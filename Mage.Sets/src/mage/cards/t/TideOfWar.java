@@ -34,7 +34,7 @@ public final class TideOfWar extends CardImpl {
         this.addAbility(new BlocksTriggeredAbility(new TideOfWarEffect(), false));
     }
 
-    public TideOfWar(final TideOfWar card) {
+    private TideOfWar(final TideOfWar card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class EbonbladeReaper extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{B}{B}")));
     }
 
-    public EbonbladeReaper(final EbonbladeReaper card) {
+    private EbonbladeReaper(final EbonbladeReaper card) {
         super(card);
     }
 

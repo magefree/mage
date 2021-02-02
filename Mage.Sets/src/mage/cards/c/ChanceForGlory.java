@@ -27,7 +27,7 @@ public final class ChanceForGlory extends CardImpl {
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect(true));
     }
 
-    public ChanceForGlory(final ChanceForGlory card) {
+    private ChanceForGlory(final ChanceForGlory card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class LivewireLash extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public LivewireLash(final LivewireLash card) {
+    private LivewireLash(final LivewireLash card) {
         super(card);
     }
 

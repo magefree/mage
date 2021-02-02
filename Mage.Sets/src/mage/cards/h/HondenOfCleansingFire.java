@@ -36,7 +36,7 @@ public final class HondenOfCleansingFire extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter, 2)), TargetController.YOU, false));
     }
 
-    public HondenOfCleansingFire(final HondenOfCleansingFire card) {
+    private HondenOfCleansingFire(final HondenOfCleansingFire card) {
         super(card);
     }
 

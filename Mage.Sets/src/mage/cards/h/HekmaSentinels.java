@@ -29,7 +29,7 @@ public final class HekmaSentinels extends CardImpl {
         this.addAbility(new CycleOrDiscardControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn)));
     }
 
-    public HekmaSentinels(final HekmaSentinels card) {
+    private HekmaSentinels(final HekmaSentinels card) {
         super(card);
     }
 

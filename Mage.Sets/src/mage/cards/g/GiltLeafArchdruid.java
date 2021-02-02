@@ -53,7 +53,7 @@ public final class GiltLeafArchdruid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GiltLeafArchdruid(final GiltLeafArchdruid card) {
+    private GiltLeafArchdruid(final GiltLeafArchdruid card) {
         super(card);
     }
 

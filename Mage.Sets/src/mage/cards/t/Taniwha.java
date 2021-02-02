@@ -46,7 +46,7 @@ public final class Taniwha extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TaniwhaEffect(), TargetController.YOU, false));
     }
 
-    public Taniwha(final Taniwha card) {
+    private Taniwha(final Taniwha card) {
         super(card);
     }
 

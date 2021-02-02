@@ -25,7 +25,7 @@ public final class GluttonousZombie extends CardImpl {
         this.addAbility(FearAbility.getInstance());
     }
 
-    public GluttonousZombie(final GluttonousZombie card) {
+    private GluttonousZombie(final GluttonousZombie card) {
         super(card);
     }
 

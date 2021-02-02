@@ -35,7 +35,7 @@ public final class WompRat extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WompRat(final WompRat card) {
+    private WompRat(final WompRat card) {
         super(card);
     }
 

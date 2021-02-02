@@ -27,7 +27,7 @@ public final class DissipationField extends CardImpl {
         this.addAbility(new DissipationFieldAbility());
     }
 
-    public DissipationField(final DissipationField card) {
+    private DissipationField(final DissipationField card) {
         super(card);
     }
 

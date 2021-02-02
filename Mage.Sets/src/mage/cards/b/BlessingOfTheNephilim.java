@@ -40,7 +40,7 @@ public final class BlessingOfTheNephilim extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public BlessingOfTheNephilim(final BlessingOfTheNephilim card) {
+    private BlessingOfTheNephilim(final BlessingOfTheNephilim card) {
         super(card);
     }
 

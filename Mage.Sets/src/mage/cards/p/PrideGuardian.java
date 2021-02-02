@@ -30,7 +30,7 @@ public final class PrideGuardian extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new GainLifeEffect(3), false));
     }
 
-    public PrideGuardian(final PrideGuardian card) {
+    private PrideGuardian(final PrideGuardian card) {
         super(card);
     }
 

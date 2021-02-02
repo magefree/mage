@@ -37,7 +37,7 @@ public final class InducedAmnesia extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new InducedAmnesiaReturnEffect()));
     }
 
-    public InducedAmnesia(final InducedAmnesia card) {
+    private InducedAmnesia(final InducedAmnesia card) {
         super(card);
     }
 

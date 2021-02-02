@@ -38,7 +38,7 @@ public final class Dawnstrider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Dawnstrider(final Dawnstrider card) {
+    private Dawnstrider(final Dawnstrider card) {
         super(card);
     }
 

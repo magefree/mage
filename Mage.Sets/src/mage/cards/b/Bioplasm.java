@@ -36,7 +36,7 @@ public final class Bioplasm extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BioplasmEffect(), false));
     }
 
-    public Bioplasm(final Bioplasm card) {
+    private Bioplasm(final Bioplasm card) {
         super(card);
     }
 

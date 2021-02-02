@@ -26,7 +26,7 @@ public final class SramsExpertise extends CardImpl {
         this.getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(3));
     }
 
-    public SramsExpertise(final SramsExpertise card) {
+    private SramsExpertise(final SramsExpertise card) {
         super(card);
     }
 

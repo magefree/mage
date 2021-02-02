@@ -22,7 +22,7 @@ public final class Decompose extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0, 3, StaticFilters.FILTER_CARD_CARDS));
     }
 
-    public Decompose(final Decompose card) {
+    private Decompose(final Decompose card) {
         super(card);
     }
 

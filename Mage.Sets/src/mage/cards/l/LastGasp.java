@@ -24,7 +24,7 @@ public final class LastGasp extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public LastGasp(final LastGasp card) {
+    private LastGasp(final LastGasp card) {
         super(card);
     }
 

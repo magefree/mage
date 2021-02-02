@@ -40,7 +40,7 @@ public final class InverterOfTruth extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExileLibraryEffect(), false));
     }
 
-    public InverterOfTruth(final InverterOfTruth card) {
+    private InverterOfTruth(final InverterOfTruth card) {
         super(card);
     }
 

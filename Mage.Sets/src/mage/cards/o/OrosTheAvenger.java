@@ -45,7 +45,7 @@ public final class OrosTheAvenger extends CardImpl {
                 new DoIfCostPaid(new DamageAllEffect(3, filter), new ManaCostsImpl("{2}{W}")), false));
     }
 
-    public OrosTheAvenger(final OrosTheAvenger card) {
+    private OrosTheAvenger(final OrosTheAvenger card) {
         super(card);
     }
 

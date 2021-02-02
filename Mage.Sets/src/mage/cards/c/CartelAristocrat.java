@@ -36,7 +36,7 @@ public final class CartelAristocrat extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE))));
     }
 
-    public CartelAristocrat(final CartelAristocrat card) {
+    private CartelAristocrat(final CartelAristocrat card) {
         super(card);
     }
 

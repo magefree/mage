@@ -43,7 +43,7 @@ public final class SerrasGuardian extends CardImpl {
         ));
     }
 
-    public SerrasGuardian(final SerrasGuardian card) {
+    private SerrasGuardian(final SerrasGuardian card) {
         super(card);
     }
 

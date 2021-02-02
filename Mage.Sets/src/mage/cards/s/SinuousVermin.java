@@ -42,7 +42,7 @@ public final class SinuousVermin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SinuousVermin(final SinuousVermin card) {
+    private SinuousVermin(final SinuousVermin card) {
         super(card);
     }
 

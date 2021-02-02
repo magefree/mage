@@ -25,7 +25,7 @@ public final class Oppression extends CardImpl {
         this.addAbility(new OppressionTriggeredAbility());
     }
 
-    public Oppression(final Oppression card) {
+    private Oppression(final Oppression card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class MarshalingTheTroops extends CardImpl {
         this.getSpellAbility().addEffect(new MarshalingTheTroopsEffect());
     }
 
-    public MarshalingTheTroops(final MarshalingTheTroops card) {
+    private MarshalingTheTroops(final MarshalingTheTroops card) {
         super(card);
     }
 

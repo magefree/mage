@@ -33,7 +33,7 @@ public final class LinvalaKeeperOfSilence extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LinvalaKeeperOfSilenceCantActivateEffect()));
     }
 
-    public LinvalaKeeperOfSilence(final LinvalaKeeperOfSilence card) {
+    private LinvalaKeeperOfSilence(final LinvalaKeeperOfSilence card) {
         super(card);
     }
 

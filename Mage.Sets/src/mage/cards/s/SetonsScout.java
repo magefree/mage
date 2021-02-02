@@ -42,7 +42,7 @@ public final class SetonsScout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SetonsScout(final SetonsScout card) {
+    private SetonsScout(final SetonsScout card) {
         super(card);
     }
 

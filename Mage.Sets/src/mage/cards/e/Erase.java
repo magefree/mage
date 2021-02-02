@@ -22,7 +22,7 @@ public final class Erase extends CardImpl {
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
     }
 
-    public Erase(final Erase card) {
+    private Erase(final Erase card) {
         super(card);
     }
 

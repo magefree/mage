@@ -33,7 +33,7 @@ public final class SulfurVent extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SulfurVent(final SulfurVent card) {
+    private SulfurVent(final SulfurVent card) {
         super(card);
     }
 

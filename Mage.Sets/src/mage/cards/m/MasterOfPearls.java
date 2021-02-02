@@ -34,7 +34,7 @@ public final class MasterOfPearls extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostControlledEffect(2, 2, Duration.EndOfTurn, FILTER_PERMANENT_CREATURES)));
     }
 
-    public MasterOfPearls(final MasterOfPearls card) {
+    private MasterOfPearls(final MasterOfPearls card) {
         super(card);
     }
 

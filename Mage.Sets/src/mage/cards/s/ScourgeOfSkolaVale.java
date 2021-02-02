@@ -50,7 +50,7 @@ public final class ScourgeOfSkolaVale extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScourgeOfSkolaVale(final ScourgeOfSkolaVale card) {
+    private ScourgeOfSkolaVale(final ScourgeOfSkolaVale card) {
         super(card);
     }
 

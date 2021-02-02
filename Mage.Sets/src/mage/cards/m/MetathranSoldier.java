@@ -26,7 +26,7 @@ public final class MetathranSoldier extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public MetathranSoldier(final MetathranSoldier card) {
+    private MetathranSoldier(final MetathranSoldier card) {
         super(card);
     }
 

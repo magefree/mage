@@ -39,7 +39,7 @@ public final class WirewoodHivemaster extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new InsectToken(), 1), filter, true));
     }
 
-    public WirewoodHivemaster(final WirewoodHivemaster card) {
+    private WirewoodHivemaster(final WirewoodHivemaster card) {
         super(card);
     }
 

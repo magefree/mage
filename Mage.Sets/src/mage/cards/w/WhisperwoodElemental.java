@@ -53,7 +53,7 @@ public final class WhisperwoodElemental extends CardImpl {
                 Zone.ALL, effect, new SacrificeSourceCost()));
     }
 
-    public WhisperwoodElemental(final WhisperwoodElemental card) {
+    private WhisperwoodElemental(final WhisperwoodElemental card) {
         super(card);
     }
 

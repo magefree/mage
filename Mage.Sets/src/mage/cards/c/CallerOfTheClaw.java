@@ -45,7 +45,7 @@ public final class CallerOfTheClaw extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
     }
 
-    public CallerOfTheClaw(final CallerOfTheClaw card) {
+    private CallerOfTheClaw(final CallerOfTheClaw card) {
         super(card);
     }
 

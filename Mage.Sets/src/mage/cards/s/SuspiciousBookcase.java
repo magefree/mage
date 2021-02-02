@@ -40,7 +40,7 @@ public final class SuspiciousBookcase extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SuspiciousBookcase(final SuspiciousBookcase card) {
+    private SuspiciousBookcase(final SuspiciousBookcase card) {
         super(card);
     }
 

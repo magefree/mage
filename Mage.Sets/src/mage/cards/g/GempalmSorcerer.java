@@ -44,7 +44,7 @@ public final class GempalmSorcerer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GempalmSorcerer(final GempalmSorcerer card) {
+    private GempalmSorcerer(final GempalmSorcerer card) {
         super(card);
     }
 

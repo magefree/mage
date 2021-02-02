@@ -40,7 +40,7 @@ public final class SakikoMotherOfSummer extends CardImpl {
 
     }
 
-    public SakikoMotherOfSummer(final SakikoMotherOfSummer card) {
+    private SakikoMotherOfSummer(final SakikoMotherOfSummer card) {
         super(card);
     }
 

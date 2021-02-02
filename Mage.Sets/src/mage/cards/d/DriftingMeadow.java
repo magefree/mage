@@ -26,7 +26,7 @@ public final class DriftingMeadow extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public DriftingMeadow(final DriftingMeadow card) {
+    private DriftingMeadow(final DriftingMeadow card) {
         super(card);
     }
 

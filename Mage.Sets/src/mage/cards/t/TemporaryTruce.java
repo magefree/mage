@@ -24,7 +24,7 @@ public final class TemporaryTruce extends CardImpl {
         this.getSpellAbility().addEffect(new TemporaryTruceEffect());
     }
 
-    public TemporaryTruce(final TemporaryTruce card) {
+    private TemporaryTruce(final TemporaryTruce card) {
         super(card);
     }
 

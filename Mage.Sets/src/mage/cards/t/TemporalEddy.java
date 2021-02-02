@@ -32,7 +32,7 @@ public final class TemporalEddy extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public TemporalEddy(final TemporalEddy card) {
+    private TemporalEddy(final TemporalEddy card) {
         super(card);
     }
 

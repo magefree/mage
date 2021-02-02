@@ -47,7 +47,7 @@ public final class BorrowedMalevolence extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public BorrowedMalevolence(final BorrowedMalevolence card) {
+    private BorrowedMalevolence(final BorrowedMalevolence card) {
         super(card);
     }
 

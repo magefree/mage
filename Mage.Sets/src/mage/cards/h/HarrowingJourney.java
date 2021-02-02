@@ -25,7 +25,7 @@ public final class HarrowingJourney extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public HarrowingJourney(final HarrowingJourney card) {
+    private HarrowingJourney(final HarrowingJourney card) {
         super(card);
     }
 

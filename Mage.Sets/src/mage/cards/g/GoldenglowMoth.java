@@ -32,7 +32,7 @@ public final class GoldenglowMoth extends CardImpl {
 
     }
 
-    public GoldenglowMoth(final GoldenglowMoth card) {
+    private GoldenglowMoth(final GoldenglowMoth card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class NarnamCobra extends CardImpl {
 
     }
 
-    public NarnamCobra(final NarnamCobra card) {
+    private NarnamCobra(final NarnamCobra card) {
         super(card);
     }
 

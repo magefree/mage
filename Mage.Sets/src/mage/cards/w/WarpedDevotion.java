@@ -27,7 +27,7 @@ public final class WarpedDevotion extends CardImpl {
         this.addAbility(new WarpedDevotionTriggeredAbility());
     }
 
-    public WarpedDevotion(final WarpedDevotion card) {
+    private WarpedDevotion(final WarpedDevotion card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class BrutalDeceiver extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BrutalDeceiverEffect(), new ManaCostsImpl("{2}")));
     }
 
-    public BrutalDeceiver(final BrutalDeceiver card) {
+    private BrutalDeceiver(final BrutalDeceiver card) {
         super(card);
     }
 

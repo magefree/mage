@@ -24,7 +24,7 @@ public final class Afflict extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Afflict(final Afflict card) {
+    private Afflict(final Afflict card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class SpiritualVisit extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{W}"));
     }
 
-    public SpiritualVisit(final SpiritualVisit card) {
+    private SpiritualVisit(final SpiritualVisit card) {
         super(card);
     }
 

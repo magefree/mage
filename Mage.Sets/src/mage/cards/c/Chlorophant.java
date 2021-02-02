@@ -42,7 +42,7 @@ public final class Chlorophant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Chlorophant(final Chlorophant card) {
+    private Chlorophant(final Chlorophant card) {
         super(card);
     }
 

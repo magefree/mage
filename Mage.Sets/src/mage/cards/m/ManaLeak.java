@@ -27,7 +27,7 @@ public final class ManaLeak extends CardImpl {
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(3)));
     }
 
-    public ManaLeak(final ManaLeak card) {
+    private ManaLeak(final ManaLeak card) {
         super(card);
     }
 

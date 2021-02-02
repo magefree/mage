@@ -56,7 +56,7 @@ public final class SkirkAlarmist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkirkAlarmist(final SkirkAlarmist card) {
+    private SkirkAlarmist(final SkirkAlarmist card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class GrowingRanks extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PopulateEffect(""), TargetController.YOU, false));
     }
 
-    public GrowingRanks(final GrowingRanks card) {
+    private GrowingRanks(final GrowingRanks card) {
         super(card);
     }
 

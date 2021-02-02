@@ -27,7 +27,7 @@ public final class RagingGorilla extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(2, -2, Duration.EndOfTurn), false));
     }
 
-    public RagingGorilla(final RagingGorilla card) {
+    private RagingGorilla(final RagingGorilla card) {
         super(card);
     }
 

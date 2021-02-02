@@ -35,7 +35,7 @@ public final class EmissaryOfDespair extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseLifeTargetEffect(new EmissaryOfDespairCount()), false, true));
     }
 
-    public EmissaryOfDespair(final EmissaryOfDespair card) {
+    private EmissaryOfDespair(final EmissaryOfDespair card) {
         super(card);
     }
 

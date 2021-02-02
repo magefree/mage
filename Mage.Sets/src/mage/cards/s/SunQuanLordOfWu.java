@@ -35,7 +35,7 @@ public final class SunQuanLordOfWu extends CardImpl {
                 Duration.WhileOnBattlefield, FILTER_PERMANENT_CREATURES)));
     }
 
-    public SunQuanLordOfWu(final SunQuanLordOfWu card) {
+    private SunQuanLordOfWu(final SunQuanLordOfWu card) {
         super(card);
     }
 

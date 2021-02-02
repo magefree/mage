@@ -54,7 +54,7 @@ public final class NeurokTransmuter extends CardImpl {
         this.addAbility(becomeBlueAbility);
     }
 
-    public NeurokTransmuter(final NeurokTransmuter card) {
+    private NeurokTransmuter(final NeurokTransmuter card) {
         super(card);
     }
 

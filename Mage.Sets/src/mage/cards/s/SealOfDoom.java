@@ -35,7 +35,7 @@ public final class SealOfDoom extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SealOfDoom(final SealOfDoom card) {
+    private SealOfDoom(final SealOfDoom card) {
         super(card);
     }
 

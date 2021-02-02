@@ -50,7 +50,7 @@ public final class PropheticRavings extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PropheticRavings(final PropheticRavings card) {
+    private PropheticRavings(final PropheticRavings card) {
         super(card);
     }
 

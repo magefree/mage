@@ -33,7 +33,7 @@ public final class Eradicate extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect(false, "its controller's","all cards with the same name as that creature"));
     }
 
-    public Eradicate(final Eradicate card) {
+    private Eradicate(final Eradicate card) {
         super(card);
     }
 

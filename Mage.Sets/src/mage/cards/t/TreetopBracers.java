@@ -40,7 +40,7 @@ public final class TreetopBracers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TreetopBracers(final TreetopBracers card) {
+    private TreetopBracers(final TreetopBracers card) {
         super(card);
     }
 

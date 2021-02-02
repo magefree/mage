@@ -33,7 +33,7 @@ public final class Shimmer extends CardImpl {
                         new FilterLandPermanent("Each land of the chosen type"))));
     }
 
-    public Shimmer(final Shimmer card) {
+    private Shimmer(final Shimmer card) {
         super(card);
     }
 

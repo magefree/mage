@@ -40,7 +40,7 @@ public final class FatalMutation extends CardImpl {
         this.addAbility(new FatalMutationAbility(new DestroyAttachedToEffect("it", true)));
     }
 
-    public FatalMutation(final FatalMutation card) {
+    private FatalMutation(final FatalMutation card) {
         super(card);
     }
 

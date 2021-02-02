@@ -48,7 +48,7 @@ public final class WaxmaneBaku extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WaxmaneBaku(final WaxmaneBaku card) {
+    private WaxmaneBaku(final WaxmaneBaku card) {
         super(card);
     }
 

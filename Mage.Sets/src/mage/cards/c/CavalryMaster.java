@@ -44,7 +44,7 @@ public final class CavalryMaster extends CardImpl {
         ));
     }
 
-    public CavalryMaster(final CavalryMaster card) {
+    private CavalryMaster(final CavalryMaster card) {
         super(card);
     }
 

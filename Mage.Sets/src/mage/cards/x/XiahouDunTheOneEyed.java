@@ -50,7 +50,7 @@ public final class XiahouDunTheOneEyed extends CardImpl {
         this.addAbility(ability);
     }
 
-    public XiahouDunTheOneEyed(final XiahouDunTheOneEyed card) {
+    private XiahouDunTheOneEyed(final XiahouDunTheOneEyed card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class MagmaSpray extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public MagmaSpray(final MagmaSpray card) {
+    private MagmaSpray(final MagmaSpray card) {
         super(card);
     }
 

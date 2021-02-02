@@ -49,7 +49,7 @@ public final class CrosissCharm extends CardImpl {
 
     }
 
-    public CrosissCharm(final CrosissCharm card) {
+    private CrosissCharm(final CrosissCharm card) {
         super(card);
     }
 

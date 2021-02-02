@@ -29,7 +29,7 @@ public final class TempleOfDeceit extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public TempleOfDeceit(final TempleOfDeceit card) {
+    private TempleOfDeceit(final TempleOfDeceit card) {
         super(card);
     }
 

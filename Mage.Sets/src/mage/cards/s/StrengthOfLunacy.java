@@ -50,7 +50,7 @@ public final class StrengthOfLunacy extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{B}")));
     }
 
-    public StrengthOfLunacy(final StrengthOfLunacy card) {
+    private StrengthOfLunacy(final StrengthOfLunacy card) {
         super(card);
     }
 

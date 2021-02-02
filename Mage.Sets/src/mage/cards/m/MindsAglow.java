@@ -26,7 +26,7 @@ public final class MindsAglow extends CardImpl {
 
     }
 
-    public MindsAglow(final MindsAglow card) {
+    private MindsAglow(final MindsAglow card) {
         super(card);
     }
 

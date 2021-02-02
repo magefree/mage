@@ -52,7 +52,7 @@ public final class TheloniteDruid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TheloniteDruid(final TheloniteDruid card) {
+    private TheloniteDruid(final TheloniteDruid card) {
         super(card);
     }
 

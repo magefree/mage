@@ -30,7 +30,7 @@ public final class PitchburnDevils extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PitchburnDevils(final PitchburnDevils card) {
+    private PitchburnDevils(final PitchburnDevils card) {
         super(card);
     }
 

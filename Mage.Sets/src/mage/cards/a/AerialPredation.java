@@ -36,7 +36,7 @@ public final class AerialPredation extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 
-    public AerialPredation(final AerialPredation card) {
+    private AerialPredation(final AerialPredation card) {
         super(card);
     }
 

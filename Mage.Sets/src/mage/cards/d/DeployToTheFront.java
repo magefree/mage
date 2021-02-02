@@ -26,7 +26,7 @@ public final class DeployToTheFront extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public DeployToTheFront(final DeployToTheFront card) {
+    private DeployToTheFront(final DeployToTheFront card) {
         super(card);
     }
 

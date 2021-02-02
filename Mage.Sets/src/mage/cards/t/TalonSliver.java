@@ -34,7 +34,7 @@ public final class TalonSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public TalonSliver(final TalonSliver card) {
+    private TalonSliver(final TalonSliver card) {
         super(card);
     }
 

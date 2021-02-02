@@ -35,7 +35,7 @@ public final class OpenTheGraves extends CardImpl {
         ));
     }
 
-    public OpenTheGraves(final OpenTheGraves card) {
+    private OpenTheGraves(final OpenTheGraves card) {
         super(card);
     }
 

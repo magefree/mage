@@ -29,7 +29,7 @@ public final class BelligerentWhiptail extends CardImpl {
 
     }
 
-    public BelligerentWhiptail(final BelligerentWhiptail card) {
+    private BelligerentWhiptail(final BelligerentWhiptail card) {
         super(card);
     }
 

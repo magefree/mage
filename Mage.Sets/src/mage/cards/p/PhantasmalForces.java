@@ -31,7 +31,7 @@ public final class PhantasmalForces extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{U}")), TargetController.YOU, false));
     }
 
-    public PhantasmalForces(final PhantasmalForces card) {
+    private PhantasmalForces(final PhantasmalForces card) {
         super(card);
     }
 

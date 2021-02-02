@@ -29,7 +29,7 @@ public final class DireFleetHoarder extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
     }
 
-    public DireFleetHoarder(final DireFleetHoarder card) {
+    private DireFleetHoarder(final DireFleetHoarder card) {
         super(card);
     }
 

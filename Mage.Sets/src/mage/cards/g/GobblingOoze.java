@@ -36,7 +36,7 @@ public final class GobblingOoze extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GobblingOoze(final GobblingOoze card) {
+    private GobblingOoze(final GobblingOoze card) {
         super(card);
     }
 

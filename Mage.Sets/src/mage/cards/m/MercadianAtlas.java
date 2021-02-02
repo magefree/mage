@@ -33,7 +33,7 @@ public final class MercadianAtlas extends CardImpl {
         ), new PlayLandWatcher());
     }
 
-    public MercadianAtlas(final MercadianAtlas card) {
+    private MercadianAtlas(final MercadianAtlas card) {
         super(card);
     }
 

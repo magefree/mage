@@ -36,7 +36,7 @@ public final class SeasonedTactician extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeasonedTactician(final SeasonedTactician card) {
+    private SeasonedTactician(final SeasonedTactician card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class Smokebraider extends CardImpl {
         this.addAbility(new ConditionalAnyColorManaAbility(2, new SmokebraiderManaBuilder()));
     }
 
-    public Smokebraider(final Smokebraider card) {
+    private Smokebraider(final Smokebraider card) {
         super(card);
     }
 

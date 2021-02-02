@@ -45,7 +45,7 @@ public final class GuardianOfCloverdell extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GuardianOfCloverdell(final GuardianOfCloverdell card) {
+    private GuardianOfCloverdell(final GuardianOfCloverdell card) {
         super(card);
     }
 

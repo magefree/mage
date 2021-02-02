@@ -37,7 +37,7 @@ public final class DarkSphere extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DarkSphere(final DarkSphere card) {
+    private DarkSphere(final DarkSphere card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class MurkfiendLiege extends CardImpl {
 
     }
 
-    public MurkfiendLiege(final MurkfiendLiege card) {
+    private MurkfiendLiege(final MurkfiendLiege card) {
         super(card);
     }
 

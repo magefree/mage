@@ -50,7 +50,7 @@ public final class GoblinBushwhacker extends CardImpl {
         ));
     }
 
-    public GoblinBushwhacker(final GoblinBushwhacker card) {
+    private GoblinBushwhacker(final GoblinBushwhacker card) {
         super(card);
     }
 

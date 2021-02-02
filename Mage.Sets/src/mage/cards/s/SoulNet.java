@@ -23,7 +23,7 @@ public final class SoulNet extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new GainLifeEffect(1), new GenericManaCost(1)), false));
     }
 
-    public SoulNet(final SoulNet card) {
+    private SoulNet(final SoulNet card) {
         super(card);
     }
 

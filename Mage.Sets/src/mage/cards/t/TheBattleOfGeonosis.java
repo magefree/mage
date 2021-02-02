@@ -39,7 +39,7 @@ public final class TheBattleOfGeonosis extends CardImpl {
 
     }
 
-    public TheBattleOfGeonosis(final TheBattleOfGeonosis card) {
+    private TheBattleOfGeonosis(final TheBattleOfGeonosis card) {
         super(card);
     }
 

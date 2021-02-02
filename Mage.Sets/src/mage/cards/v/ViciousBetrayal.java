@@ -33,7 +33,7 @@ public final class ViciousBetrayal extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(GetXValue.instance, GetXValue.instance, Duration.EndOfTurn));
     }
 
-    public ViciousBetrayal(final ViciousBetrayal card) {
+    private ViciousBetrayal(final ViciousBetrayal card) {
         super(card);
     }
 

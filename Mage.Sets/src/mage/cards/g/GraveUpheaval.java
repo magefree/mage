@@ -28,7 +28,7 @@ public final class GraveUpheaval extends CardImpl {
         this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public GraveUpheaval(final GraveUpheaval card) {
+    private GraveUpheaval(final GraveUpheaval card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class AcquireTarget extends CardImpl {
 
     }
 
-    public AcquireTarget(final AcquireTarget card) {
+    private AcquireTarget(final AcquireTarget card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class NimbleObstructionist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NimbleObstructionist(final NimbleObstructionist card) {
+    private NimbleObstructionist(final NimbleObstructionist card) {
         super(card);
     }
 

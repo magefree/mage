@@ -38,7 +38,7 @@ public final class Wellwisher extends CardImpl {
 
     }
 
-    public Wellwisher(final Wellwisher card) {
+    private Wellwisher(final Wellwisher card) {
         super(card);
     }
 

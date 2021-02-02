@@ -29,7 +29,7 @@ public final class PitScorpion extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(effect, false, true));
     }
 
-    public PitScorpion(final PitScorpion card) {
+    private PitScorpion(final PitScorpion card) {
         super(card);
     }
 

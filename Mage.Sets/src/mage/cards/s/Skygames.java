@@ -43,7 +43,7 @@ public final class Skygames extends CardImpl {
                 Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Target creature gains flying until end of turn. Activate this ability only any time you could cast a sorcery.\"")));
     }
 
-    public Skygames(final Skygames card) {
+    private Skygames(final Skygames card) {
         super(card);
     }
 

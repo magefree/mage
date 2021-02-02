@@ -40,7 +40,7 @@ public final class FiresOfYavimaya extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FiresOfYavimaya(final FiresOfYavimaya card) {
+    private FiresOfYavimaya(final FiresOfYavimaya card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class BeckCall extends SplitCard {
 
     }
 
-    public BeckCall(final BeckCall card) {
+    private BeckCall(final BeckCall card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class SilklashSpider extends CardImpl {
                 new ManaCostsImpl("{X}{G}{G}")));
     }
 
-    public SilklashSpider(final SilklashSpider card) {
+    private SilklashSpider(final SilklashSpider card) {
         super(card);
     }
 

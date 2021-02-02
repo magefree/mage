@@ -26,7 +26,7 @@ public final class BrokenBond extends CardImpl {
         this.getSpellAbility().addEffect(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A));
     }
 
-    public BrokenBond(final BrokenBond card) {
+    private BrokenBond(final BrokenBond card) {
         super(card);
     }
 

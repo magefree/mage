@@ -22,7 +22,7 @@ public final class FlameLash extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public FlameLash(final FlameLash card) {
+    private FlameLash(final FlameLash card) {
         super(card);
     }
 

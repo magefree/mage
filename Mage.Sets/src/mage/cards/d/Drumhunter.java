@@ -39,7 +39,7 @@ public final class Drumhunter extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public Drumhunter(final Drumhunter card) {
+    private Drumhunter(final Drumhunter card) {
         super(card);
     }
 

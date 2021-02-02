@@ -45,7 +45,7 @@ public final class WingsOfHope extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WingsOfHope(final WingsOfHope card) {
+    private WingsOfHope(final WingsOfHope card) {
         super(card);
     }
 

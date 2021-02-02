@@ -26,7 +26,7 @@ public final class Refresh extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Refresh(final Refresh card) {
+    private Refresh(final Refresh card) {
         super(card);
     }
 

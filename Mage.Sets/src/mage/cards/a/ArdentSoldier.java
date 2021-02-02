@@ -37,7 +37,7 @@ public final class ArdentSoldier extends CardImpl {
             KickedCondition.instance, "If {this} was kicked, it enters the battlefield with a +1/+1 counter on it.", ""));
     }
 
-    public ArdentSoldier(final ArdentSoldier card) {
+    private ArdentSoldier(final ArdentSoldier card) {
         super(card);
     }
 

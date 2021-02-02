@@ -53,7 +53,7 @@ public final class AjaniValiantProtector extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AjaniValiantProtector(final AjaniValiantProtector card) {
+    private AjaniValiantProtector(final AjaniValiantProtector card) {
         super(card);
     }
 

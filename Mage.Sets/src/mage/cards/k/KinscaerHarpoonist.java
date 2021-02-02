@@ -42,7 +42,7 @@ public final class KinscaerHarpoonist extends CardImpl {
         
     }
 
-    public KinscaerHarpoonist(final KinscaerHarpoonist card) {
+    private KinscaerHarpoonist(final KinscaerHarpoonist card) {
         super(card);
     }
 

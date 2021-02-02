@@ -33,7 +33,7 @@ public final class StolenIdentity extends CardImpl {
         this.getSpellAbility().addEffect(new CipherEffect());
     }
 
-    public StolenIdentity(final StolenIdentity card) {
+    private StolenIdentity(final StolenIdentity card) {
         super(card);
     }
 

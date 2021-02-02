@@ -33,7 +33,7 @@ public final class MonasteryFlock extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}")));
     }
 
-    public MonasteryFlock(final MonasteryFlock card) {
+    private MonasteryFlock(final MonasteryFlock card) {
         super(card);
     }
 

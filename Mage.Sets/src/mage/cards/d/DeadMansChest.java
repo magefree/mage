@@ -53,7 +53,7 @@ public final class DeadMansChest extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new DeadMansChestEffect(), "enchanted creature", false));
     }
 
-    public DeadMansChest(final DeadMansChest card) {
+    private DeadMansChest(final DeadMansChest card) {
         super(card);
     }
 

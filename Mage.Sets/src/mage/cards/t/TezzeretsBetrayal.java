@@ -35,7 +35,7 @@ public final class TezzeretsBetrayal extends CardImpl {
         getSpellAbility().addEffect(new SearchLibraryGraveyardPutInHandEffect(filter));
     }
 
-    public TezzeretsBetrayal(final TezzeretsBetrayal card) {
+    private TezzeretsBetrayal(final TezzeretsBetrayal card) {
         super(card);
     }
 

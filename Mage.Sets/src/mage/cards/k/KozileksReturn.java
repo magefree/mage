@@ -46,7 +46,7 @@ public final class KozileksReturn extends CardImpl {
                 new ExileSourceFromGraveCost()), filter, false, false));
     }
 
-    public KozileksReturn(final KozileksReturn card) {
+    private KozileksReturn(final KozileksReturn card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class EarnestFellowship extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EarnestFellowshipEffect()));
     }
 
-    public EarnestFellowship(final EarnestFellowship card) {
+    private EarnestFellowship(final EarnestFellowship card) {
         super(card);
     }
 

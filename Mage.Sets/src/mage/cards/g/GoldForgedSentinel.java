@@ -26,7 +26,7 @@ public final class GoldForgedSentinel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public GoldForgedSentinel(final GoldForgedSentinel card) {
+    private GoldForgedSentinel(final GoldForgedSentinel card) {
         super(card);
     }
 

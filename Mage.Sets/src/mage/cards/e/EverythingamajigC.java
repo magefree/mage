@@ -50,7 +50,7 @@ public final class EverythingamajigC extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChimericStaffEffect(), new VariableManaCost()));
     }
 
-    public EverythingamajigC(final EverythingamajigC card) {
+    private EverythingamajigC(final EverythingamajigC card) {
         super(card);
     }
 

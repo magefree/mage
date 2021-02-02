@@ -36,7 +36,7 @@ public final class MightSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public MightSliver(final MightSliver card) {
+    private MightSliver(final MightSliver card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class TandemTactics extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 
-    public TandemTactics(final TandemTactics card) {
+    private TandemTactics(final TandemTactics card) {
         super(card);
     }
 

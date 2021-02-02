@@ -24,7 +24,7 @@ public final class TropicalIsland extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public TropicalIsland(final TropicalIsland card) {
+    private TropicalIsland(final TropicalIsland card) {
         super(card);
     }
 

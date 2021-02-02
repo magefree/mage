@@ -48,7 +48,7 @@ public final class QuicksilverFountain extends CardImpl {
                 new QuicksilverFountainEffect2(), TargetController.ANY, condition, false));
     }
 
-    public QuicksilverFountain(final QuicksilverFountain card) {
+    private QuicksilverFountain(final QuicksilverFountain card) {
         super(card);
     }
 

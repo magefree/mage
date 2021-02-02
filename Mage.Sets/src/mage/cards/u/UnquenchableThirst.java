@@ -63,7 +63,7 @@ public final class UnquenchableThirst extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
-    public UnquenchableThirst(final UnquenchableThirst card) {
+    private UnquenchableThirst(final UnquenchableThirst card) {
         super(card);
     }
 

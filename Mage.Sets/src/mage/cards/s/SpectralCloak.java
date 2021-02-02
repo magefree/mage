@@ -50,7 +50,7 @@ public final class SpectralCloak extends CardImpl {
         ));
     }
 
-    public SpectralCloak(final SpectralCloak card) {
+    private SpectralCloak(final SpectralCloak card) {
         super(card);
     }
 

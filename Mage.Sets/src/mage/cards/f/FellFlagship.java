@@ -46,7 +46,7 @@ public final class FellFlagship extends CardImpl {
 
     }
 
-    public FellFlagship(final FellFlagship card) {
+    private FellFlagship(final FellFlagship card) {
         super(card);
     }
 

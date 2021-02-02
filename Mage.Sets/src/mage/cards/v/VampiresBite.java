@@ -36,7 +36,7 @@ public final class VampiresBite extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalContinuousEffect(effect, new LockedInCondition(KickedCondition.instance), "if this spell was kicked, that creature gains lifelink until end of turn"));
     }
 
-    public VampiresBite(final VampiresBite card) {
+    private VampiresBite(final VampiresBite card) {
         super(card);
     }
 

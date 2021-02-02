@@ -29,7 +29,7 @@ public final class ZofShade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{2}{B}")));
     }
 
-    public ZofShade(final ZofShade card) {
+    private ZofShade(final ZofShade card) {
         super(card);
     }
 

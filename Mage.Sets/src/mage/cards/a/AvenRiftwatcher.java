@@ -45,7 +45,7 @@ public final class AvenRiftwatcher extends CardImpl {
         this.addAbility(new EntersBattlefieldOrLeavesSourceTriggeredAbility(new GainLifeEffect(2), false));
     }
 
-    public AvenRiftwatcher(final AvenRiftwatcher card) {
+    private AvenRiftwatcher(final AvenRiftwatcher card) {
         super(card);
     }
 

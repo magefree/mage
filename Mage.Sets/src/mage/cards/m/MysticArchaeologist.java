@@ -33,7 +33,7 @@ public final class MysticArchaeologist extends CardImpl {
         ));
     }
 
-    public MysticArchaeologist(final MysticArchaeologist card) {
+    private MysticArchaeologist(final MysticArchaeologist card) {
         super(card);
     }
 

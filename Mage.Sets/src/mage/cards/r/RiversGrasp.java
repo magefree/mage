@@ -50,7 +50,7 @@ public final class RiversGrasp extends CardImpl {
         this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
-    public RiversGrasp(final RiversGrasp card) {
+    private RiversGrasp(final RiversGrasp card) {
         super(card);
     }
 

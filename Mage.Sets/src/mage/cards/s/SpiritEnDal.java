@@ -36,7 +36,7 @@ public final class SpiritEnDal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpiritEnDal(final SpiritEnDal card) {
+    private SpiritEnDal(final SpiritEnDal card) {
         super(card);
     }
 

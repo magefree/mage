@@ -36,7 +36,7 @@ public final class ResoluteBlademaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ResoluteBlademaster(final ResoluteBlademaster card) {
+    private ResoluteBlademaster(final ResoluteBlademaster card) {
         super(card);
     }
 

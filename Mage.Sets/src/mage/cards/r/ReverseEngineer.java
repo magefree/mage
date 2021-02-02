@@ -24,7 +24,7 @@ public final class ReverseEngineer extends CardImpl {
         getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
     }
 
-    public ReverseEngineer(final ReverseEngineer card) {
+    private ReverseEngineer(final ReverseEngineer card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class ShadowsOfThePast extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShadowsOfThePast(final ShadowsOfThePast card) {
+    private ShadowsOfThePast(final ShadowsOfThePast card) {
         super(card);
     }
 

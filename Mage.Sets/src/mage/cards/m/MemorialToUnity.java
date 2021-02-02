@@ -44,7 +44,7 @@ public final class MemorialToUnity extends CardImpl {
 
     }
 
-    public MemorialToUnity(final MemorialToUnity card) {
+    private MemorialToUnity(final MemorialToUnity card) {
         super(card);
     }
 

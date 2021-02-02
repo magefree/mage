@@ -46,7 +46,7 @@ public final class LunarAvenger extends CardImpl {
                 new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1))));
     }
 
-    public LunarAvenger(final LunarAvenger card) {
+    private LunarAvenger(final LunarAvenger card) {
         super(card);
     }
 

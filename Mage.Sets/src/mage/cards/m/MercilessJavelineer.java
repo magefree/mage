@@ -51,7 +51,7 @@ public final class MercilessJavelineer extends CardImpl {
         addAbility(ability);
     }
 
-    public MercilessJavelineer(final MercilessJavelineer card) {
+    private MercilessJavelineer(final MercilessJavelineer card) {
         super(card);
     }
 

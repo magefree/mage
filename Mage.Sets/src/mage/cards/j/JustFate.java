@@ -36,7 +36,7 @@ public final class JustFate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
-    public JustFate(final JustFate card) {
+    private JustFate(final JustFate card) {
         super(card);
     }
 

@@ -62,7 +62,7 @@ public final class NissaGenesisMage extends CardImpl {
                 -10));
     }
 
-    public NissaGenesisMage(final NissaGenesisMage card) {
+    private NissaGenesisMage(final NissaGenesisMage card) {
         super(card);
     }
 

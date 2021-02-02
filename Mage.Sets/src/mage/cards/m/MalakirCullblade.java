@@ -36,7 +36,7 @@ public final class MalakirCullblade extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter));
     }
 
-    public MalakirCullblade(final MalakirCullblade card) {
+    private MalakirCullblade(final MalakirCullblade card) {
         super(card);
     }
 

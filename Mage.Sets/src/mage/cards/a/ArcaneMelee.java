@@ -24,7 +24,7 @@ public final class ArcaneMelee extends CardImpl {
         );
     }
 
-    public ArcaneMelee(final ArcaneMelee card) {
+    private ArcaneMelee(final ArcaneMelee card) {
         super(card);
     }
 

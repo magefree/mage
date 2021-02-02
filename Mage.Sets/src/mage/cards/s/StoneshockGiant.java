@@ -42,7 +42,7 @@ public final class StoneshockGiant extends CardImpl {
         this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new CantBlockAllEffect(filter, Duration.EndOfTurn)));
     }
 
-    public StoneshockGiant(final StoneshockGiant card) {
+    private StoneshockGiant(final StoneshockGiant card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class CatapultSquad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CatapultSquad(final CatapultSquad card) {
+    private CatapultSquad(final CatapultSquad card) {
         super(card);
     }
 

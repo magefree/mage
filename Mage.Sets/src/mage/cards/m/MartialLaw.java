@@ -35,7 +35,7 @@ public final class MartialLaw extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MartialLaw(final MartialLaw card) {
+    private MartialLaw(final MartialLaw card) {
         super(card);
     }
 

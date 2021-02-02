@@ -34,7 +34,7 @@ public final class VampiricFury extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, vampires));
     }
 
-    public VampiricFury(final VampiricFury card) {
+    private VampiricFury(final VampiricFury card) {
         super(card);
     }
 

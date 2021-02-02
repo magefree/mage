@@ -27,7 +27,7 @@ public final class MobJustice extends CardImpl {
         this.getSpellAbility().addHint(CreaturesYouControlHint.instance);
     }
 
-    public MobJustice(final MobJustice card) {
+    private MobJustice(final MobJustice card) {
         super(card);
     }
 

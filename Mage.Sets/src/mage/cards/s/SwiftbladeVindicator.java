@@ -34,7 +34,7 @@ public final class SwiftbladeVindicator extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public SwiftbladeVindicator(final SwiftbladeVindicator card) {
+    private SwiftbladeVindicator(final SwiftbladeVindicator card) {
         super(card);
     }
 

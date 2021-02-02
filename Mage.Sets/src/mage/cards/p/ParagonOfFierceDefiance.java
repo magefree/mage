@@ -57,7 +57,7 @@ public final class ParagonOfFierceDefiance extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ParagonOfFierceDefiance(final ParagonOfFierceDefiance card) {
+    private ParagonOfFierceDefiance(final ParagonOfFierceDefiance card) {
         super(card);
     }
 

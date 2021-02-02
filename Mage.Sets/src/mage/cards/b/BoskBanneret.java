@@ -38,7 +38,7 @@ public final class BoskBanneret extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public BoskBanneret(final BoskBanneret card) {
+    private BoskBanneret(final BoskBanneret card) {
         super(card);
     }
 

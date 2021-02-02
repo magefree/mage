@@ -20,7 +20,7 @@ public final class TouchOfBrilliance extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
-    public TouchOfBrilliance(final TouchOfBrilliance card) {
+    private TouchOfBrilliance(final TouchOfBrilliance card) {
         super(card);
     }
 

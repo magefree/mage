@@ -44,7 +44,7 @@ public final class ChosenByHeliod extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0,2, Duration.WhileOnBattlefield)));
     }
 
-    public ChosenByHeliod(final ChosenByHeliod card) {
+    private ChosenByHeliod(final ChosenByHeliod card) {
         super(card);
     }
 

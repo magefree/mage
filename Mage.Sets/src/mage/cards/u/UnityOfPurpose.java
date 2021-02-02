@@ -32,7 +32,7 @@ public final class UnityOfPurpose extends CardImpl {
         this.getSpellAbility().addEffect(new UntapAllControllerEffect(filter, "Untap each creature you control with a +1/+1 counter on it"));
     }
 
-    public UnityOfPurpose(final UnityOfPurpose card) {
+    private UnityOfPurpose(final UnityOfPurpose card) {
         super(card);
     }
 

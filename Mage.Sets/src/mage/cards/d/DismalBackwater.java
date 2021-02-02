@@ -29,7 +29,7 @@ public final class DismalBackwater extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public DismalBackwater(final DismalBackwater card) {
+    private DismalBackwater(final DismalBackwater card) {
         super(card);
     }
 

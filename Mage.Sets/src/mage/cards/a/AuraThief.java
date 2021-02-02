@@ -46,7 +46,7 @@ public final class AuraThief extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new AuraThiefDiesTriggeredEffect()));
     }
     
-    public AuraThief(final AuraThief card) {
+    private AuraThief(final AuraThief card) {
         super(card);
     }
     

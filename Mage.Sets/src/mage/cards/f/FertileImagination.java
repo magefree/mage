@@ -35,7 +35,7 @@ public final class FertileImagination extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public FertileImagination(final FertileImagination card) {
+    private FertileImagination(final FertileImagination card) {
         super(card);
     }
 

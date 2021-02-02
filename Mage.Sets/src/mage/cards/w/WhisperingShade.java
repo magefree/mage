@@ -33,7 +33,7 @@ public final class WhisperingShade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,1,Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public WhisperingShade(final WhisperingShade card) {
+    private WhisperingShade(final WhisperingShade card) {
         super(card);
     }
 

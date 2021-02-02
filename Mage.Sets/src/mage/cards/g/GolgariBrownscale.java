@@ -32,7 +32,7 @@ public final class GolgariBrownscale extends CardImpl {
         this.addAbility(new DredgeAbility(2));
     }
 
-    public GolgariBrownscale(final GolgariBrownscale card) {
+    private GolgariBrownscale(final GolgariBrownscale card) {
         super(card);
     }
 

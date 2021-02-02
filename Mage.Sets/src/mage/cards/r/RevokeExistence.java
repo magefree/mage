@@ -24,7 +24,7 @@ public final class RevokeExistence extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
-    public RevokeExistence(final RevokeExistence card) {
+    private RevokeExistence(final RevokeExistence card) {
         super(card);
     }
 

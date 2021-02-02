@@ -53,7 +53,7 @@ public final class DwarvenHold extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DwarvenHold(final DwarvenHold card) {
+    private DwarvenHold(final DwarvenHold card) {
         super(card);
     }
 

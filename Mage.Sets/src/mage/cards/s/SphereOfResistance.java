@@ -25,7 +25,7 @@ public final class SphereOfResistance extends CardImpl {
         );
     }
 
-    public SphereOfResistance(final SphereOfResistance card) {
+    private SphereOfResistance(final SphereOfResistance card) {
         super(card);
     }
 

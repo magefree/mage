@@ -39,7 +39,7 @@ public final class WingsOfTheCosmos extends CardImpl {
 
     }
 
-    public WingsOfTheCosmos(final WingsOfTheCosmos card) {
+    private WingsOfTheCosmos(final WingsOfTheCosmos card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class EnthrallingVictor extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public EnthrallingVictor(final EnthrallingVictor card) {
+    private EnthrallingVictor(final EnthrallingVictor card) {
         super(card);
     }
 

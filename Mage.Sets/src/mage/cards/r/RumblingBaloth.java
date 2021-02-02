@@ -22,7 +22,7 @@ public final class RumblingBaloth extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public RumblingBaloth(final RumblingBaloth card) {
+    private RumblingBaloth(final RumblingBaloth card) {
         super(card);
     }
 

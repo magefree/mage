@@ -46,7 +46,7 @@ public final class DesolationAngel extends CardImpl {
                 new DestroyAllEffect(filter2), KickedCondition.instance, "destroy all lands you control. If it was kicked, destroy all lands instead.")));
     }
 
-    public DesolationAngel(final DesolationAngel card) {
+    private DesolationAngel(final DesolationAngel card) {
         super(card);
     }
 

@@ -20,7 +20,7 @@ public final class FinalFortune extends CardImpl {
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect(true));
     }
 
-    public FinalFortune(final FinalFortune card) {
+    private FinalFortune(final FinalFortune card) {
         super(card);
     }
 

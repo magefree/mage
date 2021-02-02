@@ -36,7 +36,7 @@ public final class SinCollector extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SinCollector(final SinCollector card) {
+    private SinCollector(final SinCollector card) {
         super(card);
     }
 

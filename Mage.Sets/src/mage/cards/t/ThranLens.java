@@ -24,7 +24,7 @@ public final class ThranLens extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThranLensEffect()));
     }
 
-    public ThranLens(final ThranLens card) {
+    private ThranLens(final ThranLens card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class GrimReturn extends CardImpl {
         this.getSpellAbility().addWatcher(new CardsPutIntoGraveyardWatcher());
     }
 
-    public GrimReturn(final GrimReturn card) {
+    private GrimReturn(final GrimReturn card) {
         super(card);
     }
 

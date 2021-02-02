@@ -35,7 +35,7 @@ public final class LivingLands extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public LivingLands(final LivingLands card) {
+    private LivingLands(final LivingLands card) {
         super(card);
     }
 

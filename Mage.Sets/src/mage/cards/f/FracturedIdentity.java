@@ -28,7 +28,7 @@ public final class FracturedIdentity extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
-    public FracturedIdentity(final FracturedIdentity card) {
+    private FracturedIdentity(final FracturedIdentity card) {
         super(card);
     }
 

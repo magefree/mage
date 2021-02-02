@@ -34,7 +34,7 @@ public final class TormentedHero extends CardImpl {
         this.addAbility(new HeroicAbility(new EachOpponentLosesYouGainSumLifeEffect()));
     }
 
-    public TormentedHero(final TormentedHero card) {
+    private TormentedHero(final TormentedHero card) {
         super(card);
     }
 

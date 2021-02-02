@@ -29,7 +29,7 @@ public final class FangrenFirstborn extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterAttackingCreature()), false));
     }
 
-    public FangrenFirstborn(final FangrenFirstborn card) {
+    private FangrenFirstborn(final FangrenFirstborn card) {
         super(card);
     }
 

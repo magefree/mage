@@ -50,7 +50,7 @@ public final class RocCharger extends CardImpl {
         addAbility(ability);
     }
 
-    public RocCharger(final RocCharger card) {
+    private RocCharger(final RocCharger card) {
         super(card);
     }
 

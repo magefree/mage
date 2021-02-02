@@ -31,7 +31,7 @@ public final class Karma extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KarmaDamageTargetEffect(), TargetController.ANY, false));
     }
 
-    public Karma(final Karma card) {
+    private Karma(final Karma card) {
         super(card);
     }
 

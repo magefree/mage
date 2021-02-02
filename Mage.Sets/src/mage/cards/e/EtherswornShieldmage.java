@@ -42,7 +42,7 @@ public final class EtherswornShieldmage extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PreventAllDamageToAllEffect(Duration.EndOfTurn, filter), false));
     }
 
-    public EtherswornShieldmage(final EtherswornShieldmage card) {
+    private EtherswornShieldmage(final EtherswornShieldmage card) {
         super(card);
     }
 

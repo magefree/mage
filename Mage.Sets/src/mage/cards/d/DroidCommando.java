@@ -36,7 +36,7 @@ public final class DroidCommando extends CardImpl {
         this.addAbility(new RepairAbility(3));
     }
 
-    public DroidCommando(final DroidCommando card) {
+    private DroidCommando(final DroidCommando card) {
         super(card);
     }
 

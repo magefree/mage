@@ -23,7 +23,7 @@ public final class CruelEdict extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public CruelEdict(final CruelEdict card) {
+    private CruelEdict(final CruelEdict card) {
         super(card);
     }
 

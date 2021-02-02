@@ -58,7 +58,7 @@ public final class GrimoireThief extends CardImpl {
 
     }
 
-    public GrimoireThief(final GrimoireThief card) {
+    private GrimoireThief(final GrimoireThief card) {
         super(card);
     }
 

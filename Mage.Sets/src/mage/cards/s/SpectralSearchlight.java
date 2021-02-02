@@ -35,7 +35,7 @@ public final class SpectralSearchlight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpectralSearchlight(final SpectralSearchlight card) {
+    private SpectralSearchlight(final SpectralSearchlight card) {
         super(card);
     }
 

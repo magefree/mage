@@ -31,7 +31,7 @@ public final class BountyOfTheLuxa extends CardImpl {
 
     }
 
-    public BountyOfTheLuxa(final BountyOfTheLuxa card) {
+    private BountyOfTheLuxa(final BountyOfTheLuxa card) {
         super(card);
     }
 

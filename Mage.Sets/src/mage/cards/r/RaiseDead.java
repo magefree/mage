@@ -23,7 +23,7 @@ public final class RaiseDead extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 
-    public RaiseDead(final RaiseDead card) {
+    private RaiseDead(final RaiseDead card) {
         super(card);
     }
 

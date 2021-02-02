@@ -51,7 +51,7 @@ public final class DeadwoodTreefolk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeadwoodTreefolk(final DeadwoodTreefolk card) {
+    private DeadwoodTreefolk(final DeadwoodTreefolk card) {
         super(card);
     }
 

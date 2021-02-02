@@ -59,7 +59,7 @@ public final class ExtricatorOfSin extends CardImpl {
                 .addHint(DeliriumHint.instance));
     }
 
-    public ExtricatorOfSin(final ExtricatorOfSin card) {
+    private ExtricatorOfSin(final ExtricatorOfSin card) {
         super(card);
     }
 

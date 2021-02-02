@@ -24,7 +24,7 @@ public final class Thoughtlace extends CardImpl {
         this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.BLUE, Duration.Custom));
     }
 
-    public Thoughtlace(final Thoughtlace card) {
+    private Thoughtlace(final Thoughtlace card) {
         super(card);
     }
 

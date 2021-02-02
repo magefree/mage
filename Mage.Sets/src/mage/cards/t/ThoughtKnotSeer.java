@@ -38,7 +38,7 @@ public final class ThoughtKnotSeer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThoughtKnotSeer(final ThoughtKnotSeer card) {
+    private ThoughtKnotSeer(final ThoughtKnotSeer card) {
         super(card);
     }
 

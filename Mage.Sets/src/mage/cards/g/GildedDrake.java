@@ -51,7 +51,7 @@ public final class GildedDrake extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GildedDrake(final GildedDrake card) {
+    private GildedDrake(final GildedDrake card) {
         super(card);
     }
 

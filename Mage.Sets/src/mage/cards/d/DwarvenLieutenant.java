@@ -41,7 +41,7 @@ public final class DwarvenLieutenant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DwarvenLieutenant(final DwarvenLieutenant card) {
+    private DwarvenLieutenant(final DwarvenLieutenant card) {
         super(card);
     }
 

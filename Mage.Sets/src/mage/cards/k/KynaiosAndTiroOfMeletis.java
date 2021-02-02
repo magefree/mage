@@ -39,7 +39,7 @@ public final class KynaiosAndTiroOfMeletis extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new KynaiosAndTirosEffect(), TargetController.YOU, false));
     }
 
-    public KynaiosAndTiroOfMeletis(final KynaiosAndTiroOfMeletis card) {
+    private KynaiosAndTiroOfMeletis(final KynaiosAndTiroOfMeletis card) {
         super(card);
     }
 

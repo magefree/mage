@@ -30,7 +30,7 @@ public final class Bribery extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public Bribery(final Bribery card) {
+    private Bribery(final Bribery card) {
         super(card);
     }
 

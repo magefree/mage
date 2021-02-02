@@ -35,7 +35,7 @@ public final class PhyrexianProwler extends CardImpl {
             new RemoveCountersSourceCost(CounterType.FADE.createInstance())));
     }
 
-    public PhyrexianProwler(final PhyrexianProwler card) {
+    private PhyrexianProwler(final PhyrexianProwler card) {
         super(card);
     }
 

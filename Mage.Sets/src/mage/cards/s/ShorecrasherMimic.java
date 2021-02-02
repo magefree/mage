@@ -50,7 +50,7 @@ public final class ShorecrasherMimic extends CardImpl {
 
     }
 
-    public ShorecrasherMimic(final ShorecrasherMimic card) {
+    private ShorecrasherMimic(final ShorecrasherMimic card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class ExpeditionRaptor extends CardImpl {
         this.addAbility(new SupportAbility(this, 2));
     }
 
-    public ExpeditionRaptor(final ExpeditionRaptor card) {
+    private ExpeditionRaptor(final ExpeditionRaptor card) {
         super(card);
     }
 

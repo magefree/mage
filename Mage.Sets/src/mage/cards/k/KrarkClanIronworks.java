@@ -32,7 +32,7 @@ public final class KrarkClanIronworks extends CardImpl {
 
     }
 
-    public KrarkClanIronworks(final KrarkClanIronworks card) {
+    private KrarkClanIronworks(final KrarkClanIronworks card) {
         super(card);
     }
 

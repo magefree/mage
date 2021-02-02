@@ -35,7 +35,7 @@ public final class MayaelsAria extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new MayaelsAriaEffect(), TargetController.YOU, false));
     }
 
-    public MayaelsAria(final MayaelsAria card) {
+    private MayaelsAria(final MayaelsAria card) {
         super(card);
     }
 

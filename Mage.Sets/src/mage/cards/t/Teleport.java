@@ -27,7 +27,7 @@ public final class Teleport extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Teleport(final Teleport card) {
+    private Teleport(final Teleport card) {
         super(card);
     }
 

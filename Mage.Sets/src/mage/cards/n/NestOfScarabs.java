@@ -28,7 +28,7 @@ public final class NestOfScarabs extends CardImpl {
 
     }
 
-    public NestOfScarabs(final NestOfScarabs card) {
+    private NestOfScarabs(final NestOfScarabs card) {
         super(card);
     }
 

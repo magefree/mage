@@ -36,7 +36,7 @@ public final class SeedcradleWitch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeedcradleWitch(final SeedcradleWitch card) {
+    private SeedcradleWitch(final SeedcradleWitch card) {
         super(card);
     }
 

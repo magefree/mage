@@ -36,7 +36,7 @@ public final class SelesnyaLocket extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SelesnyaLocket(final SelesnyaLocket card) {
+    private SelesnyaLocket(final SelesnyaLocket card) {
         super(card);
     }
 

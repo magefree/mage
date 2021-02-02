@@ -47,7 +47,7 @@ public final class RhonassStalwart extends CardImpl {
         this.addAbility(new ExertAbility(ability));
     }
 
-    public RhonassStalwart(final RhonassStalwart card) {
+    private RhonassStalwart(final RhonassStalwart card) {
         super(card);
     }
 

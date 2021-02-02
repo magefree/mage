@@ -36,7 +36,7 @@ public final class Annex extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("land")));
     }
 
-    public Annex(final Annex card) {
+    private Annex(final Annex card) {
         super(card);
     }
 

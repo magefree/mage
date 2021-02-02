@@ -40,7 +40,7 @@ public final class CinderShade extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CinderShade(final CinderShade card) {
+    private CinderShade(final CinderShade card) {
         super(card);
     }
 

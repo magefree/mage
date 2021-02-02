@@ -43,7 +43,7 @@ public final class SpiritLoop extends CardImpl {
         
     }
 
-    public SpiritLoop(final SpiritLoop card) {
+    private SpiritLoop(final SpiritLoop card) {
         super(card);
     }
 

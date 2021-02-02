@@ -26,7 +26,7 @@ public final class DwarvenGrunt extends CardImpl {
         this.addAbility(new MountainwalkAbility());
     }
 
-    public DwarvenGrunt(final DwarvenGrunt card) {
+    private DwarvenGrunt(final DwarvenGrunt card) {
         super(card);
     }
 

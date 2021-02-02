@@ -35,7 +35,7 @@ public final class SunscorchRegent extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SunscorchRegent(final SunscorchRegent card) {
+    private SunscorchRegent(final SunscorchRegent card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class IsperiaSupremeJudge extends CardImpl {
         this.addAbility(new AttacksAllTriggeredAbility(new DrawCardSourceControllerEffect(1), true, true));
     }
 
-    public IsperiaSupremeJudge(final IsperiaSupremeJudge card) {
+    private IsperiaSupremeJudge(final IsperiaSupremeJudge card) {
         super(card);
     }
 

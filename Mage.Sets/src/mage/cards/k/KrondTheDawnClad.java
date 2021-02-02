@@ -44,7 +44,7 @@ public final class KrondTheDawnClad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KrondTheDawnClad(final KrondTheDawnClad card) {
+    private KrondTheDawnClad(final KrondTheDawnClad card) {
         super(card);
     }
 

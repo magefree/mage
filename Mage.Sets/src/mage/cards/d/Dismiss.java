@@ -23,7 +23,7 @@ public final class Dismiss extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Dismiss(final Dismiss card) {
+    private Dismiss(final Dismiss card) {
         super(card);
     }
 

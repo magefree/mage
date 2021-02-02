@@ -28,7 +28,7 @@ public final class AncientRunes extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AncientRunesDamageTargetEffect(), TargetController.ANY, false, true));
     }
 
-    public AncientRunes(final AncientRunes card) {
+    private AncientRunes(final AncientRunes card) {
         super(card);
     }
 

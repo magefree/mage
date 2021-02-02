@@ -49,7 +49,7 @@ public final class CatchRelease extends SplitCard {
 
     }
 
-    public CatchRelease(final CatchRelease card) {
+    private CatchRelease(final CatchRelease card) {
         super(card);
     }
 

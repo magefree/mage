@@ -30,7 +30,7 @@ public final class Rowen extends CardImpl {
         this.addAbility(new RowenAbility());
     }
 
-    public Rowen(final Rowen card) {
+    private Rowen(final Rowen card) {
         super(card);
     }
 

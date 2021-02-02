@@ -29,7 +29,7 @@ public final class MinotaurExplorer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardCardCost(true))));
     }
 
-    public MinotaurExplorer(final MinotaurExplorer card) {
+    private MinotaurExplorer(final MinotaurExplorer card) {
         super(card);
     }
 

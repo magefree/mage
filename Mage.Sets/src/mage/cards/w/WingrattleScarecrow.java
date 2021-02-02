@@ -52,7 +52,7 @@ public final class WingrattleScarecrow extends CardImpl {
         
     }
 
-    public WingrattleScarecrow(final WingrattleScarecrow card) {
+    private WingrattleScarecrow(final WingrattleScarecrow card) {
         super(card);
     }
 

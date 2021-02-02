@@ -24,7 +24,7 @@ public final class DanceWithDevils extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public DanceWithDevils(final DanceWithDevils card) {
+    private DanceWithDevils(final DanceWithDevils card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class PowerMatrix extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PowerMatrix(final PowerMatrix card) {
+    private PowerMatrix(final PowerMatrix card) {
         super(card);
     }
 

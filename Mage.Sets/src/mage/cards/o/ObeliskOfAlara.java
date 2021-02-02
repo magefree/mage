@@ -52,7 +52,7 @@ public final class ObeliskOfAlara extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ObeliskOfAlara(final ObeliskOfAlara card) {
+    private ObeliskOfAlara(final ObeliskOfAlara card) {
         super(card);
     }
 

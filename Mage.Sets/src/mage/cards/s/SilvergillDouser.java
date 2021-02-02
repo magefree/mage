@@ -46,7 +46,7 @@ public final class SilvergillDouser extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SilvergillDouser(final SilvergillDouser card) {
+    private SilvergillDouser(final SilvergillDouser card) {
         super(card);
     }
 

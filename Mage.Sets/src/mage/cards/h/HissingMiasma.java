@@ -24,7 +24,7 @@ public final class HissingMiasma extends CardImpl {
         this.addAbility(new AttackedByCreatureTriggeredAbility(new LoseLifeTargetEffect(1), false, SetTargetPointer.PLAYER));
     }
 
-    public HissingMiasma(final HissingMiasma card) {
+    private HissingMiasma(final HissingMiasma card) {
         super(card);
     }
 

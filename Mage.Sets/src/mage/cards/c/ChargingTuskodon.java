@@ -39,7 +39,7 @@ public final class ChargingTuskodon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChargingTuskodonEffect()));
     }
 
-    public ChargingTuskodon(final ChargingTuskodon card) {
+    private ChargingTuskodon(final ChargingTuskodon card) {
         super(card);
     }
 

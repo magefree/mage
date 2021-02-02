@@ -30,7 +30,7 @@ public final class AlbinoTroll extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }
 
-    public AlbinoTroll(final AlbinoTroll card) {
+    private AlbinoTroll(final AlbinoTroll card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class AngelicArmaments extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4)));
     }
 
-    public AngelicArmaments(final AngelicArmaments card) {
+    private AngelicArmaments(final AngelicArmaments card) {
         super(card);
     }
 

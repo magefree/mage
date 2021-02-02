@@ -40,7 +40,7 @@ public final class OhranViper extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
-    public OhranViper(final OhranViper card) {
+    private OhranViper(final OhranViper card) {
         super(card);
     }
 

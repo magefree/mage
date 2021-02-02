@@ -26,7 +26,7 @@ public final class Squelch extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Squelch(final Squelch card) {
+    private Squelch(final Squelch card) {
         super(card);
     }
 

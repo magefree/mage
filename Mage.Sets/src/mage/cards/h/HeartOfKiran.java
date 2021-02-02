@@ -52,7 +52,7 @@ public final class HeartOfKiran extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, cost));
     }
 
-    public HeartOfKiran(final HeartOfKiran card) {
+    private HeartOfKiran(final HeartOfKiran card) {
         super(card);
     }
 

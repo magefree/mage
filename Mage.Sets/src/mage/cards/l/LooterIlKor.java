@@ -31,7 +31,7 @@ public final class LooterIlKor extends CardImpl {
         this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DrawDiscardControllerEffect()));
     }
 
-    public LooterIlKor(final LooterIlKor card) {
+    private LooterIlKor(final LooterIlKor card) {
         super(card);
     }
 

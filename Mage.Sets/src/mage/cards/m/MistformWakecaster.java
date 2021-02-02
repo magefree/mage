@@ -52,7 +52,7 @@ public final class MistformWakecaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MistformWakecaster(final MistformWakecaster card) {
+    private MistformWakecaster(final MistformWakecaster card) {
         super(card);
     }
 

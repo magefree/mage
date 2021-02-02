@@ -53,7 +53,7 @@ public final class CentaurChieftain extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CentaurChieftain(final CentaurChieftain card) {
+    private CentaurChieftain(final CentaurChieftain card) {
         super(card);
     }
 

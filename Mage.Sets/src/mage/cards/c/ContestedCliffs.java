@@ -51,7 +51,7 @@ public final class ContestedCliffs extends CardImpl {
         
     }
 
-    public ContestedCliffs(final ContestedCliffs card) {
+    private ContestedCliffs(final ContestedCliffs card) {
         super(card);
     }
 

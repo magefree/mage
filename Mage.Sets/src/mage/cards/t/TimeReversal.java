@@ -27,7 +27,7 @@ public final class TimeReversal extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public TimeReversal(final TimeReversal card) {
+    private TimeReversal(final TimeReversal card) {
         super(card);
     }
 

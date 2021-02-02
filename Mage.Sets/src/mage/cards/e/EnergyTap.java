@@ -36,7 +36,7 @@ public final class EnergyTap extends CardImpl {
         this.getSpellAbility().addEffect(new EnergyTapEffect());
     }
 
-    public EnergyTap(final EnergyTap card) {
+    private EnergyTap(final EnergyTap card) {
         super(card);
     }
 

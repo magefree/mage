@@ -35,7 +35,7 @@ public final class ProbeDroid extends CardImpl {
         this.addAbility(new RepairAbility(3));
     }
 
-    public ProbeDroid(final ProbeDroid card) {
+    private ProbeDroid(final ProbeDroid card) {
         super(card);
     }
 

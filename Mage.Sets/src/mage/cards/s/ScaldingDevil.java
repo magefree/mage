@@ -33,7 +33,7 @@ public final class ScaldingDevil extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScaldingDevil(final ScaldingDevil card) {
+    private ScaldingDevil(final ScaldingDevil card) {
         super(card);
     }
 

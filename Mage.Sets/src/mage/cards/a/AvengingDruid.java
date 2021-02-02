@@ -30,7 +30,7 @@ public final class AvengingDruid extends CardImpl {
         this.addAbility(new DealsDamageToOpponentTriggeredAbility(new RevealCardsFromLibraryUntilEffect(new FilterLandCard(), Zone.BATTLEFIELD, Zone.GRAVEYARD), true));
     }
 
-    public AvengingDruid(final AvengingDruid card) {
+    private AvengingDruid(final AvengingDruid card) {
         super(card);
     }
 

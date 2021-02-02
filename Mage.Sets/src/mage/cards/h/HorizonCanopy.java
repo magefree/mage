@@ -39,7 +39,7 @@ public final class HorizonCanopy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HorizonCanopy(final HorizonCanopy card) {
+    private HorizonCanopy(final HorizonCanopy card) {
         super(card);
     }
 

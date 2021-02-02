@@ -35,7 +35,7 @@ public final class CandlesGlow extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{1}{W}"));
     }
 
-    public CandlesGlow(final CandlesGlow card) {
+    private CandlesGlow(final CandlesGlow card) {
         super(card);
     }
 

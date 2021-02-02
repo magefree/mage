@@ -31,7 +31,7 @@ public final class RecklessWurm extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{2}{R}")));
     }
 
-    public RecklessWurm(final RecklessWurm card) {
+    private RecklessWurm(final RecklessWurm card) {
         super(card);
     }
 

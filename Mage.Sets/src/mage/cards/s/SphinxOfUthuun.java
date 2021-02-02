@@ -44,7 +44,7 @@ public final class SphinxOfUthuun extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SphinxOfUthuunEffect()));
     }
 
-    public SphinxOfUthuun(final SphinxOfUthuun card) {
+    private SphinxOfUthuun(final SphinxOfUthuun card) {
         super(card);
     }
 

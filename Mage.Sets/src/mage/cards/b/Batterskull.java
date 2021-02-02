@@ -42,7 +42,7 @@ public final class Batterskull extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(5)));
     }
 
-    public Batterskull(final Batterskull card) {
+    private Batterskull(final Batterskull card) {
         super(card);
     }
 

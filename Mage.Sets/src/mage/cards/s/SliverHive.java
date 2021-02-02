@@ -55,7 +55,7 @@ public final class SliverHive extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SliverHive(final SliverHive card) {
+    private SliverHive(final SliverHive card) {
         super(card);
     }
 

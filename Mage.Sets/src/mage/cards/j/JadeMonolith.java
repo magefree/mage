@@ -38,7 +38,7 @@ public final class JadeMonolith extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JadeMonolith(final JadeMonolith card) {
+    private JadeMonolith(final JadeMonolith card) {
         super(card);
     }
 

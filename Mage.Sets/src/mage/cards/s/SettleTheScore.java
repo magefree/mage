@@ -32,7 +32,7 @@ public final class SettleTheScore extends CardImpl {
         this.getSpellAbility().addEffect(new SettleTheScoreEffect());
     }
 
-    public SettleTheScore(final SettleTheScore card) {
+    private SettleTheScore(final SettleTheScore card) {
         super(card);
     }
 

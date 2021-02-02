@@ -30,7 +30,7 @@ public final class PathrazerOfUlamog extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(3)));
     }
 
-    public PathrazerOfUlamog(final PathrazerOfUlamog card) {
+    private PathrazerOfUlamog(final PathrazerOfUlamog card) {
         super(card);
     }
 

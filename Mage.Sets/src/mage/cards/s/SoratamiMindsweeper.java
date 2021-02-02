@@ -44,7 +44,7 @@ public final class SoratamiMindsweeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoratamiMindsweeper(final SoratamiMindsweeper card) {
+    private SoratamiMindsweeper(final SoratamiMindsweeper card) {
         super(card);
     }
 

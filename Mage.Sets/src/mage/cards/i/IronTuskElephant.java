@@ -26,7 +26,7 @@ public final class IronTuskElephant extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public IronTuskElephant(final IronTuskElephant card) {
+    private IronTuskElephant(final IronTuskElephant card) {
         super(card);
     }
 

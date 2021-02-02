@@ -31,7 +31,7 @@ public final class DazzlingReflection extends CardImpl {
         getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public DazzlingReflection(final DazzlingReflection card) {
+    private DazzlingReflection(final DazzlingReflection card) {
         super(card);
     }
 

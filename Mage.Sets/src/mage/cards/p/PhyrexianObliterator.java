@@ -39,7 +39,7 @@ public final class PhyrexianObliterator extends CardImpl {
         this.addAbility(new PhyrexianObliteratorTriggeredAbility());
     }
 
-    public PhyrexianObliterator(final PhyrexianObliterator card) {
+    private PhyrexianObliterator(final PhyrexianObliterator card) {
         super(card);
     }
 

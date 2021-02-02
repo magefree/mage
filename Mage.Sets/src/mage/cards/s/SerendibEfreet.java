@@ -31,7 +31,7 @@ public final class SerendibEfreet extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), TargetController.YOU, false));
     }
 
-    public SerendibEfreet(final SerendibEfreet card) {
+    private SerendibEfreet(final SerendibEfreet card) {
         super(card);
     }
 

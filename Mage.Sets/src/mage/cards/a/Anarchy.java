@@ -30,7 +30,7 @@ public final class Anarchy extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public Anarchy(final Anarchy card) {
+    private Anarchy(final Anarchy card) {
         super(card);
     }
 

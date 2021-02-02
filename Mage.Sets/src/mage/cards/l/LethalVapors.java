@@ -41,7 +41,7 @@ public final class LethalVapors extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LethalVapors(final LethalVapors card) {
+    private LethalVapors(final LethalVapors card) {
         super(card);
     }
 

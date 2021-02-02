@@ -42,7 +42,7 @@ public final class AmuletOfSafekeeping extends CardImpl {
         ));
     }
 
-    public AmuletOfSafekeeping(final AmuletOfSafekeeping card) {
+    private AmuletOfSafekeeping(final AmuletOfSafekeeping card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class Submerge extends CardImpl {
                 
     }
 
-    public Submerge(final Submerge card) {
+    private Submerge(final Submerge card) {
         super(card);
     }
 

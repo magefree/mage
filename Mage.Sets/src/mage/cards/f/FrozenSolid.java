@@ -40,7 +40,7 @@ public final class FrozenSolid extends CardImpl {
         this.addAbility(new DealtDamageAttachedTriggeredAbility(new DestroyAttachedToEffect("it"), false));
     }
 
-    public FrozenSolid(final FrozenSolid card) {
+    private FrozenSolid(final FrozenSolid card) {
         super(card);
     }
 

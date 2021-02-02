@@ -20,7 +20,7 @@ public final class MoxPearl extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public MoxPearl(final MoxPearl card) {
+    private MoxPearl(final MoxPearl card) {
         super(card);
     }
 

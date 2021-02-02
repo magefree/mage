@@ -43,7 +43,7 @@ public final class HellionCrucible extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HellionCrucible(final HellionCrucible card) {
+    private HellionCrucible(final HellionCrucible card) {
         super(card);
     }
 

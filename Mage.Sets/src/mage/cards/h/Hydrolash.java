@@ -25,7 +25,7 @@ public final class Hydrolash extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Hydrolash(final Hydrolash card) {
+    private Hydrolash(final Hydrolash card) {
         super(card);
     }
 

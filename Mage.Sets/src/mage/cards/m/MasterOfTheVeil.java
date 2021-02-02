@@ -52,7 +52,7 @@ public final class MasterOfTheVeil extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MasterOfTheVeil(final MasterOfTheVeil card) {
+    private MasterOfTheVeil(final MasterOfTheVeil card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class DeeptreadMerrow extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new IslandwalkAbility(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.U)));
     }
 
-    public DeeptreadMerrow(final DeeptreadMerrow card) {
+    private DeeptreadMerrow(final DeeptreadMerrow card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class SealOfFire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SealOfFire(final SealOfFire card) {
+    private SealOfFire(final SealOfFire card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class VedalkenAethermage extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}"), filter2, "Wizardcycling"));
     }
 
-    public VedalkenAethermage(final VedalkenAethermage card) {
+    private VedalkenAethermage(final VedalkenAethermage card) {
         super(card);
     }
 

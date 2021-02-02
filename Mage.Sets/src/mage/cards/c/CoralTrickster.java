@@ -35,7 +35,7 @@ public final class CoralTrickster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CoralTrickster(final CoralTrickster card) {
+    private CoralTrickster(final CoralTrickster card) {
         super(card);
     }
 

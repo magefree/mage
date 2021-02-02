@@ -21,7 +21,7 @@ public final class WarriorsCharge extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
     }
 
-    public WarriorsCharge(final WarriorsCharge card) {
+    private WarriorsCharge(final WarriorsCharge card) {
         super(card);
     }
 

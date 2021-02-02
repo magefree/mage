@@ -32,7 +32,7 @@ public final class SirenLookout extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect()));
     }
 
-    public SirenLookout(final SirenLookout card) {
+    private SirenLookout(final SirenLookout card) {
         super(card);
     }
 

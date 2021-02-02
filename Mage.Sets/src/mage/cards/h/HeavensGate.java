@@ -29,7 +29,7 @@ public final class HeavensGate extends CardImpl {
 
     }
 
-    public HeavensGate(final HeavensGate card) {
+    private HeavensGate(final HeavensGate card) {
         super(card);
     }
 

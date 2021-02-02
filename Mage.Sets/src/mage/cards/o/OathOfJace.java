@@ -35,7 +35,7 @@ public final class OathOfJace extends CardImpl {
 
     }
 
-    public OathOfJace(final OathOfJace card) {
+    private OathOfJace(final OathOfJace card) {
         super(card);
     }
 

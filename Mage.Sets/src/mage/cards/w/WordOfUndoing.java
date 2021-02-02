@@ -33,7 +33,7 @@ public final class WordOfUndoing extends CardImpl {
 
     }
 
-    public WordOfUndoing(final WordOfUndoing card) {
+    private WordOfUndoing(final WordOfUndoing card) {
         super(card);
     }
 

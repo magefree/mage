@@ -49,7 +49,7 @@ public final class ShiftyDoppelganger extends CardImpl {
 
     }
 
-    public ShiftyDoppelganger(final ShiftyDoppelganger card) {
+    private ShiftyDoppelganger(final ShiftyDoppelganger card) {
         super(card);
     }
 

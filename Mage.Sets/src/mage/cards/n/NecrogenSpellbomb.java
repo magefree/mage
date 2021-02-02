@@ -33,7 +33,7 @@ public final class NecrogenSpellbomb extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public NecrogenSpellbomb(final NecrogenSpellbomb card) {
+    private NecrogenSpellbomb(final NecrogenSpellbomb card) {
         super(card);
     }
 

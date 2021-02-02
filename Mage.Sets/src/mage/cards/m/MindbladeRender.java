@@ -34,7 +34,7 @@ public final class MindbladeRender extends CardImpl {
         this.addAbility(new MindbladeRenderTriggeredAbility());
     }
 
-    public MindbladeRender(final MindbladeRender card) {
+    private MindbladeRender(final MindbladeRender card) {
         super(card);
     }
 

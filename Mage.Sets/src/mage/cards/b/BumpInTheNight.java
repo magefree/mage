@@ -27,7 +27,7 @@ public final class BumpInTheNight extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{R}"), TimingRule.SORCERY));
     }
 
-    public BumpInTheNight(final BumpInTheNight card) {
+    private BumpInTheNight(final BumpInTheNight card) {
         super(card);
     }
 

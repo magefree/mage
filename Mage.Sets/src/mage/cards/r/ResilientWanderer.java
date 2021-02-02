@@ -36,7 +36,7 @@ public final class ResilientWanderer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ResilientWanderer(final ResilientWanderer card) {
+    private ResilientWanderer(final ResilientWanderer card) {
         super(card);
     }
 

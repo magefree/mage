@@ -31,7 +31,7 @@ public final class SaprolingCluster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SaprolingCluster(final SaprolingCluster card) {
+    private SaprolingCluster(final SaprolingCluster card) {
         super(card);
     }
 

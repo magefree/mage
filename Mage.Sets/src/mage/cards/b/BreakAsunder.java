@@ -29,7 +29,7 @@ public final class BreakAsunder extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public BreakAsunder(final BreakAsunder card) {
+    private BreakAsunder(final BreakAsunder card) {
         super(card);
     }
 

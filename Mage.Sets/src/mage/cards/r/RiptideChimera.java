@@ -41,7 +41,7 @@ public final class RiptideChimera extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false));
     }
 
-    public RiptideChimera(final RiptideChimera card) {
+    private RiptideChimera(final RiptideChimera card) {
         super(card);
     }
 

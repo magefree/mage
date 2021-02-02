@@ -49,7 +49,7 @@ public final class InfernoFist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InfernoFist(final InfernoFist card) {
+    private InfernoFist(final InfernoFist card) {
         super(card);
     }
 

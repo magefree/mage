@@ -52,7 +52,7 @@ public final class FruitcakeElemental extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FruitcakeElemental(final FruitcakeElemental card) {
+    private FruitcakeElemental(final FruitcakeElemental card) {
         super(card);
     }
 

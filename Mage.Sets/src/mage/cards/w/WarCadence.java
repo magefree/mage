@@ -32,7 +32,7 @@ public final class WarCadence extends CardImpl {
 
     }
 
-    public WarCadence(final WarCadence card) {
+    private WarCadence(final WarCadence card) {
         super(card);
     }
 

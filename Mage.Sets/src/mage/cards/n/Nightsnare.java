@@ -27,7 +27,7 @@ public final class Nightsnare extends CardImpl {
         this.getSpellAbility().addEffect(new NightsnareDiscardEffect());
     }
 
-    public Nightsnare(final Nightsnare card) {
+    private Nightsnare(final Nightsnare card) {
         super(card);
     }
 

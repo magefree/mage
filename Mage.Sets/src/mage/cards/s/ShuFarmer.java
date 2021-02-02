@@ -32,7 +32,7 @@ public final class ShuFarmer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShuFarmer(final ShuFarmer card) {
+    private ShuFarmer(final ShuFarmer card) {
         super(card);
     }
 

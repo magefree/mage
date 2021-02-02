@@ -23,7 +23,7 @@ public final class FemerefScouts extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public FemerefScouts(final FemerefScouts card) {
+    private FemerefScouts(final FemerefScouts card) {
         super(card);
     }
 

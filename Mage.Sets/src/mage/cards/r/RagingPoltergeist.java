@@ -22,7 +22,7 @@ public final class RagingPoltergeist extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public RagingPoltergeist(final RagingPoltergeist card) {
+    private RagingPoltergeist(final RagingPoltergeist card) {
         super(card);
     }
 

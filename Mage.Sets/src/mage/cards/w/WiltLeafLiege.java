@@ -48,7 +48,7 @@ public final class WiltLeafLiege extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.HAND, new DiscardOntoBattlefieldEffect()));
     }
 
-    public WiltLeafLiege(final WiltLeafLiege card) {
+    private WiltLeafLiege(final WiltLeafLiege card) {
         super(card);
     }
 

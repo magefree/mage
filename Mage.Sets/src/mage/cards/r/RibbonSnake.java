@@ -38,7 +38,7 @@ public final class RibbonSnake extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RibbonSnake(final RibbonSnake card) {
+    private RibbonSnake(final RibbonSnake card) {
         super(card);
     }
 

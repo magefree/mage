@@ -39,7 +39,7 @@ public final class CloneShell extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CloneShellDiesEffect()));
     }
 
-    public CloneShell(final CloneShell card) {
+    private CloneShell(final CloneShell card) {
         super(card);
     }
 

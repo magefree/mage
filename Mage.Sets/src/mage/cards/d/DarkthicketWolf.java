@@ -30,7 +30,7 @@ public final class DarkthicketWolf extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{2}{G}")));
     }
 
-    public DarkthicketWolf(final DarkthicketWolf card) {
+    private DarkthicketWolf(final DarkthicketWolf card) {
         super(card);
     }
 

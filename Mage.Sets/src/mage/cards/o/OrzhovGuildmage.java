@@ -37,7 +37,7 @@ public final class OrzhovGuildmage extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeAllPlayersEffect(1), new ManaCostsImpl("{2}{B}")));
     }
 
-    public OrzhovGuildmage(final OrzhovGuildmage card) {
+    private OrzhovGuildmage(final OrzhovGuildmage card) {
         super(card);
     }
 

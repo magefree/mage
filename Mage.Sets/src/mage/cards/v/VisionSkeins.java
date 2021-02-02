@@ -21,7 +21,7 @@ public final class VisionSkeins extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardAllEffect(2));
     }
 
-    public VisionSkeins(final VisionSkeins card) {
+    private VisionSkeins(final VisionSkeins card) {
         super(card);
     }
 

@@ -57,7 +57,7 @@ public final class ShattergangBrothers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShattergangBrothers(final ShattergangBrothers card) {
+    private ShattergangBrothers(final ShattergangBrothers card) {
         super(card);
     }
 

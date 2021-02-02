@@ -35,7 +35,7 @@ public final class Detonate extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(DetonateAdjuster.instance);
     }
 
-    public Detonate(final Detonate card) {
+    private Detonate(final Detonate card) {
         super(card);
     }
 

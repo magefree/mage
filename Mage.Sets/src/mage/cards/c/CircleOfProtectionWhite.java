@@ -36,7 +36,7 @@ public final class CircleOfProtectionWhite extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("1")));
     }
 
-    public CircleOfProtectionWhite(final CircleOfProtectionWhite card) {
+    private CircleOfProtectionWhite(final CircleOfProtectionWhite card) {
         super(card);
     }
 

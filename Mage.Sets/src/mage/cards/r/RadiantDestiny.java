@@ -52,7 +52,7 @@ public final class RadiantDestiny extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RadiantDestiny(final RadiantDestiny card) {
+    private RadiantDestiny(final RadiantDestiny card) {
         super(card);
     }
 

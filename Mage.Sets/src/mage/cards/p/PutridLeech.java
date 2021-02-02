@@ -32,7 +32,7 @@ public final class PutridLeech extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new PayLifeCost(2)));
     }
 
-    public PutridLeech(final PutridLeech card) {
+    private PutridLeech(final PutridLeech card) {
         super(card);
     }
 

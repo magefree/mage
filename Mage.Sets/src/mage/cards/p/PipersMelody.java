@@ -29,7 +29,7 @@ public final class PipersMelody extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard")));
     }
 
-    public PipersMelody(final PipersMelody card) {
+    private PipersMelody(final PipersMelody card) {
         super(card);
     }
 

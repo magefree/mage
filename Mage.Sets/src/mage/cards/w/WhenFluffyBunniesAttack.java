@@ -33,7 +33,7 @@ public final class WhenFluffyBunniesAttack extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WhenFluffyBunniesAttack(final WhenFluffyBunniesAttack card) {
+    private WhenFluffyBunniesAttack(final WhenFluffyBunniesAttack card) {
         super(card);
     }
 

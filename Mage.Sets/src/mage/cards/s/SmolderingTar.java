@@ -36,7 +36,7 @@ public final class SmolderingTar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SmolderingTar(final SmolderingTar card) {
+    private SmolderingTar(final SmolderingTar card) {
         super(card);
     }
 

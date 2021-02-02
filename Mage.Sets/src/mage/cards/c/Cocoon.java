@@ -58,7 +58,7 @@ public final class Cocoon extends CardImpl {
 
     }
 
-    public Cocoon(final Cocoon card) {
+    private Cocoon(final Cocoon card) {
         super(card);
     }
 

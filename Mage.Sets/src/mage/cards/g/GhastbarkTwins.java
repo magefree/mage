@@ -31,7 +31,7 @@ public final class GhastbarkTwins extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect()));
     }
 
-    public GhastbarkTwins(final GhastbarkTwins card) {
+    private GhastbarkTwins(final GhastbarkTwins card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class Seahunter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Seahunter(final Seahunter card) {
+    private Seahunter(final Seahunter card) {
         super(card);
     }
 

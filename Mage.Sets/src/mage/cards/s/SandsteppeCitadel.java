@@ -27,7 +27,7 @@ public final class SandsteppeCitadel extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public SandsteppeCitadel(final SandsteppeCitadel card) {
+    private SandsteppeCitadel(final SandsteppeCitadel card) {
         super(card);
     }
 

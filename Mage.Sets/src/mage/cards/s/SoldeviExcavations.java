@@ -50,7 +50,7 @@ public final class SoldeviExcavations extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoldeviExcavations(final SoldeviExcavations card) {
+    private SoldeviExcavations(final SoldeviExcavations card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class KavuRunner extends CardImpl {
             "{this} has haste as long as no opponent controls a white or blue creature")));
     }
 
-    public KavuRunner(final KavuRunner card) {
+    private KavuRunner(final KavuRunner card) {
         super(card);
     }
 

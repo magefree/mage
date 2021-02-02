@@ -45,7 +45,7 @@ public final class SigardasAid extends CardImpl {
 
     }
 
-    public SigardasAid(final SigardasAid card) {
+    private SigardasAid(final SigardasAid card) {
         super(card);
     }
 

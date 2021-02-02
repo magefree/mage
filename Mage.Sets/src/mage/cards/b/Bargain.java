@@ -26,7 +26,7 @@ public final class Bargain extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(7));
     }
 
-    public Bargain(final Bargain card) {
+    private Bargain(final Bargain card) {
         super(card);
     }
 

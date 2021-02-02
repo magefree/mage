@@ -34,7 +34,7 @@ public final class Divest extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
     }
 
-    public Divest(final Divest card) {
+    private Divest(final Divest card) {
         super(card);
     }
 

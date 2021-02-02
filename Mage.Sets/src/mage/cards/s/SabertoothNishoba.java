@@ -31,7 +31,7 @@ public final class SabertoothNishoba extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLUE, ObjectColor.RED));
     }
 
-    public SabertoothNishoba(final SabertoothNishoba card) {
+    private SabertoothNishoba(final SabertoothNishoba card) {
         super(card);
     }
 

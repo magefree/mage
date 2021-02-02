@@ -23,7 +23,7 @@ public final class PheresBandCentaurs extends CardImpl {
         this.toughness = new MageInt(7);
     }
 
-    public PheresBandCentaurs(final PheresBandCentaurs card) {
+    private PheresBandCentaurs(final PheresBandCentaurs card) {
         super(card);
     }
 

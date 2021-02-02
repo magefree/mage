@@ -29,7 +29,7 @@ public final class DoomedTraveler extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken())));
     }
 
-    public DoomedTraveler(final DoomedTraveler card) {
+    private DoomedTraveler(final DoomedTraveler card) {
         super(card);
     }
 

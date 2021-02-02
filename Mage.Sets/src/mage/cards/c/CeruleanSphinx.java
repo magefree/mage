@@ -35,7 +35,7 @@ public final class CeruleanSphinx extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{U}")));
     }
 
-    public CeruleanSphinx(final CeruleanSphinx card) {
+    private CeruleanSphinx(final CeruleanSphinx card) {
         super(card);
     }
 

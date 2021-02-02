@@ -57,7 +57,7 @@ public final class GrixisGrimblade extends CardImpl {
         
     }
 
-    public GrixisGrimblade(final GrixisGrimblade card) {
+    private GrixisGrimblade(final GrixisGrimblade card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class AhnCropChampion extends CardImpl {
         addAbility(new ExertAbility(new BecomesExertSourceTriggeredAbility(new UntapAllControllerEffect(new FilterControlledCreaturePermanent("creatures you control"), null, false))));
     }
 
-    public AhnCropChampion(final AhnCropChampion card) {
+    private AhnCropChampion(final AhnCropChampion card) {
         super(card);
     }
 

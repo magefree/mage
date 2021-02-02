@@ -28,7 +28,7 @@ public final class TishanasWayfinder extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect()));
     }
 
-    public TishanasWayfinder(final TishanasWayfinder card) {
+    private TishanasWayfinder(final TishanasWayfinder card) {
         super(card);
     }
 

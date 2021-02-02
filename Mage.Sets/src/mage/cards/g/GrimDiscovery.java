@@ -34,7 +34,7 @@ public final class GrimDiscovery extends CardImpl {
         this.getSpellAbility().addMode(mode1);
     }
 
-    public GrimDiscovery(final GrimDiscovery card) {
+    private GrimDiscovery(final GrimDiscovery card) {
         super(card);
     }
 

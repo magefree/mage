@@ -66,7 +66,7 @@ public final class TajicLegionsEdge extends CardImpl {
         ));
     }
 
-    public TajicLegionsEdge(final TajicLegionsEdge card) {
+    private TajicLegionsEdge(final TajicLegionsEdge card) {
         super(card);
     }
 

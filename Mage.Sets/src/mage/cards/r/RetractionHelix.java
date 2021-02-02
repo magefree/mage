@@ -37,7 +37,7 @@ public final class RetractionHelix extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public RetractionHelix(final RetractionHelix card) {
+    private RetractionHelix(final RetractionHelix card) {
         super(card);
     }
 

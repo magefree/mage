@@ -37,7 +37,7 @@ public final class TwistedExperiment extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, -1, Duration.WhileOnBattlefield)));
     }
 
-    public TwistedExperiment(final TwistedExperiment card) {
+    private TwistedExperiment(final TwistedExperiment card) {
         super(card);
     }
 

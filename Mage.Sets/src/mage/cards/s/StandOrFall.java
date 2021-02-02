@@ -38,7 +38,7 @@ public final class StandOrFall extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new StandOrFallEffect(), TargetController.YOU, false));
     }
 
-    public StandOrFall(final StandOrFall card) {
+    private StandOrFall(final StandOrFall card) {
         super(card);
     }
 

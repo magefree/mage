@@ -46,7 +46,7 @@ public final class MimicVat extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MimicVat(final MimicVat card) {
+    private MimicVat(final MimicVat card) {
         super(card);
     }
 

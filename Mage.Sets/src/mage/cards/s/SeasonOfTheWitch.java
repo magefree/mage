@@ -48,7 +48,7 @@ public final class SeasonOfTheWitch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeasonOfTheWitch(final SeasonOfTheWitch card) {
+    private SeasonOfTheWitch(final SeasonOfTheWitch card) {
         super(card);
     }
 

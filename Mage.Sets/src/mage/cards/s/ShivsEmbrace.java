@@ -51,7 +51,7 @@ public final class ShivsEmbrace extends CardImpl {
 
     }
 
-    public ShivsEmbrace(final ShivsEmbrace card) {
+    private ShivsEmbrace(final ShivsEmbrace card) {
         super(card);
     }
 

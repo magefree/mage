@@ -32,7 +32,7 @@ public final class EmrakulsInfluence extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(2), filterSpell, false));
     }
 
-    public EmrakulsInfluence(final EmrakulsInfluence card) {
+    private EmrakulsInfluence(final EmrakulsInfluence card) {
         super(card);
     }
 

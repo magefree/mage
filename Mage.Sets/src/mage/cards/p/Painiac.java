@@ -35,7 +35,7 @@ public final class Painiac extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PainiacEffect(), TargetController.YOU, false));
     }
 
-    public Painiac(final Painiac card) {
+    private Painiac(final Painiac card) {
         super(card);
     }
 

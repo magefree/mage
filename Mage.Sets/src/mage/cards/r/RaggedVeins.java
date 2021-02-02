@@ -46,7 +46,7 @@ public final class RaggedVeins extends CardImpl {
         this.addAbility(new DealtDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
     }
 
-    public RaggedVeins(final RaggedVeins card) {
+    private RaggedVeins(final RaggedVeins card) {
         super(card);
     }
 

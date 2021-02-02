@@ -49,7 +49,7 @@ public final class SwordOfWarAndPeace extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public SwordOfWarAndPeace(final SwordOfWarAndPeace card) {
+    private SwordOfWarAndPeace(final SwordOfWarAndPeace card) {
         super(card);
     }
 

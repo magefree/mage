@@ -21,7 +21,7 @@ public final class FeralKrushok extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public FeralKrushok(final FeralKrushok card) {
+    private FeralKrushok(final FeralKrushok card) {
         super(card);
     }
 

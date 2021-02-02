@@ -35,7 +35,7 @@ public final class SpirebluffCanal extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public SpirebluffCanal(final SpirebluffCanal card) {
+    private SpirebluffCanal(final SpirebluffCanal card) {
         super(card);
     }
 

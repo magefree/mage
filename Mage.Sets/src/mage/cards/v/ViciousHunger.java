@@ -25,7 +25,7 @@ public final class ViciousHunger extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(2));                
     }
 
-    public ViciousHunger(final ViciousHunger card) {
+    private ViciousHunger(final ViciousHunger card) {
         super(card);
     }
 

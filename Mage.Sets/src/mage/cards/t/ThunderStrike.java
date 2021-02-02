@@ -26,7 +26,7 @@ public final class ThunderStrike extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public ThunderStrike(final ThunderStrike card) {
+    private ThunderStrike(final ThunderStrike card) {
         super(card);
     }
 

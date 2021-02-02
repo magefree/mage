@@ -25,7 +25,7 @@ public final class FadeIntoAntiquity extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
-    public FadeIntoAntiquity(final FadeIntoAntiquity card) {
+    private FadeIntoAntiquity(final FadeIntoAntiquity card) {
         super(card);
     }
 

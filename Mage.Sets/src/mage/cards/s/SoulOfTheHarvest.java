@@ -42,7 +42,7 @@ public final class SoulOfTheHarvest extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true));
     }
 
-    public SoulOfTheHarvest(final SoulOfTheHarvest card) {
+    private SoulOfTheHarvest(final SoulOfTheHarvest card) {
         super(card);
     }
 

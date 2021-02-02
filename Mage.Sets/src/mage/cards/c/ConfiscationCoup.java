@@ -42,7 +42,7 @@ public final class ConfiscationCoup extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public ConfiscationCoup(final ConfiscationCoup card) {
+    private ConfiscationCoup(final ConfiscationCoup card) {
         super(card);
     }
 

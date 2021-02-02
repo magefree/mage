@@ -50,7 +50,7 @@ public final class Filth extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, filthEffect));
     }
 
-    public Filth(final Filth card) {
+    private Filth(final Filth card) {
         super(card);
     }
 

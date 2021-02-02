@@ -26,7 +26,7 @@ public final class SeismicSpike extends CardImpl {
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.RedMana(2)));
     }
 
-    public SeismicSpike(final SeismicSpike card) {
+    private SeismicSpike(final SeismicSpike card) {
         super(card);
     }
 

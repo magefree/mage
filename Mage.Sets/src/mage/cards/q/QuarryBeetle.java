@@ -32,7 +32,7 @@ public final class QuarryBeetle extends CardImpl {
         addAbility(ability);
     }
 
-    public QuarryBeetle(final QuarryBeetle card) {
+    private QuarryBeetle(final QuarryBeetle card) {
         super(card);
     }
 

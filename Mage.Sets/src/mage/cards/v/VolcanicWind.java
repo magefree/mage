@@ -37,7 +37,7 @@ public final class VolcanicWind extends CardImpl {
 
     }
 
-    public VolcanicWind(final VolcanicWind card) {
+    private VolcanicWind(final VolcanicWind card) {
         super(card);
     }
 

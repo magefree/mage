@@ -51,7 +51,7 @@ public final class Bloodcurdler extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public Bloodcurdler(final Bloodcurdler card) {
+    private Bloodcurdler(final Bloodcurdler card) {
         super(card);
     }
 

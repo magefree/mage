@@ -41,7 +41,7 @@ public final class Scarecrow extends CardImpl {
 
     }
 
-    public Scarecrow(final Scarecrow card) {
+    private Scarecrow(final Scarecrow card) {
         super(card);
     }
 

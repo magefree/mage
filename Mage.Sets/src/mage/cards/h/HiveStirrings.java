@@ -21,7 +21,7 @@ public final class HiveStirrings extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SliverToken(), 2));
     }
 
-    public HiveStirrings(final HiveStirrings card) {
+    private HiveStirrings(final HiveStirrings card) {
         super(card);
     }
 

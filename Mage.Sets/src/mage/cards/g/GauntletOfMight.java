@@ -43,7 +43,7 @@ public final class GauntletOfMight extends CardImpl {
                 effect, filterMountain, SetTargetPointer.PLAYER));        
     }
 
-    public GauntletOfMight(final GauntletOfMight card) {
+    private GauntletOfMight(final GauntletOfMight card) {
         super(card);
     }
 

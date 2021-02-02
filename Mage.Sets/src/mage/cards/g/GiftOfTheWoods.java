@@ -43,7 +43,7 @@ public final class GiftOfTheWoods extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public GiftOfTheWoods(final GiftOfTheWoods card) {
+    private GiftOfTheWoods(final GiftOfTheWoods card) {
         super(card);
     }
 

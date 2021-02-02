@@ -54,7 +54,7 @@ public final class SawtoothLoon extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SawtoothLoonEffect()));
     }
 
-    public SawtoothLoon(final SawtoothLoon card) {
+    private SawtoothLoon(final SawtoothLoon card) {
         super(card);
     }
 

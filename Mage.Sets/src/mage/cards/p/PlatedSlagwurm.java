@@ -25,7 +25,7 @@ public final class PlatedSlagwurm extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    public PlatedSlagwurm(final PlatedSlagwurm card) {
+    private PlatedSlagwurm(final PlatedSlagwurm card) {
         super(card);
     }
 

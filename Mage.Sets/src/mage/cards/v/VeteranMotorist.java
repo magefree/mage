@@ -36,7 +36,7 @@ public final class VeteranMotorist extends CardImpl {
         this.addAbility(new CrewsVehicleSourceTriggeredAbility(effect));
     }
 
-    public VeteranMotorist(final VeteranMotorist card) {
+    private VeteranMotorist(final VeteranMotorist card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class CinderHellion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CinderHellion(final CinderHellion card) {
+    private CinderHellion(final CinderHellion card) {
         super(card);
     }
 

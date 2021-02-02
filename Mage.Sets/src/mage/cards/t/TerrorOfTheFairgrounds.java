@@ -21,7 +21,7 @@ public final class TerrorOfTheFairgrounds extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public TerrorOfTheFairgrounds(final TerrorOfTheFairgrounds card) {
+    private TerrorOfTheFairgrounds(final TerrorOfTheFairgrounds card) {
         super(card);
     }
 

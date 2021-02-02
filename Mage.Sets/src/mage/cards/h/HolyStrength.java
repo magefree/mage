@@ -37,7 +37,7 @@ public final class HolyStrength extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield)));
     }
 
-    public HolyStrength(final HolyStrength card) {
+    private HolyStrength(final HolyStrength card) {
         super(card);
     }
 

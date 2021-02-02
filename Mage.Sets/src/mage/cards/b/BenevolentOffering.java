@@ -34,7 +34,7 @@ public final class BenevolentOffering extends CardImpl {
         this.getSpellAbility().addEffect(new BenevolentOfferingEffect2());
     }
 
-    public BenevolentOffering(final BenevolentOffering card) {
+    private BenevolentOffering(final BenevolentOffering card) {
         super(card);
     }
 

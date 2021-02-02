@@ -41,7 +41,7 @@ public final class GhostLitWarder extends CardImpl {
         
     }
 
-    public GhostLitWarder(final GhostLitWarder card) {
+    private GhostLitWarder(final GhostLitWarder card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class Counterintelligence extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(1, 2));
     }
 
-    public Counterintelligence(final Counterintelligence card) {
+    private Counterintelligence(final Counterintelligence card) {
         super(card);
     }
 

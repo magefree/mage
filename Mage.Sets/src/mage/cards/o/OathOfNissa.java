@@ -36,7 +36,7 @@ public final class OathOfNissa extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OathOfNissaSpendAnyManaEffect()));
     }
 
-    public OathOfNissa(final OathOfNissa card) {
+    private OathOfNissa(final OathOfNissa card) {
         super(card);
     }
 

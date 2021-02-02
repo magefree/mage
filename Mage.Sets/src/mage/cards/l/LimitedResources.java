@@ -45,7 +45,7 @@ public final class LimitedResources extends CardImpl {
 
     }
 
-    public LimitedResources(final LimitedResources card) {
+    private LimitedResources(final LimitedResources card) {
         super(card);
     }
 

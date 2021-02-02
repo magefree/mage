@@ -38,7 +38,7 @@ public final class Seedtime extends CardImpl {
 
     }
 
-    public Seedtime(final Seedtime card) {
+    private Seedtime(final Seedtime card) {
         super(card);
     }
 

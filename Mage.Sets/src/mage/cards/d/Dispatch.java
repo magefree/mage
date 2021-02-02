@@ -31,7 +31,7 @@ public final class Dispatch extends CardImpl {
         this.getSpellAbility().addHint(MetalcraftHint.instance);
     }
 
-    public Dispatch(final Dispatch card) {
+    private Dispatch(final Dispatch card) {
         super(card);
     }
 

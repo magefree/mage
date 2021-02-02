@@ -20,7 +20,7 @@ public final class DromokasGift extends CardImpl {
         this.getSpellAbility().addEffect(new BolsterEffect(4));
     }
 
-    public DromokasGift(final DromokasGift card) {
+    private DromokasGift(final DromokasGift card) {
         super(card);
     }
 

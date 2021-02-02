@@ -44,7 +44,7 @@ public final class LuminatePrimordial extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LuminatePrimordial(final LuminatePrimordial card) {
+    private LuminatePrimordial(final LuminatePrimordial card) {
         super(card);
     }
 

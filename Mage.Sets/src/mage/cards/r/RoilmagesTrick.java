@@ -40,7 +40,7 @@ public final class RoilmagesTrick extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public RoilmagesTrick(final RoilmagesTrick card) {
+    private RoilmagesTrick(final RoilmagesTrick card) {
         super(card);
     }
 

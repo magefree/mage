@@ -24,7 +24,7 @@ public final class SickAndTired extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
     }
 
-    public SickAndTired(final SickAndTired card) {
+    private SickAndTired(final SickAndTired card) {
         super(card);
     }
 

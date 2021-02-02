@@ -49,7 +49,7 @@ public final class JovensFerrets extends CardImpl {
         this.addAbility(eocAbility);
     }
 
-    public JovensFerrets(final JovensFerrets card) {
+    private JovensFerrets(final JovensFerrets card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class BallynockTrapper extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filterWhiteSpell, true));
     }
 
-    public BallynockTrapper(final BallynockTrapper card) {
+    private BallynockTrapper(final BallynockTrapper card) {
         super(card);
     }
 

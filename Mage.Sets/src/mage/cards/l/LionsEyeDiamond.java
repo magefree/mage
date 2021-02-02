@@ -29,7 +29,7 @@ public final class LionsEyeDiamond extends CardImpl {
         this.addAbility(new LionsEyeDiamondAbility());
     }
 
-    public LionsEyeDiamond(final LionsEyeDiamond card) {
+    private LionsEyeDiamond(final LionsEyeDiamond card) {
         super(card);
     }
 

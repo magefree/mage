@@ -36,7 +36,7 @@ public final class EmeriaTheSkyRuin extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public EmeriaTheSkyRuin(final EmeriaTheSkyRuin card) {
+    private EmeriaTheSkyRuin(final EmeriaTheSkyRuin card) {
         super(card);
     }
 

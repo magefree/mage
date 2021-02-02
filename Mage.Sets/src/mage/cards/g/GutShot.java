@@ -21,7 +21,7 @@ public final class GutShot extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public GutShot(final GutShot card) {
+    private GutShot(final GutShot card) {
         super(card);
     }
 

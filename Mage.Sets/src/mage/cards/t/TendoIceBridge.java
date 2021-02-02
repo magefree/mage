@@ -32,7 +32,7 @@ public final class TendoIceBridge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TendoIceBridge(final TendoIceBridge card) {
+    private TendoIceBridge(final TendoIceBridge card) {
         super(card);
     }
 

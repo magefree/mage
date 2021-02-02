@@ -51,7 +51,7 @@ public final class GethLordOfTheVault extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GethLordOfTheVault(final GethLordOfTheVault card) {
+    private GethLordOfTheVault(final GethLordOfTheVault card) {
         super(card);
     }
 

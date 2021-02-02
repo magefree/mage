@@ -30,7 +30,7 @@ public final class RavenousBloodseeker extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -2, Duration.EndOfTurn), new DiscardCardCost()));
     }
 
-    public RavenousBloodseeker(final RavenousBloodseeker card) {
+    private RavenousBloodseeker(final RavenousBloodseeker card) {
         super(card);
     }
 

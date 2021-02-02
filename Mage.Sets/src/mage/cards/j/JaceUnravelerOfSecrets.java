@@ -51,7 +51,7 @@ public final class JaceUnravelerOfSecrets extends CardImpl {
 
     }
 
-    public JaceUnravelerOfSecrets(final JaceUnravelerOfSecrets card) {
+    private JaceUnravelerOfSecrets(final JaceUnravelerOfSecrets card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class RallyTheTroops extends CardImpl {
         this.getSpellAbility().addEffect(new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
-    public RallyTheTroops(final RallyTheTroops card) {
+    private RallyTheTroops(final RallyTheTroops card) {
         super(card);
     }
 

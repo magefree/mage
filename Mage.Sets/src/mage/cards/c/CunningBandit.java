@@ -52,7 +52,7 @@ public final class CunningBandit extends CardImpl {
                 "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it."));
     }
 
-    public CunningBandit(final CunningBandit card) {
+    private CunningBandit(final CunningBandit card) {
         super(card);
     }
 

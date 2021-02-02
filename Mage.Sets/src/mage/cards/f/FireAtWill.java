@@ -36,7 +36,7 @@ public final class FireAtWill extends CardImpl {
 
     }
 
-    public FireAtWill(final FireAtWill card) {
+    private FireAtWill(final FireAtWill card) {
         super(card);
     }
 

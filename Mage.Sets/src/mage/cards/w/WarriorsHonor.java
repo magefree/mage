@@ -21,7 +21,7 @@ public final class WarriorsHonor extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, false));
     }
 
-    public WarriorsHonor(final WarriorsHonor card) {
+    private WarriorsHonor(final WarriorsHonor card) {
         super(card);
     }
 

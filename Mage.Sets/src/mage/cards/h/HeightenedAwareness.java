@@ -27,7 +27,7 @@ public final class HeightenedAwareness extends CardImpl {
             TargetController.YOU, false));
     }
 
-    public HeightenedAwareness(final HeightenedAwareness card) {
+    private HeightenedAwareness(final HeightenedAwareness card) {
         super(card);
     }
 

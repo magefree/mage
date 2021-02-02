@@ -30,7 +30,7 @@ public final class OrdruunCommando extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{W}")));
     }
 
-    public OrdruunCommando(final OrdruunCommando card) {
+    private OrdruunCommando(final OrdruunCommando card) {
         super(card);
     }
 

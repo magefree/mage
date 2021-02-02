@@ -44,7 +44,7 @@ public final class LifeDeath extends SplitCard {
 
     }
 
-    public LifeDeath(final LifeDeath card) {
+    private LifeDeath(final LifeDeath card) {
         super(card);
     }
 

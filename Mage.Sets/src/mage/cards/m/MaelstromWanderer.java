@@ -41,7 +41,7 @@ public final class MaelstromWanderer extends CardImpl {
         this.addAbility(new CascadeAbility());
     }
 
-    public MaelstromWanderer(final MaelstromWanderer card) {
+    private MaelstromWanderer(final MaelstromWanderer card) {
         super(card);
     }
 

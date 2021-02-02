@@ -41,7 +41,7 @@ public final class DireFleetCaptain extends CardImpl {
                 .setText("it gets +1/+1 until end of turn for each other attacking Pirate"), false));
     }
 
-    public DireFleetCaptain(final DireFleetCaptain card) {
+    private DireFleetCaptain(final DireFleetCaptain card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class VrynWingmare extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(1, filter, TargetController.ANY)));
     }
 
-    public VrynWingmare(final VrynWingmare card) {
+    private VrynWingmare(final VrynWingmare card) {
         super(card);
     }
 

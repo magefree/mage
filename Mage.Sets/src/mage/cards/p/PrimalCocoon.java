@@ -43,7 +43,7 @@ public final class PrimalCocoon extends CardImpl {
 
     }
 
-    public PrimalCocoon(final PrimalCocoon card) {
+    private PrimalCocoon(final PrimalCocoon card) {
         super(card);
     }
 

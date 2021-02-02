@@ -40,7 +40,7 @@ public final class SylvanReclamation extends CardImpl {
         this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public SylvanReclamation(final SylvanReclamation card) {
+    private SylvanReclamation(final SylvanReclamation card) {
         super(card);
     }
 

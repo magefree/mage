@@ -28,7 +28,7 @@ public final class ScabClanMauler extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public ScabClanMauler(final ScabClanMauler card) {
+    private ScabClanMauler(final ScabClanMauler card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class DeputizedProtester extends CardImpl {
         this.addAbility(new MeleeAbility());
     }
 
-    public DeputizedProtester(final DeputizedProtester card) {
+    private DeputizedProtester(final DeputizedProtester card) {
         super(card);
     }
 

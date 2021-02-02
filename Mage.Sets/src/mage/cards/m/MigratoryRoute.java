@@ -27,7 +27,7 @@ public final class MigratoryRoute extends CardImpl {
         this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public MigratoryRoute(final MigratoryRoute card) {
+    private MigratoryRoute(final MigratoryRoute card) {
         super(card);
     }
 

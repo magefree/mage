@@ -34,7 +34,7 @@ public final class Aethertow extends CardImpl {
         this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
     }
 
-    public Aethertow(final Aethertow card) {
+    private Aethertow(final Aethertow card) {
         super(card);
     }
 

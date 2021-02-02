@@ -51,7 +51,7 @@ public final class ScourgeOfTheNobilis extends CardImpl {
         this.addAbility(whiteAbility);
     }
 
-    public ScourgeOfTheNobilis(final ScourgeOfTheNobilis card) {
+    private ScourgeOfTheNobilis(final ScourgeOfTheNobilis card) {
         super(card);
     }
 

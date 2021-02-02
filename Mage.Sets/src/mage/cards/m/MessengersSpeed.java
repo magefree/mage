@@ -47,7 +47,7 @@ public final class MessengersSpeed extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MessengersSpeed(final MessengersSpeed card) {
+    private MessengersSpeed(final MessengersSpeed card) {
         super(card);
     }
 

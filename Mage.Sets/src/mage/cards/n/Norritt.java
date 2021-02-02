@@ -73,7 +73,7 @@ public final class Norritt extends CardImpl {
 
     }
 
-    public Norritt(final Norritt card) {
+    private Norritt(final Norritt card) {
         super(card);
     }
 

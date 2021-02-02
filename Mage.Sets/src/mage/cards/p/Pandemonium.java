@@ -37,7 +37,7 @@ public final class Pandemonium extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Pandemonium(final Pandemonium card) {
+    private Pandemonium(final Pandemonium card) {
         super(card);
     }
 

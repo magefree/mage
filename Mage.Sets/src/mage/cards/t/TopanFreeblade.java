@@ -30,7 +30,7 @@ public final class TopanFreeblade extends CardImpl {
         this.addAbility(new RenownAbility(1));
     }
 
-    public TopanFreeblade(final TopanFreeblade card) {
+    private TopanFreeblade(final TopanFreeblade card) {
         super(card);
     }
 

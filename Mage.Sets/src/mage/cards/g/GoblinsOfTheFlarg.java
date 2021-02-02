@@ -40,7 +40,7 @@ public final class GoblinsOfTheFlarg extends CardImpl {
                 new SacrificeSourceEffect()));
     }
 
-    public GoblinsOfTheFlarg(final GoblinsOfTheFlarg card) {
+    private GoblinsOfTheFlarg(final GoblinsOfTheFlarg card) {
         super(card);
     }
 

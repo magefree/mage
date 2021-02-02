@@ -30,7 +30,7 @@ public final class ValorousCharge extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, filter, false));
     }
 
-    public ValorousCharge(final ValorousCharge card) {
+    private ValorousCharge(final ValorousCharge card) {
         super(card);
     }
 

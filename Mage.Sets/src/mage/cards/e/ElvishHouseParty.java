@@ -36,7 +36,7 @@ public final class ElvishHouseParty extends CardImpl {
                 new SetPowerToughnessSourceEffect(new CurrentHourCount(), Duration.WhileOnBattlefield)));
     }
 
-    public ElvishHouseParty(final ElvishHouseParty card) {
+    private ElvishHouseParty(final ElvishHouseParty card) {
         super(card);
     }
 

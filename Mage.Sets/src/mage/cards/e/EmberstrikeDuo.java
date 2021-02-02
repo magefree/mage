@@ -45,7 +45,7 @@ public final class EmberstrikeDuo extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), redFilter, false));
     }
 
-    public EmberstrikeDuo(final EmberstrikeDuo card) {
+    private EmberstrikeDuo(final EmberstrikeDuo card) {
         super(card);
     }
 

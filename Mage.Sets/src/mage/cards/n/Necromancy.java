@@ -54,7 +54,7 @@ public final class Necromancy extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new NecromancyLeavesBattlefieldTriggeredEffect(), false));
     }
 
-    public Necromancy(final Necromancy card) {
+    private Necromancy(final Necromancy card) {
         super(card);
     }
 

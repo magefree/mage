@@ -35,7 +35,7 @@ public final class MorphicPool extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public MorphicPool(final MorphicPool card) {
+    private MorphicPool(final MorphicPool card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class Lawbringer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Lawbringer(final Lawbringer card) {
+    private Lawbringer(final Lawbringer card) {
         super(card);
     }
 

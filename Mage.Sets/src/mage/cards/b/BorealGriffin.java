@@ -32,7 +32,7 @@ public final class BorealGriffin extends CardImpl {
             FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{S}")));
     }
 
-    public BorealGriffin(final BorealGriffin card) {
+    private BorealGriffin(final BorealGriffin card) {
         super(card);
     }
 

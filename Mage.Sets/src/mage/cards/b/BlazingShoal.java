@@ -42,7 +42,7 @@ public final class BlazingShoal extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public BlazingShoal(final BlazingShoal card) {
+    private BlazingShoal(final BlazingShoal card) {
         super(card);
     }
 

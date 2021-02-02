@@ -30,7 +30,7 @@ public final class SmiteTheMonstrous extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public SmiteTheMonstrous(final SmiteTheMonstrous card) {
+    private SmiteTheMonstrous(final SmiteTheMonstrous card) {
         super(card);
     }
 

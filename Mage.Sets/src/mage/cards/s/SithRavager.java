@@ -34,7 +34,7 @@ public final class SithRavager extends CardImpl {
         this.addAbility(new LostNonCombatLifeTriggeredAbility());
     }
 
-    public SithRavager(final SithRavager card) {
+    private SithRavager(final SithRavager card) {
         super(card);
     }
 

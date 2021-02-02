@@ -24,7 +24,7 @@ public final class WallOfTorches extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public WallOfTorches(final WallOfTorches card) {
+    private WallOfTorches(final WallOfTorches card) {
         super(card);
     }
 

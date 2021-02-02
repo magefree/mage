@@ -49,7 +49,7 @@ public final class InfernalScarring extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InfernalScarring(final InfernalScarring card) {
+    private InfernalScarring(final InfernalScarring card) {
         super(card);
     }
 

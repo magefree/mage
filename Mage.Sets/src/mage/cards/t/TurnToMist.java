@@ -23,7 +23,7 @@ public final class TurnToMist extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TurnToMist(final TurnToMist card) {
+    private TurnToMist(final TurnToMist card) {
         super(card);
     }
 

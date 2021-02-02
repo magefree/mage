@@ -32,7 +32,7 @@ public final class VampiresZeal extends CardImpl {
                 "If it's a Vampire, it gains first strike until end of turn"));
     }
 
-    public VampiresZeal(final VampiresZeal card) {
+    private VampiresZeal(final VampiresZeal card) {
         super(card);
     }
 

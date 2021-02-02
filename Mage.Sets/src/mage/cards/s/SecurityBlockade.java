@@ -52,7 +52,7 @@ public final class SecurityBlockade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }
 
-    public SecurityBlockade(final SecurityBlockade card) {
+    private SecurityBlockade(final SecurityBlockade card) {
         super(card);
     }
 

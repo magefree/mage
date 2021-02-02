@@ -42,7 +42,7 @@ public final class VoidAttendant extends CardImpl {
 
     }
 
-    public VoidAttendant(final VoidAttendant card) {
+    private VoidAttendant(final VoidAttendant card) {
         super(card);
     }
 

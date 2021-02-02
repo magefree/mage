@@ -22,7 +22,7 @@ public final class MetalFatigue extends CardImpl {
         this.getSpellAbility().addEffect(new TapAllEffect(new FilterArtifactPermanent("artifacts")));
     }
 
-    public MetalFatigue(final MetalFatigue card) {
+    private MetalFatigue(final MetalFatigue card) {
         super(card);
     }
 

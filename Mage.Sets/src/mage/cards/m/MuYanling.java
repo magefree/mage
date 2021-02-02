@@ -47,7 +47,7 @@ public final class MuYanling extends CardImpl {
         this.addAbility(new LoyaltyAbility(new MuYanlingEffect(), -10));
     }
 
-    public MuYanling(final MuYanling card) {
+    private MuYanling(final MuYanling card) {
         super(card);
     }
 

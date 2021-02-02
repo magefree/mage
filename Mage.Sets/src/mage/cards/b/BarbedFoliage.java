@@ -73,7 +73,7 @@ public final class BarbedFoliage extends CardImpl {
         ));
     }
 
-    public BarbedFoliage(final BarbedFoliage card) {
+    private BarbedFoliage(final BarbedFoliage card) {
         super(card);
     }
 

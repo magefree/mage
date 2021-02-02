@@ -39,7 +39,7 @@ public final class ButcherOfMalakir extends CardImpl {
         this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new SacrificeOpponentsEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), false, filter));
     }
 
-    public ButcherOfMalakir(final ButcherOfMalakir card) {
+    private ButcherOfMalakir(final ButcherOfMalakir card) {
         super(card);
     }
 

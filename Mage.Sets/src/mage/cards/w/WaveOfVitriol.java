@@ -34,7 +34,7 @@ public final class WaveOfVitriol extends CardImpl {
 
     }
 
-    public WaveOfVitriol(final WaveOfVitriol card) {
+    private WaveOfVitriol(final WaveOfVitriol card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class NestedGhoul extends CardImpl {
         this.addAbility(new NestedGhoulTriggeredAbility());
     }
 
-    public NestedGhoul(final NestedGhoul card) {
+    private NestedGhoul(final NestedGhoul card) {
         super(card);
     }
 

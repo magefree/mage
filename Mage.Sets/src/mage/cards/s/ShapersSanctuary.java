@@ -27,7 +27,7 @@ public final class ShapersSanctuary extends CardImpl {
         this.addAbility(new CreaturesYouControlTargetedTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public ShapersSanctuary(final ShapersSanctuary card) {
+    private ShapersSanctuary(final ShapersSanctuary card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class GhostsOfTheDamned extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhostsOfTheDamned(final GhostsOfTheDamned card) {
+    private GhostsOfTheDamned(final GhostsOfTheDamned card) {
         super(card);
     }
 

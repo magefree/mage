@@ -39,7 +39,7 @@ public final class FlamekinBladewhirl extends CardImpl {
                 "reveal a Elemental card from your hand or pay {3}"));
     }
 
-    public FlamekinBladewhirl(final FlamekinBladewhirl card) {
+    private FlamekinBladewhirl(final FlamekinBladewhirl card) {
         super(card);
     }
 

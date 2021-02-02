@@ -37,7 +37,7 @@ public final class ManaSkimmer extends CardImpl {
         this.addAbility(new ManaSkimmerTriggeredAbility());
     }
 
-    public ManaSkimmer(final ManaSkimmer card) {
+    private ManaSkimmer(final ManaSkimmer card) {
         super(card);
     }
 

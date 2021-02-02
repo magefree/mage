@@ -39,7 +39,7 @@ public final class JoustingLance extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public JoustingLance(final JoustingLance card) {
+    private JoustingLance(final JoustingLance card) {
         super(card);
     }
 

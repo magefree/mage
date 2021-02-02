@@ -33,7 +33,7 @@ public final class CircleOfProtectionArtifacts extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("2")));
     }
 
-    public CircleOfProtectionArtifacts(final CircleOfProtectionArtifacts card) {
+    private CircleOfProtectionArtifacts(final CircleOfProtectionArtifacts card) {
         super(card);
     }
 

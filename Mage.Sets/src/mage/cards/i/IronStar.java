@@ -28,7 +28,7 @@ public final class IronStar extends CardImpl {
         this.addAbility(new IronStarAbility());
     }
 
-    public IronStar(final IronStar card) {
+    private IronStar(final IronStar card) {
         super(card);
     }
 

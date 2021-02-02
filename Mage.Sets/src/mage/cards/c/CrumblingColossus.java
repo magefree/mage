@@ -31,7 +31,7 @@ public final class CrumblingColossus extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())), false));
     }
 
-    public CrumblingColossus(final CrumblingColossus card) {
+    private CrumblingColossus(final CrumblingColossus card) {
         super(card);
     }
 

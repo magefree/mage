@@ -27,7 +27,7 @@ public final class SangriteSurge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SangriteSurge(final SangriteSurge card) {
+    private SangriteSurge(final SangriteSurge card) {
         super(card);
     }
 

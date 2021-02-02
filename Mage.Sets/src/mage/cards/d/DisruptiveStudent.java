@@ -35,7 +35,7 @@ public final class DisruptiveStudent extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DisruptiveStudent(final DisruptiveStudent card) {
+    private DisruptiveStudent(final DisruptiveStudent card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class MartonStromgald extends CardImpl {
         
     }
 
-    public MartonStromgald(final MartonStromgald card) {
+    private MartonStromgald(final MartonStromgald card) {
         super(card);
     }
 

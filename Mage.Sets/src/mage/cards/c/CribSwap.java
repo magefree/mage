@@ -36,7 +36,7 @@ public final class CribSwap extends CardImpl {
 
     }
 
-    public CribSwap(final CribSwap card) {
+    private CribSwap(final CribSwap card) {
         super(card);
     }
 

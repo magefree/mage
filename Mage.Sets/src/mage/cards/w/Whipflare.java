@@ -29,7 +29,7 @@ public final class Whipflare extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(2, filter));
     }
 
-    public Whipflare(final Whipflare card) {
+    private Whipflare(final Whipflare card) {
         super(card);
     }
 

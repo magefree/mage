@@ -29,7 +29,7 @@ public final class StuntDouble extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(), true));
     }
 
-    public StuntDouble(final StuntDouble card) {
+    private StuntDouble(final StuntDouble card) {
         super(card);
     }
 

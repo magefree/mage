@@ -40,7 +40,7 @@ public final class DeadeyePlunderers extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()), new ManaCostsImpl("{2}{U}{B}")));
     }
 
-    public DeadeyePlunderers(final DeadeyePlunderers card) {
+    private DeadeyePlunderers(final DeadeyePlunderers card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class HiddenGuerrillas extends CardImpl {
                 "When an opponent casts an artifact spell, if {this} is an enchantment, {this} becomes a 5/3 Soldier creature with trample."));
     }
 
-    public HiddenGuerrillas(final HiddenGuerrillas card) {
+    private HiddenGuerrillas(final HiddenGuerrillas card) {
         super(card);
     }
 

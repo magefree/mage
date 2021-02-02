@@ -44,7 +44,7 @@ public final class ViridianScout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ViridianScout(final ViridianScout card) {
+    private ViridianScout(final ViridianScout card) {
         super(card);
     }
 

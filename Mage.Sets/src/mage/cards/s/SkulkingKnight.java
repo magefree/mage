@@ -31,7 +31,7 @@ public final class SkulkingKnight extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public SkulkingKnight(final SkulkingKnight card) {
+    private SkulkingKnight(final SkulkingKnight card) {
         super(card);
     }
 

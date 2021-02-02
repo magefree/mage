@@ -32,7 +32,7 @@ public final class SoltariTrooper extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(1,1,Duration.EndOfTurn), false));
     }
 
-    public SoltariTrooper(final SoltariTrooper card) {
+    private SoltariTrooper(final SoltariTrooper card) {
         super(card);
     }
 

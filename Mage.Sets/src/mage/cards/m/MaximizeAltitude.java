@@ -34,7 +34,7 @@ public final class MaximizeAltitude extends CardImpl {
 
     }
 
-    public MaximizeAltitude(final MaximizeAltitude card) {
+    private MaximizeAltitude(final MaximizeAltitude card) {
         super(card);
     }
 

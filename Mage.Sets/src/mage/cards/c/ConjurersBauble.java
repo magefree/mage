@@ -34,7 +34,7 @@ public final class ConjurersBauble extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ConjurersBauble(final ConjurersBauble card) {
+    private ConjurersBauble(final ConjurersBauble card) {
         super(card);
     }
 

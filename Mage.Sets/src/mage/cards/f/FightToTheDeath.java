@@ -36,7 +36,7 @@ public final class FightToTheDeath extends CardImpl {
         
     }
 
-    public FightToTheDeath(final FightToTheDeath card) {
+    private FightToTheDeath(final FightToTheDeath card) {
         super(card);
     }
 

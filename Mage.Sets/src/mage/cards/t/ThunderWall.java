@@ -37,7 +37,7 @@ public final class ThunderWall extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
     }
 
-    public ThunderWall(final ThunderWall card) {
+    private ThunderWall(final ThunderWall card) {
         super(card);
     }
 

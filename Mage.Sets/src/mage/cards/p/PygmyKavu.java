@@ -38,7 +38,7 @@ public final class PygmyKavu extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter))));
     }
 
-    public PygmyKavu(final PygmyKavu card) {
+    private PygmyKavu(final PygmyKavu card) {
         super(card);
     }
 

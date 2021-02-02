@@ -35,7 +35,7 @@ public final class SwordDancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SwordDancer(final SwordDancer card) {
+    private SwordDancer(final SwordDancer card) {
         super(card);
     }
 

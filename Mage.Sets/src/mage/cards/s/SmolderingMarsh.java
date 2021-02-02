@@ -43,7 +43,7 @@ public final class SmolderingMarsh extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public SmolderingMarsh(final SmolderingMarsh card) {
+    private SmolderingMarsh(final SmolderingMarsh card) {
         super(card);
     }
 

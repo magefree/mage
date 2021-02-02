@@ -23,7 +23,7 @@ public final class OgreWarrior extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public OgreWarrior(final OgreWarrior card) {
+    private OgreWarrior(final OgreWarrior card) {
         super(card);
     }
 

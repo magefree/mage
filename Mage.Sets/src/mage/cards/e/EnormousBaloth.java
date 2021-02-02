@@ -22,7 +22,7 @@ public final class EnormousBaloth extends CardImpl {
         this.toughness = new MageInt(7);
     }
 
-    public EnormousBaloth(final EnormousBaloth card) {
+    private EnormousBaloth(final EnormousBaloth card) {
         super(card);
     }
 

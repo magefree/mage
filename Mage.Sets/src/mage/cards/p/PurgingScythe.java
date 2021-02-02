@@ -34,7 +34,7 @@ public final class PurgingScythe extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PurgingScytheEffect(), TargetController.YOU, false));
     }
 
-    public PurgingScythe(final PurgingScythe card) {
+    private PurgingScythe(final PurgingScythe card) {
         super(card);
     }
 

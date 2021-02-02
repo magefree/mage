@@ -27,7 +27,7 @@ public final class GreatWall extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GreatWallEffect()));
     }
 
-    public GreatWall(final GreatWall card) {
+    private GreatWall(final GreatWall card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class HealTheScars extends CardImpl {
 
     }
 
-    public HealTheScars(final HealTheScars card) {
+    private HealTheScars(final HealTheScars card) {
         super(card);
     }
 

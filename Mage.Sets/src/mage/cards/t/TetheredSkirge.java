@@ -30,7 +30,7 @@ public final class TetheredSkirge extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new LoseLifeSourceControllerEffect(1)));
     }
 
-    public TetheredSkirge(final TetheredSkirge card) {
+    private TetheredSkirge(final TetheredSkirge card) {
         super(card);
     }
 

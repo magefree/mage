@@ -27,7 +27,7 @@ public final class LoneMissionary extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4), false));
     }
 
-    public LoneMissionary(final LoneMissionary card) {
+    private LoneMissionary(final LoneMissionary card) {
         super(card);
     }
 

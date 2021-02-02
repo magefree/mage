@@ -53,7 +53,7 @@ public final class SavingGrace extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, 3, Duration.WhileOnBattlefield)));
     }
 
-    public SavingGrace(final SavingGrace card) {
+    private SavingGrace(final SavingGrace card) {
         super(card);
     }
 

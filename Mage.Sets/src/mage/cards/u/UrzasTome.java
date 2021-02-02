@@ -34,7 +34,7 @@ public final class UrzasTome extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UrzasTome(final UrzasTome card) {
+    private UrzasTome(final UrzasTome card) {
         super(card);
     }
 

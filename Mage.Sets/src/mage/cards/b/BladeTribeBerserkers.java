@@ -41,7 +41,7 @@ public final class BladeTribeBerserkers extends CardImpl {
         );
     }
 
-    public BladeTribeBerserkers(final BladeTribeBerserkers card) {
+    private BladeTribeBerserkers(final BladeTribeBerserkers card) {
         super(card);
     }
 

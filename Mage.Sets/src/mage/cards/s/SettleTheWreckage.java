@@ -35,7 +35,7 @@ public final class SettleTheWreckage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public SettleTheWreckage(final SettleTheWreckage card) {
+    private SettleTheWreckage(final SettleTheWreckage card) {
         super(card);
     }
 

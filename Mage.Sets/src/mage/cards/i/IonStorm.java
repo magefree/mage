@@ -33,7 +33,7 @@ public final class IonStorm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IonStorm(final IonStorm card) {
+    private IonStorm(final IonStorm card) {
         super(card);
     }
 

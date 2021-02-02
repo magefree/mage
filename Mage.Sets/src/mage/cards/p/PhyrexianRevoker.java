@@ -35,7 +35,7 @@ public final class PhyrexianRevoker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianRevokerEffect2()));
     }
 
-    public PhyrexianRevoker(final PhyrexianRevoker card) {
+    private PhyrexianRevoker(final PhyrexianRevoker card) {
         super(card);
     }
 

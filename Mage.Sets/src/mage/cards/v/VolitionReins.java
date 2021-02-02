@@ -41,7 +41,7 @@ public final class VolitionReins extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("permanent")));
     }
 
-    public VolitionReins(final VolitionReins card) {
+    private VolitionReins(final VolitionReins card) {
         super(card);
     }
 

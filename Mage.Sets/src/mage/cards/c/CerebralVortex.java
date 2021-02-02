@@ -34,7 +34,7 @@ public final class CerebralVortex extends CardImpl {
         this.getSpellAbility().addWatcher(new CerebralVortexWatcher());
     }
 
-    public CerebralVortex(final CerebralVortex card) {
+    private CerebralVortex(final CerebralVortex card) {
         super(card);
     }
 

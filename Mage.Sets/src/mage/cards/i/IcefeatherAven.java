@@ -48,7 +48,7 @@ public final class IcefeatherAven extends CardImpl {
 
     }
 
-    public IcefeatherAven(final IcefeatherAven card) {
+    private IcefeatherAven(final IcefeatherAven card) {
         super(card);
     }
 

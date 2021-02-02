@@ -41,7 +41,7 @@ public final class CurseOfPredation extends CardImpl {
         this.addAbility(new CurseOfPredationTriggeredAbility());
     }
 
-    public CurseOfPredation(final CurseOfPredation card) {
+    private CurseOfPredation(final CurseOfPredation card) {
         super(card);
     }
 

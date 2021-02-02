@@ -31,7 +31,7 @@ public final class HornetHarasser extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HornetHarasser(final HornetHarasser card) {
+    private HornetHarasser(final HornetHarasser card) {
         super(card);
     }
 

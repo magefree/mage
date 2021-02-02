@@ -42,7 +42,7 @@ public final class TraxosScourgeOfKroog extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), new FilterHistoricSpell(), false));
     }
 
-    public TraxosScourgeOfKroog(final TraxosScourgeOfKroog card) {
+    private TraxosScourgeOfKroog(final TraxosScourgeOfKroog card) {
         super(card);
     }
 

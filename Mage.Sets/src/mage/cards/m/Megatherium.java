@@ -37,7 +37,7 @@ public final class Megatherium extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MegatheriumEffect(), false));
     }
 
-    public Megatherium(final Megatherium card) {
+    private Megatherium(final Megatherium card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class BarbedSliver extends CardImpl {
                 new GenericManaCost(2)), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, false)));
     }
 
-    public BarbedSliver(final BarbedSliver card) {
+    private BarbedSliver(final BarbedSliver card) {
         super(card);
     }
 

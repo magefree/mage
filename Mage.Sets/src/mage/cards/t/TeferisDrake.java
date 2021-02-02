@@ -29,7 +29,7 @@ public final class TeferisDrake extends CardImpl {
         this.addAbility(PhasingAbility.getInstance());
     }
 
-    public TeferisDrake(final TeferisDrake card) {
+    private TeferisDrake(final TeferisDrake card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class SnuffOut extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public SnuffOut(final SnuffOut card) {
+    private SnuffOut(final SnuffOut card) {
         super(card);
     }
 

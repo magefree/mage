@@ -43,7 +43,7 @@ public final class BlightKeeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlightKeeper(final BlightKeeper card) {
+    private BlightKeeper(final BlightKeeper card) {
         super(card);
     }
 

@@ -59,7 +59,7 @@ public final class GoblinShrine extends CardImpl {
 
     }
 
-    public GoblinShrine(final GoblinShrine card) {
+    private GoblinShrine(final GoblinShrine card) {
         super(card);
     }
 

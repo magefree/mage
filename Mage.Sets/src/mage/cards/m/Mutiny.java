@@ -40,7 +40,7 @@ public final class Mutiny extends CardImpl {
 
     }
 
-    public Mutiny(final Mutiny card) {
+    private Mutiny(final Mutiny card) {
         super(card);
     }
 

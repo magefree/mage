@@ -31,7 +31,7 @@ public final class ForceVoid extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false));
     }
 
-    public ForceVoid(final ForceVoid card) {
+    private ForceVoid(final ForceVoid card) {
         super(card);
     }
 

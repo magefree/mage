@@ -32,7 +32,7 @@ public final class VeiledSentry extends CardImpl {
 
     }
 
-    public VeiledSentry(final VeiledSentry card) {
+    private VeiledSentry(final VeiledSentry card) {
         super(card);
     }
 

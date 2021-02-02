@@ -28,7 +28,7 @@ public final class CoilingOracle extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealTopLandToBattlefieldElseHandEffect()));
     }
 
-    public CoilingOracle(final CoilingOracle card) {
+    private CoilingOracle(final CoilingOracle card) {
         super(card);
     }
 

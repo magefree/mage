@@ -40,7 +40,7 @@ public final class Justice extends CardImpl {
         this.addAbility(new JusticeTriggeredAbility(new JusticeEffect()));
     }
 
-    public Justice(final Justice card) {
+    private Justice(final Justice card) {
         super(card);
     }
 

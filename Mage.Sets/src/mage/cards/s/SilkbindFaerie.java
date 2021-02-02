@@ -41,7 +41,7 @@ public final class SilkbindFaerie extends CardImpl {
         
     }
 
-    public SilkbindFaerie(final SilkbindFaerie card) {
+    private SilkbindFaerie(final SilkbindFaerie card) {
         super(card);
     }
 

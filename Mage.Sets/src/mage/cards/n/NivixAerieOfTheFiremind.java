@@ -42,7 +42,7 @@ public final class NivixAerieOfTheFiremind extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NivixAerieOfTheFiremind(final NivixAerieOfTheFiremind card) {
+    private NivixAerieOfTheFiremind(final NivixAerieOfTheFiremind card) {
         super(card);
     }
 

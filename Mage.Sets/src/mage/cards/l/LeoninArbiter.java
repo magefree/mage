@@ -40,7 +40,7 @@ public final class LeoninArbiter extends CardImpl {
         this.addAbility(new LeoninArbiterSpecialAction(KEY_STRING));
     }
 
-    public LeoninArbiter(final LeoninArbiter card) {
+    private LeoninArbiter(final LeoninArbiter card) {
         super(card);
     }
 

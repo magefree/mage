@@ -40,7 +40,7 @@ public final class Twinflame extends CardImpl {
 
     }
 
-    public Twinflame(final Twinflame card) {
+    private Twinflame(final Twinflame card) {
         super(card);
     }
 

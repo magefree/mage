@@ -67,7 +67,7 @@ public final class VraskaGolgariQueen extends CardImpl {
         ));
     }
 
-    public VraskaGolgariQueen(final VraskaGolgariQueen card) {
+    private VraskaGolgariQueen(final VraskaGolgariQueen card) {
         super(card);
     }
 

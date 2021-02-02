@@ -48,7 +48,7 @@ public final class GlassdustHulk extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{W/U}")));
     }
 
-    public GlassdustHulk(final GlassdustHulk card) {
+    private GlassdustHulk(final GlassdustHulk card) {
         super(card);
     }
 

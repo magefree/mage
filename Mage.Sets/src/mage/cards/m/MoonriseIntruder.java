@@ -41,7 +41,7 @@ public final class MoonriseIntruder extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public MoonriseIntruder(final MoonriseIntruder card) {
+    private MoonriseIntruder(final MoonriseIntruder card) {
         super(card);
     }
 

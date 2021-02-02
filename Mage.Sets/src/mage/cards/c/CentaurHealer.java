@@ -29,7 +29,7 @@ public final class CentaurHealer extends CardImpl {
 
     }
 
-    public CentaurHealer(final CentaurHealer card) {
+    private CentaurHealer(final CentaurHealer card) {
         super(card);
     }
 

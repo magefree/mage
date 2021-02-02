@@ -32,7 +32,7 @@ public final class Fleshgrafter extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new DiscardCardCost(new FilterArtifactCard("an artifact card"))));
     }
 
-    public Fleshgrafter(final Fleshgrafter card) {
+    private Fleshgrafter(final Fleshgrafter card) {
         super(card);
     }
 

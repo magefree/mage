@@ -47,7 +47,7 @@ public final class AdelizTheCinderWind extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AdelizTheCinderWind(final AdelizTheCinderWind card) {
+    private AdelizTheCinderWind(final AdelizTheCinderWind card) {
         super(card);
     }
 

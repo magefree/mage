@@ -46,7 +46,7 @@ public final class ThrullWizard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThrullWizard(final ThrullWizard card) {
+    private ThrullWizard(final ThrullWizard card) {
         super(card);
     }
 

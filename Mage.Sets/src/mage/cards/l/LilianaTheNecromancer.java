@@ -58,7 +58,7 @@ public final class LilianaTheNecromancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LilianaTheNecromancer(final LilianaTheNecromancer card) {
+    private LilianaTheNecromancer(final LilianaTheNecromancer card) {
         super(card);
     }
 

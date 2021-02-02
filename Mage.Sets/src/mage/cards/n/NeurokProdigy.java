@@ -42,7 +42,7 @@ public final class NeurokProdigy extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new DiscardTargetCost(new TargetCardInHand(filter))));
     }
 
-    public NeurokProdigy(final NeurokProdigy card) {
+    private NeurokProdigy(final NeurokProdigy card) {
         super(card);
     }
 

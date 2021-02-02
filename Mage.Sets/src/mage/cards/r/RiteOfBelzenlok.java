@@ -32,7 +32,7 @@ public final class RiteOfBelzenlok extends CardImpl {
         this.addAbility(sagaAbility);
     }
 
-    public RiteOfBelzenlok(final RiteOfBelzenlok card) {
+    private RiteOfBelzenlok(final RiteOfBelzenlok card) {
         super(card);
     }
 

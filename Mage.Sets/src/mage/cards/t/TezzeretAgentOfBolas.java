@@ -64,7 +64,7 @@ public final class TezzeretAgentOfBolas extends CardImpl {
 
     }
 
-    public TezzeretAgentOfBolas(final TezzeretAgentOfBolas card) {
+    private TezzeretAgentOfBolas(final TezzeretAgentOfBolas card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class Helldozer extends CardImpl {
 
     }
 
-    public Helldozer(final Helldozer card) {
+    private Helldozer(final Helldozer card) {
         super(card);
     }
 

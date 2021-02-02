@@ -24,7 +24,7 @@ public final class TranquilPath extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br><br>Draw a card"));
     }
 
-    public TranquilPath(final TranquilPath card) {
+    private TranquilPath(final TranquilPath card) {
         super(card);
     }
 

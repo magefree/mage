@@ -35,7 +35,7 @@ public final class AngelsGrace extends CardImpl {
         this.getSpellAbility().addEffect(new AngelsGraceReplacementEffect());
     }
 
-    public AngelsGrace(final AngelsGrace card) {
+    private AngelsGrace(final AngelsGrace card) {
         super(card);
     }
 

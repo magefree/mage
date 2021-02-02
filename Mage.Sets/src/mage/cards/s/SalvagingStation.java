@@ -43,7 +43,7 @@ public final class SalvagingStation extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new UntapSourceEffect(), true));
     }
 
-    public SalvagingStation(final SalvagingStation card) {
+    private SalvagingStation(final SalvagingStation card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class BrokenDam extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(1, 2, filter, false));
     }
 
-    public BrokenDam(final BrokenDam card) {
+    private BrokenDam(final BrokenDam card) {
         super(card);
     }
 

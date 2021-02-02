@@ -42,7 +42,7 @@ public final class Quicksand extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Quicksand(final Quicksand card) {
+    private Quicksand(final Quicksand card) {
         super(card);
     }
 

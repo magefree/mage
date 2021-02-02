@@ -38,7 +38,7 @@ public final class ErtaiWizardAdept extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ErtaiWizardAdept(final ErtaiWizardAdept card) {
+    private ErtaiWizardAdept(final ErtaiWizardAdept card) {
         super(card);
     }
 

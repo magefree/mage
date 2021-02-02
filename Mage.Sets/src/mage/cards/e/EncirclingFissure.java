@@ -32,7 +32,7 @@ public final class EncirclingFissure extends CardImpl {
         this.addAbility(new AwakenAbility(this, 2, "{4}{W}"));
     }
 
-    public EncirclingFissure(final EncirclingFissure card) {
+    private EncirclingFissure(final EncirclingFissure card) {
         super(card);
     }
 

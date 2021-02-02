@@ -51,7 +51,7 @@ public final class SoulSeparator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoulSeparator(final SoulSeparator card) {
+    private SoulSeparator(final SoulSeparator card) {
         super(card);
     }
 

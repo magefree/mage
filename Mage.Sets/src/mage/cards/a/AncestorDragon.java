@@ -34,7 +34,7 @@ public final class AncestorDragon extends CardImpl {
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new AncestorDragonEffect(), 1));
     }
 
-    public AncestorDragon(final AncestorDragon card) {
+    private AncestorDragon(final AncestorDragon card) {
         super(card);
     }
 

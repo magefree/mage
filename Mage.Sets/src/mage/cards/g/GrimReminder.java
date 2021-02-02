@@ -53,7 +53,7 @@ public final class GrimReminder extends CardImpl {
         ));
     }
 
-    public GrimReminder(final GrimReminder card) {
+    private GrimReminder(final GrimReminder card) {
         super(card);
     }
 

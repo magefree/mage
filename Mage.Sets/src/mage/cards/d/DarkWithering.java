@@ -38,7 +38,7 @@ public final class DarkWithering extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{B}")));
     }
 
-    public DarkWithering(final DarkWithering card) {
+    private DarkWithering(final DarkWithering card) {
         super(card);
     }
 

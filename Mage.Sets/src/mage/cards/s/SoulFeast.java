@@ -23,7 +23,7 @@ public final class SoulFeast extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
     }
 
-    public SoulFeast(final SoulFeast card) {
+    private SoulFeast(final SoulFeast card) {
         super(card);
     }
 

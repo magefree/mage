@@ -23,7 +23,7 @@ public final class QuicksilverGeyser extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent(0, 2, false));
     }
 
-    public QuicksilverGeyser(final QuicksilverGeyser card) {
+    private QuicksilverGeyser(final QuicksilverGeyser card) {
         super(card);
     }
 

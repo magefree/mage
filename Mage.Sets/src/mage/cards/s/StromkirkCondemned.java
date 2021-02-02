@@ -36,7 +36,7 @@ public final class StromkirkCondemned extends CardImpl {
 
     }
 
-    public StromkirkCondemned(final StromkirkCondemned card) {
+    private StromkirkCondemned(final StromkirkCondemned card) {
         super(card);
     }
 

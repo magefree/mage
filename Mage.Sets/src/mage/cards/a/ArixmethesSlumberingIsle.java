@@ -61,7 +61,7 @@ public final class ArixmethesSlumberingIsle extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 0, 1, 0, 0, 0), new TapSourceCost()));
     }
 
-    public ArixmethesSlumberingIsle(final ArixmethesSlumberingIsle card) {
+    private ArixmethesSlumberingIsle(final ArixmethesSlumberingIsle card) {
         super(card);
     }
 

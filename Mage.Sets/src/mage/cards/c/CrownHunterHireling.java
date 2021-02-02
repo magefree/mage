@@ -37,7 +37,7 @@ public final class CrownHunterHireling extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CrownHunterHirelingCantAttackEffect()));
     }
 
-    public CrownHunterHireling(final CrownHunterHireling card) {
+    private CrownHunterHireling(final CrownHunterHireling card) {
         super(card);
     }
 

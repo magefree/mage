@@ -29,7 +29,7 @@ public final class LochKorrigan extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{U/B}")));
     }
 
-    public LochKorrigan(final LochKorrigan card) {
+    private LochKorrigan(final LochKorrigan card) {
         super(card);
     }
 

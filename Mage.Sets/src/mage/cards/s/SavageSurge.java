@@ -29,7 +29,7 @@ public final class SavageSurge extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public SavageSurge(final SavageSurge card) {
+    private SavageSurge(final SavageSurge card) {
         super(card);
     }
 

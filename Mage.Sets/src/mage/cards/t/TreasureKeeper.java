@@ -34,7 +34,7 @@ public final class TreasureKeeper extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new TreasureKeeperEffect()));
     }
 
-    public TreasureKeeper(final TreasureKeeper card) {
+    private TreasureKeeper(final TreasureKeeper card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class GoliathSpider extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public GoliathSpider(final GoliathSpider card) {
+    private GoliathSpider(final GoliathSpider card) {
         super(card);
     }
 

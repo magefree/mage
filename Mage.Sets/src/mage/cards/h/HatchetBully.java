@@ -49,7 +49,7 @@ public final class HatchetBully extends CardImpl {
 
     }
 
-    public HatchetBully(final HatchetBully card) {
+    private HatchetBully(final HatchetBully card) {
         super(card);
     }
 

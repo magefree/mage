@@ -48,7 +48,7 @@ public final class HearthCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public HearthCharm(final HearthCharm card) {
+    private HearthCharm(final HearthCharm card) {
         super(card);
     }
 

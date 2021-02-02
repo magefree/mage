@@ -48,7 +48,7 @@ public final class TeferiTimebender extends CardImpl {
         this.addAbility(new LoyaltyAbility(new AddExtraTurnControllerEffect(), -9));
     }
 
-    public TeferiTimebender(final TeferiTimebender card) {
+    private TeferiTimebender(final TeferiTimebender card) {
         super(card);
     }
 

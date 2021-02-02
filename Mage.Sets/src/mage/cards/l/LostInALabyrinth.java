@@ -26,7 +26,7 @@ public final class LostInALabyrinth extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public LostInALabyrinth(final LostInALabyrinth card) {
+    private LostInALabyrinth(final LostInALabyrinth card) {
         super(card);
     }
 

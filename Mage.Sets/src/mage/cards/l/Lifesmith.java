@@ -33,7 +33,7 @@ public final class Lifesmith extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new LifesmithEffect(), filter, false));
     }
 
-    public Lifesmith(final Lifesmith card) {
+    private Lifesmith(final Lifesmith card) {
         super(card);
     }
 

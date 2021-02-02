@@ -52,7 +52,7 @@ public final class EbonPraetor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EbonPraetor(final EbonPraetor card) {
+    private EbonPraetor(final EbonPraetor card) {
         super(card);
     }
 

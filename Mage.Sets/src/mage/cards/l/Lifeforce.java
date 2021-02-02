@@ -35,7 +35,7 @@ public final class Lifeforce extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Lifeforce(final Lifeforce card) {
+    private Lifeforce(final Lifeforce card) {
         super(card);
     }
 

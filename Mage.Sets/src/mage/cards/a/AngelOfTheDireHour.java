@@ -41,7 +41,7 @@ public final class AngelOfTheDireHour extends CardImpl {
                 new CastFromHandWatcher());
     }
 
-    public AngelOfTheDireHour(final AngelOfTheDireHour card) {
+    private AngelOfTheDireHour(final AngelOfTheDireHour card) {
         super(card);
     }
 

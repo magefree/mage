@@ -29,7 +29,7 @@ public final class BassaraTowerArcher extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public BassaraTowerArcher(final BassaraTowerArcher card) {
+    private BassaraTowerArcher(final BassaraTowerArcher card) {
         super(card);
     }
 

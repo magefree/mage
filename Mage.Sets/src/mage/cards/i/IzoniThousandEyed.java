@@ -61,7 +61,7 @@ public final class IzoniThousandEyed extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IzoniThousandEyed(final IzoniThousandEyed card) {
+    private IzoniThousandEyed(final IzoniThousandEyed card) {
         super(card);
     }
 

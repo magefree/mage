@@ -25,7 +25,7 @@ public final class PsychicCorrosion extends CardImpl {
         ));
     }
 
-    public PsychicCorrosion(final PsychicCorrosion card) {
+    private PsychicCorrosion(final PsychicCorrosion card) {
         super(card);
     }
 

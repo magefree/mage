@@ -35,7 +35,7 @@ public final class BogRats extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public BogRats(final BogRats card) {
+    private BogRats(final BogRats card) {
         super(card);
     }
 

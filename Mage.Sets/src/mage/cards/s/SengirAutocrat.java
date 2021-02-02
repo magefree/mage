@@ -41,7 +41,7 @@ public final class SengirAutocrat extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ExileAllEffect(filter), false));
     }
 
-    public SengirAutocrat(final SengirAutocrat card) {
+    private SengirAutocrat(final SengirAutocrat card) {
         super(card);
     }
 

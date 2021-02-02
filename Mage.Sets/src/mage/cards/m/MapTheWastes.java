@@ -28,7 +28,7 @@ public final class MapTheWastes extends CardImpl {
         this.getSpellAbility().addEffect(new BolsterEffect(1));
     }
 
-    public MapTheWastes(final MapTheWastes card) {
+    private MapTheWastes(final MapTheWastes card) {
         super(card);
     }
 

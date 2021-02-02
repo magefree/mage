@@ -24,7 +24,7 @@ public final class AlibansTower extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterBlockingCreature()));
     }
 
-    public AlibansTower(final AlibansTower card) {
+    private AlibansTower(final AlibansTower card) {
         super(card);
     }
 

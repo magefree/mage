@@ -37,7 +37,7 @@ public final class DragonspeakerShaman extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 2)));
     }
 
-    public DragonspeakerShaman(final DragonspeakerShaman card) {
+    private DragonspeakerShaman(final DragonspeakerShaman card) {
         super(card);
     }
 

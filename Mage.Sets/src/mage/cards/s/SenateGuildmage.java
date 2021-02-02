@@ -38,7 +38,7 @@ public final class SenateGuildmage extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public SenateGuildmage(final SenateGuildmage card) {
+    private SenateGuildmage(final SenateGuildmage card) {
         super(card);
     }
 

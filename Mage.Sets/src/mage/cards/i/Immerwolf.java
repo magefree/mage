@@ -47,7 +47,7 @@ public final class Immerwolf extends CardImpl {
 
     }
 
-    public Immerwolf(final Immerwolf card) {
+    private Immerwolf(final Immerwolf card) {
         super(card);
     }
 

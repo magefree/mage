@@ -33,7 +33,7 @@ public final class NemesisMask extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public NemesisMask(final NemesisMask card) {
+    private NemesisMask(final NemesisMask card) {
         super(card);
     }
 

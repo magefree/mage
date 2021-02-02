@@ -32,7 +32,7 @@ public final class ScoutThePerimeter extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent(0, 1));
     }
 
-    public ScoutThePerimeter(final ScoutThePerimeter card) {
+    private ScoutThePerimeter(final ScoutThePerimeter card) {
         super(card);
     }
 

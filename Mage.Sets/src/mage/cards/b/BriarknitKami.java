@@ -32,7 +32,7 @@ public final class BriarknitKami extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BriarknitKami(final BriarknitKami card) {
+    private BriarknitKami(final BriarknitKami card) {
         super(card);
     }
 

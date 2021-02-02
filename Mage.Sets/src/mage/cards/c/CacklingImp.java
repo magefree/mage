@@ -36,7 +36,7 @@ public final class CacklingImp extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CacklingImp(final CacklingImp card) {
+    private CacklingImp(final CacklingImp card) {
         super(card);
     }
 

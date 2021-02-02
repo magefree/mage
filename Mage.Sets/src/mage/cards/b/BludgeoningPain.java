@@ -25,7 +25,7 @@ public final class BludgeoningPain extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public BludgeoningPain(final BludgeoningPain card) {
+    private BludgeoningPain(final BludgeoningPain card) {
         super(card);
     }
 

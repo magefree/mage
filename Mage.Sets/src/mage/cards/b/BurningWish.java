@@ -31,7 +31,7 @@ public final class BurningWish extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public BurningWish(final BurningWish card) {
+    private BurningWish(final BurningWish card) {
         super(card);
     }
 

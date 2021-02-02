@@ -38,7 +38,7 @@ public final class AzoriusCluestone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AzoriusCluestone(final AzoriusCluestone card) {
+    private AzoriusCluestone(final AzoriusCluestone card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class ImprovisedArmor extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
     }
 
-    public ImprovisedArmor(final ImprovisedArmor card) {
+    private ImprovisedArmor(final ImprovisedArmor card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class SeaGodsRevenge extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public SeaGodsRevenge(final SeaGodsRevenge card) {
+    private SeaGodsRevenge(final SeaGodsRevenge card) {
         super(card);
     }
 

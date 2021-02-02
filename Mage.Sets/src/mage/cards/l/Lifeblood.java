@@ -31,7 +31,7 @@ public final class Lifeblood extends CardImpl {
         this.addAbility(new BecomesTappedTriggeredAbility(new GainLifeEffect(1), false, filter));
     }
 
-    public Lifeblood(final Lifeblood card) {
+    private Lifeblood(final Lifeblood card) {
         super(card);
     }
 

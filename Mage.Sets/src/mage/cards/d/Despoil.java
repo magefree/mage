@@ -24,7 +24,7 @@ public final class Despoil extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public Despoil(final Despoil card) {
+    private Despoil(final Despoil card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class PentagramOfTheAges extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PentagramOfTheAges(final PentagramOfTheAges card) {
+    private PentagramOfTheAges(final PentagramOfTheAges card) {
         super(card);
     }
 

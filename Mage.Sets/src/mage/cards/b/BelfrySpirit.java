@@ -35,7 +35,7 @@ public final class BelfrySpirit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BelfrySpirit(final BelfrySpirit card) {
+    private BelfrySpirit(final BelfrySpirit card) {
         super(card);
     }
 

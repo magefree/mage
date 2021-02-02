@@ -24,7 +24,7 @@ public final class ValiantGuard extends CardImpl {
     this.toughness = new MageInt(3);
     }
 
-    public ValiantGuard(final ValiantGuard card) {
+    private ValiantGuard(final ValiantGuard card) {
         super(card);
     }
 

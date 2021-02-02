@@ -34,7 +34,7 @@ public final class TheFallen extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TheFallenEffect(), TargetController.YOU, false), new TheFallenWatcher());
     }
 
-    public TheFallen(final TheFallen card) {
+    private TheFallen(final TheFallen card) {
         super(card);
     }
 

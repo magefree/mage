@@ -23,7 +23,7 @@ public final class Warning extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
-    public Warning(final Warning card) {
+    private Warning(final Warning card) {
         super(card);
     }
 

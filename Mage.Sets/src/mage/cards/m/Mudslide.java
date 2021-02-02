@@ -45,7 +45,7 @@ public final class Mudslide extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new MudslideEffect(), TargetController.ANY, false));
     }
 
-    public Mudslide(final Mudslide card) {
+    private Mudslide(final Mudslide card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class SeraphSanctuary extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public SeraphSanctuary(final SeraphSanctuary card) {
+    private SeraphSanctuary(final SeraphSanctuary card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class RiversFavor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1)));
     }
 
-    public RiversFavor(final RiversFavor card) {
+    private RiversFavor(final RiversFavor card) {
         super(card);
     }
 

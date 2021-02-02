@@ -40,7 +40,7 @@ public final class DranasEmissary extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DranasEmissary(final DranasEmissary card) {
+    private DranasEmissary(final DranasEmissary card) {
         super(card);
     }
 

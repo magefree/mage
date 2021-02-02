@@ -44,7 +44,7 @@ public final class Fertilid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Fertilid(final Fertilid card) {
+    private Fertilid(final Fertilid card) {
         super(card);
     }
 

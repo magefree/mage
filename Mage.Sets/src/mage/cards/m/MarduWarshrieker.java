@@ -39,7 +39,7 @@ public final class MarduWarshrieker extends CardImpl {
                 new PlayerAttackedWatcher());
     }
 
-    public MarduWarshrieker(final MarduWarshrieker card) {
+    private MarduWarshrieker(final MarduWarshrieker card) {
         super(card);
     }
 

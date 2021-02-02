@@ -45,7 +45,7 @@ public final class DivineSacrament extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DivineSacrament(final DivineSacrament card) {
+    private DivineSacrament(final DivineSacrament card) {
         super(card);
     }
 

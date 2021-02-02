@@ -31,7 +31,7 @@ public final class Excise extends CardImpl {
         this.getSpellAbility().addEffect(new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new ExileTargetEffect(), ManacostVariableValue.instance));
     }
 
-    public Excise(final Excise card) {
+    private Excise(final Excise card) {
         super(card);
     }
 

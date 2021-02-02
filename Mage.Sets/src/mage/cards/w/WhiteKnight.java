@@ -30,7 +30,7 @@ public final class WhiteKnight extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
     }
 
-    public WhiteKnight(final WhiteKnight card) {
+    private WhiteKnight(final WhiteKnight card) {
         super(card);
     }
 

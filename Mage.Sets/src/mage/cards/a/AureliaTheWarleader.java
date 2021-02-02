@@ -48,7 +48,7 @@ public final class AureliaTheWarleader extends CardImpl {
 
     }
 
-    public AureliaTheWarleader(final AureliaTheWarleader card) {
+    private AureliaTheWarleader(final AureliaTheWarleader card) {
         super(card);
     }
 

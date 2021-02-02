@@ -46,7 +46,7 @@ public final class UlvenwaldMysteries extends CardImpl {
         this.addAbility(new UlvenwaldMysteriesTriggeredAbility());
     }
 
-    public UlvenwaldMysteries(final UlvenwaldMysteries card) {
+    private UlvenwaldMysteries(final UlvenwaldMysteries card) {
         super(card);
     }
 

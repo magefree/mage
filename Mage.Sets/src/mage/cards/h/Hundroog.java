@@ -27,7 +27,7 @@ public final class Hundroog extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
     }
 
-    public Hundroog(final Hundroog card) {
+    private Hundroog(final Hundroog card) {
         super(card);
     }
 

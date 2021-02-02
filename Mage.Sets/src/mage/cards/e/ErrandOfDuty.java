@@ -21,7 +21,7 @@ public final class ErrandOfDuty extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ErrandOfDutyKnightToken()));
     }
 
-    public ErrandOfDuty(final ErrandOfDuty card) {
+    private ErrandOfDuty(final ErrandOfDuty card) {
         super(card);
     }
 

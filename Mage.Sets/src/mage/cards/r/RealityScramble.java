@@ -47,7 +47,7 @@ public final class RealityScramble extends CardImpl {
         this.addAbility(new RetraceAbility(this));
     }
 
-    public RealityScramble(final RealityScramble card) {
+    private RealityScramble(final RealityScramble card) {
         super(card);
     }
 

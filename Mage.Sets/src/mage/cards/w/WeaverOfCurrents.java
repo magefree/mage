@@ -30,7 +30,7 @@ public final class WeaverOfCurrents extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 
-    public WeaverOfCurrents(final WeaverOfCurrents card) {
+    private WeaverOfCurrents(final WeaverOfCurrents card) {
         super(card);
     }
 

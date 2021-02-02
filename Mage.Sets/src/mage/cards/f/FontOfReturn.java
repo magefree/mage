@@ -31,7 +31,7 @@ public final class FontOfReturn extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public FontOfReturn(final FontOfReturn card) {
+    private FontOfReturn(final FontOfReturn card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class SpawnOfRixMaadi extends CardImpl {
         this.addAbility(new UnleashAbility());
     }
  
-    public SpawnOfRixMaadi(final SpawnOfRixMaadi card) {
+    private SpawnOfRixMaadi(final SpawnOfRixMaadi card) {
         super(card);
     }
  

@@ -49,7 +49,7 @@ public final class VaporSnare extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new VaporSnareEffect(), TargetController.YOU, false));
     }
 
-    public VaporSnare(final VaporSnare card) {
+    private VaporSnare(final VaporSnare card) {
         super(card);
     }
 

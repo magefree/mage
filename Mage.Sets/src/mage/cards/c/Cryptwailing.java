@@ -30,7 +30,7 @@ public final class Cryptwailing extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Cryptwailing(final Cryptwailing card) {
+    private Cryptwailing(final Cryptwailing card) {
         super(card);
     }
 

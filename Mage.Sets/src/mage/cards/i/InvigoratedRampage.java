@@ -44,7 +44,7 @@ public final class InvigoratedRampage extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public InvigoratedRampage(final InvigoratedRampage card) {
+    private InvigoratedRampage(final InvigoratedRampage card) {
         super(card);
     }
 

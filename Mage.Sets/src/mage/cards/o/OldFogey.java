@@ -61,7 +61,7 @@ public final class OldFogey extends CardImpl {
         this.addAbility(new RampageAbility(2, true));
     }
 
-    public OldFogey(final OldFogey card) {
+    private OldFogey(final OldFogey card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class AuriokSunchaser extends CardImpl {
         );
     }
 
-    public AuriokSunchaser(final AuriokSunchaser card) {
+    private AuriokSunchaser(final AuriokSunchaser card) {
         super(card);
     }
 

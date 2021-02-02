@@ -26,7 +26,7 @@ public final class AuraBlast extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public AuraBlast(final AuraBlast card) {
+    private AuraBlast(final AuraBlast card) {
         super(card);
     }
 

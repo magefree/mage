@@ -29,7 +29,7 @@ public final class GossamerPhantasm extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public GossamerPhantasm(final GossamerPhantasm card) {
+    private GossamerPhantasm(final GossamerPhantasm card) {
         super(card);
     }
 

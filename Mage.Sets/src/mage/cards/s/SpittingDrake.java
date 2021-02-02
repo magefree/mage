@@ -33,7 +33,7 @@ public final class SpittingDrake extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public SpittingDrake(final SpittingDrake card) {
+    private SpittingDrake(final SpittingDrake card) {
         super(card);
     }
 

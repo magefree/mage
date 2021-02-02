@@ -44,7 +44,7 @@ public final class Interdict extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br><br>Draw a card"));
     }
 
-    public Interdict(final Interdict card) {
+    private Interdict(final Interdict card) {
         super(card);
     }
 

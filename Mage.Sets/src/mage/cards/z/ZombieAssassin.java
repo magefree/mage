@@ -52,7 +52,7 @@ public final class ZombieAssassin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZombieAssassin(final ZombieAssassin card) {
+    private ZombieAssassin(final ZombieAssassin card) {
         super(card);
     }
 

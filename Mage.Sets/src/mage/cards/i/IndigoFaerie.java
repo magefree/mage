@@ -45,7 +45,7 @@ public final class IndigoFaerie extends CardImpl {
         
     }
 
-    public IndigoFaerie(final IndigoFaerie card) {
+    private IndigoFaerie(final IndigoFaerie card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class DreamHalls extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DreamHallsEffect()));
     }
 
-    public DreamHalls(final DreamHalls card) {
+    private DreamHalls(final DreamHalls card) {
         super(card);
     }
 

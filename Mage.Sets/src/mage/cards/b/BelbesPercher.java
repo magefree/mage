@@ -28,7 +28,7 @@ public final class BelbesPercher extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public BelbesPercher(final BelbesPercher card) {
+    private BelbesPercher(final BelbesPercher card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class MarchesasInfiltrator extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public MarchesasInfiltrator(final MarchesasInfiltrator card) {
+    private MarchesasInfiltrator(final MarchesasInfiltrator card) {
         super(card);
     }
 

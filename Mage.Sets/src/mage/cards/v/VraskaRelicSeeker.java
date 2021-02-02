@@ -50,7 +50,7 @@ public final class VraskaRelicSeeker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VraskaRelicSeeker(final VraskaRelicSeeker card) {
+    private VraskaRelicSeeker(final VraskaRelicSeeker card) {
         super(card);
     }
 

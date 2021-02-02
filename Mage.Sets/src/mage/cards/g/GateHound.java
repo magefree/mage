@@ -36,7 +36,7 @@ public final class GateHound extends CardImpl {
                 "Creatures you control have vigilance as long as {this} is enchanted")));
     }
 
-    public GateHound(final GateHound card) {
+    private GateHound(final GateHound card) {
         super(card);
     }
 

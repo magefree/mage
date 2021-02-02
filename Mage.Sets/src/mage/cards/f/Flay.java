@@ -28,7 +28,7 @@ public final class Flay extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Flay(final Flay card) {
+    private Flay(final Flay card) {
         super(card);
     }
 

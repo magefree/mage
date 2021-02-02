@@ -35,7 +35,7 @@ public final class Bullwhip extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Bullwhip(final Bullwhip card) {
+    private Bullwhip(final Bullwhip card) {
         super(card);
     }
 

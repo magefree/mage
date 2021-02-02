@@ -28,7 +28,7 @@ public final class ShuDefender extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(0, 2, Duration.EndOfTurn), false));
     }
 
-    public ShuDefender(final ShuDefender card) {
+    private ShuDefender(final ShuDefender card) {
         super(card);
     }
 

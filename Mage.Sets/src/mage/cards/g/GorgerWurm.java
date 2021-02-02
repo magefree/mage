@@ -28,7 +28,7 @@ public final class GorgerWurm extends CardImpl {
         this.addAbility(new DevourAbility(DevourEffect.DevourFactor.Devour1));
     }
 
-    public GorgerWurm(final GorgerWurm card) {
+    private GorgerWurm(final GorgerWurm card) {
         super(card);
     }
 

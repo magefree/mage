@@ -35,7 +35,7 @@ public final class SmokespewInvoker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SmokespewInvoker(final SmokespewInvoker card) {
+    private SmokespewInvoker(final SmokespewInvoker card) {
         super(card);
     }
 

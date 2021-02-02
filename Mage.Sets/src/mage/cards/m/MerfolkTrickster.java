@@ -40,7 +40,7 @@ public final class MerfolkTrickster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MerfolkTrickster(final MerfolkTrickster card) {
+    private MerfolkTrickster(final MerfolkTrickster card) {
         super(card);
     }
 

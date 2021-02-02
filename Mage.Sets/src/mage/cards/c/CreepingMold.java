@@ -32,7 +32,7 @@ public final class CreepingMold extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public CreepingMold(final CreepingMold card) {
+    private CreepingMold(final CreepingMold card) {
         super(card);
     }
 

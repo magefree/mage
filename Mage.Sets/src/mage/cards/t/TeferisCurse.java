@@ -44,7 +44,7 @@ public final class TeferisCurse extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(PhasingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, null, "permanent")));
     }
 
-    public TeferisCurse(final TeferisCurse card) {
+    private TeferisCurse(final TeferisCurse card) {
         super(card);
     }
 

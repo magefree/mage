@@ -29,7 +29,7 @@ public final class ShamblingAttendants extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public ShamblingAttendants(final ShamblingAttendants card) {
+    private ShamblingAttendants(final ShamblingAttendants card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class SpiresideInfiltrator extends CardImpl {
         this.addAbility(new BecomesTappedSourceTriggeredAbility(new DamagePlayersEffect(1, TargetController.OPPONENT, "it")));
     }
 
-    public SpiresideInfiltrator(final SpiresideInfiltrator card) {
+    private SpiresideInfiltrator(final SpiresideInfiltrator card) {
         super(card);
     }
 

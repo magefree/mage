@@ -41,7 +41,7 @@ public final class SirenReaver extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SirenReaver(final SirenReaver card) {
+    private SirenReaver(final SirenReaver card) {
         super(card);
     }
 

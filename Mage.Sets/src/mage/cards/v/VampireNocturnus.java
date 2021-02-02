@@ -44,7 +44,7 @@ public final class VampireNocturnus extends CardImpl {
         this.addAbility(new VampireNocturnusAbility());
     }
 
-    public VampireNocturnus(final VampireNocturnus card) {
+    private VampireNocturnus(final VampireNocturnus card) {
         super(card);
     }
 

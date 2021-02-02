@@ -46,7 +46,7 @@ public final class GhaltaPrimalHunger extends CardImpl {
 
     }
 
-    public GhaltaPrimalHunger(final GhaltaPrimalHunger card) {
+    private GhaltaPrimalHunger(final GhaltaPrimalHunger card) {
         super(card);
     }
 

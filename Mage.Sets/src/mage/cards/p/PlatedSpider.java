@@ -26,7 +26,7 @@ public final class PlatedSpider extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public PlatedSpider(final PlatedSpider card) {
+    private PlatedSpider(final PlatedSpider card) {
         super(card);
     }
 

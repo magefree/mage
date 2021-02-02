@@ -42,7 +42,7 @@ public final class SeethingPathblazer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeethingPathblazer(final SeethingPathblazer card) {
+    private SeethingPathblazer(final SeethingPathblazer card) {
         super(card);
     }
 

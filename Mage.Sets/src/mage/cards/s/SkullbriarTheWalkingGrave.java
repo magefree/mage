@@ -45,7 +45,7 @@ public final class SkullbriarTheWalkingGrave extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SkullbriarEffect()));
     }
 
-    public SkullbriarTheWalkingGrave(SkullbriarTheWalkingGrave card) {
+    private SkullbriarTheWalkingGrave(SkullbriarTheWalkingGrave card) {
         super(card);
     }
 

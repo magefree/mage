@@ -48,7 +48,7 @@ public final class Fleshformer extends CardImpl {
 
     }
 
-    public Fleshformer(final Fleshformer card) {
+    private Fleshformer(final Fleshformer card) {
         super(card);
     }
 

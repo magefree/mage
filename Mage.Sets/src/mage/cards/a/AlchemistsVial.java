@@ -37,7 +37,7 @@ public final class AlchemistsVial extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AlchemistsVial(final AlchemistsVial card) {
+    private AlchemistsVial(final AlchemistsVial card) {
         super(card);
     }
 

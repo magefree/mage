@@ -31,7 +31,7 @@ public final class GreatSableStag extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect()));
     }
 
-    public GreatSableStag(final GreatSableStag card) {
+    private GreatSableStag(final GreatSableStag card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class FungusSliver extends CardImpl {
                 "All Sliver creatures have \"Whenever this creature is dealt damage, put a +1/+1 counter on it.\""))); 
     }
 
-    public FungusSliver(final FungusSliver card) {
+    private FungusSliver(final FungusSliver card) {
         super(card);
     }
 

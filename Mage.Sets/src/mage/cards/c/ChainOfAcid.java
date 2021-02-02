@@ -39,7 +39,7 @@ public final class ChainOfAcid extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public ChainOfAcid(final ChainOfAcid card) {
+    private ChainOfAcid(final ChainOfAcid card) {
         super(card);
     }
 

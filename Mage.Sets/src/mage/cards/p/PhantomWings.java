@@ -47,7 +47,7 @@ public final class PhantomWings extends CardImpl {
         
     }
 
-    public PhantomWings(final PhantomWings card) {
+    private PhantomWings(final PhantomWings card) {
         super(card);
     }
 

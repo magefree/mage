@@ -31,7 +31,7 @@ public final class OverrideCard extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public OverrideCard(final OverrideCard card) {
+    private OverrideCard(final OverrideCard card) {
         super(card);
     }
 

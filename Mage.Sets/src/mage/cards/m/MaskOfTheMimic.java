@@ -45,7 +45,7 @@ public final class MaskOfTheMimic extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public MaskOfTheMimic(final MaskOfTheMimic card) {
+    private MaskOfTheMimic(final MaskOfTheMimic card) {
         super(card);
     }
 

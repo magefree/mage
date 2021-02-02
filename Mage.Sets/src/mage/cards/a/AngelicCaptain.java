@@ -43,7 +43,7 @@ public final class AngelicCaptain extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, value, Duration.EndOfTurn, true), false));
     }
 
-    public AngelicCaptain(final AngelicCaptain card) {
+    private AngelicCaptain(final AngelicCaptain card) {
         super(card);
     }
 

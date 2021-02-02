@@ -61,7 +61,7 @@ public final class PackRat extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PackRat(final PackRat card) {
+    private PackRat(final PackRat card) {
         super(card);
     }
 

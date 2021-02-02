@@ -47,7 +47,7 @@ public final class ThallidOmnivore extends CardImpl {
 
     }
 
-    public ThallidOmnivore(final ThallidOmnivore card) {
+    private ThallidOmnivore(final ThallidOmnivore card) {
         super(card);
     }
 

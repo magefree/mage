@@ -38,7 +38,7 @@ public final class NayaCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public NayaCharm(final NayaCharm card) {
+    private NayaCharm(final NayaCharm card) {
         super(card);
     }
 

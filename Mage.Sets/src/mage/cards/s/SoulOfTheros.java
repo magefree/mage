@@ -56,7 +56,7 @@ public final class SoulOfTheros extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoulOfTheros(final SoulOfTheros card) {
+    private SoulOfTheros(final SoulOfTheros card) {
         super(card);
     }
 

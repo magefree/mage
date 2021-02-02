@@ -34,7 +34,7 @@ public final class HourOfGlory extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public HourOfGlory(final HourOfGlory card) {
+    private HourOfGlory(final HourOfGlory card) {
         super(card);
     }
 

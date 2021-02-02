@@ -31,7 +31,7 @@ public final class PreciseStrike extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PreciseStrike(final PreciseStrike card) {
+    private PreciseStrike(final PreciseStrike card) {
         super(card);
     }
 

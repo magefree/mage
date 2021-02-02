@@ -33,7 +33,7 @@ public final class GruesomeMenagerie extends CardImpl {
         this.getSpellAbility().addEffect(new GruesomeMenagerieEffect());
     }
 
-    public GruesomeMenagerie(final GruesomeMenagerie card) {
+    private GruesomeMenagerie(final GruesomeMenagerie card) {
         super(card);
     }
 

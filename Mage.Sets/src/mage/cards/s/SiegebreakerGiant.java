@@ -42,7 +42,7 @@ public final class SiegebreakerGiant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SiegebreakerGiant(final SiegebreakerGiant card) {
+    private SiegebreakerGiant(final SiegebreakerGiant card) {
         super(card);
     }
 

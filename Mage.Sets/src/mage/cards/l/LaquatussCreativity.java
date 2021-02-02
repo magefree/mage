@@ -28,7 +28,7 @@ public final class LaquatussCreativity extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public LaquatussCreativity(final LaquatussCreativity card) {
+    private LaquatussCreativity(final LaquatussCreativity card) {
         super(card);
     }
 

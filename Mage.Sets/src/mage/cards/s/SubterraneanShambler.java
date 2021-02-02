@@ -42,7 +42,7 @@ public final class SubterraneanShambler extends CardImpl {
 
     }
 
-    public SubterraneanShambler(final SubterraneanShambler card) {
+    private SubterraneanShambler(final SubterraneanShambler card) {
         super(card);
     }
 

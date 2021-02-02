@@ -32,7 +32,7 @@ public final class ThoughtErasure extends CardImpl {
         this.getSpellAbility().addEffect(new SurveilEffect(1));
     }
 
-    public ThoughtErasure(final ThoughtErasure card) {
+    private ThoughtErasure(final ThoughtErasure card) {
         super(card);
     }
 

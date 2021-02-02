@@ -29,7 +29,7 @@ public final class SigiledStarfish extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new TapSourceCost()));
     }
 
-    public SigiledStarfish(final SigiledStarfish card) {
+    private SigiledStarfish(final SigiledStarfish card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class NeurokFamiliar extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new NeurokFamiliarEffect()));
     }
 
-    public NeurokFamiliar(final NeurokFamiliar card) {
+    private NeurokFamiliar(final NeurokFamiliar card) {
         super(card);
     }
 

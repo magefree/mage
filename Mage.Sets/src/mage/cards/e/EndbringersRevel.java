@@ -31,7 +31,7 @@ public final class EndbringersRevel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EndbringersRevel(final EndbringersRevel card) {
+    private EndbringersRevel(final EndbringersRevel card) {
         super(card);
     }
 

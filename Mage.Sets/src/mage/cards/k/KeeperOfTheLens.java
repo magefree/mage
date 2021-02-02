@@ -37,7 +37,7 @@ public final class KeeperOfTheLens extends CardImpl {
         this.addAbility(new KeeperOfTheLensLookFaceDownAbility());
     }
 
-    public KeeperOfTheLens(final KeeperOfTheLens card) {
+    private KeeperOfTheLens(final KeeperOfTheLens card) {
         super(card);
     }
 

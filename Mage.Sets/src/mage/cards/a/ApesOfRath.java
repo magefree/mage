@@ -26,7 +26,7 @@ public final class ApesOfRath extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new DontUntapInControllersNextUntapStepSourceEffect(), false));
     }
 
-    public ApesOfRath(final ApesOfRath card) {
+    private ApesOfRath(final ApesOfRath card) {
         super(card);
     }
 

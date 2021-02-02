@@ -31,7 +31,7 @@ public final class SilverKnight extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
-    public SilverKnight(final SilverKnight card) {
+    private SilverKnight(final SilverKnight card) {
         super(card);
     }
 

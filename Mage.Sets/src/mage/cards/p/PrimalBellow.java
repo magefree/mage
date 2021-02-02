@@ -35,7 +35,7 @@ public final class PrimalBellow extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(value, value, Duration.EndOfTurn));
     }
 
-    public PrimalBellow(final PrimalBellow card) {
+    private PrimalBellow(final PrimalBellow card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class UnboundFlourishing extends CardImpl {
         this.addAbility(new UnboundFlourishingCopyAbility());
     }
 
-    public UnboundFlourishing(final UnboundFlourishing card) {
+    private UnboundFlourishing(final UnboundFlourishing card) {
         super(card);
     }
 

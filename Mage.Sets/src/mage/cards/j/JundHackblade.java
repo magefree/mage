@@ -56,7 +56,7 @@ public final class JundHackblade extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JundHackblade(final JundHackblade card) {
+    private JundHackblade(final JundHackblade card) {
         super(card);
     }
 

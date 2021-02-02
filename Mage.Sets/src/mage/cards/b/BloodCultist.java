@@ -38,7 +38,7 @@ public final class BloodCultist extends CardImpl {
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 
-    public BloodCultist(final BloodCultist card) {
+    private BloodCultist(final BloodCultist card) {
         super(card);
     }
 

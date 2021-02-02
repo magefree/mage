@@ -57,7 +57,7 @@ public final class DemonicEmbrace extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new DemonicEmbracePlayEffect()));
     }
 
-    public DemonicEmbrace(final DemonicEmbrace card) {
+    private DemonicEmbrace(final DemonicEmbrace card) {
         super(card);
     }
 

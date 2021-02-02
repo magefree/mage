@@ -24,7 +24,7 @@ public final class ExplosiveImpact extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
     }
 
-    public ExplosiveImpact(final ExplosiveImpact card) {
+    private ExplosiveImpact(final ExplosiveImpact card) {
         super(card);
     }
 

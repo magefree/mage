@@ -30,7 +30,7 @@ public final class AmuletOfKroog extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AmuletOfKroog(final AmuletOfKroog card) {
+    private AmuletOfKroog(final AmuletOfKroog card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class DarkApprenticeship extends CardImpl {
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }
 
-    public DarkApprenticeship(final DarkApprenticeship card) {
+    private DarkApprenticeship(final DarkApprenticeship card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class ArmadaWurm extends CardImpl {
 
     }
 
-    public ArmadaWurm(final ArmadaWurm card) {
+    private ArmadaWurm(final ArmadaWurm card) {
         super(card);
     }
 

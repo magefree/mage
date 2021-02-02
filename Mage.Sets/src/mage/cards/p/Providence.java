@@ -33,7 +33,7 @@ public final class Providence extends CardImpl {
 
     }
 
-    public Providence(final Providence card) {
+    private Providence(final Providence card) {
         super(card);
     }
 

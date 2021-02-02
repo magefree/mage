@@ -40,7 +40,7 @@ public final class GravebornMuse extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GravebornMuse(final GravebornMuse card) {
+    private GravebornMuse(final GravebornMuse card) {
         super(card);
     }
 

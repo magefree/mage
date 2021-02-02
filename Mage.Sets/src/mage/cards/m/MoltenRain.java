@@ -31,7 +31,7 @@ public final class MoltenRain extends CardImpl {
         this.getSpellAbility().addEffect(new MoltenRainEffect());
     }
 
-    public MoltenRain(final MoltenRain card) {
+    private MoltenRain(final MoltenRain card) {
         super(card);
     }
 

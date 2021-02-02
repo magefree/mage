@@ -31,7 +31,7 @@ public final class KyrenSniper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KyrenSniper(final KyrenSniper card) {
+    private KyrenSniper(final KyrenSniper card) {
         super(card);
     }
 

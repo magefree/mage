@@ -34,7 +34,7 @@ public final class Skullmulcher extends CardImpl {
                 new DrawCardSourceControllerEffect(new DevouredCreaturesCount()),false));
     }
 
-    public Skullmulcher(final Skullmulcher card) {
+    private Skullmulcher(final Skullmulcher card) {
         super(card);
     }
 

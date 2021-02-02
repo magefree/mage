@@ -31,7 +31,7 @@ public final class LionheartMaverick extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 2, Duration.EndOfTurn), new ManaCostsImpl("{4}{W}")));
     }
 
-    public LionheartMaverick(final LionheartMaverick card) {
+    private LionheartMaverick(final LionheartMaverick card) {
         super(card);
     }
 

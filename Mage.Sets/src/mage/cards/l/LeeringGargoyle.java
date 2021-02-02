@@ -44,7 +44,7 @@ public final class LeeringGargoyle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LeeringGargoyle(final LeeringGargoyle card) {
+    private LeeringGargoyle(final LeeringGargoyle card) {
         super(card);
     }
 

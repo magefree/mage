@@ -32,7 +32,7 @@ public final class TeferisIsle extends CardImpl {
 
     }
 
-    public TeferisIsle(final TeferisIsle card) {
+    private TeferisIsle(final TeferisIsle card) {
         super(card);
     }
 

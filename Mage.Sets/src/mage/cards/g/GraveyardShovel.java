@@ -34,7 +34,7 @@ public final class GraveyardShovel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GraveyardShovel(final GraveyardShovel card) {
+    private GraveyardShovel(final GraveyardShovel card) {
         super(card);
     }
 

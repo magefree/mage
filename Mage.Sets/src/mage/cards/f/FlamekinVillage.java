@@ -52,7 +52,7 @@ public final class FlamekinVillage extends CardImpl {
 
     }
 
-    public FlamekinVillage(final FlamekinVillage card) {
+    private FlamekinVillage(final FlamekinVillage card) {
         super(card);
     }
 

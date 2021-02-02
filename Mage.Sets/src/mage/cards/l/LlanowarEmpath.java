@@ -40,7 +40,7 @@ public final class LlanowarEmpath extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LlanowarEmpath(final LlanowarEmpath card) {
+    private LlanowarEmpath(final LlanowarEmpath card) {
         super(card);
     }
 

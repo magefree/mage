@@ -54,7 +54,7 @@ public final class RisenExecutioner extends CardImpl {
 
     }
 
-    public RisenExecutioner(final RisenExecutioner card) {
+    private RisenExecutioner(final RisenExecutioner card) {
         super(card);
     }
 

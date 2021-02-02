@@ -38,7 +38,7 @@ public final class OrzhovCluestone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrzhovCluestone(final OrzhovCluestone card) {
+    private OrzhovCluestone(final OrzhovCluestone card) {
         super(card);
     }
 

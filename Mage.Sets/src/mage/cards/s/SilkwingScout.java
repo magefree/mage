@@ -42,7 +42,7 @@ public final class SilkwingScout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SilkwingScout(final SilkwingScout card) {
+    private SilkwingScout(final SilkwingScout card) {
         super(card);
     }
 

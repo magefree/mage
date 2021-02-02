@@ -40,7 +40,7 @@ public final class DrownedCatacomb extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public DrownedCatacomb(final DrownedCatacomb card) {
+    private DrownedCatacomb(final DrownedCatacomb card) {
         super(card);
     }
 

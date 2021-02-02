@@ -39,7 +39,7 @@ public final class KamahlsDruidicVow extends CardImpl {
         this.getSpellAbility().addEffect(new KamahlsDruidicVowEffect());
     }
 
-    public KamahlsDruidicVow(final KamahlsDruidicVow card) {
+    private KamahlsDruidicVow(final KamahlsDruidicVow card) {
         super(card);
     }
 

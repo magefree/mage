@@ -43,7 +43,7 @@ public final class KalitasBloodchiefOfGhet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KalitasBloodchiefOfGhet(final KalitasBloodchiefOfGhet card) {
+    private KalitasBloodchiefOfGhet(final KalitasBloodchiefOfGhet card) {
         super(card);
     }
 

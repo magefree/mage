@@ -50,7 +50,7 @@ public final class ArcheryTraining extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ArcheryTrainingEffect()));
     }
 
-    public ArcheryTraining(final ArcheryTraining card) {
+    private ArcheryTraining(final ArcheryTraining card) {
         super(card);
     }
 

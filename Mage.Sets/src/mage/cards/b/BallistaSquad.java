@@ -36,7 +36,7 @@ public final class BallistaSquad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BallistaSquad(final BallistaSquad card) {
+    private BallistaSquad(final BallistaSquad card) {
         super(card);
     }
 

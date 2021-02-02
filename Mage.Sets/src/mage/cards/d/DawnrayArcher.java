@@ -39,7 +39,7 @@ public final class DawnrayArcher extends CardImpl {
        this.addAbility(ability);
     }
 
-    public DawnrayArcher(final DawnrayArcher card) {
+    private DawnrayArcher(final DawnrayArcher card) {
         super(card);
     }
 

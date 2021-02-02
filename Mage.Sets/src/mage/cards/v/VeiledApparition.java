@@ -42,7 +42,7 @@ public final class VeiledApparition extends CardImpl {
         
     }
 
-    public VeiledApparition(final VeiledApparition card) {
+    private VeiledApparition(final VeiledApparition card) {
         super(card);
     }
 

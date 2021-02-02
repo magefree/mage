@@ -24,7 +24,7 @@ public final class GerrardsWisdom extends CardImpl {
             "You gain 2 life for each card in your hand"));
     }
 
-    public GerrardsWisdom(final GerrardsWisdom card) {
+    private GerrardsWisdom(final GerrardsWisdom card) {
         super(card);
     }
 

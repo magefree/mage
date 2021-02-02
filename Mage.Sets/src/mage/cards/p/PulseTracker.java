@@ -27,7 +27,7 @@ public final class PulseTracker extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new LoseLifeOpponentsEffect(1), false));
     }
 
-    public PulseTracker(final PulseTracker card) {
+    private PulseTracker(final PulseTracker card) {
         super(card);
     }
 

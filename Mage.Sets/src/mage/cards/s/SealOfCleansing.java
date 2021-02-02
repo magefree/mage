@@ -29,7 +29,7 @@ public final class SealOfCleansing extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SealOfCleansing(final SealOfCleansing card) {
+    private SealOfCleansing(final SealOfCleansing card) {
         super(card);
     }
 

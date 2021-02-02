@@ -34,7 +34,7 @@ public final class LoyalTauntaun extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LoyalTauntaun(final LoyalTauntaun card) {
+    private LoyalTauntaun(final LoyalTauntaun card) {
         super(card);
     }
 

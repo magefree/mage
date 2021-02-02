@@ -26,7 +26,7 @@ public final class CrumbleToDust extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect(false, "its controller's", "any number of cards with the same name as that land"));
     }
 
-    public CrumbleToDust(final CrumbleToDust card) {
+    private CrumbleToDust(final CrumbleToDust card) {
         super(card);
     }
 

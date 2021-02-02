@@ -38,7 +38,7 @@ public final class ThespiansStage extends CardImpl {
 
     }
 
-    public ThespiansStage(final ThespiansStage card) {
+    private ThespiansStage(final ThespiansStage card) {
         super(card);
     }
 

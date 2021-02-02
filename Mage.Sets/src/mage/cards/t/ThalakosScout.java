@@ -34,7 +34,7 @@ public final class ThalakosScout extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new DiscardCardCost()));
     }
 
-    public ThalakosScout(final ThalakosScout card) {
+    private ThalakosScout(final ThalakosScout card) {
         super(card);
     }
 

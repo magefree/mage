@@ -40,7 +40,7 @@ public final class GreenerPastures extends CardImpl {
         ));
     }
 
-    public GreenerPastures(final GreenerPastures card) {
+    private GreenerPastures(final GreenerPastures card) {
         super(card);
     }
 

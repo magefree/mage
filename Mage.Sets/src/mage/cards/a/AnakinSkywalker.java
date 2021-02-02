@@ -56,7 +56,7 @@ public final class AnakinSkywalker extends CardImpl {
 
     }
 
-    public AnakinSkywalker(final AnakinSkywalker card) {
+    private AnakinSkywalker(final AnakinSkywalker card) {
         super(card);
     }
 

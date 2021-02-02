@@ -45,7 +45,7 @@ public final class ReaperOfFlightMoonsilver extends CardImpl {
                 .addHint(DeliriumHint.instance));
     }
 
-    public ReaperOfFlightMoonsilver(final ReaperOfFlightMoonsilver card) {
+    private ReaperOfFlightMoonsilver(final ReaperOfFlightMoonsilver card) {
         super(card);
     }
 

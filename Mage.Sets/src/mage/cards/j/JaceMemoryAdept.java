@@ -47,7 +47,7 @@ public final class JaceMemoryAdept extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public JaceMemoryAdept(final JaceMemoryAdept card) {
+    private JaceMemoryAdept(final JaceMemoryAdept card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class AvenSentry extends CardImpl {
 
     }
 
-    public AvenSentry(final AvenSentry card) {
+    private AvenSentry(final AvenSentry card) {
         super(card);
     }
 

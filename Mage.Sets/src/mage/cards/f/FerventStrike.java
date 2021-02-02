@@ -35,7 +35,7 @@ public final class FerventStrike extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FerventStrike(final FerventStrike card) {
+    private FerventStrike(final FerventStrike card) {
         super(card);
     }
 

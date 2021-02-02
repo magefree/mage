@@ -37,7 +37,7 @@ public final class SwarmOfBloodflies extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, true));
     }
 
-    public SwarmOfBloodflies(final SwarmOfBloodflies card) {
+    private SwarmOfBloodflies(final SwarmOfBloodflies card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class PerfectedForm extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public PerfectedForm(final PerfectedForm card) {
+    private PerfectedForm(final PerfectedForm card) {
         super(card);
     }
 

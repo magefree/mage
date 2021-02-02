@@ -34,7 +34,7 @@ public final class Delay extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Delay(final Delay card) {
+    private Delay(final Delay card) {
         super(card);
     }
 

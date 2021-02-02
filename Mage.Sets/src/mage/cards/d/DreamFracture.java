@@ -31,7 +31,7 @@ public final class DreamFracture extends CardImpl {
 
     }
 
-    public DreamFracture(final DreamFracture card) {
+    private DreamFracture(final DreamFracture card) {
         super(card);
     }
 

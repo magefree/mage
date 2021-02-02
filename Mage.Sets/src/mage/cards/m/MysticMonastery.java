@@ -27,7 +27,7 @@ public final class MysticMonastery extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public MysticMonastery(final MysticMonastery card) {
+    private MysticMonastery(final MysticMonastery card) {
         super(card);
     }
 

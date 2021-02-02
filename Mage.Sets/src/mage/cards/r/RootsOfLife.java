@@ -54,7 +54,7 @@ public final class RootsOfLife extends CardImpl {
                 ruleTrigger2));
     }
 
-    public RootsOfLife(final RootsOfLife card) {
+    private RootsOfLife(final RootsOfLife card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class BurstOfEnergy extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
-    public BurstOfEnergy(final BurstOfEnergy card) {
+    private BurstOfEnergy(final BurstOfEnergy card) {
         super(card);
     }
 

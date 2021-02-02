@@ -39,7 +39,7 @@ public final class Bravado extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BravadoBoostEnchantedEffect()));
     }
 
-    public Bravado(final Bravado card) {
+    private Bravado(final Bravado card) {
         super(card);
     }
 

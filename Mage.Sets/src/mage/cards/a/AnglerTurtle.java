@@ -37,7 +37,7 @@ public final class AnglerTurtle extends CardImpl {
                 new AttackedThisTurnWatcher());
     }
 
-    public AnglerTurtle(final AnglerTurtle card) {
+    private AnglerTurtle(final AnglerTurtle card) {
         super(card);
     }
 

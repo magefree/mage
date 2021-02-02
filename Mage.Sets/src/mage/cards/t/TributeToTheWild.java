@@ -31,7 +31,7 @@ public final class TributeToTheWild extends CardImpl {
       this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(filter));
     }
 
-    public TributeToTheWild(final TributeToTheWild card) {
+    private TributeToTheWild(final TributeToTheWild card) {
         super(card);
     }
 

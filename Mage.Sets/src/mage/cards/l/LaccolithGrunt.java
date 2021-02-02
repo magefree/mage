@@ -37,7 +37,7 @@ public final class LaccolithGrunt extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LaccolithGrunt(final LaccolithGrunt card) {
+    private LaccolithGrunt(final LaccolithGrunt card) {
         super(card);
     }
 

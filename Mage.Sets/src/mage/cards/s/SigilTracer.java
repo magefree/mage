@@ -47,7 +47,7 @@ public final class SigilTracer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SigilTracer(final SigilTracer card) {
+    private SigilTracer(final SigilTracer card) {
         super(card);
     }
 

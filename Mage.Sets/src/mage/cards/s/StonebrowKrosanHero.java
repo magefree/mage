@@ -46,7 +46,7 @@ public final class StonebrowKrosanHero extends CardImpl {
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(effect, false, filter, true));
     }
 
-    public StonebrowKrosanHero(final StonebrowKrosanHero card) {
+    private StonebrowKrosanHero(final StonebrowKrosanHero card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class AboutFace extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public AboutFace(final AboutFace card) {
+    private AboutFace(final AboutFace card) {
         super(card);
     }
 

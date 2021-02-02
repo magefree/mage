@@ -48,7 +48,7 @@ public final class ArcticNishoba extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(effect));
     }
 
-    public ArcticNishoba(final ArcticNishoba card) {
+    private ArcticNishoba(final ArcticNishoba card) {
         super(card);
     }
 

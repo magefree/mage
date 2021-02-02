@@ -25,7 +25,7 @@ public final class SlashPanther extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public SlashPanther(final SlashPanther card) {
+    private SlashPanther(final SlashPanther card) {
         super(card);
     }
 

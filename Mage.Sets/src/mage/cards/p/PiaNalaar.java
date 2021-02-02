@@ -54,7 +54,7 @@ public final class PiaNalaar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PiaNalaar(final PiaNalaar card) {
+    private PiaNalaar(final PiaNalaar card) {
         super(card);
     }
 

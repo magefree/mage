@@ -39,7 +39,7 @@ public final class OverwhelmingDenial extends CardImpl {
         addAbility(new SurgeAbility(this, "{U}{U}"));
     }
 
-    public OverwhelmingDenial(final OverwhelmingDenial card) {
+    private OverwhelmingDenial(final OverwhelmingDenial card) {
         super(card);
     }
 

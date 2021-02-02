@@ -34,7 +34,7 @@ public final class Cloudpost extends CardImpl {
         this.addAbility(new DynamicManaAbility(Mana.ColorlessMana(1), new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public Cloudpost(final Cloudpost card) {
+    private Cloudpost(final Cloudpost card) {
         super(card);
     }
 

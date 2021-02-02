@@ -39,7 +39,7 @@ public final class EladamriLordOfLeaves extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filterPermanents, true)));
     }
 
-    public EladamriLordOfLeaves(final EladamriLordOfLeaves card) {
+    private EladamriLordOfLeaves(final EladamriLordOfLeaves card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class SeaTroll extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeaTroll(final SeaTroll card) {
+    private SeaTroll(final SeaTroll card) {
         super(card);
     }
 

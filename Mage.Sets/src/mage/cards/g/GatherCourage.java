@@ -27,7 +27,7 @@ public final class GatherCourage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public GatherCourage(final GatherCourage card) {
+    private GatherCourage(final GatherCourage card) {
         super(card);
     }
 

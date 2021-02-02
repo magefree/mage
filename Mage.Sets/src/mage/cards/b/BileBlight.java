@@ -28,7 +28,7 @@ public final class BileBlight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public BileBlight(final BileBlight card) {
+    private BileBlight(final BileBlight card) {
         super(card);
     }
 

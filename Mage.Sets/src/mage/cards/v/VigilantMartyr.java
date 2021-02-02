@@ -53,7 +53,7 @@ public final class VigilantMartyr extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VigilantMartyr(final VigilantMartyr card) {
+    private VigilantMartyr(final VigilantMartyr card) {
         super(card);
     }
 

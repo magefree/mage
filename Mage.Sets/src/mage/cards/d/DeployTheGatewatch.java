@@ -27,7 +27,7 @@ public final class DeployTheGatewatch extends CardImpl {
         this.getSpellAbility().addEffect(new DeployTheGatewatchEffect());
     }
 
-    public DeployTheGatewatch(final DeployTheGatewatch card) {
+    private DeployTheGatewatch(final DeployTheGatewatch card) {
         super(card);
     }
 

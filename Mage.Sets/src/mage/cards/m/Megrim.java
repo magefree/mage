@@ -22,7 +22,7 @@ public final class Megrim extends CardImpl {
         this.addAbility(new DiscardsACardOpponentTriggeredAbility(new DamageTargetEffect(2, true, "that player"), false, SetTargetPointer.PLAYER));
     }
 
-    public Megrim(final Megrim card) {
+    private Megrim(final Megrim card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class FlailingManticore extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlailingManticore(final FlailingManticore card) {
+    private FlailingManticore(final FlailingManticore card) {
         super(card);
     }
 

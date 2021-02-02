@@ -38,7 +38,7 @@ public final class CurseOfChains extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TapEnchantedEffect(), TargetController.ANY, false));
     }
 
-    public CurseOfChains(final CurseOfChains card) {
+    private CurseOfChains(final CurseOfChains card) {
         super(card);
     }
 

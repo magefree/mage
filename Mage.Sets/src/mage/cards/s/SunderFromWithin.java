@@ -35,7 +35,7 @@ public final class SunderFromWithin extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public SunderFromWithin(final SunderFromWithin card) {
+    private SunderFromWithin(final SunderFromWithin card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class BronzeSable extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public BronzeSable(final BronzeSable card) {
+    private BronzeSable(final BronzeSable card) {
         super(card);
     }
 

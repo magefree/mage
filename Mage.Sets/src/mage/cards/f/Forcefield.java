@@ -39,7 +39,7 @@ public final class Forcefield extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ForcefieldEffect(), new GenericManaCost(1)));
     }
 
-    public Forcefield(final Forcefield card) {
+    private Forcefield(final Forcefield card) {
         super(card);
     }
 

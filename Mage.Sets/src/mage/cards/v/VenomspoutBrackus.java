@@ -49,7 +49,7 @@ public final class VenomspoutBrackus extends CardImpl {
 
     }
 
-    public VenomspoutBrackus(final VenomspoutBrackus card) {
+    private VenomspoutBrackus(final VenomspoutBrackus card) {
         super(card);
     }
 

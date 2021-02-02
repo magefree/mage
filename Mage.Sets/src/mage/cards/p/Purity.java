@@ -45,7 +45,7 @@ public final class Purity extends CardImpl {
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
     }
 
-    public Purity(final Purity card) {
+    private Purity(final Purity card) {
         super(card);
     }
 

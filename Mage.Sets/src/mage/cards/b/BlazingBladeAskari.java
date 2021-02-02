@@ -34,7 +34,7 @@ public final class BlazingBladeAskari extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(new ObjectColor(), Duration.EndOfTurn), new ManaCostsImpl("{2}")));
     }
 
-    public BlazingBladeAskari(final BlazingBladeAskari card) {
+    private BlazingBladeAskari(final BlazingBladeAskari card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class CouncilGuardian extends CardImpl {
 
     }
 
-    public CouncilGuardian(final CouncilGuardian card) {
+    private CouncilGuardian(final CouncilGuardian card) {
         super(card);
     }
 

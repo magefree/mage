@@ -45,7 +45,7 @@ public final class DivinityOfPride extends CardImpl {
                         "{this} gets +4/+4 as long as you have 25 or more life")));
     }
 
-    public DivinityOfPride(final DivinityOfPride card) {
+    private DivinityOfPride(final DivinityOfPride card) {
         super(card);
     }
 

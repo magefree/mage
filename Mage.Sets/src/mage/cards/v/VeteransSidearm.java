@@ -30,7 +30,7 @@ public final class VeteransSidearm extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public VeteransSidearm(final VeteransSidearm card) {
+    private VeteransSidearm(final VeteransSidearm card) {
         super(card);
     }
 

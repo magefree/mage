@@ -35,7 +35,7 @@ public final class OpenIntoWonder extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(OpenIntoWonderAdjuster.instance);
     }
 
-    public OpenIntoWonder(final OpenIntoWonder card) {
+    private OpenIntoWonder(final OpenIntoWonder card) {
         super(card);
     }
 

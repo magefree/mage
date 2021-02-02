@@ -51,7 +51,7 @@ public final class AjaniGoldmane extends CardImpl {
 
     }
 
-    public AjaniGoldmane(final AjaniGoldmane card) {
+    private AjaniGoldmane(final AjaniGoldmane card) {
         super(card);
     }
 

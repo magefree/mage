@@ -51,7 +51,7 @@ public final class TezzeretArtificeMaster extends CardImpl {
         ));
     }
 
-    public TezzeretArtificeMaster(final TezzeretArtificeMaster card) {
+    private TezzeretArtificeMaster(final TezzeretArtificeMaster card) {
         super(card);
     }
 

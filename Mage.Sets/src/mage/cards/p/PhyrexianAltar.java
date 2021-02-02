@@ -28,7 +28,7 @@ public final class PhyrexianAltar extends CardImpl {
         ));
     }
 
-    public PhyrexianAltar(final PhyrexianAltar card) {
+    private PhyrexianAltar(final PhyrexianAltar card) {
         super(card);
     }
 

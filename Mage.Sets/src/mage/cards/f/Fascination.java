@@ -30,7 +30,7 @@ public final class Fascination extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public Fascination(final Fascination card) {
+    private Fascination(final Fascination card) {
         super(card);
     }
 

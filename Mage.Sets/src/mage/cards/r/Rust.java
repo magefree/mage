@@ -30,7 +30,7 @@ public final class Rust extends CardImpl {
         this.getSpellAbility().addTarget(new TargetActivatedAbility(filter));
     }
 
-    public Rust(final Rust card) {
+    private Rust(final Rust card) {
         super(card);
     }
 

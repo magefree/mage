@@ -43,7 +43,7 @@ public final class Farmstead extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public Farmstead(final Farmstead card) {
+    private Farmstead(final Farmstead card) {
         super(card);
     }
 

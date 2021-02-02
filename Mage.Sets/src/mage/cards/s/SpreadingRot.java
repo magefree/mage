@@ -24,7 +24,7 @@ public final class SpreadingRot extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public SpreadingRot(final SpreadingRot card) {
+    private SpreadingRot(final SpreadingRot card) {
         super(card);
     }
 

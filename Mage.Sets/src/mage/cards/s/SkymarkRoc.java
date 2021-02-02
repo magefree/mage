@@ -41,7 +41,7 @@ public final class SkymarkRoc extends CardImpl {
         this.addAbility(new SkymarkRocAbility());
     }
 
-    public SkymarkRoc(final SkymarkRoc card) {
+    private SkymarkRoc(final SkymarkRoc card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class KamiOfEmptyGraves extends CardImpl {
         this.addAbility(new SoulshiftAbility(3));
     }
 
-    public KamiOfEmptyGraves(final KamiOfEmptyGraves card) {
+    private KamiOfEmptyGraves(final KamiOfEmptyGraves card) {
         super(card);
     }
 

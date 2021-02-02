@@ -47,7 +47,7 @@ public final class ControlledInstincts extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
-    public ControlledInstincts(final ControlledInstincts card) {
+    private ControlledInstincts(final ControlledInstincts card) {
         super(card);
     }
 

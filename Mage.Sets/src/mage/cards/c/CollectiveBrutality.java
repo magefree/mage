@@ -62,7 +62,7 @@ public final class CollectiveBrutality extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public CollectiveBrutality(final CollectiveBrutality card) {
+    private CollectiveBrutality(final CollectiveBrutality card) {
         super(card);
     }
 

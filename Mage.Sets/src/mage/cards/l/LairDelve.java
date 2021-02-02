@@ -30,7 +30,7 @@ public final class LairDelve extends CardImpl {
         this.getSpellAbility().addEffect(new RevealLibraryPutIntoHandEffect(2, filter, Zone.LIBRARY));
     }
 
-    public LairDelve(final LairDelve card) {
+    private LairDelve(final LairDelve card) {
         super(card);
     }
 

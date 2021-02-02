@@ -43,7 +43,7 @@ public final class SuturePriest extends CardImpl {
 
     }
 
-    public SuturePriest(final SuturePriest card) {
+    private SuturePriest(final SuturePriest card) {
         super(card);
     }
 

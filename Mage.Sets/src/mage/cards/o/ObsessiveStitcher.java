@@ -43,7 +43,7 @@ public final class ObsessiveStitcher extends CardImpl {
 
     }
 
-    public ObsessiveStitcher(final ObsessiveStitcher card) {
+    private ObsessiveStitcher(final ObsessiveStitcher card) {
         super(card);
     }
 

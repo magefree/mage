@@ -42,7 +42,7 @@ public final class TornadoElemental extends CardImpl {
         this.addAbility(DamageAsThoughNotBlockedAbility.getInstance());
     }
 
-    public TornadoElemental(final TornadoElemental card) {
+    private TornadoElemental(final TornadoElemental card) {
         super(card);
     }
 

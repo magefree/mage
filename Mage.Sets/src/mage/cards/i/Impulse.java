@@ -24,7 +24,7 @@ public final class Impulse extends CardImpl {
 
     }
 
-    public Impulse(final Impulse card) {
+    private Impulse(final Impulse card) {
         super(card);
     }
 

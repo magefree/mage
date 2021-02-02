@@ -31,7 +31,7 @@ public final class WeldfastWingsmith extends CardImpl {
                 new FilterControlledArtifactPermanent(), "Whenever an artifact enters the battlefield under your control, {this} gains flying until end of turn."));
     }
 
-    public WeldfastWingsmith(final WeldfastWingsmith card) {
+    private WeldfastWingsmith(final WeldfastWingsmith card) {
         super(card);
     }
 

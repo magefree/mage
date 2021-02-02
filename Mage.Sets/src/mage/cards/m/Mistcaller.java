@@ -38,7 +38,7 @@ public final class Mistcaller extends CardImpl {
         ), new CreatureWasCastWatcher());
     }
 
-    public Mistcaller(final Mistcaller card) {
+    private Mistcaller(final Mistcaller card) {
         super(card);
     }
 

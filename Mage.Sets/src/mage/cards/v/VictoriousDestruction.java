@@ -35,7 +35,7 @@ public final class VictoriousDestruction extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(1));
     }
 
-    public VictoriousDestruction(final VictoriousDestruction card) {
+    private VictoriousDestruction(final VictoriousDestruction card) {
         super(card);
     }
 

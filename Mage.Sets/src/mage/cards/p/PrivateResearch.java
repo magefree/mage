@@ -49,7 +49,7 @@ public final class PrivateResearch extends CardImpl {
 
     }
 
-    public PrivateResearch(final PrivateResearch card) {
+    private PrivateResearch(final PrivateResearch card) {
         super(card);
     }
 

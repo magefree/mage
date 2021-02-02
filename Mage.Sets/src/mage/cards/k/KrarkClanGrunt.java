@@ -42,7 +42,7 @@ public final class KrarkClanGrunt extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KrarkClanGrunt(final KrarkClanGrunt card) {
+    private KrarkClanGrunt(final KrarkClanGrunt card) {
         super(card);
     }
 

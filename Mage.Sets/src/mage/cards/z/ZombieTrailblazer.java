@@ -55,7 +55,7 @@ public final class ZombieTrailblazer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZombieTrailblazer(final ZombieTrailblazer card) {
+    private ZombieTrailblazer(final ZombieTrailblazer card) {
         super(card);
     }
 

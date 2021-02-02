@@ -31,7 +31,7 @@ public final class CyclopeanSnare extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CyclopeanSnare(final CyclopeanSnare card) {
+    private CyclopeanSnare(final CyclopeanSnare card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class LambholtElder extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
-    public LambholtElder(final LambholtElder card) {
+    private LambholtElder(final LambholtElder card) {
         super(card);
     }
 

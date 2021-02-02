@@ -48,7 +48,7 @@ public final class MidnightReaper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MidnightReaper(final MidnightReaper card) {
+    private MidnightReaper(final MidnightReaper card) {
         super(card);
     }
 

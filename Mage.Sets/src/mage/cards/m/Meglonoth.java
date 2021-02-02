@@ -39,7 +39,7 @@ public final class Meglonoth extends CardImpl {
 
     }
 
-    public Meglonoth(final Meglonoth card) {
+    private Meglonoth(final Meglonoth card) {
         super(card);
     }
 

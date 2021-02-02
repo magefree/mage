@@ -41,7 +41,7 @@ public final class FatalAttraction extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageAttachedEffect(4), TargetController.YOU, false));
     }
 
-    public FatalAttraction(final FatalAttraction card) {
+    private FatalAttraction(final FatalAttraction card) {
         super(card);
     }
 

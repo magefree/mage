@@ -29,7 +29,7 @@ public final class SurvivalCache extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public SurvivalCache(final SurvivalCache card) {
+    private SurvivalCache(final SurvivalCache card) {
         super(card);
     }
 

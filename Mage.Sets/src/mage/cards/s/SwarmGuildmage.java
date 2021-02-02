@@ -53,7 +53,7 @@ public final class SwarmGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SwarmGuildmage(final SwarmGuildmage card) {
+    private SwarmGuildmage(final SwarmGuildmage card) {
         super(card);
     }
 

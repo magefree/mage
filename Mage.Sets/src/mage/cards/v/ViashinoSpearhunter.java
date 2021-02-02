@@ -26,7 +26,7 @@ public final class ViashinoSpearhunter extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public ViashinoSpearhunter(final ViashinoSpearhunter card) {
+    private ViashinoSpearhunter(final ViashinoSpearhunter card) {
         super(card);
     }
 

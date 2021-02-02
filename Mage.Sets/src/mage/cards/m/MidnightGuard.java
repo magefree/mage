@@ -36,7 +36,7 @@ public final class MidnightGuard extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(new UntapSourceEffect(), filter));
     }
 
-    public MidnightGuard(final MidnightGuard card) {
+    private MidnightGuard(final MidnightGuard card) {
         super(card);
     }
 

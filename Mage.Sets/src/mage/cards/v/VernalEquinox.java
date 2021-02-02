@@ -32,7 +32,7 @@ public final class VernalEquinox extends CardImpl {
 
     }
 
-    public VernalEquinox(final VernalEquinox card) {
+    private VernalEquinox(final VernalEquinox card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class Devastation extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public Devastation(final Devastation card) {
+    private Devastation(final Devastation card) {
         super(card);
     }
 

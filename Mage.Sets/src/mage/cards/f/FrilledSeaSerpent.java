@@ -34,7 +34,7 @@ public final class FrilledSeaSerpent extends CardImpl {
         ));
     }
 
-    public FrilledSeaSerpent(final FrilledSeaSerpent card) {
+    private FrilledSeaSerpent(final FrilledSeaSerpent card) {
         super(card);
     }
 

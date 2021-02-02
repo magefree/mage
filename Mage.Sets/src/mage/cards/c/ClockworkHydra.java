@@ -47,7 +47,7 @@ public final class ClockworkHydra extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true), new TapSourceCost()));
     }
 
-    public ClockworkHydra(final ClockworkHydra card) {
+    private ClockworkHydra(final ClockworkHydra card) {
         super(card);
     }
 

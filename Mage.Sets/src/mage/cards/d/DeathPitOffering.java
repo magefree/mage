@@ -37,7 +37,7 @@ public final class DeathPitOffering extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public DeathPitOffering(final DeathPitOffering card) {
+    private DeathPitOffering(final DeathPitOffering card) {
         super(card);
     }
 

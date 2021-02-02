@@ -29,7 +29,7 @@ public final class ElementalAugury extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElementalAugury(final ElementalAugury card) {
+    private ElementalAugury(final ElementalAugury card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class RitualOfTheReturned extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
     }
 
-    public RitualOfTheReturned(final RitualOfTheReturned card) {
+    private RitualOfTheReturned(final RitualOfTheReturned card) {
         super(card);
     }
 

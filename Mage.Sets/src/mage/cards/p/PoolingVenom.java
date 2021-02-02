@@ -41,7 +41,7 @@ public final class PoolingVenom extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAttachedToEffect("enchanted land"), new ManaCostsImpl("{3}{B}")));
     }
 
-    public PoolingVenom(final PoolingVenom card) {
+    private PoolingVenom(final PoolingVenom card) {
         super(card);
     }
 

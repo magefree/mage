@@ -34,7 +34,7 @@ public final class BlindingMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlindingMage(final BlindingMage card) {
+    private BlindingMage(final BlindingMage card) {
         super(card);
     }
 

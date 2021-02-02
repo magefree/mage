@@ -31,7 +31,7 @@ public final class ArmedDangerous extends SplitCard {
 
     }
 
-    public ArmedDangerous(final ArmedDangerous card) {
+    private ArmedDangerous(final ArmedDangerous card) {
         super(card);
     }
 

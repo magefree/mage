@@ -29,7 +29,7 @@ public final class BrimstoneVolley extends CardImpl {
         this.getSpellAbility().addWatcher(new MorbidWatcher());
     }
 
-    public BrimstoneVolley(final BrimstoneVolley card) {
+    private BrimstoneVolley(final BrimstoneVolley card) {
         super(card);
     }
 

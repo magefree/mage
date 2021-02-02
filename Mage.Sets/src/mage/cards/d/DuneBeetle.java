@@ -22,7 +22,7 @@ public final class DuneBeetle extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public DuneBeetle(final DuneBeetle card) {
+    private DuneBeetle(final DuneBeetle card) {
         super(card);
     }
 

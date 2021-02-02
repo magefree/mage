@@ -29,7 +29,7 @@ public final class WeightOfSpires extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WeightOfSpires(final WeightOfSpires card) {
+    private WeightOfSpires(final WeightOfSpires card) {
         super(card);
     }
 

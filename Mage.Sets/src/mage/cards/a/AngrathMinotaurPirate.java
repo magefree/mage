@@ -63,7 +63,7 @@ public final class AngrathMinotaurPirate extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public AngrathMinotaurPirate(final AngrathMinotaurPirate card) {
+    private AngrathMinotaurPirate(final AngrathMinotaurPirate card) {
         super(card);
     }
 

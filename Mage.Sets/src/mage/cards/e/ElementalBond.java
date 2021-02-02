@@ -31,7 +31,7 @@ public final class ElementalBond extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
     }
 
-    public ElementalBond(final ElementalBond card) {
+    private ElementalBond(final ElementalBond card) {
         super(card);
     }
 

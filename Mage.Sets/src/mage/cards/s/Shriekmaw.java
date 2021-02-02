@@ -52,7 +52,7 @@ public final class Shriekmaw extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{1}{B}"));
     }
 
-    public Shriekmaw(final Shriekmaw card) {
+    private Shriekmaw(final Shriekmaw card) {
         super(card);
     }
 

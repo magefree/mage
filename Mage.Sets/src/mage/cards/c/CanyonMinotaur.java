@@ -25,7 +25,7 @@ public final class CanyonMinotaur extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public CanyonMinotaur(final CanyonMinotaur card) {
+    private CanyonMinotaur(final CanyonMinotaur card) {
         super(card);
     }
 

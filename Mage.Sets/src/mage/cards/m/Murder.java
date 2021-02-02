@@ -23,7 +23,7 @@ public final class Murder extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Murder(final Murder card) {
+    private Murder(final Murder card) {
         super(card);
     }
 

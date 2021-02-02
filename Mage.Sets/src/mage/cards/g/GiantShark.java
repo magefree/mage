@@ -53,7 +53,7 @@ public final class GiantShark extends CardImpl {
                 new SacrificeSourceEffect()));
     }
 
-    public GiantShark(final GiantShark card) {
+    private GiantShark(final GiantShark card) {
         super(card);
     }
 

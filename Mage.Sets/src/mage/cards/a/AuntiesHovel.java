@@ -35,7 +35,7 @@ public final class AuntiesHovel extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public AuntiesHovel(final AuntiesHovel card) {
+    private AuntiesHovel(final AuntiesHovel card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class DefiantFalcon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DefiantFalcon(final DefiantFalcon card) {
+    private DefiantFalcon(final DefiantFalcon card) {
         super(card);
     }
 

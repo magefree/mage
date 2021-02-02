@@ -34,7 +34,7 @@ public final class UginsNexus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UginsNexusExileEffect()));
     }
 
-    public UginsNexus(final UginsNexus card) {
+    private UginsNexus(final UginsNexus card) {
         super(card);
     }
 

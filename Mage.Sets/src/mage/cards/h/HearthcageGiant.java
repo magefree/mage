@@ -52,7 +52,7 @@ public final class HearthcageGiant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HearthcageGiant(final HearthcageGiant card) {
+    private HearthcageGiant(final HearthcageGiant card) {
         super(card);
     }
 

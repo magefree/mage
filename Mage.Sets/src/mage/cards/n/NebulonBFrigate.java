@@ -41,7 +41,7 @@ public final class NebulonBFrigate extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("creatures you control")), false));
     }
 
-    public NebulonBFrigate(final NebulonBFrigate card) {
+    private NebulonBFrigate(final NebulonBFrigate card) {
         super(card);
     }
 

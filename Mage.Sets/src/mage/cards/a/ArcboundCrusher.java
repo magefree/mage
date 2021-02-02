@@ -45,7 +45,7 @@ public final class ArcboundCrusher extends CardImpl {
         this.addAbility(new ModularAbility(this, 1));
     }
 
-    public ArcboundCrusher(final ArcboundCrusher card) {
+    private ArcboundCrusher(final ArcboundCrusher card) {
         super(card);
     }
 

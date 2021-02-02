@@ -35,7 +35,7 @@ public final class CrosstownCourier extends CardImpl {
         this.addAbility(new CrosstownCourierTriggeredAbility());
     }
 
-    public CrosstownCourier(final CrosstownCourier card) {
+    private CrosstownCourier(final CrosstownCourier card) {
         super(card);
     }
 

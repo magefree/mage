@@ -35,7 +35,7 @@ public final class FrontlineDevastator extends CardImpl {
         addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0,Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
     }
 
-    public FrontlineDevastator(final FrontlineDevastator card) {
+    private FrontlineDevastator(final FrontlineDevastator card) {
         super(card);
     }
 

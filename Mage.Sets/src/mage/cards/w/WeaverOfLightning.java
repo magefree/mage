@@ -43,7 +43,7 @@ public final class WeaverOfLightning extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WeaverOfLightning(final WeaverOfLightning card) {
+    private WeaverOfLightning(final WeaverOfLightning card) {
         super(card);
     }
 

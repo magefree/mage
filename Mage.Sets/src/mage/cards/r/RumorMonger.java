@@ -39,7 +39,7 @@ public final class RumorMonger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RumorMonger(final RumorMonger card) {
+    private RumorMonger(final RumorMonger card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class Undermine extends CardImpl {
 
     }
 
-    public Undermine(final Undermine card) {
+    private Undermine(final Undermine card) {
         super(card);
     }
 

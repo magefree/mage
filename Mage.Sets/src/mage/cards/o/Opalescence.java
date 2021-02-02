@@ -28,7 +28,7 @@ public final class Opalescence extends CardImpl {
 
     }
 
-    public Opalescence(final Opalescence card) {
+    private Opalescence(final Opalescence card) {
         super(card);
     }
 

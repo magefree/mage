@@ -30,7 +30,7 @@ public final class AncientKavu extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(new ObjectColor(), Duration.EndOfTurn), new ManaCostsImpl("{2}")));
     }
 
-    public AncientKavu(final AncientKavu card) {
+    private AncientKavu(final AncientKavu card) {
         super(card);
     }
 

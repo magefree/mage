@@ -37,7 +37,7 @@ public final class WuAdmiral extends CardImpl {
             "{this} gets +1/+1 as long as an opponent controls an Island")));
     }
 
-    public WuAdmiral(final WuAdmiral card) {
+    private WuAdmiral(final WuAdmiral card) {
         super(card);
     }
 

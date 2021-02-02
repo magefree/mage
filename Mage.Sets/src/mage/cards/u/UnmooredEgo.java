@@ -34,7 +34,7 @@ public final class UnmooredEgo extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public UnmooredEgo(final UnmooredEgo card) {
+    private UnmooredEgo(final UnmooredEgo card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class FairgroundsTrumpeter extends CardImpl {
                 new FairgroundsTrumpeterWatcher());
     }
 
-    public FairgroundsTrumpeter(final FairgroundsTrumpeter card) {
+    private FairgroundsTrumpeter(final FairgroundsTrumpeter card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class KarooMeerkat extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
     }
 
-    public KarooMeerkat(final KarooMeerkat card) {
+    private KarooMeerkat(final KarooMeerkat card) {
         super(card);
     }
 

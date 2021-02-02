@@ -22,7 +22,7 @@ public final class HollowhengeBeast extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public HollowhengeBeast(final HollowhengeBeast card) {
+    private HollowhengeBeast(final HollowhengeBeast card) {
         super(card);
     }
 

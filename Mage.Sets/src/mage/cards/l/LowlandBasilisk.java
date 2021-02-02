@@ -33,7 +33,7 @@ public final class LowlandBasilisk extends CardImpl {
                 true));
     }
 
-    public LowlandBasilisk(final LowlandBasilisk card) {
+    private LowlandBasilisk(final LowlandBasilisk card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class Monsoon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Monsoon(final Monsoon card) {
+    private Monsoon(final Monsoon card) {
         super(card);
     }
 

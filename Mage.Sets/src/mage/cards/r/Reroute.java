@@ -34,7 +34,7 @@ public final class Reroute extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Reroute(final Reroute card) {
+    private Reroute(final Reroute card) {
         super(card);
     }
 

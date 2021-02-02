@@ -43,7 +43,7 @@ public final class ChargingCinderhorn extends CardImpl {
         this.addAbility(ability, new AttackedThisTurnWatcher());
     }
 
-    public ChargingCinderhorn(final ChargingCinderhorn card) {
+    private ChargingCinderhorn(final ChargingCinderhorn card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class SinisterSabotage extends CardImpl {
         this.getSpellAbility().addEffect(new SurveilEffect(1));
     }
 
-    public SinisterSabotage(final SinisterSabotage card) {
+    private SinisterSabotage(final SinisterSabotage card) {
         super(card);
     }
 

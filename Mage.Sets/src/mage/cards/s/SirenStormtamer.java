@@ -52,7 +52,7 @@ public final class SirenStormtamer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SirenStormtamer(final SirenStormtamer card) {
+    private SirenStormtamer(final SirenStormtamer card) {
         super(card);
     }
 

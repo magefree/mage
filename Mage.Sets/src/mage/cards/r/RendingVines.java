@@ -35,7 +35,7 @@ public final class RendingVines extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public RendingVines(final RendingVines card) {
+    private RendingVines(final RendingVines card) {
         super(card);
     }
 

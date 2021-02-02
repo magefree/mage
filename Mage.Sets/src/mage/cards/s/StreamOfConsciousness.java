@@ -35,7 +35,7 @@ public final class StreamOfConsciousness extends CardImpl {
 
     }
 
-    public StreamOfConsciousness(final StreamOfConsciousness card) {
+    private StreamOfConsciousness(final StreamOfConsciousness card) {
         super(card);
     }
 

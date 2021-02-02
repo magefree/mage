@@ -32,7 +32,7 @@ public final class UrDrago extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UrDragoEffect()));
     }
 
-    public UrDrago(final UrDrago card) {
+    private UrDrago(final UrDrago card) {
         super(card);
     }
 

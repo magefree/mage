@@ -31,7 +31,7 @@ public final class TreadUpon extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TreadUpon(final TreadUpon card) {
+    private TreadUpon(final TreadUpon card) {
         super(card);
     }
 

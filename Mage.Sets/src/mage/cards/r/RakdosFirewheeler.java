@@ -38,7 +38,7 @@ public final class RakdosFirewheeler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RakdosFirewheeler(final RakdosFirewheeler card) {
+    private RakdosFirewheeler(final RakdosFirewheeler card) {
         super(card);
     }
 

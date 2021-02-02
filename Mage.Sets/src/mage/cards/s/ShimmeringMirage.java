@@ -26,7 +26,7 @@ public final class ShimmeringMirage extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br><br>Draw a card"));
     }
 
-    public ShimmeringMirage(final ShimmeringMirage card) {
+    private ShimmeringMirage(final ShimmeringMirage card) {
         super(card);
     }
 

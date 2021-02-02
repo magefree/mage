@@ -26,7 +26,7 @@ public final class AncientGrudge extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{G}"), TimingRule.INSTANT));
     }
 
-    public AncientGrudge(final AncientGrudge card) {
+    private AncientGrudge(final AncientGrudge card) {
         super(card);
     }
 

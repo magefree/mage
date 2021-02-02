@@ -23,7 +23,7 @@ public final class NoxiousRevival extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInGraveyard());
     }
 
-    public NoxiousRevival(final NoxiousRevival card) {
+    private NoxiousRevival(final NoxiousRevival card) {
         super(card);
     }
 

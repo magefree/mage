@@ -31,7 +31,7 @@ public final class GrafMole extends CardImpl {
         this.addAbility(new GrafMoleTriggeredAbility());
     }
 
-    public GrafMole(final GrafMole card) {
+    private GrafMole(final GrafMole card) {
         super(card);
     }
 

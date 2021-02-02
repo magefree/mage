@@ -39,7 +39,7 @@ public final class SupplyDemand extends SplitCard {
 
     }
 
-    public SupplyDemand(final SupplyDemand card) {
+    private SupplyDemand(final SupplyDemand card) {
         super(card);
     }
 

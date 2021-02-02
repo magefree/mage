@@ -39,7 +39,7 @@ public final class Whimwader extends CardImpl {
         
     }
 
-    public Whimwader(final Whimwader card) {
+    private Whimwader(final Whimwader card) {
         super(card);
     }
 

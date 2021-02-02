@@ -37,7 +37,7 @@ public final class SustainingSpirit extends CardImpl {
 
     }
 
-    public SustainingSpirit(final SustainingSpirit card) {
+    private SustainingSpirit(final SustainingSpirit card) {
         super(card);
     }
 

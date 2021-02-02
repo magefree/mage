@@ -28,7 +28,7 @@ public final class MidnightRecovery extends CardImpl {
 
     }
 
-    public MidnightRecovery(final MidnightRecovery card) {
+    private MidnightRecovery(final MidnightRecovery card) {
         super(card);
     }
 

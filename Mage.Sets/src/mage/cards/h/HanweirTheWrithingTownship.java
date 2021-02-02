@@ -39,7 +39,7 @@ public final class HanweirTheWrithingTownship extends MeldCard {
         this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new EldraziHorrorToken(), 2, true, true), false));
     }
 
-    public HanweirTheWrithingTownship(final HanweirTheWrithingTownship card) {
+    private HanweirTheWrithingTownship(final HanweirTheWrithingTownship card) {
         super(card);
     }
 

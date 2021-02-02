@@ -48,7 +48,7 @@ public final class VonaButcherOfMagan extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VonaButcherOfMagan(final VonaButcherOfMagan card) {
+    private VonaButcherOfMagan(final VonaButcherOfMagan card) {
         super(card);
     }
 

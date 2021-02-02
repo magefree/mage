@@ -33,7 +33,7 @@ public final class EnslavedScout extends CardImpl {
                 new GenericManaCost(2)));
     }
 
-    public EnslavedScout(final EnslavedScout card) {
+    private EnslavedScout(final EnslavedScout card) {
         super(card);
     }
 

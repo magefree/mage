@@ -33,7 +33,7 @@ public final class SilburlindSnapper extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SilburlindSnapperEffect()), new SpellsCastWatcher());
     }
 
-    public SilburlindSnapper(final SilburlindSnapper card) {
+    private SilburlindSnapper(final SilburlindSnapper card) {
         super(card);
     }
 

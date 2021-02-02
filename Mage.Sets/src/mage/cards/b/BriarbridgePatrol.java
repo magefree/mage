@@ -40,7 +40,7 @@ public final class BriarbridgePatrol extends CardImpl {
 
     }
 
-    public BriarbridgePatrol(final BriarbridgePatrol card) {
+    private BriarbridgePatrol(final BriarbridgePatrol card) {
         super(card);
     }
 

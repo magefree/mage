@@ -53,7 +53,7 @@ public final class PrimordialMist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PrimordialMist(final PrimordialMist card) {
+    private PrimordialMist(final PrimordialMist card) {
         super(card);
     }
 

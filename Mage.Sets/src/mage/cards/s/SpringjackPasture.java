@@ -58,7 +58,7 @@ public final class SpringjackPasture extends CardImpl {
 
     }
 
-    public SpringjackPasture(final SpringjackPasture card) {
+    private SpringjackPasture(final SpringjackPasture card) {
         super(card);
     }
 

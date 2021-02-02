@@ -30,7 +30,7 @@ public final class ConvalescentCare extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new XorLessLifeCondition(XorLessLifeCondition.CheckType.CONTROLLER, 5), "At the beginning of your upkeep, if you have 5 or less life, you gain 3 life and draw a card."));
     }
 
-    public ConvalescentCare(final ConvalescentCare card) {
+    private ConvalescentCare(final ConvalescentCare card) {
         super(card);
     }
 

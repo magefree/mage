@@ -26,7 +26,7 @@ public final class ToweringBaloth extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{6}{G}")));
     }
 
-    public ToweringBaloth(final ToweringBaloth card) {
+    private ToweringBaloth(final ToweringBaloth card) {
         super(card);
     }
 

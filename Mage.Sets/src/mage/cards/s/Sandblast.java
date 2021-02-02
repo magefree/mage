@@ -22,7 +22,7 @@ public final class Sandblast extends CardImpl {
         getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());
     }
 
-    public Sandblast(final Sandblast card) {
+    private Sandblast(final Sandblast card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class PalaceSentinels extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect(), false));
     }
 
-    public PalaceSentinels(final PalaceSentinels card) {
+    private PalaceSentinels(final PalaceSentinels card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class AuraFinesse extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public AuraFinesse(final AuraFinesse card) {
+    private AuraFinesse(final AuraFinesse card) {
         super(card);
     }
 

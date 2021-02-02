@@ -25,7 +25,7 @@ public final class DarksteelGargoyle extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
     }
 
-    public DarksteelGargoyle(final DarksteelGargoyle card) {
+    private DarksteelGargoyle(final DarksteelGargoyle card) {
         super(card);
     }
 

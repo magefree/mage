@@ -49,7 +49,7 @@ public final class GenjuOfTheFens extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public GenjuOfTheFens(final GenjuOfTheFens card) {
+    private GenjuOfTheFens(final GenjuOfTheFens card) {
         super(card);
     }
 

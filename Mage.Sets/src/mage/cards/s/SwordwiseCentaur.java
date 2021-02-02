@@ -23,7 +23,7 @@ public final class SwordwiseCentaur extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public SwordwiseCentaur(final SwordwiseCentaur card) {
+    private SwordwiseCentaur(final SwordwiseCentaur card) {
         super(card);
     }
 

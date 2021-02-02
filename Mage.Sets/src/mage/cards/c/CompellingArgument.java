@@ -28,7 +28,7 @@ public final class CompellingArgument extends CardImpl {
 
     }
 
-    public CompellingArgument(final CompellingArgument card) {
+    private CompellingArgument(final CompellingArgument card) {
         super(card);
     }
 

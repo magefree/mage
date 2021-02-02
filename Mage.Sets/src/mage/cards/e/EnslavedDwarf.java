@@ -52,7 +52,7 @@ public final class EnslavedDwarf extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EnslavedDwarf(final EnslavedDwarf card) {
+    private EnslavedDwarf(final EnslavedDwarf card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ public final class HashepOasis extends CardImpl {
         addAbility(ability);
     }
 
-    public HashepOasis(final HashepOasis card) {
+    private HashepOasis(final HashepOasis card) {
         super(card);
     }
 

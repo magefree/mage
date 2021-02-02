@@ -41,7 +41,7 @@ public final class SquanderedResources extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new SquanderedResourcesEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public SquanderedResources(final SquanderedResources card) {
+    private SquanderedResources(final SquanderedResources card) {
         super(card);
     }
 

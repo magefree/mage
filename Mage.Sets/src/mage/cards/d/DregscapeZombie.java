@@ -26,7 +26,7 @@ public final class DregscapeZombie extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{B}")));
     }
 
-    public DregscapeZombie(final DregscapeZombie card) {
+    private DregscapeZombie(final DregscapeZombie card) {
         super(card);
     }
 

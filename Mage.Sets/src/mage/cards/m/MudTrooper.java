@@ -47,7 +47,7 @@ public final class MudTrooper extends CardImpl {
         ));
     }
 
-    public MudTrooper(final MudTrooper card) {
+    private MudTrooper(final MudTrooper card) {
         super(card);
     }
 

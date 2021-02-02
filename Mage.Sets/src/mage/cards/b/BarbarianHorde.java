@@ -22,7 +22,7 @@ public final class BarbarianHorde extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public BarbarianHorde(final BarbarianHorde card) {
+    private BarbarianHorde(final BarbarianHorde card) {
         super(card);
     }
 

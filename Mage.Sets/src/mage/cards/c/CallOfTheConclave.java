@@ -22,7 +22,7 @@ public final class CallOfTheConclave extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CentaurToken()));
     }
 
-    public CallOfTheConclave(final CallOfTheConclave card) {
+    private CallOfTheConclave(final CallOfTheConclave card) {
         super(card);
     }
 

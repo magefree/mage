@@ -33,7 +33,7 @@ public final class FrostLynx extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FrostLynx(final FrostLynx card) {
+    private FrostLynx(final FrostLynx card) {
         super(card);
     }
 

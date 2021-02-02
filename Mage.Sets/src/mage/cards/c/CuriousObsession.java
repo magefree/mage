@@ -60,7 +60,7 @@ public final class CuriousObsession extends CardImpl {
 
     }
 
-    public CuriousObsession(final CuriousObsession card) {
+    private CuriousObsession(final CuriousObsession card) {
         super(card);
     }
 

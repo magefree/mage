@@ -30,7 +30,7 @@ public final class DreadReaper extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(5), false));
     }
 
-    public DreadReaper(final DreadReaper card) {
+    private DreadReaper(final DreadReaper card) {
         super(card);
     }
 

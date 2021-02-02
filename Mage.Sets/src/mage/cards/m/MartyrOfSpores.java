@@ -52,7 +52,7 @@ public final class MartyrOfSpores extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MartyrOfSpores(final MartyrOfSpores card) {
+    private MartyrOfSpores(final MartyrOfSpores card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class CunningAdvisor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CunningAdvisor(final CunningAdvisor card) {
+    private CunningAdvisor(final CunningAdvisor card) {
         super(card);
     }
 

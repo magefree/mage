@@ -29,7 +29,7 @@ public final class TempleOfPlenty extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public TempleOfPlenty(final TempleOfPlenty card) {
+    private TempleOfPlenty(final TempleOfPlenty card) {
         super(card);
     }
 

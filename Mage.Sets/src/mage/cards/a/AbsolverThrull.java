@@ -33,7 +33,7 @@ public final class AbsolverThrull extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AbsolverThrull(final AbsolverThrull card) {
+    private AbsolverThrull(final AbsolverThrull card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class TumbleMagnet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TumbleMagnet(final TumbleMagnet card) {
+    private TumbleMagnet(final TumbleMagnet card) {
         super(card);
     }
 

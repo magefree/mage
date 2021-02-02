@@ -45,7 +45,7 @@ public final class ProteanHydra extends CardImpl {
 
     }
 
-    public ProteanHydra(final ProteanHydra card) {
+    private ProteanHydra(final ProteanHydra card) {
         super(card);
     }
 

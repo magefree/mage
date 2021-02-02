@@ -34,7 +34,7 @@ public final class LlanowarWastes extends CardImpl {
         this.addAbility(greenManaAbility);
     }
 
-    public LlanowarWastes(final LlanowarWastes card) {
+    private LlanowarWastes(final LlanowarWastes card) {
         super(card);
     }
 

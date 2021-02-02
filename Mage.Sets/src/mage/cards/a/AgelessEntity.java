@@ -32,7 +32,7 @@ public final class AgelessEntity extends CardImpl {
         this.addAbility(new GainLifeControllerTriggeredAbility(new AgelessEntityEffect(), false, true));
     }
 
-    public AgelessEntity(final AgelessEntity card) {
+    private AgelessEntity(final AgelessEntity card) {
         super(card);
     }
 

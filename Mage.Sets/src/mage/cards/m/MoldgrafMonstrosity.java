@@ -44,7 +44,7 @@ public final class MoldgrafMonstrosity extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoldgrafMonstrosity(final MoldgrafMonstrosity card) {
+    private MoldgrafMonstrosity(final MoldgrafMonstrosity card) {
         super(card);
     }
 

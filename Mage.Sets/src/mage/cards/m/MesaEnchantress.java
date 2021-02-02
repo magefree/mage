@@ -34,7 +34,7 @@ public final class MesaEnchantress extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, true));
     }
 
-    public MesaEnchantress(final MesaEnchantress card) {
+    private MesaEnchantress(final MesaEnchantress card) {
         super(card);
     }
 

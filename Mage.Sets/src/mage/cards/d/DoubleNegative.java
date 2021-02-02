@@ -29,7 +29,7 @@ public final class DoubleNegative extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(0, 2, StaticFilters.FILTER_SPELL));
     }
 
-    public DoubleNegative(final DoubleNegative card) {
+    private DoubleNegative(final DoubleNegative card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class TwinningGlass extends CardImpl {
 
     }
 
-    public TwinningGlass(final TwinningGlass card) {
+    private TwinningGlass(final TwinningGlass card) {
         super(card);
     }
 

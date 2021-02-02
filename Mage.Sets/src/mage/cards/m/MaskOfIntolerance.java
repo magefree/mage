@@ -32,7 +32,7 @@ public final class MaskOfIntolerance extends CardImpl {
             "At the beginning of each player's upkeep, if there are four or more basic land types among lands that player controls, {this} deals 3 damage to that player."));
     }
 
-    public MaskOfIntolerance(final MaskOfIntolerance card) {
+    private MaskOfIntolerance(final MaskOfIntolerance card) {
         super(card);
     }
 

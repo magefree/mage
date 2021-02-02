@@ -32,7 +32,7 @@ public final class PhyrexianBattleflies extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0,Duration.EndOfTurn), new ManaCostsImpl("{B}"), 2));
     }
 
-    public PhyrexianBattleflies(final PhyrexianBattleflies card) {
+    private PhyrexianBattleflies(final PhyrexianBattleflies card) {
         super(card);
     }
 

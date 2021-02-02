@@ -46,7 +46,7 @@ public final class SmotheringAbomination extends CardImpl {
         this.addAbility(new SmotheringAbominationTriggeredAbility());
     }
 
-    public SmotheringAbomination(final SmotheringAbomination card) {
+    private SmotheringAbomination(final SmotheringAbomination card) {
         super(card);
     }
 

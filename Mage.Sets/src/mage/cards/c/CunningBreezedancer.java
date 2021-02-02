@@ -39,7 +39,7 @@ public final class CunningBreezedancer extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), filter, false));
     }
 
-    public CunningBreezedancer(final CunningBreezedancer card) {
+    private CunningBreezedancer(final CunningBreezedancer card) {
         super(card);
     }
 

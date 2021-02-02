@@ -32,7 +32,7 @@ public final class ForgebornOreads extends CardImpl {
 
     }
 
-    public ForgebornOreads(final ForgebornOreads card) {
+    private ForgebornOreads(final ForgebornOreads card) {
         super(card);
     }
 

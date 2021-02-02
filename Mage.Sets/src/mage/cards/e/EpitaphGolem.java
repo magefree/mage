@@ -35,7 +35,7 @@ public final class EpitaphGolem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EpitaphGolem(final EpitaphGolem card) {
+    private EpitaphGolem(final EpitaphGolem card) {
         super(card);
     }
 

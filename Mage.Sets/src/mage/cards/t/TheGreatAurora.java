@@ -33,7 +33,7 @@ public final class TheGreatAurora extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public TheGreatAurora(final TheGreatAurora card) {
+    private TheGreatAurora(final TheGreatAurora card) {
         super(card);
     }
 

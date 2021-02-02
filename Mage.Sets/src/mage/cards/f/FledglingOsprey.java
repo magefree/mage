@@ -35,7 +35,7 @@ public final class FledglingOsprey extends CardImpl {
                 "{this} has flying as long as it's enchanted")));
     }
 
-    public FledglingOsprey(final FledglingOsprey card) {
+    private FledglingOsprey(final FledglingOsprey card) {
         super(card);
     }
 

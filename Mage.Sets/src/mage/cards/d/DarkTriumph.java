@@ -41,7 +41,7 @@ public final class DarkTriumph extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn));
     }
 
-    public DarkTriumph(final DarkTriumph card) {
+    private DarkTriumph(final DarkTriumph card) {
         super(card);
     }
 

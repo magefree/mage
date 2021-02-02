@@ -39,7 +39,7 @@ public final class BanishingStroke extends CardImpl {
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{W}")));
     }
 
-    public BanishingStroke(final BanishingStroke card) {
+    private BanishingStroke(final BanishingStroke card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class TarielReckonerOfSouls extends CardImpl {
 
     }
 
-    public TarielReckonerOfSouls(final TarielReckonerOfSouls card) {
+    private TarielReckonerOfSouls(final TarielReckonerOfSouls card) {
         super(card);
     }
 

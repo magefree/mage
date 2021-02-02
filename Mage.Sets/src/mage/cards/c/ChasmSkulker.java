@@ -42,7 +42,7 @@ public final class ChasmSkulker extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ChasmSkulkerEffect(), false));
     }
 
-    public ChasmSkulker(final ChasmSkulker card) {
+    private ChasmSkulker(final ChasmSkulker card) {
         super(card);
     }
 

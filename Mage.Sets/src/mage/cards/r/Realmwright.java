@@ -36,7 +36,7 @@ public final class Realmwright extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RealmwrightEffect()));
     }
 
-    public Realmwright(final Realmwright card) {
+    private Realmwright(final Realmwright card) {
         super(card);
     }
 

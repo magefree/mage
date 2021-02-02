@@ -23,7 +23,7 @@ public final class SwabGoblin extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public SwabGoblin(final SwabGoblin card) {
+    private SwabGoblin(final SwabGoblin card) {
         super(card);
     }
 

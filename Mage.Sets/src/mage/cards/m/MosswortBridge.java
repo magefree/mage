@@ -42,7 +42,7 @@ public final class MosswortBridge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MosswortBridge(final MosswortBridge card) {
+    private MosswortBridge(final MosswortBridge card) {
         super(card);
     }
 

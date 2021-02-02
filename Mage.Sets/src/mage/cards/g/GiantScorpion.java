@@ -25,7 +25,7 @@ public final class GiantScorpion extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public GiantScorpion(final GiantScorpion card) {
+    private GiantScorpion(final GiantScorpion card) {
         super(card);
     }
 

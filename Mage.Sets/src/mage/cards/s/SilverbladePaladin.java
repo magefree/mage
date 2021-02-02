@@ -35,7 +35,7 @@ public final class SilverbladePaladin extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(DoubleStrikeAbility.getInstance(), ruleText)));
     }
 
-    public SilverbladePaladin(final SilverbladePaladin card) {
+    private SilverbladePaladin(final SilverbladePaladin card) {
         super(card);
     }
 

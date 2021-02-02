@@ -30,7 +30,7 @@ public final class ThrabenMilitia extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public ThrabenMilitia(final ThrabenMilitia card) {
+    private ThrabenMilitia(final ThrabenMilitia card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class OonaQueenOfTheFae extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OonaQueenOfTheFae(final OonaQueenOfTheFae card) {
+    private OonaQueenOfTheFae(final OonaQueenOfTheFae card) {
         super(card);
     }
 

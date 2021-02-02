@@ -37,7 +37,7 @@ public final class MaChaoWesternWarrior extends CardImpl {
         this.addAbility(new AttacksAloneTriggeredAbility(effect));
     }
 
-    public MaChaoWesternWarrior(final MaChaoWesternWarrior card) {
+    private MaChaoWesternWarrior(final MaChaoWesternWarrior card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class PyrostaticPillar extends CardImpl {
         this.addAbility(new PyrostaticPillarTriggeredAbility());
     }
 
-    public PyrostaticPillar(final PyrostaticPillar card) {
+    private PyrostaticPillar(final PyrostaticPillar card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class HauntingWind extends CardImpl {
         this.addAbility(new HauntingWindTriggeredAbility());
     }
 
-    public HauntingWind(final HauntingWind card) {
+    private HauntingWind(final HauntingWind card) {
         super(card);
     }
 

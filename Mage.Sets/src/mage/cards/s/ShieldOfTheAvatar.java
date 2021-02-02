@@ -37,7 +37,7 @@ public final class ShieldOfTheAvatar extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public ShieldOfTheAvatar(final ShieldOfTheAvatar card) {
+    private ShieldOfTheAvatar(final ShieldOfTheAvatar card) {
         super(card);
     }
 

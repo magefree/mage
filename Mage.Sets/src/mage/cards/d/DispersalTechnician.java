@@ -33,7 +33,7 @@ public final class DispersalTechnician extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DispersalTechnician(final DispersalTechnician card) {
+    private DispersalTechnician(final DispersalTechnician card) {
         super(card);
     }
 

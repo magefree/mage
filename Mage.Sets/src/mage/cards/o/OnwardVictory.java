@@ -35,7 +35,7 @@ public final class OnwardVictory extends SplitCard {
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public OnwardVictory(final OnwardVictory card) {
+    private OnwardVictory(final OnwardVictory card) {
         super(card);
     }
 

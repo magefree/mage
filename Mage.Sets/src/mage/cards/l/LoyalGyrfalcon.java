@@ -51,7 +51,7 @@ public final class LoyalGyrfalcon extends CardImpl {
         
     }
 
-    public LoyalGyrfalcon(final LoyalGyrfalcon card) {
+    private LoyalGyrfalcon(final LoyalGyrfalcon card) {
         super(card);
     }
 

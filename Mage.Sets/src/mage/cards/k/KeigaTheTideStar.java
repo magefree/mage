@@ -39,7 +39,7 @@ public final class KeigaTheTideStar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KeigaTheTideStar(final KeigaTheTideStar card) {
+    private KeigaTheTideStar(final KeigaTheTideStar card) {
         super(card);
     }
 

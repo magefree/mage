@@ -27,7 +27,7 @@ public final class Remand extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Remand(final Remand card) {
+    private Remand(final Remand card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class KnowledgeVault extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.GRAVEYARD), false));
     }
 
-    public KnowledgeVault(final KnowledgeVault card) {
+    private KnowledgeVault(final KnowledgeVault card) {
         super(card);
     }
 

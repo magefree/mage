@@ -32,7 +32,7 @@ public final class DragonEgg extends CardImpl {
 
     }
 
-    public DragonEgg(final DragonEgg card) {
+    private DragonEgg(final DragonEgg card) {
         super(card);
     }
 

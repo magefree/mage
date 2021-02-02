@@ -31,7 +31,7 @@ public final class MonCalamariCruiser extends CardImpl {
 
     }
 
-    public MonCalamariCruiser(final MonCalamariCruiser card) {
+    private MonCalamariCruiser(final MonCalamariCruiser card) {
         super(card);
     }
 

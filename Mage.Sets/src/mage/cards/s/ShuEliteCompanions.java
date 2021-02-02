@@ -26,7 +26,7 @@ public final class ShuEliteCompanions extends CardImpl {
         this.addAbility(HorsemanshipAbility.getInstance());
     }
 
-    public ShuEliteCompanions(final ShuEliteCompanions card) {
+    private ShuEliteCompanions(final ShuEliteCompanions card) {
         super(card);
     }
 

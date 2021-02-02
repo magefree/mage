@@ -30,7 +30,7 @@ public final class DuskmantleProwler extends CardImpl {
         this.addAbility(new ExaltedAbility());
     }
 
-    public DuskmantleProwler(final DuskmantleProwler card) {
+    private DuskmantleProwler(final DuskmantleProwler card) {
         super(card);
     }
 

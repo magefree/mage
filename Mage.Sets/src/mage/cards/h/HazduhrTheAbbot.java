@@ -51,7 +51,7 @@ public final class HazduhrTheAbbot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HazduhrTheAbbot(final HazduhrTheAbbot card) {
+    private HazduhrTheAbbot(final HazduhrTheAbbot card) {
         super(card);
     }
 

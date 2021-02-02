@@ -27,7 +27,7 @@ public final class DivinePresence extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DivinePresenceEffect()));
     }
 
-    public DivinePresence(final DivinePresence card) {
+    private DivinePresence(final DivinePresence card) {
         super(card);
     }
 

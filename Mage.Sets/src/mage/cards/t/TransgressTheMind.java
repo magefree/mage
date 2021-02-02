@@ -38,7 +38,7 @@ public final class TransgressTheMind extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public TransgressTheMind(final TransgressTheMind card) {
+    private TransgressTheMind(final TransgressTheMind card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class DesertOfTheMindful extends CardImpl {
 
     }
 
-    public DesertOfTheMindful(final DesertOfTheMindful card) {
+    private DesertOfTheMindful(final DesertOfTheMindful card) {
         super(card);
     }
 

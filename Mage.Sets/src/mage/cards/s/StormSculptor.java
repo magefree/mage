@@ -33,7 +33,7 @@ public final class StormSculptor extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent())));
     }
 
-    public StormSculptor(final StormSculptor card) {
+    private StormSculptor(final StormSculptor card) {
         super(card);
     }
 

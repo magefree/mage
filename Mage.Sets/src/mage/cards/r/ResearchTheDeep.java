@@ -23,7 +23,7 @@ public final class ResearchTheDeep extends CardImpl {
         this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());
     }
 
-    public ResearchTheDeep(final ResearchTheDeep card) {
+    private ResearchTheDeep(final ResearchTheDeep card) {
         super(card);
     }
 

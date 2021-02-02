@@ -37,7 +37,7 @@ public final class MercilessEviction extends CardImpl {
         this.getSpellAbility().addMode(mode3);
     }
 
-    public MercilessEviction(final MercilessEviction card) {
+    private MercilessEviction(final MercilessEviction card) {
         super(card);
     }
 

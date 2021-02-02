@@ -28,7 +28,7 @@ public final class HurloonShaman extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new SacrificeAllEffect(new FilterControlledLandPermanent("land"))));
     }
 
-    public HurloonShaman(final HurloonShaman card) {
+    private HurloonShaman(final HurloonShaman card) {
         super(card);
     }
 

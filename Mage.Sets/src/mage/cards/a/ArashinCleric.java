@@ -28,7 +28,7 @@ public final class ArashinCleric extends CardImpl {
 
     }
 
-    public ArashinCleric(final ArashinCleric card) {
+    private ArashinCleric(final ArashinCleric card) {
         super(card);
     }
 

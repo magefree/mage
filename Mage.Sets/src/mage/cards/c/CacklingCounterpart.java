@@ -27,7 +27,7 @@ public final class CacklingCounterpart extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{U}{U}"), TimingRule.INSTANT));
     }
 
-    public CacklingCounterpart(final CacklingCounterpart card) {
+    private CacklingCounterpart(final CacklingCounterpart card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class MasteryOfTheUnseen extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ManifestEffect(1), new ManaCostsImpl("{3}{W}")));
     }
 
-    public MasteryOfTheUnseen(final MasteryOfTheUnseen card) {
+    private MasteryOfTheUnseen(final MasteryOfTheUnseen card) {
         super(card);
     }
 

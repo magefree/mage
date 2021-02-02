@@ -24,7 +24,7 @@ public final class Redirect extends CardImpl {
         this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect());
     }
 
-    public Redirect(final Redirect card) {
+    private Redirect(final Redirect card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class Aboroth extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new AborothCost()));
     }
 
-    public Aboroth(final Aboroth card) {
+    private Aboroth(final Aboroth card) {
         super(card);
     }
 

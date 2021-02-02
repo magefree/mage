@@ -44,7 +44,7 @@ public final class StormFleetSwashbuckler extends CardImpl {
 
     }
 
-    public StormFleetSwashbuckler(final StormFleetSwashbuckler card) {
+    private StormFleetSwashbuckler(final StormFleetSwashbuckler card) {
         super(card);
     }
 

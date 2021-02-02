@@ -33,7 +33,7 @@ public final class DragonBroodmother extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new DragonBroodmotherDragonToken()), TargetController.ANY, false));
     }
 
-    public DragonBroodmother(final DragonBroodmother card) {
+    private DragonBroodmother(final DragonBroodmother card) {
         super(card);
     }
 

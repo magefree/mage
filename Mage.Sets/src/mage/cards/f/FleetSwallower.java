@@ -34,7 +34,7 @@ public final class FleetSwallower extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FleetSwallower(final FleetSwallower card) {
+    private FleetSwallower(final FleetSwallower card) {
         super(card);
     }
 

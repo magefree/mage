@@ -47,7 +47,7 @@ public final class SetessanTactics extends CardImpl {
                 "and gain \"{T}: This creature fights another target creature.\""));
     }
 
-    public SetessanTactics(final SetessanTactics card) {
+    private SetessanTactics(final SetessanTactics card) {
         super(card);
     }
 

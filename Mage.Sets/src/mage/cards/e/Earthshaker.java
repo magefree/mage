@@ -37,7 +37,7 @@ public final class Earthshaker extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DamageAllEffect(StaticValue.get(2) , creatureFilter), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
     }
 
-    public Earthshaker(final Earthshaker card) {
+    private Earthshaker(final Earthshaker card) {
         super(card);
     }
 

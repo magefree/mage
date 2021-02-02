@@ -33,7 +33,7 @@ public final class EnduringIdeal extends CardImpl {
 
     }
 
-    public EnduringIdeal(final EnduringIdeal card) {
+    private EnduringIdeal(final EnduringIdeal card) {
         super(card);
     }
 

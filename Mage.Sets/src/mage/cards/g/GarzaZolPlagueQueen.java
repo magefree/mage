@@ -41,7 +41,7 @@ public final class GarzaZolPlagueQueen extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
-    public GarzaZolPlagueQueen(final GarzaZolPlagueQueen card) {
+    private GarzaZolPlagueQueen(final GarzaZolPlagueQueen card) {
         super(card);
     }
 

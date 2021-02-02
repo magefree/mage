@@ -32,7 +32,7 @@ public final class BogardanRager extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BogardanRager(final BogardanRager card) {
+    private BogardanRager(final BogardanRager card) {
         super(card);
     }
 

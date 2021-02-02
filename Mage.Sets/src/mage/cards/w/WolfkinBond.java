@@ -44,7 +44,7 @@ public final class WolfkinBond extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
     }
 
-    public WolfkinBond(final WolfkinBond card) {
+    private WolfkinBond(final WolfkinBond card) {
         super(card);
     }
 

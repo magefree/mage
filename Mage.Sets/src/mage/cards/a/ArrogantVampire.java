@@ -26,7 +26,7 @@ public final class ArrogantVampire extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public ArrogantVampire(final ArrogantVampire card) {
+    private ArrogantVampire(final ArrogantVampire card) {
         super(card);
     }
 

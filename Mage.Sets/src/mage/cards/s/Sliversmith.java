@@ -35,7 +35,7 @@ public final class Sliversmith extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Sliversmith(final Sliversmith card) {
+    private Sliversmith(final Sliversmith card) {
         super(card);
     }
 

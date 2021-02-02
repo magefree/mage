@@ -47,7 +47,7 @@ public final class KavuMonarch extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter2));
     }
 
-    public KavuMonarch(final KavuMonarch card) {
+    private KavuMonarch(final KavuMonarch card) {
         super(card);
     }
 

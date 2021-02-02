@@ -38,7 +38,7 @@ public final class SingingTree extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SingingTree(final SingingTree card) {
+    private SingingTree(final SingingTree card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class BrassGnat extends CardImpl {
                 false));
     }
 
-    public BrassGnat(final BrassGnat card) {
+    private BrassGnat(final BrassGnat card) {
         super(card);
     }
 

@@ -63,7 +63,7 @@ public final class GateToTheAfterlife extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GateToTheAfterlife(final GateToTheAfterlife card) {
+    private GateToTheAfterlife(final GateToTheAfterlife card) {
         super(card);
     }
 

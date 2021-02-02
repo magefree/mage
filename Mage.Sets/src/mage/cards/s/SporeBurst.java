@@ -23,7 +23,7 @@ public final class SporeBurst extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), new DomainValue()));
     }
 
-    public SporeBurst(final SporeBurst card) {
+    private SporeBurst(final SporeBurst card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class ThunderclapWyvern extends CardImpl {
 
     }
 
-    public ThunderclapWyvern(final ThunderclapWyvern card) {
+    private ThunderclapWyvern(final ThunderclapWyvern card) {
         super(card);
     }
 

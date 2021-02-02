@@ -35,7 +35,7 @@ public final class RuthlessCullblade extends CardImpl {
                 "{this} gets +2/+1 as long as an opponent has 10 or less life.")));
     }
 
-    public RuthlessCullblade(final RuthlessCullblade card) {
+    private RuthlessCullblade(final RuthlessCullblade card) {
         super(card);
     }
 

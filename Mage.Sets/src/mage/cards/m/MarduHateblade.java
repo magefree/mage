@@ -33,7 +33,7 @@ public final class MarduHateblade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
-    public MarduHateblade(final MarduHateblade card) {
+    private MarduHateblade(final MarduHateblade card) {
         super(card);
     }
 

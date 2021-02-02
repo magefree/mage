@@ -39,7 +39,7 @@ public final class Grounded extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LoseAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public Grounded(final Grounded card) {
+    private Grounded(final Grounded card) {
         super(card);
     }
 

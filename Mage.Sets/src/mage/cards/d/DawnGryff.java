@@ -25,7 +25,7 @@ public final class DawnGryff extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public DawnGryff(final DawnGryff card) {
+    private DawnGryff(final DawnGryff card) {
         super(card);
     }
 

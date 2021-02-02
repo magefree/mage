@@ -37,7 +37,7 @@ public final class Cursecatcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Cursecatcher(final Cursecatcher card) {
+    private Cursecatcher(final Cursecatcher card) {
         super(card);
     }
 

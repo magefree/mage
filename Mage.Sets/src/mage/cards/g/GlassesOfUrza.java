@@ -27,7 +27,7 @@ public final class GlassesOfUrza extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GlassesOfUrza(final GlassesOfUrza card) {
+    private GlassesOfUrza(final GlassesOfUrza card) {
         super(card);
     }
 

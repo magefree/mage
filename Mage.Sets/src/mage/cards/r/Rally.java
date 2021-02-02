@@ -23,7 +23,7 @@ public final class Rally extends CardImpl {
             new FilterBlockingCreature("blocking creatures"), false));
     }
 
-    public Rally(final Rally card) {
+    private Rally(final Rally card) {
         super(card);
     }
 

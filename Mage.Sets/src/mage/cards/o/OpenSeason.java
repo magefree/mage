@@ -47,7 +47,7 @@ public final class OpenSeason extends CardImpl {
 
     }
 
-    public OpenSeason(final OpenSeason card) {
+    private OpenSeason(final OpenSeason card) {
         super(card);
     }
 

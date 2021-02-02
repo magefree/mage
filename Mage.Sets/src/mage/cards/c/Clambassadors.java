@@ -36,7 +36,7 @@ public final class Clambassadors extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new ClambassadorsEffect(), false, true));
     }
 
-    public Clambassadors(final Clambassadors card) {
+    private Clambassadors(final Clambassadors card) {
         super(card);
     }
 

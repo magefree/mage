@@ -26,7 +26,7 @@ public final class HammerDropper extends CardImpl {
         this.addAbility(new MentorAbility());
     }
 
-    public HammerDropper(final HammerDropper card) {
+    private HammerDropper(final HammerDropper card) {
         super(card);
     }
 

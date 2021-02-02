@@ -28,7 +28,7 @@ public final class BlazingHope extends CardImpl {
         this.getSpellAbility().addTarget(new BlazingHopeTarget());
     }
 
-    public BlazingHope(final BlazingHope card) {
+    private BlazingHope(final BlazingHope card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class NeverHappened extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public NeverHappened(final NeverHappened card) {
+    private NeverHappened(final NeverHappened card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class TrueheartTwins extends CardImpl {
         this.addAbility(new ExertCreatureControllerTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn)));
     }
 
-    public TrueheartTwins(final TrueheartTwins card) {
+    private TrueheartTwins(final TrueheartTwins card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class SkyclawThrash extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new SkyclawThrashEffect(), false));
     }
 
-    public SkyclawThrash(final SkyclawThrash card) {
+    private SkyclawThrash(final SkyclawThrash card) {
         super(card);
     }
 

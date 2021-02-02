@@ -37,7 +37,7 @@ public final class GoblinFestival extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinFestival(final GoblinFestival card) {
+    private GoblinFestival(final GoblinFestival card) {
         super(card);
     }
 

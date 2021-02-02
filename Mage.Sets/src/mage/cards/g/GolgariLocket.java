@@ -36,7 +36,7 @@ public final class GolgariLocket extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GolgariLocket(final GolgariLocket card) {
+    private GolgariLocket(final GolgariLocket card) {
         super(card);
     }
 

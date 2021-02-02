@@ -30,7 +30,7 @@ public final class BargingSergeant extends CardImpl {
         this.addAbility(new MentorAbility());
     }
 
-    public BargingSergeant(final BargingSergeant card) {
+    private BargingSergeant(final BargingSergeant card) {
         super(card);
     }
 

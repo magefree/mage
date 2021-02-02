@@ -23,7 +23,7 @@ public final class NecrogenMists extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(1), TargetController.ANY, false));
     }
 
-    public NecrogenMists(final NecrogenMists card) {
+    private NecrogenMists(final NecrogenMists card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class EliminateTheCompetition extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(EliminateTheCompetitionAdjuster.instance);
     }
 
-    public EliminateTheCompetition(final EliminateTheCompetition card) {
+    private EliminateTheCompetition(final EliminateTheCompetition card) {
         super(card);
     }
 

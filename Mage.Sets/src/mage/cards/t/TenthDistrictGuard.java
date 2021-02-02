@@ -34,7 +34,7 @@ public final class TenthDistrictGuard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TenthDistrictGuard(final TenthDistrictGuard card) {
+    private TenthDistrictGuard(final TenthDistrictGuard card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class PredatorFlagship extends CardImpl {
         this.addAbility(ability);    
     }
 
-    public PredatorFlagship(final PredatorFlagship card) {
+    private PredatorFlagship(final PredatorFlagship card) {
         super(card);
     }
 

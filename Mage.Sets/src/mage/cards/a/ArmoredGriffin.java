@@ -29,7 +29,7 @@ public final class ArmoredGriffin extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public ArmoredGriffin(final ArmoredGriffin card) {
+    private ArmoredGriffin(final ArmoredGriffin card) {
         super(card);
     }
 

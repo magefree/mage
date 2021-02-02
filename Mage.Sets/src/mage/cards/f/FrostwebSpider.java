@@ -51,7 +51,7 @@ public final class FrostwebSpider extends CardImpl {
         this.addAbility(new FrostwebSpiderTriggeredAbility(effect, filter, false));
     }
 
-    public FrostwebSpider(final FrostwebSpider card) {
+    private FrostwebSpider(final FrostwebSpider card) {
         super(card);
     }
 

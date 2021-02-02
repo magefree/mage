@@ -25,7 +25,7 @@ public final class Rewind extends CardImpl {
         this.getSpellAbility().addEffect(new UntapLandsEffect(4));
     }
 
-    public Rewind(final Rewind card) {
+    private Rewind(final Rewind card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ public final class DwarvenSeaClan extends CardImpl {
         addAbility(ability);
     }
 
-    public DwarvenSeaClan(final DwarvenSeaClan card) {
+    private DwarvenSeaClan(final DwarvenSeaClan card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class JacesSanctum extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new ScryEffect(1), filter2, false));
     }
 
-    public JacesSanctum(final JacesSanctum card) {
+    private JacesSanctum(final JacesSanctum card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class MeteorCrater extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new MeteorCraterEffect(), new TapSourceCost()));
     }
 
-    public MeteorCrater(final MeteorCrater card) {
+    private MeteorCrater(final MeteorCrater card) {
         super(card);
     }
 

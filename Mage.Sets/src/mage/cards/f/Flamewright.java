@@ -53,7 +53,7 @@ public final class Flamewright extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Flamewright(final Flamewright card) {
+    private Flamewright(final Flamewright card) {
         super(card);
     }
 

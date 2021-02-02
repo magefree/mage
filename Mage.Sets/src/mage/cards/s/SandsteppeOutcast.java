@@ -38,7 +38,7 @@ public final class SandsteppeOutcast extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SandsteppeOutcast(final SandsteppeOutcast card) {
+    private SandsteppeOutcast(final SandsteppeOutcast card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class WolfPack extends CardImpl {
         this.addAbility(DamageAsThoughNotBlockedAbility.getInstance());
     }
 
-    public WolfPack(final WolfPack card) {
+    private WolfPack(final WolfPack card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class JettingGlasskite extends CardImpl {
 
     }
 
-    public JettingGlasskite(final JettingGlasskite card) {
+    private JettingGlasskite(final JettingGlasskite card) {
         super(card);
     }
 

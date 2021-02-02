@@ -37,7 +37,7 @@ public final class BogGnarr extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), filter, false));
     }
 
-    public BogGnarr(final BogGnarr card) {
+    private BogGnarr(final BogGnarr card) {
         super(card);
     }
 

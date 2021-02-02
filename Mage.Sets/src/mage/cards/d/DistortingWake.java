@@ -30,7 +30,7 @@ public final class DistortingWake extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(DistortingWakeAdjuster.instance);
     }
 
-    public DistortingWake(final DistortingWake card) {
+    private DistortingWake(final DistortingWake card) {
         super(card);
     }
 

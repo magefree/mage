@@ -46,7 +46,7 @@ public final class DiplomaticEscort extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DiplomaticEscort(final DiplomaticEscort card) {
+    private DiplomaticEscort(final DiplomaticEscort card) {
         super(card);
     }
 

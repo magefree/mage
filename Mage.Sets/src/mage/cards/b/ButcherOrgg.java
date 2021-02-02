@@ -26,7 +26,7 @@ public final class ButcherOrgg extends CardImpl {
         this.addAbility(ControllerDivideCombatDamageAbility.getInstance());
     }
 
-    public ButcherOrgg(final ButcherOrgg card) {
+    private ButcherOrgg(final ButcherOrgg card) {
         super(card);
     }
 

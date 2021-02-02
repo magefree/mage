@@ -27,7 +27,7 @@ public final class FieryImpulse extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FieryImpulse(final FieryImpulse card) {
+    private FieryImpulse(final FieryImpulse card) {
         super(card);
     }
 

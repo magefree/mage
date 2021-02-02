@@ -29,7 +29,7 @@ public final class CloudCrusader extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public CloudCrusader(final CloudCrusader card) {
+    private CloudCrusader(final CloudCrusader card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class Transmogrify extends CardImpl {
         this.getSpellAbility().addEffect(new TransmogrifyEffect());
     }
 
-    public Transmogrify(final Transmogrify card) {
+    private Transmogrify(final Transmogrify card) {
         super(card);
     }
 

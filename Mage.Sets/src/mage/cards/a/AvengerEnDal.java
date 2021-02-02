@@ -42,7 +42,7 @@ public final class AvengerEnDal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AvengerEnDal(final AvengerEnDal card) {
+    private AvengerEnDal(final AvengerEnDal card) {
         super(card);
     }
 

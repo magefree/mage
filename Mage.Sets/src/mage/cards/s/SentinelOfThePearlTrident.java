@@ -52,7 +52,7 @@ public final class SentinelOfThePearlTrident extends CardImpl {
         this.addAbility(etbAbility);
     }
 
-    public SentinelOfThePearlTrident(final SentinelOfThePearlTrident card) {
+    private SentinelOfThePearlTrident(final SentinelOfThePearlTrident card) {
         super(card);
     }
 

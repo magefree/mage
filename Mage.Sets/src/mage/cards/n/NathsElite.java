@@ -37,7 +37,7 @@ public final class NathsElite extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfClashWonEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()))));
     }
 
-    public NathsElite(final NathsElite card) {
+    private NathsElite(final NathsElite card) {
         super(card);
     }
 

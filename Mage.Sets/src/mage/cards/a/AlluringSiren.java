@@ -37,7 +37,7 @@ public final class AlluringSiren extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AlluringSiren(final AlluringSiren card) {
+    private AlluringSiren(final AlluringSiren card) {
         super(card);
     }
 

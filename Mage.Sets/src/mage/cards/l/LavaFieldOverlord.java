@@ -40,7 +40,7 @@ public final class LavaFieldOverlord extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LavaFieldOverlord(final LavaFieldOverlord card) {
+    private LavaFieldOverlord(final LavaFieldOverlord card) {
         super(card);
     }
 

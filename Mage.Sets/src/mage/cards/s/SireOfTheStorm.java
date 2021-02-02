@@ -29,7 +29,7 @@ public final class SireOfTheStorm extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
     }
 
-    public SireOfTheStorm(final SireOfTheStorm card) {
+    private SireOfTheStorm(final SireOfTheStorm card) {
         super(card);
     }
 

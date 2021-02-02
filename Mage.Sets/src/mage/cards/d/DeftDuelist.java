@@ -28,7 +28,7 @@ public final class DeftDuelist extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public DeftDuelist(final DeftDuelist card) {
+    private DeftDuelist(final DeftDuelist card) {
         super(card);
     }
 

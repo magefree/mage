@@ -32,7 +32,7 @@ public final class VolcanicEruption extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(VolcanicEruptionAdjuster.instance);
     }
 
-    public VolcanicEruption(final VolcanicEruption card) {
+    private VolcanicEruption(final VolcanicEruption card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class VampireNighthawk extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public VampireNighthawk(final VampireNighthawk card) {
+    private VampireNighthawk(final VampireNighthawk card) {
         super(card);
     }
 

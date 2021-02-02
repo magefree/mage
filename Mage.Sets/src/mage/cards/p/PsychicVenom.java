@@ -40,7 +40,7 @@ public final class PsychicVenom extends CardImpl {
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(effect, "enchanted land"));
     }
 
-    public PsychicVenom(final PsychicVenom card) {
+    private PsychicVenom(final PsychicVenom card) {
         super(card);
     }
 

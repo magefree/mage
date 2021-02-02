@@ -36,7 +36,7 @@ public final class KeeperOfTresserhorn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KeeperOfTresserhorn(final KeeperOfTresserhorn card) {
+    private KeeperOfTresserhorn(final KeeperOfTresserhorn card) {
         super(card);
     }
 

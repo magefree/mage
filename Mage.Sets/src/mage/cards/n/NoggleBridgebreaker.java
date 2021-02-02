@@ -32,7 +32,7 @@ public final class NoggleBridgebreaker extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
     }
 
-    public NoggleBridgebreaker(final NoggleBridgebreaker card) {
+    private NoggleBridgebreaker(final NoggleBridgebreaker card) {
         super(card);
     }
 

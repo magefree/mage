@@ -44,7 +44,7 @@ public final class WildernessHypnotist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WildernessHypnotist(final WildernessHypnotist card) {
+    private WildernessHypnotist(final WildernessHypnotist card) {
         super(card);
     }
 

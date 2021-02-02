@@ -36,7 +36,7 @@ public final class PhyrexianDenouncer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianDenouncer(final PhyrexianDenouncer card) {
+    private PhyrexianDenouncer(final PhyrexianDenouncer card) {
         super(card);
     }
 

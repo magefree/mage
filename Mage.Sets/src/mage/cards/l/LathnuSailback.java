@@ -22,7 +22,7 @@ public final class LathnuSailback extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public LathnuSailback(final LathnuSailback card) {
+    private LathnuSailback(final LathnuSailback card) {
         super(card);
     }
 

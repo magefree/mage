@@ -29,7 +29,7 @@ public final class SimicGuildgate extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public SimicGuildgate(final SimicGuildgate card) {
+    private SimicGuildgate(final SimicGuildgate card) {
         super(card);
     }
 

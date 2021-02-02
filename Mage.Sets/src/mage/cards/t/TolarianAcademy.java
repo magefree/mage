@@ -33,7 +33,7 @@ public final class TolarianAcademy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TolarianAcademy(final TolarianAcademy card) {
+    private TolarianAcademy(final TolarianAcademy card) {
         super(card);
     }
 

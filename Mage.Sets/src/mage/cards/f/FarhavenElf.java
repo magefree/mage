@@ -31,7 +31,7 @@ public final class FarhavenElf extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true), true));
     }
 
-    public FarhavenElf(final FarhavenElf card) {
+    private FarhavenElf(final FarhavenElf card) {
         super(card);
     }
 

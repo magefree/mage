@@ -42,7 +42,7 @@ public final class RitesOfReaping extends CardImpl {
         this.getSpellAbility().addTarget(target2);
     }
 
-    public RitesOfReaping(final RitesOfReaping card) {
+    private RitesOfReaping(final RitesOfReaping card) {
         super(card);
     }
 

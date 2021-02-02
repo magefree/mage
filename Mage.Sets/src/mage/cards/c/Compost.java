@@ -32,7 +32,7 @@ public final class Compost extends CardImpl {
                 new DrawCardSourceControllerEffect(1), true, filter, TargetController.OPPONENT));
     }
 
-    public Compost(final Compost card) {
+    private Compost(final Compost card) {
         super(card);
     }
 

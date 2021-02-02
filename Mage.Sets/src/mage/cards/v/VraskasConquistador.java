@@ -49,7 +49,7 @@ public final class VraskasConquistador extends CardImpl {
                 "Whenever {this} attacks or blocks, if you control a Vraska planeswalker, target opponent loses 2 life and you gain 2 life."));
     }
 
-    public VraskasConquistador(final VraskasConquistador card) {
+    private VraskasConquistador(final VraskasConquistador card) {
         super(card);
     }
 

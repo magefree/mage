@@ -28,7 +28,7 @@ public final class GloriousEnd extends CardImpl {
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new LoseGameSourceControllerEffect(), TargetController.YOU)));
     }
 
-    public GloriousEnd(final GloriousEnd card) {
+    private GloriousEnd(final GloriousEnd card) {
         super(card);
     }
 

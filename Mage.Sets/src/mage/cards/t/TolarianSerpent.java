@@ -29,7 +29,7 @@ public final class TolarianSerpent extends CardImpl {
                 new MillCardsControllerEffect(7), false));
     }
 
-    public TolarianSerpent(final TolarianSerpent card) {
+    private TolarianSerpent(final TolarianSerpent card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class NissaWorldwaker extends CardImpl {
         this.addAbility(new LoyaltyAbility(new NissaWorldwakerSearchEffect(), -7));
     }
 
-    public NissaWorldwaker(final NissaWorldwaker card) {
+    private NissaWorldwaker(final NissaWorldwaker card) {
         super(card);
     }
 

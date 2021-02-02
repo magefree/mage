@@ -58,7 +58,7 @@ public final class ConfusionInTheRanks extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ConfusionInTheRanks(final ConfusionInTheRanks card) {
+    private ConfusionInTheRanks(final ConfusionInTheRanks card) {
         super(card);
     }
 

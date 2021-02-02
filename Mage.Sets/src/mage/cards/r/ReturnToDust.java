@@ -30,7 +30,7 @@ public final class ReturnToDust extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(1, 2, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT, false));
     }
 
-    public ReturnToDust(final ReturnToDust card) {
+    private ReturnToDust(final ReturnToDust card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class Sunweb extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
     }
 
-    public Sunweb(final Sunweb card) {
+    private Sunweb(final Sunweb card) {
         super(card);
     }
 

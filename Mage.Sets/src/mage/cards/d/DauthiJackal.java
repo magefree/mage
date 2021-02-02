@@ -40,7 +40,7 @@ public final class DauthiJackal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DauthiJackal(final DauthiJackal card) {
+    private DauthiJackal(final DauthiJackal card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class SkyshroudCondor extends CardImpl {
        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastOnlyIfYouHaveCastAnotherSpellEffect()));
     }
 
-    public SkyshroudCondor(final SkyshroudCondor card) {
+    private SkyshroudCondor(final SkyshroudCondor card) {
         super(card);
     }
 

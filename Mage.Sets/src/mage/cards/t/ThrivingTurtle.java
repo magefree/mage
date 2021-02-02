@@ -34,7 +34,7 @@ public final class ThrivingTurtle extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new PayEnergyCost(2)), false));
     }
 
-    public ThrivingTurtle(final ThrivingTurtle card) {
+    private ThrivingTurtle(final ThrivingTurtle card) {
         super(card);
     }
 

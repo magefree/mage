@@ -40,7 +40,7 @@ public final class ConfrontTheUnknown extends CardImpl {
         getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ConfrontTheUnknown(final ConfrontTheUnknown card) {
+    private ConfrontTheUnknown(final ConfrontTheUnknown card) {
         super(card);
     }
 

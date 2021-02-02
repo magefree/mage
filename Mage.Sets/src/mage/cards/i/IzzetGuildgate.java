@@ -28,7 +28,7 @@ public final class IzzetGuildgate extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public IzzetGuildgate(final IzzetGuildgate card) {
+    private IzzetGuildgate(final IzzetGuildgate card) {
         super(card);
     }
 

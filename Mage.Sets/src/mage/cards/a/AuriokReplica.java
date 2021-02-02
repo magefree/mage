@@ -39,7 +39,7 @@ public final class AuriokReplica extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AuriokReplica(final AuriokReplica card) {
+    private AuriokReplica(final AuriokReplica card) {
         super(card);
     }
 

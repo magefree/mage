@@ -33,7 +33,7 @@ public final class KessigCagebreakers extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new KessigCagebreakersEffect(), false));
     }
 
-    public KessigCagebreakers(final KessigCagebreakers card) {
+    private KessigCagebreakers(final KessigCagebreakers card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class TetsukoUmezawaFugitive extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public TetsukoUmezawaFugitive(final TetsukoUmezawaFugitive card) {
+    private TetsukoUmezawaFugitive(final TetsukoUmezawaFugitive card) {
         super(card);
     }
 

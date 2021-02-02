@@ -39,7 +39,7 @@ public final class PucasMischief extends CardImpl {
 
     }
 
-    public PucasMischief(final PucasMischief card) {
+    private PucasMischief(final PucasMischief card) {
         super(card);
     }
 

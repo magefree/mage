@@ -37,7 +37,7 @@ public final class NineRingedBo extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NineRingedBo(final NineRingedBo card) {
+    private NineRingedBo(final NineRingedBo card) {
         super(card);
     }
 

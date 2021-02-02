@@ -30,7 +30,7 @@ public final class MerfolkRaiders extends CardImpl {
         this.addAbility(PhasingAbility.getInstance());
     }
 
-    public MerfolkRaiders(final MerfolkRaiders card) {
+    private MerfolkRaiders(final MerfolkRaiders card) {
         super(card);
     }
 

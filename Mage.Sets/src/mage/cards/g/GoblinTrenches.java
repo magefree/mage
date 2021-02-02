@@ -33,7 +33,7 @@ public final class GoblinTrenches extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinTrenches(final GoblinTrenches card) {
+    private GoblinTrenches(final GoblinTrenches card) {
         super(card);
     }
 

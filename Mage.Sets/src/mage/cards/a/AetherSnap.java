@@ -30,7 +30,7 @@ public final class AetherSnap extends CardImpl {
         this.getSpellAbility().addEffect(new AetherSnapEffect());
     }
 
-    public AetherSnap(final AetherSnap card) {
+    private AetherSnap(final AetherSnap card) {
         super(card);
     }
 

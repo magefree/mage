@@ -32,7 +32,7 @@ public final class SawtoothOgre extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
-    public SawtoothOgre(final SawtoothOgre card) {
+    private SawtoothOgre(final SawtoothOgre card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class ElvenFortress extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElvenFortress(final ElvenFortress card) {
+    private ElvenFortress(final ElvenFortress card) {
         super(card);
     }
 

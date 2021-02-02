@@ -37,7 +37,7 @@ public final class ForceOfNature extends CardImpl {
 
     }
 
-    public ForceOfNature(final ForceOfNature card) {
+    private ForceOfNature(final ForceOfNature card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class ActiveVolcano extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public ActiveVolcano(final ActiveVolcano card) {
+    private ActiveVolcano(final ActiveVolcano card) {
         super(card);
     }
 

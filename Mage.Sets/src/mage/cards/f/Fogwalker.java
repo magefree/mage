@@ -40,7 +40,7 @@ public final class Fogwalker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Fogwalker(final Fogwalker card) {
+    private Fogwalker(final Fogwalker card) {
         super(card);
     }
 

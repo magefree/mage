@@ -38,7 +38,7 @@ public final class MalakirBloodwitch extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MalakirBloodwitchEffect(), false));
     }
 
-    public MalakirBloodwitch(final MalakirBloodwitch card) {
+    private MalakirBloodwitch(final MalakirBloodwitch card) {
         super(card);
     }
 

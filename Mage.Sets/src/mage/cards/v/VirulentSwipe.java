@@ -35,7 +35,7 @@ public final class VirulentSwipe extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public VirulentSwipe(final VirulentSwipe card) {
+    private VirulentSwipe(final VirulentSwipe card) {
         super(card);
     }
 

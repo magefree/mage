@@ -28,7 +28,7 @@ public final class FerventDenial extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{U}{U}"),TimingRule.INSTANT));
     }
 
-    public FerventDenial(final FerventDenial card) {
+    private FerventDenial(final FerventDenial card) {
         super(card);
     }
 

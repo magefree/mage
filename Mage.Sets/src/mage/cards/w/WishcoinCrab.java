@@ -21,7 +21,7 @@ public final class WishcoinCrab extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public WishcoinCrab(final WishcoinCrab card) {
+    private WishcoinCrab(final WishcoinCrab card) {
         super(card);
     }
 

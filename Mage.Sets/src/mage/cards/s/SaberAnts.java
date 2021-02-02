@@ -33,7 +33,7 @@ public final class SaberAnts extends CardImpl {
         this.addAbility(new DealtDamageToSourceTriggeredAbility(new SaberAntsEffect(), true, false, true));
     }
 
-    public SaberAnts(final SaberAnts card) {
+    private SaberAnts(final SaberAnts card) {
         super(card);
     }
 

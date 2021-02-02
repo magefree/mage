@@ -46,7 +46,7 @@ public final class BirthingPod extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BirthingPod(final BirthingPod card) {
+    private BirthingPod(final BirthingPod card) {
         super(card);
     }
 

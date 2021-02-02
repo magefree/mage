@@ -30,7 +30,7 @@ public final class DrippingDead extends CardImpl {
         this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new DestroyTargetEffect(true), false, true));
     }
 
-    public DrippingDead(final DrippingDead card) {
+    private DrippingDead(final DrippingDead card) {
         super(card);
     }
 

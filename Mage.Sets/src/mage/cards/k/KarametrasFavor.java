@@ -50,7 +50,7 @@ public final class KarametrasFavor extends CardImpl {
 
     }
 
-    public KarametrasFavor(final KarametrasFavor card) {
+    private KarametrasFavor(final KarametrasFavor card) {
         super(card);
     }
 

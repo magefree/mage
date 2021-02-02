@@ -38,7 +38,7 @@ public final class MoltenNursery extends CardImpl {
 
     }
 
-    public MoltenNursery(final MoltenNursery card) {
+    private MoltenNursery(final MoltenNursery card) {
         super(card);
     }
 

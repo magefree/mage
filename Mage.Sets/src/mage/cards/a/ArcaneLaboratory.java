@@ -24,7 +24,7 @@ public final class ArcaneLaboratory extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCastMoreThanOneSpellEffect(TargetController.ANY)));
     }
 
-    public ArcaneLaboratory(final ArcaneLaboratory card) {
+    private ArcaneLaboratory(final ArcaneLaboratory card) {
         super(card);
     }
 

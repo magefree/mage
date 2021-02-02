@@ -33,7 +33,7 @@ public final class ArrestersZeal extends CardImpl {
         this.getSpellAbility().addEffect(new ArrestersZealEffect());
     }
 
-    public ArrestersZeal(final ArrestersZeal card) {
+    private ArrestersZeal(final ArrestersZeal card) {
         super(card);
     }
 

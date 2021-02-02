@@ -37,7 +37,7 @@ public final class RitualOfSubdual extends CardImpl {
 
     }
 
-    public RitualOfSubdual(final RitualOfSubdual card) {
+    private RitualOfSubdual(final RitualOfSubdual card) {
         super(card);
     }
 

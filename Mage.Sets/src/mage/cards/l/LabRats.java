@@ -25,7 +25,7 @@ public final class LabRats extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new RatToken()));
     }
 
-    public LabRats(final LabRats card) {
+    private LabRats(final LabRats card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class PyromancersGauntlet extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PyromancersGauntletReplacementEffect()));
     }
 
-    public PyromancersGauntlet(final PyromancersGauntlet card) {
+    private PyromancersGauntlet(final PyromancersGauntlet card) {
         super(card);
     }
 

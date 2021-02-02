@@ -29,7 +29,7 @@ public final class TempleOfEnlightenment extends CardImpl {
         this.addAbility(new BlueManaAbility());        
     }
 
-    public TempleOfEnlightenment(final TempleOfEnlightenment card) {
+    private TempleOfEnlightenment(final TempleOfEnlightenment card) {
         super(card);
     }
 

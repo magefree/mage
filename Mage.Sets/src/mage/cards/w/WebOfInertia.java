@@ -30,7 +30,7 @@ public final class WebOfInertia extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(Zone.BATTLEFIELD, new WebOfInertiaEffect(), TargetController.OPPONENT, false, true));
     }
 
-    public WebOfInertia(final WebOfInertia card) {
+    private WebOfInertia(final WebOfInertia card) {
         super(card);
     }
 

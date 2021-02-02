@@ -31,7 +31,7 @@ public final class SeersLantern extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeersLantern(final SeersLantern card) {
+    private SeersLantern(final SeersLantern card) {
         super(card);
     }
 

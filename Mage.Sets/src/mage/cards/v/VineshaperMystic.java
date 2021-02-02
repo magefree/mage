@@ -45,7 +45,7 @@ public final class VineshaperMystic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VineshaperMystic(final VineshaperMystic card) {
+    private VineshaperMystic(final VineshaperMystic card) {
         super(card);
     }
 

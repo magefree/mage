@@ -28,7 +28,7 @@ public final class SkyhunterSkirmisher extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
     }
 
-    public SkyhunterSkirmisher(final SkyhunterSkirmisher card) {
+    private SkyhunterSkirmisher(final SkyhunterSkirmisher card) {
         super(card);
     }
 

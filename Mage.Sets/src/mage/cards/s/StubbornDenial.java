@@ -45,7 +45,7 @@ public final class StubbornDenial extends CardImpl {
         this.getSpellAbility().addHint(FerociousHint.instance);
     }
 
-    public StubbornDenial(final StubbornDenial card) {
+    private StubbornDenial(final StubbornDenial card) {
         super(card);
     }
 

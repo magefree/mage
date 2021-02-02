@@ -46,7 +46,7 @@ public final class GorgonRecluse extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{B}{B}")));
     }
 
-    public GorgonRecluse(final GorgonRecluse card) {
+    private GorgonRecluse(final GorgonRecluse card) {
         super(card);
     }
 

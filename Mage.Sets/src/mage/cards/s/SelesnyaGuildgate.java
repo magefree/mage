@@ -28,7 +28,7 @@ public final class SelesnyaGuildgate extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public SelesnyaGuildgate(final SelesnyaGuildgate card) {
+    private SelesnyaGuildgate(final SelesnyaGuildgate card) {
         super(card);
     }
 

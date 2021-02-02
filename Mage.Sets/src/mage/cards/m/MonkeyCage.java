@@ -34,7 +34,7 @@ public final class MonkeyCage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MonkeyCage(final MonkeyCage card) {
+    private MonkeyCage(final MonkeyCage card) {
         super(card);
     }
 

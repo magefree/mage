@@ -28,7 +28,7 @@ public final class FamiliarsRuse extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public FamiliarsRuse(final FamiliarsRuse card) {
+    private FamiliarsRuse(final FamiliarsRuse card) {
         super(card);
     }
 

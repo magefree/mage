@@ -40,7 +40,7 @@ public final class Conversion extends CardImpl {
 
     }
 
-    public Conversion(final Conversion card) {
+    private Conversion(final Conversion card) {
         super(card);
     }
 

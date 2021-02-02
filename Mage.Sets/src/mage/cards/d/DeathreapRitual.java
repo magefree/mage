@@ -25,7 +25,7 @@ public final class DeathreapRitual extends CardImpl {
                 TargetController.ANY, MorbidCondition.instance, true));
     }
 
-    public DeathreapRitual(final DeathreapRitual card) {
+    private DeathreapRitual(final DeathreapRitual card) {
         super(card);
     }
 

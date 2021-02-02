@@ -39,7 +39,7 @@ public final class AuthorityOfTheConsuls extends CardImpl {
                 "Whenever a creature enters the battlefield under an opponent's control, you gain 1 life."));
     }
 
-    public AuthorityOfTheConsuls(final AuthorityOfTheConsuls card) {
+    private AuthorityOfTheConsuls(final AuthorityOfTheConsuls card) {
         super(card);
     }
 

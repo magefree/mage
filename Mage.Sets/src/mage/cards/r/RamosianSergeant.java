@@ -45,7 +45,7 @@ public final class RamosianSergeant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RamosianSergeant(final RamosianSergeant card) {
+    private RamosianSergeant(final RamosianSergeant card) {
         super(card);
     }
 

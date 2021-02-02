@@ -21,7 +21,7 @@ public final class Contemplation extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(1), false));
     }
 
-    public Contemplation(final Contemplation card) {
+    private Contemplation(final Contemplation card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class DespoilerOfSouls extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DespoilerOfSouls(final DespoilerOfSouls card) {
+    private DespoilerOfSouls(final DespoilerOfSouls card) {
         super(card);
     }
 

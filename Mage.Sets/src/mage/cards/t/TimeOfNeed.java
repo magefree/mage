@@ -32,7 +32,7 @@ public final class TimeOfNeed extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(target, true));
     }
 
-    public TimeOfNeed(final TimeOfNeed card) {
+    private TimeOfNeed(final TimeOfNeed card) {
         super(card);
     }
 

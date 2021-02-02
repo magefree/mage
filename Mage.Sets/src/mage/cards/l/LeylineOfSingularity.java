@@ -30,7 +30,7 @@ public final class LeylineOfSingularity extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetSupertypeAllEffect()));
     }
 
-    public LeylineOfSingularity(final LeylineOfSingularity card) {
+    private LeylineOfSingularity(final LeylineOfSingularity card) {
         super(card);
     }
 

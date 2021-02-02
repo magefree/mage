@@ -55,7 +55,7 @@ public final class ShapeOfTheWiitigo extends CardImpl {
         this.addAbility(triggeredAbility);
     }
 
-    public ShapeOfTheWiitigo(final ShapeOfTheWiitigo card) {
+    private ShapeOfTheWiitigo(final ShapeOfTheWiitigo card) {
         super(card);
     }
 

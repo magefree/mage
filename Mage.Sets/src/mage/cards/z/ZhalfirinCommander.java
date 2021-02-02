@@ -44,7 +44,7 @@ public final class ZhalfirinCommander extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZhalfirinCommander(final ZhalfirinCommander card) {
+    private ZhalfirinCommander(final ZhalfirinCommander card) {
         super(card);
     }
 

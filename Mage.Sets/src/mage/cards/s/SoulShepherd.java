@@ -35,7 +35,7 @@ public final class SoulShepherd extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoulShepherd(final SoulShepherd card) {
+    private SoulShepherd(final SoulShepherd card) {
         super(card);
     }
 

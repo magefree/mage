@@ -31,7 +31,7 @@ public final class GluttonousSlime extends CardImpl {
         this.addAbility(new DevourAbility(DevourFactor.Devour1));
     }
 
-    public GluttonousSlime(final GluttonousSlime card) {
+    private GluttonousSlime(final GluttonousSlime card) {
         super(card);
     }
 

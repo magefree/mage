@@ -32,7 +32,7 @@ public final class MerchantScroll extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, filter), true));
     }
 
-    public MerchantScroll(final MerchantScroll card) {
+    private MerchantScroll(final MerchantScroll card) {
         super(card);
     }
 

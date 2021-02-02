@@ -26,7 +26,7 @@ public final class RockBadger extends CardImpl {
         this.addAbility(new MountainwalkAbility());
     }
 
-    public RockBadger(final RockBadger card) {
+    private RockBadger(final RockBadger card) {
         super(card);
     }
 

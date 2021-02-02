@@ -31,7 +31,7 @@ public final class Lifetap extends CardImpl {
         this.addAbility(new BecomesTappedTriggeredAbility(new GainLifeEffect(1), false, filter));
     }
 
-    public Lifetap(final Lifetap card) {
+    private Lifetap(final Lifetap card) {
         super(card);
     }
 

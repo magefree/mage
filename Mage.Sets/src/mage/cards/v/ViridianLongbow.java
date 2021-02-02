@@ -40,7 +40,7 @@ public final class ViridianLongbow extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public ViridianLongbow(final ViridianLongbow card) {
+    private ViridianLongbow(final ViridianLongbow card) {
         super(card);
     }
 

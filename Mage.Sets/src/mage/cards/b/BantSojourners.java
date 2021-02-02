@@ -38,7 +38,7 @@ public final class BantSojourners extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{W}")));
     }
 
-    public BantSojourners(final BantSojourners card) {
+    private BantSojourners(final BantSojourners card) {
         super(card);
     }
 

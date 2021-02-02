@@ -42,7 +42,7 @@ public final class SilverpeltWerewolf extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public SilverpeltWerewolf(final SilverpeltWerewolf card) {
+    private SilverpeltWerewolf(final SilverpeltWerewolf card) {
         super(card);
     }
 

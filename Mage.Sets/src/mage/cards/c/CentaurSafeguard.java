@@ -28,7 +28,7 @@ public final class CentaurSafeguard extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(3), true));
     }
 
-    public CentaurSafeguard(final CentaurSafeguard card) {
+    private CentaurSafeguard(final CentaurSafeguard card) {
         super(card);
     }
 

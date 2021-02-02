@@ -31,7 +31,7 @@ public final class IgnobleSoldier extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
-    public IgnobleSoldier(final IgnobleSoldier card) {
+    private IgnobleSoldier(final IgnobleSoldier card) {
         super(card);
     }
 

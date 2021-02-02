@@ -37,7 +37,7 @@ public final class Wispmare extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{W}"));
     }
 
-    public Wispmare(final Wispmare card) {
+    private Wispmare(final Wispmare card) {
         super(card);
     }
 

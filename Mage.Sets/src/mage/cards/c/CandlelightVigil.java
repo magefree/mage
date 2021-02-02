@@ -48,7 +48,7 @@ public final class CandlelightVigil extends CardImpl {
 
     }
 
-    public CandlelightVigil(final CandlelightVigil card) {
+    private CandlelightVigil(final CandlelightVigil card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class Festercreep extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Festercreep(final Festercreep card) {
+    private Festercreep(final Festercreep card) {
         super(card);
     }
 

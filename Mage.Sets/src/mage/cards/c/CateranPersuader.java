@@ -46,7 +46,7 @@ public final class CateranPersuader extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CateranPersuader(final CateranPersuader card) {
+    private CateranPersuader(final CateranPersuader card) {
         super(card);
     }
 

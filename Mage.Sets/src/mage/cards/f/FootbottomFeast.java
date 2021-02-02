@@ -27,7 +27,7 @@ public final class FootbottomFeast extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public FootbottomFeast(final FootbottomFeast card) {
+    private FootbottomFeast(final FootbottomFeast card) {
         super(card);
     }
 

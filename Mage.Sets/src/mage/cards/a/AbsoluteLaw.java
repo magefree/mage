@@ -27,7 +27,7 @@ public final class AbsoluteLaw extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, FILTER_PERMANENT_CREATURES, false)));
     }
 
-    public AbsoluteLaw(final AbsoluteLaw card) {
+    private AbsoluteLaw(final AbsoluteLaw card) {
         super(card);
     }
 

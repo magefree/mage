@@ -29,7 +29,7 @@ public final class ChillingGrasp extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{3}{U}")));
     }
 
-    public ChillingGrasp(final ChillingGrasp card) {
+    private ChillingGrasp(final ChillingGrasp card) {
         super(card);
     }
 

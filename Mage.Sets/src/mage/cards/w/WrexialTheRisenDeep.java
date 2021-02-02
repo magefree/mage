@@ -52,7 +52,7 @@ public final class WrexialTheRisenDeep extends CardImpl {
         this.addAbility(new WrexialTheRisenDeepTriggeredAbility());
     }
 
-    public WrexialTheRisenDeep(final WrexialTheRisenDeep card) {
+    private WrexialTheRisenDeep(final WrexialTheRisenDeep card) {
         super(card);
     }
 

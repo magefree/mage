@@ -59,7 +59,7 @@ public final class TurntimberSower extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TurntimberSower(final TurntimberSower card) {
+    private TurntimberSower(final TurntimberSower card) {
         super(card);
     }
 

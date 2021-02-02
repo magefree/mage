@@ -45,7 +45,7 @@ public final class StratusDancer extends CardImpl {
         
     }
 
-    public StratusDancer(final StratusDancer card) {
+    private StratusDancer(final StratusDancer card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class BarbarianLunatic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BarbarianLunatic(final BarbarianLunatic card) {
+    private BarbarianLunatic(final BarbarianLunatic card) {
         super(card);
     }
 

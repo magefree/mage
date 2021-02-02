@@ -43,7 +43,7 @@ public final class WakestoneGargoyle extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItDidntHaveDefenderAllEffect(Duration.EndOfTurn, filter), new ManaCostsImpl("{1}{W}") ));
     }
 
-    public WakestoneGargoyle(final WakestoneGargoyle card) {
+    private WakestoneGargoyle(final WakestoneGargoyle card) {
         super(card);
     }
 

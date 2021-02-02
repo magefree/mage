@@ -26,7 +26,7 @@ public final class YavimayaWurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public YavimayaWurm(final YavimayaWurm card) {
+    private YavimayaWurm(final YavimayaWurm card) {
         super(card);
     }
 

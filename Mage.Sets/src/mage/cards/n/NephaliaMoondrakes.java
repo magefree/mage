@@ -46,7 +46,7 @@ public final class NephaliaMoondrakes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NephaliaMoondrakes(final NephaliaMoondrakes card) {
+    private NephaliaMoondrakes(final NephaliaMoondrakes card) {
         super(card);
     }
 

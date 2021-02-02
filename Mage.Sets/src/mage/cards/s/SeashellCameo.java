@@ -22,7 +22,7 @@ public final class SeashellCameo extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public SeashellCameo(final SeashellCameo card) {
+    private SeashellCameo(final SeashellCameo card) {
         super(card);
     }
 

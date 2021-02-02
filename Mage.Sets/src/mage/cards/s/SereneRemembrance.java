@@ -30,7 +30,7 @@ public final class SereneRemembrance extends CardImpl {
 
     }
 
-    public SereneRemembrance(final SereneRemembrance card) {
+    private SereneRemembrance(final SereneRemembrance card) {
         super(card);
     }
 

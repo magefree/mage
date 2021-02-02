@@ -51,7 +51,7 @@ public final class AegisAngel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AegisAngel(final AegisAngel card) {
+    private AegisAngel(final AegisAngel card) {
         super(card);
     }
 

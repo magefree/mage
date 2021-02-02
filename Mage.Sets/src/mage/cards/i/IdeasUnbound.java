@@ -28,7 +28,7 @@ public final class IdeasUnbound extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new DiscardControllerEffect(3))));
     }
 
-    public IdeasUnbound(final IdeasUnbound card) {
+    private IdeasUnbound(final IdeasUnbound card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class UpsilonClassShuttle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UpsilonClassShuttle(final UpsilonClassShuttle card) {
+    private UpsilonClassShuttle(final UpsilonClassShuttle card) {
         super(card);
     }
 

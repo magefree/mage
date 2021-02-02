@@ -31,7 +31,7 @@ public final class ManifoldInsights extends CardImpl {
         this.getSpellAbility().addEffect(new ManifoldInsightsEffect());
     }
 
-    public ManifoldInsights(final ManifoldInsights card) {
+    private ManifoldInsights(final ManifoldInsights card) {
         super(card);
     }
 

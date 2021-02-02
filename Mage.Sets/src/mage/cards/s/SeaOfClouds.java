@@ -35,7 +35,7 @@ public final class SeaOfClouds extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public SeaOfClouds(final SeaOfClouds card) {
+    private SeaOfClouds(final SeaOfClouds card) {
         super(card);
     }
 

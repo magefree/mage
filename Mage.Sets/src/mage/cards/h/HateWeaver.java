@@ -45,7 +45,7 @@ public final class HateWeaver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HateWeaver(final HateWeaver card) {
+    private HateWeaver(final HateWeaver card) {
         super(card);
     }
 

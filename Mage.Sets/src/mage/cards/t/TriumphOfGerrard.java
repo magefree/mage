@@ -63,7 +63,7 @@ public final class TriumphOfGerrard extends CardImpl {
 
     }
 
-    public TriumphOfGerrard(final TriumphOfGerrard card) {
+    private TriumphOfGerrard(final TriumphOfGerrard card) {
         super(card);
     }
 

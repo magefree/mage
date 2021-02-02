@@ -40,7 +40,7 @@ public final class MaskedAdmirers extends CardImpl {
                 Zone.GRAVEYARD, new DoIfCostPaid(effect, new ManaCostsImpl("{G}{G}")), StaticFilters.FILTER_SPELL_A_CREATURE, false, false));
     }
 
-    public MaskedAdmirers(final MaskedAdmirers card) {
+    private MaskedAdmirers(final MaskedAdmirers card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class WitchEngine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WitchEngine(final WitchEngine card) {
+    private WitchEngine(final WitchEngine card) {
         super(card);
     }
 

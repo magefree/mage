@@ -54,7 +54,7 @@ public final class SingingBellStrike extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public SingingBellStrike(final SingingBellStrike card) {
+    private SingingBellStrike(final SingingBellStrike card) {
         super(card);
     }
 

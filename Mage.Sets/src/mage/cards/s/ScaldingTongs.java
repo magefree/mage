@@ -34,7 +34,7 @@ public final class ScaldingTongs extends CardImpl {
         ));
     }
 
-    public ScaldingTongs(final ScaldingTongs card) {
+    private ScaldingTongs(final ScaldingTongs card) {
         super(card);
     }
 

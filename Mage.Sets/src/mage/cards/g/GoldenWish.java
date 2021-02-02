@@ -34,7 +34,7 @@ public final class GoldenWish extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public GoldenWish(final GoldenWish card) {
+    private GoldenWish(final GoldenWish card) {
         super(card);
     }
 

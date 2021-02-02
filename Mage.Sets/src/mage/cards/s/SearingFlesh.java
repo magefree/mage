@@ -22,7 +22,7 @@ public final class SearingFlesh extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(7));
     }
 
-    public SearingFlesh(final SearingFlesh card) {
+    private SearingFlesh(final SearingFlesh card) {
         super(card);
     }
 

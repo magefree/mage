@@ -33,7 +33,7 @@ public final class ResoundingScream extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ResoundingScream(final ResoundingScream card) {
+    private ResoundingScream(final ResoundingScream card) {
         super(card);
     }
 

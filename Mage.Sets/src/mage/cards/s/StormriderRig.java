@@ -40,7 +40,7 @@ public final class StormriderRig extends CardImpl {
 
     }
 
-    public StormriderRig(final StormriderRig card) {
+    private StormriderRig(final StormriderRig card) {
         super(card);
     }
 

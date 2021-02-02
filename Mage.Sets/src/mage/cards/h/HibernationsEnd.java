@@ -39,7 +39,7 @@ public final class HibernationsEnd extends CardImpl {
         this.addAbility(new HibernationsEndAbility());
     }
 
-    public HibernationsEnd(final HibernationsEnd card) {
+    private HibernationsEnd(final HibernationsEnd card) {
         super(card);
     }
 

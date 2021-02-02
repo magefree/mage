@@ -32,7 +32,7 @@ public final class FirewingPhoenix extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{1}{R}{R}{R}")));
     }
 
-    public FirewingPhoenix(final FirewingPhoenix card) {
+    private FirewingPhoenix(final FirewingPhoenix card) {
         super(card);
     }
 

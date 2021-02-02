@@ -42,7 +42,7 @@ public final class SpawnOfThraxes extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public SpawnOfThraxes(final SpawnOfThraxes card) {
+    private SpawnOfThraxes(final SpawnOfThraxes card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class StormscapeMaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StormscapeMaster(final StormscapeMaster card) {
+    private StormscapeMaster(final StormscapeMaster card) {
         super(card);
     }
 

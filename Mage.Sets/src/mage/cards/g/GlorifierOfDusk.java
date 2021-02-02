@@ -36,7 +36,7 @@ public final class GlorifierOfDusk extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new PayLifeCost(2)));
     }
 
-    public GlorifierOfDusk(final GlorifierOfDusk card) {
+    private GlorifierOfDusk(final GlorifierOfDusk card) {
         super(card);
     }
 

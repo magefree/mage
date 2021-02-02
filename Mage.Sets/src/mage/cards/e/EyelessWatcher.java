@@ -35,7 +35,7 @@ public final class EyelessWatcher extends CardImpl {
 
     }
 
-    public EyelessWatcher(final EyelessWatcher card) {
+    private EyelessWatcher(final EyelessWatcher card) {
         super(card);
     }
 

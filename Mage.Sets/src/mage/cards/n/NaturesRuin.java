@@ -30,7 +30,7 @@ public final class NaturesRuin extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public NaturesRuin(final NaturesRuin card) {
+    private NaturesRuin(final NaturesRuin card) {
         super(card);
     }
 

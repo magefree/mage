@@ -32,7 +32,7 @@ public final class InsidiousBookworms extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InsidiousBookworms(final InsidiousBookworms card) {
+    private InsidiousBookworms(final InsidiousBookworms card) {
         super(card);
     }
 

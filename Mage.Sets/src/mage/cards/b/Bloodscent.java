@@ -24,7 +24,7 @@ public final class Bloodscent extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Bloodscent(final Bloodscent card) {
+    private Bloodscent(final Bloodscent card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class InvincibleHymn extends CardImpl {
         this.getSpellAbility().addEffect(new InvincibleHymnEffect());
     }
 
-    public InvincibleHymn(final InvincibleHymn card) {
+    private InvincibleHymn(final InvincibleHymn card) {
         super(card);
     }
 

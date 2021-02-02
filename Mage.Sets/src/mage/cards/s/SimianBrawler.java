@@ -32,7 +32,7 @@ public final class SimianBrawler extends CardImpl {
             new DiscardCardCost(new FilterLandCard("a land card"))));
     }
 
-    public SimianBrawler(final SimianBrawler card) {
+    private SimianBrawler(final SimianBrawler card) {
         super(card);
     }
 

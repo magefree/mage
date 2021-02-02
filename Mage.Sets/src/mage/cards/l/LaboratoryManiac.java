@@ -37,7 +37,7 @@ public final class LaboratoryManiac extends CardImpl {
 
     }
 
-    public LaboratoryManiac(final LaboratoryManiac card) {
+    private LaboratoryManiac(final LaboratoryManiac card) {
         super(card);
     }
 

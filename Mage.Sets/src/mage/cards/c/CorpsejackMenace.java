@@ -40,7 +40,7 @@ public final class CorpsejackMenace extends CardImpl {
 
     }
 
-    public CorpsejackMenace(final CorpsejackMenace card) {
+    private CorpsejackMenace(final CorpsejackMenace card) {
         super(card);
     }
 

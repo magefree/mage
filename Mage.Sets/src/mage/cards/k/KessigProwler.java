@@ -34,7 +34,7 @@ public final class KessigProwler extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new ManaCostsImpl("{4}{G}")));
     }
 
-    public KessigProwler(final KessigProwler card) {
+    private KessigProwler(final KessigProwler card) {
         super(card);
     }
 

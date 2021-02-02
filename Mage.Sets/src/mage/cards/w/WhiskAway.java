@@ -29,7 +29,7 @@ public final class WhiskAway extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public WhiskAway(final WhiskAway card) {
+    private WhiskAway(final WhiskAway card) {
         super(card);
     }
 

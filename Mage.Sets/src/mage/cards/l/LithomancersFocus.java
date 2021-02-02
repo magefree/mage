@@ -31,7 +31,7 @@ public final class LithomancersFocus extends CardImpl {
         this.getSpellAbility().addEffect(new LithomancersFocusPreventDamageToTargetEffect());
     }
 
-    public LithomancersFocus(final LithomancersFocus card) {
+    private LithomancersFocus(final LithomancersFocus card) {
         super(card);
     }
 

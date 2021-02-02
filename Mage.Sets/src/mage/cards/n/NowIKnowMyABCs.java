@@ -32,7 +32,7 @@ public final class NowIKnowMyABCs extends CardImpl {
                 "At the beginning of your upkeep, if you control permanents with names that include all twenty-six letters of the English alphabet, you win the game."));
     }
 
-    public NowIKnowMyABCs(final NowIKnowMyABCs card) {
+    private NowIKnowMyABCs(final NowIKnowMyABCs card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class IntrepidHero extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IntrepidHero(final IntrepidHero card) {
+    private IntrepidHero(final IntrepidHero card) {
         super(card);
     }
 

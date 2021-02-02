@@ -25,7 +25,7 @@ public final class RuleOfLaw extends CardImpl {
 
     }
 
-    public RuleOfLaw(final RuleOfLaw card) {
+    private RuleOfLaw(final RuleOfLaw card) {
         super(card);
     }
 

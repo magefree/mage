@@ -29,7 +29,7 @@ public final class CrumblingVestige extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public CrumblingVestige(final CrumblingVestige card) {
+    private CrumblingVestige(final CrumblingVestige card) {
         super(card);
     }
 

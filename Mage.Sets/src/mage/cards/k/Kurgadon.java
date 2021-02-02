@@ -39,7 +39,7 @@ public final class Kurgadon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Kurgadon(final Kurgadon card) {
+    private Kurgadon(final Kurgadon card) {
         super(card);
     }
 

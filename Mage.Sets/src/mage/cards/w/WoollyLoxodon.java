@@ -28,7 +28,7 @@ public final class WoollyLoxodon extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{G}")));
     }
 
-    public WoollyLoxodon(final WoollyLoxodon card) {
+    private WoollyLoxodon(final WoollyLoxodon card) {
         super(card);
     }
 

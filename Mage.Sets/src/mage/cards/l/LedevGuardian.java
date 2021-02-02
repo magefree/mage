@@ -26,7 +26,7 @@ public final class LedevGuardian extends CardImpl {
         this.addAbility(new ConvokeAbility());
     }
 
-    public LedevGuardian(final LedevGuardian card) {
+    private LedevGuardian(final LedevGuardian card) {
         super(card);
     }
 

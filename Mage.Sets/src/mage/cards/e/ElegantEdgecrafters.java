@@ -29,7 +29,7 @@ public final class ElegantEdgecrafters extends CardImpl {
         this.addAbility(new FabricateAbility(2));
     }
 
-    public ElegantEdgecrafters(final ElegantEdgecrafters card) {
+    private ElegantEdgecrafters(final ElegantEdgecrafters card) {
         super(card);
     }
 

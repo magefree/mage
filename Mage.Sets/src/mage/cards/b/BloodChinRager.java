@@ -36,7 +36,7 @@ public final class BloodChinRager extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new GainAbilityAllEffect(new MenaceAbility(), Duration.EndOfTurn, filter), false));
     }
 
-    public BloodChinRager(final BloodChinRager card) {
+    private BloodChinRager(final BloodChinRager card) {
         super(card);
     }
 

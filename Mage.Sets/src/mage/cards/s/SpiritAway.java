@@ -49,7 +49,7 @@ public final class SpiritAway extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public SpiritAway(final SpiritAway card) {
+    private SpiritAway(final SpiritAway card) {
         super(card);
     }
 

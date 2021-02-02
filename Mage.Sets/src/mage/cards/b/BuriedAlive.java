@@ -28,7 +28,7 @@ public final class BuriedAlive extends CardImpl {
 
     }
 
-    public BuriedAlive(final BuriedAlive card) {
+    private BuriedAlive(final BuriedAlive card) {
         super(card);
     }
 

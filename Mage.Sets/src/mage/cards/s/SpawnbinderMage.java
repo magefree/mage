@@ -49,7 +49,7 @@ public final class SpawnbinderMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpawnbinderMage(final SpawnbinderMage card) {
+    private SpawnbinderMage(final SpawnbinderMage card) {
         super(card);
     }
 

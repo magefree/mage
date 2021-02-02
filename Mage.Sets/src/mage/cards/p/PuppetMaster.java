@@ -42,7 +42,7 @@ public final class PuppetMaster extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new PuppetMasterEffect(), "enchanted creature"));
     }
 
-    public PuppetMaster(final PuppetMaster card) {
+    private PuppetMaster(final PuppetMaster card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class ZephyrGull extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public ZephyrGull(final ZephyrGull card) {
+    private ZephyrGull(final ZephyrGull card) {
         super(card);
     }
 

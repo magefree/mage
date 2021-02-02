@@ -53,7 +53,7 @@ public final class GarzasAssassin extends CardImpl {
         this.addAbility(new RecoverAbility(new GarzasAssassinCost(), this));
     }
 
-    public GarzasAssassin(final GarzasAssassin card) {
+    private GarzasAssassin(final GarzasAssassin card) {
         super(card);
     }
 

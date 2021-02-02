@@ -34,7 +34,7 @@ public final class DoublingCube extends CardImpl {
 
     }
 
-    public DoublingCube(final DoublingCube card) {
+    private DoublingCube(final DoublingCube card) {
         super(card);
     }
 

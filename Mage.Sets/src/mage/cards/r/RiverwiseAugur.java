@@ -28,7 +28,7 @@ public final class RiverwiseAugur extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BrainstormEffect()));
     }
 
-    public RiverwiseAugur(final RiverwiseAugur card) {
+    private RiverwiseAugur(final RiverwiseAugur card) {
         super(card);
     }
 

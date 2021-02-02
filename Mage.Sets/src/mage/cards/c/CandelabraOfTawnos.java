@@ -34,7 +34,7 @@ public final class CandelabraOfTawnos extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CandelabraOfTawnos(final CandelabraOfTawnos card) {
+    private CandelabraOfTawnos(final CandelabraOfTawnos card) {
         super(card);
     }
 

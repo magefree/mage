@@ -37,7 +37,7 @@ public final class DeadlyAllure extends CardImpl {
 
     }
 
-    public DeadlyAllure(final DeadlyAllure card) {
+    private DeadlyAllure(final DeadlyAllure card) {
         super(card);
     }
 

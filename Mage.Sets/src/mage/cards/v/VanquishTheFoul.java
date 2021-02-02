@@ -35,7 +35,7 @@ public final class VanquishTheFoul extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public VanquishTheFoul(final VanquishTheFoul card) {
+    private VanquishTheFoul(final VanquishTheFoul card) {
         super(card);
     }
 

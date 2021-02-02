@@ -39,7 +39,7 @@ public final class VectisAgents extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VectisAgents(final VectisAgents card) {
+    private VectisAgents(final VectisAgents card) {
         super(card);
     }
 

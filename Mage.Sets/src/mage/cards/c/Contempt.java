@@ -44,7 +44,7 @@ public final class Contempt extends CardImpl {
 
     }
 
-    public Contempt(final Contempt card) {
+    private Contempt(final Contempt card) {
         super(card);
     }
 

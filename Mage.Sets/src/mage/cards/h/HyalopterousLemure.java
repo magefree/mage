@@ -39,7 +39,7 @@ public final class HyalopterousLemure extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HyalopterousLemure(final HyalopterousLemure card) {
+    private HyalopterousLemure(final HyalopterousLemure card) {
         super(card);
     }
 

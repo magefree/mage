@@ -29,7 +29,7 @@ public final class HighspireMantis extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public HighspireMantis(final HighspireMantis card) {
+    private HighspireMantis(final HighspireMantis card) {
         super(card);
     }
 

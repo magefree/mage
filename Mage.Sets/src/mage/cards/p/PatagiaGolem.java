@@ -34,7 +34,7 @@ public final class PatagiaGolem extends CardImpl {
         
     }
 
-    public PatagiaGolem(final PatagiaGolem card) {
+    private PatagiaGolem(final PatagiaGolem card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class HerosDownfall extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
     }
 
-    public HerosDownfall(final HerosDownfall card) {
+    private HerosDownfall(final HerosDownfall card) {
         super(card);
     }
 

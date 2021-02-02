@@ -26,7 +26,7 @@ public final class RocOfKherRidges extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public RocOfKherRidges(final RocOfKherRidges card) {
+    private RocOfKherRidges(final RocOfKherRidges card) {
         super(card);
     }
 

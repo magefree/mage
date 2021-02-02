@@ -32,7 +32,7 @@ public final class DoublingChant extends CardImpl {
         this.getSpellAbility().addEffect(new DoublingChantEffect());
     }
 
-    public DoublingChant(final DoublingChant card) {
+    private DoublingChant(final DoublingChant card) {
         super(card);
     }
 

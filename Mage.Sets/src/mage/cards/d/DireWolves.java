@@ -40,7 +40,7 @@ public final class DireWolves extends CardImpl {
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(BandingAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule)));
     }
 
-    public DireWolves(final DireWolves card) {
+    private DireWolves(final DireWolves card) {
         super(card);
     }
 

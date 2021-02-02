@@ -42,7 +42,7 @@ public final class SerraAscendant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SerraAscendantEffect()));
     }
 
-    public SerraAscendant(final SerraAscendant card) {
+    private SerraAscendant(final SerraAscendant card) {
         super(card);
     }
 

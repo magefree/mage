@@ -25,7 +25,7 @@ public final class FranticSalvage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterArtifactCard("artifact cards from your graveyard")));
     }
 
-    public FranticSalvage(final FranticSalvage card) {
+    private FranticSalvage(final FranticSalvage card) {
         super(card);
     }
 

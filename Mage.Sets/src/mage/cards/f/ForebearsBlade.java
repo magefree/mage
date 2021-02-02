@@ -60,7 +60,7 @@ public final class ForebearsBlade extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public ForebearsBlade(final ForebearsBlade card) {
+    private ForebearsBlade(final ForebearsBlade card) {
         super(card);
     }
 

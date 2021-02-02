@@ -26,7 +26,7 @@ public final class PunctureBolt extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PunctureBolt(final PunctureBolt card) {
+    private PunctureBolt(final PunctureBolt card) {
         super(card);
     }
 

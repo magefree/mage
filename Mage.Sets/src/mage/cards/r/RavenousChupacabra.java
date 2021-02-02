@@ -39,7 +39,7 @@ public final class RavenousChupacabra extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RavenousChupacabra(final RavenousChupacabra card) {
+    private RavenousChupacabra(final RavenousChupacabra card) {
         super(card);
     }
 

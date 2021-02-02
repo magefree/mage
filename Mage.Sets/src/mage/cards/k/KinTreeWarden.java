@@ -34,7 +34,7 @@ public final class KinTreeWarden extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{G}")));
     }
 
-    public KinTreeWarden(final KinTreeWarden card) {
+    private KinTreeWarden(final KinTreeWarden card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class TobiasBeckett extends CardImpl {
         this.addAbility(new BountyAbility(new TobiasBeckettEffect(), false, true));
     }
 
-    public TobiasBeckett(final TobiasBeckett card) {
+    private TobiasBeckett(final TobiasBeckett card) {
         super(card);
     }
 

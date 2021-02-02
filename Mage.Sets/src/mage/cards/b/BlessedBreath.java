@@ -30,7 +30,7 @@ public final class BlessedBreath extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{W}"));
     }
 
-    public BlessedBreath(final BlessedBreath card) {
+    private BlessedBreath(final BlessedBreath card) {
         super(card);
     }
 

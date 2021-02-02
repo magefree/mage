@@ -31,7 +31,7 @@ public final class Hollowsage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Hollowsage(final Hollowsage card) {
+    private Hollowsage(final Hollowsage card) {
         super(card);
     }
 

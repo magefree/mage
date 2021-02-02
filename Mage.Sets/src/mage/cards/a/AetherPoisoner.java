@@ -41,7 +41,7 @@ public final class AetherPoisoner extends CardImpl {
                 "Whenever {this} attacks, you may pay {E}{E}. If you do, create a 1/1 colorless Servo artifact creature token."));
     }
 
-    public AetherPoisoner(final AetherPoisoner card) {
+    private AetherPoisoner(final AetherPoisoner card) {
         super(card);
     }
 

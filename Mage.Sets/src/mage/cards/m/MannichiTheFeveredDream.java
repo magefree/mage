@@ -32,7 +32,7 @@ public final class MannichiTheFeveredDream extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessAllEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
     }
 
-    public MannichiTheFeveredDream(final MannichiTheFeveredDream card) {
+    private MannichiTheFeveredDream(final MannichiTheFeveredDream card) {
         super(card);
     }
 

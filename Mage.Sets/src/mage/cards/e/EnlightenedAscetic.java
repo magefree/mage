@@ -31,7 +31,7 @@ public final class EnlightenedAscetic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EnlightenedAscetic(final EnlightenedAscetic card) {
+    private EnlightenedAscetic(final EnlightenedAscetic card) {
         super(card);
     }
 

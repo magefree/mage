@@ -31,7 +31,7 @@ public final class TrueBeliever extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield)));
     }
 
-    public TrueBeliever(final TrueBeliever card) {
+    private TrueBeliever(final TrueBeliever card) {
         super(card);
     }
 

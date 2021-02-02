@@ -48,7 +48,7 @@ public final class MagusOfTheDisk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagusOfTheDisk(final MagusOfTheDisk card) {
+    private MagusOfTheDisk(final MagusOfTheDisk card) {
         super(card);
     }
 

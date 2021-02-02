@@ -35,7 +35,7 @@ public final class SimianSpiritGuide extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.HAND, Mana.RedMana(1), new ExileSourceFromHandCost()));
     }
 
-    public SimianSpiritGuide(final SimianSpiritGuide card) {
+    private SimianSpiritGuide(final SimianSpiritGuide card) {
         super(card);
     }
 

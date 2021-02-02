@@ -51,7 +51,7 @@ public final class BloodTribute extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public BloodTribute(final BloodTribute card) {
+    private BloodTribute(final BloodTribute card) {
         super(card);
     }
 

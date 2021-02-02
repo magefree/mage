@@ -39,7 +39,7 @@ public final class RealityStrobe extends CardImpl {
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{2}{U}"), this));
     }
 
-    public RealityStrobe(final RealityStrobe card) {
+    private RealityStrobe(final RealityStrobe card) {
         super(card);
     }
 

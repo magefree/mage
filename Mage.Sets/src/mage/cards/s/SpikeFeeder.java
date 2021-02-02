@@ -43,7 +43,7 @@ public final class SpikeFeeder extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new RemoveCountersSourceCost(CounterType.P1P1.createInstance())));
     }
 
-    public SpikeFeeder(final SpikeFeeder card) {
+    private SpikeFeeder(final SpikeFeeder card) {
         super(card);
     }
 

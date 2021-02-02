@@ -46,7 +46,7 @@ public final class HelmOfPossession extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HelmOfPossession(final HelmOfPossession card) {
+    private HelmOfPossession(final HelmOfPossession card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class StinkdrinkerBandit extends CardImpl {
                 filter, "Whenever a Rogue you control attacks and isn't blocked, it gets +2/+1 until end of turn")));
     }
 
-    public StinkdrinkerBandit(final StinkdrinkerBandit card) {
+    private StinkdrinkerBandit(final StinkdrinkerBandit card) {
         super(card);
     }
 

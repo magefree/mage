@@ -38,7 +38,7 @@ public final class SwaggeringCorsair extends CardImpl {
                 new PlayerAttackedWatcher());
     }
 
-    public SwaggeringCorsair(final SwaggeringCorsair card) {
+    private SwaggeringCorsair(final SwaggeringCorsair card) {
         super(card);
     }
 

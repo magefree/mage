@@ -28,7 +28,7 @@ public final class SoldeviDigger extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoldeviDiggerEffect(), new ManaCostsImpl("{2}")));
     }
 
-    public SoldeviDigger(final SoldeviDigger card) {
+    private SoldeviDigger(final SoldeviDigger card) {
         super(card);
     }
 

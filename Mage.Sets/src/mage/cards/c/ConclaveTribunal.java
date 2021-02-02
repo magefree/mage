@@ -43,7 +43,7 @@ public final class ConclaveTribunal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ConclaveTribunal(final ConclaveTribunal card) {
+    private ConclaveTribunal(final ConclaveTribunal card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class NimGrotesque extends CardImpl {
         );
     }
 
-    public NimGrotesque(final NimGrotesque card) {
+    private NimGrotesque(final NimGrotesque card) {
         super(card);
     }
 

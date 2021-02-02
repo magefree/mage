@@ -34,7 +34,7 @@ public final class FormOfTheDinosaur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FormOfTheDinosaur(final FormOfTheDinosaur card) {
+    private FormOfTheDinosaur(final FormOfTheDinosaur card) {
         super(card);
     }
 

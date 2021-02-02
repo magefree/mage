@@ -31,7 +31,7 @@ public final class GroveRumbler extends CardImpl {
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public GroveRumbler(final GroveRumbler card) {
+    private GroveRumbler(final GroveRumbler card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class RakdosCackler extends CardImpl {
         this.addAbility(new UnleashAbility());
     }
  
-    public RakdosCackler(final RakdosCackler card) {
+    private RakdosCackler(final RakdosCackler card) {
         super(card);
     }
  

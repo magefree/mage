@@ -35,7 +35,7 @@ public final class GuidedPassage extends CardImpl {
         this.getSpellAbility().addEffect(new GuidedPassageEffect());
     }
 
-    public GuidedPassage(final GuidedPassage card) {
+    private GuidedPassage(final GuidedPassage card) {
         super(card);
     }
 

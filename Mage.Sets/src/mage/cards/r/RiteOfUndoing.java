@@ -42,7 +42,7 @@ public final class RiteOfUndoing extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent(filterNotControlled));
     }
 
-    public RiteOfUndoing(final RiteOfUndoing card) {
+    private RiteOfUndoing(final RiteOfUndoing card) {
         super(card);
     }
 

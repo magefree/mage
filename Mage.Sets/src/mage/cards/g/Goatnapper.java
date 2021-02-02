@@ -43,7 +43,7 @@ public final class Goatnapper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Goatnapper(final Goatnapper card) {
+    private Goatnapper(final Goatnapper card) {
         super(card);
     }
 

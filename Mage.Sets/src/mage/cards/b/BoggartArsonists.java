@@ -50,7 +50,7 @@ public final class BoggartArsonists extends CardImpl {
 
     }
 
-    public BoggartArsonists(final BoggartArsonists card) {
+    private BoggartArsonists(final BoggartArsonists card) {
         super(card);
     }
 

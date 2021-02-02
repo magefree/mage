@@ -38,7 +38,7 @@ public final class PhantomFlock extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhantomPreventionEffect()));
     }
 
-    public PhantomFlock(final PhantomFlock card) {
+    private PhantomFlock(final PhantomFlock card) {
         super(card);
     }
 

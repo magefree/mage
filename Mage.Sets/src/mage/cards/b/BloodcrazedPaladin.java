@@ -39,7 +39,7 @@ public final class BloodcrazedPaladin extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(effect), new CreaturesDiedWatcher());
     }
 
-    public BloodcrazedPaladin(final BloodcrazedPaladin card) {
+    private BloodcrazedPaladin(final BloodcrazedPaladin card) {
         super(card);
     }
 

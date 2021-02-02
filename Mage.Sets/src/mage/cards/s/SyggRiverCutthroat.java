@@ -38,7 +38,7 @@ public final class SyggRiverCutthroat extends CardImpl {
                 true));
     }
 
-    public SyggRiverCutthroat(final SyggRiverCutthroat card) {
+    private SyggRiverCutthroat(final SyggRiverCutthroat card) {
         super(card);
     }
 

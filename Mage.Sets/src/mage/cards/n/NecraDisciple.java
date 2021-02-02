@@ -36,7 +36,7 @@ public final class NecraDisciple extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public NecraDisciple(final NecraDisciple card) {
+    private NecraDisciple(final NecraDisciple card) {
         super(card);
     }
 

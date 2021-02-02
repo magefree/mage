@@ -30,7 +30,7 @@ public final class FaerieInvaders extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public FaerieInvaders(final FaerieInvaders card) {
+    private FaerieInvaders(final FaerieInvaders card) {
         super(card);
     }
 

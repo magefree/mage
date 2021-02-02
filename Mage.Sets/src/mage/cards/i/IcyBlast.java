@@ -38,7 +38,7 @@ public final class IcyBlast extends CardImpl {
         this.getSpellAbility().addHint(FerociousHint.instance);
     }
 
-    public IcyBlast(final IcyBlast card) {
+    private IcyBlast(final IcyBlast card) {
         super(card);
     }
 

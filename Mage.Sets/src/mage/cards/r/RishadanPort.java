@@ -31,7 +31,7 @@ public final class RishadanPort extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RishadanPort(final RishadanPort card) {
+    private RishadanPort(final RishadanPort card) {
         super(card);
     }
 

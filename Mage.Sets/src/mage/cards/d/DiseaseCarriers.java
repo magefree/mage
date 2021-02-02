@@ -31,7 +31,7 @@ public final class DiseaseCarriers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DiseaseCarriers(final DiseaseCarriers card) {
+    private DiseaseCarriers(final DiseaseCarriers card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class BantPanorama extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BantPanorama(final BantPanorama card) {
+    private BantPanorama(final BantPanorama card) {
         super(card);
     }
 

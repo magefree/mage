@@ -37,7 +37,7 @@ public final class HarvestHand extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new HarvestHandReturnTransformedEffect()));
     }
 
-    public HarvestHand(final HarvestHand card) {
+    private HarvestHand(final HarvestHand card) {
         super(card);
     }
 

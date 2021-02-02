@@ -47,7 +47,7 @@ public final class ReaperFromTheAbyss extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ReaperFromTheAbyss(final ReaperFromTheAbyss card) {
+    private ReaperFromTheAbyss(final ReaperFromTheAbyss card) {
         super(card);
     }
 

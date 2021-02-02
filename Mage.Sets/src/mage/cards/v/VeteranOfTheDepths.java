@@ -30,7 +30,7 @@ public final class VeteranOfTheDepths extends CardImpl {
          this.addAbility(ability);
     }
 
-    public VeteranOfTheDepths(final VeteranOfTheDepths card) {
+    private VeteranOfTheDepths(final VeteranOfTheDepths card) {
         super(card);
     }
 

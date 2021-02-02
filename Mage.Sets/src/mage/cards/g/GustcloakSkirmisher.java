@@ -38,7 +38,7 @@ public final class GustcloakSkirmisher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GustcloakSkirmisher(final GustcloakSkirmisher card) {
+    private GustcloakSkirmisher(final GustcloakSkirmisher card) {
         super(card);
     }
 

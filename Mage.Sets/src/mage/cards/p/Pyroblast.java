@@ -34,7 +34,7 @@ public final class Pyroblast extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public Pyroblast(final Pyroblast card) {
+    private Pyroblast(final Pyroblast card) {
         super(card);
     }
 

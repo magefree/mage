@@ -31,7 +31,7 @@ public final class Gallantry extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Gallantry(final Gallantry card) {
+    private Gallantry(final Gallantry card) {
         super(card);
     }
 

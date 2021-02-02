@@ -42,7 +42,7 @@ public final class JeskaWarriorAdept extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JeskaWarriorAdept(final JeskaWarriorAdept card) {
+    private JeskaWarriorAdept(final JeskaWarriorAdept card) {
         super(card);
     }
 

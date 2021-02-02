@@ -44,7 +44,7 @@ public final class DraconicDisciple extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DraconicDisciple(final DraconicDisciple card) {
+    private DraconicDisciple(final DraconicDisciple card) {
         super(card);
     }
 

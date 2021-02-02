@@ -42,7 +42,7 @@ public final class HomaridShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HomaridShaman(final HomaridShaman card) {
+    private HomaridShaman(final HomaridShaman card) {
         super(card);
     }
 

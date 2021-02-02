@@ -30,7 +30,7 @@ public final class BrilliantUltimatum extends CardImpl {
         this.getSpellAbility().addEffect(new BrilliantUltimatumEffect());
     }
 
-    public BrilliantUltimatum(final BrilliantUltimatum card) {
+    private BrilliantUltimatum(final BrilliantUltimatum card) {
         super(card);
     }
 

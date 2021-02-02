@@ -37,7 +37,7 @@ public final class DragonScarredBear extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DragonScarredBear(final DragonScarredBear card) {
+    private DragonScarredBear(final DragonScarredBear card) {
         super(card);
     }
 

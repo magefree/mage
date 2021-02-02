@@ -37,7 +37,7 @@ public final class PhyrexianColossus extends CardImpl {
         
     }
 
-    public PhyrexianColossus(final PhyrexianColossus card) {
+    private PhyrexianColossus(final PhyrexianColossus card) {
         super(card);
     }
 

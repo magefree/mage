@@ -38,7 +38,7 @@ public final class SpirePatrol extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpirePatrol(final SpirePatrol card) {
+    private SpirePatrol(final SpirePatrol card) {
         super(card);
     }
 

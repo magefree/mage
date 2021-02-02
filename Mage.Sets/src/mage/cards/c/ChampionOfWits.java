@@ -45,7 +45,7 @@ public final class ChampionOfWits extends CardImpl {
         this.addAbility(new EternalizeAbility(new ManaCostsImpl("{5}{U}{U}"), this));
     }
 
-    public ChampionOfWits(final ChampionOfWits card) {
+    private ChampionOfWits(final ChampionOfWits card) {
         super(card);
     }
 

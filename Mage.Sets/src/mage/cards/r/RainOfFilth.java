@@ -29,7 +29,7 @@ public final class RainOfFilth extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(ability, Duration.EndOfTurn, new FilterControlledLandPermanent()));
     }
 
-    public RainOfFilth(final RainOfFilth card) {
+    private RainOfFilth(final RainOfFilth card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class Narcolepsy extends CardImpl {
         this.addAbility(new NarcolepsyTriggeredAbility());
     }
 
-    public Narcolepsy(final Narcolepsy card) {
+    private Narcolepsy(final Narcolepsy card) {
         super(card);
     }
 

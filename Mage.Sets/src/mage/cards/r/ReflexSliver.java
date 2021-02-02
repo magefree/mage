@@ -39,7 +39,7 @@ public final class ReflexSliver extends CardImpl {
                 filter, "All Sliver creatures have haste.")));
     }
 
-    public ReflexSliver(final ReflexSliver card) {
+    private ReflexSliver(final ReflexSliver card) {
         super(card);
     }
 

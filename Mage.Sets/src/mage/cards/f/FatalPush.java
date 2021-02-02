@@ -31,7 +31,7 @@ public final class FatalPush extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FatalPush(final FatalPush card) {
+    private FatalPush(final FatalPush card) {
         super(card);
     }
 

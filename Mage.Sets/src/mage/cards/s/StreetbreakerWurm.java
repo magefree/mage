@@ -22,7 +22,7 @@ public final class StreetbreakerWurm extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public StreetbreakerWurm(final StreetbreakerWurm card) {
+    private StreetbreakerWurm(final StreetbreakerWurm card) {
         super(card);
     }
 

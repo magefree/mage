@@ -28,7 +28,7 @@ public final class SellerOfSongbirds extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BirdToken())));
     }
 
-    public SellerOfSongbirds(final SellerOfSongbirds card) {
+    private SellerOfSongbirds(final SellerOfSongbirds card) {
         super(card);
     }
 

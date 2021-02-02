@@ -46,7 +46,7 @@ public final class ForceStasis extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public ForceStasis(final ForceStasis card) {
+    private ForceStasis(final ForceStasis card) {
         super(card);
     }
 

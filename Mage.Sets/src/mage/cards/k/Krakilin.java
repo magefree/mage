@@ -34,7 +34,7 @@ public final class Krakilin extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }
 
-    public Krakilin(final Krakilin card) {
+    private Krakilin(final Krakilin card) {
         super(card);
     }
 

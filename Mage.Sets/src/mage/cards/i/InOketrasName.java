@@ -31,7 +31,7 @@ public final class InOketrasName extends CardImpl {
         getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filterNotZombies));
     }
 
-    public InOketrasName(final InOketrasName card) {
+    private InOketrasName(final InOketrasName card) {
         super(card);
     }
 

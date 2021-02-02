@@ -27,7 +27,7 @@ public final class Pyromatics extends CardImpl {
 
     }
 
-    public Pyromatics(final Pyromatics card) {
+    private Pyromatics(final Pyromatics card) {
         super(card);
     }
 

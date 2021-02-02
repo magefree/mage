@@ -36,7 +36,7 @@ public final class RagsRiches extends SplitCard {
         getRightHalfCard().getSpellAbility().addEffect(new RichesEffect());
     }
 
-    public RagsRiches(final RagsRiches card) {
+    private RagsRiches(final RagsRiches card) {
         super(card);
     }
 

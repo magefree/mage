@@ -30,7 +30,7 @@ public final class HorizonScholar extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(2), false));
     }
 
-    public HorizonScholar(final HorizonScholar card) {
+    private HorizonScholar(final HorizonScholar card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class Fluxcharger extends CardImpl {
 
     }
 
-    public Fluxcharger(final Fluxcharger card) {
+    private Fluxcharger(final Fluxcharger card) {
         super(card);
     }
 

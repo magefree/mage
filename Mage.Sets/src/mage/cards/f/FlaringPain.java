@@ -27,7 +27,7 @@ public final class FlaringPain extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{R}"), TimingRule.INSTANT));
     }
 
-    public FlaringPain(final FlaringPain card) {
+    private FlaringPain(final FlaringPain card) {
         super(card);
     }
 

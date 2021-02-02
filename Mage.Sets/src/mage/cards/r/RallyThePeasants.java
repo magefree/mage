@@ -27,7 +27,7 @@ public final class RallyThePeasants extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{R}"), TimingRule.INSTANT));
     }
 
-    public RallyThePeasants(final RallyThePeasants card) {
+    private RallyThePeasants(final RallyThePeasants card) {
         super(card);
     }
 

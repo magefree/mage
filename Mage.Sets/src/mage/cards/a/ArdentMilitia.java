@@ -26,7 +26,7 @@ public final class ArdentMilitia extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public ArdentMilitia(final ArdentMilitia card) {
+    private ArdentMilitia(final ArdentMilitia card) {
         super(card);
     }
 

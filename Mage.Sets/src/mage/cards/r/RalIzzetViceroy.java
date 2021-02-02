@@ -55,7 +55,7 @@ public final class RalIzzetViceroy extends CardImpl {
         ));
     }
 
-    public RalIzzetViceroy(final RalIzzetViceroy card) {
+    private RalIzzetViceroy(final RalIzzetViceroy card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class SpectralGuardian extends CardImpl {
                 "as long as {this} is untapped, noncreature artifacts have shroud.")));
     }
 
-    public SpectralGuardian(final SpectralGuardian card) {
+    private SpectralGuardian(final SpectralGuardian card) {
         super(card);
     }
 

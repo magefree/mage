@@ -45,7 +45,7 @@ public final class MantleOfWebs extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public MantleOfWebs(final MantleOfWebs card) {
+    private MantleOfWebs(final MantleOfWebs card) {
         super(card);
     }
 

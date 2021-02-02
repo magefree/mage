@@ -33,7 +33,7 @@ public final class EnemyOfTheGuildpact extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public EnemyOfTheGuildpact(final EnemyOfTheGuildpact card) {
+    private EnemyOfTheGuildpact(final EnemyOfTheGuildpact card) {
         super(card);
     }
 

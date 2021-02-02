@@ -44,7 +44,7 @@ public final class ChandrasPhoenix extends CardImpl {
         this.addAbility(new ChandrasPhoenixTriggeredAbility());
     }
 
-    public ChandrasPhoenix(final ChandrasPhoenix card) {
+    private ChandrasPhoenix(final ChandrasPhoenix card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class WuScout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WuScout(final WuScout card) {
+    private WuScout(final WuScout card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class Wildcall extends CardImpl {
 
     }
 
-    public Wildcall(final Wildcall card) {
+    private Wildcall(final Wildcall card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class ItOfTheHorridSwarm extends CardImpl {
         this.addAbility(new CastSourceTriggeredAbility(new CreateTokenEffect(new InsectToken(), 2)));
     }
 
-    public ItOfTheHorridSwarm(final ItOfTheHorridSwarm card) {
+    private ItOfTheHorridSwarm(final ItOfTheHorridSwarm card) {
         super(card);
     }
 

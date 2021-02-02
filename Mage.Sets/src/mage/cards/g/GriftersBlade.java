@@ -47,7 +47,7 @@ public final class GriftersBlade extends CardImpl {
 
     }
 
-    public GriftersBlade(final GriftersBlade card) {
+    private GriftersBlade(final GriftersBlade card) {
         super(card);
     }
 

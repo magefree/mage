@@ -44,7 +44,7 @@ public final class EdgeOfTheDivinity extends CardImpl {
         this.addAbility(blackAbility);
     }
 
-    public EdgeOfTheDivinity(final EdgeOfTheDivinity card) {
+    private EdgeOfTheDivinity(final EdgeOfTheDivinity card) {
         super(card);
     }
 

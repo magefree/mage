@@ -30,7 +30,7 @@ public final class ConfidenceFromStrength extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ConfidenceFromStrength(final ConfidenceFromStrength card) {
+    private ConfidenceFromStrength(final ConfidenceFromStrength card) {
         super(card);
     }
 

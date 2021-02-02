@@ -43,7 +43,7 @@ public final class FountainOfCho extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FountainOfCho(final FountainOfCho card) {
+    private FountainOfCho(final FountainOfCho card) {
         super(card);
     }
 

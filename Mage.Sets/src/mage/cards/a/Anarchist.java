@@ -38,7 +38,7 @@ public final class Anarchist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Anarchist(final Anarchist card) {
+    private Anarchist(final Anarchist card) {
         super(card);
     }
 

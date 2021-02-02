@@ -44,7 +44,7 @@ public final class AtarkaPummeler extends CardImpl {
 
     }
 
-    public AtarkaPummeler(final AtarkaPummeler card) {
+    private AtarkaPummeler(final AtarkaPummeler card) {
         super(card);
     }
 

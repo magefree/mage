@@ -48,7 +48,7 @@ public final class HuntTheHunter extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public HuntTheHunter(final HuntTheHunter card) {
+    private HuntTheHunter(final HuntTheHunter card) {
         super(card);
     }
 

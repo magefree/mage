@@ -46,7 +46,7 @@ public final class BloodlineNecromancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodlineNecromancer(final BloodlineNecromancer card) {
+    private BloodlineNecromancer(final BloodlineNecromancer card) {
         super(card);
     }
 

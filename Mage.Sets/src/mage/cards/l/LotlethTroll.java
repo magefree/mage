@@ -44,7 +44,7 @@ public final class LotlethTroll extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public LotlethTroll(final LotlethTroll card) {
+    private LotlethTroll(final LotlethTroll card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class BatteringRam extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(effect, filter, false));
     }
 
-    public BatteringRam(final BatteringRam card) {
+    private BatteringRam(final BatteringRam card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class CapriciousEfreet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CapriciousEfreet(final CapriciousEfreet card) {
+    private CapriciousEfreet(final CapriciousEfreet card) {
         super(card);
     }
 

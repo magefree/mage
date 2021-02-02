@@ -28,7 +28,7 @@ public final class Necrobite extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Necrobite(final Necrobite card) {
+    private Necrobite(final Necrobite card) {
         super(card);
     }
 

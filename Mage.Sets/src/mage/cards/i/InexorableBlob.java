@@ -34,7 +34,7 @@ public final class InexorableBlob extends CardImpl {
                 .addHint(DeliriumHint.instance));
     }
 
-    public InexorableBlob(final InexorableBlob card) {
+    private InexorableBlob(final InexorableBlob card) {
         super(card);
     }
 

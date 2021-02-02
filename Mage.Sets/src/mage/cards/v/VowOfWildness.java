@@ -51,7 +51,7 @@ public final class VowOfWildness extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VowOfWildness(final VowOfWildness card) {
+    private VowOfWildness(final VowOfWildness card) {
         super(card);
     }
 

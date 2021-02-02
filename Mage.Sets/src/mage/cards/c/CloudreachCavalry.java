@@ -49,7 +49,7 @@ public final class CloudreachCavalry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CloudreachCavalry(final CloudreachCavalry card) {
+    private CloudreachCavalry(final CloudreachCavalry card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class ShivanPhoenix extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public ShivanPhoenix(final ShivanPhoenix card) {
+    private ShivanPhoenix(final ShivanPhoenix card) {
         super(card);
     }
 

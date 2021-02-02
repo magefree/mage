@@ -46,7 +46,7 @@ public final class UnstableHulk extends CardImpl {
     
     }
 
-    public UnstableHulk(final UnstableHulk card) {
+    private UnstableHulk(final UnstableHulk card) {
         super(card);
     }
 

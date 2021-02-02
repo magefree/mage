@@ -45,7 +45,7 @@ public final class Chaosphere extends CardImpl {
 
     }
 
-    public Chaosphere(final Chaosphere card) {
+    private Chaosphere(final Chaosphere card) {
         super(card);
     }
 

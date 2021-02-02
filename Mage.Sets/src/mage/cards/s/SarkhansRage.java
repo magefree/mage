@@ -32,7 +32,7 @@ public final class SarkhansRage extends CardImpl {
 
     }
 
-    public SarkhansRage(final SarkhansRage card) {
+    private SarkhansRage(final SarkhansRage card) {
         super(card);
     }
 

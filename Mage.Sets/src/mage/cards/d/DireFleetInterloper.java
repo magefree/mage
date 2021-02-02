@@ -32,7 +32,7 @@ public final class DireFleetInterloper extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect()));
     }
 
-    public DireFleetInterloper(final DireFleetInterloper card) {
+    private DireFleetInterloper(final DireFleetInterloper card) {
         super(card);
     }
 

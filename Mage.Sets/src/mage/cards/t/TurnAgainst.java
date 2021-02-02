@@ -32,7 +32,7 @@ public final class TurnAgainst extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public TurnAgainst(final TurnAgainst card) {
+    private TurnAgainst(final TurnAgainst card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class Condemn extends CardImpl {
         this.getSpellAbility().addEffect(new CondemnEffect());
     }
 
-    public Condemn(final Condemn card) {
+    private Condemn(final Condemn card) {
         super(card);
     }
 

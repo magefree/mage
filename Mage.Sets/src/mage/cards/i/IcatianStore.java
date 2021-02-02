@@ -53,7 +53,7 @@ public final class IcatianStore extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IcatianStore(final IcatianStore card) {
+    private IcatianStore(final IcatianStore card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class PhantomWarrior extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public PhantomWarrior(final PhantomWarrior card) {
+    private PhantomWarrior(final PhantomWarrior card) {
         super(card);
     }
 

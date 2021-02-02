@@ -45,7 +45,7 @@ public final class SidewinderNaga extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SidewinderNaga(final SidewinderNaga card) {
+    private SidewinderNaga(final SidewinderNaga card) {
         super(card);
     }
 

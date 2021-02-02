@@ -41,7 +41,7 @@ public final class SwarmSurge extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public SwarmSurge(final SwarmSurge card) {
+    private SwarmSurge(final SwarmSurge card) {
         super(card);
     }
 

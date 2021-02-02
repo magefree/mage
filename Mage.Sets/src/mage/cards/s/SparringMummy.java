@@ -31,7 +31,7 @@ public final class SparringMummy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SparringMummy(final SparringMummy card) {
+    private SparringMummy(final SparringMummy card) {
         super(card);
     }
 

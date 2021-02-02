@@ -39,7 +39,7 @@ public final class Offalsnout extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{B}"));
     }
 
-    public Offalsnout(final Offalsnout card) {
+    private Offalsnout(final Offalsnout card) {
         super(card);
     }
 

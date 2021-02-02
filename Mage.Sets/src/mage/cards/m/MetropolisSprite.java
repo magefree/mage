@@ -34,7 +34,7 @@ public final class MetropolisSprite extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
     }
 
-    public MetropolisSprite(final MetropolisSprite card) {
+    private MetropolisSprite(final MetropolisSprite card) {
         super(card);
     }
 

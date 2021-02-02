@@ -47,7 +47,7 @@ public final class TalarasBattalion extends CardImpl {
 
     }
 
-    public TalarasBattalion(final TalarasBattalion card) {
+    private TalarasBattalion(final TalarasBattalion card) {
         super(card);
     }
 

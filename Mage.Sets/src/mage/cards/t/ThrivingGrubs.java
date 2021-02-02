@@ -35,7 +35,7 @@ public final class ThrivingGrubs extends CardImpl {
                 "Whenever {this} attacks you may pay {E}{E}. If you do, put a +1/+1 counter on it."));
     }
 
-    public ThrivingGrubs(final ThrivingGrubs card) {
+    private ThrivingGrubs(final ThrivingGrubs card) {
         super(card);
     }
 

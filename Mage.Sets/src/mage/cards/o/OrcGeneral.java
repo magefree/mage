@@ -49,7 +49,7 @@ public final class OrcGeneral extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrcGeneral(final OrcGeneral card) {
+    private OrcGeneral(final OrcGeneral card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class CoastalWizard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CoastalWizard(final CoastalWizard card) {
+    private CoastalWizard(final CoastalWizard card) {
         super(card);
     }
 

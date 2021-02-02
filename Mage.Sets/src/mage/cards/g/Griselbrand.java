@@ -35,7 +35,7 @@ public final class Griselbrand extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(7), new PayLifeCost(7)));
     }
 
-    public Griselbrand(final Griselbrand card) {
+    private Griselbrand(final Griselbrand card) {
         super(card);
     }
 

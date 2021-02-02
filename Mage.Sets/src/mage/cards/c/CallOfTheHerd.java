@@ -27,7 +27,7 @@ public final class CallOfTheHerd extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{G}"), TimingRule.SORCERY));
     }
 
-    public CallOfTheHerd(final CallOfTheHerd card) {
+    private CallOfTheHerd(final CallOfTheHerd card) {
         super(card);
     }
 

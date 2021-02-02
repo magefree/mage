@@ -37,7 +37,7 @@ public final class DinrovaHorror extends CardImpl {
 
     }
 
-    public DinrovaHorror(final DinrovaHorror card) {
+    private DinrovaHorror(final DinrovaHorror card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class SoratamiSavant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoratamiSavant(final SoratamiSavant card) {
+    private SoratamiSavant(final SoratamiSavant card) {
         super(card);
     }
 

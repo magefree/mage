@@ -33,7 +33,7 @@ public final class AntQueen extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(insectToken), new ManaCostsImpl("{1}{G}")));
     }
 
-    public AntQueen(final AntQueen card) {
+    private AntQueen(final AntQueen card) {
         super(card);
     }
 

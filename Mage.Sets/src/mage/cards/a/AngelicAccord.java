@@ -28,7 +28,7 @@ public final class AngelicAccord extends CardImpl {
                 new PlayerGainedLifeWatcher());
     }
 
-    public AngelicAccord(final AngelicAccord card) {
+    private AngelicAccord(final AngelicAccord card) {
         super(card);
     }
 

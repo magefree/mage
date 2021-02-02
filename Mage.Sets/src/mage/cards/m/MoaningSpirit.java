@@ -26,7 +26,7 @@ public final class MoaningSpirit extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public MoaningSpirit(final MoaningSpirit card) {
+    private MoaningSpirit(final MoaningSpirit card) {
         super(card);
     }
 

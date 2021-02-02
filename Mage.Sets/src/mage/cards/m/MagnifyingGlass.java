@@ -31,7 +31,7 @@ public final class MagnifyingGlass extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagnifyingGlass(final MagnifyingGlass card) {
+    private MagnifyingGlass(final MagnifyingGlass card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class LiarsPendulum extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LiarsPendulum(final LiarsPendulum card) {
+    private LiarsPendulum(final LiarsPendulum card) {
         super(card);
     }
 

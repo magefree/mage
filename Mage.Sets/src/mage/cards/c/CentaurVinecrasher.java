@@ -48,7 +48,7 @@ public final class CentaurVinecrasher extends CardImpl {
         ));
     }
 
-    public CentaurVinecrasher(final CentaurVinecrasher card) {
+    private CentaurVinecrasher(final CentaurVinecrasher card) {
         super(card);
     }
 

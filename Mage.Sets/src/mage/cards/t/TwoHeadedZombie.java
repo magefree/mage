@@ -26,7 +26,7 @@ public final class TwoHeadedZombie extends CardImpl {
 
     }
 
-    public TwoHeadedZombie(final TwoHeadedZombie card) {
+    private TwoHeadedZombie(final TwoHeadedZombie card) {
         super(card);
     }
 

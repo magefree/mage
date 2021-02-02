@@ -40,7 +40,7 @@ public final class WallOfSouls extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WallOfSouls(final WallOfSouls card) {
+    private WallOfSouls(final WallOfSouls card) {
         super(card);
     }
 

@@ -57,7 +57,7 @@ public final class StormElemental extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public StormElemental(final StormElemental card) {
+    private StormElemental(final StormElemental card) {
         super(card);
     }
 

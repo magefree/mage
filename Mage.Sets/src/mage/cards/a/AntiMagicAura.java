@@ -43,7 +43,7 @@ public final class AntiMagicAura extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public AntiMagicAura(final AntiMagicAura card) {
+    private AntiMagicAura(final AntiMagicAura card) {
         super(card);
     }
 

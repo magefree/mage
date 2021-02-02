@@ -26,7 +26,7 @@ public final class OgreTaskmaster extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public OgreTaskmaster(final OgreTaskmaster card) {
+    private OgreTaskmaster(final OgreTaskmaster card) {
         super(card);
     }
 

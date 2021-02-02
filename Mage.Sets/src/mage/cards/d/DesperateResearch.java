@@ -30,7 +30,7 @@ public final class DesperateResearch extends CardImpl {
         this.getSpellAbility().addEffect(new DesperateResearchEffect());
     }
 
-    public DesperateResearch(final DesperateResearch card) {
+    private DesperateResearch(final DesperateResearch card) {
         super(card);
     }
 

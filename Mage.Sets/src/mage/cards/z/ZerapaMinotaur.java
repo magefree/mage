@@ -34,7 +34,7 @@ public final class ZerapaMinotaur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZerapaMinotaur(final ZerapaMinotaur card) {
+    private ZerapaMinotaur(final ZerapaMinotaur card) {
         super(card);
     }
 

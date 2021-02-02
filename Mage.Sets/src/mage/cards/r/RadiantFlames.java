@@ -24,7 +24,7 @@ public final class RadiantFlames extends CardImpl {
         getSpellAbility().addEffect(new DamageAllEffect(ColorsOfManaSpentToCastCount.getInstance(), new FilterCreaturePermanent()));
     }
 
-    public RadiantFlames(final RadiantFlames card) {
+    private RadiantFlames(final RadiantFlames card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class BallLightning extends CardImpl {
         this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
     }
 
-    public BallLightning(final BallLightning card) {
+    private BallLightning(final BallLightning card) {
         super(card);
     }
 

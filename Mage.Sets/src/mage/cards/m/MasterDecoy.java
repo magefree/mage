@@ -35,7 +35,7 @@ public final class MasterDecoy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MasterDecoy(final MasterDecoy card) {
+    private MasterDecoy(final MasterDecoy card) {
         super(card);
     }
 

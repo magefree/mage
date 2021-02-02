@@ -37,7 +37,7 @@ public final class SwirlingSandstorm extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public SwirlingSandstorm(final SwirlingSandstorm card) {
+    private SwirlingSandstorm(final SwirlingSandstorm card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class AdarkarWindform extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AdarkarWindform(final AdarkarWindform card) {
+    private AdarkarWindform(final AdarkarWindform card) {
         super(card);
     }
 

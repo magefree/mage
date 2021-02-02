@@ -26,7 +26,7 @@ public final class InciteRebellion extends CardImpl {
         this.getSpellAbility().addEffect(new InciteRebellionEffect());
     }
 
-    public InciteRebellion(final InciteRebellion card) {
+    private InciteRebellion(final InciteRebellion card) {
         super(card);
     }
 

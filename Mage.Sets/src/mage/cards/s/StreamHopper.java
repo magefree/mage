@@ -30,7 +30,7 @@ public final class StreamHopper extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U/R}")));
     }
 
-    public StreamHopper(final StreamHopper card) {
+    private StreamHopper(final StreamHopper card) {
         super(card);
     }
 

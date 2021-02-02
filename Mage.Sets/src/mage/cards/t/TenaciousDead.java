@@ -33,7 +33,7 @@ public final class TenaciousDead extends CardImpl {
 
     }
 
-    public TenaciousDead(final TenaciousDead card) {
+    private TenaciousDead(final TenaciousDead card) {
         super(card);
     }
 

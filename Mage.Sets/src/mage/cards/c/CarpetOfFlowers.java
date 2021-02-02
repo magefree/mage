@@ -36,7 +36,7 @@ public final class CarpetOfFlowers extends CardImpl {
         this.addAbility(new CarpetOfFlowersTriggeredAbility());
     }
 
-    public CarpetOfFlowers(final CarpetOfFlowers card) {
+    private CarpetOfFlowers(final CarpetOfFlowers card) {
         super(card);
     }
 

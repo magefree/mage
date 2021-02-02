@@ -42,7 +42,7 @@ public final class BasalSliver extends CardImpl {
                 filter, "All Slivers have \"Sacrifice this permanent: Add {B}{B}.\"")));
     }
 
-    public BasalSliver(final BasalSliver card) {
+    private BasalSliver(final BasalSliver card) {
         super(card);
     }
 

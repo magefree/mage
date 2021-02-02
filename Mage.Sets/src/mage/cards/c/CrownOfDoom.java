@@ -62,7 +62,7 @@ public final class CrownOfDoom extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrownOfDoom(final CrownOfDoom card) {
+    private CrownOfDoom(final CrownOfDoom card) {
         super(card);
     }
 

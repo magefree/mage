@@ -42,7 +42,7 @@ public final class WildNacatl extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter2, 1, 1)));
     }
 
-    public WildNacatl(final WildNacatl card) {
+    private WildNacatl(final WildNacatl card) {
         super(card);
     }
 

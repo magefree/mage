@@ -40,7 +40,7 @@ public final class MasterTransmuter extends CardImpl {
 
     }
 
-    public MasterTransmuter(final MasterTransmuter card) {
+    private MasterTransmuter(final MasterTransmuter card) {
         super(card);
     }
 

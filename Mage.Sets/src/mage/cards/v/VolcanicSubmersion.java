@@ -37,7 +37,7 @@ public final class VolcanicSubmersion extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public VolcanicSubmersion(final VolcanicSubmersion card) {
+    private VolcanicSubmersion(final VolcanicSubmersion card) {
         super(card);
     }
 

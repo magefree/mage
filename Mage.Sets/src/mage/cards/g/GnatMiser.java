@@ -40,7 +40,7 @@ public final class GnatMiser extends CardImpl {
                 new MaximumHandSizeControllerEffect(1, Duration.WhileOnBattlefield, HandSizeModification.REDUCE, TargetController.OPPONENT)));
     }
 
-    public GnatMiser(final GnatMiser card) {
+    private GnatMiser(final GnatMiser card) {
         super(card);
     }
 

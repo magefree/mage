@@ -53,7 +53,7 @@ public final class CrestedSunmare extends CardImpl {
                 new PlayerGainedLifeWatcher());
     }
 
-    public CrestedSunmare(final CrestedSunmare card) {
+    private CrestedSunmare(final CrestedSunmare card) {
         super(card);
     }
 

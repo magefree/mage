@@ -65,7 +65,7 @@ public final class IzzetChemister extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IzzetChemister(final IzzetChemister card) {
+    private IzzetChemister(final IzzetChemister card) {
         super(card);
     }
 

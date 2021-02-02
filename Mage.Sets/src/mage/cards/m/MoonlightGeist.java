@@ -38,7 +38,7 @@ public final class MoonlightGeist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoonlightGeist(final MoonlightGeist card) {
+    private MoonlightGeist(final MoonlightGeist card) {
         super(card);
     }
 

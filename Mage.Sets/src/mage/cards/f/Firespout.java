@@ -43,7 +43,7 @@ public final class Firespout extends CardImpl {
         this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
-    public Firespout(final Firespout card) {
+    private Firespout(final Firespout card) {
         super(card);
     }
 

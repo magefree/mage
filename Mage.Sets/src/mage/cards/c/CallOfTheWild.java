@@ -27,7 +27,7 @@ public final class CallOfTheWild extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CallOfTheWildEffect(), new ManaCostsImpl("{2}{G}{G}")));
     }
 
-    public CallOfTheWild(final CallOfTheWild card) {
+    private CallOfTheWild(final CallOfTheWild card) {
         super(card);
     }
 

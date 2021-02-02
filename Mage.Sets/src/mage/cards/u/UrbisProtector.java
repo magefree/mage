@@ -29,7 +29,7 @@ public final class UrbisProtector extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new AngelToken())));
     }
 
-    public UrbisProtector(final UrbisProtector card) {
+    private UrbisProtector(final UrbisProtector card) {
         super(card);
     }
 

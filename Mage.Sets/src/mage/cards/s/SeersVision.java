@@ -32,7 +32,7 @@ public final class SeersVision extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeersVision(final SeersVision card) {
+    private SeersVision(final SeersVision card) {
         super(card);
     }
 

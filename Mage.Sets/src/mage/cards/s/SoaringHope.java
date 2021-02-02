@@ -50,7 +50,7 @@ public final class SoaringHope extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibrarySourceEffect(true), new ManaCostsImpl("{W}")));
     }
 
-    public SoaringHope(final SoaringHope card) {
+    private SoaringHope(final SoaringHope card) {
         super(card);
     }
 

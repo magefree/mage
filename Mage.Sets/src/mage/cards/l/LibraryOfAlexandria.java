@@ -32,7 +32,7 @@ public final class LibraryOfAlexandria extends CardImpl {
                 ""));
     }
 
-    public LibraryOfAlexandria(final LibraryOfAlexandria card) {
+    private LibraryOfAlexandria(final LibraryOfAlexandria card) {
         super(card);
     }
 

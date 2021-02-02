@@ -29,7 +29,7 @@ public final class CivicStalwart extends CardImpl {
                 new BoostControlledEffect(1, 1, Duration.EndOfTurn, new FilterCreaturePermanent("creatures"))));
     }
 
-    public CivicStalwart(final CivicStalwart card) {
+    private CivicStalwart(final CivicStalwart card) {
         super(card);
     }
 

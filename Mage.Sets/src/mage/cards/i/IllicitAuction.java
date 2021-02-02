@@ -35,7 +35,7 @@ public final class IllicitAuction extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public IllicitAuction(final IllicitAuction card) {
+    private IllicitAuction(final IllicitAuction card) {
         super(card);
     }
 

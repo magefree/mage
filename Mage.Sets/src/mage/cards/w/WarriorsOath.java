@@ -20,7 +20,7 @@ public final class WarriorsOath extends CardImpl {
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect(true));
     }
 
-    public WarriorsOath(final WarriorsOath card) {
+    private WarriorsOath(final WarriorsOath card) {
         super(card);
     }
 

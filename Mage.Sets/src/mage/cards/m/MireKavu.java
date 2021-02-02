@@ -34,7 +34,7 @@ public final class MireKavu extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter, 1, 1)));
     }
 
-    public MireKavu(final MireKavu card) {
+    private MireKavu(final MireKavu card) {
         super(card);
     }
 

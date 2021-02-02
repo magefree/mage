@@ -39,7 +39,7 @@ public final class DeusOfCalamity extends CardImpl {
         this.addAbility(new DeusOfCalamityTriggeredAbility());
     }
 
-    public DeusOfCalamity(final DeusOfCalamity card) {
+    private DeusOfCalamity(final DeusOfCalamity card) {
         super(card);
     }
 

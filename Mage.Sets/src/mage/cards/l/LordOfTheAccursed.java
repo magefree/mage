@@ -47,7 +47,7 @@ public final class LordOfTheAccursed extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LordOfTheAccursed(final LordOfTheAccursed card) {
+    private LordOfTheAccursed(final LordOfTheAccursed card) {
         super(card);
     }
 

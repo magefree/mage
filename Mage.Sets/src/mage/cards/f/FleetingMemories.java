@@ -42,7 +42,7 @@ public final class FleetingMemories extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FleetingMemories(final FleetingMemories card) {
+    private FleetingMemories(final FleetingMemories card) {
         super(card);
     }
 

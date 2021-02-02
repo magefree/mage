@@ -43,7 +43,7 @@ public final class SaffiEriksdotter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SaffiEriksdotter(final SaffiEriksdotter card) {
+    private SaffiEriksdotter(final SaffiEriksdotter card) {
         super(card);
     }
 

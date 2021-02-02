@@ -31,7 +31,7 @@ public final class BlossomingDefense extends CardImpl {
         getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
-    public BlossomingDefense(final BlossomingDefense card) {
+    private BlossomingDefense(final BlossomingDefense card) {
         super(card);
     }
 

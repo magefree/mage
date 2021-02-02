@@ -27,7 +27,7 @@ public final class VesselOfVolatility extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VesselOfVolatility(final VesselOfVolatility card) {
+    private VesselOfVolatility(final VesselOfVolatility card) {
         super(card);
     }
 

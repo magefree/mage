@@ -38,7 +38,7 @@ public final class SatyrWayfinder extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SatyrWayfinderEffect()));
     }
 
-    public SatyrWayfinder(final SatyrWayfinder card) {
+    private SatyrWayfinder(final SatyrWayfinder card) {
         super(card);
     }
 

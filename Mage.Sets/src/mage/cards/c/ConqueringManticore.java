@@ -47,7 +47,7 @@ public final class ConqueringManticore extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ConqueringManticore(final ConqueringManticore card) {
+    private ConqueringManticore(final ConqueringManticore card) {
         super(card);
     }
 

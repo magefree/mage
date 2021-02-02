@@ -38,7 +38,7 @@ public final class RuneflareTrap extends CardImpl {
 
     }
 
-    public RuneflareTrap(final RuneflareTrap card) {
+    private RuneflareTrap(final RuneflareTrap card) {
         super(card);
     }
 

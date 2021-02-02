@@ -46,7 +46,7 @@ public final class EnigmaSphinx extends CardImpl {
         this.addAbility(new CascadeAbility());
     }
 
-    public EnigmaSphinx(final EnigmaSphinx card) {
+    private EnigmaSphinx(final EnigmaSphinx card) {
         super(card);
     }
 

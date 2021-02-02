@@ -30,7 +30,7 @@ public final class ScouringSands extends CardImpl {
         
     }
 
-    public ScouringSands(final ScouringSands card) {
+    private ScouringSands(final ScouringSands card) {
         super(card);
     }
 

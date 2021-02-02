@@ -34,7 +34,7 @@ public final class LegionsOfLimDul extends CardImpl {
         this.addAbility(new LandwalkAbility(filter));
     }
 
-    public LegionsOfLimDul(final LegionsOfLimDul card) {
+    private LegionsOfLimDul(final LegionsOfLimDul card) {
         super(card);
     }
 

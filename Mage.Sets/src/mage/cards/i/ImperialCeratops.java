@@ -26,7 +26,7 @@ public final class ImperialCeratops extends CardImpl {
         this.addAbility(new DealtDamageToSourceTriggeredAbility(new GainLifeEffect(2), false, true));
     }
 
-    public ImperialCeratops(final ImperialCeratops card) {
+    private ImperialCeratops(final ImperialCeratops card) {
         super(card);
     }
 

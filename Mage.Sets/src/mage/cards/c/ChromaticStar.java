@@ -32,7 +32,7 @@ public final class ChromaticStar extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public ChromaticStar(final ChromaticStar card) {
+    private ChromaticStar(final ChromaticStar card) {
         super(card);
     }
 

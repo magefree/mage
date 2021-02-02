@@ -38,7 +38,7 @@ public final class VedalkenAnatomist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VedalkenAnatomist(final VedalkenAnatomist card) {
+    private VedalkenAnatomist(final VedalkenAnatomist card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class StolenStrategy extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new StolenStrategyEffect(), TargetController.YOU, false));
     }
 
-    public StolenStrategy(final StolenStrategy card) {
+    private StolenStrategy(final StolenStrategy card) {
         super(card);
     }
 

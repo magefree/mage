@@ -45,7 +45,7 @@ public final class DevoutHarpist extends CardImpl {
 
     }
 
-    public DevoutHarpist(final DevoutHarpist card) {
+    private DevoutHarpist(final DevoutHarpist card) {
         super(card);
     }
 

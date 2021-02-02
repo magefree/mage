@@ -41,7 +41,7 @@ public final class SupremePhantom extends CardImpl {
         ));
     }
 
-    public SupremePhantom(final SupremePhantom card) {
+    private SupremePhantom(final SupremePhantom card) {
         super(card);
     }
 

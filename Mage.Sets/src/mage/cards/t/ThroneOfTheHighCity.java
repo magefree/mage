@@ -33,7 +33,7 @@ public final class ThroneOfTheHighCity extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThroneOfTheHighCity(final ThroneOfTheHighCity card) {
+    private ThroneOfTheHighCity(final ThroneOfTheHighCity card) {
         super(card);
     }
 

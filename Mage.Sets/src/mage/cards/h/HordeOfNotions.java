@@ -52,7 +52,7 @@ public final class HordeOfNotions extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HordeOfNotions(final HordeOfNotions card) {
+    private HordeOfNotions(final HordeOfNotions card) {
         super(card);
     }
 

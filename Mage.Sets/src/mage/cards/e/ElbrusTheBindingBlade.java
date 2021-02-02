@@ -43,7 +43,7 @@ public final class ElbrusTheBindingBlade extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public ElbrusTheBindingBlade(final ElbrusTheBindingBlade card) {
+    private ElbrusTheBindingBlade(final ElbrusTheBindingBlade card) {
         super(card);
     }
 

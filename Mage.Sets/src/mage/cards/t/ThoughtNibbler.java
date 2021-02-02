@@ -35,7 +35,7 @@ public final class ThoughtNibbler extends CardImpl {
                 new MaximumHandSizeControllerEffect(2, Duration.WhileOnBattlefield, HandSizeModification.REDUCE)));
     }
 
-    public ThoughtNibbler(final ThoughtNibbler card) {
+    private ThoughtNibbler(final ThoughtNibbler card) {
         super(card);
     }
 

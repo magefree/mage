@@ -28,7 +28,7 @@ public final class PrimevalsGloriousRebirth extends CardImpl {
         this.getSpellAbility().addEffect(new PrimevalsGloriousRebirthEffect());
     }
 
-    public PrimevalsGloriousRebirth(final PrimevalsGloriousRebirth card) {
+    private PrimevalsGloriousRebirth(final PrimevalsGloriousRebirth card) {
         super(card);
     }
 

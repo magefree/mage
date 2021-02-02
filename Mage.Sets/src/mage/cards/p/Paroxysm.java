@@ -53,7 +53,7 @@ public final class Paroxysm extends CardImpl {
                 false, false, "At the beginning of the upkeep of enchanted creature's controller, "));
     }
 
-    public Paroxysm(final Paroxysm card) {
+    private Paroxysm(final Paroxysm card) {
         super(card);
     }
 

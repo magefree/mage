@@ -32,7 +32,7 @@ public final class NyxbornWolf extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3,1, Duration.WhileOnBattlefield)));
     }
 
-    public NyxbornWolf(final NyxbornWolf card) {
+    private NyxbornWolf(final NyxbornWolf card) {
         super(card);
     }
 

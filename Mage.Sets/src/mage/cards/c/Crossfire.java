@@ -27,7 +27,7 @@ public final class Crossfire extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Crossfire(final Crossfire card) {
+    private Crossfire(final Crossfire card) {
         super(card);
     }
 

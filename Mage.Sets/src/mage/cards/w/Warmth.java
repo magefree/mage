@@ -30,7 +30,7 @@ public final class Warmth extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(new GainLifeEffect(2), filter, false));
     }
 
-    public Warmth(final Warmth card) {
+    private Warmth(final Warmth card) {
         super(card);
     }
 

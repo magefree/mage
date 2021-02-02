@@ -38,7 +38,7 @@ public final class AnaDisciple extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public AnaDisciple(final AnaDisciple card) {
+    private AnaDisciple(final AnaDisciple card) {
         super(card);
     }
 

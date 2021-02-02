@@ -22,7 +22,7 @@ public final class FrenziedRaptor extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public FrenziedRaptor(final FrenziedRaptor card) {
+    private FrenziedRaptor(final FrenziedRaptor card) {
         super(card);
     }
 

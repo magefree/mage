@@ -39,7 +39,7 @@ public final class PhyrexianSlayer extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DestroyTargetEffect(true), filter, false));
     }
 
-    public PhyrexianSlayer(final PhyrexianSlayer card) {
+    private PhyrexianSlayer(final PhyrexianSlayer card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class UnholyFiend extends CardImpl {
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new LoseLifeSourceControllerEffect(1), false));
     }
 
-    public UnholyFiend(final UnholyFiend card) {
+    private UnholyFiend(final UnholyFiend card) {
         super(card);
     }
 

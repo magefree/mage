@@ -64,7 +64,7 @@ public final class FuryCharm extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
     }
 
-    public FuryCharm(final FuryCharm card) {
+    private FuryCharm(final FuryCharm card) {
         super(card);
     }
 

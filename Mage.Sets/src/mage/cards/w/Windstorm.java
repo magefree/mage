@@ -30,7 +30,7 @@ public final class Windstorm extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, filter));
     }
 
-    public Windstorm(final Windstorm card) {
+    private Windstorm(final Windstorm card) {
         super(card);
     }
 

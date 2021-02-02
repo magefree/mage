@@ -26,7 +26,7 @@ public final class GoblinPatrol extends CardImpl {
         this.addAbility(new EchoAbility("{R}"));
     }
 
-    public GoblinPatrol(final GoblinPatrol card) {
+    private GoblinPatrol(final GoblinPatrol card) {
         super(card);
     }
 

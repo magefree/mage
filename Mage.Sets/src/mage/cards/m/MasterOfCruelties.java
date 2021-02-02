@@ -50,7 +50,7 @@ public final class MasterOfCruelties extends CardImpl {
 
     }
 
-    public MasterOfCruelties(final MasterOfCruelties card) {
+    private MasterOfCruelties(final MasterOfCruelties card) {
         super(card);
     }
 

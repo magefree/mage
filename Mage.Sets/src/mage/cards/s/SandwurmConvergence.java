@@ -41,7 +41,7 @@ public final class SandwurmConvergence extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new Wurm55Token()), TargetController.YOU, false));
     }
 
-    public SandwurmConvergence(final SandwurmConvergence card) {
+    private SandwurmConvergence(final SandwurmConvergence card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class PhyrexianHulk extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public PhyrexianHulk(final PhyrexianHulk card) {
+    private PhyrexianHulk(final PhyrexianHulk card) {
         super(card);
     }
 

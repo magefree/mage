@@ -47,7 +47,7 @@ public final class AncientStoneIdol extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new StoneTrapIdolToken())));
     }
 
-    public AncientStoneIdol(final AncientStoneIdol card) {
+    private AncientStoneIdol(final AncientStoneIdol card) {
         super(card);
     }
 

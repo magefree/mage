@@ -48,7 +48,7 @@ public final class FlaringFlameKin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlaringFlameKin(final FlaringFlameKin card) {
+    private FlaringFlameKin(final FlaringFlameKin card) {
         super(card);
     }
 

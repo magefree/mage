@@ -35,7 +35,7 @@ public final class TrialOfKnowledge extends CardImpl {
                 "When a Cartouche enters the battlefield under your control, return {this} to its owner's hand"));
     }
 
-    public TrialOfKnowledge(final TrialOfKnowledge card) {
+    private TrialOfKnowledge(final TrialOfKnowledge card) {
         super(card);
     }
 

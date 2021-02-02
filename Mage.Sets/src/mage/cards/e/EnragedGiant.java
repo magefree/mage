@@ -35,7 +35,7 @@ public final class EnragedGiant extends CardImpl {
 
     }
 
-    public EnragedGiant(final EnragedGiant card) {
+    private EnragedGiant(final EnragedGiant card) {
         super(card);
     }
 

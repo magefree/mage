@@ -26,7 +26,7 @@ public final class PartTheWaterveil extends CardImpl {
         this.addAbility(new AwakenAbility(this, 6, "{6}{U}{U}{U}"));
     }
 
-    public PartTheWaterveil(final PartTheWaterveil card) {
+    private PartTheWaterveil(final PartTheWaterveil card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class KaerveksPurge extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(KaerveksPurgeAdjuster.instance);
     }
 
-    public KaerveksPurge(final KaerveksPurge card) {
+    private KaerveksPurge(final KaerveksPurge card) {
         super(card);
     }
 

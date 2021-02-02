@@ -64,7 +64,7 @@ public final class ObsidianFireheart extends CardImpl {
 
     }
 
-    public ObsidianFireheart(final ObsidianFireheart card) {
+    private ObsidianFireheart(final ObsidianFireheart card) {
         super(card);
     }
 

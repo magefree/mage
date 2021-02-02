@@ -27,7 +27,7 @@ public final class Powerleech extends CardImpl {
         this.addAbility(new PowerleechTriggeredAbility());
     }
 
-    public Powerleech(final Powerleech card) {
+    private Powerleech(final Powerleech card) {
         super(card);
     }
 

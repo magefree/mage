@@ -40,7 +40,7 @@ public final class ObsidianAcolyte extends CardImpl {
 
     }
 
-    public ObsidianAcolyte(final ObsidianAcolyte card) {
+    private ObsidianAcolyte(final ObsidianAcolyte card) {
         super(card);
     }
 

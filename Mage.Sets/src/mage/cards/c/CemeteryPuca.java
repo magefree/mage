@@ -39,7 +39,7 @@ public final class CemeteryPuca extends CardImpl {
 
     }
 
-    public CemeteryPuca(final CemeteryPuca card) {
+    private CemeteryPuca(final CemeteryPuca card) {
         super(card);
     }
 

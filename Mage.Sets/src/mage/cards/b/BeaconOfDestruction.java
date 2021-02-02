@@ -23,7 +23,7 @@ public final class BeaconOfDestruction extends CardImpl {
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
     }
 
-    public BeaconOfDestruction(final BeaconOfDestruction card) {
+    private BeaconOfDestruction(final BeaconOfDestruction card) {
         super(card);
     }
 

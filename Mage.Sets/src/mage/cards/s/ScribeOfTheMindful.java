@@ -51,7 +51,7 @@ public final class ScribeOfTheMindful extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScribeOfTheMindful(final ScribeOfTheMindful card) {
+    private ScribeOfTheMindful(final ScribeOfTheMindful card) {
         super(card);
     }
 

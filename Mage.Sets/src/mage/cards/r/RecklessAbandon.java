@@ -28,7 +28,7 @@ public final class RecklessAbandon extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public RecklessAbandon(final RecklessAbandon card) {
+    private RecklessAbandon(final RecklessAbandon card) {
         super(card);
     }
 

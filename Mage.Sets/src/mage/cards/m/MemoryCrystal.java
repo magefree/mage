@@ -32,7 +32,7 @@ public final class MemoryCrystal extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MemoryCrystalSpellsCostReductionEffect()));
     }
 
-    public MemoryCrystal(final MemoryCrystal card) {
+    private MemoryCrystal(final MemoryCrystal card) {
         super(card);
     }
 

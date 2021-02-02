@@ -33,7 +33,7 @@ public final class GutturalResponse extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public GutturalResponse(final GutturalResponse card) {
+    private GutturalResponse(final GutturalResponse card) {
         super(card);
     }
 

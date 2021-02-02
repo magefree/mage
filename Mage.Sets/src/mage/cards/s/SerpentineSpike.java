@@ -56,7 +56,7 @@ public final class SerpentineSpike extends CardImpl {
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
-    public SerpentineSpike(final SerpentineSpike card) {
+    private SerpentineSpike(final SerpentineSpike card) {
         super(card);
     }
 

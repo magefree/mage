@@ -35,7 +35,7 @@ public final class SavageVentmaw extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }
 
-    public SavageVentmaw(final SavageVentmaw card) {
+    private SavageVentmaw(final SavageVentmaw card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class IgniteMemories extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public IgniteMemories(final IgniteMemories card) {
+    private IgniteMemories(final IgniteMemories card) {
         super(card);
     }
 

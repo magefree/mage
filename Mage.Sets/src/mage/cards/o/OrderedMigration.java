@@ -25,7 +25,7 @@ public final class OrderedMigration extends CardImpl {
         this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);
     }
 
-    public OrderedMigration(final OrderedMigration card) {
+    private OrderedMigration(final OrderedMigration card) {
         super(card);
     }
 

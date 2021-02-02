@@ -51,7 +51,7 @@ public final class DarkSupplicant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DarkSupplicant(final DarkSupplicant card) {
+    private DarkSupplicant(final DarkSupplicant card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class ClifftopRetreat extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public ClifftopRetreat(final ClifftopRetreat card) {
+    private ClifftopRetreat(final ClifftopRetreat card) {
         super(card);
     }
 

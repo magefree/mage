@@ -27,7 +27,7 @@ public final class EnragedRevolutionary extends CardImpl {
         this.addAbility(new DethroneAbility());
     }
 
-    public EnragedRevolutionary(final EnragedRevolutionary card) {
+    private EnragedRevolutionary(final EnragedRevolutionary card) {
         super(card);
     }
 

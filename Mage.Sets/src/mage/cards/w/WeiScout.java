@@ -27,7 +27,7 @@ public final class WeiScout extends CardImpl {
         this.addAbility(HorsemanshipAbility.getInstance());
     }
 
-    public WeiScout(final WeiScout card) {
+    private WeiScout(final WeiScout card) {
         super(card);
     }
 

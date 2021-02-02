@@ -49,7 +49,7 @@ public final class ChitteringWitch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChitteringWitch(final ChitteringWitch card) {
+    private ChitteringWitch(final ChitteringWitch card) {
         super(card);
     }
 

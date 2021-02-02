@@ -41,7 +41,7 @@ public final class FlashFoliage extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public FlashFoliage(final FlashFoliage card) {
+    private FlashFoliage(final FlashFoliage card) {
         super(card);
     }
 

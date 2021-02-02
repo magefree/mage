@@ -55,7 +55,7 @@ public final class YurikoTheTigersShadow extends CardImpl {
         ));
     }
 
-    public YurikoTheTigersShadow(final YurikoTheTigersShadow card) {
+    private YurikoTheTigersShadow(final YurikoTheTigersShadow card) {
         super(card);
     }
 

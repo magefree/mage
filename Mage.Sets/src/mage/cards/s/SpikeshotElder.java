@@ -35,7 +35,7 @@ public final class SpikeshotElder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpikeshotElder(final SpikeshotElder card) {
+    private SpikeshotElder(final SpikeshotElder card) {
         super(card);
     }
 

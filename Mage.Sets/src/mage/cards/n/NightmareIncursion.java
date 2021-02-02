@@ -33,7 +33,7 @@ public final class NightmareIncursion extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public NightmareIncursion(final NightmareIncursion card) {
+    private NightmareIncursion(final NightmareIncursion card) {
         super(card);
     }
 

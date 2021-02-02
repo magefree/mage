@@ -33,7 +33,7 @@ public final class KnightOfDawn extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{W}{W}")));
     }
 
-    public KnightOfDawn(final KnightOfDawn card) {
+    private KnightOfDawn(final KnightOfDawn card) {
         super(card);
     }
 

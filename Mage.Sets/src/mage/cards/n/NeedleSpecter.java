@@ -40,7 +40,7 @@ public final class NeedleSpecter extends CardImpl {
         
     }
 
-    public NeedleSpecter(final NeedleSpecter card) {
+    private NeedleSpecter(final NeedleSpecter card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class Snakeform extends CardImpl {
         
     }
 
-    public Snakeform(final Snakeform card) {
+    private Snakeform(final Snakeform card) {
         super(card);
     }
 

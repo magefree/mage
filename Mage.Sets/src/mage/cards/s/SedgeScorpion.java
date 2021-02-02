@@ -26,7 +26,7 @@ public final class SedgeScorpion extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public SedgeScorpion(final SedgeScorpion card) {
+    private SedgeScorpion(final SedgeScorpion card) {
         super(card);
     }
 

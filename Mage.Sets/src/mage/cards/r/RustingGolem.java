@@ -34,7 +34,7 @@ public final class RustingGolem extends CardImpl {
             new CountersSourceCount(CounterType.FADE), Duration.EndOfGame)));
     }
 
-    public RustingGolem(final RustingGolem card) {
+    private RustingGolem(final RustingGolem card) {
         super(card);
     }
 

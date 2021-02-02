@@ -20,7 +20,7 @@ public final class SpringOfEternalPeace extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(8));
     }
 
-    public SpringOfEternalPeace(final SpringOfEternalPeace card) {
+    private SpringOfEternalPeace(final SpringOfEternalPeace card) {
         super(card);
     }
 

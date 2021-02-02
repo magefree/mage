@@ -46,7 +46,7 @@ public final class Overtaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Overtaker(final Overtaker card) {
+    private Overtaker(final Overtaker card) {
         super(card);
     }
 

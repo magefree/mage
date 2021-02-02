@@ -58,7 +58,7 @@ public final class SlitheryStalker extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public SlitheryStalker(final SlitheryStalker card) {
+    private SlitheryStalker(final SlitheryStalker card) {
         super(card);
     }
 

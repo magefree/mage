@@ -34,7 +34,7 @@ public final class ScaleBlessing extends CardImpl {
 
     }
 
-    public ScaleBlessing(final ScaleBlessing card) {
+    private ScaleBlessing(final ScaleBlessing card) {
         super(card);
     }
 

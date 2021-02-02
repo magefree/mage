@@ -28,7 +28,7 @@ public final class ViciousKavu extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
     }
 
-    public ViciousKavu(final ViciousKavu card) {
+    private ViciousKavu(final ViciousKavu card) {
         super(card);
     }
 

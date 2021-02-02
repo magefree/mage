@@ -35,7 +35,7 @@ public final class LeoninBola extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public LeoninBola(final LeoninBola card) {
+    private LeoninBola(final LeoninBola card) {
         super(card);
     }
 

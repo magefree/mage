@@ -36,7 +36,7 @@ public final class NetherbornPhalanx extends CardImpl {
         this.addAbility(new TransmuteAbility("{1}{B}{B}"));
     }
 
-    public NetherbornPhalanx(final NetherbornPhalanx card) {
+    private NetherbornPhalanx(final NetherbornPhalanx card) {
         super(card);
     }
 

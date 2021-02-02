@@ -42,7 +42,7 @@ public final class ScribNibblers extends CardImpl {
         this.addAbility(new LandfallAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), true));
     }
 
-    public ScribNibblers(final ScribNibblers card) {
+    private ScribNibblers(final ScribNibblers card) {
         super(card);
     }
 

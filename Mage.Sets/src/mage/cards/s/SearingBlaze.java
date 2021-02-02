@@ -38,7 +38,7 @@ public final class SearingBlaze extends CardImpl {
         this.getSpellAbility().addWatcher(new LandfallWatcher());
     }
 
-    public SearingBlaze(final SearingBlaze card) {
+    private SearingBlaze(final SearingBlaze card) {
         super(card);
     }
 

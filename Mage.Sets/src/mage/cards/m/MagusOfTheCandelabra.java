@@ -40,7 +40,7 @@ public final class MagusOfTheCandelabra extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagusOfTheCandelabra(final MagusOfTheCandelabra card) {
+    private MagusOfTheCandelabra(final MagusOfTheCandelabra card) {
         super(card);
     }
 

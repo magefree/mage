@@ -34,7 +34,7 @@ public final class ShorelineRaider extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public ShorelineRaider(final ShorelineRaider card) {
+    private ShorelineRaider(final ShorelineRaider card) {
         super(card);
     }
 

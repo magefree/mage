@@ -37,7 +37,7 @@ public final class VenserShaperSavant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VenserShaperSavant(final VenserShaperSavant card) {
+    private VenserShaperSavant(final VenserShaperSavant card) {
         super(card);
     }
 

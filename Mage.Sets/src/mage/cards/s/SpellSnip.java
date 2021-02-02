@@ -27,7 +27,7 @@ public final class SpellSnip extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public SpellSnip(final SpellSnip card) {
+    private SpellSnip(final SpellSnip card) {
         super(card);
     }
 

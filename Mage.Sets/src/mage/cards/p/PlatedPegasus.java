@@ -41,7 +41,7 @@ public final class PlatedPegasus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlatedPegasusEffect()));
     }
 
-    public PlatedPegasus(final PlatedPegasus card) {
+    private PlatedPegasus(final PlatedPegasus card) {
         super(card);
     }
 

@@ -69,7 +69,7 @@ public final class PossessedCentaur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PossessedCentaur(final PossessedCentaur card) {
+    private PossessedCentaur(final PossessedCentaur card) {
         super(card);
     }
 

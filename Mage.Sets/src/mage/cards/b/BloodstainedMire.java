@@ -24,7 +24,7 @@ public final class BloodstainedMire extends CardImpl {
         this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.SWAMP,SubType.MOUNTAIN)));
     }
 
-    public BloodstainedMire(final BloodstainedMire card) {
+    private BloodstainedMire(final BloodstainedMire card) {
         super(card);
     }
 

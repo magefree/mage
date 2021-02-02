@@ -36,7 +36,7 @@ public final class TidalWarrior extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TidalWarrior(final TidalWarrior card) {
+    private TidalWarrior(final TidalWarrior card) {
         super(card);
     }
 

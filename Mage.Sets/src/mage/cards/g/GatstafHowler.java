@@ -40,7 +40,7 @@ public final class GatstafHowler extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public GatstafHowler(final GatstafHowler card) {
+    private GatstafHowler(final GatstafHowler card) {
         super(card);
     }
 

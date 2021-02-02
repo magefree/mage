@@ -29,7 +29,7 @@ public final class DreamChisel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public DreamChisel(final DreamChisel card) {
+    private DreamChisel(final DreamChisel card) {
         super(card);
     }
 

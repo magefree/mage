@@ -27,7 +27,7 @@ public final class BristlingBoar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
-    public BristlingBoar(final BristlingBoar card) {
+    private BristlingBoar(final BristlingBoar card) {
         super(card);
     }
 

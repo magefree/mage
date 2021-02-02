@@ -52,7 +52,7 @@ public final class SerrasLiturgy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SerrasLiturgy(final SerrasLiturgy card) {
+    private SerrasLiturgy(final SerrasLiturgy card) {
         super(card);
     }
 

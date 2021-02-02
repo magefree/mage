@@ -53,7 +53,7 @@ public final class MuldrothaTheGravetide extends CardImpl {
                 new MuldrothaTheGravetideWatcher());
     }
 
-    public MuldrothaTheGravetide(final MuldrothaTheGravetide card) {
+    private MuldrothaTheGravetide(final MuldrothaTheGravetide card) {
         super(card);
     }
 

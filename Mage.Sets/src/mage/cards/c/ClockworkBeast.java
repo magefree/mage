@@ -70,7 +70,7 @@ public final class ClockworkBeast extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ClockworkBeast(final ClockworkBeast card) {
+    private ClockworkBeast(final ClockworkBeast card) {
         super(card);
     }
 

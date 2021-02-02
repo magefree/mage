@@ -36,7 +36,7 @@ public final class BanishingKnack extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public BanishingKnack(final BanishingKnack card) {
+    private BanishingKnack(final BanishingKnack card) {
         super(card);
     }
 

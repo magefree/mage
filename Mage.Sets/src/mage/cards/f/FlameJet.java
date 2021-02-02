@@ -26,7 +26,7 @@ public final class FlameJet extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public FlameJet(final FlameJet card) {
+    private FlameJet(final FlameJet card) {
         super(card);
     }
 

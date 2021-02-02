@@ -45,7 +45,7 @@ public final class ExclusionRitual extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ExclusionRitualReplacementEffect()));
     }
 
-    public ExclusionRitual(final ExclusionRitual card) {
+    private ExclusionRitual(final ExclusionRitual card) {
         super(card);
     }
 

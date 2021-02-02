@@ -32,7 +32,7 @@ public final class WhimsOfTheFates extends CardImpl {
         this.getSpellAbility().addEffect(new WhimsOfTheFateEffect());
     }
 
-    public WhimsOfTheFates(final WhimsOfTheFates card) {
+    private WhimsOfTheFates(final WhimsOfTheFates card) {
         super(card);
     }
 

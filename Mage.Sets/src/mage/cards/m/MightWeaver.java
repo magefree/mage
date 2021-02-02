@@ -46,7 +46,7 @@ public final class MightWeaver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MightWeaver(final MightWeaver card) {
+    private MightWeaver(final MightWeaver card) {
         super(card);
     }
 

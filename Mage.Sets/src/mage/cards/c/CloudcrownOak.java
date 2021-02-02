@@ -26,7 +26,7 @@ public final class CloudcrownOak extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public CloudcrownOak(final CloudcrownOak card) {
+    private CloudcrownOak(final CloudcrownOak card) {
         super(card);
     }
 

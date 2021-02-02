@@ -40,7 +40,7 @@ public final class ConundrumSphinx extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new ConundrumSphinxEffect(), false));
     }
 
-    public ConundrumSphinx(final ConundrumSphinx card) {
+    private ConundrumSphinx(final ConundrumSphinx card) {
         super(card);
     }
 

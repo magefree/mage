@@ -31,7 +31,7 @@ public final class Abrade extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public Abrade(final Abrade card) {
+    private Abrade(final Abrade card) {
         super(card);
     }
 

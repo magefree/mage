@@ -45,7 +45,7 @@ public final class RitualOfSteel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0,2, Duration.WhileOnBattlefield)));
     }
 
-    public RitualOfSteel(final RitualOfSteel card) {
+    private RitualOfSteel(final RitualOfSteel card) {
         super(card);
     }
 

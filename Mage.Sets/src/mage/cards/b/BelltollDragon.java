@@ -47,7 +47,7 @@ public final class BelltollDragon extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false, false));
     }
 
-    public BelltollDragon(final BelltollDragon card) {
+    private BelltollDragon(final BelltollDragon card) {
         super(card);
     }
 

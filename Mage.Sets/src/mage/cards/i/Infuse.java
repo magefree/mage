@@ -39,7 +39,7 @@ public final class Infuse extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public Infuse(final Infuse card) {
+    private Infuse(final Infuse card) {
         super(card);
     }
 

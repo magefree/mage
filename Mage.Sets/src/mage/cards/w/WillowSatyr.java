@@ -52,7 +52,7 @@ public final class WillowSatyr extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WillowSatyr(final WillowSatyr card) {
+    private WillowSatyr(final WillowSatyr card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class MerrowGrimeblotter extends CardImpl {
         
     }
 
-    public MerrowGrimeblotter(final MerrowGrimeblotter card) {
+    private MerrowGrimeblotter(final MerrowGrimeblotter card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class VulshokSorcerer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VulshokSorcerer(final VulshokSorcerer card) {
+    private VulshokSorcerer(final VulshokSorcerer card) {
         super(card);
     }
 

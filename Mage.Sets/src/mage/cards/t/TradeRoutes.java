@@ -42,7 +42,7 @@ public final class TradeRoutes extends CardImpl {
         this.addAbility(drawACard);
     }
 
-    public TradeRoutes(final TradeRoutes card) {
+    private TradeRoutes(final TradeRoutes card) {
         super(card);
     }
 

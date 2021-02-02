@@ -36,7 +36,7 @@ public final class HermitDruid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HermitDruid(final HermitDruid card) {
+    private HermitDruid(final HermitDruid card) {
         super(card);
     }
 

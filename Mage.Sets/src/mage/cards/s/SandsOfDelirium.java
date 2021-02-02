@@ -31,7 +31,7 @@ public final class SandsOfDelirium extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SandsOfDelirium(final SandsOfDelirium card) {
+    private SandsOfDelirium(final SandsOfDelirium card) {
         super(card);
     }
 

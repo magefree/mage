@@ -35,7 +35,7 @@ public final class WaningWurm extends CardImpl {
         this.addAbility(new VanishingSacrificeAbility());
     }
 
-    public WaningWurm(final WaningWurm card) {
+    private WaningWurm(final WaningWurm card) {
         super(card);
     }
 

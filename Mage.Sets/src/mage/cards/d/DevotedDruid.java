@@ -34,7 +34,7 @@ public final class DevotedDruid extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new PutCountersSourceCost(CounterType.M1M1.createInstance())));
     }
 
-    public DevotedDruid(final DevotedDruid card) {
+    private DevotedDruid(final DevotedDruid card) {
         super(card);
     }
 

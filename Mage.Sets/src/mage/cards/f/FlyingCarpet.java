@@ -31,7 +31,7 @@ public final class FlyingCarpet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlyingCarpet(final FlyingCarpet card) {
+    private FlyingCarpet(final FlyingCarpet card) {
         super(card);
     }
 

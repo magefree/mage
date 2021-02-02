@@ -44,7 +44,7 @@ public final class WalkingBallista extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WalkingBallista(final WalkingBallista card) {
+    private WalkingBallista(final WalkingBallista card) {
         super(card);
     }
 

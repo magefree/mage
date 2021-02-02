@@ -30,7 +30,7 @@ public final class DevastatingSummons extends CardImpl {
         this.getSpellAbility().addEffect(new DevastatingSummonsEffect());
     }
 
-    public DevastatingSummons(final DevastatingSummons card) {
+    private DevastatingSummons(final DevastatingSummons card) {
         super(card);
     }
 

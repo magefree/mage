@@ -45,7 +45,7 @@ public final class FellSpecter extends CardImpl {
         ));
     }
 
-    public FellSpecter(final FellSpecter card) {
+    private FellSpecter(final FellSpecter card) {
         super(card);
     }
 

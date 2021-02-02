@@ -29,7 +29,7 @@ public final class PactOfNegation extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{3}{U}{U}")), false));
     }
 
-    public PactOfNegation(final PactOfNegation card) {
+    private PactOfNegation(final PactOfNegation card) {
         super(card);
     }
 

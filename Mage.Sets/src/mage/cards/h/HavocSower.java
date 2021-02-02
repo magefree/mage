@@ -33,7 +33,7 @@ public final class HavocSower extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{C}")));
     }
 
-    public HavocSower(final HavocSower card) {
+    private HavocSower(final HavocSower card) {
         super(card);
     }
 

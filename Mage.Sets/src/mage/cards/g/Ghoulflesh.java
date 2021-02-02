@@ -37,7 +37,7 @@ public final class Ghoulflesh extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardColorAttachedEffect(ObjectColor.BLACK, Duration.WhileOnBattlefield, AttachmentType.AURA)));
     }
 
-    public Ghoulflesh(final Ghoulflesh card) {
+    private Ghoulflesh(final Ghoulflesh card) {
         super(card);
     }
 

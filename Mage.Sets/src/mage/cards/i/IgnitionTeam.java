@@ -55,7 +55,7 @@ public final class IgnitionTeam extends CardImpl {
         
     }
 
-    public IgnitionTeam(final IgnitionTeam card) {
+    private IgnitionTeam(final IgnitionTeam card) {
         super(card);
     }
 

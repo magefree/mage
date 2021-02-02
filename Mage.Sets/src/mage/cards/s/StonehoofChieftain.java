@@ -54,7 +54,7 @@ public final class StonehoofChieftain extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StonehoofChieftain(final StonehoofChieftain card) {
+    private StonehoofChieftain(final StonehoofChieftain card) {
         super(card);
     }
 

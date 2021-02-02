@@ -33,7 +33,7 @@ public final class KinsbaileBalloonist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KinsbaileBalloonist(final KinsbaileBalloonist card) {
+    private KinsbaileBalloonist(final KinsbaileBalloonist card) {
         super(card);
     }
 

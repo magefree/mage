@@ -32,7 +32,7 @@ public final class BroodKeeper extends CardImpl {
         this.addAbility(new AuraAttachedTriggeredAbility(effect, false));
     }
 
-    public BroodKeeper(final BroodKeeper card) {
+    private BroodKeeper(final BroodKeeper card) {
         super(card);
     }
 

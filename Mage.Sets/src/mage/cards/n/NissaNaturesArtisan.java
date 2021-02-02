@@ -59,7 +59,7 @@ public final class NissaNaturesArtisan extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NissaNaturesArtisan(final NissaNaturesArtisan card) {
+    private NissaNaturesArtisan(final NissaNaturesArtisan card) {
         super(card);
     }
 

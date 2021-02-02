@@ -42,7 +42,7 @@ public final class ShrineOfTheForsakenGods extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledLandPermanent("you control seven or more lands"), ComparisonType.MORE_THAN, 6)));
     }
 
-    public ShrineOfTheForsakenGods(final ShrineOfTheForsakenGods card) {
+    private ShrineOfTheForsakenGods(final ShrineOfTheForsakenGods card) {
         super(card);
     }
 

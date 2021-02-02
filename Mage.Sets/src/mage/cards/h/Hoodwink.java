@@ -32,7 +32,7 @@ public final class Hoodwink extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public Hoodwink(final Hoodwink card) {
+    private Hoodwink(final Hoodwink card) {
         super(card);
     }
 

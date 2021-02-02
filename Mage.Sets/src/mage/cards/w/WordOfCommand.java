@@ -44,7 +44,7 @@ public final class WordOfCommand extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public WordOfCommand(final WordOfCommand card) {
+    private WordOfCommand(final WordOfCommand card) {
         super(card);
     }
 

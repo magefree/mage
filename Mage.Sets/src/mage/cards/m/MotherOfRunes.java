@@ -35,7 +35,7 @@ public final class MotherOfRunes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MotherOfRunes(final MotherOfRunes card) {
+    private MotherOfRunes(final MotherOfRunes card) {
         super(card);
     }
 

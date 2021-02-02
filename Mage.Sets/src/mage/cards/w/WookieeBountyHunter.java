@@ -27,7 +27,7 @@ public final class WookieeBountyHunter extends CardImpl {
         this.addAbility(new BountyAbility(new GainLifeEffect(3)));
     }
 
-    public WookieeBountyHunter(final WookieeBountyHunter card) {
+    private WookieeBountyHunter(final WookieeBountyHunter card) {
         super(card);
     }
 

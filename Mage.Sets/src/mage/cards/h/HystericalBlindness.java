@@ -30,7 +30,7 @@ public final class HystericalBlindness extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-4, 0, Duration.EndOfTurn, filter, false));
     }
 
-    public HystericalBlindness(final HystericalBlindness card) {
+    private HystericalBlindness(final HystericalBlindness card) {
         super(card);
     }
 

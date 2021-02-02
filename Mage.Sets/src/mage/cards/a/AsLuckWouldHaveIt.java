@@ -36,7 +36,7 @@ public final class AsLuckWouldHaveIt extends CardImpl {
         this.addAbility(new AsLuckWouldHaveItTriggeredAbility());
     }
 
-    public AsLuckWouldHaveIt(final AsLuckWouldHaveIt card) {
+    private AsLuckWouldHaveIt(final AsLuckWouldHaveIt card) {
         super(card);
     }
 

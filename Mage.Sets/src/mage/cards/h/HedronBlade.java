@@ -45,7 +45,7 @@ public final class HedronBlade extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public HedronBlade(final HedronBlade card) {
+    private HedronBlade(final HedronBlade card) {
         super(card);
     }
 

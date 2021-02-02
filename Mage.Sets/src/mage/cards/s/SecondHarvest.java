@@ -29,7 +29,7 @@ public final class SecondHarvest extends CardImpl {
         this.getSpellAbility().addEffect(new SecondHarvestEffect());
     }
 
-    public SecondHarvest(final SecondHarvest card) {
+    private SecondHarvest(final SecondHarvest card) {
         super(card);
     }
 

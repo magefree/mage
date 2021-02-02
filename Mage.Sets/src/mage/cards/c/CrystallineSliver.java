@@ -31,7 +31,7 @@ public final class CrystallineSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, new FilterPermanent(SubType.SLIVER, "All Slivers"))));
     }
 
-    public CrystallineSliver(final CrystallineSliver card) {
+    private CrystallineSliver(final CrystallineSliver card) {
         super(card);
     }
 

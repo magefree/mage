@@ -43,7 +43,7 @@ public final class Dread extends CardImpl {
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
     }
 
-    public Dread(final Dread card) {
+    private Dread(final Dread card) {
         super(card);
     }
 

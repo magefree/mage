@@ -22,7 +22,7 @@ public final class FlamebornViron extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public FlamebornViron(final FlamebornViron card) {
+    private FlamebornViron(final FlamebornViron card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class InspiringVantage extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public InspiringVantage(final InspiringVantage card) {
+    private InspiringVantage(final InspiringVantage card) {
         super(card);
     }
 

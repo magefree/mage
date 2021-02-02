@@ -32,7 +32,7 @@ public final class AnZerrinRuins extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnZerrinRuinsDontUntapEffect()));
     }
 
-    public AnZerrinRuins(final AnZerrinRuins card) {
+    private AnZerrinRuins(final AnZerrinRuins card) {
         super(card);
     }
 

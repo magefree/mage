@@ -31,7 +31,7 @@ public final class ToxicDeluge extends CardImpl {
                 null, true));
     }
 
-    public ToxicDeluge(final ToxicDeluge card) {
+    private ToxicDeluge(final ToxicDeluge card) {
         super(card);
     }
 

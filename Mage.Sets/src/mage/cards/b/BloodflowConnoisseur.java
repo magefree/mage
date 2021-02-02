@@ -36,7 +36,7 @@ public final class BloodflowConnoisseur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodflowConnoisseur(final BloodflowConnoisseur card) {
+    private BloodflowConnoisseur(final BloodflowConnoisseur card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class PrimevalTitan extends CardImpl {
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, new FilterLandCard("land cards")), true, Outcome.PutLandInPlay), true));
     }
 
-    public PrimevalTitan(final PrimevalTitan card) {
+    private PrimevalTitan(final PrimevalTitan card) {
         super(card);
     }
 

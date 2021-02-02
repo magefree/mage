@@ -51,7 +51,7 @@ public final class Hobble extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public Hobble(final Hobble card) {
+    private Hobble(final Hobble card) {
         super(card);
     }
 

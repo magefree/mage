@@ -42,7 +42,7 @@ public final class SamiteArcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SamiteArcher(final SamiteArcher card) {
+    private SamiteArcher(final SamiteArcher card) {
         super(card);
     }
 

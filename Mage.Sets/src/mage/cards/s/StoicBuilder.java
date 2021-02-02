@@ -31,7 +31,7 @@ public final class StoicBuilder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StoicBuilder(final StoicBuilder card) {
+    private StoicBuilder(final StoicBuilder card) {
         super(card);
     }
 

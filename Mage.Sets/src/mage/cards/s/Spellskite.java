@@ -42,7 +42,7 @@ public final class Spellskite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Spellskite(final Spellskite card) {
+    private Spellskite(final Spellskite card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class DarksteelForge extends CardImpl {
 
     }
 
-    public DarksteelForge(final DarksteelForge card) {
+    private DarksteelForge(final DarksteelForge card) {
         super(card);
     }
 

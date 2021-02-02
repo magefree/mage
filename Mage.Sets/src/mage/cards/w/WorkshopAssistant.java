@@ -41,7 +41,7 @@ public final class WorkshopAssistant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WorkshopAssistant(final WorkshopAssistant card) {
+    private WorkshopAssistant(final WorkshopAssistant card) {
         super(card);
     }
 

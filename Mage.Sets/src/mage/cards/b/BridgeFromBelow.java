@@ -46,7 +46,7 @@ public final class BridgeFromBelow extends CardImpl {
 
     }
 
-    public BridgeFromBelow(final BridgeFromBelow card) {
+    private BridgeFromBelow(final BridgeFromBelow card) {
         super(card);
     }
 

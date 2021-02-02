@@ -40,7 +40,7 @@ public final class WreckingOgre extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WreckingOgre(final WreckingOgre card) {
+    private WreckingOgre(final WreckingOgre card) {
         super(card);
     }
 

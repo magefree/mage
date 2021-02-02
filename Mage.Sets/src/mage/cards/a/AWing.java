@@ -44,7 +44,7 @@ public final class AWing extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AWing(final AWing card) {
+    private AWing(final AWing card) {
         super(card);
     }
 

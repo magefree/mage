@@ -43,7 +43,7 @@ public final class SpittingHydra extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpittingHydra(final SpittingHydra card) {
+    private SpittingHydra(final SpittingHydra card) {
         super(card);
     }
 

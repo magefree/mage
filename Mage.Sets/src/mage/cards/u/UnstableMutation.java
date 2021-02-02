@@ -44,7 +44,7 @@ public final class UnstableMutation extends CardImpl {
             TargetController.CONTROLLER_ATTACHED_TO, false));
     }
 
-    public UnstableMutation(final UnstableMutation card) {
+    private UnstableMutation(final UnstableMutation card) {
         super(card);
     }
 

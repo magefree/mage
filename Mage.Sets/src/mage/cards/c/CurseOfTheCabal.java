@@ -50,7 +50,7 @@ public final class CurseOfTheCabal extends CardImpl {
 
     }
 
-    public CurseOfTheCabal(final CurseOfTheCabal card) {
+    private CurseOfTheCabal(final CurseOfTheCabal card) {
         super(card);
     }
 

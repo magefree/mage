@@ -28,7 +28,7 @@ public final class KamiOfThePalaceFields extends CardImpl {
         this.addAbility(new SoulshiftAbility(5));
     }
 
-    public KamiOfThePalaceFields(final KamiOfThePalaceFields card) {
+    private KamiOfThePalaceFields(final KamiOfThePalaceFields card) {
         super(card);
     }
 

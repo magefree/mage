@@ -37,7 +37,7 @@ public final class OvergrownBattlement extends CardImpl {
         this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public OvergrownBattlement(final OvergrownBattlement card) {
+    private OvergrownBattlement(final OvergrownBattlement card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class PsychicSpiral extends CardImpl {
         this.getSpellAbility().addEffect(new PsychicSpiralEffect());
     }
 
-    public PsychicSpiral(final PsychicSpiral card) {
+    private PsychicSpiral(final PsychicSpiral card) {
         super(card);
     }
 

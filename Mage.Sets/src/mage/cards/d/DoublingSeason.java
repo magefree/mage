@@ -32,7 +32,7 @@ public final class DoublingSeason extends CardImpl {
 
     }
 
-    public DoublingSeason(final DoublingSeason card) {
+    private DoublingSeason(final DoublingSeason card) {
         super(card);
     }
 

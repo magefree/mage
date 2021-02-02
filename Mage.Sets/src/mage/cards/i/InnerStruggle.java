@@ -28,7 +28,7 @@ public final class InnerStruggle extends CardImpl {
 
     }
 
-    public InnerStruggle(final InnerStruggle card) {
+    private InnerStruggle(final InnerStruggle card) {
         super(card);
     }
 

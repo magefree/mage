@@ -27,7 +27,7 @@ public final class TidehollowStrix extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public TidehollowStrix(final TidehollowStrix card) {
+    private TidehollowStrix(final TidehollowStrix card) {
         super(card);
     }
 

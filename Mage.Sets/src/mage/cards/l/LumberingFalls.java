@@ -38,7 +38,7 @@ public final class LumberingFalls extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LumberingFallsToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{2}{G}{U}")));
     }
 
-    public LumberingFalls(final LumberingFalls card) {
+    private LumberingFalls(final LumberingFalls card) {
         super(card);
     }
 

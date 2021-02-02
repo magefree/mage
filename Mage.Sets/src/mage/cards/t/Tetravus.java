@@ -67,7 +67,7 @@ public final class Tetravus extends CardImpl {
 
     }
 
-    public Tetravus(final Tetravus card) {
+    private Tetravus(final Tetravus card) {
         super(card);
     }
 

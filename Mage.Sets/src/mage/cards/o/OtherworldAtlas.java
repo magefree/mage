@@ -32,7 +32,7 @@ public final class OtherworldAtlas extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OtherworldAtlasDrawEffect(), new TapSourceCost()));
     }
 
-    public OtherworldAtlas(final OtherworldAtlas card) {
+    private OtherworldAtlas(final OtherworldAtlas card) {
         super(card);
     }
 

@@ -59,7 +59,7 @@ public final class SphinxsHerald extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SphinxsHerald(final SphinxsHerald card) {
+    private SphinxsHerald(final SphinxsHerald card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class TormentorExarch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TormentorExarch(final TormentorExarch card) {
+    private TormentorExarch(final TormentorExarch card) {
         super(card);
     }
 

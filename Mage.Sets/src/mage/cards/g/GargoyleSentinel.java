@@ -32,7 +32,7 @@ public final class GargoyleSentinel extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GargoyleSentinelEffect(), new ManaCostsImpl("{3}")));
     }
 
-    public GargoyleSentinel(final GargoyleSentinel card) {
+    private GargoyleSentinel(final GargoyleSentinel card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class MentorOfTheMeek extends CardImpl {
 
     }
 
-    public MentorOfTheMeek(final MentorOfTheMeek card) {
+    private MentorOfTheMeek(final MentorOfTheMeek card) {
         super(card);
     }
 

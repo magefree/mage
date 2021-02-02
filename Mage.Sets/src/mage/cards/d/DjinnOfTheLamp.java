@@ -26,7 +26,7 @@ public final class DjinnOfTheLamp extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public DjinnOfTheLamp(final DjinnOfTheLamp card) {
+    private DjinnOfTheLamp(final DjinnOfTheLamp card) {
         super(card);
     }
 

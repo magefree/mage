@@ -41,7 +41,7 @@ public final class IzzetChronarch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IzzetChronarch(final IzzetChronarch card) {
+    private IzzetChronarch(final IzzetChronarch card) {
         super(card);
     }
 

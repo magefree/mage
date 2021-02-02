@@ -43,7 +43,7 @@ public final class ScourgeOfNelToth extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ScourgeOfNelTothPlayEffect()));
     }
 
-    public ScourgeOfNelToth(final ScourgeOfNelToth card) {
+    private ScourgeOfNelToth(final ScourgeOfNelToth card) {
         super(card);
     }
 

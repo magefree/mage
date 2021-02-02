@@ -45,7 +45,7 @@ public final class DwarvenBloodboiler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DwarvenBloodboiler(final DwarvenBloodboiler card) {
+    private DwarvenBloodboiler(final DwarvenBloodboiler card) {
         super(card);
     }
 

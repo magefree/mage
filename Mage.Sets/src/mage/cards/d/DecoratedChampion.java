@@ -41,7 +41,7 @@ public final class DecoratedChampion extends CardImpl {
         ));
     }
 
-    public DecoratedChampion(final DecoratedChampion card) {
+    private DecoratedChampion(final DecoratedChampion card) {
         super(card);
     }
 

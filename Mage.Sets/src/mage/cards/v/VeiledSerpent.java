@@ -42,7 +42,7 @@ public final class VeiledSerpent extends CardImpl {
 
     }
 
-    public VeiledSerpent(final VeiledSerpent card) {
+    private VeiledSerpent(final VeiledSerpent card) {
         super(card);
     }
 

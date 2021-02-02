@@ -39,7 +39,7 @@ public final class GraveBetrayal extends CardImpl {
         this.addAbility(new GraveBetrayalTriggeredAbility());
     }
 
-    public GraveBetrayal(final GraveBetrayal card) {
+    private GraveBetrayal(final GraveBetrayal card) {
         super(card);
     }
 

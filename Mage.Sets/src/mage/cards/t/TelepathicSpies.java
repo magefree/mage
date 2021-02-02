@@ -32,7 +32,7 @@ public final class TelepathicSpies extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TelepathicSpies(final TelepathicSpies card) {
+    private TelepathicSpies(final TelepathicSpies card) {
         super(card);
     }
 

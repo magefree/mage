@@ -30,7 +30,7 @@ public final class AvenWarhawk extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public AvenWarhawk(final AvenWarhawk card) {
+    private AvenWarhawk(final AvenWarhawk card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class TezzeretCruelMachinist extends CardImpl {
         this.addAbility(new LoyaltyAbility(new TezzeretCruelMachinistEffect(), -7));
     }
 
-    public TezzeretCruelMachinist(final TezzeretCruelMachinist card) {
+    private TezzeretCruelMachinist(final TezzeretCruelMachinist card) {
         super(card);
     }
 

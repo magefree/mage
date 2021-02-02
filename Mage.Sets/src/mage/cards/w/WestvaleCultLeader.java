@@ -38,7 +38,7 @@ public final class WestvaleCultLeader extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new HumanClericToken()), TargetController.YOU, false));
     }
 
-    public WestvaleCultLeader(final WestvaleCultLeader card) {
+    private WestvaleCultLeader(final WestvaleCultLeader card) {
         super(card);
     }
 

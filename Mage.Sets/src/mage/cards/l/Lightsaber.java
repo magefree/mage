@@ -50,7 +50,7 @@ public final class Lightsaber extends CardImpl {
         }
     }
 
-    public Lightsaber(final Lightsaber card) {
+    private Lightsaber(final Lightsaber card) {
         super(card);
     }
 

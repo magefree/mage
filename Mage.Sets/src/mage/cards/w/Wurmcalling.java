@@ -27,7 +27,7 @@ public final class Wurmcalling extends CardImpl {
         this.getSpellAbility().addEffect(new WurmcallingEffect());
     }
 
-    public Wurmcalling(final Wurmcalling card) {
+    private Wurmcalling(final Wurmcalling card) {
         super(card);
     }
 

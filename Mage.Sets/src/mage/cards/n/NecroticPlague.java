@@ -55,7 +55,7 @@ public final class NecroticPlague extends CardImpl {
 
     }
 
-    public NecroticPlague(final NecroticPlague card) {
+    private NecroticPlague(final NecroticPlague card) {
         super(card);
     }
 

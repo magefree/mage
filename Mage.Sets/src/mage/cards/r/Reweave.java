@@ -38,7 +38,7 @@ public final class Reweave extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{2}{U}{U}"));
     }
 
-    public Reweave(final Reweave card) {
+    private Reweave(final Reweave card) {
         super(card);
     }
 

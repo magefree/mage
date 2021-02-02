@@ -30,7 +30,7 @@ public final class Talonrend extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{U/R}")));
     }
 
-    public Talonrend(final Talonrend card) {
+    private Talonrend(final Talonrend card) {
         super(card);
     }
 

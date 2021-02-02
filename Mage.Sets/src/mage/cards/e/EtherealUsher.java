@@ -40,7 +40,7 @@ public final class EtherealUsher extends CardImpl {
         this.addAbility(new TransmuteAbility("{1}{U}{U}"));
     }
 
-    public EtherealUsher(final EtherealUsher card) {
+    private EtherealUsher(final EtherealUsher card) {
         super(card);
     }
 

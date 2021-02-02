@@ -51,7 +51,7 @@ public final class GoblinVandal extends CardImpl {
 
     }
 
-    public GoblinVandal(final GoblinVandal card) {
+    private GoblinVandal(final GoblinVandal card) {
         super(card);
     }
 

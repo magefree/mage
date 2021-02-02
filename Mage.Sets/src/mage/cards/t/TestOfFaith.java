@@ -30,7 +30,7 @@ public final class TestOfFaith extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TestOfFaith(final TestOfFaith card) {
+    private TestOfFaith(final TestOfFaith card) {
         super(card);
     }
 

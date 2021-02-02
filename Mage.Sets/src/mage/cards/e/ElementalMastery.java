@@ -46,7 +46,7 @@ public final class ElementalMastery extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.AURA)));
     }
 
-    public ElementalMastery(final ElementalMastery card) {
+    private ElementalMastery(final ElementalMastery card) {
         super(card);
     }
 

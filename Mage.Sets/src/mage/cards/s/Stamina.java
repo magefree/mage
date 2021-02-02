@@ -46,7 +46,7 @@ public final class Stamina extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new SacrificeSourceCost()));
     }
 
-    public Stamina(final Stamina card) {
+    private Stamina(final Stamina card) {
         super(card);
     }
 

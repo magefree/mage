@@ -58,7 +58,7 @@ public final class SelkieHedgeMage extends CardImpl {
 
     }
 
-    public SelkieHedgeMage(final SelkieHedgeMage card) {
+    private SelkieHedgeMage(final SelkieHedgeMage card) {
         super(card);
     }
 

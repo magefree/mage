@@ -32,7 +32,7 @@ public final class ManaEchoes extends CardImpl {
                 new ManaEchoesEffect(), new FilterCreaturePermanent("a creature"), true, SetTargetPointer.PERMANENT, ""));
     }
 
-    public ManaEchoes(final ManaEchoes card) {
+    private ManaEchoes(final ManaEchoes card) {
         super(card);
     }
 

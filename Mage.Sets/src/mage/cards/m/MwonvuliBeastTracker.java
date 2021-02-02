@@ -47,7 +47,7 @@ public final class MwonvuliBeastTracker extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true)));
     }
 
-    public MwonvuliBeastTracker(final MwonvuliBeastTracker card) {
+    private MwonvuliBeastTracker(final MwonvuliBeastTracker card) {
         super(card);
     }
 

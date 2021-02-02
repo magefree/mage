@@ -33,7 +33,7 @@ public final class BarrierOfBones extends CardImpl {
         ));
     }
 
-    public BarrierOfBones(final BarrierOfBones card) {
+    private BarrierOfBones(final BarrierOfBones card) {
         super(card);
     }
 

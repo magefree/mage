@@ -25,7 +25,7 @@ public final class RootbreakerWurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public RootbreakerWurm(final RootbreakerWurm card) {
+    private RootbreakerWurm(final RootbreakerWurm card) {
         super(card);
     }
 

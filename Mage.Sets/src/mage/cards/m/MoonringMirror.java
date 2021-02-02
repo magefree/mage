@@ -40,7 +40,7 @@ public final class MoonringMirror extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MoonringMirrorEffect(), TargetController.YOU, true));
     }
 
-    public MoonringMirror(final MoonringMirror card) {
+    private MoonringMirror(final MoonringMirror card) {
         super(card);
     }
 

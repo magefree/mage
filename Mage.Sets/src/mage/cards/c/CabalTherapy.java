@@ -41,7 +41,7 @@ public final class CabalTherapy extends CardImpl {
                 TimingRule.SORCERY));
     }
 
-    public CabalTherapy(final CabalTherapy card) {
+    private CabalTherapy(final CabalTherapy card) {
         super(card);
     }
 

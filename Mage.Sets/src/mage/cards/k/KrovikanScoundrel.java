@@ -23,7 +23,7 @@ public final class KrovikanScoundrel extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public KrovikanScoundrel(final KrovikanScoundrel card) {
+    private KrovikanScoundrel(final KrovikanScoundrel card) {
         super(card);
     }
 

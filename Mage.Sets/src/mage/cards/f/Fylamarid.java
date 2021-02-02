@@ -51,7 +51,7 @@ public final class Fylamarid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Fylamarid(final Fylamarid card) {
+    private Fylamarid(final Fylamarid card) {
         super(card);
     }
 

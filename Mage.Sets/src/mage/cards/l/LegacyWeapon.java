@@ -34,7 +34,7 @@ public final class LegacyWeapon extends CardImpl {
         this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new RevealAndShuffleIntoLibrarySourceEffect()));
     }
 
-    public LegacyWeapon(final LegacyWeapon card) {
+    private LegacyWeapon(final LegacyWeapon card) {
         super(card);
     }
 

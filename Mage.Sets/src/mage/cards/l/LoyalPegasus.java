@@ -31,7 +31,7 @@ public final class LoyalPegasus extends CardImpl {
         this.addAbility(CantBlockAloneAbility.getInstance());
     }
 
-    public LoyalPegasus(final LoyalPegasus card) {
+    private LoyalPegasus(final LoyalPegasus card) {
         super(card);
     }
 

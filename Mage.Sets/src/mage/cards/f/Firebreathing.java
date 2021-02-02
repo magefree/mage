@@ -35,7 +35,7 @@ public final class Firebreathing extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public Firebreathing(final Firebreathing card) {
+    private Firebreathing(final Firebreathing card) {
         super(card);
     }
 

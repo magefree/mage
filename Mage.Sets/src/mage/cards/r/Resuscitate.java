@@ -33,7 +33,7 @@ public final class Resuscitate extends CardImpl {
         );
     }
 
-    public Resuscitate(final Resuscitate card) {
+    private Resuscitate(final Resuscitate card) {
         super(card);
     }
 

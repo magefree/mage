@@ -44,7 +44,7 @@ public final class MarduAscendancy extends CardImpl {
                 new SacrificeSourceCost()));
     }
 
-    public MarduAscendancy(final MarduAscendancy card) {
+    private MarduAscendancy(final MarduAscendancy card) {
         super(card);
     }
 

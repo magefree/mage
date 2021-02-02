@@ -47,7 +47,7 @@ public final class NiblisOfFrost extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NiblisOfFrost(final NiblisOfFrost card) {
+    private NiblisOfFrost(final NiblisOfFrost card) {
         super(card);
     }
 

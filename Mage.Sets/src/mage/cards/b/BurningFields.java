@@ -22,7 +22,7 @@ public final class BurningFields extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
     }
 
-    public BurningFields(final BurningFields card) {
+    private BurningFields(final BurningFields card) {
         super(card);
     }
 

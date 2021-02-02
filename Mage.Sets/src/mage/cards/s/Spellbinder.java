@@ -49,7 +49,7 @@ public final class Spellbinder extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
     }
 
-    public Spellbinder(final Spellbinder card) {
+    private Spellbinder(final Spellbinder card) {
         super(card);
     }
 

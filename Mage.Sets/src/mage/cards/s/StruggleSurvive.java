@@ -41,7 +41,7 @@ public final class StruggleSurvive extends SplitCard {
 
     }
 
-    public StruggleSurvive(final StruggleSurvive card) {
+    private StruggleSurvive(final StruggleSurvive card) {
         super(card);
     }
 

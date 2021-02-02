@@ -30,7 +30,7 @@ public final class FadeAway extends CardImpl {
         this.getSpellAbility().addEffect(new FadeAwayEffect());
     }
 
-    public FadeAway(final FadeAway card) {
+    private FadeAway(final FadeAway card) {
         super(card);
     }
 

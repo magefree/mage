@@ -50,7 +50,7 @@ public final class LlawanCephalidEmpress extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LlawanCephalidRuleModifyingEffect()));
     }
 
-    public LlawanCephalidEmpress(final LlawanCephalidEmpress card) {
+    private LlawanCephalidEmpress(final LlawanCephalidEmpress card) {
         super(card);
     }
 

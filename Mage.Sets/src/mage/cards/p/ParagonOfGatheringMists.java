@@ -59,7 +59,7 @@ public final class ParagonOfGatheringMists extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ParagonOfGatheringMists(final ParagonOfGatheringMists card) {
+    private ParagonOfGatheringMists(final ParagonOfGatheringMists card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class ThrivingRhino extends CardImpl {
 
     }
 
-    public ThrivingRhino(final ThrivingRhino card) {
+    private ThrivingRhino(final ThrivingRhino card) {
         super(card);
     }
 

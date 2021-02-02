@@ -36,7 +36,7 @@ public final class EdricSpymasterOfTrest extends CardImpl {
         this.addAbility(new EdricSpymasterOfTrestTriggeredAbility());
     }
 
-    public EdricSpymasterOfTrest(final EdricSpymasterOfTrest card) {
+    private EdricSpymasterOfTrest(final EdricSpymasterOfTrest card) {
         super(card);
     }
 

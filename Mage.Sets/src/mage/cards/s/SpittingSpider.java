@@ -41,7 +41,7 @@ public final class SpittingSpider extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT))));
     }
 
-    public SpittingSpider(final SpittingSpider card) {
+    private SpittingSpider(final SpittingSpider card) {
         super(card);
     }
 

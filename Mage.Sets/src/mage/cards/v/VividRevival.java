@@ -31,7 +31,7 @@ public final class VividRevival extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public VividRevival(final VividRevival card) {
+    private VividRevival(final VividRevival card) {
         super(card);
     }
 

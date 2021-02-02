@@ -34,7 +34,7 @@ public final class ScuttlingDeath extends CardImpl {
         this.addAbility(new SoulshiftAbility(4));
     }
 
-    public ScuttlingDeath(final ScuttlingDeath card) {
+    private ScuttlingDeath(final ScuttlingDeath card) {
         super(card);
     }
 

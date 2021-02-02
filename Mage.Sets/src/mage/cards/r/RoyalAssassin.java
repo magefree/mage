@@ -42,7 +42,7 @@ public final class RoyalAssassin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RoyalAssassin(final RoyalAssassin card) {
+    private RoyalAssassin(final RoyalAssassin card) {
         super(card);
     }
 

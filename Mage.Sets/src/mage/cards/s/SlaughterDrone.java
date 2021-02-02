@@ -36,7 +36,7 @@ public final class SlaughterDrone extends CardImpl {
 
     }
 
-    public SlaughterDrone(final SlaughterDrone card) {
+    private SlaughterDrone(final SlaughterDrone card) {
         super(card);
     }
 

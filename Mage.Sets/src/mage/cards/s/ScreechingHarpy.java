@@ -30,7 +30,7 @@ public final class ScreechingHarpy extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }
 
-    public ScreechingHarpy(final ScreechingHarpy card) {
+    private ScreechingHarpy(final ScreechingHarpy card) {
         super(card);
     }
 

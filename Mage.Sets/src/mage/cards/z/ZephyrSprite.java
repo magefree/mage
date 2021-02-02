@@ -25,7 +25,7 @@ public final class ZephyrSprite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public ZephyrSprite(final ZephyrSprite card) {
+    private ZephyrSprite(final ZephyrSprite card) {
         super(card);
     }
 

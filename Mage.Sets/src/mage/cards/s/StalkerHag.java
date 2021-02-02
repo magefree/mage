@@ -27,7 +27,7 @@ public final class StalkerHag extends CardImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public StalkerHag(final StalkerHag card) {
+    private StalkerHag(final StalkerHag card) {
         super(card);
     }
 

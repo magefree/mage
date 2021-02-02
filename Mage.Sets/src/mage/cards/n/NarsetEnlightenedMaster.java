@@ -43,7 +43,7 @@ public final class NarsetEnlightenedMaster extends CardImpl {
 
     }
 
-    public NarsetEnlightenedMaster(final NarsetEnlightenedMaster card) {
+    private NarsetEnlightenedMaster(final NarsetEnlightenedMaster card) {
         super(card);
     }
 

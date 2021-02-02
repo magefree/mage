@@ -30,7 +30,7 @@ public final class RootOut extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public RootOut(final RootOut card) {
+    private RootOut(final RootOut card) {
         super(card);
     }
 

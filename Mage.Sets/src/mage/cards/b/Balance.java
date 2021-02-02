@@ -19,7 +19,7 @@ public final class Balance extends CardImpl {
         this.getSpellAbility().addEffect(new BalanceEffect());
     }
 
-    public Balance(final Balance card) {
+    private Balance(final Balance card) {
         super(card);
     }
 

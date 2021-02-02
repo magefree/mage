@@ -32,7 +32,7 @@ public final class TurntimberBasilisk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TurntimberBasilisk(final TurntimberBasilisk card) {
+    private TurntimberBasilisk(final TurntimberBasilisk card) {
         super(card);
     }
 

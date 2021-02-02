@@ -28,7 +28,7 @@ public final class CruelEntertainment extends CardImpl {
 
     }
 
-    public CruelEntertainment(final CruelEntertainment card) {
+    private CruelEntertainment(final CruelEntertainment card) {
         super(card);
     }
 

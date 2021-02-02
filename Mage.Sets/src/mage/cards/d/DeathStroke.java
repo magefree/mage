@@ -30,7 +30,7 @@ public final class DeathStroke extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public DeathStroke(final DeathStroke card) {
+    private DeathStroke(final DeathStroke card) {
         super(card);
     }
 

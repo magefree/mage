@@ -53,7 +53,7 @@ public final class VitalityCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public VitalityCharm(final VitalityCharm card) {
+    private VitalityCharm(final VitalityCharm card) {
         super(card);
     }
 

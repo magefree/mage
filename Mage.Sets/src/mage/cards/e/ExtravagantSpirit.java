@@ -37,7 +37,7 @@ public final class ExtravagantSpirit extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ExtravagantSpiritEffect(), TargetController.YOU, false));
     }
 
-    public ExtravagantSpirit(final ExtravagantSpirit card) {
+    private ExtravagantSpirit(final ExtravagantSpirit card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class MagetasBoon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield)));
     }
 
-    public MagetasBoon(final MagetasBoon card) {
+    private MagetasBoon(final MagetasBoon card) {
         super(card);
     }
 

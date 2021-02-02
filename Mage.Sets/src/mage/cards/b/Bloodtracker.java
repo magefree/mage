@@ -46,7 +46,7 @@ public final class Bloodtracker extends CardImpl {
         ));
     }
 
-    public Bloodtracker(final Bloodtracker card) {
+    private Bloodtracker(final Bloodtracker card) {
         super(card);
     }
 

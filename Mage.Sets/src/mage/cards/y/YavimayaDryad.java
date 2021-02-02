@@ -46,7 +46,7 @@ public final class YavimayaDryad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public YavimayaDryad(final YavimayaDryad card) {
+    private YavimayaDryad(final YavimayaDryad card) {
         super(card);
     }
 

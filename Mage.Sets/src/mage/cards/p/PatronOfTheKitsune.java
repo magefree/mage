@@ -32,7 +32,7 @@ public final class PatronOfTheKitsune extends CardImpl {
         this.addAbility(new AttacksAllTriggeredAbility(new GainLifeEffect(1), true));
     }
 
-    public PatronOfTheKitsune(final PatronOfTheKitsune card) {
+    private PatronOfTheKitsune(final PatronOfTheKitsune card) {
         super(card);
     }
 

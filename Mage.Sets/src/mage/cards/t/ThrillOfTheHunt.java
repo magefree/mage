@@ -28,7 +28,7 @@ public final class ThrillOfTheHunt extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{W}"), TimingRule.INSTANT));
     }
 
-    public ThrillOfTheHunt(final ThrillOfTheHunt card) {
+    private ThrillOfTheHunt(final ThrillOfTheHunt card) {
         super(card);
     }
 

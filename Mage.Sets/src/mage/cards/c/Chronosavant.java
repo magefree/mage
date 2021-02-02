@@ -32,7 +32,7 @@ public final class Chronosavant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Chronosavant(final Chronosavant card) {
+    private Chronosavant(final Chronosavant card) {
         super(card);
     }
 

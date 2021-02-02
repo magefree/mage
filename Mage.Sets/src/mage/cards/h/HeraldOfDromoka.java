@@ -44,7 +44,7 @@ public final class HeraldOfDromoka extends CardImpl {
             (VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public HeraldOfDromoka(final HeraldOfDromoka card) {
+    private HeraldOfDromoka(final HeraldOfDromoka card) {
         super(card);
     }
 

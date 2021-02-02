@@ -40,7 +40,7 @@ public final class Transcendence extends CardImpl {
         this.addAbility(new TranscendenceLoseLifeTriggeredAbility());
     }
 
-    public Transcendence(final Transcendence card) {
+    private Transcendence(final Transcendence card) {
         super(card);
     }
 

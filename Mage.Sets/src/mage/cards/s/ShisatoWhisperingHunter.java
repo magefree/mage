@@ -43,7 +43,7 @@ public final class ShisatoWhisperingHunter extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SkipNextPlayerUntapStepEffect("that"), false, true));
     }
 
-    public ShisatoWhisperingHunter(final ShisatoWhisperingHunter card) {
+    private ShisatoWhisperingHunter(final ShisatoWhisperingHunter card) {
         super(card);
     }
 

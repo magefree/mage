@@ -40,7 +40,7 @@ public final class SageOfHours extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new SageOfHoursEffect(), new RemoveAllCountersSourceCost(CounterType.P1P1)));
     }
 
-    public SageOfHours(final SageOfHours card) {
+    private SageOfHours(final SageOfHours card) {
         super(card);
     }
 

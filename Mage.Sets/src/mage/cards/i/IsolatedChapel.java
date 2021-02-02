@@ -40,7 +40,7 @@ public final class IsolatedChapel extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public IsolatedChapel(final IsolatedChapel card) {
+    private IsolatedChapel(final IsolatedChapel card) {
         super(card);
     }
 

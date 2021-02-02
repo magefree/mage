@@ -38,7 +38,7 @@ public final class Kindle extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public Kindle(final Kindle card) {
+    private Kindle(final Kindle card) {
         super(card);
     }
 

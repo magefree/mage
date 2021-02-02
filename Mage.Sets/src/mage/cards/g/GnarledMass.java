@@ -22,7 +22,7 @@ public final class GnarledMass extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public GnarledMass(final GnarledMass card) {
+    private GnarledMass(final GnarledMass card) {
         super(card);
     }
 

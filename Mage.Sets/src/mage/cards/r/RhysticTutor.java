@@ -26,7 +26,7 @@ public final class RhysticTutor extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public RhysticTutor(final RhysticTutor card) {
+    private RhysticTutor(final RhysticTutor card) {
         super(card);
     }
 

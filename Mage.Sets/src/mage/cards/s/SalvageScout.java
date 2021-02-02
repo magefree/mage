@@ -36,7 +36,7 @@ public final class SalvageScout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SalvageScout(final SalvageScout card) {
+    private SalvageScout(final SalvageScout card) {
         super(card);
     }
 

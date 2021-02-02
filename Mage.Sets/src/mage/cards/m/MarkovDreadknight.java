@@ -38,7 +38,7 @@ public final class MarkovDreadknight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MarkovDreadknight(final MarkovDreadknight card) {
+    private MarkovDreadknight(final MarkovDreadknight card) {
         super(card);
     }
 

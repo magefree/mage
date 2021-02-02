@@ -35,7 +35,7 @@ public final class WarriorsStand extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, false));
     }
 
-    public WarriorsStand(final WarriorsStand card) {
+    private WarriorsStand(final WarriorsStand card) {
         super(card);
     }
 

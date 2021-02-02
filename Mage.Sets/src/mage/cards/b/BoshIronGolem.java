@@ -47,7 +47,7 @@ public final class BoshIronGolem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BoshIronGolem(final BoshIronGolem card) {
+    private BoshIronGolem(final BoshIronGolem card) {
         super(card);
     }
 

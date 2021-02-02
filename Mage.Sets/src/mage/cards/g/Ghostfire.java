@@ -28,7 +28,7 @@ public final class Ghostfire extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public Ghostfire(final Ghostfire card) {
+    private Ghostfire(final Ghostfire card) {
         super(card);
     }
 

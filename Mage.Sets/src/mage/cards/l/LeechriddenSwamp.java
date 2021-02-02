@@ -59,7 +59,7 @@ public final class LeechriddenSwamp extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LeechriddenSwamp(final LeechriddenSwamp card) {
+    private LeechriddenSwamp(final LeechriddenSwamp card) {
         super(card);
     }
 

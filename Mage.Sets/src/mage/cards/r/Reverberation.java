@@ -36,7 +36,7 @@ public final class Reverberation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public Reverberation(final Reverberation card) {
+    private Reverberation(final Reverberation card) {
         super(card);
     }
 

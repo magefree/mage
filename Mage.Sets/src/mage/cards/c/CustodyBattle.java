@@ -63,7 +63,7 @@ public final class CustodyBattle extends CardImpl {
 
     }
 
-    public CustodyBattle(final CustodyBattle card) {
+    private CustodyBattle(final CustodyBattle card) {
         super(card);
     }
 

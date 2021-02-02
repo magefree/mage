@@ -44,7 +44,7 @@ public final class BuccaneersBravado extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public BuccaneersBravado(final BuccaneersBravado card) {
+    private BuccaneersBravado(final BuccaneersBravado card) {
         super(card);
     }
 

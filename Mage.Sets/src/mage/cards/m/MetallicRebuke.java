@@ -27,7 +27,7 @@ public final class MetallicRebuke extends CardImpl {
         getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public MetallicRebuke(final MetallicRebuke card) {
+    private MetallicRebuke(final MetallicRebuke card) {
         super(card);
     }
 

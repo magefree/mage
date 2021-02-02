@@ -25,7 +25,7 @@ public final class AccomplishedAutomaton extends CardImpl {
         this.addAbility(new FabricateAbility(1));
     }
 
-    public AccomplishedAutomaton(final AccomplishedAutomaton card) {
+    private AccomplishedAutomaton(final AccomplishedAutomaton card) {
         super(card);
     }
 

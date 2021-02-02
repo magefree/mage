@@ -26,7 +26,7 @@ public final class YellowScarvesTroops extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public YellowScarvesTroops(final YellowScarvesTroops card) {
+    private YellowScarvesTroops(final YellowScarvesTroops card) {
         super(card);
     }
 

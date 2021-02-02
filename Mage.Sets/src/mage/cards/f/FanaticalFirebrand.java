@@ -43,7 +43,7 @@ public final class FanaticalFirebrand extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FanaticalFirebrand(final FanaticalFirebrand card) {
+    private FanaticalFirebrand(final FanaticalFirebrand card) {
         super(card);
     }
 

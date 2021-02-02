@@ -37,7 +37,7 @@ public final class LymphSliver extends CardImpl {
                 Duration.WhileOnBattlefield, filter, "All Sliver creatures have absorb 1. <i>(If a source would deal damage to a Sliver, prevent 1 of that damage.)</i>")));
     }
 
-    public LymphSliver(final LymphSliver card) {
+    private LymphSliver(final LymphSliver card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class DemonOfCatastrophes extends CardImpl {
 
     }
 
-    public DemonOfCatastrophes(final DemonOfCatastrophes card) {
+    private DemonOfCatastrophes(final DemonOfCatastrophes card) {
         super(card);
     }
 

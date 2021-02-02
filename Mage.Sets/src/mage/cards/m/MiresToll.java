@@ -35,7 +35,7 @@ public final class MiresToll extends CardImpl {
 
     }
 
-    public MiresToll(final MiresToll card) {
+    private MiresToll(final MiresToll card) {
         super(card);
     }
 

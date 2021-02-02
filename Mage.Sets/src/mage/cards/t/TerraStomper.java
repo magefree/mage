@@ -29,7 +29,7 @@ public final class TerraStomper extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public TerraStomper(final TerraStomper card) {
+    private TerraStomper(final TerraStomper card) {
         super(card);
     }
 

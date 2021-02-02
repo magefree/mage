@@ -26,7 +26,7 @@ public final class ReapingTheGraves extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public ReapingTheGraves(final ReapingTheGraves card) {
+    private ReapingTheGraves(final ReapingTheGraves card) {
         super(card);
     }
 

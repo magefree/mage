@@ -24,7 +24,7 @@ public final class ChokingFumes extends CardImpl {
         this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.M1M1.createInstance(), filter));
     }
 
-    public ChokingFumes(final ChokingFumes card) {
+    private ChokingFumes(final ChokingFumes card) {
         super(card);
     }
 

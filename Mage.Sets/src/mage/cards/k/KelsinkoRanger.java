@@ -48,7 +48,7 @@ public final class KelsinkoRanger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KelsinkoRanger(final KelsinkoRanger card) {
+    private KelsinkoRanger(final KelsinkoRanger card) {
         super(card);
     }
 

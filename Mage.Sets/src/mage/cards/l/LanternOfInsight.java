@@ -34,7 +34,7 @@ public final class LanternOfInsight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LanternOfInsight(final LanternOfInsight card) {
+    private LanternOfInsight(final LanternOfInsight card) {
         super(card);
     }
 

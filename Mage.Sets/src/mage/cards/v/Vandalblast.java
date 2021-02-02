@@ -36,7 +36,7 @@ public final class Vandalblast extends CardImpl {
 
     }
 
-    public Vandalblast(final Vandalblast card) {
+    private Vandalblast(final Vandalblast card) {
         super(card);
     }
 

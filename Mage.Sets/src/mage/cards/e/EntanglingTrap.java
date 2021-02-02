@@ -41,7 +41,7 @@ public final class EntanglingTrap extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EntanglingTrap(final EntanglingTrap card) {
+    private EntanglingTrap(final EntanglingTrap card) {
         super(card);
     }
 

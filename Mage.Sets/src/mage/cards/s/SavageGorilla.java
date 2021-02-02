@@ -38,7 +38,7 @@ public final class SavageGorilla extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SavageGorilla(final SavageGorilla card) {
+    private SavageGorilla(final SavageGorilla card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class RunedArch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RunedArch(final RunedArch card) {
+    private RunedArch(final RunedArch card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class Swat extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public Swat(final Swat card) {
+    private Swat(final Swat card) {
         super(card);
     }
 

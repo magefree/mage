@@ -30,7 +30,7 @@ public final class CausticCrawler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CausticCrawler(final CausticCrawler card) {
+    private CausticCrawler(final CausticCrawler card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class Nyxathid extends CardImpl {
 
     }
 
-    public Nyxathid(final Nyxathid card) {
+    private Nyxathid(final Nyxathid card) {
         super(card);
     }
 

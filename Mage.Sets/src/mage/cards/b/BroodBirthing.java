@@ -26,7 +26,7 @@ public final class BroodBirthing extends CardImpl {
         this.getSpellAbility().addEffect(new BroodBirthingEffect());
     }
 
-    public BroodBirthing(final BroodBirthing card) {
+    private BroodBirthing(final BroodBirthing card) {
         super(card);
     }
 

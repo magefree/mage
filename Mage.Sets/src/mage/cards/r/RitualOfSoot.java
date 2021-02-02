@@ -31,7 +31,7 @@ public final class RitualOfSoot extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public RitualOfSoot(final RitualOfSoot card) {
+    private RitualOfSoot(final RitualOfSoot card) {
         super(card);
     }
 

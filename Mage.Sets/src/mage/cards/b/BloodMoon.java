@@ -26,7 +26,7 @@ public final class BloodMoon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodMoonEffect()));
     }
 
-    public BloodMoon(final BloodMoon card) {
+    private BloodMoon(final BloodMoon card) {
         super(card);
     }
 

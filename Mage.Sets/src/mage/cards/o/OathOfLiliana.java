@@ -41,7 +41,7 @@ public final class OathOfLiliana extends CardImpl {
                         + "create a 2/2 black Zombie creature token."), new OathOfLilianaWatcher());
     }
 
-    public OathOfLiliana(final OathOfLiliana card) {
+    private OathOfLiliana(final OathOfLiliana card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class HydraBroodmaster extends CardImpl {
         this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new HydraBroodmasterEffect()));
     }
 
-    public HydraBroodmaster(final HydraBroodmaster card) {
+    private HydraBroodmaster(final HydraBroodmaster card) {
         super(card);
     }
 

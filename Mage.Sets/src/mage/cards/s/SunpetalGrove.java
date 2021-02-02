@@ -40,7 +40,7 @@ public final class SunpetalGrove extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public SunpetalGrove(final SunpetalGrove card) {
+    private SunpetalGrove(final SunpetalGrove card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class DakraMystic extends CardImpl {
 
     }
 
-    public DakraMystic(final DakraMystic card) {
+    private DakraMystic(final DakraMystic card) {
         super(card);
     }
 

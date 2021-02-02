@@ -43,7 +43,7 @@ public final class HiddenStockpile extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HiddenStockpile(final HiddenStockpile card) {
+    private HiddenStockpile(final HiddenStockpile card) {
         super(card);
     }
 

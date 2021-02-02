@@ -44,7 +44,7 @@ public final class LoxodonPeacekeeper extends CardImpl {
 
     }
 
-    public LoxodonPeacekeeper(final LoxodonPeacekeeper card) {
+    private LoxodonPeacekeeper(final LoxodonPeacekeeper card) {
         super(card);
     }
 

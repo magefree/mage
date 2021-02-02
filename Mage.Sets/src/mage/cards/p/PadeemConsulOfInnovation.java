@@ -42,7 +42,7 @@ public final class PadeemConsulOfInnovation extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PadeemConsulOfInnovation(final PadeemConsulOfInnovation card) {
+    private PadeemConsulOfInnovation(final PadeemConsulOfInnovation card) {
         super(card);
     }
 

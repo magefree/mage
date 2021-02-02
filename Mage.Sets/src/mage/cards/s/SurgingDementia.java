@@ -26,7 +26,7 @@ public final class SurgingDementia extends CardImpl {
         this.getSpellAbility().getTargets().add(new TargetPlayer());
     }
 
-    public SurgingDementia(final SurgingDementia card) {
+    private SurgingDementia(final SurgingDementia card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class NaturesCloak extends CardImpl {
                 new ForestwalkAbility(false), Duration.EndOfTurn, filter));
     }
 
-    public NaturesCloak(final NaturesCloak card) {
+    private NaturesCloak(final NaturesCloak card) {
         super(card);
     }
 

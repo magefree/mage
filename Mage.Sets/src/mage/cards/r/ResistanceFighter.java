@@ -35,7 +35,7 @@ public final class ResistanceFighter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ResistanceFighter(final ResistanceFighter card) {
+    private ResistanceFighter(final ResistanceFighter card) {
         super(card);
     }
 

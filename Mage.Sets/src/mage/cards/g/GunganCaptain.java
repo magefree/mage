@@ -31,7 +31,7 @@ public final class GunganCaptain extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GunganCaptain(final GunganCaptain card) {
+    private GunganCaptain(final GunganCaptain card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class WoodvineElemental extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WoodvineElemental(final WoodvineElemental card) {
+    private WoodvineElemental(final WoodvineElemental card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class TreasuredFind extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public TreasuredFind(final TreasuredFind card) {
+    private TreasuredFind(final TreasuredFind card) {
         super(card);
     }
 

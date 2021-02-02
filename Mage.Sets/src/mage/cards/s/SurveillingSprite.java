@@ -30,7 +30,7 @@ public final class SurveillingSprite extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
-    public SurveillingSprite(final SurveillingSprite card) {
+    private SurveillingSprite(final SurveillingSprite card) {
         super(card);
     }
 

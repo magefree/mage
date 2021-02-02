@@ -34,7 +34,7 @@ public final class BearerOfOverwhelmingTruths extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new InvestigateEffect(), false));
     }
 
-    public BearerOfOverwhelmingTruths(final BearerOfOverwhelmingTruths card) {
+    private BearerOfOverwhelmingTruths(final BearerOfOverwhelmingTruths card) {
         super(card);
     }
 

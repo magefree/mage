@@ -38,7 +38,7 @@ public final class ArcBlade extends CardImpl {
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{2}{R}"), this));
     }
 
-    public ArcBlade(final ArcBlade card) {
+    private ArcBlade(final ArcBlade card) {
         super(card);
     }
 

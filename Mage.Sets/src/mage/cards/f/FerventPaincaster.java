@@ -44,7 +44,7 @@ public final class FerventPaincaster extends CardImpl {
 
     }
 
-    public FerventPaincaster(final FerventPaincaster card) {
+    private FerventPaincaster(final FerventPaincaster card) {
         super(card);
     }
 

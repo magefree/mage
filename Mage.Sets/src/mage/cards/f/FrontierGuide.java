@@ -37,7 +37,7 @@ public final class FrontierGuide extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FrontierGuide(final FrontierGuide card) {
+    private FrontierGuide(final FrontierGuide card) {
         super(card);
     }
 

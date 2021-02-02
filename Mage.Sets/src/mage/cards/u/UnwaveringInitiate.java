@@ -32,7 +32,7 @@ public final class UnwaveringInitiate extends CardImpl {
         this.addAbility(new EmbalmAbility(new ManaCostsImpl("{4}{W}"), this));
     }
 
-    public UnwaveringInitiate(final UnwaveringInitiate card) {
+    private UnwaveringInitiate(final UnwaveringInitiate card) {
         super(card);
     }
 

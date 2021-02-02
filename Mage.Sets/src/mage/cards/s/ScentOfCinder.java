@@ -30,7 +30,7 @@ public final class ScentOfCinder extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public ScentOfCinder(final ScentOfCinder card) {
+    private ScentOfCinder(final ScentOfCinder card) {
         super(card);
     }
 

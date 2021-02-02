@@ -26,7 +26,7 @@ public final class LotusCobra extends CardImpl {
         this.addAbility(new LandfallAbility(new AddManaOfAnyColorEffect(), false));
     }
 
-    public LotusCobra(final LotusCobra card) {
+    private LotusCobra(final LotusCobra card) {
         super(card);
     }
 

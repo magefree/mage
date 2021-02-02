@@ -37,7 +37,7 @@ public final class DeepSeaTerror extends CardImpl {
 
     }
 
-    public DeepSeaTerror(final DeepSeaTerror card) {
+    private DeepSeaTerror(final DeepSeaTerror card) {
         super(card);
     }
 

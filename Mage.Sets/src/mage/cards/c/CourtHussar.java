@@ -42,7 +42,7 @@ public final class CourtHussar extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.W)), false), new ManaSpentToCastWatcher());
     }
 
-    public CourtHussar(final CourtHussar card) {
+    private CourtHussar(final CourtHussar card) {
         super(card);
     }
 

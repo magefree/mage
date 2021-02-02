@@ -32,7 +32,7 @@ public final class BraveTheElements extends CardImpl {
         this.getSpellAbility().addEffect(new GainProtectionFromColorAllEffect(Duration.EndOfTurn, filter));
     }
 
-    public BraveTheElements(final BraveTheElements card) {
+    private BraveTheElements(final BraveTheElements card) {
         super(card);
     }
 

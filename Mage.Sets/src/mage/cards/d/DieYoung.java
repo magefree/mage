@@ -35,7 +35,7 @@ public final class DieYoung extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public DieYoung(final DieYoung card) {
+    private DieYoung(final DieYoung card) {
         super(card);
     }
 

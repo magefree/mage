@@ -35,7 +35,7 @@ public final class JourneyOfDiscovery extends CardImpl {
         this.addAbility(new EntwineAbility("{2}{G}"));
     }
 
-    public JourneyOfDiscovery(final JourneyOfDiscovery card) {
+    private JourneyOfDiscovery(final JourneyOfDiscovery card) {
         super(card);
     }
 

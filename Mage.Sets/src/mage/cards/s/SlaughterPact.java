@@ -39,7 +39,7 @@ public final class SlaughterPact extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{2}{B}")),false));
     }
 
-    public SlaughterPact(final SlaughterPact card) {
+    private SlaughterPact(final SlaughterPact card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class AsphodelWanderer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
     }
 
-    public AsphodelWanderer(final AsphodelWanderer card) {
+    private AsphodelWanderer(final AsphodelWanderer card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class MalachOfTheDawn extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{W}{W}{W}")));
     }
 
-    public MalachOfTheDawn(final MalachOfTheDawn card) {
+    private MalachOfTheDawn(final MalachOfTheDawn card) {
         super(card);
     }
 

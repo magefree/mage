@@ -52,7 +52,7 @@ public final class Aluren extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Aluren(final Aluren card) {
+    private Aluren(final Aluren card) {
         super(card);
     }
 

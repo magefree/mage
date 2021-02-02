@@ -30,7 +30,7 @@ public final class JolraelsCentaur extends CardImpl {
         this.addAbility(new FlankingAbility());
     }
 
-    public JolraelsCentaur(final JolraelsCentaur card) {
+    private JolraelsCentaur(final JolraelsCentaur card) {
         super(card);
     }
 

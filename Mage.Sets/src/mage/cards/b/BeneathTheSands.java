@@ -28,7 +28,7 @@ public final class BeneathTheSands extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public BeneathTheSands(final BeneathTheSands card) {
+    private BeneathTheSands(final BeneathTheSands card) {
         super(card);
     }
 

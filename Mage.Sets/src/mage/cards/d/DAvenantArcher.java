@@ -35,7 +35,7 @@ public final class DAvenantArcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DAvenantArcher(final DAvenantArcher card) {
+    private DAvenantArcher(final DAvenantArcher card) {
         super(card);
     }
 

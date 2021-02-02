@@ -40,7 +40,7 @@ public final class SurgingMight extends CardImpl {
         this.addAbility(new RippleAbility(4));
     }
 
-    public SurgingMight(final SurgingMight card) {
+    private SurgingMight(final SurgingMight card) {
         super(card);
     }
 

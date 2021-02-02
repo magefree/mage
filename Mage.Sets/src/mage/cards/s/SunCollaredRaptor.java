@@ -38,7 +38,7 @@ public final class SunCollaredRaptor extends CardImpl {
         );
     }
 
-    public SunCollaredRaptor(final SunCollaredRaptor card) {
+    private SunCollaredRaptor(final SunCollaredRaptor card) {
         super(card);
     }
 

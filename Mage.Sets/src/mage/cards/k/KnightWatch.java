@@ -22,7 +22,7 @@ public final class KnightWatch extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KnightToken(),2));
     }
 
-    public KnightWatch(final KnightWatch card) {
+    private KnightWatch(final KnightWatch card) {
         super(card);
     }
 

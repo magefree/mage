@@ -37,7 +37,7 @@ public final class DewdropSpy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DewdropSpy(final DewdropSpy card) {
+    private DewdropSpy(final DewdropSpy card) {
         super(card);
     }
 

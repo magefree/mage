@@ -57,7 +57,7 @@ public final class BountyAgent extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BountyAgent(final BountyAgent card) {
+    private BountyAgent(final BountyAgent card) {
         super(card);
     }
 

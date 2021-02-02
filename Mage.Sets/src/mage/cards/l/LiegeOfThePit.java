@@ -42,7 +42,7 @@ public final class LiegeOfThePit extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{B}{B}{B}{B}")));
     }
 
-    public LiegeOfThePit(final LiegeOfThePit card) {
+    private LiegeOfThePit(final LiegeOfThePit card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class BeastbreakerOfBalaGed extends LevelerCard {
         setMaxLevelCounters(4);
     }
 
-    public BeastbreakerOfBalaGed(final BeastbreakerOfBalaGed card) {
+    private BeastbreakerOfBalaGed(final BeastbreakerOfBalaGed card) {
         super(card);
     }
 

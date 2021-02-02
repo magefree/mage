@@ -47,7 +47,7 @@ public final class OrdealOfHeliod extends CardImpl {
         this.addAbility(new SacrificeSourceTriggeredAbility(new GainLifeEffect(10), false));
     }
 
-    public OrdealOfHeliod(final OrdealOfHeliod card) {
+    private OrdealOfHeliod(final OrdealOfHeliod card) {
         super(card);
     }
 

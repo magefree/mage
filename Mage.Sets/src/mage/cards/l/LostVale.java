@@ -25,7 +25,7 @@ public final class LostVale extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost()));
     }
 
-    public LostVale(final LostVale card) {
+    private LostVale(final LostVale card) {
         super(card);
     }
 

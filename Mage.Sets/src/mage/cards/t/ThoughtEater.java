@@ -35,7 +35,7 @@ public final class ThoughtEater extends CardImpl {
                 new MaximumHandSizeControllerEffect(3, Duration.WhileOnBattlefield, HandSizeModification.REDUCE)));
     }
 
-    public ThoughtEater(final ThoughtEater card) {
+    private ThoughtEater(final ThoughtEater card) {
         super(card);
     }
 

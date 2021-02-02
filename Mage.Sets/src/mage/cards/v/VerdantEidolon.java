@@ -38,7 +38,7 @@ public final class VerdantEidolon extends CardImpl {
                 new ReturnSourceFromGraveyardToHandEffect(), StaticFilters.FILTER_SPELL_A_MULTICOLORED, true, false));
     }
 
-    public VerdantEidolon(final VerdantEidolon card) {
+    private VerdantEidolon(final VerdantEidolon card) {
         super(card);
     }
 

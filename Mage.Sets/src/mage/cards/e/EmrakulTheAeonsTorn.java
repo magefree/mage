@@ -51,7 +51,7 @@ public final class EmrakulTheAeonsTorn extends CardImpl {
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibraryGraveOfSourceOwnerEffect(), false));
     }
 
-    public EmrakulTheAeonsTorn(final EmrakulTheAeonsTorn card) {
+    private EmrakulTheAeonsTorn(final EmrakulTheAeonsTorn card) {
         super(card);
     }
 

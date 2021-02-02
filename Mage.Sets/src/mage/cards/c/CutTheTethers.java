@@ -30,7 +30,7 @@ public final class CutTheTethers extends CardImpl {
         this.getSpellAbility().addEffect(new CutTheTethersEffect());
     }
 
-    public CutTheTethers(final CutTheTethers card) {
+    private CutTheTethers(final CutTheTethers card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class PrivilegedPosition extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENTS, true)));
     }
 
-    public PrivilegedPosition(final PrivilegedPosition card) {
+    private PrivilegedPosition(final PrivilegedPosition card) {
         super(card);
     }
 

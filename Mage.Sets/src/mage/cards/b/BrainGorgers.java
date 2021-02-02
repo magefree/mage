@@ -40,7 +40,7 @@ public final class BrainGorgers extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{1}{B}")));
     }
 
-    public BrainGorgers(final BrainGorgers card) {
+    private BrainGorgers(final BrainGorgers card) {
         super(card);
     }
 

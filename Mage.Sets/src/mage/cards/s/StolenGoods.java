@@ -32,7 +32,7 @@ public final class StolenGoods extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public StolenGoods(final StolenGoods card) {
+    private StolenGoods(final StolenGoods card) {
         super(card);
     }
 

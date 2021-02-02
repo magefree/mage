@@ -38,7 +38,7 @@ public final class KazuulWarlord extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), true));
     }
 
-    public KazuulWarlord(final KazuulWarlord card) {
+    private KazuulWarlord(final KazuulWarlord card) {
         super(card);
     }
 

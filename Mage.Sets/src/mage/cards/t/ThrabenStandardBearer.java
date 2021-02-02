@@ -36,7 +36,7 @@ public final class ThrabenStandardBearer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThrabenStandardBearer(final ThrabenStandardBearer card) {
+    private ThrabenStandardBearer(final ThrabenStandardBearer card) {
         super(card);
     }
 

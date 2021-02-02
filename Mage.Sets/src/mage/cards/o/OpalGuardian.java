@@ -38,7 +38,7 @@ public final class OpalGuardian extends CardImpl {
                 "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 3/4 Gargoyle creature with flying and protection from red."));
     }
 
-    public OpalGuardian(final OpalGuardian card) {
+    private OpalGuardian(final OpalGuardian card) {
         super(card);
     }
 

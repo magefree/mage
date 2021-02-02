@@ -37,7 +37,7 @@ public final class OathOfLieges extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OathOfLieges(final OathOfLieges card) {
+    private OathOfLieges(final OathOfLieges card) {
         super(card);
     }
 

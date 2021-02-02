@@ -29,7 +29,7 @@ public final class RayOfDistortion extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{W}{W}"), TimingRule.INSTANT));
     }
 
-    public RayOfDistortion(final RayOfDistortion card) {
+    private RayOfDistortion(final RayOfDistortion card) {
         super(card);
     }
 

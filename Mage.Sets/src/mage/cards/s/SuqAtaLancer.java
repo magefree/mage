@@ -30,7 +30,7 @@ public final class SuqAtaLancer extends CardImpl {
         this.addAbility(new FlankingAbility());
     }
 
-    public SuqAtaLancer(final SuqAtaLancer card) {
+    private SuqAtaLancer(final SuqAtaLancer card) {
         super(card);
     }
 

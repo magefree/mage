@@ -60,7 +60,7 @@ public final class DanceOfMany extends CardImpl {
 
     }
 
-    public DanceOfMany(final DanceOfMany card) {
+    private DanceOfMany(final DanceOfMany card) {
         super(card);
     }
 

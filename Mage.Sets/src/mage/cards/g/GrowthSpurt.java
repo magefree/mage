@@ -32,7 +32,7 @@ public final class GrowthSpurt extends CardImpl {
         this.getSpellAbility().addEffect(new GrowthSpurtEffect());
     }
 
-    public GrowthSpurt(final GrowthSpurt card) {
+    private GrowthSpurt(final GrowthSpurt card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class FogOfGnats extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public FogOfGnats(final FogOfGnats card) {
+    private FogOfGnats(final FogOfGnats card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class AkuDjinn extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), TargetController.YOU, false));
     }
 
-    public AkuDjinn(final AkuDjinn card) {
+    private AkuDjinn(final AkuDjinn card) {
         super(card);
     }
 

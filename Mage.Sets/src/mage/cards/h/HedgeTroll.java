@@ -41,7 +41,7 @@ public final class HedgeTroll extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{W}")));
     }
 
-    public HedgeTroll(final HedgeTroll card) {
+    private HedgeTroll(final HedgeTroll card) {
         super(card);
     }
 

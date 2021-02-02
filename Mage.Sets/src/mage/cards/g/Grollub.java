@@ -31,7 +31,7 @@ public final class Grollub extends CardImpl {
 
     }
 
-    public Grollub(final Grollub card) {
+    private Grollub(final Grollub card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class RottedHulk extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public RottedHulk(final RottedHulk card) {
+    private RottedHulk(final RottedHulk card) {
         super(card);
     }
 

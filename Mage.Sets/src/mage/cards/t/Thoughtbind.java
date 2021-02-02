@@ -30,7 +30,7 @@ public final class Thoughtbind extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public Thoughtbind(final Thoughtbind card) {
+    private Thoughtbind(final Thoughtbind card) {
         super(card);
     }
 

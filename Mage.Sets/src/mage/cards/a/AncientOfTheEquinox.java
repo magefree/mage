@@ -31,7 +31,7 @@ public final class AncientOfTheEquinox extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    public AncientOfTheEquinox(final AncientOfTheEquinox card) {
+    private AncientOfTheEquinox(final AncientOfTheEquinox card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class RiverBoa extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
     }
 
-    public RiverBoa(final RiverBoa card) {
+    private RiverBoa(final RiverBoa card) {
         super(card);
     }
 

@@ -60,7 +60,7 @@ public final class CitadelSiege extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CitadelSiege(final CitadelSiege card) {
+    private CitadelSiege(final CitadelSiege card) {
         super(card);
     }
 

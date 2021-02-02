@@ -39,7 +39,7 @@ public final class BoldwyrHeavyweights extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoldwyrHeavyweightsEffect()));
     }
 
-    public BoldwyrHeavyweights(final BoldwyrHeavyweights card) {
+    private BoldwyrHeavyweights(final BoldwyrHeavyweights card) {
         super(card);
     }
 

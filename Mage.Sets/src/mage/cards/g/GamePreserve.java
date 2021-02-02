@@ -30,7 +30,7 @@ public final class GamePreserve extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DuskmarEffect(), TargetController.YOU, false));
     }
 
-    public GamePreserve(final GamePreserve card) {
+    private GamePreserve(final GamePreserve card) {
         super(card);
     }
 

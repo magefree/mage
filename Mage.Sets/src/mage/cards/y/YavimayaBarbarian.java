@@ -27,7 +27,7 @@ public final class YavimayaBarbarian extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
     }
 
-    public YavimayaBarbarian(final YavimayaBarbarian card) {
+    private YavimayaBarbarian(final YavimayaBarbarian card) {
         super(card);
     }
 

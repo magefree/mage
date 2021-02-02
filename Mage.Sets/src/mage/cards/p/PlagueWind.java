@@ -28,7 +28,7 @@ public final class PlagueWind extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, true));
     }
 
-    public PlagueWind(final PlagueWind card) {
+    private PlagueWind(final PlagueWind card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class AvatarOfDiscord extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards"))))));
     }
 
-    public AvatarOfDiscord(final AvatarOfDiscord card) {
+    private AvatarOfDiscord(final AvatarOfDiscord card) {
         super(card);
     }
 

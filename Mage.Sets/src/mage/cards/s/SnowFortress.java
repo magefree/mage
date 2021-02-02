@@ -55,7 +55,7 @@ public final class SnowFortress extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SnowFortress(final SnowFortress card) {
+    private SnowFortress(final SnowFortress card) {
         super(card);
     }
 

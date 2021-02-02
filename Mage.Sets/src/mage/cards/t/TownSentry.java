@@ -28,7 +28,7 @@ public final class TownSentry extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(0, 2, Duration.EndOfTurn), false));
     }
 
-    public TownSentry(final TownSentry card) {
+    private TownSentry(final TownSentry card) {
         super(card);
     }
 

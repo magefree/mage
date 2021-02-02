@@ -31,7 +31,7 @@ public final class ImplementOfExamination extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public ImplementOfExamination(final ImplementOfExamination card) {
+    private ImplementOfExamination(final ImplementOfExamination card) {
         super(card);
     }
 

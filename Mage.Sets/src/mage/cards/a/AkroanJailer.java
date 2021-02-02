@@ -36,7 +36,7 @@ public final class AkroanJailer extends CardImpl {
         
     }
 
-    public AkroanJailer(final AkroanJailer card) {
+    private AkroanJailer(final AkroanJailer card) {
         super(card);
     }
 

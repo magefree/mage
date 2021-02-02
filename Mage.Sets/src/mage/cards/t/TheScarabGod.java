@@ -57,7 +57,7 @@ public final class TheScarabGod extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new TheScarabGodEffect3()));
     }
 
-    public TheScarabGod(final TheScarabGod card) {
+    private TheScarabGod(final TheScarabGod card) {
         super(card);
     }
 

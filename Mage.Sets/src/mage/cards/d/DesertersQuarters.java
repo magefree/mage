@@ -35,7 +35,7 @@ public final class DesertersQuarters extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DesertersQuarters(final DesertersQuarters card) {
+    private DesertersQuarters(final DesertersQuarters card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class RallyingFire extends CardImpl {
 
     }
 
-    public RallyingFire(final RallyingFire card) {
+    private RallyingFire(final RallyingFire card) {
         super(card);
     }
 

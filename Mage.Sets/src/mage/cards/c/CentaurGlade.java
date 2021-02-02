@@ -24,7 +24,7 @@ public final class CentaurGlade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CentaurToken(), 1), new ManaCostsImpl("{2}{G}{G}")));
     }
 
-    public CentaurGlade(final CentaurGlade card) {
+    private CentaurGlade(final CentaurGlade card) {
         super(card);
     }
 

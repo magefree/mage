@@ -35,7 +35,7 @@ public final class ThranFoundry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThranFoundry(final ThranFoundry card) {
+    private ThranFoundry(final ThranFoundry card) {
         super(card);
     }
 

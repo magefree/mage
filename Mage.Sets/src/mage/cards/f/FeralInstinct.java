@@ -30,7 +30,7 @@ public final class FeralInstinct extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false));
     }
 
-    public FeralInstinct(final FeralInstinct card) {
+    private FeralInstinct(final FeralInstinct card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class JarJarBinks extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new JarJarBinksTapEffect(), TargetController.YOU, false));
     }
 
-    public JarJarBinks(final JarJarBinks card) {
+    private JarJarBinks(final JarJarBinks card) {
         super(card);
     }
 

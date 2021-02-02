@@ -34,7 +34,7 @@ public final class EidolonOfPhilosophy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EidolonOfPhilosophy(final EidolonOfPhilosophy card) {
+    private EidolonOfPhilosophy(final EidolonOfPhilosophy card) {
         super(card);
     }
 

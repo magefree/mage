@@ -47,7 +47,7 @@ public final class SoratamiRainshaper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoratamiRainshaper(final SoratamiRainshaper card) {
+    private SoratamiRainshaper(final SoratamiRainshaper card) {
         super(card);
     }
 

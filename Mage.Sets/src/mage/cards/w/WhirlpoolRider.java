@@ -28,7 +28,7 @@ public final class WhirlpoolRider extends CardImpl {
 
     }
 
-    public WhirlpoolRider(final WhirlpoolRider card) {
+    private WhirlpoolRider(final WhirlpoolRider card) {
         super(card);
     }
 

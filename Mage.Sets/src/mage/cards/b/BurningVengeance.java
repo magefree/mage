@@ -26,7 +26,7 @@ public final class BurningVengeance extends CardImpl {
         this.addAbility(new BurningVengeanceOnCastAbility());
     }
 
-    public BurningVengeance(final BurningVengeance card) {
+    private BurningVengeance(final BurningVengeance card) {
         super(card);
     }
 

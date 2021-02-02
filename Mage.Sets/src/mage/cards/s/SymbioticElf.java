@@ -27,7 +27,7 @@ public final class SymbioticElf extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new InsectToken(), 2)));
     }
 
-    public SymbioticElf(final SymbioticElf card) {
+    private SymbioticElf(final SymbioticElf card) {
         super(card);
     }
 

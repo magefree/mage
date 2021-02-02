@@ -36,7 +36,7 @@ public final class MagusOfTheAbyss extends CardImpl {
         this.addAbility(new MagusOfTheAbyssTriggeredAbility());
     }
 
-    public MagusOfTheAbyss(final MagusOfTheAbyss card) {
+    private MagusOfTheAbyss(final MagusOfTheAbyss card) {
         super(card);
     }
 

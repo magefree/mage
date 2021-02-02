@@ -48,7 +48,7 @@ public final class InfiniteAuthority extends CardImpl {
         this.addAbility(new InfiniteAuthorityTriggeredAbility());
     }
 
-    public InfiniteAuthority(final InfiniteAuthority card) {
+    private InfiniteAuthority(final InfiniteAuthority card) {
         super(card);
     }
 

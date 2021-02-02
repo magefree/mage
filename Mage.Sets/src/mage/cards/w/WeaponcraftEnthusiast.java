@@ -26,7 +26,7 @@ public final class WeaponcraftEnthusiast extends CardImpl {
         this.addAbility(new FabricateAbility(2));
     }
 
-    public WeaponcraftEnthusiast(final WeaponcraftEnthusiast card) {
+    private WeaponcraftEnthusiast(final WeaponcraftEnthusiast card) {
         super(card);
     }
 

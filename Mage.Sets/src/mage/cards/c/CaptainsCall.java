@@ -21,7 +21,7 @@ public final class CaptainsCall extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SoldierToken(), 3));
     }
 
-    public CaptainsCall(final CaptainsCall card) {
+    private CaptainsCall(final CaptainsCall card) {
         super(card);
     }
 

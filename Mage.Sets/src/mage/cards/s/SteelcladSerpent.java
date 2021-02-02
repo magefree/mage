@@ -33,7 +33,7 @@ public final class SteelcladSerpent extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SteelcladSerpentEffect()));
     }
 
-    public SteelcladSerpent(final SteelcladSerpent card) {
+    private SteelcladSerpent(final SteelcladSerpent card) {
         super(card);
     }
 

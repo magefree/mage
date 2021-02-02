@@ -35,7 +35,7 @@ public final class SoulChanneling extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new PayLifeCost(2)));
     }
 
-    public SoulChanneling(final SoulChanneling card) {
+    private SoulChanneling(final SoulChanneling card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class RuthlessSniper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RuthlessSniper(final RuthlessSniper card) {
+    private RuthlessSniper(final RuthlessSniper card) {
         super(card);
     }
 

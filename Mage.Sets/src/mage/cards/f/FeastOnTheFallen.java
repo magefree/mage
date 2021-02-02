@@ -38,7 +38,7 @@ public final class FeastOnTheFallen extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FeastOnTheFallen(final FeastOnTheFallen card) {
+    private FeastOnTheFallen(final FeastOnTheFallen card) {
         super(card);
     }
 

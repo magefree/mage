@@ -34,7 +34,7 @@ public final class CephalidLooter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CephalidLooter(final CephalidLooter card) {
+    private CephalidLooter(final CephalidLooter card) {
         super(card);
     }
 

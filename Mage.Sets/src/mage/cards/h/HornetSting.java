@@ -22,7 +22,7 @@ public final class HornetSting extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
     }
 
-    public HornetSting(final HornetSting card) {
+    private HornetSting(final HornetSting card) {
         super(card);
     }
 

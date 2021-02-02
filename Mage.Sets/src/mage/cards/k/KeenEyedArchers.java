@@ -27,7 +27,7 @@ public final class KeenEyedArchers extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public KeenEyedArchers(final KeenEyedArchers card) {
+    private KeenEyedArchers(final KeenEyedArchers card) {
         super(card);
     }
 

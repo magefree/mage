@@ -25,7 +25,7 @@ public final class ArcboundWorker extends CardImpl {
         this.addAbility(new ModularAbility(this, 1));
     }
 
-    public ArcboundWorker(final ArcboundWorker card) {
+    private ArcboundWorker(final ArcboundWorker card) {
         super(card);
     }
 

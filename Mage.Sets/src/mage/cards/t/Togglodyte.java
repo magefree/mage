@@ -46,7 +46,7 @@ public final class Togglodyte extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Togglodyte(final Togglodyte card) {
+    private Togglodyte(final Togglodyte card) {
         super(card);
     }
 

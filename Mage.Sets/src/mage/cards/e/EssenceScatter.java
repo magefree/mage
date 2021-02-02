@@ -23,7 +23,7 @@ public final class EssenceScatter extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
-    public EssenceScatter(final EssenceScatter card) {
+    private EssenceScatter(final EssenceScatter card) {
         super(card);
     }
 

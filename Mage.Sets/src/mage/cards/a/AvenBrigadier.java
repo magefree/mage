@@ -43,7 +43,7 @@ public final class AvenBrigadier extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter2, true)));
     }
 
-    public AvenBrigadier(final AvenBrigadier card) {
+    private AvenBrigadier(final AvenBrigadier card) {
         super(card);
     }
 

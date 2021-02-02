@@ -55,7 +55,7 @@ public final class Melee extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new MeleeTriggeredAbility()));
     }
 
-    public Melee(final Melee card) {
+    private Melee(final Melee card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class Gigantosaurus extends CardImpl {
         this.toughness = new MageInt(10);
     }
 
-    public Gigantosaurus(final Gigantosaurus card) {
+    private Gigantosaurus(final Gigantosaurus card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class AncestralVision extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(3));
     }
 
-    public AncestralVision(final AncestralVision card) {
+    private AncestralVision(final AncestralVision card) {
         super(card);
     }
 

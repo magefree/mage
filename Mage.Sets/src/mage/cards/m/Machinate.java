@@ -34,7 +34,7 @@ public final class Machinate extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Machinate(final Machinate card) {
+    private Machinate(final Machinate card) {
         super(card);
     }
 

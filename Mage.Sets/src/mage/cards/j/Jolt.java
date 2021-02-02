@@ -39,7 +39,7 @@ public final class Jolt extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public Jolt(final Jolt card) {
+    private Jolt(final Jolt card) {
         super(card);
     }
 

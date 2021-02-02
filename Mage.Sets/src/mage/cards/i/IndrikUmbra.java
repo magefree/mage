@@ -50,7 +50,7 @@ public final class IndrikUmbra extends CardImpl {
         this.addAbility(new TotemArmorAbility());
     }
 
-    public IndrikUmbra(final IndrikUmbra card) {
+    private IndrikUmbra(final IndrikUmbra card) {
         super(card);
     }
 

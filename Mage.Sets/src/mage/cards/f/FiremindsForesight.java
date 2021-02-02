@@ -31,7 +31,7 @@ public final class FiremindsForesight extends CardImpl {
         this.getSpellAbility().addEffect(new FiremindsForesightSearchEffect());
     }
 
-    public FiremindsForesight(final FiremindsForesight card) {
+    private FiremindsForesight(final FiremindsForesight card) {
         super(card);
     }
 

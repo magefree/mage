@@ -30,7 +30,7 @@ public final class DevourFlesh extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public DevourFlesh(final DevourFlesh card) {
+    private DevourFlesh(final DevourFlesh card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class VhatiIlDal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VhatiIlDal(final VhatiIlDal card) {
+    private VhatiIlDal(final VhatiIlDal card) {
         super(card);
     }
 

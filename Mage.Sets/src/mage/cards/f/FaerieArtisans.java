@@ -50,7 +50,7 @@ public final class FaerieArtisans extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FaerieArtisans(final FaerieArtisans card) {
+    private FaerieArtisans(final FaerieArtisans card) {
         super(card);
     }
 

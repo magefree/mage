@@ -42,7 +42,7 @@ public class GlimpseTheCosmos extends CardImpl {
         this.addAbility(new GlimpseTheCosmosAbility(new ManaCostsImpl("{U}")));
     }
 
-    public GlimpseTheCosmos(final GlimpseTheCosmos card) {
+    private GlimpseTheCosmos(final GlimpseTheCosmos card) {
         super(card);
     }
 

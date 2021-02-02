@@ -36,7 +36,7 @@ public final class UlvenwaldBear extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UlvenwaldBear(final UlvenwaldBear card) {
+    private UlvenwaldBear(final UlvenwaldBear card) {
         super(card);
     }
 

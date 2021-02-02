@@ -34,7 +34,7 @@ public final class ConsignOblivion extends SplitCard {
         getRightHalfCard().getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public ConsignOblivion(final ConsignOblivion card) {
+    private ConsignOblivion(final ConsignOblivion card) {
         super(card);
     }
 

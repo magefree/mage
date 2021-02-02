@@ -38,7 +38,7 @@ public final class GravelSlinger extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{W}")));
     }
 
-    public GravelSlinger(final GravelSlinger card) {
+    private GravelSlinger(final GravelSlinger card) {
         super(card);
     }
 

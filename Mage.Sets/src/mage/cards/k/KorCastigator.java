@@ -37,7 +37,7 @@ public final class KorCastigator extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(FILTER, Duration.WhileOnBattlefield)));
     }
 
-    public KorCastigator(final KorCastigator card) {
+    private KorCastigator(final KorCastigator card) {
         super(card);
     }
 

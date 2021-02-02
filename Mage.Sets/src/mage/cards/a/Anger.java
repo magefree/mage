@@ -51,7 +51,7 @@ public final class Anger extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, angerEffect));
     }
 
-    public Anger(final Anger card) {
+    private Anger(final Anger card) {
         super(card);
     }
 

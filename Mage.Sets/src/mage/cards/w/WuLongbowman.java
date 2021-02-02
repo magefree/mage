@@ -36,7 +36,7 @@ public final class WuLongbowman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WuLongbowman(final WuLongbowman card) {
+    private WuLongbowman(final WuLongbowman card) {
         super(card);
     }
 

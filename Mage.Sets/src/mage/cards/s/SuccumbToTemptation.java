@@ -25,7 +25,7 @@ public final class SuccumbToTemptation extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public SuccumbToTemptation(final SuccumbToTemptation card) {
+    private SuccumbToTemptation(final SuccumbToTemptation card) {
         super(card);
     }
 

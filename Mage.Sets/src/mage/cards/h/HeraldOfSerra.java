@@ -30,7 +30,7 @@ public final class HeraldOfSerra extends CardImpl {
         this.addAbility(new EchoAbility("{2}{W}{W}"));
     }
 
-    public HeraldOfSerra(final HeraldOfSerra card) {
+    private HeraldOfSerra(final HeraldOfSerra card) {
         super(card);
     }
 

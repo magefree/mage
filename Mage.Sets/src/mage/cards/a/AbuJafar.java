@@ -34,7 +34,7 @@ public final class AbuJafar extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DestroyAllEffect(filter, true), false));
     }
 
-    public AbuJafar(final AbuJafar card) {
+    private AbuJafar(final AbuJafar card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class KillShot extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public KillShot(final KillShot card) {
+    private KillShot(final KillShot card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class ManaReflection extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaReflectionReplacementEffect()));
     }
 
-    public ManaReflection(final ManaReflection card) {
+    private ManaReflection(final ManaReflection card) {
         super(card);
     }
 

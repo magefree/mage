@@ -34,7 +34,7 @@ public final class GolgothianSylex extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GolgothianSylex(final GolgothianSylex card) {
+    private GolgothianSylex(final GolgothianSylex card) {
         super(card);
     }
 

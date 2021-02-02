@@ -55,7 +55,7 @@ public final class BallynockCohort extends CardImpl {
         
     }
 
-    public BallynockCohort(final BallynockCohort card) {
+    private BallynockCohort(final BallynockCohort card) {
         super(card);
     }
 

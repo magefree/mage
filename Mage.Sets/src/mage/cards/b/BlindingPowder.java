@@ -37,7 +37,7 @@ public final class BlindingPowder extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.PreventDamage, new GenericManaCost(2)));
     }
 
-    public BlindingPowder(final BlindingPowder card) {
+    private BlindingPowder(final BlindingPowder card) {
         super(card);
     }
 

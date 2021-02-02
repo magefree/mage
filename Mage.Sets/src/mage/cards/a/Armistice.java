@@ -36,7 +36,7 @@ public final class Armistice extends CardImpl {
 
     }
 
-    public Armistice(final Armistice card) {
+    private Armistice(final Armistice card) {
         super(card);
     }
 

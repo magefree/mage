@@ -49,7 +49,7 @@ public final class BoldwyrIntimidator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BoldwyrIntimidator(final BoldwyrIntimidator card) {
+    private BoldwyrIntimidator(final BoldwyrIntimidator card) {
         super(card);
     }
 

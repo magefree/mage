@@ -36,7 +36,7 @@ public final class Skinrender extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Skinrender(final Skinrender card) {
+    private Skinrender(final Skinrender card) {
         super(card);
     }
 

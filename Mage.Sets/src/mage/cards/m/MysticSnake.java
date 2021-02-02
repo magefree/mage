@@ -31,7 +31,7 @@ public final class MysticSnake extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MysticSnake(final MysticSnake card) {
+    private MysticSnake(final MysticSnake card) {
         super(card);
     }
 

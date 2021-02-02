@@ -33,7 +33,7 @@ public final class SickeningDreams extends CardImpl {
         this.getSpellAbility().addEffect(new DamageEverythingEffect(GetXValue.instance, new FilterCreaturePermanent()));
     }
 
-    public SickeningDreams(final SickeningDreams card) {
+    private SickeningDreams(final SickeningDreams card) {
         super(card);
     }
 

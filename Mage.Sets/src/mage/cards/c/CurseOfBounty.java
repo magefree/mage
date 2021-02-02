@@ -43,7 +43,7 @@ public final class CurseOfBounty extends CardImpl {
         this.addAbility(new EnchantedPlayerAttackedTriggeredAbility(new CurseOfBountyEffect()));
     }
 
-    public CurseOfBounty(final CurseOfBounty card) {
+    private CurseOfBounty(final CurseOfBounty card) {
         super(card);
     }
 

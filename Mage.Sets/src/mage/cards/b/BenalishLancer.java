@@ -40,7 +40,7 @@ public final class BenalishLancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BenalishLancer(final BenalishLancer card) {
+    private BenalishLancer(final BenalishLancer card) {
         super(card);
     }
 

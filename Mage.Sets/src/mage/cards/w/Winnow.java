@@ -31,7 +31,7 @@ public final class Winnow extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Winnow(final Winnow card) {
+    private Winnow(final Winnow card) {
         super(card);
     }
 

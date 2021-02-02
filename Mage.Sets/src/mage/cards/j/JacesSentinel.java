@@ -48,7 +48,7 @@ public final class JacesSentinel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JacesSentinel(final JacesSentinel card) {
+    private JacesSentinel(final JacesSentinel card) {
         super(card);
     }
 

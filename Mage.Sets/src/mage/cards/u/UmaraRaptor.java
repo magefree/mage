@@ -30,7 +30,7 @@ public final class UmaraRaptor extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
 
-    public UmaraRaptor(final UmaraRaptor card) {
+    private UmaraRaptor(final UmaraRaptor card) {
         super(card);
     }
 

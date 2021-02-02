@@ -40,7 +40,7 @@ public final class SyndicateTrafficker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SyndicateTrafficker(final SyndicateTrafficker card) {
+    private SyndicateTrafficker(final SyndicateTrafficker card) {
         super(card);
     }
 

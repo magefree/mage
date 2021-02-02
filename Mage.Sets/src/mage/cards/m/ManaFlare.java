@@ -26,7 +26,7 @@ public final class ManaFlare extends CardImpl {
                 SetTargetPointer.PERMANENT));
     }
 
-    public ManaFlare(final ManaFlare card) {
+    private ManaFlare(final ManaFlare card) {
         super(card);
     }
 

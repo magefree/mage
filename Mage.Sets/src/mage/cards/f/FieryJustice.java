@@ -32,7 +32,7 @@ public final class FieryJustice extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public FieryJustice(final FieryJustice card) {
+    private FieryJustice(final FieryJustice card) {
         super(card);
     }
 

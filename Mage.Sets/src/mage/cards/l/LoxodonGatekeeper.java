@@ -38,7 +38,7 @@ public final class LoxodonGatekeeper extends CardImpl {
 
     }
 
-    public LoxodonGatekeeper(final LoxodonGatekeeper card) {
+    private LoxodonGatekeeper(final LoxodonGatekeeper card) {
         super(card);
     }
 

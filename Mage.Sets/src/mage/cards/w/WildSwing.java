@@ -38,7 +38,7 @@ public final class WildSwing extends CardImpl {
 
     }
 
-    public WildSwing(final WildSwing card) {
+    private WildSwing(final WildSwing card) {
         super(card);
     }
 

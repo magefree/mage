@@ -43,7 +43,7 @@ public final class WindwrightMage extends CardImpl {
                 "{this} has flying as long as an artifact card is in your graveyard")));
     }
 
-    public WindwrightMage(final WindwrightMage card) {
+    private WindwrightMage(final WindwrightMage card) {
         super(card);
     }
 

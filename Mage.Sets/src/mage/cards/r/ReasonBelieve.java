@@ -37,7 +37,7 @@ public final class ReasonBelieve extends SplitCard {
 
     }
 
-    public ReasonBelieve(final ReasonBelieve card) {
+    private ReasonBelieve(final ReasonBelieve card) {
         super(card);
     }
 

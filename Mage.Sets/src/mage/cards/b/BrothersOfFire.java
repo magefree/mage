@@ -37,7 +37,7 @@ public final class BrothersOfFire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BrothersOfFire(final BrothersOfFire card) {
+    private BrothersOfFire(final BrothersOfFire card) {
         super(card);
     }
 

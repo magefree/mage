@@ -48,7 +48,7 @@ public final class YisanTheWandererBard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public YisanTheWandererBard(final YisanTheWandererBard card) {
+    private YisanTheWandererBard(final YisanTheWandererBard card) {
         super(card);
     }
 

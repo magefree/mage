@@ -43,7 +43,7 @@ public final class NefariousLich extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new LoseGameSourceControllerEffect(), false));
     }
 
-    public NefariousLich(final NefariousLich card) {
+    private NefariousLich(final NefariousLich card) {
         super(card);
     }
 

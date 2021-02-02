@@ -27,7 +27,7 @@ public final class Inspire extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Inspire(final Inspire card) {
+    private Inspire(final Inspire card) {
         super(card);
     }
 

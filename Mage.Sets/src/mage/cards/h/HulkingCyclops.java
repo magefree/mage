@@ -26,7 +26,7 @@ public final class HulkingCyclops extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public HulkingCyclops(final HulkingCyclops card) {
+    private HulkingCyclops(final HulkingCyclops card) {
         super(card);
     }
 

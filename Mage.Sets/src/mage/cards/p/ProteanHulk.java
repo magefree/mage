@@ -32,7 +32,7 @@ public final class ProteanHulk extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new ProteanHulkTarget())));
     }
 
-    public ProteanHulk(final ProteanHulk card) {
+    private ProteanHulk(final ProteanHulk card) {
         super(card);
     }
 

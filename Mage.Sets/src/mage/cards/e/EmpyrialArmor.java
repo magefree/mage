@@ -42,7 +42,7 @@ public final class EmpyrialArmor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(xValue, xValue, Duration.WhileOnBattlefield)));
     }
 
-    public EmpyrialArmor(final EmpyrialArmor card) {
+    private EmpyrialArmor(final EmpyrialArmor card) {
         super(card);
     }
 

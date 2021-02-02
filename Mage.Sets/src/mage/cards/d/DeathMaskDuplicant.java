@@ -60,7 +60,7 @@ public final class DeathMaskDuplicant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DeathMaskDuplicantEffect()));
     }
 
-    public DeathMaskDuplicant(final DeathMaskDuplicant card) {
+    private DeathMaskDuplicant(final DeathMaskDuplicant card) {
         super(card);
     }
 

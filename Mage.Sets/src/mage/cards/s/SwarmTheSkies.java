@@ -21,7 +21,7 @@ public final class SwarmTheSkies extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new TIEFighterToken(), 3));
     }
 
-    public SwarmTheSkies(final SwarmTheSkies card) {
+    private SwarmTheSkies(final SwarmTheSkies card) {
         super(card);
     }
 

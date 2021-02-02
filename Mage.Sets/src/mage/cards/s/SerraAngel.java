@@ -28,7 +28,7 @@ public final class SerraAngel extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public SerraAngel(final SerraAngel card) {
+    private SerraAngel(final SerraAngel card) {
         super(card);
     }
 

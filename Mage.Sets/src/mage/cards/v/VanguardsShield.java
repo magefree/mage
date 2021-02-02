@@ -40,7 +40,7 @@ public final class VanguardsShield extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public VanguardsShield(final VanguardsShield card) {
+    private VanguardsShield(final VanguardsShield card) {
         super(card);
     }
 

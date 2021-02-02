@@ -39,7 +39,7 @@ public final class SpinneretSliver extends CardImpl {
                 filter, "All Sliver creatures have reach.")));
     }
 
-    public SpinneretSliver(final SpinneretSliver card) {
+    private SpinneretSliver(final SpinneretSliver card) {
         super(card);
     }
 

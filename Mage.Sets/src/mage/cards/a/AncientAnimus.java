@@ -40,7 +40,7 @@ public final class AncientAnimus extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public AncientAnimus(final AncientAnimus card) {
+    private AncientAnimus(final AncientAnimus card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class CrashTheRamparts extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public CrashTheRamparts(final CrashTheRamparts card) {
+    private CrashTheRamparts(final CrashTheRamparts card) {
         super(card);
     }
 

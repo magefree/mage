@@ -31,7 +31,7 @@ public final class SerpentGenerator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SerpentGenerator(final SerpentGenerator card) {
+    private SerpentGenerator(final SerpentGenerator card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class DraconicRoar extends CardImpl {
         this.getSpellAbility().addWatcher(new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
     }
 
-    public DraconicRoar(final DraconicRoar card) {
+    private DraconicRoar(final DraconicRoar card) {
         super(card);
     }
 

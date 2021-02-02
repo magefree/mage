@@ -32,7 +32,7 @@ public final class WalkThePlank extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public WalkThePlank(final WalkThePlank card) {
+    private WalkThePlank(final WalkThePlank card) {
         super(card);
     }
 

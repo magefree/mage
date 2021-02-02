@@ -50,7 +50,7 @@ public final class MerrowBonegnawer extends CardImpl {
 
     }
 
-    public MerrowBonegnawer(final MerrowBonegnawer card) {
+    private MerrowBonegnawer(final MerrowBonegnawer card) {
         super(card);
     }
 

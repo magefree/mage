@@ -37,7 +37,7 @@ public final class Spiritualize extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Spiritualize(final Spiritualize card) {
+    private Spiritualize(final Spiritualize card) {
         super(card);
     }
 

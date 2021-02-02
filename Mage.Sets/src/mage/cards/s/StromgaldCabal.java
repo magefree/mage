@@ -45,7 +45,7 @@ public final class StromgaldCabal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StromgaldCabal(final StromgaldCabal card) {
+    private StromgaldCabal(final StromgaldCabal card) {
         super(card);
     }
 

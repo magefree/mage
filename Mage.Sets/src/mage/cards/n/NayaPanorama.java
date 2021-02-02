@@ -45,7 +45,7 @@ public final class NayaPanorama extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NayaPanorama(final NayaPanorama card) {
+    private NayaPanorama(final NayaPanorama card) {
         super(card);
     }
 

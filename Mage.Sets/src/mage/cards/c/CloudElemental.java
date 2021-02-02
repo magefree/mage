@@ -28,7 +28,7 @@ public final class CloudElemental extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public CloudElemental(final CloudElemental card) {
+    private CloudElemental(final CloudElemental card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class FromUnderTheFloorboards extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(xValue));        
     }
 
-    public FromUnderTheFloorboards(final FromUnderTheFloorboards card) {
+    private FromUnderTheFloorboards(final FromUnderTheFloorboards card) {
         super(card);
     }
 

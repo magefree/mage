@@ -35,7 +35,7 @@ public final class CapriciousSorcerer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CapriciousSorcerer(final CapriciousSorcerer card) {
+    private CapriciousSorcerer(final CapriciousSorcerer card) {
         super(card);
     }
 

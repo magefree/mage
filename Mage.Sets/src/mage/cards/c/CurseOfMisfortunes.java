@@ -47,7 +47,7 @@ public final class CurseOfMisfortunes extends CardImpl {
         this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new CurseOfMisfortunesEffect(), true));
     }
 
-    public CurseOfMisfortunes(final CurseOfMisfortunes card) {
+    private CurseOfMisfortunes(final CurseOfMisfortunes card) {
         super(card);
     }
 

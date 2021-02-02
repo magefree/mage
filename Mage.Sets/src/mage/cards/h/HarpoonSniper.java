@@ -43,7 +43,7 @@ public final class HarpoonSniper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HarpoonSniper(final HarpoonSniper card) {
+    private HarpoonSniper(final HarpoonSniper card) {
         super(card);
     }
 

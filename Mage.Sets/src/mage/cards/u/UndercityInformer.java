@@ -44,7 +44,7 @@ public final class UndercityInformer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UndercityInformer(final UndercityInformer card) {
+    private UndercityInformer(final UndercityInformer card) {
         super(card);
     }
 

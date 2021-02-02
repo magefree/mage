@@ -26,7 +26,7 @@ public final class TyrantsChoice extends CardImpl {
         this.getSpellAbility().addEffect(new TyrantsChoiceEffect());
     }
 
-    public TyrantsChoice(final TyrantsChoice card) {
+    private TyrantsChoice(final TyrantsChoice card) {
         super(card);
     }
 

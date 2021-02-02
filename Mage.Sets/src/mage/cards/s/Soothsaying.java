@@ -32,7 +32,7 @@ public final class Soothsaying extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("X")));
     }
 
-    public Soothsaying(final Soothsaying card) {
+    private Soothsaying(final Soothsaying card) {
         super(card);
     }
 

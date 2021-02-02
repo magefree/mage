@@ -40,7 +40,7 @@ public final class LuminousBonds extends CardImpl {
 
     }
 
-    public LuminousBonds(final LuminousBonds card) {
+    private LuminousBonds(final LuminousBonds card) {
         super(card);
     }
 

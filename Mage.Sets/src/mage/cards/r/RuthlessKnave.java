@@ -53,7 +53,7 @@ public final class RuthlessKnave extends CardImpl {
         ));
     }
 
-    public RuthlessKnave(final RuthlessKnave card) {
+    private RuthlessKnave(final RuthlessKnave card) {
         super(card);
     }
 

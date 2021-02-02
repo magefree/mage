@@ -56,7 +56,7 @@ public final class DjeruWithEyesOpen extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DjeruWithEyesOpenPreventEffect()));
     }
 
-    public DjeruWithEyesOpen(final DjeruWithEyesOpen card) {
+    private DjeruWithEyesOpen(final DjeruWithEyesOpen card) {
         super(card);
     }
 

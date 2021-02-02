@@ -20,7 +20,7 @@ public final class Thoughtflare extends CardImpl {
         this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(4, 2));
     }
 
-    public Thoughtflare(final Thoughtflare card) {
+    private Thoughtflare(final Thoughtflare card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class LancersEnKor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LancersEnKor(final LancersEnKor card) {
+    private LancersEnKor(final LancersEnKor card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class LupinePrototype extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LupinePrototypeEffect()));
     }
 
-    public LupinePrototype(final LupinePrototype card) {
+    private LupinePrototype(final LupinePrototype card) {
         super(card);
     }
 

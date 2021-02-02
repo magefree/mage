@@ -34,7 +34,7 @@ public final class Juxtapose extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Juxtapose(final Juxtapose card) {
+    private Juxtapose(final Juxtapose card) {
         super(card);
     }
 

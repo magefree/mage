@@ -50,7 +50,7 @@ public final class HuntingWilds extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new HuntingWildsEffect(), KickedCondition.instance));
     }
 
-    public HuntingWilds(final HuntingWilds card) {
+    private HuntingWilds(final HuntingWilds card) {
         super(card);
     }
 

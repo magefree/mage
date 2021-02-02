@@ -42,7 +42,7 @@ public final class Pallimud extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(new AnathemancerCount(), Duration.Custom)));
     }
 
-    public Pallimud(final Pallimud card) {
+    private Pallimud(final Pallimud card) {
         super(card);
     }
 

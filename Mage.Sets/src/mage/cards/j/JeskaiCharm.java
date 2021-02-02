@@ -46,7 +46,7 @@ public final class JeskaiCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public JeskaiCharm(final JeskaiCharm card) {
+    private JeskaiCharm(final JeskaiCharm card) {
         super(card);
     }
 

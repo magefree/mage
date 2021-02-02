@@ -24,7 +24,7 @@ public final class ImperialSeal extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
-    public ImperialSeal(final ImperialSeal card) {
+    private ImperialSeal(final ImperialSeal card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class ElvishScrapper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElvishScrapper(final ElvishScrapper card) {
+    private ElvishScrapper(final ElvishScrapper card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class BogardanPhoenix extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new BogardanPhoenixEffect(), false));
     }
 
-    public BogardanPhoenix(final BogardanPhoenix card) {
+    private BogardanPhoenix(final BogardanPhoenix card) {
         super(card);
     }
 

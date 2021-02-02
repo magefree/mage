@@ -47,7 +47,7 @@ public final class UtopiaVow extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public UtopiaVow(final UtopiaVow card) {
+    private UtopiaVow(final UtopiaVow card) {
         super(card);
     }
 

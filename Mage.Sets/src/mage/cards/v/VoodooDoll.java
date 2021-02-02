@@ -69,7 +69,7 @@ public final class VoodooDoll extends CardImpl {
         }
     }
 
-    public VoodooDoll(final VoodooDoll card) {
+    private VoodooDoll(final VoodooDoll card) {
         super(card);
     }
 

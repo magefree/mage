@@ -41,7 +41,7 @@ public final class HissingQuagmire extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}{G}")));
     }
 
-    public HissingQuagmire(final HissingQuagmire card) {
+    private HissingQuagmire(final HissingQuagmire card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class Flicker extends CardImpl {
 
     }
 
-    public Flicker(final Flicker card) {
+    private Flicker(final Flicker card) {
         super(card);
     }
 

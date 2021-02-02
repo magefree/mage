@@ -22,7 +22,7 @@ public final class WildJhovall extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public WildJhovall(final WildJhovall card) {
+    private WildJhovall(final WildJhovall card) {
         super(card);
     }
 

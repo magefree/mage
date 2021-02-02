@@ -28,7 +28,7 @@ public final class ArcboundStinger extends CardImpl {
         this.addAbility(new ModularAbility(this, 1));
     }
 
-    public ArcboundStinger(final ArcboundStinger card) {
+    private ArcboundStinger(final ArcboundStinger card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class MyrBattlesphere extends CardImpl {
 
     }
 
-    public MyrBattlesphere(final MyrBattlesphere card) {
+    private MyrBattlesphere(final MyrBattlesphere card) {
         super(card);
     }
 

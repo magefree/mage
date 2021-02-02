@@ -39,7 +39,7 @@ public final class LimitsOfSolidarity extends CardImpl {
 
     }
 
-    public LimitsOfSolidarity(final LimitsOfSolidarity card) {
+    private LimitsOfSolidarity(final LimitsOfSolidarity card) {
         super(card);
     }
 

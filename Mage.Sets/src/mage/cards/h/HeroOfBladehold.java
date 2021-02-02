@@ -34,7 +34,7 @@ public final class HeroOfBladehold extends CardImpl {
 
     }
 
-    public HeroOfBladehold(final HeroOfBladehold card) {
+    private HeroOfBladehold(final HeroOfBladehold card) {
         super(card);
     }
 

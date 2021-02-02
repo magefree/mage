@@ -41,7 +41,7 @@ public final class InkfathomWitch extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SetPowerToughnessAllEffect(4, 1, Duration.EndOfTurn, filter, true), new ManaCostsImpl("{2}{U}{B}")));
     }
 
-    public InkfathomWitch(final InkfathomWitch card) {
+    private InkfathomWitch(final InkfathomWitch card) {
         super(card);
     }
 

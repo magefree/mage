@@ -36,7 +36,7 @@ public final class ArashinSovereign extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ArashinSovereignEffect(), true));
     }
 
-    public ArashinSovereign(final ArashinSovereign card) {
+    private ArashinSovereign(final ArashinSovereign card) {
         super(card);
     }
 

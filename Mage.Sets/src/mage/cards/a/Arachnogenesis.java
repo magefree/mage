@@ -42,7 +42,7 @@ public final class Arachnogenesis extends CardImpl {
          this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true));
     }
 
-    public Arachnogenesis(final Arachnogenesis card) {
+    private Arachnogenesis(final Arachnogenesis card) {
         super(card);
     }
 

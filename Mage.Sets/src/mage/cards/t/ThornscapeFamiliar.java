@@ -40,7 +40,7 @@ public final class ThornscapeFamiliar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public ThornscapeFamiliar(final ThornscapeFamiliar card) {
+    private ThornscapeFamiliar(final ThornscapeFamiliar card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class TrespassersCurse extends CardImpl {
         this.addAbility(new TrespassersCurseTriggeredAbility());
     }
 
-    public TrespassersCurse(final TrespassersCurse card) {
+    private TrespassersCurse(final TrespassersCurse card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class MarchOfTheMultitudes extends CardImpl {
         ));
     }
 
-    public MarchOfTheMultitudes(final MarchOfTheMultitudes card) {
+    private MarchOfTheMultitudes(final MarchOfTheMultitudes card) {
         super(card);
     }
 

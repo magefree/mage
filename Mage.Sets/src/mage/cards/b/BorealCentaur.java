@@ -27,7 +27,7 @@ public final class BorealCentaur extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{S}")));
     }
 
-    public BorealCentaur(final BorealCentaur card) {
+    private BorealCentaur(final BorealCentaur card) {
         super(card);
     }
 

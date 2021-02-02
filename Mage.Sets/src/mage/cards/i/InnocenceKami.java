@@ -38,7 +38,7 @@ public final class InnocenceKami extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
     }
 
-    public InnocenceKami(final InnocenceKami card) {
+    private InnocenceKami(final InnocenceKami card) {
         super(card);
     }
 

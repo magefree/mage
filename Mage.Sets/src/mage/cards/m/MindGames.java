@@ -37,7 +37,7 @@ public final class MindGames extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public MindGames(final MindGames card) {
+    private MindGames(final MindGames card) {
         super(card);
     }
 

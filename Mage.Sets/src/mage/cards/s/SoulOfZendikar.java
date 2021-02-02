@@ -39,7 +39,7 @@ public final class SoulOfZendikar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoulOfZendikar(final SoulOfZendikar card) {
+    private SoulOfZendikar(final SoulOfZendikar card) {
         super(card);
     }
 

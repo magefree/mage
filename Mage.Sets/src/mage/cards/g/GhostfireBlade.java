@@ -60,7 +60,7 @@ public final class GhostfireBlade extends CardImpl {
         }
     }
 
-    public GhostfireBlade(final GhostfireBlade card) {
+    private GhostfireBlade(final GhostfireBlade card) {
         super(card);
     }
 

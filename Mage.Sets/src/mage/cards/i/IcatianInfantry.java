@@ -37,7 +37,7 @@ public final class IcatianInfantry extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(BandingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}")));
     }
 
-    public IcatianInfantry(final IcatianInfantry card) {
+    private IcatianInfantry(final IcatianInfantry card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class SawtoothThresher extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(4, 4, Duration.EndOfTurn), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
     }
 
-    public SawtoothThresher(final SawtoothThresher card) {
+    private SawtoothThresher(final SawtoothThresher card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class Sporemound extends CardImpl {
         this.addAbility(new LandfallAbility(new CreateTokenEffect(new SaprolingToken())));
     }
 
-    public Sporemound(final Sporemound card) {
+    private Sporemound(final Sporemound card) {
         super(card);
     }
 

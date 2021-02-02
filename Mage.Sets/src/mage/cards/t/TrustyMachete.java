@@ -27,7 +27,7 @@ public final class TrustyMachete extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public TrustyMachete(final TrustyMachete card) {
+    private TrustyMachete(final TrustyMachete card) {
         super(card);
     }
 

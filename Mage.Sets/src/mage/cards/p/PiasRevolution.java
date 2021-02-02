@@ -36,7 +36,7 @@ public final class PiasRevolution extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PiasRevolution(final PiasRevolution card) {
+    private PiasRevolution(final PiasRevolution card) {
         super(card);
     }
 

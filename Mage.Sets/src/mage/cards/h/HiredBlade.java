@@ -27,7 +27,7 @@ public final class HiredBlade extends CardImpl {
 
     }
 
-    public HiredBlade(final HiredBlade card) {
+    private HiredBlade(final HiredBlade card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class AcolyteOfTheInferno extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(2, true, "that creature", "it"), false));
     }
 
-    public AcolyteOfTheInferno(final AcolyteOfTheInferno card) {
+    private AcolyteOfTheInferno(final AcolyteOfTheInferno card) {
         super(card);
     }
 

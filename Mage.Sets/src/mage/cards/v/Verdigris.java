@@ -21,7 +21,7 @@ public final class Verdigris extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
-    public Verdigris(final Verdigris card) {
+    private Verdigris(final Verdigris card) {
         super(card);
     }
 

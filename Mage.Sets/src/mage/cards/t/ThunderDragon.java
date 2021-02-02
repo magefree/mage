@@ -41,7 +41,7 @@ public final class ThunderDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThunderDragon(final ThunderDragon card) {
+    private ThunderDragon(final ThunderDragon card) {
         super(card);
     }
 

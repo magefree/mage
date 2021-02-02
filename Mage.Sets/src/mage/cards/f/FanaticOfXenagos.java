@@ -43,7 +43,7 @@ public final class FanaticOfXenagos extends CardImpl {
                 "When {this} enters the battlefield, if its tribute wasn't paid, it gets +1/+1 and gains haste until end of turn."));
     }
 
-    public FanaticOfXenagos(final FanaticOfXenagos card) {
+    private FanaticOfXenagos(final FanaticOfXenagos card) {
         super(card);
     }
 

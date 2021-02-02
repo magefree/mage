@@ -43,7 +43,7 @@ public final class GrindingStation extends CardImpl {
         
     }
 
-    public GrindingStation(final GrindingStation card) {
+    private GrindingStation(final GrindingStation card) {
         super(card);
     }
 

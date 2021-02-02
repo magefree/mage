@@ -35,7 +35,7 @@ public final class ViridianHarvest extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new GainLifeEffect(6), "enchanted artifact", false, false));
     }
 
-    public ViridianHarvest(final ViridianHarvest card) {
+    private ViridianHarvest(final ViridianHarvest card) {
         super(card);
     }
 

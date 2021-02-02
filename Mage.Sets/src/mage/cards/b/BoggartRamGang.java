@@ -27,7 +27,7 @@ public final class BoggartRamGang extends CardImpl {
         this.addAbility(WitherAbility.getInstance());
     }
 
-    public BoggartRamGang(final BoggartRamGang card) {
+    private BoggartRamGang(final BoggartRamGang card) {
         super(card);
     }
 

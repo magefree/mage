@@ -22,7 +22,7 @@ public final class LowlandGiant extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public LowlandGiant(final LowlandGiant card) {
+    private LowlandGiant(final LowlandGiant card) {
         super(card);
     }
 

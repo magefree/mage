@@ -36,7 +36,7 @@ public final class SkylineScout extends CardImpl {
         ), false));
     }
 
-    public SkylineScout(final SkylineScout card) {
+    private SkylineScout(final SkylineScout card) {
         super(card);
     }
 

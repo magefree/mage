@@ -37,7 +37,7 @@ public final class AshesToAshes extends CardImpl {
         this.getSpellAbility().addEffect(new DamageControllerEffect(5));
     }
 
-    public AshesToAshes(final AshesToAshes card) {
+    private AshesToAshes(final AshesToAshes card) {
         super(card);
     }
 

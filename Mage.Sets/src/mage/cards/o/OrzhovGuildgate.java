@@ -29,7 +29,7 @@ public final class OrzhovGuildgate extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public OrzhovGuildgate(final OrzhovGuildgate card) {
+    private OrzhovGuildgate(final OrzhovGuildgate card) {
         super(card);
     }
 

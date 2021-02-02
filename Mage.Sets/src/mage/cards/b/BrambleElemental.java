@@ -28,7 +28,7 @@ public final class BrambleElemental extends CardImpl {
         this.addAbility(new AuraAttachedTriggeredAbility(new CreateTokenEffect(new SaprolingToken(),2),false));
     }
 
-    public BrambleElemental(final BrambleElemental card) {
+    private BrambleElemental(final BrambleElemental card) {
         super(card);
     }
 

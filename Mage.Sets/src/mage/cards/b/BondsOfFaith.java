@@ -45,7 +45,7 @@ public final class BondsOfFaith extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public BondsOfFaith(final BondsOfFaith card) {
+    private BondsOfFaith(final BondsOfFaith card) {
         super(card);
     }
 

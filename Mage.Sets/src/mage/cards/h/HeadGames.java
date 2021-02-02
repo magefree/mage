@@ -22,7 +22,7 @@ public final class HeadGames extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public HeadGames(final HeadGames card) {
+    private HeadGames(final HeadGames card) {
         super(card);
     }
 

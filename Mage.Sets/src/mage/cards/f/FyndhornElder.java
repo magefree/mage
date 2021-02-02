@@ -30,7 +30,7 @@ public final class FyndhornElder extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()));
     }
 
-    public FyndhornElder(final FyndhornElder card) {
+    private FyndhornElder(final FyndhornElder card) {
         super(card);
     }
 

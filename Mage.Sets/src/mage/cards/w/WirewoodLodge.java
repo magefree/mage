@@ -41,7 +41,7 @@ public final class WirewoodLodge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WirewoodLodge(final WirewoodLodge card) {
+    private WirewoodLodge(final WirewoodLodge card) {
         super(card);
     }
 

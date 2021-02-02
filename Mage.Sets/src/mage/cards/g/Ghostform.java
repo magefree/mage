@@ -23,7 +23,7 @@ public final class Ghostform extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }
 
-    public Ghostform(final Ghostform card) {
+    private Ghostform(final Ghostform card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class FountainOfYouth extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FountainOfYouth(final FountainOfYouth card) {
+    private FountainOfYouth(final FountainOfYouth card) {
         super(card);
     }
 

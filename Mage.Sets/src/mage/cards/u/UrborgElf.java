@@ -30,7 +30,7 @@ public final class UrborgElf extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public UrborgElf(final UrborgElf card) {
+    private UrborgElf(final UrborgElf card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class Afterlife extends CardImpl {
         this.getSpellAbility().addEffect(new AfterlifeEffect());
     }
 
-    public Afterlife(final Afterlife card) {
+    private Afterlife(final Afterlife card) {
         super(card);
     }
 

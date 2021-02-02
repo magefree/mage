@@ -31,7 +31,7 @@ public final class ViridianEmissary extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true), true));
     }
 
-    public ViridianEmissary(final ViridianEmissary card) {
+    private ViridianEmissary(final ViridianEmissary card) {
         super(card);
     }
 

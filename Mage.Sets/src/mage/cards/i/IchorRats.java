@@ -32,7 +32,7 @@ public final class IchorRats extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new IchorRatsEffect(), false));
     }
 
-    public IchorRats(final IchorRats card) {
+    private IchorRats(final IchorRats card) {
         super(card);
     }
 

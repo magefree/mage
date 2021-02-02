@@ -48,7 +48,7 @@ public final class TerentatekCub extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TerentatekCub(final TerentatekCub card) {
+    private TerentatekCub(final TerentatekCub card) {
         super(card);
     }
 

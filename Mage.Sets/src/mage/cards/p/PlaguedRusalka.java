@@ -33,7 +33,7 @@ public final class PlaguedRusalka extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PlaguedRusalka(final PlaguedRusalka card) {
+    private PlaguedRusalka(final PlaguedRusalka card) {
         super(card);
     }
 

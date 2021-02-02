@@ -42,7 +42,7 @@ public final class DoomCannon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DoomCannon(final DoomCannon card) {
+    private DoomCannon(final DoomCannon card) {
         super(card);
     }
 

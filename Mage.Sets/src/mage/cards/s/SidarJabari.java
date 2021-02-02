@@ -44,7 +44,7 @@ public final class SidarJabari extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SidarJabari(final SidarJabari card) {
+    private SidarJabari(final SidarJabari card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class VigilForTheLost extends CardImpl {
         this.addAbility(new VigilForTheLostTriggeredAbility());
     }
 
-    public VigilForTheLost(final VigilForTheLost card) {
+    private VigilForTheLost(final VigilForTheLost card) {
         super(card);
     }
 

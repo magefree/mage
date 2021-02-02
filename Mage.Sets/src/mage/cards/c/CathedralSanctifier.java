@@ -28,7 +28,7 @@ public final class CathedralSanctifier extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)));
     }
 
-    public CathedralSanctifier(final CathedralSanctifier card) {
+    private CathedralSanctifier(final CathedralSanctifier card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class Solidarity extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(0, 5, Duration.EndOfTurn));
     }
 
-    public Solidarity(final Solidarity card) {
+    private Solidarity(final Solidarity card) {
         super(card);
     }
 

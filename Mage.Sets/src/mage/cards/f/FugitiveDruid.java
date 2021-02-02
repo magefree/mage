@@ -34,7 +34,7 @@ public final class FugitiveDruid extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
     }
 
-    public FugitiveDruid(final FugitiveDruid card) {
+    private FugitiveDruid(final FugitiveDruid card) {
         super(card);
     }
 

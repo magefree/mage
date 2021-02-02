@@ -28,7 +28,7 @@ public final class DwarvenCatapult extends CardImpl {
         this.getSpellAbility().addEffect(new DwarvenCatapultEffect());
     }
 
-    public DwarvenCatapult(final DwarvenCatapult card) {
+    private DwarvenCatapult(final DwarvenCatapult card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class VoiceOfGrace extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
     }
 
-    public VoiceOfGrace(final VoiceOfGrace card) {
+    private VoiceOfGrace(final VoiceOfGrace card) {
         super(card);
     }
 

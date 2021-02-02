@@ -48,7 +48,7 @@ public final class BloodFunnel extends CardImpl {
                 true));
     }
 
-    public BloodFunnel(final BloodFunnel card) {
+    private BloodFunnel(final BloodFunnel card) {
         super(card);
     }
 

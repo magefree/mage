@@ -44,7 +44,7 @@ public final class WhipSilk extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ColoredManaCost(ColoredManaSymbol.G)));        
     }
 
-    public WhipSilk(final WhipSilk card) {
+    private WhipSilk(final WhipSilk card) {
         super(card);
     }
 

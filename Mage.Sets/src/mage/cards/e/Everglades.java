@@ -46,7 +46,7 @@ public final class Everglades extends CardImpl {
 
     }
 
-    public Everglades(final Everglades card) {
+    private Everglades(final Everglades card) {
         super(card);
     }
 

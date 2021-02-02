@@ -27,7 +27,7 @@ public final class LabyrinthMinotaur extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new DontUntapInControllersNextUntapStepTargetEffect("that creature"), false, true));
     }
 
-    public LabyrinthMinotaur(final LabyrinthMinotaur card) {
+    private LabyrinthMinotaur(final LabyrinthMinotaur card) {
         super(card);
     }
 

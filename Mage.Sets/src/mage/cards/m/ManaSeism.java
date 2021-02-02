@@ -30,7 +30,7 @@ public final class ManaSeism extends CardImpl {
         
     }
 
-    public ManaSeism(final ManaSeism card) {
+    private ManaSeism(final ManaSeism card) {
         super(card);
     }
 

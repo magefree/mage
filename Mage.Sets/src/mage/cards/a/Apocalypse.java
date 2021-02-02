@@ -22,7 +22,7 @@ public final class Apocalypse extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardHandControllerEffect().setText("You discard your hand"));
     }
 
-    public Apocalypse(final Apocalypse card) {
+    private Apocalypse(final Apocalypse card) {
         super(card);
     }
 

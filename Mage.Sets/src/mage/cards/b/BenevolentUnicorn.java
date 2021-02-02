@@ -37,7 +37,7 @@ public final class BenevolentUnicorn extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BenevolentUnicornEffect()));
     }
 
-    public BenevolentUnicorn(final BenevolentUnicorn card) {
+    private BenevolentUnicorn(final BenevolentUnicorn card) {
         super(card);
     }
 

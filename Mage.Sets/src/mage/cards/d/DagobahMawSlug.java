@@ -38,7 +38,7 @@ public final class DagobahMawSlug extends CardImpl {
         ));
     }
 
-    public DagobahMawSlug(final DagobahMawSlug card) {
+    private DagobahMawSlug(final DagobahMawSlug card) {
         super(card);
     }
 

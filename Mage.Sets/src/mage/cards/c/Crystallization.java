@@ -48,7 +48,7 @@ public final class Crystallization extends CardImpl {
         this.addAbility(new CrystallizationTriggeredAbility());
     }
 
-    public Crystallization(final Crystallization card) {
+    private Crystallization(final Crystallization card) {
         super(card);
     }
 

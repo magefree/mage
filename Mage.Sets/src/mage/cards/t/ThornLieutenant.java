@@ -42,7 +42,7 @@ public final class ThornLieutenant extends CardImpl {
         ));
     }
 
-    public ThornLieutenant(final ThornLieutenant card) {
+    private ThornLieutenant(final ThornLieutenant card) {
         super(card);
     }
 

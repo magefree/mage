@@ -41,7 +41,7 @@ public final class DAvenantHealer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DAvenantHealer(final DAvenantHealer card) {
+    private DAvenantHealer(final DAvenantHealer card) {
         super(card);
     }
 

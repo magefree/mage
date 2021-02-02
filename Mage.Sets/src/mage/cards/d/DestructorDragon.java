@@ -40,7 +40,7 @@ public final class DestructorDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DestructorDragon(final DestructorDragon card) {
+    private DestructorDragon(final DestructorDragon card) {
         super(card);
     }
 

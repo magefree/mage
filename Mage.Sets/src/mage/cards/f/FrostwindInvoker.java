@@ -32,7 +32,7 @@ public final class FrostwindInvoker extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{8}")));
     }
 
-    public FrostwindInvoker(final FrostwindInvoker card) {
+    private FrostwindInvoker(final FrostwindInvoker card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class RenewingTouch extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard")));
     }
 
-    public RenewingTouch(final RenewingTouch card) {
+    private RenewingTouch(final RenewingTouch card) {
         super(card);
     }
 

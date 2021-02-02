@@ -24,7 +24,7 @@ public final class FusionElemental extends CardImpl {
     this.toughness = new MageInt(8);
     }
 
-    public FusionElemental(final FusionElemental card) {
+    private FusionElemental(final FusionElemental card) {
         super(card);
     }
 

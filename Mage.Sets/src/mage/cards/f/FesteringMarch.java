@@ -37,7 +37,7 @@ public final class FesteringMarch extends CardImpl {
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{2}{B}"), this));
     }
 
-    public FesteringMarch(final FesteringMarch card) {
+    private FesteringMarch(final FesteringMarch card) {
         super(card);
     }
 

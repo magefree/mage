@@ -21,7 +21,7 @@ public final class Damnation extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(FILTER_PERMANENT_CREATURES, true));
     }
 
-    public Damnation(final Damnation card) {
+    private Damnation(final Damnation card) {
         super(card);
     }
 

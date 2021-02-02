@@ -20,7 +20,7 @@ public final class HeroesRemembered extends CardImpl {
         this.addAbility(new SuspendAbility(10, new ManaCostsImpl("{W}"), this));
     }
 
-    public HeroesRemembered(final HeroesRemembered card) {
+    private HeroesRemembered(final HeroesRemembered card) {
         super(card);
     }
 

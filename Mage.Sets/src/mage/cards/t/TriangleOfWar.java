@@ -41,7 +41,7 @@ public final class TriangleOfWar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TriangleOfWar(final TriangleOfWar card) {
+    private TriangleOfWar(final TriangleOfWar card) {
         super(card);
     }
 

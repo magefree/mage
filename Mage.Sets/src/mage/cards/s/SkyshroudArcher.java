@@ -43,7 +43,7 @@ public final class SkyshroudArcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkyshroudArcher(final SkyshroudArcher card) {
+    private SkyshroudArcher(final SkyshroudArcher card) {
         super(card);
     }
 

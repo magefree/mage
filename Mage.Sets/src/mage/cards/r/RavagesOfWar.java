@@ -22,7 +22,7 @@ public final class RavagesOfWar extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_LANDS));
     }
 
-    public RavagesOfWar(final RavagesOfWar card) {
+    private RavagesOfWar(final RavagesOfWar card) {
         super(card);
     }
 

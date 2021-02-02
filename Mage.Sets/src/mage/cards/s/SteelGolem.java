@@ -30,7 +30,7 @@ public final class SteelGolem extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SteelGolemEffect()));
     }
 
-    public SteelGolem(final SteelGolem card) {
+    private SteelGolem(final SteelGolem card) {
         super(card);
     }
 

@@ -55,7 +55,7 @@ public final class GarrukWildspeaker extends CardImpl {
         this.addAbility(new LoyaltyAbility(effects1, -4));
     }
 
-    public GarrukWildspeaker(final GarrukWildspeaker card) {
+    private GarrukWildspeaker(final GarrukWildspeaker card) {
         super(card);
     }
 

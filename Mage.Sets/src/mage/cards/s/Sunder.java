@@ -21,7 +21,7 @@ public final class Sunder extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(StaticFilters.FILTER_LANDS));
     }
 
-    public Sunder(final Sunder card) {
+    private Sunder(final Sunder card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class NantukoShrine extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new NantukoShrineEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.SPELL));
     }
 
-    public NantukoShrine(final NantukoShrine card) {
+    private NantukoShrine(final NantukoShrine card) {
         super(card);
     }
 

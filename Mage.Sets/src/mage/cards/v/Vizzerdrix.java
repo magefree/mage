@@ -23,7 +23,7 @@ public final class Vizzerdrix extends CardImpl {
         this.toughness = new MageInt(6);
     }
 
-    public Vizzerdrix(final Vizzerdrix card) {
+    private Vizzerdrix(final Vizzerdrix card) {
         super(card);
     }
 

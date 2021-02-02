@@ -29,7 +29,7 @@ public final class DrossGolem extends CardImpl {
         this.addAbility(FearAbility.getInstance());
     }
 
-    public DrossGolem(final DrossGolem card) {
+    private DrossGolem(final DrossGolem card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class TalismanOfProgress extends CardImpl {
         this.addAbility(blueManaAbility);
     }
 
-    public TalismanOfProgress(final TalismanOfProgress card) {
+    private TalismanOfProgress(final TalismanOfProgress card) {
         super(card);
     }
 

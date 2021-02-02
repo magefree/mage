@@ -41,7 +41,7 @@ public final class WardenOfTheBeyond extends CardImpl {
                         "{this} gets +2/+2 as long as an opponent owns a card in exile")));
     }
 
-    public WardenOfTheBeyond(final WardenOfTheBeyond card) {
+    private WardenOfTheBeyond(final WardenOfTheBeyond card) {
         super(card);
     }
 

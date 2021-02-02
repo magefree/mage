@@ -24,7 +24,7 @@ public final class ForkedBolt extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(2));
     }
 
-    public ForkedBolt(final ForkedBolt card) {
+    private ForkedBolt(final ForkedBolt card) {
         super(card);
     }
 

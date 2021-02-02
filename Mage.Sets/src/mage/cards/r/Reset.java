@@ -28,7 +28,7 @@ public final class Reset extends CardImpl {
         this.getSpellAbility().addEffect(new UntapAllLandsControllerEffect());
     }
 
-    public Reset(final Reset card) {
+    private Reset(final Reset card) {
         super(card);
     }
 

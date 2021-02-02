@@ -36,7 +36,7 @@ public final class MireBlight extends CardImpl {
         this.addAbility(new DealtDamageAttachedTriggeredAbility(new DestroyAttachedToEffect("it"), false));
     }
 
-    public MireBlight(final MireBlight card) {
+    private MireBlight(final MireBlight card) {
         super(card);
     }
 

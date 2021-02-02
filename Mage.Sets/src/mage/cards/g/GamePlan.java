@@ -31,7 +31,7 @@ public final class GamePlan extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public GamePlan(final GamePlan card) {
+    private GamePlan(final GamePlan card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class HammerheadCorvette extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HammerheadCorvette(final HammerheadCorvette card) {
+    private HammerheadCorvette(final HammerheadCorvette card) {
         super(card);
     }
 

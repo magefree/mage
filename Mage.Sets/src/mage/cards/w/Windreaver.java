@@ -43,7 +43,7 @@ public final class Windreaver extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{U}"))); 
     }
 
-    public Windreaver(final Windreaver card) {
+    private Windreaver(final Windreaver card) {
         super(card);
     }
 

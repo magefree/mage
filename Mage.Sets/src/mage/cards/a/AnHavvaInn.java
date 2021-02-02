@@ -27,7 +27,7 @@ public final class AnHavvaInn extends CardImpl {
         this.getSpellAbility().addEffect(new AnHavvaInnEffect());
     }
 
-    public AnHavvaInn(final AnHavvaInn card) {
+    private AnHavvaInn(final AnHavvaInn card) {
         super(card);
     }
 

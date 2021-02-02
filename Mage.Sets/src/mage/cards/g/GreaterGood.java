@@ -36,7 +36,7 @@ public final class GreaterGood extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GreaterGood(final GreaterGood card) {
+    private GreaterGood(final GreaterGood card) {
         super(card);
     }
 

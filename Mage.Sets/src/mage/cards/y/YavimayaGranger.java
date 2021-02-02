@@ -34,7 +34,7 @@ public final class YavimayaGranger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true), true));
     }
 
-    public YavimayaGranger(final YavimayaGranger card) {
+    private YavimayaGranger(final YavimayaGranger card) {
         super(card);
     }
 

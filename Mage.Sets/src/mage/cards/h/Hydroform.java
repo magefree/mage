@@ -28,7 +28,7 @@ public final class Hydroform extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public Hydroform(final Hydroform card) {
+    private Hydroform(final Hydroform card) {
         super(card);
     }
 

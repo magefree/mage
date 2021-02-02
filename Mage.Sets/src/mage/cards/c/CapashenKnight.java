@@ -33,7 +33,7 @@ public final class CapashenKnight extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
     }
 
-    public CapashenKnight(final CapashenKnight card) {
+    private CapashenKnight(final CapashenKnight card) {
         super(card);
     }
 

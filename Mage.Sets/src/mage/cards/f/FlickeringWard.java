@@ -46,7 +46,7 @@ public final class FlickeringWard extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{W}")));
     }
 
-    public FlickeringWard(final FlickeringWard card) {
+    private FlickeringWard(final FlickeringWard card) {
         super(card);
     }
 

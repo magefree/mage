@@ -38,7 +38,7 @@ public final class KoboldOverlord extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public KoboldOverlord(final KoboldOverlord card) {
+    private KoboldOverlord(final KoboldOverlord card) {
         super(card);
     }
 

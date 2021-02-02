@@ -34,7 +34,7 @@ public final class AweForTheGuilds extends CardImpl {
 
     }
 
-    public AweForTheGuilds(final AweForTheGuilds card) {
+    private AweForTheGuilds(final AweForTheGuilds card) {
         super(card);
     }
 

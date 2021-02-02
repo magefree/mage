@@ -44,7 +44,7 @@ public final class SphinxOfTheChimes extends CardImpl {
 
     }
 
-    public SphinxOfTheChimes(final SphinxOfTheChimes card) {
+    private SphinxOfTheChimes(final SphinxOfTheChimes card) {
         super(card);
     }
 

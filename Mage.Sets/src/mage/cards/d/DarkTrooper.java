@@ -26,7 +26,7 @@ public final class DarkTrooper extends CardImpl {
         this.addAbility(new RepairAbility(2));
     }
 
-    public DarkTrooper(final DarkTrooper card) {
+    private DarkTrooper(final DarkTrooper card) {
         super(card);
     }
 

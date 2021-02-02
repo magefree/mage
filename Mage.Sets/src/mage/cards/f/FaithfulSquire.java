@@ -81,7 +81,7 @@ public final class FaithfulSquire extends CardImpl {
 
     }
 
-    public FaithfulSquire(final FaithfulSquire card) {
+    private FaithfulSquire(final FaithfulSquire card) {
         super(card);
     }
 

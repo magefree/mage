@@ -34,7 +34,7 @@ public final class LiegeOfTheAxe extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new UntapSourceEffect()));
     }
 
-    public LiegeOfTheAxe(final LiegeOfTheAxe card) {
+    private LiegeOfTheAxe(final LiegeOfTheAxe card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class DiamondValley extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DiamondValley(final DiamondValley card) {
+    private DiamondValley(final DiamondValley card) {
         super(card);
     }
 

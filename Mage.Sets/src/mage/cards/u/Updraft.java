@@ -30,7 +30,7 @@ public final class Updraft extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public Updraft(final Updraft card) {
+    private Updraft(final Updraft card) {
         super(card);
     }
 

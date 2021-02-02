@@ -27,7 +27,7 @@ public final class SeethingAnger extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SeethingAnger(final SeethingAnger card) {
+    private SeethingAnger(final SeethingAnger card) {
         super(card);
     }
 

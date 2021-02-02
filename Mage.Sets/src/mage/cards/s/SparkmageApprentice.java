@@ -30,7 +30,7 @@ public final class SparkmageApprentice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SparkmageApprentice(final SparkmageApprentice card) {
+    private SparkmageApprentice(final SparkmageApprentice card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class AAT1 extends CardImpl {
         this.addAbility(new RepairAbility(4));
     }
 
-    public AAT1(final AAT1 card) {
+    private AAT1(final AAT1 card) {
         super(card);
     }
 

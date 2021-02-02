@@ -25,7 +25,7 @@ public final class JacesErasure extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JacesErasure(final JacesErasure card) {
+    private JacesErasure(final JacesErasure card) {
         super(card);
     }
 

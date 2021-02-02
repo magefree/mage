@@ -35,7 +35,7 @@ public final class SurviveTheNight extends CardImpl {
         this.getSpellAbility().addEffect(new InvestigateEffect());
     }
 
-    public SurviveTheNight(final SurviveTheNight card) {
+    private SurviveTheNight(final SurviveTheNight card) {
         super(card);
     }
 

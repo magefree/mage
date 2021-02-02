@@ -52,7 +52,7 @@ public final class AjaniCallerOfThePride extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new CatToken(), ControllerLifeCount.instance), -8));
     }
 
-    public AjaniCallerOfThePride(final AjaniCallerOfThePride card) {
+    private AjaniCallerOfThePride(final AjaniCallerOfThePride card) {
         super(card);
     }
 

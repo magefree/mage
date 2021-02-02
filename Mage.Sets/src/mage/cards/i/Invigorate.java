@@ -36,7 +36,7 @@ public final class Invigorate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Invigorate(final Invigorate card) {
+    private Invigorate(final Invigorate card) {
         super(card);
     }
 

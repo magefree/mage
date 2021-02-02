@@ -28,7 +28,7 @@ public final class SoulNova extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
-    public SoulNova(final SoulNova card) {
+    private SoulNova(final SoulNova card) {
         super(card);
     }
 

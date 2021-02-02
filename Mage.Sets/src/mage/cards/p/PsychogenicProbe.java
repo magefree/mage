@@ -27,7 +27,7 @@ public final class PsychogenicProbe extends CardImpl {
         this.addAbility(new PsychogenicProbeTriggeredAbility());
     }
 
-    public PsychogenicProbe(final PsychogenicProbe card) {
+    private PsychogenicProbe(final PsychogenicProbe card) {
         super(card);
     }
 

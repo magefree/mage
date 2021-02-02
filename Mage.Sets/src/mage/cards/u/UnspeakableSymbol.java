@@ -29,7 +29,7 @@ public final class UnspeakableSymbol extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnspeakableSymbol(final UnspeakableSymbol card) {
+    private UnspeakableSymbol(final UnspeakableSymbol card) {
         super(card);
     }
 

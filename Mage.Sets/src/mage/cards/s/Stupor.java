@@ -24,7 +24,7 @@ public final class Stupor extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public Stupor(final Stupor card) {
+    private Stupor(final Stupor card) {
         super(card);
     }
 

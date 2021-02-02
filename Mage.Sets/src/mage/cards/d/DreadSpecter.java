@@ -41,7 +41,7 @@ public final class DreadSpecter extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, filter, false));
     }
 
-    public DreadSpecter(final DreadSpecter card) {
+    private DreadSpecter(final DreadSpecter card) {
         super(card);
     }
 

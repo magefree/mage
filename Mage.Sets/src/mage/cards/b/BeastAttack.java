@@ -27,7 +27,7 @@ public final class BeastAttack extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{G}{G}{G}"), TimingRule.INSTANT));
     }
 
-    public BeastAttack(final BeastAttack card) {
+    private BeastAttack(final BeastAttack card) {
         super(card);
     }
 

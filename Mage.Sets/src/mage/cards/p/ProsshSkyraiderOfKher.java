@@ -44,7 +44,7 @@ public final class ProsshSkyraiderOfKher extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true))));
     }
 
-    public ProsshSkyraiderOfKher(final ProsshSkyraiderOfKher card) {
+    private ProsshSkyraiderOfKher(final ProsshSkyraiderOfKher card) {
         super(card);
     }
 

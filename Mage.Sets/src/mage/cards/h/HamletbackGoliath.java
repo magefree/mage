@@ -36,7 +36,7 @@ public final class HamletbackGoliath extends CardImpl {
         this.addAbility(new HamletbackGoliathTriggeredAbility());
     }
 
-    public HamletbackGoliath(final HamletbackGoliath card) {
+    private HamletbackGoliath(final HamletbackGoliath card) {
         super(card);
     }
 

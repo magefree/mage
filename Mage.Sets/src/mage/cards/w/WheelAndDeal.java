@@ -41,7 +41,7 @@ public final class WheelAndDeal extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public WheelAndDeal(final WheelAndDeal card) {
+    private WheelAndDeal(final WheelAndDeal card) {
         super(card);
     }
 

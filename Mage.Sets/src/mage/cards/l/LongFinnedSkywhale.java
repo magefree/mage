@@ -29,7 +29,7 @@ public final class LongFinnedSkywhale extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public LongFinnedSkywhale(final LongFinnedSkywhale card) {
+    private LongFinnedSkywhale(final LongFinnedSkywhale card) {
         super(card);
     }
 

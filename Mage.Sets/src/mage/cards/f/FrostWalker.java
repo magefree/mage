@@ -26,7 +26,7 @@ public final class FrostWalker extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public FrostWalker(final FrostWalker card) {
+    private FrostWalker(final FrostWalker card) {
         super(card);
     }
 

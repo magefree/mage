@@ -27,7 +27,7 @@ public final class ForceTelepathy extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }
 
-    public ForceTelepathy(final ForceTelepathy card) {
+    private ForceTelepathy(final ForceTelepathy card) {
         super(card);
     }
 

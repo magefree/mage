@@ -54,7 +54,7 @@ public final class CytoplastRootKin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CytoplastRootKin(final CytoplastRootKin card) {
+    private CytoplastRootKin(final CytoplastRootKin card) {
         super(card);
     }
 

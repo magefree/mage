@@ -34,7 +34,7 @@ public final class BarbedLightning extends CardImpl {
         this.addAbility(new EntwineAbility("{2}"));
     }
 
-    public BarbedLightning(final BarbedLightning card) {
+    private BarbedLightning(final BarbedLightning card) {
         super(card);
     }
 

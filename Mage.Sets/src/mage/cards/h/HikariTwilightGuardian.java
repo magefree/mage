@@ -36,7 +36,7 @@ public final class HikariTwilightGuardian extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(effect, StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
     }
 
-    public HikariTwilightGuardian(final HikariTwilightGuardian card) {
+    private HikariTwilightGuardian(final HikariTwilightGuardian card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class SepulchralPrimordial extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SepulchralPrimordial(final SepulchralPrimordial card) {
+    private SepulchralPrimordial(final SepulchralPrimordial card) {
         super(card);
     }
 

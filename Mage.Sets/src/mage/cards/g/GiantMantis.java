@@ -26,7 +26,7 @@ public final class GiantMantis extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public GiantMantis(final GiantMantis card) {
+    private GiantMantis(final GiantMantis card) {
         super(card);
     }
 

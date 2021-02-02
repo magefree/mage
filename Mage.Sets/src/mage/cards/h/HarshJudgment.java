@@ -39,7 +39,7 @@ public final class HarshJudgment extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HarshJudgmentEffect()));
     }
 
-    public HarshJudgment(final HarshJudgment card) {
+    private HarshJudgment(final HarshJudgment card) {
         super(card);
     }
 

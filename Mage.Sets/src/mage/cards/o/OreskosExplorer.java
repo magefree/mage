@@ -39,7 +39,7 @@ public final class OreskosExplorer extends CardImpl {
 
     }
 
-    public OreskosExplorer(final OreskosExplorer card) {
+    private OreskosExplorer(final OreskosExplorer card) {
         super(card);
     }
 

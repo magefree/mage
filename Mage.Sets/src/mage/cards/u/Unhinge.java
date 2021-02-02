@@ -26,7 +26,7 @@ public final class Unhinge extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Unhinge(final Unhinge card) {
+    private Unhinge(final Unhinge card) {
         super(card);
     }
 

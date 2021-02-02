@@ -32,7 +32,7 @@ public final class EtherealWhiskergill extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
     }
 
-    public EtherealWhiskergill(final EtherealWhiskergill card) {
+    private EtherealWhiskergill(final EtherealWhiskergill card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class LoyalGuardian extends CardImpl {
         ));
     }
 
-    public LoyalGuardian(final LoyalGuardian card) {
+    private LoyalGuardian(final LoyalGuardian card) {
         super(card);
     }
 

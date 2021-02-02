@@ -39,7 +39,7 @@ public final class WarpArtifact extends CardImpl {
             TargetController.CONTROLLER_ATTACHED_TO, false, true, "At the beginning of the upkeep of enchanted artifact's controller, "));
     }
 
-    public WarpArtifact(final WarpArtifact card) {
+    private WarpArtifact(final WarpArtifact card) {
         super(card);
     }
 

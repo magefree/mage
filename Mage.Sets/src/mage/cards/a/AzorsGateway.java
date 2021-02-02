@@ -46,7 +46,7 @@ public final class AzorsGateway extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AzorsGateway(final AzorsGateway card) {
+    private AzorsGateway(final AzorsGateway card) {
         super(card);
     }
 

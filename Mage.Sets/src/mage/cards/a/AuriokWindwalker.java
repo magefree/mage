@@ -48,7 +48,7 @@ public final class AuriokWindwalker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AuriokWindwalker(final AuriokWindwalker card) {
+    private AuriokWindwalker(final AuriokWindwalker card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class SakuraTribeScout extends CardImpl {
         ));
     }
 
-    public SakuraTribeScout(final SakuraTribeScout card) {
+    private SakuraTribeScout(final SakuraTribeScout card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class RingOfRenewal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RingOfRenewal(final RingOfRenewal card) {
+    private RingOfRenewal(final RingOfRenewal card) {
         super(card);
     }
 

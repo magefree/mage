@@ -29,7 +29,7 @@ public final class InspiringUnicorn extends CardImpl {
         ));
     }
 
-    public InspiringUnicorn(final InspiringUnicorn card) {
+    private InspiringUnicorn(final InspiringUnicorn card) {
         super(card);
     }
 

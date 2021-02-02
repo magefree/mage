@@ -46,7 +46,7 @@ public final class IridescentAngel extends CardImpl {
 
     }
 
-    public IridescentAngel(final IridescentAngel card) {
+    private IridescentAngel(final IridescentAngel card) {
         super(card);
     }
 

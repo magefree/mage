@@ -46,7 +46,7 @@ public final class PilloryOfTheSleepless extends CardImpl {
                 new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), TargetController.YOU, false), AttachmentType.AURA)));
     }
 
-    public PilloryOfTheSleepless(final PilloryOfTheSleepless card) {
+    private PilloryOfTheSleepless(final PilloryOfTheSleepless card) {
         super(card);
     }
 

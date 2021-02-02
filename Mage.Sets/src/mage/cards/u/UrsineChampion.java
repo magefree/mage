@@ -38,7 +38,7 @@ public final class UrsineChampion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UrsineChampion(final UrsineChampion card) {
+    private UrsineChampion(final UrsineChampion card) {
         super(card);
     }
 

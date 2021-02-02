@@ -26,7 +26,7 @@ public final class PentadPrism extends CardImpl {
                 new CountersSourceCount(CounterType.CHARGE), false));
     }
 
-    public PentadPrism(final PentadPrism card) {
+    private PentadPrism(final PentadPrism card) {
         super(card);
     }
 

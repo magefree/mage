@@ -24,7 +24,7 @@ public final class HorrifyingRevelation extends CardImpl {
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(1));
     }
 
-    public HorrifyingRevelation(final HorrifyingRevelation card) {
+    private HorrifyingRevelation(final HorrifyingRevelation card) {
         super(card);
     }
 

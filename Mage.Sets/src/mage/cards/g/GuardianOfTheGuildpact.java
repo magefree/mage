@@ -34,7 +34,7 @@ public final class GuardianOfTheGuildpact extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public GuardianOfTheGuildpact(final GuardianOfTheGuildpact card) {
+    private GuardianOfTheGuildpact(final GuardianOfTheGuildpact card) {
         super(card);
     }
 

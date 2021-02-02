@@ -27,7 +27,7 @@ public final class SpinIntoMyth extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public SpinIntoMyth(final SpinIntoMyth card) {
+    private SpinIntoMyth(final SpinIntoMyth card) {
         super(card);
     }
 

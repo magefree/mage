@@ -32,7 +32,7 @@ public final class MoonsilverSpear extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
     }
 
-    public MoonsilverSpear(final MoonsilverSpear card) {
+    private MoonsilverSpear(final MoonsilverSpear card) {
         super(card);
     }
 

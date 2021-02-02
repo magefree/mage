@@ -31,7 +31,7 @@ public final class RavenousSkirge extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
     }
 
-    public RavenousSkirge(final RavenousSkirge card) {
+    private RavenousSkirge(final RavenousSkirge card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class StillmoonCavalier extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{W/B}{W/B}")));
     }
 
-    public StillmoonCavalier(final StillmoonCavalier card) {
+    private StillmoonCavalier(final StillmoonCavalier card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class Mosstodon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Mosstodon(final Mosstodon card) {
+    private Mosstodon(final Mosstodon card) {
         super(card);
     }
 

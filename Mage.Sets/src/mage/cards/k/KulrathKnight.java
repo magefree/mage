@@ -39,7 +39,7 @@ public final class KulrathKnight extends CardImpl {
 
     }
 
-    public KulrathKnight(final KulrathKnight card) {
+    private KulrathKnight(final KulrathKnight card) {
         super(card);
     }
 

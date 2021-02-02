@@ -37,7 +37,7 @@ public final class MidsummerRevel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MidsummerRevel(final MidsummerRevel card) {
+    private MidsummerRevel(final MidsummerRevel card) {
         super(card);
     }
 

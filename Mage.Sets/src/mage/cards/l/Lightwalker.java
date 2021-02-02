@@ -34,7 +34,7 @@ public final class Lightwalker extends CardImpl {
                 new SourceHasCounterCondition(CounterType.P1P1),"Lightwalker has flying as long as it has a +1/+1 counter on it")));
     }
 
-    public Lightwalker(final Lightwalker card) {
+    private Lightwalker(final Lightwalker card) {
         super(card);
     }
 

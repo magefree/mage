@@ -46,7 +46,7 @@ public final class KalonianTwingrove extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
     }
 
-    public KalonianTwingrove(final KalonianTwingrove card) {
+    private KalonianTwingrove(final KalonianTwingrove card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class DimensionalBreach extends CardImpl {
 
     }
 
-    public DimensionalBreach(final DimensionalBreach card) {
+    private DimensionalBreach(final DimensionalBreach card) {
         super(card);
     }
 

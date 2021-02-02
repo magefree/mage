@@ -42,7 +42,7 @@ public final class BarbedField extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public BarbedField(final BarbedField card) {
+    private BarbedField(final BarbedField card) {
         super(card);
     }
 

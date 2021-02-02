@@ -32,7 +32,7 @@ public final class Encroach extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
    }
 
-    public Encroach(final Encroach card) {
+    private Encroach(final Encroach card) {
         super(card);
     }
 

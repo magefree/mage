@@ -33,7 +33,7 @@ public final class RiverHeraldsBoon extends CardImpl {
 
     }
 
-    public RiverHeraldsBoon(final RiverHeraldsBoon card) {
+    private RiverHeraldsBoon(final RiverHeraldsBoon card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class ZuranEnchanter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZuranEnchanter(final ZuranEnchanter card) {
+    private ZuranEnchanter(final ZuranEnchanter card) {
         super(card);
     }
 

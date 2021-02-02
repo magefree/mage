@@ -38,7 +38,7 @@ public final class StewardOfSolidarity extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StewardOfSolidarity(final StewardOfSolidarity card) {
+    private StewardOfSolidarity(final StewardOfSolidarity card) {
         super(card);
     }
 

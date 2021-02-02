@@ -48,7 +48,7 @@ public final class MonkeyMonkeyMonkey extends CardImpl {
 
     }
 
-    public MonkeyMonkeyMonkey(final MonkeyMonkeyMonkey card) {
+    private MonkeyMonkeyMonkey(final MonkeyMonkeyMonkey card) {
         super(card);
     }
 

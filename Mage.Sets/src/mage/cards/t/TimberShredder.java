@@ -41,7 +41,7 @@ public final class TimberShredder extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public TimberShredder(final TimberShredder card) {
+    private TimberShredder(final TimberShredder card) {
         super(card);
     }
 

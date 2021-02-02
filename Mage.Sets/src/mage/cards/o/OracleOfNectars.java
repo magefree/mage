@@ -35,7 +35,7 @@ public final class OracleOfNectars extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OracleOfNectars(final OracleOfNectars card) {
+    private OracleOfNectars(final OracleOfNectars card) {
         super(card);
     }
 

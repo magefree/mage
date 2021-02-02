@@ -24,7 +24,7 @@ public final class HowlingMine extends CardImpl {
         this.addAbility(new HowlingMineAbility());
     }
 
-    public HowlingMine(final HowlingMine card) {
+    private HowlingMine(final HowlingMine card) {
         super(card);
     }
 

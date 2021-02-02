@@ -27,7 +27,7 @@ public final class Quickchange extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Quickchange(final Quickchange card) {
+    private Quickchange(final Quickchange card) {
         super(card);
     }
 

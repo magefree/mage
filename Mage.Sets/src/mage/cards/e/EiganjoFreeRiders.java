@@ -38,7 +38,7 @@ public final class EiganjoFreeRiders extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), TargetController.YOU, false));
     }
 
-    public EiganjoFreeRiders(final EiganjoFreeRiders card) {
+    private EiganjoFreeRiders(final EiganjoFreeRiders card) {
         super(card);
     }
 

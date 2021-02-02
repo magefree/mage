@@ -33,7 +33,7 @@ public final class HandOfDeath extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public HandOfDeath(final HandOfDeath card) {
+    private HandOfDeath(final HandOfDeath card) {
         super(card);
     }
 

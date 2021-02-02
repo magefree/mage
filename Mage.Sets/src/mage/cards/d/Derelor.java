@@ -38,7 +38,7 @@ public final class Derelor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(new ManaCostsImpl<>("{B}"), filter, TargetController.YOU)));
     }
 
-    public Derelor(final Derelor card) {
+    private Derelor(final Derelor card) {
         super(card);
     }
 

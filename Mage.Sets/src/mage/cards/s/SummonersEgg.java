@@ -39,7 +39,7 @@ public final class SummonersEgg extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new SummonersEggPutOntoBattlefieldEffect()));
     }
 
-    public SummonersEgg(final SummonersEgg card) {
+    private SummonersEgg(final SummonersEgg card) {
         super(card);
     }
 

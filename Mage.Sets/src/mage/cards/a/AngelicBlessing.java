@@ -30,7 +30,7 @@ public final class AngelicBlessing extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public AngelicBlessing(final AngelicBlessing card) {
+    private AngelicBlessing(final AngelicBlessing card) {
         super(card);
     }
 

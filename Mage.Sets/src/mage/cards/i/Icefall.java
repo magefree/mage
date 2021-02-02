@@ -37,7 +37,7 @@ public final class Icefall extends CardImpl {
         this.addAbility(new RecoverAbility(new ManaCostsImpl("{R}{R}"), this));
     }
 
-    public Icefall(final Icefall card) {
+    private Icefall(final Icefall card) {
         super(card);
     }
 

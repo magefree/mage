@@ -34,7 +34,7 @@ public final class Phthisis extends CardImpl {
         this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{1}{B}"), this));
     }
 
-    public Phthisis(final Phthisis card) {
+    private Phthisis(final Phthisis card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class ViashinoPyromancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ViashinoPyromancer(final ViashinoPyromancer card) {
+    private ViashinoPyromancer(final ViashinoPyromancer card) {
         super(card);
     }
 

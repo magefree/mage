@@ -32,7 +32,7 @@ public final class VedalkenDismisser extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VedalkenDismisser(final VedalkenDismisser card) {
+    private VedalkenDismisser(final VedalkenDismisser card) {
         super(card);
     }
 

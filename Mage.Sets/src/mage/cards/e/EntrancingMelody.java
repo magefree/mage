@@ -32,7 +32,7 @@ public final class EntrancingMelody extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(EntrancingMelodyAdjuster.instance);
     }
 
-    public EntrancingMelody(final EntrancingMelody card) {
+    private EntrancingMelody(final EntrancingMelody card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class SensationGorger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SensationGorger(final SensationGorger card) {
+    private SensationGorger(final SensationGorger card) {
         super(card);
     }
 

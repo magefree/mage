@@ -59,7 +59,7 @@ public final class MinotaurTactician extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effectBlue));
     }
 
-    public MinotaurTactician(final MinotaurTactician card) {
+    private MinotaurTactician(final MinotaurTactician card) {
         super(card);
     }
 

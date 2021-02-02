@@ -55,7 +55,7 @@ public final class EternalThirst extends CardImpl {
 
     }
 
-    public EternalThirst(final EternalThirst card) {
+    private EternalThirst(final EternalThirst card) {
         super(card);
     }
 

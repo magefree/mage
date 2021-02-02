@@ -35,7 +35,7 @@ public final class PutridRaptor extends CardImpl {
         this.addAbility(new MorphAbility(this, new DiscardCardCost(filter)));
     }
 
-    public PutridRaptor(final PutridRaptor card) {
+    private PutridRaptor(final PutridRaptor card) {
         super(card);
     }
 

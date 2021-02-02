@@ -46,7 +46,7 @@ public final class TheCrowdGoesWild extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter));
     }
 
-    public TheCrowdGoesWild(final TheCrowdGoesWild card) {
+    private TheCrowdGoesWild(final TheCrowdGoesWild card) {
         super(card);
     }
 

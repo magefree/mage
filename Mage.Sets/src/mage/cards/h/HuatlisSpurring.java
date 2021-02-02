@@ -40,7 +40,7 @@ public final class HuatlisSpurring extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public HuatlisSpurring(final HuatlisSpurring card) {
+    private HuatlisSpurring(final HuatlisSpurring card) {
         super(card);
     }
 

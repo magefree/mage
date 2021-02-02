@@ -56,7 +56,7 @@ public final class ScarwoodBandits extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScarwoodBandits(final ScarwoodBandits card) {
+    private ScarwoodBandits(final ScarwoodBandits card) {
         super(card);
     }
 

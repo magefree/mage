@@ -47,7 +47,7 @@ public final class LostAuramancers extends CardImpl {
         this.addAbility(new LostAuramancersAbility());
     }
 
-    public LostAuramancers(final LostAuramancers card) {
+    private LostAuramancers(final LostAuramancers card) {
         super(card);
     }
 

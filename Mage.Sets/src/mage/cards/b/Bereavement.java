@@ -29,7 +29,7 @@ public final class Bereavement extends CardImpl {
         this.addAbility(new BereavementTriggeredAbility());
     }
 
-    public Bereavement(final Bereavement card) {
+    private Bereavement(final Bereavement card) {
         super(card);
     }
 

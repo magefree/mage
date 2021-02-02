@@ -44,7 +44,7 @@ public final class ElaborateFirecannon extends CardImpl {
 
     }
 
-    public ElaborateFirecannon(final ElaborateFirecannon card) {
+    private ElaborateFirecannon(final ElaborateFirecannon card) {
         super(card);
     }
 

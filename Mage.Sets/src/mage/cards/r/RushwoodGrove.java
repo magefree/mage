@@ -43,7 +43,7 @@ public final class RushwoodGrove extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RushwoodGrove(final RushwoodGrove card) {
+    private RushwoodGrove(final RushwoodGrove card) {
         super(card);
     }
 

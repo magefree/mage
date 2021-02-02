@@ -26,7 +26,7 @@ public final class ShadowGlider extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public ShadowGlider(final ShadowGlider card) {
+    private ShadowGlider(final ShadowGlider card) {
         super(card);
     }
 

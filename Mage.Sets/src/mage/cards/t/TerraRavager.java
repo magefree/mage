@@ -37,7 +37,7 @@ public final class TerraRavager extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(new TerraRavagerLandCount(), StaticValue.get(0), Duration.EndOfTurn, true), false));
     }
 
-    public TerraRavager(final TerraRavager card) {
+    private TerraRavager(final TerraRavager card) {
         super(card);
     }
 

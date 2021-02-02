@@ -43,7 +43,7 @@ public final class StormcloudDjinn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StormcloudDjinn(final StormcloudDjinn card) {
+    private StormcloudDjinn(final StormcloudDjinn card) {
         super(card);
     }
 

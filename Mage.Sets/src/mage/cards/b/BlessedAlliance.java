@@ -63,7 +63,7 @@ public final class BlessedAlliance extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public BlessedAlliance(final BlessedAlliance card) {
+    private BlessedAlliance(final BlessedAlliance card) {
         super(card);
     }
 

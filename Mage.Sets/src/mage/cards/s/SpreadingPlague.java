@@ -34,7 +34,7 @@ public final class SpreadingPlague extends CardImpl {
 
     }
 
-    public SpreadingPlague(final SpreadingPlague card) {
+    private SpreadingPlague(final SpreadingPlague card) {
         super(card);
     }
 

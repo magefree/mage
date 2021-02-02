@@ -28,7 +28,7 @@ public final class OgreRecluse extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new TapSourceEffect(), false));
     }
 
-    public OgreRecluse(final OgreRecluse card) {
+    private OgreRecluse(final OgreRecluse card) {
         super(card);
     }
 

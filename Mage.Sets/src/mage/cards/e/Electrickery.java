@@ -28,7 +28,7 @@ public final class Electrickery extends CardImpl {
         this.addAbility(new OverloadAbility(this, new DamageAllEffect(1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL), new ManaCostsImpl("{1}{R}")));
     }
 
-    public Electrickery(final Electrickery card) {
+    private Electrickery(final Electrickery card) {
         super(card);
     }
 

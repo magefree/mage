@@ -26,7 +26,7 @@ public final class WillForgedGolem extends CardImpl {
         this.addAbility(new ConvokeAbility());
     }
 
-    public WillForgedGolem(final WillForgedGolem card) {
+    private WillForgedGolem(final WillForgedGolem card) {
         super(card);
     }
 

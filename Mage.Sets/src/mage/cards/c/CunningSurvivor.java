@@ -36,7 +36,7 @@ public final class CunningSurvivor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CunningSurvivor(final CunningSurvivor card) {
+    private CunningSurvivor(final CunningSurvivor card) {
         super(card);
     }
 

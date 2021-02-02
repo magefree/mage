@@ -65,7 +65,7 @@ public final class YodaJediMaster extends CardImpl {
 
     }
 
-    public YodaJediMaster(final YodaJediMaster card) {
+    private YodaJediMaster(final YodaJediMaster card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class MesmericTrance extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MesmericTrance(final MesmericTrance card) {
+    private MesmericTrance(final MesmericTrance card) {
         super(card);
     }
 

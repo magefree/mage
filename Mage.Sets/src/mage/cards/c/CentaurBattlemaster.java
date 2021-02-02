@@ -29,7 +29,7 @@ public final class CentaurBattlemaster extends CardImpl {
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3))));
     }
 
-    public CentaurBattlemaster(final CentaurBattlemaster card) {
+    private CentaurBattlemaster(final CentaurBattlemaster card) {
         super(card);
     }
 

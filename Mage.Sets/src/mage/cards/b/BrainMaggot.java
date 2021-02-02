@@ -45,7 +45,7 @@ public final class BrainMaggot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BrainMaggot(final BrainMaggot card) {
+    private BrainMaggot(final BrainMaggot card) {
         super(card);
     }
 

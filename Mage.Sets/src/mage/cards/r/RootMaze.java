@@ -30,7 +30,7 @@ public final class RootMaze extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RootMazeEffect()));
     }
 
-    public RootMaze(final RootMaze card) {
+    private RootMaze(final RootMaze card) {
         super(card);
     }
 

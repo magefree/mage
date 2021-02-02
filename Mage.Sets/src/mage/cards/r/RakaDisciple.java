@@ -38,7 +38,7 @@ public final class RakaDisciple extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public RakaDisciple(final RakaDisciple card) {
+    private RakaDisciple(final RakaDisciple card) {
         super(card);
     }
 

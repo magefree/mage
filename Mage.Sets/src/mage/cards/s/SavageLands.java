@@ -25,7 +25,7 @@ public final class SavageLands extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public SavageLands(final SavageLands card) {
+    private SavageLands(final SavageLands card) {
         super(card);
     }
 

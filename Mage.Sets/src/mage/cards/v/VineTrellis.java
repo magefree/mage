@@ -30,7 +30,7 @@ public final class VineTrellis extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public VineTrellis(final VineTrellis card) {
+    private VineTrellis(final VineTrellis card) {
         super(card);
     }
 

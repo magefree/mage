@@ -44,7 +44,7 @@ public final class AlphaAuthority extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AlphaAuthority(final AlphaAuthority card) {
+    private AlphaAuthority(final AlphaAuthority card) {
         super(card);
     }
 

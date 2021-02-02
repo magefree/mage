@@ -24,7 +24,7 @@ public final class Ostracize extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(new FilterCreatureCard("a creature card")));
     }
 
-    public Ostracize(final Ostracize card) {
+    private Ostracize(final Ostracize card) {
         super(card);
     }
 

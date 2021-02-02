@@ -34,7 +34,7 @@ public final class FavoredHoplite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FavoredHoplite(final FavoredHoplite card) {
+    private FavoredHoplite(final FavoredHoplite card) {
         super(card);
     }
 

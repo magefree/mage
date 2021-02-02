@@ -27,7 +27,7 @@ public final class Mindslicer extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DiscardHandAllEffect(),false));
     }
 
-    public Mindslicer(final Mindslicer card) {
+    private Mindslicer(final Mindslicer card) {
         super(card);
     }
 

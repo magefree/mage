@@ -49,7 +49,7 @@ public final class PhyrexianBoon extends CardImpl {
         ));
     }
 
-    public PhyrexianBoon(final PhyrexianBoon card) {
+    private PhyrexianBoon(final PhyrexianBoon card) {
         super(card);
     }
 

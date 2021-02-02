@@ -41,7 +41,7 @@ public final class Scrivener extends CardImpl {
         
     }
 
-    public Scrivener(final Scrivener card) {
+    private Scrivener(final Scrivener card) {
         super(card);
     }
 

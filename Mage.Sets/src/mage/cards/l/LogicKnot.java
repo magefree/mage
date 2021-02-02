@@ -28,7 +28,7 @@ public final class LogicKnot extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public LogicKnot(final LogicKnot card) {
+    private LogicKnot(final LogicKnot card) {
         super(card);
     }
 

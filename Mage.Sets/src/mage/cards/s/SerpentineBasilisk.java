@@ -34,7 +34,7 @@ public final class SerpentineBasilisk extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{G}{G}")));
     }
 
-    public SerpentineBasilisk(final SerpentineBasilisk card) {
+    private SerpentineBasilisk(final SerpentineBasilisk card) {
         super(card);
     }
 

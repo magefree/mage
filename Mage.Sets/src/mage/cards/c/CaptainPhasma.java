@@ -55,7 +55,7 @@ public final class CaptainPhasma extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true), new ManaCostsImpl("{W}{U}{B}{R}{G}")));
     }
 
-    public CaptainPhasma(final CaptainPhasma card) {
+    private CaptainPhasma(final CaptainPhasma card) {
         super(card);
     }
 

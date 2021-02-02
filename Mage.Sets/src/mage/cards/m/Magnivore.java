@@ -41,7 +41,7 @@ public final class Magnivore extends CardImpl {
 
     }
 
-    public Magnivore(final Magnivore card) {
+    private Magnivore(final Magnivore card) {
         super(card);
     }
 

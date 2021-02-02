@@ -28,7 +28,7 @@ public final class SparkSpray extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{R}")));
     }
 
-    public SparkSpray(final SparkSpray card) {
+    private SparkSpray(final SparkSpray card) {
         super(card);
     }
 

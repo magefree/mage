@@ -28,7 +28,7 @@ public final class DreamTwist extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{U}"), TimingRule.INSTANT));
     }
 
-    public DreamTwist(final DreamTwist card) {
+    private DreamTwist(final DreamTwist card) {
         super(card);
     }
 

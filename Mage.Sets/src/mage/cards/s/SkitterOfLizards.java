@@ -40,7 +40,7 @@ public final class SkitterOfLizards extends CardImpl {
 
     }
 
-    public SkitterOfLizards(final SkitterOfLizards card) {
+    private SkitterOfLizards(final SkitterOfLizards card) {
         super(card);
     }
 

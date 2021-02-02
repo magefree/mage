@@ -51,7 +51,7 @@ public final class HatcherySpider extends CardImpl {
         ));
     }
 
-    public HatcherySpider(final HatcherySpider card) {
+    private HatcherySpider(final HatcherySpider card) {
         super(card);
     }
 

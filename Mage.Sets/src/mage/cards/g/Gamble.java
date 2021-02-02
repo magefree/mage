@@ -30,7 +30,7 @@ public final class Gamble extends CardImpl {
 
     }
 
-    public Gamble(final Gamble card) {
+    private Gamble(final Gamble card) {
         super(card);
     }
 

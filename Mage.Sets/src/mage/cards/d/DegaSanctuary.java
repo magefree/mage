@@ -28,7 +28,7 @@ public final class DegaSanctuary extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DegaSanctuary(final DegaSanctuary card) {
+    private DegaSanctuary(final DegaSanctuary card) {
         super(card);
     }
 

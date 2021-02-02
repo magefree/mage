@@ -43,7 +43,7 @@ public final class FulfillContract extends CardImpl {
 
     }
 
-    public FulfillContract(final FulfillContract card) {
+    private FulfillContract(final FulfillContract card) {
         super(card);
     }
 

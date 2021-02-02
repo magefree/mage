@@ -34,7 +34,7 @@ public final class PearlShard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PearlShard(final PearlShard card) {
+    private PearlShard(final PearlShard card) {
         super(card);
     }
 

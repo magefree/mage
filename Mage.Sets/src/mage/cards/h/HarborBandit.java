@@ -50,7 +50,7 @@ public final class HarborBandit extends CardImpl {
                 new ManaCostsImpl("{1}{U}")));
     }
 
-    public HarborBandit(final HarborBandit card) {
+    private HarborBandit(final HarborBandit card) {
         super(card);
     }
 

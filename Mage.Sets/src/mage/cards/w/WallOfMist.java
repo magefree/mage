@@ -27,7 +27,7 @@ public final class WallOfMist extends CardImpl {
 
     }
 
-    public WallOfMist(final WallOfMist card) {
+    private WallOfMist(final WallOfMist card) {
         super(card);
     }
 

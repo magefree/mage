@@ -43,7 +43,7 @@ public final class MistformMask extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new MistformMaskEffect(), new GenericManaCost(1)));
     }
 
-    public MistformMask(final MistformMask card) {
+    private MistformMask(final MistformMask card) {
         super(card);
     }
 

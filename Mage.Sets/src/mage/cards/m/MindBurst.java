@@ -39,7 +39,7 @@ public final class MindBurst extends CardImpl {
         
     }
 
-    public MindBurst(final MindBurst card) {
+    private MindBurst(final MindBurst card) {
         super(card);
     }
 

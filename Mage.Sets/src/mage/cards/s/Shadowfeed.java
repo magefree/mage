@@ -26,7 +26,7 @@ public final class Shadowfeed extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
     }
 
-    public Shadowfeed(final Shadowfeed card) {
+    private Shadowfeed(final Shadowfeed card) {
         super(card);
     }
 

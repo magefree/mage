@@ -34,7 +34,7 @@ public final class DuctCrawler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DuctCrawler(final DuctCrawler card) {
+    private DuctCrawler(final DuctCrawler card) {
         super(card);
     }
 

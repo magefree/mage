@@ -32,7 +32,7 @@ public final class BloodmadVampire extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{R}")));
     }
 
-    public BloodmadVampire(final BloodmadVampire card) {
+    private BloodmadVampire(final BloodmadVampire card) {
         super(card);
     }
 

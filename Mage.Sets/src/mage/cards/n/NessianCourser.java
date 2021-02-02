@@ -23,7 +23,7 @@ public final class NessianCourser extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public NessianCourser(final NessianCourser card) {
+    private NessianCourser(final NessianCourser card) {
         super(card);
     }
 

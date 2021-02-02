@@ -39,7 +39,7 @@ public final class KessigMalcontents extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KessigMalcontents(final KessigMalcontents card) {
+    private KessigMalcontents(final KessigMalcontents card) {
         super(card);
     }
 

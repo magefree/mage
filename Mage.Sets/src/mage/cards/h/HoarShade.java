@@ -30,7 +30,7 @@ public final class HoarShade extends CardImpl {
          this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
-    public HoarShade(final HoarShade card) {
+    private HoarShade(final HoarShade card) {
         super(card);
     }
 

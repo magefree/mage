@@ -26,7 +26,7 @@ public final class Taunt extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Taunt(final Taunt card) {
+    private Taunt(final Taunt card) {
         super(card);
     }
 

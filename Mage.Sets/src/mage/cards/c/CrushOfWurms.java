@@ -26,7 +26,7 @@ public final class CrushOfWurms extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{9}{G}{G}{G}"), TimingRule.SORCERY));
     }
 
-    public CrushOfWurms(final CrushOfWurms card) {
+    private CrushOfWurms(final CrushOfWurms card) {
         super(card);
     }
 

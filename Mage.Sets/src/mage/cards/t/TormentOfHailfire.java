@@ -28,7 +28,7 @@ public final class TormentOfHailfire extends CardImpl {
         
     }
     
-    public TormentOfHailfire(final TormentOfHailfire card) {
+    private TormentOfHailfire(final TormentOfHailfire card) {
         super(card);
     }
     

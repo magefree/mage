@@ -47,7 +47,7 @@ public final class DeepFreeze extends CardImpl {
         ));
     }
 
-    public DeepFreeze(final DeepFreeze card) {
+    private DeepFreeze(final DeepFreeze card) {
         super(card);
     }
 

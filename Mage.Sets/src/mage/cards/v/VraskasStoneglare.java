@@ -38,7 +38,7 @@ public final class VraskasStoneglare extends CardImpl {
         );
     }
 
-    public VraskasStoneglare(final VraskasStoneglare card) {
+    private VraskasStoneglare(final VraskasStoneglare card) {
         super(card);
     }
 

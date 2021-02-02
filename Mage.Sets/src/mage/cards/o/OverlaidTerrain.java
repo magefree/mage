@@ -38,7 +38,7 @@ public final class OverlaidTerrain extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(manaAbility, Duration.WhileOnBattlefield, new FilterLandPermanent(), false)));
     }
 
-    public OverlaidTerrain(final OverlaidTerrain card) {
+    private OverlaidTerrain(final OverlaidTerrain card) {
         super(card);
     }
 

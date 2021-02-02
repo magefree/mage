@@ -43,7 +43,7 @@ public final class GoldnightCastigator extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoldnightCastigatorDoubleDamageEffect()));
     }
 
-    public GoldnightCastigator(final GoldnightCastigator card) {
+    private GoldnightCastigator(final GoldnightCastigator card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public final class LordOfShatterskullPass extends LevelerCard {
         setMaxLevelCounters(6);
     }
 
-    public LordOfShatterskullPass(final LordOfShatterskullPass card) {
+    private LordOfShatterskullPass(final LordOfShatterskullPass card) {
         super(card);
     }
 

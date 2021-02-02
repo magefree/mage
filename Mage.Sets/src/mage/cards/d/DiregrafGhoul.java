@@ -27,7 +27,7 @@ public final class DiregrafGhoul extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
     }
 
-    public DiregrafGhoul(final DiregrafGhoul card) {
+    private DiregrafGhoul(final DiregrafGhoul card) {
         super(card);
     }
 

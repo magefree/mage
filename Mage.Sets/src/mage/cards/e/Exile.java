@@ -43,7 +43,7 @@ public final class Exile extends CardImpl {
         this.getSpellAbility().addEffect(new ExileEffect());
     }
 
-    public Exile(final Exile card) {
+    private Exile(final Exile card) {
         super(card);
     }
 

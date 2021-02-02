@@ -28,7 +28,7 @@ public final class ArborArmament extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ReachAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public ArborArmament(final ArborArmament card) {
+    private ArborArmament(final ArborArmament card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class UpdraftElemental extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public UpdraftElemental(final UpdraftElemental card) {
+    private UpdraftElemental(final UpdraftElemental card) {
         super(card);
     }
 

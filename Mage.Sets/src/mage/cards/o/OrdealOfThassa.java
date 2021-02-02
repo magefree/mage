@@ -49,7 +49,7 @@ public final class OrdealOfThassa extends CardImpl {
 
     }
 
-    public OrdealOfThassa(final OrdealOfThassa card) {
+    private OrdealOfThassa(final OrdealOfThassa card) {
         super(card);
     }
 

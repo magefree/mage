@@ -36,7 +36,7 @@ public final class EnduringScalelord extends CardImpl {
 
     }
 
-    public EnduringScalelord(final EnduringScalelord card) {
+    private EnduringScalelord(final EnduringScalelord card) {
         super(card);
     }
 

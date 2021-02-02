@@ -31,7 +31,7 @@ public final class SacredExcavation extends CardImpl {
         getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, cardsWithCycling));
     }
 
-    public SacredExcavation(final SacredExcavation card) {
+    private SacredExcavation(final SacredExcavation card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class BitterheartWitch extends CardImpl {
 
     }
 
-    public BitterheartWitch(final BitterheartWitch card) {
+    private BitterheartWitch(final BitterheartWitch card) {
         super(card);
     }
 

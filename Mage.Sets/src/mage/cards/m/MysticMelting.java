@@ -31,7 +31,7 @@ public final class MysticMelting extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public MysticMelting(final MysticMelting card) {
+    private MysticMelting(final MysticMelting card) {
         super(card);
     }
 

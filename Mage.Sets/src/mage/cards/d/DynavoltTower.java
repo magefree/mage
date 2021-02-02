@@ -35,7 +35,7 @@ public final class DynavoltTower extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DynavoltTower(final DynavoltTower card) {
+    private DynavoltTower(final DynavoltTower card) {
         super(card);
     }
 

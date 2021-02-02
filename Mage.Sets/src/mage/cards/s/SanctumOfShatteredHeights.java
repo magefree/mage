@@ -53,7 +53,7 @@ public final class SanctumOfShatteredHeights extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SanctumOfShatteredHeights(final SanctumOfShatteredHeights card) {
+    private SanctumOfShatteredHeights(final SanctumOfShatteredHeights card) {
         super(card);
     }
 

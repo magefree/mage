@@ -40,7 +40,7 @@ public final class Sunstone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Sunstone(final Sunstone card) {
+    private Sunstone(final Sunstone card) {
         super(card);
     }
 

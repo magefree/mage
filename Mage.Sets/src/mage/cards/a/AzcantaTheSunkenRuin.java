@@ -55,7 +55,7 @@ public final class AzcantaTheSunkenRuin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AzcantaTheSunkenRuin(final AzcantaTheSunkenRuin card) {
+    private AzcantaTheSunkenRuin(final AzcantaTheSunkenRuin card) {
         super(card);
     }
 

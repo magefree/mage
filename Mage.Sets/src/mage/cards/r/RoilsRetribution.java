@@ -23,7 +23,7 @@ public final class RoilsRetribution extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(5, new FilterAttackingOrBlockingCreature("attacking or blocking creatures")));
     }
 
-    public RoilsRetribution(final RoilsRetribution card) {
+    private RoilsRetribution(final RoilsRetribution card) {
         super(card);
     }
 

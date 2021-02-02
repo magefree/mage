@@ -32,7 +32,7 @@ public final class MistformSkyreaver extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new BecomesChosenCreatureTypeSourceEffect(), new GenericManaCost(1)));
     }
 
-    public MistformSkyreaver(final MistformSkyreaver card) {
+    private MistformSkyreaver(final MistformSkyreaver card) {
         super(card);
     }
 

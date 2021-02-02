@@ -40,7 +40,7 @@ public final class UntaidakeTheCloudKeeper extends CardImpl {
 
     }
 
-    public UntaidakeTheCloudKeeper(final UntaidakeTheCloudKeeper card) {
+    private UntaidakeTheCloudKeeper(final UntaidakeTheCloudKeeper card) {
         super(card);
     }
 

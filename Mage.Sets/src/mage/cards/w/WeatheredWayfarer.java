@@ -43,7 +43,7 @@ public final class WeatheredWayfarer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WeatheredWayfarer(final WeatheredWayfarer card) {
+    private WeatheredWayfarer(final WeatheredWayfarer card) {
         super(card);
     }
 

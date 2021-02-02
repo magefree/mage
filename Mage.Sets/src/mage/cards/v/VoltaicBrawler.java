@@ -44,7 +44,7 @@ public final class VoltaicBrawler extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(doIfCostPaid, false));
     }
 
-    public VoltaicBrawler(final VoltaicBrawler card) {
+    private VoltaicBrawler(final VoltaicBrawler card) {
         super(card);
     }
 

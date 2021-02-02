@@ -30,7 +30,7 @@ public final class BottleOfSuleiman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BottleOfSuleiman(final BottleOfSuleiman card) {
+    private BottleOfSuleiman(final BottleOfSuleiman card) {
         super(card);
     }
 

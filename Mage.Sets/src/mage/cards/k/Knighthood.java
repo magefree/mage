@@ -26,7 +26,7 @@ public final class Knighthood extends CardImpl {
 
     }
 
-    public Knighthood(final Knighthood card) {
+    private Knighthood(final Knighthood card) {
         super(card);
     }
 

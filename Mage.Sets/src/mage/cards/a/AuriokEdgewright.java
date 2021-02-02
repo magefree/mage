@@ -38,7 +38,7 @@ public final class AuriokEdgewright extends CardImpl {
         );
     }
 
-    public AuriokEdgewright(final AuriokEdgewright card) {
+    private AuriokEdgewright(final AuriokEdgewright card) {
         super(card);
     }
 

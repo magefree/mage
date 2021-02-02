@@ -60,7 +60,7 @@ public final class SeeRed extends CardImpl {
                 "At the beginning of your end step, if you didn't attack with a creature this turn, sacrifice {this}."), new AttackedThisTurnWatcher());
     }
 
-    public SeeRed(final SeeRed card) {
+    private SeeRed(final SeeRed card) {
         super(card);
     }
 

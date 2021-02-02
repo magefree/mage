@@ -54,7 +54,7 @@ public final class TezzeretMasterOfMetal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TezzeretMasterOfMetal(final TezzeretMasterOfMetal card) {
+    private TezzeretMasterOfMetal(final TezzeretMasterOfMetal card) {
         super(card);
     }
 

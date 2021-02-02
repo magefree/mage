@@ -28,7 +28,7 @@ public final class OreskosSunGuide extends CardImpl {
         this.addAbility(new InspiredAbility(new GainLifeEffect(2)));
     }
 
-    public OreskosSunGuide(final OreskosSunGuide card) {
+    private OreskosSunGuide(final OreskosSunGuide card) {
         super(card);
     }
 

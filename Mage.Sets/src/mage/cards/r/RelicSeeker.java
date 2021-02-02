@@ -42,7 +42,7 @@ public final class RelicSeeker extends CardImpl {
 
     }
 
-    public RelicSeeker(final RelicSeeker card) {
+    private RelicSeeker(final RelicSeeker card) {
         super(card);
     }
 

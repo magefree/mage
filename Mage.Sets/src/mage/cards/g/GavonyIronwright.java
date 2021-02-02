@@ -32,7 +32,7 @@ public final class GavonyIronwright extends CardImpl {
                 FatefulHourCondition.instance, "<br><i>Fateful hour</i> &mdash; As long as you have 5 or less life, other creatures you control get +1/+4")));
     }
 
-    public GavonyIronwright(final GavonyIronwright card) {
+    private GavonyIronwright(final GavonyIronwright card) {
         super(card);
     }
 

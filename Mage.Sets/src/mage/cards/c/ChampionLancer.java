@@ -34,7 +34,7 @@ public final class ChampionLancer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceByCardTypeEffect()));
     }
 
-    public ChampionLancer(final ChampionLancer card) {
+    private ChampionLancer(final ChampionLancer card) {
         super(card);
     }
 

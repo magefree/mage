@@ -26,7 +26,7 @@ public final class ByForce extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(ByForceAdjuster.instance);
     }
 
-    public ByForce(final ByForce card) {
+    private ByForce(final ByForce card) {
         super(card);
     }
 

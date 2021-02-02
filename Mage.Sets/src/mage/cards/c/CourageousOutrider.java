@@ -36,7 +36,7 @@ public final class CourageousOutrider extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), filter, false) , false));
     }
 
-    public CourageousOutrider(final CourageousOutrider card) {
+    private CourageousOutrider(final CourageousOutrider card) {
         super(card);
     }
 

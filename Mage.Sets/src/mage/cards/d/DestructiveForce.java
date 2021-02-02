@@ -33,7 +33,7 @@ public final class DestructiveForce extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(5, filterCreature));
     }
 
-    public DestructiveForce(final DestructiveForce card) {
+    private DestructiveForce(final DestructiveForce card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class BeaconOfDestiny extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BeaconOfDestinyEffect(), new TapSourceCost()));
     }
 
-    public BeaconOfDestiny(final BeaconOfDestiny card) {
+    private BeaconOfDestiny(final BeaconOfDestiny card) {
         super(card);
     }
 

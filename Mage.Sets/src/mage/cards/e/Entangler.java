@@ -45,7 +45,7 @@ public final class Entangler extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public Entangler(final Entangler card) {
+    private Entangler(final Entangler card) {
         super(card);
     }
 

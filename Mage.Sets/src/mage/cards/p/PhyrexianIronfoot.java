@@ -35,7 +35,7 @@ public final class PhyrexianIronfoot extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{1}{S}")));
     }
 
-    public PhyrexianIronfoot(final PhyrexianIronfoot card) {
+    private PhyrexianIronfoot(final PhyrexianIronfoot card) {
         super(card);
     }
 

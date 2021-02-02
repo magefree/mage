@@ -22,7 +22,7 @@ public final class AdventOfTheWurm extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WurmWithTrampleToken()));
     }
 
-    public AdventOfTheWurm(final AdventOfTheWurm card) {
+    private AdventOfTheWurm(final AdventOfTheWurm card) {
         super(card);
     }
 

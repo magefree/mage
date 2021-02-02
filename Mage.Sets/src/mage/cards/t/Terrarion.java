@@ -37,7 +37,7 @@ public final class Terrarion extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public Terrarion(final Terrarion card) {
+    private Terrarion(final Terrarion card) {
         super(card);
     }
 

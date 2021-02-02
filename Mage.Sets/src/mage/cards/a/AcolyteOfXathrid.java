@@ -35,7 +35,7 @@ public final class AcolyteOfXathrid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AcolyteOfXathrid(final AcolyteOfXathrid card) {
+    private AcolyteOfXathrid(final AcolyteOfXathrid card) {
         super(card);
     }
 

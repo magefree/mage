@@ -32,7 +32,7 @@ public final class Dredge extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Dredge(final Dredge card) {
+    private Dredge(final Dredge card) {
         super(card);
     }
 

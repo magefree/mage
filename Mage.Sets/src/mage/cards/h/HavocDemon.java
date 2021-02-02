@@ -30,7 +30,7 @@ public final class HavocDemon extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new BoostAllEffect(-5, -5, Duration.EndOfTurn), false));
     }
 
-    public HavocDemon(final HavocDemon card) {
+    private HavocDemon(final HavocDemon card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class MarbleDiamond extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public MarbleDiamond(final MarbleDiamond card) {
+    private MarbleDiamond(final MarbleDiamond card) {
         super(card);
     }
 

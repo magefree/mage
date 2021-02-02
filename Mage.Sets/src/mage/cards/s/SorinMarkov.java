@@ -51,7 +51,7 @@ public final class SorinMarkov extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public SorinMarkov(final SorinMarkov card) {
+    private SorinMarkov(final SorinMarkov card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public final class KrovikanVampire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KrovikanVampire(final KrovikanVampire card) {
+    private KrovikanVampire(final KrovikanVampire card) {
         super(card);
     }
 

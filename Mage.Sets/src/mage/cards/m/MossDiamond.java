@@ -23,7 +23,7 @@ public final class MossDiamond extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public MossDiamond(final MossDiamond card) {
+    private MossDiamond(final MossDiamond card) {
         super(card);
     }
 

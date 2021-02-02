@@ -33,7 +33,7 @@ public final class RingsOfBrighthearth extends CardImpl {
         this.addAbility(new RingsOfBrighthearthTriggeredAbility());
     }
 
-    public RingsOfBrighthearth(final RingsOfBrighthearth card) {
+    private RingsOfBrighthearth(final RingsOfBrighthearth card) {
         super(card);
     }
 

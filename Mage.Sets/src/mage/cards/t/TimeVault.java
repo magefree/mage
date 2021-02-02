@@ -45,7 +45,7 @@ public final class TimeVault extends CardImpl {
 
     }
 
-    public TimeVault(final TimeVault card) {
+    private TimeVault(final TimeVault card) {
         super(card);
     }
 

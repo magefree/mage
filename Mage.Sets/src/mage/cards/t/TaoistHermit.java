@@ -27,7 +27,7 @@ public final class TaoistHermit extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    public TaoistHermit(final TaoistHermit card) {
+    private TaoistHermit(final TaoistHermit card) {
         super(card);
     }
 

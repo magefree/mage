@@ -28,7 +28,7 @@ public final class ArcboundHybrid extends CardImpl {
         this.addAbility(new ModularAbility(this, 2));
     }
 
-    public ArcboundHybrid(final ArcboundHybrid card) {
+    private ArcboundHybrid(final ArcboundHybrid card) {
         super(card);
     }
 

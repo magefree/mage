@@ -30,7 +30,7 @@ public final class KiorasDismissal extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public KiorasDismissal(final KiorasDismissal card) {
+    private KiorasDismissal(final KiorasDismissal card) {
         super(card);
     }
 

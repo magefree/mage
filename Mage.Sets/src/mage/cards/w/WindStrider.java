@@ -32,7 +32,7 @@ public final class WindStrider extends CardImpl {
 
     }
 
-    public WindStrider(final WindStrider card) {
+    private WindStrider(final WindStrider card) {
         super(card);
     }
 

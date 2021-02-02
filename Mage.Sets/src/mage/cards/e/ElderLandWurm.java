@@ -37,7 +37,7 @@ public final class ElderLandWurm extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.Custom), false, false, true));
     }
 
-    public ElderLandWurm(final ElderLandWurm card) {
+    private ElderLandWurm(final ElderLandWurm card) {
         super(card);
     }
 

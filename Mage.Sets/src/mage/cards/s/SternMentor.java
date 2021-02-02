@@ -42,7 +42,7 @@ public final class SternMentor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ability, ruleText)));
     }
 
-    public SternMentor(final SternMentor card) {
+    private SternMentor(final SternMentor card) {
         super(card);
     }
 

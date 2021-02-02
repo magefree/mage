@@ -26,7 +26,7 @@ public final class LatchSeeker extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public LatchSeeker(final LatchSeeker card) {
+    private LatchSeeker(final LatchSeeker card) {
         super(card);
     }
 

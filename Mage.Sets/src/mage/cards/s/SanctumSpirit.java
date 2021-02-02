@@ -42,7 +42,7 @@ public final class SanctumSpirit extends CardImpl {
         );
     }
 
-    public SanctumSpirit(final SanctumSpirit card) {
+    private SanctumSpirit(final SanctumSpirit card) {
         super(card);
     }
 

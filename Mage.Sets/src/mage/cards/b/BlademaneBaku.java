@@ -41,7 +41,7 @@ public final class BlademaneBaku extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlademaneBaku(final BlademaneBaku card) {
+    private BlademaneBaku(final BlademaneBaku card) {
         super(card);
     }
 

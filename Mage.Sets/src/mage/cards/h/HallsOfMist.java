@@ -33,7 +33,7 @@ public final class HallsOfMist extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackIfAttackedLastTurnAllEffect()), new AttackedLastTurnWatcher());
     }
 
-    public HallsOfMist(final HallsOfMist card) {
+    private HallsOfMist(final HallsOfMist card) {
         super(card);
     }
 

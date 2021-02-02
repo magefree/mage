@@ -33,7 +33,7 @@ public final class HonoredHydra extends CardImpl {
 
     }
 
-    public HonoredHydra(final HonoredHydra card) {
+    private HonoredHydra(final HonoredHydra card) {
         super(card);
     }
 

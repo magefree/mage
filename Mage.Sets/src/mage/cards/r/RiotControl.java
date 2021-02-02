@@ -36,7 +36,7 @@ public final class RiotControl extends CardImpl {
 
     }
 
-    public RiotControl(final RiotControl card) {
+    private RiotControl(final RiotControl card) {
         super(card);
     }
 

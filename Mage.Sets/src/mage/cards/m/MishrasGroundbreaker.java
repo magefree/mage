@@ -32,7 +32,7 @@ public final class MishrasGroundbreaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MishrasGroundbreaker(final MishrasGroundbreaker card) {
+    private MishrasGroundbreaker(final MishrasGroundbreaker card) {
         super(card);
     }
 

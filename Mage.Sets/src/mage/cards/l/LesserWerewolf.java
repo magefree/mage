@@ -44,7 +44,7 @@ public final class LesserWerewolf extends CardImpl {
 
     }
 
-    public LesserWerewolf(final LesserWerewolf card) {
+    private LesserWerewolf(final LesserWerewolf card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class HadaFreeblade extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
 
-    public HadaFreeblade(final HadaFreeblade card) {
+    private HadaFreeblade(final HadaFreeblade card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class BazaarOfWonders extends CardImpl {
                 StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL));
     }
 
-    public BazaarOfWonders(final BazaarOfWonders card) {
+    private BazaarOfWonders(final BazaarOfWonders card) {
         super(card);
     }
 

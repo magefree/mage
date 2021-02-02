@@ -35,7 +35,7 @@ public final class Nefashu extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Nefashu(final Nefashu card) {
+    private Nefashu(final Nefashu card) {
         super(card);
     }
 

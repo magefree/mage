@@ -33,7 +33,7 @@ public final class Inviolability extends CardImpl {
         )));
     }
 
-    public Inviolability(final Inviolability card) {
+    private Inviolability(final Inviolability card) {
         super(card);
     }
 

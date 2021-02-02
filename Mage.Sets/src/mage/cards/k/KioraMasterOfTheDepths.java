@@ -54,7 +54,7 @@ public final class KioraMasterOfTheDepths extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KioraMasterOfTheDepths(final KioraMasterOfTheDepths card) {
+    private KioraMasterOfTheDepths(final KioraMasterOfTheDepths card) {
         super(card);
     }
 

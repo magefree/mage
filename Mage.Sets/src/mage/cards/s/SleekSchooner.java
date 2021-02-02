@@ -27,7 +27,7 @@ public final class SleekSchooner extends CardImpl {
 
     }
 
-    public SleekSchooner(final SleekSchooner card) {
+    private SleekSchooner(final SleekSchooner card) {
         super(card);
     }
 

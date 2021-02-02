@@ -25,7 +25,7 @@ public final class ForceOfSavagery extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public ForceOfSavagery(final ForceOfSavagery card) {
+    private ForceOfSavagery(final ForceOfSavagery card) {
         super(card);
     }
 

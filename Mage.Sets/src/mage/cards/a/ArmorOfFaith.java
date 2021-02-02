@@ -37,7 +37,7 @@ public final class ArmorOfFaith extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public ArmorOfFaith(final ArmorOfFaith card) {
+    private ArmorOfFaith(final ArmorOfFaith card) {
         super(card);
     }
 

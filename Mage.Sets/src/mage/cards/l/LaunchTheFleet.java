@@ -33,7 +33,7 @@ public final class LaunchTheFleet extends CardImpl {
 
     }
 
-    public LaunchTheFleet(final LaunchTheFleet card) {
+    private LaunchTheFleet(final LaunchTheFleet card) {
         super(card);
     }
 

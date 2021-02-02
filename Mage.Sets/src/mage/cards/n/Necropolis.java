@@ -43,7 +43,7 @@ public final class Necropolis extends CardImpl {
                 new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("a creature card")))));
     }
 
-    public Necropolis(final Necropolis card) {
+    private Necropolis(final Necropolis card) {
         super(card);
     }
 

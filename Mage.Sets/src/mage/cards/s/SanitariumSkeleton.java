@@ -28,7 +28,7 @@ public final class SanitariumSkeleton extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{2}{B}")));
     }
 
-    public SanitariumSkeleton(final SanitariumSkeleton card) {
+    private SanitariumSkeleton(final SanitariumSkeleton card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class MidnightRitual extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(MidnightRitualAdjuster.instance);
     }
 
-    public MidnightRitual(final MidnightRitual card) {
+    private MidnightRitual(final MidnightRitual card) {
         super(card);
     }
 

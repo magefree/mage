@@ -49,7 +49,7 @@ public final class DawnCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public DawnCharm(final DawnCharm card) {
+    private DawnCharm(final DawnCharm card) {
         super(card);
     }
 

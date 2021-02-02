@@ -54,7 +54,7 @@ public final class GhosthelmCourier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhosthelmCourier(final GhosthelmCourier card) {
+    private GhosthelmCourier(final GhosthelmCourier card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class FeedTheClan extends CardImpl {
         this.getSpellAbility().addHint(FerociousHint.instance);
     }
 
-    public FeedTheClan(final FeedTheClan card) {
+    private FeedTheClan(final FeedTheClan card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class SparkOfCreativity extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SparkOfCreativity(final SparkOfCreativity card) {
+    private SparkOfCreativity(final SparkOfCreativity card) {
         super(card);
     }
 

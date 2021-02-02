@@ -21,7 +21,7 @@ public final class ArmoredWhirlTurtle extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public ArmoredWhirlTurtle(final ArmoredWhirlTurtle card) {
+    private ArmoredWhirlTurtle(final ArmoredWhirlTurtle card) {
         super(card);
     }
 

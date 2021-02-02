@@ -40,7 +40,7 @@ public final class ChokingSands extends CardImpl {
         this.getSpellAbility().addEffect(new ChokingSandsEffect());
     }
 
-    public ChokingSands(final ChokingSands card) {
+    private ChokingSands(final ChokingSands card) {
         super(card);
     }
 

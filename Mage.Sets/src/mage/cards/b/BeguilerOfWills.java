@@ -40,7 +40,7 @@ public final class BeguilerOfWills extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BeguilerOfWills(final BeguilerOfWills card) {
+    private BeguilerOfWills(final BeguilerOfWills card) {
         super(card);
     }
 

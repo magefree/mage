@@ -33,7 +33,7 @@ public final class Polyraptor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Polyraptor(final Polyraptor card) {
+    private Polyraptor(final Polyraptor card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class Rubblehulk extends CardImpl {
         this.addAbility(new BloodrushAbility("{1}{R}{G}", new BoostTargetEffect(controlledLands, controlledLands, Duration.EndOfTurn, true)));
     }
 
-    public Rubblehulk(final Rubblehulk card) {
+    private Rubblehulk(final Rubblehulk card) {
         super(card);
     }
 

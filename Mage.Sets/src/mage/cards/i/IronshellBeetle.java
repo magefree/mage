@@ -31,7 +31,7 @@ public final class IronshellBeetle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IronshellBeetle(final IronshellBeetle card) {
+    private IronshellBeetle(final IronshellBeetle card) {
         super(card);
     }
 

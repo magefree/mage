@@ -26,7 +26,7 @@ public final class VigilantBaloth extends CardImpl {
 
     }
 
-    public VigilantBaloth(final VigilantBaloth card) {
+    private VigilantBaloth(final VigilantBaloth card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class GeierReachSanitarium extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GeierReachSanitarium(final GeierReachSanitarium card) {
+    private GeierReachSanitarium(final GeierReachSanitarium card) {
         super(card);
     }
 

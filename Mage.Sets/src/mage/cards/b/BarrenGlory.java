@@ -40,7 +40,7 @@ public final class BarrenGlory extends CardImpl {
                 "At the beginning of your upkeep, if you control no permanents other than {this} and have no cards in hand, you win the game"));
     }
 
-    public BarrenGlory(final BarrenGlory card) {
+    private BarrenGlory(final BarrenGlory card) {
         super(card);
     }
 

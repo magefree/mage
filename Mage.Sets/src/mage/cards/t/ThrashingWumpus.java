@@ -29,7 +29,7 @@ public final class ThrashingWumpus extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl("{B}")));
     }
 
-    public ThrashingWumpus(final ThrashingWumpus card) {
+    private ThrashingWumpus(final ThrashingWumpus card) {
         super(card);
     }
 

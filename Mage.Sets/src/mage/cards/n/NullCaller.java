@@ -39,7 +39,7 @@ public final class NullCaller extends CardImpl {
 
     }
 
-    public NullCaller(final NullCaller card) {
+    private NullCaller(final NullCaller card) {
         super(card);
     }
 

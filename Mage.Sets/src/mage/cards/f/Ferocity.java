@@ -41,7 +41,7 @@ public final class Ferocity extends CardImpl {
         this.addAbility(new FerocityTriggeredAbility());
     }
 
-    public Ferocity(final Ferocity card) {
+    private Ferocity(final Ferocity card) {
         super(card);
     }
 

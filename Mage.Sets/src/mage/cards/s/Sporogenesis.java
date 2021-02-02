@@ -57,7 +57,7 @@ public final class Sporogenesis extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new SporogenesisRemoveCountersEffect(), false)); 
     }
 
-    public Sporogenesis(final Sporogenesis card) {
+    private Sporogenesis(final Sporogenesis card) {
         super(card);
     }
 

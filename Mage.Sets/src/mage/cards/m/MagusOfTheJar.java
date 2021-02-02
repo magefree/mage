@@ -40,7 +40,7 @@ public final class MagusOfTheJar extends CardImpl {
 
     }
 
-    public MagusOfTheJar(final MagusOfTheJar card) {
+    private MagusOfTheJar(final MagusOfTheJar card) {
         super(card);
     }
 

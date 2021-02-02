@@ -29,7 +29,7 @@ public final class Heal extends CardImpl {
         
     }
 
-    public Heal(final Heal card) {
+    private Heal(final Heal card) {
         super(card);
     }
 

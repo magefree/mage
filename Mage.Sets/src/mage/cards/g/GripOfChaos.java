@@ -34,7 +34,7 @@ public final class GripOfChaos extends CardImpl {
         this.addAbility(new GripOfChaosTriggeredAbility());
     }
 
-    public GripOfChaos(final GripOfChaos card) {
+    private GripOfChaos(final GripOfChaos card) {
         super(card);
     }
 

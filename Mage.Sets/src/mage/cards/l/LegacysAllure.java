@@ -43,7 +43,7 @@ public final class LegacysAllure extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LegacysAllure(final LegacysAllure card) {
+    private LegacysAllure(final LegacysAllure card) {
         super(card);
     }
 

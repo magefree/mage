@@ -33,7 +33,7 @@ public final class LightOfDay extends CardImpl {
 
     }
 
-    public LightOfDay(final LightOfDay card) {
+    private LightOfDay(final LightOfDay card) {
         super(card);
     }
 

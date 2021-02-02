@@ -26,7 +26,7 @@ public final class EnlistedWurm extends CardImpl {
         this.addAbility(new CascadeAbility());
     }
 
-    public EnlistedWurm(final EnlistedWurm card) {
+    private EnlistedWurm(final EnlistedWurm card) {
         super(card);
     }
 

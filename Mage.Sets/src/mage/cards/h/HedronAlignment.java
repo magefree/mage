@@ -40,7 +40,7 @@ public final class HedronAlignment extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new ManaCostsImpl("{1}{U}")));
     }
 
-    public HedronAlignment(final HedronAlignment card) {
+    private HedronAlignment(final HedronAlignment card) {
         super(card);
     }
 

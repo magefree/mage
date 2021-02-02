@@ -44,7 +44,7 @@ public final class Conviction extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("W")));
     }
 
-    public Conviction(final Conviction card) {
+    private Conviction(final Conviction card) {
         super(card);
     }
 

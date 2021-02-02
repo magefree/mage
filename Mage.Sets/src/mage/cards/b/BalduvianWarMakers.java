@@ -28,7 +28,7 @@ public final class BalduvianWarMakers extends CardImpl {
         this.addAbility(new RampageAbility(1));
     }
 
-    public BalduvianWarMakers(final BalduvianWarMakers card) {
+    private BalduvianWarMakers(final BalduvianWarMakers card) {
         super(card);
     }
 

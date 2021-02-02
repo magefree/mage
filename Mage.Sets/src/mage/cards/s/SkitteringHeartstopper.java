@@ -33,7 +33,7 @@ public final class SkitteringHeartstopper extends CardImpl {
                 new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
-    public SkitteringHeartstopper(final SkitteringHeartstopper card) {
+    private SkitteringHeartstopper(final SkitteringHeartstopper card) {
         super(card);
     }
 

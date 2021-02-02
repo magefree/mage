@@ -46,7 +46,7 @@ public final class RatColony extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("A deck can have any number of cards named Rat Colony.")));
     }
 
-    public RatColony(final RatColony card) {
+    private RatColony(final RatColony card) {
         super(card);
     }
 

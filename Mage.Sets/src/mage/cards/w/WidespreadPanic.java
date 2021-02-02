@@ -32,7 +32,7 @@ public final class WidespreadPanic extends CardImpl {
         this.addAbility(new WidespreadPanicTriggeredAbility());
     }
 
-    public WidespreadPanic(final WidespreadPanic card) {
+    private WidespreadPanic(final WidespreadPanic card) {
         super(card);
     }
 

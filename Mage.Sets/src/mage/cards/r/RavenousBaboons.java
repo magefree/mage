@@ -31,7 +31,7 @@ public final class RavenousBaboons extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RavenousBaboons(final RavenousBaboons card) {
+    private RavenousBaboons(final RavenousBaboons card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class AmbassadorOak extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElfToken(), 1), false));
     }
 
-    public AmbassadorOak(final AmbassadorOak card) {
+    private AmbassadorOak(final AmbassadorOak card) {
         super(card);
     }
 

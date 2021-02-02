@@ -39,7 +39,7 @@ public final class SplinteringWind extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SplinteringWind(final SplinteringWind card) {
+    private SplinteringWind(final SplinteringWind card) {
         super(card);
     }
 

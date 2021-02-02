@@ -40,7 +40,7 @@ public final class FortuneThief extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{R}{R}")));
     }
 
-    public FortuneThief(final FortuneThief card) {
+    private FortuneThief(final FortuneThief card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class ShamanOfSpring extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public ShamanOfSpring(final ShamanOfSpring card) {
+    private ShamanOfSpring(final ShamanOfSpring card) {
         super(card);
     }
 

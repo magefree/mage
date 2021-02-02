@@ -30,7 +30,7 @@ public final class RazorclawBear extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
-    public RazorclawBear(final RazorclawBear card) {
+    private RazorclawBear(final RazorclawBear card) {
         super(card);
     }
 

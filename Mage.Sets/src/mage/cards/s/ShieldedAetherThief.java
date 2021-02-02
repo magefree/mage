@@ -43,7 +43,7 @@ public final class ShieldedAetherThief extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShieldedAetherThief(final ShieldedAetherThief card) {
+    private ShieldedAetherThief(final ShieldedAetherThief card) {
         super(card);
     }
 

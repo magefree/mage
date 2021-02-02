@@ -33,7 +33,7 @@ public final class AvenInitiate extends CardImpl {
 
     }
 
-    public AvenInitiate(final AvenInitiate card) {
+    private AvenInitiate(final AvenInitiate card) {
         super(card);
     }
 

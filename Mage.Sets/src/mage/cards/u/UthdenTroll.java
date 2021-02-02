@@ -29,7 +29,7 @@ public final class UthdenTroll extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{R}")));
     }
 
-    public UthdenTroll(final UthdenTroll card) {
+    private UthdenTroll(final UthdenTroll card) {
         super(card);
     }
 

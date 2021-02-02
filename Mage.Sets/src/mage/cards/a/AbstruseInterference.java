@@ -35,7 +35,7 @@ public final class AbstruseInterference extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public AbstruseInterference(final AbstruseInterference card) {
+    private AbstruseInterference(final AbstruseInterference card) {
         super(card);
     }
 

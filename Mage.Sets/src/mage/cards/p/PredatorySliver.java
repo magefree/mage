@@ -31,7 +31,7 @@ public final class PredatorySliver extends CardImpl {
                 new BoostControlledEffect(1, 1, Duration.WhileInGraveyard, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
-    public PredatorySliver(final PredatorySliver card) {
+    private PredatorySliver(final PredatorySliver card) {
         super(card);
     }
 

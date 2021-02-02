@@ -24,7 +24,7 @@ public final class DecisionParalysis extends CardImpl {
         this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("Those creatures"));
     }
 
-    public DecisionParalysis(final DecisionParalysis card) {
+    private DecisionParalysis(final DecisionParalysis card) {
         super(card);
     }
 

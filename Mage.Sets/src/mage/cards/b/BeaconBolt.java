@@ -30,7 +30,7 @@ public final class BeaconBolt extends CardImpl {
         this.addAbility(new JumpStartAbility(this));
     }
 
-    public BeaconBolt(final BeaconBolt card) {
+    private BeaconBolt(final BeaconBolt card) {
         super(card);
     }
 

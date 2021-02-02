@@ -59,7 +59,7 @@ public final class CrownOfFury extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrownOfFury(final CrownOfFury card) {
+    private CrownOfFury(final CrownOfFury card) {
         super(card);
     }
 

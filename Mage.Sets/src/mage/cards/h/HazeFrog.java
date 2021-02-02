@@ -38,7 +38,7 @@ public final class HazeFrog extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new HazeFrogEffect()));
     }
 
-    public HazeFrog(final HazeFrog card) {
+    private HazeFrog(final HazeFrog card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class SwansOfBrynArgoll extends CardImpl {
 
     }
 
-    public SwansOfBrynArgoll(final SwansOfBrynArgoll card) {
+    private SwansOfBrynArgoll(final SwansOfBrynArgoll card) {
         super(card);
     }
 

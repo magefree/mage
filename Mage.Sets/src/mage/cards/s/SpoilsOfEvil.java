@@ -35,7 +35,7 @@ public final class SpoilsOfEvil extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public SpoilsOfEvil(final SpoilsOfEvil card) {
+    private SpoilsOfEvil(final SpoilsOfEvil card) {
         super(card);
     }
 

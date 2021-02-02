@@ -33,7 +33,7 @@ public final class WeldfastMonitor extends CardImpl {
 
     }
 
-    public WeldfastMonitor(final WeldfastMonitor card) {
+    private WeldfastMonitor(final WeldfastMonitor card) {
         super(card);
     }
 

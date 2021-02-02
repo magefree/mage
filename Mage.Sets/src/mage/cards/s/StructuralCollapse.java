@@ -28,7 +28,7 @@ public final class StructuralCollapse extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public StructuralCollapse(final StructuralCollapse card) {
+    private StructuralCollapse(final StructuralCollapse card) {
         super(card);
     }
 

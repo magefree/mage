@@ -31,7 +31,7 @@ public final class WarpedPhysique extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WarpedPhysique(final WarpedPhysique card) {
+    private WarpedPhysique(final WarpedPhysique card) {
         super(card);
     }
 

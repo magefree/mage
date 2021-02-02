@@ -37,7 +37,7 @@ public final class LashweedLurker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LashweedLurker(final LashweedLurker card) {
+    private LashweedLurker(final LashweedLurker card) {
         super(card);
     }
 

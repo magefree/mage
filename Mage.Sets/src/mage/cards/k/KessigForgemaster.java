@@ -46,7 +46,7 @@ public final class KessigForgemaster extends CardImpl {
 
     }
 
-    public KessigForgemaster(final KessigForgemaster card) {
+    private KessigForgemaster(final KessigForgemaster card) {
         super(card);
     }
 

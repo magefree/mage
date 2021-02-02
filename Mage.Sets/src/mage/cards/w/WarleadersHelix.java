@@ -24,7 +24,7 @@ public final class WarleadersHelix extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public WarleadersHelix(final WarleadersHelix card) {
+    private WarleadersHelix(final WarleadersHelix card) {
         super(card);
     }
 

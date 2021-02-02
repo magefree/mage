@@ -40,7 +40,7 @@ public final class KatabaticWinds extends CardImpl {
 
     }
 
-    public KatabaticWinds(final KatabaticWinds card) {
+    private KatabaticWinds(final KatabaticWinds card) {
         super(card);
     }
 

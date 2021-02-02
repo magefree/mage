@@ -41,7 +41,7 @@ public final class AetherSwooper extends CardImpl {
                 "Whenever {this} attacks you may pay {E}{E}. If you do, create a 1/1 colorless Servo artifact creature token."));
     }
 
-    public AetherSwooper(final AetherSwooper card) {
+    private AetherSwooper(final AetherSwooper card) {
         super(card);
     }
 

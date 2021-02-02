@@ -36,7 +36,7 @@ public final class FlailingDrake extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlailingDrake(final FlailingDrake card) {
+    private FlailingDrake(final FlailingDrake card) {
         super(card);
     }
 

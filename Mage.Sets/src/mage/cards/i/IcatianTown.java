@@ -22,7 +22,7 @@ public final class IcatianTown extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CitizenToken(), 4));
     }
 
-    public IcatianTown(final IcatianTown card) {
+    private IcatianTown(final IcatianTown card) {
         super(card);
     }
 

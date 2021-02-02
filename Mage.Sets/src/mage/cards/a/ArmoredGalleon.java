@@ -29,7 +29,7 @@ public final class ArmoredGalleon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
     }
 
-    public ArmoredGalleon(final ArmoredGalleon card) {
+    private ArmoredGalleon(final ArmoredGalleon card) {
         super(card);
     }
 

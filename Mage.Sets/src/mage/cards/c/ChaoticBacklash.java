@@ -31,7 +31,7 @@ public final class ChaoticBacklash extends CardImpl {
 
     }
 
-    public ChaoticBacklash(final ChaoticBacklash card) {
+    private ChaoticBacklash(final ChaoticBacklash card) {
         super(card);
     }
 

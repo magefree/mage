@@ -22,7 +22,7 @@ public final class ExplosiveVegetation extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, new FilterBasicLandCard("basic land cards")), true));
     }
 
-    public ExplosiveVegetation(final ExplosiveVegetation card) {
+    private ExplosiveVegetation(final ExplosiveVegetation card) {
         super(card);
     }
 

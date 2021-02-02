@@ -27,7 +27,7 @@ public final class WarBehemoth extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{W}")));
     }
 
-    public WarBehemoth(final WarBehemoth card) {
+    private WarBehemoth(final WarBehemoth card) {
         super(card);
     }
 

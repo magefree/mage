@@ -46,7 +46,7 @@ public final class DrydenVos extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public DrydenVos(final DrydenVos card) {
+    private DrydenVos(final DrydenVos card) {
         super(card);
     }
 

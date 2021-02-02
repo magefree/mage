@@ -28,7 +28,7 @@ public final class DoomedDissenter extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new ZombieToken())));
     }
 
-    public DoomedDissenter(final DoomedDissenter card) {
+    private DoomedDissenter(final DoomedDissenter card) {
         super(card);
     }
 

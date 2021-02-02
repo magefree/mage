@@ -39,7 +39,7 @@ public final class SirenOfTheSilentSong extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SirenOfTheSilentSong(final SirenOfTheSilentSong card) {
+    private SirenOfTheSilentSong(final SirenOfTheSilentSong card) {
         super(card);
     }
 

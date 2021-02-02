@@ -32,7 +32,7 @@ public final class MoggManiac extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoggManiac(final MoggManiac card) {
+    private MoggManiac(final MoggManiac card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class SomberwaldSpider extends CardImpl {
                 "with two +1/+1 counters on it if a creature died this turn"));
     }
 
-    public SomberwaldSpider(final SomberwaldSpider card) {
+    private SomberwaldSpider(final SomberwaldSpider card) {
         super(card);
     }
 

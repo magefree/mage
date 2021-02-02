@@ -40,7 +40,7 @@ public final class GuiseOfFire extends CardImpl {
 
     }
 
-    public GuiseOfFire(final GuiseOfFire card) {
+    private GuiseOfFire(final GuiseOfFire card) {
         super(card);
     }
 

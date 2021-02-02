@@ -41,7 +41,7 @@ public final class RysorianBadger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RysorianBadger(final RysorianBadger card) {
+    private RysorianBadger(final RysorianBadger card) {
         super(card);
     }
 

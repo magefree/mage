@@ -50,7 +50,7 @@ public final class VoidmageProdigy extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}")));
     }
 
-    public VoidmageProdigy(final VoidmageProdigy card) {
+    private VoidmageProdigy(final VoidmageProdigy card) {
         super(card);
     }
 

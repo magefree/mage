@@ -40,7 +40,7 @@ public final class SandstoneBridge extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public SandstoneBridge(final SandstoneBridge card) {
+    private SandstoneBridge(final SandstoneBridge card) {
         super(card);
     }
 

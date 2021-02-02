@@ -39,7 +39,7 @@ public final class StrengthOfArms extends CardImpl {
                 "If you control an Equipment, create a 1/1 white Human Soldier creature token."));
     }
 
-    public StrengthOfArms(final StrengthOfArms card) {
+    private StrengthOfArms(final StrengthOfArms card) {
         super(card);
     }
 

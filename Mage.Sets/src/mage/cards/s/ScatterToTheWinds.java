@@ -26,7 +26,7 @@ public final class ScatterToTheWinds extends CardImpl {
         this.addAbility(new AwakenAbility(this, 3, "{4}{U}{U}"));
     }
 
-    public ScatterToTheWinds(final ScatterToTheWinds card) {
+    private ScatterToTheWinds(final ScatterToTheWinds card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class FrostMarsh extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public FrostMarsh(final FrostMarsh card) {
+    private FrostMarsh(final FrostMarsh card) {
         super(card);
     }
 

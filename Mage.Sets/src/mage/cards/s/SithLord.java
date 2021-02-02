@@ -38,7 +38,7 @@ public final class SithLord extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new SithLordEffect(), rule));
     }
 
-    public SithLord(final SithLord card) {
+    private SithLord(final SithLord card) {
         super(card);
     }
 

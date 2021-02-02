@@ -34,7 +34,7 @@ public final class SlateStreetRuffian extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new SlateStreetRuffianDiscardEffect(), false));
     }
 
-    public SlateStreetRuffian(final SlateStreetRuffian card) {
+    private SlateStreetRuffian(final SlateStreetRuffian card) {
         super(card);
     }
 

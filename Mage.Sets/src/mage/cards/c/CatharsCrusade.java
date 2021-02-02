@@ -31,7 +31,7 @@ public final class CatharsCrusade extends CardImpl {
         );
     }
 
-    public CatharsCrusade(final CatharsCrusade card) {
+    private CatharsCrusade(final CatharsCrusade card) {
         super(card);
     }
 

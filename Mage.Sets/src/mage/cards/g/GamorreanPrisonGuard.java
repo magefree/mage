@@ -40,7 +40,7 @@ public final class GamorreanPrisonGuard extends CardImpl {
 
     }
 
-    public GamorreanPrisonGuard(final GamorreanPrisonGuard card) {
+    private GamorreanPrisonGuard(final GamorreanPrisonGuard card) {
         super(card);
     }
 

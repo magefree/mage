@@ -28,7 +28,7 @@ public final class LlanowarKnight extends CardImpl {
         
     }
 
-    public LlanowarKnight(final LlanowarKnight card) {
+    private LlanowarKnight(final LlanowarKnight card) {
         super(card);
     }
 

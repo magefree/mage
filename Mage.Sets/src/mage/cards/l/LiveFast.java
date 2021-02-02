@@ -31,7 +31,7 @@ public final class LiveFast extends CardImpl {
         getSpellAbility().addEffect(effect);
     }
 
-    public LiveFast(final LiveFast card) {
+    private LiveFast(final LiveFast card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class FromBeyond extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FromBeyond(final FromBeyond card) {
+    private FromBeyond(final FromBeyond card) {
         super(card);
     }
 

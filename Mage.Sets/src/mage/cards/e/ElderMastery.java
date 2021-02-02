@@ -42,7 +42,7 @@ public final class ElderMastery extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DiscardTargetEffect(2), "enchanted", false, true, false));
     }
 
-    public ElderMastery(final ElderMastery card) {
+    private ElderMastery(final ElderMastery card) {
         super(card);
     }
 

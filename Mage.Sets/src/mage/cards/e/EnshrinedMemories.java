@@ -22,7 +22,7 @@ public final class EnshrinedMemories extends CardImpl {
         this.getSpellAbility().addEffect(new RevealLibraryPutIntoHandEffect(ManacostVariableValue.instance, StaticFilters.FILTER_CARD_CREATURE, Zone.LIBRARY, true));
     }
 
-    public EnshrinedMemories(final EnshrinedMemories card) {
+    private EnshrinedMemories(final EnshrinedMemories card) {
         super(card);
     }
 

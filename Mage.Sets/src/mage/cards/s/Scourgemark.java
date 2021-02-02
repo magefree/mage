@@ -42,7 +42,7 @@ public final class Scourgemark extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,0, Duration.WhileOnBattlefield)));
     }
 
-    public Scourgemark(final Scourgemark card) {
+    private Scourgemark(final Scourgemark card) {
         super(card);
     }
 

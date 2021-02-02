@@ -35,7 +35,7 @@ public final class VillainousWealth extends CardImpl {
 
     }
 
-    public VillainousWealth(final VillainousWealth card) {
+    private VillainousWealth(final VillainousWealth card) {
         super(card);
     }
 

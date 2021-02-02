@@ -33,7 +33,7 @@ public final class SkullCatapult extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkullCatapult(final SkullCatapult card) {
+    private SkullCatapult(final SkullCatapult card) {
         super(card);
     }
 

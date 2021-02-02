@@ -47,7 +47,7 @@ public final class ThoughtHarvester extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThoughtHarvester(final ThoughtHarvester card) {
+    private ThoughtHarvester(final ThoughtHarvester card) {
         super(card);
     }
 

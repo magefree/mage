@@ -43,7 +43,7 @@ public final class VigorousCharge extends CardImpl {
 
     }
 
-    public VigorousCharge(final VigorousCharge card) {
+    private VigorousCharge(final VigorousCharge card) {
         super(card);
     }
 

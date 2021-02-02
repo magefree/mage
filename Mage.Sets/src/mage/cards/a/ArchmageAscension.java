@@ -40,7 +40,7 @@ public final class ArchmageAscension extends CardImpl {
 
     }
 
-    public ArchmageAscension(final ArchmageAscension card) {
+    private ArchmageAscension(final ArchmageAscension card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class SenselessRage extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{R}")));
     }
 
-    public SenselessRage(final SenselessRage card) {
+    private SenselessRage(final SenselessRage card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class FoolsTome extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FoolsTome(final FoolsTome card) {
+    private FoolsTome(final FoolsTome card) {
         super(card);
     }
 

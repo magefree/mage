@@ -25,7 +25,7 @@ public final class Quasiduplicate extends CardImpl {
         this.addAbility(new JumpStartAbility(this));
     }
 
-    public Quasiduplicate(final Quasiduplicate card) {
+    private Quasiduplicate(final Quasiduplicate card) {
         super(card);
     }
 

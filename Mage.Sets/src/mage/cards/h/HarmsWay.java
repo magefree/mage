@@ -31,7 +31,7 @@ public final class HarmsWay extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public HarmsWay(final HarmsWay card) {
+    private HarmsWay(final HarmsWay card) {
         super(card);
     }
 

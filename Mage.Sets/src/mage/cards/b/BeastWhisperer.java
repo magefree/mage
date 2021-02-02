@@ -31,7 +31,7 @@ public final class BeastWhisperer extends CardImpl {
         ));
     }
 
-    public BeastWhisperer(final BeastWhisperer card) {
+    private BeastWhisperer(final BeastWhisperer card) {
         super(card);
     }
 

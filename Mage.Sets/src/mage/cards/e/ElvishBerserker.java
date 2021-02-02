@@ -33,7 +33,7 @@ public final class ElvishBerserker extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
-    public ElvishBerserker(final ElvishBerserker card) {
+    private ElvishBerserker(final ElvishBerserker card) {
         super(card);
     }
 

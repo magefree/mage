@@ -40,7 +40,7 @@ public final class SwiftfootBoots extends CardImpl {
 
     }
 
-    public SwiftfootBoots(final SwiftfootBoots card) {
+    private SwiftfootBoots(final SwiftfootBoots card) {
         super(card);
     }
 

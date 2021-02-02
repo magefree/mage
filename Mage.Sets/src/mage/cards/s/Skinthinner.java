@@ -44,7 +44,7 @@ public final class Skinthinner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Skinthinner(final Skinthinner card) {
+    private Skinthinner(final Skinthinner card) {
         super(card);
     }
 

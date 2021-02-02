@@ -55,7 +55,7 @@ public final class PossessedSkaab extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PossessedSkaabDiesEffect()));
     }
 
-    public PossessedSkaab(final PossessedSkaab card) {
+    private PossessedSkaab(final PossessedSkaab card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class BloodfireDwarf extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodfireDwarf(final BloodfireDwarf card) {
+    private BloodfireDwarf(final BloodfireDwarf card) {
         super(card);
     }
 

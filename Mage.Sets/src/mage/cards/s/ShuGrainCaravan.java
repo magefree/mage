@@ -27,7 +27,7 @@ public final class ShuGrainCaravan extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2)));
     }
 
-    public ShuGrainCaravan(final ShuGrainCaravan card) {
+    private ShuGrainCaravan(final ShuGrainCaravan card) {
         super(card);
     }
 

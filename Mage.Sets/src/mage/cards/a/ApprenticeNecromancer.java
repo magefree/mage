@@ -48,7 +48,7 @@ public final class ApprenticeNecromancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ApprenticeNecromancer(final ApprenticeNecromancer card) {
+    private ApprenticeNecromancer(final ApprenticeNecromancer card) {
         super(card);
     }
 

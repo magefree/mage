@@ -50,7 +50,7 @@ public final class NissaRevane extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public NissaRevane(final NissaRevane card) {
+    private NissaRevane(final NissaRevane card) {
         super(card);
     }
 

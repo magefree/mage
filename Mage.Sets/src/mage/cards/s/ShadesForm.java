@@ -48,7 +48,7 @@ public final class ShadesForm extends CardImpl {
     }
 
 
-    public ShadesForm(final ShadesForm card) {
+    private ShadesForm(final ShadesForm card) {
         super(card);
     }
 

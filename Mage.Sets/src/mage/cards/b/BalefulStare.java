@@ -35,7 +35,7 @@ public final class BalefulStare extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public BalefulStare(final BalefulStare card) {
+    private BalefulStare(final BalefulStare card) {
         super(card);
     }
 

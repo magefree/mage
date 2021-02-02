@@ -41,7 +41,7 @@ public final class ShadowTrooper extends CardImpl {
 
     }
 
-    public ShadowTrooper(final ShadowTrooper card) {
+    private ShadowTrooper(final ShadowTrooper card) {
         super(card);
     }
 

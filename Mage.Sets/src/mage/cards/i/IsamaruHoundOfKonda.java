@@ -25,7 +25,7 @@ public final class IsamaruHoundOfKonda extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public IsamaruHoundOfKonda(final IsamaruHoundOfKonda card) {
+    private IsamaruHoundOfKonda(final IsamaruHoundOfKonda card) {
         super(card);
     }
 

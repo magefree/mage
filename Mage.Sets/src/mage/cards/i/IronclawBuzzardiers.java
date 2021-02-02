@@ -44,7 +44,7 @@ public final class IronclawBuzzardiers extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public IronclawBuzzardiers(final IronclawBuzzardiers card) {
+    private IronclawBuzzardiers(final IronclawBuzzardiers card) {
         super(card);
     }
 

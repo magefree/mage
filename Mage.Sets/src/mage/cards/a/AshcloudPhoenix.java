@@ -47,7 +47,7 @@ public final class AshcloudPhoenix extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(effect));
     }
 
-    public AshcloudPhoenix(final AshcloudPhoenix card) {
+    private AshcloudPhoenix(final AshcloudPhoenix card) {
         super(card);
     }
 

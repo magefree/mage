@@ -35,7 +35,7 @@ public final class BurningTreeShaman extends CardImpl {
         this.addAbility(new BurningTreeShamanTriggeredAbility());
     }
 
-    public BurningTreeShaman(final BurningTreeShaman card) {
+    private BurningTreeShaman(final BurningTreeShaman card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class OpulentPalace extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public OpulentPalace(final OpulentPalace card) {
+    private OpulentPalace(final OpulentPalace card) {
         super(card);
     }
 

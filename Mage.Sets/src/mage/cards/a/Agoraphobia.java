@@ -44,7 +44,7 @@ public final class Agoraphobia extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{2}{U}")));
     }
 
-    public Agoraphobia(final Agoraphobia card) {
+    private Agoraphobia(final Agoraphobia card) {
         super(card);
     }
 

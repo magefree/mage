@@ -51,7 +51,7 @@ public final class HellkiteIgniter extends CardImpl {
                 new ManaCostsImpl("{1}{R}")));
     }
 
-    public HellkiteIgniter(final HellkiteIgniter card) {
+    private HellkiteIgniter(final HellkiteIgniter card) {
         super(card);
     }
 

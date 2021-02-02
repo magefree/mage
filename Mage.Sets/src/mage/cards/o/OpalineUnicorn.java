@@ -27,7 +27,7 @@ public final class OpalineUnicorn extends CardImpl {
         this.addAbility(new AnyColorManaAbility(new TapSourceCost()));
     }
 
-    public OpalineUnicorn(final OpalineUnicorn card) {
+    private OpalineUnicorn(final OpalineUnicorn card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class AgentOfTheFates extends CardImpl {
         this.addAbility(new HeroicAbility(new SacrificeOpponentsEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
     }
 
-    public AgentOfTheFates(final AgentOfTheFates card) {
+    private AgentOfTheFates(final AgentOfTheFates card) {
         super(card);
     }
 

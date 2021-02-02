@@ -38,7 +38,7 @@ public final class DevastatingDreams extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(GetXValue.instance, new FilterCreaturePermanent()));
     }
 
-    public DevastatingDreams(final DevastatingDreams card) {
+    private DevastatingDreams(final DevastatingDreams card) {
         super(card);
     }
 

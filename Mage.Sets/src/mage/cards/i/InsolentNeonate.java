@@ -35,7 +35,7 @@ public final class InsolentNeonate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InsolentNeonate(final InsolentNeonate card) {
+    private InsolentNeonate(final InsolentNeonate card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class EnduringVictory extends CardImpl {
         this.getSpellAbility().addEffect(new BolsterEffect(1));
     }
 
-    public EnduringVictory(final EnduringVictory card) {
+    private EnduringVictory(final EnduringVictory card) {
         super(card);
     }
 

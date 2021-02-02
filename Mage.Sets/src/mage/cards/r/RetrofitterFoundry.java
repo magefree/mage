@@ -69,7 +69,7 @@ public final class RetrofitterFoundry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RetrofitterFoundry(final RetrofitterFoundry card) {
+    private RetrofitterFoundry(final RetrofitterFoundry card) {
         super(card);
     }
 

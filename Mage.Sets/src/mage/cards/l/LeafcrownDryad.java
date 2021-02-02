@@ -43,7 +43,7 @@ public final class LeafcrownDryad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LeafcrownDryad(final LeafcrownDryad card) {
+    private LeafcrownDryad(final LeafcrownDryad card) {
         super(card);
     }
 

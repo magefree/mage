@@ -29,7 +29,7 @@ public final class NeutralizingBlast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public NeutralizingBlast(final NeutralizingBlast card) {
+    private NeutralizingBlast(final NeutralizingBlast card) {
         super(card);
     }
 

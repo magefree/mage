@@ -33,7 +33,7 @@ public final class SylvanRanger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
     }
 
-    public SylvanRanger(final SylvanRanger card) {
+    private SylvanRanger(final SylvanRanger card) {
         super(card);
     }
 

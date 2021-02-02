@@ -40,7 +40,7 @@ public final class EnfysNest extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EnfysNest(final EnfysNest card) {
+    private EnfysNest(final EnfysNest card) {
         super(card);
     }
 

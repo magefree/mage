@@ -29,7 +29,7 @@ public final class FlowstoneGiant extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -2, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public FlowstoneGiant(final FlowstoneGiant card) {
+    private FlowstoneGiant(final FlowstoneGiant card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class TragicArrogance extends CardImpl {
         this.getSpellAbility().addEffect(new TragicArroganceffect());
     }
 
-    public TragicArrogance(final TragicArrogance card) {
+    private TragicArrogance(final TragicArrogance card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class FledglingDjinn extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), TargetController.YOU, false));
     }
 
-    public FledglingDjinn(final FledglingDjinn card) {
+    private FledglingDjinn(final FledglingDjinn card) {
         super(card);
     }
 

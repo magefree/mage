@@ -33,7 +33,7 @@ public final class TempleAltisaur extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TempleAltisaurPreventEffect()));
     }
 
-    public TempleAltisaur(final TempleAltisaur card) {
+    private TempleAltisaur(final TempleAltisaur card) {
         super(card);
     }
 

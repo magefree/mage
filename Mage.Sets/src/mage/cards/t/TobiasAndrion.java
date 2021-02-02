@@ -25,7 +25,7 @@ public final class TobiasAndrion extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public TobiasAndrion(final TobiasAndrion card) {
+    private TobiasAndrion(final TobiasAndrion card) {
         super(card);
     }
 

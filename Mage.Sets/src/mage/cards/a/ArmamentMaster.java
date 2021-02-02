@@ -38,7 +38,7 @@ public final class ArmamentMaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArmamentMasterEffect()));
     }
 
-    public ArmamentMaster(final ArmamentMaster card) {
+    private ArmamentMaster(final ArmamentMaster card) {
         super(card);
     }
 

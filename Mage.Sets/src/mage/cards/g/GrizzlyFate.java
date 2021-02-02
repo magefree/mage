@@ -36,7 +36,7 @@ public final class GrizzlyFate extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{G}{G}"), TimingRule.SORCERY));
     }
 
-    public GrizzlyFate(final GrizzlyFate card) {
+    private GrizzlyFate(final GrizzlyFate card) {
         super(card);
     }
 

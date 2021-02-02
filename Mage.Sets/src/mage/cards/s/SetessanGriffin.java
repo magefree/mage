@@ -33,7 +33,7 @@ public final class SetessanGriffin extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2,2, Duration.EndOfTurn), new ManaCostsImpl("{2}{G}{G}")));
     }
 
-    public SetessanGriffin(final SetessanGriffin card) {
+    private SetessanGriffin(final SetessanGriffin card) {
         super(card);
     }
 

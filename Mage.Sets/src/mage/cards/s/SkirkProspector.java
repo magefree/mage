@@ -40,7 +40,7 @@ public final class SkirkProspector extends CardImpl {
                 new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public SkirkProspector(final SkirkProspector card) {
+    private SkirkProspector(final SkirkProspector card) {
         super(card);
     }
 

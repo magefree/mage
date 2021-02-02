@@ -34,7 +34,7 @@ public final class DrownInFilth extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(landCards, landCards, Duration.EndOfTurn));
     }
 
-    public DrownInFilth(final DrownInFilth card) {
+    private DrownInFilth(final DrownInFilth card) {
         super(card);
     }
 

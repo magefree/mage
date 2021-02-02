@@ -34,7 +34,7 @@ public final class AvenFogbringer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AvenFogbringer(final AvenFogbringer card) {
+    private AvenFogbringer(final AvenFogbringer card) {
         super(card);
     }
 

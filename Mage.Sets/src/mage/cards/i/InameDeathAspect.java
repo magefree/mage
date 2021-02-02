@@ -31,7 +31,7 @@ public final class InameDeathAspect extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InameDeathAspectEffect(), true));
     }
 
-    public InameDeathAspect(final InameDeathAspect card) {
+    private InameDeathAspect(final InameDeathAspect card) {
         super(card);
     }
 

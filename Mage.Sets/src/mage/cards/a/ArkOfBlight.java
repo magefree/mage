@@ -31,7 +31,7 @@ public final class ArkOfBlight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArkOfBlight(final ArkOfBlight card) {
+    private ArkOfBlight(final ArkOfBlight card) {
         super(card);
     }
 

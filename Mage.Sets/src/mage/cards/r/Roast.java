@@ -32,7 +32,7 @@ public final class Roast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public Roast(final Roast card) {
+    private Roast(final Roast card) {
         super(card);
     }
 

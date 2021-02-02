@@ -35,7 +35,7 @@ public final class MuddleTheMixture extends CardImpl {
         this.addAbility(new TransmuteAbility("{1}{U}{U}"));
     }
 
-    public MuddleTheMixture(final MuddleTheMixture card) {
+    private MuddleTheMixture(final MuddleTheMixture card) {
         super(card);
     }
 

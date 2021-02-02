@@ -32,7 +32,7 @@ public final class JeeringHomunculus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JeeringHomunculus(final JeeringHomunculus card) {
+    private JeeringHomunculus(final JeeringHomunculus card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class SwoopingTalon extends CardImpl {
         this.addAbility(new ProvokeAbility());
     }
 
-    public SwoopingTalon(final SwoopingTalon card) {
+    private SwoopingTalon(final SwoopingTalon card) {
         super(card);
     }
 

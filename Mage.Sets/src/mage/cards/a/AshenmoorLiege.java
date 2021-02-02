@@ -56,7 +56,7 @@ public final class AshenmoorLiege extends CardImpl {
 
     }
 
-    public AshenmoorLiege(final AshenmoorLiege card) {
+    private AshenmoorLiege(final AshenmoorLiege card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class KefnetTheMindful extends CardImpl {
 
     }
 
-    public KefnetTheMindful(final KefnetTheMindful card) {
+    private KefnetTheMindful(final KefnetTheMindful card) {
         super(card);
     }
 

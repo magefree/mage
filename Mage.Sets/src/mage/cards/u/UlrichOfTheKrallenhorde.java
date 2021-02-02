@@ -46,7 +46,7 @@ public final class UlrichOfTheKrallenhorde extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
-    public UlrichOfTheKrallenhorde(final UlrichOfTheKrallenhorde card) {
+    private UlrichOfTheKrallenhorde(final UlrichOfTheKrallenhorde card) {
         super(card);
     }
 

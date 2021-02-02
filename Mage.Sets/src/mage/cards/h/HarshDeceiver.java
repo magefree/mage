@@ -46,7 +46,7 @@ public final class HarshDeceiver extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new HarshDeceiverEffect(), new ManaCostsImpl("{2}")));
     }
 
-    public HarshDeceiver(final HarshDeceiver card) {
+    private HarshDeceiver(final HarshDeceiver card) {
         super(card);
     }
 

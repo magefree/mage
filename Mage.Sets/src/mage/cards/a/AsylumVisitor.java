@@ -44,7 +44,7 @@ public final class AsylumVisitor extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{B}")));
     }
 
-    public AsylumVisitor(final AsylumVisitor card) {
+    private AsylumVisitor(final AsylumVisitor card) {
         super(card);
     }
 

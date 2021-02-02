@@ -30,7 +30,7 @@ public final class DeadReckoning extends CardImpl {
 
     }
 
-    public DeadReckoning(final DeadReckoning card) {
+    private DeadReckoning(final DeadReckoning card) {
         super(card);
     }
 

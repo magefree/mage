@@ -35,7 +35,7 @@ public final class BakuAltar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BakuAltar(final BakuAltar card) {
+    private BakuAltar(final BakuAltar card) {
         super(card);
     }
 

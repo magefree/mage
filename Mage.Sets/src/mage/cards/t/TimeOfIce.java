@@ -62,7 +62,7 @@ public final class TimeOfIce extends CardImpl {
         this.addAbility(sagaAbility, new TimeOfIceWatcher());
     }
 
-    public TimeOfIce(final TimeOfIce card) {
+    private TimeOfIce(final TimeOfIce card) {
         super(card);
     }
 

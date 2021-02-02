@@ -41,7 +41,7 @@ public final class Illumination extends CardImpl {
         this.getSpellAbility().addEffect(new IlluminationEffect());
     }
 
-    public Illumination(final Illumination card) {
+    private Illumination(final Illumination card) {
         super(card);
     }
 

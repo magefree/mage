@@ -32,7 +32,7 @@ public final class DrifterIlDal extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{U}")), TargetController.YOU, false));
     }
 
-    public DrifterIlDal(final DrifterIlDal card) {
+    private DrifterIlDal(final DrifterIlDal card) {
         super(card);
     }
 

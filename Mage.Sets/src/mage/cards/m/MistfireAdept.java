@@ -44,7 +44,7 @@ public final class MistfireAdept extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MistfireAdept(final MistfireAdept card) {
+    private MistfireAdept(final MistfireAdept card) {
         super(card);
     }
 

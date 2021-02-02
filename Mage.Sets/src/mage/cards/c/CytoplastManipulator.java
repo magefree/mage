@@ -55,7 +55,7 @@ public final class CytoplastManipulator extends CardImpl {
         
     }
 
-    public CytoplastManipulator(final CytoplastManipulator card) {
+    private CytoplastManipulator(final CytoplastManipulator card) {
         super(card);
     }
 

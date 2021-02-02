@@ -36,7 +36,7 @@ public final class GracefulReprieve extends CardImpl {
 
     }
 
-    public GracefulReprieve(final GracefulReprieve card) {
+    private GracefulReprieve(final GracefulReprieve card) {
         super(card);
     }
 

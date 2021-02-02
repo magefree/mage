@@ -34,7 +34,7 @@ public final class DragonHunter extends CardImpl {
 
     }
 
-    public DragonHunter(final DragonHunter card) {
+    private DragonHunter(final DragonHunter card) {
         super(card);
     }
 

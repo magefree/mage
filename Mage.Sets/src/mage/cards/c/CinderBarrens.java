@@ -26,7 +26,7 @@ public final class CinderBarrens extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public CinderBarrens(final CinderBarrens card) {
+    private CinderBarrens(final CinderBarrens card) {
         super(card);
     }
 

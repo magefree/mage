@@ -35,7 +35,7 @@ public final class RustmouthOgre extends CardImpl {
         this.addAbility(new RustmouthOgreTriggeredAbility());
     }
 
-    public RustmouthOgre(final RustmouthOgre card) {
+    private RustmouthOgre(final RustmouthOgre card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class Alarum extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public Alarum(final Alarum card) {
+    private Alarum(final Alarum card) {
         super(card);
     }
 

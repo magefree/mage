@@ -25,7 +25,7 @@ public final class BitterRevelation extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
-    public BitterRevelation(final BitterRevelation card) {
+    private BitterRevelation(final BitterRevelation card) {
         super(card);
     }
 

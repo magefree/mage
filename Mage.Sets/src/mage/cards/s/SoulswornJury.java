@@ -39,7 +39,7 @@ public final class SoulswornJury extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoulswornJury(final SoulswornJury card) {
+    private SoulswornJury(final SoulswornJury card) {
         super(card);
     }
 

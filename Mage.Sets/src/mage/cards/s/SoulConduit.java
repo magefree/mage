@@ -32,7 +32,7 @@ public final class SoulConduit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoulConduit(final SoulConduit card) {
+    private SoulConduit(final SoulConduit card) {
         super(card);
     }
 

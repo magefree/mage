@@ -49,7 +49,7 @@ public final class IronHeartChimera extends CardImpl {
         addAbility(ability);
     }
 
-    public IronHeartChimera(final IronHeartChimera card) {
+    private IronHeartChimera(final IronHeartChimera card) {
         super(card);
     }
 

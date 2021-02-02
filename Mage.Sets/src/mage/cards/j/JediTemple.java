@@ -33,7 +33,7 @@ public final class JediTemple extends CardImpl {
 
     }
 
-    public JediTemple(final JediTemple card) {
+    private JediTemple(final JediTemple card) {
         super(card);
     }
 

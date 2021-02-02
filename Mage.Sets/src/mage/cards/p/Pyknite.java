@@ -30,7 +30,7 @@ public final class Pyknite extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse)), false));
     }
 
-    public Pyknite(final Pyknite card) {
+    private Pyknite(final Pyknite card) {
         super(card);
     }
 

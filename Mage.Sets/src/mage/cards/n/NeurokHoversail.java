@@ -27,7 +27,7 @@ public final class NeurokHoversail extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public NeurokHoversail(final NeurokHoversail card) {
+    private NeurokHoversail(final NeurokHoversail card) {
         super(card);
     }
 

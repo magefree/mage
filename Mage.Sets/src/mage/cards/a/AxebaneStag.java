@@ -22,7 +22,7 @@ public final class AxebaneStag extends CardImpl {
         this.toughness = new MageInt(7);
     }
 
-    public AxebaneStag(final AxebaneStag card) {
+    private AxebaneStag(final AxebaneStag card) {
         super(card);
     }
 

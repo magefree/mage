@@ -44,7 +44,7 @@ public final class InsultInjury extends SplitCard {
         getRightHalfCard().getSpellAbility().addEffect(new InjuryEffect());
     }
 
-    public InsultInjury(final InsultInjury card) {
+    private InsultInjury(final InsultInjury card) {
         super(card);
     }
 

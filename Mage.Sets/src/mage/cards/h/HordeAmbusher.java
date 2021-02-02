@@ -55,7 +55,7 @@ public final class HordeAmbusher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HordeAmbusher(final HordeAmbusher card) {
+    private HordeAmbusher(final HordeAmbusher card) {
         super(card);
     }
 

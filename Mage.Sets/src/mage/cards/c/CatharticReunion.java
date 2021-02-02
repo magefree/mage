@@ -26,7 +26,7 @@ public final class CatharticReunion extends CardImpl {
         getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
     }
 
-    public CatharticReunion(final CatharticReunion card) {
+    private CatharticReunion(final CatharticReunion card) {
         super(card);
     }
 

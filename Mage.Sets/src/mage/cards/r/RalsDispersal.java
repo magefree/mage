@@ -33,7 +33,7 @@ public final class RalsDispersal extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public RalsDispersal(final RalsDispersal card) {
+    private RalsDispersal(final RalsDispersal card) {
         super(card);
     }
 

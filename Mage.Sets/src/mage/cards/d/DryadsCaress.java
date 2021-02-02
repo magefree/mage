@@ -36,7 +36,7 @@ public final class DryadsCaress extends CardImpl {
                 new ManaWasSpentCondition(ColoredManaSymbol.W), "If {W} was spent to cast this spell, untap all creatures you control"));
     }
 
-    public DryadsCaress(final DryadsCaress card) {
+    private DryadsCaress(final DryadsCaress card) {
         super(card);
     }
 

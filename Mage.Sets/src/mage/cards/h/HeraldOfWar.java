@@ -39,7 +39,7 @@ public final class HeraldOfWar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HeraldOfWarCostReductionEffect()));
     }
 
-    public HeraldOfWar(final HeraldOfWar card) {
+    private HeraldOfWar(final HeraldOfWar card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class ShapeshiftersMarrow extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ShapeshiftersMarrowEffect(), TargetController.OPPONENT, false));
     }
 
-    public ShapeshiftersMarrow(final ShapeshiftersMarrow card) {
+    private ShapeshiftersMarrow(final ShapeshiftersMarrow card) {
         super(card);
     }
 

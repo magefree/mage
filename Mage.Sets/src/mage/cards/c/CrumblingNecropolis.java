@@ -25,7 +25,7 @@ public final class CrumblingNecropolis extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public CrumblingNecropolis(final CrumblingNecropolis card) {
+    private CrumblingNecropolis(final CrumblingNecropolis card) {
         super(card);
     }
 

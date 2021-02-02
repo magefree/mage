@@ -27,7 +27,7 @@ public final class Flusterstorm extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public Flusterstorm(final Flusterstorm card) {
+    private Flusterstorm(final Flusterstorm card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class DefenderEnVec extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DefenderEnVec(final DefenderEnVec card) {
+    private DefenderEnVec(final DefenderEnVec card) {
         super(card);
     }
 

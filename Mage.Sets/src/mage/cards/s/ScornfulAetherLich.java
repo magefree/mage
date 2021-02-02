@@ -36,7 +36,7 @@ public final class ScornfulAetherLich extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScornfulAetherLich(final ScornfulAetherLich card) {
+    private ScornfulAetherLich(final ScornfulAetherLich card) {
         super(card);
     }
 

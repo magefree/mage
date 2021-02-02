@@ -41,7 +41,7 @@ public final class LeapOfFlame extends CardImpl {
 
     }
 
-    public LeapOfFlame(final LeapOfFlame card) {
+    private LeapOfFlame(final LeapOfFlame card) {
         super(card);
     }
 

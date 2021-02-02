@@ -39,7 +39,7 @@ public final class DiaochanArtfulBeauty extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DiaochanArtfulBeauty(final DiaochanArtfulBeauty card) {
+    private DiaochanArtfulBeauty(final DiaochanArtfulBeauty card) {
         super(card);
     }
 

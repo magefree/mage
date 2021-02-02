@@ -34,7 +34,7 @@ public final class TreasureNabber extends CardImpl {
         this.addAbility(new TreasureNabberAbility());
     }
 
-    public TreasureNabber(final TreasureNabber card) {
+    private TreasureNabber(final TreasureNabber card) {
         super(card);
     }
 

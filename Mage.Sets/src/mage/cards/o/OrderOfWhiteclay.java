@@ -49,7 +49,7 @@ public final class OrderOfWhiteclay extends CardImpl {
         
     }
 
-    public OrderOfWhiteclay(final OrderOfWhiteclay card) {
+    private OrderOfWhiteclay(final OrderOfWhiteclay card) {
         super(card);
     }
 

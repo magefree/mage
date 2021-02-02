@@ -29,7 +29,7 @@ public final class SphinxsDecree extends CardImpl {
         this.getSpellAbility().addEffect(new SphinxsDecreeEffect());
     }
 
-    public SphinxsDecree(final SphinxsDecree card) {
+    private SphinxsDecree(final SphinxsDecree card) {
         super(card);
     }
 

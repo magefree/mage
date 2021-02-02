@@ -34,7 +34,7 @@ public final class ProdigalPyromancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ProdigalPyromancer(final ProdigalPyromancer card) {
+    private ProdigalPyromancer(final ProdigalPyromancer card) {
         super(card);
     }
 

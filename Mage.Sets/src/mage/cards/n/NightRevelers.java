@@ -38,7 +38,7 @@ public final class NightRevelers extends CardImpl {
                 "{this} has haste as long as an opponent controls a Human.")));
     }
 
-    public NightRevelers(final NightRevelers card) {
+    private NightRevelers(final NightRevelers card) {
         super(card);
     }
 

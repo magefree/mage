@@ -26,7 +26,7 @@ public final class Brushstrider extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public Brushstrider(final Brushstrider card) {
+    private Brushstrider(final Brushstrider card) {
         super(card);
     }
 

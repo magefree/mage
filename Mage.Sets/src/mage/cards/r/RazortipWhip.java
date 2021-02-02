@@ -29,7 +29,7 @@ public final class RazortipWhip extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RazortipWhip(final RazortipWhip card) {
+    private RazortipWhip(final RazortipWhip card) {
         super(card);
     }
 

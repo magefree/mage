@@ -48,7 +48,7 @@ public final class EntropicSpecter extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1, false), false, true));
     }
 
-    public EntropicSpecter(final EntropicSpecter card) {
+    private EntropicSpecter(final EntropicSpecter card) {
         super(card);
     }
 

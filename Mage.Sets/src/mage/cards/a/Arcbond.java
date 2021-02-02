@@ -39,7 +39,7 @@ public final class Arcbond extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Arcbond(final Arcbond card) {
+    private Arcbond(final Arcbond card) {
         super(card);
     }
 

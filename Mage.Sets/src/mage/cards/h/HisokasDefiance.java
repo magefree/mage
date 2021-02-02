@@ -30,7 +30,7 @@ public final class HisokasDefiance extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
-    public HisokasDefiance(final HisokasDefiance card) {
+    private HisokasDefiance(final HisokasDefiance card) {
         super(card);
     }
 

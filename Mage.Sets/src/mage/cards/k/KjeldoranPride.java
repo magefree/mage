@@ -53,7 +53,7 @@ public final class KjeldoranPride extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KjeldoranPride(final KjeldoranPride card) {
+    private KjeldoranPride(final KjeldoranPride card) {
         super(card);
     }
 

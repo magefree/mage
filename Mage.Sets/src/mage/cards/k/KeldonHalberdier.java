@@ -30,7 +30,7 @@ public final class KeldonHalberdier extends CardImpl {
         this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{R}"), this));
     }
 
-    public KeldonHalberdier(final KeldonHalberdier card) {
+    private KeldonHalberdier(final KeldonHalberdier card) {
         super(card);
     }
 

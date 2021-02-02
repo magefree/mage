@@ -38,7 +38,7 @@ public final class AphettoExterminator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AphettoExterminator(final AphettoExterminator card) {
+    private AphettoExterminator(final AphettoExterminator card) {
         super(card);
     }
 

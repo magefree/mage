@@ -42,7 +42,7 @@ public final class DoomedNecromancer extends CardImpl {
 
     }
 
-    public DoomedNecromancer(final DoomedNecromancer card) {
+    private DoomedNecromancer(final DoomedNecromancer card) {
         super(card);
     }
 

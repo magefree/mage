@@ -27,7 +27,7 @@ public final class WallOfFire extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public WallOfFire(final WallOfFire card) {
+    private WallOfFire(final WallOfFire card) {
         super(card);
     }
 

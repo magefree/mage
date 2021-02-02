@@ -32,7 +32,7 @@ public final class DuskmantleHouseOfShadow extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DuskmantleHouseOfShadow(final DuskmantleHouseOfShadow card) {
+    private DuskmantleHouseOfShadow(final DuskmantleHouseOfShadow card) {
         super(card);
     }
 

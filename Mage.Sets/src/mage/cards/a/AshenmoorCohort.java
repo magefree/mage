@@ -49,7 +49,7 @@ public final class AshenmoorCohort extends CardImpl {
 
     }
 
-    public AshenmoorCohort(final AshenmoorCohort card) {
+    private AshenmoorCohort(final AshenmoorCohort card) {
         super(card);
     }
 

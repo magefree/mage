@@ -38,7 +38,7 @@ public final class SpeederTrooper extends CardImpl {
 
     }
 
-    public SpeederTrooper(final SpeederTrooper card) {
+    private SpeederTrooper(final SpeederTrooper card) {
         super(card);
     }
 

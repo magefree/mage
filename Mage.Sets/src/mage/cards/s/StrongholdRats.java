@@ -30,7 +30,7 @@ public final class StrongholdRats extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardEachPlayerEffect(), false));
     }
 
-    public StrongholdRats(final StrongholdRats card) {
+    private StrongholdRats(final StrongholdRats card) {
         super(card);
     }
 

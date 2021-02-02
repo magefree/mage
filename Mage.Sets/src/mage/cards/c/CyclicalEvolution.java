@@ -37,7 +37,7 @@ public final class CyclicalEvolution extends CardImpl {
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl<>("{2}{G}"), this));
     }
 
-    public CyclicalEvolution(final CyclicalEvolution card) {
+    private CyclicalEvolution(final CyclicalEvolution card) {
         super(card);
     }
 

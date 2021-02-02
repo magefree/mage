@@ -47,7 +47,7 @@ public final class GiltLeafWinnower extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GiltLeafWinnower(final GiltLeafWinnower card) {
+    private GiltLeafWinnower(final GiltLeafWinnower card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class VedalkenEntrancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VedalkenEntrancer(final VedalkenEntrancer card) {
+    private VedalkenEntrancer(final VedalkenEntrancer card) {
         super(card);
     }
 

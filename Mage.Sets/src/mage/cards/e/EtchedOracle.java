@@ -38,7 +38,7 @@ public final class EtchedOracle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EtchedOracle(final EtchedOracle card) {
+    private EtchedOracle(final EtchedOracle card) {
         super(card);
     }
 

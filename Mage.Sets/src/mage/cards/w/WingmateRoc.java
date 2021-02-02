@@ -49,7 +49,7 @@ public final class WingmateRoc extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }
 
-    public WingmateRoc(final WingmateRoc card) {
+    private WingmateRoc(final WingmateRoc card) {
         super(card);
     }
 

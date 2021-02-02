@@ -35,7 +35,7 @@ public final class AerialVolley extends CardImpl {
 
     }
 
-    public AerialVolley(final AerialVolley card) {
+    private AerialVolley(final AerialVolley card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class IronWill extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public IronWill(final IronWill card) {
+    private IronWill(final IronWill card) {
         super(card);
     }
 

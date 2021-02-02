@@ -31,7 +31,7 @@ public final class PredatorsRapport extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
-    public PredatorsRapport(final PredatorsRapport card) {
+    private PredatorsRapport(final PredatorsRapport card) {
         super(card);
     }
 

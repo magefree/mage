@@ -36,7 +36,7 @@ public final class WhiplashTrap extends CardImpl {
 
     }
 
-    public WhiplashTrap(final WhiplashTrap card) {
+    private WhiplashTrap(final WhiplashTrap card) {
         super(card);
     }
 

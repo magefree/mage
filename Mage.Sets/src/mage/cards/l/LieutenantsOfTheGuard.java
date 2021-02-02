@@ -38,7 +38,7 @@ public final class LieutenantsOfTheGuard extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LieutenantsOfTheGuardDilemmaEffect(), false, "<i>Council's dilemma</i> &mdash; "));
     }
 
-    public LieutenantsOfTheGuard(final LieutenantsOfTheGuard card) {
+    private LieutenantsOfTheGuard(final LieutenantsOfTheGuard card) {
         super(card);
     }
 

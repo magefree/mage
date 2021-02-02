@@ -32,7 +32,7 @@ public final class GuardianOfSolitude extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GuardianOfSolitude(final GuardianOfSolitude card) {
+    private GuardianOfSolitude(final GuardianOfSolitude card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class ManaClash extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public ManaClash(final ManaClash card) {
+    private ManaClash(final ManaClash card) {
         super(card);
     }
 

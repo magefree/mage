@@ -26,7 +26,7 @@ public final class Fecundity extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new FecundityEffect(), false, false, true));
     }
 
-    public Fecundity(final Fecundity card) {
+    private Fecundity(final Fecundity card) {
         super(card);
     }
 

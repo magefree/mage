@@ -29,7 +29,7 @@ public final class GhostlySentinel extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public GhostlySentinel(final GhostlySentinel card) {
+    private GhostlySentinel(final GhostlySentinel card) {
         super(card);
     }
 

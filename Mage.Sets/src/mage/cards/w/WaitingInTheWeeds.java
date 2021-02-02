@@ -30,7 +30,7 @@ public final class WaitingInTheWeeds extends CardImpl {
         this.getSpellAbility().addEffect(new WaitingInTheWeedsEffect());
     }
 
-    public WaitingInTheWeeds(final WaitingInTheWeeds card) {
+    private WaitingInTheWeeds(final WaitingInTheWeeds card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class SwelteringSuns extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
     }
 
-    public SwelteringSuns(final SwelteringSuns card) {
+    private SwelteringSuns(final SwelteringSuns card) {
         super(card);
     }
 

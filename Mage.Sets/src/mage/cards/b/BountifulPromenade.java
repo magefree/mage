@@ -35,7 +35,7 @@ public final class BountifulPromenade extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public BountifulPromenade(final BountifulPromenade card) {
+    private BountifulPromenade(final BountifulPromenade card) {
         super(card);
     }
 

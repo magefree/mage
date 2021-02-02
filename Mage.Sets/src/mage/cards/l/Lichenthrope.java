@@ -43,7 +43,7 @@ public final class Lichenthrope extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance()), TargetController.YOU, false));
     }
 
-    public Lichenthrope(final Lichenthrope card) {
+    private Lichenthrope(final Lichenthrope card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class FickleEfreet extends CardImpl {
                 new AtTheEndOfCombatDelayedTriggeredAbility(new FickleEfreetChangeControlEffect()), true), false));
     }
 
-    public FickleEfreet(final FickleEfreet card) {
+    private FickleEfreet(final FickleEfreet card) {
         super(card);
     }
 

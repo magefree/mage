@@ -58,7 +58,7 @@ public final class MeanderingTowershell extends CardImpl {
 
     }
 
-    public MeanderingTowershell(final MeanderingTowershell card) {
+    private MeanderingTowershell(final MeanderingTowershell card) {
         super(card);
     }
 

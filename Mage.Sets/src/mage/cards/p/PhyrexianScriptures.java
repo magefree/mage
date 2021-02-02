@@ -62,7 +62,7 @@ public final class PhyrexianScriptures extends CardImpl {
         this.addAbility(sagaAbility);
     }
 
-    public PhyrexianScriptures(final PhyrexianScriptures card) {
+    private PhyrexianScriptures(final PhyrexianScriptures card) {
         super(card);
     }
 

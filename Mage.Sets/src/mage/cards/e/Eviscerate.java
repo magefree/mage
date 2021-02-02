@@ -22,7 +22,7 @@ public final class Eviscerate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Eviscerate(final Eviscerate card) {
+    private Eviscerate(final Eviscerate card) {
         super(card);
     }
 

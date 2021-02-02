@@ -29,7 +29,7 @@ public final class PaladinOfTheBloodstained extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new IxalanVampireToken())));
     }
 
-    public PaladinOfTheBloodstained(final PaladinOfTheBloodstained card) {
+    private PaladinOfTheBloodstained(final PaladinOfTheBloodstained card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class TickingGnomes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TickingGnomes(final TickingGnomes card) {
+    private TickingGnomes(final TickingGnomes card) {
         super(card);
     }
 

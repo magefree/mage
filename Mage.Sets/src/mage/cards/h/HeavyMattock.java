@@ -35,7 +35,7 @@ public final class HeavyMattock extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public HeavyMattock(final HeavyMattock card) {
+    private HeavyMattock(final HeavyMattock card) {
         super(card);
     }
 

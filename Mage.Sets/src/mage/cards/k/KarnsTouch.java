@@ -37,7 +37,7 @@ public final class KarnsTouch extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public KarnsTouch(final KarnsTouch card) {
+    private KarnsTouch(final KarnsTouch card) {
         super(card);
     }
 

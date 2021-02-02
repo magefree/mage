@@ -52,7 +52,7 @@ public final class SarkhanUnbroken extends CardImpl {
         this.addAbility(new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, Integer.MAX_VALUE, dragonFilter)), -8));
     }
 
-    public SarkhanUnbroken(final SarkhanUnbroken card) {
+    private SarkhanUnbroken(final SarkhanUnbroken card) {
         super(card);
     }
 

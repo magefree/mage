@@ -46,7 +46,7 @@ public final class OrcSureshot extends CardImpl {
         
     }
 
-    public OrcSureshot(final OrcSureshot card) {
+    private OrcSureshot(final OrcSureshot card) {
         super(card);
     }
 

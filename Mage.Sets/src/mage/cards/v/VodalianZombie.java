@@ -27,7 +27,7 @@ public final class VodalianZombie extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.GREEN));
     }
 
-    public VodalianZombie(final VodalianZombie card) {
+    private VodalianZombie(final VodalianZombie card) {
         super(card);
     }
 

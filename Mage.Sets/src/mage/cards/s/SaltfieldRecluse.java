@@ -36,7 +36,7 @@ public final class SaltfieldRecluse extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SaltfieldRecluse(final SaltfieldRecluse card) {
+    private SaltfieldRecluse(final SaltfieldRecluse card) {
         super(card);
     }
 

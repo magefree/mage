@@ -30,7 +30,7 @@ public final class Flashfires extends CardImpl {
         
     }
 
-    public Flashfires(final Flashfires card) {
+    private Flashfires(final Flashfires card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class AbzanCharm extends CardImpl {
 
     }
 
-    public AbzanCharm(final AbzanCharm card) {
+    private AbzanCharm(final AbzanCharm card) {
         super(card);
     }
 

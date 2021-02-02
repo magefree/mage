@@ -45,7 +45,7 @@ public final class SoulFoundry extends CardImpl {
 
     }
 
-    public SoulFoundry(final SoulFoundry card) {
+    private SoulFoundry(final SoulFoundry card) {
         super(card);
     }
 

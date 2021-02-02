@@ -34,7 +34,7 @@ public final class SlimyKavu extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SlimyKavu(final SlimyKavu card) {
+    private SlimyKavu(final SlimyKavu card) {
         super(card);
     }
 

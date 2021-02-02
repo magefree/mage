@@ -33,7 +33,7 @@ public final class ManaSeverance extends CardImpl {
         this.getSpellAbility().addEffect(new ManaSeveranceEffect());
     }
     
-    public ManaSeverance(final ManaSeverance card) {
+    private ManaSeverance(final ManaSeverance card) {
         super(card);
     }
     

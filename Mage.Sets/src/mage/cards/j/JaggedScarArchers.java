@@ -52,7 +52,7 @@ public final class JaggedScarArchers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JaggedScarArchers(final JaggedScarArchers card) {
+    private JaggedScarArchers(final JaggedScarArchers card) {
         super(card);
     }
 

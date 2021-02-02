@@ -43,7 +43,7 @@ public final class SphinxOfLostTruths extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SphinxOfLostTruths(final SphinxOfLostTruths card) {
+    private SphinxOfLostTruths(final SphinxOfLostTruths card) {
         super(card);
     }
 

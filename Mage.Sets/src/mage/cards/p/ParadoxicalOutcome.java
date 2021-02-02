@@ -46,7 +46,7 @@ public final class ParadoxicalOutcome extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(paradoxicalOutcomeValue));
     }
 
-    public ParadoxicalOutcome(final ParadoxicalOutcome card) {
+    private ParadoxicalOutcome(final ParadoxicalOutcome card) {
         super(card);
     }
 

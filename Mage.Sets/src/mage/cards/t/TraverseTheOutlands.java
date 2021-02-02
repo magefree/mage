@@ -32,7 +32,7 @@ public final class TraverseTheOutlands extends CardImpl {
         this.getSpellAbility().addEffect(new TraverseTheOutlandsEffect());
     }
 
-    public TraverseTheOutlands(final TraverseTheOutlands card) {
+    private TraverseTheOutlands(final TraverseTheOutlands card) {
         super(card);
     }
 

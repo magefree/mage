@@ -28,7 +28,7 @@ public final class ShardConvergence extends CardImpl {
         ));
     }
 
-    public ShardConvergence(final ShardConvergence card) {
+    private ShardConvergence(final ShardConvergence card) {
         super(card);
     }
 

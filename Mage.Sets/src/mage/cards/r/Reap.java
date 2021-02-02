@@ -35,7 +35,7 @@ public final class Reap extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(ReapAdjuster.instance);
     }
 
-    public Reap(final Reap card) {
+    private Reap(final Reap card) {
         super(card);
     }
 

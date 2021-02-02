@@ -24,7 +24,7 @@ public final class SpontaneousCombustion extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(3, new FilterCreaturePermanent()));
     }
 
-    public SpontaneousCombustion(final SpontaneousCombustion card) {
+    private SpontaneousCombustion(final SpontaneousCombustion card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class ShroudedLore extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public ShroudedLore(final ShroudedLore card) {
+    private ShroudedLore(final ShroudedLore card) {
         super(card);
     }
 

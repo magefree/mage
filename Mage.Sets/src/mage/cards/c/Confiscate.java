@@ -37,7 +37,7 @@ public final class Confiscate extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("permanent")));
     }
 
-    public Confiscate(final Confiscate card) {
+    private Confiscate(final Confiscate card) {
         super(card);
     }
 

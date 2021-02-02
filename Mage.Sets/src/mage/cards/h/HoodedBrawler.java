@@ -30,7 +30,7 @@ public final class HoodedBrawler extends CardImpl {
         this.addAbility(new ExertAbility(new BecomesExertSourceTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn))));
     }
 
-    public HoodedBrawler(final HoodedBrawler card) {
+    private HoodedBrawler(final HoodedBrawler card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class InfiniteObliteration extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public InfiniteObliteration(final InfiniteObliteration card) {
+    private InfiniteObliteration(final InfiniteObliteration card) {
         super(card);
     }
 

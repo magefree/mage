@@ -49,7 +49,7 @@ public final class AustereCommand extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
     }
 
-    public AustereCommand(final AustereCommand card) {
+    private AustereCommand(final AustereCommand card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class SacredCat extends CardImpl {
         this.addAbility(new EmbalmAbility(new ManaCostsImpl("{W}"), this));
     }
 
-    public SacredCat(final SacredCat card) {
+    private SacredCat(final SacredCat card) {
         super(card);
     }
 

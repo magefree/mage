@@ -26,7 +26,7 @@ public final class WinterSky extends CardImpl {
         this.getSpellAbility().addEffect(new WinterSkyEffect());
     }
 
-    public WinterSky(final WinterSky card) {
+    private WinterSky(final WinterSky card) {
         super(card);
     }
 

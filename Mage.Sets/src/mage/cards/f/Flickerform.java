@@ -51,7 +51,7 @@ public final class Flickerform extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FlickerformEffect(), new ManaCostsImpl("{2}{W}{W}")));
     }
 
-    public Flickerform(final Flickerform card) {
+    private Flickerform(final Flickerform card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class ShieldSphere extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new AddCountersSourceEffect(CounterType.M0M1.createInstance()), false));
     }
 
-    public ShieldSphere(final ShieldSphere card) {
+    private ShieldSphere(final ShieldSphere card) {
         super(card);
     }
 

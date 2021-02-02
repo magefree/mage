@@ -36,7 +36,7 @@ public final class BenalishTrapper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BenalishTrapper(final BenalishTrapper card) {
+    private BenalishTrapper(final BenalishTrapper card) {
         super(card);
     }
 

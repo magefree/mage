@@ -31,7 +31,7 @@ public final class Aeolipile extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Aeolipile(final Aeolipile card) {
+    private Aeolipile(final Aeolipile card) {
         super(card);
     }
 

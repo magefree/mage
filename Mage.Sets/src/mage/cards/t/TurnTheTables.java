@@ -28,7 +28,7 @@ public final class TurnTheTables extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
-    public TurnTheTables(final TurnTheTables card) {
+    private TurnTheTables(final TurnTheTables card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class MythUnbound extends CardImpl {
         ));
     }
 
-    public MythUnbound(final MythUnbound card) {
+    private MythUnbound(final MythUnbound card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class WallOfHeat extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public WallOfHeat(final WallOfHeat card) {
+    private WallOfHeat(final WallOfHeat card) {
         super(card);
     }
 

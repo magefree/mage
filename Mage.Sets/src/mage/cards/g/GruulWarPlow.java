@@ -33,7 +33,7 @@ public final class GruulWarPlow extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GruulWarPlowToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{1}{R}{G}")));
     }
 
-    public GruulWarPlow(final GruulWarPlow card) {
+    private GruulWarPlow(final GruulWarPlow card) {
         super(card);
     }
 

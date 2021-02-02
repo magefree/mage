@@ -27,7 +27,7 @@ public final class OvergrownEstate extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public OvergrownEstate(final OvergrownEstate card) {
+    private OvergrownEstate(final OvergrownEstate card) {
         super(card);
     }
 

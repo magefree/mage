@@ -29,7 +29,7 @@ public final class Pongify extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Pongify(final Pongify card) {
+    private Pongify(final Pongify card) {
         super(card);
     }
 

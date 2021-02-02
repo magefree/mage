@@ -35,7 +35,7 @@ public final class SpectralGateguards extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(VigilanceAbility.getInstance(), ruleText)));
     }
 
-    public SpectralGateguards(final SpectralGateguards card) {
+    private SpectralGateguards(final SpectralGateguards card) {
         super(card);
     }
 

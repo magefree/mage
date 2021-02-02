@@ -27,7 +27,7 @@ public final class IronMaiden extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IronMaiden(final IronMaiden card) {
+    private IronMaiden(final IronMaiden card) {
         super(card);
     }
 

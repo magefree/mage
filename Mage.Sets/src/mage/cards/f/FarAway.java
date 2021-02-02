@@ -29,7 +29,7 @@ public final class FarAway extends SplitCard {
 
     }
 
-    public FarAway(final FarAway card) {
+    private FarAway(final FarAway card) {
         super(card);
     }
 

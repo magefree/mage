@@ -32,7 +32,7 @@ public final class ForgottenLore extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public ForgottenLore(final ForgottenLore card) {
+    private ForgottenLore(final ForgottenLore card) {
         super(card);
     }
 

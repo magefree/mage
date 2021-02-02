@@ -43,7 +43,7 @@ public final class QasaliPridemage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QasaliPridemage(final QasaliPridemage card) {
+    private QasaliPridemage(final QasaliPridemage card) {
         super(card);
     }
 

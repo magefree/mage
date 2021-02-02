@@ -30,7 +30,7 @@ public final class WildWanderer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true)));
     }
 
-    public WildWanderer(final WildWanderer card) {
+    private WildWanderer(final WildWanderer card) {
         super(card);
     }
 

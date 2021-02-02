@@ -47,7 +47,7 @@ public final class Chainflinger extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public Chainflinger(final Chainflinger card) {
+    private Chainflinger(final Chainflinger card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class CallerOfTheHunt extends CardImpl {
 
     }
 
-    public CallerOfTheHunt(final CallerOfTheHunt card) {
+    private CallerOfTheHunt(final CallerOfTheHunt card) {
         super(card);
     }
 

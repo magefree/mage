@@ -28,7 +28,7 @@ public final class TatteredHaunter extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public TatteredHaunter(final TatteredHaunter card) {
+    private TatteredHaunter(final TatteredHaunter card) {
         super(card);
     }
 

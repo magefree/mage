@@ -28,7 +28,7 @@ public final class Fallowsage extends CardImpl {
         this.addAbility(new BecomesTappedSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
-    public Fallowsage(final Fallowsage card) {
+    private Fallowsage(final Fallowsage card) {
         super(card);
     }
 

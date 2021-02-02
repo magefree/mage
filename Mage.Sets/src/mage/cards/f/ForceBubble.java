@@ -43,7 +43,7 @@ public final class ForceBubble extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new RemoveAllCountersSourceEffect(CounterType.DEPLETION), TargetController.ANY, false));
     }
 
-    public ForceBubble(final ForceBubble card) {
+    private ForceBubble(final ForceBubble card) {
         super(card);
     }
 

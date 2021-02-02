@@ -30,7 +30,7 @@ public final class CoastWatcher extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.GREEN));
     }
 
-    public CoastWatcher(final CoastWatcher card) {
+    private CoastWatcher(final CoastWatcher card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class OgreMenial extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public OgreMenial(final OgreMenial card) {
+    private OgreMenial(final OgreMenial card) {
         super(card);
     }
 

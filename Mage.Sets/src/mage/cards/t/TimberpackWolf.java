@@ -38,7 +38,7 @@ public final class TimberpackWolf extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TimberpackWolfEffect()));
     }
 
-    public TimberpackWolf(final TimberpackWolf card) {
+    private TimberpackWolf(final TimberpackWolf card) {
         super(card);
     }
 

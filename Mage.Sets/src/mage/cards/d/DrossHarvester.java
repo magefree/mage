@@ -36,7 +36,7 @@ public final class DrossHarvester extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new GainLifeEffect(2), false));
     }
 
-    public DrossHarvester(final DrossHarvester card) {
+    private DrossHarvester(final DrossHarvester card) {
         super(card);
     }
 

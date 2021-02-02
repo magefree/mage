@@ -30,7 +30,7 @@ public final class DriftOfPhantasms extends CardImpl {
         this.addAbility(new TransmuteAbility("{1}{U}{U}"));
     }
 
-    public DriftOfPhantasms(final DriftOfPhantasms card) {
+    private DriftOfPhantasms(final DriftOfPhantasms card) {
         super(card);
     }
 

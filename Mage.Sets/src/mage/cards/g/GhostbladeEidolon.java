@@ -43,7 +43,7 @@ public final class GhostbladeEidolon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhostbladeEidolon(final GhostbladeEidolon card) {
+    private GhostbladeEidolon(final GhostbladeEidolon card) {
         super(card);
     }
 

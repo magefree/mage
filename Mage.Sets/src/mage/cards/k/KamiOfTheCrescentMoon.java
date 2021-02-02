@@ -30,7 +30,7 @@ public final class KamiOfTheCrescentMoon extends CardImpl {
         this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardTargetEffect(1), TargetController.ANY, false));
     }
 
-    public KamiOfTheCrescentMoon(final KamiOfTheCrescentMoon card) {
+    private KamiOfTheCrescentMoon(final KamiOfTheCrescentMoon card) {
         super(card);
     }
 

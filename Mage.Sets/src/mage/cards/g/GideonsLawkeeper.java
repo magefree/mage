@@ -35,7 +35,7 @@ public final class GideonsLawkeeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GideonsLawkeeper(final GideonsLawkeeper card) {
+    private GideonsLawkeeper(final GideonsLawkeeper card) {
         super(card);
     }
 

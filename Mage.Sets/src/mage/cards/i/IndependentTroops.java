@@ -23,7 +23,7 @@ public final class IndependentTroops extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public IndependentTroops(final IndependentTroops card) {
+    private IndependentTroops(final IndependentTroops card) {
         super(card);
     }
 

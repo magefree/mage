@@ -47,7 +47,7 @@ public final class PredatorsGambit extends CardImpl {
 
     }
 
-    public PredatorsGambit(final PredatorsGambit card) {
+    private PredatorsGambit(final PredatorsGambit card) {
         super(card);
     }
 

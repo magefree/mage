@@ -68,7 +68,7 @@ public final class UrzaAcademyHeadmaster extends CardImpl {
 
     }
 
-    public UrzaAcademyHeadmaster(final UrzaAcademyHeadmaster card) {
+    private UrzaAcademyHeadmaster(final UrzaAcademyHeadmaster card) {
         super(card);
     }
 

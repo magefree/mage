@@ -29,7 +29,7 @@ public final class WarchiefGiant extends CardImpl {
         this.addAbility(new MyriadAbility());
     }
 
-    public WarchiefGiant(final WarchiefGiant card) {
+    private WarchiefGiant(final WarchiefGiant card) {
         super(card);
     }
 

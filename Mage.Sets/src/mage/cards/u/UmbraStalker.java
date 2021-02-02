@@ -39,7 +39,7 @@ public final class UmbraStalker extends CardImpl {
 
     }
 
-    public UmbraStalker(final UmbraStalker card) {
+    private UmbraStalker(final UmbraStalker card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class AbzanRunemark extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter), "{this} has vigilance as long as you control a black or green permanent")));
     }
 
-    public AbzanRunemark(final AbzanRunemark card) {
+    private AbzanRunemark(final AbzanRunemark card) {
         super(card);
     }
 

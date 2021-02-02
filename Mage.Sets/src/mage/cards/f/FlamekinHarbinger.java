@@ -38,7 +38,7 @@ public final class FlamekinHarbinger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true, true), true));
     }
 
-    public FlamekinHarbinger(final FlamekinHarbinger card) {
+    private FlamekinHarbinger(final FlamekinHarbinger card) {
         super(card);
     }
 

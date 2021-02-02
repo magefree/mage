@@ -42,7 +42,7 @@ public final class PsychicVortex extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PsychicVortex(final PsychicVortex card) {
+    private PsychicVortex(final PsychicVortex card) {
         super(card);
     }
 

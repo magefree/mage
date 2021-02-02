@@ -33,7 +33,7 @@ public final class EntrapmentManeuver extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public EntrapmentManeuver(final EntrapmentManeuver card) {
+    private EntrapmentManeuver(final EntrapmentManeuver card) {
         super(card);
     }
 

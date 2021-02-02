@@ -40,7 +40,7 @@ public final class FoodChain extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FoodChain(final FoodChain card) {
+    private FoodChain(final FoodChain card) {
         super(card);
     }
 

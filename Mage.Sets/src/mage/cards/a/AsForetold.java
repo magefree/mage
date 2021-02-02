@@ -46,7 +46,7 @@ public final class AsForetold extends CardImpl {
 
     }
 
-    public AsForetold(final AsForetold card) {
+    private AsForetold(final AsForetold card) {
         super(card);
     }
 

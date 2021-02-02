@@ -33,7 +33,7 @@ public final class HuttCrimeLord extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new DontUntapInControllersNextUntapStepSourceEffect(), false));
     }
 
-    public HuttCrimeLord(final HuttCrimeLord card) {
+    private HuttCrimeLord(final HuttCrimeLord card) {
         super(card);
     }
 

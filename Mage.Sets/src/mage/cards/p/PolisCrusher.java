@@ -54,7 +54,7 @@ public final class PolisCrusher extends CardImpl {
         this.addAbility(new PolisCrusherTriggeredAbility());
     }
 
-    public PolisCrusher(final PolisCrusher card) {
+    private PolisCrusher(final PolisCrusher card) {
         super(card);
     }
 

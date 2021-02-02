@@ -33,7 +33,7 @@ public final class Twiddle extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public Twiddle(final Twiddle card) {
+    private Twiddle(final Twiddle card) {
         super(card);
     }
 

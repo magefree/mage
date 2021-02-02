@@ -22,7 +22,7 @@ public final class PinpointAvalanche extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PinpointAvalanche(final PinpointAvalanche card) {
+    private PinpointAvalanche(final PinpointAvalanche card) {
         super(card);
     }
 

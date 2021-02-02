@@ -34,7 +34,7 @@ public final class MortuaryMire extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public MortuaryMire(final MortuaryMire card) {
+    private MortuaryMire(final MortuaryMire card) {
         super(card);
     }
 

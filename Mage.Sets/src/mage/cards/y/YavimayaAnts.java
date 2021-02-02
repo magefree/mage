@@ -33,7 +33,7 @@ public final class YavimayaAnts extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{G}{G}")));
     }
 
-    public YavimayaAnts(final YavimayaAnts card) {
+    private YavimayaAnts(final YavimayaAnts card) {
         super(card);
     }
 

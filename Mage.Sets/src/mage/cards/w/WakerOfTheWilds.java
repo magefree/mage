@@ -51,7 +51,7 @@ public final class WakerOfTheWilds extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WakerOfTheWilds(final WakerOfTheWilds card) {
+    private WakerOfTheWilds(final WakerOfTheWilds card) {
         super(card);
     }
 

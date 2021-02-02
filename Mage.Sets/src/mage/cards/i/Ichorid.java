@@ -53,7 +53,7 @@ public final class Ichorid extends CardImpl {
         
     }
 
-    public Ichorid(final Ichorid card) {
+    private Ichorid(final Ichorid card) {
         super(card);
     }
 

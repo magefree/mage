@@ -45,7 +45,7 @@ public final class Frightcrawler extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public Frightcrawler(final Frightcrawler card) {
+    private Frightcrawler(final Frightcrawler card) {
         super(card);
     }
 

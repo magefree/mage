@@ -40,7 +40,7 @@ public final class LumengridAugur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LumengridAugur(final LumengridAugur card) {
+    private LumengridAugur(final LumengridAugur card) {
         super(card);
     }
 

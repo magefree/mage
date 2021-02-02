@@ -45,7 +45,7 @@ public final class SaprazzanLegate extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(null, condition));
     }
 
-    public SaprazzanLegate(final SaprazzanLegate card) {
+    private SaprazzanLegate(final SaprazzanLegate card) {
         super(card);
     }
 

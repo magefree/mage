@@ -33,7 +33,7 @@ public final class SnowTrooper extends CardImpl {
                         new FilterCreaturePermanent(SubType.TROOPER, "Trooper creatures"), false)));
     }
 
-    public SnowTrooper(final SnowTrooper card) {
+    private SnowTrooper(final SnowTrooper card) {
         super(card);
     }
 

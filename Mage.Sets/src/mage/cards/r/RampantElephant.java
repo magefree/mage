@@ -32,7 +32,7 @@ public final class RampantElephant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RampantElephant(final RampantElephant card) {
+    private RampantElephant(final RampantElephant card) {
         super(card);
     }
 

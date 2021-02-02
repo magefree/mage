@@ -43,7 +43,7 @@ public final class NemataGroveGuardian extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false), new SacrificeTargetCost(new TargetControlledPermanent(filter1))));
     }
 
-    public NemataGroveGuardian(final NemataGroveGuardian card) {
+    private NemataGroveGuardian(final NemataGroveGuardian card) {
         super(card);
     }
 

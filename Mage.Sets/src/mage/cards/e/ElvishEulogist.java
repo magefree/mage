@@ -36,7 +36,7 @@ public final class ElvishEulogist extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(new CardsInControllerGraveyardCount(filter, 1)), new SacrificeSourceCost()));
     }
 
-    public ElvishEulogist(final ElvishEulogist card) {
+    private ElvishEulogist(final ElvishEulogist card) {
         super(card);
     }
 

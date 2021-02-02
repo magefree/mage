@@ -36,7 +36,7 @@ public final class FalkenrathNoble extends CardImpl {
         this.addAbility(new FalkenrathNobleTriggeredAbility());
     }
 
-    public FalkenrathNoble(final FalkenrathNoble card) {
+    private FalkenrathNoble(final FalkenrathNoble card) {
         super(card);
     }
 

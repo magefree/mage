@@ -38,7 +38,7 @@ public final class GiantsIre extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter), "If you control a Giant, draw a card"));
     }
 
-    public GiantsIre(final GiantsIre card) {
+    private GiantsIre(final GiantsIre card) {
         super(card);
     }
 

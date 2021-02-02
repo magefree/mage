@@ -50,7 +50,7 @@ public final class AngelicOverseer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AngelicOverseer(final AngelicOverseer card) {
+    private AngelicOverseer(final AngelicOverseer card) {
         super(card);
     }
 

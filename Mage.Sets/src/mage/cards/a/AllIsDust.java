@@ -24,7 +24,7 @@ public final class AllIsDust extends CardImpl {
         this.getSpellAbility().addEffect(new AllIsDustEffect());
     }
 
-    public AllIsDust(final AllIsDust card) {
+    private AllIsDust(final AllIsDust card) {
         super(card);
     }
 

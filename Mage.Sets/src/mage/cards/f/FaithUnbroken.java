@@ -56,7 +56,7 @@ public final class FaithUnbroken extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
     }
 
-    public FaithUnbroken(final FaithUnbroken card) {
+    private FaithUnbroken(final FaithUnbroken card) {
         super(card);
     }
 

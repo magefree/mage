@@ -31,7 +31,7 @@ public final class SpidersilkNet extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public SpidersilkNet(final SpidersilkNet card) {
+    private SpidersilkNet(final SpidersilkNet card) {
         super(card);
     }
 

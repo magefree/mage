@@ -35,7 +35,7 @@ public final class ArmedResponse extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
-    public ArmedResponse(final ArmedResponse card) {
+    private ArmedResponse(final ArmedResponse card) {
         super(card);
     }
 

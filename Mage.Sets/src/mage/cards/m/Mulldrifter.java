@@ -33,7 +33,7 @@ public final class Mulldrifter extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{2}{U}"));
     }
 
-    public Mulldrifter(final Mulldrifter card) {
+    private Mulldrifter(final Mulldrifter card) {
         super(card);
     }
 

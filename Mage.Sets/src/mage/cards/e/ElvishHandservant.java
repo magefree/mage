@@ -36,7 +36,7 @@ public final class ElvishHandservant extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), filter, true));
     }
 
-    public ElvishHandservant(final ElvishHandservant card) {
+    private ElvishHandservant(final ElvishHandservant card) {
         super(card);
     }
 

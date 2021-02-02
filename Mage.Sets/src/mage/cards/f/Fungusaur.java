@@ -29,7 +29,7 @@ public final class Fungusaur extends CardImpl {
         this.addAbility(new DealtDamageToSourceTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false));
     }
 
-    public Fungusaur(final Fungusaur card) {
+    private Fungusaur(final Fungusaur card) {
         super(card);
     }
 

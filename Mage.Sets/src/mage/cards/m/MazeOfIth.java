@@ -40,7 +40,7 @@ public final class MazeOfIth extends CardImpl {
         this.addAbility(ability);
     }
     
-    public MazeOfIth(final MazeOfIth card) {
+    private MazeOfIth(final MazeOfIth card) {
         super(card);
     }
     

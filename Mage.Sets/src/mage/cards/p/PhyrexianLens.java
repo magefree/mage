@@ -24,7 +24,7 @@ public final class PhyrexianLens extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianLens(final PhyrexianLens card) {
+    private PhyrexianLens(final PhyrexianLens card) {
         super(card);
     }
 

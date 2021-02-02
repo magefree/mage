@@ -51,7 +51,7 @@ public final class IthHighArcanist extends CardImpl {
         this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{W}{U}"), this));
     }
 
-    public IthHighArcanist(final IthHighArcanist card) {
+    private IthHighArcanist(final IthHighArcanist card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class ForcedMarch extends CardImpl {
         this.getSpellAbility().addEffect(new ForcedMarchEffect());
     }
 
-    public ForcedMarch(final ForcedMarch card) {
+    private ForcedMarch(final ForcedMarch card) {
         super(card);
     }
 

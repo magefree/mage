@@ -49,7 +49,7 @@ public final class StormwingDragon extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false, false));
     }
 
-    public StormwingDragon(final StormwingDragon card) {
+    private StormwingDragon(final StormwingDragon card) {
         super(card);
     }
 

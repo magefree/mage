@@ -31,7 +31,7 @@ public final class CoordinatedAssault extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,2));
     }
 
-    public CoordinatedAssault(final CoordinatedAssault card) {
+    private CoordinatedAssault(final CoordinatedAssault card) {
         super(card);
     }
 

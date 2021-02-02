@@ -27,7 +27,7 @@ public final class ThrabenInspector extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InvestigateEffect(), false));
     }
 
-    public ThrabenInspector(final ThrabenInspector card) {
+    private ThrabenInspector(final ThrabenInspector card) {
         super(card);
     }
 

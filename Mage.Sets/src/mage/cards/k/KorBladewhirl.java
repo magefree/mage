@@ -32,7 +32,7 @@ public final class KorBladewhirl extends CardImpl {
                 new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), false));
     }
 
-    public KorBladewhirl(final KorBladewhirl card) {
+    private KorBladewhirl(final KorBladewhirl card) {
         super(card);
     }
 

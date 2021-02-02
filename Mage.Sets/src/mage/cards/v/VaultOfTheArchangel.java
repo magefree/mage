@@ -37,7 +37,7 @@ public final class VaultOfTheArchangel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VaultOfTheArchangel(final VaultOfTheArchangel card) {
+    private VaultOfTheArchangel(final VaultOfTheArchangel card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class Dragonstalker extends CardImpl {
         this.addAbility(new ProtectionAbility(new FilterPermanent(SubType.DRAGON, "Dragons")));
     }
 
-    public Dragonstalker(final Dragonstalker card) {
+    private Dragonstalker(final Dragonstalker card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ public final class HollowTrees extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HollowTrees(final HollowTrees card) {
+    private HollowTrees(final HollowTrees card) {
         super(card);
     }
 

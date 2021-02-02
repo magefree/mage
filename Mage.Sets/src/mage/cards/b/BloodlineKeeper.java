@@ -56,7 +56,7 @@ public final class BloodlineKeeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodlineKeeper(final BloodlineKeeper card) {
+    private BloodlineKeeper(final BloodlineKeeper card) {
         super(card);
     }
 

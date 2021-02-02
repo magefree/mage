@@ -32,7 +32,7 @@ public final class WallOfBrambles extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
     }
 
-    public WallOfBrambles(final WallOfBrambles card) {
+    private WallOfBrambles(final WallOfBrambles card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class Controvert extends CardImpl {
         this.addAbility(new RecoverAbility(new ManaCostsImpl("{2}{U}{U}"), this));
     }
 
-    public Controvert(final Controvert card) {
+    private Controvert(final Controvert card) {
         super(card);
     }
 

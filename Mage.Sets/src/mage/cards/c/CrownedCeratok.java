@@ -43,7 +43,7 @@ public final class CrownedCeratok extends CardImpl {
 
     }
 
-    public CrownedCeratok(final CrownedCeratok card) {
+    private CrownedCeratok(final CrownedCeratok card) {
         super(card);
     }
 

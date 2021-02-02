@@ -61,7 +61,7 @@ public final class HivisOfTheScale extends CardImpl {
         
     }
 
-    public HivisOfTheScale(final HivisOfTheScale card) {
+    private HivisOfTheScale(final HivisOfTheScale card) {
         super(card);
     }
 

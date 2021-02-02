@@ -26,7 +26,7 @@ public final class WeiEliteCompanions extends CardImpl {
         this.addAbility(HorsemanshipAbility.getInstance());
     }
 
-    public WeiEliteCompanions(final WeiEliteCompanions card) {
+    private WeiEliteCompanions(final WeiEliteCompanions card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class FeralContest extends CardImpl {
         this.getSpellAbility().addTarget(target2);
     }
 
-    public FeralContest(final FeralContest card) {
+    private FeralContest(final FeralContest card) {
         super(card);
     }
 

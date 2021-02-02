@@ -22,7 +22,7 @@ public final class FleshToDust extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }
 
-    public FleshToDust(final FleshToDust card) {
+    private FleshToDust(final FleshToDust card) {
         super(card);
     }
 

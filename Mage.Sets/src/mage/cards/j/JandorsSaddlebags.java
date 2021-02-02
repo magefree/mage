@@ -29,7 +29,7 @@ public final class JandorsSaddlebags extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JandorsSaddlebags(final JandorsSaddlebags card) {
+    private JandorsSaddlebags(final JandorsSaddlebags card) {
         super(card);
     }
 

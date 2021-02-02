@@ -41,7 +41,7 @@ public final class BoggartMob extends CardImpl {
                 filter, true, SetTargetPointer.NONE, true));
     }
 
-    public BoggartMob(final BoggartMob card) {
+    private BoggartMob(final BoggartMob card) {
         super(card);
     }
 

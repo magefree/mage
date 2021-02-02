@@ -30,7 +30,7 @@ public final class GiftedAetherborn extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public GiftedAetherborn(final GiftedAetherborn card) {
+    private GiftedAetherborn(final GiftedAetherborn card) {
         super(card);
     }
 

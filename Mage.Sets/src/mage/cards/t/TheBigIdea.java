@@ -53,7 +53,7 @@ public final class TheBigIdea extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TheBigIdeaReplacementEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true))));
     }
 
-    public TheBigIdea(final TheBigIdea card) {
+    private TheBigIdea(final TheBigIdea card) {
         super(card);
     }
 

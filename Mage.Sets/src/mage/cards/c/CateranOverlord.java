@@ -53,7 +53,7 @@ public final class CateranOverlord extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CateranOverlord(final CateranOverlord card) {
+    private CateranOverlord(final CateranOverlord card) {
         super(card);
     }
 

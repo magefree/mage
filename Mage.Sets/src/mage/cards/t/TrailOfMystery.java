@@ -40,7 +40,7 @@ public final class TrailOfMystery extends CardImpl {
         this.addAbility(new TrailOfMysteryTriggeredAbility());
     }
 
-    public TrailOfMystery(final TrailOfMystery card) {
+    private TrailOfMystery(final TrailOfMystery card) {
         super(card);
     }
 

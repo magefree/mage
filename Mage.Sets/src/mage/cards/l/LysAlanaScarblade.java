@@ -52,7 +52,7 @@ public final class LysAlanaScarblade extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LysAlanaScarblade(final LysAlanaScarblade card) {
+    private LysAlanaScarblade(final LysAlanaScarblade card) {
         super(card);
     }
 

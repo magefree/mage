@@ -42,7 +42,7 @@ public final class UrzasRage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public UrzasRage(final UrzasRage card) {
+    private UrzasRage(final UrzasRage card) {
         super(card);
     }
 

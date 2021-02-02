@@ -38,7 +38,7 @@ public final class HomicidalBrute extends CardImpl {
         this.addAbility(new HomicidalBruteTriggeredAbility());
     }
 
-    public HomicidalBrute(final HomicidalBrute card) {
+    private HomicidalBrute(final HomicidalBrute card) {
         super(card);
     }
 

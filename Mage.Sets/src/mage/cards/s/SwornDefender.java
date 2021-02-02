@@ -43,7 +43,7 @@ public final class SwornDefender extends CardImpl {
 
     }
 
-    public SwornDefender(final SwornDefender card) {
+    private SwornDefender(final SwornDefender card) {
         super(card);
     }
 

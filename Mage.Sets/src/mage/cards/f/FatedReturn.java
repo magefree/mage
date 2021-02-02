@@ -35,7 +35,7 @@ public final class FatedReturn extends CardImpl {
         this.getSpellAbility().addHint(MyTurnHint.instance);
     }
 
-    public FatedReturn(final FatedReturn card) {
+    private FatedReturn(final FatedReturn card) {
         super(card);
     }
 

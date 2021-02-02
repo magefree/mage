@@ -30,7 +30,7 @@ public final class DralnusCrusade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DralnusCrusadeEffect()));
     }
 
-    public DralnusCrusade(final DralnusCrusade card) {
+    private DralnusCrusade(final DralnusCrusade card) {
         super(card);
     }
 

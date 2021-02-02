@@ -46,7 +46,7 @@ public final class SkirkVolcanist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkirkVolcanist(final SkirkVolcanist card) {
+    private SkirkVolcanist(final SkirkVolcanist card) {
         super(card);
     }
 

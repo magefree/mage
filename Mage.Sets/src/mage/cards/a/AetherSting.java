@@ -28,7 +28,7 @@ public final class AetherSting extends CardImpl {
         this.addAbility(new AetherStingTriggeredAbility());
     }
 
-    public AetherSting(final AetherSting card) {
+    private AetherSting(final AetherSting card) {
         super(card);
     }
 

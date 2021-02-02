@@ -39,7 +39,7 @@ public final class Muzzle extends CardImpl {
         
     }
 
-    public Muzzle(final Muzzle card) {
+    private Muzzle(final Muzzle card) {
         super(card);
     }
 

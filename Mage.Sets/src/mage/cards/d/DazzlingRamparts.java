@@ -39,7 +39,7 @@ public final class DazzlingRamparts extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DazzlingRamparts(final DazzlingRamparts card) {
+    private DazzlingRamparts(final DazzlingRamparts card) {
         super(card);
     }
 

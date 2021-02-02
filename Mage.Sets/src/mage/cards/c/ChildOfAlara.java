@@ -35,7 +35,7 @@ public final class ChildOfAlara extends CardImpl {
         
     }
 
-    public ChildOfAlara(final ChildOfAlara card) {
+    private ChildOfAlara(final ChildOfAlara card) {
         super(card);
     }
 

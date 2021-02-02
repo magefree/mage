@@ -37,7 +37,7 @@ public final class SpireOfIndustry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpireOfIndustry(final SpireOfIndustry card) {
+    private SpireOfIndustry(final SpireOfIndustry card) {
         super(card);
     }
 

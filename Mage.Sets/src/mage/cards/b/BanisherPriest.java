@@ -47,7 +47,7 @@ public final class BanisherPriest extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BanisherPriest(final BanisherPriest card) {
+    private BanisherPriest(final BanisherPriest card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class InnerSanctum extends CardImpl {
         ));
     }
 
-    public InnerSanctum(final InnerSanctum card) {
+    private InnerSanctum(final InnerSanctum card) {
         super(card);
     }
 

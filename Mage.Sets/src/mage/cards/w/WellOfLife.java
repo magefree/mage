@@ -36,7 +36,7 @@ public final class WellOfLife extends CardImpl {
             "At the beginning of your end step, if you control no untapped lands, you gain 2 life."));
     }
 
-    public WellOfLife(final WellOfLife card) {
+    private WellOfLife(final WellOfLife card) {
         super(card);
     }
 

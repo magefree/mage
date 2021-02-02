@@ -33,7 +33,7 @@ public final class PearlDragon extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
     }
 
-    public PearlDragon(final PearlDragon card) {
+    private PearlDragon(final PearlDragon card) {
         super(card);
     }
 

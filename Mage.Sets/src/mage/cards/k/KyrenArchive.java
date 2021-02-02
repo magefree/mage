@@ -45,7 +45,7 @@ public final class KyrenArchive extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KyrenArchive(final KyrenArchive card) {
+    private KyrenArchive(final KyrenArchive card) {
         super(card);
     }
 

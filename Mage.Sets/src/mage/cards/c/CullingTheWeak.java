@@ -27,7 +27,7 @@ public final class CullingTheWeak extends CardImpl {
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.BlackMana(4)));
     }
 
-    public CullingTheWeak(final CullingTheWeak card) {
+    private CullingTheWeak(final CullingTheWeak card) {
         super(card);
     }
 

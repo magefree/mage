@@ -37,7 +37,7 @@ public final class BrandedHowler extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public BrandedHowler(final BrandedHowler card) {
+    private BrandedHowler(final BrandedHowler card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class JawboneSkulkin extends CardImpl {
 
     }
 
-    public JawboneSkulkin(final JawboneSkulkin card) {
+    private JawboneSkulkin(final JawboneSkulkin card) {
         super(card);
     }
 

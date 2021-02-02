@@ -38,7 +38,7 @@ public final class DivineTransformation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
     }
 
-    public DivineTransformation(final DivineTransformation card) {
+    private DivineTransformation(final DivineTransformation card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class Distress extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
     }
 
-    public Distress(final Distress card) {
+    private Distress(final Distress card) {
         super(card);
     }
 

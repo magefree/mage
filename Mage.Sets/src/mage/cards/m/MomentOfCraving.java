@@ -26,7 +26,7 @@ public final class MomentOfCraving extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 
-    public MomentOfCraving(final MomentOfCraving card) {
+    private MomentOfCraving(final MomentOfCraving card) {
         super(card);
     }
 

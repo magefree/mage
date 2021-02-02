@@ -32,7 +32,7 @@ public final class FrontierMastodon extends CardImpl {
         ).addHint(FerociousHint.instance));
     }
 
-    public FrontierMastodon(final FrontierMastodon card) {
+    private FrontierMastodon(final FrontierMastodon card) {
         super(card);
     }
 

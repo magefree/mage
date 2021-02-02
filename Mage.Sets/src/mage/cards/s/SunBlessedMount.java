@@ -35,7 +35,7 @@ public final class SunBlessedMount extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryGraveyardPutInHandEffect(filter), true));
     }
 
-    public SunBlessedMount(final SunBlessedMount card) {
+    private SunBlessedMount(final SunBlessedMount card) {
         super(card);
     }
 

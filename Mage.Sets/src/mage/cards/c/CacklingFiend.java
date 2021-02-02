@@ -29,7 +29,7 @@ public final class CacklingFiend extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT), false));
     }
 
-    public CacklingFiend(final CacklingFiend card) {
+    private CacklingFiend(final CacklingFiend card) {
         super(card);
     }
 

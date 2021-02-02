@@ -39,7 +39,7 @@ public final class MillenniumFalcon extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES)));
     }
 
-    public MillenniumFalcon(final MillenniumFalcon card) {
+    private MillenniumFalcon(final MillenniumFalcon card) {
         super(card);
     }
 

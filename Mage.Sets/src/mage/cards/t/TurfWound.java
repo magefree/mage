@@ -32,7 +32,7 @@ public final class TurfWound extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public TurfWound(final TurfWound card) {
+    private TurfWound(final TurfWound card) {
         super(card);
     }
 

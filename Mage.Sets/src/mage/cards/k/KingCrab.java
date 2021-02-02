@@ -45,7 +45,7 @@ public final class KingCrab extends CardImpl {
 
     }
 
-    public KingCrab(final KingCrab card) {
+    private KingCrab(final KingCrab card) {
         super(card);
     }
 

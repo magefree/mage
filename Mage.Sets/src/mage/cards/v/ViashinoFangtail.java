@@ -34,7 +34,7 @@ public final class ViashinoFangtail extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ViashinoFangtail(final ViashinoFangtail card) {
+    private ViashinoFangtail(final ViashinoFangtail card) {
         super(card);
     }
 

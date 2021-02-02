@@ -50,7 +50,7 @@ public final class GlenElendraArchmage extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public GlenElendraArchmage(final GlenElendraArchmage card) {
+    private GlenElendraArchmage(final GlenElendraArchmage card) {
         super(card);
     }
 

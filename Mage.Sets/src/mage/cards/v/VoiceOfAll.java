@@ -37,7 +37,7 @@ public final class VoiceOfAll extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionChosenColorSourceEffect()));
     }
 
-    public VoiceOfAll(final VoiceOfAll card) {
+    private VoiceOfAll(final VoiceOfAll card) {
         super(card);
     }
 

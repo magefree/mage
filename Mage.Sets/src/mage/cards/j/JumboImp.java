@@ -53,7 +53,7 @@ public final class JumboImp extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public JumboImp(final JumboImp card) {
+    private JumboImp(final JumboImp card) {
         super(card);
     }
 

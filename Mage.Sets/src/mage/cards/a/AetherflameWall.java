@@ -39,7 +39,7 @@ public final class AetherflameWall extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public AetherflameWall(final AetherflameWall card) {
+    private AetherflameWall(final AetherflameWall card) {
         super(card);
     }
 

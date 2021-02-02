@@ -35,7 +35,7 @@ public final class MuscleSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public MuscleSliver(final MuscleSliver card) {
+    private MuscleSliver(final MuscleSliver card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class ThranTemporalGateway extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThranTemporalGateway(final ThranTemporalGateway card) {
+    private ThranTemporalGateway(final ThranTemporalGateway card) {
         super(card);
     }
 

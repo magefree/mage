@@ -27,7 +27,7 @@ public final class LightningDart extends CardImpl {
         this.getSpellAbility().addEffect(new LightningDartEffect());
     }
 
-    public LightningDart(final LightningDart card) {
+    private LightningDart(final LightningDart card) {
         super(card);
     }
 

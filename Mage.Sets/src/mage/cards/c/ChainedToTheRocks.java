@@ -88,7 +88,7 @@ public final class ChainedToTheRocks extends CardImpl {
 
     }
 
-    public ChainedToTheRocks(final ChainedToTheRocks card) {
+    private ChainedToTheRocks(final ChainedToTheRocks card) {
         super(card);
     }
 

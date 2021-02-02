@@ -34,7 +34,7 @@ public final class RangingRaptors extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RangingRaptors(final RangingRaptors card) {
+    private RangingRaptors(final RangingRaptors card) {
         super(card);
     }
 

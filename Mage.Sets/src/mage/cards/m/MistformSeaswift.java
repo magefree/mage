@@ -38,7 +38,7 @@ public final class MistformSeaswift extends CardImpl {
 
     }
 
-    public MistformSeaswift(final MistformSeaswift card) {
+    private MistformSeaswift(final MistformSeaswift card) {
         super(card);
     }
 

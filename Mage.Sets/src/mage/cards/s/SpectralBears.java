@@ -36,7 +36,7 @@ public final class SpectralBears extends CardImpl {
         this.addAbility(new SpectralBearsTriggeredAbility());
     }
 
-    public SpectralBears(final SpectralBears card) {
+    private SpectralBears(final SpectralBears card) {
         super(card);
     }
 

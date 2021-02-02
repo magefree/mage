@@ -31,7 +31,7 @@ public final class UnifyingTheory extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new UnifyingTheoryEffect() , new FilterSpell("a spell"), false, SetTargetPointer.PLAYER));
     }
 
-    public UnifyingTheory(final UnifyingTheory card) {
+    private UnifyingTheory(final UnifyingTheory card) {
         super(card);
     }
 

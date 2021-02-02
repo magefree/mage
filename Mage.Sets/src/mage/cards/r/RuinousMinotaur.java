@@ -30,7 +30,7 @@ public final class RuinousMinotaur extends CardImpl {
 
     }
 
-    public RuinousMinotaur(final RuinousMinotaur card) {
+    private RuinousMinotaur(final RuinousMinotaur card) {
         super(card);
     }
 

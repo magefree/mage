@@ -53,7 +53,7 @@ public final class OrdealOfNylea extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrdealOfNylea(final OrdealOfNylea card) {
+    private OrdealOfNylea(final OrdealOfNylea card) {
         super(card);
     }
 

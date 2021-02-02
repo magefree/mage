@@ -38,7 +38,7 @@ public final class ArchetypeOfCourage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreaturesCantGetOrHaveAbilityEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public ArchetypeOfCourage(final ArchetypeOfCourage card) {
+    private ArchetypeOfCourage(final ArchetypeOfCourage card) {
         super(card);
     }
 

@@ -70,7 +70,7 @@ public final class ZacamaPrimalCalamity extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new ManaCostsImpl<>("{2}{W}")));
     }
 
-    public ZacamaPrimalCalamity(final ZacamaPrimalCalamity card) {
+    private ZacamaPrimalCalamity(final ZacamaPrimalCalamity card) {
         super(card);
     }
 

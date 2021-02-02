@@ -51,7 +51,7 @@ public final class WretchedConfluence extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
     }
 
-    public WretchedConfluence(final WretchedConfluence card) {
+    private WretchedConfluence(final WretchedConfluence card) {
         super(card);
     }
 

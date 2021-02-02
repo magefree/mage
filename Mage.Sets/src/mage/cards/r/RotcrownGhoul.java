@@ -30,7 +30,7 @@ public final class RotcrownGhoul extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RotcrownGhoul(final RotcrownGhoul card) {
+    private RotcrownGhoul(final RotcrownGhoul card) {
         super(card);
     }
 

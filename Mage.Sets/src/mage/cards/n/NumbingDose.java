@@ -55,7 +55,7 @@ public final class NumbingDose extends CardImpl {
         this.addAbility(new NumbingDoseTriggeredAbility());
     }
 
-    public NumbingDose(final NumbingDose card) {
+    private NumbingDose(final NumbingDose card) {
         super(card);
     }
 

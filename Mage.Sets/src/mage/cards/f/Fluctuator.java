@@ -29,7 +29,7 @@ public final class Fluctuator extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FluctuatorEffect()));
     }
 
-    public Fluctuator(final Fluctuator card) {
+    private Fluctuator(final Fluctuator card) {
         super(card);
     }
 

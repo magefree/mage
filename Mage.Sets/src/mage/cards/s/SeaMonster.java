@@ -29,7 +29,7 @@ import mage.filter.common.FilterLandPermanent;
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
     }
 
-    public SeaMonster(final SeaMonster card) {
+    private SeaMonster(final SeaMonster card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class Spirespine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Spirespine(final Spirespine card) {
+    private Spirespine(final Spirespine card) {
         super(card);
     }
 

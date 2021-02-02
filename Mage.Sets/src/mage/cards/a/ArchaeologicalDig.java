@@ -28,7 +28,7 @@ public final class ArchaeologicalDig extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArchaeologicalDig(final ArchaeologicalDig card) {
+    private ArchaeologicalDig(final ArchaeologicalDig card) {
         super(card);
     }
 

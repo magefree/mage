@@ -38,7 +38,7 @@ public final class Worldslayer extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(5)));
     }
 
-    public Worldslayer(final Worldslayer card) {
+    private Worldslayer(final Worldslayer card) {
         super(card);
     }
 

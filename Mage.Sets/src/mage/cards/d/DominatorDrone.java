@@ -54,7 +54,7 @@ public final class DominatorDrone extends CardImpl {
 
     }
 
-    public DominatorDrone(final DominatorDrone card) {
+    private DominatorDrone(final DominatorDrone card) {
         super(card);
     }
 

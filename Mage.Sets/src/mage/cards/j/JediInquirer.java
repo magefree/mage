@@ -35,7 +35,7 @@ public final class JediInquirer extends CardImpl {
         this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{W}")));
     }
 
-    public JediInquirer(final JediInquirer card) {
+    private JediInquirer(final JediInquirer card) {
         super(card);
     }
 

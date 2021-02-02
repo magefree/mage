@@ -28,7 +28,7 @@ public final class DaybreakChaplain extends CardImpl {
 
     }
 
-    public DaybreakChaplain(final DaybreakChaplain card) {
+    private DaybreakChaplain(final DaybreakChaplain card) {
         super(card);
     }
 

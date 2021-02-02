@@ -52,7 +52,7 @@ public final class RestInPeace extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RestInPeaceReplacementEffect()));
     }
 
-    public RestInPeace(final RestInPeace card) {
+    private RestInPeace(final RestInPeace card) {
         super(card);
     }
 

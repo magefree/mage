@@ -38,7 +38,7 @@ public final class ArrogantBloodlord extends CardImpl {
         this.addAbility(new ArrogantBloodlordTriggeredAbility());
     }
 
-    public ArrogantBloodlord(final ArrogantBloodlord card) {
+    private ArrogantBloodlord(final ArrogantBloodlord card) {
         super(card);
     }
 

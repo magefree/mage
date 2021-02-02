@@ -48,7 +48,7 @@ public final class EliteArcanist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EliteArcanist(final EliteArcanist card) {
+    private EliteArcanist(final EliteArcanist card) {
         super(card);
     }
 

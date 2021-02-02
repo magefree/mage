@@ -51,7 +51,7 @@ public final class PollenbrightWings extends CardImpl {
         this.addAbility(new PollenbrightWingsAbility());
     }
 
-    public PollenbrightWings(final PollenbrightWings card) {
+    private PollenbrightWings(final PollenbrightWings card) {
         super(card);
     }
 

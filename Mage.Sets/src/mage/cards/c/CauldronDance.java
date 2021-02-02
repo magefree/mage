@@ -42,7 +42,7 @@ public final class CauldronDance extends CardImpl {
         this.getSpellAbility().addEffect(new CauldronDancePutCreatureFromHandOntoBattlefieldEffect());
     }
 
-    public CauldronDance(final CauldronDance card) {
+    private CauldronDance(final CauldronDance card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class Claustrophobia extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
-    public Claustrophobia(final Claustrophobia card) {
+    private Claustrophobia(final Claustrophobia card) {
         super(card);
     }
 

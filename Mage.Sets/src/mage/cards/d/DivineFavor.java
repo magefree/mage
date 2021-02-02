@@ -39,7 +39,7 @@ public final class DivineFavor extends CardImpl {
 
     }
 
-    public DivineFavor(final DivineFavor card) {
+    private DivineFavor(final DivineFavor card) {
         super(card);
     }
 

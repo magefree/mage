@@ -44,7 +44,7 @@ public final class FistsOfIronwood extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public FistsOfIronwood(final FistsOfIronwood card) {
+    private FistsOfIronwood(final FistsOfIronwood card) {
         super(card);
     }
 

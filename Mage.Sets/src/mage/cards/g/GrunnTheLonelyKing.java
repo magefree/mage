@@ -46,7 +46,7 @@ public final class GrunnTheLonelyKing extends CardImpl {
         this.addAbility(new AttacksAloneTriggeredAbility(effect));
     }
 
-    public GrunnTheLonelyKing(final GrunnTheLonelyKing card) {
+    private GrunnTheLonelyKing(final GrunnTheLonelyKing card) {
         super(card);
     }
 

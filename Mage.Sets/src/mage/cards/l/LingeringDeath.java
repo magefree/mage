@@ -41,7 +41,7 @@ public final class LingeringDeath extends CardImpl {
         this.addAbility(new LingeringDeathAbility());
     }
 
-    public LingeringDeath(final LingeringDeath card) {
+    private LingeringDeath(final LingeringDeath card) {
         super(card);
     }
 

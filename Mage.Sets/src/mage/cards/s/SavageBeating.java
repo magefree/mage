@@ -43,7 +43,7 @@ public final class SavageBeating extends CardImpl {
         this.addAbility(new EntwineAbility("{1}{R}"));
     }
 
-    public SavageBeating(final SavageBeating card) {
+    private SavageBeating(final SavageBeating card) {
         super(card);
     }
 

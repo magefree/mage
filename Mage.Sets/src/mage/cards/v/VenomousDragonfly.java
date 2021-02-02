@@ -35,7 +35,7 @@ public final class VenomousDragonfly extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
-    public VenomousDragonfly(final VenomousDragonfly card) {
+    private VenomousDragonfly(final VenomousDragonfly card) {
         super(card);
     }
 

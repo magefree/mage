@@ -40,7 +40,7 @@ public final class StrongarmThug extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StrongarmThug(final StrongarmThug card) {
+    private StrongarmThug(final StrongarmThug card) {
         super(card);
     }
 

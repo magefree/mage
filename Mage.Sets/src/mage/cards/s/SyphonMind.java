@@ -26,7 +26,7 @@ public final class SyphonMind extends CardImpl {
 
     }
 
-    public SyphonMind(final SyphonMind card) {
+    private SyphonMind(final SyphonMind card) {
         super(card);
     }
 

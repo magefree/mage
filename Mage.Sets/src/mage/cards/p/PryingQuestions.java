@@ -30,7 +30,7 @@ public final class PryingQuestions extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public PryingQuestions(final PryingQuestions card) {
+    private PryingQuestions(final PryingQuestions card) {
         super(card);
     }
 

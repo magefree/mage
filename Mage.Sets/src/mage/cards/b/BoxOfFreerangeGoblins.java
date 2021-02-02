@@ -26,7 +26,7 @@ public final class BoxOfFreerangeGoblins extends CardImpl {
         this.getSpellAbility().addEffect(new BoxOfFreerangeGoblinsEffect());
     }
 
-    public BoxOfFreerangeGoblins(final BoxOfFreerangeGoblins card) {
+    private BoxOfFreerangeGoblins(final BoxOfFreerangeGoblins card) {
         super(card);
     }
 

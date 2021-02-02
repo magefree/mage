@@ -24,7 +24,7 @@ public final class Disenchant extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
-    public Disenchant(final Disenchant card) {
+    private Disenchant(final Disenchant card) {
         super(card);
     }
 

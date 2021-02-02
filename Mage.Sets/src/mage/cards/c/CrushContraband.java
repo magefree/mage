@@ -32,7 +32,7 @@ public final class CrushContraband extends CardImpl {
         this.getSpellAbility().addMode(mode1);
     }
 
-    public CrushContraband(final CrushContraband card) {
+    private CrushContraband(final CrushContraband card) {
         super(card);
     }
 

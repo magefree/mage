@@ -53,7 +53,7 @@ public final class EpharasEnlightenment extends CardImpl {
         
     }
 
-    public EpharasEnlightenment(final EpharasEnlightenment card) {
+    private EpharasEnlightenment(final EpharasEnlightenment card) {
         super(card);
     }
 

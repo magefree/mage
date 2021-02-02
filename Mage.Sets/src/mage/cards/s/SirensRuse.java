@@ -27,7 +27,7 @@ public final class SirensRuse extends CardImpl {
         this.getSpellAbility().addEffect(new SirensRuseEffect());
     }
 
-    public SirensRuse(final SirensRuse card) {
+    private SirensRuse(final SirensRuse card) {
         super(card);
     }
 

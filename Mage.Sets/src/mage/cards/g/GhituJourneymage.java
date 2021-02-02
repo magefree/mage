@@ -46,7 +46,7 @@ public final class GhituJourneymage extends CardImpl {
         ));
     }
 
-    public GhituJourneymage(final GhituJourneymage card) {
+    private GhituJourneymage(final GhituJourneymage card) {
         super(card);
     }
 

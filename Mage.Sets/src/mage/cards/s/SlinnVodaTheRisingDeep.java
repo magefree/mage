@@ -56,7 +56,7 @@ public final class SlinnVodaTheRisingDeep extends CardImpl {
         ));
     }
 
-    public SlinnVodaTheRisingDeep(final SlinnVodaTheRisingDeep card) {
+    private SlinnVodaTheRisingDeep(final SlinnVodaTheRisingDeep card) {
         super(card);
     }
 

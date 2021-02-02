@@ -41,7 +41,7 @@ public final class Cloudform extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Cloudform(final Cloudform card) {
+    private Cloudform(final Cloudform card) {
         super(card);
     }
 

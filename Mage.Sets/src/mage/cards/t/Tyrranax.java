@@ -31,7 +31,7 @@ public final class Tyrranax extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
     }
 
-    public Tyrranax(final Tyrranax card) {
+    private Tyrranax(final Tyrranax card) {
         super(card);
     }
 

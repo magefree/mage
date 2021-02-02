@@ -26,7 +26,7 @@ public final class MarkovsServant extends CardImpl {
         this.nightCard = true;
     }
 
-    public MarkovsServant(final MarkovsServant card) {
+    private MarkovsServant(final MarkovsServant card) {
         super(card);
     }
 

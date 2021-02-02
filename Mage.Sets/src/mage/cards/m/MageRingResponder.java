@@ -44,7 +44,7 @@ public final class MageRingResponder extends CardImpl {
         this.addAbility(new MageRingResponderAbility());
     }
 
-    public MageRingResponder(final MageRingResponder card) {
+    private MageRingResponder(final MageRingResponder card) {
         super(card);
     }
 

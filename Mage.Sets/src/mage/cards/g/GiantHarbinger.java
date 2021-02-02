@@ -34,7 +34,7 @@ public final class GiantHarbinger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true), true));
     }
 
-    public GiantHarbinger(final GiantHarbinger card) {
+    private GiantHarbinger(final GiantHarbinger card) {
         super(card);
     }
 

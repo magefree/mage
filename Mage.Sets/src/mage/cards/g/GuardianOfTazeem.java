@@ -48,7 +48,7 @@ public final class GuardianOfTazeem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GuardianOfTazeem(final GuardianOfTazeem card) {
+    private GuardianOfTazeem(final GuardianOfTazeem card) {
         super(card);
     }
 

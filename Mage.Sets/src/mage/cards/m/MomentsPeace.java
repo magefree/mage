@@ -27,7 +27,7 @@ public final class MomentsPeace extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{G}"), TimingRule.INSTANT));
     }
 
-    public MomentsPeace(final MomentsPeace card) {
+    private MomentsPeace(final MomentsPeace card) {
         super(card);
     }
 

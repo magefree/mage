@@ -33,7 +33,7 @@ public final class Panacea extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Panacea(final Panacea card) {
+    private Panacea(final Panacea card) {
         super(card);
     }
 

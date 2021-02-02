@@ -39,7 +39,7 @@ public final class GreenwardenOfMurasa extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GreenwardenOfMurasa(final GreenwardenOfMurasa card) {
+    private GreenwardenOfMurasa(final GreenwardenOfMurasa card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class PhyrexianDevourer extends CardImpl {
 
     }
 
-    public PhyrexianDevourer(final PhyrexianDevourer card) {
+    private PhyrexianDevourer(final PhyrexianDevourer card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class TaskForce extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new BoostSourceEffect(0, 3, Duration.EndOfTurn)));
     }
 
-    public TaskForce(final TaskForce card) {
+    private TaskForce(final TaskForce card) {
         super(card);
     }
 

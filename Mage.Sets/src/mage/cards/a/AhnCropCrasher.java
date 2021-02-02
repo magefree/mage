@@ -37,7 +37,7 @@ public final class AhnCropCrasher extends CardImpl {
         this.addAbility(new ExertAbility(ability));
     }
 
-    public AhnCropCrasher(final AhnCropCrasher card) {
+    private AhnCropCrasher(final AhnCropCrasher card) {
         super(card);
     }
 

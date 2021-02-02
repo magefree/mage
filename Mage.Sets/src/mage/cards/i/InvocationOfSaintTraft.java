@@ -46,7 +46,7 @@ public final class InvocationOfSaintTraft extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
     }
 
-    public InvocationOfSaintTraft(final InvocationOfSaintTraft card) {
+    private InvocationOfSaintTraft(final InvocationOfSaintTraft card) {
         super(card);
     }
 

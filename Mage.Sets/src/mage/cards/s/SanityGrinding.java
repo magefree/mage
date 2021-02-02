@@ -28,7 +28,7 @@ public final class SanityGrinding extends CardImpl {
 
     }
 
-    public SanityGrinding(final SanityGrinding card) {
+    private SanityGrinding(final SanityGrinding card) {
         super(card);
     }
 

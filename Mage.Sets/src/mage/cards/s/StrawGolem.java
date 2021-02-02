@@ -27,7 +27,7 @@ public final class StrawGolem extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false));
     }
 
-    public StrawGolem(final StrawGolem card) {
+    private StrawGolem(final StrawGolem card) {
         super(card);
     }
 

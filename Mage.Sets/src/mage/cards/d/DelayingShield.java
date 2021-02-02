@@ -38,7 +38,7 @@ public final class DelayingShield extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DelayingShieldUpkeepEffect(), TargetController.YOU, false));
     }
 
-    public DelayingShield(final DelayingShield card) {
+    private DelayingShield(final DelayingShield card) {
         super(card);
     }
 

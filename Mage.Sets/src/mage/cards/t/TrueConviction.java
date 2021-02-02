@@ -33,7 +33,7 @@ public final class TrueConviction extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TrueConviction(final TrueConviction card) {
+    private TrueConviction(final TrueConviction card) {
         super(card);
     }
 

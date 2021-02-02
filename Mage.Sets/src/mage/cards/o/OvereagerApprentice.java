@@ -34,7 +34,7 @@ public final class OvereagerApprentice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OvereagerApprentice(final OvereagerApprentice card) {
+    private OvereagerApprentice(final OvereagerApprentice card) {
         super(card);
     }
 

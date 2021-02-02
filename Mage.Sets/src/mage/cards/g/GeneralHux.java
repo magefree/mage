@@ -48,7 +48,7 @@ public final class GeneralHux extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false));
     }
 
-    public GeneralHux(final GeneralHux card) {
+    private GeneralHux(final GeneralHux card) {
         super(card);
     }
 

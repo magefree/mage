@@ -40,7 +40,7 @@ public final class FiremawKavu extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FiremawKavu(final FiremawKavu card) {
+    private FiremawKavu(final FiremawKavu card) {
         super(card);
     }
 

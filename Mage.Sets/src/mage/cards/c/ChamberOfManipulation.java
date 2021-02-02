@@ -45,7 +45,7 @@ public final class ChamberOfManipulation extends CardImpl {
                 Duration.WhileOnBattlefield, "Enchanted land has \"{t}, Discard a card: Gain control of target creature until end of turn.\"")));
     }
 
-    public ChamberOfManipulation(final ChamberOfManipulation card) {
+    private ChamberOfManipulation(final ChamberOfManipulation card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class LeoninVanguard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LeoninVanguard(final LeoninVanguard card) {
+    private LeoninVanguard(final LeoninVanguard card) {
         super(card);
     }
 

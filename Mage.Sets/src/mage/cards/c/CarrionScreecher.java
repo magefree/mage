@@ -28,7 +28,7 @@ public final class CarrionScreecher extends CardImpl {
 
     }
 
-    public CarrionScreecher(final CarrionScreecher card) {
+    private CarrionScreecher(final CarrionScreecher card) {
         super(card);
     }
 

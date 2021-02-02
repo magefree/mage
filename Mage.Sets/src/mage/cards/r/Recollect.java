@@ -22,7 +22,7 @@ public final class Recollect extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
     }
 
-    public Recollect(final Recollect card) {
+    private Recollect(final Recollect card) {
         super(card);
     }
 

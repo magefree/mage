@@ -24,7 +24,7 @@ public final class FlowstoneSurge extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, -1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false)));
     }
 
-    public FlowstoneSurge(final FlowstoneSurge card) {
+    private FlowstoneSurge(final FlowstoneSurge card) {
         super(card);
     }
 

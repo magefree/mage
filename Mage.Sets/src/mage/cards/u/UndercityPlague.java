@@ -33,7 +33,7 @@ public final class UndercityPlague extends CardImpl {
 
     }
 
-    public UndercityPlague(final UndercityPlague card) {
+    private UndercityPlague(final UndercityPlague card) {
         super(card);
     }
 

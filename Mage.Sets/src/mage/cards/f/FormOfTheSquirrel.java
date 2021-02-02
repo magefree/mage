@@ -47,7 +47,7 @@ public final class FormOfTheSquirrel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FormOfTheSquirrelCantCastEffect()));
     }
 
-    public FormOfTheSquirrel(final FormOfTheSquirrel card) {
+    private FormOfTheSquirrel(final FormOfTheSquirrel card) {
         super(card);
     }
 

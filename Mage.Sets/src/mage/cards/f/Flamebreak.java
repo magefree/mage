@@ -42,7 +42,7 @@ public final class Flamebreak extends CardImpl {
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
-    public Flamebreak(final Flamebreak card) {
+    private Flamebreak(final Flamebreak card) {
         super(card);
     }
 

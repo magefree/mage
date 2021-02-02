@@ -31,7 +31,7 @@ public final class Weakstone extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect( -1, 0, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public Weakstone(final Weakstone card) {
+    private Weakstone(final Weakstone card) {
         super(card);
     }
 

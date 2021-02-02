@@ -25,7 +25,7 @@ public final class TemporalTrespass extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public TemporalTrespass(final TemporalTrespass card) {
+    private TemporalTrespass(final TemporalTrespass card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class PriestOfTheBloodRite extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), TargetController.YOU, false));
     }
 
-    public PriestOfTheBloodRite(final PriestOfTheBloodRite card) {
+    private PriestOfTheBloodRite(final PriestOfTheBloodRite card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class ReaperOfTheWilds extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
     }
 
-    public ReaperOfTheWilds(final ReaperOfTheWilds card) {
+    private ReaperOfTheWilds(final ReaperOfTheWilds card) {
         super(card);
     }
 

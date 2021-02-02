@@ -33,7 +33,7 @@ public final class MortalsArdor extends CardImpl {
         
     }
 
-    public MortalsArdor(final MortalsArdor card) {
+    private MortalsArdor(final MortalsArdor card) {
         super(card);
     }
 

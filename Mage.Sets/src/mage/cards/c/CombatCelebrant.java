@@ -33,7 +33,7 @@ public final class CombatCelebrant extends CardImpl {
         this.addAbility(new ExertAbility(ability, true));
     }
 
-    public CombatCelebrant(final CombatCelebrant card) {
+    private CombatCelebrant(final CombatCelebrant card) {
         super(card);
     }
 

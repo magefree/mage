@@ -73,7 +73,7 @@ public final class JiangYanggu extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JiangYanggu(final JiangYanggu card) {
+    private JiangYanggu(final JiangYanggu card) {
         super(card);
     }
 

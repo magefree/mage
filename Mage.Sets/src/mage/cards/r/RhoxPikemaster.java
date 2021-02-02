@@ -38,7 +38,7 @@ public final class RhoxPikemaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public RhoxPikemaster(final RhoxPikemaster card) {
+    private RhoxPikemaster(final RhoxPikemaster card) {
         super(card);
     }
 

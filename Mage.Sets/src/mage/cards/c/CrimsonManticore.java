@@ -39,7 +39,7 @@ public final class CrimsonManticore extends CardImpl {
         
     }
 
-    public CrimsonManticore(final CrimsonManticore card) {
+    private CrimsonManticore(final CrimsonManticore card) {
         super(card);
     }
 

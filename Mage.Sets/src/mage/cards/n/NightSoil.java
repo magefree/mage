@@ -29,7 +29,7 @@ public final class NightSoil extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NightSoil(final NightSoil card) {
+    private NightSoil(final NightSoil card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class RoilingTerrain extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public RoilingTerrain(final RoilingTerrain card) {
+    private RoilingTerrain(final RoilingTerrain card) {
         super(card);
     }
 

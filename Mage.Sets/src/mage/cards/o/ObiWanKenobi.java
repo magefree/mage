@@ -53,7 +53,7 @@ public final class ObiWanKenobi extends CardImpl {
 
     }
 
-    public ObiWanKenobi(final ObiWanKenobi card) {
+    private ObiWanKenobi(final ObiWanKenobi card) {
         super(card);
     }
 

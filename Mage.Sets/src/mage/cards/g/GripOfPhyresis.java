@@ -43,7 +43,7 @@ public final class GripOfPhyresis extends CardImpl {
         this.getSpellAbility().addEffect(new GripOfPhyresisEffect());
     }
 
-    public GripOfPhyresis(final GripOfPhyresis card) {
+    private GripOfPhyresis(final GripOfPhyresis card) {
         super(card);
     }
 

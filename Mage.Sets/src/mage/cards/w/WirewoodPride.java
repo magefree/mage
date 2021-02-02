@@ -30,7 +30,7 @@ public final class WirewoodPride extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WirewoodPride(final WirewoodPride card) {
+    private WirewoodPride(final WirewoodPride card) {
         super(card);
     }
 

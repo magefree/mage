@@ -32,7 +32,7 @@ public final class CrosswayVampire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrosswayVampire(final CrosswayVampire card) {
+    private CrosswayVampire(final CrosswayVampire card) {
         super(card);
     }
 

@@ -58,7 +58,7 @@ public final class ImpelledGiant extends CardImpl {
 
     }
 
-    public ImpelledGiant(final ImpelledGiant card) {
+    private ImpelledGiant(final ImpelledGiant card) {
         super(card);
     }
 

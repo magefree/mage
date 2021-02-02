@@ -56,7 +56,7 @@ public final class RimehornAurochs extends CardImpl {
         this.addAbility(ability, new BlockedAttackerWatcher());
     }
 
-    public RimehornAurochs(final RimehornAurochs card) {
+    private RimehornAurochs(final RimehornAurochs card) {
         super(card);
     }
 

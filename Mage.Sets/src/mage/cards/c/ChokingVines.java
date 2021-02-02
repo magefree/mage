@@ -36,7 +36,7 @@ public final class ChokingVines extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(ChokingVinesAdjuster.instance);
     }
 
-    public ChokingVines(final ChokingVines card) {
+    private ChokingVines(final ChokingVines card) {
         super(card);
     }
 

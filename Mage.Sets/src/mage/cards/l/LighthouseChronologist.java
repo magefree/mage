@@ -54,7 +54,7 @@ public final class LighthouseChronologist extends LevelerCard {
         setMaxLevelCounters(7);
     }
 
-    public LighthouseChronologist(final LighthouseChronologist card) {
+    private LighthouseChronologist(final LighthouseChronologist card) {
         super(card);
     }
 

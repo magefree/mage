@@ -47,7 +47,7 @@ public final class FeralDeceiver extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new FeralDeceiverEffect(), new ManaCostsImpl("{2}")));
     }
 
-    public FeralDeceiver(final FeralDeceiver card) {
+    private FeralDeceiver(final FeralDeceiver card) {
         super(card);
     }
 

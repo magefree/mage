@@ -34,7 +34,7 @@ public final class CultOfTheWaxingMoon extends CardImpl {
         this.addAbility(new CultOfTheWaxingMoonAbility());
     }
 
-    public CultOfTheWaxingMoon(final CultOfTheWaxingMoon card) {
+    private CultOfTheWaxingMoon(final CultOfTheWaxingMoon card) {
         super(card);
     }
 

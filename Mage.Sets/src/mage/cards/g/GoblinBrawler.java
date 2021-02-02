@@ -38,7 +38,7 @@ public final class GoblinBrawler extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeEquippedSourceEffect()));
     }
 
-    public GoblinBrawler(final GoblinBrawler card) {
+    private GoblinBrawler(final GoblinBrawler card) {
         super(card);
     }
 

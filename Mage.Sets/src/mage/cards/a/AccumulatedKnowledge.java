@@ -34,7 +34,7 @@ public final class AccumulatedKnowledge extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public AccumulatedKnowledge(final AccumulatedKnowledge card) {
+    private AccumulatedKnowledge(final AccumulatedKnowledge card) {
         super(card);
     }
 

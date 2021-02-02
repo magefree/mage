@@ -40,7 +40,7 @@ public final class PureIntentions extends CardImpl {
         this.addAbility(new PureIntentionsTriggeredAbility());
     }
 
-    public PureIntentions(final PureIntentions card) {
+    private PureIntentions(final PureIntentions card) {
         super(card);
     }
 

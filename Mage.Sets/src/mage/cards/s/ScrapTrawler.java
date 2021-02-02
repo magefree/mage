@@ -40,7 +40,7 @@ public final class ScrapTrawler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScrapTrawler(final ScrapTrawler card) {
+    private ScrapTrawler(final ScrapTrawler card) {
         super(card);
     }
 

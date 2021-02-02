@@ -25,7 +25,7 @@ public final class KavuClimber extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public KavuClimber(final KavuClimber card) {
+    private KavuClimber(final KavuClimber card) {
         super(card);
     }
 

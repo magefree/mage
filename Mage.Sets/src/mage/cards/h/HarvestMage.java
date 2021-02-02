@@ -44,7 +44,7 @@ public final class HarvestMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HarvestMage(final HarvestMage card) {
+    private HarvestMage(final HarvestMage card) {
         super(card);
     }
 

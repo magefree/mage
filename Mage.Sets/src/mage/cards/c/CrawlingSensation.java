@@ -31,7 +31,7 @@ public final class CrawlingSensation extends CardImpl {
         this.addAbility(new CrawlingSensationTriggeredAbility());
     }
 
-    public CrawlingSensation(final CrawlingSensation card) {
+    private CrawlingSensation(final CrawlingSensation card) {
         super(card);
     }
 

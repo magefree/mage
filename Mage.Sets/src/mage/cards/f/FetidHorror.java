@@ -31,7 +31,7 @@ public final class FetidHorror extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
-    public FetidHorror(final FetidHorror card) {
+    private FetidHorror(final FetidHorror card) {
         super(card);
     }
 

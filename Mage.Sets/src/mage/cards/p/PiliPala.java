@@ -34,7 +34,7 @@ public final class PiliPala extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PiliPala(final PiliPala card) {
+    private PiliPala(final PiliPala card) {
         super(card);
     }
 

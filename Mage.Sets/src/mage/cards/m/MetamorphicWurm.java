@@ -42,7 +42,7 @@ public final class MetamorphicWurm extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public MetamorphicWurm(final MetamorphicWurm card) {
+    private MetamorphicWurm(final MetamorphicWurm card) {
         super(card);
     }
 

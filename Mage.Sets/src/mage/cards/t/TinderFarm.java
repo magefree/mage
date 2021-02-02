@@ -33,7 +33,7 @@ public final class TinderFarm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TinderFarm(final TinderFarm card) {
+    private TinderFarm(final TinderFarm card) {
         super(card);
     }
 

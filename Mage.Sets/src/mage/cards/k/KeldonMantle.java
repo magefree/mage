@@ -48,7 +48,7 @@ public final class KeldonMantle extends CardImpl {
             AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl("{G}")));
     }
 
-    public KeldonMantle(final KeldonMantle card) {
+    private KeldonMantle(final KeldonMantle card) {
         super(card);
     }
 

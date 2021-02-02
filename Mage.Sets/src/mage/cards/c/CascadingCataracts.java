@@ -35,7 +35,7 @@ public final class CascadingCataracts extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CascadingCataracts(final CascadingCataracts card) {
+    private CascadingCataracts(final CascadingCataracts card) {
         super(card);
     }
 

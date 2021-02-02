@@ -34,7 +34,7 @@ public final class EgoErasure extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public EgoErasure(final EgoErasure card) {
+    private EgoErasure(final EgoErasure card) {
         super(card);
     }
 

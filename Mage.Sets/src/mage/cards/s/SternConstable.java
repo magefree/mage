@@ -36,7 +36,7 @@ public final class SternConstable extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SternConstable(final SternConstable card) {
+    private SternConstable(final SternConstable card) {
         super(card);
     }
 

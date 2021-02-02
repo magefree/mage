@@ -39,7 +39,7 @@ public final class ExuberantFirestoker extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public ExuberantFirestoker(final ExuberantFirestoker card) {
+    private ExuberantFirestoker(final ExuberantFirestoker card) {
         super(card);
     }
 

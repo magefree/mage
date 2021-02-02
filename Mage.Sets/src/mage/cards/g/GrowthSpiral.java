@@ -22,7 +22,7 @@ public final class GrowthSpiral extends CardImpl {
         this.getSpellAbility().addEffect(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A));
     }
 
-    public GrowthSpiral(final GrowthSpiral card) {
+    private GrowthSpiral(final GrowthSpiral card) {
         super(card);
     }
 

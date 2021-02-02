@@ -39,7 +39,7 @@ public final class SteelOverseer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), new TapSourceCost()));
     }
 
-    public SteelOverseer(final SteelOverseer card) {
+    private SteelOverseer(final SteelOverseer card) {
         super(card);
     }
 

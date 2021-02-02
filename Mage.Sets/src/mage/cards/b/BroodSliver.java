@@ -35,7 +35,7 @@ public final class BroodSliver extends CardImpl {
                 new FilterCreaturePermanent(SubType.SLIVER, "a Sliver"), false, SetTargetPointer.PLAYER, true));
     }
 
-    public BroodSliver(final BroodSliver card) {
+    private BroodSliver(final BroodSliver card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class SpiritEnKor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpiritEnKor(final SpiritEnKor card) {
+    private SpiritEnKor(final SpiritEnKor card) {
         super(card);
     }
 

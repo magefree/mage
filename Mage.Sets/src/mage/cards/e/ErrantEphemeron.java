@@ -30,7 +30,7 @@ public final class ErrantEphemeron extends CardImpl {
         this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{1}{U}"), this));
     }
 
-    public ErrantEphemeron(final ErrantEphemeron card) {
+    private ErrantEphemeron(final ErrantEphemeron card) {
         super(card);
     }
 

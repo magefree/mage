@@ -52,7 +52,7 @@ public final class DualCasting extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
     }
 
-    public DualCasting(final DualCasting card) {
+    private DualCasting(final DualCasting card) {
         super(card);
     }
 

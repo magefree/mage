@@ -27,7 +27,7 @@ public final class YavimayaScion extends CardImpl {
         this.addAbility(new ProtectionAbility(new FilterArtifactCard("artifacts")));
     }
 
-    public YavimayaScion(final YavimayaScion card) {
+    private YavimayaScion(final YavimayaScion card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class VinesOfTheRecluse extends CardImpl {
 
     }
 
-    public VinesOfTheRecluse(final VinesOfTheRecluse card) {
+    private VinesOfTheRecluse(final VinesOfTheRecluse card) {
         super(card);
     }
 

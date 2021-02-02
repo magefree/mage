@@ -21,7 +21,7 @@ public final class ColossodonYearling extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public ColossodonYearling(final ColossodonYearling card) {
+    private ColossodonYearling(final ColossodonYearling card) {
         super(card);
     }
 

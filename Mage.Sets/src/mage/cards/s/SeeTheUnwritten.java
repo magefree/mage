@@ -39,7 +39,7 @@ public final class SeeTheUnwritten extends CardImpl {
         this.getSpellAbility().addHint(FerociousHint.instance);
     }
 
-    public SeeTheUnwritten(final SeeTheUnwritten card) {
+    private SeeTheUnwritten(final SeeTheUnwritten card) {
         super(card);
     }
 

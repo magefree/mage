@@ -52,7 +52,7 @@ public final class ChandraPyrogenius extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChandraPyrogenius(final ChandraPyrogenius card) {
+    private ChandraPyrogenius(final ChandraPyrogenius card) {
         super(card);
     }
 

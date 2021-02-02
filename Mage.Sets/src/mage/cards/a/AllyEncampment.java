@@ -49,7 +49,7 @@ public final class AllyEncampment extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AllyEncampment(final AllyEncampment card) {
+    private AllyEncampment(final AllyEncampment card) {
         super(card);
     }
 

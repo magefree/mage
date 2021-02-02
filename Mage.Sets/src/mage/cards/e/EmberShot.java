@@ -25,7 +25,7 @@ public final class EmberShot extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public EmberShot(final EmberShot card) {
+    private EmberShot(final EmberShot card) {
         super(card);
     }
 

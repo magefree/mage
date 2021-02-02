@@ -42,7 +42,7 @@ public final class HellcarverDemon extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new HellcarverDemonEffect(), false));
     }
 
-    public HellcarverDemon(final HellcarverDemon card) {
+    private HellcarverDemon(final HellcarverDemon card) {
         super(card);
     }
 

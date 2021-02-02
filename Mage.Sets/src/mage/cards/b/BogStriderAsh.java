@@ -38,7 +38,7 @@ public final class BogStriderAsh extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new DoIfCostPaid(new GainLifeEffect(2), new ManaCostsImpl("{G}")), filter, false));
     }
 
-    public BogStriderAsh(final BogStriderAsh card) {
+    private BogStriderAsh(final BogStriderAsh card) {
         super(card);
     }
 

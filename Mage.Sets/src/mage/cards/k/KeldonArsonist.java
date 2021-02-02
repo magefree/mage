@@ -39,7 +39,7 @@ public final class KeldonArsonist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KeldonArsonist(final KeldonArsonist card) {
+    private KeldonArsonist(final KeldonArsonist card) {
         super(card);
     }
 

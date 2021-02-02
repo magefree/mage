@@ -38,7 +38,7 @@ public final class Aetherling extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}")));
     }
 
-    public Aetherling(final Aetherling card) {
+    private Aetherling(final Aetherling card) {
         super(card);
     }
 

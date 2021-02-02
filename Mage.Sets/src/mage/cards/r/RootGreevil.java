@@ -41,7 +41,7 @@ public final class RootGreevil extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RootGreevil(final RootGreevil card) {
+    private RootGreevil(final RootGreevil card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class GameTrailChangeling extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public GameTrailChangeling(final GameTrailChangeling card) {
+    private GameTrailChangeling(final GameTrailChangeling card) {
         super(card);
     }
 

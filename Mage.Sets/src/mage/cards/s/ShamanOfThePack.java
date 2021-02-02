@@ -45,7 +45,7 @@ public final class ShamanOfThePack extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShamanOfThePack(final ShamanOfThePack card) {
+    private ShamanOfThePack(final ShamanOfThePack card) {
         super(card);
     }
 

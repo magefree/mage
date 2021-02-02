@@ -35,7 +35,7 @@ public final class WildEvocation extends CardImpl {
                 new WildEvocationEffect(), TargetController.ANY, false));
     }
 
-    public WildEvocation(final WildEvocation card) {
+    private WildEvocation(final WildEvocation card) {
         super(card);
     }
 

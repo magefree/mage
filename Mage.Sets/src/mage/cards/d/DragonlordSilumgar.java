@@ -55,7 +55,7 @@ public final class DragonlordSilumgar extends CardImpl {
 
     }
 
-    public DragonlordSilumgar(final DragonlordSilumgar card) {
+    private DragonlordSilumgar(final DragonlordSilumgar card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class KirtarsWrath extends CardImpl {
 
     }
 
-    public KirtarsWrath(final KirtarsWrath card) {
+    private KirtarsWrath(final KirtarsWrath card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class RiftElemental extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RiftElemental(final RiftElemental card) {
+    private RiftElemental(final RiftElemental card) {
         super(card);
     }
 

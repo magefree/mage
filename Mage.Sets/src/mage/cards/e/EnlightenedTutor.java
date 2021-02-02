@@ -31,7 +31,7 @@ public final class EnlightenedTutor extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true));
     }
 
-    public EnlightenedTutor(final EnlightenedTutor card) {
+    private EnlightenedTutor(final EnlightenedTutor card) {
         super(card);
     }
 

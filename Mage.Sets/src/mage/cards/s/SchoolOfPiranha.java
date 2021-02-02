@@ -28,7 +28,7 @@ public final class SchoolOfPiranha extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{1}{U}")), TargetController.YOU, false));
     }
 
-    public SchoolOfPiranha(final SchoolOfPiranha card) {
+    private SchoolOfPiranha(final SchoolOfPiranha card) {
         super(card);
     }
 

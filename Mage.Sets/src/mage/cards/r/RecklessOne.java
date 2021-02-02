@@ -41,7 +41,7 @@ public final class RecklessOne extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public RecklessOne(final RecklessOne card) {
+    private RecklessOne(final RecklessOne card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class TalasResearcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TalasResearcher(final TalasResearcher card) {
+    private TalasResearcher(final TalasResearcher card) {
         super(card);
     }
 

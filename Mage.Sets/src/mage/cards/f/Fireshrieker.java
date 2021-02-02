@@ -32,7 +32,7 @@ public final class Fireshrieker extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl("{2}")));
     }
 
-    public Fireshrieker(final Fireshrieker card) {
+    private Fireshrieker(final Fireshrieker card) {
         super(card);
     }
 

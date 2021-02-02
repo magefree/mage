@@ -31,7 +31,7 @@ public final class NightTerrors extends CardImpl {
         this.getSpellAbility().addEffect(new NightTerrorsEffect());
     }
 
-    public NightTerrors(final NightTerrors card) {
+    private NightTerrors(final NightTerrors card) {
         super(card);
     }
 

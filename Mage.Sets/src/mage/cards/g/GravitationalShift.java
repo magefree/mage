@@ -39,7 +39,7 @@ public final class GravitationalShift extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-2, 0, Duration.WhileOnBattlefield, filter2, false)));
     }
 
-    public GravitationalShift(final GravitationalShift card) {
+    private GravitationalShift(final GravitationalShift card) {
         super(card);
     }
 

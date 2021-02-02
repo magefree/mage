@@ -30,7 +30,7 @@ public final class NovaChaser extends CardImpl {
         this.addAbility(new ChampionAbility(this, SubType.ELEMENTAL, false));
     }
 
-    public NovaChaser(final NovaChaser card) {
+    private NovaChaser(final NovaChaser card) {
         super(card);
     }
 

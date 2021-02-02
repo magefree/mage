@@ -27,7 +27,7 @@ public final class BookBurning extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public BookBurning(final BookBurning card) {
+    private BookBurning(final BookBurning card) {
         super(card);
     }
 

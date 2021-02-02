@@ -39,7 +39,7 @@ public final class RiptideSurvivor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RiptideSurvivor(final RiptideSurvivor card) {
+    private RiptideSurvivor(final RiptideSurvivor card) {
         super(card);
     }
 

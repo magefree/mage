@@ -37,7 +37,7 @@ public final class CrypticGateway extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new CrypticGatewayEffect(), new CrypticGatewayCost()));
     }
 
-    public CrypticGateway(final CrypticGateway card) {
+    private CrypticGateway(final CrypticGateway card) {
         super(card);
     }
 

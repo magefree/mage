@@ -47,7 +47,7 @@ public final class LightOfTheLegion extends CardImpl {
         )));
     }
 
-    public LightOfTheLegion(final LightOfTheLegion card) {
+    private LightOfTheLegion(final LightOfTheLegion card) {
         super(card);
     }
 

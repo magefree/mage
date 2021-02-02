@@ -32,7 +32,7 @@ public final class BrazenBuccaneers extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect()));
     }
 
-    public BrazenBuccaneers(final BrazenBuccaneers card) {
+    private BrazenBuccaneers(final BrazenBuccaneers card) {
         super(card);
     }
 

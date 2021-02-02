@@ -27,7 +27,7 @@ public final class SearingRays extends CardImpl {
         this.getSpellAbility().addEffect(new SearingRaysEffect());
     }
 
-    public SearingRays(final SearingRays card) {
+    private SearingRays(final SearingRays card) {
         super(card);
     }
 

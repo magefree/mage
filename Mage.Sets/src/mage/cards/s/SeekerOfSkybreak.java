@@ -31,7 +31,7 @@ public final class SeekerOfSkybreak extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeekerOfSkybreak(final SeekerOfSkybreak card) {
+    private SeekerOfSkybreak(final SeekerOfSkybreak card) {
         super(card);
     }
 

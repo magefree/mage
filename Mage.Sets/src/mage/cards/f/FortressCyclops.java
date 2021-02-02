@@ -32,7 +32,7 @@ public final class FortressCyclops extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(0,3, Duration.EndOfTurn), false));
     }
 
-    public FortressCyclops(final FortressCyclops card) {
+    private FortressCyclops(final FortressCyclops card) {
         super(card);
     }
 

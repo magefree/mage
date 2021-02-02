@@ -26,7 +26,7 @@ public final class HulkingGoblin extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public HulkingGoblin(final HulkingGoblin card) {
+    private HulkingGoblin(final HulkingGoblin card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class ThunderingGiant extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public ThunderingGiant(final ThunderingGiant card) {
+    private ThunderingGiant(final ThunderingGiant card) {
         super(card);
     }
 

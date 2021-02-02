@@ -33,7 +33,7 @@ public final class RollingSpoil extends CardImpl {
                 new ManaWasSpentCondition(ColoredManaSymbol.B), "If {B} was spent to cast this spell, all creatures get -1/-1 until end of turn"));
     }
 
-    public RollingSpoil(final RollingSpoil card) {
+    private RollingSpoil(final RollingSpoil card) {
         super(card);
     }
 

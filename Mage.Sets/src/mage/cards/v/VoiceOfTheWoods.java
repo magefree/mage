@@ -45,7 +45,7 @@ public final class VoiceOfTheWoods extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VoiceOfTheWoods(final VoiceOfTheWoods card) {
+    private VoiceOfTheWoods(final VoiceOfTheWoods card) {
         super(card);
     }
 

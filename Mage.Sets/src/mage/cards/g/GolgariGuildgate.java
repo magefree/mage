@@ -28,7 +28,7 @@ public final class GolgariGuildgate extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public GolgariGuildgate(final GolgariGuildgate card) {
+    private GolgariGuildgate(final GolgariGuildgate card) {
         super(card);
     }
 

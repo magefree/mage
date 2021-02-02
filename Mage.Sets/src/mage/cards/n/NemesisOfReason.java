@@ -34,7 +34,7 @@ public final class NemesisOfReason extends CardImpl {
         this.addAbility(new NemesisOfReasonTriggeredAbility(new PutLibraryIntoGraveTargetEffect(10)));
     }
 
-    public NemesisOfReason(final NemesisOfReason card) {
+    private NemesisOfReason(final NemesisOfReason card) {
         super(card);
     }
 

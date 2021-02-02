@@ -41,7 +41,7 @@ public final class MirenTheMoaningWell extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MirenTheMoaningWell(final MirenTheMoaningWell card) {
+    private MirenTheMoaningWell(final MirenTheMoaningWell card) {
         super(card);
     }
 

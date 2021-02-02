@@ -40,7 +40,7 @@ public final class MagusOfTheMind extends CardImpl {
         this.addAbility(ability, new CastSpellLastTurnWatcher());
     }
 
-    public MagusOfTheMind(final MagusOfTheMind card) {
+    private MagusOfTheMind(final MagusOfTheMind card) {
         super(card);
     }
 

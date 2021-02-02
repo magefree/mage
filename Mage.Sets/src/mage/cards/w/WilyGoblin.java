@@ -29,7 +29,7 @@ public final class WilyGoblin extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
     }
 
-    public WilyGoblin(final WilyGoblin card) {
+    private WilyGoblin(final WilyGoblin card) {
         super(card);
     }
 

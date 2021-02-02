@@ -49,7 +49,7 @@ public final class VorinclexVoiceOfHunger extends CardImpl {
         this.addAbility(new VorinclexTriggeredAbility2());
     }
 
-    public VorinclexVoiceOfHunger(final VorinclexVoiceOfHunger card) {
+    private VorinclexVoiceOfHunger(final VorinclexVoiceOfHunger card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class Glowrider extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(1, filter, TargetController.ANY)));
     }
 
-    public Glowrider(final Glowrider card) {
+    private Glowrider(final Glowrider card) {
         super(card);
     }
 

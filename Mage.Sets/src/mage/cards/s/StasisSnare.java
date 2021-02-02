@@ -40,7 +40,7 @@ public final class StasisSnare extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StasisSnare(final StasisSnare card) {
+    private StasisSnare(final StasisSnare card) {
         super(card);
     }
 

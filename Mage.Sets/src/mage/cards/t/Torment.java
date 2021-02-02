@@ -37,7 +37,7 @@ public final class Torment extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-3, 0, Duration.WhileOnBattlefield)));
     }
 
-    public Torment(final Torment card) {
+    private Torment(final Torment card) {
         super(card);
     }
 

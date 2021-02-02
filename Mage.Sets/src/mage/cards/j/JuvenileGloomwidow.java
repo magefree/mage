@@ -27,7 +27,7 @@ public final class JuvenileGloomwidow extends CardImpl {
         this.addAbility(WitherAbility.getInstance());
     }
 
-    public JuvenileGloomwidow(final JuvenileGloomwidow card) {
+    private JuvenileGloomwidow(final JuvenileGloomwidow card) {
         super(card);
     }
 

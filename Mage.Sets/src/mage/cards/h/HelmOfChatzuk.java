@@ -31,7 +31,7 @@ public final class HelmOfChatzuk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HelmOfChatzuk(final HelmOfChatzuk card) {
+    private HelmOfChatzuk(final HelmOfChatzuk card) {
         super(card);
     }
 

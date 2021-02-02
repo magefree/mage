@@ -29,7 +29,7 @@ public final class HorizonDrake extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public HorizonDrake(final HorizonDrake card) {
+    private HorizonDrake(final HorizonDrake card) {
         super(card);
     }
 

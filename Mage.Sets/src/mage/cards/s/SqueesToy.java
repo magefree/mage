@@ -26,7 +26,7 @@ public final class SqueesToy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SqueesToy(final SqueesToy card) {
+    private SqueesToy(final SqueesToy card) {
         super(card);
     }
 

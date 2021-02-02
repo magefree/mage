@@ -32,7 +32,7 @@ public final class CleansingMeditation extends CardImpl {
         this.getSpellAbility().addEffect(new CleansingMeditationEffect());
     }
 
-    public CleansingMeditation(final CleansingMeditation card) {
+    private CleansingMeditation(final CleansingMeditation card) {
         super(card);
     }
 

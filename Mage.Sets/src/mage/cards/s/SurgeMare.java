@@ -62,7 +62,7 @@ public final class SurgeMare extends CardImpl {
         ));
     }
 
-    public SurgeMare(final SurgeMare card) {
+    private SurgeMare(final SurgeMare card) {
         super(card);
     }
 

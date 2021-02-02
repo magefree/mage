@@ -41,7 +41,7 @@ public final class ShahOfNaarIsle extends CardImpl {
         this.addAbility(new ShahOfNaarIsleTriggeredAbility());
     }
 
-    public ShahOfNaarIsle(final ShahOfNaarIsle card) {
+    private ShahOfNaarIsle(final ShahOfNaarIsle card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class WalkTheAeons extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public WalkTheAeons(final WalkTheAeons card) {
+    private WalkTheAeons(final WalkTheAeons card) {
         super(card);
     }
 

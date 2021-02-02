@@ -42,7 +42,7 @@ public final class SlingbowTrap extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature(1, 1, filter, false));
     }
 
-    public SlingbowTrap(final SlingbowTrap card) {
+    private SlingbowTrap(final SlingbowTrap card) {
         super(card);
     }
 

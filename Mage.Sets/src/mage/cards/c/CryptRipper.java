@@ -31,7 +31,7 @@ public final class CryptRipper extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public CryptRipper(final CryptRipper card) {
+    private CryptRipper(final CryptRipper card) {
         super(card);
     }
 

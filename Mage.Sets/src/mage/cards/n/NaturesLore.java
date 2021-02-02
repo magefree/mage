@@ -31,7 +31,7 @@ public final class NaturesLore extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true));
     }
 
-    public NaturesLore(final NaturesLore card) {
+    private NaturesLore(final NaturesLore card) {
         super(card);
     }
 

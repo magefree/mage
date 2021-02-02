@@ -26,7 +26,7 @@ public final class GiltgroveStalker extends CardImpl {
         this.addAbility(new DauntAbility());
     }
 
-    public GiltgroveStalker(final GiltgroveStalker card) {
+    private GiltgroveStalker(final GiltgroveStalker card) {
         super(card);
     }
 

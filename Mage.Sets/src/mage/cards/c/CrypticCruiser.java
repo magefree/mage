@@ -39,7 +39,7 @@ public final class CrypticCruiser extends CardImpl {
 
     }
 
-    public CrypticCruiser(final CrypticCruiser card) {
+    private CrypticCruiser(final CrypticCruiser card) {
         super(card);
     }
 

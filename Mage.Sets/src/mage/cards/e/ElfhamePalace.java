@@ -25,7 +25,7 @@ public final class ElfhamePalace extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public ElfhamePalace(final ElfhamePalace card) {
+    private ElfhamePalace(final ElfhamePalace card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class Terror extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }
 
-    public Terror(final Terror card) {
+    private Terror(final Terror card) {
         super(card);
     }
 

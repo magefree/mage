@@ -31,7 +31,7 @@ public final class PelakkaWurm extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public PelakkaWurm(final PelakkaWurm card) {
+    private PelakkaWurm(final PelakkaWurm card) {
         super(card);
     }
 

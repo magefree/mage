@@ -40,7 +40,7 @@ public final class AlphaStatus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(dynamicValue, dynamicValue, Duration.WhileOnBattlefield)));
     }
 
-    public AlphaStatus(final AlphaStatus card) {
+    private AlphaStatus(final AlphaStatus card) {
         super(card);
     }
 

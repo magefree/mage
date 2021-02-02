@@ -31,7 +31,7 @@ public final class MarchesasDecree extends CardImpl {
         this.addAbility(new AttacksAllTriggeredAbility(effect, false, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PLAYER, true, true));
     }
 
-    public MarchesasDecree(final MarchesasDecree card) {
+    private MarchesasDecree(final MarchesasDecree card) {
         super(card);
     }
 

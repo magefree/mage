@@ -26,7 +26,7 @@ public final class EbonyRhino extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public EbonyRhino(final EbonyRhino card) {
+    private EbonyRhino(final EbonyRhino card) {
         super(card);
     }
 

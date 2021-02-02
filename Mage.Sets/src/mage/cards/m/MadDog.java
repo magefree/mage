@@ -42,7 +42,7 @@ public final class MadDog extends CardImpl {
 
     }
 
-    public MadDog(final MadDog card) {
+    private MadDog(final MadDog card) {
         super(card);
     }
 

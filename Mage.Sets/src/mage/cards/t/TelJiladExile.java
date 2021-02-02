@@ -28,7 +28,7 @@ public final class TelJiladExile extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }
 
-    public TelJiladExile(final TelJiladExile card) {
+    private TelJiladExile(final TelJiladExile card) {
         super(card);
     }
 

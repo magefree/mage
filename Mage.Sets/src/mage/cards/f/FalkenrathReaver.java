@@ -21,7 +21,7 @@ public final class FalkenrathReaver extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public FalkenrathReaver(final FalkenrathReaver card) {
+    private FalkenrathReaver(final FalkenrathReaver card) {
         super(card);
     }
 

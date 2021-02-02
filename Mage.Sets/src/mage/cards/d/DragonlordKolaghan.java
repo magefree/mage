@@ -52,7 +52,7 @@ public final class DragonlordKolaghan extends CardImpl {
 
     }
 
-    public DragonlordKolaghan(final DragonlordKolaghan card) {
+    private DragonlordKolaghan(final DragonlordKolaghan card) {
         super(card);
     }
 

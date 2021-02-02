@@ -27,7 +27,7 @@ public final class BlastOfGenius extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public BlastOfGenius(final BlastOfGenius card) {
+    private BlastOfGenius(final BlastOfGenius card) {
         super(card);
     }
 

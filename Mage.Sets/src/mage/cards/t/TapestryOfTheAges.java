@@ -41,7 +41,7 @@ public final class TapestryOfTheAges extends CardImpl {
 
     }
 
-    public TapestryOfTheAges(final TapestryOfTheAges card) {
+    private TapestryOfTheAges(final TapestryOfTheAges card) {
         super(card);
     }
 

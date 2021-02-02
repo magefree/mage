@@ -56,7 +56,7 @@ public final class ShipwreckSinger extends CardImpl {
 
     }
 
-    public ShipwreckSinger(final ShipwreckSinger card) {
+    private ShipwreckSinger(final ShipwreckSinger card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class CinderMarsh extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CinderMarsh(final CinderMarsh card) {
+    private CinderMarsh(final CinderMarsh card) {
         super(card);
     }
 

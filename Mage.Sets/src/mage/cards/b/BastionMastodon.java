@@ -32,7 +32,7 @@ public final class BastionMastodon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BastionMastodon(final BastionMastodon card) {
+    private BastionMastodon(final BastionMastodon card) {
         super(card);
     }
 

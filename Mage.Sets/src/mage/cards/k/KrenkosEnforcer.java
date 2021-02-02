@@ -27,7 +27,7 @@ public final class KrenkosEnforcer extends CardImpl {
         this.addAbility(IntimidateAbility.getInstance());
     }
 
-    public KrenkosEnforcer(final KrenkosEnforcer card) {
+    private KrenkosEnforcer(final KrenkosEnforcer card) {
         super(card);
     }
 

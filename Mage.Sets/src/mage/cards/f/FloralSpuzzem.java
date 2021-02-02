@@ -43,7 +43,7 @@ public final class FloralSpuzzem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FloralSpuzzem(final FloralSpuzzem card) {
+    private FloralSpuzzem(final FloralSpuzzem card) {
         super(card);
     }
 

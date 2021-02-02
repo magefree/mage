@@ -41,7 +41,7 @@ public final class DownhillCharge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public DownhillCharge(final DownhillCharge card) {
+    private DownhillCharge(final DownhillCharge card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class PulseOfMurasa extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(6));
     }
 
-    public PulseOfMurasa(final PulseOfMurasa card) {
+    private PulseOfMurasa(final PulseOfMurasa card) {
         super(card);
     }
 

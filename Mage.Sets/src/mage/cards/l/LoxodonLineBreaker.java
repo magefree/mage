@@ -23,7 +23,7 @@ public final class LoxodonLineBreaker extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public LoxodonLineBreaker(final LoxodonLineBreaker card) {
+    private LoxodonLineBreaker(final LoxodonLineBreaker card) {
         super(card);
     }
 

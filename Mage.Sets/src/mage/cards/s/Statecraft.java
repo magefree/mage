@@ -29,7 +29,7 @@ public final class Statecraft extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StatecraftPreventionEffect()));
     }
 
-    public Statecraft(final Statecraft card) {
+    private Statecraft(final Statecraft card) {
         super(card);
     }
 

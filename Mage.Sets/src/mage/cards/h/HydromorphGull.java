@@ -48,7 +48,7 @@ public final class HydromorphGull extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HydromorphGull(final HydromorphGull card) {
+    private HydromorphGull(final HydromorphGull card) {
         super(card);
     }
 

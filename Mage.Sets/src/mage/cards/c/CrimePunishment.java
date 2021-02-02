@@ -39,7 +39,7 @@ public final class CrimePunishment extends SplitCard {
 
     }
 
-    public CrimePunishment(final CrimePunishment card) {
+    private CrimePunishment(final CrimePunishment card) {
         super(card);
     }
 

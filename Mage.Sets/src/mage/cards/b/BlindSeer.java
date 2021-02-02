@@ -33,7 +33,7 @@ public final class BlindSeer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlindSeer(final BlindSeer card) {
+    private BlindSeer(final BlindSeer card) {
         super(card);
     }
 

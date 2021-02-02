@@ -40,7 +40,7 @@ public final class RidersOfGavony extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RidersOfGavonyGainAbilityControlledEffect()));
     }
 
-    public RidersOfGavony(final RidersOfGavony card) {
+    private RidersOfGavony(final RidersOfGavony card) {
         super(card);
     }
 

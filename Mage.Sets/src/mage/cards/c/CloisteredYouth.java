@@ -33,7 +33,7 @@ public final class CloisteredYouth extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.YOU, true));
     }
 
-    public CloisteredYouth(final CloisteredYouth card) {
+    private CloisteredYouth(final CloisteredYouth card) {
         super(card);
     }
 

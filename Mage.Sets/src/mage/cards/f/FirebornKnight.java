@@ -36,7 +36,7 @@ public final class FirebornKnight extends CardImpl {
                 new ManaCostsImpl("{R/W}{R/W}{R/W}{R/W}")));
     }
 
-    public FirebornKnight(final FirebornKnight card) {
+    private FirebornKnight(final FirebornKnight card) {
         super(card);
     }
 

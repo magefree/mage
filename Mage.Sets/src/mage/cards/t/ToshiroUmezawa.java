@@ -58,7 +58,7 @@ public final class ToshiroUmezawa extends CardImpl {
 
     }
 
-    public ToshiroUmezawa(final ToshiroUmezawa card) {
+    private ToshiroUmezawa(final ToshiroUmezawa card) {
         super(card);
     }
 

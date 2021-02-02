@@ -26,7 +26,7 @@ public final class TitansRevenge extends CardImpl {
         this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());
     }
 
-    public TitansRevenge(final TitansRevenge card) {
+    private TitansRevenge(final TitansRevenge card) {
         super(card);
     }
 

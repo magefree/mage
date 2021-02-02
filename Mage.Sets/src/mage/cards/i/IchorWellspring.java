@@ -23,7 +23,7 @@ public final class IchorWellspring extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public IchorWellspring(final IchorWellspring card) {
+    private IchorWellspring(final IchorWellspring card) {
         super(card);
     }
 

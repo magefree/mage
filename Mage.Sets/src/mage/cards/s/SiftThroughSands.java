@@ -52,7 +52,7 @@ public final class SiftThroughSands extends CardImpl {
         this.getSpellAbility().addWatcher(new SiftThroughSandsWatcher());
     }
 
-    public SiftThroughSands(final SiftThroughSands card) {
+    private SiftThroughSands(final SiftThroughSands card) {
         super(card);
     }
 

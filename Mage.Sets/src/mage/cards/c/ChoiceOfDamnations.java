@@ -33,7 +33,7 @@ public final class ChoiceOfDamnations extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public ChoiceOfDamnations(final ChoiceOfDamnations card) {
+    private ChoiceOfDamnations(final ChoiceOfDamnations card) {
         super(card);
     }
 

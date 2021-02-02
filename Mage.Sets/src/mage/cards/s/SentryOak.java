@@ -41,7 +41,7 @@ public final class SentryOak extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new DoIfClashWonEffect(new SentryOakEffect()), TargetController.YOU, true));
     }
 
-    public SentryOak(final SentryOak card) {
+    private SentryOak(final SentryOak card) {
         super(card);
     }
 

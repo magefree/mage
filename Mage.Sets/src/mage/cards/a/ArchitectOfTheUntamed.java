@@ -37,7 +37,7 @@ public final class ArchitectOfTheUntamed extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ArchitectOfTheUntamedBeastToken(), 1), new PayEnergyCost(8)));
     }
 
-    public ArchitectOfTheUntamed(final ArchitectOfTheUntamed card) {
+    private ArchitectOfTheUntamed(final ArchitectOfTheUntamed card) {
         super(card);
     }
 

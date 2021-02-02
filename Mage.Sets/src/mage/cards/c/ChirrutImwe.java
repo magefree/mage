@@ -46,7 +46,7 @@ public final class ChirrutImwe extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{W}")));
     }
 
-    public ChirrutImwe(final ChirrutImwe card) {
+    private ChirrutImwe(final ChirrutImwe card) {
         super(card);
     }
 

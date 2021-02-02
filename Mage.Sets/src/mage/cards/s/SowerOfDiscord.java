@@ -47,7 +47,7 @@ public final class SowerOfDiscord extends CardImpl {
         this.addAbility(new SowerOfDiscordTriggeredAbility());
     }
 
-    public SowerOfDiscord(final SowerOfDiscord card) {
+    private SowerOfDiscord(final SowerOfDiscord card) {
         super(card);
     }
 

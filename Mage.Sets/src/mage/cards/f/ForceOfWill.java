@@ -39,7 +39,7 @@ public final class ForceOfWill extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public ForceOfWill(final ForceOfWill card) {
+    private ForceOfWill(final ForceOfWill card) {
         super(card);
     }
 

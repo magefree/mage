@@ -36,7 +36,7 @@ public final class Wakedancer extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MorbidCondition.instance, staticText));
     }
 
-    public Wakedancer(final Wakedancer card) {
+    private Wakedancer(final Wakedancer card) {
         super(card);
     }
 

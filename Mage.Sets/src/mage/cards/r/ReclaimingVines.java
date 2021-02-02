@@ -33,7 +33,7 @@ public final class ReclaimingVines extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public ReclaimingVines(final ReclaimingVines card) {
+    private ReclaimingVines(final ReclaimingVines card) {
         super(card);
     }
 

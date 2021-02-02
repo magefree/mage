@@ -32,7 +32,7 @@ public final class MinotaurSkullcleaver extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostSourceEffect(2,0, Duration.EndOfTurn)));
     }
 
-    public MinotaurSkullcleaver(final MinotaurSkullcleaver card) {
+    private MinotaurSkullcleaver(final MinotaurSkullcleaver card) {
         super(card);
     }
 

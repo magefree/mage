@@ -38,7 +38,7 @@ public final class OrcishCannoneers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrcishCannoneers(final OrcishCannoneers card) {
+    private OrcishCannoneers(final OrcishCannoneers card) {
         super(card);
     }
 

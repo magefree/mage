@@ -42,7 +42,7 @@ public final class RenegadeFreighter extends CardImpl {
         this.addAbility(new CrewAbility(2));
     }
 
-    public RenegadeFreighter(final RenegadeFreighter card) {
+    private RenegadeFreighter(final RenegadeFreighter card) {
         super(card);
     }
 

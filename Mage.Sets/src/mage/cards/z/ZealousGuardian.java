@@ -25,7 +25,7 @@ public final class ZealousGuardian extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
     }
 
-    public ZealousGuardian(final ZealousGuardian card) {
+    private ZealousGuardian(final ZealousGuardian card) {
         super(card);
     }
 

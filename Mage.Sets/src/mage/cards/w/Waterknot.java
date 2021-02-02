@@ -39,7 +39,7 @@ public final class Waterknot extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
-    public Waterknot(final Waterknot card) {
+    private Waterknot(final Waterknot card) {
         super(card);
     }
 

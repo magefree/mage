@@ -29,7 +29,7 @@ public final class NewFrontiers extends CardImpl {
         this.getSpellAbility().addEffect(new NewFrontiersEffect());
     }
 
-    public NewFrontiers(final NewFrontiers card) {
+    private NewFrontiers(final NewFrontiers card) {
         super(card);
     }
 

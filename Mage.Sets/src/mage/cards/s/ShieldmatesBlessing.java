@@ -23,7 +23,7 @@ public final class ShieldmatesBlessing extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public ShieldmatesBlessing(final ShieldmatesBlessing card) {
+    private ShieldmatesBlessing(final ShieldmatesBlessing card) {
         super(card);
     }
 

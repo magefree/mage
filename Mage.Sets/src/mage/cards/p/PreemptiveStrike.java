@@ -23,7 +23,7 @@ public final class PreemptiveStrike extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
-    public PreemptiveStrike(final PreemptiveStrike card) {
+    private PreemptiveStrike(final PreemptiveStrike card) {
         super(card);
     }
 

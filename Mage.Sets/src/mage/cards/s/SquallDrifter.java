@@ -40,7 +40,7 @@ public final class SquallDrifter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SquallDrifter(final SquallDrifter card) {
+    private SquallDrifter(final SquallDrifter card) {
         super(card);
     }
 

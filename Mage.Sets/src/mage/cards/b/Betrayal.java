@@ -43,7 +43,7 @@ public final class Betrayal extends CardImpl {
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), "enchanted creature"));
     }
 
-    public Betrayal(final Betrayal card) {
+    private Betrayal(final Betrayal card) {
         super(card);
     }
 

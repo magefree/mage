@@ -42,7 +42,7 @@ public final class LathnuHellion extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(effect, TargetController.YOU, false));
     }
 
-    public LathnuHellion(final LathnuHellion card) {
+    private LathnuHellion(final LathnuHellion card) {
         super(card);
     }
 

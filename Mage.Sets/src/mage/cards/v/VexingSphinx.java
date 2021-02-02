@@ -39,7 +39,7 @@ public final class VexingSphinx extends CardImpl {
 
     }
 
-    public VexingSphinx(final VexingSphinx card) {
+    private VexingSphinx(final VexingSphinx card) {
         super(card);
     }
 

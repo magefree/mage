@@ -43,7 +43,7 @@ public final class Ratcatcher extends CardImpl {
         
     }
 
-    public Ratcatcher(final Ratcatcher card) {
+    private Ratcatcher(final Ratcatcher card) {
         super(card);
     }
 

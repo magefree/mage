@@ -26,7 +26,7 @@ public final class StoneThrowingDevils extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public StoneThrowingDevils(final StoneThrowingDevils card) {
+    private StoneThrowingDevils(final StoneThrowingDevils card) {
         super(card);
     }
 

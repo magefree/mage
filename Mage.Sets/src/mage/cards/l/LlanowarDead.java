@@ -26,7 +26,7 @@ public final class LlanowarDead extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public LlanowarDead(final LlanowarDead card) {
+    private LlanowarDead(final LlanowarDead card) {
         super(card);
     }
 

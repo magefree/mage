@@ -30,7 +30,7 @@ public final class ScavengerDrake extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true, true));
     }
 
-    public ScavengerDrake(final ScavengerDrake card) {
+    private ScavengerDrake(final ScavengerDrake card) {
         super(card);
     }
 

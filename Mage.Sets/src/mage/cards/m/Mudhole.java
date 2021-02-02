@@ -30,7 +30,7 @@ public final class Mudhole extends CardImpl {
         this.getSpellAbility().addEffect(new MudholeEffect());
     }
 
-    public Mudhole(final Mudhole card) {
+    private Mudhole(final Mudhole card) {
         super(card);
     }
 

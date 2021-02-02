@@ -32,7 +32,7 @@ public final class VisceraSeer extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
-    public VisceraSeer(final VisceraSeer card) {
+    private VisceraSeer(final VisceraSeer card) {
         super(card);
     }
 

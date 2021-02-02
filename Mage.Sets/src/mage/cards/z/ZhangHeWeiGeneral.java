@@ -34,7 +34,7 @@ public final class ZhangHeWeiGeneral extends CardImpl {
                 StaticFilters.FILTER_PERMANENT_CREATURE, true), false));
     }
 
-    public ZhangHeWeiGeneral(final ZhangHeWeiGeneral card) {
+    private ZhangHeWeiGeneral(final ZhangHeWeiGeneral card) {
         super(card);
     }
 

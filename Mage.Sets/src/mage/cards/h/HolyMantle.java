@@ -45,7 +45,7 @@ public final class HolyMantle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HolyMantle(final HolyMantle card) {
+    private HolyMantle(final HolyMantle card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class Unnerve extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(StaticValue.get(2), false, TargetController.OPPONENT));
     }
 
-    public Unnerve(final Unnerve card) {
+    private Unnerve(final Unnerve card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class SequesteredStash extends CardImpl {
 
     }
 
-    public SequesteredStash(final SequesteredStash card) {
+    private SequesteredStash(final SequesteredStash card) {
         super(card);
     }
 

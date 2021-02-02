@@ -30,7 +30,7 @@ public final class MelesseSpirit extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
     }
 
-    public MelesseSpirit(final MelesseSpirit card) {
+    private MelesseSpirit(final MelesseSpirit card) {
         super(card);
     }
 

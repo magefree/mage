@@ -30,7 +30,7 @@ public final class SoulOfMagma extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoulOfMagma(final SoulOfMagma card) {
+    private SoulOfMagma(final SoulOfMagma card) {
         super(card);
     }
 

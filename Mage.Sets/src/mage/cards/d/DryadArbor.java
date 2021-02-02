@@ -29,7 +29,7 @@ public final class DryadArbor extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public DryadArbor(final DryadArbor card) {
+    private DryadArbor(final DryadArbor card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class WaterWurm extends CardImpl {
             "{this} gets +0/+1 as long as an opponent controls an Island")));
     }
 
-    public WaterWurm(final WaterWurm card) {
+    private WaterWurm(final WaterWurm card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class Aquamoeba extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new DiscardCardCost()));
     }
 
-    public Aquamoeba(final Aquamoeba card) {
+    private Aquamoeba(final Aquamoeba card) {
         super(card);
     }
 

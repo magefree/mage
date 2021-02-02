@@ -37,7 +37,7 @@ public final class ThranTurbine extends CardImpl {
                 new ThranTurbineEffect(), TargetController.YOU, true));
     }
 
-    public ThranTurbine(final ThranTurbine card) {
+    private ThranTurbine(final ThranTurbine card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class SandcrafterMage extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BolsterEffect(1), false));
     }
 
-    public SandcrafterMage(final SandcrafterMage card) {
+    private SandcrafterMage(final SandcrafterMage card) {
         super(card);
     }
 

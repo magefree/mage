@@ -42,7 +42,7 @@ public final class MireShade extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MireShade(final MireShade card) {
+    private MireShade(final MireShade card) {
         super(card);
     }
 

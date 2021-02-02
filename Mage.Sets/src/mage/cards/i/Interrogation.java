@@ -30,7 +30,7 @@ public final class Interrogation extends CardImpl {
         this.getSpellAbility().addEffect(new InterrogationEffect());
     }
 
-    public Interrogation(final Interrogation card) {
+    private Interrogation(final Interrogation card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class TemptingWurm extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TemptingWurmEffect()));
     }
 
-    public TemptingWurm(final TemptingWurm card) {
+    private TemptingWurm(final TemptingWurm card) {
         super(card);
     }
 

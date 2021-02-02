@@ -29,7 +29,7 @@ public final class Fathier extends CardImpl {
         this.addAbility(new MonstrosityAbility("{4}{R}{R}", 2));
     }
 
-    public Fathier(final Fathier card) {
+    private Fathier(final Fathier card) {
         super(card);
     }
 

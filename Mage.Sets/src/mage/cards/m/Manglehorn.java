@@ -43,7 +43,7 @@ public final class Manglehorn extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManglehornTapEffect()));
     }
 
-    public Manglehorn(final Manglehorn card) {
+    private Manglehorn(final Manglehorn card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class AkroanCrusader extends CardImpl {
         this.addAbility(new HeroicAbility(new CreateTokenEffect(new AkroanSoldierToken())));
     }
 
-    public AkroanCrusader(final AkroanCrusader card) {
+    private AkroanCrusader(final AkroanCrusader card) {
         super(card);
     }
 

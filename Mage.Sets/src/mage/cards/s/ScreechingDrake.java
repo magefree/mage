@@ -29,7 +29,7 @@ public final class ScreechingDrake extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(1, 1, false), false));
     }
 
-    public ScreechingDrake(final ScreechingDrake card) {
+    private ScreechingDrake(final ScreechingDrake card) {
         super(card);
     }
 

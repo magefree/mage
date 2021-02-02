@@ -28,7 +28,7 @@ public final class LivingAirship extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{G}")));
     }
 
-    public LivingAirship(final LivingAirship card) {
+    private LivingAirship(final LivingAirship card) {
         super(card);
     }
 

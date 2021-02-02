@@ -26,7 +26,7 @@ public final class BlessedWine extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public BlessedWine(final BlessedWine card) {
+    private BlessedWine(final BlessedWine card) {
         super(card);
     }
 

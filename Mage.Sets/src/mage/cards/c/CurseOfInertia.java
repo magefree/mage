@@ -42,7 +42,7 @@ public final class CurseOfInertia extends CardImpl {
 
     }
 
-    public CurseOfInertia(final CurseOfInertia card) {
+    private CurseOfInertia(final CurseOfInertia card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class BuildersBlessing extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield, new FilterUntappedCreature("untapped creatures"))));
     }
 
-    public BuildersBlessing(final BuildersBlessing card) {
+    private BuildersBlessing(final BuildersBlessing card) {
         super(card);
     }
 

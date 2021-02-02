@@ -66,7 +66,7 @@ public final class ShellOfTheLastKappa extends CardImpl {
 
     }
 
-    public ShellOfTheLastKappa(final ShellOfTheLastKappa card) {
+    private ShellOfTheLastKappa(final ShellOfTheLastKappa card) {
         super(card);
     }
 

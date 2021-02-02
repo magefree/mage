@@ -34,7 +34,7 @@ public final class ZzzyxassAbyss extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ZzzyxassAbyssEffect(), TargetController.YOU, false));
     }
 
-    public ZzzyxassAbyss(final ZzzyxassAbyss card) {
+    private ZzzyxassAbyss(final ZzzyxassAbyss card) {
         super(card);
     }
 

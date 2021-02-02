@@ -27,7 +27,7 @@ public final class ColossalDreadmaw extends CardImpl {
 
     }
 
-    public ColossalDreadmaw(final ColossalDreadmaw card) {
+    private ColossalDreadmaw(final ColossalDreadmaw card) {
         super(card);
     }
 

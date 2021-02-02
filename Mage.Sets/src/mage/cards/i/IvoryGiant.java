@@ -40,7 +40,7 @@ public final class IvoryGiant extends CardImpl {
         this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{W"), this));
     }
 
-    public IvoryGiant(final IvoryGiant card) {
+    private IvoryGiant(final IvoryGiant card) {
         super(card);
     }
 

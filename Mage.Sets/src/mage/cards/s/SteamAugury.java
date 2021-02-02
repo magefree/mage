@@ -37,7 +37,7 @@ public final class SteamAugury extends CardImpl {
         this.getSpellAbility().addEffect(new SteamAuguryEffect());
     }
 
-    public SteamAugury(final SteamAugury card) {
+    private SteamAugury(final SteamAugury card) {
         super(card);
     }
 

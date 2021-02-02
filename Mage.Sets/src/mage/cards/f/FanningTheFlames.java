@@ -27,7 +27,7 @@ public final class FanningTheFlames extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public FanningTheFlames(final FanningTheFlames card) {
+    private FanningTheFlames(final FanningTheFlames card) {
         super(card);
     }
 

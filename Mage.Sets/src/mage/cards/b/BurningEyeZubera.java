@@ -37,7 +37,7 @@ public final class BurningEyeZubera extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BurningEyeZubera(final BurningEyeZubera card) {
+    private BurningEyeZubera(final BurningEyeZubera card) {
         super(card);
     }
 

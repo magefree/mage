@@ -34,7 +34,7 @@ public final class DeathsCaress extends CardImpl {
         this.getSpellAbility().addEffect(new DeathsCaressEffect());
     }
 
-    public DeathsCaress(final DeathsCaress card) {
+    private DeathsCaress(final DeathsCaress card) {
         super(card);
     }
 

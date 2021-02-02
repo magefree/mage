@@ -42,7 +42,7 @@ public final class SerendibSorcerer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SerendibSorcerer(final SerendibSorcerer card) {
+    private SerendibSorcerer(final SerendibSorcerer card) {
         super(card);
     }
 

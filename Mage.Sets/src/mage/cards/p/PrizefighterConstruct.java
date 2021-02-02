@@ -22,7 +22,7 @@ public final class PrizefighterConstruct extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public PrizefighterConstruct(final PrizefighterConstruct card) {
+    private PrizefighterConstruct(final PrizefighterConstruct card) {
         super(card);
     }
 

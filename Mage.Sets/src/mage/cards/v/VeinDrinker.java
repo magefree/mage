@@ -43,7 +43,7 @@ public final class VeinDrinker extends CardImpl {
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 
-    public VeinDrinker(final VeinDrinker card) {
+    private VeinDrinker(final VeinDrinker card) {
         super(card);
     }
 

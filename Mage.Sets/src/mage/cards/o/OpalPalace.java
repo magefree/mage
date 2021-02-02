@@ -46,7 +46,7 @@ public final class OpalPalace extends CardImpl {
 
     }
 
-    public OpalPalace(final OpalPalace card) {
+    private OpalPalace(final OpalPalace card) {
         super(card);
     }
 

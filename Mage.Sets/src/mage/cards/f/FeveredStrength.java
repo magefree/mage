@@ -30,7 +30,7 @@ public final class FeveredStrength extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false));
     }
 
-    public FeveredStrength(final FeveredStrength card) {
+    private FeveredStrength(final FeveredStrength card) {
         super(card);
     }
 

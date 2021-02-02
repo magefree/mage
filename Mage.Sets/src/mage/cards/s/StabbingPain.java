@@ -25,7 +25,7 @@ public final class StabbingPain extends CardImpl {
         this.getSpellAbility().addEffect(new TapTargetEffect());
     }
 
-    public StabbingPain(final StabbingPain card) {
+    private StabbingPain(final StabbingPain card) {
         super(card);
     }
 

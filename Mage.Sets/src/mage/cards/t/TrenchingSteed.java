@@ -35,7 +35,7 @@ public final class TrenchingSteed extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("land")))));
     }
 
-    public TrenchingSteed(final TrenchingSteed card) {
+    private TrenchingSteed(final TrenchingSteed card) {
         super(card);
     }
 

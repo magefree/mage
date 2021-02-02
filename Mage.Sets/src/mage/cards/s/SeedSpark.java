@@ -34,7 +34,7 @@ public final class SeedSpark extends CardImpl {
                 new ManaWasSpentCondition(ColoredManaSymbol.G), "If {G} was spent to cast this spell, create two 1/1 green Saproling creature tokens"));
     }
 
-    public SeedSpark(final SeedSpark card) {
+    private SeedSpark(final SeedSpark card) {
         super(card);
     }
 

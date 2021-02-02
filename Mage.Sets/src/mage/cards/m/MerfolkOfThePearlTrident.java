@@ -22,7 +22,7 @@ public final class MerfolkOfThePearlTrident extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public MerfolkOfThePearlTrident(final MerfolkOfThePearlTrident card) {
+    private MerfolkOfThePearlTrident(final MerfolkOfThePearlTrident card) {
         super(card);
     }
 

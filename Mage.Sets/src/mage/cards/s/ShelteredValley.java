@@ -54,7 +54,7 @@ public final class ShelteredValley extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public ShelteredValley(final ShelteredValley card) {
+    private ShelteredValley(final ShelteredValley card) {
         super(card);
     }
 

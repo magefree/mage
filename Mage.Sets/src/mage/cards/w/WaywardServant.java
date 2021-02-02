@@ -46,7 +46,7 @@ public final class WaywardServant extends CardImpl {
 
     }
 
-    public WaywardServant(final WaywardServant card) {
+    private WaywardServant(final WaywardServant card) {
         super(card);
     }
 

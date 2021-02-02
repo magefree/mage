@@ -39,7 +39,7 @@ public final class FaerieMechanist extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(StaticValue.get(3), false, StaticValue.get(1), filter, false)));
     }
 
-    public FaerieMechanist(final FaerieMechanist card) {
+    private FaerieMechanist(final FaerieMechanist card) {
         super(card);
     }
 

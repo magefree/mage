@@ -47,7 +47,7 @@ public final class RabbleRouser extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RabbleRouser(final RabbleRouser card) {
+    private RabbleRouser(final RabbleRouser card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class SunTitan extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SunTitan(final SunTitan card) {
+    private SunTitan(final SunTitan card) {
         super(card);
     }
 

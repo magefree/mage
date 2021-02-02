@@ -33,7 +33,7 @@ public final class BenthicInfiltrator extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public BenthicInfiltrator(final BenthicInfiltrator card) {
+    private BenthicInfiltrator(final BenthicInfiltrator card) {
         super(card);
     }
 

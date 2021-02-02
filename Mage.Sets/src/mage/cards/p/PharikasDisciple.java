@@ -29,7 +29,7 @@ public final class PharikasDisciple extends CardImpl {
         this.addAbility(new RenownAbility(1));
     }
 
-    public PharikasDisciple(final PharikasDisciple card) {
+    private PharikasDisciple(final PharikasDisciple card) {
         super(card);
     }
 

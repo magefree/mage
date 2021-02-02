@@ -34,7 +34,7 @@ public final class GatewayPlaza extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public GatewayPlaza(final GatewayPlaza card) {
+    private GatewayPlaza(final GatewayPlaza card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class DarksteelIngot extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public DarksteelIngot(final DarksteelIngot card) {
+    private DarksteelIngot(final DarksteelIngot card) {
         super(card);
     }
 

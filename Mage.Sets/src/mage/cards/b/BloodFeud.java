@@ -32,7 +32,7 @@ public final class BloodFeud extends CardImpl {
         this.getSpellAbility().addTarget(target2);
     }
 
-    public BloodFeud(final BloodFeud card) {
+    private BloodFeud(final BloodFeud card) {
         super(card);
     }
 

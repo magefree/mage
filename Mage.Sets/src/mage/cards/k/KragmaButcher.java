@@ -32,7 +32,7 @@ public final class KragmaButcher extends CardImpl {
         this.addAbility(new InspiredAbility(effect));
     }
 
-    public KragmaButcher(final KragmaButcher card) {
+    private KragmaButcher(final KragmaButcher card) {
         super(card);
     }
 

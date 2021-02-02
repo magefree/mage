@@ -29,7 +29,7 @@ public final class FrightfulDelusion extends CardImpl {
         this.getSpellAbility().addEffect(new FrightfulDelusionEffect());
     }
 
-    public FrightfulDelusion(final FrightfulDelusion card) {
+    private FrightfulDelusion(final FrightfulDelusion card) {
         super(card);
     }
 

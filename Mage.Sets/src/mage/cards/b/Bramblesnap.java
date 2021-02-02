@@ -34,7 +34,7 @@ public final class Bramblesnap extends CardImpl {
                 new TapTargetCost(new TargetControlledCreaturePermanent())));
     }
 
-    public Bramblesnap(final Bramblesnap card) {
+    private Bramblesnap(final Bramblesnap card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class RockcasterPlatoon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RockcasterPlatoon(final RockcasterPlatoon card) {
+    private RockcasterPlatoon(final RockcasterPlatoon card) {
         super(card);
     }
 

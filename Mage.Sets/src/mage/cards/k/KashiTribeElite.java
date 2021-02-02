@@ -47,7 +47,7 @@ public final class KashiTribeElite extends CardImpl {
 
     }
 
-    public KashiTribeElite(final KashiTribeElite card) {
+    private KashiTribeElite(final KashiTribeElite card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class KillingGlare extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(KillingGlareAdjuster.instance);
     }
 
-    public KillingGlare(final KillingGlare card) {
+    private KillingGlare(final KillingGlare card) {
         super(card);
     }
 

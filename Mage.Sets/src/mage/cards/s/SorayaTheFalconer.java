@@ -44,7 +44,7 @@ public final class SorayaTheFalconer extends CardImpl {
 
     }
 
-    public SorayaTheFalconer(final SorayaTheFalconer card) {
+    private SorayaTheFalconer(final SorayaTheFalconer card) {
         super(card);
     }
 

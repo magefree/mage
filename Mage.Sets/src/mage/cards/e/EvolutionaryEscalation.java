@@ -41,7 +41,7 @@ public final class EvolutionaryEscalation extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EvolutionaryEscalation(final EvolutionaryEscalation card) {
+    private EvolutionaryEscalation(final EvolutionaryEscalation card) {
         super(card);
     }
 

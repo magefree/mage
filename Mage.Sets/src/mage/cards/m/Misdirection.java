@@ -45,7 +45,7 @@ public final class Misdirection extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter2));
     }
 
-    public Misdirection(final Misdirection card) {
+    private Misdirection(final Misdirection card) {
         super(card);
     }
 

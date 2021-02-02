@@ -38,7 +38,7 @@ public final class SpellheartChimera extends CardImpl {
                 new CardsInControllerGraveyardCount(new FilterInstantOrSorceryCard("instant and sorcery cards in your graveyard")), Duration.EndOfGame)));
     }
 
-    public SpellheartChimera(final SpellheartChimera card) {
+    private SpellheartChimera(final SpellheartChimera card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class PaleRiderOfTrostad extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardControllerEffect(1), false));
     }
 
-    public PaleRiderOfTrostad(final PaleRiderOfTrostad card) {
+    private PaleRiderOfTrostad(final PaleRiderOfTrostad card) {
         super(card);
     }
 

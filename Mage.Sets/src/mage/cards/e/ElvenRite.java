@@ -23,7 +23,7 @@ public final class ElvenRite extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(2));
     }
 
-    public ElvenRite(final ElvenRite card) {
+    private ElvenRite(final ElvenRite card) {
         super(card);
     }
 

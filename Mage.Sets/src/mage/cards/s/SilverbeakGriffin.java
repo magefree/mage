@@ -25,7 +25,7 @@ public final class SilverbeakGriffin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SilverbeakGriffin(final SilverbeakGriffin card) {
+    private SilverbeakGriffin(final SilverbeakGriffin card) {
         super(card);
     }
 

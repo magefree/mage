@@ -28,7 +28,7 @@ public final class ElephantResurgence extends CardImpl {
         this.getSpellAbility().addEffect(new ElephantResurgenceEffect());
     }
 
-    public ElephantResurgence(final ElephantResurgence card) {
+    private ElephantResurgence(final ElephantResurgence card) {
         super(card);
     }
 

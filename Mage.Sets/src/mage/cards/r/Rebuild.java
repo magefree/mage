@@ -26,7 +26,7 @@ public final class Rebuild extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public Rebuild(final Rebuild card) {
+    private Rebuild(final Rebuild card) {
         super(card);
     }
 

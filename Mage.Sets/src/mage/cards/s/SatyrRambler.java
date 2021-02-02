@@ -26,7 +26,7 @@ public final class SatyrRambler extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public SatyrRambler(final SatyrRambler card) {
+    private SatyrRambler(final SatyrRambler card) {
         super(card);
     }
 

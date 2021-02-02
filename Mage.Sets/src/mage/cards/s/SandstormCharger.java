@@ -26,7 +26,7 @@ public final class SandstormCharger extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{W}"), true));
     }
 
-    public SandstormCharger(final SandstormCharger card) {
+    private SandstormCharger(final SandstormCharger card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class BraidOfFire extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new BraidOfFireCost()));
     }
 
-    public BraidOfFire(final BraidOfFire card) {
+    private BraidOfFire(final BraidOfFire card) {
         super(card);
     }
 

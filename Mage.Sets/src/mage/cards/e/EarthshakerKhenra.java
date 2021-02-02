@@ -58,7 +58,7 @@ public final class EarthshakerKhenra extends CardImpl {
         this.addAbility(new EternalizeAbility(new ManaCostsImpl("{4}{R}{R}"), this));
     }
 
-    public EarthshakerKhenra(final EarthshakerKhenra card) {
+    private EarthshakerKhenra(final EarthshakerKhenra card) {
         super(card);
     }
 

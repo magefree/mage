@@ -35,7 +35,7 @@ public final class PhyrexianDriver extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, true)));
     }
 
-    public PhyrexianDriver(final PhyrexianDriver card) {
+    private PhyrexianDriver(final PhyrexianDriver card) {
         super(card);
     }
 

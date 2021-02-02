@@ -39,7 +39,7 @@ public final class FlailingOgre extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlailingOgre(final FlailingOgre card) {
+    private FlailingOgre(final FlailingOgre card) {
         super(card);
     }
 

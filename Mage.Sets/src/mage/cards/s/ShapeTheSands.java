@@ -32,7 +32,7 @@ public final class ShapeTheSands extends CardImpl {
 
     }
 
-    public ShapeTheSands(final ShapeTheSands card) {
+    private ShapeTheSands(final ShapeTheSands card) {
         super(card);
     }
 

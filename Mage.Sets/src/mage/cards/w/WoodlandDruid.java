@@ -23,7 +23,7 @@ public final class WoodlandDruid extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public WoodlandDruid(final WoodlandDruid card) {
+    private WoodlandDruid(final WoodlandDruid card) {
         super(card);
     }
 

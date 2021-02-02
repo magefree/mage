@@ -24,7 +24,7 @@ public final class SerumVisions extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }
 
-    public SerumVisions(final SerumVisions card) {
+    private SerumVisions(final SerumVisions card) {
         super(card);
     }
 

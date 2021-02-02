@@ -31,7 +31,7 @@ public final class RocEgg extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(rocEggToken, 1), false));
     }
 
-    public RocEgg(final RocEgg card) {
+    private RocEgg(final RocEgg card) {
         super(card);
     }
 

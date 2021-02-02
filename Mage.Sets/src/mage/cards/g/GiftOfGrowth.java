@@ -35,7 +35,7 @@ public final class GiftOfGrowth extends CardImpl {
                 "It gets +2/+2 until end of turn. If this spell was kicked, that creature gets +4/+4 until end of turn instead."));
     }
 
-    public GiftOfGrowth(final GiftOfGrowth card) {
+    private GiftOfGrowth(final GiftOfGrowth card) {
         super(card);
     }
 

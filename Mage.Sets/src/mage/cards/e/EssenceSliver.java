@@ -38,7 +38,7 @@ public final class EssenceSliver extends CardImpl {
 
     }
 
-    public EssenceSliver(final EssenceSliver card) {
+    private EssenceSliver(final EssenceSliver card) {
         super(card);
     }
 

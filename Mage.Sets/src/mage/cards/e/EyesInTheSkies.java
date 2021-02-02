@@ -24,7 +24,7 @@ public final class EyesInTheSkies extends CardImpl {
         this.getSpellAbility().addEffect(new PopulateEffect("then"));
     }
 
-    public EyesInTheSkies(final EyesInTheSkies card) {
+    private EyesInTheSkies(final EyesInTheSkies card) {
         super(card);
     }
 

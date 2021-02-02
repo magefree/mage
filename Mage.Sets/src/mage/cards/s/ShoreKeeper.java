@@ -35,7 +35,7 @@ public final class ShoreKeeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShoreKeeper(final ShoreKeeper card) {
+    private ShoreKeeper(final ShoreKeeper card) {
         super(card);
     }
 

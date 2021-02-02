@@ -30,7 +30,7 @@ public final class Crush extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public Crush(final Crush card) {
+    private Crush(final Crush card) {
         super(card);
     }
 

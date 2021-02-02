@@ -48,7 +48,7 @@ public final class GutwrencherOni extends CardImpl {
 
     }
 
-    public GutwrencherOni(final GutwrencherOni card) {
+    private GutwrencherOni(final GutwrencherOni card) {
         super(card);
     }
 

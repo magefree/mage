@@ -27,7 +27,7 @@ public final class ChamberedNautilus extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
-    public ChamberedNautilus(final ChamberedNautilus card) {
+    private ChamberedNautilus(final ChamberedNautilus card) {
         super(card);
     }
 

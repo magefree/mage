@@ -26,7 +26,7 @@ public final class GrazingGladehart extends CardImpl {
         this.addAbility(new LandfallAbility(new GainLifeEffect(2), true));
     }
 
-    public GrazingGladehart(final GrazingGladehart card) {
+    private GrazingGladehart(final GrazingGladehart card) {
         super(card);
     }
 

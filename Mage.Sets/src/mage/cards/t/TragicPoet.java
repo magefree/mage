@@ -43,7 +43,7 @@ public final class TragicPoet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TragicPoet(final TragicPoet card) {
+    private TragicPoet(final TragicPoet card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class TymnaTheWeaver extends CardImpl {
         this.addAbility(PartnerAbility.getInstance());
     }
 
-    public TymnaTheWeaver(final TymnaTheWeaver card) {
+    private TymnaTheWeaver(final TymnaTheWeaver card) {
         super(card);
     }
 

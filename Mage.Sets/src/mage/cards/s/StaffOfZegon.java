@@ -30,7 +30,7 @@ public final class StaffOfZegon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StaffOfZegon(final StaffOfZegon card) {
+    private StaffOfZegon(final StaffOfZegon card) {
         super(card);
     }
 

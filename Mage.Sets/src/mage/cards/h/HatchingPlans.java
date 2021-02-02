@@ -20,7 +20,7 @@ public final class HatchingPlans extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DrawCardSourceControllerEffect(3)));
     }
 
-    public HatchingPlans(final HatchingPlans card) {
+    private HatchingPlans(final HatchingPlans card) {
         super(card);
     }
 

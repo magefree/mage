@@ -37,7 +37,7 @@ public final class DuelingGrounds extends CardImpl {
                 new BlockedThisTurnWatcher());
     }
 
-    public DuelingGrounds(final DuelingGrounds card) {
+    private DuelingGrounds(final DuelingGrounds card) {
         super(card);
     }
 

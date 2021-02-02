@@ -27,7 +27,7 @@ public final class BrambleCreeper extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(5, 0, Duration.EndOfTurn), false));
     }
 
-    public BrambleCreeper(final BrambleCreeper card) {
+    private BrambleCreeper(final BrambleCreeper card) {
         super(card);
     }
 

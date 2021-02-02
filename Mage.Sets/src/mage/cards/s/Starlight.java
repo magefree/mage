@@ -34,7 +34,7 @@ public final class Starlight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public Starlight(final Starlight card) {
+    private Starlight(final Starlight card) {
         super(card);
     }
 

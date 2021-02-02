@@ -48,7 +48,7 @@ public final class ElvishFarmer extends CardImpl {
             new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
     }
 
-    public ElvishFarmer(final ElvishFarmer card) {
+    private ElvishFarmer(final ElvishFarmer card) {
         super(card);
     }
 

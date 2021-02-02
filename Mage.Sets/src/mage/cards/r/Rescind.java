@@ -24,7 +24,7 @@ public final class Rescind extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public Rescind(final Rescind card) {
+    private Rescind(final Rescind card) {
         super(card);
     }
 

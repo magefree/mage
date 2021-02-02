@@ -41,7 +41,7 @@ public final class Metalworker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Metalworker(final Metalworker card) {
+    private Metalworker(final Metalworker card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class FeedThePack extends CardImpl {
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new FeedThePackEffect(), true));
     }
 
-    public FeedThePack(final FeedThePack card) {
+    private FeedThePack(final FeedThePack card) {
         super(card);
     }
 

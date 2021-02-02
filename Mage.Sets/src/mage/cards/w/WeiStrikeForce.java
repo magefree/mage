@@ -26,7 +26,7 @@ public final class WeiStrikeForce extends CardImpl {
         this.addAbility(HorsemanshipAbility.getInstance());
     }
 
-    public WeiStrikeForce(final WeiStrikeForce card) {
+    private WeiStrikeForce(final WeiStrikeForce card) {
         super(card);
     }
 

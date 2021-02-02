@@ -53,7 +53,7 @@ public final class DragonScales extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonScalesEffect(), filter, true, SetTargetPointer.PERMANENT, null));
     }
 
-    public DragonScales(final DragonScales card) {
+    private DragonScales(final DragonScales card) {
         super(card);
     }
 

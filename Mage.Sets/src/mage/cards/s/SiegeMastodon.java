@@ -24,7 +24,7 @@ public final class SiegeMastodon extends CardImpl {
 
     }
 
-    public SiegeMastodon(final SiegeMastodon card) {
+    private SiegeMastodon(final SiegeMastodon card) {
         super(card);
     }
 

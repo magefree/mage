@@ -47,7 +47,7 @@ public final class FaithsFetters extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FaithsFetters(final FaithsFetters card) {
+    private FaithsFetters(final FaithsFetters card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class DreamspoilerWitches extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DreamspoilerWitches(final DreamspoilerWitches card) {
+    private DreamspoilerWitches(final DreamspoilerWitches card) {
         super(card);
     }
 

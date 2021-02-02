@@ -36,7 +36,7 @@ public final class TsabosWeb extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TsabosWebPreventUntapEffect()));
     }
 
-    public TsabosWeb(final TsabosWeb card) {
+    private TsabosWeb(final TsabosWeb card) {
         super(card);
     }
 

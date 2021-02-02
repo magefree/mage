@@ -26,7 +26,7 @@ public final class RecrossThePaths extends CardImpl {
         this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());
     }
 
-    public RecrossThePaths(final RecrossThePaths card) {
+    private RecrossThePaths(final RecrossThePaths card) {
         super(card);
     }
 

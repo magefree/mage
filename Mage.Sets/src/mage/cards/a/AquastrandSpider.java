@@ -50,7 +50,7 @@ public final class AquastrandSpider extends CardImpl {
         this.addAbility(ability.addCustomOutcome(Outcome.Benefit));        
     }
     
-    public AquastrandSpider(final AquastrandSpider card) {
+    private AquastrandSpider(final AquastrandSpider card) {
         super(card);
     }
     

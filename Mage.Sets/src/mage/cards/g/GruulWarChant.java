@@ -38,7 +38,7 @@ public final class GruulWarChant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GruulWarChant(final GruulWarChant card) {
+    private GruulWarChant(final GruulWarChant card) {
         super(card);
     }
 

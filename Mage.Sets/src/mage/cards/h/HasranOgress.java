@@ -31,7 +31,7 @@ public final class HasranOgress extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new HasranOgressEffect(), false));
     }
 
-    public HasranOgress(final HasranOgress card) {
+    private HasranOgress(final HasranOgress card) {
         super(card);
     }
 

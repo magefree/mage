@@ -70,7 +70,7 @@ public final class TheEldestReborn extends CardImpl {
 
     }
 
-    public TheEldestReborn(final TheEldestReborn card) {
+    private TheEldestReborn(final TheEldestReborn card) {
         super(card);
     }
 

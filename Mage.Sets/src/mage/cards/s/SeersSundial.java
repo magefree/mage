@@ -23,7 +23,7 @@ public final class SeersSundial extends CardImpl {
         this.addAbility(new LandfallAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{2}")), false)); // optional = false because DoIfCost is already optonal
     }
 
-    public SeersSundial(final SeersSundial card) {
+    private SeersSundial(final SeersSundial card) {
         super(card);
     }
 

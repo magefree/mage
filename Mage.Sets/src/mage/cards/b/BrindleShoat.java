@@ -28,7 +28,7 @@ public final class BrindleShoat extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new BoarToken())));
     }
 
-    public BrindleShoat(final BrindleShoat card) {
+    private BrindleShoat(final BrindleShoat card) {
         super(card);
     }
 

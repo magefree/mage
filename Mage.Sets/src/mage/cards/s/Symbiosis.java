@@ -24,7 +24,7 @@ public final class Symbiosis extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
     }
 
-    public Symbiosis(final Symbiosis card) {
+    private Symbiosis(final Symbiosis card) {
         super(card);
     }
 

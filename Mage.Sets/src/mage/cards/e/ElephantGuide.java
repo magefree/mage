@@ -44,7 +44,7 @@ public final class ElephantGuide extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new CreateTokenEffect(new ElephantToken()),"enchanted creature"));
     }
 
-    public ElephantGuide(final ElephantGuide card) {
+    private ElephantGuide(final ElephantGuide card) {
         super(card);
     }
 

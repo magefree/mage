@@ -27,7 +27,7 @@ public final class DeathWind extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public DeathWind(final DeathWind card) {
+    private DeathWind(final DeathWind card) {
         super(card);
     }
 

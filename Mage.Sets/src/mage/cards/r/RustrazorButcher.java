@@ -28,7 +28,7 @@ public final class RustrazorButcher extends CardImpl {
         this.addAbility(WitherAbility.getInstance());
     }
 
-    public RustrazorButcher(final RustrazorButcher card) {
+    private RustrazorButcher(final RustrazorButcher card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class VisceridDeepwalker extends CardImpl {
         this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{U}"), this));
     }
 
-    public VisceridDeepwalker(final VisceridDeepwalker card) {
+    private VisceridDeepwalker(final VisceridDeepwalker card) {
         super(card);
     }
 

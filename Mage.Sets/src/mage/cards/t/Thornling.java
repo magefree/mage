@@ -39,7 +39,7 @@ public final class Thornling extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}")));
     }
 
-    public Thornling(final Thornling card) {
+    private Thornling(final Thornling card) {
         super(card);
     }
 

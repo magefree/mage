@@ -43,7 +43,7 @@ public final class NecromanticSelection extends CardImpl {
 
     }
 
-    public NecromanticSelection(final NecromanticSelection card) {
+    private NecromanticSelection(final NecromanticSelection card) {
         super(card);
     }
 

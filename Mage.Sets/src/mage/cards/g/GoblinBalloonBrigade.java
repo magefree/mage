@@ -35,7 +35,7 @@ public final class GoblinBalloonBrigade extends CardImpl {
                         Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public GoblinBalloonBrigade(final GoblinBalloonBrigade card) {
+    private GoblinBalloonBrigade(final GoblinBalloonBrigade card) {
         super(card);
     }
 

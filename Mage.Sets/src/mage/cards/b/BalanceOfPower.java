@@ -27,7 +27,7 @@ public final class BalanceOfPower extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public BalanceOfPower(final BalanceOfPower card) {
+    private BalanceOfPower(final BalanceOfPower card) {
         super(card);
     }
 

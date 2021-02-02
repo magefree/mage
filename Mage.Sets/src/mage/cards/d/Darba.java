@@ -29,7 +29,7 @@ public final class Darba extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{G}{G}")), TargetController.YOU, false));
     }
 
-    public Darba(final Darba card) {
+    private Darba(final Darba card) {
         super(card);
     }
 

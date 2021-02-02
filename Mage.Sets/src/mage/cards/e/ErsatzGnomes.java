@@ -40,7 +40,7 @@ public final class ErsatzGnomes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ErsatzGnomes(final ErsatzGnomes card) {
+    private ErsatzGnomes(final ErsatzGnomes card) {
         super(card);
     }
 

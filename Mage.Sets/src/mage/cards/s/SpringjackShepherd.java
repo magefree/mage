@@ -39,7 +39,7 @@ public final class SpringjackShepherd extends CardImpl {
 
     }
 
-    public SpringjackShepherd(final SpringjackShepherd card) {
+    private SpringjackShepherd(final SpringjackShepherd card) {
         super(card);
     }
 

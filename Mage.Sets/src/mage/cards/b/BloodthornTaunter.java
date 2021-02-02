@@ -41,7 +41,7 @@ public final class BloodthornTaunter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodthornTaunter(final BloodthornTaunter card) {
+    private BloodthornTaunter(final BloodthornTaunter card) {
         super(card);
     }
 

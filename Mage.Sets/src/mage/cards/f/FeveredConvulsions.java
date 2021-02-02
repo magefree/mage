@@ -27,7 +27,7 @@ public final class FeveredConvulsions extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FeveredConvulsions(final FeveredConvulsions card) {
+    private FeveredConvulsions(final FeveredConvulsions card) {
         super(card);
     }
 

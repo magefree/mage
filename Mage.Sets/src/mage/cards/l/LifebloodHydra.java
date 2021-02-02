@@ -42,7 +42,7 @@ public final class LifebloodHydra extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new LifebloodHydraEffect(), false));
     }
 
-    public LifebloodHydra(final LifebloodHydra card) {
+    private LifebloodHydra(final LifebloodHydra card) {
         super(card);
     }
 

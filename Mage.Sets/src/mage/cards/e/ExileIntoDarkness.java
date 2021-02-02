@@ -49,7 +49,7 @@ public final class ExileIntoDarkness extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ExileIntoDarkness(final ExileIntoDarkness card) {
+    private ExileIntoDarkness(final ExileIntoDarkness card) {
         super(card);
     }
 

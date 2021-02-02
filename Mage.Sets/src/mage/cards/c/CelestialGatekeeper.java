@@ -55,7 +55,7 @@ public final class CelestialGatekeeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CelestialGatekeeper(final CelestialGatekeeper card) {
+    private CelestialGatekeeper(final CelestialGatekeeper card) {
         super(card);
     }
 

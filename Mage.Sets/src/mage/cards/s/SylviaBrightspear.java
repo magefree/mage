@@ -43,7 +43,7 @@ public final class SylviaBrightspear extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public SylviaBrightspear(final SylviaBrightspear card) {
+    private SylviaBrightspear(final SylviaBrightspear card) {
         super(card);
     }
 

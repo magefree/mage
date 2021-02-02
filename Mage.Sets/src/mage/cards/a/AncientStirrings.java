@@ -34,7 +34,7 @@ public final class AncientStirrings extends CardImpl {
         
     }
 
-    public AncientStirrings(final AncientStirrings card) {
+    private AncientStirrings(final AncientStirrings card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class EzurisArchers extends CardImpl {
         this.addAbility(new BlocksCreatureWithFlyingTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn), false));
     }
 
-    public EzurisArchers(final EzurisArchers card) {
+    private EzurisArchers(final EzurisArchers card) {
         super(card);
     }
 

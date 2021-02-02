@@ -25,7 +25,7 @@ public final class RushwoodDryad extends CardImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public RushwoodDryad(final RushwoodDryad card) {
+    private RushwoodDryad(final RushwoodDryad card) {
         super(card);
     }
 

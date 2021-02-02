@@ -64,7 +64,7 @@ public final class TellerOfTales extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TellerOfTales(final TellerOfTales card) {
+    private TellerOfTales(final TellerOfTales card) {
         super(card);
     }
 

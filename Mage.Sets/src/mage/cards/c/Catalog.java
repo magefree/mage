@@ -21,7 +21,7 @@ public final class Catalog extends CardImpl {
         this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2,1));
     }
 
-    public Catalog(final Catalog card) {
+    private Catalog(final Catalog card) {
         super(card);
     }
 

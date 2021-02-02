@@ -27,7 +27,7 @@ public final class Thermokarst extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public Thermokarst(final Thermokarst card) {
+    private Thermokarst(final Thermokarst card) {
         super(card);
     }
 

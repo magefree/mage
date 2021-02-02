@@ -41,7 +41,7 @@ public final class FaunaShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FaunaShaman(final FaunaShaman card) {
+    private FaunaShaman(final FaunaShaman card) {
         super(card);
     }
 

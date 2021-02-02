@@ -26,7 +26,7 @@ public final class MistCloakedHerald extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public MistCloakedHerald(final MistCloakedHerald card) {
+    private MistCloakedHerald(final MistCloakedHerald card) {
         super(card);
     }
 

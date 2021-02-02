@@ -43,7 +43,7 @@ public final class Excavator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Excavator(final Excavator card) {
+    private Excavator(final Excavator card) {
         super(card);
     }
 

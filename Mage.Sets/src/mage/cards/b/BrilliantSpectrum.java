@@ -28,7 +28,7 @@ public final class BrilliantSpectrum extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardControllerEffect(2));
     }
 
-    public BrilliantSpectrum(final BrilliantSpectrum card) {
+    private BrilliantSpectrum(final BrilliantSpectrum card) {
         super(card);
     }
 

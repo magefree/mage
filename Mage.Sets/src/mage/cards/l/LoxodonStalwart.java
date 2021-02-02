@@ -34,7 +34,7 @@ public final class LoxodonStalwart extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public LoxodonStalwart(final LoxodonStalwart card) {
+    private LoxodonStalwart(final LoxodonStalwart card) {
         super(card);
     }
 

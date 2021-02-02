@@ -53,7 +53,7 @@ public final class EmbodimentOfFury extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EmbodimentOfFury(final EmbodimentOfFury card) {
+    private EmbodimentOfFury(final EmbodimentOfFury card) {
         super(card);
     }
 

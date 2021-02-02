@@ -45,7 +45,7 @@ public final class NineLives extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new LoseGameSourceControllerEffect(), false));
     }
 
-    public NineLives(final NineLives card) {
+    private NineLives(final NineLives card) {
         super(card);
     }
 

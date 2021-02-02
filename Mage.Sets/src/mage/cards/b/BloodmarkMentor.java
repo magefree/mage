@@ -39,7 +39,7 @@ public final class BloodmarkMentor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public BloodmarkMentor(final BloodmarkMentor card) {
+    private BloodmarkMentor(final BloodmarkMentor card) {
         super(card);
     }
 

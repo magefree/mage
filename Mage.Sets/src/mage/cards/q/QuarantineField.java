@@ -42,7 +42,7 @@ public final class QuarantineField extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuarantineField(final QuarantineField card) {
+    private QuarantineField(final QuarantineField card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class ErtaisTrickery extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public ErtaisTrickery(final ErtaisTrickery card) {
+    private ErtaisTrickery(final ErtaisTrickery card) {
         super(card);
     }
 

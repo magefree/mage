@@ -35,7 +35,7 @@ public final class LimestoneGolem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LimestoneGolem(final LimestoneGolem card) {
+    private LimestoneGolem(final LimestoneGolem card) {
         super(card);
     }
 

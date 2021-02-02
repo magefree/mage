@@ -35,7 +35,7 @@ public final class GalvanicJuggernaut extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new UntapSourceEffect(), false, true));
     }
 
-    public GalvanicJuggernaut(final GalvanicJuggernaut card) {
+    private GalvanicJuggernaut(final GalvanicJuggernaut card) {
         super(card);
     }
 

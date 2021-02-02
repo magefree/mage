@@ -28,7 +28,7 @@ public final class Inspirit extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Inspirit(final Inspirit card) {
+    private Inspirit(final Inspirit card) {
         super(card);
     }
 

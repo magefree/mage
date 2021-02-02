@@ -41,7 +41,7 @@ public final class ArenaAthlete extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArenaAthlete(final ArenaAthlete card) {
+    private ArenaAthlete(final ArenaAthlete card) {
         super(card);
     }
 

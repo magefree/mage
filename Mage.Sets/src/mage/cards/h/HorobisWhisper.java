@@ -52,7 +52,7 @@ public final class HorobisWhisper extends CardImpl {
 
     }
 
-    public HorobisWhisper(final HorobisWhisper card) {
+    private HorobisWhisper(final HorobisWhisper card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class Pangosaur extends CardImpl {
         this.addAbility(new PangosaurTriggeredAbility());
     }
 
-    public Pangosaur(final Pangosaur card) {
+    private Pangosaur(final Pangosaur card) {
         super(card);
     }
 

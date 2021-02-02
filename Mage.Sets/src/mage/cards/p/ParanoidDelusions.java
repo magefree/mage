@@ -26,7 +26,7 @@ public final class ParanoidDelusions extends CardImpl {
         this.getSpellAbility().addEffect(new CipherEffect());
     }
 
-    public ParanoidDelusions(final ParanoidDelusions card) {
+    private ParanoidDelusions(final ParanoidDelusions card) {
         super(card);
     }
 

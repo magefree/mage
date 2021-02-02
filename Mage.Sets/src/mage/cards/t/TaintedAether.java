@@ -35,7 +35,7 @@ public final class TaintedAether extends CardImpl {
             "Whenever a creature enters the battlefield, its controller sacrifices a creature or land"));
     }
 
-    public TaintedAether(final TaintedAether card) {
+    private TaintedAether(final TaintedAether card) {
         super(card);
     }
 

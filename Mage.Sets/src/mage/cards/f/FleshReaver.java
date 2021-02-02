@@ -34,7 +34,7 @@ public final class FleshReaver extends CardImpl {
         this.addAbility(new FleshReaverTriggeredAbility());
     }
 
-    public FleshReaver(final FleshReaver card) {
+    private FleshReaver(final FleshReaver card) {
         super(card);
     }
 

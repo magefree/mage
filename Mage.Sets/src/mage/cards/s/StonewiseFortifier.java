@@ -40,7 +40,7 @@ public final class StonewiseFortifier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StonewiseFortifier(final StonewiseFortifier card) {
+    private StonewiseFortifier(final StonewiseFortifier card) {
         super(card);
     }
 

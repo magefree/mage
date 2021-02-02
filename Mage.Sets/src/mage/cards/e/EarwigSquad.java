@@ -49,7 +49,7 @@ public final class EarwigSquad extends CardImpl {
 
     }
 
-    public EarwigSquad(final EarwigSquad card) {
+    private EarwigSquad(final EarwigSquad card) {
         super(card);
     }
 

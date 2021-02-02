@@ -29,7 +29,7 @@ public final class RidingTheDiluHorse extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public RidingTheDiluHorse(final RidingTheDiluHorse card) {
+    private RidingTheDiluHorse(final RidingTheDiluHorse card) {
         super(card);
     }
 

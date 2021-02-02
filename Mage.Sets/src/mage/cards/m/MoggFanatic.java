@@ -33,7 +33,7 @@ public final class MoggFanatic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoggFanatic(final MoggFanatic card) {
+    private MoggFanatic(final MoggFanatic card) {
         super(card);
     }
 

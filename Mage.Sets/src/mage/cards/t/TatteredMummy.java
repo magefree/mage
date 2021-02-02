@@ -28,7 +28,7 @@ public final class TatteredMummy extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new LoseLifeOpponentsEffect(2)));
     }
 
-    public TatteredMummy(final TatteredMummy card) {
+    private TatteredMummy(final TatteredMummy card) {
         super(card);
     }
 

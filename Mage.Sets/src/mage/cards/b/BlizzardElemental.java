@@ -31,7 +31,7 @@ public final class BlizzardElemental extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{3}{U}")));
     }
 
-    public BlizzardElemental(final BlizzardElemental card) {
+    private BlizzardElemental(final BlizzardElemental card) {
         super(card);
     }
 

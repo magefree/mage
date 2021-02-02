@@ -30,7 +30,7 @@ public final class Dominate extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(DominateAdjuster.instance);
     }
 
-    public Dominate(final Dominate card) {
+    private Dominate(final Dominate card) {
         super(card);
     }
 

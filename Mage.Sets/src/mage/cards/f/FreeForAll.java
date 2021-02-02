@@ -42,7 +42,7 @@ public final class FreeForAll extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new FreeForAllLeavesBattlefieldEffect(), false));
     }
 
-    public FreeForAll(final FreeForAll card) {
+    private FreeForAll(final FreeForAll card) {
         super(card);
     }
 

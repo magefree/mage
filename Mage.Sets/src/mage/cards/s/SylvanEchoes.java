@@ -24,7 +24,7 @@ public final class SylvanEchoes extends CardImpl {
         this.addAbility(new SylvanEchoesTriggeredAbility());
     }
 
-    public SylvanEchoes(final SylvanEchoes card) {
+    private SylvanEchoes(final SylvanEchoes card) {
         super(card);
     }
 

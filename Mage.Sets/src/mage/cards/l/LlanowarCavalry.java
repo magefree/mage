@@ -31,7 +31,7 @@ public final class LlanowarCavalry extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public LlanowarCavalry(final LlanowarCavalry card) {
+    private LlanowarCavalry(final LlanowarCavalry card) {
         super(card);
     }
 

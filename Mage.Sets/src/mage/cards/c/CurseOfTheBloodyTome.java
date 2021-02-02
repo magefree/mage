@@ -43,7 +43,7 @@ public final class CurseOfTheBloodyTome extends CardImpl {
 
     }
 
-    public CurseOfTheBloodyTome(final CurseOfTheBloodyTome card) {
+    private CurseOfTheBloodyTome(final CurseOfTheBloodyTome card) {
         super(card);
     }
 

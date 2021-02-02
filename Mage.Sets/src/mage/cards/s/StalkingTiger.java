@@ -28,7 +28,7 @@ public final class StalkingTiger extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
-    public StalkingTiger(final StalkingTiger card) {
+    private StalkingTiger(final StalkingTiger card) {
         super(card);
     }
 

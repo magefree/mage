@@ -43,7 +43,7 @@ public final class GorillaShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GorillaShaman(final GorillaShaman card) {
+    private GorillaShaman(final GorillaShaman card) {
         super(card);
     }
 

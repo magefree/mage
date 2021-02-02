@@ -26,7 +26,7 @@ public final class PilferedPlans extends CardImpl {
         
     }
 
-    public PilferedPlans(final PilferedPlans card) {
+    private PilferedPlans(final PilferedPlans card) {
         super(card);
     }
 

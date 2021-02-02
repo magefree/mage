@@ -37,7 +37,7 @@ public final class ArtifactWard extends CardImpl {
                 new GainAbilityAttachedEffect(new ProtectionAbility(new FilterArtifactCard("artifacts")), AttachmentType.AURA)));
     }
 
-    public ArtifactWard(final ArtifactWard card) {
+    private ArtifactWard(final ArtifactWard card) {
         super(card);
     }
 

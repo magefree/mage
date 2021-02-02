@@ -31,7 +31,7 @@ public final class AnimistsAwakening extends CardImpl {
         this.getSpellAbility().addEffect(new AnimistsAwakeningEffect());
     }
 
-    public AnimistsAwakening(final AnimistsAwakening card) {
+    private AnimistsAwakening(final AnimistsAwakening card) {
         super(card);
     }
 

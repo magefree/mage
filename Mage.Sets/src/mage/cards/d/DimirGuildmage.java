@@ -39,7 +39,7 @@ public final class DimirGuildmage extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public DimirGuildmage(final DimirGuildmage card) {
+    private DimirGuildmage(final DimirGuildmage card) {
         super(card);
     }
 

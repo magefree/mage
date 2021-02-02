@@ -33,7 +33,7 @@ public final class Sunlance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public Sunlance(final Sunlance card) {
+    private Sunlance(final Sunlance card) {
         super(card);
     }
 

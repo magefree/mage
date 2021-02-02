@@ -48,7 +48,7 @@ public final class ChosenOfMarkov extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChosenOfMarkov(final ChosenOfMarkov card) {
+    private ChosenOfMarkov(final ChosenOfMarkov card) {
         super(card);
     }
 

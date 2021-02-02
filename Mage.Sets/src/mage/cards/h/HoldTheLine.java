@@ -24,7 +24,7 @@ public final class HoldTheLine extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(7, 7, Duration.EndOfTurn, filter, false));
     }
 
-    public HoldTheLine(final HoldTheLine card) {
+    private HoldTheLine(final HoldTheLine card) {
         super(card);
     }
 

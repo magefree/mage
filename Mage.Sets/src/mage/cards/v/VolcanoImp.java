@@ -35,7 +35,7 @@ public final class VolcanoImp extends CardImpl {
 
     }
 
-    public VolcanoImp(final VolcanoImp card) {
+    private VolcanoImp(final VolcanoImp card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class CuratorOfMysteries extends CardImpl {
 
     }
 
-    public CuratorOfMysteries(final CuratorOfMysteries card) {
+    private CuratorOfMysteries(final CuratorOfMysteries card) {
         super(card);
     }
 

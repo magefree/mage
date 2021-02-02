@@ -28,7 +28,7 @@ public final class SteamVents extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public SteamVents(final SteamVents card) {
+    private SteamVents(final SteamVents card) {
         super(card);
     }
 

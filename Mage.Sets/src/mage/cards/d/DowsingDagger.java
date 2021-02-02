@@ -53,7 +53,7 @@ public final class DowsingDagger extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public DowsingDagger(final DowsingDagger card) {
+    private DowsingDagger(final DowsingDagger card) {
         super(card);
     }
 

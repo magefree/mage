@@ -30,7 +30,7 @@ public final class Squall extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(2, filter));
     }
 
-    public Squall(final Squall card) {
+    private Squall(final Squall card) {
         super(card);
     }
 

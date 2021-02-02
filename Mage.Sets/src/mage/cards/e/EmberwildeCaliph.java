@@ -45,7 +45,7 @@ public final class EmberwildeCaliph extends CardImpl {
         this.addAbility(new EmberwildeCaliphTriggeredAbility());
     }
 
-    public EmberwildeCaliph(final EmberwildeCaliph card) {
+    private EmberwildeCaliph(final EmberwildeCaliph card) {
         super(card);
     }
 

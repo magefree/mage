@@ -44,7 +44,7 @@ public final class DebtorsPulpit extends CardImpl {
 
     }
 
-    public DebtorsPulpit(final DebtorsPulpit card) {
+    private DebtorsPulpit(final DebtorsPulpit card) {
         super(card);
     }
 

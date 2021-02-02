@@ -36,7 +36,7 @@ public final class CitanulDruid extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, false));
     }
 
-    public CitanulDruid(final CitanulDruid card) {
+    private CitanulDruid(final CitanulDruid card) {
         super(card);
     }
 

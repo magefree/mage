@@ -27,7 +27,7 @@ public final class Splinter extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect(false, "its controller's","all cards with the same name as that artifact"));
     }
 
-    public Splinter(final Splinter card) {
+    private Splinter(final Splinter card) {
         super(card);
     }
 

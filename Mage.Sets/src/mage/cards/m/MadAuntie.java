@@ -50,7 +50,7 @@ public final class MadAuntie extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MadAuntie(final MadAuntie card) {
+    private MadAuntie(final MadAuntie card) {
         super(card);
     }
 

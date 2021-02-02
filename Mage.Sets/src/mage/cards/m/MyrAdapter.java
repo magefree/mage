@@ -31,7 +31,7 @@ public final class MyrAdapter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
     }
 
-    public MyrAdapter(final MyrAdapter card) {
+    private MyrAdapter(final MyrAdapter card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class NettleSwine extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public NettleSwine(final NettleSwine card) {
+    private NettleSwine(final NettleSwine card) {
         super(card);
     }
 

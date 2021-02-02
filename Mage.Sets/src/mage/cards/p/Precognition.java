@@ -35,7 +35,7 @@ public final class Precognition extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Precognition(final Precognition card) {
+    private Precognition(final Precognition card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class Resize extends CardImpl {
         this.addAbility(new RecoverAbility(new ManaCostsImpl("{1}{G}"), this));
     }
 
-    public Resize(final Resize card) {
+    private Resize(final Resize card) {
         super(card);
     }
 

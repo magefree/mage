@@ -26,7 +26,7 @@ public final class CryptolithRite extends CardImpl {
                 new AnyColorManaAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, false)));
     }
 
-    public CryptolithRite(final CryptolithRite card) {
+    private CryptolithRite(final CryptolithRite card) {
         super(card);
     }
 

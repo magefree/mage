@@ -41,7 +41,7 @@ public final class Earthcraft extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Earthcraft(final Earthcraft card) {
+    private Earthcraft(final Earthcraft card) {
         super(card);
     }
 

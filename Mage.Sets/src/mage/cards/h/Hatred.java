@@ -31,7 +31,7 @@ public final class Hatred extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Hatred(final Hatred card) {
+    private Hatred(final Hatred card) {
         super(card);
     }
 

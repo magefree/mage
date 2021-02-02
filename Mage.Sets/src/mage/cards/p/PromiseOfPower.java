@@ -48,7 +48,7 @@ public final class PromiseOfPower extends CardImpl {
         this.addAbility(new EntwineAbility("{4}"));
     }
 
-    public PromiseOfPower(final PromiseOfPower card) {
+    private PromiseOfPower(final PromiseOfPower card) {
         super(card);
     }
 

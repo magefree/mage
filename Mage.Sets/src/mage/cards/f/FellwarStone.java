@@ -21,7 +21,7 @@ public final class FellwarStone extends CardImpl {
         this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));
     }
 
-    public FellwarStone(final FellwarStone card) {
+    private FellwarStone(final FellwarStone card) {
         super(card);
     }
 

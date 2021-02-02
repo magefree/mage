@@ -42,7 +42,7 @@ public final class TorchSong extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TorchSong(final TorchSong card) {
+    private TorchSong(final TorchSong card) {
         super(card);
     }
 

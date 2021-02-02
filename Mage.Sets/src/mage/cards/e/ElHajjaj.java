@@ -26,7 +26,7 @@ public final class ElHajjaj extends CardImpl {
         this.addAbility(new DealsDamageGainLifeSourceTriggeredAbility());
     }
 
-    public ElHajjaj(final ElHajjaj card) {
+    private ElHajjaj(final ElHajjaj card) {
         super(card);
     }
 

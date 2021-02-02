@@ -27,7 +27,7 @@ public final class PardicWanderer extends CardImpl {
 
     }
 
-    public PardicWanderer(final PardicWanderer card) {
+    private PardicWanderer(final PardicWanderer card) {
         super(card);
     }
 

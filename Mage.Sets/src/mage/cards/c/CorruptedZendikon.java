@@ -49,7 +49,7 @@ public final class CorruptedZendikon extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public CorruptedZendikon(final CorruptedZendikon card) {
+    private CorruptedZendikon(final CorruptedZendikon card) {
         super(card);
     }
 

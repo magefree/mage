@@ -28,7 +28,7 @@ public final class ArmoredSkaab extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(4)));
     }
 
-    public ArmoredSkaab(final ArmoredSkaab card) {
+    private ArmoredSkaab(final ArmoredSkaab card) {
         super(card);
     }
 

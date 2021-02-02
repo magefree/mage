@@ -36,7 +36,7 @@ public final class TotemGuideHartebeest extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, false), true));
     }
 
-    public TotemGuideHartebeest(final TotemGuideHartebeest card) {
+    private TotemGuideHartebeest(final TotemGuideHartebeest card) {
         super(card);
     }
 

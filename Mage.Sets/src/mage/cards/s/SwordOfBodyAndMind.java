@@ -54,7 +54,7 @@ public final class SwordOfBodyAndMind extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public SwordOfBodyAndMind(final SwordOfBodyAndMind card) {
+    private SwordOfBodyAndMind(final SwordOfBodyAndMind card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class Sustenance extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Sustenance(final Sustenance card) {
+    private Sustenance(final Sustenance card) {
         super(card);
     }
 

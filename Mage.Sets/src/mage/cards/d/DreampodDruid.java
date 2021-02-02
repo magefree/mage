@@ -36,7 +36,7 @@ public final class DreampodDruid extends CardImpl {
                 "At the beginning of each upkeep, if Dreampod Druid is enchanted, create a 1/1 green Saproling creature token."));
     }
 
-    public DreampodDruid(final DreampodDruid card) {
+    private DreampodDruid(final DreampodDruid card) {
         super(card);
     }
 

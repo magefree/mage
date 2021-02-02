@@ -28,7 +28,7 @@ public final class ChatterOfTheSquirrel extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{G}"), TimingRule.SORCERY));
     }
 
-    public ChatterOfTheSquirrel(final ChatterOfTheSquirrel card) {
+    private ChatterOfTheSquirrel(final ChatterOfTheSquirrel card) {
         super(card);
     }
 

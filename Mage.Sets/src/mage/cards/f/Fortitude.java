@@ -48,7 +48,7 @@ public final class Fortitude extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public Fortitude(final Fortitude card) {
+    private Fortitude(final Fortitude card) {
         super(card);
     }
 

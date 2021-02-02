@@ -51,7 +51,7 @@ public final class WitchHunter extends CardImpl {
         this.addAbility(returnAbility);
     }
 
-    public WitchHunter(final WitchHunter card) {
+    private WitchHunter(final WitchHunter card) {
         super(card);
     }
 

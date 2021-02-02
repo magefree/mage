@@ -30,7 +30,7 @@ public final class RiverwheelAerialists extends CardImpl {
         this.addAbility(new ProwessAbility());
     }
 
-    public RiverwheelAerialists(final RiverwheelAerialists card) {
+    private RiverwheelAerialists(final RiverwheelAerialists card) {
         super(card);
     }
 

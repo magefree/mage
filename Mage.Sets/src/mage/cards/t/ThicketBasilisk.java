@@ -40,7 +40,7 @@ public final class ThicketBasilisk extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, filter, false));
     }
 
-    public ThicketBasilisk(final ThicketBasilisk card) {
+    private ThicketBasilisk(final ThicketBasilisk card) {
         super(card);
     }
 

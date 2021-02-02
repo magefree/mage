@@ -25,7 +25,7 @@ public final class RayOfDissolution extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
     }
 
-    public RayOfDissolution(final RayOfDissolution card) {
+    private RayOfDissolution(final RayOfDissolution card) {
         super(card);
     }
 

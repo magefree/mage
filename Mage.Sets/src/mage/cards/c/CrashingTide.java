@@ -43,7 +43,7 @@ public final class CrashingTide extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<BR>Draw a card"));
     }
 
-    public CrashingTide(final CrashingTide card) {
+    private CrashingTide(final CrashingTide card) {
         super(card);
     }
 

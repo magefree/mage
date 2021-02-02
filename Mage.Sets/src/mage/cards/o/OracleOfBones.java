@@ -50,7 +50,7 @@ public final class OracleOfBones extends CardImpl {
                 + "you may cast an instant or sorcery card from your hand without paying its mana cost."));
     }
 
-    public OracleOfBones(final OracleOfBones card) {
+    private OracleOfBones(final OracleOfBones card) {
         super(card);
     }
 

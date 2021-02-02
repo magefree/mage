@@ -30,7 +30,7 @@ public final class PhalanxLeader extends CardImpl {
         this.addAbility(new HeroicAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent())));
     }
 
-    public PhalanxLeader(final PhalanxLeader card) {
+    private PhalanxLeader(final PhalanxLeader card) {
         super(card);
     }
 

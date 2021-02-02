@@ -62,7 +62,7 @@ public final class RakdosTheDefiler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RakdosTheDefiler(final RakdosTheDefiler card) {
+    private RakdosTheDefiler(final RakdosTheDefiler card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class GlenElendraLiege extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlack, true)));
     }
 
-    public GlenElendraLiege(final GlenElendraLiege card) {
+    private GlenElendraLiege(final GlenElendraLiege card) {
         super(card);
     }
 

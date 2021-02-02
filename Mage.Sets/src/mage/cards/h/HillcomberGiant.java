@@ -26,7 +26,7 @@ public final class HillcomberGiant extends CardImpl {
         this.addAbility(new MountainwalkAbility());
     }
 
-    public HillcomberGiant(final HillcomberGiant card) {
+    private HillcomberGiant(final HillcomberGiant card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class Icequake extends CardImpl {
 
     }
 
-    public Icequake(final Icequake card) {
+    private Icequake(final Icequake card) {
         super(card);
     }
 

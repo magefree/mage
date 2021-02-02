@@ -41,7 +41,7 @@ public final class ScionOfTheUrDragon extends CardImpl {
                 new ManaCostsImpl("{2}")));
     }
 
-    public ScionOfTheUrDragon(final ScionOfTheUrDragon card) {
+    private ScionOfTheUrDragon(final ScionOfTheUrDragon card) {
         super(card);
     }
 

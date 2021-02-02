@@ -30,7 +30,7 @@ public final class PlowThroughReito extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PlowThroughReito(final PlowThroughReito card) {
+    private PlowThroughReito(final PlowThroughReito card) {
         super(card);
     }
 

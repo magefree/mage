@@ -37,7 +37,7 @@ public final class FalseDemise extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToBattlefieldUnderYourControlAttachedEffect(), "enchanted creature"));
     }
 
-    public FalseDemise(final FalseDemise card) {
+    private FalseDemise(final FalseDemise card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class VerdantConfluence extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
     }
 
-    public VerdantConfluence(final VerdantConfluence card) {
+    private VerdantConfluence(final VerdantConfluence card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class AgonizingMemories extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public AgonizingMemories(final AgonizingMemories card) {
+    private AgonizingMemories(final AgonizingMemories card) {
         super(card);
     }
 

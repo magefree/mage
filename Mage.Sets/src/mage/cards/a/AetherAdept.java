@@ -32,7 +32,7 @@ public final class AetherAdept extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AetherAdept(final AetherAdept card) {
+    private AetherAdept(final AetherAdept card) {
         super(card);
     }
 

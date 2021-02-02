@@ -43,7 +43,7 @@ public final class Desert extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Desert(final Desert card) {
+    private Desert(final Desert card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class MatsuTribeDecoy extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public MatsuTribeDecoy(final MatsuTribeDecoy card) {
+    private MatsuTribeDecoy(final MatsuTribeDecoy card) {
         super(card);
     }
 

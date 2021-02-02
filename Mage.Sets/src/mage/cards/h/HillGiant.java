@@ -22,7 +22,7 @@ public final class HillGiant extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public HillGiant(final HillGiant card) {
+    private HillGiant(final HillGiant card) {
         super(card);
     }
 

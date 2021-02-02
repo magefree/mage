@@ -35,7 +35,7 @@ public final class TowerOfTheMagistrate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TowerOfTheMagistrate(final TowerOfTheMagistrate card) {
+    private TowerOfTheMagistrate(final TowerOfTheMagistrate card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class RayOfCommand extends CardImpl {
         
     }
 
-    public RayOfCommand(final RayOfCommand card) {
+    private RayOfCommand(final RayOfCommand card) {
         super(card);
     }
 

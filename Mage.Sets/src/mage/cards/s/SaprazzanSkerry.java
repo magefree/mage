@@ -38,7 +38,7 @@ public final class SaprazzanSkerry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SaprazzanSkerry(final SaprazzanSkerry card) {
+    private SaprazzanSkerry(final SaprazzanSkerry card) {
         super(card);
     }
 

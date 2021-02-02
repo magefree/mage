@@ -39,7 +39,7 @@ public final class TreasureMap extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TreasureMap(final TreasureMap card) {
+    private TreasureMap(final TreasureMap card) {
         super(card);
     }
 

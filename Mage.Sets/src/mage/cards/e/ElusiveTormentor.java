@@ -38,7 +38,7 @@ public final class ElusiveTormentor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElusiveTormentor(final ElusiveTormentor card) {
+    private ElusiveTormentor(final ElusiveTormentor card) {
         super(card);
     }
 

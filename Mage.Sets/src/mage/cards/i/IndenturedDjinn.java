@@ -38,7 +38,7 @@ public final class IndenturedDjinn extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new IndenturedDjinnEffect(), false));
     }
 
-    public IndenturedDjinn(final IndenturedDjinn card) {
+    private IndenturedDjinn(final IndenturedDjinn card) {
         super(card);
     }
 

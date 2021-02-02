@@ -51,7 +51,7 @@ public final class NemesisTrap extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
-    public NemesisTrap(final NemesisTrap card) {
+    private NemesisTrap(final NemesisTrap card) {
         super(card);
     }
 

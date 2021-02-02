@@ -51,7 +51,7 @@ public final class AppealAuthority extends SplitCard {
 
     }
 
-    public AppealAuthority(final AppealAuthority card) {
+    private AppealAuthority(final AppealAuthority card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class SearchlightGeist extends CardImpl {
                 new ManaCostsImpl("{3}{B}")));
     }
 
-    public SearchlightGeist(final SearchlightGeist card) {
+    private SearchlightGeist(final SearchlightGeist card) {
         super(card);
     }
 

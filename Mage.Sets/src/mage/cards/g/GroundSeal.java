@@ -26,7 +26,7 @@ public final class GroundSeal extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedCardsGraveyardsEffect()));
     }
 
-    public GroundSeal(final GroundSeal card) {
+    private GroundSeal(final GroundSeal card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class NaturalAffinity extends CardImpl {
                 "lands", StaticFilters.FILTER_LANDS, Duration.EndOfTurn, false));
     }
 
-    public NaturalAffinity(final NaturalAffinity card) {
+    private NaturalAffinity(final NaturalAffinity card) {
         super(card);
     }
 

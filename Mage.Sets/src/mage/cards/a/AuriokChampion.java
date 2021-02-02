@@ -43,7 +43,7 @@ public final class AuriokChampion extends CardImpl {
 
     }
 
-    public AuriokChampion(final AuriokChampion card) {
+    private AuriokChampion(final AuriokChampion card) {
         super(card);
     }
 

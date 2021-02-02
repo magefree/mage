@@ -31,7 +31,7 @@ public final class ManaforceMace extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
     }
 
-    public ManaforceMace(final ManaforceMace card) {
+    private ManaforceMace(final ManaforceMace card) {
         super(card);
     }
 

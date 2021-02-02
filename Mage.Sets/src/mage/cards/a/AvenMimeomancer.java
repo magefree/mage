@@ -44,7 +44,7 @@ public final class AvenMimeomancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AvenMimeomancer(final AvenMimeomancer card) {
+    private AvenMimeomancer(final AvenMimeomancer card) {
         super(card);
     }
 

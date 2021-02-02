@@ -45,7 +45,7 @@ public final class BantCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public BantCharm(final BantCharm card) {
+    private BantCharm(final BantCharm card) {
         super(card);
     }
 

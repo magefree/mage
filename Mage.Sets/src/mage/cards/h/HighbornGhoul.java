@@ -25,7 +25,7 @@ public final class HighbornGhoul extends CardImpl {
         this.addAbility(IntimidateAbility.getInstance());
     }
 
-    public HighbornGhoul(final HighbornGhoul card) {
+    private HighbornGhoul(final HighbornGhoul card) {
         super(card);
     }
 

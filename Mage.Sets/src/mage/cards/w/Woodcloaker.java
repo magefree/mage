@@ -36,7 +36,7 @@ public final class Woodcloaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Woodcloaker(final Woodcloaker card) {
+    private Woodcloaker(final Woodcloaker card) {
         super(card);
     }
 

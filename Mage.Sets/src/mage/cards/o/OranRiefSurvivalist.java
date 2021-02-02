@@ -29,7 +29,7 @@ public final class OranRiefSurvivalist extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
 
-    public OranRiefSurvivalist(final OranRiefSurvivalist card) {
+    private OranRiefSurvivalist(final OranRiefSurvivalist card) {
         super(card);
     }
 

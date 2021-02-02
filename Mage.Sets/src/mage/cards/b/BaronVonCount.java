@@ -50,7 +50,7 @@ public final class BaronVonCount extends CardImpl {
         this.addAbility(new BaronVonCountSecondTriggeredAbility());
     }
 
-    public BaronVonCount(final BaronVonCount card) {
+    private BaronVonCount(final BaronVonCount card) {
         super(card);
     }
 

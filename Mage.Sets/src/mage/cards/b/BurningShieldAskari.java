@@ -34,7 +34,7 @@ public final class BurningShieldAskari extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}{R}")));
     }
 
-    public BurningShieldAskari(final BurningShieldAskari card) {
+    private BurningShieldAskari(final BurningShieldAskari card) {
         super(card);
     }
 

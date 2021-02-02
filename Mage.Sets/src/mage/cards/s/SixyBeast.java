@@ -36,7 +36,7 @@ public final class SixyBeast extends CardImpl {
 
     }
 
-    public SixyBeast(final SixyBeast card) {
+    private SixyBeast(final SixyBeast card) {
         super(card);
     }
 

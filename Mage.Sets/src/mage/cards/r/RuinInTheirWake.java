@@ -33,7 +33,7 @@ public final class RuinInTheirWake extends CardImpl {
         getSpellAbility().addEffect(new RuinInTheirWakeEffect());
     }
 
-    public RuinInTheirWake(final RuinInTheirWake card) {
+    private RuinInTheirWake(final RuinInTheirWake card) {
         super(card);
     }
 

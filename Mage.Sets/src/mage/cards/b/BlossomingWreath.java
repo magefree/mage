@@ -24,7 +24,7 @@ public final class BlossomingWreath extends CardImpl {
         this.getSpellAbility().addEffect(new BlossomingWreathEffect());
     }
 
-    public BlossomingWreath(final BlossomingWreath card) {
+    private BlossomingWreath(final BlossomingWreath card) {
         super(card);
     }
 

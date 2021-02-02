@@ -25,7 +25,7 @@ public final class Brainbite extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public Brainbite(final Brainbite card) {
+    private Brainbite(final Brainbite card) {
         super(card);
     }
 

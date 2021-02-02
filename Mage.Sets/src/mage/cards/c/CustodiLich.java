@@ -43,7 +43,7 @@ public final class CustodiLich extends CardImpl {
 
     }
 
-    public CustodiLich(final CustodiLich card) {
+    private CustodiLich(final CustodiLich card) {
         super(card);
     }
 

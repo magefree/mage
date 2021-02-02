@@ -44,7 +44,7 @@ public final class TradewindRider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TradewindRider(final TradewindRider card) {
+    private TradewindRider(final TradewindRider card) {
         super(card);
     }
 

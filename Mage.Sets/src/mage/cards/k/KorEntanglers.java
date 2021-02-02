@@ -41,7 +41,7 @@ public final class KorEntanglers extends CardImpl {
 
     }
 
-    public KorEntanglers(final KorEntanglers card) {
+    private KorEntanglers(final KorEntanglers card) {
         super(card);
     }
 

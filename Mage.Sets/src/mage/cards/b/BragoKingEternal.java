@@ -45,7 +45,7 @@ public final class BragoKingEternal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BragoKingEternal(final BragoKingEternal card) {
+    private BragoKingEternal(final BragoKingEternal card) {
         super(card);
     }
 

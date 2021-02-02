@@ -41,7 +41,7 @@ public final class RighteousConfluence extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
     }
 
-    public RighteousConfluence(final RighteousConfluence card) {
+    private RighteousConfluence(final RighteousConfluence card) {
         super(card);
     }
 

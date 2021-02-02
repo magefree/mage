@@ -30,7 +30,7 @@ public final class DevourInShadow extends CardImpl {
         this.getSpellAbility().addEffect(new DevourInShadowEffect());
     }
 
-    public DevourInShadow(final DevourInShadow card) {
+    private DevourInShadow(final DevourInShadow card) {
         super(card);
     }
 

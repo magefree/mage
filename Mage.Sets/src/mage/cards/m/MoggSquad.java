@@ -43,7 +43,7 @@ public final class MoggSquad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoggSquad(final MoggSquad card) {
+    private MoggSquad(final MoggSquad card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class Miscalculation extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public Miscalculation(final Miscalculation card) {
+    private Miscalculation(final Miscalculation card) {
         super(card);
     }
 

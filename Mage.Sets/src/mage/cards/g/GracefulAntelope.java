@@ -34,7 +34,7 @@ public final class GracefulAntelope extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GracefulAntelope(final GracefulAntelope card) {
+    private GracefulAntelope(final GracefulAntelope card) {
         super(card);
     }
 

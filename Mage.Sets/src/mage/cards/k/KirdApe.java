@@ -42,7 +42,7 @@ public final class KirdApe extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter), rule)));
     }
 
-    public KirdApe(final KirdApe card) {
+    private KirdApe(final KirdApe card) {
         super(card);
     }
 

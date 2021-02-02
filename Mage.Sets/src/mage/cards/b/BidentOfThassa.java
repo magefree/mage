@@ -40,7 +40,7 @@ public final class BidentOfThassa extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BidentOfThassa(final BidentOfThassa card) {
+    private BidentOfThassa(final BidentOfThassa card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class AbattoirGhoul extends CardImpl {
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(new AbattoirGhoulEffect(), false));
     }
 
-    public AbattoirGhoul(final AbattoirGhoul card) {
+    private AbattoirGhoul(final AbattoirGhoul card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class WeeDragonauts extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), new FilterInstantOrSorcerySpell(), false));
     }
 
-    public WeeDragonauts(final WeeDragonauts card) {
+    private WeeDragonauts(final WeeDragonauts card) {
         super(card);
     }
 

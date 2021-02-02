@@ -42,7 +42,7 @@ public final class StormFleetArsonist extends CardImpl {
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public StormFleetArsonist(final StormFleetArsonist card) {
+    private StormFleetArsonist(final StormFleetArsonist card) {
         super(card);
     }
 

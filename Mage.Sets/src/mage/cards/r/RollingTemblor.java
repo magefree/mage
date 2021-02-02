@@ -36,7 +36,7 @@ public final class RollingTemblor extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{R}{R}"), TimingRule.SORCERY));
     }
 
-    public RollingTemblor(final RollingTemblor card) {
+    private RollingTemblor(final RollingTemblor card) {
         super(card);
     }
 

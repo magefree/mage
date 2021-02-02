@@ -24,7 +24,7 @@ public final class UrbanEvolution extends CardImpl {
         this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
     }
 
-    public UrbanEvolution(final UrbanEvolution card) {
+    private UrbanEvolution(final UrbanEvolution card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class AwokenHorror extends CardImpl {
         this.addAbility(new AwokenHorrorAbility());
     }
 
-    public AwokenHorror(final AwokenHorror card) {
+    private AwokenHorror(final AwokenHorror card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class SapphireMedallion extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public SapphireMedallion(final SapphireMedallion card) {
+    private SapphireMedallion(final SapphireMedallion card) {
         super(card);
     }
 

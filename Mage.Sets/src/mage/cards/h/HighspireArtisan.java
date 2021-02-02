@@ -29,7 +29,7 @@ public final class HighspireArtisan extends CardImpl {
         this.addAbility(new FabricateAbility(1));
     }
 
-    public HighspireArtisan(final HighspireArtisan card) {
+    private HighspireArtisan(final HighspireArtisan card) {
         super(card);
     }
 

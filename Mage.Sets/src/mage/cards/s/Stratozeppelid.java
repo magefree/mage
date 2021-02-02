@@ -28,7 +28,7 @@ public final class Stratozeppelid extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public Stratozeppelid(final Stratozeppelid card) {
+    private Stratozeppelid(final Stratozeppelid card) {
         super(card);
     }
 

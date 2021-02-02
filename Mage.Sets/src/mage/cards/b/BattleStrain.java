@@ -28,7 +28,7 @@ public final class BattleStrain extends CardImpl {
         this.addAbility(new BattleStrainTriggeredAbility());
     }
 
-    public BattleStrain(final BattleStrain card) {
+    private BattleStrain(final BattleStrain card) {
         super(card);
     }
 

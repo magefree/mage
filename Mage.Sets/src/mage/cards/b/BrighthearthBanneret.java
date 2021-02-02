@@ -42,7 +42,7 @@ public final class BrighthearthBanneret extends CardImpl {
         this.addAbility(new ReinforceAbility(1, new ManaCostsImpl("{1}{R}")));
     }
 
-    public BrighthearthBanneret(final BrighthearthBanneret card) {
+    private BrighthearthBanneret(final BrighthearthBanneret card) {
         super(card);
     }
 

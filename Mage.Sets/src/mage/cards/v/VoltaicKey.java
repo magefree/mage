@@ -35,7 +35,7 @@ public final class VoltaicKey extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VoltaicKey(final VoltaicKey card) {
+    private VoltaicKey(final VoltaicKey card) {
         super(card);
     }
 

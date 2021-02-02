@@ -25,7 +25,7 @@ public final class CabalConditioning extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
     }
 
-    public CabalConditioning(final CabalConditioning card) {
+    private CabalConditioning(final CabalConditioning card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class BlanchwoodArmor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield)));
     }
 
-    public BlanchwoodArmor(final BlanchwoodArmor card) {
+    private BlanchwoodArmor(final BlanchwoodArmor card) {
         super(card);
     }
 

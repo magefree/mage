@@ -42,7 +42,7 @@ public final class CivilizedScholar extends CardImpl {
         this.addAbility(new TransformAbility(), new HomicidalBruteWatcher());
     }
 
-    public CivilizedScholar(final CivilizedScholar card) {
+    private CivilizedScholar(final CivilizedScholar card) {
         super(card);
     }
 

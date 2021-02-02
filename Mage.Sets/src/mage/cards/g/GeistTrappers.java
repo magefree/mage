@@ -35,7 +35,7 @@ public final class GeistTrappers extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ReachAbility.getInstance(), ruleText)));
     }
 
-    public GeistTrappers(final GeistTrappers card) {
+    private GeistTrappers(final GeistTrappers card) {
         super(card);
     }
 

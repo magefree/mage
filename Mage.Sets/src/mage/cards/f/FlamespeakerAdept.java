@@ -35,7 +35,7 @@ public final class FlamespeakerAdept extends CardImpl {
         this.addAbility(new ScryTriggeredAbility());
     }
 
-    public FlamespeakerAdept(final FlamespeakerAdept card) {
+    private FlamespeakerAdept(final FlamespeakerAdept card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class WakerOfWaves extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WakerOfWaves(final WakerOfWaves card) {
+    private WakerOfWaves(final WakerOfWaves card) {
         super(card);
     }
 

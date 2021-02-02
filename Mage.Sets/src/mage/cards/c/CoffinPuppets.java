@@ -58,7 +58,7 @@ public final class CoffinPuppets extends CardImpl {
         ));
     }
 
-    public CoffinPuppets(final CoffinPuppets card) {
+    private CoffinPuppets(final CoffinPuppets card) {
         super(card);
     }
 

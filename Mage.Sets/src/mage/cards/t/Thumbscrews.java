@@ -36,7 +36,7 @@ public final class Thumbscrews extends CardImpl {
         ));
     }
 
-    public Thumbscrews(final Thumbscrews card) {
+    private Thumbscrews(final Thumbscrews card) {
         super(card);
     }
 

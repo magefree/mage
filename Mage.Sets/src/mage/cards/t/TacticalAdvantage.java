@@ -39,7 +39,7 @@ public final class TacticalAdvantage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public TacticalAdvantage(final TacticalAdvantage card) {
+    private TacticalAdvantage(final TacticalAdvantage card) {
         super(card);
     }
 

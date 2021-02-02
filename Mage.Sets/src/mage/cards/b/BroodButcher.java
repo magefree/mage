@@ -47,7 +47,7 @@ public final class BroodButcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BroodButcher(final BroodButcher card) {
+    private BroodButcher(final BroodButcher card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class UnseenWalker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnseenWalker(final UnseenWalker card) {
+    private UnseenWalker(final UnseenWalker card) {
         super(card);
     }
 

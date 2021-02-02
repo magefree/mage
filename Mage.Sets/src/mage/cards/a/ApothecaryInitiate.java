@@ -41,7 +41,7 @@ public final class ApothecaryInitiate extends CardImpl {
 
     }
 
-    public ApothecaryInitiate(final ApothecaryInitiate card) {
+    private ApothecaryInitiate(final ApothecaryInitiate card) {
         super(card);
     }
 

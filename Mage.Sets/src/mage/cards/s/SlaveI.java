@@ -38,7 +38,7 @@ public final class SlaveI extends CardImpl {
 
     }
 
-    public SlaveI(final SlaveI card) {
+    private SlaveI(final SlaveI card) {
         super(card);
     }
 

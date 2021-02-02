@@ -25,7 +25,7 @@ public final class SkyswirlHarrier extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SkyswirlHarrier(final SkyswirlHarrier card) {
+    private SkyswirlHarrier(final SkyswirlHarrier card) {
         super(card);
     }
 

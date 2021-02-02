@@ -47,7 +47,7 @@ public final class NezumiShortfang extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NezumiShortfang(final NezumiShortfang card) {
+    private NezumiShortfang(final NezumiShortfang card) {
         super(card);
     }
 

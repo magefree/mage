@@ -30,7 +30,7 @@ public final class Rivalry extends CardImpl {
         
     }
 
-    public Rivalry(final Rivalry card) {
+    private Rivalry(final Rivalry card) {
         super(card);
     }
 

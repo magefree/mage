@@ -48,7 +48,7 @@ public final class JinxedChoker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JinxedChoker(final JinxedChoker card) {
+    private JinxedChoker(final JinxedChoker card) {
         super(card);
     }
 

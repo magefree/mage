@@ -34,7 +34,7 @@ public final class TouchOfTheVoid extends CardImpl {
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
-    public TouchOfTheVoid(final TouchOfTheVoid card) {
+    private TouchOfTheVoid(final TouchOfTheVoid card) {
         super(card);
     }
 

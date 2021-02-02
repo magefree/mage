@@ -38,7 +38,7 @@ public final class NostalgicDreams extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public NostalgicDreams(final NostalgicDreams card) {
+    private NostalgicDreams(final NostalgicDreams card) {
         super(card);
     }
 

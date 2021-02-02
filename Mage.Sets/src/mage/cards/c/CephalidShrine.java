@@ -34,7 +34,7 @@ public final class CephalidShrine extends CardImpl {
         this.addAbility(new CephalidShrineTriggeredAbility());
     }
 
-    public CephalidShrine(final CephalidShrine card) {
+    private CephalidShrine(final CephalidShrine card) {
         super(card);
     }
 

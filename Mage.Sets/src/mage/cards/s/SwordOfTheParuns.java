@@ -65,7 +65,7 @@ public final class SwordOfTheParuns extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
     }
 
-    public SwordOfTheParuns(final SwordOfTheParuns card) {
+    private SwordOfTheParuns(final SwordOfTheParuns card) {
         super(card);
     }
 

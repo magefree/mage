@@ -41,7 +41,7 @@ public final class SpinalVillain extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpinalVillain(final SpinalVillain card) {
+    private SpinalVillain(final SpinalVillain card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class ShivanReef extends CardImpl {
         this.addAbility(redManaAbility);
     }
 
-    public ShivanReef(final ShivanReef card) {
+    private ShivanReef(final ShivanReef card) {
         super(card);
     }
 

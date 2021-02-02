@@ -37,7 +37,7 @@ public final class CodeSlice extends CardImpl {
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
     }
 
-    public CodeSlice(final CodeSlice card) {
+    private CodeSlice(final CodeSlice card) {
         super(card);
     }
 

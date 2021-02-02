@@ -27,7 +27,7 @@ public final class Memoricide extends CardImpl {
         this.getSpellAbility().addEffect(new MemoricideEffect());
     }
 
-    public Memoricide(final Memoricide card) {
+    private Memoricide(final Memoricide card) {
         super(card);
     }
 

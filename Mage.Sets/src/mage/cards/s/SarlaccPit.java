@@ -56,7 +56,7 @@ public final class SarlaccPit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SarlaccPit(final SarlaccPit card) {
+    private SarlaccPit(final SarlaccPit card) {
         super(card);
     }
 

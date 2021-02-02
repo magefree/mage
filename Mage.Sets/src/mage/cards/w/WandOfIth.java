@@ -35,7 +35,7 @@ public final class WandOfIth extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WandOfIth(final WandOfIth card) {
+    private WandOfIth(final WandOfIth card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class Shrink extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(-5, 0, Duration.EndOfTurn));
     }
 
-    public Shrink(final Shrink card) {
+    private Shrink(final Shrink card) {
         super(card);
     }
 

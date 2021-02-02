@@ -44,7 +44,7 @@ public final class KariZevSkyshipRaider extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new KariZevSkyshipRaiderEffect(), false));
     }
 
-    public KariZevSkyshipRaider(final KariZevSkyshipRaider card) {
+    private KariZevSkyshipRaider(final KariZevSkyshipRaider card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class Narwhal extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
-    public Narwhal(final Narwhal card) {
+    private Narwhal(final Narwhal card) {
         super(card);
     }
 

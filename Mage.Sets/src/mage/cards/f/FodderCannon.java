@@ -34,7 +34,7 @@ public final class FodderCannon extends CardImpl {
 
     }
 
-    public FodderCannon(final FodderCannon card) {
+    private FodderCannon(final FodderCannon card) {
         super(card);
     }
 

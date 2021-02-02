@@ -36,7 +36,7 @@ public final class MoxDiamond extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public MoxDiamond(final MoxDiamond card) {
+    private MoxDiamond(final MoxDiamond card) {
         super(card);
     }
 

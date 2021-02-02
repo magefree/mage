@@ -52,7 +52,7 @@ public final class FaerieMiscreant extends CardImpl {
         ));
     }
 
-    public FaerieMiscreant(final FaerieMiscreant card) {
+    private FaerieMiscreant(final FaerieMiscreant card) {
         super(card);
     }
 

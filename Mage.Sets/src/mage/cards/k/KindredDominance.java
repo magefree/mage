@@ -30,7 +30,7 @@ public final class KindredDominance extends CardImpl {
         this.getSpellAbility().addEffect(new KindredDominanceEffect());
     }
 
-    public KindredDominance(final KindredDominance card) {
+    private KindredDominance(final KindredDominance card) {
         super(card);
     }
 

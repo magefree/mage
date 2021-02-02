@@ -32,7 +32,7 @@ public final class BlinkOfAnEye extends CardImpl {
                                                                       "If this spell was kicked, draw a card"));
     }
 
-    public BlinkOfAnEye(final BlinkOfAnEye card) {
+    private BlinkOfAnEye(final BlinkOfAnEye card) {
         super(card);
     }
 

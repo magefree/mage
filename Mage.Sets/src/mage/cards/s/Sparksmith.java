@@ -42,7 +42,7 @@ public final class Sparksmith extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Sparksmith(final Sparksmith card) {
+    private Sparksmith(final Sparksmith card) {
         super(card);
     }
 

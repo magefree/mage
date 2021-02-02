@@ -27,7 +27,7 @@ public final class RazorSwine extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
     }
 
-    public RazorSwine(final RazorSwine card) {
+    private RazorSwine(final RazorSwine card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class EmrakulsEvangel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EmrakulsEvangel(final EmrakulsEvangel card) {
+    private EmrakulsEvangel(final EmrakulsEvangel card) {
         super(card);
     }
 

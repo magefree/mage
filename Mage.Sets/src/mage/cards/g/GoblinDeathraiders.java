@@ -26,7 +26,7 @@ public final class GoblinDeathraiders extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public GoblinDeathraiders(final GoblinDeathraiders card) {
+    private GoblinDeathraiders(final GoblinDeathraiders card) {
         super(card);
     }
 

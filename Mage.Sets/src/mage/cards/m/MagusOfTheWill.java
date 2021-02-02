@@ -50,7 +50,7 @@ public final class MagusOfTheWill extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagusOfTheWill(final MagusOfTheWill card) {
+    private MagusOfTheWill(final MagusOfTheWill card) {
         super(card);
     }
 

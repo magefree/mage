@@ -31,7 +31,7 @@ public final class TuktukGrunts extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
 
-    public TuktukGrunts(final TuktukGrunts card) {
+    private TuktukGrunts(final TuktukGrunts card) {
         super(card);
     }
 

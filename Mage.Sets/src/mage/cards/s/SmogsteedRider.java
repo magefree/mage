@@ -29,7 +29,7 @@ public final class SmogsteedRider extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new GainAbilityControlledEffect(FearAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature(), true), false));
     }
 
-    public SmogsteedRider(final SmogsteedRider card) {
+    private SmogsteedRider(final SmogsteedRider card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class MichikoKondaTruthSeeker extends CardImpl {
         this.addAbility(new MichikoKondaTruthSeekerAbility());
     }
 
-    public MichikoKondaTruthSeeker(final MichikoKondaTruthSeeker card) {
+    private MichikoKondaTruthSeeker(final MichikoKondaTruthSeeker card) {
         super(card);
     }
 

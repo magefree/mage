@@ -34,7 +34,7 @@ public final class SpitfireHandler extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public SpitfireHandler(final SpitfireHandler card) {
+    private SpitfireHandler(final SpitfireHandler card) {
         super(card);
     }
 

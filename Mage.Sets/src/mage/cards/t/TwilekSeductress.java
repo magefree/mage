@@ -35,7 +35,7 @@ public final class TwilekSeductress extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), false));
     }
 
-    public TwilekSeductress(final TwilekSeductress card) {
+    private TwilekSeductress(final TwilekSeductress card) {
         super(card);
     }
 

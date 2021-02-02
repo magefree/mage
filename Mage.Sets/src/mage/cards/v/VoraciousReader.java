@@ -45,7 +45,7 @@ public final class VoraciousReader extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public VoraciousReader(final VoraciousReader card) {
+    private VoraciousReader(final VoraciousReader card) {
         super(card);
     }
 

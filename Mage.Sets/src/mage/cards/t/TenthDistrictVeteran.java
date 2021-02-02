@@ -43,7 +43,7 @@ public final class TenthDistrictVeteran extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TenthDistrictVeteran(final TenthDistrictVeteran card) {
+    private TenthDistrictVeteran(final TenthDistrictVeteran card) {
         super(card);
     }
 

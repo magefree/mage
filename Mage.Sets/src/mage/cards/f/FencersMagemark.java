@@ -47,7 +47,7 @@ public final class FencersMagemark extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FencersMagemark(final FencersMagemark card) {
+    private FencersMagemark(final FencersMagemark card) {
         super(card);
     }
 

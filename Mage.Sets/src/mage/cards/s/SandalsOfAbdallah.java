@@ -43,7 +43,7 @@ public final class SandalsOfAbdallah extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new SacrificeSourceEffect(), false, filter, true));
     }
 
-    public SandalsOfAbdallah(final SandalsOfAbdallah card) {
+    private SandalsOfAbdallah(final SandalsOfAbdallah card) {
         super(card);
     }
 

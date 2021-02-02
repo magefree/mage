@@ -48,7 +48,7 @@ public final class KazarovSengirPureblood extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KazarovSengirPureblood(final KazarovSengirPureblood card) {
+    private KazarovSengirPureblood(final KazarovSengirPureblood card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class LivonyaSilone extends CardImpl {
         this.addAbility(new LandwalkAbility(filter));
     }
 
-    public LivonyaSilone(final LivonyaSilone card) {
+    private LivonyaSilone(final LivonyaSilone card) {
         super(card);
     }
 

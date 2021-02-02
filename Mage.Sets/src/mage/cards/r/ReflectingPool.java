@@ -21,7 +21,7 @@ public final class ReflectingPool extends CardImpl {
         this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.YOU, false));
     }
 
-    public ReflectingPool(final ReflectingPool card) {
+    private ReflectingPool(final ReflectingPool card) {
         super(card);
     }
 

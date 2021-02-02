@@ -40,7 +40,7 @@ public final class CanopyCrawler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CanopyCrawler(final CanopyCrawler card) {
+    private CanopyCrawler(final CanopyCrawler card) {
         super(card);
     }
 

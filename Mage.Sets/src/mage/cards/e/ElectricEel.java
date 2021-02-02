@@ -40,7 +40,7 @@ public final class ElectricEel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElectricEel(final ElectricEel card) {
+    private ElectricEel(final ElectricEel card) {
         super(card);
     }
 

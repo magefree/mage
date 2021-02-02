@@ -29,7 +29,7 @@ public final class GiantCrab extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.U)));
     }
 
-    public GiantCrab(final GiantCrab card) {
+    private GiantCrab(final GiantCrab card) {
         super(card);
     }
 

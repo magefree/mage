@@ -45,7 +45,7 @@ public final class LanternScout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LanternScout(final LanternScout card) {
+    private LanternScout(final LanternScout card) {
         super(card);
     }
 

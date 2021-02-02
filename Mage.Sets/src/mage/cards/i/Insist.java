@@ -36,7 +36,7 @@ public final class Insist extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Insist(final Insist card) {
+    private Insist(final Insist card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class WizenedSnitches extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect(true)));
     }
 
-    public WizenedSnitches(final WizenedSnitches card) {
+    private WizenedSnitches(final WizenedSnitches card) {
         super(card);
     }
 

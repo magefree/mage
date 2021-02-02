@@ -37,7 +37,7 @@ public final class SkyshroudVampire extends CardImpl {
                 new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE))));
     }
 
-    public SkyshroudVampire(final SkyshroudVampire card) {
+    private SkyshroudVampire(final SkyshroudVampire card) {
         super(card);
     }
 

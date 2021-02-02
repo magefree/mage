@@ -50,7 +50,7 @@ public final class EmeraldCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public EmeraldCharm(final EmeraldCharm card) {
+    private EmeraldCharm(final EmeraldCharm card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class LuxaRiverShrine extends CardImpl {
 
     }
 
-    public LuxaRiverShrine(final LuxaRiverShrine card) {
+    private LuxaRiverShrine(final LuxaRiverShrine card) {
         super(card);
     }
 

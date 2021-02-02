@@ -33,7 +33,7 @@ public final class ShieldOfTheRealm extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.PreventDamage, new GenericManaCost(1)));
     }
 
-    public ShieldOfTheRealm(final ShieldOfTheRealm card) {
+    private ShieldOfTheRealm(final ShieldOfTheRealm card) {
         super(card);
     }
 

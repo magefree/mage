@@ -33,7 +33,7 @@ public final class SkywhalersShot extends CardImpl {
         getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public SkywhalersShot(final SkywhalersShot card) {
+    private SkywhalersShot(final SkywhalersShot card) {
         super(card);
     }
 

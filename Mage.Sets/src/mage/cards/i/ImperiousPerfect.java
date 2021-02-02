@@ -41,7 +41,7 @@ public final class ImperiousPerfect extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ImperiousPerfect(final ImperiousPerfect card) {
+    private ImperiousPerfect(final ImperiousPerfect card) {
         super(card);
     }
 

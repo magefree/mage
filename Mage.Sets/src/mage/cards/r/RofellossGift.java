@@ -28,7 +28,7 @@ public final class RofellossGift extends CardImpl {
         this.getSpellAbility().addEffect(new RofellossGiftEffect());
     }
 
-    public RofellossGift(final RofellossGift card) {
+    private RofellossGift(final RofellossGift card) {
         super(card);
     }
 

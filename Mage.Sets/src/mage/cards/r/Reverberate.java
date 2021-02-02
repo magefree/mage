@@ -34,7 +34,7 @@ public final class Reverberate extends CardImpl {
         this.getSpellAbility().addEffect(new CopyTargetSpellEffect());
     }
 
-    public Reverberate(final Reverberate card) {
+    private Reverberate(final Reverberate card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class PensiveMinotaur extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public PensiveMinotaur(final PensiveMinotaur card) {
+    private PensiveMinotaur(final PensiveMinotaur card) {
         super(card);
     }
 

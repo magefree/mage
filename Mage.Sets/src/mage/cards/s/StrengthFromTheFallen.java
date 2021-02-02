@@ -32,7 +32,7 @@ public final class StrengthFromTheFallen extends CardImpl {
 
     }
 
-    public StrengthFromTheFallen(final StrengthFromTheFallen card) {
+    private StrengthFromTheFallen(final StrengthFromTheFallen card) {
         super(card);
     }
 

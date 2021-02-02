@@ -45,7 +45,7 @@ public final class LazavDimirMastermind extends CardImpl {
                 TargetController.OPPONENT, SetTargetPointer.CARD));
     }
 
-    public LazavDimirMastermind(final LazavDimirMastermind card) {
+    private LazavDimirMastermind(final LazavDimirMastermind card) {
         super(card);
     }
 

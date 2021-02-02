@@ -21,7 +21,7 @@ public final class Sift extends CardImpl {
         this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(3,1));
     }
 
-    public Sift(final Sift card) {
+    private Sift(final Sift card) {
         super(card);
     }
 

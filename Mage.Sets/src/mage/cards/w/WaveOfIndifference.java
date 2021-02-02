@@ -29,7 +29,7 @@ public final class WaveOfIndifference extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(WaveOfIndifferenceAdjuster.instance);
     }
 
-    public WaveOfIndifference(final WaveOfIndifference card) {
+    private WaveOfIndifference(final WaveOfIndifference card) {
         super(card);
     }
 

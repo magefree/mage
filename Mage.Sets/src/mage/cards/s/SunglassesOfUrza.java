@@ -30,7 +30,7 @@ public final class SunglassesOfUrza extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SunglassesOfUrzaManaAsThoughtEffect()));
     }
 
-    public SunglassesOfUrza(final SunglassesOfUrza card) {
+    private SunglassesOfUrza(final SunglassesOfUrza card) {
         super(card);
     }
 

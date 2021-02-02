@@ -39,7 +39,7 @@ public final class MistformShrieker extends CardImpl {
 
     }
 
-    public MistformShrieker(final MistformShrieker card) {
+    private MistformShrieker(final MistformShrieker card) {
         super(card);
     }
 

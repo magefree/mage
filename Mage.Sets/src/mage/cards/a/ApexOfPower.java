@@ -36,7 +36,7 @@ public final class ApexOfPower extends CardImpl {
         this.getSpellAbility().addEffect(new ApexOfPowerManaEffect());
     }
 
-    public ApexOfPower(final ApexOfPower card) {
+    private ApexOfPower(final ApexOfPower card) {
         super(card);
     }
 

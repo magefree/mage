@@ -27,7 +27,7 @@ public final class IncendiarySabotage extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(3, new FilterCreaturePermanent()));
     }
 
-    public IncendiarySabotage(final IncendiarySabotage card) {
+    private IncendiarySabotage(final IncendiarySabotage card) {
         super(card);
     }
 

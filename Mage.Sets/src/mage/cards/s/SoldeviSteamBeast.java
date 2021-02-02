@@ -37,7 +37,7 @@ public final class SoldeviSteamBeast extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new GenericManaCost(3)));
     }
 
-    public SoldeviSteamBeast(final SoldeviSteamBeast card) {
+    private SoldeviSteamBeast(final SoldeviSteamBeast card) {
         super(card);
     }
 

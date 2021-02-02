@@ -29,7 +29,7 @@ public final class RoaringSlagwurm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RoaringSlagwurm(final RoaringSlagwurm card) {
+    private RoaringSlagwurm(final RoaringSlagwurm card) {
         super(card);
     }
 

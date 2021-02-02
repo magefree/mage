@@ -36,7 +36,7 @@ public final class DeclarationInStone extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public DeclarationInStone(final DeclarationInStone card) {
+    private DeclarationInStone(final DeclarationInStone card) {
         super(card);
     }
 

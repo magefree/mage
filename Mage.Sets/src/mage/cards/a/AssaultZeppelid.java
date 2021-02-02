@@ -27,7 +27,7 @@ public final class AssaultZeppelid extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public AssaultZeppelid(final AssaultZeppelid card) {
+    private AssaultZeppelid(final AssaultZeppelid card) {
         super(card);
     }
 

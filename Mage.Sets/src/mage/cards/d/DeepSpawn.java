@@ -51,7 +51,7 @@ public final class DeepSpawn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeepSpawn(final DeepSpawn card) {
+    private DeepSpawn(final DeepSpawn card) {
         super(card);
     }
 

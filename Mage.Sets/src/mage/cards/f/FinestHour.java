@@ -41,7 +41,7 @@ public final class FinestHour extends CardImpl {
         this.addAbility(new FinestHourAbility());
     }
 
-    public FinestHour(final FinestHour card) {
+    private FinestHour(final FinestHour card) {
         super(card);
     }
 

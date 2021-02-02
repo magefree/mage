@@ -28,7 +28,7 @@ public final class Zephid extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public Zephid(final Zephid card) {
+    private Zephid(final Zephid card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class GoblinLookout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinLookout(final GoblinLookout card) {
+    private GoblinLookout(final GoblinLookout card) {
         super(card);
     }
 

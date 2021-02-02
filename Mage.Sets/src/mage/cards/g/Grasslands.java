@@ -24,7 +24,7 @@ public final class Grasslands extends CardImpl {
         this.addAbility(new FetchLandActivatedAbility(false, EnumSet.of(SubType.FOREST, SubType.PLAINS)));
     }
 
-    public Grasslands(final Grasslands card) {
+    private Grasslands(final Grasslands card) {
         super(card);
     }
 

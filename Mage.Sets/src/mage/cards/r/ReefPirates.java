@@ -30,7 +30,7 @@ public final class ReefPirates extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(effect, false, true));
     }
 
-    public ReefPirates(final ReefPirates card) {
+    private ReefPirates(final ReefPirates card) {
         super(card);
     }
 

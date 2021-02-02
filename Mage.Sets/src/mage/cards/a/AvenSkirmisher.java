@@ -26,7 +26,7 @@ public final class AvenSkirmisher extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public AvenSkirmisher(final AvenSkirmisher card) {
+    private AvenSkirmisher(final AvenSkirmisher card) {
         super(card);
     }
 

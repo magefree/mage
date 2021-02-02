@@ -43,7 +43,7 @@ public final class MasterOfEtherium extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBoosted, true)));
     }
 
-    public MasterOfEtherium(final MasterOfEtherium card) {
+    private MasterOfEtherium(final MasterOfEtherium card) {
         super(card);
     }
 

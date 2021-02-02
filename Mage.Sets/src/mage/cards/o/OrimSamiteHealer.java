@@ -36,7 +36,7 @@ public final class OrimSamiteHealer extends CardImpl {
         // {tap}: Prevent the next 3 damage that would be dealt to any target this turn.
     }
 
-    public OrimSamiteHealer(final OrimSamiteHealer card) {
+    private OrimSamiteHealer(final OrimSamiteHealer card) {
         super(card);
     }
 

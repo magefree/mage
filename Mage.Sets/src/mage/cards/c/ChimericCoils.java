@@ -29,7 +29,7 @@ public final class ChimericCoils extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChimericCoils(final ChimericCoils card) {
+    private ChimericCoils(final ChimericCoils card) {
         super(card);
     }
 

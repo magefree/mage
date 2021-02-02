@@ -59,7 +59,7 @@ public final class ForerunnerOfTheEmpire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ForerunnerOfTheEmpire(final ForerunnerOfTheEmpire card) {
+    private ForerunnerOfTheEmpire(final ForerunnerOfTheEmpire card) {
         super(card);
     }
 

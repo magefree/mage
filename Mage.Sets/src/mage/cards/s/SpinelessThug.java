@@ -25,7 +25,7 @@ public final class SpinelessThug extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public SpinelessThug(final SpinelessThug card) {
+    private SpinelessThug(final SpinelessThug card) {
         super(card);
     }
 

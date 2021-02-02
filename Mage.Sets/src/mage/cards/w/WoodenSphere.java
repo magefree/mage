@@ -29,7 +29,7 @@ public final class WoodenSphere extends CardImpl {
         this.addAbility(new WoodenSphereAbility());
     }
 
-    public WoodenSphere(final WoodenSphere card) {
+    private WoodenSphere(final WoodenSphere card) {
         super(card);
     }
 

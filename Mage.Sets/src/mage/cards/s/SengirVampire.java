@@ -30,7 +30,7 @@ public final class SengirVampire extends CardImpl {
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public SengirVampire(final SengirVampire card) {
+    private SengirVampire(final SengirVampire card) {
         super(card);
     }
 

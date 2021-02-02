@@ -43,7 +43,7 @@ public final class Domineer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("artifact creature")));
     }
 
-    public Domineer(final Domineer card) {
+    private Domineer(final Domineer card) {
         super(card);
     }
 

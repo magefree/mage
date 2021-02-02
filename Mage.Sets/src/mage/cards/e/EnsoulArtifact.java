@@ -43,7 +43,7 @@ public final class EnsoulArtifact extends CardImpl {
 
     }
 
-    public EnsoulArtifact(final EnsoulArtifact card) {
+    private EnsoulArtifact(final EnsoulArtifact card) {
         super(card);
     }
 

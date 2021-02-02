@@ -32,7 +32,7 @@ public final class SpellgorgerBarbarian extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public SpellgorgerBarbarian(final SpellgorgerBarbarian card) {
+    private SpellgorgerBarbarian(final SpellgorgerBarbarian card) {
         super(card);
     }
 

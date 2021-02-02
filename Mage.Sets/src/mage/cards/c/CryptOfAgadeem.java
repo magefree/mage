@@ -41,7 +41,7 @@ public final class CryptOfAgadeem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CryptOfAgadeem(final CryptOfAgadeem card) {
+    private CryptOfAgadeem(final CryptOfAgadeem card) {
         super(card);
     }
 

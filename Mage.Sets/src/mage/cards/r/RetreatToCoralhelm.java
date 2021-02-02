@@ -29,7 +29,7 @@ public final class RetreatToCoralhelm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RetreatToCoralhelm(final RetreatToCoralhelm card) {
+    private RetreatToCoralhelm(final RetreatToCoralhelm card) {
         super(card);
     }
 

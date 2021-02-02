@@ -44,7 +44,7 @@ public final class SporebackTroll extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SporebackTroll(final SporebackTroll card) {
+    private SporebackTroll(final SporebackTroll card) {
         super(card);
     }
 

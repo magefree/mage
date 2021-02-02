@@ -38,7 +38,7 @@ public final class ShireiShizosCaretaker extends CardImpl {
         this.addAbility(new ShireiShizosCaretakerTriggeredAbility(this.getId()));
     }
 
-    public ShireiShizosCaretaker(final ShireiShizosCaretaker card) {
+    private ShireiShizosCaretaker(final ShireiShizosCaretaker card) {
         super(card);
     }
 

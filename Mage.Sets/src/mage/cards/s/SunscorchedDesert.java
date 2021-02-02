@@ -32,7 +32,7 @@ public final class SunscorchedDesert extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public SunscorchedDesert(final SunscorchedDesert card) {
+    private SunscorchedDesert(final SunscorchedDesert card) {
         super(card);
     }
 

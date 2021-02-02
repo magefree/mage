@@ -30,7 +30,7 @@ public final class DueRespect extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public DueRespect(final DueRespect card) {
+    private DueRespect(final DueRespect card) {
         super(card);
     }
 

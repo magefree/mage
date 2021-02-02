@@ -41,7 +41,7 @@ public final class TempestOwl extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, tap up to three target permanents."));
     }
 
-    public TempestOwl(final TempestOwl card) {
+    private TempestOwl(final TempestOwl card) {
         super(card);
     }
 

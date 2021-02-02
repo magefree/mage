@@ -42,7 +42,7 @@ public final class InsidiousWill extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
     }
 
-    public InsidiousWill(final InsidiousWill card) {
+    private InsidiousWill(final InsidiousWill card) {
         super(card);
     }
 

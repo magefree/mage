@@ -46,7 +46,7 @@ public final class PatronWizard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PatronWizard(final PatronWizard card) {
+    private PatronWizard(final PatronWizard card) {
         super(card);
     }
 

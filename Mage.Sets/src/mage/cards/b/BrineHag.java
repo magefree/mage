@@ -39,7 +39,7 @@ public final class BrineHag extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new BrineHagEffect()));
     }
 
-    public BrineHag(final BrineHag card) {
+    private BrineHag(final BrineHag card) {
         super(card);
     }
 

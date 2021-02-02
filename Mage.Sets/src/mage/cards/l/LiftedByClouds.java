@@ -31,7 +31,7 @@ public final class LiftedByClouds extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{1}{U}"));
     }
 
-    public LiftedByClouds(final LiftedByClouds card) {
+    private LiftedByClouds(final LiftedByClouds card) {
         super(card);
     }
 

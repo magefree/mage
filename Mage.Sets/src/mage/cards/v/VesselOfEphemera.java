@@ -31,7 +31,7 @@ public final class VesselOfEphemera extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VesselOfEphemera(final VesselOfEphemera card) {
+    private VesselOfEphemera(final VesselOfEphemera card) {
         super(card);
     }
 

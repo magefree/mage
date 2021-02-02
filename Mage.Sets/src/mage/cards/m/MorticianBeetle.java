@@ -34,7 +34,7 @@ public final class MorticianBeetle extends CardImpl {
         this.addAbility(new PlayerSacrificesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
 
-    public MorticianBeetle(final MorticianBeetle card) {
+    private MorticianBeetle(final MorticianBeetle card) {
         super(card);
     }
 

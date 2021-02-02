@@ -33,7 +33,7 @@ public final class SerrasSanctum extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SerrasSanctum(final SerrasSanctum card) {
+    private SerrasSanctum(final SerrasSanctum card) {
         super(card);
     }
 

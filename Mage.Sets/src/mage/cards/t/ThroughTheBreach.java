@@ -42,7 +42,7 @@ public final class ThroughTheBreach extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility(new ManaCostsImpl("{2}{R}{R}")));
     }
 
-    public ThroughTheBreach(final ThroughTheBreach card) {
+    private ThroughTheBreach(final ThroughTheBreach card) {
         super(card);
     }
 

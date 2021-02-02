@@ -37,7 +37,7 @@ public final class Reflexes extends CardImpl {
 
     }
 
-    public Reflexes(final Reflexes card) {
+    private Reflexes(final Reflexes card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class DromokaCaptain extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BolsterEffect(1), false));
     }
 
-    public DromokaCaptain(final DromokaCaptain card) {
+    private DromokaCaptain(final DromokaCaptain card) {
         super(card);
     }
 

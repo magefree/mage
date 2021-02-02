@@ -36,7 +36,7 @@ public final class KamahlPitFighter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KamahlPitFighter(final KamahlPitFighter card) {
+    private KamahlPitFighter(final KamahlPitFighter card) {
         super(card);
     }
 

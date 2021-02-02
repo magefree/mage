@@ -51,7 +51,7 @@ public final class ScrybRanger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScrybRanger(final ScrybRanger card) {
+    private ScrybRanger(final ScrybRanger card) {
         super(card);
     }
 

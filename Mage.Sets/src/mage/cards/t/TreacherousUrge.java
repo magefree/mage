@@ -39,7 +39,7 @@ public final class TreacherousUrge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public TreacherousUrge(final TreacherousUrge card) {
+    private TreacherousUrge(final TreacherousUrge card) {
         super(card);
     }
 

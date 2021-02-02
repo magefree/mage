@@ -42,7 +42,7 @@ public final class TheFlameOfKeld extends CardImpl {
         this.addAbility(sagaAbility);
     }
 
-    public TheFlameOfKeld(final TheFlameOfKeld card) {
+    private TheFlameOfKeld(final TheFlameOfKeld card) {
         super(card);
     }
 

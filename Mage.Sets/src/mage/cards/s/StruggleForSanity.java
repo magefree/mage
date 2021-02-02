@@ -33,7 +33,7 @@ public final class StruggleForSanity extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public StruggleForSanity(final StruggleForSanity card) {
+    private StruggleForSanity(final StruggleForSanity card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ public final class UnexpectedResults extends CardImpl {
 
     }
 
-    public UnexpectedResults(final UnexpectedResults card) {
+    private UnexpectedResults(final UnexpectedResults card) {
         super(card);
     }
 

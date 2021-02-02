@@ -30,7 +30,7 @@ public final class Liberate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
-    public Liberate(final Liberate card) {
+    private Liberate(final Liberate card) {
         super(card);
     }
 

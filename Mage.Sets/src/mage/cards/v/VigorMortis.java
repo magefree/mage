@@ -37,7 +37,7 @@ public final class VigorMortis extends CardImpl {
 
     }
 
-    public VigorMortis(final VigorMortis card) {
+    private VigorMortis(final VigorMortis card) {
         super(card);
     }
 

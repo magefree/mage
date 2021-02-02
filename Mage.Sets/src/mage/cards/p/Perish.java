@@ -31,7 +31,7 @@ public final class Perish extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, true));
     }
 
-    public Perish(final Perish card) {
+    private Perish(final Perish card) {
         super(card);
     }
 

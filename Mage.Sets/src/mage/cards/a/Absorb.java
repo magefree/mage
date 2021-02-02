@@ -23,7 +23,7 @@ public final class Absorb extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Absorb(final Absorb card) {
+    private Absorb(final Absorb card) {
         super(card);
     }
 

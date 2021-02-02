@@ -46,7 +46,7 @@ public final class FrenziedRage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FrenziedRage(final FrenziedRage card) {
+    private FrenziedRage(final FrenziedRage card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class SpontaneousGeneration extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), CardsInControllerHandCount.instance));
     }
 
-    public SpontaneousGeneration(final SpontaneousGeneration card) {
+    private SpontaneousGeneration(final SpontaneousGeneration card) {
         super(card);
     }
 

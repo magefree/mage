@@ -48,7 +48,7 @@ public final class PiaAndKiranNalaar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PiaAndKiranNalaar(final PiaAndKiranNalaar card) {
+    private PiaAndKiranNalaar(final PiaAndKiranNalaar card) {
         super(card);
     }
 

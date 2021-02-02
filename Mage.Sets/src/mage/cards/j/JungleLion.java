@@ -26,7 +26,7 @@ public final class JungleLion extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public JungleLion(final JungleLion card) {
+    private JungleLion(final JungleLion card) {
         super(card);
     }
 

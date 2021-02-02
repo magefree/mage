@@ -29,7 +29,7 @@ public final class BorrowingTheEastWind extends CardImpl {
         // Borrowing the East Wind deals X damage to each creature with horsemanship and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(ManacostVariableValue.instance, filter));                                                                                                  }
 
-    public BorrowingTheEastWind(final BorrowingTheEastWind card) {
+    private BorrowingTheEastWind(final BorrowingTheEastWind card) {
         super(card);
     }
 

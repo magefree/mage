@@ -34,7 +34,7 @@ public final class AngelicShield extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AngelicShield(final AngelicShield card) {
+    private AngelicShield(final AngelicShield card) {
         super(card);
     }
 

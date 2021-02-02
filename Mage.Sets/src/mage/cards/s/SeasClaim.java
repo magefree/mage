@@ -38,7 +38,7 @@ public final class SeasClaim extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect(SubType.ISLAND)));
     }
 
-    public SeasClaim(final SeasClaim card) {
+    private SeasClaim(final SeasClaim card) {
         super(card);
     }
 

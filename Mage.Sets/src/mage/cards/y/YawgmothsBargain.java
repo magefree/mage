@@ -29,7 +29,7 @@ public final class YawgmothsBargain extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new PayLifeCost(1)));
     }
 
-    public YawgmothsBargain(final YawgmothsBargain card) {
+    private YawgmothsBargain(final YawgmothsBargain card) {
         super(card);
     }
 

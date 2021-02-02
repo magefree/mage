@@ -38,7 +38,7 @@ public final class TreetopRangers extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(onlyFlyingCreatures, Duration.WhileOnBattlefield)));
     }
 
-    public TreetopRangers(final TreetopRangers card) {
+    private TreetopRangers(final TreetopRangers card) {
         super(card);
     }
 

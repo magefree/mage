@@ -46,7 +46,7 @@ public final class AinokBondKin extends CardImpl {
 
     }
 
-    public AinokBondKin(final AinokBondKin card) {
+    private AinokBondKin(final AinokBondKin card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class RavingOniSlave extends CardImpl {
         this.addAbility(new EntersBattlefieldOrLeavesSourceTriggeredAbility(new RavingOniSlaveEffect(), false));
     }
 
-    public RavingOniSlave(final RavingOniSlave card) {
+    private RavingOniSlave(final RavingOniSlave card) {
         super(card);
     }
 

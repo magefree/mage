@@ -42,7 +42,7 @@ public final class FleetfootPanther extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
     }
 
-    public FleetfootPanther(final FleetfootPanther card) {
+    private FleetfootPanther(final FleetfootPanther card) {
         super(card);
     }
 

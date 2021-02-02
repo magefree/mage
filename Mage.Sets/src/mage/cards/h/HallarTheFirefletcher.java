@@ -45,7 +45,7 @@ public final class HallarTheFirefletcher extends CardImpl {
         this.addAbility(new HallarTheFirefletcherTriggeredAbility());
     }
 
-    public HallarTheFirefletcher(final HallarTheFirefletcher card) {
+    private HallarTheFirefletcher(final HallarTheFirefletcher card) {
         super(card);
     }
 

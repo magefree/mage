@@ -26,7 +26,7 @@ public final class OgreSentry extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public OgreSentry(final OgreSentry card) {
+    private OgreSentry(final OgreSentry card) {
         super(card);
     }
 

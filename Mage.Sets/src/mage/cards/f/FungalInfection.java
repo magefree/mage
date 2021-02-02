@@ -26,7 +26,7 @@ public final class FungalInfection extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken()));
     }
 
-    public FungalInfection(final FungalInfection card) {
+    private FungalInfection(final FungalInfection card) {
         super(card);
     }
 

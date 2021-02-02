@@ -26,7 +26,7 @@ public final class VeteranCavalier extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public VeteranCavalier(final VeteranCavalier card) {
+    private VeteranCavalier(final VeteranCavalier card) {
         super(card);
     }
 

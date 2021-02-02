@@ -37,7 +37,7 @@ public final class DryadMilitant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DryadMilitantReplacementEffect()));
     }
 
-    public DryadMilitant(final DryadMilitant card) {
+    private DryadMilitant(final DryadMilitant card) {
         super(card);
     }
 

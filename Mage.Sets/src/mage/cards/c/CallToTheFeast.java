@@ -21,7 +21,7 @@ public final class CallToTheFeast extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new IxalanVampireToken(), 3));
     }
 
-    public CallToTheFeast(final CallToTheFeast card) {
+    private CallToTheFeast(final CallToTheFeast card) {
         super(card);
     }
 

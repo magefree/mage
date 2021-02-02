@@ -45,7 +45,7 @@ public final class ArmsDealer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArmsDealer(final ArmsDealer card) {
+    private ArmsDealer(final ArmsDealer card) {
         super(card);
     }
 

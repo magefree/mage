@@ -55,7 +55,7 @@ public final class GarnaTheBloodflame extends CardImpl {
                 new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, true)));
     }
 
-    public GarnaTheBloodflame(final GarnaTheBloodflame card) {
+    private GarnaTheBloodflame(final GarnaTheBloodflame card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class DoorToNothingness extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DoorToNothingness(final DoorToNothingness card) {
+    private DoorToNothingness(final DoorToNothingness card) {
         super(card);
     }
 

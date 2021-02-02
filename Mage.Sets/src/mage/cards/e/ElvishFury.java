@@ -28,7 +28,7 @@ public final class ElvishFury extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ElvishFury(final ElvishFury card) {
+    private ElvishFury(final ElvishFury card) {
         super(card);
     }
 

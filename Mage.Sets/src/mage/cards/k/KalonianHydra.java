@@ -43,7 +43,7 @@ public final class KalonianHydra extends CardImpl {
 
     }
 
-    public KalonianHydra(final KalonianHydra card) {
+    private KalonianHydra(final KalonianHydra card) {
         super(card);
     }
 

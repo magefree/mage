@@ -31,7 +31,7 @@ public final class Eviscerator extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(5)));
     }
 
-    public Eviscerator(final Eviscerator card) {
+    private Eviscerator(final Eviscerator card) {
         super(card);
     }
 

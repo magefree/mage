@@ -29,7 +29,7 @@ public final class VWing extends CardImpl {
         this.addAbility(SpaceflightAbility.getInstance());
     }
 
-    public VWing(final VWing card) {
+    private VWing(final VWing card) {
         super(card);
     }
 

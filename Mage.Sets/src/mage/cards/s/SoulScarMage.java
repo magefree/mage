@@ -44,7 +44,7 @@ public final class SoulScarMage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SoulScarMageDamageReplacementEffect()));
     }
 
-    public SoulScarMage(final SoulScarMage card) {
+    private SoulScarMage(final SoulScarMage card) {
         super(card);
     }
 

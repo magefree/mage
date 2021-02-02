@@ -25,7 +25,7 @@ public final class ArcboundBruiser extends CardImpl {
         this.addAbility(new ModularAbility(this, 3));
     }
 
-    public ArcboundBruiser(final ArcboundBruiser card) {
+    private ArcboundBruiser(final ArcboundBruiser card) {
         super(card);
     }
 

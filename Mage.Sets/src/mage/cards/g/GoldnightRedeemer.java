@@ -40,7 +40,7 @@ public final class GoldnightRedeemer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter, 2)), false));
     }
 
-    public GoldnightRedeemer(final GoldnightRedeemer card) {
+    private GoldnightRedeemer(final GoldnightRedeemer card) {
         super(card);
     }
 

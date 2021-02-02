@@ -35,7 +35,7 @@ public final class ShieldMate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShieldMate(final ShieldMate card) {
+    private ShieldMate(final ShieldMate card) {
         super(card);
     }
 

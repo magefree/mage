@@ -54,7 +54,7 @@ public final class Incendiary extends CardImpl {
         
     }
     
-    public Incendiary(final Incendiary card) {
+    private Incendiary(final Incendiary card) {
         super(card);
     }
     

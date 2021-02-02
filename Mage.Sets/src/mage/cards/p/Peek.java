@@ -26,7 +26,7 @@ public final class Peek extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Peek(final Peek card) {
+    private Peek(final Peek card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class Terastodon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Terastodon(final Terastodon card) {
+    private Terastodon(final Terastodon card) {
         super(card);
     }
 

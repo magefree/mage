@@ -57,7 +57,7 @@ public final class RoonOfTheHiddenRealm extends CardImpl {
 
     }
 
-    public RoonOfTheHiddenRealm(final RoonOfTheHiddenRealm card) {
+    private RoonOfTheHiddenRealm(final RoonOfTheHiddenRealm card) {
         super(card);
     }
 

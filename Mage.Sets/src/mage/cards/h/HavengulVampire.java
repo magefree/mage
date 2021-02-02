@@ -31,7 +31,7 @@ public final class HavengulVampire extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, true));
     }
 
-    public HavengulVampire(final HavengulVampire card) {
+    private HavengulVampire(final HavengulVampire card) {
         super(card);
     }
 

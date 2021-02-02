@@ -35,7 +35,7 @@ public final class SpireTracer extends CardImpl {
 
     }
 
-    public SpireTracer(final SpireTracer card) {
+    private SpireTracer(final SpireTracer card) {
         super(card);
     }
 

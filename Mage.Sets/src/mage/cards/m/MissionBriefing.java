@@ -35,7 +35,7 @@ public final class MissionBriefing extends CardImpl {
         this.getSpellAbility().addEffect(new MissionBriefingEffect());
     }
 
-    public MissionBriefing(final MissionBriefing card) {
+    private MissionBriefing(final MissionBriefing card) {
         super(card);
     }
 

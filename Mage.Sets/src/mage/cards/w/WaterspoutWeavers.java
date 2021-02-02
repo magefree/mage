@@ -32,7 +32,7 @@ public final class WaterspoutWeavers extends CardImpl {
         this.addAbility(new KinshipAbility(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent())));
     }
 
-    public WaterspoutWeavers(final WaterspoutWeavers card) {
+    private WaterspoutWeavers(final WaterspoutWeavers card) {
         super(card);
     }
 

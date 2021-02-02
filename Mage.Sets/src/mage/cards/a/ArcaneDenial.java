@@ -38,7 +38,7 @@ public final class ArcaneDenial extends CardImpl {
                         new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public ArcaneDenial(final ArcaneDenial card) {
+    private ArcaneDenial(final ArcaneDenial card) {
         super(card);
     }
 

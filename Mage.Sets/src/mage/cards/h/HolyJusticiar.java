@@ -40,7 +40,7 @@ public final class HolyJusticiar extends CardImpl {
 
     }
 
-    public HolyJusticiar(final HolyJusticiar card) {
+    private HolyJusticiar(final HolyJusticiar card) {
         super(card);
     }
 

@@ -57,7 +57,7 @@ public final class DroneHolocron extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DroneHolocron(final DroneHolocron card) {
+    private DroneHolocron(final DroneHolocron card) {
         super(card);
     }
 

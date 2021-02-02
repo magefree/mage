@@ -40,7 +40,7 @@ public final class ArgivianArchaeologist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArgivianArchaeologist(final ArgivianArchaeologist card) {
+    private ArgivianArchaeologist(final ArgivianArchaeologist card) {
         super(card);
     }
 

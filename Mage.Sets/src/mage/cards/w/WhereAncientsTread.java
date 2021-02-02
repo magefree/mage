@@ -35,7 +35,7 @@ import mage.target.common.TargetAnyTarget;
         this.addAbility(ability);
     }
 
-    public WhereAncientsTread(final WhereAncientsTread card) {
+    private WhereAncientsTread(final WhereAncientsTread card) {
         super(card);
     }
 

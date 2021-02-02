@@ -35,7 +35,7 @@ public final class VodalianMystic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VodalianMystic(final VodalianMystic card) {
+    private VodalianMystic(final VodalianMystic card) {
         super(card);
     }
 

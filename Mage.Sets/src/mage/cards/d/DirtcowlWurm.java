@@ -31,7 +31,7 @@ public final class DirtcowlWurm extends CardImpl {
         this.addAbility(new DirtcowlWurmTriggeredAbility());
     }
 
-    public DirtcowlWurm(final DirtcowlWurm card) {
+    private DirtcowlWurm(final DirtcowlWurm card) {
         super(card);
     }
 

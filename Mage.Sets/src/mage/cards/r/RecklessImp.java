@@ -33,7 +33,7 @@ public final class RecklessImp extends CardImpl {
         this.addAbility(new DashAbility(this, "{1}{B}"));
     }
 
-    public RecklessImp(final RecklessImp card) {
+    private RecklessImp(final RecklessImp card) {
         super(card);
     }
 

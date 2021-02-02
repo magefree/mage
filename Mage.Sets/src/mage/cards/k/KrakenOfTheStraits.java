@@ -34,7 +34,7 @@ public final class KrakenOfTheStraits extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
     }
 
-    public KrakenOfTheStraits(final KrakenOfTheStraits card) {
+    private KrakenOfTheStraits(final KrakenOfTheStraits card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class TreetopDefense extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(ReachAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public TreetopDefense(final TreetopDefense card) {
+    private TreetopDefense(final TreetopDefense card) {
         super(card);
     }
 

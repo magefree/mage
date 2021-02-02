@@ -27,7 +27,7 @@ public final class DauntlessOnslaught extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,2));
     }
 
-    public DauntlessOnslaught(final DauntlessOnslaught card) {
+    private DauntlessOnslaught(final DauntlessOnslaught card) {
         super(card);
     }
 

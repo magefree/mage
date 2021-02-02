@@ -42,7 +42,7 @@ public final class AkkiLavarunner extends CardImpl {
         this.addAbility(new AkkiLavarunnerAbility());
     }
 
-    public AkkiLavarunner(final AkkiLavarunner card) {
+    private AkkiLavarunner(final AkkiLavarunner card) {
         super(card);
     }
 

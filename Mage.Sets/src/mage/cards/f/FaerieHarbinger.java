@@ -40,7 +40,7 @@ public final class FaerieHarbinger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true), true));
     }
 
-    public FaerieHarbinger(final FaerieHarbinger card) {
+    private FaerieHarbinger(final FaerieHarbinger card) {
         super(card);
     }
 

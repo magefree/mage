@@ -22,7 +22,7 @@ public final class LightningBlast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public LightningBlast(final LightningBlast card) {
+    private LightningBlast(final LightningBlast card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class RagingGoblin extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public RagingGoblin(final RagingGoblin card) {
+    private RagingGoblin(final RagingGoblin card) {
         super(card);
     }
 

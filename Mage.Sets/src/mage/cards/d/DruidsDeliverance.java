@@ -24,7 +24,7 @@ public final class DruidsDeliverance extends CardImpl {
         this.getSpellAbility().addEffect(new PopulateEffect());
     }
 
-    public DruidsDeliverance(final DruidsDeliverance card) {
+    private DruidsDeliverance(final DruidsDeliverance card) {
         super(card);
     }
 

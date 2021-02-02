@@ -41,7 +41,7 @@ public final class Mundungu extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Mundungu(final Mundungu card) {
+    private Mundungu(final Mundungu card) {
         super(card);
     }
 

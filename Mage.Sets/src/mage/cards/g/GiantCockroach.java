@@ -22,7 +22,7 @@ public final class GiantCockroach extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public GiantCockroach(final GiantCockroach card) {
+    private GiantCockroach(final GiantCockroach card) {
         super(card);
     }
 

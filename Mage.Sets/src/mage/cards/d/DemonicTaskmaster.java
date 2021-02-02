@@ -41,7 +41,7 @@ public final class DemonicTaskmaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DemonicTaskmaster(final DemonicTaskmaster card) {
+    private DemonicTaskmaster(final DemonicTaskmaster card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class Greenseeker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Greenseeker(final Greenseeker card) {
+    private Greenseeker(final Greenseeker card) {
         super(card);
     }
 

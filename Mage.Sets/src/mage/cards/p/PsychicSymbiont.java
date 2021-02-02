@@ -37,7 +37,7 @@ public final class PsychicSymbiont extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PsychicSymbiont(final PsychicSymbiont card) {
+    private PsychicSymbiont(final PsychicSymbiont card) {
         super(card);
     }
 

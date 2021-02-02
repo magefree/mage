@@ -44,7 +44,7 @@ public final class GisaAndGeralf extends CardImpl {
                 new GisaAndGeralfWatcher());
     }
 
-    public GisaAndGeralf(final GisaAndGeralf card) {
+    private GisaAndGeralf(final GisaAndGeralf card) {
         super(card);
     }
 

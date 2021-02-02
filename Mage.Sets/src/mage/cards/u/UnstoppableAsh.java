@@ -51,7 +51,7 @@ public final class UnstoppableAsh extends CardImpl {
 
     }
 
-    public UnstoppableAsh(final UnstoppableAsh card) {
+    private UnstoppableAsh(final UnstoppableAsh card) {
         super(card);
     }
 

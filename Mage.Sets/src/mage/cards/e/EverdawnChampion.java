@@ -31,7 +31,7 @@ public final class EverdawnChampion extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EverdawnChampionEffect()));
     }
 
-    public EverdawnChampion(final EverdawnChampion card) {
+    private EverdawnChampion(final EverdawnChampion card) {
         super(card);
     }
 

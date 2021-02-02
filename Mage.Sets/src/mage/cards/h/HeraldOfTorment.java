@@ -50,7 +50,7 @@ public final class HeraldOfTorment extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HeraldOfTorment(final HeraldOfTorment card) {
+    private HeraldOfTorment(final HeraldOfTorment card) {
         super(card);
     }
 

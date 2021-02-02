@@ -42,7 +42,7 @@ public final class FleshBlood extends SplitCard {
 
     }
 
-    public FleshBlood(final FleshBlood card) {
+    private FleshBlood(final FleshBlood card) {
         super(card);
     }
 

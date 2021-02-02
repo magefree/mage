@@ -26,7 +26,7 @@ public final class FaithbearerPaladin extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public FaithbearerPaladin(final FaithbearerPaladin card) {
+    private FaithbearerPaladin(final FaithbearerPaladin card) {
         super(card);
     }
 

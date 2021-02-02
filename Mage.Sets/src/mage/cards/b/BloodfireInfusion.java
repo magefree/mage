@@ -49,7 +49,7 @@ public final class BloodfireInfusion extends CardImpl {
 
     }
 
-    public BloodfireInfusion(final BloodfireInfusion card) {
+    private BloodfireInfusion(final BloodfireInfusion card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class RunesOfTheDeus extends CardImpl {
         this.addAbility(greenAbility);
     }
 
-    public RunesOfTheDeus(final RunesOfTheDeus card) {
+    private RunesOfTheDeus(final RunesOfTheDeus card) {
         super(card);
     }
 

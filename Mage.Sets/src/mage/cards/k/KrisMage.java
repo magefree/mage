@@ -37,7 +37,7 @@ public final class KrisMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KrisMage(final KrisMage card) {
+    private KrisMage(final KrisMage card) {
         super(card);
     }
 

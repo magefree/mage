@@ -48,7 +48,7 @@ public final class SadisticSkymarcher extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public SadisticSkymarcher(final SadisticSkymarcher card) {
+    private SadisticSkymarcher(final SadisticSkymarcher card) {
         super(card);
     }
 

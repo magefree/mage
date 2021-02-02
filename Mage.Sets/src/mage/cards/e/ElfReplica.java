@@ -32,7 +32,7 @@ public final class ElfReplica extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElfReplica(final ElfReplica card) {
+    private ElfReplica(final ElfReplica card) {
         super(card);
     }
 

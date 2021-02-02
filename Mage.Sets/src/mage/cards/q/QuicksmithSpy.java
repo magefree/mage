@@ -46,7 +46,7 @@ public final class QuicksmithSpy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuicksmithSpy(final QuicksmithSpy card) {
+    private QuicksmithSpy(final QuicksmithSpy card) {
         super(card);
     }
 

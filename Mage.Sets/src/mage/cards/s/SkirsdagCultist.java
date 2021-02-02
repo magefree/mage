@@ -39,7 +39,7 @@ public final class SkirsdagCultist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkirsdagCultist(final SkirsdagCultist card) {
+    private SkirsdagCultist(final SkirsdagCultist card) {
         super(card);
     }
 

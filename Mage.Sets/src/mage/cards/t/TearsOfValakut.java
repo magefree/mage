@@ -43,7 +43,7 @@ public final class TearsOfValakut extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public TearsOfValakut(final TearsOfValakut card) {
+    private TearsOfValakut(final TearsOfValakut card) {
         super(card);
     }
 

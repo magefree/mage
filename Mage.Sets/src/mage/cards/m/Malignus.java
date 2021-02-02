@@ -41,7 +41,7 @@ public final class Malignus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MalignusEffect()));
     }
 
-    public Malignus(final Malignus card) {
+    private Malignus(final Malignus card) {
         super(card);
     }
 

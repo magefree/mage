@@ -45,7 +45,7 @@ public final class SageOfTheInwardEye extends CardImpl {
 
     }
 
-    public SageOfTheInwardEye(final SageOfTheInwardEye card) {
+    private SageOfTheInwardEye(final SageOfTheInwardEye card) {
         super(card);
     }
 

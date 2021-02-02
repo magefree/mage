@@ -39,7 +39,7 @@ public final class PitilessPlunderer extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new TreasureToken()), false, filter));
     }
 
-    public PitilessPlunderer(final PitilessPlunderer card) {
+    private PitilessPlunderer(final PitilessPlunderer card) {
         super(card);
     }
 

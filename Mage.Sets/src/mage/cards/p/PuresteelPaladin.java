@@ -49,7 +49,7 @@ public final class PuresteelPaladin extends CardImpl {
         );
     }
 
-    public PuresteelPaladin(final PuresteelPaladin card) {
+    private PuresteelPaladin(final PuresteelPaladin card) {
         super(card);
     }
 

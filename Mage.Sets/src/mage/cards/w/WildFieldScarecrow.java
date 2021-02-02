@@ -40,7 +40,7 @@ public final class WildFieldScarecrow extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WildFieldScarecrow(final WildFieldScarecrow card) {
+    private WildFieldScarecrow(final WildFieldScarecrow card) {
         super(card);
     }
 

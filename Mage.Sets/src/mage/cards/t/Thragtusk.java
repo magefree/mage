@@ -34,7 +34,7 @@ public final class Thragtusk extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new CreateTokenEffect(new BeastToken()), false));
     }
 
-    public Thragtusk(final Thragtusk card) {
+    private Thragtusk(final Thragtusk card) {
         super(card);
     }
 

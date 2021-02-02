@@ -28,7 +28,7 @@ public final class AkkiRockspeaker extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BasicManaEffect(new Mana(ColoredManaSymbol.R))));
     }
 
-    public AkkiRockspeaker(final AkkiRockspeaker card) {
+    private AkkiRockspeaker(final AkkiRockspeaker card) {
         super(card);
     }
 

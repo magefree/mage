@@ -43,7 +43,7 @@ public final class PrairieStream extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public PrairieStream(final PrairieStream card) {
+    private PrairieStream(final PrairieStream card) {
         super(card);
     }
 

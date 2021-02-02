@@ -31,7 +31,7 @@ public final class AegisOfTheGods extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield)));
     }
 
-    public AegisOfTheGods(final AegisOfTheGods card) {
+    private AegisOfTheGods(final AegisOfTheGods card) {
         super(card);
     }
 

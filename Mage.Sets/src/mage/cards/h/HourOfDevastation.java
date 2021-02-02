@@ -43,7 +43,7 @@ public final class HourOfDevastation extends CardImpl {
         
     }
 
-    public HourOfDevastation(final HourOfDevastation card) {
+    private HourOfDevastation(final HourOfDevastation card) {
         super(card);
     }
 

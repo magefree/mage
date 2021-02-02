@@ -40,7 +40,7 @@ public final class FanFavorite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FanFavorite(final FanFavorite card) {
+    private FanFavorite(final FanFavorite card) {
         super(card);
     }
 

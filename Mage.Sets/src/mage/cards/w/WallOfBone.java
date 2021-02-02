@@ -31,7 +31,7 @@ public final class WallOfBone extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public WallOfBone(final WallOfBone card) {
+    private WallOfBone(final WallOfBone card) {
         super(card);
     }
 

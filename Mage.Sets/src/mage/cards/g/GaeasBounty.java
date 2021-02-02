@@ -29,7 +29,7 @@ public final class GaeasBounty extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, filter), false));
     }
 
-    public GaeasBounty(final GaeasBounty card) {
+    private GaeasBounty(final GaeasBounty card) {
         super(card);
     }
 

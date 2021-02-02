@@ -36,7 +36,7 @@ public final class LiegeOfTheHollows extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new LiegeOfTheHollowsEffect()));
     }
 
-    public LiegeOfTheHollows(final LiegeOfTheHollows card) {
+    private LiegeOfTheHollows(final LiegeOfTheHollows card) {
         super(card);
     }
 

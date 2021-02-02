@@ -28,7 +28,7 @@ public final class PlanarOverlay extends CardImpl {
         this.getSpellAbility().addEffect(new PlanarOverlayEffect());
     }
 
-    public PlanarOverlay(final PlanarOverlay card) {
+    private PlanarOverlay(final PlanarOverlay card) {
         super(card);
     }
 

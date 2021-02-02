@@ -36,7 +36,7 @@ public final class Wallop extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public Wallop(final Wallop card) {
+    private Wallop(final Wallop card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class GoblinLore extends CardImpl {
         effect.setText("then discard three cards at random");
         this.getSpellAbility().addEffect(effect);    }
 
-    public GoblinLore(final GoblinLore card) {
+    private GoblinLore(final GoblinLore card) {
         super(card);
     }
 

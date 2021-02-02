@@ -39,7 +39,7 @@ public final class MerfolkMistbinder extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public MerfolkMistbinder(final MerfolkMistbinder card) {
+    private MerfolkMistbinder(final MerfolkMistbinder card) {
         super(card);
     }
 

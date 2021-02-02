@@ -32,7 +32,7 @@ public final class DispenseJustice extends CardImpl {
         this.getSpellAbility().addHint(MetalcraftHint.instance);
     }
 
-    public DispenseJustice(final DispenseJustice card) {
+    private DispenseJustice(final DispenseJustice card) {
         super(card);
     }
 

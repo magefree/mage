@@ -28,7 +28,7 @@ public final class DemonicConsultation extends CardImpl {
         this.getSpellAbility().addEffect(new DemonicConsultationEffect());
     }
 
-    public DemonicConsultation(final DemonicConsultation card) {
+    private DemonicConsultation(final DemonicConsultation card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class Skullsnatcher extends CardImpl {
         this.addAbility(new SkullsnatcherTriggeredAbility(effect));
     }
 
-    public Skullsnatcher(final Skullsnatcher card) {
+    private Skullsnatcher(final Skullsnatcher card) {
         super(card);
     }
 

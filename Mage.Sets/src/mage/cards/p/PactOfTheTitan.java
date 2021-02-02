@@ -28,7 +28,7 @@ public final class PactOfTheTitan extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{4}{R}"))));
     }
 
-    public PactOfTheTitan(final PactOfTheTitan card) {
+    private PactOfTheTitan(final PactOfTheTitan card) {
         super(card);
     }
 

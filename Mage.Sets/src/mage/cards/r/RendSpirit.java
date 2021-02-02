@@ -29,7 +29,7 @@ public final class RendSpirit extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public RendSpirit(final RendSpirit card) {
+    private RendSpirit(final RendSpirit card) {
         super(card);
     }
 

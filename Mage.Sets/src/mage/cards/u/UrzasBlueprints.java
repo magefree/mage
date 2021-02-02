@@ -26,7 +26,7 @@ public final class UrzasBlueprints extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost()));
     }
 
-    public UrzasBlueprints(final UrzasBlueprints card) {
+    private UrzasBlueprints(final UrzasBlueprints card) {
         super(card);
     }
 

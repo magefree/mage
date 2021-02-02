@@ -41,7 +41,7 @@ public final class FrenziedFugue extends CardImpl {
         this.addAbility(new FrenziedFugueTriggeredAbility());
     }
 
-    public FrenziedFugue(final FrenziedFugue card) {
+    private FrenziedFugue(final FrenziedFugue card) {
         super(card);
     }
 

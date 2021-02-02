@@ -36,7 +36,7 @@ public final class WindingCanyons extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WindingCanyons(final WindingCanyons card) {
+    private WindingCanyons(final WindingCanyons card) {
         super(card);
     }
 

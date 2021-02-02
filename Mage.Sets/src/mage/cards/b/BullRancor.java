@@ -43,7 +43,7 @@ public final class BullRancor extends CardImpl {
         ));
     }
 
-    public BullRancor(final BullRancor card) {
+    private BullRancor(final BullRancor card) {
         super(card);
     }
 

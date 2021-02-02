@@ -41,7 +41,7 @@ public final class DarkDepths extends CardImpl {
         this.addAbility(new DarkDepthsAbility());
     }
 
-    public DarkDepths(final DarkDepths card) {
+    private DarkDepths(final DarkDepths card) {
         super(card);
     }
 

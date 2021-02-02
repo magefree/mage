@@ -28,7 +28,7 @@ public final class PriestOfUrabrask extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BasicManaEffect(Mana.RedMana(3))));
     }
 
-    public PriestOfUrabrask(final PriestOfUrabrask card) {
+    private PriestOfUrabrask(final PriestOfUrabrask card) {
         super(card);
     }
 

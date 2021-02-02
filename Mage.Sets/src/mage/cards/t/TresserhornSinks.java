@@ -27,7 +27,7 @@ public final class TresserhornSinks extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public TresserhornSinks(final TresserhornSinks card) {
+    private TresserhornSinks(final TresserhornSinks card) {
         super(card);
     }
 

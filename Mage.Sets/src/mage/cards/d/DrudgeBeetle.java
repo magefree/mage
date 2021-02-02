@@ -27,7 +27,7 @@ public final class DrudgeBeetle extends CardImpl {
         this.addAbility(new ScavengeAbility(new ManaCostsImpl("{5}{G}")));
     }
 
-    public DrudgeBeetle(final DrudgeBeetle card) {
+    private DrudgeBeetle(final DrudgeBeetle card) {
         super(card);
     }
 

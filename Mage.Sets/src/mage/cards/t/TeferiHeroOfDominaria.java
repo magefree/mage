@@ -55,7 +55,7 @@ public final class TeferiHeroOfDominaria extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new TeferiHeroOfDominariaEmblem()), -8));
     }
 
-    public TeferiHeroOfDominaria(final TeferiHeroOfDominaria card) {
+    private TeferiHeroOfDominaria(final TeferiHeroOfDominaria card) {
         super(card);
     }
 

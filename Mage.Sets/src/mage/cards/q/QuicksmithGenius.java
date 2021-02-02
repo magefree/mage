@@ -31,7 +31,7 @@ public final class QuicksmithGenius extends CardImpl {
                 Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()), new FilterControlledArtifactPermanent("an artifact"), false, null, true));
     }
 
-    public QuicksmithGenius(final QuicksmithGenius card) {
+    private QuicksmithGenius(final QuicksmithGenius card) {
         super(card);
     }
 

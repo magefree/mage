@@ -31,7 +31,7 @@ public final class BlockadeRunner extends CardImpl {
                 new ManaCostsImpl("{U}")));
     }
 
-    public BlockadeRunner(final BlockadeRunner card) {
+    private BlockadeRunner(final BlockadeRunner card) {
         super(card);
     }
 

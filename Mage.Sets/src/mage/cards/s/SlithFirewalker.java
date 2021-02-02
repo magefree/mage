@@ -28,7 +28,7 @@ public final class SlithFirewalker extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false));
     }
 
-    public SlithFirewalker(final SlithFirewalker card) {
+    private SlithFirewalker(final SlithFirewalker card) {
         super(card);
     }
 

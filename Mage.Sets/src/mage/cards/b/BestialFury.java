@@ -54,7 +54,7 @@ public final class BestialFury extends CardImpl {
         
     }
 
-    public BestialFury(final BestialFury card) {
+    private BestialFury(final BestialFury card) {
         super(card);
     }
 

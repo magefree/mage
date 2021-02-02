@@ -23,7 +23,7 @@ public final class FireAmbush extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public FireAmbush(final FireAmbush card) {
+    private FireAmbush(final FireAmbush card) {
         super(card);
     }
 

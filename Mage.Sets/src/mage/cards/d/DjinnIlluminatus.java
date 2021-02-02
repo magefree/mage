@@ -40,7 +40,7 @@ public final class DjinnIlluminatus extends CardImpl {
 
     }
 
-    public DjinnIlluminatus(final DjinnIlluminatus card) {
+    private DjinnIlluminatus(final DjinnIlluminatus card) {
         super(card);
     }
 

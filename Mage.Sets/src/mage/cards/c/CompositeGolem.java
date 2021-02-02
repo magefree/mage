@@ -28,7 +28,7 @@ public final class CompositeGolem extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 1, 1, 1, 0, 0, 0), new SacrificeSourceCost()));
     }
 
-    public CompositeGolem(final CompositeGolem card) {
+    private CompositeGolem(final CompositeGolem card) {
         super(card);
     }
 

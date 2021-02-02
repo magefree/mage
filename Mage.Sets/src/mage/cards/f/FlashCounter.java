@@ -30,7 +30,7 @@ public final class FlashCounter extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public FlashCounter(final FlashCounter card) {
+    private FlashCounter(final FlashCounter card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public final class OverseerOfTheDamned extends CardImpl {
 
     }
 
-    public OverseerOfTheDamned(final OverseerOfTheDamned card) {
+    private OverseerOfTheDamned(final OverseerOfTheDamned card) {
         super(card);
     }
 

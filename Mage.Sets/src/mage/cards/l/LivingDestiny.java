@@ -32,7 +32,7 @@ public final class LivingDestiny extends CardImpl {
         this.getSpellAbility().addEffect(new LivingDestinyEffect());
     }
 
-    public LivingDestiny(final LivingDestiny card) {
+    private LivingDestiny(final LivingDestiny card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class Recycle extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MaximumHandSizeControllerEffect(2, Duration.WhileOnBattlefield, HandSizeModification.SET)));
     }
 
-    public Recycle(final Recycle card) {
+    private Recycle(final Recycle card) {
         super(card);
     }
 

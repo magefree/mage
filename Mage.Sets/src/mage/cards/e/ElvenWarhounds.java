@@ -29,7 +29,7 @@ public final class ElvenWarhounds extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(effect,  false));
     }
 
-    public ElvenWarhounds(final ElvenWarhounds card) {
+    private ElvenWarhounds(final ElvenWarhounds card) {
         super(card);
     }
 

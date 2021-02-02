@@ -41,7 +41,7 @@ public final class HeedlessOne extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public HeedlessOne(final HeedlessOne card) {
+    private HeedlessOne(final HeedlessOne card) {
         super(card);
     }
 

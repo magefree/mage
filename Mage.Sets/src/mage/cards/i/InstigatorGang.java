@@ -47,7 +47,7 @@ public final class InstigatorGang extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
-    public InstigatorGang(final InstigatorGang card) {
+    private InstigatorGang(final InstigatorGang card) {
         super(card);
     }
 

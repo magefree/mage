@@ -22,7 +22,7 @@ public final class Prosperity extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardAllEffect(ManacostVariableValue.instance));
     }
 
-    public Prosperity(final Prosperity card) {
+    private Prosperity(final Prosperity card) {
         super(card);
     }
 

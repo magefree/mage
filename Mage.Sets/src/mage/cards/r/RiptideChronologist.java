@@ -40,7 +40,7 @@ public final class RiptideChronologist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RiptideChronologist(final RiptideChronologist card) {
+    private RiptideChronologist(final RiptideChronologist card) {
         super(card);
     }
 

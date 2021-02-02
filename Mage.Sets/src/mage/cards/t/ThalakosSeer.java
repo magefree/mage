@@ -31,7 +31,7 @@ public final class ThalakosSeer extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public ThalakosSeer(final ThalakosSeer card) {
+    private ThalakosSeer(final ThalakosSeer card) {
         super(card);
     }
 

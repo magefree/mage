@@ -31,7 +31,7 @@ public final class BladeSliver extends CardImpl {
                 new BoostAllEffect(1, 0, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, false)));
     }
 
-    public BladeSliver(final BladeSliver card) {
+    private BladeSliver(final BladeSliver card) {
         super(card);
     }
 

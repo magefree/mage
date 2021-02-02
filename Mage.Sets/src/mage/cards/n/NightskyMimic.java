@@ -49,7 +49,7 @@ public final class NightskyMimic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NightskyMimic(final NightskyMimic card) {
+    private NightskyMimic(final NightskyMimic card) {
         super(card);
     }
 

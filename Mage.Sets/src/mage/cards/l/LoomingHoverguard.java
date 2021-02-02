@@ -38,7 +38,7 @@ public final class LoomingHoverguard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LoomingHoverguard(final LoomingHoverguard card) {
+    private LoomingHoverguard(final LoomingHoverguard card) {
         super(card);
     }
 

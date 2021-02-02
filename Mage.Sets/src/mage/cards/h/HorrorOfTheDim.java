@@ -36,7 +36,7 @@ public final class HorrorOfTheDim extends CardImpl {
                 new ColoredManaCost(ColoredManaSymbol.U)));
     }
 
-    public HorrorOfTheDim(final HorrorOfTheDim card) {
+    private HorrorOfTheDim(final HorrorOfTheDim card) {
         super(card);
     }
 

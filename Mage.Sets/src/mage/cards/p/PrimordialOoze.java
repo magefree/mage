@@ -37,7 +37,7 @@ public final class PrimordialOoze extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PrimordialOoze(final PrimordialOoze card) {
+    private PrimordialOoze(final PrimordialOoze card) {
         super(card);
     }
 

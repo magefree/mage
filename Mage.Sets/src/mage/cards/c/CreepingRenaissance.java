@@ -36,7 +36,7 @@ public final class CreepingRenaissance extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{G}{G}"), TimingRule.SORCERY));
     }
 
-    public CreepingRenaissance(final CreepingRenaissance card) {
+    private CreepingRenaissance(final CreepingRenaissance card) {
         super(card);
     }
 

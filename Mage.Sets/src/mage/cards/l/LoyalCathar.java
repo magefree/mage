@@ -45,7 +45,7 @@ public final class LoyalCathar extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new LoyalCatharEffect()));
     }
 
-    public LoyalCathar(final LoyalCathar card) {
+    private LoyalCathar(final LoyalCathar card) {
         super(card);
     }
 

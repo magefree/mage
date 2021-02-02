@@ -40,7 +40,7 @@ public final class EndrekSahrMasterBreeder extends CardImpl {
                 new SacrificeSourceEffect()));
     }
 
-    public EndrekSahrMasterBreeder(final EndrekSahrMasterBreeder card) {
+    private EndrekSahrMasterBreeder(final EndrekSahrMasterBreeder card) {
         super(card);
     }
 

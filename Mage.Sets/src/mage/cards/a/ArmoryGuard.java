@@ -42,7 +42,7 @@ public final class ArmoryGuard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public ArmoryGuard(final ArmoryGuard card) {
+    private ArmoryGuard(final ArmoryGuard card) {
         super(card);
     }
 

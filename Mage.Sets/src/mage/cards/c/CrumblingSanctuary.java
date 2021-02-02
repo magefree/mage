@@ -28,7 +28,7 @@ public final class CrumblingSanctuary extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CrumblingSanctuaryEffect()));
     }
 
-    public CrumblingSanctuary(final CrumblingSanctuary card) {
+    private CrumblingSanctuary(final CrumblingSanctuary card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class SilentGravestone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SilentGravestone(final SilentGravestone card) {
+    private SilentGravestone(final SilentGravestone card) {
         super(card);
     }
 

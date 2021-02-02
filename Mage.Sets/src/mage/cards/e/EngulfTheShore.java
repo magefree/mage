@@ -31,7 +31,7 @@ public final class EngulfTheShore extends CardImpl {
         getSpellAbility().addEffect(new EngulfTheShoreEffect());
     }
 
-    public EngulfTheShore(final EngulfTheShore card) {
+    private EngulfTheShore(final EngulfTheShore card) {
         super(card);
     }
 

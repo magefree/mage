@@ -32,7 +32,7 @@ public final class TorporOrb extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TorporOrbEffect()));
     }
 
-    public TorporOrb(final TorporOrb card) {
+    private TorporOrb(final TorporOrb card) {
         super(card);
     }
 

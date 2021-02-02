@@ -49,7 +49,7 @@ public final class VoidGrafter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VoidGrafter(final VoidGrafter card) {
+    private VoidGrafter(final VoidGrafter card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class Banshee extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Banshee(final Banshee card) {
+    private Banshee(final Banshee card) {
         super(card);
     }
 

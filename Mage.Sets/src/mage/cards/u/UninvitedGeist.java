@@ -36,7 +36,7 @@ public final class UninvitedGeist extends CardImpl {
 
     }
 
-    public UninvitedGeist(final UninvitedGeist card) {
+    private UninvitedGeist(final UninvitedGeist card) {
         super(card);
     }
 

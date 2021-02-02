@@ -28,7 +28,7 @@ public final class DisappearingAct extends CardImpl {
         getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public DisappearingAct(final DisappearingAct card) {
+    private DisappearingAct(final DisappearingAct card) {
         super(card);
     }
 

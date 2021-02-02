@@ -31,7 +31,7 @@ public final class GryffVanguard extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public GryffVanguard(final GryffVanguard card) {
+    private GryffVanguard(final GryffVanguard card) {
         super(card);
     }
 

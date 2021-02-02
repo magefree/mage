@@ -28,7 +28,7 @@ public final class FirefiendElemental extends CardImpl {
         this.addAbility(new RenownAbility(1));
     }
 
-    public FirefiendElemental(final FirefiendElemental card) {
+    private FirefiendElemental(final FirefiendElemental card) {
         super(card);
     }
 

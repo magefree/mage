@@ -31,7 +31,7 @@ public final class SomberwaldSage extends CardImpl {
         this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 3, new SomberwaldSageManaBuilder(), true));
     }
 
-    public SomberwaldSage(final SomberwaldSage card) {
+    private SomberwaldSage(final SomberwaldSage card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class KoboldTaskmaster extends CardImpl {
         
     }
 
-    public KoboldTaskmaster(final KoboldTaskmaster card) {
+    private KoboldTaskmaster(final KoboldTaskmaster card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class Treachery extends CardImpl {
 
     }
 
-    public Treachery(final Treachery card) {
+    private Treachery(final Treachery card) {
         super(card);
     }
 

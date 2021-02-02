@@ -37,7 +37,7 @@ public final class CracklingPerimeter extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), new TapTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public CracklingPerimeter(final CracklingPerimeter card) {
+    private CracklingPerimeter(final CracklingPerimeter card) {
         super(card);
     }
 

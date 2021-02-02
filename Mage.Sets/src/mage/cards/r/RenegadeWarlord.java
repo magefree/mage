@@ -30,7 +30,7 @@ public final class RenegadeWarlord extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(1, 0, Duration.EndOfTurn, new FilterAttackingCreature(), true), false));
     }
 
-    public RenegadeWarlord(final RenegadeWarlord card) {
+    private RenegadeWarlord(final RenegadeWarlord card) {
         super(card);
     }
 

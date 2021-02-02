@@ -28,7 +28,7 @@ public final class GodlessShrine extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public GodlessShrine(final GodlessShrine card) {
+    private GodlessShrine(final GodlessShrine card) {
         super(card);
     }
 

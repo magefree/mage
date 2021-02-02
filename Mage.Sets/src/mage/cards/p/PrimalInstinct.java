@@ -28,7 +28,7 @@ public final class PrimalInstinct extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PrimalInstinct(final PrimalInstinct card) {
+    private PrimalInstinct(final PrimalInstinct card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class BattlewiseAven extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BattlewiseAven(final BattlewiseAven card) {
+    private BattlewiseAven(final BattlewiseAven card) {
         super(card);
     }
 

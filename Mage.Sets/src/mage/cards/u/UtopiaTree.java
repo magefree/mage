@@ -26,7 +26,7 @@ public final class UtopiaTree extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public UtopiaTree(final UtopiaTree card) {
+    private UtopiaTree(final UtopiaTree card) {
         super(card);
     }
 

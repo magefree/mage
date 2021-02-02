@@ -39,7 +39,7 @@ public final class TelekineticSliver extends CardImpl {
                 new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, filter, "All Slivers have \"{T}: Tap target permanent.\"")));
     }
 
-    public TelekineticSliver(final TelekineticSliver card) {
+    private TelekineticSliver(final TelekineticSliver card) {
         super(card);
     }
 

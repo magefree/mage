@@ -34,7 +34,7 @@ public final class HallOfGemstone extends CardImpl {
 
     }
 
-    public HallOfGemstone(final HallOfGemstone card) {
+    private HallOfGemstone(final HallOfGemstone card) {
         super(card);
     }
 

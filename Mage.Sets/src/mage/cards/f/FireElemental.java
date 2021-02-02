@@ -22,7 +22,7 @@ public final class FireElemental extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public FireElemental(final FireElemental card) {
+    private FireElemental(final FireElemental card) {
         super(card);
     }
 

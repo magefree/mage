@@ -22,7 +22,7 @@ public final class SpreadingFlames extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(6));
     }
 
-    public SpreadingFlames(final SpreadingFlames card) {
+    private SpreadingFlames(final SpreadingFlames card) {
         super(card);
     }
 

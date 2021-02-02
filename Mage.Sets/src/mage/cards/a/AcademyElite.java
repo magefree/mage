@@ -45,7 +45,7 @@ public final class AcademyElite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AcademyElite(final AcademyElite card) {
+    private AcademyElite(final AcademyElite card) {
         super(card);
     }
 

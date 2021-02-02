@@ -38,7 +38,7 @@ public final class BitterbladeWarrior extends CardImpl {
         this.addAbility(new ExertAbility(ability));
     }
 
-    public BitterbladeWarrior(final BitterbladeWarrior card) {
+    private BitterbladeWarrior(final BitterbladeWarrior card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ public final class DragonTempest extends CardImpl {
 
     }
 
-    public DragonTempest(final DragonTempest card) {
+    private DragonTempest(final DragonTempest card) {
         super(card);
     }
 

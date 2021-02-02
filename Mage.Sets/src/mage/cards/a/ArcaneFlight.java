@@ -43,7 +43,7 @@ public final class ArcaneFlight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArcaneFlight(final ArcaneFlight card) {
+    private ArcaneFlight(final ArcaneFlight card) {
         super(card);
     }
 

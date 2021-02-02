@@ -37,7 +37,7 @@ public final class GibberingHyenas extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
     }
 
-    public GibberingHyenas(final GibberingHyenas card) {
+    private GibberingHyenas(final GibberingHyenas card) {
         super(card);
     }
 

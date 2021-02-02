@@ -53,7 +53,7 @@ public final class BottomlessVault extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BottomlessVault(final BottomlessVault card) {
+    private BottomlessVault(final BottomlessVault card) {
         super(card);
     }
 

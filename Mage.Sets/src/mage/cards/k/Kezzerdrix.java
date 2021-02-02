@@ -39,7 +39,7 @@ public final class Kezzerdrix extends CardImpl {
                 "At the beginning of your upkeep, if your opponents control no creatures, {this} deals 4 damage to you."));
     }
 
-    public Kezzerdrix(final Kezzerdrix card) {
+    private Kezzerdrix(final Kezzerdrix card) {
         super(card);
     }
 

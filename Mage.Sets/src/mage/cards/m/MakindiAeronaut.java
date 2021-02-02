@@ -27,7 +27,7 @@ public final class MakindiAeronaut extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public MakindiAeronaut(final MakindiAeronaut card) {
+    private MakindiAeronaut(final MakindiAeronaut card) {
         super(card);
     }
 

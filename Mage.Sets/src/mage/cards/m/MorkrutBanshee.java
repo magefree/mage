@@ -37,7 +37,7 @@ public final class MorkrutBanshee extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MorkrutBanshee(final MorkrutBanshee card) {
+    private MorkrutBanshee(final MorkrutBanshee card) {
         super(card);
     }
 

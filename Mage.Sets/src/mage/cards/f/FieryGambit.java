@@ -30,7 +30,7 @@ public final class FieryGambit extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FieryGambit(final FieryGambit card) {
+    private FieryGambit(final FieryGambit card) {
         super(card);
     }
 

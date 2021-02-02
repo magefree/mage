@@ -29,7 +29,7 @@ public final class MysticGenesis extends CardImpl {
 
     }
 
-    public MysticGenesis(final MysticGenesis card) {
+    private MysticGenesis(final MysticGenesis card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class WallOfVines extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public WallOfVines(final WallOfVines card) {
+    private WallOfVines(final WallOfVines card) {
         super(card);
     }
 

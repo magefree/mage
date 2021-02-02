@@ -51,7 +51,7 @@ public final class YoseiTheMorningStar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public YoseiTheMorningStar(final YoseiTheMorningStar card) {
+    private YoseiTheMorningStar(final YoseiTheMorningStar card) {
         super(card);
     }
 

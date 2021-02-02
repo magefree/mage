@@ -31,7 +31,7 @@ public final class PhyrexianSoulgorger extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
-    public PhyrexianSoulgorger(final PhyrexianSoulgorger card) {
+    private PhyrexianSoulgorger(final PhyrexianSoulgorger card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class DauntlessEscort extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new SacrificeSourceCost()));
     }
 
-    public DauntlessEscort(final DauntlessEscort card) {
+    private DauntlessEscort(final DauntlessEscort card) {
         super(card);
     }
 

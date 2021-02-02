@@ -34,7 +34,7 @@ public final class MoxOpal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoxOpal(final MoxOpal card) {
+    private MoxOpal(final MoxOpal card) {
         super(card);
     }
 

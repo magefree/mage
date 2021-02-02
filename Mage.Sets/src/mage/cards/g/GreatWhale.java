@@ -26,7 +26,7 @@ public final class GreatWhale extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapLandsEffect(7)));
     }
 
-    public GreatWhale(final GreatWhale card) {
+    private GreatWhale(final GreatWhale card) {
         super(card);
     }
 

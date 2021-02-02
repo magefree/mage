@@ -45,7 +45,7 @@ public final class ServantOfTheScale extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ServantOfTheScale(final ServantOfTheScale card) {
+    private ServantOfTheScale(final ServantOfTheScale card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class ScarabOfTheUnseen extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScarabOfTheUnseen(final ScarabOfTheUnseen card) {
+    private ScarabOfTheUnseen(final ScarabOfTheUnseen card) {
         super(card);
     }
 

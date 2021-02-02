@@ -37,7 +37,7 @@ public final class SadisticGlee extends CardImpl {
             CounterType.P1P1.createInstance(), "enchanted creature"), false));
     }
 
-    public SadisticGlee(final SadisticGlee card) {
+    private SadisticGlee(final SadisticGlee card) {
         super(card);
     }
 

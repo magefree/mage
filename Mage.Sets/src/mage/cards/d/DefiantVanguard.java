@@ -64,7 +64,7 @@ public final class DefiantVanguard extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public DefiantVanguard(final DefiantVanguard card) {
+    private DefiantVanguard(final DefiantVanguard card) {
         super(card);
     }
 

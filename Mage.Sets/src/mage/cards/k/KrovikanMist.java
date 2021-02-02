@@ -42,7 +42,7 @@ public final class KrovikanMist extends CardImpl {
 
     }
 
-    public KrovikanMist(final KrovikanMist card) {
+    private KrovikanMist(final KrovikanMist card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class Syncopate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Syncopate(final Syncopate card) {
+    private Syncopate(final Syncopate card) {
         super(card);
     }
 

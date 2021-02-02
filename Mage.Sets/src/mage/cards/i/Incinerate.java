@@ -32,7 +32,7 @@ public final class Incinerate extends CardImpl {
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
-    public Incinerate(final Incinerate card) {
+    private Incinerate(final Incinerate card) {
         super(card);
     }
 

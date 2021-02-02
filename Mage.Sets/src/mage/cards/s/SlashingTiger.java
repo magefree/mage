@@ -27,7 +27,7 @@ public final class SlashingTiger extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public SlashingTiger(final SlashingTiger card) {
+    private SlashingTiger(final SlashingTiger card) {
         super(card);
     }
 

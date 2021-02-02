@@ -31,7 +31,7 @@ public final class CleansingNova extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
     }
 
-    public CleansingNova(final CleansingNova card) {
+    private CleansingNova(final CleansingNova card) {
         super(card);
     }
 

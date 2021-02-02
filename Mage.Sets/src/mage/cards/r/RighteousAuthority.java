@@ -47,7 +47,7 @@ public final class RighteousAuthority extends CardImpl {
         this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardTargetEffect(1), TargetController.CONTROLLER_ATTACHED_TO, false));
     }
 
-    public RighteousAuthority(final RighteousAuthority card) {
+    private RighteousAuthority(final RighteousAuthority card) {
         super(card);
     }
 

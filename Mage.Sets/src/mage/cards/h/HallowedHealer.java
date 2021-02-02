@@ -47,7 +47,7 @@ public final class HallowedHealer extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public HallowedHealer(final HallowedHealer card) {
+    private HallowedHealer(final HallowedHealer card) {
         super(card);
     }
 

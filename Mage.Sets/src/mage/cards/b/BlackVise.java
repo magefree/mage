@@ -31,7 +31,7 @@ public final class BlackVise extends CardImpl {
         this.addAbility(new BlackViseTriggeredAbility());
     }
 
-    public BlackVise(final BlackVise card) {
+    private BlackVise(final BlackVise card) {
         super(card);
     }
 

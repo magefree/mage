@@ -35,7 +35,7 @@ public final class DromarsCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public DromarsCharm(final DromarsCharm card) {
+    private DromarsCharm(final DromarsCharm card) {
         super(card);
     }
 

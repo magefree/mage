@@ -45,7 +45,7 @@ public final class NivixCyclops extends CardImpl {
 
     }
 
-    public NivixCyclops(final NivixCyclops card) {
+    private NivixCyclops(final NivixCyclops card) {
         super(card);
     }
 

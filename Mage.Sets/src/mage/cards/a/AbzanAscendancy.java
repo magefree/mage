@@ -40,7 +40,7 @@ public final class AbzanAscendancy extends CardImpl {
 
     }
 
-    public AbzanAscendancy(final AbzanAscendancy card) {
+    private AbzanAscendancy(final AbzanAscendancy card) {
         super(card);
     }
 

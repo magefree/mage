@@ -41,7 +41,7 @@ public final class HammerMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HammerMage(final HammerMage card) {
+    private HammerMage(final HammerMage card) {
         super(card);
     }
 

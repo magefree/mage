@@ -33,7 +33,7 @@ public final class SoldierReplica extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoldierReplica(final SoldierReplica card) {
+    private SoldierReplica(final SoldierReplica card) {
         super(card);
     }
 

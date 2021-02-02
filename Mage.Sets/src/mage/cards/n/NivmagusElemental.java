@@ -46,7 +46,7 @@ public final class NivmagusElemental extends CardImpl {
 
     }
 
-    public NivmagusElemental(final NivmagusElemental card) {
+    private NivmagusElemental(final NivmagusElemental card) {
         super(card);
     }
 

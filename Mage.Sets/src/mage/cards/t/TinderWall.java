@@ -46,7 +46,7 @@ public final class TinderWall extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TinderWall(final TinderWall card) {
+    private TinderWall(final TinderWall card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class NurturingLicid extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
-    public NurturingLicid(final NurturingLicid card) {
+    private NurturingLicid(final NurturingLicid card) {
         super(card);
     }
 

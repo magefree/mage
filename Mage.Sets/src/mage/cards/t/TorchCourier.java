@@ -51,7 +51,7 @@ public final class TorchCourier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TorchCourier(final TorchCourier card) {
+    private TorchCourier(final TorchCourier card) {
         super(card);
     }
 

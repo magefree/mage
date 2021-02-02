@@ -34,7 +34,7 @@ public final class RadiantsJudgment extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public RadiantsJudgment(final RadiantsJudgment card) {
+    private RadiantsJudgment(final RadiantsJudgment card) {
         super(card);
     }
 

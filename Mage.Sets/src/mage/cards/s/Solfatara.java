@@ -35,7 +35,7 @@ public final class Solfatara extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false));
     }
 
-    public Solfatara(final Solfatara card) {
+    private Solfatara(final Solfatara card) {
         super(card);
     }
 

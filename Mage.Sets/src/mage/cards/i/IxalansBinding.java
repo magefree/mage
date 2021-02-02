@@ -45,7 +45,7 @@ public final class IxalansBinding extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IxalansBindingReplacementEffect()));
     }
 
-    public IxalansBinding(final IxalansBinding card) {
+    private IxalansBinding(final IxalansBinding card) {
         super(card);
     }
 

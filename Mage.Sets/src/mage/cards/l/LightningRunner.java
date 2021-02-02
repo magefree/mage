@@ -48,7 +48,7 @@ public final class LightningRunner extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new LightningRunnerEffect(), false));
     }
 
-    public LightningRunner(final LightningRunner card) {
+    private LightningRunner(final LightningRunner card) {
         super(card);
     }
 

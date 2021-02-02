@@ -38,7 +38,7 @@ public final class BurningFistMinotaur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BurningFistMinotaur(final BurningFistMinotaur card) {
+    private BurningFistMinotaur(final BurningFistMinotaur card) {
         super(card);
     }
 

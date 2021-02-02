@@ -22,7 +22,7 @@ public final class DwarvenTrader extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public DwarvenTrader(final DwarvenTrader card) {
+    private DwarvenTrader(final DwarvenTrader card) {
         super(card);
     }
 

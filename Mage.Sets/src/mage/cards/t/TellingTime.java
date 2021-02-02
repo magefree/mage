@@ -32,7 +32,7 @@ public final class TellingTime extends CardImpl {
         this.getSpellAbility().addEffect(new TellingTimeEffect());
     }
 
-    public TellingTime(final TellingTime card) {
+    private TellingTime(final TellingTime card) {
         super(card);
     }
 

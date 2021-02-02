@@ -32,7 +32,7 @@ public final class OxiddaScrapmelter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OxiddaScrapmelter(final OxiddaScrapmelter card) {
+    private OxiddaScrapmelter(final OxiddaScrapmelter card) {
         super(card);
     }
 

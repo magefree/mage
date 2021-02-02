@@ -36,7 +36,7 @@ public final class KazuulTyrantOfTheCliffs extends CardImpl {
         this.addAbility(new KazuulTyrantOfTheCliffsTriggeredAbility());
     }
 
-    public KazuulTyrantOfTheCliffs(final KazuulTyrantOfTheCliffs card) {
+    private KazuulTyrantOfTheCliffs(final KazuulTyrantOfTheCliffs card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class ThornwoodFalls extends CardImpl {
         
     }
 
-    public ThornwoodFalls(final ThornwoodFalls card) {
+    private ThornwoodFalls(final ThornwoodFalls card) {
         super(card);
     }
 

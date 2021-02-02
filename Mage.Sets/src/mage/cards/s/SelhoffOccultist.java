@@ -32,7 +32,7 @@ public final class SelhoffOccultist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SelhoffOccultist(final SelhoffOccultist card) {
+    private SelhoffOccultist(final SelhoffOccultist card) {
         super(card);
     }
 

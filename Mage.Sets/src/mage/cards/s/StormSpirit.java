@@ -36,7 +36,7 @@ public final class StormSpirit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StormSpirit(final StormSpirit card) {
+    private StormSpirit(final StormSpirit card) {
         super(card);
     }
 

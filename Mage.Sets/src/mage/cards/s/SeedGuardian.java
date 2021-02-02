@@ -35,7 +35,7 @@ public final class SeedGuardian extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new SeedGuardianEffect(), false));
     }
 
-    public SeedGuardian(final SeedGuardian card) {
+    private SeedGuardian(final SeedGuardian card) {
         super(card);
     }
 

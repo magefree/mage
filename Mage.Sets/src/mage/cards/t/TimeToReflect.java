@@ -35,7 +35,7 @@ public final class TimeToReflect extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(TimeToReflectAdjuster.instance);
     }
 
-    public TimeToReflect(final TimeToReflect card) {
+    private TimeToReflect(final TimeToReflect card) {
         super(card);
     }
 

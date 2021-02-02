@@ -49,7 +49,7 @@ public final class HermitOfTheNatterknolls extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
-    public HermitOfTheNatterknolls(final HermitOfTheNatterknolls card) {
+    private HermitOfTheNatterknolls(final HermitOfTheNatterknolls card) {
         super(card);
     }
 

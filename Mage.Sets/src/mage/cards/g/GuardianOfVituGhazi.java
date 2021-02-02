@@ -29,7 +29,7 @@ public final class GuardianOfVituGhazi extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public GuardianOfVituGhazi(final GuardianOfVituGhazi card) {
+    private GuardianOfVituGhazi(final GuardianOfVituGhazi card) {
         super(card);
     }
 

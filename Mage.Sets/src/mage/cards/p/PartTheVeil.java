@@ -26,7 +26,7 @@ public final class PartTheVeil extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public PartTheVeil(final PartTheVeil card) {
+    private PartTheVeil(final PartTheVeil card) {
         super(card);
     }
 

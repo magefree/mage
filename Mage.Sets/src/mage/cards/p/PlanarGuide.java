@@ -44,7 +44,7 @@ public final class PlanarGuide extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PlanarGuide(final PlanarGuide card) {
+    private PlanarGuide(final PlanarGuide card) {
         super(card);
     }
 

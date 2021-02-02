@@ -44,7 +44,7 @@ public final class SkyshipPlunderer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkyshipPlunderer(final SkyshipPlunderer card) {
+    private SkyshipPlunderer(final SkyshipPlunderer card) {
         super(card);
     }
 

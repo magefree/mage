@@ -41,7 +41,7 @@ public final class MerfolkWayfinder extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealLibraryPutIntoHandEffect(3, filter, Zone.LIBRARY)));
     }
 
-    public MerfolkWayfinder(final MerfolkWayfinder card) {
+    private MerfolkWayfinder(final MerfolkWayfinder card) {
         super(card);
     }
 

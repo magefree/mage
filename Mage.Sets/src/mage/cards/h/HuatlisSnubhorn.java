@@ -27,7 +27,7 @@ public final class HuatlisSnubhorn extends CardImpl {
 
     }
 
-    public HuatlisSnubhorn(final HuatlisSnubhorn card) {
+    private HuatlisSnubhorn(final HuatlisSnubhorn card) {
         super(card);
     }
 

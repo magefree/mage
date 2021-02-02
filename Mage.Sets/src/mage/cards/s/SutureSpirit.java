@@ -33,7 +33,7 @@ public final class SutureSpirit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SutureSpirit(final SutureSpirit card) {
+    private SutureSpirit(final SutureSpirit card) {
         super(card);
     }
 

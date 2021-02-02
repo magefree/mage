@@ -44,7 +44,7 @@ public final class GoblinSledder extends CardImpl {
 
     }
 
-    public GoblinSledder(final GoblinSledder card) {
+    private GoblinSledder(final GoblinSledder card) {
         super(card);
     }
 

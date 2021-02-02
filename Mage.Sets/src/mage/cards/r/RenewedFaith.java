@@ -28,7 +28,7 @@ public final class RenewedFaith extends CardImpl {
         this.addAbility(new CycleTriggeredAbility(new GainLifeEffect(2), true));
     }
 
-    public RenewedFaith(final RenewedFaith card) {
+    private RenewedFaith(final RenewedFaith card) {
         super(card);
     }
 

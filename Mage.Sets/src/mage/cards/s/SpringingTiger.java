@@ -41,7 +41,7 @@ public final class SpringingTiger extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public SpringingTiger(final SpringingTiger card) {
+    private SpringingTiger(final SpringingTiger card) {
         super(card);
     }
 

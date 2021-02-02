@@ -33,7 +33,7 @@ public final class Awakening extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new UntapAllEffect(filter), TargetController.ANY, false));
     }
 
-    public Awakening(final Awakening card) {
+    private Awakening(final Awakening card) {
         super(card);
     }
 

@@ -63,7 +63,7 @@ public final class LeechBonder extends CardImpl {
 
     }
 
-    public LeechBonder(final LeechBonder card) {
+    private LeechBonder(final LeechBonder card) {
         super(card);
     }
 

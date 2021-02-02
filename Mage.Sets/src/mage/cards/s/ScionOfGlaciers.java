@@ -30,7 +30,7 @@ public final class ScionOfGlaciers extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
     }
 
-    public ScionOfGlaciers(final ScionOfGlaciers card) {
+    private ScionOfGlaciers(final ScionOfGlaciers card) {
         super(card);
     }
 

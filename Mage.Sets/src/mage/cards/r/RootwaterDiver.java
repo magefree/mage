@@ -36,7 +36,7 @@ public final class RootwaterDiver extends CardImpl {
 
     }
 
-    public RootwaterDiver(final RootwaterDiver card) {
+    private RootwaterDiver(final RootwaterDiver card) {
         super(card);
     }
 

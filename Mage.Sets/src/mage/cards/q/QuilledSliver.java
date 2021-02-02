@@ -45,7 +45,7 @@ public final class QuilledSliver extends CardImpl {
                         "All Slivers have \"{T}: This permanent deals 1 damage to target attacking or blocking creature.\"")));
     }
 
-    public QuilledSliver(final QuilledSliver card) {
+    private QuilledSliver(final QuilledSliver card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class PouncingWurm extends CardImpl {
 		this.addAbility(ability);
     }
 
-    public PouncingWurm(final PouncingWurm card) {
+    private PouncingWurm(final PouncingWurm card) {
         super(card);
     }
 

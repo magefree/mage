@@ -21,7 +21,7 @@ public final class BeastHunt extends CardImpl {
         this.getSpellAbility().addEffect(new RevealLibraryPutIntoHandEffect(3, new FilterCreatureCard("creature cards"), Zone.GRAVEYARD));
     }
 
-    public BeastHunt(final BeastHunt card) {
+    private BeastHunt(final BeastHunt card) {
         super(card);
     }
 

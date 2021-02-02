@@ -28,7 +28,7 @@ public final class Inflame extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(2, FILTER));
     }
 
-    public Inflame(final Inflame card) {
+    private Inflame(final Inflame card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class Fireblast extends CardImpl {
 
     }
 
-    public Fireblast(final Fireblast card) {
+    private Fireblast(final Fireblast card) {
         super(card);
     }
 

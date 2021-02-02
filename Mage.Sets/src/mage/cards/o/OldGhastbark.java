@@ -23,7 +23,7 @@ public final class OldGhastbark extends CardImpl {
         this.toughness = new MageInt(6);
     }
 
-    public OldGhastbark(final OldGhastbark card) {
+    private OldGhastbark(final OldGhastbark card) {
         super(card);
     }
 

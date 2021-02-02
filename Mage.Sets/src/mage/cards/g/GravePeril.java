@@ -38,7 +38,7 @@ public final class GravePeril extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GravePerilEffect(), filter, false, SetTargetPointer.PERMANENT, null));
     }
 
-    public GravePeril(final GravePeril card) {
+    private GravePeril(final GravePeril card) {
         super(card);
     }
 

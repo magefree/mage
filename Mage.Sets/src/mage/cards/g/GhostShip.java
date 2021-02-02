@@ -34,7 +34,7 @@ public final class GhostShip extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhostShip(final GhostShip card) {
+    private GhostShip(final GhostShip card) {
         super(card);
     }
 

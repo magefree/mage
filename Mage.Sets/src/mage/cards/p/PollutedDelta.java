@@ -24,7 +24,7 @@ public final class PollutedDelta extends CardImpl {
         this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.ISLAND, SubType.SWAMP)));
     }
 
-    public PollutedDelta(final PollutedDelta card) {
+    private PollutedDelta(final PollutedDelta card) {
         super(card);
     }
 

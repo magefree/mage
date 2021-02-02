@@ -45,7 +45,7 @@ public final class WandOfTheElements extends CardImpl {
 
     }
 
-    public WandOfTheElements(final WandOfTheElements card) {
+    private WandOfTheElements(final WandOfTheElements card) {
         super(card);
     }
 

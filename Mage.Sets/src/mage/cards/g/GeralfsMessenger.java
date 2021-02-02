@@ -38,7 +38,7 @@ public final class GeralfsMessenger extends CardImpl {
         this.addAbility(new UndyingAbility());
     }
 
-    public GeralfsMessenger(final GeralfsMessenger card) {
+    private GeralfsMessenger(final GeralfsMessenger card) {
         super(card);
     }
 

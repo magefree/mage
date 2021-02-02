@@ -51,7 +51,7 @@ public final class WestvaleAbbey extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WestvaleAbbey(final WestvaleAbbey card) {
+    private WestvaleAbbey(final WestvaleAbbey card) {
         super(card);
     }
 

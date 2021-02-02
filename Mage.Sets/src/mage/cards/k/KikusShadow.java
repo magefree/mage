@@ -28,7 +28,7 @@ public final class KikusShadow extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public KikusShadow(final KikusShadow card) {
+    private KikusShadow(final KikusShadow card) {
         super(card);
     }
 

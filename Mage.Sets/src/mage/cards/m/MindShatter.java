@@ -23,7 +23,7 @@ public final class MindShatter extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public MindShatter(final MindShatter card) {
+    private MindShatter(final MindShatter card) {
         super(card);
     }
 

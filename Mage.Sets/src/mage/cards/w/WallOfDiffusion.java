@@ -32,7 +32,7 @@ public final class WallOfDiffusion extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAsThoughtItHadShadowEffect(Duration.WhileOnBattlefield)));
     }
 
-    public WallOfDiffusion(final WallOfDiffusion card) {
+    private WallOfDiffusion(final WallOfDiffusion card) {
         super(card);
     }
 

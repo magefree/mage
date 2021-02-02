@@ -36,7 +36,7 @@ public final class SunCeYoungConquerer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SunCeYoungConquerer(final SunCeYoungConquerer card) {
+    private SunCeYoungConquerer(final SunCeYoungConquerer card) {
         super(card);
     }
 

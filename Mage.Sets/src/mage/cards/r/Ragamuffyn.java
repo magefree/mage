@@ -45,7 +45,7 @@ public final class Ragamuffyn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Ragamuffyn(final Ragamuffyn card) {
+    private Ragamuffyn(final Ragamuffyn card) {
         super(card);
     }
 

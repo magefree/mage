@@ -36,7 +36,7 @@ public final class CrenellatedWall extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrenellatedWall(final CrenellatedWall card) {
+    private CrenellatedWall(final CrenellatedWall card) {
         super(card);
     }
 

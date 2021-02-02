@@ -40,7 +40,7 @@ public final class OrderOfTheWhiteShield extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{W}{W}")));
     }
 
-    public OrderOfTheWhiteShield(final OrderOfTheWhiteShield card) {
+    private OrderOfTheWhiteShield(final OrderOfTheWhiteShield card) {
         super(card);
     }
 

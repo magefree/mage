@@ -34,7 +34,7 @@ public final class BondedFetch extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
     }
 
-    public BondedFetch(final BondedFetch card) {
+    private BondedFetch(final BondedFetch card) {
         super(card);
     }
 

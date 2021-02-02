@@ -28,7 +28,7 @@ public final class MalachiteGolem extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
     }
 
-    public MalachiteGolem(final MalachiteGolem card) {
+    private MalachiteGolem(final MalachiteGolem card) {
         super(card);
     }
 

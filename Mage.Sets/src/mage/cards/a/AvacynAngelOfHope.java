@@ -40,7 +40,7 @@ public final class AvacynAngelOfHope extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public AvacynAngelOfHope(final AvacynAngelOfHope card) {
+    private AvacynAngelOfHope(final AvacynAngelOfHope card) {
         super(card);
     }
 

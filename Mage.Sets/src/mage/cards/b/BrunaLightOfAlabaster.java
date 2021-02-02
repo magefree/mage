@@ -47,7 +47,7 @@ public final class BrunaLightOfAlabaster extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new BrunaLightOfAlabasterEffect(), true));
     }
 
-    public BrunaLightOfAlabaster(final BrunaLightOfAlabaster card) {
+    private BrunaLightOfAlabaster(final BrunaLightOfAlabaster card) {
         super(card);
     }
 

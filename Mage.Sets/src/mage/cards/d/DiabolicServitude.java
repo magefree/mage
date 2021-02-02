@@ -47,7 +47,7 @@ public final class DiabolicServitude extends CardImpl {
 
     }
 
-    public DiabolicServitude(final DiabolicServitude card) {
+    private DiabolicServitude(final DiabolicServitude card) {
         super(card);
     }
 

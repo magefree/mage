@@ -50,7 +50,7 @@ public final class DimensionalInfiltrator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DimensionalInfiltrator(final DimensionalInfiltrator card) {
+    private DimensionalInfiltrator(final DimensionalInfiltrator card) {
         super(card);
     }
 

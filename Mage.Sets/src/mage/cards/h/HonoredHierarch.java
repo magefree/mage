@@ -50,7 +50,7 @@ public final class HonoredHierarch extends CardImpl {
         
     }
 
-    public HonoredHierarch(final HonoredHierarch card) {
+    private HonoredHierarch(final HonoredHierarch card) {
         super(card);
     }
 

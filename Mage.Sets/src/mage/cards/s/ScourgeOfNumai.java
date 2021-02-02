@@ -34,7 +34,7 @@ public final class ScourgeOfNumai extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ScourgeOfNumaiEffect(), TargetController.YOU, false));        
     }
 
-    public ScourgeOfNumai(final ScourgeOfNumai card) {
+    private ScourgeOfNumai(final ScourgeOfNumai card) {
         super(card);
     }
 

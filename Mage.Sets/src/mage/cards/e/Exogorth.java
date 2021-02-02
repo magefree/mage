@@ -39,7 +39,7 @@ public final class Exogorth extends CardImpl {
         this.addAbility(new CanBlockOnlySpaceflightAbility());
     }
 
-    public Exogorth(final Exogorth card) {
+    private Exogorth(final Exogorth card) {
         super(card);
     }
 

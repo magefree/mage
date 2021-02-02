@@ -44,7 +44,7 @@ public final class GhituFirebreathing extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{R}")));
     }
 
-    public GhituFirebreathing(final GhituFirebreathing card) {
+    private GhituFirebreathing(final GhituFirebreathing card) {
         super(card);
     }
 

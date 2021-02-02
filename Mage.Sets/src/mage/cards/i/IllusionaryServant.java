@@ -28,7 +28,7 @@ public final class IllusionaryServant extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public IllusionaryServant(final IllusionaryServant card) {
+    private IllusionaryServant(final IllusionaryServant card) {
         super(card);
     }
 

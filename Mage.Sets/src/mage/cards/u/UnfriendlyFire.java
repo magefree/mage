@@ -22,7 +22,7 @@ public final class UnfriendlyFire extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
     }
 
-    public UnfriendlyFire(final UnfriendlyFire card) {
+    private UnfriendlyFire(final UnfriendlyFire card) {
         super(card);
     }
 

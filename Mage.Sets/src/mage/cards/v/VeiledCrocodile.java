@@ -28,7 +28,7 @@ public final class VeiledCrocodile extends CardImpl {
         this.addAbility(new VeiledCrocodileStateTriggeredAbility());
     }
 
-    public VeiledCrocodile(final VeiledCrocodile card) {
+    private VeiledCrocodile(final VeiledCrocodile card) {
         super(card);
     }
 

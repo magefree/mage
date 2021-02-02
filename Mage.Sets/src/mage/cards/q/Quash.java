@@ -25,7 +25,7 @@ public final class Quash extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetAndSearchGraveyardHandLibraryEffect());
     }
 
-    public Quash(final Quash card) {
+    private Quash(final Quash card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class SanctumGargoyle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SanctumGargoyle(final SanctumGargoyle card) {
+    private SanctumGargoyle(final SanctumGargoyle card) {
         super(card);
     }
 

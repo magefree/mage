@@ -41,7 +41,7 @@ public final class GhostLitNourisher extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public GhostLitNourisher(final GhostLitNourisher card) {
+    private GhostLitNourisher(final GhostLitNourisher card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class CankerousThirst extends CardImpl {
         this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
-    public CankerousThirst(final CankerousThirst card) {
+    private CankerousThirst(final CankerousThirst card) {
         super(card);
     }
 

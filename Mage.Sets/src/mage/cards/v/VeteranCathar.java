@@ -37,7 +37,7 @@ public final class VeteranCathar extends CardImpl {
 
     }
 
-    public VeteranCathar(final VeteranCathar card) {
+    private VeteranCathar(final VeteranCathar card) {
         super(card);
     }
 

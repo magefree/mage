@@ -30,7 +30,7 @@ public final class JunglebornPioneer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JunglebornPioneer(final JunglebornPioneer card) {
+    private JunglebornPioneer(final JunglebornPioneer card) {
         super(card);
     }
 

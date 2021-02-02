@@ -30,7 +30,7 @@ public final class HarvestWurm extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandFromGraveyardCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_BASIC_LAND)))));
     }
 
-    public HarvestWurm(final HarvestWurm card) {
+    private HarvestWurm(final HarvestWurm card) {
         super(card);
     }
 

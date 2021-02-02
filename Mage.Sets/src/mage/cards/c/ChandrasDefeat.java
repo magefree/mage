@@ -39,7 +39,7 @@ public final class ChandrasDefeat extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public ChandrasDefeat(final ChandrasDefeat card) {
+    private ChandrasDefeat(final ChandrasDefeat card) {
         super(card);
     }
 

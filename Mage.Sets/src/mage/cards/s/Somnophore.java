@@ -51,7 +51,7 @@ public final class Somnophore extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Somnophore(final Somnophore card) {
+    private Somnophore(final Somnophore card) {
         super(card);
     }
 

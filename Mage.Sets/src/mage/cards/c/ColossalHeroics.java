@@ -33,7 +33,7 @@ public final class ColossalHeroics extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
-    public ColossalHeroics(final ColossalHeroics card) {
+    private ColossalHeroics(final ColossalHeroics card) {
         super(card);
     }
 

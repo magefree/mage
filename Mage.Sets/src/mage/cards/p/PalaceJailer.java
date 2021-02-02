@@ -58,7 +58,7 @@ public final class PalaceJailer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PalaceJailer(final PalaceJailer card) {
+    private PalaceJailer(final PalaceJailer card) {
         super(card);
     }
 

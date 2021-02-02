@@ -31,7 +31,7 @@ public final class PendrellMists extends CardImpl {
                 "All creatures have \"At the beginning of your upkeep, sacrifice this creature unless you pay {1}")));
     }
 
-    public PendrellMists(final PendrellMists card) {
+    private PendrellMists(final PendrellMists card) {
         super(card);
     }
 

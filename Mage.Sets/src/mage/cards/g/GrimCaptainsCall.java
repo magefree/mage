@@ -29,7 +29,7 @@ public final class GrimCaptainsCall extends CardImpl {
         this.getSpellAbility().addEffect(new GrimCaptainsCallEffect());
     }
 
-    public GrimCaptainsCall(final GrimCaptainsCall card) {
+    private GrimCaptainsCall(final GrimCaptainsCall card) {
         super(card);
     }
 

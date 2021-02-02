@@ -38,7 +38,7 @@ public final class Lithophage extends CardImpl {
                 new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter))), TargetController.YOU, false));
     }
 
-    public Lithophage(final Lithophage card) {
+    private Lithophage(final Lithophage card) {
         super(card);
     }
 

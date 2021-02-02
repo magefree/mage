@@ -35,7 +35,7 @@ public final class TorWauki extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TorWauki(final TorWauki card) {
+    private TorWauki(final TorWauki card) {
         super(card);
     }
 

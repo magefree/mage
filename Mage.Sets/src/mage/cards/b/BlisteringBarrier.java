@@ -26,7 +26,7 @@ public final class BlisteringBarrier extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public BlisteringBarrier(final BlisteringBarrier card) {
+    private BlisteringBarrier(final BlisteringBarrier card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class IxidorsWill extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public IxidorsWill(final IxidorsWill card) {
+    private IxidorsWill(final IxidorsWill card) {
         super(card);
     }
 

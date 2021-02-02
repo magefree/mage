@@ -27,7 +27,7 @@ public final class HideousLaughter extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{3}{B}{B}"));
     }
 
-    public HideousLaughter(final HideousLaughter card) {
+    private HideousLaughter(final HideousLaughter card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class MasterOfTheWildHunt extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MasterOfTheWildHunt(final MasterOfTheWildHunt card) {
+    private MasterOfTheWildHunt(final MasterOfTheWildHunt card) {
         super(card);
     }
 

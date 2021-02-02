@@ -25,7 +25,7 @@ public final class OonasGrace extends CardImpl {
         this.addAbility(new RetraceAbility(this));
     }
 
-    public OonasGrace(final OonasGrace card) {
+    private OonasGrace(final OonasGrace card) {
         super(card);
     }
 

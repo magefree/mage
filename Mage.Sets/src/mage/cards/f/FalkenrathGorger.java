@@ -46,7 +46,7 @@ public final class FalkenrathGorger extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FalkenrathGorgerEffect()));
     }
 
-    public FalkenrathGorger(final FalkenrathGorger card) {
+    private FalkenrathGorger(final FalkenrathGorger card) {
         super(card);
     }
 

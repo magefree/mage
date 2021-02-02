@@ -44,7 +44,7 @@ public final class PrimeSpeakerZegana extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new SourcePermanentPowerCount())));
     }
 
-    public PrimeSpeakerZegana(final PrimeSpeakerZegana card) {
+    private PrimeSpeakerZegana(final PrimeSpeakerZegana card) {
         super(card);
     }
 

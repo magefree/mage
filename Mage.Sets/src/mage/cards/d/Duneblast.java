@@ -32,7 +32,7 @@ public final class Duneblast extends CardImpl {
 
     }
 
-    public Duneblast(final Duneblast card) {
+    private Duneblast(final Duneblast card) {
         super(card);
     }
 

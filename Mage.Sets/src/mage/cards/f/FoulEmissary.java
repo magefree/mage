@@ -46,7 +46,7 @@ public final class FoulEmissary extends CardImpl {
         this.addAbility(new FoulEmissaryTriggeredAbility(new CreateTokenEffect(new EldraziHorrorToken()), false));
     }
 
-    public FoulEmissary(final FoulEmissary card) {
+    private FoulEmissary(final FoulEmissary card) {
         super(card);
     }
 

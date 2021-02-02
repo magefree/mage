@@ -37,7 +37,7 @@ public final class CastleSengir extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CastleSengir(final CastleSengir card) {
+    private CastleSengir(final CastleSengir card) {
         super(card);
     }
 

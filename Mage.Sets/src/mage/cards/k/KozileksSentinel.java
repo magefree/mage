@@ -41,7 +41,7 @@ public final class KozileksSentinel extends CardImpl {
 
     }
 
-    public KozileksSentinel(final KozileksSentinel card) {
+    private KozileksSentinel(final KozileksSentinel card) {
         super(card);
     }
 

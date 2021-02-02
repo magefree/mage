@@ -33,7 +33,7 @@ public final class PrimalBoost extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PrimalBoost(final PrimalBoost card) {
+    private PrimalBoost(final PrimalBoost card) {
         super(card);
     }
 

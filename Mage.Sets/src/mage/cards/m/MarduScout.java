@@ -26,7 +26,7 @@ public final class MarduScout extends CardImpl {
         this.addAbility(new DashAbility(this, "{1}{R}"));        
     }
 
-    public MarduScout(final MarduScout card) {
+    private MarduScout(final MarduScout card) {
         super(card);
     }
 

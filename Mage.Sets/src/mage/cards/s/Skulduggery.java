@@ -40,7 +40,7 @@ public final class Skulduggery extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public Skulduggery(final Skulduggery card) {
+    private Skulduggery(final Skulduggery card) {
         super(card);
     }
 

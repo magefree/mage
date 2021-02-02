@@ -32,7 +32,7 @@ public final class MirriCatWarrior extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public MirriCatWarrior(final MirriCatWarrior card) {
+    private MirriCatWarrior(final MirriCatWarrior card) {
         super(card);
     }
 

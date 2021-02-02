@@ -37,7 +37,7 @@ public final class KjeldoranFrostbeast extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KjeldoranFrostbeast(final KjeldoranFrostbeast card) {
+    private KjeldoranFrostbeast(final KjeldoranFrostbeast card) {
         super(card);
     }
 

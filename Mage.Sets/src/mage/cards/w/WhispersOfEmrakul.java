@@ -35,7 +35,7 @@ public final class WhispersOfEmrakul extends CardImpl {
         this.getSpellAbility().addHint(DeliriumHint.instance);
     }
 
-    public WhispersOfEmrakul(final WhispersOfEmrakul card) {
+    private WhispersOfEmrakul(final WhispersOfEmrakul card) {
         super(card);
     }
 

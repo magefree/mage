@@ -39,7 +39,7 @@ public final class TreasonousOgre extends CardImpl {
                 new PayLifeCost(3)));
     }
 
-    public TreasonousOgre(final TreasonousOgre card) {
+    private TreasonousOgre(final TreasonousOgre card) {
         super(card);
     }
 

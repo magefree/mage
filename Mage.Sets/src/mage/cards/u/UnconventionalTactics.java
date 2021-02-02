@@ -50,7 +50,7 @@ public final class UnconventionalTactics extends CardImpl {
         this.addAbility(new UnconventionalTacticsTriggeredAbility());
     }
 
-    public UnconventionalTactics(final UnconventionalTactics card) {
+    private UnconventionalTactics(final UnconventionalTactics card) {
         super(card);
     }
 

@@ -63,7 +63,7 @@ public final class RathiAssassin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RathiAssassin(final RathiAssassin card) {
+    private RathiAssassin(final RathiAssassin card) {
         super(card);
     }
 

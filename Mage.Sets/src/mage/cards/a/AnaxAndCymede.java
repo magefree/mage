@@ -50,7 +50,7 @@ public final class AnaxAndCymede extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AnaxAndCymede(final AnaxAndCymede card) {
+    private AnaxAndCymede(final AnaxAndCymede card) {
         super(card);
     }
 

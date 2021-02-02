@@ -35,7 +35,7 @@ public final class NissasPilgrimage extends CardImpl {
         this.getSpellAbility().addEffect(new NissasPilgrimageEffect());
     }
 
-    public NissasPilgrimage(final NissasPilgrimage card) {
+    private NissasPilgrimage(final NissasPilgrimage card) {
         super(card);
     }
 

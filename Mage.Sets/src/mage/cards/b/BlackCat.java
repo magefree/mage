@@ -59,7 +59,7 @@ public final class BlackCat extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlackCat(final BlackCat card) {
+    private BlackCat(final BlackCat card) {
         super(card);
     }
 

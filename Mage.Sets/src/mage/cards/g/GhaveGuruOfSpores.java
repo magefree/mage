@@ -56,7 +56,7 @@ public final class GhaveGuruOfSpores extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public GhaveGuruOfSpores(final GhaveGuruOfSpores card) {
+    private GhaveGuruOfSpores(final GhaveGuruOfSpores card) {
         super(card);
     }
 

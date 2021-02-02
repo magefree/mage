@@ -37,7 +37,7 @@ public final class AncientHolocron extends CardImpl {
 
     }
 
-    public AncientHolocron(final AncientHolocron card) {
+    private AncientHolocron(final AncientHolocron card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class EarthshakingSi extends CardImpl {
 
     }
 
-    public EarthshakingSi(final EarthshakingSi card) {
+    private EarthshakingSi(final EarthshakingSi card) {
         super(card);
     }
 

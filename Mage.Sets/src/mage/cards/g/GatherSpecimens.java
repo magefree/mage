@@ -29,7 +29,7 @@ public final class GatherSpecimens extends CardImpl {
         this.getSpellAbility().addEffect(new GatherSpecimensReplacementEffect());
     }
 
-    public GatherSpecimens(final GatherSpecimens card) {
+    private GatherSpecimens(final GatherSpecimens card) {
         super(card);
     }
 

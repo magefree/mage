@@ -41,7 +41,7 @@ public final class NightMarketAeronaut extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NightMarketAeronaut(final NightMarketAeronaut card) {
+    private NightMarketAeronaut(final NightMarketAeronaut card) {
         super(card);
     }
 

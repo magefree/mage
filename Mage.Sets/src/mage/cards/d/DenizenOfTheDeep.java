@@ -37,7 +37,7 @@ public final class DenizenOfTheDeep extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
     }
 
-    public DenizenOfTheDeep(final DenizenOfTheDeep card) {
+    private DenizenOfTheDeep(final DenizenOfTheDeep card) {
         super(card);
     }
 

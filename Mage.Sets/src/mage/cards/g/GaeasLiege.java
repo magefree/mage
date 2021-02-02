@@ -58,7 +58,7 @@ public final class GaeasLiege extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GaeasLiege(final GaeasLiege card) {
+    private GaeasLiege(final GaeasLiege card) {
         super(card);
     }
 

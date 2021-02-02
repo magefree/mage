@@ -35,7 +35,7 @@ public final class BoosterTutor extends CardImpl {
         this.getSpellAbility().addEffect(new BoosterTutorEffect());
     }
 
-    public BoosterTutor(final BoosterTutor card) {
+    private BoosterTutor(final BoosterTutor card) {
         super(card);
     }
 

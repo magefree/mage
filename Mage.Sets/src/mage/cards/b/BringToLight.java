@@ -33,7 +33,7 @@ public final class BringToLight extends CardImpl {
         this.getSpellAbility().addEffect(new BringToLightEffect());
     }
 
-    public BringToLight(final BringToLight card) {
+    private BringToLight(final BringToLight card) {
         super(card);
     }
 

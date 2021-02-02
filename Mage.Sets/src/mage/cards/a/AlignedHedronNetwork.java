@@ -35,7 +35,7 @@ public final class AlignedHedronNetwork extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AlignedHedronNetworkExileEffect(), false));
     }
 
-    public AlignedHedronNetwork(final AlignedHedronNetwork card) {
+    private AlignedHedronNetwork(final AlignedHedronNetwork card) {
         super(card);
     }
 

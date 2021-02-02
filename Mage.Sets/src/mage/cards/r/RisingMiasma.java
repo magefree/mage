@@ -25,7 +25,7 @@ public final class RisingMiasma extends CardImpl {
         this.addAbility(new AwakenAbility(this, 3, "{5}{B}{B}"));
     }
 
-    public RisingMiasma(final RisingMiasma card) {
+    private RisingMiasma(final RisingMiasma card) {
         super(card);
     }
 

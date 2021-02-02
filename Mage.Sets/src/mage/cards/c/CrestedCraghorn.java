@@ -29,7 +29,7 @@ public final class CrestedCraghorn extends CardImpl {
         this.addAbility(new ProvokeAbility());
     }
 
-    public CrestedCraghorn(final CrestedCraghorn card) {
+    private CrestedCraghorn(final CrestedCraghorn card) {
         super(card);
     }
 

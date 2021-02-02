@@ -38,7 +38,7 @@ public final class SalvageTitan extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ExileFromGraveCost(new TargetCardInYourGraveyard(3, new FilterArtifactCard("artifact cards")))));
     }
 
-    public SalvageTitan(final SalvageTitan card) {
+    private SalvageTitan(final SalvageTitan card) {
         super(card);
     }
 

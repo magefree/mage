@@ -34,7 +34,7 @@ public final class DisasterRadius extends CardImpl {
         this.getSpellAbility().addEffect(new DisasterRadiusEffect());
     }
 
-    public DisasterRadius(final DisasterRadius card) {
+    private DisasterRadius(final DisasterRadius card) {
         super(card);
     }
 

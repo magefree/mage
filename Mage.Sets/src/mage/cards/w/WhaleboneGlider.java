@@ -45,7 +45,7 @@ public final class WhaleboneGlider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WhaleboneGlider(final WhaleboneGlider card) {
+    private WhaleboneGlider(final WhaleboneGlider card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class PrecipiceOfMortis extends CardImpl {
 
     }
 
-    public PrecipiceOfMortis(final PrecipiceOfMortis card) {
+    private PrecipiceOfMortis(final PrecipiceOfMortis card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class SovereignsOfLostAlara extends CardImpl {
         this.addAbility(new CreatureControlledAttacksAloneTriggeredAbility());
     }
 
-    public SovereignsOfLostAlara(final SovereignsOfLostAlara card) {
+    private SovereignsOfLostAlara(final SovereignsOfLostAlara card) {
         super(card);
     }
 

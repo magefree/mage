@@ -23,7 +23,7 @@ public final class InnerFire extends CardImpl {
         this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), CardsInControllerHandCount.instance));
     }
 
-    public InnerFire(final InnerFire card) {
+    private InnerFire(final InnerFire card) {
         super(card);
     }
 

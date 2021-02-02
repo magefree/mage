@@ -28,7 +28,7 @@ public final class PlanarBirth extends CardImpl {
         this.getSpellAbility().addEffect(new PlanarBirthEffect());
     }
 
-    public PlanarBirth(final PlanarBirth card) {
+    private PlanarBirth(final PlanarBirth card) {
         super(card);
     }
 

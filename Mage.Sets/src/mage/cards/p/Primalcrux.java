@@ -42,7 +42,7 @@ public final class Primalcrux extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
     }
 
-    public Primalcrux(final Primalcrux card) {
+    private Primalcrux(final Primalcrux card) {
         super(card);
     }
 

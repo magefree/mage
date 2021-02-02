@@ -36,7 +36,7 @@ public final class Spelljack extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Spelljack(final Spelljack card) {
+    private Spelljack(final Spelljack card) {
         super(card);
     }
 

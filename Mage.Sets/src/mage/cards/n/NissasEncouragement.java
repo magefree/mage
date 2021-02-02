@@ -31,7 +31,7 @@ public final class NissasEncouragement extends CardImpl {
 
     }
 
-    public NissasEncouragement(final NissasEncouragement card) {
+    private NissasEncouragement(final NissasEncouragement card) {
         super(card);
     }
 

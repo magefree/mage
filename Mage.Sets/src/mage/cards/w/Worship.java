@@ -25,7 +25,7 @@ public final class Worship extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WorshipReplacementEffect()));
     }
 
-    public Worship(final Worship card) {
+    private Worship(final Worship card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class DimirKeyrune extends CardImpl {
                 "", Duration.EndOfTurn), new ManaCostsImpl("{U}{B}")));
     }
 
-    public DimirKeyrune(final DimirKeyrune card) {
+    private DimirKeyrune(final DimirKeyrune card) {
         super(card);
     }
 

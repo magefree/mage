@@ -36,7 +36,7 @@ public final class HourOfEternity extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(HourOfEternityAdjuster.instance);
     }
 
-    public HourOfEternity(final HourOfEternity card) {
+    private HourOfEternity(final HourOfEternity card) {
         super(card);
     }
 

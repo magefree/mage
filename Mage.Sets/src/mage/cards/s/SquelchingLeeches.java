@@ -37,7 +37,7 @@ public final class SquelchingLeeches extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public SquelchingLeeches(final SquelchingLeeches card) {
+    private SquelchingLeeches(final SquelchingLeeches card) {
         super(card);
     }
 

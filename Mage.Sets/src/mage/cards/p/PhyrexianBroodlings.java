@@ -36,7 +36,7 @@ public final class PhyrexianBroodlings extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianBroodlings(final PhyrexianBroodlings card) {
+    private PhyrexianBroodlings(final PhyrexianBroodlings card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class OrchardElemental extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new OrchardElementalDilemmaEffect(), false, "<i>Council's dilemma</i> &mdash; "));
     }
 
-    public OrchardElemental(final OrchardElemental card) {
+    private OrchardElemental(final OrchardElemental card) {
         super(card);
     }
 

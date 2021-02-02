@@ -36,7 +36,7 @@ public final class AlabornVeteran extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AlabornVeteran(final AlabornVeteran card) {
+    private AlabornVeteran(final AlabornVeteran card) {
         super(card);
     }
 

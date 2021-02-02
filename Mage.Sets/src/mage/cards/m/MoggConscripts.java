@@ -32,7 +32,7 @@ public final class MoggConscripts extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MoggConscriptsEffect()), new PlayerCastCreatureWatcher());
     }
 
-    public MoggConscripts(final MoggConscripts card) {
+    private MoggConscripts(final MoggConscripts card) {
         super(card);
     }
 

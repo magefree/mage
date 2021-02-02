@@ -51,7 +51,7 @@ public final class GlimmerpointStag extends CardImpl {
         this.addAbility(etbAbility);
     }
 
-    public GlimmerpointStag(final GlimmerpointStag card) {
+    private GlimmerpointStag(final GlimmerpointStag card) {
         super(card);
     }
 

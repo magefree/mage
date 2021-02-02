@@ -24,7 +24,7 @@ public final class ArmyOfAllah extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, filter, false));
     }
 
-    public ArmyOfAllah(final ArmyOfAllah card) {
+    private ArmyOfAllah(final ArmyOfAllah card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class SwiftSilence extends CardImpl {
         this.getSpellAbility().addEffect(new SwiftSilenceEffect());
     }
 
-    public SwiftSilence(final SwiftSilence card) {
+    private SwiftSilence(final SwiftSilence card) {
         super(card);
     }
 

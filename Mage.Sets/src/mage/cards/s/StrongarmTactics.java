@@ -32,7 +32,7 @@ public final class StrongarmTactics extends CardImpl {
         this.getSpellAbility().addEffect(new StrongarmTacticsEffect());
     }
 
-    public StrongarmTactics(final StrongarmTactics card) {
+    private StrongarmTactics(final StrongarmTactics card) {
         super(card);
     }
 

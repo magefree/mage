@@ -25,7 +25,7 @@ public final class AlloyMyr extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public AlloyMyr(final AlloyMyr card) {
+    private AlloyMyr(final AlloyMyr card) {
         super(card);
     }
 

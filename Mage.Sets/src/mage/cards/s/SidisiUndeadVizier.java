@@ -39,7 +39,7 @@ public final class SidisiUndeadVizier extends CardImpl {
         this.addAbility(new ExploitCreatureTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCard("card")), false, true), false));
     }
 
-    public SidisiUndeadVizier(final SidisiUndeadVizier card) {
+    private SidisiUndeadVizier(final SidisiUndeadVizier card) {
         super(card);
     }
 

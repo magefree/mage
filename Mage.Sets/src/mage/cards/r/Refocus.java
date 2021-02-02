@@ -25,7 +25,7 @@ public final class Refocus extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Refocus(final Refocus card) {
+    private Refocus(final Refocus card) {
         super(card);
     }
 

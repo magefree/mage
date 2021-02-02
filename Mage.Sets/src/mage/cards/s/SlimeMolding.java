@@ -25,7 +25,7 @@ public final class SlimeMolding extends CardImpl {
         this.getSpellAbility().addEffect(new SlimeMoldingEffect());
     }
 
-    public SlimeMolding(final SlimeMolding card) {
+    private SlimeMolding(final SlimeMolding card) {
         super(card);
     }
 

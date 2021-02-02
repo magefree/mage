@@ -29,7 +29,7 @@ public final class EssenceExtraction extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public EssenceExtraction(final EssenceExtraction card) {
+    private EssenceExtraction(final EssenceExtraction card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class DivingGriffin extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public DivingGriffin(final DivingGriffin card) {
+    private DivingGriffin(final DivingGriffin card) {
         super(card);
     }
 

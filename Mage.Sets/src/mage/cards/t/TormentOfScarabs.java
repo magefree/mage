@@ -46,7 +46,7 @@ public final class TormentOfScarabs extends CardImpl {
         this.addAbility(new TormentOfScarabsAbility());
     }
 
-    public TormentOfScarabs(final TormentOfScarabs card) {
+    private TormentOfScarabs(final TormentOfScarabs card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class TelJiladWolf extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new BoostSourceEffect(3, 3, Duration.EndOfTurn), filter, false));
     }
 
-    public TelJiladWolf(final TelJiladWolf card) {
+    private TelJiladWolf(final TelJiladWolf card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class DeathlessBehemoth extends CardImpl {
                 new ReturnToHandSourceEffect(), new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true))));
     }
 
-    public DeathlessBehemoth(final DeathlessBehemoth card) {
+    private DeathlessBehemoth(final DeathlessBehemoth card) {
         super(card);
     }
 

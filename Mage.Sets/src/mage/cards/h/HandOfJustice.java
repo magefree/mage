@@ -47,7 +47,7 @@ public final class HandOfJustice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HandOfJustice(final HandOfJustice card) {
+    private HandOfJustice(final HandOfJustice card) {
         super(card);
     }
 

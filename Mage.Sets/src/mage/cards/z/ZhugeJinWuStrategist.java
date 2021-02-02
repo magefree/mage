@@ -34,7 +34,7 @@ public final class ZhugeJinWuStrategist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZhugeJinWuStrategist(final ZhugeJinWuStrategist card) {
+    private ZhugeJinWuStrategist(final ZhugeJinWuStrategist card) {
         super(card);
     }
 

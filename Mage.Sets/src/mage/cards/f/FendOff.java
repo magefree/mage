@@ -30,7 +30,7 @@ public final class FendOff extends CardImpl {
         
     }
     
-    public FendOff(final FendOff card) {
+    private FendOff(final FendOff card) {
         super(card);
     }
     

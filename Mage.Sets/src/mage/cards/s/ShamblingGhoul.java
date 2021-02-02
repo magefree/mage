@@ -28,7 +28,7 @@ public final class ShamblingGhoul extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new TapSourceEffect(), staticText));
     }
 
-    public ShamblingGhoul(final ShamblingGhoul card) {
+    private ShamblingGhoul(final ShamblingGhoul card) {
         super(card);
     }
 

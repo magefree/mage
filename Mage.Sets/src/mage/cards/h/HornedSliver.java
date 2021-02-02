@@ -34,7 +34,7 @@ public final class HornedSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public HornedSliver(final HornedSliver card) {
+    private HornedSliver(final HornedSliver card) {
         super(card);
     }
 

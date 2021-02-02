@@ -33,7 +33,7 @@ public final class DimirAqueduct extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 1, 0, 0, 0, 0, 0), new TapSourceCost()));
     }
 
-    public DimirAqueduct(final DimirAqueduct card) {
+    private DimirAqueduct(final DimirAqueduct card) {
         super(card);
     }
 

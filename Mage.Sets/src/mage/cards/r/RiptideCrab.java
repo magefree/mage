@@ -30,7 +30,7 @@ public final class RiptideCrab extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public RiptideCrab(final RiptideCrab card) {
+    private RiptideCrab(final RiptideCrab card) {
         super(card);
     }
 

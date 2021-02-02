@@ -40,7 +40,7 @@ public final class EndlessSands extends CardImpl {
         this.addAbility(returnAbility);
     }
 
-    public EndlessSands(final EndlessSands card) {
+    private EndlessSands(final EndlessSands card) {
         super(card);
     }
 

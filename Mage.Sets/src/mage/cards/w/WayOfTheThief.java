@@ -52,7 +52,7 @@ public final class WayOfTheThief extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public WayOfTheThief(final WayOfTheThief card) {
+    private WayOfTheThief(final WayOfTheThief card) {
         super(card);
     }
 

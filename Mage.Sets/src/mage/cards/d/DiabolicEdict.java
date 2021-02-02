@@ -23,7 +23,7 @@ public final class DiabolicEdict extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public DiabolicEdict(final DiabolicEdict card) {
+    private DiabolicEdict(final DiabolicEdict card) {
         super(card);
     }
 

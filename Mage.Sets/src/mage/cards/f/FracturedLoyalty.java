@@ -42,7 +42,7 @@ public final class FracturedLoyalty extends CardImpl {
         this.addAbility(new FracturedLoyaltyTriggeredAbility());
     }
 
-    public FracturedLoyalty(final FracturedLoyalty card) {
+    private FracturedLoyalty(final FracturedLoyalty card) {
         super(card);
     }
 

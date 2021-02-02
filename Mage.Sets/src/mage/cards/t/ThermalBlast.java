@@ -30,7 +30,7 @@ public final class ThermalBlast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ThermalBlast(final ThermalBlast card) {
+    private ThermalBlast(final ThermalBlast card) {
         super(card);
     }
 

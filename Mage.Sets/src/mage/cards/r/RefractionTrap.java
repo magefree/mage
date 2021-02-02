@@ -43,7 +43,7 @@ public final class RefractionTrap extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public RefractionTrap(final RefractionTrap card) {
+    private RefractionTrap(final RefractionTrap card) {
         super(card);
     }
 

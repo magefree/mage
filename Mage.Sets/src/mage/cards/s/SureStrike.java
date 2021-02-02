@@ -31,7 +31,7 @@ public final class SureStrike extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public SureStrike(final SureStrike card) {
+    private SureStrike(final SureStrike card) {
         super(card);
     }
 

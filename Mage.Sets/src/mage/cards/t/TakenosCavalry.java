@@ -43,7 +43,7 @@ public final class TakenosCavalry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TakenosCavalry(final TakenosCavalry card) {
+    private TakenosCavalry(final TakenosCavalry card) {
         super(card);
     }
 

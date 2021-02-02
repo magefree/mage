@@ -44,7 +44,7 @@ public final class Downdraft extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(2, filter), new SacrificeSourceCost()));
     }
 
-    public Downdraft(final Downdraft card) {
+    private Downdraft(final Downdraft card) {
         super(card);
     }
 

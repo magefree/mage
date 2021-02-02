@@ -47,7 +47,7 @@ public final class ForcemageAdvocate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ForcemageAdvocate(final ForcemageAdvocate card) {
+    private ForcemageAdvocate(final ForcemageAdvocate card) {
         super(card);
     }
 

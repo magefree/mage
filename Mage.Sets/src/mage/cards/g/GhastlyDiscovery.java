@@ -28,7 +28,7 @@ public final class GhastlyDiscovery extends CardImpl {
         this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.NONE));
     }
 
-    public GhastlyDiscovery(final GhastlyDiscovery card) {
+    private GhastlyDiscovery(final GhastlyDiscovery card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class FlowstoneBlade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("R")));
     }
 
-    public FlowstoneBlade(final FlowstoneBlade card) {
+    private FlowstoneBlade(final FlowstoneBlade card) {
         super(card);
     }
 

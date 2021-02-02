@@ -37,7 +37,7 @@ public final class CharmedPendant extends CardImpl {
         this.addAbility(new CharmedPendantAbility());
     }
 
-    public CharmedPendant(final CharmedPendant card) {
+    private CharmedPendant(final CharmedPendant card) {
         super(card);
     }
 

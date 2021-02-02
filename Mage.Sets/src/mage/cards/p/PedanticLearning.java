@@ -27,7 +27,7 @@ public final class PedanticLearning extends CardImpl {
         this.addAbility(new PedanticLearningTriggeredAbility());
     }
 
-    public PedanticLearning(final PedanticLearning card) {
+    private PedanticLearning(final PedanticLearning card) {
         super(card);
     }
 

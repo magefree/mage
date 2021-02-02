@@ -70,7 +70,7 @@ public final class TheWretched extends CardImpl {
         ability.addWatcher(new LostControlWatcher());
     }
 
-    public TheWretched(final TheWretched card) {
+    private TheWretched(final TheWretched card) {
         super(card);
     }
 

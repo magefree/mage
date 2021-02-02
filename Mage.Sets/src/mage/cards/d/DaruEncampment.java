@@ -41,7 +41,7 @@ public final class DaruEncampment extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DaruEncampment(final DaruEncampment card) {
+    private DaruEncampment(final DaruEncampment card) {
         super(card);
     }
 

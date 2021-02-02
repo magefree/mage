@@ -36,7 +36,7 @@ public final class SatyrPiper extends CardImpl {
 
     }
 
-    public SatyrPiper(final SatyrPiper card) {
+    private SatyrPiper(final SatyrPiper card) {
         super(card);
     }
 

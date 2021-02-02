@@ -37,7 +37,7 @@ public final class DronepackKindred extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(1)));
     }
 
-    public DronepackKindred(final DronepackKindred card) {
+    private DronepackKindred(final DronepackKindred card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class CovenantOfBlood extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public CovenantOfBlood(final CovenantOfBlood card) {
+    private CovenantOfBlood(final CovenantOfBlood card) {
         super(card);
     }
 

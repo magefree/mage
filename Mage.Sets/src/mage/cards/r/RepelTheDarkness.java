@@ -24,7 +24,7 @@ public final class RepelTheDarkness extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }
 
-    public RepelTheDarkness(final RepelTheDarkness card) {
+    private RepelTheDarkness(final RepelTheDarkness card) {
         super(card);
     }
 

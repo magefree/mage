@@ -38,7 +38,7 @@ public final class NabanDeanOfIteration extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new NabanDeanOfIterationEffect()));
     }
 
-    public NabanDeanOfIteration(final NabanDeanOfIteration card) {
+    private NabanDeanOfIteration(final NabanDeanOfIteration card) {
         super(card);
     }
 

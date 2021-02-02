@@ -29,7 +29,7 @@ public final class BogardanFirefiend extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BogardanFirefiend(final BogardanFirefiend card) {
+    private BogardanFirefiend(final BogardanFirefiend card) {
         super(card);
     }
 

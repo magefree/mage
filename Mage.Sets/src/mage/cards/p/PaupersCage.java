@@ -31,7 +31,7 @@ public final class PaupersCage extends CardImpl {
                 "At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, {this} deals 2 damage to that player."));
     }
 
-    public PaupersCage(final PaupersCage card) {
+    private PaupersCage(final PaupersCage card) {
         super(card);
     }
 

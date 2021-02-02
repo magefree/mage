@@ -62,7 +62,7 @@ public final class NaruMehaMasterWizard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, wizardFilter, true)));
     }
 
-    public NaruMehaMasterWizard(final NaruMehaMasterWizard card) {
+    private NaruMehaMasterWizard(final NaruMehaMasterWizard card) {
         super(card);
     }
 

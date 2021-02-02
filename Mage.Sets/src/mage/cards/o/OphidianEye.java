@@ -40,7 +40,7 @@ public final class OphidianEye extends CardImpl {
 
     }
 
-    public OphidianEye(final OphidianEye card) {
+    private OphidianEye(final OphidianEye card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class HungeringHydra extends CardImpl {
         ));
     }
 
-    public HungeringHydra(final HungeringHydra card) {
+    private HungeringHydra(final HungeringHydra card) {
         super(card);
     }
 

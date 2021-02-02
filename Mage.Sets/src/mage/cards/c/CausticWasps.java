@@ -39,7 +39,7 @@ public final class CausticWasps extends CardImpl {
         this.addAbility(new CausticWaspsTriggeredAbility());
     }
 
-    public CausticWasps(final CausticWasps card) {
+    private CausticWasps(final CausticWasps card) {
         super(card);
     }
 

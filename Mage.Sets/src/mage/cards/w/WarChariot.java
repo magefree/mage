@@ -32,7 +32,7 @@ public final class WarChariot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WarChariot(final WarChariot card) {
+    private WarChariot(final WarChariot card) {
         super(card);
     }
 

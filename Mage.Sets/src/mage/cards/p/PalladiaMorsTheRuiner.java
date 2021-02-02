@@ -61,7 +61,7 @@ public final class PalladiaMorsTheRuiner extends CardImpl {
         ), new PalladiaMorsTheRuinerWatcher());
     }
 
-    public PalladiaMorsTheRuiner(final PalladiaMorsTheRuiner card) {
+    private PalladiaMorsTheRuiner(final PalladiaMorsTheRuiner card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class GeistOfTheLonelyVigil extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(DeliriumHint.instance));
     }
 
-    public GeistOfTheLonelyVigil(final GeistOfTheLonelyVigil card) {
+    private GeistOfTheLonelyVigil(final GeistOfTheLonelyVigil card) {
         super(card);
     }
 

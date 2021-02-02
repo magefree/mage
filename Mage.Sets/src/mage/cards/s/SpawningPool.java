@@ -25,7 +25,7 @@ public final class SpawningPool extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SkeletonToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{B}")));
     }
 
-    public SpawningPool(final SpawningPool card) {
+    private SpawningPool(final SpawningPool card) {
         super(card);
     }
 

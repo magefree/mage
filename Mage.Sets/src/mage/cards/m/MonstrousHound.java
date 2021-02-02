@@ -44,7 +44,7 @@ public final class MonstrousHound extends CardImpl {
 
     }
 
-    public MonstrousHound(final MonstrousHound card) {
+    private MonstrousHound(final MonstrousHound card) {
         super(card);
     }
 

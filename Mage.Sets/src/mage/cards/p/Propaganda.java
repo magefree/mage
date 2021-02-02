@@ -23,7 +23,7 @@ public final class Propaganda extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl("{2}"))));
     }
 
-    public Propaganda(final Propaganda card) {
+    private Propaganda(final Propaganda card) {
         super(card);
     }
 

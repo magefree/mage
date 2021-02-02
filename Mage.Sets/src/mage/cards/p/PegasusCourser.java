@@ -44,7 +44,7 @@ public final class PegasusCourser extends CardImpl {
         addAbility(ability);
     }
 
-    public PegasusCourser(final PegasusCourser card) {
+    private PegasusCourser(final PegasusCourser card) {
         super(card);
     }
 

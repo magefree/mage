@@ -35,7 +35,7 @@ public final class InquisitorsSnare extends CardImpl {
 
     }
 
-    public InquisitorsSnare(final InquisitorsSnare card) {
+    private InquisitorsSnare(final InquisitorsSnare card) {
         super(card);
     }
 

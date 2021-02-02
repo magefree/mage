@@ -47,7 +47,7 @@ public final class Necravolver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Necravolver(final Necravolver card) {
+    private Necravolver(final Necravolver card) {
         super(card);
     }
 

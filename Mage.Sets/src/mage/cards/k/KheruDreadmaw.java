@@ -44,7 +44,7 @@ public final class KheruDreadmaw extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KheruDreadmaw(final KheruDreadmaw card) {
+    private KheruDreadmaw(final KheruDreadmaw card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class CinderStorm extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(7));
     }
 
-    public CinderStorm(final CinderStorm card) {
+    private CinderStorm(final CinderStorm card) {
         super(card);
     }
 

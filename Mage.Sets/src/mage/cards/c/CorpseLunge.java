@@ -34,7 +34,7 @@ public final class CorpseLunge extends CardImpl {
 
     }
 
-    public CorpseLunge(final CorpseLunge card) {
+    private CorpseLunge(final CorpseLunge card) {
         super(card);
     }
 

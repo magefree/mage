@@ -39,7 +39,7 @@ public final class Reconnaissance extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Reconnaissance(final Reconnaissance card) {
+    private Reconnaissance(final Reconnaissance card) {
         super(card);
     }
 

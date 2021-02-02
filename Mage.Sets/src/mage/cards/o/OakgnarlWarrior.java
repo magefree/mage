@@ -28,7 +28,7 @@ public final class OakgnarlWarrior extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public OakgnarlWarrior(final OakgnarlWarrior card) {
+    private OakgnarlWarrior(final OakgnarlWarrior card) {
         super(card);
     }
 

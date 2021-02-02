@@ -39,7 +39,7 @@ public final class TakePossession extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("permanent")));
     }
 
-    public TakePossession(final TakePossession card) {
+    private TakePossession(final TakePossession card) {
         super(card);
     }
 

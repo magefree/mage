@@ -25,7 +25,7 @@ public final class NuisanceEngine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NuisanceEngine(final NuisanceEngine card) {
+    private NuisanceEngine(final NuisanceEngine card) {
         super(card);
     }
 

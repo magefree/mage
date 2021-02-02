@@ -44,7 +44,7 @@ public final class NoxiousDragon extends CardImpl {
         
     }
 
-    public NoxiousDragon(final NoxiousDragon card) {
+    private NoxiousDragon(final NoxiousDragon card) {
         super(card);
     }
 

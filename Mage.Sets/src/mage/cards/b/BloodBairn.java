@@ -36,7 +36,7 @@ public final class BloodBairn extends CardImpl {
 
     }
 
-    public BloodBairn(final BloodBairn card) {
+    private BloodBairn(final BloodBairn card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class DevilthornFox extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public DevilthornFox(final DevilthornFox card) {
+    private DevilthornFox(final DevilthornFox card) {
         super(card);
     }
 

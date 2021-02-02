@@ -43,7 +43,7 @@ public final class CorruptedConscience extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(InfectAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public CorruptedConscience(final CorruptedConscience card) {
+    private CorruptedConscience(final CorruptedConscience card) {
         super(card);
     }
 

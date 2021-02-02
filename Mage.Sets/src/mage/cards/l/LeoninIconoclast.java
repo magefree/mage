@@ -42,7 +42,7 @@ public final class LeoninIconoclast extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LeoninIconoclast(final LeoninIconoclast card) {
+    private LeoninIconoclast(final LeoninIconoclast card) {
         super(card);
     }
 

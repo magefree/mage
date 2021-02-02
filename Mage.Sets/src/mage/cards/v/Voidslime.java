@@ -23,7 +23,7 @@ public final class Voidslime extends CardImpl {
         this.getSpellAbility().addTarget(new TargetStackObject());
     }
 
-    public Voidslime(final Voidslime card) {
+    private Voidslime(final Voidslime card) {
         super(card);
     }
 

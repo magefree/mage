@@ -29,7 +29,7 @@ public final class EndHostilities extends CardImpl {
         this.getSpellAbility().addEffect(new EndHostilitiesEffect());
     }
 
-    public EndHostilities(final EndHostilities card) {
+    private EndHostilities(final EndHostilities card) {
         super(card);
     }
 

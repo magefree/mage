@@ -52,7 +52,7 @@ public final class ArashiTheSkyAsunder extends CardImpl {
         this.addAbility(new ChannelAbility("{X}{G}{G}", new DamageAllEffect(ManacostVariableValue.instance, filter)));
     }
 
-    public ArashiTheSkyAsunder(final ArashiTheSkyAsunder card) {
+    private ArashiTheSkyAsunder(final ArashiTheSkyAsunder card) {
         super(card);
     }
 

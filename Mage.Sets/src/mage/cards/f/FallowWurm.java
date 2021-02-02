@@ -28,7 +28,7 @@ public final class FallowWurm extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardCardCost(new FilterLandCard("a land card")))));
     }
 
-    public FallowWurm(final FallowWurm card) {
+    private FallowWurm(final FallowWurm card) {
         super(card);
     }
 

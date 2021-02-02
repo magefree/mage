@@ -26,7 +26,7 @@ public final class Manabarbs extends CardImpl {
                 new FilterLandPermanent("a player taps a land"), SetTargetPointer.PLAYER));
     }
 
-    public Manabarbs(final Manabarbs card) {
+    private Manabarbs(final Manabarbs card) {
         super(card);
     }
 

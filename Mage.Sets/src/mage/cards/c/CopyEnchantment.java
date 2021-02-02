@@ -23,7 +23,7 @@ public final class CopyEnchantment extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(StaticFilters.FILTER_ENCHANTMENT_PERMANENT), true));
     }
 
-    public CopyEnchantment(final CopyEnchantment card) {
+    private CopyEnchantment(final CopyEnchantment card) {
         super(card);
     }
 

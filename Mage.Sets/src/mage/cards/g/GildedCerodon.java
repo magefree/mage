@@ -41,7 +41,7 @@ public final class GildedCerodon extends CardImpl {
 
     }
 
-    public GildedCerodon(final GildedCerodon card) {
+    private GildedCerodon(final GildedCerodon card) {
         super(card);
     }
 

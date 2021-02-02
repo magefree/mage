@@ -47,7 +47,7 @@ public final class TezzeretTheSeeker extends CardImpl {
         this.addAbility(new LoyaltyAbility(new TezzeretTheSeekerEffect3(), -5));
     }
 
-    public TezzeretTheSeeker(final TezzeretTheSeeker card) {
+    private TezzeretTheSeeker(final TezzeretTheSeeker card) {
         super(card);
     }
 

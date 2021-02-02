@@ -27,7 +27,7 @@ public final class RapidDecay extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public RapidDecay(final RapidDecay card) {
+    private RapidDecay(final RapidDecay card) {
         super(card);
     }
 

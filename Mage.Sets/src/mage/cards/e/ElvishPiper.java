@@ -36,7 +36,7 @@ public final class ElvishPiper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElvishPiper(final ElvishPiper card) {
+    private ElvishPiper(final ElvishPiper card) {
         super(card);
     }
 

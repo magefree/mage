@@ -37,7 +37,7 @@ public final class CorruptedGrafstone extends CardImpl {
         this.addAbility(new CorruptedGrafstoneManaAbility());
     }
 
-    public CorruptedGrafstone(final CorruptedGrafstone card) {
+    private CorruptedGrafstone(final CorruptedGrafstone card) {
         super(card);
     }
 

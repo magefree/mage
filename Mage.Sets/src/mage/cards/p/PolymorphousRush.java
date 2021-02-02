@@ -36,7 +36,7 @@ public final class PolymorphousRush extends CardImpl {
 
     }
 
-    public PolymorphousRush(final PolymorphousRush card) {
+    private PolymorphousRush(final PolymorphousRush card) {
         super(card);
     }
 

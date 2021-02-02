@@ -34,7 +34,7 @@ public final class ColosYearling extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public ColosYearling(final ColosYearling card) {
+    private ColosYearling(final ColosYearling card) {
         super(card);
     }
 

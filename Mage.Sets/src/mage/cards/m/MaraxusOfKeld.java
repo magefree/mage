@@ -46,7 +46,7 @@ public final class MaraxusOfKeld extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public MaraxusOfKeld(final MaraxusOfKeld card) {
+    private MaraxusOfKeld(final MaraxusOfKeld card) {
         super(card);
     }
 

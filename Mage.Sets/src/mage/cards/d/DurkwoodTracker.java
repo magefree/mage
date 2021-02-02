@@ -37,7 +37,7 @@ public final class DurkwoodTracker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DurkwoodTracker(final DurkwoodTracker card) {
+    private DurkwoodTracker(final DurkwoodTracker card) {
         super(card);
     }
 

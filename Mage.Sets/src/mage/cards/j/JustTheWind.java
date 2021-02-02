@@ -27,7 +27,7 @@ public final class JustTheWind extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{U}")));
     }
 
-    public JustTheWind(final JustTheWind card) {
+    private JustTheWind(final JustTheWind card) {
         super(card);
     }
 

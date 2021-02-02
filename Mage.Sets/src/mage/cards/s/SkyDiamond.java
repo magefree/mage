@@ -23,7 +23,7 @@ public final class SkyDiamond extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public SkyDiamond(final SkyDiamond card) {
+    private SkyDiamond(final SkyDiamond card) {
         super(card);
     }
 

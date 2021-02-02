@@ -38,7 +38,7 @@ public final class VesselOfNascency extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VesselOfNascency(final VesselOfNascency card) {
+    private VesselOfNascency(final VesselOfNascency card) {
         super(card);
     }
 

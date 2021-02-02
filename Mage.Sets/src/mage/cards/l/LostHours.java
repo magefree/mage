@@ -31,7 +31,7 @@ public final class LostHours extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public LostHours(final LostHours card) {
+    private LostHours(final LostHours card) {
         super(card);
     }
 

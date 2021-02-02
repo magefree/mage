@@ -50,7 +50,7 @@ public final class FinaleOfPromise extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(FinaleOfPromiseAdjuster.instance);
     }
 
-    public FinaleOfPromise(final FinaleOfPromise card) {
+    private FinaleOfPromise(final FinaleOfPromise card) {
         super(card);
     }
 

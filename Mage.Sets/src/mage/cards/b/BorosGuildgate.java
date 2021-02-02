@@ -28,7 +28,7 @@ public final class BorosGuildgate extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public BorosGuildgate(final BorosGuildgate card) {
+    private BorosGuildgate(final BorosGuildgate card) {
         super(card);
     }
 

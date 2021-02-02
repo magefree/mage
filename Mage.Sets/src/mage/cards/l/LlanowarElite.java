@@ -42,7 +42,7 @@ public final class LlanowarElite extends CardImpl {
         
     }
 
-    public LlanowarElite(final LlanowarElite card) {
+    private LlanowarElite(final LlanowarElite card) {
         super(card);
     }
 

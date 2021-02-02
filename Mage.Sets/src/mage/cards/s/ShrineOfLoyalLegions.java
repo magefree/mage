@@ -53,7 +53,7 @@ public final class ShrineOfLoyalLegions extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShrineOfLoyalLegions(final ShrineOfLoyalLegions card) {
+    private ShrineOfLoyalLegions(final ShrineOfLoyalLegions card) {
         super(card);
     }
 

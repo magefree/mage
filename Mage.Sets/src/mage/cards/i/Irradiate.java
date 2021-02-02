@@ -27,7 +27,7 @@ public final class Irradiate extends CardImpl {
         this.getSpellAbility().addHint(ArtifactYouControlHint.instance);
     }
 
-    public Irradiate(final Irradiate card) {
+    private Irradiate(final Irradiate card) {
         super(card);
     }
 

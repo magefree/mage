@@ -42,7 +42,7 @@ public final class NomadStadium extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public NomadStadium(final NomadStadium card) {
+    private NomadStadium(final NomadStadium card) {
         super(card);
     }
 

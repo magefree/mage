@@ -23,7 +23,7 @@ public final class Downpour extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 3));
     }
 
-    public Downpour(final Downpour card) {
+    private Downpour(final Downpour card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class YaroksWavecrasher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public YaroksWavecrasher(final YaroksWavecrasher card) {
+    private YaroksWavecrasher(final YaroksWavecrasher card) {
         super(card);
     }
 

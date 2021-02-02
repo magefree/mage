@@ -25,7 +25,7 @@ public final class DeadlyVisit extends CardImpl {
         this.getSpellAbility().addEffect(new SurveilEffect(2));
     }
 
-    public DeadlyVisit(final DeadlyVisit card) {
+    private DeadlyVisit(final DeadlyVisit card) {
         super(card);
     }
 

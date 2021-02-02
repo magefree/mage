@@ -37,7 +37,7 @@ public final class AvenTrooper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AvenTrooper(final AvenTrooper card) {
+    private AvenTrooper(final AvenTrooper card) {
         super(card);
     }
 

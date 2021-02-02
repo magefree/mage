@@ -28,7 +28,7 @@ public final class RhoxWarMonk extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public RhoxWarMonk(final RhoxWarMonk card) {
+    private RhoxWarMonk(final RhoxWarMonk card) {
         super(card);
     }
 

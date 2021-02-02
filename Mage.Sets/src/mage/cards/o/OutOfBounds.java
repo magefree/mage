@@ -26,7 +26,7 @@ public final class OutOfBounds extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public OutOfBounds(final OutOfBounds card) {
+    private OutOfBounds(final OutOfBounds card) {
         super(card);
     }
 

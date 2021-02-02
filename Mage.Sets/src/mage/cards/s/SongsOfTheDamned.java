@@ -23,7 +23,7 @@ public final class SongsOfTheDamned extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public SongsOfTheDamned(final SongsOfTheDamned card) {
+    private SongsOfTheDamned(final SongsOfTheDamned card) {
         super(card);
     }
 

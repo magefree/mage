@@ -42,7 +42,7 @@ public final class PlaneswalkersScorn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PlaneswalkersScorn(final PlaneswalkersScorn card) {
+    private PlaneswalkersScorn(final PlaneswalkersScorn card) {
         super(card);
     }
 

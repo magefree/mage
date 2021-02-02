@@ -40,7 +40,7 @@ public final class JediTraining extends CardImpl {
         this.addAbility(new JediTrainingTriggeredAbility());
     }
 
-    public JediTraining(final JediTraining card) {
+    private JediTraining(final JediTraining card) {
         super(card);
     }
 

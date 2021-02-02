@@ -31,7 +31,7 @@ public final class MarkovBlademaster extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public MarkovBlademaster(final MarkovBlademaster card) {
+    private MarkovBlademaster(final MarkovBlademaster card) {
         super(card);
     }
 

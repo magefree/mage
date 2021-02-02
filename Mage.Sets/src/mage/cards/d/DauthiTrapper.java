@@ -36,7 +36,7 @@ public final class DauthiTrapper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DauthiTrapper(final DauthiTrapper card) {
+    private DauthiTrapper(final DauthiTrapper card) {
         super(card);
     }
 

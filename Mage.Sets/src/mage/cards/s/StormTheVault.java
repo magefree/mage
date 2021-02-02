@@ -45,7 +45,7 @@ public final class StormTheVault extends CardImpl {
     }
 
 
-    public StormTheVault(final StormTheVault card) {
+    private StormTheVault(final StormTheVault card) {
         super(card);
     }
 

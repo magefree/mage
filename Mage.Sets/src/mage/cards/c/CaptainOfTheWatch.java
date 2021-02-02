@@ -44,7 +44,7 @@ public final class CaptainOfTheWatch extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SoldierToken(), 3), false));
     }
 
-    public CaptainOfTheWatch(final CaptainOfTheWatch card) {
+    private CaptainOfTheWatch(final CaptainOfTheWatch card) {
         super(card);
     }
 

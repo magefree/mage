@@ -45,7 +45,7 @@ public final class VorracBattlehorns extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
-    public VorracBattlehorns(final VorracBattlehorns card) {
+    private VorracBattlehorns(final VorracBattlehorns card) {
         super(card);
     }
 

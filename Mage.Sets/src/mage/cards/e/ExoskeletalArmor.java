@@ -42,7 +42,7 @@ public final class ExoskeletalArmor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public ExoskeletalArmor(final ExoskeletalArmor card) {
+    private ExoskeletalArmor(final ExoskeletalArmor card) {
         super(card);
     }
 

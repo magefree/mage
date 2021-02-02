@@ -30,7 +30,7 @@ public final class ConclaveEquenaut extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public ConclaveEquenaut(final ConclaveEquenaut card) {
+    private ConclaveEquenaut(final ConclaveEquenaut card) {
         super(card);
     }
 

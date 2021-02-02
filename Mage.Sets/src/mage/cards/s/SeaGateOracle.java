@@ -32,7 +32,7 @@ public final class SeaGateOracle extends CardImpl {
     }
 
 
-    public SeaGateOracle(final SeaGateOracle card) {
+    private SeaGateOracle(final SeaGateOracle card) {
         super(card);
     }
 

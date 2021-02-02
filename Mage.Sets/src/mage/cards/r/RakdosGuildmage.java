@@ -46,7 +46,7 @@ public final class RakdosGuildmage extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public RakdosGuildmage(final RakdosGuildmage card) {
+    private RakdosGuildmage(final RakdosGuildmage card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class TitansStrength extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public TitansStrength(final TitansStrength card) {
+    private TitansStrength(final TitansStrength card) {
         super(card);
     }
 

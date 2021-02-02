@@ -37,7 +37,7 @@ public final class NetcasterSpider extends CardImpl {
         this.addAbility(new BlocksCreatureWithFlyingTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
     }
 
-    public NetcasterSpider(final NetcasterSpider card) {
+    private NetcasterSpider(final NetcasterSpider card) {
         super(card);
     }
 

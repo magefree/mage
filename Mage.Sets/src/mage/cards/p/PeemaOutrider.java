@@ -29,7 +29,7 @@ public final class PeemaOutrider extends CardImpl {
         this.addAbility(new FabricateAbility(1));
     }
 
-    public PeemaOutrider(final PeemaOutrider card) {
+    private PeemaOutrider(final PeemaOutrider card) {
         super(card);
     }
 

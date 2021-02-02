@@ -21,7 +21,7 @@ public final class DrySpell extends CardImpl {
         this.getSpellAbility().addEffect(new DamageEverythingEffect(1));
     }
 
-    public DrySpell(final DrySpell card) {
+    private DrySpell(final DrySpell card) {
         super(card);
     }
 

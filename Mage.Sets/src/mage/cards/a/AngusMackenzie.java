@@ -43,7 +43,7 @@ public final class AngusMackenzie extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AngusMackenzie(final AngusMackenzie card) {
+    private AngusMackenzie(final AngusMackenzie card) {
         super(card);
     }
 

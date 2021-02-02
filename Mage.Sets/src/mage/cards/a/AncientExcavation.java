@@ -31,7 +31,7 @@ public final class AncientExcavation extends CardImpl {
         this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public AncientExcavation(final AncientExcavation card) {
+    private AncientExcavation(final AncientExcavation card) {
         super(card);
     }
 

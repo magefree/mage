@@ -59,7 +59,7 @@ public final class SimicManipulator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SimicManipulator(final SimicManipulator card) {
+    private SimicManipulator(final SimicManipulator card) {
         super(card);
     }
 

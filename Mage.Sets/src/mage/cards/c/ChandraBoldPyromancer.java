@@ -52,7 +52,7 @@ public final class ChandraBoldPyromancer extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public ChandraBoldPyromancer(final ChandraBoldPyromancer card) {
+    private ChandraBoldPyromancer(final ChandraBoldPyromancer card) {
         super(card);
     }
 

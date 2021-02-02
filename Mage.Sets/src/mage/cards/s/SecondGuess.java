@@ -35,7 +35,7 @@ public final class SecondGuess extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public SecondGuess(final SecondGuess card) {
+    private SecondGuess(final SecondGuess card) {
         super(card);
     }
 

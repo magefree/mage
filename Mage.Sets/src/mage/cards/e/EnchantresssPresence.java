@@ -30,7 +30,7 @@ public final class EnchantresssPresence extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
     }
 
-    public EnchantresssPresence(final EnchantresssPresence card) {
+    private EnchantresssPresence(final EnchantresssPresence card) {
         super(card);
     }
 

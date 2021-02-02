@@ -37,7 +37,7 @@ public final class TemporalAdept extends CardImpl {
         
     }
 
-    public TemporalAdept(final TemporalAdept card) {
+    private TemporalAdept(final TemporalAdept card) {
         super(card);
     }
 

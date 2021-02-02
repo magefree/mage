@@ -36,7 +36,7 @@ public final class HeartPiercerBow extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(1)));
     }
 
-    public HeartPiercerBow(final HeartPiercerBow card) {
+    private HeartPiercerBow(final HeartPiercerBow card) {
         super(card);
     }
 

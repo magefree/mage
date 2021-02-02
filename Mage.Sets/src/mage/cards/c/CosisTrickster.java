@@ -32,7 +32,7 @@ public final class CosisTrickster extends CardImpl {
         this.addAbility(new CosisTricksterTriggeredAbility());
     }
 
-    public CosisTrickster(final CosisTrickster card) {
+    private CosisTrickster(final CosisTrickster card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class VaporSnag extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public VaporSnag(final VaporSnag card) {
+    private VaporSnag(final VaporSnag card) {
         super(card);
     }
 

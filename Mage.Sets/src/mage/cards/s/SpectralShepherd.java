@@ -45,7 +45,7 @@ public final class SpectralShepherd extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpectralShepherd(final SpectralShepherd card) {
+    private SpectralShepherd(final SpectralShepherd card) {
         super(card);
     }
 

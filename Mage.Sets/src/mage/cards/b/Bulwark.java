@@ -30,7 +30,7 @@ public final class Bulwark extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Bulwark(final Bulwark card) {
+    private Bulwark(final Bulwark card) {
         super(card);
     }
 

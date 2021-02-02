@@ -37,7 +37,7 @@ public final class GoblinBowlingTeam extends CardImpl {
 
     }
 
-    public GoblinBowlingTeam(final GoblinBowlingTeam card) {
+    private GoblinBowlingTeam(final GoblinBowlingTeam card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class SelesnyaCluestone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SelesnyaCluestone(final SelesnyaCluestone card) {
+    private SelesnyaCluestone(final SelesnyaCluestone card) {
         super(card);
     }
 

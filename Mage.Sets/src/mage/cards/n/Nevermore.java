@@ -35,7 +35,7 @@ public final class Nevermore extends CardImpl {
 
     }
 
-    public Nevermore(final Nevermore card) {
+    private Nevermore(final Nevermore card) {
         super(card);
     }
 

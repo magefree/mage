@@ -51,7 +51,7 @@ public final class TombOfTheDuskRose extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TombOfTheDuskRose(final TombOfTheDuskRose card) {
+    private TombOfTheDuskRose(final TombOfTheDuskRose card) {
         super(card);
     }
 

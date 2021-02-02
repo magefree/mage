@@ -41,7 +41,7 @@ public final class HopefulEidolon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HopefulEidolon(final HopefulEidolon card) {
+    private HopefulEidolon(final HopefulEidolon card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class Lifeline extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Lifeline(final Lifeline card) {
+    private Lifeline(final Lifeline card) {
         super(card);
     }
 

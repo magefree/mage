@@ -34,7 +34,7 @@ public final class TimberlandGuide extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TimberlandGuide(final TimberlandGuide card) {
+    private TimberlandGuide(final TimberlandGuide card) {
         super(card);
     }
 

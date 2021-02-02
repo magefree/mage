@@ -29,7 +29,7 @@ public final class GraspOfPhantoms extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{U}"), TimingRule.SORCERY));
     }
 
-    public GraspOfPhantoms(final GraspOfPhantoms card) {
+    private GraspOfPhantoms(final GraspOfPhantoms card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class GristleGrinner extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public GristleGrinner(final GristleGrinner card) {
+    private GristleGrinner(final GristleGrinner card) {
         super(card);
     }
 

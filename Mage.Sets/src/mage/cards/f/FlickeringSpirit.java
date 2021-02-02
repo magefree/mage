@@ -38,7 +38,7 @@ public final class FlickeringSpirit extends CardImpl {
 
     }
 
-    public FlickeringSpirit(final FlickeringSpirit card) {
+    private FlickeringSpirit(final FlickeringSpirit card) {
         super(card);
     }
 

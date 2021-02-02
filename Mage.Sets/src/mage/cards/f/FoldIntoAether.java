@@ -30,7 +30,7 @@ public final class FoldIntoAether extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public FoldIntoAether(final FoldIntoAether card) {
+    private FoldIntoAether(final FoldIntoAether card) {
         super(card);
     }
 

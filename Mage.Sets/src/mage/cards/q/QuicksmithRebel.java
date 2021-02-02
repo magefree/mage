@@ -48,7 +48,7 @@ public final class QuicksmithRebel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuicksmithRebel(final QuicksmithRebel card) {
+    private QuicksmithRebel(final QuicksmithRebel card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class PyriteSpellbomb extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public PyriteSpellbomb(final PyriteSpellbomb card) {
+    private PyriteSpellbomb(final PyriteSpellbomb card) {
         super(card);
     }
 

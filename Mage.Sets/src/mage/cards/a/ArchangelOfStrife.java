@@ -45,7 +45,7 @@ public final class ArchangelOfStrife extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArchangelOfStrifePeaceEffect()));
     }
 
-    public ArchangelOfStrife(final ArchangelOfStrife card) {
+    private ArchangelOfStrife(final ArchangelOfStrife card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class DelayTactic extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public DelayTactic(final DelayTactic card) {
+    private DelayTactic(final DelayTactic card) {
         super(card);
     }
 

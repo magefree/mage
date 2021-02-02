@@ -37,7 +37,7 @@ public final class RegalForce extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter))));
     }
 
-    public RegalForce(final RegalForce card) {
+    private RegalForce(final RegalForce card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class FoundryAssembler extends CardImpl {
         addAbility(new ImproviseAbility());
     }
 
-    public FoundryAssembler(final FoundryAssembler card) {
+    private FoundryAssembler(final FoundryAssembler card) {
         super(card);
     }
 

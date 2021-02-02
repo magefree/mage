@@ -28,7 +28,7 @@ public final class FaultLine extends CardImpl {
         this.getSpellAbility().addEffect(new FaultLineEffect());
     }
 
-    public FaultLine(final FaultLine card) {
+    private FaultLine(final FaultLine card) {
         super(card);
     }
 

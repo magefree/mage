@@ -32,7 +32,7 @@ public final class SalvageScuttler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SalvageScuttler(final SalvageScuttler card) {
+    private SalvageScuttler(final SalvageScuttler card) {
         super(card);
     }
 

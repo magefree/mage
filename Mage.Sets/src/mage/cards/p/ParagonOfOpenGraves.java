@@ -57,7 +57,7 @@ public final class ParagonOfOpenGraves extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ParagonOfOpenGraves(final ParagonOfOpenGraves card) {
+    private ParagonOfOpenGraves(final ParagonOfOpenGraves card) {
         super(card);
     }
 

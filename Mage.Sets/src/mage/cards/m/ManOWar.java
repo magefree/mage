@@ -31,7 +31,7 @@ public final class ManOWar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ManOWar(final ManOWar card) {
+    private ManOWar(final ManOWar card) {
         super(card);
     }
 

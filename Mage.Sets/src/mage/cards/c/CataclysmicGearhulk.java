@@ -46,7 +46,7 @@ public final class CataclysmicGearhulk extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CataclysmicGearhulkEffect(), false));
     }
 
-    public CataclysmicGearhulk(final CataclysmicGearhulk card) {
+    private CataclysmicGearhulk(final CataclysmicGearhulk card) {
         super(card);
     }
 

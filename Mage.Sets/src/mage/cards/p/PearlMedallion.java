@@ -30,7 +30,7 @@ public final class PearlMedallion extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public PearlMedallion(final PearlMedallion card) {
+    private PearlMedallion(final PearlMedallion card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class GreatDefender extends CardImpl {
         );
     }
 
-    public GreatDefender(final GreatDefender card) {
+    private GreatDefender(final GreatDefender card) {
         super(card);
     }
 

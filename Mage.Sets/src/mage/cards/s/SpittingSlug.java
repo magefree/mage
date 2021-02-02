@@ -46,7 +46,7 @@ public final class SpittingSlug extends CardImpl {
             false));
     }
 
-    public SpittingSlug(final SpittingSlug card) {
+    private SpittingSlug(final SpittingSlug card) {
         super(card);
     }
 

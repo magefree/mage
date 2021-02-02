@@ -23,7 +23,7 @@ public final class Revitalize extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Revitalize(final Revitalize card) {
+    private Revitalize(final Revitalize card) {
         super(card);
     }
 

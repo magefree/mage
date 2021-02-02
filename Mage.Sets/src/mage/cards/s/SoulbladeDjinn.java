@@ -43,7 +43,7 @@ public final class SoulbladeDjinn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoulbladeDjinn(final SoulbladeDjinn card) {
+    private SoulbladeDjinn(final SoulbladeDjinn card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class ArguelsBloodFast extends CardImpl {
         ));
     }
 
-    public ArguelsBloodFast(final ArguelsBloodFast card) {
+    private ArguelsBloodFast(final ArguelsBloodFast card) {
         super(card);
     }
 

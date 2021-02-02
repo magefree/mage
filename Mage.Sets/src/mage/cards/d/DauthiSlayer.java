@@ -30,7 +30,7 @@ public final class DauthiSlayer extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public DauthiSlayer(final DauthiSlayer card) {
+    private DauthiSlayer(final DauthiSlayer card) {
         super(card);
     }
 

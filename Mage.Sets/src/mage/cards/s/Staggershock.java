@@ -23,7 +23,7 @@ public final class Staggershock extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public Staggershock(final Staggershock card) {
+    private Staggershock(final Staggershock card) {
         super(card);
     }
 

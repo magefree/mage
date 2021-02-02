@@ -36,7 +36,7 @@ public final class Hypochondria extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Hypochondria(final Hypochondria card) {
+    private Hypochondria(final Hypochondria card) {
         super(card);
     }
 

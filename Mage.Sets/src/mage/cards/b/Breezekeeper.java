@@ -29,7 +29,7 @@ public final class Breezekeeper extends CardImpl {
         this.addAbility(PhasingAbility.getInstance());
     }
 
-    public Breezekeeper(final Breezekeeper card) {
+    private Breezekeeper(final Breezekeeper card) {
         super(card);
     }
 

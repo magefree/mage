@@ -26,7 +26,7 @@ public final class CurtainsCall extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, FILTER_PERMANENT_CREATURES, false));
     }
 
-    public CurtainsCall(final CurtainsCall card) {
+    private CurtainsCall(final CurtainsCall card) {
         super(card);
     }
 

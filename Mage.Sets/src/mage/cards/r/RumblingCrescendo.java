@@ -49,7 +49,7 @@ public final class RumblingCrescendo extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RumblingCrescendo(final RumblingCrescendo card) {
+    private RumblingCrescendo(final RumblingCrescendo card) {
         super(card);
     }
 

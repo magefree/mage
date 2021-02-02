@@ -30,7 +30,7 @@ public final class Jinx extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public Jinx(final Jinx card) {
+    private Jinx(final Jinx card) {
         super(card);
     }
 

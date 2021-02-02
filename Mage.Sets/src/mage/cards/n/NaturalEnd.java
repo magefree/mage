@@ -26,7 +26,7 @@ public final class NaturalEnd extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
-    public NaturalEnd(final NaturalEnd card) {
+    private NaturalEnd(final NaturalEnd card) {
         super(card);
     }
 

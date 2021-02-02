@@ -50,7 +50,7 @@ public final class TahngarthsRage extends CardImpl {
         ));
     }
 
-    public TahngarthsRage(final TahngarthsRage card) {
+    private TahngarthsRage(final TahngarthsRage card) {
         super(card);
     }
 

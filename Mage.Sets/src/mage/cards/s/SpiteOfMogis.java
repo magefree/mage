@@ -27,7 +27,7 @@ public final class SpiteOfMogis extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public SpiteOfMogis(final SpiteOfMogis card) {
+    private SpiteOfMogis(final SpiteOfMogis card) {
         super(card);
     }
 

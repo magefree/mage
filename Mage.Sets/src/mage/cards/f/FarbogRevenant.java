@@ -29,7 +29,7 @@ public final class FarbogRevenant extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public FarbogRevenant(final FarbogRevenant card) {
+    private FarbogRevenant(final FarbogRevenant card) {
         super(card);
     }
 

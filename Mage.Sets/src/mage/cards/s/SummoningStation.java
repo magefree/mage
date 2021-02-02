@@ -29,7 +29,7 @@ public final class SummoningStation extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new UntapSourceEffect(), true, new FilterArtifactPermanent(), false));
     }
 
-    public SummoningStation(final SummoningStation card) {
+    private SummoningStation(final SummoningStation card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class BestialMenace extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()));
     }
 
-    public BestialMenace(final BestialMenace card) {
+    private BestialMenace(final BestialMenace card) {
         super(card);
     }
 

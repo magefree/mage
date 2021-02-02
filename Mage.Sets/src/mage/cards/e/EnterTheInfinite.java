@@ -38,7 +38,7 @@ public final class EnterTheInfinite extends CardImpl {
         this.getSpellAbility().addEffect(new MaximumHandSizeEffect());
     }
 
-    public EnterTheInfinite(final EnterTheInfinite card) {
+    private EnterTheInfinite(final EnterTheInfinite card) {
         super(card);
     }
 

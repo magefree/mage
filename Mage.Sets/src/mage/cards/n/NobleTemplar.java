@@ -32,7 +32,7 @@ public final class NobleTemplar extends CardImpl {
         this.addAbility(new PlainscyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public NobleTemplar(final NobleTemplar card) {
+    private NobleTemplar(final NobleTemplar card) {
         super(card);
     }
 

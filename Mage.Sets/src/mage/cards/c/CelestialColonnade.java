@@ -44,7 +44,7 @@ public final class CelestialColonnade extends CardImpl {
                 "land", Duration.EndOfTurn), new ManaCostsImpl("{3}{W}{U}")));
     }
 
-    public CelestialColonnade(final CelestialColonnade card) {
+    private CelestialColonnade(final CelestialColonnade card) {
         super(card);
     }
 

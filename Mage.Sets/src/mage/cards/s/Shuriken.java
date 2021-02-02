@@ -44,7 +44,7 @@ public final class Shuriken extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.PreventDamage, new GenericManaCost(2)));
     }
 
-    public Shuriken(final Shuriken card) {
+    private Shuriken(final Shuriken card) {
         super(card);
     }
 

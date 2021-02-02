@@ -40,7 +40,7 @@ public final class CommonCause extends CardImpl {
         ));
     }
 
-    public CommonCause(final CommonCause card) {
+    private CommonCause(final CommonCause card) {
         super(card);
     }
 

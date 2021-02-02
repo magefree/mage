@@ -47,7 +47,7 @@ public final class HeroicDefiance extends CardImpl {
                         "Enchanted creature gets +3/+3 unless it shares a color with the most common color among all permanents or a color tied for most common")));
     }
 
-    public HeroicDefiance(final HeroicDefiance card) {
+    private HeroicDefiance(final HeroicDefiance card) {
         super(card);
     }
 

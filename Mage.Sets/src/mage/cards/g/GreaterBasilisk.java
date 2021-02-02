@@ -26,7 +26,7 @@ public final class GreaterBasilisk extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public GreaterBasilisk(final GreaterBasilisk card) {
+    private GreaterBasilisk(final GreaterBasilisk card) {
         super(card);
     }
 

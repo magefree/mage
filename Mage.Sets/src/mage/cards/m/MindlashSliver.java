@@ -44,7 +44,7 @@ public final class MindlashSliver extends CardImpl {
                 filter, "All Slivers have \"{1}, Sacrifice this permanent: Each player discards a card.\"")));
     }
 
-    public MindlashSliver(final MindlashSliver card) {
+    private MindlashSliver(final MindlashSliver card) {
         super(card);
     }
 

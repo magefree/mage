@@ -40,7 +40,7 @@ public final class JacquesLeVert extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0,2, Duration.WhileOnBattlefield, filter)));
     }
 
-    public JacquesLeVert(final JacquesLeVert card) {
+    private JacquesLeVert(final JacquesLeVert card) {
         super(card);
     }
 

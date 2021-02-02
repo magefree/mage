@@ -39,7 +39,7 @@ public final class TemurAscendancy extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true));
     }
 
-    public TemurAscendancy(final TemurAscendancy card) {
+    private TemurAscendancy(final TemurAscendancy card) {
         super(card);
     }
 

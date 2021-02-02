@@ -38,7 +38,7 @@ public final class ExoticCurse extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ExoticCurse(final ExoticCurse card) {
+    private ExoticCurse(final ExoticCurse card) {
         super(card);
     }
 

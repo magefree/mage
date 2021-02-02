@@ -40,7 +40,7 @@ public final class WhispererOfTheWilds extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WhispererOfTheWilds(final WhispererOfTheWilds card) {
+    private WhispererOfTheWilds(final WhispererOfTheWilds card) {
         super(card);
     }
 

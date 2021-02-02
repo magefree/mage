@@ -41,7 +41,7 @@ public final class CruelUltimatum extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(5));
     }
 
-    public CruelUltimatum(final CruelUltimatum card) {
+    private CruelUltimatum(final CruelUltimatum card) {
         super(card);
     }
 

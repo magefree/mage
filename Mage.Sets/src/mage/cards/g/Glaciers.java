@@ -36,7 +36,7 @@ public final class Glaciers extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GlaciersEffect()));
     }
 
-    public Glaciers(final Glaciers card) {
+    private Glaciers(final Glaciers card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class DeadeyeTracker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeadeyeTracker(final DeadeyeTracker card) {
+    private DeadeyeTracker(final DeadeyeTracker card) {
         super(card);
     }
 

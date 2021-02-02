@@ -54,7 +54,7 @@ public final class SquealingDevil extends CardImpl {
 
     }
 
-    public SquealingDevil(final SquealingDevil card) {
+    private SquealingDevil(final SquealingDevil card) {
         super(card);
     }
 

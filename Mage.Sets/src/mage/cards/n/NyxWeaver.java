@@ -43,7 +43,7 @@ public final class NyxWeaver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NyxWeaver(final NyxWeaver card) {
+    private NyxWeaver(final NyxWeaver card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class KolaghanTheStormsFury extends CardImpl {
         this.addAbility(new DashAbility(this, "{3}{B}{R}"));
     }
 
-    public KolaghanTheStormsFury(final KolaghanTheStormsFury card) {
+    private KolaghanTheStormsFury(final KolaghanTheStormsFury card) {
         super(card);
     }
 

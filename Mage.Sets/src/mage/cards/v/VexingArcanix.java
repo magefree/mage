@@ -35,7 +35,7 @@ public final class VexingArcanix extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VexingArcanix(final VexingArcanix card) {
+    private VexingArcanix(final VexingArcanix card) {
         super(card);
     }
 

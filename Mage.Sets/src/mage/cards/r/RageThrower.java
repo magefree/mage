@@ -31,7 +31,7 @@ public final class RageThrower extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RageThrower(final RageThrower card) {
+    private RageThrower(final RageThrower card) {
         super(card);
     }
 

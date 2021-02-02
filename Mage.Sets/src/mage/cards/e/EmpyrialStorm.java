@@ -24,7 +24,7 @@ public final class EmpyrialStorm extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new AngelToken()));
     }
 
-    public EmpyrialStorm(final EmpyrialStorm card) {
+    private EmpyrialStorm(final EmpyrialStorm card) {
         super(card);
     }
 

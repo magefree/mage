@@ -29,7 +29,7 @@ public final class ChargingBinox extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public ChargingBinox(final ChargingBinox card) {
+    private ChargingBinox(final ChargingBinox card) {
         super(card);
     }
 

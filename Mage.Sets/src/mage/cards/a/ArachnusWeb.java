@@ -45,7 +45,7 @@ public final class ArachnusWeb extends CardImpl {
                 new AttachedToMatchesFilterCondition(filter), false));
     }
 
-    public ArachnusWeb(final ArachnusWeb card) {
+    private ArachnusWeb(final ArachnusWeb card) {
         super(card);
     }
 

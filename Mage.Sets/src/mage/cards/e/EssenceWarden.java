@@ -36,7 +36,7 @@ public final class EssenceWarden extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), filter, false, null));
     }
 
-    public EssenceWarden(final EssenceWarden card) {
+    private EssenceWarden(final EssenceWarden card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class KrosanCloudscraper extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{7}{G}{G}")));
     }
 
-    public KrosanCloudscraper(final KrosanCloudscraper card) {
+    private KrosanCloudscraper(final KrosanCloudscraper card) {
         super(card);
     }
 

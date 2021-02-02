@@ -42,7 +42,7 @@ public final class NirkanaRevenant extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public NirkanaRevenant(final NirkanaRevenant card) {
+    private NirkanaRevenant(final NirkanaRevenant card) {
         super(card);
     }
 

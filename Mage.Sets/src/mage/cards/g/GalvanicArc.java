@@ -46,7 +46,7 @@ public final class GalvanicArc extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public GalvanicArc(final GalvanicArc card) {
+    private GalvanicArc(final GalvanicArc card) {
         super(card);
     }
 

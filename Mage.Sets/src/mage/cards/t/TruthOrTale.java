@@ -30,7 +30,7 @@ public final class TruthOrTale extends CardImpl {
         this.getSpellAbility().addEffect(new TruthOrTaleEffect());
     }
 
-    public TruthOrTale(final TruthOrTale card) {
+    private TruthOrTale(final TruthOrTale card) {
         super(card);
     }
 

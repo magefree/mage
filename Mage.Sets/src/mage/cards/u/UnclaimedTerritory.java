@@ -41,7 +41,7 @@ public final class UnclaimedTerritory extends CardImpl {
         this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new UnclaimedTerritoryManaBuilder(), true));
     }
 
-    public UnclaimedTerritory(final UnclaimedTerritory card) {
+    private UnclaimedTerritory(final UnclaimedTerritory card) {
         super(card);
     }
 

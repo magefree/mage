@@ -26,7 +26,7 @@ public final class TenementCrasher extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public TenementCrasher(final TenementCrasher card) {
+    private TenementCrasher(final TenementCrasher card) {
         super(card);
     }
 

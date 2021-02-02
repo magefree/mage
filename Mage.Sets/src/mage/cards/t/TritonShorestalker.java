@@ -27,7 +27,7 @@ public final class TritonShorestalker extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility("{this} can't be blocked"));
     }
 
-    public TritonShorestalker(final TritonShorestalker card) {
+    private TritonShorestalker(final TritonShorestalker card) {
         super(card);
     }
 

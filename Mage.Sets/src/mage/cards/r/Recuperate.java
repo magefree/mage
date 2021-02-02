@@ -30,7 +30,7 @@ public final class Recuperate extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public Recuperate(final Recuperate card) {
+    private Recuperate(final Recuperate card) {
         super(card);
     }
 

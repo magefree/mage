@@ -21,7 +21,7 @@ public final class SacredNectar extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
     }
 
-    public SacredNectar(final SacredNectar card) {
+    private SacredNectar(final SacredNectar card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class CavesOfKoilos extends CardImpl {
         this.addAbility(blackManaAbility);
     }
 
-    public CavesOfKoilos(final CavesOfKoilos card) {
+    private CavesOfKoilos(final CavesOfKoilos card) {
         super(card);
     }
 

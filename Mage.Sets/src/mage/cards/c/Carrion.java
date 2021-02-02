@@ -28,7 +28,7 @@ public final class Carrion extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new CarrionBlackInsectToken(), SacrificeCostCreaturesPower.instance));
     }
 
-    public Carrion(final Carrion card) {
+    private Carrion(final Carrion card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class Enlarge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Enlarge(final Enlarge card) {
+    private Enlarge(final Enlarge card) {
         super(card);
     }
 

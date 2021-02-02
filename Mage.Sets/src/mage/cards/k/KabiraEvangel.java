@@ -47,7 +47,7 @@ public final class KabiraEvangel extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filter2, true));
     }
 
-    public KabiraEvangel(final KabiraEvangel card) {
+    private KabiraEvangel(final KabiraEvangel card) {
         super(card);
     }
 

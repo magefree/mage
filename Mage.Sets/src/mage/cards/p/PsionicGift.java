@@ -45,7 +45,7 @@ public final class PsionicGift extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(psiAbility, AttachmentType.AURA)));
     }
 
-    public PsionicGift(final PsionicGift card) {
+    private PsionicGift(final PsionicGift card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class Purelace extends CardImpl {
         this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.WHITE, Duration.Custom));
     }
 
-    public Purelace(final Purelace card) {
+    private Purelace(final Purelace card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class PullFromEternity extends CardImpl {
 
     }
 
-    public PullFromEternity(final PullFromEternity card) {
+    private PullFromEternity(final PullFromEternity card) {
         super(card);
     }
 

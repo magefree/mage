@@ -24,7 +24,7 @@ public final class Lifegift extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new FilterLandPermanent("a land"), true));
     }
 
-    public Lifegift(final Lifegift card) {
+    private Lifegift(final Lifegift card) {
         super(card);
     }
 

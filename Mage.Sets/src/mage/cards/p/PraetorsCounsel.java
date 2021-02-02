@@ -31,7 +31,7 @@ public final class PraetorsCounsel extends CardImpl {
         this.getSpellAbility().addEffect(new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.EndOfGame, HandSizeModification.SET));
     }
 
-    public PraetorsCounsel(final PraetorsCounsel card) {
+    private PraetorsCounsel(final PraetorsCounsel card) {
         super(card);
     }
 

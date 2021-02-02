@@ -36,7 +36,7 @@ public final class ChasmDrake extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChasmDrake(final ChasmDrake card) {
+    private ChasmDrake(final ChasmDrake card) {
         super(card);
     }
 

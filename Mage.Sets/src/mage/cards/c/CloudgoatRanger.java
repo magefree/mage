@@ -57,7 +57,7 @@ public final class CloudgoatRanger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CloudgoatRanger(final CloudgoatRanger card) {
+    private CloudgoatRanger(final CloudgoatRanger card) {
         super(card);
     }
 

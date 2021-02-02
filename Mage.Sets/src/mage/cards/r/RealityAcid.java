@@ -54,7 +54,7 @@ public final class RealityAcid extends CardImpl {
         this.addAbility(new RealityAcidTriggeredAbility(effect, false));
     }
 
-    public RealityAcid(final RealityAcid card) {
+    private RealityAcid(final RealityAcid card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class LifeBurst extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public LifeBurst(final LifeBurst card) {
+    private LifeBurst(final LifeBurst card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class AvariciousDragon extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DiscardHandControllerEffect(), TargetController.YOU, false));
     }
 
-    public AvariciousDragon(final AvariciousDragon card) {
+    private AvariciousDragon(final AvariciousDragon card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class RitesOfFlourishing extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsAllEffect()));
     }
 
-    public RitesOfFlourishing(final RitesOfFlourishing card) {
+    private RitesOfFlourishing(final RitesOfFlourishing card) {
         super(card);
     }
 

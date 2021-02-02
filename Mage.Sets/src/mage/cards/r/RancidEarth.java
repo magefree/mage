@@ -35,7 +35,7 @@ public final class RancidEarth extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public RancidEarth(final RancidEarth card) {
+    private RancidEarth(final RancidEarth card) {
         super(card);
     }
 

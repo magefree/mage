@@ -46,7 +46,7 @@ public final class RegalBloodlord extends CardImpl {
         ), new PlayerGainedLifeWatcher());
     }
 
-    public RegalBloodlord(final RegalBloodlord card) {
+    private RegalBloodlord(final RegalBloodlord card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class WingsOfAesthir extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WingsOfAesthir(final WingsOfAesthir card) {
+    private WingsOfAesthir(final WingsOfAesthir card) {
         super(card);
     }
 

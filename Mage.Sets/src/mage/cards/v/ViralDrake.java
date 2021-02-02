@@ -36,7 +36,7 @@ public final class ViralDrake extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProliferateEffect(), new ManaCostsImpl("{3}{U}")));
     }
 
-    public ViralDrake(final ViralDrake card) {
+    private ViralDrake(final ViralDrake card) {
         super(card);
     }
 

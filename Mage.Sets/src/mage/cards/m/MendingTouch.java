@@ -26,7 +26,7 @@ public final class MendingTouch extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public MendingTouch(final MendingTouch card) {
+    private MendingTouch(final MendingTouch card) {
         super(card);
     }
 

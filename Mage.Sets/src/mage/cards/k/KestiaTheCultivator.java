@@ -61,7 +61,7 @@ public final class KestiaTheCultivator extends CardImpl {
         ));
     }
 
-    public KestiaTheCultivator(final KestiaTheCultivator card) {
+    private KestiaTheCultivator(final KestiaTheCultivator card) {
         super(card);
     }
 

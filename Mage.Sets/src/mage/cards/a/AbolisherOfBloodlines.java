@@ -42,7 +42,7 @@ public final class AbolisherOfBloodlines extends CardImpl {
         this.addAbility(new AbolisherOfBloodlinesAbility());
     }
 
-    public AbolisherOfBloodlines(final AbolisherOfBloodlines card) {
+    private AbolisherOfBloodlines(final AbolisherOfBloodlines card) {
         super(card);
     }
 

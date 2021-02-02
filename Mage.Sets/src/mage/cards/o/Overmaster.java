@@ -38,7 +38,7 @@ public final class Overmaster extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Overmaster(final Overmaster card) {
+    private Overmaster(final Overmaster card) {
         super(card);
     }
 

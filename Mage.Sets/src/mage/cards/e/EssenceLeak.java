@@ -51,7 +51,7 @@ public final class EssenceLeak extends CardImpl {
         this.addAbility(ifRedOrGreenAbility);
     }
 
-    public EssenceLeak(final EssenceLeak card) {
+    private EssenceLeak(final EssenceLeak card) {
         super(card);
     }
 

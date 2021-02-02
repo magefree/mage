@@ -43,7 +43,7 @@ public final class SurgicalExtraction extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
     }
 
-    public SurgicalExtraction(final SurgicalExtraction card) {
+    private SurgicalExtraction(final SurgicalExtraction card) {
         super(card);
     }
 

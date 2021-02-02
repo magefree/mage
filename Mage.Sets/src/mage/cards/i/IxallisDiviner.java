@@ -28,7 +28,7 @@ public final class IxallisDiviner extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect()));
     }
 
-    public IxallisDiviner(final IxallisDiviner card) {
+    private IxallisDiviner(final IxallisDiviner card) {
         super(card);
     }
 

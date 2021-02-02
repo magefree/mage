@@ -39,7 +39,7 @@ public final class RusticClachan extends CardImpl {
         this.addAbility(new ReinforceAbility(1, new ManaCostsImpl("{1}{W}")));
     }
 
-    public RusticClachan(final RusticClachan card) {
+    private RusticClachan(final RusticClachan card) {
         super(card);
     }
 

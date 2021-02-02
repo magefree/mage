@@ -36,7 +36,7 @@ public final class HorizonChimera extends CardImpl {
         this.addAbility(new DrawCardControllerTriggeredAbility(new GainLifeEffect(1), false));
     }
 
-    public HorizonChimera(final HorizonChimera card) {
+    private HorizonChimera(final HorizonChimera card) {
         super(card);
     }
 

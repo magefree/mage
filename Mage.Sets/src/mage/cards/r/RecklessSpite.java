@@ -34,7 +34,7 @@ public final class RecklessSpite extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(5));
     }
 
-    public RecklessSpite(final RecklessSpite card) {
+    private RecklessSpite(final RecklessSpite card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class BrambleweftBehemoth extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public BrambleweftBehemoth(final BrambleweftBehemoth card) {
+    private BrambleweftBehemoth(final BrambleweftBehemoth card) {
         super(card);
     }
 

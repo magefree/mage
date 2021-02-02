@@ -36,7 +36,7 @@ public final class TropicalStorm extends CardImpl {
 
     }
 
-    public TropicalStorm(final TropicalStorm card) {
+    private TropicalStorm(final TropicalStorm card) {
         super(card);
     }
 

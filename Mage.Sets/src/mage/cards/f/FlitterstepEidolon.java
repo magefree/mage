@@ -40,7 +40,7 @@ public final class FlitterstepEidolon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlitterstepEidolon(final FlitterstepEidolon card) {
+    private FlitterstepEidolon(final FlitterstepEidolon card) {
         super(card);
     }
 

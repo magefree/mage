@@ -39,7 +39,7 @@ public final class EmbodimentOfSpring extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EmbodimentOfSpring(final EmbodimentOfSpring card) {
+    private EmbodimentOfSpring(final EmbodimentOfSpring card) {
         super(card);
     }
 

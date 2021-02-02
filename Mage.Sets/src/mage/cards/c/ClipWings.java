@@ -29,7 +29,7 @@ public final class ClipWings extends CardImpl {
         this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(filter));
     }
 
-    public ClipWings(final ClipWings card) {
+    private ClipWings(final ClipWings card) {
         super(card);
     }
 

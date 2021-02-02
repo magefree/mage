@@ -27,7 +27,7 @@ public final class FrayingOmnipotence extends CardImpl {
         this.getSpellAbility().addEffect(new FrayingOmnipotenceEffect());
     }
 
-    public FrayingOmnipotence(final FrayingOmnipotence card) {
+    private FrayingOmnipotence(final FrayingOmnipotence card) {
         super(card);
     }
 

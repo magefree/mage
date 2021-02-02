@@ -43,7 +43,7 @@ public final class AncestorsProphet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AncestorsProphet(final AncestorsProphet card) {
+    private AncestorsProphet(final AncestorsProphet card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class RollickOfAbandon extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(2,-2, Duration.EndOfTurn));
     }
 
-    public RollickOfAbandon(final RollickOfAbandon card) {
+    private RollickOfAbandon(final RollickOfAbandon card) {
         super(card);
     }
 

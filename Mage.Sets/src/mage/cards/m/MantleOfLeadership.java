@@ -46,7 +46,7 @@ public final class MantleOfLeadership extends CardImpl {
         ));
     }
 
-    public MantleOfLeadership(final MantleOfLeadership card) {
+    private MantleOfLeadership(final MantleOfLeadership card) {
         super(card);
     }
 

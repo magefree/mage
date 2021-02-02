@@ -49,7 +49,7 @@ public final class RagingRavine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RagingRavine(final RagingRavine card) {
+    private RagingRavine(final RagingRavine card) {
         super(card);
     }
 

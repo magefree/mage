@@ -31,7 +31,7 @@ public final class SpellContortion extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public SpellContortion(final SpellContortion card) {
+    private SpellContortion(final SpellContortion card) {
         super(card);
     }
 

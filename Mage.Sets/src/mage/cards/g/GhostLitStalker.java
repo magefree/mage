@@ -41,7 +41,7 @@ public final class GhostLitStalker extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public GhostLitStalker(final GhostLitStalker card) {
+    private GhostLitStalker(final GhostLitStalker card) {
         super(card);
     }
 

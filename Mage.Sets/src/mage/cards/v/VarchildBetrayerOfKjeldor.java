@@ -73,7 +73,7 @@ public final class VarchildBetrayerOfKjeldor extends CardImpl {
         ));
     }
 
-    public VarchildBetrayerOfKjeldor(final VarchildBetrayerOfKjeldor card) {
+    private VarchildBetrayerOfKjeldor(final VarchildBetrayerOfKjeldor card) {
         super(card);
     }
 

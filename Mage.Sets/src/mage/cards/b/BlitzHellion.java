@@ -39,7 +39,7 @@ public final class BlitzHellion extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, null, false));
     }
 
-    public BlitzHellion(final BlitzHellion card) {
+    private BlitzHellion(final BlitzHellion card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class Inheritance extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Inheritance(final Inheritance card) {
+    private Inheritance(final Inheritance card) {
         super(card);
     }
 

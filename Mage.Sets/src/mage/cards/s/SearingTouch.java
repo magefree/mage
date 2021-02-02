@@ -27,7 +27,7 @@ public final class SearingTouch extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public SearingTouch(final SearingTouch card) {
+    private SearingTouch(final SearingTouch card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class StrandsOfUndeath extends CardImpl {
         this.addAbility(abilityDiscard);
     }
 
-    public StrandsOfUndeath(final StrandsOfUndeath card) {
+    private StrandsOfUndeath(final StrandsOfUndeath card) {
         super(card);
     }
 

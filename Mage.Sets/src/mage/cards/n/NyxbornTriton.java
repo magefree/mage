@@ -32,7 +32,7 @@ public final class NyxbornTriton extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2,3, Duration.WhileOnBattlefield)));        
     }
 
-    public NyxbornTriton(final NyxbornTriton card) {
+    private NyxbornTriton(final NyxbornTriton card) {
         super(card);
     }
 

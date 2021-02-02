@@ -29,7 +29,7 @@ public final class SkullFracture extends CardImpl {
        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{B}"), TimingRule.SORCERY));
     }
 
-    public SkullFracture(final SkullFracture card) {
+    private SkullFracture(final SkullFracture card) {
         super(card);
     }
 

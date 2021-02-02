@@ -23,7 +23,7 @@ public final class NaturalSpring extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public NaturalSpring(final NaturalSpring card) {
+    private NaturalSpring(final NaturalSpring card) {
         super(card);
     }
 

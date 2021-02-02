@@ -29,7 +29,7 @@ public final class SootfeatherFlock extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{B}")));
     }
 
-    public SootfeatherFlock(final SootfeatherFlock card) {
+    private SootfeatherFlock(final SootfeatherFlock card) {
         super(card);
     }
 

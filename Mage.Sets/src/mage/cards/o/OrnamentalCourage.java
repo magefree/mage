@@ -28,7 +28,7 @@ public final class OrnamentalCourage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public OrnamentalCourage(final OrnamentalCourage card) {
+    private OrnamentalCourage(final OrnamentalCourage card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class Dub extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Dub(final Dub card) {
+    private Dub(final Dub card) {
         super(card);
     }
 

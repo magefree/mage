@@ -42,7 +42,7 @@ public final class KarmicGuide extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KarmicGuide(final KarmicGuide card) {
+    private KarmicGuide(final KarmicGuide card) {
         super(card);
     }
 

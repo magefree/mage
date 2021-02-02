@@ -34,7 +34,7 @@ public final class WreakHavoc extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public WreakHavoc(final WreakHavoc card) {
+    private WreakHavoc(final WreakHavoc card) {
         super(card);
     }
 

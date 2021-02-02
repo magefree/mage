@@ -48,7 +48,7 @@ public final class LegionWarboss extends CardImpl {
         ));
     }
 
-    public LegionWarboss(final LegionWarboss card) {
+    private LegionWarboss(final LegionWarboss card) {
         super(card);
     }
 

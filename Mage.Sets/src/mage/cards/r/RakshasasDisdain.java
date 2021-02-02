@@ -26,7 +26,7 @@ public final class RakshasasDisdain extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public RakshasasDisdain(final RakshasasDisdain card) {
+    private RakshasasDisdain(final RakshasasDisdain card) {
         super(card);
     }
 

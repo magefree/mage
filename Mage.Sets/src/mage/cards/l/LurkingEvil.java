@@ -37,7 +37,7 @@ public final class LurkingEvil extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new LurkingEvilCost()));
     }
 
-    public LurkingEvil(final LurkingEvil card) {
+    private LurkingEvil(final LurkingEvil card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class SavageKnuckleblade extends CardImpl {
 
     }
 
-    public SavageKnuckleblade(final SavageKnuckleblade card) {
+    private SavageKnuckleblade(final SavageKnuckleblade card) {
         super(card);
     }
 

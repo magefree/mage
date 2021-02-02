@@ -38,7 +38,7 @@ public final class KeenSense extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1), "enchanted creature", true, false, false, TargetController.OPPONENT));
     }
 
-    public KeenSense(final KeenSense card) {
+    private KeenSense(final KeenSense card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public final class CustodiSoulbinders extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CustodiSoulbinders(final CustodiSoulbinders card) {
+    private CustodiSoulbinders(final CustodiSoulbinders card) {
         super(card);
     }
 

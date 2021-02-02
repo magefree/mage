@@ -21,7 +21,7 @@ public final class GreatHornKrushok extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public GreatHornKrushok(final GreatHornKrushok card) {
+    private GreatHornKrushok(final GreatHornKrushok card) {
         super(card);
     }
 

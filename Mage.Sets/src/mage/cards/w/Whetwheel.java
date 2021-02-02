@@ -34,7 +34,7 @@ public final class Whetwheel extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}")));
     }
 
-    public Whetwheel(final Whetwheel card) {
+    private Whetwheel(final Whetwheel card) {
         super(card);
     }
 

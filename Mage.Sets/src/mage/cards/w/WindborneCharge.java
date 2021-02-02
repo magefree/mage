@@ -27,7 +27,7 @@ public final class WindborneCharge extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public WindborneCharge(final WindborneCharge card) {
+    private WindborneCharge(final WindborneCharge card) {
         super(card);
     }
 

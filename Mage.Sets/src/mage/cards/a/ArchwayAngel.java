@@ -43,7 +43,7 @@ public final class ArchwayAngel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArchwayAngel(final ArchwayAngel card) {
+    private ArchwayAngel(final ArchwayAngel card) {
         super(card);
     }
 

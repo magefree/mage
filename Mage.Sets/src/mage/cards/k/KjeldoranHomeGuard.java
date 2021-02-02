@@ -40,7 +40,7 @@ public final class KjeldoranHomeGuard extends CardImpl {
         this.addAbility(ability, new AttackedOrBlockedThisCombatWatcher());
     }
 
-    public KjeldoranHomeGuard(final KjeldoranHomeGuard card) {
+    private KjeldoranHomeGuard(final KjeldoranHomeGuard card) {
         super(card);
     }
 

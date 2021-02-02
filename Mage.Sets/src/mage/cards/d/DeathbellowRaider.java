@@ -34,7 +34,7 @@ public final class DeathbellowRaider extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
     }
 
-    public DeathbellowRaider(final DeathbellowRaider card) {
+    private DeathbellowRaider(final DeathbellowRaider card) {
         super(card);
     }
 

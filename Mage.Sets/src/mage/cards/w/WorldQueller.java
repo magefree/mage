@@ -40,7 +40,7 @@ public final class WorldQueller extends CardImpl {
 
     }
 
-    public WorldQueller(final WorldQueller card) {
+    private WorldQueller(final WorldQueller card) {
         super(card);
     }
 

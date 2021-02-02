@@ -35,7 +35,7 @@ public final class LuxurySuite extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public LuxurySuite(final LuxurySuite card) {
+    private LuxurySuite(final LuxurySuite card) {
         super(card);
     }
 

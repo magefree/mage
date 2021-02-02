@@ -44,7 +44,7 @@ public final class NoxiousField extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public NoxiousField(final NoxiousField card) {
+    private NoxiousField(final NoxiousField card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class RipClanCrasher extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public RipClanCrasher(final RipClanCrasher card) {
+    private RipClanCrasher(final RipClanCrasher card) {
         super(card);
     }
 

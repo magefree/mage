@@ -35,7 +35,7 @@ public final class PsychicBattle extends CardImpl {
         this.addAbility(new PsychicBattleTriggeredAbility());
     }
 
-    public PsychicBattle(final PsychicBattle card) {
+    private PsychicBattle(final PsychicBattle card) {
         super(card);
     }
 

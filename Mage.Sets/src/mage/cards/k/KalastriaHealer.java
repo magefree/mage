@@ -35,7 +35,7 @@ public final class KalastriaHealer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KalastriaHealer(final KalastriaHealer card) {
+    private KalastriaHealer(final KalastriaHealer card) {
         super(card);
     }
 

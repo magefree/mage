@@ -29,7 +29,7 @@ public final class MagneticFlux extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter, false));
     }
 
-    public MagneticFlux(final MagneticFlux card) {
+    private MagneticFlux(final MagneticFlux card) {
         super(card);
     }
 

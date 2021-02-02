@@ -36,7 +36,7 @@ public final class KaijinOfTheVanishingTouch extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(effect)), false, true));
     }
 
-    public KaijinOfTheVanishingTouch(final KaijinOfTheVanishingTouch card) {
+    private KaijinOfTheVanishingTouch(final KaijinOfTheVanishingTouch card) {
         super(card);
     }
 

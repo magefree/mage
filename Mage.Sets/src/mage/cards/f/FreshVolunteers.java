@@ -23,7 +23,7 @@ public final class FreshVolunteers extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public FreshVolunteers(final FreshVolunteers card) {
+    private FreshVolunteers(final FreshVolunteers card) {
         super(card);
     }
 

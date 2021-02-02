@@ -45,7 +45,7 @@ public final class GazeOfJustice extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{W}"), TimingRule.SORCERY));
     }
 
-    public GazeOfJustice(final GazeOfJustice card) {
+    private GazeOfJustice(final GazeOfJustice card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class WordsOfWisdom extends CardImpl {
         this.getSpellAbility().addEffect(new WordsOfWisdomEffect());
     }
 
-    public WordsOfWisdom(final WordsOfWisdom card) {
+    private WordsOfWisdom(final WordsOfWisdom card) {
         super(card);
     }
 

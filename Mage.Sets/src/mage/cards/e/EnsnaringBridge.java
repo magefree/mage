@@ -26,7 +26,7 @@ public final class EnsnaringBridge extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EnsnaringBridgeRestrictionEffect()));
     }
 
-    public EnsnaringBridge(final EnsnaringBridge card) {
+    private EnsnaringBridge(final EnsnaringBridge card) {
         super(card);
     }
 

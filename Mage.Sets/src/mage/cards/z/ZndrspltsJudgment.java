@@ -32,7 +32,7 @@ public final class ZndrspltsJudgment extends CardImpl {
         this.getSpellAbility().addEffect(new ZndrspltsJudgmentEffect());
     }
 
-    public ZndrspltsJudgment(final ZndrspltsJudgment card) {
+    private ZndrspltsJudgment(final ZndrspltsJudgment card) {
         super(card);
     }
 

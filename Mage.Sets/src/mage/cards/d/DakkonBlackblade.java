@@ -38,7 +38,7 @@ public final class DakkonBlackblade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(controlledLands, Duration.EndOfGame)));
     }
 
-    public DakkonBlackblade(final DakkonBlackblade card) {
+    private DakkonBlackblade(final DakkonBlackblade card) {
         super(card);
     }
 

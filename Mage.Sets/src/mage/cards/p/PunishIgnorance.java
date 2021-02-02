@@ -31,7 +31,7 @@ public final class PunishIgnorance extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public PunishIgnorance(final PunishIgnorance card) {
+    private PunishIgnorance(final PunishIgnorance card) {
         super(card);
     }
 

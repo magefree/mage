@@ -35,7 +35,7 @@ public final class ErraticPortal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ErraticPortal(final ErraticPortal card) {
+    private ErraticPortal(final ErraticPortal card) {
         super(card);
     }
 

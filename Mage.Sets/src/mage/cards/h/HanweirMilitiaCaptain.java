@@ -42,7 +42,7 @@ public final class HanweirMilitiaCaptain extends CardImpl {
                 "At the beginning of your upkeep, if you control four or more creatures, transform {this}"));
     }
 
-    public HanweirMilitiaCaptain(final HanweirMilitiaCaptain card) {
+    private HanweirMilitiaCaptain(final HanweirMilitiaCaptain card) {
         super(card);
     }
 

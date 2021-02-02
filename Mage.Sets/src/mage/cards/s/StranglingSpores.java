@@ -22,7 +22,7 @@ public final class StranglingSpores extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public StranglingSpores(final StranglingSpores card) {
+    private StranglingSpores(final StranglingSpores card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class EtherealGuidance extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn, new FilterCreaturePermanent()));
     }
 
-    public EtherealGuidance(final EtherealGuidance card) {
+    private EtherealGuidance(final EtherealGuidance card) {
         super(card);
     }
 

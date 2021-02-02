@@ -49,7 +49,7 @@ public final class RamosDragonEngine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RamosDragonEngine(final RamosDragonEngine card) {
+    private RamosDragonEngine(final RamosDragonEngine card) {
         super(card);
     }
 

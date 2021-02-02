@@ -38,7 +38,7 @@ public final class GeistOfSaintTraft extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new GeistOfSaintTraftEffect(), false));
     }
 
-    public GeistOfSaintTraft(final GeistOfSaintTraft card) {
+    private GeistOfSaintTraft(final GeistOfSaintTraft card) {
         super(card);
     }
 

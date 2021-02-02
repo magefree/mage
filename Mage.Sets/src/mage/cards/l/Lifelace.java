@@ -24,7 +24,7 @@ public final class Lifelace extends CardImpl {
         this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.GREEN, Duration.Custom));
     }
 
-    public Lifelace(final Lifelace card) {
+    private Lifelace(final Lifelace card) {
         super(card);
     }
 

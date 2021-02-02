@@ -37,7 +37,7 @@ public final class ChantOfTheSkifsang extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-13, 0, Duration.WhileOnBattlefield)));
     }
 
-    public ChantOfTheSkifsang(final ChantOfTheSkifsang card) {
+    private ChantOfTheSkifsang(final ChantOfTheSkifsang card) {
         super(card);
     }
 

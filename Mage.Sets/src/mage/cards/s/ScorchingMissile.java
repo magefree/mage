@@ -29,7 +29,7 @@ public final class ScorchingMissile extends CardImpl {
 
     }
 
-    public ScorchingMissile(final ScorchingMissile card) {
+    private ScorchingMissile(final ScorchingMissile card) {
         super(card);
     }
 

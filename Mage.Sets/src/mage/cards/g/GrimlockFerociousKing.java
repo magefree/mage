@@ -42,7 +42,7 @@ public final class GrimlockFerociousKing extends CardImpl{
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(false), new ManaCostsImpl("{2}")));
     }
 
-    public GrimlockFerociousKing(final GrimlockFerociousKing card) {
+    private GrimlockFerociousKing(final GrimlockFerociousKing card) {
         super(card);
     }
 

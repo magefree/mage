@@ -55,7 +55,7 @@ public final class WritOfPassage extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public WritOfPassage(final WritOfPassage card) {
+    private WritOfPassage(final WritOfPassage card) {
         super(card);
     }
 

@@ -55,7 +55,7 @@ public final class MeriekeRiBerit extends CardImpl {
 
     }
 
-    public MeriekeRiBerit(final MeriekeRiBerit card) {
+    private MeriekeRiBerit(final MeriekeRiBerit card) {
         super(card);
     }
 

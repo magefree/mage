@@ -37,7 +37,7 @@ public final class StoneshakerShaman extends CardImpl {
          this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeEffect(filter, 1, "that player "), TargetController.ANY, false));
     }
 
-    public StoneshakerShaman(final StoneshakerShaman card) {
+    private StoneshakerShaman(final StoneshakerShaman card) {
         super(card);
     }
 

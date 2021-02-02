@@ -29,7 +29,7 @@ public final class BloodMist extends CardImpl {
 
     }
 
-    public BloodMist(final BloodMist card) {
+    private BloodMist(final BloodMist card) {
         super(card);
     }
 

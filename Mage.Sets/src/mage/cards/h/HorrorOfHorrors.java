@@ -42,7 +42,7 @@ public final class HorrorOfHorrors extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HorrorOfHorrors(final HorrorOfHorrors card) {
+    private HorrorOfHorrors(final HorrorOfHorrors card) {
         super(card);
     }
 

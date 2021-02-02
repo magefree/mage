@@ -28,7 +28,7 @@ public final class DampenThought extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{1}{U}"));
     }
 
-    public DampenThought(final DampenThought card) {
+    private DampenThought(final DampenThought card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class DesolationTwin extends CardImpl {
         this.addAbility(new DesolationTwinOnCastAbility());
     }
 
-    public DesolationTwin(final DesolationTwin card) {
+    private DesolationTwin(final DesolationTwin card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class BrimstoneDragon extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public BrimstoneDragon(final BrimstoneDragon card) {
+    private BrimstoneDragon(final BrimstoneDragon card) {
         super(card);
     }
 

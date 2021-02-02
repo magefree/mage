@@ -37,7 +37,7 @@ public final class KeldonChampion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KeldonChampion(final KeldonChampion card) {
+    private KeldonChampion(final KeldonChampion card) {
         super(card);
     }
 

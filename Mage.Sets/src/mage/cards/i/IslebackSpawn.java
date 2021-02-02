@@ -38,7 +38,7 @@ public final class IslebackSpawn extends CardImpl {
                 "{this} gets +4/+8 as long as a library has twenty or fewer cards in it")));
     }
 
-    public IslebackSpawn(final IslebackSpawn card) {
+    private IslebackSpawn(final IslebackSpawn card) {
         super(card);
     }
 

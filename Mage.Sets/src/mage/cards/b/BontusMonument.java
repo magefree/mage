@@ -48,7 +48,7 @@ public final class BontusMonument extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BontusMonument(final BontusMonument card) {
+    private BontusMonument(final BontusMonument card) {
         super(card);
     }
 

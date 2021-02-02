@@ -42,7 +42,7 @@ public final class GolgariThug extends CardImpl {
         this.addAbility(new DredgeAbility(4));
     }
 
-    public GolgariThug(final GolgariThug card) {
+    private GolgariThug(final GolgariThug card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class LilianasElite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LilianasElite(final LilianasElite card) {
+    private LilianasElite(final LilianasElite card) {
         super(card);
     }
 

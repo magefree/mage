@@ -44,7 +44,7 @@ public final class ParallaxDementia extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new DestroyAttachedToEffect("enchanted creature", true), false));
     }
 
-    public ParallaxDementia(final ParallaxDementia card) {
+    private ParallaxDementia(final ParallaxDementia card) {
         super(card);
     }
 

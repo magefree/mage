@@ -32,7 +32,7 @@ public final class SungrassEgg extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SungrassEgg(final SungrassEgg card) {
+    private SungrassEgg(final SungrassEgg card) {
         super(card);
     }
 

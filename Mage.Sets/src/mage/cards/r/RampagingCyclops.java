@@ -41,7 +41,7 @@ public final class RampagingCyclops extends CardImpl {
         ));
     }
 
-    public RampagingCyclops(final RampagingCyclops card) {
+    private RampagingCyclops(final RampagingCyclops card) {
         super(card);
     }
 

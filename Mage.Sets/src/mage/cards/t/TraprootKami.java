@@ -41,7 +41,7 @@ public final class TraprootKami extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public TraprootKami(final TraprootKami card) {
+    private TraprootKami(final TraprootKami card) {
         super(card);
     }
 

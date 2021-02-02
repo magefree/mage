@@ -32,7 +32,7 @@ public final class GoblinWarCry extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public GoblinWarCry(final GoblinWarCry card) {
+    private GoblinWarCry(final GoblinWarCry card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class GhostlyTouch extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
     }
 
-    public GhostlyTouch(final GhostlyTouch card) {
+    private GhostlyTouch(final GhostlyTouch card) {
         super(card);
     }
 

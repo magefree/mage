@@ -22,7 +22,7 @@ public final class Electrify extends CardImpl {
         getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Electrify(final Electrify card) {
+    private Electrify(final Electrify card) {
         super(card);
     }
 

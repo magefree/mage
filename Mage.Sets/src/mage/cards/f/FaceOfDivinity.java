@@ -50,7 +50,7 @@ public final class FaceOfDivinity extends CardImpl {
         this.addAbility(abilityBoost);
     }
 
-    public FaceOfDivinity(final FaceOfDivinity card) {
+    private FaceOfDivinity(final FaceOfDivinity card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class IndomitableAncients extends CardImpl {
         this.toughness = new MageInt(10);
     }
 
-    public IndomitableAncients(final IndomitableAncients card) {
+    private IndomitableAncients(final IndomitableAncients card) {
         super(card);
     }
 

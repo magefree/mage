@@ -56,7 +56,7 @@ public final class FrontlineMedic extends CardImpl {
 
     }
 
-    public FrontlineMedic(final FrontlineMedic card) {
+    private FrontlineMedic(final FrontlineMedic card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class SporeCloud extends CardImpl {
         this.getSpellAbility().addEffect(new SporeCloudEffect());
     }
 
-    public SporeCloud(final SporeCloud card) {
+    private SporeCloud(final SporeCloud card) {
         super(card);
     }
 

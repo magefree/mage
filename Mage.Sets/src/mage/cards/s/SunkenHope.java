@@ -31,7 +31,7 @@ public final class SunkenHope extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SunkenHopeReturnToHandEffect(), TargetController.ANY, false, true));
     }
 
-    public SunkenHope(final SunkenHope card) {
+    private SunkenHope(final SunkenHope card) {
         super(card);
     }
 

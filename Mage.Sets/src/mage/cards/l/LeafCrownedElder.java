@@ -36,7 +36,7 @@ public final class LeafCrownedElder extends CardImpl {
 
     }
 
-    public LeafCrownedElder(final LeafCrownedElder card) {
+    private LeafCrownedElder(final LeafCrownedElder card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class MysticPenitent extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MysticPenitent(final MysticPenitent card) {
+    private MysticPenitent(final MysticPenitent card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class CommuneWithTheGods extends CardImpl {
 
     }
 
-    public CommuneWithTheGods(final CommuneWithTheGods card) {
+    private CommuneWithTheGods(final CommuneWithTheGods card) {
         super(card);
     }
 

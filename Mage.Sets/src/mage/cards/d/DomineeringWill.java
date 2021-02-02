@@ -46,7 +46,7 @@ public final class DomineeringWill extends CardImpl {
 
     }
 
-    public DomineeringWill(final DomineeringWill card) {
+    private DomineeringWill(final DomineeringWill card) {
         super(card);
     }
 

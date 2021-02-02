@@ -40,7 +40,7 @@ public final class Vendetta extends CardImpl {
         this.getSpellAbility().addEffect(new VendettaEffect());
     }
 
-    public Vendetta(final Vendetta card) {
+    private Vendetta(final Vendetta card) {
         super(card);
     }
 

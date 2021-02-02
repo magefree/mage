@@ -40,7 +40,7 @@ public final class BosiumStrip extends CardImpl {
         this.addAbility(ability, new CastFromGraveyardWatcher());
     }
 
-    public BosiumStrip(final BosiumStrip card) {
+    private BosiumStrip(final BosiumStrip card) {
         super(card);
     }
 

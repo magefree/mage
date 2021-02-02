@@ -45,7 +45,7 @@ public final class SpiritWeaver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpiritWeaver(final SpiritWeaver card) {
+    private SpiritWeaver(final SpiritWeaver card) {
         super(card);
     }
 

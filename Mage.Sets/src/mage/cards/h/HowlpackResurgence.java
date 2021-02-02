@@ -47,7 +47,7 @@ public final class HowlpackResurgence extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HowlpackResurgence(final HowlpackResurgence card) {
+    private HowlpackResurgence(final HowlpackResurgence card) {
         super(card);
     }
 

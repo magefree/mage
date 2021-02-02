@@ -52,7 +52,7 @@ public final class BaronSengir extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BaronSengir(final BaronSengir card) {
+    private BaronSengir(final BaronSengir card) {
         super(card);
     }
 

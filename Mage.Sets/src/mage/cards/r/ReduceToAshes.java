@@ -26,7 +26,7 @@ public final class ReduceToAshes extends CardImpl {
 
     }
 
-    public ReduceToAshes(final ReduceToAshes card) {
+    private ReduceToAshes(final ReduceToAshes card) {
         super(card);
     }
 

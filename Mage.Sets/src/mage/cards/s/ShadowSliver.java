@@ -38,7 +38,7 @@ public final class ShadowSliver extends CardImpl {
                 filter, "All Sliver creatures have shadow.")));
     }
 
-    public ShadowSliver(final ShadowSliver card) {
+    private ShadowSliver(final ShadowSliver card) {
         super(card);
     }
 

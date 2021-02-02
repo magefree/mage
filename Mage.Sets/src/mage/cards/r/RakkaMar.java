@@ -42,7 +42,7 @@ public final class RakkaMar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RakkaMar(final RakkaMar card) {
+    private RakkaMar(final RakkaMar card) {
         super(card);
     }
 

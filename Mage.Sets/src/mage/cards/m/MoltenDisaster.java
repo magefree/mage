@@ -44,7 +44,7 @@ public final class MoltenDisaster extends CardImpl {
         this.getSpellAbility().addEffect(new MoltenDisasterEffect());
     }
 
-    public MoltenDisaster(final MoltenDisaster card) {
+    private MoltenDisaster(final MoltenDisaster card) {
         super(card);
     }
 

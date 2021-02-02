@@ -50,7 +50,7 @@ public final class KnightExemplar extends CardImpl {
 
     }
 
-    public KnightExemplar(final KnightExemplar card) {
+    private KnightExemplar(final KnightExemplar card) {
         super(card);
     }
 

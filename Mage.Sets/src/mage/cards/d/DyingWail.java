@@ -38,7 +38,7 @@ public final class DyingWail extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DyingWail(final DyingWail card) {
+    private DyingWail(final DyingWail card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class LightningSurge extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{R}{R}"), TimingRule.SORCERY));
     }
 
-    public LightningSurge(final LightningSurge card) {
+    private LightningSurge(final LightningSurge card) {
         super(card);
     }
 

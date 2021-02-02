@@ -29,7 +29,7 @@ public final class SealOfRemoval extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SealOfRemoval(final SealOfRemoval card) {
+    private SealOfRemoval(final SealOfRemoval card) {
         super(card);
     }
 

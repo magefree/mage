@@ -51,7 +51,7 @@ public final class Godsend extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
     }
 
-    public Godsend(final Godsend card) {
+    private Godsend(final Godsend card) {
         super(card);
     }
 

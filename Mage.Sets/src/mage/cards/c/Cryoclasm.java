@@ -37,7 +37,7 @@ public final class Cryoclasm extends CardImpl {
 
     }
 
-    public Cryoclasm(final Cryoclasm card) {
+    private Cryoclasm(final Cryoclasm card) {
         super(card);
     }
 

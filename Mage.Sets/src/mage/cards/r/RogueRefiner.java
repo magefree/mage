@@ -35,7 +35,7 @@ public final class RogueRefiner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RogueRefiner(final RogueRefiner card) {
+    private RogueRefiner(final RogueRefiner card) {
         super(card);
     }
 

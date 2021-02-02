@@ -35,7 +35,7 @@ public final class Saltskitter extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(true), filter));
     }
 
-    public Saltskitter(final Saltskitter card) {
+    private Saltskitter(final Saltskitter card) {
         super(card);
     }
 

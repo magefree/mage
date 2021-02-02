@@ -32,7 +32,7 @@ public final class MonstrousCarabid extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{B/R}")));
     }
 
-    public MonstrousCarabid(final MonstrousCarabid card) {
+    private MonstrousCarabid(final MonstrousCarabid card) {
         super(card);
     }
 

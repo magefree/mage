@@ -35,7 +35,7 @@ public final class NimLasher extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.WhileOnBattlefield)));
     }
 
-    public NimLasher(final NimLasher card) {
+    private NimLasher(final NimLasher card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class DriftingShade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
-    public DriftingShade(final DriftingShade card) {
+    private DriftingShade(final DriftingShade card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class Anavolver extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public Anavolver(final Anavolver card) {
+    private Anavolver(final Anavolver card) {
         super(card);
     }
 

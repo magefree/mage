@@ -36,7 +36,7 @@ public final class PhyrexianEtchings extends CardImpl {
         ));
     }
 
-    public PhyrexianEtchings(final PhyrexianEtchings card) {
+    private PhyrexianEtchings(final PhyrexianEtchings card) {
         super(card);
     }
 

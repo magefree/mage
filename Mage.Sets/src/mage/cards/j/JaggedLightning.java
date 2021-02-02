@@ -23,7 +23,7 @@ public final class JaggedLightning extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
-    public JaggedLightning(final JaggedLightning card) {
+    private JaggedLightning(final JaggedLightning card) {
         super(card);
     }
 

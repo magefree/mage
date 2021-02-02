@@ -51,7 +51,7 @@ public final class TransmogrifyingWand extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TransmogrifyingWand(final TransmogrifyingWand card) {
+    private TransmogrifyingWand(final TransmogrifyingWand card) {
         super(card);
     }
 

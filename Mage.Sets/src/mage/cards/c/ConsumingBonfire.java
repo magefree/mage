@@ -44,7 +44,7 @@ public final class ConsumingBonfire extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public ConsumingBonfire(final ConsumingBonfire card) {
+    private ConsumingBonfire(final ConsumingBonfire card) {
         super(card);
     }
 

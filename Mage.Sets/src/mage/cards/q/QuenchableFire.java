@@ -28,7 +28,7 @@ public final class QuenchableFire extends CardImpl {
                 "It deals an additional 3 damage to that player or planeswalker at the beginning of your next upkeep step unless that player or that planeswalker's controller pays {U} before that step."));
     }
 
-    public QuenchableFire(final QuenchableFire card) {
+    private QuenchableFire(final QuenchableFire card) {
         super(card);
     }
 

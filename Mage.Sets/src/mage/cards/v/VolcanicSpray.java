@@ -35,7 +35,7 @@ public final class VolcanicSpray extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{R}"), TimingRule.SORCERY));
     }
 
-    public VolcanicSpray(final VolcanicSpray card) {
+    private VolcanicSpray(final VolcanicSpray card) {
         super(card);
     }
 

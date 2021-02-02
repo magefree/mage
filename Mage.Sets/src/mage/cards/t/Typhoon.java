@@ -26,7 +26,7 @@ public final class Typhoon extends CardImpl {
         this.getSpellAbility().addEffect(new TyphoonEffect());
     }
 
-    public Typhoon(final Typhoon card) {
+    private Typhoon(final Typhoon card) {
         super(card);
     }
 

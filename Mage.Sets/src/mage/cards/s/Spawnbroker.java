@@ -45,7 +45,7 @@ public final class Spawnbroker extends CardImpl {
 
     }
 
-    public Spawnbroker(final Spawnbroker card) {
+    private Spawnbroker(final Spawnbroker card) {
         super(card);
     }
 

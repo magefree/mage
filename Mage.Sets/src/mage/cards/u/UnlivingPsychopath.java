@@ -53,7 +53,7 @@ public final class UnlivingPsychopath extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnlivingPsychopath(final UnlivingPsychopath card) {
+    private UnlivingPsychopath(final UnlivingPsychopath card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class WallOfBlossoms extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public WallOfBlossoms(final WallOfBlossoms card) {
+    private WallOfBlossoms(final WallOfBlossoms card) {
         super(card);
     }
 

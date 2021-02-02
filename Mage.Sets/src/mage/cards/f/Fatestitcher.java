@@ -45,7 +45,7 @@ public final class Fatestitcher extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{U}")));
     }
 
-    public Fatestitcher(final Fatestitcher card) {
+    private Fatestitcher(final Fatestitcher card) {
         super(card);
     }
 

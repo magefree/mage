@@ -31,7 +31,7 @@ public final class ThunderingWurm extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
     }
 
-    public ThunderingWurm(final ThunderingWurm card) {
+    private ThunderingWurm(final ThunderingWurm card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class SumalaWoodshaper extends CardImpl {
         ).setBackInRandomOrder(true), false));
     }
 
-    public SumalaWoodshaper(final SumalaWoodshaper card) {
+    private SumalaWoodshaper(final SumalaWoodshaper card) {
         super(card);
     }
 

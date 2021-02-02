@@ -28,7 +28,7 @@ public final class DiabolicMachine extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new GenericManaCost(3)));
     }
 
-    public DiabolicMachine(final DiabolicMachine card) {
+    private DiabolicMachine(final DiabolicMachine card) {
         super(card);
     }
 

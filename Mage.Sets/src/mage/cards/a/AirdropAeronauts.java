@@ -43,7 +43,7 @@ public final class AirdropAeronauts extends CardImpl {
         this.addAbility(ability, new RevoltWatcher());
     }
 
-    public AirdropAeronauts(final AirdropAeronauts card) {
+    private AirdropAeronauts(final AirdropAeronauts card) {
         super(card);
     }
 

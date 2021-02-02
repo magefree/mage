@@ -35,7 +35,7 @@ public final class CatharsShield extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), new TargetControlledCreaturePermanent()));
     }
 
-    public CatharsShield(final CatharsShield card) {
+    private CatharsShield(final CatharsShield card) {
         super(card);
     }
 

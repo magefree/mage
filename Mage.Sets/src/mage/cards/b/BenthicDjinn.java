@@ -31,7 +31,7 @@ public final class BenthicDjinn extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), TargetController.YOU, false));
     }
 
-    public BenthicDjinn(final BenthicDjinn card) {
+    private BenthicDjinn(final BenthicDjinn card) {
         super(card);
     }
 

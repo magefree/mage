@@ -33,7 +33,7 @@ public final class BlazingArchon extends CardImpl {
 
     }
 
-    public BlazingArchon(final BlazingArchon card) {
+    private BlazingArchon(final BlazingArchon card) {
         super(card);
     }
 

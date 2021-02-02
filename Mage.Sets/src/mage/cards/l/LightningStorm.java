@@ -47,7 +47,7 @@ public final class LightningStorm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LightningStorm(final LightningStorm card) {
+    private LightningStorm(final LightningStorm card) {
         super(card);
     }
 

@@ -58,7 +58,7 @@ public final class PhyrexianMetamorph extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianMetamorph(final PhyrexianMetamorph card) {
+    private PhyrexianMetamorph(final PhyrexianMetamorph card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class WalkingDead extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public WalkingDead(final WalkingDead card) {
+    private WalkingDead(final WalkingDead card) {
         super(card);
     }
 

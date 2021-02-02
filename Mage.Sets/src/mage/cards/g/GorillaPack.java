@@ -36,7 +36,7 @@ public final class GorillaPack extends CardImpl {
                 new SacrificeSourceEffect()));
     }
 
-    public GorillaPack(final GorillaPack card) {
+    private GorillaPack(final GorillaPack card) {
         super(card);
     }
 

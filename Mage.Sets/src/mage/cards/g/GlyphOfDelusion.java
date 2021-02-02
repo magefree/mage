@@ -49,7 +49,7 @@ public final class GlyphOfDelusion extends CardImpl {
         this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
     }
 
-    public GlyphOfDelusion(final GlyphOfDelusion card) {
+    private GlyphOfDelusion(final GlyphOfDelusion card) {
         super(card);
     }
 

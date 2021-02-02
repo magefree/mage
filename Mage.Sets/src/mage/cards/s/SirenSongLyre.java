@@ -39,7 +39,7 @@ public final class SirenSongLyre extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl("{2}")));        
     }
 
-    public SirenSongLyre(final SirenSongLyre card) {
+    private SirenSongLyre(final SirenSongLyre card) {
         super(card);
     }
 

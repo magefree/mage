@@ -49,7 +49,7 @@ public final class UnscytheKillerOfKings extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetControlledCreaturePermanent()));
     }
 
-    public UnscytheKillerOfKings(final UnscytheKillerOfKings card) {
+    private UnscytheKillerOfKings(final UnscytheKillerOfKings card) {
         super(card);
     }
 

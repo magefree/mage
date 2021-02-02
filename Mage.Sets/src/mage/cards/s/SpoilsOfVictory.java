@@ -36,7 +36,7 @@ public final class SpoilsOfVictory extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, Outcome.PutLandInPlay));
     }
 
-    public SpoilsOfVictory(final SpoilsOfVictory card) {
+    private SpoilsOfVictory(final SpoilsOfVictory card) {
         super(card);
     }
 

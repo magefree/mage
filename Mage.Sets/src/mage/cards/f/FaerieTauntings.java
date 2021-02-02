@@ -28,7 +28,7 @@ public final class FaerieTauntings extends CardImpl {
 
     }
 
-    public FaerieTauntings(final FaerieTauntings card) {
+    private FaerieTauntings(final FaerieTauntings card) {
         super(card);
     }
 

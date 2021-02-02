@@ -56,7 +56,7 @@ public final class DovinBaan extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new DovinBaanEmblem()), -7));
     }
 
-    public DovinBaan(final DovinBaan card) {
+    private DovinBaan(final DovinBaan card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class CyclopeanMummy extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ExileSourceEffect()));
     }
 
-    public CyclopeanMummy(final CyclopeanMummy card) {
+    private CyclopeanMummy(final CyclopeanMummy card) {
         super(card);
     }
 

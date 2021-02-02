@@ -36,7 +36,7 @@ public final class KemuriOnna extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
     }
 
-    public KemuriOnna(final KemuriOnna card) {
+    private KemuriOnna(final KemuriOnna card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class MyrQuadropod extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{3}")));
     }
 
-    public MyrQuadropod(final MyrQuadropod card) {
+    private MyrQuadropod(final MyrQuadropod card) {
         super(card);
     }
 

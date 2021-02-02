@@ -31,7 +31,7 @@ public final class Excoriate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public Excoriate(final Excoriate card) {
+    private Excoriate(final Excoriate card) {
         super(card);
     }
 

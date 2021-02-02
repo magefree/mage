@@ -37,7 +37,7 @@ public final class CurseOfDeathsHold extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CurseOfDeathsHoldEffect()));
     }
 
-    public CurseOfDeathsHold(final CurseOfDeathsHold card) {
+    private CurseOfDeathsHold(final CurseOfDeathsHold card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class DeathSpark extends CardImpl {
                 "At the beginning of your upkeep, if {this} is in your graveyard with a creature card directly above it, you may pay {1}. If you do, return {this} to your hand."));
     }
 
-    public DeathSpark(final DeathSpark card) {
+    private DeathSpark(final DeathSpark card) {
         super(card);
     }
 

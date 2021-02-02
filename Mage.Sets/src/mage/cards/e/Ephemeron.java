@@ -34,7 +34,7 @@ public final class Ephemeron extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new DiscardTargetCost(new TargetCardInHand())));
     }
 
-    public Ephemeron(final Ephemeron card) {
+    private Ephemeron(final Ephemeron card) {
         super(card);
     }
 

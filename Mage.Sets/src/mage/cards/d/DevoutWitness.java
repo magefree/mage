@@ -40,7 +40,7 @@ public final class DevoutWitness extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DevoutWitness(final DevoutWitness card) {
+    private DevoutWitness(final DevoutWitness card) {
         super(card);
     }
 

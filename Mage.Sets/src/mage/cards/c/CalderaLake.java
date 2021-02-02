@@ -34,7 +34,7 @@ public final class CalderaLake extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CalderaLake(final CalderaLake card) {
+    private CalderaLake(final CalderaLake card) {
         super(card);
     }
 

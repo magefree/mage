@@ -26,7 +26,7 @@ public final class RuptureSpire extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public RuptureSpire(final RuptureSpire card) {
+    private RuptureSpire(final RuptureSpire card) {
         super(card);
     }
 

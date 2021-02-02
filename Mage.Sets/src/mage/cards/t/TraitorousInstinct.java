@@ -29,7 +29,7 @@ public final class TraitorousInstinct extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("and gains haste"));
     }
 
-    public TraitorousInstinct(final TraitorousInstinct card) {
+    private TraitorousInstinct(final TraitorousInstinct card) {
         super(card);
     }
 

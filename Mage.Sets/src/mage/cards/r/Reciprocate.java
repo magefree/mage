@@ -29,7 +29,7 @@ public final class Reciprocate extends CardImpl {
         this.getSpellAbility().addTarget(new ReciprocateTarget());
     }
 
-    public Reciprocate(final Reciprocate card) {
+    private Reciprocate(final Reciprocate card) {
         super(card);
     }
 

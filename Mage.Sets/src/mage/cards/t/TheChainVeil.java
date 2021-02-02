@@ -45,7 +45,7 @@ public final class TheChainVeil extends CardImpl {
 
     }
 
-    public TheChainVeil(final TheChainVeil card) {
+    private TheChainVeil(final TheChainVeil card) {
         super(card);
     }
 

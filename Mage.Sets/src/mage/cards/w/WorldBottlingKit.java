@@ -35,7 +35,7 @@ public final class WorldBottlingKit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WorldBottlingKit(final WorldBottlingKit card) {
+    private WorldBottlingKit(final WorldBottlingKit card) {
         super(card);
     }
 

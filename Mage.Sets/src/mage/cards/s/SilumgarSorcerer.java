@@ -42,7 +42,7 @@ public final class SilumgarSorcerer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SilumgarSorcerer(final SilumgarSorcerer card) {
+    private SilumgarSorcerer(final SilumgarSorcerer card) {
         super(card);
     }
 

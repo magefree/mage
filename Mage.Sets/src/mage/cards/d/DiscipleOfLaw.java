@@ -30,7 +30,7 @@ public final class DiscipleOfLaw extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public DiscipleOfLaw(final DiscipleOfLaw card) {
+    private DiscipleOfLaw(final DiscipleOfLaw card) {
         super(card);
     }
 

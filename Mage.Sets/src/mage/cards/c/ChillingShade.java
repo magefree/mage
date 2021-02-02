@@ -34,7 +34,7 @@ public final class ChillingShade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{S}")));
     }
 
-    public ChillingShade(final ChillingShade card) {
+    private ChillingShade(final ChillingShade card) {
         super(card);
     }
 

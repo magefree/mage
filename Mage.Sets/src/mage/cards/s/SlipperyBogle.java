@@ -25,7 +25,7 @@ public final class SlipperyBogle extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    public SlipperyBogle(final SlipperyBogle card) {
+    private SlipperyBogle(final SlipperyBogle card) {
         super(card);
     }
 

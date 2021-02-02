@@ -26,7 +26,7 @@ public final class Greatsword extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public Greatsword(final Greatsword card) {
+    private Greatsword(final Greatsword card) {
         super(card);
     }
 

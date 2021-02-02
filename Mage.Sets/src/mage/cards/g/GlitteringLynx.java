@@ -39,7 +39,7 @@ public final class GlitteringLynx extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public GlitteringLynx(final GlitteringLynx card) {
+    private GlitteringLynx(final GlitteringLynx card) {
         super(card);
     }
 

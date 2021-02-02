@@ -48,7 +48,7 @@ public final class SpikeWeaver extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public SpikeWeaver(final SpikeWeaver card) {
+    private SpikeWeaver(final SpikeWeaver card) {
         super(card);
     }
 

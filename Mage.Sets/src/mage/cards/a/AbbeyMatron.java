@@ -34,7 +34,7 @@ public final class AbbeyMatron extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AbbeyMatron(final AbbeyMatron card) {
+    private AbbeyMatron(final AbbeyMatron card) {
         super(card);
     }
 

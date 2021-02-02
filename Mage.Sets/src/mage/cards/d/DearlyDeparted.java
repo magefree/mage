@@ -34,7 +34,7 @@ public final class DearlyDeparted extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, new DearlyDepartedEntersBattlefieldEffect()));
     }
 
-    public DearlyDeparted(final DearlyDeparted card) {
+    private DearlyDeparted(final DearlyDeparted card) {
         super(card);
     }
 

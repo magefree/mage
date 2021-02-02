@@ -31,7 +31,7 @@ public final class JungleTroll extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
     }
 
-    public JungleTroll(final JungleTroll card) {
+    private JungleTroll(final JungleTroll card) {
         super(card);
     }
 

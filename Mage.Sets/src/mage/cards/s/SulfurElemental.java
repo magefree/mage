@@ -46,7 +46,7 @@ public final class SulfurElemental extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, -1, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public SulfurElemental(final SulfurElemental card) {
+    private SulfurElemental(final SulfurElemental card) {
         super(card);
     }
 

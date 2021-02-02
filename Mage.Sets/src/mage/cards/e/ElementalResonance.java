@@ -46,7 +46,7 @@ public final class ElementalResonance extends CardImpl {
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(new ElementalResonanceEffect(), TargetController.YOU, false));
     }
 
-    public ElementalResonance(final ElementalResonance card) {
+    private ElementalResonance(final ElementalResonance card) {
         super(card);
     }
 

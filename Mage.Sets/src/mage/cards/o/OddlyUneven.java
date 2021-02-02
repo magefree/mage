@@ -32,7 +32,7 @@ public final class OddlyUneven extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public OddlyUneven(final OddlyUneven card) {
+    private OddlyUneven(final OddlyUneven card) {
         super(card);
     }
 

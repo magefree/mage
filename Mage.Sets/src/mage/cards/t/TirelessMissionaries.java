@@ -28,7 +28,7 @@ public final class TirelessMissionaries extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)));
     }
 
-    public TirelessMissionaries(final TirelessMissionaries card) {
+    private TirelessMissionaries(final TirelessMissionaries card) {
         super(card);
     }
 

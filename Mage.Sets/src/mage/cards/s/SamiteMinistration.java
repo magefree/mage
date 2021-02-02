@@ -29,7 +29,7 @@ public final class SamiteMinistration extends CardImpl {
         this.getSpellAbility().addEffect(new SamiteMinistrationEffect());
     }
 
-    public SamiteMinistration(final SamiteMinistration card) {
+    private SamiteMinistration(final SamiteMinistration card) {
         super(card);
     }
 

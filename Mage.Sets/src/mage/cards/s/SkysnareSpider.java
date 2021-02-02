@@ -28,7 +28,7 @@ public final class SkysnareSpider extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public SkysnareSpider(final SkysnareSpider card) {
+    private SkysnareSpider(final SkysnareSpider card) {
         super(card);
     }
 

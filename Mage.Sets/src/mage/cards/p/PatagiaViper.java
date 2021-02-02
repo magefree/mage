@@ -39,7 +39,7 @@ public final class PatagiaViper extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.U)), false), new ManaSpentToCastWatcher());
     }
 
-    public PatagiaViper(final PatagiaViper card) {
+    private PatagiaViper(final PatagiaViper card) {
         super(card);
     }
 

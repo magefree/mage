@@ -31,7 +31,7 @@ public final class ChandrasRevolution extends CardImpl {
         this.getSpellAbility().addEffect(new ChandrasRevolutionEffect());
     }
 
-    public ChandrasRevolution(final ChandrasRevolution card) {
+    private ChandrasRevolution(final ChandrasRevolution card) {
         super(card);
     }
 

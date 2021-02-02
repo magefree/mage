@@ -31,7 +31,7 @@ public final class SkarrganPitSkulk extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
     }
 
-    public SkarrganPitSkulk(final SkarrganPitSkulk card) {
+    private SkarrganPitSkulk(final SkarrganPitSkulk card) {
         super(card);
     }
 

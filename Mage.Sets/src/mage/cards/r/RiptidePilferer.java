@@ -30,7 +30,7 @@ public final class RiptidePilferer extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}")));
     }
 
-    public RiptidePilferer(final RiptidePilferer card) {
+    private RiptidePilferer(final RiptidePilferer card) {
         super(card);
     }
 

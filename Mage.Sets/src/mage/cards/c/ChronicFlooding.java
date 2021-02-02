@@ -45,7 +45,7 @@ public final class ChronicFlooding extends CardImpl {
         this.addAbility(new ChronicFloodingAbility());
     }
  
-    public ChronicFlooding(final ChronicFlooding card) {
+    private ChronicFlooding(final ChronicFlooding card) {
         super(card);
     }
  

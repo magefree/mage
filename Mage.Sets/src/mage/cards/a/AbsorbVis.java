@@ -26,7 +26,7 @@ public final class AbsorbVis extends CardImpl {
         this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}{B}")));
     }
 
-    public AbsorbVis(final AbsorbVis card) {
+    private AbsorbVis(final AbsorbVis card) {
         super(card);
     }
 

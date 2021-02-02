@@ -50,7 +50,7 @@ public final class ChickenALaKing extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RollDiceEffect(null, Outcome.Benefit, 6), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
     }
 
-    public ChickenALaKing(final ChickenALaKing card) {
+    private ChickenALaKing(final ChickenALaKing card) {
         super(card);
     }
 

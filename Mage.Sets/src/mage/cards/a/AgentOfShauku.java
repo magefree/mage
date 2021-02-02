@@ -42,7 +42,7 @@ public final class AgentOfShauku extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AgentOfShauku(final AgentOfShauku card) {
+    private AgentOfShauku(final AgentOfShauku card) {
         super(card);
     }
 

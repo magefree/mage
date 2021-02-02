@@ -46,7 +46,7 @@ public final class KrovikanFetish extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
     }
 
-    public KrovikanFetish(final KrovikanFetish card) {
+    private KrovikanFetish(final KrovikanFetish card) {
         super(card);
     }
 

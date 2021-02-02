@@ -35,7 +35,7 @@ public final class RapaciousOne extends CardImpl {
         this.addAbility(new RapaciousOneTriggeredAbility());
     }
 
-    public RapaciousOne(final RapaciousOne card) {
+    private RapaciousOne(final RapaciousOne card) {
         super(card);
     }
 

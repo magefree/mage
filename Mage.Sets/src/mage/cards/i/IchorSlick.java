@@ -33,7 +33,7 @@ public final class IchorSlick extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{3}{B}")));
     }
 
-    public IchorSlick(final IchorSlick card) {
+    private IchorSlick(final IchorSlick card) {
         super(card);
     }
 

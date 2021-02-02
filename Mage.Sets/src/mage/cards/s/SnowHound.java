@@ -51,7 +51,7 @@ public final class SnowHound extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SnowHound(final SnowHound card) {
+    private SnowHound(final SnowHound card) {
         super(card);
     }
 

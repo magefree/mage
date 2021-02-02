@@ -41,7 +41,7 @@ public final class Pariah extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PariahEffect()));
     }
 
-    public Pariah(final Pariah card) {
+    private Pariah(final Pariah card) {
         super(card);
     }
 

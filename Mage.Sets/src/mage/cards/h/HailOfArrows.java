@@ -24,7 +24,7 @@ public final class HailOfArrows extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(ManacostVariableValue.instance, new FilterAttackingCreature()));
     }
 
-    public HailOfArrows(final HailOfArrows card) {
+    private HailOfArrows(final HailOfArrows card) {
         super(card);
     }
 

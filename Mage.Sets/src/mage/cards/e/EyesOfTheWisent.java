@@ -39,7 +39,7 @@ public final class EyesOfTheWisent extends CardImpl {
         ).addHint(MyTurnHint.instance));
     }
 
-    public EyesOfTheWisent(final EyesOfTheWisent card) {
+    private EyesOfTheWisent(final EyesOfTheWisent card) {
         super(card);
     }
 

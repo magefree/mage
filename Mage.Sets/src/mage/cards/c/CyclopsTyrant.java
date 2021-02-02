@@ -40,7 +40,7 @@ public final class CyclopsTyrant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
     }
 
-    public CyclopsTyrant(final CyclopsTyrant card) {
+    private CyclopsTyrant(final CyclopsTyrant card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class PowerTaint extends CardImpl {
 
     }
 
-    public PowerTaint(final PowerTaint card) {
+    private PowerTaint(final PowerTaint card) {
         super(card);
     }
 

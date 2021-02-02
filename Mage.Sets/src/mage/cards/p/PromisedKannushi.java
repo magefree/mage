@@ -26,7 +26,7 @@ public final class PromisedKannushi extends CardImpl {
         this.addAbility(new SoulshiftAbility(7));
     }
 
-    public PromisedKannushi(final PromisedKannushi card) {
+    private PromisedKannushi(final PromisedKannushi card) {
         super(card);
     }
 

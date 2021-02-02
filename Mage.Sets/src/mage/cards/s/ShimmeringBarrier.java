@@ -30,7 +30,7 @@ public final class ShimmeringBarrier extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public ShimmeringBarrier(final ShimmeringBarrier card) {
+    private ShimmeringBarrier(final ShimmeringBarrier card) {
         super(card);
     }
 

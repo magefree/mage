@@ -29,7 +29,7 @@ public final class PanglacialWurm extends CardImpl {
         this.addAbility(WhileSearchingPlayFromLibraryAbility.getInstance());
     }
 
-    public PanglacialWurm(final PanglacialWurm card) {
+    private PanglacialWurm(final PanglacialWurm card) {
         super(card);
     }
 

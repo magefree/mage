@@ -31,7 +31,7 @@ public final class Evangelize extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponentsChoicePermanent(1, 1, filter, false));
     }
 
-    public Evangelize(final Evangelize card) {
+    private Evangelize(final Evangelize card) {
         super(card);
     }
 

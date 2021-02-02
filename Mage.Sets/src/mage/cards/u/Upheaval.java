@@ -20,7 +20,7 @@ public final class Upheaval extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(StaticFilters.FILTER_PERMANENT));
     }
 
-    public Upheaval(final Upheaval card) {
+    private Upheaval(final Upheaval card) {
         super(card);
     }
 

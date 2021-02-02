@@ -32,7 +32,7 @@ public final class Aetherspouts extends CardImpl {
         this.getSpellAbility().addEffect(new AetherspoutsEffect());
     }
 
-    public Aetherspouts(final Aetherspouts card) {
+    private Aetherspouts(final Aetherspouts card) {
         super(card);
     }
 

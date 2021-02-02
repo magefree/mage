@@ -44,7 +44,7 @@ public final class AtzocanSeer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AtzocanSeer(final AtzocanSeer card) {
+    private AtzocanSeer(final AtzocanSeer card) {
         super(card);
     }
 

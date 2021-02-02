@@ -46,7 +46,7 @@ public final class FungalReaches extends CardImpl {
 
     }
 
-    public FungalReaches(final FungalReaches card) {
+    private FungalReaches(final FungalReaches card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class CorpseHarvester extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CorpseHarvester(final CorpseHarvester card) {
+    private CorpseHarvester(final CorpseHarvester card) {
         super(card);
     }
 

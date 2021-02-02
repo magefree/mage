@@ -39,7 +39,7 @@ public final class SunseedNurturer extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public SunseedNurturer(final SunseedNurturer card) {
+    private SunseedNurturer(final SunseedNurturer card) {
         super(card);
     }
 

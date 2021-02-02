@@ -32,7 +32,7 @@ public final class LoxodonSmiter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.HAND, new DiscardOntoBattlefieldEffect()));
     }
 
-    public LoxodonSmiter(final LoxodonSmiter card) {
+    private LoxodonSmiter(final LoxodonSmiter card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class TawnosUrzasApprentice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TawnosUrzasApprentice(final TawnosUrzasApprentice card) {
+    private TawnosUrzasApprentice(final TawnosUrzasApprentice card) {
         super(card);
     }
 

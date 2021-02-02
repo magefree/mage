@@ -38,7 +38,7 @@ public final class CraterHellion extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CraterHellionEffect(), false));
     }
 
-    public CraterHellion(final CraterHellion card) {
+    private CraterHellion(final CraterHellion card) {
         super(card);
     }
 

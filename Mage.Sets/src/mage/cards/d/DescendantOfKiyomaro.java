@@ -44,7 +44,7 @@ public final class DescendantOfKiyomaro extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DescendantOfKiyomaro(final DescendantOfKiyomaro card) {
+    private DescendantOfKiyomaro(final DescendantOfKiyomaro card) {
         super(card);
     }
 

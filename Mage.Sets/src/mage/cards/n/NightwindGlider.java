@@ -33,7 +33,7 @@ public final class NightwindGlider extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
     }
 
-    public NightwindGlider(final NightwindGlider card) {
+    private NightwindGlider(final NightwindGlider card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class GravebaneZombie extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GravebaneZombieEffect()));
     }
 
-    public GravebaneZombie(final GravebaneZombie card) {
+    private GravebaneZombie(final GravebaneZombie card) {
         super(card);
     }
 

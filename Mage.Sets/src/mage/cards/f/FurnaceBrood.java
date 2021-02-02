@@ -33,7 +33,7 @@ public final class FurnaceBrood extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FurnaceBrood(final FurnaceBrood card) {
+    private FurnaceBrood(final FurnaceBrood card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class TidalWave extends CardImpl {
         this.getSpellAbility().addEffect(new TidalWaveEffect());
     }
 
-    public TidalWave(final TidalWave card) {
+    private TidalWave(final TidalWave card) {
         super(card);
     }
 

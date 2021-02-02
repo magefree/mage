@@ -36,7 +36,7 @@ public final class ElvishPromenade extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElfToken(), elfCount));
     }
 
-    public ElvishPromenade(final ElvishPromenade card) {
+    private ElvishPromenade(final ElvishPromenade card) {
         super(card);
     }
 

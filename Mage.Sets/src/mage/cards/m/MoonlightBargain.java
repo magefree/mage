@@ -31,7 +31,7 @@ public final class MoonlightBargain extends CardImpl {
         getSpellAbility().addEffect(new MoonlightBargainEffect());
     }
 
-    public MoonlightBargain(final MoonlightBargain card) {
+    private MoonlightBargain(final MoonlightBargain card) {
         super(card);
     }
 

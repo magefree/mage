@@ -27,7 +27,7 @@ public final class WindsOfChange extends CardImpl {
         this.getSpellAbility().addEffect(new WindsOfChangeEffect());
     }
 
-    public WindsOfChange(final WindsOfChange card) {
+    private WindsOfChange(final WindsOfChange card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class ImmortalServitude extends CardImpl {
         this.getSpellAbility().addEffect(new ImmortalServitudeEffect());
     }
 
-    public ImmortalServitude(final ImmortalServitude card) {
+    private ImmortalServitude(final ImmortalServitude card) {
         super(card);
     }
 

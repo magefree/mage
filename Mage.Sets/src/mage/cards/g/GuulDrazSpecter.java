@@ -45,7 +45,7 @@ public final class GuulDrazSpecter extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true));
     }
 
-    public GuulDrazSpecter(final GuulDrazSpecter card) {
+    private GuulDrazSpecter(final GuulDrazSpecter card) {
         super(card);
     }
 

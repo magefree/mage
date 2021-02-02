@@ -47,7 +47,7 @@ public final class TogetherForever extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TogetherForever(final TogetherForever card) {
+    private TogetherForever(final TogetherForever card) {
         super(card);
     }
 

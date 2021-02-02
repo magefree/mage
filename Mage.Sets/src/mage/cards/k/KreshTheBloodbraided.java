@@ -34,7 +34,7 @@ public final class KreshTheBloodbraided extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new KreshTheBloodbraidedEffect(), true, true, true));
     }
 
-    public KreshTheBloodbraided(final KreshTheBloodbraided card) {
+    private KreshTheBloodbraided(final KreshTheBloodbraided card) {
         super(card);
     }
 

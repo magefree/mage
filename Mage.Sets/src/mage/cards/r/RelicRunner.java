@@ -44,7 +44,7 @@ public final class RelicRunner extends CardImpl {
         ), new SpellsCastWatcher());
     }
 
-    public RelicRunner(final RelicRunner card) {
+    private RelicRunner(final RelicRunner card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class BroodmateDragon extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(dragonToken), false));
     }
 
-    public BroodmateDragon(final BroodmateDragon card) {
+    private BroodmateDragon(final BroodmateDragon card) {
         super(card);
     }
 

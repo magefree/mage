@@ -42,7 +42,7 @@ public final class CanopyDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CanopyDragon(final CanopyDragon card) {
+    private CanopyDragon(final CanopyDragon card) {
         super(card);
     }
 

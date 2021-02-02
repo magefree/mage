@@ -28,7 +28,7 @@ public final class TargetMinotaur extends CardImpl {
 
     }
 
-    public TargetMinotaur(final TargetMinotaur card) {
+    private TargetMinotaur(final TargetMinotaur card) {
         super(card);
     }
 

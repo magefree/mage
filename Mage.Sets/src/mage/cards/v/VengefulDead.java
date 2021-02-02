@@ -33,7 +33,7 @@ public final class VengefulDead extends CardImpl {
         this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new LoseLifeOpponentsEffect(1), false, filter));
     }
 
-    public VengefulDead(final VengefulDead card) {
+    private VengefulDead(final VengefulDead card) {
         super(card);
     }
 

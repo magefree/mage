@@ -43,7 +43,7 @@ public final class AfiyaGrove extends CardImpl {
         this.addAbility(new AfiyaGroveNoCountersAbility());
     }
 
-    public AfiyaGrove(final AfiyaGrove card) {
+    private AfiyaGrove(final AfiyaGrove card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class StensiaBanquet extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public StensiaBanquet(final StensiaBanquet card) {
+    private StensiaBanquet(final StensiaBanquet card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class TimeWarp extends CardImpl {
         this.getSpellAbility().addEffect(new TimeWarpEffect());
     }
 
-    public TimeWarp(final TimeWarp card) {
+    private TimeWarp(final TimeWarp card) {
         super(card);
     }
 

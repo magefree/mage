@@ -35,7 +35,7 @@ public final class ScuttlingDoomEngine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScuttlingDoomEngine(final ScuttlingDoomEngine card) {
+    private ScuttlingDoomEngine(final ScuttlingDoomEngine card) {
         super(card);
     }
 

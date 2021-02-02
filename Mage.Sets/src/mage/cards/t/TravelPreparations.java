@@ -32,7 +32,7 @@ public final class TravelPreparations extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{W}"), TimingRule.SORCERY));
     }
 
-    public TravelPreparations(final TravelPreparations card) {
+    private TravelPreparations(final TravelPreparations card) {
         super(card);
     }
 

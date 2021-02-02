@@ -23,7 +23,7 @@ public final class DarkInquiry extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public DarkInquiry(final DarkInquiry card) {
+    private DarkInquiry(final DarkInquiry card) {
         super(card);
     }
 

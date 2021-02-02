@@ -36,7 +36,7 @@ public final class WoodElves extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true)));
     }
 
-    public WoodElves(final WoodElves card) {
+    private WoodElves(final WoodElves card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class InsidiousMist extends CardImpl {
         this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new DoIfCostPaid(new TransformSourceEffect(false), new ManaCostsImpl("{2}{B}"), "Pay {2}{B} to transform?")));
     }
 
-    public InsidiousMist(final InsidiousMist card) {
+    private InsidiousMist(final InsidiousMist card) {
         super(card);
     }
 

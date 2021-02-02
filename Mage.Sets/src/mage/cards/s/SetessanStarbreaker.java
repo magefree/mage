@@ -39,7 +39,7 @@ public final class SetessanStarbreaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SetessanStarbreaker(final SetessanStarbreaker card) {
+    private SetessanStarbreaker(final SetessanStarbreaker card) {
         super(card);
     }
 

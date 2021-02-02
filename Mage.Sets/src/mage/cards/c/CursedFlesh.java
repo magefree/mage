@@ -38,7 +38,7 @@ public final class CursedFlesh extends CardImpl {
         this.addAbility(ability);               
     }
 
-    public CursedFlesh(final CursedFlesh card) {
+    private CursedFlesh(final CursedFlesh card) {
         super(card);
     }
 

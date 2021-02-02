@@ -25,7 +25,7 @@ public final class WordOfBinding extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(WordOfBindingAdjuster.instance);
     }
 
-    public WordOfBinding(final WordOfBinding card) {
+    private WordOfBinding(final WordOfBinding card) {
         super(card);
     }
 

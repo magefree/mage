@@ -45,7 +45,7 @@ public final class KnightCaptainOfEos extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KnightCaptainOfEos(final KnightCaptainOfEos card) {
+    private KnightCaptainOfEos(final KnightCaptainOfEos card) {
         super(card);
     }
 

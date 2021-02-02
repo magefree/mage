@@ -38,7 +38,7 @@ public final class OldGrowthDryads extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new OldGrowthDryadsEffect()));
     }
 
-    public OldGrowthDryads(final OldGrowthDryads card) {
+    private OldGrowthDryads(final OldGrowthDryads card) {
         super(card);
     }
 

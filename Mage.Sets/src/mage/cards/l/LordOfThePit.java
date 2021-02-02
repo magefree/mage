@@ -39,7 +39,7 @@ public final class LordOfThePit extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LordOfThePitEffect(), TargetController.YOU, false));
     }
 
-    public LordOfThePit(final LordOfThePit card) {
+    private LordOfThePit(final LordOfThePit card) {
         super(card);
     }
 

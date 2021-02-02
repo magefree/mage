@@ -33,7 +33,7 @@ public final class WindingConstrictor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WindingConstrictorPlayerEffect()));
     }
 
-    public WindingConstrictor(final WindingConstrictor card) {
+    private WindingConstrictor(final WindingConstrictor card) {
         super(card);
     }
 

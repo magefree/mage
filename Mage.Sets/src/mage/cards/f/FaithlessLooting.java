@@ -26,7 +26,7 @@ public final class FaithlessLooting extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{R}"), TimingRule.SORCERY));
     }
 
-    public FaithlessLooting(final FaithlessLooting card) {
+    private FaithlessLooting(final FaithlessLooting card) {
         super(card);
     }
 

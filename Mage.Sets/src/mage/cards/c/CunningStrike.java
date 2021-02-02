@@ -34,7 +34,7 @@ public final class CunningStrike extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public CunningStrike(final CunningStrike card) {
+    private CunningStrike(final CunningStrike card) {
         super(card);
     }
 

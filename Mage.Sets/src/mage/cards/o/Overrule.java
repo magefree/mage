@@ -27,7 +27,7 @@ public final class Overrule extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.instance));
     }
 
-    public Overrule(final Overrule card) {
+    private Overrule(final Overrule card) {
         super(card);
     }
 

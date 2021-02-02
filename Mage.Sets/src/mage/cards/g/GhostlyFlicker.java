@@ -42,7 +42,7 @@ public final class GhostlyFlicker extends CardImpl {
         this.getSpellAbility().addEffect(new GhostlyFlickerEffect());
     }
 
-    public GhostlyFlicker(final GhostlyFlicker card) {
+    private GhostlyFlicker(final GhostlyFlicker card) {
         super(card);
     }
 

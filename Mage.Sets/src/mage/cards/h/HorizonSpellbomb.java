@@ -38,7 +38,7 @@ public final class HorizonSpellbomb extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{G}"))));
     }
 
-    public HorizonSpellbomb(final HorizonSpellbomb card) {
+    private HorizonSpellbomb(final HorizonSpellbomb card) {
         super(card);
     }
 

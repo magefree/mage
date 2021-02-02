@@ -42,7 +42,7 @@ public final class KariZevsExpertise extends CardImpl {
         this.getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(2));
     }
 
-    public KariZevsExpertise(final KariZevsExpertise card) {
+    private KariZevsExpertise(final KariZevsExpertise card) {
         super(card);
     }
 

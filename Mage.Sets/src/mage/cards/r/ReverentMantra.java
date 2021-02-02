@@ -37,7 +37,7 @@ public final class ReverentMantra extends CardImpl {
         this.getSpellAbility().addEffect(new GainProtectionFromColorAllEffect(Duration.EndOfTurn, new FilterCreaturePermanent()));
     }
 
-    public ReverentMantra(final ReverentMantra card) {
+    private ReverentMantra(final ReverentMantra card) {
         super(card);
     }
 

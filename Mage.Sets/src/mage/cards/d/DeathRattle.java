@@ -37,7 +37,7 @@ public final class DeathRattle extends CardImpl {
 
     }
 
-    public DeathRattle(final DeathRattle card) {
+    private DeathRattle(final DeathRattle card) {
         super(card);
     }
 

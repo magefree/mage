@@ -30,7 +30,7 @@ public final class PrimalVigor extends CardImpl {
 
     }
 
-    public PrimalVigor(final PrimalVigor card) {
+    private PrimalVigor(final PrimalVigor card) {
         super(card);
     }
 

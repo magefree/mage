@@ -43,7 +43,7 @@ public final class Kudzu extends CardImpl {
 
     }
 
-    public Kudzu(final Kudzu card) {
+    private Kudzu(final Kudzu card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class ExertInfluence extends CardImpl {
 
     }
 
-    public ExertInfluence(final ExertInfluence card) {
+    private ExertInfluence(final ExertInfluence card) {
         super(card);
     }
 

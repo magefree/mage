@@ -37,7 +37,7 @@ public final class FuneralCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public FuneralCharm(final FuneralCharm card) {
+    private FuneralCharm(final FuneralCharm card) {
         super(card);
     }
 

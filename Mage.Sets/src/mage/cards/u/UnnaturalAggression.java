@@ -44,7 +44,7 @@ public final class UnnaturalAggression extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public UnnaturalAggression(final UnnaturalAggression card) {
+    private UnnaturalAggression(final UnnaturalAggression card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class WildbloodPack extends CardImpl {
 
     }
 
-    public WildbloodPack(final WildbloodPack card) {
+    private WildbloodPack(final WildbloodPack card) {
         super(card);
     }
 

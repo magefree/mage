@@ -27,7 +27,7 @@ public final class Vivify extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Vivify(final Vivify card) {
+    private Vivify(final Vivify card) {
         super(card);
     }
 

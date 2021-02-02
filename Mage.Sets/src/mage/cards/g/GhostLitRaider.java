@@ -40,7 +40,7 @@ public final class GhostLitRaider extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public GhostLitRaider(final GhostLitRaider card) {
+    private GhostLitRaider(final GhostLitRaider card) {
         super(card);
     }
 

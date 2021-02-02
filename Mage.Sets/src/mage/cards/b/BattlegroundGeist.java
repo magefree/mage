@@ -38,7 +38,7 @@ public final class BattlegroundGeist extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public BattlegroundGeist(final BattlegroundGeist card) {
+    private BattlegroundGeist(final BattlegroundGeist card) {
         super(card);
     }
 

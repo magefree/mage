@@ -32,7 +32,7 @@ import mage.filter.common.FilterCreaturePermanent;
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public GoblinWarDrums(final GoblinWarDrums card) {
+    private GoblinWarDrums(final GoblinWarDrums card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class DregsOfSorrow extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(DregsOfSorrowAdjuster.instance);
     }
 
-    public DregsOfSorrow(final DregsOfSorrow card) {
+    private DregsOfSorrow(final DregsOfSorrow card) {
         super(card);
     }
 

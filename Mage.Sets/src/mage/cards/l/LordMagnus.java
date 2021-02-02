@@ -36,7 +36,7 @@ public final class LordMagnus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LordMagnusSecondEffect()));
     }
 
-    public LordMagnus(final LordMagnus card) {
+    private LordMagnus(final LordMagnus card) {
         super(card);
     }
 

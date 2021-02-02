@@ -27,7 +27,7 @@ public final class AzoriusGuildgate extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public AzoriusGuildgate(final AzoriusGuildgate card) {
+    private AzoriusGuildgate(final AzoriusGuildgate card) {
         super(card);
     }
 

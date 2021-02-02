@@ -27,7 +27,7 @@ public final class SpoilsOfTheVault extends CardImpl {
         this.getSpellAbility().addEffect(new SpoilsOfTheVaultEffect());
     }
 
-    public SpoilsOfTheVault(final SpoilsOfTheVault card) {
+    private SpoilsOfTheVault(final SpoilsOfTheVault card) {
         super(card);
     }
 

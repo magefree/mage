@@ -31,7 +31,7 @@ public final class ScentOfBrine extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public ScentOfBrine(final ScentOfBrine card) {
+    private ScentOfBrine(final ScentOfBrine card) {
         super(card);
     }
 

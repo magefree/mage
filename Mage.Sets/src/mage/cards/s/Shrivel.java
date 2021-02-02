@@ -22,7 +22,7 @@ public final class Shrivel extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, new FilterCreaturePermanent("All creatures"), false));
     }
 
-    public Shrivel(final Shrivel card) {
+    private Shrivel(final Shrivel card) {
         super(card);
     }
 

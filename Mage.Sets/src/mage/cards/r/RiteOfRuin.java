@@ -27,7 +27,7 @@ public final class RiteOfRuin extends CardImpl {
         this.getSpellAbility().addEffect(new RiteOfRuinEffect());
     }
 
-    public RiteOfRuin(final RiteOfRuin card) {
+    private RiteOfRuin(final RiteOfRuin card) {
         super(card);
     }
 

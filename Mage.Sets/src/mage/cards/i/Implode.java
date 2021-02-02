@@ -26,7 +26,7 @@ public final class Implode extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Implode(final Implode card) {
+    private Implode(final Implode card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class LightmineField extends CardImpl {
         this.addAbility(new LightmineFieldTriggeredAbility());
     }
 
-    public LightmineField(final LightmineField card) {
+    private LightmineField(final LightmineField card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class SpiketailDrake extends CardImpl {
          Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new ManaCostsImpl("{3}")), new SacrificeSourceCost());                                                         ability.addTarget(new TargetSpell());                                                              this.addAbility(ability);
     }
 
-    public SpiketailDrake(final SpiketailDrake card) {
+    private SpiketailDrake(final SpiketailDrake card) {
         super(card);
     }
 

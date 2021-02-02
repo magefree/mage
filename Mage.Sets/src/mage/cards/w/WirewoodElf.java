@@ -24,7 +24,7 @@ public final class WirewoodElf extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public WirewoodElf(final WirewoodElf card) {
+    private WirewoodElf(final WirewoodElf card) {
         super(card);
     }
 

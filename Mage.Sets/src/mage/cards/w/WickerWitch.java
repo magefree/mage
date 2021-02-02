@@ -21,7 +21,7 @@ public final class WickerWitch extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public WickerWitch(final WickerWitch card) {
+    private WickerWitch(final WickerWitch card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class Paleoloth extends CardImpl {
 
     }
 
-    public Paleoloth(final Paleoloth card) {
+    private Paleoloth(final Paleoloth card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class RavenFamiliar extends CardImpl {
                 false));
     }
 
-    public RavenFamiliar(final RavenFamiliar card) {
+    private RavenFamiliar(final RavenFamiliar card) {
         super(card);
     }
 

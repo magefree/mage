@@ -37,7 +37,7 @@ public final class BlessedSpirits extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, false));
     }
 
-    public BlessedSpirits(final BlessedSpirits card) {
+    private BlessedSpirits(final BlessedSpirits card) {
         super(card);
     }
 

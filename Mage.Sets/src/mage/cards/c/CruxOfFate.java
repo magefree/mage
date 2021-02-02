@@ -35,7 +35,7 @@ public final class CruxOfFate extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public CruxOfFate(final CruxOfFate card) {
+    private CruxOfFate(final CruxOfFate card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class MaraudersAxe extends CardImpl {
         this.addAbility(new EquipAbility(2));
     }
 
-    public MaraudersAxe(final MaraudersAxe card) {
+    private MaraudersAxe(final MaraudersAxe card) {
         super(card);
     }
 

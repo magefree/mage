@@ -28,7 +28,7 @@ public final class PacksFavor extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PacksFavor(final PacksFavor card) {
+    private PacksFavor(final PacksFavor card) {
         super(card);
     }
 

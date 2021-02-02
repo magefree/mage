@@ -52,7 +52,7 @@ public final class GhostlyWings extends CardImpl {
 
     }
 
-    public GhostlyWings(final GhostlyWings card) {
+    private GhostlyWings(final GhostlyWings card) {
         super(card);
     }
 

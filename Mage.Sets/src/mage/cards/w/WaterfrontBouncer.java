@@ -40,7 +40,7 @@ public final class WaterfrontBouncer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WaterfrontBouncer(final WaterfrontBouncer card) {
+    private WaterfrontBouncer(final WaterfrontBouncer card) {
         super(card);
     }
 

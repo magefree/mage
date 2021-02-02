@@ -41,7 +41,7 @@ public final class IlluminatedFolio extends CardImpl {
 
     }
 
-    public IlluminatedFolio(final IlluminatedFolio card) {
+    private IlluminatedFolio(final IlluminatedFolio card) {
         super(card);
     }
 

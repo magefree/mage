@@ -27,7 +27,7 @@ public final class FatalFumes extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(-4,-2, Duration.EndOfTurn));
     }
 
-    public FatalFumes(final FatalFumes card) {
+    private FatalFumes(final FatalFumes card) {
         super(card);
     }
 

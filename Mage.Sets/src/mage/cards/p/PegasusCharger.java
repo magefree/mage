@@ -27,7 +27,7 @@ public final class PegasusCharger extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public PegasusCharger(final PegasusCharger card) {
+    private PegasusCharger(final PegasusCharger card) {
         super(card);
     }
 

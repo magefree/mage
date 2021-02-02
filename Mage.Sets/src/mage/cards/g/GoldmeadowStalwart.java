@@ -39,7 +39,7 @@ public final class GoldmeadowStalwart extends CardImpl {
                 "reveal a Kithkin card from your hand or pay {3}"));
     }
 
-    public GoldmeadowStalwart(final GoldmeadowStalwart card) {
+    private GoldmeadowStalwart(final GoldmeadowStalwart card) {
         super(card);
     }
 

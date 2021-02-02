@@ -43,7 +43,7 @@ public final class ThunderfootBaloth extends CardImpl {
         this.addAbility(new LieutenantAbility(effects));
     }
 
-    public ThunderfootBaloth(final ThunderfootBaloth card) {
+    private ThunderfootBaloth(final ThunderfootBaloth card) {
         super(card);
     }
 

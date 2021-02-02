@@ -28,7 +28,7 @@ public final class SkyshroudBehemoth extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
     }
 
-    public SkyshroudBehemoth(final SkyshroudBehemoth card) {
+    private SkyshroudBehemoth(final SkyshroudBehemoth card) {
         super(card);
     }
 

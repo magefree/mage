@@ -39,7 +39,7 @@ public final class CankerAbomination extends CardImpl {
 
     }
 
-    public CankerAbomination(final CankerAbomination card) {
+    private CankerAbomination(final CankerAbomination card) {
         super(card);
     }
 

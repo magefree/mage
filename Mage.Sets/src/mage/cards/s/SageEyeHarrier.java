@@ -31,7 +31,7 @@ public final class SageEyeHarrier extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{W}")));
     }
 
-    public SageEyeHarrier(final SageEyeHarrier card) {
+    private SageEyeHarrier(final SageEyeHarrier card) {
         super(card);
     }
 

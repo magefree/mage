@@ -41,7 +41,7 @@ public final class DeadeyeQuartermaster extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
     }
 
-    public DeadeyeQuartermaster(final DeadeyeQuartermaster card) {
+    private DeadeyeQuartermaster(final DeadeyeQuartermaster card) {
         super(card);
     }
 

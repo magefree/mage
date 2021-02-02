@@ -45,7 +45,7 @@ public final class Willbender extends CardImpl {
 
     }
 
-    public Willbender(final Willbender card) {
+    private Willbender(final Willbender card) {
         super(card);
     }
 

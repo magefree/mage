@@ -27,7 +27,7 @@ public final class DamnablePact extends CardImpl {
 
     }
 
-    public DamnablePact(final DamnablePact card) {
+    private DamnablePact(final DamnablePact card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class SarpadianEmpiresVolVII extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SarpadianEmpiresVolVII(final SarpadianEmpiresVolVII card) {
+    private SarpadianEmpiresVolVII(final SarpadianEmpiresVolVII card) {
         super(card);
     }
 

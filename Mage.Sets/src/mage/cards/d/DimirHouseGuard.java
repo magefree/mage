@@ -37,7 +37,7 @@ public final class DimirHouseGuard extends CardImpl {
         this.addAbility(new TransmuteAbility("{1}{B}{B}"));
     }
 
-    public DimirHouseGuard(final DimirHouseGuard card) {
+    private DimirHouseGuard(final DimirHouseGuard card) {
         super(card);
     }
 

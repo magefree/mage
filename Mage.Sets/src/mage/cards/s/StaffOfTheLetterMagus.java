@@ -38,7 +38,7 @@ public final class StaffOfTheLetterMagus extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new StaffOfTheLetterMagusEffect(), new FilterSpell("a spell"), false, SetTargetPointer.SPELL));
     }
 
-    public StaffOfTheLetterMagus(final StaffOfTheLetterMagus card) {
+    private StaffOfTheLetterMagus(final StaffOfTheLetterMagus card) {
         super(card);
     }
 

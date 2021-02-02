@@ -32,7 +32,7 @@ public final class BloodfrayGiant extends CardImpl {
         
     }
  
-    public BloodfrayGiant(final BloodfrayGiant card) {
+    private BloodfrayGiant(final BloodfrayGiant card) {
         super(card);
     }
  

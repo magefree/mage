@@ -37,7 +37,7 @@ public final class ShizoDeathsStorehouse extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShizoDeathsStorehouse(final ShizoDeathsStorehouse card) {
+    private ShizoDeathsStorehouse(final ShizoDeathsStorehouse card) {
         super(card);
     }
 

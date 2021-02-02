@@ -39,7 +39,7 @@ public final class TelimTorsEdict extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public TelimTorsEdict(final TelimTorsEdict card) {
+    private TelimTorsEdict(final TelimTorsEdict card) {
         super(card);
     }
 

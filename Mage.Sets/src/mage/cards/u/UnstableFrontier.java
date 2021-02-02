@@ -34,7 +34,7 @@ public final class UnstableFrontier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnstableFrontier(final UnstableFrontier card) {
+    private UnstableFrontier(final UnstableFrontier card) {
         super(card);
     }
 

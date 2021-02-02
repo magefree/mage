@@ -34,7 +34,7 @@ public final class CovetousDragon extends CardImpl {
                 new SacrificeSourceEffect()));
     }
 
-    public CovetousDragon(final CovetousDragon card) {
+    private CovetousDragon(final CovetousDragon card) {
         super(card);
     }
 

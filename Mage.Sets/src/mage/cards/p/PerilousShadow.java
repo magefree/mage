@@ -33,7 +33,7 @@ public final class PerilousShadow extends CardImpl {
 
     }
 
-    public PerilousShadow(final PerilousShadow card) {
+    private PerilousShadow(final PerilousShadow card) {
         super(card);
     }
 

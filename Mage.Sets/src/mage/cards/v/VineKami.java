@@ -28,7 +28,7 @@ public final class VineKami extends CardImpl {
         this.addAbility(new SoulshiftAbility(6));
     }
 
-    public VineKami(final VineKami card) {
+    private VineKami(final VineKami card) {
         super(card);
     }
 

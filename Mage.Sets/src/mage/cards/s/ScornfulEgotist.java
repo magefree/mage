@@ -27,7 +27,7 @@ public final class ScornfulEgotist extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}")));
     }
 
-    public ScornfulEgotist(final ScornfulEgotist card) {
+    private ScornfulEgotist(final ScornfulEgotist card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class PeacewalkerColossus extends CardImpl {
         this.addAbility(new CrewAbility(4));
     }
 
-    public PeacewalkerColossus(final PeacewalkerColossus card) {
+    private PeacewalkerColossus(final PeacewalkerColossus card) {
         super(card);
     }
 

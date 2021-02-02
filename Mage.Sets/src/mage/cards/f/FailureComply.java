@@ -44,7 +44,7 @@ public final class FailureComply extends SplitCard {
         getRightHalfCard().getSpellAbility().addEffect(new ComplyCantCastEffect());
     }
 
-    public FailureComply(final FailureComply card) {
+    private FailureComply(final FailureComply card) {
         super(card);
     }
 

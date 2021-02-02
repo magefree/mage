@@ -28,7 +28,7 @@ public final class SkyshroudTroll extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }
 
-    public SkyshroudTroll(final SkyshroudTroll card) {
+    private SkyshroudTroll(final SkyshroudTroll card) {
         super(card);
     }
 

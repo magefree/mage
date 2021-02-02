@@ -40,7 +40,7 @@ public final class InformationDealer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost()));
     }
 
-    public InformationDealer(final InformationDealer card) {
+    private InformationDealer(final InformationDealer card) {
         super(card);
     }
 

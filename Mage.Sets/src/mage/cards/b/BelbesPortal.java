@@ -38,7 +38,7 @@ public final class BelbesPortal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BelbesPortal(final BelbesPortal card) {
+    private BelbesPortal(final BelbesPortal card) {
         super(card);
     }
 

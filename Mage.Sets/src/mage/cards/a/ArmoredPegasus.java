@@ -25,7 +25,7 @@ public final class ArmoredPegasus extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public ArmoredPegasus(final ArmoredPegasus card) {
+    private ArmoredPegasus(final ArmoredPegasus card) {
         super(card);
     }
 

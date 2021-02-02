@@ -35,7 +35,7 @@ public final class Dehydration extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
-    public Dehydration(final Dehydration card) {
+    private Dehydration(final Dehydration card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class AinokArtillerist extends CardImpl {
                 new SourceHasCounterCondition(CounterType.P1P1),"{this} has reach as long as it has a +1/+1 counter on it")));
     }
 
-    public AinokArtillerist(final AinokArtillerist card) {
+    private AinokArtillerist(final AinokArtillerist card) {
         super(card);
     }
 

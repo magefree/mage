@@ -27,7 +27,7 @@ public final class Browbeat extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Browbeat(final Browbeat card) {
+    private Browbeat(final Browbeat card) {
         super(card);
     }
 

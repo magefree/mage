@@ -27,7 +27,7 @@ public final class MitoticSlime extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new Ooze2Token(), 2), false));
     }
 
-    public MitoticSlime(final MitoticSlime card) {
+    private MitoticSlime(final MitoticSlime card) {
         super(card);
     }
 

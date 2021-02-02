@@ -53,7 +53,7 @@ public final class OrdealOfErebos extends CardImpl {
 
     }
 
-    public OrdealOfErebos(final OrdealOfErebos card) {
+    private OrdealOfErebos(final OrdealOfErebos card) {
         super(card);
     }
 

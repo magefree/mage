@@ -35,7 +35,7 @@ public final class TotemSpeaker extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), filter, true));
     }
 
-    public TotemSpeaker(final TotemSpeaker card) {
+    private TotemSpeaker(final TotemSpeaker card) {
         super(card);
     }
 

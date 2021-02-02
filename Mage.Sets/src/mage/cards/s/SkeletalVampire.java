@@ -52,7 +52,7 @@ public final class SkeletalVampire extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
     }
 
-    public SkeletalVampire(final SkeletalVampire card) {
+    private SkeletalVampire(final SkeletalVampire card) {
         super(card);
     }
 

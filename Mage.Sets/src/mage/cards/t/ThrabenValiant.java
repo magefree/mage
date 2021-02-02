@@ -26,7 +26,7 @@ public final class ThrabenValiant extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public ThrabenValiant(final ThrabenValiant card) {
+    private ThrabenValiant(final ThrabenValiant card) {
         super(card);
     }
 

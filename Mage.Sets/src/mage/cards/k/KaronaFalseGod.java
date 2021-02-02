@@ -47,7 +47,7 @@ public final class KaronaFalseGod extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new KaronaFalseGodEffect(), false));
     }
 
-    public KaronaFalseGod(final KaronaFalseGod card) {
+    private KaronaFalseGod(final KaronaFalseGod card) {
         super(card);
     }
 

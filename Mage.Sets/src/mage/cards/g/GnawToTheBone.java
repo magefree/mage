@@ -29,7 +29,7 @@ public final class GnawToTheBone extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{G}"), TimingRule.INSTANT));
     }
 
-    public GnawToTheBone(final GnawToTheBone card) {
+    private GnawToTheBone(final GnawToTheBone card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class CunningAbduction extends CardImpl {
         this.getSpellAbility().addEffect(new CunningAbductionExileEffect());
     }
 
-    public CunningAbduction(final CunningAbduction card) {
+    private CunningAbduction(final CunningAbduction card) {
         super(card);
     }
 

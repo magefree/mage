@@ -35,7 +35,7 @@ public final class Gelectrode extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), new FilterInstantOrSorcerySpell("an instant or sorcery spell"), true));
     }
 
-    public Gelectrode(final Gelectrode card) {
+    private Gelectrode(final Gelectrode card) {
         super(card);
     }
 

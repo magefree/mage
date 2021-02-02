@@ -27,7 +27,7 @@ public final class MemorySluice extends CardImpl {
 
     }
 
-    public MemorySluice(final MemorySluice card) {
+    private MemorySluice(final MemorySluice card) {
         super(card);
     }
 

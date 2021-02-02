@@ -30,7 +30,7 @@ public final class HannasCustody extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public HannasCustody(final HannasCustody card) {
+    private HannasCustody(final HannasCustody card) {
         super(card);
     }
 

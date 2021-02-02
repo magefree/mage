@@ -36,7 +36,7 @@ public final class SurgeOfZeal extends CardImpl {
         this.getSpellAbility().setAbilityWord(AbilityWord.RADIANCE);
     }
 
-    public SurgeOfZeal(final SurgeOfZeal card) {
+    private SurgeOfZeal(final SurgeOfZeal card) {
         super(card);
     }
 

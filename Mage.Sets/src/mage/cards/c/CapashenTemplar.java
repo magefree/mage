@@ -31,7 +31,7 @@ public final class CapashenTemplar extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public CapashenTemplar(final CapashenTemplar card) {
+    private CapashenTemplar(final CapashenTemplar card) {
         super(card);
     }
 

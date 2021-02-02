@@ -48,7 +48,7 @@ public final class HostileRealm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public HostileRealm(final HostileRealm card) {
+    private HostileRealm(final HostileRealm card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class WindScarredCrag extends CardImpl {
         
     }
 
-    public WindScarredCrag(final WindScarredCrag card) {
+    private WindScarredCrag(final WindScarredCrag card) {
         super(card);
     }
 

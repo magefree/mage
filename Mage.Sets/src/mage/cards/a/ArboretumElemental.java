@@ -29,7 +29,7 @@ public final class ArboretumElemental extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    public ArboretumElemental(final ArboretumElemental card) {
+    private ArboretumElemental(final ArboretumElemental card) {
         super(card);
     }
 

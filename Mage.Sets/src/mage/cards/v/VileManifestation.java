@@ -54,7 +54,7 @@ public final class VileManifestation extends CardImpl {
 
     }
 
-    public VileManifestation(final VileManifestation card) {
+    private VileManifestation(final VileManifestation card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class HarvestGwyllion extends CardImpl {
         this.addAbility(WitherAbility.getInstance());
     }
 
-    public HarvestGwyllion(final HarvestGwyllion card) {
+    private HarvestGwyllion(final HarvestGwyllion card) {
         super(card);
     }
 

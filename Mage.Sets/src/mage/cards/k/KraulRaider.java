@@ -26,7 +26,7 @@ public final class KraulRaider extends CardImpl {
         this.addAbility(new MenaceAbility());
     }
 
-    public KraulRaider(final KraulRaider card) {
+    private KraulRaider(final KraulRaider card) {
         super(card);
     }
 

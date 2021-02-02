@@ -32,7 +32,7 @@ public final class ThornOfTheBlackRose extends CardImpl {
 
     }
 
-    public ThornOfTheBlackRose(final ThornOfTheBlackRose card) {
+    private ThornOfTheBlackRose(final ThornOfTheBlackRose card) {
         super(card);
     }
 

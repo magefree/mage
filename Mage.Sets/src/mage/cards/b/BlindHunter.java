@@ -38,7 +38,7 @@ public final class BlindHunter extends CardImpl {
 
     }
 
-    public BlindHunter(final BlindHunter card) {
+    private BlindHunter(final BlindHunter card) {
         super(card);
     }
 

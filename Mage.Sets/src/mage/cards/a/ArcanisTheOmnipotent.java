@@ -36,7 +36,7 @@ public final class ArcanisTheOmnipotent extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{2}{U}{U}")));
     }
 
-    public ArcanisTheOmnipotent(final ArcanisTheOmnipotent card) {
+    private ArcanisTheOmnipotent(final ArcanisTheOmnipotent card) {
         super(card);
     }
 

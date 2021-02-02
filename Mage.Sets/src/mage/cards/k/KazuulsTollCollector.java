@@ -43,7 +43,7 @@ public final class KazuulsTollCollector extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KazuulsTollCollector(final KazuulsTollCollector card) {
+    private KazuulsTollCollector(final KazuulsTollCollector card) {
         super(card);
     }
 

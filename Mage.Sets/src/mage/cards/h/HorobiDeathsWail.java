@@ -39,7 +39,7 @@ public final class HorobiDeathsWail extends CardImpl {
         this.addAbility(new HorobiDeathsWailAbility(new DestroyTargetEffect()));
     }
 
-    public HorobiDeathsWail(final HorobiDeathsWail card) {
+    private HorobiDeathsWail(final HorobiDeathsWail card) {
         super(card);
     }
 

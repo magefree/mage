@@ -28,7 +28,7 @@ public final class AzureMage extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{3}{U}")));
     }
 
-    public AzureMage(final AzureMage card) {
+    private AzureMage(final AzureMage card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class KitesailCorsair extends CardImpl {
         )));
     }
 
-    public KitesailCorsair(final KitesailCorsair card) {
+    private KitesailCorsair(final KitesailCorsair card) {
         super(card);
     }
 

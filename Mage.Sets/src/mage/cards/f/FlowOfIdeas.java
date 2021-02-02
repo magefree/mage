@@ -30,7 +30,7 @@ public final class FlowOfIdeas extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public FlowOfIdeas(final FlowOfIdeas card) {
+    private FlowOfIdeas(final FlowOfIdeas card) {
         super(card);
     }
 

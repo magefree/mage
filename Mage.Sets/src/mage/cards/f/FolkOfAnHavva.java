@@ -27,7 +27,7 @@ public final class FolkOfAnHavva extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
     }
 
-    public FolkOfAnHavva(final FolkOfAnHavva card) {
+    private FolkOfAnHavva(final FolkOfAnHavva card) {
         super(card);
     }
 

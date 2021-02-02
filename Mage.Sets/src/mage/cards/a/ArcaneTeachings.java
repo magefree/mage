@@ -39,7 +39,7 @@ public final class ArcaneTeachings extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
     }
 
-    public ArcaneTeachings(final ArcaneTeachings card) {
+    private ArcaneTeachings(final ArcaneTeachings card) {
         super(card);
     }
 

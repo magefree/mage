@@ -42,7 +42,7 @@ public final class SokenzanSpellblade extends CardImpl {
         ));
     }
 
-    public SokenzanSpellblade(final SokenzanSpellblade card) {
+    private SokenzanSpellblade(final SokenzanSpellblade card) {
         super(card);
     }
 

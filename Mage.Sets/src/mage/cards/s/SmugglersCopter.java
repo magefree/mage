@@ -38,7 +38,7 @@ public final class SmugglersCopter extends CardImpl {
         this.addAbility(new CrewAbility(1));
     }
 
-    public SmugglersCopter(final SmugglersCopter card) {
+    private SmugglersCopter(final SmugglersCopter card) {
         super(card);
     }
 

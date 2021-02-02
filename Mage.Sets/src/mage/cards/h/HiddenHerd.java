@@ -37,7 +37,7 @@ public final class HiddenHerd extends CardImpl {
         ));
     }
 
-    public HiddenHerd(final HiddenHerd card) {
+    private HiddenHerd(final HiddenHerd card) {
         super(card);
     }
 

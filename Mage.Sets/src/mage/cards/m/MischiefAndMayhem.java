@@ -24,7 +24,7 @@ public final class MischiefAndMayhem extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2, new FilterCreaturePermanent("creatures each"), false));
     }
 
-    public MischiefAndMayhem(final MischiefAndMayhem card) {
+    private MischiefAndMayhem(final MischiefAndMayhem card) {
         super(card);
     }
 

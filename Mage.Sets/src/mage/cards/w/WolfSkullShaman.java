@@ -29,7 +29,7 @@ public final class WolfSkullShaman extends CardImpl {
         this.addAbility(new KinshipAbility(new CreateTokenEffect(new WolfToken("LRW"))));
     }
 
-    public WolfSkullShaman(final WolfSkullShaman card) {
+    private WolfSkullShaman(final WolfSkullShaman card) {
         super(card);
     }
 

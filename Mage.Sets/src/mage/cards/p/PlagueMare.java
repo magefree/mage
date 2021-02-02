@@ -50,7 +50,7 @@ public final class PlagueMare extends CardImpl {
         ));
     }
 
-    public PlagueMare(final PlagueMare card) {
+    private PlagueMare(final PlagueMare card) {
         super(card);
     }
 

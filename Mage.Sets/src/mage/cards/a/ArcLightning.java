@@ -23,7 +23,7 @@ public final class ArcLightning extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(3));
     }
 
-    public ArcLightning(final ArcLightning card) {
+    private ArcLightning(final ArcLightning card) {
         super(card);
     }
 

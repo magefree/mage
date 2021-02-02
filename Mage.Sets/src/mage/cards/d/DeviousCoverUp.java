@@ -36,7 +36,7 @@ public final class DeviousCoverUp extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 4));
     }
 
-    public DeviousCoverUp(final DeviousCoverUp card) {
+    private DeviousCoverUp(final DeviousCoverUp card) {
         super(card);
     }
 

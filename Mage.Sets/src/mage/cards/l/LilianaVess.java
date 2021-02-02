@@ -48,7 +48,7 @@ public final class LilianaVess extends CardImpl {
 
     }
 
-    public LilianaVess(final LilianaVess card) {
+    private LilianaVess(final LilianaVess card) {
         super(card);
     }
 

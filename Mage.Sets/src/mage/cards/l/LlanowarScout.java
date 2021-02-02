@@ -32,7 +32,7 @@ public final class LlanowarScout extends CardImpl {
                 new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A), new TapSourceCost()));
     }
 
-    public LlanowarScout(final LlanowarScout card) {
+    private LlanowarScout(final LlanowarScout card) {
         super(card);
     }
 

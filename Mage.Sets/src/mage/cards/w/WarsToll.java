@@ -40,7 +40,7 @@ public final class WarsToll extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new WarsTollAttackRestrictionEffect()));
     }
 
-    public WarsToll(final WarsToll card) {
+    private WarsToll(final WarsToll card) {
         super(card);
     }
 

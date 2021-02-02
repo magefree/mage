@@ -32,7 +32,7 @@ public final class ForceAway extends CardImpl {
         this.getSpellAbility().addHint(FerociousHint.instance);
     }
 
-    public ForceAway(final ForceAway card) {
+    private ForceAway(final ForceAway card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class CrookclawTransmuter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrookclawTransmuter(final CrookclawTransmuter card) {
+    private CrookclawTransmuter(final CrookclawTransmuter card) {
         super(card);
     }
 

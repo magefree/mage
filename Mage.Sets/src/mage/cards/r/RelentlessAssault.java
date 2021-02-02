@@ -24,7 +24,7 @@ public final class RelentlessAssault extends CardImpl {
         this.getSpellAbility().addEffect(new AddCombatAndMainPhaseEffect());
     }
 
-    public RelentlessAssault(final RelentlessAssault card) {
+    private RelentlessAssault(final RelentlessAssault card) {
         super(card);
     }
 

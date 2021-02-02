@@ -48,7 +48,7 @@ public final class EyeOfDoom extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EyeOfDoom(final EyeOfDoom card) {
+    private EyeOfDoom(final EyeOfDoom card) {
         super(card);
     }
 

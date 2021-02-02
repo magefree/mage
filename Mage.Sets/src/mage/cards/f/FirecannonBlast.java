@@ -32,7 +32,7 @@ public final class FirecannonBlast extends CardImpl {
         this.getSpellAbility().addHint(RaidHint.instance);
     }
 
-    public FirecannonBlast(final FirecannonBlast card) {
+    private FirecannonBlast(final FirecannonBlast card) {
         super(card);
     }
 

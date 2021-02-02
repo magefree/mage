@@ -32,7 +32,7 @@ public final class StripedRiverwinder extends CardImpl {
 
     }
 
-    public StripedRiverwinder(final StripedRiverwinder card) {
+    private StripedRiverwinder(final StripedRiverwinder card) {
         super(card);
     }
 

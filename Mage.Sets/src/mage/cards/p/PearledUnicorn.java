@@ -22,7 +22,7 @@ public final class PearledUnicorn extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public PearledUnicorn(final PearledUnicorn card) {
+    private PearledUnicorn(final PearledUnicorn card) {
         super(card);
     }
 

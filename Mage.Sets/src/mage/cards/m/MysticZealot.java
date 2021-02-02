@@ -43,7 +43,7 @@ public final class MysticZealot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MysticZealot(final MysticZealot card) {
+    private MysticZealot(final MysticZealot card) {
         super(card);
     }
 

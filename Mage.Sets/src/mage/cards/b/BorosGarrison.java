@@ -37,7 +37,7 @@ public final class BorosGarrison extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 1, 0, 0, 0, 0), new TapSourceCost()));
     }
 
-    public BorosGarrison(final BorosGarrison card) {
+    private BorosGarrison(final BorosGarrison card) {
         super(card);
     }
 

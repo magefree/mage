@@ -32,7 +32,7 @@ public final class GulfSquid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GulfSquid(final GulfSquid card) {
+    private GulfSquid(final GulfSquid card) {
         super(card);
     }
 

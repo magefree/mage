@@ -35,7 +35,7 @@ public final class FeastOfBlood extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
     }
 
-    public FeastOfBlood(final FeastOfBlood card) {
+    private FeastOfBlood(final FeastOfBlood card) {
         super(card);
     }
 

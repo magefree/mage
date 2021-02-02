@@ -42,7 +42,7 @@ public final class DefilingTears extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public DefilingTears(final DefilingTears card) {
+    private DefilingTears(final DefilingTears card) {
         super(card);
     }
 

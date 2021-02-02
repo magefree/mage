@@ -41,7 +41,7 @@ public final class LieutenantKirtar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LieutenantKirtar(final LieutenantKirtar card) {
+    private LieutenantKirtar(final LieutenantKirtar card) {
         super(card);
     }
 

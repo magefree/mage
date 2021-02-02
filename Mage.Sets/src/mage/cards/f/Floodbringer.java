@@ -45,7 +45,7 @@ public final class Floodbringer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Floodbringer(final Floodbringer card) {
+    private Floodbringer(final Floodbringer card) {
         super(card);
     }
 

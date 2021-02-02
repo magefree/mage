@@ -42,7 +42,7 @@ public final class BalduvianHydra extends CardImpl {
 
     }
 
-    public BalduvianHydra(final BalduvianHydra card) {
+    private BalduvianHydra(final BalduvianHydra card) {
         super(card);
     }
 

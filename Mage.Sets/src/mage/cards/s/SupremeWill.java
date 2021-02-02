@@ -33,7 +33,7 @@ public final class SupremeWill extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public SupremeWill(final SupremeWill card) {
+    private SupremeWill(final SupremeWill card) {
         super(card);
     }
 

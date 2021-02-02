@@ -25,7 +25,7 @@ public final class JusticeStrike extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public JusticeStrike(final JusticeStrike card) {
+    private JusticeStrike(final JusticeStrike card) {
         super(card);
     }
 

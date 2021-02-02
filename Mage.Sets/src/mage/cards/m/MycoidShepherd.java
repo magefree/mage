@@ -37,7 +37,7 @@ public final class MycoidShepherd extends CardImpl {
         
     }
 
-    public MycoidShepherd(final MycoidShepherd card) {
+    private MycoidShepherd(final MycoidShepherd card) {
         super(card);
     }
 

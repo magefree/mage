@@ -34,7 +34,7 @@ public final class LichsTomb extends CardImpl {
         this.addAbility(new LichsTombTriggeredAbility());
     }
 
-    public LichsTomb(final LichsTomb card) {
+    private LichsTomb(final LichsTomb card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class DreadCharge extends CardImpl {
         this.getSpellAbility().addEffect(new CantBeBlockedByCreaturesAllEffect(filter, filter2, Duration.EndOfTurn));
     }
 
-    public DreadCharge(final DreadCharge card) {
+    private DreadCharge(final DreadCharge card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class WatcherOfTheRoost extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(effect));
     }
 
-    public WatcherOfTheRoost(final WatcherOfTheRoost card) {
+    private WatcherOfTheRoost(final WatcherOfTheRoost card) {
         super(card);
     }
 

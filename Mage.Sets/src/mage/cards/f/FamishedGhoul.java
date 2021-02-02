@@ -35,7 +35,7 @@ public final class FamishedGhoul extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FamishedGhoul(final FamishedGhoul card) {
+    private FamishedGhoul(final FamishedGhoul card) {
         super(card);
     }
 

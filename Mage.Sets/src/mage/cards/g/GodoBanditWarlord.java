@@ -53,7 +53,7 @@ public final class GodoBanditWarlord extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GodoBanditWarlord(final GodoBanditWarlord card) {
+    private GodoBanditWarlord(final GodoBanditWarlord card) {
         super(card);
     }
 

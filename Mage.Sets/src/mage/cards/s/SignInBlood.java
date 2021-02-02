@@ -29,7 +29,7 @@ public final class SignInBlood extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public SignInBlood(final SignInBlood card) {
+    private SignInBlood(final SignInBlood card) {
         super(card);
     }
 

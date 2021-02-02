@@ -22,7 +22,7 @@ public final class MossMonster extends CardImpl {
         this.toughness = new MageInt(6);
     }
 
-    public MossMonster(final MossMonster card) {
+    private MossMonster(final MossMonster card) {
         super(card);
     }
 

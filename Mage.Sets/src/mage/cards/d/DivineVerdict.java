@@ -23,7 +23,7 @@ public final class DivineVerdict extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public DivineVerdict(final DivineVerdict card) {
+    private DivineVerdict(final DivineVerdict card) {
         super(card);
     }
 

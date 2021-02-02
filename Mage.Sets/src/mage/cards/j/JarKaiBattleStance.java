@@ -34,7 +34,7 @@ public final class JarKaiBattleStance extends CardImpl {
                 "If that creature is a Jedi or Sith, it also gains trample until end of turn"));
     }
 
-    public JarKaiBattleStance(final JarKaiBattleStance card) {
+    private JarKaiBattleStance(final JarKaiBattleStance card) {
         super(card);
     }
 

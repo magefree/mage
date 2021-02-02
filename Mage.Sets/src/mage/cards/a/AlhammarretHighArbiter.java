@@ -42,7 +42,7 @@ public final class AlhammarretHighArbiter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new AlhammarretHighArbiterEffect(), "")));
     }
 
-    public AlhammarretHighArbiter(final AlhammarretHighArbiter card) {
+    private AlhammarretHighArbiter(final AlhammarretHighArbiter card) {
         super(card);
     }
 

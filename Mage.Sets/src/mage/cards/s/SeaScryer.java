@@ -37,7 +37,7 @@ public final class SeaScryer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeaScryer(final SeaScryer card) {
+    private SeaScryer(final SeaScryer card) {
         super(card);
     }
 

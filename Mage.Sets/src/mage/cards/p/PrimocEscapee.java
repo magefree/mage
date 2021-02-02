@@ -31,7 +31,7 @@ public final class PrimocEscapee extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public PrimocEscapee(final PrimocEscapee card) {
+    private PrimocEscapee(final PrimocEscapee card) {
         super(card);
     }
 

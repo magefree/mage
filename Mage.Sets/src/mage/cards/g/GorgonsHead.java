@@ -31,7 +31,7 @@ public final class GorgonsHead extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl("{2}")));
     }
 
-    public GorgonsHead(final GorgonsHead card) {
+    private GorgonsHead(final GorgonsHead card) {
         super(card);
     }
 

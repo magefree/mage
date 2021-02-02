@@ -36,7 +36,7 @@ public final class BalefireDragon extends CardImpl {
 
     }
 
-    public BalefireDragon(final BalefireDragon card) {
+    private BalefireDragon(final BalefireDragon card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class Tunnel extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public Tunnel(final Tunnel card) {
+    private Tunnel(final Tunnel card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class ForgeDevil extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ForgeDevil(final ForgeDevil card) {
+    private ForgeDevil(final ForgeDevil card) {
         super(card);
     }
 

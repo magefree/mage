@@ -26,7 +26,7 @@ public final class VernadiShieldmate extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public VernadiShieldmate(final VernadiShieldmate card) {
+    private VernadiShieldmate(final VernadiShieldmate card) {
         super(card);
     }
 

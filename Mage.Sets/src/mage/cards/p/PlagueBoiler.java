@@ -43,7 +43,7 @@ public final class PlagueBoiler extends CardImpl {
 
     }
 
-    public PlagueBoiler(final PlagueBoiler card) {
+    private PlagueBoiler(final PlagueBoiler card) {
         super(card);
     }
 

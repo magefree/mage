@@ -23,7 +23,7 @@ public final class BlastedLandscape extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public BlastedLandscape(final BlastedLandscape card) {
+    private BlastedLandscape(final BlastedLandscape card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class PusKami extends CardImpl {
         this.addAbility(new SoulshiftAbility(6));
     }
 
-    public PusKami(final PusKami card) {
+    private PusKami(final PusKami card) {
         super(card);
     }
 

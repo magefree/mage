@@ -49,7 +49,7 @@ public final class CelestialMantle extends CardImpl {
         this.addAbility(new CelestialMantleAbility());
     }
 
-    public CelestialMantle(final CelestialMantle card) {
+    private CelestialMantle(final CelestialMantle card) {
         super(card);
     }
 

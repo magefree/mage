@@ -43,7 +43,7 @@ public final class FlashOfDefiance extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlashOfDefiance(final FlashOfDefiance card) {
+    private FlashOfDefiance(final FlashOfDefiance card) {
         super(card);
     }
 

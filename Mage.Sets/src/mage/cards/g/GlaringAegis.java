@@ -48,7 +48,7 @@ public final class GlaringAegis extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 3, Duration.WhileOnBattlefield)));
     }
 
-    public GlaringAegis(final GlaringAegis card) {
+    private GlaringAegis(final GlaringAegis card) {
         super(card);
     }
 

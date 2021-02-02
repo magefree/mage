@@ -29,7 +29,7 @@ public final class TitanicBulvox extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{G}{G}{G}")));
     }
 
-    public TitanicBulvox(final TitanicBulvox card) {
+    private TitanicBulvox(final TitanicBulvox card) {
         super(card);
     }
 

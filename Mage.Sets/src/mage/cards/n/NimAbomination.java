@@ -34,7 +34,7 @@ public final class NimAbomination extends CardImpl {
                 TargetController.YOU, SourceUntappedCondition.instance, false));
     }
 
-    public NimAbomination(final NimAbomination card) {
+    private NimAbomination(final NimAbomination card) {
         super(card);
     }
 

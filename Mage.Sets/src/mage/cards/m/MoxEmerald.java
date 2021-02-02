@@ -20,7 +20,7 @@ public final class MoxEmerald extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public MoxEmerald(final MoxEmerald card) {
+    private MoxEmerald(final MoxEmerald card) {
         super(card);
     }
 

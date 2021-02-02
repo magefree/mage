@@ -34,7 +34,7 @@ public final class Electryte extends CardImpl {
         this.addAbility(new ElectryteTriggeredAbility());
     }
 
-    public Electryte(final Electryte card) {
+    private Electryte(final Electryte card) {
         super(card);
     }
 

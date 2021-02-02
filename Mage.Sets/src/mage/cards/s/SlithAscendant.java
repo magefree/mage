@@ -28,7 +28,7 @@ public final class SlithAscendant extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false));
     }
 
-    public SlithAscendant(final SlithAscendant card) {
+    private SlithAscendant(final SlithAscendant card) {
         super(card);
     }
 

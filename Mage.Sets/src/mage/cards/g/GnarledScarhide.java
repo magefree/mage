@@ -44,7 +44,7 @@ public final class GnarledScarhide extends CardImpl {
         
     }
 
-    public GnarledScarhide(final GnarledScarhide card) {
+    private GnarledScarhide(final GnarledScarhide card) {
         super(card);
     }
 

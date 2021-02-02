@@ -33,7 +33,7 @@ public final class Blisterpod extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(effect, false));
     }
 
-    public Blisterpod(final Blisterpod card) {
+    private Blisterpod(final Blisterpod card) {
         super(card);
     }
 

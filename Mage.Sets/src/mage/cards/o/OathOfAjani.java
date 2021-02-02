@@ -32,7 +32,7 @@ public final class OathOfAjani extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(new FilterPlaneswalkerCard("Planeswalker spells"), 1)));
     }
 
-    public OathOfAjani(final OathOfAjani card) {
+    private OathOfAjani(final OathOfAjani card) {
         super(card);
     }
 

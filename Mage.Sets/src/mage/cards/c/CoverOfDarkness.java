@@ -29,7 +29,7 @@ public final class CoverOfDarkness extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FearAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCoverOfDarkness())));
     }
 
-    public CoverOfDarkness(final CoverOfDarkness card) {
+    private CoverOfDarkness(final CoverOfDarkness card) {
         super(card);
     }
 

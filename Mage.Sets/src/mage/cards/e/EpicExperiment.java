@@ -33,7 +33,7 @@ public final class EpicExperiment extends CardImpl {
         this.getSpellAbility().addEffect(new EpicExperimentEffect());
     }
 
-    public EpicExperiment(final EpicExperiment card) {
+    private EpicExperiment(final EpicExperiment card) {
         super(card);
     }
 

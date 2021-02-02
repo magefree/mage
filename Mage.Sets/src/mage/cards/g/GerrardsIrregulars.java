@@ -30,7 +30,7 @@ public final class GerrardsIrregulars extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public GerrardsIrregulars(final GerrardsIrregulars card) {
+    private GerrardsIrregulars(final GerrardsIrregulars card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class HierophantsChalice extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public HierophantsChalice(final HierophantsChalice card) {
+    private HierophantsChalice(final HierophantsChalice card) {
         super(card);
     }
 

@@ -73,7 +73,7 @@ public final class Torchling extends CardImpl {
         ));
     }
 
-    public Torchling(final Torchling card) {
+    private Torchling(final Torchling card) {
         super(card);
     }
 

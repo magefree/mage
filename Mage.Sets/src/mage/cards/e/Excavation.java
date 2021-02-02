@@ -36,7 +36,7 @@ public final class Excavation extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Excavation(final Excavation card) {
+    private Excavation(final Excavation card) {
         super(card);
     }
 

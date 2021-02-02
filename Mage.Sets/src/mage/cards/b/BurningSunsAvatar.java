@@ -37,7 +37,7 @@ public final class BurningSunsAvatar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BurningSunsAvatar(final BurningSunsAvatar card) {
+    private BurningSunsAvatar(final BurningSunsAvatar card) {
         super(card);
     }
 

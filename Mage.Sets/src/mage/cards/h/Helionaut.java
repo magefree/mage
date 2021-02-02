@@ -32,7 +32,7 @@ public final class Helionaut extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Helionaut(final Helionaut card) {
+    private Helionaut(final Helionaut card) {
         super(card);
     }
 

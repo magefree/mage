@@ -37,7 +37,7 @@ public final class GolemSkinGauntlets extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public GolemSkinGauntlets(final GolemSkinGauntlets card) {
+    private GolemSkinGauntlets(final GolemSkinGauntlets card) {
         super(card);
     }
 

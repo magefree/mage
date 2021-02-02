@@ -52,7 +52,7 @@ public final class KyscuDrake extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(1, 1, filter), false, true, Outcome.PutCardInPlay), new CompositeCost(new SacrificeSourceCost(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filterSpitting, false)), "sacrifice {this} and a creature named Spitting Drake")));
     }
 
-    public KyscuDrake(final KyscuDrake card) {
+    private KyscuDrake(final KyscuDrake card) {
         super(card);
     }
 

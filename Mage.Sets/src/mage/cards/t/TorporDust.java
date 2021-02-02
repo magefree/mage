@@ -46,7 +46,7 @@ public final class TorporDust extends CardImpl {
         
     }
 
-    public TorporDust(final TorporDust card) {
+    private TorporDust(final TorporDust card) {
         super(card);
     }
 

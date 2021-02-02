@@ -35,7 +35,7 @@ public final class TreetopVillage extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ApeToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
     }
 
-    public TreetopVillage(final TreetopVillage card) {
+    private TreetopVillage(final TreetopVillage card) {
         super(card);
     }
 

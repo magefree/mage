@@ -40,7 +40,7 @@ public final class Foratog extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Foratog(final Foratog card) {
+    private Foratog(final Foratog card) {
         super(card);
     }
 

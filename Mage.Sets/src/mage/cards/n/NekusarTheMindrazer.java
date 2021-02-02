@@ -38,7 +38,7 @@ public final class NekusarTheMindrazer extends CardImpl {
         this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(1, true, "that player"), false, true));
     }
 
-    public NekusarTheMindrazer(final NekusarTheMindrazer card) {
+    private NekusarTheMindrazer(final NekusarTheMindrazer card) {
         super(card);
     }
 

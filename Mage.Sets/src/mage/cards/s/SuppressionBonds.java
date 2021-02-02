@@ -40,7 +40,7 @@ public final class SuppressionBonds extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
     }
 
-    public SuppressionBonds(final SuppressionBonds card) {
+    private SuppressionBonds(final SuppressionBonds card) {
         super(card);
     }
 

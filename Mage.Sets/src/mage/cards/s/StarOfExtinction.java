@@ -25,7 +25,7 @@ public final class StarOfExtinction extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public StarOfExtinction(final StarOfExtinction card) {
+    private StarOfExtinction(final StarOfExtinction card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class BrineSeer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BrineSeer(final BrineSeer card) {
+    private BrineSeer(final BrineSeer card) {
         super(card);
     }
 

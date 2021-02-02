@@ -59,7 +59,7 @@ public final class IbHalfheartGoblinTactician extends CardImpl {
 
     }
 
-    public IbHalfheartGoblinTactician(final IbHalfheartGoblinTactician card) {
+    private IbHalfheartGoblinTactician(final IbHalfheartGoblinTactician card) {
         super(card);
     }
 

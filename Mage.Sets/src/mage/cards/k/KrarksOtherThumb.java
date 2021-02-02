@@ -32,7 +32,7 @@ public final class KrarksOtherThumb extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KrarksOtherThumbEffect()));
     }
 
-    public KrarksOtherThumb(final KrarksOtherThumb card) {
+    private KrarksOtherThumb(final KrarksOtherThumb card) {
         super(card);
     }
 

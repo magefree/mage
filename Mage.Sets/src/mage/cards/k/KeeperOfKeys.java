@@ -43,7 +43,7 @@ public final class KeeperOfKeys extends CardImpl {
                 "At the beginning of your upkeep, if you're the monarch, creatures you control can't be blocked this turn."));
     }
 
-    public KeeperOfKeys(final KeeperOfKeys card) {
+    private KeeperOfKeys(final KeeperOfKeys card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class TitanicGrowth extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TitanicGrowth(final TitanicGrowth card) {
+    private TitanicGrowth(final TitanicGrowth card) {
         super(card);
     }
 

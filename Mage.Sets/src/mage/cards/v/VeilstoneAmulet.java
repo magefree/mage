@@ -28,7 +28,7 @@ public final class VeilstoneAmulet extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new VeilstoneAmuletEffect(), new FilterSpell("a spell"), false));
     }
 
-    public VeilstoneAmulet(final VeilstoneAmulet card) {
+    private VeilstoneAmulet(final VeilstoneAmulet card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class Dreadwing extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Dreadwing(final Dreadwing card) {
+    private Dreadwing(final Dreadwing card) {
         super(card);
     }
 

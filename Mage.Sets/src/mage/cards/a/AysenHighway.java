@@ -34,7 +34,7 @@ public final class AysenHighway extends CardImpl {
                 new GainAbilityAllEffect(new PlainswalkAbility(false), Duration.WhileOnBattlefield, filter)));
     }
 
-    public AysenHighway(final AysenHighway card) {
+    private AysenHighway(final AysenHighway card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class KrosanConstrictor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KrosanConstrictor(final KrosanConstrictor card) {
+    private KrosanConstrictor(final KrosanConstrictor card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class SeafarersQuay extends CardImpl {
         ));
     }
 
-    public SeafarersQuay(final SeafarersQuay card) {
+    private SeafarersQuay(final SeafarersQuay card) {
         super(card);
     }
 

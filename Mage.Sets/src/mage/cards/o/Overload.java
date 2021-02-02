@@ -32,7 +32,7 @@ public final class Overload extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
-    public Overload(final Overload card) {
+    private Overload(final Overload card) {
         super(card);
     }
 

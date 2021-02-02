@@ -28,7 +28,7 @@ public final class Greed extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Greed(final Greed card) {
+    private Greed(final Greed card) {
         super(card);
     }
 

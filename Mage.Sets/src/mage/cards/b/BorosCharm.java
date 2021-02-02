@@ -38,7 +38,7 @@ public final class BorosCharm extends CardImpl {
         this.getSpellAbility().addMode(mode2);
     }
 
-    public BorosCharm(final BorosCharm card) {
+    private BorosCharm(final BorosCharm card) {
         super(card);
     }
 

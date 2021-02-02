@@ -26,7 +26,7 @@ public final class EyeOfRamos extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(1), new SacrificeSourceCost()));
     }
 
-    public EyeOfRamos(final EyeOfRamos card) {
+    private EyeOfRamos(final EyeOfRamos card) {
         super(card);
     }
 

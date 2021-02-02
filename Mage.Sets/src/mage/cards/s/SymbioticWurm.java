@@ -29,7 +29,7 @@ public final class SymbioticWurm extends CardImpl {
 
     }
 
-    public SymbioticWurm(final SymbioticWurm card) {
+    private SymbioticWurm(final SymbioticWurm card) {
         super(card);
     }
 

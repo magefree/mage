@@ -21,7 +21,7 @@ public final class GoblinScouts extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinScoutsToken(), 3));
     }
 
-    public GoblinScouts(final GoblinScouts card) {
+    private GoblinScouts(final GoblinScouts card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class LowlandTracker extends CardImpl {
         this.addAbility(new ProvokeAbility());
     }
 
-    public LowlandTracker(final LowlandTracker card) {
+    private LowlandTracker(final LowlandTracker card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class RocHatchling extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RocHatchling(final RocHatchling card) {
+    private RocHatchling(final RocHatchling card) {
         super(card);
     }
 

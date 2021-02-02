@@ -51,7 +51,7 @@ public final class GangrenousZombies extends CardImpl {
 
     }
 
-    public GangrenousZombies(final GangrenousZombies card) {
+    private GangrenousZombies(final GangrenousZombies card) {
         super(card);
     }
 

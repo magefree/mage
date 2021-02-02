@@ -35,7 +35,7 @@ public final class ViciousOffering extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent().withChooseHint("creature that gets -/-"));
     }
 
-    public ViciousOffering(final ViciousOffering card) {
+    private ViciousOffering(final ViciousOffering card) {
         super(card);
     }
 

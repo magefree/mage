@@ -42,7 +42,7 @@ public final class DeadeyeBrawler extends CardImpl {
 
     }
 
-    public DeadeyeBrawler(final DeadeyeBrawler card) {
+    private DeadeyeBrawler(final DeadeyeBrawler card) {
         super(card);
     }
 

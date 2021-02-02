@@ -49,7 +49,7 @@ public final class ViridianLorebearers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ViridianLorebearers(final ViridianLorebearers card) {
+    private ViridianLorebearers(final ViridianLorebearers card) {
         super(card);
     }
 

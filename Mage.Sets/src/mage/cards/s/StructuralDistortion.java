@@ -35,7 +35,7 @@ public final class StructuralDistortion extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(FILTER));
     }
 
-    public StructuralDistortion(final StructuralDistortion card) {
+    private StructuralDistortion(final StructuralDistortion card) {
         super(card);
     }
 

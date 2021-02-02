@@ -26,7 +26,7 @@ public final class WheelOfFortune extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public WheelOfFortune(final WheelOfFortune card) {
+    private WheelOfFortune(final WheelOfFortune card) {
         super(card);
     }
 

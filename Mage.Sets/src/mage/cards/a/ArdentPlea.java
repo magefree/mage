@@ -24,7 +24,7 @@ public final class ArdentPlea extends CardImpl {
         this.addAbility(new CascadeAbility());
     }
 
-    public ArdentPlea(final ArdentPlea card) {
+    private ArdentPlea(final ArdentPlea card) {
         super(card);
     }
 

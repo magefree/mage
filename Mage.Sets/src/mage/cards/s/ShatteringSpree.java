@@ -25,7 +25,7 @@ public final class ShatteringSpree extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
-    public ShatteringSpree(final ShatteringSpree card) {
+    private ShatteringSpree(final ShatteringSpree card) {
         super(card);
     }
 

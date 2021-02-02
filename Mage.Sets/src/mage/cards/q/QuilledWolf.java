@@ -29,7 +29,7 @@ public final class QuilledWolf extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(4, 4, Duration.EndOfTurn), new ManaCostsImpl("{5}{G}")));
     }
 
-    public QuilledWolf(final QuilledWolf card) {
+    private QuilledWolf(final QuilledWolf card) {
         super(card);
     }
 

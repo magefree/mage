@@ -32,7 +32,7 @@ public final class AuguryAdept extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AuguryAdeptEffect(), false));
     }
 
-    public AuguryAdept(final AuguryAdept card) {
+    private AuguryAdept(final AuguryAdept card) {
         super(card);
     }
 

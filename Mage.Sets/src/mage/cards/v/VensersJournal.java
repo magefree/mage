@@ -33,7 +33,7 @@ public final class VensersJournal extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(CardsInControllerHandCount.instance), TargetController.YOU, false));
     }
 
-    public VensersJournal(final VensersJournal card) {
+    private VensersJournal(final VensersJournal card) {
         super(card);
     }
 

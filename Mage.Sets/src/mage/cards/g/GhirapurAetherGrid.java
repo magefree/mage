@@ -39,7 +39,7 @@ public final class GhirapurAetherGrid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhirapurAetherGrid(final GhirapurAetherGrid card) {
+    private GhirapurAetherGrid(final GhirapurAetherGrid card) {
         super(card);
     }
 

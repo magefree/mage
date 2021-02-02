@@ -43,7 +43,7 @@ public final class MirrorwingDragon extends CardImpl {
         this.addAbility(new MirrorwingDragonCopyTriggeredAbility());
     }
 
-    public MirrorwingDragon(final MirrorwingDragon card) {
+    private MirrorwingDragon(final MirrorwingDragon card) {
         super(card);
     }
 

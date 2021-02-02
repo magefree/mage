@@ -27,7 +27,7 @@ public final class ShimmeringGrotto extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShimmeringGrotto(final ShimmeringGrotto card) {
+    private ShimmeringGrotto(final ShimmeringGrotto card) {
         super(card);
     }
 

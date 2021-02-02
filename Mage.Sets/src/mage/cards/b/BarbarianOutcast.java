@@ -37,7 +37,7 @@ public final class BarbarianOutcast extends CardImpl {
                 new SacrificeSourceEffect()));
     }
 
-    public BarbarianOutcast(final BarbarianOutcast card) {
+    private BarbarianOutcast(final BarbarianOutcast card) {
         super(card);
     }
 

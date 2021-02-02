@@ -28,7 +28,7 @@ public final class KavuGlider extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.U)));
     }
 
-    public KavuGlider(final KavuGlider card) {
+    private KavuGlider(final KavuGlider card) {
         super(card);
     }
 

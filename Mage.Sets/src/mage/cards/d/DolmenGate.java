@@ -30,7 +30,7 @@ public final class DolmenGate extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public DolmenGate(final DolmenGate card) {
+    private DolmenGate(final DolmenGate card) {
         super(card);
     }
 

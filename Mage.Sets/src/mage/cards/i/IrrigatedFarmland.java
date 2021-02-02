@@ -36,7 +36,7 @@ public final class IrrigatedFarmland extends CardImpl {
 
     }
 
-    public IrrigatedFarmland(final IrrigatedFarmland card) {
+    private IrrigatedFarmland(final IrrigatedFarmland card) {
         super(card);
     }
 

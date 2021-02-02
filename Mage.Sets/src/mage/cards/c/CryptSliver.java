@@ -38,7 +38,7 @@ public final class CryptSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
-    public CryptSliver(final CryptSliver card) {
+    private CryptSliver(final CryptSliver card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class MawOfKozilek extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -2, Duration.EndOfTurn), new ManaCostsImpl("{C}")));
     }
 
-    public MawOfKozilek(final MawOfKozilek card) {
+    private MawOfKozilek(final MawOfKozilek card) {
         super(card);
     }
 

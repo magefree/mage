@@ -30,7 +30,7 @@ public final class TreasureHunter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TreasureHunter(final TreasureHunter card) {
+    private TreasureHunter(final TreasureHunter card) {
         super(card);
     }
 

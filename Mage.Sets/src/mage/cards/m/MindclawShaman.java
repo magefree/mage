@@ -43,7 +43,7 @@ public final class MindclawShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MindclawShaman(final MindclawShaman card) {
+    private MindclawShaman(final MindclawShaman card) {
         super(card);
     }
 

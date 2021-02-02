@@ -26,7 +26,7 @@ public final class KolaghanSkirmisher extends CardImpl {
         this.addAbility(new DashAbility(this, "{2}{B}"));
     }
 
-    public KolaghanSkirmisher(final KolaghanSkirmisher card) {
+    private KolaghanSkirmisher(final KolaghanSkirmisher card) {
         super(card);
     }
 

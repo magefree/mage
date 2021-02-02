@@ -32,7 +32,7 @@ public final class RiseToTheChallenge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public RiseToTheChallenge(final RiseToTheChallenge card) {
+    private RiseToTheChallenge(final RiseToTheChallenge card) {
         super(card);
     }
 

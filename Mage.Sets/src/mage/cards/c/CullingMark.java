@@ -24,7 +24,7 @@ public final class CullingMark extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public CullingMark(final CullingMark card) {
+    private CullingMark(final CullingMark card) {
         super(card);
     }
 

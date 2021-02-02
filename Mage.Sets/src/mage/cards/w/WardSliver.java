@@ -44,7 +44,7 @@ public final class WardSliver extends CardImpl {
         
     }
 
-    public WardSliver(final WardSliver card) {
+    private WardSliver(final WardSliver card) {
         super(card);
     }
 

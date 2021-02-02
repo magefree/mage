@@ -45,7 +45,7 @@ public final class IncreasingVengeance extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}{R}"), TimingRule.INSTANT));
     }
 
-    public IncreasingVengeance(final IncreasingVengeance card) {
+    private IncreasingVengeance(final IncreasingVengeance card) {
         super(card);
     }
 

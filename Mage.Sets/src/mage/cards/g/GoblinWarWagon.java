@@ -35,7 +35,7 @@ public final class GoblinWarWagon extends CardImpl {
             new UntapSourceEffect(), new ManaCostsImpl("{2}")), TargetController.YOU, false));
     }
 
-    public GoblinWarWagon(final GoblinWarWagon card) {
+    private GoblinWarWagon(final GoblinWarWagon card) {
         super(card);
     }
 

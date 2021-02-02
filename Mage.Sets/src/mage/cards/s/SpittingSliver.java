@@ -38,7 +38,7 @@ public final class SpittingSliver extends CardImpl {
                 new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, filter, "All Sliver creatures have first strike.")));
     }
 
-    public SpittingSliver(final SpittingSliver card) {
+    private SpittingSliver(final SpittingSliver card) {
         super(card);
     }
 

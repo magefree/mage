@@ -29,7 +29,7 @@ public final class GeyserGlider extends CardImpl {
         this.addAbility(new LandfallAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), false));
     }
 
-    public GeyserGlider(final GeyserGlider card) {
+    private GeyserGlider(final GeyserGlider card) {
         super(card);
     }
 

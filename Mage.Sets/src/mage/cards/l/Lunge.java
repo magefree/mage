@@ -31,7 +31,7 @@ public final class Lunge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    public Lunge(final Lunge card) {
+    private Lunge(final Lunge card) {
         super(card);
     }
 

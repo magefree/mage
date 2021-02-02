@@ -35,7 +35,7 @@ public final class TahCropElite extends CardImpl {
         this.addAbility(new ExertAbility(ability));
     }
 
-    public TahCropElite(final TahCropElite card) {
+    private TahCropElite(final TahCropElite card) {
         super(card);
     }
 

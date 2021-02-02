@@ -32,7 +32,7 @@ public final class GallantCavalry extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KnightToken())));
     }
 
-    public GallantCavalry(final GallantCavalry card) {
+    private GallantCavalry(final GallantCavalry card) {
         super(card);
     }
 

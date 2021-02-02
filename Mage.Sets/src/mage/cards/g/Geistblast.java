@@ -48,7 +48,7 @@ public final class Geistblast extends CardImpl {
 
     }
 
-    public Geistblast(final Geistblast card) {
+    private Geistblast(final Geistblast card) {
         super(card);
     }
 

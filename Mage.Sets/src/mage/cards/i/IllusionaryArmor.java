@@ -40,7 +40,7 @@ public final class IllusionaryArmor extends CardImpl {
         this.addAbility(new BecomesTargetAttachedTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public IllusionaryArmor(final IllusionaryArmor card) {
+    private IllusionaryArmor(final IllusionaryArmor card) {
         super(card);
     }
 

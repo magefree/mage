@@ -43,7 +43,7 @@ public final class ThunderscapeFamiliar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public ThunderscapeFamiliar(final ThunderscapeFamiliar card) {
+    private ThunderscapeFamiliar(final ThunderscapeFamiliar card) {
         super(card);
     }
 

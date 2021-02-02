@@ -34,7 +34,7 @@ public final class DampingSphere extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DampingSphereIncreasementAllEffect()), new CastSpellLastTurnWatcher());
     }
 
-    public DampingSphere(final DampingSphere card) {
+    private DampingSphere(final DampingSphere card) {
         super(card);
     }
 

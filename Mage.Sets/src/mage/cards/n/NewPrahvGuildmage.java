@@ -55,7 +55,7 @@ public final class NewPrahvGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NewPrahvGuildmage(final NewPrahvGuildmage card) {
+    private NewPrahvGuildmage(final NewPrahvGuildmage card) {
         super(card);
     }
 

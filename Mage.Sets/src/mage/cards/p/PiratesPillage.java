@@ -28,7 +28,7 @@ public final class PiratesPillage extends CardImpl {
                 .setText("and create two colorless Treasure artifacts with \"{T}, Sacrifice this artifact: Add one mana of any color"));
     }
 
-    public PiratesPillage(final PiratesPillage card) {
+    private PiratesPillage(final PiratesPillage card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class ShadowcloakVampire extends CardImpl {
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),new PayLifeCost(2)));
     }
 
-    public ShadowcloakVampire(final ShadowcloakVampire card) {
+    private ShadowcloakVampire(final ShadowcloakVampire card) {
         super(card);
     }
 

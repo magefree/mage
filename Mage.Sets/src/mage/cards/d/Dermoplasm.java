@@ -46,7 +46,7 @@ public final class Dermoplasm extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new DermoplasmEffect()));
     }
 
-    public Dermoplasm(final Dermoplasm card) {
+    private Dermoplasm(final Dermoplasm card) {
         super(card);
     }
 

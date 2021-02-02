@@ -35,7 +35,7 @@ public final class MalachiteTalisman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MalachiteTalisman(final MalachiteTalisman card) {
+    private MalachiteTalisman(final MalachiteTalisman card) {
         super(card);
     }
 

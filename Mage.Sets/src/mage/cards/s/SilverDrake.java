@@ -40,7 +40,7 @@ public final class SilverDrake extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
     }
 
-    public SilverDrake(final SilverDrake card) {
+    private SilverDrake(final SilverDrake card) {
         super(card);
     }
 

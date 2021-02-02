@@ -28,7 +28,7 @@ public final class WateryGrave extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public WateryGrave(final WateryGrave card) {
+    private WateryGrave(final WateryGrave card) {
         super(card);
     }
 

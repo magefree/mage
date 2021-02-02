@@ -26,7 +26,7 @@ public final class MakeMischief extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new DevilToken()));
     }
 
-    public MakeMischief(final MakeMischief card) {
+    private MakeMischief(final MakeMischief card) {
         super(card);
     }
 

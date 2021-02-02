@@ -24,7 +24,7 @@ public final class Mindculling extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
     }
 
-    public Mindculling(final Mindculling card) {
+    private Mindculling(final Mindculling card) {
         super(card);
     }
 

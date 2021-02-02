@@ -42,7 +42,7 @@ public final class SilentSentinel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SilentSentinel(final SilentSentinel card) {
+    private SilentSentinel(final SilentSentinel card) {
         super(card);
     }
 

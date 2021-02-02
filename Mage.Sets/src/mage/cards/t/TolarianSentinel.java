@@ -42,7 +42,7 @@ public final class TolarianSentinel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TolarianSentinel(final TolarianSentinel card) {
+    private TolarianSentinel(final TolarianSentinel card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class IndomitableCreativity extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(IndomitableCreativityAdjuster.instance);
     }
 
-    public IndomitableCreativity(final IndomitableCreativity card) {
+    private IndomitableCreativity(final IndomitableCreativity card) {
         super(card);
     }
 

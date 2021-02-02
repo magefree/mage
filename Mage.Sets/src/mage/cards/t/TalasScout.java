@@ -28,7 +28,7 @@ public final class TalasScout extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public TalasScout(final TalasScout card) {
+    private TalasScout(final TalasScout card) {
         super(card);
     }
 

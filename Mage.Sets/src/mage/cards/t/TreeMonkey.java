@@ -25,7 +25,7 @@ public final class TreeMonkey extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public TreeMonkey(final TreeMonkey card) {
+    private TreeMonkey(final TreeMonkey card) {
         super(card);
     }
 

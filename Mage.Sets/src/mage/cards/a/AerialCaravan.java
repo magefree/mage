@@ -44,7 +44,7 @@ public final class AerialCaravan extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new AerialCaravanExileEffect(), new ManaCostsImpl("{1}{U}{U}")));
     }
 
-    public AerialCaravan(final AerialCaravan card) {
+    private AerialCaravan(final AerialCaravan card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class UrzasMiter extends CardImpl {
         this.addAbility(ability, watcher);
     }
 
-    public UrzasMiter(final UrzasMiter card) {
+    private UrzasMiter(final UrzasMiter card) {
         super(card);
     }
 

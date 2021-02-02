@@ -46,7 +46,7 @@ public final class Hostility extends CardImpl {
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
     }
 
-    public Hostility(final Hostility card) {
+    private Hostility(final Hostility card) {
         super(card);
     }
 

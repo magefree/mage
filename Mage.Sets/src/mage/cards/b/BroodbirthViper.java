@@ -29,7 +29,7 @@ public final class BroodbirthViper extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true, false));
     }
 
-    public BroodbirthViper(final BroodbirthViper card) {
+    private BroodbirthViper(final BroodbirthViper card) {
         super(card);
     }
 

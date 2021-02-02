@@ -28,7 +28,7 @@ public final class ScentOfJasmine extends CardImpl {
         this.getSpellAbility().addEffect(new ScentOfJasmineEffect());
     }
 
-    public ScentOfJasmine(final ScentOfJasmine card) {
+    private ScentOfJasmine(final ScentOfJasmine card) {
         super(card);
     }
 

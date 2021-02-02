@@ -37,7 +37,7 @@ public final class NefaroxOverlordOfGrixis extends CardImpl {
             StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, 1, "defending player")));
     }
 
-    public NefaroxOverlordOfGrixis(final NefaroxOverlordOfGrixis card) {
+    private NefaroxOverlordOfGrixis(final NefaroxOverlordOfGrixis card) {
         super(card);
     }
 

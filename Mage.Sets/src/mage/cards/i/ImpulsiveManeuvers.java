@@ -32,7 +32,7 @@ public final class ImpulsiveManeuvers extends CardImpl {
                 SetTargetPointer.PERMANENT, false));
     }
 
-    public ImpulsiveManeuvers(final ImpulsiveManeuvers card) {
+    private ImpulsiveManeuvers(final ImpulsiveManeuvers card) {
         super(card);
     }
 

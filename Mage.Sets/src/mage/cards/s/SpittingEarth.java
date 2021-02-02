@@ -30,7 +30,7 @@ public final class SpittingEarth extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SpittingEarth(final SpittingEarth card) {
+    private SpittingEarth(final SpittingEarth card) {
         super(card);
     }
 

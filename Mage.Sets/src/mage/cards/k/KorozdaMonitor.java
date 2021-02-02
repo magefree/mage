@@ -30,7 +30,7 @@ public final class KorozdaMonitor extends CardImpl {
         this.addAbility(new ScavengeAbility(new ManaCostsImpl("{5}{G}{G}")));
     }
 
-    public KorozdaMonitor(final KorozdaMonitor card) {
+    private KorozdaMonitor(final KorozdaMonitor card) {
         super(card);
     }
 

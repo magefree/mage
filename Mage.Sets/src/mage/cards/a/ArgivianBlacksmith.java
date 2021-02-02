@@ -43,7 +43,7 @@ public final class ArgivianBlacksmith extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArgivianBlacksmith(final ArgivianBlacksmith card) {
+    private ArgivianBlacksmith(final ArgivianBlacksmith card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class GatekeeperOfMalakir extends CardImpl {
         this.addAbility(conditionalAbility);
     }
 
-    public GatekeeperOfMalakir(final GatekeeperOfMalakir card) {
+    private GatekeeperOfMalakir(final GatekeeperOfMalakir card) {
         super(card);
     }
 

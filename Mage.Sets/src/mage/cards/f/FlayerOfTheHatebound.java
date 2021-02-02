@@ -42,7 +42,7 @@ public final class FlayerOfTheHatebound extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlayerOfTheHatebound(final FlayerOfTheHatebound card) {
+    private FlayerOfTheHatebound(final FlayerOfTheHatebound card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class Hornswoggle extends CardImpl {
                 .setText("You create a colorless Treasure artifact token with \"{T}, Sacrifice this artifact: Add one mana of any color.\""));
     }
 
-    public Hornswoggle(final Hornswoggle card) {
+    private Hornswoggle(final Hornswoggle card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class SeedbornMuse extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UntapAllDuringEachOtherPlayersUntapStepEffect(new FilterControlledPermanent("permanents you control"))));
     }
 
-    public SeedbornMuse(final SeedbornMuse card) {
+    private SeedbornMuse(final SeedbornMuse card) {
         super(card);
     }
 

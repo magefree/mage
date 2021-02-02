@@ -39,7 +39,7 @@ public final class InfernoTitan extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InfernoTitan(final InfernoTitan card) {
+    private InfernoTitan(final InfernoTitan card) {
         super(card);
     }
 

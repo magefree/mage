@@ -26,7 +26,7 @@ public final class FadeFromMemory extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{B}")));
     }
 
-    public FadeFromMemory(final FadeFromMemory card) {
+    private FadeFromMemory(final FadeFromMemory card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class AshnodsAltar extends CardImpl {
                 cost));
     }
 
-    public AshnodsAltar(final AshnodsAltar card) {
+    private AshnodsAltar(final AshnodsAltar card) {
         super(card);
     }
 

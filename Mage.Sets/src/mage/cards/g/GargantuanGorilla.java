@@ -47,7 +47,7 @@ public final class GargantuanGorilla extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GargantuanGorilla(final GargantuanGorilla card) {
+    private GargantuanGorilla(final GargantuanGorilla card) {
         super(card);
     }
 

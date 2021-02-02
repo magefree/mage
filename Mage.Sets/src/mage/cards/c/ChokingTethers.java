@@ -34,7 +34,7 @@ public final class ChokingTethers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChokingTethers(final ChokingTethers card) {
+    private ChokingTethers(final ChokingTethers card) {
         super(card);
     }
 

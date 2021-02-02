@@ -42,7 +42,7 @@ public final class TreacherousLink extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TreacherousLinkEffect()));
     }
 
-    public TreacherousLink(final TreacherousLink card) {
+    private TreacherousLink(final TreacherousLink card) {
         super(card);
     }
 

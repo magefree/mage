@@ -30,7 +30,7 @@ public final class BasilicaScreecher extends CardImpl {
         this.addAbility(new ExtortAbility());
     }
 
-    public BasilicaScreecher(final BasilicaScreecher card) {
+    private BasilicaScreecher(final BasilicaScreecher card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class WaryOkapi extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public WaryOkapi(final WaryOkapi card) {
+    private WaryOkapi(final WaryOkapi card) {
         super(card);
     }
 

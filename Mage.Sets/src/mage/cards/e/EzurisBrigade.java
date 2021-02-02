@@ -39,7 +39,7 @@ public final class EzurisBrigade extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EzurisBrigade(final EzurisBrigade card) {
+    private EzurisBrigade(final EzurisBrigade card) {
         super(card);
     }
 

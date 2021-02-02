@@ -26,7 +26,7 @@ public final class PenumbraBobcat extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new PenumbraBobcatToken(), 1), false));
     }
 
-    public PenumbraBobcat(final PenumbraBobcat card) {
+    private PenumbraBobcat(final PenumbraBobcat card) {
         super(card);
     }
 

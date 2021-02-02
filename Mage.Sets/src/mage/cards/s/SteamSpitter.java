@@ -32,7 +32,7 @@ public final class SteamSpitter extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public SteamSpitter(final SteamSpitter card) {
+    private SteamSpitter(final SteamSpitter card) {
         super(card);
     }
 

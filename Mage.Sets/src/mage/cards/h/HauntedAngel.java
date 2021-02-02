@@ -37,7 +37,7 @@ public final class HauntedAngel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HauntedAngel(final HauntedAngel card) {
+    private HauntedAngel(final HauntedAngel card) {
         super(card);
     }
 

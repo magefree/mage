@@ -34,7 +34,7 @@ public final class SorcerersStrongbox extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SorcerersStrongbox(final SorcerersStrongbox card) {
+    private SorcerersStrongbox(final SorcerersStrongbox card) {
         super(card);
     }
 

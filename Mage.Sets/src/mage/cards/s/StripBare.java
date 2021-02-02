@@ -32,7 +32,7 @@ public final class StripBare extends CardImpl {
 
     }
 
-    public StripBare(final StripBare card) {
+    private StripBare(final StripBare card) {
         super(card);
     }
 

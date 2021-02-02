@@ -45,7 +45,7 @@ public final class WandOfVertebrae extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WandOfVertebrae(final WandOfVertebrae card) {
+    private WandOfVertebrae(final WandOfVertebrae card) {
         super(card);
     }
 

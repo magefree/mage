@@ -34,7 +34,7 @@ public final class RouseTheMob extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
-    public RouseTheMob(final RouseTheMob card) {
+    private RouseTheMob(final RouseTheMob card) {
         super(card);
     }
 

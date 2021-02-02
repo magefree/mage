@@ -28,7 +28,7 @@ public final class ThoughtrenderLamia extends CardImpl {
         this.addAbility(new ConstellationAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT)));
     }
 
-    public ThoughtrenderLamia(final ThoughtrenderLamia card) {
+    private ThoughtrenderLamia(final ThoughtrenderLamia card) {
         super(card);
     }
 

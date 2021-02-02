@@ -25,7 +25,7 @@ public final class ColorfulFeiyiSparrow extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public ColorfulFeiyiSparrow(final ColorfulFeiyiSparrow card) {
+    private ColorfulFeiyiSparrow(final ColorfulFeiyiSparrow card) {
         super(card);
     }
 

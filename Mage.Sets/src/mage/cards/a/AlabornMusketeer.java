@@ -27,7 +27,7 @@ public final class AlabornMusketeer extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public AlabornMusketeer(final AlabornMusketeer card) {
+    private AlabornMusketeer(final AlabornMusketeer card) {
         super(card);
     }
 

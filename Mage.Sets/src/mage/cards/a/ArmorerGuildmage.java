@@ -42,7 +42,7 @@ public final class ArmorerGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArmorerGuildmage(final ArmorerGuildmage card) {
+    private ArmorerGuildmage(final ArmorerGuildmage card) {
         super(card);
     }
 

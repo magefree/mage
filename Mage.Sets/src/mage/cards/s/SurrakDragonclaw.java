@@ -55,7 +55,7 @@ public final class SurrakDragonclaw extends CardImpl {
 
     }
 
-    public SurrakDragonclaw(final SurrakDragonclaw card) {
+    private SurrakDragonclaw(final SurrakDragonclaw card) {
         super(card);
     }
 

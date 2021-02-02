@@ -34,7 +34,7 @@ public final class VedalkenMesmerist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VedalkenMesmerist(final VedalkenMesmerist card) {
+    private VedalkenMesmerist(final VedalkenMesmerist card) {
         super(card);
     }
 

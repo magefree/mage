@@ -40,7 +40,7 @@ public final class Morphling extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, 1, Duration.EndOfTurn), new GenericManaCost(1)));
     }
 
-    public Morphling(final Morphling card) {
+    private Morphling(final Morphling card) {
         super(card);
     }
 

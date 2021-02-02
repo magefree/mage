@@ -35,7 +35,7 @@ public final class Expropriate extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public Expropriate(final Expropriate card) {
+    private Expropriate(final Expropriate card) {
         super(card);
     }
 

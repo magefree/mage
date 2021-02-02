@@ -24,7 +24,7 @@ public final class Naturalize extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public Naturalize(final Naturalize card) {
+    private Naturalize(final Naturalize card) {
         super(card);
     }
 

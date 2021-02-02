@@ -43,7 +43,7 @@ public final class HollowOne extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public HollowOne(final HollowOne card) {
+    private HollowOne(final HollowOne card) {
         super(card);
     }
 

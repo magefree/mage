@@ -52,7 +52,7 @@ public final class IonasBlessing extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IonasBlessing(final IonasBlessing card) {
+    private IonasBlessing(final IonasBlessing card) {
         super(card);
     }
 

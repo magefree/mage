@@ -34,7 +34,7 @@ public final class ShaleskinPlower extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShaleskinPlower(final ShaleskinPlower card) {
+    private ShaleskinPlower(final ShaleskinPlower card) {
         super(card);
     }
 

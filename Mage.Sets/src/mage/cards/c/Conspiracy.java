@@ -40,7 +40,7 @@ public final class Conspiracy extends CardImpl {
 
     }
 
-    public Conspiracy(final Conspiracy card) {
+    private Conspiracy(final Conspiracy card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class SkillfulLunge extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public SkillfulLunge(final SkillfulLunge card) {
+    private SkillfulLunge(final SkillfulLunge card) {
         super(card);
     }
 

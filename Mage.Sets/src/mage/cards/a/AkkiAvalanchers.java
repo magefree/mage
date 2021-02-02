@@ -36,7 +36,7 @@ public final class AkkiAvalanchers extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public AkkiAvalanchers(final AkkiAvalanchers card) {
+    private AkkiAvalanchers(final AkkiAvalanchers card) {
         super(card);
     }
 

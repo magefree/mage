@@ -28,7 +28,7 @@ public final class XanthicStatue extends CardImpl {
             "", Duration.EndOfTurn), new ManaCostsImpl("{5}")));
     }
 
-    public XanthicStatue(final XanthicStatue card) {
+    private XanthicStatue(final XanthicStatue card) {
         super(card);
     }
 

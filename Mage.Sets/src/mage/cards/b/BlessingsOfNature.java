@@ -26,7 +26,7 @@ public final class BlessingsOfNature extends CardImpl {
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{G}")));
     }
 
-    public BlessingsOfNature(final BlessingsOfNature card) {
+    private BlessingsOfNature(final BlessingsOfNature card) {
         super(card);
     }
 

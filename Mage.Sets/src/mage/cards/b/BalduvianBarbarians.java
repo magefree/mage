@@ -22,7 +22,7 @@ public final class BalduvianBarbarians extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public BalduvianBarbarians(final BalduvianBarbarians card) {
+    private BalduvianBarbarians(final BalduvianBarbarians card) {
         super(card);
     }
 

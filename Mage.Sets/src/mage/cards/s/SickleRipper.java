@@ -26,7 +26,7 @@ public final class SickleRipper extends CardImpl {
         this.addAbility(WitherAbility.getInstance());
     }
 
-    public SickleRipper(final SickleRipper card) {
+    private SickleRipper(final SickleRipper card) {
         super(card);
     }
 

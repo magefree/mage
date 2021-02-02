@@ -25,7 +25,7 @@ public final class ThrummingStone extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new RippleAbility(4), new FilterCard("Spells"))));
     }
 
-    public ThrummingStone(final ThrummingStone card) {
+    private ThrummingStone(final ThrummingStone card) {
         super(card);
     }
 

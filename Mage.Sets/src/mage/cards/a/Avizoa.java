@@ -39,7 +39,7 @@ public final class Avizoa extends CardImpl {
 
     }
 
-    public Avizoa(final Avizoa card) {
+    private Avizoa(final Avizoa card) {
         super(card);
     }
 

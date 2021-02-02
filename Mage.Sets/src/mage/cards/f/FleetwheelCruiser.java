@@ -40,7 +40,7 @@ public final class FleetwheelCruiser extends CardImpl {
         this.addAbility(new CrewAbility(2));
     }
 
-    public FleetwheelCruiser(final FleetwheelCruiser card) {
+    private FleetwheelCruiser(final FleetwheelCruiser card) {
         super(card);
     }
 

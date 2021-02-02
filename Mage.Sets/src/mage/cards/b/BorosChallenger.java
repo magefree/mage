@@ -38,7 +38,7 @@ public final class BorosChallenger extends CardImpl {
         ));
     }
 
-    public BorosChallenger(final BorosChallenger card) {
+    private BorosChallenger(final BorosChallenger card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class AzoriusSignet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AzoriusSignet(final AzoriusSignet card) {
+    private AzoriusSignet(final AzoriusSignet card) {
         super(card);
     }
 

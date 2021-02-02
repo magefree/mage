@@ -38,7 +38,7 @@ public final class MoonlitStrider extends CardImpl {
         this.addAbility(new SoulshiftAbility(3));
     }
 
-    public MoonlitStrider(final MoonlitStrider card) {
+    private MoonlitStrider(final MoonlitStrider card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class FireOmenCrane extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FireOmenCrane(final FireOmenCrane card) {
+    private FireOmenCrane(final FireOmenCrane card) {
         super(card);
     }
 

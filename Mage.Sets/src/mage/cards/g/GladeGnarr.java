@@ -36,7 +36,7 @@ public final class GladeGnarr extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), filter, false));
     }
 
-    public GladeGnarr(final GladeGnarr card) {
+    private GladeGnarr(final GladeGnarr card) {
         super(card);
     }
 

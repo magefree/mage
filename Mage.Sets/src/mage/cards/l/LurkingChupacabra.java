@@ -41,7 +41,7 @@ public final class LurkingChupacabra extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LurkingChupacabra(final LurkingChupacabra card) {
+    private LurkingChupacabra(final LurkingChupacabra card) {
         super(card);
     }
 

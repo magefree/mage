@@ -28,7 +28,7 @@ public final class ErraticExplosion extends CardImpl {
         this.getSpellAbility().addEffect(new ErraticExplosionEffect());
     }
 
-    public ErraticExplosion(final ErraticExplosion card) {
+    private ErraticExplosion(final ErraticExplosion card) {
         super(card);
     }
 

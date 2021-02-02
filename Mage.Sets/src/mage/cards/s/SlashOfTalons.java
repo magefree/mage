@@ -22,7 +22,7 @@ public final class SlashOfTalons extends CardImpl {
         getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());
     }
 
-    public SlashOfTalons(final SlashOfTalons card) {
+    private SlashOfTalons(final SlashOfTalons card) {
         super(card);
     }
 

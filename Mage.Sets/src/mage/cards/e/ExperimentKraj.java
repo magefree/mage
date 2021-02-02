@@ -44,7 +44,7 @@ public final class ExperimentKraj extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ExperimentKraj(final ExperimentKraj card) {
+    private ExperimentKraj(final ExperimentKraj card) {
         super(card);
     }
 

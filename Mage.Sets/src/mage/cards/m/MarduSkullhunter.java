@@ -43,7 +43,7 @@ public final class MarduSkullhunter extends CardImpl {
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public MarduSkullhunter(final MarduSkullhunter card) {
+    private MarduSkullhunter(final MarduSkullhunter card) {
         super(card);
     }
 

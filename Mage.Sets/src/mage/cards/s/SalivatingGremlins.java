@@ -41,7 +41,7 @@ public final class SalivatingGremlins extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SalivatingGremlins(final SalivatingGremlins card) {
+    private SalivatingGremlins(final SalivatingGremlins card) {
         super(card);
     }
 

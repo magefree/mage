@@ -28,7 +28,7 @@ public final class SkywinderDrake extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public SkywinderDrake(final SkywinderDrake card) {
+    private SkywinderDrake(final SkywinderDrake card) {
         super(card);
     }
 

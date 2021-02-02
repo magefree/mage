@@ -28,7 +28,7 @@ public final class PlaneswalkersFury extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PlaneswalkersFury(final PlaneswalkersFury card) {
+    private PlaneswalkersFury(final PlaneswalkersFury card) {
         super(card);
     }
 

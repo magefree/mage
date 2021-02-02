@@ -50,7 +50,7 @@ public final class MausoleumWanderer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MausoleumWanderer(final MausoleumWanderer card) {
+    private MausoleumWanderer(final MausoleumWanderer card) {
         super(card);
     }
 

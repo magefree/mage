@@ -35,7 +35,7 @@ public final class HondenOfLifesWeb extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SpiritToken(), new PermanentsOnBattlefieldCount(filter)), TargetController.YOU, false));
     }
 
-    public HondenOfLifesWeb(final HondenOfLifesWeb card) {
+    private HondenOfLifesWeb(final HondenOfLifesWeb card) {
         super(card);
     }
 

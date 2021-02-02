@@ -21,7 +21,7 @@ public final class MindSpring extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.instance));
     }
 
-    public MindSpring(final MindSpring card) {
+    private MindSpring(final MindSpring card) {
         super(card);
     }
 

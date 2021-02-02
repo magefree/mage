@@ -25,7 +25,7 @@ public final class MountainGoat extends CardImpl {
         this.addAbility(new MountainwalkAbility());
     }
 
-    public MountainGoat(final MountainGoat card) {
+    private MountainGoat(final MountainGoat card) {
         super(card);
     }
 

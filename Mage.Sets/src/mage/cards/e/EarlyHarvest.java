@@ -29,7 +29,7 @@ public final class EarlyHarvest extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public EarlyHarvest(final EarlyHarvest card) {
+    private EarlyHarvest(final EarlyHarvest card) {
         super(card);
     }
 

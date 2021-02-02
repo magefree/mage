@@ -42,7 +42,7 @@ public final class SanguineGlorifier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SanguineGlorifier(final SanguineGlorifier card) {
+    private SanguineGlorifier(final SanguineGlorifier card) {
         super(card);
     }
 

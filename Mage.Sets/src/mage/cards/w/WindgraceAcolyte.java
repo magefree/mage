@@ -36,7 +36,7 @@ public final class WindgraceAcolyte extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WindgraceAcolyte(final WindgraceAcolyte card) {
+    private WindgraceAcolyte(final WindgraceAcolyte card) {
         super(card);
     }
 

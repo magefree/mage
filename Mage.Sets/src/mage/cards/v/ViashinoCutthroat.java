@@ -31,7 +31,7 @@ public final class ViashinoCutthroat extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.ANY, false));
     }
 
-    public ViashinoCutthroat(final ViashinoCutthroat card) {
+    private ViashinoCutthroat(final ViashinoCutthroat card) {
         super(card);
     }
 

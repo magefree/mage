@@ -44,7 +44,7 @@ public final class WalkerOfTheWastes extends CardImpl {
                 new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield)));
     }
 
-    public WalkerOfTheWastes(final WalkerOfTheWastes card) {
+    private WalkerOfTheWastes(final WalkerOfTheWastes card) {
         super(card);
     }
 

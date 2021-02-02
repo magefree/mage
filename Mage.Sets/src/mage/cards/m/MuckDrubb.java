@@ -59,7 +59,7 @@ public final class MuckDrubb extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{2}{B}")));
     }
 
-    public MuckDrubb(final MuckDrubb card) {
+    private MuckDrubb(final MuckDrubb card) {
         super(card);
     }
 

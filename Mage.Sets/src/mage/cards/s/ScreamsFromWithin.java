@@ -49,7 +49,7 @@ public final class ScreamsFromWithin extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new ScreamsFromWithinEffect(), "enchanted creature"));
     }
 
-    public ScreamsFromWithin(final ScreamsFromWithin card) {
+    private ScreamsFromWithin(final ScreamsFromWithin card) {
         super(card);
     }
 

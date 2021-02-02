@@ -48,7 +48,7 @@ public final class MinaAndDennWildborn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MinaAndDennWildborn(final MinaAndDennWildborn card) {
+    private MinaAndDennWildborn(final MinaAndDennWildborn card) {
         super(card);
     }
 

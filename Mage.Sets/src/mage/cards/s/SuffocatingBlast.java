@@ -29,7 +29,7 @@ public final class SuffocatingBlast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SuffocatingBlast(final SuffocatingBlast card) {
+    private SuffocatingBlast(final SuffocatingBlast card) {
         super(card);
     }
 

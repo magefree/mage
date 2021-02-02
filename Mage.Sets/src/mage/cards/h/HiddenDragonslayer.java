@@ -51,7 +51,7 @@ public final class HiddenDragonslayer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HiddenDragonslayer(final HiddenDragonslayer card) {
+    private HiddenDragonslayer(final HiddenDragonslayer card) {
         super(card);
     }
 

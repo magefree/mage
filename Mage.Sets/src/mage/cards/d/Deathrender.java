@@ -39,7 +39,7 @@ public final class Deathrender extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public Deathrender(final Deathrender card) {
+    private Deathrender(final Deathrender card) {
         super(card);
     }
 

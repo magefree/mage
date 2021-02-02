@@ -35,7 +35,7 @@ public final class DauntingDefender extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DauntingDefenderEffect(1)));
     }
 
-    public DauntingDefender(final DauntingDefender card) {
+    private DauntingDefender(final DauntingDefender card) {
         super(card);
     }
 

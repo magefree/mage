@@ -39,7 +39,7 @@ public final class OonasProwler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OonasProwler(final OonasProwler card) {
+    private OonasProwler(final OonasProwler card) {
         super(card);
     }
 

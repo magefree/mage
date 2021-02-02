@@ -48,7 +48,7 @@ public final class ErtaiTheCorrupted extends CardImpl {
         this.addAbility(ability);
 }
 
-    public ErtaiTheCorrupted(final ErtaiTheCorrupted card) {
+    private ErtaiTheCorrupted(final ErtaiTheCorrupted card) {
         super(card);
     }
 

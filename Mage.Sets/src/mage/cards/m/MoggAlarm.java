@@ -34,7 +34,7 @@ public final class MoggAlarm extends CardImpl {
         
     }
 
-    public MoggAlarm(final MoggAlarm card) {
+    private MoggAlarm(final MoggAlarm card) {
         super(card);
     }
 

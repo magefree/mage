@@ -31,7 +31,7 @@ public final class MercurialGeists extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false));
     }
 
-    public MercurialGeists(final MercurialGeists card) {
+    private MercurialGeists(final MercurialGeists card) {
         super(card);
     }
 

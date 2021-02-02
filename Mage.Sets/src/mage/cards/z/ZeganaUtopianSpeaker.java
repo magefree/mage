@@ -65,7 +65,7 @@ public final class ZeganaUtopianSpeaker extends CardImpl {
         ));
     }
 
-    public ZeganaUtopianSpeaker(final ZeganaUtopianSpeaker card) {
+    private ZeganaUtopianSpeaker(final ZeganaUtopianSpeaker card) {
         super(card);
     }
 

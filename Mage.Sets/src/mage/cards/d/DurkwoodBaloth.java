@@ -27,7 +27,7 @@ public final class DurkwoodBaloth extends CardImpl {
         this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{G"), this));
     }
 
-    public DurkwoodBaloth(final DurkwoodBaloth card) {
+    private DurkwoodBaloth(final DurkwoodBaloth card) {
         super(card);
     }
 

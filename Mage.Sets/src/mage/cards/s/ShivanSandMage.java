@@ -50,7 +50,7 @@ public final class ShivanSandMage extends CardImpl {
         this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{R}"), this));
     }
 
-    public ShivanSandMage(final ShivanSandMage card) {
+    private ShivanSandMage(final ShivanSandMage card) {
         super(card);
     }
 

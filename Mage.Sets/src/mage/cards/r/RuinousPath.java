@@ -26,7 +26,7 @@ public final class RuinousPath extends CardImpl {
         this.addAbility(new AwakenAbility(this, 4, "{5}{B}{B}"));
     }
 
-    public RuinousPath(final RuinousPath card) {
+    private RuinousPath(final RuinousPath card) {
         super(card);
     }
 

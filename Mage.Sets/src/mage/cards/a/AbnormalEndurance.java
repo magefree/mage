@@ -32,7 +32,7 @@ public final class AbnormalEndurance extends CardImpl {
         ));
     }
 
-    public AbnormalEndurance(final AbnormalEndurance card) {
+    private AbnormalEndurance(final AbnormalEndurance card) {
         super(card);
     }
 

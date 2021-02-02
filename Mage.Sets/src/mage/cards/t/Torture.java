@@ -47,7 +47,7 @@ public final class Torture extends CardImpl {
                 new ManaCostsImpl("{1}{B}")));
     }
 
-    public Torture(final Torture card) {
+    private Torture(final Torture card) {
         super(card);
     }
 

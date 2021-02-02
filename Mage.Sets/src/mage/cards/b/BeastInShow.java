@@ -25,7 +25,7 @@ public final class BeastInShow extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public BeastInShow(final BeastInShow card) {
+    private BeastInShow(final BeastInShow card) {
         super(card);
     }
 

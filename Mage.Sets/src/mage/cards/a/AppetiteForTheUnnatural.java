@@ -25,7 +25,7 @@ public final class AppetiteForTheUnnatural extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
-    public AppetiteForTheUnnatural(final AppetiteForTheUnnatural card) {
+    private AppetiteForTheUnnatural(final AppetiteForTheUnnatural card) {
         super(card);
     }
 

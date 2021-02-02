@@ -44,7 +44,7 @@ public final class Masticore extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new GenericManaCost(2)));
     }
 
-    public Masticore(final Masticore card) {
+    private Masticore(final Masticore card) {
         super(card);
     }
 

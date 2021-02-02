@@ -40,7 +40,7 @@ public final class AberrantResearcher extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AberrantResearcherEffect(), TargetController.YOU, false));
     }
 
-    public AberrantResearcher(final AberrantResearcher card) {
+    private AberrantResearcher(final AberrantResearcher card) {
         super(card);
     }
 

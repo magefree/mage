@@ -37,7 +37,7 @@ public final class SpiritOfResistance extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public SpiritOfResistance(final SpiritOfResistance card) {
+    private SpiritOfResistance(final SpiritOfResistance card) {
         super(card);
     }
 

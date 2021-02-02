@@ -38,7 +38,7 @@ public final class DawntreaderElk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DawntreaderElk(final DawntreaderElk card) {
+    private DawntreaderElk(final DawntreaderElk card) {
         super(card);
     }
 

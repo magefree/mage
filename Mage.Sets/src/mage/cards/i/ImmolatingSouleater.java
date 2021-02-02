@@ -32,7 +32,7 @@ public final class ImmolatingSouleater extends CardImpl {
                 new PhyrexianManaCost(ColoredManaSymbol.R)));
     }
 
-    public ImmolatingSouleater(final ImmolatingSouleater card) {
+    private ImmolatingSouleater(final ImmolatingSouleater card) {
         super(card);
     }
 

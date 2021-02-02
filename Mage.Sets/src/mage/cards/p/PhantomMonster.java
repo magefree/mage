@@ -25,7 +25,7 @@ public final class PhantomMonster extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public PhantomMonster(final PhantomMonster card) {
+    private PhantomMonster(final PhantomMonster card) {
         super(card);
     }
 

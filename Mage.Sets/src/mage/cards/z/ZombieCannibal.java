@@ -34,7 +34,7 @@ public final class ZombieCannibal extends CardImpl {
         this.addAbility(new ZombieCannibalTriggeredAbility());
     }
 
-    public ZombieCannibal(final ZombieCannibal card) {
+    private ZombieCannibal(final ZombieCannibal card) {
         super(card);
     }
 

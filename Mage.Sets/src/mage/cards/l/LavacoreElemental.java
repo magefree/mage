@@ -46,7 +46,7 @@ public final class LavacoreElemental extends CardImpl {
         ));
     }
 
-    public LavacoreElemental(final LavacoreElemental card) {
+    private LavacoreElemental(final LavacoreElemental card) {
         super(card);
     }
 

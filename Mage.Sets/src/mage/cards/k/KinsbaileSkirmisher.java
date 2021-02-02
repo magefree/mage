@@ -31,7 +31,7 @@ public final class KinsbaileSkirmisher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KinsbaileSkirmisher(final KinsbaileSkirmisher card) {
+    private KinsbaileSkirmisher(final KinsbaileSkirmisher card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class Reknit extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
-    public Reknit(final Reknit card) {
+    private Reknit(final Reknit card) {
         super(card);
     }
 

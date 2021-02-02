@@ -38,7 +38,7 @@ public final class WalkingDesecration extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WalkingDesecration(final WalkingDesecration card) {
+    private WalkingDesecration(final WalkingDesecration card) {
         super(card);
     }
 

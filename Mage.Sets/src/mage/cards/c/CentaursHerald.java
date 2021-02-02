@@ -35,7 +35,7 @@ public final class CentaursHerald extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CentaursHerald(final CentaursHerald card) {
+    private CentaursHerald(final CentaursHerald card) {
         super(card);
     }
 

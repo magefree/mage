@@ -35,7 +35,7 @@ public final class GripOfDesolation extends CardImpl {
 
     }
 
-    public GripOfDesolation(final GripOfDesolation card) {
+    private GripOfDesolation(final GripOfDesolation card) {
         super(card);
     }
 

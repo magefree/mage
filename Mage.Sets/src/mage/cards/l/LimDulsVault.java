@@ -25,7 +25,7 @@ public final class LimDulsVault extends CardImpl {
         this.getSpellAbility().addEffect(new LimDulsVaultEffect());
     }
 
-    public LimDulsVault(final LimDulsVault card) {
+    private LimDulsVault(final LimDulsVault card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class BywayCourier extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new InvestigateEffect(), false));
     }
 
-    public BywayCourier(final BywayCourier card) {
+    private BywayCourier(final BywayCourier card) {
         super(card);
     }
 

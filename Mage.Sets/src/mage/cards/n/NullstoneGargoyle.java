@@ -38,7 +38,7 @@ public final class NullstoneGargoyle extends CardImpl {
         this.addAbility(new NullstoneGargoyleTriggeredAbility(), new SpellsCastWatcher());
     }
 
-    public NullstoneGargoyle(final NullstoneGargoyle card) {
+    private NullstoneGargoyle(final NullstoneGargoyle card) {
         super(card);
     }
 

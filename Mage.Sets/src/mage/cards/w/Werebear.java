@@ -46,7 +46,7 @@ public final class Werebear extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public Werebear(final Werebear card) {
+    private Werebear(final Werebear card) {
         super(card);
     }
 

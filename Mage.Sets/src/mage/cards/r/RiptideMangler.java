@@ -39,7 +39,7 @@ public final class RiptideMangler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RiptideMangler(final RiptideMangler card) {
+    private RiptideMangler(final RiptideMangler card) {
         super(card);
     }
 

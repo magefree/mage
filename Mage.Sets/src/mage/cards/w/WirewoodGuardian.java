@@ -28,7 +28,7 @@ public final class WirewoodGuardian extends CardImpl {
         this.addAbility(new ForestcyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public WirewoodGuardian(final WirewoodGuardian card) {
+    private WirewoodGuardian(final WirewoodGuardian card) {
         super(card);
     }
 

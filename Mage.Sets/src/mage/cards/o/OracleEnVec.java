@@ -52,7 +52,7 @@ public final class OracleEnVec extends CardImpl {
         this.addAbility(ability, new AttackedThisTurnWatcher());
     }
 
-    public OracleEnVec(final OracleEnVec card) {
+    private OracleEnVec(final OracleEnVec card) {
         super(card);
     }
 

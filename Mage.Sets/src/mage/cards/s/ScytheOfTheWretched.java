@@ -49,7 +49,7 @@ public final class ScytheOfTheWretched extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
     }
 
-    public ScytheOfTheWretched(final ScytheOfTheWretched card) {
+    private ScytheOfTheWretched(final ScytheOfTheWretched card) {
         super(card);
     }
 

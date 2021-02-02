@@ -37,7 +37,7 @@ public final class GhostTactician extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhostTactician(final GhostTactician card) {
+    private GhostTactician(final GhostTactician card) {
         super(card);
     }
 

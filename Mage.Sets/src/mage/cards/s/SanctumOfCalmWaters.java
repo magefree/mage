@@ -45,7 +45,7 @@ public final class SanctumOfCalmWaters extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SanctumOfCalmWaters(final SanctumOfCalmWaters card) {
+    private SanctumOfCalmWaters(final SanctumOfCalmWaters card) {
         super(card);
     }
 

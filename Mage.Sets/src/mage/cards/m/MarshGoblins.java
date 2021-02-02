@@ -26,7 +26,7 @@ public final class MarshGoblins extends CardImpl {
         this.addAbility(new SwampwalkAbility());
     }
 
-    public MarshGoblins(final MarshGoblins card) {
+    private MarshGoblins(final MarshGoblins card) {
         super(card);
     }
 

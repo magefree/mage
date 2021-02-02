@@ -29,7 +29,7 @@ public final class SpiteflameWitch extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeAllPlayersEffect(1), new ManaCostsImpl("{B}{R}")));
     }
 
-    public SpiteflameWitch(final SpiteflameWitch card) {
+    private SpiteflameWitch(final SpiteflameWitch card) {
         super(card);
     }
 

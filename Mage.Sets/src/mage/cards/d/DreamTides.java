@@ -39,7 +39,7 @@ public final class DreamTides extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DreamTidesEffect(), TargetController.ANY, false));
     }
 
-    public DreamTides(final DreamTides card) {
+    private DreamTides(final DreamTides card) {
         super(card);
     }
 

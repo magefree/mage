@@ -45,7 +45,7 @@ public final class UnquestionedAuthority extends CardImpl {
                 new GainAbilityAttachedEffect(new ProtectionAbility(FILTER_PERMANENT_CREATURES), AttachmentType.AURA)));
     }
 
-    public UnquestionedAuthority(final UnquestionedAuthority card) {
+    private UnquestionedAuthority(final UnquestionedAuthority card) {
         super(card);
     }
 

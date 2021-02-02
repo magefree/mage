@@ -42,7 +42,7 @@ public final class RangerOfEos extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
     }
 
-    public RangerOfEos(final RangerOfEos card) {
+    private RangerOfEos(final RangerOfEos card) {
         super(card);
     }
 

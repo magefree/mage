@@ -37,7 +37,7 @@ public final class BattleflightEagle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BattleflightEagle(final BattleflightEagle card) {
+    private BattleflightEagle(final BattleflightEagle card) {
         super(card);
     }
 

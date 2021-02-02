@@ -36,7 +36,7 @@ public final class Solarion extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost()));
     }
 
-    public Solarion(final Solarion card) {
+    private Solarion(final Solarion card) {
         super(card);
     }
 

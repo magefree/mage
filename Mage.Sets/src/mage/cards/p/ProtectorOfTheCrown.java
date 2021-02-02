@@ -41,7 +41,7 @@ public final class ProtectorOfTheCrown extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectorOfTheCrownEffect()));
     }
 
-    public ProtectorOfTheCrown(final ProtectorOfTheCrown card) {
+    private ProtectorOfTheCrown(final ProtectorOfTheCrown card) {
         super(card);
     }
 

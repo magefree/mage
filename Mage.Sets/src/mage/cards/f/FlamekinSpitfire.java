@@ -32,7 +32,7 @@ public final class FlamekinSpitfire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlamekinSpitfire(final FlamekinSpitfire card) {
+    private FlamekinSpitfire(final FlamekinSpitfire card) {
         super(card);
     }
 

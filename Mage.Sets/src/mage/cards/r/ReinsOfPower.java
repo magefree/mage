@@ -39,7 +39,7 @@ public final class ReinsOfPower extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public ReinsOfPower(final ReinsOfPower card) {
+    private ReinsOfPower(final ReinsOfPower card) {
         super(card);
     }
 

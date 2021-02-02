@@ -37,7 +37,7 @@ public final class PhyrexianNegator extends CardImpl {
         this.addAbility(new PhyrexianNegatorTriggeredAbility());
     }
 
-    public PhyrexianNegator(final PhyrexianNegator card) {
+    private PhyrexianNegator(final PhyrexianNegator card) {
         super(card);
     }
 

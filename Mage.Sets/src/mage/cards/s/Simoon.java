@@ -30,7 +30,7 @@ public final class Simoon extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public Simoon(final Simoon card) {
+    private Simoon(final Simoon card) {
         super(card);
     }
 

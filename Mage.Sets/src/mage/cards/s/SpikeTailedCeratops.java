@@ -29,7 +29,7 @@ public final class SpikeTailedCeratops extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.WhileOnBattlefield, 1)));
     }
 
-    public SpikeTailedCeratops(final SpikeTailedCeratops card) {
+    private SpikeTailedCeratops(final SpikeTailedCeratops card) {
         super(card);
     }
 

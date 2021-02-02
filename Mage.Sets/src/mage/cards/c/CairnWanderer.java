@@ -36,7 +36,7 @@ public final class CairnWanderer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CairnWandererEffect()));
     }
 
-    public CairnWanderer(final CairnWanderer card) {
+    private CairnWanderer(final CairnWanderer card) {
         super(card);
     }
 

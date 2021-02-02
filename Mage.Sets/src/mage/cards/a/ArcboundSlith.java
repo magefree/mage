@@ -31,7 +31,7 @@ public final class ArcboundSlith extends CardImpl {
         this.addAbility(new ModularAbility(this, 1));
     }
 
-    public ArcboundSlith(final ArcboundSlith card) {
+    private ArcboundSlith(final ArcboundSlith card) {
         super(card);
     }
 

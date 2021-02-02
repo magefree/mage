@@ -37,7 +37,7 @@ public final class MwonvuliOoze extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new MwonvuliOozePTValue(), Duration.EndOfGame)));
     }
 
-    public MwonvuliOoze(final MwonvuliOoze card) {
+    private MwonvuliOoze(final MwonvuliOoze card) {
         super(card);
     }
 

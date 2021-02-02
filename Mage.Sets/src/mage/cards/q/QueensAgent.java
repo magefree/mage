@@ -32,7 +32,7 @@ public final class QueensAgent extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect()));
     }
 
-    public QueensAgent(final QueensAgent card) {
+    private QueensAgent(final QueensAgent card) {
         super(card);
     }
 

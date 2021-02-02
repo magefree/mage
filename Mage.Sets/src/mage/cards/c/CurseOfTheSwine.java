@@ -34,7 +34,7 @@ public final class CurseOfTheSwine extends CardImpl {
 
     }
 
-    public CurseOfTheSwine(final CurseOfTheSwine card) {
+    private CurseOfTheSwine(final CurseOfTheSwine card) {
         super(card);
     }
 

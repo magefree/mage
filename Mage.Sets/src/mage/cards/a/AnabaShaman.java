@@ -36,7 +36,7 @@ public final class AnabaShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AnabaShaman(final AnabaShaman card) {
+    private AnabaShaman(final AnabaShaman card) {
         super(card);
     }
 

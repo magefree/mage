@@ -32,7 +32,7 @@ public final class Despise extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
     }
 
-    public Despise(final Despise card) {
+    private Despise(final Despise card) {
         super(card);
     }
 

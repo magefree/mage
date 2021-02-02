@@ -27,7 +27,7 @@ public final class SwellOfCourage extends CardImpl {
         this.addAbility(new ReinforceAbility(ManacostVariableValue.instance, new ManaCostsImpl("{X}{W}{W}")));
     }
 
-    public SwellOfCourage(final SwellOfCourage card) {
+    private SwellOfCourage(final SwellOfCourage card) {
         super(card);
     }
 

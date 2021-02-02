@@ -26,7 +26,7 @@ public final class GhirapurOsprey extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public GhirapurOsprey(final GhirapurOsprey card) {
+    private GhirapurOsprey(final GhirapurOsprey card) {
         super(card);
     }
 

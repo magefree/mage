@@ -37,7 +37,7 @@ public final class VolrathsGardens extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VolrathsGardens(final VolrathsGardens card) {
+    private VolrathsGardens(final VolrathsGardens card) {
         super(card);
     }
 

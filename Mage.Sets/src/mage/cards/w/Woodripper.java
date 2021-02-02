@@ -38,7 +38,7 @@ public final class Woodripper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Woodripper(final Woodripper card) {
+    private Woodripper(final Woodripper card) {
         super(card);
     }
 

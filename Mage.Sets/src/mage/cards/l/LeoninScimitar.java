@@ -28,7 +28,7 @@ public final class LeoninScimitar extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public LeoninScimitar(final LeoninScimitar card) {
+    private LeoninScimitar(final LeoninScimitar card) {
         super(card);
     }
 

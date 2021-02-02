@@ -29,7 +29,7 @@ public final class BogInitiate extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new ManaCostsImpl("{1}")));
     }
 
-    public BogInitiate(final BogInitiate card) {
+    private BogInitiate(final BogInitiate card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class RancidRats extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public RancidRats(final RancidRats card) {
+    private RancidRats(final RancidRats card) {
         super(card);
     }
 

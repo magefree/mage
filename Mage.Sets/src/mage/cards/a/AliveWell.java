@@ -34,7 +34,7 @@ public final class AliveWell extends SplitCard {
 
     }
 
-    public AliveWell(final AliveWell card) {
+    private AliveWell(final AliveWell card) {
         super(card);
     }
 

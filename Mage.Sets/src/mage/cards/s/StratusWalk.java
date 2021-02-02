@@ -48,7 +48,7 @@ public final class StratusWalk extends CardImpl {
         
     }
 
-    public StratusWalk(final StratusWalk card) {
+    private StratusWalk(final StratusWalk card) {
         super(card);
     }
 

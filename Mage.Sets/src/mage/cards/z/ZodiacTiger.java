@@ -26,7 +26,7 @@ public final class ZodiacTiger extends CardImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public ZodiacTiger(final ZodiacTiger card) {
+    private ZodiacTiger(final ZodiacTiger card) {
         super(card);
     }
 

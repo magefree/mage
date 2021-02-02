@@ -27,7 +27,7 @@ public final class AbyssalGatekeeper extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new SacrificeAllEffect(1, new FilterControlledCreaturePermanent("creature"))));
     }
 
-    public AbyssalGatekeeper(final AbyssalGatekeeper card) {
+    private AbyssalGatekeeper(final AbyssalGatekeeper card) {
         super(card);
     }
 

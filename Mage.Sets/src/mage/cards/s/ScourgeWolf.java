@@ -38,7 +38,7 @@ public final class ScourgeWolf extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(DeliriumHint.instance));
     }
 
-    public ScourgeWolf(final ScourgeWolf card) {
+    private ScourgeWolf(final ScourgeWolf card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class Tremor extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filter));
     }
 
-    public Tremor(final Tremor card) {
+    private Tremor(final Tremor card) {
         super(card);
     }
 

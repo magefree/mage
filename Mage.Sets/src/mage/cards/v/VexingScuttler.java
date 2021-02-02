@@ -49,7 +49,7 @@ public final class VexingScuttler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VexingScuttler(final VexingScuttler card) {
+    private VexingScuttler(final VexingScuttler card) {
         super(card);
     }
 

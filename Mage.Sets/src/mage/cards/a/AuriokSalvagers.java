@@ -43,7 +43,7 @@ public final class AuriokSalvagers extends CardImpl {
 
     }
 
-    public AuriokSalvagers(final AuriokSalvagers card) {
+    private AuriokSalvagers(final AuriokSalvagers card) {
         super(card);
     }
 

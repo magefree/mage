@@ -31,7 +31,7 @@ public final class BarrinsSpite extends CardImpl {
 
     }
 
-    public BarrinsSpite(final BarrinsSpite card) {
+    private BarrinsSpite(final BarrinsSpite card) {
         super(card);
     }
 

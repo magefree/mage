@@ -67,7 +67,7 @@ public final class RasputinDreamweaver extends CardImpl {
         this.addAbility(new CantHaveMoreThanAmountCountersSourceAbility(CounterType.DREAM, 7));
     }
 
-    public RasputinDreamweaver(final RasputinDreamweaver card) {
+    private RasputinDreamweaver(final RasputinDreamweaver card) {
         super(card);
     }
 

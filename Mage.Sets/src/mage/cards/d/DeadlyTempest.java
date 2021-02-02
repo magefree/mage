@@ -29,7 +29,7 @@ public final class DeadlyTempest extends CardImpl {
         getSpellAbility().addEffect(new DeadlyTempestEffect());
     }
 
-    public DeadlyTempest(final DeadlyTempest card) {
+    private DeadlyTempest(final DeadlyTempest card) {
         super(card);
     }
 

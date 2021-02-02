@@ -26,7 +26,7 @@ public final class ViashinoRunner extends CardImpl {
         this.addAbility(new MenaceAbility());
     }
 
-    public ViashinoRunner(final ViashinoRunner card) {
+    private ViashinoRunner(final ViashinoRunner card) {
         super(card);
     }
 

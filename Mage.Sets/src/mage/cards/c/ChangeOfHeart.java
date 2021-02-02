@@ -26,7 +26,7 @@ public final class ChangeOfHeart extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ChangeOfHeart(final ChangeOfHeart card) {
+    private ChangeOfHeart(final ChangeOfHeart card) {
         super(card);
     }
 

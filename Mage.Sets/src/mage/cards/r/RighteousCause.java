@@ -21,7 +21,7 @@ public final class RighteousCause extends CardImpl {
         this.addAbility(new AttacksAllTriggeredAbility(new GainLifeEffect(1), false));
     }
 
-    public RighteousCause(final RighteousCause card) {
+    private RighteousCause(final RighteousCause card) {
         super(card);
     }
 

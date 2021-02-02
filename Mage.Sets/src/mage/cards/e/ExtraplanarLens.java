@@ -52,7 +52,7 @@ public final class ExtraplanarLens extends CardImpl {
 
     }
 
-    public ExtraplanarLens(final ExtraplanarLens card) {
+    private ExtraplanarLens(final ExtraplanarLens card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class Coretapper extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public Coretapper(final Coretapper card) {
+    private Coretapper(final Coretapper card) {
         super(card);
     }
 

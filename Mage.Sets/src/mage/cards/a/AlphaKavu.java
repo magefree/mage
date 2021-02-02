@@ -41,7 +41,7 @@ public final class AlphaKavu extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AlphaKavu(final AlphaKavu card) {
+    private AlphaKavu(final AlphaKavu card) {
         super(card);
     }
 

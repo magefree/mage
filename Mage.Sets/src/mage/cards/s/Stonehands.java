@@ -44,7 +44,7 @@ public final class Stonehands extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public Stonehands(final Stonehands card) {
+    private Stonehands(final Stonehands card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class ObeliskOfUrd extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ObeliskOfUrdBoostEffect()));
     }
 
-    public ObeliskOfUrd(final ObeliskOfUrd card) {
+    private ObeliskOfUrd(final ObeliskOfUrd card) {
         super(card);
     }
 

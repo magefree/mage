@@ -34,7 +34,7 @@ public final class GreenbeltRampager extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GreenbeltRampagerEffect(), false));
     }
 
-    public GreenbeltRampager(final GreenbeltRampager card) {
+    private GreenbeltRampager(final GreenbeltRampager card) {
         super(card);
     }
 

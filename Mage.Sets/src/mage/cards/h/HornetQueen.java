@@ -34,7 +34,7 @@ public final class HornetQueen extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new HornetQueenInsectToken(), 4), false));
     }
 
-    public HornetQueen(final HornetQueen card) {
+    private HornetQueen(final HornetQueen card) {
         super(card);
     }
 

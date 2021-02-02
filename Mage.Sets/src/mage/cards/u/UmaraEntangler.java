@@ -27,7 +27,7 @@ public final class UmaraEntangler extends CardImpl {
         this.addAbility(new ProwessAbility());
     }
 
-    public UmaraEntangler(final UmaraEntangler card) {
+    private UmaraEntangler(final UmaraEntangler card) {
         super(card);
     }
 

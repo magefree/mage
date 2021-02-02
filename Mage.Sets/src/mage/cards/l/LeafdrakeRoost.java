@@ -48,7 +48,7 @@ public final class LeafdrakeRoost extends CardImpl {
 
     }
 
-    public LeafdrakeRoost(final LeafdrakeRoost card) {
+    private LeafdrakeRoost(final LeafdrakeRoost card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class RafiqOfTheMany extends CardImpl {
         this.addAbility(new RafiqOfTheManyAbility());
     }
 
-    public RafiqOfTheMany(final RafiqOfTheMany card) {
+    private RafiqOfTheMany(final RafiqOfTheMany card) {
         super(card);
     }
 

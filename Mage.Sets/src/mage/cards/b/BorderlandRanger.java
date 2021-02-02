@@ -30,7 +30,7 @@ public final class BorderlandRanger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, false), true));
     }
 
-    public BorderlandRanger(final BorderlandRanger card) {
+    private BorderlandRanger(final BorderlandRanger card) {
         super(card);
     }
 

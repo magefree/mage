@@ -26,7 +26,7 @@ public final class RibCageSpider extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public RibCageSpider(final RibCageSpider card) {
+    private RibCageSpider(final RibCageSpider card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class VaultSkirge extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public VaultSkirge(final VaultSkirge card) {
+    private VaultSkirge(final VaultSkirge card) {
         super(card);
     }
 

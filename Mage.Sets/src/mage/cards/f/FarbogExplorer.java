@@ -26,7 +26,7 @@ public final class FarbogExplorer extends CardImpl {
         this.addAbility(new SwampwalkAbility());
     }
 
-    public FarbogExplorer(final FarbogExplorer card) {
+    private FarbogExplorer(final FarbogExplorer card) {
         super(card);
     }
 

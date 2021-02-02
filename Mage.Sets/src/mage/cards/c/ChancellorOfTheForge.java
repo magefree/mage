@@ -49,7 +49,7 @@ public final class ChancellorOfTheForge extends CardImpl {
                 .addHint(CreaturesYouControlHint.instance));
     }
 
-    public ChancellorOfTheForge(final ChancellorOfTheForge card) {
+    private ChancellorOfTheForge(final ChancellorOfTheForge card) {
         super(card);
     }
 

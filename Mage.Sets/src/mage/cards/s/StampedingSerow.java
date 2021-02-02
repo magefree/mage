@@ -38,7 +38,7 @@ public final class StampedingSerow extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), TargetController.YOU, false));
     }
 
-    public StampedingSerow(final StampedingSerow card) {
+    private StampedingSerow(final StampedingSerow card) {
         super(card);
     }
 

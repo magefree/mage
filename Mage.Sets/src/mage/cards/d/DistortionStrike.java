@@ -31,7 +31,7 @@ public final class DistortionStrike extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public DistortionStrike(final DistortionStrike card) {
+    private DistortionStrike(final DistortionStrike card) {
         super(card);
     }
 

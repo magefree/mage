@@ -34,7 +34,7 @@ public final class PygmyTroll extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
     }
 
-    public PygmyTroll(final PygmyTroll card) {
+    private PygmyTroll(final PygmyTroll card) {
         super(card);
     }
 

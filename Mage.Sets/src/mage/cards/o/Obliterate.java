@@ -35,7 +35,7 @@ public final class Obliterate extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public Obliterate(final Obliterate card) {
+    private Obliterate(final Obliterate card) {
         super(card);
     }
 

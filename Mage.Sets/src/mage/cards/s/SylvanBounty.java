@@ -26,7 +26,7 @@ public final class SylvanBounty extends CardImpl {
         this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}{G}")));
     }
 
-    public SylvanBounty(final SylvanBounty card) {
+    private SylvanBounty(final SylvanBounty card) {
         super(card);
     }
 

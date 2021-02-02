@@ -39,7 +39,7 @@ public final class ValdukKeeperOfTheFlame extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new ValdukKeeperOfTheFlameEffect(), TargetController.YOU, false));
     }
 
-    public ValdukKeeperOfTheFlame(final ValdukKeeperOfTheFlame card) {
+    private ValdukKeeperOfTheFlame(final ValdukKeeperOfTheFlame card) {
         super(card);
     }
 

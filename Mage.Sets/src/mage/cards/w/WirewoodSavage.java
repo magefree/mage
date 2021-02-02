@@ -35,7 +35,7 @@ public final class WirewoodSavage extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true));
     }
 
-    public WirewoodSavage(final WirewoodSavage card) {
+    private WirewoodSavage(final WirewoodSavage card) {
         super(card);
     }
 

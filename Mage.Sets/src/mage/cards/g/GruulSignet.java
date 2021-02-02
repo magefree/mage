@@ -25,7 +25,7 @@ public final class GruulSignet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GruulSignet(final GruulSignet card) {
+    private GruulSignet(final GruulSignet card) {
         super(card);
     }
 

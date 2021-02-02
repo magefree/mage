@@ -26,7 +26,7 @@ public final class FillWithFright extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }
 
-    public FillWithFright(final FillWithFright card) {
+    private FillWithFright(final FillWithFright card) {
         super(card);
     }
 

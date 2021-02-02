@@ -48,7 +48,7 @@ public final class VanquishersBanner extends CardImpl {
 
     }
 
-    public VanquishersBanner(final VanquishersBanner card) {
+    private VanquishersBanner(final VanquishersBanner card) {
         super(card);
     }
 

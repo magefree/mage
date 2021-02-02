@@ -48,7 +48,7 @@ public final class StormfrontRiders extends CardImpl {
 
     }
 
-    public StormfrontRiders(final StormfrontRiders card) {
+    private StormfrontRiders(final StormfrontRiders card) {
         super(card);
     }
 

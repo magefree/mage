@@ -31,7 +31,7 @@ public final class BuildersBane extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(BuildersBaneAdjuster.instance);
     }
 
-    public BuildersBane(final BuildersBane card) {
+    private BuildersBane(final BuildersBane card) {
         super(card);
     }
 

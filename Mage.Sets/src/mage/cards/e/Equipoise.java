@@ -37,7 +37,7 @@ public final class Equipoise extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Equipoise(final Equipoise card) {
+    private Equipoise(final Equipoise card) {
         super(card);
     }
 

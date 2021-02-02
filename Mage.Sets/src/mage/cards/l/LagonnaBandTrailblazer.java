@@ -29,7 +29,7 @@ public final class LagonnaBandTrailblazer extends CardImpl {
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 
-    public LagonnaBandTrailblazer(final LagonnaBandTrailblazer card) {
+    private LagonnaBandTrailblazer(final LagonnaBandTrailblazer card) {
         super(card);
     }
 

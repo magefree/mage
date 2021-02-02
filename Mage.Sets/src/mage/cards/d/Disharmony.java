@@ -33,7 +33,7 @@ public final class Disharmony extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
-    public Disharmony(final Disharmony card) {
+    private Disharmony(final Disharmony card) {
         super(card);
     }
 

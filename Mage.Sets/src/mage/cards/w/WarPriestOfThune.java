@@ -33,7 +33,7 @@ public final class WarPriestOfThune extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WarPriestOfThune(final WarPriestOfThune card) {
+    private WarPriestOfThune(final WarPriestOfThune card) {
         super(card);
     }
 

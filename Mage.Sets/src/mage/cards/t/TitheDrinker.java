@@ -29,7 +29,7 @@ public final class TitheDrinker extends CardImpl {
         this.addAbility(new ExtortAbility());
     }
 
-    public TitheDrinker(final TitheDrinker card) {
+    private TitheDrinker(final TitheDrinker card) {
         super(card);
     }
 

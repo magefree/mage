@@ -41,7 +41,7 @@ public final class NetherTraitor extends CardImpl {
         this.addAbility(new NetherTraitorTriggeredAbility());
     }
 
-    public NetherTraitor(final NetherTraitor card) {
+    private NetherTraitor(final NetherTraitor card) {
         super(card);
     }
 

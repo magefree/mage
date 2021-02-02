@@ -27,7 +27,7 @@ public final class MortusStrider extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect(false)));
     }
 
-    public MortusStrider(final MortusStrider card) {
+    private MortusStrider(final MortusStrider card) {
         super(card);
     }
 

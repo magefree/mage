@@ -28,7 +28,7 @@ public final class Char extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Char(final Char card) {
+    private Char(final Char card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class LeyWeaver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LeyWeaver(final LeyWeaver card) {
+    private LeyWeaver(final LeyWeaver card) {
         super(card);
     }
 

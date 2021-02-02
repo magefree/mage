@@ -31,7 +31,7 @@ public final class Doublecast extends CardImpl {
         );
     }
 
-    public Doublecast(final Doublecast card) {
+    private Doublecast(final Doublecast card) {
         super(card);
     }
 

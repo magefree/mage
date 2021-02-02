@@ -33,7 +33,7 @@ public final class IcatianPriest extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IcatianPriest(final IcatianPriest card) {
+    private IcatianPriest(final IcatianPriest card) {
         super(card);
     }
 

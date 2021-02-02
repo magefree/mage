@@ -28,7 +28,7 @@ public final class AetherMutation extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetConvertedManaCost.instance));
     }
 
-    public AetherMutation(final AetherMutation card) {
+    private AetherMutation(final AetherMutation card) {
         super(card);
     }
 

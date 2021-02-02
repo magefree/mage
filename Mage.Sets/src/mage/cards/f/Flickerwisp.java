@@ -51,7 +51,7 @@ public final class Flickerwisp extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Flickerwisp(final Flickerwisp card) {
+    private Flickerwisp(final Flickerwisp card) {
         super(card);
     }
 

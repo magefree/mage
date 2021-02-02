@@ -27,7 +27,7 @@ public final class BloodOgre extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public BloodOgre(final BloodOgre card) {
+    private BloodOgre(final BloodOgre card) {
         super(card);
     }
 

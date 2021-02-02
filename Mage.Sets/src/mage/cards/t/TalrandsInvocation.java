@@ -22,7 +22,7 @@ public final class TalrandsInvocation extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new DrakeToken(), 2));
     }
 
-    public TalrandsInvocation(final TalrandsInvocation card) {
+    private TalrandsInvocation(final TalrandsInvocation card) {
         super(card);
     }
 

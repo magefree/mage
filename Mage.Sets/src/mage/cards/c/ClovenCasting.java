@@ -37,7 +37,7 @@ public final class ClovenCasting extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(effect, new GenericManaCost(1)), filter, false, true));
     }
 
-    public ClovenCasting(final ClovenCasting card) {
+    private ClovenCasting(final ClovenCasting card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class ErayoSoratamiAscendant extends CardImpl {
 
     }
 
-    public ErayoSoratamiAscendant(final ErayoSoratamiAscendant card) {
+    private ErayoSoratamiAscendant(final ErayoSoratamiAscendant card) {
         super(card);
     }
 

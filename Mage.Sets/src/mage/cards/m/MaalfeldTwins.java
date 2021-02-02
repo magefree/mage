@@ -28,7 +28,7 @@ public final class MaalfeldTwins extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 2)));
     }
 
-    public MaalfeldTwins(final MaalfeldTwins card) {
+    private MaalfeldTwins(final MaalfeldTwins card) {
         super(card);
     }
 

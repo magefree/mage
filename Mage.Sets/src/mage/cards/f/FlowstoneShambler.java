@@ -30,7 +30,7 @@ public final class FlowstoneShambler extends CardImpl {
             new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public FlowstoneShambler(final FlowstoneShambler card) {
+    private FlowstoneShambler(final FlowstoneShambler card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class TormentedAngel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public TormentedAngel(final TormentedAngel card) {
+    private TormentedAngel(final TormentedAngel card) {
         super(card);
     }
 

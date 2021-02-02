@@ -33,7 +33,7 @@ public final class OvergrownArmasaur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OvergrownArmasaur(final OvergrownArmasaur card) {
+    private OvergrownArmasaur(final OvergrownArmasaur card) {
         super(card);
     }
 

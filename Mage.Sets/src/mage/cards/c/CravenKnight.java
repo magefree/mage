@@ -26,7 +26,7 @@ public final class CravenKnight extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public CravenKnight(final CravenKnight card) {
+    private CravenKnight(final CravenKnight card) {
         super(card);
     }
 

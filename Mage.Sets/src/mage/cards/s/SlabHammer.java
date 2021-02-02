@@ -40,7 +40,7 @@ public final class SlabHammer extends CardImpl {
 
     }
 
-    public SlabHammer(final SlabHammer card) {
+    private SlabHammer(final SlabHammer card) {
         super(card);
     }
 

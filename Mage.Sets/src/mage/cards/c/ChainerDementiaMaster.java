@@ -63,7 +63,7 @@ public final class ChainerDementiaMaster extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ExileAllEffect(filterPermanent), false));
     }
 
-    public ChainerDementiaMaster(final ChainerDementiaMaster card) {
+    private ChainerDementiaMaster(final ChainerDementiaMaster card) {
         super(card);
     }
 

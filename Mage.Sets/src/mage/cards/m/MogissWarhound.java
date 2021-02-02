@@ -45,7 +45,7 @@ public final class MogissWarhound extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MogissWarhound(final MogissWarhound card) {
+    private MogissWarhound(final MogissWarhound card) {
         super(card);
     }
 

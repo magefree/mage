@@ -33,7 +33,7 @@ public final class KamiOfFiresRoar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KamiOfFiresRoar(final KamiOfFiresRoar card) {
+    private KamiOfFiresRoar(final KamiOfFiresRoar card) {
         super(card);
     }
 

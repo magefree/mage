@@ -25,7 +25,7 @@ public final class NissasRenewal extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(7));
     }
 
-    public NissasRenewal(final NissasRenewal card) {
+    private NissasRenewal(final NissasRenewal card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class FontOfIre extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FontOfIre(final FontOfIre card) {
+    private FontOfIre(final FontOfIre card) {
         super(card);
     }
 

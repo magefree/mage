@@ -51,7 +51,7 @@ public final class Valor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, valorEffect));
     }
 
-    public Valor(final Valor card) {
+    private Valor(final Valor card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class InsideOut extends CardImpl {
         
     }
 
-    public InsideOut(final InsideOut card) {
+    private InsideOut(final InsideOut card) {
         super(card);
     }
 

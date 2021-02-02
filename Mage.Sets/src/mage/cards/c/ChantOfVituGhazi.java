@@ -32,7 +32,7 @@ public final class ChantOfVituGhazi extends CardImpl {
         this.getSpellAbility().addEffect(new ChantOfVituGhaziPreventEffect(StaticFilters.FILTER_PERMANENT_CREATURES, Duration.EndOfTurn, false));
     }
 
-    public ChantOfVituGhazi(final ChantOfVituGhazi card) {
+    private ChantOfVituGhazi(final ChantOfVituGhazi card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class UnderworldDreams extends CardImpl {
         this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(1, true, "that player"), false, true));
     }
 
-    public UnderworldDreams(final UnderworldDreams card) {
+    private UnderworldDreams(final UnderworldDreams card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class Enfeeblement extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-2, -2, Duration.WhileOnBattlefield)));
     }
 
-    public Enfeeblement(final Enfeeblement card) {
+    private Enfeeblement(final Enfeeblement card) {
         super(card);
     }
 

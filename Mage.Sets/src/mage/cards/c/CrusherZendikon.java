@@ -48,7 +48,7 @@ public final class CrusherZendikon extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public CrusherZendikon(final CrusherZendikon card) {
+    private CrusherZendikon(final CrusherZendikon card) {
         super(card);
     }
 

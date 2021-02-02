@@ -36,7 +36,7 @@ public final class LeechingSliver extends CardImpl {
         this.addAbility(new AttacksAllTriggeredAbility(new LoseLifeDefendingPlayerEffect(1, false), false, filter, SetTargetPointer.PLAYER, false));
     }
 
-    public LeechingSliver(final LeechingSliver card) {
+    private LeechingSliver(final LeechingSliver card) {
         super(card);
     }
 

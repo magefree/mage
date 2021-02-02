@@ -40,7 +40,7 @@ public final class CrimsonMuckwader extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
     }
 
-    public CrimsonMuckwader(final CrimsonMuckwader card) {
+    private CrimsonMuckwader(final CrimsonMuckwader card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class JabarisBanner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JabarisBanner(final JabarisBanner card) {
+    private JabarisBanner(final JabarisBanner card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class RavagingBlaze extends CardImpl {
             SpellMasteryCondition.instance, "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, Ravaging Blaze also deals X damage to that creature's controller."));
     }
 
-    public RavagingBlaze(final RavagingBlaze card) {
+    private RavagingBlaze(final RavagingBlaze card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class WatchfulAutomaton extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new ManaCostsImpl("{2}{U}")));
     }
 
-    public WatchfulAutomaton(final WatchfulAutomaton card) {
+    private WatchfulAutomaton(final WatchfulAutomaton card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class FriendlyFire extends CardImpl {
 
     }
 
-    public FriendlyFire(final FriendlyFire card) {
+    private FriendlyFire(final FriendlyFire card) {
         super(card);
     }
 

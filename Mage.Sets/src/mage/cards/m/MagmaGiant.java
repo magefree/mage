@@ -27,7 +27,7 @@ public final class MagmaGiant extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageEverythingEffect(2)));
     }
 
-    public MagmaGiant(final MagmaGiant card) {
+    private MagmaGiant(final MagmaGiant card) {
         super(card);
     }
 

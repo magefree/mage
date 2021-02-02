@@ -26,7 +26,7 @@ public final class SerrasBlessing extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures"))));
     }
 
-    public SerrasBlessing(final SerrasBlessing card) {
+    private SerrasBlessing(final SerrasBlessing card) {
         super(card);
     }
 

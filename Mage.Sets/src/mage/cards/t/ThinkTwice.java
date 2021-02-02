@@ -27,7 +27,7 @@ public final class ThinkTwice extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{U}"), TimingRule.INSTANT));
     }
 
-    public ThinkTwice(final ThinkTwice card) {
+    private ThinkTwice(final ThinkTwice card) {
         super(card);
     }
 

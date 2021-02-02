@@ -33,7 +33,7 @@ public final class BlatantThievery extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(BlatantThieveryAdjuster.instance);
     }
 
-    public BlatantThievery(final BlatantThievery card) {
+    private BlatantThievery(final BlatantThievery card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class Moonhold extends CardImpl {
         this.getSpellAbility().addWatcher(new ManaSpentToCastWatcher());
     }
 
-    public Moonhold(final Moonhold card) {
+    private Moonhold(final Moonhold card) {
         super(card);
     }
 

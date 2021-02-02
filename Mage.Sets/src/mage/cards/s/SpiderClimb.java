@@ -50,7 +50,7 @@ public final class SpiderClimb extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpiderClimb(final SpiderClimb card) {
+    private SpiderClimb(final SpiderClimb card) {
         super(card);
     }
 

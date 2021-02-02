@@ -34,7 +34,7 @@ public final class GiltLeafSeer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GiltLeafSeer(final GiltLeafSeer card) {
+    private GiltLeafSeer(final GiltLeafSeer card) {
         super(card);
     }
 

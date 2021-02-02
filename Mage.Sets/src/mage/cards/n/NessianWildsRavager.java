@@ -44,7 +44,7 @@ public final class NessianWildsRavager extends CardImpl {
                 "When {this} enters the battlefield, if its tribute wasn't paid, you may have {this} fight another target creature."));
     }
 
-    public NessianWildsRavager(final NessianWildsRavager card) {
+    private NessianWildsRavager(final NessianWildsRavager card) {
         super(card);
     }
 

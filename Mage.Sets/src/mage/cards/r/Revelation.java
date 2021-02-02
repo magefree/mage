@@ -25,7 +25,7 @@ public final class Revelation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.ANY)));
     }
 
-    public Revelation(final Revelation card) {
+    private Revelation(final Revelation card) {
         super(card);
     }
 

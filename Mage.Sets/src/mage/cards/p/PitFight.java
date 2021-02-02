@@ -33,7 +33,7 @@ public final class PitFight extends CardImpl {
         this.getSpellAbility().addTarget(target2);
     }
 
-    public PitFight(final PitFight card) {
+    private PitFight(final PitFight card) {
         super(card);
     }
 

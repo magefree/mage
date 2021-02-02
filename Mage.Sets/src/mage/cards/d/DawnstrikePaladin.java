@@ -30,7 +30,7 @@ public final class DawnstrikePaladin extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public DawnstrikePaladin(final DawnstrikePaladin card) {
+    private DawnstrikePaladin(final DawnstrikePaladin card) {
         super(card);
     }
 

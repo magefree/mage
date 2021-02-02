@@ -37,7 +37,7 @@ public final class PsychicIntrusion extends CardImpl {
 
     }
 
-    public PsychicIntrusion(final PsychicIntrusion card) {
+    private PsychicIntrusion(final PsychicIntrusion card) {
         super(card);
     }
 

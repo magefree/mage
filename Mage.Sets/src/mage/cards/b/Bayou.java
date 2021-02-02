@@ -22,7 +22,7 @@ public final class Bayou extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public Bayou(final Bayou card) {
+    private Bayou(final Bayou card) {
         super(card);
     }
 

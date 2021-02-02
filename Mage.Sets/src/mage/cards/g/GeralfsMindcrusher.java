@@ -35,7 +35,7 @@ public final class GeralfsMindcrusher extends CardImpl {
         this.addAbility(new UndyingAbility());
     }
 
-    public GeralfsMindcrusher(final GeralfsMindcrusher card) {
+    private GeralfsMindcrusher(final GeralfsMindcrusher card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class DeepwoodElder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeepwoodElder(final DeepwoodElder card) {
+    private DeepwoodElder(final DeepwoodElder card) {
         super(card);
     }
 

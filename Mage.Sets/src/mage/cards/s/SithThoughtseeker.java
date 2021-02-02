@@ -38,7 +38,7 @@ public final class SithThoughtseeker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SithThoughtseeker(final SithThoughtseeker card) {
+    private SithThoughtseeker(final SithThoughtseeker card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class RevelInRiches extends CardImpl {
                 "At the beginning of your upkeep, if you control ten or more Treasures, you win the game."));
     }
 
-    public RevelInRiches(final RevelInRiches card) {
+    private RevelInRiches(final RevelInRiches card) {
         super(card);
     }
 

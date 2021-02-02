@@ -43,7 +43,7 @@ public final class Songstitcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Songstitcher(final Songstitcher card) {
+    private Songstitcher(final Songstitcher card) {
         super(card);
     }
 

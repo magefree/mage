@@ -27,7 +27,7 @@ public final class RunAmok extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
-    public RunAmok(final RunAmok card) {
+    private RunAmok(final RunAmok card) {
         super(card);
     }
 

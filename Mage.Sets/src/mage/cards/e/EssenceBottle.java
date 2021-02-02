@@ -39,7 +39,7 @@ public final class EssenceBottle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EssenceBottle(final EssenceBottle card) {
+    private EssenceBottle(final EssenceBottle card) {
         super(card);
     }
 

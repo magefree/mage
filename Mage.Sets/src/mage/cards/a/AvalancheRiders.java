@@ -38,7 +38,7 @@ public final class AvalancheRiders extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AvalancheRiders(final AvalancheRiders card) {
+    private AvalancheRiders(final AvalancheRiders card) {
         super(card);
     }
 

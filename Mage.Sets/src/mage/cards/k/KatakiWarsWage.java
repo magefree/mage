@@ -41,7 +41,7 @@ public final class KatakiWarsWage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public KatakiWarsWage(final KatakiWarsWage card) {
+    private KatakiWarsWage(final KatakiWarsWage card) {
         super(card);
     }
 

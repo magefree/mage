@@ -30,7 +30,7 @@ public final class AdderStaffBoggart extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfClashWonEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()))));
     }
 
-    public AdderStaffBoggart(final AdderStaffBoggart card) {
+    private AdderStaffBoggart(final AdderStaffBoggart card) {
         super(card);
     }
 

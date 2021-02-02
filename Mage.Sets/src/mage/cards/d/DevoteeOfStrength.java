@@ -34,7 +34,7 @@ public final class DevoteeOfStrength extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DevoteeOfStrength(final DevoteeOfStrength card) {
+    private DevoteeOfStrength(final DevoteeOfStrength card) {
         super(card);
     }
 

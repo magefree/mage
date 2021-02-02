@@ -56,7 +56,7 @@ public final class BoundByMoonsilver extends CardImpl {
         this.addAbility(limitedAbility);
     }
 
-    public BoundByMoonsilver(final BoundByMoonsilver card) {
+    private BoundByMoonsilver(final BoundByMoonsilver card) {
         super(card);
     }
 

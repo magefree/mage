@@ -48,7 +48,7 @@ public final class AleshaWhoSmilesAtDeath extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AleshaWhoSmilesAtDeath(final AleshaWhoSmilesAtDeath card) {
+    private AleshaWhoSmilesAtDeath(final AleshaWhoSmilesAtDeath card) {
         super(card);
     }
 

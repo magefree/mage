@@ -32,7 +32,7 @@ public final class LumberingSatyr extends CardImpl {
                 new GainAbilityAllEffect(new ForestwalkAbility(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
     }
 
-    public LumberingSatyr(final LumberingSatyr card) {
+    private LumberingSatyr(final LumberingSatyr card) {
         super(card);
     }
 

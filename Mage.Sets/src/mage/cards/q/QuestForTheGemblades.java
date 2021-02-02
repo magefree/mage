@@ -44,7 +44,7 @@ public final class QuestForTheGemblades extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuestForTheGemblades(final QuestForTheGemblades card) {
+    private QuestForTheGemblades(final QuestForTheGemblades card) {
         super(card);
     }
 

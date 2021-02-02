@@ -56,7 +56,7 @@ public final class EldraziObligator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EldraziObligator(final EldraziObligator card) {
+    private EldraziObligator(final EldraziObligator card) {
         super(card);
     }
 

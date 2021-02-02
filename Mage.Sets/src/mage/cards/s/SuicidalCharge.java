@@ -32,7 +32,7 @@ public final class SuicidalCharge extends CardImpl {
         
     }
 
-    public SuicidalCharge(final SuicidalCharge card) {
+    private SuicidalCharge(final SuicidalCharge card) {
         super(card);
     }
 

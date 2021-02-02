@@ -51,7 +51,7 @@ public final class PallidMycoderm extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filterSaproling, false))));
     }
 
-    public PallidMycoderm(final PallidMycoderm card) {
+    private PallidMycoderm(final PallidMycoderm card) {
         super(card);
     }
 

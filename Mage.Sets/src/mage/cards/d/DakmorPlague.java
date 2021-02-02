@@ -20,7 +20,7 @@ public final class DakmorPlague extends CardImpl {
         this.getSpellAbility().addEffect(new DamageEverythingEffect(3));
     }
 
-    public DakmorPlague(final DakmorPlague card) {
+    private DakmorPlague(final DakmorPlague card) {
         super(card);
     }
 

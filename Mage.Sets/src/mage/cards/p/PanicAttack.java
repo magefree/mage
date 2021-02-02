@@ -24,7 +24,7 @@ public final class PanicAttack extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 3));
     }
 
-    public PanicAttack(final PanicAttack card) {
+    private PanicAttack(final PanicAttack card) {
         super(card);
     }
 

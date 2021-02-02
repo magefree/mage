@@ -34,7 +34,7 @@ public final class PinionFeast extends CardImpl {
 
     }
 
-    public PinionFeast(final PinionFeast card) {
+    private PinionFeast(final PinionFeast card) {
         super(card);
     }
 

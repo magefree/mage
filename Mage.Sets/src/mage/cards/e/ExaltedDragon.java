@@ -39,7 +39,7 @@ public final class ExaltedDragon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ExaltedDragonCostToAttackBlockEffect()));
     }
 
-    public ExaltedDragon(final ExaltedDragon card) {
+    private ExaltedDragon(final ExaltedDragon card) {
         super(card);
     }
 

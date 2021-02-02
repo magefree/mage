@@ -73,7 +73,7 @@ public final class NaturesChosen extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public NaturesChosen(final NaturesChosen card) {
+    private NaturesChosen(final NaturesChosen card) {
         super(card);
     }
 

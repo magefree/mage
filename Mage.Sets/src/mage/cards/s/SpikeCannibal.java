@@ -38,7 +38,7 @@ public final class SpikeCannibal extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SpikeCannibalEffect()));
     }
 
-    public SpikeCannibal(final SpikeCannibal card) {
+    private SpikeCannibal(final SpikeCannibal card) {
         super(card);
     }
 

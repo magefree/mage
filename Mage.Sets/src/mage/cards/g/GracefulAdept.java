@@ -33,7 +33,7 @@ public final class GracefulAdept extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public GracefulAdept(final GracefulAdept card) {
+    private GracefulAdept(final GracefulAdept card) {
         super(card);
     }
 

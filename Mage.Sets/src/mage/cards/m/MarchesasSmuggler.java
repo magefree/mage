@@ -45,7 +45,7 @@ public final class MarchesasSmuggler extends CardImpl {
 
     }
 
-    public MarchesasSmuggler(final MarchesasSmuggler card) {
+    private MarchesasSmuggler(final MarchesasSmuggler card) {
         super(card);
     }
 

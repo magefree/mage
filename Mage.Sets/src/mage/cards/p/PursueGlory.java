@@ -27,7 +27,7 @@ public final class PursueGlory extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public PursueGlory(final PursueGlory card) {
+    private PursueGlory(final PursueGlory card) {
         super(card);
     }
 

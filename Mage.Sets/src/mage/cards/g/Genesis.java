@@ -37,7 +37,7 @@ public final class Genesis extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Genesis(final Genesis card) {
+    private Genesis(final Genesis card) {
         super(card);
     }
 

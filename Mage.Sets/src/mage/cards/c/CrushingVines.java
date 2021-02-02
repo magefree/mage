@@ -38,7 +38,7 @@ public final class CrushingVines extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public CrushingVines(final CrushingVines card) {
+    private CrushingVines(final CrushingVines card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class RavenousSlime extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new RavenousSlimeEffect()));
     }
 
-    public RavenousSlime(final RavenousSlime card) {
+    private RavenousSlime(final RavenousSlime card) {
         super(card);
     }
 

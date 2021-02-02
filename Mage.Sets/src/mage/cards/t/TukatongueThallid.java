@@ -28,7 +28,7 @@ public final class TukatongueThallid extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), false));
     }
 
-    public TukatongueThallid(final TukatongueThallid card) {
+    private TukatongueThallid(final TukatongueThallid card) {
         super(card);
     }
 

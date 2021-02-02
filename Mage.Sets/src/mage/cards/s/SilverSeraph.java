@@ -39,7 +39,7 @@ public final class SilverSeraph extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SilverSeraph(final SilverSeraph card) {
+    private SilverSeraph(final SilverSeraph card) {
         super(card);
     }
 

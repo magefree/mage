@@ -29,7 +29,7 @@ public final class FleshbagMarauder extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeAllEffect(1, new FilterControlledCreaturePermanent("creature"))));
     }
 
-    public FleshbagMarauder(final FleshbagMarauder card) {
+    private FleshbagMarauder(final FleshbagMarauder card) {
         super(card);
     }
 

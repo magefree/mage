@@ -42,7 +42,7 @@ public final class FleshAllergy extends CardImpl {
         this.getSpellAbility().addWatcher(new FleshAllergyWatcher());
     }
 
-    public FleshAllergy(final FleshAllergy card) {
+    private FleshAllergy(final FleshAllergy card) {
         super(card);
     }
 

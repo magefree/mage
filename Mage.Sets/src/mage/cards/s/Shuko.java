@@ -28,7 +28,7 @@ public final class Shuko extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(0)));
     }
 
-    public Shuko(final Shuko card) {
+    private Shuko(final Shuko card) {
         super(card);
     }
 

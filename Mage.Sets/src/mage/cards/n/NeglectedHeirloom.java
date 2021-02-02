@@ -42,7 +42,7 @@ public final class NeglectedHeirloom extends CardImpl {
 
     }
 
-    public NeglectedHeirloom(final NeglectedHeirloom card) {
+    private NeglectedHeirloom(final NeglectedHeirloom card) {
         super(card);
     }
 

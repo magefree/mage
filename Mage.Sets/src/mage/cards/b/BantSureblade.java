@@ -52,7 +52,7 @@ public final class BantSureblade extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BantSureblade(final BantSureblade card) {
+    private BantSureblade(final BantSureblade card) {
         super(card);
     }
 

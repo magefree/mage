@@ -40,7 +40,7 @@ public final class ShepherdOfRot extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeAllPlayersEffect(new PermanentsOnBattlefieldCount(filter), rule), new TapSourceCost()));
     }
 
-    public ShepherdOfRot(final ShepherdOfRot card) {
+    private ShepherdOfRot(final ShepherdOfRot card) {
         super(card);
     }
 

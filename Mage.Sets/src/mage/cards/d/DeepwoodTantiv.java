@@ -26,7 +26,7 @@ public final class DeepwoodTantiv extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new GainLifeEffect(2), false));
     }
 
-    public DeepwoodTantiv(final DeepwoodTantiv card) {
+    private DeepwoodTantiv(final DeepwoodTantiv card) {
         super(card);
     }
 

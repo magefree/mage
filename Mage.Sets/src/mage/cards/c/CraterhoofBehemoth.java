@@ -46,7 +46,7 @@ public final class CraterhoofBehemoth extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CraterhoofBehemoth(final CraterhoofBehemoth card) {
+    private CraterhoofBehemoth(final CraterhoofBehemoth card) {
         super(card);
     }
 

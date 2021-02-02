@@ -32,7 +32,7 @@ public final class HarrierGriffin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HarrierGriffin(final HarrierGriffin card) {
+    private HarrierGriffin(final HarrierGriffin card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class NeedleDrop extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public NeedleDrop(final NeedleDrop card) {
+    private NeedleDrop(final NeedleDrop card) {
         super(card);
     }
 

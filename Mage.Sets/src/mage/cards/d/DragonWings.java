@@ -55,7 +55,7 @@ public final class DragonWings extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonWingsEffect(), filter, true, SetTargetPointer.PERMANENT, null));
     }
 
-    public DragonWings(final DragonWings card) {
+    private DragonWings(final DragonWings card) {
         super(card);
     }
 

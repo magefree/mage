@@ -43,7 +43,7 @@ public final class MizzixsMastery extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MizzixsMastery(final MizzixsMastery card) {
+    private MizzixsMastery(final MizzixsMastery card) {
         super(card);
     }
 

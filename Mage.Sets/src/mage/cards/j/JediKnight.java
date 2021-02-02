@@ -45,7 +45,7 @@ public final class JediKnight extends CardImpl {
         this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{U}")));
     }
 
-    public JediKnight(final JediKnight card) {
+    private JediKnight(final JediKnight card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class KefnetsMonument extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KefnetsMonument(final KefnetsMonument card) {
+    private KefnetsMonument(final KefnetsMonument card) {
         super(card);
     }
 

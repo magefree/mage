@@ -28,7 +28,7 @@ public final class PloverKnights extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public PloverKnights(final PloverKnights card) {
+    private PloverKnights(final PloverKnights card) {
         super(card);
     }
 

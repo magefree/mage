@@ -40,7 +40,7 @@ public final class SinisterPossession extends CardImpl {
         this.addAbility(new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeControllerAttachedEffect(2)));
     }
 
-    public SinisterPossession(final SinisterPossession card) {
+    private SinisterPossession(final SinisterPossession card) {
         super(card);
     }
 

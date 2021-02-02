@@ -30,7 +30,7 @@ public final class PredatorsStrike extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PredatorsStrike(final PredatorsStrike card) {
+    private PredatorsStrike(final PredatorsStrike card) {
         super(card);
     }
 

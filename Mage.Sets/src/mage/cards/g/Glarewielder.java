@@ -39,7 +39,7 @@ public final class Glarewielder extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{1}{R}"));
     }
 
-    public Glarewielder(final Glarewielder card) {
+    private Glarewielder(final Glarewielder card) {
         super(card);
     }
 

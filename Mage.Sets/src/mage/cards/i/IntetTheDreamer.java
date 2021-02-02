@@ -52,7 +52,7 @@ public final class IntetTheDreamer extends CardImpl {
 
     }
 
-    public IntetTheDreamer(final IntetTheDreamer card) {
+    private IntetTheDreamer(final IntetTheDreamer card) {
         super(card);
     }
 

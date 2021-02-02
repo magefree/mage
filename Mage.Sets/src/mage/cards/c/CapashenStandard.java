@@ -45,7 +45,7 @@ public final class CapashenStandard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CapashenStandard(final CapashenStandard card) {
+    private CapashenStandard(final CapashenStandard card) {
         super(card);
     }
 

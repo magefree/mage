@@ -38,7 +38,7 @@ public final class AmbushKrotiq extends CardImpl {
 
     }
 
-    public AmbushKrotiq(final AmbushKrotiq card) {
+    private AmbushKrotiq(final AmbushKrotiq card) {
         super(card);
     }
 

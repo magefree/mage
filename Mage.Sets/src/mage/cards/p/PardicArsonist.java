@@ -42,7 +42,7 @@ public final class PardicArsonist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PardicArsonist(final PardicArsonist card) {
+    private PardicArsonist(final PardicArsonist card) {
         super(card);
     }
 

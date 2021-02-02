@@ -29,7 +29,7 @@ public final class PlatedRootwalla extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn), new ManaCostsImpl("{2}{G}")));
     }
 
-    public PlatedRootwalla(final PlatedRootwalla card) {
+    private PlatedRootwalla(final PlatedRootwalla card) {
         super(card);
     }
 

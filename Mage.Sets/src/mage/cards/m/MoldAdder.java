@@ -40,7 +40,7 @@ public final class MoldAdder extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, true));
     }
 
-    public MoldAdder(final MoldAdder card) {
+    private MoldAdder(final MoldAdder card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class PulseOfTheForge extends CardImpl {
         this.getSpellAbility().addEffect(new PulseOfTheForgeReturnToHandEffect());
     }
 
-    public PulseOfTheForge(final PulseOfTheForge card) {
+    private PulseOfTheForge(final PulseOfTheForge card) {
         super(card);
     }
 

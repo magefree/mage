@@ -27,7 +27,7 @@ public final class CarnageWurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public CarnageWurm(final CarnageWurm card) {
+    private CarnageWurm(final CarnageWurm card) {
         super(card);
     }
 

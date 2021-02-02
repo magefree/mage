@@ -24,7 +24,7 @@ public final class ShriekOfDread extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ShriekOfDread(final ShriekOfDread card) {
+    private ShriekOfDread(final ShriekOfDread card) {
         super(card);
     }
 

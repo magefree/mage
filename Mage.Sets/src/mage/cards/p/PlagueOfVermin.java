@@ -30,7 +30,7 @@ public final class PlagueOfVermin extends CardImpl {
 
     }
 
-    public PlagueOfVermin(final PlagueOfVermin card) {
+    private PlagueOfVermin(final PlagueOfVermin card) {
         super(card);
     }
 

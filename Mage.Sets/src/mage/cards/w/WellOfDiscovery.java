@@ -37,7 +37,7 @@ public final class WellOfDiscovery extends CardImpl {
             "At the beginning of your end step, if you control no untapped lands, draw a card."));
     }
 
-    public WellOfDiscovery(final WellOfDiscovery card) {
+    private WellOfDiscovery(final WellOfDiscovery card) {
         super(card);
     }
 

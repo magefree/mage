@@ -35,7 +35,7 @@ public final class MilitiasPride extends CardImpl {
 
     }
 
-    public MilitiasPride(final MilitiasPride card) {
+    private MilitiasPride(final MilitiasPride card) {
         super(card);
     }
 

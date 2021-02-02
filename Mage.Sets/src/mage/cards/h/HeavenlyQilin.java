@@ -48,7 +48,7 @@ public final class HeavenlyQilin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HeavenlyQilin(final HeavenlyQilin card) {
+    private HeavenlyQilin(final HeavenlyQilin card) {
         super(card);
     }
 

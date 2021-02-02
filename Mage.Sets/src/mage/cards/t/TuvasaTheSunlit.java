@@ -64,7 +64,7 @@ public final class TuvasaTheSunlit extends CardImpl {
         );
     }
 
-    public TuvasaTheSunlit(final TuvasaTheSunlit card) {
+    private TuvasaTheSunlit(final TuvasaTheSunlit card) {
         super(card);
     }
 

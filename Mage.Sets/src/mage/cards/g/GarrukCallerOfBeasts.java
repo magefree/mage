@@ -48,7 +48,7 @@ public final class GarrukCallerOfBeasts extends CardImpl {
 
     }
 
-    public GarrukCallerOfBeasts(final GarrukCallerOfBeasts card) {
+    private GarrukCallerOfBeasts(final GarrukCallerOfBeasts card) {
         super(card);
     }
 

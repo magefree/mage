@@ -38,7 +38,7 @@ public final class FathomSeer extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new DrawCardSourceControllerEffect(2)));
     }
 
-    public FathomSeer(final FathomSeer card) {
+    private FathomSeer(final FathomSeer card) {
         super(card);
     }
 

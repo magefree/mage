@@ -35,7 +35,7 @@ public final class LeylineOfTheVoid extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeylineOfTheVoidEffect()));
     }
 
-    public LeylineOfTheVoid(final LeylineOfTheVoid card) {
+    private LeylineOfTheVoid(final LeylineOfTheVoid card) {
         super(card);
     }
 

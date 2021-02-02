@@ -23,7 +23,7 @@ public final class BarterInBlood extends CardImpl {
         this.getSpellAbility().addEffect(new SacrificeAllEffect(2, filter));
     }
 
-    public BarterInBlood(final BarterInBlood card) {
+    private BarterInBlood(final BarterInBlood card) {
         super(card);
     }
 

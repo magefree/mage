@@ -41,7 +41,7 @@ public final class RockBasilisk extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, filter, false));
     }
 
-    public RockBasilisk(final RockBasilisk card) {
+    private RockBasilisk(final RockBasilisk card) {
         super(card);
     }
 

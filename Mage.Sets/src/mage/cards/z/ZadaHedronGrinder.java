@@ -39,7 +39,7 @@ public final class ZadaHedronGrinder extends CardImpl {
 
     }
 
-    public ZadaHedronGrinder(final ZadaHedronGrinder card) {
+    private ZadaHedronGrinder(final ZadaHedronGrinder card) {
         super(card);
     }
 

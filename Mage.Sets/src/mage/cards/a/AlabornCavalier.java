@@ -31,7 +31,7 @@ public final class AlabornCavalier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AlabornCavalier(final AlabornCavalier card) {
+    private AlabornCavalier(final AlabornCavalier card) {
         super(card);
     }
 

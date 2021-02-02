@@ -38,7 +38,7 @@ public final class VeilingOddity extends CardImpl {
         this.addAbility(new VeilingOddityTriggeredAbility());
     }
 
-    public VeilingOddity(final VeilingOddity card) {
+    private VeilingOddity(final VeilingOddity card) {
         super(card);
     }
 

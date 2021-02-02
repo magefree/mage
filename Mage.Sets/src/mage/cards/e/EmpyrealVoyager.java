@@ -38,7 +38,7 @@ public final class EmpyrealVoyager extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new EmpyrealVoyagerEffect(), false, true));
     }
 
-    public EmpyrealVoyager(final EmpyrealVoyager card) {
+    private EmpyrealVoyager(final EmpyrealVoyager card) {
         super(card);
     }
 

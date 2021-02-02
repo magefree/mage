@@ -35,7 +35,7 @@ public final class RabidElephant extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
-    public RabidElephant(final RabidElephant card) {
+    private RabidElephant(final RabidElephant card) {
         super(card);
     }
 

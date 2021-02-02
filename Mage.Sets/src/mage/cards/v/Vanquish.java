@@ -24,7 +24,7 @@ public final class Vanquish extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterBlockingCreature()));
     }
 
-    public Vanquish(final Vanquish card) {
+    private Vanquish(final Vanquish card) {
         super(card);
     }
 

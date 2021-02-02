@@ -22,7 +22,7 @@ public final class GrizzlyBears extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public GrizzlyBears(final GrizzlyBears card) {
+    private GrizzlyBears(final GrizzlyBears card) {
         super(card);
     }
 

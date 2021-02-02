@@ -29,7 +29,7 @@ public final class DevilsPlay extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{X}{R}{R}{R}"), TimingRule.SORCERY));
     }
 
-    public DevilsPlay(final DevilsPlay card) {
+    private DevilsPlay(final DevilsPlay card) {
         super(card);
     }
 

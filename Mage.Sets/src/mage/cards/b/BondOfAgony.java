@@ -28,7 +28,7 @@ public final class BondOfAgony extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeOpponentsEffect(xValue));
     }
 
-    public BondOfAgony(final BondOfAgony card) {
+    private BondOfAgony(final BondOfAgony card) {
         super(card);
     }
 

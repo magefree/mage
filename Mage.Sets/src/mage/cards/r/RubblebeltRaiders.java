@@ -31,7 +31,7 @@ public final class RubblebeltRaiders extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new AttackingCreatureCount("attacking creature you control"), true),false));
     }
 
-    public RubblebeltRaiders(final RubblebeltRaiders card) {
+    private RubblebeltRaiders(final RubblebeltRaiders card) {
         super(card);
     }
 

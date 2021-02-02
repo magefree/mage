@@ -36,7 +36,7 @@ public final class Overabundance extends CardImpl {
         ));
     }
 
-    public Overabundance(final Overabundance card) {
+    private Overabundance(final Overabundance card) {
         super(card);
     }
 

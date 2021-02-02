@@ -32,7 +32,7 @@ public final class FesteringMummy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FesteringMummy(final FesteringMummy card) {
+    private FesteringMummy(final FesteringMummy card) {
         super(card);
     }
 

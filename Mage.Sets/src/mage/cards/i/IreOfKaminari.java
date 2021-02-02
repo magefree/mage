@@ -33,7 +33,7 @@ public final class IreOfKaminari extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public IreOfKaminari(final IreOfKaminari card) {
+    private IreOfKaminari(final IreOfKaminari card) {
         super(card);
     }
 

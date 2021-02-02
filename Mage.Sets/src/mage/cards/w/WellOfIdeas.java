@@ -36,7 +36,7 @@ public final class WellOfIdeas extends CardImpl {
         this.addAbility(new BeginningOfDrawTriggeredAbility(effect , TargetController.YOU, false));
     }
 
-    public WellOfIdeas(final WellOfIdeas card) {
+    private WellOfIdeas(final WellOfIdeas card) {
         super(card);
     }
 

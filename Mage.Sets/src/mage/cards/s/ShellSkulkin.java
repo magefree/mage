@@ -40,7 +40,7 @@ public final class ShellSkulkin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShellSkulkin(final ShellSkulkin card) {
+    private ShellSkulkin(final ShellSkulkin card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class Shapesharer extends CardImpl {
         this.addAbility(copyAbility);
     }
 
-    public Shapesharer(final Shapesharer card) {
+    private Shapesharer(final Shapesharer card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class SwornGuardian extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public SwornGuardian(final SwornGuardian card) {
+    private SwornGuardian(final SwornGuardian card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class HordelingOutburst extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 3));
     }
 
-    public HordelingOutburst(final HordelingOutburst card) {
+    private HordelingOutburst(final HordelingOutburst card) {
         super(card);
     }
 

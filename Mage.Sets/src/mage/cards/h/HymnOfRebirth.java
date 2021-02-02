@@ -23,7 +23,7 @@ public final class HymnOfRebirth extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
     }
 
-    public HymnOfRebirth(final HymnOfRebirth card) {
+    private HymnOfRebirth(final HymnOfRebirth card) {
         super(card);
     }
 

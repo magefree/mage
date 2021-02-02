@@ -23,7 +23,7 @@ public final class EfficientConstruction extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken()), new FilterArtifactSpell("an artifact spell"), false));
     }
 
-    public EfficientConstruction(final EfficientConstruction card) {
+    private EfficientConstruction(final EfficientConstruction card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class FrostGiant extends CardImpl {
         this.addAbility(new RampageAbility(2));
     }
 
-    public FrostGiant(final FrostGiant card) {
+    private FrostGiant(final FrostGiant card) {
         super(card);
     }
 

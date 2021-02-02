@@ -43,7 +43,7 @@ public final class CranialPlating extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
-    public CranialPlating(final CranialPlating card) {
+    private CranialPlating(final CranialPlating card) {
         super(card);
     }
 

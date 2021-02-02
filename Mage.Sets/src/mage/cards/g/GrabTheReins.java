@@ -56,7 +56,7 @@ public final class GrabTheReins extends CardImpl {
         this.addAbility(new EntwineAbility("{2}{R}"));
     }
 
-    public GrabTheReins(final GrabTheReins card) {
+    private GrabTheReins(final GrabTheReins card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class BannersRaised extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Duration.EndOfTurn));
     }
 
-    public BannersRaised(final BannersRaised card) {
+    private BannersRaised(final BannersRaised card) {
         super(card);
     }
 

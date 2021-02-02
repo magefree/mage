@@ -22,7 +22,7 @@ public final class FinalReward extends CardImpl {
         getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FinalReward(final FinalReward card) {
+    private FinalReward(final FinalReward card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class SibsigHost extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsEachPlayerEffect(3, TargetController.ANY)));
     }
 
-    public SibsigHost(final SibsigHost card) {
+    private SibsigHost(final SibsigHost card) {
         super(card);
     }
 

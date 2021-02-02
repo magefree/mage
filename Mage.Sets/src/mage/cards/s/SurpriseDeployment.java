@@ -41,7 +41,7 @@ public final class SurpriseDeployment extends CardImpl {
         this.getSpellAbility().addEffect(new SurpriseDeploymentEffect());
     }
 
-    public SurpriseDeployment(final SurpriseDeployment card) {
+    private SurpriseDeployment(final SurpriseDeployment card) {
         super(card);
     }
 

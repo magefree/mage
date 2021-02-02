@@ -51,7 +51,7 @@ public final class MossbridgeTroll extends CardImpl {
 
     }
 
-    public MossbridgeTroll(final MossbridgeTroll card) {
+    private MossbridgeTroll(final MossbridgeTroll card) {
         super(card);
     }
 

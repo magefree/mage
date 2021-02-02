@@ -24,7 +24,7 @@ public final class TrumpetBlast extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, filter, false));
     }
 
-    public TrumpetBlast(final TrumpetBlast card) {
+    private TrumpetBlast(final TrumpetBlast card) {
         super(card);
     }
 

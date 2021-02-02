@@ -37,7 +37,7 @@ public final class UrgorosTheEmptyOne extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new UrgorosTheEmptyOneEffect(), false, true));
     }
 
-    public UrgorosTheEmptyOne(final UrgorosTheEmptyOne card) {
+    private UrgorosTheEmptyOne(final UrgorosTheEmptyOne card) {
         super(card);
     }
 

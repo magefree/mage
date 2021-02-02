@@ -21,7 +21,7 @@ public final class FistOfSuns extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WUBRGInsteadEffect()));
     }
 
-    public FistOfSuns(final FistOfSuns card) {
+    private FistOfSuns(final FistOfSuns card) {
         super(card);
     }
 

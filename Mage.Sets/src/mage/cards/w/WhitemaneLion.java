@@ -32,7 +32,7 @@ public final class WhitemaneLion extends CardImpl {
 
     }
 
-    public WhitemaneLion(final WhitemaneLion card) {
+    private WhitemaneLion(final WhitemaneLion card) {
         super(card);
     }
 

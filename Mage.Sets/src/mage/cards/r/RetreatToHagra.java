@@ -43,7 +43,7 @@ public final class RetreatToHagra extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RetreatToHagra(final RetreatToHagra card) {
+    private RetreatToHagra(final RetreatToHagra card) {
         super(card);
     }
 

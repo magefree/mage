@@ -29,7 +29,7 @@ public final class VerdantForce extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), TargetController.ANY, false));
     }
 
-    public VerdantForce(final VerdantForce card) {
+    private VerdantForce(final VerdantForce card) {
         super(card);
     }
 

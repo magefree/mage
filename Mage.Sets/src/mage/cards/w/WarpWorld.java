@@ -35,7 +35,7 @@ public final class WarpWorld extends CardImpl {
         this.getSpellAbility().addEffect(new WarpWorldEffect());
     }
 
-    public WarpWorld(final WarpWorld card) {
+    private WarpWorld(final WarpWorld card) {
         super(card);
     }
 

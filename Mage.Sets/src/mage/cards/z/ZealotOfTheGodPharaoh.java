@@ -33,7 +33,7 @@ public final class ZealotOfTheGodPharaoh extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZealotOfTheGodPharaoh(final ZealotOfTheGodPharaoh card) {
+    private ZealotOfTheGodPharaoh(final ZealotOfTheGodPharaoh card) {
         super(card);
     }
 

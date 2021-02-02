@@ -36,7 +36,7 @@ public final class StingingBarrier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StingingBarrier(final StingingBarrier card) {
+    private StingingBarrier(final StingingBarrier card) {
         super(card);
     }
 

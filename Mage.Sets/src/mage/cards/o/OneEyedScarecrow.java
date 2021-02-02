@@ -42,7 +42,7 @@ public final class OneEyedScarecrow extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, 0, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public OneEyedScarecrow(final OneEyedScarecrow card) {
+    private OneEyedScarecrow(final OneEyedScarecrow card) {
         super(card);
     }
 

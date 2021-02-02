@@ -38,7 +38,7 @@ public final class HeroesBane extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{G}{G}")));
     }
 
-    public HeroesBane(final HeroesBane card) {
+    private HeroesBane(final HeroesBane card) {
         super(card);
     }
 

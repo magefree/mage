@@ -25,7 +25,7 @@ public final class Subversion extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SubversionEffect(), TargetController.YOU, false));
     }
 
-    public Subversion(final Subversion card) {
+    private Subversion(final Subversion card) {
         super(card);
     }
 

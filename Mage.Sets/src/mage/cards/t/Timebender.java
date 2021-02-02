@@ -51,7 +51,7 @@ public final class Timebender extends CardImpl {
 
     }
 
-    public Timebender(final Timebender card) {
+    private Timebender(final Timebender card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class ScoutTheBorders extends CardImpl {
         this.getSpellAbility().addEffect(new ScoutTheBordersEffect());
     }
 
-    public ScoutTheBorders(final ScoutTheBorders card) {
+    private ScoutTheBorders(final ScoutTheBorders card) {
         super(card);
     }
 

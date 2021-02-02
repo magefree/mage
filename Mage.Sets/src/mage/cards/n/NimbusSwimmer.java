@@ -31,7 +31,7 @@ public final class NimbusSwimmer extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
     }
 
-    public NimbusSwimmer(final NimbusSwimmer card) {
+    private NimbusSwimmer(final NimbusSwimmer card) {
         super(card);
     }
 

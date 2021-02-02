@@ -37,7 +37,7 @@ public final class BenalishEmissary extends CardImpl {
             "When {this} enters the battlefield, if it was kicked, destroy target land."));
     }
 
-    public BenalishEmissary(final BenalishEmissary card) {
+    private BenalishEmissary(final BenalishEmissary card) {
         super(card);
     }
 

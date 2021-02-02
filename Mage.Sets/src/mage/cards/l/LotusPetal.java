@@ -22,7 +22,7 @@ public final class LotusPetal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LotusPetal(final LotusPetal card) {
+    private LotusPetal(final LotusPetal card) {
         super(card);
     }
 

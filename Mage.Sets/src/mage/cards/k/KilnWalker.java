@@ -27,7 +27,7 @@ public final class KilnWalker extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn), false));
     }
 
-    public KilnWalker(final KilnWalker card) {
+    private KilnWalker(final KilnWalker card) {
         super(card);
     }
 

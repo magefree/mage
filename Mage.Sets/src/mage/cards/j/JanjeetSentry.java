@@ -41,7 +41,7 @@ public final class JanjeetSentry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JanjeetSentry(final JanjeetSentry card) {
+    private JanjeetSentry(final JanjeetSentry card) {
         super(card);
     }
 

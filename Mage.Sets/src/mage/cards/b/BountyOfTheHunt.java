@@ -37,7 +37,7 @@ public final class BountyOfTheHunt extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3));
     }
 
-    public BountyOfTheHunt(final BountyOfTheHunt card) {
+    private BountyOfTheHunt(final BountyOfTheHunt card) {
         super(card);
     }
 

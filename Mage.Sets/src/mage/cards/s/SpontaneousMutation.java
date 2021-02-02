@@ -46,7 +46,7 @@ public final class SpontaneousMutation extends CardImpl {
                 .setText("enchanted creature gets -X/-0, where X is the number of cards in your graveyard")));
     }
 
-    public SpontaneousMutation(final SpontaneousMutation card) {
+    private SpontaneousMutation(final SpontaneousMutation card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class HanSolo extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HanSolo(final HanSolo card) {
+    private HanSolo(final HanSolo card) {
         super(card);
     }
 

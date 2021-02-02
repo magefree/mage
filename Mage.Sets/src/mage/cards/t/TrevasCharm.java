@@ -37,7 +37,7 @@ public final class TrevasCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public TrevasCharm(final TrevasCharm card) {
+    private TrevasCharm(final TrevasCharm card) {
         super(card);
     }
 

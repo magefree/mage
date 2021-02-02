@@ -43,7 +43,7 @@ public final class OpalTitan extends CardImpl {
 
     }
 
-    public OpalTitan(final OpalTitan card) {
+    private OpalTitan(final OpalTitan card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ public final class InvertTheSkies extends CardImpl {
 
     }
 
-    public InvertTheSkies(final InvertTheSkies card) {
+    private InvertTheSkies(final InvertTheSkies card) {
         super(card);
     }
 

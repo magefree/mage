@@ -38,7 +38,7 @@ public final class AfflictedDeserter extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
-    public AfflictedDeserter(final AfflictedDeserter card) {
+    private AfflictedDeserter(final AfflictedDeserter card) {
         super(card);
     }
 

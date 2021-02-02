@@ -57,7 +57,7 @@ public final class OldManOfTheSea extends CardImpl {
         this.addAbility(new OldManOfTheSeaStateBasedTriggeredAbility());
     }
 
-    public OldManOfTheSea(final OldManOfTheSea card) {
+    private OldManOfTheSea(final OldManOfTheSea card) {
         super(card);
     }
 

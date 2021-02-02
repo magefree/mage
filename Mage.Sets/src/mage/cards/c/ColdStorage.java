@@ -33,7 +33,7 @@ public final class ColdStorage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ColdStorage(final ColdStorage card) {
+    private ColdStorage(final ColdStorage card) {
         super(card);
     }
 

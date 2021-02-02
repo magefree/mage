@@ -33,7 +33,7 @@ public final class BlazingSpecter extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true));
     }
 
-    public BlazingSpecter(final BlazingSpecter card) {
+    private BlazingSpecter(final BlazingSpecter card) {
         super(card);
     }
 

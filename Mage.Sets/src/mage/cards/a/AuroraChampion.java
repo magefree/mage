@@ -46,7 +46,7 @@ public final class AuroraChampion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AuroraChampion(final AuroraChampion card) {
+    private AuroraChampion(final AuroraChampion card) {
         super(card);
     }
 

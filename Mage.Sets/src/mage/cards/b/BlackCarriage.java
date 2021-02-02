@@ -43,7 +43,7 @@ public final class BlackCarriage extends CardImpl {
                 new IsStepCondition(PhaseStep.UPKEEP), "Sacrifice a creature: Untap {this}. Activate this ability only during your upkeep."));
     }
 
-    public BlackCarriage(final BlackCarriage card) {
+    private BlackCarriage(final BlackCarriage card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class OrochiRanger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrochiRanger(final OrochiRanger card) {
+    private OrochiRanger(final OrochiRanger card) {
         super(card);
     }
 

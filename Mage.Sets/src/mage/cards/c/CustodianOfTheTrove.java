@@ -29,7 +29,7 @@ public final class CustodianOfTheTrove extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
     }
 
-    public CustodianOfTheTrove(final CustodianOfTheTrove card) {
+    private CustodianOfTheTrove(final CustodianOfTheTrove card) {
         super(card);
     }
 

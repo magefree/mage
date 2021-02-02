@@ -44,7 +44,7 @@ public final class DemonicVigor extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted creature"));
     }
 
-    public DemonicVigor(final DemonicVigor card) {
+    private DemonicVigor(final DemonicVigor card) {
         super(card);
     }
 

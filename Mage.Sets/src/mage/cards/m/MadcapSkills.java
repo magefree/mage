@@ -42,7 +42,7 @@ public final class MadcapSkills extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.AURA)));
     }
 
-    public MadcapSkills(final MadcapSkills card) {
+    private MadcapSkills(final MadcapSkills card) {
         super(card);
     }
 

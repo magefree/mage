@@ -39,7 +39,7 @@ public final class InterventionPact extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{1}{W}{W}")), false));
     }
 
-    public InterventionPact(final InterventionPact card) {
+    private InterventionPact(final InterventionPact card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class SpireBarrage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public SpireBarrage(final SpireBarrage card) {
+    private SpireBarrage(final SpireBarrage card) {
         super(card);
     }
 

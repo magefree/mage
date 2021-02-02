@@ -39,7 +39,7 @@ public final class LeapingLizard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LeapingLizard(final LeapingLizard card) {
+    private LeapingLizard(final LeapingLizard card) {
         super(card);
     }
 

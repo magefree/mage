@@ -35,7 +35,7 @@ public final class SlinkingSkirge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SlinkingSkirge(final SlinkingSkirge card) {
+    private SlinkingSkirge(final SlinkingSkirge card) {
         super(card);
     }
 

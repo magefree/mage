@@ -42,7 +42,7 @@ public final class ParanoidParishBlade extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ParanoidParishBlade(final ParanoidParishBlade card) {
+    private ParanoidParishBlade(final ParanoidParishBlade card) {
         super(card);
     }
 

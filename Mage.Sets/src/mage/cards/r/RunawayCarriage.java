@@ -33,7 +33,7 @@ public final class RunawayCarriage extends CardImpl {
                 new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())), false));
     }
 
-    public RunawayCarriage(final RunawayCarriage card) {
+    private RunawayCarriage(final RunawayCarriage card) {
         super(card);
     }
 

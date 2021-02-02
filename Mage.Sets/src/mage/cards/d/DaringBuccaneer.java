@@ -40,7 +40,7 @@ public final class DaringBuccaneer extends CardImpl {
 
     }
 
-    public DaringBuccaneer(final DaringBuccaneer card) {
+    private DaringBuccaneer(final DaringBuccaneer card) {
         super(card);
     }
 

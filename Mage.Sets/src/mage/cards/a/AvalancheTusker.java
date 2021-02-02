@@ -35,7 +35,7 @@ public final class AvalancheTusker extends CardImpl {
         this.addAbility(new AvalancheTuskerAbility());
     }
 
-    public AvalancheTusker(final AvalancheTusker card) {
+    private AvalancheTusker(final AvalancheTusker card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class SunfireBalm extends CardImpl {
 
     }
 
-    public SunfireBalm(final SunfireBalm card) {
+    private SunfireBalm(final SunfireBalm card) {
         super(card);
     }
 

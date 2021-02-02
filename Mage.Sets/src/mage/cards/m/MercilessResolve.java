@@ -33,7 +33,7 @@ public final class MercilessResolve extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
-    public MercilessResolve(final MercilessResolve card) {
+    private MercilessResolve(final MercilessResolve card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class BalefireLiege extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(3), filterWhiteSpell, false));
     }
 
-    public BalefireLiege(final BalefireLiege card) {
+    private BalefireLiege(final BalefireLiege card) {
         super(card);
     }
 

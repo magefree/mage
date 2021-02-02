@@ -44,7 +44,7 @@ public final class MelokuTheCloudedMirror extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MelokuTheCloudedMirror(final MelokuTheCloudedMirror card) {
+    private MelokuTheCloudedMirror(final MelokuTheCloudedMirror card) {
         super(card);
     }
 

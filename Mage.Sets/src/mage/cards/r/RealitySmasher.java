@@ -40,7 +40,7 @@ public final class RealitySmasher extends CardImpl {
         this.addAbility(new RealitySmasherTriggeredAbility());
     }
 
-    public RealitySmasher(final RealitySmasher card) {
+    private RealitySmasher(final RealitySmasher card) {
         super(card);
     }
 

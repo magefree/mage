@@ -32,7 +32,7 @@ public final class AzimaetDrake extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
     }
 
-    public AzimaetDrake(final AzimaetDrake card) {
+    private AzimaetDrake(final AzimaetDrake card) {
         super(card);
     }
 

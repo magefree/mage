@@ -39,7 +39,7 @@ public final class ViscidLemures extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ViscidLemures(final ViscidLemures card) {
+    private ViscidLemures(final ViscidLemures card) {
         super(card);
     }
 

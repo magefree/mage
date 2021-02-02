@@ -26,7 +26,7 @@ public final class StoneQuarry extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public StoneQuarry(final StoneQuarry card) {
+    private StoneQuarry(final StoneQuarry card) {
         super(card);
     }
 

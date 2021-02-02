@@ -24,7 +24,7 @@ public final class GhostlyPrison extends CardImpl {
 
     }
 
-    public GhostlyPrison(final GhostlyPrison card) {
+    private GhostlyPrison(final GhostlyPrison card) {
         super(card);
     }
 

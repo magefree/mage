@@ -29,7 +29,7 @@ public final class SoulCharmer extends CardImpl {
         this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new GainLifeEffect(2), new ManaCostsImpl("{2}")), false, true));
     }
 
-    public SoulCharmer(final SoulCharmer card) {
+    private SoulCharmer(final SoulCharmer card) {
         super(card);
     }
 

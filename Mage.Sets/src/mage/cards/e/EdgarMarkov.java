@@ -65,7 +65,7 @@ public final class EdgarMarkov extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false));
     }
 
-    public EdgarMarkov(final EdgarMarkov card) {
+    private EdgarMarkov(final EdgarMarkov card) {
         super(card);
     }
 

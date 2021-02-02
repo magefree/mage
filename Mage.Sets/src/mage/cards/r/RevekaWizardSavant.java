@@ -37,7 +37,7 @@ public final class RevekaWizardSavant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RevekaWizardSavant(final RevekaWizardSavant card) {
+    private RevekaWizardSavant(final RevekaWizardSavant card) {
         super(card);
     }
 

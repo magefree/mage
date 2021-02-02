@@ -22,7 +22,7 @@ public final class Armageddon extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_LANDS));
     }
 
-    public Armageddon(final Armageddon card) {
+    private Armageddon(final Armageddon card) {
         super(card);
     }
 

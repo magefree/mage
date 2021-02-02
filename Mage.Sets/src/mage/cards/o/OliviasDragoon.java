@@ -31,7 +31,7 @@ public final class OliviasDragoon extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost()));
     }
 
-    public OliviasDragoon(final OliviasDragoon card) {
+    private OliviasDragoon(final OliviasDragoon card) {
         super(card);
     }
 

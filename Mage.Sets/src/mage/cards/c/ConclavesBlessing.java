@@ -53,7 +53,7 @@ public final class ConclavesBlessing extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public ConclavesBlessing(final ConclavesBlessing card) {
+    private ConclavesBlessing(final ConclavesBlessing card) {
         super(card);
     }
 

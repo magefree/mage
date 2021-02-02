@@ -44,7 +44,7 @@ public final class VanishIntoMemory extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public VanishIntoMemory(final VanishIntoMemory card) {
+    private VanishIntoMemory(final VanishIntoMemory card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class HolyLight extends CardImpl {
 
     }
 
-    public HolyLight(final HolyLight card) {
+    private HolyLight(final HolyLight card) {
         super(card);
     }
 

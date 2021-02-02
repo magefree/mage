@@ -48,7 +48,7 @@ public final class RhysTheExiled extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RhysTheExiled(final RhysTheExiled card) {
+    private RhysTheExiled(final RhysTheExiled card) {
         super(card);
     }
 

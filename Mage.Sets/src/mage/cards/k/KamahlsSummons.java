@@ -32,7 +32,7 @@ public final class KamahlsSummons extends CardImpl {
         getSpellAbility().addEffect(new KamahlsSummonsEffect());
     }
 
-    public KamahlsSummons(final KamahlsSummons card) {
+    private KamahlsSummons(final KamahlsSummons card) {
         super(card);
     }
 

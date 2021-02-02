@@ -39,7 +39,7 @@ public final class HeraldOfAnafenza extends CardImpl {
 
     }
 
-    public HeraldOfAnafenza(final HeraldOfAnafenza card) {
+    private HeraldOfAnafenza(final HeraldOfAnafenza card) {
         super(card);
     }
 

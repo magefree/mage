@@ -43,7 +43,7 @@ public final class PullFromTheDeep extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public PullFromTheDeep(final PullFromTheDeep card) {
+    private PullFromTheDeep(final PullFromTheDeep card) {
         super(card);
     }
 

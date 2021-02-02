@@ -46,7 +46,7 @@ public final class TradeFederationBattleship extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DroidToken(), 2), new TapSourceCost()));
     }
 
-    public TradeFederationBattleship(final TradeFederationBattleship card) {
+    private TradeFederationBattleship(final TradeFederationBattleship card) {
         super(card);
     }
 

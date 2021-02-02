@@ -32,7 +32,7 @@ public final class CragPuca extends CardImpl {
         
     }
 
-    public CragPuca(final CragPuca card) {
+    private CragPuca(final CragPuca card) {
         super(card);
     }
 

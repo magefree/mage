@@ -37,7 +37,7 @@ public final class OpalArchangel extends CardImpl {
                 "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 5/5 Angel creature with flying and vigilance."));
     }
 
-    public OpalArchangel(final OpalArchangel card) {
+    private OpalArchangel(final OpalArchangel card) {
         super(card);
     }
 

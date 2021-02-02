@@ -43,7 +43,7 @@ public final class WarrenWeirding extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public WarrenWeirding(final WarrenWeirding card) {
+    private WarrenWeirding(final WarrenWeirding card) {
         super(card);
     }
 

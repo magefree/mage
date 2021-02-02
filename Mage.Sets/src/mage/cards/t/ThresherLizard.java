@@ -35,7 +35,7 @@ public final class ThresherLizard extends CardImpl {
                         "{this} gets +1/+2 as long as you have one or fewer cards in hand")));
     }
 
-    public ThresherLizard(final ThresherLizard card) {
+    private ThresherLizard(final ThresherLizard card) {
         super(card);
     }
 

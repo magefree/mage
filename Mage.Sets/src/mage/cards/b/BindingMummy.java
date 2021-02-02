@@ -42,7 +42,7 @@ public final class BindingMummy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BindingMummy(final BindingMummy card) {
+    private BindingMummy(final BindingMummy card) {
         super(card);
     }
 

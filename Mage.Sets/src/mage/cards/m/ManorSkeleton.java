@@ -31,7 +31,7 @@ public final class ManorSkeleton extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }
 
-    public ManorSkeleton(final ManorSkeleton card) {
+    private ManorSkeleton(final ManorSkeleton card) {
         super(card);
     }
 

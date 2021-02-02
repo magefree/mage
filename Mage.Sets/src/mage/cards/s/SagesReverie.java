@@ -53,7 +53,7 @@ public final class SagesReverie extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter))));
     }
 
-    public SagesReverie(final SagesReverie card) {
+    private SagesReverie(final SagesReverie card) {
         super(card);
     }
 

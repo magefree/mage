@@ -32,7 +32,7 @@ public final class WildWurm extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new WildWurmEffect(), false));
     }
 
-    public WildWurm(final WildWurm card) {
+    private WildWurm(final WildWurm card) {
         super(card);
     }
 

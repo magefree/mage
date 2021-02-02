@@ -38,7 +38,7 @@ public final class ArcboundReclaimer extends CardImpl {
         this.addAbility(new ModularAbility(this, 2));
     }
 
-    public ArcboundReclaimer(final ArcboundReclaimer card) {
+    private ArcboundReclaimer(final ArcboundReclaimer card) {
         super(card);
     }
 

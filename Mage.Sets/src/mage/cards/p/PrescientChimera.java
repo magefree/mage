@@ -30,7 +30,7 @@ public final class PrescientChimera extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new ScryEffect(1), StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false));
     }
 
-    public PrescientChimera(final PrescientChimera card) {
+    private PrescientChimera(final PrescientChimera card) {
         super(card);
     }
 

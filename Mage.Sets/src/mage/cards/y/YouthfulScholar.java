@@ -27,7 +27,7 @@ public final class YouthfulScholar extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(2), false));
     }
 
-    public YouthfulScholar(final YouthfulScholar card) {
+    private YouthfulScholar(final YouthfulScholar card) {
         super(card);
     }
 

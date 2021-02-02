@@ -38,7 +38,7 @@ public final class JinGitaxiasCoreAugur extends CardImpl {
                 new MaximumHandSizeControllerEffect(7, Duration.WhileOnBattlefield, HandSizeModification.REDUCE, TargetController.OPPONENT)));
     }
 
-    public JinGitaxiasCoreAugur(final JinGitaxiasCoreAugur card) {
+    private JinGitaxiasCoreAugur(final JinGitaxiasCoreAugur card) {
         super(card);
     }
 

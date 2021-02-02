@@ -46,7 +46,7 @@ public final class WardOfLights extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionChosenColorAttachedEffect(true)));
     }
 
-    public WardOfLights(final WardOfLights card) {
+    private WardOfLights(final WardOfLights card) {
         super(card);
     }
 

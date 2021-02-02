@@ -25,7 +25,7 @@ public final class SmolderingCrater extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public SmolderingCrater(final SmolderingCrater card) {
+    private SmolderingCrater(final SmolderingCrater card) {
         super(card);
     }
 

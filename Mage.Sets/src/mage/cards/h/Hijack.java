@@ -35,7 +35,7 @@ public final class Hijack extends CardImpl {
 
     }
 
-    public Hijack(final Hijack card) {
+    private Hijack(final Hijack card) {
         super(card);
     }
 

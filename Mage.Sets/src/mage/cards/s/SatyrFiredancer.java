@@ -40,7 +40,7 @@ public final class SatyrFiredancer extends CardImpl {
         this.addAbility(new SatyrFiredancerTriggeredAbility());
     }
 
-    public SatyrFiredancer(final SatyrFiredancer card) {
+    private SatyrFiredancer(final SatyrFiredancer card) {
         super(card);
     }
 

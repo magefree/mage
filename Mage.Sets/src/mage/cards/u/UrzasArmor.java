@@ -26,7 +26,7 @@ public final class UrzasArmor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UrzasArmorEffect()));
     }
 
-    public UrzasArmor(final UrzasArmor card) {
+    private UrzasArmor(final UrzasArmor card) {
         super(card);
     }
 

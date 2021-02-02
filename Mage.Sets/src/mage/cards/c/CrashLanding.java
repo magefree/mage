@@ -42,7 +42,7 @@ public final class CrashLanding extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter2));
     }
 
-    public CrashLanding(final CrashLanding card) {
+    private CrashLanding(final CrashLanding card) {
         super(card);
     }
 

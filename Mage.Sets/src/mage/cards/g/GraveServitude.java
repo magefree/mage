@@ -45,7 +45,7 @@ public final class GraveServitude extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GraveServitude(final GraveServitude card) {
+    private GraveServitude(final GraveServitude card) {
         super(card);
     }
 

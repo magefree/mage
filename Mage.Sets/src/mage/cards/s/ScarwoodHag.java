@@ -49,7 +49,7 @@ public final class ScarwoodHag extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScarwoodHag(final ScarwoodHag card) {
+    private ScarwoodHag(final ScarwoodHag card) {
         super(card);
     }
 

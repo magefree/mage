@@ -41,7 +41,7 @@ public final class StoneSeederHierophant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StoneSeederHierophant(final StoneSeederHierophant card) {
+    private StoneSeederHierophant(final StoneSeederHierophant card) {
         super(card);
     }
 

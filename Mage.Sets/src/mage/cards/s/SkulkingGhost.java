@@ -29,7 +29,7 @@ public final class SkulkingGhost extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public SkulkingGhost(final SkulkingGhost card) {
+    private SkulkingGhost(final SkulkingGhost card) {
         super(card);
     }
 

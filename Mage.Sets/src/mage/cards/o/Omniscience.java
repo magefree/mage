@@ -22,7 +22,7 @@ public final class Omniscience extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastFromHandWithoutPayingManaCostEffect()));
     }
 
-    public Omniscience(final Omniscience card) {
+    private Omniscience(final Omniscience card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class CruelCelebrant extends CardImpl {
 
     }
 
-    public CruelCelebrant(final CruelCelebrant card) {
+    private CruelCelebrant(final CruelCelebrant card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class DimirInformant extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SurveilEffect(2), false));
     }
 
-    public DimirInformant(final DimirInformant card) {
+    private DimirInformant(final DimirInformant card) {
         super(card);
     }
 

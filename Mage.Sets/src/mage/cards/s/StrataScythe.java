@@ -40,7 +40,7 @@ public final class StrataScythe extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
     }
 
-    public StrataScythe(final StrataScythe card) {
+    private StrataScythe(final StrataScythe card) {
         super(card);
     }
 

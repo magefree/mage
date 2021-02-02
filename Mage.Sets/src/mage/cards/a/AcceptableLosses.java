@@ -26,7 +26,7 @@ public final class AcceptableLosses extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public AcceptableLosses(final AcceptableLosses card) {
+    private AcceptableLosses(final AcceptableLosses card) {
         super(card);
     }
 

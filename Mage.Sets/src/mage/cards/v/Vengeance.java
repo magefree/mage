@@ -30,7 +30,7 @@ public final class Vengeance extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public Vengeance(final Vengeance card) {
+    private Vengeance(final Vengeance card) {
         super(card);
     }
 

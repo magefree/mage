@@ -25,7 +25,7 @@ public final class BraidwoodCup extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BraidwoodCup(final BraidwoodCup card) {
+    private BraidwoodCup(final BraidwoodCup card) {
         super(card);
     }
 

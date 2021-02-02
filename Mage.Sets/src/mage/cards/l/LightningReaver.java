@@ -47,7 +47,7 @@ public final class LightningReaver extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamageOpponentsEffect(), TargetController.YOU, false));
     }
 
-    public LightningReaver(final LightningReaver card) {
+    private LightningReaver(final LightningReaver card) {
         super(card);
     }
 

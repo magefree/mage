@@ -21,7 +21,7 @@ public final class Foresee extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).concatBy(", then"));
     }
 
-    public Foresee(final Foresee card) {
+    private Foresee(final Foresee card) {
         super(card);
     }
 

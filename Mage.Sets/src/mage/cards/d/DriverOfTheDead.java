@@ -41,7 +41,7 @@ public final class DriverOfTheDead extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DriverOfTheDead(final DriverOfTheDead card) {
+    private DriverOfTheDead(final DriverOfTheDead card) {
         super(card);
     }
 

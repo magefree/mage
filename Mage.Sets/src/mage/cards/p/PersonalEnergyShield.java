@@ -36,7 +36,7 @@ public final class PersonalEnergyShield extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public PersonalEnergyShield(final PersonalEnergyShield card) {
+    private PersonalEnergyShield(final PersonalEnergyShield card) {
         super(card);
     }
 

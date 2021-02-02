@@ -43,7 +43,7 @@ public final class ErrantDoomsayers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ErrantDoomsayers(final ErrantDoomsayers card) {
+    private ErrantDoomsayers(final ErrantDoomsayers card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class GraveyardMarshal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GraveyardMarshal(final GraveyardMarshal card) {
+    private GraveyardMarshal(final GraveyardMarshal card) {
         super(card);
     }
 

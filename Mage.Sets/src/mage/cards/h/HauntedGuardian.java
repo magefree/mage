@@ -27,7 +27,7 @@ public final class HauntedGuardian extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public HauntedGuardian(final HauntedGuardian card) {
+    private HauntedGuardian(final HauntedGuardian card) {
         super(card);
     }
 

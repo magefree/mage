@@ -52,7 +52,7 @@ public final class DelifsCube extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public DelifsCube(final DelifsCube card) {
+    private DelifsCube(final DelifsCube card) {
         super(card);
     }
 

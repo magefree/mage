@@ -28,7 +28,7 @@ public final class BurningTreeEmissary extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BasicManaEffect(new Mana(0, 0, 0, 1,1, 0,0, 0))));
     }
 
-    public BurningTreeEmissary(final BurningTreeEmissary card) {
+    private BurningTreeEmissary(final BurningTreeEmissary card) {
         super(card);
     }
 

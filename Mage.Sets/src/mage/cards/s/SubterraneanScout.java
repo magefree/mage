@@ -41,7 +41,7 @@ public final class SubterraneanScout extends CardImpl {
         
     }
 
-    public SubterraneanScout(final SubterraneanScout card) {
+    private SubterraneanScout(final SubterraneanScout card) {
         super(card);
     }
 

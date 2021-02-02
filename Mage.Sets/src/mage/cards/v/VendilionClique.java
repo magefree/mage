@@ -49,7 +49,7 @@ public final class VendilionClique extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VendilionClique(final VendilionClique card) {
+    private VendilionClique(final VendilionClique card) {
         super(card);
     }
 

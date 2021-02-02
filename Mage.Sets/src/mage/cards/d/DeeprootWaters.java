@@ -31,7 +31,7 @@ public final class DeeprootWaters extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new MerfolkHexproofToken()), filter, false));
     }
 
-    public DeeprootWaters(final DeeprootWaters card) {
+    private DeeprootWaters(final DeeprootWaters card) {
         super(card);
     }
 

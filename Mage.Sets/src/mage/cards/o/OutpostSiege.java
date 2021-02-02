@@ -62,7 +62,7 @@ public final class OutpostSiege extends CardImpl {
 
     }
 
-    public OutpostSiege(final OutpostSiege card) {
+    private OutpostSiege(final OutpostSiege card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class FrayingSanity extends CardImpl {
 
     }
 
-    public FrayingSanity(final FrayingSanity card) {
+    private FrayingSanity(final FrayingSanity card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class IntoTheFray extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{R}"));
     }
 
-    public IntoTheFray(final IntoTheFray card) {
+    private IntoTheFray(final IntoTheFray card) {
         super(card);
     }
 

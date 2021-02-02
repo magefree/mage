@@ -35,7 +35,7 @@ public final class GhituSlinger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhituSlinger(final GhituSlinger card) {
+    private GhituSlinger(final GhituSlinger card) {
         super(card);
     }
 

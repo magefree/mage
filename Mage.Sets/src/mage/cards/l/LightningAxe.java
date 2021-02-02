@@ -28,7 +28,7 @@ public final class LightningAxe extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public LightningAxe(final LightningAxe card) {
+    private LightningAxe(final LightningAxe card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class CuriousHomunculus extends CardImpl {
                 "At the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform {this}"));
     }
 
-    public CuriousHomunculus(final CuriousHomunculus card) {
+    private CuriousHomunculus(final CuriousHomunculus card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class LiltingRefrain extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LiltingRefrain(final LiltingRefrain card) {
+    private LiltingRefrain(final LiltingRefrain card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class CloudPirates extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public CloudPirates(final CloudPirates card) {
+    private CloudPirates(final CloudPirates card) {
         super(card);
     }
 

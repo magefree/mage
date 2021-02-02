@@ -66,7 +66,7 @@ public final class LenaSelflessChampion extends CardImpl {
         ));
     }
 
-    public LenaSelflessChampion(final LenaSelflessChampion card) {
+    private LenaSelflessChampion(final LenaSelflessChampion card) {
         super(card);
     }
 

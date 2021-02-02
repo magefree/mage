@@ -33,7 +33,7 @@ public final class PathToExile extends CardImpl {
         this.getSpellAbility().addEffect(new PathToExileEffect());
     }
 
-    public PathToExile(final PathToExile card) {
+    private PathToExile(final PathToExile card) {
         super(card);
     }
 

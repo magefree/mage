@@ -47,7 +47,7 @@ public final class ChoArrimLegate extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(null, condition));
     }
 
-    public ChoArrimLegate(final ChoArrimLegate card) {
+    private ChoArrimLegate(final ChoArrimLegate card) {
         super(card);
     }
 

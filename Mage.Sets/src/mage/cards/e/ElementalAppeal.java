@@ -38,7 +38,7 @@ public final class ElementalAppeal extends CardImpl {
         this.getSpellAbility().addEffect(new ElementalAppealEffect());
     }
 
-    public ElementalAppeal(final ElementalAppeal card) {
+    private ElementalAppeal(final ElementalAppeal card) {
         super(card);
     }
 

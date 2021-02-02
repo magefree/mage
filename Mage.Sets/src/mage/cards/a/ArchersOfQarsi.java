@@ -29,7 +29,7 @@ public final class ArchersOfQarsi extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public ArchersOfQarsi(final ArchersOfQarsi card) {
+    private ArchersOfQarsi(final ArchersOfQarsi card) {
         super(card);
     }
 

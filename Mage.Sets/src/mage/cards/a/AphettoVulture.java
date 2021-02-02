@@ -43,7 +43,7 @@ public final class AphettoVulture extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AphettoVulture(final AphettoVulture card) {
+    private AphettoVulture(final AphettoVulture card) {
         super(card);
     }
 

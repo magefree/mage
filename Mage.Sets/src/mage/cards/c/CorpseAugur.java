@@ -41,7 +41,7 @@ public final class CorpseAugur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CorpseAugur(final CorpseAugur card) {
+    private CorpseAugur(final CorpseAugur card) {
         super(card);
     }
 

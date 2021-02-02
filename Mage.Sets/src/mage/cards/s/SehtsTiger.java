@@ -44,7 +44,7 @@ public final class SehtsTiger extends CardImpl {
 
     }
 
-    public SehtsTiger(final SehtsTiger card) {
+    private SehtsTiger(final SehtsTiger card) {
         super(card);
     }
 

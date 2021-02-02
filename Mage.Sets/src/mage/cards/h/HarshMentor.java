@@ -37,7 +37,7 @@ public final class HarshMentor extends CardImpl {
         this.addAbility(new HarshMentorTriggeredAbility());
     }
 
-    public HarshMentor(final HarshMentor card) {
+    private HarshMentor(final HarshMentor card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class SuddenShock extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public SuddenShock(final SuddenShock card) {
+    private SuddenShock(final SuddenShock card) {
         super(card);
     }
 

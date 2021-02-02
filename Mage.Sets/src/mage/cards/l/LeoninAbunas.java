@@ -31,7 +31,7 @@ public final class LeoninAbunas extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, new FilterArtifactPermanent(), false)));
     }
 
-    public LeoninAbunas(final LeoninAbunas card) {
+    private LeoninAbunas(final LeoninAbunas card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class GrayOgre extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public GrayOgre(final GrayOgre card) {
+    private GrayOgre(final GrayOgre card) {
         super(card);
     }
 

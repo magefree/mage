@@ -22,7 +22,7 @@ public final class FelhideMinotaur extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public FelhideMinotaur(final FelhideMinotaur card) {
+    private FelhideMinotaur(final FelhideMinotaur card) {
         super(card);
     }
 

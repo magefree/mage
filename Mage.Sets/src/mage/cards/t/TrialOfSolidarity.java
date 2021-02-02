@@ -47,7 +47,7 @@ public final class TrialOfSolidarity extends CardImpl {
                 "When a Cartouche enters the battlefield under your control, return {this} to its owner's hand"));
     }
 
-    public TrialOfSolidarity(final TrialOfSolidarity card) {
+    private TrialOfSolidarity(final TrialOfSolidarity card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class MeganticSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(3, 3, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
-    public MeganticSliver(final MeganticSliver card) {
+    private MeganticSliver(final MeganticSliver card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class WeiAssassins extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WeiAssassins(final WeiAssassins card) {
+    private WeiAssassins(final WeiAssassins card) {
         super(card);
     }
 

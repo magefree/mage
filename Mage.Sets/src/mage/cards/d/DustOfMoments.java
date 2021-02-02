@@ -42,7 +42,7 @@ public final class DustOfMoments extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public DustOfMoments(final DustOfMoments card) {
+    private DustOfMoments(final DustOfMoments card) {
         super(card);
     }
 

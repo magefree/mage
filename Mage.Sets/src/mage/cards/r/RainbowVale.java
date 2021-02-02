@@ -31,7 +31,7 @@ public final class RainbowVale extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RainbowVale(final RainbowVale card) {
+    private RainbowVale(final RainbowVale card) {
         super(card);
     }
 

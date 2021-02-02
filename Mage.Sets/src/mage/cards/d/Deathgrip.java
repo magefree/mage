@@ -34,7 +34,7 @@ public final class Deathgrip extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Deathgrip(final Deathgrip card) {
+    private Deathgrip(final Deathgrip card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class TalruumPiper extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TalruumPiperEffect()));
     }
 
-    public TalruumPiper(final TalruumPiper card) {
+    private TalruumPiper(final TalruumPiper card) {
         super(card);
     }
 

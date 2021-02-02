@@ -37,7 +37,7 @@ public final class SergeantAtArms extends CardImpl {
                 "if it was kicked, create two 1/1 white Soldier creature tokens.")));
     }
 
-    public SergeantAtArms(final SergeantAtArms card) {
+    private SergeantAtArms(final SergeantAtArms card) {
         super(card);
     }
 

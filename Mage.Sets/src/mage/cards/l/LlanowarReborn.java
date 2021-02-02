@@ -27,7 +27,7 @@ public final class LlanowarReborn extends CardImpl {
         
     }
 
-    public LlanowarReborn(final LlanowarReborn card) {
+    private LlanowarReborn(final LlanowarReborn card) {
         super(card);
     }
 

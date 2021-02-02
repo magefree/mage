@@ -40,7 +40,7 @@ public final class CylianSunsinger extends CardImpl {
         
     }
 
-    public CylianSunsinger(final CylianSunsinger card) {
+    private CylianSunsinger(final CylianSunsinger card) {
         super(card);
     }
 

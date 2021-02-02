@@ -42,7 +42,7 @@ public final class ChampionOfDusk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChampionOfDusk(final ChampionOfDusk card) {
+    private ChampionOfDusk(final ChampionOfDusk card) {
         super(card);
     }
 

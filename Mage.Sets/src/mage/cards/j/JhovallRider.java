@@ -27,7 +27,7 @@ public final class JhovallRider extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public JhovallRider(final JhovallRider card) {
+    private JhovallRider(final JhovallRider card) {
         super(card);
     }
 

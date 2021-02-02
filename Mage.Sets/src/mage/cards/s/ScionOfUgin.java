@@ -26,7 +26,7 @@ public final class ScionOfUgin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public ScionOfUgin(final ScionOfUgin card) {
+    private ScionOfUgin(final ScionOfUgin card) {
         super(card);
     }
 

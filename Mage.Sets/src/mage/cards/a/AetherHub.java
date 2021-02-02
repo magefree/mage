@@ -33,7 +33,7 @@ public final class AetherHub extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AetherHub(final AetherHub card) {
+    private AetherHub(final AetherHub card) {
         super(card);
     }
 

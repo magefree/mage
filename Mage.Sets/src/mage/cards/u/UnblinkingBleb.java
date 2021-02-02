@@ -32,7 +32,7 @@ public final class UnblinkingBleb extends CardImpl {
         this.addAbility(new TurnedFaceUpAllTriggeredAbility(new ScryEffect(2), new FilterPermanent("{this} or another permanent"), true));
     }
 
-    public UnblinkingBleb(final UnblinkingBleb card) {
+    private UnblinkingBleb(final UnblinkingBleb card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class GraniteShard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GraniteShard(final GraniteShard card) {
+    private GraniteShard(final GraniteShard card) {
         super(card);
     }
 

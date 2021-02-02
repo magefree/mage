@@ -51,7 +51,7 @@ public final class SisaysIngenuity extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public SisaysIngenuity(final SisaysIngenuity card) {
+    private SisaysIngenuity(final SisaysIngenuity card) {
         super(card);
     }
 

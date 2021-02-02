@@ -30,7 +30,7 @@ public final class ThrillingEncore extends CardImpl {
         this.getSpellAbility().addWatcher(new CardsPutIntoGraveyardWatcher());
     }
 
-    public ThrillingEncore(final ThrillingEncore card) {
+    private ThrillingEncore(final ThrillingEncore card) {
         super(card);
     }
 

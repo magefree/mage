@@ -37,7 +37,7 @@ public final class Karstoderm extends CardImpl {
                 new FilterArtifactPermanent("an artifact"), false));
     }
 
-    public Karstoderm(final Karstoderm card) {
+    private Karstoderm(final Karstoderm card) {
         super(card);
     }
 

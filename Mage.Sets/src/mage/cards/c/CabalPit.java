@@ -45,7 +45,7 @@ public final class CabalPit extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public CabalPit(final CabalPit card) {
+    private CabalPit(final CabalPit card) {
         super(card);
     }
 

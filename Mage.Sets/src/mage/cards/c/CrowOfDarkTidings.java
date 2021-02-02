@@ -31,7 +31,7 @@ public final class CrowOfDarkTidings extends CardImpl {
         this.addAbility(new EntersBattlefieldOrDiesSourceTriggeredAbility(new MillCardsControllerEffect(2), false));
     }
 
-    public CrowOfDarkTidings(final CrowOfDarkTidings card) {
+    private CrowOfDarkTidings(final CrowOfDarkTidings card) {
         super(card);
     }
 

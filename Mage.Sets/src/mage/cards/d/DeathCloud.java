@@ -38,7 +38,7 @@ public final class DeathCloud extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public DeathCloud(final DeathCloud card) {
+    private DeathCloud(final DeathCloud card) {
         super(card);
     }
 

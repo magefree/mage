@@ -27,7 +27,7 @@ public final class ArcticFlats extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public ArcticFlats(final ArcticFlats card) {
+    private ArcticFlats(final ArcticFlats card) {
         super(card);
     }
 

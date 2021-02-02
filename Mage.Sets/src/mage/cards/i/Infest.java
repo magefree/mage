@@ -23,7 +23,7 @@ public final class Infest extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn, new FilterCreaturePermanent("All creatures"), false));
     }
 
-    public Infest(final Infest card) {
+    private Infest(final Infest card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class RenegadeMap extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RenegadeMap(final RenegadeMap card) {
+    private RenegadeMap(final RenegadeMap card) {
         super(card);
     }
 

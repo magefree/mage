@@ -41,7 +41,7 @@ public final class ResoluteSurvivors extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ResoluteSurvivors(final ResoluteSurvivors card) {
+    private ResoluteSurvivors(final ResoluteSurvivors card) {
         super(card);
     }
 

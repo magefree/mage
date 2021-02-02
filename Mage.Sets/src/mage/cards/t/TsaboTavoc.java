@@ -52,7 +52,7 @@ public final class TsaboTavoc extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public TsaboTavoc(final TsaboTavoc card) {
+    private TsaboTavoc(final TsaboTavoc card) {
         super(card);
     }
 

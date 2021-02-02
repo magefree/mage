@@ -48,7 +48,7 @@ public final class UnderhandedDesigns extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnderhandedDesigns(final UnderhandedDesigns card) {
+    private UnderhandedDesigns(final UnderhandedDesigns card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class SacredKnight extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public SacredKnight(final SacredKnight card) {
+    private SacredKnight(final SacredKnight card) {
         super(card);
     }
 

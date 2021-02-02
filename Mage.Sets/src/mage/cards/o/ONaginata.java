@@ -57,7 +57,7 @@ public final class ONaginata extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), target));
     }
 
-    public ONaginata(final ONaginata card) {
+    private ONaginata(final ONaginata card) {
         super(card);
     }
 

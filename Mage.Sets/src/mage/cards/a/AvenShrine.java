@@ -33,7 +33,7 @@ public final class AvenShrine extends CardImpl {
 
     }
 
-    public AvenShrine(final AvenShrine card) {
+    private AvenShrine(final AvenShrine card) {
         super(card);
     }
 

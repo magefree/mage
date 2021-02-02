@@ -48,7 +48,7 @@ public final class NightfireGiant extends CardImpl {
 
     }
 
-    public NightfireGiant(final NightfireGiant card) {
+    private NightfireGiant(final NightfireGiant card) {
         super(card);
     }
 

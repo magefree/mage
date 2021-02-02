@@ -32,7 +32,7 @@ public final class BladeOfTheBloodchief extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public BladeOfTheBloodchief(final BladeOfTheBloodchief card) {
+    private BladeOfTheBloodchief(final BladeOfTheBloodchief card) {
         super(card);
     }
 

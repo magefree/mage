@@ -26,7 +26,7 @@ public final class FuriousAssault extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FuriousAssault(final FuriousAssault card) {
+    private FuriousAssault(final FuriousAssault card) {
         super(card);
     }
 

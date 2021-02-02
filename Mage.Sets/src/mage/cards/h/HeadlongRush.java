@@ -23,7 +23,7 @@ public final class HeadlongRush extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature()));
     }
 
-    public HeadlongRush(final HeadlongRush card) {
+    private HeadlongRush(final HeadlongRush card) {
         super(card);
     }
 

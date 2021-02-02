@@ -38,7 +38,7 @@ public final class StarCrownedStag extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StarCrownedStag(final StarCrownedStag card) {
+    private StarCrownedStag(final StarCrownedStag card) {
         super(card);
     }
 

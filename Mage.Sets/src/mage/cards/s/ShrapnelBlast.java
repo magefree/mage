@@ -30,7 +30,7 @@ public final class ShrapnelBlast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public ShrapnelBlast(final ShrapnelBlast card) {
+    private ShrapnelBlast(final ShrapnelBlast card) {
         super(card);
     }
 

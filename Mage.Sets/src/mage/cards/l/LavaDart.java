@@ -37,7 +37,7 @@ public final class LavaDart extends CardImpl {
         this.addAbility(new FlashbackAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter)), TimingRule.INSTANT));
     }
 
-    public LavaDart(final LavaDart card) {
+    private LavaDart(final LavaDart card) {
         super(card);
     }
 

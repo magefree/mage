@@ -53,7 +53,7 @@ public final class ElvishScout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElvishScout(final ElvishScout card) {
+    private ElvishScout(final ElvishScout card) {
         super(card);
     }
 

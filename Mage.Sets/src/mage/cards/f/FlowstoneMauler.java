@@ -35,7 +35,7 @@ public final class FlowstoneMauler extends CardImpl {
                 new ManaCostsImpl("{R}")));
     }
 
-    public FlowstoneMauler(final FlowstoneMauler card) {
+    private FlowstoneMauler(final FlowstoneMauler card) {
         super(card);
     }
 

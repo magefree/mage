@@ -44,7 +44,7 @@ public final class AwakenTheAncient extends CardImpl {
 
     }
 
-    public AwakenTheAncient(final AwakenTheAncient card) {
+    private AwakenTheAncient(final AwakenTheAncient card) {
         super(card);
     }
 

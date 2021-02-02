@@ -37,7 +37,7 @@ public final class FallenCleric extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{B}")));
     }
 
-    public FallenCleric(final FallenCleric card) {
+    private FallenCleric(final FallenCleric card) {
         super(card);
     }
 

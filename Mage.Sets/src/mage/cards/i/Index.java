@@ -21,7 +21,7 @@ public final class Index extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryControllerEffect(5));
     }
 
-    public Index(final Index card) {
+    private Index(final Index card) {
         super(card);
     }
 

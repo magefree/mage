@@ -30,7 +30,7 @@ public final class Abundance extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbundanceReplacementEffect()));
     }
 
-    public Abundance(final Abundance card) {
+    private Abundance(final Abundance card) {
         super(card);
     }
 

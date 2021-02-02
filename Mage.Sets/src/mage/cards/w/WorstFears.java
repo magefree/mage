@@ -25,7 +25,7 @@ public final class WorstFears extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public WorstFears(final WorstFears card) {
+    private WorstFears(final WorstFears card) {
         super(card);
     }
 

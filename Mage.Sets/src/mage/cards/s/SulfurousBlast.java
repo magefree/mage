@@ -26,7 +26,7 @@ public final class SulfurousBlast extends CardImpl {
                 "Sulfurous Blast deals 2 damage to each creature and each player. If you cast this spell during your main phase, Sulfurous Blast deals 3 damage to each creature and each player instead"));
     }
 
-    public SulfurousBlast(final SulfurousBlast card) {
+    private SulfurousBlast(final SulfurousBlast card) {
         super(card);
     }
 

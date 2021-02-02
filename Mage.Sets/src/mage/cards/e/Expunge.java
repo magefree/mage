@@ -40,7 +40,7 @@ public final class Expunge extends CardImpl {
 		
     }
 
-    public Expunge(final Expunge card) {
+    private Expunge(final Expunge card) {
         super(card);
     }
 

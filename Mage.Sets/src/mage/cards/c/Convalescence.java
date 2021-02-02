@@ -27,7 +27,7 @@ public final class Convalescence extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConvalescenceEffect(), TargetController.YOU, false));
     }
 
-    public Convalescence(final Convalescence card) {
+    private Convalescence(final Convalescence card) {
         super(card);
     }
 

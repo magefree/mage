@@ -35,7 +35,7 @@ public final class MirrorWall extends CardImpl {
                 new ManaCostsImpl("{W}")));
     }
 
-    public MirrorWall(final MirrorWall card) {
+    private MirrorWall(final MirrorWall card) {
         super(card);
     }
 

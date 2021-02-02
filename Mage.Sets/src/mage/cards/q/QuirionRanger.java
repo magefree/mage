@@ -42,7 +42,7 @@ public final class QuirionRanger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuirionRanger(final QuirionRanger card) {
+    private QuirionRanger(final QuirionRanger card) {
         super(card);
     }
 

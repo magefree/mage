@@ -36,7 +36,7 @@ public final class Foreshadow extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public Foreshadow(final Foreshadow card) {
+    private Foreshadow(final Foreshadow card) {
         super(card);
     }
 

@@ -60,7 +60,7 @@ public final class TravelingPlague extends CardImpl {
 
     }
 
-    public TravelingPlague(final TravelingPlague card) {
+    private TravelingPlague(final TravelingPlague card) {
         super(card);
     }
 

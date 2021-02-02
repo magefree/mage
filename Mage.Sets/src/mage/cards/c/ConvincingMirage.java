@@ -41,7 +41,7 @@ public final class ConvincingMirage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConvincingMirageContinousEffect()));
     }
 
-    public ConvincingMirage(final ConvincingMirage card) {
+    private ConvincingMirage(final ConvincingMirage card) {
         super(card);
     }
 

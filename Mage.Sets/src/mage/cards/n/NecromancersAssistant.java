@@ -26,7 +26,7 @@ public final class NecromancersAssistant extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(3)));
     }
 
-    public NecromancersAssistant(final NecromancersAssistant card) {
+    private NecromancersAssistant(final NecromancersAssistant card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class UrborgUprising extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public UrborgUprising(final UrborgUprising card) {
+    private UrborgUprising(final UrborgUprising card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class GodsWilling extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public GodsWilling(final GodsWilling card) {
+    private GodsWilling(final GodsWilling card) {
         super(card);
     }
 

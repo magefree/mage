@@ -26,7 +26,7 @@ public final class Mugging extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Mugging(final Mugging card) {
+    private Mugging(final Mugging card) {
         super(card);
     }
 

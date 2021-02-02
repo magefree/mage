@@ -44,7 +44,7 @@ public final class SaprolingBurst extends CardImpl {
         this.addAbility(new SaprolingBurstLeavesBattlefieldTriggeredAbility());
     }
 
-    public SaprolingBurst(final SaprolingBurst card) {
+    private SaprolingBurst(final SaprolingBurst card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class KithkinGreatheart extends CardImpl {
 
     }
 
-    public KithkinGreatheart(final KithkinGreatheart card) {
+    private KithkinGreatheart(final KithkinGreatheart card) {
         super(card);
     }
 

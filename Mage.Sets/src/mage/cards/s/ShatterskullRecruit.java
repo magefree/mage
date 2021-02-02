@@ -27,7 +27,7 @@ public final class ShatterskullRecruit extends CardImpl {
         this.addAbility(new MenaceAbility());
     }
 
-    public ShatterskullRecruit(final ShatterskullRecruit card) {
+    private ShatterskullRecruit(final ShatterskullRecruit card) {
         super(card);
     }
 

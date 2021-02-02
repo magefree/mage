@@ -40,7 +40,7 @@ public final class HolisticWisdom extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HolisticWisdom(final HolisticWisdom card) {
+    private HolisticWisdom(final HolisticWisdom card) {
         super(card);
     }
 

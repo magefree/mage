@@ -35,7 +35,7 @@ public final class RestorationGearsmith extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RestorationGearsmith(final RestorationGearsmith card) {
+    private RestorationGearsmith(final RestorationGearsmith card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class Exorcist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Exorcist(final Exorcist card) {
+    private Exorcist(final Exorcist card) {
         super(card);
     }
 

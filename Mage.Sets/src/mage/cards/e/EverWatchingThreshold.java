@@ -25,7 +25,7 @@ public final class EverWatchingThreshold extends CardImpl {
         this.addAbility(new EverWatchingThresholdTriggeredAbility());
     }
 
-    public EverWatchingThreshold(final EverWatchingThreshold card) {
+    private EverWatchingThreshold(final EverWatchingThreshold card) {
         super(card);
     }
 

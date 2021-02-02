@@ -33,7 +33,7 @@ public final class SpeedwayFanatic extends CardImpl {
                 "that Vehicle gains haste until end of turn")));
     }
 
-    public SpeedwayFanatic(final SpeedwayFanatic card) {
+    private SpeedwayFanatic(final SpeedwayFanatic card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class SteppeLynx extends CardImpl {
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public SteppeLynx(final SteppeLynx card) {
+    private SteppeLynx(final SteppeLynx card) {
         super(card);
     }
 

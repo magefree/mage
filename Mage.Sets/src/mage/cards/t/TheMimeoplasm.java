@@ -37,7 +37,7 @@ public final class TheMimeoplasm extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new TheMimeoplasmEffect(), "you may exile two creature cards from graveyards. If you do, it enters the battlefield as a copy of one of those cards with a number of additional +1/+1 counters on it equal to the power of the other card"));
     }
 
-    public TheMimeoplasm(final TheMimeoplasm card) {
+    private TheMimeoplasm(final TheMimeoplasm card) {
         super(card);
     }
 

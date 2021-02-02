@@ -47,7 +47,7 @@ public final class RingOfKalonia extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
-    public RingOfKalonia(final RingOfKalonia card) {
+    private RingOfKalonia(final RingOfKalonia card) {
         super(card);
     }
 

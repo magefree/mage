@@ -31,7 +31,7 @@ public final class FissureVent extends CardImpl {
         this.getSpellAbility().addMode(mode1);
     }
 
-    public FissureVent(final FissureVent card) {
+    private FissureVent(final FissureVent card) {
         super(card);
     }
 

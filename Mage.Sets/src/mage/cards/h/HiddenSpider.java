@@ -44,7 +44,7 @@ public final class HiddenSpider extends CardImpl {
                 "When an opponent casts a creature spell with flying, if {this} is an enchantment, {this} becomes a 3/5 Spider creature with reach."));
     }
 
-    public HiddenSpider(final HiddenSpider card) {
+    private HiddenSpider(final HiddenSpider card) {
         super(card);
     }
 

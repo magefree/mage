@@ -31,7 +31,7 @@ public final class Borrowing100000Arrows extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public Borrowing100000Arrows(final Borrowing100000Arrows card) {
+    private Borrowing100000Arrows(final Borrowing100000Arrows card) {
         super(card);
     }
 

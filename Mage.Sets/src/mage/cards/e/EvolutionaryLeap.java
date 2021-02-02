@@ -29,7 +29,7 @@ public final class EvolutionaryLeap extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EvolutionaryLeap(final EvolutionaryLeap card) {
+    private EvolutionaryLeap(final EvolutionaryLeap card) {
         super(card);
     }
 

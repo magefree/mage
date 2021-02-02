@@ -46,7 +46,7 @@ public final class SpireSerpent extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpireSerpent(final SpireSerpent card) {
+    private SpireSerpent(final SpireSerpent card) {
         super(card);
     }
 

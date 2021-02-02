@@ -22,7 +22,7 @@ public final class ImpeccableTiming extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
     }
 
-    public ImpeccableTiming(final ImpeccableTiming card) {
+    private ImpeccableTiming(final ImpeccableTiming card) {
         super(card);
     }
 

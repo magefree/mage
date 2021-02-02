@@ -40,7 +40,7 @@ public class Soulshriek extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
-    public Soulshriek(final Soulshriek card) {
+    private Soulshriek(final Soulshriek card) {
         super(card);
     }
 

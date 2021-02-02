@@ -36,7 +36,7 @@ public final class FavorOfTheWoods extends CardImpl {
         this.addAbility(new BlocksAttachedTriggeredAbility(new GainLifeEffect(3), "enchanted", false));
     }
 
-    public FavorOfTheWoods(final FavorOfTheWoods card) {
+    private FavorOfTheWoods(final FavorOfTheWoods card) {
         super(card);
     }
 

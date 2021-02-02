@@ -52,7 +52,7 @@ public final class SpellstutterSprite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpellstutterSprite(final SpellstutterSprite card) {
+    private SpellstutterSprite(final SpellstutterSprite card) {
         super(card);
     }
 

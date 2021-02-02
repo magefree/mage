@@ -40,7 +40,7 @@ public final class BlindSpotGiant extends CardImpl {
 
     }
 
-    public BlindSpotGiant(final BlindSpotGiant card) {
+    private BlindSpotGiant(final BlindSpotGiant card) {
         super(card);
     }
 

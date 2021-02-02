@@ -35,7 +35,7 @@ public final class GaeasTouch extends CardImpl {
         addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new SacrificeSourceCost()));
     }
 
-    public GaeasTouch(final GaeasTouch card) {
+    private GaeasTouch(final GaeasTouch card) {
         super(card);
     }
 

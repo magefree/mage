@@ -39,7 +39,7 @@ public final class BarrinMasterWizard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BarrinMasterWizard(final BarrinMasterWizard card) {
+    private BarrinMasterWizard(final BarrinMasterWizard card) {
         super(card);
     }
 

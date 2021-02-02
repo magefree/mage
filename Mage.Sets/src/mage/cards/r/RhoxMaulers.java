@@ -29,7 +29,7 @@ public final class RhoxMaulers extends CardImpl {
         this.addAbility(new RenownAbility(2));
     }
 
-    public RhoxMaulers(final RhoxMaulers card) {
+    private RhoxMaulers(final RhoxMaulers card) {
         super(card);
     }
 

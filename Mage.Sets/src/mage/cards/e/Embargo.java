@@ -33,7 +33,7 @@ public final class Embargo extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), TargetController.YOU, false));
     }
 
-    public Embargo(final Embargo card) {
+    private Embargo(final Embargo card) {
         super(card);
     }
 

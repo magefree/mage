@@ -37,7 +37,7 @@ public final class SoulsurgeElemental extends CardImpl {
                 .addHint(CreaturesYouControlHint.instance));
     }
 
-    public SoulsurgeElemental(final SoulsurgeElemental card) {
+    private SoulsurgeElemental(final SoulsurgeElemental card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class Countersquall extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(2));
     }
 
-    public Countersquall(final Countersquall card) {
+    private Countersquall(final Countersquall card) {
         super(card);
     }
 

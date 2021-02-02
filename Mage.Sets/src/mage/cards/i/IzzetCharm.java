@@ -46,7 +46,7 @@ public final class IzzetCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public IzzetCharm(final IzzetCharm card) {
+    private IzzetCharm(final IzzetCharm card) {
         super(card);
     }
 

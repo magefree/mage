@@ -47,7 +47,7 @@ public final class AnimateWall extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, enchantEffect));
     }
 
-    public AnimateWall(final AnimateWall card) {
+    private AnimateWall(final AnimateWall card) {
         super(card);
     }
 

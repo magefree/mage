@@ -27,7 +27,7 @@ public final class ElvishMystic extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public ElvishMystic(final ElvishMystic card) {
+    private ElvishMystic(final ElvishMystic card) {
         super(card);
     }
 

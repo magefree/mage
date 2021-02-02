@@ -35,7 +35,7 @@ public final class ViashinoSandstalker extends CardImpl {
             TargetController.ANY, false));
     }
 
-    public ViashinoSandstalker(final ViashinoSandstalker card) {
+    private ViashinoSandstalker(final ViashinoSandstalker card) {
         super(card);
     }
 

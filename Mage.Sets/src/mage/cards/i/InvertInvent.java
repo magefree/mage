@@ -38,7 +38,7 @@ public final class InvertInvent extends SplitCard {
         this.getRightHalfCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new InventTarget(), true));
     }
 
-    public InvertInvent(final InvertInvent card) {
+    private InvertInvent(final InvertInvent card) {
         super(card);
     }
 

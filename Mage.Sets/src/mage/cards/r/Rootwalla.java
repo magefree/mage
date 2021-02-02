@@ -28,7 +28,7 @@ public final class Rootwalla extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
     }
 
-    public Rootwalla(final Rootwalla card) {
+    private Rootwalla(final Rootwalla card) {
         super(card);
     }
 

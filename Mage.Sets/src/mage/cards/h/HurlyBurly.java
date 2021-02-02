@@ -35,7 +35,7 @@ public final class HurlyBurly extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public HurlyBurly(final HurlyBurly card) {
+    private HurlyBurly(final HurlyBurly card) {
         super(card);
     }
 

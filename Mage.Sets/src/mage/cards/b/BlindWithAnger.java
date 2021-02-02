@@ -37,7 +37,7 @@ public final class BlindWithAnger extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public BlindWithAnger(final BlindWithAnger card) {
+    private BlindWithAnger(final BlindWithAnger card) {
         super(card);
     }
 

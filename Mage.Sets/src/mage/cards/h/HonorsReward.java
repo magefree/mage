@@ -23,7 +23,7 @@ public final class HonorsReward extends CardImpl {
         this.getSpellAbility().addEffect(new BolsterEffect(2));
     }
 
-    public HonorsReward(final HonorsReward card) {
+    private HonorsReward(final HonorsReward card) {
         super(card);
     }
 

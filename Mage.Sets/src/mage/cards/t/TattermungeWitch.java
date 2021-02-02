@@ -44,7 +44,7 @@ public final class TattermungeWitch extends CardImpl {
         
     }
 
-    public TattermungeWitch(final TattermungeWitch card) {
+    private TattermungeWitch(final TattermungeWitch card) {
         super(card);
     }
 

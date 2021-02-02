@@ -28,7 +28,7 @@ public final class SliptideSerpent extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl("{3}{U}")));
     }
 
-    public SliptideSerpent(final SliptideSerpent card) {
+    private SliptideSerpent(final SliptideSerpent card) {
         super(card);
     }
 

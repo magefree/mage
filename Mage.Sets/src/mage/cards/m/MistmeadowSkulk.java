@@ -37,7 +37,7 @@ public final class MistmeadowSkulk extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public MistmeadowSkulk(final MistmeadowSkulk card) {
+    private MistmeadowSkulk(final MistmeadowSkulk card) {
         super(card);
     }
 

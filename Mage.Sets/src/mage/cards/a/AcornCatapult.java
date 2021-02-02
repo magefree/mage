@@ -35,7 +35,7 @@ public final class AcornCatapult extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AcornCatapult(final AcornCatapult card) {
+    private AcornCatapult(final AcornCatapult card) {
         super(card);
     }
 

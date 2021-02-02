@@ -28,7 +28,7 @@ public final class VodalianArcanist extends CardImpl {
                 new mage.abilities.mana.builder.common.InstantOrSorcerySpellManaBuilder()));
     }
 
-    public VodalianArcanist(final VodalianArcanist card) {
+    private VodalianArcanist(final VodalianArcanist card) {
         super(card);
     }
 

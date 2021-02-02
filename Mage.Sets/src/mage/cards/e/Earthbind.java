@@ -46,7 +46,7 @@ public final class Earthbind extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public Earthbind(final Earthbind card) {
+    private Earthbind(final Earthbind card) {
         super(card);
     }
 

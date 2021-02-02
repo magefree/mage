@@ -34,7 +34,7 @@ public final class AltarOfDementia extends CardImpl {
 
     }
 
-    public AltarOfDementia(final AltarOfDementia card) {
+    private AltarOfDementia(final AltarOfDementia card) {
         super(card);
     }
 

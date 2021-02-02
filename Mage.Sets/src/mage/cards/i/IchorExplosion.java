@@ -37,7 +37,7 @@ public final class IchorExplosion extends CardImpl {
 
     }
 
-    public IchorExplosion(final IchorExplosion card) {
+    private IchorExplosion(final IchorExplosion card) {
         super(card);
     }
 

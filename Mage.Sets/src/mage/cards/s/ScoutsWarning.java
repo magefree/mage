@@ -37,7 +37,7 @@ public final class ScoutsWarning extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public ScoutsWarning(final ScoutsWarning card) {
+    private ScoutsWarning(final ScoutsWarning card) {
         super(card);
     }
 

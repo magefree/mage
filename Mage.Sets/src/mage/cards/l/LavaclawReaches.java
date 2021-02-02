@@ -39,7 +39,7 @@ public final class LavaclawReaches extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new LavaclawReachesToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{B}{R}")));
     }
 
-    public LavaclawReaches(final LavaclawReaches card) {
+    private LavaclawReaches(final LavaclawReaches card) {
         super(card);
     }
 

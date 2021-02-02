@@ -32,7 +32,7 @@ public final class GiantAdephage extends CardImpl {
 
     }
 
-    public GiantAdephage(final GiantAdephage card) {
+    private GiantAdephage(final GiantAdephage card) {
         super(card);
     }
 

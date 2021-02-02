@@ -48,7 +48,7 @@ public final class RimewindTaskmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RimewindTaskmage(final RimewindTaskmage card) {
+    private RimewindTaskmage(final RimewindTaskmage card) {
         super(card);
     }
 

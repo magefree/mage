@@ -31,7 +31,7 @@ public final class Chastise extends CardImpl {
         this.getSpellAbility().addEffect(new ChastiseEffect());
     }
 
-    public Chastise(final Chastise card) {
+    private Chastise(final Chastise card) {
         super(card);
     }
 

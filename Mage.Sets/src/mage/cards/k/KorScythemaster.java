@@ -32,7 +32,7 @@ public final class KorScythemaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), SourceAttackingCondition.instance, "{this} has first strike as long as it's attacking")));
     }
 
-    public KorScythemaster(final KorScythemaster card) {
+    private KorScythemaster(final KorScythemaster card) {
         super(card);
     }
 

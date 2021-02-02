@@ -46,7 +46,7 @@ public final class RamosianRevivalist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RamosianRevivalist(final RamosianRevivalist card) {
+    private RamosianRevivalist(final RamosianRevivalist card) {
         super(card);
     }
 

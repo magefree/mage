@@ -35,7 +35,7 @@ public final class DaruSpiritualist extends CardImpl {
         this.addAbility(new DaruSpiritualistTriggeredAbility(new BoostTargetEffect(0, 2, Duration.EndOfTurn)));
     }
 
-    public DaruSpiritualist(final DaruSpiritualist card) {
+    private DaruSpiritualist(final DaruSpiritualist card) {
         super(card);
     }
 

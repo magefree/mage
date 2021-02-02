@@ -35,7 +35,7 @@ public final class KavuHowler extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealLibraryPutIntoHandEffect(4, filter, Zone.LIBRARY)));
     }
 
-    public KavuHowler(final KavuHowler card) {
+    private KavuHowler(final KavuHowler card) {
         super(card);
     }
 

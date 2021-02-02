@@ -47,7 +47,7 @@ public final class ColfenorsUrn extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new ColfenorsUrnEffect(), TargetController.ANY, new ColfenorsUrnCondition(), false));
     }
 
-    public ColfenorsUrn(final ColfenorsUrn card) {
+    private ColfenorsUrn(final ColfenorsUrn card) {
         super(card);
     }
 

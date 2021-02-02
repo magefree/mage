@@ -27,7 +27,7 @@ public final class AvenSquire extends CardImpl {
         this.addAbility(new ExaltedAbility());
     }
 
-    public AvenSquire(final AvenSquire card) {
+    private AvenSquire(final AvenSquire card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class QuarryHauler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuarryHauler(final QuarryHauler card) {
+    private QuarryHauler(final QuarryHauler card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class PerilousVoyage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public PerilousVoyage(final PerilousVoyage card) {
+    private PerilousVoyage(final PerilousVoyage card) {
         super(card);
     }
 

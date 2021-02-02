@@ -33,7 +33,7 @@ public final class TimeOfHeroes extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, boost));
     }
 
-    public TimeOfHeroes(final TimeOfHeroes card) {
+    private TimeOfHeroes(final TimeOfHeroes card) {
         super(card);
     }
 

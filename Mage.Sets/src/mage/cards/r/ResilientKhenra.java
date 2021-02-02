@@ -42,7 +42,7 @@ public final class ResilientKhenra extends CardImpl {
 
     }
 
-    public ResilientKhenra(final ResilientKhenra card) {
+    private ResilientKhenra(final ResilientKhenra card) {
         super(card);
     }
 

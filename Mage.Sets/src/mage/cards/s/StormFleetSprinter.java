@@ -30,7 +30,7 @@ public final class StormFleetSprinter extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public StormFleetSprinter(final StormFleetSprinter card) {
+    private StormFleetSprinter(final StormFleetSprinter card) {
         super(card);
     }
 

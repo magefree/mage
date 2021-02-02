@@ -51,7 +51,7 @@ public final class SetonsDesire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SetonsDesire(final SetonsDesire card) {
+    private SetonsDesire(final SetonsDesire card) {
         super(card);
     }
 

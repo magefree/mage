@@ -22,7 +22,7 @@ public final class JoinTheRanks extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new JoinTheRanksSoldierToken(), 2));
     }
 
-    public JoinTheRanks(final JoinTheRanks card) {
+    private JoinTheRanks(final JoinTheRanks card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class FlameKinWarScout extends CardImpl {
 
     }
 
-    public FlameKinWarScout(final FlameKinWarScout card) {
+    private FlameKinWarScout(final FlameKinWarScout card) {
         super(card);
     }
 

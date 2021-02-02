@@ -34,7 +34,7 @@ public final class BattleRattleShaman extends CardImpl {
 
     }
 
-    public BattleRattleShaman(final BattleRattleShaman card) {
+    private BattleRattleShaman(final BattleRattleShaman card) {
         super(card);
     }
 

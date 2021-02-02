@@ -29,7 +29,7 @@ public final class LightningAngel extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public LightningAngel(final LightningAngel card) {
+    private LightningAngel(final LightningAngel card) {
         super(card);
     }
 

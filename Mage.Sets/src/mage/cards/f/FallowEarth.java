@@ -23,7 +23,7 @@ public final class FallowEarth extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public FallowEarth(final FallowEarth card) {
+    private FallowEarth(final FallowEarth card) {
         super(card);
     }
 

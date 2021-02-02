@@ -41,7 +41,7 @@ public final class CrusadingKnight extends CardImpl {
       this.addAbility(ability);
     }
 
-    public CrusadingKnight(final CrusadingKnight card) {
+    private CrusadingKnight(final CrusadingKnight card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class DauthiGhoul extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter));
     }
 
-    public DauthiGhoul(final DauthiGhoul card) {
+    private DauthiGhoul(final DauthiGhoul card) {
         super(card);
     }
 

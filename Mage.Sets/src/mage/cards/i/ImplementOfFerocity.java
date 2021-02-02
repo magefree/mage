@@ -35,7 +35,7 @@ public final class ImplementOfFerocity extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public ImplementOfFerocity(final ImplementOfFerocity card) {
+    private ImplementOfFerocity(final ImplementOfFerocity card) {
         super(card);
     }
 

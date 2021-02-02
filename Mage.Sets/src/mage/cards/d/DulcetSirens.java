@@ -46,7 +46,7 @@ public final class DulcetSirens extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}")));
     }
 
-    public DulcetSirens(final DulcetSirens card) {
+    private DulcetSirens(final DulcetSirens card) {
         super(card);
     }
 

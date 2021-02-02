@@ -54,7 +54,7 @@ public final class FacelessDevourer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FacelessDevourer(final FacelessDevourer card) {
+    private FacelessDevourer(final FacelessDevourer card) {
         super(card);
     }
 

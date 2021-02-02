@@ -40,7 +40,7 @@ public final class LeshracsSigil extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl("{B}{B}")));
     }
 
-    public LeshracsSigil(final LeshracsSigil card) {
+    private LeshracsSigil(final LeshracsSigil card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class GemstoneArray extends CardImpl {
                 new CountersSourceCount(CounterType.CHARGE), false));
     }
 
-    public GemstoneArray(final GemstoneArray card) {
+    private GemstoneArray(final GemstoneArray card) {
         super(card);
     }
 

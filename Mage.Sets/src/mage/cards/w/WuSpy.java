@@ -43,7 +43,7 @@ public final class WuSpy extends CardImpl {
 
     }
 
-    public WuSpy(final WuSpy card) {
+    private WuSpy(final WuSpy card) {
         super(card);
     }
 

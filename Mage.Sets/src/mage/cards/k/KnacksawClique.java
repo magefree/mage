@@ -52,7 +52,7 @@ public final class KnacksawClique extends CardImpl {
         
     }
 
-    public KnacksawClique(final KnacksawClique card) {
+    private KnacksawClique(final KnacksawClique card) {
         super(card);
     }
 

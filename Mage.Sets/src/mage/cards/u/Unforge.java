@@ -37,7 +37,7 @@ public final class Unforge extends CardImpl {
         getSpellAbility().addEffect(new UnforgeEffect());
     }
 
-    public Unforge(final Unforge card) {
+    private Unforge(final Unforge card) {
         super(card);
     }
 

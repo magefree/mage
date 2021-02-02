@@ -34,7 +34,7 @@ public final class OstiaryThrull extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OstiaryThrull(final OstiaryThrull card) {
+    private OstiaryThrull(final OstiaryThrull card) {
         super(card);
     }
 

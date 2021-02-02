@@ -21,7 +21,7 @@ public final class HulkingDevil extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public HulkingDevil(final HulkingDevil card) {
+    private HulkingDevil(final HulkingDevil card) {
         super(card);
     }
 

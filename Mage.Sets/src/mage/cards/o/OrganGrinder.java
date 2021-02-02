@@ -36,7 +36,7 @@ public final class OrganGrinder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrganGrinder(final OrganGrinder card) {
+    private OrganGrinder(final OrganGrinder card) {
         super(card);
     }
 

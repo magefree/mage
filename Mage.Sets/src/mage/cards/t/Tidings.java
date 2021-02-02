@@ -19,7 +19,7 @@ public final class Tidings extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));
     }
 
-    public Tidings(final Tidings card) {
+    private Tidings(final Tidings card) {
         super(card);
     }
 

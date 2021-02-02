@@ -42,7 +42,7 @@ public final class GoblinTinkerer extends CardImpl {
         
     }
 
-    public GoblinTinkerer(final GoblinTinkerer card) {
+    private GoblinTinkerer(final GoblinTinkerer card) {
         super(card);
     }
 

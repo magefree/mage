@@ -37,7 +37,7 @@ public final class DarkDwellerOracle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DarkDwellerOracle(final DarkDwellerOracle card) {
+    private DarkDwellerOracle(final DarkDwellerOracle card) {
         super(card);
     }
 

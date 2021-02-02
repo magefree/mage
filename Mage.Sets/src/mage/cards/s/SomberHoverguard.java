@@ -28,7 +28,7 @@ public final class SomberHoverguard extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SomberHoverguard(final SomberHoverguard card) {
+    private SomberHoverguard(final SomberHoverguard card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class HordeOfBoggarts extends CardImpl {
         this.addAbility(new MenaceAbility());
     }
 
-    public HordeOfBoggarts(final HordeOfBoggarts card) {
+    private HordeOfBoggarts(final HordeOfBoggarts card) {
         super(card);
     }
 

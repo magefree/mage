@@ -47,7 +47,7 @@ public final class AshayaSoulOfTheWild extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new AshayaSoulOfTheWildEffect()));
     }
 
-    public AshayaSoulOfTheWild(final AshayaSoulOfTheWild card) {
+    private AshayaSoulOfTheWild(final AshayaSoulOfTheWild card) {
         super(card);
     }
 

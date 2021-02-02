@@ -30,7 +30,7 @@ public final class DreadShade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public DreadShade(final DreadShade card) {
+    private DreadShade(final DreadShade card) {
         super(card);
     }
 

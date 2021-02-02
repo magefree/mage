@@ -24,7 +24,7 @@ public final class GaeasAnthem extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false)));
     }
 
-    public GaeasAnthem(final GaeasAnthem card) {
+    private GaeasAnthem(final GaeasAnthem card) {
         super(card);
     }
 

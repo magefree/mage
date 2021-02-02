@@ -38,7 +38,7 @@ public final class OrderOfTheStars extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionChosenColorSourceEffect()));
     }
 
-    public OrderOfTheStars(final OrderOfTheStars card) {
+    private OrderOfTheStars(final OrderOfTheStars card) {
         super(card);
     }
 

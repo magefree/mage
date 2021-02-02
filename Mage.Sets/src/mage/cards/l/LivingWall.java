@@ -33,7 +33,7 @@ public final class LivingWall extends CardImpl {
         
     }
 
-    public LivingWall(final LivingWall card) {
+    private LivingWall(final LivingWall card) {
         super(card);
     }
 

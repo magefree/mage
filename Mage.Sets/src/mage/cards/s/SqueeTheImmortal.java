@@ -36,7 +36,7 @@ public final class SqueeTheImmortal extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SqueePlayEffect()));
     }
 
-    public SqueeTheImmortal(final SqueeTheImmortal card) {
+    private SqueeTheImmortal(final SqueeTheImmortal card) {
         super(card);
     }
 

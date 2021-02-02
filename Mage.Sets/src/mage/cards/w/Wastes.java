@@ -22,7 +22,7 @@ public final class Wastes extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public Wastes(final Wastes card) {
+    private Wastes(final Wastes card) {
         super(card);
     }
 

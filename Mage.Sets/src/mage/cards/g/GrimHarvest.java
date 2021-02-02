@@ -28,7 +28,7 @@ public final class GrimHarvest extends CardImpl {
         this.addAbility(new RecoverAbility(new ManaCostsImpl("{2}{B}"), this));
     }
 
-    public GrimHarvest(final GrimHarvest card) {
+    private GrimHarvest(final GrimHarvest card) {
         super(card);
     }
 

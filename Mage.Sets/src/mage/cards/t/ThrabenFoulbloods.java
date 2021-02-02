@@ -39,7 +39,7 @@ public final class ThrabenFoulbloods extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThrabenFoulbloods(final ThrabenFoulbloods card) {
+    private ThrabenFoulbloods(final ThrabenFoulbloods card) {
         super(card);
     }
 

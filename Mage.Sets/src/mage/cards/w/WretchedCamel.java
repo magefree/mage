@@ -52,7 +52,7 @@ public final class WretchedCamel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WretchedCamel(final WretchedCamel card) {
+    private WretchedCamel(final WretchedCamel card) {
         super(card);
     }
 

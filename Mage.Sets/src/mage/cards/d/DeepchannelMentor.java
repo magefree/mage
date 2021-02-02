@@ -39,7 +39,7 @@ public final class DeepchannelMentor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAllEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public DeepchannelMentor(final DeepchannelMentor card) {
+    private DeepchannelMentor(final DeepchannelMentor card) {
         super(card);
     }
 

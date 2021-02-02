@@ -29,7 +29,7 @@ public final class Divert extends CardImpl {
         this.getSpellAbility().addEffect(new DivertEffect());
     }
 
-    public Divert(final Divert card) {
+    private Divert(final Divert card) {
         super(card);
     }
 

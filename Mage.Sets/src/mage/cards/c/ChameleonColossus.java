@@ -41,7 +41,7 @@ public final class ChameleonColossus extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(x, x, Duration.EndOfTurn, true), new ManaCostsImpl("{2}{G}{G}")));
     }
 
-    public ChameleonColossus(final ChameleonColossus card) {
+    private ChameleonColossus(final ChameleonColossus card) {
         super(card);
     }
 

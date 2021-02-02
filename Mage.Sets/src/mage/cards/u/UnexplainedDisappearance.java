@@ -25,7 +25,7 @@ public final class UnexplainedDisappearance extends CardImpl {
         this.getSpellAbility().addEffect(new SurveilEffect(1));
     }
 
-    public UnexplainedDisappearance(final UnexplainedDisappearance card) {
+    private UnexplainedDisappearance(final UnexplainedDisappearance card) {
         super(card);
     }
 

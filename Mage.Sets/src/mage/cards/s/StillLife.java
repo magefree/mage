@@ -28,7 +28,7 @@ public final class StillLife extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new StillLifeCentaur(), "", Duration.EndOfTurn), new ManaCostsImpl("{G}{G}")));
     }
 
-    public StillLife(final StillLife card) {
+    private StillLife(final StillLife card) {
         super(card);
     }
 

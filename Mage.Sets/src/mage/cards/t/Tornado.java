@@ -43,7 +43,7 @@ public final class Tornado extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Tornado(final Tornado card) {
+    private Tornado(final Tornado card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class InnocentBlood extends CardImpl {
         this.getSpellAbility().addEffect(new SacrificeAllEffect(1, new FilterControlledCreaturePermanent("creature")));
     }
 
-    public InnocentBlood(final InnocentBlood card) {
+    private InnocentBlood(final InnocentBlood card) {
         super(card);
     }
 

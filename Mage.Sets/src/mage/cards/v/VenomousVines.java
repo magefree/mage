@@ -30,7 +30,7 @@ public final class VenomousVines extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public VenomousVines(final VenomousVines card) {
+    private VenomousVines(final VenomousVines card) {
         super(card);
     }
 

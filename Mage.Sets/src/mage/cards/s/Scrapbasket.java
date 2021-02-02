@@ -36,7 +36,7 @@ public final class Scrapbasket extends CardImpl {
         
     }
 
-    public Scrapbasket(final Scrapbasket card) {
+    private Scrapbasket(final Scrapbasket card) {
         super(card);
     }
 

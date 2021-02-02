@@ -32,7 +32,7 @@ public final class GraveStrength extends CardImpl {
 
     }
 
-    public GraveStrength(final GraveStrength card) {
+    private GraveStrength(final GraveStrength card) {
         super(card);
     }
 

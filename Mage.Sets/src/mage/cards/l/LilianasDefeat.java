@@ -35,7 +35,7 @@ public final class LilianasDefeat extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public LilianasDefeat(final LilianasDefeat card) {
+    private LilianasDefeat(final LilianasDefeat card) {
         super(card);
     }
 

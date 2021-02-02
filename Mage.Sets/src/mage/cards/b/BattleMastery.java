@@ -32,7 +32,7 @@ public final class BattleMastery extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public BattleMastery(final BattleMastery card) {
+    private BattleMastery(final BattleMastery card) {
         super(card);
     }
 

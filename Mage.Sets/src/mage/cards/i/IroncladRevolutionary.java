@@ -40,7 +40,7 @@ public final class IroncladRevolutionary extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(doEffect, false));
     }
 
-    public IroncladRevolutionary(final IroncladRevolutionary card) {
+    private IroncladRevolutionary(final IroncladRevolutionary card) {
         super(card);
     }
 

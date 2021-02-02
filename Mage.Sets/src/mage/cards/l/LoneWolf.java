@@ -26,7 +26,7 @@ public final class LoneWolf extends CardImpl {
         this.addAbility(DamageAsThoughNotBlockedAbility.getInstance());
     }
 
-    public LoneWolf(final LoneWolf card) {
+    private LoneWolf(final LoneWolf card) {
         super(card);
     }
 

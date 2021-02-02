@@ -24,7 +24,7 @@ public final class Badlands extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public Badlands(final Badlands card) {
+    private Badlands(final Badlands card) {
         super(card);
     }
 

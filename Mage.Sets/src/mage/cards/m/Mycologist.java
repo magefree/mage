@@ -49,7 +49,7 @@ public final class Mycologist extends CardImpl {
             new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
     }
 
-    public Mycologist(final Mycologist card) {
+    private Mycologist(final Mycologist card) {
         super(card);
     }
 

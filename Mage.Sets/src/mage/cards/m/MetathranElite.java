@@ -36,7 +36,7 @@ public final class MetathranElite extends CardImpl {
 
     }
 
-    public MetathranElite(final MetathranElite card) {
+    private MetathranElite(final MetathranElite card) {
         super(card);
     }
 

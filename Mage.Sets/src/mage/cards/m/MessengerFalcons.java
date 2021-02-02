@@ -34,7 +34,7 @@ public final class MessengerFalcons extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public MessengerFalcons(final MessengerFalcons card) {
+    private MessengerFalcons(final MessengerFalcons card) {
         super(card);
     }
 

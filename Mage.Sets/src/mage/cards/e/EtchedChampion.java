@@ -51,7 +51,7 @@ public final class EtchedChampion extends CardImpl {
         );
     }
 
-    public EtchedChampion(final EtchedChampion card) {
+    private EtchedChampion(final EtchedChampion card) {
         super(card);
     }
 

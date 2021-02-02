@@ -44,7 +44,7 @@ public final class VarchildsCrusader extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VarchildsCrusader(final VarchildsCrusader card) {
+    private VarchildsCrusader(final VarchildsCrusader card) {
         super(card);
     }
 

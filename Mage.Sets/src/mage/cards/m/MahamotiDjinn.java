@@ -25,7 +25,7 @@ public final class MahamotiDjinn extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public MahamotiDjinn(final MahamotiDjinn card) {
+    private MahamotiDjinn(final MahamotiDjinn card) {
         super(card);
     }
 

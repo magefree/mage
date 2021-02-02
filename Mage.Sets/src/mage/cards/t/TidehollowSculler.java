@@ -45,7 +45,7 @@ public final class TidehollowSculler extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new TidehollowScullerLeaveEffect(), false));
     }
 
-    public TidehollowSculler(final TidehollowSculler card) {
+    private TidehollowSculler(final TidehollowSculler card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class Slitherhead extends CardImpl {
         this.addAbility(new ScavengeAbility(new ManaCostsImpl("{0}")));
     }
 
-    public Slitherhead(final Slitherhead card) {
+    private Slitherhead(final Slitherhead card) {
         super(card);
     }
 

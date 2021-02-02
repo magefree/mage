@@ -23,7 +23,7 @@ public final class LoxodonConvert extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public LoxodonConvert(final LoxodonConvert card) {
+    private LoxodonConvert(final LoxodonConvert card) {
         super(card);
     }
 

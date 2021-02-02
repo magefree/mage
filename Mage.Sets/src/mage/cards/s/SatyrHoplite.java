@@ -29,7 +29,7 @@ public final class SatyrHoplite extends CardImpl {
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 
-    public SatyrHoplite(final SatyrHoplite card) {
+    private SatyrHoplite(final SatyrHoplite card) {
         super(card);
     }
 

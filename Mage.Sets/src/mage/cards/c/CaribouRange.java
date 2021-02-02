@@ -58,7 +58,7 @@ public final class CaribouRange extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter))));
     }
 
-    public CaribouRange(final CaribouRange card) {
+    private CaribouRange(final CaribouRange card) {
         super(card);
     }
 

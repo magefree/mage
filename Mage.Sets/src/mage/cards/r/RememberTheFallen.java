@@ -37,7 +37,7 @@ public final class RememberTheFallen extends CardImpl {
 
     }
 
-    public RememberTheFallen(final RememberTheFallen card) {
+    private RememberTheFallen(final RememberTheFallen card) {
         super(card);
     }
 

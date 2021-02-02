@@ -36,7 +36,7 @@ public final class SilenceTheBelievers extends CardImpl {
 
     }
 
-    public SilenceTheBelievers(final SilenceTheBelievers card) {
+    private SilenceTheBelievers(final SilenceTheBelievers card) {
         super(card);
     }
 

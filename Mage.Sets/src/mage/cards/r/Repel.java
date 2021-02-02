@@ -23,7 +23,7 @@ public final class Repel extends CardImpl {
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
     }
 
-    public Repel(final Repel card) {
+    private Repel(final Repel card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class EpiphanyStorm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(drawAbility, AttachmentType.AURA)));
     }
 
-    public EpiphanyStorm(final EpiphanyStorm card) {
+    private EpiphanyStorm(final EpiphanyStorm card) {
         super(card);
     }
 

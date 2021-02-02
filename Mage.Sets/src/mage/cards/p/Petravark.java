@@ -36,7 +36,7 @@ public final class Petravark extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false));
     }
 
-    public Petravark(final Petravark card) {
+    private Petravark(final Petravark card) {
         super(card);
     }
 

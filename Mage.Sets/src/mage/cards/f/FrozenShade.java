@@ -31,7 +31,7 @@ public final class FrozenShade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public FrozenShade(final FrozenShade card) {
+    private FrozenShade(final FrozenShade card) {
         super(card);
     }
 

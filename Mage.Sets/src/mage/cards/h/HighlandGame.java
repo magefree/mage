@@ -27,7 +27,7 @@ public final class HighlandGame extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(2)));
     }
 
-    public HighlandGame(final HighlandGame card) {
+    private HighlandGame(final HighlandGame card) {
         super(card);
     }
 

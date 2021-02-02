@@ -25,7 +25,7 @@ public final class TorstenVonUrsus extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public TorstenVonUrsus(final TorstenVonUrsus card) {
+    private TorstenVonUrsus(final TorstenVonUrsus card) {
         super(card);
     }
 

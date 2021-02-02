@@ -49,7 +49,7 @@ public final class CompanionOfTheTrials extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CompanionOfTheTrials(final CompanionOfTheTrials card) {
+    private CompanionOfTheTrials(final CompanionOfTheTrials card) {
         super(card);
     }
 

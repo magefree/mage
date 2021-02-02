@@ -44,7 +44,7 @@ public final class RazormaneMasticore extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RazormaneMasticore(final RazormaneMasticore card) {
+    private RazormaneMasticore(final RazormaneMasticore card) {
         super(card);
     }
 

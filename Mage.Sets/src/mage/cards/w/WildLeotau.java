@@ -30,7 +30,7 @@ public final class WildLeotau extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ColoredManaCost(ColoredManaSymbol.G)), TargetController.YOU, false));
     }
 
-    public WildLeotau(final WildLeotau card) {
+    private WildLeotau(final WildLeotau card) {
         super(card);
     }
 

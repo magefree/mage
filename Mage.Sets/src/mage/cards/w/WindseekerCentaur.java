@@ -25,7 +25,7 @@ public final class WindseekerCentaur extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public WindseekerCentaur(final WindseekerCentaur card) {
+    private WindseekerCentaur(final WindseekerCentaur card) {
         super(card);
     }
 

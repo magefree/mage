@@ -38,7 +38,7 @@ public final class BraceForImpact extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public BraceForImpact(final BraceForImpact card) {
+    private BraceForImpact(final BraceForImpact card) {
         super(card);
     }
 

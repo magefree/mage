@@ -38,7 +38,7 @@ public final class DustElemental extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter, 3)));
     }
 
-    public DustElemental(final DustElemental card) {
+    private DustElemental(final DustElemental card) {
         super(card);
     }
 

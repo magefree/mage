@@ -31,7 +31,7 @@ public final class LastOneStanding extends CardImpl {
         this.getSpellAbility().addEffect(new LastOneStandingEffect());
     }
 
-    public LastOneStanding(final LastOneStanding card) {
+    private LastOneStanding(final LastOneStanding card) {
         super(card);
     }
 

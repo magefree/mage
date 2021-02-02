@@ -26,7 +26,7 @@ public final class AshenmoorGouger extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public AshenmoorGouger(final AshenmoorGouger card) {
+    private AshenmoorGouger(final AshenmoorGouger card) {
         super(card);
     }
 

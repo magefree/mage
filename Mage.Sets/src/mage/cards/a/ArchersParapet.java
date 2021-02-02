@@ -37,7 +37,7 @@ public final class ArchersParapet extends CardImpl {
 
     }
 
-    public ArchersParapet(final ArchersParapet card) {
+    private ArchersParapet(final ArchersParapet card) {
         super(card);
     }
 

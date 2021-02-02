@@ -29,7 +29,7 @@ public final class Fruition extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public Fruition(final Fruition card) {
+    private Fruition(final Fruition card) {
         super(card);
     }
 

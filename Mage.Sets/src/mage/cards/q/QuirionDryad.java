@@ -40,7 +40,7 @@ public final class QuirionDryad extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), filter, false));
     }
 
-    public QuirionDryad(final QuirionDryad card) {
+    private QuirionDryad(final QuirionDryad card) {
         super(card);
     }
 

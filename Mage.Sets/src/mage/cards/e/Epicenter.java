@@ -44,7 +44,7 @@ public final class Epicenter extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Epicenter(final Epicenter card) {
+    private Epicenter(final Epicenter card) {
         super(card);
     }
 

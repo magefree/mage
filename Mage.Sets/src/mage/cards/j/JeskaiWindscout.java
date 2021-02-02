@@ -30,7 +30,7 @@ public final class JeskaiWindscout extends CardImpl {
         this.addAbility(new ProwessAbility());
     }
 
-    public JeskaiWindscout(final JeskaiWindscout card) {
+    private JeskaiWindscout(final JeskaiWindscout card) {
         super(card);
     }
 

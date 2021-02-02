@@ -36,7 +36,7 @@ public final class CultivatorOfBlades extends CardImpl {
                 true, "Whenever Cultivator of Blades attacks, you may have other attacking creatures get +X/+X until end of turn, where X is Cultivator of Blades's power."));
     }
 
-    public CultivatorOfBlades(final CultivatorOfBlades card) {
+    private CultivatorOfBlades(final CultivatorOfBlades card) {
         super(card);
     }
 

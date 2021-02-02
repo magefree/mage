@@ -25,7 +25,7 @@ public final class FleetFootedMonk extends CardImpl {
         this.addAbility(new DauntAbility());
     }
 
-    public FleetFootedMonk(final FleetFootedMonk card) {
+    private FleetFootedMonk(final FleetFootedMonk card) {
         super(card);
     }
 

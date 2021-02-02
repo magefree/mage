@@ -43,7 +43,7 @@ public final class RideDown extends CardImpl {
 
     }
 
-    public RideDown(final RideDown card) {
+    private RideDown(final RideDown card) {
         super(card);
     }
 

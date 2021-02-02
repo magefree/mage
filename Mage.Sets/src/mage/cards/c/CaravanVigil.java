@@ -29,7 +29,7 @@ public final class CaravanVigil extends CardImpl {
         this.getSpellAbility().addEffect(new CaravanVigilEffect());
     }
 
-    public CaravanVigil(final CaravanVigil card) {
+    private CaravanVigil(final CaravanVigil card) {
         super(card);
     }
 

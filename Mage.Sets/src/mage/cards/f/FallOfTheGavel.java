@@ -26,7 +26,7 @@ public final class FallOfTheGavel extends CardImpl {
 
     }
 
-    public FallOfTheGavel(final FallOfTheGavel card) {
+    private FallOfTheGavel(final FallOfTheGavel card) {
         super(card);
     }
 

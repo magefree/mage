@@ -28,7 +28,7 @@ public final class TendrilsOfDespair extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
     }
 
-    public TendrilsOfDespair(final TendrilsOfDespair card) {
+    private TendrilsOfDespair(final TendrilsOfDespair card) {
         super(card);
     }
 

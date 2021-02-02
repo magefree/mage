@@ -37,7 +37,7 @@ public final class Wingcrafter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(FlyingAbility.getInstance(), ruleText)));
     }
 
-    public Wingcrafter(final Wingcrafter card) {
+    private Wingcrafter(final Wingcrafter card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class GoblinSoothsayer extends CardImpl {
         
     }
 
-    public GoblinSoothsayer(final GoblinSoothsayer card) {
+    private GoblinSoothsayer(final GoblinSoothsayer card) {
         super(card);
     }
 

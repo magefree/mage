@@ -48,7 +48,7 @@ public final class WolfOfDevilsBreach extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WolfOfDevilsBreach(final WolfOfDevilsBreach card) {
+    private WolfOfDevilsBreach(final WolfOfDevilsBreach card) {
         super(card);
     }
 

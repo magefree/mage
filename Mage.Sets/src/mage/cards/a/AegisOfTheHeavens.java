@@ -22,7 +22,7 @@ public final class AegisOfTheHeavens extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public AegisOfTheHeavens(final AegisOfTheHeavens card) {
+    private AegisOfTheHeavens(final AegisOfTheHeavens card) {
         super(card);
     }
 

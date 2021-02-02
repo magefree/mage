@@ -55,7 +55,7 @@ public final class GemstoneCaverns extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GemstoneCaverns(final GemstoneCaverns card) {
+    private GemstoneCaverns(final GemstoneCaverns card) {
         super(card);
     }
 

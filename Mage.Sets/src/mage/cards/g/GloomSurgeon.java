@@ -29,7 +29,7 @@ public final class GloomSurgeon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GloomSurgeonEffect()));
     }
 
-    public GloomSurgeon(final GloomSurgeon card) {
+    private GloomSurgeon(final GloomSurgeon card) {
         super(card);
     }
 

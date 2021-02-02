@@ -54,7 +54,7 @@ public final class AngelicFavor extends CardImpl {
 
     }
 
-    public AngelicFavor(final AngelicFavor card) {
+    private AngelicFavor(final AngelicFavor card) {
         super(card);
     }
 

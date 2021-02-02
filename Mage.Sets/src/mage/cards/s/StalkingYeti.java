@@ -51,7 +51,7 @@ public final class StalkingYeti extends CardImpl {
         this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{2}{S}")));
     }
 
-    public StalkingYeti(final StalkingYeti card) {
+    private StalkingYeti(final StalkingYeti card) {
         super(card);
     }
 

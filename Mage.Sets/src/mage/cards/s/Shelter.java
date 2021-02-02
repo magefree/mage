@@ -28,7 +28,7 @@ public final class Shelter extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Shelter(final Shelter card) {
+    private Shelter(final Shelter card) {
         super(card);
     }
 

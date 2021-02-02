@@ -37,7 +37,7 @@ public final class FathomMage extends CardImpl {
         this.addAbility(new FathomMageTriggeredAbility());
     }
 
-    public FathomMage(final FathomMage card) {
+    private FathomMage(final FathomMage card) {
         super(card);
     }
 

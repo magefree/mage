@@ -36,7 +36,7 @@ public final class Gigapede extends CardImpl {
         this.addAbility(new GigapedeTriggerdAbility());
     }
 
-    public Gigapede(final Gigapede card) {
+    private Gigapede(final Gigapede card) {
         super(card);
     }
 

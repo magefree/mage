@@ -31,7 +31,7 @@ public final class WallOfGlare extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));
     }
 
-    public WallOfGlare(final WallOfGlare card) {
+    private WallOfGlare(final WallOfGlare card) {
         super(card);
     }
 

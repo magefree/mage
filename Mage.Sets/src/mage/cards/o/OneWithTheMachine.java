@@ -23,7 +23,7 @@ public final class OneWithTheMachine extends CardImpl {
         ).setText("Draw cards equal to the highest converted mana cost among artifacts you control"));
     }
 
-    public OneWithTheMachine(final OneWithTheMachine card) {
+    private OneWithTheMachine(final OneWithTheMachine card) {
         super(card);
     }
 

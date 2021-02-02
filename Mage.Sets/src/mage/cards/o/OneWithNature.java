@@ -44,7 +44,7 @@ public final class OneWithNature extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OneWithNature(final OneWithNature card) {
+    private OneWithNature(final OneWithNature card) {
         super(card);
     }
 

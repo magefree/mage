@@ -46,7 +46,7 @@ public final class WhipgrassEntangler extends CardImpl {
 
     }
 
-    public WhipgrassEntangler(final WhipgrassEntangler card) {
+    private WhipgrassEntangler(final WhipgrassEntangler card) {
         super(card);
     }
 

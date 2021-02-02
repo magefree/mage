@@ -53,7 +53,7 @@ public final class SuturedGhoul extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public SuturedGhoul(final SuturedGhoul card) {
+    private SuturedGhoul(final SuturedGhoul card) {
         super(card);
     }
 

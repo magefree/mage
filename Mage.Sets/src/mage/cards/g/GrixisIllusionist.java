@@ -36,7 +36,7 @@ public final class GrixisIllusionist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GrixisIllusionist(final GrixisIllusionist card) {
+    private GrixisIllusionist(final GrixisIllusionist card) {
         super(card);
     }
 

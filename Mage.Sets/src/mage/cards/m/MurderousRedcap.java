@@ -39,7 +39,7 @@ public final class MurderousRedcap extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public MurderousRedcap(final MurderousRedcap card) {
+    private MurderousRedcap(final MurderousRedcap card) {
         super(card);
     }
 

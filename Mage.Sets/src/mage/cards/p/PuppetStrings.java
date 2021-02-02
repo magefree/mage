@@ -29,7 +29,7 @@ public final class PuppetStrings extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PuppetStrings(final PuppetStrings card) {
+    private PuppetStrings(final PuppetStrings card) {
         super(card);
     }
 

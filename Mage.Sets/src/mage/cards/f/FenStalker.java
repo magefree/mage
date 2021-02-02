@@ -44,7 +44,7 @@ public final class FenStalker extends CardImpl {
             "{this} has fear as long as you control no untapped lands")));
     }
 
-    public FenStalker(final FenStalker card) {
+    private FenStalker(final FenStalker card) {
         super(card);
     }
 

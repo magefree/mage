@@ -35,7 +35,7 @@ public final class GlidingLicid extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public GlidingLicid(final GlidingLicid card) {
+    private GlidingLicid(final GlidingLicid card) {
         super(card);
     }
 

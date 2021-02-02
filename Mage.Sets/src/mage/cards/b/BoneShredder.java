@@ -50,7 +50,7 @@ public final class BoneShredder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BoneShredder(final BoneShredder card) {
+    private BoneShredder(final BoneShredder card) {
         super(card);
     }
 

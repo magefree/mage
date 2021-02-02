@@ -45,7 +45,7 @@ public final class WanderwineProphets extends CardImpl {
 
     }
 
-    public WanderwineProphets(final WanderwineProphets card) {
+    private WanderwineProphets(final WanderwineProphets card) {
         super(card);
     }
 

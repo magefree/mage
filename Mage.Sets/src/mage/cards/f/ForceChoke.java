@@ -35,7 +35,7 @@ public final class ForceChoke extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }
 
-    public ForceChoke(final ForceChoke card) {
+    private ForceChoke(final ForceChoke card) {
         super(card);
     }
 

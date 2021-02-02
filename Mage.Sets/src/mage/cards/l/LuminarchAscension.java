@@ -43,7 +43,7 @@ public final class LuminarchAscension extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LuminarchAscension(final LuminarchAscension card) {
+    private LuminarchAscension(final LuminarchAscension card) {
         super(card);
     }
 

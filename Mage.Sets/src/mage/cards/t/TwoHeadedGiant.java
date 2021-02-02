@@ -36,7 +36,7 @@ public final class TwoHeadedGiant extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new TwoHeadedGiantEffect(), false));
     }
 
-    public TwoHeadedGiant(final TwoHeadedGiant card) {
+    private TwoHeadedGiant(final TwoHeadedGiant card) {
         super(card);
     }
 

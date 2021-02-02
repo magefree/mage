@@ -27,7 +27,7 @@ public final class SilverclawGriffin extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public SilverclawGriffin(final SilverclawGriffin card) {
+    private SilverclawGriffin(final SilverclawGriffin card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class MephidrossVampire extends CardImpl {
 
     }
 
-    public MephidrossVampire(final MephidrossVampire card) {
+    private MephidrossVampire(final MephidrossVampire card) {
         super(card);
     }
 

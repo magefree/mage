@@ -48,7 +48,7 @@ public final class MerrowReejerey extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MerrowReejerey(final MerrowReejerey card) {
+    private MerrowReejerey(final MerrowReejerey card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class IgneousPouncer extends CardImpl {
         this.addAbility(new MountaincyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public IgneousPouncer(final IgneousPouncer card) {
+    private IgneousPouncer(final IgneousPouncer card) {
         super(card);
     }
 

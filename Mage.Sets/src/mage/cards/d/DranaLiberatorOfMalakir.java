@@ -46,7 +46,7 @@ public final class DranaLiberatorOfMalakir extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false));
     }
 
-    public DranaLiberatorOfMalakir(final DranaLiberatorOfMalakir card) {
+    private DranaLiberatorOfMalakir(final DranaLiberatorOfMalakir card) {
         super(card);
     }
 

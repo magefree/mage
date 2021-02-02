@@ -43,7 +43,7 @@ public final class HammerOfPurphoros extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HammerOfPurphoros(final HammerOfPurphoros card) {
+    private HammerOfPurphoros(final HammerOfPurphoros card) {
         super(card);
     }
 

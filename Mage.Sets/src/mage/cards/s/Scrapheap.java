@@ -29,7 +29,7 @@ public final class Scrapheap extends CardImpl {
         this.addAbility(new ScrapheapTriggeredAbility());
     }
 
-    public Scrapheap(final Scrapheap card) {
+    private Scrapheap(final Scrapheap card) {
         super(card);
     }
 

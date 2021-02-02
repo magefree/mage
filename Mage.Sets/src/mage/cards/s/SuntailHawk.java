@@ -25,7 +25,7 @@ public final class SuntailHawk extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SuntailHawk(final SuntailHawk card) {
+    private SuntailHawk(final SuntailHawk card) {
         super(card);
     }
 

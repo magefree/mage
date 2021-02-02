@@ -32,7 +32,7 @@ public final class DefenderOfTheOrder extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostControlledEffect(0, 2, Duration.EndOfTurn)));
     }
 
-    public DefenderOfTheOrder(final DefenderOfTheOrder card) {
+    private DefenderOfTheOrder(final DefenderOfTheOrder card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class RakdosSignet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RakdosSignet(final RakdosSignet card) {
+    private RakdosSignet(final RakdosSignet card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class Imagecrafter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Imagecrafter(final Imagecrafter card) {
+    private Imagecrafter(final Imagecrafter card) {
         super(card);
     }
 

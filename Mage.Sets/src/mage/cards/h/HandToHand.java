@@ -27,7 +27,7 @@ public final class HandToHand extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HandToHandEffect()));
     }
 
-    public HandToHand(final HandToHand card) {
+    private HandToHand(final HandToHand card) {
         super(card);
     }
 

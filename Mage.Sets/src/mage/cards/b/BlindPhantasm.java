@@ -22,7 +22,7 @@ public final class BlindPhantasm extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public BlindPhantasm(final BlindPhantasm card) {
+    private BlindPhantasm(final BlindPhantasm card) {
         super(card);
     }
 

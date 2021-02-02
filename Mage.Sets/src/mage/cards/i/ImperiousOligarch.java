@@ -30,7 +30,7 @@ public final class ImperiousOligarch extends CardImpl {
         this.addAbility(new AfterlifeAbility(1));
     }
 
-    public ImperiousOligarch(final ImperiousOligarch card) {
+    private ImperiousOligarch(final ImperiousOligarch card) {
         super(card);
     }
 

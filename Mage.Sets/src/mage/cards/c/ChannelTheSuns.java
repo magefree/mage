@@ -24,7 +24,7 @@ public final class ChannelTheSuns extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public ChannelTheSuns(final ChannelTheSuns card) {
+    private ChannelTheSuns(final ChannelTheSuns card) {
         super(card);
     }
 

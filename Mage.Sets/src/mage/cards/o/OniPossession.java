@@ -49,7 +49,7 @@ public final class OniPossession extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetCardSubtypeAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA, SubType.DEMON, SubType.SPIRIT)));
     }
 
-    public OniPossession(final OniPossession card) {
+    private OniPossession(final OniPossession card) {
         super(card);
     }
 

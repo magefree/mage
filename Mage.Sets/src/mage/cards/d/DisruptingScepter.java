@@ -31,7 +31,7 @@ public final class DisruptingScepter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DisruptingScepter(final DisruptingScepter card) {
+    private DisruptingScepter(final DisruptingScepter card) {
         super(card);
     }
 

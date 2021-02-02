@@ -35,7 +35,7 @@ public final class WeequayBeastmaster extends CardImpl {
         this.addAbility(new BecomesMonstrousTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance())));
     }
 
-    public WeequayBeastmaster(final WeequayBeastmaster card) {
+    private WeequayBeastmaster(final WeequayBeastmaster card) {
         super(card);
     }
 

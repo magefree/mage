@@ -28,7 +28,7 @@ public final class RayOfRevelation extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{G}"), TimingRule.INSTANT));
     }
 
-    public RayOfRevelation(final RayOfRevelation card) {
+    private RayOfRevelation(final RayOfRevelation card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class SunCrestedPterodon extends CardImpl {
         ));
     }
 
-    public SunCrestedPterodon(final SunCrestedPterodon card) {
+    private SunCrestedPterodon(final SunCrestedPterodon card) {
         super(card);
     }
 

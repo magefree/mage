@@ -37,7 +37,7 @@ public final class InfernalTribute extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InfernalTribute(final InfernalTribute card) {
+    private InfernalTribute(final InfernalTribute card) {
         super(card);
     }
 

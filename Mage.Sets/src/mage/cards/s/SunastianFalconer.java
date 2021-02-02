@@ -31,7 +31,7 @@ public final class SunastianFalconer extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 
-    public SunastianFalconer(final SunastianFalconer card) {
+    private SunastianFalconer(final SunastianFalconer card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class GaeasRevenge extends CardImpl {
 
     }
 
-    public GaeasRevenge(final GaeasRevenge card) {
+    private GaeasRevenge(final GaeasRevenge card) {
         super(card);
     }
 

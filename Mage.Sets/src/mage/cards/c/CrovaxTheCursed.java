@@ -47,7 +47,7 @@ public final class CrovaxTheCursed extends CardImpl {
 
     }
 
-    public CrovaxTheCursed(final CrovaxTheCursed card) {
+    private CrovaxTheCursed(final CrovaxTheCursed card) {
         super(card);
     }
 

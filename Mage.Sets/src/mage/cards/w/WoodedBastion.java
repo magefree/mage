@@ -37,7 +37,7 @@ public final class WoodedBastion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WoodedBastion(final WoodedBastion card) {
+    private WoodedBastion(final WoodedBastion card) {
         super(card);
     }
 

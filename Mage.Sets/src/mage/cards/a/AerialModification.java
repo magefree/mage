@@ -56,7 +56,7 @@ public final class AerialModification extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AerialModification(final AerialModification card) {
+    private AerialModification(final AerialModification card) {
         super(card);
     }
 

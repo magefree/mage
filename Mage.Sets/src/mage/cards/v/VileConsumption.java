@@ -34,7 +34,7 @@ public final class VileConsumption extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
     }
 
-    public VileConsumption(final VileConsumption card) {
+    private VileConsumption(final VileConsumption card) {
         super(card);
     }
 

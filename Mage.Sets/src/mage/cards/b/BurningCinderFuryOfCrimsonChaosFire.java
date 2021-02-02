@@ -42,7 +42,7 @@ public final class BurningCinderFuryOfCrimsonChaosFire extends CardImpl {
                 TargetController.ANY, new BurningCinderFuryOfCrimsonChaosFireCondition(), false), new BurningCinderFuryOfCrimsonChaosFireWatcher());
     }
 
-    public BurningCinderFuryOfCrimsonChaosFire(final BurningCinderFuryOfCrimsonChaosFire card) {
+    private BurningCinderFuryOfCrimsonChaosFire(final BurningCinderFuryOfCrimsonChaosFire card) {
         super(card);
     }
 

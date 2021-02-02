@@ -35,7 +35,7 @@ public final class PhyrexianReaper extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DestroyTargetEffect(true), filter, false));
     }
 
-    public PhyrexianReaper(final PhyrexianReaper card) {
+    private PhyrexianReaper(final PhyrexianReaper card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class LiberatedDwarf extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LiberatedDwarf(final LiberatedDwarf card) {
+    private LiberatedDwarf(final LiberatedDwarf card) {
         super(card);
     }
 

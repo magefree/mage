@@ -40,7 +40,7 @@ public final class RoilElemental extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RoilElemental(final RoilElemental card) {
+    private RoilElemental(final RoilElemental card) {
         super(card);
     }
 

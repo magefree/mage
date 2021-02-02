@@ -44,7 +44,7 @@ public final class ScorchedRuins extends CardImpl {
         
     }
     
-    public ScorchedRuins(final ScorchedRuins card) {
+    private ScorchedRuins(final ScorchedRuins card) {
         super(card);
     }
     

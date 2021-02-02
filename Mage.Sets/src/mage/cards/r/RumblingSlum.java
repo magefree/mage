@@ -31,7 +31,7 @@ public final class RumblingSlum extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
     }
 
-    public RumblingSlum(final RumblingSlum card) {
+    private RumblingSlum(final RumblingSlum card) {
         super(card);
     }
 

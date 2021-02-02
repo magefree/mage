@@ -31,7 +31,7 @@ public final class WallOfBlood extends CardImpl {
         // Pay 1 life: Wall of Blood gets +1/+1 until end of turn.
     }
 
-    public WallOfBlood(final WallOfBlood card) {
+    private WallOfBlood(final WallOfBlood card) {
         super(card);
     }
 

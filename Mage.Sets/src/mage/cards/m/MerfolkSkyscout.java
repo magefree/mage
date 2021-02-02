@@ -32,7 +32,7 @@ public final class MerfolkSkyscout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MerfolkSkyscout(final MerfolkSkyscout card) {
+    private MerfolkSkyscout(final MerfolkSkyscout card) {
         super(card);
     }
 

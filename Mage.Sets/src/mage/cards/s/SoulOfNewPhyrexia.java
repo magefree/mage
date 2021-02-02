@@ -40,7 +40,7 @@ public final class SoulOfNewPhyrexia extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoulOfNewPhyrexia(final SoulOfNewPhyrexia card) {
+    private SoulOfNewPhyrexia(final SoulOfNewPhyrexia card) {
         super(card);
     }
 

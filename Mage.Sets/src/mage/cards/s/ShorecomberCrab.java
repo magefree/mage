@@ -21,7 +21,7 @@ public final class ShorecomberCrab extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public ShorecomberCrab(final ShorecomberCrab card) {
+    private ShorecomberCrab(final ShorecomberCrab card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class Unsummon extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 
-    public Unsummon(final Unsummon card) {
+    private Unsummon(final Unsummon card) {
         super(card);
     }
 

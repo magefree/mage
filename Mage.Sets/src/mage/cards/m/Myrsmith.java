@@ -34,7 +34,7 @@ public final class Myrsmith extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new MyrsmithEffect(), filter, false));
     }
 
-    public Myrsmith(final Myrsmith card) {
+    private Myrsmith(final Myrsmith card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class RoguesPassage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RoguesPassage(final RoguesPassage card) {
+    private RoguesPassage(final RoguesPassage card) {
         super(card);
     }
 

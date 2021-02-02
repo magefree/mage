@@ -37,7 +37,7 @@ public final class AshlingTheExtinguisher extends CardImpl {
         this.addAbility(new AshlingTheExtinguisherTriggeredAbility());
     }
 
-    public AshlingTheExtinguisher(final AshlingTheExtinguisher card) {
+    private AshlingTheExtinguisher(final AshlingTheExtinguisher card) {
         super(card);
     }
 

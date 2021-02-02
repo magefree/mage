@@ -59,7 +59,7 @@ public final class MomirVigSimicVisionary extends CardImpl {
 
     }
 
-    public MomirVigSimicVisionary(final MomirVigSimicVisionary card) {
+    private MomirVigSimicVisionary(final MomirVigSimicVisionary card) {
         super(card);
     }
 

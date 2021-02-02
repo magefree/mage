@@ -35,7 +35,7 @@ public final class ForceScream extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public ForceScream(final ForceScream card) {
+    private ForceScream(final ForceScream card) {
         super(card);
     }
 

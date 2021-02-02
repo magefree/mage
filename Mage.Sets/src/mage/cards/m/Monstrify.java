@@ -26,7 +26,7 @@ public final class Monstrify extends CardImpl {
         this.addAbility(new RetraceAbility(this));
     }
 
-    public Monstrify(final Monstrify card) {
+    private Monstrify(final Monstrify card) {
         super(card);
     }
 

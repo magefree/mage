@@ -22,7 +22,7 @@ public final class KeepWatch extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new AttackingCreatureCount()));
     }
 
-    public KeepWatch(final KeepWatch card) {
+    private KeepWatch(final KeepWatch card) {
         super(card);
     }
 

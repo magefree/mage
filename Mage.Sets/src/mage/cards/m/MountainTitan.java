@@ -39,7 +39,7 @@ public final class MountainTitan extends CardImpl {
         ));
     }
 
-    public MountainTitan(final MountainTitan card) {
+    private MountainTitan(final MountainTitan card) {
         super(card);
     }
 

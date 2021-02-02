@@ -35,7 +35,7 @@ public final class PatronOfTheWild extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PatronOfTheWild(final PatronOfTheWild card) {
+    private PatronOfTheWild(final PatronOfTheWild card) {
         super(card);
     }
 

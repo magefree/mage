@@ -37,7 +37,7 @@ public final class RainOfThorns extends CardImpl {
         this.getSpellAbility().addMode(mode2);
     }
 
-    public RainOfThorns(final RainOfThorns card) {
+    private RainOfThorns(final RainOfThorns card) {
         super(card);
     }
 

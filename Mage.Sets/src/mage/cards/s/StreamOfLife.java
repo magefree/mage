@@ -24,7 +24,7 @@ public final class StreamOfLife extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public StreamOfLife(final StreamOfLife card) {
+    private StreamOfLife(final StreamOfLife card) {
         super(card);
     }
 

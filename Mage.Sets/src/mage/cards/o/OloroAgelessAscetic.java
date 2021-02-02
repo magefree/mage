@@ -50,7 +50,7 @@ public final class OloroAgelessAscetic extends CardImpl {
                 new GainLifeEffect(StaticValue.get(2), "if {this} is in the command zone, you gain 2 life"), TargetController.YOU, false));
     }
 
-    public OloroAgelessAscetic(final OloroAgelessAscetic card) {
+    private OloroAgelessAscetic(final OloroAgelessAscetic card) {
         super(card);
     }
 

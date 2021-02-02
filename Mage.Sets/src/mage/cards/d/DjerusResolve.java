@@ -38,7 +38,7 @@ public final class DjerusResolve extends CardImpl {
 
     }
 
-    public DjerusResolve(final DjerusResolve card) {
+    private DjerusResolve(final DjerusResolve card) {
         super(card);
     }
 

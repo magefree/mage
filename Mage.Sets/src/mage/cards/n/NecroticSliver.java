@@ -42,7 +42,7 @@ public final class NecroticSliver extends CardImpl {
                         "All Slivers have \"{3}, Sacrifice this permanent: Destroy target permanent.\"")));
     }
 
-    public NecroticSliver(final NecroticSliver card) {
+    private NecroticSliver(final NecroticSliver card) {
         super(card);
     }
 

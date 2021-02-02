@@ -67,7 +67,7 @@ public final class LyzoldaTheBloodWitch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LyzoldaTheBloodWitch(final LyzoldaTheBloodWitch card) {
+    private LyzoldaTheBloodWitch(final LyzoldaTheBloodWitch card) {
         super(card);
     }
 

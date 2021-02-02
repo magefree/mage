@@ -35,7 +35,7 @@ public final class MagmaHellion extends CardImpl {
 
     }
 
-    public MagmaHellion(final MagmaHellion card) {
+    private MagmaHellion(final MagmaHellion card) {
         super(card);
     }
 

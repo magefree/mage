@@ -38,7 +38,7 @@ public final class UrborgEmissary extends CardImpl {
             "When {this} enters the battlefield, if it was kicked, return target permanent to its owner's hand."));
     }
 
-    public UrborgEmissary(final UrborgEmissary card) {
+    private UrborgEmissary(final UrborgEmissary card) {
         super(card);
     }
 

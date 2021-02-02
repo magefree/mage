@@ -34,7 +34,7 @@ public final class IllusionistsGambit extends CardImpl {
         this.getSpellAbility().addEffect(new IllusionistsGambitRemoveFromCombatEffect());
     }
 
-    public IllusionistsGambit(final IllusionistsGambit card) {
+    private IllusionistsGambit(final IllusionistsGambit card) {
         super(card);
     }
 

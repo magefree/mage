@@ -35,7 +35,7 @@ public final class JhoirasFamiliar extends CardImpl {
                         .setText("Historic spells you cast cost {1} less to cast. <i>(Artifacts, legendaries, and Sagas are historic.)</i>")));
     }
 
-    public JhoirasFamiliar(final JhoirasFamiliar card) {
+    private JhoirasFamiliar(final JhoirasFamiliar card) {
         super(card);
     }
 

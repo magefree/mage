@@ -31,7 +31,7 @@ public final class CorruptEunuchs extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CorruptEunuchs(final CorruptEunuchs card) {
+    private CorruptEunuchs(final CorruptEunuchs card) {
         super(card);
     }
 

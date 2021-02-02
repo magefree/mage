@@ -40,7 +40,7 @@ public final class KheruSpellsnatcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KheruSpellsnatcher(final KheruSpellsnatcher card) {
+    private KheruSpellsnatcher(final KheruSpellsnatcher card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class EssenceFlare extends CardImpl {
             TargetController.CONTROLLER_ATTACHED_TO, false));
     }
 
-    public EssenceFlare(final EssenceFlare card) {
+    private EssenceFlare(final EssenceFlare card) {
         super(card);
     }
 

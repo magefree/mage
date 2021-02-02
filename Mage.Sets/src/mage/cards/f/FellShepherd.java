@@ -50,7 +50,7 @@ public final class FellShepherd extends CardImpl {
 
     }
 
-    public FellShepherd(final FellShepherd card) {
+    private FellShepherd(final FellShepherd card) {
         super(card);
     }
 

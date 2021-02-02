@@ -27,7 +27,7 @@ public final class NaturesResurgence extends CardImpl {
         this.getSpellAbility().addEffect(new NaturesResurgenceEffect());
     }
 
-    public NaturesResurgence(final NaturesResurgence card) {
+    private NaturesResurgence(final NaturesResurgence card) {
         super(card);
     }
 

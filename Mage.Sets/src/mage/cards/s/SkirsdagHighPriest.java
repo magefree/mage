@@ -49,7 +49,7 @@ public final class SkirsdagHighPriest extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkirsdagHighPriest(final SkirsdagHighPriest card) {
+    private SkirsdagHighPriest(final SkirsdagHighPriest card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class RuinationWurm extends CardImpl {
         this.toughness = new MageInt(6);
     }
 
-    public RuinationWurm(final RuinationWurm card) {
+    private RuinationWurm(final RuinationWurm card) {
         super(card);
     }
 

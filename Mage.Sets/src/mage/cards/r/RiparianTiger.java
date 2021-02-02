@@ -41,7 +41,7 @@ public final class RiparianTiger extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(doIfCostPaid, false));
     }
 
-    public RiparianTiger(final RiparianTiger card) {
+    private RiparianTiger(final RiparianTiger card) {
         super(card);
     }
 

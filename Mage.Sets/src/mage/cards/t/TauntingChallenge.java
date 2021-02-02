@@ -23,7 +23,7 @@ public final class TauntingChallenge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TauntingChallenge(final TauntingChallenge card) {
+    private TauntingChallenge(final TauntingChallenge card) {
         super(card);
     }
 

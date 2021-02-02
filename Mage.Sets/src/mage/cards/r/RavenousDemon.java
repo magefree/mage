@@ -41,7 +41,7 @@ public final class RavenousDemon extends CardImpl {
         this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public RavenousDemon(final RavenousDemon card) {
+    private RavenousDemon(final RavenousDemon card) {
         super(card);
     }
 

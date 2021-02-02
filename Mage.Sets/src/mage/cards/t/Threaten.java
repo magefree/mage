@@ -27,7 +27,7 @@ public final class Threaten extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Threaten(final Threaten card) {
+    private Threaten(final Threaten card) {
         super(card);
     }
 

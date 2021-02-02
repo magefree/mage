@@ -36,7 +36,7 @@ public final class Broodwarden extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public Broodwarden(final Broodwarden card) {
+    private Broodwarden(final Broodwarden card) {
         super(card);
     }
 

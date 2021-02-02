@@ -22,7 +22,7 @@ public final class Deglamer extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
-    public Deglamer(final Deglamer card) {
+    private Deglamer(final Deglamer card) {
         super(card);
     }
 

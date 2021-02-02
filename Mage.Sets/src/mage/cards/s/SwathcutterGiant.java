@@ -37,7 +37,7 @@ public final class SwathcutterGiant extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new SwathcutterGiantEffect(), false));
     }
 
-    public SwathcutterGiant(final SwathcutterGiant card) {
+    private SwathcutterGiant(final SwathcutterGiant card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class Wishmonger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Wishmonger(final Wishmonger card) {
+    private Wishmonger(final Wishmonger card) {
         super(card);
     }
 

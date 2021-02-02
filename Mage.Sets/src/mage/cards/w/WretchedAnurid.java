@@ -37,7 +37,7 @@ public final class WretchedAnurid extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(new LoseLifeSourceControllerEffect(1), filter));
     }
 
-    public WretchedAnurid(final WretchedAnurid card) {
+    private WretchedAnurid(final WretchedAnurid card) {
         super(card);
     }
 

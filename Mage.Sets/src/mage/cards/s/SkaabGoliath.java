@@ -31,7 +31,7 @@ public final class SkaabGoliath extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public SkaabGoliath(final SkaabGoliath card) {
+    private SkaabGoliath(final SkaabGoliath card) {
         super(card);
     }
 

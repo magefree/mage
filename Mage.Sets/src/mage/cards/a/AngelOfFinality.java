@@ -34,7 +34,7 @@ public final class AngelOfFinality extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AngelOfFinality(final AngelOfFinality card) {
+    private AngelOfFinality(final AngelOfFinality card) {
         super(card);
     }
 

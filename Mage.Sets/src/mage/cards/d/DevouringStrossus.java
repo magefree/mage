@@ -46,7 +46,7 @@ public final class DevouringStrossus extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
-    public DevouringStrossus(final DevouringStrossus card) {
+    private DevouringStrossus(final DevouringStrossus card) {
         super(card);
     }
 

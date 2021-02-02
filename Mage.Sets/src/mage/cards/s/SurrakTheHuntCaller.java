@@ -41,7 +41,7 @@ public final class SurrakTheHuntCaller extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SurrakTheHuntCaller(final SurrakTheHuntCaller card) {
+    private SurrakTheHuntCaller(final SurrakTheHuntCaller card) {
         super(card);
     }
 

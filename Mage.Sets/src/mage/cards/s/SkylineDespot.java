@@ -44,7 +44,7 @@ public final class SkylineDespot extends CardImpl {
 
     }
 
-    public SkylineDespot(final SkylineDespot card) {
+    private SkylineDespot(final SkylineDespot card) {
         super(card);
     }
 

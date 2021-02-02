@@ -27,7 +27,7 @@ public final class MoongloveExtract extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoongloveExtract(final MoongloveExtract card) {
+    private MoongloveExtract(final MoongloveExtract card) {
         super(card);
     }
 

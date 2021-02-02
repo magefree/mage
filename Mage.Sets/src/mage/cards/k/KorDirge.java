@@ -39,7 +39,7 @@ public final class KorDirge extends CardImpl {
         this.getSpellAbility().addTarget(target2);
     }
 
-    public KorDirge(final KorDirge card) {
+    private KorDirge(final KorDirge card) {
         super(card);
     }
 

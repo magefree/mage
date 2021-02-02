@@ -60,7 +60,7 @@ public final class CollectiveDefiance extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public CollectiveDefiance(final CollectiveDefiance card) {
+    private CollectiveDefiance(final CollectiveDefiance card) {
         super(card);
     }
 

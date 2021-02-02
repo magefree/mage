@@ -30,7 +30,7 @@ public final class KitchenFinks extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public KitchenFinks(final KitchenFinks card) {
+    private KitchenFinks(final KitchenFinks card) {
         super(card);
     }
 

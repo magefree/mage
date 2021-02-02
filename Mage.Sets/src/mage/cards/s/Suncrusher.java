@@ -46,7 +46,7 @@ public final class Suncrusher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Suncrusher(final Suncrusher card) {
+    private Suncrusher(final Suncrusher card) {
         super(card);
     }
 

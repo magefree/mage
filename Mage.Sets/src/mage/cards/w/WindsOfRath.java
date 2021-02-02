@@ -29,7 +29,7 @@ public final class WindsOfRath extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, true));
     }
 
-    public WindsOfRath(final WindsOfRath card) {
+    private WindsOfRath(final WindsOfRath card) {
         super(card);
     }
 

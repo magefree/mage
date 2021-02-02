@@ -43,7 +43,7 @@ public final class LorthosTheTidemaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LorthosTheTidemaker(final LorthosTheTidemaker card) {
+    private LorthosTheTidemaker(final LorthosTheTidemaker card) {
         super(card);
     }
 

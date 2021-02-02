@@ -30,7 +30,7 @@ public final class VeteranArmorer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, true)));
     }
 
-    public VeteranArmorer(final VeteranArmorer card) {
+    private VeteranArmorer(final VeteranArmorer card) {
         super(card);
     }
 

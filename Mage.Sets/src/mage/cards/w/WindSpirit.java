@@ -31,7 +31,7 @@ public final class WindSpirit extends CardImpl {
         this.addAbility(new MenaceAbility());
     }
 
-    public WindSpirit(final WindSpirit card) {
+    private WindSpirit(final WindSpirit card) {
         super(card);
     }
 

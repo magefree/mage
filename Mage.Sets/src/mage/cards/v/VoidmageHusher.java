@@ -40,7 +40,7 @@ public final class VoidmageHusher extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), true));
     }
 
-    public VoidmageHusher(final VoidmageHusher card) {
+    private VoidmageHusher(final VoidmageHusher card) {
         super(card);
     }
 

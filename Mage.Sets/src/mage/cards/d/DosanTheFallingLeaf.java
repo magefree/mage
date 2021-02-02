@@ -31,7 +31,7 @@ public final class DosanTheFallingLeaf extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DosanTheFallingLeafEffect()));
     }
 
-    public DosanTheFallingLeaf(final DosanTheFallingLeaf card) {
+    private DosanTheFallingLeaf(final DosanTheFallingLeaf card) {
         super(card);
     }
 

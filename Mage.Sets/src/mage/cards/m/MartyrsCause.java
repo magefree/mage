@@ -31,7 +31,7 @@ public final class MartyrsCause extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MartyrsCause(final MartyrsCause card) {
+    private MartyrsCause(final MartyrsCause card) {
         super(card);
     }
 

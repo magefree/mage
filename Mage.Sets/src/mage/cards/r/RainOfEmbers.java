@@ -21,7 +21,7 @@ public final class RainOfEmbers extends CardImpl {
         this.getSpellAbility().addEffect(new DamageEverythingEffect(1));
     }
 
-    public RainOfEmbers(final RainOfEmbers card) {
+    private RainOfEmbers(final RainOfEmbers card) {
         super(card);
     }
 

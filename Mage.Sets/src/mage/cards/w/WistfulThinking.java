@@ -27,7 +27,7 @@ public final class WistfulThinking extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public WistfulThinking(final WistfulThinking card) {
+    private WistfulThinking(final WistfulThinking card) {
         super(card);
     }
 

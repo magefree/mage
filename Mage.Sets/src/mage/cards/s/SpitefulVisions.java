@@ -36,7 +36,7 @@ public final class SpitefulVisions extends CardImpl {
         this.addAbility(triggeredAbility);
     }
 
-    public SpitefulVisions(final SpitefulVisions card) {
+    private SpitefulVisions(final SpitefulVisions card) {
         super(card);
     }
 

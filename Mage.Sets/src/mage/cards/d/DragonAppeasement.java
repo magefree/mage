@@ -31,7 +31,7 @@ public final class DragonAppeasement extends CardImpl {
 
     }
 
-    public DragonAppeasement(final DragonAppeasement card) {
+    private DragonAppeasement(final DragonAppeasement card) {
         super(card);
     }
 

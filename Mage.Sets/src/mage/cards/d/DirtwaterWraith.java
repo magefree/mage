@@ -33,7 +33,7 @@ public final class DirtwaterWraith extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public DirtwaterWraith(final DirtwaterWraith card) {
+    private DirtwaterWraith(final DirtwaterWraith card) {
         super(card);
     }
 

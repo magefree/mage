@@ -27,7 +27,7 @@ public final class Cowardice extends CardImpl {
         this.addAbility(new CowardiceTriggeredAbility());
     }
 
-    public Cowardice(final Cowardice card) {
+    private Cowardice(final Cowardice card) {
         super(card);
     }
 

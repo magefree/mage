@@ -37,7 +37,7 @@ public final class RustElemental extends CardImpl {
         this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new RustElementalEffect(), false));
     }
 
-    public RustElemental(final RustElemental card) {
+    private RustElemental(final RustElemental card) {
         super(card);
     }
 

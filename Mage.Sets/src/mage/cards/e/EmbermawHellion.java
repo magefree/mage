@@ -39,7 +39,7 @@ public final class EmbermawHellion extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EmbermawHellionEffect()));
     }
 
-    public EmbermawHellion(final EmbermawHellion card) {
+    private EmbermawHellion(final EmbermawHellion card) {
         super(card);
     }
 

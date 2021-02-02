@@ -49,7 +49,7 @@ public final class SentinelOfTheEternalWatch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SentinelOfTheEternalWatch(final SentinelOfTheEternalWatch card) {
+    private SentinelOfTheEternalWatch(final SentinelOfTheEternalWatch card) {
         super(card);
     }
 

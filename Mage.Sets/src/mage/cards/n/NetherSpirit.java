@@ -37,7 +37,7 @@ public final class NetherSpirit extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new NetherSpiritCondition(), "At the beginning of your upkeep, if {this} is the only creature card in your graveyard, you may return {this} to the battlefield."));
     }
 
-    public NetherSpirit(final NetherSpirit card) {
+    private NetherSpirit(final NetherSpirit card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class Calciderm extends CardImpl {
         this.addAbility(new VanishingSacrificeAbility());
     }
 
-    public Calciderm(final Calciderm card) {
+    private Calciderm(final Calciderm card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class PsychoticFury extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public PsychoticFury(final PsychoticFury card) {
+    private PsychoticFury(final PsychoticFury card) {
         super(card);
     }
 

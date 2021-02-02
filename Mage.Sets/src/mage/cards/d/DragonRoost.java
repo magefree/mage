@@ -23,7 +23,7 @@ public final class DragonRoost extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DragonToken2(), 1), new ManaCostsImpl("{5}{R}{R}")));
     }
 
-    public DragonRoost(final DragonRoost card) {
+    private DragonRoost(final DragonRoost card) {
         super(card);
     }
 

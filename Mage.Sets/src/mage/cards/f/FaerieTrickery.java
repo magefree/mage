@@ -34,7 +34,7 @@ public final class FaerieTrickery extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public FaerieTrickery(final FaerieTrickery card) {
+    private FaerieTrickery(final FaerieTrickery card) {
         super(card);
     }
 

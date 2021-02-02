@@ -28,7 +28,7 @@ public final class SurpriseManeuver extends CardImpl {
 
     }
 
-    public SurpriseManeuver(final SurpriseManeuver card) {
+    private SurpriseManeuver(final SurpriseManeuver card) {
         super(card);
     }
 

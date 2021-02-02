@@ -32,7 +32,7 @@ public final class ThornbowArcher extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new ThornbowArcherEffect(), false));
     }
 
-    public ThornbowArcher(final ThornbowArcher card) {
+    private ThornbowArcher(final ThornbowArcher card) {
         super(card);
     }
 

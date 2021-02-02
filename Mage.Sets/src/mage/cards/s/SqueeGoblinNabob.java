@@ -31,7 +31,7 @@ public final class SqueeGoblinNabob extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), TargetController.YOU, true));
     }
 
-    public SqueeGoblinNabob(final SqueeGoblinNabob card) {
+    private SqueeGoblinNabob(final SqueeGoblinNabob card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class HandOfHonor extends CardImpl {
         this.addAbility(new BushidoAbility(1));
     }
 
-    public HandOfHonor(final HandOfHonor card) {
+    private HandOfHonor(final HandOfHonor card) {
         super(card);
     }
 

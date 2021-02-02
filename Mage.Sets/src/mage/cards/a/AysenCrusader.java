@@ -47,7 +47,7 @@ public final class AysenCrusader extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value, Duration.EndOfGame)));
     }
 
-    public AysenCrusader(final AysenCrusader card) {
+    private AysenCrusader(final AysenCrusader card) {
         super(card);
     }
 

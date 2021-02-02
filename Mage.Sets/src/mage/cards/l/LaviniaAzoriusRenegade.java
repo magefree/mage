@@ -48,7 +48,7 @@ public final class LaviniaAzoriusRenegade extends CardImpl {
         this.addAbility(new LaviniaAzoriusRenegadeTriggeredAbility());
     }
 
-    public LaviniaAzoriusRenegade(final LaviniaAzoriusRenegade card) {
+    private LaviniaAzoriusRenegade(final LaviniaAzoriusRenegade card) {
         super(card);
     }
 

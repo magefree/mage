@@ -30,7 +30,7 @@ public final class RhonassLastStand extends CardImpl {
                 .setText("Lands you control don't untap during your next untap phase"));
     }
 
-    public RhonassLastStand(final RhonassLastStand card) {
+    private RhonassLastStand(final RhonassLastStand card) {
         super(card);
     }
 

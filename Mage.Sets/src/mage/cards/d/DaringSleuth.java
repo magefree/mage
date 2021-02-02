@@ -36,7 +36,7 @@ public final class DaringSleuth extends CardImpl {
         this.addAbility(new DaringSleuthTriggeredAbility());
     }
 
-    public DaringSleuth(final DaringSleuth card) {
+    private DaringSleuth(final DaringSleuth card) {
         super(card);
     }
 

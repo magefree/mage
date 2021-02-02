@@ -22,7 +22,7 @@ public final class RebukingCeremony extends CardImpl {
         getSpellAbility().addTarget(new TargetArtifactPermanent(2));
     }
 
-    public RebukingCeremony(final RebukingCeremony card) {
+    private RebukingCeremony(final RebukingCeremony card) {
         super(card);
     }
 

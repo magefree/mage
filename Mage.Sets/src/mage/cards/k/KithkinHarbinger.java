@@ -35,7 +35,7 @@ public final class KithkinHarbinger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true), true));
     }
 
-    public KithkinHarbinger(final KithkinHarbinger card) {
+    private KithkinHarbinger(final KithkinHarbinger card) {
         super(card);
     }
 

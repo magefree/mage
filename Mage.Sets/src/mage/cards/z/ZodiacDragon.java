@@ -26,7 +26,7 @@ public final class ZodiacDragon extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect(), true));
     }
 
-    public ZodiacDragon(final ZodiacDragon card) {
+    private ZodiacDragon(final ZodiacDragon card) {
         super(card);
     }
 

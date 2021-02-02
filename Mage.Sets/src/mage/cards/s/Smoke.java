@@ -30,7 +30,7 @@ public final class Smoke extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SmokeEffect()));
     }
 
-    public Smoke(final Smoke card) {
+    private Smoke(final Smoke card) {
         super(card);
     }
 

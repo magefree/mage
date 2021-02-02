@@ -35,7 +35,7 @@ public final class OgreShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OgreShaman(final OgreShaman card) {
+    private OgreShaman(final OgreShaman card) {
         super(card);
     }
 

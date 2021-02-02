@@ -43,7 +43,7 @@ public final class IntegrityIntervention extends SplitCard {
         );
     }
 
-    public IntegrityIntervention(final IntegrityIntervention card) {
+    private IntegrityIntervention(final IntegrityIntervention card) {
         super(card);
     }
 

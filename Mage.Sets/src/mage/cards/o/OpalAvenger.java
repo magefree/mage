@@ -27,7 +27,7 @@ public final class OpalAvenger extends CardImpl {
         this.addAbility(new OpalAvengerStateTriggeredAbility());
     }
 
-    public OpalAvenger(final OpalAvenger card) {
+    private OpalAvenger(final OpalAvenger card) {
         super(card);
     }
 

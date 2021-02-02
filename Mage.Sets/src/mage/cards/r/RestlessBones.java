@@ -37,7 +37,7 @@ public final class RestlessBones extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }
 
-    public RestlessBones(final RestlessBones card) {
+    private RestlessBones(final RestlessBones card) {
         super(card);
     }
 

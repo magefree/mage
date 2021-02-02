@@ -37,7 +37,7 @@ public final class OketrasAttendant extends CardImpl {
 
     }
 
-    public OketrasAttendant(final OketrasAttendant card) {
+    private OketrasAttendant(final OketrasAttendant card) {
         super(card);
     }
 

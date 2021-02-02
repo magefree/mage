@@ -29,7 +29,7 @@ public final class UtvaraScalper extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public UtvaraScalper(final UtvaraScalper card) {
+    private UtvaraScalper(final UtvaraScalper card) {
         super(card);
     }
 

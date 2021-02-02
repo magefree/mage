@@ -28,7 +28,7 @@ public final class ParadigmShift extends CardImpl {
         this.getSpellAbility().addEffect(new ExileLibraryEffect());
     }
 
-    public ParadigmShift(final ParadigmShift card) {
+    private ParadigmShift(final ParadigmShift card) {
         super(card);
     }
 

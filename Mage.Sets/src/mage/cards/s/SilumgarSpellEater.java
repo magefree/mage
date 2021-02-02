@@ -37,7 +37,7 @@ public final class SilumgarSpellEater extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SilumgarSpellEater(final SilumgarSpellEater card) {
+    private SilumgarSpellEater(final SilumgarSpellEater card) {
         super(card);
     }
 

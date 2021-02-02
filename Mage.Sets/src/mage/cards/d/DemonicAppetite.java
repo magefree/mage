@@ -42,7 +42,7 @@ public final class DemonicAppetite extends CardImpl {
                 TargetController.YOU, false));
     }
 
-    public DemonicAppetite(final DemonicAppetite card) {
+    private DemonicAppetite(final DemonicAppetite card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class AethergeodeMiner extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AethergeodeMinerEffect(), new PayEnergyCost(2)));
     }
 
-    public AethergeodeMiner(final AethergeodeMiner card) {
+    private AethergeodeMiner(final AethergeodeMiner card) {
         super(card);
     }
 

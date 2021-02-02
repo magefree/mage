@@ -26,7 +26,7 @@ public final class WailingGhoul extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(2)));
     }
 
-    public WailingGhoul(final WailingGhoul card) {
+    private WailingGhoul(final WailingGhoul card) {
         super(card);
     }
 

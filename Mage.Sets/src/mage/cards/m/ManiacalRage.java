@@ -36,7 +36,7 @@ public final class ManiacalRage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ManiacalRage(final ManiacalRage card) {
+    private ManiacalRage(final ManiacalRage card) {
         super(card);
     }
 

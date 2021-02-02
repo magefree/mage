@@ -64,7 +64,7 @@ public final class KalemneDiscipleOfIroas extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)));
     }
 
-    public KalemneDiscipleOfIroas(final KalemneDiscipleOfIroas card) {
+    private KalemneDiscipleOfIroas(final KalemneDiscipleOfIroas card) {
         super(card);
     }
 

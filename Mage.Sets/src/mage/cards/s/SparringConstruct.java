@@ -32,7 +32,7 @@ public final class SparringConstruct extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SparringConstruct(final SparringConstruct card) {
+    private SparringConstruct(final SparringConstruct card) {
         super(card);
     }
 

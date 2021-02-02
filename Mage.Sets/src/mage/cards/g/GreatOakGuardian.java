@@ -46,7 +46,7 @@ public final class GreatOakGuardian extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GreatOakGuardian(final GreatOakGuardian card) {
+    private GreatOakGuardian(final GreatOakGuardian card) {
         super(card);
     }
 

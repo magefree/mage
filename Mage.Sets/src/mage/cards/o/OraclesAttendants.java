@@ -42,7 +42,7 @@ public final class OraclesAttendants extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OraclesAttendants(final OraclesAttendants card) {
+    private OraclesAttendants(final OraclesAttendants card) {
         super(card);
     }
 

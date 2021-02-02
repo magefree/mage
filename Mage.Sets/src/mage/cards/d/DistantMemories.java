@@ -26,7 +26,7 @@ public final class DistantMemories extends CardImpl {
         this.getSpellAbility().addEffect(new DistantMemoriesEffect());
     }
 
-    public DistantMemories(final DistantMemories card) {
+    private DistantMemories(final DistantMemories card) {
         super(card);
     }
 

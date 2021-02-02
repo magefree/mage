@@ -34,7 +34,7 @@ public final class OozeFlux extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OozeFlux(final OozeFlux card) {
+    private OozeFlux(final OozeFlux card) {
         super(card);
     }
 

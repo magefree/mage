@@ -28,7 +28,7 @@ public final class CitanulCentaurs extends CardImpl {
     this.addAbility(new EchoAbility("{3}{G}"));
     }
 
-    public CitanulCentaurs(final CitanulCentaurs card) {
+    private CitanulCentaurs(final CitanulCentaurs card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class CommuneWithLava extends CardImpl {
 
     }
 
-    public CommuneWithLava(final CommuneWithLava card) {
+    private CommuneWithLava(final CommuneWithLava card) {
         super(card);
     }
 

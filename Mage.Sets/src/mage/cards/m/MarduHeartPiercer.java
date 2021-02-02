@@ -39,7 +39,7 @@ public final class MarduHeartPiercer extends CardImpl {
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public MarduHeartPiercer(final MarduHeartPiercer card) {
+    private MarduHeartPiercer(final MarduHeartPiercer card) {
         super(card);
     }
 

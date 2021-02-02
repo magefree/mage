@@ -51,7 +51,7 @@ public final class ConsumingFervor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ConsumingFervor(final ConsumingFervor card) {
+    private ConsumingFervor(final ConsumingFervor card) {
         super(card);
     }
 

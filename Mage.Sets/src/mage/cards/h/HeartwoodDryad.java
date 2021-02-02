@@ -28,7 +28,7 @@ public final class HeartwoodDryad extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAsThoughtItHadShadowEffect(Duration.WhileOnBattlefield)));
     }
 
-    public HeartwoodDryad(final HeartwoodDryad card) {
+    private HeartwoodDryad(final HeartwoodDryad card) {
         super(card);
     }
 

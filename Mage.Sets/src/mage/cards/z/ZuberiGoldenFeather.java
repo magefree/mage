@@ -32,7 +32,7 @@ public final class ZuberiGoldenFeather extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public ZuberiGoldenFeather(final ZuberiGoldenFeather card) {
+    private ZuberiGoldenFeather(final ZuberiGoldenFeather card) {
         super(card);
     }
 

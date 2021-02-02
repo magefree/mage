@@ -48,7 +48,7 @@ public final class BloodchiefAscension extends CardImpl {
 
     }
 
-    public BloodchiefAscension(final BloodchiefAscension card) {
+    private BloodchiefAscension(final BloodchiefAscension card) {
         super(card);
     }
 

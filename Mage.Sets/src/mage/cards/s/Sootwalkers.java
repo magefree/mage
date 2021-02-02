@@ -38,7 +38,7 @@ public final class Sootwalkers extends CardImpl {
         
     }
 
-    public Sootwalkers(final Sootwalkers card) {
+    private Sootwalkers(final Sootwalkers card) {
         super(card);
     }
 

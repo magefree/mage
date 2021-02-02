@@ -32,7 +32,7 @@ public final class KnightOfGlory extends CardImpl {
         this.addAbility(new ExaltedAbility());
     }
 
-    public KnightOfGlory(final KnightOfGlory card) {
+    private KnightOfGlory(final KnightOfGlory card) {
         super(card);
     }
 

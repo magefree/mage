@@ -48,7 +48,7 @@ public final class SixthSense extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public SixthSense(final SixthSense card) {
+    private SixthSense(final SixthSense card) {
         super(card);
     }
 

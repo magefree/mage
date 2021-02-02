@@ -44,7 +44,7 @@ public final class BlueElementalBlast extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public BlueElementalBlast(final BlueElementalBlast card) {
+    private BlueElementalBlast(final BlueElementalBlast card) {
         super(card);
     }
 

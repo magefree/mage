@@ -27,7 +27,7 @@ public final class RagingMinotaur extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public RagingMinotaur(final RagingMinotaur card) {
+    private RagingMinotaur(final RagingMinotaur card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class EmissaryOfTheSleepless extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MorbidCondition.instance, "When {this} enters the battlefield, if a creature died this turn, create a 1/1 white Spirit creature token with flying."));
     }
 
-    public EmissaryOfTheSleepless(final EmissaryOfTheSleepless card) {
+    private EmissaryOfTheSleepless(final EmissaryOfTheSleepless card) {
         super(card);
     }
 

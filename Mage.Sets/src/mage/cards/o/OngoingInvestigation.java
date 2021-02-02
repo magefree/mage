@@ -35,7 +35,7 @@ public final class OngoingInvestigation extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OngoingInvestigation(final OngoingInvestigation card) {
+    private OngoingInvestigation(final OngoingInvestigation card) {
         super(card);
     }
 

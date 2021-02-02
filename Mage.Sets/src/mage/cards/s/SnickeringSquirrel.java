@@ -30,7 +30,7 @@ public final class SnickeringSquirrel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SnickeringSquirrelEffect()));
     }
 
-    public SnickeringSquirrel(final SnickeringSquirrel card) {
+    private SnickeringSquirrel(final SnickeringSquirrel card) {
         super(card);
     }
 

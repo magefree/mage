@@ -40,7 +40,7 @@ public final class CoastalDrake extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CoastalDrake(final CoastalDrake card) {
+    private CoastalDrake(final CoastalDrake card) {
         super(card);
     }
 

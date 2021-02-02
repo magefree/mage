@@ -33,7 +33,7 @@ public final class BogDown extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public BogDown(final BogDown card) {
+    private BogDown(final BogDown card) {
         super(card);
     }
 

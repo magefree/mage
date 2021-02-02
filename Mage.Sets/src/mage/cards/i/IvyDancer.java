@@ -38,7 +38,7 @@ public final class IvyDancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IvyDancer(final IvyDancer card) {
+    private IvyDancer(final IvyDancer card) {
         super(card);
     }
 

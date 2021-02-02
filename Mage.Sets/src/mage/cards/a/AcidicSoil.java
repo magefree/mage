@@ -27,7 +27,7 @@ public final class AcidicSoil extends CardImpl {
         this.getSpellAbility().addEffect(new AcidicSoilEffect());
     }
 
-    public AcidicSoil(final AcidicSoil card) {
+    private AcidicSoil(final AcidicSoil card) {
         super(card);
     }
 

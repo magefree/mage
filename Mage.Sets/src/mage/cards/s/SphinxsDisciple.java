@@ -31,7 +31,7 @@ public final class SphinxsDisciple extends CardImpl {
         this.addAbility(new InspiredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public SphinxsDisciple(final SphinxsDisciple card) {
+    private SphinxsDisciple(final SphinxsDisciple card) {
         super(card);
     }
 

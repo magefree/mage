@@ -33,7 +33,7 @@ public final class ThrillKillAssassin extends CardImpl {
         
     }
  
-    public ThrillKillAssassin(final ThrillKillAssassin card) {
+    private ThrillKillAssassin(final ThrillKillAssassin card) {
         super(card);
     }
  

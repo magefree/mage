@@ -29,7 +29,7 @@ public final class DartingMerfolk extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{U}")));
     }
 
-    public DartingMerfolk(final DartingMerfolk card) {
+    private DartingMerfolk(final DartingMerfolk card) {
         super(card);
     }
 

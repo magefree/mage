@@ -41,7 +41,7 @@ public final class Phantatog extends CardImpl {
                 new DiscardCardCost()));
     }
 
-    public Phantatog(final Phantatog card) {
+    private Phantatog(final Phantatog card) {
         super(card);
     }
 

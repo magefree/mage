@@ -28,7 +28,7 @@ public final class FoulTongueShriek extends CardImpl {
 
     }
 
-    public FoulTongueShriek(final FoulTongueShriek card) {
+    private FoulTongueShriek(final FoulTongueShriek card) {
         super(card);
     }
 

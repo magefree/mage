@@ -30,7 +30,7 @@ public final class OnduGiant extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true), true));
     }
 
-    public OnduGiant(final OnduGiant card) {
+    private OnduGiant(final OnduGiant card) {
         super(card);
     }
 

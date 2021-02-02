@@ -43,7 +43,7 @@ public final class WrensRunVanquisher extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public WrensRunVanquisher(final WrensRunVanquisher card) {
+    private WrensRunVanquisher(final WrensRunVanquisher card) {
         super(card);
     }
 

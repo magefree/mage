@@ -27,7 +27,7 @@ public final class AmuletOfVigor extends CardImpl {
         this.addAbility(new AmuletOfVigorTriggeredAbility());
     }
 
-    public AmuletOfVigor(final AmuletOfVigor card) {
+    private AmuletOfVigor(final AmuletOfVigor card) {
         super(card);
     }
 

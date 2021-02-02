@@ -40,7 +40,7 @@ public final class HarvesterOfSouls extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), true, filter));
     }
 
-    public HarvesterOfSouls(final HarvesterOfSouls card) {
+    private HarvesterOfSouls(final HarvesterOfSouls card) {
         super(card);
     }
 

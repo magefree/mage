@@ -56,7 +56,7 @@ public final class SultaiRunemark extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter), "{this} has deathtouch as long as you control a green or blue permanent")));
     }
 
-    public SultaiRunemark(final SultaiRunemark card) {
+    private SultaiRunemark(final SultaiRunemark card) {
         super(card);
     }
 

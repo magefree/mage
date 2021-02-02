@@ -30,7 +30,7 @@ public final class Breathstealer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public Breathstealer(final Breathstealer card) {
+    private Breathstealer(final Breathstealer card) {
         super(card);
     }
 

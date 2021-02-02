@@ -47,7 +47,7 @@ public final class TownGossipmonger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TownGossipmonger(final TownGossipmonger card) {
+    private TownGossipmonger(final TownGossipmonger card) {
         super(card);
     }
 

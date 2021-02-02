@@ -38,7 +38,7 @@ public final class SagesOfTheAnima extends CardImpl {
 
     }
 
-    public SagesOfTheAnima(final SagesOfTheAnima card) {
+    private SagesOfTheAnima(final SagesOfTheAnima card) {
         super(card);
     }
 

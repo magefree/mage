@@ -40,7 +40,7 @@ public final class SramSeniorEdificer extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
     }
 
-    public SramSeniorEdificer(final SramSeniorEdificer card) {
+    private SramSeniorEdificer(final SramSeniorEdificer card) {
         super(card);
     }
 

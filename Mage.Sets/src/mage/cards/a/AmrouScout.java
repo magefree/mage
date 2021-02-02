@@ -46,7 +46,7 @@ public final class AmrouScout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AmrouScout(final AmrouScout card) {
+    private AmrouScout(final AmrouScout card) {
         super(card);
     }
 

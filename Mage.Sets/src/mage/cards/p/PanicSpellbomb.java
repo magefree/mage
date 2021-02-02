@@ -36,7 +36,7 @@ public final class PanicSpellbomb extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{R}")), false, false));
     }
 
-    public PanicSpellbomb(final PanicSpellbomb card) {
+    private PanicSpellbomb(final PanicSpellbomb card) {
         super(card);
     }
 

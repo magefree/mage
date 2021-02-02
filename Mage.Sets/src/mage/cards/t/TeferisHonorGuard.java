@@ -33,7 +33,7 @@ public final class TeferisHonorGuard extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhaseOutSourceEffect(), new ManaCostsImpl("{U}{U}")));
     }
 
-    public TeferisHonorGuard(final TeferisHonorGuard card) {
+    private TeferisHonorGuard(final TeferisHonorGuard card) {
         super(card);
     }
 

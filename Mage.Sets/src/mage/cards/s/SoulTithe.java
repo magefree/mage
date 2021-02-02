@@ -45,7 +45,7 @@ public final class SoulTithe extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SoulTitheEffect(), TargetController.CONTROLLER_ATTACHED_TO, false));
     }
 
-    public SoulTithe(final SoulTithe card) {
+    private SoulTithe(final SoulTithe card) {
         super(card);
     }
 

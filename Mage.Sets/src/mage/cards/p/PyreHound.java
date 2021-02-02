@@ -33,7 +33,7 @@ public final class PyreHound extends CardImpl {
                 new FilterInstantOrSorcerySpell("an instant or sorcery spell"), false));
     }
 
-    public PyreHound(final PyreHound card) {
+    private PyreHound(final PyreHound card) {
         super(card);
     }
 

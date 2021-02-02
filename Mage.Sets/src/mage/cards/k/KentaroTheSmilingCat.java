@@ -42,7 +42,7 @@ public final class KentaroTheSmilingCat extends CardImpl {
 
     }
 
-    public KentaroTheSmilingCat(final KentaroTheSmilingCat card) {
+    private KentaroTheSmilingCat(final KentaroTheSmilingCat card) {
         super(card);
     }
 

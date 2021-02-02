@@ -31,7 +31,7 @@ public final class SeasonedMarshal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeasonedMarshal(final SeasonedMarshal card) {
+    private SeasonedMarshal(final SeasonedMarshal card) {
         super(card);
     }
 

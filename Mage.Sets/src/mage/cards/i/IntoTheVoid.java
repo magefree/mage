@@ -23,7 +23,7 @@ public final class IntoTheVoid extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }
 
-    public IntoTheVoid(final IntoTheVoid card) {
+    private IntoTheVoid(final IntoTheVoid card) {
         super(card);
     }
 

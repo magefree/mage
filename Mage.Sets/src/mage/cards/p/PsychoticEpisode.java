@@ -37,7 +37,7 @@ public final class PsychoticEpisode extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{B}")));
     }
 
-    public PsychoticEpisode(final PsychoticEpisode card) {
+    private PsychoticEpisode(final PsychoticEpisode card) {
         super(card);
     }
 

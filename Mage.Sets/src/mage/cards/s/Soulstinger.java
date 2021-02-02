@@ -48,7 +48,7 @@ public final class Soulstinger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Soulstinger(final Soulstinger card) {
+    private Soulstinger(final Soulstinger card) {
         super(card);
     }
 

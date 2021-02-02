@@ -27,7 +27,7 @@ public final class WellLaidPlans extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WellLaidPlansPreventionEffect()));
     }
 
-    public WellLaidPlans(final WellLaidPlans card) {
+    private WellLaidPlans(final WellLaidPlans card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class VitalSplicer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VitalSplicer(final VitalSplicer card) {
+    private VitalSplicer(final VitalSplicer card) {
         super(card);
     }
 

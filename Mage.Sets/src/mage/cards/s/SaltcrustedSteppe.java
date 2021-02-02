@@ -44,7 +44,7 @@ public final class SaltcrustedSteppe extends CardImpl {
 
     }
 
-    public SaltcrustedSteppe(final SaltcrustedSteppe card) {
+    private SaltcrustedSteppe(final SaltcrustedSteppe card) {
         super(card);
     }
 

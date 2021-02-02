@@ -27,7 +27,7 @@ public final class CampaignOfVengeance extends CardImpl {
         this.addAbility(new CampaignOfVengeanceTriggeredAbility());
     }
 
-    public CampaignOfVengeance(final CampaignOfVengeance card) {
+    private CampaignOfVengeance(final CampaignOfVengeance card) {
         super(card);
     }
 

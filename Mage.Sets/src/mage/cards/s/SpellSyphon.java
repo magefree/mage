@@ -35,7 +35,7 @@ public final class SpellSyphon extends CardImpl {
 
     }
 
-    public SpellSyphon(final SpellSyphon card) {
+    private SpellSyphon(final SpellSyphon card) {
         super(card);
     }
 

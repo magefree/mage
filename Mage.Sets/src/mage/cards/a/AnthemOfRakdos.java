@@ -41,7 +41,7 @@ public final class AnthemOfRakdos extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnthemOfRakdosHellbentEffect()));
     }
 
-    public AnthemOfRakdos(final AnthemOfRakdos card) {
+    private AnthemOfRakdos(final AnthemOfRakdos card) {
         super(card);
     }
 

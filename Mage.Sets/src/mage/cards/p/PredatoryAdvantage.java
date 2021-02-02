@@ -32,7 +32,7 @@ public final class PredatoryAdvantage extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new LizardToken()), TargetController.OPPONENT, new DidNotCastCreatureCondition(), false), new CastCreatureWatcher());
     }
 
-    public PredatoryAdvantage(final PredatoryAdvantage card) {
+    private PredatoryAdvantage(final PredatoryAdvantage card) {
         super(card);
     }
 

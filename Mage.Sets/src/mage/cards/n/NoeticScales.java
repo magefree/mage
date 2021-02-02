@@ -29,7 +29,7 @@ public final class NoeticScales extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new NoeticScalesEffect(), TargetController.ANY, false, true));
     }
 
-    public NoeticScales(final NoeticScales card) {
+    private NoeticScales(final NoeticScales card) {
         super(card);
     }
 

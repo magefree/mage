@@ -39,7 +39,7 @@ public final class MoltenSentry extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new MoltenSentryEffect(), null, rule, ""));
     }
 
-    public MoltenSentry(final MoltenSentry card) {
+    private MoltenSentry(final MoltenSentry card) {
         super(card);
     }
 

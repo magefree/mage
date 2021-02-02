@@ -47,7 +47,7 @@ public final class GoblinArtisans extends CardImpl {
 
     }
 
-    public GoblinArtisans(final GoblinArtisans card) {
+    private GoblinArtisans(final GoblinArtisans card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class CrueltyOfTheSith extends CardImpl {
 
     }
 
-    public CrueltyOfTheSith(final CrueltyOfTheSith card) {
+    private CrueltyOfTheSith(final CrueltyOfTheSith card) {
         super(card);
     }
 

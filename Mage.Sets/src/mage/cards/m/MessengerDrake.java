@@ -30,7 +30,7 @@ public final class MessengerDrake extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public MessengerDrake(final MessengerDrake card) {
+    private MessengerDrake(final MessengerDrake card) {
         super(card);
     }
 

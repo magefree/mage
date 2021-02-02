@@ -34,7 +34,7 @@ public final class FloodedWoodlands extends CardImpl {
         
     }
 
-    public FloodedWoodlands(final FloodedWoodlands card) {
+    private FloodedWoodlands(final FloodedWoodlands card) {
         super(card);
     }
 

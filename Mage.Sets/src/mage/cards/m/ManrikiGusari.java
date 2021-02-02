@@ -41,7 +41,7 @@ public final class ManrikiGusari extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
-    public ManrikiGusari(final ManrikiGusari card) {
+    private ManrikiGusari(final ManrikiGusari card) {
         super(card);
     }
 

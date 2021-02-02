@@ -34,7 +34,7 @@ public final class BattletideAlchemist extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BattletideAlchemistEffect()));
     }
 
-    public BattletideAlchemist(final BattletideAlchemist card) {
+    private BattletideAlchemist(final BattletideAlchemist card) {
         super(card);
     }
 

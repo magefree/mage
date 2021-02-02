@@ -58,7 +58,7 @@ public final class MultaniYavimayasAvatar extends CardImpl {
         this.addAbility(returnToHand);
     }
 
-    public MultaniYavimayasAvatar(final MultaniYavimayasAvatar card) {
+    private MultaniYavimayasAvatar(final MultaniYavimayasAvatar card) {
         super(card);
     }
 

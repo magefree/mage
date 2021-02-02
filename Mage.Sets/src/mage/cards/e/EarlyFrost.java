@@ -24,7 +24,7 @@ public final class EarlyFrost extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent(0, 3, new FilterLandPermanent(), false));
     }
 
-    public EarlyFrost(final EarlyFrost card) {
+    private EarlyFrost(final EarlyFrost card) {
         super(card);
     }
 

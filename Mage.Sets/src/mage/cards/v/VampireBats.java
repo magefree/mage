@@ -34,7 +34,7 @@ public final class VampireBats extends CardImpl {
 
     }
 
-    public VampireBats(final VampireBats card) {
+    private VampireBats(final VampireBats card) {
         super(card);
     }
 

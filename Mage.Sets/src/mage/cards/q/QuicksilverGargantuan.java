@@ -32,7 +32,7 @@ public final class QuicksilverGargantuan extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuicksilverGargantuan(final QuicksilverGargantuan card) {
+    private QuicksilverGargantuan(final QuicksilverGargantuan card) {
         super(card);
     }
 

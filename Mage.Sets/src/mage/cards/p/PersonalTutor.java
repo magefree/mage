@@ -27,7 +27,7 @@ public final class PersonalTutor extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true));
     }
 
-    public PersonalTutor(final PersonalTutor card) {
+    private PersonalTutor(final PersonalTutor card) {
         super(card);
     }
 

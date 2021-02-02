@@ -25,7 +25,7 @@ public final class KrakensEye extends CardImpl {
         this.addAbility(new KrakensEyeAbility());
     }
 
-    public KrakensEye(final KrakensEye card) {
+    private KrakensEye(final KrakensEye card) {
         super(card);
     }
 

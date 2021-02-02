@@ -23,7 +23,7 @@ public final class PiratesPrize extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken()));
     }
 
-    public PiratesPrize(final PiratesPrize card) {
+    private PiratesPrize(final PiratesPrize card) {
         super(card);
     }
 

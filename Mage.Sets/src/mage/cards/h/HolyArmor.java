@@ -45,7 +45,7 @@ public final class HolyArmor extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W)));
     }
 
-    public HolyArmor(final HolyArmor card) {
+    private HolyArmor(final HolyArmor card) {
         super(card);
     }
 

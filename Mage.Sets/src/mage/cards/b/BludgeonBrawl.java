@@ -33,7 +33,7 @@ public final class BludgeonBrawl extends CardImpl {
         this.addAbility(new BludgeonBrawlAbility());
     }
 
-    public BludgeonBrawl(final BludgeonBrawl card) {
+    private BludgeonBrawl(final BludgeonBrawl card) {
         super(card);
     }
 

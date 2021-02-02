@@ -42,7 +42,7 @@ public final class ZombieMusher extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{S}")));
     }
 
-    public ZombieMusher(final ZombieMusher card) {
+    private ZombieMusher(final ZombieMusher card) {
         super(card);
     }
 

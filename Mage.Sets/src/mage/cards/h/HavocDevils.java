@@ -26,7 +26,7 @@ public final class HavocDevils extends CardImpl {
 
     }
 
-    public HavocDevils(final HavocDevils card) {
+    private HavocDevils(final HavocDevils card) {
         super(card);
     }
 

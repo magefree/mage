@@ -46,7 +46,7 @@ public final class Magmasaur extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new MagmasaurEffect(), TargetController.YOU, false, false));
     }
 
-    public Magmasaur(final Magmasaur card) {
+    private Magmasaur(final Magmasaur card) {
         super(card);
     }
 

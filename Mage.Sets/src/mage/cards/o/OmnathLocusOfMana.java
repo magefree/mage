@@ -38,7 +38,7 @@ public final class OmnathLocusOfMana extends CardImpl {
 
     }
 
-    public OmnathLocusOfMana(final OmnathLocusOfMana card) {
+    private OmnathLocusOfMana(final OmnathLocusOfMana card) {
         super(card);
     }
 

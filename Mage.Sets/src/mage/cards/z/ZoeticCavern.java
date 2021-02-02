@@ -24,7 +24,7 @@ public final class ZoeticCavern extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}")));
     }
 
-    public ZoeticCavern(final ZoeticCavern card) {
+    private ZoeticCavern(final ZoeticCavern card) {
         super(card);
     }
 

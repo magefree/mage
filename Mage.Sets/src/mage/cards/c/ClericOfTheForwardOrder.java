@@ -38,7 +38,7 @@ public final class ClericOfTheForwardOrder extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter, 2)), false));
     }
 
-    public ClericOfTheForwardOrder(final ClericOfTheForwardOrder card) {
+    private ClericOfTheForwardOrder(final ClericOfTheForwardOrder card) {
         super(card);
     }
 

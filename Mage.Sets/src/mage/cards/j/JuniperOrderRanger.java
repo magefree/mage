@@ -47,7 +47,7 @@ public final class JuniperOrderRanger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JuniperOrderRanger(final JuniperOrderRanger card) {
+    private JuniperOrderRanger(final JuniperOrderRanger card) {
         super(card);
     }
 

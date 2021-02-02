@@ -23,7 +23,7 @@ public final class CrossbowAmbush extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(ReachAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures")));
     }
 
-    public CrossbowAmbush(final CrossbowAmbush card) {
+    private CrossbowAmbush(final CrossbowAmbush card) {
         super(card);
     }
 

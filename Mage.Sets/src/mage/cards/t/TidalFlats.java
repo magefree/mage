@@ -41,7 +41,7 @@ public final class TidalFlats extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TidalFlatsEffect(), new ManaCostsImpl("{U}{U}")));
     }
 
-    public TidalFlats(final TidalFlats card) {
+    private TidalFlats(final TidalFlats card) {
         super(card);
     }
 

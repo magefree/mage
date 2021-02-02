@@ -43,7 +43,7 @@ public final class Gleancrawler extends CardImpl {
 
     }
 
-    public Gleancrawler(final Gleancrawler card) {
+    private Gleancrawler(final Gleancrawler card) {
         super(card);
     }
 

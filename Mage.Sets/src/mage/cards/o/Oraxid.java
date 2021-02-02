@@ -27,7 +27,7 @@ public final class Oraxid extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
-    public Oraxid(final Oraxid card) {
+    private Oraxid(final Oraxid card) {
         super(card);
     }
 

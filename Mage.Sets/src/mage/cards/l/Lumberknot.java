@@ -30,7 +30,7 @@ public final class Lumberknot extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public Lumberknot(final Lumberknot card) {
+    private Lumberknot(final Lumberknot card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class EndlessHorizons extends CardImpl {
 
     }
 
-    public EndlessHorizons(final EndlessHorizons card) {
+    private EndlessHorizons(final EndlessHorizons card) {
         super(card);
     }
 

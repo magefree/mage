@@ -40,7 +40,7 @@ public final class FountainWatch extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public FountainWatch(final FountainWatch card) {
+    private FountainWatch(final FountainWatch card) {
         super(card);
     }
 

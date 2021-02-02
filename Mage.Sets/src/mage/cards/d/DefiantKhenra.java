@@ -23,7 +23,7 @@ public final class DefiantKhenra extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public DefiantKhenra(final DefiantKhenra card) {
+    private DefiantKhenra(final DefiantKhenra card) {
         super(card);
     }
 

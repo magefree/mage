@@ -26,7 +26,7 @@ public final class PouncingJaguar extends CardImpl {
     this.addAbility(new EchoAbility("{G}"));
     }
 
-    public PouncingJaguar(final PouncingJaguar card) {
+    private PouncingJaguar(final PouncingJaguar card) {
         super(card);
     }
 

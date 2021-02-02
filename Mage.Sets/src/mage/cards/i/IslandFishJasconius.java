@@ -48,7 +48,7 @@ public final class IslandFishJasconius extends CardImpl {
                 new SacrificeSourceEffect()));
     }
 
-    public IslandFishJasconius(final IslandFishJasconius card) {
+    private IslandFishJasconius(final IslandFishJasconius card) {
         super(card);
     }
 

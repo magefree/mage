@@ -40,7 +40,7 @@ public final class GraspingDunes extends CardImpl {
         
     }
 
-    public GraspingDunes(final GraspingDunes card) {
+    private GraspingDunes(final GraspingDunes card) {
         super(card);
     }
 

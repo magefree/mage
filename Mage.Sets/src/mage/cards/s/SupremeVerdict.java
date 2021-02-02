@@ -28,7 +28,7 @@ public final class SupremeVerdict extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
-    public SupremeVerdict(final SupremeVerdict card) {
+    private SupremeVerdict(final SupremeVerdict card) {
         super(card);
     }
 

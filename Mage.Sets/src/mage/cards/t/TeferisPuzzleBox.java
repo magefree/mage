@@ -28,7 +28,7 @@ public final class TeferisPuzzleBox extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TeferisPuzzleBox(final TeferisPuzzleBox card) {
+    private TeferisPuzzleBox(final TeferisPuzzleBox card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class EmpressGalina extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EmpressGalina(final EmpressGalina card) {
+    private EmpressGalina(final EmpressGalina card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class SearchForTomorrow extends CardImpl {
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{G}"), this));
     }
 
-    public SearchForTomorrow(final SearchForTomorrow card) {
+    private SearchForTomorrow(final SearchForTomorrow card) {
         super(card);
     }
 

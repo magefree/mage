@@ -51,7 +51,7 @@ public final class Chronozoa extends CardImpl {
                 "When {this} dies, if it had no time counters on it, create two tokens that are copies of it."));
     }
 
-    public Chronozoa(final Chronozoa card) {
+    private Chronozoa(final Chronozoa card) {
         super(card);
     }
 

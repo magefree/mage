@@ -37,7 +37,7 @@ public final class SkyriderElf extends CardImpl {
 
     }
 
-    public SkyriderElf(final SkyriderElf card) {
+    private SkyriderElf(final SkyriderElf card) {
         super(card);
     }
 

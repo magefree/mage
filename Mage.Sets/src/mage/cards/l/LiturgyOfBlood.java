@@ -26,7 +26,7 @@ public final class LiturgyOfBlood extends CardImpl {
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.BlackMana(3)));
     }
 
-    public LiturgyOfBlood(final LiturgyOfBlood card) {
+    private LiturgyOfBlood(final LiturgyOfBlood card) {
         super(card);
     }
 

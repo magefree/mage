@@ -44,7 +44,7 @@ public final class NehebTheEternal extends CardImpl {
                         false));
     }
 
-    public NehebTheEternal(final NehebTheEternal card) {
+    private NehebTheEternal(final NehebTheEternal card) {
         super(card);
     }
 

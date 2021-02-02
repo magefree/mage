@@ -42,7 +42,7 @@ public final class LightningProwess extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
     }
 
-    public LightningProwess(final LightningProwess card) {
+    private LightningProwess(final LightningProwess card) {
         super(card);
     }
 

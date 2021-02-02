@@ -22,7 +22,7 @@ public final class QilinsBlessing extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public QilinsBlessing(final QilinsBlessing card) {
+    private QilinsBlessing(final QilinsBlessing card) {
         super(card);
     }
 

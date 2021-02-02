@@ -27,7 +27,7 @@ public final class VulshokRefugee extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
-    public VulshokRefugee(final VulshokRefugee card) {
+    private VulshokRefugee(final VulshokRefugee card) {
         super(card);
     }
 

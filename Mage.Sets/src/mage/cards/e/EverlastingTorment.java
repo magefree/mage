@@ -40,7 +40,7 @@ public final class EverlastingTorment extends CardImpl {
 
     }
 
-    public EverlastingTorment(final EverlastingTorment card) {
+    private EverlastingTorment(final EverlastingTorment card) {
         super(card);
     }
 

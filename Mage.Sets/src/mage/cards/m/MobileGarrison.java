@@ -49,7 +49,7 @@ public final class MobileGarrison extends CardImpl {
         this.addAbility(new CrewAbility(2));
     }
 
-    public MobileGarrison(final MobileGarrison card) {
+    private MobileGarrison(final MobileGarrison card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class ArchetypeOfImagination extends CardImpl {
 
     }
 
-    public ArchetypeOfImagination(final ArchetypeOfImagination card) {
+    private ArchetypeOfImagination(final ArchetypeOfImagination card) {
         super(card);
     }
 

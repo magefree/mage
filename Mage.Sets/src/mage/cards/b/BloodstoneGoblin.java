@@ -37,7 +37,7 @@ public final class BloodstoneGoblin extends CardImpl {
         this.addAbility(new BloodstoneGoblinTriggeredAbility());
     }
 
-    public BloodstoneGoblin(final BloodstoneGoblin card) {
+    private BloodstoneGoblin(final BloodstoneGoblin card) {
         super(card);
     }
 

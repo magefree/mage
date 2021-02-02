@@ -37,7 +37,7 @@ public final class PoisonTipArcher extends CardImpl {
         ));
     }
 
-    public PoisonTipArcher(final PoisonTipArcher card) {
+    private PoisonTipArcher(final PoisonTipArcher card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class Deathgazer extends CardImpl {
 
     }
 
-    public Deathgazer(final Deathgazer card) {
+    private Deathgazer(final Deathgazer card) {
         super(card);
     }
 

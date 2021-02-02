@@ -25,7 +25,7 @@ public final class CruelFinality extends CardImpl {
         getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public CruelFinality(final CruelFinality card) {
+    private CruelFinality(final CruelFinality card) {
         super(card);
     }
 

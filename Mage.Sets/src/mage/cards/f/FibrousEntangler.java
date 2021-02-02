@@ -39,7 +39,7 @@ public final class FibrousEntangler extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.WhileOnBattlefield, 1)));
     }
 
-    public FibrousEntangler(final FibrousEntangler card) {
+    private FibrousEntangler(final FibrousEntangler card) {
         super(card);
     }
 

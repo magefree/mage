@@ -37,7 +37,7 @@ public final class SvogthosTheRestlessTomb extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SvogthosTheRestlessTomb(final SvogthosTheRestlessTomb card) {
+    private SvogthosTheRestlessTomb(final SvogthosTheRestlessTomb card) {
         super(card);
     }
 

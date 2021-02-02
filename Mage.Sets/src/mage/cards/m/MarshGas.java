@@ -22,7 +22,7 @@ public final class MarshGas extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-2, 0, Duration.EndOfTurn));
     }
 
-    public MarshGas(final MarshGas card) {
+    private MarshGas(final MarshGas card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class MirranSpy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MirranSpy(final MirranSpy card) {
+    private MirranSpy(final MirranSpy card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class MurasaPyromancer extends CardImpl {
 
     }
 
-    public MurasaPyromancer(final MurasaPyromancer card) {
+    private MurasaPyromancer(final MurasaPyromancer card) {
         super(card);
     }
 

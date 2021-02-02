@@ -37,7 +37,7 @@ public final class Pyrokinesis extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(4));
     }
 
-    public Pyrokinesis(final Pyrokinesis card) {
+    private Pyrokinesis(final Pyrokinesis card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class WallOfTears extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(effect)), false, true));
     }
 
-    public WallOfTears(final WallOfTears card) {
+    private WallOfTears(final WallOfTears card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class Granulate extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public Granulate(final Granulate card) {
+    private Granulate(final Granulate card) {
         super(card);
     }
 

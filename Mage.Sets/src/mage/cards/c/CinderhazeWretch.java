@@ -44,7 +44,7 @@ public final class CinderhazeWretch extends CardImpl {
 
     }
 
-    public CinderhazeWretch(final CinderhazeWretch card) {
+    private CinderhazeWretch(final CinderhazeWretch card) {
         super(card);
     }
 

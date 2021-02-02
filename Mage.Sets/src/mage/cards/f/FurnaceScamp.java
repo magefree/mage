@@ -30,7 +30,7 @@ public final class FurnaceScamp extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FurnaceScamp(final FurnaceScamp card) {
+    private FurnaceScamp(final FurnaceScamp card) {
         super(card);
     }
 

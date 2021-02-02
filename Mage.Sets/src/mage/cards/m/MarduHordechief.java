@@ -39,7 +39,7 @@ public final class MarduHordechief extends CardImpl {
                 new PlayerAttackedWatcher());
     }
 
-    public MarduHordechief(final MarduHordechief card) {
+    private MarduHordechief(final MarduHordechief card) {
         super(card);
     }
 

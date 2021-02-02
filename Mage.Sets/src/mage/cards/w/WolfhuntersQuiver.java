@@ -53,7 +53,7 @@ public final class WolfhuntersQuiver extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(5)));
     }
 
-    public WolfhuntersQuiver(final WolfhuntersQuiver card) {
+    private WolfhuntersQuiver(final WolfhuntersQuiver card) {
         super(card);
     }
 

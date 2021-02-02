@@ -32,7 +32,7 @@ public final class MischievousPoltergeist extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new PayLifeCost(1)));
     }
 
-    public MischievousPoltergeist(final MischievousPoltergeist card) {
+    private MischievousPoltergeist(final MischievousPoltergeist card) {
         super(card);
     }
 

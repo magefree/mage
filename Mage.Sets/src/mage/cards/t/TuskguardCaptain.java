@@ -50,7 +50,7 @@ public final class TuskguardCaptain extends CardImpl {
 
     }
 
-    public TuskguardCaptain(final TuskguardCaptain card) {
+    private TuskguardCaptain(final TuskguardCaptain card) {
         super(card);
     }
 

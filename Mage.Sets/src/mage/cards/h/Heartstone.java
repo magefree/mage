@@ -30,7 +30,7 @@ public final class Heartstone extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HeartstoneEffect()));
     }
 
-    public Heartstone(final Heartstone card) {
+    private Heartstone(final Heartstone card) {
         super(card);
     }
 

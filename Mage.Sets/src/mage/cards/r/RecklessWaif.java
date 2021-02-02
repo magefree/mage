@@ -39,7 +39,7 @@ public final class RecklessWaif extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
-    public RecklessWaif(final RecklessWaif card) {
+    private RecklessWaif(final RecklessWaif card) {
         super(card);
     }
 

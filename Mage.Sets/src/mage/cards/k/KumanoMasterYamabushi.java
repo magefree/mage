@@ -68,7 +68,7 @@ public final class KumanoMasterYamabushi extends CardImpl {
 
     }
 
-    public KumanoMasterYamabushi(final KumanoMasterYamabushi card) {
+    private KumanoMasterYamabushi(final KumanoMasterYamabushi card) {
         super(card);
     }
 

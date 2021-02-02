@@ -33,7 +33,7 @@ public final class GazeOfGranite extends CardImpl {
          this.getSpellAbility().addEffect(new GazeOfGraniteEffect());
     }
 
-    public GazeOfGranite(final GazeOfGranite card) {
+    private GazeOfGranite(final GazeOfGranite card) {
         super(card);
     }
 

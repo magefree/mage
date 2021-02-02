@@ -31,7 +31,7 @@ public final class RaziasPurification extends CardImpl {
         this.getSpellAbility().addEffect(new RaziasPurificationEffect());
     }
 
-    public RaziasPurification(final RaziasPurification card) {
+    private RaziasPurification(final RaziasPurification card) {
         super(card);
     }
 

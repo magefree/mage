@@ -41,7 +41,7 @@ public final class SpelltitheEnforcer extends CardImpl {
         ));
     }
 
-    public SpelltitheEnforcer(final SpelltitheEnforcer card) {
+    private SpelltitheEnforcer(final SpelltitheEnforcer card) {
         super(card);
     }
 

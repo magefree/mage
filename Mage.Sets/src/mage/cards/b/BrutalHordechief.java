@@ -52,7 +52,7 @@ public final class BrutalHordechief extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BrutalHordechief(final BrutalHordechief card) {
+    private BrutalHordechief(final BrutalHordechief card) {
         super(card);
     }
 

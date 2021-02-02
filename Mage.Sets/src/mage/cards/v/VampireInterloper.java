@@ -29,7 +29,7 @@ public final class VampireInterloper extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public VampireInterloper(final VampireInterloper card) {
+    private VampireInterloper(final VampireInterloper card) {
         super(card);
     }
 

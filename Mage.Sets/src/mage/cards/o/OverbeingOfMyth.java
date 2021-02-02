@@ -41,7 +41,7 @@ public final class OverbeingOfMyth extends CardImpl {
 
     }
 
-    public OverbeingOfMyth(final OverbeingOfMyth card) {
+    private OverbeingOfMyth(final OverbeingOfMyth card) {
         super(card);
     }
 

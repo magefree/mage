@@ -24,7 +24,7 @@ public final class InvigoratingFalls extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public InvigoratingFalls(final InvigoratingFalls card) {
+    private InvigoratingFalls(final InvigoratingFalls card) {
         super(card);
     }
 

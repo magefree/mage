@@ -44,7 +44,7 @@ public final class MeletisCharlatan extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MeletisCharlatan(final MeletisCharlatan card) {
+    private MeletisCharlatan(final MeletisCharlatan card) {
         super(card);
     }
 

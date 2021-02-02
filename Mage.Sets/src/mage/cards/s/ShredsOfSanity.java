@@ -42,7 +42,7 @@ public final class ShredsOfSanity extends CardImpl {
         this.getSpellAbility().addEffect(new ExileSourceEffect());
     }
 
-    public ShredsOfSanity(final ShredsOfSanity card) {
+    private ShredsOfSanity(final ShredsOfSanity card) {
         super(card);
     }
 

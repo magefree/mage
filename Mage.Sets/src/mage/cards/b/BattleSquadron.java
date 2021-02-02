@@ -34,7 +34,7 @@ public final class BattleSquadron extends CardImpl {
                 .addHint(CreaturesYouControlHint.instance));
     }
 
-    public BattleSquadron(final BattleSquadron card) {
+    private BattleSquadron(final BattleSquadron card) {
         super(card);
     }
 

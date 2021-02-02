@@ -25,7 +25,7 @@ public final class MiresMalice extends CardImpl {
         this.addAbility(new AwakenAbility(this, 3, "{5}{B}"));
     }
 
-    public MiresMalice(final MiresMalice card) {
+    private MiresMalice(final MiresMalice card) {
         super(card);
     }
 

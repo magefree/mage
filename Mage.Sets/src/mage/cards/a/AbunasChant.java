@@ -36,7 +36,7 @@ public final class AbunasChant extends CardImpl {
         this.addAbility(new EntwineAbility("{2}"));
     }
 
-    public AbunasChant(final AbunasChant card) {
+    private AbunasChant(final AbunasChant card) {
         super(card);
     }
 

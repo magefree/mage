@@ -26,7 +26,7 @@ public final class ShadowSlice extends CardImpl {
 
     }
 
-    public ShadowSlice(final ShadowSlice card) {
+    private ShadowSlice(final ShadowSlice card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class SunhomeFortressOfTheLegion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SunhomeFortressOfTheLegion(final SunhomeFortressOfTheLegion card) {
+    private SunhomeFortressOfTheLegion(final SunhomeFortressOfTheLegion card) {
         super(card);
     }
 

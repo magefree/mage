@@ -38,7 +38,7 @@ public final class AvenMindcensor extends CardImpl {
 
     }
 
-    public AvenMindcensor(final AvenMindcensor card) {
+    private AvenMindcensor(final AvenMindcensor card) {
         super(card);
     }
 

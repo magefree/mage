@@ -47,7 +47,7 @@ public final class GrimPoppet extends CardImpl {
         
     }
     
-    public GrimPoppet(final GrimPoppet card) {
+    private GrimPoppet(final GrimPoppet card) {
         super(card);
     }
     

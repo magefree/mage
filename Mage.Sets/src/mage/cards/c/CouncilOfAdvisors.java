@@ -27,7 +27,7 @@ public final class CouncilOfAdvisors extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public CouncilOfAdvisors(final CouncilOfAdvisors card) {
+    private CouncilOfAdvisors(final CouncilOfAdvisors card) {
         super(card);
     }
 

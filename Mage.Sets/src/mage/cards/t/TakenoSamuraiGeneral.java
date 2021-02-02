@@ -35,7 +35,7 @@ public final class TakenoSamuraiGeneral extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TakenoSamuraiGeneralEffect()));
     }
 
-    public TakenoSamuraiGeneral(final TakenoSamuraiGeneral card) {
+    private TakenoSamuraiGeneral(final TakenoSamuraiGeneral card) {
         super(card);
     }
 

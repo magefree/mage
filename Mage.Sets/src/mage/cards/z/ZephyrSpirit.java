@@ -30,7 +30,7 @@ public final class ZephyrSpirit extends CardImpl {
         ));
     }
 
-    public ZephyrSpirit(final ZephyrSpirit card) {
+    private ZephyrSpirit(final ZephyrSpirit card) {
         super(card);
     }
 

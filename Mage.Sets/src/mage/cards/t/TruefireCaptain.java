@@ -41,7 +41,7 @@ public final class TruefireCaptain extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TruefireCaptain(final TruefireCaptain card) {
+    private TruefireCaptain(final TruefireCaptain card) {
         super(card);
     }
 

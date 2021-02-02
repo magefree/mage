@@ -27,7 +27,7 @@ public final class BayouDragonfly extends CardImpl {
         this.addAbility(new SwampwalkAbility());
     }
 
-    public BayouDragonfly(final BayouDragonfly card) {
+    private BayouDragonfly(final BayouDragonfly card) {
         super(card);
     }
 

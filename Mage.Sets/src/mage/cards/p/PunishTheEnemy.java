@@ -27,7 +27,7 @@ public final class PunishTheEnemy extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public PunishTheEnemy(final PunishTheEnemy card) {
+    private PunishTheEnemy(final PunishTheEnemy card) {
         super(card);
     }
 

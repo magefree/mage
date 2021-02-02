@@ -26,7 +26,7 @@ public final class MountainValley extends CardImpl {
 
     }
 
-    public MountainValley(final MountainValley card) {
+    private MountainValley(final MountainValley card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class ThievingMagpie extends CardImpl {
         this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public ThievingMagpie(final ThievingMagpie card) {
+    private ThievingMagpie(final ThievingMagpie card) {
         super(card);
     }
 

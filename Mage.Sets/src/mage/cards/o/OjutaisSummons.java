@@ -25,7 +25,7 @@ public final class OjutaisSummons extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public OjutaisSummons(final OjutaisSummons card) {
+    private OjutaisSummons(final OjutaisSummons card) {
         super(card);
     }
 

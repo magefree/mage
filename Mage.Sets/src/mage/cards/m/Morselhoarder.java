@@ -37,7 +37,7 @@ public final class Morselhoarder extends CardImpl {
 
     }
 
-    public Morselhoarder(final Morselhoarder card) {
+    private Morselhoarder(final Morselhoarder card) {
         super(card);
     }
 

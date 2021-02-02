@@ -59,7 +59,7 @@ public final class WarpingWail extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public WarpingWail(final WarpingWail card) {
+    private WarpingWail(final WarpingWail card) {
         super(card);
     }
 

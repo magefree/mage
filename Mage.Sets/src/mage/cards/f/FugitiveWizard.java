@@ -23,7 +23,7 @@ public final class FugitiveWizard extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public FugitiveWizard(final FugitiveWizard card) {
+    private FugitiveWizard(final FugitiveWizard card) {
         super(card);
     }
 

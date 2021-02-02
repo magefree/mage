@@ -27,7 +27,7 @@ public final class AlchemistsGreeting extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{R}")));
     }
 
-    public AlchemistsGreeting(final AlchemistsGreeting card) {
+    private AlchemistsGreeting(final AlchemistsGreeting card) {
         super(card);
     }
 

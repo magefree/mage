@@ -62,7 +62,7 @@ public final class LichsMastery extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new LoseGameSourceControllerEffect(), false));
     }
 
-    public LichsMastery(final LichsMastery card) {
+    private LichsMastery(final LichsMastery card) {
         super(card);
     }
 

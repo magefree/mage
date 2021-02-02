@@ -44,7 +44,7 @@ public final class AethersphereHarvester extends CardImpl {
         this.addAbility(new CrewAbility(1));
     }
 
-    public AethersphereHarvester(final AethersphereHarvester card) {
+    private AethersphereHarvester(final AethersphereHarvester card) {
         super(card);
     }
 

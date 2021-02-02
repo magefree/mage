@@ -40,7 +40,7 @@ public final class SpikeColony extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpikeColony(final SpikeColony card) {
+    private SpikeColony(final SpikeColony card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class KeldonNecropolis extends CardImpl {
 
     }
 
-    public KeldonNecropolis(final KeldonNecropolis card) {
+    private KeldonNecropolis(final KeldonNecropolis card) {
         super(card);
     }
 

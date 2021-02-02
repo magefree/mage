@@ -34,7 +34,7 @@ public final class SpidersilkArmor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpidersilkArmor(final SpidersilkArmor card) {
+    private SpidersilkArmor(final SpidersilkArmor card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class NezumiCutthroat extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public NezumiCutthroat(final NezumiCutthroat card) {
+    private NezumiCutthroat(final NezumiCutthroat card) {
         super(card);
     }
 

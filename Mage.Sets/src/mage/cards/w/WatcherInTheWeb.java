@@ -34,7 +34,7 @@ public final class WatcherInTheWeb extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public WatcherInTheWeb(final WatcherInTheWeb card) {
+    private WatcherInTheWeb(final WatcherInTheWeb card) {
         super(card);
     }
 

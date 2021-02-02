@@ -27,7 +27,7 @@ public final class DeathSpeakers extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
     }
 
-    public DeathSpeakers(final DeathSpeakers card) {
+    private DeathSpeakers(final DeathSpeakers card) {
         super(card);
     }
 

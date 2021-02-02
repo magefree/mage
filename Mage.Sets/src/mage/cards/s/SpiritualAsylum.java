@@ -45,7 +45,7 @@ public final class SpiritualAsylum extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpiritualAsylum(final SpiritualAsylum card) {
+    private SpiritualAsylum(final SpiritualAsylum card) {
         super(card);
     }
 

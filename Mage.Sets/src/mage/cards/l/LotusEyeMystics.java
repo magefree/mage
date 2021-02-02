@@ -41,7 +41,7 @@ public final class LotusEyeMystics extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LotusEyeMystics(final LotusEyeMystics card) {
+    private LotusEyeMystics(final LotusEyeMystics card) {
         super(card);
     }
 

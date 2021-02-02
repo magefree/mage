@@ -33,7 +33,7 @@ public final class CeremonialGuard extends CardImpl {
                 false));
     }
 
-    public CeremonialGuard(final CeremonialGuard card) {
+    private CeremonialGuard(final CeremonialGuard card) {
         super(card);
     }
 

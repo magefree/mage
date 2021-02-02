@@ -50,7 +50,7 @@ public final class BlindingBeam extends CardImpl {
         this.addAbility(new EntwineAbility("{1}"));
     }
 
-    public BlindingBeam(final BlindingBeam card) {
+    private BlindingBeam(final BlindingBeam card) {
         super(card);
     }
 

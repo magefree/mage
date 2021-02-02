@@ -31,7 +31,7 @@ public final class ShriekingSpecter extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new DiscardTargetEffect(1), false, "Whenever {this} attacks, defending player discards a card.", SetTargetPointer.PLAYER));
     }
 
-    public ShriekingSpecter(final ShriekingSpecter card) {
+    private ShriekingSpecter(final ShriekingSpecter card) {
         super(card);
     }
 

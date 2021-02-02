@@ -26,7 +26,7 @@ public final class BackToBasics extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, FilterLandPermanent.nonbasicLands())));
     }
 
-    public BackToBasics(final BackToBasics card) {
+    private BackToBasics(final BackToBasics card) {
         super(card);
     }
 

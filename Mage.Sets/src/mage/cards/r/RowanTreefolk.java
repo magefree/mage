@@ -22,7 +22,7 @@ public final class RowanTreefolk extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public RowanTreefolk(final RowanTreefolk card) {
+    private RowanTreefolk(final RowanTreefolk card) {
         super(card);
     }
 

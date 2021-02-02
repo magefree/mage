@@ -37,7 +37,7 @@ public final class GuardianOfTheAges extends CardImpl {
         this.addAbility(new GuardianOfTheAgesTriggerAbility());
     }
     
-    public GuardianOfTheAges(final GuardianOfTheAges card){
+    private GuardianOfTheAges(final GuardianOfTheAges card){
         super(card);
     }
     

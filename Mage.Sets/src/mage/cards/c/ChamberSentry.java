@@ -56,7 +56,7 @@ public final class ChamberSentry extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{W}{U}{B}{R}{G}")));
     }
 
-    public ChamberSentry(final ChamberSentry card) {
+    private ChamberSentry(final ChamberSentry card) {
         super(card);
     }
 

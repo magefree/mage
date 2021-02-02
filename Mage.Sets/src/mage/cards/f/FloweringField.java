@@ -42,7 +42,7 @@ public final class FloweringField extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public FloweringField(final FloweringField card) {
+    private FloweringField(final FloweringField card) {
         super(card);
     }
 

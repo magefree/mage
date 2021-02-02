@@ -32,7 +32,7 @@ public final class TotalWar extends CardImpl {
         this.addAbility(new TotalWarTriggeredAbility(), new AttackedOrBlockedThisCombatWatcher());
     }
 
-    public TotalWar(final TotalWar card) {
+    private TotalWar(final TotalWar card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public final class GolemArtisan extends CardImpl {
 
     }
 
-    public GolemArtisan(final GolemArtisan card) {
+    private GolemArtisan(final GolemArtisan card) {
         super(card);
     }
 

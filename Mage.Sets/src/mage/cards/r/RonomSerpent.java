@@ -47,7 +47,7 @@ public final class RonomSerpent extends CardImpl {
         ));
     }
 
-    public RonomSerpent(final RonomSerpent card) {
+    private RonomSerpent(final RonomSerpent card) {
         super(card);
     }
 

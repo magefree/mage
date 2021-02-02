@@ -52,7 +52,7 @@ public final class GiselaTheBrokenBlade extends CardImpl {
                         + "then meld them into Brisela, Voice of Nightmares."));
     }
 
-    public GiselaTheBrokenBlade(final GiselaTheBrokenBlade card) {
+    private GiselaTheBrokenBlade(final GiselaTheBrokenBlade card) {
         super(card);
     }
 

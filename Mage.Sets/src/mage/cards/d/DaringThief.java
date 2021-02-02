@@ -46,7 +46,7 @@ public final class DaringThief extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DaringThief(final DaringThief card) {
+    private DaringThief(final DaringThief card) {
         super(card);
     }
 

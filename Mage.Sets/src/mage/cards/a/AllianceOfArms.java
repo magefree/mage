@@ -30,7 +30,7 @@ public final class AllianceOfArms extends CardImpl {
         this.getSpellAbility().addEffect(new AllianceOfArmsEffect());
     }
 
-    public AllianceOfArms(final AllianceOfArms card) {
+    private AllianceOfArms(final AllianceOfArms card) {
         super(card);
     }
 

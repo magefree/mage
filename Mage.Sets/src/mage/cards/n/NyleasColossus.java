@@ -35,7 +35,7 @@ public final class NyleasColossus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NyleasColossus(final NyleasColossus card) {
+    private NyleasColossus(final NyleasColossus card) {
         super(card);
     }
 

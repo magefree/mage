@@ -30,7 +30,7 @@ public final class ZanikevLocust extends CardImpl {
         this.addAbility(new ScavengeAbility(new ManaCostsImpl("{2}{B}{B}")));
     }
 
-    public ZanikevLocust(final ZanikevLocust card) {
+    private ZanikevLocust(final ZanikevLocust card) {
         super(card);
     }
 

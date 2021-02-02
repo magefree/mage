@@ -43,7 +43,7 @@ public final class AetherbornMarauder extends CardImpl {
 
     }
 
-    public AetherbornMarauder(final AetherbornMarauder card) {
+    private AetherbornMarauder(final AetherbornMarauder card) {
         super(card);
     }
 

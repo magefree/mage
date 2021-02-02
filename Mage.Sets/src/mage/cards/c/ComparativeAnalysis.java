@@ -26,7 +26,7 @@ public final class ComparativeAnalysis extends CardImpl {
         addAbility(new SurgeAbility(this, "{2}{U}"));
     }
 
-    public ComparativeAnalysis(final ComparativeAnalysis card) {
+    private ComparativeAnalysis(final ComparativeAnalysis card) {
         super(card);
     }
 

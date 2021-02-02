@@ -55,7 +55,7 @@ public final class AtarkasCommand extends CardImpl {
 
     }
 
-    public AtarkasCommand(final AtarkasCommand card) {
+    private AtarkasCommand(final AtarkasCommand card) {
         super(card);
     }
 

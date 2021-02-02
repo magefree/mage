@@ -29,7 +29,7 @@ public final class BloodbraidElf extends CardImpl {
         this.addAbility(new CascadeAbility());
     }
 
-    public BloodbraidElf(final BloodbraidElf card) {
+    private BloodbraidElf(final BloodbraidElf card) {
         super(card);
     }
 

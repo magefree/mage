@@ -26,7 +26,7 @@ public final class HornetCobra extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public HornetCobra(final HornetCobra card) {
+    private HornetCobra(final HornetCobra card) {
         super(card);
     }
 

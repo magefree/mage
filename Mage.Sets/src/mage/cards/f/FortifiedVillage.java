@@ -40,7 +40,7 @@ public final class FortifiedVillage extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public FortifiedVillage(final FortifiedVillage card) {
+    private FortifiedVillage(final FortifiedVillage card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class Addle extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Addle(final Addle card) {
+    private Addle(final Addle card) {
         super(card);
     }
 

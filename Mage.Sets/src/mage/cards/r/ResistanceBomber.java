@@ -49,7 +49,7 @@ public final class ResistanceBomber extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ResistanceBomber(final ResistanceBomber card) {
+    private ResistanceBomber(final ResistanceBomber card) {
         super(card);
     }
 

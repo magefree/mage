@@ -29,7 +29,7 @@ public final class PutAway extends CardImpl {
 
     }
 
-    public PutAway(final PutAway card) {
+    private PutAway(final PutAway card) {
         super(card);
     }
 

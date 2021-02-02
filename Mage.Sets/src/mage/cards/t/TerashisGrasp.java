@@ -34,7 +34,7 @@ public final class TerashisGrasp extends CardImpl {
         this.getSpellAbility().addEffect(new TerashisGraspEffect());
     }
 
-    public TerashisGrasp(final TerashisGrasp card) {
+    private TerashisGrasp(final TerashisGrasp card) {
         super(card);
     }
 

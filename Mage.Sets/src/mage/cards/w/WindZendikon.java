@@ -48,7 +48,7 @@ public final class WindZendikon extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public WindZendikon(final WindZendikon card) {
+    private WindZendikon(final WindZendikon card) {
         super(card);
     }
 

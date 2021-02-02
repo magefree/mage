@@ -42,7 +42,7 @@ public final class MaraudingLooter extends CardImpl {
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public MaraudingLooter(final MaraudingLooter card) {
+    private MaraudingLooter(final MaraudingLooter card) {
         super(card);
     }
 

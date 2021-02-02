@@ -30,7 +30,7 @@ public final class IronBarbHellion extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public IronBarbHellion(final IronBarbHellion card) {
+    private IronBarbHellion(final IronBarbHellion card) {
         super(card);
     }
 

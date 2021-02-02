@@ -44,7 +44,7 @@ public final class Tallowisp extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterAura), true, true), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
     }
 
-    public Tallowisp(final Tallowisp card) {
+    private Tallowisp(final Tallowisp card) {
         super(card);
     }
 

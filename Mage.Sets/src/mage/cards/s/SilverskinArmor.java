@@ -29,7 +29,7 @@ public final class SilverskinArmor extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{2}")));
     }
 
-    public SilverskinArmor(final SilverskinArmor card) {
+    private SilverskinArmor(final SilverskinArmor card) {
         super(card);
     }
 

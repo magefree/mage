@@ -37,7 +37,7 @@ public final class Launch extends CardImpl {
 
     }
 
-    public Launch(final Launch card) {
+    private Launch(final Launch card) {
         super(card);
     }
 

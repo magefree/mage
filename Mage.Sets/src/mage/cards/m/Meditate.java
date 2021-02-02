@@ -27,7 +27,7 @@ public final class Meditate extends CardImpl {
         this.getSpellAbility().addEffect(new SpipTurnEffect());
     }
 
-    public Meditate(final Meditate card) {
+    private Meditate(final Meditate card) {
         super(card);
     }
 

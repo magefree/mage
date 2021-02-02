@@ -39,7 +39,7 @@ public final class Skizzik extends CardImpl {
                 new SacrificeSourceUnlessConditionEffect(KickedCondition.instance), TargetController.NEXT, false));
     }
 
-    public Skizzik(final Skizzik card) {
+    private Skizzik(final Skizzik card) {
         super(card);
     }
 

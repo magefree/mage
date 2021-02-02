@@ -42,7 +42,7 @@ public final class Finn extends CardImpl {
                 filter, false));
     }
 
-    public Finn(final Finn card) {
+    private Finn(final Finn card) {
         super(card);
     }
 

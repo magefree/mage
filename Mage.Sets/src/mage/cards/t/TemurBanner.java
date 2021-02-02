@@ -37,7 +37,7 @@ public final class TemurBanner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TemurBanner(final TemurBanner card) {
+    private TemurBanner(final TemurBanner card) {
         super(card);
     }
 

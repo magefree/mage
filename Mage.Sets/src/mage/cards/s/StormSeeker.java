@@ -26,7 +26,7 @@ public final class StormSeeker extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public StormSeeker(final StormSeeker card) {
+    private StormSeeker(final StormSeeker card) {
         super(card);
     }
 

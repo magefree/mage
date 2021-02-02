@@ -29,7 +29,7 @@ public final class TelimTorsDarts extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TelimTorsDarts(final TelimTorsDarts card) {
+    private TelimTorsDarts(final TelimTorsDarts card) {
         super(card);
     }
 

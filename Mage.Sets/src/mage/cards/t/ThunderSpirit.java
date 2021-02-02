@@ -30,7 +30,7 @@ public final class ThunderSpirit extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public ThunderSpirit(final ThunderSpirit card) {
+    private ThunderSpirit(final ThunderSpirit card) {
         super(card);
     }
 

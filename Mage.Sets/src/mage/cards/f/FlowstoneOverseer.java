@@ -34,7 +34,7 @@ public final class FlowstoneOverseer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlowstoneOverseer(final FlowstoneOverseer card) {
+    private FlowstoneOverseer(final FlowstoneOverseer card) {
         super(card);
     }
 

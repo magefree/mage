@@ -26,7 +26,7 @@ public final class PygmyAllosaurus extends CardImpl {
         this.addAbility(new SwampwalkAbility());
     }
 
-    public PygmyAllosaurus(final PygmyAllosaurus card) {
+    private PygmyAllosaurus(final PygmyAllosaurus card) {
         super(card);
     }
 

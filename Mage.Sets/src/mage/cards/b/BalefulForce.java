@@ -33,7 +33,7 @@ public final class BalefulForce extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BalefulForce(final BalefulForce card) {
+    private BalefulForce(final BalefulForce card) {
         super(card);
     }
 

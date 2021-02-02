@@ -36,7 +36,7 @@ public final class AvengingAngel extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new AvengingAngelEffect(), true));
     }
 
-    public AvengingAngel(final AvengingAngel card) {
+    private AvengingAngel(final AvengingAngel card) {
         super(card);
     }
 

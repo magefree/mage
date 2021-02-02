@@ -35,7 +35,7 @@ public final class StoryCircle extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new StoryCircleEffect(), new ManaCostsImpl("{W}")));
     }
 
-    public StoryCircle(final StoryCircle card) {
+    private StoryCircle(final StoryCircle card) {
         super(card);
     }
 

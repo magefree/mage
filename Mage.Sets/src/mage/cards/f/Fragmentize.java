@@ -31,7 +31,7 @@ public final class Fragmentize extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public Fragmentize(final Fragmentize card) {
+    private Fragmentize(final Fragmentize card) {
         super(card);
     }
 

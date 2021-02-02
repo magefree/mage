@@ -30,7 +30,7 @@ public final class OrdruunVeteran extends CardImpl {
         this.addAbility(new BattalionAbility(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn)));
     }
 
-    public OrdruunVeteran(final OrdruunVeteran card) {
+    private OrdruunVeteran(final OrdruunVeteran card) {
         super(card);
     }
 

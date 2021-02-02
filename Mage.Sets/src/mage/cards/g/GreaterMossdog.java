@@ -27,7 +27,7 @@ public final class GreaterMossdog extends CardImpl {
         this.addAbility(new DredgeAbility(3));
     }
 
-    public GreaterMossdog(final GreaterMossdog card) {
+    private GreaterMossdog(final GreaterMossdog card) {
         super(card);
     }
 

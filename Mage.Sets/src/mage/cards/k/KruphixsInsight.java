@@ -30,7 +30,7 @@ public final class KruphixsInsight extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(6), false, StaticValue.get(3), filter, Zone.GRAVEYARD, false, true, true,Zone.HAND, false));
     }
 
-    public KruphixsInsight(final KruphixsInsight card) {
+    private KruphixsInsight(final KruphixsInsight card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class LoamdraggerGiant extends CardImpl {
         this.toughness = new MageInt(6);
     }
 
-    public LoamdraggerGiant(final LoamdraggerGiant card) {
+    private LoamdraggerGiant(final LoamdraggerGiant card) {
         super(card);
     }
 

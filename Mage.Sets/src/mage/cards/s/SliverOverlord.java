@@ -48,7 +48,7 @@ public final class SliverOverlord extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SliverOverlord(final SliverOverlord card) {
+    private SliverOverlord(final SliverOverlord card) {
         super(card);
     }
 

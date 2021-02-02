@@ -51,7 +51,7 @@ public final class DecimatorOfTheProvinces extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public DecimatorOfTheProvinces(final DecimatorOfTheProvinces card) {
+    private DecimatorOfTheProvinces(final DecimatorOfTheProvinces card) {
         super(card);
     }
 

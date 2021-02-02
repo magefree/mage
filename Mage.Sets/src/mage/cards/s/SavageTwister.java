@@ -23,7 +23,7 @@ public final class SavageTwister extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, new FilterCreaturePermanent()));
     }
 
-    public SavageTwister(final SavageTwister card) {
+    private SavageTwister(final SavageTwister card) {
         super(card);
     }
 

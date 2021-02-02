@@ -29,7 +29,7 @@ public final class DaggerdromeImp extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public DaggerdromeImp(final DaggerdromeImp card) {
+    private DaggerdromeImp(final DaggerdromeImp card) {
         super(card);
     }
 

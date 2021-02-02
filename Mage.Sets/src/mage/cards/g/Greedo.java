@@ -48,7 +48,7 @@ public final class Greedo extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true), true));
     }
 
-    public Greedo(final Greedo card) {
+    private Greedo(final Greedo card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class Clone extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(), true));
     }
 
-    public Clone(final Clone card) {
+    private Clone(final Clone card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class BloodFrenzy extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());
     }
 
-    public BloodFrenzy(final BloodFrenzy card) {
+    private BloodFrenzy(final BloodFrenzy card) {
         super(card);
     }
 

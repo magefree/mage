@@ -40,7 +40,7 @@ public final class CharmedGriffin extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CharmedGriffinEffect(), false));
     }
 
-    public CharmedGriffin(final CharmedGriffin card) {
+    private CharmedGriffin(final CharmedGriffin card) {
         super(card);
     }
 

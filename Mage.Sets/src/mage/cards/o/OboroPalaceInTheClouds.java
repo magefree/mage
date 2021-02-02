@@ -27,7 +27,7 @@ public final class OboroPalaceInTheClouds extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new GenericManaCost(1)));
     }
 
-    public OboroPalaceInTheClouds(final OboroPalaceInTheClouds card) {
+    private OboroPalaceInTheClouds(final OboroPalaceInTheClouds card) {
         super(card);
     }
 

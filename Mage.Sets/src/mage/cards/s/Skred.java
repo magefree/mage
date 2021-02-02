@@ -28,7 +28,7 @@ public final class Skred extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Skred(final Skred card) {
+    private Skred(final Skred card) {
         super(card);
     }
 

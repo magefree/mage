@@ -25,7 +25,7 @@ public final class Explore extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Explore(final Explore card) {
+    private Explore(final Explore card) {
         super(card);
     }
 

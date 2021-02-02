@@ -43,7 +43,7 @@ public final class KingsAssassin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KingsAssassin(final KingsAssassin card) {
+    private KingsAssassin(final KingsAssassin card) {
         super(card);
     }
 

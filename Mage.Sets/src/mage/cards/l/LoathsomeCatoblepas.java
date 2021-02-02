@@ -48,7 +48,7 @@ public final class LoathsomeCatoblepas extends CardImpl {
 
     }
 
-    public LoathsomeCatoblepas(final LoathsomeCatoblepas card) {
+    private LoathsomeCatoblepas(final LoathsomeCatoblepas card) {
         super(card);
     }
 

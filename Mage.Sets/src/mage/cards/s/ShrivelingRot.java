@@ -45,7 +45,7 @@ public final class ShrivelingRot extends CardImpl {
         this.addAbility(new EntwineAbility("{2}{B}"));
     }
 
-    public ShrivelingRot(final ShrivelingRot card) {
+    private ShrivelingRot(final ShrivelingRot card) {
         super(card);
     }
 

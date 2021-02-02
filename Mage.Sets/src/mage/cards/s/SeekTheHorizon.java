@@ -23,7 +23,7 @@ public final class SeekTheHorizon extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 3, StaticFilters.FILTER_CARD_BASIC_LAND), true));
     }
 
-    public SeekTheHorizon(final SeekTheHorizon card) {
+    private SeekTheHorizon(final SeekTheHorizon card) {
         super(card);
     }
 

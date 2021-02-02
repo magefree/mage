@@ -35,7 +35,7 @@ public final class SearchForSurvivors extends CardImpl {
 
     }
 
-    public SearchForSurvivors(final SearchForSurvivors card) {
+    private SearchForSurvivors(final SearchForSurvivors card) {
         super(card);
     }
 

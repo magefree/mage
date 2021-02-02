@@ -34,7 +34,7 @@ public final class PortentOfBetrayal extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public PortentOfBetrayal(final PortentOfBetrayal card) {
+    private PortentOfBetrayal(final PortentOfBetrayal card) {
         super(card);
     }
 

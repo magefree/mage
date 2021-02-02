@@ -23,7 +23,7 @@ public final class MarshFlats extends CardImpl {
         this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.SWAMP, SubType.PLAINS)));
     }
 
-    public MarshFlats(final MarshFlats card) {
+    private MarshFlats(final MarshFlats card) {
         super(card);
     }
 

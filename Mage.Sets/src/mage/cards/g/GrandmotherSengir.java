@@ -38,7 +38,7 @@ public final class GrandmotherSengir extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GrandmotherSengir(final GrandmotherSengir card) {
+    private GrandmotherSengir(final GrandmotherSengir card) {
         super(card);
     }
 

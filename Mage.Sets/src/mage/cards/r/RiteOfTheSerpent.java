@@ -32,7 +32,7 @@ public final class RiteOfTheSerpent extends CardImpl {
         this.getSpellAbility().addEffect(new RiteOfTheSerpentEffect());
     }
 
-    public RiteOfTheSerpent(final RiteOfTheSerpent card) {
+    private RiteOfTheSerpent(final RiteOfTheSerpent card) {
         super(card);
     }
 

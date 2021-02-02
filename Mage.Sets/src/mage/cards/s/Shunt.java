@@ -31,7 +31,7 @@ public final class Shunt extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));        
     }
 
-    public Shunt(final Shunt card) {
+    private Shunt(final Shunt card) {
         super(card);
     }
 

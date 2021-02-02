@@ -28,7 +28,7 @@ public final class UnifiedWill extends CardImpl {
         this.getSpellAbility().addEffect(new UnifiedWillEffect());
     }
 
-    public UnifiedWill(final UnifiedWill card) {
+    private UnifiedWill(final UnifiedWill card) {
         super(card);
     }
 

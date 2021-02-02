@@ -24,7 +24,7 @@ public final class SovereignsBite extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public SovereignsBite(final SovereignsBite card) {
+    private SovereignsBite(final SovereignsBite card) {
         super(card);
     }
 

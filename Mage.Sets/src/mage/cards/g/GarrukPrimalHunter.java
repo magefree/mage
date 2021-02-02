@@ -48,7 +48,7 @@ public final class GarrukPrimalHunter extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new WurmToken(), new PermanentsOnBattlefieldCount(filter)), -6));
     }
 
-    public GarrukPrimalHunter(final GarrukPrimalHunter card) {
+    private GarrukPrimalHunter(final GarrukPrimalHunter card) {
         super(card);
     }
 

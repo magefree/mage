@@ -42,7 +42,7 @@ public final class KaaliaOfTheVast extends CardImpl {
         this.addAbility(new KaaliaOfTheVastAttacksAbility());
     }
 
-    public KaaliaOfTheVast(final KaaliaOfTheVast card) {
+    private KaaliaOfTheVast(final KaaliaOfTheVast card) {
         super(card);
     }
 

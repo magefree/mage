@@ -36,7 +36,7 @@ public final class WingedShepherd extends CardImpl {
 
     }
 
-    public WingedShepherd(final WingedShepherd card) {
+    private WingedShepherd(final WingedShepherd card) {
         super(card);
     }
 

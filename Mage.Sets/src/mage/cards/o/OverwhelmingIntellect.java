@@ -29,7 +29,7 @@ public final class OverwhelmingIntellect extends CardImpl {
 
     }
 
-    public OverwhelmingIntellect(final OverwhelmingIntellect card) {
+    private OverwhelmingIntellect(final OverwhelmingIntellect card) {
         super(card);
     }
 

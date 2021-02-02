@@ -31,7 +31,7 @@ public final class WarriorsLesson extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,2));
     }
 
-    public WarriorsLesson(final WarriorsLesson card) {
+    private WarriorsLesson(final WarriorsLesson card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class UkudCobra extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public UkudCobra(final UkudCobra card) {
+    private UkudCobra(final UkudCobra card) {
         super(card);
     }
 

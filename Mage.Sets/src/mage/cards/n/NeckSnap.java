@@ -22,7 +22,7 @@ public final class NeckSnap extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());
     }
 
-    public NeckSnap(final NeckSnap card) {
+    private NeckSnap(final NeckSnap card) {
         super(card);
     }
 

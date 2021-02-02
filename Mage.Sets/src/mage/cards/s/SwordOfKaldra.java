@@ -37,7 +37,7 @@ public final class SwordOfKaldra extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{4}")));
     }
 
-    public SwordOfKaldra(final SwordOfKaldra card) {
+    private SwordOfKaldra(final SwordOfKaldra card) {
         super(card);
     }
 

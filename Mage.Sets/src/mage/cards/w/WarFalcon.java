@@ -37,7 +37,7 @@ public final class WarFalcon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WarFalconEffect()));
     }
 
-    public WarFalcon(final WarFalcon card) {
+    private WarFalcon(final WarFalcon card) {
         super(card);
     }
 

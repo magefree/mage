@@ -40,7 +40,7 @@ public final class DongZhouTheTyrant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DongZhouTheTyrant(final DongZhouTheTyrant card) {
+    private DongZhouTheTyrant(final DongZhouTheTyrant card) {
         super(card);
     }
 

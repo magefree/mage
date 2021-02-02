@@ -33,7 +33,7 @@ public final class DeathMatch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeathMatch(final DeathMatch card) {
+    private DeathMatch(final DeathMatch card) {
         super(card);
     }
 

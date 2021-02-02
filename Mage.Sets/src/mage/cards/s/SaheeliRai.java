@@ -55,7 +55,7 @@ public final class SaheeliRai extends CardImpl {
         this.addAbility(new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new SaheeliRaiTarget()), -7));
     }
 
-    public SaheeliRai(final SaheeliRai card) {
+    private SaheeliRai(final SaheeliRai card) {
         super(card);
     }
 

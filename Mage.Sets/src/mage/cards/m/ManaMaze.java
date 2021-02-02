@@ -33,7 +33,7 @@ public final class ManaMaze extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaMazeEffect()), new LastSpellCastWatcher());
     }
 
-    public ManaMaze(final ManaMaze card) {
+    private ManaMaze(final ManaMaze card) {
         super(card);
     }
 

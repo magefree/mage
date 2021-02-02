@@ -36,7 +36,7 @@ public final class BrutalSuppression extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BrutalSuppressionAdditionalCostEffect()));
     }
 
-    public BrutalSuppression(final BrutalSuppression card) {
+    private BrutalSuppression(final BrutalSuppression card) {
         super(card);
     }
 

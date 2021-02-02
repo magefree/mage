@@ -30,7 +30,7 @@ public final class Preordain extends CardImpl {
         );
     }
 
-    public Preordain(final Preordain card) {
+    private Preordain(final Preordain card) {
         super(card);
     }
 

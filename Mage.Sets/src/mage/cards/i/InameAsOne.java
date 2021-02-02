@@ -61,7 +61,7 @@ public final class InameAsOne extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InameAsOne(final InameAsOne card) {
+    private InameAsOne(final InameAsOne card) {
         super(card);
     }
 

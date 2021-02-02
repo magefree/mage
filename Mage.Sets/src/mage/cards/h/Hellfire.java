@@ -31,7 +31,7 @@ public final class Hellfire extends CardImpl {
         this.getSpellAbility().addEffect(new HellfireEffect());
     }
 
-    public Hellfire(final Hellfire card) {
+    private Hellfire(final Hellfire card) {
         super(card);
     }
 

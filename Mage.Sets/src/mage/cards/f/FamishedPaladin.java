@@ -32,7 +32,7 @@ public final class FamishedPaladin extends CardImpl {
         this.addAbility(new GainLifeControllerTriggeredAbility(new UntapSourceEffect(), false));
     }
 
-    public FamishedPaladin(final FamishedPaladin card) {
+    private FamishedPaladin(final FamishedPaladin card) {
         super(card);
     }
 

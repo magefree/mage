@@ -35,7 +35,7 @@ public final class FemerefKnight extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public FemerefKnight(final FemerefKnight card) {
+    private FemerefKnight(final FemerefKnight card) {
         super(card);
     }
 

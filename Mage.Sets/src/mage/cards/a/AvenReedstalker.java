@@ -32,7 +32,7 @@ public final class AvenReedstalker extends CardImpl {
 
     }
 
-    public AvenReedstalker(final AvenReedstalker card) {
+    private AvenReedstalker(final AvenReedstalker card) {
         super(card);
     }
 

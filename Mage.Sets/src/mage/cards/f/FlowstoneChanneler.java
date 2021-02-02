@@ -46,7 +46,7 @@ public final class FlowstoneChanneler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlowstoneChanneler(final FlowstoneChanneler card) {
+    private FlowstoneChanneler(final FlowstoneChanneler card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class PuppetConjurer extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, ""), TargetController.ANY, false));
     }
 
-    public PuppetConjurer(final PuppetConjurer card) {
+    private PuppetConjurer(final PuppetConjurer card) {
         super(card);
     }
 

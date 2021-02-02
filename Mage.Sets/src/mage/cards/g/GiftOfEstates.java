@@ -36,7 +36,7 @@ public final class GiftOfEstates extends CardImpl {
                 new OpponentControlsMoreCondition(StaticFilters.FILTER_LANDS)));
     }
 
-    public GiftOfEstates(final GiftOfEstates card) {
+    private GiftOfEstates(final GiftOfEstates card) {
         super(card);
     }
 

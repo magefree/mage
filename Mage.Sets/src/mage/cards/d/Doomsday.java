@@ -30,7 +30,7 @@ public final class Doomsday extends CardImpl {
         this.getSpellAbility().addEffect(new LoseHalfLifeEffect());
     }
 
-    public Doomsday(final Doomsday card) {
+    private Doomsday(final Doomsday card) {
         super(card);
     }
 

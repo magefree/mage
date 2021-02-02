@@ -38,7 +38,7 @@ public final class LunkErrant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LunkErrant(final LunkErrant card) {
+    private LunkErrant(final LunkErrant card) {
         super(card);
     }
 

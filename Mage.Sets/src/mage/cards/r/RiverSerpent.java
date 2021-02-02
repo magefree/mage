@@ -37,7 +37,7 @@ public final class RiverSerpent extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
     }
 
-    public RiverSerpent(final RiverSerpent card) {
+    private RiverSerpent(final RiverSerpent card) {
         super(card);
     }
 

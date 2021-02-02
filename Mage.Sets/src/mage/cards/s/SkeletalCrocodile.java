@@ -23,7 +23,7 @@ public final class SkeletalCrocodile extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public SkeletalCrocodile(final SkeletalCrocodile card) {
+    private SkeletalCrocodile(final SkeletalCrocodile card) {
         super(card);
     }
 

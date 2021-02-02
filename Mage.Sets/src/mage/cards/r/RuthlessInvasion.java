@@ -22,7 +22,7 @@ public final class RuthlessInvasion extends CardImpl {
         this.getSpellAbility().addEffect(new RuthlessInvasionEffect());
     }
 
-    public RuthlessInvasion(final RuthlessInvasion card) {
+    private RuthlessInvasion(final RuthlessInvasion card) {
         super(card);
     }
 

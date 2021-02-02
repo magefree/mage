@@ -40,7 +40,7 @@ public final class StirThePride extends CardImpl {
 
     }
 
-    public StirThePride(final StirThePride card) {
+    private StirThePride(final StirThePride card) {
         super(card);
     }
 

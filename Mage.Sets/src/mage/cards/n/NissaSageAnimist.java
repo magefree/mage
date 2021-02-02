@@ -53,7 +53,7 @@ public final class NissaSageAnimist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NissaSageAnimist(final NissaSageAnimist card) {
+    private NissaSageAnimist(final NissaSageAnimist card) {
         super(card);
     }
 

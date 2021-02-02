@@ -33,7 +33,7 @@ public final class SakuraTribeElder extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay), new SacrificeSourceCost()));
     }
 
-    public SakuraTribeElder(final SakuraTribeElder card) {
+    private SakuraTribeElder(final SakuraTribeElder card) {
         super(card);
     }
 

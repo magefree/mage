@@ -31,7 +31,7 @@ public final class ElixirOfImmortality extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElixirOfImmortality(final ElixirOfImmortality card) {
+    private ElixirOfImmortality(final ElixirOfImmortality card) {
         super(card);
     }
 

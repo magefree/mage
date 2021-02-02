@@ -44,7 +44,7 @@ public final class RakeclawGargantuan extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RakeclawGargantuan(final RakeclawGargantuan card) {
+    private RakeclawGargantuan(final RakeclawGargantuan card) {
         super(card);
     }
 

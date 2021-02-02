@@ -35,7 +35,7 @@ public final class FistfulOfForce extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FistfulOfForce(final FistfulOfForce card) {
+    private FistfulOfForce(final FistfulOfForce card) {
         super(card);
     }
 

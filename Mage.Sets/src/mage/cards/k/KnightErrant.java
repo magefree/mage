@@ -23,7 +23,7 @@ public final class KnightErrant extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public KnightErrant(final KnightErrant card) {
+    private KnightErrant(final KnightErrant card) {
         super(card);
     }
 

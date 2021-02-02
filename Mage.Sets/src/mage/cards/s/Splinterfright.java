@@ -39,7 +39,7 @@ public final class Splinterfright extends CardImpl {
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new MillCardsControllerEffect(2), false));
     }
 
-    public Splinterfright(final Splinterfright card) {
+    private Splinterfright(final Splinterfright card) {
         super(card);
     }
 

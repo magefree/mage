@@ -31,7 +31,7 @@ public final class PainfulMemories extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public PainfulMemories(final PainfulMemories card) {
+    private PainfulMemories(final PainfulMemories card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class ChargingGriffin extends CardImpl {
         
     }
 
-    public ChargingGriffin(final ChargingGriffin card) {
+    private ChargingGriffin(final ChargingGriffin card) {
         super(card);
     }
 

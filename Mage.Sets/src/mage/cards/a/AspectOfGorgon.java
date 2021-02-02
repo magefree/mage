@@ -45,7 +45,7 @@ public final class AspectOfGorgon extends CardImpl {
 
     }
 
-    public AspectOfGorgon(final AspectOfGorgon card) {
+    private AspectOfGorgon(final AspectOfGorgon card) {
         super(card);
     }
 

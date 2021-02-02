@@ -36,7 +36,7 @@ public final class LodestoneGolem extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(1, filter, TargetController.ANY)));
     }
 
-    public LodestoneGolem(final LodestoneGolem card) {
+    private LodestoneGolem(final LodestoneGolem card) {
         super(card);
     }
 

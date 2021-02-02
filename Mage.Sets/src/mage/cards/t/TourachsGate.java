@@ -89,7 +89,7 @@ public final class TourachsGate extends CardImpl {
                 cost, new AttachedToMatchesFilterCondition(filterUntapped)));
     }
 
-    public TourachsGate(final TourachsGate card) {
+    private TourachsGate(final TourachsGate card) {
         super(card);
     }
 

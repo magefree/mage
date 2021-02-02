@@ -33,7 +33,7 @@ public final class SamiteHealer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SamiteHealer(final SamiteHealer card) {
+    private SamiteHealer(final SamiteHealer card) {
         super(card);
     }
 

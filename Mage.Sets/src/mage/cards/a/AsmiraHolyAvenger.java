@@ -40,7 +40,7 @@ public final class AsmiraHolyAvenger extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new AsmiraHolyAvengerDynamicValue(), true), TargetController.ANY, false), new AsmiraHolyAvengerWatcher());
     }
 
-    public AsmiraHolyAvenger(final AsmiraHolyAvenger card) {
+    private AsmiraHolyAvenger(final AsmiraHolyAvenger card) {
         super(card);
     }
 

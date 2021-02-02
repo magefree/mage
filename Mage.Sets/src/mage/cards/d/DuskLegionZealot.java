@@ -34,7 +34,7 @@ public final class DuskLegionZealot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DuskLegionZealot(final DuskLegionZealot card) {
+    private DuskLegionZealot(final DuskLegionZealot card) {
         super(card);
     }
 

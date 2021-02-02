@@ -47,7 +47,7 @@ public final class KnightOfCliffhaven extends LevelerCard {
         setMaxLevelCounters(4);
     }
 
-    public KnightOfCliffhaven(final KnightOfCliffhaven card) {
+    private KnightOfCliffhaven(final KnightOfCliffhaven card) {
         super(card);
     }
 

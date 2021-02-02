@@ -40,7 +40,7 @@ public final class DecoctionModule extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DecoctionModule(final DecoctionModule card) {
+    private DecoctionModule(final DecoctionModule card) {
         super(card);
     }
 

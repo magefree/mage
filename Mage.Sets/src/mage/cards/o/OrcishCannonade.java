@@ -30,7 +30,7 @@ public final class OrcishCannonade extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public OrcishCannonade(final OrcishCannonade card) {
+    private OrcishCannonade(final OrcishCannonade card) {
         super(card);
     }
 

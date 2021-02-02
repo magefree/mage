@@ -30,7 +30,7 @@ public final class BurdenOfGreed extends CardImpl {
 
     }
 
-    public BurdenOfGreed(final BurdenOfGreed card) {
+    private BurdenOfGreed(final BurdenOfGreed card) {
         super(card);
     }
 

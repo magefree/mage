@@ -32,7 +32,7 @@ public final class GhostWarden extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhostWarden(final GhostWarden card) {
+    private GhostWarden(final GhostWarden card) {
         super(card);
     }
 

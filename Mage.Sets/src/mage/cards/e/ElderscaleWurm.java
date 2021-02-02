@@ -42,7 +42,7 @@ public final class ElderscaleWurm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ElderscaleWurmReplacementEffect()));
     }
 
-    public ElderscaleWurm(final ElderscaleWurm card) {
+    private ElderscaleWurm(final ElderscaleWurm card) {
         super(card);
     }
 

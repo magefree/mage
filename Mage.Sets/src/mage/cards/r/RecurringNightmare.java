@@ -34,7 +34,7 @@ public final class RecurringNightmare extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RecurringNightmare(final RecurringNightmare card) {
+    private RecurringNightmare(final RecurringNightmare card) {
         super(card);
     }
 

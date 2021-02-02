@@ -27,7 +27,7 @@ public final class SlitherBlade extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public SlitherBlade(final SlitherBlade card) {
+    private SlitherBlade(final SlitherBlade card) {
         super(card);
     }
 

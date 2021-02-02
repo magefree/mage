@@ -46,7 +46,7 @@ public final class HazyHomunculus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public HazyHomunculus(final HazyHomunculus card) {
+    private HazyHomunculus(final HazyHomunculus card) {
         super(card);
     }
 

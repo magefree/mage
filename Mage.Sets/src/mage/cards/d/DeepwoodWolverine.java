@@ -30,7 +30,7 @@ public final class DeepwoodWolverine extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
-    public DeepwoodWolverine(final DeepwoodWolverine card) {
+    private DeepwoodWolverine(final DeepwoodWolverine card) {
         super(card);
     }
 

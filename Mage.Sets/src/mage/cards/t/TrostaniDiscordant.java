@@ -63,7 +63,7 @@ public final class TrostaniDiscordant extends CardImpl {
         ));
     }
 
-    public TrostaniDiscordant(final TrostaniDiscordant card) {
+    private TrostaniDiscordant(final TrostaniDiscordant card) {
         super(card);
     }
 

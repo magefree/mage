@@ -38,7 +38,7 @@ public final class TaskMageAssembly extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TaskMageAssembly(final TaskMageAssembly card) {
+    private TaskMageAssembly(final TaskMageAssembly card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class LightningCoils extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LightningCoilsEffect(), TargetController.YOU, false));
     }
 
-    public LightningCoils(final LightningCoils card) {
+    private LightningCoils(final LightningCoils card) {
         super(card);
     }
 

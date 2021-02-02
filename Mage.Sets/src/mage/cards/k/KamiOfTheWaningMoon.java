@@ -34,7 +34,7 @@ public final class KamiOfTheWaningMoon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KamiOfTheWaningMoon(final KamiOfTheWaningMoon card) {
+    private KamiOfTheWaningMoon(final KamiOfTheWaningMoon card) {
         super(card);
     }
 

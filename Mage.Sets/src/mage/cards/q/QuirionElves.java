@@ -40,7 +40,7 @@ public final class QuirionElves extends CardImpl {
 
     }
 
-    public QuirionElves(final QuirionElves card) {
+    private QuirionElves(final QuirionElves card) {
         super(card);
     }
 

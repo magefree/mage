@@ -34,7 +34,7 @@ public final class SibsigMuckdraggers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SibsigMuckdraggers(final SibsigMuckdraggers card) {
+    private SibsigMuckdraggers(final SibsigMuckdraggers card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class Mise extends CardImpl {
         this.getSpellAbility().addEffect(new MiseEffect());
     }
 
-    public Mise(final Mise card) {
+    private Mise(final Mise card) {
         super(card);
     }
 

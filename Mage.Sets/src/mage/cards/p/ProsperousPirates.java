@@ -28,7 +28,7 @@ public final class ProsperousPirates extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken(), 2)));
     }
 
-    public ProsperousPirates(final ProsperousPirates card) {
+    private ProsperousPirates(final ProsperousPirates card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class ParallaxNexus extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileEffect(exileId, Zone.HAND), false));
     }
 
-    public ParallaxNexus(final ParallaxNexus card) {
+    private ParallaxNexus(final ParallaxNexus card) {
         super(card);
     }
 

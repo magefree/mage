@@ -65,7 +65,7 @@ public final class WillKenrith extends CardImpl {
         this.addAbility(CanBeYourCommanderAbility.getInstance());
     }
 
-    public WillKenrith(final WillKenrith card) {
+    private WillKenrith(final WillKenrith card) {
         super(card);
     }
 

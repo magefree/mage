@@ -36,7 +36,7 @@ public final class SalvagerOfSecrets extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SalvagerOfSecrets(final SalvagerOfSecrets card) {
+    private SalvagerOfSecrets(final SalvagerOfSecrets card) {
         super(card);
     }
 

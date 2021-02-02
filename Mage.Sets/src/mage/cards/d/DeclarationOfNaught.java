@@ -38,7 +38,7 @@ public final class DeclarationOfNaught extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeclarationOfNaught(final DeclarationOfNaught card) {
+    private DeclarationOfNaught(final DeclarationOfNaught card) {
         super(card);
     }
 

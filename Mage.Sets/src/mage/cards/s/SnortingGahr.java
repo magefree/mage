@@ -31,7 +31,7 @@ public final class SnortingGahr extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
-    public SnortingGahr(final SnortingGahr card) {
+    private SnortingGahr(final SnortingGahr card) {
         super(card);
     }
 

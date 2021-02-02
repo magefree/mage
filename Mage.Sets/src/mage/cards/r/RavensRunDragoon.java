@@ -38,7 +38,7 @@ public final class RavensRunDragoon extends CardImpl {
         
     }
 
-    public RavensRunDragoon(final RavensRunDragoon card) {
+    private RavensRunDragoon(final RavensRunDragoon card) {
         super(card);
     }
 

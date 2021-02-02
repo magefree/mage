@@ -36,7 +36,7 @@ public final class MightyEmergence extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, effect, filter, true, SetTargetPointer.PERMANENT, "", true));
     }
 
-    public MightyEmergence(final MightyEmergence card) {
+    private MightyEmergence(final MightyEmergence card) {
         super(card);
     }
 

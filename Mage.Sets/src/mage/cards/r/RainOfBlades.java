@@ -22,7 +22,7 @@ public final class RainOfBlades extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterAttackingCreature()));
     }
 
-    public RainOfBlades(final RainOfBlades card) {
+    private RainOfBlades(final RainOfBlades card) {
         super(card);
     }
 

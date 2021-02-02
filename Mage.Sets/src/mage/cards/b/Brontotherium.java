@@ -30,7 +30,7 @@ public final class Brontotherium extends CardImpl {
         this.addAbility(new ProvokeAbility());
     }
 
-    public Brontotherium(final Brontotherium card) {
+    private Brontotherium(final Brontotherium card) {
         super(card);
     }
 

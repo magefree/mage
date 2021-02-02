@@ -29,7 +29,7 @@ public final class ImiStatue extends CardImpl {
 
     }
 
-    public ImiStatue(final ImiStatue card) {
+    private ImiStatue(final ImiStatue card) {
         super(card);
     }
 

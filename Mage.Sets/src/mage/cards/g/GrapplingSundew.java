@@ -44,7 +44,7 @@ public final class GrapplingSundew extends CardImpl {
         ));
     }
 
-    public GrapplingSundew(final GrapplingSundew card) {
+    private GrapplingSundew(final GrapplingSundew card) {
         super(card);
     }
 

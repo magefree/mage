@@ -44,7 +44,7 @@ public final class PearlLakeAncient extends CardImpl {
                 new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(3, 3, new FilterControlledLandPermanent("lands"), true))));
     }
 
-    public PearlLakeAncient(final PearlLakeAncient card) {
+    private PearlLakeAncient(final PearlLakeAncient card) {
         super(card);
     }
 

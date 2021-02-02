@@ -26,7 +26,7 @@ public final class FossilFind extends CardImpl {
         this.getSpellAbility().addEffect(new FossilFindEffect());
     }
 
-    public FossilFind(final FossilFind card) {
+    private FossilFind(final FossilFind card) {
         super(card);
     }
 

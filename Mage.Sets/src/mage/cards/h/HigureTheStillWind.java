@@ -58,7 +58,7 @@ public final class HigureTheStillWind extends CardImpl {
 
     }
 
-    public HigureTheStillWind(final HigureTheStillWind card) {
+    private HigureTheStillWind(final HigureTheStillWind card) {
         super(card);
     }
 

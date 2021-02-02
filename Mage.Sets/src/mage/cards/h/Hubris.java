@@ -33,7 +33,7 @@ public final class Hubris extends CardImpl {
 
     }
 
-    public Hubris(final Hubris card) {
+    private Hubris(final Hubris card) {
         super(card);
     }
 

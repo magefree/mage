@@ -43,7 +43,7 @@ public final class MorkrutNecropod extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new SacrificeControllerEffect(filter, 1, ""), false));
     }
 
-    public MorkrutNecropod(final MorkrutNecropod card) {
+    private MorkrutNecropod(final MorkrutNecropod card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class Grapeshot extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public Grapeshot(final Grapeshot card) {
+    private Grapeshot(final Grapeshot card) {
         super(card);
     }
 

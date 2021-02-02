@@ -49,7 +49,7 @@ public final class GoblinRazerunners extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinRazerunners(final GoblinRazerunners card) {
+    private GoblinRazerunners(final GoblinRazerunners card) {
         super(card);
     }
 

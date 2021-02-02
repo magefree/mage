@@ -26,7 +26,7 @@ public final class CrashOfRhinos extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public CrashOfRhinos(final CrashOfRhinos card) {
+    private CrashOfRhinos(final CrashOfRhinos card) {
         super(card);
     }
 

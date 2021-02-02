@@ -65,7 +65,7 @@ public final class OratorOfOjutai extends CardImpl {
         }
     }
 
-    public OratorOfOjutai(final OratorOfOjutai card) {
+    private OratorOfOjutai(final OratorOfOjutai card) {
         super(card);
     }
 

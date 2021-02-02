@@ -46,7 +46,7 @@ public final class DemonOfDeathsGate extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public DemonOfDeathsGate(final DemonOfDeathsGate card) {
+    private DemonOfDeathsGate(final DemonOfDeathsGate card) {
         super(card);
     }
 

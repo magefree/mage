@@ -37,7 +37,7 @@ public final class StaffOfTheWildMagus extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), filterLand, false));
     }
 
-    public StaffOfTheWildMagus(final StaffOfTheWildMagus card) {
+    private StaffOfTheWildMagus(final StaffOfTheWildMagus card) {
         super(card);
     }
 

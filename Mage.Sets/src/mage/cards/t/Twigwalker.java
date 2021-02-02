@@ -36,7 +36,7 @@ public final class Twigwalker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Twigwalker(final Twigwalker card) {
+    private Twigwalker(final Twigwalker card) {
         super(card);
     }
 

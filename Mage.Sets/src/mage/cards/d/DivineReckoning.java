@@ -38,7 +38,7 @@ public final class DivineReckoning extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{W}{W}"), TimingRule.SORCERY));
     }
 
-    public DivineReckoning(final DivineReckoning card) {
+    private DivineReckoning(final DivineReckoning card) {
         super(card);
     }
 

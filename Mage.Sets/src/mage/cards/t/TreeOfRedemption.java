@@ -40,7 +40,7 @@ public final class TreeOfRedemption extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TreeOfRedemptionEffect(), new TapSourceCost()));
     }
 
-    public TreeOfRedemption(final TreeOfRedemption card) {
+    private TreeOfRedemption(final TreeOfRedemption card) {
         super(card);
     }
 

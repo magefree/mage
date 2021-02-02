@@ -32,7 +32,7 @@ public final class InnerCalmOuterStrength extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public InnerCalmOuterStrength(final InnerCalmOuterStrength card) {
+    private InnerCalmOuterStrength(final InnerCalmOuterStrength card) {
         super(card);
     }
 

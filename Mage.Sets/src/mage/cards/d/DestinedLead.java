@@ -39,7 +39,7 @@ public final class DestinedLead extends SplitCard {
         getRightHalfCard().getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
     }
 
-    public DestinedLead(final DestinedLead card) {
+    private DestinedLead(final DestinedLead card) {
         super(card);
     }
 

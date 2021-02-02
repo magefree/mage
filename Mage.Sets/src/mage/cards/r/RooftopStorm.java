@@ -29,7 +29,7 @@ public final class RooftopStorm extends CardImpl {
 
     }
 
-    public RooftopStorm(final RooftopStorm card) {
+    private RooftopStorm(final RooftopStorm card) {
         super(card);
     }
 

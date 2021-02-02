@@ -32,7 +32,7 @@ public final class KongmingSleepingDragon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,1,Duration.WhileOnBattlefield, true)));
     }
 
-    public KongmingSleepingDragon(final KongmingSleepingDragon card) {
+    private KongmingSleepingDragon(final KongmingSleepingDragon card) {
         super(card);
     }
 

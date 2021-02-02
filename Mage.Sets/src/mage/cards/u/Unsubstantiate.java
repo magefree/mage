@@ -30,7 +30,7 @@ public final class Unsubstantiate extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 
-    public Unsubstantiate(final Unsubstantiate card) {
+    private Unsubstantiate(final Unsubstantiate card) {
         super(card);
     }
 

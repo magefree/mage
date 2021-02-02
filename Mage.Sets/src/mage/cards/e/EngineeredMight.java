@@ -48,7 +48,7 @@ public final class EngineeredMight extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public EngineeredMight(final EngineeredMight card) {
+    private EngineeredMight(final EngineeredMight card) {
         super(card);
     }
 

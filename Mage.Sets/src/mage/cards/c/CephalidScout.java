@@ -40,7 +40,7 @@ public final class CephalidScout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CephalidScout(final CephalidScout card) {
+    private CephalidScout(final CephalidScout card) {
         super(card);
     }
 

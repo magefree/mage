@@ -40,7 +40,7 @@ public final class EyeOfYawgmoth extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EyeOfYawgmoth(final EyeOfYawgmoth card) {
+    private EyeOfYawgmoth(final EyeOfYawgmoth card) {
         super(card);
     }
 

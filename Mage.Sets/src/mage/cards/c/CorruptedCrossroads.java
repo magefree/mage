@@ -35,7 +35,7 @@ public final class CorruptedCrossroads extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CorruptedCrossroads(final CorruptedCrossroads card) {
+    private CorruptedCrossroads(final CorruptedCrossroads card) {
         super(card);
     }
 

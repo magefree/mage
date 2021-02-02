@@ -30,7 +30,7 @@ public final class InfernalGenesis extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InfernalGenesisEffect(), TargetController.ANY, false));
     }
 
-    public InfernalGenesis(final InfernalGenesis card) {
+    private InfernalGenesis(final InfernalGenesis card) {
         super(card);
     }
 

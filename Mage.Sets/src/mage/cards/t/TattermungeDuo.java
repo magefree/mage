@@ -46,7 +46,7 @@ public final class TattermungeDuo extends CardImpl {
                 Duration.EndOfTurn), greenFilter, false));
     }
 
-    public TattermungeDuo(final TattermungeDuo card) {
+    private TattermungeDuo(final TattermungeDuo card) {
         super(card);
     }
 

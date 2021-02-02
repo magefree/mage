@@ -49,7 +49,7 @@ public final class GoblinBarrage extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(GoblinBarrageAdjuster.instance);
     }
 
-    public GoblinBarrage(final GoblinBarrage card) {
+    private GoblinBarrage(final GoblinBarrage card) {
         super(card);
     }
 

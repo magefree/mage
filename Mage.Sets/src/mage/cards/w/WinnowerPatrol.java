@@ -30,7 +30,7 @@ public final class WinnowerPatrol extends CardImpl {
         this.addAbility(new KinshipAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 
-    public WinnowerPatrol(final WinnowerPatrol card) {
+    private WinnowerPatrol(final WinnowerPatrol card) {
         super(card);
     }
 

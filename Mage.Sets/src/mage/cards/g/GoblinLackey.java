@@ -34,7 +34,7 @@ public final class GoblinLackey extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(filter), false));
     }
 
-    public GoblinLackey(final GoblinLackey card) {
+    private GoblinLackey(final GoblinLackey card) {
         super(card);
     }
 

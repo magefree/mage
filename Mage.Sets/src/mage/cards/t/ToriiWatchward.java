@@ -27,7 +27,7 @@ public final class ToriiWatchward extends CardImpl {
         this.addAbility(new SoulshiftAbility(4));
     }
 
-    public ToriiWatchward(final ToriiWatchward card) {
+    private ToriiWatchward(final ToriiWatchward card) {
         super(card);
     }
 

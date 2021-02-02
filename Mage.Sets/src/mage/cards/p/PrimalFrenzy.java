@@ -40,7 +40,7 @@ public final class PrimalFrenzy extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public PrimalFrenzy(final PrimalFrenzy card) {
+    private PrimalFrenzy(final PrimalFrenzy card) {
         super(card);
     }
 

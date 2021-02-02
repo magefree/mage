@@ -20,7 +20,7 @@ public final class DarkRitual extends CardImpl {
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.BlackMana(3)));
     }
 
-    public DarkRitual(final DarkRitual card) {
+    private DarkRitual(final DarkRitual card) {
         super(card);
     }
 

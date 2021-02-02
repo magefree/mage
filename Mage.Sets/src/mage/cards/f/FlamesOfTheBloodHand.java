@@ -30,7 +30,7 @@ public final class FlamesOfTheBloodHand extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    public FlamesOfTheBloodHand(final FlamesOfTheBloodHand card) {
+    private FlamesOfTheBloodHand(final FlamesOfTheBloodHand card) {
         super(card);
     }
 

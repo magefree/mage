@@ -60,7 +60,7 @@ public final class FinalIteration extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new HumanWizardToken()), filterSpell, false));
     }
 
-    public FinalIteration(final FinalIteration card) {
+    private FinalIteration(final FinalIteration card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class WallOfIce extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public WallOfIce(final WallOfIce card) {
+    private WallOfIce(final WallOfIce card) {
         super(card);
     }
 

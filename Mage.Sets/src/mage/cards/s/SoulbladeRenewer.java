@@ -31,7 +31,7 @@ public final class SoulbladeRenewer extends CardImpl {
         this.addAbility(new SupportAbility(this, 2));
     }
 
-    public SoulbladeRenewer(final SoulbladeRenewer card) {
+    private SoulbladeRenewer(final SoulbladeRenewer card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class ToolcraftExemplar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ToolcraftExemplar(final ToolcraftExemplar card) {
+    private ToolcraftExemplar(final ToolcraftExemplar card) {
         super(card);
     }
 

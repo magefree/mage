@@ -26,7 +26,7 @@ public final class RoyalFalcon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public RoyalFalcon(final RoyalFalcon card) {
+    private RoyalFalcon(final RoyalFalcon card) {
         super(card);
     }
 

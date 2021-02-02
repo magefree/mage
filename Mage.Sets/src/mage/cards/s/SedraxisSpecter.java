@@ -34,7 +34,7 @@ public final class SedraxisSpecter extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{B}")));
     }
 
-    public SedraxisSpecter(final SedraxisSpecter card) {
+    private SedraxisSpecter(final SedraxisSpecter card) {
         super(card);
     }
 

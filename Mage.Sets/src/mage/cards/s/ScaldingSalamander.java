@@ -43,7 +43,7 @@ public final class ScaldingSalamander extends CardImpl {
         ));
     }
 
-    public ScaldingSalamander(final ScaldingSalamander card) {
+    private ScaldingSalamander(final ScaldingSalamander card) {
         super(card);
     }
 

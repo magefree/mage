@@ -24,7 +24,7 @@ public final class ForceSpike extends CardImpl {
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(1)));
     }
 
-    public ForceSpike(final ForceSpike card) {
+    private ForceSpike(final ForceSpike card) {
         super(card);
     }
 

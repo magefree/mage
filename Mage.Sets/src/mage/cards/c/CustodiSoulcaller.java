@@ -49,7 +49,7 @@ public final class CustodiSoulcaller extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CustodiSoulcaller(final CustodiSoulcaller card) {
+    private CustodiSoulcaller(final CustodiSoulcaller card) {
         super(card);
     }
 

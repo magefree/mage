@@ -24,7 +24,7 @@ public final class HarmlessAssault extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(new FilterAttackingCreature(), Duration.EndOfTurn, true));
     }
 
-    public HarmlessAssault(final HarmlessAssault card) {
+    private HarmlessAssault(final HarmlessAssault card) {
         super(card);
     }
 

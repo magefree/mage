@@ -24,7 +24,7 @@ public final class LadyOrca extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public LadyOrca(final LadyOrca card) {
+    private LadyOrca(final LadyOrca card) {
         super(card);
     }
 

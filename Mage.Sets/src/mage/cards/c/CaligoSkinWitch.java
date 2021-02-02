@@ -43,7 +43,7 @@ public final class CaligoSkinWitch extends CardImpl {
         ));
     }
 
-    public CaligoSkinWitch(final CaligoSkinWitch card) {
+    private CaligoSkinWitch(final CaligoSkinWitch card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class RecklessBrute extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public RecklessBrute(final RecklessBrute card) {
+    private RecklessBrute(final RecklessBrute card) {
         super(card);
     }
 

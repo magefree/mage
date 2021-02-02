@@ -27,7 +27,7 @@ public final class SightBeyondSight extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public SightBeyondSight(final SightBeyondSight card) {
+    private SightBeyondSight(final SightBeyondSight card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class VoidWinnower extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VoidWinnowerCantBlockEffect()));
     }
 
-    public VoidWinnower(final VoidWinnower card) {
+    private VoidWinnower(final VoidWinnower card) {
         super(card);
     }
 

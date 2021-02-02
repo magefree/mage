@@ -54,7 +54,7 @@ public final class TeysaOrzhovScion extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken()), false, filterBlack));
     }
 
-    public TeysaOrzhovScion(final TeysaOrzhovScion card) {
+    private TeysaOrzhovScion(final TeysaOrzhovScion card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class DramaticReversal extends CardImpl {
         this.getSpellAbility().addEffect(new UntapAllControllerEffect(filter));
     }
 
-    public DramaticReversal(final DramaticReversal card) {
+    private DramaticReversal(final DramaticReversal card) {
         super(card);
     }
 

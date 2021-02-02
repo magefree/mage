@@ -27,7 +27,7 @@ public final class Reiterate extends CardImpl {
         this.getSpellAbility().addEffect(new CopyTargetSpellEffect());
     }
 
-    public Reiterate(final Reiterate card) {
+    private Reiterate(final Reiterate card) {
         super(card);
     }
 

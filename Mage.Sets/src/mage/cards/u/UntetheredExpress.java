@@ -36,7 +36,7 @@ public final class UntetheredExpress extends CardImpl {
         this.addAbility(new CrewAbility(1));
     }
 
-    public UntetheredExpress(final UntetheredExpress card) {
+    private UntetheredExpress(final UntetheredExpress card) {
         super(card);
     }
 

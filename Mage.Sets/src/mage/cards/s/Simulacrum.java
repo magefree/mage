@@ -33,7 +33,7 @@ public final class Simulacrum extends CardImpl {
         this.getSpellAbility().addWatcher(new AmountOfDamageAPlayerReceivedThisTurnWatcher());
     }
 
-    public Simulacrum(final Simulacrum card) {
+    private Simulacrum(final Simulacrum card) {
         super(card);
     }
 

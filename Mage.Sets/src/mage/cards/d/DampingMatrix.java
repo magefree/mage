@@ -34,7 +34,7 @@ public final class DampingMatrix extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DampingMatrixEffect()));
     }
 
-    public DampingMatrix(final DampingMatrix card) {
+    private DampingMatrix(final DampingMatrix card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class ShaperGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShaperGuildmage(final ShaperGuildmage card) {
+    private ShaperGuildmage(final ShaperGuildmage card) {
         super(card);
     }
 

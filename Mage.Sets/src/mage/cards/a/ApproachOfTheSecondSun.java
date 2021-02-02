@@ -33,7 +33,7 @@ public final class ApproachOfTheSecondSun extends CardImpl {
         getSpellAbility().addWatcher(new ApproachOfTheSecondSunWatcher());
     }
 
-    public ApproachOfTheSecondSun(final ApproachOfTheSecondSun card) {
+    private ApproachOfTheSecondSun(final ApproachOfTheSecondSun card) {
         super(card);
     }
 

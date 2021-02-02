@@ -38,7 +38,7 @@ public final class KingMacarTheGoldCursed extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KingMacarTheGoldCursed(final KingMacarTheGoldCursed card) {
+    private KingMacarTheGoldCursed(final KingMacarTheGoldCursed card) {
         super(card);
     }
 

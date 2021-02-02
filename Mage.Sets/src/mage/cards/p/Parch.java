@@ -38,7 +38,7 @@ public final class Parch extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public Parch(final Parch card) {
+    private Parch(final Parch card) {
         super(card);
     }
 

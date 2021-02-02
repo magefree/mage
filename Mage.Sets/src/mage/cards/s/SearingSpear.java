@@ -23,7 +23,7 @@ public final class SearingSpear extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public SearingSpear(final SearingSpear card) {
+    private SearingSpear(final SearingSpear card) {
         super(card);
     }
 

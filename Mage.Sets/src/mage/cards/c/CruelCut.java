@@ -31,7 +31,7 @@ public final class CruelCut extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public CruelCut(final CruelCut card) {
+    private CruelCut(final CruelCut card) {
         super(card);
     }
 

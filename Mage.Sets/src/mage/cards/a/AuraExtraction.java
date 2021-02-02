@@ -27,7 +27,7 @@ public final class AuraExtraction extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public AuraExtraction(final AuraExtraction card) {
+    private AuraExtraction(final AuraExtraction card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class ElspethSunsChampion extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new ElspethSunsChampionEmblem()), -7));
     }
 
-    public ElspethSunsChampion(final ElspethSunsChampion card) {
+    private ElspethSunsChampion(final ElspethSunsChampion card) {
         super(card);
     }
 

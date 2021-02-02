@@ -24,7 +24,7 @@ public final class Despair extends CardImpl {
         this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(filter));
     }
 
-    public Despair(final Despair card) {
+    private Despair(final Despair card) {
         super(card);
     }
 

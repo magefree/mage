@@ -43,7 +43,7 @@ public final class JazalGoldmane extends CardImpl {
                 new ManaCostsImpl("{3}{W}{W}")));
     }
 
-    public JazalGoldmane(final JazalGoldmane card) {
+    private JazalGoldmane(final JazalGoldmane card) {
         super(card);
     }
 

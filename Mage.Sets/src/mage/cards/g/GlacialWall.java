@@ -25,7 +25,7 @@ public final class GlacialWall extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public GlacialWall(final GlacialWall card) {
+    private GlacialWall(final GlacialWall card) {
         super(card);
     }
 

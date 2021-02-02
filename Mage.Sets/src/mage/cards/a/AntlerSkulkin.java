@@ -46,7 +46,7 @@ public final class AntlerSkulkin extends CardImpl {
         
     }
 
-    public AntlerSkulkin(final AntlerSkulkin card) {
+    private AntlerSkulkin(final AntlerSkulkin card) {
         super(card);
     }
 

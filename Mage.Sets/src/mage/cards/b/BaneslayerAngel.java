@@ -42,7 +42,7 @@ public final class BaneslayerAngel extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public BaneslayerAngel(final BaneslayerAngel card) {
+    private BaneslayerAngel(final BaneslayerAngel card) {
         super(card);
     }
 

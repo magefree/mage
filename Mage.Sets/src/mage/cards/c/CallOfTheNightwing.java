@@ -26,7 +26,7 @@ public final class CallOfTheNightwing extends CardImpl {
 
     }
 
-    public CallOfTheNightwing(final CallOfTheNightwing card) {
+    private CallOfTheNightwing(final CallOfTheNightwing card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class SkittishKavu extends CardImpl {
             "{this} gets +1/+1 as long as no opponent controls a white or blue creature")));
     }
 
-    public SkittishKavu(final SkittishKavu card) {
+    private SkittishKavu(final SkittishKavu card) {
         super(card);
     }
 

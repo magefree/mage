@@ -41,7 +41,7 @@ public final class SandSquid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SandSquid(final SandSquid card) {
+    private SandSquid(final SandSquid card) {
         super(card);
     }
 

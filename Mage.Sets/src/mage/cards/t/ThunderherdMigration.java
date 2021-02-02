@@ -40,7 +40,7 @@ public final class ThunderherdMigration extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true));
     }
 
-    public ThunderherdMigration(final ThunderherdMigration card) {
+    private ThunderherdMigration(final ThunderherdMigration card) {
         super(card);
     }
 

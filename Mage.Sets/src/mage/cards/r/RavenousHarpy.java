@@ -45,7 +45,7 @@ public final class RavenousHarpy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RavenousHarpy(final RavenousHarpy card) {
+    private RavenousHarpy(final RavenousHarpy card) {
         super(card);
     }
 

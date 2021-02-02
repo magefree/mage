@@ -36,7 +36,7 @@ public final class NobleBenefactor extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new NobleBenefactorEffect()));
     }
 
-    public NobleBenefactor(final NobleBenefactor card) {
+    private NobleBenefactor(final NobleBenefactor card) {
         super(card);
     }
 

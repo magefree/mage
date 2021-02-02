@@ -61,7 +61,7 @@ public final class DesertsHold extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
     }
 
-    public DesertsHold(final DesertsHold card) {
+    private DesertsHold(final DesertsHold card) {
         super(card);
     }
 

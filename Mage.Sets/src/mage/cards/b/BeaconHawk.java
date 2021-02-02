@@ -34,7 +34,7 @@ public final class BeaconHawk extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W)));
     }
 
-    public BeaconHawk(final BeaconHawk card) {
+    private BeaconHawk(final BeaconHawk card) {
         super(card);
     }
 

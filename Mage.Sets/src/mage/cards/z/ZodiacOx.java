@@ -26,7 +26,7 @@ public final class ZodiacOx extends CardImpl {
         this.addAbility(new SwampwalkAbility());
     }
 
-    public ZodiacOx(final ZodiacOx card) {
+    private ZodiacOx(final ZodiacOx card) {
         super(card);
     }
 

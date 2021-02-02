@@ -32,7 +32,7 @@ public final class FlyingCraneTechnique extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public FlyingCraneTechnique(final FlyingCraneTechnique card) {
+    private FlyingCraneTechnique(final FlyingCraneTechnique card) {
         super(card);
     }
 

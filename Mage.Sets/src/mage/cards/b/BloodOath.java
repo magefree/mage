@@ -32,7 +32,7 @@ public final class BloodOath extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public BloodOath(final BloodOath card) {
+    private BloodOath(final BloodOath card) {
         super(card);
     }
 

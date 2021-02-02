@@ -30,7 +30,7 @@ public final class SpellCrumple extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToLibrarySpellEffect(false));
     }
 
-    public SpellCrumple(final SpellCrumple card) {
+    private SpellCrumple(final SpellCrumple card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class DesertDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public DesertDrake(final DesertDrake card) {
+    private DesertDrake(final DesertDrake card) {
         super(card);
     }
 

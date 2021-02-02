@@ -25,7 +25,7 @@ public final class BituminousBlast extends CardImpl {
         this.addAbility(new CascadeAbility());
     }
 
-    public BituminousBlast(final BituminousBlast card) {
+    private BituminousBlast(final BituminousBlast card) {
         super(card);
     }
 

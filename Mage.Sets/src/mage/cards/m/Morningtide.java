@@ -20,7 +20,7 @@ public final class Morningtide extends CardImpl {
         this.getSpellAbility().addEffect(new ExileGraveyardAllPlayersEffect());
     }
 
-    public Morningtide(final Morningtide card) {
+    private Morningtide(final Morningtide card) {
         super(card);
     }
 

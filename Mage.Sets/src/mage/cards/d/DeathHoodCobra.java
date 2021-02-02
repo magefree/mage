@@ -32,7 +32,7 @@ public final class DeathHoodCobra extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
     }
 
-    public DeathHoodCobra(final DeathHoodCobra card) {
+    private DeathHoodCobra(final DeathHoodCobra card) {
         super(card);
     }
 

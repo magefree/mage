@@ -37,7 +37,7 @@ public final class KaervekTheMerciless extends CardImpl {
 
     }
 
-    public KaervekTheMerciless(final KaervekTheMerciless card) {
+    private KaervekTheMerciless(final KaervekTheMerciless card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class SelesnyaSentry extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{5}{G}")));
     }
 
-    public SelesnyaSentry(final SelesnyaSentry card) {
+    private SelesnyaSentry(final SelesnyaSentry card) {
         super(card);
     }
 

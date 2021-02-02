@@ -46,7 +46,7 @@ public final class RedManaBattery extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RedManaBattery(final RedManaBattery card) {
+    private RedManaBattery(final RedManaBattery card) {
         super(card);
     }
 

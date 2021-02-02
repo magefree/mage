@@ -42,7 +42,7 @@ public final class JandorsRing extends CardImpl {
         this.addAbility(ability, watcher);
     }
 
-    public JandorsRing(final JandorsRing card) {
+    private JandorsRing(final JandorsRing card) {
         super(card);
     }
 

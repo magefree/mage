@@ -36,7 +36,7 @@ public final class ReverentSilence extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")));
     }
 
-    public ReverentSilence(final ReverentSilence card) {
+    private ReverentSilence(final ReverentSilence card) {
         super(card);
     }
 

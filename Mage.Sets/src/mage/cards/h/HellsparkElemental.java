@@ -40,7 +40,7 @@ public final class HellsparkElemental extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{R}")));
     }
 
-    public HellsparkElemental(final HellsparkElemental card) {
+    private HellsparkElemental(final HellsparkElemental card) {
         super(card);
     }
 

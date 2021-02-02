@@ -36,7 +36,7 @@ public final class AuriokBladewarden extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AuriokBladewarden(final AuriokBladewarden card) {
+    private AuriokBladewarden(final AuriokBladewarden card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class TideforceElemental extends CardImpl {
         this.addAbility(new LandfallAbility(new UntapSourceEffect(), true));
     }
 
-    public TideforceElemental(final TideforceElemental card) {
+    private TideforceElemental(final TideforceElemental card) {
         super(card);
     }
 

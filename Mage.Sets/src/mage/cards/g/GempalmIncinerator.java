@@ -42,7 +42,7 @@ public final class GempalmIncinerator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GempalmIncinerator(final GempalmIncinerator card) {
+    private GempalmIncinerator(final GempalmIncinerator card) {
         super(card);
     }
 

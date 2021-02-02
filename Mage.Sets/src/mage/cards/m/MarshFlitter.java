@@ -51,7 +51,7 @@ public final class MarshFlitter extends CardImpl {
 
     }
 
-    public MarshFlitter(final MarshFlitter card) {
+    private MarshFlitter(final MarshFlitter card) {
         super(card);
     }
 

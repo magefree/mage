@@ -42,7 +42,7 @@ public final class BlowflyInfestation extends CardImpl {
 
     }
 
-    public BlowflyInfestation(final BlowflyInfestation card) {
+    private BlowflyInfestation(final BlowflyInfestation card) {
         super(card);
     }
 

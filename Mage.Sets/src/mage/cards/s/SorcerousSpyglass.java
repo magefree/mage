@@ -32,7 +32,7 @@ public final class SorcerousSpyglass extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SorcerousSpyglassActivationEffect()));
     }
 
-    public SorcerousSpyglass(final SorcerousSpyglass card) {
+    private SorcerousSpyglass(final SorcerousSpyglass card) {
         super(card);
     }
 

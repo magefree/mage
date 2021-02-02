@@ -23,7 +23,7 @@ public final class CruelBargain extends CardImpl {
         this.getSpellAbility().addEffect(new LoseHalfLifeEffect());
     }
 
-    public CruelBargain(final CruelBargain card) {
+    private CruelBargain(final CruelBargain card) {
         super(card);
     }
 

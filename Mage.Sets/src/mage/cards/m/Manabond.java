@@ -31,7 +31,7 @@ public final class Manabond extends CardImpl {
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new ManabondEffect(), true));
     }
 
-    public Manabond(final Manabond card) {
+    private Manabond(final Manabond card) {
         super(card);
     }
 

@@ -69,7 +69,7 @@ public final class EstridTheMasked extends CardImpl {
         this.addAbility(CanBeYourCommanderAbility.getInstance());
     }
 
-    public EstridTheMasked(final EstridTheMasked card) {
+    private EstridTheMasked(final EstridTheMasked card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class GlyphOfDestruction extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(filter));
     }
 
-    public GlyphOfDestruction(final GlyphOfDestruction card) {
+    private GlyphOfDestruction(final GlyphOfDestruction card) {
         super(card);
     }
 

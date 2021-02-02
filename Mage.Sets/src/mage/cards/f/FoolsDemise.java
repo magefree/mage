@@ -42,7 +42,7 @@ public final class FoolsDemise extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public FoolsDemise(final FoolsDemise card) {
+    private FoolsDemise(final FoolsDemise card) {
         super(card);
     }
 

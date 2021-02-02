@@ -32,7 +32,7 @@ public final class AvenOfEnduringHope extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3), false));
     }
 
-    public AvenOfEnduringHope(final AvenOfEnduringHope card) {
+    private AvenOfEnduringHope(final AvenOfEnduringHope card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class SabertoothWyvern extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public SabertoothWyvern(final SabertoothWyvern card) {
+    private SabertoothWyvern(final SabertoothWyvern card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class DarkwaterEgg extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DarkwaterEgg(final DarkwaterEgg card) {
+    private DarkwaterEgg(final DarkwaterEgg card) {
         super(card);
     }
 

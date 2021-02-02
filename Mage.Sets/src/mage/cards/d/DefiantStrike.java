@@ -31,7 +31,7 @@ public final class DefiantStrike extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public DefiantStrike(final DefiantStrike card) {
+    private DefiantStrike(final DefiantStrike card) {
         super(card);
     }
 

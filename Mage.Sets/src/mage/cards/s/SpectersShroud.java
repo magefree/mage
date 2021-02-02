@@ -35,7 +35,7 @@ public final class SpectersShroud extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public SpectersShroud(final SpectersShroud card) {
+    private SpectersShroud(final SpectersShroud card) {
         super(card);
     }
 

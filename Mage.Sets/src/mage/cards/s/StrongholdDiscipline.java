@@ -25,7 +25,7 @@ public final class StrongholdDiscipline extends CardImpl {
         this.getSpellAbility().addEffect(new StrongholdDisciplineEffect());
     }
 
-    public StrongholdDiscipline(final StrongholdDiscipline card) {
+    private StrongholdDiscipline(final StrongholdDiscipline card) {
         super(card);
     }
 

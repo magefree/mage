@@ -45,7 +45,7 @@ public final class Godtoucher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Godtoucher(final Godtoucher card) {
+    private Godtoucher(final Godtoucher card) {
         super(card);
     }
 

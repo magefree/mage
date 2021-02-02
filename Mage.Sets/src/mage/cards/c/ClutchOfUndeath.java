@@ -47,7 +47,7 @@ public final class ClutchOfUndeath extends CardImpl {
         );
     }
 
-    public ClutchOfUndeath(final ClutchOfUndeath card) {
+    private ClutchOfUndeath(final ClutchOfUndeath card) {
         super(card);
     }
 

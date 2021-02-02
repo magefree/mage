@@ -32,7 +32,7 @@ public final class UlvenwaldAbomination extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 
-    public UlvenwaldAbomination(final UlvenwaldAbomination card) {
+    private UlvenwaldAbomination(final UlvenwaldAbomination card) {
         super(card);
     }
 

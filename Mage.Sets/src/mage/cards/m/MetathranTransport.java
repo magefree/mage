@@ -50,7 +50,7 @@ public final class MetathranTransport extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MetathranTransport(final MetathranTransport card) {
+    private MetathranTransport(final MetathranTransport card) {
         super(card);
     }
 

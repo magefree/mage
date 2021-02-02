@@ -36,7 +36,7 @@ public final class GiltLeafPalace extends CardImpl {
 
     }
 
-    public GiltLeafPalace(final GiltLeafPalace card) {
+    private GiltLeafPalace(final GiltLeafPalace card) {
         super(card);
     }
 

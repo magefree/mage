@@ -36,7 +36,7 @@ public final class GraveScrabbler extends CardImpl {
                 "When {this} enters the battlefield, if its madness cost was paid, you may return target creature card from a graveyard to its owner's hand."));
     }
 
-    public GraveScrabbler(final GraveScrabbler card) {
+    private GraveScrabbler(final GraveScrabbler card) {
         super(card);
     }
 

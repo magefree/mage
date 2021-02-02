@@ -40,7 +40,7 @@ public final class EvolutionCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public EvolutionCharm(final EvolutionCharm card) {
+    private EvolutionCharm(final EvolutionCharm card) {
         super(card);
     }
 

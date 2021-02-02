@@ -31,7 +31,7 @@ public final class SeismicStomp extends CardImpl {
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
     }
 
-    public SeismicStomp(final SeismicStomp card) {
+    private SeismicStomp(final SeismicStomp card) {
         super(card);
     }
 

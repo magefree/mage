@@ -39,7 +39,7 @@ public final class StormFleetSpy extends CardImpl {
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public StormFleetSpy(final StormFleetSpy card) {
+    private StormFleetSpy(final StormFleetSpy card) {
         super(card);
     }
 

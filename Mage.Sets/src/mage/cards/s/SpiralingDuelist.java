@@ -35,7 +35,7 @@ public final class SpiralingDuelist extends CardImpl {
                 .addHint(MetalcraftHint.instance));
     }
 
-    public SpiralingDuelist(final SpiralingDuelist card) {
+    private SpiralingDuelist(final SpiralingDuelist card) {
         super(card);
     }
 

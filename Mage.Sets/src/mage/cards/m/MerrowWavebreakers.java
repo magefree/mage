@@ -38,7 +38,7 @@ public final class MerrowWavebreakers extends CardImpl {
         
     }
 
-    public MerrowWavebreakers(final MerrowWavebreakers card) {
+    private MerrowWavebreakers(final MerrowWavebreakers card) {
         super(card);
     }
 

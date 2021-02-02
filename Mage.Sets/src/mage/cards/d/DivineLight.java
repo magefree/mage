@@ -31,7 +31,7 @@ public final class DivineLight extends CardImpl {
         );
     }
 
-    public DivineLight(final DivineLight card) {
+    private DivineLight(final DivineLight card) {
         super(card);
     }
 

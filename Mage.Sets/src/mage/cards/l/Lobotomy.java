@@ -33,7 +33,7 @@ public final class Lobotomy extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Lobotomy(final Lobotomy card) {
+    private Lobotomy(final Lobotomy card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class CryOfContrition extends CardImpl {
         
     }
 
-    public CryOfContrition(final CryOfContrition card) {
+    private CryOfContrition(final CryOfContrition card) {
         super(card);
     }
 

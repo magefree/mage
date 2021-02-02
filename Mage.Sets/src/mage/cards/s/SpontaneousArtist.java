@@ -43,7 +43,7 @@ public final class SpontaneousArtist extends CardImpl {
 
     }
 
-    public SpontaneousArtist(final SpontaneousArtist card) {
+    private SpontaneousArtist(final SpontaneousArtist card) {
         super(card);
     }
 

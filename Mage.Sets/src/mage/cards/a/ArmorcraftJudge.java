@@ -36,7 +36,7 @@ public final class ArmorcraftJudge extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter))));
     }
 
-    public ArmorcraftJudge(final ArmorcraftJudge card) {
+    private ArmorcraftJudge(final ArmorcraftJudge card) {
         super(card);
     }
 

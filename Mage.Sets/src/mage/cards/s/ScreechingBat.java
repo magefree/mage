@@ -45,7 +45,7 @@ public final class ScreechingBat extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(new ScreechingBatBeginningOfUpkeepTriggeredAbility(), new TransformedCondition(true), ""));
     }
 
-    public ScreechingBat(final ScreechingBat card) {
+    private ScreechingBat(final ScreechingBat card) {
         super(card);
     }
 

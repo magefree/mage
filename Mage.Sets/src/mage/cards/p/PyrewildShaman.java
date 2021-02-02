@@ -36,7 +36,7 @@ public final class PyrewildShaman extends CardImpl {
 
     }
 
-    public PyrewildShaman(final PyrewildShaman card) {
+    private PyrewildShaman(final PyrewildShaman card) {
         super(card);
     }
 

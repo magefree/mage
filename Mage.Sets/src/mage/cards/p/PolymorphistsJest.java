@@ -29,7 +29,7 @@ public final class PolymorphistsJest extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public PolymorphistsJest(final PolymorphistsJest card) {
+    private PolymorphistsJest(final PolymorphistsJest card) {
         super(card);
     }
 

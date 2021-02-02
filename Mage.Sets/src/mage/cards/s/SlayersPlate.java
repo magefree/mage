@@ -41,7 +41,7 @@ public final class SlayersPlate extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public SlayersPlate(final SlayersPlate card) {
+    private SlayersPlate(final SlayersPlate card) {
         super(card);
     }
 

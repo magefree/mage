@@ -38,7 +38,7 @@ public final class Unearth extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public Unearth(final Unearth card) {
+    private Unearth(final Unearth card) {
         super(card);
     }
 

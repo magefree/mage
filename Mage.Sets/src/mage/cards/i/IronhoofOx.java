@@ -27,7 +27,7 @@ public final class IronhoofOx extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
-    public IronhoofOx(final IronhoofOx card) {
+    private IronhoofOx(final IronhoofOx card) {
         super(card);
     }
 

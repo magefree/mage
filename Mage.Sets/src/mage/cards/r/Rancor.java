@@ -46,7 +46,7 @@ public final class Rancor extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public Rancor(final Rancor card) {
+    private Rancor(final Rancor card) {
         super(card);
     }
 

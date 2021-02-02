@@ -45,7 +45,7 @@ public final class SleepersGuile extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public SleepersGuile(final SleepersGuile card) {
+    private SleepersGuile(final SleepersGuile card) {
         super(card);
     }
 

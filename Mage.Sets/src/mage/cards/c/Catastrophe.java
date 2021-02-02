@@ -27,7 +27,7 @@ public final class Catastrophe extends CardImpl {
         this.getSpellAbility().addEffect(new CatastropheEffect());
     }
 
-    public Catastrophe(final Catastrophe card) {
+    private Catastrophe(final Catastrophe card) {
         super(card);
     }
 

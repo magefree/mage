@@ -37,7 +37,7 @@ public final class RavenousBaloth extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter,true))));
     }
 
-    public RavenousBaloth(final RavenousBaloth card) {
+    private RavenousBaloth(final RavenousBaloth card) {
         super(card);
     }
 

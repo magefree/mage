@@ -29,7 +29,7 @@ public final class MoltenRavager extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public MoltenRavager(final MoltenRavager card) {
+    private MoltenRavager(final MoltenRavager card) {
         super(card);
     }
 

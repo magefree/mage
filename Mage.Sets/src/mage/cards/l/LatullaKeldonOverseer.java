@@ -42,7 +42,7 @@ public final class LatullaKeldonOverseer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LatullaKeldonOverseer(final LatullaKeldonOverseer card) {
+    private LatullaKeldonOverseer(final LatullaKeldonOverseer card) {
         super(card);
     }
 

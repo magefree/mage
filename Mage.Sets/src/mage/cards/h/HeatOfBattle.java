@@ -22,7 +22,7 @@ public final class HeatOfBattle extends CardImpl {
         this.addAbility(new HeatOfBattleTriggeredAbility());
     }
 
-    public HeatOfBattle(final HeatOfBattle card) {
+    private HeatOfBattle(final HeatOfBattle card) {
         super(card);
     }
 

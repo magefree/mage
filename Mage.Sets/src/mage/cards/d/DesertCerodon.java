@@ -27,7 +27,7 @@ public final class DesertCerodon extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{R}")));
     }
 
-    public DesertCerodon(final DesertCerodon card) {
+    private DesertCerodon(final DesertCerodon card) {
         super(card);
     }
 

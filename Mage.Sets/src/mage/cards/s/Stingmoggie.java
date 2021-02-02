@@ -51,7 +51,7 @@ public final class Stingmoggie extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Stingmoggie(final Stingmoggie card) {
+    private Stingmoggie(final Stingmoggie card) {
         super(card);
     }
 

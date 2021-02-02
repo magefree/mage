@@ -30,7 +30,7 @@ public final class GreaterSandwurm extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public GreaterSandwurm(final GreaterSandwurm card) {
+    private GreaterSandwurm(final GreaterSandwurm card) {
         super(card);
     }
 

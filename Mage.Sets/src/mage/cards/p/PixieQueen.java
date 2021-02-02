@@ -39,7 +39,7 @@ public final class PixieQueen extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PixieQueen(final PixieQueen card) {
+    private PixieQueen(final PixieQueen card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class LivingWish extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public LivingWish(final LivingWish card) {
+    private LivingWish(final LivingWish card) {
         super(card);
     }
 

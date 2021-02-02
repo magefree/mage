@@ -34,7 +34,7 @@ public final class MindeyeDrake extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MindeyeDrake(final MindeyeDrake card) {
+    private MindeyeDrake(final MindeyeDrake card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class GrixisCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public GrixisCharm(final GrixisCharm card) {
+    private GrixisCharm(final GrixisCharm card) {
         super(card);
     }
 

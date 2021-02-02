@@ -52,7 +52,7 @@ public final class Glorybringer extends CardImpl {
         this.addAbility(new ExertAbility(ability));
     }
 
-    public Glorybringer(final Glorybringer card) {
+    private Glorybringer(final Glorybringer card) {
         super(card);
     }
 

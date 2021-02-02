@@ -29,7 +29,7 @@ public final class TemporalMachinations extends CardImpl {
                 "If you control an artifact, draw a card"));
     }
 
-    public TemporalMachinations(final TemporalMachinations card) {
+    private TemporalMachinations(final TemporalMachinations card) {
         super(card);
     }
 

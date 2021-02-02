@@ -51,7 +51,7 @@ public final class SasayaOrochiAscendant extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SasayaOrochiAscendantFlipEffect(), new RevealHandSourceControllerCost()));
     }
 
-    public SasayaOrochiAscendant(final SasayaOrochiAscendant card) {
+    private SasayaOrochiAscendant(final SasayaOrochiAscendant card) {
         super(card);
     }
 

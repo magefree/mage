@@ -47,7 +47,7 @@ public final class SpikeRogue extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public SpikeRogue(final SpikeRogue card) {
+    private SpikeRogue(final SpikeRogue card) {
         super(card);
     }
 

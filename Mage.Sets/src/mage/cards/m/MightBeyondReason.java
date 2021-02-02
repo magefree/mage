@@ -33,7 +33,7 @@ public final class MightBeyondReason extends CardImpl {
         getSpellAbility().addHint(DeliriumHint.instance);
     }
 
-    public MightBeyondReason(final MightBeyondReason card) {
+    private MightBeyondReason(final MightBeyondReason card) {
         super(card);
     }
 

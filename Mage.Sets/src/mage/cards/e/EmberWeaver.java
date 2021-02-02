@@ -52,7 +52,7 @@ public final class EmberWeaver extends CardImpl {
 
     }
 
-    public EmberWeaver(final EmberWeaver card) {
+    private EmberWeaver(final EmberWeaver card) {
         super(card);
     }
 

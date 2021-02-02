@@ -53,7 +53,7 @@ public final class SoulRansom extends CardImpl {
 
     }
 
-    public SoulRansom(final SoulRansom card) {
+    private SoulRansom(final SoulRansom card) {
         super(card);
     }
 

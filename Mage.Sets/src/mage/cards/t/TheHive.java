@@ -26,7 +26,7 @@ public final class TheHive extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TheHive(final TheHive card) {
+    private TheHive(final TheHive card) {
         super(card);
     }
 

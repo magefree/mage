@@ -29,7 +29,7 @@ public final class SkeletalWurm extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public SkeletalWurm(final SkeletalWurm card) {
+    private SkeletalWurm(final SkeletalWurm card) {
         super(card);
     }
 

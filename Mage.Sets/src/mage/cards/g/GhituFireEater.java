@@ -37,7 +37,7 @@ public final class GhituFireEater extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhituFireEater(final GhituFireEater card) {
+    private GhituFireEater(final GhituFireEater card) {
         super(card);
     }
 

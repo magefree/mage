@@ -48,7 +48,7 @@ public final class InspiringCommander extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InspiringCommander(final InspiringCommander card) {
+    private InspiringCommander(final InspiringCommander card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class MindOverMatter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MindOverMatter(final MindOverMatter card) {
+    private MindOverMatter(final MindOverMatter card) {
         super(card);
     }
 

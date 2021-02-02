@@ -36,7 +36,7 @@ public final class BountyOfMight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (3rd)")));
     }
 
-    public BountyOfMight(final BountyOfMight card) {
+    private BountyOfMight(final BountyOfMight card) {
         super(card);
     }
 

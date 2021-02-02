@@ -38,7 +38,7 @@ public final class FirstComeFirstServed extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, gainEffect));
     }
 
-    public FirstComeFirstServed(final FirstComeFirstServed card) {
+    private FirstComeFirstServed(final FirstComeFirstServed card) {
         super(card);
     }
 

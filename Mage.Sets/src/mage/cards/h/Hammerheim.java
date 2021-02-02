@@ -43,7 +43,7 @@ public final class Hammerheim extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Hammerheim(final Hammerheim card) {
+    private Hammerheim(final Hammerheim card) {
         super(card);
     }
 

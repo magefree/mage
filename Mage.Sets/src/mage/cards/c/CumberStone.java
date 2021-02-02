@@ -24,7 +24,7 @@ public final class CumberStone extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostOpponentsEffect(-1, 0, Duration.WhileOnBattlefield)));
     }
 
-    public CumberStone(final CumberStone card) {
+    private CumberStone(final CumberStone card) {
         super(card);
     }
 

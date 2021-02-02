@@ -27,7 +27,7 @@ public final class RestForTheWeary extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public RestForTheWeary(final RestForTheWeary card) {
+    private RestForTheWeary(final RestForTheWeary card) {
         super(card);
     }
 

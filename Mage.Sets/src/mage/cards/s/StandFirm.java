@@ -27,7 +27,7 @@ public final class StandFirm extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }
 
-    public StandFirm(final StandFirm card) {
+    private StandFirm(final StandFirm card) {
         super(card);
     }
 

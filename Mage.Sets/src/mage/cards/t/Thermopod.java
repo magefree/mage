@@ -43,7 +43,7 @@ public final class Thermopod extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
-    public Thermopod(final Thermopod card) {
+    private Thermopod(final Thermopod card) {
         super(card);
     }
 

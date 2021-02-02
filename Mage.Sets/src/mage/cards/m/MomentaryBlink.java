@@ -29,7 +29,7 @@ public final class MomentaryBlink extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{U}"), TimingRule.INSTANT));
     }
 
-    public MomentaryBlink(final MomentaryBlink card) {
+    private MomentaryBlink(final MomentaryBlink card) {
         super(card);
     }
 

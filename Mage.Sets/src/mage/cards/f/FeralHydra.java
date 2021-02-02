@@ -41,7 +41,7 @@ public final class FeralHydra extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FeralHydra(final FeralHydra card) {
+    private FeralHydra(final FeralHydra card) {
         super(card);
     }
 

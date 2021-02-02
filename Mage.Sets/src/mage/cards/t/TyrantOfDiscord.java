@@ -35,7 +35,7 @@ public final class TyrantOfDiscord extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TyrantOfDiscord(final TyrantOfDiscord card) {
+    private TyrantOfDiscord(final TyrantOfDiscord card) {
         super(card);
     }
 

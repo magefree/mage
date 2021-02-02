@@ -33,7 +33,7 @@ public final class Overrun extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Overrun(final Overrun card) {
+    private Overrun(final Overrun card) {
         super(card);
     }
 

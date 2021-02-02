@@ -52,7 +52,7 @@ public final class SpikeTiller extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public SpikeTiller(final SpikeTiller card) {
+    private SpikeTiller(final SpikeTiller card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class RazingSnidd extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeAllEffect(1, new FilterControlledLandPermanent("land")), false));
     }
 
-    public RazingSnidd(final RazingSnidd card) {
+    private RazingSnidd(final RazingSnidd card) {
         super(card);
     }
 

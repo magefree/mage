@@ -63,7 +63,7 @@ public final class GyrusWakerOfCorpses extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GyrusWakerOfCorpses(final GyrusWakerOfCorpses card) {
+    private GyrusWakerOfCorpses(final GyrusWakerOfCorpses card) {
         super(card);
     }
 

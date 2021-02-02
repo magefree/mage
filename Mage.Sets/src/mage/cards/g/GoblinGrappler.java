@@ -25,7 +25,7 @@ public final class GoblinGrappler extends CardImpl {
         this.addAbility(new ProvokeAbility());
     }
 
-    public GoblinGrappler(final GoblinGrappler card) {
+    private GoblinGrappler(final GoblinGrappler card) {
         super(card);
     }
 

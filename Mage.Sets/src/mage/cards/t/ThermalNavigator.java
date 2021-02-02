@@ -33,7 +33,7 @@ public final class ThermalNavigator extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact")))));
     }
 
-    public ThermalNavigator(final ThermalNavigator card) {
+    private ThermalNavigator(final ThermalNavigator card) {
         super(card);
     }
 

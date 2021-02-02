@@ -40,7 +40,7 @@ public final class FlailingSoldier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlailingSoldier(final FlailingSoldier card) {
+    private FlailingSoldier(final FlailingSoldier card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class GraveBirthing extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public GraveBirthing(final GraveBirthing card) {
+    private GraveBirthing(final GraveBirthing card) {
         super(card);
     }
 

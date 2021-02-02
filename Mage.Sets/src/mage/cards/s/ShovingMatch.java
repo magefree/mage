@@ -32,7 +32,7 @@ public final class ShovingMatch extends CardImpl {
         );
     }
 
-    public ShovingMatch(final ShovingMatch card) {
+    private ShovingMatch(final ShovingMatch card) {
         super(card);
     }
 

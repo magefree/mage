@@ -65,7 +65,7 @@ public final class ThingInTheIce extends CardImpl {
 
     }
 
-    public ThingInTheIce(final ThingInTheIce card) {
+    private ThingInTheIce(final ThingInTheIce card) {
         super(card);
     }
 

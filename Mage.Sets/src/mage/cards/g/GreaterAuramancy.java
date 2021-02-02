@@ -44,7 +44,7 @@ public final class GreaterAuramancy extends CardImpl {
         
     }
 
-    public GreaterAuramancy(final GreaterAuramancy card) {
+    private GreaterAuramancy(final GreaterAuramancy card) {
         super(card);
     }
 

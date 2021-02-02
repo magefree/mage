@@ -26,7 +26,7 @@ public final class WasteAway extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WasteAway(final WasteAway card) {
+    private WasteAway(final WasteAway card) {
         super(card);
     }
 

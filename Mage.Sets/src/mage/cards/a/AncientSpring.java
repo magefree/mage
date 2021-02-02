@@ -33,7 +33,7 @@ public final class AncientSpring extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AncientSpring(final AncientSpring card) {
+    private AncientSpring(final AncientSpring card) {
         super(card);
     }
 

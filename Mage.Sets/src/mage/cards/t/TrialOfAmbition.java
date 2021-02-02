@@ -40,7 +40,7 @@ public final class TrialOfAmbition extends CardImpl {
                 "When a Cartouche enters the battlefield under your control, return {this} to its owner's hand"));
     }
 
-    public TrialOfAmbition(final TrialOfAmbition card) {
+    private TrialOfAmbition(final TrialOfAmbition card) {
         super(card);
     }
 

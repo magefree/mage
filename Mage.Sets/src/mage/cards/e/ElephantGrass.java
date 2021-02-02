@@ -44,7 +44,7 @@ public final class ElephantGrass extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl<>("{2"), false, filter)));
     }
 
-    public ElephantGrass(final ElephantGrass card) {
+    private ElephantGrass(final ElephantGrass card) {
         super(card);
     }
 

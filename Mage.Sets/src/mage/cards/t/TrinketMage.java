@@ -42,7 +42,7 @@ public final class TrinketMage extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
     }
 
-    public TrinketMage(final TrinketMage card) {
+    private TrinketMage(final TrinketMage card) {
         super(card);
     }
 

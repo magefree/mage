@@ -48,7 +48,7 @@ public final class FacelessButcher extends CardImpl {
 
     }
 
-    public FacelessButcher(final FacelessButcher card) {
+    private FacelessButcher(final FacelessButcher card) {
         super(card);
     }
 

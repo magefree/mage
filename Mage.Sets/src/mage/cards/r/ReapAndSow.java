@@ -38,7 +38,7 @@ public final class ReapAndSow extends CardImpl {
         this.addAbility(new EntwineAbility("{1}{G}"));
     }
 
-    public ReapAndSow(final ReapAndSow card) {
+    private ReapAndSow(final ReapAndSow card) {
         super(card);
     }
 

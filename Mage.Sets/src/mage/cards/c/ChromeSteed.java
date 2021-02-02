@@ -34,7 +34,7 @@ public final class ChromeSteed extends CardImpl {
                 .addHint(MetalcraftHint.instance));
     }
 
-    public ChromeSteed(final ChromeSteed card) {
+    private ChromeSteed(final ChromeSteed card) {
         super(card);
     }
 

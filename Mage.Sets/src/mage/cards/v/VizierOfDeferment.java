@@ -48,7 +48,7 @@ public final class VizierOfDeferment extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VizierOfDeferment(final VizierOfDeferment card) {
+    private VizierOfDeferment(final VizierOfDeferment card) {
         super(card);
     }
 

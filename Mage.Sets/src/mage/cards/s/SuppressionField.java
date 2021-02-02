@@ -29,7 +29,7 @@ public final class SuppressionField extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SuppressionFieldCostReductionEffect()));
     }
 
-    public SuppressionField(final SuppressionField card) {
+    private SuppressionField(final SuppressionField card) {
         super(card);
     }
 

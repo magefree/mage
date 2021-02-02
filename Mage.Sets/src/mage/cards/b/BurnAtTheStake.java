@@ -40,7 +40,7 @@ public final class BurnAtTheStake extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public BurnAtTheStake(final BurnAtTheStake card) {
+    private BurnAtTheStake(final BurnAtTheStake card) {
         super(card);
     }
 

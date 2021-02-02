@@ -24,7 +24,7 @@ public final class DeathWard extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public DeathWard(final DeathWard card) {
+    private DeathWard(final DeathWard card) {
         super(card);
     }
 

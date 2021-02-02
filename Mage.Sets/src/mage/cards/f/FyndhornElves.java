@@ -27,7 +27,7 @@ public final class FyndhornElves extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public FyndhornElves(final FyndhornElves card) {
+    private FyndhornElves(final FyndhornElves card) {
         super(card);
     }
 

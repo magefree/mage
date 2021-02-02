@@ -39,7 +39,7 @@ public final class TreetopScout extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(onlyFlyingCreatures, Duration.WhileOnBattlefield)));
     }
 
-    public TreetopScout(final TreetopScout card) {
+    private TreetopScout(final TreetopScout card) {
         super(card);
     }
 

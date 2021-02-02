@@ -32,7 +32,7 @@ public final class RollingEarthquake extends CardImpl {
         this.getSpellAbility().addEffect(new DamageEverythingEffect(ManacostVariableValue.instance, filter));
     }
 
-    public RollingEarthquake(final RollingEarthquake card) {
+    private RollingEarthquake(final RollingEarthquake card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class CrowdFavorites extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 5, Duration.EndOfTurn), new ManaCostsImpl("{3}{W}")));
     }
 
-    public CrowdFavorites(final CrowdFavorites card) {
+    private CrowdFavorites(final CrowdFavorites card) {
         super(card);
     }
 

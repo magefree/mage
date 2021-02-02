@@ -33,7 +33,7 @@ public final class CutthroatIlDal extends CardImpl {
             new GainAbilitySourceEffect(ShadowAbility.getInstance(), Duration.WhileOnBattlefield),                                                                                                            HellbentCondition.instance,
             "<i>Hellbent</i> &mdash; {this} has shadow as long as you have no cards in hand")));                                                                                                   }
 
-    public CutthroatIlDal(final CutthroatIlDal card) {
+    private CutthroatIlDal(final CutthroatIlDal card) {
         super(card);
     }
 

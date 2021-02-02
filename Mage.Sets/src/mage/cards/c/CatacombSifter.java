@@ -46,7 +46,7 @@ public final class CatacombSifter extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new ScryEffect(1), false, filter));
     }
 
-    public CatacombSifter(final CatacombSifter card) {
+    private CatacombSifter(final CatacombSifter card) {
         super(card);
     }
 

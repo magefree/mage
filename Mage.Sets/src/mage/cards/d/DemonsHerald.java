@@ -61,7 +61,7 @@ public final class DemonsHerald extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DemonsHerald(final DemonsHerald card) {
+    private DemonsHerald(final DemonsHerald card) {
         super(card);
     }
 

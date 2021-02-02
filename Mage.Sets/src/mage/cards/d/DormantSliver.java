@@ -43,7 +43,7 @@ public final class DormantSliver extends CardImpl {
                 new GainAbilityAllEffect(ability2, Duration.WhileOnBattlefield, filter, "All Slivers have \"When this permanent enters the battlefield, draw a card.\"")));
     }
 
-    public DormantSliver(final DormantSliver card) {
+    private DormantSliver(final DormantSliver card) {
         super(card);
     }
 

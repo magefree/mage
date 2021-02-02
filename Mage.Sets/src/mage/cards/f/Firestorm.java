@@ -34,7 +34,7 @@ public final class Firestorm extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(FirestormAdjuster.instance);
     }
 
-    public Firestorm(final Firestorm card) {
+    private Firestorm(final Firestorm card) {
         super(card);
     }
 

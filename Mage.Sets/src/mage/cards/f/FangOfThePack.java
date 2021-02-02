@@ -45,7 +45,7 @@ public final class FangOfThePack extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FangOfThePack(final FangOfThePack card) {
+    private FangOfThePack(final FangOfThePack card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class PiannaNomadCaptain extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false), false));
     }
 
-    public PiannaNomadCaptain(final PiannaNomadCaptain card) {
+    private PiannaNomadCaptain(final PiannaNomadCaptain card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class Stun extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Stun(final Stun card) {
+    private Stun(final Stun card) {
         super(card);
     }
 

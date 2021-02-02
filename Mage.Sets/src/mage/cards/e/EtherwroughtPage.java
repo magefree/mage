@@ -49,7 +49,7 @@ public final class EtherwroughtPage extends CardImpl {
 
     }
 
-    public EtherwroughtPage(final EtherwroughtPage card) {
+    private EtherwroughtPage(final EtherwroughtPage card) {
         super(card);
     }
 

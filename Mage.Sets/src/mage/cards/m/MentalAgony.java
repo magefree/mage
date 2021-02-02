@@ -25,7 +25,7 @@ public final class MentalAgony extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public MentalAgony(final MentalAgony card) {
+    private MentalAgony(final MentalAgony card) {
         super(card);
     }
 

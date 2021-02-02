@@ -33,7 +33,7 @@ public final class JohnnyComboPlayer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterCard("a card")), false, true), new ManaCostsImpl("{4}")));
     }
 
-    public JohnnyComboPlayer(final JohnnyComboPlayer card) {
+    private JohnnyComboPlayer(final JohnnyComboPlayer card) {
         super(card);
     }
 

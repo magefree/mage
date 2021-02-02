@@ -33,7 +33,7 @@ public final class StinkweedImp extends CardImpl {
         this.addAbility(new DredgeAbility(5));
     }
 
-    public StinkweedImp(final StinkweedImp card) {
+    private StinkweedImp(final StinkweedImp card) {
         super(card);
     }
 

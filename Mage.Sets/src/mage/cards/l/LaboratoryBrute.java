@@ -27,7 +27,7 @@ public final class LaboratoryBrute extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(4)));
     }
 
-    public LaboratoryBrute(final LaboratoryBrute card) {
+    private LaboratoryBrute(final LaboratoryBrute card) {
         super(card);
     }
 

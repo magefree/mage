@@ -35,7 +35,7 @@ public final class StoicRebuttal extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
-    public StoicRebuttal(final StoicRebuttal card) {
+    private StoicRebuttal(final StoicRebuttal card) {
         super(card);
     }
 

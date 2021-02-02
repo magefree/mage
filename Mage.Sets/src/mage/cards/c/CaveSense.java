@@ -45,7 +45,7 @@ public final class CaveSense extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CaveSense(final CaveSense card) {
+    private CaveSense(final CaveSense card) {
         super(card);
     }
 

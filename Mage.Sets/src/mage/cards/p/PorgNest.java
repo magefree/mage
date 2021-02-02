@@ -33,7 +33,7 @@ public final class PorgNest extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PorgToken()), TargetController.YOU, false));
     }
 
-    public PorgNest(final PorgNest card) {
+    private PorgNest(final PorgNest card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class DrownyardTemple extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new GenericManaCost(3)));
     }
 
-    public DrownyardTemple(final DrownyardTemple card) {
+    private DrownyardTemple(final DrownyardTemple card) {
         super(card);
     }
 

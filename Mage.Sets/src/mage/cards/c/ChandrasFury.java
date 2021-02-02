@@ -27,7 +27,7 @@ public final class ChandrasFury extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    public ChandrasFury(final ChandrasFury card) {
+    private ChandrasFury(final ChandrasFury card) {
         super(card);
     }
 

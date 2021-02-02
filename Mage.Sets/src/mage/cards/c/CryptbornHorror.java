@@ -39,7 +39,7 @@ public final class CryptbornHorror extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new CryptbornHorrorEffect(), rule));
     }
 
-    public CryptbornHorror(final CryptbornHorror card) {
+    private CryptbornHorror(final CryptbornHorror card) {
         super(card);
     }
 

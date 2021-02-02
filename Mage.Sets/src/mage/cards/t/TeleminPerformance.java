@@ -30,7 +30,7 @@ public final class TeleminPerformance extends CardImpl {
 
     }
 
-    public TeleminPerformance(final TeleminPerformance card) {
+    private TeleminPerformance(final TeleminPerformance card) {
         super(card);
     }
 

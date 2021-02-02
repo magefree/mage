@@ -42,7 +42,7 @@ public final class SakashimaTheImpostor extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 
-    public SakashimaTheImpostor(final SakashimaTheImpostor card) {
+    private SakashimaTheImpostor(final SakashimaTheImpostor card) {
         super(card);
     }
 

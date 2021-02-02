@@ -24,7 +24,7 @@ public final class PlowUnder extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent(2,2, StaticFilters.FILTER_LANDS, false));
     }
 
-    public PlowUnder(final PlowUnder card) {
+    private PlowUnder(final PlowUnder card) {
         super(card);
     }
 

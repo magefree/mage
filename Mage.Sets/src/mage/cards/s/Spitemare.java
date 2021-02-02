@@ -38,7 +38,7 @@ public final class Spitemare extends CardImpl {
 
     }
 
-    public Spitemare(final Spitemare card) {
+    private Spitemare(final Spitemare card) {
         super(card);
     }
 

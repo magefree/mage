@@ -30,7 +30,7 @@ public final class WhiptailMoloch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WhiptailMoloch(final WhiptailMoloch card) {
+    private WhiptailMoloch(final WhiptailMoloch card) {
         super(card);
     }
 

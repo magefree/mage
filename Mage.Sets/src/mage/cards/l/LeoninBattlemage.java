@@ -38,7 +38,7 @@ public final class LeoninBattlemage extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), true));
     }
 
-    public LeoninBattlemage(final LeoninBattlemage card) {
+    private LeoninBattlemage(final LeoninBattlemage card) {
         super(card);
     }
 

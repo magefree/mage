@@ -45,7 +45,7 @@ public final class AnimateArtifact extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnimateArtifactContinuousEffect(Duration.WhileOnBattlefield)));
     }
 
-    public AnimateArtifact(final AnimateArtifact card) {
+    private AnimateArtifact(final AnimateArtifact card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class SunflareShaman extends CardImpl {
 
     }
 
-    public SunflareShaman(final SunflareShaman card) {
+    private SunflareShaman(final SunflareShaman card) {
         super(card);
     }
 

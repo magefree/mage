@@ -43,7 +43,7 @@ public final class WarElemental extends CardImpl {
 
     }
 
-    public WarElemental(final WarElemental card) {
+    private WarElemental(final WarElemental card) {
         super(card);
     }
 

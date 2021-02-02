@@ -36,7 +36,7 @@ public final class DruidOfHorns extends CardImpl {
         this.addAbility(new DruidOfHornsTriggeredAbility());
     }
 
-    public DruidOfHorns(final DruidOfHorns card) {
+    private DruidOfHorns(final DruidOfHorns card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class OathOfGhouls extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OathOfGhouls(final OathOfGhouls card) {
+    private OathOfGhouls(final OathOfGhouls card) {
         super(card);
     }
 

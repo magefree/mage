@@ -24,7 +24,7 @@ public final class MassiveRaid extends CardImpl {
         this.getSpellAbility().addHint(CreaturesYouControlHint.instance);
     }
 
-    public MassiveRaid(final MassiveRaid card) {
+    private MassiveRaid(final MassiveRaid card) {
         super(card);
     }
 

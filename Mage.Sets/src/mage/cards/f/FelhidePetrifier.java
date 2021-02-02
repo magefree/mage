@@ -38,7 +38,7 @@ public final class FelhidePetrifier extends CardImpl {
         ));
     }
 
-    public FelhidePetrifier(final FelhidePetrifier card) {
+    private FelhidePetrifier(final FelhidePetrifier card) {
         super(card);
     }
 

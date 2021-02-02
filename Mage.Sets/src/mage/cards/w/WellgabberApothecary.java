@@ -45,7 +45,7 @@ public final class WellgabberApothecary extends CardImpl {
 
     }
 
-    public WellgabberApothecary(final WellgabberApothecary card) {
+    private WellgabberApothecary(final WellgabberApothecary card) {
         super(card);
     }
 

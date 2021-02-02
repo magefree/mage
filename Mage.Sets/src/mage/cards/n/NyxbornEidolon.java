@@ -32,7 +32,7 @@ public final class NyxbornEidolon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield)));
     }
 
-    public NyxbornEidolon(final NyxbornEidolon card) {
+    private NyxbornEidolon(final NyxbornEidolon card) {
         super(card);
     }
 

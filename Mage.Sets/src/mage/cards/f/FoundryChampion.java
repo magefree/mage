@@ -45,7 +45,7 @@ public final class FoundryChampion extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public FoundryChampion(final FoundryChampion card) {
+    private FoundryChampion(final FoundryChampion card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class ArmWithAether extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public ArmWithAether(final ArmWithAether card) {
+    private ArmWithAether(final ArmWithAether card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class EmperorsVanguard extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExploreSourceEffect(), false));
     }
 
-    public EmperorsVanguard(final EmperorsVanguard card) {
+    private EmperorsVanguard(final EmperorsVanguard card) {
         super(card);
     }
 

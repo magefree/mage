@@ -30,7 +30,7 @@ public final class SeismicRupture extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(2, filter));
     }
 
-    public SeismicRupture(final SeismicRupture card) {
+    private SeismicRupture(final SeismicRupture card) {
         super(card);
     }
 

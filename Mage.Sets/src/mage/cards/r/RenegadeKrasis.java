@@ -35,7 +35,7 @@ public final class RenegadeKrasis extends CardImpl {
         this.addAbility(new RenegadeKrasisTriggeredAbility());
     }
 
-    public RenegadeKrasis(final RenegadeKrasis card) {
+    private RenegadeKrasis(final RenegadeKrasis card) {
         super(card);
     }
 

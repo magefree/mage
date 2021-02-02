@@ -55,7 +55,7 @@ public final class UlamogsNullifier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UlamogsNullifier(final UlamogsNullifier card) {
+    private UlamogsNullifier(final UlamogsNullifier card) {
         super(card);
     }
 

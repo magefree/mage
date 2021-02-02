@@ -43,7 +43,7 @@ public final class DiviningWitch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DiviningWitch(final DiviningWitch card) {
+    private DiviningWitch(final DiviningWitch card) {
         super(card);
     }
 

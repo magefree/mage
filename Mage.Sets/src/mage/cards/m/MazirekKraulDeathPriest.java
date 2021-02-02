@@ -41,7 +41,7 @@ public final class MazirekKraulDeathPriest extends CardImpl {
         this.addAbility(new PlayerSacrificesPermanentTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()), false));
     }
 
-    public MazirekKraulDeathPriest(final MazirekKraulDeathPriest card) {
+    private MazirekKraulDeathPriest(final MazirekKraulDeathPriest card) {
         super(card);
     }
 

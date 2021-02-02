@@ -41,7 +41,7 @@ public final class KavuMauler extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, value, Duration.EndOfTurn, true), false));
     }
 
-    public KavuMauler(final KavuMauler card) {
+    private KavuMauler(final KavuMauler card) {
         super(card);
     }
 

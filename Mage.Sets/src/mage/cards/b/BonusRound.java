@@ -27,7 +27,7 @@ public final class BonusRound extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new BonusRoundDelayedTriggeredAbility()));
     }
 
-    public BonusRound(final BonusRound card) {
+    private BonusRound(final BonusRound card) {
         super(card);
     }
 

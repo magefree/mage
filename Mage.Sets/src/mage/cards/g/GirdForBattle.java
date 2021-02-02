@@ -24,7 +24,7 @@ public final class GirdForBattle extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }
 
-    public GirdForBattle(final GirdForBattle card) {
+    private GirdForBattle(final GirdForBattle card) {
         super(card);
     }
 

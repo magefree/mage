@@ -46,7 +46,7 @@ public final class GuildSummit extends CardImpl {
         ));
     }
 
-    public GuildSummit(final GuildSummit card) {
+    private GuildSummit(final GuildSummit card) {
         super(card);
     }
 

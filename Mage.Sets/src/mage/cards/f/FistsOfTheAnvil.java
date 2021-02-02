@@ -22,7 +22,7 @@ public final class FistsOfTheAnvil extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FistsOfTheAnvil(final FistsOfTheAnvil card) {
+    private FistsOfTheAnvil(final FistsOfTheAnvil card) {
         super(card);
     }
 

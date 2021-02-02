@@ -41,7 +41,7 @@ public final class LandGrant extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));
     }
 
-    public LandGrant(final LandGrant card) {
+    private LandGrant(final LandGrant card) {
         super(card);
     }
 

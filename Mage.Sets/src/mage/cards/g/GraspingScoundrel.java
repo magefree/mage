@@ -38,7 +38,7 @@ public final class GraspingScoundrel extends CardImpl{
         )));
     }
 
-    public GraspingScoundrel(final GraspingScoundrel card) {
+    private GraspingScoundrel(final GraspingScoundrel card) {
         super(card);
     }
 

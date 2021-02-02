@@ -26,7 +26,7 @@ public final class HalimarDepths extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public HalimarDepths(final HalimarDepths card) {
+    private HalimarDepths(final HalimarDepths card) {
         super(card);
     }
 

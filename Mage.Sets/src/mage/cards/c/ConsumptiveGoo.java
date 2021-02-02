@@ -36,7 +36,7 @@ public final class ConsumptiveGoo extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ConsumptiveGoo(final ConsumptiveGoo card) {
+    private ConsumptiveGoo(final ConsumptiveGoo card) {
         super(card);
     }
 

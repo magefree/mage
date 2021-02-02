@@ -42,7 +42,7 @@ public final class FeralInvocation extends CardImpl {
 
     }
 
-    public FeralInvocation(final FeralInvocation card) {
+    private FeralInvocation(final FeralInvocation card) {
         super(card);
     }
 

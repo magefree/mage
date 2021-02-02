@@ -27,7 +27,7 @@ public final class DictateOfHeliod extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2,2,Duration.WhileOnBattlefield)));
     }
 
-    public DictateOfHeliod(final DictateOfHeliod card) {
+    private DictateOfHeliod(final DictateOfHeliod card) {
         super(card);
     }
 

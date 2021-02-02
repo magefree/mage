@@ -31,7 +31,7 @@ public final class FlowstoneWyvern extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -2, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public FlowstoneWyvern(final FlowstoneWyvern card) {
+    private FlowstoneWyvern(final FlowstoneWyvern card) {
         super(card);
     }
 

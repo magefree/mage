@@ -36,7 +36,7 @@ public final class RiotRingleader extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn, filter), false));
     }
 
-    public RiotRingleader(final RiotRingleader card) {
+    private RiotRingleader(final RiotRingleader card) {
         super(card);
     }
 

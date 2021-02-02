@@ -26,7 +26,7 @@ public class FlockOfRabidSheep extends CardImpl {
         this.getSpellAbility().addEffect(new FlockOfRabidSheepEffect());
     }
 
-    public FlockOfRabidSheep(final FlockOfRabidSheep card) {
+    private FlockOfRabidSheep(final FlockOfRabidSheep card) {
         super(card);
     }
 

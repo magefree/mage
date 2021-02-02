@@ -64,7 +64,7 @@ public final class ScaleguardSentinels extends CardImpl {
         }
     }
 
-    public ScaleguardSentinels(final ScaleguardSentinels card) {
+    private ScaleguardSentinels(final ScaleguardSentinels card) {
         super(card);
     }
 

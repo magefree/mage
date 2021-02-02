@@ -39,7 +39,7 @@ public final class EternalWarrior extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public EternalWarrior(final EternalWarrior card) {
+    private EternalWarrior(final EternalWarrior card) {
         super(card);
     }
 

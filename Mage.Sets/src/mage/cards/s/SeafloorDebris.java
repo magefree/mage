@@ -30,7 +30,7 @@ public final class SeafloorDebris extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeafloorDebris(final SeafloorDebris card) {
+    private SeafloorDebris(final SeafloorDebris card) {
         super(card);
     }
 

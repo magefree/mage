@@ -35,7 +35,7 @@ public final class PrimevalForce extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, true)))));
     }
 
-    public PrimevalForce(final PrimevalForce card) {
+    private PrimevalForce(final PrimevalForce card) {
         super(card);
     }
 

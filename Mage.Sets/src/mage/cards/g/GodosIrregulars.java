@@ -38,7 +38,7 @@ public final class GodosIrregulars extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GodosIrregulars(final GodosIrregulars card) {
+    private GodosIrregulars(final GodosIrregulars card) {
         super(card);
     }
 

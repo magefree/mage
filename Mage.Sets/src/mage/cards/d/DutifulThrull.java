@@ -30,7 +30,7 @@ public final class DutifulThrull extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
-    public DutifulThrull(final DutifulThrull card) {
+    private DutifulThrull(final DutifulThrull card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class MonasteryLoremaster extends CardImpl {
 
     }
 
-    public MonasteryLoremaster(final MonasteryLoremaster card) {
+    private MonasteryLoremaster(final MonasteryLoremaster card) {
         super(card);
     }
 

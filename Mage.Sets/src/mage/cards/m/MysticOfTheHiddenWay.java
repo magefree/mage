@@ -31,7 +31,7 @@ public final class MysticOfTheHiddenWay extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}")));
     }
 
-    public MysticOfTheHiddenWay(final MysticOfTheHiddenWay card) {
+    private MysticOfTheHiddenWay(final MysticOfTheHiddenWay card) {
         super(card);
     }
 

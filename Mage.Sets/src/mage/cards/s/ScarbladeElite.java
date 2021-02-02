@@ -42,7 +42,7 @@ public final class ScarbladeElite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScarbladeElite(final ScarbladeElite card) {
+    private ScarbladeElite(final ScarbladeElite card) {
         super(card);
     }
 

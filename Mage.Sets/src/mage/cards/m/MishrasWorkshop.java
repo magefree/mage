@@ -25,7 +25,7 @@ public final class MishrasWorkshop extends CardImpl {
 
     }
 
-    public MishrasWorkshop(final MishrasWorkshop card) {
+    private MishrasWorkshop(final MishrasWorkshop card) {
         super(card);
     }
 

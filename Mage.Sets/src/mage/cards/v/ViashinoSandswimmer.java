@@ -35,7 +35,7 @@ public final class ViashinoSandswimmer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ViashinoSandswimmerEffect(), new ManaCostsImpl("{R}")));
     }
 
-    public ViashinoSandswimmer(final ViashinoSandswimmer card) {
+    private ViashinoSandswimmer(final ViashinoSandswimmer card) {
         super(card);
     }
 

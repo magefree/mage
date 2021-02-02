@@ -31,7 +31,7 @@ public final class Brushland extends CardImpl {
         this.addAbility(whiteManaAbility);
     }
 
-    public Brushland(final Brushland card) {
+    private Brushland(final Brushland card) {
         super(card);
     }
 

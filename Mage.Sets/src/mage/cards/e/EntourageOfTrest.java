@@ -38,7 +38,7 @@ public final class EntourageOfTrest extends CardImpl {
                 "{this} can block an additional creature each combat as long as you're the monarch")));
     }
 
-    public EntourageOfTrest(final EntourageOfTrest card) {
+    private EntourageOfTrest(final EntourageOfTrest card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class Scar extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Scar(final Scar card) {
+    private Scar(final Scar card) {
         super(card);
     }
 

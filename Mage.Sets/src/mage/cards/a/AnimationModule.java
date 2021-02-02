@@ -47,7 +47,7 @@ public final class AnimationModule extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AnimationModule(final AnimationModule card) {
+    private AnimationModule(final AnimationModule card) {
         super(card);
     }
 

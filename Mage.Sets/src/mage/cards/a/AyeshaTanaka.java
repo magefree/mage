@@ -48,7 +48,7 @@ public final class AyeshaTanaka extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AyeshaTanaka(final AyeshaTanaka card) {
+    private AyeshaTanaka(final AyeshaTanaka card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class SealockMonster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SealockMonster(final SealockMonster card) {
+    private SealockMonster(final SealockMonster card) {
         super(card);
     }
 

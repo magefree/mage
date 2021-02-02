@@ -63,7 +63,7 @@ public final class ShrewdHatchling extends CardImpl {
 
     }
 
-    public ShrewdHatchling(final ShrewdHatchling card) {
+    private ShrewdHatchling(final ShrewdHatchling card) {
         super(card);
     }
 

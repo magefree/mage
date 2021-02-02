@@ -27,7 +27,7 @@ public final class SultaiSkullkeeper extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(2)));
     }
 
-    public SultaiSkullkeeper(final SultaiSkullkeeper card) {
+    private SultaiSkullkeeper(final SultaiSkullkeeper card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class Thrive extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(ThriveAdjuster.instance);
     }
 
-    public Thrive(final Thrive card) {
+    private Thrive(final Thrive card) {
         super(card);
     }
 

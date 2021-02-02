@@ -31,7 +31,7 @@ public final class GeistOfTheArchives extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ScryEffect(1), TargetController.YOU, false));
     }
 
-    public GeistOfTheArchives(final GeistOfTheArchives card) {
+    private GeistOfTheArchives(final GeistOfTheArchives card) {
         super(card);
     }
 

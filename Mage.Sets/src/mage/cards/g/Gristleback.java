@@ -34,7 +34,7 @@ public final class Gristleback extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(new SourcePermanentPowerCount()), new SacrificeSourceCost()));
     }
 
-    public Gristleback(final Gristleback card) {
+    private Gristleback(final Gristleback card) {
         super(card);
     }
 

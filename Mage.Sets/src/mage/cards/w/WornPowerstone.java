@@ -23,7 +23,7 @@ public final class WornPowerstone extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 
-    public WornPowerstone(final WornPowerstone card) {
+    private WornPowerstone(final WornPowerstone card) {
         super(card);
     }
 

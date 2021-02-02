@@ -38,7 +38,7 @@ public final class DuskFeaster extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public DuskFeaster(final DuskFeaster card) {
+    private DuskFeaster(final DuskFeaster card) {
         super(card);
     }
 

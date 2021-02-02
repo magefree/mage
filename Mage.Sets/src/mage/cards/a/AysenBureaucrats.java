@@ -43,7 +43,7 @@ public final class AysenBureaucrats extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AysenBureaucrats(final AysenBureaucrats card) {
+    private AysenBureaucrats(final AysenBureaucrats card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class LingeringSouls extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{B}"), TimingRule.SORCERY));
     }
 
-    public LingeringSouls(final LingeringSouls card) {
+    private LingeringSouls(final LingeringSouls card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class AudaciousInfiltrator extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public AudaciousInfiltrator(final AudaciousInfiltrator card) {
+    private AudaciousInfiltrator(final AudaciousInfiltrator card) {
         super(card);
     }
 

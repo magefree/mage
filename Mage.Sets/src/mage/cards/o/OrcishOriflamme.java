@@ -27,7 +27,7 @@ public final class OrcishOriflamme extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect));
     }
 
-    public OrcishOriflamme(final OrcishOriflamme card) {
+    private OrcishOriflamme(final OrcishOriflamme card) {
         super(card);
     }
 

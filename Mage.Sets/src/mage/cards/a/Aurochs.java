@@ -42,7 +42,7 @@ public final class Aurochs extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, StaticValue.get(0), Duration.EndOfTurn, true), false));
     }
 
-    public Aurochs(final Aurochs card) {
+    private Aurochs(final Aurochs card) {
         super(card);
     }
 

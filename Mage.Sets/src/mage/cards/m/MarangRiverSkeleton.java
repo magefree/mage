@@ -32,7 +32,7 @@ public final class MarangRiverSkeleton extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{B}"), true));
     }
 
-    public MarangRiverSkeleton(final MarangRiverSkeleton card) {
+    private MarangRiverSkeleton(final MarangRiverSkeleton card) {
         super(card);
     }
 

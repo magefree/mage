@@ -39,7 +39,7 @@ public final class ThalakosDreamsower extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThalakosDreamsower(final ThalakosDreamsower card) {
+    private ThalakosDreamsower(final ThalakosDreamsower card) {
         super(card);
     }
 

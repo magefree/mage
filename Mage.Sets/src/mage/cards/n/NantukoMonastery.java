@@ -38,7 +38,7 @@ public final class NantukoMonastery extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NantukoMonastery(final NantukoMonastery card) {
+    private NantukoMonastery(final NantukoMonastery card) {
         super(card);
     }
 

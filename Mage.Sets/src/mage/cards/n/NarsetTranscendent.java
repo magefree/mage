@@ -54,7 +54,7 @@ public final class NarsetTranscendent extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new NarsetTranscendentEmblem()), -9));
     }
 
-    public NarsetTranscendent(final NarsetTranscendent card) {
+    private NarsetTranscendent(final NarsetTranscendent card) {
         super(card);
     }
 

@@ -57,7 +57,7 @@ public final class ShrineOfPiercingVision extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShrineOfPiercingVision(final ShrineOfPiercingVision card) {
+    private ShrineOfPiercingVision(final ShrineOfPiercingVision card) {
         super(card);
     }
 

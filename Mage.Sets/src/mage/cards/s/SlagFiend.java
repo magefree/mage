@@ -30,7 +30,7 @@ public final class SlagFiend extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInAllGraveyardsCount(new FilterArtifactCard("artifacts")), Duration.EndOfGame)));
     }
 
-    public SlagFiend(final SlagFiend card) {
+    private SlagFiend(final SlagFiend card) {
         super(card);
     }
 

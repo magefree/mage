@@ -35,7 +35,7 @@ public final class RukhEgg extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RukhEgg(final RukhEgg card) {
+    private RukhEgg(final RukhEgg card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class AvatarOfTheResolute extends CardImpl {
         
     }
 
-    public AvatarOfTheResolute(final AvatarOfTheResolute card) {
+    private AvatarOfTheResolute(final AvatarOfTheResolute card) {
         super(card);
     }
 

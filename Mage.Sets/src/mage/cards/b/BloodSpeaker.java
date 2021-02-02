@@ -54,7 +54,7 @@ public final class BloodSpeaker extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), filter, false));
     }
 
-    public BloodSpeaker(final BloodSpeaker card) {
+    private BloodSpeaker(final BloodSpeaker card) {
         super(card);
     }
 

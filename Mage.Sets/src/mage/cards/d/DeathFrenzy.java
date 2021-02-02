@@ -31,7 +31,7 @@ public final class DeathFrenzy extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new DeathFrenzyDelayedTriggeredAbility()));
     }
 
-    public DeathFrenzy(final DeathFrenzy card) {
+    private DeathFrenzy(final DeathFrenzy card) {
         super(card);
     }
 

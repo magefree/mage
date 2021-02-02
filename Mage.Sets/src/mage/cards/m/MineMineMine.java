@@ -49,7 +49,7 @@ public final class MineMineMine extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ShuffleHandGraveyardAllEffect(), false));
     }
 
-    public MineMineMine(final MineMineMine card) {
+    private MineMineMine(final MineMineMine card) {
         super(card);
     }
 

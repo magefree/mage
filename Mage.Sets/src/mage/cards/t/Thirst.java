@@ -45,7 +45,7 @@ public final class Thirst extends CardImpl {
             TargetController.YOU, false));
     }
 
-    public Thirst(final Thirst card) {
+    private Thirst(final Thirst card) {
         super(card);
     }
 

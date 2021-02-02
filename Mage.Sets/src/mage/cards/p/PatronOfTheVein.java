@@ -64,7 +64,7 @@ public final class PatronOfTheVein extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public PatronOfTheVein(final PatronOfTheVein card) {
+    private PatronOfTheVein(final PatronOfTheVein card) {
         super(card);
     }
 

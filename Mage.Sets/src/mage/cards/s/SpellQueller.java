@@ -63,7 +63,7 @@ public final class SpellQueller extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public SpellQueller(final SpellQueller card) {
+    private SpellQueller(final SpellQueller card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class ProudMentor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ProudMentor(final ProudMentor card) {
+    private ProudMentor(final ProudMentor card) {
         super(card);
     }
 

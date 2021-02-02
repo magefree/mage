@@ -43,7 +43,7 @@ public final class HarshJustice extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new HarshJusticeTriggeredAbility()));
     }
 
-    public HarshJustice(final HarshJustice card) {
+    private HarshJustice(final HarshJustice card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class AvenArcher extends CardImpl {
 		this.addAbility(ability);
     }
 
-    public AvenArcher(final AvenArcher card) {
+    private AvenArcher(final AvenArcher card) {
         super(card);
     }
 

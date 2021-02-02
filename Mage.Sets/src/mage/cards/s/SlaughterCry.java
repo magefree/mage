@@ -31,7 +31,7 @@ public final class SlaughterCry extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public SlaughterCry(final SlaughterCry card) {
+    private SlaughterCry(final SlaughterCry card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class Dragonrage extends CardImpl {
         
     }
 
-    public Dragonrage(final Dragonrage card) {
+    private Dragonrage(final Dragonrage card) {
         super(card);
     }
 

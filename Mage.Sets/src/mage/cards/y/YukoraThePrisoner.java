@@ -44,7 +44,7 @@ public final class YukoraThePrisoner extends CardImpl {
 
     }
 
-    public YukoraThePrisoner(final YukoraThePrisoner card) {
+    private YukoraThePrisoner(final YukoraThePrisoner card) {
         super(card);
     }
 

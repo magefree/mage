@@ -25,7 +25,7 @@ public final class AnabaBodyguard extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public AnabaBodyguard(final AnabaBodyguard card) {
+    private AnabaBodyguard(final AnabaBodyguard card) {
         super(card);
     }
 

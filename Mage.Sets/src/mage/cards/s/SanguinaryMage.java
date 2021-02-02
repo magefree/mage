@@ -26,7 +26,7 @@ public final class SanguinaryMage extends CardImpl {
         this.addAbility(new ProwessAbility());
     }
 
-    public SanguinaryMage(final SanguinaryMage card) {
+    private SanguinaryMage(final SanguinaryMage card) {
         super(card);
     }
 

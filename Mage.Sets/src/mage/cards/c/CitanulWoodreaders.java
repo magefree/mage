@@ -38,7 +38,7 @@ public final class CitanulWoodreaders extends CardImpl {
         ));
     }
 
-    public CitanulWoodreaders(final CitanulWoodreaders card) {
+    private CitanulWoodreaders(final CitanulWoodreaders card) {
         super(card);
     }
 

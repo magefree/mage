@@ -26,7 +26,7 @@ public final class ArcboundWanderer extends CardImpl {
 
     }
 
-    public ArcboundWanderer(final ArcboundWanderer card) {
+    private ArcboundWanderer(final ArcboundWanderer card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class WildernessElemental extends CardImpl {
          this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
    }
 
-    public WildernessElemental(final WildernessElemental card) {
+    private WildernessElemental(final WildernessElemental card) {
         super(card);
     }
 

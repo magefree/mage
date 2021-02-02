@@ -51,7 +51,7 @@ public final class DominariasJudgment extends CardImpl {
                 StaticFilters.FILTER_PERMANENT_CREATURE, false), new PermanentsOnTheBattlefieldCondition(filterForest)," and from green if you control a Forest"));
     }
 
-    public DominariasJudgment(final DominariasJudgment card) {
+    private DominariasJudgment(final DominariasJudgment card) {
         super(card);
     }
 

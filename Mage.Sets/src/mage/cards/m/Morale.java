@@ -24,7 +24,7 @@ public final class Morale extends CardImpl {
 
     }
 
-    public Morale(final Morale card) {
+    private Morale(final Morale card) {
         super(card);
     }
 

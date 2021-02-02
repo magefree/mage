@@ -31,7 +31,7 @@ public final class WindKinRaiders extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WindKinRaiders(final WindKinRaiders card) {
+    private WindKinRaiders(final WindKinRaiders card) {
         super(card);
     }
 

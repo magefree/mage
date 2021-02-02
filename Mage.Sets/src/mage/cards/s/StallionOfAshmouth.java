@@ -37,7 +37,7 @@ public final class StallionOfAshmouth extends CardImpl {
                 .addHint(DeliriumHint.instance));
     }
 
-    public StallionOfAshmouth(final StallionOfAshmouth card) {
+    private StallionOfAshmouth(final StallionOfAshmouth card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class VerixBladewing extends CardImpl {
                         "a legendary 4/4 red Dragon creature token with flying."));
     }
 
-    public VerixBladewing(final VerixBladewing card) {
+    private VerixBladewing(final VerixBladewing card) {
         super(card);
     }
 

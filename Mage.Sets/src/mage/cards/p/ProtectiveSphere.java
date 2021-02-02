@@ -39,7 +39,7 @@ public final class ProtectiveSphere extends CardImpl {
 
     }
 
-    public ProtectiveSphere(final ProtectiveSphere card) {
+    private ProtectiveSphere(final ProtectiveSphere card) {
         super(card);
     }
 

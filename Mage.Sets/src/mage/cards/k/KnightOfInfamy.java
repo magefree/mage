@@ -31,7 +31,7 @@ public final class KnightOfInfamy extends CardImpl {
         this.addAbility(new ExaltedAbility());
     }
 
-    public KnightOfInfamy(final KnightOfInfamy card) {
+    private KnightOfInfamy(final KnightOfInfamy card) {
         super(card);
     }
 

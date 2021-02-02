@@ -42,7 +42,7 @@ public final class WallOfResurgence extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WallOfResurgence(final WallOfResurgence card) {
+    private WallOfResurgence(final WallOfResurgence card) {
         super(card);
     }
 

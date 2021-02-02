@@ -31,7 +31,7 @@ public final class Rageform extends CardImpl {
                 new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
-    public Rageform(final Rageform card) {
+    private Rageform(final Rageform card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class WhispersOfTheMuse extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public WhispersOfTheMuse(final WhispersOfTheMuse card) {
+    private WhispersOfTheMuse(final WhispersOfTheMuse card) {
         super(card);
     }
 

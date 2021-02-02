@@ -33,7 +33,7 @@ public final class SkywiseTeachings extends CardImpl {
 
     }
 
-    public SkywiseTeachings(final SkywiseTeachings card) {
+    private SkywiseTeachings(final SkywiseTeachings card) {
         super(card);
     }
 

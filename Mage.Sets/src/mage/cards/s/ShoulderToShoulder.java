@@ -24,7 +24,7 @@ public final class ShoulderToShoulder extends CardImpl {
         getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public ShoulderToShoulder(final ShoulderToShoulder card) {
+    private ShoulderToShoulder(final ShoulderToShoulder card) {
         super(card);
     }
 

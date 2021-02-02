@@ -28,7 +28,7 @@ public final class DrakeHaven extends CardImpl {
         );
     }
 
-    public DrakeHaven(final DrakeHaven card) {
+    private DrakeHaven(final DrakeHaven card) {
         super(card);
     }
 

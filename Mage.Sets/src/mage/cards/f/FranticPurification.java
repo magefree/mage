@@ -28,7 +28,7 @@ public final class FranticPurification extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{W}")));
     }
 
-    public FranticPurification(final FranticPurification card) {
+    private FranticPurification(final FranticPurification card) {
         super(card);
     }
 

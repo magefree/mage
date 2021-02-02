@@ -25,7 +25,7 @@ public final class CephalidAristocrat extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new MillCardsControllerEffect(2)));
     }
 
-    public CephalidAristocrat(final CephalidAristocrat card) {
+    private CephalidAristocrat(final CephalidAristocrat card) {
         super(card);
     }
 

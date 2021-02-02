@@ -40,7 +40,7 @@ public final class ParallaxInhibitor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ParallaxInhibitor(final ParallaxInhibitor card) {
+    private ParallaxInhibitor(final ParallaxInhibitor card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class FightingDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public FightingDrake(final FightingDrake card) {
+    private FightingDrake(final FightingDrake card) {
         super(card);
     }
 

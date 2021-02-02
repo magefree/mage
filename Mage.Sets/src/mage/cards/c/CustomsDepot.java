@@ -30,7 +30,7 @@ public final class CustomsDepot extends CardImpl {
         ));
     }
 
-    public CustomsDepot(final CustomsDepot card) {
+    private CustomsDepot(final CustomsDepot card) {
         super(card);
     }
 

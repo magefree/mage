@@ -51,7 +51,7 @@ public final class EnchantmentAlteration extends CardImpl {
 
     }
 
-    public EnchantmentAlteration(final EnchantmentAlteration card) {
+    private EnchantmentAlteration(final EnchantmentAlteration card) {
         super(card);
     }
 

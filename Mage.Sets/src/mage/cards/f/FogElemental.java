@@ -32,7 +32,7 @@ public final class FogElemental extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())), false));
     }
 
-    public FogElemental(final FogElemental card) {
+    private FogElemental(final FogElemental card) {
         super(card);
     }
 

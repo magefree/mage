@@ -43,7 +43,7 @@ public final class GolgariGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GolgariGuildmage(final GolgariGuildmage card) {
+    private GolgariGuildmage(final GolgariGuildmage card) {
         super(card);
     }
 

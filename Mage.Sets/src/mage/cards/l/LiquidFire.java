@@ -35,7 +35,7 @@ public final class LiquidFire extends CardImpl {
 
     }
 
-    public LiquidFire(final LiquidFire card) {
+    private LiquidFire(final LiquidFire card) {
         super(card);
     }
 

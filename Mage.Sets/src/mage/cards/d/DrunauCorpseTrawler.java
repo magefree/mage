@@ -42,7 +42,7 @@ public final class DrunauCorpseTrawler extends CardImpl {
 
     }
 
-    public DrunauCorpseTrawler(final DrunauCorpseTrawler card) {
+    private DrunauCorpseTrawler(final DrunauCorpseTrawler card) {
         super(card);
     }
 

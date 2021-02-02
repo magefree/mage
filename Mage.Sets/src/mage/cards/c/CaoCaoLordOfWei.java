@@ -37,7 +37,7 @@ public final class CaoCaoLordOfWei extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public CaoCaoLordOfWei(final CaoCaoLordOfWei card) {
+    private CaoCaoLordOfWei(final CaoCaoLordOfWei card) {
         super(card);
     }
 

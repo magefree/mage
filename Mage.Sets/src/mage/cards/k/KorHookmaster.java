@@ -42,7 +42,7 @@ public final class KorHookmaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KorHookmaster(final KorHookmaster card) {
+    private KorHookmaster(final KorHookmaster card) {
         super(card);
     }
 

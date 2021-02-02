@@ -43,7 +43,7 @@ public final class Erosion extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.CONTROLLER_ATTACHED_TO, false, true, "At the beginning of the upkeep of enchanted land's controller, "));
     }
 
-    public Erosion(final Erosion card) {
+    private Erosion(final Erosion card) {
         super(card);
     }
 

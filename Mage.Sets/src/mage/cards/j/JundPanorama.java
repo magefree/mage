@@ -44,7 +44,7 @@ public final class JundPanorama extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JundPanorama(final JundPanorama card) {
+    private JundPanorama(final JundPanorama card) {
         super(card);
     }
 

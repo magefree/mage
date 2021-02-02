@@ -42,7 +42,7 @@ public final class Disappear extends CardImpl {
         
     }
 
-    public Disappear(final Disappear card) {
+    private Disappear(final Disappear card) {
         super(card);
     }
 

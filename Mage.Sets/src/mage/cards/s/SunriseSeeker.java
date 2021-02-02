@@ -32,7 +32,7 @@ public final class SunriseSeeker extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect()));
     }
 
-    public SunriseSeeker(final SunriseSeeker card) {
+    private SunriseSeeker(final SunriseSeeker card) {
         super(card);
     }
 

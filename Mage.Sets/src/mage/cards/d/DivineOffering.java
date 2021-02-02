@@ -29,7 +29,7 @@ public final class DivineOffering extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
-    public DivineOffering(final DivineOffering card) {
+    private DivineOffering(final DivineOffering card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class RealityRipple extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public RealityRipple(final RealityRipple card) {
+    private RealityRipple(final RealityRipple card) {
         super(card);
     }
 

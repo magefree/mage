@@ -53,7 +53,7 @@ public final class ShannaSisaysLegacy extends CardImpl {
         ));
     }
 
-    public ShannaSisaysLegacy(final ShannaSisaysLegacy card) {
+    private ShannaSisaysLegacy(final ShannaSisaysLegacy card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class MountainBandit extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public MountainBandit(final MountainBandit card) {
+    private MountainBandit(final MountainBandit card) {
         super(card);
     }
 

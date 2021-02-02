@@ -28,7 +28,7 @@ public final class BanefulOmen extends CardImpl {
         this.addAbility(new BanefulOmenTriggeredAbility());
     }
 
-    public BanefulOmen(final BanefulOmen card) {
+    private BanefulOmen(final BanefulOmen card) {
         super(card);
     }
 

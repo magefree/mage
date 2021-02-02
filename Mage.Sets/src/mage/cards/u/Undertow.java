@@ -27,7 +27,7 @@ public final class Undertow extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UndertowEffect()));
     }
 
-    public Undertow(final Undertow card) {
+    private Undertow(final Undertow card) {
         super(card);
     }
 

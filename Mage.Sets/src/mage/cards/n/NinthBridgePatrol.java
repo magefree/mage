@@ -41,7 +41,7 @@ public final class NinthBridgePatrol extends CardImpl {
                 "Whenever another creature you control leaves the battlefield, ", false));
     }
 
-    public NinthBridgePatrol(final NinthBridgePatrol card) {
+    private NinthBridgePatrol(final NinthBridgePatrol card) {
         super(card);
     }
 

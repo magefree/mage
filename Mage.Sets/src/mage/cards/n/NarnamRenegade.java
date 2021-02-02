@@ -41,7 +41,7 @@ public final class NarnamRenegade extends CardImpl {
         );
     }
 
-    public NarnamRenegade(final NarnamRenegade card) {
+    private NarnamRenegade(final NarnamRenegade card) {
         super(card);
     }
 

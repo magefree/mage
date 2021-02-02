@@ -24,7 +24,7 @@ public final class WithstandDeath extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WithstandDeath(final WithstandDeath card) {
+    private WithstandDeath(final WithstandDeath card) {
         super(card);
     }
 

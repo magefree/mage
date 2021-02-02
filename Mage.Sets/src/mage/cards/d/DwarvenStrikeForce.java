@@ -41,7 +41,7 @@ public final class DwarvenStrikeForce extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DwarvenStrikeForce(final DwarvenStrikeForce card) {
+    private DwarvenStrikeForce(final DwarvenStrikeForce card) {
         super(card);
     }
 

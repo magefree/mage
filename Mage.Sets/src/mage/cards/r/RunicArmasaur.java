@@ -33,7 +33,7 @@ public final class RunicArmasaur extends CardImpl {
         this.addAbility(new RunicArmasaurTriggeredAbility());
     }
 
-    public RunicArmasaur(final RunicArmasaur card) {
+    private RunicArmasaur(final RunicArmasaur card) {
         super(card);
     }
 

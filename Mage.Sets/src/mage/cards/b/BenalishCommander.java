@@ -52,7 +52,7 @@ public final class BenalishCommander extends CardImpl {
         this.addAbility(new BenalishCommanderTriggeredAbility());
     }
 
-    public BenalishCommander(final BenalishCommander card) {
+    private BenalishCommander(final BenalishCommander card) {
         super(card);
     }
 

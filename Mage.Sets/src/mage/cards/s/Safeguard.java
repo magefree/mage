@@ -31,7 +31,7 @@ public final class Safeguard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Safeguard(final Safeguard card) {
+    private Safeguard(final Safeguard card) {
         super(card);
     }
 

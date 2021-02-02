@@ -52,7 +52,7 @@ public final class UtopiaMycon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UtopiaMycon(final UtopiaMycon card) {
+    private UtopiaMycon(final UtopiaMycon card) {
         super(card);
     }
 

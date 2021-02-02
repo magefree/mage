@@ -53,7 +53,7 @@ public final class FungalPlots extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public FungalPlots(final FungalPlots card) {
+    private FungalPlots(final FungalPlots card) {
         super(card);
     }
 

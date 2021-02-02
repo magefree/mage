@@ -46,7 +46,7 @@ public final class Chewbacca extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Chewbacca(final Chewbacca card) {
+    private Chewbacca(final Chewbacca card) {
         super(card);
     }
 

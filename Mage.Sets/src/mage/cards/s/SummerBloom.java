@@ -22,7 +22,7 @@ public final class SummerBloom extends CardImpl {
         this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(3, Duration.EndOfTurn));
     }
 
-    public SummerBloom(final SummerBloom card) {
+    private SummerBloom(final SummerBloom card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class VoroshTheHunter extends CardImpl {
                 new DoIfCostPaid(new AddCountersSourceEffect(CounterType.P1P1.createInstance(6), true), new ManaCostsImpl("{2}{G}")), false));
     }
 
-    public VoroshTheHunter(final VoroshTheHunter card) {
+    private VoroshTheHunter(final VoroshTheHunter card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class TraitorsClutch extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{B}"), TimingRule.INSTANT));
     }
 
-    public TraitorsClutch(final TraitorsClutch card) {
+    private TraitorsClutch(final TraitorsClutch card) {
         super(card);
     }
 

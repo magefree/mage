@@ -28,7 +28,7 @@ public final class NyxFleeceRam extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), TargetController.YOU, false));
     }
 
-    public NyxFleeceRam(final NyxFleeceRam card) {
+    private NyxFleeceRam(final NyxFleeceRam card) {
         super(card);
     }
 

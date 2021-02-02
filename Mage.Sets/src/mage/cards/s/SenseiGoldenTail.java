@@ -56,7 +56,7 @@ public final class SenseiGoldenTail extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SenseiGoldenTail(final SenseiGoldenTail card) {
+    private SenseiGoldenTail(final SenseiGoldenTail card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class RootElemental extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_CREATURE_A)));
     }
 
-    public RootElemental(final RootElemental card) {
+    private RootElemental(final RootElemental card) {
         super(card);
     }
 

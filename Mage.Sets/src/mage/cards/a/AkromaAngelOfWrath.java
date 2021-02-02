@@ -34,7 +34,7 @@ public final class AkromaAngelOfWrath extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK, ObjectColor.RED));
     }
 
-    public AkromaAngelOfWrath(final AkromaAngelOfWrath card) {
+    private AkromaAngelOfWrath(final AkromaAngelOfWrath card) {
         super(card);
     }
 

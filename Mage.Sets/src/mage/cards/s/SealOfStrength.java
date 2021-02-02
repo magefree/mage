@@ -29,7 +29,7 @@ public final class SealOfStrength extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SealOfStrength(final SealOfStrength card) {
+    private SealOfStrength(final SealOfStrength card) {
         super(card);
     }
 

@@ -57,7 +57,7 @@ public final class AjaniMentorOfHeroes extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GainLifeEffect(100), -8));
     }
 
-    public AjaniMentorOfHeroes(final AjaniMentorOfHeroes card) {
+    private AjaniMentorOfHeroes(final AjaniMentorOfHeroes card) {
         super(card);
     }
 

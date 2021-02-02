@@ -50,7 +50,7 @@ public final class OppressiveRays extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OppressiveRaysCostModificationEffect()));
     }
 
-    public OppressiveRays(final OppressiveRays card) {
+    private OppressiveRays(final OppressiveRays card) {
         super(card);
     }
 

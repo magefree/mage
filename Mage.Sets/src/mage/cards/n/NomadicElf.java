@@ -28,7 +28,7 @@ public final class NomadicElf extends CardImpl {
         this.addAbility(new AnyColorManaAbility(new ManaCostsImpl("{1}{G}")));
     }
 
-    public NomadicElf(final NomadicElf card) {
+    private NomadicElf(final NomadicElf card) {
         super(card);
     }
 

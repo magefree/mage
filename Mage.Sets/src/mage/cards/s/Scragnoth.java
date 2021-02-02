@@ -30,7 +30,7 @@ public final class Scragnoth extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
     }
 
-    public Scragnoth(final Scragnoth card) {
+    private Scragnoth(final Scragnoth card) {
         super(card);
     }
 

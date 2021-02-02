@@ -35,7 +35,7 @@ public final class HematiteTalisman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HematiteTalisman(final HematiteTalisman card) {
+    private HematiteTalisman(final HematiteTalisman card) {
         super(card);
     }
 

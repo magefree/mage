@@ -32,7 +32,7 @@ public final class AngelOfTheGodPharaoh extends CardImpl {
 
     }
 
-    public AngelOfTheGodPharaoh(final AngelOfTheGodPharaoh card) {
+    private AngelOfTheGodPharaoh(final AngelOfTheGodPharaoh card) {
         super(card);
     }
 

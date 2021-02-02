@@ -41,7 +41,7 @@ public final class BrokenVisage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public BrokenVisage(final BrokenVisage card) {
+    private BrokenVisage(final BrokenVisage card) {
         super(card);
     }
 

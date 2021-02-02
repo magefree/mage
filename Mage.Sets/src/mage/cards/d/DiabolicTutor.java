@@ -22,7 +22,7 @@ public final class DiabolicTutor extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(target));
     }
 
-    public DiabolicTutor(final DiabolicTutor card) {
+    private DiabolicTutor(final DiabolicTutor card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class PhyrexianTribute extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
-    public PhyrexianTribute(final PhyrexianTribute card) {
+    private PhyrexianTribute(final PhyrexianTribute card) {
         super(card);
     }
 

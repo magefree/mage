@@ -31,7 +31,7 @@ public final class HallOfTriumph extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HallOfTriumphBoostControlledEffect()));
     }
 
-    public HallOfTriumph(final HallOfTriumph card) {
+    private HallOfTriumph(final HallOfTriumph card) {
         super(card);
     }
 

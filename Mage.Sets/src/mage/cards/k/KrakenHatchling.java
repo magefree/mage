@@ -24,7 +24,7 @@ public final class KrakenHatchling extends CardImpl {
 
     }
 
-    public KrakenHatchling(final KrakenHatchling card) {
+    private KrakenHatchling(final KrakenHatchling card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class LegionLieutenant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public LegionLieutenant(final LegionLieutenant card) {
+    private LegionLieutenant(final LegionLieutenant card) {
         super(card);
     }
 

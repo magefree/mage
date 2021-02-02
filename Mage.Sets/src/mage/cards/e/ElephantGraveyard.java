@@ -34,7 +34,7 @@ public final class ElephantGraveyard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElephantGraveyard(final ElephantGraveyard card) {
+    private ElephantGraveyard(final ElephantGraveyard card) {
         super(card);
     }
 

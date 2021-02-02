@@ -29,7 +29,7 @@ public final class WojekSiren extends CardImpl {
 
     }
 
-    public WojekSiren(final WojekSiren card) {
+    private WojekSiren(final WojekSiren card) {
         super(card);
     }
 

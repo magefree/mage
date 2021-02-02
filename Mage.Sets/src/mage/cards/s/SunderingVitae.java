@@ -27,7 +27,7 @@ public final class SunderingVitae extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public SunderingVitae(final SunderingVitae card) {
+    private SunderingVitae(final SunderingVitae card) {
         super(card);
     }
 

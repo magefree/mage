@@ -27,7 +27,7 @@ public final class MoggFlunkies extends CardImpl {
         this.addAbility(CantBlockAloneAbility.getInstance());
     }
 
-    public MoggFlunkies(final MoggFlunkies card) {
+    private MoggFlunkies(final MoggFlunkies card) {
         super(card);
     }
 

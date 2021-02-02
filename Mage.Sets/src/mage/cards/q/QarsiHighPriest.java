@@ -37,7 +37,7 @@ public final class QarsiHighPriest extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QarsiHighPriest(final QarsiHighPriest card) {
+    private QarsiHighPriest(final QarsiHighPriest card) {
         super(card);
     }
 

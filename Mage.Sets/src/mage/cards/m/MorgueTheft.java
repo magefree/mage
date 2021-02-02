@@ -28,7 +28,7 @@ public final class MorgueTheft extends CardImpl {
 
     }
 
-    public MorgueTheft(final MorgueTheft card) {
+    private MorgueTheft(final MorgueTheft card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class DeathcoilWurm extends CardImpl {
         this.addAbility(DamageAsThoughNotBlockedAbility.getInstance());
     }
 
-    public DeathcoilWurm(final DeathcoilWurm card) {
+    private DeathcoilWurm(final DeathcoilWurm card) {
         super(card);
     }
 

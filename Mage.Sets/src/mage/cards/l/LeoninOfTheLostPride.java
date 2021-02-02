@@ -33,7 +33,7 @@ public final class LeoninOfTheLostPride extends CardImpl {
         this.addAbility(diesTriggeredAbility);
     }
 
-    public LeoninOfTheLostPride(final LeoninOfTheLostPride card) {
+    private LeoninOfTheLostPride(final LeoninOfTheLostPride card) {
         super(card);
     }
 

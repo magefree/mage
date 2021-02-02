@@ -25,7 +25,7 @@ public final class KindledFury extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public KindledFury(final KindledFury card) {
+    private KindledFury(final KindledFury card) {
         super(card);
     }
 

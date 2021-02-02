@@ -36,7 +36,7 @@ public final class LurkingInformant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LurkingInformant(final LurkingInformant card) {
+    private LurkingInformant(final LurkingInformant card) {
         super(card);
     }
 

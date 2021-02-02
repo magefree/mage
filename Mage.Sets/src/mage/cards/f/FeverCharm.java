@@ -45,7 +45,7 @@ public final class FeverCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public FeverCharm(final FeverCharm card) {
+    private FeverCharm(final FeverCharm card) {
         super(card);
     }
 

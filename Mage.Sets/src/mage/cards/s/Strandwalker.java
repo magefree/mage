@@ -33,7 +33,7 @@ public final class Strandwalker extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4)));
     }
 
-    public Strandwalker(final Strandwalker card) {
+    private Strandwalker(final Strandwalker card) {
         super(card);
     }
 

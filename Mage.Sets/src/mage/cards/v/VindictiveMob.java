@@ -41,7 +41,7 @@ public final class VindictiveMob extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public VindictiveMob(final VindictiveMob card) {
+    private VindictiveMob(final VindictiveMob card) {
         super(card);
     }
 

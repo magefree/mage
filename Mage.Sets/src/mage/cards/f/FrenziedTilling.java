@@ -28,7 +28,7 @@ public final class FrenziedTilling extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true));
     }
 
-    public FrenziedTilling(final FrenziedTilling card) {
+    private FrenziedTilling(final FrenziedTilling card) {
         super(card);
     }
 

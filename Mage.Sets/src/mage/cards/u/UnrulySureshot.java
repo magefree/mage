@@ -49,7 +49,7 @@ public final class UnrulySureshot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnrulySureshot(final UnrulySureshot card) {
+    private UnrulySureshot(final UnrulySureshot card) {
         super(card);
     }
 

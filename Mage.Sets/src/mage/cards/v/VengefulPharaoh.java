@@ -44,7 +44,7 @@ public final class VengefulPharaoh extends CardImpl {
         this.addAbility(new VengefulPharaohTriggeredAbility());
     }
 
-    public VengefulPharaoh(final VengefulPharaoh card) {
+    private VengefulPharaoh(final VengefulPharaoh card) {
         super(card);
     }
 

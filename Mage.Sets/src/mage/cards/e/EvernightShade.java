@@ -32,7 +32,7 @@ public final class EvernightShade extends CardImpl {
         this.addAbility(new UndyingAbility());
     }
 
-    public EvernightShade(final EvernightShade card) {
+    private EvernightShade(final EvernightShade card) {
         super(card);
     }
 

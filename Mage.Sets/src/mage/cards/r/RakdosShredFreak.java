@@ -27,7 +27,7 @@ public final class RakdosShredFreak extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public RakdosShredFreak(final RakdosShredFreak card) {
+    private RakdosShredFreak(final RakdosShredFreak card) {
         super(card);
     }
 

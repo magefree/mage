@@ -31,7 +31,7 @@ public final class PredatoryNightstalker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PredatoryNightstalker(final PredatoryNightstalker card) {
+    private PredatoryNightstalker(final PredatoryNightstalker card) {
         super(card);
     }
 

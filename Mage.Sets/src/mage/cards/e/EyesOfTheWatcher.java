@@ -30,7 +30,7 @@ public final class EyesOfTheWatcher extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new ScryEffect(2), new ManaCostsImpl("{1}")), filter, false));
     }
 
-    public EyesOfTheWatcher(final EyesOfTheWatcher card) {
+    private EyesOfTheWatcher(final EyesOfTheWatcher card) {
         super(card);
     }
 

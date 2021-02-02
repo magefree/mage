@@ -28,7 +28,7 @@ public final class EmberBeast extends CardImpl {
         this.addAbility(CantBlockAloneAbility.getInstance());
     }
 
-    public EmberBeast(final EmberBeast card) {
+    private EmberBeast(final EmberBeast card) {
         super(card);
     }
 

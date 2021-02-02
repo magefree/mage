@@ -33,7 +33,7 @@ public final class Purge extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }
 
-    public Purge(final Purge card) {
+    private Purge(final Purge card) {
         super(card);
     }
 

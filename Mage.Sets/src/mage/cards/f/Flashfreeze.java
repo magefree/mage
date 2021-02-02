@@ -34,7 +34,7 @@ public final class Flashfreeze extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
-    public Flashfreeze(final Flashfreeze card) {
+    private Flashfreeze(final Flashfreeze card) {
         super(card);
     }
 

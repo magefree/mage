@@ -29,7 +29,7 @@ public final class CrucibleOfFire extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(3, 3, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public CrucibleOfFire(final CrucibleOfFire card) {
+    private CrucibleOfFire(final CrucibleOfFire card) {
         super(card);
     }
 

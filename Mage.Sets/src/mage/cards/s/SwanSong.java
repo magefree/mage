@@ -38,7 +38,7 @@ public final class SwanSong extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public SwanSong(final SwanSong card) {
+    private SwanSong(final SwanSong card) {
         super(card);
     }
 

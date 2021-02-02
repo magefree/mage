@@ -28,7 +28,7 @@ public final class ReverseTheSands extends CardImpl {
         this.getSpellAbility().addEffect(new ReverseTheSandsEffect());
     }
 
-    public ReverseTheSands(final ReverseTheSands card) {
+    private ReverseTheSands(final ReverseTheSands card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class MinionsMurmurs extends CardImpl {
         this.getSpellAbility().addHint(CreaturesYouControlHint.instance);
     }
 
-    public MinionsMurmurs(final MinionsMurmurs card) {
+    private MinionsMurmurs(final MinionsMurmurs card) {
         super(card);
     }
 

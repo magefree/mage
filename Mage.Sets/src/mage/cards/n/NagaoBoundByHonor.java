@@ -38,7 +38,7 @@ public final class NagaoBoundByHonor extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter, false), false));
     }
 
-    public NagaoBoundByHonor(final NagaoBoundByHonor card) {
+    private NagaoBoundByHonor(final NagaoBoundByHonor card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class UlvenwaldTracker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UlvenwaldTracker(final UlvenwaldTracker card) {
+    private UlvenwaldTracker(final UlvenwaldTracker card) {
         super(card);
     }
 

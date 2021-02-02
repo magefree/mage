@@ -33,7 +33,7 @@ public final class KembaKhaRegent extends CardImpl {
                 TargetController.YOU, false));
     }
 
-    public KembaKhaRegent(final KembaKhaRegent card) {
+    private KembaKhaRegent(final KembaKhaRegent card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class Thunderheads extends CardImpl {
         this.getSpellAbility().addEffect(new ThunderheadsEffect());
     }
 
-    public Thunderheads(final Thunderheads card) {
+    private Thunderheads(final Thunderheads card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class CrushOfTentacles extends CardImpl {
         addAbility(new SurgeAbility(this, "{3}{U}{U}"));
     }
 
-    public CrushOfTentacles(final CrushOfTentacles card) {
+    private CrushOfTentacles(final CrushOfTentacles card) {
         super(card);
     }
 

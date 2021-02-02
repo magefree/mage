@@ -34,7 +34,7 @@ public final class PendulumOfPatterns extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PendulumOfPatterns(final PendulumOfPatterns card) {
+    private PendulumOfPatterns(final PendulumOfPatterns card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class CallToMind extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard")));
     }
 
-    public CallToMind(final CallToMind card) {
+    private CallToMind(final CallToMind card) {
         super(card);
     }
 

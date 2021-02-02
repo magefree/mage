@@ -28,7 +28,7 @@ public final class MirrorGallery extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MirrorGalleryRuleEffect()));
     }
 
-    public MirrorGallery(final MirrorGallery card) {
+    private MirrorGallery(final MirrorGallery card) {
         super(card);
     }
 

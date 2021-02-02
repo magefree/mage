@@ -30,7 +30,7 @@ public final class ForsakeTheWorldly extends CardImpl {
 
     }
 
-    public ForsakeTheWorldly(final ForsakeTheWorldly card) {
+    private ForsakeTheWorldly(final ForsakeTheWorldly card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class SoltariMonk extends CardImpl {
         this.addAbility(ShadowAbility.getInstance());
     }
 
-    public SoltariMonk(final SoltariMonk card) {
+    private SoltariMonk(final SoltariMonk card) {
         super(card);
     }
 

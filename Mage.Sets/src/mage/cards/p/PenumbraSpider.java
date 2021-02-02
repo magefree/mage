@@ -31,7 +31,7 @@ public final class PenumbraSpider extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new PenumbraSpiderToken()), false));
     }
 
-    public PenumbraSpider(final PenumbraSpider card) {
+    private PenumbraSpider(final PenumbraSpider card) {
         super(card);
     }
 

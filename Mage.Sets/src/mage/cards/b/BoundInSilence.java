@@ -34,7 +34,7 @@ public final class BoundInSilence extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
     }
 
-    public BoundInSilence(final BoundInSilence card) {
+    private BoundInSilence(final BoundInSilence card) {
         super(card);
     }
 

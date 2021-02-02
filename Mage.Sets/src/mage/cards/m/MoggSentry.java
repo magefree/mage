@@ -29,7 +29,7 @@ public final class MoggSentry extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public MoggSentry(final MoggSentry card) {
+    private MoggSentry(final MoggSentry card) {
         super(card);
     }
 

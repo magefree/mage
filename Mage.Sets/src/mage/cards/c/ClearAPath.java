@@ -36,7 +36,7 @@ public final class ClearAPath extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public ClearAPath(final ClearAPath card) {
+    private ClearAPath(final ClearAPath card) {
         super(card);
     }
 

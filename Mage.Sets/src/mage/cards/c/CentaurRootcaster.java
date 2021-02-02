@@ -32,7 +32,7 @@ public final class CentaurRootcaster extends CardImpl {
                 true));
     }
 
-    public CentaurRootcaster(final CentaurRootcaster card) {
+    private CentaurRootcaster(final CentaurRootcaster card) {
         super(card);
     }
 

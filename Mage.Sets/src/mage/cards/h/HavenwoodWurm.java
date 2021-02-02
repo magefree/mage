@@ -27,7 +27,7 @@ public final class HavenwoodWurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public HavenwoodWurm(final HavenwoodWurm card) {
+    private HavenwoodWurm(final HavenwoodWurm card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class SteamVines extends CardImpl {
 
     }
 
-    public SteamVines(final SteamVines card) {
+    private SteamVines(final SteamVines card) {
         super(card);
     }
 

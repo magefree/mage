@@ -41,7 +41,7 @@ public final class FemerefArchers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FemerefArchers(final FemerefArchers card) {
+    private FemerefArchers(final FemerefArchers card) {
         super(card);
     }
 

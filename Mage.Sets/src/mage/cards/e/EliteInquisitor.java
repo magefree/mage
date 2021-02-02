@@ -43,7 +43,7 @@ public final class EliteInquisitor extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public EliteInquisitor(final EliteInquisitor card) {
+    private EliteInquisitor(final EliteInquisitor card) {
         super(card);
     }
 

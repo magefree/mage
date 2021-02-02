@@ -35,7 +35,7 @@ public final class DaruMender extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DaruMender(final DaruMender card) {
+    private DaruMender(final DaruMender card) {
         super(card);
     }
 

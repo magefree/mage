@@ -20,7 +20,7 @@ public final class JacesIngenuity extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
     }
 
-    public JacesIngenuity(final JacesIngenuity card) {
+    private JacesIngenuity(final JacesIngenuity card) {
         super(card);
     }
 

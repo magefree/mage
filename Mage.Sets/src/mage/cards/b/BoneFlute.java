@@ -28,7 +28,7 @@ public final class BoneFlute extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BoneFlute(final BoneFlute card) {
+    private BoneFlute(final BoneFlute card) {
         super(card);
     }
 

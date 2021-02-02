@@ -32,7 +32,7 @@ public final class MonCalamariInitiate extends CardImpl {
         this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{U}")));
     }
 
-    public MonCalamariInitiate(final MonCalamariInitiate card) {
+    private MonCalamariInitiate(final MonCalamariInitiate card) {
         super(card);
     }
 

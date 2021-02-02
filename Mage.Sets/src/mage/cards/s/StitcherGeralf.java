@@ -42,7 +42,7 @@ public final class StitcherGeralf extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StitcherGeralf(final StitcherGeralf card) {
+    private StitcherGeralf(final StitcherGeralf card) {
         super(card);
     }
 

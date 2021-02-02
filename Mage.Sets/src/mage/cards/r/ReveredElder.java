@@ -30,7 +30,7 @@ public final class ReveredElder extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{1}")));
     }
 
-    public ReveredElder(final ReveredElder card) {
+    private ReveredElder(final ReveredElder card) {
         super(card);
     }
 

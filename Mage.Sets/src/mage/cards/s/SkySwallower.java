@@ -38,7 +38,7 @@ public final class SkySwallower extends CardImpl {
         addAbility(ability);
     }
 
-    public SkySwallower(final SkySwallower card) {
+    private SkySwallower(final SkySwallower card) {
         super(card);
     }
 

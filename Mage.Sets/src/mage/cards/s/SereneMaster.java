@@ -42,7 +42,7 @@ public final class SereneMaster extends CardImpl {
 
     }
 
-    public SereneMaster(final SereneMaster card) {
+    private SereneMaster(final SereneMaster card) {
         super(card);
     }
 

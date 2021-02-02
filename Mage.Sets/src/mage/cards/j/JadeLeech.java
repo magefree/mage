@@ -38,7 +38,7 @@ public final class JadeLeech extends CardImpl {
                 new SpellsCostIncreasingAllEffect(new ManaCostsImpl("{G}"), filter, TargetController.YOU)));
     }
 
-    public JadeLeech(final JadeLeech card) {
+    private JadeLeech(final JadeLeech card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class Brawl extends CardImpl {
         );
     }
 
-    public Brawl(final Brawl card) {
+    private Brawl(final Brawl card) {
         super(card);
     }
 

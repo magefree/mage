@@ -44,7 +44,7 @@ public final class ManaCache extends CardImpl {
         this.addAbility(new ManaCacheManaAbility());
     }
 
-    public ManaCache(final ManaCache card) {
+    private ManaCache(final ManaCache card) {
         super(card);
     }
 

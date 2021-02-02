@@ -38,7 +38,7 @@ public final class ArenaOfTheAncients extends CardImpl {
         this.addAbility(tapAllLegendsAbility);
     }
     
-    public ArenaOfTheAncients(final ArenaOfTheAncients card) {
+    private ArenaOfTheAncients(final ArenaOfTheAncients card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class ValleyDasher extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public ValleyDasher(final ValleyDasher card) {
+    private ValleyDasher(final ValleyDasher card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class BurrentonForgeTender extends CardImpl {
 
     }
 
-    public BurrentonForgeTender(final BurrentonForgeTender card) {
+    private BurrentonForgeTender(final BurrentonForgeTender card) {
         super(card);
     }
 

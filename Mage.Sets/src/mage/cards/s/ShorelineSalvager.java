@@ -39,7 +39,7 @@ public final class ShorelineSalvager extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true), new PermanentsOnTheBattlefieldCondition(filter), rule));
     }
 
-    public ShorelineSalvager(final ShorelineSalvager card) {
+    private ShorelineSalvager(final ShorelineSalvager card) {
         super(card);
     }
 

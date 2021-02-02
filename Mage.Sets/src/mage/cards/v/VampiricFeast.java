@@ -30,7 +30,7 @@ public final class VampiricFeast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public VampiricFeast(final VampiricFeast card) {
+    private VampiricFeast(final VampiricFeast card) {
         super(card);
     }
 

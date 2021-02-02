@@ -34,7 +34,7 @@ public final class DukharaScavenger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DukharaScavenger(final DukharaScavenger card) {
+    private DukharaScavenger(final DukharaScavenger card) {
         super(card);
     }
 

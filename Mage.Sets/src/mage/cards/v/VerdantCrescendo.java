@@ -35,7 +35,7 @@ public final class VerdantCrescendo extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryGraveyardPutInHandEffect(filter, true));
     }
 
-    public VerdantCrescendo(final VerdantCrescendo card) {
+    private VerdantCrescendo(final VerdantCrescendo card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class AirborneAid extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public AirborneAid(final AirborneAid card) {
+    private AirborneAid(final AirborneAid card) {
         super(card);
     }
 

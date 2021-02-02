@@ -35,7 +35,7 @@ public final class ScarscaleRitual extends CardImpl {
 
     }
 
-    public ScarscaleRitual(final ScarscaleRitual card) {
+    private ScarscaleRitual(final ScarscaleRitual card) {
         super(card);
     }
 

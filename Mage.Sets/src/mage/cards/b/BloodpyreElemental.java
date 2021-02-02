@@ -33,7 +33,7 @@ public final class BloodpyreElemental extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodpyreElemental(final BloodpyreElemental card) {
+    private BloodpyreElemental(final BloodpyreElemental card) {
         super(card);
     }
 

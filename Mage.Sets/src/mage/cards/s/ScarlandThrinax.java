@@ -36,7 +36,7 @@ public final class ScarlandThrinax extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScarlandThrinax(final ScarlandThrinax card) {
+    private ScarlandThrinax(final ScarlandThrinax card) {
         super(card);
     }
 

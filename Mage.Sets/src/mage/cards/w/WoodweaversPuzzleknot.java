@@ -38,7 +38,7 @@ public final class WoodweaversPuzzleknot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WoodweaversPuzzleknot(final WoodweaversPuzzleknot card) {
+    private WoodweaversPuzzleknot(final WoodweaversPuzzleknot card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class Unwind extends CardImpl {
         this.getSpellAbility().addEffect(new UntapLandsEffect(3));
     }
 
-    public Unwind(final Unwind card) {
+    private Unwind(final Unwind card) {
         super(card);
     }
 

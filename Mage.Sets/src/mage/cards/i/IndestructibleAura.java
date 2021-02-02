@@ -23,7 +23,7 @@ public final class IndestructibleAura extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public IndestructibleAura(final IndestructibleAura card) {
+    private IndestructibleAura(final IndestructibleAura card) {
         super(card);
     }
 

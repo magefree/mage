@@ -28,7 +28,7 @@ public final class InfernoJet extends CardImpl {
 
     }
 
-    public InfernoJet(final InfernoJet card) {
+    private InfernoJet(final InfernoJet card) {
         super(card);
     }
 

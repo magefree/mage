@@ -29,7 +29,7 @@ public final class AngelOfFury extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect(), true));
     }
 
-    public AngelOfFury(final AngelOfFury card) {
+    private AngelOfFury(final AngelOfFury card) {
         super(card);
     }
 

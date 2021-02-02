@@ -34,7 +34,7 @@ public final class WarmongersChariot extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public WarmongersChariot(final WarmongersChariot card) {
+    private WarmongersChariot(final WarmongersChariot card) {
         super(card);
     }
 

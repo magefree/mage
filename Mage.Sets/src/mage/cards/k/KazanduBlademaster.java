@@ -33,7 +33,7 @@ public final class KazanduBlademaster extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
 
-    public KazanduBlademaster(final KazanduBlademaster card) {
+    private KazanduBlademaster(final KazanduBlademaster card) {
         super(card);
     }
 

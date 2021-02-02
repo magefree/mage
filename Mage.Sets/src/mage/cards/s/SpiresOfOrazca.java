@@ -49,7 +49,7 @@ public final class SpiresOfOrazca extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpiresOfOrazca(final SpiresOfOrazca card) {
+    private SpiresOfOrazca(final SpiresOfOrazca card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class StaveOff extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public StaveOff(final StaveOff card) {
+    private StaveOff(final StaveOff card) {
         super(card);
     }
 

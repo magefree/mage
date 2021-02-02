@@ -41,7 +41,7 @@ public final class AutumnsVeil extends CardImpl {
         this.getSpellAbility().addEffect(new CantBeTargetedAllEffect(filterTarget2, filterSource, Duration.EndOfTurn));
     }
 
-    public AutumnsVeil(final AutumnsVeil card) {
+    private AutumnsVeil(final AutumnsVeil card) {
         super(card);
     }
 

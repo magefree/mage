@@ -54,7 +54,7 @@ public final class FiremindsResearch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FiremindsResearch(final FiremindsResearch card) {
+    private FiremindsResearch(final FiremindsResearch card) {
         super(card);
     }
 

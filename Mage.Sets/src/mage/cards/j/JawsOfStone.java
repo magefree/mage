@@ -38,7 +38,7 @@ public final class JawsOfStone extends CardImpl {
         
     }
 
-    public JawsOfStone(final JawsOfStone card) {
+    private JawsOfStone(final JawsOfStone card) {
         super(card);
     }
 

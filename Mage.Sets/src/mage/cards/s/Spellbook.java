@@ -26,7 +26,7 @@ public final class Spellbook extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public Spellbook(final Spellbook card) {
+    private Spellbook(final Spellbook card) {
         super(card);
     }
 

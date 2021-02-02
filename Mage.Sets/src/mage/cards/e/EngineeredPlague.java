@@ -28,7 +28,7 @@ public final class EngineeredPlague extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllOfChosenSubtypeEffect(-1, -1, Duration.WhileOnBattlefield, false)));
     }
 
-    public EngineeredPlague(final EngineeredPlague card) {
+    private EngineeredPlague(final EngineeredPlague card) {
         super(card);
     }
 

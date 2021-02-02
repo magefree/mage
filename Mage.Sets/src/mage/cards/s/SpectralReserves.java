@@ -25,7 +25,7 @@ public final class SpectralReserves extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 
-    public SpectralReserves(final SpectralReserves card) {
+    private SpectralReserves(final SpectralReserves card) {
         super(card);
     }
 

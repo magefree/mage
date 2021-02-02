@@ -48,7 +48,7 @@ public final class AuraOfDominion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AuraOfDominion(final AuraOfDominion card) {
+    private AuraOfDominion(final AuraOfDominion card) {
         super(card);
     }
 

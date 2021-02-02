@@ -32,7 +32,7 @@ public final class PackHunt extends CardImpl {
         this.getSpellAbility().addEffect(new PackHuntEffect());
     }
 
-    public PackHunt(final PackHunt card) {
+    private PackHunt(final PackHunt card) {
         super(card);
     }
 

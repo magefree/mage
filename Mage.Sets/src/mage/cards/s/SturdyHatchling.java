@@ -53,7 +53,7 @@ public final class SturdyHatchling extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance(1)), filterBlueSpell, false));
     }
 
-    public SturdyHatchling(final SturdyHatchling card) {
+    private SturdyHatchling(final SturdyHatchling card) {
         super(card);
     }
 

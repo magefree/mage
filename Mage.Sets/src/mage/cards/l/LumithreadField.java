@@ -28,7 +28,7 @@ public final class LumithreadField extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{W}")));
     }
 
-    public LumithreadField(final LumithreadField card) {
+    private LumithreadField(final LumithreadField card) {
         super(card);
     }
 

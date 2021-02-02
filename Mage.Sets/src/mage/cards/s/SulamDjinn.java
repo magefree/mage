@@ -39,7 +39,7 @@ public final class SulamDjinn extends CardImpl {
                         "{this} gets -2/-2 as long as green is the most common color among all permanents or is tied for most common")));
     }
 
-    public SulamDjinn(final SulamDjinn card) {
+    private SulamDjinn(final SulamDjinn card) {
         super(card);
     }
 

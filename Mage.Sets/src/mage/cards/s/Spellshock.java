@@ -28,7 +28,7 @@ public final class Spellshock extends CardImpl {
         this.addAbility(new SpellshockTriggeredAbility());
     }
 
-    public Spellshock(final Spellshock card) {
+    private Spellshock(final Spellshock card) {
         super(card);
     }
 

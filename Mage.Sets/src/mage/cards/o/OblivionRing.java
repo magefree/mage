@@ -42,7 +42,7 @@ public final class OblivionRing extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false));
     }
 
-    public OblivionRing(final OblivionRing card) {
+    private OblivionRing(final OblivionRing card) {
         super(card);
     }
 

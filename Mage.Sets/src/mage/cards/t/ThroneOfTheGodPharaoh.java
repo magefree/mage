@@ -35,7 +35,7 @@ public final class ThroneOfTheGodPharaoh extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new LoseLifeOpponentsEffect(new PermanentsOnBattlefieldCount(filter)), TargetController.YOU, false));
     }
 
-    public ThroneOfTheGodPharaoh(final ThroneOfTheGodPharaoh card) {
+    private ThroneOfTheGodPharaoh(final ThroneOfTheGodPharaoh card) {
         super(card);
     }
 

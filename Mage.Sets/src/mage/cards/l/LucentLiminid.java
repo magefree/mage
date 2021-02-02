@@ -25,7 +25,7 @@ public final class LucentLiminid extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public LucentLiminid(final LucentLiminid card) {
+    private LucentLiminid(final LucentLiminid card) {
         super(card);
     }
 

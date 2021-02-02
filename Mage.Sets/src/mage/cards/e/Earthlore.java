@@ -65,7 +65,7 @@ public final class Earthlore extends CardImpl {
 
     }
 
-    public Earthlore(final Earthlore card) {
+    private Earthlore(final Earthlore card) {
         super(card);
     }
 

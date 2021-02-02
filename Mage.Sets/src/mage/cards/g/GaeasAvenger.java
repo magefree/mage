@@ -41,7 +41,7 @@ public final class GaeasAvenger extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
     }
 
-    public GaeasAvenger(final GaeasAvenger card) {
+    private GaeasAvenger(final GaeasAvenger card) {
         super(card);
     }
 

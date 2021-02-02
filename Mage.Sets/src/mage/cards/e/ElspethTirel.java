@@ -38,7 +38,7 @@ public final class ElspethTirel extends CardImpl {
         this.addAbility(new LoyaltyAbility(new ElspethTirelThirdEffect(), -5));
     }
 
-    public ElspethTirel(final ElspethTirel card) {
+    private ElspethTirel(final ElspethTirel card) {
         super(card);
     }
 

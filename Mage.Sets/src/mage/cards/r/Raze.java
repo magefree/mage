@@ -28,7 +28,7 @@ public final class Raze extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public Raze(final Raze card) {
+    private Raze(final Raze card) {
         super(card);
     }
 

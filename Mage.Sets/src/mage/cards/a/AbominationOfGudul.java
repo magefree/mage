@@ -38,7 +38,7 @@ public final class AbominationOfGudul extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{B}{G}{U}")));
     }
 
-    public AbominationOfGudul(final AbominationOfGudul card) {
+    private AbominationOfGudul(final AbominationOfGudul card) {
         super(card);
     }
 

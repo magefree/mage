@@ -56,7 +56,7 @@ public final class NehebTheWorthy extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardEachPlayerEffect(), false));
     }
 
-    public NehebTheWorthy(final NehebTheWorthy card) {
+    private NehebTheWorthy(final NehebTheWorthy card) {
         super(card);
     }
 

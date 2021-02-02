@@ -27,7 +27,7 @@ public final class CrystalGolem extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new PhaseOutSourceEffect(), TargetController.YOU, false));
     }
 
-    public CrystalGolem(final CrystalGolem card) {
+    private CrystalGolem(final CrystalGolem card) {
         super(card);
     }
 

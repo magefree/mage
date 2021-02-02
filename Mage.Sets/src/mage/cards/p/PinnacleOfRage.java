@@ -25,7 +25,7 @@ public final class PinnacleOfRage extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public PinnacleOfRage(final PinnacleOfRage card) {
+    private PinnacleOfRage(final PinnacleOfRage card) {
         super(card);
     }
 

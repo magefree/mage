@@ -68,7 +68,7 @@ public final class RalZarek extends CardImpl {
 
     }
 
-    public RalZarek(final RalZarek card) {
+    private RalZarek(final RalZarek card) {
         super(card);
     }
 

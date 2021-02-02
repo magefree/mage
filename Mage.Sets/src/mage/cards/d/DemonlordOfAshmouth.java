@@ -42,7 +42,7 @@ public final class DemonlordOfAshmouth extends CardImpl {
         this.addAbility(new UndyingAbility());
     }
 
-    public DemonlordOfAshmouth(final DemonlordOfAshmouth card) {
+    private DemonlordOfAshmouth(final DemonlordOfAshmouth card) {
         super(card);
     }
 

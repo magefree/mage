@@ -38,7 +38,7 @@ public final class FenHauler extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public FenHauler(final FenHauler card) {
+    private FenHauler(final FenHauler card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class CourtlyProvocateur extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public CourtlyProvocateur(final CourtlyProvocateur card) {
+    private CourtlyProvocateur(final CourtlyProvocateur card) {
         super(card);
     }
 

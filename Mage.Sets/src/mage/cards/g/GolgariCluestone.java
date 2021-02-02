@@ -38,7 +38,7 @@ public final class GolgariCluestone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GolgariCluestone(final GolgariCluestone card) {
+    private GolgariCluestone(final GolgariCluestone card) {
         super(card);
     }
 

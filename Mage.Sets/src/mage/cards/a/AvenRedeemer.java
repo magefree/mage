@@ -38,7 +38,7 @@ public final class AvenRedeemer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AvenRedeemer(final AvenRedeemer card) {
+    private AvenRedeemer(final AvenRedeemer card) {
         super(card);
     }
 

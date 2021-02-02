@@ -32,7 +32,7 @@ public final class TragicSlip extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TragicSlip(final TragicSlip card) {
+    private TragicSlip(final TragicSlip card) {
         super(card);
     }
 

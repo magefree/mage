@@ -26,7 +26,7 @@ public final class GlistenerElf extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
     }
 
-    public GlistenerElf(final GlistenerElf card) {
+    private GlistenerElf(final GlistenerElf card) {
         super(card);
     }
 

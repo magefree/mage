@@ -36,7 +36,7 @@ public final class TorrentOfStone extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility(new SacrificeTargetCost(new TargetControlledPermanent(2,2, filterSacrifice, false))));
     }
 
-    public TorrentOfStone(final TorrentOfStone card) {
+    private TorrentOfStone(final TorrentOfStone card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class ThrashOfRaptors extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThrashOfRaptors(final ThrashOfRaptors card) {
+    private ThrashOfRaptors(final ThrashOfRaptors card) {
         super(card);
     }
 

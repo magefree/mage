@@ -32,7 +32,7 @@ public final class CarrionWall extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }
 
-    public CarrionWall(final CarrionWall card) {
+    private CarrionWall(final CarrionWall card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class SpiritMantle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpiritMantle(final SpiritMantle card) {
+    private SpiritMantle(final SpiritMantle card) {
         super(card);
     }
 

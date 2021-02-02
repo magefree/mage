@@ -34,7 +34,7 @@ public final class TrashForTreasure extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filterCard));
     }
 
-    public TrashForTreasure(final TrashForTreasure card) {
+    private TrashForTreasure(final TrashForTreasure card) {
         super(card);
     }
 

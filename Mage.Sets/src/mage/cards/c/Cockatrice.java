@@ -44,7 +44,7 @@ public final class Cockatrice extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, filter, false));
     }
 
-    public Cockatrice(final Cockatrice card) {
+    private Cockatrice(final Cockatrice card) {
         super(card);
     }
 

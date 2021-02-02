@@ -48,7 +48,7 @@ public final class LandCap extends CardImpl {
         this.addAbility(ability4);
     }
 
-    public LandCap(final LandCap card) {
+    private LandCap(final LandCap card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class PricklyBoggart extends CardImpl {
         this.addAbility(FearAbility.getInstance());
     }
 
-    public PricklyBoggart(final PricklyBoggart card) {
+    private PricklyBoggart(final PricklyBoggart card) {
         super(card);
     }
 

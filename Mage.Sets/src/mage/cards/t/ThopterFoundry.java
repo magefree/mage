@@ -41,7 +41,7 @@ public final class ThopterFoundry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThopterFoundry(final ThopterFoundry card) {
+    private ThopterFoundry(final ThopterFoundry card) {
         super(card);
     }
 

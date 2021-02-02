@@ -43,7 +43,7 @@ public final class RamsesOverdark extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RamsesOverdark(final RamsesOverdark card) {
+    private RamsesOverdark(final RamsesOverdark card) {
         super(card);
     }
 

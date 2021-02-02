@@ -44,7 +44,7 @@ public final class AlteredEgo extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AlteredEgo(final AlteredEgo card) {
+    private AlteredEgo(final AlteredEgo card) {
         super(card);
     }
 

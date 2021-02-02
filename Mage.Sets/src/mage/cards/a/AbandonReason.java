@@ -35,7 +35,7 @@ public final class AbandonReason extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{R}")));
     }
 
-    public AbandonReason(final AbandonReason card) {
+    private AbandonReason(final AbandonReason card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class GhituEncampment extends CardImpl {
                 new ManaCostsImpl("{1}{R}")));
     }
 
-    public GhituEncampment(final GhituEncampment card) {
+    private GhituEncampment(final GhituEncampment card) {
         super(card);
     }
 

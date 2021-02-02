@@ -37,7 +37,7 @@ public final class Gravegouger extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.GRAVEYARD), false));
     }
 
-    public Gravegouger(final Gravegouger card) {
+    private Gravegouger(final Gravegouger card) {
         super(card);
     }
 

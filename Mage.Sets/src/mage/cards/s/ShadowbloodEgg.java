@@ -32,7 +32,7 @@ public final class ShadowbloodEgg extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShadowbloodEgg(final ShadowbloodEgg card) {
+    private ShadowbloodEgg(final ShadowbloodEgg card) {
         super(card);
     }
 

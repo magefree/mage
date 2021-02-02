@@ -33,7 +33,7 @@ public final class BenevolentBodyguard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BenevolentBodyguard(final BenevolentBodyguard card) {
+    private BenevolentBodyguard(final BenevolentBodyguard card) {
         super(card);
     }
 

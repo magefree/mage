@@ -34,7 +34,7 @@ public final class Confound extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Confound(final Confound card) {
+    private Confound(final Confound card) {
         super(card);
     }
 

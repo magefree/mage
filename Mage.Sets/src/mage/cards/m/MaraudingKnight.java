@@ -41,7 +41,7 @@ public final class MaraudingKnight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MaraudingKnight(final MaraudingKnight card) {
+    private MaraudingKnight(final MaraudingKnight card) {
         super(card);
     }
 

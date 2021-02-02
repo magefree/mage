@@ -52,7 +52,7 @@ public final class BrambleSovereign extends CardImpl {
         ));
     }
 
-    public BrambleSovereign(final BrambleSovereign card) {
+    private BrambleSovereign(final BrambleSovereign card) {
         super(card);
     }
 

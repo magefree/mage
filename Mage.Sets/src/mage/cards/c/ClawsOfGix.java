@@ -28,7 +28,7 @@ public final class ClawsOfGix extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ClawsOfGix(final ClawsOfGix card) {
+    private ClawsOfGix(final ClawsOfGix card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class PrimalBeyond extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PrimalBeyond(final PrimalBeyond card) {
+    private PrimalBeyond(final PrimalBeyond card) {
         super(card);
     }
 

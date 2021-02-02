@@ -33,7 +33,7 @@ public final class Kaleidostone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Kaleidostone(final Kaleidostone card) {
+    private Kaleidostone(final Kaleidostone card) {
         super(card);
     }
 

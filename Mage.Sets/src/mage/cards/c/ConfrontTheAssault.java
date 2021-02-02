@@ -34,7 +34,7 @@ public final class ConfrontTheAssault extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken(), 3));
     }
 
-    public ConfrontTheAssault(final ConfrontTheAssault card) {
+    private ConfrontTheAssault(final ConfrontTheAssault card) {
         super(card);
     }
 

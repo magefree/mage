@@ -36,7 +36,7 @@ public final class MistOfStagnation extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MistOfStagnationEffect(), TargetController.ANY, false));
     }
 
-    public MistOfStagnation(final MistOfStagnation card) {
+    private MistOfStagnation(final MistOfStagnation card) {
         super(card);
     }
 

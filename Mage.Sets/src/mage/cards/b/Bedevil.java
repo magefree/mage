@@ -33,7 +33,7 @@ public final class Bedevil extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public Bedevil(final Bedevil card) {
+    private Bedevil(final Bedevil card) {
         super(card);
     }
 

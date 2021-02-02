@@ -32,7 +32,7 @@ public final class Frostling extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Frostling(final Frostling card) {
+    private Frostling(final Frostling card) {
         super(card);
     }
 

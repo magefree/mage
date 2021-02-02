@@ -22,7 +22,7 @@ public final class OpenFire extends CardImpl {
         getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public OpenFire(final OpenFire card) {
+    private OpenFire(final OpenFire card) {
         super(card);
     }
 

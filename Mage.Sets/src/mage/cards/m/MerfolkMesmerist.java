@@ -35,7 +35,7 @@ public final class MerfolkMesmerist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MerfolkMesmerist(final MerfolkMesmerist card) {
+    private MerfolkMesmerist(final MerfolkMesmerist card) {
         super(card);
     }
 

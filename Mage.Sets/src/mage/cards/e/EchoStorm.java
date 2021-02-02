@@ -25,7 +25,7 @@ public final class EchoStorm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
-    public EchoStorm(final EchoStorm card) {
+    private EchoStorm(final EchoStorm card) {
         super(card);
     }
 

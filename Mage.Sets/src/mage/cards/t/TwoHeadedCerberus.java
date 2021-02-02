@@ -26,7 +26,7 @@ public final class TwoHeadedCerberus extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
     }
 
-    public TwoHeadedCerberus(final TwoHeadedCerberus card) {
+    private TwoHeadedCerberus(final TwoHeadedCerberus card) {
         super(card);
     }
 

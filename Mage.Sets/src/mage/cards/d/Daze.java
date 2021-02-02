@@ -39,7 +39,7 @@ public final class Daze extends CardImpl {
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(1)));
     }
 
-    public Daze(final Daze card) {
+    private Daze(final Daze card) {
         super(card);
     }
 

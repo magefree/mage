@@ -51,7 +51,7 @@ public final class PardicDragon extends CardImpl {
 
     }
 
-    public PardicDragon(final PardicDragon card) {
+    private PardicDragon(final PardicDragon card) {
         super(card);
     }
 

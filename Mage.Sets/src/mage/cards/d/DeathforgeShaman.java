@@ -41,7 +41,7 @@ public final class DeathforgeShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeathforgeShaman(final DeathforgeShaman card) {
+    private DeathforgeShaman(final DeathforgeShaman card) {
         super(card);
     }
 

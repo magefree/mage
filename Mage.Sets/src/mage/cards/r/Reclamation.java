@@ -34,7 +34,7 @@ public final class Reclamation extends CardImpl {
         
     }
 
-    public Reclamation(final Reclamation card) {
+    private Reclamation(final Reclamation card) {
         super(card);
     }
 

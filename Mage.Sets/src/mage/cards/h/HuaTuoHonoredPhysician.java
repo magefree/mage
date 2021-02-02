@@ -37,7 +37,7 @@ public final class HuaTuoHonoredPhysician extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HuaTuoHonoredPhysician(final HuaTuoHonoredPhysician card) {
+    private HuaTuoHonoredPhysician(final HuaTuoHonoredPhysician card) {
         super(card);
     }
 

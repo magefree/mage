@@ -38,7 +38,7 @@ public final class Spiritmonger extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{G}")));
     }
 
-    public Spiritmonger(final Spiritmonger card) {
+    private Spiritmonger(final Spiritmonger card) {
         super(card);
     }
 

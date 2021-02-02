@@ -52,7 +52,7 @@ public final class MasterWarcraft extends CardImpl {
         this.getSpellAbility().addEffect(new ChooseBlockersRedundancyWatcherIncrementEffect());
     }
 
-    public MasterWarcraft(final MasterWarcraft card) {
+    private MasterWarcraft(final MasterWarcraft card) {
         super(card);
     }
 

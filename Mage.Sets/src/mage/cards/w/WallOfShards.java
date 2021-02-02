@@ -34,7 +34,7 @@ public final class WallOfShards extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new GainLifeOpponentCost(1) ));
     }
 
-    public WallOfShards(final WallOfShards card) {
+    private WallOfShards(final WallOfShards card) {
         super(card);
     }
 

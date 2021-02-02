@@ -31,7 +31,7 @@ public final class DestroyTheEvidence extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTheEvidenceEffect());
     }
 
-    public DestroyTheEvidence(final DestroyTheEvidence card) {
+    private DestroyTheEvidence(final DestroyTheEvidence card) {
         super(card);
     }
 

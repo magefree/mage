@@ -32,7 +32,7 @@ public final class Tatterkite extends CardImpl {
 
     }
 
-    public Tatterkite(final Tatterkite card) {
+    private Tatterkite(final Tatterkite card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class VarolzTheScarStriped extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true))));
     }
 
-    public VarolzTheScarStriped(final VarolzTheScarStriped card) {
+    private VarolzTheScarStriped(final VarolzTheScarStriped card) {
         super(card);
     }
 

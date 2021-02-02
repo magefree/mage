@@ -31,7 +31,7 @@ public final class FieryHellhound extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public FieryHellhound(final FieryHellhound card) {
+    private FieryHellhound(final FieryHellhound card) {
         super(card);
     }
 

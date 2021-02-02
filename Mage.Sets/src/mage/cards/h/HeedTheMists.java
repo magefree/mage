@@ -27,7 +27,7 @@ public final class HeedTheMists extends CardImpl {
         this.getSpellAbility().addEffect(new HeedTheMistsEffect());
     }
 
-    public HeedTheMists(final HeedTheMists card) {
+    private HeedTheMists(final HeedTheMists card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class ImmobilizerEldrazi extends CardImpl {
 
     }
 
-    public ImmobilizerEldrazi(final ImmobilizerEldrazi card) {
+    private ImmobilizerEldrazi(final ImmobilizerEldrazi card) {
         super(card);
     }
 

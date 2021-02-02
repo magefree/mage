@@ -32,7 +32,7 @@ public final class ChillingApparition extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true));
     }
 
-    public ChillingApparition(final ChillingApparition card) {
+    private ChillingApparition(final ChillingApparition card) {
         super(card);
     }
 

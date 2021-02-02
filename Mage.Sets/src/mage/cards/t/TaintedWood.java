@@ -46,7 +46,7 @@ public final class TaintedWood extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter)));
     }
 
-    public TaintedWood(final TaintedWood card) {
+    private TaintedWood(final TaintedWood card) {
         super(card);
     }
 

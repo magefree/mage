@@ -27,7 +27,7 @@ public final class SquirrelPoweredScheme extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SquirrelPoweredSchemeEffect()));
     }
 
-    public SquirrelPoweredScheme(final SquirrelPoweredScheme card) {
+    private SquirrelPoweredScheme(final SquirrelPoweredScheme card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class Soar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Soar(final Soar card) {
+    private Soar(final Soar card) {
         super(card);
     }
 

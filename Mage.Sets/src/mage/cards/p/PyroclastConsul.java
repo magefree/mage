@@ -30,7 +30,7 @@ public final class PyroclastConsul extends CardImpl {
         this.addAbility(new KinshipAbility(new DamageAllEffect(2, StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 
-    public PyroclastConsul(final PyroclastConsul card) {
+    private PyroclastConsul(final PyroclastConsul card) {
         super(card);
     }
 

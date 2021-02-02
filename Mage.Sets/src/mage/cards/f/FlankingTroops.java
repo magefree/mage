@@ -31,7 +31,7 @@ public final class FlankingTroops extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlankingTroops(final FlankingTroops card) {
+    private FlankingTroops(final FlankingTroops card) {
         super(card);
     }
 

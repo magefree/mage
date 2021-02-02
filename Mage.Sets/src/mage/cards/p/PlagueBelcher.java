@@ -53,7 +53,7 @@ public final class PlagueBelcher extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new LoseLifeOpponentsEffect(1), false, filter));
     }
 
-    public PlagueBelcher(final PlagueBelcher card) {
+    private PlagueBelcher(final PlagueBelcher card) {
         super(card);
     }
 

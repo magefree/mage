@@ -56,7 +56,7 @@ public final class TravelersCloak extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public TravelersCloak(final TravelersCloak card) {
+    private TravelersCloak(final TravelersCloak card) {
         super(card);
     }
 

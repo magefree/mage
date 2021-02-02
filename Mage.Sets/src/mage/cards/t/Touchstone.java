@@ -35,7 +35,7 @@ public final class Touchstone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Touchstone(final Touchstone card) {
+    private Touchstone(final Touchstone card) {
         super(card);
     }
 

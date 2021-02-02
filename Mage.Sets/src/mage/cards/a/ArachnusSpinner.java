@@ -58,7 +58,7 @@ public final class ArachnusSpinner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArachnusSpinner(final ArachnusSpinner card) {
+    private ArachnusSpinner(final ArachnusSpinner card) {
         super(card);
     }
 

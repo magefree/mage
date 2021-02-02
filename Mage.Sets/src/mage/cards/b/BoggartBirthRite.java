@@ -30,7 +30,7 @@ public final class BoggartBirthRite extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
     }
 
-    public BoggartBirthRite(final BoggartBirthRite card) {
+    private BoggartBirthRite(final BoggartBirthRite card) {
         super(card);
     }
 

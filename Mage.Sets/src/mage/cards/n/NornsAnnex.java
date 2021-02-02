@@ -23,7 +23,7 @@ public final class NornsAnnex extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl<>("{W/P}"), true)));
     }
 
-    public NornsAnnex(final NornsAnnex card) {
+    private NornsAnnex(final NornsAnnex card) {
         super(card);
     }
 

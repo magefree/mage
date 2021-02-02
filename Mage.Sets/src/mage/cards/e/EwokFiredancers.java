@@ -34,7 +34,7 @@ public final class EwokFiredancers extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
     }
 
-    public EwokFiredancers(final EwokFiredancers card) {
+    private EwokFiredancers(final EwokFiredancers card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class PhyrexianGremlins extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianGremlins(final PhyrexianGremlins card) {
+    private PhyrexianGremlins(final PhyrexianGremlins card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class ParasiticStrix extends CardImpl {
         this.addAbility(new ParasiticStrixTriggeredAbility());
     }
 
-    public ParasiticStrix(final ParasiticStrix card) {
+    private ParasiticStrix(final ParasiticStrix card) {
         super(card);
     }
 

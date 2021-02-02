@@ -47,7 +47,7 @@ public final class MerrowLevitator extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filterBlueSpell, true));
     }
 
-    public MerrowLevitator(final MerrowLevitator card) {
+    private MerrowLevitator(final MerrowLevitator card) {
         super(card);
     }
 

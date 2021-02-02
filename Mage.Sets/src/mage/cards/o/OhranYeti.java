@@ -44,7 +44,7 @@ public final class OhranYeti extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OhranYeti(final OhranYeti card) {
+    private OhranYeti(final OhranYeti card) {
         super(card);
     }
 

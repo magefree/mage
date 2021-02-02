@@ -26,7 +26,7 @@ public final class Amnesia extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Amnesia(final Amnesia card) {
+    private Amnesia(final Amnesia card) {
         super(card);
     }
 

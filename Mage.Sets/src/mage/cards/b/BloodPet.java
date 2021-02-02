@@ -29,7 +29,7 @@ public final class BloodPet extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new SacrificeSourceCost()));
     }
 
-    public BloodPet(final BloodPet card) {
+    private BloodPet(final BloodPet card) {
         super(card);
     }
 

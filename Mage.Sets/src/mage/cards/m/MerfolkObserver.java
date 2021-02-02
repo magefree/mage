@@ -31,7 +31,7 @@ public final class MerfolkObserver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MerfolkObserver(final MerfolkObserver card) {
+    private MerfolkObserver(final MerfolkObserver card) {
         super(card);
     }
 

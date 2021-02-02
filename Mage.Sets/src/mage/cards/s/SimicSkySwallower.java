@@ -29,7 +29,7 @@ public final class SimicSkySwallower extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public SimicSkySwallower(final SimicSkySwallower card) {
+    private SimicSkySwallower(final SimicSkySwallower card) {
         super(card);
     }
 

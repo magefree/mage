@@ -42,7 +42,7 @@ public final class DragonmasterOutcast extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 5), "At the beginning of your upkeep, if you control six or more lands, create a 5/5 red Dragon creature token with flying."));
     }
 
-    public DragonmasterOutcast(final DragonmasterOutcast card) {
+    private DragonmasterOutcast(final DragonmasterOutcast card) {
         super(card);
     }
 

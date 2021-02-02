@@ -42,7 +42,7 @@ public final class TrigonOfThought extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public TrigonOfThought(final TrigonOfThought card) {
+    private TrigonOfThought(final TrigonOfThought card) {
         super(card);
     }
 

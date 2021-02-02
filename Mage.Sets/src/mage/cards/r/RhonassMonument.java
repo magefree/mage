@@ -57,7 +57,7 @@ public final class RhonassMonument extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RhonassMonument(final RhonassMonument card) {
+    private RhonassMonument(final RhonassMonument card) {
         super(card);
     }
 

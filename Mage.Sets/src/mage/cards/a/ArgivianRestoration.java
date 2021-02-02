@@ -22,7 +22,7 @@ public final class ArgivianRestoration extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
     }
 
-    public ArgivianRestoration(final ArgivianRestoration card) {
+    private ArgivianRestoration(final ArgivianRestoration card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class SulfuricVortex extends CardImpl {
         
     }
 
-    public SulfuricVortex(final SulfuricVortex card) {
+    private SulfuricVortex(final SulfuricVortex card) {
         super(card);
     }
 

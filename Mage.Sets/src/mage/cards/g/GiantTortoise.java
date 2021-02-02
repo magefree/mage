@@ -35,7 +35,7 @@ public final class GiantTortoise extends CardImpl {
                 "{this} gets +0/+3 as long as it's untapped")));
     }
 
-    public GiantTortoise(final GiantTortoise card) {
+    private GiantTortoise(final GiantTortoise card) {
         super(card);
     }
 

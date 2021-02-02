@@ -29,7 +29,7 @@ public final class QuirionTrailblazer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true), true));
     }
 
-    public QuirionTrailblazer(final QuirionTrailblazer card) {
+    private QuirionTrailblazer(final QuirionTrailblazer card) {
         super(card);
     }
 

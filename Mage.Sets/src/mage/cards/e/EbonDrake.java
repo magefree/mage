@@ -30,7 +30,7 @@ public final class EbonDrake extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new LoseLifeSourceControllerEffect(1), false));
     }
 
-    public EbonDrake(final EbonDrake card) {
+    private EbonDrake(final EbonDrake card) {
         super(card);
     }
 

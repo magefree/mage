@@ -48,7 +48,7 @@ public final class AphettoAlchemist extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}")));
     }
 
-    public AphettoAlchemist(final AphettoAlchemist card) {
+    private AphettoAlchemist(final AphettoAlchemist card) {
         super(card);
     }
 

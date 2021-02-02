@@ -30,7 +30,7 @@ public final class TouchOfDeath extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public TouchOfDeath(final TouchOfDeath card) {
+    private TouchOfDeath(final TouchOfDeath card) {
         super(card);
     }
 

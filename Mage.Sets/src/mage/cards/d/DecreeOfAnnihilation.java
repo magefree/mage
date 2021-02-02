@@ -40,7 +40,7 @@ public final class DecreeOfAnnihilation extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DecreeOfAnnihilation(final DecreeOfAnnihilation card) {
+    private DecreeOfAnnihilation(final DecreeOfAnnihilation card) {
         super(card);
     }
 

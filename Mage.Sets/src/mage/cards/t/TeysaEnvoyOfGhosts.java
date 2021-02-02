@@ -47,7 +47,7 @@ public final class TeysaEnvoyOfGhosts extends CardImpl {
 
     }
 
-    public TeysaEnvoyOfGhosts(final TeysaEnvoyOfGhosts card) {
+    private TeysaEnvoyOfGhosts(final TeysaEnvoyOfGhosts card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class StrikingSliver extends CardImpl {
                         Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
-    public StrikingSliver(final StrikingSliver card) {
+    private StrikingSliver(final StrikingSliver card) {
         super(card);
     }
 

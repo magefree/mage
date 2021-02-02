@@ -35,7 +35,7 @@ public final class Brainspoil extends CardImpl {
         this.addAbility(new TransmuteAbility("{1}{B}{B}"));
     }
 
-    public Brainspoil(final Brainspoil card) {
+    private Brainspoil(final Brainspoil card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class DevourInFlames extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
     }
 
-    public DevourInFlames(final DevourInFlames card) {
+    private DevourInFlames(final DevourInFlames card) {
         super(card);
     }
 

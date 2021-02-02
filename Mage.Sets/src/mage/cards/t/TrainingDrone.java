@@ -32,7 +32,7 @@ public final class TrainingDrone extends CardImpl {
 
     }
 
-    public TrainingDrone(final TrainingDrone card) {
+    private TrainingDrone(final TrainingDrone card) {
         super(card);
     }
 

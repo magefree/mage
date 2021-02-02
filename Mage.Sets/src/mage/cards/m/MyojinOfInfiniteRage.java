@@ -50,7 +50,7 @@ public final class MyojinOfInfiniteRage extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(StaticFilters.FILTER_LANDS), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance())));
     }
 
-    public MyojinOfInfiniteRage(final MyojinOfInfiniteRage card) {
+    private MyojinOfInfiniteRage(final MyojinOfInfiniteRage card) {
         super(card);
     }
 

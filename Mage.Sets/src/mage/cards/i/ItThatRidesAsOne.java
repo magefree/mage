@@ -35,7 +35,7 @@ public final class ItThatRidesAsOne extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public ItThatRidesAsOne(final ItThatRidesAsOne card) {
+    private ItThatRidesAsOne(final ItThatRidesAsOne card) {
         super(card);
     }
 

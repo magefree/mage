@@ -52,7 +52,7 @@ public final class AngelOfSanctions extends CardImpl {
 
     }
 
-    public AngelOfSanctions(final AngelOfSanctions card) {
+    private AngelOfSanctions(final AngelOfSanctions card) {
         super(card);
     }
 

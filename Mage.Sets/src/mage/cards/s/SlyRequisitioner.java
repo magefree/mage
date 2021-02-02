@@ -42,7 +42,7 @@ public final class SlyRequisitioner extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new CreateTokenEffect(new ServoToken()), false, filter, false));
     }
 
-    public SlyRequisitioner(final SlyRequisitioner card) {
+    private SlyRequisitioner(final SlyRequisitioner card) {
         super(card);
     }
 

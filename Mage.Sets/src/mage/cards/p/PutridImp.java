@@ -51,7 +51,7 @@ public final class PutridImp extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PutridImp(final PutridImp card) {
+    private PutridImp(final PutridImp card) {
         super(card);
     }
 

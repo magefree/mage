@@ -32,7 +32,7 @@ public final class WillOTheWisp extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public WillOTheWisp(final WillOTheWisp card) {
+    private WillOTheWisp(final WillOTheWisp card) {
         super(card);
     }
 

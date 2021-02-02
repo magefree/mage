@@ -45,7 +45,7 @@ public final class ShadowGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShadowGuildmage(final ShadowGuildmage card) {
+    private ShadowGuildmage(final ShadowGuildmage card) {
         super(card);
     }
 

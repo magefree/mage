@@ -34,7 +34,7 @@ public final class PerilousVault extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PerilousVault(final PerilousVault card) {
+    private PerilousVault(final PerilousVault card) {
         super(card);
     }
 

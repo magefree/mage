@@ -42,7 +42,7 @@ public final class FathomFleetCutthroat extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FathomFleetCutthroat(final FathomFleetCutthroat card) {
+    private FathomFleetCutthroat(final FathomFleetCutthroat card) {
         super(card);
     }
 

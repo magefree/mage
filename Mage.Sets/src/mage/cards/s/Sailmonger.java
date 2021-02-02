@@ -38,7 +38,7 @@ public final class Sailmonger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Sailmonger(final Sailmonger card) {
+    private Sailmonger(final Sailmonger card) {
         super(card);
     }
 

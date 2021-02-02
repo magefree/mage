@@ -31,7 +31,7 @@ public final class Penance extends CardImpl {
 
     }
 
-    public Penance(final Penance card) {
+    private Penance(final Penance card) {
         super(card);
     }
 

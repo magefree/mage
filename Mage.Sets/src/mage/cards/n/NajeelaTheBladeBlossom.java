@@ -79,7 +79,7 @@ public final class NajeelaTheBladeBlossom extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NajeelaTheBladeBlossom(final NajeelaTheBladeBlossom card) {
+    private NajeelaTheBladeBlossom(final NajeelaTheBladeBlossom card) {
         super(card);
     }
 

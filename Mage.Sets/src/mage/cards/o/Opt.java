@@ -24,7 +24,7 @@ public final class Opt extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Opt(final Opt card) {
+    private Opt(final Opt card) {
         super(card);
     }
 

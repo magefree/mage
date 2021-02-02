@@ -34,7 +34,7 @@ public final class IndenturedOaf extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IndenturedOafPreventEffectEffect(Duration.WhileOnBattlefield)));
     }
 
-    public IndenturedOaf(final IndenturedOaf card) {
+    private IndenturedOaf(final IndenturedOaf card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class AetherTide extends CardImpl {
 
     }
 
-    public AetherTide(final AetherTide card) {
+    private AetherTide(final AetherTide card) {
         super(card);
     }
 

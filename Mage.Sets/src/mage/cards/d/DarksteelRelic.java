@@ -19,7 +19,7 @@ public final class DarksteelRelic extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
     }
 
-    public DarksteelRelic(final DarksteelRelic card) {
+    private DarksteelRelic(final DarksteelRelic card) {
         super(card);
     }
 

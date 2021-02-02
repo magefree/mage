@@ -24,7 +24,7 @@ public final class Thoughtcast extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
-    public Thoughtcast(final Thoughtcast card) {
+    private Thoughtcast(final Thoughtcast card) {
         super(card);
     }
 

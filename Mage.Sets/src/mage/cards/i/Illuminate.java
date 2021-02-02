@@ -41,7 +41,7 @@ public final class Illuminate extends CardImpl {
 
     }
 
-    public Illuminate(final Illuminate card) {
+    private Illuminate(final Illuminate card) {
         super(card);
     }
 

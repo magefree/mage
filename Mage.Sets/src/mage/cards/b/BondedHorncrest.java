@@ -28,7 +28,7 @@ public final class BondedHorncrest extends CardImpl {
         this.addAbility(CantBlockAloneAbility.getInstance());
     }
 
-    public BondedHorncrest(final BondedHorncrest card) {
+    private BondedHorncrest(final BondedHorncrest card) {
         super(card);
     }
 

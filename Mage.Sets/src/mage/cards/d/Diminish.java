@@ -23,7 +23,7 @@ public final class Diminish extends CardImpl {
         this.getSpellAbility().addEffect(new SetPowerToughnessTargetEffect(1, 1, Duration.EndOfTurn));
     }
 
-    public Diminish(final Diminish card) {
+    private Diminish(final Diminish card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class ManaTithe extends CardImpl {
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(1)));
     }
 
-    public ManaTithe(final ManaTithe card) {
+    private ManaTithe(final ManaTithe card) {
         super(card);
     }
 

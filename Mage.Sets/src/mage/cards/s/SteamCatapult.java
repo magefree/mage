@@ -43,7 +43,7 @@ public final class SteamCatapult extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SteamCatapult(final SteamCatapult card) {
+    private SteamCatapult(final SteamCatapult card) {
         super(card);
     }
 

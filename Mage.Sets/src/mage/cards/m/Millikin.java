@@ -29,7 +29,7 @@ public final class Millikin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Millikin(final Millikin card) {
+    private Millikin(final Millikin card) {
         super(card);
     }
 

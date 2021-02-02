@@ -49,7 +49,7 @@ public final class AuriokSiegeSled extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public AuriokSiegeSled(final AuriokSiegeSled card) {
+    private AuriokSiegeSled(final AuriokSiegeSled card) {
         super(card);
     }
 

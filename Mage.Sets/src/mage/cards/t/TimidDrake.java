@@ -43,7 +43,7 @@ public final class TimidDrake extends CardImpl {
         ));
     }
 
-    public TimidDrake(final TimidDrake card) {
+    private TimidDrake(final TimidDrake card) {
         super(card);
     }
 

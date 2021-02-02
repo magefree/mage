@@ -32,7 +32,7 @@ public final class RealitySpasm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public RealitySpasm(final RealitySpasm card) {
+    private RealitySpasm(final RealitySpasm card) {
         super(card);
     }
 

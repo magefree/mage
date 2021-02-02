@@ -42,7 +42,7 @@ public final class RunehornHellkite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RunehornHellkite(final RunehornHellkite card) {
+    private RunehornHellkite(final RunehornHellkite card) {
         super(card);
     }
 

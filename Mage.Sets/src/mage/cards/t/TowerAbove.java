@@ -41,7 +41,7 @@ public final class TowerAbove extends CardImpl {
 
     }
 
-    public TowerAbove(final TowerAbove card) {
+    private TowerAbove(final TowerAbove card) {
         super(card);
     }
 

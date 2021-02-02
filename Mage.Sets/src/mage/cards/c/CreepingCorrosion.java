@@ -21,7 +21,7 @@ public final class CreepingCorrosion extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterArtifactPermanent("artifacts")));
     }
 
-    public CreepingCorrosion(final CreepingCorrosion card) {
+    private CreepingCorrosion(final CreepingCorrosion card) {
         super(card);
     }
 

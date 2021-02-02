@@ -30,7 +30,7 @@ public final class Trinisphere extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TrinisphereEffect()));
     }
 
-    public Trinisphere(final Trinisphere card) {
+    private Trinisphere(final Trinisphere card) {
         super(card);
     }
 

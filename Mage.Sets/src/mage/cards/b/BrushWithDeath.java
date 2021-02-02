@@ -27,7 +27,7 @@ public final class BrushWithDeath extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public BrushWithDeath(final BrushWithDeath card) {
+    private BrushWithDeath(final BrushWithDeath card) {
         super(card);
     }
 

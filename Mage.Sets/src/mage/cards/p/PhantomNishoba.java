@@ -42,7 +42,7 @@ public final class PhantomNishoba extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhantomPreventionEffect()));
     }
 
-    public PhantomNishoba(final PhantomNishoba card) {
+    private PhantomNishoba(final PhantomNishoba card) {
         super(card);
     }
 

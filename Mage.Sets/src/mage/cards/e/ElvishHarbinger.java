@@ -38,7 +38,7 @@ public final class ElvishHarbinger extends CardImpl {
         this.addAbility(new AnyColorManaAbility(new TapSourceCost()));
     }
 
-    public ElvishHarbinger(final ElvishHarbinger card) {
+    private ElvishHarbinger(final ElvishHarbinger card) {
         super(card);
     }
 

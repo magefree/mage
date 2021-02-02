@@ -54,7 +54,7 @@ public final class ArcadesSabboth extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public ArcadesSabboth(final ArcadesSabboth card) {
+    private ArcadesSabboth(final ArcadesSabboth card) {
         super(card);
     }
 

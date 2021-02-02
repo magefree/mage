@@ -38,7 +38,7 @@ public final class ZhalfirinCrusader extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZhalfirinCrusader(final ZhalfirinCrusader card) {
+    private ZhalfirinCrusader(final ZhalfirinCrusader card) {
         super(card);
     }
 

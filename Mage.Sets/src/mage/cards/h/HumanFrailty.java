@@ -30,7 +30,7 @@ public final class HumanFrailty extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public HumanFrailty(final HumanFrailty card) {
+    private HumanFrailty(final HumanFrailty card) {
         super(card);
     }
 

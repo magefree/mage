@@ -25,7 +25,7 @@ public final class SaltMarsh extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public SaltMarsh(final SaltMarsh card) {
+    private SaltMarsh(final SaltMarsh card) {
         super(card);
     }
 

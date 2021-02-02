@@ -28,7 +28,7 @@ public final class PendrellDrake extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public PendrellDrake(final PendrellDrake card) {
+    private PendrellDrake(final PendrellDrake card) {
         super(card);
     }
 

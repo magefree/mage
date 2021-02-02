@@ -47,7 +47,7 @@ public final class SlitheringShade extends CardImpl {
 
     }
 
-    public SlitheringShade(final SlitheringShade card) {
+    private SlitheringShade(final SlitheringShade card) {
         super(card);
     }
 

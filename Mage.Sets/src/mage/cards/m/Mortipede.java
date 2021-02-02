@@ -29,7 +29,7 @@ public final class Mortipede extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{2}{G}")));
     }
 
-    public Mortipede(final Mortipede card) {
+    private Mortipede(final Mortipede card) {
         super(card);
     }
 

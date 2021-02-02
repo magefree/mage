@@ -30,7 +30,7 @@ public final class AviationPioneer extends CardImpl {
         ));
     }
 
-    public AviationPioneer(final AviationPioneer card) {
+    private AviationPioneer(final AviationPioneer card) {
         super(card);
     }
 

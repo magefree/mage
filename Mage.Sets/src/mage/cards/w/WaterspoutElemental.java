@@ -46,7 +46,7 @@ public final class WaterspoutElemental extends CardImpl {
             "When {this} enters the battlefield, if it was kicked, return all other creatures to their owners' hands and you skip your next turn."));
     }
 
-    public WaterspoutElemental(final WaterspoutElemental card) {
+    private WaterspoutElemental(final WaterspoutElemental card) {
         super(card);
     }
 

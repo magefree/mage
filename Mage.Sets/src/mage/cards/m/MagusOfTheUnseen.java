@@ -61,7 +61,7 @@ public final class MagusOfTheUnseen extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagusOfTheUnseen(final MagusOfTheUnseen card) {
+    private MagusOfTheUnseen(final MagusOfTheUnseen card) {
         super(card);
     }
 

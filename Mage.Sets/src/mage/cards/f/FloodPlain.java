@@ -25,7 +25,7 @@ public final class FloodPlain extends CardImpl {
         this.addAbility(new FetchLandActivatedAbility(false, EnumSet.of(SubType.PLAINS, SubType.ISLAND)));
     }
 
-    public FloodPlain(final FloodPlain card) {
+    private FloodPlain(final FloodPlain card) {
         super(card);
     }
 

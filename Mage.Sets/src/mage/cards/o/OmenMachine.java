@@ -37,7 +37,7 @@ public final class OmenMachine extends CardImpl {
         this.addAbility(new BeginningOfDrawTriggeredAbility(new OmenMachineEffect2(), TargetController.ANY, false));
     }
 
-    public OmenMachine(final OmenMachine card) {
+    private OmenMachine(final OmenMachine card) {
         super(card);
     }
 

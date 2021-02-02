@@ -34,7 +34,7 @@ public final class MagmaPhoenix extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{3}{R}{R}")));
     }
 
-    public MagmaPhoenix(final MagmaPhoenix card) {
+    private MagmaPhoenix(final MagmaPhoenix card) {
         super(card);
     }
 

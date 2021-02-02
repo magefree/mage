@@ -45,7 +45,7 @@ public final class GatewayShade extends CardImpl {
 
     }
 
-    public GatewayShade(final GatewayShade card) {
+    private GatewayShade(final GatewayShade card) {
         super(card);
     }
 

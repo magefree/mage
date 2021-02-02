@@ -41,7 +41,7 @@ public final class CavePeople extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CavePeople(final CavePeople card) {
+    private CavePeople(final CavePeople card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class DarkIntimations extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD, new DarkIntimationsGraveyardEffect(), filter, false, true));
     }
 
-    public DarkIntimations(final DarkIntimations card) {
+    private DarkIntimations(final DarkIntimations card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class WrathOfGod extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(FILTER_PERMANENT_CREATURES, true));
     }
 
-    public WrathOfGod(final WrathOfGod card) {
+    private WrathOfGod(final WrathOfGod card) {
         super(card);
     }
 

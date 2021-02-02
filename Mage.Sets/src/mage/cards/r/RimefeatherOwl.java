@@ -71,7 +71,7 @@ public final class RimefeatherOwl extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RimefeatherOwlEffect(Duration.WhileOnBattlefield, filter)));
     }
 
-    public RimefeatherOwl(final RimefeatherOwl card) {
+    private RimefeatherOwl(final RimefeatherOwl card) {
         super(card);
     }
 

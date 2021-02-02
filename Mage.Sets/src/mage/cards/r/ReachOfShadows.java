@@ -31,7 +31,7 @@ public final class ReachOfShadows extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public ReachOfShadows(final ReachOfShadows card) {
+    private ReachOfShadows(final ReachOfShadows card) {
         super(card);
     }
 

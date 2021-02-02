@@ -38,7 +38,7 @@ public final class JacesDefeat extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public JacesDefeat(final JacesDefeat card) {
+    private JacesDefeat(final JacesDefeat card) {
         super(card);
     }
 

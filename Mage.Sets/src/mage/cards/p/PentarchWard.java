@@ -45,7 +45,7 @@ public final class PentarchWard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionChosenColorAttachedEffect(true)));
     }
 
-    public PentarchWard(final PentarchWard card) {
+    private PentarchWard(final PentarchWard card) {
         super(card);
     }
 

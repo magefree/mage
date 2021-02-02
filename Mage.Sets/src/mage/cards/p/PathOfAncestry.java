@@ -36,7 +36,7 @@ public final class PathOfAncestry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PathOfAncestry(final PathOfAncestry card) {
+    private PathOfAncestry(final PathOfAncestry card) {
         super(card);
     }
 

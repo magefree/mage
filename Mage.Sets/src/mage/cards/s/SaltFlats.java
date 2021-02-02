@@ -34,7 +34,7 @@ public final class SaltFlats extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SaltFlats(final SaltFlats card) {
+    private SaltFlats(final SaltFlats card) {
         super(card);
     }
 

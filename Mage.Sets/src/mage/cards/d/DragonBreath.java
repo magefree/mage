@@ -57,7 +57,7 @@ public final class DragonBreath extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonBreathEffect(), filter, true, SetTargetPointer.PERMANENT, null));
     }
 
-    public DragonBreath(final DragonBreath card) {
+    private DragonBreath(final DragonBreath card) {
         super(card);
     }
 

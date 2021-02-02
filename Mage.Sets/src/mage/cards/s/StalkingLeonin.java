@@ -43,7 +43,7 @@ public final class StalkingLeonin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StalkingLeonin(final StalkingLeonin card) {
+    private StalkingLeonin(final StalkingLeonin card) {
         super(card);
     }
 

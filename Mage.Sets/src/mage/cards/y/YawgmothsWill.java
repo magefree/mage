@@ -38,7 +38,7 @@ public final class YawgmothsWill extends CardImpl {
         this.getSpellAbility().addEffect(new YawgmothsWillReplacementEffect());
     }
 
-    public YawgmothsWill(final YawgmothsWill card) {
+    private YawgmothsWill(final YawgmothsWill card) {
         super(card);
     }
 

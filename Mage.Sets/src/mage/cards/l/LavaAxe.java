@@ -21,7 +21,7 @@ public final class LavaAxe extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
     }
 
-    public LavaAxe(final LavaAxe card) {
+    private LavaAxe(final LavaAxe card) {
         super(card);
     }
 

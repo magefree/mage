@@ -27,7 +27,7 @@ public final class EmmessiTome extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EmmessiTome(final EmmessiTome card) {
+    private EmmessiTome(final EmmessiTome card) {
         super(card);
     }
 

@@ -57,7 +57,7 @@ public final class Imprison extends CardImpl {
         this.addAbility(new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(new ImprisonUnblockEffect(), new DestroySourceEffect(), new ManaCostsImpl("1"))));
     }
 
-    public Imprison(final Imprison card) {
+    private Imprison(final Imprison card) {
         super(card);
     }
 

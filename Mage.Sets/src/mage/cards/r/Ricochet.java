@@ -47,7 +47,7 @@ public final class Ricochet extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new RicochetEffect(), filter, false, SetTargetPointer.SPELL));
     }
 
-    public Ricochet(final Ricochet card) {
+    private Ricochet(final Ricochet card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class TormentedSoul extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public TormentedSoul(final TormentedSoul card) {
+    private TormentedSoul(final TormentedSoul card) {
         super(card);
     }
 

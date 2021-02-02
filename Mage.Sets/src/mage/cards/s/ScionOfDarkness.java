@@ -43,7 +43,7 @@ public final class ScionOfDarkness extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
     }
 
-    public ScionOfDarkness(final ScionOfDarkness card) {
+    private ScionOfDarkness(final ScionOfDarkness card) {
         super(card);
     }
 

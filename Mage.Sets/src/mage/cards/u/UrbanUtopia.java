@@ -52,7 +52,7 @@ public final class UrbanUtopia extends CardImpl {
         ));
     }
 
-    public UrbanUtopia(final UrbanUtopia card) {
+    private UrbanUtopia(final UrbanUtopia card) {
         super(card);
     }
 

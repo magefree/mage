@@ -50,7 +50,7 @@ public final class ShieldOfTheOversoul extends CardImpl {
         this.addAbility(whiteAbility);
     }
 
-    public ShieldOfTheOversoul(final ShieldOfTheOversoul card) {
+    private ShieldOfTheOversoul(final ShieldOfTheOversoul card) {
         super(card);
     }
 

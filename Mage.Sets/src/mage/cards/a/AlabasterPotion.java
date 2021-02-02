@@ -31,7 +31,7 @@ public final class AlabasterPotion extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public AlabasterPotion(final AlabasterPotion card) {
+    private AlabasterPotion(final AlabasterPotion card) {
         super(card);
     }
 

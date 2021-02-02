@@ -41,7 +41,7 @@ public final class ClockworkVorrac extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new TapSourceCost()));
     }
 
-    public ClockworkVorrac(final ClockworkVorrac card) {
+    private ClockworkVorrac(final ClockworkVorrac card) {
         super(card);
     }
 

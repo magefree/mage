@@ -33,7 +33,7 @@ public final class StoneHavenMedic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StoneHavenMedic(final StoneHavenMedic card) {
+    private StoneHavenMedic(final StoneHavenMedic card) {
         super(card);
     }
 

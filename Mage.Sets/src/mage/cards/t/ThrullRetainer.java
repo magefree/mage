@@ -43,7 +43,7 @@ public final class ThrullRetainer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new SacrificeSourceCost()));
     }
 
-    public ThrullRetainer(final ThrullRetainer card) {
+    private ThrullRetainer(final ThrullRetainer card) {
         super(card);
     }
 

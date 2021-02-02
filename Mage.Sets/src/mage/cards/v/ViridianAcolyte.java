@@ -31,7 +31,7 @@ public final class ViridianAcolyte extends CardImpl {
 
     }
 
-    public ViridianAcolyte(final ViridianAcolyte card) {
+    private ViridianAcolyte(final ViridianAcolyte card) {
         super(card);
     }
 

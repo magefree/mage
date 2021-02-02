@@ -36,7 +36,7 @@ public final class TajicBladeOfTheLegion extends CardImpl {
         
     }
 
-    public TajicBladeOfTheLegion(final TajicBladeOfTheLegion card) {
+    private TajicBladeOfTheLegion(final TajicBladeOfTheLegion card) {
         super(card);
     }
 

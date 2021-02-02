@@ -27,7 +27,7 @@ public final class FeedbackBolt extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    public FeedbackBolt(final FeedbackBolt card) {
+    private FeedbackBolt(final FeedbackBolt card) {
         super(card);
     }
 

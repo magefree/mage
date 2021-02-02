@@ -24,7 +24,7 @@ public final class LavaSpike extends CardImpl {
 
     }
 
-    public LavaSpike(final LavaSpike card) {
+    private LavaSpike(final LavaSpike card) {
         super(card);
     }
 

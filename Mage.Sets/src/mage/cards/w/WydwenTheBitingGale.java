@@ -41,7 +41,7 @@ public final class WydwenTheBitingGale extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WydwenTheBitingGale(final WydwenTheBitingGale card) {
+    private WydwenTheBitingGale(final WydwenTheBitingGale card) {
         super(card);
     }
 

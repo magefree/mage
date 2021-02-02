@@ -26,7 +26,7 @@ public final class ScarwoodTreefolk extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new TapSourceEffect(), "tapped"));
     }
 
-    public ScarwoodTreefolk(final ScarwoodTreefolk card) {
+    private ScarwoodTreefolk(final ScarwoodTreefolk card) {
         super(card);
     }
 

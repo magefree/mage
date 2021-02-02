@@ -22,7 +22,7 @@ public final class Cancel extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
-    public Cancel(final Cancel card) {
+    private Cancel(final Cancel card) {
         super(card);
     }
 

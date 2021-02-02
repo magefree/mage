@@ -42,7 +42,7 @@ public final class SkyshipStalker extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public SkyshipStalker(final SkyshipStalker card) {
+    private SkyshipStalker(final SkyshipStalker card) {
         super(card);
     }
 

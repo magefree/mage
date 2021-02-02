@@ -29,7 +29,7 @@ public final class IvoryCup extends CardImpl {
         this.addAbility(new IvoryCupAbility());
     }
 
-    public IvoryCup(final IvoryCup card) {
+    private IvoryCup(final IvoryCup card) {
         super(card);
     }
 

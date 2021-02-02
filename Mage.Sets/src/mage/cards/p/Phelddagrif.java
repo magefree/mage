@@ -55,7 +55,7 @@ public final class Phelddagrif extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Phelddagrif(final Phelddagrif card) {
+    private Phelddagrif(final Phelddagrif card) {
         super(card);
     }
 

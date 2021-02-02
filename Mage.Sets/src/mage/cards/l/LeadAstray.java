@@ -22,7 +22,7 @@ public final class LeadAstray extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }
 
-    public LeadAstray(final LeadAstray card) {
+    private LeadAstray(final LeadAstray card) {
         super(card);
     }
 

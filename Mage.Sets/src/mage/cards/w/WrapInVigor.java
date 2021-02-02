@@ -21,7 +21,7 @@ public final class WrapInVigor extends CardImpl {
         this.getSpellAbility().addEffect(new RegenerateAllEffect(new FilterControlledCreaturePermanent()));
     }
 
-    public WrapInVigor(final WrapInVigor card) {
+    private WrapInVigor(final WrapInVigor card) {
         super(card);
     }
 

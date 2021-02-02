@@ -26,7 +26,7 @@ public final class DevouringDeep extends CardImpl {
         this.addAbility(new IslandwalkAbility());
     }
 
-    public DevouringDeep(final DevouringDeep card) {
+    private DevouringDeep(final DevouringDeep card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class TrapDigger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TrapDigger(final TrapDigger card) {
+    private TrapDigger(final TrapDigger card) {
         super(card);
     }
 

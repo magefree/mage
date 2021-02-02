@@ -32,7 +32,7 @@ public final class EscapePod extends CardImpl {
 
     }
 
-    public EscapePod(final EscapePod card) {
+    private EscapePod(final EscapePod card) {
         super(card);
     }
 

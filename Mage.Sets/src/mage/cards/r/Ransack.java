@@ -36,7 +36,7 @@ public final class Ransack extends CardImpl {
 
     }
 
-    public Ransack(final Ransack card) {
+    private Ransack(final Ransack card) {
         super(card);
     }
 

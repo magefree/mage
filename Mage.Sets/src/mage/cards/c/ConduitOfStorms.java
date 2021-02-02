@@ -47,7 +47,7 @@ public final class ConduitOfStorms extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new ManaCostsImpl("{3}{R}{R}")));
     }
 
-    public ConduitOfStorms(final ConduitOfStorms card) {
+    private ConduitOfStorms(final ConduitOfStorms card) {
         super(card);
     }
 

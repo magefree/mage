@@ -47,7 +47,7 @@ public final class HeartOfYavimaya extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HeartOfYavimaya(final HeartOfYavimaya card) {
+    private HeartOfYavimaya(final HeartOfYavimaya card) {
         super(card);
     }
 

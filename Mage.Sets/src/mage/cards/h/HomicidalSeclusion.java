@@ -38,7 +38,7 @@ public final class HomicidalSeclusion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HomicidalSeclusion(final HomicidalSeclusion card) {
+    private HomicidalSeclusion(final HomicidalSeclusion card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class Spelltwine extends CardImpl {
 
     }
 
-    public Spelltwine(final Spelltwine card) {
+    private Spelltwine(final Spelltwine card) {
         super(card);
     }
 

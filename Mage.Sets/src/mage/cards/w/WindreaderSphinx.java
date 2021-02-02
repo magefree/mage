@@ -37,7 +37,7 @@ public final class WindreaderSphinx extends CardImpl {
         this.addAbility(new WindreaderSphinxTriggeredAbility());
     }
 
-    public WindreaderSphinx(final WindreaderSphinx card) {
+    private WindreaderSphinx(final WindreaderSphinx card) {
         super(card);
     }
 

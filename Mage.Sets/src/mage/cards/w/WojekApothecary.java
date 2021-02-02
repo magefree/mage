@@ -47,7 +47,7 @@ public final class WojekApothecary extends CardImpl {
 
     }
 
-    public WojekApothecary(final WojekApothecary card) {
+    private WojekApothecary(final WojekApothecary card) {
         super(card);
     }
 

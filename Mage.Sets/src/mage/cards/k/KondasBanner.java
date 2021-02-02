@@ -78,7 +78,7 @@ public final class KondasBanner extends CardImpl {
 
     }
 
-    public KondasBanner(final KondasBanner card) {
+    private KondasBanner(final KondasBanner card) {
         super(card);
     }
 

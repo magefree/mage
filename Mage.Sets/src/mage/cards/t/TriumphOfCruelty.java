@@ -33,7 +33,7 @@ public final class TriumphOfCruelty extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, ControlsCreatureGreatestPowerCondition.instance, ruleText));
     }
 
-    public TriumphOfCruelty(final TriumphOfCruelty card) {
+    private TriumphOfCruelty(final TriumphOfCruelty card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class Bogstomper extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public Bogstomper(final Bogstomper card) {
+    private Bogstomper(final Bogstomper card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class SoulOfTheRapids extends CardImpl {
 
     }
 
-    public SoulOfTheRapids(final SoulOfTheRapids card) {
+    private SoulOfTheRapids(final SoulOfTheRapids card) {
         super(card);
     }
 

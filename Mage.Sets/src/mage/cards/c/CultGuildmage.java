@@ -43,7 +43,7 @@ public final class CultGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CultGuildmage(final CultGuildmage card) {
+    private CultGuildmage(final CultGuildmage card) {
         super(card);
     }
 

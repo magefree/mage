@@ -22,7 +22,7 @@ public final class WakeOfDestruction extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllNamedPermanentsEffect());
     }
 
-    public WakeOfDestruction(final WakeOfDestruction card) {
+    private WakeOfDestruction(final WakeOfDestruction card) {
         super(card);
     }
 

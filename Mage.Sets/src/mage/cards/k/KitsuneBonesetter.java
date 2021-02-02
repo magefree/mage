@@ -41,7 +41,7 @@ public final class KitsuneBonesetter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KitsuneBonesetter(final KitsuneBonesetter card) {
+    private KitsuneBonesetter(final KitsuneBonesetter card) {
         super(card);
     }
 

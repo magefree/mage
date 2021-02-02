@@ -29,7 +29,7 @@ public final class SpiralingEmbers extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public SpiralingEmbers(final SpiralingEmbers card) {
+    private SpiralingEmbers(final SpiralingEmbers card) {
         super(card);
     }
 

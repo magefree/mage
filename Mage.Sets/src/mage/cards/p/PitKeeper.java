@@ -39,7 +39,7 @@ public final class PitKeeper extends CardImpl {
                 "When {this} enters the battlefield, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand."));
     }
 
-    public PitKeeper(final PitKeeper card) {
+    private PitKeeper(final PitKeeper card) {
         super(card);
     }
 

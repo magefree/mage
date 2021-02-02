@@ -43,7 +43,7 @@ public final class IonaShieldOfEmeria extends CardImpl {
 
     }
 
-    public IonaShieldOfEmeria(final IonaShieldOfEmeria card) {
+    private IonaShieldOfEmeria(final IonaShieldOfEmeria card) {
         super(card);
     }
 

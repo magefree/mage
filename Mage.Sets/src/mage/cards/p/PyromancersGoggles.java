@@ -42,7 +42,7 @@ public final class PyromancersGoggles extends CardImpl {
 
     }
 
-    public PyromancersGoggles(final PyromancersGoggles card) {
+    private PyromancersGoggles(final PyromancersGoggles card) {
         super(card);
     }
 

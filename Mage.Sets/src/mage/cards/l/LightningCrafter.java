@@ -38,7 +38,7 @@ public final class LightningCrafter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LightningCrafter(final LightningCrafter card) {
+    private LightningCrafter(final LightningCrafter card) {
         super(card);
     }
 

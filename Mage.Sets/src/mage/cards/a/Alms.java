@@ -30,7 +30,7 @@ public final class Alms extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Alms(final Alms card) {
+    private Alms(final Alms card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class Groundskeeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Groundskeeper(final Groundskeeper card) {
+    private Groundskeeper(final Groundskeeper card) {
         super(card);
     }
 

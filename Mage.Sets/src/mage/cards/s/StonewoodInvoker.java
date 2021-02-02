@@ -31,7 +31,7 @@ public final class StonewoodInvoker extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(5,5,Duration.EndOfTurn), new ManaCostsImpl("{7}{G}")));
     }
 
-    public StonewoodInvoker(final StonewoodInvoker card) {
+    private StonewoodInvoker(final StonewoodInvoker card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class UrzasChalice extends CardImpl {
         this.addAbility(new UrzasChaliceAbility());
     }
 
-    public UrzasChalice(final UrzasChalice card) {
+    private UrzasChalice(final UrzasChalice card) {
         super(card);
     }
 

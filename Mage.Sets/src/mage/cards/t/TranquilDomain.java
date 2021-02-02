@@ -29,7 +29,7 @@ public final class TranquilDomain extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public TranquilDomain(final TranquilDomain card) {
+    private TranquilDomain(final TranquilDomain card) {
         super(card);
     }
 

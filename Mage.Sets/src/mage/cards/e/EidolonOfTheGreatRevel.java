@@ -35,7 +35,7 @@ public final class EidolonOfTheGreatRevel extends CardImpl {
 
     }
 
-    public EidolonOfTheGreatRevel(final EidolonOfTheGreatRevel card) {
+    private EidolonOfTheGreatRevel(final EidolonOfTheGreatRevel card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class Maro extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(CardsInControllerHandCount.instance, Duration.EndOfGame)));
     }
 
-    public Maro(final Maro card) {
+    private Maro(final Maro card) {
         super(card);
     }
 

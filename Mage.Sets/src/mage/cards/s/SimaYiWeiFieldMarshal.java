@@ -34,7 +34,7 @@ public final class SimaYiWeiFieldMarshal extends CardImpl {
         // Sima Yi, Wei Field Marshal's power is equal to the number of Swamps you control.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));                                                         }
 
-    public SimaYiWeiFieldMarshal(final SimaYiWeiFieldMarshal card) {
+    private SimaYiWeiFieldMarshal(final SimaYiWeiFieldMarshal card) {
         super(card);
     }
 

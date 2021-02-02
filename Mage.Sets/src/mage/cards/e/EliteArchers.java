@@ -35,7 +35,7 @@ public final class EliteArchers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EliteArchers(final EliteArchers card) {
+    private EliteArchers(final EliteArchers card) {
         super(card);
     }
 

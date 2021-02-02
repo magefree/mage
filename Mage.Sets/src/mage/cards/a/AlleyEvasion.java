@@ -32,7 +32,7 @@ public final class AlleyEvasion extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public AlleyEvasion(final AlleyEvasion card) {
+    private AlleyEvasion(final AlleyEvasion card) {
         super(card);
     }
 

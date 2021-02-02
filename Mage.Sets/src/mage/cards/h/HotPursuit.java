@@ -40,7 +40,7 @@ public final class HotPursuit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HotPursuit(final HotPursuit card) {
+    private HotPursuit(final HotPursuit card) {
         super(card);
     }
 

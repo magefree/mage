@@ -29,7 +29,7 @@ public final class Corrupt extends CardImpl {
         this.getSpellAbility().addEffect(new CorruptEffect());
     }
 
-    public Corrupt(final Corrupt card) {
+    private Corrupt(final Corrupt card) {
         super(card);
     }
 

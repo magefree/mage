@@ -27,7 +27,7 @@ public final class Telekinesis extends CardImpl {
         this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("It", true, null));
     }
 
-    public Telekinesis(final Telekinesis card) {
+    private Telekinesis(final Telekinesis card) {
         super(card);
     }
 

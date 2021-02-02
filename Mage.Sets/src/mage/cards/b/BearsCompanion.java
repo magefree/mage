@@ -28,7 +28,7 @@ public final class BearsCompanion extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BearsCompanionBearToken())));
     }
 
-    public BearsCompanion(final BearsCompanion card) {
+    private BearsCompanion(final BearsCompanion card) {
         super(card);
     }
 

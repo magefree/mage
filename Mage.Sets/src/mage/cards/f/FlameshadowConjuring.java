@@ -49,7 +49,7 @@ public final class FlameshadowConjuring extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlameshadowConjuring(final FlameshadowConjuring card) {
+    private FlameshadowConjuring(final FlameshadowConjuring card) {
         super(card);
     }
 

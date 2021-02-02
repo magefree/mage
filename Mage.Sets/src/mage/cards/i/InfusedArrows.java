@@ -41,7 +41,7 @@ public final class InfusedArrows extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InfusedArrows(final InfusedArrows card) {
+    private InfusedArrows(final InfusedArrows card) {
         super(card);
     }
 

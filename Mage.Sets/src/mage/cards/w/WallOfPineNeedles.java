@@ -34,7 +34,7 @@ public final class WallOfPineNeedles extends CardImpl {
         
     }
 
-    public WallOfPineNeedles(final WallOfPineNeedles card) {
+    private WallOfPineNeedles(final WallOfPineNeedles card) {
         super(card);
     }
 

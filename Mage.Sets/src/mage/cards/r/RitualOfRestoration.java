@@ -23,7 +23,7 @@ public final class RitualOfRestoration extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
     }
 
-    public RitualOfRestoration(final RitualOfRestoration card) {
+    private RitualOfRestoration(final RitualOfRestoration card) {
         super(card);
     }
 

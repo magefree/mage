@@ -60,7 +60,7 @@ public final class LeagueGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LeagueGuildmage(final LeagueGuildmage card) {
+    private LeagueGuildmage(final LeagueGuildmage card) {
         super(card);
     }
 

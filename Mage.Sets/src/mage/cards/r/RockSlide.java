@@ -41,7 +41,7 @@ public final class RockSlide extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(xValue, filter));
     }
 
-    public RockSlide(final RockSlide card) {
+    private RockSlide(final RockSlide card) {
         super(card);
     }
 

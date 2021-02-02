@@ -47,7 +47,7 @@ public final class TwilightDrover extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TwilightDrover(final TwilightDrover card) {
+    private TwilightDrover(final TwilightDrover card) {
         super(card);
     }
 

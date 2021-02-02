@@ -32,7 +32,7 @@ public final class Metrognome extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Metrognome(final Metrognome card) {
+    private Metrognome(final Metrognome card) {
         super(card);
     }
 

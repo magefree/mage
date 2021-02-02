@@ -20,7 +20,7 @@ public final class LastChance extends CardImpl {
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect(true));
     }
 
-    public LastChance(final LastChance card) {
+    private LastChance(final LastChance card) {
         super(card);
     }
 

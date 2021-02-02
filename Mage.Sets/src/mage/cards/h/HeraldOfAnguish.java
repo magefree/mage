@@ -52,7 +52,7 @@ public final class HeraldOfAnguish extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HeraldOfAnguish(final HeraldOfAnguish card) {
+    private HeraldOfAnguish(final HeraldOfAnguish card) {
         super(card);
     }
 

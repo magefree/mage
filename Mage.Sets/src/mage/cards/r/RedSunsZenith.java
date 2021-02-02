@@ -32,7 +32,7 @@ public final class RedSunsZenith extends CardImpl {
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
-    public RedSunsZenith(final RedSunsZenith card) {
+    private RedSunsZenith(final RedSunsZenith card) {
         super(card);
     }
 

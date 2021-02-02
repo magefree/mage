@@ -32,7 +32,7 @@ public final class HarmonyOfNature extends CardImpl {
         this.getSpellAbility().addEffect(new HarmonyOfNatureEffect());
     }
 
-    public HarmonyOfNature(final HarmonyOfNature card) {
+    private HarmonyOfNature(final HarmonyOfNature card) {
         super(card);
     }
 

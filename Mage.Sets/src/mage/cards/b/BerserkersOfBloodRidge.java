@@ -25,7 +25,7 @@ public final class BerserkersOfBloodRidge  extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public BerserkersOfBloodRidge(final BerserkersOfBloodRidge card) {
+    private BerserkersOfBloodRidge(final BerserkersOfBloodRidge card) {
         super(card);
     }
 

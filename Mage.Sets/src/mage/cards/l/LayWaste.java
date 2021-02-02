@@ -26,7 +26,7 @@ public final class LayWaste extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public LayWaste(final LayWaste card) {
+    private LayWaste(final LayWaste card) {
         super(card);
     }
 

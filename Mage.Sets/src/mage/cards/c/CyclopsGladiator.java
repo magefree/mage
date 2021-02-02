@@ -39,7 +39,7 @@ public final class CyclopsGladiator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CyclopsGladiator(final CyclopsGladiator card) {
+    private CyclopsGladiator(final CyclopsGladiator card) {
         super(card);
     }
 

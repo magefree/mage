@@ -26,7 +26,7 @@ public final class IvoryTower extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IvoryTowerEffect(), TargetController.YOU, false));
     }
 
-    public IvoryTower(final IvoryTower card) {
+    private IvoryTower(final IvoryTower card) {
         super(card);
     }
 

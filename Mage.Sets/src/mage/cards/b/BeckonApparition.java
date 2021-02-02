@@ -25,7 +25,7 @@ public final class BeckonApparition extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WhiteBlackSpiritToken(), 1));
     }
 
-    public BeckonApparition(final BeckonApparition card) {
+    private BeckonApparition(final BeckonApparition card) {
         super(card);
     }
 

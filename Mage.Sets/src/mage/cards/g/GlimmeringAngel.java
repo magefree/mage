@@ -34,7 +34,7 @@ public final class GlimmeringAngel extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}")));
     }
 
-    public GlimmeringAngel(final GlimmeringAngel card) {
+    private GlimmeringAngel(final GlimmeringAngel card) {
         super(card);
     }
 

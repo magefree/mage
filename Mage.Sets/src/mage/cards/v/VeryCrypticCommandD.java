@@ -75,7 +75,7 @@ public final class VeryCrypticCommandD extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
     }
 
-    public VeryCrypticCommandD(final VeryCrypticCommandD card) {
+    private VeryCrypticCommandD(final VeryCrypticCommandD card) {
         super(card);
     }
 

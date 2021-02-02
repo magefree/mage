@@ -27,7 +27,7 @@ public final class ShuSoldierFarmers extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4)));
     }
 
-    public ShuSoldierFarmers(final ShuSoldierFarmers card) {
+    private ShuSoldierFarmers(final ShuSoldierFarmers card) {
         super(card);
     }
 

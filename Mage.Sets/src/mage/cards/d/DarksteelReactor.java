@@ -35,7 +35,7 @@ public final class DarksteelReactor extends CardImpl {
 
     }
 
-    public DarksteelReactor(final DarksteelReactor card) {
+    private DarksteelReactor(final DarksteelReactor card) {
         super(card);
     }
 

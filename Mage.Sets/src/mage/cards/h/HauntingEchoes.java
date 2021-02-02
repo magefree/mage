@@ -31,7 +31,7 @@ public final class HauntingEchoes extends CardImpl {
         this.getSpellAbility().addEffect(new HauntingEchoesEffect());
     }
 
-    public HauntingEchoes(final HauntingEchoes card) {
+    private HauntingEchoes(final HauntingEchoes card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class ConjuredCurrency extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ConjuredCurrency(final ConjuredCurrency card) {
+    private ConjuredCurrency(final ConjuredCurrency card) {
         super(card);
     }
 

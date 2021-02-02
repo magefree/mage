@@ -42,7 +42,7 @@ public final class AbyssalHunter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AbyssalHunter(final AbyssalHunter card) {
+    private AbyssalHunter(final AbyssalHunter card) {
         super(card);
     }
 

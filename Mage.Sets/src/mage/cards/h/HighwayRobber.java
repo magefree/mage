@@ -32,7 +32,7 @@ public final class HighwayRobber extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HighwayRobber(final HighwayRobber card) {
+    private HighwayRobber(final HighwayRobber card) {
         super(card);
     }
 

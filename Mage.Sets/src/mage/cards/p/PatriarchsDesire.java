@@ -49,7 +49,7 @@ public final class PatriarchsDesire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PatriarchsDesire(final PatriarchsDesire card) {
+    private PatriarchsDesire(final PatriarchsDesire card) {
         super(card);
     }
 

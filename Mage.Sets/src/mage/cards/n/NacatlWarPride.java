@@ -53,7 +53,7 @@ public final class NacatlWarPride extends CardImpl {
         
     }
 
-    public NacatlWarPride(final NacatlWarPride card) {
+    private NacatlWarPride(final NacatlWarPride card) {
         super(card);
     }
 

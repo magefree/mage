@@ -35,7 +35,7 @@ public final class QuestForTheNihilStone extends CardImpl {
         this.addAbility(new QuestForTheNihilStoneTriggeredAbility());
     }
 
-    public QuestForTheNihilStone(final QuestForTheNihilStone card) {
+    private QuestForTheNihilStone(final QuestForTheNihilStone card) {
         super(card);
     }
 

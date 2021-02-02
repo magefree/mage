@@ -30,7 +30,7 @@ public final class SerpentineKavu extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public SerpentineKavu(final SerpentineKavu card) {
+    private SerpentineKavu(final SerpentineKavu card) {
         super(card);
     }
 

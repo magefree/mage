@@ -30,7 +30,7 @@ public final class OnduGreathorn extends CardImpl {
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public OnduGreathorn(final OnduGreathorn card) {
+    private OnduGreathorn(final OnduGreathorn card) {
         super(card);
     }
 

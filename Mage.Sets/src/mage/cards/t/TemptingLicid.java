@@ -34,7 +34,7 @@ public final class TemptingLicid extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllAttachedEffect(AttachmentType.AURA)));
     }
 
-    public TemptingLicid(final TemptingLicid card) {
+    private TemptingLicid(final TemptingLicid card) {
         super(card);
     }
 

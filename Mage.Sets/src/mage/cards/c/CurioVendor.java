@@ -21,7 +21,7 @@ public final class CurioVendor extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public CurioVendor(final CurioVendor card) {
+    private CurioVendor(final CurioVendor card) {
         super(card);
     }
 

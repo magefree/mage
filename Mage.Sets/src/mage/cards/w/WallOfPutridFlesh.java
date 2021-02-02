@@ -45,7 +45,7 @@ public final class WallOfPutridFlesh extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public WallOfPutridFlesh(final WallOfPutridFlesh card) {
+    private WallOfPutridFlesh(final WallOfPutridFlesh card) {
         super(card);
     }
 

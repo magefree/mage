@@ -32,7 +32,7 @@ public final class SpringMind extends SplitCard {
         getRightHalfCard().getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
-    public SpringMind(final SpringMind card) {
+    private SpringMind(final SpringMind card) {
         super(card);
     }
 

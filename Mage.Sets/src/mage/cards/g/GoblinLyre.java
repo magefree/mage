@@ -31,7 +31,7 @@ public final class GoblinLyre extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinLyre(final GoblinLyre card) {
+    private GoblinLyre(final GoblinLyre card) {
         super(card);
     }
 

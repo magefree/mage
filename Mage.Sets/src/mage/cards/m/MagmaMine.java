@@ -38,7 +38,7 @@ public final class MagmaMine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagmaMine(final MagmaMine card) {
+    private MagmaMine(final MagmaMine card) {
         super(card);
     }
 

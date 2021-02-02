@@ -38,7 +38,7 @@ public final class BallyrushBanneret extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public BallyrushBanneret(final BallyrushBanneret card) {
+    private BallyrushBanneret(final BallyrushBanneret card) {
         super(card);
     }
 

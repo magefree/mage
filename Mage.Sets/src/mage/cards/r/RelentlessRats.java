@@ -42,7 +42,7 @@ public final class RelentlessRats extends CardImpl {
         this.getSpellAbility().addEffect(new InfoEffect("A deck can have any number of cards named Relentless Rats."));
     }
 
-    public RelentlessRats(final RelentlessRats card) {
+    private RelentlessRats(final RelentlessRats card) {
         super(card);
     }
 

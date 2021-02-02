@@ -32,7 +32,7 @@ public final class CoalGolem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CoalGolem(final CoalGolem card) {
+    private CoalGolem(final CoalGolem card) {
         super(card);
     }
 

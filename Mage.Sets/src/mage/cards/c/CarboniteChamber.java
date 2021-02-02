@@ -50,7 +50,7 @@ public final class CarboniteChamber extends CardImpl {
 
     }
 
-    public CarboniteChamber(final CarboniteChamber card) {
+    private CarboniteChamber(final CarboniteChamber card) {
         super(card);
     }
 

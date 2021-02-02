@@ -25,7 +25,7 @@ public final class RootwaterCommando extends CardImpl {
         this.addAbility(new IslandwalkAbility());
     }
 
-    public RootwaterCommando(final RootwaterCommando card) {
+    private RootwaterCommando(final RootwaterCommando card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class ClotSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect("this permanent"), new GenericManaCost(2)), Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public ClotSliver(final ClotSliver card) {
+    private ClotSliver(final ClotSliver card) {
         super(card);
     }
 

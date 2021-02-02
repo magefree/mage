@@ -26,7 +26,7 @@ public final class GoldenHind extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public GoldenHind(final GoldenHind card) {
+    private GoldenHind(final GoldenHind card) {
         super(card);
     }
 

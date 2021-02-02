@@ -54,7 +54,7 @@ public final class DaghatarTheAdamant extends CardImpl {
 
     }
 
-    public DaghatarTheAdamant(final DaghatarTheAdamant card) {
+    private DaghatarTheAdamant(final DaghatarTheAdamant card) {
         super(card);
     }
 

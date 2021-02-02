@@ -27,7 +27,7 @@ public final class MakeAWish extends CardImpl {
         this.getSpellAbility().addEffect(new MakeAWishEffect());
     }
 
-    public MakeAWish(final MakeAWish card) {
+    private MakeAWish(final MakeAWish card) {
         super(card);
     }
 

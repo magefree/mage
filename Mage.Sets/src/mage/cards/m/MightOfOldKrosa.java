@@ -30,7 +30,7 @@ public final class MightOfOldKrosa extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public MightOfOldKrosa(final MightOfOldKrosa card) {
+    private MightOfOldKrosa(final MightOfOldKrosa card) {
         super(card);
     }
 

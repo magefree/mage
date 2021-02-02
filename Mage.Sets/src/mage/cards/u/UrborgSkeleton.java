@@ -46,7 +46,7 @@ public final class UrborgSkeleton extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UrborgSkeleton(final UrborgSkeleton card) {
+    private UrborgSkeleton(final UrborgSkeleton card) {
         super(card);
     }
 

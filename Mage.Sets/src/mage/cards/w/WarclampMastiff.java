@@ -26,7 +26,7 @@ public final class WarclampMastiff extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public WarclampMastiff(final WarclampMastiff card) {
+    private WarclampMastiff(final WarclampMastiff card) {
         super(card);
     }
 

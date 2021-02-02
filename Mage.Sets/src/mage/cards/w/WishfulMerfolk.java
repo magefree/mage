@@ -34,7 +34,7 @@ public final class WishfulMerfolk extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new WishfulMerfolkEffect(), new ManaCostsImpl("{1}{U}")));
     }
 
-    public WishfulMerfolk(final WishfulMerfolk card) {
+    private WishfulMerfolk(final WishfulMerfolk card) {
         super(card);
     }
 

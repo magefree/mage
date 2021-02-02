@@ -23,7 +23,7 @@ public final class ClashOfWills extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public ClashOfWills(final ClashOfWills card) {
+    private ClashOfWills(final ClashOfWills card) {
         super(card);
     }
 

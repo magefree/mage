@@ -37,7 +37,7 @@ public final class ContainmentPriest extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ContainmentPriestReplacementEffect()), new CreatureWasCastWatcher());
     }
 
-    public ContainmentPriest(final ContainmentPriest card) {
+    private ContainmentPriest(final ContainmentPriest card) {
         super(card);
     }
 

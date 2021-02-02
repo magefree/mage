@@ -22,7 +22,7 @@ public final class WhiptailWurm extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public WhiptailWurm(final WhiptailWurm card) {
+    private WhiptailWurm(final WhiptailWurm card) {
         super(card);
     }
 

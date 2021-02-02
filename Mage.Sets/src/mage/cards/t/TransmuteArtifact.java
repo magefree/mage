@@ -32,7 +32,7 @@ public final class TransmuteArtifact extends CardImpl {
         this.getSpellAbility().addEffect(new TransmuteArtifactEffect());
     }
 
-    public TransmuteArtifact(final TransmuteArtifact card) {
+    private TransmuteArtifact(final TransmuteArtifact card) {
         super(card);
     }
 

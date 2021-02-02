@@ -31,7 +31,7 @@ public final class ThalakosLowlands extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThalakosLowlands(final ThalakosLowlands card) {
+    private ThalakosLowlands(final ThalakosLowlands card) {
         super(card);
     }
 

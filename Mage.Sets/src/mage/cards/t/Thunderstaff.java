@@ -43,7 +43,7 @@ public final class Thunderstaff extends CardImpl {
 
     }
 
-    public Thunderstaff(final Thunderstaff card) {
+    private Thunderstaff(final Thunderstaff card) {
         super(card);
     }
 

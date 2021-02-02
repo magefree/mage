@@ -40,7 +40,7 @@ public final class ThermalDetonator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThermalDetonator(final ThermalDetonator card) {
+    private ThermalDetonator(final ThermalDetonator card) {
         super(card);
     }
 

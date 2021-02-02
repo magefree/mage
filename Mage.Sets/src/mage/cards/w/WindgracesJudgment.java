@@ -32,7 +32,7 @@ public final class WindgracesJudgment extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(WindgracesJudgmentAdjuster.instance);
     }
 
-    public WindgracesJudgment(final WindgracesJudgment card) {
+    private WindgracesJudgment(final WindgracesJudgment card) {
         super(card);
     }
 

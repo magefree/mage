@@ -36,7 +36,7 @@ public final class DemonsJester extends CardImpl {
             "<i>Hellbent</i> &mdash; {this} gets +2/+1 as long as you have no cards in hand")));
     }
 
-    public DemonsJester(final DemonsJester card) {
+    private DemonsJester(final DemonsJester card) {
         super(card);
     }
 

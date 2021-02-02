@@ -33,7 +33,7 @@ public final class RetreatToValakut extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RetreatToValakut(final RetreatToValakut card) {
+    private RetreatToValakut(final RetreatToValakut card) {
         super(card);
     }
 

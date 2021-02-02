@@ -34,7 +34,7 @@ public final class BroodMonitor extends CardImpl {
 
     }
 
-    public BroodMonitor(final BroodMonitor card) {
+    private BroodMonitor(final BroodMonitor card) {
         super(card);
     }
 

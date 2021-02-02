@@ -24,7 +24,7 @@ public final class MemoryDrain extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }
 
-    public MemoryDrain(final MemoryDrain card) {
+    private MemoryDrain(final MemoryDrain card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class BanewaspAffliction extends CardImpl {
         this.addAbility( new DiesAttachedTriggeredAbility(new BanewaspAfflictionLoseLifeEffect(), "enchanted creature"));
     }
 
-    public BanewaspAffliction(final BanewaspAffliction card) {
+    private BanewaspAffliction(final BanewaspAffliction card) {
         super(card);
     }
 

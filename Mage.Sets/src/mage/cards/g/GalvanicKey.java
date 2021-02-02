@@ -36,7 +36,7 @@ public final class GalvanicKey extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GalvanicKey(final GalvanicKey card) {
+    private GalvanicKey(final GalvanicKey card) {
         super(card);
     }
 

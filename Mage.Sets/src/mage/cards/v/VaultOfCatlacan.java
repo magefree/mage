@@ -45,7 +45,7 @@ public final class VaultOfCatlacan extends CardImpl {
 
     }
 
-    public VaultOfCatlacan(final VaultOfCatlacan card) {
+    private VaultOfCatlacan(final VaultOfCatlacan card) {
         super(card);
     }
 

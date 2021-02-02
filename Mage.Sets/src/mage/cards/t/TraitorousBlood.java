@@ -30,7 +30,7 @@ public final class TraitorousBlood extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("and hast until end of turn"));
     }
 
-    public TraitorousBlood(final TraitorousBlood card) {
+    private TraitorousBlood(final TraitorousBlood card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class MysticalTeachings extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{B}"), TimingRule.INSTANT));
     }
 
-    public MysticalTeachings(final MysticalTeachings card) {
+    private MysticalTeachings(final MysticalTeachings card) {
         super(card);
     }
 

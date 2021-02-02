@@ -39,7 +39,7 @@ public final class TeferisSentinel extends CardImpl {
                         "As long as you control a Teferi planeswalker, {this} gets +4/+0")));
     }
 
-    public TeferisSentinel(final TeferisSentinel card) {
+    private TeferisSentinel(final TeferisSentinel card) {
         super(card);
     }
 

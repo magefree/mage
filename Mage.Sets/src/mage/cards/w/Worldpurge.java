@@ -34,7 +34,7 @@ public final class Worldpurge extends CardImpl {
 
     }
 
-    public Worldpurge(final Worldpurge card) {
+    private Worldpurge(final Worldpurge card) {
         super(card);
     }
 

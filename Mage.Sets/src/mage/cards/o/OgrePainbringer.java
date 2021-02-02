@@ -27,7 +27,7 @@ public final class OgrePainbringer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DamagePlayersEffect(3, TargetController.ANY, "it")));
     }
 
-    public OgrePainbringer(final OgrePainbringer card) {
+    private OgrePainbringer(final OgrePainbringer card) {
         super(card);
     }
 

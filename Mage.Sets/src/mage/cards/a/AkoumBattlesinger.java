@@ -42,7 +42,7 @@ public final class AkoumBattlesinger extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn, filter, false), true));
     }
 
-    public AkoumBattlesinger(final AkoumBattlesinger card) {
+    private AkoumBattlesinger(final AkoumBattlesinger card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class CunningLethemancer extends CardImpl {
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DiscardEachPlayerEffect()));
     }
 
-    public CunningLethemancer(final CunningLethemancer card) {
+    private CunningLethemancer(final CunningLethemancer card) {
         super(card);
     }
 

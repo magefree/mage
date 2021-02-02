@@ -40,7 +40,7 @@ public final class DemonlordBelzenlok extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DemonlordBelzenlokEffect()));
     }
 
-    public DemonlordBelzenlok(final DemonlordBelzenlok card) {
+    private DemonlordBelzenlok(final DemonlordBelzenlok card) {
         super(card);
     }
 

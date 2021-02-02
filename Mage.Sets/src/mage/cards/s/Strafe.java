@@ -33,7 +33,7 @@ public final class Strafe extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public Strafe(final Strafe card) {
+    private Strafe(final Strafe card) {
         super(card);
     }
 

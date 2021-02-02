@@ -41,7 +41,7 @@ public final class JaceBeleren extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public JaceBeleren(final JaceBeleren card) {
+    private JaceBeleren(final JaceBeleren card) {
         super(card);
     }
 

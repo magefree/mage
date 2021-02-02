@@ -24,7 +24,7 @@ public final class WrapInFlames extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 3));
     }
 
-    public WrapInFlames(final WrapInFlames card) {
+    private WrapInFlames(final WrapInFlames card) {
         super(card);
     }
 

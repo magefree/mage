@@ -27,7 +27,7 @@ public final class GuardianAutomaton extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(3)));
     }
 
-    public GuardianAutomaton(final GuardianAutomaton card) {
+    private GuardianAutomaton(final GuardianAutomaton card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class MasterOfDiversion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MasterOfDiversion(final MasterOfDiversion card) {
+    private MasterOfDiversion(final MasterOfDiversion card) {
         super(card);
     }
 

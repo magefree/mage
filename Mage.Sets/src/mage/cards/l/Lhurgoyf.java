@@ -36,7 +36,7 @@ public final class Lhurgoyf extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LhurgoyfEffect()));
     }
 
-    public Lhurgoyf(final Lhurgoyf card) {
+    private Lhurgoyf(final Lhurgoyf card) {
         super(card);
     }
 

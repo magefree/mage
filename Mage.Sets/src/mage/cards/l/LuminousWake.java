@@ -39,7 +39,7 @@ public final class LuminousWake extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public LuminousWake(final LuminousWake card) {
+    private LuminousWake(final LuminousWake card) {
         super(card);
     }
 

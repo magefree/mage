@@ -31,7 +31,7 @@ public final class HereticsPunishment extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HereticsPunishment(final HereticsPunishment card) {
+    private HereticsPunishment(final HereticsPunishment card) {
         super(card);
     }
 

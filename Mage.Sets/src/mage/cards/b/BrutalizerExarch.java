@@ -53,7 +53,7 @@ public final class BrutalizerExarch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BrutalizerExarch(final BrutalizerExarch card) {
+    private BrutalizerExarch(final BrutalizerExarch card) {
         super(card);
     }
 

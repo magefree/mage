@@ -22,7 +22,7 @@ public final class ObsidianGiant extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public ObsidianGiant(final ObsidianGiant card) {
+    private ObsidianGiant(final ObsidianGiant card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class Ensnare extends CardImpl {
         this.getSpellAbility().addEffect(new TapAllEffect(FILTER_PERMANENT_CREATURES));
     }
 
-    public Ensnare(final Ensnare card) {
+    private Ensnare(final Ensnare card) {
         super(card);
     }
 

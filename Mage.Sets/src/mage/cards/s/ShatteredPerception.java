@@ -25,7 +25,7 @@ public final class ShatteredPerception extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{R}"), TimingRule.SORCERY));
     }
 
-    public ShatteredPerception(final ShatteredPerception card) {
+    private ShatteredPerception(final ShatteredPerception card) {
         super(card);
     }
 

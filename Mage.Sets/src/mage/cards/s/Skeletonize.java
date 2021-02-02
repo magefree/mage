@@ -37,7 +37,7 @@ public final class Skeletonize extends CardImpl {
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
-    public Skeletonize(final Skeletonize card) {
+    private Skeletonize(final Skeletonize card) {
         super(card);
     }
 

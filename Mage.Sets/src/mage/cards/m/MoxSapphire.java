@@ -20,7 +20,7 @@ public final class MoxSapphire extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public MoxSapphire(final MoxSapphire card) {
+    private MoxSapphire(final MoxSapphire card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class StaffOfTheSunMagus extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), filterLand, false));
     }
 
-    public StaffOfTheSunMagus(final StaffOfTheSunMagus card) {
+    private StaffOfTheSunMagus(final StaffOfTheSunMagus card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class SidisiBroodTyrant extends CardImpl {
         this.addAbility(new SidisiBroodTyrantTriggeredAbility());
     }
 
-    public SidisiBroodTyrant(final SidisiBroodTyrant card) {
+    private SidisiBroodTyrant(final SidisiBroodTyrant card) {
         super(card);
     }
 

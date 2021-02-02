@@ -33,7 +33,7 @@ public final class Desolation extends CardImpl {
         this.addAbility(ability, new DesolationWatcher());
     }
 
-    public Desolation(final Desolation card) {
+    private Desolation(final Desolation card) {
         super(card);
     }
 

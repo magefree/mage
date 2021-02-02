@@ -39,7 +39,7 @@ public final class SimicCharm extends CardImpl {
         
     }
 
-    public SimicCharm(final SimicCharm card) {
+    private SimicCharm(final SimicCharm card) {
         super(card);
     }
 

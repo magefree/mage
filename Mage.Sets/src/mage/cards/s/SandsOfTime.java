@@ -35,7 +35,7 @@ public final class SandsOfTime extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SandsOfTimeEffect(), TargetController.ANY, false));
     }
 
-    public SandsOfTime(final SandsOfTime card) {
+    private SandsOfTime(final SandsOfTime card) {
         super(card);
     }
 

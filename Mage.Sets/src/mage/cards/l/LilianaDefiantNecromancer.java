@@ -56,7 +56,7 @@ public final class LilianaDefiantNecromancer extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new LilianaDefiantNecromancerEmblem()), -8));
     }
 
-    public LilianaDefiantNecromancer(final LilianaDefiantNecromancer card) {
+    private LilianaDefiantNecromancer(final LilianaDefiantNecromancer card) {
         super(card);
     }
 

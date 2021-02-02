@@ -31,7 +31,7 @@ public final class Umbilicus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Umbilicus(final Umbilicus card) {
+    private Umbilicus(final Umbilicus card) {
         super(card);
     }
 

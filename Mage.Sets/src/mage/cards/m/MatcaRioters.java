@@ -34,7 +34,7 @@ public final class MatcaRioters extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
     }
 
-    public MatcaRioters(final MatcaRioters card) {
+    private MatcaRioters(final MatcaRioters card) {
         super(card);
     }
 

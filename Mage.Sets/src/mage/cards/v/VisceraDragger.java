@@ -30,7 +30,7 @@ public final class VisceraDragger extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{1}{B}")));
     }
 
-    public VisceraDragger(final VisceraDragger card) {
+    private VisceraDragger(final VisceraDragger card) {
         super(card);
     }
 

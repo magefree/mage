@@ -34,7 +34,7 @@ public final class PriestOfTitania extends CardImpl {
         this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), xValue));
     }
 
-    public PriestOfTitania(final PriestOfTitania card) {
+    private PriestOfTitania(final PriestOfTitania card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class SatyrHedonist extends CardImpl {
 
     }
 
-    public SatyrHedonist(final SatyrHedonist card) {
+    private SatyrHedonist(final SatyrHedonist card) {
         super(card);
     }
 

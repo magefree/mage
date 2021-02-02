@@ -42,7 +42,7 @@ public final class HeirOfTheWilds extends CardImpl {
 
     }
 
-    public HeirOfTheWilds(final HeirOfTheWilds card) {
+    private HeirOfTheWilds(final HeirOfTheWilds card) {
         super(card);
     }
 

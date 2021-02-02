@@ -33,7 +33,7 @@ public final class TrespasserIlVec extends CardImpl {
                 new DiscardCardCost()));
     }
 
-    public TrespasserIlVec(final TrespasserIlVec card) {
+    private TrespasserIlVec(final TrespasserIlVec card) {
         super(card);
     }
 

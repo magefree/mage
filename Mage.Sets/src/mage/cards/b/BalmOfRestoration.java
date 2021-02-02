@@ -40,7 +40,7 @@ public final class BalmOfRestoration extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BalmOfRestoration(final BalmOfRestoration card) {
+    private BalmOfRestoration(final BalmOfRestoration card) {
         super(card);
     }
 

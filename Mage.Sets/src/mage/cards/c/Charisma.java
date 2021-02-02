@@ -46,7 +46,7 @@ public final class Charisma extends CardImpl {
         
     }
 
-    public Charisma(final Charisma card) {
+    private Charisma(final Charisma card) {
         super(card);
     }
 

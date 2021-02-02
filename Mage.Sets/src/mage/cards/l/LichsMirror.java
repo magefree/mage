@@ -30,7 +30,7 @@ public final class LichsMirror extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LichsMirrorEffect()));
     }
 
-    public LichsMirror(final LichsMirror card) {
+    private LichsMirror(final LichsMirror card) {
         super(card);
     }
 

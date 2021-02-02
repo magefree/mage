@@ -28,7 +28,7 @@ public final class SellSwordBrute extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DamageControllerEffect(2, "it"), false));
     }
 
-    public SellSwordBrute(final SellSwordBrute card) {
+    private SellSwordBrute(final SellSwordBrute card) {
         super(card);
     }
 

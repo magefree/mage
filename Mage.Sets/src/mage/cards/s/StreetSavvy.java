@@ -41,7 +41,7 @@ public final class StreetSavvy extends CardImpl {
         this.addAbility(staticAbility);
     }
 
-    public StreetSavvy(final StreetSavvy card) {
+    private StreetSavvy(final StreetSavvy card) {
         super(card);
     }
 

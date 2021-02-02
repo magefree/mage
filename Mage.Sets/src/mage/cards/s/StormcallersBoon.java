@@ -31,7 +31,7 @@ public final class StormcallersBoon extends CardImpl {
         this.addAbility(new CascadeAbility());
     }
 
-    public StormcallersBoon(final StormcallersBoon card) {
+    private StormcallersBoon(final StormcallersBoon card) {
         super(card);
     }
 

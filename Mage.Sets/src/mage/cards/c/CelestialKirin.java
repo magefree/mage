@@ -38,7 +38,7 @@ public final class CelestialKirin extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new CelestialKirinEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, false, true));
     }
 
-    public CelestialKirin(final CelestialKirin card) {
+    private CelestialKirin(final CelestialKirin card) {
         super(card);
     }
 

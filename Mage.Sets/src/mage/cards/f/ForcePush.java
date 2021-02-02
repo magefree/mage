@@ -26,7 +26,7 @@ public final class ForcePush extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public ForcePush(final ForcePush card) {
+    private ForcePush(final ForcePush card) {
         super(card);
     }
 

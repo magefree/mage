@@ -47,7 +47,7 @@ public final class InameLifeAspect extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InameLifeAspect(final InameLifeAspect card) {
+    private InameLifeAspect(final InameLifeAspect card) {
         super(card);
     }
 

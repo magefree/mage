@@ -48,7 +48,7 @@ public final class SkyshroudWarBeast extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SkyshroudWarBeastEffect()));
     }
 
-    public SkyshroudWarBeast(final SkyshroudWarBeast card) {
+    private SkyshroudWarBeast(final SkyshroudWarBeast card) {
         super(card);
     }
 

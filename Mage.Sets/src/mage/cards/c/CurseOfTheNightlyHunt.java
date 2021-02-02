@@ -37,7 +37,7 @@ public final class CurseOfTheNightlyHunt extends CardImpl {
 
     }
 
-    public CurseOfTheNightlyHunt(final CurseOfTheNightlyHunt card) {
+    private CurseOfTheNightlyHunt(final CurseOfTheNightlyHunt card) {
         super(card);
     }
 

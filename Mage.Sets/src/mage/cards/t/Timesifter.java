@@ -32,7 +32,7 @@ public final class Timesifter extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TimesifterEffect(), TargetController.ANY, false));
     }
 
-    public Timesifter(final Timesifter card) {
+    private Timesifter(final Timesifter card) {
         super(card);
     }
 

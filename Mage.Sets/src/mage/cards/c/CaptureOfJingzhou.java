@@ -21,7 +21,7 @@ public final class CaptureOfJingzhou extends CardImpl {
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());
     }
 
-    public CaptureOfJingzhou(final CaptureOfJingzhou card) {
+    private CaptureOfJingzhou(final CaptureOfJingzhou card) {
         super(card);
     }
 

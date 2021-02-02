@@ -51,7 +51,7 @@ public final class GiftOfParadise extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public GiftOfParadise(final GiftOfParadise card) {
+    private GiftOfParadise(final GiftOfParadise card) {
         super(card);
     }
 

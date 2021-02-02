@@ -37,7 +37,7 @@ public final class DryadGreenseeker extends CardImpl {
         ));
     }
 
-    public DryadGreenseeker(final DryadGreenseeker card) {
+    private DryadGreenseeker(final DryadGreenseeker card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class PatriarchsBidding extends CardImpl {
         this.getSpellAbility().addEffect(new PatriarchsBiddingEffect());
     }
 
-    public PatriarchsBidding(final PatriarchsBidding card) {
+    private PatriarchsBidding(final PatriarchsBidding card) {
         super(card);
     }
 

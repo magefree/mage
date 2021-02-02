@@ -35,7 +35,7 @@ public final class Kitesail extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public Kitesail(final Kitesail card) {
+    private Kitesail(final Kitesail card) {
         super(card);
     }
 

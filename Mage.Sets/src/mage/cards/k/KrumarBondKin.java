@@ -28,7 +28,7 @@ public final class KrumarBondKin extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{B}")));
     }
 
-    public KrumarBondKin(final KrumarBondKin card) {
+    private KrumarBondKin(final KrumarBondKin card) {
         super(card);
     }
 

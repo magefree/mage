@@ -31,7 +31,7 @@ public final class MerrowWitsniper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MerrowWitsniper(final MerrowWitsniper card) {
+    private MerrowWitsniper(final MerrowWitsniper card) {
         super(card);
     }
 

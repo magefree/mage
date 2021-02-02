@@ -30,7 +30,7 @@ public final class HussarPatrol extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public HussarPatrol(final HussarPatrol card) {
+    private HussarPatrol(final HussarPatrol card) {
         super(card);
     }
 

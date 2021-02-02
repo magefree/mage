@@ -30,7 +30,7 @@ public final class IchorclawMyr extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public IchorclawMyr(final IchorclawMyr card) {
+    private IchorclawMyr(final IchorclawMyr card) {
         super(card);
     }
 

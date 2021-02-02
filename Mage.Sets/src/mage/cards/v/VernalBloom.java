@@ -34,7 +34,7 @@ public final class VernalBloom extends CardImpl {
                 filter, SetTargetPointer.PLAYER));
     }
 
-    public VernalBloom(final VernalBloom card) {
+    private VernalBloom(final VernalBloom card) {
         super(card);
     }
 

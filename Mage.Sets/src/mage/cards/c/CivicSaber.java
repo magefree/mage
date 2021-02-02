@@ -36,7 +36,7 @@ public final class CivicSaber extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
  
-    public CivicSaber(final CivicSaber card) {
+    private CivicSaber(final CivicSaber card) {
         super(card);
     }
  

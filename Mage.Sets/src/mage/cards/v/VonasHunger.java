@@ -48,7 +48,7 @@ public final class VonasHunger extends CardImpl {
                 "If you have the city's blessing, instead each opponent sacrifices half the creatures they control rounded up"));
     }
 
-    public VonasHunger(final VonasHunger card) {
+    private VonasHunger(final VonasHunger card) {
         super(card);
     }
 

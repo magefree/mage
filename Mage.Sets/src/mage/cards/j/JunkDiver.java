@@ -45,7 +45,7 @@ public final class JunkDiver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JunkDiver(final JunkDiver card) {
+    private JunkDiver(final JunkDiver card) {
         super(card);
     }
 

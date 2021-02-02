@@ -38,7 +38,7 @@ public final class CosmicHorror extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CosmicHorrorEffect(new ManaCostsImpl("{3}{B}{B}{B}")), TargetController.YOU, false));
     }
 
-    public CosmicHorror(final CosmicHorror card) {
+    private CosmicHorror(final CosmicHorror card) {
         super(card);
     }
 

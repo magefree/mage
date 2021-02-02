@@ -47,7 +47,7 @@ public final class RazakethTheFoulblooded extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RazakethTheFoulblooded(final RazakethTheFoulblooded card) {
+    private RazakethTheFoulblooded(final RazakethTheFoulblooded card) {
         super(card);
     }
 

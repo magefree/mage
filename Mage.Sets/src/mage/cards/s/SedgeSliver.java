@@ -49,7 +49,7 @@ public final class SedgeSliver extends CardImpl {
                         filterSlivers, "All Slivers have \"{B}: Regenerate this permanent.\"")));
     }
 
-    public SedgeSliver(final SedgeSliver card) {
+    private SedgeSliver(final SedgeSliver card) {
         super(card);
     }
 

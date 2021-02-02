@@ -38,7 +38,7 @@ public final class NivixBarrier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NivixBarrier(final NivixBarrier card) {
+    private NivixBarrier(final NivixBarrier card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class LobberCrew extends CardImpl {
                 new UntapSourceEffect(), StaticFilters.FILTER_SPELL_A_MULTICOLORED, false));
     }
 
-    public LobberCrew(final LobberCrew card) {
+    private LobberCrew(final LobberCrew card) {
         super(card);
     }
 

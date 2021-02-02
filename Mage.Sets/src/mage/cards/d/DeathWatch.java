@@ -40,7 +40,7 @@ public final class DeathWatch extends CardImpl {
 		this.addAbility( new DiesAttachedTriggeredAbility(new DeathWatchEffect(), "enchanted creature"));
     }
 
-    public DeathWatch(final DeathWatch card) {
+    private DeathWatch(final DeathWatch card) {
         super(card);
     }
 

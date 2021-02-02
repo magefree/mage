@@ -27,7 +27,7 @@ public final class NestRobber extends CardImpl {
 
     }
 
-    public NestRobber(final NestRobber card) {
+    private NestRobber(final NestRobber card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class FreewindEquenaut extends CardImpl {
                 "As long as {this} is enchanted, it has \"{T}: {this} deals 2 damage to target attacking or blocking creature\"")));
     }
 
-    public FreewindEquenaut(final FreewindEquenaut card) {
+    private FreewindEquenaut(final FreewindEquenaut card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class ApostlesBlessing extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledPermanent(filter));
     }
 
-    public ApostlesBlessing(final ApostlesBlessing card) {
+    private ApostlesBlessing(final ApostlesBlessing card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class CallTheSkybreaker extends CardImpl {
 
     }
 
-    public CallTheSkybreaker(final CallTheSkybreaker card) {
+    private CallTheSkybreaker(final CallTheSkybreaker card) {
         super(card);
     }
 

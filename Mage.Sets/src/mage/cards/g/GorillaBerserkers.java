@@ -34,7 +34,7 @@ public final class GorillaBerserkers extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(3)));
     }
 
-    public GorillaBerserkers(final GorillaBerserkers card) {
+    private GorillaBerserkers(final GorillaBerserkers card) {
         super(card);
     }
 

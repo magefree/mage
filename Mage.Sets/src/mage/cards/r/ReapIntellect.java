@@ -39,7 +39,7 @@ public final class ReapIntellect extends CardImpl {
 
     }
 
-    public ReapIntellect(final ReapIntellect card) {
+    private ReapIntellect(final ReapIntellect card) {
         super(card);
     }
 

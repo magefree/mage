@@ -40,7 +40,7 @@ public final class TourachsChant extends CardImpl {
                 "Whenever a player puts a Forest onto the battlefield, {this} deals 3 damage to that player unless they put a -1/-1 counter on a creature they control."));
     }
 
-    public TourachsChant(final TourachsChant card) {
+    private TourachsChant(final TourachsChant card) {
         super(card);
     }
 

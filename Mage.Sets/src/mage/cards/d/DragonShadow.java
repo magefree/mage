@@ -53,7 +53,7 @@ public final class DragonShadow extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonShadowEffect(), filter, true, SetTargetPointer.PERMANENT, null));
     }
 
-    public DragonShadow(final DragonShadow card) {
+    private DragonShadow(final DragonShadow card) {
         super(card);
     }
 

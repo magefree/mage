@@ -45,7 +45,7 @@ public final class GraniteGrip extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GraniteGrip(final GraniteGrip card) {
+    private GraniteGrip(final GraniteGrip card) {
         super(card);
     }
 

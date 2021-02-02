@@ -43,7 +43,7 @@ public final class CommanderCody extends CardImpl {
         ));
     }
 
-    public CommanderCody(final CommanderCody card) {
+    private CommanderCody(final CommanderCody card) {
         super(card);
     }
 

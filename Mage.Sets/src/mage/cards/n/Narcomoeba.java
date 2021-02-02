@@ -31,7 +31,7 @@ public final class Narcomoeba extends CardImpl {
         this.addAbility(new NarcomoebaAbility());
     }
 
-    public Narcomoeba(final Narcomoeba card) {
+    private Narcomoeba(final Narcomoeba card) {
         super(card);
     }
 

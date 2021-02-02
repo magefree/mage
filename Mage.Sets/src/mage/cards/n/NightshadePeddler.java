@@ -35,7 +35,7 @@ public final class NightshadePeddler extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(DeathtouchAbility.getInstance(), ruleText)));
     }
 
-    public NightshadePeddler(final NightshadePeddler card) {
+    private NightshadePeddler(final NightshadePeddler card) {
         super(card);
     }
 

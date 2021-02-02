@@ -41,7 +41,7 @@ public final class CarrionThrash extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CarrionThrash(final CarrionThrash card) {
+    private CarrionThrash(final CarrionThrash card) {
         super(card);
     }
 

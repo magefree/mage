@@ -31,7 +31,7 @@ public final class MausoleumSecrets extends CardImpl {
         this.getSpellAbility().addEffect(new MausoleumSecretsEffect());
     }
 
-    public MausoleumSecrets(final MausoleumSecrets card) {
+    private MausoleumSecrets(final MausoleumSecrets card) {
         super(card);
     }
 

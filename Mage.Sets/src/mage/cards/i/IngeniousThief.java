@@ -35,7 +35,7 @@ public final class IngeniousThief extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IngeniousThief(final IngeniousThief card) {
+    private IngeniousThief(final IngeniousThief card) {
         super(card);
     }
 

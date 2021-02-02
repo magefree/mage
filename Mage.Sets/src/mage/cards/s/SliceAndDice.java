@@ -28,7 +28,7 @@ public final class SliceAndDice extends CardImpl {
         this.addAbility(new CycleTriggeredAbility(new DamageAllEffect(1, StaticFilters.FILTER_PERMANENT_CREATURE).setText("have it deal 1 damage to each creature"), true));
     }
 
-    public SliceAndDice(final SliceAndDice card) {
+    private SliceAndDice(final SliceAndDice card) {
         super(card);
     }
 

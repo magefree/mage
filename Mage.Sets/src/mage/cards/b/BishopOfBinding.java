@@ -62,7 +62,7 @@ public final class BishopOfBinding extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BishopOfBinding(final BishopOfBinding card) {
+    private BishopOfBinding(final BishopOfBinding card) {
         super(card);
     }
 

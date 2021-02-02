@@ -44,7 +44,7 @@ public final class SmolderInitiate extends CardImpl {
         
     }
 
-    public SmolderInitiate(final SmolderInitiate card) {
+    private SmolderInitiate(final SmolderInitiate card) {
         super(card);
     }
 

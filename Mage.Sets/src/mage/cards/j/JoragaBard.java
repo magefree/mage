@@ -39,7 +39,7 @@ public final class JoragaBard extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainAbilityAllEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, filter), true));
     }
 
-    public JoragaBard(final JoragaBard card) {
+    private JoragaBard(final JoragaBard card) {
         super(card);
     }
 

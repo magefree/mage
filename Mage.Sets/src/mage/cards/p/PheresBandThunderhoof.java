@@ -29,7 +29,7 @@ public final class PheresBandThunderhoof extends CardImpl {
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2), true)));
     }
 
-    public PheresBandThunderhoof(final PheresBandThunderhoof card) {
+    private PheresBandThunderhoof(final PheresBandThunderhoof card) {
         super(card);
     }
 

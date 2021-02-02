@@ -32,7 +32,7 @@ public final class DoomBlade extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public DoomBlade(final DoomBlade card) {
+    private DoomBlade(final DoomBlade card) {
         super(card);
     }
 

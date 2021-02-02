@@ -38,7 +38,7 @@ public final class Sicken extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public Sicken(final Sicken card) {
+    private Sicken(final Sicken card) {
         super(card);
     }
 

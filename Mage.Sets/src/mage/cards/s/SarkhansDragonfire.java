@@ -42,7 +42,7 @@ public final class SarkhansDragonfire extends CardImpl {
         );
     }
 
-    public SarkhansDragonfire(final SarkhansDragonfire card) {
+    private SarkhansDragonfire(final SarkhansDragonfire card) {
         super(card);
     }
 

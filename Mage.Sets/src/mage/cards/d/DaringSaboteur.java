@@ -39,7 +39,7 @@ public final class DaringSaboteur extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(effect, true));
     }
 
-    public DaringSaboteur(final DaringSaboteur card) {
+    private DaringSaboteur(final DaringSaboteur card) {
         super(card);
     }
 

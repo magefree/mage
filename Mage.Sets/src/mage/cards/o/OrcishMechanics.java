@@ -36,7 +36,7 @@ public final class OrcishMechanics extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrcishMechanics(final OrcishMechanics card) {
+    private OrcishMechanics(final OrcishMechanics card) {
         super(card);
     }
 

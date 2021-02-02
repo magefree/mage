@@ -41,7 +41,7 @@ public final class HeavenEarth extends SplitCard {
         getRightHalfCard().getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, filterWithouFlying));
     }
 
-    public HeavenEarth(final HeavenEarth card) {
+    private HeavenEarth(final HeavenEarth card) {
         super(card);
     }
 

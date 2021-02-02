@@ -35,7 +35,7 @@ public final class CollapsingBorders extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CollapsingBorders(final CollapsingBorders card) {
+    private CollapsingBorders(final CollapsingBorders card) {
         super(card);
     }
 

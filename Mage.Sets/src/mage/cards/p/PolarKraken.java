@@ -35,7 +35,7 @@ public final class PolarKraken extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT))));
     }
 
-    public PolarKraken(final PolarKraken card) {
+    private PolarKraken(final PolarKraken card) {
         super(card);
     }
 

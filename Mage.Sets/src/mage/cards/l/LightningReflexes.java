@@ -50,7 +50,7 @@ public final class LightningReflexes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LightningReflexes(final LightningReflexes card) {
+    private LightningReflexes(final LightningReflexes card) {
         super(card);
     }
 

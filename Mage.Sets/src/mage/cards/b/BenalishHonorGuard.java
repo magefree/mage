@@ -41,7 +41,7 @@ public final class BenalishHonorGuard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, StaticValue.get(0), Duration.WhileOnBattlefield)));
     }
 
-    public BenalishHonorGuard(final BenalishHonorGuard card) {
+    private BenalishHonorGuard(final BenalishHonorGuard card) {
         super(card);
     }
 

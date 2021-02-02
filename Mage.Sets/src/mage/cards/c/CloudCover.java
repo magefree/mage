@@ -28,7 +28,7 @@ public final class CloudCover extends CardImpl {
         this.addAbility(new CloudCoverAbility());
     }
 
-    public CloudCover(final CloudCover card) {
+    private CloudCover(final CloudCover card) {
         super(card);
     }
 

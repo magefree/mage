@@ -31,7 +31,7 @@ public final class KnightOfObligation extends CardImpl {
         this.addAbility(new ExtortAbility());
     }
 
-    public KnightOfObligation(final KnightOfObligation card) {
+    private KnightOfObligation(final KnightOfObligation card) {
         super(card);
     }
 

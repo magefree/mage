@@ -35,7 +35,7 @@ public final class DismantlingBlow extends CardImpl {
                 "if this spell was kicked, draw two cards"));
     }
 
-    public DismantlingBlow(final DismantlingBlow card) {
+    private DismantlingBlow(final DismantlingBlow card) {
         super(card);
     }
 

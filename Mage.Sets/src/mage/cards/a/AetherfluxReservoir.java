@@ -39,7 +39,7 @@ public final class AetherfluxReservoir extends CardImpl {
         this.addAbility(abilityPayLife);
     }
 
-    public AetherfluxReservoir(final AetherfluxReservoir card) {
+    private AetherfluxReservoir(final AetherfluxReservoir card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class CrookOfCondemnation extends CardImpl {
 
     }
 
-    public CrookOfCondemnation(final CrookOfCondemnation card) {
+    private CrookOfCondemnation(final CrookOfCondemnation card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class MarshViper extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(effect, false, true));
     }
 
-    public MarshViper(final MarshViper card) {
+    private MarshViper(final MarshViper card) {
         super(card);
     }
 

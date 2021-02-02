@@ -30,7 +30,7 @@ public final class TajuruPathwarden extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public TajuruPathwarden(final TajuruPathwarden card) {
+    private TajuruPathwarden(final TajuruPathwarden card) {
         super(card);
     }
 

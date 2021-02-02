@@ -39,7 +39,7 @@ public final class CraftyCutpurse extends CardImpl {
 
     }
 
-    public CraftyCutpurse(final CraftyCutpurse card) {
+    private CraftyCutpurse(final CraftyCutpurse card) {
         super(card);
     }
 

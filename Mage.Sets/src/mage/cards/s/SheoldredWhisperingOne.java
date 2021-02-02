@@ -44,7 +44,7 @@ public final class SheoldredWhisperingOne extends CardImpl {
                 new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "that player"), TargetController.OPPONENT, false));
     }
 
-    public SheoldredWhisperingOne(final SheoldredWhisperingOne card) {
+    private SheoldredWhisperingOne(final SheoldredWhisperingOne card) {
         super(card);
     }
 

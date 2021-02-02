@@ -41,7 +41,7 @@ public final class PhantomNantuko extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new TapSourceCost()));
     }
 
-    public PhantomNantuko(final PhantomNantuko card) {
+    private PhantomNantuko(final PhantomNantuko card) {
         super(card);
     }
 

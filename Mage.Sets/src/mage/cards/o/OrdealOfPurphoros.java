@@ -52,7 +52,7 @@ public final class OrdealOfPurphoros extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrdealOfPurphoros(final OrdealOfPurphoros card) {
+    private OrdealOfPurphoros(final OrdealOfPurphoros card) {
         super(card);
     }
 

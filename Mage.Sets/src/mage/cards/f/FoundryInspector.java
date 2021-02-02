@@ -34,7 +34,7 @@ public final class FoundryInspector extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public FoundryInspector(final FoundryInspector card) {
+    private FoundryInspector(final FoundryInspector card) {
         super(card);
     }
 

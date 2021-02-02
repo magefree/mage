@@ -27,7 +27,7 @@ public final class MesaUnicorn extends CardImpl {
 
     }
 
-    public MesaUnicorn(final MesaUnicorn card) {
+    private MesaUnicorn(final MesaUnicorn card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class MindstabThrull extends CardImpl {
         this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new DoIfCostPaid(effect, new SacrificeSourceCost()), false, true));
     }
 
-    public MindstabThrull(final MindstabThrull card) {
+    private MindstabThrull(final MindstabThrull card) {
         super(card);
     }
 

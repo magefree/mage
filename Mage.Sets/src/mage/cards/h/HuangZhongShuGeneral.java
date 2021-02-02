@@ -30,7 +30,7 @@ public final class HuangZhongShuGeneral extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
-    public HuangZhongShuGeneral(final HuangZhongShuGeneral card) {
+    private HuangZhongShuGeneral(final HuangZhongShuGeneral card) {
         super(card);
     }
 

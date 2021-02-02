@@ -34,7 +34,7 @@ public final class IntrusivePackbeast extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IntrusivePackbeast(final IntrusivePackbeast card) {
+    private IntrusivePackbeast(final IntrusivePackbeast card) {
         super(card);
     }
 

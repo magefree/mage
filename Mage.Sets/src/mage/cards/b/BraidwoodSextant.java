@@ -34,7 +34,7 @@ public final class BraidwoodSextant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BraidwoodSextant(final BraidwoodSextant card) {
+    private BraidwoodSextant(final BraidwoodSextant card) {
         super(card);
     }
 

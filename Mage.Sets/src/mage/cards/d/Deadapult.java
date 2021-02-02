@@ -39,7 +39,7 @@ public final class Deadapult extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Deadapult(final Deadapult card) {
+    private Deadapult(final Deadapult card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class BorderlandMarauder extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
     }
 
-    public BorderlandMarauder(final BorderlandMarauder card) {
+    private BorderlandMarauder(final BorderlandMarauder card) {
         super(card);
     }
 

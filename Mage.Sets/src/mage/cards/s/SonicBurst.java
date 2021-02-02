@@ -25,7 +25,7 @@ public final class SonicBurst extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public SonicBurst(final SonicBurst card) {
+    private SonicBurst(final SonicBurst card) {
         super(card);
     }
 

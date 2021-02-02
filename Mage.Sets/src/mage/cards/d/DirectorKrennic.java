@@ -47,7 +47,7 @@ public final class DirectorKrennic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DirectorKrennic(final DirectorKrennic card) {
+    private DirectorKrennic(final DirectorKrennic card) {
         super(card);
     }
 

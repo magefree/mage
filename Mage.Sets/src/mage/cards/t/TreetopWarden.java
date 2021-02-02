@@ -21,7 +21,7 @@ public final class TreetopWarden extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public TreetopWarden(final TreetopWarden card) {
+    private TreetopWarden(final TreetopWarden card) {
         super(card);
     }
 

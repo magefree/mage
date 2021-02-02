@@ -23,7 +23,7 @@ public final class FuelForTheCause extends CardImpl {
         this.getSpellAbility().addEffect(new ProliferateEffect().concatBy(", then"));
     }
 
-    public FuelForTheCause(final FuelForTheCause card) {
+    private FuelForTheCause(final FuelForTheCause card) {
         super(card);
     }
 

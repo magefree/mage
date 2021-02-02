@@ -37,7 +37,7 @@ public final class GiveTake extends SplitCard {
         getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
-    public GiveTake(final GiveTake card) {
+    private GiveTake(final GiveTake card) {
         super(card);
     }
 

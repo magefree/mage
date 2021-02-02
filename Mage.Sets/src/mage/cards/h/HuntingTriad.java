@@ -25,7 +25,7 @@ public final class HuntingTriad extends CardImpl {
         this.addAbility(new ReinforceAbility(3, new ManaCostsImpl("{3}{G}")));
     }
 
-    public HuntingTriad(final HuntingTriad card) {
+    private HuntingTriad(final HuntingTriad card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class ShieldDancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShieldDancer(final ShieldDancer card) {
+    private ShieldDancer(final ShieldDancer card) {
         super(card);
     }
 

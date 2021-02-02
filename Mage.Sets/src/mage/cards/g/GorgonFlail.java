@@ -31,7 +31,7 @@ public final class GorgonFlail extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{2}")));
     }
 
-    public GorgonFlail(final GorgonFlail card) {
+    private GorgonFlail(final GorgonFlail card) {
         super(card);
     }
 

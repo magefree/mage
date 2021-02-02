@@ -42,7 +42,7 @@ public final class VampiricSliver extends CardImpl {
 
     }
 
-    public VampiricSliver(final VampiricSliver card) {
+    private VampiricSliver(final VampiricSliver card) {
         super(card);
     }
 

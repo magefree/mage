@@ -44,7 +44,7 @@ public final class TreasuryThrull extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TreasuryThrull(final TreasuryThrull card) {
+    private TreasuryThrull(final TreasuryThrull card) {
         super(card);
     }
 

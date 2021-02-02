@@ -42,7 +42,7 @@ public final class ArsenalThresher extends CardImpl {
                 "you may reveal any number of other artifact cards from your hand. {this} enters the battlefield with a +1/+1 counter on it for each card revealed this way"));
     }
 
-    public ArsenalThresher(final ArsenalThresher card) {
+    private ArsenalThresher(final ArsenalThresher card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class Subdue extends CardImpl {
                 .setText("That creature gets +0/+X until end of turn, where X is its converted mana cost"));
     }
 
-    public Subdue(final Subdue card) {
+    private Subdue(final Subdue card) {
         super(card);
     }
 

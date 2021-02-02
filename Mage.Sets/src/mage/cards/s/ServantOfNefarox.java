@@ -27,7 +27,7 @@ public final class ServantOfNefarox extends CardImpl {
         this.addAbility(new ExaltedAbility());
     }
 
-    public ServantOfNefarox(final ServantOfNefarox card) {
+    private ServantOfNefarox(final ServantOfNefarox card) {
         super(card);
     }
 

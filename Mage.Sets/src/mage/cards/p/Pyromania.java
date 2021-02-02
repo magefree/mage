@@ -35,7 +35,7 @@ public final class Pyromania extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Pyromania(final Pyromania card) {
+    private Pyromania(final Pyromania card) {
         super(card);
     }
 

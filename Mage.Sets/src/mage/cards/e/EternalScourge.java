@@ -36,7 +36,7 @@ public final class EternalScourge extends CardImpl {
         this.addAbility(new EternalScourgeAbility());
     }
 
-    public EternalScourge(final EternalScourge card) {
+    private EternalScourge(final EternalScourge card) {
         super(card);
     }
 

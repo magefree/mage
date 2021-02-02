@@ -41,7 +41,7 @@ public final class MartialGlory extends CardImpl {
         
     }
 
-    public MartialGlory(final MartialGlory card) {
+    private MartialGlory(final MartialGlory card) {
         super(card);
     }
 

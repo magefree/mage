@@ -27,7 +27,7 @@ public final class AvenFleetwing extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    public AvenFleetwing(final AvenFleetwing card) {
+    private AvenFleetwing(final AvenFleetwing card) {
         super(card);
     }
 

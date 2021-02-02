@@ -50,7 +50,7 @@ public final class SpellweaverVolute extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new SpellweaverVoluteEffect(), filterSpell, false));
     }
 
-    public SpellweaverVolute(final SpellweaverVolute card) {
+    private SpellweaverVolute(final SpellweaverVolute card) {
         super(card);
     }
 

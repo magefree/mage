@@ -32,7 +32,7 @@ public final class VoltaicServant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VoltaicServant(final VoltaicServant card) {
+    private VoltaicServant(final VoltaicServant card) {
         super(card);
     }
 

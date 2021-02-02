@@ -33,7 +33,7 @@ public final class PsychicSpear extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
     }
 
-    public PsychicSpear(final PsychicSpear card) {
+    private PsychicSpear(final PsychicSpear card) {
         super(card);
     }
 

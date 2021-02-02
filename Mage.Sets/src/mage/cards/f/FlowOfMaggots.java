@@ -39,7 +39,7 @@ public final class FlowOfMaggots extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public FlowOfMaggots(final FlowOfMaggots card) {
+    private FlowOfMaggots(final FlowOfMaggots card) {
         super(card);
     }
 

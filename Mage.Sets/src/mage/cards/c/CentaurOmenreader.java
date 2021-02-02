@@ -41,7 +41,7 @@ public final class CentaurOmenreader extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CentaurOmenreaderSpellsCostReductionEffect(filter)));
     }
 
-    public CentaurOmenreader(final CentaurOmenreader card) {
+    private CentaurOmenreader(final CentaurOmenreader card) {
         super(card);
     }
 

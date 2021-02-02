@@ -29,7 +29,7 @@ public final class TempleOfMalice extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public TempleOfMalice(final TempleOfMalice card) {
+    private TempleOfMalice(final TempleOfMalice card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class DutifulServants extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public DutifulServants(final DutifulServants card) {
+    private DutifulServants(final DutifulServants card) {
         super(card);
     }
 

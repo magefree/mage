@@ -45,7 +45,7 @@ public final class ReclusiveWight extends CardImpl {
         ));
     }
 
-    public ReclusiveWight(final ReclusiveWight card) {
+    private ReclusiveWight(final ReclusiveWight card) {
         super(card);
     }
 

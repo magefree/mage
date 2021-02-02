@@ -30,7 +30,7 @@ public final class LilianasSpecter extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT), false));
     }
 
-    public LilianasSpecter(final LilianasSpecter card) {
+    private LilianasSpecter(final LilianasSpecter card) {
         super(card);
     }
 

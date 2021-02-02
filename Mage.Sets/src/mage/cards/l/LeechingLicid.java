@@ -37,7 +37,7 @@ public final class LeechingLicid extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.CONTROLLER_ATTACHED_TO, false, true));
     }
 
-    public LeechingLicid(final LeechingLicid card) {
+    private LeechingLicid(final LeechingLicid card) {
         super(card);
     }
 

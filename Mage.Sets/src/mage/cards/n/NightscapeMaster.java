@@ -42,7 +42,7 @@ public final class NightscapeMaster extends CardImpl {
         this.addAbility(damageAbility);
     }
 
-    public NightscapeMaster(final NightscapeMaster card) {
+    private NightscapeMaster(final NightscapeMaster card) {
         super(card);
     }
 

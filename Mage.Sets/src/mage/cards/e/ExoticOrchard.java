@@ -21,7 +21,7 @@ public final class ExoticOrchard extends CardImpl {
         this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));
     }
 
-    public ExoticOrchard(final ExoticOrchard card) {
+    private ExoticOrchard(final ExoticOrchard card) {
         super(card);
     }
 

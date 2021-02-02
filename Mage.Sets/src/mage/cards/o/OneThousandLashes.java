@@ -44,7 +44,7 @@ public final class OneThousandLashes extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), TargetController.CONTROLLER_ATTACHED_TO, false, true));
     }
 
-    public OneThousandLashes(final OneThousandLashes card) {
+    private OneThousandLashes(final OneThousandLashes card) {
         super(card);
     }
 

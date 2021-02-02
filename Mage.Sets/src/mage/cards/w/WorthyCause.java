@@ -34,7 +34,7 @@ public final class WorthyCause extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public WorthyCause(final WorthyCause card) {
+    private WorthyCause(final WorthyCause card) {
         super(card);
     }
 

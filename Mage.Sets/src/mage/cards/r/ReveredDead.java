@@ -29,7 +29,7 @@ public final class ReveredDead extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{W}")));
     }
 
-    public ReveredDead(final ReveredDead card) {
+    private ReveredDead(final ReveredDead card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class RageNimbus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RageNimbus(final RageNimbus card) {
+    private RageNimbus(final RageNimbus card) {
         super(card);
     }
 

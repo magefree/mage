@@ -41,7 +41,7 @@ public final class DestructiveUrge extends CardImpl {
         ));
     }
 
-    public DestructiveUrge(final DestructiveUrge card) {
+    private DestructiveUrge(final DestructiveUrge card) {
         super(card);
     }
 

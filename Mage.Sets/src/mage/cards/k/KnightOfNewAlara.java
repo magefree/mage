@@ -41,7 +41,7 @@ public final class KnightOfNewAlara extends CardImpl {
 
     }
 
-    public KnightOfNewAlara(final KnightOfNewAlara card) {
+    private KnightOfNewAlara(final KnightOfNewAlara card) {
         super(card);
     }
 

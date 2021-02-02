@@ -26,7 +26,7 @@ public final class MindPeel extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1));
     }
 
-    public MindPeel(final MindPeel card) {
+    private MindPeel(final MindPeel card) {
         super(card);
     }
 

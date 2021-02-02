@@ -31,7 +31,7 @@ public final class ShinkaGatekeeper extends CardImpl {
         this.addAbility(new DealtDamageToSourceTriggeredAbility(new ShinkaGatekeeperDealDamageEffect(), false, false, true));
     }
 
-    public ShinkaGatekeeper(final ShinkaGatekeeper card) {
+    private ShinkaGatekeeper(final ShinkaGatekeeper card) {
         super(card);
     }
 

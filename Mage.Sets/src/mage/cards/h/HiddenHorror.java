@@ -28,7 +28,7 @@ public final class HiddenHorror extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard("a creature card"))))));
     }
 
-    public HiddenHorror(final HiddenHorror card) {
+    private HiddenHorror(final HiddenHorror card) {
         super(card);
     }
 

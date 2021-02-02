@@ -46,7 +46,7 @@ public final class SagesRowDenizen extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SagesRowDenizen(final SagesRowDenizen card) {
+    private SagesRowDenizen(final SagesRowDenizen card) {
         super(card);
     }
 

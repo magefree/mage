@@ -47,7 +47,7 @@ public final class KnightsOfTheBlackRose extends CardImpl {
 
     }
 
-    public KnightsOfTheBlackRose(final KnightsOfTheBlackRose card) {
+    private KnightsOfTheBlackRose(final KnightsOfTheBlackRose card) {
         super(card);
     }
 

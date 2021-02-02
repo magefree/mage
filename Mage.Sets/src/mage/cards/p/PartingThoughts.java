@@ -28,7 +28,7 @@ public final class PartingThoughts extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PartingThoughts(final PartingThoughts card) {
+    private PartingThoughts(final PartingThoughts card) {
         super(card);
     }
 

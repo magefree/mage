@@ -48,7 +48,7 @@ public final class FleecemaneLion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FleecemaneLion(final FleecemaneLion card) {
+    private FleecemaneLion(final FleecemaneLion card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class RaidersSpoils extends CardImpl {
         this.addAbility(new RaidersSpoilsTriggeredAbility());
     }
 
-    public RaidersSpoils(final RaidersSpoils card) {
+    private RaidersSpoils(final RaidersSpoils card) {
         super(card);
     }
 

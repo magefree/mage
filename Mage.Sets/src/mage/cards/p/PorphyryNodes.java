@@ -43,7 +43,7 @@ public final class PorphyryNodes extends CardImpl {
         
     }
 
-    public PorphyryNodes(final PorphyryNodes card) {
+    private PorphyryNodes(final PorphyryNodes card) {
         super(card);
     }
 

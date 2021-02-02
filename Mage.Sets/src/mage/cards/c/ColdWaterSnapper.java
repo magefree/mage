@@ -27,7 +27,7 @@ public final class ColdWaterSnapper extends CardImpl {
 
     }
 
-    public ColdWaterSnapper(final ColdWaterSnapper card) {
+    private ColdWaterSnapper(final ColdWaterSnapper card) {
         super(card);
     }
 

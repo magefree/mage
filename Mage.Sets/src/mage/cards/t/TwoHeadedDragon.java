@@ -44,7 +44,7 @@ public final class TwoHeadedDragon extends CardImpl {
 
     }
 
-    public TwoHeadedDragon(final TwoHeadedDragon card) {
+    private TwoHeadedDragon(final TwoHeadedDragon card) {
         super(card);
     }
 

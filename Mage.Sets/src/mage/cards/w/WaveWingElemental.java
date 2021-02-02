@@ -31,7 +31,7 @@ public final class WaveWingElemental extends CardImpl {
 
     }
 
-    public WaveWingElemental(final WaveWingElemental card) {
+    private WaveWingElemental(final WaveWingElemental card) {
         super(card);
     }
 

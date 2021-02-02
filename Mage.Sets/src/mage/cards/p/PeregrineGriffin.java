@@ -26,7 +26,7 @@ public final class PeregrineGriffin extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public PeregrineGriffin(final PeregrineGriffin card) {
+    private PeregrineGriffin(final PeregrineGriffin card) {
         super(card);
     }
 

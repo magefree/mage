@@ -47,7 +47,7 @@ public final class ErstwhileTrooper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ErstwhileTrooper(final ErstwhileTrooper card) {
+    private ErstwhileTrooper(final ErstwhileTrooper card) {
         super(card);
     }
 

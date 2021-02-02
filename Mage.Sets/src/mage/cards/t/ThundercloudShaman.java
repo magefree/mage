@@ -43,7 +43,7 @@ public final class ThundercloudShaman extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
     }
 
-    public ThundercloudShaman(final ThundercloudShaman card) {
+    private ThundercloudShaman(final ThundercloudShaman card) {
         super(card);
     }
 

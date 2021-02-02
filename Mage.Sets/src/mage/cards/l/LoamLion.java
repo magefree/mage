@@ -42,7 +42,7 @@ public final class LoamLion extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter), rule)));
     }
 
-    public LoamLion(final LoamLion card) {
+    private LoamLion(final LoamLion card) {
         super(card);
     }
 

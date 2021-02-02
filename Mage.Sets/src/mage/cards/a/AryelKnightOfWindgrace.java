@@ -64,7 +64,7 @@ public final class AryelKnightOfWindgrace extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AryelKnightOfWindgrace(final AryelKnightOfWindgrace card) {
+    private AryelKnightOfWindgrace(final AryelKnightOfWindgrace card) {
         super(card);
     }
 

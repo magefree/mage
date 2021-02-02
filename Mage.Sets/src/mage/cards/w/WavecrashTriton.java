@@ -41,7 +41,7 @@ public final class WavecrashTriton extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WavecrashTriton(final WavecrashTriton card) {
+    private WavecrashTriton(final WavecrashTriton card) {
         super(card);
     }
 

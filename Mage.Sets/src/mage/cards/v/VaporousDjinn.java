@@ -38,7 +38,7 @@ public final class VaporousDjinn extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new VaporousDjinnEffect(), TargetController.YOU, false));
     }
 
-    public VaporousDjinn(final VaporousDjinn card) {
+    private VaporousDjinn(final VaporousDjinn card) {
         super(card);
     }
 

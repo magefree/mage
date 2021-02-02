@@ -26,7 +26,7 @@ public final class PressurePoint extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public PressurePoint(final PressurePoint card) {
+    private PressurePoint(final PressurePoint card) {
         super(card);
     }
 

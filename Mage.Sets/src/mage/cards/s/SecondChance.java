@@ -31,7 +31,7 @@ public final class SecondChance extends CardImpl {
         
     }
 
-    public SecondChance(final SecondChance card) {
+    private SecondChance(final SecondChance card) {
         super(card);
     }
 

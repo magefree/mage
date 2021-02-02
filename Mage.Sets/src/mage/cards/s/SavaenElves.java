@@ -49,7 +49,7 @@ public final class SavaenElves extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SavaenElves(final SavaenElves card) {
+    private SavaenElves(final SavaenElves card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class MirriTheCursed extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MirriTheCursed(final MirriTheCursed card) {
+    private MirriTheCursed(final MirriTheCursed card) {
         super(card);
     }
 

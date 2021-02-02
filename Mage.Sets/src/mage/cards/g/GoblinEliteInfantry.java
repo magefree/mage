@@ -27,7 +27,7 @@ public final class GoblinEliteInfantry extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(-1, -1, Duration.EndOfTurn), false));
     }
 
-    public GoblinEliteInfantry(final GoblinEliteInfantry card) {
+    private GoblinEliteInfantry(final GoblinEliteInfantry card) {
         super(card);
     }
 

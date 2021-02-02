@@ -29,7 +29,7 @@ public final class ThievesFortune extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false));
     }
 
-    public ThievesFortune(final ThievesFortune card) {
+    private ThievesFortune(final ThievesFortune card) {
         super(card);
     }
 

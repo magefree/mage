@@ -39,7 +39,7 @@ public final class ArchetypeOfFinality extends CardImpl {
                
     }
 
-    public ArchetypeOfFinality(final ArchetypeOfFinality card) {
+    private ArchetypeOfFinality(final ArchetypeOfFinality card) {
         super(card);
     }
 

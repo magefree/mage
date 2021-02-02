@@ -51,7 +51,7 @@ public final class OtepecHuntmaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OtepecHuntmaster(final OtepecHuntmaster card) {
+    private OtepecHuntmaster(final OtepecHuntmaster card) {
         super(card);
     }
 

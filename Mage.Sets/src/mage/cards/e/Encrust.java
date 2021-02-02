@@ -53,7 +53,7 @@ public final class Encrust extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Encrust(final Encrust card) {
+    private Encrust(final Encrust card) {
         super(card);
     }
 

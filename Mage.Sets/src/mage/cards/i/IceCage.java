@@ -44,7 +44,7 @@ public final class IceCage extends CardImpl {
         this.addAbility(new BecomesTargetAttachedTriggeredAbility(new DestroySourceEffect()));
     }
 
-    public IceCage(final IceCage card) {
+    private IceCage(final IceCage card) {
         super(card);
     }
 

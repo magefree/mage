@@ -29,7 +29,7 @@ public final class Reparations extends CardImpl {
 
     }
 
-    public Reparations(final Reparations card) {
+    private Reparations(final Reparations card) {
         super(card);
     }
 

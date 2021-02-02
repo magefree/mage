@@ -55,7 +55,7 @@ public final class JunglePatrol extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true))));
     }
 
-    public JunglePatrol(final JunglePatrol card) {
+    private JunglePatrol(final JunglePatrol card) {
         super(card);
     }
 

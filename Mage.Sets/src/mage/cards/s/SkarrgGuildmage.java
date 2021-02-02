@@ -47,7 +47,7 @@ public final class SkarrgGuildmage extends CardImpl {
 
     }
 
-    public SkarrgGuildmage(final SkarrgGuildmage card) {
+    private SkarrgGuildmage(final SkarrgGuildmage card) {
         super(card);
     }
 

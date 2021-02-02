@@ -25,7 +25,7 @@ public final class TorrentOfFire extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public TorrentOfFire(final TorrentOfFire card) {
+    private TorrentOfFire(final TorrentOfFire card) {
         super(card);
     }
 

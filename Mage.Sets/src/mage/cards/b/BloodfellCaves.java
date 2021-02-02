@@ -31,7 +31,7 @@ public final class BloodfellCaves extends CardImpl {
         this.addAbility(new RedManaAbility());           
     }
 
-    public BloodfellCaves(final BloodfellCaves card) {
+    private BloodfellCaves(final BloodfellCaves card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class RavenousLeucrocota extends CardImpl {
         this.addAbility(new MonstrosityAbility("{6}{G}", 3));
     }
 
-    public RavenousLeucrocota(final RavenousLeucrocota card) {
+    private RavenousLeucrocota(final RavenousLeucrocota card) {
         super(card);
     }
 

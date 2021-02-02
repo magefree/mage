@@ -37,7 +37,7 @@ public final class ProwessOfTheFair extends CardImpl {
             true, filter, false, true));
     }
 
-    public ProwessOfTheFair(final ProwessOfTheFair card) {
+    private ProwessOfTheFair(final ProwessOfTheFair card) {
         super(card);
     }
 

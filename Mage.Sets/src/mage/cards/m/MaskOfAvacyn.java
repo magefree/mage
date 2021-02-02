@@ -34,7 +34,7 @@ public final class MaskOfAvacyn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MaskOfAvacyn(final MaskOfAvacyn card) {
+    private MaskOfAvacyn(final MaskOfAvacyn card) {
         super(card);
     }
 

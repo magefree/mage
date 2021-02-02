@@ -27,7 +27,7 @@ public final class DuskhunterBat extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public DuskhunterBat(final DuskhunterBat card) {
+    private DuskhunterBat(final DuskhunterBat card) {
         super(card);
     }
 

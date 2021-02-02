@@ -39,7 +39,7 @@ public final class SpikeWorker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpikeWorker(final SpikeWorker card) {
+    private SpikeWorker(final SpikeWorker card) {
         super(card);
     }
 

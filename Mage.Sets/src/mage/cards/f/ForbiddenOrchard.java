@@ -58,7 +58,7 @@ public final class ForbiddenOrchard extends CardImpl {
         this.addAbility(new ForbiddenOrchardTriggeredAbility());
     }
 
-    public ForbiddenOrchard(final ForbiddenOrchard card) {
+    private ForbiddenOrchard(final ForbiddenOrchard card) {
         super(card);
     }
 

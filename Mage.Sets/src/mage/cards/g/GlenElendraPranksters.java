@@ -40,7 +40,7 @@ public final class GlenElendraPranksters extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GlenElendraPranksters(final GlenElendraPranksters card) {
+    private GlenElendraPranksters(final GlenElendraPranksters card) {
         super(card);
     }
 

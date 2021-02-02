@@ -38,7 +38,7 @@ public final class ThrabenDoomsayer extends CardImpl {
                 FatefulHourCondition.instance, "<br><i>Fateful hour</i> &mdash; As long as you have 5 or less life, other creatures you control get +2/+2")));
     }
 
-    public ThrabenDoomsayer(final ThrabenDoomsayer card) {
+    private ThrabenDoomsayer(final ThrabenDoomsayer card) {
         super(card);
     }
 

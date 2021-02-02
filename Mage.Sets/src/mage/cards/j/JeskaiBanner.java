@@ -37,7 +37,7 @@ public final class JeskaiBanner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JeskaiBanner(final JeskaiBanner card) {
+    private JeskaiBanner(final JeskaiBanner card) {
         super(card);
     }
 

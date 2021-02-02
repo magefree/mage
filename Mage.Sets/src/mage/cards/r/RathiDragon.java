@@ -40,7 +40,7 @@ public final class RathiDragon extends CardImpl {
                 new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true)))));
     }
 
-    public RathiDragon(final RathiDragon card) {
+    private RathiDragon(final RathiDragon card) {
         super(card);
     }
 

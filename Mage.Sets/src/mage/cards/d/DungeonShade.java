@@ -34,7 +34,7 @@ public final class DungeonShade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("B")));
     }
 
-    public DungeonShade(final DungeonShade card) {
+    private DungeonShade(final DungeonShade card) {
         super(card);
     }
 

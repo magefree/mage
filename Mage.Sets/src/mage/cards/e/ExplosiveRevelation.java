@@ -31,7 +31,7 @@ public final class ExplosiveRevelation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public ExplosiveRevelation(final ExplosiveRevelation card) {
+    private ExplosiveRevelation(final ExplosiveRevelation card) {
         super(card);
     }
 

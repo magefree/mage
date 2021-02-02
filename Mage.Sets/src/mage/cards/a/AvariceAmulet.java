@@ -54,7 +54,7 @@ public final class AvariceAmulet extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public AvariceAmulet(final AvariceAmulet card) {
+    private AvariceAmulet(final AvariceAmulet card) {
         super(card);
     }
 

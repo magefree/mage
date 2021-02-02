@@ -34,7 +34,7 @@ public final class GaddockTeeg extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GaddockTeegReplacementEffectX()));
     }
 
-    public GaddockTeeg(final GaddockTeeg card) {
+    private GaddockTeeg(final GaddockTeeg card) {
         super(card);
     }
 

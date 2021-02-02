@@ -32,7 +32,7 @@ public final class Temper extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Temper(final Temper card) {
+    private Temper(final Temper card) {
         super(card);
     }
 

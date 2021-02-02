@@ -57,7 +57,7 @@ public final class TetzimocPrimalDeath extends CardImpl {
 
     }
 
-    public TetzimocPrimalDeath(final TetzimocPrimalDeath card) {
+    private TetzimocPrimalDeath(final TetzimocPrimalDeath card) {
         super(card);
     }
 

@@ -60,7 +60,7 @@ public final class SilumgarsScorn extends CardImpl {
         }
     }
     
-    public SilumgarsScorn(final SilumgarsScorn card) {
+    private SilumgarsScorn(final SilumgarsScorn card) {
         super(card);
     }
 

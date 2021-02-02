@@ -39,7 +39,7 @@ public final class ZndrspltEyeOfWisdom extends CardImpl {
         this.addAbility(new WinsCoinFlipTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public ZndrspltEyeOfWisdom(final ZndrspltEyeOfWisdom card) {
+    private ZndrspltEyeOfWisdom(final ZndrspltEyeOfWisdom card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class Corrosion extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new CorrosionRemoveCountersEffect(), false)); 
     }
 
-    public Corrosion(final Corrosion card) {
+    private Corrosion(final Corrosion card) {
         super(card);
     }
 

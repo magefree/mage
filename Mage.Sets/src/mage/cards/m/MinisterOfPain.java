@@ -41,7 +41,7 @@ public final class MinisterOfPain extends CardImpl {
         
     }
 
-    public MinisterOfPain(final MinisterOfPain card) {
+    private MinisterOfPain(final MinisterOfPain card) {
         super(card);
     }
 

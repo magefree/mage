@@ -36,7 +36,7 @@ public final class HeartwoodStoryteller extends CardImpl {
         this.addAbility(new HeartwoodStorytellerTriggeredAbility());
     }
 
-    public HeartwoodStoryteller(final HeartwoodStoryteller card) {
+    private HeartwoodStoryteller(final HeartwoodStoryteller card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class LodestoneMyr extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public LodestoneMyr(final LodestoneMyr card) {
+    private LodestoneMyr(final LodestoneMyr card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class RemorsefulCleric extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RemorsefulCleric(final RemorsefulCleric card) {
+    private RemorsefulCleric(final RemorsefulCleric card) {
         super(card);
     }
 

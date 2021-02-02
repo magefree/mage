@@ -38,7 +38,7 @@ public final class WarpedLandscape extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WarpedLandscape(final WarpedLandscape card) {
+    private WarpedLandscape(final WarpedLandscape card) {
         super(card);
     }
 

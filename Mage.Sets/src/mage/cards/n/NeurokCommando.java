@@ -29,7 +29,7 @@ public final class NeurokCommando extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
-    public NeurokCommando(final NeurokCommando card) {
+    private NeurokCommando(final NeurokCommando card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class IgniteDisorder extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, filter));
     }
 
-    public IgniteDisorder(final IgniteDisorder card) {
+    private IgniteDisorder(final IgniteDisorder card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class HardenedScales extends CardImpl {
 
     }
 
-    public HardenedScales(final HardenedScales card) {
+    private HardenedScales(final HardenedScales card) {
         super(card);
     }
 

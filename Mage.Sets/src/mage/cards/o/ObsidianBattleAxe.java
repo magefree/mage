@@ -45,7 +45,7 @@ public final class ObsidianBattleAxe extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public ObsidianBattleAxe(final ObsidianBattleAxe card) {
+    private ObsidianBattleAxe(final ObsidianBattleAxe card) {
         super(card);
     }
 

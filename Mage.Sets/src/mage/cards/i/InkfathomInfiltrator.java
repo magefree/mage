@@ -28,7 +28,7 @@ public final class InkfathomInfiltrator extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public InkfathomInfiltrator(final InkfathomInfiltrator card) {
+    private InkfathomInfiltrator(final InkfathomInfiltrator card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class ThoughtDissector extends CardImpl {
         this.addAbility(abilitiy);
     }
 
-    public ThoughtDissector(final ThoughtDissector card) {
+    private ThoughtDissector(final ThoughtDissector card) {
         super(card);
     }
 

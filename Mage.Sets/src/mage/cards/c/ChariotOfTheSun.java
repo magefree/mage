@@ -43,7 +43,7 @@ public final class ChariotOfTheSun extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChariotOfTheSun(final ChariotOfTheSun card) {
+    private ChariotOfTheSun(final ChariotOfTheSun card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class ExcavationElephant extends CardImpl {
         ));
     }
 
-    public ExcavationElephant(final ExcavationElephant card) {
+    private ExcavationElephant(final ExcavationElephant card) {
         super(card);
     }
 

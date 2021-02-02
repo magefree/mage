@@ -29,7 +29,7 @@ public final class VedalkenGhoul extends CardImpl {
 
     }
 
-    public VedalkenGhoul(final VedalkenGhoul card) {
+    private VedalkenGhoul(final VedalkenGhoul card) {
         super(card);
     }
 

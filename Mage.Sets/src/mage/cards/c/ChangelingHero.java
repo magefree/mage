@@ -33,7 +33,7 @@ public final class ChangelingHero extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public ChangelingHero(final ChangelingHero card) {
+    private ChangelingHero(final ChangelingHero card) {
         super(card);
     }
 

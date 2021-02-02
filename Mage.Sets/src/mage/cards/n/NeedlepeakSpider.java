@@ -25,7 +25,7 @@ public final class NeedlepeakSpider extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public NeedlepeakSpider(final NeedlepeakSpider card) {
+    private NeedlepeakSpider(final NeedlepeakSpider card) {
         super(card);
     }
 

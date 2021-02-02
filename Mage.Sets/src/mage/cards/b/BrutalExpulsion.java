@@ -52,7 +52,7 @@ public final class BrutalExpulsion extends CardImpl {
         this.getSpellAbility().addWatcher(new DamagedByWatcher(true));
     }
 
-    public BrutalExpulsion(final BrutalExpulsion card) {
+    private BrutalExpulsion(final BrutalExpulsion card) {
         super(card);
     }
 

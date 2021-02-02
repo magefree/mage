@@ -22,7 +22,7 @@ public final class DromokaWarrior extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public DromokaWarrior(final DromokaWarrior card) {
+    private DromokaWarrior(final DromokaWarrior card) {
         super(card);
     }
 

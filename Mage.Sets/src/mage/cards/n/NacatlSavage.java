@@ -28,7 +28,7 @@ public final class NacatlSavage extends CardImpl {
         this.addAbility(new ProtectionAbility(new FilterArtifactCard("artifacts")));
     }
 
-    public NacatlSavage(final NacatlSavage card) {
+    private NacatlSavage(final NacatlSavage card) {
         super(card);
     }
 

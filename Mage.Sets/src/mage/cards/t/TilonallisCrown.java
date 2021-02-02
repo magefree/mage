@@ -52,7 +52,7 @@ public final class TilonallisCrown extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TilonallisCrown(final TilonallisCrown card) {
+    private TilonallisCrown(final TilonallisCrown card) {
         super(card);
     }
 

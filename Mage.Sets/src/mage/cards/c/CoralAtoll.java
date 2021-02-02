@@ -44,7 +44,7 @@ public final class CoralAtoll extends CardImpl {
 
     }
 
-    public CoralAtoll(final CoralAtoll card) {
+    private CoralAtoll(final CoralAtoll card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class DeadlyWanderings extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeadlyWanderings(final DeadlyWanderings card) {
+    private DeadlyWanderings(final DeadlyWanderings card) {
         super(card);
     }
 

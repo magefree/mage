@@ -30,7 +30,7 @@ public final class AvengingArrow extends CardImpl {
         this.getSpellAbility().addWatcher(new SourceDidDamageWatcher());
     }
 
-    public AvengingArrow(final AvengingArrow card) {
+    private AvengingArrow(final AvengingArrow card) {
         super(card);
     }
 

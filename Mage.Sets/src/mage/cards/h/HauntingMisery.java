@@ -26,7 +26,7 @@ public final class HauntingMisery extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
     }
 
-    public HauntingMisery(final HauntingMisery card) {
+    private HauntingMisery(final HauntingMisery card) {
         super(card);
     }
 

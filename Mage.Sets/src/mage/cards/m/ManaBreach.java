@@ -33,7 +33,7 @@ public final class ManaBreach extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new ManaBreachEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.PLAYER));
     }
 
-    public ManaBreach(final ManaBreach card) {
+    private ManaBreach(final ManaBreach card) {
         super(card);
     }
 

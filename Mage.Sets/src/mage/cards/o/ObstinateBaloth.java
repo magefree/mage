@@ -34,7 +34,7 @@ public final class ObstinateBaloth extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.HAND, new DiscardOntoBattlefieldEffect()));
     }
 
-    public ObstinateBaloth(final ObstinateBaloth card) {
+    private ObstinateBaloth(final ObstinateBaloth card) {
         super(card);
     }
 

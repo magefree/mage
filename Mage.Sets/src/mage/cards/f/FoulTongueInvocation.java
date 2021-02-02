@@ -41,7 +41,7 @@ public final class FoulTongueInvocation extends CardImpl {
         this.getSpellAbility().addWatcher(new DragonOnTheBattlefieldWhileSpellWasCastWatcher());
     }
 
-    public FoulTongueInvocation(final FoulTongueInvocation card) {
+    private FoulTongueInvocation(final FoulTongueInvocation card) {
         super(card);
     }
 

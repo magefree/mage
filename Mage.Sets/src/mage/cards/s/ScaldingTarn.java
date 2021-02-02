@@ -23,7 +23,7 @@ public final class ScaldingTarn extends CardImpl {
         this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.ISLAND, SubType.MOUNTAIN)));
     }
 
-    public ScaldingTarn(final ScaldingTarn card) {
+    private ScaldingTarn(final ScaldingTarn card) {
         super(card);
     }
 

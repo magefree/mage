@@ -36,7 +36,7 @@ public final class SpiritOfTheHearth extends CardImpl {
         
     }
 
-    public SpiritOfTheHearth(final SpiritOfTheHearth card) {
+    private SpiritOfTheHearth(final SpiritOfTheHearth card) {
         super(card);
     }
 

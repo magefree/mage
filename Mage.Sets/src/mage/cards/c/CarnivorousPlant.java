@@ -27,7 +27,7 @@ public final class CarnivorousPlant extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public CarnivorousPlant(final CarnivorousPlant card) {
+    private CarnivorousPlant(final CarnivorousPlant card) {
         super(card);
     }
 

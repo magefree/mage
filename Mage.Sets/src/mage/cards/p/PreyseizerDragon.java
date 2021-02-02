@@ -42,7 +42,7 @@ public final class PreyseizerDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PreyseizerDragon(final PreyseizerDragon card) {
+    private PreyseizerDragon(final PreyseizerDragon card) {
         super(card);
     }
 

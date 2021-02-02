@@ -33,7 +33,7 @@ public final class ThermalGlider extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
-    public ThermalGlider(final ThermalGlider card) {
+    private ThermalGlider(final ThermalGlider card) {
         super(card);
     }
 

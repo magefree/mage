@@ -32,7 +32,7 @@ public final class DeathsShadow extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(x, x, Duration.WhileOnBattlefield)));
     }
 
-    public DeathsShadow(final DeathsShadow card) {
+    private DeathsShadow(final DeathsShadow card) {
         super(card);
     }
 

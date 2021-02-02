@@ -27,7 +27,7 @@ public final class SeedsOfInnocence extends CardImpl {
 
     }
 
-    public SeedsOfInnocence(final SeedsOfInnocence card) {
+    private SeedsOfInnocence(final SeedsOfInnocence card) {
         super(card);
     }
 

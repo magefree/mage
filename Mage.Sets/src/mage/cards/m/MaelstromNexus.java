@@ -33,7 +33,7 @@ public final class MaelstromNexus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MaelstromNexusGainCascadeFirstSpellEffect()), new FirstSpellCastThisTurnWatcher());
     }
 
-    public MaelstromNexus(final MaelstromNexus card) {
+    private MaelstromNexus(final MaelstromNexus card) {
         super(card);
     }
 

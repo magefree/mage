@@ -32,7 +32,7 @@ public final class ShivanFire extends CardImpl {
                 new DamageTargetEffect(2), KickedCondition.instance, "{this} deals 2 damage to target creature. if this spell was kicked, it deals 4 damage to that creature instead"));
     }
 
-    public ShivanFire(final ShivanFire card) {
+    private ShivanFire(final ShivanFire card) {
         super(card);
     }
 

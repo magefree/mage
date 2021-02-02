@@ -41,7 +41,7 @@ public final class SealOfTheGuildpact extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SealOfTheGuildpactCostReductionEffect()));
     }
 
-    public SealOfTheGuildpact(final SealOfTheGuildpact card) {
+    private SealOfTheGuildpact(final SealOfTheGuildpact card) {
         super(card);
     }
 

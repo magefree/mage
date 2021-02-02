@@ -28,7 +28,7 @@ public final class ValorMadeReal extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ValorMadeReal(final ValorMadeReal card) {
+    private ValorMadeReal(final ValorMadeReal card) {
         super(card);
     }
 

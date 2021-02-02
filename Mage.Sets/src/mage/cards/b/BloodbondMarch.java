@@ -31,7 +31,7 @@ public final class BloodbondMarch extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new BloodbondMarchEffect(), new FilterCreatureSpell(), false, SetTargetPointer.SPELL));
     }
 
-    public BloodbondMarch(final BloodbondMarch card) {
+    private BloodbondMarch(final BloodbondMarch card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class LyevDecree extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public LyevDecree(final LyevDecree card) {
+    private LyevDecree(final LyevDecree card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class ThoughtLash extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.EndOfTurn, 1), new ExileFromTopOfLibraryCost(1)));
     }
 
-    public ThoughtLash(final ThoughtLash card) {
+    private ThoughtLash(final ThoughtLash card) {
         super(card);
     }
 

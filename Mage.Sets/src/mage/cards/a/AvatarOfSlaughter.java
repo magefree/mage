@@ -40,7 +40,7 @@ public final class AvatarOfSlaughter extends CardImpl {
         this.addAbility(ability, new AttackedThisTurnWatcher());
     }
 
-    public AvatarOfSlaughter(final AvatarOfSlaughter card) {
+    private AvatarOfSlaughter(final AvatarOfSlaughter card) {
         super(card);
     }
 

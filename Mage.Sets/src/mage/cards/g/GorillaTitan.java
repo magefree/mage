@@ -41,7 +41,7 @@ public final class GorillaTitan extends CardImpl {
                 )));
     }
 
-    public GorillaTitan(final GorillaTitan card) {
+    private GorillaTitan(final GorillaTitan card) {
         super(card);
     }
 

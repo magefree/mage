@@ -33,7 +33,7 @@ public final class Overblaze extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{2}{R}{R}"));
     }
 
-    public Overblaze(final Overblaze card) {
+    private Overblaze(final Overblaze card) {
         super(card);
     }
 

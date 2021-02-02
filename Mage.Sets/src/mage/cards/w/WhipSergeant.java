@@ -36,7 +36,7 @@ public final class WhipSergeant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WhipSergeant(final WhipSergeant card) {
+    private WhipSergeant(final WhipSergeant card) {
         super(card);
     }
 

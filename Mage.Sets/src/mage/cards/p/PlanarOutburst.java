@@ -32,7 +32,7 @@ public final class PlanarOutburst extends CardImpl {
         this.addAbility(new AwakenAbility(this, 4, "{5}{W}{W}{W}"));
     }
 
-    public PlanarOutburst(final PlanarOutburst card) {
+    private PlanarOutburst(final PlanarOutburst card) {
         super(card);
     }
 

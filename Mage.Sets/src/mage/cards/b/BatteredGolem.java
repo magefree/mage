@@ -33,7 +33,7 @@ public final class BatteredGolem extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new FilterArtifactPermanent("an artifact"), true));
     }
 
-    public BatteredGolem(final BatteredGolem card) {
+    private BatteredGolem(final BatteredGolem card) {
         super(card);
     }
 

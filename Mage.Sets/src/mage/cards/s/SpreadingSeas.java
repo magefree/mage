@@ -49,7 +49,7 @@ public final class SpreadingSeas extends CardImpl {
 
     }
 
-    public SpreadingSeas(final SpreadingSeas card) {
+    private SpreadingSeas(final SpreadingSeas card) {
         super(card);
     }
 

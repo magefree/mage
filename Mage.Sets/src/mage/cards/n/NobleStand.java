@@ -28,7 +28,7 @@ public final class NobleStand extends CardImpl {
         this.addAbility(new NobleStandAbility());
     }
 
-    public NobleStand(final NobleStand card) {
+    private NobleStand(final NobleStand card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class MiasmicMummy extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect()));
     }
 
-    public MiasmicMummy(final MiasmicMummy card) {
+    private MiasmicMummy(final MiasmicMummy card) {
         super(card);
     }
 

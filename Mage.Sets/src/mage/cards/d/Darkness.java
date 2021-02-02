@@ -22,7 +22,7 @@ public final class Darkness extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
     }
 
-    public Darkness(final Darkness card) {
+    private Darkness(final Darkness card) {
         super(card);
     }
 

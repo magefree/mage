@@ -43,7 +43,7 @@ public final class EternitySnare extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
-    public EternitySnare(final EternitySnare card) {
+    private EternitySnare(final EternitySnare card) {
         super(card);
     }
 

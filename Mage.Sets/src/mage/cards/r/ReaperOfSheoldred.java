@@ -39,7 +39,7 @@ public final class ReaperOfSheoldred extends CardImpl {
         this.addAbility(new ReaperOfSheoldredTriggeredAbility());
     }
 
-    public ReaperOfSheoldred(final ReaperOfSheoldred card) {
+    private ReaperOfSheoldred(final ReaperOfSheoldred card) {
         super(card);
     }
 

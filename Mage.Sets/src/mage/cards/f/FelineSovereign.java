@@ -60,7 +60,7 @@ public final class FelineSovereign extends CardImpl {
         this.addAbility(new FelineSovereignTriggeredAbility());
     }
 
-    public FelineSovereign(final FelineSovereign card) {
+    private FelineSovereign(final FelineSovereign card) {
         super(card);
     }
 

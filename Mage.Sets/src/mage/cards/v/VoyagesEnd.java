@@ -26,7 +26,7 @@ public final class VoyagesEnd extends CardImpl {
 
     }
 
-    public VoyagesEnd(final VoyagesEnd card) {
+    private VoyagesEnd(final VoyagesEnd card) {
         super(card);
     }
 

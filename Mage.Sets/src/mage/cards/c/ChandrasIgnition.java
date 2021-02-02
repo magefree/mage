@@ -27,7 +27,7 @@ public final class ChandrasIgnition extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
-    public ChandrasIgnition(final ChandrasIgnition card) {
+    private ChandrasIgnition(final ChandrasIgnition card) {
         super(card);
     }
 

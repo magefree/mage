@@ -35,7 +35,7 @@ public final class Backlash extends CardImpl {
         this.getSpellAbility().addEffect(new BacklashEffect());
     }
 
-    public Backlash(final Backlash card) {
+    private Backlash(final Backlash card) {
         super(card);
     }
 

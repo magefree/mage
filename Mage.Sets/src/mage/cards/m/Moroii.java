@@ -30,7 +30,7 @@ public final class Moroii extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), TargetController.YOU, false));
     }
 
-    public Moroii(final Moroii card) {
+    private Moroii(final Moroii card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class GrimGuardian extends CardImpl {
         this.addAbility(new ConstellationAbility(new LoseLifeOpponentsEffect(1), false));
     }
 
-    public GrimGuardian(final GrimGuardian card) {
+    private GrimGuardian(final GrimGuardian card) {
         super(card);
     }
 

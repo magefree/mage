@@ -29,7 +29,7 @@ public final class SteelyResolve extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, new FilterSteelyResolve())));
     }
 
-    public SteelyResolve(final SteelyResolve card) {
+    private SteelyResolve(final SteelyResolve card) {
         super(card);
     }
 

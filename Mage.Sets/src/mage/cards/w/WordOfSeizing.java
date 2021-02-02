@@ -38,7 +38,7 @@ public final class WordOfSeizing extends CardImpl {
 
     }
 
-    public WordOfSeizing(final WordOfSeizing card) {
+    private WordOfSeizing(final WordOfSeizing card) {
         super(card);
     }
 

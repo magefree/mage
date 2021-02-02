@@ -42,7 +42,7 @@ public final class MuzzioVisionaryArchitect extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MuzzioVisionaryArchitect(final MuzzioVisionaryArchitect card) {
+    private MuzzioVisionaryArchitect(final MuzzioVisionaryArchitect card) {
         super(card);
     }
 

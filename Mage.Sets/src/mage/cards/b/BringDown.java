@@ -35,7 +35,7 @@ public final class BringDown extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public BringDown(final BringDown card) {
+    private BringDown(final BringDown card) {
         super(card);
     }
 

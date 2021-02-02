@@ -38,7 +38,7 @@ public final class VampiricLink extends CardImpl {
         this.addAbility(new DealsDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(new NumericSetToEffectValues("that much", "damage")), false));
     }
 
-    public VampiricLink(final VampiricLink card) {
+    private VampiricLink(final VampiricLink card) {
         super(card);
     }
 

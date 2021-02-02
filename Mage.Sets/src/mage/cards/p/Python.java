@@ -22,7 +22,7 @@ public final class Python extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public Python(final Python card) {
+    private Python(final Python card) {
         super(card);
     }
 

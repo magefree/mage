@@ -22,7 +22,7 @@ public final class InspiringRoar extends CardImpl {
         getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()));
     }
 
-    public InspiringRoar(final InspiringRoar card) {
+    private InspiringRoar(final InspiringRoar card) {
         super(card);
     }
 

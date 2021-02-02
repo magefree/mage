@@ -44,7 +44,7 @@ public final class WingSplicer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public WingSplicer(final WingSplicer card) {
+    private WingSplicer(final WingSplicer card) {
         super(card);
     }
 

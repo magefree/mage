@@ -33,7 +33,7 @@ public final class Dodecapod extends CardImpl {
 
     }
 
-    public Dodecapod(final Dodecapod card) {
+    private Dodecapod(final Dodecapod card) {
         super(card);
     }
 

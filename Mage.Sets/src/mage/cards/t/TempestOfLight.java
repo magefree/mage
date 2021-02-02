@@ -20,7 +20,7 @@ public final class TempestOfLight extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")));
     }
 
-    public TempestOfLight(final TempestOfLight card) {
+    private TempestOfLight(final TempestOfLight card) {
         super(card);
     }
 

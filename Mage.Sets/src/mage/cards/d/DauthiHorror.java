@@ -40,7 +40,7 @@ public final class DauthiHorror extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public DauthiHorror(final DauthiHorror card) {
+    private DauthiHorror(final DauthiHorror card) {
         super(card);
     }
 

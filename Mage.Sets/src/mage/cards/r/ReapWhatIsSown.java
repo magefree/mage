@@ -27,7 +27,7 @@ public final class ReapWhatIsSown extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 3, FILTER_PERMANENT_CREATURES, false));
     }
 
-    public ReapWhatIsSown(final ReapWhatIsSown card) {
+    private ReapWhatIsSown(final ReapWhatIsSown card) {
         super(card);
     }
 

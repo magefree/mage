@@ -36,7 +36,7 @@ public final class SoulExchange extends CardImpl {
 
     }
 
-    public SoulExchange(final SoulExchange card) {
+    private SoulExchange(final SoulExchange card) {
         super(card);
     }
 

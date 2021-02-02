@@ -35,7 +35,7 @@ public final class MarchFromTheTomb extends CardImpl {
         this.getSpellAbility().addTarget(new MarchFromTheTombTarget(0, Integer.MAX_VALUE, filter));
     }
 
-    public MarchFromTheTomb(final MarchFromTheTomb card) {
+    private MarchFromTheTomb(final MarchFromTheTomb card) {
         super(card);
     }
 

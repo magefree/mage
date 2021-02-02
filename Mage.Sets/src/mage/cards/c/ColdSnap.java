@@ -30,7 +30,7 @@ public final class ColdSnap extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ColdSnapDamageTargetEffect(), TargetController.ANY, false, true));
     }
 
-    public ColdSnap(final ColdSnap card) {
+    private ColdSnap(final ColdSnap card) {
         super(card);
     }
 

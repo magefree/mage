@@ -50,7 +50,7 @@ public final class StormtideLeviathan extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantAttackAnyPlayerAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
-    public StormtideLeviathan(final StormtideLeviathan card) {
+    private StormtideLeviathan(final StormtideLeviathan card) {
         super(card);
     }
 

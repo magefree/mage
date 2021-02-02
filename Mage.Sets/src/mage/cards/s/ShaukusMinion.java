@@ -45,7 +45,7 @@ public final class ShaukusMinion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShaukusMinion(final ShaukusMinion card) {
+    private ShaukusMinion(final ShaukusMinion card) {
         super(card);
     }
 

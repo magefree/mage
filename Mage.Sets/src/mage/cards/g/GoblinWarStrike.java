@@ -33,7 +33,7 @@ public final class GoblinWarStrike extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    public GoblinWarStrike(final GoblinWarStrike card) {
+    private GoblinWarStrike(final GoblinWarStrike card) {
         super(card);
     }
 

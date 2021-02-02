@@ -26,7 +26,7 @@ public final class Fortify extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public Fortify(final Fortify card) {
+    private Fortify(final Fortify card) {
         super(card);
     }
 

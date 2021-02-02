@@ -45,7 +45,7 @@ public final class EnergyStorm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
     }
 
-    public EnergyStorm(final EnergyStorm card) {
+    private EnergyStorm(final EnergyStorm card) {
         super(card);
     }
 

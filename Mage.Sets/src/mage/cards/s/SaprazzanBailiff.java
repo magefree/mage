@@ -47,7 +47,7 @@ public final class SaprazzanBailiff extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnToHandFromGraveyardAllEffect(filter).setText("return all artifact and enchantment cards from all graveyards to their owners' hands"), false));
     }
 
-    public SaprazzanBailiff(final SaprazzanBailiff card) {
+    private SaprazzanBailiff(final SaprazzanBailiff card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class DragonlordOjutai extends CardImpl {
             (StaticValue.get(3), false, StaticValue.get(1), new FilterCard(), Zone.LIBRARY, false, false), false));
     }
 
-    public DragonlordOjutai(final DragonlordOjutai card) {
+    private DragonlordOjutai(final DragonlordOjutai card) {
         super(card);
     }
 

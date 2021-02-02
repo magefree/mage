@@ -48,7 +48,7 @@ public final class ViviensJaguar extends CardImpl {
         ));
     }
 
-    public ViviensJaguar(final ViviensJaguar card) {
+    private ViviensJaguar(final ViviensJaguar card) {
         super(card);
     }
 

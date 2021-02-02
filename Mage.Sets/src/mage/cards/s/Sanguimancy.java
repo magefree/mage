@@ -28,7 +28,7 @@ public final class Sanguimancy extends CardImpl {
         this.getSpellAbility().addHint(DevotionCount.B.getHint());
     }
 
-    public Sanguimancy(final Sanguimancy card) {
+    private Sanguimancy(final Sanguimancy card) {
         super(card);
     }
 

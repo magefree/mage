@@ -23,7 +23,7 @@ public final class MightOfOaks extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(7, 7, Duration.EndOfTurn));
     }
 
-    public MightOfOaks(final MightOfOaks card) {
+    private MightOfOaks(final MightOfOaks card) {
         super(card);
     }
 

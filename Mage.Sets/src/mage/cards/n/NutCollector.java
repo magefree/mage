@@ -46,7 +46,7 @@ public final class NutCollector extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NutCollector(final NutCollector card) {
+    private NutCollector(final NutCollector card) {
         super(card);
     }
 

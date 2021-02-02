@@ -28,7 +28,7 @@ public final class SuChi extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new BasicManaEffect(Mana.ColorlessMana(4)), false));
     }
 
-    public SuChi(final SuChi card) {
+    private SuChi(final SuChi card) {
         super(card);
     }
 

@@ -63,7 +63,7 @@ public class DampingEngine extends CardImpl {
 
     }
 
-    public DampingEngine(final DampingEngine card) {
+    private DampingEngine(final DampingEngine card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class EasternPaladin extends CardImpl {
                 this.addAbility(ability);
         }
 
-    public EasternPaladin(final EasternPaladin card) {
+    private EasternPaladin(final EasternPaladin card) {
         super(card);
     }
 

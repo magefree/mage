@@ -44,7 +44,7 @@ public final class UlamogTheInfiniteGyre extends CardImpl {
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibraryGraveOfSourceOwnerEffect(), false));
     }
 
-    public UlamogTheInfiniteGyre(final UlamogTheInfiniteGyre card) {
+    private UlamogTheInfiniteGyre(final UlamogTheInfiniteGyre card) {
         super(card);
     }
 

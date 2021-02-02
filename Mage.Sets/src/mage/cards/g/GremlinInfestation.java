@@ -47,7 +47,7 @@ public final class GremlinInfestation extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new CreateTokenEffect(new GremlinToken()), "enchanted artifact", false, false));
     }
 
-    public GremlinInfestation(final GremlinInfestation card) {
+    private GremlinInfestation(final GremlinInfestation card) {
         super(card);
     }
 

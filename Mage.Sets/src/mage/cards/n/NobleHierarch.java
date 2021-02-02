@@ -33,7 +33,7 @@ public final class NobleHierarch extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public NobleHierarch(final NobleHierarch card) {
+    private NobleHierarch(final NobleHierarch card) {
         super(card);
     }
 

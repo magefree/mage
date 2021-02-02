@@ -44,7 +44,7 @@ public final class Thunderblust extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public Thunderblust(final Thunderblust card) {
+    private Thunderblust(final Thunderblust card) {
         super(card);
     }
 

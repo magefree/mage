@@ -31,7 +31,7 @@ public final class CallToHeel extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public CallToHeel(final CallToHeel card) {
+    private CallToHeel(final CallToHeel card) {
         super(card);
     }
 

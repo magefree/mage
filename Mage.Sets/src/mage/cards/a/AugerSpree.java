@@ -23,7 +23,7 @@ public final class AugerSpree extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public AugerSpree(final AugerSpree card) {
+    private AugerSpree(final AugerSpree card) {
         super(card);
     }
 

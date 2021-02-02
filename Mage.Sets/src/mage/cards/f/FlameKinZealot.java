@@ -35,7 +35,7 @@ public final class FlameKinZealot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlameKinZealot(final FlameKinZealot card) {
+    private FlameKinZealot(final FlameKinZealot card) {
         super(card);
     }
 

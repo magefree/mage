@@ -31,7 +31,7 @@ public final class OyobiWhoSplitTheHeavens extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new AnotherSpiritToken()), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
     }
 
-    public OyobiWhoSplitTheHeavens(final OyobiWhoSplitTheHeavens card) {
+    private OyobiWhoSplitTheHeavens(final OyobiWhoSplitTheHeavens card) {
         super(card);
     }
 

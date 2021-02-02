@@ -32,7 +32,7 @@ public final class MireBoa extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
     }
 
-    public MireBoa(final MireBoa card) {
+    private MireBoa(final MireBoa card) {
         super(card);
     }
 

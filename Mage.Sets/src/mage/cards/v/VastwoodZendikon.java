@@ -47,7 +47,7 @@ public final class VastwoodZendikon extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public VastwoodZendikon(final VastwoodZendikon card) {
+    private VastwoodZendikon(final VastwoodZendikon card) {
         super(card);
     }
 

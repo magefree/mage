@@ -28,7 +28,7 @@ public final class Dromosaur extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(2, -2, Duration.EndOfTurn), false));
     }
 
-    public Dromosaur(final Dromosaur card) {
+    private Dromosaur(final Dromosaur card) {
         super(card);
     }
 

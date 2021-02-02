@@ -49,7 +49,7 @@ public final class DroolingGroodion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DroolingGroodion(final DroolingGroodion card) {
+    private DroolingGroodion(final DroolingGroodion card) {
         super(card);
     }
 

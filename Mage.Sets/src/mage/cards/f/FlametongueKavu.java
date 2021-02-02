@@ -29,7 +29,7 @@ public final class FlametongueKavu extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlametongueKavu(final FlametongueKavu card) {
+    private FlametongueKavu(final FlametongueKavu card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class OmnispellAdept extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OmnispellAdept(final OmnispellAdept card) {
+    private OmnispellAdept(final OmnispellAdept card) {
         super(card);
     }
 

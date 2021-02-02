@@ -35,7 +35,7 @@ public final class CinderCrawler extends CardImpl {
         ));
     }
 
-    public CinderCrawler(final CinderCrawler card) {
+    private CinderCrawler(final CinderCrawler card) {
         super(card);
     }
 

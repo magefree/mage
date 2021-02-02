@@ -29,7 +29,7 @@ public final class TajuruBeastmaster extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn), false));
     }
 
-    public TajuruBeastmaster(final TajuruBeastmaster card) {
+    private TajuruBeastmaster(final TajuruBeastmaster card) {
         super(card);
     }
 

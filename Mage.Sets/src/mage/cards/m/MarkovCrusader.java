@@ -47,7 +47,7 @@ public final class MarkovCrusader extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public MarkovCrusader(final MarkovCrusader card) {
+    private MarkovCrusader(final MarkovCrusader card) {
         super(card);
     }
 

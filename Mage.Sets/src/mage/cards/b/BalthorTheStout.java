@@ -47,7 +47,7 @@ public final class BalthorTheStout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BalthorTheStout(final BalthorTheStout card) {
+    private BalthorTheStout(final BalthorTheStout card) {
         super(card);
     }
 

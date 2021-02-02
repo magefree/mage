@@ -46,7 +46,7 @@ public final class InstillEnergy extends CardImpl {
                 .addHint(MyTurnHint.instance));
     }
 
-    public InstillEnergy(final InstillEnergy card) {
+    private InstillEnergy(final InstillEnergy card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class SabertoothAlleyCat extends CardImpl {
                 new ManaCostsImpl<>("{1}{R}")));
     }
 
-    public SabertoothAlleyCat(final SabertoothAlleyCat card) {
+    private SabertoothAlleyCat(final SabertoothAlleyCat card) {
         super(card);
     }
 

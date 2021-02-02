@@ -42,7 +42,7 @@ public final class CityInABottle extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CityInABottleCantPlayEffect()));
     }
 
-    public CityInABottle(final CityInABottle card) {
+    private CityInABottle(final CityInABottle card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class Reprocess extends CardImpl {
         this.getSpellAbility().addEffect(new ReprocessEffect());
     }
 
-    public Reprocess(final Reprocess card) {
+    private Reprocess(final Reprocess card) {
         super(card);
     }
 

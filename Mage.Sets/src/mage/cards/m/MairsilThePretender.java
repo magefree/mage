@@ -55,7 +55,7 @@ public final class MairsilThePretender extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MairsilThePretender(final MairsilThePretender card) {
+    private MairsilThePretender(final MairsilThePretender card) {
         super(card);
     }
 

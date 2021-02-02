@@ -29,7 +29,7 @@ public final class BloatedToad extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public BloatedToad(final BloatedToad card) {
+    private BloatedToad(final BloatedToad card) {
         super(card);
     }
 

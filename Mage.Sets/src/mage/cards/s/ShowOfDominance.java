@@ -40,7 +40,7 @@ public final class ShowOfDominance extends CardImpl {
         this.getSpellAbility().addEffect(new ShowOfDominanceEffect());
     }
 
-    public ShowOfDominance(final ShowOfDominance card) {
+    private ShowOfDominance(final ShowOfDominance card) {
         super(card);
     }
 

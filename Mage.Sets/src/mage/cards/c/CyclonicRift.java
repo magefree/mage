@@ -39,7 +39,7 @@ public final class CyclonicRift extends CardImpl {
         this.addAbility(new OverloadAbility(this, effect, new ManaCostsImpl("{6}{U}")));
     }
 
-    public CyclonicRift(final CyclonicRift card) {
+    private CyclonicRift(final CyclonicRift card) {
         super(card);
     }
 

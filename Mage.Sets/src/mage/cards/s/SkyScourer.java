@@ -43,7 +43,7 @@ public final class SkyScourer extends CardImpl {
 
     }
 
-    public SkyScourer(final SkyScourer card) {
+    private SkyScourer(final SkyScourer card) {
         super(card);
     }
 

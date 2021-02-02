@@ -37,7 +37,7 @@ public final class TawnossWeaponry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TawnossWeaponry(final TawnossWeaponry card) {
+    private TawnossWeaponry(final TawnossWeaponry card) {
         super(card);
     }
 

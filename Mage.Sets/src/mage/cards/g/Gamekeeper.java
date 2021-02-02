@@ -31,7 +31,7 @@ public final class Gamekeeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Gamekeeper(final Gamekeeper card) {
+    private Gamekeeper(final Gamekeeper card) {
         super(card);
     }
 

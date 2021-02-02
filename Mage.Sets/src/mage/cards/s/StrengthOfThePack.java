@@ -22,7 +22,7 @@ public final class StrengthOfThePack extends CardImpl {
         this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(2), new FilterControlledCreaturePermanent()));
     }
 
-    public StrengthOfThePack(final StrengthOfThePack card) {
+    private StrengthOfThePack(final StrengthOfThePack card) {
         super(card);
     }
 

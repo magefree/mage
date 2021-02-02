@@ -25,7 +25,7 @@ public final class PsychicBarrier extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(1));
     }
 
-    public PsychicBarrier(final PsychicBarrier card) {
+    private PsychicBarrier(final PsychicBarrier card) {
         super(card);
     }
 

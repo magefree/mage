@@ -26,7 +26,7 @@ public final class PainMagnification extends CardImpl {
         this.addAbility(new PainMagnificationTriggeredAbility());
     }
 
-    public PainMagnification(final PainMagnification card) {
+    private PainMagnification(final PainMagnification card) {
         super(card);
     }
 

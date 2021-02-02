@@ -32,7 +32,7 @@ public final class SpiritualFocus extends CardImpl {
         this.addAbility(new SpiritualFocusTriggeredAbility());
     }
 
-    public SpiritualFocus(final SpiritualFocus card) {
+    private SpiritualFocus(final SpiritualFocus card) {
         super(card);
     }
 

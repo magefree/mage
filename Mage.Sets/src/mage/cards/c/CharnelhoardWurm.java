@@ -34,7 +34,7 @@ public final class CharnelhoardWurm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CharnelhoardWurm(final CharnelhoardWurm card) {
+    private CharnelhoardWurm(final CharnelhoardWurm card) {
         super(card);
     }
 

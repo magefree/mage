@@ -29,7 +29,7 @@ public final class IncorrigibleYouths extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{2}{R}")));
     }
 
-    public IncorrigibleYouths(final IncorrigibleYouths card) {
+    private IncorrigibleYouths(final IncorrigibleYouths card) {
         super(card);
     }
 

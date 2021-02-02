@@ -43,7 +43,7 @@ public final class GlyphOfLife extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new GlyphOfLifeTriggeredAbility()));
     }
 
-    public GlyphOfLife(final GlyphOfLife card) {
+    private GlyphOfLife(final GlyphOfLife card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class UndyingEvil extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public UndyingEvil(final UndyingEvil card) {
+    private UndyingEvil(final UndyingEvil card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class ArborColossus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArborColossus(final ArborColossus card) {
+    private ArborColossus(final ArborColossus card) {
         super(card);
     }
 

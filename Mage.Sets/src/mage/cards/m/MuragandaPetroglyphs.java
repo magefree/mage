@@ -41,7 +41,7 @@ public final class MuragandaPetroglyphs extends CardImpl {
                 2, 2, Duration.WhileOnBattlefield, filterNoAbilities, false)));
     }
 
-    public MuragandaPetroglyphs(final MuragandaPetroglyphs card) {
+    private MuragandaPetroglyphs(final MuragandaPetroglyphs card) {
         super(card);
     }
 

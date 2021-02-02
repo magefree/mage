@@ -45,7 +45,7 @@ public final class TempestDjinn extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, StaticValue.get(0), Duration.WhileOnBattlefield)));
     }
 
-    public TempestDjinn(final TempestDjinn card) {
+    private TempestDjinn(final TempestDjinn card) {
         super(card);
     }
 

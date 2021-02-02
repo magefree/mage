@@ -48,7 +48,7 @@ public final class KitsuneHealer extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public KitsuneHealer(final KitsuneHealer card) {
+    private KitsuneHealer(final KitsuneHealer card) {
         super(card);
     }
 

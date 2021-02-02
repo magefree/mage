@@ -32,7 +32,7 @@ public final class PollutedDead extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PollutedDead(final PollutedDead card) {
+    private PollutedDead(final PollutedDead card) {
         super(card);
     }
 

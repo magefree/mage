@@ -30,7 +30,7 @@ public final class TolarianDrake extends CardImpl {
         this.addAbility(PhasingAbility.getInstance());
     }
 
-    public TolarianDrake(final TolarianDrake card) {
+    private TolarianDrake(final TolarianDrake card) {
         super(card);
     }
 

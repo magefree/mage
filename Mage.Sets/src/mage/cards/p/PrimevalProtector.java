@@ -54,7 +54,7 @@ public final class PrimevalProtector extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false));
     }
 
-    public PrimevalProtector(final PrimevalProtector card) {
+    private PrimevalProtector(final PrimevalProtector card) {
         super(card);
     }
 

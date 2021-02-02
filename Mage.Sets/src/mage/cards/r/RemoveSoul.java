@@ -22,7 +22,7 @@ public final class RemoveSoul extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
-    public RemoveSoul(final RemoveSoul card) {
+    private RemoveSoul(final RemoveSoul card) {
         super(card);
     }
 

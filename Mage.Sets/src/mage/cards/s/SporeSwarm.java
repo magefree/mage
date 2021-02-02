@@ -21,7 +21,7 @@ public final class SporeSwarm extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), 3));
     }
 
-    public SporeSwarm(final SporeSwarm card) {
+    private SporeSwarm(final SporeSwarm card) {
         super(card);
     }
 

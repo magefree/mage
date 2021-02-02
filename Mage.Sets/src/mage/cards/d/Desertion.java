@@ -35,7 +35,7 @@ public final class Desertion extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new DesertionReplacementEffect()));
     }
 
-    public Desertion(final Desertion card) {
+    private Desertion(final Desertion card) {
         super(card);
     }
 

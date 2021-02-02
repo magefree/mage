@@ -23,7 +23,7 @@ public final class Sinkhole extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public Sinkhole(final Sinkhole card) {
+    private Sinkhole(final Sinkhole card) {
         super(card);
     }
 

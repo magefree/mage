@@ -42,7 +42,7 @@ public final class LivingTsunami extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(1, 1, filter, true))), TargetController.YOU, false));
     }
 
-    public LivingTsunami(final LivingTsunami card) {
+    private LivingTsunami(final LivingTsunami card) {
         super(card);
     }
 

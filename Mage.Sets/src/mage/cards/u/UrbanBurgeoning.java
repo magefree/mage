@@ -40,7 +40,7 @@ public final class UrbanBurgeoning extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }
 
-    public UrbanBurgeoning(final UrbanBurgeoning card) {
+    private UrbanBurgeoning(final UrbanBurgeoning card) {
         super(card);
     }
 

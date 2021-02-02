@@ -53,7 +53,7 @@ public final class ChildhoodHorror extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public ChildhoodHorror(final ChildhoodHorror card) {
+    private ChildhoodHorror(final ChildhoodHorror card) {
         super(card);
     }
 

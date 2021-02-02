@@ -35,7 +35,7 @@ public final class ChickenEgg extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ChickenEggEffect(), TargetController.YOU, false));
     }
 
-    public ChickenEgg(final ChickenEgg card) {
+    private ChickenEgg(final ChickenEgg card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class Disallow extends CardImpl {
         this.getSpellAbility().addTarget(new TargetStackObject());
     }
 
-    public Disallow(final Disallow card) {
+    private Disallow(final Disallow card) {
         super(card);
     }
 

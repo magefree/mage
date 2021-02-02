@@ -26,7 +26,7 @@ public final class SunspireGriffin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SunspireGriffin(final SunspireGriffin card) {
+    private SunspireGriffin(final SunspireGriffin card) {
         super(card);
     }
 

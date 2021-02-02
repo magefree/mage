@@ -30,7 +30,7 @@ public final class ViashinoRacketeer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost())));
     }
 
-    public ViashinoRacketeer(final ViashinoRacketeer card) {
+    private ViashinoRacketeer(final ViashinoRacketeer card) {
         super(card);
     }
 

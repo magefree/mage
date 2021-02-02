@@ -31,7 +31,7 @@ public final class EverAfter extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToLibrarySpellEffect(false));
     }
 
-    public EverAfter(final EverAfter card) {
+    private EverAfter(final EverAfter card) {
         super(card);
     }
 

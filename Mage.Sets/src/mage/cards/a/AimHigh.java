@@ -38,7 +38,7 @@ public final class AimHigh extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public AimHigh(final AimHigh card) {
+    private AimHigh(final AimHigh card) {
         super(card);
     }
 

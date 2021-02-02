@@ -39,7 +39,7 @@ public final class WightOfPrecinctSix extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(boost, boost, Duration.WhileOnBattlefield)));
     }
 
-    public WightOfPrecinctSix(final WightOfPrecinctSix card) {
+    private WightOfPrecinctSix(final WightOfPrecinctSix card) {
         super(card);
     }
 

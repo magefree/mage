@@ -45,7 +45,7 @@ public final class TouchOfMoonglove extends CardImpl {
 
     }
 
-    public TouchOfMoonglove(final TouchOfMoonglove card) {
+    private TouchOfMoonglove(final TouchOfMoonglove card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class CovetedPeacock extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CovetedPeacock(final CovetedPeacock card) {
+    private CovetedPeacock(final CovetedPeacock card) {
         super(card);
     }
 

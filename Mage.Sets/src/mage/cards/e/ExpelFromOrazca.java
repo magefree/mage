@@ -36,7 +36,7 @@ public final class ExpelFromOrazca extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
-    public ExpelFromOrazca(final ExpelFromOrazca card) {
+    private ExpelFromOrazca(final ExpelFromOrazca card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class FireWhip extends CardImpl {
         
     }
 
-    public FireWhip(final FireWhip card) {
+    private FireWhip(final FireWhip card) {
         super(card);
     }
 

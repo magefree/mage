@@ -32,7 +32,7 @@ public final class DuskLegionDreadnought extends CardImpl {
 
     }
 
-    public DuskLegionDreadnought(final DuskLegionDreadnought card) {
+    private DuskLegionDreadnought(final DuskLegionDreadnought card) {
         super(card);
     }
 

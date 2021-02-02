@@ -31,7 +31,7 @@ public final class PhyrexianTyranny extends CardImpl {
         this.addAbility(new PhyrexianTyrannyTriggeredAbility());
     }
 
-    public PhyrexianTyranny(final PhyrexianTyranny card) {
+    private PhyrexianTyranny(final PhyrexianTyranny card) {
         super(card);
     }
 

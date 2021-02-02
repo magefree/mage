@@ -32,7 +32,7 @@ public final class FlowstoneWall extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public FlowstoneWall(final FlowstoneWall card) {
+    private FlowstoneWall(final FlowstoneWall card) {
         super(card);
     }
 

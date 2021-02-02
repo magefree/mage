@@ -31,7 +31,7 @@ public final class ExecutionersHood extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public ExecutionersHood(final ExecutionersHood card) {
+    private ExecutionersHood(final ExecutionersHood card) {
         super(card);
     }
 

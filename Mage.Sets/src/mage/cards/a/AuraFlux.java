@@ -30,7 +30,7 @@ public final class AuraFlux extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, new FilterEnchantmentPermanent("enchantments"), true)));
     }
 
-    public AuraFlux(final AuraFlux card) {
+    private AuraFlux(final AuraFlux card) {
         super(card);
     }
 

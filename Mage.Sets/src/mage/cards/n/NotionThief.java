@@ -41,7 +41,7 @@ public final class NotionThief extends CardImpl {
 
     }
 
-    public NotionThief(final NotionThief card) {
+    private NotionThief(final NotionThief card) {
         super(card);
     }
 

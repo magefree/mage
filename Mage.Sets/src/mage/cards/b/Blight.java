@@ -37,7 +37,7 @@ public final class Blight extends CardImpl {
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DestroyAttachedToEffect("it"), "enchanted land"));
     }
 
-    public Blight(final Blight card) {
+    private Blight(final Blight card) {
         super(card);
     }
 

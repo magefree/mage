@@ -33,7 +33,7 @@ public final class TangleAsp extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
-    public TangleAsp(final TangleAsp card) {
+    private TangleAsp(final TangleAsp card) {
         super(card);
     }
 

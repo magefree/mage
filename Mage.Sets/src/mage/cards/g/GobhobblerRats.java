@@ -41,7 +41,7 @@ public final class GobhobblerRats extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GobhobblerRats(final GobhobblerRats card) {
+    private GobhobblerRats(final GobhobblerRats card) {
         super(card);
     }
 

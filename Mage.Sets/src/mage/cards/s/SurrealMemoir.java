@@ -31,7 +31,7 @@ public final class SurrealMemoir extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public SurrealMemoir(final SurrealMemoir card) {
+    private SurrealMemoir(final SurrealMemoir card) {
         super(card);
     }
 

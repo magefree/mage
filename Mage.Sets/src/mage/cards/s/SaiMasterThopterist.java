@@ -57,7 +57,7 @@ public final class SaiMasterThopterist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SaiMasterThopterist(final SaiMasterThopterist card) {
+    private SaiMasterThopterist(final SaiMasterThopterist card) {
         super(card);
     }
 

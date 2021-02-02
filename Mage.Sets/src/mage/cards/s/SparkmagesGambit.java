@@ -30,7 +30,7 @@ public final class SparkmagesGambit extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }
 
-    public SparkmagesGambit(final SparkmagesGambit card) {
+    private SparkmagesGambit(final SparkmagesGambit card) {
         super(card);
     }
 

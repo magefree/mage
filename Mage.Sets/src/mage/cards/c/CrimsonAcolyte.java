@@ -41,7 +41,7 @@ public final class CrimsonAcolyte extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrimsonAcolyte(final CrimsonAcolyte card) {
+    private CrimsonAcolyte(final CrimsonAcolyte card) {
         super(card);
     }
 

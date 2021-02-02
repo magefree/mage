@@ -32,7 +32,7 @@ public final class SaltwaterStalwart extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SaltwaterStalwart(final SaltwaterStalwart card) {
+    private SaltwaterStalwart(final SaltwaterStalwart card) {
         super(card);
     }
 

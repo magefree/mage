@@ -25,7 +25,7 @@ public final class Skyscribing extends CardImpl {
         this.addAbility(new ForecastAbility(new DrawCardAllEffect(1), new ManaCostsImpl("{2}{U}")));
     }
 
-    public Skyscribing(final Skyscribing card) {
+    private Skyscribing(final Skyscribing card) {
         super(card);
     }
 

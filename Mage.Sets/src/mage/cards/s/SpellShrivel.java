@@ -37,7 +37,7 @@ public final class SpellShrivel extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public SpellShrivel(final SpellShrivel card) {
+    private SpellShrivel(final SpellShrivel card) {
         super(card);
     }
 

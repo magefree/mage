@@ -40,7 +40,7 @@ public final class CaravanEscort extends LevelerCard {
         setMaxLevelCounters(5);
     }
 
-    public CaravanEscort(final CaravanEscort card) {
+    private CaravanEscort(final CaravanEscort card) {
         super(card);
     }
 

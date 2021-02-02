@@ -28,7 +28,7 @@ public final class MerfolkBranchwalker extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect()));
     }
 
-    public MerfolkBranchwalker(final MerfolkBranchwalker card) {
+    private MerfolkBranchwalker(final MerfolkBranchwalker card) {
         super(card);
     }
 

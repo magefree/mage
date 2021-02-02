@@ -27,7 +27,7 @@ public final class FinalParting extends CardImpl {
         this.getSpellAbility().addEffect(new FinalPartingEffect());
     }
 
-    public FinalParting(final FinalParting card) {
+    private FinalParting(final FinalParting card) {
         super(card);
     }
 

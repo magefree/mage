@@ -32,7 +32,7 @@ public final class BoilingEarth extends CardImpl {
         this.addAbility(new AwakenAbility(this, 4, "{6}{R}"));
     }
 
-    public BoilingEarth(final BoilingEarth card) {
+    private BoilingEarth(final BoilingEarth card) {
         super(card);
     }
 

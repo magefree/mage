@@ -43,7 +43,7 @@ public final class AvenAugur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AvenAugur(final AvenAugur card) {
+    private AvenAugur(final AvenAugur card) {
         super(card);
     }
 

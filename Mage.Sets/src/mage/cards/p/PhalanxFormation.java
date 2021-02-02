@@ -30,7 +30,7 @@ public final class PhalanxFormation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
-    public PhalanxFormation(final PhalanxFormation card) {
+    private PhalanxFormation(final PhalanxFormation card) {
         super(card);
     }
 

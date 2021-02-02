@@ -23,7 +23,7 @@ public final class LavaCoil extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public LavaCoil(final LavaCoil card) {
+    private LavaCoil(final LavaCoil card) {
         super(card);
     }
 

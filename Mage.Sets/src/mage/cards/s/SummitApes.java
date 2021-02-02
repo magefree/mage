@@ -41,7 +41,7 @@ public final class SummitApes extends CardImpl {
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(new MenaceAbility()), new PermanentsOnTheBattlefieldCondition(filter), rule)));
     }
 
-    public SummitApes(final SummitApes card) {
+    private SummitApes(final SummitApes card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class ZamWesell extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZamWesell(final ZamWesell card) {
+    private ZamWesell(final ZamWesell card) {
         super(card);
     }
 

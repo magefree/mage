@@ -44,7 +44,7 @@ public final class BreathOfFury extends CardImpl {
         this.addAbility(new BreathOfFuryAbility());
     }
 
-    public BreathOfFury(final BreathOfFury card) {
+    private BreathOfFury(final BreathOfFury card) {
         super(card);
     }
 

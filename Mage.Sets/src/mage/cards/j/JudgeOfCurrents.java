@@ -28,7 +28,7 @@ public final class JudgeOfCurrents extends CardImpl {
         this.addAbility(new BecomesTappedTriggeredAbility(new GainLifeEffect(1), true, new FilterControlledCreaturePermanent(SubType.MERFOLK, "a Merfolk you control")));
     }
 
-    public JudgeOfCurrents(final JudgeOfCurrents card) {
+    private JudgeOfCurrents(final JudgeOfCurrents card) {
         super(card);
     }
 

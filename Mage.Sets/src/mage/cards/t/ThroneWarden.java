@@ -33,7 +33,7 @@ public final class ThroneWarden extends CardImpl {
                 TargetController.YOU, MonarchIsSourceControllerCondition.instance, false));
     }
 
-    public ThroneWarden(final ThroneWarden card) {
+    private ThroneWarden(final ThroneWarden card) {
         super(card);
     }
 

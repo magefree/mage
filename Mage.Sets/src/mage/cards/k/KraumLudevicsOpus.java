@@ -47,7 +47,7 @@ public final class KraumLudevicsOpus extends CardImpl {
 
     }
 
-    public KraumLudevicsOpus(final KraumLudevicsOpus card) {
+    private KraumLudevicsOpus(final KraumLudevicsOpus card) {
         super(card);
     }
 

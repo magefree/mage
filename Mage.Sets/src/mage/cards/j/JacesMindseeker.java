@@ -44,7 +44,7 @@ public final class JacesMindseeker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JacesMindseeker(final JacesMindseeker card) {
+    private JacesMindseeker(final JacesMindseeker card) {
         super(card);
     }
 

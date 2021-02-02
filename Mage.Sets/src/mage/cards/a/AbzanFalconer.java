@@ -42,7 +42,7 @@ public final class AbzanFalconer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter, "Each creature you control with a +1/+1 counter on it has flying")));
     }
 
-    public AbzanFalconer(final AbzanFalconer card) {
+    private AbzanFalconer(final AbzanFalconer card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class PrimalOrder extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PrimalOrderDamageTargetEffect(), TargetController.ANY, false, true));
     }
 
-    public PrimalOrder(final PrimalOrder card) {
+    private PrimalOrder(final PrimalOrder card) {
         super(card);
     }
 

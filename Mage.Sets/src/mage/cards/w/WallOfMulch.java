@@ -47,7 +47,7 @@ public final class WallOfMulch extends CardImpl {
         
     }
 
-    public WallOfMulch(final WallOfMulch card) {
+    private WallOfMulch(final WallOfMulch card) {
         super(card);
     }
 

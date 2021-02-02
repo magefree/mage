@@ -43,7 +43,7 @@ public final class AzamiLadyOfScrolls extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
     }
 
-    public AzamiLadyOfScrolls(final AzamiLadyOfScrolls card) {
+    private AzamiLadyOfScrolls(final AzamiLadyOfScrolls card) {
         super(card);
     }
 

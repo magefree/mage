@@ -39,7 +39,7 @@ public final class UnlikelyAlliance extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnlikelyAlliance(final UnlikelyAlliance card) {
+    private UnlikelyAlliance(final UnlikelyAlliance card) {
         super(card);
     }
 

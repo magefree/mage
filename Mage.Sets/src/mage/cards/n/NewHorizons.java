@@ -55,7 +55,7 @@ public final class NewHorizons extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public NewHorizons(final NewHorizons card) {
+    private NewHorizons(final NewHorizons card) {
         super(card);
     }
 

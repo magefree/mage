@@ -34,7 +34,7 @@ public final class HuntingCheetah extends CardImpl {
         this.addAbility(new DealsDamageToOpponentTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), true));
     }
 
-    public HuntingCheetah(final HuntingCheetah card) {
+    private HuntingCheetah(final HuntingCheetah card) {
         super(card);
     }
 

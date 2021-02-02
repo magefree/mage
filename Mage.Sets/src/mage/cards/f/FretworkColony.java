@@ -38,7 +38,7 @@ public final class FretworkColony extends CardImpl {
 
     }
 
-    public FretworkColony(final FretworkColony card) {
+    private FretworkColony(final FretworkColony card) {
         super(card);
     }
 

@@ -62,7 +62,7 @@ public final class LinessaZephyrMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LinessaZephyrMage(final LinessaZephyrMage card) {
+    private LinessaZephyrMage(final LinessaZephyrMage card) {
         super(card);
     }
 

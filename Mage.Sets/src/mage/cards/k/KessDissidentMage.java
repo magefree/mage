@@ -47,7 +47,7 @@ public final class KessDissidentMage extends CardImpl {
         this.addAbility(ability, new KessDissidentMageWatcher());
     }
 
-    public KessDissidentMage(final KessDissidentMage card) {
+    private KessDissidentMage(final KessDissidentMage card) {
         super(card);
     }
 

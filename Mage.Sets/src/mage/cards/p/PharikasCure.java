@@ -25,7 +25,7 @@ public final class PharikasCure extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 
-    public PharikasCure(final PharikasCure card) {
+    private PharikasCure(final PharikasCure card) {
         super(card);
     }
 

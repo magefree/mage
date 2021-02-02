@@ -31,7 +31,7 @@ public final class ThassasDevourer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThassasDevourer(final ThassasDevourer card) {
+    private ThassasDevourer(final ThassasDevourer card) {
         super(card);
     }
 

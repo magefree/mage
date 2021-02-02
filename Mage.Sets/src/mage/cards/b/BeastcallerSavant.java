@@ -31,7 +31,7 @@ public final class BeastcallerSavant extends CardImpl {
         this.addAbility(new ConditionalAnyColorManaAbility(1, new ConditionalSpellManaBuilder(new FilterCreatureSpell("creature spells"))));
     }
 
-    public BeastcallerSavant(final BeastcallerSavant card) {
+    private BeastcallerSavant(final BeastcallerSavant card) {
         super(card);
     }
 

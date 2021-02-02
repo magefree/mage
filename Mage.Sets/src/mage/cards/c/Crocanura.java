@@ -32,7 +32,7 @@ public final class Crocanura extends CardImpl {
 
     }
 
-    public Crocanura(final Crocanura card) {
+    private Crocanura(final Crocanura card) {
         super(card);
     }
 

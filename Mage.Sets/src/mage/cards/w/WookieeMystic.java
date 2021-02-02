@@ -61,7 +61,7 @@ public final class WookieeMystic extends CardImpl {
         this.addAbility(ability, new WookieeMysticWatcher().withParams(ability));
     }
 
-    public WookieeMystic(final WookieeMystic card) {
+    private WookieeMystic(final WookieeMystic card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class OranRiefRecluse extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, destroy target creature with flying."));
     }
 
-    public OranRiefRecluse(final OranRiefRecluse card) {
+    private OranRiefRecluse(final OranRiefRecluse card) {
         super(card);
     }
 

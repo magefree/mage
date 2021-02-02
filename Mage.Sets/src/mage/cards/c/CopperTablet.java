@@ -24,7 +24,7 @@ public final class CopperTablet extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1, true, "that player"), TargetController.ANY, false, true));        
     }
 
-    public CopperTablet(final CopperTablet card) {
+    private CopperTablet(final CopperTablet card) {
         super(card);
     }
 

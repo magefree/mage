@@ -29,7 +29,7 @@ public final class ZhangFeiFierceWarrior extends CardImpl {
         this.addAbility(HorsemanshipAbility.getInstance());
     }
 
-    public ZhangFeiFierceWarrior(final ZhangFeiFierceWarrior card) {
+    private ZhangFeiFierceWarrior(final ZhangFeiFierceWarrior card) {
         super(card);
     }
 

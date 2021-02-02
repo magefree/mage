@@ -42,7 +42,7 @@ public final class JadeBearer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JadeBearer(final JadeBearer card) {
+    private JadeBearer(final JadeBearer card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class TalasWarrior extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public TalasWarrior(final TalasWarrior card) {
+    private TalasWarrior(final TalasWarrior card) {
         super(card);
     }
 

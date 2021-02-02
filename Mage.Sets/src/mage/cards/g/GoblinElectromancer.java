@@ -39,7 +39,7 @@ public final class GoblinElectromancer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public GoblinElectromancer(final GoblinElectromancer card) {
+    private GoblinElectromancer(final GoblinElectromancer card) {
         super(card);
     }
 

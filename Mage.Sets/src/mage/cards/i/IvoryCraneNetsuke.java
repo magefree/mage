@@ -30,7 +30,7 @@ public final class IvoryCraneNetsuke extends CardImpl {
         
     }
 
-    public IvoryCraneNetsuke(final IvoryCraneNetsuke card) {
+    private IvoryCraneNetsuke(final IvoryCraneNetsuke card) {
         super(card);
     }
 

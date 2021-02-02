@@ -27,7 +27,7 @@ public final class RidgetopRaptor extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
     }
 
-    public RidgetopRaptor(final RidgetopRaptor card) {
+    private RidgetopRaptor(final RidgetopRaptor card) {
         super(card);
     }
 

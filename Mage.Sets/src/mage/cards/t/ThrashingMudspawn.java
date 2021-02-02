@@ -38,7 +38,7 @@ public final class ThrashingMudspawn extends CardImpl {
 
     }
 
-    public ThrashingMudspawn(final ThrashingMudspawn card) {
+    private ThrashingMudspawn(final ThrashingMudspawn card) {
         super(card);
     }
 

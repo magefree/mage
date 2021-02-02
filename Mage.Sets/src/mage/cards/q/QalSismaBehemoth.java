@@ -31,7 +31,7 @@ public final class QalSismaBehemoth extends CardImpl {
 
     }
 
-    public QalSismaBehemoth(final QalSismaBehemoth card) {
+    private QalSismaBehemoth(final QalSismaBehemoth card) {
         super(card);
     }
 

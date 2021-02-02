@@ -26,7 +26,7 @@ public final class ShredMemory extends CardImpl {
         this.addAbility(new TransmuteAbility("{1}{B}{B}"));
     }
 
-    public ShredMemory(final ShredMemory card) {
+    private ShredMemory(final ShredMemory card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class AncestralKnowledge extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ShuffleLibrarySourceEffect(), false));
     }
 
-    public AncestralKnowledge(final AncestralKnowledge card) {
+    private AncestralKnowledge(final AncestralKnowledge card) {
         super(card);
     }
 

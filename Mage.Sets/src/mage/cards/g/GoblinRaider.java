@@ -27,7 +27,7 @@ public final class GoblinRaider extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public GoblinRaider(final GoblinRaider card) {
+    private GoblinRaider(final GoblinRaider card) {
         super(card);
     }
 

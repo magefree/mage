@@ -39,7 +39,7 @@ public final class EmbraalBruiser extends CardImpl {
                 "{this} has menace as long as you control an artifact")));
     }
 
-    public EmbraalBruiser(final EmbraalBruiser card) {
+    private EmbraalBruiser(final EmbraalBruiser card) {
         super(card);
     }
 

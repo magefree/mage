@@ -24,7 +24,7 @@ public final class VampiricTutor extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
-    public VampiricTutor(final VampiricTutor card) {
+    private VampiricTutor(final VampiricTutor card) {
         super(card);
     }
 

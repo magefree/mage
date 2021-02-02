@@ -42,7 +42,7 @@ public final class Paralyze extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ParalyzeEffect(), TargetController.CONTROLLER_ATTACHED_TO, false));
     }
 
-    public Paralyze(final Paralyze card) {
+    private Paralyze(final Paralyze card) {
         super(card);
     }
 

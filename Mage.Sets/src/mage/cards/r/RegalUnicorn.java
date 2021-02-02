@@ -22,7 +22,7 @@ public final class RegalUnicorn extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public RegalUnicorn(final RegalUnicorn card) {
+    private RegalUnicorn(final RegalUnicorn card) {
         super(card);
     }
 

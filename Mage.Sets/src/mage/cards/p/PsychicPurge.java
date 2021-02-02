@@ -36,7 +36,7 @@ public final class PsychicPurge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PsychicPurge(final PsychicPurge card) {
+    private PsychicPurge(final PsychicPurge card) {
         super(card);
     }
 

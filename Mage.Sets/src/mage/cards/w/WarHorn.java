@@ -26,7 +26,7 @@ public final class WarHorn extends CardImpl {
             Duration.WhileOnBattlefield, new FilterAttackingCreature(), false)));
     }
 
-    public WarHorn(final WarHorn card) {
+    private WarHorn(final WarHorn card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class WingStorm extends CardImpl {
         this.getSpellAbility().addEffect(new WingStormEffect());
     }
 
-    public WingStorm(final WingStorm card) {
+    private WingStorm(final WingStorm card) {
         super(card);
     }
 

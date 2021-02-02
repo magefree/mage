@@ -42,7 +42,7 @@ public final class VolleyVeteran extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VolleyVeteran(final VolleyVeteran card) {
+    private VolleyVeteran(final VolleyVeteran card) {
         super(card);
     }
 

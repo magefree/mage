@@ -33,7 +33,7 @@ public final class NinjaOfTheDeepHours extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true, false));
     }
 
-    public NinjaOfTheDeepHours(final NinjaOfTheDeepHours card) {
+    private NinjaOfTheDeepHours(final NinjaOfTheDeepHours card) {
         super(card);
     }
 

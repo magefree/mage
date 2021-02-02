@@ -29,7 +29,7 @@ public final class AnvilwroughtRaptor extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public AnvilwroughtRaptor(final AnvilwroughtRaptor card) {
+    private AnvilwroughtRaptor(final AnvilwroughtRaptor card) {
         super(card);
     }
 

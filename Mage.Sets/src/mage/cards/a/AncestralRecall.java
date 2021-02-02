@@ -23,7 +23,7 @@ public final class AncestralRecall extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public AncestralRecall(final AncestralRecall card) {
+    private AncestralRecall(final AncestralRecall card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class SpiritualGuardian extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4), false));
     }
 
-    public SpiritualGuardian(final SpiritualGuardian card) {
+    private SpiritualGuardian(final SpiritualGuardian card) {
         super(card);
     }
 

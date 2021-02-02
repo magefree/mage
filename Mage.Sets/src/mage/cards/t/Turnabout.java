@@ -35,7 +35,7 @@ public final class Turnabout extends CardImpl {
 
     }
 
-    public Turnabout(final Turnabout card) {
+    private Turnabout(final Turnabout card) {
         super(card);
     }
 

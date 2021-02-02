@@ -34,7 +34,7 @@ public final class GroveOfTheBurnwillows extends CardImpl {
         this.addAbility(GreenManaAbility);
     }
 
-    public GroveOfTheBurnwillows(final GroveOfTheBurnwillows card) {
+    private GroveOfTheBurnwillows(final GroveOfTheBurnwillows card) {
         super(card);
     }
 

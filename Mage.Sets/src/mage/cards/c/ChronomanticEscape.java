@@ -37,7 +37,7 @@ public final class ChronomanticEscape extends CardImpl {
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{2}{W}"), this));
     }
 
-    public ChronomanticEscape(final ChronomanticEscape card) {
+    private ChronomanticEscape(final ChronomanticEscape card) {
         super(card);
     }
 

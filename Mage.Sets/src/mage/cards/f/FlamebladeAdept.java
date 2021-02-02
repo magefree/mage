@@ -33,7 +33,7 @@ public final class FlamebladeAdept extends CardImpl {
         this.addAbility(new CycleOrDiscardControllerTriggeredAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn)));
     }
 
-    public FlamebladeAdept(final FlamebladeAdept card) {
+    private FlamebladeAdept(final FlamebladeAdept card) {
         super(card);
     }
 

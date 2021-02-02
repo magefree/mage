@@ -23,7 +23,7 @@ public final class TotallyLost extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
-    public TotallyLost(final TotallyLost card) {
+    private TotallyLost(final TotallyLost card) {
         super(card);
     }
 

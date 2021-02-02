@@ -33,7 +33,7 @@ public final class NobleSteeds extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NobleSteeds(final NobleSteeds card) {
+    private NobleSteeds(final NobleSteeds card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class StenchOfDecay extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false));
     }
 
-    public StenchOfDecay(final StenchOfDecay card) {
+    private StenchOfDecay(final StenchOfDecay card) {
         super(card);
     }
 

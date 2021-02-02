@@ -32,7 +32,7 @@ public final class SulfurousSprings extends CardImpl {
         this.addAbility(redManaAbility);
     }
 
-    public SulfurousSprings(final SulfurousSprings card) {
+    private SulfurousSprings(final SulfurousSprings card) {
         super(card);
     }
 

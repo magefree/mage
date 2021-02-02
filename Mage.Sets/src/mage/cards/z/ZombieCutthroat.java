@@ -26,7 +26,7 @@ public final class ZombieCutthroat extends CardImpl {
         this.addAbility(new MorphAbility(this, new PayLifeCost(5)));
     }
 
-    public ZombieCutthroat(final ZombieCutthroat card) {
+    private ZombieCutthroat(final ZombieCutthroat card) {
         super(card);
     }
 

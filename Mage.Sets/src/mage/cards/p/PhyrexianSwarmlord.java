@@ -33,7 +33,7 @@ public final class PhyrexianSwarmlord extends CardImpl {
                 new CreateTokenEffect(new InsectInfectToken(), OpponentsPoisonCountersCount.instance)));
     }
 
-    public PhyrexianSwarmlord(final PhyrexianSwarmlord card) {
+    private PhyrexianSwarmlord(final PhyrexianSwarmlord card) {
         super(card);
     }
 

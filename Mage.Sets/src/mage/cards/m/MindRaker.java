@@ -35,7 +35,7 @@ public final class MindRaker extends CardImpl {
                 new DoIfCostPaid(new DiscardEachPlayerEffect(TargetController.OPPONENT), new ExileOpponentsCardFromExileToGraveyardCost(true)), false));
     }
 
-    public MindRaker(final MindRaker card) {
+    private MindRaker(final MindRaker card) {
         super(card);
     }
 

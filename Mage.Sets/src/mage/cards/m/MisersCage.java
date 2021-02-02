@@ -26,7 +26,7 @@ public final class MisersCage extends CardImpl {
         this.addAbility(new MisersCageTriggeredAbility());
     }
 
-    public MisersCage(final MisersCage card) {
+    private MisersCage(final MisersCage card) {
         super(card);
     }
 

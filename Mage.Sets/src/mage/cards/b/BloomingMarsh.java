@@ -35,7 +35,7 @@ public final class BloomingMarsh extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public BloomingMarsh(final BloomingMarsh card) {
+    private BloomingMarsh(final BloomingMarsh card) {
         super(card);
     }
 

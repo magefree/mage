@@ -30,7 +30,7 @@ public final class SeismicStrike extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SeismicStrike(final SeismicStrike card) {
+    private SeismicStrike(final SeismicStrike card) {
         super(card);
     }
 

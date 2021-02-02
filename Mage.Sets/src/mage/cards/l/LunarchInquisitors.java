@@ -47,7 +47,7 @@ public final class LunarchInquisitors extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LunarchInquisitors(final LunarchInquisitors card) {
+    private LunarchInquisitors(final LunarchInquisitors card) {
         super(card);
     }
 

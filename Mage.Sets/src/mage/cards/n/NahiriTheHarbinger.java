@@ -72,7 +72,7 @@ public final class NahiriTheHarbinger extends CardImpl {
         this.addAbility(new LoyaltyAbility(new NahiriTheHarbingerEffect(), -8));
     }
 
-    public NahiriTheHarbinger(final NahiriTheHarbinger card) {
+    private NahiriTheHarbinger(final NahiriTheHarbinger card) {
         super(card);
     }
 

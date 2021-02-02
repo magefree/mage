@@ -39,7 +39,7 @@ public final class LeoninSquire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LeoninSquire(final LeoninSquire card) {
+    private LeoninSquire(final LeoninSquire card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class Mindswipe extends CardImpl {
         this.getSpellAbility().addEffect(new MindswipeEffect());
     }
 
-    public Mindswipe(final Mindswipe card) {
+    private Mindswipe(final Mindswipe card) {
         super(card);
     }
 

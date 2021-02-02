@@ -39,7 +39,7 @@ public final class ParasiticBond extends CardImpl {
             TargetController.CONTROLLER_ATTACHED_TO, false, true));
     }
 
-    public ParasiticBond(final ParasiticBond card) {
+    private ParasiticBond(final ParasiticBond card) {
         super(card);
     }
 

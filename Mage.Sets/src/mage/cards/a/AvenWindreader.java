@@ -39,7 +39,7 @@ public final class AvenWindreader extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AvenWindreader(final AvenWindreader card) {
+    private AvenWindreader(final AvenWindreader card) {
         super(card);
     }
 

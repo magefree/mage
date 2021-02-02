@@ -35,7 +35,7 @@ public final class AjanisChosen extends CardImpl {
                 "Whenever an enchantment enters the battlefield under your control, create a 2/2 white Cat creature token. If that enchantment is an Aura, you may attach it to the token"));
     }
 
-    public AjanisChosen(final AjanisChosen card) {
+    private AjanisChosen(final AjanisChosen card) {
         super(card);
     }
 

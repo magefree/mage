@@ -25,7 +25,7 @@ public final class FathomTrawl extends CardImpl {
         this.getSpellAbility().addEffect(new FathomTrawlEffect());
     }
 
-    public FathomTrawl(final FathomTrawl card) {
+    private FathomTrawl(final FathomTrawl card) {
         super(card);
     }
 

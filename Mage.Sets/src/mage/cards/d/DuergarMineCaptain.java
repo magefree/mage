@@ -41,7 +41,7 @@ public final class DuergarMineCaptain extends CardImpl {
 
     }
 
-    public DuergarMineCaptain(final DuergarMineCaptain card) {
+    private DuergarMineCaptain(final DuergarMineCaptain card) {
         super(card);
     }
 

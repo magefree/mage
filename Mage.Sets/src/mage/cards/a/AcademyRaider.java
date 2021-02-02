@@ -35,7 +35,7 @@ public final class AcademyRaider extends CardImpl {
 
     }
 
-    public AcademyRaider(final AcademyRaider card) {
+    private AcademyRaider(final AcademyRaider card) {
         super(card);
     }
 

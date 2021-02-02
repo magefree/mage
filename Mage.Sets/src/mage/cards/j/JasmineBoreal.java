@@ -24,7 +24,7 @@ public final class JasmineBoreal extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public JasmineBoreal(final JasmineBoreal card) {
+    private JasmineBoreal(final JasmineBoreal card) {
         super(card);
     }
 

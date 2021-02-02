@@ -26,7 +26,7 @@ public final class ZodiacGoat extends CardImpl {
         this.addAbility(new MountainwalkAbility());
     }
 
-    public ZodiacGoat(final ZodiacGoat card) {
+    private ZodiacGoat(final ZodiacGoat card) {
         super(card);
     }
 

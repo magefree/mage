@@ -28,7 +28,7 @@ public final class SnareThopter extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public SnareThopter(final SnareThopter card) {
+    private SnareThopter(final SnareThopter card) {
         super(card);
     }
 

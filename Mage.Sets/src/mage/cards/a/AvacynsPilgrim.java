@@ -25,7 +25,7 @@ public final class AvacynsPilgrim extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public AvacynsPilgrim(final AvacynsPilgrim card) {
+    private AvacynsPilgrim(final AvacynsPilgrim card) {
         super(card);
     }
 

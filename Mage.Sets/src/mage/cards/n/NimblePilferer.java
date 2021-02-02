@@ -25,7 +25,7 @@ public final class NimblePilferer extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
     }
 
-    public NimblePilferer(final NimblePilferer card) {
+    private NimblePilferer(final NimblePilferer card) {
         super(card);
     }
 

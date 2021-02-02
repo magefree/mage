@@ -32,7 +32,7 @@ public final class KarplusanYeti extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KarplusanYeti(final KarplusanYeti card) {
+    private KarplusanYeti(final KarplusanYeti card) {
         super(card);
     }
 

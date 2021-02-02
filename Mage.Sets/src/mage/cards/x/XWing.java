@@ -36,7 +36,7 @@ public final class XWing extends CardImpl {
 
     }
 
-    public XWing(final XWing card) {
+    private XWing(final XWing card) {
         super(card);
     }
 

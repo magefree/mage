@@ -28,7 +28,7 @@ public final class TranquilGarden extends CardImpl {
         this.addAbility(whiteManaAbility);
     }
 
-    public TranquilGarden(final TranquilGarden card) {
+    private TranquilGarden(final TranquilGarden card) {
         super(card);
     }
 

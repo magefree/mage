@@ -56,7 +56,7 @@ public final class MelekIzzetParagon extends CardImpl {
         this.addAbility(new MelekIzzetParagonTriggeredAbility());
     }
 
-    public MelekIzzetParagon(final MelekIzzetParagon card) {
+    private MelekIzzetParagon(final MelekIzzetParagon card) {
         super(card);
     }
 

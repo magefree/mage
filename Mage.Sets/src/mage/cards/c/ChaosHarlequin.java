@@ -35,7 +35,7 @@ public final class ChaosHarlequin extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChaosHarlequinEffect(), new ManaCostsImpl("{R}")));
     }
 
-    public ChaosHarlequin(final ChaosHarlequin card) {
+    private ChaosHarlequin(final ChaosHarlequin card) {
         super(card);
     }
 

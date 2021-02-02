@@ -37,7 +37,7 @@ public final class DesperateGambit extends CardImpl {
         this.getSpellAbility().addEffect(new DesperateGambitEffect());
     }
 
-    public DesperateGambit(final DesperateGambit card) {
+    private DesperateGambit(final DesperateGambit card) {
         super(card);
     }
 

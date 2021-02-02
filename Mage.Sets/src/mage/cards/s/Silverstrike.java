@@ -24,7 +24,7 @@ public final class Silverstrike extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
     }
 
-    public Silverstrike(final Silverstrike card) {
+    private Silverstrike(final Silverstrike card) {
         super(card);
     }
 

@@ -63,7 +63,7 @@ public final class AyliEternalPilgrim extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AyliEternalPilgrim(final AyliEternalPilgrim card) {
+    private AyliEternalPilgrim(final AyliEternalPilgrim card) {
         super(card);
     }
 

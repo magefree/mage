@@ -31,7 +31,7 @@ public final class SlithBloodletter extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }
 
-    public SlithBloodletter(final SlithBloodletter card) {
+    private SlithBloodletter(final SlithBloodletter card) {
         super(card);
     }
 

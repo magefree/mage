@@ -25,7 +25,7 @@ public final class SipOfHemlock extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(2));
     }
 
-    public SipOfHemlock(final SipOfHemlock card) {
+    private SipOfHemlock(final SipOfHemlock card) {
         super(card);
     }
 

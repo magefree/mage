@@ -44,7 +44,7 @@ public final class UnstableShapeshifter extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new UnstableShapeshifterEffect(), filterAnotherCreature, false, SetTargetPointer.PERMANENT, ""));
     }
 
-    public UnstableShapeshifter(final UnstableShapeshifter card) {
+    private UnstableShapeshifter(final UnstableShapeshifter card) {
         super(card);
     }
 

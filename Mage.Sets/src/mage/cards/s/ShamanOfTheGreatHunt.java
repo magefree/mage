@@ -63,7 +63,7 @@ public final class ShamanOfTheGreatHunt extends CardImpl {
         
     }
 
-    public ShamanOfTheGreatHunt(final ShamanOfTheGreatHunt card) {
+    private ShamanOfTheGreatHunt(final ShamanOfTheGreatHunt card) {
         super(card);
     }
 

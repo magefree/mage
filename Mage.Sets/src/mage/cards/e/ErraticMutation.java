@@ -34,7 +34,7 @@ public final class ErraticMutation extends CardImpl {
 
     }
 
-    public ErraticMutation(final ErraticMutation card) {
+    private ErraticMutation(final ErraticMutation card) {
         super(card);
     }
 

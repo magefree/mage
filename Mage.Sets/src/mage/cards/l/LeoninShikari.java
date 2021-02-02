@@ -29,7 +29,7 @@ public final class LeoninShikari extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(EquipAbility.class, "equip abilities")));
     }
 
-    public LeoninShikari(final LeoninShikari card) {
+    private LeoninShikari(final LeoninShikari card) {
         super(card);
     }
 

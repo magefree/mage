@@ -37,7 +37,7 @@ public final class ManaLeech extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ManaLeech(final ManaLeech card) {
+    private ManaLeech(final ManaLeech card) {
         super(card);
     }
 

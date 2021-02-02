@@ -58,7 +58,7 @@ public final class HavenOfTheSpiritDragon extends CardImpl {
 
     }
 
-    public HavenOfTheSpiritDragon(final HavenOfTheSpiritDragon card) {
+    private HavenOfTheSpiritDragon(final HavenOfTheSpiritDragon card) {
         super(card);
     }
 

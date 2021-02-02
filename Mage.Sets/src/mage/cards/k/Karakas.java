@@ -38,7 +38,7 @@ public final class Karakas extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Karakas(final Karakas card) {
+    private Karakas(final Karakas card) {
         super(card);
     }
 

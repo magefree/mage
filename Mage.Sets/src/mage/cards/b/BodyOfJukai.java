@@ -27,7 +27,7 @@ public final class BodyOfJukai extends CardImpl {
         this.addAbility(new SoulshiftAbility(8));
     }
 
-    public BodyOfJukai(final BodyOfJukai card) {
+    private BodyOfJukai(final BodyOfJukai card) {
         super(card);
     }
 

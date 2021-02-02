@@ -39,7 +39,7 @@ public final class HowlingGale extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{G}"), TimingRule.INSTANT));
     }
 
-    public HowlingGale(final HowlingGale card) {
+    private HowlingGale(final HowlingGale card) {
         super(card);
     }
 

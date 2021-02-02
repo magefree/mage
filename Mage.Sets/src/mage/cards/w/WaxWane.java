@@ -31,7 +31,7 @@ public final class WaxWane extends SplitCard {
         this.getRightHalfCard().getSpellAbility().addTarget(new TargetEnchantmentPermanent());
     }
 
-    public WaxWane(final WaxWane card) {
+    private WaxWane(final WaxWane card) {
         super(card);
     }
 

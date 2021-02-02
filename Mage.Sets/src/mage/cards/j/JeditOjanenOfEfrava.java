@@ -34,7 +34,7 @@ public final class JeditOjanenOfEfrava extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateTokenEffect(new CatWarriorToken()), false));
     }
 
-    public JeditOjanenOfEfrava(final JeditOjanenOfEfrava card) {
+    private JeditOjanenOfEfrava(final JeditOjanenOfEfrava card) {
         super(card);
     }
 

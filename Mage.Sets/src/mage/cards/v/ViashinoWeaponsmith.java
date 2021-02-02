@@ -27,7 +27,7 @@ public final class ViashinoWeaponsmith extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public ViashinoWeaponsmith(final ViashinoWeaponsmith card) {
+    private ViashinoWeaponsmith(final ViashinoWeaponsmith card) {
         super(card);
     }
 

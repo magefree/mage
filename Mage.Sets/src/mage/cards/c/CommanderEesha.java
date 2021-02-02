@@ -39,7 +39,7 @@ public final class CommanderEesha extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public CommanderEesha(final CommanderEesha card) {
+    private CommanderEesha(final CommanderEesha card) {
         super(card);
     }
 

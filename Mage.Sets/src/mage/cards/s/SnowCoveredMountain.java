@@ -25,7 +25,7 @@ public final class SnowCoveredMountain extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public SnowCoveredMountain(final SnowCoveredMountain card) {
+    private SnowCoveredMountain(final SnowCoveredMountain card) {
         super(card);
     }
 

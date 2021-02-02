@@ -34,7 +34,7 @@ public final class SeafloorOracle extends CardImpl {
 
     }
 
-    public SeafloorOracle(final SeafloorOracle card) {
+    private SeafloorOracle(final SeafloorOracle card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class MycosynthGolem extends CardImpl {
 
     }
 
-    public MycosynthGolem(final MycosynthGolem card) {
+    private MycosynthGolem(final MycosynthGolem card) {
         super(card);
     }
 

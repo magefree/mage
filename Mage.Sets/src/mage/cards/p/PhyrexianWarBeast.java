@@ -33,7 +33,7 @@ public final class PhyrexianWarBeast extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianWarBeast(final PhyrexianWarBeast card) {
+    private PhyrexianWarBeast(final PhyrexianWarBeast card) {
         super(card);
     }
 

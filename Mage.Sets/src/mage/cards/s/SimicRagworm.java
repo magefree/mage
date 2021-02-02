@@ -28,7 +28,7 @@ public final class SimicRagworm extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{U}")));
     }
 
-    public SimicRagworm(final SimicRagworm card) {
+    private SimicRagworm(final SimicRagworm card) {
         super(card);
     }
 

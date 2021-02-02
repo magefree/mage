@@ -39,7 +39,7 @@ public final class LurkingSkirge extends CardImpl {
                 "When a creature is put into an opponent's graveyard from the battlefield, if {this} is an enchantment, {this} becomes a 3/2 Imp creature with flying."));
     }
 
-    public LurkingSkirge(final LurkingSkirge card) {
+    private LurkingSkirge(final LurkingSkirge card) {
         super(card);
     }
 

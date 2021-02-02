@@ -27,7 +27,7 @@ public final class Quagmire extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new QuagmireEffect()));
     }
 
-    public Quagmire(final Quagmire card) {
+    private Quagmire(final Quagmire card) {
         super(card);
     }
 

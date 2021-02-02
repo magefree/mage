@@ -27,7 +27,7 @@ public final class DarkwaterCatacombs extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DarkwaterCatacombs(final DarkwaterCatacombs card) {
+    private DarkwaterCatacombs(final DarkwaterCatacombs card) {
         super(card);
     }
 

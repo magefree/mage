@@ -31,7 +31,7 @@ public final class RhoxBodyguard extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)));
     }
 
-    public RhoxBodyguard(final RhoxBodyguard card) {
+    private RhoxBodyguard(final RhoxBodyguard card) {
         super(card);
     }
 

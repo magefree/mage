@@ -26,7 +26,7 @@ public final class IroassChampion extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
     }
 
-    public IroassChampion(final IroassChampion card) {
+    private IroassChampion(final IroassChampion card) {
         super(card);
     }
 

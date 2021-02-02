@@ -44,7 +44,7 @@ public final class AphettoGrifter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AphettoGrifter(final AphettoGrifter card) {
+    private AphettoGrifter(final AphettoGrifter card) {
         super(card);
     }
 

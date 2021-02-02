@@ -47,7 +47,7 @@ public final class BorborygmosEnraged extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BorborygmosEnraged(final BorborygmosEnraged card) {
+    private BorborygmosEnraged(final BorborygmosEnraged card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class GoblinMarshal extends CardImpl {
         this.addAbility(enterAbility);
     }
 
-    public GoblinMarshal(final GoblinMarshal card) {
+    private GoblinMarshal(final GoblinMarshal card) {
         super(card);
     }
 

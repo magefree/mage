@@ -50,7 +50,7 @@ public final class CherishedHatchling extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CherishedHatchling(final CherishedHatchling card) {
+    private CherishedHatchling(final CherishedHatchling card) {
         super(card);
     }
 

@@ -64,7 +64,7 @@ public final class KeeperOfTheDead extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KeeperOfTheDead(final KeeperOfTheDead card) {
+    private KeeperOfTheDead(final KeeperOfTheDead card) {
         super(card);
     }
 

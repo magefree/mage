@@ -37,7 +37,7 @@ public final class WakeOfVultures extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WakeOfVultures(final WakeOfVultures card) {
+    private WakeOfVultures(final WakeOfVultures card) {
         super(card);
     }
 

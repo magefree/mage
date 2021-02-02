@@ -31,7 +31,7 @@ public final class WallOfOmens extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public WallOfOmens(final WallOfOmens card) {
+    private WallOfOmens(final WallOfOmens card) {
         super(card);
     }
 

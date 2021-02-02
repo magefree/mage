@@ -40,7 +40,7 @@ public final class AngelOfInvention extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, true)));
     }
 
-    public AngelOfInvention(final AngelOfInvention card) {
+    private AngelOfInvention(final AngelOfInvention card) {
         super(card);
     }
 

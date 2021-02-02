@@ -37,7 +37,7 @@ public final class LlanowarSentinel extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LlanowarSentinelEffect()));
     }
 
-    public LlanowarSentinel(final LlanowarSentinel card) {
+    private LlanowarSentinel(final LlanowarSentinel card) {
         super(card);
     }
 

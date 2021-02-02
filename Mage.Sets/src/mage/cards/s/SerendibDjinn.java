@@ -41,7 +41,7 @@ public final class SerendibDjinn extends CardImpl {
                 new SacrificeSourceEffect()));
     }
 
-    public SerendibDjinn(final SerendibDjinn card) {
+    private SerendibDjinn(final SerendibDjinn card) {
         super(card);
     }
 

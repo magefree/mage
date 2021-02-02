@@ -53,7 +53,7 @@ public final class MausoleumHarpy extends CardImpl {
 
     }
 
-    public MausoleumHarpy(final MausoleumHarpy card) {
+    private MausoleumHarpy(final MausoleumHarpy card) {
         super(card);
     }
 

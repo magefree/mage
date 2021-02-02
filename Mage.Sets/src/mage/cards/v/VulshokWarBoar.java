@@ -33,7 +33,7 @@ public final class VulshokWarBoar extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
     }
 
-    public VulshokWarBoar(final VulshokWarBoar card) {
+    private VulshokWarBoar(final VulshokWarBoar card) {
         super(card);
     }
 

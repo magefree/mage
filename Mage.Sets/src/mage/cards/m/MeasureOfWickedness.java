@@ -56,7 +56,7 @@ public final class MeasureOfWickedness extends CardImpl {
 
     }
 
-    public MeasureOfWickedness(final MeasureOfWickedness card) {
+    private MeasureOfWickedness(final MeasureOfWickedness card) {
         super(card);
     }
 

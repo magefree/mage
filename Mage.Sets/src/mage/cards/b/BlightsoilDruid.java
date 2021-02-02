@@ -29,7 +29,7 @@ public final class BlightsoilDruid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlightsoilDruid(final BlightsoilDruid card) {
+    private BlightsoilDruid(final BlightsoilDruid card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class Glarecaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Glarecaster(final Glarecaster card) {
+    private Glarecaster(final Glarecaster card) {
         super(card);
     }
 

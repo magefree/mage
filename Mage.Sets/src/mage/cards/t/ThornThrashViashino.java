@@ -37,7 +37,7 @@ public final class ThornThrashViashino extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),new ManaCostsImpl("{G}")));
     }
 
-    public ThornThrashViashino(final ThornThrashViashino card) {
+    private ThornThrashViashino(final ThornThrashViashino card) {
         super(card);
     }
 

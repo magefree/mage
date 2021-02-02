@@ -43,7 +43,7 @@ public final class AltarOfShadows extends CardImpl {
         this.addAbility(destroyAbility);
     }
 
-    public AltarOfShadows(final AltarOfShadows card) {
+    private AltarOfShadows(final AltarOfShadows card) {
         super(card);
     }
 

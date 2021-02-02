@@ -32,7 +32,7 @@ public final class Crusade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public Crusade(final Crusade card) {
+    private Crusade(final Crusade card) {
         super(card);
     }
 

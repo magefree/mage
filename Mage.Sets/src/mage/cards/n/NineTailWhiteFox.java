@@ -27,7 +27,7 @@ public final class NineTailWhiteFox extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public NineTailWhiteFox(final NineTailWhiteFox card) {
+    private NineTailWhiteFox(final NineTailWhiteFox card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class EchoingCourage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public EchoingCourage(final EchoingCourage card) {
+    private EchoingCourage(final EchoingCourage card) {
         super(card);
     }
 

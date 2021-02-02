@@ -26,7 +26,7 @@ public final class DefiantElf extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public DefiantElf(final DefiantElf card) {
+    private DefiantElf(final DefiantElf card) {
         super(card);
     }
 

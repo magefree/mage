@@ -39,7 +39,7 @@ public final class HandOfEmrakul extends CardImpl {
         this.addAbility(new AnnihilatorAbility(1));
     }
 
-    public HandOfEmrakul(final HandOfEmrakul card) {
+    private HandOfEmrakul(final HandOfEmrakul card) {
         super(card);
     }
 

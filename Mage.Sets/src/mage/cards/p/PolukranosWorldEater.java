@@ -62,7 +62,7 @@ public final class PolukranosWorldEater extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PolukranosWorldEater(final PolukranosWorldEater card) {
+    private PolukranosWorldEater(final PolukranosWorldEater card) {
         super(card);
     }
 

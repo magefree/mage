@@ -40,7 +40,7 @@ public final class PrematureBurial extends CardImpl {
         this.getSpellAbility().addWatcher(new ETBSinceYourLastTurnWatcher());
     }
 
-    public PrematureBurial(final PrematureBurial card) {
+    private PrematureBurial(final PrematureBurial card) {
         super(card);
     }
 

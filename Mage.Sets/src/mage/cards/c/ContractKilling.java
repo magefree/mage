@@ -25,7 +25,7 @@ public final class ContractKilling extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken(), 2));
     }
 
-    public ContractKilling(final ContractKilling card) {
+    private ContractKilling(final ContractKilling card) {
         super(card);
     }
 

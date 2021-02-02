@@ -48,7 +48,7 @@ public final class RimewindCryomancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RimewindCryomancer(final RimewindCryomancer card) {
+    private RimewindCryomancer(final RimewindCryomancer card) {
         super(card);
     }
 

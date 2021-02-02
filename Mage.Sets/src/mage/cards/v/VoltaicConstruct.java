@@ -38,7 +38,7 @@ public final class VoltaicConstruct extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VoltaicConstruct(final VoltaicConstruct card) {
+    private VoltaicConstruct(final VoltaicConstruct card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class OrochiHatchery extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrochiHatchery(final OrochiHatchery card) {
+    private OrochiHatchery(final OrochiHatchery card) {
         super(card);
     }
 

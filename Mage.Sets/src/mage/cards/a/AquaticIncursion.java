@@ -42,7 +42,7 @@ public final class AquaticIncursion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AquaticIncursion(final AquaticIncursion card) {
+    private AquaticIncursion(final AquaticIncursion card) {
         super(card);
     }
 

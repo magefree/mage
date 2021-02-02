@@ -38,7 +38,7 @@ public final class ScoutTrooper extends CardImpl {
 
     }
 
-    public ScoutTrooper(final ScoutTrooper card) {
+    private ScoutTrooper(final ScoutTrooper card) {
         super(card);
     }
 

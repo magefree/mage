@@ -32,7 +32,7 @@ public final class RealityShift extends CardImpl {
 
     }
 
-    public RealityShift(final RealityShift card) {
+    private RealityShift(final RealityShift card) {
         super(card);
     }
 

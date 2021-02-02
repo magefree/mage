@@ -39,7 +39,7 @@ public final class CrushingCanopy extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public CrushingCanopy(final CrushingCanopy card) {
+    private CrushingCanopy(final CrushingCanopy card) {
         super(card);
     }
 

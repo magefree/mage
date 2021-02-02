@@ -46,7 +46,7 @@ public final class KeldonBerserker extends CardImpl {
         ));
     }
 
-    public KeldonBerserker(final KeldonBerserker card) {
+    private KeldonBerserker(final KeldonBerserker card) {
         super(card);
     }
 

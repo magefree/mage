@@ -43,7 +43,7 @@ public final class KeeperOfTheBeasts extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KeeperOfTheBeasts(final KeeperOfTheBeasts card) {
+    private KeeperOfTheBeasts(final KeeperOfTheBeasts card) {
         super(card);
     }
 

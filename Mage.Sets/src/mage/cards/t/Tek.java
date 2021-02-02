@@ -62,7 +62,7 @@ public final class Tek extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Tek(final Tek card) {
+    private Tek(final Tek card) {
         super(card);
     }
 

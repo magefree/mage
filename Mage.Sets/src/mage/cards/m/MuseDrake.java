@@ -32,7 +32,7 @@ public final class MuseDrake extends CardImpl {
         ));
     }
 
-    public MuseDrake(final MuseDrake card) {
+    private MuseDrake(final MuseDrake card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class Junktroller extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Junktroller(final Junktroller card) {
+    private Junktroller(final Junktroller card) {
         super(card);
     }
 

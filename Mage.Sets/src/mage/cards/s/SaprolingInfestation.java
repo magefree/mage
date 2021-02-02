@@ -25,7 +25,7 @@ public final class SaprolingInfestation extends CardImpl {
         this.addAbility(new SaprolingInfestationTriggeredAbility());
     }
 
-    public SaprolingInfestation(final SaprolingInfestation card) {
+    private SaprolingInfestation(final SaprolingInfestation card) {
         super(card);
     }
 

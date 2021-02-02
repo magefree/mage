@@ -49,7 +49,7 @@ public final class BattleBrawler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BattleBrawler(final BattleBrawler card) {
+    private BattleBrawler(final BattleBrawler card) {
         super(card);
     }
 

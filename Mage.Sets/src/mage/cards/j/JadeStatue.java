@@ -30,7 +30,7 @@ public final class JadeStatue extends CardImpl {
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect (new JadeStatueToken(), "", Duration.EndOfCombat), new ManaCostsImpl("{2}"), new IsPhaseCondition(TurnPhase.COMBAT), "{2}: {this} becomes a 3/6 Golem artifact creature until end of combat. Activate this ability only during combat."));
     }
 
-    public JadeStatue(final JadeStatue card) {
+    private JadeStatue(final JadeStatue card) {
         super(card);
     }
 

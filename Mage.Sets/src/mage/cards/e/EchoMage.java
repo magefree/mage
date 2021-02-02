@@ -64,7 +64,7 @@ public final class EchoMage extends LevelerCard {
         setMaxLevelCounters(4);
     }
 
-    public EchoMage(final EchoMage card) {
+    private EchoMage(final EchoMage card) {
         super(card);
     }
 

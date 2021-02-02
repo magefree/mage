@@ -24,7 +24,7 @@ public final class AnguishedUnmaking extends CardImpl {
         getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(3));
     }
 
-    public AnguishedUnmaking(final AnguishedUnmaking card) {
+    private AnguishedUnmaking(final AnguishedUnmaking card) {
         super(card);
     }
 

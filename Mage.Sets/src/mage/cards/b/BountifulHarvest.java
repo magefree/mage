@@ -26,7 +26,7 @@ public final class BountifulHarvest extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public BountifulHarvest(final BountifulHarvest card) {
+    private BountifulHarvest(final BountifulHarvest card) {
         super(card);
     }
 

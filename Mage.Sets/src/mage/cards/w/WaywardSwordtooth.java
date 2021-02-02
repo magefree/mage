@@ -41,7 +41,7 @@ public final class WaywardSwordtooth extends CardImpl {
         );
     }
 
-    public WaywardSwordtooth(final WaywardSwordtooth card) {
+    private WaywardSwordtooth(final WaywardSwordtooth card) {
         super(card);
     }
 

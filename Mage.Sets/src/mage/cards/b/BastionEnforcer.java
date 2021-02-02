@@ -22,7 +22,7 @@ public final class BastionEnforcer extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public BastionEnforcer(final BastionEnforcer card) {
+    private BastionEnforcer(final BastionEnforcer card) {
         super(card);
     }
 

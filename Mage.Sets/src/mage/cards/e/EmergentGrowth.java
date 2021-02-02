@@ -28,7 +28,7 @@ public final class EmergentGrowth extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public EmergentGrowth(final EmergentGrowth card) {
+    private EmergentGrowth(final EmergentGrowth card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class WoodenStake extends CardImpl {
         this.addAbility(new WoodenStakeBlocksOrBecomesBlockedTriggeredAbility());
     }
 
-    public WoodenStake(final WoodenStake card) {
+    private WoodenStake(final WoodenStake card) {
         super(card);
     }
 

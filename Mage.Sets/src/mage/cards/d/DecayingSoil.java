@@ -61,7 +61,7 @@ public final class DecayingSoil extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DecayingSoil(final DecayingSoil card) {
+    private DecayingSoil(final DecayingSoil card) {
         super(card);
     }
 

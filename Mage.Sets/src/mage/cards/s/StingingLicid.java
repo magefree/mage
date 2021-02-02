@@ -33,7 +33,7 @@ public final class StingingLicid extends CardImpl {
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DamageAttachedControllerEffect(2), "enchanted creature"));
     }
 
-    public StingingLicid(final StingingLicid card) {
+    private StingingLicid(final StingingLicid card) {
         super(card);
     }
 

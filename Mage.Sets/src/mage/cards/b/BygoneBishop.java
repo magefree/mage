@@ -41,7 +41,7 @@ public final class BygoneBishop extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new InvestigateEffect(), filterSpell, false));
     }
 
-    public BygoneBishop(final BygoneBishop card) {
+    private BygoneBishop(final BygoneBishop card) {
         super(card);
     }
 

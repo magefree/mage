@@ -25,7 +25,7 @@ public final class WindsOfRebuke extends CardImpl {
         getSpellAbility().addEffect(new MillCardsEachPlayerEffect(2, TargetController.ANY));
     }
 
-    public WindsOfRebuke(final WindsOfRebuke card) {
+    private WindsOfRebuke(final WindsOfRebuke card) {
         super(card);
     }
 

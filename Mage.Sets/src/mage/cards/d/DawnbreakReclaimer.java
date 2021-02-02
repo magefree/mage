@@ -44,7 +44,7 @@ public final class DawnbreakReclaimer extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DawnbreakReclaimerEffect(), TargetController.YOU, false));
     }
 
-    public DawnbreakReclaimer(final DawnbreakReclaimer card) {
+    private DawnbreakReclaimer(final DawnbreakReclaimer card) {
         super(card);
     }
 

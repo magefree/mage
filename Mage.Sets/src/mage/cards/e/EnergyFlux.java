@@ -38,7 +38,7 @@ public final class EnergyFlux extends CardImpl {
                         "All artifacts have \"At the beginning of your upkeep, sacrifice this artifact unless you pay {2}.\"")));
     }
 
-    public EnergyFlux(final EnergyFlux card) {
+    private EnergyFlux(final EnergyFlux card) {
         super(card);
     }
 

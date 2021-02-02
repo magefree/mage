@@ -28,7 +28,7 @@ public final class NightshadeStinger extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public NightshadeStinger(final NightshadeStinger card) {
+    private NightshadeStinger(final NightshadeStinger card) {
         super(card);
     }
 

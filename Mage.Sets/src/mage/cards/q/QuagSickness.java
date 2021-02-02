@@ -43,7 +43,7 @@ public final class QuagSickness extends CardImpl {
 
     }
 
-    public QuagSickness(final QuagSickness card) {
+    private QuagSickness(final QuagSickness card) {
         super(card);
     }
 

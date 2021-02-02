@@ -45,7 +45,7 @@ public final class SickeningShoal extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SickeningShoal(final SickeningShoal card) {
+    private SickeningShoal(final SickeningShoal card) {
         super(card);
     }
 

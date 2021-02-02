@@ -35,7 +35,7 @@ public final class Channel extends CardImpl {
         this.getSpellAbility().addEffect(new ChannelEffect());
     }
 
-    public Channel(final Channel card) {
+    private Channel(final Channel card) {
         super(card);
     }
 

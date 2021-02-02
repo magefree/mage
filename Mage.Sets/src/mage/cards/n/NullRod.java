@@ -25,7 +25,7 @@ public final class NullRod extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NullRodCantActivateEffect()));
     }
 
-    public NullRod(final NullRod card) {
+    private NullRod(final NullRod card) {
         super(card);
     }
 

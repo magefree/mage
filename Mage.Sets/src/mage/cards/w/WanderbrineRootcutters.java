@@ -38,7 +38,7 @@ public final class WanderbrineRootcutters extends CardImpl {
 
     }
 
-    public WanderbrineRootcutters(final WanderbrineRootcutters card) {
+    private WanderbrineRootcutters(final WanderbrineRootcutters card) {
         super(card);
     }
 

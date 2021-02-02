@@ -27,7 +27,7 @@ public final class LurkingNightstalker extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
     }
 
-    public LurkingNightstalker(final LurkingNightstalker card) {
+    private LurkingNightstalker(final LurkingNightstalker card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class LostLegacy extends CardImpl {
         this.getSpellAbility().addEffect(new LostLegacyEffect());
     }
 
-    public LostLegacy(final LostLegacy card) {
+    private LostLegacy(final LostLegacy card) {
         super(card);
     }
 

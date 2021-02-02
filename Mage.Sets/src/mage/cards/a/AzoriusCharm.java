@@ -39,7 +39,7 @@ public final class AzoriusCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public AzoriusCharm(final AzoriusCharm card) {
+    private AzoriusCharm(final AzoriusCharm card) {
         super(card);
     }
 

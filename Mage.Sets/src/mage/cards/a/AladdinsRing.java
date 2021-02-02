@@ -29,7 +29,7 @@ public final class AladdinsRing extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AladdinsRing(final AladdinsRing card) {
+    private AladdinsRing(final AladdinsRing card) {
         super(card);
     }
 

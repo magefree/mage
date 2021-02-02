@@ -39,7 +39,7 @@ public final class SpiritShackle extends CardImpl {
 
     }
 
-    public SpiritShackle(final SpiritShackle card) {
+    private SpiritShackle(final SpiritShackle card) {
         super(card);
     }
 

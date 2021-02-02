@@ -40,7 +40,7 @@ public final class StormEntity extends CardImpl {
                 "with a +1/+1 counter on it for each other spell cast this turn"));
     }
 
-    public StormEntity(final StormEntity card) {
+    private StormEntity(final StormEntity card) {
         super(card);
     }
 

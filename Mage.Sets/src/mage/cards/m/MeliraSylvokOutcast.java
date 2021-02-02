@@ -44,7 +44,7 @@ public final class MeliraSylvokOutcast extends CardImpl {
 
     }
 
-    public MeliraSylvokOutcast(final MeliraSylvokOutcast card) {
+    private MeliraSylvokOutcast(final MeliraSylvokOutcast card) {
         super(card);
     }
 

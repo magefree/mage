@@ -40,7 +40,7 @@ public final class DroverOfTheMighty extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public DroverOfTheMighty(final DroverOfTheMighty card) {
+    private DroverOfTheMighty(final DroverOfTheMighty card) {
         super(card);
     }
 

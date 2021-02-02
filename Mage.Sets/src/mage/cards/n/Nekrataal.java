@@ -49,7 +49,7 @@ public final class Nekrataal extends CardImpl {
 
     }
 
-    public Nekrataal(final Nekrataal card) {
+    private Nekrataal(final Nekrataal card) {
         super(card);
     }
 

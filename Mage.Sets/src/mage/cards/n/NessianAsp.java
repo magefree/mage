@@ -29,7 +29,7 @@ public final class NessianAsp extends CardImpl {
         this.addAbility(new MonstrosityAbility("{6}{G}",4));
     }
 
-    public NessianAsp(final NessianAsp card) {
+    private NessianAsp(final NessianAsp card) {
         super(card);
     }
 

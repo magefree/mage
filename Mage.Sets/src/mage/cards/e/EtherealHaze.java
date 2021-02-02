@@ -27,7 +27,7 @@ public final class EtherealHaze extends CardImpl {
 
     }
 
-    public EtherealHaze(final EtherealHaze card) {
+    private EtherealHaze(final EtherealHaze card) {
         super(card);
     }
 

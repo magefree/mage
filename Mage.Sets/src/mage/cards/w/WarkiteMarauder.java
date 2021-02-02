@@ -50,7 +50,7 @@ public final class WarkiteMarauder extends CardImpl {
 
     }
 
-    public WarkiteMarauder(final WarkiteMarauder card) {
+    private WarkiteMarauder(final WarkiteMarauder card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class Immolation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, -2)));
     }
 
-    public Immolation(final Immolation card) {
+    private Immolation(final Immolation card) {
         super(card);
     }
 

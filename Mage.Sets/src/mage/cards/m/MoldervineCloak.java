@@ -39,7 +39,7 @@ public final class MoldervineCloak extends CardImpl {
         this.addAbility(new DredgeAbility(2));
     }
 
-    public MoldervineCloak(final MoldervineCloak card) {
+    private MoldervineCloak(final MoldervineCloak card) {
         super(card);
     }
 

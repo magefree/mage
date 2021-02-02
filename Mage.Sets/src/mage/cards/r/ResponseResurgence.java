@@ -53,7 +53,7 @@ public final class ResponseResurgence extends SplitCard {
         );
     }
 
-    public ResponseResurgence(final ResponseResurgence card) {
+    private ResponseResurgence(final ResponseResurgence card) {
         super(card);
     }
 

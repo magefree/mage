@@ -41,7 +41,7 @@ public final class BlaringCaptain extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false), false));
     }
 
-    public BlaringCaptain(final BlaringCaptain card) {
+    private BlaringCaptain(final BlaringCaptain card) {
         super(card);
     }
 

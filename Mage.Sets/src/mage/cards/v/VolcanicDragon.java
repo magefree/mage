@@ -26,7 +26,7 @@ public final class VolcanicDragon extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public VolcanicDragon(final VolcanicDragon card) {
+    private VolcanicDragon(final VolcanicDragon card) {
         super(card);
     }
 

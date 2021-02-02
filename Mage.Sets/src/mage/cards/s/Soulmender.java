@@ -31,7 +31,7 @@ public final class Soulmender extends CardImpl {
         
     }
 
-    public Soulmender(final Soulmender card) {
+    private Soulmender(final Soulmender card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class BoundDetermined extends SplitCard {
 
     }
 
-    public BoundDetermined(final BoundDetermined card) {
+    private BoundDetermined(final BoundDetermined card) {
         super(card);
     }
 

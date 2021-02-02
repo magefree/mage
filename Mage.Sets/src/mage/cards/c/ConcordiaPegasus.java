@@ -26,7 +26,7 @@ public final class ConcordiaPegasus extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public ConcordiaPegasus(final ConcordiaPegasus card) {
+    private ConcordiaPegasus(final ConcordiaPegasus card) {
         super(card);
     }
 

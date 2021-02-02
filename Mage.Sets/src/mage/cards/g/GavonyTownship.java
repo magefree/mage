@@ -28,7 +28,7 @@ public final class GavonyTownship extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GavonyTownship(final GavonyTownship card) {
+    private GavonyTownship(final GavonyTownship card) {
         super(card);
     }
 

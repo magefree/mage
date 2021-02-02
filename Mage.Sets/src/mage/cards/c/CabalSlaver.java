@@ -35,7 +35,7 @@ public final class CabalSlaver extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(new DiscardTargetEffect(1), filter, false, SetTargetPointer.NONE, true, true));
     }
 
-    public CabalSlaver(final CabalSlaver card) {
+    private CabalSlaver(final CabalSlaver card) {
         super(card);
     }
 

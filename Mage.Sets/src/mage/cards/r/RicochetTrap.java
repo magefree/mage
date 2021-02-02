@@ -42,7 +42,7 @@ public final class RicochetTrap extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public RicochetTrap(final RicochetTrap card) {
+    private RicochetTrap(final RicochetTrap card) {
         super(card);
     }
 

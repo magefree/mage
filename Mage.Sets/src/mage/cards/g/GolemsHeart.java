@@ -26,7 +26,7 @@ public final class GolemsHeart extends CardImpl {
         this.addAbility(new GolemsHeartAbility());
     }
 
-    public GolemsHeart(final GolemsHeart card) {
+    private GolemsHeart(final GolemsHeart card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class CobraTrap extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SnakeToken(), 4));
     }
 
-    public CobraTrap(final CobraTrap card) {
+    private CobraTrap(final CobraTrap card) {
         super(card);
     }
 

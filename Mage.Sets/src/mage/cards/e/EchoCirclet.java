@@ -30,7 +30,7 @@ public final class EchoCirclet extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public EchoCirclet(final EchoCirclet card) {
+    private EchoCirclet(final EchoCirclet card) {
         super(card);
     }
 

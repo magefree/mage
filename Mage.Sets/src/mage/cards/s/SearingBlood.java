@@ -34,7 +34,7 @@ public final class SearingBlood extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SearingBlood(final SearingBlood card) {
+    private SearingBlood(final SearingBlood card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class SkeletonKey extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public SkeletonKey(final SkeletonKey card) {
+    private SkeletonKey(final SkeletonKey card) {
         super(card);
     }
 

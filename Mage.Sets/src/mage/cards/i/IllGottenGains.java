@@ -37,7 +37,7 @@ public final class IllGottenGains extends CardImpl {
         this.getSpellAbility().addEffect(new IllGottenGainsEffect());
     }
 
-    public IllGottenGains(final IllGottenGains card) {
+    private IllGottenGains(final IllGottenGains card) {
         super(card);
     }
 

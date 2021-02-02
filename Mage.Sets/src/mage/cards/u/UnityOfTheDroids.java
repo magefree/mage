@@ -51,7 +51,7 @@ public final class UnityOfTheDroids extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public UnityOfTheDroids(final UnityOfTheDroids card) {
+    private UnityOfTheDroids(final UnityOfTheDroids card) {
         super(card);
     }
 

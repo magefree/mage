@@ -43,7 +43,7 @@ public final class Bloodghast extends CardImpl {
         this.addAbility(new LandfallAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), true));
     }
 
-    public Bloodghast(final Bloodghast card) {
+    private Bloodghast(final Bloodghast card) {
         super(card);
     }
 

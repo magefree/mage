@@ -43,7 +43,7 @@ public final class SunClasp extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SunClaspReturnEffect(), new ColoredManaCost(ColoredManaSymbol.W)));
     }
 
-    public SunClasp(final SunClasp card) {
+    private SunClasp(final SunClasp card) {
         super(card);
     }
 

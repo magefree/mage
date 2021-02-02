@@ -34,7 +34,7 @@ public final class SkullStorm extends CardImpl {
         this.getSpellAbility().addEffect(new SkullStormEffect());
     }
 
-    public SkullStorm(final SkullStorm card) {
+    private SkullStorm(final SkullStorm card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class Riptide extends CardImpl {
         this.getSpellAbility().addEffect(new TapAllEffect(filter));
     }
 
-    public Riptide(final Riptide card) {
+    private Riptide(final Riptide card) {
         super(card);
     }
 

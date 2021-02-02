@@ -36,7 +36,7 @@ public final class CabalPaladin extends CardImpl {
         ));
     }
 
-    public CabalPaladin(final CabalPaladin card) {
+    private CabalPaladin(final CabalPaladin card) {
         super(card);
     }
 

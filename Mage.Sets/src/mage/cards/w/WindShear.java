@@ -32,7 +32,7 @@ public final class WindShear extends CardImpl {
         this.getSpellAbility().addEffect(new LoseAbilityAllEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter).setText("and lose flying until end of turn"));
     }
 
-    public WindShear(final WindShear card) {
+    private WindShear(final WindShear card) {
         super(card);
     }
 

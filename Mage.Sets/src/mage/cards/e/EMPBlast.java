@@ -31,7 +31,7 @@ public final class EMPBlast extends CardImpl {
         this.getSpellAbility().addEffect(new EMPBlastEffect());
     }
 
-    public EMPBlast(final EMPBlast card) {
+    private EMPBlast(final EMPBlast card) {
         super(card);
     }
 

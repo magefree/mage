@@ -36,7 +36,7 @@ public final class HuntingGrounds extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HuntingGrounds(final HuntingGrounds card) {
+    private HuntingGrounds(final HuntingGrounds card) {
         super(card);
     }
 

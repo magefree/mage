@@ -26,7 +26,7 @@ public final class WindingWurm extends CardImpl {
     this.addAbility(new EchoAbility("{4}{G}"));
     }
 
-    public WindingWurm(final WindingWurm card) {
+    private WindingWurm(final WindingWurm card) {
         super(card);
     }
 

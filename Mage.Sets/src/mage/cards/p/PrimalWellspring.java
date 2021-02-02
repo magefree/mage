@@ -38,7 +38,7 @@ public final class PrimalWellspring extends CardImpl {
         this.addAbility(new PyrimalWellspringTriggeredAbility(ability.getOriginalId(), effect));
     }
 
-    public PrimalWellspring(final PrimalWellspring card) {
+    private PrimalWellspring(final PrimalWellspring card) {
         super(card);
     }
 

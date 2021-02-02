@@ -33,7 +33,7 @@ public final class WordsOfWar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WordsOfWar(final WordsOfWar card) {
+    private WordsOfWar(final WordsOfWar card) {
         super(card);
     }
 

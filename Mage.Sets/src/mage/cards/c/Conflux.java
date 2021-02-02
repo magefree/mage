@@ -28,7 +28,7 @@ public final class Conflux extends CardImpl {
                 "Reveal those cards and put them into your hand. Then shuffle your library"));
     }
 
-    public Conflux(final Conflux card) {
+    private Conflux(final Conflux card) {
         super(card);
     }
 

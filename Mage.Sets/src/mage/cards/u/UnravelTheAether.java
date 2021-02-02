@@ -22,7 +22,7 @@ public final class UnravelTheAether extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
-    public UnravelTheAether(final UnravelTheAether card) {
+    private UnravelTheAether(final UnravelTheAether card) {
         super(card);
     }
 

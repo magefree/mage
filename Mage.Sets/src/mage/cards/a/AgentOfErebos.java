@@ -31,7 +31,7 @@ public final class AgentOfErebos extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AgentOfErebos(final AgentOfErebos card) {
+    private AgentOfErebos(final AgentOfErebos card) {
         super(card);
     }
 

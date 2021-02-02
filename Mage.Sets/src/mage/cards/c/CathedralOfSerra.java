@@ -37,7 +37,7 @@ public final class CathedralOfSerra extends CardImpl {
         ));
     }
 
-    public CathedralOfSerra(final CathedralOfSerra card) {
+    private CathedralOfSerra(final CathedralOfSerra card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class BlinkmothInfusion extends CardImpl {
         this.getSpellAbility().addEffect(new UntapAllArtifactsEffect());
     }
 
-    public BlinkmothInfusion(final BlinkmothInfusion card) {
+    private BlinkmothInfusion(final BlinkmothInfusion card) {
         super(card);
     }
 

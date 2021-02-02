@@ -41,7 +41,7 @@ public final class BrigidHeroOfKinsbaile extends CardImpl {
 
     }
 
-    public BrigidHeroOfKinsbaile(final BrigidHeroOfKinsbaile card) {
+    private BrigidHeroOfKinsbaile(final BrigidHeroOfKinsbaile card) {
         super(card);
     }
 

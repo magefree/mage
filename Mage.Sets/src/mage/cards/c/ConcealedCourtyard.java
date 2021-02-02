@@ -35,7 +35,7 @@ public final class ConcealedCourtyard extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public ConcealedCourtyard(final ConcealedCourtyard card) {
+    private ConcealedCourtyard(final ConcealedCourtyard card) {
         super(card);
     }
 

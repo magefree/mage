@@ -26,7 +26,7 @@ public final class GibberingKami extends CardImpl {
         this.addAbility(new SoulshiftAbility(3));
     }
 
-    public GibberingKami(final GibberingKami card) {
+    private GibberingKami(final GibberingKami card) {
         super(card);
     }
 

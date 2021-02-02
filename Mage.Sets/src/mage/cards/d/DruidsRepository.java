@@ -34,7 +34,7 @@ public final class DruidsRepository extends CardImpl {
                 new RemoveCountersSourceCost(CounterType.CHARGE.createInstance())));
     }
 
-    public DruidsRepository(final DruidsRepository card) {
+    private DruidsRepository(final DruidsRepository card) {
         super(card);
     }
 

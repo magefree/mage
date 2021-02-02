@@ -31,7 +31,7 @@ public final class CommonBond extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("second creature (can be the same as the first)")));
     }
 
-    public CommonBond(final CommonBond card) {
+    private CommonBond(final CommonBond card) {
         super(card);
     }
 

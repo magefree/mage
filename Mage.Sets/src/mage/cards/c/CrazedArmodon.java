@@ -46,7 +46,7 @@ public final class CrazedArmodon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrazedArmodon(final CrazedArmodon card) {
+    private CrazedArmodon(final CrazedArmodon card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class AmrouKithkin extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public AmrouKithkin(final AmrouKithkin card) {
+    private AmrouKithkin(final AmrouKithkin card) {
         super(card);
     }
 

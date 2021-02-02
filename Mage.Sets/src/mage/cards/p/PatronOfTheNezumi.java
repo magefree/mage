@@ -43,7 +43,7 @@ public final class PatronOfTheNezumi extends CardImpl {
 
     }
 
-    public PatronOfTheNezumi(final PatronOfTheNezumi card) {
+    private PatronOfTheNezumi(final PatronOfTheNezumi card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class LayOfTheLand extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, StaticFilters.FILTER_CARD_BASIC_LAND), true));
     }
 
-    public LayOfTheLand(final LayOfTheLand card) {
+    private LayOfTheLand(final LayOfTheLand card) {
         super(card);
     }
 

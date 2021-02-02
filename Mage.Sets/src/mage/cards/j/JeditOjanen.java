@@ -25,7 +25,7 @@ public final class JeditOjanen extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public JeditOjanen(final JeditOjanen card) {
+    private JeditOjanen(final JeditOjanen card) {
         super(card);
     }
 

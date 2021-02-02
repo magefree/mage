@@ -32,7 +32,7 @@ public final class Thoughtleech extends CardImpl {
         this.addAbility(new BecomesTappedTriggeredAbility(new GainLifeEffect(1), true, filter));
     }
 
-    public Thoughtleech(final Thoughtleech card) {
+    private Thoughtleech(final Thoughtleech card) {
         super(card);
     }
 

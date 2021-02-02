@@ -36,7 +36,7 @@ public final class PhantomWurm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhantomPreventionEffect()));
     }
 
-    public PhantomWurm(final PhantomWurm card) {
+    private PhantomWurm(final PhantomWurm card) {
         super(card);
     }
 

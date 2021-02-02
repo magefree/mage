@@ -39,7 +39,7 @@ public final class DreamThrush extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DreamThrush(final DreamThrush card) {
+    private DreamThrush(final DreamThrush card) {
         super(card);
     }
 

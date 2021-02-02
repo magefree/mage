@@ -36,7 +36,7 @@ public final class InciteHysteria extends CardImpl {
         this.getSpellAbility().setAbilityWord(AbilityWord.RADIANCE);
     }
 
-    public InciteHysteria(final InciteHysteria card) {
+    private InciteHysteria(final InciteHysteria card) {
         super(card);
     }
 

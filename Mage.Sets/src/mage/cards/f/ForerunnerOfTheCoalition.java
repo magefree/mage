@@ -50,7 +50,7 @@ public final class ForerunnerOfTheCoalition extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ForerunnerOfTheCoalition(final ForerunnerOfTheCoalition card) {
+    private ForerunnerOfTheCoalition(final ForerunnerOfTheCoalition card) {
         super(card);
     }
 

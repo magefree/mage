@@ -50,7 +50,7 @@ public final class BladewingTheRisen extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,1, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{B}{R}")));
     }
 
-    public BladewingTheRisen(final BladewingTheRisen card) {
+    private BladewingTheRisen(final BladewingTheRisen card) {
         super(card);
     }
 

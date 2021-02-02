@@ -35,7 +35,7 @@ public final class GoblinMatron extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), true));
     }
 
-    public GoblinMatron(final GoblinMatron card) {
+    private GoblinMatron(final GoblinMatron card) {
         super(card);
     }
 

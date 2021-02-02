@@ -31,7 +31,7 @@ public final class VedalkenHeretic extends CardImpl {
 
     }
 
-    public VedalkenHeretic(final VedalkenHeretic card) {
+    private VedalkenHeretic(final VedalkenHeretic card) {
         super(card);
     }
 

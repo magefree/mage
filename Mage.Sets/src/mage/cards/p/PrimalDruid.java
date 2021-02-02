@@ -34,7 +34,7 @@ public final class PrimalDruid extends CardImpl {
 
     }
 
-    public PrimalDruid(final PrimalDruid card) {
+    private PrimalDruid(final PrimalDruid card) {
         super(card);
     }
 

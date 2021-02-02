@@ -37,7 +37,7 @@ public final class WarfireJavelineer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WarfireJavelineer(final WarfireJavelineer card) {
+    private WarfireJavelineer(final WarfireJavelineer card) {
         super(card);
     }
 

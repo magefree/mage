@@ -36,7 +36,7 @@ public final class TrialOfStrength extends CardImpl {
                 "When a Cartouche enters the battlefield under your control, return {this} to its owner's hand"));
     }
 
-    public TrialOfStrength(final TrialOfStrength card) {
+    private TrialOfStrength(final TrialOfStrength card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public final class KrovikanElementalist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KrovikanElementalist(final KrovikanElementalist card) {
+    private KrovikanElementalist(final KrovikanElementalist card) {
         super(card);
     }
 

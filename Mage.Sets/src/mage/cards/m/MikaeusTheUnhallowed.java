@@ -51,7 +51,7 @@ public final class MikaeusTheUnhallowed extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new UndyingAbility(), Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public MikaeusTheUnhallowed(final MikaeusTheUnhallowed card) {
+    private MikaeusTheUnhallowed(final MikaeusTheUnhallowed card) {
         super(card);
     }
 

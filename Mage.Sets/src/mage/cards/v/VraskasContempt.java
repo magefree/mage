@@ -24,7 +24,7 @@ public final class VraskasContempt extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 
-    public VraskasContempt(final VraskasContempt card) {
+    private VraskasContempt(final VraskasContempt card) {
         super(card);
     }
 

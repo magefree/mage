@@ -40,7 +40,7 @@ public final class EpharasRadiance extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
-    public EpharasRadiance(final EpharasRadiance card) {
+    private EpharasRadiance(final EpharasRadiance card) {
         super(card);
     }
 

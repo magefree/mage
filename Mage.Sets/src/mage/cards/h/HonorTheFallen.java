@@ -26,7 +26,7 @@ public final class HonorTheFallen extends CardImpl {
         this.getSpellAbility().addEffect(new HonorTheFallenEffect());
     }
 
-    public HonorTheFallen(final HonorTheFallen card) {
+    private HonorTheFallen(final HonorTheFallen card) {
         super(card);
     }
 

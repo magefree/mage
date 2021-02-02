@@ -25,7 +25,7 @@ public final class WarMammoth extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public WarMammoth(final WarMammoth card) {
+    private WarMammoth(final WarMammoth card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class PiecesOfThePuzzle extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public PiecesOfThePuzzle(final PiecesOfThePuzzle card) {
+    private PiecesOfThePuzzle(final PiecesOfThePuzzle card) {
         super(card);
     }
 

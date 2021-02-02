@@ -33,7 +33,7 @@ public final class KormusBell extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public KormusBell(final KormusBell card) {
+    private KormusBell(final KormusBell card) {
         super(card);
     }
 

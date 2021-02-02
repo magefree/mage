@@ -22,7 +22,7 @@ public final class Excommunicate extends CardImpl {
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
     }
 
-    public Excommunicate(final Excommunicate card) {
+    private Excommunicate(final Excommunicate card) {
         super(card);
     }
 

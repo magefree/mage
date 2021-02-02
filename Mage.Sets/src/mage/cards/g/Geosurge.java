@@ -27,7 +27,7 @@ public final class Geosurge extends CardImpl {
         this.getSpellAbility().addEffect(new BasicManaEffect(new GeosurgeConditionalMana()));
     }
 
-    public Geosurge(final Geosurge card) {
+    private Geosurge(final Geosurge card) {
         super(card);
     }
 

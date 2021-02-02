@@ -36,7 +36,7 @@ public final class BattlefieldPercher extends CardImpl {
             new ManaCostsImpl("{1}{B}")));
     }
 
-    public BattlefieldPercher(final BattlefieldPercher card) {
+    private BattlefieldPercher(final BattlefieldPercher card) {
         super(card);
     }
 

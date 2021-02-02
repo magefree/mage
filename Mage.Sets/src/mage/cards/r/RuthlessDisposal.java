@@ -40,7 +40,7 @@ public final class RuthlessDisposal extends CardImpl {
 
     }
 
-    public RuthlessDisposal(final RuthlessDisposal card) {
+    private RuthlessDisposal(final RuthlessDisposal card) {
         super(card);
     }
 

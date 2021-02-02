@@ -39,7 +39,7 @@ public final class SilverfurPartisan extends CardImpl {
         this.addAbility(new CreaturesYouControlBecomesTargetTriggeredAbility(new CreateTokenEffect(new WolfToken())));
     }
 
-    public SilverfurPartisan(final SilverfurPartisan card) {
+    private SilverfurPartisan(final SilverfurPartisan card) {
         super(card);
     }
 

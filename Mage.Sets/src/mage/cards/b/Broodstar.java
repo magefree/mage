@@ -41,7 +41,7 @@ public final class Broodstar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public Broodstar(final Broodstar card) {
+    private Broodstar(final Broodstar card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class BastionInventor extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    public BastionInventor(final BastionInventor card) {
+    private BastionInventor(final BastionInventor card) {
         super(card);
     }
 

@@ -64,7 +64,7 @@ public final class IshkanahGrafwidow extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IshkanahGrafwidow(final IshkanahGrafwidow card) {
+    private IshkanahGrafwidow(final IshkanahGrafwidow card) {
         super(card);
     }
 

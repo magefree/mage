@@ -39,7 +39,7 @@ public final class RoilingWaters extends CardImpl {
         getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public RoilingWaters(final RoilingWaters card) {
+    private RoilingWaters(final RoilingWaters card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class HuntingPack extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public HuntingPack(final HuntingPack card) {
+    private HuntingPack(final HuntingPack card) {
         super(card);
     }
 

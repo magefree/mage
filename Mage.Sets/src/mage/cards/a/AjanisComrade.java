@@ -47,7 +47,7 @@ public final class AjanisComrade extends CardImpl {
                 "At the beginning of combat on your turn, if you control an Ajani planeswalker, put a +1/+1 counter on {this}."));
     }
 
-    public AjanisComrade(final AjanisComrade card) {
+    private AjanisComrade(final AjanisComrade card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class VeiledShade extends CardImpl {
         ));
     }
 
-    public VeiledShade(final VeiledShade card) {
+    private VeiledShade(final VeiledShade card) {
         super(card);
     }
 

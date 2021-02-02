@@ -40,7 +40,7 @@ public final class SoulsOfTheFaultless extends CardImpl {
         this.addAbility(new SoulsOfTheFaultlessTriggeredAbility());
     }
 
-    public SoulsOfTheFaultless(final SoulsOfTheFaultless card) {
+    private SoulsOfTheFaultless(final SoulsOfTheFaultless card) {
         super(card);
     }
 

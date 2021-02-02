@@ -40,7 +40,7 @@ public final class TahngarthTalruumHero extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TahngarthTalruumHero(final TahngarthTalruumHero card) {
+    private TahngarthTalruumHero(final TahngarthTalruumHero card) {
         super(card);
     }
 

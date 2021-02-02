@@ -57,7 +57,7 @@ public final class KraulHarpooner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KraulHarpooner(final KraulHarpooner card) {
+    private KraulHarpooner(final KraulHarpooner card) {
         super(card);
     }
 

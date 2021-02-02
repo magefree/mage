@@ -27,7 +27,7 @@ public final class ForgottenCave extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{R}")));
     }
 
-    public ForgottenCave(final ForgottenCave card) {
+    private ForgottenCave(final ForgottenCave card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class AncestorsChosen extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(new CardsInControllerGraveyardCount()), false));
     }
 
-    public AncestorsChosen(final AncestorsChosen card) {
+    private AncestorsChosen(final AncestorsChosen card) {
         super(card);
     }
 

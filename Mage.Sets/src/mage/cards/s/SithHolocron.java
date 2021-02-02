@@ -57,7 +57,7 @@ public final class SithHolocron extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SithHolocron(final SithHolocron card) {
+    private SithHolocron(final SithHolocron card) {
         super(card);
     }
 

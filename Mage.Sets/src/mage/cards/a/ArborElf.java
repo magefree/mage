@@ -39,7 +39,7 @@ public final class ArborElf extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArborElf(final ArborElf card) {
+    private ArborElf(final ArborElf card) {
         super(card);
     }
 

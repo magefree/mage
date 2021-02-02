@@ -27,7 +27,7 @@ public final class SpireMonitor extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SpireMonitor(final SpireMonitor card) {
+    private SpireMonitor(final SpireMonitor card) {
         super(card);
     }
 

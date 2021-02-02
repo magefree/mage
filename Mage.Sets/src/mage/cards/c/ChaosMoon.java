@@ -42,7 +42,7 @@ public final class ChaosMoon extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ChaosMoonEffect(), TargetController.ANY, false));
     }
 
-    public ChaosMoon(final ChaosMoon card) {
+    private ChaosMoon(final ChaosMoon card) {
         super(card);
     }
 

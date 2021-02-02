@@ -50,7 +50,7 @@ public final class HallOfTheBanditLord extends CardImpl {
         this.addAbility(ability, new HallOfTheBanditLordWatcher(ability));
     }
 
-    public HallOfTheBanditLord(final HallOfTheBanditLord card) {
+    private HallOfTheBanditLord(final HallOfTheBanditLord card) {
         super(card);
     }
 

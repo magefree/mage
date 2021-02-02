@@ -26,7 +26,7 @@ public final class MagmaJet extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }
 
-    public MagmaJet(final MagmaJet card) {
+    private MagmaJet(final MagmaJet card) {
         super(card);
     }
 

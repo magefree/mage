@@ -42,7 +42,7 @@ public final class DeadlockTrap extends CardImpl {
 
     }
 
-    public DeadlockTrap(final DeadlockTrap card) {
+    private DeadlockTrap(final DeadlockTrap card) {
         super(card);
     }
 

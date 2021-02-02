@@ -30,7 +30,7 @@ public final class ForceDrain extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public ForceDrain(final ForceDrain card) {
+    private ForceDrain(final ForceDrain card) {
         super(card);
     }
 

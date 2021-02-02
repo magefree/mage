@@ -35,7 +35,7 @@ public final class ReyaDawnbringer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ReyaDawnbringer(final ReyaDawnbringer card) {
+    private ReyaDawnbringer(final ReyaDawnbringer card) {
         super(card);
     }
 

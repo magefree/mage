@@ -34,7 +34,7 @@ public final class Barishi extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new BarishiEffect(), false));
     }
 
-    public Barishi(final Barishi card) {
+    private Barishi(final Barishi card) {
         super(card);
     }
 

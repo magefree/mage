@@ -35,7 +35,7 @@ public final class FirebrandRanger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FirebrandRanger(final FirebrandRanger card) {
+    private FirebrandRanger(final FirebrandRanger card) {
         super(card);
     }
 

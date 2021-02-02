@@ -32,7 +32,7 @@ public final class BeastOfBurden extends CardImpl {
         
     }
 
-    public BeastOfBurden(final BeastOfBurden card) {
+    private BeastOfBurden(final BeastOfBurden card) {
         super(card);
     }
 

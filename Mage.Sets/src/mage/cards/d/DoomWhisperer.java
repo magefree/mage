@@ -38,7 +38,7 @@ public final class DoomWhisperer extends CardImpl {
         ));
     }
 
-    public DoomWhisperer(final DoomWhisperer card) {
+    private DoomWhisperer(final DoomWhisperer card) {
         super(card);
     }
 

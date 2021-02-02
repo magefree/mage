@@ -62,7 +62,7 @@ public final class SpectraWard extends CardImpl {
 
     }
 
-    public SpectraWard(final SpectraWard card) {
+    private SpectraWard(final SpectraWard card) {
         super(card);
     }
 

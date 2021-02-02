@@ -45,7 +45,7 @@ public final class ComaVeil extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect("permanent")));
     }
 
-    public ComaVeil(final ComaVeil card) {
+    private ComaVeil(final ComaVeil card) {
         super(card);
     }
 

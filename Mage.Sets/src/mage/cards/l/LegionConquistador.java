@@ -41,7 +41,7 @@ public final class LegionConquistador extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
     }
 
-    public LegionConquistador(final LegionConquistador card) {
+    private LegionConquistador(final LegionConquistador card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class RangeTrooper extends CardImpl {
                 new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public RangeTrooper(final RangeTrooper card) {
+    private RangeTrooper(final RangeTrooper card) {
         super(card);
     }
 

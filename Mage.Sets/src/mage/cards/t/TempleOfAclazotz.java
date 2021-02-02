@@ -41,7 +41,7 @@ public final class TempleOfAclazotz extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TempleOfAclazotz(final TempleOfAclazotz card) {
+    private TempleOfAclazotz(final TempleOfAclazotz card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class StitchersApprentice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StitchersApprentice(final StitchersApprentice card) {
+    private StitchersApprentice(final StitchersApprentice card) {
         super(card);
     }
 

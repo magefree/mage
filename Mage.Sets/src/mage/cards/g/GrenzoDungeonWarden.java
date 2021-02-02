@@ -44,7 +44,7 @@ public final class GrenzoDungeonWarden extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrenzoDungeonWardenEffect(), new GenericManaCost(2)));
     }
 
-    public GrenzoDungeonWarden(final GrenzoDungeonWarden card) {
+    private GrenzoDungeonWarden(final GrenzoDungeonWarden card) {
         super(card);
     }
 

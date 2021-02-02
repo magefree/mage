@@ -35,7 +35,7 @@ public final class YewSpirit extends CardImpl {
                 new ManaCostsImpl("{2}{G}{G}")));
     }
 
-    public YewSpirit(final YewSpirit card) {
+    private YewSpirit(final YewSpirit card) {
         super(card);
     }
 

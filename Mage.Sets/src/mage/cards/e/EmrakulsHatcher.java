@@ -29,7 +29,7 @@ public final class EmrakulsHatcher extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 3), false));
     }
 
-    public EmrakulsHatcher(final EmrakulsHatcher card) {
+    private EmrakulsHatcher(final EmrakulsHatcher card) {
         super(card);
     }
 

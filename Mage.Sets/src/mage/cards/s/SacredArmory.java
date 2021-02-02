@@ -28,7 +28,7 @@ public final class SacredArmory extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SacredArmory(final SacredArmory card) {
+    private SacredArmory(final SacredArmory card) {
         super(card);
     }
 

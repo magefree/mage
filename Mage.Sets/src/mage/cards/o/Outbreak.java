@@ -43,7 +43,7 @@ public final class Outbreak extends CardImpl {
         this.getSpellAbility().addEffect(new OutbreakEffect());
     }
 
-    public Outbreak(final Outbreak card) {
+    private Outbreak(final Outbreak card) {
         super(card);
     }
 

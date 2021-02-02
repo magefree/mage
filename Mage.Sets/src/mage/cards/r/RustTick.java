@@ -40,7 +40,7 @@ public final class RustTick extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RustTick(final RustTick card) {
+    private RustTick(final RustTick card) {
         super(card);
     }
 

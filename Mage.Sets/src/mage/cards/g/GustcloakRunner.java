@@ -34,7 +34,7 @@ public final class GustcloakRunner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GustcloakRunner(final GustcloakRunner card) {
+    private GustcloakRunner(final GustcloakRunner card) {
         super(card);
     }
 

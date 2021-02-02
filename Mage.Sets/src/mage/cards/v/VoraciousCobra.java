@@ -30,7 +30,7 @@ public final class VoraciousCobra extends CardImpl {
         this.addAbility(new DealsDamageToACreatureTriggeredAbility(new DestroyTargetEffect(), true, false, true));
     }
 
-    public VoraciousCobra(final VoraciousCobra card) {
+    private VoraciousCobra(final VoraciousCobra card) {
         super(card);
     }
 

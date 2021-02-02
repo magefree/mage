@@ -42,7 +42,7 @@ public final class HellBentRaider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HellBentRaider(final HellBentRaider card) {
+    private HellBentRaider(final HellBentRaider card) {
         super(card);
     }
 

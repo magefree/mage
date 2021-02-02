@@ -38,7 +38,7 @@ public final class AngelOfFlightAlabaster extends CardImpl {
 
     }
 
-    public AngelOfFlightAlabaster(final AngelOfFlightAlabaster card) {
+    private AngelOfFlightAlabaster(final AngelOfFlightAlabaster card) {
         super(card);
     }
 

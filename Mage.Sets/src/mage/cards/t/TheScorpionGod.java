@@ -65,7 +65,7 @@ public final class TheScorpionGod extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new TheScorpionGodEffect()));
     }
 
-    public TheScorpionGod(final TheScorpionGod card) {
+    private TheScorpionGod(final TheScorpionGod card) {
         super(card);
     }
 

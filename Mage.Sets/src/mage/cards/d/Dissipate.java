@@ -23,7 +23,7 @@ public final class Dissipate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Dissipate(final Dissipate card) {
+    private Dissipate(final Dissipate card) {
         super(card);
     }
 

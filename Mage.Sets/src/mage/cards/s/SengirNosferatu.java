@@ -49,7 +49,7 @@ public final class SengirNosferatu extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SengirNosferatu(final SengirNosferatu card) {
+    private SengirNosferatu(final SengirNosferatu card) {
         super(card);
     }
 

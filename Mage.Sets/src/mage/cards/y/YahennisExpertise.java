@@ -26,7 +26,7 @@ public final class YahennisExpertise extends CardImpl {
         this.getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(3));
     }
 
-    public YahennisExpertise(final YahennisExpertise card) {
+    private YahennisExpertise(final YahennisExpertise card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class ArgothianTreefolk extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceByCardTypeEffect(CardType.ARTIFACT)));
     }
 
-    public ArgothianTreefolk(final ArgothianTreefolk card) {
+    private ArgothianTreefolk(final ArgothianTreefolk card) {
         super(card);
     }
 

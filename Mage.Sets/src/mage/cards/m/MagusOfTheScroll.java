@@ -41,7 +41,7 @@ public final class MagusOfTheScroll extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagusOfTheScroll(final MagusOfTheScroll card) {
+    private MagusOfTheScroll(final MagusOfTheScroll card) {
         super(card);
     }
 

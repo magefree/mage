@@ -31,7 +31,7 @@ public final class ScrapskinDrake extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public ScrapskinDrake(final ScrapskinDrake card) {
+    private ScrapskinDrake(final ScrapskinDrake card) {
         super(card);
     }
 

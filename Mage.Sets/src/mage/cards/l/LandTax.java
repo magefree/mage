@@ -32,7 +32,7 @@ public final class LandTax extends CardImpl {
 
     }
 
-    public LandTax(final LandTax card) {
+    private LandTax(final LandTax card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class AkromasBlessing extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{W}")));
     }
 
-    public AkromasBlessing(final AkromasBlessing card) {
+    private AkromasBlessing(final AkromasBlessing card) {
         super(card);
     }
 

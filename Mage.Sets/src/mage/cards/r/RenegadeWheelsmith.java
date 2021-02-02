@@ -33,7 +33,7 @@ public final class RenegadeWheelsmith extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RenegadeWheelsmith(final RenegadeWheelsmith card) {
+    private RenegadeWheelsmith(final RenegadeWheelsmith card) {
         super(card);
     }
 

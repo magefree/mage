@@ -28,7 +28,7 @@ public final class TrackDown extends CardImpl {
         this.getSpellAbility().addEffect(new TrackDownEffect().concatBy(", then"));
     }
 
-    public TrackDown(final TrackDown card) {
+    private TrackDown(final TrackDown card) {
         super(card);
     }
 

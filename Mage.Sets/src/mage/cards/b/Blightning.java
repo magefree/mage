@@ -30,7 +30,7 @@ public final class Blightning extends CardImpl {
         this.getSpellAbility().addEffect(new BlightningEffect());
     }
 
-    public Blightning(final Blightning card) {
+    private Blightning(final Blightning card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class NahirisMachinations extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NahirisMachinations(final NahirisMachinations card) {
+    private NahirisMachinations(final NahirisMachinations card) {
         super(card);
     }
 

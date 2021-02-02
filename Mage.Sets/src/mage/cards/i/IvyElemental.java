@@ -28,7 +28,7 @@ public final class IvyElemental extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
     }
 
-    public IvyElemental(final IvyElemental card) {
+    private IvyElemental(final IvyElemental card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class CoastalDiscovery extends CardImpl {
         this.addAbility(new AwakenAbility(this, 4, "{5}{U}"));
     }
 
-    public CoastalDiscovery(final CoastalDiscovery card) {
+    private CoastalDiscovery(final CoastalDiscovery card) {
         super(card);
     }
 

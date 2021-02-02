@@ -29,7 +29,7 @@ public final class Spinebiter extends CardImpl {
         this.addAbility(DamageAsThoughNotBlockedAbility.getInstance());
     }
 
-    public Spinebiter(final Spinebiter card) {
+    private Spinebiter(final Spinebiter card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class HungryHungryHeifer extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new HungryHungryHeiferEffect(), TargetController.YOU, false, false));
     }
 
-    public HungryHungryHeifer(final HungryHungryHeifer card) {
+    private HungryHungryHeifer(final HungryHungryHeifer card) {
         super(card);
     }
 

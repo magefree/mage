@@ -24,7 +24,7 @@ public final class FloodedStrand extends CardImpl {
         this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.PLAINS, SubType.ISLAND)));
     }
 
-    public FloodedStrand(final FloodedStrand card) {
+    private FloodedStrand(final FloodedStrand card) {
         super(card);
     }
 

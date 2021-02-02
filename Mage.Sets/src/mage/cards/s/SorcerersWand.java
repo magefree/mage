@@ -49,7 +49,7 @@ public final class SorcerersWand extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public SorcerersWand(final SorcerersWand card) {
+    private SorcerersWand(final SorcerersWand card) {
         super(card);
     }
 

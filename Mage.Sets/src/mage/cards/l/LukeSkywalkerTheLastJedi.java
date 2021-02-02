@@ -56,7 +56,7 @@ public final class LukeSkywalkerTheLastJedi extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public LukeSkywalkerTheLastJedi(final LukeSkywalkerTheLastJedi card) {
+    private LukeSkywalkerTheLastJedi(final LukeSkywalkerTheLastJedi card) {
         super(card);
     }
 

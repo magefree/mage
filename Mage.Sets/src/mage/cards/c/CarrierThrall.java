@@ -31,7 +31,7 @@ public final class CarrierThrall extends CardImpl {
 
     }
 
-    public CarrierThrall(final CarrierThrall card) {
+    private CarrierThrall(final CarrierThrall card) {
         super(card);
     }
 

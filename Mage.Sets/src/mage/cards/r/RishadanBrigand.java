@@ -36,7 +36,7 @@ public final class RishadanBrigand extends CardImpl {
         
     }
 
-    public RishadanBrigand(final RishadanBrigand card) {
+    private RishadanBrigand(final RishadanBrigand card) {
         super(card);
     }
 

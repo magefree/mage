@@ -35,7 +35,7 @@ public final class UgnaughtScrapWorker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public UgnaughtScrapWorker(final UgnaughtScrapWorker card) {
+    private UgnaughtScrapWorker(final UgnaughtScrapWorker card) {
         super(card);
     }
 

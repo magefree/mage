@@ -31,7 +31,7 @@ public final class SolidarityOfHeroes extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
-    public SolidarityOfHeroes(final SolidarityOfHeroes card) {
+    private SolidarityOfHeroes(final SolidarityOfHeroes card) {
         super(card);
     }
 

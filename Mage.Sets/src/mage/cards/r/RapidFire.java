@@ -39,7 +39,7 @@ public final class RapidFire extends CardImpl {
 
     }
 
-    public RapidFire(final RapidFire card) {
+    private RapidFire(final RapidFire card) {
         super(card);
     }
 

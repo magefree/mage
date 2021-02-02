@@ -27,7 +27,7 @@ public final class TendrilsOfAgony extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public TendrilsOfAgony(final TendrilsOfAgony card) {
+    private TendrilsOfAgony(final TendrilsOfAgony card) {
         super(card);
     }
 

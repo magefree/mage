@@ -49,7 +49,7 @@ public final class HeroesPodium extends CardImpl {
 
     }
 
-    public HeroesPodium(final HeroesPodium card) {
+    private HeroesPodium(final HeroesPodium card) {
         super(card);
     }
 

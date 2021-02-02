@@ -36,7 +36,7 @@ public final class GraftedWargear extends CardImpl {
 
     }
 
-    public GraftedWargear(final GraftedWargear card) {
+    private GraftedWargear(final GraftedWargear card) {
         super(card);
     }
 

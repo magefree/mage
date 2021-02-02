@@ -30,7 +30,7 @@ public final class TragicLesson extends CardImpl {
         this.getSpellAbility().addEffect(new TragicLessonEffect());
     }
 
-    public TragicLesson(final TragicLesson card) {
+    private TragicLesson(final TragicLesson card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class WastelandViper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WastelandViper(final WastelandViper card) {
+    private WastelandViper(final WastelandViper card) {
         super(card);
     }
 

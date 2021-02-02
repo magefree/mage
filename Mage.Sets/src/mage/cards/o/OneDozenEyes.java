@@ -33,7 +33,7 @@ public final class OneDozenEyes extends CardImpl {
         this.addAbility(new EntwineAbility("{G}{G}{G}"));
     }
 
-    public OneDozenEyes(final OneDozenEyes card) {
+    private OneDozenEyes(final OneDozenEyes card) {
         super(card);
     }
 

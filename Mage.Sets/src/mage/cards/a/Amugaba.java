@@ -37,7 +37,7 @@ public final class Amugaba extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Amugaba(final Amugaba card) {
+    private Amugaba(final Amugaba card) {
         super(card);
     }
 

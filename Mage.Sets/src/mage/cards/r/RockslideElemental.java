@@ -30,7 +30,7 @@ public final class RockslideElemental extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true, true));
     }
 
-    public RockslideElemental(final RockslideElemental card) {
+    private RockslideElemental(final RockslideElemental card) {
         super(card);
     }
 

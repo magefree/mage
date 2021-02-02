@@ -36,7 +36,7 @@ public final class ScavengerFolk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScavengerFolk(final ScavengerFolk card) {
+    private ScavengerFolk(final ScavengerFolk card) {
         super(card);
     }
 

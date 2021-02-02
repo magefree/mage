@@ -28,7 +28,7 @@ public final class AvenFisher extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
-    public AvenFisher(final AvenFisher card) {
+    private AvenFisher(final AvenFisher card) {
         super(card);
     }
 

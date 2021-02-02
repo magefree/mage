@@ -46,7 +46,7 @@ public final class TrueFaithCenser extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public TrueFaithCenser(final TrueFaithCenser card) {
+    private TrueFaithCenser(final TrueFaithCenser card) {
         super(card);
     }
 

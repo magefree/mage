@@ -31,7 +31,7 @@ public final class ShorelineRanger extends CardImpl {
         this.addAbility(new IslandcyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public ShorelineRanger(final ShorelineRanger card) {
+    private ShorelineRanger(final ShorelineRanger card) {
         super(card);
     }
 

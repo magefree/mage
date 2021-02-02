@@ -35,7 +35,7 @@ public final class DesperateStand extends CardImpl {
 
     }
 
-    public DesperateStand(final DesperateStand card) {
+    private DesperateStand(final DesperateStand card) {
         super(card);
     }
 

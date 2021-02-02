@@ -28,7 +28,7 @@ public final class AngelicChorus extends CardImpl {
         this.addAbility(new AngelicChorusTriggeredAbility());
     }
 
-    public AngelicChorus(final AngelicChorus card) {
+    private AngelicChorus(final AngelicChorus card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class ImmaculateMagistrate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ImmaculateMagistrate(final ImmaculateMagistrate card) {
+    private ImmaculateMagistrate(final ImmaculateMagistrate card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class RealityAnchor extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public RealityAnchor(final RealityAnchor card) {
+    private RealityAnchor(final RealityAnchor card) {
         super(card);
     }
 

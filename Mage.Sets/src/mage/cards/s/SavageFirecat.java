@@ -45,7 +45,7 @@ public final class SavageFirecat extends CardImpl {
 
     }
 
-    public SavageFirecat(final SavageFirecat card) {
+    private SavageFirecat(final SavageFirecat card) {
         super(card);
     }
 

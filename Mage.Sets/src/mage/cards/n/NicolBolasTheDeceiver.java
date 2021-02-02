@@ -50,7 +50,7 @@ public final class NicolBolasTheDeceiver extends CardImpl {
 
     }
 
-    public NicolBolasTheDeceiver(final NicolBolasTheDeceiver card) {
+    private NicolBolasTheDeceiver(final NicolBolasTheDeceiver card) {
         super(card);
     }
 

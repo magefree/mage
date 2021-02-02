@@ -28,7 +28,7 @@ public final class PardicFirecat extends CardImpl {
         this.addAbility(mage.cards.f.FlameBurst.getCountAsAbility());
     }
 
-    public PardicFirecat(final PardicFirecat card) {
+    private PardicFirecat(final PardicFirecat card) {
         super(card);
     }
 

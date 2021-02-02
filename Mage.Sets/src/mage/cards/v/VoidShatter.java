@@ -27,7 +27,7 @@ public final class VoidShatter extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public VoidShatter(final VoidShatter card) {
+    private VoidShatter(final VoidShatter card) {
         super(card);
     }
 

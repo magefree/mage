@@ -31,7 +31,7 @@ public final class Spawnwrithe extends CardImpl {
 
     }
 
-    public Spawnwrithe(final Spawnwrithe card) {
+    private Spawnwrithe(final Spawnwrithe card) {
         super(card);
     }
 

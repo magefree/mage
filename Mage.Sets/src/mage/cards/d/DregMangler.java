@@ -31,7 +31,7 @@ public final class DregMangler extends CardImpl {
         this.addAbility(new ScavengeAbility(new ManaCostsImpl("{3}{B}{G}")));
     }
 
-    public DregMangler(final DregMangler card) {
+    private DregMangler(final DregMangler card) {
         super(card);
     }
 

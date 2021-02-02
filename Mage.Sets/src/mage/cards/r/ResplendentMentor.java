@@ -44,7 +44,7 @@ public final class ResplendentMentor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, filter)));
     }
 
-    public ResplendentMentor(final ResplendentMentor card) {
+    private ResplendentMentor(final ResplendentMentor card) {
         super(card);
     }
 

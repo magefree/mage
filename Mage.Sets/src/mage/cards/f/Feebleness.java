@@ -40,7 +40,7 @@ public final class Feebleness extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-2, -1, Duration.WhileOnBattlefield)));
     }
 
-    public Feebleness(final Feebleness card) {
+    private Feebleness(final Feebleness card) {
         super(card);
     }
 

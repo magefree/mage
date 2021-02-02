@@ -35,7 +35,7 @@ public final class MaskOfMemory extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public MaskOfMemory(final MaskOfMemory card) {
+    private MaskOfMemory(final MaskOfMemory card) {
         super(card);
     }
 

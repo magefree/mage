@@ -33,7 +33,7 @@ public final class ArtisanOfKozilek extends CardImpl {
         this.addAbility(new AnnihilatorAbility(2));
     }
 
-    public ArtisanOfKozilek(final ArtisanOfKozilek card) {
+    private ArtisanOfKozilek(final ArtisanOfKozilek card) {
         super(card);
     }
 

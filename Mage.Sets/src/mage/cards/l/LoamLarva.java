@@ -30,7 +30,7 @@ public final class LoamLarva extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true, true), true));
     }
 
-    public LoamLarva(final LoamLarva card) {
+    private LoamLarva(final LoamLarva card) {
         super(card);
     }
 

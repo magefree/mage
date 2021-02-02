@@ -32,7 +32,7 @@ public final class RustedRelic extends CardImpl {
         );
     }
 
-    public RustedRelic(final RustedRelic card) {
+    private RustedRelic(final RustedRelic card) {
         super(card);
     }
 

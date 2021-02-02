@@ -49,7 +49,7 @@ public final class DauntlessBodyguard extends CardImpl {
 
     }
 
-    public DauntlessBodyguard(final DauntlessBodyguard card) {
+    private DauntlessBodyguard(final DauntlessBodyguard card) {
         super(card);
     }
 

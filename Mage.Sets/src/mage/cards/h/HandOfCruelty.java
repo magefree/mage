@@ -29,7 +29,7 @@ public final class HandOfCruelty extends CardImpl {
         this.addAbility(new BushidoAbility(1));
     }
 
-    public HandOfCruelty(final HandOfCruelty card) {
+    private HandOfCruelty(final HandOfCruelty card) {
         super(card);
     }
 

@@ -59,7 +59,7 @@ public final class VesuvanShapeshifter extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{U}")));
     }
 
-    public VesuvanShapeshifter(final VesuvanShapeshifter card) {
+    private VesuvanShapeshifter(final VesuvanShapeshifter card) {
         super(card);
     }
 

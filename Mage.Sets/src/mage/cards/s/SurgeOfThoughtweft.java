@@ -37,7 +37,7 @@ public final class SurgeOfThoughtweft extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter),"If you control a Kithkin, draw a card"));
     }
 
-    public SurgeOfThoughtweft(final SurgeOfThoughtweft card) {
+    private SurgeOfThoughtweft(final SurgeOfThoughtweft card) {
         super(card);
     }
 

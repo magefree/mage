@@ -41,7 +41,7 @@ public final class DesecrationDemon extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new DesecrationDemonEffect(), TargetController.ANY, false));
     }
 
-    public DesecrationDemon(final DesecrationDemon card) {
+    private DesecrationDemon(final DesecrationDemon card) {
         super(card);
     }
 

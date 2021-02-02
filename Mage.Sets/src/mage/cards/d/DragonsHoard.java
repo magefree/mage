@@ -44,7 +44,7 @@ public final class DragonsHoard extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public DragonsHoard(final DragonsHoard card) {
+    private DragonsHoard(final DragonsHoard card) {
         super(card);
     }
 

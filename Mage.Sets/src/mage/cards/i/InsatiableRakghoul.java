@@ -37,7 +37,7 @@ public final class InsatiableRakghoul extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new InsatiableRakghoulEffect(), false), new NonArtifactCreaturesDiedWatcher());
     }
 
-    public InsatiableRakghoul(final InsatiableRakghoul card) {
+    private InsatiableRakghoul(final InsatiableRakghoul card) {
         super(card);
     }
 

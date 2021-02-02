@@ -28,7 +28,7 @@ public final class PilgrimOfTheFires extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public PilgrimOfTheFires(final PilgrimOfTheFires card) {
+    private PilgrimOfTheFires(final PilgrimOfTheFires card) {
         super(card);
     }
 

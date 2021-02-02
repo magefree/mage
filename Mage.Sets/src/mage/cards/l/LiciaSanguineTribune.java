@@ -53,7 +53,7 @@ public final class LiciaSanguineTribune extends CardImpl {
                 .addHint(MyTurnHint.instance));
     }
 
-    public LiciaSanguineTribune(final LiciaSanguineTribune card) {
+    private LiciaSanguineTribune(final LiciaSanguineTribune card) {
         super(card);
     }
 

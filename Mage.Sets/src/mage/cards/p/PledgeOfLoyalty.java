@@ -53,7 +53,7 @@ public final class PledgeOfLoyalty extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public PledgeOfLoyalty(final PledgeOfLoyalty card) {
+    private PledgeOfLoyalty(final PledgeOfLoyalty card) {
         super(card);
     }
 

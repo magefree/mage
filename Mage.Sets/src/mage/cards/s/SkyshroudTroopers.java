@@ -27,7 +27,7 @@ public final class SkyshroudTroopers extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public SkyshroudTroopers(final SkyshroudTroopers card) {
+    private SkyshroudTroopers(final SkyshroudTroopers card) {
         super(card);
     }
 

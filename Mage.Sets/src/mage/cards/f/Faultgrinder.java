@@ -40,7 +40,7 @@ public final class Faultgrinder extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{4}{R}"));
     }
 
-    public Faultgrinder(final Faultgrinder card) {
+    private Faultgrinder(final Faultgrinder card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class OverwhelmingStampede extends CardImpl {
         this.getSpellAbility().addEffect(new OverwhelmingStampedeInitEffect());
     }
 
-    public OverwhelmingStampede(final OverwhelmingStampede card) {
+    private OverwhelmingStampede(final OverwhelmingStampede card) {
         super(card);
     }
 

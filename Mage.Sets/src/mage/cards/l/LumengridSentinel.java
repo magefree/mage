@@ -37,7 +37,7 @@ public final class LumengridSentinel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LumengridSentinel(final LumengridSentinel card) {
+    private LumengridSentinel(final LumengridSentinel card) {
         super(card);
     }
 

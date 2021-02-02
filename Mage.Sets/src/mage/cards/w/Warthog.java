@@ -26,7 +26,7 @@ public final class Warthog extends CardImpl {
         this.addAbility(new SwampwalkAbility());
     }
 
-    public Warthog(final Warthog card) {
+    private Warthog(final Warthog card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class Groundbreaker extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false));
     }
 
-    public Groundbreaker(final Groundbreaker card) {
+    private Groundbreaker(final Groundbreaker card) {
         super(card);
     }
 

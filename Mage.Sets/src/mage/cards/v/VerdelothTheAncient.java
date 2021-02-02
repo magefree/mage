@@ -52,7 +52,7 @@ public final class VerdelothTheAncient extends CardImpl {
 
     }
 
-    public VerdelothTheAncient(final VerdelothTheAncient card) {
+    private VerdelothTheAncient(final VerdelothTheAncient card) {
         super(card);
     }
 

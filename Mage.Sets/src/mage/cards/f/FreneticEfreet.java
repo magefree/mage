@@ -40,7 +40,7 @@ public final class FreneticEfreet extends CardImpl {
         ));
     }
 
-    public FreneticEfreet(final FreneticEfreet card) {
+    private FreneticEfreet(final FreneticEfreet card) {
         super(card);
     }
 

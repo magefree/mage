@@ -43,7 +43,7 @@ public final class DreamThief extends CardImpl {
 
     }
 
-    public DreamThief(final DreamThief card) {
+    private DreamThief(final DreamThief card) {
         super(card);
     }
 

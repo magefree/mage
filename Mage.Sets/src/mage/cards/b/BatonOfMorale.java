@@ -29,7 +29,7 @@ public final class BatonOfMorale extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BatonOfMorale(final BatonOfMorale card) {
+    private BatonOfMorale(final BatonOfMorale card) {
         super(card);
     }
 

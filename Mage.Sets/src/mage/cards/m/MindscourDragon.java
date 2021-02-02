@@ -34,7 +34,7 @@ public final class MindscourDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MindscourDragon(final MindscourDragon card) {
+    private MindscourDragon(final MindscourDragon card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class DimirMachinations extends CardImpl {
 
     }
 
-    public DimirMachinations(final DimirMachinations card) {
+    private DimirMachinations(final DimirMachinations card) {
         super(card);
     }
 

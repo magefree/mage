@@ -56,7 +56,7 @@ public final class GoblinMutant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effectBlock));
     }
 
-    public GoblinMutant(final GoblinMutant card) {
+    private GoblinMutant(final GoblinMutant card) {
         super(card);
     }
 

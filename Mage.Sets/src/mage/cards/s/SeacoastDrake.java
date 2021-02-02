@@ -26,7 +26,7 @@ public final class SeacoastDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SeacoastDrake(final SeacoastDrake card) {
+    private SeacoastDrake(final SeacoastDrake card) {
         super(card);
     }
 

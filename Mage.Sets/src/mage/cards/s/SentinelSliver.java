@@ -31,7 +31,7 @@ public final class SentinelSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent(SubType.SLIVER, "Sliver creatures you control "))));
     }
 
-    public SentinelSliver(final SentinelSliver card) {
+    private SentinelSliver(final SentinelSliver card) {
         super(card);
     }
 

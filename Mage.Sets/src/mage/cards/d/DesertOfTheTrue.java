@@ -33,7 +33,7 @@ public final class DesertOfTheTrue extends CardImpl {
 
     }
 
-    public DesertOfTheTrue(final DesertOfTheTrue card) {
+    private DesertOfTheTrue(final DesertOfTheTrue card) {
         super(card);
     }
 

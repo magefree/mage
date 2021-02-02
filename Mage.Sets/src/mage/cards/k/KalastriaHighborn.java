@@ -45,7 +45,7 @@ public final class KalastriaHighborn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KalastriaHighborn(final KalastriaHighborn card) {
+    private KalastriaHighborn(final KalastriaHighborn card) {
         super(card);
     }
 

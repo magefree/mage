@@ -22,7 +22,7 @@ public final class ScourFromExistence extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
-    public ScourFromExistence(final ScourFromExistence card) {
+    private ScourFromExistence(final ScourFromExistence card) {
         super(card);
     }
 

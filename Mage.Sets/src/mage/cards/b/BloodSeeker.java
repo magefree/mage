@@ -35,7 +35,7 @@ public final class BloodSeeker extends CardImpl {
         this.addAbility(new BloodSeekerTriggeredAbility());
     }
 
-    public BloodSeeker(final BloodSeeker card) {
+    private BloodSeeker(final BloodSeeker card) {
         super(card);
     }
 

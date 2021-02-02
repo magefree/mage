@@ -48,7 +48,7 @@ public final class SignalPest extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(notFlyingorReachCreatures, Duration.WhileOnBattlefield)));
     }
 
-    public SignalPest(final SignalPest card) {
+    private SignalPest(final SignalPest card) {
         super(card);
     }
 

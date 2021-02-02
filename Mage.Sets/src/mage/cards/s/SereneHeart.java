@@ -28,7 +28,7 @@ public final class SereneHeart extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public SereneHeart(final SereneHeart card) {
+    private SereneHeart(final SereneHeart card) {
         super(card);
     }
 

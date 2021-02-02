@@ -36,7 +36,7 @@ public final class IzzetLocket extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IzzetLocket(final IzzetLocket card) {
+    private IzzetLocket(final IzzetLocket card) {
         super(card);
     }
 

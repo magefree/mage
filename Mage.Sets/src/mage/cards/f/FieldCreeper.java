@@ -21,7 +21,7 @@ public final class FieldCreeper extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public FieldCreeper(final FieldCreeper card) {
+    private FieldCreeper(final FieldCreeper card) {
         super(card);
     }
 

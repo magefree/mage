@@ -31,7 +31,7 @@ public final class ImagesOfThePast extends CardImpl {
 
     }
 
-    public ImagesOfThePast(final ImagesOfThePast card) {
+    private ImagesOfThePast(final ImagesOfThePast card) {
         super(card);
     }
 

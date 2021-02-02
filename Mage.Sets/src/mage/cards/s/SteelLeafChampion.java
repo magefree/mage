@@ -26,7 +26,7 @@ public final class SteelLeafChampion extends CardImpl {
         this.addAbility(new DauntAbility());
     }
 
-    public SteelLeafChampion(final SteelLeafChampion card) {
+    private SteelLeafChampion(final SteelLeafChampion card) {
         super(card);
     }
 

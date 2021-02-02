@@ -30,7 +30,7 @@ public final class MassAppeal extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public MassAppeal(final MassAppeal card) {
+    private MassAppeal(final MassAppeal card) {
         super(card);
     }
 

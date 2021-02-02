@@ -36,7 +36,7 @@ public final class StadiumVendors extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StadiumVendors(final StadiumVendors card) {
+    private StadiumVendors(final StadiumVendors card) {
         super(card);
     }
 

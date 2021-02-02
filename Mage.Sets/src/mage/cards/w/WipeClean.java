@@ -26,7 +26,7 @@ public final class WipeClean extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
     }
 
-    public WipeClean(final WipeClean card) {
+    private WipeClean(final WipeClean card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class DramaticEntrance extends CardImpl {
 
     }
 
-    public DramaticEntrance(final DramaticEntrance card) {
+    private DramaticEntrance(final DramaticEntrance card) {
         super(card);
     }
 

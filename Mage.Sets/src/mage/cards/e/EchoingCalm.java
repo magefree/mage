@@ -28,7 +28,7 @@ public final class EchoingCalm extends CardImpl {
         this.getSpellAbility().addEffect(new EchoingCalmEffect());
     }
 
-    public EchoingCalm(final EchoingCalm card) {
+    private EchoingCalm(final EchoingCalm card) {
         super(card);
     }
 

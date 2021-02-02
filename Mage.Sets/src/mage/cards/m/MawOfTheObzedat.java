@@ -38,7 +38,7 @@ public final class MawOfTheObzedat extends CardImpl {
 
     }
 
-    public MawOfTheObzedat(final MawOfTheObzedat card) {
+    private MawOfTheObzedat(final MawOfTheObzedat card) {
         super(card);
     }
 

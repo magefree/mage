@@ -35,7 +35,7 @@ public final class GhorClanRampager extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhorClanRampager(final GhorClanRampager card) {
+    private GhorClanRampager(final GhorClanRampager card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class RhysticStudy extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new RhysticStudyDrawEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.PLAYER));
     }
 
-    public RhysticStudy(final RhysticStudy card) {
+    private RhysticStudy(final RhysticStudy card) {
         super(card);
     }
 

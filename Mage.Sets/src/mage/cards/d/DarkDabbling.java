@@ -34,7 +34,7 @@ public final class DarkDabbling extends CardImpl {
         this.getSpellAbility().addEffect(new DarkDabblingEffect());
     }
 
-    public DarkDabbling(final DarkDabbling card) {
+    private DarkDabbling(final DarkDabbling card) {
         super(card);
     }
 

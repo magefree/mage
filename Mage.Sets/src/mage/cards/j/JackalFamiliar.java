@@ -27,7 +27,7 @@ public final class JackalFamiliar extends CardImpl {
         this.addAbility(CantBlockAloneAbility.getInstance());
     }
 
-    public JackalFamiliar(final JackalFamiliar card) {
+    private JackalFamiliar(final JackalFamiliar card) {
         super(card);
     }
 

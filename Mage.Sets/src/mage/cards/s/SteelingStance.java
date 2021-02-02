@@ -31,7 +31,7 @@ public final class SteelingStance extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SteelingStance(final SteelingStance card) {
+    private SteelingStance(final SteelingStance card) {
         super(card);
     }
 

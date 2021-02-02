@@ -49,7 +49,7 @@ public final class DragonsEyeSavants extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DragonsEyeSavants(final DragonsEyeSavants card) {
+    private DragonsEyeSavants(final DragonsEyeSavants card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class PoulticeSliver extends CardImpl {
                         "All Slivers have \"{2}, {T}: Regenerate target Sliver.\"")));
     }
 
-    public PoulticeSliver(final PoulticeSliver card) {
+    private PoulticeSliver(final PoulticeSliver card) {
         super(card);
     }
 

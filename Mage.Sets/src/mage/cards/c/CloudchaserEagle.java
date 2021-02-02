@@ -31,7 +31,7 @@ public final class CloudchaserEagle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CloudchaserEagle(final CloudchaserEagle card) {
+    private CloudchaserEagle(final CloudchaserEagle card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class RampagingMonument extends CardImpl {
         ));
     }
 
-    public RampagingMonument(final RampagingMonument card) {
+    private RampagingMonument(final RampagingMonument card) {
         super(card);
     }
 

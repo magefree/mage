@@ -35,7 +35,7 @@ public final class GruulScrapper extends CardImpl {
 
     }
 
-    public GruulScrapper(final GruulScrapper card) {
+    private GruulScrapper(final GruulScrapper card) {
         super(card);
     }
 

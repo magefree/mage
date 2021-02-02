@@ -38,7 +38,7 @@ public final class SpiritLink extends CardImpl {
         this.addAbility(new DealsDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(new NumericSetToEffectValues("that much", "damage")), false));
     }
 
-    public SpiritLink(final SpiritLink card) {
+    private SpiritLink(final SpiritLink card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class GiftOfOrzhova extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GiftOfOrzhova(final GiftOfOrzhova card) {
+    private GiftOfOrzhova(final GiftOfOrzhova card) {
         super(card);
     }
 

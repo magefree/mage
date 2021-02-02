@@ -24,7 +24,7 @@ public final class KabiraCrossroads extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public KabiraCrossroads(final KabiraCrossroads card) {
+    private KabiraCrossroads(final KabiraCrossroads card) {
         super(card);
     }
 

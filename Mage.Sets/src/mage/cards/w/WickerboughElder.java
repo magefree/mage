@@ -43,7 +43,7 @@ public final class WickerboughElder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WickerboughElder(final WickerboughElder card) {
+    private WickerboughElder(final WickerboughElder card) {
         super(card);
     }
 

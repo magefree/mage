@@ -29,7 +29,7 @@ public final class FellTheMighty extends CardImpl {
 
     }
 
-    public FellTheMighty(final FellTheMighty card) {
+    private FellTheMighty(final FellTheMighty card) {
         super(card);
     }
 

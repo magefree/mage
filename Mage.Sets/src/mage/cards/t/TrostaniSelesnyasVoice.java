@@ -49,7 +49,7 @@ public final class TrostaniSelesnyasVoice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TrostaniSelesnyasVoice(final TrostaniSelesnyasVoice card) {
+    private TrostaniSelesnyasVoice(final TrostaniSelesnyasVoice card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class GoblinRuinblaster extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, destroy target nonbasic land."));
     }
 
-    public GoblinRuinblaster(final GoblinRuinblaster card) {
+    private GoblinRuinblaster(final GoblinRuinblaster card) {
         super(card);
     }
 

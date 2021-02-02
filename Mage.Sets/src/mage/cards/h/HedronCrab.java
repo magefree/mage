@@ -29,7 +29,7 @@ public final class HedronCrab extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HedronCrab(final HedronCrab card) {
+    private HedronCrab(final HedronCrab card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class CacheRaiders extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledPermanent()), TargetController.YOU, false));
     }
 
-    public CacheRaiders(final CacheRaiders card) {
+    private CacheRaiders(final CacheRaiders card) {
         super(card);
     }
 

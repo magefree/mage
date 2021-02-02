@@ -31,7 +31,7 @@ public final class StarCompass extends CardImpl {
         this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.YOU, true, filter));
     }
 
-    public StarCompass(final StarCompass card) {
+    private StarCompass(final StarCompass card) {
         super(card);
     }
 

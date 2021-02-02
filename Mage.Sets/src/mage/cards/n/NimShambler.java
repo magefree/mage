@@ -42,7 +42,7 @@ public final class NimShambler extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
-    public NimShambler(final NimShambler card) {
+    private NimShambler(final NimShambler card) {
         super(card);
     }
 

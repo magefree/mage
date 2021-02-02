@@ -27,7 +27,7 @@ public final class FieryConclusion extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FieryConclusion(final FieryConclusion card) {
+    private FieryConclusion(final FieryConclusion card) {
         super(card);
     }
 

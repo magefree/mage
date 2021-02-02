@@ -39,7 +39,7 @@ public final class BalaGedScorpion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BalaGedScorpion(final BalaGedScorpion card) {
+    private BalaGedScorpion(final BalaGedScorpion card) {
         super(card);
     }
 

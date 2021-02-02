@@ -34,7 +34,7 @@ public final class CurseOfMaritLage extends CardImpl {
                 new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
     }
 
-    public CurseOfMaritLage(final CurseOfMaritLage card) {
+    private CurseOfMaritLage(final CurseOfMaritLage card) {
         super(card);
     }
 

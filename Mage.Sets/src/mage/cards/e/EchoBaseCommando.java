@@ -45,7 +45,7 @@ public final class EchoBaseCommando extends CardImpl {
 
     }
 
-    public EchoBaseCommando(final EchoBaseCommando card) {
+    private EchoBaseCommando(final EchoBaseCommando card) {
         super(card);
     }
 

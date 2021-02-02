@@ -44,7 +44,7 @@ public final class GoblinTaskmaster extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{R}")));
     }
 
-    public GoblinTaskmaster(final GoblinTaskmaster card) {
+    private GoblinTaskmaster(final GoblinTaskmaster card) {
         super(card);
     }
 

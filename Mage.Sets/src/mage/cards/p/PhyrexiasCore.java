@@ -37,7 +37,7 @@ public final class PhyrexiasCore extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexiasCore(final PhyrexiasCore card) {
+    private PhyrexiasCore(final PhyrexiasCore card) {
         super(card);
     }
 

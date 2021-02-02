@@ -28,7 +28,7 @@ public final class MoonwingMoth extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W)));
     }
 
-    public MoonwingMoth(final MoonwingMoth card) {
+    private MoonwingMoth(final MoonwingMoth card) {
         super(card);
     }
 

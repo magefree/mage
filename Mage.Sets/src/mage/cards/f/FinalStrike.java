@@ -32,7 +32,7 @@ public final class FinalStrike extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
     }
 
-    public FinalStrike(final FinalStrike card) {
+    private FinalStrike(final FinalStrike card) {
         super(card);
     }
 

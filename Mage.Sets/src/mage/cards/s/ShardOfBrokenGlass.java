@@ -35,7 +35,7 @@ public final class ShardOfBrokenGlass extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public ShardOfBrokenGlass(final ShardOfBrokenGlass card) {
+    private ShardOfBrokenGlass(final ShardOfBrokenGlass card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class JoragaAuxiliary extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JoragaAuxiliary(final JoragaAuxiliary card) {
+    private JoragaAuxiliary(final JoragaAuxiliary card) {
         super(card);
     }
 

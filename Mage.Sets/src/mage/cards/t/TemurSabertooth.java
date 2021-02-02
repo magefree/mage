@@ -41,7 +41,7 @@ public final class TemurSabertooth extends CardImpl {
 
     }
 
-    public TemurSabertooth(final TemurSabertooth card) {
+    private TemurSabertooth(final TemurSabertooth card) {
         super(card);
     }
 

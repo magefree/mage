@@ -37,7 +37,7 @@ public final class SylvanAwakening extends CardImpl {
         );
     }
 
-    public SylvanAwakening(final SylvanAwakening card) {
+    private SylvanAwakening(final SylvanAwakening card) {
         super(card);
     }
 

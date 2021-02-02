@@ -32,7 +32,7 @@ public final class HeraldOfTheFair extends CardImpl {
 
     }
 
-    public HeraldOfTheFair(final HeraldOfTheFair card) {
+    private HeraldOfTheFair(final HeraldOfTheFair card) {
         super(card);
     }
 

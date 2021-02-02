@@ -34,7 +34,7 @@ public final class HiddenPath extends CardImpl {
                 new GainAbilityAllEffect(new ForestwalkAbility(false), Duration.WhileOnBattlefield, filter)));
     }
 
-    public HiddenPath(final HiddenPath card) {
+    private HiddenPath(final HiddenPath card) {
         super(card);
     }
 

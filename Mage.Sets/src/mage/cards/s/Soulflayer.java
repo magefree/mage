@@ -39,7 +39,7 @@ public final class Soulflayer extends CardImpl {
 
     }
 
-    public Soulflayer(final Soulflayer card) {
+    private Soulflayer(final Soulflayer card) {
         super(card);
     }
 

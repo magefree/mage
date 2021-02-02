@@ -31,7 +31,7 @@ public final class WilyBandar extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{G}")));
     }
 
-    public WilyBandar(final WilyBandar card) {
+    private WilyBandar(final WilyBandar card) {
         super(card);
     }
 

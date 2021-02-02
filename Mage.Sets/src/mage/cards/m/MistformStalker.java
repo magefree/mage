@@ -45,7 +45,7 @@ public final class MistformStalker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MistformStalker(final MistformStalker card) {
+    private MistformStalker(final MistformStalker card) {
         super(card);
     }
 

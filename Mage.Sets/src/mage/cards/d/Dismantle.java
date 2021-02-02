@@ -33,7 +33,7 @@ public final class Dismantle extends CardImpl {
 
     }
 
-    public Dismantle(final Dismantle card) {
+    private Dismantle(final Dismantle card) {
         super(card);
     }
 

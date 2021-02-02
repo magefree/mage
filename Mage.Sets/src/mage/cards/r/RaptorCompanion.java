@@ -22,7 +22,7 @@ public final class RaptorCompanion extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public RaptorCompanion(final RaptorCompanion card) {
+    private RaptorCompanion(final RaptorCompanion card) {
         super(card);
     }
 

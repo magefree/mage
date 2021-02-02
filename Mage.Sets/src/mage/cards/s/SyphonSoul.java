@@ -23,7 +23,7 @@ public final class SyphonSoul extends CardImpl {
         this.getSpellAbility().addEffect(new SyphonSoulEffect());
     }
 
-    public SyphonSoul(final SyphonSoul card) {
+    private SyphonSoul(final SyphonSoul card) {
         super(card);
     }
 

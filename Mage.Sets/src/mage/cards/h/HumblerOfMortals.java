@@ -30,7 +30,7 @@ public final class HumblerOfMortals extends CardImpl {
         this.addAbility(new ConstellationAbility(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures"))));
     }
 
-    public HumblerOfMortals(final HumblerOfMortals card) {
+    private HumblerOfMortals(final HumblerOfMortals card) {
         super(card);
     }
 

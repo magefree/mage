@@ -37,7 +37,7 @@ public final class SithInquisitor extends CardImpl {
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }
 
-    public SithInquisitor(final SithInquisitor card) {
+    private SithInquisitor(final SithInquisitor card) {
         super(card);
     }
 

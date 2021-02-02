@@ -30,7 +30,7 @@ public final class Giantbaiting extends CardImpl {
 
     }
 
-    public Giantbaiting(final Giantbaiting card) {
+    private Giantbaiting(final Giantbaiting card) {
         super(card);
     }
 

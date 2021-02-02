@@ -30,7 +30,7 @@ public final class MonasterySwiftspear extends CardImpl {
         this.addAbility(new ProwessAbility());
     }
 
-    public MonasterySwiftspear(final MonasterySwiftspear card) {
+    private MonasterySwiftspear(final MonasterySwiftspear card) {
         super(card);
     }
 

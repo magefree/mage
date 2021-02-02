@@ -49,7 +49,7 @@ public final class VileRedeemer extends CardImpl {
                 new VileRedeemerNonTokenCreaturesDiedWatcher());
     }
 
-    public VileRedeemer(final VileRedeemer card) {
+    private VileRedeemer(final VileRedeemer card) {
         super(card);
     }
 

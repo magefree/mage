@@ -69,7 +69,7 @@ public final class Leviathan extends CardImpl {
 
     }
         
-    public Leviathan(final Leviathan card) {
+    private Leviathan(final Leviathan card) {
         super(card);
     }
 

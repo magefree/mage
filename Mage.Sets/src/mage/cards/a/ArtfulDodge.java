@@ -28,7 +28,7 @@ public final class ArtfulDodge extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{U}"), TimingRule.SORCERY));
     }
 
-    public ArtfulDodge(final ArtfulDodge card) {
+    private ArtfulDodge(final ArtfulDodge card) {
         super(card);
     }
 

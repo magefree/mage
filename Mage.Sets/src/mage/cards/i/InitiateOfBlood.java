@@ -79,7 +79,7 @@ public final class InitiateOfBlood extends CardImpl {
 
     }
 
-    public InitiateOfBlood(final InitiateOfBlood card) {
+    private InitiateOfBlood(final InitiateOfBlood card) {
         super(card);
     }
 

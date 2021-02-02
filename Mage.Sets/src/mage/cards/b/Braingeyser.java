@@ -26,7 +26,7 @@ public final class Braingeyser extends CardImpl {
         
     }
 
-    public Braingeyser(final Braingeyser card) {
+    private Braingeyser(final Braingeyser card) {
         super(card);
     }
 

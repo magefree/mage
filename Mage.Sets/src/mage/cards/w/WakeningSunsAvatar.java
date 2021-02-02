@@ -43,7 +43,7 @@ public final class WakeningSunsAvatar extends CardImpl {
                 new CastFromHandWatcher());
     }
 
-    public WakeningSunsAvatar(final WakeningSunsAvatar card) {
+    private WakeningSunsAvatar(final WakeningSunsAvatar card) {
         super(card);
     }
 

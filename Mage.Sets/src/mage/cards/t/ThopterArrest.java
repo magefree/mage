@@ -41,7 +41,7 @@ public final class ThopterArrest extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThopterArrest(final ThopterArrest card) {
+    private ThopterArrest(final ThopterArrest card) {
         super(card);
     }
 

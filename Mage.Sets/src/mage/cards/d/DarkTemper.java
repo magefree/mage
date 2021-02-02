@@ -30,7 +30,7 @@ public final class DarkTemper extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public DarkTemper(final DarkTemper card) {
+    private DarkTemper(final DarkTemper card) {
         super(card);
     }
 

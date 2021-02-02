@@ -35,7 +35,7 @@ public final class KessigDireSwine extends CardImpl {
                 .addHint(DeliriumHint.instance));
     }
 
-    public KessigDireSwine(final KessigDireSwine card) {
+    private KessigDireSwine(final KessigDireSwine card) {
         super(card);
     }
 

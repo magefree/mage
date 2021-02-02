@@ -29,7 +29,7 @@ public final class UnimpededTrespasser extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public UnimpededTrespasser(final UnimpededTrespasser card) {
+    private UnimpededTrespasser(final UnimpededTrespasser card) {
         super(card);
     }
 

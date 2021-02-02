@@ -31,7 +31,7 @@ public final class FrilledSandwalla extends CardImpl {
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
     }
 
-    public FrilledSandwalla(final FrilledSandwalla card) {
+    private FrilledSandwalla(final FrilledSandwalla card) {
         super(card);
     }
 

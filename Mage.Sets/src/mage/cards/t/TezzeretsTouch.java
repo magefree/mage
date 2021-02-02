@@ -46,7 +46,7 @@ public final class TezzeretsTouch extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted artifact", false, false));
     }
 
-    public TezzeretsTouch(final TezzeretsTouch card) {
+    private TezzeretsTouch(final TezzeretsTouch card) {
         super(card);
     }
 

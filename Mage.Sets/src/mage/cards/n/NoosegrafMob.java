@@ -40,7 +40,7 @@ public final class NoosegrafMob extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new NoosegrafMobEffect(), false));
     }
 
-    public NoosegrafMob(final NoosegrafMob card) {
+    private NoosegrafMob(final NoosegrafMob card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class ProphetOfDistortion extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{3}{C}")));
     }
 
-    public ProphetOfDistortion(final ProphetOfDistortion card) {
+    private ProphetOfDistortion(final ProphetOfDistortion card) {
         super(card);
     }
 

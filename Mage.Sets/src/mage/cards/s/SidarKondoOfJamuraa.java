@@ -49,7 +49,7 @@ public final class SidarKondoOfJamuraa extends CardImpl {
         this.addAbility(PartnerAbility.getInstance());
     }
 
-    public SidarKondoOfJamuraa(final SidarKondoOfJamuraa card) {
+    private SidarKondoOfJamuraa(final SidarKondoOfJamuraa card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class MagusOfTheMoon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MagusOfTheMoonEffect()));
     }
 
-    public MagusOfTheMoon(final MagusOfTheMoon card) {
+    private MagusOfTheMoon(final MagusOfTheMoon card) {
         super(card);
     }
 

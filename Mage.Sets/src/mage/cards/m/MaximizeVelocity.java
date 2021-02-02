@@ -34,7 +34,7 @@ public final class MaximizeVelocity extends CardImpl {
 
     }
 
-    public MaximizeVelocity(final MaximizeVelocity card) {
+    private MaximizeVelocity(final MaximizeVelocity card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class CommandersSphere extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new SacrificeSourceCost()));
     }
 
-    public CommandersSphere(final CommandersSphere card) {
+    private CommandersSphere(final CommandersSphere card) {
         super(card);
     }
 

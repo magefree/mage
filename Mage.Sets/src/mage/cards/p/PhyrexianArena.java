@@ -26,7 +26,7 @@ public final class PhyrexianArena extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianArena(final PhyrexianArena card) {
+    private PhyrexianArena(final PhyrexianArena card) {
         super(card);
     }
 

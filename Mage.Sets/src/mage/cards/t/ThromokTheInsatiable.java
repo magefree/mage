@@ -29,7 +29,7 @@ public final class ThromokTheInsatiable extends CardImpl {
         this.addAbility(new DevourAbility(DevourFactor.DevourX));
     }
 
-    public ThromokTheInsatiable(final ThromokTheInsatiable card) {
+    private ThromokTheInsatiable(final ThromokTheInsatiable card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class DruidicSatchel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DruidicSatchel(final DruidicSatchel card) {
+    private DruidicSatchel(final DruidicSatchel card) {
         super(card);
     }
 

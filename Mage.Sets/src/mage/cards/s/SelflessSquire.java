@@ -42,7 +42,7 @@ public final class SelflessSquire extends CardImpl {
         this.addAbility(new SelflessSquireTriggeredAbility());
     }
 
-    public SelflessSquire(final SelflessSquire card) {
+    private SelflessSquire(final SelflessSquire card) {
         super(card);
     }
 

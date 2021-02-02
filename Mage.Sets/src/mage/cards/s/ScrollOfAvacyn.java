@@ -38,7 +38,7 @@ public final class ScrollOfAvacyn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScrollOfAvacyn(final ScrollOfAvacyn card) {
+    private ScrollOfAvacyn(final ScrollOfAvacyn card) {
         super(card);
     }
 

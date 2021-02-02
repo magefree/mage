@@ -27,7 +27,7 @@ public final class RecklessOgre extends CardImpl {
         this.addAbility(new AttacksAloneTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn).setText("it gets +3/+0 until end of turn")));
     }
 
-    public RecklessOgre(final RecklessOgre card) {
+    private RecklessOgre(final RecklessOgre card) {
         super(card);
     }
 

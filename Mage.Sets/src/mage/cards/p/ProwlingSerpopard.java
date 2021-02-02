@@ -41,7 +41,7 @@ public final class ProwlingSerpopard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeCounteredControlledEffect(filterTarget, null, Duration.WhileOnBattlefield)));
     }
 
-    public ProwlingSerpopard(final ProwlingSerpopard card) {
+    private ProwlingSerpopard(final ProwlingSerpopard card) {
         super(card);
     }
 

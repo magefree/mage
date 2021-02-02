@@ -28,7 +28,7 @@ public final class MetallicMastery extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn."));
     }
 
-    public MetallicMastery(final MetallicMastery card) {
+    private MetallicMastery(final MetallicMastery card) {
         super(card);
     }
 

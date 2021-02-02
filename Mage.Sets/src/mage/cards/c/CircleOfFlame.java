@@ -30,7 +30,7 @@ public final class CircleOfFlame extends CardImpl {
         this.addAbility(new CircleOfFlameTriggeredAbility());
     }
 
-    public CircleOfFlame(final CircleOfFlame card) {
+    private CircleOfFlame(final CircleOfFlame card) {
         super(card);
     }
 

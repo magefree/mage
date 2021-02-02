@@ -54,7 +54,7 @@ public final class SteelOfTheGodhead extends CardImpl {
         this.addAbility(blueAbility);
     }
 
-    public SteelOfTheGodhead(final SteelOfTheGodhead card) {
+    private SteelOfTheGodhead(final SteelOfTheGodhead card) {
         super(card);
     }
 

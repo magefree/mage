@@ -41,7 +41,7 @@ public final class AgadeemOccultist extends CardImpl {
 
     }
 
-    public AgadeemOccultist(final AgadeemOccultist card) {
+    private AgadeemOccultist(final AgadeemOccultist card) {
         super(card);
     }
 

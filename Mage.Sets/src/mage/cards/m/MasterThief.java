@@ -40,7 +40,7 @@ public final class MasterThief extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MasterThief(final MasterThief card) {
+    private MasterThief(final MasterThief card) {
         super(card);
     }
 

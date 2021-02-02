@@ -42,7 +42,7 @@ public final class VerdantField extends CardImpl {
 				Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Target creature gets +1/+1 until end of turn.\"")));
     }
 
-    public VerdantField(final VerdantField card) {
+    private VerdantField(final VerdantField card) {
         super(card);
     }
 

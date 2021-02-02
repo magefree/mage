@@ -51,7 +51,7 @@ public final class Wonder extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, wonderEffect));
     }
 
-    public Wonder(final Wonder card) {
+    private Wonder(final Wonder card) {
         super(card);
     }
 

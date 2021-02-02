@@ -36,7 +36,7 @@ public final class HeartOfBogardan extends CardImpl {
         this.addAbility(new HeartOfBogardanTriggeredAbility());
     }
 
-    public HeartOfBogardan(final HeartOfBogardan card) {
+    private HeartOfBogardan(final HeartOfBogardan card) {
         super(card);
     }
 

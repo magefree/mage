@@ -43,7 +43,7 @@ public final class HighlandBerserker extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(effect, true));
     }
 
-    public HighlandBerserker(final HighlandBerserker card) {
+    private HighlandBerserker(final HighlandBerserker card) {
         super(card);
     }
 

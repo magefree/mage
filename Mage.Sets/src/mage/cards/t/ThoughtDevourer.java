@@ -35,7 +35,7 @@ public final class ThoughtDevourer extends CardImpl {
                 new MaximumHandSizeControllerEffect(4, Duration.WhileOnBattlefield, HandSizeModification.REDUCE)));
     }
 
-    public ThoughtDevourer(final ThoughtDevourer card) {
+    private ThoughtDevourer(final ThoughtDevourer card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class MournfulZombie extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MournfulZombie(final MournfulZombie card) {
+    private MournfulZombie(final MournfulZombie card) {
         super(card);
     }
 

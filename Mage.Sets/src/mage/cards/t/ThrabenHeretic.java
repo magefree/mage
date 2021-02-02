@@ -35,7 +35,7 @@ public final class ThrabenHeretic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThrabenHeretic(final ThrabenHeretic card) {
+    private ThrabenHeretic(final ThrabenHeretic card) {
         super(card);
     }
 

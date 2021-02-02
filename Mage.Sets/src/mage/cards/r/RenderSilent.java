@@ -42,7 +42,7 @@ public final class RenderSilent extends CardImpl {
         this.getSpellAbility().addEffect(new RenderSilentEffect());
     }
 
-    public RenderSilent(final RenderSilent card) {
+    private RenderSilent(final RenderSilent card) {
         super(card);
     }
 

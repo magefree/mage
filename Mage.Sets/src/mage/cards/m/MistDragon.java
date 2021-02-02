@@ -42,7 +42,7 @@ public final class MistDragon extends CardImpl {
                 new PhaseOutSourceEffect(), new ManaCostsImpl("{3}{U}{U}")));
     }
 
-    public MistDragon(final MistDragon card) {
+    private MistDragon(final MistDragon card) {
         super(card);
     }
 

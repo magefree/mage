@@ -34,7 +34,7 @@ public final class TezzeretsAmbition extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0)));
     }
 
-    public TezzeretsAmbition(final TezzeretsAmbition card) {
+    private TezzeretsAmbition(final TezzeretsAmbition card) {
         super(card);
     }
 

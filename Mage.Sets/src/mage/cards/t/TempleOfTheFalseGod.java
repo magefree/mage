@@ -36,7 +36,7 @@ public final class TempleOfTheFalseGod extends CardImpl {
         ));
     }
 
-    public TempleOfTheFalseGod(final TempleOfTheFalseGod card) {
+    private TempleOfTheFalseGod(final TempleOfTheFalseGod card) {
         super(card);
     }
 

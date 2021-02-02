@@ -34,7 +34,7 @@ public final class StriderHarness extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
     }
 
-    public StriderHarness(final StriderHarness card) {
+    private StriderHarness(final StriderHarness card) {
         super(card);
     }
 

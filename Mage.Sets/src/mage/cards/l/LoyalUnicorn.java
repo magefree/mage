@@ -55,7 +55,7 @@ public final class LoyalUnicorn extends CardImpl {
         ));
     }
 
-    public LoyalUnicorn(final LoyalUnicorn card) {
+    private LoyalUnicorn(final LoyalUnicorn card) {
         super(card);
     }
 

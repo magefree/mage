@@ -24,7 +24,7 @@ public final class Scour extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect(false, "its controller's","all cards with the same name as that enchantment"));
     }
 
-    public Scour(final Scour card) {
+    private Scour(final Scour card) {
         super(card);
     }
 

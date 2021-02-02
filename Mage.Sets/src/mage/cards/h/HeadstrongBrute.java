@@ -48,7 +48,7 @@ public final class HeadstrongBrute extends CardImpl {
                         new PermanentsOnTheBattlefieldCondition(filter), "{this} has menace as long as you control another Pirate")));
     }
 
-    public HeadstrongBrute(final HeadstrongBrute card) {
+    private HeadstrongBrute(final HeadstrongBrute card) {
         super(card);
     }
 

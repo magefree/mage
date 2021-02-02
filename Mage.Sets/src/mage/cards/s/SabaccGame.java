@@ -44,7 +44,7 @@ public final class SabaccGame extends CardImpl {
         this.getSpellAbility().getTargets().add(new TargetPermanent(filter));
     }
 
-    public SabaccGame(final SabaccGame card) {
+    private SabaccGame(final SabaccGame card) {
         super(card);
     }
 

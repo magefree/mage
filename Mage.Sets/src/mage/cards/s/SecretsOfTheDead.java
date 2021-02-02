@@ -29,7 +29,7 @@ public final class SecretsOfTheDead extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
     }
 
-    public SecretsOfTheDead(final SecretsOfTheDead card) {
+    private SecretsOfTheDead(final SecretsOfTheDead card) {
         super(card);
     }
 

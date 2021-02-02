@@ -30,7 +30,7 @@ public final class InkDissolver extends CardImpl {
         this.addAbility(new KinshipAbility(new MillCardsEachPlayerEffect(3, TargetController.OPPONENT)));
     }
 
-    public InkDissolver(final InkDissolver card) {
+    private InkDissolver(final InkDissolver card) {
         super(card);
     }
 

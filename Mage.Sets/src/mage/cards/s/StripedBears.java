@@ -26,7 +26,7 @@ public final class StripedBears extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public StripedBears(final StripedBears card) {
+    private StripedBears(final StripedBears card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class SkirkShaman extends CardImpl {
 
     }
 
-    public SkirkShaman(final SkirkShaman card) {
+    private SkirkShaman(final SkirkShaman card) {
         super(card);
     }
 

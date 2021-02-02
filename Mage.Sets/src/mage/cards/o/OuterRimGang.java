@@ -37,7 +37,7 @@ public final class OuterRimGang extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostAllEffect(-2, -2, Duration.EndOfTurn, filter, false)));
     }
 
-    public OuterRimGang(final OuterRimGang card) {
+    private OuterRimGang(final OuterRimGang card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class FortunesFavor extends CardImpl {
         getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public FortunesFavor(final FortunesFavor card) {
+    private FortunesFavor(final FortunesFavor card) {
         super(card);
     }
 

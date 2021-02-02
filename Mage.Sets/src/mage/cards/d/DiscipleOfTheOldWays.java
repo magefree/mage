@@ -32,7 +32,7 @@ public final class DiscipleOfTheOldWays extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public DiscipleOfTheOldWays(final DiscipleOfTheOldWays card) {
+    private DiscipleOfTheOldWays(final DiscipleOfTheOldWays card) {
         super(card);
     }
 

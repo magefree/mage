@@ -42,7 +42,7 @@ public final class GrixisBattlemage extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public GrixisBattlemage(final GrixisBattlemage card) {
+    private GrixisBattlemage(final GrixisBattlemage card) {
         super(card);
     }
 

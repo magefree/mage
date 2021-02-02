@@ -33,7 +33,7 @@ public final class Prohibit extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Prohibit(final Prohibit card) {
+    private Prohibit(final Prohibit card) {
         super(card);
     }
 

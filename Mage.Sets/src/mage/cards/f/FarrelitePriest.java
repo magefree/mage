@@ -39,7 +39,7 @@ public final class FarrelitePriest extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FarrelitePriest(final FarrelitePriest card) {
+    private FarrelitePriest(final FarrelitePriest card) {
         super(card);
     }
 

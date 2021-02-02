@@ -27,7 +27,7 @@ public final class NimbleInnovator extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public NimbleInnovator(final NimbleInnovator card) {
+    private NimbleInnovator(final NimbleInnovator card) {
         super(card);
     }
 

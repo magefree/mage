@@ -44,7 +44,7 @@ public final class PathmakerInitiate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PathmakerInitiate(final PathmakerInitiate card) {
+    private PathmakerInitiate(final PathmakerInitiate card) {
         super(card);
     }
 

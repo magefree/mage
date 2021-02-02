@@ -30,7 +30,7 @@ public final class HomingLightning extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public HomingLightning(final HomingLightning card) {
+    private HomingLightning(final HomingLightning card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class KnightOfTheWhiteOrchid extends CardImpl {
         
     }
 
-    public KnightOfTheWhiteOrchid(final KnightOfTheWhiteOrchid card) {
+    private KnightOfTheWhiteOrchid(final KnightOfTheWhiteOrchid card) {
         super(card);
     }
 

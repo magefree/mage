@@ -41,7 +41,7 @@ public final class GuardiansOfKoilos extends CardImpl {
                 .setText("you may return another target historic permanent you control to its owner's hand. <i>(Artifacts, legendaries, and Sagas are historic.)</i>"), true));
     }
 
-    public GuardiansOfKoilos(final GuardiansOfKoilos card) {
+    private GuardiansOfKoilos(final GuardiansOfKoilos card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class Rey extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Rey(final Rey card) {
+    private Rey(final Rey card) {
         super(card);
     }
 

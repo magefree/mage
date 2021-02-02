@@ -29,7 +29,7 @@ public final class AvariceTotem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AvariceTotem(final AvariceTotem card) {
+    private AvariceTotem(final AvariceTotem card) {
         super(card);
     }
 

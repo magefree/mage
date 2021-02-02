@@ -32,7 +32,7 @@ public final class TheAbyss extends CardImpl {
         this.addAbility(new TheAbyssTriggeredAbility());
     }
 
-    public TheAbyss(final TheAbyss card) {
+    private TheAbyss(final TheAbyss card) {
         super(card);
     }
 

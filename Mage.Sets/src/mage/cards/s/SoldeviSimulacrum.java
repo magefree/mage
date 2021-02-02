@@ -33,7 +33,7 @@ public final class SoldeviSimulacrum extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{1}")));
     }
 
-    public SoldeviSimulacrum(final SoldeviSimulacrum card) {
+    private SoldeviSimulacrum(final SoldeviSimulacrum card) {
         super(card);
     }
 

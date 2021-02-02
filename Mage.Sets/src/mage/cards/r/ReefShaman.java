@@ -34,7 +34,7 @@ public final class ReefShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ReefShaman(final ReefShaman card) {
+    private ReefShaman(final ReefShaman card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class AqualishBountyHunter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AqualishBountyHunter(final AqualishBountyHunter card) {
+    private AqualishBountyHunter(final AqualishBountyHunter card) {
         super(card);
     }
 

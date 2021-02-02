@@ -41,7 +41,7 @@ public final class DeathcapCultivator extends CardImpl {
                 .addHint(DeliriumHint.instance));
     }
 
-    public DeathcapCultivator(final DeathcapCultivator card) {
+    private DeathcapCultivator(final DeathcapCultivator card) {
         super(card);
     }
 

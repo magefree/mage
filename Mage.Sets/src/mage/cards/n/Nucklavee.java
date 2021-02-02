@@ -47,7 +47,7 @@ public final class Nucklavee extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Nucklavee(final Nucklavee card) {
+    private Nucklavee(final Nucklavee card) {
         super(card);
     }
 

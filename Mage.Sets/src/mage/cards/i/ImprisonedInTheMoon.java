@@ -51,7 +51,7 @@ public final class ImprisonedInTheMoon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesColorlessLandEffect()));
     }
 
-    public ImprisonedInTheMoon(final ImprisonedInTheMoon card) {
+    private ImprisonedInTheMoon(final ImprisonedInTheMoon card) {
         super(card);
     }
 

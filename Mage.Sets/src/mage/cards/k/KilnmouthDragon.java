@@ -44,7 +44,7 @@ public final class KilnmouthDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KilnmouthDragon(final KilnmouthDragon card) {
+    private KilnmouthDragon(final KilnmouthDragon card) {
         super(card);
     }
 

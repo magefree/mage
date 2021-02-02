@@ -30,7 +30,7 @@ public final class DinosaurHunter extends CardImpl {
         this.addAbility(new DinosaurHunterAbility());
     }
 
-    public DinosaurHunter(final DinosaurHunter card) {
+    private DinosaurHunter(final DinosaurHunter card) {
         super(card);
     }
 

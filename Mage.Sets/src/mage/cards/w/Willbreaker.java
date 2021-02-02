@@ -40,7 +40,7 @@ public final class Willbreaker extends CardImpl {
         this.addAbility(new WillbreakerTriggeredAbility(effect), new LostControlWatcher());
     }
 
-    public Willbreaker(final Willbreaker card) {
+    private Willbreaker(final Willbreaker card) {
         super(card);
     }
 

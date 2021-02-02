@@ -33,7 +33,7 @@ public final class ProfanePrayers extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public ProfanePrayers(final ProfanePrayers card) {
+    private ProfanePrayers(final ProfanePrayers card) {
         super(card);
     }
 

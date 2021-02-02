@@ -27,7 +27,7 @@ public final class MoanOfTheUnhallowed extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{B}{B}"), TimingRule.SORCERY));
     }
 
-    public MoanOfTheUnhallowed(final MoanOfTheUnhallowed card) {
+    private MoanOfTheUnhallowed(final MoanOfTheUnhallowed card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class HornedHelm extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
-    public HornedHelm(final HornedHelm card) {
+    private HornedHelm(final HornedHelm card) {
         super(card);
     }
 

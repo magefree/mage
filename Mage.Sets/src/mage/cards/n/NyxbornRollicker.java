@@ -32,7 +32,7 @@ public final class NyxbornRollicker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield )));
     }
 
-    public NyxbornRollicker(final NyxbornRollicker card) {
+    private NyxbornRollicker(final NyxbornRollicker card) {
         super(card);
     }
 

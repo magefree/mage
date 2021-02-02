@@ -27,7 +27,7 @@ public final class FreshMeat extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken(), new FreshMeatDynamicValue()));
     }
 
-    public FreshMeat(final FreshMeat card) {
+    private FreshMeat(final FreshMeat card) {
         super(card);
     }
 

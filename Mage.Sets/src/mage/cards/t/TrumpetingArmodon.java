@@ -32,7 +32,7 @@ public final class TrumpetingArmodon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TrumpetingArmodon(final TrumpetingArmodon card) {
+    private TrumpetingArmodon(final TrumpetingArmodon card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class NearheathChaplain extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NearheathChaplain(final NearheathChaplain card) {
+    private NearheathChaplain(final NearheathChaplain card) {
         super(card);
     }
 

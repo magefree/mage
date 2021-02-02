@@ -30,7 +30,7 @@ public final class WeatherseedFaeries extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
-    public WeatherseedFaeries(final WeatherseedFaeries card) {
+    private WeatherseedFaeries(final WeatherseedFaeries card) {
         super(card);
     }
 

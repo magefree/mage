@@ -56,7 +56,7 @@ public final class ExtricatorOfFlesh extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ExtricatorOfFlesh(final ExtricatorOfFlesh card) {
+    private ExtricatorOfFlesh(final ExtricatorOfFlesh card) {
         super(card);
     }
 

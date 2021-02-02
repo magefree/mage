@@ -30,7 +30,7 @@ public final class WeatherseedTreefolk extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public WeatherseedTreefolk(final WeatherseedTreefolk card) {
+    private WeatherseedTreefolk(final WeatherseedTreefolk card) {
         super(card);
     }
 

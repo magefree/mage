@@ -29,7 +29,7 @@ public final class SkinbrandGoblin extends CardImpl {
         this.addAbility(new BloodrushAbility("{R}", new BoostTargetEffect(2, 1, Duration.EndOfTurn)));
     }
 
-    public SkinbrandGoblin(final SkinbrandGoblin card) {
+    private SkinbrandGoblin(final SkinbrandGoblin card) {
         super(card);
     }
 

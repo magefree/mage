@@ -51,7 +51,7 @@ public final class MinamoSightbender extends CardImpl {
 
     }
 
-    public MinamoSightbender(final MinamoSightbender card) {
+    private MinamoSightbender(final MinamoSightbender card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class VampireCharmseeker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VampireCharmseeker(final VampireCharmseeker card) {
+    private VampireCharmseeker(final VampireCharmseeker card) {
         super(card);
     }
 

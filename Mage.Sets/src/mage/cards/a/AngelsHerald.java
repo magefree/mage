@@ -59,7 +59,7 @@ public final class AngelsHerald extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AngelsHerald(final AngelsHerald card) {
+    private AngelsHerald(final AngelsHerald card) {
         super(card);
     }
 

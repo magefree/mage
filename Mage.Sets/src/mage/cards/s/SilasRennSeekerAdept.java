@@ -43,7 +43,7 @@ public final class SilasRennSeekerAdept extends CardImpl {
         this.addAbility(PartnerAbility.getInstance());
     }
 
-    public SilasRennSeekerAdept(final SilasRennSeekerAdept card) {
+    private SilasRennSeekerAdept(final SilasRennSeekerAdept card) {
         super(card);
     }
 

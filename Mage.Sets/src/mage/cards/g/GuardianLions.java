@@ -26,7 +26,7 @@ public final class GuardianLions extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public GuardianLions(final GuardianLions card) {
+    private GuardianLions(final GuardianLions card) {
         super(card);
     }
 

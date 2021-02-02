@@ -34,7 +34,7 @@ public final class ArtificersEpiphany extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0)));
     }
 
-    public ArtificersEpiphany(final ArtificersEpiphany card) {
+    private ArtificersEpiphany(final ArtificersEpiphany card) {
         super(card);
     }
 

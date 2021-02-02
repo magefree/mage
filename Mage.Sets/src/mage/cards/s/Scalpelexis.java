@@ -41,7 +41,7 @@ public final class Scalpelexis extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ScalpelexisEffect(), false, true));
     }
 
-    public Scalpelexis(final Scalpelexis card) {
+    private Scalpelexis(final Scalpelexis card) {
         super(card);
     }
 

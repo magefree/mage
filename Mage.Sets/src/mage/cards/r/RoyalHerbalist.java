@@ -34,7 +34,7 @@ public final class RoyalHerbalist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RoyalHerbalist(final RoyalHerbalist card) {
+    private RoyalHerbalist(final RoyalHerbalist card) {
         super(card);
     }
 

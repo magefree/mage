@@ -23,7 +23,7 @@ public final class FranticSearch extends CardImpl {
         this.getSpellAbility().addEffect(new UntapLandsEffect(3));
     }
 
-    public FranticSearch(final FranticSearch card) {
+    private FranticSearch(final FranticSearch card) {
         super(card);
     }
 

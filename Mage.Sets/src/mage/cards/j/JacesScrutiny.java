@@ -27,7 +27,7 @@ public final class JacesScrutiny extends CardImpl {
         getSpellAbility().addEffect(new InvestigateEffect());
     }
 
-    public JacesScrutiny(final JacesScrutiny card) {
+    private JacesScrutiny(final JacesScrutiny card) {
         super(card);
     }
 

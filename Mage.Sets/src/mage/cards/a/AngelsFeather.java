@@ -30,7 +30,7 @@ public final class AngelsFeather extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new GainLifeEffect(1), filter, true));
     }
 
-    public AngelsFeather(final AngelsFeather card) {
+    private AngelsFeather(final AngelsFeather card) {
         super(card);
     }
 

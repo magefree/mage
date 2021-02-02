@@ -40,7 +40,7 @@ public final class MyrPrototype extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MyrPrototypeCantAttackUnlessYouPayEffect()));
     }
 
-    public MyrPrototype(final MyrPrototype card) {
+    private MyrPrototype(final MyrPrototype card) {
         super(card);
     }
 

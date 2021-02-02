@@ -29,7 +29,7 @@ public final class AncientSpider extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public AncientSpider(final AncientSpider card) {
+    private AncientSpider(final AncientSpider card) {
         super(card);
     }
 

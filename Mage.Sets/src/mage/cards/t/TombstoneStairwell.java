@@ -49,7 +49,7 @@ public final class TombstoneStairwell extends CardImpl {
         this.addAbility(new TombstoneStairwellTriggeredAbility());
     }
 
-    public TombstoneStairwell(final TombstoneStairwell card) {
+    private TombstoneStairwell(final TombstoneStairwell card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class CalderaHellion extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageAllEffect(3, "it", new FilterCreaturePermanent())));
     }
 
-    public CalderaHellion(final CalderaHellion card) {
+    private CalderaHellion(final CalderaHellion card) {
         super(card);
     }
 

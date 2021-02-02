@@ -54,7 +54,7 @@ public final class NyxInfusion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NyxInfusion(final NyxInfusion card) {
+    private NyxInfusion(final NyxInfusion card) {
         super(card);
     }
 

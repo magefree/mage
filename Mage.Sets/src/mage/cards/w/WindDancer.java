@@ -34,7 +34,7 @@ public final class WindDancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WindDancer(final WindDancer card) {
+    private WindDancer(final WindDancer card) {
         super(card);
     }
 

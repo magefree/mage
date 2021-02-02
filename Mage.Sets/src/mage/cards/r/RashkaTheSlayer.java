@@ -49,7 +49,7 @@ public final class RashkaTheSlayer extends CardImpl {
         this.addAbility(new RashkaTheSlayerTriggeredAbility(new BoostSourceEffect(1, 2, Duration.EndOfTurn), filter, false));
     }
 
-    public RashkaTheSlayer(final RashkaTheSlayer card) {
+    private RashkaTheSlayer(final RashkaTheSlayer card) {
         super(card);
     }
 

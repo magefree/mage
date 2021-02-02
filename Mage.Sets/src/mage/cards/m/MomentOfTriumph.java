@@ -26,7 +26,7 @@ public final class MomentOfTriumph extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 
-    public MomentOfTriumph(final MomentOfTriumph card) {
+    private MomentOfTriumph(final MomentOfTriumph card) {
         super(card);
     }
 

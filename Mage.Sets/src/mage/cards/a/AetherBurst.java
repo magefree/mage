@@ -33,7 +33,7 @@ public final class AetherBurst extends CardImpl {
     }
 
 
-    public AetherBurst(final AetherBurst card) {
+    private AetherBurst(final AetherBurst card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class Evershrike extends CardImpl {
 
     }
 
-    public Evershrike(final Evershrike card) {
+    private Evershrike(final Evershrike card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class FoundryOfTheConsuls extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FoundryOfTheConsuls(final FoundryOfTheConsuls card) {
+    private FoundryOfTheConsuls(final FoundryOfTheConsuls card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ public final class MoodmarkPainter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoodmarkPainter(final MoodmarkPainter card) {
+    private MoodmarkPainter(final MoodmarkPainter card) {
         super(card);
     }
 

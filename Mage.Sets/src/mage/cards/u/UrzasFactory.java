@@ -34,7 +34,7 @@ public final class UrzasFactory extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UrzasFactory(final UrzasFactory card) {
+    private UrzasFactory(final UrzasFactory card) {
         super(card);
     }
 

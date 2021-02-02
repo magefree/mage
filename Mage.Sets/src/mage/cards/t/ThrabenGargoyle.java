@@ -37,7 +37,7 @@ public final class ThrabenGargoyle extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new GenericManaCost(6)));
     }
 
-    public ThrabenGargoyle(final ThrabenGargoyle card) {
+    private ThrabenGargoyle(final ThrabenGargoyle card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class GuardianAngel extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public GuardianAngel(final GuardianAngel card) {
+    private GuardianAngel(final GuardianAngel card) {
         super(card);
     }
 

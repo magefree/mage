@@ -40,7 +40,7 @@ public final class AuroraEidolon extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), StaticFilters.FILTER_SPELL_A_MULTICOLORED, true, false));
     }
 
-    public AuroraEidolon(final AuroraEidolon card) {
+    private AuroraEidolon(final AuroraEidolon card) {
         super(card);
     }
 

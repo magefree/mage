@@ -33,7 +33,7 @@ public final class BloodfireKavu extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodfireKavu(final BloodfireKavu card) {
+    private BloodfireKavu(final BloodfireKavu card) {
         super(card);
     }
 

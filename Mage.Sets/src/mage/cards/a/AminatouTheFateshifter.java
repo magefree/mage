@@ -68,7 +68,7 @@ public class AminatouTheFateshifter extends CardImpl {
         this.addAbility(CanBeYourCommanderAbility.getInstance());
     }
 
-    public AminatouTheFateshifter(final AminatouTheFateshifter card) {
+    private AminatouTheFateshifter(final AminatouTheFateshifter card) {
         super(card);
     }
 

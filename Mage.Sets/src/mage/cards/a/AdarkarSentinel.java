@@ -31,7 +31,7 @@ public final class AdarkarSentinel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AdarkarSentinel(final AdarkarSentinel card) {
+    private AdarkarSentinel(final AdarkarSentinel card) {
         super(card);
     }
 

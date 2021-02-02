@@ -43,7 +43,7 @@ public final class ManaclesOfDecay extends CardImpl {
 
     }
 
-    public ManaclesOfDecay(final ManaclesOfDecay card) {
+    private ManaclesOfDecay(final ManaclesOfDecay card) {
         super(card);
     }
 

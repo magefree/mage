@@ -29,7 +29,7 @@ public final class WildMight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WildMight(final WildMight card) {
+    private WildMight(final WildMight card) {
         super(card);
     }
 

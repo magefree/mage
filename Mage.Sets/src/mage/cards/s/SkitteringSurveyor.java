@@ -29,7 +29,7 @@ public final class SkitteringSurveyor extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true), true));
     }
 
-    public SkitteringSurveyor(final SkitteringSurveyor card) {
+    private SkitteringSurveyor(final SkitteringSurveyor card) {
         super(card);
     }
 

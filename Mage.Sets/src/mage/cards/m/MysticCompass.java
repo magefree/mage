@@ -32,7 +32,7 @@ public final class MysticCompass extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MysticCompass(final MysticCompass card) {
+    private MysticCompass(final MysticCompass card) {
         super(card);
     }
 

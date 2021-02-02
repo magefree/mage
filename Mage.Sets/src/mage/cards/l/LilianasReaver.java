@@ -36,7 +36,7 @@ public final class LilianasReaver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LilianasReaver(final LilianasReaver card) {
+    private LilianasReaver(final LilianasReaver card) {
         super(card);
     }
 

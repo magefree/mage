@@ -53,7 +53,7 @@ public final class HomuraHumanAscendant extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new HomuraReturnFlippedSourceEffect(new HomurasEssence2())));
     }
 
-    public HomuraHumanAscendant(final HomuraHumanAscendant card) {
+    private HomuraHumanAscendant(final HomuraHumanAscendant card) {
         super(card);
     }
 

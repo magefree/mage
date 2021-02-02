@@ -38,7 +38,7 @@ public final class StagBeetle extends CardImpl {
             "with X +1/+1 counters on it, where X is the number of other creatures on the battlefield"));
     }
 
-    public StagBeetle(final StagBeetle card) {
+    private StagBeetle(final StagBeetle card) {
         super(card);
     }
 

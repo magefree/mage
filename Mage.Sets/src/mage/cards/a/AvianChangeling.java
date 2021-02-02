@@ -26,7 +26,7 @@ public final class AvianChangeling extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public AvianChangeling(final AvianChangeling card) {
+    private AvianChangeling(final AvianChangeling card) {
         super(card);
     }
 

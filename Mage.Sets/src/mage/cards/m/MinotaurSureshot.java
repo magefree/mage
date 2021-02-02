@@ -35,7 +35,7 @@ public final class MinotaurSureshot extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
     }
 
-    public MinotaurSureshot(final MinotaurSureshot card) {
+    private MinotaurSureshot(final MinotaurSureshot card) {
         super(card);
     }
 

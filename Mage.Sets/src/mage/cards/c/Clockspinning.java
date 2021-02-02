@@ -39,7 +39,7 @@ public final class Clockspinning extends CardImpl {
         this.getSpellAbility().addEffect(new ClockspinningAddOrRemoveCounterEffect());
     }
 
-    public Clockspinning(final Clockspinning card) {
+    private Clockspinning(final Clockspinning card) {
         super(card);
     }
 

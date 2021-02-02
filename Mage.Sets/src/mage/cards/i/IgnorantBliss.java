@@ -35,7 +35,7 @@ public final class IgnorantBliss extends CardImpl {
 
     }
 
-    public IgnorantBliss(final IgnorantBliss card) {
+    private IgnorantBliss(final IgnorantBliss card) {
         super(card);
     }
 

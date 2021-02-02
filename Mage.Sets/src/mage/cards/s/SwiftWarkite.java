@@ -53,7 +53,7 @@ public final class SwiftWarkite extends CardImpl {
 
     }
 
-    public SwiftWarkite(final SwiftWarkite card) {
+    private SwiftWarkite(final SwiftWarkite card) {
         super(card);
     }
 

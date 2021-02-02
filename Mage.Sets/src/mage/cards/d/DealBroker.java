@@ -38,7 +38,7 @@ public final class DealBroker extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
     }
 
-    public DealBroker(final DealBroker card) {
+    private DealBroker(final DealBroker card) {
         super(card);
     }
 

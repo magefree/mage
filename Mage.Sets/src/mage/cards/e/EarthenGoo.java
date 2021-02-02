@@ -51,7 +51,7 @@ public final class EarthenGoo extends CardImpl {
         ));
     }
 
-    public EarthenGoo(final EarthenGoo card) {
+    private EarthenGoo(final EarthenGoo card) {
         super(card);
     }
 

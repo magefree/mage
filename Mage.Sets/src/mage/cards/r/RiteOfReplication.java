@@ -30,7 +30,7 @@ public final class RiteOfReplication extends CardImpl {
                 "Create a token that's a copy of target creature. if this spell was kicked, create five of those tokens instead"));
     }
 
-    public RiteOfReplication(final RiteOfReplication card) {
+    private RiteOfReplication(final RiteOfReplication card) {
         super(card);
     }
 

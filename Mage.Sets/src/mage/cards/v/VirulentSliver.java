@@ -38,7 +38,7 @@ public final class VirulentSliver extends CardImpl {
                         "All Sliver creatures have poisonous 1. <i>(Whenever a Sliver deals combat damage to a player, that player gets a poison counter.)</i>")));
     }
 
-    public VirulentSliver(final VirulentSliver card) {
+    private VirulentSliver(final VirulentSliver card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class CorpseConnoisseur extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{3}{B}")));
     }
 
-    public CorpseConnoisseur(final CorpseConnoisseur card) {
+    private CorpseConnoisseur(final CorpseConnoisseur card) {
         super(card);
     }
 

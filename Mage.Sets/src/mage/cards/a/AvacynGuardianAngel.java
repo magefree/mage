@@ -63,7 +63,7 @@ public final class AvacynGuardianAngel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AvacynGuardianAngel(final AvacynGuardianAngel card) {
+    private AvacynGuardianAngel(final AvacynGuardianAngel card) {
         super(card);
     }
 

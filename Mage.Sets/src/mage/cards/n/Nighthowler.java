@@ -44,7 +44,7 @@ public final class Nighthowler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Nighthowler(final Nighthowler card) {
+    private Nighthowler(final Nighthowler card) {
         super(card);
     }
 

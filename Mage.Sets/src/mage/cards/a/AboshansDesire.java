@@ -44,7 +44,7 @@ public final class AboshansDesire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AboshansDesire(final AboshansDesire card) {
+    private AboshansDesire(final AboshansDesire card) {
         super(card);
     }
 

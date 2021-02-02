@@ -24,7 +24,7 @@ public final class TribalFlames extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public TribalFlames(final TribalFlames card) {
+    private TribalFlames(final TribalFlames card) {
         super(card);
     }
 

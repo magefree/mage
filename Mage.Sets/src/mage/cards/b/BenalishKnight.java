@@ -27,7 +27,7 @@ public final class BenalishKnight extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public BenalishKnight(final BenalishKnight card) {
+    private BenalishKnight(final BenalishKnight card) {
         super(card);
     }
 

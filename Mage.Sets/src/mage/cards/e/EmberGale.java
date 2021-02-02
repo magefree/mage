@@ -38,7 +38,7 @@ public final class EmberGale extends CardImpl {
 
     }
 
-    public EmberGale(final EmberGale card) {
+    private EmberGale(final EmberGale card) {
         super(card);
     }
 

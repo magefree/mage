@@ -42,7 +42,7 @@ public final class Phantasmagorian extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new DiscardTargetCost(new TargetCardInHand(3, 3, new FilterCard("three cards")))));
     }
 
-    public Phantasmagorian(final Phantasmagorian card) {
+    private Phantasmagorian(final Phantasmagorian card) {
         super(card);
     }
 

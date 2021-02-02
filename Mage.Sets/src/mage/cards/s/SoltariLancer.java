@@ -35,7 +35,7 @@ public final class SoltariLancer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), SourceAttackingCondition.instance, "{this} has first strike as long as it's attacking")));
     }
 
-    public SoltariLancer(final SoltariLancer card) {
+    private SoltariLancer(final SoltariLancer card) {
         super(card);
     }
 

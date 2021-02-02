@@ -24,7 +24,7 @@ public final class MaritimeGuard extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public MaritimeGuard(final MaritimeGuard card) {
+    private MaritimeGuard(final MaritimeGuard card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class SeedguideAsh extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 3, filter), true, false, Outcome.PutLandInPlay), true));
     }
 
-    public SeedguideAsh(final SeedguideAsh card) {
+    private SeedguideAsh(final SeedguideAsh card) {
         super(card);
     }
 

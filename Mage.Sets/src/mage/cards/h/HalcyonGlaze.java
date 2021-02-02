@@ -30,7 +30,7 @@ public final class HalcyonGlaze extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(effect, StaticFilters.FILTER_SPELL_A_CREATURE, false));
     }
 
-    public HalcyonGlaze(final HalcyonGlaze card) {
+    private HalcyonGlaze(final HalcyonGlaze card) {
         super(card);
     }
 

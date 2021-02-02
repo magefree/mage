@@ -31,7 +31,7 @@ public final class AdventuringGear extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
-    public AdventuringGear(final AdventuringGear card) {
+    private AdventuringGear(final AdventuringGear card) {
         super(card);
     }
 

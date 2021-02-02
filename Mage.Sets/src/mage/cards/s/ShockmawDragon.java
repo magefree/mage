@@ -37,7 +37,7 @@ public final class ShockmawDragon extends CardImpl {
         this.addAbility(new PolisCrusherTriggeredAbility());
     }
 
-    public ShockmawDragon(final ShockmawDragon card) {
+    private ShockmawDragon(final ShockmawDragon card) {
         super(card);
     }
 

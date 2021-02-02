@@ -36,7 +36,7 @@ public final class Farseek extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true, Outcome.PutLandInPlay));
     }
 
-    public Farseek(final Farseek card) {
+    private Farseek(final Farseek card) {
         super(card);
     }
 

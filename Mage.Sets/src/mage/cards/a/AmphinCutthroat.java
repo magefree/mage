@@ -23,7 +23,7 @@ public final class AmphinCutthroat extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public AmphinCutthroat(final AmphinCutthroat card) {
+    private AmphinCutthroat(final AmphinCutthroat card) {
         super(card);
     }
 

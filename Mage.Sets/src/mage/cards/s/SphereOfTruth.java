@@ -23,7 +23,7 @@ public final class SphereOfTruth extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageByColorEffect(ObjectColor.WHITE, 2)));
     }
 
-    public SphereOfTruth(final SphereOfTruth card) {
+    private SphereOfTruth(final SphereOfTruth card) {
         super(card);
     }
 

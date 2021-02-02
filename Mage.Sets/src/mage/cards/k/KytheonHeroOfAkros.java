@@ -55,7 +55,7 @@ public final class KytheonHeroOfAkros extends CardImpl {
 
     }
 
-    public KytheonHeroOfAkros(final KytheonHeroOfAkros card) {
+    private KytheonHeroOfAkros(final KytheonHeroOfAkros card) {
         super(card);
     }
 

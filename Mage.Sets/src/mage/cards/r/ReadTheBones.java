@@ -28,7 +28,7 @@ public final class ReadTheBones extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
-    public ReadTheBones(final ReadTheBones card) {
+    private ReadTheBones(final ReadTheBones card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class ScoriaWurm extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ScoriaWurmEffect(), TargetController.YOU, false));
     }
 
-    public ScoriaWurm(final ScoriaWurm card) {
+    private ScoriaWurm(final ScoriaWurm card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class MenacingOgre extends CardImpl {
 
     }
 
-    public MenacingOgre(final MenacingOgre card) {
+    private MenacingOgre(final MenacingOgre card) {
         super(card);
     }
 

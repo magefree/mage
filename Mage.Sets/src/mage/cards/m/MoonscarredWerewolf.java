@@ -48,7 +48,7 @@ public final class MoonscarredWerewolf extends CardImpl {
                 TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public MoonscarredWerewolf(final MoonscarredWerewolf card) {
+    private MoonscarredWerewolf(final MoonscarredWerewolf card) {
         super(card);
     }
 

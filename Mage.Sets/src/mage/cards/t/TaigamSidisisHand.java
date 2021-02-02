@@ -65,7 +65,7 @@ public final class TaigamSidisisHand extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TaigamSidisisHand(final TaigamSidisisHand card) {
+    private TaigamSidisisHand(final TaigamSidisisHand card) {
         super(card);
     }
 

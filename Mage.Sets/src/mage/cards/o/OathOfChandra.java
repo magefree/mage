@@ -52,7 +52,7 @@ public final class OathOfChandra extends CardImpl {
                 "At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, {this} deals 2 damage to each opponent."), new OathOfChandraWatcher());
     }
 
-    public OathOfChandra(final OathOfChandra card) {
+    private OathOfChandra(final OathOfChandra card) {
         super(card);
     }
 

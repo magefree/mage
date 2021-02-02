@@ -30,7 +30,7 @@ public final class DeflectingPalm extends CardImpl {
         this.getSpellAbility().addEffect(new DeflectingPalmEffect());
     }
 
-    public DeflectingPalm(final DeflectingPalm card) {
+    private DeflectingPalm(final DeflectingPalm card) {
         super(card);
     }
 

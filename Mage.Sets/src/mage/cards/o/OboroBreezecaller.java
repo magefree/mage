@@ -45,7 +45,7 @@ public final class OboroBreezecaller extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OboroBreezecaller(final OboroBreezecaller card) {
+    private OboroBreezecaller(final OboroBreezecaller card) {
         super(card);
     }
 

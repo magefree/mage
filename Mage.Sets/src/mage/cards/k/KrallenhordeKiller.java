@@ -41,7 +41,7 @@ public final class KrallenhordeKiller extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public KrallenhordeKiller(final KrallenhordeKiller card) {
+    private KrallenhordeKiller(final KrallenhordeKiller card) {
         super(card);
     }
 

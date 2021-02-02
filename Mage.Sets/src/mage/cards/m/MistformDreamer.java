@@ -32,7 +32,7 @@ public final class MistformDreamer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new BecomesChosenCreatureTypeSourceEffect(), new GenericManaCost(1)));
     }
 
-    public MistformDreamer(final MistformDreamer card) {
+    private MistformDreamer(final MistformDreamer card) {
         super(card);
     }
 

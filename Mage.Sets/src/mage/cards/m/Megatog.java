@@ -40,7 +40,7 @@ public final class Megatog extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Megatog(final Megatog card) {
+    private Megatog(final Megatog card) {
         super(card);
     }
 

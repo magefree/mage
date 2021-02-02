@@ -36,7 +36,7 @@ public final class PromiseOfBunrei extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new PromiseOfBunreiEffect(), false, filter));
     }
 
-    public PromiseOfBunrei(final PromiseOfBunrei card) {
+    private PromiseOfBunrei(final PromiseOfBunrei card) {
         super(card);
     }
 

@@ -60,7 +60,7 @@ public final class NullhideFerox extends CardImpl {
         ));
     }
 
-    public NullhideFerox(final NullhideFerox card) {
+    private NullhideFerox(final NullhideFerox card) {
         super(card);
     }
 

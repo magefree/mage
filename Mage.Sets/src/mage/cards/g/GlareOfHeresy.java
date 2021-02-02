@@ -32,7 +32,7 @@ public final class GlareOfHeresy extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public GlareOfHeresy(final GlareOfHeresy card) {
+    private GlareOfHeresy(final GlareOfHeresy card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class AmaranthineWall extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AmaranthineWall(final AmaranthineWall card) {
+    private AmaranthineWall(final AmaranthineWall card) {
         super(card);
     }
 

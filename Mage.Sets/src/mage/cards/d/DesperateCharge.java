@@ -21,7 +21,7 @@ public final class DesperateCharge extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn));
     }
 
-    public DesperateCharge(final DesperateCharge card) {
+    private DesperateCharge(final DesperateCharge card) {
         super(card);
     }
 

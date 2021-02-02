@@ -31,7 +31,7 @@ public final class Wirecat extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WirecatEffect()));
     }
 
-    public Wirecat(final Wirecat card) {
+    private Wirecat(final Wirecat card) {
         super(card);
     }
 

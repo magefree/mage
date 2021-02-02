@@ -34,7 +34,7 @@ public final class Retromancer extends CardImpl {
         this.addAbility(new RetromancerTriggeredAbility(new DamageTargetEffect(3)));
     }
 
-    public Retromancer(final Retromancer card) {
+    private Retromancer(final Retromancer card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class GuardianOfTheGateless extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(1,1, Duration.EndOfTurn),false));
     }
 
-    public GuardianOfTheGateless(final GuardianOfTheGateless card) {
+    private GuardianOfTheGateless(final GuardianOfTheGateless card) {
         super(card);
     }
 

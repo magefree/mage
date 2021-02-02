@@ -39,7 +39,7 @@ public final class OblivionStone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OblivionStone(final OblivionStone card) {
+    private OblivionStone(final OblivionStone card) {
         super(card);
     }
 

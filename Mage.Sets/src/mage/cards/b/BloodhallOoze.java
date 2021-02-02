@@ -36,7 +36,7 @@ public final class BloodhallOoze extends CardImpl {
         this.addAbility(new BloodhallOozeTriggeredAbility2());
     }
 
-    public BloodhallOoze(final BloodhallOoze card) {
+    private BloodhallOoze(final BloodhallOoze card) {
         super(card);
     }
 

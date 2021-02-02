@@ -25,7 +25,7 @@ public final class BarbarianGeneral extends CardImpl {
         this.addAbility(HorsemanshipAbility.getInstance());
     }
 
-    public BarbarianGeneral(final BarbarianGeneral card) {
+    private BarbarianGeneral(final BarbarianGeneral card) {
         super(card);
     }
 

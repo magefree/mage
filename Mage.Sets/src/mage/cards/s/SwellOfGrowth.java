@@ -26,7 +26,7 @@ public final class SwellOfGrowth extends CardImpl {
         this.getSpellAbility().addEffect(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A));
     }
 
-    public SwellOfGrowth(final SwellOfGrowth card) {
+    private SwellOfGrowth(final SwellOfGrowth card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class HammerfistGiant extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(4, filter), new TapSourceCost()));
     }
 
-    public HammerfistGiant(final HammerfistGiant card) {
+    private HammerfistGiant(final HammerfistGiant card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class EternalFlame extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
     }
 
-    public EternalFlame(final EternalFlame card) {
+    private EternalFlame(final EternalFlame card) {
         super(card);
     }
 

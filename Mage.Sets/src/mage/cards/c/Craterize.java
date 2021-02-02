@@ -23,7 +23,7 @@ public final class Craterize extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public Craterize(final Craterize card) {
+    private Craterize(final Craterize card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class DiscipleOfBolas extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscipleOfBolasEffect()));
     }
 
-    public DiscipleOfBolas(final DiscipleOfBolas card) {
+    private DiscipleOfBolas(final DiscipleOfBolas card) {
         super(card);
     }
 

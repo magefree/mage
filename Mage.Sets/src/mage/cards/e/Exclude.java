@@ -28,7 +28,7 @@ public final class Exclude extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Exclude(final Exclude card) {
+    private Exclude(final Exclude card) {
         super(card);
     }
 

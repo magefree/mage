@@ -37,7 +37,7 @@ public final class RenewingDawn extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public RenewingDawn(final RenewingDawn card) {
+    private RenewingDawn(final RenewingDawn card) {
         super(card);
     }
 

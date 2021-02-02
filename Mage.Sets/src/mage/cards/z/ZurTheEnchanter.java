@@ -43,7 +43,7 @@ public final class ZurTheEnchanter extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false), true));
     }
 
-    public ZurTheEnchanter(final ZurTheEnchanter card) {
+    private ZurTheEnchanter(final ZurTheEnchanter card) {
         super(card);
     }
 

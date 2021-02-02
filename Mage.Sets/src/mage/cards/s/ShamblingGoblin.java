@@ -41,7 +41,7 @@ public final class ShamblingGoblin extends CardImpl {
 
     }
 
-    public ShamblingGoblin(final ShamblingGoblin card) {
+    private ShamblingGoblin(final ShamblingGoblin card) {
         super(card);
     }
 

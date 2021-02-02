@@ -37,7 +37,7 @@ public final class EnslavedHorror extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EnslavedHorrorEffect()));
     }
 
-    public EnslavedHorror(final EnslavedHorror card) {
+    private EnslavedHorror(final EnslavedHorror card) {
         super(card);
     }
 

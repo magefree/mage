@@ -34,7 +34,7 @@ public final class CaptainsClaws extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
-    public CaptainsClaws(final CaptainsClaws card) {
+    private CaptainsClaws(final CaptainsClaws card) {
         super(card);
     }
 

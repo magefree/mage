@@ -25,7 +25,7 @@ public final class SlinkingSerpent extends CardImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public SlinkingSerpent(final SlinkingSerpent card) {
+    private SlinkingSerpent(final SlinkingSerpent card) {
         super(card);
     }
 

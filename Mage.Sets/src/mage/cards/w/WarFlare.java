@@ -24,7 +24,7 @@ public final class WarFlare extends CardImpl {
         this.getSpellAbility().addEffect(new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, "Untap those creatures"));
     }
 
-    public WarFlare(final WarFlare card) {
+    private WarFlare(final WarFlare card) {
         super(card);
     }
 

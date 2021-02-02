@@ -44,7 +44,7 @@ public final class MetamorphicAlteration extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MetamorphicAlterationEffect()));
     }
 
-    public MetamorphicAlteration(final MetamorphicAlteration card) {
+    private MetamorphicAlteration(final MetamorphicAlteration card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class AnglerDrake extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AnglerDrake(final AnglerDrake card) {
+    private AnglerDrake(final AnglerDrake card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class Deathgreeter extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new GainLifeEffect(1), true, true));
     }
 
-    public Deathgreeter(final Deathgreeter card) {
+    private Deathgreeter(final Deathgreeter card) {
         super(card);
     }
 

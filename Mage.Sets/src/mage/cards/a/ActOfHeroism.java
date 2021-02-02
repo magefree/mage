@@ -39,7 +39,7 @@ public final class ActOfHeroism extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ActOfHeroism(final ActOfHeroism card) {
+    private ActOfHeroism(final ActOfHeroism card) {
         super(card);
     }
 

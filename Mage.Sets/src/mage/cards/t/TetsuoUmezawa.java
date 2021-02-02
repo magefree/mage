@@ -55,7 +55,7 @@ public final class TetsuoUmezawa extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TetsuoUmezawa(final TetsuoUmezawa card) {
+    private TetsuoUmezawa(final TetsuoUmezawa card) {
         super(card);
     }
 

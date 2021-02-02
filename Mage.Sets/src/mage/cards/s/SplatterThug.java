@@ -33,7 +33,7 @@ public final class SplatterThug extends CardImpl {
         
     }
  
-    public SplatterThug(final SplatterThug card) {
+    private SplatterThug(final SplatterThug card) {
         super(card);
     }
  

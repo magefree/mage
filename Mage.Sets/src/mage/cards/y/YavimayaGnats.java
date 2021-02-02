@@ -31,7 +31,7 @@ public final class YavimayaGnats extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
     }
 
-    public YavimayaGnats(final YavimayaGnats card) {
+    private YavimayaGnats(final YavimayaGnats card) {
         super(card);
     }
 

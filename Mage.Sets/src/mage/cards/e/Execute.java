@@ -34,7 +34,7 @@ public final class Execute extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Execute(final Execute card) {
+    private Execute(final Execute card) {
         super(card);
     }
 

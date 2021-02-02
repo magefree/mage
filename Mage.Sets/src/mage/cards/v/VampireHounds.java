@@ -34,7 +34,7 @@ public final class VampireHounds extends CardImpl {
                 new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE))));
     }
 
-    public VampireHounds(final VampireHounds card) {
+    private VampireHounds(final VampireHounds card) {
         super(card);
     }
 

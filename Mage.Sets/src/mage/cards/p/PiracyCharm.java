@@ -39,7 +39,7 @@ public final class PiracyCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public PiracyCharm(final PiracyCharm card) {
+    private PiracyCharm(final PiracyCharm card) {
         super(card);
     }
 

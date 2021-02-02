@@ -27,7 +27,7 @@ public final class RishadanFootpad extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeOpponentsUnlessPayEffect(2)));
     }
 
-    public RishadanFootpad(final RishadanFootpad card) {
+    private RishadanFootpad(final RishadanFootpad card) {
         super(card);
     }
 

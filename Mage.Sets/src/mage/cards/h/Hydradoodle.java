@@ -48,7 +48,7 @@ public final class Hydradoodle extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public Hydradoodle(final Hydradoodle card) {
+    private Hydradoodle(final Hydradoodle card) {
         super(card);
     }
 

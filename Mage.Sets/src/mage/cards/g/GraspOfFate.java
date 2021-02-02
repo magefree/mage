@@ -41,7 +41,7 @@ public final class GraspOfFate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GraspOfFate(final GraspOfFate card) {
+    private GraspOfFate(final GraspOfFate card) {
         super(card);
     }
 

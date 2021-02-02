@@ -43,7 +43,7 @@ public final class BudokaGardener extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BudokaGardener(final BudokaGardener card) {
+    private BudokaGardener(final BudokaGardener card) {
         super(card);
     }
 

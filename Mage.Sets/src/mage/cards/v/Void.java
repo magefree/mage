@@ -31,7 +31,7 @@ public final class Void extends CardImpl {
         this.getSpellAbility().addEffect(new VoidEffect());
     }
 
-    public Void(final Void card) {
+    private Void(final Void card) {
         super(card);
     }
 

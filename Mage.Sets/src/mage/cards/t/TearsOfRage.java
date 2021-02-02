@@ -42,7 +42,7 @@ public final class TearsOfRage extends CardImpl {
         getSpellAbility().addEffect(new TearsOfRageEffect());
     }
 
-    public TearsOfRage(final TearsOfRage card) {
+    private TearsOfRage(final TearsOfRage card) {
         super(card);
     }
 

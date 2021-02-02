@@ -43,7 +43,7 @@ public final class HomingSliver extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}"), filter, "Slivercycling"));
     }
 
-    public HomingSliver(final HomingSliver card) {
+    private HomingSliver(final HomingSliver card) {
         super(card);
     }
 

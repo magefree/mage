@@ -44,7 +44,7 @@ public final class MurderousSpoils extends CardImpl {
         
     }
 
-    public MurderousSpoils(final MurderousSpoils card) {
+    private MurderousSpoils(final MurderousSpoils card) {
         super(card);
     }
 

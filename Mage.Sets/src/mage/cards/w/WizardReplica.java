@@ -36,7 +36,7 @@ public final class WizardReplica extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WizardReplica(final WizardReplica card) {
+    private WizardReplica(final WizardReplica card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class SpitefulShadows extends CardImpl {
                 false, SetTargetPointer.PERMANENT));
     }
 
-    public SpitefulShadows(final SpitefulShadows card) {
+    private SpitefulShadows(final SpitefulShadows card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class PainsReward extends CardImpl {
         this.getSpellAbility().addEffect(new PainsRewardEffect());
     }
 
-    public PainsReward(final PainsReward card) {
+    private PainsReward(final PainsReward card) {
         super(card);
     }
 

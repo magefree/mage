@@ -37,7 +37,7 @@ public final class Martyrdom extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
-    public Martyrdom(final Martyrdom card) {
+    private Martyrdom(final Martyrdom card) {
         super(card);
     }
 

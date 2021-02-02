@@ -46,7 +46,7 @@ public final class BoseijuWhoSheltersAll extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new BoseijuWhoSheltersAllCantCounterEffect()));
     }
 
-    public BoseijuWhoSheltersAll(final BoseijuWhoSheltersAll card) {
+    private BoseijuWhoSheltersAll(final BoseijuWhoSheltersAll card) {
         super(card);
     }
 

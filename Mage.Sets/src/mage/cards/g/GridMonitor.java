@@ -33,7 +33,7 @@ public final class GridMonitor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GridMonitorEffect()));
     }
 
-    public GridMonitor(final GridMonitor card) {
+    private GridMonitor(final GridMonitor card) {
         super(card);
     }
 

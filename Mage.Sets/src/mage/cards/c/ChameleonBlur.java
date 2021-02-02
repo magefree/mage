@@ -25,7 +25,7 @@ public final class ChameleonBlur extends CardImpl {
         this.getSpellAbility().addEffect(new ChameleonBlurEffect());
     }
 
-    public ChameleonBlur(final ChameleonBlur card) {
+    private ChameleonBlur(final ChameleonBlur card) {
         super(card);
     }
 

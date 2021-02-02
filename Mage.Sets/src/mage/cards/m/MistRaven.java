@@ -34,7 +34,7 @@ public final class MistRaven extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MistRaven(final MistRaven card) {
+    private MistRaven(final MistRaven card) {
         super(card);
     }
 

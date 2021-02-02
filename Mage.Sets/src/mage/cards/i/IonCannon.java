@@ -38,7 +38,7 @@ public final class IonCannon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IonCannon(final IonCannon card) {
+    private IonCannon(final IonCannon card) {
         super(card);
     }
 

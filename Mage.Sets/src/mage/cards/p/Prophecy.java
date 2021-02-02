@@ -36,7 +36,7 @@ public final class Prophecy extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public Prophecy(final Prophecy card) {
+    private Prophecy(final Prophecy card) {
         super(card);
     }
 

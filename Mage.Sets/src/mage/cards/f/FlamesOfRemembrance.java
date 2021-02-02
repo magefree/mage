@@ -41,7 +41,7 @@ public final class FlamesOfRemembrance extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FlamesOfRemembranceExileEffect(new CountersSourceCount(CounterType.LORE)), new SacrificeSourceCost()));
     }
 
-    public FlamesOfRemembrance(final FlamesOfRemembrance card) {
+    private FlamesOfRemembrance(final FlamesOfRemembrance card) {
         super(card);
     }
 

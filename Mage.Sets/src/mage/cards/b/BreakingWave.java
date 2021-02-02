@@ -35,7 +35,7 @@ public final class BreakingWave extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public BreakingWave(final BreakingWave card) {
+    private BreakingWave(final BreakingWave card) {
         super(card);
     }
 

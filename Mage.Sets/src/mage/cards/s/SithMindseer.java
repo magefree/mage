@@ -46,7 +46,7 @@ public final class SithMindseer extends CardImpl {
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }
 
-    public SithMindseer(final SithMindseer card) {
+    private SithMindseer(final SithMindseer card) {
         super(card);
     }
 

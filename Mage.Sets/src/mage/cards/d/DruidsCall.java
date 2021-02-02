@@ -44,7 +44,7 @@ public final class DruidsCall extends CardImpl {
         this.addAbility(new DealtDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
     }
 
-    public DruidsCall(final DruidsCall card) {
+    private DruidsCall(final DruidsCall card) {
         super(card);
     }
 

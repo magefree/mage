@@ -47,7 +47,7 @@ public final class ArensonsAura extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArensonsAura(final ArensonsAura card) {
+    private ArensonsAura(final ArensonsAura card) {
         super(card);
     }
 

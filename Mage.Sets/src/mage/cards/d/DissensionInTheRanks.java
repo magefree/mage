@@ -40,7 +40,7 @@ public final class DissensionInTheRanks extends CardImpl {
         this.getSpellAbility().addTarget(target2);
     }
 
-    public DissensionInTheRanks(final DissensionInTheRanks card) {
+    private DissensionInTheRanks(final DissensionInTheRanks card) {
         super(card);
     }
 

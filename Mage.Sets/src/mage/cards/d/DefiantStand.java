@@ -39,7 +39,7 @@ public final class DefiantStand extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public DefiantStand(final DefiantStand card) {
+    private DefiantStand(final DefiantStand card) {
         super(card);
     }
 

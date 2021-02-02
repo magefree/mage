@@ -48,7 +48,7 @@ public final class JarOfEyeballs extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JarOfEyeballs(final JarOfEyeballs card) {
+    private JarOfEyeballs(final JarOfEyeballs card) {
         super(card);
     }
 

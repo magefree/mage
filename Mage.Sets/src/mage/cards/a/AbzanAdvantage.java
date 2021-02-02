@@ -26,7 +26,7 @@ public final class AbzanAdvantage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public AbzanAdvantage(final AbzanAdvantage card) {
+    private AbzanAdvantage(final AbzanAdvantage card) {
         super(card);
     }
 

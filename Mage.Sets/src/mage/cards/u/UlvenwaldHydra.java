@@ -49,7 +49,7 @@ public final class UlvenwaldHydra extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(target, true, true, Outcome.PutLandInPlay), true));
     }
 
-    public UlvenwaldHydra(final UlvenwaldHydra card) {
+    private UlvenwaldHydra(final UlvenwaldHydra card) {
         super(card);
     }
 

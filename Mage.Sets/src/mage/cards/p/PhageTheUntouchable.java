@@ -48,7 +48,7 @@ public final class PhageTheUntouchable extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseGameTargetPlayerEffect(), false, true));
     }
 
-    public PhageTheUntouchable(final PhageTheUntouchable card) {
+    private PhageTheUntouchable(final PhageTheUntouchable card) {
         super(card);
     }
 

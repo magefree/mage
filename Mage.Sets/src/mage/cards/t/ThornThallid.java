@@ -40,7 +40,7 @@ public final class ThornThallid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThornThallid(final ThornThallid card) {
+    private ThornThallid(final ThornThallid card) {
         super(card);
     }
 

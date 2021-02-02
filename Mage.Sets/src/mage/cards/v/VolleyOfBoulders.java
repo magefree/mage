@@ -28,7 +28,7 @@ public final class VolleyOfBoulders extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{R}{R}{R}{R}{R}{R}"),TimingRule.SORCERY));
     }
 
-    public VolleyOfBoulders(final VolleyOfBoulders card) {
+    private VolleyOfBoulders(final VolleyOfBoulders card) {
         super(card);
     }
 

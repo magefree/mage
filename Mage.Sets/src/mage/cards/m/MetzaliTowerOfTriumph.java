@@ -61,7 +61,7 @@ public final class MetzaliTowerOfTriumph extends CardImpl {
 
     }
 
-    public MetzaliTowerOfTriumph(final MetzaliTowerOfTriumph card) {
+    private MetzaliTowerOfTriumph(final MetzaliTowerOfTriumph card) {
         super(card);
     }
 

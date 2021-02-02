@@ -40,7 +40,7 @@ public final class ConsumeStrength extends CardImpl {
         this.getSpellAbility().addTarget(target2);
     }
 
-    public ConsumeStrength(final ConsumeStrength card) {
+    private ConsumeStrength(final ConsumeStrength card) {
         super(card);
     }
 

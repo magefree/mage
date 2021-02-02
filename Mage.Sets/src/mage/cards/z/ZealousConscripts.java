@@ -38,7 +38,7 @@ public final class ZealousConscripts extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZealousConscripts(final ZealousConscripts card) {
+    private ZealousConscripts(final ZealousConscripts card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class RagingSwordtooth extends CardImpl {
         addAbility(new EntersBattlefieldTriggeredAbility(new DamageAllEffect(1, "it", filter)));
     }
 
-    public RagingSwordtooth(final RagingSwordtooth card) {
+    private RagingSwordtooth(final RagingSwordtooth card) {
         super(card);
     }
 

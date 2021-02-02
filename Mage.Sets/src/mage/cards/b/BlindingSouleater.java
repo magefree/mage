@@ -37,7 +37,7 @@ public final class BlindingSouleater extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlindingSouleater(final BlindingSouleater card) {
+    private BlindingSouleater(final BlindingSouleater card) {
         super(card);
     }
 

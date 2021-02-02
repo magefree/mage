@@ -38,7 +38,7 @@ public final class KeldonWarlord extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public KeldonWarlord(final KeldonWarlord card) {
+    private KeldonWarlord(final KeldonWarlord card) {
         super(card);
     }
 

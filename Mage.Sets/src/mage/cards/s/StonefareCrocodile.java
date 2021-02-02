@@ -31,7 +31,7 @@ public final class StonefareCrocodile extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{2}{B}")));
     }
 
-    public StonefareCrocodile(final StonefareCrocodile card) {
+    private StonefareCrocodile(final StonefareCrocodile card) {
         super(card);
     }
 

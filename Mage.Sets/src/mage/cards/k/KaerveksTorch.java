@@ -38,7 +38,7 @@ public final class KaerveksTorch extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public KaerveksTorch(final KaerveksTorch card) {
+    private KaerveksTorch(final KaerveksTorch card) {
         super(card);
     }
 

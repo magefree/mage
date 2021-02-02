@@ -29,7 +29,7 @@ public final class HauntingHymn extends CardImpl {
 
     }
 
-    public HauntingHymn(final HauntingHymn card) {
+    private HauntingHymn(final HauntingHymn card) {
         super(card);
     }
 

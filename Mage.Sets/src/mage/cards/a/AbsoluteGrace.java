@@ -27,7 +27,7 @@ public final class AbsoluteGrace extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, FILTER_PERMANENT_CREATURES, false)));
     }
 
-    public AbsoluteGrace(final AbsoluteGrace card) {
+    private AbsoluteGrace(final AbsoluteGrace card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class RoaringPrimadox extends CardImpl {
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent())));
     }
 
-    public RoaringPrimadox(final RoaringPrimadox card) {
+    private RoaringPrimadox(final RoaringPrimadox card) {
         super(card);
     }
 

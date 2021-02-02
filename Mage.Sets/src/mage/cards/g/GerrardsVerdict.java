@@ -29,7 +29,7 @@ public final class GerrardsVerdict extends CardImpl {
 
     }
 
-    public GerrardsVerdict(final GerrardsVerdict card) {
+    private GerrardsVerdict(final GerrardsVerdict card) {
         super(card);
     }
 

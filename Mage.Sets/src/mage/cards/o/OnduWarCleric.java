@@ -47,7 +47,7 @@ public final class OnduWarCleric extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OnduWarCleric(final OnduWarCleric card) {
+    private OnduWarCleric(final OnduWarCleric card) {
         super(card);
     }
 

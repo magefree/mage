@@ -27,7 +27,7 @@ public final class SnareTheSkies extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SnareTheSkies(final SnareTheSkies card) {
+    private SnareTheSkies(final SnareTheSkies card) {
         super(card);
     }
 

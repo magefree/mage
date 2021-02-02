@@ -30,7 +30,7 @@ public final class PrimitiveEtchings extends CardImpl {
         this.addAbility(new PrimitiveEtchingsAbility());
     }
 
-    public PrimitiveEtchings(final PrimitiveEtchings card) {
+    private PrimitiveEtchings(final PrimitiveEtchings card) {
         super(card);
     }
 

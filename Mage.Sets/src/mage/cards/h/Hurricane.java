@@ -31,7 +31,7 @@ public final class Hurricane extends CardImpl {
         this.getSpellAbility().addEffect(new DamageEverythingEffect(ManacostVariableValue.instance, filter));
     }
 
-    public Hurricane(final Hurricane card) {
+    private Hurricane(final Hurricane card) {
         super(card);
     }
 

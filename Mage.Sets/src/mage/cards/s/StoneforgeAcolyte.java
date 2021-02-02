@@ -54,7 +54,7 @@ public final class StoneforgeAcolyte extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StoneforgeAcolyte(final StoneforgeAcolyte card) {
+    private StoneforgeAcolyte(final StoneforgeAcolyte card) {
         super(card);
     }
 

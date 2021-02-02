@@ -50,7 +50,7 @@ public final class ConsulsShieldguard extends CardImpl {
 
     }
 
-    public ConsulsShieldguard(final ConsulsShieldguard card) {
+    private ConsulsShieldguard(final ConsulsShieldguard card) {
         super(card);
     }
 

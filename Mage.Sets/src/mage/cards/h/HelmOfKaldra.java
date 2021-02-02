@@ -66,7 +66,7 @@ public final class HelmOfKaldra extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.Benefit, new ManaCostsImpl("{2}")));
     }
 
-    public HelmOfKaldra(final HelmOfKaldra card) {
+    private HelmOfKaldra(final HelmOfKaldra card) {
         super(card);
     }
 

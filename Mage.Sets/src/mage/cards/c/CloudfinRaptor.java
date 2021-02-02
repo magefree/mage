@@ -32,7 +32,7 @@ public final class CloudfinRaptor extends CardImpl {
         this.addAbility(new EvolveAbility());
     }
 
-    public CloudfinRaptor(final CloudfinRaptor card) {
+    private CloudfinRaptor(final CloudfinRaptor card) {
         super(card);
     }
 

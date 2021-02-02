@@ -42,7 +42,7 @@ public final class CageOfHands extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{W}")));
     }
 
-    public CageOfHands(final CageOfHands card) {
+    private CageOfHands(final CageOfHands card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class MentalNote extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public MentalNote(final MentalNote card) {
+    private MentalNote(final MentalNote card) {
         super(card);
     }
 

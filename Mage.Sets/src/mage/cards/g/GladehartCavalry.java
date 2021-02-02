@@ -38,7 +38,7 @@ public final class GladehartCavalry extends CardImpl {
         this.addAbility(new GladehartCavalryTriggeredAbility());
     }
 
-    public GladehartCavalry(final GladehartCavalry card) {
+    private GladehartCavalry(final GladehartCavalry card) {
         super(card);
     }
 

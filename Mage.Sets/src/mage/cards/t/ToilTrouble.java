@@ -33,7 +33,7 @@ public final class ToilTrouble extends SplitCard {
 
     }
 
-    public ToilTrouble(final ToilTrouble card) {
+    private ToilTrouble(final ToilTrouble card) {
         super(card);
     }
 

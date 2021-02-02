@@ -34,7 +34,7 @@ public final class Nullify extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public Nullify(final Nullify card) {
+    private Nullify(final Nullify card) {
         super(card);
     }
 

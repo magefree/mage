@@ -26,7 +26,7 @@ public final class FeiyiSnake extends CardImpl {
 
     }
 
-    public FeiyiSnake(final FeiyiSnake card) {
+    private FeiyiSnake(final FeiyiSnake card) {
         super(card);
     }
 

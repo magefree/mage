@@ -39,7 +39,7 @@ public final class Flight extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public Flight(final Flight card) {
+    private Flight(final Flight card) {
         super(card);
     }
 

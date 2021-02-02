@@ -30,7 +30,7 @@ public final class WhiptongueFrog extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}")));
     }
 
-    public WhiptongueFrog(final WhiptongueFrog card) {
+    private WhiptongueFrog(final WhiptongueFrog card) {
         super(card);
     }
 

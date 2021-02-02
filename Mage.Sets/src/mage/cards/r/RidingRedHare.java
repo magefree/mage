@@ -31,7 +31,7 @@ public final class RidingRedHare extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public RidingRedHare(final RidingRedHare card) {
+    private RidingRedHare(final RidingRedHare card) {
         super(card);
     }
 

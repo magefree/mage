@@ -28,7 +28,7 @@ public final class MerchantOfSecrets extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public MerchantOfSecrets(final MerchantOfSecrets card) {
+    private MerchantOfSecrets(final MerchantOfSecrets card) {
         super(card);
     }
 

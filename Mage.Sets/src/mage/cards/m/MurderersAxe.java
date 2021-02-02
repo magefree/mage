@@ -30,7 +30,7 @@ public final class MurderersAxe extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new DiscardCardCost()));
     }
 
-    public MurderersAxe(final MurderersAxe card) {
+    private MurderersAxe(final MurderersAxe card) {
         super(card);
     }
 

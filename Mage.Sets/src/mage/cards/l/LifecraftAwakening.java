@@ -43,7 +43,7 @@ public final class LifecraftAwakening extends CardImpl {
         getSpellAbility().addEffect(new LifecraftAwakeningEffect());
     }
 
-    public LifecraftAwakening(final LifecraftAwakening card) {
+    private LifecraftAwakening(final LifecraftAwakening card) {
         super(card);
     }
 

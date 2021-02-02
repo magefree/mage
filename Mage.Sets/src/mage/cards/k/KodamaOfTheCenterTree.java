@@ -39,7 +39,7 @@ public final class KodamaOfTheCenterTree extends CardImpl {
         this.addAbility(new SoulshiftAbility(new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public KodamaOfTheCenterTree(final KodamaOfTheCenterTree card) {
+    private KodamaOfTheCenterTree(final KodamaOfTheCenterTree card) {
         super(card);
     }
 

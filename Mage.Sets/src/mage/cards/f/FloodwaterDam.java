@@ -33,7 +33,7 @@ public final class FloodwaterDam extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FloodwaterDam(final FloodwaterDam card) {
+    private FloodwaterDam(final FloodwaterDam card) {
         super(card);
     }
 

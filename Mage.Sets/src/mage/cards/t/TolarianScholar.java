@@ -23,7 +23,7 @@ public final class TolarianScholar extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public TolarianScholar(final TolarianScholar card) {
+    private TolarianScholar(final TolarianScholar card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class DeadlyGrub extends CardImpl {
                 LastTimeCounterRemovedCondition.instance, "When {this} dies, if it had no time counters on it, create a 6/1 green Insect creature token with shroud."));
     }
 
-    public DeadlyGrub(final DeadlyGrub card) {
+    private DeadlyGrub(final DeadlyGrub card) {
         super(card);
     }
 

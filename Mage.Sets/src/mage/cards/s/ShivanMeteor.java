@@ -27,7 +27,7 @@ public final class ShivanMeteor extends CardImpl {
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{1}{R}{R}"), this));
     }
 
-    public ShivanMeteor(final ShivanMeteor card) {
+    private ShivanMeteor(final ShivanMeteor card) {
         super(card);
     }
 

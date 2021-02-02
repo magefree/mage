@@ -28,7 +28,7 @@ public final class DesecratedTomb extends CardImpl {
         this.addAbility(new DesecratedTombTriggeredAbility());
     }
 
-    public DesecratedTomb(final DesecratedTomb card) {
+    private DesecratedTomb(final DesecratedTomb card) {
         super(card);
     }
 

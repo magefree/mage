@@ -27,7 +27,7 @@ public final class WallOfAir extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WallOfAir(final WallOfAir card) {
+    private WallOfAir(final WallOfAir card) {
         super(card);
     }
 

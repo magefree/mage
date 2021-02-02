@@ -45,7 +45,7 @@ public final class EntomberExarch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EntomberExarch(final EntomberExarch card) {
+    private EntomberExarch(final EntomberExarch card) {
         super(card);
     }
 

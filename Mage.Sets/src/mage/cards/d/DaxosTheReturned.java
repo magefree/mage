@@ -48,7 +48,7 @@ public final class DaxosTheReturned extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DaxosSpiritToken(), 1), new ManaCostsImpl("{1}{W}{B}")));
     }
 
-    public DaxosTheReturned(final DaxosTheReturned card) {
+    private DaxosTheReturned(final DaxosTheReturned card) {
         super(card);
     }
 

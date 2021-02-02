@@ -21,7 +21,7 @@ public final class GrimFlowering extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE)));
     }
 
-    public GrimFlowering(final GrimFlowering card) {
+    private GrimFlowering(final GrimFlowering card) {
         super(card);
     }
 

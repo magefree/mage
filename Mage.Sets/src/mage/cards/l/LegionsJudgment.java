@@ -31,7 +31,7 @@ public final class LegionsJudgment extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public LegionsJudgment(final LegionsJudgment card) {
+    private LegionsJudgment(final LegionsJudgment card) {
         super(card);
     }
 

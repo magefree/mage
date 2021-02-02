@@ -49,7 +49,7 @@ public final class DoubleHeader extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DoubleHeader(final DoubleHeader card) {
+    private DoubleHeader(final DoubleHeader card) {
         super(card);
     }
 

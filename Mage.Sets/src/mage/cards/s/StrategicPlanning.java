@@ -24,7 +24,7 @@ public final class StrategicPlanning extends CardImpl {
                 StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false));
     }
 
-    public StrategicPlanning(final StrategicPlanning card) {
+    private StrategicPlanning(final StrategicPlanning card) {
         super(card);
     }
 

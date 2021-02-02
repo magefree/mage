@@ -29,7 +29,7 @@ public final class Extinguish extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
-    public Extinguish(final Extinguish card) {
+    private Extinguish(final Extinguish card) {
         super(card);
     }
 

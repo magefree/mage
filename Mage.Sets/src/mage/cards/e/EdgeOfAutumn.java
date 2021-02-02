@@ -38,7 +38,7 @@ public final class EdgeOfAutumn extends CardImpl {
         this.addAbility(new CyclingAbility(new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public EdgeOfAutumn(final EdgeOfAutumn card) {
+    private EdgeOfAutumn(final EdgeOfAutumn card) {
         super(card);
     }
 

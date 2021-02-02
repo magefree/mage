@@ -30,7 +30,7 @@ public final class ArcticWolves extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public ArcticWolves(final ArcticWolves card) {
+    private ArcticWolves(final ArcticWolves card) {
         super(card);
     }
 

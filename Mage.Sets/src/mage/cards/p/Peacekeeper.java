@@ -34,7 +34,7 @@ public final class Peacekeeper extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PeacekeeperCantAttackEffect()));
     }
 
-    public Peacekeeper(final Peacekeeper card) {
+    private Peacekeeper(final Peacekeeper card) {
         super(card);
     }
 

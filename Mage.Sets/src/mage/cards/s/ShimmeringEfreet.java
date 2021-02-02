@@ -38,7 +38,7 @@ public final class ShimmeringEfreet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShimmeringEfreet(final ShimmeringEfreet card) {
+    private ShimmeringEfreet(final ShimmeringEfreet card) {
         super(card);
     }
 

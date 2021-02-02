@@ -48,7 +48,7 @@ public final class SquirrelWrangler extends CardImpl {
 
     }
 
-    public SquirrelWrangler(final SquirrelWrangler card) {
+    private SquirrelWrangler(final SquirrelWrangler card) {
         super(card);
     }
 

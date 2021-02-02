@@ -37,7 +37,7 @@ public final class WildMammoth extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WildMammothEffect(), TargetController.YOU, false));
     }
 
-    public WildMammoth(final WildMammoth card) {
+    private WildMammoth(final WildMammoth card) {
         super(card);
     }
 

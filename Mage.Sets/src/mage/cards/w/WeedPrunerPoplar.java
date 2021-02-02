@@ -41,7 +41,7 @@ public final class WeedPrunerPoplar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WeedPrunerPoplar(final WeedPrunerPoplar card) {
+    private WeedPrunerPoplar(final WeedPrunerPoplar card) {
         super(card);
     }
 

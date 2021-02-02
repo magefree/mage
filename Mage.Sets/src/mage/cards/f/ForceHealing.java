@@ -27,7 +27,7 @@ public final class ForceHealing extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public ForceHealing(final ForceHealing card) {
+    private ForceHealing(final ForceHealing card) {
         super(card);
     }
 

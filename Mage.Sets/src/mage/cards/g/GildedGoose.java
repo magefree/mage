@@ -58,7 +58,7 @@ public final class GildedGoose extends CardImpl {
         this.addAbility(ability1);
     }
 
-    public GildedGoose(final GildedGoose card) {
+    private GildedGoose(final GildedGoose card) {
         super(card);
     }
 

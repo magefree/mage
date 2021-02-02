@@ -31,7 +31,7 @@ public final class TransguildPromenade extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public TransguildPromenade(final TransguildPromenade card) {
+    private TransguildPromenade(final TransguildPromenade card) {
         super(card);
     }
 

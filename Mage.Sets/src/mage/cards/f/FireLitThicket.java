@@ -37,7 +37,7 @@ public final class FireLitThicket extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FireLitThicket(final FireLitThicket card) {
+    private FireLitThicket(final FireLitThicket card) {
         super(card);
     }
 

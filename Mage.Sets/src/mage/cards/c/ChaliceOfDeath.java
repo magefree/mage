@@ -30,7 +30,7 @@ public final class ChaliceOfDeath extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChaliceOfDeath(final ChaliceOfDeath card) {
+    private ChaliceOfDeath(final ChaliceOfDeath card) {
         super(card);
     }
 

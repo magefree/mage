@@ -40,7 +40,7 @@ public final class FloodtideSerpent extends CardImpl {
 
     }
 
-    public FloodtideSerpent(final FloodtideSerpent card) {
+    private FloodtideSerpent(final FloodtideSerpent card) {
         super(card);
     }
 

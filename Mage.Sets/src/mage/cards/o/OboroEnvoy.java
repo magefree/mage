@@ -47,7 +47,7 @@ public final class OboroEnvoy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OboroEnvoy(final OboroEnvoy card) {
+    private OboroEnvoy(final OboroEnvoy card) {
         super(card);
     }
 

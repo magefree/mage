@@ -39,7 +39,7 @@ public final class PinToTheEarth extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-6,-0,Duration.WhileOnBattlefield)));
     }
 
-    public PinToTheEarth(final PinToTheEarth card) {
+    private PinToTheEarth(final PinToTheEarth card) {
         super(card);
     }
 

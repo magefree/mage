@@ -27,7 +27,7 @@ public final class CenterSoul extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public CenterSoul(final CenterSoul card) {
+    private CenterSoul(final CenterSoul card) {
         super(card);
     }
 

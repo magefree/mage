@@ -23,7 +23,7 @@ public final class StrawSoldiers extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public StrawSoldiers(final StrawSoldiers card) {
+    private StrawSoldiers(final StrawSoldiers card) {
         super(card);
     }
 

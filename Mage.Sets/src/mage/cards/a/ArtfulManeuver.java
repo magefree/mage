@@ -27,7 +27,7 @@ public final class ArtfulManeuver extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public ArtfulManeuver(final ArtfulManeuver card) {
+    private ArtfulManeuver(final ArtfulManeuver card) {
         super(card);
     }
 

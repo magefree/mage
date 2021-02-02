@@ -33,7 +33,7 @@ public final class OrcishSpy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrcishSpy(final OrcishSpy card) {
+    private OrcishSpy(final OrcishSpy card) {
         super(card);
     }
 

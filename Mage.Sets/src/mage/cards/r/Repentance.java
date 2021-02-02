@@ -27,7 +27,7 @@ public final class Repentance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Repentance(final Repentance card) {
+    private Repentance(final Repentance card) {
         super(card);
     }
 

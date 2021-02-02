@@ -34,7 +34,7 @@ public final class MoldgrafScavenger extends CardImpl {
                 .addHint(DeliriumHint.instance));
     }
 
-    public MoldgrafScavenger(final MoldgrafScavenger card) {
+    private MoldgrafScavenger(final MoldgrafScavenger card) {
         super(card);
     }
 

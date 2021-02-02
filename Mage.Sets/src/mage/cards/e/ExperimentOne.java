@@ -35,7 +35,7 @@ public final class ExperimentOne extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
     }
 
-    public ExperimentOne(final ExperimentOne card) {
+    private ExperimentOne(final ExperimentOne card) {
         super(card);
     }
 

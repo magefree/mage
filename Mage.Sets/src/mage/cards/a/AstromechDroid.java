@@ -51,7 +51,7 @@ public final class AstromechDroid extends CardImpl {
         this.addAbility(new RepairAbility(4));
     }
 
-    public AstromechDroid(final AstromechDroid card) {
+    private AstromechDroid(final AstromechDroid card) {
         super(card);
     }
 

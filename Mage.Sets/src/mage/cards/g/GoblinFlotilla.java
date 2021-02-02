@@ -55,7 +55,7 @@ public final class GoblinFlotilla extends CardImpl {
 
     }
 
-    public GoblinFlotilla(final GoblinFlotilla card) {
+    private GoblinFlotilla(final GoblinFlotilla card) {
         super(card);
     }
 

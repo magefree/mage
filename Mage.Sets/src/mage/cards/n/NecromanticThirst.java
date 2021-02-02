@@ -42,7 +42,7 @@ public final class NecromanticThirst extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NecromanticThirst(final NecromanticThirst card) {
+    private NecromanticThirst(final NecromanticThirst card) {
         super(card);
     }
 

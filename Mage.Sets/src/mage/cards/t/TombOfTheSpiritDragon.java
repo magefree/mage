@@ -39,7 +39,7 @@ public final class TombOfTheSpiritDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TombOfTheSpiritDragon(final TombOfTheSpiritDragon card) {
+    private TombOfTheSpiritDragon(final TombOfTheSpiritDragon card) {
         super(card);
     }
 

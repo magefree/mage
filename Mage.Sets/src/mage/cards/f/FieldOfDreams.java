@@ -24,7 +24,7 @@ public final class FieldOfDreams extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect(true)));
     }
 
-    public FieldOfDreams(final FieldOfDreams card) {
+    private FieldOfDreams(final FieldOfDreams card) {
         super(card);
     }
 

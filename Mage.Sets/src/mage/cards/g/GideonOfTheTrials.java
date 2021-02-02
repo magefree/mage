@@ -54,7 +54,7 @@ public final class GideonOfTheTrials extends CardImpl {
 
     }
 
-    public GideonOfTheTrials(final GideonOfTheTrials card) {
+    private GideonOfTheTrials(final GideonOfTheTrials card) {
         super(card);
     }
 

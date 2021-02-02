@@ -39,7 +39,7 @@ public final class ApexHawks extends CardImpl {
                 ,"with a +1/+1 counter on it for each time it was kicked"));
     }
 
-    public ApexHawks(final ApexHawks card) {
+    private ApexHawks(final ApexHawks card) {
         super(card);
     }
 

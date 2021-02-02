@@ -34,7 +34,7 @@ public final class AlabasterMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AlabasterMage(final AlabasterMage card) {
+    private AlabasterMage(final AlabasterMage card) {
         super(card);
     }
 

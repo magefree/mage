@@ -37,7 +37,7 @@ public final class SanctumOfTheSun extends CardImpl {
 
     }
 
-    public SanctumOfTheSun(final SanctumOfTheSun card) {
+    private SanctumOfTheSun(final SanctumOfTheSun card) {
         super(card);
     }
 

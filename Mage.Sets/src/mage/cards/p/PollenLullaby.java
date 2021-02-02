@@ -35,7 +35,7 @@ public final class PollenLullaby extends CardImpl {
         this.getSpellAbility().addEffect(new DoIfClashWonEffect(new PollenLullabyEffect(), true, null));
     }
 
-    public PollenLullaby(final PollenLullaby card) {
+    private PollenLullaby(final PollenLullaby card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class BorGullet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BorGullet(final BorGullet card) {
+    private BorGullet(final BorGullet card) {
         super(card);
     }
 

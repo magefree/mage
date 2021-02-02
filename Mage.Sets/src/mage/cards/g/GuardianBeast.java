@@ -58,7 +58,7 @@ public final class GuardianBeast extends CardImpl {
 
     }
 
-    public GuardianBeast(final GuardianBeast card) {
+    private GuardianBeast(final GuardianBeast card) {
         super(card);
     }
 

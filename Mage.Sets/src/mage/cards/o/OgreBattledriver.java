@@ -49,7 +49,7 @@ public final class OgreBattledriver extends CardImpl {
         
     }
 
-    public OgreBattledriver(final OgreBattledriver card) {
+    private OgreBattledriver(final OgreBattledriver card) {
         super(card);
     }
 

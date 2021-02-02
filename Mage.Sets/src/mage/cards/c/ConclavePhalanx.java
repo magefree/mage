@@ -33,7 +33,7 @@ public final class ConclavePhalanx extends CardImpl {
                 new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE))));
     }
 
-    public ConclavePhalanx(final ConclavePhalanx card) {
+    private ConclavePhalanx(final ConclavePhalanx card) {
         super(card);
     }
 

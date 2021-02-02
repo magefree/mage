@@ -38,7 +38,7 @@ public final class SunkenCity extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public SunkenCity(final SunkenCity card) {
+    private SunkenCity(final SunkenCity card) {
         super(card);
     }
 

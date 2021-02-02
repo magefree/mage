@@ -29,7 +29,7 @@ public final class ChangelingTitan extends CardImpl {
         this.addAbility(new ChampionAbility(this, true));
     }
 
-    public ChangelingTitan(final ChangelingTitan card) {
+    private ChangelingTitan(final ChangelingTitan card) {
         super(card);
     }
 

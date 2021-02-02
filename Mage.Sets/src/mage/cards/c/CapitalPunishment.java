@@ -29,7 +29,7 @@ public final class CapitalPunishment extends CardImpl {
         this.getSpellAbility().addEffect(new CapitalPunishmentDilemmaEffect());
     }
 
-    public CapitalPunishment(final CapitalPunishment card) {
+    private CapitalPunishment(final CapitalPunishment card) {
         super(card);
     }
 

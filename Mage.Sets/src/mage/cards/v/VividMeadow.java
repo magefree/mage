@@ -34,7 +34,7 @@ public final class VividMeadow extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VividMeadow(final VividMeadow card) {
+    private VividMeadow(final VividMeadow card) {
         super(card);
     }
 

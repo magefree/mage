@@ -45,7 +45,7 @@ public final class OrderOfTheSacredTorch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrderOfTheSacredTorch(final OrderOfTheSacredTorch card) {
+    private OrderOfTheSacredTorch(final OrderOfTheSacredTorch card) {
         super(card);
     }
 

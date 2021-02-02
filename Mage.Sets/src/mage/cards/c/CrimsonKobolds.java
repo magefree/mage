@@ -22,7 +22,7 @@ public final class CrimsonKobolds extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public CrimsonKobolds(final CrimsonKobolds card) {
+    private CrimsonKobolds(final CrimsonKobolds card) {
         super(card);
     }
 

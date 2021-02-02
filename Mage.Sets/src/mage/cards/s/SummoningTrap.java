@@ -39,7 +39,7 @@ public final class SummoningTrap extends CardImpl {
         this.getSpellAbility().addEffect(new SummoningTrapEffect());
     }
 
-    public SummoningTrap(final SummoningTrap card) {
+    private SummoningTrap(final SummoningTrap card) {
         super(card);
     }
 

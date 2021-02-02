@@ -32,7 +32,7 @@ public final class WingSnare extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public WingSnare(final WingSnare card) {
+    private WingSnare(final WingSnare card) {
         super(card);
     }
 

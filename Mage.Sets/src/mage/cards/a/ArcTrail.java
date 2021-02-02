@@ -42,7 +42,7 @@ public final class ArcTrail extends CardImpl {
         this.getSpellAbility().addEffect(ArcTrailEffect.getInstance());
     }
 
-    public ArcTrail(final ArcTrail card) {
+    private ArcTrail(final ArcTrail card) {
         super(card);
     }
 

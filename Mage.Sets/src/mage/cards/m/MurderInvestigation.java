@@ -42,7 +42,7 @@ public final class MurderInvestigation extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new CreateTokenEffect(new SoldierToken(), new AttachedPermanentPowerCount()), "enchanted creature"));
     }
 
-    public MurderInvestigation(final MurderInvestigation card) {
+    private MurderInvestigation(final MurderInvestigation card) {
         super(card);
     }
 

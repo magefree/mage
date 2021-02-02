@@ -34,7 +34,7 @@ public final class LightningVolley extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public LightningVolley(final LightningVolley card) {
+    private LightningVolley(final LightningVolley card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class IncreasingAmbition extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{B}"), TimingRule.SORCERY));
     }
 
-    public IncreasingAmbition(final IncreasingAmbition card) {
+    private IncreasingAmbition(final IncreasingAmbition card) {
         super(card);
     }
 

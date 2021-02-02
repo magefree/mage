@@ -30,7 +30,7 @@ public final class RayOfErasure extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false));
     }
 
-    public RayOfErasure(final RayOfErasure card) {
+    private RayOfErasure(final RayOfErasure card) {
         super(card);
     }
 

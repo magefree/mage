@@ -42,7 +42,7 @@ public final class InfernalMedusa extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(effect, filter, false));
     }
 
-    public InfernalMedusa(final InfernalMedusa card) {
+    private InfernalMedusa(final InfernalMedusa card) {
         super(card);
     }
 

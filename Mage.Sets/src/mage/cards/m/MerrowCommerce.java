@@ -31,7 +31,7 @@ public final class MerrowCommerce extends CardImpl {
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new UntapAllControllerEffect(filter, "untap all Merfolk you control"), false));
     }
 
-    public MerrowCommerce(final MerrowCommerce card) {
+    private MerrowCommerce(final MerrowCommerce card) {
         super(card);
     }
 

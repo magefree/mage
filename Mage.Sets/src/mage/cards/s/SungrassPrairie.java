@@ -27,7 +27,7 @@ public final class SungrassPrairie extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SungrassPrairie(final SungrassPrairie card) {
+    private SungrassPrairie(final SungrassPrairie card) {
         super(card);
     }
 

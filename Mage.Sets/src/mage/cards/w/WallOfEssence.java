@@ -38,7 +38,7 @@ public final class WallOfEssence extends CardImpl {
         this.addAbility(new WallOfEssenceTriggeredAbility());
     }
 
-    public WallOfEssence(final WallOfEssence card) {
+    private WallOfEssence(final WallOfEssence card) {
         super(card);
     }
 

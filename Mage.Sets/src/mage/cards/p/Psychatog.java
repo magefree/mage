@@ -37,7 +37,7 @@ public final class Psychatog extends CardImpl {
 
     }
 
-    public Psychatog(final Psychatog card) {
+    private Psychatog(final Psychatog card) {
         super(card);
     }
 

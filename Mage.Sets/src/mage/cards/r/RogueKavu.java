@@ -27,7 +27,7 @@ public final class RogueKavu extends CardImpl {
         this.addAbility(new AttacksAloneTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn)));
     }
 
-    public RogueKavu(final RogueKavu card) {
+    private RogueKavu(final RogueKavu card) {
         super(card);
     }
 

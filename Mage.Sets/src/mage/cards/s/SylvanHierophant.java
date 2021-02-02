@@ -46,7 +46,7 @@ public final class SylvanHierophant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SylvanHierophant(final SylvanHierophant card) {
+    private SylvanHierophant(final SylvanHierophant card) {
         super(card);
     }
 

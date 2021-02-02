@@ -28,7 +28,7 @@ public final class HorseshoeCrab extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ColoredManaCost(ColoredManaSymbol.U)));
     }
 
-    public HorseshoeCrab(final HorseshoeCrab card) {
+    private HorseshoeCrab(final HorseshoeCrab card) {
         super(card);
     }
 

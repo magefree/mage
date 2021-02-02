@@ -41,7 +41,7 @@ public final class VeteranExplorer extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new VeteranExplorerEffect()));
     }
 
-    public VeteranExplorer(final VeteranExplorer card) {
+    private VeteranExplorer(final VeteranExplorer card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class OakenBrawler extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfClashWonEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()))));
     }
 
-    public OakenBrawler(final OakenBrawler card) {
+    private OakenBrawler(final OakenBrawler card) {
         super(card);
     }
 

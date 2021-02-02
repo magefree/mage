@@ -46,7 +46,7 @@ public final class MaintenanceHangar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MaintenanceHangar(final MaintenanceHangar card) {
+    private MaintenanceHangar(final MaintenanceHangar card) {
         super(card);
     }
 

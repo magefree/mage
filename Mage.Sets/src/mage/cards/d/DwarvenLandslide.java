@@ -40,7 +40,7 @@ public final class DwarvenLandslide extends CardImpl {
         getSpellAbility().setTargetAdjuster(DwarvenLandslideAdjuster.instance);
     }
 
-    public DwarvenLandslide(final DwarvenLandslide card) {
+    private DwarvenLandslide(final DwarvenLandslide card) {
         super(card);
     }
 

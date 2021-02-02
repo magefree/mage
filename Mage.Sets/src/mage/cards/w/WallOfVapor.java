@@ -39,7 +39,7 @@ public final class WallOfVapor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WallOfVaporEffect()));
     }
 
-    public WallOfVapor(final WallOfVapor card) {
+    private WallOfVapor(final WallOfVapor card) {
         super(card);
     }
 

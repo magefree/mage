@@ -27,7 +27,7 @@ public final class SandsteppeScavenger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BolsterEffect(2), false));
     }
 
-    public SandsteppeScavenger(final SandsteppeScavenger card) {
+    private SandsteppeScavenger(final SandsteppeScavenger card) {
         super(card);
     }
 

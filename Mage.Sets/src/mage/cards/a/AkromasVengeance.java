@@ -33,7 +33,7 @@ public final class AkromasVengeance extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public AkromasVengeance(final AkromasVengeance card) {
+    private AkromasVengeance(final AkromasVengeance card) {
         super(card);
     }
 

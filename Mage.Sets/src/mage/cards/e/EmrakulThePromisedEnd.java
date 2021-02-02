@@ -65,7 +65,7 @@ public final class EmrakulThePromisedEnd extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public EmrakulThePromisedEnd(final EmrakulThePromisedEnd card) {
+    private EmrakulThePromisedEnd(final EmrakulThePromisedEnd card) {
         super(card);
     }
 

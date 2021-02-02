@@ -25,7 +25,7 @@ public final class UnwindingClock extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnwindingClockEffect()));
     }
 
-    public UnwindingClock(final UnwindingClock card) {
+    private UnwindingClock(final UnwindingClock card) {
         super(card);
     }
 

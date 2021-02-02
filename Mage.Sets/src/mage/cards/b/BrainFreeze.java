@@ -26,7 +26,7 @@ public final class BrainFreeze extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public BrainFreeze(final BrainFreeze card) {
+    private BrainFreeze(final BrainFreeze card) {
         super(card);
     }
 

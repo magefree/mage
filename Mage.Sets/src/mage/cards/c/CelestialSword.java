@@ -34,7 +34,7 @@ public final class CelestialSword extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CelestialSword(final CelestialSword card) {
+    private CelestialSword(final CelestialSword card) {
         super(card);
     }
 

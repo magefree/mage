@@ -39,7 +39,7 @@ public final class DarienKingOfKjeldor extends CardImpl {
         this.addAbility(new DarienKingOfKjeldorTriggeredAbility());
     }
 
-    public DarienKingOfKjeldor(final DarienKingOfKjeldor card) {
+    private DarienKingOfKjeldor(final DarienKingOfKjeldor card) {
         super(card);
     }
 

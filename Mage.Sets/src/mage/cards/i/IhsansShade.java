@@ -29,7 +29,7 @@ public final class IhsansShade extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
     }
 
-    public IhsansShade(final IhsansShade card) {
+    private IhsansShade(final IhsansShade card) {
         super(card);
     }
 

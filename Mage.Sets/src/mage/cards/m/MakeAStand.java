@@ -30,7 +30,7 @@ public final class MakeAStand extends CardImpl {
         this.getSpellAbility().addEffect(effect2);
     }
 
-    public MakeAStand(final MakeAStand card) {
+    private MakeAStand(final MakeAStand card) {
         super(card);
     }
 

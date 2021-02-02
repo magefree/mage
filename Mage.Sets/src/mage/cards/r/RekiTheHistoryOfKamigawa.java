@@ -36,7 +36,7 @@ public final class RekiTheHistoryOfKamigawa extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
     }
 
-    public RekiTheHistoryOfKamigawa(final RekiTheHistoryOfKamigawa card) {
+    private RekiTheHistoryOfKamigawa(final RekiTheHistoryOfKamigawa card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class DrakeFamiliar extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrakeFamiliarEffect()));
     }
 
-    public DrakeFamiliar(final DrakeFamiliar card) {
+    private DrakeFamiliar(final DrakeFamiliar card) {
         super(card);
     }
 

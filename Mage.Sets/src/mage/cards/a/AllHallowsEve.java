@@ -40,7 +40,7 @@ public final class AllHallowsEve extends CardImpl {
 
     }
 
-    public AllHallowsEve(final AllHallowsEve card) {
+    private AllHallowsEve(final AllHallowsEve card) {
         super(card);
     }
 

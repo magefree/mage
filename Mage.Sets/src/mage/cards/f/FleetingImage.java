@@ -32,7 +32,7 @@ public final class FleetingImage extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{U}")));
     }
 
-    public FleetingImage(final FleetingImage card) {
+    private FleetingImage(final FleetingImage card) {
         super(card);
     }
 

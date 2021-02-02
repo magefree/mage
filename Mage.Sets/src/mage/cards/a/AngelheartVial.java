@@ -41,7 +41,7 @@ public final class AngelheartVial extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AngelheartVial(final AngelheartVial card) {
+    private AngelheartVial(final AngelheartVial card) {
         super(card);
     }
 

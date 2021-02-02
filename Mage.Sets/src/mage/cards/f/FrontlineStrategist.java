@@ -40,7 +40,7 @@ public final class FrontlineStrategist extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true).setText("prevent all combat damage non-Soldier creatures would deal this turn")));
     }
 
-    public FrontlineStrategist(final FrontlineStrategist card) {
+    private FrontlineStrategist(final FrontlineStrategist card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class ThoughtpickerWitch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThoughtpickerWitch(final ThoughtpickerWitch card) {
+    private ThoughtpickerWitch(final ThoughtpickerWitch card) {
         super(card);
     }
 

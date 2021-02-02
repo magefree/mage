@@ -27,7 +27,7 @@ public final class NoxiousToad extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT), false));
     }
 
-    public NoxiousToad(final NoxiousToad card) {
+    private NoxiousToad(final NoxiousToad card) {
         super(card);
     }
 

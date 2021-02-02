@@ -44,7 +44,7 @@ public final class FallOfTheThran extends CardImpl {
         this.addAbility(sagaAbility);
     }
 
-    public FallOfTheThran(final FallOfTheThran card) {
+    private FallOfTheThran(final FallOfTheThran card) {
         super(card);
     }
 

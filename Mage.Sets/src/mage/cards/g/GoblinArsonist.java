@@ -32,7 +32,7 @@ public final class GoblinArsonist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinArsonist(final GoblinArsonist card) {
+    private GoblinArsonist(final GoblinArsonist card) {
         super(card);
     }
 

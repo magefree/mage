@@ -38,7 +38,7 @@ public final class SoldeviMachinist extends CardImpl {
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 2, new SoldeviMachinistManaBuilder()));
     }
 
-    public SoldeviMachinist(final SoldeviMachinist card) {
+    private SoldeviMachinist(final SoldeviMachinist card) {
         super(card);
     }
 

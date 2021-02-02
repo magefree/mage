@@ -39,7 +39,7 @@ public final class DiveBomber extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DiveBomber(final DiveBomber card) {
+    private DiveBomber(final DiveBomber card) {
         super(card);
     }
 

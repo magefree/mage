@@ -24,7 +24,7 @@ public final class FailedInspection extends CardImpl {
         this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(1, 1));
     }
 
-    public FailedInspection(final FailedInspection card) {
+    private FailedInspection(final FailedInspection card) {
         super(card);
     }
 

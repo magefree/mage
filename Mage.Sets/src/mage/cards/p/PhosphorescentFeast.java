@@ -35,7 +35,7 @@ public final class PhosphorescentFeast extends CardImpl {
 
     }
 
-    public PhosphorescentFeast(final PhosphorescentFeast card) {
+    private PhosphorescentFeast(final PhosphorescentFeast card) {
         super(card);
     }
 

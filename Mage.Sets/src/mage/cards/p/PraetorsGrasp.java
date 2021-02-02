@@ -31,7 +31,7 @@ public final class PraetorsGrasp extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public PraetorsGrasp(final PraetorsGrasp card) {
+    private PraetorsGrasp(final PraetorsGrasp card) {
         super(card);
     }
 

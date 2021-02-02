@@ -59,7 +59,7 @@ public final class GideonJura extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public GideonJura(final GideonJura card) {
+    private GideonJura(final GideonJura card) {
         super(card);
     }
 

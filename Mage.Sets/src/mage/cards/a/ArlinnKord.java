@@ -57,7 +57,7 @@ public final class ArlinnKord extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArlinnKord(final ArlinnKord card) {
+    private ArlinnKord(final ArlinnKord card) {
         super(card);
     }
 

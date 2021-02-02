@@ -51,7 +51,7 @@ public final class Toymaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Toymaker(final Toymaker card) {
+    private Toymaker(final Toymaker card) {
         super(card);
     }
 

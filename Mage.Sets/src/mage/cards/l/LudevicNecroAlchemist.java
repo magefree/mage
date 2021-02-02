@@ -41,7 +41,7 @@ public final class LudevicNecroAlchemist extends CardImpl {
         this.addAbility(PartnerAbility.getInstance());
     }
 
-    public LudevicNecroAlchemist(final LudevicNecroAlchemist card) {
+    private LudevicNecroAlchemist(final LudevicNecroAlchemist card) {
         super(card);
     }
 

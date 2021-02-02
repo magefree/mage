@@ -20,7 +20,7 @@ public final class SeethingSong extends CardImpl {
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.RedMana(5)));
     }
 
-    public SeethingSong(final SeethingSong card) {
+    private SeethingSong(final SeethingSong card) {
         super(card);
     }
 

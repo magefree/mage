@@ -33,7 +33,7 @@ public final class TranquilGrove extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter), new ManaCostsImpl("{1}{G}{G}")));
     }
 
-    public TranquilGrove(final TranquilGrove card) {
+    private TranquilGrove(final TranquilGrove card) {
         super(card);
     }
 

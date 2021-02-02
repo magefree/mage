@@ -27,7 +27,7 @@ public final class TelekineticBonds extends CardImpl {
 
     }
 
-    public TelekineticBonds(final TelekineticBonds card) {
+    private TelekineticBonds(final TelekineticBonds card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class CultivatorsCaravan extends CardImpl {
         this.addAbility(new CrewAbility(3));
     }
 
-    public CultivatorsCaravan(final CultivatorsCaravan card) {
+    private CultivatorsCaravan(final CultivatorsCaravan card) {
         super(card);
     }
 

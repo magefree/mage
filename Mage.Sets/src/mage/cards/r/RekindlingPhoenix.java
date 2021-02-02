@@ -32,7 +32,7 @@ public final class RekindlingPhoenix extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new RekindlingPhoenixToken()), false));
     }
 
-    public RekindlingPhoenix(final RekindlingPhoenix card) {
+    private RekindlingPhoenix(final RekindlingPhoenix card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class DjerusRenunciation extends CardImpl {
 
     }
 
-    public DjerusRenunciation(final DjerusRenunciation card) {
+    private DjerusRenunciation(final DjerusRenunciation card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class LotusPathDjinn extends CardImpl {
         this.addAbility(new ProwessAbility());
     }
 
-    public LotusPathDjinn(final LotusPathDjinn card) {
+    private LotusPathDjinn(final LotusPathDjinn card) {
         super(card);
     }
 

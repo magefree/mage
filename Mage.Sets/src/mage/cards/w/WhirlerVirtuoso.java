@@ -35,7 +35,7 @@ public final class WhirlerVirtuoso extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterColorlessToken()), new PayEnergyCost(3)));
     }
 
-    public WhirlerVirtuoso(final WhirlerVirtuoso card) {
+    private WhirlerVirtuoso(final WhirlerVirtuoso card) {
         super(card);
     }
 

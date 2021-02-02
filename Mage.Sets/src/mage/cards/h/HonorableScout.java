@@ -43,7 +43,7 @@ public final class HonorableScout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HonorableScout(final HonorableScout card) {
+    private HonorableScout(final HonorableScout card) {
         super(card);
     }
 

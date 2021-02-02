@@ -30,7 +30,7 @@ public final class DaruLancer extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{W}{W}")));
     }
 
-    public DaruLancer(final DaruLancer card) {
+    private DaruLancer(final DaruLancer card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class VerduranEnchantress extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, true));
     }
 
-    public VerduranEnchantress(final VerduranEnchantress card) {
+    private VerduranEnchantress(final VerduranEnchantress card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class SkulkingFugitive extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public SkulkingFugitive(final SkulkingFugitive card) {
+    private SkulkingFugitive(final SkulkingFugitive card) {
         super(card);
     }
 

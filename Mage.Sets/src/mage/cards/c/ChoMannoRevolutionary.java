@@ -30,7 +30,7 @@ public final class ChoMannoRevolutionary extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToSourceEffect(Duration.WhileOnBattlefield)));
     }
 
-    public ChoMannoRevolutionary(final ChoMannoRevolutionary card) {
+    private ChoMannoRevolutionary(final ChoMannoRevolutionary card) {
         super(card);
     }
 

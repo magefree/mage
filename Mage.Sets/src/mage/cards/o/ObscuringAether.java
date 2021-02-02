@@ -40,7 +40,7 @@ public final class ObscuringAether extends CardImpl {
 
     }
 
-    public ObscuringAether(final ObscuringAether card) {
+    private ObscuringAether(final ObscuringAether card) {
         super(card);
     }
 

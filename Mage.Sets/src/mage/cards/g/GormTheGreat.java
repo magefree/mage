@@ -41,7 +41,7 @@ public final class GormTheGreat extends CardImpl {
                 .setText("{this} must be blocked if able, and {this} must be blocked by two or more creatures if able")));
     }
 
-    public GormTheGreat(final GormTheGreat card) {
+    private GormTheGreat(final GormTheGreat card) {
         super(card);
     }
 

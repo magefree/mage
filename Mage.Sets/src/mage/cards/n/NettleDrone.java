@@ -47,7 +47,7 @@ public final class NettleDrone extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filterSpell, false));
     }
 
-    public NettleDrone(final NettleDrone card) {
+    private NettleDrone(final NettleDrone card) {
         super(card);
     }
 

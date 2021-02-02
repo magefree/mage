@@ -38,7 +38,7 @@ public final class InTheWebOfWar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InTheWebOfWar(final InTheWebOfWar card) {
+    private InTheWebOfWar(final InTheWebOfWar card) {
         super(card);
     }
 

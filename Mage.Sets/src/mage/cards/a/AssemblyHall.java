@@ -39,7 +39,7 @@ public final class AssemblyHall extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AssemblyHall(final AssemblyHall card) {
+    private AssemblyHall(final AssemblyHall card) {
         super(card);
     }
 

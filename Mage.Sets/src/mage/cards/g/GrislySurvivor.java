@@ -29,7 +29,7 @@ public final class GrislySurvivor extends CardImpl {
         addAbility(new CycleOrDiscardControllerTriggeredAbility(new BoostSourceEffect(2,0,Duration.EndOfTurn)));
     }
 
-    public GrislySurvivor(final GrislySurvivor card) {
+    private GrislySurvivor(final GrislySurvivor card) {
         super(card);
     }
 

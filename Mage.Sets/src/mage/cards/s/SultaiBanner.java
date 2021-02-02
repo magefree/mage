@@ -37,7 +37,7 @@ public final class SultaiBanner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SultaiBanner(final SultaiBanner card) {
+    private SultaiBanner(final SultaiBanner card) {
         super(card);
     }
 

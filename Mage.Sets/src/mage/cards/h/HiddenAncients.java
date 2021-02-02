@@ -41,7 +41,7 @@ public final class HiddenAncients extends CardImpl {
                 "When an opponent casts an enchantment spell, if {this} is an enchantment, {this} becomes a 5/5 Treefolk creature."));
     }
 
-    public HiddenAncients(final HiddenAncients card) {
+    private HiddenAncients(final HiddenAncients card) {
         super(card);
     }
 

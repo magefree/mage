@@ -45,7 +45,7 @@ public final class NayaSojourners extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{G}")));
     }
 
-    public NayaSojourners(final NayaSojourners card) {
+    private NayaSojourners(final NayaSojourners card) {
         super(card);
     }
 

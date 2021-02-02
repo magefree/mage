@@ -31,7 +31,7 @@ public final class TravelersAmulet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TravelersAmulet(final TravelersAmulet card) {
+    private TravelersAmulet(final TravelersAmulet card) {
         super(card);
     }
 

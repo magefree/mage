@@ -27,7 +27,7 @@ public final class SuddenImpact extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public SuddenImpact(final SuddenImpact card) {
+    private SuddenImpact(final SuddenImpact card) {
         super(card);
     }
 

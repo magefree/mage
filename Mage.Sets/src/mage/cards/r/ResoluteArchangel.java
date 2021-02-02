@@ -37,7 +37,7 @@ public final class ResoluteArchangel extends CardImpl {
                 "if your life total is lower than your starting life total, it becomes equal to your starting life total")));
     }
 
-    public ResoluteArchangel(final ResoluteArchangel card) {
+    private ResoluteArchangel(final ResoluteArchangel card) {
         super(card);
     }
 

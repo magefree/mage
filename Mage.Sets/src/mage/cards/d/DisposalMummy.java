@@ -35,7 +35,7 @@ public final class DisposalMummy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DisposalMummy(final DisposalMummy card) {
+    private DisposalMummy(final DisposalMummy card) {
         super(card);
     }
 

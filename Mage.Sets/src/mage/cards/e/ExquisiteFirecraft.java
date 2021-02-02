@@ -36,7 +36,7 @@ public final class ExquisiteFirecraft extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ExquisiteFirecraft(final ExquisiteFirecraft card) {
+    private ExquisiteFirecraft(final ExquisiteFirecraft card) {
         super(card);
     }
 

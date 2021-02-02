@@ -50,7 +50,7 @@ public final class KnightOfAutumn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KnightOfAutumn(final KnightOfAutumn card) {
+    private KnightOfAutumn(final KnightOfAutumn card) {
         super(card);
     }
 

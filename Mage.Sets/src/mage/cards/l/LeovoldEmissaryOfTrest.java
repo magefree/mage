@@ -38,7 +38,7 @@ public final class LeovoldEmissaryOfTrest extends CardImpl {
         this.addAbility(new LeovoldEmissaryOfTrestTriggeredAbility());
     }
 
-    public LeovoldEmissaryOfTrest(final LeovoldEmissaryOfTrest card) {
+    private LeovoldEmissaryOfTrest(final LeovoldEmissaryOfTrest card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class StormCrow extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public StormCrow(final StormCrow card) {
+    private StormCrow(final StormCrow card) {
         super(card);
     }
 

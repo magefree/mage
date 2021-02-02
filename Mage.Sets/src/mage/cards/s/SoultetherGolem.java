@@ -53,7 +53,7 @@ public final class SoultetherGolem extends CardImpl {
                 false));
     }
 
-    public SoultetherGolem(final SoultetherGolem card) {
+    private SoultetherGolem(final SoultetherGolem card) {
         super(card);
     }
 

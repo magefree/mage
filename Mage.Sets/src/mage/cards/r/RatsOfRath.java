@@ -49,7 +49,7 @@ public final class RatsOfRath extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RatsOfRath(final RatsOfRath card) {
+    private RatsOfRath(final RatsOfRath card) {
         super(card);
     }
 

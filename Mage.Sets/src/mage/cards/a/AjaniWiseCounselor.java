@@ -49,7 +49,7 @@ public final class AjaniWiseCounselor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AjaniWiseCounselor(final AjaniWiseCounselor card) {
+    private AjaniWiseCounselor(final AjaniWiseCounselor card) {
         super(card);
     }
 

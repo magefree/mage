@@ -32,7 +32,7 @@ public final class IllusionsOfGrandeur extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(20), false));
     }
 
-    public IllusionsOfGrandeur(final IllusionsOfGrandeur card) {
+    private IllusionsOfGrandeur(final IllusionsOfGrandeur card) {
         super(card);
     }
 

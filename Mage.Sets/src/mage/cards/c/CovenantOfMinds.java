@@ -29,7 +29,7 @@ public final class CovenantOfMinds extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public CovenantOfMinds(final CovenantOfMinds card) {
+    private CovenantOfMinds(final CovenantOfMinds card) {
         super(card);
     }
 

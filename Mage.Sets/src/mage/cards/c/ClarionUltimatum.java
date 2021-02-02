@@ -32,7 +32,7 @@ public final class ClarionUltimatum extends CardImpl {
         this.getSpellAbility().addEffect(new ClarionUltimatumEffect());
     }
 
-    public ClarionUltimatum(final ClarionUltimatum card) {
+    private ClarionUltimatum(final ClarionUltimatum card) {
         super(card);
     }
 

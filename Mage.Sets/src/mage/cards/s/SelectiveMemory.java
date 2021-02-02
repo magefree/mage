@@ -28,7 +28,7 @@ public final class SelectiveMemory extends CardImpl {
         this.getSpellAbility().addEffect(new SelectiveMemoryEffect());
     }
 
-    public SelectiveMemory(final SelectiveMemory card) {
+    private SelectiveMemory(final SelectiveMemory card) {
         super(card);
     }
 

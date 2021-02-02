@@ -43,7 +43,7 @@ public final class NerfHerder extends CardImpl {
 
     }
 
-    public NerfHerder(final NerfHerder card) {
+    private NerfHerder(final NerfHerder card) {
         super(card);
     }
 

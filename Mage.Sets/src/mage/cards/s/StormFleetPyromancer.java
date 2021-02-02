@@ -42,7 +42,7 @@ public final class StormFleetPyromancer extends CardImpl {
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public StormFleetPyromancer(final StormFleetPyromancer card) {
+    private StormFleetPyromancer(final StormFleetPyromancer card) {
         super(card);
     }
 

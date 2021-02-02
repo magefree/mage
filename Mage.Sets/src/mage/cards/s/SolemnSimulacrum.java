@@ -33,7 +33,7 @@ public final class SolemnSimulacrum extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
-    public SolemnSimulacrum(final SolemnSimulacrum card) {
+    private SolemnSimulacrum(final SolemnSimulacrum card) {
         super(card);
     }
 

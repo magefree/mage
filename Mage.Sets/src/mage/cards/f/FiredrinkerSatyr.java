@@ -40,7 +40,7 @@ public final class FiredrinkerSatyr extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FiredrinkerSatyr(final FiredrinkerSatyr card) {
+    private FiredrinkerSatyr(final FiredrinkerSatyr card) {
         super(card);
     }
 

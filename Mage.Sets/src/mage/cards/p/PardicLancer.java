@@ -40,7 +40,7 @@ public final class PardicLancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PardicLancer(final PardicLancer card) {
+    private PardicLancer(final PardicLancer card) {
         super(card);
     }
 

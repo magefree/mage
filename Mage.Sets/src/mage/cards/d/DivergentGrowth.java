@@ -29,7 +29,7 @@ public final class DivergentGrowth extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public DivergentGrowth(final DivergentGrowth card) {
+    private DivergentGrowth(final DivergentGrowth card) {
         super(card);
     }
 

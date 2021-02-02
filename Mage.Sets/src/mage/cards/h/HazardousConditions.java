@@ -30,7 +30,7 @@ public final class HazardousConditions extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn, filter, false));
     }
 
-    public HazardousConditions(final HazardousConditions card) {
+    private HazardousConditions(final HazardousConditions card) {
         super(card);
     }
 

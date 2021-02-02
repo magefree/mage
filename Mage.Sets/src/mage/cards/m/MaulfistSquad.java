@@ -30,7 +30,7 @@ public final class MaulfistSquad extends CardImpl {
         this.addAbility(new FabricateAbility(1));
     }
 
-    public MaulfistSquad(final MaulfistSquad card) {
+    private MaulfistSquad(final MaulfistSquad card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class DeputyOfAcquittals extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeputyOfAcquittals(final DeputyOfAcquittals card) {
+    private DeputyOfAcquittals(final DeputyOfAcquittals card) {
         super(card);
     }
 

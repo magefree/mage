@@ -45,7 +45,7 @@ public final class SavageSummoning extends CardImpl {
 
     }
 
-    public SavageSummoning(final SavageSummoning card) {
+    private SavageSummoning(final SavageSummoning card) {
         super(card);
     }
 

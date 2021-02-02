@@ -39,7 +39,7 @@ public final class RibbonsOfNight extends CardImpl {
                 new ManaWasSpentCondition(ColoredManaSymbol.U), "If {U} was spent to cast this spell, draw a card"));
     }
 
-    public RibbonsOfNight(final RibbonsOfNight card) {
+    private RibbonsOfNight(final RibbonsOfNight card) {
         super(card);
     }
 

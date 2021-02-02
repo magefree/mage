@@ -47,7 +47,7 @@ public final class NagaOracle extends CardImpl {
         addAbility(new EntersBattlefieldTriggeredAbility(effect));
     }
 
-    public NagaOracle(final NagaOracle card) {
+    private NagaOracle(final NagaOracle card) {
         super(card);
     }
 

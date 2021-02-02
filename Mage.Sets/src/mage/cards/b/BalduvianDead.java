@@ -44,7 +44,7 @@ public final class BalduvianDead extends CardImpl {
 
     }
 
-    public BalduvianDead(final BalduvianDead card) {
+    private BalduvianDead(final BalduvianDead card) {
         super(card);
     }
 

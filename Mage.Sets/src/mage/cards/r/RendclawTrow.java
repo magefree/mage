@@ -29,7 +29,7 @@ public final class RendclawTrow extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public RendclawTrow(final RendclawTrow card) {
+    private RendclawTrow(final RendclawTrow card) {
         super(card);
     }
 

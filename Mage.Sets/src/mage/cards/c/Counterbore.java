@@ -24,7 +24,7 @@ public final class Counterbore extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetAndSearchGraveyardHandLibraryEffect());
     }
 
-    public Counterbore(final Counterbore card) {
+    private Counterbore(final Counterbore card) {
         super(card);
     }
 

@@ -68,7 +68,7 @@ public final class ArchangelAvacyn extends CardImpl {
 
     }
 
-    public ArchangelAvacyn(final ArchangelAvacyn card) {
+    private ArchangelAvacyn(final ArchangelAvacyn card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class CarvenCaryatid extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public CarvenCaryatid(final CarvenCaryatid card) {
+    private CarvenCaryatid(final CarvenCaryatid card) {
         super(card);
     }
 

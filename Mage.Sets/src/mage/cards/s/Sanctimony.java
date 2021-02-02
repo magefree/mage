@@ -33,7 +33,7 @@ public final class Sanctimony extends CardImpl {
         this.addAbility(new TapForManaAllTriggeredAbility(new GainLifeEffect(1), filter, SetTargetPointer.NONE));
     }
 
-    public Sanctimony(final Sanctimony card) {
+    private Sanctimony(final Sanctimony card) {
         super(card);
     }
 

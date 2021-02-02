@@ -38,7 +38,7 @@ public final class BibFortuna extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ShuffleLibrarySourceEffect()));
     }
 
-    public BibFortuna(final BibFortuna card) {
+    private BibFortuna(final BibFortuna card) {
         super(card);
     }
 

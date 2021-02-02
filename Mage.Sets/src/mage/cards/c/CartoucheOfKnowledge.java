@@ -48,7 +48,7 @@ public final class CartoucheOfKnowledge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CartoucheOfKnowledge(final CartoucheOfKnowledge card) {
+    private CartoucheOfKnowledge(final CartoucheOfKnowledge card) {
         super(card);
     }
 

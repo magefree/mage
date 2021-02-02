@@ -39,7 +39,7 @@ public final class PutridCyclops extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PutridCyclopEffect()));
     }
 
-    public PutridCyclops(final PutridCyclops card) {
+    private PutridCyclops(final PutridCyclops card) {
         super(card);
     }
 

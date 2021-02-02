@@ -42,7 +42,7 @@ public final class CurseOfVitality extends CardImpl {
         this.addAbility(new EnchantedPlayerAttackedTriggeredAbility(new CurseOfVitalityEffect()));
     }
 
-    public CurseOfVitality(final CurseOfVitality card) {
+    private CurseOfVitality(final CurseOfVitality card) {
         super(card);
     }
 

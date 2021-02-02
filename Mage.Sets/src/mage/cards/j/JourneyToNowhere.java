@@ -38,7 +38,7 @@ public final class JourneyToNowhere extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public JourneyToNowhere(final JourneyToNowhere card) {
+    private JourneyToNowhere(final JourneyToNowhere card) {
         super(card);
     }
 

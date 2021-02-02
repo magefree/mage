@@ -39,7 +39,7 @@ public final class KorChant extends CardImpl {
         this.getSpellAbility().addTarget(target2);
     }
 
-    public KorChant(final KorChant card) {
+    private KorChant(final KorChant card) {
         super(card);
     }
 

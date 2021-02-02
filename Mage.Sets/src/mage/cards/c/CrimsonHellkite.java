@@ -55,7 +55,7 @@ public final class CrimsonHellkite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrimsonHellkite(final CrimsonHellkite card) {
+    private CrimsonHellkite(final CrimsonHellkite card) {
         super(card);
     }
 

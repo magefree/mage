@@ -44,7 +44,7 @@ public final class Lurker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Lurker(final Lurker card) {
+    private Lurker(final Lurker card) {
         super(card);
     }
 

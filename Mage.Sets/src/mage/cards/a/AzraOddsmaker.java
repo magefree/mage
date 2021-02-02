@@ -47,7 +47,7 @@ public final class AzraOddsmaker extends CardImpl {
         ));
     }
 
-    public AzraOddsmaker(final AzraOddsmaker card) {
+    private AzraOddsmaker(final AzraOddsmaker card) {
         super(card);
     }
 

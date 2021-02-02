@@ -25,7 +25,7 @@ public final class HeartwoodTreefolk extends CardImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public HeartwoodTreefolk(final HeartwoodTreefolk card) {
+    private HeartwoodTreefolk(final HeartwoodTreefolk card) {
         super(card);
     }
 

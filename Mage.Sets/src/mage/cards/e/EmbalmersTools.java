@@ -47,7 +47,7 @@ public final class EmbalmersTools extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EmbalmersTools(final EmbalmersTools card) {
+    private EmbalmersTools(final EmbalmersTools card) {
         super(card);
     }
 

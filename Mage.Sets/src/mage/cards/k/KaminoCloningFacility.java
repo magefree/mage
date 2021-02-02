@@ -45,7 +45,7 @@ public final class KaminoCloningFacility extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KaminoCloningFacility(final KaminoCloningFacility card) {
+    private KaminoCloningFacility(final KaminoCloningFacility card) {
         super(card);
     }
 

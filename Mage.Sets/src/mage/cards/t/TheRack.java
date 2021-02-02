@@ -31,7 +31,7 @@ public final class TheRack extends CardImpl {
         this.addAbility(new TheRackTriggeredAbility());
     }
 
-    public TheRack(final TheRack card) {
+    private TheRack(final TheRack card) {
         super(card);
     }
 

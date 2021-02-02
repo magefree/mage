@@ -37,7 +37,7 @@ public final class LushGrowth extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect(SubType.MOUNTAIN, SubType.FOREST, SubType.PLAINS)));
     }
 
-    public LushGrowth(final LushGrowth card) {
+    private LushGrowth(final LushGrowth card) {
         super(card);
     }
 

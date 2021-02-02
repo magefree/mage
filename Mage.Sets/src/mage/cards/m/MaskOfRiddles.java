@@ -31,7 +31,7 @@ public final class MaskOfRiddles extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public MaskOfRiddles(final MaskOfRiddles card) {
+    private MaskOfRiddles(final MaskOfRiddles card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class GossamerChains extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GossamerChains(final GossamerChains card) {
+    private GossamerChains(final GossamerChains card) {
         super(card);
     }
 

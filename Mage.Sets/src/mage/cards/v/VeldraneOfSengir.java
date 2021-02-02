@@ -37,7 +37,7 @@ public final class VeldraneOfSengir extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VeldraneOfSengir(final VeldraneOfSengir card) {
+    private VeldraneOfSengir(final VeldraneOfSengir card) {
         super(card);
     }
 

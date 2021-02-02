@@ -23,7 +23,7 @@ public final class UndeadMinotaur extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public UndeadMinotaur(final UndeadMinotaur card) {
+    private UndeadMinotaur(final UndeadMinotaur card) {
         super(card);
     }
 

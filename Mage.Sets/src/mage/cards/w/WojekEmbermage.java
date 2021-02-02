@@ -41,7 +41,7 @@ public final class WojekEmbermage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WojekEmbermage(final WojekEmbermage card) {
+    private WojekEmbermage(final WojekEmbermage card) {
         super(card);
     }
 

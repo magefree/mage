@@ -43,7 +43,7 @@ public final class AdaptiveAutomaton extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public AdaptiveAutomaton(final AdaptiveAutomaton card) {
+    private AdaptiveAutomaton(final AdaptiveAutomaton card) {
         super(card);
     }
 

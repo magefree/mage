@@ -22,7 +22,7 @@ public final class StormHerd extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new PegasusToken(), ControllerLifeCount.instance));
     }
 
-    public StormHerd(final StormHerd card) {
+    private StormHerd(final StormHerd card) {
         super(card);
     }
 

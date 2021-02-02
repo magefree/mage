@@ -39,7 +39,7 @@ public final class QuillSlingerBoggart extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuillSlingerBoggart(final QuillSlingerBoggart card) {
+    private QuillSlingerBoggart(final QuillSlingerBoggart card) {
         super(card);
     }
 

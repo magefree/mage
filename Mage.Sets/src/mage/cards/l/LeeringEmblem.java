@@ -26,7 +26,7 @@ public final class LeeringEmblem extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public LeeringEmblem(final LeeringEmblem card) {
+    private LeeringEmblem(final LeeringEmblem card) {
         super(card);
     }
 

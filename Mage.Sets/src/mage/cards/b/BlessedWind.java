@@ -22,7 +22,7 @@ public final class BlessedWind extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public BlessedWind(final BlessedWind card) {
+    private BlessedWind(final BlessedWind card) {
         super(card);
     }
 

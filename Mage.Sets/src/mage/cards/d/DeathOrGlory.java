@@ -29,7 +29,7 @@ public final class DeathOrGlory extends CardImpl {
         this.getSpellAbility().addEffect(new DeathOrGloryEffect());
     }
 
-    public DeathOrGlory(final DeathOrGlory card) {
+    private DeathOrGlory(final DeathOrGlory card) {
         super(card);
     }
 

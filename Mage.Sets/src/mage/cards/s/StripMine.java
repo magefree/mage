@@ -33,7 +33,7 @@ public final class StripMine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StripMine(final StripMine card) {
+    private StripMine(final StripMine card) {
         super(card);
     }
 

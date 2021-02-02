@@ -46,7 +46,7 @@ public final class MurmuringBosk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MurmuringBosk(final MurmuringBosk card) {
+    private MurmuringBosk(final MurmuringBosk card) {
         super(card);
     }
 

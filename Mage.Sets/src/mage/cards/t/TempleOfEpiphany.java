@@ -29,7 +29,7 @@ public final class TempleOfEpiphany extends CardImpl {
         this.addAbility(new RedManaAbility());        
     }
 
-    public TempleOfEpiphany(final TempleOfEpiphany card) {
+    private TempleOfEpiphany(final TempleOfEpiphany card) {
         super(card);
     }
 

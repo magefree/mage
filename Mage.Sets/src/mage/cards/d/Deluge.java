@@ -32,7 +32,7 @@ public final class Deluge extends CardImpl {
         this.getSpellAbility().addEffect(new TapAllEffect(filter));
     }
 
-    public Deluge(final Deluge card) {
+    private Deluge(final Deluge card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class ArmorOfThorns extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
     }
 
-    public ArmorOfThorns(final ArmorOfThorns card) {
+    private ArmorOfThorns(final ArmorOfThorns card) {
         super(card);
     }
 

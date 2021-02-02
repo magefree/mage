@@ -24,7 +24,7 @@ public final class VolcanicGeyser extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public VolcanicGeyser(final VolcanicGeyser card) {
+    private VolcanicGeyser(final VolcanicGeyser card) {
         super(card);
     }
 

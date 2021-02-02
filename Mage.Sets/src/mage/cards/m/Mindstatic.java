@@ -28,7 +28,7 @@ public final class Mindstatic extends CardImpl {
 
     }
 
-    public Mindstatic(final Mindstatic card) {
+    private Mindstatic(final Mindstatic card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class JundCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public JundCharm(final JundCharm card) {
+    private JundCharm(final JundCharm card) {
         super(card);
     }
 

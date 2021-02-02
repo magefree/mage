@@ -27,7 +27,7 @@ public final class GrimTutor extends CardImpl {
 
     }
 
-    public GrimTutor(final GrimTutor card) {
+    private GrimTutor(final GrimTutor card) {
         super(card);
     }
 

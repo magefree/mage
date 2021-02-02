@@ -30,7 +30,7 @@ public final class ProcessorAssault extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ProcessorAssault(final ProcessorAssault card) {
+    private ProcessorAssault(final ProcessorAssault card) {
         super(card);
     }
 

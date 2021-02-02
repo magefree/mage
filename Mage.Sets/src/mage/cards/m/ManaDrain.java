@@ -33,7 +33,7 @@ public final class ManaDrain extends CardImpl {
         this.getSpellAbility().addEffect(new ManaDrainCounterEffect());
     }
 
-    public ManaDrain(final ManaDrain card) {
+    private ManaDrain(final ManaDrain card) {
         super(card);
     }
 

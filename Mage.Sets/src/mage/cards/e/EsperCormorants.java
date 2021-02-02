@@ -26,7 +26,7 @@ public final class EsperCormorants extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public EsperCormorants(final EsperCormorants card) {
+    private EsperCormorants(final EsperCormorants card) {
         super(card);
     }
 

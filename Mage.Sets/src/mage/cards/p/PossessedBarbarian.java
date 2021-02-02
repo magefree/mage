@@ -70,7 +70,7 @@ public final class PossessedBarbarian extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PossessedBarbarian(final PossessedBarbarian card) {
+    private PossessedBarbarian(final PossessedBarbarian card) {
         super(card);
     }
 

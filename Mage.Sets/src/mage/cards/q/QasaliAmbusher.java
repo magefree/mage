@@ -55,7 +55,7 @@ public final class QasaliAmbusher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QasaliAmbusher(final QasaliAmbusher card) {
+    private QasaliAmbusher(final QasaliAmbusher card) {
         super(card);
     }
 

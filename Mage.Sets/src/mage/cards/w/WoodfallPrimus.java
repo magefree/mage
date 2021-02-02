@@ -45,7 +45,7 @@ public final class WoodfallPrimus extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public WoodfallPrimus(final WoodfallPrimus card) {
+    private WoodfallPrimus(final WoodfallPrimus card) {
         super(card);
     }
 

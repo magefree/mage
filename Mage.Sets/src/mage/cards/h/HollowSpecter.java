@@ -39,7 +39,7 @@ public final class HollowSpecter extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new HollowSpecterEffect(), false, true));
     }
 
-    public HollowSpecter(final HollowSpecter card) {
+    private HollowSpecter(final HollowSpecter card) {
         super(card);
     }
 

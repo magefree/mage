@@ -46,7 +46,7 @@ public final class BloodOperative extends CardImpl {
         this.addAbility(new BloodOperativeTriggeredAbility());
     }
 
-    public BloodOperative(final BloodOperative card) {
+    private BloodOperative(final BloodOperative card) {
         super(card);
     }
 

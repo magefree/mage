@@ -23,7 +23,7 @@ public final class Mobilize extends CardImpl {
         this.getSpellAbility().addEffect(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), rule));
     }
 
-    public Mobilize(final Mobilize card) {
+    private Mobilize(final Mobilize card) {
         super(card);
     }
 

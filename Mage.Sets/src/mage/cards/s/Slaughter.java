@@ -37,7 +37,7 @@ public final class Slaughter extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public Slaughter(final Slaughter card) {
+    private Slaughter(final Slaughter card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class ClockworkCondor extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkCondorEffect(), false));
     }
 
-    public ClockworkCondor(final ClockworkCondor card) {
+    private ClockworkCondor(final ClockworkCondor card) {
         super(card);
     }
 

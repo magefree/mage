@@ -30,7 +30,7 @@ public final class MightOfTheNephilim extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public MightOfTheNephilim(final MightOfTheNephilim card) {
+    private MightOfTheNephilim(final MightOfTheNephilim card) {
         super(card);
     }
 

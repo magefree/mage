@@ -34,7 +34,7 @@ public final class BoggartForager extends CardImpl {
 	this.addAbility(ability);
     }
     
-    public BoggartForager(final BoggartForager card) {
+    private BoggartForager(final BoggartForager card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class Liability extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new LiabilityEffect(), false, filter, true));
     }
 
-    public Liability(final Liability card) {
+    private Liability(final Liability card) {
         super(card);
     }
 

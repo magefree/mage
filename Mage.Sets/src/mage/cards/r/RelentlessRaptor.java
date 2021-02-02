@@ -37,7 +37,7 @@ public final class RelentlessRaptor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RelentlessRaptor(final RelentlessRaptor card) {
+    private RelentlessRaptor(final RelentlessRaptor card) {
         super(card);
     }
 

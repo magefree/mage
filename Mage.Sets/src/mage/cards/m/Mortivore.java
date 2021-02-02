@@ -34,7 +34,7 @@ public final class Mortivore extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
-    public Mortivore(final Mortivore card) {
+    private Mortivore(final Mortivore card) {
         super(card);
     }
 

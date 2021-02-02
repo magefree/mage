@@ -43,7 +43,7 @@ public final class SpriteNoble extends CardImpl {
                 new TapSourceCost()));
     }
 
-    public SpriteNoble(final SpriteNoble card) {
+    private SpriteNoble(final SpriteNoble card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class BorderPatrol extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public BorderPatrol(final BorderPatrol card) {
+    private BorderPatrol(final BorderPatrol card) {
         super(card);
     }
 

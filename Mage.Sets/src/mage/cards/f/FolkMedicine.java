@@ -28,7 +28,7 @@ public final class FolkMedicine extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{W}"), TimingRule.INSTANT));
     }
 
-    public FolkMedicine(final FolkMedicine card) {
+    private FolkMedicine(final FolkMedicine card) {
         super(card);
     }
 

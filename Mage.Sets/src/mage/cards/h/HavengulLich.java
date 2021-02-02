@@ -53,7 +53,7 @@ public final class HavengulLich extends CardImpl {
 
     }
 
-    public HavengulLich(final HavengulLich card) {
+    private HavengulLich(final HavengulLich card) {
         super(card);
     }
 

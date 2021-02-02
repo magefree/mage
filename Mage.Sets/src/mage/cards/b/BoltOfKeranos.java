@@ -25,7 +25,7 @@ public final class BoltOfKeranos extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public BoltOfKeranos(final BoltOfKeranos card) {
+    private BoltOfKeranos(final BoltOfKeranos card) {
         super(card);
     }
 

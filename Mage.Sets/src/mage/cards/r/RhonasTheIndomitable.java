@@ -65,7 +65,7 @@ public final class RhonasTheIndomitable extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RhonasTheIndomitable(final RhonasTheIndomitable card) {
+    private RhonasTheIndomitable(final RhonasTheIndomitable card) {
         super(card);
     }
 

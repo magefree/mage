@@ -30,7 +30,7 @@ public final class FlameFusillade extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(gainedAbility, Duration.EndOfTurn));
     }
 
-    public FlameFusillade(final FlameFusillade card) {
+    private FlameFusillade(final FlameFusillade card) {
         super(card);
     }
 

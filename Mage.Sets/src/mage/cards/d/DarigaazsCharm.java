@@ -43,7 +43,7 @@ public final class DarigaazsCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public DarigaazsCharm(final DarigaazsCharm card) {
+    private DarigaazsCharm(final DarigaazsCharm card) {
         super(card);
     }
 

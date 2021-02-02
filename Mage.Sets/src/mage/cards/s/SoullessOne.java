@@ -37,7 +37,7 @@ public final class SoullessOne extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new SoullessOneDynamicCount(), Duration.EndOfGame)));
     }
 
-    public SoullessOne(final SoullessOne card) {
+    private SoullessOne(final SoullessOne card) {
         super(card);
     }
 

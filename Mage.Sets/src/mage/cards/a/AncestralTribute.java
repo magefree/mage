@@ -32,7 +32,7 @@ public final class AncestralTribute extends CardImpl {
         
     }
 
-    public AncestralTribute(final AncestralTribute card) {
+    private AncestralTribute(final AncestralTribute card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class Mimeofacture extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT));
     }
 
-    public Mimeofacture(final Mimeofacture card) {
+    private Mimeofacture(final Mimeofacture card) {
         super(card);
     }
 

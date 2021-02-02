@@ -34,7 +34,7 @@ public final class Surgespanner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Surgespanner(final Surgespanner card) {
+    private Surgespanner(final Surgespanner card) {
         super(card);
     }
 

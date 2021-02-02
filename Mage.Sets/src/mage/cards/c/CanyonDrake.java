@@ -36,7 +36,7 @@ public final class CanyonDrake extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CanyonDrake(final CanyonDrake card) {
+    private CanyonDrake(final CanyonDrake card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class CultistsStaff extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), new TargetControlledCreaturePermanent()));
     }
 
-    public CultistsStaff(final CultistsStaff card) {
+    private CultistsStaff(final CultistsStaff card) {
         super(card);
     }
 

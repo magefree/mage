@@ -36,7 +36,7 @@ public final class MirrorUniverse extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MirrorUniverse(final MirrorUniverse card) {
+    private MirrorUniverse(final MirrorUniverse card) {
         super(card);
     }
 

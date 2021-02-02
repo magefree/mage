@@ -50,7 +50,7 @@ public final class RaisedByWolves extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amountOfWolves, amountOfWolves, Duration.WhileOnBattlefield)));
     }
 
-    public RaisedByWolves(final RaisedByWolves card) {
+    private RaisedByWolves(final RaisedByWolves card) {
         super(card);
     }
 

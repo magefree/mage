@@ -39,7 +39,7 @@ public final class LightningSerpent extends CardImpl {
         this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
     }
 
-    public LightningSerpent(final LightningSerpent card) {
+    private LightningSerpent(final LightningSerpent card) {
         super(card);
     }
 

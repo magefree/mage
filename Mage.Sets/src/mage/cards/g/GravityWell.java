@@ -29,7 +29,7 @@ public final class GravityWell extends CardImpl {
         this.addAbility(new GravityWellTriggeredAbility());
     }
 
-    public GravityWell(final GravityWell card) {
+    private GravityWell(final GravityWell card) {
         super(card);
     }
 

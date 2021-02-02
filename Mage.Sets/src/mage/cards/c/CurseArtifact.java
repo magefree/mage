@@ -44,7 +44,7 @@ public final class CurseArtifact extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.CONTROLLER_ATTACHED_TO, false, true, "At the beginning of the upkeep of enchanted artifact's controller, "));
     }
 
-    public CurseArtifact(final CurseArtifact card) {
+    private CurseArtifact(final CurseArtifact card) {
         super(card);
     }
 

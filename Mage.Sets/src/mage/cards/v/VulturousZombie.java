@@ -36,7 +36,7 @@ public final class VulturousZombie extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, TargetController.OPPONENT));
     }
 
-    public VulturousZombie(final VulturousZombie card) {
+    private VulturousZombie(final VulturousZombie card) {
         super(card);
     }
 

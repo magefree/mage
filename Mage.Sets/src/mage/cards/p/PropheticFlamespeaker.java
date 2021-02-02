@@ -45,7 +45,7 @@ public final class PropheticFlamespeaker extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new PropheticFlamespeakerExileEffect(), false));
     }
 
-    public PropheticFlamespeaker(final PropheticFlamespeaker card) {
+    private PropheticFlamespeaker(final PropheticFlamespeaker card) {
         super(card);
     }
 

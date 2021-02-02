@@ -54,7 +54,7 @@ public final class InstillFuror extends CardImpl {
 
     }
 
-    public InstillFuror(final InstillFuror card) {
+    private InstillFuror(final InstillFuror card) {
         super(card);
     }
 

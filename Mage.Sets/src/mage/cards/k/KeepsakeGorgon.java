@@ -48,7 +48,7 @@ public final class KeepsakeGorgon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KeepsakeGorgon(final KeepsakeGorgon card) {
+    private KeepsakeGorgon(final KeepsakeGorgon card) {
         super(card);
     }
 

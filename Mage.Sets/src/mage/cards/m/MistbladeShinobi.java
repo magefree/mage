@@ -42,7 +42,7 @@ public final class MistbladeShinobi extends CardImpl {
         this.addAbility(new MistbladeShinobiTriggeredAbility());
     }
 
-    public MistbladeShinobi(final MistbladeShinobi card) {
+    private MistbladeShinobi(final MistbladeShinobi card) {
         super(card);
     }
 

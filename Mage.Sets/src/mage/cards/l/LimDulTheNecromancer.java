@@ -55,7 +55,7 @@ public final class LimDulTheNecromancer extends CardImpl {
 
     }
 
-    public LimDulTheNecromancer(final LimDulTheNecromancer card) {
+    private LimDulTheNecromancer(final LimDulTheNecromancer card) {
         super(card);
     }
 

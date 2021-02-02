@@ -38,7 +38,7 @@ public final class FloodedShoreline extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FloodedShoreline(final FloodedShoreline card) {
+    private FloodedShoreline(final FloodedShoreline card) {
         super(card);
     }
 

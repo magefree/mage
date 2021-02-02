@@ -47,7 +47,7 @@ public final class SpurredWolverine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpurredWolverine(final SpurredWolverine card) {
+    private SpurredWolverine(final SpurredWolverine card) {
         super(card);
     }
 

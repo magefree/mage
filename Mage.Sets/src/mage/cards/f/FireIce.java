@@ -34,7 +34,7 @@ public final class FireIce extends SplitCard {
 
     }
 
-    public FireIce(final FireIce card) {
+    private FireIce(final FireIce card) {
         super(card);
     }
 

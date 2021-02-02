@@ -60,7 +60,7 @@ public final class GnarlrootTrapper extends CardImpl {
 
     }
 
-    public GnarlrootTrapper(final GnarlrootTrapper card) {
+    private GnarlrootTrapper(final GnarlrootTrapper card) {
         super(card);
     }
 

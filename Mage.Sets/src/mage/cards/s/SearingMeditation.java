@@ -30,7 +30,7 @@ public final class SearingMeditation extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SearingMeditation(final SearingMeditation card) {
+    private SearingMeditation(final SearingMeditation card) {
         super(card);
     }
 

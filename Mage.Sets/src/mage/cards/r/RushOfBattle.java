@@ -35,7 +35,7 @@ public final class RushOfBattle extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public RushOfBattle(final RushOfBattle card) {
+    private RushOfBattle(final RushOfBattle card) {
         super(card);
     }
 

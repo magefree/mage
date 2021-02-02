@@ -35,7 +35,7 @@ public final class StampedingElkHerd extends CardImpl {
         ));
     }
 
-    public StampedingElkHerd(final StampedingElkHerd card) {
+    private StampedingElkHerd(final StampedingElkHerd card) {
         super(card);
     }
 

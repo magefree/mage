@@ -34,7 +34,7 @@ public final class AjanisPresence extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
-    public AjanisPresence(final AjanisPresence card) {
+    private AjanisPresence(final AjanisPresence card) {
         super(card);
     }
 

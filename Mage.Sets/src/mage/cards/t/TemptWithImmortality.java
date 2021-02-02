@@ -32,7 +32,7 @@ public final class TemptWithImmortality extends CardImpl {
         this.getSpellAbility().addEffect(new TemptWithImmortalityEffect());
     }
 
-    public TemptWithImmortality(final TemptWithImmortality card) {
+    private TemptWithImmortality(final TemptWithImmortality card) {
         super(card);
     }
 

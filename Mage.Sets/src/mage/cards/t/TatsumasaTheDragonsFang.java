@@ -47,7 +47,7 @@ public final class TatsumasaTheDragonsFang extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public TatsumasaTheDragonsFang(final TatsumasaTheDragonsFang card) {
+    private TatsumasaTheDragonsFang(final TatsumasaTheDragonsFang card) {
         super(card);
     }
 

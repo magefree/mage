@@ -27,7 +27,7 @@ public final class Darkblast extends CardImpl {
         this.addAbility(new DredgeAbility(3));
     }
 
-    public Darkblast(final Darkblast card) {
+    private Darkblast(final Darkblast card) {
         super(card);
     }
 

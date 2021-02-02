@@ -50,7 +50,7 @@ public final class UnyaroGriffin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnyaroGriffin(final UnyaroGriffin card) {
+    private UnyaroGriffin(final UnyaroGriffin card) {
         super(card);
     }
 

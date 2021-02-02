@@ -33,7 +33,7 @@ public final class ResoundingThunder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ResoundingThunder(final ResoundingThunder card) {
+    private ResoundingThunder(final ResoundingThunder card) {
         super(card);
     }
 

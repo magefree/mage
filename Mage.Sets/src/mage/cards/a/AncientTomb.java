@@ -26,7 +26,7 @@ public final class AncientTomb extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AncientTomb(final AncientTomb card) {
+    private AncientTomb(final AncientTomb card) {
         super(card);
     }
 

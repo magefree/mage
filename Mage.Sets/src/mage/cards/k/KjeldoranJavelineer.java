@@ -44,7 +44,7 @@ public final class KjeldoranJavelineer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KjeldoranJavelineer(final KjeldoranJavelineer card) {
+    private KjeldoranJavelineer(final KjeldoranJavelineer card) {
         super(card);
     }
 

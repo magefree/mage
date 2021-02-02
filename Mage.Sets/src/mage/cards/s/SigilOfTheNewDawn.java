@@ -30,7 +30,7 @@ public final class SigilOfTheNewDawn extends CardImpl {
         ));
     }
 
-    public SigilOfTheNewDawn(final SigilOfTheNewDawn card) {
+    private SigilOfTheNewDawn(final SigilOfTheNewDawn card) {
         super(card);
     }
 

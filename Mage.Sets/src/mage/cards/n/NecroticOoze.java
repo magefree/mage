@@ -31,7 +31,7 @@ public final class NecroticOoze extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NecroticOozeEffect()));
     }
 
-    public NecroticOoze(final NecroticOoze card) {
+    private NecroticOoze(final NecroticOoze card) {
         super(card);
     }
 

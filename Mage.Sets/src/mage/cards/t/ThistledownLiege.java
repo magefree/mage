@@ -45,7 +45,7 @@ public final class ThistledownLiege extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlue, true)));
     }
 
-    public ThistledownLiege(final ThistledownLiege card) {
+    private ThistledownLiege(final ThistledownLiege card) {
         super(card);
     }
 

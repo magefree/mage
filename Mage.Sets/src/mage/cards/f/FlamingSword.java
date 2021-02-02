@@ -53,7 +53,7 @@ public final class FlamingSword extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlamingSword(final FlamingSword card) {
+    private FlamingSword(final FlamingSword card) {
         super(card);
     }
 

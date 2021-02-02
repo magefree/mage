@@ -41,7 +41,7 @@ public final class PhyrexianDreadnought extends CardImpl {
 
     }
 
-    public PhyrexianDreadnought(final PhyrexianDreadnought card) {
+    private PhyrexianDreadnought(final PhyrexianDreadnought card) {
         super(card);
     }
 

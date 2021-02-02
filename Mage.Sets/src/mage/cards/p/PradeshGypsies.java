@@ -37,7 +37,7 @@ public final class PradeshGypsies extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PradeshGypsies(final PradeshGypsies card) {
+    private PradeshGypsies(final PradeshGypsies card) {
         super(card);
     }
 

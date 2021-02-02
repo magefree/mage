@@ -29,7 +29,7 @@ public final class DragonscaleBoon extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public DragonscaleBoon(final DragonscaleBoon card) {
+    private DragonscaleBoon(final DragonscaleBoon card) {
         super(card);
     }
 

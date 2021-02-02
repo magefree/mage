@@ -53,7 +53,7 @@ public final class HazezonTamar extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ExileAllEffect(filter), false));
     }
 
-    public HazezonTamar(final HazezonTamar card) {
+    private HazezonTamar(final HazezonTamar card) {
         super(card);
     }
 

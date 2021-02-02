@@ -25,7 +25,7 @@ public final class FangrenHunter extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public FangrenHunter(final FangrenHunter card) {
+    private FangrenHunter(final FangrenHunter card) {
         super(card);
     }
 

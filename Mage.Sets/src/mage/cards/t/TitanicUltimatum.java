@@ -31,7 +31,7 @@ public final class TitanicUltimatum extends CardImpl {
                 .setText("and gain first strike, trample, and lifelink"));
     }
 
-    public TitanicUltimatum(final TitanicUltimatum card) {
+    private TitanicUltimatum(final TitanicUltimatum card) {
         super(card);
     }
 

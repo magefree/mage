@@ -47,7 +47,7 @@ public final class OrcishVeteran extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public OrcishVeteran(final OrcishVeteran card) {
+    private OrcishVeteran(final OrcishVeteran card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class HokoriDustDrinker extends CardImpl {
 
     }
 
-    public HokoriDustDrinker(final HokoriDustDrinker card) {
+    private HokoriDustDrinker(final HokoriDustDrinker card) {
         super(card);
     }
 

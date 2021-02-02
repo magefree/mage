@@ -33,7 +33,7 @@ public final class FemerefEnchantress extends CardImpl {
                 "Whenever an enchantment is put into a graveyard from the battlefield, ", false));
     }
 
-    public FemerefEnchantress(final FemerefEnchantress card) {
+    private FemerefEnchantress(final FemerefEnchantress card) {
         super(card);
     }
 

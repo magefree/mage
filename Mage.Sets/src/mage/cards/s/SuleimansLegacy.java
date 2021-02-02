@@ -43,7 +43,7 @@ public final class SuleimansLegacy extends CardImpl {
         ));
     }
 
-    public SuleimansLegacy(final SuleimansLegacy card) {
+    private SuleimansLegacy(final SuleimansLegacy card) {
         super(card);
     }
 

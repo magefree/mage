@@ -26,7 +26,7 @@ public final class DigThroughTime extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(7), false, StaticValue.get(2), new FilterCard(), Zone.LIBRARY, false, false));
     }
 
-    public DigThroughTime(final DigThroughTime card) {
+    private DigThroughTime(final DigThroughTime card) {
         super(card);
     }
 

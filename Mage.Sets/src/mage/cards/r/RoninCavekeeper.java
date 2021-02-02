@@ -26,7 +26,7 @@ public final class RoninCavekeeper extends CardImpl {
         this.addAbility(new BushidoAbility(2));
     }
 
-    public RoninCavekeeper(final RoninCavekeeper card) {
+    private RoninCavekeeper(final RoninCavekeeper card) {
         super(card);
     }
 

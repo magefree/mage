@@ -29,7 +29,7 @@ public final class CanopyClaws extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{G}"), TimingRule.INSTANT));
     }
 
-    public CanopyClaws(final CanopyClaws card) {
+    private CanopyClaws(final CanopyClaws card) {
         super(card);
     }
 

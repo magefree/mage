@@ -30,7 +30,7 @@ public final class VolcanicRush extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public VolcanicRush(final VolcanicRush card) {
+    private VolcanicRush(final VolcanicRush card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class KitsuneMystic extends CardImpl {
                 new EnchantedSourceCondition(2), "At the beginning of the end step, if {this} is enchanted by two or more Auras, flip it."));
     }
 
-    public KitsuneMystic(final KitsuneMystic card) {
+    private KitsuneMystic(final KitsuneMystic card) {
         super(card);
     }
 

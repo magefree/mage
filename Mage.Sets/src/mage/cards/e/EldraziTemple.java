@@ -33,7 +33,7 @@ public final class EldraziTemple extends CardImpl {
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 2, new EldraziTempleManaBuilder()));
     }
 
-    public EldraziTemple(final EldraziTemple card) {
+    private EldraziTemple(final EldraziTemple card) {
         super(card);
     }
 

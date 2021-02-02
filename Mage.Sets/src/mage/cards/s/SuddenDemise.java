@@ -30,7 +30,7 @@ public final class SuddenDemise extends CardImpl {
 
     }
 
-    public SuddenDemise(final SuddenDemise card) {
+    private SuddenDemise(final SuddenDemise card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class Polymorph extends CardImpl {
         this.getSpellAbility().addEffect(new PolymorphEffect());
     }
 
-    public Polymorph(final Polymorph card) {
+    private Polymorph(final Polymorph card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class GracebladeArtisan extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
     }
 
-    public GracebladeArtisan(final GracebladeArtisan card) {
+    private GracebladeArtisan(final GracebladeArtisan card) {
         super(card);
     }
 

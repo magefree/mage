@@ -40,7 +40,7 @@ public final class SkeletonShip extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkeletonShip(final SkeletonShip card) {
+    private SkeletonShip(final SkeletonShip card) {
         super(card);
     }
 

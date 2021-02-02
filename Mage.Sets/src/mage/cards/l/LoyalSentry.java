@@ -32,7 +32,7 @@ public final class LoyalSentry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LoyalSentry(final LoyalSentry card) {
+    private LoyalSentry(final LoyalSentry card) {
         super(card);
     }
 

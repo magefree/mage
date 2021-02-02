@@ -40,7 +40,7 @@ public final class JhoirasToolbox extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JhoirasToolbox(final JhoirasToolbox card) {
+    private JhoirasToolbox(final JhoirasToolbox card) {
         super(card);
     }
 

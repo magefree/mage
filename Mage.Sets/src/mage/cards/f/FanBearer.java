@@ -35,7 +35,7 @@ public final class FanBearer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FanBearer(final FanBearer card) {
+    private FanBearer(final FanBearer card) {
         super(card);
     }
 

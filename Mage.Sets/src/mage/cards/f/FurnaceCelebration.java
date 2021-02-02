@@ -27,7 +27,7 @@ public final class FurnaceCelebration extends CardImpl {
         this.addAbility(new FurnaceCelebrationAbility());
     }
 
-    public FurnaceCelebration(final FurnaceCelebration card) {
+    private FurnaceCelebration(final FurnaceCelebration card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class MockeryOfNature extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MockeryOfNature(final MockeryOfNature card) {
+    private MockeryOfNature(final MockeryOfNature card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class AlgaeGharial extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true, true));
     }
 
-    public AlgaeGharial(final AlgaeGharial card) {
+    private AlgaeGharial(final AlgaeGharial card) {
         super(card);
     }
 

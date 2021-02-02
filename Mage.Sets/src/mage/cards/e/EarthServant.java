@@ -37,7 +37,7 @@ public final class EarthServant extends CardImpl {
                 Duration.WhileOnBattlefield)));
     }
 
-    public EarthServant(final EarthServant card) {
+    private EarthServant(final EarthServant card) {
         super(card);
     }
 

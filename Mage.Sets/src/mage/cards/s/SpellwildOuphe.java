@@ -30,7 +30,7 @@ public final class SpellwildOuphe extends CardImpl {
         );
     }
 
-    public SpellwildOuphe(final SpellwildOuphe card) {
+    private SpellwildOuphe(final SpellwildOuphe card) {
         super(card);
     }
 

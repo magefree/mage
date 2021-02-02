@@ -41,7 +41,7 @@ public final class GeistHonoredMonk extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken(), 2)));
     }
 
-    public GeistHonoredMonk(final GeistHonoredMonk card) {
+    private GeistHonoredMonk(final GeistHonoredMonk card) {
         super(card);
     }
 

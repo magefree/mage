@@ -32,7 +32,7 @@ public final class AerialResponder extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public AerialResponder(final AerialResponder card) {
+    private AerialResponder(final AerialResponder card) {
         super(card);
     }
 

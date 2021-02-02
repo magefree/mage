@@ -51,7 +51,7 @@ public final class ThelonOfHavenwood extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThelonOfHavenwood(final ThelonOfHavenwood card) {
+    private ThelonOfHavenwood(final ThelonOfHavenwood card) {
         super(card);
     }
 

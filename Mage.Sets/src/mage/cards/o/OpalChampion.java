@@ -36,7 +36,7 @@ public final class OpalChampion extends CardImpl {
                 "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 3/3 Knight creature with first strike."));
     }
 
-    public OpalChampion(final OpalChampion card) {
+    private OpalChampion(final OpalChampion card) {
         super(card);
     }
 

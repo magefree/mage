@@ -55,7 +55,7 @@ public final class ShuYunTheSilentTempest extends CardImpl {
 
     }
 
-    public ShuYunTheSilentTempest(final ShuYunTheSilentTempest card) {
+    private ShuYunTheSilentTempest(final ShuYunTheSilentTempest card) {
         super(card);
     }
 

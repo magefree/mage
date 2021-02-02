@@ -49,7 +49,7 @@ public final class ThreadsOfDisloyalty extends CardImpl {
 
     }
 
-    public ThreadsOfDisloyalty(final ThreadsOfDisloyalty card) {
+    private ThreadsOfDisloyalty(final ThreadsOfDisloyalty card) {
         super(card);
     }
 

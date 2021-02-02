@@ -34,7 +34,7 @@ public final class GhastlyConscription extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public GhastlyConscription(final GhastlyConscription card) {
+    private GhastlyConscription(final GhastlyConscription card) {
         super(card);
     }
 

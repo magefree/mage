@@ -25,7 +25,7 @@ public final class AirElemental extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public AirElemental(final AirElemental card) {
+    private AirElemental(final AirElemental card) {
         super(card);
     }
 

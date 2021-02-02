@@ -33,7 +33,7 @@ public final class Portent extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public Portent(final Portent card) {
+    private Portent(final Portent card) {
         super(card);
     }
 

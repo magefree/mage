@@ -37,7 +37,7 @@ public final class ChainOfSilence extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ChainOfSilence(final ChainOfSilence card) {
+    private ChainOfSilence(final ChainOfSilence card) {
         super(card);
     }
 

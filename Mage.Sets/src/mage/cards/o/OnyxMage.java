@@ -34,7 +34,7 @@ public final class OnyxMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OnyxMage(final OnyxMage card) {
+    private OnyxMage(final OnyxMage card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class SithRuins extends CardImpl {
 
     }
 
-    public SithRuins(final SithRuins card) {
+    private SithRuins(final SithRuins card) {
         super(card);
     }
 

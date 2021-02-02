@@ -48,7 +48,7 @@ public final class OupheVandals extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OupheVandals(final OupheVandals card) {
+    private OupheVandals(final OupheVandals card) {
         super(card);
     }
 

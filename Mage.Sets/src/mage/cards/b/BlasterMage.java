@@ -43,7 +43,7 @@ public final class BlasterMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlasterMage(final BlasterMage card) {
+    private BlasterMage(final BlasterMage card) {
         super(card);
     }
 

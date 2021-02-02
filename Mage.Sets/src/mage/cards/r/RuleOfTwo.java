@@ -45,7 +45,7 @@ public final class RuleOfTwo extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RuleOfTwo(final RuleOfTwo card) {
+    private RuleOfTwo(final RuleOfTwo card) {
         super(card);
     }
 

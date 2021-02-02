@@ -36,7 +36,7 @@ public final class KiriOnna extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
     }
 
-    public KiriOnna(final KiriOnna card) {
+    private KiriOnna(final KiriOnna card) {
         super(card);
     }
 

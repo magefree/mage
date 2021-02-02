@@ -32,7 +32,7 @@ public final class RainbowEfreet extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhaseOutSourceEffect(), new ManaCostsImpl("{U}{U}")));
     }
 
-    public RainbowEfreet(final RainbowEfreet card) {
+    private RainbowEfreet(final RainbowEfreet card) {
         super(card);
     }
 

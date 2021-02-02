@@ -28,7 +28,7 @@ public final class PeaceOfMind extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PeaceOfMind(final PeaceOfMind card) {
+    private PeaceOfMind(final PeaceOfMind card) {
         super(card);
     }
 

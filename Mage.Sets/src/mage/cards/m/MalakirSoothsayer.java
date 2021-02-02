@@ -54,7 +54,7 @@ public final class MalakirSoothsayer extends CardImpl {
 
     }
 
-    public MalakirSoothsayer(final MalakirSoothsayer card) {
+    private MalakirSoothsayer(final MalakirSoothsayer card) {
         super(card);
     }
 

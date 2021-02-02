@@ -51,7 +51,7 @@ public final class MaliciousAffliction extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public MaliciousAffliction(final MaliciousAffliction card) {
+    private MaliciousAffliction(final MaliciousAffliction card) {
         super(card);
     }
 

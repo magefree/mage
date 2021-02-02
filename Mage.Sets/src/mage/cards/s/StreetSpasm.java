@@ -42,7 +42,7 @@ public final class StreetSpasm extends CardImpl {
         this.addAbility(new OverloadAbility(this, new DamageAllEffect(ManacostVariableValue.instance, filter), new ManaCostsImpl("{X}{X}{R}{R}")));
     }
 
-    public StreetSpasm(final StreetSpasm card) {
+    private StreetSpasm(final StreetSpasm card) {
         super(card);
     }
 

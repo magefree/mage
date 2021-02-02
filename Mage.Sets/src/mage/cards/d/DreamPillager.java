@@ -42,7 +42,7 @@ public final class DreamPillager extends CardImpl {
         this.addAbility(new DreamPillagerTriggeredAbility());
     }
 
-    public DreamPillager(final DreamPillager card) {
+    private DreamPillager(final DreamPillager card) {
         super(card);
     }
 

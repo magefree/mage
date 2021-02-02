@@ -52,7 +52,7 @@ public final class ThoughtboundPhantasm extends CardImpl {
         ));
     }
 
-    public ThoughtboundPhantasm(final ThoughtboundPhantasm card) {
+    private ThoughtboundPhantasm(final ThoughtboundPhantasm card) {
         super(card);
     }
 

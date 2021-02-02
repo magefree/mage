@@ -38,7 +38,7 @@ public final class HazoretsUndyingFury extends CardImpl {
                 .setText("Lands you control don't untap during your next untap phase"));
     }
 
-    public HazoretsUndyingFury(final HazoretsUndyingFury card) {
+    private HazoretsUndyingFury(final HazoretsUndyingFury card) {
         super(card);
     }
 

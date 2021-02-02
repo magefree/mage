@@ -22,7 +22,7 @@ public final class SoundTheCall extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SoundTheCallToken()));
     }
 
-    public SoundTheCall(final SoundTheCall card) {
+    private SoundTheCall(final SoundTheCall card) {
         super(card);
     }
 

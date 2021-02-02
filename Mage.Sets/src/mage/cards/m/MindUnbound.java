@@ -29,7 +29,7 @@ public final class MindUnbound extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MindUnbound(final MindUnbound card) {
+    private MindUnbound(final MindUnbound card) {
         super(card);
     }
 

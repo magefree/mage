@@ -39,7 +39,7 @@ public final class Camel extends CardImpl {
 
     }
 
-    public Camel(final Camel card) {
+    private Camel(final Camel card) {
         super(card);
     }
 

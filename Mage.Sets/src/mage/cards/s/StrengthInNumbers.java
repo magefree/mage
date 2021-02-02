@@ -27,7 +27,7 @@ public final class StrengthInNumbers extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public StrengthInNumbers(final StrengthInNumbers card) {
+    private StrengthInNumbers(final StrengthInNumbers card) {
         super(card);
     }
 

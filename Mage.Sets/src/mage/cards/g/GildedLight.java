@@ -28,7 +28,7 @@ public final class GildedLight extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public GildedLight(final GildedLight card) {
+    private GildedLight(final GildedLight card) {
         super(card);
     }
 

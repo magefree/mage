@@ -24,7 +24,7 @@ public final class SowingSalt extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect(false, "its controller's","all cards with the same name as that land"));
     }
 
-    public SowingSalt(final SowingSalt card) {
+    private SowingSalt(final SowingSalt card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class HammerHelper extends CardImpl {
         this.getSpellAbility().addEffect(new HammerHelperEffect());
     }
 
-    public HammerHelper(final HammerHelper card) {
+    private HammerHelper(final HammerHelper card) {
         super(card);
     }
 

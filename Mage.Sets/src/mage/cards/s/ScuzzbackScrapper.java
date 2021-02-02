@@ -26,7 +26,7 @@ public final class ScuzzbackScrapper extends CardImpl {
         this.addAbility(WitherAbility.getInstance());
     }
 
-    public ScuzzbackScrapper(final ScuzzbackScrapper card) {
+    private ScuzzbackScrapper(final ScuzzbackScrapper card) {
         super(card);
     }
 

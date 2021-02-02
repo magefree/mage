@@ -37,7 +37,7 @@ public final class SubtleStrike extends CardImpl {
         this.getSpellAbility().addMode(mode1);
     }
 
-    public SubtleStrike(final SubtleStrike card) {
+    private SubtleStrike(final SubtleStrike card) {
         super(card);
     }
 

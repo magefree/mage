@@ -52,7 +52,7 @@ public final class LullmageMentor extends CardImpl {
 
     }
 
-    public LullmageMentor(final LullmageMentor card) {
+    private LullmageMentor(final LullmageMentor card) {
         super(card);
     }
 

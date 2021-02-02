@@ -42,7 +42,7 @@ public final class Invisibility extends CardImpl {
                 new CantBeBlockedByCreaturesAttachedEffect(Duration.WhileOnBattlefield, filter, AttachmentType.AURA)));
     }
 
-    public Invisibility(final Invisibility card) {
+    private Invisibility(final Invisibility card) {
         super(card);
     }
 

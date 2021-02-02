@@ -28,7 +28,7 @@ public final class WarSpikeChangeling extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public WarSpikeChangeling(final WarSpikeChangeling card) {
+    private WarSpikeChangeling(final WarSpikeChangeling card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class TwoHeadedGiantOfForiys extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect()));
     }
 
-    public TwoHeadedGiantOfForiys(final TwoHeadedGiantOfForiys card) {
+    private TwoHeadedGiantOfForiys(final TwoHeadedGiantOfForiys card) {
         super(card);
     }
 

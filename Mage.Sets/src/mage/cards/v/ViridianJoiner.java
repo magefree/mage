@@ -29,7 +29,7 @@ public final class ViridianJoiner extends CardImpl {
         this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new SourcePermanentPowerCount()));
     }
 
-    public ViridianJoiner(final ViridianJoiner card) {
+    private ViridianJoiner(final ViridianJoiner card) {
         super(card);
     }
 

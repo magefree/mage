@@ -58,7 +58,7 @@ public final class SydriGalvanicGenius extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SydriGalvanicGenius(final SydriGalvanicGenius card) {
+    private SydriGalvanicGenius(final SydriGalvanicGenius card) {
         super(card);
     }
 

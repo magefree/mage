@@ -63,7 +63,7 @@ public final class TattooWard extends CardImpl {
 
     }
 
-    public TattooWard(final TattooWard card) {
+    private TattooWard(final TattooWard card) {
         super(card);
     }
 

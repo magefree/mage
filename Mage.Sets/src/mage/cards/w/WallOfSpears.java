@@ -27,7 +27,7 @@ public final class WallOfSpears extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public WallOfSpears(final WallOfSpears card) {
+    private WallOfSpears(final WallOfSpears card) {
         super(card);
     }
 

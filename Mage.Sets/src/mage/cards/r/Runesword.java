@@ -56,7 +56,7 @@ public final class Runesword extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Runesword(final Runesword card) {
+    private Runesword(final Runesword card) {
         super(card);
     }
 

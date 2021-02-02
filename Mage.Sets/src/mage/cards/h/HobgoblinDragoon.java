@@ -28,7 +28,7 @@ public final class HobgoblinDragoon extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public HobgoblinDragoon(final HobgoblinDragoon card) {
+    private HobgoblinDragoon(final HobgoblinDragoon card) {
         super(card);
     }
 

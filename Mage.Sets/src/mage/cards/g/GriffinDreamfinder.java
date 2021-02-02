@@ -41,7 +41,7 @@ public final class GriffinDreamfinder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GriffinDreamfinder(final GriffinDreamfinder card) {
+    private GriffinDreamfinder(final GriffinDreamfinder card) {
         super(card);
     }
 

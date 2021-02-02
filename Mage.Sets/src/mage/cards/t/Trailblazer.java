@@ -22,7 +22,7 @@ public final class Trailblazer extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Trailblazer(final Trailblazer card) {
+    private Trailblazer(final Trailblazer card) {
         super(card);
     }
 

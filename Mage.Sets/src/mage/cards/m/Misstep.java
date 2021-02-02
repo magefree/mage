@@ -33,7 +33,7 @@ public final class Misstep extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Misstep(final Misstep card) {
+    private Misstep(final Misstep card) {
         super(card);
     }
 

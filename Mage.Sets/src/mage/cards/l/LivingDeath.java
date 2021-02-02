@@ -20,7 +20,7 @@ public final class LivingDeath extends CardImpl {
         this.getSpellAbility().addEffect(new LivingDeathEffect());
     }
 
-    public LivingDeath(final LivingDeath card) {
+    private LivingDeath(final LivingDeath card) {
         super(card);
     }
 

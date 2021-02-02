@@ -26,7 +26,7 @@ public final class GiantSpider extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public GiantSpider(final GiantSpider card) {
+    private GiantSpider(final GiantSpider card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class BreachingHippocamp extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BreachingHippocamp(final BreachingHippocamp card) {
+    private BreachingHippocamp(final BreachingHippocamp card) {
         super(card);
     }
 

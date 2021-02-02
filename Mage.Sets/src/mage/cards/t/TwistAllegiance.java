@@ -34,7 +34,7 @@ public final class TwistAllegiance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public TwistAllegiance(final TwistAllegiance card) {
+    private TwistAllegiance(final TwistAllegiance card) {
         super(card);
     }
 

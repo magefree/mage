@@ -29,7 +29,7 @@ public final class Necratog extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ExileTopCreatureCardOfGraveyardCost(1)));
     }
 
-    public Necratog(final Necratog card) {
+    private Necratog(final Necratog card) {
         super(card);
     }
 

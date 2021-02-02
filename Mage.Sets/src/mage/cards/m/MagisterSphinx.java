@@ -39,7 +39,7 @@ public final class MagisterSphinx extends CardImpl {
         
     }
 
-    public MagisterSphinx(final MagisterSphinx card) {
+    private MagisterSphinx(final MagisterSphinx card) {
         super(card);
     }
 

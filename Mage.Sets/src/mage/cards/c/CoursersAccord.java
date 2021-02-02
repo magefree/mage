@@ -25,7 +25,7 @@ public final class CoursersAccord extends CardImpl {
         this.getSpellAbility().addEffect(new PopulateEffect("then"));
     }
 
-    public CoursersAccord(final CoursersAccord card) {
+    private CoursersAccord(final CoursersAccord card) {
         super(card);
     }
 

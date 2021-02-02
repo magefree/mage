@@ -33,7 +33,7 @@ public final class PyromancerAscension extends CardImpl {
         this.addAbility(new PyromancerAscensionCopyTriggeredAbility());
     }
 
-    public PyromancerAscension(final PyromancerAscension card) {
+    private PyromancerAscension(final PyromancerAscension card) {
         super(card);
     }
 

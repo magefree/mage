@@ -30,7 +30,7 @@ public final class DwarvenSoldier extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility(new BoostSourceEffect(0, 2, Duration.EndOfTurn), new FilterCreaturePermanent(SubType.ORC, "Orcs"), false));
     }
 
-    public DwarvenSoldier(final DwarvenSoldier card) {
+    private DwarvenSoldier(final DwarvenSoldier card) {
         super(card);
     }
 

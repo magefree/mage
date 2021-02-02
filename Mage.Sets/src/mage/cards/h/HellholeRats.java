@@ -39,7 +39,7 @@ public final class HellholeRats extends CardImpl {
 
     }
 
-    public HellholeRats(final HellholeRats card) {
+    private HellholeRats(final HellholeRats card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class ThrabenSentry extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new TransformSourceEffect(true), true, new FilterControlledCreaturePermanent()));
     }
 
-    public ThrabenSentry(final ThrabenSentry card) {
+    private ThrabenSentry(final ThrabenSentry card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class BubbleMatrix extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
     }
 
-    public BubbleMatrix(final BubbleMatrix card) {
+    private BubbleMatrix(final BubbleMatrix card) {
         super(card);
     }
 

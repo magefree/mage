@@ -44,7 +44,7 @@ public final class ManaBloom extends CardImpl {
 
     }
 
-    public ManaBloom(final ManaBloom card) {
+    private ManaBloom(final ManaBloom card) {
         super(card);
     }
 

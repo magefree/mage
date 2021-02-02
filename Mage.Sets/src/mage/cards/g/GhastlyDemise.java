@@ -38,7 +38,7 @@ public final class GhastlyDemise extends CardImpl {
         this.getSpellAbility().addEffect(new GhastlyDemiseEffect(false));
     }
 
-    public GhastlyDemise(final GhastlyDemise card) {
+    private GhastlyDemise(final GhastlyDemise card) {
         super(card);
     }
 

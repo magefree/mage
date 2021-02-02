@@ -37,7 +37,7 @@ public final class AysenAbbey extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AysenAbbey(final AysenAbbey card) {
+    private AysenAbbey(final AysenAbbey card) {
         super(card);
     }
 

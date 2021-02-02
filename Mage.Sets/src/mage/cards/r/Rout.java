@@ -31,7 +31,7 @@ public final class Rout extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Rout(final Rout card) {
+    private Rout(final Rout card) {
         super(card);
     }
 

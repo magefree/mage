@@ -26,7 +26,7 @@ public final class ChainReaction extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public ChainReaction(final ChainReaction card) {
+    private ChainReaction(final ChainReaction card) {
         super(card);
     }
 

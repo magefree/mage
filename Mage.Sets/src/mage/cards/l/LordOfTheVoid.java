@@ -40,7 +40,7 @@ public final class LordOfTheVoid extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LordOfTheVoidEffect(), false, true));
     }
 
-    public LordOfTheVoid(final LordOfTheVoid card) {
+    private LordOfTheVoid(final LordOfTheVoid card) {
         super(card);
     }
 

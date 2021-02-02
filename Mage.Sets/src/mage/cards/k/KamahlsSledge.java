@@ -29,7 +29,7 @@ public final class KamahlsSledge extends CardImpl {
             "<br><br><i>Threshold</i> &mdash; If seven or more cards are in your graveyard, instead {this} deals 4 damage to that creature and 4 damage to that creature's controller."));
     }
 
-    public KamahlsSledge(final KamahlsSledge card) {
+    private KamahlsSledge(final KamahlsSledge card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class Cunning extends CardImpl {
                 new SacrificeSourceBeginningCleanupStepEffect()));
     }
 
-    public Cunning(final Cunning card) {
+    private Cunning(final Cunning card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class Forbid extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Forbid(final Forbid card) {
+    private Forbid(final Forbid card) {
         super(card);
     }
 

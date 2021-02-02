@@ -52,7 +52,7 @@ public final class ImperialAerosaur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ImperialAerosaur(final ImperialAerosaur card) {
+    private ImperialAerosaur(final ImperialAerosaur card) {
         super(card);
     }
 

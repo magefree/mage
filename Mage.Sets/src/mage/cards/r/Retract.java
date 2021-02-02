@@ -25,7 +25,7 @@ public final class Retract extends CardImpl {
         
     }
 
-    public Retract(final Retract card) {
+    private Retract(final Retract card) {
         super(card);
     }
 

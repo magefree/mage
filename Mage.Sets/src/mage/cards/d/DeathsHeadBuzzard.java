@@ -31,7 +31,7 @@ public final class DeathsHeadBuzzard extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new BoostAllEffect(-1, -1, Duration.EndOfTurn)));
     }
 
-    public DeathsHeadBuzzard(final DeathsHeadBuzzard card) {
+    private DeathsHeadBuzzard(final DeathsHeadBuzzard card) {
         super(card);
     }
 

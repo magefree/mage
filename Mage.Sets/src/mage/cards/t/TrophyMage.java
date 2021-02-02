@@ -39,7 +39,7 @@ public final class TrophyMage extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 1, filter), true, true), true));
     }
 
-    public TrophyMage(final TrophyMage card) {
+    private TrophyMage(final TrophyMage card) {
         super(card);
     }
 

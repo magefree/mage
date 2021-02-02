@@ -31,7 +31,7 @@ public final class EmberSwallower extends CardImpl {
         this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new SacrificeAllEffect(3, new FilterControlledLandPermanent("lands"))));
     }
 
-    public EmberSwallower(final EmberSwallower card) {
+    private EmberSwallower(final EmberSwallower card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class LifeMatrix extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LifeMatrix(final LifeMatrix card) {
+    private LifeMatrix(final LifeMatrix card) {
         super(card);
     }
 

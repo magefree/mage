@@ -24,7 +24,7 @@ public final class Rebuke extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public Rebuke(final Rebuke card) {
+    private Rebuke(final Rebuke card) {
         super(card);
     }
 

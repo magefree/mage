@@ -44,7 +44,7 @@ public final class VulshokGauntlets extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public VulshokGauntlets(final VulshokGauntlets card) {
+    private VulshokGauntlets(final VulshokGauntlets card) {
         super(card);
     }
 

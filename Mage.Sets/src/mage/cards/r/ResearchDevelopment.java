@@ -31,7 +31,7 @@ public final class ResearchDevelopment extends SplitCard {
         getRightHalfCard().getSpellAbility().addEffect(new DevelopmentEffect());
     }
 
-    public ResearchDevelopment(final ResearchDevelopment card) {
+    private ResearchDevelopment(final ResearchDevelopment card) {
         super(card);
     }
 

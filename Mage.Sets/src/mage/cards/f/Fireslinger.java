@@ -34,7 +34,7 @@ public final class Fireslinger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Fireslinger(final Fireslinger card) {
+    private Fireslinger(final Fireslinger card) {
         super(card);
     }
 

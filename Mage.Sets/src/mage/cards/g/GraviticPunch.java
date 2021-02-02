@@ -33,7 +33,7 @@ public final class GraviticPunch extends CardImpl {
 
     }
 
-    public GraviticPunch(final GraviticPunch card) {
+    private GraviticPunch(final GraviticPunch card) {
         super(card);
     }
 

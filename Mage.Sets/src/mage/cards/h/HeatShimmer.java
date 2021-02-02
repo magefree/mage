@@ -32,7 +32,7 @@ public final class HeatShimmer extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public HeatShimmer(final HeatShimmer card) {
+    private HeatShimmer(final HeatShimmer card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class LodestoneBauble extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LodestoneBauble(final LodestoneBauble card) {
+    private LodestoneBauble(final LodestoneBauble card) {
         super(card);
     }
 

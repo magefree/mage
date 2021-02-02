@@ -29,7 +29,7 @@ public final class LeadGolem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LeadGolem(final LeadGolem card) {
+    private LeadGolem(final LeadGolem card) {
         super(card);
     }
 

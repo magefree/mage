@@ -38,7 +38,7 @@ public final class PublicExecution extends CardImpl {
         this.getSpellAbility().addEffect(new PublicExecutionEffect());
     }
 
-    public PublicExecution(final PublicExecution card) {
+    private PublicExecution(final PublicExecution card) {
         super(card);
     }
 

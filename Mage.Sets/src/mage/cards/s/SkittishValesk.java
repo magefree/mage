@@ -38,7 +38,7 @@ public final class SkittishValesk extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{R}")));
     }
 
-    public SkittishValesk(final SkittishValesk card) {
+    private SkittishValesk(final SkittishValesk card) {
         super(card);
     }
 

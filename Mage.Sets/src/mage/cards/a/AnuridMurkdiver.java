@@ -27,7 +27,7 @@ public final class AnuridMurkdiver extends CardImpl {
         this.addAbility(new SwampwalkAbility());
     }
 
-    public AnuridMurkdiver(final AnuridMurkdiver card) {
+    private AnuridMurkdiver(final AnuridMurkdiver card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class Cataclysm extends CardImpl {
         this.getSpellAbility().addEffect(new CataclysmEffect());
     }
 
-    public Cataclysm(final Cataclysm card) {
+    private Cataclysm(final Cataclysm card) {
         super(card);
     }
 

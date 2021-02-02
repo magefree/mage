@@ -23,7 +23,7 @@ public final class RitualOfRejuvenation extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public RitualOfRejuvenation(final RitualOfRejuvenation card) {
+    private RitualOfRejuvenation(final RitualOfRejuvenation card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class DarkRevenant extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DarkRevenantEffect()));
     }
 
-    public DarkRevenant(final DarkRevenant card) {
+    private DarkRevenant(final DarkRevenant card) {
         super(card);
     }
 

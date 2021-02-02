@@ -32,7 +32,7 @@ public final class WhitewaterNaiads extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WhitewaterNaiads(final WhitewaterNaiads card) {
+    private WhitewaterNaiads(final WhitewaterNaiads card) {
         super(card);
     }
 

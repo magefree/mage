@@ -35,7 +35,7 @@ public final class RoarOfTheKha extends CardImpl {
         this.addAbility(new EntwineAbility("{1}{W}"));
     }
 
-    public RoarOfTheKha(final RoarOfTheKha card) {
+    private RoarOfTheKha(final RoarOfTheKha card) {
         super(card);
     }
 

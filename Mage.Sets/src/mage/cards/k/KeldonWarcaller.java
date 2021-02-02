@@ -40,7 +40,7 @@ public final class KeldonWarcaller extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KeldonWarcaller(final KeldonWarcaller card) {
+    private KeldonWarcaller(final KeldonWarcaller card) {
         super(card);
     }
 

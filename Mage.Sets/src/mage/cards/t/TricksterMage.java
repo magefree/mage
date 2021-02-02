@@ -48,7 +48,7 @@ public final class TricksterMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TricksterMage(final TricksterMage card) {
+    private TricksterMage(final TricksterMage card) {
         super(card);
     }
 

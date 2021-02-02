@@ -32,7 +32,7 @@ public final class UrgeToFeed extends CardImpl {
         this.getSpellAbility().addEffect(new UrgeToFeedEffect());
     }
 
-    public UrgeToFeed(final UrgeToFeed card) {
+    private UrgeToFeed(final UrgeToFeed card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class WanderingGoblins extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new DomainValue(), StaticValue.get(0), Duration.EndOfTurn), new GenericManaCost(3)));
     }
 
-    public WanderingGoblins(final WanderingGoblins card) {
+    private WanderingGoblins(final WanderingGoblins card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class UncageTheMenagerie extends CardImpl {
         this.getSpellAbility().addEffect(new UncageTheMenagerieEffect());
     }
 
-    public UncageTheMenagerie(final UncageTheMenagerie card) {
+    private UncageTheMenagerie(final UncageTheMenagerie card) {
         super(card);
     }
 

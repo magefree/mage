@@ -32,7 +32,7 @@ public final class FurnaceSpirit extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public FurnaceSpirit(final FurnaceSpirit card) {
+    private FurnaceSpirit(final FurnaceSpirit card) {
         super(card);
     }
 

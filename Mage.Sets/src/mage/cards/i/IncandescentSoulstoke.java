@@ -57,7 +57,7 @@ public final class IncandescentSoulstoke extends CardImpl {
 
     }
 
-    public IncandescentSoulstoke(final IncandescentSoulstoke card) {
+    private IncandescentSoulstoke(final IncandescentSoulstoke card) {
         super(card);
     }
 

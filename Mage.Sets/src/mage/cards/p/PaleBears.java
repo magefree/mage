@@ -26,7 +26,7 @@ public final class PaleBears extends CardImpl {
         this.addAbility(new IslandwalkAbility());
     }
 
-    public PaleBears(final PaleBears card) {
+    private PaleBears(final PaleBears card) {
         super(card);
     }
 

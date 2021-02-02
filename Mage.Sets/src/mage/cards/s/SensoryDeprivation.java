@@ -36,7 +36,7 @@ public final class SensoryDeprivation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-3, 0, Duration.WhileOnBattlefield)));
     }
 
-    public SensoryDeprivation(final SensoryDeprivation card) {
+    private SensoryDeprivation(final SensoryDeprivation card) {
         super(card);
     }
 

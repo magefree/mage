@@ -35,7 +35,7 @@ public final class KitsuneLoreweaver extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{W}")));
     }
 
-    public KitsuneLoreweaver(final KitsuneLoreweaver card) {
+    private KitsuneLoreweaver(final KitsuneLoreweaver card) {
         super(card);
     }
 

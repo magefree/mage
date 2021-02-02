@@ -23,7 +23,7 @@ public final class SphereOfGrace extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageByColorEffect(ObjectColor.BLACK, 2)));
     }
 
-    public SphereOfGrace(final SphereOfGrace card) {
+    private SphereOfGrace(final SphereOfGrace card) {
         super(card);
     }
 

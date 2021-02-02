@@ -38,7 +38,7 @@ public final class BlightedWoodland extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlightedWoodland(final BlightedWoodland card) {
+    private BlightedWoodland(final BlightedWoodland card) {
         super(card);
     }
 

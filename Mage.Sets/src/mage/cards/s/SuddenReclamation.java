@@ -34,7 +34,7 @@ public final class SuddenReclamation extends CardImpl {
         this.getSpellAbility().addEffect(new SuddenReclamationEffect());
     }
 
-    public SuddenReclamation(final SuddenReclamation card) {
+    private SuddenReclamation(final SuddenReclamation card) {
         super(card);
     }
 

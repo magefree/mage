@@ -29,7 +29,7 @@ public final class FiligreeFracture extends CardImpl {
         this.getSpellAbility().addEffect(new FiligreeFractureEffect());
     }
 
-    public FiligreeFracture(final FiligreeFracture card) {
+    private FiligreeFracture(final FiligreeFracture card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class VarinaLichQueen extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VarinaLichQueen(final VarinaLichQueen card) {
+    private VarinaLichQueen(final VarinaLichQueen card) {
         super(card);
     }
 

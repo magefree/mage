@@ -38,7 +38,7 @@ public final class SanctifiedCharge extends CardImpl {
 
     }
 
-    public SanctifiedCharge(final SanctifiedCharge card) {
+    private SanctifiedCharge(final SanctifiedCharge card) {
         super(card);
     }
 

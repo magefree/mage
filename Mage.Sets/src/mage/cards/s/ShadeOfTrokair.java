@@ -35,7 +35,7 @@ public final class ShadeOfTrokair extends CardImpl {
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{W}"), this));
     }
 
-    public ShadeOfTrokair(final ShadeOfTrokair card) {
+    private ShadeOfTrokair(final ShadeOfTrokair card) {
         super(card);
     }
 

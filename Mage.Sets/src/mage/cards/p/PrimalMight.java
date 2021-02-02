@@ -34,7 +34,7 @@ public final class PrimalMight extends CardImpl {
 
     }
 
-    public PrimalMight(final PrimalMight card) {
+    private PrimalMight(final PrimalMight card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class LudevicsTestSubject extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LudevicsTestSubject(final LudevicsTestSubject card) {
+    private LudevicsTestSubject(final LudevicsTestSubject card) {
         super(card);
     }
 

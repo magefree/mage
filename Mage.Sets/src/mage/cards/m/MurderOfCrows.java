@@ -33,7 +33,7 @@ public final class MurderOfCrows extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new MurderOfCrowsEffect(), false, true));
     }
 
-    public MurderOfCrows(final MurderOfCrows card) {
+    private MurderOfCrows(final MurderOfCrows card) {
         super(card);
     }
 

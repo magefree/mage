@@ -23,7 +23,7 @@ public final class CentaurCourser extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public CentaurCourser(final CentaurCourser card) {
+    private CentaurCourser(final CentaurCourser card) {
         super(card);
     }
 

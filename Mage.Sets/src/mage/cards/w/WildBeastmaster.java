@@ -37,7 +37,7 @@ public final class WildBeastmaster extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }
 
-    public WildBeastmaster(final WildBeastmaster card) {
+    private WildBeastmaster(final WildBeastmaster card) {
         super(card);
     }
 

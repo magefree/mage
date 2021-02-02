@@ -35,7 +35,7 @@ public final class BoonSatyr extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(4,2, Duration.WhileOnBattlefield)));
     }
 
-    public BoonSatyr(final BoonSatyr card) {
+    private BoonSatyr(final BoonSatyr card) {
         super(card);
     }
 

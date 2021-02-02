@@ -39,7 +39,7 @@ public final class RadiantKavu extends CardImpl {
            Duration.EndOfTurn, true)), new ManaCostsImpl("{R}{G}{W}")));
     }
 
-    public RadiantKavu(final RadiantKavu card) {
+    private RadiantKavu(final RadiantKavu card) {
         super(card);
     }
 

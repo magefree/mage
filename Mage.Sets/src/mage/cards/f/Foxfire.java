@@ -35,7 +35,7 @@ public final class Foxfire extends CardImpl {
 
     }
 
-    public Foxfire(final Foxfire card) {
+    private Foxfire(final Foxfire card) {
         super(card);
     }
 

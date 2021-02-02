@@ -22,7 +22,7 @@ public final class WetlandSambar extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public WetlandSambar(final WetlandSambar card) {
+    private WetlandSambar(final WetlandSambar card) {
         super(card);
     }
 

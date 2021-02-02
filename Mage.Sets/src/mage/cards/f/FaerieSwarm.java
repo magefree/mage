@@ -41,7 +41,7 @@ public final class FaerieSwarm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public FaerieSwarm(final FaerieSwarm card) {
+    private FaerieSwarm(final FaerieSwarm card) {
         super(card);
     }
 

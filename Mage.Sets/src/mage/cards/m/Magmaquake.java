@@ -36,7 +36,7 @@ public final class Magmaquake extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, filter));
     }
 
-    public Magmaquake(final Magmaquake card) {
+    private Magmaquake(final Magmaquake card) {
         super(card);
     }
 

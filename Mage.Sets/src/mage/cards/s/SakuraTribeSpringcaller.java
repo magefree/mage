@@ -34,7 +34,7 @@ public final class SakuraTribeSpringcaller extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
     }
 
-    public SakuraTribeSpringcaller(final SakuraTribeSpringcaller card) {
+    private SakuraTribeSpringcaller(final SakuraTribeSpringcaller card) {
         super(card);
     }
 

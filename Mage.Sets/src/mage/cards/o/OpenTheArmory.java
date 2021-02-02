@@ -31,7 +31,7 @@ public final class OpenTheArmory extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, auraOrEquipmentTarget), true, true));
     }
 
-    public OpenTheArmory(final OpenTheArmory card) {
+    private OpenTheArmory(final OpenTheArmory card) {
         super(card);
     }
 

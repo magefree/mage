@@ -39,7 +39,7 @@ public final class InactionInjunction extends CardImpl {
  
     }
  
-    public InactionInjunction(final InactionInjunction card) {
+    private InactionInjunction(final InactionInjunction card) {
         super(card);
     }
  

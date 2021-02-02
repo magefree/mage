@@ -64,7 +64,7 @@ public final class SupremeLeaderSnoke extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public SupremeLeaderSnoke(final SupremeLeaderSnoke card) {
+    private SupremeLeaderSnoke(final SupremeLeaderSnoke card) {
         super(card);
     }
 

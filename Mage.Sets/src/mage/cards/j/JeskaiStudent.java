@@ -27,7 +27,7 @@ public final class JeskaiStudent extends CardImpl {
         this.addAbility(new ProwessAbility());
     }
 
-    public JeskaiStudent(final JeskaiStudent card) {
+    private JeskaiStudent(final JeskaiStudent card) {
         super(card);
     }
 

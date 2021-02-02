@@ -23,7 +23,7 @@ public final class MengHuosHorde extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public MengHuosHorde(final MengHuosHorde card) {
+    private MengHuosHorde(final MengHuosHorde card) {
         super(card);
     }
 

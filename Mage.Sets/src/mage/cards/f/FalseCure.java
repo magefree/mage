@@ -29,7 +29,7 @@ public final class FalseCure extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new FalseCureTriggeredAbility()));
     }
 
-    public FalseCure(final FalseCure card) {
+    private FalseCure(final FalseCure card) {
         super(card);
     }
 

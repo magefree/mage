@@ -33,7 +33,7 @@ public final class NyxbornShieldmate extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,2, Duration.WhileOnBattlefield)));
     }
 
-    public NyxbornShieldmate(final NyxbornShieldmate card) {
+    private NyxbornShieldmate(final NyxbornShieldmate card) {
         super(card);
     }
 

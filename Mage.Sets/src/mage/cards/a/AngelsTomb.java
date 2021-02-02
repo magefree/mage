@@ -39,7 +39,7 @@ public final class AngelsTomb extends CardImpl {
         );
     }
 
-    public AngelsTomb(final AngelsTomb card) {
+    private AngelsTomb(final AngelsTomb card) {
         super(card);
     }
 

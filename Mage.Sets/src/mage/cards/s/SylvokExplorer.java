@@ -28,7 +28,7 @@ public final class SylvokExplorer extends CardImpl {
         this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));
     }
 
-    public SylvokExplorer(final SylvokExplorer card) {
+    private SylvokExplorer(final SylvokExplorer card) {
         super(card);
     }
 

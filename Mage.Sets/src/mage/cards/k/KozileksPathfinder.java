@@ -34,7 +34,7 @@ public final class KozileksPathfinder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KozileksPathfinder(final KozileksPathfinder card) {
+    private KozileksPathfinder(final KozileksPathfinder card) {
         super(card);
     }
 

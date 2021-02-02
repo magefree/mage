@@ -32,7 +32,7 @@ public final class PrahvSpiresOfOrder extends CardImpl {
 
     }
 
-    public PrahvSpiresOfOrder(final PrahvSpiresOfOrder card) {
+    private PrahvSpiresOfOrder(final PrahvSpiresOfOrder card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class AngelicFieldMarshal extends CardImpl {
         this.addAbility(new LieutenantAbility(effect));
     }
 
-    public AngelicFieldMarshal(final AngelicFieldMarshal card) {
+    private AngelicFieldMarshal(final AngelicFieldMarshal card) {
         super(card);
     }
 

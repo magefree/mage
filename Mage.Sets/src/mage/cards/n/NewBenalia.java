@@ -27,7 +27,7 @@ public final class NewBenalia extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public NewBenalia(final NewBenalia card) {
+    private NewBenalia(final NewBenalia card) {
         super(card);
     }
 

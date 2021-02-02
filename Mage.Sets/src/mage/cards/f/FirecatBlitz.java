@@ -46,7 +46,7 @@ public final class FirecatBlitz extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FirecatBlitz(final FirecatBlitz card) {
+    private FirecatBlitz(final FirecatBlitz card) {
         super(card);
     }
 

@@ -64,7 +64,7 @@ public final class KyloRen extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KyloRen(final KyloRen card) {
+    private KyloRen(final KyloRen card) {
         super(card);
     }
 

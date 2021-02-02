@@ -29,7 +29,7 @@ public final class BrindleBoar extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(4), new SacrificeSourceCost()));
     }
 
-    public BrindleBoar(final BrindleBoar card) {
+    private BrindleBoar(final BrindleBoar card) {
         super(card);
     }
 

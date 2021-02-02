@@ -27,7 +27,7 @@ public final class ScaledBehemoth extends CardImpl {
 
     }
 
-    public ScaledBehemoth(final ScaledBehemoth card) {
+    private ScaledBehemoth(final ScaledBehemoth card) {
         super(card);
     }
 

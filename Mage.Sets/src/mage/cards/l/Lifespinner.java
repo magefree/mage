@@ -46,7 +46,7 @@ public final class Lifespinner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Lifespinner(final Lifespinner card) {
+    private Lifespinner(final Lifespinner card) {
         super(card);
     }
 

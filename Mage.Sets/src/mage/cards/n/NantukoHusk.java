@@ -34,7 +34,7 @@ public final class NantukoHusk extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
-    public NantukoHusk(final NantukoHusk card) {
+    private NantukoHusk(final NantukoHusk card) {
         super(card);
     }
 

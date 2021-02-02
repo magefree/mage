@@ -32,7 +32,7 @@ public final class ExclusionMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ExclusionMage(final ExclusionMage card) {
+    private ExclusionMage(final ExclusionMage card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class QuestForTheHolyRelic extends CardImpl {
         );
     }
 
-    public QuestForTheHolyRelic(final QuestForTheHolyRelic card) {
+    private QuestForTheHolyRelic(final QuestForTheHolyRelic card) {
         super(card);
     }
 

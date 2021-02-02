@@ -36,7 +36,7 @@ public final class HorriblyAwry extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public HorriblyAwry(final HorriblyAwry card) {
+    private HorriblyAwry(final HorriblyAwry card) {
         super(card);
     }
 

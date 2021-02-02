@@ -51,7 +51,7 @@ public final class DaringArchaeologist extends CardImpl {
                 filter, false));
     }
 
-    public DaringArchaeologist(final DaringArchaeologist card) {
+    private DaringArchaeologist(final DaringArchaeologist card) {
         super(card);
     }
 

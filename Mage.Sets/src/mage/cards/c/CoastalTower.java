@@ -25,7 +25,7 @@ public final class CoastalTower extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public CoastalTower(final CoastalTower card) {
+    private CoastalTower(final CoastalTower card) {
         super(card);
     }
 

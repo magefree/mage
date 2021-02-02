@@ -37,7 +37,7 @@ public final class AngelicReward extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public AngelicReward(final AngelicReward card) {
+    private AngelicReward(final AngelicReward card) {
         super(card);
     }
 

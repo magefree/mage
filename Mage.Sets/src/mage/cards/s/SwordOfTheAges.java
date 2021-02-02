@@ -48,7 +48,7 @@ public final class SwordOfTheAges extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SwordOfTheAges(final SwordOfTheAges card) {
+    private SwordOfTheAges(final SwordOfTheAges card) {
         super(card);
     }
 

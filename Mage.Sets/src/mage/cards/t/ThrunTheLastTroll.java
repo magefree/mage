@@ -36,7 +36,7 @@ public final class ThrunTheLastTroll extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }
 
-    public ThrunTheLastTroll(final ThrunTheLastTroll card) {
+    private ThrunTheLastTroll(final ThrunTheLastTroll card) {
         super(card);
     }
 

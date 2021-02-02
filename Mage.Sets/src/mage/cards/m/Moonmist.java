@@ -38,7 +38,7 @@ public final class Moonmist extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true));
     }
 
-    public Moonmist(final Moonmist card) {
+    private Moonmist(final Moonmist card) {
         super(card);
     }
 

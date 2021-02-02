@@ -35,7 +35,7 @@ public final class SinisterConcoction extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SinisterConcoction(final SinisterConcoction card) {
+    private SinisterConcoction(final SinisterConcoction card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class WildInstincts extends CardImpl {
         getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public WildInstincts(final WildInstincts card) {
+    private WildInstincts(final WildInstincts card) {
         super(card);
     }
 

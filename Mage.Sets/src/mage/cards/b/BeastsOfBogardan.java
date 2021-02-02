@@ -48,7 +48,7 @@ public final class BeastsOfBogardan extends CardImpl {
                 "{this} gets +1/+1 as long as an opponent controls a nontoken white permanent")));
     }
 
-    public BeastsOfBogardan(final BeastsOfBogardan card) {
+    private BeastsOfBogardan(final BeastsOfBogardan card) {
         super(card);
     }
 

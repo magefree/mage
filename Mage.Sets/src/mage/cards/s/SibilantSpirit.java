@@ -34,7 +34,7 @@ public final class SibilantSpirit extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new SibilantSpiritEffect(), false));
     }
 
-    public SibilantSpirit(final SibilantSpirit card) {
+    private SibilantSpirit(final SibilantSpirit card) {
         super(card);
     }
 

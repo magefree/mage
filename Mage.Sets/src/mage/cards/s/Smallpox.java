@@ -39,7 +39,7 @@ public final class Smallpox extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Smallpox(final Smallpox card) {
+    private Smallpox(final Smallpox card) {
         super(card);
     }
 

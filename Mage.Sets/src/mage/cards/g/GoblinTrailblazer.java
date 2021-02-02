@@ -26,7 +26,7 @@ public final class GoblinTrailblazer extends CardImpl {
         this.addAbility(new MenaceAbility());
     }
 
-    public GoblinTrailblazer(final GoblinTrailblazer card) {
+    private GoblinTrailblazer(final GoblinTrailblazer card) {
         super(card);
     }
 

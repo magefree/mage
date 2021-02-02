@@ -44,7 +44,7 @@ public final class DisruptionAura extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public DisruptionAura(final DisruptionAura card) {
+    private DisruptionAura(final DisruptionAura card) {
         super(card);
     }
 

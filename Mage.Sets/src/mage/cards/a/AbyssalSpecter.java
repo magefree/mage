@@ -31,7 +31,7 @@ public final class AbyssalSpecter extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1, false), false, true));
     }
 
-    public AbyssalSpecter(final AbyssalSpecter card) {
+    private AbyssalSpecter(final AbyssalSpecter card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class MoggCannon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoggCannon(final MoggCannon card) {
+    private MoggCannon(final MoggCannon card) {
         super(card);
     }
 

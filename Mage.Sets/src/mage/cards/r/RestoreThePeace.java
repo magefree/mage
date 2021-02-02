@@ -28,7 +28,7 @@ public final class RestoreThePeace extends CardImpl {
 
     }
 
-    public RestoreThePeace(final RestoreThePeace card) {
+    private RestoreThePeace(final RestoreThePeace card) {
         super(card);
     }
 

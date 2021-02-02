@@ -48,7 +48,7 @@ public final class ReiverDemon extends CardImpl {
                 new CastFromHandWatcher());
     }
 
-    public ReiverDemon(final ReiverDemon card) {
+    private ReiverDemon(final ReiverDemon card) {
         super(card);
     }
 

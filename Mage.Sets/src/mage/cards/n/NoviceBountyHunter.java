@@ -31,7 +31,7 @@ public final class NoviceBountyHunter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NoviceBountyHunter(final NoviceBountyHunter card) {
+    private NoviceBountyHunter(final NoviceBountyHunter card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class AlchorsTomb extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AlchorsTomb(final AlchorsTomb card) {
+    private AlchorsTomb(final AlchorsTomb card) {
         super(card);
     }
 

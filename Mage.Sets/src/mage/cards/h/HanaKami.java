@@ -40,7 +40,7 @@ public final class HanaKami extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HanaKami(final HanaKami card) {
+    private HanaKami(final HanaKami card) {
         super(card);
     }
 

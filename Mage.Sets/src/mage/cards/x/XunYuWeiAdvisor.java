@@ -38,7 +38,7 @@ public final class XunYuWeiAdvisor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public XunYuWeiAdvisor(final XunYuWeiAdvisor card) {
+    private XunYuWeiAdvisor(final XunYuWeiAdvisor card) {
         super(card);
     }
 

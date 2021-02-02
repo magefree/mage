@@ -38,7 +38,7 @@ public final class NissasChosen extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NissasChosenEffect()));
     }
 
-    public NissasChosen(final NissasChosen card) {
+    private NissasChosen(final NissasChosen card) {
         super(card);
     }
 

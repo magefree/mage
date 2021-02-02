@@ -44,7 +44,7 @@ public final class BullRushBruiser extends CardImpl {
         ));
     }
 
-    public BullRushBruiser(final BullRushBruiser card) {
+    private BullRushBruiser(final BullRushBruiser card) {
         super(card);
     }
 

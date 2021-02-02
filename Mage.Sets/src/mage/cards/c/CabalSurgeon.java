@@ -39,7 +39,7 @@ public final class CabalSurgeon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CabalSurgeon(final CabalSurgeon card) {
+    private CabalSurgeon(final CabalSurgeon card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class KazanduRefuge extends CardImpl {
         
     }
 
-    public KazanduRefuge(final KazanduRefuge card) {
+    private KazanduRefuge(final KazanduRefuge card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class Shinewend extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Shinewend(final Shinewend card) {
+    private Shinewend(final Shinewend card) {
         super(card);
     }
 

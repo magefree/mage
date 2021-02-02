@@ -22,7 +22,7 @@ public final class CyclopsOfOneEyedPass extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public CyclopsOfOneEyedPass(final CyclopsOfOneEyedPass card) {
+    private CyclopsOfOneEyedPass(final CyclopsOfOneEyedPass card) {
         super(card);
     }
 

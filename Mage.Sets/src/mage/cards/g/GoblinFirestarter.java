@@ -34,7 +34,7 @@ public final class GoblinFirestarter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinFirestarter(final GoblinFirestarter card) {
+    private GoblinFirestarter(final GoblinFirestarter card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class Defeat extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public Defeat(final Defeat card) {
+    private Defeat(final Defeat card) {
         super(card);
     }
 

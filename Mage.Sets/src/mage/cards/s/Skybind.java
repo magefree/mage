@@ -39,7 +39,7 @@ public final class Skybind extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Skybind(final Skybind card) {
+    private Skybind(final Skybind card) {
         super(card);
     }
 

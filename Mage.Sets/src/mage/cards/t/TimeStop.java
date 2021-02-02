@@ -21,7 +21,7 @@ public final class TimeStop extends CardImpl {
         this.getSpellAbility().addEffect(new EndTurnEffect());
     }
 
-    public TimeStop(final TimeStop card) {
+    private TimeStop(final TimeStop card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class YixlidJailer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new YixlidJailerEffect()));
     }
 
-    public YixlidJailer(final YixlidJailer card) {
+    private YixlidJailer(final YixlidJailer card) {
         super(card);
     }
 

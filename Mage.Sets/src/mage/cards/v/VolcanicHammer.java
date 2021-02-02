@@ -22,7 +22,7 @@ public final class VolcanicHammer extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public VolcanicHammer(final VolcanicHammer card) {
+    private VolcanicHammer(final VolcanicHammer card) {
         super(card);
     }
 

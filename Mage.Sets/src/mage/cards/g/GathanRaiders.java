@@ -38,7 +38,7 @@ public final class GathanRaiders extends CardImpl {
         this.addAbility(new MorphAbility(this, new DiscardCardCost()));
     }
 
-    public GathanRaiders(final GathanRaiders card) {
+    private GathanRaiders(final GathanRaiders card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class RegalCaracal extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect2));
     }
 
-    public RegalCaracal(final RegalCaracal card) {
+    private RegalCaracal(final RegalCaracal card) {
         super(card);
     }
 

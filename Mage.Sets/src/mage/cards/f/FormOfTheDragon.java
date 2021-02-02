@@ -48,7 +48,7 @@ public final class FormOfTheDragon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
-    public FormOfTheDragon(final FormOfTheDragon card) {
+    private FormOfTheDragon(final FormOfTheDragon card) {
         super(card);
     }
 

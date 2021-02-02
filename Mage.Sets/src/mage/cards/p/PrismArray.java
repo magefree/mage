@@ -43,7 +43,7 @@ public final class PrismArray extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(3), new ManaCostsImpl("{W}{U}{B}{R}{G}")));
     }
 
-    public PrismArray(final PrismArray card) {
+    private PrismArray(final PrismArray card) {
         super(card);
     }
 

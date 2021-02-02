@@ -30,7 +30,7 @@ public final class UnifiedStrike extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
-    public UnifiedStrike(final UnifiedStrike card) {
+    private UnifiedStrike(final UnifiedStrike card) {
         super(card);
     }
 

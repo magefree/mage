@@ -25,7 +25,7 @@ public final class PeachGardenOath extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(amount));
     }
 
-    public PeachGardenOath(final PeachGardenOath card) {
+    private PeachGardenOath(final PeachGardenOath card) {
         super(card);
     }
 

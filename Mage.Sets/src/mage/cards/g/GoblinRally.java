@@ -23,7 +23,7 @@ public final class GoblinRally extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 4));
     }
 
-    public GoblinRally(final GoblinRally card) {
+    private GoblinRally(final GoblinRally card) {
         super(card);
     }
 

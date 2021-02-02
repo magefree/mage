@@ -26,7 +26,7 @@ public final class TreespringLorian extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{G}")));
     }
 
-    public TreespringLorian(final TreespringLorian card) {
+    private TreespringLorian(final TreespringLorian card) {
         super(card);
     }
 

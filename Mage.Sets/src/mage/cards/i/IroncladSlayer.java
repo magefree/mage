@@ -42,7 +42,7 @@ public final class IroncladSlayer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IroncladSlayer(final IroncladSlayer card) {
+    private IroncladSlayer(final IroncladSlayer card) {
         super(card);
     }
 

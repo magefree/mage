@@ -41,7 +41,7 @@ public final class UnbreathingHorde extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnbreathingHordeEffect2()));
     }
 
-    public UnbreathingHorde(final UnbreathingHorde card) {
+    private UnbreathingHorde(final UnbreathingHorde card) {
         super(card);
     }
 

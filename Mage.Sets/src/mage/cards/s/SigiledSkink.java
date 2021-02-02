@@ -27,7 +27,7 @@ public final class SigiledSkink extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new ScryEffect(1), false));
     }
 
-    public SigiledSkink(final SigiledSkink card) {
+    private SigiledSkink(final SigiledSkink card) {
         super(card);
     }
 

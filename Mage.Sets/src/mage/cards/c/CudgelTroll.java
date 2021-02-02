@@ -29,7 +29,7 @@ public final class CudgelTroll extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
     }
 
-    public CudgelTroll(final CudgelTroll card) {
+    private CudgelTroll(final CudgelTroll card) {
         super(card);
     }
 

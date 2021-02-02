@@ -45,7 +45,7 @@ public final class GravespawnSovereign extends CardImpl {
 
     }
 
-    public GravespawnSovereign(final GravespawnSovereign card) {
+    private GravespawnSovereign(final GravespawnSovereign card) {
         super(card);
     }
 

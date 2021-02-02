@@ -26,7 +26,7 @@ public final class Guma extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
     }
 
-    public Guma(final Guma card) {
+    private Guma(final Guma card) {
         super(card);
     }
 

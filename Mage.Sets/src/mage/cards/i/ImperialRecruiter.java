@@ -38,7 +38,7 @@ public final class ImperialRecruiter extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true)));
     }
 
-    public ImperialRecruiter(final ImperialRecruiter card) {
+    private ImperialRecruiter(final ImperialRecruiter card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class Onulet extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(2)));
     }
 
-    public Onulet(final Onulet card) {
+    private Onulet(final Onulet card) {
         super(card);
     }
 

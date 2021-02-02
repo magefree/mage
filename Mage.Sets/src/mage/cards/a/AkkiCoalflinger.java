@@ -36,7 +36,7 @@ public final class AkkiCoalflinger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AkkiCoalflinger(final AkkiCoalflinger card) {
+    private AkkiCoalflinger(final AkkiCoalflinger card) {
         super(card);
     }
 

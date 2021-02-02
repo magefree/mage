@@ -39,7 +39,7 @@ public final class SunriseSovereign extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public SunriseSovereign(final SunriseSovereign card) {
+    private SunriseSovereign(final SunriseSovereign card) {
         super(card);
     }
 

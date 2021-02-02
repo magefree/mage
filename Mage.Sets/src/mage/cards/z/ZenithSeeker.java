@@ -39,7 +39,7 @@ public final class ZenithSeeker extends CardImpl {
 
     }
 
-    public ZenithSeeker(final ZenithSeeker card) {
+    private ZenithSeeker(final ZenithSeeker card) {
         super(card);
     }
 

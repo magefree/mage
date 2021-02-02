@@ -44,7 +44,7 @@ public final class BleakCovenVampires extends CardImpl {
         );
     }
 
-    public BleakCovenVampires(final BleakCovenVampires card) {
+    private BleakCovenVampires(final BleakCovenVampires card) {
         super(card);
     }
 

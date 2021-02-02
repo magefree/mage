@@ -80,7 +80,7 @@ public final class OrochiEggwatcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrochiEggwatcher(final OrochiEggwatcher card) {
+    private OrochiEggwatcher(final OrochiEggwatcher card) {
         super(card);
     }
 

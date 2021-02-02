@@ -46,7 +46,7 @@ public final class WallOfVipers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WallOfVipers(final WallOfVipers card) {
+    private WallOfVipers(final WallOfVipers card) {
         super(card);
     }
 

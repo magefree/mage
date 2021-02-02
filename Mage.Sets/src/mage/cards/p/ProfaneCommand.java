@@ -69,7 +69,7 @@ public final class ProfaneCommand extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(ProfaneCommandAdjuster.instance);
     }
 
-    public ProfaneCommand(final ProfaneCommand card) {
+    private ProfaneCommand(final ProfaneCommand card) {
         super(card);
     }
 

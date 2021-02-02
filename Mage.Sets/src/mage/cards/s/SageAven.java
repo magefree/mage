@@ -30,7 +30,7 @@ public final class SageAven extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryControllerEffect(4)));
     }
 
-    public SageAven(final SageAven card) {
+    private SageAven(final SageAven card) {
         super(card);
     }
 

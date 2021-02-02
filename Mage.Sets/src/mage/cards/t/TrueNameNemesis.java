@@ -50,7 +50,7 @@ public final class TrueNameNemesis extends CardImpl {
 
     }
 
-    public TrueNameNemesis(final TrueNameNemesis card) {
+    private TrueNameNemesis(final TrueNameNemesis card) {
         super(card);
     }
 

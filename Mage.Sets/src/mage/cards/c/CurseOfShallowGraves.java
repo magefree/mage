@@ -44,7 +44,7 @@ public final class CurseOfShallowGraves extends CardImpl {
         this.addAbility(new CurseOfShallowTriggeredAbility());
     }
 
-    public CurseOfShallowGraves(final CurseOfShallowGraves card) {
+    private CurseOfShallowGraves(final CurseOfShallowGraves card) {
         super(card);
     }
 

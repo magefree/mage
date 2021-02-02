@@ -56,7 +56,7 @@ public final class NoggleHedgeMage extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public NoggleHedgeMage(final NoggleHedgeMage card) {
+    private NoggleHedgeMage(final NoggleHedgeMage card) {
         super(card);
     }
 

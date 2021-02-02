@@ -25,7 +25,7 @@ public final class SegovianLeviathan extends CardImpl {
         this.addAbility(new IslandwalkAbility());
     }
 
-    public SegovianLeviathan(final SegovianLeviathan card) {
+    private SegovianLeviathan(final SegovianLeviathan card) {
         super(card);
     }
 

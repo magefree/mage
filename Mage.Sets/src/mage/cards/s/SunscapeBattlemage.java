@@ -54,7 +54,7 @@ public final class SunscapeBattlemage extends CardImpl {
                 "When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, draw two cards."));
     }
 
-    public SunscapeBattlemage(final SunscapeBattlemage card) {
+    private SunscapeBattlemage(final SunscapeBattlemage card) {
         super(card);
     }
 

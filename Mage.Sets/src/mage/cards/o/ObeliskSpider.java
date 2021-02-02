@@ -48,7 +48,7 @@ public final class ObeliskSpider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ObeliskSpider(final ObeliskSpider card) {
+    private ObeliskSpider(final ObeliskSpider card) {
         super(card);
     }
 

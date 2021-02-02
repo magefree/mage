@@ -28,7 +28,7 @@ public final class Caltrops extends CardImpl {
                 SetTargetPointer.PERMANENT, false));
     }
 
-    public Caltrops(final Caltrops card) {
+    private Caltrops(final Caltrops card) {
         super(card);
     }
 

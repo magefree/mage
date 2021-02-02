@@ -39,7 +39,7 @@ public final class FieldOfSouls extends CardImpl {
         
     }
 
-    public FieldOfSouls(final FieldOfSouls card) {
+    private FieldOfSouls(final FieldOfSouls card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class AwakenTheErstwhile extends CardImpl {
         this.getSpellAbility().addEffect(new AwakenTheErstwhileEffect());
     }
 
-    public AwakenTheErstwhile(final AwakenTheErstwhile card) {
+    private AwakenTheErstwhile(final AwakenTheErstwhile card) {
         super(card);
     }
 

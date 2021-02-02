@@ -38,7 +38,7 @@ public final class SylvanMessenger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealLibraryPutIntoHandEffect(4, filter, Zone.LIBRARY)));
     }
 
-    public SylvanMessenger(final SylvanMessenger card) {
+    private SylvanMessenger(final SylvanMessenger card) {
         super(card);
     }
 

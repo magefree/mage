@@ -30,7 +30,7 @@ public final class PlatedSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(0, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, false)));
     }
 
-    public PlatedSliver(final PlatedSliver card) {
+    private PlatedSliver(final PlatedSliver card) {
         super(card);
     }
 

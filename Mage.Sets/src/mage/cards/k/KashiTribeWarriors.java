@@ -33,7 +33,7 @@ public final class KashiTribeWarriors extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KashiTribeWarriors(final KashiTribeWarriors card) {
+    private KashiTribeWarriors(final KashiTribeWarriors card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class ReignOfChaos extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public ReignOfChaos(final ReignOfChaos card) {
+    private ReignOfChaos(final ReignOfChaos card) {
         super(card);
     }
 

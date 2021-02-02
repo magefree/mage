@@ -27,7 +27,7 @@ public final class Gravepurge extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Gravepurge(final Gravepurge card) {
+    private Gravepurge(final Gravepurge card) {
         super(card);
     }
 

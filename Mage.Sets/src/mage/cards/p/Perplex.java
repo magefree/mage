@@ -30,7 +30,7 @@ public final class Perplex extends CardImpl {
         this.addAbility(new TransmuteAbility("{1}{U}{B}"));
     }
 
-    public Perplex(final Perplex card) {
+    private Perplex(final Perplex card) {
         super(card);
     }
 

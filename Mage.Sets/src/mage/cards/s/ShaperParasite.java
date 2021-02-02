@@ -42,7 +42,7 @@ public final class ShaperParasite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShaperParasite(final ShaperParasite card) {
+    private ShaperParasite(final ShaperParasite card) {
         super(card);
     }
 

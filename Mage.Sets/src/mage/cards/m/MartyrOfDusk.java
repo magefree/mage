@@ -28,7 +28,7 @@ public final class MartyrOfDusk extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new IxalanVampireToken())));
     }
 
-    public MartyrOfDusk(final MartyrOfDusk card) {
+    private MartyrOfDusk(final MartyrOfDusk card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class GiftOfGranite extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield)));
     }
 
-    public GiftOfGranite(final GiftOfGranite card) {
+    private GiftOfGranite(final GiftOfGranite card) {
         super(card);
     }
 

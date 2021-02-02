@@ -28,7 +28,7 @@ public final class AlmsOfTheVein extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{B}")));
     }
 
-    public AlmsOfTheVein(final AlmsOfTheVein card) {
+    private AlmsOfTheVein(final AlmsOfTheVein card) {
         super(card);
     }
 

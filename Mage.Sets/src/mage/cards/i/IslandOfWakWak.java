@@ -42,7 +42,7 @@ public final class IslandOfWakWak extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IslandOfWakWak(final IslandOfWakWak card) {
+    private IslandOfWakWak(final IslandOfWakWak card) {
         super(card);
     }
 

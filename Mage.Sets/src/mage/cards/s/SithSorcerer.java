@@ -40,7 +40,7 @@ public final class SithSorcerer extends CardImpl {
 
     }
 
-    public SithSorcerer(final SithSorcerer card) {
+    private SithSorcerer(final SithSorcerer card) {
         super(card);
     }
 

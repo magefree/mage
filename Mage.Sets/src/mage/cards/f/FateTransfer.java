@@ -41,7 +41,7 @@ public final class FateTransfer extends CardImpl {
 
     }
 
-    public FateTransfer(final FateTransfer card) {
+    private FateTransfer(final FateTransfer card) {
         super(card);
     }
 

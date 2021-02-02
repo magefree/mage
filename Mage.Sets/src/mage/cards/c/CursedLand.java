@@ -39,7 +39,7 @@ public final class CursedLand extends CardImpl {
             TargetController.CONTROLLER_ATTACHED_TO, false, true));
     }
 
-    public CursedLand(final CursedLand card) {
+    private CursedLand(final CursedLand card) {
         super(card);
     }
 

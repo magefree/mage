@@ -24,7 +24,7 @@ public final class CrackTheEarth extends CardImpl {
 
     }
 
-    public CrackTheEarth(final CrackTheEarth card) {
+    private CrackTheEarth(final CrackTheEarth card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class MagusOfTheVineyard extends CardImpl {
                 Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(2), "that player's"), TargetController.ANY, false, true));
     }
 
-    public MagusOfTheVineyard(final MagusOfTheVineyard card) {
+    private MagusOfTheVineyard(final MagusOfTheVineyard card) {
         super(card);
     }
 

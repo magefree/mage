@@ -37,7 +37,7 @@ public final class SterlingGrove extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SterlingGrove(final SterlingGrove card) {
+    private SterlingGrove(final SterlingGrove card) {
         super(card);
     }
 

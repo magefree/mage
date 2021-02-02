@@ -38,7 +38,7 @@ public final class SeerOfTheLastTomorrow extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeerOfTheLastTomorrow(final SeerOfTheLastTomorrow card) {
+    private SeerOfTheLastTomorrow(final SeerOfTheLastTomorrow card) {
         super(card);
     }
 

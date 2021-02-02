@@ -37,7 +37,7 @@ public final class FieldMarshal extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public FieldMarshal(final FieldMarshal card) {
+    private FieldMarshal(final FieldMarshal card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class CreakwoodLiege extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new CreakwoodLiegeToken(), 1), TargetController.YOU, true));
     }
 
-    public CreakwoodLiege(final CreakwoodLiege card) {
+    private CreakwoodLiege(final CreakwoodLiege card) {
         super(card);
     }
 

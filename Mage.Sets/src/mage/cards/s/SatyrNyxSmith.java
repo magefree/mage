@@ -35,7 +35,7 @@ public final class SatyrNyxSmith extends CardImpl {
 
     }
 
-    public SatyrNyxSmith(final SatyrNyxSmith card) {
+    private SatyrNyxSmith(final SatyrNyxSmith card) {
         super(card);
     }
 

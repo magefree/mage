@@ -50,7 +50,7 @@ public final class DiregrafCaptain extends CardImpl {
         this.addAbility(new DiregrafCaptainTriggeredAbility());
     }
 
-    public DiregrafCaptain(final DiregrafCaptain card) {
+    private DiregrafCaptain(final DiregrafCaptain card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class QuestForUlasTemple extends CardImpl {
         this.addAbility(new QuestForUlasTempleTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(filter)));
     }
 
-    public QuestForUlasTemple(final QuestForUlasTemple card) {
+    private QuestForUlasTemple(final QuestForUlasTemple card) {
         super(card);
     }
 

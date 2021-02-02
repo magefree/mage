@@ -23,7 +23,7 @@ public final class SwordsToPlowshares extends CardImpl {
 
     }
 
-    public SwordsToPlowshares(final SwordsToPlowshares card) {
+    private SwordsToPlowshares(final SwordsToPlowshares card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class SwarmIntelligence extends CardImpl {
                 new CopyTargetSpellEffect(true).setText("you may copy that spell. You may choose new targets for the copy"), new FilterInstantOrSorcerySpell("an instant or sorcery spell"), true, true));
     }
 
-    public SwarmIntelligence(final SwarmIntelligence card) {
+    private SwarmIntelligence(final SwarmIntelligence card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class SpreadTheSickness extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SpreadTheSickness(final SpreadTheSickness card) {
+    private SpreadTheSickness(final SpreadTheSickness card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class MyrTurbine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MyrTurbine(final MyrTurbine card) {
+    private MyrTurbine(final MyrTurbine card) {
         super(card);
     }
 

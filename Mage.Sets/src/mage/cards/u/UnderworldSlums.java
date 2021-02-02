@@ -36,7 +36,7 @@ public final class UnderworldSlums extends CardImpl {
 
     }
 
-    public UnderworldSlums(final UnderworldSlums card) {
+    private UnderworldSlums(final UnderworldSlums card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class ParadiseMantle extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public ParadiseMantle(final ParadiseMantle card) {
+    private ParadiseMantle(final ParadiseMantle card) {
         super(card);
     }
 

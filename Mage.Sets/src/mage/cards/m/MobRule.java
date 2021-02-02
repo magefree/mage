@@ -38,7 +38,7 @@ public final class MobRule extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public MobRule(final MobRule card) {
+    private MobRule(final MobRule card) {
         super(card);
     }
 

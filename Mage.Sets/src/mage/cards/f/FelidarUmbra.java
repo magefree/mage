@@ -52,7 +52,7 @@ public final class FelidarUmbra extends CardImpl {
         this.addAbility(new TotemArmorAbility());
     }
 
-    public FelidarUmbra(final FelidarUmbra card) {
+    private FelidarUmbra(final FelidarUmbra card) {
         super(card);
     }
 

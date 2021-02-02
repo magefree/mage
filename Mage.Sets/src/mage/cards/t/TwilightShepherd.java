@@ -51,7 +51,7 @@ public final class TwilightShepherd extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public TwilightShepherd(final TwilightShepherd card) {
+    private TwilightShepherd(final TwilightShepherd card) {
         super(card);
     }
 

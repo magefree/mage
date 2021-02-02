@@ -23,7 +23,7 @@ public final class Jump extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Jump(final Jump card) {
+    private Jump(final Jump card) {
         super(card);
     }
 

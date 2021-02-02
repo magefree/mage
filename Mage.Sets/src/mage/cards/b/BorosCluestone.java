@@ -38,7 +38,7 @@ public final class BorosCluestone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BorosCluestone(final BorosCluestone card) {
+    private BorosCluestone(final BorosCluestone card) {
         super(card);
     }
 

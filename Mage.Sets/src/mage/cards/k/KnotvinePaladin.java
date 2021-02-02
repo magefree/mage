@@ -40,7 +40,7 @@ public final class KnotvinePaladin extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Duration.EndOfTurn), false));
     }
 
-    public KnotvinePaladin(final KnotvinePaladin card) {
+    private KnotvinePaladin(final KnotvinePaladin card) {
         super(card);
     }
 

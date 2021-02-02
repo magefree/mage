@@ -31,7 +31,7 @@ public final class SkyTerror extends CardImpl {
 
     }
 
-    public SkyTerror(final SkyTerror card) {
+    private SkyTerror(final SkyTerror card) {
         super(card);
     }
 

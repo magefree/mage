@@ -50,7 +50,7 @@ public final class IridescentDrake extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IridescentDrake(final IridescentDrake card) {
+    private IridescentDrake(final IridescentDrake card) {
         super(card);
     }
 

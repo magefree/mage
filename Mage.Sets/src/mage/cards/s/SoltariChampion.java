@@ -33,7 +33,7 @@ public final class SoltariChampion extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, true), false));
     }
 
-    public SoltariChampion(final SoltariChampion card) {
+    private SoltariChampion(final SoltariChampion card) {
         super(card);
     }
 

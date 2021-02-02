@@ -33,7 +33,7 @@ public final class PlaneswalkersMirth extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PlaneswalkersMirth(final PlaneswalkersMirth card) {
+    private PlaneswalkersMirth(final PlaneswalkersMirth card) {
         super(card);
     }
 

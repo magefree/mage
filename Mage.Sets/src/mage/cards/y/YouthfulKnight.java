@@ -26,7 +26,7 @@ public final class YouthfulKnight extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public YouthfulKnight(final YouthfulKnight card) {
+    private YouthfulKnight(final YouthfulKnight card) {
         super(card);
     }
 

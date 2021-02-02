@@ -48,7 +48,7 @@ public final class TrigonOfMending extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public TrigonOfMending(final TrigonOfMending card) {
+    private TrigonOfMending(final TrigonOfMending card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class CeremoniousRejection extends CardImpl {
         getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public CeremoniousRejection(final CeremoniousRejection card) {
+    private CeremoniousRejection(final CeremoniousRejection card) {
         super(card);
     }
 

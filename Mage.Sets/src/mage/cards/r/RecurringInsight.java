@@ -30,7 +30,7 @@ public final class RecurringInsight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public RecurringInsight(final RecurringInsight card) {
+    private RecurringInsight(final RecurringInsight card) {
         super(card);
     }
 

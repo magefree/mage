@@ -35,7 +35,7 @@ public final class DragonHatchling extends CardImpl {
                 new ManaCostsImpl("{R}")));
     }
 
-    public DragonHatchling(final DragonHatchling card) {
+    private DragonHatchling(final DragonHatchling card) {
         super(card);
     }
 

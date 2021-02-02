@@ -46,7 +46,7 @@ public final class XenagosTheReveler extends CardImpl {
 
     }
 
-    public XenagosTheReveler(final XenagosTheReveler card) {
+    private XenagosTheReveler(final XenagosTheReveler card) {
         super(card);
     }
 

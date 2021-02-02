@@ -31,7 +31,7 @@ public final class Smother extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }
 
-    public Smother(final Smother card) {
+    private Smother(final Smother card) {
         super(card);
     }
 

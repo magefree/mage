@@ -27,7 +27,7 @@ public final class TranquilThicket extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{G}")));
     }
 
-    public TranquilThicket(final TranquilThicket card) {
+    private TranquilThicket(final TranquilThicket card) {
         super(card);
     }
 

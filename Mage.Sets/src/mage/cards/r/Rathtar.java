@@ -36,7 +36,7 @@ public final class Rathtar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Rathtar(final Rathtar card) {
+    private Rathtar(final Rathtar card) {
         super(card);
     }
 

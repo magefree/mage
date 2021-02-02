@@ -36,7 +36,7 @@ public final class FlamebladeAngel extends CardImpl {
 
     }
 
-    public FlamebladeAngel(final FlamebladeAngel card) {
+    private FlamebladeAngel(final FlamebladeAngel card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class SparkDouble extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SparkDouble(final SparkDouble card) {
+    private SparkDouble(final SparkDouble card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class WelkinGuide extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WelkinGuide(final WelkinGuide card) {
+    private WelkinGuide(final WelkinGuide card) {
         super(card);
     }
 

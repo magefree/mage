@@ -44,7 +44,7 @@ public final class GlyphOfDoom extends CardImpl {
         this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
     }
 
-    public GlyphOfDoom(final GlyphOfDoom card) {
+    private GlyphOfDoom(final GlyphOfDoom card) {
         super(card);
     }
 

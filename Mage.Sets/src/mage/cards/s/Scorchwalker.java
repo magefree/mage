@@ -28,7 +28,7 @@ public final class Scorchwalker extends CardImpl {
         this.addAbility(new BloodrushAbility("{1}{R}{R}", new BoostTargetEffect(5, 1, Duration.EndOfTurn)));
     }
 
-    public Scorchwalker(final Scorchwalker card) {
+    private Scorchwalker(final Scorchwalker card) {
         super(card);
     }
 

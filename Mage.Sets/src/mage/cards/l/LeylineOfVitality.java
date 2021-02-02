@@ -38,7 +38,7 @@ public final class LeylineOfVitality extends CardImpl {
         );
     }
 
-    public LeylineOfVitality(final LeylineOfVitality card) {
+    private LeylineOfVitality(final LeylineOfVitality card) {
         super(card);
     }
 

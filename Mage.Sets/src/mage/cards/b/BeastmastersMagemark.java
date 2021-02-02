@@ -52,7 +52,7 @@ public final class BeastmastersMagemark extends CardImpl {
         this.addAbility(new BecomesBlockedAllTriggeredAbility(effect, false, filter, false));
     }
 
-    public BeastmastersMagemark(final BeastmastersMagemark card) {
+    private BeastmastersMagemark(final BeastmastersMagemark card) {
         super(card);
     }
 

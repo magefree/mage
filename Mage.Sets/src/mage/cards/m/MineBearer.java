@@ -35,7 +35,7 @@ public final class MineBearer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MineBearer(final MineBearer card) {
+    private MineBearer(final MineBearer card) {
         super(card);
     }
 

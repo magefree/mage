@@ -42,7 +42,7 @@ public final class RootwaterShaman extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public RootwaterShaman(final RootwaterShaman card) {
+    private RootwaterShaman(final RootwaterShaman card) {
         super(card);
     }
 

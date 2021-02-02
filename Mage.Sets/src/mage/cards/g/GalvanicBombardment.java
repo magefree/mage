@@ -37,7 +37,7 @@ public final class GalvanicBombardment extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public GalvanicBombardment(final GalvanicBombardment card) {
+    private GalvanicBombardment(final GalvanicBombardment card) {
         super(card);
     }
 

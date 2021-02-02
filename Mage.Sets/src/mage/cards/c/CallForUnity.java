@@ -43,7 +43,7 @@ public final class CallForUnity extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public CallForUnity(final CallForUnity card) {
+    private CallForUnity(final CallForUnity card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class WhisperingSpecter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WhisperingSpecter(final WhisperingSpecter card) {
+    private WhisperingSpecter(final WhisperingSpecter card) {
         super(card);
     }
 

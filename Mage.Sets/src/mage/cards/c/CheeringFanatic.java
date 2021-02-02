@@ -36,7 +36,7 @@ public final class CheeringFanatic extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new CheeringFanaticEffect(), false));
     }
 
-    public CheeringFanatic(final CheeringFanatic card) {
+    private CheeringFanatic(final CheeringFanatic card) {
         super(card);
     }
 

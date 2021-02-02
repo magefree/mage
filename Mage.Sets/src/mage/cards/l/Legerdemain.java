@@ -45,7 +45,7 @@ public final class Legerdemain extends CardImpl {
         this.getSpellAbility().addTarget(secondTarget);
     }
 
-    public Legerdemain(final Legerdemain card) {
+    private Legerdemain(final Legerdemain card) {
         super(card);
     }
 

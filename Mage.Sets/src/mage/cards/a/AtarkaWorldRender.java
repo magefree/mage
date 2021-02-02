@@ -42,7 +42,7 @@ public final class AtarkaWorldRender extends CardImpl {
 
     }
 
-    public AtarkaWorldRender(final AtarkaWorldRender card) {
+    private AtarkaWorldRender(final AtarkaWorldRender card) {
         super(card);
     }
 

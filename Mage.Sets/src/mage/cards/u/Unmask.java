@@ -42,7 +42,7 @@ public final class Unmask extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filterNonLand, TargetController.ANY));
     }
 
-    public Unmask(final Unmask card) {
+    private Unmask(final Unmask card) {
         super(card);
     }
 

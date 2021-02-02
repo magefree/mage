@@ -30,7 +30,7 @@ public final class OwlFamiliar extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect()));
     }
 
-    public OwlFamiliar(final OwlFamiliar card) {
+    private OwlFamiliar(final OwlFamiliar card) {
         super(card);
     }
 

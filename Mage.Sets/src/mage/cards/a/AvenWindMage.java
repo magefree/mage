@@ -37,7 +37,7 @@ public final class AvenWindMage extends CardImpl {
         ));
     }
 
-    public AvenWindMage(final AvenWindMage card) {
+    private AvenWindMage(final AvenWindMage card) {
         super(card);
     }
 

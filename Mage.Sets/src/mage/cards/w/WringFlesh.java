@@ -22,7 +22,7 @@ public final class WringFlesh extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WringFlesh(final WringFlesh card) {
+    private WringFlesh(final WringFlesh card) {
         super(card);
     }
 

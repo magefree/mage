@@ -21,7 +21,7 @@ public final class EnhancedAwareness extends CardImpl {
 
     }
 
-    public EnhancedAwareness(final EnhancedAwareness card) {
+    private EnhancedAwareness(final EnhancedAwareness card) {
         super(card);
     }
 

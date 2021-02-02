@@ -25,7 +25,7 @@ public final class MarkovPatrician extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public MarkovPatrician(final MarkovPatrician card) {
+    private MarkovPatrician(final MarkovPatrician card) {
         super(card);
     }
 

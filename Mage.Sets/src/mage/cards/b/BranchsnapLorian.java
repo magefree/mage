@@ -29,7 +29,7 @@ public final class BranchsnapLorian extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{G}")));
     }
 
-    public BranchsnapLorian(final BranchsnapLorian card) {
+    private BranchsnapLorian(final BranchsnapLorian card) {
         super(card);
     }
 

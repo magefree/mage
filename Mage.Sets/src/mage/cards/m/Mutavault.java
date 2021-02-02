@@ -31,7 +31,7 @@ public final class Mutavault extends CardImpl {
                 new ManaCostsImpl("{1}")));
     }
 
-    public Mutavault(final Mutavault card) {
+    private Mutavault(final Mutavault card) {
         super(card);
     }
 

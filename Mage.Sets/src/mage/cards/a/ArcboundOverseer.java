@@ -43,7 +43,7 @@ public final class ArcboundOverseer extends CardImpl {
         this.addAbility(new ModularAbility(this, 6));
     }
 
-    public ArcboundOverseer(final ArcboundOverseer card) {
+    private ArcboundOverseer(final ArcboundOverseer card) {
         super(card);
     }
 

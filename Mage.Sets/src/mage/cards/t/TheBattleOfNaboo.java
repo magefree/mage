@@ -32,7 +32,7 @@ public final class TheBattleOfNaboo extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(TheBattleOfNabooAdjuster.instance);
     }
 
-    public TheBattleOfNaboo(final TheBattleOfNaboo card) {
+    private TheBattleOfNaboo(final TheBattleOfNaboo card) {
         super(card);
     }
 

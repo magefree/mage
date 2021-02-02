@@ -50,7 +50,7 @@ public final class BoneDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BoneDragon(final BoneDragon card) {
+    private BoneDragon(final BoneDragon card) {
         super(card);
     }
 

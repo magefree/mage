@@ -45,7 +45,7 @@ public final class SpikeSoldier extends CardImpl {
             new RemoveCountersSourceCost(CounterType.P1P1.createInstance())));
     }
 
-    public SpikeSoldier(final SpikeSoldier card) {
+    private SpikeSoldier(final SpikeSoldier card) {
         super(card);
     }
 

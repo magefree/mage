@@ -23,7 +23,7 @@ public final class Negate extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
-    public Negate(final Negate card) {
+    private Negate(final Negate card) {
         super(card);
     }
 

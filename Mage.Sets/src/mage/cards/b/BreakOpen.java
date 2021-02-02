@@ -32,7 +32,7 @@ public final class BreakOpen extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public BreakOpen(final BreakOpen card) {
+    private BreakOpen(final BreakOpen card) {
         super(card);
     }
 

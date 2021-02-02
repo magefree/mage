@@ -35,7 +35,7 @@ public final class BlightSickle extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public BlightSickle(final BlightSickle card) {
+    private BlightSickle(final BlightSickle card) {
         super(card);
     }
 

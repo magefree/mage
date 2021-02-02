@@ -38,7 +38,7 @@ public final class SplittingHeadache extends CardImpl {
 
     }
 
-    public SplittingHeadache(final SplittingHeadache card) {
+    private SplittingHeadache(final SplittingHeadache card) {
         super(card);
     }
 

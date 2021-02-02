@@ -37,7 +37,7 @@ public final class LockjawSnapper extends CardImpl {
         
     }
 
-    public LockjawSnapper(final LockjawSnapper card) {
+    private LockjawSnapper(final LockjawSnapper card) {
         super(card);
     }
 

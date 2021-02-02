@@ -27,7 +27,7 @@ public final class GravelgillAxeshark extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public GravelgillAxeshark(final GravelgillAxeshark card) {
+    private GravelgillAxeshark(final GravelgillAxeshark card) {
         super(card);
     }
 

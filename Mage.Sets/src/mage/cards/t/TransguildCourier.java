@@ -31,7 +31,7 @@ public final class TransguildCourier extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("{this} is all colors")));
     }
 
-    public TransguildCourier(final TransguildCourier card) {
+    private TransguildCourier(final TransguildCourier card) {
         super(card);
     }
 

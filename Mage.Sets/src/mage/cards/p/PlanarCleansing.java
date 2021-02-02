@@ -22,7 +22,7 @@ public final class PlanarCleansing extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterNonlandPermanent("nonland permanents")));
     }
 
-    public PlanarCleansing(final PlanarCleansing card) {
+    private PlanarCleansing(final PlanarCleansing card) {
         super(card);
     }
 

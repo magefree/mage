@@ -28,7 +28,7 @@ public final class CallTheBloodline extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CallTheBloodline(final CallTheBloodline card) {
+    private CallTheBloodline(final CallTheBloodline card) {
         super(card);
     }
 

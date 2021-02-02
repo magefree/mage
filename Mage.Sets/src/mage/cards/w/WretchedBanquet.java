@@ -28,7 +28,7 @@ public final class WretchedBanquet extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WretchedBanquet(final WretchedBanquet card) {
+    private WretchedBanquet(final WretchedBanquet card) {
         super(card);
     }
 

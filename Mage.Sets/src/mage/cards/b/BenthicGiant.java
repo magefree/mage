@@ -26,7 +26,7 @@ public final class BenthicGiant extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    public BenthicGiant(final BenthicGiant card) {
+    private BenthicGiant(final BenthicGiant card) {
         super(card);
     }
 

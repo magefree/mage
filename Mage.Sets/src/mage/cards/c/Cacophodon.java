@@ -31,7 +31,7 @@ public final class Cacophodon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Cacophodon(final Cacophodon card) {
+    private Cacophodon(final Cacophodon card) {
         super(card);
     }
 

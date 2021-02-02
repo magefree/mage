@@ -55,7 +55,7 @@ public final class TorrentOfSouls extends CardImpl {
 
     }
 
-    public TorrentOfSouls(final TorrentOfSouls card) {
+    private TorrentOfSouls(final TorrentOfSouls card) {
         super(card);
     }
 

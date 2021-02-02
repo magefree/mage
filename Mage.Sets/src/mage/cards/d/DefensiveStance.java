@@ -34,7 +34,7 @@ public final class DefensiveStance extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, 1, Duration.WhileOnBattlefield)));
     }
 
-    public DefensiveStance(final DefensiveStance card) {
+    private DefensiveStance(final DefensiveStance card) {
         super(card);
     }
 

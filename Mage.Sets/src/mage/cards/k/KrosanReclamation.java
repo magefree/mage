@@ -38,7 +38,7 @@ public final class KrosanReclamation extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{G}"), TimingRule.INSTANT));
     }
 
-    public KrosanReclamation(final KrosanReclamation card) {
+    private KrosanReclamation(final KrosanReclamation card) {
         super(card);
     }
 

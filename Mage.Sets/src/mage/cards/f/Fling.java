@@ -29,7 +29,7 @@ public final class Fling extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Fling(final Fling card) {
+    private Fling(final Fling card) {
         super(card);
     }
 

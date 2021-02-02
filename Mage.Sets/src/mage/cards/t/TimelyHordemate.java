@@ -49,7 +49,7 @@ public final class TimelyHordemate extends CardImpl {
 
     }
 
-    public TimelyHordemate(final TimelyHordemate card) {
+    private TimelyHordemate(final TimelyHordemate card) {
         super(card);
     }
 

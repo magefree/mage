@@ -61,7 +61,7 @@ public final class YasovaDragonclaw extends CardImpl {
         this.addAbility(ability);
     }
 
-    public YasovaDragonclaw(final YasovaDragonclaw card) {
+    private YasovaDragonclaw(final YasovaDragonclaw card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class ForethoughtAmulet extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ForethoughtAmuletEffect()));
     }
 
-    public ForethoughtAmulet(final ForethoughtAmulet card) {
+    private ForethoughtAmulet(final ForethoughtAmulet card) {
         super(card);
     }
 

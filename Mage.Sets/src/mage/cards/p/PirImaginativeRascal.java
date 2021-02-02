@@ -35,7 +35,7 @@ public final class PirImaginativeRascal extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PirImaginativeRascalEffect()));
     }
 
-    public PirImaginativeRascal(final PirImaginativeRascal card) {
+    private PirImaginativeRascal(final PirImaginativeRascal card) {
         super(card);
     }
 

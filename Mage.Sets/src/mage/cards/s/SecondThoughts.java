@@ -26,7 +26,7 @@ public final class SecondThoughts extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public SecondThoughts(final SecondThoughts card) {
+    private SecondThoughts(final SecondThoughts card) {
         super(card);
     }
 

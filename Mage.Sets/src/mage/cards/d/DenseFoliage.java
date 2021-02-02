@@ -27,7 +27,7 @@ public final class DenseFoliage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, cantTargetEffect));
     }
 
-    public DenseFoliage(final DenseFoliage card) {
+    private DenseFoliage(final DenseFoliage card) {
         super(card);
     }
 

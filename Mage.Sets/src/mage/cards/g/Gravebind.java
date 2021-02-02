@@ -29,7 +29,7 @@ public final class Gravebind extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public Gravebind(final Gravebind card) {
+    private Gravebind(final Gravebind card) {
         super(card);
     }
 

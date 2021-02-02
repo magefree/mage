@@ -37,7 +37,7 @@ public final class FoundryScreecher extends CardImpl {
                 "{this} gets +1/+0 as long as you control an artifact")));
     }
 
-    public FoundryScreecher(final FoundryScreecher card) {
+    private FoundryScreecher(final FoundryScreecher card) {
         super(card);
     }
 

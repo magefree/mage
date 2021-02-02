@@ -35,7 +35,7 @@ public final class DuskUrchins extends CardImpl {
 
     }
 
-    public DuskUrchins(final DuskUrchins card) {
+    private DuskUrchins(final DuskUrchins card) {
         super(card);
     }
 

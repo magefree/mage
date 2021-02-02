@@ -47,7 +47,7 @@ public final class CaughtInTheBrights extends CardImpl {
         this.addAbility(new AttacksAllTriggeredAbility(new ExileAttachedEffect(), false, filter, SetTargetPointer.NONE, false));
     }
 
-    public CaughtInTheBrights(final CaughtInTheBrights card) {
+    private CaughtInTheBrights(final CaughtInTheBrights card) {
         super(card);
     }
 

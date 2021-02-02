@@ -33,7 +33,7 @@ public final class Wildsize extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Wildsize(final Wildsize card) {
+    private Wildsize(final Wildsize card) {
         super(card);
     }
 

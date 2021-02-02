@@ -42,7 +42,7 @@ public final class DrakeUmbra extends CardImpl {
         this.addAbility(new TotemArmorAbility());
     }
 
-    public DrakeUmbra(final DrakeUmbra card) {
+    private DrakeUmbra(final DrakeUmbra card) {
         super(card);
     }
 

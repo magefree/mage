@@ -36,7 +36,7 @@ public final class TrickeryCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public TrickeryCharm(final TrickeryCharm card) {
+    private TrickeryCharm(final TrickeryCharm card) {
         super(card);
     }
 

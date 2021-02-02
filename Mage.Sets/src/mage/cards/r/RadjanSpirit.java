@@ -35,7 +35,7 @@ public final class RadjanSpirit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RadjanSpirit(final RadjanSpirit card) {
+    private RadjanSpirit(final RadjanSpirit card) {
         super(card);
     }
 

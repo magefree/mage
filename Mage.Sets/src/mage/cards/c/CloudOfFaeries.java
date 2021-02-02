@@ -34,7 +34,7 @@ public final class CloudOfFaeries extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public CloudOfFaeries(final CloudOfFaeries card) {
+    private CloudOfFaeries(final CloudOfFaeries card) {
         super(card);
     }
 

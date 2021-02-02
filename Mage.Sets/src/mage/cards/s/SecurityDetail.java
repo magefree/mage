@@ -32,7 +32,7 @@ public final class SecurityDetail extends CardImpl {
         ));
     }
 
-    public SecurityDetail(final SecurityDetail card) {
+    private SecurityDetail(final SecurityDetail card) {
         super(card);
     }
 

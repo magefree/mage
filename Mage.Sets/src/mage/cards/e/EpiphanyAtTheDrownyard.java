@@ -34,7 +34,7 @@ public final class EpiphanyAtTheDrownyard extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public EpiphanyAtTheDrownyard(final EpiphanyAtTheDrownyard card) {
+    private EpiphanyAtTheDrownyard(final EpiphanyAtTheDrownyard card) {
         super(card);
     }
 

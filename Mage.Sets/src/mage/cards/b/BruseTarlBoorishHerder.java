@@ -48,7 +48,7 @@ public final class BruseTarlBoorishHerder extends CardImpl {
         this.addAbility(PartnerAbility.getInstance());
     }
 
-    public BruseTarlBoorishHerder(final BruseTarlBoorishHerder card) {
+    private BruseTarlBoorishHerder(final BruseTarlBoorishHerder card) {
         super(card);
     }
 

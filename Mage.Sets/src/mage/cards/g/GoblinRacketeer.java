@@ -39,7 +39,7 @@ public final class GoblinRacketeer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinRacketeer(final GoblinRacketeer card) {
+    private GoblinRacketeer(final GoblinRacketeer card) {
         super(card);
     }
 

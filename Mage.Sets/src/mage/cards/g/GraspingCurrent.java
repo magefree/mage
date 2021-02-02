@@ -34,7 +34,7 @@ public final class GraspingCurrent extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryGraveyardPutInHandEffect(filter));
     }
 
-    public GraspingCurrent(final GraspingCurrent card) {
+    private GraspingCurrent(final GraspingCurrent card) {
         super(card);
     }
 

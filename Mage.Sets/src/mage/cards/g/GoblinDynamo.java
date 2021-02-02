@@ -41,7 +41,7 @@ public final class GoblinDynamo extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinDynamo(final GoblinDynamo card) {
+    private GoblinDynamo(final GoblinDynamo card) {
         super(card);
     }
 

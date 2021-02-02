@@ -41,7 +41,7 @@ public final class AzoriusJusticiar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AzoriusJusticiar(final AzoriusJusticiar card) {
+    private AzoriusJusticiar(final AzoriusJusticiar card) {
         super(card);
     }
 

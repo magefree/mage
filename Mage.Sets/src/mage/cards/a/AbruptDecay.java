@@ -43,7 +43,7 @@ public final class AbruptDecay extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent(filter));
     }
 
-    public AbruptDecay(final AbruptDecay card) {
+    private AbruptDecay(final AbruptDecay card) {
         super(card);
     }
 

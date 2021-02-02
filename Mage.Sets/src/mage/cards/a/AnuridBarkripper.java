@@ -33,7 +33,7 @@ public final class AnuridBarkripper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AnuridBarkripper(final AnuridBarkripper card) {
+    private AnuridBarkripper(final AnuridBarkripper card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class DramaticRescue extends CardImpl {
 
     }
 
-    public DramaticRescue(final DramaticRescue card) {
+    private DramaticRescue(final DramaticRescue card) {
         super(card);
     }
 

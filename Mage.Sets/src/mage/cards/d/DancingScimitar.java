@@ -25,7 +25,7 @@ public final class DancingScimitar extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public DancingScimitar(final DancingScimitar card) {
+    private DancingScimitar(final DancingScimitar card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class NyleasEmissary extends CardImpl {
         
     }
 
-    public NyleasEmissary(final NyleasEmissary card) {
+    private NyleasEmissary(final NyleasEmissary card) {
         super(card);
     }
 

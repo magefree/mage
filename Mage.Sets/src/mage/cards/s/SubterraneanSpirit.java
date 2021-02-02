@@ -47,7 +47,7 @@ public final class SubterraneanSpirit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SubterraneanSpirit(final SubterraneanSpirit card) {
+    private SubterraneanSpirit(final SubterraneanSpirit card) {
         super(card);
     }
 

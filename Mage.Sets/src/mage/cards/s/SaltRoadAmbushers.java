@@ -35,7 +35,7 @@ public final class SaltRoadAmbushers extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{G}{G}"), true));
     }
 
-    public SaltRoadAmbushers(final SaltRoadAmbushers card) {
+    private SaltRoadAmbushers(final SaltRoadAmbushers card) {
         super(card);
     }
 

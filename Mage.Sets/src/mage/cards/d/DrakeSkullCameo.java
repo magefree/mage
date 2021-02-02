@@ -22,7 +22,7 @@ public final class DrakeSkullCameo extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public DrakeSkullCameo(final DrakeSkullCameo card) {
+    private DrakeSkullCameo(final DrakeSkullCameo card) {
         super(card);
     }
 

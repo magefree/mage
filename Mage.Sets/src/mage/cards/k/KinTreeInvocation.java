@@ -31,7 +31,7 @@ public final class KinTreeInvocation extends CardImpl {
 
     }
 
-    public KinTreeInvocation(final KinTreeInvocation card) {
+    private KinTreeInvocation(final KinTreeInvocation card) {
         super(card);
     }
 

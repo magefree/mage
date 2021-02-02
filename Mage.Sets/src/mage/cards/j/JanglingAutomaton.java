@@ -31,7 +31,7 @@ public final class JanglingAutomaton extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new JanglingAutomatonEffect(), false));
     }
 
-    public JanglingAutomaton(final JanglingAutomaton card) {
+    private JanglingAutomaton(final JanglingAutomaton card) {
         super(card);
     }
 

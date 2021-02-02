@@ -35,7 +35,7 @@ public final class OnyxTalisman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OnyxTalisman(final OnyxTalisman card) {
+    private OnyxTalisman(final OnyxTalisman card) {
         super(card);
     }
 

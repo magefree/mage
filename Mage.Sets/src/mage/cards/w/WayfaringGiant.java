@@ -34,7 +34,7 @@ public final class WayfaringGiant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public WayfaringGiant(final WayfaringGiant card) {
+    private WayfaringGiant(final WayfaringGiant card) {
         super(card);
     }
 

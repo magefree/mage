@@ -43,7 +43,7 @@ public final class VildinPackOutcast extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new ManaCostsImpl("{5}{R}{R}")));
     }
 
-    public VildinPackOutcast(final VildinPackOutcast card) {
+    private VildinPackOutcast(final VildinPackOutcast card) {
         super(card);
     }
 

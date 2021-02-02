@@ -46,7 +46,7 @@ public final class FreneticSliver extends CardImpl {
         ));
     }
 
-    public FreneticSliver(final FreneticSliver card) {
+    private FreneticSliver(final FreneticSliver card) {
         super(card);
     }
 

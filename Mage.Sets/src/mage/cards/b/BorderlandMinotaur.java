@@ -22,7 +22,7 @@ public final class BorderlandMinotaur extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public BorderlandMinotaur(final BorderlandMinotaur card) {
+    private BorderlandMinotaur(final BorderlandMinotaur card) {
         super(card);
     }
 

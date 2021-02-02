@@ -41,7 +41,7 @@ public final class HaazdaExonerator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HaazdaExonerator(final HaazdaExonerator card) {
+    private HaazdaExonerator(final HaazdaExonerator card) {
         super(card);
     }
 

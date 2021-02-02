@@ -41,7 +41,7 @@ public final class DeadlyDesigns extends CardImpl {
         this.addAbility(triggerredAbility);
     }
 
-    public DeadlyDesigns(final DeadlyDesigns card) {
+    private DeadlyDesigns(final DeadlyDesigns card) {
         super(card);
     }
 

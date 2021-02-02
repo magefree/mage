@@ -33,7 +33,7 @@ public final class JoragaInvocation extends CardImpl {
 
     }
 
-    public JoragaInvocation(final JoragaInvocation card) {
+    private JoragaInvocation(final JoragaInvocation card) {
         super(card);
     }
 

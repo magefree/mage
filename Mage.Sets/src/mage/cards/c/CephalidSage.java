@@ -38,7 +38,7 @@ public final class CephalidSage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CephalidSage(final CephalidSage card) {
+    private CephalidSage(final CephalidSage card) {
         super(card);
     }
 

@@ -58,7 +58,7 @@ public final class XathridGorgon extends CardImpl {
 
     }
 
-    public XathridGorgon(final XathridGorgon card) {
+    private XathridGorgon(final XathridGorgon card) {
         super(card);
     }
 

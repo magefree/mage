@@ -48,7 +48,7 @@ public final class MageRingNetwork extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MageRingNetwork(final MageRingNetwork card) {
+    private MageRingNetwork(final MageRingNetwork card) {
         super(card);
     }
 

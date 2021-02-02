@@ -32,7 +32,7 @@ public final class BalshanCollaborator extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public BalshanCollaborator(final BalshanCollaborator card) {
+    private BalshanCollaborator(final BalshanCollaborator card) {
         super(card);
     }
 

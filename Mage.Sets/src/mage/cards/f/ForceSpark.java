@@ -26,7 +26,7 @@ public final class ForceSpark extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public ForceSpark(final ForceSpark card) {
+    private ForceSpark(final ForceSpark card) {
         super(card);
     }
 

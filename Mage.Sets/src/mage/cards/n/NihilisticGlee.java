@@ -50,7 +50,7 @@ public final class NihilisticGlee extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NihilisticGlee(final NihilisticGlee card) {
+    private NihilisticGlee(final NihilisticGlee card) {
         super(card);
     }
 

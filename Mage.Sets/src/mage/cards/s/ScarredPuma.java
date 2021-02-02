@@ -33,7 +33,7 @@ public final class ScarredPuma extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ScarredPumaEffect()));
     }
 
-    public ScarredPuma(final ScarredPuma card) {
+    private ScarredPuma(final ScarredPuma card) {
         super(card);
     }
 

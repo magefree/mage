@@ -43,7 +43,7 @@ public final class JumpTrooper extends CardImpl {
 
     }
 
-    public JumpTrooper(final JumpTrooper card) {
+    private JumpTrooper(final JumpTrooper card) {
         super(card);
     }
 

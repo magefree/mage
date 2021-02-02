@@ -28,7 +28,7 @@ public final class StandTogether extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public StandTogether(final StandTogether card) {
+    private StandTogether(final StandTogether card) {
         super(card);
     }
 

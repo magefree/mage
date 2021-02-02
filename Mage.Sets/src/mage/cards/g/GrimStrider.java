@@ -36,7 +36,7 @@ public final class GrimStrider extends CardImpl {
 
     }
 
-    public GrimStrider(final GrimStrider card) {
+    private GrimStrider(final GrimStrider card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class VesperGhoul extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VesperGhoul(final VesperGhoul card) {
+    private VesperGhoul(final VesperGhoul card) {
         super(card);
     }
 

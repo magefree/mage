@@ -43,7 +43,7 @@ public final class HythoniaTheCruel extends CardImpl {
         
     }
 
-    public HythoniaTheCruel(final HythoniaTheCruel card) {
+    private HythoniaTheCruel(final HythoniaTheCruel card) {
         super(card);
     }
 

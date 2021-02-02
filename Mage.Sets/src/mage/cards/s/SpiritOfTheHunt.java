@@ -44,7 +44,7 @@ public final class SpiritOfTheHunt extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
     }
 
-    public SpiritOfTheHunt(final SpiritOfTheHunt card) {
+    private SpiritOfTheHunt(final SpiritOfTheHunt card) {
         super(card);
     }
 

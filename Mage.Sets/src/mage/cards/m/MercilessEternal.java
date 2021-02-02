@@ -39,7 +39,7 @@ public final class MercilessEternal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MercilessEternal(final MercilessEternal card) {
+    private MercilessEternal(final MercilessEternal card) {
         super(card);
     }
 

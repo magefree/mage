@@ -35,7 +35,7 @@ public final class BogardanHellkite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BogardanHellkite(final BogardanHellkite card) {
+    private BogardanHellkite(final BogardanHellkite card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class Clear extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public Clear(final Clear card) {
+    private Clear(final Clear card) {
         super(card);
     }
 

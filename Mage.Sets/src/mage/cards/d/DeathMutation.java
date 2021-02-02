@@ -38,7 +38,7 @@ public final class DeathMutation extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetConvertedManaCost.instance));
     }
 
-    public DeathMutation(final DeathMutation card) {
+    private DeathMutation(final DeathMutation card) {
         super(card);
     }
 

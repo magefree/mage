@@ -26,7 +26,7 @@ public final class GoblinSkyRaider extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public GoblinSkyRaider(final GoblinSkyRaider card) {
+    private GoblinSkyRaider(final GoblinSkyRaider card) {
         super(card);
     }
 

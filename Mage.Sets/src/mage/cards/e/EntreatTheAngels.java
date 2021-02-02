@@ -28,7 +28,7 @@ public final class EntreatTheAngels extends CardImpl {
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{X}{W}{W}")));
     }
 
-    public EntreatTheAngels(final EntreatTheAngels card) {
+    private EntreatTheAngels(final EntreatTheAngels card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class GiftsUngiven extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public GiftsUngiven(final GiftsUngiven card) {
+    private GiftsUngiven(final GiftsUngiven card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class MendingHands extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public MendingHands(final MendingHands card) {
+    private MendingHands(final MendingHands card) {
         super(card);
     }
 

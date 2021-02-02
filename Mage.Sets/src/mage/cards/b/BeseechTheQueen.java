@@ -32,7 +32,7 @@ public final class BeseechTheQueen extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));
     }
 
-    public BeseechTheQueen(final BeseechTheQueen card) {
+    private BeseechTheQueen(final BeseechTheQueen card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class StitchedMangler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StitchedMangler(final StitchedMangler card) {
+    private StitchedMangler(final StitchedMangler card) {
         super(card);
     }
 

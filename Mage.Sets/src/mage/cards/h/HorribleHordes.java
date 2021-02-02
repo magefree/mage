@@ -25,7 +25,7 @@ public final class HorribleHordes extends CardImpl {
         this.addAbility(new RampageAbility(1));
     }
 
-    public HorribleHordes(final HorribleHordes card) {
+    private HorribleHordes(final HorribleHordes card) {
         super(card);
     }
 

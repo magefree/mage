@@ -54,7 +54,7 @@ public final class OrcishMine extends CardImpl {
         this.addAbility(new OrcishMineAbility());
     }
 
-    public OrcishMine(final OrcishMine card) {
+    private OrcishMine(final OrcishMine card) {
         super(card);
     }
 

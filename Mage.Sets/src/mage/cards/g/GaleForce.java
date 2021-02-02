@@ -28,7 +28,7 @@ public final class GaleForce extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(5, filter));
     }
 
-    public GaleForce(final GaleForce card) {
+    private GaleForce(final GaleForce card) {
         super(card);
     }
 

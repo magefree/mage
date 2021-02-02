@@ -56,7 +56,7 @@ public final class Cryptbreaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Cryptbreaker(final Cryptbreaker card) {
+    private Cryptbreaker(final Cryptbreaker card) {
         super(card);
     }
 

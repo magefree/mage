@@ -33,7 +33,7 @@ public final class GoretuskFirebeast extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoretuskFirebeast(final GoretuskFirebeast card) {
+    private GoretuskFirebeast(final GoretuskFirebeast card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class TemurCharger extends CardImpl {
 
     }
 
-    public TemurCharger(final TemurCharger card) {
+    private TemurCharger(final TemurCharger card) {
         super(card);
     }
 

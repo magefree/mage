@@ -38,7 +38,7 @@ public final class ElvishChampion extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new ForestwalkAbility(), Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public ElvishChampion(final ElvishChampion card) {
+    private ElvishChampion(final ElvishChampion card) {
         super(card);
     }
 

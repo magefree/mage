@@ -63,7 +63,7 @@ public final class TowerGeist extends CardImpl {
                 new LookLibraryAndPickControllerEffect(StaticValue.get(2), false, StaticValue.get(1), new FilterCard(), Zone.GRAVEYARD, false, false)));
     }
 
-    public TowerGeist(final TowerGeist card) {
+    private TowerGeist(final TowerGeist card) {
         super(card);
     }
 

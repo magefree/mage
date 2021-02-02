@@ -41,7 +41,7 @@ public final class AkronLegionnaire extends CardImpl {
         
     }
 
-    public AkronLegionnaire(final AkronLegionnaire card) {
+    private AkronLegionnaire(final AkronLegionnaire card) {
         super(card);
     }
 

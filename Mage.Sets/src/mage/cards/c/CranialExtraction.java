@@ -34,7 +34,7 @@ public final class CranialExtraction extends CardImpl {
         this.getSpellAbility().addEffect(new CranialExtractionEffect());
     }
 
-    public CranialExtraction(final CranialExtraction card) {
+    private CranialExtraction(final CranialExtraction card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class SpectralProcession extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken(), 3));
     }
 
-    public SpectralProcession(final SpectralProcession card) {
+    private SpectralProcession(final SpectralProcession card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class Choke extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
     }
 
-    public Choke(final Choke card) {
+    private Choke(final Choke card) {
         super(card);
     }
 

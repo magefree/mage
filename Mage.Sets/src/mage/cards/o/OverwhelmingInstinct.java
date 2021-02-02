@@ -26,7 +26,7 @@ public final class OverwhelmingInstinct extends CardImpl {
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new DrawCardSourceControllerEffect(1), 3));
     }
 
-    public OverwhelmingInstinct(final OverwhelmingInstinct card) {
+    private OverwhelmingInstinct(final OverwhelmingInstinct card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class IshaiOjutaiDragonspeaker extends CardImpl {
         this.addAbility(PartnerAbility.getInstance());
     }
 
-    public IshaiOjutaiDragonspeaker(final IshaiOjutaiDragonspeaker card) {
+    private IshaiOjutaiDragonspeaker(final IshaiOjutaiDragonspeaker card) {
         super(card);
     }
 

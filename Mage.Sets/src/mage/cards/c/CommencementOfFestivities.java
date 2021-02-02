@@ -21,7 +21,7 @@ public final class CommencementOfFestivities extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageToPlayersEffect(Duration.EndOfTurn, true));
     }
 
-    public CommencementOfFestivities(final CommencementOfFestivities card) {
+    private CommencementOfFestivities(final CommencementOfFestivities card) {
         super(card);
     }
 

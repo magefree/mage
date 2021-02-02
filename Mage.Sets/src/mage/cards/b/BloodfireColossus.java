@@ -32,7 +32,7 @@ public final class BloodfireColossus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodfireColossus(final BloodfireColossus card) {
+    private BloodfireColossus(final BloodfireColossus card) {
         super(card);
     }
 

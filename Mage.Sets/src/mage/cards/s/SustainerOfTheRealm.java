@@ -31,7 +31,7 @@ public final class SustainerOfTheRealm extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(0, 2, Duration.EndOfTurn), false));
     }
 
-    public SustainerOfTheRealm(final SustainerOfTheRealm card) {
+    private SustainerOfTheRealm(final SustainerOfTheRealm card) {
         super(card);
     }
 

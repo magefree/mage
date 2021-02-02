@@ -31,7 +31,7 @@ public final class StitchedDrake extends CardImpl {
         this.getSpellAbility().addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)));
     }
 
-    public StitchedDrake(final StitchedDrake card) {
+    private StitchedDrake(final StitchedDrake card) {
         super(card);
     }
 

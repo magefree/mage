@@ -30,7 +30,7 @@ public final class CitywatchSphinx extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new SurveilEffect(2)));
     }
 
-    public CitywatchSphinx(final CitywatchSphinx card) {
+    private CitywatchSphinx(final CitywatchSphinx card) {
         super(card);
     }
 

@@ -55,7 +55,7 @@ public final class BlackMarketDealer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlackMarketDealer(final BlackMarketDealer card) {
+    private BlackMarketDealer(final BlackMarketDealer card) {
         super(card);
     }
 

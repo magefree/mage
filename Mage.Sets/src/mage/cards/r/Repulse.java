@@ -26,7 +26,7 @@ public final class Repulse extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Repulse(final Repulse card) {
+    private Repulse(final Repulse card) {
         super(card);
     }
 

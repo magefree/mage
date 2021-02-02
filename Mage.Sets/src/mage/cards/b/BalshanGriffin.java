@@ -37,7 +37,7 @@ public final class BalshanGriffin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BalshanGriffin(final BalshanGriffin card) {
+    private BalshanGriffin(final BalshanGriffin card) {
         super(card);
     }
 

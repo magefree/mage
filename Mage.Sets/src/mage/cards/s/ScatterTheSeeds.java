@@ -25,7 +25,7 @@ public final class ScatterTheSeeds extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), 3));
     }
 
-    public ScatterTheSeeds(final ScatterTheSeeds card) {
+    private ScatterTheSeeds(final ScatterTheSeeds card) {
         super(card);
     }
 

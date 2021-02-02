@@ -32,7 +32,7 @@ public final class CyclopsOfEternalFury extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
     }
 
-    public CyclopsOfEternalFury(final CyclopsOfEternalFury card) {
+    private CyclopsOfEternalFury(final CyclopsOfEternalFury card) {
         super(card);
     }
 

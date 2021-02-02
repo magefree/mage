@@ -36,7 +36,7 @@ public final class AbyssalPersecutor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbyssalPersecutorCannotWinEffect()));
     }
 
-    public AbyssalPersecutor(final AbyssalPersecutor card) {
+    private AbyssalPersecutor(final AbyssalPersecutor card) {
         super(card);
     }
 

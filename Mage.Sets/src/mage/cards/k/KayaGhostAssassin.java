@@ -58,7 +58,7 @@ public final class KayaGhostAssassin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KayaGhostAssassin(final KayaGhostAssassin card) {
+    private KayaGhostAssassin(final KayaGhostAssassin card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class YdwenEfreet extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new YdwenEfreetEffect(), false));
     }
 
-    public YdwenEfreet(final YdwenEfreet card) {
+    private YdwenEfreet(final YdwenEfreet card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class MoorFiend extends CardImpl {
         this.addAbility(new SwampwalkAbility());
     }
 
-    public MoorFiend(final MoorFiend card) {
+    private MoorFiend(final MoorFiend card) {
         super(card);
     }
 

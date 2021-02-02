@@ -47,7 +47,7 @@ public final class EldraziDisplacer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EldraziDisplacer(final EldraziDisplacer card) {
+    private EldraziDisplacer(final EldraziDisplacer card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class CrusaderOfOdric extends CardImpl {
                 .addHint(CreaturesYouControlHint.instance));
     }
 
-    public CrusaderOfOdric(final CrusaderOfOdric card) {
+    private CrusaderOfOdric(final CrusaderOfOdric card) {
         super(card);
     }
 

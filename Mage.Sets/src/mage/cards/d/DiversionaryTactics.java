@@ -36,7 +36,7 @@ public final class DiversionaryTactics extends CardImpl {
 
     }
 
-    public DiversionaryTactics(final DiversionaryTactics card) {
+    private DiversionaryTactics(final DiversionaryTactics card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class AltarOfTheBrood extends CardImpl {
                 new MillCardsEachPlayerEffect(1, TargetController.OPPONENT), filter, false, null, true));
     }
 
-    public AltarOfTheBrood(final AltarOfTheBrood card) {
+    private AltarOfTheBrood(final AltarOfTheBrood card) {
         super(card);
     }
 

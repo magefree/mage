@@ -38,7 +38,7 @@ public final class SelfAssembler extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
     }
 
-    public SelfAssembler(final SelfAssembler card) {
+    private SelfAssembler(final SelfAssembler card) {
         super(card);
     }
 

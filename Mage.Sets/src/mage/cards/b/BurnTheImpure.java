@@ -27,7 +27,7 @@ public final class BurnTheImpure extends CardImpl {
         this.getSpellAbility().addEffect(new BurnTheImpureEffect());
     }
 
-    public BurnTheImpure(final BurnTheImpure card) {
+    private BurnTheImpure(final BurnTheImpure card) {
         super(card);
     }
 

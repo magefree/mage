@@ -37,7 +37,7 @@ public final class HowlingChorus extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(new EldraziHorrorToken()), false));
     }
 
-    public HowlingChorus(final HowlingChorus card) {
+    private HowlingChorus(final HowlingChorus card) {
         super(card);
     }
 

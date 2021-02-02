@@ -37,7 +37,7 @@ public final class DeeprootChampion extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, false));
     }
 
-    public DeeprootChampion(final DeeprootChampion card) {
+    private DeeprootChampion(final DeeprootChampion card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class AgentOfHorizons extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{2}{U}")));
     }
 
-    public AgentOfHorizons(final AgentOfHorizons card) {
+    private AgentOfHorizons(final AgentOfHorizons card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class BoilingBlood extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public BoilingBlood(final BoilingBlood card) {
+    private BoilingBlood(final BoilingBlood card) {
         super(card);
     }
 

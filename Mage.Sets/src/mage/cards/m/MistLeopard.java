@@ -25,7 +25,7 @@ public final class MistLeopard extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public MistLeopard(final MistLeopard card) {
+    private MistLeopard(final MistLeopard card) {
         super(card);
     }
 

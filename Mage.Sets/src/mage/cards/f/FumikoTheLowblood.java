@@ -42,7 +42,7 @@ public final class FumikoTheLowblood extends CardImpl {
 
     }
 
-    public FumikoTheLowblood(final FumikoTheLowblood card) {
+    private FumikoTheLowblood(final FumikoTheLowblood card) {
         super(card);
     }
 

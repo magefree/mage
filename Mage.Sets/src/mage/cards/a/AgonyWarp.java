@@ -39,7 +39,7 @@ public final class AgonyWarp extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public AgonyWarp(final AgonyWarp card) {
+    private AgonyWarp(final AgonyWarp card) {
         super(card);
     }
 

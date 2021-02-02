@@ -32,7 +32,7 @@ public final class AkroanSkyguard extends CardImpl {
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true)));
     }
 
-    public AkroanSkyguard(final AkroanSkyguard card) {
+    private AkroanSkyguard(final AkroanSkyguard card) {
         super(card);
     }
 

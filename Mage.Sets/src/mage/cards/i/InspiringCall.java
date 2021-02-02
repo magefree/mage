@@ -36,7 +36,7 @@ public final class InspiringCall extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public InspiringCall(final InspiringCall card) {
+    private InspiringCall(final InspiringCall card) {
         super(card);
     }
 

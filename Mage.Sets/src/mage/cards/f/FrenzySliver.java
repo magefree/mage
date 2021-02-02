@@ -48,7 +48,7 @@ public final class FrenzySliver extends CardImpl {
                 filter, "All Sliver creatures have frenzy 1. <i>(Whenever a Sliver attacks and isn't blocked, it gets +1/+0 until end of turn.)</i>")));
     }
 
-    public FrenzySliver(final FrenzySliver card) {
+    private FrenzySliver(final FrenzySliver card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class KorOutfitter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KorOutfitter(final KorOutfitter card) {
+    private KorOutfitter(final KorOutfitter card) {
         super(card);
     }
 

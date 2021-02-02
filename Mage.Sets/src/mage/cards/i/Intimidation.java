@@ -25,7 +25,7 @@ public final class Intimidation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FearAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
     }
 
-    public Intimidation(final Intimidation card) {
+    private Intimidation(final Intimidation card) {
         super(card);
     }
 

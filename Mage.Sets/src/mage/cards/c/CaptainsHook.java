@@ -53,7 +53,7 @@ public final class CaptainsHook extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
-    public CaptainsHook(final CaptainsHook card) {
+    private CaptainsHook(final CaptainsHook card) {
         super(card);
     }
 

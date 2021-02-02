@@ -50,7 +50,7 @@ public final class NalathniDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NalathniDragon(final NalathniDragon card) {
+    private NalathniDragon(final NalathniDragon card) {
         super(card);
     }
 

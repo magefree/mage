@@ -38,7 +38,7 @@ public final class ChampionsHelm extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public ChampionsHelm(final ChampionsHelm card) {
+    private ChampionsHelm(final ChampionsHelm card) {
         super(card);
     }
 

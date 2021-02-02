@@ -55,7 +55,7 @@ public final class KitesailFreebooter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KitesailFreebooter(final KitesailFreebooter card) {
+    private KitesailFreebooter(final KitesailFreebooter card) {
         super(card);
     }
 

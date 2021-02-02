@@ -39,7 +39,7 @@ public final class DiscipleOfTheVault extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DiscipleOfTheVault(final DiscipleOfTheVault card) {
+    private DiscipleOfTheVault(final DiscipleOfTheVault card) {
         super(card);
     }
 

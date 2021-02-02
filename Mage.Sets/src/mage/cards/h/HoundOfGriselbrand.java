@@ -28,7 +28,7 @@ public final class HoundOfGriselbrand extends CardImpl {
         this.addAbility(new UndyingAbility());
     }
 
-    public HoundOfGriselbrand(final HoundOfGriselbrand card) {
+    private HoundOfGriselbrand(final HoundOfGriselbrand card) {
         super(card);
     }
 

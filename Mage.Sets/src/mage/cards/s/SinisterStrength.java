@@ -48,7 +48,7 @@ public final class SinisterStrength extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SinisterStrength(final SinisterStrength card) {
+    private SinisterStrength(final SinisterStrength card) {
         super(card);
     }
 

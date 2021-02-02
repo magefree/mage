@@ -24,7 +24,7 @@ public final class LashOfTheWhip extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public LashOfTheWhip(final LashOfTheWhip card) {
+    private LashOfTheWhip(final LashOfTheWhip card) {
         super(card);
     }
 

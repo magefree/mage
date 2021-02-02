@@ -43,7 +43,7 @@ public final class Sandsower extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Sandsower(final Sandsower card) {
+    private Sandsower(final Sandsower card) {
         super(card);
     }
 

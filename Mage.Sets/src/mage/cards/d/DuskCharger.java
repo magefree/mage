@@ -41,7 +41,7 @@ public final class DuskCharger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DuskCharger(final DuskCharger card) {
+    private DuskCharger(final DuskCharger card) {
         super(card);
     }
 

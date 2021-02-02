@@ -40,7 +40,7 @@ public final class ZealotIlVec extends CardImpl {
 
     }
 
-    public ZealotIlVec(final ZealotIlVec card) {
+    private ZealotIlVec(final ZealotIlVec card) {
         super(card);
     }
 

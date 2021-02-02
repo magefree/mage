@@ -35,7 +35,7 @@ public final class Serenity extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Serenity(final Serenity card) {
+    private Serenity(final Serenity card) {
         super(card);
     }
 

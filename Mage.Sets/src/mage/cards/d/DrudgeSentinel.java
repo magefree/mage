@@ -33,7 +33,7 @@ public final class DrudgeSentinel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DrudgeSentinel(final DrudgeSentinel card) {
+    private DrudgeSentinel(final DrudgeSentinel card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class IcatianLieutenant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IcatianLieutenant(final IcatianLieutenant card) {
+    private IcatianLieutenant(final IcatianLieutenant card) {
         super(card);
     }
 

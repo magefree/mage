@@ -30,7 +30,7 @@ public final class PerilousMyr extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PerilousMyr(final PerilousMyr card) {
+    private PerilousMyr(final PerilousMyr card) {
         super(card);
     }
 

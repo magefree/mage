@@ -34,7 +34,7 @@ public final class SpellPierce extends CardImpl {
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(2)));
     }
 
-    public SpellPierce(final SpellPierce card) {
+    private SpellPierce(final SpellPierce card) {
         super(card);
     }
 

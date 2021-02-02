@@ -37,7 +37,7 @@ public final class BrassclawOrcs extends CardImpl {
 
     }
 
-    public BrassclawOrcs(final BrassclawOrcs card) {
+    private BrassclawOrcs(final BrassclawOrcs card) {
         super(card);
     }
 

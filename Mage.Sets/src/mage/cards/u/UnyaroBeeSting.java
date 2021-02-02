@@ -22,7 +22,7 @@ public final class UnyaroBeeSting extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public UnyaroBeeSting(final UnyaroBeeSting card) {
+    private UnyaroBeeSting(final UnyaroBeeSting card) {
         super(card);
     }
 

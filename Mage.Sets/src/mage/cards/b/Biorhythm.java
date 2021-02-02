@@ -25,7 +25,7 @@ public final class Biorhythm extends CardImpl {
         this.getSpellAbility().addEffect(new BiorhythmEffect());
     }
 
-    public Biorhythm(final Biorhythm card) {
+    private Biorhythm(final Biorhythm card) {
         super(card);
     }
 

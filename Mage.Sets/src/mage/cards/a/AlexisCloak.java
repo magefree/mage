@@ -37,7 +37,7 @@ public final class AlexisCloak extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public AlexisCloak(final AlexisCloak card) {
+    private AlexisCloak(final AlexisCloak card) {
         super(card);
     }
 

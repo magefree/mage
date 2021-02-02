@@ -36,7 +36,7 @@ public final class SoldeviSage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoldeviSage(final SoldeviSage card) {
+    private SoldeviSage(final SoldeviSage card) {
         super(card);
     }
 

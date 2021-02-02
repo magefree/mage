@@ -31,7 +31,7 @@ public final class NightmarishEnd extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public NightmarishEnd(final NightmarishEnd card) {
+    private NightmarishEnd(final NightmarishEnd card) {
         super(card);
     }
 

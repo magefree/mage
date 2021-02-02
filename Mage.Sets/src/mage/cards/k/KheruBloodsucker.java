@@ -58,7 +58,7 @@ public final class KheruBloodsucker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KheruBloodsucker(final KheruBloodsucker card) {
+    private KheruBloodsucker(final KheruBloodsucker card) {
         super(card);
     }
 

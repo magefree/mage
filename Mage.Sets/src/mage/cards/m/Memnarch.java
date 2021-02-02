@@ -45,7 +45,7 @@ public final class Memnarch extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public Memnarch(final Memnarch card) {
+    private Memnarch(final Memnarch card) {
         super(card);
     }
 

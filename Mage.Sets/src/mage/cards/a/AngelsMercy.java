@@ -20,7 +20,7 @@ public final class AngelsMercy extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(7));
     }
 
-    public AngelsMercy(final AngelsMercy card) {
+    private AngelsMercy(final AngelsMercy card) {
         super(card);
     }
 

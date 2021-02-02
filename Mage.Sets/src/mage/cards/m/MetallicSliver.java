@@ -22,7 +22,7 @@ public final class MetallicSliver extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public MetallicSliver(final MetallicSliver card) {
+    private MetallicSliver(final MetallicSliver card) {
         super(card);
     }
 

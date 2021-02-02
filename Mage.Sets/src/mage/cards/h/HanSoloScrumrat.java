@@ -53,7 +53,7 @@ public final class HanSoloScrumrat extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HanSoloScrumrat(final HanSoloScrumrat card) {
+    private HanSoloScrumrat(final HanSoloScrumrat card) {
         super(card);
     }
 

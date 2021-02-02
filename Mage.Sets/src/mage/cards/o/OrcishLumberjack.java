@@ -47,7 +47,7 @@ public final class OrcishLumberjack extends CardImpl {
 
     }
 
-    public OrcishLumberjack(final OrcishLumberjack card) {
+    private OrcishLumberjack(final OrcishLumberjack card) {
         super(card);
     }
 

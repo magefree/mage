@@ -36,7 +36,7 @@ public final class AnaSanctuary extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AnaSanctuary(final AnaSanctuary card) {
+    private AnaSanctuary(final AnaSanctuary card) {
         super(card);
     }
 

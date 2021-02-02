@@ -30,7 +30,7 @@ public final class WallOfFrost extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new DontUntapInControllersNextUntapStepTargetEffect("that creature"), false, true));
     }
 
-    public WallOfFrost(final WallOfFrost card) {
+    private WallOfFrost(final WallOfFrost card) {
         super(card);
     }
 

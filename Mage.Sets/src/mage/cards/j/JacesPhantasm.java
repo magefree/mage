@@ -36,7 +36,7 @@ public final class JacesPhantasm extends CardImpl {
         )).addHint(CardsInOpponentGraveyardCondition.TEN.getHint()));
     }
 
-    public JacesPhantasm(final JacesPhantasm card) {
+    private JacesPhantasm(final JacesPhantasm card) {
         super(card);
     }
 

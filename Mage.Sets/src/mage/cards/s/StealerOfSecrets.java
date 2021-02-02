@@ -37,7 +37,7 @@ public final class StealerOfSecrets extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public StealerOfSecrets(final StealerOfSecrets card) {
+    private StealerOfSecrets(final StealerOfSecrets card) {
         super(card);
     }
 

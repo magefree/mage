@@ -67,7 +67,7 @@ public final class Crackleburr extends CardImpl {
         
     }
 
-    public Crackleburr(final Crackleburr card) {
+    private Crackleburr(final Crackleburr card) {
         super(card);
     }
 

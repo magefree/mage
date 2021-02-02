@@ -58,7 +58,7 @@ public final class StormscapeBattlemage extends CardImpl {
                 "When Stormscape Battlemage enters the battlefield, if it was kicked with its {2}{B} kicker, destroy target nonblack creature. That creature can't be regenerated."));        
     }
 
-    public StormscapeBattlemage(final StormscapeBattlemage card) {
+    private StormscapeBattlemage(final StormscapeBattlemage card) {
         super(card);
     }
 

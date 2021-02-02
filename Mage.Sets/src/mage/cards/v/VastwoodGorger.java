@@ -22,7 +22,7 @@ public final class VastwoodGorger extends CardImpl {
         this.toughness = new MageInt(6);
     }
 
-    public VastwoodGorger(final VastwoodGorger card) {
+    private VastwoodGorger(final VastwoodGorger card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class DescendUponTheSinful extends CardImpl {
         this.getSpellAbility().addHint(DeliriumHint.instance);
     }
 
-    public DescendUponTheSinful(final DescendUponTheSinful card) {
+    private DescendUponTheSinful(final DescendUponTheSinful card) {
         super(card);
     }
 

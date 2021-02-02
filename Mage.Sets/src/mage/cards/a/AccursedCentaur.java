@@ -28,7 +28,7 @@ public final class AccursedCentaur extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, null)));
     }
 
-    public AccursedCentaur(final AccursedCentaur card) {
+    private AccursedCentaur(final AccursedCentaur card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class FireShrineKeeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FireShrineKeeper(final FireShrineKeeper card) {
+    private FireShrineKeeper(final FireShrineKeeper card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class ArbiterOfKnollridge extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ArbiterOfKnollridgeEffect()));
     }
 
-    public ArbiterOfKnollridge(final ArbiterOfKnollridge card) {
+    private ArbiterOfKnollridge(final ArbiterOfKnollridge card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class LobeLobber extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public LobeLobber(final LobeLobber card) {
+    private LobeLobber(final LobeLobber card) {
         super(card);
     }
 

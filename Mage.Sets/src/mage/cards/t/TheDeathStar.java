@@ -54,7 +54,7 @@ public final class TheDeathStar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TheDeathStar(final TheDeathStar card) {
+    private TheDeathStar(final TheDeathStar card) {
         super(card);
     }
 

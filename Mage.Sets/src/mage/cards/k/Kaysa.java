@@ -41,7 +41,7 @@ public final class Kaysa extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,1, Duration.WhileOnBattlefield, filter)));
     }
 
-    public Kaysa(final Kaysa card) {
+    private Kaysa(final Kaysa card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class SculptingSteel extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(filter), true));
     }
 
-    public SculptingSteel(final SculptingSteel card) {
+    private SculptingSteel(final SculptingSteel card) {
         super(card);
     }
 

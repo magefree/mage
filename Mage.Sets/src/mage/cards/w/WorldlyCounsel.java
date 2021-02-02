@@ -31,7 +31,7 @@ public final class WorldlyCounsel extends CardImpl {
         this.getSpellAbility().addEffect(new WorldlyCounselEffect());
     }
 
-    public WorldlyCounsel(final WorldlyCounsel card) {
+    private WorldlyCounsel(final WorldlyCounsel card) {
         super(card);
     }
 

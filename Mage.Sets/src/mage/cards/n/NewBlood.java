@@ -49,7 +49,7 @@ public final class NewBlood extends CardImpl {
         getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public NewBlood(final NewBlood card) {
+    private NewBlood(final NewBlood card) {
         super(card);
     }
 

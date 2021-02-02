@@ -31,7 +31,7 @@ public final class OrzhovaTheChurchOfDeals extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrzhovaTheChurchOfDeals(final OrzhovaTheChurchOfDeals card) {
+    private OrzhovaTheChurchOfDeals(final OrzhovaTheChurchOfDeals card) {
         super(card);
     }
 

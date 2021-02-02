@@ -41,7 +41,7 @@ public final class Tolaria extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Tolaria(final Tolaria card) {
+    private Tolaria(final Tolaria card) {
         super(card);
     }
 

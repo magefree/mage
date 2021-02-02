@@ -29,7 +29,7 @@ public final class SpireOwl extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryControllerEffect(4)));
     }
 
-    public SpireOwl(final SpireOwl card) {
+    private SpireOwl(final SpireOwl card) {
         super(card);
     }
 

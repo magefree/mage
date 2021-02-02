@@ -43,7 +43,7 @@ public final class MirrorSheen extends CardImpl {
 
     }
 
-    public MirrorSheen(final MirrorSheen card) {
+    private MirrorSheen(final MirrorSheen card) {
         super(card);
     }
 

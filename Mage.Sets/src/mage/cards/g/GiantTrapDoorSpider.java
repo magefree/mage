@@ -47,7 +47,7 @@ public final class GiantTrapDoorSpider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GiantTrapDoorSpider(final GiantTrapDoorSpider card) {
+    private GiantTrapDoorSpider(final GiantTrapDoorSpider card) {
         super(card);
     }
 

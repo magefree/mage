@@ -26,7 +26,7 @@ public final class PrimalHuntbeast extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    public PrimalHuntbeast(final PrimalHuntbeast card) {
+    private PrimalHuntbeast(final PrimalHuntbeast card) {
         super(card);
     }
 

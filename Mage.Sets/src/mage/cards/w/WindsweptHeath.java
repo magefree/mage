@@ -24,7 +24,7 @@ public final class WindsweptHeath extends CardImpl {
         this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.FOREST, SubType.PLAINS)));
     }
 
-    public WindsweptHeath(final WindsweptHeath card) {
+    private WindsweptHeath(final WindsweptHeath card) {
         super(card);
     }
 

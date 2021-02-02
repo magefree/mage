@@ -40,7 +40,7 @@ public final class InspiredSphinx extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterColorlessToken()), new ManaCostsImpl<>("{3}{U}")));
     }
 
-    public InspiredSphinx(final InspiredSphinx card) {
+    private InspiredSphinx(final InspiredSphinx card) {
         super(card);
     }
 

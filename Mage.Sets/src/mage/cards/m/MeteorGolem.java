@@ -38,7 +38,7 @@ public final class MeteorGolem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MeteorGolem(final MeteorGolem card) {
+    private MeteorGolem(final MeteorGolem card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class CoalStoker extends CardImpl {
                 new CastFromHandWatcher());
     }
 
-    public CoalStoker(final CoalStoker card) {
+    private CoalStoker(final CoalStoker card) {
         super(card);
     }
 

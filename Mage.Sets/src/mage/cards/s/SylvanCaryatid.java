@@ -33,7 +33,7 @@ public final class SylvanCaryatid extends CardImpl {
 
     }
 
-    public SylvanCaryatid(final SylvanCaryatid card) {
+    private SylvanCaryatid(final SylvanCaryatid card) {
         super(card);
     }
 

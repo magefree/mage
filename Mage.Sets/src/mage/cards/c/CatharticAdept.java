@@ -34,7 +34,7 @@ public final class CatharticAdept extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CatharticAdept(final CatharticAdept card) {
+    private CatharticAdept(final CatharticAdept card) {
         super(card);
     }
 

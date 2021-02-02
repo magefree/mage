@@ -34,7 +34,7 @@ public final class CosmicLarva extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true))), TargetController.YOU, false));
     }
 
-    public CosmicLarva(final CosmicLarva card) {
+    private CosmicLarva(final CosmicLarva card) {
         super(card);
     }
 

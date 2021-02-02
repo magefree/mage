@@ -29,7 +29,7 @@ public final class Restrain extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Restrain(final Restrain card) {
+    private Restrain(final Restrain card) {
         super(card);
     }
 

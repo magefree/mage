@@ -35,7 +35,7 @@ public final class StromkirkNoble extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public StromkirkNoble(final StromkirkNoble card) {
+    private StromkirkNoble(final StromkirkNoble card) {
         super(card);
     }
 

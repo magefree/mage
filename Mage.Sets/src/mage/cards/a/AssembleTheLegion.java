@@ -29,7 +29,7 @@ public final class AssembleTheLegion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AssembleTheLegion(final AssembleTheLegion card) {
+    private AssembleTheLegion(final AssembleTheLegion card) {
         super(card);
     }
 

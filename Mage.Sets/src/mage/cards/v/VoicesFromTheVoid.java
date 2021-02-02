@@ -24,7 +24,7 @@ public final class VoicesFromTheVoid extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public VoicesFromTheVoid(final VoicesFromTheVoid card) {
+    private VoicesFromTheVoid(final VoicesFromTheVoid card) {
         super(card);
     }
 

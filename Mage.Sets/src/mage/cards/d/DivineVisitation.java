@@ -32,7 +32,7 @@ public final class DivineVisitation extends CardImpl {
         ));
     }
 
-    public DivineVisitation(final DivineVisitation card) {
+    private DivineVisitation(final DivineVisitation card) {
         super(card);
     }
 

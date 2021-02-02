@@ -28,7 +28,7 @@ public final class CloudSpirit extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public CloudSpirit(final CloudSpirit card) {
+    private CloudSpirit(final CloudSpirit card) {
         super(card);
     }
 

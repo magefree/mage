@@ -32,7 +32,7 @@ public final class WojekBodyguard extends CardImpl {
         this.addAbility(CantBlockAloneAbility.getInstance());
     }
 
-    public WojekBodyguard(final WojekBodyguard card) {
+    private WojekBodyguard(final WojekBodyguard card) {
         super(card);
     }
 

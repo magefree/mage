@@ -25,7 +25,7 @@ public final class SublimeExhalation extends CardImpl {
         getSpellAbility().addEffect(new DestroyAllEffect(FILTER_PERMANENT_CREATURES));
     }
 
-    public SublimeExhalation(final SublimeExhalation card) {
+    private SublimeExhalation(final SublimeExhalation card) {
         super(card);
     }
 

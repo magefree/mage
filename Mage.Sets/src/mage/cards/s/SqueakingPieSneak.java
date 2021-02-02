@@ -42,7 +42,7 @@ public final class SqueakingPieSneak extends CardImpl {
         this.addAbility(FearAbility.getInstance());
     }
 
-    public SqueakingPieSneak(final SqueakingPieSneak card) {
+    private SqueakingPieSneak(final SqueakingPieSneak card) {
         super(card);
     }
 

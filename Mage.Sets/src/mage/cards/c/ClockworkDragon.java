@@ -40,7 +40,7 @@ public final class ClockworkDragon extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new GenericManaCost(3)));
     }
 
-    public ClockworkDragon(final ClockworkDragon card) {
+    private ClockworkDragon(final ClockworkDragon card) {
         super(card);
     }
 

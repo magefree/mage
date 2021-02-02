@@ -59,7 +59,7 @@ public final class GreaterStoneSpirit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GreaterStoneSpirit(final GreaterStoneSpirit card) {
+    private GreaterStoneSpirit(final GreaterStoneSpirit card) {
         super(card);
     }
 

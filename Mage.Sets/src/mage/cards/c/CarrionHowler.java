@@ -31,7 +31,7 @@ public final class CarrionHowler extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -1, Duration.EndOfTurn), new PayLifeCost(1)));
     }
 
-    public CarrionHowler(final CarrionHowler card) {
+    private CarrionHowler(final CarrionHowler card) {
         super(card);
     }
 

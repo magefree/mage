@@ -34,7 +34,7 @@ public final class HarshMercy extends CardImpl {
         this.getSpellAbility().addEffect(new HarshMercyEffect());
     }
 
-    public HarshMercy(final HarshMercy card) {
+    private HarshMercy(final HarshMercy card) {
         super(card);
     }
 

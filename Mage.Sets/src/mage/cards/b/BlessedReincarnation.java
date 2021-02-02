@@ -42,7 +42,7 @@ public final class BlessedReincarnation extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public BlessedReincarnation(final BlessedReincarnation card) {
+    private BlessedReincarnation(final BlessedReincarnation card) {
         super(card);
     }
 

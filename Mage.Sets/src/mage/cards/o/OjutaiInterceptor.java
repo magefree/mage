@@ -32,7 +32,7 @@ public final class OjutaiInterceptor extends CardImpl {
 
     }
 
-    public OjutaiInterceptor(final OjutaiInterceptor card) {
+    private OjutaiInterceptor(final OjutaiInterceptor card) {
         super(card);
     }
 

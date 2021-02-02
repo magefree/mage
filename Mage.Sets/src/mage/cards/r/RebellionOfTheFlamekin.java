@@ -40,7 +40,7 @@ public final class RebellionOfTheFlamekin extends CardImpl {
         this.addAbility(new RebellionOfTheFlamekinTriggeredAbility());
     }
 
-    public RebellionOfTheFlamekin(final RebellionOfTheFlamekin card) {
+    private RebellionOfTheFlamekin(final RebellionOfTheFlamekin card) {
         super(card);
     }
 

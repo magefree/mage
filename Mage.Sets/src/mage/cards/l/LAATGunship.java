@@ -37,7 +37,7 @@ public final class LAATGunship extends CardImpl {
 
     }
 
-    public LAATGunship(final LAATGunship card) {
+    private LAATGunship(final LAATGunship card) {
         super(card);
     }
 

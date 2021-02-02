@@ -44,7 +44,7 @@ public final class SightOfTheScalelords extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SightOfTheScalelords(final SightOfTheScalelords card) {
+    private SightOfTheScalelords(final SightOfTheScalelords card) {
         super(card);
     }
 

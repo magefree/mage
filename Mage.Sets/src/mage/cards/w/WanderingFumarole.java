@@ -42,7 +42,7 @@ public final class WanderingFumarole extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{2}{U}{R}")));
     }
 
-    public WanderingFumarole(final WanderingFumarole card) {
+    private WanderingFumarole(final WanderingFumarole card) {
         super(card);
     }
 

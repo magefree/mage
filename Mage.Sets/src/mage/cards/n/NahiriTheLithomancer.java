@@ -58,7 +58,7 @@ public final class NahiriTheLithomancer extends CardImpl {
         this.addAbility(CanBeYourCommanderAbility.getInstance());
     }
 
-    public NahiriTheLithomancer(final NahiriTheLithomancer card) {
+    private NahiriTheLithomancer(final NahiriTheLithomancer card) {
         super(card);
     }
 

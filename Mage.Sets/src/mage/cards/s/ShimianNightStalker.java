@@ -47,7 +47,7 @@ public final class ShimianNightStalker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShimianNightStalker(final ShimianNightStalker card) {
+    private ShimianNightStalker(final ShimianNightStalker card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class PastInFlames extends CardImpl {
 
     }
 
-    public PastInFlames(final PastInFlames card) {
+    private PastInFlames(final PastInFlames card) {
         super(card);
     }
 

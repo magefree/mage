@@ -28,7 +28,7 @@ public final class SlumReaper extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeAllEffect(1, new FilterControlledCreaturePermanent("creature"))));
     }
 
-    public SlumReaper(final SlumReaper card) {
+    private SlumReaper(final SlumReaper card) {
         super(card);
     }
 

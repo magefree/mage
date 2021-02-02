@@ -27,7 +27,7 @@ public final class SageOfShailasClaim extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(3)));
     }
 
-    public SageOfShailasClaim(final SageOfShailasClaim card) {
+    private SageOfShailasClaim(final SageOfShailasClaim card) {
         super(card);
     }
 

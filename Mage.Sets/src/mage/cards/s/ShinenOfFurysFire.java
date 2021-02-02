@@ -35,7 +35,7 @@ public final class ShinenOfFurysFire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShinenOfFurysFire(final ShinenOfFurysFire card) {
+    private ShinenOfFurysFire(final ShinenOfFurysFire card) {
         super(card);
     }
 

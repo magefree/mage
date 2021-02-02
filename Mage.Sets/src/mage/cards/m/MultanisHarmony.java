@@ -41,7 +41,7 @@ public final class MultanisHarmony extends CardImpl {
             AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted creature has \"{T}: Add one mana of any color.\"")));
     }
 
-    public MultanisHarmony(final MultanisHarmony card) {
+    private MultanisHarmony(final MultanisHarmony card) {
         super(card);
     }
 

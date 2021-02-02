@@ -23,7 +23,7 @@ public final class GlimpseTheUnthinkable extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public GlimpseTheUnthinkable(final GlimpseTheUnthinkable card) {
+    private GlimpseTheUnthinkable(final GlimpseTheUnthinkable card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class TrainedJackal extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public TrainedJackal(final TrainedJackal card) {
+    private TrainedJackal(final TrainedJackal card) {
         super(card);
     }
 

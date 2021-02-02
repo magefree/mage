@@ -34,7 +34,7 @@ public final class RuinousGremlin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RuinousGremlin(final RuinousGremlin card) {
+    private RuinousGremlin(final RuinousGremlin card) {
         super(card);
     }
 

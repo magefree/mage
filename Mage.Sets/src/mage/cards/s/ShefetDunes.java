@@ -55,7 +55,7 @@ public final class ShefetDunes extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public ShefetDunes(final ShefetDunes card) {
+    private ShefetDunes(final ShefetDunes card) {
         super(card);
     }
 

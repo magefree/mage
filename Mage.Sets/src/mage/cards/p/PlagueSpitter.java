@@ -31,7 +31,7 @@ public final class PlagueSpitter extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DamageEverythingEffect(1), false));
     }
 
-    public PlagueSpitter(final PlagueSpitter card) {
+    private PlagueSpitter(final PlagueSpitter card) {
         super(card);
     }
 

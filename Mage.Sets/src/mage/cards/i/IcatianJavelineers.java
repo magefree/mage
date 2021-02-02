@@ -41,7 +41,7 @@ public final class IcatianJavelineers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IcatianJavelineers(final IcatianJavelineers card) {
+    private IcatianJavelineers(final IcatianJavelineers card) {
         super(card);
     }
 

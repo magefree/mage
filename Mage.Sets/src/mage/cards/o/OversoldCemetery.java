@@ -30,7 +30,7 @@ public final class OversoldCemetery extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition, "At the beginning of your upkeep, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand."));
     }
 
-    public OversoldCemetery(final OversoldCemetery card) {
+    private OversoldCemetery(final OversoldCemetery card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class WoodlandPatrol extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public WoodlandPatrol(final WoodlandPatrol card) {
+    private WoodlandPatrol(final WoodlandPatrol card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class BonescytheSliver extends CardImpl {
                         Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
-    public BonescytheSliver(final BonescytheSliver card) {
+    private BonescytheSliver(final BonescytheSliver card) {
         super(card);
     }
 

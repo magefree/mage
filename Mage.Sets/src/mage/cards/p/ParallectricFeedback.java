@@ -27,7 +27,7 @@ public final class ParallectricFeedback extends CardImpl {
 
     }
 
-    public ParallectricFeedback(final ParallectricFeedback card) {
+    private ParallectricFeedback(final ParallectricFeedback card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class SyggRiverGuide extends CardImpl {
 
     }
 
-    public SyggRiverGuide(final SyggRiverGuide card) {
+    private SyggRiverGuide(final SyggRiverGuide card) {
         super(card);
     }
 

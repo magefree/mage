@@ -35,7 +35,7 @@ public final class TemporalCascade extends CardImpl {
         this.addAbility(new EntwineAbility("{2}"));
     }
 
-    public TemporalCascade(final TemporalCascade card) {
+    private TemporalCascade(final TemporalCascade card) {
         super(card);
     }
 

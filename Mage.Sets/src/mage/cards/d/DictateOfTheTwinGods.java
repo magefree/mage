@@ -35,7 +35,7 @@ public final class DictateOfTheTwinGods extends CardImpl {
 
     }
 
-    public DictateOfTheTwinGods(final DictateOfTheTwinGods card) {
+    private DictateOfTheTwinGods(final DictateOfTheTwinGods card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class AzoriusFirstWing extends CardImpl {
         this.addAbility(new ProtectionAbility(new FilterEnchantmentCard("enchantments")));
     }
 
-    public AzoriusFirstWing(final AzoriusFirstWing card) {
+    private AzoriusFirstWing(final AzoriusFirstWing card) {
         super(card);
     }
 

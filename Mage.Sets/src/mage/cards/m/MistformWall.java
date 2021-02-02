@@ -43,7 +43,7 @@ public final class MistformWall extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new BecomesChosenCreatureTypeSourceEffect(), new GenericManaCost(1)));
     }
 
-    public MistformWall(final MistformWall card) {
+    private MistformWall(final MistformWall card) {
         super(card);
     }
 

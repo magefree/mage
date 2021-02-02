@@ -46,7 +46,7 @@ public final class ErebossEmissary extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
     }
 
-    public ErebossEmissary(final ErebossEmissary card) {
+    private ErebossEmissary(final ErebossEmissary card) {
         super(card);
     }
 

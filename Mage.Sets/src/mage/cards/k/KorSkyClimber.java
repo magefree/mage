@@ -32,7 +32,7 @@ public final class KorSkyClimber extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
     }
 
-    public KorSkyClimber(final KorSkyClimber card) {
+    private KorSkyClimber(final KorSkyClimber card) {
         super(card);
     }
 

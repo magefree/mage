@@ -53,7 +53,7 @@ public final class JeskaiInfiltrator extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new JeskaiInfiltratorEffect(), false));
     }
 
-    public JeskaiInfiltrator(final JeskaiInfiltrator card) {
+    private JeskaiInfiltrator(final JeskaiInfiltrator card) {
         super(card);
     }
 

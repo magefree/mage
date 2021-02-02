@@ -36,7 +36,7 @@ public final class GraveExchange extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public GraveExchange(final GraveExchange card) {
+    private GraveExchange(final GraveExchange card) {
         super(card);
     }
 

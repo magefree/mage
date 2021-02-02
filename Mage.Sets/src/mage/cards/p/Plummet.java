@@ -32,7 +32,7 @@ public final class Plummet extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public Plummet(final Plummet card) {
+    private Plummet(final Plummet card) {
         super(card);
     }
 

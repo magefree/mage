@@ -37,7 +37,7 @@ public final class ArterialFlow extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new GainLifeEffect(2), new PermanentsOnTheBattlefieldCondition(filter), "and you gain 2 life"));
     }
 
-    public ArterialFlow(final ArterialFlow card) {
+    private ArterialFlow(final ArterialFlow card) {
         super(card);
     }
 

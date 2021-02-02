@@ -38,7 +38,7 @@ public final class OvalchaseDaredevil extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), filter, true, SetTargetPointer.NONE, null, true));
     }
 
-    public OvalchaseDaredevil(final OvalchaseDaredevil card) {
+    private OvalchaseDaredevil(final OvalchaseDaredevil card) {
         super(card);
     }
 

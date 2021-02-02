@@ -29,7 +29,7 @@ public final class Acquire extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public Acquire(final Acquire card) {
+    private Acquire(final Acquire card) {
         super(card);
     }
 

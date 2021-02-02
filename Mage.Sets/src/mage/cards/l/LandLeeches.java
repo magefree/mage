@@ -26,7 +26,7 @@ public final class LandLeeches extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public LandLeeches(final LandLeeches card) {
+    private LandLeeches(final LandLeeches card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class AkoumHellkite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AkoumHellkite(final AkoumHellkite card) {
+    private AkoumHellkite(final AkoumHellkite card) {
         super(card);
     }
 

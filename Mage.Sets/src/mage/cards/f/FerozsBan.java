@@ -26,7 +26,7 @@ public final class FerozsBan extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(2, filter, TargetController.ANY)));
     }
 
-    public FerozsBan(final FerozsBan card) {
+    private FerozsBan(final FerozsBan card) {
         super(card);
     }
 

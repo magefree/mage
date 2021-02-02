@@ -54,7 +54,7 @@ public final class LukeSkywalker extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn), new LukeSkywalkerCost()));
     }
 
-    public LukeSkywalker(final LukeSkywalker card) {
+    private LukeSkywalker(final LukeSkywalker card) {
         super(card);
     }
 

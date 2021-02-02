@@ -44,7 +44,7 @@ public final class Radiate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public Radiate(final Radiate card) {
+    private Radiate(final Radiate card) {
         super(card);
     }
 

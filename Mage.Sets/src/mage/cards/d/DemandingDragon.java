@@ -43,7 +43,7 @@ public final class DemandingDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DemandingDragon(final DemandingDragon card) {
+    private DemandingDragon(final DemandingDragon card) {
         super(card);
     }
 

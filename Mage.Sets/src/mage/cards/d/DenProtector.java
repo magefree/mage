@@ -43,7 +43,7 @@ public final class DenProtector extends CardImpl {
 
     }
 
-    public DenProtector(final DenProtector card) {
+    private DenProtector(final DenProtector card) {
         super(card);
     }
 

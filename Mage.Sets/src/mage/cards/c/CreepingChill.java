@@ -33,7 +33,7 @@ public final class CreepingChill extends CardImpl {
         this.addAbility(new CreepingChillAbility());
     }
 
-    public CreepingChill(final CreepingChill card) {
+    private CreepingChill(final CreepingChill card) {
         super(card);
     }
 

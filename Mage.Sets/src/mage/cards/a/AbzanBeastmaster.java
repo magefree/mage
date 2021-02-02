@@ -34,7 +34,7 @@ public final class AbzanBeastmaster extends CardImpl {
         ));
     }
 
-    public AbzanBeastmaster(final AbzanBeastmaster card) {
+    private AbzanBeastmaster(final AbzanBeastmaster card) {
         super(card);
     }
 

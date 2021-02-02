@@ -42,7 +42,7 @@ public final class MindlessAutomaton extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
     }
 
-    public MindlessAutomaton(final MindlessAutomaton card) {
+    private MindlessAutomaton(final MindlessAutomaton card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class RevealingWind extends CardImpl {
         this.getSpellAbility().addEffect(new RevealingWindEffect());
     }
 
-    public RevealingWind(final RevealingWind card) {
+    private RevealingWind(final RevealingWind card) {
         super(card);
     }
 

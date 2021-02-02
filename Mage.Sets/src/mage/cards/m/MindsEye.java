@@ -23,7 +23,7 @@ public final class MindsEye extends CardImpl {
         this.addAbility(new DrawCardOpponentTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new GenericManaCost(1)), false, false));
     }
 
-    public MindsEye(final MindsEye card) {
+    private MindsEye(final MindsEye card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class SewerShambler extends CardImpl {
         this.addAbility(new ScavengeAbility(new ManaCostsImpl("{2}{B}")));
     }
 
-    public SewerShambler(final SewerShambler card) {
+    private SewerShambler(final SewerShambler card) {
         super(card);
     }
 

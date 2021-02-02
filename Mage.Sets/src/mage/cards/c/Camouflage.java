@@ -46,7 +46,7 @@ public final class Camouflage extends CardImpl {
         this.getSpellAbility().addEffect(new CamouflageEffect());
     }
 
-    public Camouflage(final Camouflage card) {
+    private Camouflage(final Camouflage card) {
         super(card);
     }
 

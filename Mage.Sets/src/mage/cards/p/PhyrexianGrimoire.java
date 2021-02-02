@@ -39,7 +39,7 @@ public final class PhyrexianGrimoire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianGrimoire(final PhyrexianGrimoire card) {
+    private PhyrexianGrimoire(final PhyrexianGrimoire card) {
         super(card);
     }
 

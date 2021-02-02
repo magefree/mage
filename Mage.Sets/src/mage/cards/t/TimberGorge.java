@@ -26,7 +26,7 @@ public final class TimberGorge extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public TimberGorge(final TimberGorge card) {
+    private TimberGorge(final TimberGorge card) {
         super(card);
     }
 

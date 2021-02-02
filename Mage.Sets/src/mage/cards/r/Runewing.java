@@ -40,7 +40,7 @@ public final class Runewing extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public Runewing(final Runewing card) {
+    private Runewing(final Runewing card) {
         super(card);
     }
 

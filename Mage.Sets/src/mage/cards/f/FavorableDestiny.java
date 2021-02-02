@@ -66,7 +66,7 @@ public final class FavorableDestiny extends CardImpl {
         ));
     }
 
-    public FavorableDestiny(final FavorableDestiny card) {
+    private FavorableDestiny(final FavorableDestiny card) {
         super(card);
     }
 

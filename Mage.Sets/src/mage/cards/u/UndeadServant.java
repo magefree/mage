@@ -36,7 +36,7 @@ public final class UndeadServant extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken(), new CardsInControllerGraveyardCount(filter))));
     }
 
-    public UndeadServant(final UndeadServant card) {
+    private UndeadServant(final UndeadServant card) {
         super(card);
     }
 

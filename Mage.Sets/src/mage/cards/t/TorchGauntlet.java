@@ -30,7 +30,7 @@ public final class TorchGauntlet extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public TorchGauntlet(final TorchGauntlet card) {
+    private TorchGauntlet(final TorchGauntlet card) {
         super(card);
     }
 

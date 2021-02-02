@@ -49,7 +49,7 @@ public final class FallOfTheHammer extends CardImpl {
         this.getSpellAbility().addTarget(target2);
     }
 
-    public FallOfTheHammer(final FallOfTheHammer card) {
+    private FallOfTheHammer(final FallOfTheHammer card) {
         super(card);
     }
 

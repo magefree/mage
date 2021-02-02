@@ -48,7 +48,7 @@ public final class CrashOfRhinoBeetles extends CardImpl {
         ));
     }
 
-    public CrashOfRhinoBeetles(final CrashOfRhinoBeetles card) {
+    private CrashOfRhinoBeetles(final CrashOfRhinoBeetles card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class ChroniclerOfHeroes extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ChroniclerOfHeroesEffect()));
     }
 
-    public ChroniclerOfHeroes(final ChroniclerOfHeroes card) {
+    private ChroniclerOfHeroes(final ChroniclerOfHeroes card) {
         super(card);
     }
 

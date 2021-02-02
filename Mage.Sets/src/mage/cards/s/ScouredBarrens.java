@@ -30,7 +30,7 @@ public final class ScouredBarrens extends CardImpl {
                 
     }
 
-    public ScouredBarrens(final ScouredBarrens card) {
+    private ScouredBarrens(final ScouredBarrens card) {
         super(card);
     }
 

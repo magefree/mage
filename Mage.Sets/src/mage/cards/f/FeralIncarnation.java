@@ -24,7 +24,7 @@ public final class FeralIncarnation extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken(), 3));
     }
 
-    public FeralIncarnation(final FeralIncarnation card) {
+    private FeralIncarnation(final FeralIncarnation card) {
         super(card);
     }
 

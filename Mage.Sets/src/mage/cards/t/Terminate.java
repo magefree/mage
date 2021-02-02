@@ -22,7 +22,7 @@ public final class Terminate extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect(true));
     }
 
-    public Terminate(final Terminate card) {
+    private Terminate(final Terminate card) {
         super(card);
     }
 

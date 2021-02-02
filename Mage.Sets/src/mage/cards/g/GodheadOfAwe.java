@@ -44,7 +44,7 @@ public final class GodheadOfAwe extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public GodheadOfAwe(final GodheadOfAwe card) {
+    private GodheadOfAwe(final GodheadOfAwe card) {
         super(card);
     }
 

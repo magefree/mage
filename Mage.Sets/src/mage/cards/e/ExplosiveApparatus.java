@@ -31,7 +31,7 @@ public final class ExplosiveApparatus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ExplosiveApparatus(final ExplosiveApparatus card) {
+    private ExplosiveApparatus(final ExplosiveApparatus card) {
         super(card);
     }
 

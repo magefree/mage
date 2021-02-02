@@ -29,7 +29,7 @@ public final class Headstone extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public Headstone(final Headstone card) {
+    private Headstone(final Headstone card) {
         super(card);
     }
 

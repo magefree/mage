@@ -26,7 +26,7 @@ public final class RoilSpout extends CardImpl {
         this.addAbility(new AwakenAbility(this, 4, "{4}{W}{U}"));
     }
 
-    public RoilSpout(final RoilSpout card) {
+    private RoilSpout(final RoilSpout card) {
         super(card);
     }
 

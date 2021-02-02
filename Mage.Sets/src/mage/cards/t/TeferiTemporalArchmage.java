@@ -50,7 +50,7 @@ public final class TeferiTemporalArchmage extends CardImpl {
 
     }
 
-    public TeferiTemporalArchmage(final TeferiTemporalArchmage card) {
+    private TeferiTemporalArchmage(final TeferiTemporalArchmage card) {
         super(card);
     }
 

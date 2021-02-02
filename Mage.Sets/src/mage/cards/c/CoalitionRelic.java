@@ -39,7 +39,7 @@ public final class CoalitionRelic extends CardImpl {
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(new CoalitionRelicEffect(), TargetController.YOU, false));
     }
 
-    public CoalitionRelic(final CoalitionRelic card) {
+    private CoalitionRelic(final CoalitionRelic card) {
         super(card);
     }
 

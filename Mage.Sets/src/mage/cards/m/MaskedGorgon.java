@@ -50,7 +50,7 @@ public final class MaskedGorgon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MaskedGorgon(final MaskedGorgon card) {
+    private MaskedGorgon(final MaskedGorgon card) {
         super(card);
     }
 

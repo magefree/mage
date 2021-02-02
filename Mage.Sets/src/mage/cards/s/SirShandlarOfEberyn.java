@@ -25,7 +25,7 @@ public final class SirShandlarOfEberyn extends CardImpl {
         this.toughness = new MageInt(7);
     }
 
-    public SirShandlarOfEberyn(final SirShandlarOfEberyn card) {
+    private SirShandlarOfEberyn(final SirShandlarOfEberyn card) {
         super(card);
     }
 

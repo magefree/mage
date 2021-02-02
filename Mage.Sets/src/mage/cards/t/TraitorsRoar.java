@@ -40,7 +40,7 @@ public final class TraitorsRoar extends CardImpl {
 
     }
 
-    public TraitorsRoar(final TraitorsRoar card) {
+    private TraitorsRoar(final TraitorsRoar card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class GreatTeachersDecree extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public GreatTeachersDecree(final GreatTeachersDecree card) {
+    private GreatTeachersDecree(final GreatTeachersDecree card) {
         super(card);
     }
 

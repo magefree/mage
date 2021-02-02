@@ -31,7 +31,7 @@ public final class CloneLegion extends CardImpl {
 
     }
 
-    public CloneLegion(final CloneLegion card) {
+    private CloneLegion(final CloneLegion card) {
         super(card);
     }
 

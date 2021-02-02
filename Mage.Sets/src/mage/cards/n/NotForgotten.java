@@ -31,7 +31,7 @@ public final class NotForgotten extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInGraveyard());
     }
 
-    public NotForgotten(final NotForgotten card) {
+    private NotForgotten(final NotForgotten card) {
         super(card);
     }
 

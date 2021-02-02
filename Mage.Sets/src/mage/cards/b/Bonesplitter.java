@@ -27,7 +27,7 @@ public final class Bonesplitter extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public Bonesplitter(final Bonesplitter card) {
+    private Bonesplitter(final Bonesplitter card) {
         super(card);
     }
 

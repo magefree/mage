@@ -52,7 +52,7 @@ public final class TawnossCoffin extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public TawnossCoffin(final TawnossCoffin card) {
+    private TawnossCoffin(final TawnossCoffin card) {
         super(card);
     }
 

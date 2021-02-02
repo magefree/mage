@@ -47,7 +47,7 @@ public final class OketraTheTrue extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WarriorVigilantToken()), new ManaCostsImpl("{3}{W}")));
     }
 
-    public OketraTheTrue(final OketraTheTrue card) {
+    private OketraTheTrue(final OketraTheTrue card) {
         super(card);
     }
 

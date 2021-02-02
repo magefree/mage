@@ -49,7 +49,7 @@ public final class KarnScionOfUrza extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public KarnScionOfUrza(final KarnScionOfUrza card) {
+    private KarnScionOfUrza(final KarnScionOfUrza card) {
         super(card);
     }
 

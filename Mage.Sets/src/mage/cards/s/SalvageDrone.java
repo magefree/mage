@@ -34,7 +34,7 @@ public final class SalvageDrone extends CardImpl {
 
     }
 
-    public SalvageDrone(final SalvageDrone card) {
+    private SalvageDrone(final SalvageDrone card) {
         super(card);
     }
 

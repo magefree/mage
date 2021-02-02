@@ -33,7 +33,7 @@ public final class ElkinBottle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElkinBottle(final ElkinBottle card) {
+    private ElkinBottle(final ElkinBottle card) {
         super(card);
     }
 

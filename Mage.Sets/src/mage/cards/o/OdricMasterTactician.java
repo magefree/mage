@@ -36,7 +36,7 @@ public final class OdricMasterTactician extends CardImpl {
         this.addAbility(new OdricMasterTacticianTriggeredAbility());
     }
 
-    public OdricMasterTactician(final OdricMasterTactician card) {
+    private OdricMasterTactician(final OdricMasterTactician card) {
         super(card);
     }
 

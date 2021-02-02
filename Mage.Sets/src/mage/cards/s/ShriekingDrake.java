@@ -31,7 +31,7 @@ public final class ShriekingDrake extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent())));
     }
 
-    public ShriekingDrake(final ShriekingDrake card) {
+    private ShriekingDrake(final ShriekingDrake card) {
         super(card);
     }
 

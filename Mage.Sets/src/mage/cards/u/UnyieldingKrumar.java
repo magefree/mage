@@ -33,7 +33,7 @@ public final class UnyieldingKrumar extends CardImpl {
 
     }
 
-    public UnyieldingKrumar(final UnyieldingKrumar card) {
+    private UnyieldingKrumar(final UnyieldingKrumar card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class ScroungedScythe extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public ScroungedScythe(final ScroungedScythe card) {
+    private ScroungedScythe(final ScroungedScythe card) {
         super(card);
     }
 

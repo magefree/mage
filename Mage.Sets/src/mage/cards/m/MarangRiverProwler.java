@@ -48,7 +48,7 @@ public final class MarangRiverProwler extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, new MarangRiverProwlerCastEffect()));
     }
 
-    public MarangRiverProwler(final MarangRiverProwler card) {
+    private MarangRiverProwler(final MarangRiverProwler card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class IllusionReality extends SplitCard {
         getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public IllusionReality(final IllusionReality card) {
+    private IllusionReality(final IllusionReality card) {
         super(card);
     }
 

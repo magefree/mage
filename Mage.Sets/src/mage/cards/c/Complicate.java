@@ -35,7 +35,7 @@ public final class Complicate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Complicate(final Complicate card) {
+    private Complicate(final Complicate card) {
         super(card);
     }
 

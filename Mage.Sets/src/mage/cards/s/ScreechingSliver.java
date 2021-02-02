@@ -40,7 +40,7 @@ public final class ScreechingSliver extends CardImpl {
                         allSliversFilter, "All Slivers have \"{T}: Target player mills a card.\"")));
     }
 
-    public ScreechingSliver(final ScreechingSliver card) {
+    private ScreechingSliver(final ScreechingSliver card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class CastDown extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public CastDown(final CastDown card){
+    private CastDown(final CastDown card){
         super(card);
     }
 

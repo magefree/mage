@@ -42,7 +42,7 @@ public final class BattlefieldScrounger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BattlefieldScrounger(final BattlefieldScrounger card) {
+    private BattlefieldScrounger(final BattlefieldScrounger card) {
         super(card);
     }
 

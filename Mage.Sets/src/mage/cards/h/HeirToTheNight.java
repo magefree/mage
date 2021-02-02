@@ -30,7 +30,7 @@ public final class HeirToTheNight extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public HeirToTheNight(final HeirToTheNight card) {
+    private HeirToTheNight(final HeirToTheNight card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class Demolish extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public Demolish(final Demolish card) {
+    private Demolish(final Demolish card) {
         super(card);
     }
 

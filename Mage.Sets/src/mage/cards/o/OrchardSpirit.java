@@ -45,7 +45,7 @@ public final class OrchardSpirit extends CardImpl {
 
     }
 
-    public OrchardSpirit(final OrchardSpirit card) {
+    private OrchardSpirit(final OrchardSpirit card) {
         super(card);
     }
 

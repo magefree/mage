@@ -43,7 +43,7 @@ public final class AxebaneGuardian extends CardImpl {
                 "Add X mana in any combination of colors, where X is the number of creatures with defender you control."));
     }
 
-    public AxebaneGuardian(final AxebaneGuardian card) {
+    private AxebaneGuardian(final AxebaneGuardian card) {
         super(card);
     }
 

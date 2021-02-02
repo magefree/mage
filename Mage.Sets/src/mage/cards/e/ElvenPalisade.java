@@ -36,7 +36,7 @@ public final class ElvenPalisade extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElvenPalisade(final ElvenPalisade card) {
+    private ElvenPalisade(final ElvenPalisade card) {
         super(card);
     }
 

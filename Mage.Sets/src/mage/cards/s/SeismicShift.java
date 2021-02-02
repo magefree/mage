@@ -31,7 +31,7 @@ public final class SeismicShift extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2, StaticFilters.FILTER_PERMANENT_CREATURES, false));
     }
 
-    public SeismicShift(final SeismicShift card) {
+    private SeismicShift(final SeismicShift card) {
         super(card);
     }
 

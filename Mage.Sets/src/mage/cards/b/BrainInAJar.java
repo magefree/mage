@@ -56,7 +56,7 @@ public final class BrainInAJar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BrainInAJar(final BrainInAJar card) {
+    private BrainInAJar(final BrainInAJar card) {
         super(card);
     }
 

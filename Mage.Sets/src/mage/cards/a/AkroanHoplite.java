@@ -41,7 +41,7 @@ public final class AkroanHoplite extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.EndOfTurn, true), false));
     }
 
-    public AkroanHoplite(final AkroanHoplite card) {
+    private AkroanHoplite(final AkroanHoplite card) {
         super(card);
     }
 

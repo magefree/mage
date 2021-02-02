@@ -35,7 +35,7 @@ public final class GoblinRecruiter extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RecruiterEffect(filter), false));
     }
 
-    public GoblinRecruiter(final GoblinRecruiter card) {
+    private GoblinRecruiter(final GoblinRecruiter card) {
         super(card);
     }
 

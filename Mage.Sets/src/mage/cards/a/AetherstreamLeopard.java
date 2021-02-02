@@ -40,7 +40,7 @@ public final class AetherstreamLeopard extends CardImpl {
                 "Whenever {this} attacks you may pay {E}. If you do, it gets +2/+0 until end of turn."));
     }
 
-    public AetherstreamLeopard(final AetherstreamLeopard card) {
+    private AetherstreamLeopard(final AetherstreamLeopard card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class DwarvenWeaponsmith extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DwarvenWeaponsmith(final DwarvenWeaponsmith card) {
+    private DwarvenWeaponsmith(final DwarvenWeaponsmith card) {
         super(card);
     }
 

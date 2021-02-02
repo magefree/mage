@@ -41,7 +41,7 @@ public final class HollowWarrior extends CardImpl {
 
     }
         
-    public HollowWarrior(final HollowWarrior card) {
+    private HollowWarrior(final HollowWarrior card) {
         super(card);
     }
 

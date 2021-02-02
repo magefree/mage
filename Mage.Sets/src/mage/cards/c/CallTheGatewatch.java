@@ -24,7 +24,7 @@ public final class CallTheGatewatch extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
     }
 
-    public CallTheGatewatch(final CallTheGatewatch card) {
+    private CallTheGatewatch(final CallTheGatewatch card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class Ponder extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Ponder(final Ponder card) {
+    private Ponder(final Ponder card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class KavuLair extends CardImpl {
                 "Whenever a creature with power 4 or greater enters the battlefield, its controller draws a card."));        
     }
 
-    public KavuLair(final KavuLair card) {
+    private KavuLair(final KavuLair card) {
         super(card);
     }
 

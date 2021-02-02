@@ -33,7 +33,7 @@ public final class Excruciator extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ExcruciatorEffect()));
     }
 
-    public Excruciator(final Excruciator card) {
+    private Excruciator(final Excruciator card) {
         super(card);
     }
 

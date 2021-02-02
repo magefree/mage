@@ -51,7 +51,7 @@ public final class RavenousVampire extends CardImpl {
         ));
     }
 
-    public RavenousVampire(final RavenousVampire card) {
+    private RavenousVampire(final RavenousVampire card) {
         super(card);
     }
 

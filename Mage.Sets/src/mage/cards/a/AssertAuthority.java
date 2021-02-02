@@ -27,7 +27,7 @@ public final class AssertAuthority extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public AssertAuthority(final AssertAuthority card) {
+    private AssertAuthority(final AssertAuthority card) {
         super(card);
     }
 

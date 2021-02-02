@@ -33,7 +33,7 @@ public final class DecoratedGriffin extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.EndOfTurn, true, true, 1), new ManaCostsImpl("{1}{W}")));
     }
 
-    public DecoratedGriffin(final DecoratedGriffin card) {
+    private DecoratedGriffin(final DecoratedGriffin card) {
         super(card);
     }
 

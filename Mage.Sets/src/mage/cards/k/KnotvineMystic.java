@@ -36,7 +36,7 @@ public final class KnotvineMystic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KnotvineMystic(final KnotvineMystic card) {
+    private KnotvineMystic(final KnotvineMystic card) {
         super(card);
     }
 

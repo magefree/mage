@@ -46,7 +46,7 @@ public final class CateranBrute extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CateranBrute(final CateranBrute card) {
+    private CateranBrute(final CateranBrute card) {
         super(card);
     }
 

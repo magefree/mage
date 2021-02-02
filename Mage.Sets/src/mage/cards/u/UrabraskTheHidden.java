@@ -36,7 +36,7 @@ public final class UrabraskTheHidden extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UrabraskTheHiddenEffect()));
     }
 
-    public UrabraskTheHidden(final UrabraskTheHidden card) {
+    private UrabraskTheHidden(final UrabraskTheHidden card) {
         super(card);
     }
 

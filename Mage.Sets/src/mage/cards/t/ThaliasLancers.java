@@ -43,7 +43,7 @@ public final class ThaliasLancers extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, true));
     }
 
-    public ThaliasLancers(final ThaliasLancers card) {
+    private ThaliasLancers(final ThaliasLancers card) {
         super(card);
     }
 

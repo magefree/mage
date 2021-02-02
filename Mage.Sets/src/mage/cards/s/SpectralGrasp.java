@@ -52,7 +52,7 @@ public final class SpectralGrasp extends CardImpl {
 
     }
 
-    public SpectralGrasp(final SpectralGrasp card) {
+    private SpectralGrasp(final SpectralGrasp card) {
         super(card);
     }
 

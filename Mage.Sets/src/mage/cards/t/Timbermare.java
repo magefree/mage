@@ -41,7 +41,7 @@ public final class Timbermare extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter)));
     }
 
-    public Timbermare(final Timbermare card) {
+    private Timbermare(final Timbermare card) {
         super(card);
     }
 

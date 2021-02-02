@@ -35,7 +35,7 @@ public final class ShroudedSerpent extends CardImpl {
                 SetTargetPointer.PLAYER));
     }
 
-    public ShroudedSerpent(final ShroudedSerpent card) {
+    private ShroudedSerpent(final ShroudedSerpent card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class HoofSkulkin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HoofSkulkin(final HoofSkulkin card) {
+    private HoofSkulkin(final HoofSkulkin card) {
         super(card);
     }
 

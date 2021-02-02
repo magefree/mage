@@ -44,7 +44,7 @@ public final class DromokaDunecaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DromokaDunecaster(final DromokaDunecaster card) {
+    private DromokaDunecaster(final DromokaDunecaster card) {
         super(card);
     }
 

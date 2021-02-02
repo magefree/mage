@@ -25,7 +25,7 @@ public final class YotianSoldier extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public YotianSoldier(final YotianSoldier card) {
+    private YotianSoldier(final YotianSoldier card) {
         super(card);
     }
 

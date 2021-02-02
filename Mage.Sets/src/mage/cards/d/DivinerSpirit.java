@@ -31,7 +31,7 @@ public final class DivinerSpirit extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DivinerSpiritEffect(), false, true));
     }
 
-    public DivinerSpirit(final DivinerSpirit card) {
+    private DivinerSpirit(final DivinerSpirit card) {
         super(card);
     }
 

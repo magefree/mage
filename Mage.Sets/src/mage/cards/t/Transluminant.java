@@ -38,7 +38,7 @@ public final class Transluminant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Transluminant(final Transluminant card) {
+    private Transluminant(final Transluminant card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class ProperBurial extends CardImpl {
         this.addAbility(new ProperBurialTriggeredAbility());
     }
 
-    public ProperBurial(final ProperBurial card) {
+    private ProperBurial(final ProperBurial card) {
         super(card);
     }
 

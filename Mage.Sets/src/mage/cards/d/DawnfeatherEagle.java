@@ -43,7 +43,7 @@ public final class DawnfeatherEagle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DawnfeatherEagle(final DawnfeatherEagle card) {
+    private DawnfeatherEagle(final DawnfeatherEagle card) {
         super(card);
     }
 

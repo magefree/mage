@@ -28,7 +28,7 @@ public final class MorgueThrull extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsControllerEffect(3), new SacrificeSourceCost()));
     }
 
-    public MorgueThrull(final MorgueThrull card) {
+    private MorgueThrull(final MorgueThrull card) {
         super(card);
     }
 

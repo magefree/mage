@@ -30,7 +30,7 @@ public final class GiantDustwasp extends CardImpl {
         this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{1}{G}"), this));
     }
 
-    public GiantDustwasp(final GiantDustwasp card) {
+    private GiantDustwasp(final GiantDustwasp card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class YavimayaKavu extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterGreenCreature), Duration.EndOfGame)));
     }
 
-    public YavimayaKavu(final YavimayaKavu card) {
+    private YavimayaKavu(final YavimayaKavu card) {
         super(card);
     }
 

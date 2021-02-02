@@ -24,7 +24,7 @@ public final class SavageConception extends CardImpl {
         this.addAbility(new RetraceAbility(this));
     }
 
-    public SavageConception(final SavageConception card) {
+    private SavageConception(final SavageConception card) {
         super(card);
     }
 

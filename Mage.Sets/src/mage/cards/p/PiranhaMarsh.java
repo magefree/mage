@@ -27,7 +27,7 @@ public final class PiranhaMarsh extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PiranhaMarsh(final PiranhaMarsh card) {
+    private PiranhaMarsh(final PiranhaMarsh card) {
         super(card);
     }
 

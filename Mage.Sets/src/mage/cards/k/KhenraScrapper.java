@@ -34,7 +34,7 @@ public final class KhenraScrapper extends CardImpl {
         this.addAbility(new ExertAbility(new BecomesExertSourceTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn))));
     }
 
-    public KhenraScrapper(final KhenraScrapper card) {
+    private KhenraScrapper(final KhenraScrapper card) {
         super(card);
     }
 

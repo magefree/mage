@@ -45,7 +45,7 @@ public final class LightningRigCrew extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, false));
     }
 
-    public LightningRigCrew(final LightningRigCrew card) {
+    private LightningRigCrew(final LightningRigCrew card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class TwinBolt extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(2));
     }
 
-    public TwinBolt(final TwinBolt card) {
+    private TwinBolt(final TwinBolt card) {
         super(card);
     }
 

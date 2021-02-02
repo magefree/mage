@@ -64,7 +64,7 @@ public final class PurrajOfUrborg extends CardImpl {
         ));
     }
 
-    public PurrajOfUrborg(final PurrajOfUrborg card) {
+    private PurrajOfUrborg(final PurrajOfUrborg card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class PsychicStrike extends CardImpl {
         this.getSpellAbility().addEffect(new PsychicStrikeEffect());
     }
 
-    public PsychicStrike(final PsychicStrike card) {
+    private PsychicStrike(final PsychicStrike card) {
         super(card);
     }
 

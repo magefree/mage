@@ -36,7 +36,7 @@ public final class NeverReturn extends SplitCard {
         getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken()));
     }
 
-    public NeverReturn(final NeverReturn card) {
+    private NeverReturn(final NeverReturn card) {
         super(card);
     }
 

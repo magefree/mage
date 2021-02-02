@@ -28,7 +28,7 @@ public final class Geistflame extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), TimingRule.INSTANT));
     }
 
-    public Geistflame(final Geistflame card) {
+    private Geistflame(final Geistflame card) {
         super(card);
     }
 

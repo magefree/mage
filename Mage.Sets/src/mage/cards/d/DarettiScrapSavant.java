@@ -56,7 +56,7 @@ public final class DarettiScrapSavant extends CardImpl {
         this.addAbility(CanBeYourCommanderAbility.getInstance());
     }
 
-    public DarettiScrapSavant(final DarettiScrapSavant card) {
+    private DarettiScrapSavant(final DarettiScrapSavant card) {
         super(card);
     }
 

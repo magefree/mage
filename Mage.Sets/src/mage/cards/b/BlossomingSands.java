@@ -31,7 +31,7 @@ public final class BlossomingSands extends CardImpl {
         this.addAbility(new WhiteManaAbility());           
     }
 
-    public BlossomingSands(final BlossomingSands card) {
+    private BlossomingSands(final BlossomingSands card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class Vitalize extends CardImpl {
         this.getSpellAbility().addEffect(new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, "Untap all creatures you control"));
     }
 
-    public Vitalize(final Vitalize card) {
+    private Vitalize(final Vitalize card) {
         super(card);
     }
 

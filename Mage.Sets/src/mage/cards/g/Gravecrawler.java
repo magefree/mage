@@ -35,7 +35,7 @@ public final class Gravecrawler extends CardImpl {
 
     }
 
-    public Gravecrawler(final Gravecrawler card) {
+    private Gravecrawler(final Gravecrawler card) {
         super(card);
     }
 

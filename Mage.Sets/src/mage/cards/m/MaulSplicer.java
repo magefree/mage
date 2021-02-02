@@ -44,7 +44,7 @@ public final class MaulSplicer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public MaulSplicer(final MaulSplicer card) {
+    private MaulSplicer(final MaulSplicer card) {
         super(card);
     }
 

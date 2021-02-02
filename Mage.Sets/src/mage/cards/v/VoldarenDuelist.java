@@ -36,7 +36,7 @@ public final class VoldarenDuelist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VoldarenDuelist(final VoldarenDuelist card) {
+    private VoldarenDuelist(final VoldarenDuelist card) {
         super(card);
     }
 

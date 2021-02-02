@@ -32,7 +32,7 @@ public final class MightyLeap extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public MightyLeap(final MightyLeap card) {
+    private MightyLeap(final MightyLeap card) {
         super(card);
     }
 

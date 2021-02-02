@@ -21,7 +21,7 @@ public final class DragonFodder extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 2));
     }
 
-    public DragonFodder(final DragonFodder card) {
+    private DragonFodder(final DragonFodder card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class Archangel extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public Archangel(final Archangel card) {
+    private Archangel(final Archangel card) {
         super(card);
     }
 

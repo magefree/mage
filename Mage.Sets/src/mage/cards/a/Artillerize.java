@@ -34,7 +34,7 @@ public final class Artillerize extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
     }
 
-    public Artillerize(final Artillerize card) {
+    private Artillerize(final Artillerize card) {
         super(card);
     }
 

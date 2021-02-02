@@ -51,7 +51,7 @@ public final class CharmbreakerDevils extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(4, 0, Duration.EndOfTurn), filter, false));
     }
 
-    public CharmbreakerDevils(final CharmbreakerDevils card) {
+    private CharmbreakerDevils(final CharmbreakerDevils card) {
         super(card);
     }
 

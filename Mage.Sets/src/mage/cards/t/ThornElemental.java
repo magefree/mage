@@ -26,7 +26,7 @@ public final class ThornElemental extends CardImpl {
         this.addAbility(DamageAsThoughNotBlockedAbility.getInstance());
     }
 
-    public ThornElemental(final ThornElemental card) {
+    private ThornElemental(final ThornElemental card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class KithkinZephyrnaut extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KithkinZephyrnaut(final KithkinZephyrnaut card) {
+    private KithkinZephyrnaut(final KithkinZephyrnaut card) {
         super(card);
     }
 

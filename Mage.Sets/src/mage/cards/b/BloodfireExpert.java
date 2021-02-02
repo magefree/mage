@@ -26,7 +26,7 @@ public final class BloodfireExpert extends CardImpl {
         this.addAbility(new ProwessAbility());
     }
 
-    public BloodfireExpert(final BloodfireExpert card) {
+    private BloodfireExpert(final BloodfireExpert card) {
         super(card);
     }
 

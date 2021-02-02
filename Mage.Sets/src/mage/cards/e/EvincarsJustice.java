@@ -24,7 +24,7 @@ public final class EvincarsJustice extends CardImpl {
         this.getSpellAbility().addEffect(new DamageEverythingEffect(2));
     }
 
-    public EvincarsJustice(final EvincarsJustice card) {
+    private EvincarsJustice(final EvincarsJustice card) {
         super(card);
     }
 

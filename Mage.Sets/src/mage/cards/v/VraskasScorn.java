@@ -35,7 +35,7 @@ public final class VraskasScorn extends CardImpl {
                 .setText("You may search your library and/or graveyard for a card named Vraska, Scheming Gorgon, reveal it, and put it into your hand. If you search your library this way, shuffle it"));
     }
 
-    public VraskasScorn(final VraskasScorn card) {
+    private VraskasScorn(final VraskasScorn card) {
         super(card);
     }
 

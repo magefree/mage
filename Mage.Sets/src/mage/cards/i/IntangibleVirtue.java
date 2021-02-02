@@ -39,7 +39,7 @@ public final class IntangibleVirtue extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IntangibleVirtue(final IntangibleVirtue card) {
+    private IntangibleVirtue(final IntangibleVirtue card) {
         super(card);
     }
 

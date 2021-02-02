@@ -46,7 +46,7 @@ public final class ArvadTheCursed extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public ArvadTheCursed(final ArvadTheCursed card) {
+    private ArvadTheCursed(final ArvadTheCursed card) {
         super(card);
     }
 

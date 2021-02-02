@@ -33,7 +33,7 @@ public final class Meekstone extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
     }
 
-    public Meekstone(final Meekstone card) {
+    private Meekstone(final Meekstone card) {
         super(card);
     }
 

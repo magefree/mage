@@ -28,7 +28,7 @@ public final class CoaxFromTheBlindEternities extends CardImpl {
         this.getSpellAbility().addEffect(new WishEffect(filter, true, true));
     }
 
-    public CoaxFromTheBlindEternities(final CoaxFromTheBlindEternities card) {
+    private CoaxFromTheBlindEternities(final CoaxFromTheBlindEternities card) {
         super(card);
     }
 

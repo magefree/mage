@@ -31,7 +31,7 @@ public final class Glitterfang extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.ANY, false));
     }
 
-    public Glitterfang(final Glitterfang card) {
+    private Glitterfang(final Glitterfang card) {
         super(card);
     }
 

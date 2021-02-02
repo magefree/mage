@@ -56,7 +56,7 @@ public final class ThatWhichWasTaken extends CardImpl {
 
     }
 
-    public ThatWhichWasTaken(final ThatWhichWasTaken card) {
+    private ThatWhichWasTaken(final ThatWhichWasTaken card) {
         super(card);
     }
 

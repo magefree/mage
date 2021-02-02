@@ -34,7 +34,7 @@ public final class HexParasite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HexParasite(final HexParasite card) {
+    private HexParasite(final HexParasite card) {
         super(card);
     }
 

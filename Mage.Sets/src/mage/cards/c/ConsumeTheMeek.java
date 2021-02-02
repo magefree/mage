@@ -30,7 +30,7 @@ public final class ConsumeTheMeek extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, true));
     }
 
-    public ConsumeTheMeek(final ConsumeTheMeek card) {
+    private ConsumeTheMeek(final ConsumeTheMeek card) {
         super(card);
     }
 

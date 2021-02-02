@@ -57,7 +57,7 @@ public final class LightningMare extends CardImpl {
         ));
     }
 
-    public LightningMare(final LightningMare card) {
+    private LightningMare(final LightningMare card) {
         super(card);
     }
 

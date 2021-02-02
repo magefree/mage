@@ -27,7 +27,7 @@ public final class ClayStatue extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}")));
     }
 
-    public ClayStatue(final ClayStatue card) {
+    private ClayStatue(final ClayStatue card) {
         super(card);
     }
 

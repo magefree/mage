@@ -25,7 +25,7 @@ public final class Cathodion extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new BasicManaEffect(Mana.ColorlessMana(3)), false));
     }
 
-    public Cathodion(final Cathodion card) {
+    private Cathodion(final Cathodion card) {
         super(card);
     }
 

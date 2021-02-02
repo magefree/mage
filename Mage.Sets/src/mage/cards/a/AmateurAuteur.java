@@ -33,7 +33,7 @@ public final class AmateurAuteur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AmateurAuteur(final AmateurAuteur card) {
+    private AmateurAuteur(final AmateurAuteur card) {
         super(card);
     }
 

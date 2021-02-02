@@ -38,7 +38,7 @@ public final class PrismwakeMerrow extends CardImpl {
 
     }
 
-    public PrismwakeMerrow(final PrismwakeMerrow card) {
+    private PrismwakeMerrow(final PrismwakeMerrow card) {
         super(card);
     }
 

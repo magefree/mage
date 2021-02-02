@@ -24,7 +24,7 @@ public final class Convolute extends CardImpl {
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(4)));
     }
 
-    public Convolute(final Convolute card) {
+    private Convolute(final Convolute card) {
         super(card);
     }
 

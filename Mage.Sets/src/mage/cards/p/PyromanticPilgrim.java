@@ -28,7 +28,7 @@ public final class PyromanticPilgrim extends CardImpl {
 
     }
 
-    public PyromanticPilgrim(final PyromanticPilgrim card) {
+    private PyromanticPilgrim(final PyromanticPilgrim card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class SelesnyaSagittars extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect()));
     }
 
-    public SelesnyaSagittars(final SelesnyaSagittars card) {
+    private SelesnyaSagittars(final SelesnyaSagittars card) {
         super(card);
     }
 

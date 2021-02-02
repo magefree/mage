@@ -24,7 +24,7 @@ public final class CoastalBreach extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterNonlandPermanent()));
     }
 
-    public CoastalBreach(final CoastalBreach card) {
+    private CoastalBreach(final CoastalBreach card) {
         super(card);
     }
 

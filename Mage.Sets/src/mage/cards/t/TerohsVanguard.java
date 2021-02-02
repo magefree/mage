@@ -48,7 +48,7 @@ public final class TerohsVanguard extends CardImpl {
 
     }
 
-    public TerohsVanguard(final TerohsVanguard card) {
+    private TerohsVanguard(final TerohsVanguard card) {
         super(card);
     }
 

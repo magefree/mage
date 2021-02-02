@@ -62,7 +62,7 @@ public final class ResplendentAngel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ResplendentAngel(final ResplendentAngel card) {
+    private ResplendentAngel(final ResplendentAngel card) {
         super(card);
     }
 

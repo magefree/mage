@@ -37,7 +37,7 @@ public final class RankAndFile extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false)));
     }
 
-    public RankAndFile(final RankAndFile card) {
+    private RankAndFile(final RankAndFile card) {
         super(card);
     }
 

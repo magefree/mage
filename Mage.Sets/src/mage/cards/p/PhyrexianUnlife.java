@@ -39,7 +39,7 @@ public final class PhyrexianUnlife extends CardImpl {
 
     }
 
-    public PhyrexianUnlife(final PhyrexianUnlife card) {
+    private PhyrexianUnlife(final PhyrexianUnlife card) {
         super(card);
     }
 

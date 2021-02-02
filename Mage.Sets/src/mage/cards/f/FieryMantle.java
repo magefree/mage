@@ -40,7 +40,7 @@ public final class FieryMantle extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public FieryMantle(final FieryMantle card) {
+    private FieryMantle(final FieryMantle card) {
         super(card);
     }
 

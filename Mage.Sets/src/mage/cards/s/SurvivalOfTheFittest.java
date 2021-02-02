@@ -32,7 +32,7 @@ public final class SurvivalOfTheFittest extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SurvivalOfTheFittest(final SurvivalOfTheFittest card) {
+    private SurvivalOfTheFittest(final SurvivalOfTheFittest card) {
         super(card);
     }
 

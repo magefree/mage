@@ -45,7 +45,7 @@ public final class NullProfusion extends CardImpl {
         ));
     }
 
-    public NullProfusion(final NullProfusion card) {
+    private NullProfusion(final NullProfusion card) {
         super(card);
     }
 

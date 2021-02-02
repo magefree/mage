@@ -37,7 +37,7 @@ public final class Omnibian extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Omnibian(final Omnibian card) {
+    private Omnibian(final Omnibian card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class EmpyrialArchangel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EmpyrialArchangelEffect()));
     }
 
-    public EmpyrialArchangel(final EmpyrialArchangel card) {
+    private EmpyrialArchangel(final EmpyrialArchangel card) {
         super(card);
     }
 

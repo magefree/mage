@@ -30,7 +30,7 @@ public final class Amok extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Amok(final Amok card) {
+    private Amok(final Amok card) {
         super(card);
     }
 

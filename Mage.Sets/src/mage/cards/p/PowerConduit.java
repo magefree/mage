@@ -37,7 +37,7 @@ public final class PowerConduit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PowerConduit(final PowerConduit card) {
+    private PowerConduit(final PowerConduit card) {
         super(card);
     }
 

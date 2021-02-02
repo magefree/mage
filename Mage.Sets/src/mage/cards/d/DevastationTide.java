@@ -26,7 +26,7 @@ public final class DevastationTide extends CardImpl {
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{U}")));
     }
 
-    public DevastationTide(final DevastationTide card) {
+    private DevastationTide(final DevastationTide card) {
         super(card);
     }
 

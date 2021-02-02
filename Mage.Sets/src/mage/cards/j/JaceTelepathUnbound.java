@@ -53,7 +53,7 @@ public final class JaceTelepathUnbound extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new JaceTelepathUnboundEmblem()), -9));
     }
 
-    public JaceTelepathUnbound(final JaceTelepathUnbound card) {
+    private JaceTelepathUnbound(final JaceTelepathUnbound card) {
         super(card);
     }
 

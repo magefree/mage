@@ -31,7 +31,7 @@ public final class Cannibalize extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanentSameController(2, 2, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
-    public Cannibalize(final Cannibalize card) {
+    private Cannibalize(final Cannibalize card) {
         super(card);
     }
 

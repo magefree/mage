@@ -43,7 +43,7 @@ public class AminatousAugury extends CardImpl {
         this.getSpellAbility().addEffect(new AminatousAuguryEffect());
     }
 
-    public AminatousAugury(final AminatousAugury card) {
+    private AminatousAugury(final AminatousAugury card) {
         super(card);
     }
 

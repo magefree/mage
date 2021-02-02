@@ -48,7 +48,7 @@ public final class WorldheartPhoenix extends CardImpl {
 
     }
 
-    public WorldheartPhoenix(final WorldheartPhoenix card) {
+    private WorldheartPhoenix(final WorldheartPhoenix card) {
         super(card);
     }
 

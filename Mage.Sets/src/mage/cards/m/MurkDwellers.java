@@ -27,7 +27,7 @@ public final class MurkDwellers extends CardImpl {
         this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfCombat)));
     }
 
-    public MurkDwellers(final MurkDwellers card) {
+    private MurkDwellers(final MurkDwellers card) {
         super(card);
     }
 

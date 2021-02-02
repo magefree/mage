@@ -34,7 +34,7 @@ public final class HarvestSeason extends CardImpl {
 
     }
 
-    public HarvestSeason(final HarvestSeason card) {
+    private HarvestSeason(final HarvestSeason card) {
         super(card);
     }
 

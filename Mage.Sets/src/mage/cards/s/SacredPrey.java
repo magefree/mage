@@ -26,7 +26,7 @@ public final class SacredPrey extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new GainLifeEffect(1), false));
     }
 
-    public SacredPrey(final SacredPrey card) {
+    private SacredPrey(final SacredPrey card) {
         super(card);
     }
 

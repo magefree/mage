@@ -42,7 +42,7 @@ public final class AinokGuide extends CardImpl {
 
     }
 
-    public AinokGuide(final AinokGuide card) {
+    private AinokGuide(final AinokGuide card) {
         super(card);
     }
 

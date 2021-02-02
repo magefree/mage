@@ -44,7 +44,7 @@ public final class GenesisChamber extends CardImpl {
                         + "that creature's controller creates a 1/1 colorless Myr artifact creature token"));
     }
 
-    public GenesisChamber(final GenesisChamber card) {
+    private GenesisChamber(final GenesisChamber card) {
         super(card);
     }
 

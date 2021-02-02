@@ -31,7 +31,7 @@ public final class LeylinePhantom extends CardImpl {
         this.addAbility(new LeylinePhantomTriggeredAbility());
     }
 
-    public LeylinePhantom(final LeylinePhantom card) {
+    private LeylinePhantom(final LeylinePhantom card) {
         super(card);
     }
 

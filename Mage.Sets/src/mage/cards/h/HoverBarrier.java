@@ -30,7 +30,7 @@ public final class HoverBarrier extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public HoverBarrier(final HoverBarrier card) {
+    private HoverBarrier(final HoverBarrier card) {
         super(card);
     }
 

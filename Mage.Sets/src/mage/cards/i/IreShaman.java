@@ -47,7 +47,7 @@ public final class IreShaman extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new IreShamanExileEffect(), false));
     }
 
-    public IreShaman(final IreShaman card) {
+    private IreShaman(final IreShaman card) {
         super(card);
     }
 

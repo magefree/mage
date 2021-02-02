@@ -32,7 +32,7 @@ public final class IncreasingConfusion extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{X}{U}"), TimingRule.SORCERY));
     }
 
-    public IncreasingConfusion(final IncreasingConfusion card) {
+    private IncreasingConfusion(final IncreasingConfusion card) {
         super(card);
     }
 

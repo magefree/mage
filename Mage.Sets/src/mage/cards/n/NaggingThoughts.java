@@ -28,7 +28,7 @@ public final class NaggingThoughts extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{U}")));
     }
 
-    public NaggingThoughts(final NaggingThoughts card) {
+    private NaggingThoughts(final NaggingThoughts card) {
         super(card);
     }
 

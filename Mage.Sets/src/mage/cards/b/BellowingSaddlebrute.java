@@ -38,7 +38,7 @@ public final class BellowingSaddlebrute extends CardImpl {
                 new PlayerAttackedWatcher());
     }
 
-    public BellowingSaddlebrute(final BellowingSaddlebrute card) {
+    private BellowingSaddlebrute(final BellowingSaddlebrute card) {
         super(card);
     }
 

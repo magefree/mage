@@ -55,7 +55,7 @@ public final class JaceArchitectOfThought extends CardImpl {
 
     }
 
-    public JaceArchitectOfThought(final JaceArchitectOfThought card) {
+    private JaceArchitectOfThought(final JaceArchitectOfThought card) {
         super(card);
     }
 

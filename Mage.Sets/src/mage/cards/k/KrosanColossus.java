@@ -26,7 +26,7 @@ public final class KrosanColossus extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{6}{G}{G}")));
     }
 
-    public KrosanColossus(final KrosanColossus card) {
+    private KrosanColossus(final KrosanColossus card) {
         super(card);
     }
 

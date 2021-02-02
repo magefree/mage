@@ -40,7 +40,7 @@ public final class DromarsCavern extends CardImpl {
                 
     }
 
-    public DromarsCavern(final DromarsCavern card) {
+    private DromarsCavern(final DromarsCavern card) {
         super(card);
     }
 

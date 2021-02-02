@@ -28,7 +28,7 @@ public final class TritonFortuneHunter extends CardImpl {
         this.addAbility(new HeroicAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public TritonFortuneHunter(final TritonFortuneHunter card) {
+    private TritonFortuneHunter(final TritonFortuneHunter card) {
         super(card);
     }
 

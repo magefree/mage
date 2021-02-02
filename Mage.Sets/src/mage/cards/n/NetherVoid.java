@@ -26,7 +26,7 @@ public final class NetherVoid extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(3)), new FilterSpell("a spell"), false, SetTargetPointer.SPELL));
     }
 
-    public NetherVoid(final NetherVoid card) {
+    private NetherVoid(final NetherVoid card) {
         super(card);
     }
 

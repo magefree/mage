@@ -56,7 +56,7 @@ public final class SelesnyaCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public SelesnyaCharm(final SelesnyaCharm card) {
+    private SelesnyaCharm(final SelesnyaCharm card) {
         super(card);
     }
 

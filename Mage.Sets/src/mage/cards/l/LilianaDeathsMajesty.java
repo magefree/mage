@@ -58,7 +58,7 @@ public final class LilianaDeathsMajesty extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LilianaDeathsMajesty(final LilianaDeathsMajesty card) {
+    private LilianaDeathsMajesty(final LilianaDeathsMajesty card) {
         super(card);
     }
 

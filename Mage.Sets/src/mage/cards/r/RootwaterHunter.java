@@ -31,7 +31,7 @@ public final class RootwaterHunter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RootwaterHunter(final RootwaterHunter card) {
+    private RootwaterHunter(final RootwaterHunter card) {
         super(card);
     }
 

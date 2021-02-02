@@ -39,7 +39,7 @@ public final class DemonOfWailingAgonies extends CardImpl {
         this.addAbility(new LieutenantAbility(effect));
     }
 
-    public DemonOfWailingAgonies(final DemonOfWailingAgonies card) {
+    private DemonOfWailingAgonies(final DemonOfWailingAgonies card) {
         super(card);
     }
 

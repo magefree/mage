@@ -36,7 +36,7 @@ public final class JediBattleHealer extends CardImpl {
         this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{W}")));
     }
 
-    public JediBattleHealer(final JediBattleHealer card) {
+    private JediBattleHealer(final JediBattleHealer card) {
         super(card);
     }
 

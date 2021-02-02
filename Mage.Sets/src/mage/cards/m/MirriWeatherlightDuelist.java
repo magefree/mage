@@ -46,7 +46,7 @@ public final class MirriWeatherlightDuelist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MirriWeatherlightDuelist(final MirriWeatherlightDuelist card) {
+    private MirriWeatherlightDuelist(final MirriWeatherlightDuelist card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class TrapjawTyrant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TrapjawTyrant(final TrapjawTyrant card) {
+    private TrapjawTyrant(final TrapjawTyrant card) {
         super(card);
     }
 

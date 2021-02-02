@@ -28,7 +28,7 @@ public final class GleefulSabotage extends CardImpl {
         this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
     }
 
-    public GleefulSabotage(final GleefulSabotage card) {
+    private GleefulSabotage(final GleefulSabotage card) {
         super(card);
     }
 

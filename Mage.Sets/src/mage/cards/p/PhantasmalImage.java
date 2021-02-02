@@ -52,7 +52,7 @@ public final class PhantasmalImage extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 
-    public PhantasmalImage(final PhantasmalImage card) {
+    private PhantasmalImage(final PhantasmalImage card) {
         super(card);
     }
 

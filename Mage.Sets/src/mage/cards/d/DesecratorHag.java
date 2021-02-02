@@ -35,7 +35,7 @@ public final class DesecratorHag extends CardImpl {
 
     }
 
-    public DesecratorHag(final DesecratorHag card) {
+    private DesecratorHag(final DesecratorHag card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ public final class WitheringHex extends CardImpl {
         ));
     }
 
-    public WitheringHex(final WitheringHex card) {
+    private WitheringHex(final WitheringHex card) {
         super(card);
     }
 

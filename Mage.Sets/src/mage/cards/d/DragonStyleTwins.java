@@ -30,7 +30,7 @@ public final class DragonStyleTwins extends CardImpl {
         this.addAbility(new ProwessAbility());
     }
 
-    public DragonStyleTwins(final DragonStyleTwins card) {
+    private DragonStyleTwins(final DragonStyleTwins card) {
         super(card);
     }
 

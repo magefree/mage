@@ -48,7 +48,7 @@ public final class SteelshaperApprentice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SteelshaperApprentice(final SteelshaperApprentice card) {
+    private SteelshaperApprentice(final SteelshaperApprentice card) {
         super(card);
     }
 

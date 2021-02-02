@@ -33,7 +33,7 @@ public final class ThranQuarry extends CardImpl {
 
     }
 
-    public ThranQuarry(final ThranQuarry card) {
+    private ThranQuarry(final ThranQuarry card) {
         super(card);
     }
 

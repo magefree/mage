@@ -36,7 +36,7 @@ public final class ChimericIdol extends CardImpl {
 
     }
 
-    public ChimericIdol(final ChimericIdol card) {
+    private ChimericIdol(final ChimericIdol card) {
         super(card);
     }
 

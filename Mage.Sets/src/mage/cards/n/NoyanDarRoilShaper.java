@@ -57,7 +57,7 @@ public final class NoyanDarRoilShaper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NoyanDarRoilShaper(final NoyanDarRoilShaper card) {
+    private NoyanDarRoilShaper(final NoyanDarRoilShaper card) {
         super(card);
     }
 

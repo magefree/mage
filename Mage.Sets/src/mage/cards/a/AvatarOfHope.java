@@ -43,7 +43,7 @@ public final class AvatarOfHope extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));
     }
 
-    public AvatarOfHope(final AvatarOfHope card) {
+    private AvatarOfHope(final AvatarOfHope card) {
         super(card);
     }
 

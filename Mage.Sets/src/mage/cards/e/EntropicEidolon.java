@@ -45,7 +45,7 @@ public final class EntropicEidolon extends CardImpl {
                 new ReturnSourceFromGraveyardToHandEffect(), StaticFilters.FILTER_SPELL_A_MULTICOLORED, true, false));
     }
 
-    public EntropicEidolon(final EntropicEidolon card) {
+    private EntropicEidolon(final EntropicEidolon card) {
         super(card);
     }
 

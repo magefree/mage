@@ -40,7 +40,7 @@ public final class AnointedDeacon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AnointedDeacon(final AnointedDeacon card) {
+    private AnointedDeacon(final AnointedDeacon card) {
         super(card);
     }
 

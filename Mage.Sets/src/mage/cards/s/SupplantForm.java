@@ -27,7 +27,7 @@ public final class SupplantForm extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public SupplantForm(final SupplantForm card) {
+    private SupplantForm(final SupplantForm card) {
         super(card);
     }
 

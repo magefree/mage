@@ -37,7 +37,7 @@ public final class InduceDespair extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public InduceDespair(final InduceDespair card) {
+    private InduceDespair(final InduceDespair card) {
         super(card);
     }
 

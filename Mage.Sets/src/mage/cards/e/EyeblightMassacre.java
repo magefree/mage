@@ -31,7 +31,7 @@ public final class EyeblightMassacre extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn, filter, false));
     }
 
-    public EyeblightMassacre(final EyeblightMassacre card) {
+    private EyeblightMassacre(final EyeblightMassacre card) {
         super(card);
     }
 

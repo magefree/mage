@@ -39,7 +39,7 @@ public final class GraverobberSpider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GraverobberSpider(final GraverobberSpider card) {
+    private GraverobberSpider(final GraverobberSpider card) {
         super(card);
     }
 

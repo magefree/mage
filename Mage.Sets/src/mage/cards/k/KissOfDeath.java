@@ -24,7 +24,7 @@ public final class KissOfDeath extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
     }
 
-    public KissOfDeath(final KissOfDeath card) {
+    private KissOfDeath(final KissOfDeath card) {
         super(card);
     }
 

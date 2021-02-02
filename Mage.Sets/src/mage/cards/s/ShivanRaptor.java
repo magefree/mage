@@ -29,7 +29,7 @@ public final class ShivanRaptor extends CardImpl {
         this.addAbility(new EchoAbility("{2}{R}"));
     }
 
-    public ShivanRaptor(final ShivanRaptor card) {
+    private ShivanRaptor(final ShivanRaptor card) {
         super(card);
     }
 

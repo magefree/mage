@@ -31,7 +31,7 @@ public final class Pyromancy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Pyromancy(final Pyromancy card) {
+    private Pyromancy(final Pyromancy card) {
         super(card);
     }
 

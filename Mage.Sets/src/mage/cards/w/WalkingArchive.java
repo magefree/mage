@@ -45,7 +45,7 @@ public final class WalkingArchive extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{2}{W}{U}")));
     }
 
-    public WalkingArchive(final WalkingArchive card) {
+    private WalkingArchive(final WalkingArchive card) {
         super(card);
     }
 

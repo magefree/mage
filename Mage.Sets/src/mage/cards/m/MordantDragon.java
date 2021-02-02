@@ -46,7 +46,7 @@ public final class MordantDragon extends CardImpl {
         this.addAbility(new MordantDragonTriggeredAbility());
     }
 
-    public MordantDragon(final MordantDragon card) {
+    private MordantDragon(final MordantDragon card) {
         super(card);
     }
 

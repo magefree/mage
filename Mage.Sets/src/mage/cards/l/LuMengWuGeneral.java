@@ -28,7 +28,7 @@ public final class LuMengWuGeneral extends CardImpl {
         this.addAbility(HorsemanshipAbility.getInstance());
     }
 
-    public LuMengWuGeneral(final LuMengWuGeneral card) {
+    private LuMengWuGeneral(final LuMengWuGeneral card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class PullFromTomorrow extends CardImpl {
         getSpellAbility().addEffect(effect);
     }
 
-    public PullFromTomorrow(final PullFromTomorrow card) {
+    private PullFromTomorrow(final PullFromTomorrow card) {
         super(card);
     }
 

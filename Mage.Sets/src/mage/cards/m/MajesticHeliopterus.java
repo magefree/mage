@@ -46,7 +46,7 @@ public final class MajesticHeliopterus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MajesticHeliopterus(final MajesticHeliopterus card) {
+    private MajesticHeliopterus(final MajesticHeliopterus card) {
         super(card);
     }
 

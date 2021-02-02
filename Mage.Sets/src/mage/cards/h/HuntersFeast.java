@@ -21,7 +21,7 @@ public final class HuntersFeast extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(6));
     }
 
-    public HuntersFeast(final HuntersFeast card) {
+    private HuntersFeast(final HuntersFeast card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class FlashOfInsight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlashOfInsight(final FlashOfInsight card) {
+    private FlashOfInsight(final FlashOfInsight card) {
         super(card);
     }
 

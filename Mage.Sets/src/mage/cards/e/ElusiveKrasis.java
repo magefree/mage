@@ -30,7 +30,7 @@ public final class ElusiveKrasis extends CardImpl {
         this.addAbility(new EvolveAbility());
     }
 
-    public ElusiveKrasis(final ElusiveKrasis card) {
+    private ElusiveKrasis(final ElusiveKrasis card) {
         super(card);
     }
 

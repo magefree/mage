@@ -46,7 +46,7 @@ public final class ArgothianPixies extends CardImpl {
 
     }
 
-    public ArgothianPixies(final ArgothianPixies card) {
+    private ArgothianPixies(final ArgothianPixies card) {
         super(card);
     }
 

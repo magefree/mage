@@ -36,7 +36,7 @@ public final class InfantryVeteran extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InfantryVeteran(final InfantryVeteran card) {
+    private InfantryVeteran(final InfantryVeteran card) {
         super(card);
     }
 

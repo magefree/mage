@@ -35,7 +35,7 @@ public final class PeakEruption extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent(filter));
     }
 
-    public PeakEruption(final PeakEruption card) {
+    private PeakEruption(final PeakEruption card) {
         super(card);
     }
 

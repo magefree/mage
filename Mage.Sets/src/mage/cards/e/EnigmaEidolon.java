@@ -40,7 +40,7 @@ public final class EnigmaEidolon extends CardImpl {
                 new ReturnSourceFromGraveyardToHandEffect(), StaticFilters.FILTER_SPELL_A_MULTICOLORED, true, false));
     }
 
-    public EnigmaEidolon(final EnigmaEidolon card) {
+    private EnigmaEidolon(final EnigmaEidolon card) {
         super(card);
     }
 

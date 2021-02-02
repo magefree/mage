@@ -47,7 +47,7 @@ public final class SpiritMirror extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpiritMirror(final SpiritMirror card) {
+    private SpiritMirror(final SpiritMirror card) {
         super(card);
     }
 

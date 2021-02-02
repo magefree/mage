@@ -40,7 +40,7 @@ public final class ArtifactPossession extends CardImpl {
 
     }
 
-    public ArtifactPossession(final ArtifactPossession card) {
+    private ArtifactPossession(final ArtifactPossession card) {
         super(card);
     }
 

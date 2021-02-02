@@ -46,7 +46,7 @@ public final class EvilTwin extends CardImpl {
 
     }
 
-    public EvilTwin(final EvilTwin card) {
+    private EvilTwin(final EvilTwin card) {
         super(card);
     }
 

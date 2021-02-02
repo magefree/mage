@@ -39,7 +39,7 @@ public final class KorHaven extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KorHaven(final KorHaven card) {
+    private KorHaven(final KorHaven card) {
         super(card);
     }
 

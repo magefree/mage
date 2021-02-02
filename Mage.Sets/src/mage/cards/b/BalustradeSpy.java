@@ -41,7 +41,7 @@ public final class BalustradeSpy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BalustradeSpy(final BalustradeSpy card) {
+    private BalustradeSpy(final BalustradeSpy card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class LoxodonRestorer extends CardImpl {
         ));
     }
 
-    public LoxodonRestorer(final LoxodonRestorer card) {
+    private LoxodonRestorer(final LoxodonRestorer card) {
         super(card);
     }
 

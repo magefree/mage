@@ -29,7 +29,7 @@ public final class Incoming extends CardImpl {
         this.getSpellAbility().addEffect(new IncomingEffect());
     }
 
-    public Incoming(final Incoming card) {
+    private Incoming(final Incoming card) {
         super(card);
     }
 

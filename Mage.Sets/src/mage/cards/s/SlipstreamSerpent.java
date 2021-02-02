@@ -41,7 +41,7 @@ public final class SlipstreamSerpent extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}{U}")));
     }
 
-    public SlipstreamSerpent(final SlipstreamSerpent card) {
+    private SlipstreamSerpent(final SlipstreamSerpent card) {
         super(card);
     }
 

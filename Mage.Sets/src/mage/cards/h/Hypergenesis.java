@@ -37,7 +37,7 @@ public final class Hypergenesis extends CardImpl {
         this.getSpellAbility().addEffect(new HypergenesisEffect());
     }
 
-    public Hypergenesis(final Hypergenesis card) {
+    private Hypergenesis(final Hypergenesis card) {
         super(card);
     }
 

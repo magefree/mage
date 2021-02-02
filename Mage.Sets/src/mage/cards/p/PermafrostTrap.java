@@ -38,7 +38,7 @@ public final class PermafrostTrap extends CardImpl {
         this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
     }
 
-    public PermafrostTrap(final PermafrostTrap card) {
+    private PermafrostTrap(final PermafrostTrap card) {
         super(card);
     }
 

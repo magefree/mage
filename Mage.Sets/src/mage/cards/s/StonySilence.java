@@ -27,7 +27,7 @@ public final class StonySilence extends CardImpl {
 
     }
 
-    public StonySilence(final StonySilence card) {
+    private StonySilence(final StonySilence card) {
         super(card);
     }
 

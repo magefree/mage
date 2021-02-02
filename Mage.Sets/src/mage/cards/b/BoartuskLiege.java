@@ -44,7 +44,7 @@ public final class BoartuskLiege extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterGreen, true)));
     }
 
-    public BoartuskLiege(final BoartuskLiege card) {
+    private BoartuskLiege(final BoartuskLiege card) {
         super(card);
     }
 

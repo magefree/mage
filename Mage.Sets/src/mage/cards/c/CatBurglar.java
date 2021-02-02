@@ -37,7 +37,7 @@ public final class CatBurglar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CatBurglar(final CatBurglar card) {
+    private CatBurglar(final CatBurglar card) {
         super(card);
     }
 

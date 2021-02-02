@@ -35,7 +35,7 @@ public final class Hydroblast extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public Hydroblast(final Hydroblast card) {
+    private Hydroblast(final Hydroblast card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class MisshapenFiend extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public MisshapenFiend(final MisshapenFiend card) {
+    private MisshapenFiend(final MisshapenFiend card) {
         super(card);
     }
 

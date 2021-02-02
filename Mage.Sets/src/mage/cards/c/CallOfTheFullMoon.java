@@ -51,7 +51,7 @@ public final class CallOfTheFullMoon extends CardImpl {
             "At the beginning of each upkeep, if a player cast two or more spells last turn, sacrifice {this}."));
     }
 
-    public CallOfTheFullMoon(final CallOfTheFullMoon card) {
+    private CallOfTheFullMoon(final CallOfTheFullMoon card) {
         super(card);
     }
 

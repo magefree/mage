@@ -39,7 +39,7 @@ public final class CloudKey extends CardImpl {
         return new CloudKey(this);
     }
 
-    public CloudKey(final CloudKey card) {
+    private CloudKey(final CloudKey card) {
         super(card);
     }
 }

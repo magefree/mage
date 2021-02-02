@@ -32,7 +32,7 @@ public final class DarkPetition extends CardImpl {
 
     }
 
-    public DarkPetition(final DarkPetition card) {
+    private DarkPetition(final DarkPetition card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class JynErsoAndCassianAndor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JynErsoAndCassianAndor(final JynErsoAndCassianAndor card) {
+    private JynErsoAndCassianAndor(final JynErsoAndCassianAndor card) {
         super(card);
     }
 

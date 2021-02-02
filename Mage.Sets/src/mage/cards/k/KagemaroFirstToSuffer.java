@@ -53,7 +53,7 @@ public final class KagemaroFirstToSuffer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KagemaroFirstToSuffer(final KagemaroFirstToSuffer card) {
+    private KagemaroFirstToSuffer(final KagemaroFirstToSuffer card) {
         super(card);
     }
 

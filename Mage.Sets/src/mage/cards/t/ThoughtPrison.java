@@ -47,7 +47,7 @@ public final class ThoughtPrison extends CardImpl {
         this.addAbility(new ThoughtPrisonTriggeredAbility());
     }
 
-    public ThoughtPrison(final ThoughtPrison card) {
+    private ThoughtPrison(final ThoughtPrison card) {
         super(card);
     }
 

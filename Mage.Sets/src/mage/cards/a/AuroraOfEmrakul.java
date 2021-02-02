@@ -38,7 +38,7 @@ public final class AuroraOfEmrakul extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new LoseLifeOpponentsEffect(3),false));
     }
 
-    public AuroraOfEmrakul(final AuroraOfEmrakul card) {
+    private AuroraOfEmrakul(final AuroraOfEmrakul card) {
         super(card);
     }
 

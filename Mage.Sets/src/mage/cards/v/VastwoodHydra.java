@@ -50,7 +50,7 @@ public final class VastwoodHydra extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VastwoodHydra(final VastwoodHydra card) {
+    private VastwoodHydra(final VastwoodHydra card) {
         super(card);
     }
 

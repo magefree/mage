@@ -50,7 +50,7 @@ public final class WormfangDrake extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false));
     }
 
-    public WormfangDrake(final WormfangDrake card) {
+    private WormfangDrake(final WormfangDrake card) {
         super(card);
     }
 

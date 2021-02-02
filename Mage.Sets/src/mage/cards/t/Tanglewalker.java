@@ -45,7 +45,7 @@ public final class Tanglewalker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public Tanglewalker(final Tanglewalker card) {
+    private Tanglewalker(final Tanglewalker card) {
         super(card);
     }
 

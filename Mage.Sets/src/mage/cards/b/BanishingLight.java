@@ -36,7 +36,7 @@ public final class BanishingLight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BanishingLight(final BanishingLight card) {
+    private BanishingLight(final BanishingLight card) {
         super(card);
     }
 

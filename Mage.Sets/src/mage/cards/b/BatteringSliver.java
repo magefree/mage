@@ -39,7 +39,7 @@ public final class BatteringSliver extends CardImpl {
                         Duration.WhileOnBattlefield, filter)));
     }
 
-    public BatteringSliver(final BatteringSliver card) {
+    private BatteringSliver(final BatteringSliver card) {
         super(card);
     }
 

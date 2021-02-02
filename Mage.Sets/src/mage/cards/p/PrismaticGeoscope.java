@@ -35,7 +35,7 @@ public final class PrismaticGeoscope extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PrismaticGeoscope(final PrismaticGeoscope card) {
+    private PrismaticGeoscope(final PrismaticGeoscope card) {
         super(card);
     }
 

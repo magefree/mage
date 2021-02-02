@@ -41,7 +41,7 @@ public final class TrollsOfTelJilad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TrollsOfTelJilad(final TrollsOfTelJilad card) {
+    private TrollsOfTelJilad(final TrollsOfTelJilad card) {
         super(card);
     }
 

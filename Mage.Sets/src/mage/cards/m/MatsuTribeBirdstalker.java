@@ -45,7 +45,7 @@ public final class MatsuTribeBirdstalker extends CardImpl {
                 new ManaCostsImpl("{G}")));
     }
 
-    public MatsuTribeBirdstalker(final MatsuTribeBirdstalker card) {
+    private MatsuTribeBirdstalker(final MatsuTribeBirdstalker card) {
         super(card);
     }
 

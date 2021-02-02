@@ -44,7 +44,7 @@ public final class PiousInterdiction extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
     }
 
-    public PiousInterdiction(final PiousInterdiction card) {
+    private PiousInterdiction(final PiousInterdiction card) {
         super(card);
     }
 

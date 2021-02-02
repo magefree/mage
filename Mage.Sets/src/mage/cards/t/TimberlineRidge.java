@@ -48,7 +48,7 @@ public final class TimberlineRidge extends CardImpl {
         this.addAbility(ability4);
     }
 
-    public TimberlineRidge(final TimberlineRidge card) {
+    private TimberlineRidge(final TimberlineRidge card) {
         super(card);
     }
 

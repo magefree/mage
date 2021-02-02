@@ -28,7 +28,7 @@ public final class TivadarsCrusade extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public TivadarsCrusade(final TivadarsCrusade card) {
+    private TivadarsCrusade(final TivadarsCrusade card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class ForkInTheRoad extends CardImpl {
         this.getSpellAbility().addEffect(new ForkInTheRoadEffect());
     }
 
-    public ForkInTheRoad(final ForkInTheRoad card) {
+    private ForkInTheRoad(final ForkInTheRoad card) {
         super(card);
     }
 

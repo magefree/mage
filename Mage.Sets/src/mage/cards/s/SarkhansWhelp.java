@@ -36,7 +36,7 @@ public final class SarkhansWhelp extends CardImpl {
         this.addAbility(new SarkhansWhelpTriggeredAbility());
     }
 
-    public SarkhansWhelp(final SarkhansWhelp card) {
+    private SarkhansWhelp(final SarkhansWhelp card) {
         super(card);
     }
 

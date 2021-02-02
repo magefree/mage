@@ -54,7 +54,7 @@ public final class Pentavus extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public Pentavus(final Pentavus card) {
+    private Pentavus(final Pentavus card) {
         super(card);
     }
 

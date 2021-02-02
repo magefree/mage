@@ -28,7 +28,7 @@ public final class ForiysianBrigade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect()));
     }
 
-    public ForiysianBrigade(final ForiysianBrigade card) {
+    private ForiysianBrigade(final ForiysianBrigade card) {
         super(card);
     }
 

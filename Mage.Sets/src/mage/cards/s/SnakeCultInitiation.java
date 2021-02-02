@@ -39,7 +39,7 @@ public final class SnakeCultInitiation extends CardImpl {
             new PoisonousAbility(3), AttachmentType.AURA)));
     }
 
-    public SnakeCultInitiation(final SnakeCultInitiation card) {
+    private SnakeCultInitiation(final SnakeCultInitiation card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class WurmcoilEngine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WurmcoilEngine(final WurmcoilEngine card) {
+    private WurmcoilEngine(final WurmcoilEngine card) {
         super(card);
     }
 

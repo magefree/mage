@@ -30,7 +30,7 @@ public final class DarkBargain extends CardImpl {
         this.getSpellAbility().addEffect(new DamageControllerEffect(2));
     }
 
-    public DarkBargain(final DarkBargain card) {
+    private DarkBargain(final DarkBargain card) {
         super(card);
     }
 

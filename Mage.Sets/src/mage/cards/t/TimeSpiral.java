@@ -34,7 +34,7 @@ public final class TimeSpiral extends CardImpl {
         this.getSpellAbility().addEffect(new UntapLandsEffect(6));
     }
 
-    public TimeSpiral(final TimeSpiral card) {
+    private TimeSpiral(final TimeSpiral card) {
         super(card);
     }
 

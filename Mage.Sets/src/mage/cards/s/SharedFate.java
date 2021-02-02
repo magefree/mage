@@ -34,7 +34,7 @@ public final class SharedFate extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SharedFateLookEffect()));
     }
 
-    public SharedFate(final SharedFate card) {
+    private SharedFate(final SharedFate card) {
         super(card);
     }
 

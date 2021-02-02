@@ -42,7 +42,7 @@ public final class DireFleetNeckbreaker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, gainEffect));
     }
 
-    public DireFleetNeckbreaker(final DireFleetNeckbreaker card) {
+    private DireFleetNeckbreaker(final DireFleetNeckbreaker card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class KraulSwarm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KraulSwarm(final KraulSwarm card) {
+    private KraulSwarm(final KraulSwarm card) {
         super(card);
     }
 

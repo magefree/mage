@@ -35,7 +35,7 @@ public final class QuestForRenewal extends CardImpl {
                 "As long as there are four or more quest counters on {this}, untap all creatures you control during each other player's untap step.")));
     }
 
-    public QuestForRenewal(final QuestForRenewal card) {
+    private QuestForRenewal(final QuestForRenewal card) {
         super(card);
     }
 

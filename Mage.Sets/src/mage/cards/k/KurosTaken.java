@@ -31,7 +31,7 @@ public final class KurosTaken extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }
 
-    public KurosTaken(final KurosTaken card) {
+    private KurosTaken(final KurosTaken card) {
         super(card);
     }
 

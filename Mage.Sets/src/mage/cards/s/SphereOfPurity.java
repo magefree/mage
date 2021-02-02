@@ -27,7 +27,7 @@ public final class SphereOfPurity extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SphereOfPurityEffect()));
     }
 
-    public SphereOfPurity(final SphereOfPurity card) {
+    private SphereOfPurity(final SphereOfPurity card) {
         super(card);
     }
 

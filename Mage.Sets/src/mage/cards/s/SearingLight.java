@@ -31,7 +31,7 @@ public final class SearingLight extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public SearingLight(final SearingLight card) {
+    private SearingLight(final SearingLight card) {
         super(card);
     }
 

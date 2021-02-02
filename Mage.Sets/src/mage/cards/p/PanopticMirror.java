@@ -37,7 +37,7 @@ public final class PanopticMirror extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PanopticMirrorCastEffect(), TargetController.YOU, true));
     }
 
-    public PanopticMirror(final PanopticMirror card) {
+    private PanopticMirror(final PanopticMirror card) {
         super(card);
     }
 

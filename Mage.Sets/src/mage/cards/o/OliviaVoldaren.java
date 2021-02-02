@@ -76,7 +76,7 @@ public final class OliviaVoldaren extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public OliviaVoldaren(final OliviaVoldaren card) {
+    private OliviaVoldaren(final OliviaVoldaren card) {
         super(card);
     }
 

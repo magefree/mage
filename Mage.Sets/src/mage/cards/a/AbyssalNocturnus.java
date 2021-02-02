@@ -37,7 +37,7 @@ public final class AbyssalNocturnus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AbyssalNocturnus(final AbyssalNocturnus card) {
+    private AbyssalNocturnus(final AbyssalNocturnus card) {
         super(card);
     }
 

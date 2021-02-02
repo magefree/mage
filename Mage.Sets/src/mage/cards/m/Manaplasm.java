@@ -36,7 +36,7 @@ public final class Manaplasm extends CardImpl {
         
     }
 
-    public Manaplasm(final Manaplasm card) {
+    private Manaplasm(final Manaplasm card) {
         super(card);
     }
 

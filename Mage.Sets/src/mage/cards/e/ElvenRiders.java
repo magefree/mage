@@ -38,7 +38,7 @@ public final class ElvenRiders extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public ElvenRiders(final ElvenRiders card) {
+    private ElvenRiders(final ElvenRiders card) {
         super(card);
     }
 

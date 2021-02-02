@@ -32,7 +32,7 @@ public final class VanguardOfBrimaz extends CardImpl {
         this.addAbility(new HeroicAbility(new CreateTokenEffect(new CatSoldierCreatureToken()), false));
     }
 
-    public VanguardOfBrimaz(final VanguardOfBrimaz card) {
+    private VanguardOfBrimaz(final VanguardOfBrimaz card) {
         super(card);
     }
 

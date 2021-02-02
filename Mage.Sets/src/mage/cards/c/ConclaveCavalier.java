@@ -34,7 +34,7 @@ public final class ConclaveCavalier extends CardImpl {
         ));
     }
 
-    public ConclaveCavalier(final ConclaveCavalier card) {
+    private ConclaveCavalier(final ConclaveCavalier card) {
         super(card);
     }
 

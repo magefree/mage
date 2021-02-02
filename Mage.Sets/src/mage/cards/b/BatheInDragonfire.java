@@ -22,7 +22,7 @@ public final class BatheInDragonfire extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
     }
 
-    public BatheInDragonfire(final BatheInDragonfire card) {
+    private BatheInDragonfire(final BatheInDragonfire card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class RebornHope extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
     }
 
-    public RebornHope(final RebornHope card) {
+    private RebornHope(final RebornHope card) {
         super(card);
     }
 

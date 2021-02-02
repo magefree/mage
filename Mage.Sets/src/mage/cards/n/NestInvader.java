@@ -29,7 +29,7 @@ public final class NestInvader extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken()), false));
     }
 
-    public NestInvader(final NestInvader card) {
+    private NestInvader(final NestInvader card) {
         super(card);
     }
 

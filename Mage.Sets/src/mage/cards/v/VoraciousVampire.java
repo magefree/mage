@@ -43,7 +43,7 @@ public final class VoraciousVampire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VoraciousVampire(final VoraciousVampire card) {
+    private VoraciousVampire(final VoraciousVampire card) {
         super(card);
     }
 

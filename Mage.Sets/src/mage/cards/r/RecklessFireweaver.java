@@ -32,7 +32,7 @@ public final class RecklessFireweaver extends CardImpl {
             "Whenever an artifact enters the battlefield under your control, Reckless Fireweaver deals 1 damage to each opponent."));
     }
 
-    public RecklessFireweaver(final RecklessFireweaver card) {
+    private RecklessFireweaver(final RecklessFireweaver card) {
         super(card);
     }
 

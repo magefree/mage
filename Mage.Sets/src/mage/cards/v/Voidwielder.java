@@ -32,7 +32,7 @@ public final class Voidwielder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Voidwielder(final Voidwielder card) {
+    private Voidwielder(final Voidwielder card) {
         super(card);
     }
 

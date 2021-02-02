@@ -39,7 +39,7 @@ public final class DeadeyeTormentor extends CardImpl {
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public DeadeyeTormentor(final DeadeyeTormentor card) {
+    private DeadeyeTormentor(final DeadeyeTormentor card) {
         super(card);
     }
 

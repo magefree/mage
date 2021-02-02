@@ -33,7 +33,7 @@ public final class RallyTheRighteous extends CardImpl {
         this.getSpellAbility().addEffect(new RallyTheRighteousBoostEffect());
     }
 
-    public RallyTheRighteous(final RallyTheRighteous card) {
+    private RallyTheRighteous(final RallyTheRighteous card) {
         super(card);
     }
 

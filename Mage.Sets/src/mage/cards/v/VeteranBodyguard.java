@@ -43,7 +43,7 @@ public final class VeteranBodyguard extends CardImpl {
         )));
     }
 
-    public VeteranBodyguard(final VeteranBodyguard card) {
+    private VeteranBodyguard(final VeteranBodyguard card) {
         super(card);
     }
 

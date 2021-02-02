@@ -23,7 +23,7 @@ public final class ViashinoWarrior extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public ViashinoWarrior(final ViashinoWarrior card) {
+    private ViashinoWarrior(final ViashinoWarrior card) {
         super(card);
     }
 

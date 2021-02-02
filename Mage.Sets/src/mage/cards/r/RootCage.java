@@ -28,7 +28,7 @@ public final class RootCage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
     }
 
-    public RootCage(final RootCage card) {
+    private RootCage(final RootCage card) {
         super(card);
     }
 

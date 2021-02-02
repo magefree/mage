@@ -53,7 +53,7 @@ public final class LavamancersSkill extends CardImpl {
         this.addAbility(ifWizardAbility);
     }
 
-    public LavamancersSkill(final LavamancersSkill card) {
+    private LavamancersSkill(final LavamancersSkill card) {
         super(card);
     }
 

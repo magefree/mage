@@ -38,7 +38,7 @@ public final class JadeGuardian extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JadeGuardian(final JadeGuardian card) {
+    private JadeGuardian(final JadeGuardian card) {
         super(card);
     }
 

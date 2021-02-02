@@ -39,7 +39,7 @@ public final class ShiftingSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesAllEffect(filterCreatures, filterBlockedBy, Duration.WhileOnBattlefield)));
     }
 
-    public ShiftingSliver(final ShiftingSliver card) {
+    private ShiftingSliver(final ShiftingSliver card) {
         super(card);
     }
 

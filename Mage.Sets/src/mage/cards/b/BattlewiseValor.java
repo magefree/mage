@@ -26,7 +26,7 @@ public final class BattlewiseValor extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public BattlewiseValor(final BattlewiseValor card) {
+    private BattlewiseValor(final BattlewiseValor card) {
         super(card);
     }
 

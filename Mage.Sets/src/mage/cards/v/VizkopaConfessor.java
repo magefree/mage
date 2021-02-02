@@ -47,7 +47,7 @@ public final class VizkopaConfessor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VizkopaConfessor(final VizkopaConfessor card) {
+    private VizkopaConfessor(final VizkopaConfessor card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class RottingFensnake extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public RottingFensnake(final RottingFensnake card) {
+    private RottingFensnake(final RottingFensnake card) {
         super(card);
     }
 

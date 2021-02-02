@@ -30,7 +30,7 @@ public final class LlanowarEnvoy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LlanowarEnvoy(final LlanowarEnvoy card) {
+    private LlanowarEnvoy(final LlanowarEnvoy card) {
         super(card);
     }
 

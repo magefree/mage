@@ -29,7 +29,7 @@ public final class LurchingRotbeast extends CardImpl {
 
     }
 
-    public LurchingRotbeast(final LurchingRotbeast card) {
+    private LurchingRotbeast(final LurchingRotbeast card) {
         super(card);
     }
 

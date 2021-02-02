@@ -27,7 +27,7 @@ public final class RenegadesGetaway extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ServoToken()));
     }
 
-    public RenegadesGetaway(final RenegadesGetaway card) {
+    private RenegadesGetaway(final RenegadesGetaway card) {
         super(card);
     }
 

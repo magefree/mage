@@ -40,7 +40,7 @@ public final class SilvergillAdept extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public SilvergillAdept(final SilvergillAdept card) {
+    private SilvergillAdept(final SilvergillAdept card) {
         super(card);
     }
 

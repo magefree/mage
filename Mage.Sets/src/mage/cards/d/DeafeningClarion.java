@@ -39,7 +39,7 @@ public final class DeafeningClarion extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public DeafeningClarion(final DeafeningClarion card) {
+    private DeafeningClarion(final DeafeningClarion card) {
         super(card);
     }
 

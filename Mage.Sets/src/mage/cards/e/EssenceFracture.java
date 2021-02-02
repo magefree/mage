@@ -30,7 +30,7 @@ public final class EssenceFracture extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{U}")));
     }
 
-    public EssenceFracture(final EssenceFracture card) {
+    private EssenceFracture(final EssenceFracture card) {
         super(card);
     }
 

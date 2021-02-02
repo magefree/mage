@@ -34,7 +34,7 @@ public final class IzzetBoilerworks extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 1, 0, 0, 0, 0), new TapSourceCost()));
     }
 
-    public IzzetBoilerworks(final IzzetBoilerworks card) {
+    private IzzetBoilerworks(final IzzetBoilerworks card) {
         super(card);
     }
 

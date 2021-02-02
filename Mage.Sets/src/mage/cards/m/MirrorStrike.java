@@ -39,7 +39,7 @@ public final class MirrorStrike extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public MirrorStrike(final MirrorStrike card) {
+    private MirrorStrike(final MirrorStrike card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class TabletOfTheGuilds extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new TabletOfTheGuildsGainLifeEffect(), new FilterSpell("a spell"), false, true));
     }
 
-    public TabletOfTheGuilds(final TabletOfTheGuilds card) {
+    private TabletOfTheGuilds(final TabletOfTheGuilds card) {
         super(card);
     }
 

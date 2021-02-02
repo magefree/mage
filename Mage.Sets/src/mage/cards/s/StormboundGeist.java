@@ -30,7 +30,7 @@ public final class StormboundGeist extends CardImpl {
         this.addAbility(new UndyingAbility());
     }
 
-    public StormboundGeist(final StormboundGeist card) {
+    private StormboundGeist(final StormboundGeist card) {
         super(card);
     }
 

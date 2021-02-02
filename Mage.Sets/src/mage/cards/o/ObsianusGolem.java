@@ -22,7 +22,7 @@ public final class ObsianusGolem extends CardImpl {
         this.toughness = new MageInt(6);
     }
 
-    public ObsianusGolem(final ObsianusGolem card) {
+    private ObsianusGolem(final ObsianusGolem card) {
         super(card);
     }
 

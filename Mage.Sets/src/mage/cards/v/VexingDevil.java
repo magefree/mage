@@ -31,7 +31,7 @@ public final class VexingDevil extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new VexingDevilEffect(), false));
     }
 
-    public VexingDevil(final VexingDevil card) {
+    private VexingDevil(final VexingDevil card) {
         super(card);
     }
 

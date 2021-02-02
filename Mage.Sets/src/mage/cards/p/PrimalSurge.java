@@ -26,7 +26,7 @@ public final class PrimalSurge extends CardImpl {
         this.getSpellAbility().addEffect(new PrimalSurgeEffect());
     }
 
-    public PrimalSurge(final PrimalSurge card) {
+    private PrimalSurge(final PrimalSurge card) {
         super(card);
     }
 

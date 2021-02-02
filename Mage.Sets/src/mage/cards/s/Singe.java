@@ -31,7 +31,7 @@ public final class Singe extends CardImpl {
 
     }
 
-    public Singe(final Singe card) {
+    private Singe(final Singe card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class KrosanWayfarer extends CardImpl {
                 new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A), new SacrificeSourceCost()));
     }
 
-    public KrosanWayfarer(final KrosanWayfarer card) {
+    private KrosanWayfarer(final KrosanWayfarer card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class SulfuricVapors extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SulfuricVaporsEffect()));
     }
 
-    public SulfuricVapors(final SulfuricVapors card) {
+    private SulfuricVapors(final SulfuricVapors card) {
         super(card);
     }
 

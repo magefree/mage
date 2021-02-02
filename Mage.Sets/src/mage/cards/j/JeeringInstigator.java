@@ -63,7 +63,7 @@ public final class JeeringInstigator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JeeringInstigator(final JeeringInstigator card) {
+    private JeeringInstigator(final JeeringInstigator card) {
         super(card);
     }
 

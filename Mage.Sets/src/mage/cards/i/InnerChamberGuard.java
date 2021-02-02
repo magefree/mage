@@ -26,7 +26,7 @@ public final class InnerChamberGuard extends CardImpl {
         this.addAbility(new BushidoAbility(2));
     }
 
-    public InnerChamberGuard(final InnerChamberGuard card) {
+    private InnerChamberGuard(final InnerChamberGuard card) {
         super(card);
     }
 

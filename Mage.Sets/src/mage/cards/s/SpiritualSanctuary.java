@@ -41,7 +41,7 @@ public final class SpiritualSanctuary extends CardImpl {
         ));
     }
 
-    public SpiritualSanctuary(final SpiritualSanctuary card) {
+    private SpiritualSanctuary(final SpiritualSanctuary card) {
         super(card);
     }
 

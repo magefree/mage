@@ -28,7 +28,7 @@ public final class GoblinWarBuggy extends CardImpl {
         this.addAbility(new EchoAbility("{1}{R}"));
     }
 
-    public GoblinWarBuggy(final GoblinWarBuggy card) {
+    private GoblinWarBuggy(final GoblinWarBuggy card) {
         super(card);
     }
 

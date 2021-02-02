@@ -42,7 +42,7 @@ public final class Nightmare extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public Nightmare(final Nightmare card) {
+    private Nightmare(final Nightmare card) {
         super(card);
     }
 

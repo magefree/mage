@@ -42,7 +42,7 @@ public final class HotSoup extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public HotSoup(final HotSoup card) {
+    private HotSoup(final HotSoup card) {
         super(card);
     }
 

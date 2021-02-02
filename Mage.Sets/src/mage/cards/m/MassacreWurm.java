@@ -36,7 +36,7 @@ public final class MassacreWurm extends CardImpl {
         this.addAbility(new MassacreWurmTriggeredAbility());
     }
 
-    public MassacreWurm(final MassacreWurm card) {
+    private MassacreWurm(final MassacreWurm card) {
         super(card);
     }
 

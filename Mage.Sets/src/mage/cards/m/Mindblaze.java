@@ -38,7 +38,7 @@ public final class Mindblaze extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Mindblaze(final Mindblaze card) {
+    private Mindblaze(final Mindblaze card) {
         super(card);
     }
 

@@ -67,7 +67,7 @@ public final class OjutaiExemplars extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OjutaiExemplars(final OjutaiExemplars card) {
+    private OjutaiExemplars(final OjutaiExemplars card) {
         super(card);
     }
 

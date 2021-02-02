@@ -34,7 +34,7 @@ public final class ProwlingPangolin extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ProwlingPangolinEffect(), false));
     }
 
-    public ProwlingPangolin(final ProwlingPangolin card) {
+    private ProwlingPangolin(final ProwlingPangolin card) {
         super(card);
     }
 

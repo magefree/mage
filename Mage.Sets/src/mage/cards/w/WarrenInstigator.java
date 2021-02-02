@@ -38,7 +38,7 @@ public final class WarrenInstigator extends CardImpl {
         this.addAbility(new DealsDamageToOpponentTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(filter), false));
     }
 
-    public WarrenInstigator(final WarrenInstigator card) {
+    private WarrenInstigator(final WarrenInstigator card) {
         super(card);
     }
 

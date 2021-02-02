@@ -43,7 +43,7 @@ public final class ShardingSphinx extends CardImpl {
 
     }
 
-    public ShardingSphinx(final ShardingSphinx card) {
+    private ShardingSphinx(final ShardingSphinx card) {
         super(card);
     }
 

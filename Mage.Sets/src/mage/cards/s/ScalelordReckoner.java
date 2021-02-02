@@ -41,7 +41,7 @@ public final class ScalelordReckoner extends CardImpl {
         this.addAbility(new ScalelardReckonerTriggeredAbility(new DestroyTargetEffect()));
     }
 
-    public ScalelordReckoner(final ScalelordReckoner card) {
+    private ScalelordReckoner(final ScalelordReckoner card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class Disintegrate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public Disintegrate(final Disintegrate card) {
+    private Disintegrate(final Disintegrate card) {
         super(card);
     }
 

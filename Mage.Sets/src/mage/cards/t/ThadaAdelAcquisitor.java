@@ -42,7 +42,7 @@ public final class ThadaAdelAcquisitor extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ThadaAdelAcquisitorEffect(), false, true));
     }
 
-    public ThadaAdelAcquisitor(final ThadaAdelAcquisitor card) {
+    private ThadaAdelAcquisitor(final ThadaAdelAcquisitor card) {
         super(card);
     }
 

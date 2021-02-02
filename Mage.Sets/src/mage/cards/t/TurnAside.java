@@ -32,7 +32,7 @@ public final class TurnAside extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public TurnAside(final TurnAside card) {
+    private TurnAside(final TurnAside card) {
         super(card);
     }
 

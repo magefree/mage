@@ -35,7 +35,7 @@ public final class HanweirLancer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(FirstStrikeAbility.getInstance(), ruleText)));
     }
 
-    public HanweirLancer(final HanweirLancer card) {
+    private HanweirLancer(final HanweirLancer card) {
         super(card);
     }
 

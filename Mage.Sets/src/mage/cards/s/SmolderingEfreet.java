@@ -27,7 +27,7 @@ public final class SmolderingEfreet extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DamageControllerEffect(2, "it"), false));
     }
 
-    public SmolderingEfreet(final SmolderingEfreet card) {
+    private SmolderingEfreet(final SmolderingEfreet card) {
         super(card);
     }
 

@@ -67,7 +67,7 @@ public final class LongForgottenGohei extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, spiritFilter, false)));
     }
 
-    public LongForgottenGohei(final LongForgottenGohei card) {
+    private LongForgottenGohei(final LongForgottenGohei card) {
         super(card);
     }
 

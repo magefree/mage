@@ -40,7 +40,7 @@ public final class Mourning extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{B}")));
     }
 
-    public Mourning(final Mourning card) {
+    private Mourning(final Mourning card) {
         super(card);
     }
 

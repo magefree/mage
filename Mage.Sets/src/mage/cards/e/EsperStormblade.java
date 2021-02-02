@@ -56,7 +56,7 @@ public final class EsperStormblade extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EsperStormblade(final EsperStormblade card) {
+    private EsperStormblade(final EsperStormblade card) {
         super(card);
     }
 

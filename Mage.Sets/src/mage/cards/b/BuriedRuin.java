@@ -33,7 +33,7 @@ public final class BuriedRuin extends CardImpl {
 
     }
 
-    public BuriedRuin(final BuriedRuin card) {
+    private BuriedRuin(final BuriedRuin card) {
         super(card);
     }
 

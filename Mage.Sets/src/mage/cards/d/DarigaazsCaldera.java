@@ -40,7 +40,7 @@ public final class DarigaazsCaldera extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public DarigaazsCaldera(final DarigaazsCaldera card) {
+    private DarigaazsCaldera(final DarigaazsCaldera card) {
         super(card);
     }
 

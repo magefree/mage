@@ -35,7 +35,7 @@ public final class Gundark extends CardImpl {
         this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn)));
     }
 
-    public Gundark(final Gundark card) {
+    private Gundark(final Gundark card) {
         super(card);
     }
 

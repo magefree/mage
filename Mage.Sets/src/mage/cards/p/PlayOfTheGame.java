@@ -25,7 +25,7 @@ public final class PlayOfTheGame extends CardImpl {
         this.getSpellAbility().addEffect(new ExileAllEffect(StaticFilters.FILTER_PERMANENTS_NON_LAND));
     }
 
-    public PlayOfTheGame(final PlayOfTheGame card) {
+    private PlayOfTheGame(final PlayOfTheGame card) {
         super(card);
     }
 

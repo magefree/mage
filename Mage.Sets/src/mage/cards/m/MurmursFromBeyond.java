@@ -33,7 +33,7 @@ public final class MurmursFromBeyond extends CardImpl {
         this.getSpellAbility().addEffect(new MurmursFromBeyondEffect());
     }
 
-    public MurmursFromBeyond(final MurmursFromBeyond card) {
+    private MurmursFromBeyond(final MurmursFromBeyond card) {
         super(card);
     }
 

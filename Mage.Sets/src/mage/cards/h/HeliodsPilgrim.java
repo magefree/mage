@@ -38,7 +38,7 @@ public final class HeliodsPilgrim extends CardImpl {
 
     }
 
-    public HeliodsPilgrim(final HeliodsPilgrim card) {
+    private HeliodsPilgrim(final HeliodsPilgrim card) {
         super(card);
     }
 

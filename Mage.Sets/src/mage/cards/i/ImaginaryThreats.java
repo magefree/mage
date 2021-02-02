@@ -41,7 +41,7 @@ public final class ImaginaryThreats extends CardImpl {
 
     }
 
-    public ImaginaryThreats(final ImaginaryThreats card) {
+    private ImaginaryThreats(final ImaginaryThreats card) {
         super(card);
     }
 

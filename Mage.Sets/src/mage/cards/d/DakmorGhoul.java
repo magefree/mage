@@ -31,7 +31,7 @@ public final class DakmorGhoul extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DakmorGhoul(final DakmorGhoul card) {
+    private DakmorGhoul(final DakmorGhoul card) {
         super(card);
     }
 

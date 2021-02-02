@@ -27,7 +27,7 @@ public final class FencingAce extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
     }
 
-    public FencingAce(final FencingAce card) {
+    private FencingAce(final FencingAce card) {
         super(card);
     }
 

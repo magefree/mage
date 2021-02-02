@@ -48,7 +48,7 @@ public final class WormfangNewt extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public WormfangNewt(final WormfangNewt card) {
+    private WormfangNewt(final WormfangNewt card) {
         super(card);
     }
 

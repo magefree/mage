@@ -34,7 +34,7 @@ public final class BlistercoilWeird extends CardImpl {
 
     }
 
-    public BlistercoilWeird(final BlistercoilWeird card) {
+    private BlistercoilWeird(final BlistercoilWeird card) {
         super(card);
     }
 

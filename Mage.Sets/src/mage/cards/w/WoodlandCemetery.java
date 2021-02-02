@@ -39,7 +39,7 @@ public final class WoodlandCemetery extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public WoodlandCemetery(final WoodlandCemetery card) {
+    private WoodlandCemetery(final WoodlandCemetery card) {
         super(card);
     }
 

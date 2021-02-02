@@ -25,7 +25,7 @@ public final class Skulltap extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
-    public Skulltap(final Skulltap card) {
+    private Skulltap(final Skulltap card) {
         super(card);
     }
 

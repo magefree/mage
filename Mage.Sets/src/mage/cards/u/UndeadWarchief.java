@@ -42,7 +42,7 @@ public final class UndeadWarchief extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 1, Duration.WhileOnBattlefield, filterCreatures, false)));
     }
 
-    public UndeadWarchief(final UndeadWarchief card) {
+    private UndeadWarchief(final UndeadWarchief card) {
         super(card);
     }
 

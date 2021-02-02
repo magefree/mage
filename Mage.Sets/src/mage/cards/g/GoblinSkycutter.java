@@ -46,7 +46,7 @@ public final class GoblinSkycutter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinSkycutter(final GoblinSkycutter card) {
+    private GoblinSkycutter(final GoblinSkycutter card) {
         super(card);
     }
 

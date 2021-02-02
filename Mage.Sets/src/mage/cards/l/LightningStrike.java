@@ -24,7 +24,7 @@ public final class LightningStrike extends CardImpl {
         
     }
 
-    public LightningStrike(final LightningStrike card) {
+    private LightningStrike(final LightningStrike card) {
         super(card);
     }
 

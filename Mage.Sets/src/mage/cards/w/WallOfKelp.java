@@ -38,7 +38,7 @@ public final class WallOfKelp extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WallOfKelp(final WallOfKelp card) {
+    private WallOfKelp(final WallOfKelp card) {
         super(card);
     }
 

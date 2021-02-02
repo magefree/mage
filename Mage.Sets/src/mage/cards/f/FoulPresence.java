@@ -45,7 +45,7 @@ public final class FoulPresence extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FoulPresence(final FoulPresence card) {
+    private FoulPresence(final FoulPresence card) {
         super(card);
     }
 

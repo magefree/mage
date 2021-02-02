@@ -34,7 +34,7 @@ public final class Aftershock extends CardImpl {
         this.getSpellAbility().addEffect(new DamageControllerEffect(3));
     }
 
-    public Aftershock(final Aftershock card) {
+    private Aftershock(final Aftershock card) {
         super(card);
     }
 

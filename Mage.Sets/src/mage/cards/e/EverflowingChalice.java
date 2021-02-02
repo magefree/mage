@@ -40,7 +40,7 @@ public final class EverflowingChalice extends CardImpl {
         this.addAbility(new DynamicManaAbility(Mana.ColorlessMana(1), new CountersSourceCount(CounterType.CHARGE)));
     }
 
-    public EverflowingChalice(final EverflowingChalice card) {
+    private EverflowingChalice(final EverflowingChalice card) {
         super(card);
     }
 

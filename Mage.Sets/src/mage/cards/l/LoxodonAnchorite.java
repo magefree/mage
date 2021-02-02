@@ -35,7 +35,7 @@ public final class LoxodonAnchorite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LoxodonAnchorite(final LoxodonAnchorite card) {
+    private LoxodonAnchorite(final LoxodonAnchorite card) {
         super(card);
     }
 

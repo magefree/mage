@@ -36,7 +36,7 @@ public final class AcklayOfTheArena extends CardImpl {
 
     }
 
-    public AcklayOfTheArena(final AcklayOfTheArena card) {
+    private AcklayOfTheArena(final AcklayOfTheArena card) {
         super(card);
     }
 

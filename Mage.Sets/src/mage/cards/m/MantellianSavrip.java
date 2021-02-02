@@ -36,7 +36,7 @@ public final class MantellianSavrip extends CardImpl {
 
     }
 
-    public MantellianSavrip(final MantellianSavrip card) {
+    private MantellianSavrip(final MantellianSavrip card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class PayNoHeed extends CardImpl {
         
     }
 
-    public PayNoHeed(final PayNoHeed card) {
+    private PayNoHeed(final PayNoHeed card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public final class VedalkenHumiliator extends CardImpl {
         );
     }
 
-    public VedalkenHumiliator(final VedalkenHumiliator card) {
+    private VedalkenHumiliator(final VedalkenHumiliator card) {
         super(card);
     }
 

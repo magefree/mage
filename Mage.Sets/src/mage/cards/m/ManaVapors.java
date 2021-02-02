@@ -31,7 +31,7 @@ public final class ManaVapors extends CardImpl {
         getSpellAbility().addEffect(new ManaVaporsEffect());
     }
 
-    public ManaVapors(final ManaVapors card) {
+    private ManaVapors(final ManaVapors card) {
         super(card);
     }
 

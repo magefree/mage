@@ -51,7 +51,7 @@ public final class PalisadeGiant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PalisadeGiantReplacementEffect()));
     }
 
-    public PalisadeGiant(final PalisadeGiant card) {
+    private PalisadeGiant(final PalisadeGiant card) {
         super(card);
     }
 

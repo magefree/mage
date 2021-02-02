@@ -36,7 +36,7 @@ public final class EnigmaDrake extends CardImpl {
                 new CardsInControllerGraveyardCount(new FilterInstantOrSorceryCard("instant and sorcery cards")), Duration.EndOfGame)));
     }
 
-    public EnigmaDrake(final EnigmaDrake card) {
+    private EnigmaDrake(final EnigmaDrake card) {
         super(card);
     }
 

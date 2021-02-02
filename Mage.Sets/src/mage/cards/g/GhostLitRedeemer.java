@@ -36,7 +36,7 @@ public final class GhostLitRedeemer extends CardImpl {
         this.addAbility(new ChannelAbility("{1}{W}", new GainLifeEffect(4)));
     }
 
-    public GhostLitRedeemer(final GhostLitRedeemer card) {
+    private GhostLitRedeemer(final GhostLitRedeemer card) {
         super(card);
     }
 

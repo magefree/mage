@@ -39,7 +39,7 @@ public final class MonkIdealist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MonkIdealist(final MonkIdealist card) {
+    private MonkIdealist(final MonkIdealist card) {
         super(card);
     }
 

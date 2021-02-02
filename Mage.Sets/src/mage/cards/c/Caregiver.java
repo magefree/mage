@@ -40,7 +40,7 @@ public final class Caregiver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Caregiver(final Caregiver card) {
+    private Caregiver(final Caregiver card) {
         super(card);
     }
 

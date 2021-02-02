@@ -26,7 +26,7 @@ public final class VolcanicAwakening extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public VolcanicAwakening(final VolcanicAwakening card) {
+    private VolcanicAwakening(final VolcanicAwakening card) {
         super(card);
     }
 

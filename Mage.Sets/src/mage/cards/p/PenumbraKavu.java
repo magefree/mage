@@ -26,7 +26,7 @@ public final class PenumbraKavu extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new PenumbraKavuToken(), 1), false));
     }
 
-    public PenumbraKavu(final PenumbraKavu card) {
+    private PenumbraKavu(final PenumbraKavu card) {
         super(card);
     }
 

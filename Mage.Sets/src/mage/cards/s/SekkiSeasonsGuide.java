@@ -56,7 +56,7 @@ public final class SekkiSeasonsGuide extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(8, 8, filter, true))));
     }
 
-    public SekkiSeasonsGuide(final SekkiSeasonsGuide card) {
+    private SekkiSeasonsGuide(final SekkiSeasonsGuide card) {
         super(card);
     }
 

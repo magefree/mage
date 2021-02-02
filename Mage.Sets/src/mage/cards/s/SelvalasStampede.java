@@ -26,7 +26,7 @@ public final class SelvalasStampede extends CardImpl {
         this.getSpellAbility().addEffect(new SelvalasStampedeDilemmaEffect());
     }
 
-    public SelvalasStampede(final SelvalasStampede card) {
+    private SelvalasStampede(final SelvalasStampede card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ public final class FlamestickCourier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlamestickCourier(final FlamestickCourier card) {
+    private FlamestickCourier(final FlamestickCourier card) {
         super(card);
     }
 

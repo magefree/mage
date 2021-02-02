@@ -29,7 +29,7 @@ public final class Regression extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public Regression(final Regression card) {
+    private Regression(final Regression card) {
         super(card);
     }
 

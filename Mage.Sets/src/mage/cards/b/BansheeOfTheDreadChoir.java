@@ -29,7 +29,7 @@ public final class BansheeOfTheDreadChoir extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true));
     }
 
-    public BansheeOfTheDreadChoir(final BansheeOfTheDreadChoir card) {
+    private BansheeOfTheDreadChoir(final BansheeOfTheDreadChoir card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class VampiricRites extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VampiricRites(final VampiricRites card) {
+    private VampiricRites(final VampiricRites card) {
         super(card);
     }
 

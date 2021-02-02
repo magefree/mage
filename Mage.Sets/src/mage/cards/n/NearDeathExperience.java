@@ -29,7 +29,7 @@ public final class NearDeathExperience extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new OneLifeCondition(), "At the beginning of your upkeep, if you have exactly 1 life, you win the game."));
     }
 
-    public NearDeathExperience(final NearDeathExperience card) {
+    private NearDeathExperience(final NearDeathExperience card) {
         super(card);
     }
 

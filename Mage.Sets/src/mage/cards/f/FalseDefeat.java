@@ -23,7 +23,7 @@ public final class FalseDefeat extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
-    public FalseDefeat(final FalseDefeat card) {
+    private FalseDefeat(final FalseDefeat card) {
         super(card);
     }
 

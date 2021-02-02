@@ -35,7 +35,7 @@ public final class AvenFateshaper extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(4), new ManaCostsImpl("{4}{U}")));
     }
 
-    public AvenFateshaper(final AvenFateshaper card) {
+    private AvenFateshaper(final AvenFateshaper card) {
         super(card);
     }
 

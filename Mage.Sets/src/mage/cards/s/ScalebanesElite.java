@@ -28,7 +28,7 @@ public final class ScalebanesElite extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
     }
 
-    public ScalebanesElite(final ScalebanesElite card) {
+    private ScalebanesElite(final ScalebanesElite card) {
         super(card);
     }
 

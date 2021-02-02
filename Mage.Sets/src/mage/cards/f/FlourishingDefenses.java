@@ -29,7 +29,7 @@ public final class FlourishingDefenses extends CardImpl {
 
     }
 
-    public FlourishingDefenses(final FlourishingDefenses card) {
+    private FlourishingDefenses(final FlourishingDefenses card) {
         super(card);
     }
 

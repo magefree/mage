@@ -43,7 +43,7 @@ public final class GlareOfSubdual extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GlareOfSubdual(final GlareOfSubdual card) {
+    private GlareOfSubdual(final GlareOfSubdual card) {
         super(card);
     }
 

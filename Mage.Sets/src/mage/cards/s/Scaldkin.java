@@ -38,7 +38,7 @@ public final class Scaldkin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Scaldkin(final Scaldkin card) {
+    private Scaldkin(final Scaldkin card) {
         super(card);
     }
 

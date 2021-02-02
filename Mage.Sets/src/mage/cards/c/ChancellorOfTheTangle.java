@@ -40,7 +40,7 @@ public final class ChancellorOfTheTangle extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public ChancellorOfTheTangle(final ChancellorOfTheTangle card) {
+    private ChancellorOfTheTangle(final ChancellorOfTheTangle card) {
         super(card);
     }
 

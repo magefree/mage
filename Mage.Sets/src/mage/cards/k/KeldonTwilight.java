@@ -40,7 +40,7 @@ public final class KeldonTwilight extends CardImpl {
         this.addAbility(ability, new AttackedThisTurnWatcher());
     }
 
-    public KeldonTwilight(final KeldonTwilight card) {
+    private KeldonTwilight(final KeldonTwilight card) {
         super(card);
     }
 

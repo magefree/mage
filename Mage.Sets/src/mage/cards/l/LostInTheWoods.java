@@ -27,7 +27,7 @@ public final class LostInTheWoods extends CardImpl {
         this.addAbility(new AttacksAllTriggeredAbility(new LostInTheWoodsEffect(), false, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PERMANENT, true));
     }
 
-    public LostInTheWoods(final LostInTheWoods card) {
+    private LostInTheWoods(final LostInTheWoods card) {
         super(card);
     }
 

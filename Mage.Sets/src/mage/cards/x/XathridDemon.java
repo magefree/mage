@@ -43,7 +43,7 @@ public final class XathridDemon extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new XathridDemonEffect(), TargetController.YOU, false));
     }
 
-    public XathridDemon(final XathridDemon card) {
+    private XathridDemon(final XathridDemon card) {
         super(card);
     }
 

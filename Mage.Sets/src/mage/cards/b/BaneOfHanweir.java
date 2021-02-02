@@ -41,7 +41,7 @@ public final class BaneOfHanweir extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public BaneOfHanweir(final BaneOfHanweir card) {
+    private BaneOfHanweir(final BaneOfHanweir card) {
         super(card);
     }
 

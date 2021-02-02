@@ -31,7 +31,7 @@ public final class ChiefEngineer extends CardImpl {
 
     }
 
-    public ChiefEngineer(final ChiefEngineer card) {
+    private ChiefEngineer(final ChiefEngineer card) {
         super(card);
     }
 

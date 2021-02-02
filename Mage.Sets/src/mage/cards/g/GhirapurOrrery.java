@@ -37,7 +37,7 @@ public final class GhirapurOrrery extends CardImpl {
                 "At the beginning of each player's upkeep, if that player has no cards in hand, that player draws three cards."));
     }
 
-    public GhirapurOrrery(final GhirapurOrrery card) {
+    private GhirapurOrrery(final GhirapurOrrery card) {
         super(card);
     }
 

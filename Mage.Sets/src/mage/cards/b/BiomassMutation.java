@@ -26,7 +26,7 @@ public final class BiomassMutation extends CardImpl {
         this.getSpellAbility().addEffect(new SetPowerToughnessAllEffect(variableMana, variableMana, Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures you control"), true));
     }
 
-    public BiomassMutation(final BiomassMutation card) {
+    private BiomassMutation(final BiomassMutation card) {
         super(card);
     }
 

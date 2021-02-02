@@ -56,7 +56,7 @@ public final class Mindreaver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Mindreaver(final Mindreaver card) {
+    private Mindreaver(final Mindreaver card) {
         super(card);
     }
 

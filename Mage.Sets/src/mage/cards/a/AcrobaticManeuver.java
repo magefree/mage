@@ -28,7 +28,7 @@ public final class AcrobaticManeuver extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public AcrobaticManeuver(final AcrobaticManeuver card) {
+    private AcrobaticManeuver(final AcrobaticManeuver card) {
         super(card);
     }
 

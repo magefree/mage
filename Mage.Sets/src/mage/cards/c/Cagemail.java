@@ -39,7 +39,7 @@ public final class Cagemail extends CardImpl {
         this.addAbility(ability1);
     }
 
-    public Cagemail(final Cagemail card) {
+    private Cagemail(final Cagemail card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class ShuFootSoldiers extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public ShuFootSoldiers(final ShuFootSoldiers card) {
+    private ShuFootSoldiers(final ShuFootSoldiers card) {
         super(card);
     }
 

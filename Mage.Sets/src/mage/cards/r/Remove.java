@@ -36,7 +36,7 @@ public final class Remove extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
-    public Remove(final Remove card) {
+    private Remove(final Remove card) {
         super(card);
     }
 

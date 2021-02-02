@@ -32,7 +32,7 @@ public final class DemonsHorn extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new GainLifeEffect(StaticValue.get(1), "you may gain 1 life"), filter, true));
     }
 
-    public DemonsHorn(final DemonsHorn card) {
+    private DemonsHorn(final DemonsHorn card) {
         super(card);
     }
 

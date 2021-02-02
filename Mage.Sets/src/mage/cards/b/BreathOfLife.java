@@ -23,7 +23,7 @@ public final class BreathOfLife extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
-    public BreathOfLife(final BreathOfLife card) {
+    private BreathOfLife(final BreathOfLife card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ public final class PrincessLeia extends CardImpl {
 
     }
 
-    public PrincessLeia(final PrincessLeia card) {
+    private PrincessLeia(final PrincessLeia card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class WinterOrb extends CardImpl {
 
     }
 
-    public WinterOrb(final WinterOrb card) {
+    private WinterOrb(final WinterOrb card) {
         super(card);
     }
 

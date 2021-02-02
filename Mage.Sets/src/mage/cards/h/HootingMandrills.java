@@ -29,7 +29,7 @@ public final class HootingMandrills extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public HootingMandrills(final HootingMandrills card) {
+    private HootingMandrills(final HootingMandrills card) {
         super(card);
     }
 

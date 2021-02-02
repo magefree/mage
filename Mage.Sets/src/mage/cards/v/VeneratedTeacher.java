@@ -36,7 +36,7 @@ public final class VeneratedTeacher extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new VeneratedTeacherEffect()));
     }
 
-    public VeneratedTeacher(final VeneratedTeacher card) {
+    private VeneratedTeacher(final VeneratedTeacher card) {
         super(card);
     }
 

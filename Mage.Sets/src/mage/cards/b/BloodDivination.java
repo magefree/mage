@@ -27,7 +27,7 @@ public final class BloodDivination extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
     }
 
-    public BloodDivination(final BloodDivination card) {
+    private BloodDivination(final BloodDivination card) {
         super(card);
     }
 

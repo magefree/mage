@@ -29,7 +29,7 @@ public final class ActOfTreason extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn."));
     }
 
-    public ActOfTreason(final ActOfTreason card) {
+    private ActOfTreason(final ActOfTreason card) {
         super(card);
     }
 

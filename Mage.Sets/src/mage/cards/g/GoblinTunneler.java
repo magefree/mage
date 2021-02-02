@@ -44,7 +44,7 @@ public final class GoblinTunneler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinTunneler(final GoblinTunneler card) {
+    private GoblinTunneler(final GoblinTunneler card) {
         super(card);
     }
 

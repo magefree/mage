@@ -43,7 +43,7 @@ public final class MalevolentWhispers extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{3}{R}")));
     }
 
-    public MalevolentWhispers(final MalevolentWhispers card) {
+    private MalevolentWhispers(final MalevolentWhispers card) {
         super(card);
     }
 

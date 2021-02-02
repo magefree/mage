@@ -39,7 +39,7 @@ public final class KalevanStarYacht extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KalevanStarYacht(final KalevanStarYacht card) {
+    private KalevanStarYacht(final KalevanStarYacht card) {
         super(card);
     }
 

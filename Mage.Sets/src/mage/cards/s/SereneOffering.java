@@ -28,7 +28,7 @@ public final class SereneOffering extends CardImpl {
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
     }
 
-    public SereneOffering(final SereneOffering card) {
+    private SereneOffering(final SereneOffering card) {
         super(card);
     }
 

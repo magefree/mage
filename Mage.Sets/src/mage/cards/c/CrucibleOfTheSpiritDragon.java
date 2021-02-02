@@ -53,7 +53,7 @@ public final class CrucibleOfTheSpiritDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrucibleOfTheSpiritDragon(final CrucibleOfTheSpiritDragon card) {
+    private CrucibleOfTheSpiritDragon(final CrucibleOfTheSpiritDragon card) {
         super(card);
     }
 

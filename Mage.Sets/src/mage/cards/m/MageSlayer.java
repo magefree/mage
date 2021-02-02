@@ -33,7 +33,7 @@ public final class MageSlayer extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(3), new TargetControlledCreaturePermanent()));
     }
 
-    public MageSlayer(final MageSlayer card) {
+    private MageSlayer(final MageSlayer card) {
         super(card);
     }
 

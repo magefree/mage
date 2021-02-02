@@ -51,7 +51,7 @@ public final class ScrollOfTheMasters extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScrollOfTheMasters(final ScrollOfTheMasters card) {
+    private ScrollOfTheMasters(final ScrollOfTheMasters card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class SoulsFire extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public SoulsFire(final SoulsFire card) {
+    private SoulsFire(final SoulsFire card) {
         super(card);
     }
 

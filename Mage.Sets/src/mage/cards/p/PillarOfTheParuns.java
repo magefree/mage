@@ -22,7 +22,7 @@ public final class PillarOfTheParuns extends CardImpl {
         this.addAbility(new ConditionalAnyColorManaAbility(1, new ConditionalSpellManaBuilder(StaticFilters.FILTER_SPELL_A_MULTICOLORED)));
     }
 
-    public PillarOfTheParuns(final PillarOfTheParuns card) {
+    private PillarOfTheParuns(final PillarOfTheParuns card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class EssenceBacklash extends CardImpl {
         this.getSpellAbility().addEffect(new EssenceBacklashEffect());
     }
 
-    public EssenceBacklash(final EssenceBacklash card) {
+    private EssenceBacklash(final EssenceBacklash card) {
         super(card);
     }
 

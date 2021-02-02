@@ -45,7 +45,7 @@ public final class GrixisSojourners extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{B}")));
     }
 
-    public GrixisSojourners(final GrixisSojourners card) {
+    private GrixisSojourners(final GrixisSojourners card) {
         super(card);
     }
 

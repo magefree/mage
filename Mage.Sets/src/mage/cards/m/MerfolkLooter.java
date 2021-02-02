@@ -28,7 +28,7 @@ public final class MerfolkLooter extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
     }
 
-    public MerfolkLooter(final MerfolkLooter card) {
+    private MerfolkLooter(final MerfolkLooter card) {
         super(card);
     }
 

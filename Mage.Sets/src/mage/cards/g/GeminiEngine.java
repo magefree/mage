@@ -38,7 +38,7 @@ public final class GeminiEngine extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new GeminiEngineCreateTokenEffect(), false));
     }
 
-    public GeminiEngine(final GeminiEngine card) {
+    private GeminiEngine(final GeminiEngine card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class CanopyGorger extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public CanopyGorger(final CanopyGorger card) {
+    private CanopyGorger(final CanopyGorger card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class Merseine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Merseine(final Merseine card) {
+    private Merseine(final Merseine card) {
         super(card);
     }
 

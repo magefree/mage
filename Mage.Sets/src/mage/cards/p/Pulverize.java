@@ -35,7 +35,7 @@ public final class Pulverize extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterArtifactPermanent()));
     }
 
-    public Pulverize(final Pulverize card) {
+    private Pulverize(final Pulverize card) {
         super(card);
     }
 

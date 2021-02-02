@@ -24,7 +24,7 @@ public final class Stifle extends CardImpl {
         this.getSpellAbility().addTarget(new TargetActivatedOrTriggeredAbility());
     }
 
-    public Stifle(final Stifle card) {
+    private Stifle(final Stifle card) {
         super(card);
     }
 

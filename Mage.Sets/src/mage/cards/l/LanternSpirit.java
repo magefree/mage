@@ -31,7 +31,7 @@ public final class LanternSpirit extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{U}")));
     }
 
-    public LanternSpirit(final LanternSpirit card) {
+    private LanternSpirit(final LanternSpirit card) {
         super(card);
     }
 

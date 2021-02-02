@@ -45,7 +45,7 @@ public final class VulturousAven extends CardImpl {
 
     }
 
-    public VulturousAven(final VulturousAven card) {
+    private VulturousAven(final VulturousAven card) {
         super(card);
     }
 

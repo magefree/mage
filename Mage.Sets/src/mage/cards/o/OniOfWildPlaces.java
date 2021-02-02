@@ -39,7 +39,7 @@ public final class OniOfWildPlaces extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), TargetController.YOU, false));
     }
 
-    public OniOfWildPlaces(final OniOfWildPlaces card) {
+    private OniOfWildPlaces(final OniOfWildPlaces card) {
         super(card);
     }
 

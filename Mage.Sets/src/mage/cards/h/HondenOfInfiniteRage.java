@@ -37,7 +37,7 @@ public final class HondenOfInfiniteRage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HondenOfInfiniteRage(final HondenOfInfiniteRage card) {
+    private HondenOfInfiniteRage(final HondenOfInfiniteRage card) {
         super(card);
     }
 

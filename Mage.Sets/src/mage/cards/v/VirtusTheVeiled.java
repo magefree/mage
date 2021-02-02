@@ -38,7 +38,7 @@ public final class VirtusTheVeiled extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseHalfLifeTargetEffect(), false, true));
     }
 
-    public VirtusTheVeiled(final VirtusTheVeiled card) {
+    private VirtusTheVeiled(final VirtusTheVeiled card) {
         super(card);
     }
 

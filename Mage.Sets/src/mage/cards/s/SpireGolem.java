@@ -29,7 +29,7 @@ public final class SpireGolem extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SpireGolem(final SpireGolem card) {
+    private SpireGolem(final SpireGolem card) {
         super(card);
     }
 

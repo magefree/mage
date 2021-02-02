@@ -36,7 +36,7 @@ public final class KruinStriker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KruinStriker(final KruinStriker card) {
+    private KruinStriker(final KruinStriker card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class BrazenScourge extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public BrazenScourge(final BrazenScourge card) {
+    private BrazenScourge(final BrazenScourge card) {
         super(card);
     }
 

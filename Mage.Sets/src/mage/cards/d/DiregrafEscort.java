@@ -43,7 +43,7 @@ public final class DiregrafEscort extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(new ProtectionAbility(filter), ruleText)));
     }
 
-    public DiregrafEscort(final DiregrafEscort card) {
+    private DiregrafEscort(final DiregrafEscort card) {
         super(card);
     }
 

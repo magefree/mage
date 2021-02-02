@@ -32,7 +32,7 @@ public final class ImplementOfImprovement extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public ImplementOfImprovement(final ImplementOfImprovement card) {
+    private ImplementOfImprovement(final ImplementOfImprovement card) {
         super(card);
     }
 

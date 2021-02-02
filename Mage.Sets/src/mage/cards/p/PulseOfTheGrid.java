@@ -28,7 +28,7 @@ public final class PulseOfTheGrid extends CardImpl {
         this.getSpellAbility().addEffect(new PulseOfTheGridReturnToHandEffect());
     }
 
-    public PulseOfTheGrid(final PulseOfTheGrid card) {
+    private PulseOfTheGrid(final PulseOfTheGrid card) {
         super(card);
     }
 

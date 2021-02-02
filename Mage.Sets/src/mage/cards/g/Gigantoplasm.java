@@ -43,7 +43,7 @@ public final class Gigantoplasm extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 
-    public Gigantoplasm(final Gigantoplasm card) {
+    private Gigantoplasm(final Gigantoplasm card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class LocustMiser extends CardImpl {
                 new MaximumHandSizeControllerEffect(2, Duration.WhileOnBattlefield, HandSizeModification.REDUCE, TargetController.OPPONENT)));
     }
 
-    public LocustMiser(final LocustMiser card) {
+    private LocustMiser(final LocustMiser card) {
         super(card);
     }
 

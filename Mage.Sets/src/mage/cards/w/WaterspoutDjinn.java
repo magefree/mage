@@ -44,7 +44,7 @@ public final class WaterspoutDjinn extends CardImpl {
                 TargetController.YOU, false));
     }
 
-    public WaterspoutDjinn(final WaterspoutDjinn card) {
+    private WaterspoutDjinn(final WaterspoutDjinn card) {
         super(card);
     }
 

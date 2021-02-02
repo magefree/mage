@@ -71,7 +71,7 @@ public final class SamutVoiceOfDissent extends CardImpl {
 
     }
 
-    public SamutVoiceOfDissent(final SamutVoiceOfDissent card) {
+    private SamutVoiceOfDissent(final SamutVoiceOfDissent card) {
         super(card);
     }
 

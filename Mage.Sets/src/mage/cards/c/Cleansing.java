@@ -27,7 +27,7 @@ public final class Cleansing extends CardImpl {
         this.getSpellAbility().addEffect(new CleansingEffect());
     }
 
-    public Cleansing(final Cleansing card) {
+    private Cleansing(final Cleansing card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class DrownInShapelessness extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public DrownInShapelessness(final DrownInShapelessness card) {
+    private DrownInShapelessness(final DrownInShapelessness card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class Reclaim extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
     }
 
-    public Reclaim(final Reclaim card) {
+    private Reclaim(final Reclaim card) {
         super(card);
     }
 

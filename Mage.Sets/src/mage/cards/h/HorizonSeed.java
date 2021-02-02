@@ -30,7 +30,7 @@ public final class HorizonSeed extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HorizonSeed(final HorizonSeed card) {
+    private HorizonSeed(final HorizonSeed card) {
         super(card);
     }
 

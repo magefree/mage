@@ -43,7 +43,7 @@ public final class PrisonBarricade extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PrisonBarricade(final PrisonBarricade card) {
+    private PrisonBarricade(final PrisonBarricade card) {
         super(card);
     }
 

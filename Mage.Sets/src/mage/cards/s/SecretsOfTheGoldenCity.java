@@ -33,7 +33,7 @@ public final class SecretsOfTheGoldenCity extends CardImpl {
                 "Draw two cards. If you have the city's blessing, draw three cards instead"));
     }
 
-    public SecretsOfTheGoldenCity(final SecretsOfTheGoldenCity card) {
+    private SecretsOfTheGoldenCity(final SecretsOfTheGoldenCity card) {
         super(card);
     }
 

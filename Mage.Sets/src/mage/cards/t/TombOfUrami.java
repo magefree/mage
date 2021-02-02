@@ -42,7 +42,7 @@ public final class TombOfUrami extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public TombOfUrami(final TombOfUrami card) {
+    private TombOfUrami(final TombOfUrami card) {
         super(card);
     }
 

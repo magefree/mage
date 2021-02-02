@@ -31,7 +31,7 @@ public final class ExoticDisease extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public ExoticDisease(final ExoticDisease card) {
+    private ExoticDisease(final ExoticDisease card) {
         super(card);
     }
 

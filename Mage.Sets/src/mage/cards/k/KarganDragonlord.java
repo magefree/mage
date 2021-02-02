@@ -52,7 +52,7 @@ public final class KarganDragonlord extends LevelerCard {
         setMaxLevelCounters(8);
     }
 
-    public KarganDragonlord(final KarganDragonlord card) {
+    private KarganDragonlord(final KarganDragonlord card) {
         super(card);
     }
 

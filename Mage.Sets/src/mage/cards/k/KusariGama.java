@@ -50,7 +50,7 @@ public final class KusariGama extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public KusariGama(final KusariGama card) {
+    private KusariGama(final KusariGama card) {
         super(card);
     }
 

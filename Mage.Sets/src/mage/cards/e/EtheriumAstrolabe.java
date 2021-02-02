@@ -40,7 +40,7 @@ public final class EtheriumAstrolabe extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EtheriumAstrolabe(final EtheriumAstrolabe card) {
+    private EtheriumAstrolabe(final EtheriumAstrolabe card) {
         super(card);
     }
 

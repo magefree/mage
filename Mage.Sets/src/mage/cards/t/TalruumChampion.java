@@ -34,7 +34,7 @@ public final class TalruumChampion extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
-    public TalruumChampion(final TalruumChampion card) {
+    private TalruumChampion(final TalruumChampion card) {
         super(card);
     }
 

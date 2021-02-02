@@ -35,7 +35,7 @@ public final class WakeThrasher extends CardImpl {
 
     }
 
-    public WakeThrasher(final WakeThrasher card) {
+    private WakeThrasher(final WakeThrasher card) {
         super(card);
     }
 

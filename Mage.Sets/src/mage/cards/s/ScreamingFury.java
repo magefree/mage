@@ -32,7 +32,7 @@ public final class ScreamingFury extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ScreamingFury(final ScreamingFury card) {
+    private ScreamingFury(final ScreamingFury card) {
         super(card);
     }
 

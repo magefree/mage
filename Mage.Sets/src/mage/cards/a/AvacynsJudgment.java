@@ -37,7 +37,7 @@ public final class AvacynsJudgment extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));
     }
 
-    public AvacynsJudgment(final AvacynsJudgment card) {
+    private AvacynsJudgment(final AvacynsJudgment card) {
         super(card);
     }
 

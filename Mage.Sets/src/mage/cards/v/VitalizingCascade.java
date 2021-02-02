@@ -24,7 +24,7 @@ public final class VitalizingCascade extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(VitalizingCascadeValue.instance));
     }
 
-    public VitalizingCascade(final VitalizingCascade card) {
+    private VitalizingCascade(final VitalizingCascade card) {
         super(card);
     }
 

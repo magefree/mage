@@ -26,7 +26,7 @@ public final class WitheringBoon extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
     }
 
-    public WitheringBoon(final WitheringBoon card) {
+    private WitheringBoon(final WitheringBoon card) {
         super(card);
     }
 

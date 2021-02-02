@@ -44,7 +44,7 @@ public final class CloakOfInvisibility extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CloakOfInvisibility(final CloakOfInvisibility card) {
+    private CloakOfInvisibility(final CloakOfInvisibility card) {
         super(card);
     }
 

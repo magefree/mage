@@ -44,7 +44,7 @@ public final class Earthblighter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Earthblighter(final Earthblighter card) {
+    private Earthblighter(final Earthblighter card) {
         super(card);
     }
 

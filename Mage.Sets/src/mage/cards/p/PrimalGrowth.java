@@ -36,7 +36,7 @@ public final class PrimalGrowth extends CardImpl {
                 "Search your library for a basic land card, put that card onto the battlefield, then shuffle your library. If this spell was kicked, instead search your library for up to two basic land cards, put them onto the battlefield, then shuffle your library"));
     }
 
-    public PrimalGrowth(final PrimalGrowth card) {
+    private PrimalGrowth(final PrimalGrowth card) {
         super(card);
     }
 

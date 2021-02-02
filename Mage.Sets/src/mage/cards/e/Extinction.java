@@ -29,7 +29,7 @@ public final class Extinction extends CardImpl {
         this.getSpellAbility().addEffect(new ExtinctionEffect());
     }
 
-    public Extinction(final Extinction card) {
+    private Extinction(final Extinction card) {
         super(card);
     }
 

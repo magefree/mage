@@ -51,7 +51,7 @@ public final class GuardianZendikon extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public GuardianZendikon(final GuardianZendikon card) {
+    private GuardianZendikon(final GuardianZendikon card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class SurrakarBanisher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SurrakarBanisher(final SurrakarBanisher card) {
+    private SurrakarBanisher(final SurrakarBanisher card) {
         super(card);
     }
 

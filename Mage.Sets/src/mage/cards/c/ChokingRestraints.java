@@ -47,7 +47,7 @@ public final class ChokingRestraints extends CardImpl {
 
     }
 
-    public ChokingRestraints(final ChokingRestraints card) {
+    private ChokingRestraints(final ChokingRestraints card) {
         super(card);
     }
 

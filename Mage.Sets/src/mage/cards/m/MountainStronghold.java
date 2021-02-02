@@ -37,7 +37,7 @@ public final class MountainStronghold extends CardImpl {
         ));
     }
 
-    public MountainStronghold(final MountainStronghold card) {
+    private MountainStronghold(final MountainStronghold card) {
         super(card);
     }
 

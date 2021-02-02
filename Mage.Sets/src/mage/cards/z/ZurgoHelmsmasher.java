@@ -48,7 +48,7 @@ public final class ZurgoHelmsmasher extends CardImpl {
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public ZurgoHelmsmasher(final ZurgoHelmsmasher card) {
+    private ZurgoHelmsmasher(final ZurgoHelmsmasher card) {
         super(card);
     }
 

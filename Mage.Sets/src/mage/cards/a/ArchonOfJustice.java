@@ -32,7 +32,7 @@ public final class ArchonOfJustice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArchonOfJustice(final ArchonOfJustice card) {
+    private ArchonOfJustice(final ArchonOfJustice card) {
         super(card);
     }
 

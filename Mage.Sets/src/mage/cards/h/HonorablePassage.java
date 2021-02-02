@@ -29,7 +29,7 @@ public final class HonorablePassage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public HonorablePassage(final HonorablePassage card) {
+    private HonorablePassage(final HonorablePassage card) {
         super(card);
     }
 

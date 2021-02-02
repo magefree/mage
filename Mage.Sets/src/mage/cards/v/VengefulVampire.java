@@ -28,7 +28,7 @@ public final class VengefulVampire extends CardImpl {
         this.addAbility(new UndyingAbility());
     }
 
-    public VengefulVampire(final VengefulVampire card) {
+    private VengefulVampire(final VengefulVampire card) {
         super(card);
     }
 

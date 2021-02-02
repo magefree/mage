@@ -34,7 +34,7 @@ public final class MerfolkThaumaturgist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MerfolkThaumaturgist(final MerfolkThaumaturgist card) {
+    private MerfolkThaumaturgist(final MerfolkThaumaturgist card) {
         super(card);
     }
 

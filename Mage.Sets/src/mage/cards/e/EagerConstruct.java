@@ -30,7 +30,7 @@ public final class EagerConstruct extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EagerConstructEffect()));
     }
 
-    public EagerConstruct(final EagerConstruct card) {
+    private EagerConstruct(final EagerConstruct card) {
         super(card);
     }
 

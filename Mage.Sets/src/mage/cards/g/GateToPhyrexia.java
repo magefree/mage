@@ -33,7 +33,7 @@ public final class GateToPhyrexia extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GateToPhyrexia(final GateToPhyrexia card) {
+    private GateToPhyrexia(final GateToPhyrexia card) {
         super(card);
     }
 

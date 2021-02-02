@@ -46,7 +46,7 @@ public final class HeliumSquirter extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public HeliumSquirter(final HeliumSquirter card) {
+    private HeliumSquirter(final HeliumSquirter card) {
         super(card);
     }
 

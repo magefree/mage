@@ -34,7 +34,7 @@ public final class BendOrBreak extends CardImpl {
         this.getSpellAbility().addEffect(new BendOrBreakEffect());
     }
 
-    public BendOrBreak(final BendOrBreak card) {
+    private BendOrBreak(final BendOrBreak card) {
         super(card);
     }
 

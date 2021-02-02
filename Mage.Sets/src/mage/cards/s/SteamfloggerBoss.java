@@ -59,7 +59,7 @@ public final class SteamfloggerBoss extends CardImpl {
 
     }
 
-    public SteamfloggerBoss(final SteamfloggerBoss card) {
+    private SteamfloggerBoss(final SteamfloggerBoss card) {
         super(card);
     }
 

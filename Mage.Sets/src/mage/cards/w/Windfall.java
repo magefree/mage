@@ -23,7 +23,7 @@ public final class Windfall extends CardImpl {
         this.getSpellAbility().addEffect(new WindfallEffect());
     }
 
-    public Windfall(final Windfall card) {
+    private Windfall(final Windfall card) {
         super(card);
     }
 

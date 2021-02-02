@@ -47,7 +47,7 @@ public final class LaquatussChampion extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public LaquatussChampion(final LaquatussChampion card) {
+    private LaquatussChampion(final LaquatussChampion card) {
         super(card);
     }
 

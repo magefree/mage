@@ -29,7 +29,7 @@ public final class ValorInAkros extends CardImpl {
         );
     }
 
-    public ValorInAkros(final ValorInAkros card) {
+    private ValorInAkros(final ValorInAkros card) {
         super(card);
     }
 

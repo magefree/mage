@@ -41,7 +41,7 @@ public final class CorrosiveMentor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(WitherAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public CorrosiveMentor(final CorrosiveMentor card) {
+    private CorrosiveMentor(final CorrosiveMentor card) {
         super(card);
     }
 

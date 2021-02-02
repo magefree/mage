@@ -30,7 +30,7 @@ public final class PeregrineDrake extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapLandsEffect(5)));
     }
 
-    public PeregrineDrake(final PeregrineDrake card) {
+    private PeregrineDrake(final PeregrineDrake card) {
         super(card);
     }
 

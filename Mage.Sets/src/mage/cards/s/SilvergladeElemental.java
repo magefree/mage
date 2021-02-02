@@ -33,7 +33,7 @@ public final class SilvergladeElemental extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, false), true));
     }
 
-    public SilvergladeElemental(final SilvergladeElemental card) {
+    private SilvergladeElemental(final SilvergladeElemental card) {
         super(card);
     }
 

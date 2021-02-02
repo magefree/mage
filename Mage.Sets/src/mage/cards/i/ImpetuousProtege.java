@@ -41,7 +41,7 @@ public final class ImpetuousProtege extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new ImpetuousProtegeEffect(), false));
     }
 
-    public ImpetuousProtege(final ImpetuousProtege card) {
+    private ImpetuousProtege(final ImpetuousProtege card) {
         super(card);
     }
 

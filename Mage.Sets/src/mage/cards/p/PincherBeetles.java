@@ -25,7 +25,7 @@ public final class PincherBeetles extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public PincherBeetles(final PincherBeetles card) {
+    private PincherBeetles(final PincherBeetles card) {
         super(card);
     }
 

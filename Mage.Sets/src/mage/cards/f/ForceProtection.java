@@ -25,7 +25,7 @@ public final class ForceProtection extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public ForceProtection(final ForceProtection card) {
+    private ForceProtection(final ForceProtection card) {
         super(card);
     }
 

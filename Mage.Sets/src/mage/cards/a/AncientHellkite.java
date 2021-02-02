@@ -47,7 +47,7 @@ public final class AncientHellkite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AncientHellkite(final AncientHellkite card) {
+    private AncientHellkite(final AncientHellkite card) {
         super(card);
     }
 

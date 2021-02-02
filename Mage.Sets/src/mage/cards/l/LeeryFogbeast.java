@@ -28,7 +28,7 @@ public final class LeeryFogbeast extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true), false));
     }
 
-    public LeeryFogbeast(final LeeryFogbeast card) {
+    private LeeryFogbeast(final LeeryFogbeast card) {
         super(card);
     }
 

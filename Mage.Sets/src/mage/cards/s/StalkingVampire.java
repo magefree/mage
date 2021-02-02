@@ -31,7 +31,7 @@ public final class StalkingVampire extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(new ScreechingBatBeginningOfUpkeepTriggeredAbility(), new TransformedCondition(), ""));
     }
 
-    public StalkingVampire(final StalkingVampire card) {
+    private StalkingVampire(final StalkingVampire card) {
         super(card);
     }
 

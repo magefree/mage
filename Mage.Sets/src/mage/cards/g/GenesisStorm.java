@@ -31,7 +31,7 @@ public final class GenesisStorm extends CardImpl {
         this.getSpellAbility().addEffect(new GenesisStormEffect());
     }
 
-    public GenesisStorm(final GenesisStorm card) {
+    private GenesisStorm(final GenesisStorm card) {
         super(card);
     }
 

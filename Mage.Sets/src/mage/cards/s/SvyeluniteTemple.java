@@ -33,7 +33,7 @@ public final class SvyeluniteTemple extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SvyeluniteTemple(final SvyeluniteTemple card) {
+    private SvyeluniteTemple(final SvyeluniteTemple card) {
         super(card);
     }
 

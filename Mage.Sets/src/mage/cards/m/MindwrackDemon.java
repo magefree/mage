@@ -49,7 +49,7 @@ public final class MindwrackDemon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MindwrackDemon(final MindwrackDemon card) {
+    private MindwrackDemon(final MindwrackDemon card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class SilentDeparture extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{U}"), TimingRule.SORCERY));
     }
 
-    public SilentDeparture(final SilentDeparture card) {
+    private SilentDeparture(final SilentDeparture card) {
         super(card);
     }
 

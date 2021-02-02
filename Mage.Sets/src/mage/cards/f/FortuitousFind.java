@@ -34,7 +34,7 @@ public final class FortuitousFind extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public FortuitousFind(final FortuitousFind card) {
+    private FortuitousFind(final FortuitousFind card) {
         super(card);
     }
 

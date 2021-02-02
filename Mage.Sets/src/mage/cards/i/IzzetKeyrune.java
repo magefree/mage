@@ -41,7 +41,7 @@ public final class IzzetKeyrune extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new IzzetKeyruneEffect(), true));
     }
 
-    public IzzetKeyrune(final IzzetKeyrune card) {
+    private IzzetKeyrune(final IzzetKeyrune card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class AvatarOfMight extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public AvatarOfMight(final AvatarOfMight card) {
+    private AvatarOfMight(final AvatarOfMight card) {
         super(card);
     }
 

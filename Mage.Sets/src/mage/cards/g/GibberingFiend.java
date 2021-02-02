@@ -41,7 +41,7 @@ public final class GibberingFiend extends CardImpl {
                 .addHint(DeliriumHint.instance));
     }
 
-    public GibberingFiend(final GibberingFiend card) {
+    private GibberingFiend(final GibberingFiend card) {
         super(card);
     }
 

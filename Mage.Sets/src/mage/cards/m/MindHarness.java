@@ -52,7 +52,7 @@ public final class MindHarness extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
     }
 
-    public MindHarness(final MindHarness card) {
+    private MindHarness(final MindHarness card) {
         super(card);
     }
 

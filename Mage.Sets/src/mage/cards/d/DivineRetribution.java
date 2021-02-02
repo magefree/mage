@@ -27,7 +27,7 @@ public final class DivineRetribution extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
-    public DivineRetribution(final DivineRetribution card) {
+    private DivineRetribution(final DivineRetribution card) {
         super(card);
     }
 

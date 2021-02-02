@@ -53,7 +53,7 @@ public final class BloodChinFanatic extends CardImpl {
         
     }
 
-    public BloodChinFanatic(final BloodChinFanatic card) {
+    private BloodChinFanatic(final BloodChinFanatic card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class LivingTotem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LivingTotem(final LivingTotem card) {
+    private LivingTotem(final LivingTotem card) {
         super(card);
     }
 

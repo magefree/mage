@@ -43,7 +43,7 @@ public final class PrimalWhisperer extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{G}")));
     }
 
-    public PrimalWhisperer(final PrimalWhisperer card) {
+    private PrimalWhisperer(final PrimalWhisperer card) {
         super(card);
     }
 

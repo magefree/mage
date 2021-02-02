@@ -34,7 +34,7 @@ public final class Woebearer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Woebearer(final Woebearer card) {
+    private Woebearer(final Woebearer card) {
         super(card);
     }
 

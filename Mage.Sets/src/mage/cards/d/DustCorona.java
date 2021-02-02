@@ -48,7 +48,7 @@ public final class DustCorona extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DustCorona(final DustCorona card) {
+    private DustCorona(final DustCorona card) {
         super(card);
     }
 

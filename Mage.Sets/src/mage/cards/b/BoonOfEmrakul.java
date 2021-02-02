@@ -34,7 +34,7 @@ public final class BoonOfEmrakul extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, -3, Duration.WhileOnBattlefield)));
     }
 
-    public BoonOfEmrakul(final BoonOfEmrakul card) {
+    private BoonOfEmrakul(final BoonOfEmrakul card) {
         super(card);
     }
 

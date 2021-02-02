@@ -28,7 +28,7 @@ public final class ChromaticLantern extends CardImpl {
 
     }
 
-    public ChromaticLantern(final ChromaticLantern card) {
+    private ChromaticLantern(final ChromaticLantern card) {
         super(card);
     }
 

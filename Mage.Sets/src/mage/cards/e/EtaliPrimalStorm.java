@@ -37,7 +37,7 @@ public final class EtaliPrimalStorm extends CardImpl {
 
     }
 
-    public EtaliPrimalStorm(final EtaliPrimalStorm card) {
+    private EtaliPrimalStorm(final EtaliPrimalStorm card) {
         super(card);
     }
 

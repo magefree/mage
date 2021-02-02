@@ -46,7 +46,7 @@ public final class WithengarUnbound extends CardImpl {
 
     }
 
-    public WithengarUnbound(final WithengarUnbound card) {
+    private WithengarUnbound(final WithengarUnbound card) {
         super(card);
     }
 

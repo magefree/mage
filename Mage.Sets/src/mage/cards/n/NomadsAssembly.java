@@ -27,7 +27,7 @@ public final class NomadsAssembly extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public NomadsAssembly(final NomadsAssembly card) {
+    private NomadsAssembly(final NomadsAssembly card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class HomewardPath extends CardImpl {
 
     }
 
-    public HomewardPath(final HomewardPath card) {
+    private HomewardPath(final HomewardPath card) {
         super(card);
     }
 

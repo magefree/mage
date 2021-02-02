@@ -23,7 +23,7 @@ public final class TasteOfBlood extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    public TasteOfBlood(final TasteOfBlood card) {
+    private TasteOfBlood(final TasteOfBlood card) {
         super(card);
     }
 

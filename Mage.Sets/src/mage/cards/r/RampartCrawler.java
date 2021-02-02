@@ -37,7 +37,7 @@ public final class RampartCrawler extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public RampartCrawler(final RampartCrawler card) {
+    private RampartCrawler(final RampartCrawler card) {
         super(card);
     }
 

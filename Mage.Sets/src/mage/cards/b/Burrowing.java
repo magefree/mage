@@ -38,7 +38,7 @@ public final class Burrowing extends CardImpl {
                 new GainAbilityAttachedEffect(new MountainwalkAbility(), AttachmentType.AURA)));
     }
 
-    public Burrowing(final Burrowing card) {
+    private Burrowing(final Burrowing card) {
         super(card);
     }
 

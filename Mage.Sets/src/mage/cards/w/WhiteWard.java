@@ -50,7 +50,7 @@ public final class WhiteWard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public WhiteWard(final WhiteWard card) {
+    private WhiteWard(final WhiteWard card) {
         super(card);
     }
 

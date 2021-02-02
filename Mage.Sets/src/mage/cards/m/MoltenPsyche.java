@@ -33,7 +33,7 @@ public final class MoltenPsyche extends CardImpl {
         this.getSpellAbility().addHint(MetalcraftHint.instance);
     }
 
-    public MoltenPsyche(final MoltenPsyche card) {
+    private MoltenPsyche(final MoltenPsyche card) {
         super(card);
     }
 

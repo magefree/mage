@@ -21,7 +21,7 @@ public final class CowlProwler extends CardImpl {
         this.toughness = new MageInt(6);
     }
 
-    public CowlProwler(final CowlProwler card) {
+    private CowlProwler(final CowlProwler card) {
         super(card);
     }
 

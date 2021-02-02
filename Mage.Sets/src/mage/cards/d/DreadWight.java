@@ -54,7 +54,7 @@ public final class DreadWight extends CardImpl {
 
     }
 
-    public DreadWight(final DreadWight card) {
+    private DreadWight(final DreadWight card) {
         super(card);
     }
 

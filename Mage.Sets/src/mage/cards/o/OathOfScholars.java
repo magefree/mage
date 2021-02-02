@@ -34,7 +34,7 @@ public final class OathOfScholars extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OathOfScholars(final OathOfScholars card) {
+    private OathOfScholars(final OathOfScholars card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class MetalworkColossus extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledArtifactPermanent("two artifacts"), true))));
     }
 
-    public MetalworkColossus(final MetalworkColossus card) {
+    private MetalworkColossus(final MetalworkColossus card) {
         super(card);
     }
 

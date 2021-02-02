@@ -41,7 +41,7 @@ public final class JhessianBalmgiver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JhessianBalmgiver(final JhessianBalmgiver card) {
+    private JhessianBalmgiver(final JhessianBalmgiver card) {
         super(card);
     }
 

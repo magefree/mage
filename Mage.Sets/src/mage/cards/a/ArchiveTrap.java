@@ -39,7 +39,7 @@ public final class ArchiveTrap extends CardImpl {
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(13));
     }
 
-    public ArchiveTrap(final ArchiveTrap card) {
+    private ArchiveTrap(final ArchiveTrap card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class OrcishBloodpainter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrcishBloodpainter(final OrcishBloodpainter card) {
+    private OrcishBloodpainter(final OrcishBloodpainter card) {
         super(card);
     }
 

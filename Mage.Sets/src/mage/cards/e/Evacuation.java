@@ -21,7 +21,7 @@ public final class Evacuation extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(FILTER_PERMANENT_CREATURES));
     }
 
-    public Evacuation(final Evacuation card) {
+    private Evacuation(final Evacuation card) {
         super(card);
     }
 

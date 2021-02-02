@@ -36,7 +36,7 @@ public final class Palinchron extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{2}{U}{U}")));
     }
 
-    public Palinchron(final Palinchron card) {
+    private Palinchron(final Palinchron card) {
         super(card);
     }
 

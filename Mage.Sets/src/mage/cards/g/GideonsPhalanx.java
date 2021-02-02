@@ -36,7 +36,7 @@ public final class GideonsPhalanx extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public GideonsPhalanx(final GideonsPhalanx card) {
+    private GideonsPhalanx(final GideonsPhalanx card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class RushbladeCommander extends CardImpl {
         ));
     }
 
-    public RushbladeCommander(final RushbladeCommander card) {
+    private RushbladeCommander(final RushbladeCommander card) {
         super(card);
     }
 

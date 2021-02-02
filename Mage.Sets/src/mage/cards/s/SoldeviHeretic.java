@@ -44,7 +44,7 @@ public final class SoldeviHeretic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoldeviHeretic(final SoldeviHeretic card) {
+    private SoldeviHeretic(final SoldeviHeretic card) {
         super(card);
     }
 

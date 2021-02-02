@@ -30,7 +30,7 @@ public final class WhirlwindAdept extends CardImpl {
         this.addAbility(new ProwessAbility());
     }
 
-    public WhirlwindAdept(final WhirlwindAdept card) {
+    private WhirlwindAdept(final WhirlwindAdept card) {
         super(card);
     }
 

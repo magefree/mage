@@ -29,7 +29,7 @@ public final class VampireCutthroat extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public VampireCutthroat(final VampireCutthroat card) {
+    private VampireCutthroat(final VampireCutthroat card) {
         super(card);
     }
 

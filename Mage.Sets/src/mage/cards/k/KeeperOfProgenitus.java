@@ -43,7 +43,7 @@ public final class KeeperOfProgenitus extends CardImpl {
                 filter, SetTargetPointer.PERMANENT));
     }
 
-    public KeeperOfProgenitus(final KeeperOfProgenitus card) {
+    private KeeperOfProgenitus(final KeeperOfProgenitus card) {
         super(card);
     }
 

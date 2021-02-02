@@ -23,7 +23,7 @@ public final class DemonsGrasp extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(-5, -5, Duration.EndOfTurn));
     }
 
-    public DemonsGrasp(final DemonsGrasp card) {
+    private DemonsGrasp(final DemonsGrasp card) {
         super(card);
     }
 

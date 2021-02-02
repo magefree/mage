@@ -48,7 +48,7 @@ public final class PrizedAmalgam extends CardImpl {
                 new CastFromGraveyardWatcher());
     }
 
-    public PrizedAmalgam(final PrizedAmalgam card) {
+    private PrizedAmalgam(final PrizedAmalgam card) {
         super(card);
     }
 

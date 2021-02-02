@@ -24,7 +24,7 @@ public final class DoubleCleave extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public DoubleCleave(final DoubleCleave card) {
+    private DoubleCleave(final DoubleCleave card) {
         super(card);
     }
 

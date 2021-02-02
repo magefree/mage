@@ -42,7 +42,7 @@ public final class NimbusNaiad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NimbusNaiad(final NimbusNaiad card) {
+    private NimbusNaiad(final NimbusNaiad card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class Fervor extends CardImpl {
                 HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false)));
     }
 
-    public Fervor(final Fervor card) {
+    private Fervor(final Fervor card) {
         super(card);
     }
 

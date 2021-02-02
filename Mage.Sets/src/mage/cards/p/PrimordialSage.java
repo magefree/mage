@@ -28,7 +28,7 @@ public final class PrimordialSage extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_A_CREATURE, true));
     }
 
-    public PrimordialSage(final PrimordialSage card) {
+    private PrimordialSage(final PrimordialSage card) {
         super(card);
     }
 

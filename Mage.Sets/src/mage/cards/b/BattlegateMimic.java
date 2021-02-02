@@ -47,7 +47,7 @@ public final class BattlegateMimic extends CardImpl {
 
     }
 
-    public BattlegateMimic(final BattlegateMimic card) {
+    private BattlegateMimic(final BattlegateMimic card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class Ulcerate extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(3));
     }
 
-    public Ulcerate(final Ulcerate card) {
+    private Ulcerate(final Ulcerate card) {
         super(card);
     }
 

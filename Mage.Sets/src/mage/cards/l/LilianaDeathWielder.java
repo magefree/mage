@@ -55,7 +55,7 @@ public final class LilianaDeathWielder extends CardImpl {
         this.addAbility(new LoyaltyAbility(new LilianaDeathWielderEffect(), -10));
     }
 
-    public LilianaDeathWielder(final LilianaDeathWielder card) {
+    private LilianaDeathWielder(final LilianaDeathWielder card) {
         super(card);
     }
 

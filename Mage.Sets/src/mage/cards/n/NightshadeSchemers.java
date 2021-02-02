@@ -32,7 +32,7 @@ public final class NightshadeSchemers extends CardImpl {
         this.addAbility(new KinshipAbility(new LoseLifeOpponentsEffect(2)));
     }
 
-    public NightshadeSchemers(final NightshadeSchemers card) {
+    private NightshadeSchemers(final NightshadeSchemers card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class JoltingMerfolk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JoltingMerfolk(final JoltingMerfolk card) {
+    private JoltingMerfolk(final JoltingMerfolk card) {
         super(card);
     }
 

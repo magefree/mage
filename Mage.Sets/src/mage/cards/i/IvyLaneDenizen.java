@@ -47,7 +47,7 @@ public final class IvyLaneDenizen extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IvyLaneDenizen(final IvyLaneDenizen card) {
+    private IvyLaneDenizen(final IvyLaneDenizen card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class NecropolisRegent extends CardImpl {
         this.addAbility(new NecropolisRegentTriggeredAbility());
     }
 
-    public NecropolisRegent(final NecropolisRegent card) {
+    private NecropolisRegent(final NecropolisRegent card) {
         super(card);
     }
 

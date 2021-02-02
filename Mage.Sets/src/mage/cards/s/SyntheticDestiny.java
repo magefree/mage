@@ -33,7 +33,7 @@ public final class SyntheticDestiny extends CardImpl {
         getSpellAbility().addEffect(new SyntheticDestinyEffect());
     }
 
-    public SyntheticDestiny(final SyntheticDestiny card) {
+    private SyntheticDestiny(final SyntheticDestiny card) {
         super(card);
     }
 

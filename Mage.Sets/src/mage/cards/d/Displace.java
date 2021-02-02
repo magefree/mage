@@ -26,7 +26,7 @@ public final class Displace extends CardImpl {
                 .withReturnNames("those cards", "their owner's").concatBy(", then"));
     }
 
-    public Displace(final Displace card) {
+    private Displace(final Displace card) {
         super(card);
     }
 

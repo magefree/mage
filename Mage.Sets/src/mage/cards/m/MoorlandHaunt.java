@@ -38,7 +38,7 @@ public final class MoorlandHaunt extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoorlandHaunt(final MoorlandHaunt card) {
+    private MoorlandHaunt(final MoorlandHaunt card) {
         super(card);
     }
 

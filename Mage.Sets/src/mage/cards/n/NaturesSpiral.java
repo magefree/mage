@@ -23,7 +23,7 @@ public final class NaturesSpiral extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 
-    public NaturesSpiral(final NaturesSpiral card) {
+    private NaturesSpiral(final NaturesSpiral card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class ArmamentCorps extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArmamentCorps(final ArmamentCorps card) {
+    private ArmamentCorps(final ArmamentCorps card) {
         super(card);
     }
 

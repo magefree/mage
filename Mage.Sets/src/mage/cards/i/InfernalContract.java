@@ -23,7 +23,7 @@ public final class InfernalContract extends CardImpl {
         this.getSpellAbility().addEffect(new LoseHalfLifeEffect());
     }
 
-    public InfernalContract(final InfernalContract card) {
+    private InfernalContract(final InfernalContract card) {
         super(card);
     }
 

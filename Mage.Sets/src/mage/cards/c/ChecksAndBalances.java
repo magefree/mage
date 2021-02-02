@@ -34,7 +34,7 @@ public final class ChecksAndBalances extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new ChecksAndBalancesEffect(), new FilterSpell("a spell"), false, SetTargetPointer.SPELL));
     }
 
-    public ChecksAndBalances(final ChecksAndBalances card) {
+    private ChecksAndBalances(final ChecksAndBalances card) {
         super(card);
     }
 

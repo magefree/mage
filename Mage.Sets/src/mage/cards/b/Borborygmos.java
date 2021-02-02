@@ -34,7 +34,7 @@ public final class Borborygmos extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()), false));
     }
 
-    public Borborygmos(final Borborygmos card) {
+    private Borborygmos(final Borborygmos card) {
         super(card);
     }
 

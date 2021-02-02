@@ -23,7 +23,7 @@ public final class Disempower extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
-    public Disempower(final Disempower card) {
+    private Disempower(final Disempower card) {
         super(card);
     }
 

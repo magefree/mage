@@ -38,7 +38,7 @@ public final class PossessedPortal extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new PossessedPortalEffect(), TargetController.ANY, false));
     }
 
-    public PossessedPortal(final PossessedPortal card) {
+    private PossessedPortal(final PossessedPortal card) {
         super(card);
     }
 

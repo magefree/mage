@@ -29,7 +29,7 @@ public final class RestlessDead extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public RestlessDead(final RestlessDead card) {
+    private RestlessDead(final RestlessDead card) {
         super(card);
     }
 

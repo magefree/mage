@@ -31,7 +31,7 @@ public final class Chill extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(2, filter, TargetController.ANY)));
     }
 
-    public Chill(final Chill card) {
+    private Chill(final Chill card) {
         super(card);
     }
 

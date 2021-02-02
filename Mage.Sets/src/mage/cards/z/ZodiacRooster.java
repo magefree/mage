@@ -26,7 +26,7 @@ public final class ZodiacRooster extends CardImpl {
         this.addAbility(new PlainswalkAbility());
     }
 
-    public ZodiacRooster(final ZodiacRooster card) {
+    private ZodiacRooster(final ZodiacRooster card) {
         super(card);
     }
 

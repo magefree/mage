@@ -46,7 +46,7 @@ public final class GoblinWarPaint extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinWarPaint(final GoblinWarPaint card) {
+    private GoblinWarPaint(final GoblinWarPaint card) {
         super(card);
     }
 

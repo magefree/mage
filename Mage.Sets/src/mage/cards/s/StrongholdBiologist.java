@@ -38,7 +38,7 @@ public final class StrongholdBiologist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StrongholdBiologist(final StrongholdBiologist card) {
+    private StrongholdBiologist(final StrongholdBiologist card) {
         super(card);
     }
 

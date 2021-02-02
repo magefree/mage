@@ -37,7 +37,7 @@ public final class EldraziSkyspawner extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
     }
 
-    public EldraziSkyspawner(final EldraziSkyspawner card) {
+    private EldraziSkyspawner(final EldraziSkyspawner card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class MacabreWaltz extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardControllerEffect(1).setText(", then discard a card"));
     }
 
-    public MacabreWaltz(final MacabreWaltz card) {
+    private MacabreWaltz(final MacabreWaltz card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class MyrWelder extends CardImpl {
 
     }
 
-    public MyrWelder(final MyrWelder card) {
+    private MyrWelder(final MyrWelder card) {
         super(card);
     }
 

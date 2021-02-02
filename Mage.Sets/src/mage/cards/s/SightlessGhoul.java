@@ -30,7 +30,7 @@ public final class SightlessGhoul extends CardImpl {
         this.addAbility(new UndyingAbility());
     }
 
-    public SightlessGhoul(final SightlessGhoul card) {
+    private SightlessGhoul(final SightlessGhoul card) {
         super(card);
     }
 

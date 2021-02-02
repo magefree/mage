@@ -44,7 +44,7 @@ public final class WanderingChampion extends CardImpl {
 
     }
 
-    public WanderingChampion(final WanderingChampion card) {
+    private WanderingChampion(final WanderingChampion card) {
         super(card);
     }
 

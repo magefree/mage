@@ -53,7 +53,7 @@ public final class HealersHeaddress extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
-    public HealersHeaddress(final HealersHeaddress card) {
+    private HealersHeaddress(final HealersHeaddress card) {
         super(card);
     }
 

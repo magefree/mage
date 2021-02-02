@@ -42,7 +42,7 @@ public final class RafterDemon extends CardImpl {
         ));
     }
 
-    public RafterDemon(final RafterDemon card) {
+    private RafterDemon(final RafterDemon card) {
         super(card);
     }
 

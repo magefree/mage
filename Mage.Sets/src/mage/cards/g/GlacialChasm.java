@@ -39,7 +39,7 @@ public final class GlacialChasm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.WhileOnBattlefield)));
     }
 
-    public GlacialChasm(final GlacialChasm card) {
+    private GlacialChasm(final GlacialChasm card) {
         super(card);
     }
 

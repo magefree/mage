@@ -31,7 +31,7 @@ public final class SoulBarrier extends CardImpl {
                 StaticFilters.FILTER_SPELL_A_CREATURE, false, SetTargetPointer.PLAYER));
     }
 
-    public SoulBarrier(final SoulBarrier card) {
+    private SoulBarrier(final SoulBarrier card) {
         super(card);
     }
 

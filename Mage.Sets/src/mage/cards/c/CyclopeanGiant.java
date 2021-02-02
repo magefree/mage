@@ -33,7 +33,7 @@ public final class CyclopeanGiant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CyclopeanGiant(final CyclopeanGiant card) {
+    private CyclopeanGiant(final CyclopeanGiant card) {
         super(card);
     }
 

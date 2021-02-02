@@ -25,7 +25,7 @@ public final class Congregate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Congregate(final Congregate card) {
+    private Congregate(final Congregate card) {
         super(card);
     }
 

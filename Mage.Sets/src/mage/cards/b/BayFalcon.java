@@ -29,7 +29,7 @@ public final class BayFalcon extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public BayFalcon(final BayFalcon card) {
+    private BayFalcon(final BayFalcon card) {
         super(card);
     }
 

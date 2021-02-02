@@ -39,7 +39,7 @@ public final class AzoriusAethermage extends CardImpl {
         this.addAbility(new AzoriusAEthermageAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.HAND, effect, new FilterPermanent(), rule, false));
     }
 
-    public AzoriusAethermage(final AzoriusAethermage card) {
+    private AzoriusAethermage(final AzoriusAethermage card) {
         super(card);
     }
 

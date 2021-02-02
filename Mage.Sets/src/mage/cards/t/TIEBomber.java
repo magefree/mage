@@ -40,7 +40,7 @@ public final class TIEBomber extends CardImpl {
                 "{1}: {this} loses Spaceflight until end od turn. Activate this ability only during combat."));
     }
 
-    public TIEBomber(final TIEBomber card) {
+    private TIEBomber(final TIEBomber card) {
         super(card);
     }
 

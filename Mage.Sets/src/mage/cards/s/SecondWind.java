@@ -40,7 +40,7 @@ public final class SecondWind extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapEnchantedEffect(), new TapSourceCost()));
     }
 
-    public SecondWind(final SecondWind card) {
+    private SecondWind(final SecondWind card) {
         super(card);
     }
 

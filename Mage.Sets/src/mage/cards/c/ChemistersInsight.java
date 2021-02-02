@@ -23,7 +23,7 @@ public final class ChemistersInsight extends CardImpl {
         this.addAbility(new JumpStartAbility(this));
     }
 
-    public ChemistersInsight(final ChemistersInsight card) {
+    private ChemistersInsight(final ChemistersInsight card) {
         super(card);
     }
 

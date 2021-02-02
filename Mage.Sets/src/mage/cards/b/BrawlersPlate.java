@@ -36,7 +36,7 @@ public final class BrawlersPlate extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
     }
 
-    public BrawlersPlate(final BrawlersPlate card) {
+    private BrawlersPlate(final BrawlersPlate card) {
         super(card);
     }
 

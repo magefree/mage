@@ -37,7 +37,7 @@ public final class HeroicReinforcements extends CardImpl {
         );
     }
 
-    public HeroicReinforcements(final HeroicReinforcements card) {
+    private HeroicReinforcements(final HeroicReinforcements card) {
         super(card);
     }
 

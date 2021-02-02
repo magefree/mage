@@ -34,7 +34,7 @@ public final class AvenFlock extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public AvenFlock(final AvenFlock card) {
+    private AvenFlock(final AvenFlock card) {
         super(card);
     }
 

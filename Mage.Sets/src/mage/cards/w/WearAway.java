@@ -31,7 +31,7 @@ public final class WearAway extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{3}{G}"));
     }
 
-    public WearAway(final WearAway card) {
+    private WearAway(final WearAway card) {
         super(card);
     }
 

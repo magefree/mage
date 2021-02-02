@@ -32,7 +32,7 @@ public final class Tarmogoyf extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new TarmogoyfEffect()).addHint(TarmogoyfHint.instance));
     }
 
-    public Tarmogoyf(final Tarmogoyf card) {
+    private Tarmogoyf(final Tarmogoyf card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class DazzlingLights extends CardImpl {
         this.getSpellAbility().addEffect(new SurveilEffect(2));
     }
 
-    public DazzlingLights(final DazzlingLights card) {
+    private DazzlingLights(final DazzlingLights card) {
         super(card);
     }
 

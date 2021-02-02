@@ -33,7 +33,7 @@ public final class MindSludge extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardTargetEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public MindSludge(final MindSludge card) {
+    private MindSludge(final MindSludge card) {
         super(card);
     }
 

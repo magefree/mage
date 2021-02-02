@@ -49,7 +49,7 @@ public final class DaughterOfAutumn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DaughterOfAutumn(final DaughterOfAutumn card) {
+    private DaughterOfAutumn(final DaughterOfAutumn card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class KorlashHeirToBlackblade extends CardImpl {
         this.addAbility(new GrandeurAbility(effect, "Korlash, Heir to Blackblade"));
     }
 
-    public KorlashHeirToBlackblade(final KorlashHeirToBlackblade card) {
+    private KorlashHeirToBlackblade(final KorlashHeirToBlackblade card) {
         super(card);
     }
 

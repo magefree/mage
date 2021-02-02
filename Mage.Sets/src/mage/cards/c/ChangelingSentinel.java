@@ -26,7 +26,7 @@ public final class ChangelingSentinel extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public ChangelingSentinel(final ChangelingSentinel card) {
+    private ChangelingSentinel(final ChangelingSentinel card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class FactOrFiction extends CardImpl {
         this.getSpellAbility().addEffect(new FactOrFictionEffect());
     }
 
-    public FactOrFiction(final FactOrFiction card) {
+    private FactOrFiction(final FactOrFiction card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class WordOfBlasting extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public WordOfBlasting(final WordOfBlasting card) {
+    private WordOfBlasting(final WordOfBlasting card) {
         super(card);
     }
 

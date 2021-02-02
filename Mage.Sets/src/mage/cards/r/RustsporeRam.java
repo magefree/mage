@@ -35,7 +35,7 @@ public final class RustsporeRam extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RustsporeRam(final RustsporeRam card) {
+    private RustsporeRam(final RustsporeRam card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class OneOfThePack extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public OneOfThePack(final OneOfThePack card) {
+    private OneOfThePack(final OneOfThePack card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class LightningMauler extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(HasteAbility.getInstance(), ruleText)));
     }
 
-    public LightningMauler(final LightningMauler card) {
+    private LightningMauler(final LightningMauler card) {
         super(card);
     }
 

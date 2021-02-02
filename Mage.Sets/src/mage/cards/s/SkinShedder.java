@@ -26,7 +26,7 @@ public final class SkinShedder extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public SkinShedder(final SkinShedder card) {
+    private SkinShedder(final SkinShedder card) {
         super(card);
     }
 

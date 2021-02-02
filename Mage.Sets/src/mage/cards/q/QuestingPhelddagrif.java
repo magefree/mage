@@ -58,7 +58,7 @@ public final class QuestingPhelddagrif extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuestingPhelddagrif(final QuestingPhelddagrif card) {
+    private QuestingPhelddagrif(final QuestingPhelddagrif card) {
         super(card);
     }
 

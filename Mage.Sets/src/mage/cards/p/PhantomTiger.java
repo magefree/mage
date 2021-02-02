@@ -33,7 +33,7 @@ public final class PhantomTiger extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhantomPreventionEffect()));
     }
 
-    public PhantomTiger(final PhantomTiger card) {
+    private PhantomTiger(final PhantomTiger card) {
         super(card);
     }
 

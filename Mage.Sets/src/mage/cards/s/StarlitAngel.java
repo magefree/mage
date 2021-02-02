@@ -26,7 +26,7 @@ public final class StarlitAngel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public StarlitAngel(final StarlitAngel card) {
+    private StarlitAngel(final StarlitAngel card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class GrimMonolith extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{4}")));
     }
 
-    public GrimMonolith(final GrimMonolith card) {
+    private GrimMonolith(final GrimMonolith card) {
         super(card);
     }
 

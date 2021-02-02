@@ -39,7 +39,7 @@ public final class MemorialToWar extends CardImpl {
 
     }
 
-    public MemorialToWar(final MemorialToWar card) {
+    private MemorialToWar(final MemorialToWar card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class ZulaportEnforcer extends LevelerCard {
         setMaxLevelCounters(3);
     }
 
-    public ZulaportEnforcer(final ZulaportEnforcer card) {
+    private ZulaportEnforcer(final ZulaportEnforcer card) {
         super(card);
     }
 

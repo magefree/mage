@@ -48,7 +48,7 @@ public final class BazaarTrader extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BazaarTrader(final BazaarTrader card) {
+    private BazaarTrader(final BazaarTrader card) {
         super(card);
     }
 

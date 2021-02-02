@@ -38,7 +38,7 @@ public final class ShiftingSky extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShiftingSkyEffect()));
     }
 
-    public ShiftingSky(final ShiftingSky card) {
+    private ShiftingSky(final ShiftingSky card) {
         super(card);
     }
 

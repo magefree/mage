@@ -28,7 +28,7 @@ public final class FeudkillersVerdict extends CardImpl {
         this.getSpellAbility().addEffect(new FeudkillersVerdictEffect());
     }
 
-    public FeudkillersVerdict(final FeudkillersVerdict card) {
+    private FeudkillersVerdict(final FeudkillersVerdict card) {
         super(card);
     }
 

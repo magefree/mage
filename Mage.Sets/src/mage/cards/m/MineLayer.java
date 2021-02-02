@@ -55,7 +55,7 @@ public final class MineLayer extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new RemoveAllMineCountersEffect(), false));
     }
 
-    public MineLayer(final MineLayer card) {
+    private MineLayer(final MineLayer card) {
         super(card);
     }
 

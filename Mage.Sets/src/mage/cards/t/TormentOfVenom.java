@@ -36,7 +36,7 @@ public final class TormentOfVenom extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TormentOfVenom(final TormentOfVenom card) {
+    private TormentOfVenom(final TormentOfVenom card) {
         super(card);
     }
 

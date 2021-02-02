@@ -29,7 +29,7 @@ public final class PlatinumEmperion extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LifeTotalCantChangeControllerEffect(Duration.WhileOnBattlefield)));
     }
 
-    public PlatinumEmperion(final PlatinumEmperion card) {
+    private PlatinumEmperion(final PlatinumEmperion card) {
         super(card);
     }
 

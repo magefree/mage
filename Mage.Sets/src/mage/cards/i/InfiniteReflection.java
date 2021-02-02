@@ -53,7 +53,7 @@ public final class InfiniteReflection extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfiniteReflectionEntersBattlefieldEffect()));
     }
 
-    public InfiniteReflection(final InfiniteReflection card) {
+    private InfiniteReflection(final InfiniteReflection card) {
         super(card);
     }
 

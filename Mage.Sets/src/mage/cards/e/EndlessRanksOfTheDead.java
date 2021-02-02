@@ -32,7 +32,7 @@ public final class EndlessRanksOfTheDead extends CardImpl {
 
     }
 
-    public EndlessRanksOfTheDead(final EndlessRanksOfTheDead card) {
+    private EndlessRanksOfTheDead(final EndlessRanksOfTheDead card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class FontOfFortunes extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public FontOfFortunes(final FontOfFortunes card) {
+    private FontOfFortunes(final FontOfFortunes card) {
         super(card);
     }
 

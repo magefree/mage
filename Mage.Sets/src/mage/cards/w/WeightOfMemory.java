@@ -26,7 +26,7 @@ public final class WeightOfMemory extends CardImpl {
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(3));
     }
 
-    public WeightOfMemory(final WeightOfMemory card) {
+    private WeightOfMemory(final WeightOfMemory card) {
         super(card);
     }
 

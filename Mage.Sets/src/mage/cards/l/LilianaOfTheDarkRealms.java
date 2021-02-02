@@ -51,7 +51,7 @@ public final class LilianaOfTheDarkRealms extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new LilianaOfTheDarkRealmsEmblem()), -6));
     }
 
-    public LilianaOfTheDarkRealms(final LilianaOfTheDarkRealms card) {
+    private LilianaOfTheDarkRealms(final LilianaOfTheDarkRealms card) {
         super(card);
     }
 

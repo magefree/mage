@@ -22,7 +22,7 @@ public final class Ruination extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(FilterLandPermanent.nonbasicLands()));
     }
 
-    public Ruination(final Ruination card) {
+    private Ruination(final Ruination card) {
         super(card);
     }
 

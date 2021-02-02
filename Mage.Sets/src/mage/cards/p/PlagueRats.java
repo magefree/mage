@@ -39,7 +39,7 @@ public final class PlagueRats extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(amount, Duration.EndOfGame)));
     }
 
-    public PlagueRats(final PlagueRats card) {
+    private PlagueRats(final PlagueRats card) {
         super(card);
     }
 

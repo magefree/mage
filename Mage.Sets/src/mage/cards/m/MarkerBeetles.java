@@ -40,7 +40,7 @@ public final class MarkerBeetles extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MarkerBeetles(final MarkerBeetles card) {
+    private MarkerBeetles(final MarkerBeetles card) {
         super(card);
     }
 

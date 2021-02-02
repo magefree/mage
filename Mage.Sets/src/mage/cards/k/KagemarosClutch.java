@@ -47,7 +47,7 @@ public final class KagemarosClutch extends CardImpl {
 
     }
 
-    public KagemarosClutch(final KagemarosClutch card) {
+    private KagemarosClutch(final KagemarosClutch card) {
         super(card);
     }
 

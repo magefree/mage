@@ -37,7 +37,7 @@ public final class PetrifiedField extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PetrifiedField(final PetrifiedField card) {
+    private PetrifiedField(final PetrifiedField card) {
         super(card);
     }
 

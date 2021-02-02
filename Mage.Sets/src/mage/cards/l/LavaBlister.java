@@ -26,7 +26,7 @@ public final class LavaBlister extends CardImpl {
         this.getSpellAbility().addEffect(new LavaBlisterEffect());
     }
 
-    public LavaBlister(final LavaBlister card) {
+    private LavaBlister(final LavaBlister card) {
         super(card);
     }
 

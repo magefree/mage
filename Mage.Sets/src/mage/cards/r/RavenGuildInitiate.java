@@ -37,7 +37,7 @@ public final class RavenGuildInitiate extends CardImpl {
 
     }
 
-    public RavenGuildInitiate(final RavenGuildInitiate card) {
+    private RavenGuildInitiate(final RavenGuildInitiate card) {
         super(card);
     }
 

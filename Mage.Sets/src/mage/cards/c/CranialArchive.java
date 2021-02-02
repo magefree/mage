@@ -34,7 +34,7 @@ public final class CranialArchive extends CardImpl {
 
     }
 
-    public CranialArchive(final CranialArchive card) {
+    private CranialArchive(final CranialArchive card) {
         super(card);
     }
 

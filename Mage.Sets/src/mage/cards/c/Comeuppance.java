@@ -33,7 +33,7 @@ public final class Comeuppance extends CardImpl {
 
     }
 
-    public Comeuppance(final Comeuppance card) {
+    private Comeuppance(final Comeuppance card) {
         super(card);
     }
 

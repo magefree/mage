@@ -42,7 +42,7 @@ public final class MarkOfTheVampire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MarkOfTheVampire(final MarkOfTheVampire card) {
+    private MarkOfTheVampire(final MarkOfTheVampire card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class SlipperyScoundrel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SlipperyScoundrel(final SlipperyScoundrel card) {
+    private SlipperyScoundrel(final SlipperyScoundrel card) {
         super(card);
     }
 

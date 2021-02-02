@@ -43,7 +43,7 @@ public final class GhirapurGuide extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhirapurGuide(final GhirapurGuide card) {
+    private GhirapurGuide(final GhirapurGuide card) {
         super(card);
     }
 

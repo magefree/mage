@@ -25,7 +25,7 @@ public final class EldraziDevastator extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public EldraziDevastator(final EldraziDevastator card) {
+    private EldraziDevastator(final EldraziDevastator card) {
         super(card);
     }
 

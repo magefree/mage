@@ -21,7 +21,7 @@ public final class AncientCarp extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public AncientCarp(final AncientCarp card) {
+    private AncientCarp(final AncientCarp card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class HowlOfTheNightPack extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WolfToken(), new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public HowlOfTheNightPack(final HowlOfTheNightPack card) {
+    private HowlOfTheNightPack(final HowlOfTheNightPack card) {
         super(card);
     }
 

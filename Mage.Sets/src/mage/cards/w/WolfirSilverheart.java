@@ -34,7 +34,7 @@ public final class WolfirSilverheart extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostPairedEffect(4, 4, ruleText)));
     }
 
-    public WolfirSilverheart(final WolfirSilverheart card) {
+    private WolfirSilverheart(final WolfirSilverheart card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class SurvivorOfTheUnseen extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SurvivorOfTheUnseenEffect(), new TapSourceCost()));
     }
 
-    public SurvivorOfTheUnseen(final SurvivorOfTheUnseen card) {
+    private SurvivorOfTheUnseen(final SurvivorOfTheUnseen card) {
         super(card);
     }
 

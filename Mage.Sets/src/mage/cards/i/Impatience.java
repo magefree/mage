@@ -32,7 +32,7 @@ public final class Impatience extends CardImpl {
             new ImpatienceCondition(), false));
     }
 
-    public Impatience(final Impatience card) {
+    private Impatience(final Impatience card) {
         super(card);
     }
 

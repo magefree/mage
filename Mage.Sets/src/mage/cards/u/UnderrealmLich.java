@@ -55,7 +55,7 @@ public final class UnderrealmLich extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnderrealmLich(final UnderrealmLich card) {
+    private UnderrealmLich(final UnderrealmLich card) {
         super(card);
     }
 

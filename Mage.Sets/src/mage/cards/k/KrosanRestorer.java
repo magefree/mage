@@ -46,7 +46,7 @@ public final class KrosanRestorer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KrosanRestorer(final KrosanRestorer card) {
+    private KrosanRestorer(final KrosanRestorer card) {
         super(card);
     }
 

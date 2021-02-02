@@ -27,7 +27,7 @@ public final class SoulsMajesty extends CardImpl {
         this.getSpellAbility().addEffect(new SoulsMajestyEffect());
     }
 
-    public SoulsMajesty(final SoulsMajesty card) {
+    private SoulsMajesty(final SoulsMajesty card) {
         super(card);
     }
 

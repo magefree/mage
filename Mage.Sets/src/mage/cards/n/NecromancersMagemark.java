@@ -58,7 +58,7 @@ public final class NecromancersMagemark extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NecromancersMagemarkEffect()));
     }
 
-    public NecromancersMagemark(final NecromancersMagemark card) {
+    private NecromancersMagemark(final NecromancersMagemark card) {
         super(card);
     }
 

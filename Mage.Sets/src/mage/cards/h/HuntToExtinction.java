@@ -42,7 +42,7 @@ public final class HuntToExtinction extends CardImpl {
 
     }
 
-    public HuntToExtinction(final HuntToExtinction card) {
+    private HuntToExtinction(final HuntToExtinction card) {
         super(card);
     }
 

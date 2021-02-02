@@ -21,7 +21,7 @@ public final class MarrowShards extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterAttackingCreature()));
     }
 
-    public MarrowShards(final MarrowShards card) {
+    private MarrowShards(final MarrowShards card) {
         super(card);
     }
 

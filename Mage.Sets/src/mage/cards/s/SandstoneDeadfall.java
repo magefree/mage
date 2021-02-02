@@ -34,7 +34,7 @@ public final class SandstoneDeadfall extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SandstoneDeadfall(final SandstoneDeadfall card) {
+    private SandstoneDeadfall(final SandstoneDeadfall card) {
         super(card);
     }
 

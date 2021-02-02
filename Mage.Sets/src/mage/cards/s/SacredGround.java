@@ -28,7 +28,7 @@ public final class SacredGround extends CardImpl {
         this.addAbility(new SacredGroundTriggeredAbility());
     }
 
-    public SacredGround(final SacredGround card) {
+    private SacredGround(final SacredGround card) {
         super(card);
     }
 

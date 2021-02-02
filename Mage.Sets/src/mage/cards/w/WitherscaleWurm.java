@@ -42,7 +42,7 @@ public final class WitherscaleWurm extends CardImpl {
 
     }
 
-    public WitherscaleWurm(final WitherscaleWurm card) {
+    private WitherscaleWurm(final WitherscaleWurm card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class KithkinZealot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KithkinZealot(final KithkinZealot card) {
+    private KithkinZealot(final KithkinZealot card) {
         super(card);
     }
 

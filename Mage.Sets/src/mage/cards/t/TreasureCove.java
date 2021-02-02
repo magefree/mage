@@ -42,7 +42,7 @@ public final class TreasureCove extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TreasureCove(final TreasureCove card) {
+    private TreasureCove(final TreasureCove card) {
         super(card);
     }
 

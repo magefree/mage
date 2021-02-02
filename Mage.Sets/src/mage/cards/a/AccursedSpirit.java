@@ -26,7 +26,7 @@ public final class AccursedSpirit extends CardImpl {
         this.addAbility(IntimidateAbility.getInstance());
     }
 
-    public AccursedSpirit(final AccursedSpirit card) {
+    private AccursedSpirit(final AccursedSpirit card) {
         super(card);
     }
 

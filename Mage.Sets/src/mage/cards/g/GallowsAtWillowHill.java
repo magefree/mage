@@ -49,7 +49,7 @@ public final class GallowsAtWillowHill extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GallowsAtWillowHill(final GallowsAtWillowHill card) {
+    private GallowsAtWillowHill(final GallowsAtWillowHill card) {
         super(card);
     }
 

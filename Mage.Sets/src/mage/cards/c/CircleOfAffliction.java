@@ -39,7 +39,7 @@ public final class CircleOfAffliction extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CircleOfAffliction(final CircleOfAffliction card) {
+    private CircleOfAffliction(final CircleOfAffliction card) {
         super(card);
     }
 

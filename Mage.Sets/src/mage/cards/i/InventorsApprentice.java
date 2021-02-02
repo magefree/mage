@@ -36,7 +36,7 @@ public final class InventorsApprentice extends CardImpl {
             new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent()), rule)));
     }
 
-    public InventorsApprentice(final InventorsApprentice card) {
+    private InventorsApprentice(final InventorsApprentice card) {
         super(card);
     }
 

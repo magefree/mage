@@ -26,7 +26,7 @@ public final class BenalishVeteran extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
     }
 
-    public BenalishVeteran(final BenalishVeteran card) {
+    private BenalishVeteran(final BenalishVeteran card) {
         super(card);
     }
 

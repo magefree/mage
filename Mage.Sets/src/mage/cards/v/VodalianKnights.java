@@ -45,7 +45,7 @@ public final class VodalianKnights extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}")));
     }
 
-    public VodalianKnights(final VodalianKnights card) {
+    private VodalianKnights(final VodalianKnights card) {
         super(card);
     }
 

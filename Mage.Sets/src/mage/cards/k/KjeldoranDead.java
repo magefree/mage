@@ -36,7 +36,7 @@ public final class KjeldoranDead extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public KjeldoranDead(final KjeldoranDead card) {
+    private KjeldoranDead(final KjeldoranDead card) {
         super(card);
     }
 

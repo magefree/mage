@@ -22,7 +22,7 @@ public final class BearCub extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public BearCub(final BearCub card) {
+    private BearCub(final BearCub card) {
         super(card);
     }
 

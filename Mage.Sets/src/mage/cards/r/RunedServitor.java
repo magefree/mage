@@ -24,7 +24,7 @@ public final class RunedServitor extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardAllEffect(1), false));
     }
 
-    public RunedServitor(final RunedServitor card) {
+    private RunedServitor(final RunedServitor card) {
         super(card);
     }
 

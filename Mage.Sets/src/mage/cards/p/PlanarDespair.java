@@ -29,7 +29,7 @@ public final class PlanarDespair extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public PlanarDespair(final PlanarDespair card) {
+    private PlanarDespair(final PlanarDespair card) {
         super(card);
     }
 

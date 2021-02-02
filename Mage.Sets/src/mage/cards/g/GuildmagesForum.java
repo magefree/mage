@@ -42,7 +42,7 @@ public final class GuildmagesForum extends CardImpl {
         this.addAbility(ability, new GuildmagesForumWatcher(ability));
     }
 
-    public GuildmagesForum(final GuildmagesForum card) {
+    private GuildmagesForum(final GuildmagesForum card) {
         super(card);
     }
 

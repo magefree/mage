@@ -26,7 +26,7 @@ public final class BadRiver extends CardImpl {
 
     }
 
-    public BadRiver(final BadRiver card) {
+    private BadRiver(final BadRiver card) {
         super(card);
     }
 

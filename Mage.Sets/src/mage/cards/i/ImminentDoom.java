@@ -40,7 +40,7 @@ public final class ImminentDoom extends CardImpl {
 
     }
 
-    public ImminentDoom(final ImminentDoom card) {
+    private ImminentDoom(final ImminentDoom card) {
         super(card);
     }
 

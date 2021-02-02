@@ -36,7 +36,7 @@ public final class SaheelisArtistry extends CardImpl {
         this.getSpellAbility().addMode(mode1);
     }
 
-    public SaheelisArtistry(final SaheelisArtistry card) {
+    private SaheelisArtistry(final SaheelisArtistry card) {
         super(card);
     }
 

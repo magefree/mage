@@ -57,7 +57,7 @@ public final class TheFirstEruption extends CardImpl {
         this.addAbility(sagaAbility);
     }
 
-    public TheFirstEruption(final TheFirstEruption card) {
+    private TheFirstEruption(final TheFirstEruption card) {
         super(card);
     }
 

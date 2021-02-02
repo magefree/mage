@@ -44,7 +44,7 @@ public final class LumengridDrake extends CardImpl {
         this.addAbility(conditional);
     }
 
-    public LumengridDrake(final LumengridDrake card) {
+    private LumengridDrake(final LumengridDrake card) {
         super(card);
     }
 

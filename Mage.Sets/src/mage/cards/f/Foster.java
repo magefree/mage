@@ -28,7 +28,7 @@ public final class Foster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Foster(final Foster card) {
+    private Foster(final Foster card) {
         super(card);
     }
 

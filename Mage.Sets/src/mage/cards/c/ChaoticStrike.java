@@ -39,7 +39,7 @@ public final class ChaoticStrike extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public ChaoticStrike(final ChaoticStrike card) {
+    private ChaoticStrike(final ChaoticStrike card) {
         super(card);
     }
 

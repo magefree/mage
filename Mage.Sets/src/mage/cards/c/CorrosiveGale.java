@@ -30,7 +30,7 @@ public final class CorrosiveGale extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.instance, filter));
     }
 
-    public CorrosiveGale(final CorrosiveGale card) {
+    private CorrosiveGale(final CorrosiveGale card) {
         super(card);
     }
 

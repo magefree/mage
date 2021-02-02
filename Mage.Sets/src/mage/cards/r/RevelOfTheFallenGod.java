@@ -22,7 +22,7 @@ public final class RevelOfTheFallenGod extends CardImpl {
 
     }
 
-    public RevelOfTheFallenGod(final RevelOfTheFallenGod card) {
+    private RevelOfTheFallenGod(final RevelOfTheFallenGod card) {
         super(card);
     }
 

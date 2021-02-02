@@ -40,7 +40,7 @@ public final class ImposingVisage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.AURA)));
     }
 
-    public ImposingVisage(final ImposingVisage card) {
+    private ImposingVisage(final ImposingVisage card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class MilitaryIntelligence extends CardImpl {
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new DrawCardSourceControllerEffect(1), 2));
     }
 
-    public MilitaryIntelligence(final MilitaryIntelligence card) {
+    private MilitaryIntelligence(final MilitaryIntelligence card) {
         super(card);
     }
 

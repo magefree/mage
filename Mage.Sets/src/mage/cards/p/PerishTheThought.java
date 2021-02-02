@@ -30,7 +30,7 @@ public final class PerishTheThought extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public PerishTheThought(final PerishTheThought card) {
+    private PerishTheThought(final PerishTheThought card) {
         super(card);
     }
 

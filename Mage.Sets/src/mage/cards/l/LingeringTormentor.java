@@ -29,7 +29,7 @@ public final class LingeringTormentor extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public LingeringTormentor(final LingeringTormentor card) {
+    private LingeringTormentor(final LingeringTormentor card) {
         super(card);
     }
 

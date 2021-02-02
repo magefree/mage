@@ -41,7 +41,7 @@ public final class Necrite extends CardImpl {
         
     }
 
-    public Necrite(final Necrite card) {
+    private Necrite(final Necrite card) {
         super(card);
     }
 

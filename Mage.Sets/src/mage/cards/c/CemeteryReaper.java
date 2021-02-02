@@ -50,7 +50,7 @@ public final class CemeteryReaper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CemeteryReaper(final CemeteryReaper card) {
+    private CemeteryReaper(final CemeteryReaper card) {
         super(card);
     }
 

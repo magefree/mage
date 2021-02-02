@@ -29,7 +29,7 @@ public final class TributeToHunger extends CardImpl {
         this.getSpellAbility().addEffect(new TributeToHungerEffect());
     }
 
-    public TributeToHunger(final TributeToHunger card) {
+    private TributeToHunger(final TributeToHunger card) {
         super(card);
     }
 

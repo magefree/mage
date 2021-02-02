@@ -32,7 +32,7 @@ public final class SteadfastCathar extends CardImpl {
 
     }
 
-    public SteadfastCathar(final SteadfastCathar card) {
+    private SteadfastCathar(final SteadfastCathar card) {
         super(card);
     }
 

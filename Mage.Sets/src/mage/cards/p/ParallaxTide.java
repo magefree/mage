@@ -36,7 +36,7 @@ public final class ParallaxTide extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false));
     }
 
-    public ParallaxTide(final ParallaxTide card) {
+    private ParallaxTide(final ParallaxTide card) {
         super(card);
     }
 

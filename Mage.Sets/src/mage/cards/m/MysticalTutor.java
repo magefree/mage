@@ -31,7 +31,7 @@ public final class MysticalTutor extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true));
     }
 
-    public MysticalTutor(final MysticalTutor card) {
+    private MysticalTutor(final MysticalTutor card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class BlindingFog extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURE, false));
     }
 
-    public BlindingFog(final BlindingFog card) {
+    private BlindingFog(final BlindingFog card) {
         super(card);
     }
 

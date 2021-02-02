@@ -25,7 +25,7 @@ public final class Reminisce extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Reminisce(final Reminisce card) {
+    private Reminisce(final Reminisce card) {
         super(card);
     }
 

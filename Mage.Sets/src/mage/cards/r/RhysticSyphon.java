@@ -28,7 +28,7 @@ public final class RhysticSyphon extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public RhysticSyphon(final RhysticSyphon card) {
+    private RhysticSyphon(final RhysticSyphon card) {
         super(card);
     }
 

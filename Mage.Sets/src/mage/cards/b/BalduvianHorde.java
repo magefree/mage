@@ -28,7 +28,7 @@ public final class BalduvianHorde extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardCardCost(true))));
     }
 
-    public BalduvianHorde(final BalduvianHorde card) {
+    private BalduvianHorde(final BalduvianHorde card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class HeavyFog extends CardImpl {
         this.getSpellAbility().addEffect(new HeavyFogEffect());
     }
 
-    public HeavyFog(final HeavyFog card) {
+    private HeavyFog(final HeavyFog card) {
         super(card);
     }
 

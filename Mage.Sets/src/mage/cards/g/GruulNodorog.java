@@ -31,7 +31,7 @@ public final class GruulNodorog extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public GruulNodorog(final GruulNodorog card) {
+    private GruulNodorog(final GruulNodorog card) {
         super(card);
     }
 

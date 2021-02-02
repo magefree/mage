@@ -47,7 +47,7 @@ public final class FairgroundsWarden extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FairgroundsWarden(final FairgroundsWarden card) {
+    private FairgroundsWarden(final FairgroundsWarden card) {
         super(card);
     }
 

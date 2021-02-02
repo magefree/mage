@@ -24,7 +24,7 @@ public final class Resupply extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Resupply(final Resupply card) {
+    private Resupply(final Resupply card) {
         super(card);
     }
 

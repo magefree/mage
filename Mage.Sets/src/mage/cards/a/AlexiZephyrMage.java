@@ -46,7 +46,7 @@ public final class AlexiZephyrMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AlexiZephyrMage(final AlexiZephyrMage card) {
+    private AlexiZephyrMage(final AlexiZephyrMage card) {
         super(card);
     }
 

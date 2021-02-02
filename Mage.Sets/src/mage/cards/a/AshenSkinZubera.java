@@ -32,7 +32,7 @@ public final class AshenSkinZubera extends CardImpl {
         this.addAbility(ability, new ZuberasDiedWatcher());
     }
 
-    public AshenSkinZubera(final AshenSkinZubera card) {
+    private AshenSkinZubera(final AshenSkinZubera card) {
         super(card);
     }
 

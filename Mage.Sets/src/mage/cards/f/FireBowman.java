@@ -36,7 +36,7 @@ public final class FireBowman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FireBowman(final FireBowman card) {
+    private FireBowman(final FireBowman card) {
         super(card);
     }
 

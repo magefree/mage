@@ -24,7 +24,7 @@ public final class AshenPowder extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
     }
 
-    public AshenPowder(final AshenPowder card) {
+    private AshenPowder(final AshenPowder card) {
         super(card);
     }
 

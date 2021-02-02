@@ -52,7 +52,7 @@ public final class CauterySliver extends CardImpl {
                         "All Slivers have \"{1}, Sacrifice this permanent: Prevent the next 1 damage that would be dealt to target Sliver creature or player this turn.\"")));
     }
 
-    public CauterySliver(final CauterySliver card) {
+    private CauterySliver(final CauterySliver card) {
         super(card);
     }
 

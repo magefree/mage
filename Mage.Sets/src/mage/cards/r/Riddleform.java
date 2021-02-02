@@ -46,7 +46,7 @@ public final class Riddleform extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Riddleform(final Riddleform card) {
+    private Riddleform(final Riddleform card) {
         super(card);
     }
 

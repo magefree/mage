@@ -35,7 +35,7 @@ public final class SemblanceAnvil extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SemblanceAnvilCostReductionEffect()));
     }
 
-    public SemblanceAnvil(final SemblanceAnvil card) {
+    private SemblanceAnvil(final SemblanceAnvil card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class MudbuttonTorchrunner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MudbuttonTorchrunner(final MudbuttonTorchrunner card) {
+    private MudbuttonTorchrunner(final MudbuttonTorchrunner card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class ToweringThunderfist extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public ToweringThunderfist(final ToweringThunderfist card) {
+    private ToweringThunderfist(final ToweringThunderfist card) {
         super(card);
     }
 

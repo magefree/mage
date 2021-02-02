@@ -41,7 +41,7 @@ public final class LiegeOfTheTangle extends CardImpl {
         this.addAbility(new LiegeOfTheTangleTriggeredAbility());
     }
 
-    public LiegeOfTheTangle(final LiegeOfTheTangle card) {
+    private LiegeOfTheTangle(final LiegeOfTheTangle card) {
         super(card);
     }
 

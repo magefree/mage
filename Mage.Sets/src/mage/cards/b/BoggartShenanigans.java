@@ -36,7 +36,7 @@ public final class BoggartShenanigans extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BoggartShenanigans(final BoggartShenanigans card) {
+    private BoggartShenanigans(final BoggartShenanigans card) {
         super(card);
     }
 

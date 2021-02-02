@@ -32,7 +32,7 @@ public final class TirelessTribe extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 4, Duration.EndOfTurn), new DiscardTargetCost(new TargetCardInHand())));
     }
 
-    public TirelessTribe(final TirelessTribe card) {
+    private TirelessTribe(final TirelessTribe card) {
         super(card);
     }
 

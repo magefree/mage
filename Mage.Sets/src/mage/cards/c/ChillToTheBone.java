@@ -31,7 +31,7 @@ public final class ChillToTheBone extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public ChillToTheBone(final ChillToTheBone card) {
+    private ChillToTheBone(final ChillToTheBone card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class GhalmasWarden extends CardImpl {
         );
     }
 
-    public GhalmasWarden(final GhalmasWarden card) {
+    private GhalmasWarden(final GhalmasWarden card) {
         super(card);
     }
 

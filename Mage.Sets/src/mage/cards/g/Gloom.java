@@ -37,7 +37,7 @@ public final class Gloom extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GloomCostIncreaseEffect()));
     }
 
-    public Gloom(final Gloom card) {
+    private Gloom(final Gloom card) {
         super(card);
     }
 

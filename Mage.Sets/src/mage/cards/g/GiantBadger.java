@@ -28,7 +28,7 @@ public final class GiantBadger extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public GiantBadger(final GiantBadger card) {
+    private GiantBadger(final GiantBadger card) {
         super(card);
     }
 

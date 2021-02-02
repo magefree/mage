@@ -25,7 +25,7 @@ public final class Discombobulate extends CardImpl {
                 this.getSpellAbility().addEffect(new LookLibraryControllerEffect(4));
     }
 
-    public Discombobulate(final Discombobulate card) {
+    private Discombobulate(final Discombobulate card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class GoblinOffensive extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), ManacostVariableValue.instance));
     }
 
-    public GoblinOffensive(final GoblinOffensive card) {
+    private GoblinOffensive(final GoblinOffensive card) {
         super(card);
     }
 

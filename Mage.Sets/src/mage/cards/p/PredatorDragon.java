@@ -33,7 +33,7 @@ public final class PredatorDragon extends CardImpl {
         this.addAbility(new DevourAbility(DevourFactor.Devour2));
     }
 
-    public PredatorDragon(final PredatorDragon card) {
+    private PredatorDragon(final PredatorDragon card) {
         super(card);
     }
 

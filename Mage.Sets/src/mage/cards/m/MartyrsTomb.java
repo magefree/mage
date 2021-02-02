@@ -28,7 +28,7 @@ public final class MartyrsTomb extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MartyrsTomb(final MartyrsTomb card) {
+    private MartyrsTomb(final MartyrsTomb card) {
         super(card);
     }
 

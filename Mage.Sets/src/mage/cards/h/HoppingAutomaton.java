@@ -39,7 +39,7 @@ public final class HoppingAutomaton extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HoppingAutomaton(final HoppingAutomaton card) {
+    private HoppingAutomaton(final HoppingAutomaton card) {
         super(card);
     }
 

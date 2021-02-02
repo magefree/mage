@@ -34,7 +34,7 @@ public final class RappellingScouts extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{2}{W}")));
     }
 
-    public RappellingScouts(final RappellingScouts card) {
+    private RappellingScouts(final RappellingScouts card) {
         super(card);
     }
 

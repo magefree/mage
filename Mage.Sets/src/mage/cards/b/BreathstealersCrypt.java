@@ -27,7 +27,7 @@ public final class BreathstealersCrypt extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BreathstealersCryptEffect()));
     }
 
-    public BreathstealersCrypt(final BreathstealersCrypt card) {
+    private BreathstealersCrypt(final BreathstealersCrypt card) {
         super(card);
     }
 

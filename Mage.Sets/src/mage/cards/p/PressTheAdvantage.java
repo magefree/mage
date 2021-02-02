@@ -30,7 +30,7 @@ public final class PressTheAdvantage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,2));
     }
 
-    public PressTheAdvantage(final PressTheAdvantage card) {
+    private PressTheAdvantage(final PressTheAdvantage card) {
         super(card);
     }
 

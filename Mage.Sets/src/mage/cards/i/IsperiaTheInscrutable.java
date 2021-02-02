@@ -47,7 +47,7 @@ public final class IsperiaTheInscrutable extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IsperiaTheInscrutable(final IsperiaTheInscrutable card) {
+    private IsperiaTheInscrutable(final IsperiaTheInscrutable card) {
         super(card);
     }
 

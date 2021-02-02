@@ -27,7 +27,7 @@ public final class BloodrageBrawler extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardControllerEffect(1)));
     }
 
-    public BloodrageBrawler(final BloodrageBrawler card) {
+    private BloodrageBrawler(final BloodrageBrawler card) {
         super(card);
     }
 

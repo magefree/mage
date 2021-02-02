@@ -24,7 +24,7 @@ public final class SivitriScarzam extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public SivitriScarzam(final SivitriScarzam card) {
+    private SivitriScarzam(final SivitriScarzam card) {
         super(card);
     }
 

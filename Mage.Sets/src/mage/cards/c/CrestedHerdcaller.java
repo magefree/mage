@@ -32,7 +32,7 @@ public final class CrestedHerdcaller extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new DinosaurToken())));
     }
 
-    public CrestedHerdcaller(final CrestedHerdcaller card) {
+    private CrestedHerdcaller(final CrestedHerdcaller card) {
         super(card);
     }
 

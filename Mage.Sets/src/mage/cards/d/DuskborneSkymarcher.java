@@ -49,7 +49,7 @@ public final class DuskborneSkymarcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DuskborneSkymarcher(final DuskborneSkymarcher card) {
+    private DuskborneSkymarcher(final DuskborneSkymarcher card) {
         super(card);
     }
 

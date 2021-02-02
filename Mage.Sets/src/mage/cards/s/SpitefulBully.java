@@ -33,7 +33,7 @@ public final class SpitefulBully extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpitefulBully(final SpitefulBully card) {
+    private SpitefulBully(final SpitefulBully card) {
         super(card);
     }
 

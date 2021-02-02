@@ -40,7 +40,7 @@ public final class VoidStalker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VoidStalker(final VoidStalker card) {
+    private VoidStalker(final VoidStalker card) {
         super(card);
     }
 

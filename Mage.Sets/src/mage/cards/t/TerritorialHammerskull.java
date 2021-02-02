@@ -39,7 +39,7 @@ public final class TerritorialHammerskull extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TerritorialHammerskull(final TerritorialHammerskull card) {
+    private TerritorialHammerskull(final TerritorialHammerskull card) {
         super(card);
     }
 

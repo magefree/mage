@@ -27,7 +27,7 @@ public final class NephaliaSeakite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public NephaliaSeakite(final NephaliaSeakite card) {
+    private NephaliaSeakite(final NephaliaSeakite card) {
         super(card);
     }
 

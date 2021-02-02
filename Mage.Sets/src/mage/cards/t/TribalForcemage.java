@@ -49,7 +49,7 @@ public final class TribalForcemage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TribalForcemage(final TribalForcemage card) {
+    private TribalForcemage(final TribalForcemage card) {
         super(card);
     }
 

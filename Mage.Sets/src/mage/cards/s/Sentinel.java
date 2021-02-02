@@ -49,7 +49,7 @@ public final class Sentinel extends CardImpl {
 
     }
 
-    public Sentinel(final Sentinel card) {
+    private Sentinel(final Sentinel card) {
         super(card);
     }
 

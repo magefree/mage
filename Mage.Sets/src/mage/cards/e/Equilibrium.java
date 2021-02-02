@@ -28,7 +28,7 @@ public final class Equilibrium extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Equilibrium(final Equilibrium card) {
+    private Equilibrium(final Equilibrium card) {
         super(card);
     }
 

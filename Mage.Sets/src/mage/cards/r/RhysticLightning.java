@@ -28,7 +28,7 @@ public final class RhysticLightning extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public RhysticLightning(final RhysticLightning card) {
+    private RhysticLightning(final RhysticLightning card) {
         super(card);
     }
 

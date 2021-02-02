@@ -32,7 +32,7 @@ public final class CogworkersPuzzleknot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CogworkersPuzzleknot(final CogworkersPuzzleknot card) {
+    private CogworkersPuzzleknot(final CogworkersPuzzleknot card) {
         super(card);
     }
 

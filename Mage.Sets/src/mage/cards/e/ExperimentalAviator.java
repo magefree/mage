@@ -32,7 +32,7 @@ public final class ExperimentalAviator extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken(), 2)));
     }
 
-    public ExperimentalAviator(final ExperimentalAviator card) {
+    private ExperimentalAviator(final ExperimentalAviator card) {
         super(card);
     }
 

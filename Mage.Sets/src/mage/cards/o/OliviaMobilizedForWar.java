@@ -49,7 +49,7 @@ public final class OliviaMobilizedForWar extends CardImpl {
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT, null));
     }
 
-    public OliviaMobilizedForWar(final OliviaMobilizedForWar card) {
+    private OliviaMobilizedForWar(final OliviaMobilizedForWar card) {
         super(card);
     }
 

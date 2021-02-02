@@ -30,7 +30,7 @@ public final class KjeldoranOutrider extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public KjeldoranOutrider(final KjeldoranOutrider card) {
+    private KjeldoranOutrider(final KjeldoranOutrider card) {
         super(card);
     }
 

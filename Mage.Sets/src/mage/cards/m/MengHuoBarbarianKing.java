@@ -38,7 +38,7 @@ public final class MengHuoBarbarianKing extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filterGreen, true)));
     }
 
-    public MengHuoBarbarianKing(final MengHuoBarbarianKing card) {
+    private MengHuoBarbarianKing(final MengHuoBarbarianKing card) {
         super(card);
     }
 

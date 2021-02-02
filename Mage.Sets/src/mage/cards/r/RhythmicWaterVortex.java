@@ -33,7 +33,7 @@ public final class RhythmicWaterVortex extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryGraveyardPutInHandEffect(filter));
     }
 
-    public RhythmicWaterVortex(final RhythmicWaterVortex card) {
+    private RhythmicWaterVortex(final RhythmicWaterVortex card) {
         super(card);
     }
 

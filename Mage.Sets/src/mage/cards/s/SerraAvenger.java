@@ -44,7 +44,7 @@ public final class SerraAvenger extends CardImpl {
 
     }
 
-    public SerraAvenger(final SerraAvenger card) {
+    private SerraAvenger(final SerraAvenger card) {
         super(card);
     }
 

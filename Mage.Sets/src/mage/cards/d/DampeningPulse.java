@@ -32,7 +32,7 @@ public final class DampeningPulse extends CardImpl {
 
     }
 
-    public DampeningPulse(final DampeningPulse card) {
+    private DampeningPulse(final DampeningPulse card) {
         super(card);
     }
 

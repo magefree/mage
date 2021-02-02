@@ -24,7 +24,7 @@ public final class Moonlace extends CardImpl {
         this.getSpellAbility().addEffect(new BecomesColorTargetEffect(new ObjectColor(), Duration.Custom));
     }
 
-    public Moonlace(final Moonlace card) {
+    private Moonlace(final Moonlace card) {
         super(card);
     }
 

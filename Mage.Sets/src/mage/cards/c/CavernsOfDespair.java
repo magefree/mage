@@ -31,7 +31,7 @@ public final class CavernsOfDespair extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CavernsOfDespairBlockRestrictionEffect()));
     }
 
-    public CavernsOfDespair(final CavernsOfDespair card) {
+    private CavernsOfDespair(final CavernsOfDespair card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class ToTheSlaughter extends CardImpl {
         this.getSpellAbility().addHint(DeliriumHint.instance);
     }
 
-    public ToTheSlaughter(final ToTheSlaughter card) {
+    private ToTheSlaughter(final ToTheSlaughter card) {
         super(card);
     }
 

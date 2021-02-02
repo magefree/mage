@@ -43,7 +43,7 @@ public final class VarchildsWarRiders extends CardImpl {
         this.addAbility(new RampageAbility(1));
     }
 
-    public VarchildsWarRiders(final VarchildsWarRiders card) {
+    private VarchildsWarRiders(final VarchildsWarRiders card) {
         super(card);
     }
 

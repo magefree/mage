@@ -34,7 +34,7 @@ public final class SewerRats extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SewerRats(final SewerRats card) {
+    private SewerRats(final SewerRats card) {
         super(card);
     }
 

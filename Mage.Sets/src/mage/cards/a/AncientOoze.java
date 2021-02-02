@@ -37,7 +37,7 @@ public final class AncientOoze extends CardImpl {
         ));
     }
 
-    public AncientOoze(final AncientOoze card) {
+    private AncientOoze(final AncientOoze card) {
         super(card);
     }
 

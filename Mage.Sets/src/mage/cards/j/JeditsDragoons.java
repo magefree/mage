@@ -30,7 +30,7 @@ public final class JeditsDragoons extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4), false));
     }
 
-    public JeditsDragoons(final JeditsDragoons card) {
+    private JeditsDragoons(final JeditsDragoons card) {
         super(card);
     }
 

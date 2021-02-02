@@ -36,7 +36,7 @@ public final class RenownedWeaver extends CardImpl {
 
     }
 
-    public RenownedWeaver(final RenownedWeaver card) {
+    private RenownedWeaver(final RenownedWeaver card) {
         super(card);
     }
 

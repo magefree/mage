@@ -44,7 +44,7 @@ public final class VineDryad extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter))));
     }
 
-    public VineDryad(final VineDryad card) {
+    private VineDryad(final VineDryad card) {
         super(card);
     }
 

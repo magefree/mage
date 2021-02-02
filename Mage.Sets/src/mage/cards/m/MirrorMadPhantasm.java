@@ -40,7 +40,7 @@ public final class MirrorMadPhantasm extends CardImpl {
 
     }
 
-    public MirrorMadPhantasm(final MirrorMadPhantasm card) {
+    private MirrorMadPhantasm(final MirrorMadPhantasm card) {
         super(card);
     }
 

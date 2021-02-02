@@ -46,7 +46,7 @@ public final class SquirrelNest extends CardImpl {
                 new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Create a 1/1 green Squirrel creature token.\"")));
     }
 
-    public SquirrelNest(final SquirrelNest card) {
+    private SquirrelNest(final SquirrelNest card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class DesolateLighthouse extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DesolateLighthouse(final DesolateLighthouse card) {
+    private DesolateLighthouse(final DesolateLighthouse card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class ZameckGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZameckGuildmage(final ZameckGuildmage card) {
+    private ZameckGuildmage(final ZameckGuildmage card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class ConeOfFlame extends CardImpl {
         this.getSpellAbility().addEffect(new ConeOfFlameEffect());
     }
 
-    public ConeOfFlame(final ConeOfFlame card) {
+    private ConeOfFlame(final ConeOfFlame card) {
         super(card);
     }
 

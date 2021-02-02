@@ -37,7 +37,7 @@ public final class HauntedFengraf extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HauntedFengraf(final HauntedFengraf card) {
+    private HauntedFengraf(final HauntedFengraf card) {
         super(card);
     }
 

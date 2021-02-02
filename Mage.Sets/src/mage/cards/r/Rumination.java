@@ -27,7 +27,7 @@ public final class Rumination extends CardImpl {
         this.getSpellAbility().addEffect(new RuminationEffect());
     }
 
-    public Rumination(final Rumination card) {
+    private Rumination(final Rumination card) {
         super(card);
     }
 

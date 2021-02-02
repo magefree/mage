@@ -26,7 +26,7 @@ public final class CommuneWithNature extends CardImpl {
         );
     }
 
-    public CommuneWithNature(final CommuneWithNature card) {
+    private CommuneWithNature(final CommuneWithNature card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class FelidarSovereign extends CardImpl {
 
     }
 
-    public FelidarSovereign(final FelidarSovereign card) {
+    private FelidarSovereign(final FelidarSovereign card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class BonesplitterSliver extends CardImpl {
                 new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, false)));
     }
 
-    public BonesplitterSliver(final BonesplitterSliver card) {
+    private BonesplitterSliver(final BonesplitterSliver card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class FireSnake extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FireSnake(final FireSnake card) {
+    private FireSnake(final FireSnake card) {
         super(card);
     }
 

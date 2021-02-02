@@ -37,7 +37,7 @@ public final class TonicPeddler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TonicPeddler(final TonicPeddler card) {
+    private TonicPeddler(final TonicPeddler card) {
         super(card);
     }
 

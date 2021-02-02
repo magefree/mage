@@ -52,7 +52,7 @@ public final class LoyalApprentice extends CardImpl {
         ));
     }
 
-    public LoyalApprentice(final LoyalApprentice card) {
+    private LoyalApprentice(final LoyalApprentice card) {
         super(card);
     }
 

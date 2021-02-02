@@ -44,7 +44,7 @@ public final class PersonalIncarnation extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new PersonalIncarnationLoseHalfLifeEffect()));
     }
 
-    public PersonalIncarnation(final PersonalIncarnation card) {
+    private PersonalIncarnation(final PersonalIncarnation card) {
         super(card);
     }
 

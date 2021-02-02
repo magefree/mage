@@ -26,7 +26,7 @@ public final class AdNauseam extends CardImpl {
         this.getSpellAbility().addEffect(new AdNauseamEffect());
     }
 
-    public AdNauseam(final AdNauseam card) {
+    private AdNauseam(final AdNauseam card) {
         super(card);
     }
 

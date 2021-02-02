@@ -41,7 +41,7 @@ public final class ParallelThoughts extends CardImpl {
 
     }
 
-    public ParallelThoughts(final ParallelThoughts card) {
+    private ParallelThoughts(final ParallelThoughts card) {
         super(card);
     }
 

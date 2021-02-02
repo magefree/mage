@@ -36,7 +36,7 @@ public final class NovaCleric extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NovaCleric(final NovaCleric card) {
+    private NovaCleric(final NovaCleric card) {
         super(card);
     }
 

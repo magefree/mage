@@ -31,7 +31,7 @@ public final class LudevicsAbomination extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public LudevicsAbomination(final LudevicsAbomination card) {
+    private LudevicsAbomination(final LudevicsAbomination card) {
         super(card);
     }
 

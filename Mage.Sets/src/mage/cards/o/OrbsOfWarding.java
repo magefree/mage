@@ -32,7 +32,7 @@ public final class OrbsOfWarding extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OrbsOfWardingEffect()));
     }
 
-    public OrbsOfWarding(final OrbsOfWarding card) {
+    private OrbsOfWarding(final OrbsOfWarding card) {
         super(card);
     }
 

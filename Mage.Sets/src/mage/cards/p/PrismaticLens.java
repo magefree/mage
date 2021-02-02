@@ -28,7 +28,7 @@ public final class PrismaticLens extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PrismaticLens(final PrismaticLens card) {
+    private PrismaticLens(final PrismaticLens card) {
         super(card);
     }
 

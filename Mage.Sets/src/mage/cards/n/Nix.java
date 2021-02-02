@@ -31,7 +31,7 @@ public final class Nix extends CardImpl {
 
     }
 
-    public Nix(final Nix card) {
+    private Nix(final Nix card) {
         super(card);
     }
 

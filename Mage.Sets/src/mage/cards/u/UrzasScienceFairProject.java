@@ -42,7 +42,7 @@ public final class UrzasScienceFairProject extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UrzasScienceFairProject(final UrzasScienceFairProject card) {
+    private UrzasScienceFairProject(final UrzasScienceFairProject card) {
         super(card);
     }
 

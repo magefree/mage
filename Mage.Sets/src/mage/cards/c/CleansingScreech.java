@@ -21,7 +21,7 @@ public final class CleansingScreech extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public CleansingScreech(final CleansingScreech card) {
+    private CleansingScreech(final CleansingScreech card) {
         super(card);
     }
 

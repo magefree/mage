@@ -30,7 +30,7 @@ public final class Whirlwind extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public Whirlwind(final Whirlwind card) {
+    private Whirlwind(final Whirlwind card) {
         super(card);
     }
 

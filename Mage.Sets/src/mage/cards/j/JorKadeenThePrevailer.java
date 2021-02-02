@@ -41,7 +41,7 @@ public final class JorKadeenThePrevailer extends CardImpl {
                 .addHint(MetalcraftHint.instance));
     }
 
-    public JorKadeenThePrevailer(final JorKadeenThePrevailer card) {
+    private JorKadeenThePrevailer(final JorKadeenThePrevailer card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class DrogskolCaptain extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DrogskolCaptain(final DrogskolCaptain card) {
+    private DrogskolCaptain(final DrogskolCaptain card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class AngelicPage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AngelicPage(final AngelicPage card) {
+    private AngelicPage(final AngelicPage card) {
         super(card);
     }
 

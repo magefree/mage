@@ -36,7 +36,7 @@ public final class DoomwakeGiant extends CardImpl {
         this.addAbility(new ConstellationAbility(new BoostAllEffect(-1,-1, Duration.EndOfTurn, filter, false)));
     }
 
-    public DoomwakeGiant(final DoomwakeGiant card) {
+    private DoomwakeGiant(final DoomwakeGiant card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class EbonyOwlNetsuke extends CardImpl {
         this.addAbility(new EbonyOwlNetsukeTriggeredAbility());
     }
 
-    public EbonyOwlNetsuke(final EbonyOwlNetsuke card) {
+    private EbonyOwlNetsuke(final EbonyOwlNetsuke card) {
         super(card);
     }
 

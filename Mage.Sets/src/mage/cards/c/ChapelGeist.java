@@ -25,7 +25,7 @@ public final class ChapelGeist extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public ChapelGeist(final ChapelGeist card) {
+    private ChapelGeist(final ChapelGeist card) {
         super(card);
     }
 

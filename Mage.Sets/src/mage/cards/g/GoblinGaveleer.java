@@ -36,7 +36,7 @@ public final class GoblinGaveleer extends CardImpl {
                 StaticValue.get(0), Duration.WhileOnBattlefield)));
     }
 
-    public GoblinGaveleer(final GoblinGaveleer card) {
+    private GoblinGaveleer(final GoblinGaveleer card) {
         super(card);
     }
 

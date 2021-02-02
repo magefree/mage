@@ -34,7 +34,7 @@ public final class Tracker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Tracker(final Tracker card) {
+    private Tracker(final Tracker card) {
         super(card);
     }
 

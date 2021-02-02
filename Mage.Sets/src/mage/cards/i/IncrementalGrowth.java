@@ -46,7 +46,7 @@ public final class IncrementalGrowth extends CardImpl {
         this.getSpellAbility().addTarget(target3);
     }
 
-    public IncrementalGrowth(final IncrementalGrowth card) {
+    private IncrementalGrowth(final IncrementalGrowth card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class MoleWorms extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoleWorms(final MoleWorms card) {
+    private MoleWorms(final MoleWorms card) {
         super(card);
     }
 

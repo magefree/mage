@@ -25,7 +25,7 @@ public final class SpawningBreath extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken()));
     }
 
-    public SpawningBreath(final SpawningBreath card) {
+    private SpawningBreath(final SpawningBreath card) {
         super(card);
     }
 

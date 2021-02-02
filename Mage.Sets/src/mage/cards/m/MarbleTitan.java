@@ -38,7 +38,7 @@ public final class MarbleTitan extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
     }
 
-    public MarbleTitan(final MarbleTitan card) {
+    private MarbleTitan(final MarbleTitan card) {
         super(card);
     }
 

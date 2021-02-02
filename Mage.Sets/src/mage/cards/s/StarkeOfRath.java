@@ -49,7 +49,7 @@ public final class StarkeOfRath extends CardImpl {
 
     }
 
-    public StarkeOfRath(final StarkeOfRath card) {
+    private StarkeOfRath(final StarkeOfRath card) {
         super(card);
     }
 

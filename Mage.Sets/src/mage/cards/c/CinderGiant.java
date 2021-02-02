@@ -34,7 +34,7 @@ public final class CinderGiant extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageAllEffect(2, filter), TargetController.YOU, false));
     }
 
-    public CinderGiant(final CinderGiant card) {
+    private CinderGiant(final CinderGiant card) {
         super(card);
     }
 

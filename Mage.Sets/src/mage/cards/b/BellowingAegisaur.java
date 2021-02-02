@@ -40,7 +40,7 @@ public final class BellowingAegisaur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BellowingAegisaur(final BellowingAegisaur card) {
+    private BellowingAegisaur(final BellowingAegisaur card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class MindRot extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
     }
 
-    public MindRot(final MindRot card) {
+    private MindRot(final MindRot card) {
         super(card);
     }
 

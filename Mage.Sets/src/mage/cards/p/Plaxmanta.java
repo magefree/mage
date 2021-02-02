@@ -41,7 +41,7 @@ public final class Plaxmanta extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.G)), false), new ManaSpentToCastWatcher());
     }
 
-    public Plaxmanta(final Plaxmanta card) {
+    private Plaxmanta(final Plaxmanta card) {
         super(card);
     }
 

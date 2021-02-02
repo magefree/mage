@@ -58,7 +58,7 @@ public final class InventorsFair extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InventorsFair(final InventorsFair card) {
+    private InventorsFair(final InventorsFair card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class Fettergeist extends CardImpl {
 
     }
 
-    public Fettergeist(final Fettergeist card) {
+    private Fettergeist(final Fettergeist card) {
         super(card);
     }
 

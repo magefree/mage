@@ -25,7 +25,7 @@ public final class ArtisansSorrow extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }
 
-    public ArtisansSorrow(final ArtisansSorrow card) {
+    private ArtisansSorrow(final ArtisansSorrow card) {
         super(card);
     }
 

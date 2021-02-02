@@ -42,7 +42,7 @@ public final class TheUnspeakable extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TheUnspeakable(final TheUnspeakable card) {
+    private TheUnspeakable(final TheUnspeakable card) {
         super(card);
     }
 

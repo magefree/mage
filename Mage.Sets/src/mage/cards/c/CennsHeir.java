@@ -39,7 +39,7 @@ public final class CennsHeir extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(count, count, Duration.EndOfTurn, true), false));
     }
 
-    public CennsHeir(final CennsHeir card) {
+    private CennsHeir(final CennsHeir card) {
         super(card);
     }
 

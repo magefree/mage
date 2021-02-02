@@ -31,7 +31,7 @@ public final class TombHex extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TombHex(final TombHex card) {
+    private TombHex(final TombHex card) {
         super(card);
     }
 

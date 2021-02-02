@@ -28,7 +28,7 @@ public final class MimingSlime extends CardImpl {
         this.getSpellAbility().addEffect(new MimingSlimeEffect());
     }
 
-    public MimingSlime(final MimingSlime card) {
+    private MimingSlime(final MimingSlime card) {
         super(card);
     }
 

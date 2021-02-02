@@ -27,7 +27,7 @@ public final class Brushwagg extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(-2, 2, Duration.EndOfTurn), false));
     }
 
-    public Brushwagg(final Brushwagg card) {
+    private Brushwagg(final Brushwagg card) {
         super(card);
     }
 

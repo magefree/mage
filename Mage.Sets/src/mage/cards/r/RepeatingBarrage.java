@@ -39,7 +39,7 @@ public final class RepeatingBarrage extends CardImpl {
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public RepeatingBarrage(final RepeatingBarrage card) {
+    private RepeatingBarrage(final RepeatingBarrage card) {
         super(card);
     }
 

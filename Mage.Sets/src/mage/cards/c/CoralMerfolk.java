@@ -23,7 +23,7 @@ public final class CoralMerfolk extends CardImpl {
     this.toughness = new MageInt(1);
     }
 
-    public CoralMerfolk(final CoralMerfolk card) {
+    private CoralMerfolk(final CoralMerfolk card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ public final class NettlevineBlight extends CardImpl {
 
     }
 
-    public NettlevineBlight(final NettlevineBlight card) {
+    private NettlevineBlight(final NettlevineBlight card) {
         super(card);
     }
 

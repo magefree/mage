@@ -27,7 +27,7 @@ public final class TelJiladOutrider extends CardImpl {
         this.addAbility(new ProtectionAbility(new FilterArtifactCard("artifacts")));
     }
 
-    public TelJiladOutrider(final TelJiladOutrider card) {
+    private TelJiladOutrider(final TelJiladOutrider card) {
         super(card);
     }
 

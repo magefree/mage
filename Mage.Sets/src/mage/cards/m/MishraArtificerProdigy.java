@@ -43,7 +43,7 @@ public final class MishraArtificerProdigy extends CardImpl {
         this.addAbility(new MishraArtificerProdigyTriggeredAbility());
     }
 
-    public MishraArtificerProdigy(final MishraArtificerProdigy card) {
+    private MishraArtificerProdigy(final MishraArtificerProdigy card) {
         super(card);
     }
 

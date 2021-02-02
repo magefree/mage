@@ -53,7 +53,7 @@ public final class SimicBasilisk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SimicBasilisk(final SimicBasilisk card) {
+    private SimicBasilisk(final SimicBasilisk card) {
         super(card);
     }
 

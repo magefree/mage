@@ -26,7 +26,7 @@ public final class RejuvenationChamber extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new TapSourceCost()));
     }
 
-    public RejuvenationChamber(final RejuvenationChamber card) {
+    private RejuvenationChamber(final RejuvenationChamber card) {
         super(card);
     }
 

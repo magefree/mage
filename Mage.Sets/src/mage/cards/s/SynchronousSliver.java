@@ -33,7 +33,7 @@ public final class SynchronousSliver extends CardImpl {
                 new GainAbilityAllEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, filter, "All Sliver creatures have vigilance.")));
     }
 
-    public SynchronousSliver(final SynchronousSliver card) {
+    private SynchronousSliver(final SynchronousSliver card) {
         super(card);
     }
 

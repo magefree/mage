@@ -44,7 +44,7 @@ public final class RhoxMeditant extends CardImpl {
         
     }
 
-    public RhoxMeditant(final RhoxMeditant card) {
+    private RhoxMeditant(final RhoxMeditant card) {
         super(card);
     }
 

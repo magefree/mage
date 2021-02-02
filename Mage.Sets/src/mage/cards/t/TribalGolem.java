@@ -88,7 +88,7 @@ public final class TribalGolem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TribalGolem(final TribalGolem card) {
+    private TribalGolem(final TribalGolem card) {
         super(card);
     }
 

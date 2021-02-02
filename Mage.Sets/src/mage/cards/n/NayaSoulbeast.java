@@ -46,7 +46,7 @@ public final class NayaSoulbeast extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NayaSoulbeast(final NayaSoulbeast card) {
+    private NayaSoulbeast(final NayaSoulbeast card) {
         super(card);
     }
 

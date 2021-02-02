@@ -30,7 +30,7 @@ public final class Persecute extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Persecute(final Persecute card) {
+    private Persecute(final Persecute card) {
         super(card);
     }
 

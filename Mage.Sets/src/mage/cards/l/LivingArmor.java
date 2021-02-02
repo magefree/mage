@@ -33,7 +33,7 @@ public final class LivingArmor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LivingArmor(final LivingArmor card) {
+    private LivingArmor(final LivingArmor card) {
         super(card);
     }
 

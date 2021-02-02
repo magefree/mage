@@ -46,7 +46,7 @@ public final class NightscapeApprentice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NightscapeApprentice(final NightscapeApprentice card) {
+    private NightscapeApprentice(final NightscapeApprentice card) {
         super(card);
     }
 

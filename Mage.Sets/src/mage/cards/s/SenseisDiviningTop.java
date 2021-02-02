@@ -33,7 +33,7 @@ public final class SenseisDiviningTop extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SenseisDiviningTop(final SenseisDiviningTop card) {
+    private SenseisDiviningTop(final SenseisDiviningTop card) {
         super(card);
     }
 

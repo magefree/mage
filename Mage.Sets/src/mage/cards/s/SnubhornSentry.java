@@ -41,7 +41,7 @@ public final class SnubhornSentry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SnubhornSentry(final SnubhornSentry card) {
+    private SnubhornSentry(final SnubhornSentry card) {
         super(card);
     }
 

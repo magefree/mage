@@ -41,7 +41,7 @@ public final class YavimayaElder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public YavimayaElder(final YavimayaElder card) {
+    private YavimayaElder(final YavimayaElder card) {
         super(card);
     }
 

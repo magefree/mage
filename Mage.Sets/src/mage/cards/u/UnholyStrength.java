@@ -37,7 +37,7 @@ public final class UnholyStrength extends CardImpl {
 
     }
 
-    public UnholyStrength(final UnholyStrength card) {
+    private UnholyStrength(final UnholyStrength card) {
         super(card);
     }
 

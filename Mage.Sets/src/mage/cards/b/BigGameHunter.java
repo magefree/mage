@@ -44,7 +44,7 @@ public final class BigGameHunter extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{B}")));
     }
 
-    public BigGameHunter(final BigGameHunter card) {
+    private BigGameHunter(final BigGameHunter card) {
         super(card);
     }
 

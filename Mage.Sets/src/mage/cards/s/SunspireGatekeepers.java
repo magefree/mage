@@ -48,7 +48,7 @@ public final class SunspireGatekeepers extends CardImpl {
                 .addHint(new ConditionHint(gatesCondition, "you control two or more Gates")));
     }
 
-    public SunspireGatekeepers(final SunspireGatekeepers card) {
+    private SunspireGatekeepers(final SunspireGatekeepers card) {
         super(card);
     }
 

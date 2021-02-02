@@ -46,7 +46,7 @@ public final class DamiaSageOfStone extends CardImpl {
         this.addAbility(new DamiaSageOfStoneTriggeredAbility());
     }
 
-    public DamiaSageOfStone(final DamiaSageOfStone card) {
+    private DamiaSageOfStone(final DamiaSageOfStone card) {
         super(card);
     }
 

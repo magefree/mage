@@ -26,7 +26,7 @@ public final class ThoughtScour extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public ThoughtScour(final ThoughtScour card) {
+    private ThoughtScour(final ThoughtScour card) {
         super(card);
     }
 

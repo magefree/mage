@@ -29,7 +29,7 @@ public final class Soulquake extends CardImpl {
         this.getSpellAbility().addEffect(new SoulquakeEffect());
     }
 
-    public Soulquake(final Soulquake card) {
+    private Soulquake(final Soulquake card) {
         super(card);
     }
 

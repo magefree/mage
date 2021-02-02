@@ -29,7 +29,7 @@ public final class EbonyTreefolk extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}{G}")));
     }
 
-    public EbonyTreefolk(final EbonyTreefolk card) {
+    private EbonyTreefolk(final EbonyTreefolk card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class OpalGargoyle extends CardImpl {
                 "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 2/2 Gargoyle creature with flying."));
     }
 
-    public OpalGargoyle(final OpalGargoyle card) {
+    private OpalGargoyle(final OpalGargoyle card) {
         super(card);
     }
 

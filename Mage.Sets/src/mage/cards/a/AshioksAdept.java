@@ -29,7 +29,7 @@ public final class AshioksAdept extends CardImpl {
         this.addAbility(new HeroicAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT)));
     }
 
-    public AshioksAdept(final AshioksAdept card) {
+    private AshioksAdept(final AshioksAdept card) {
         super(card);
     }
 

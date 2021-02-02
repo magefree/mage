@@ -31,7 +31,7 @@ public final class MomentousFall extends CardImpl {
         this.getSpellAbility().addEffect(new MomentousFallEffect());
     }
 
-    public MomentousFall(final MomentousFall card) {
+    private MomentousFall(final MomentousFall card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class MaraudingMaulhorn extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public MaraudingMaulhorn(final MaraudingMaulhorn card) {
+    private MaraudingMaulhorn(final MaraudingMaulhorn card) {
         super(card);
     }
 

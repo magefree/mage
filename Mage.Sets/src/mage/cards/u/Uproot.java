@@ -25,7 +25,7 @@ public final class Uproot extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public Uproot(final Uproot card) {
+    private Uproot(final Uproot card) {
         super(card);
     }
 

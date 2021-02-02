@@ -49,7 +49,7 @@ public final class WrensRunPackmaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public WrensRunPackmaster(final WrensRunPackmaster card) {
+    private WrensRunPackmaster(final WrensRunPackmaster card) {
         super(card);
     }
 

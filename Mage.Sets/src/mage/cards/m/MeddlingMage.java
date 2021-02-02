@@ -37,7 +37,7 @@ public final class MeddlingMage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeddlingMageReplacementEffect()));
     }
 
-    public MeddlingMage(final MeddlingMage card) {
+    private MeddlingMage(final MeddlingMage card) {
         super(card);
     }
 

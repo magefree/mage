@@ -37,7 +37,7 @@ public final class Stratadon extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public Stratadon(final Stratadon card) {
+    private Stratadon(final Stratadon card) {
         super(card);
     }
 

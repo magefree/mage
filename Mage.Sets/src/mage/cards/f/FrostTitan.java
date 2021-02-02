@@ -44,7 +44,7 @@ public final class FrostTitan extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FrostTitan(final FrostTitan card) {
+    private FrostTitan(final FrostTitan card) {
         super(card);
     }
 

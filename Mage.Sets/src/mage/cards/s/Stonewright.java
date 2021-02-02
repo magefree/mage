@@ -40,7 +40,7 @@ public final class Stonewright extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ability, ruleText)));
     }
 
-    public Stonewright(final Stonewright card) {
+    private Stonewright(final Stonewright card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class TopanAscetic extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
     }
 
-    public TopanAscetic(final TopanAscetic card) {
+    private TopanAscetic(final TopanAscetic card) {
         super(card);
     }
 

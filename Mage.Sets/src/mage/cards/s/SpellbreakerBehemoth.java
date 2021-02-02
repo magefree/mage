@@ -43,7 +43,7 @@ public final class SpellbreakerBehemoth extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeCounteredControlledEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public SpellbreakerBehemoth(final SpellbreakerBehemoth card) {
+    private SpellbreakerBehemoth(final SpellbreakerBehemoth card) {
         super(card);
     }
 

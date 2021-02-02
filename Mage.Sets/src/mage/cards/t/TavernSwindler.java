@@ -37,7 +37,7 @@ public final class TavernSwindler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TavernSwindler(final TavernSwindler card) {
+    private TavernSwindler(final TavernSwindler card) {
         super(card);
     }
 

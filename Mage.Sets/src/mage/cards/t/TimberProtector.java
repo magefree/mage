@@ -52,7 +52,7 @@ public final class TimberProtector extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public TimberProtector(final TimberProtector card) {
+    private TimberProtector(final TimberProtector card) {
         super(card);
     }
 

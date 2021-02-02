@@ -22,7 +22,7 @@ public final class SanctuaryCat extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public SanctuaryCat(final SanctuaryCat card) {
+    private SanctuaryCat(final SanctuaryCat card) {
         super(card);
     }
 

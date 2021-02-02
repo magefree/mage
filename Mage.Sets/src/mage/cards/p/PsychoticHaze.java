@@ -26,7 +26,7 @@ public final class PsychoticHaze extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{B}")));
     }
 
-    public PsychoticHaze(final PsychoticHaze card) {
+    private PsychoticHaze(final PsychoticHaze card) {
         super(card);
     }
 

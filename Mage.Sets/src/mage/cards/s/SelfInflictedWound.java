@@ -34,7 +34,7 @@ public final class SelfInflictedWound extends CardImpl {
         
     }
 
-    public SelfInflictedWound(final SelfInflictedWound card) {
+    private SelfInflictedWound(final SelfInflictedWound card) {
         super(card);
     }
 

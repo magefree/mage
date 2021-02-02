@@ -49,7 +49,7 @@ public final class SpearOfHeliod extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpearOfHeliod(final SpearOfHeliod card) {
+    private SpearOfHeliod(final SpearOfHeliod card) {
         super(card);
     }
 

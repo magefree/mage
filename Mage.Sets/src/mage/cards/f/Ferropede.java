@@ -33,7 +33,7 @@ public final class Ferropede extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Ferropede(final Ferropede card) {
+    private Ferropede(final Ferropede card) {
         super(card);
     }
 

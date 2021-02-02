@@ -36,7 +36,7 @@ public final class MidnightCovenant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)), AttachmentType.AURA)));
     }
 
-    public MidnightCovenant(final MidnightCovenant card) {
+    private MidnightCovenant(final MidnightCovenant card) {
         super(card);
     }
 

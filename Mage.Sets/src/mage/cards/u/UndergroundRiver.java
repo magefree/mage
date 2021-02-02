@@ -32,7 +32,7 @@ public final class UndergroundRiver extends CardImpl {
         this.addAbility(blackManaAbility);
     }
 
-    public UndergroundRiver(final UndergroundRiver card) {
+    private UndergroundRiver(final UndergroundRiver card) {
         super(card);
     }
 

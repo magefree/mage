@@ -61,7 +61,7 @@ public final class MathasFiendSeeker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MathasFiendSeeker(final MathasFiendSeeker card) {
+    private MathasFiendSeeker(final MathasFiendSeeker card) {
         super(card);
     }
 

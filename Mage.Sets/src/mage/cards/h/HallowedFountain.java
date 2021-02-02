@@ -28,7 +28,7 @@ public final class HallowedFountain extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public HallowedFountain(final HallowedFountain card) {
+    private HallowedFountain(final HallowedFountain card) {
         super(card);
     }
 

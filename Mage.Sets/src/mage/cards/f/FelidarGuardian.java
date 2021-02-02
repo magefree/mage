@@ -42,7 +42,7 @@ public final class FelidarGuardian extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FelidarGuardian(final FelidarGuardian card) {
+    private FelidarGuardian(final FelidarGuardian card) {
         super(card);
     }
 

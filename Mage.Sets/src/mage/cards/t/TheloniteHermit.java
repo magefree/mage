@@ -48,7 +48,7 @@ public final class TheloniteHermit extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new CreateTokenEffect(new SaprolingToken(), 4)));
     }
 
-    public TheloniteHermit(final TheloniteHermit card) {
+    private TheloniteHermit(final TheloniteHermit card) {
         super(card);
     }
 

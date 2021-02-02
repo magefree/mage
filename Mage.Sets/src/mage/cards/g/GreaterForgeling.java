@@ -30,7 +30,7 @@ public final class GreaterForgeling extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, -3, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
     }
 
-    public GreaterForgeling(final GreaterForgeling card) {
+    private GreaterForgeling(final GreaterForgeling card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class WipeAway extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 
-    public WipeAway(final WipeAway card) {
+    private WipeAway(final WipeAway card) {
         super(card);
     }
 

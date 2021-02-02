@@ -46,7 +46,7 @@ public final class QuestForAncientSecrets extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuestForAncientSecrets(final QuestForAncientSecrets card) {
+    private QuestForAncientSecrets(final QuestForAncientSecrets card) {
         super(card);
     }
 

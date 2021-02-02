@@ -38,7 +38,7 @@ public final class PlaneswalkersMischief extends CardImpl {
 
     }
 
-    public PlaneswalkersMischief(final PlaneswalkersMischief card) {
+    private PlaneswalkersMischief(final PlaneswalkersMischief card) {
         super(card);
     }
 

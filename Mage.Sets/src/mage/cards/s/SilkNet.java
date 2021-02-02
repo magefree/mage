@@ -27,7 +27,7 @@ public final class SilkNet extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SilkNet(final SilkNet card) {
+    private SilkNet(final SilkNet card) {
         super(card);
     }
 

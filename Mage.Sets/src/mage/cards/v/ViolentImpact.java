@@ -37,7 +37,7 @@ public final class ViolentImpact extends CardImpl {
 
     }
 
-    public ViolentImpact(final ViolentImpact card) {
+    private ViolentImpact(final ViolentImpact card) {
         super(card);
     }
 

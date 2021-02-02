@@ -26,7 +26,7 @@ public final class ButcherGhoul extends CardImpl {
         this.addAbility(new UndyingAbility());
     }
 
-    public ButcherGhoul(final ButcherGhoul card) {
+    private ButcherGhoul(final ButcherGhoul card) {
         super(card);
     }
 

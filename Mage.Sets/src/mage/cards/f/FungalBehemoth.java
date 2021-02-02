@@ -49,7 +49,7 @@ public final class FungalBehemoth extends CardImpl {
         this.addAbility(new FungalBehemothTriggeredAbility());
     }
 
-    public FungalBehemoth(final FungalBehemoth card) {
+    private FungalBehemoth(final FungalBehemoth card) {
         super(card);
     }
 

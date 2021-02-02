@@ -56,7 +56,7 @@ public final class IcefallRegent extends CardImpl {
         );
     }
 
-    public IcefallRegent(final IcefallRegent card) {
+    private IcefallRegent(final IcefallRegent card) {
         super(card);
     }
 

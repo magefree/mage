@@ -34,7 +34,7 @@ public final class ExpeditionMap extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ExpeditionMap(final ExpeditionMap card) {
+    private ExpeditionMap(final ExpeditionMap card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class AshmouthBlade extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public AshmouthBlade(final AshmouthBlade card) {
+    private AshmouthBlade(final AshmouthBlade card) {
         super(card);
     }
 

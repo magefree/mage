@@ -34,7 +34,7 @@ public final class HoverguardSweepers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HoverguardSweepers(final HoverguardSweepers card) {
+    private HoverguardSweepers(final HoverguardSweepers card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class FarbogBoneflinger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FarbogBoneflinger(final FarbogBoneflinger card) {
+    private FarbogBoneflinger(final FarbogBoneflinger card) {
         super(card);
     }
 

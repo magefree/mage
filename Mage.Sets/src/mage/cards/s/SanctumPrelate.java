@@ -38,7 +38,7 @@ public final class SanctumPrelate extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SanctumPrelateReplacementEffect()));
     }
 
-    public SanctumPrelate(final SanctumPrelate card) {
+    private SanctumPrelate(final SanctumPrelate card) {
         super(card);
     }
 

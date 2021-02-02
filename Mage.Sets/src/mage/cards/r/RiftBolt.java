@@ -30,7 +30,7 @@ public final class RiftBolt extends CardImpl {
 
     }
 
-    public RiftBolt(final RiftBolt card) {
+    private RiftBolt(final RiftBolt card) {
         super(card);
     }
 

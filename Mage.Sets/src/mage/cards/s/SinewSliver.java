@@ -30,7 +30,7 @@ public final class SinewSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.SLIVER, "All Sliver creatures"), false)));
     }
 
-    public SinewSliver(final SinewSliver card) {
+    private SinewSliver(final SinewSliver card) {
         super(card);
     }
 

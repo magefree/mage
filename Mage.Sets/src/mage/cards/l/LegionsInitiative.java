@@ -54,7 +54,7 @@ public final class LegionsInitiative extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LegionsInitiative(final LegionsInitiative card) {
+    private LegionsInitiative(final LegionsInitiative card) {
         super(card);
     }
 

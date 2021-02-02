@@ -40,7 +40,7 @@ public final class JarethLeonineTitan extends CardImpl {
 
     }
 
-    public JarethLeonineTitan(final JarethLeonineTitan card) {
+    private JarethLeonineTitan(final JarethLeonineTitan card) {
         super(card);
     }
 

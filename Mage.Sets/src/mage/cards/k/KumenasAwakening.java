@@ -33,7 +33,7 @@ public final class KumenasAwakening extends CardImpl {
                 .addHint(CitysBlessingHint.instance));
     }
 
-    public KumenasAwakening(final KumenasAwakening card) {
+    private KumenasAwakening(final KumenasAwakening card) {
         super(card);
     }
 

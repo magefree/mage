@@ -43,7 +43,7 @@ public final class ChampionOfTheFlame extends CardImpl {
                         .setText("{this} gets +2/+2 for each Aura and Equipment attached to it")));
     }
 
-    public ChampionOfTheFlame(final ChampionOfTheFlame card) {
+    private ChampionOfTheFlame(final ChampionOfTheFlame card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class PardicSwordsmith extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PardicSwordsmith(final PardicSwordsmith card) {
+    private PardicSwordsmith(final PardicSwordsmith card) {
         super(card);
     }
 

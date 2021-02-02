@@ -41,7 +41,7 @@ public final class LavaballTrap extends CardImpl {
 
     }
 
-    public LavaballTrap(final LavaballTrap card) {
+    private LavaballTrap(final LavaballTrap card) {
         super(card);
     }
 

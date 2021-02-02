@@ -35,7 +35,7 @@ public final class GravebladeMarauder extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new GravebladeMarauderEffect(), false, true));
     }
 
-    public GravebladeMarauder(final GravebladeMarauder card) {
+    private GravebladeMarauder(final GravebladeMarauder card) {
         super(card);
     }
 

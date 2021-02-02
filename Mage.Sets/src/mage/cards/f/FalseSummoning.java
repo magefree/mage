@@ -23,7 +23,7 @@ public final class FalseSummoning extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
-    public FalseSummoning(final FalseSummoning card) {
+    private FalseSummoning(final FalseSummoning card) {
         super(card);
     }
 

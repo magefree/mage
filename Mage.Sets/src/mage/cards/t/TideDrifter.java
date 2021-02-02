@@ -41,7 +41,7 @@ public final class TideDrifter extends CardImpl {
 
     }
 
-    public TideDrifter(final TideDrifter card) {
+    private TideDrifter(final TideDrifter card) {
         super(card);
     }
 

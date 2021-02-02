@@ -41,7 +41,7 @@ public final class Frostwielder extends CardImpl {
 
     }
 
-    public Frostwielder(final Frostwielder card) {
+    private Frostwielder(final Frostwielder card) {
         super(card);
     }
 

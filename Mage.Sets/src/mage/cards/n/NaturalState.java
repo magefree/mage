@@ -31,7 +31,7 @@ public final class NaturalState extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public NaturalState(final NaturalState card) {
+    private NaturalState(final NaturalState card) {
         super(card);
     }
 

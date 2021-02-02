@@ -27,7 +27,7 @@ public final class DesperateRitual extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{1}{R}"));
     }
 
-    public DesperateRitual(final DesperateRitual card) {
+    private DesperateRitual(final DesperateRitual card) {
         super(card);
     }
 

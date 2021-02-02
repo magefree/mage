@@ -39,7 +39,7 @@ public final class SoulSpike extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
     }
 
-    public SoulSpike(final SoulSpike card) {
+    private SoulSpike(final SoulSpike card) {
         super(card);
     }
 

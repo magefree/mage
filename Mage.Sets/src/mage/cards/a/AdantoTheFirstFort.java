@@ -37,7 +37,7 @@ public final class AdantoTheFirstFort extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AdantoTheFirstFort(final AdantoTheFirstFort card) {
+    private AdantoTheFirstFort(final AdantoTheFirstFort card) {
         super(card);
     }
 

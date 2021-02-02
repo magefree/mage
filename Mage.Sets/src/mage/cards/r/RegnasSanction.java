@@ -35,7 +35,7 @@ public final class RegnasSanction extends CardImpl {
         this.getSpellAbility().addEffect(new RegnasSanctionEffect());
     }
 
-    public RegnasSanction(final RegnasSanction card) {
+    private RegnasSanction(final RegnasSanction card) {
         super(card);
     }
 

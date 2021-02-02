@@ -33,7 +33,7 @@ public final class BurningEarth extends CardImpl {
                 filter, SetTargetPointer.PLAYER));
     }
 
-    public BurningEarth(final BurningEarth card) {
+    private BurningEarth(final BurningEarth card) {
         super(card);
     }
 

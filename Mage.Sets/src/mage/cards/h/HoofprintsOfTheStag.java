@@ -38,7 +38,7 @@ public final class HoofprintsOfTheStag extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HoofprintsOfTheStag(final HoofprintsOfTheStag card) {
+    private HoofprintsOfTheStag(final HoofprintsOfTheStag card) {
         super(card);
     }
 

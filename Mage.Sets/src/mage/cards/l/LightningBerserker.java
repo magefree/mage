@@ -36,7 +36,7 @@ public final class LightningBerserker extends CardImpl {
         this.addAbility(new DashAbility(this, "{R}"));
     }
 
-    public LightningBerserker(final LightningBerserker card) {
+    private LightningBerserker(final LightningBerserker card) {
         super(card);
     }
 

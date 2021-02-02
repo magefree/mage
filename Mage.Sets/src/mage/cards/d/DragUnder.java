@@ -25,7 +25,7 @@ public final class DragUnder extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public DragUnder(final DragUnder card) {
+    private DragUnder(final DragUnder card) {
         super(card);
     }
 

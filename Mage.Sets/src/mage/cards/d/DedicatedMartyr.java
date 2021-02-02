@@ -37,7 +37,7 @@ public final class DedicatedMartyr extends CardImpl {
         
       }
     
-    public DedicatedMartyr(final DedicatedMartyr card) {
+    private DedicatedMartyr(final DedicatedMartyr card) {
         super(card);
     }
 

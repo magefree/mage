@@ -22,7 +22,7 @@ public final class ArmoredWarhorse extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public ArmoredWarhorse(final ArmoredWarhorse card) {
+    private ArmoredWarhorse(final ArmoredWarhorse card) {
         super(card);
     }
 

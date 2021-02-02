@@ -37,7 +37,7 @@ public final class NecroticWound extends CardImpl {
         this.getSpellAbility().setAbilityWord(AbilityWord.UNDERGROWTH);
     }
 
-    public NecroticWound(final NecroticWound card) {
+    private NecroticWound(final NecroticWound card) {
         super(card);
     }
 

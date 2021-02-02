@@ -51,7 +51,7 @@ public final class GauntletOfPower extends CardImpl {
         this.addAbility(new GauntletOfPowerTapForManaAllTriggeredAbility(new GauntletOfPowerManaEffect2(), filter, SetTargetPointer.PERMANENT));
     }
 
-    public GauntletOfPower(final GauntletOfPower card) {
+    private GauntletOfPower(final GauntletOfPower card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class CabalExecutioner extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{B}{B}")));
     }
 
-    public CabalExecutioner(final CabalExecutioner card) {
+    private CabalExecutioner(final CabalExecutioner card) {
         super(card);
     }
 

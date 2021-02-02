@@ -36,7 +36,7 @@ public final class KitsunePalliator extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new KitsunePalliatorEffect(), new TapSourceCost()));
     }
 
-    public KitsunePalliator(final KitsunePalliator card) {
+    private KitsunePalliator(final KitsunePalliator card) {
         super(card);
     }
 

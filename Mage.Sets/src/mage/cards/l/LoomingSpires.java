@@ -40,7 +40,7 @@ public final class LoomingSpires extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public LoomingSpires(final LoomingSpires card) {
+    private LoomingSpires(final LoomingSpires card) {
         super(card);
     }
 

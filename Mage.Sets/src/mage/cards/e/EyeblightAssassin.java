@@ -40,7 +40,7 @@ public final class EyeblightAssassin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EyeblightAssassin(final EyeblightAssassin card) {
+    private EyeblightAssassin(final EyeblightAssassin card) {
         super(card);
     }
 

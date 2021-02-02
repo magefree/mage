@@ -29,7 +29,7 @@ public final class RiverDarter extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(new FilterCreaturePermanent(SubType.DINOSAUR, "Dinosaurs"), Duration.WhileOnBattlefield)));
     }
 
-    public RiverDarter(final RiverDarter card) {
+    private RiverDarter(final RiverDarter card) {
         super(card);
     }
 

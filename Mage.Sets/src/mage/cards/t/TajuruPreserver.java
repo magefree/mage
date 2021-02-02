@@ -31,7 +31,7 @@ public final class TajuruPreserver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TajuruPreserverEffect()));
     }
 
-    public TajuruPreserver(final TajuruPreserver card) {
+    private TajuruPreserver(final TajuruPreserver card) {
         super(card);
     }
 

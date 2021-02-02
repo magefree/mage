@@ -46,7 +46,7 @@ public final class AcidicSlime extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AcidicSlime(final AcidicSlime card) {
+    private AcidicSlime(final AcidicSlime card) {
         super(card);
     }
 

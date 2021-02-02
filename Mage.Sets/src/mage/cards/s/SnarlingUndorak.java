@@ -43,7 +43,7 @@ public final class SnarlingUndorak extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{G}{G}")));
     }
 
-    public SnarlingUndorak(final SnarlingUndorak card) {
+    private SnarlingUndorak(final SnarlingUndorak card) {
         super(card);
     }
 

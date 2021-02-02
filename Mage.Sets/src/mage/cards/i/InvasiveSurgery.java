@@ -39,7 +39,7 @@ public final class InvasiveSurgery extends CardImpl {
         this.getSpellAbility().addHint(DeliriumHint.instance);
     }
 
-    public InvasiveSurgery(final InvasiveSurgery card) {
+    private InvasiveSurgery(final InvasiveSurgery card) {
         super(card);
     }
 

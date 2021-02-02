@@ -34,7 +34,7 @@ public final class ConvulsingLicid extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttachedEffect(AttachmentType.AURA)));
     }
 
-    public ConvulsingLicid(final ConvulsingLicid card) {
+    private ConvulsingLicid(final ConvulsingLicid card) {
         super(card);
     }
 

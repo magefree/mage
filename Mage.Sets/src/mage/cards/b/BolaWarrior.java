@@ -39,7 +39,7 @@ public final class BolaWarrior extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BolaWarrior(final BolaWarrior card) {
+    private BolaWarrior(final BolaWarrior card) {
         super(card);
     }
 

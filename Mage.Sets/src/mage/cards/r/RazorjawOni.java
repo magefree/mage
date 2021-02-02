@@ -39,7 +39,7 @@ public final class RazorjawOni extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAllEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public RazorjawOni(final RazorjawOni card) {
+    private RazorjawOni(final RazorjawOni card) {
         super(card);
     }
 

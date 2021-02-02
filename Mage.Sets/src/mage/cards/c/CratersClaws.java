@@ -33,7 +33,7 @@ public final class CratersClaws extends CardImpl {
         this.getSpellAbility().addHint(FerociousHint.instance);
     }
 
-    public CratersClaws(final CratersClaws card) {
+    private CratersClaws(final CratersClaws card) {
         super(card);
     }
 

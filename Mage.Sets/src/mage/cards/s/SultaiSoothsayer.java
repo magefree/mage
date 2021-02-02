@@ -32,7 +32,7 @@ public final class SultaiSoothsayer extends CardImpl {
                 StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false), false));
     }
 
-    public SultaiSoothsayer(final SultaiSoothsayer card) {
+    private SultaiSoothsayer(final SultaiSoothsayer card) {
         super(card);
     }
 

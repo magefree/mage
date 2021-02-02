@@ -43,7 +43,7 @@ public final class DesperateSentry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DesperateSentry(final DesperateSentry card) {
+    private DesperateSentry(final DesperateSentry card) {
         super(card);
     }
 

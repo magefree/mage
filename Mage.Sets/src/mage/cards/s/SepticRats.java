@@ -35,7 +35,7 @@ public final class SepticRats extends CardImpl {
         this.addAbility(new SepticRatsTriggeredAbility());
     }
 
-    public SepticRats(final SepticRats card) {
+    private SepticRats(final SepticRats card) {
         super(card);
     }
 

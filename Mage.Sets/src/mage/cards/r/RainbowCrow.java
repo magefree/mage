@@ -34,7 +34,7 @@ public final class RainbowCrow extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}")));
     }
 
-    public RainbowCrow(final RainbowCrow card) {
+    private RainbowCrow(final RainbowCrow card) {
         super(card);
     }
 

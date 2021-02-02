@@ -45,7 +45,7 @@ public final class WhirlpoolWarrior extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WhirlpoolWarrior(final WhirlpoolWarrior card) {
+    private WhirlpoolWarrior(final WhirlpoolWarrior card) {
         super(card);
     }
 

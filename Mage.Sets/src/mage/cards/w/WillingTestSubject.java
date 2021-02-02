@@ -45,7 +45,7 @@ public final class WillingTestSubject extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WillingTestSubject(final WillingTestSubject card) {
+    private WillingTestSubject(final WillingTestSubject card) {
         super(card);
     }
 

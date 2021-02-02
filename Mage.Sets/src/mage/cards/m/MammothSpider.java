@@ -27,7 +27,7 @@ public final class MammothSpider extends CardImpl {
 
     }
 
-    public MammothSpider(final MammothSpider card) {
+    private MammothSpider(final MammothSpider card) {
         super(card);
     }
 

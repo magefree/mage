@@ -24,7 +24,7 @@ public final class HighGround extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureAllEffect(1, new FilterControlledCreaturePermanent("Each creature you control"), Duration.WhileOnBattlefield)));
     }
 
-    public HighGround(final HighGround card) {
+    private HighGround(final HighGround card) {
         super(card);
     }
 

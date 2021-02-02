@@ -58,7 +58,7 @@ public final class GrimgrinCorpseBorn extends CardImpl {
         this.addAbility(new GrimgrinCorpseBornAbility());
     }
 
-    public GrimgrinCorpseBorn(final GrimgrinCorpseBorn card) {
+    private GrimgrinCorpseBorn(final GrimgrinCorpseBorn card) {
         super(card);
     }
 

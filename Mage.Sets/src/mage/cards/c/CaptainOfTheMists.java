@@ -52,7 +52,7 @@ public final class CaptainOfTheMists extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CaptainOfTheMists(final CaptainOfTheMists card) {
+    private CaptainOfTheMists(final CaptainOfTheMists card) {
         super(card);
     }
 

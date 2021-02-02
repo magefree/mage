@@ -39,7 +39,7 @@ public final class GlintHawk extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GlintHawkEffect()));
     }
 
-    public GlintHawk(final GlintHawk card) {
+    private GlintHawk(final GlintHawk card) {
         super(card);
     }
 

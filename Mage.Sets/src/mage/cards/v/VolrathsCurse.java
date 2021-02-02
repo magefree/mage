@@ -56,7 +56,7 @@ public final class VolrathsCurse extends CardImpl {
 
     }
 
-    public VolrathsCurse(final VolrathsCurse card) {
+    private VolrathsCurse(final VolrathsCurse card) {
         super(card);
     }
 

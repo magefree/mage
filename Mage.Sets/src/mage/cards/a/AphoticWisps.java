@@ -37,7 +37,7 @@ public final class AphoticWisps extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public AphoticWisps(final AphoticWisps card) {
+    private AphoticWisps(final AphoticWisps card) {
         super(card);
     }
 

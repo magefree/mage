@@ -25,7 +25,7 @@ public final class Thoughtseize extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
-    public Thoughtseize(final Thoughtseize card) {
+    private Thoughtseize(final Thoughtseize card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class MatsuTribeSniper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MatsuTribeSniper(final MatsuTribeSniper card) {
+    private MatsuTribeSniper(final MatsuTribeSniper card) {
         super(card);
     }
 

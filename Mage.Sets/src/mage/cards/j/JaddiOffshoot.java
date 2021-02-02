@@ -29,7 +29,7 @@ public final class JaddiOffshoot extends CardImpl {
         this.addAbility(new LandfallAbility(new GainLifeEffect(1), false));
     }
 
-    public JaddiOffshoot(final JaddiOffshoot card) {
+    private JaddiOffshoot(final JaddiOffshoot card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class RaidingParty extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RaidingPartyEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filterOrc, true))));
     }
 
-    public RaidingParty(final RaidingParty card) {
+    private RaidingParty(final RaidingParty card) {
         super(card);
     }
 

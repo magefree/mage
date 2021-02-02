@@ -31,7 +31,7 @@ public final class RealmsUncharted extends CardImpl {
         this.getSpellAbility().addEffect(new RealmsUnchartedEffect());
     }
 
-    public RealmsUncharted(final RealmsUncharted card) {
+    private RealmsUncharted(final RealmsUncharted card) {
         super(card);
     }
 

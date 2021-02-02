@@ -41,7 +41,7 @@ public final class DarkslickShores extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public DarkslickShores(final DarkslickShores card) {
+    private DarkslickShores(final DarkslickShores card) {
         super(card);
     }
 

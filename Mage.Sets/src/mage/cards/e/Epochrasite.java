@@ -49,7 +49,7 @@ public final class Epochrasite extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new EpochrasiteEffect()));
     }
 
-    public Epochrasite(final Epochrasite card) {
+    private Epochrasite(final Epochrasite card) {
         super(card);
     }
 

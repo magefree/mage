@@ -40,7 +40,7 @@ public final class KolaghanStormsinger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KolaghanStormsinger(final KolaghanStormsinger card) {
+    private KolaghanStormsinger(final KolaghanStormsinger card) {
         super(card);
     }
 

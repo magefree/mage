@@ -59,7 +59,7 @@ public final class MazesEnd extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MazesEnd(final MazesEnd card) {
+    private MazesEnd(final MazesEnd card) {
         super(card);
     }
 

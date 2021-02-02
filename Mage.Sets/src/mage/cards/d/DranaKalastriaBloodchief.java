@@ -43,7 +43,7 @@ public final class DranaKalastriaBloodchief extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DranaKalastriaBloodchief(final DranaKalastriaBloodchief card) {
+    private DranaKalastriaBloodchief(final DranaKalastriaBloodchief card) {
         super(card);
     }
 

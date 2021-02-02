@@ -37,7 +37,7 @@ public final class TreacherousPitDweller extends CardImpl {
         this.addAbility(new TreacherousPitDwellerTriggeredAbility());
     }
 
-    public TreacherousPitDweller(final TreacherousPitDweller card) {
+    private TreacherousPitDweller(final TreacherousPitDweller card) {
         super(card);
     }
 

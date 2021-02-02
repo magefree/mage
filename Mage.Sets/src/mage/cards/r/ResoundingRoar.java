@@ -34,7 +34,7 @@ public final class ResoundingRoar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ResoundingRoar(final ResoundingRoar card) {
+    private ResoundingRoar(final ResoundingRoar card) {
         super(card);
     }
 

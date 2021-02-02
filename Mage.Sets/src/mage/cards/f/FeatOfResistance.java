@@ -30,7 +30,7 @@ public final class FeatOfResistance extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public FeatOfResistance(final FeatOfResistance card) {
+    private FeatOfResistance(final FeatOfResistance card) {
         super(card);
     }
 

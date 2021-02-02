@@ -37,7 +37,7 @@ public final class ChiefOfTheScale extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public ChiefOfTheScale(final ChiefOfTheScale card) {
+    private ChiefOfTheScale(final ChiefOfTheScale card) {
         super(card);
     }
 

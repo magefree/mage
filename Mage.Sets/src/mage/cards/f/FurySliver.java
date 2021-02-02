@@ -35,7 +35,7 @@ public final class FurySliver extends CardImpl {
         ));
     }
 
-    public FurySliver(final FurySliver card) {
+    private FurySliver(final FurySliver card) {
         super(card);
     }
 

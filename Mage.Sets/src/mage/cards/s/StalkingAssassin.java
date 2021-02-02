@@ -50,7 +50,7 @@ public final class StalkingAssassin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StalkingAssassin(final StalkingAssassin card) {
+    private StalkingAssassin(final StalkingAssassin card) {
         super(card);
     }
 

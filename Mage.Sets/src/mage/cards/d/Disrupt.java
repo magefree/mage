@@ -28,7 +28,7 @@ public final class Disrupt extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Disrupt(final Disrupt card) {
+    private Disrupt(final Disrupt card) {
         super(card);
     }
 

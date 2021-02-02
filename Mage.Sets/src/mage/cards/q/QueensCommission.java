@@ -21,7 +21,7 @@ public final class QueensCommission extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new IxalanVampireToken(), 2));
     }
 
-    public QueensCommission(final QueensCommission card) {
+    private QueensCommission(final QueensCommission card) {
         super(card);
     }
 

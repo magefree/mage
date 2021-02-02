@@ -34,7 +34,7 @@ public final class JujuBubble extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(1), new GenericManaCost(1)));
     }
 
-    public JujuBubble(final JujuBubble card) {
+    private JujuBubble(final JujuBubble card) {
         super(card);
     }
 

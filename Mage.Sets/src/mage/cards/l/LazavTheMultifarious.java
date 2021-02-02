@@ -58,7 +58,7 @@ public final class LazavTheMultifarious extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LazavTheMultifarious(final LazavTheMultifarious card) {
+    private LazavTheMultifarious(final LazavTheMultifarious card) {
         super(card);
     }
 

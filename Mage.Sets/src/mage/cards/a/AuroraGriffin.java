@@ -38,7 +38,7 @@ public final class AuroraGriffin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AuroraGriffin(final AuroraGriffin card) {
+    private AuroraGriffin(final AuroraGriffin card) {
         super(card);
     }
 

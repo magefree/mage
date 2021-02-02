@@ -39,7 +39,7 @@ public final class EmberhornMinotaur extends CardImpl {
         this.addAbility(new ExertAbility(ability));
     }
 
-    public EmberhornMinotaur(final EmberhornMinotaur card) {
+    private EmberhornMinotaur(final EmberhornMinotaur card) {
         super(card);
     }
 

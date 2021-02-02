@@ -36,7 +36,7 @@ public final class GruulRagebeast extends CardImpl {
         this.addAbility(new GruulRagebeastTriggeredAbility());
     }
 
-    public GruulRagebeast(final GruulRagebeast card) {
+    private GruulRagebeast(final GruulRagebeast card) {
         super(card);
     }
 

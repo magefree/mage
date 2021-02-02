@@ -45,7 +45,7 @@ public final class FieldSurgeon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FieldSurgeon(final FieldSurgeon card) {
+    private FieldSurgeon(final FieldSurgeon card) {
         super(card);
     }
 

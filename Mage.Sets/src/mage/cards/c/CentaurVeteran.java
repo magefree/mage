@@ -35,7 +35,7 @@ public final class CentaurVeteran extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CentaurVeteran(final CentaurVeteran card) {
+    private CentaurVeteran(final CentaurVeteran card) {
         super(card);
     }
 

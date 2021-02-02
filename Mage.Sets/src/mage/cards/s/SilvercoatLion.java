@@ -24,7 +24,7 @@ public final class SilvercoatLion extends CardImpl {
 
     }
 
-    public SilvercoatLion(final SilvercoatLion card) {
+    private SilvercoatLion(final SilvercoatLion card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class PeerPressure extends CardImpl {
         this.getSpellAbility().addEffect(new PeerPressureEffect());
     }
 
-    public PeerPressure(final PeerPressure card) {
+    private PeerPressure(final PeerPressure card) {
         super(card);
     }
 

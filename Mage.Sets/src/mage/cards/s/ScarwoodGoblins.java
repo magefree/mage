@@ -22,7 +22,7 @@ public final class ScarwoodGoblins extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public ScarwoodGoblins(final ScarwoodGoblins card) {
+    private ScarwoodGoblins(final ScarwoodGoblins card) {
         super(card);
     }
 

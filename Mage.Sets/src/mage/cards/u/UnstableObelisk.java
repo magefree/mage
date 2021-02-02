@@ -36,7 +36,7 @@ public final class UnstableObelisk extends CardImpl {
 
     }
 
-    public UnstableObelisk(final UnstableObelisk card) {
+    private UnstableObelisk(final UnstableObelisk card) {
         super(card);
     }
 

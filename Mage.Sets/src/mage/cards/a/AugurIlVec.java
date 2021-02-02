@@ -38,7 +38,7 @@ public final class AugurIlVec extends CardImpl {
                 new IsStepCondition(PhaseStep.UPKEEP), null));
     }
 
-    public AugurIlVec(final AugurIlVec card) {
+    private AugurIlVec(final AugurIlVec card) {
         super(card);
     }
 

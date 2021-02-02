@@ -24,7 +24,7 @@ public final class BruteForce extends CardImpl {
         this.getSpellAbility().getTargets().add(new TargetCreaturePermanent());
     }
 
-    public BruteForce(final BruteForce card) {
+    private BruteForce(final BruteForce card) {
         super(card);
     }
 

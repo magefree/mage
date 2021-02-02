@@ -26,7 +26,7 @@ public final class RavensCrime extends CardImpl {
         this.addAbility(new RetraceAbility(this));
     }
 
-    public RavensCrime(final RavensCrime card) {
+    private RavensCrime(final RavensCrime card) {
         super(card);
     }
 

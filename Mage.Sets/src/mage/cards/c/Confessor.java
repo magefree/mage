@@ -31,7 +31,7 @@ public final class Confessor extends CardImpl {
                 Zone.BATTLEFIELD, EventType.DISCARDED_CARD, new GainLifeEffect(1), "Whenever a player discards a card, ", false, true));
     }
 
-    public Confessor(final Confessor card) {
+    private Confessor(final Confessor card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class Recoil extends CardImpl {
 
     }
 
-    public Recoil(final Recoil card) {
+    private Recoil(final Recoil card) {
         super(card);
     }
 

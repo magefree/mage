@@ -40,7 +40,7 @@ public final class SludgeStrider extends CardImpl {
 
     }
 
-    public SludgeStrider(final SludgeStrider card) {
+    private SludgeStrider(final SludgeStrider card) {
         super(card);
     }
 

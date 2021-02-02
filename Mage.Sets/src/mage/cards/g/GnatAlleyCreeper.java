@@ -37,7 +37,7 @@ public final class GnatAlleyCreeper extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(FILTER, Duration.WhileOnBattlefield)));
     }
 
-    public GnatAlleyCreeper(final GnatAlleyCreeper card) {
+    private GnatAlleyCreeper(final GnatAlleyCreeper card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class Topple extends CardImpl {
         this.getSpellAbility().addTarget(new ToppleTargetCreature());
     }
 
-    public Topple(final Topple card) {
+    private Topple(final Topple card) {
         super(card);
     }
 

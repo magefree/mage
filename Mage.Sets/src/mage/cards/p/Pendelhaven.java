@@ -42,7 +42,7 @@ public final class Pendelhaven extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Pendelhaven(final Pendelhaven card) {
+    private Pendelhaven(final Pendelhaven card) {
         super(card);
     }
 

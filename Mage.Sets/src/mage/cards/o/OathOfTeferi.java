@@ -46,7 +46,7 @@ public final class OathOfTeferi extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OathOfTeferiLoyaltyEffect()));
     }
 
-    public OathOfTeferi(final OathOfTeferi card) {
+    private OathOfTeferi(final OathOfTeferi card) {
         super(card);
     }
 

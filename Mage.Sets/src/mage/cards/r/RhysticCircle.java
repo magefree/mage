@@ -29,7 +29,7 @@ public final class RhysticCircle extends CardImpl {
                 new ManaCostsImpl("{1}")));
     }
 
-    public RhysticCircle(final RhysticCircle card) {
+    private RhysticCircle(final RhysticCircle card) {
         super(card);
     }
 

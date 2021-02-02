@@ -32,7 +32,7 @@ public final class KraulForagers extends CardImpl {
         ));
     }
 
-    public KraulForagers(final KraulForagers card) {
+    private KraulForagers(final KraulForagers card) {
         super(card);
     }
 

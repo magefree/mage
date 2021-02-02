@@ -28,7 +28,7 @@ public final class DarkwatchElves extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public DarkwatchElves(final DarkwatchElves card) {
+    private DarkwatchElves(final DarkwatchElves card) {
         super(card);
     }
 

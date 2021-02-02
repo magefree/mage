@@ -54,7 +54,7 @@ public final class Demonfire extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public Demonfire(final Demonfire card) {
+    private Demonfire(final Demonfire card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class NewPerspectives extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NewPerspectivesCostModificationEffect()));
     }
 
-    public NewPerspectives(final NewPerspectives card) {
+    private NewPerspectives(final NewPerspectives card) {
         super(card);
     }
 

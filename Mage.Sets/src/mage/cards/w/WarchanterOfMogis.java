@@ -34,7 +34,7 @@ public final class WarchanterOfMogis extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WarchanterOfMogis(final WarchanterOfMogis card) {
+    private WarchanterOfMogis(final WarchanterOfMogis card) {
         super(card);
     }
 

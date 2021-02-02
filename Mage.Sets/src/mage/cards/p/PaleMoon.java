@@ -31,7 +31,7 @@ public final class PaleMoon extends CardImpl {
         this.getSpellAbility().addEffect(new PaleMoonReplacementEffect());
     }
 
-    public PaleMoon(final PaleMoon card) {
+    private PaleMoon(final PaleMoon card) {
         super(card);
     }
 

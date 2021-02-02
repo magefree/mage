@@ -37,7 +37,7 @@ public final class LoreWeaver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LoreWeaver(final LoreWeaver card) {
+    private LoreWeaver(final LoreWeaver card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class FalkenrathMarauders extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), false));
     }
 
-    public FalkenrathMarauders(final FalkenrathMarauders card) {
+    private FalkenrathMarauders(final FalkenrathMarauders card) {
         super(card);
     }
 

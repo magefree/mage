@@ -36,7 +36,7 @@ public final class RingOfMaruf extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RingOfMaruf(final RingOfMaruf card) {
+    private RingOfMaruf(final RingOfMaruf card) {
         super(card);
     }
 

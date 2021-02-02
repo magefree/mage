@@ -28,7 +28,7 @@ public final class ArcboundLancer extends CardImpl {
         this.addAbility(new ModularAbility(this, 4));
     }
 
-    public ArcboundLancer(final ArcboundLancer card) {
+    private ArcboundLancer(final ArcboundLancer card) {
         super(card);
     }
 

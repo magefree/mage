@@ -45,7 +45,7 @@ public final class UnflinchingCourage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnflinchingCourage(final UnflinchingCourage card) {
+    private UnflinchingCourage(final UnflinchingCourage card) {
         super(card);
     }
 

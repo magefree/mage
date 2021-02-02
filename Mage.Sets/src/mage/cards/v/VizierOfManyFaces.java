@@ -49,7 +49,7 @@ public final class VizierOfManyFaces extends CardImpl {
         this.addAbility(new EmbalmAbility(new ManaCostsImpl("{3}{U}{U}"), this));
     }
 
-    public VizierOfManyFaces(final VizierOfManyFaces card) {
+    private VizierOfManyFaces(final VizierOfManyFaces card) {
         super(card);
     }
 

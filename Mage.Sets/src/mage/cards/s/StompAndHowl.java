@@ -23,7 +23,7 @@ public final class StompAndHowl extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyMultiTargetEffect());
     }
 
-    public StompAndHowl(final StompAndHowl card) {
+    private StompAndHowl(final StompAndHowl card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class SkycloudExpanse extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkycloudExpanse(final SkycloudExpanse card) {
+    private SkycloudExpanse(final SkycloudExpanse card) {
         super(card);
     }
 

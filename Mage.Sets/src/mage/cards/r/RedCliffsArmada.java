@@ -29,7 +29,7 @@ public final class RedCliffsArmada extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
     }
 
-    public RedCliffsArmada(final RedCliffsArmada card) {
+    private RedCliffsArmada(final RedCliffsArmada card) {
         super(card);
     }
 

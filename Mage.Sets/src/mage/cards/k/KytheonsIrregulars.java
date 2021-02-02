@@ -38,7 +38,7 @@ public final class KytheonsIrregulars extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KytheonsIrregulars(final KytheonsIrregulars card) {
+    private KytheonsIrregulars(final KytheonsIrregulars card) {
         super(card);
     }
 

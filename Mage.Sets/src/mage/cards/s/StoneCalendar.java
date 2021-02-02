@@ -24,7 +24,7 @@ public final class StoneCalendar extends CardImpl {
         
     }
 
-    public StoneCalendar(final StoneCalendar card) {
+    private StoneCalendar(final StoneCalendar card) {
         super(card);
     }
 

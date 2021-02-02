@@ -35,7 +35,7 @@ public final class EyeOfTheStorm extends CardImpl {
         this.addAbility(new EyeOfTheStormAbility());
     }
 
-    public EyeOfTheStorm(final EyeOfTheStorm card) {
+    private EyeOfTheStorm(final EyeOfTheStorm card) {
         super(card);
     }
 

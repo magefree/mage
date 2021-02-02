@@ -60,7 +60,7 @@ public final class HeraldOfLeshrac extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new HeraldOfLeshracLeavesEffect(), false));
     }
 
-    public HeraldOfLeshrac(final HeraldOfLeshrac card) {
+    private HeraldOfLeshrac(final HeraldOfLeshrac card) {
         super(card);
     }
 

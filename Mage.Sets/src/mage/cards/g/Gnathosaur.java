@@ -41,7 +41,7 @@ public final class Gnathosaur extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public Gnathosaur(final Gnathosaur card) {
+    private Gnathosaur(final Gnathosaur card) {
         super(card);
     }
 

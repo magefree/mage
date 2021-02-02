@@ -35,7 +35,7 @@ public final class ChargingTroll extends CardImpl {
 
     }
 
-    public ChargingTroll(final ChargingTroll card) {
+    private ChargingTroll(final ChargingTroll card) {
         super(card);
     }
 

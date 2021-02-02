@@ -48,7 +48,7 @@ public final class JubilantMascot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JubilantMascot(final JubilantMascot card) {
+    private JubilantMascot(final JubilantMascot card) {
         super(card);
     }
 

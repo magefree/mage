@@ -29,7 +29,7 @@ public final class SharedTrauma extends CardImpl {
         this.getSpellAbility().addEffect(new SharedTraumaEffect());
     }
 
-    public SharedTrauma(final SharedTrauma card) {
+    private SharedTrauma(final SharedTrauma card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class ScreamreachBrawler extends CardImpl {
         this.addAbility(new DashAbility(this, "{1}{R}"));
     }
 
-    public ScreamreachBrawler(final ScreamreachBrawler card) {
+    private ScreamreachBrawler(final ScreamreachBrawler card) {
         super(card);
     }
 

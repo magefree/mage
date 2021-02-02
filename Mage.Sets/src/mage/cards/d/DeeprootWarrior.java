@@ -32,7 +32,7 @@ public final class DeeprootWarrior extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
-    public DeeprootWarrior(final DeeprootWarrior card) {
+    private DeeprootWarrior(final DeeprootWarrior card) {
         super(card);
     }
 

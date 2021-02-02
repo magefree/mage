@@ -43,7 +43,7 @@ public final class RedElementalBlast extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public RedElementalBlast(final RedElementalBlast card) {
+    private RedElementalBlast(final RedElementalBlast card) {
         super(card);
     }
 

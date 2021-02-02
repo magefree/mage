@@ -24,7 +24,7 @@ public final class CollectiveBlessing extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(3,3, Duration.WhileOnBattlefield)));
     }
 
-    public CollectiveBlessing(final CollectiveBlessing card) {
+    private CollectiveBlessing(final CollectiveBlessing card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class GlacialCrevasses extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GlacialCrevasses(final GlacialCrevasses card) {
+    private GlacialCrevasses(final GlacialCrevasses card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class MysticDenial extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
-    public MysticDenial(final MysticDenial card) {
+    private MysticDenial(final MysticDenial card) {
         super(card);
     }
 

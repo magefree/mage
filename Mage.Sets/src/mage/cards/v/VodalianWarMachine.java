@@ -70,7 +70,7 @@ public final class VodalianWarMachine extends CardImpl {
         this.addAbility(new VodalianWarMachineTriggeredAbility(), new VodalianWarMachineWatcher());
     }
 
-    public VodalianWarMachine(final VodalianWarMachine card) {
+    private VodalianWarMachine(final VodalianWarMachine card) {
         super(card);
     }
 

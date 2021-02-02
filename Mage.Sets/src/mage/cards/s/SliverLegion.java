@@ -39,7 +39,7 @@ public final class SliverLegion extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new PermanentsOnBattlefieldCount(countfilter) , new PermanentsOnBattlefieldCount(countfilter), Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public SliverLegion(final SliverLegion card) {
+    private SliverLegion(final SliverLegion card) {
         super(card);
     }
 

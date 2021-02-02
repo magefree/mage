@@ -35,7 +35,7 @@ public final class AvoidFate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public AvoidFate(final AvoidFate card) {
+    private AvoidFate(final AvoidFate card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class KhalniHydra extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public KhalniHydra(final KhalniHydra card) {
+    private KhalniHydra(final KhalniHydra card) {
         super(card);
     }
 

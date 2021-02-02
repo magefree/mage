@@ -30,7 +30,7 @@ public final class ShadowOfDoubt extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public ShadowOfDoubt(final ShadowOfDoubt card) {
+    private ShadowOfDoubt(final ShadowOfDoubt card) {
         super(card);
     }
 

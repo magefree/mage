@@ -30,7 +30,7 @@ public final class ErdwalRipper extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public ErdwalRipper(final ErdwalRipper card) {
+    private ErdwalRipper(final ErdwalRipper card) {
         super(card);
     }
 

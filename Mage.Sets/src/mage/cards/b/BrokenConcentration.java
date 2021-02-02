@@ -26,7 +26,7 @@ public final class BrokenConcentration extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{3}{U}")));
     }
 
-    public BrokenConcentration(final BrokenConcentration card) {
+    private BrokenConcentration(final BrokenConcentration card) {
         super(card);
     }
 

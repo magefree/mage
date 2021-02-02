@@ -40,7 +40,7 @@ public final class MistformSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
-    public MistformSliver(final MistformSliver card) {
+    private MistformSliver(final MistformSliver card) {
         super(card);
     }
 

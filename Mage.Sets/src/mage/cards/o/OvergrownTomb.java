@@ -28,7 +28,7 @@ public final class OvergrownTomb extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public OvergrownTomb(final OvergrownTomb card) {
+    private OvergrownTomb(final OvergrownTomb card) {
         super(card);
     }
 

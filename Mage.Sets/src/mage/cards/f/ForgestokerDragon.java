@@ -44,7 +44,7 @@ public final class ForgestokerDragon extends CardImpl {
 
     }
 
-    public ForgestokerDragon(final ForgestokerDragon card) {
+    private ForgestokerDragon(final ForgestokerDragon card) {
         super(card);
     }
 

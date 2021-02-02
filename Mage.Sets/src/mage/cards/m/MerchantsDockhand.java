@@ -50,7 +50,7 @@ public final class MerchantsDockhand extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MerchantsDockhand(final MerchantsDockhand card) {
+    private MerchantsDockhand(final MerchantsDockhand card) {
         super(card);
     }
 

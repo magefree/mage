@@ -47,7 +47,7 @@ public final class SwiftWarden extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SwiftWarden(final SwiftWarden card) {
+    private SwiftWarden(final SwiftWarden card) {
         super(card);
     }
 

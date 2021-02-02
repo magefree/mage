@@ -24,7 +24,7 @@ public final class Smash extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Smash(final Smash card) {
+    private Smash(final Smash card) {
         super(card);
     }
 

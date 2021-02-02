@@ -36,7 +36,7 @@ public final class StreamOfAcid extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public StreamOfAcid(final StreamOfAcid card) {
+    private StreamOfAcid(final StreamOfAcid card) {
         super(card);
     }
 

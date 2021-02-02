@@ -26,7 +26,7 @@ public final class SoltariFootSoldier extends CardImpl {
         this.addAbility(ShadowAbility.getInstance());
     }
 
-    public SoltariFootSoldier(final SoltariFootSoldier card) {
+    private SoltariFootSoldier(final SoltariFootSoldier card) {
         super(card);
     }
 

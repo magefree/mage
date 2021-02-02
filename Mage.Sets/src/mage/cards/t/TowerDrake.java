@@ -35,7 +35,7 @@ public final class TowerDrake extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public TowerDrake(final TowerDrake card) {
+    private TowerDrake(final TowerDrake card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class BorosRecruit extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public BorosRecruit(final BorosRecruit card) {
+    private BorosRecruit(final BorosRecruit card) {
         super(card);
     }
 

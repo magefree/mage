@@ -40,7 +40,7 @@ public final class GameTrail extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public GameTrail(final GameTrail card) {
+    private GameTrail(final GameTrail card) {
         super(card);
     }
 

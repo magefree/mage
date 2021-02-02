@@ -59,7 +59,7 @@ public final class KolaghansCommand extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
     }
 
-    public KolaghansCommand(final KolaghansCommand card) {
+    private KolaghansCommand(final KolaghansCommand card) {
         super(card);
     }
 

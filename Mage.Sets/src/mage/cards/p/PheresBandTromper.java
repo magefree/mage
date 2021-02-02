@@ -29,7 +29,7 @@ public final class PheresBandTromper extends CardImpl {
         this.addAbility(new InspiredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 
-    public PheresBandTromper(final PheresBandTromper card) {
+    private PheresBandTromper(final PheresBandTromper card) {
         super(card);
     }
 

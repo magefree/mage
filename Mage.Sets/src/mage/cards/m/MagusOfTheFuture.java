@@ -33,7 +33,7 @@ public final class MagusOfTheFuture extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect()));
     }
 
-    public MagusOfTheFuture(final MagusOfTheFuture card) {
+    private MagusOfTheFuture(final MagusOfTheFuture card) {
         super(card);
     }
 

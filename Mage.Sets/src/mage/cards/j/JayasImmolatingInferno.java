@@ -31,7 +31,7 @@ public final class JayasImmolatingInferno extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget(1, 3));
     }
 
-    public JayasImmolatingInferno(final JayasImmolatingInferno card) {
+    private JayasImmolatingInferno(final JayasImmolatingInferno card) {
         super(card);
     }
 

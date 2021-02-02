@@ -36,7 +36,7 @@ public final class MarrowChomper extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(new DevouredCreaturesCount(2))));
     }
 
-    public MarrowChomper(final MarrowChomper card) {
+    private MarrowChomper(final MarrowChomper card) {
         super(card);
     }
 

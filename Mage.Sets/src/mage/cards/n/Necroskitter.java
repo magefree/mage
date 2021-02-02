@@ -41,7 +41,7 @@ public final class Necroskitter extends CardImpl {
 
     }
 
-    public Necroskitter(final Necroskitter card) {
+    private Necroskitter(final Necroskitter card) {
         super(card);
     }
 

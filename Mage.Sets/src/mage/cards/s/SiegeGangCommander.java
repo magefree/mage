@@ -45,7 +45,7 @@ public final class SiegeGangCommander extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SiegeGangCommander(final SiegeGangCommander card) {
+    private SiegeGangCommander(final SiegeGangCommander card) {
         super(card);
     }
 

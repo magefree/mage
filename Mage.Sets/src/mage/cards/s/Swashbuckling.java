@@ -45,7 +45,7 @@ public final class Swashbuckling extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Swashbuckling(final Swashbuckling card) {
+    private Swashbuckling(final Swashbuckling card) {
         super(card);
     }
 

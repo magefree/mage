@@ -49,7 +49,7 @@ public final class ObNixilisOfTheBlackOath extends CardImpl {
         this.addAbility(CanBeYourCommanderAbility.getInstance());
     }
 
-    public ObNixilisOfTheBlackOath(final ObNixilisOfTheBlackOath card) {
+    private ObNixilisOfTheBlackOath(final ObNixilisOfTheBlackOath card) {
         super(card);
     }
 

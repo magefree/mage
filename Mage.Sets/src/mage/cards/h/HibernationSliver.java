@@ -40,7 +40,7 @@ public final class HibernationSliver extends CardImpl {
                         new FilterPermanent(SubType.SLIVER, "All Slivers"), "All Slivers have \"Pay 2 life: Return this permanent to its owner's hand.\"")));
     }
 
-    public HibernationSliver(final HibernationSliver card) {
+    private HibernationSliver(final HibernationSliver card) {
         super(card);
     }
 

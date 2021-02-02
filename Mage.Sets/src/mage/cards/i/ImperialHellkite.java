@@ -40,7 +40,7 @@ public final class ImperialHellkite extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(effect));
     }
 
-    public ImperialHellkite(final ImperialHellkite card) {
+    private ImperialHellkite(final ImperialHellkite card) {
         super(card);
     }
 

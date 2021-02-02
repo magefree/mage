@@ -59,7 +59,7 @@ public final class MythRealized extends CardImpl {
         
     }
 
-    public MythRealized(final MythRealized card) {
+    private MythRealized(final MythRealized card) {
         super(card);
     }
 

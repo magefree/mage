@@ -32,7 +32,7 @@ public final class EliteSkirmisher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EliteSkirmisher(final EliteSkirmisher card) {
+    private EliteSkirmisher(final EliteSkirmisher card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class RestorationAngel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RestorationAngel(final RestorationAngel card) {
+    private RestorationAngel(final RestorationAngel card) {
         super(card);
     }
 

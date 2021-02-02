@@ -33,7 +33,7 @@ public final class FarWanderings extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public FarWanderings(final FarWanderings card) {
+    private FarWanderings(final FarWanderings card) {
         super(card);
     }
 

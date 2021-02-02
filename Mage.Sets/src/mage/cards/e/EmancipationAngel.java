@@ -30,7 +30,7 @@ public final class EmancipationAngel extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledPermanent()), false));
     }
 
-    public EmancipationAngel(final EmancipationAngel card) {
+    private EmancipationAngel(final EmancipationAngel card) {
         super(card);
     }
 

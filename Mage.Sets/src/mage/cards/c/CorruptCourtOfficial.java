@@ -31,7 +31,7 @@ public final class CorruptCourtOfficial extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CorruptCourtOfficial(final CorruptCourtOfficial card) {
+    private CorruptCourtOfficial(final CorruptCourtOfficial card) {
         super(card);
     }
 

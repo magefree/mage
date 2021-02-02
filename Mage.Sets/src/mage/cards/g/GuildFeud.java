@@ -37,7 +37,7 @@ public final class GuildFeud extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GuildFeud(final GuildFeud card) {
+    private GuildFeud(final GuildFeud card) {
         super(card);
     }
 

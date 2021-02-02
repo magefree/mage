@@ -47,7 +47,7 @@ public final class SunscapeMaster extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public SunscapeMaster(final SunscapeMaster card) {
+    private SunscapeMaster(final SunscapeMaster card) {
         super(card);
     }
 

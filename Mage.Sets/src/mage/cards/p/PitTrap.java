@@ -39,7 +39,7 @@ public final class PitTrap extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PitTrap(final PitTrap card) {
+    private PitTrap(final PitTrap card) {
         super(card);
     }
 

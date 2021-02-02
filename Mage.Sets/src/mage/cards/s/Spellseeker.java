@@ -41,7 +41,7 @@ public final class Spellseeker extends CardImpl {
         ));
     }
 
-    public Spellseeker(final Spellseeker card) {
+    private Spellseeker(final Spellseeker card) {
         super(card);
     }
 

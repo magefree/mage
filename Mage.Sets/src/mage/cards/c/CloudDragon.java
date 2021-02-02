@@ -29,7 +29,7 @@ public final class CloudDragon extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public CloudDragon(final CloudDragon card) {
+    private CloudDragon(final CloudDragon card) {
         super(card);
     }
 

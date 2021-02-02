@@ -24,7 +24,7 @@ public final class Cursebreak extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 
-    public Cursebreak(final Cursebreak card) {
+    private Cursebreak(final Cursebreak card) {
         super(card);
     }
 

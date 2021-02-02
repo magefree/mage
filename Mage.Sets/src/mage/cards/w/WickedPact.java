@@ -34,7 +34,7 @@ public final class WickedPact extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(5));
     }
 
-    public WickedPact(final WickedPact card) {
+    private WickedPact(final WickedPact card) {
         super(card);
     }
 

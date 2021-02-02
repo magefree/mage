@@ -45,7 +45,7 @@ public final class TajuruArcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TajuruArcher(final TajuruArcher card) {
+    private TajuruArcher(final TajuruArcher card) {
         super(card);
     }
 

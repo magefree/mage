@@ -27,7 +27,7 @@ public final class RabidWolverines extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
     }
 
-    public RabidWolverines(final RabidWolverines card) {
+    private RabidWolverines(final RabidWolverines card) {
         super(card);
     }
 

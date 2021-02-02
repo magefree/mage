@@ -47,7 +47,7 @@ public final class ButcherOfTheHorde extends CardImpl {
                         new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false))));
     }
 
-    public ButcherOfTheHorde(final ButcherOfTheHorde card) {
+    private ButcherOfTheHorde(final ButcherOfTheHorde card) {
         super(card);
     }
 

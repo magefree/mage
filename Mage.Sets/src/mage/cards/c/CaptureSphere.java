@@ -46,7 +46,7 @@ public final class CaptureSphere extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
-    public CaptureSphere(final CaptureSphere card) {
+    private CaptureSphere(final CaptureSphere card) {
         super(card);
     }
 

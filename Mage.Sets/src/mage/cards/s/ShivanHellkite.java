@@ -33,7 +33,7 @@ public final class ShivanHellkite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShivanHellkite(final ShivanHellkite card) {
+    private ShivanHellkite(final ShivanHellkite card) {
         super(card);
     }
 

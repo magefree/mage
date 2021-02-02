@@ -38,7 +38,7 @@ public final class DawnglowInfusion extends CardImpl {
 
     }
 
-    public DawnglowInfusion(final DawnglowInfusion card) {
+    private DawnglowInfusion(final DawnglowInfusion card) {
         super(card);
     }
 

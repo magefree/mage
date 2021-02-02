@@ -32,7 +32,7 @@ public final class FavorableWinds extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public FavorableWinds(final FavorableWinds card) {
+    private FavorableWinds(final FavorableWinds card) {
         super(card);
     }
 

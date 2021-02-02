@@ -25,7 +25,7 @@ public final class CanyonWildcat extends CardImpl {
         this.addAbility(new MountainwalkAbility());
     }
 
-    public CanyonWildcat(final CanyonWildcat card) {
+    private CanyonWildcat(final CanyonWildcat card) {
         super(card);
     }
 

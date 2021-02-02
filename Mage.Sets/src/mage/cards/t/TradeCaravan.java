@@ -53,7 +53,7 @@ public final class TradeCaravan extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TradeCaravan(final TradeCaravan card) {
+    private TradeCaravan(final TradeCaravan card) {
         super(card);
     }
 

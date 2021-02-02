@@ -23,7 +23,7 @@ public final class LightningHelix extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(3).concatBy("and"));
     }
 
-    public LightningHelix(final LightningHelix card) {
+    private LightningHelix(final LightningHelix card) {
         super(card);
     }
 

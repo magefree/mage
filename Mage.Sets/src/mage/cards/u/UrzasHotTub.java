@@ -36,7 +36,7 @@ public class UrzasHotTub extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UrzasHotTub(final UrzasHotTub card) {
+    private UrzasHotTub(final UrzasHotTub card) {
         super(card);
     }
 

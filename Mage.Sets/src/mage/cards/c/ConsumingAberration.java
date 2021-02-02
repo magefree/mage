@@ -39,7 +39,7 @@ public final class ConsumingAberration extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new ConsumingAberrationEffect(), false));
     }
 
-    public ConsumingAberration(final ConsumingAberration card) {
+    private ConsumingAberration(final ConsumingAberration card) {
         super(card);
     }
 

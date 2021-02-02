@@ -41,7 +41,7 @@ public final class SpellbaneCentaur extends CardImpl {
                         filter, Duration.WhileOnBattlefield)));
     }
 
-    public SpellbaneCentaur(final SpellbaneCentaur card) {
+    private SpellbaneCentaur(final SpellbaneCentaur card) {
         super(card);
     }
 

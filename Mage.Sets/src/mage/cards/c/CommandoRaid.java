@@ -43,7 +43,7 @@ public final class CommandoRaid extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
-    public CommandoRaid(final CommandoRaid card) {
+    private CommandoRaid(final CommandoRaid card) {
         super(card);
     }
 

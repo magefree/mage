@@ -66,7 +66,7 @@ public final class RaziaBorosArchangel extends CardImpl {
 
     }
 
-    public RaziaBorosArchangel(final RaziaBorosArchangel card) {
+    private RaziaBorosArchangel(final RaziaBorosArchangel card) {
         super(card);
     }
 

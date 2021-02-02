@@ -26,7 +26,7 @@ public final class BirdMaiden extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public BirdMaiden(final BirdMaiden card) {
+    private BirdMaiden(final BirdMaiden card) {
         super(card);
     }
 

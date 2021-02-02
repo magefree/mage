@@ -29,7 +29,7 @@ public final class SoaringSeacliff extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public SoaringSeacliff(final SoaringSeacliff card) {
+    private SoaringSeacliff(final SoaringSeacliff card) {
         super(card);
     }
 

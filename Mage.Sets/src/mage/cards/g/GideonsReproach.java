@@ -22,7 +22,7 @@ public final class GideonsReproach extends CardImpl {
         getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());
     }
 
-    public GideonsReproach(final GideonsReproach card) {
+    private GideonsReproach(final GideonsReproach card) {
         super(card);
     }
 

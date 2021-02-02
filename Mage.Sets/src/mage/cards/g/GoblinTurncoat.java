@@ -41,7 +41,7 @@ public final class GoblinTurncoat extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinTurncoat(final GoblinTurncoat card) {
+    private GoblinTurncoat(final GoblinTurncoat card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class WarriorEnKor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WarriorEnKor(final WarriorEnKor card) {
+    private WarriorEnKor(final WarriorEnKor card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class HinterlandLogger extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
-    public HinterlandLogger(final HinterlandLogger card) {
+    private HinterlandLogger(final HinterlandLogger card) {
         super(card);
     }
 

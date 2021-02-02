@@ -41,7 +41,7 @@ public final class LadyEvangela extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LadyEvangela(final LadyEvangela card) {
+    private LadyEvangela(final LadyEvangela card) {
         super(card);
     }
 

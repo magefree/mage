@@ -32,7 +32,7 @@ public final class CalmingVerse extends CardImpl {
 
     }
 
-    public CalmingVerse(final CalmingVerse card) {
+    private CalmingVerse(final CalmingVerse card) {
         super(card);
     }
 

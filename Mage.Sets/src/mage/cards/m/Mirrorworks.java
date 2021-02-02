@@ -41,7 +41,7 @@ public final class Mirrorworks extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false, SetTargetPointer.PERMANENT, null));
     }
 
-    public Mirrorworks(final Mirrorworks card) {
+    private Mirrorworks(final Mirrorworks card) {
         super(card);
     }
 

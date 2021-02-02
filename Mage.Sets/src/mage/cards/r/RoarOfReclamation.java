@@ -26,7 +26,7 @@ public final class RoarOfReclamation extends CardImpl {
         this.getSpellAbility().addEffect(new RoarOfReclamationEffect());
     }
 
-    public RoarOfReclamation(final RoarOfReclamation card) {
+    private RoarOfReclamation(final RoarOfReclamation card) {
         super(card);
     }
 

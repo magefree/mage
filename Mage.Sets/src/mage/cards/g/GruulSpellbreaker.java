@@ -59,7 +59,7 @@ public final class GruulSpellbreaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GruulSpellbreaker(final GruulSpellbreaker card) {
+    private GruulSpellbreaker(final GruulSpellbreaker card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class LavafumeInvoker extends CardImpl {
                 new BoostControlledEffect(3, 0, Duration.EndOfTurn), new ManaCostsImpl("{8}")));
     }
 
-    public LavafumeInvoker(final LavafumeInvoker card) {
+    private LavafumeInvoker(final LavafumeInvoker card) {
         super(card);
     }
 

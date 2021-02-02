@@ -30,7 +30,7 @@ public final class LuminescentRain extends CardImpl {
         this.getSpellAbility().addEffect(new LuminescentRainEffect());
     }
 
-    public LuminescentRain(final LuminescentRain card) {
+    private LuminescentRain(final LuminescentRain card) {
         super(card);
     }
 

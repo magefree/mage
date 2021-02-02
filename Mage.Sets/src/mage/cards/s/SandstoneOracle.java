@@ -36,7 +36,7 @@ public final class SandstoneOracle extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SandstoneOracleEffect()));
     }
 
-    public SandstoneOracle(final SandstoneOracle card) {
+    private SandstoneOracle(final SandstoneOracle card) {
         super(card);
     }
 

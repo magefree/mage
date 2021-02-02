@@ -40,7 +40,7 @@ public final class FlowstoneThopter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlowstoneThopter(final FlowstoneThopter card) {
+    private FlowstoneThopter(final FlowstoneThopter card) {
         super(card);
     }
 

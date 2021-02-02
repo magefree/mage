@@ -41,7 +41,7 @@ public final class KrosanGroundshaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KrosanGroundshaker(final KrosanGroundshaker card) {
+    private KrosanGroundshaker(final KrosanGroundshaker card) {
         super(card);
     }
 

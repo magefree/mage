@@ -30,7 +30,7 @@ public final class VoiceOfTheProvinces extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new HumanToken())));
     }
 
-    public VoiceOfTheProvinces(final VoiceOfTheProvinces card) {
+    private VoiceOfTheProvinces(final VoiceOfTheProvinces card) {
         super(card);
     }
 

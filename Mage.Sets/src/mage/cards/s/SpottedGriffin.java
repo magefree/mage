@@ -26,7 +26,7 @@ public final class SpottedGriffin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SpottedGriffin(final SpottedGriffin card) {
+    private SpottedGriffin(final SpottedGriffin card) {
         super(card);
     }
 

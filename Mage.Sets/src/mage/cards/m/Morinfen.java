@@ -31,7 +31,7 @@ public final class Morinfen extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new PayLifeCost(1)));
     }
 
-    public Morinfen(final Morinfen card) {
+    private Morinfen(final Morinfen card) {
         super(card);
     }
 

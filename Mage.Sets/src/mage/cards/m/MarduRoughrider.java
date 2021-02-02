@@ -32,7 +32,7 @@ public final class MarduRoughrider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MarduRoughrider(final MarduRoughrider card) {
+    private MarduRoughrider(final MarduRoughrider card) {
         super(card);
     }
 

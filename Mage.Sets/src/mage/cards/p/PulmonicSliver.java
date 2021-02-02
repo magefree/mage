@@ -43,7 +43,7 @@ public final class PulmonicSliver extends CardImpl {
                 filterSlivers, "All Slivers have \"If this permanent would be put into a graveyard, you may put it on top of its owner's library instead.\"")));
     }
 
-    public PulmonicSliver(final PulmonicSliver card) {
+    private PulmonicSliver(final PulmonicSliver card) {
         super(card);
     }
 

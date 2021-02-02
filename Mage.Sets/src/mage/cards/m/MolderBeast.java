@@ -34,7 +34,7 @@ public final class MolderBeast extends CardImpl {
         this.addAbility(new MolderBeastTriggeredAbility());
     }
 
-    public MolderBeast(final MolderBeast card) {
+    private MolderBeast(final MolderBeast card) {
         super(card);
     }
 

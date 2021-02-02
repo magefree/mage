@@ -43,7 +43,7 @@ public final class SorinGrimNemesis extends CardImpl {
         this.addAbility(new LoyaltyAbility(new SorinTokenEffect(), -9));
     }
 
-    public SorinGrimNemesis(final SorinGrimNemesis card) {
+    private SorinGrimNemesis(final SorinGrimNemesis card) {
         super(card);
     }
 

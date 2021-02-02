@@ -25,7 +25,7 @@ public final class ControlOfTheCourt extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public ControlOfTheCourt(final ControlOfTheCourt card) {
+    private ControlOfTheCourt(final ControlOfTheCourt card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class TowerGargoyle extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public TowerGargoyle(final TowerGargoyle card) {
+    private TowerGargoyle(final TowerGargoyle card) {
         super(card);
     }
 

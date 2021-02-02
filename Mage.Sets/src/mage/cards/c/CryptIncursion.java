@@ -28,7 +28,7 @@ public final class CryptIncursion extends CardImpl {
 
     }
 
-    public CryptIncursion(final CryptIncursion card) {
+    private CryptIncursion(final CryptIncursion card) {
         super(card);
     }
 

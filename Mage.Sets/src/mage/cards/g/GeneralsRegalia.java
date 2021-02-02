@@ -35,7 +35,7 @@ public final class GeneralsRegalia extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GeneralsRegalia(final GeneralsRegalia card) {
+    private GeneralsRegalia(final GeneralsRegalia card) {
         super(card);
     }
 

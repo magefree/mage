@@ -40,7 +40,7 @@ public final class FeastOfFlesh extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FeastOfFlesh(final FeastOfFlesh card) {
+    private FeastOfFlesh(final FeastOfFlesh card) {
         super(card);
     }
 

@@ -59,7 +59,7 @@ public final class ThopterSquadron extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public ThopterSquadron(final ThopterSquadron card) {
+    private ThopterSquadron(final ThopterSquadron card) {
         super(card);
     }
 

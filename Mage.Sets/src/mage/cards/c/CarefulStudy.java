@@ -20,7 +20,7 @@ public final class CarefulStudy extends CardImpl {
         this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2,2));
     }
 
-    public CarefulStudy(final CarefulStudy card) {
+    private CarefulStudy(final CarefulStudy card) {
         super(card);
     }
 

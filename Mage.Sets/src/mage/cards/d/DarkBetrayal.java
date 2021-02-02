@@ -33,7 +33,7 @@ public final class DarkBetrayal extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public DarkBetrayal(final DarkBetrayal card) {
+    private DarkBetrayal(final DarkBetrayal card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class Fabricate extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, filter), true));
     }
 
-    public Fabricate(final Fabricate card) {
+    private Fabricate(final Fabricate card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class MenagerieLiberator extends CardImpl {
         this.addAbility(new MeleeAbility());
     }
 
-    public MenagerieLiberator(final MenagerieLiberator card) {
+    private MenagerieLiberator(final MenagerieLiberator card) {
         super(card);
     }
 

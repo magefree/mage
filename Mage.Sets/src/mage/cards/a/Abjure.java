@@ -36,7 +36,7 @@ public final class Abjure extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Abjure(final Abjure card) {
+    private Abjure(final Abjure card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class EonHub extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUpkeepStepEffect()));
     }
     
-    public EonHub(final EonHub card) {
+    private EonHub(final EonHub card) {
         super(card);
     }
     

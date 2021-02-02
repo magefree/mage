@@ -28,7 +28,7 @@ public final class TriumphOfFerocity extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, ControlsCreatureGreatestPowerCondition.instance, ruleText));
     }
 
-    public TriumphOfFerocity(final TriumphOfFerocity card) {
+    private TriumphOfFerocity(final TriumphOfFerocity card) {
         super(card);
     }
 

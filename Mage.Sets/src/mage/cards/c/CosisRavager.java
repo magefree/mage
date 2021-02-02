@@ -29,7 +29,7 @@ public final class CosisRavager extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CosisRavager(final CosisRavager card) {
+    private CosisRavager(final CosisRavager card) {
         super(card);
     }
 

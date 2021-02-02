@@ -39,7 +39,7 @@ public final class RyuseiTheFallingStar extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DamageAllEffect(5, filter)));
     }
 
-    public RyuseiTheFallingStar(final RyuseiTheFallingStar card) {
+    private RyuseiTheFallingStar(final RyuseiTheFallingStar card) {
         super(card);
     }
 

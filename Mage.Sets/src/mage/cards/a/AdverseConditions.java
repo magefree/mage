@@ -36,7 +36,7 @@ public final class AdverseConditions extends CardImpl {
 
     }
 
-    public AdverseConditions(final AdverseConditions card) {
+    private AdverseConditions(final AdverseConditions card) {
         super(card);
     }
 

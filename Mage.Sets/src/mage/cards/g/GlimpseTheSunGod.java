@@ -29,7 +29,7 @@ public final class GlimpseTheSunGod extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(GlimpseTheSunGodAdjuster.instance);
     }
 
-    public GlimpseTheSunGod(final GlimpseTheSunGod card) {
+    private GlimpseTheSunGod(final GlimpseTheSunGod card) {
         super(card);
     }
 

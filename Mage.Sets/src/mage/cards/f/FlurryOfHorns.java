@@ -21,7 +21,7 @@ public final class FlurryOfHorns extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new FlurryOfHornsMinotaurToken(), 2));
     }
 
-    public FlurryOfHorns(final FlurryOfHorns card) {
+    private FlurryOfHorns(final FlurryOfHorns card) {
         super(card);
     }
 

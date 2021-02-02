@@ -37,7 +37,7 @@ public final class OgreSavant extends CardImpl {
                 new ManaSpentToCastWatcher());
     }
 
-    public OgreSavant(final OgreSavant card) {
+    private OgreSavant(final OgreSavant card) {
         super(card);
     }
 

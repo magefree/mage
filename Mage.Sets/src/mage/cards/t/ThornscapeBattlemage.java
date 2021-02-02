@@ -48,7 +48,7 @@ public final class ThornscapeBattlemage extends CardImpl {
                 "When {this} enters the battlefield, if it was kicked with its {W} kicker, destroy target artifact."));
     }
 
-    public ThornscapeBattlemage(final ThornscapeBattlemage card) {
+    private ThornscapeBattlemage(final ThornscapeBattlemage card) {
         super(card);
     }
 

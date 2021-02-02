@@ -29,7 +29,7 @@ public final class SwiftSpinner extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public SwiftSpinner(final SwiftSpinner card) {
+    private SwiftSpinner(final SwiftSpinner card) {
         super(card);
     }
 

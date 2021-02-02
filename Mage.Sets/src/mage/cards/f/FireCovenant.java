@@ -30,7 +30,7 @@ public final class FireCovenant extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(xValue));
     }
 
-    public FireCovenant(final FireCovenant card) {
+    private FireCovenant(final FireCovenant card) {
         super(card);
     }
 

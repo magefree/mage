@@ -34,7 +34,7 @@ public final class LiberatingCombustion extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryGraveyardPutInHandEffect(filter));
     }
 
-    public LiberatingCombustion(final LiberatingCombustion card) {
+    private LiberatingCombustion(final LiberatingCombustion card) {
         super(card);
     }
 

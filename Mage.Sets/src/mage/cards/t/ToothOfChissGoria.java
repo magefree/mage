@@ -33,7 +33,7 @@ public final class ToothOfChissGoria extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ToothOfChissGoria(final ToothOfChissGoria card) {
+    private ToothOfChissGoria(final ToothOfChissGoria card) {
         super(card);
     }
 

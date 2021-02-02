@@ -39,7 +39,7 @@ public final class SingeMindOgre extends CardImpl {
 
     }
 
-    public SingeMindOgre(final SingeMindOgre card) {
+    private SingeMindOgre(final SingeMindOgre card) {
         super(card);
     }
 

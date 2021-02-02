@@ -27,7 +27,7 @@ public final class ToothOfRamos extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.WhiteMana(1), new SacrificeSourceCost()));
     }
 
-    public ToothOfRamos(final ToothOfRamos card) {
+    private ToothOfRamos(final ToothOfRamos card) {
         super(card);
     }
 

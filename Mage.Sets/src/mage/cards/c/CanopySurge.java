@@ -36,7 +36,7 @@ public final class CanopySurge extends CardImpl {
             "{this} deals 1 damage to each creature with flying and each player. if this spell was kicked, it deals 4 damage to each creature with flying and each player instead."));
     }
 
-    public CanopySurge(final CanopySurge card) {
+    private CanopySurge(final CanopySurge card) {
         super(card);
     }
 

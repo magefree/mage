@@ -36,7 +36,7 @@ public final class FireServant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FireServantEffect()));
     }
 
-    public FireServant(final FireServant card) {
+    private FireServant(final FireServant card) {
         super(card);
     }
 

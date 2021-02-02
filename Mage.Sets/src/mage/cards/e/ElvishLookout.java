@@ -26,7 +26,7 @@ public final class ElvishLookout extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public ElvishLookout(final ElvishLookout card) {
+    private ElvishLookout(final ElvishLookout card) {
         super(card);
     }
 

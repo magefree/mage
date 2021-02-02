@@ -22,7 +22,7 @@ public final class ForestBear extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public ForestBear(final ForestBear card) {
+    private ForestBear(final ForestBear card) {
         super(card);
     }
 

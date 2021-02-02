@@ -33,7 +33,7 @@ public final class LastStand extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public LastStand(final LastStand card) {
+    private LastStand(final LastStand card) {
         super(card);
     }
 

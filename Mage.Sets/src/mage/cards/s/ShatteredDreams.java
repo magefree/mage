@@ -29,7 +29,7 @@ public final class ShatteredDreams extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
     }
 
-    public ShatteredDreams(final ShatteredDreams card) {
+    private ShatteredDreams(final ShatteredDreams card) {
         super(card);
     }
 

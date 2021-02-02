@@ -33,7 +33,7 @@ public final class RubblebeltBoar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RubblebeltBoar(final RubblebeltBoar card) {
+    private RubblebeltBoar(final RubblebeltBoar card) {
         super(card);
     }
 

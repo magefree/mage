@@ -33,7 +33,7 @@ public final class EmberEyeWolf extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
     }
 
-    public EmberEyeWolf(final EmberEyeWolf card) {
+    private EmberEyeWolf(final EmberEyeWolf card) {
         super(card);
     }
 

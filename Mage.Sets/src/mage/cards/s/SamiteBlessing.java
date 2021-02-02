@@ -47,7 +47,7 @@ public final class SamiteBlessing extends CardImpl {
 
     }
 
-    public SamiteBlessing(final SamiteBlessing card) {
+    private SamiteBlessing(final SamiteBlessing card) {
         super(card);
     }
 

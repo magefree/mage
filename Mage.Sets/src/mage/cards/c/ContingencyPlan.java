@@ -25,7 +25,7 @@ public final class ContingencyPlan extends CardImpl {
 
     }
 
-    public ContingencyPlan(final ContingencyPlan card) {
+    private ContingencyPlan(final ContingencyPlan card) {
         super(card);
     }
 

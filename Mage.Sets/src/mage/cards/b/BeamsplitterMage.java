@@ -43,7 +43,7 @@ public final class BeamsplitterMage extends CardImpl {
         this.addAbility(new BeamsplitterMageTriggeredAbility());
     }
 
-    public BeamsplitterMage(final BeamsplitterMage card) {
+    private BeamsplitterMage(final BeamsplitterMage card) {
         super(card);
     }
 

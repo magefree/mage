@@ -50,7 +50,7 @@ public final class WharfInfiltrator extends CardImpl {
         this.addAbility(new WharfInfiltratorDiscardAbility(doIfCostPaid));
     }
 
-    public WharfInfiltrator(final WharfInfiltrator card) {
+    private WharfInfiltrator(final WharfInfiltrator card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class Cytoshape extends CardImpl {
 
     }
 
-    public Cytoshape(final Cytoshape card) {
+    private Cytoshape(final Cytoshape card) {
         super(card);
     }
 

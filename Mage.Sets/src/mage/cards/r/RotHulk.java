@@ -59,7 +59,7 @@ public final class RotHulk extends CardImpl {
         }
     }
 
-    public RotHulk(final RotHulk card) {
+    private RotHulk(final RotHulk card) {
         super(card);
         this.entersBattlefieldAbilityID = card.entersBattlefieldAbilityID;
     }

@@ -23,7 +23,7 @@ public final class Vorstclaw extends CardImpl {
         this.toughness = new MageInt(7);
     }
 
-    public Vorstclaw(final Vorstclaw card) {
+    private Vorstclaw(final Vorstclaw card) {
         super(card);
     }
 

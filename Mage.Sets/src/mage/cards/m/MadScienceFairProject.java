@@ -29,7 +29,7 @@ public final class MadScienceFairProject extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new MadScienceFairManaEffect(), new TapSourceCost()));
     }
 
-    public MadScienceFairProject(final MadScienceFairProject card) {
+    private MadScienceFairProject(final MadScienceFairProject card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class SeismicElemental extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CantBlockAllEffect(filter, Duration.EndOfTurn), false));
     }
 
-    public SeismicElemental(final SeismicElemental card) {
+    private SeismicElemental(final SeismicElemental card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class SmashToSmithereens extends CardImpl {
 
     }
 
-    public SmashToSmithereens(final SmashToSmithereens card) {
+    private SmashToSmithereens(final SmashToSmithereens card) {
         super(card);
     }
 

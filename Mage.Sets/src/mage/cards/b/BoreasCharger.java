@@ -48,7 +48,7 @@ public final class BoreasCharger extends CardImpl {
         ));
     }
 
-    public BoreasCharger(final BoreasCharger card) {
+    private BoreasCharger(final BoreasCharger card) {
         super(card);
     }
 

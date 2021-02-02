@@ -42,7 +42,7 @@ public final class KyrenToy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KyrenToy(final KyrenToy card) {
+    private KyrenToy(final KyrenToy card) {
         super(card);
     }
 

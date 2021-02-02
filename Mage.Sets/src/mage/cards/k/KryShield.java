@@ -38,7 +38,7 @@ public final class KryShield extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KryShield(final KryShield card) {
+    private KryShield(final KryShield card) {
         super(card);
     }
 

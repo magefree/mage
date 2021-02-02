@@ -52,7 +52,7 @@ public final class RadiantArchangel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield)));        
     }
 
-    public RadiantArchangel(final RadiantArchangel card) {
+    private RadiantArchangel(final RadiantArchangel card) {
         super(card);
     }
 

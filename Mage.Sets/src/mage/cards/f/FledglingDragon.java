@@ -45,7 +45,7 @@ public final class FledglingDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FledglingDragon(final FledglingDragon card) {
+    private FledglingDragon(final FledglingDragon card) {
         super(card);
     }
 

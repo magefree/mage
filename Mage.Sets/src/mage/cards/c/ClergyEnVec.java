@@ -33,7 +33,7 @@ public final class ClergyEnVec extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ClergyEnVec(final ClergyEnVec card) {
+    private ClergyEnVec(final ClergyEnVec card) {
         super(card);
     }
 

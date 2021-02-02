@@ -35,7 +35,7 @@ public final class Vaultbreaker extends CardImpl {
 
     }
 
-    public Vaultbreaker(final Vaultbreaker card) {
+    private Vaultbreaker(final Vaultbreaker card) {
         super(card);
     }
 

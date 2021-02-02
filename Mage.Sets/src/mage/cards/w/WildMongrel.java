@@ -39,7 +39,7 @@ public final class WildMongrel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WildMongrel(final WildMongrel card) {
+    private WildMongrel(final WildMongrel card) {
         super(card);
     }
 

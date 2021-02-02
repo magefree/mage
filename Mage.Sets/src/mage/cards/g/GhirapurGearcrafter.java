@@ -28,7 +28,7 @@ public final class GhirapurGearcrafter extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken())));
     }
 
-    public GhirapurGearcrafter(final GhirapurGearcrafter card) {
+    private GhirapurGearcrafter(final GhirapurGearcrafter card) {
         super(card);
     }
 

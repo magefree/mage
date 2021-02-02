@@ -23,7 +23,7 @@ public final class Vivisection extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
     }
 
-    public Vivisection(final Vivisection card) {
+    private Vivisection(final Vivisection card) {
         super(card);
     }
 

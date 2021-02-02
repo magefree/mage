@@ -36,7 +36,7 @@ public final class ThaliaHereticCathar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThaliaTapEffect()));
     }
 
-    public ThaliaHereticCathar(final ThaliaHereticCathar card) {
+    private ThaliaHereticCathar(final ThaliaHereticCathar card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class ShivanGorge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShivanGorge(final ShivanGorge card) {
+    private ShivanGorge(final ShivanGorge card) {
         super(card);
     }
 

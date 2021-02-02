@@ -44,7 +44,7 @@ public final class Melancholy extends CardImpl {
             TargetController.YOU, false));
     }
 
-    public Melancholy(final Melancholy card) {
+    private Melancholy(final Melancholy card) {
         super(card);
     }
 

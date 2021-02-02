@@ -32,7 +32,7 @@ public final class LabyrinthChampion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LabyrinthChampion(final LabyrinthChampion card) {
+    private LabyrinthChampion(final LabyrinthChampion card) {
         super(card);
     }
 

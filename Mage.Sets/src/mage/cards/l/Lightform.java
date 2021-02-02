@@ -37,7 +37,7 @@ public final class Lightform extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Lightform(final Lightform card) {
+    private Lightform(final Lightform card) {
         super(card);
     }
 

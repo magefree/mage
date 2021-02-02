@@ -45,7 +45,7 @@ public final class DaredevilDragster extends CardImpl {
         this.addAbility(new CrewAbility(2));
     }
 
-    public DaredevilDragster(final DaredevilDragster card) {
+    private DaredevilDragster(final DaredevilDragster card) {
         super(card);
     }
 

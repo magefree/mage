@@ -22,7 +22,7 @@ public final class ScaledWurm extends CardImpl {
         this.toughness = new MageInt(6);
     }
 
-    public ScaledWurm(final ScaledWurm card) {
+    private ScaledWurm(final ScaledWurm card) {
         super(card);
     }
 

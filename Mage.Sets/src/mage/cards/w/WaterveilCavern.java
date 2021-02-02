@@ -32,7 +32,7 @@ public final class WaterveilCavern extends CardImpl {
         this.addAbility(blackManaAbility);
     }
 
-    public WaterveilCavern(final WaterveilCavern card) {
+    private WaterveilCavern(final WaterveilCavern card) {
         super(card);
     }
 

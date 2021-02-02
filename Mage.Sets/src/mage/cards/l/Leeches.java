@@ -26,7 +26,7 @@ public final class Leeches extends CardImpl {
         this.getSpellAbility().addEffect(new LeechesEffect());
     }
 
-    public Leeches(final Leeches card) {
+    private Leeches(final Leeches card) {
         super(card);
     }
 

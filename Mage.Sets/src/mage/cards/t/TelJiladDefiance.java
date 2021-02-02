@@ -25,7 +25,7 @@ public final class TelJiladDefiance extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public TelJiladDefiance(final TelJiladDefiance card) {
+    private TelJiladDefiance(final TelJiladDefiance card) {
         super(card);
     }
 

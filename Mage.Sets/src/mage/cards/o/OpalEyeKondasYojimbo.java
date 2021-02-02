@@ -50,7 +50,7 @@ public final class OpalEyeKondasYojimbo extends CardImpl {
 
     }
 
-    public OpalEyeKondasYojimbo(final OpalEyeKondasYojimbo card) {
+    private OpalEyeKondasYojimbo(final OpalEyeKondasYojimbo card) {
         super(card);
     }
 

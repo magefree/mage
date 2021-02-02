@@ -26,7 +26,7 @@ public final class WillowDryad extends CardImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public WillowDryad(final WillowDryad card) {
+    private WillowDryad(final WillowDryad card) {
         super(card);
     }
 

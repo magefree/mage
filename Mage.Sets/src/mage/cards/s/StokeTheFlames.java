@@ -25,7 +25,7 @@ public final class StokeTheFlames extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public StokeTheFlames(final StokeTheFlames card) {
+    private StokeTheFlames(final StokeTheFlames card) {
         super(card);
     }
 

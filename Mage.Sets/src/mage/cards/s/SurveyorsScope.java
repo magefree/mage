@@ -35,7 +35,7 @@ public final class SurveyorsScope extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SurveyorsScope(final SurveyorsScope card) {
+    private SurveyorsScope(final SurveyorsScope card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class GrimFlayer extends CardImpl {
                 .addHint(DeliriumHint.instance));
     }
 
-    public GrimFlayer(final GrimFlayer card) {
+    private GrimFlayer(final GrimFlayer card) {
         super(card);
     }
 

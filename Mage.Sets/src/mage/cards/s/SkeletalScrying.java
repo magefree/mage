@@ -38,7 +38,7 @@ public final class SkeletalScrying extends CardImpl {
 
     }
 
-    public SkeletalScrying(final SkeletalScrying card) {
+    private SkeletalScrying(final SkeletalScrying card) {
         super(card);
     }
 

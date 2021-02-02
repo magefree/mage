@@ -31,7 +31,7 @@ public final class PirsWhim extends CardImpl {
         this.getSpellAbility().addEffect(new PirsWhimEffect());
     }
 
-    public PirsWhim(final PirsWhim card) {
+    private PirsWhim(final PirsWhim card) {
         super(card);
     }
 

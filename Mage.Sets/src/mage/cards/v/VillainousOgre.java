@@ -47,7 +47,7 @@ public final class VillainousOgre extends CardImpl {
                 rule));        
     }
 
-    public VillainousOgre(final VillainousOgre card) {
+    private VillainousOgre(final VillainousOgre card) {
         super(card);
     }
 

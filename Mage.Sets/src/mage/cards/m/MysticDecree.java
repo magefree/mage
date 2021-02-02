@@ -36,7 +36,7 @@ public final class MysticDecree extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MysticDecree(final MysticDecree card) {
+    private MysticDecree(final MysticDecree card) {
         super(card);
     }
 

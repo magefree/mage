@@ -28,7 +28,7 @@ public final class SeekersSquire extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect()));
     }
 
-    public SeekersSquire(final SeekersSquire card) {
+    private SeekersSquire(final SeekersSquire card) {
         super(card);
     }
 

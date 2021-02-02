@@ -54,7 +54,7 @@ public final class CartoucheOfStrength extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CartoucheOfStrength(final CartoucheOfStrength card) {
+    private CartoucheOfStrength(final CartoucheOfStrength card) {
         super(card);
     }
 

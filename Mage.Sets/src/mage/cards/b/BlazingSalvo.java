@@ -26,7 +26,7 @@ public final class BlazingSalvo extends CardImpl {
         this.getSpellAbility().addEffect(new BlazingSalvoEffect());
     }
 
-    public BlazingSalvo(final BlazingSalvo card) {
+    private BlazingSalvo(final BlazingSalvo card) {
         super(card);
     }
 

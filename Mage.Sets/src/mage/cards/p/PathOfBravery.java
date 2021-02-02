@@ -44,7 +44,7 @@ public final class PathOfBravery extends CardImpl {
 
     }
 
-    public PathOfBravery(final PathOfBravery card) {
+    private PathOfBravery(final PathOfBravery card) {
         super(card);
     }
 

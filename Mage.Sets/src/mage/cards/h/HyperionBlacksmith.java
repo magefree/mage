@@ -41,7 +41,7 @@ public final class HyperionBlacksmith extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HyperionBlacksmith(final HyperionBlacksmith card) {
+    private HyperionBlacksmith(final HyperionBlacksmith card) {
         super(card);
     }
 

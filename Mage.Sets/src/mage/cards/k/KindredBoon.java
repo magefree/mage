@@ -52,7 +52,7 @@ public final class KindredBoon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public KindredBoon(final KindredBoon card) {
+    private KindredBoon(final KindredBoon card) {
         super(card);
     }
 

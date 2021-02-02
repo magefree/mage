@@ -45,7 +45,7 @@ public final class WildPair extends CardImpl {
         ), new CastFromHandWatcher());
     }
 
-    public WildPair(final WildPair card) {
+    private WildPair(final WildPair card) {
         super(card);
     }
 

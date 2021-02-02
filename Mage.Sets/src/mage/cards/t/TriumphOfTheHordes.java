@@ -27,7 +27,7 @@ public final class TriumphOfTheHordes extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(InfectAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
-    public TriumphOfTheHordes(final TriumphOfTheHordes card) {
+    private TriumphOfTheHordes(final TriumphOfTheHordes card) {
         super(card);
     }
 

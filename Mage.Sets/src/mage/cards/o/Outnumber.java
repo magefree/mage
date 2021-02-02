@@ -29,7 +29,7 @@ public final class Outnumber extends CardImpl {
 
     }
 
-    public Outnumber(final Outnumber card) {
+    private Outnumber(final Outnumber card) {
         super(card);
     }
 

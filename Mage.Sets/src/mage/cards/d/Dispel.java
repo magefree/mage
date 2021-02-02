@@ -28,7 +28,7 @@ public final class Dispel extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
-    public Dispel(final Dispel card) {
+    private Dispel(final Dispel card) {
         super(card);
     }
 

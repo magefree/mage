@@ -35,7 +35,7 @@ public final class ImpulsiveWager extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
     }
 
-    public ImpulsiveWager(final ImpulsiveWager card) {
+    private ImpulsiveWager(final ImpulsiveWager card) {
         super(card);
     }
 

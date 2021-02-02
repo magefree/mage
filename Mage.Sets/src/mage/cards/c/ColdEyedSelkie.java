@@ -36,7 +36,7 @@ public final class ColdEyedSelkie extends CardImpl {
 
     }
 
-    public ColdEyedSelkie(final ColdEyedSelkie card) {
+    private ColdEyedSelkie(final ColdEyedSelkie card) {
         super(card);
     }
 

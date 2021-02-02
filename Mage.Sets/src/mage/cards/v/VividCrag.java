@@ -35,7 +35,7 @@ public final class VividCrag extends CardImpl {
 
     }
 
-    public VividCrag(final VividCrag card) {
+    private VividCrag(final VividCrag card) {
         super(card);
     }
 

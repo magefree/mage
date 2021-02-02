@@ -33,7 +33,7 @@ public final class WandOfDenial extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WandOfDenial(final WandOfDenial card) {
+    private WandOfDenial(final WandOfDenial card) {
         super(card);
     }
 

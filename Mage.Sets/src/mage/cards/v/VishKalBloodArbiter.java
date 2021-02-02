@@ -64,7 +64,7 @@ public final class VishKalBloodArbiter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VishKalBloodArbiter(final VishKalBloodArbiter card) {
+    private VishKalBloodArbiter(final VishKalBloodArbiter card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class TimeOut extends CardImpl {
 
     }
 
-    public TimeOut(final TimeOut card) {
+    private TimeOut(final TimeOut card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class GoreSwine extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public GoreSwine(final GoreSwine card) {
+    private GoreSwine(final GoreSwine card) {
         super(card);
     }
 

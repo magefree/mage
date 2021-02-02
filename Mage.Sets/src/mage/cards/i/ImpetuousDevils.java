@@ -45,7 +45,7 @@ public final class ImpetuousDevils extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.NEXT, false));
     }
 
-    public ImpetuousDevils(final ImpetuousDevils card) {
+    private ImpetuousDevils(final ImpetuousDevils card) {
         super(card);
     }
 

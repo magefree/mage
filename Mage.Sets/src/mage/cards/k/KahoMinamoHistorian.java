@@ -52,7 +52,7 @@ public final class KahoMinamoHistorian extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KahoMinamoHistorian(final KahoMinamoHistorian card) {
+    private KahoMinamoHistorian(final KahoMinamoHistorian card) {
         super(card);
     }
 

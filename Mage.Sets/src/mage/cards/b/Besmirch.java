@@ -35,7 +35,7 @@ public final class Besmirch extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Besmirch(final Besmirch card) {
+    private Besmirch(final Besmirch card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class LifeGoesOn extends CardImpl {
         getSpellAbility().addEffect(new ConditionalOneShotEffect(new GainLifeEffect(8), new GainLifeEffect(4), MorbidCondition.instance, "You gain 4 life. If a creature died this turn, you gain 8 life instead"));
     }
 
-    public LifeGoesOn(final LifeGoesOn card) {
+    private LifeGoesOn(final LifeGoesOn card) {
         super(card);
     }
 

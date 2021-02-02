@@ -36,7 +36,7 @@ public final class ZombieMob extends CardImpl {
 
     }
 
-    public ZombieMob(final ZombieMob card) {
+    private ZombieMob(final ZombieMob card) {
         super(card);
     }
 

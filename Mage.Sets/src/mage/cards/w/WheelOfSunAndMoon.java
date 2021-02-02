@@ -46,7 +46,7 @@ public final class WheelOfSunAndMoon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WheelOfSunAndMoonEffect()));
     }
 
-    public WheelOfSunAndMoon(final WheelOfSunAndMoon card) {
+    private WheelOfSunAndMoon(final WheelOfSunAndMoon card) {
         super(card);
     }
 

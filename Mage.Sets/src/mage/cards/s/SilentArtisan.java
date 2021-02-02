@@ -22,7 +22,7 @@ public final class SilentArtisan extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public SilentArtisan(final SilentArtisan card) {
+    private SilentArtisan(final SilentArtisan card) {
         super(card);
     }
 

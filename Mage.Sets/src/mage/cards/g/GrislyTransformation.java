@@ -39,7 +39,7 @@ public final class GrislyTransformation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
-    public GrislyTransformation(final GrislyTransformation card) {
+    private GrislyTransformation(final GrislyTransformation card) {
         super(card);
     }
 

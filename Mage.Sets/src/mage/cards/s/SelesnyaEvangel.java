@@ -47,7 +47,7 @@ public final class SelesnyaEvangel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SelesnyaEvangel(final SelesnyaEvangel card) {
+    private SelesnyaEvangel(final SelesnyaEvangel card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class BrainWeevil extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BrainWeevil(final BrainWeevil card) {
+    private BrainWeevil(final BrainWeevil card) {
         super(card);
     }
 

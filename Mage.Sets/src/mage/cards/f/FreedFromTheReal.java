@@ -39,7 +39,7 @@ public final class FreedFromTheReal extends CardImpl {
 
     }
 
-    public FreedFromTheReal(final FreedFromTheReal card) {
+    private FreedFromTheReal(final FreedFromTheReal card) {
         super(card);
     }
 

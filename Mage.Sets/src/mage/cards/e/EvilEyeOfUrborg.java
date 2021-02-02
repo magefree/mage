@@ -39,7 +39,7 @@ public final class EvilEyeOfUrborg extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DestroyTargetEffect(), false));
     }
 
-    public EvilEyeOfUrborg(final EvilEyeOfUrborg card) {
+    private EvilEyeOfUrborg(final EvilEyeOfUrborg card) {
         super(card);
     }
 

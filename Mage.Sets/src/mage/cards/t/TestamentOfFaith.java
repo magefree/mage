@@ -35,7 +35,7 @@ public final class TestamentOfFaith extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TestamentOfFaith(final TestamentOfFaith card) {
+    private TestamentOfFaith(final TestamentOfFaith card) {
         super(card);
     }
 

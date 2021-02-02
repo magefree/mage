@@ -43,7 +43,7 @@ public final class TethmosHighPriest extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TethmosHighPriest(final TethmosHighPriest card) {
+    private TethmosHighPriest(final TethmosHighPriest card) {
         super(card);
     }
 

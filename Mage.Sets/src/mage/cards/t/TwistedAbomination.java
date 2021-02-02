@@ -33,7 +33,7 @@ public final class TwistedAbomination extends CardImpl {
         this.addAbility(new SwampcyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public TwistedAbomination(final TwistedAbomination card) {
+    private TwistedAbomination(final TwistedAbomination card) {
         super(card);
     }
 

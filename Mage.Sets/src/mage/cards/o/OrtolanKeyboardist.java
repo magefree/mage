@@ -29,7 +29,7 @@ public final class OrtolanKeyboardist extends CardImpl {
 
     }
 
-    public OrtolanKeyboardist(final OrtolanKeyboardist card) {
+    private OrtolanKeyboardist(final OrtolanKeyboardist card) {
         super(card);
     }
 

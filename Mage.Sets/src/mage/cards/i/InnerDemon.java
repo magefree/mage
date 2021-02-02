@@ -64,7 +64,7 @@ public final class InnerDemon extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostAllEffect(-2, -2, Duration.EndOfTurn, filter, false)));
     }
 
-    public InnerDemon(final InnerDemon card) {
+    private InnerDemon(final InnerDemon card) {
         super(card);
     }
 

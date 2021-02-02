@@ -23,7 +23,7 @@ public final class SphereOfLaw extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageByColorEffect(ObjectColor.RED, 2)));
     }
 
-    public SphereOfLaw(final SphereOfLaw card) {
+    private SphereOfLaw(final SphereOfLaw card) {
         super(card);
     }
 

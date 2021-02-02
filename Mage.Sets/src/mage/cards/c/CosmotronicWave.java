@@ -30,7 +30,7 @@ public final class CosmotronicWave extends CardImpl {
         ));
     }
 
-    public CosmotronicWave(final CosmotronicWave card) {
+    private CosmotronicWave(final CosmotronicWave card) {
         super(card);
     }
 

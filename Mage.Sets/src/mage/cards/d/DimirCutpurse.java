@@ -30,7 +30,7 @@ public final class DimirCutpurse extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DimirCutpurseEffect(), false, true));
     }
 
-    public DimirCutpurse(final DimirCutpurse card) {
+    private DimirCutpurse(final DimirCutpurse card) {
         super(card);
     }
 

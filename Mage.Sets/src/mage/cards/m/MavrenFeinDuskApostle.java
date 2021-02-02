@@ -39,7 +39,7 @@ public final class MavrenFeinDuskApostle extends CardImpl {
         this.addAbility(new MavrenFeinDuskApostleTriggeredAbility());
     }
 
-    public MavrenFeinDuskApostle(final MavrenFeinDuskApostle card) {
+    private MavrenFeinDuskApostle(final MavrenFeinDuskApostle card) {
         super(card);
     }
 

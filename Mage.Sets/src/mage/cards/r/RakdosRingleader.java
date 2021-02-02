@@ -39,7 +39,7 @@ public final class RakdosRingleader extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public RakdosRingleader(final RakdosRingleader card) {
+    private RakdosRingleader(final RakdosRingleader card) {
         super(card);
     }
 

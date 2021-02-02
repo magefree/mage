@@ -31,7 +31,7 @@ public final class UndercityTroll extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{G}")));
     }
 
-    public UndercityTroll(final UndercityTroll card) {
+    private UndercityTroll(final UndercityTroll card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class GlimpseTheFuture extends CardImpl {
 
     }
 
-    public GlimpseTheFuture(final GlimpseTheFuture card) {
+    private GlimpseTheFuture(final GlimpseTheFuture card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class VulshokReplica extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VulshokReplica(final VulshokReplica card) {
+    private VulshokReplica(final VulshokReplica card) {
         super(card);
     }
 

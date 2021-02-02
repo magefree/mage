@@ -31,7 +31,7 @@ public final class AerieWorshippers extends CardImpl {
         this.addAbility(new InspiredAbility(new DoIfCostPaid(new CreateTokenEffect(new AerieWorshippersBirdToken()), new ManaCostsImpl("{2}{U}"))));
     }
 
-    public AerieWorshippers(final AerieWorshippers card) {
+    private AerieWorshippers(final AerieWorshippers card) {
         super(card);
     }
 

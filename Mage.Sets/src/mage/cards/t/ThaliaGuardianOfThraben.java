@@ -39,7 +39,7 @@ public final class ThaliaGuardianOfThraben extends CardImpl {
 
     }
 
-    public ThaliaGuardianOfThraben(final ThaliaGuardianOfThraben card) {
+    private ThaliaGuardianOfThraben(final ThaliaGuardianOfThraben card) {
         super(card);
     }
 

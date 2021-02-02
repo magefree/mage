@@ -24,7 +24,7 @@ public final class RuneclawBear extends CardImpl {
 
     }
 
-    public RuneclawBear(final RuneclawBear card) {
+    private RuneclawBear(final RuneclawBear card) {
         super(card);
     }
 

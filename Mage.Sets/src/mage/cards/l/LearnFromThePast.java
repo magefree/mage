@@ -32,7 +32,7 @@ public final class LearnFromThePast extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public LearnFromThePast(final LearnFromThePast card) {
+    private LearnFromThePast(final LearnFromThePast card) {
         super(card);
     }
 

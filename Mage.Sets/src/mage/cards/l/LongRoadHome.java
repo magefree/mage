@@ -38,7 +38,7 @@ public final class LongRoadHome extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public LongRoadHome(final LongRoadHome card) {
+    private LongRoadHome(final LongRoadHome card) {
         super(card);
     }
 

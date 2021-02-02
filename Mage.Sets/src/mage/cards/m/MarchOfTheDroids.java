@@ -37,7 +37,7 @@ public final class MarchOfTheDroids extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new DroidToken(), new PermanentsOnBattlefieldCount(new FilterPermanent(SubType.DROID, "Droid you control"))));
     }
 
-    public MarchOfTheDroids(final MarchOfTheDroids card) {
+    private MarchOfTheDroids(final MarchOfTheDroids card) {
         super(card);
     }
 

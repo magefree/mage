@@ -34,7 +34,7 @@ public final class HorrorOfTheBrokenLands extends CardImpl {
 
     }
 
-    public HorrorOfTheBrokenLands(final HorrorOfTheBrokenLands card) {
+    private HorrorOfTheBrokenLands(final HorrorOfTheBrokenLands card) {
         super(card);
     }
 

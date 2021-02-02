@@ -31,7 +31,7 @@ public final class WalkerOfTheGrove extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{4}{G}"));
     }
 
-    public WalkerOfTheGrove(final WalkerOfTheGrove card) {
+    private WalkerOfTheGrove(final WalkerOfTheGrove card) {
         super(card);
     }
 

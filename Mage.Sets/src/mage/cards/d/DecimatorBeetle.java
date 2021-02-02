@@ -56,7 +56,7 @@ public final class DecimatorBeetle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DecimatorBeetle(final DecimatorBeetle card) {
+    private DecimatorBeetle(final DecimatorBeetle card) {
         super(card);
     }
 

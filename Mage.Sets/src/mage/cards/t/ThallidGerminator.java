@@ -50,7 +50,7 @@ public final class ThallidGerminator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThallidGerminator(final ThallidGerminator card) {
+    private ThallidGerminator(final ThallidGerminator card) {
         super(card);
     }
 

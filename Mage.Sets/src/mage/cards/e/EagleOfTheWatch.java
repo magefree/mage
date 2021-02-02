@@ -29,7 +29,7 @@ public final class EagleOfTheWatch extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public EagleOfTheWatch(final EagleOfTheWatch card) {
+    private EagleOfTheWatch(final EagleOfTheWatch card) {
         super(card);
     }
 

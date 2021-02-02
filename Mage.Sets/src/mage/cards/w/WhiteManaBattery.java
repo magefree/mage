@@ -46,7 +46,7 @@ public final class WhiteManaBattery extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WhiteManaBattery(final WhiteManaBattery card) {
+    private WhiteManaBattery(final WhiteManaBattery card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class WildwoodGeist extends CardImpl {
                 .addHint(MyTurnHint.instance));
     }
 
-    public WildwoodGeist(final WildwoodGeist card) {
+    private WildwoodGeist(final WildwoodGeist card) {
         super(card);
     }
 

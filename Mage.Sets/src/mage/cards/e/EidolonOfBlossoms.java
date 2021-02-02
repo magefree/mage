@@ -27,7 +27,7 @@ public final class EidolonOfBlossoms extends CardImpl {
         this.addAbility(new ConstellationAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public EidolonOfBlossoms(final EidolonOfBlossoms card) {
+    private EidolonOfBlossoms(final EidolonOfBlossoms card) {
         super(card);
     }
 

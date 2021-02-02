@@ -26,7 +26,7 @@ public final class Vacuumelt extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 
-    public Vacuumelt(final Vacuumelt card) {
+    private Vacuumelt(final Vacuumelt card) {
         super(card);
     }
 

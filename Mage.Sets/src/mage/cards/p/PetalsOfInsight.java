@@ -28,7 +28,7 @@ public final class PetalsOfInsight extends CardImpl {
         this.getSpellAbility().addEffect(new PetalsOfInsightEffect());
     }
 
-    public PetalsOfInsight(final PetalsOfInsight card) {
+    private PetalsOfInsight(final PetalsOfInsight card) {
         super(card);
     }
 

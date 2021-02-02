@@ -27,7 +27,7 @@ public final class AdaptiveSnapjaw extends CardImpl {
         this.addAbility(new EvolveAbility());
     }
 
-    public AdaptiveSnapjaw(final AdaptiveSnapjaw card) {
+    private AdaptiveSnapjaw(final AdaptiveSnapjaw card) {
         super(card);
     }
 

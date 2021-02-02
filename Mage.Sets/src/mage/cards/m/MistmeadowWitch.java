@@ -34,7 +34,7 @@ public final class MistmeadowWitch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MistmeadowWitch(final MistmeadowWitch card) {
+    private MistmeadowWitch(final MistmeadowWitch card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class VeteranSwordsmith extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public VeteranSwordsmith(final VeteranSwordsmith card) {
+    private VeteranSwordsmith(final VeteranSwordsmith card) {
         super(card);
     }
 

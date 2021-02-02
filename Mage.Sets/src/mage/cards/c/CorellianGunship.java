@@ -34,7 +34,7 @@ public final class CorellianGunship extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CorellianGunship(final CorellianGunship card) {
+    private CorellianGunship(final CorellianGunship card) {
         super(card);
     }
 

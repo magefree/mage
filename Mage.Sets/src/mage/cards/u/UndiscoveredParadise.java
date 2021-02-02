@@ -32,7 +32,7 @@ public final class UndiscoveredParadise extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UndiscoveredParadise(final UndiscoveredParadise card) {
+    private UndiscoveredParadise(final UndiscoveredParadise card) {
         super(card);
     }
 

@@ -55,7 +55,7 @@ public final class UnearthlyBlizzard extends CardImpl {
 
     }
 
-    public UnearthlyBlizzard(final UnearthlyBlizzard card) {
+    private UnearthlyBlizzard(final UnearthlyBlizzard card) {
         super(card);
     }
 

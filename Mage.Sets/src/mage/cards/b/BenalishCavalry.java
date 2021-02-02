@@ -26,7 +26,7 @@ public final class BenalishCavalry extends CardImpl {
         this.addAbility(new FlankingAbility());
     }
 
-    public BenalishCavalry(final BenalishCavalry card) {
+    private BenalishCavalry(final BenalishCavalry card) {
         super(card);
     }
 

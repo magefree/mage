@@ -40,7 +40,7 @@ public final class StatuteOfDenial extends CardImpl {
                 "If you control a blue creature, draw a card, then discard a card"));
     }
 
-    public StatuteOfDenial(final StatuteOfDenial card) {
+    private StatuteOfDenial(final StatuteOfDenial card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class MoonSprite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public MoonSprite(final MoonSprite card) {
+    private MoonSprite(final MoonSprite card) {
         super(card);
     }
 

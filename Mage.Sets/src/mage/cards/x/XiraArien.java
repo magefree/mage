@@ -41,7 +41,7 @@ public final class XiraArien extends CardImpl {
         this.addAbility(ability);
     }
 
-    public XiraArien(final XiraArien card) {
+    private XiraArien(final XiraArien card) {
         super(card);
     }
 

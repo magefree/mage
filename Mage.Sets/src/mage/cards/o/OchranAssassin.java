@@ -34,7 +34,7 @@ public final class OchranAssassin extends CardImpl {
         ));
     }
 
-    public OchranAssassin(final OchranAssassin card) {
+    private OchranAssassin(final OchranAssassin card) {
         super(card);
     }
 

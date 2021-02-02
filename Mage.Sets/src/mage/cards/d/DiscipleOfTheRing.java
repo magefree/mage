@@ -70,7 +70,7 @@ public final class DiscipleOfTheRing extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DiscipleOfTheRing(final DiscipleOfTheRing card) {
+    private DiscipleOfTheRing(final DiscipleOfTheRing card) {
         super(card);
     }
 

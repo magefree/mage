@@ -44,7 +44,7 @@ public final class CurseOfThirst extends CardImpl {
 
     }
 
-    public CurseOfThirst(final CurseOfThirst card) {
+    private CurseOfThirst(final CurseOfThirst card) {
         super(card);
     }
 

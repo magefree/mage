@@ -54,7 +54,7 @@ public final class ConsumingFerocity extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConsumingFerocityEffect(), TargetController.YOU, false));
     }
 
-    public ConsumingFerocity(final ConsumingFerocity card) {
+    private ConsumingFerocity(final ConsumingFerocity card) {
         super(card);
     }
 

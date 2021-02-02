@@ -33,7 +33,7 @@ public final class BelovedChaplain extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public BelovedChaplain(final BelovedChaplain card) {
+    private BelovedChaplain(final BelovedChaplain card) {
         super(card);
     }
 

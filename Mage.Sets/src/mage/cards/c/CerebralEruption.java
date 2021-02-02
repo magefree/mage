@@ -28,7 +28,7 @@ public final class CerebralEruption extends CardImpl {
         this.getSpellAbility().addEffect(new CerebralEruptionEffect());
     }
 
-    public CerebralEruption(final CerebralEruption card) {
+    private CerebralEruption(final CerebralEruption card) {
         super(card);
     }
 

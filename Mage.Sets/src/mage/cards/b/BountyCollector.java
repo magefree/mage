@@ -37,7 +37,7 @@ public final class BountyCollector extends CardImpl {
         this.addAbility(new BountyAbility(new UntapSourceEffect()));
     }
 
-    public BountyCollector(final BountyCollector card) {
+    private BountyCollector(final BountyCollector card) {
         super(card);
     }
 

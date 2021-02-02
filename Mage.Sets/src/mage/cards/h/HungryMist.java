@@ -28,7 +28,7 @@ public final class HungryMist extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{G}{G}")), TargetController.YOU, false));
     }
 
-    public HungryMist(final HungryMist card) {
+    private HungryMist(final HungryMist card) {
         super(card);
     }
 

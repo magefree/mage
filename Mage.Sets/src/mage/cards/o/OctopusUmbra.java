@@ -65,7 +65,7 @@ public final class OctopusUmbra extends CardImpl {
 
     }
 
-    public OctopusUmbra(final OctopusUmbra card) {
+    private OctopusUmbra(final OctopusUmbra card) {
         super(card);
     }
 

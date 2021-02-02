@@ -31,7 +31,7 @@ public final class PainSuffering extends SplitCard {
         this.getRightHalfCard().getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public PainSuffering(final PainSuffering card) {
+    private PainSuffering(final PainSuffering card) {
         super(card);
     }
 

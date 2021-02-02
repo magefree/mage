@@ -35,7 +35,7 @@ public final class VigeanHydropon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VigeanHydroponEffect()));
     }
 
-    public VigeanHydropon(final VigeanHydropon card) {
+    private VigeanHydropon(final VigeanHydropon card) {
         super(card);
     }
 

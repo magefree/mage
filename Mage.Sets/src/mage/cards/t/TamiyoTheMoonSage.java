@@ -53,7 +53,7 @@ public final class TamiyoTheMoonSage extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new TamiyoTheMoonSageEmblem()), -8));
     }
 
-    public TamiyoTheMoonSage(final TamiyoTheMoonSage card) {
+    private TamiyoTheMoonSage(final TamiyoTheMoonSage card) {
         super(card);
     }
 

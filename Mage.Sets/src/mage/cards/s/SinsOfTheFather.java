@@ -29,7 +29,7 @@ public final class SinsOfTheFather extends CardImpl {
         this.getSpellAbility().addEffect(new SinsOfTheFatherEffect());
     }
 
-    public SinsOfTheFather(final SinsOfTheFather card) {
+    private SinsOfTheFather(final SinsOfTheFather card) {
         super(card);
     }
 

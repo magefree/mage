@@ -29,7 +29,7 @@ public final class AngelOfLight extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public AngelOfLight(final AngelOfLight card) {
+    private AngelOfLight(final AngelOfLight card) {
         super(card);
     }
 

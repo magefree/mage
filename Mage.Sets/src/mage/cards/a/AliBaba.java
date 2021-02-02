@@ -40,7 +40,7 @@ public final class AliBaba extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AliBaba(final AliBaba card) {
+    private AliBaba(final AliBaba card) {
         super(card);
     }
 

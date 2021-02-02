@@ -22,7 +22,7 @@ public final class MomentOfSilence extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
     
-    public MomentOfSilence(final MomentOfSilence card) {
+    private MomentOfSilence(final MomentOfSilence card) {
         super(card);
     }
     

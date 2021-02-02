@@ -44,7 +44,7 @@ public final class CallToTheGrave extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggered, new CreatureCountCondition(0, TargetController.ANY), ruleText));
     }
 
-    public CallToTheGrave(final CallToTheGrave card) {
+    private CallToTheGrave(final CallToTheGrave card) {
         super(card);
     }
 

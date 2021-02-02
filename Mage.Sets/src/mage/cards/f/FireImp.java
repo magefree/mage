@@ -31,7 +31,7 @@ public final class FireImp extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FireImp(final FireImp card) {
+    private FireImp(final FireImp card) {
         super(card);
     }
 

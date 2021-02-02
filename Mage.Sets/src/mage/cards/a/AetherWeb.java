@@ -49,7 +49,7 @@ public final class AetherWeb extends CardImpl {
         this.addAbility(staticAbility);
     }
 
-    public AetherWeb(final AetherWeb card) {
+    private AetherWeb(final AetherWeb card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class ReduceInStature extends CardImpl {
 
     }
 
-    public ReduceInStature(final ReduceInStature card) {
+    private ReduceInStature(final ReduceInStature card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class Telepathy extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.OPPONENT)));
     }
 
-    public Telepathy(final Telepathy card) {
+    private Telepathy(final Telepathy card) {
         super(card);
     }
 

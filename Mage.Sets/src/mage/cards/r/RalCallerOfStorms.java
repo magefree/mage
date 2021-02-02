@@ -46,7 +46,7 @@ public final class RalCallerOfStorms extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RalCallerOfStorms(final RalCallerOfStorms card) {
+    private RalCallerOfStorms(final RalCallerOfStorms card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class FetidImp extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public FetidImp(final FetidImp card) {
+    private FetidImp(final FetidImp card) {
         super(card);
     }
 

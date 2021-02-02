@@ -31,7 +31,7 @@ public final class SeraphOfTheSuns extends CardImpl {
 
     }
 
-    public SeraphOfTheSuns(final SeraphOfTheSuns card) {
+    private SeraphOfTheSuns(final SeraphOfTheSuns card) {
         super(card);
     }
 

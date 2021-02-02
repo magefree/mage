@@ -44,7 +44,7 @@ public final class VentSentinel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VentSentinel(final VentSentinel card) {
+    private VentSentinel(final VentSentinel card) {
         super(card);
     }
 

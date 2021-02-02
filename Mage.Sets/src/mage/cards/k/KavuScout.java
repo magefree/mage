@@ -36,7 +36,7 @@ public final class KavuScout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KavuScout(final KavuScout card) {
+    private KavuScout(final KavuScout card) {
         super(card);
     }
 

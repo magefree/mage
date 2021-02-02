@@ -48,7 +48,7 @@ public final class SkirkOutrider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkirkOutrider(final SkirkOutrider card) {
+    private SkirkOutrider(final SkirkOutrider card) {
         super(card);
     }
 

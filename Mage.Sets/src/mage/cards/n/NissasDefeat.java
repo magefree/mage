@@ -40,7 +40,7 @@ public final class NissasDefeat extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public NissasDefeat(final NissasDefeat card) {
+    private NissasDefeat(final NissasDefeat card) {
         super(card);
     }
 

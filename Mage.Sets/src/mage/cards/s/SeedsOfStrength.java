@@ -37,7 +37,7 @@ public final class SeedsOfStrength extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature (3rd)")));
     }
 
-    public SeedsOfStrength(final SeedsOfStrength card) {
+    private SeedsOfStrength(final SeedsOfStrength card) {
         super(card);
     }
 

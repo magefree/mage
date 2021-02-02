@@ -38,7 +38,7 @@ public final class CrowdsFavor extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public CrowdsFavor(final CrowdsFavor card) {
+    private CrowdsFavor(final CrowdsFavor card) {
         super(card);
     }
 

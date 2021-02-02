@@ -39,7 +39,7 @@ public final class KurkeshOnakkeAncient extends CardImpl {
         this.addAbility(new KurkeshOnakkeAncientTriggeredAbility());
     }
 
-    public KurkeshOnakkeAncient(final KurkeshOnakkeAncient card) {
+    private KurkeshOnakkeAncient(final KurkeshOnakkeAncient card) {
         super(card);
     }
 

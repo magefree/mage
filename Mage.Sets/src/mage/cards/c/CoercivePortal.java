@@ -29,7 +29,7 @@ public final class CoercivePortal extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CoercivePortalEffect(), TargetController.YOU, false));
     }
 
-    public CoercivePortal(final CoercivePortal card) {
+    private CoercivePortal(final CoercivePortal card) {
         super(card);
     }
 

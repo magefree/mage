@@ -33,7 +33,7 @@ public final class MesaFalcon extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
     }
 
-    public MesaFalcon(final MesaFalcon card) {
+    private MesaFalcon(final MesaFalcon card) {
         super(card);
     }
 

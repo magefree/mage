@@ -36,7 +36,7 @@ public final class VenomousBreath extends CardImpl {
         this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
     }
 
-    public VenomousBreath(final VenomousBreath card) {
+    private VenomousBreath(final VenomousBreath card) {
         super(card);
     }
 

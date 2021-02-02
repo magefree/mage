@@ -39,7 +39,7 @@ public final class GempalmStrider extends CardImpl {
         this.addAbility(new CycleTriggeredAbility(new BoostAllEffect(2,2,Duration.EndOfTurn, filter, false)));
     }
 
-    public GempalmStrider(final GempalmStrider card) {
+    private GempalmStrider(final GempalmStrider card) {
         super(card);
     }
 

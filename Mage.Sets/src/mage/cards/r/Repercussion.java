@@ -30,7 +30,7 @@ public final class Repercussion extends CardImpl {
         this.addAbility(new RepercussionTriggeredAbility(new RepercussionEffect()));
     }
 
-    public Repercussion(final Repercussion card) {
+    private Repercussion(final Repercussion card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class VividCreek extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VividCreek(final VividCreek card) {
+    private VividCreek(final VividCreek card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class KrovikanRot extends CardImpl {
         this.addAbility(new RecoverAbility(new ManaCostsImpl("{1}{B}{B}"), this));
     }
 
-    public KrovikanRot(final KrovikanRot card) {
+    private KrovikanRot(final KrovikanRot card) {
         super(card);
     }
 

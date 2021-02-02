@@ -39,7 +39,7 @@ public final class AetherCharge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AetherCharge(final AetherCharge card) {
+    private AetherCharge(final AetherCharge card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class CursedTotem extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CursedTotemCantActivateEffect()));
     }
 
-    public CursedTotem(final CursedTotem card) {
+    private CursedTotem(final CursedTotem card) {
         super(card);
     }
 

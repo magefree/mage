@@ -30,7 +30,7 @@ public final class HerosDemise extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public HerosDemise(final HerosDemise card) {
+    private HerosDemise(final HerosDemise card) {
         super(card);
     }
 

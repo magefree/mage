@@ -29,7 +29,7 @@ public final class HollowDogs extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
     }
 
-    public HollowDogs(final HollowDogs card) {
+    private HollowDogs(final HollowDogs card) {
         super(card);
     }
 

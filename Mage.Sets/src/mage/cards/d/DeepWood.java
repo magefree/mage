@@ -40,7 +40,7 @@ public final class DeepWood extends CardImpl {
         this.getSpellAbility().addEffect(new DeepWoodEffect());
     }
 
-    public DeepWood(final DeepWood card) {
+    private DeepWood(final DeepWood card) {
         super(card);
     }
 

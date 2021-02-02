@@ -30,7 +30,7 @@ public final class MurasaRanger extends CardImpl {
         this.addAbility(new LandfallAbility(new DoIfCostPaid(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl("{3}{G}")), false));
     }
 
-    public MurasaRanger(final MurasaRanger card) {
+    private MurasaRanger(final MurasaRanger card) {
         super(card);
     }
 

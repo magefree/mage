@@ -53,7 +53,7 @@ public final class TyrantsFamiliar extends CardImpl {
         this.addAbility(new LieutenantAbility(effect));
     }
 
-    public TyrantsFamiliar(final TyrantsFamiliar card) {
+    private TyrantsFamiliar(final TyrantsFamiliar card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class SoulWarden extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(new GainLifeEffect(1), filter));
     }
 
-    public SoulWarden(final SoulWarden card) {
+    private SoulWarden(final SoulWarden card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class PyreticRitual extends CardImpl {
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.RedMana(3)));
     }
 
-    public PyreticRitual(final PyreticRitual card) {
+    private PyreticRitual(final PyreticRitual card) {
         super(card);
     }
 

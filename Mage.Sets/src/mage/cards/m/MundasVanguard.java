@@ -50,7 +50,7 @@ public final class MundasVanguard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MundasVanguard(final MundasVanguard card) {
+    private MundasVanguard(final MundasVanguard card) {
         super(card);
     }
 

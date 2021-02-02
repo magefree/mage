@@ -30,7 +30,7 @@ public final class Isolate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public Isolate(final Isolate card) {
+    private Isolate(final Isolate card) {
         super(card);
     }
 

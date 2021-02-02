@@ -31,7 +31,7 @@ public final class BlisterBeetle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlisterBeetle(final BlisterBeetle card) {
+    private BlisterBeetle(final BlisterBeetle card) {
         super(card);
     }
 

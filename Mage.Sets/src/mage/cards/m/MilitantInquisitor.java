@@ -39,7 +39,7 @@ public final class MilitantInquisitor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.WhileOnBattlefield)));
     }
 
-    public MilitantInquisitor(final MilitantInquisitor card) {
+    private MilitantInquisitor(final MilitantInquisitor card) {
         super(card);
     }
 

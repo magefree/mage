@@ -33,7 +33,7 @@ public final class Skyreaping extends CardImpl {
         this.getSpellAbility().addHint(DevotionCount.G.getHint());
     }
 
-    public Skyreaping(final Skyreaping card) {
+    private Skyreaping(final Skyreaping card) {
         super(card);
     }
 

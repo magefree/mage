@@ -53,7 +53,7 @@ public final class SunstrikeLegionnaire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SunstrikeLegionnaire(final SunstrikeLegionnaire card) {
+    private SunstrikeLegionnaire(final SunstrikeLegionnaire card) {
         super(card);
     }
 

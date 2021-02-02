@@ -44,7 +44,7 @@ public final class DeathmistRaptor extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{G}"), true));
     }
 
-    public DeathmistRaptor(final DeathmistRaptor card) {
+    private DeathmistRaptor(final DeathmistRaptor card) {
         super(card);
     }
 

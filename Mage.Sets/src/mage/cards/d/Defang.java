@@ -38,7 +38,7 @@ public final class Defang extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", false)));
     }
 
-    public Defang(final Defang card) {
+    private Defang(final Defang card) {
         super(card);
     }
 

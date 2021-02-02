@@ -57,7 +57,7 @@ public final class SageOfAncientLore extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
-    public SageOfAncientLore(final SageOfAncientLore card) {
+    private SageOfAncientLore(final SageOfAncientLore card) {
         super(card);
     }
 

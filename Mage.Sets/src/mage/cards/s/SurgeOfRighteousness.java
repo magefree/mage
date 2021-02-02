@@ -37,7 +37,7 @@ public final class SurgeOfRighteousness extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 
-    public SurgeOfRighteousness(final SurgeOfRighteousness card) {
+    private SurgeOfRighteousness(final SurgeOfRighteousness card) {
         super(card);
     }
 

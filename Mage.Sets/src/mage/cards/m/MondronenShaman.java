@@ -41,7 +41,7 @@ public final class MondronenShaman extends CardImpl {
                 TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
-    public MondronenShaman(final MondronenShaman card) {
+    private MondronenShaman(final MondronenShaman card) {
         super(card);
     }
 

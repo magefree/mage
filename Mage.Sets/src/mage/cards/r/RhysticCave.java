@@ -34,7 +34,7 @@ public final class RhysticCave extends CardImpl {
         this.addAbility(new RhysticCaveManaAbility());
     }
 
-    public RhysticCave(final RhysticCave card) {
+    private RhysticCave(final RhysticCave card) {
         super(card);
     }
 

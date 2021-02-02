@@ -26,7 +26,7 @@ public final class SafePassage extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, filter));
     }
 
-    public SafePassage(final SafePassage card) {
+    private SafePassage(final SafePassage card) {
         super(card);
     }
 

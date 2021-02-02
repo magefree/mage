@@ -32,7 +32,7 @@ public final class HeapDoll extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HeapDoll(final HeapDoll card) {
+    private HeapDoll(final HeapDoll card) {
         super(card);
     }
 

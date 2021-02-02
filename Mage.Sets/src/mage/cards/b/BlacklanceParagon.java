@@ -50,7 +50,7 @@ public final class BlacklanceParagon extends CardImpl {
         
     }
 
-    public BlacklanceParagon(final BlacklanceParagon card) {
+    private BlacklanceParagon(final BlacklanceParagon card) {
         super(card);
     }
 

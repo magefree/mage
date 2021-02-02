@@ -46,7 +46,7 @@ public final class AtzalCaveOfEternity extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AtzalCaveOfEternity(final AtzalCaveOfEternity card) {
+    private AtzalCaveOfEternity(final AtzalCaveOfEternity card) {
         super(card);
     }
 

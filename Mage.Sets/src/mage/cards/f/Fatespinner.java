@@ -38,7 +38,7 @@ public final class Fatespinner extends CardImpl {
                 TargetController.OPPONENT, false, true));
     }
 
-    public Fatespinner(final Fatespinner card) {
+    private Fatespinner(final Fatespinner card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class ReleaseTheAnts extends CardImpl {
         this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());
     }
 
-    public ReleaseTheAnts(final ReleaseTheAnts card) {
+    private ReleaseTheAnts(final ReleaseTheAnts card) {
         super(card);
     }
 

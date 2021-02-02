@@ -41,7 +41,7 @@ public final class FlashFlood extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public FlashFlood(final FlashFlood card) {
+    private FlashFlood(final FlashFlood card) {
         super(card);
     }
 

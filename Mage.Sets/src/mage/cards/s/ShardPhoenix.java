@@ -50,7 +50,7 @@ public final class ShardPhoenix extends CardImpl {
                 new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{R}{R}{R}"), new IsStepCondition(PhaseStep.UPKEEP), null));    
     }
 
-    public ShardPhoenix(final ShardPhoenix card) {
+    private ShardPhoenix(final ShardPhoenix card) {
         super(card);
     }
 

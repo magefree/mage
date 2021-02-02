@@ -35,7 +35,7 @@ public final class ElgaudShieldmate extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(HexproofAbility.getInstance(), ruleText)));
     }
 
-    public ElgaudShieldmate(final ElgaudShieldmate card) {
+    private ElgaudShieldmate(final ElgaudShieldmate card) {
         super(card);
     }
 

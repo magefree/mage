@@ -33,7 +33,7 @@ public final class ThoughtsOfRuin extends CardImpl {
 
     }
 
-    public ThoughtsOfRuin(final ThoughtsOfRuin card) {
+    private ThoughtsOfRuin(final ThoughtsOfRuin card) {
         super(card);
     }
 

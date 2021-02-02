@@ -46,7 +46,7 @@ public final class SmolderingWerewolf extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new ManaCostsImpl("{4}{R}{R}")));
     }
 
-    public SmolderingWerewolf(final SmolderingWerewolf card) {
+    private SmolderingWerewolf(final SmolderingWerewolf card) {
         super(card);
     }
 

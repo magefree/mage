@@ -36,7 +36,7 @@ public final class DarkDecision extends CardImpl {
         this.getSpellAbility().addEffect(new DarkDecisionEffect());
     }
 
-    public DarkDecision(final DarkDecision card) {
+    private DarkDecision(final DarkDecision card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class SlaveOfBolas extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SlaveOfBolas(final SlaveOfBolas card) {
+    private SlaveOfBolas(final SlaveOfBolas card) {
         super(card);
     }
 

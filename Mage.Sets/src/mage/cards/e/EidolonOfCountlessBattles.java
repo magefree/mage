@@ -53,7 +53,7 @@ public final class EidolonOfCountlessBattles extends CardImpl {
         
     }
 
-    public EidolonOfCountlessBattles(final EidolonOfCountlessBattles card) {
+    private EidolonOfCountlessBattles(final EidolonOfCountlessBattles card) {
         super(card);
     }
 

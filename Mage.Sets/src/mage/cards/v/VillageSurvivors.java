@@ -36,7 +36,7 @@ public final class VillageSurvivors extends CardImpl {
                 "<br><i>Fateful hour</i> &mdash; As long as you have 5 or less life, other creatures you control have vigilance")));
     }
 
-    public VillageSurvivors(final VillageSurvivors card) {
+    private VillageSurvivors(final VillageSurvivors card) {
         super(card);
     }
 

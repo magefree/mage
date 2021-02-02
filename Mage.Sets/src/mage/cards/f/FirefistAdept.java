@@ -43,7 +43,7 @@ public final class FirefistAdept extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FirefistAdept(final FirefistAdept card) {
+    private FirefistAdept(final FirefistAdept card) {
         super(card);
     }
 

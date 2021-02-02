@@ -45,7 +45,7 @@ public final class HazoretsFavor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HazoretsFavor(final HazoretsFavor card) {
+    private HazoretsFavor(final HazoretsFavor card) {
         super(card);
     }
 

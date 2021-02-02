@@ -45,7 +45,7 @@ public final class ConsumingSinkhole extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public ConsumingSinkhole(final ConsumingSinkhole card) {
+    private ConsumingSinkhole(final ConsumingSinkhole card) {
         super(card);
     }
 

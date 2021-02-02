@@ -41,7 +41,7 @@ public final class UnbenderTine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnbenderTine(final UnbenderTine card) {
+    private UnbenderTine(final UnbenderTine card) {
         super(card);
     }
 

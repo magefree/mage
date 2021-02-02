@@ -38,7 +38,7 @@ public final class DuelistsHeritage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DuelistsHeritage(final DuelistsHeritage card) {
+    private DuelistsHeritage(final DuelistsHeritage card) {
         super(card);
     }
 

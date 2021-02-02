@@ -32,7 +32,7 @@ public final class Waylay extends CardImpl {
         this.getSpellAbility().addEffect(new WaylayEffect());
     }
 
-    public Waylay(final Waylay card) {
+    private Waylay(final Waylay card) {
         super(card);
     }
 

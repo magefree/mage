@@ -34,7 +34,7 @@ public final class ChaliceOfTheVoid extends CardImpl {
         this.addAbility(new ChaliceOfTheVoidTriggeredAbility());
     }
 
-    public ChaliceOfTheVoid(final ChaliceOfTheVoid card) {
+    private ChaliceOfTheVoid(final ChaliceOfTheVoid card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class HopeTender extends CardImpl {
         addAbility(ability);
     }
 
-    public HopeTender(final HopeTender card) {
+    private HopeTender(final HopeTender card) {
         super(card);
     }
 

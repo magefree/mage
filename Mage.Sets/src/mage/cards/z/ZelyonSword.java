@@ -37,7 +37,7 @@ public final class ZelyonSword extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZelyonSword(final ZelyonSword card) {
+    private ZelyonSword(final ZelyonSword card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class Imperiosaur extends CardImpl {
         this.getSpellAbility().getManaCosts().setSourceFilter(filter);
     }
 
-    public Imperiosaur(final Imperiosaur card) {
+    private Imperiosaur(final Imperiosaur card) {
         super(card);
     }
 

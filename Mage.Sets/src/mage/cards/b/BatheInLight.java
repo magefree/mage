@@ -41,7 +41,7 @@ public final class BatheInLight extends CardImpl {
         this.getSpellAbility().setAbilityWord(AbilityWord.RADIANCE);
     }
 
-    public BatheInLight(final BatheInLight card) {
+    private BatheInLight(final BatheInLight card) {
         super(card);
     }
 

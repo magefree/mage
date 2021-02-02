@@ -38,7 +38,7 @@ public final class SerraInquisitors extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), filter, false));
     }
 
-    public SerraInquisitors(final SerraInquisitors card) {
+    private SerraInquisitors(final SerraInquisitors card) {
         super(card);
     }
 

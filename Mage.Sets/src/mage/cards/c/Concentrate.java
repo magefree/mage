@@ -21,7 +21,7 @@ public final class Concentrate extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
     }
 
-    public Concentrate(final Concentrate card) {
+    private Concentrate(final Concentrate card) {
         super(card);
     }
 

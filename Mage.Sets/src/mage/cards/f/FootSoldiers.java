@@ -23,7 +23,7 @@ public final class FootSoldiers extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public FootSoldiers(final FootSoldiers card) {
+    private FootSoldiers(final FootSoldiers card) {
         super(card);
     }
 

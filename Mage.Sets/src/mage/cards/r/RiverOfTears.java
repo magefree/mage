@@ -33,7 +33,7 @@ public final class RiverOfTears extends CardImpl {
                 new PlayLandWatcher());
     }
 
-    public RiverOfTears(final RiverOfTears card) {
+    private RiverOfTears(final RiverOfTears card) {
         super(card);
     }
 

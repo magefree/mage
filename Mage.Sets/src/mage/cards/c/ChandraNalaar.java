@@ -51,7 +51,7 @@ public final class ChandraNalaar extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public ChandraNalaar(final ChandraNalaar card) {
+    private ChandraNalaar(final ChandraNalaar card) {
         super(card);
     }
 

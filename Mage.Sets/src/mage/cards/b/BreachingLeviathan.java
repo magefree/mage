@@ -47,7 +47,7 @@ public final class BreachingLeviathan extends CardImpl {
                 new CastFromHandWatcher());
     }
 
-    public BreachingLeviathan(final BreachingLeviathan card) {
+    private BreachingLeviathan(final BreachingLeviathan card) {
         super(card);
     }
 

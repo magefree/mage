@@ -45,7 +45,7 @@ public final class AeonChronicler extends CardImpl {
         this.addAbility(new AeonChroniclerTriggeredAbility());
     }
 
-    public AeonChronicler(final AeonChronicler card) {
+    private AeonChronicler(final AeonChronicler card) {
         super(card);
     }
 

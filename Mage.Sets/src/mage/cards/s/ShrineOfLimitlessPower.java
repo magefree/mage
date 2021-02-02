@@ -52,7 +52,7 @@ public final class ShrineOfLimitlessPower extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShrineOfLimitlessPower(final ShrineOfLimitlessPower card) {
+    private ShrineOfLimitlessPower(final ShrineOfLimitlessPower card) {
         super(card);
     }
 

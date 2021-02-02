@@ -35,7 +35,7 @@ public final class SeachromeCoast extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public SeachromeCoast(final SeachromeCoast card) {
+    private SeachromeCoast(final SeachromeCoast card) {
         super(card);
     }
 

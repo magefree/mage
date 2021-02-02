@@ -27,7 +27,7 @@ public final class SuddenStorm extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public SuddenStorm(final SuddenStorm card) {
+    private SuddenStorm(final SuddenStorm card) {
         super(card);
     }
 

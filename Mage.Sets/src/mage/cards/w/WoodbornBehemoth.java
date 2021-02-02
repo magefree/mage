@@ -45,7 +45,7 @@ public final class WoodbornBehemoth extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WoodbornBehemoth(final WoodbornBehemoth card) {
+    private WoodbornBehemoth(final WoodbornBehemoth card) {
         super(card);
     }
 

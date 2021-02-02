@@ -45,7 +45,7 @@ public final class ElvishArchdruid extends CardImpl {
         this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), xValue));
     }
 
-    public ElvishArchdruid(final ElvishArchdruid card) {
+    private ElvishArchdruid(final ElvishArchdruid card) {
         super(card);
     }
 

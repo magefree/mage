@@ -50,7 +50,7 @@ public final class MarkOfSakiko extends CardImpl {
 
     }
 
-    public MarkOfSakiko(final MarkOfSakiko card) {
+    private MarkOfSakiko(final MarkOfSakiko card) {
         super(card);
     }
 

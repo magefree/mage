@@ -22,7 +22,7 @@ public final class BarbtoothWurm extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public BarbtoothWurm(final BarbtoothWurm card) {
+    private BarbtoothWurm(final BarbtoothWurm card) {
         super(card);
     }
 

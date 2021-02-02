@@ -56,7 +56,7 @@ public final class ShamanEnKor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShamanEnKor(final ShamanEnKor card) {
+    private ShamanEnKor(final ShamanEnKor card) {
         super(card);
     }
 

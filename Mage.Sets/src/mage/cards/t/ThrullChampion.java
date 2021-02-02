@@ -51,7 +51,7 @@ public final class ThrullChampion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThrullChampion(final ThrullChampion card) {
+    private ThrullChampion(final ThrullChampion card) {
         super(card);
     }
 

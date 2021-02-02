@@ -36,7 +36,7 @@ public final class BlazingHellhound extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlazingHellhound(final BlazingHellhound card) {
+    private BlazingHellhound(final BlazingHellhound card) {
         super(card);
     }
 

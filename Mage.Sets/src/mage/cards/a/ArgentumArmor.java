@@ -39,7 +39,7 @@ public final class ArgentumArmor extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(6)));
     }
 
-    public ArgentumArmor(final ArgentumArmor card) {
+    private ArgentumArmor(final ArgentumArmor card) {
         super(card);
     }
 

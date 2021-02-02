@@ -39,7 +39,7 @@ public final class GreaterGargadon extends CardImpl {
         this.addAbility(new GreaterGargadonAbility());
     }
 
-    public GreaterGargadon(final GreaterGargadon card) {
+    private GreaterGargadon(final GreaterGargadon card) {
         super(card);
     }
 

@@ -57,7 +57,7 @@ public final class TerashisCry extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public TerashisCry(final TerashisCry card) {
+    private TerashisCry(final TerashisCry card) {
         super(card);
     }
 

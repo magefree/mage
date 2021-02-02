@@ -31,7 +31,7 @@ public final class Formation extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public Formation(final Formation card) {
+    private Formation(final Formation card) {
         super(card);
     }
 

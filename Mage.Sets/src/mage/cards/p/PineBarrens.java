@@ -34,7 +34,7 @@ public final class PineBarrens extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PineBarrens(final PineBarrens card) {
+    private PineBarrens(final PineBarrens card) {
         super(card);
     }
 

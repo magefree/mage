@@ -21,7 +21,7 @@ public final class RainOfTears extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public RainOfTears(final RainOfTears card) {
+    private RainOfTears(final RainOfTears card) {
         super(card);
     }
 

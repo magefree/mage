@@ -57,7 +57,7 @@ public final class WillowPriestess extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WillowPriestess(final WillowPriestess card) {
+    private WillowPriestess(final WillowPriestess card) {
         super(card);
     }
 

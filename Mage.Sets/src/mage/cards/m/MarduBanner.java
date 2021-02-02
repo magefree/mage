@@ -37,7 +37,7 @@ public final class MarduBanner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MarduBanner(final MarduBanner card) {
+    private MarduBanner(final MarduBanner card) {
         super(card);
     }
 

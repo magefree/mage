@@ -34,7 +34,7 @@ public final class SternJudge extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new SternJudgeEffect(), new TapSourceCost()));
     }
 
-    public SternJudge(final SternJudge card) {
+    private SternJudge(final SternJudge card) {
         super(card);
     }
 

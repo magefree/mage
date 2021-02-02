@@ -43,7 +43,7 @@ public final class SorceressQueen extends CardImpl {
         
     }
 
-    public SorceressQueen(final SorceressQueen card) {
+    private SorceressQueen(final SorceressQueen card) {
         super(card);
     }
 

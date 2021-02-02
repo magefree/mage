@@ -42,7 +42,7 @@ public final class BoneshardSlasher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BoneshardSlasher(final BoneshardSlasher card) {
+    private BoneshardSlasher(final BoneshardSlasher card) {
         super(card);
     }
 

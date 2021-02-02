@@ -31,7 +31,7 @@ public final class Bramblecrush extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public Bramblecrush(final Bramblecrush card) {
+    private Bramblecrush(final Bramblecrush card) {
         super(card);
     }
 

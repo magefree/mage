@@ -28,7 +28,7 @@ public final class ViciousConquistador extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new LoseLifeOpponentsEffect(1), false));
     }
 
-    public ViciousConquistador(final ViciousConquistador card) {
+    private ViciousConquistador(final ViciousConquistador card) {
         super(card);
     }
 

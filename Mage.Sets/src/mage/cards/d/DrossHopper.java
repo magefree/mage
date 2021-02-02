@@ -34,7 +34,7 @@ public final class DrossHopper extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
-    public DrossHopper(final DrossHopper card) {
+    private DrossHopper(final DrossHopper card) {
         super(card);
     }
 

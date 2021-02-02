@@ -36,7 +36,7 @@ public final class MarkovWarlord extends CardImpl {
 
     }
 
-    public MarkovWarlord(final MarkovWarlord card) {
+    private MarkovWarlord(final MarkovWarlord card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class RiverBear extends CardImpl {
         this.addAbility(new IslandwalkAbility());
     }
 
-    public RiverBear(final RiverBear card) {
+    private RiverBear(final RiverBear card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class SecretPlans extends CardImpl {
 
     }
 
-    public SecretPlans(final SecretPlans card) {
+    private SecretPlans(final SecretPlans card) {
         super(card);
     }
 

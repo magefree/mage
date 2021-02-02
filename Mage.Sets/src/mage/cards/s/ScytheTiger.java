@@ -34,7 +34,7 @@ public final class ScytheTiger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT)))));
     }
 
-    public ScytheTiger(final ScytheTiger card) {
+    private ScytheTiger(final ScytheTiger card) {
         super(card);
     }
 

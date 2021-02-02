@@ -23,7 +23,7 @@ public final class VolunteerMilitia extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public VolunteerMilitia(final VolunteerMilitia card) {
+    private VolunteerMilitia(final VolunteerMilitia card) {
         super(card);
     }
 

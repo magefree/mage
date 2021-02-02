@@ -35,7 +35,7 @@ public final class HagraSharpshooter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HagraSharpshooter(final HagraSharpshooter card) {
+    private HagraSharpshooter(final HagraSharpshooter card) {
         super(card);
     }
 

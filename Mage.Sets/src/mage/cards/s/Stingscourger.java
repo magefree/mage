@@ -44,7 +44,7 @@ public final class Stingscourger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Stingscourger(final Stingscourger card) {
+    private Stingscourger(final Stingscourger card) {
         super(card);
     }
 

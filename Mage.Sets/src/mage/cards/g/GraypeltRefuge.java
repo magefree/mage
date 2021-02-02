@@ -26,7 +26,7 @@ public final class GraypeltRefuge extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
     }
 
-    public GraypeltRefuge(final GraypeltRefuge card) {
+    private GraypeltRefuge(final GraypeltRefuge card) {
         super(card);
     }
 

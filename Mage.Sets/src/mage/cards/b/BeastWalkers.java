@@ -34,7 +34,7 @@ public final class BeastWalkers extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(BandingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G}")));
     }
 
-    public BeastWalkers(final BeastWalkers card) {
+    private BeastWalkers(final BeastWalkers card) {
         super(card);
     }
 

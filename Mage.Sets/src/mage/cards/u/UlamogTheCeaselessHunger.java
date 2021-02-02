@@ -51,7 +51,7 @@ public final class UlamogTheCeaselessHunger extends CardImpl {
         this.addAbility(new UlamogAttackTriggeredAbility(effect));
     }
 
-    public UlamogTheCeaselessHunger(final UlamogTheCeaselessHunger card) {
+    private UlamogTheCeaselessHunger(final UlamogTheCeaselessHunger card) {
         super(card);
     }
 

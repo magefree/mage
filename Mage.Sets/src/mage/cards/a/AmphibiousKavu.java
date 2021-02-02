@@ -37,7 +37,7 @@ public final class AmphibiousKavu extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedByOneOrMoreTriggeredAbility(new BoostSourceEffect(3, 3, Duration.EndOfTurn), filter, false));
     }
 
-    public AmphibiousKavu(final AmphibiousKavu card) {
+    private AmphibiousKavu(final AmphibiousKavu card) {
         super(card);
     }
 

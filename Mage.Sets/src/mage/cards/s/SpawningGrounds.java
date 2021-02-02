@@ -45,7 +45,7 @@ public final class SpawningGrounds extends CardImpl {
                 "Enchanted land has \"{t}: Create a 5/5 green Beast creature token with trample.\"")));
     }
 
-    public SpawningGrounds(final SpawningGrounds card) {
+    private SpawningGrounds(final SpawningGrounds card) {
         super(card);
     }
 

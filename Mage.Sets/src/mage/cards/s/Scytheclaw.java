@@ -39,7 +39,7 @@ public final class Scytheclaw extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public Scytheclaw(final Scytheclaw card) {
+    private Scytheclaw(final Scytheclaw card) {
         super(card);
     }
 

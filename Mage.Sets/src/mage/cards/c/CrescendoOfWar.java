@@ -40,7 +40,7 @@ public final class CrescendoOfWar extends CardImpl {
                 Duration.WhileOnBattlefield, new FilterBlockingCreature(), false)));
     }
 
-    public CrescendoOfWar(final CrescendoOfWar card) {
+    private CrescendoOfWar(final CrescendoOfWar card) {
         super(card);
     }
 

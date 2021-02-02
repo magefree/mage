@@ -23,7 +23,7 @@ public final class RushOfKnowledge extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public RushOfKnowledge(final RushOfKnowledge card) {
+    private RushOfKnowledge(final RushOfKnowledge card) {
         super(card);
     }
 

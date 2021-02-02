@@ -31,7 +31,7 @@ public final class DrudgeReavers extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public DrudgeReavers(final DrudgeReavers card) {
+    private DrudgeReavers(final DrudgeReavers card) {
         super(card);
     }
 

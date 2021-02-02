@@ -37,7 +37,7 @@ public final class SiegeBehemoth extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SiegeBehemothEffect()));
     }
 
-    public SiegeBehemoth(final SiegeBehemoth card) {
+    private SiegeBehemoth(final SiegeBehemoth card) {
         super(card);
     }
 

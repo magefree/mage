@@ -32,7 +32,7 @@ public final class ReinforcedBulwark extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.EndOfTurn, 1), new TapSourceCost()));
     }
 
-    public ReinforcedBulwark(final ReinforcedBulwark card) {
+    private ReinforcedBulwark(final ReinforcedBulwark card) {
         super(card);
     }
 

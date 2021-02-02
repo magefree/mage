@@ -32,7 +32,7 @@ public final class SnakePit extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(new CreateTokenEffect(new SnakeToken()), filter, true));
     }
 
-    public SnakePit(final SnakePit card) {
+    private SnakePit(final SnakePit card) {
         super(card);
     }
 

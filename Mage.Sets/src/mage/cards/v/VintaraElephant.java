@@ -38,7 +38,7 @@ public final class VintaraElephant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VintaraElephant(final VintaraElephant card) {
+    private VintaraElephant(final VintaraElephant card) {
         super(card);
     }
 

@@ -58,7 +58,7 @@ public final class GateSmasher extends CardImpl {
 
     }
 
-    public GateSmasher(final GateSmasher card) {
+    private GateSmasher(final GateSmasher card) {
         super(card);
     }
 

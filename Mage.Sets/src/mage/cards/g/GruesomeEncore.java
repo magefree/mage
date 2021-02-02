@@ -45,7 +45,7 @@ public final class GruesomeEncore extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInOpponentsGraveyard(filter));
     }
 
-    public GruesomeEncore(final GruesomeEncore card) {
+    private GruesomeEncore(final GruesomeEncore card) {
         super(card);
     }
 

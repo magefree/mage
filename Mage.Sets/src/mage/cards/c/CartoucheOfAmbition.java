@@ -52,7 +52,7 @@ public final class CartoucheOfAmbition extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CartoucheOfAmbition(final CartoucheOfAmbition card) {
+    private CartoucheOfAmbition(final CartoucheOfAmbition card) {
         super(card);
     }
 

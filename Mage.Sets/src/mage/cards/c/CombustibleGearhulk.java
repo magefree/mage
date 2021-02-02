@@ -40,7 +40,7 @@ public final class CombustibleGearhulk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CombustibleGearhulk(final CombustibleGearhulk card) {
+    private CombustibleGearhulk(final CombustibleGearhulk card) {
         super(card);
     }
 

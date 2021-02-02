@@ -33,7 +33,7 @@ public final class ScatteringStroke extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public ScatteringStroke(final ScatteringStroke card) {
+    private ScatteringStroke(final ScatteringStroke card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class WireflyHive extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WireflyHive(final WireflyHive card) {
+    private WireflyHive(final WireflyHive card) {
         super(card);
     }
 

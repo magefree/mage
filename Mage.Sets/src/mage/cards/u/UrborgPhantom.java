@@ -42,7 +42,7 @@ public final class UrborgPhantom extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UrborgPhantom(final UrborgPhantom card) {
+    private UrborgPhantom(final UrborgPhantom card) {
         super(card);
     }
 

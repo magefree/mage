@@ -42,7 +42,7 @@ public final class SoratamiCloudskater extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoratamiCloudskater(final SoratamiCloudskater card) {
+    private SoratamiCloudskater(final SoratamiCloudskater card) {
         super(card);
     }
 

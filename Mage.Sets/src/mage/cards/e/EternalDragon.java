@@ -46,7 +46,7 @@ public final class EternalDragon extends CardImpl {
         this.addAbility(new PlainscyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public EternalDragon(final EternalDragon card) {
+    private EternalDragon(final EternalDragon card) {
         super(card);
     }
 

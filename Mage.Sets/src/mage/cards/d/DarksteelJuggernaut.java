@@ -39,7 +39,7 @@ public final class DarksteelJuggernaut extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public DarksteelJuggernaut(final DarksteelJuggernaut card) {
+    private DarksteelJuggernaut(final DarksteelJuggernaut card) {
         super(card);
     }
 

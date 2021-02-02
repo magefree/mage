@@ -21,7 +21,7 @@ public final class Sprout extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken()));
     }
 
-    public Sprout(final Sprout card) {
+    private Sprout(final Sprout card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class NeedleshotGourna extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public NeedleshotGourna(final NeedleshotGourna card) {
+    private NeedleshotGourna(final NeedleshotGourna card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class ParagonOfTheAmesha extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ParagonOfTheAmesha(final ParagonOfTheAmesha card) {
+    private ParagonOfTheAmesha(final ParagonOfTheAmesha card) {
         super(card);
     }
 

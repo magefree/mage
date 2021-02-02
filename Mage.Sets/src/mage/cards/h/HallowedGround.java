@@ -37,7 +37,7 @@ public final class HallowedGround extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HallowedGround(final HallowedGround card) {
+    private HallowedGround(final HallowedGround card) {
         super(card);
     }
 

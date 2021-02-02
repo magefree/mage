@@ -53,7 +53,7 @@ public final class MaintenanceDroid extends CardImpl {
         this.addAbility(new RepairAbility(4));
     }
 
-    public MaintenanceDroid(final MaintenanceDroid card) {
+    private MaintenanceDroid(final MaintenanceDroid card) {
         super(card);
     }
 

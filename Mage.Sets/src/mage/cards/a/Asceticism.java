@@ -34,7 +34,7 @@ public final class Asceticism extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Asceticism(final Asceticism card) {
+    private Asceticism(final Asceticism card) {
         super(card);
     }
 

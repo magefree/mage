@@ -31,7 +31,7 @@ public final class Gallowbraid extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new PayLifeCost(1)));
     }
 
-    public Gallowbraid(final Gallowbraid card) {
+    private Gallowbraid(final Gallowbraid card) {
         super(card);
     }
 

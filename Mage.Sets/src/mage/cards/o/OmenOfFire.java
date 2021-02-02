@@ -41,7 +41,7 @@ public final class OmenOfFire extends CardImpl {
         this.getSpellAbility().addEffect(new OmenOfFireEffect());
     }
 
-    public OmenOfFire(final OmenOfFire card) {
+    private OmenOfFire(final OmenOfFire card) {
         super(card);
     }
 

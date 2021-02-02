@@ -33,7 +33,7 @@ public final class HornOfPlenty extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new HornOfPlentyEffect(), new FilterSpell("a spell"), false, SetTargetPointer.PLAYER));
     }
 
-    public HornOfPlenty(final HornOfPlenty card) {
+    private HornOfPlenty(final HornOfPlenty card) {
         super(card);
     }
 

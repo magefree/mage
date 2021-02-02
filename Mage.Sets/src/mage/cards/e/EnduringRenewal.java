@@ -42,7 +42,7 @@ public final class EnduringRenewal extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(effect, false, filter, true, true));
     }
 
-    public EnduringRenewal(final EnduringRenewal card) {
+    private EnduringRenewal(final EnduringRenewal card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class SamiteElder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SamiteElder(final SamiteElder card) {
+    private SamiteElder(final SamiteElder card) {
         super(card);
     }
 

@@ -57,7 +57,7 @@ public final class KarrthusTyrantOfJund extends CardImpl {
         
     }
 
-    public KarrthusTyrantOfJund(final KarrthusTyrantOfJund card) {
+    private KarrthusTyrantOfJund(final KarrthusTyrantOfJund card) {
         super(card);
     }
 

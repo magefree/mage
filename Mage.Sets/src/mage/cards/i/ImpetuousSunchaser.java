@@ -33,7 +33,7 @@ public final class ImpetuousSunchaser extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public ImpetuousSunchaser(final ImpetuousSunchaser card) {
+    private ImpetuousSunchaser(final ImpetuousSunchaser card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class Blessing extends CardImpl {
                 new ColoredManaCost(ColoredManaSymbol.W)));
     }
 
-    public Blessing(final Blessing card) {
+    private Blessing(final Blessing card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class MaelstromPulse extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllNamedPermanentsEffect());
     }
 
-    public MaelstromPulse(final MaelstromPulse card) {
+    private MaelstromPulse(final MaelstromPulse card) {
         super(card);
     }
 

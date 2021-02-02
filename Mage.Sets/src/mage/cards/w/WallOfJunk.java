@@ -36,7 +36,7 @@ public final class WallOfJunk extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(effect, false, false, true));
     }
 
-    public WallOfJunk(final WallOfJunk card) {
+    private WallOfJunk(final WallOfJunk card) {
         super(card);
     }
 

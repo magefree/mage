@@ -29,7 +29,7 @@ public final class RemorselessPunishment extends CardImpl {
         getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public RemorselessPunishment(final RemorselessPunishment card) {
+    private RemorselessPunishment(final RemorselessPunishment card) {
         super(card);
     }
 

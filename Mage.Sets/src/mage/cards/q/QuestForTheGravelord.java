@@ -38,7 +38,7 @@ public final class QuestForTheGravelord extends CardImpl {
         ));
     }
 
-    public QuestForTheGravelord(final QuestForTheGravelord card) {
+    private QuestForTheGravelord(final QuestForTheGravelord card) {
         super(card);
     }
 

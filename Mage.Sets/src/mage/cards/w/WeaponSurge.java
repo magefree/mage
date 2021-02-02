@@ -47,7 +47,7 @@ public final class WeaponSurge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WeaponSurge(final WeaponSurge card) {
+    private WeaponSurge(final WeaponSurge card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class ArmadilloCloak extends CardImpl {
 
     }
 
-    public ArmadilloCloak(final ArmadilloCloak card) {
+    private ArmadilloCloak(final ArmadilloCloak card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class ThundermawHellkite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThundermawHellkite(final ThundermawHellkite card) {
+    private ThundermawHellkite(final ThundermawHellkite card) {
         super(card);
     }
 

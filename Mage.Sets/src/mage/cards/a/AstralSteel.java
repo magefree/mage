@@ -27,7 +27,7 @@ public final class AstralSteel extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public AstralSteel(final AstralSteel card) {
+    private AstralSteel(final AstralSteel card) {
         super(card);
     }
 

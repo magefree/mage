@@ -27,7 +27,7 @@ public final class ReliefCaptain extends CardImpl {
         this.addAbility(new SupportAbility(this, 3));
     }
 
-    public ReliefCaptain(final ReliefCaptain card) {
+    private ReliefCaptain(final ReliefCaptain card) {
         super(card);
     }
 

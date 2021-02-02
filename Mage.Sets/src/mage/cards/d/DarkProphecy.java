@@ -35,7 +35,7 @@ public final class DarkProphecy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DarkProphecy(final DarkProphecy card) {
+    private DarkProphecy(final DarkProphecy card) {
         super(card);
     }
 

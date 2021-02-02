@@ -43,7 +43,7 @@ public final class OminousSphinx extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OminousSphinx(final OminousSphinx card) {
+    private OminousSphinx(final OminousSphinx card) {
         super(card);
     }
 

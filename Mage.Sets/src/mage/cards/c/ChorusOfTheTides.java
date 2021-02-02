@@ -30,7 +30,7 @@ public final class ChorusOfTheTides extends CardImpl {
         this.addAbility(new HeroicAbility(new ScryEffect(1)));
     }
 
-    public ChorusOfTheTides(final ChorusOfTheTides card) {
+    private ChorusOfTheTides(final ChorusOfTheTides card) {
         super(card);
     }
 

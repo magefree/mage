@@ -42,7 +42,7 @@ public final class ApocalypseChime extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ApocalypseChime(final ApocalypseChime card) {
+    private ApocalypseChime(final ApocalypseChime card) {
         super(card);
     }
 

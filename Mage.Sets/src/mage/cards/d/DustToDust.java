@@ -23,7 +23,7 @@ public final class DustToDust extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent(2, 2, new FilterArtifactPermanent("artifacts"), false));
     }
 
-    public DustToDust(final DustToDust card) {
+    private DustToDust(final DustToDust card) {
         super(card);
     }
 

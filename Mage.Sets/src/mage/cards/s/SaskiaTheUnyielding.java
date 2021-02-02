@@ -44,7 +44,7 @@ public final class SaskiaTheUnyielding extends CardImpl {
         ));
     }
 
-    public SaskiaTheUnyielding(final SaskiaTheUnyielding card) {
+    private SaskiaTheUnyielding(final SaskiaTheUnyielding card) {
         super(card);
     }
 

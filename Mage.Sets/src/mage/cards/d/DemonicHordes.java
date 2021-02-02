@@ -50,7 +50,7 @@ public final class DemonicHordes extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DemonicHordesEffect(new ManaCostsImpl("{B}{B}{B}")), TargetController.YOU, false));
     }
 
-    public DemonicHordes(final DemonicHordes card) {
+    private DemonicHordes(final DemonicHordes card) {
         super(card);
     }
 

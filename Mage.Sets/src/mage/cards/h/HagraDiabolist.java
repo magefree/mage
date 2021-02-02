@@ -42,7 +42,7 @@ public final class HagraDiabolist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HagraDiabolist(final HagraDiabolist card) {
+    private HagraDiabolist(final HagraDiabolist card) {
         super(card);
     }
 

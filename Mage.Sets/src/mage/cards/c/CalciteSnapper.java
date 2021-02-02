@@ -29,7 +29,7 @@ public final class CalciteSnapper extends CardImpl {
         this.addAbility(new LandfallAbility(new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), true));
     }
 
-    public CalciteSnapper(final CalciteSnapper card) {
+    private CalciteSnapper(final CalciteSnapper card) {
         super(card);
     }
 

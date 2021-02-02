@@ -21,7 +21,7 @@ public final class Languish extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-4, -4, Duration.EndOfTurn));
     }
 
-    public Languish(final Languish card) {
+    private Languish(final Languish card) {
         super(card);
     }
 

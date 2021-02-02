@@ -27,7 +27,7 @@ public final class SkySpirit extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public SkySpirit(final SkySpirit card) {
+    private SkySpirit(final SkySpirit card) {
         super(card);
     }
 

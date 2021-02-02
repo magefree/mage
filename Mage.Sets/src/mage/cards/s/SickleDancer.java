@@ -43,7 +43,7 @@ public final class SickleDancer extends CardImpl {
         ));
     }
 
-    public SickleDancer(final SickleDancer card) {
+    private SickleDancer(final SickleDancer card) {
         super(card);
     }
 

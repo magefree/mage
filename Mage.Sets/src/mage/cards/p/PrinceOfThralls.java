@@ -40,7 +40,7 @@ public final class PrinceOfThralls extends CardImpl {
         this.addAbility(new PrinceOfThrallsTriggeredAbility(new PrinceOfThrallsEffect()));
     }
 
-    public PrinceOfThralls(final PrinceOfThralls card) {
+    private PrinceOfThralls(final PrinceOfThralls card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class UndeadAlchemist extends CardImpl {
         this.addAbility(new UndeadAlchemistTriggeredAbility());
     }
 
-    public UndeadAlchemist(final UndeadAlchemist card) {
+    private UndeadAlchemist(final UndeadAlchemist card) {
         super(card);
     }
 

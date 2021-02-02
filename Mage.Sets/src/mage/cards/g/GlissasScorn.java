@@ -24,7 +24,7 @@ public final class GlissasScorn extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(1));
     }
 
-    public GlissasScorn(final GlissasScorn card) {
+    private GlissasScorn(final GlissasScorn card) {
         super(card);
     }
 

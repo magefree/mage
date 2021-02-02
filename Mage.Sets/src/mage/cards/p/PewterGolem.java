@@ -26,7 +26,7 @@ public final class PewterGolem extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }
 
-    public PewterGolem(final PewterGolem card) {
+    private PewterGolem(final PewterGolem card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class Decimate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public Decimate(final Decimate card) {
+    private Decimate(final Decimate card) {
         super(card);
     }
 

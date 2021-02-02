@@ -39,7 +39,7 @@ public final class Heartmender extends CardImpl {
 
     }
 
-    public Heartmender(final Heartmender card) {
+    private Heartmender(final Heartmender card) {
         super(card);
     }
 

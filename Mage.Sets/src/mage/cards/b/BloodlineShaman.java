@@ -37,7 +37,7 @@ public final class BloodlineShaman extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BloodlineShamanEffect(), new TapSourceCost()));
     }
 
-    public BloodlineShaman(final BloodlineShaman card) {
+    private BloodlineShaman(final BloodlineShaman card) {
         super(card);
     }
 

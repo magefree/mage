@@ -46,7 +46,7 @@ public final class KarnSilverGolem extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public KarnSilverGolem(final KarnSilverGolem card) {
+    private KarnSilverGolem(final KarnSilverGolem card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class Stangg extends CardImpl {
 
     }
 
-    public Stangg(final Stangg card) {
+    private Stangg(final Stangg card) {
         super(card);
     }
 

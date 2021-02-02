@@ -47,7 +47,7 @@ public final class TymaretTheMurderKing extends CardImpl {
 
     }
 
-    public TymaretTheMurderKing(final TymaretTheMurderKing card) {
+    private TymaretTheMurderKing(final TymaretTheMurderKing card) {
         super(card);
     }
 

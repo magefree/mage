@@ -32,7 +32,7 @@ public final class HarvestguardAlseids extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HarvestguardAlseids(final HarvestguardAlseids card) {
+    private HarvestguardAlseids(final HarvestguardAlseids card) {
         super(card);
     }
 

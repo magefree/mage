@@ -43,7 +43,7 @@ public final class MouthFeed extends SplitCard {
 
     }
 
-    public MouthFeed(final MouthFeed card) {
+    private MouthFeed(final MouthFeed card) {
         super(card);
     }
 

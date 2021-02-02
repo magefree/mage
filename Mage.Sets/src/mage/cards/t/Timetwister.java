@@ -26,7 +26,7 @@ public final class Timetwister extends CardImpl {
 
     }
 
-    public Timetwister(final Timetwister card) {
+    private Timetwister(final Timetwister card) {
         super(card);
     }
 

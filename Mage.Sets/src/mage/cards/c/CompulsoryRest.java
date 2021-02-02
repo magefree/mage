@@ -54,7 +54,7 @@ public final class CompulsoryRest extends CardImpl {
 
     }
 
-    public CompulsoryRest(final CompulsoryRest card) {
+    private CompulsoryRest(final CompulsoryRest card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class HellkiteCharger extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new HellkiteChargerEffect(),false));
     }
 
-    public HellkiteCharger(final HellkiteCharger card) {
+    private HellkiteCharger(final HellkiteCharger card) {
         super(card);
     }
 

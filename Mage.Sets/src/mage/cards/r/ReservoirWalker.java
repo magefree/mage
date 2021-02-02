@@ -34,7 +34,7 @@ public final class ReservoirWalker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ReservoirWalker(final ReservoirWalker card) {
+    private ReservoirWalker(final ReservoirWalker card) {
         super(card);
     }
 

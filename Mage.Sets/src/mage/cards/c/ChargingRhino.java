@@ -28,7 +28,7 @@ public final class ChargingRhino extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
-    public ChargingRhino(final ChargingRhino card) {
+    private ChargingRhino(final ChargingRhino card) {
         super(card);
     }
 

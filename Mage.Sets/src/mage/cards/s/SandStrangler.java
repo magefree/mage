@@ -51,7 +51,7 @@ public final class SandStrangler extends CardImpl {
 
     }
 
-    public SandStrangler(final SandStrangler card) {
+    private SandStrangler(final SandStrangler card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class MarkOfMutiny extends CardImpl {
 
     }
 
-    public MarkOfMutiny(final MarkOfMutiny card) {
+    private MarkOfMutiny(final MarkOfMutiny card) {
         super(card);
     }
 

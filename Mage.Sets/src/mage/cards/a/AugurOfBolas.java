@@ -43,7 +43,7 @@ public final class AugurOfBolas extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AugurOfBolasEffect()));
     }
 
-    public AugurOfBolas(final AugurOfBolas card) {
+    private AugurOfBolas(final AugurOfBolas card) {
         super(card);
     }
 

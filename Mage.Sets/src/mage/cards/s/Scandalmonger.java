@@ -36,7 +36,7 @@ public final class Scandalmonger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Scandalmonger(final Scandalmonger card) {
+    private Scandalmonger(final Scandalmonger card) {
         super(card);
     }
 

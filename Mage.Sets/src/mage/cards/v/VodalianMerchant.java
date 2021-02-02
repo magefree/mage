@@ -26,7 +26,7 @@ public final class VodalianMerchant extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(1, 1, false)));
     }
 
-    public VodalianMerchant(final VodalianMerchant card) {
+    private VodalianMerchant(final VodalianMerchant card) {
         super(card);
     }
 

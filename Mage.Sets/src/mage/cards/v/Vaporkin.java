@@ -29,7 +29,7 @@ public final class Vaporkin extends CardImpl {
          this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public Vaporkin(final Vaporkin card) {
+    private Vaporkin(final Vaporkin card) {
         super(card);
     }
 

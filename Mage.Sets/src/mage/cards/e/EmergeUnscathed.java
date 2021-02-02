@@ -28,7 +28,7 @@ public final class EmergeUnscathed extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public EmergeUnscathed(final EmergeUnscathed card) {
+    private EmergeUnscathed(final EmergeUnscathed card) {
         super(card);
     }
 

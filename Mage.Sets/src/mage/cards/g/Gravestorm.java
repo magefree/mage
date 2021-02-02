@@ -34,7 +34,7 @@ public final class Gravestorm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Gravestorm(final Gravestorm card) {
+    private Gravestorm(final Gravestorm card) {
         super(card);
     }
 

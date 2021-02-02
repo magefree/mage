@@ -46,7 +46,7 @@ public final class ThievingSprite extends CardImpl {
 
     }
 
-    public ThievingSprite(final ThievingSprite card) {
+    private ThievingSprite(final ThievingSprite card) {
         super(card);
     }
 

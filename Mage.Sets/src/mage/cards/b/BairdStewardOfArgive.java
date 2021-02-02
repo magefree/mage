@@ -36,7 +36,7 @@ public final class BairdStewardOfArgive extends CardImpl {
                 .setText("Creatures can't attack you or a planeswalker you control unless their controller pays {1} for each of those creatures")));
     }
 
-    public BairdStewardOfArgive(final BairdStewardOfArgive card) {
+    private BairdStewardOfArgive(final BairdStewardOfArgive card) {
         super(card);
     }
 

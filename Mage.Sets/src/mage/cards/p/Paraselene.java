@@ -27,7 +27,7 @@ public final class Paraselene extends CardImpl {
         this.getSpellAbility().addEffect(new ParaseleneEffect());
     }
 
-    public Paraselene(final Paraselene card) {
+    private Paraselene(final Paraselene card) {
         super(card);
     }
 

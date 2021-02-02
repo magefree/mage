@@ -45,7 +45,7 @@ public final class FendeepSummoner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FendeepSummoner(final FendeepSummoner card) {
+    private FendeepSummoner(final FendeepSummoner card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class RootingKavu extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new RootingKavuEffect(), new ExileSourceFromGraveCost())));
     }
 
-    public RootingKavu(final RootingKavu card) {
+    private RootingKavu(final RootingKavu card) {
         super(card);
     }
 

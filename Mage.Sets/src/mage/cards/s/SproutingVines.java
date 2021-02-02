@@ -27,7 +27,7 @@ public final class SproutingVines extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public SproutingVines(final SproutingVines card) {
+    private SproutingVines(final SproutingVines card) {
         super(card);
     }
 

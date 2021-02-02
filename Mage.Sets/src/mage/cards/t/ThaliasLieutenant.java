@@ -42,7 +42,7 @@ public final class ThaliasLieutenant extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
     }
 
-    public ThaliasLieutenant(final ThaliasLieutenant card) {
+    private ThaliasLieutenant(final ThaliasLieutenant card) {
         super(card);
     }
 

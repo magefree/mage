@@ -27,7 +27,7 @@ public final class Reshape extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryWithLessCMCPutInPlayEffect(new FilterArtifactCard()));
     }
 
-    public Reshape(final Reshape card) {
+    private Reshape(final Reshape card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class BalthorTheDefiled extends CardImpl {
 
     }
 
-    public BalthorTheDefiled(final BalthorTheDefiled card) {
+    private BalthorTheDefiled(final BalthorTheDefiled card) {
         super(card);
     }
 

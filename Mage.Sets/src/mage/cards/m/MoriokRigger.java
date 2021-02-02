@@ -36,7 +36,7 @@ public final class MoriokRigger extends CardImpl {
          this.addAbility(ability);
     }
 
-    public MoriokRigger(final MoriokRigger card) {
+    private MoriokRigger(final MoriokRigger card) {
         super(card);
     }
 

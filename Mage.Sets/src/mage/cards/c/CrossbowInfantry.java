@@ -35,7 +35,7 @@ public final class CrossbowInfantry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrossbowInfantry(final CrossbowInfantry card) {
+    private CrossbowInfantry(final CrossbowInfantry card) {
         super(card);
     }
 

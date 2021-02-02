@@ -30,7 +30,7 @@ public final class Duskworker extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(3)));
     }
 
-    public Duskworker(final Duskworker card) {
+    private Duskworker(final Duskworker card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class QuirionDruid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuirionDruid(final QuirionDruid card) {
+    private QuirionDruid(final QuirionDruid card) {
         super(card);
     }
 

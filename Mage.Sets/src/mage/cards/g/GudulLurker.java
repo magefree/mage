@@ -30,7 +30,7 @@ public final class GudulLurker extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}"), true));
     }
 
-    public GudulLurker(final GudulLurker card) {
+    private GudulLurker(final GudulLurker card) {
         super(card);
     }
 

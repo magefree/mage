@@ -44,7 +44,7 @@ public final class MajesticMyriarch extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new MajesticMyriarchEffect(), TargetController.ANY, false));
     }
 
-    public MajesticMyriarch(final MajesticMyriarch card) {
+    private MajesticMyriarch(final MajesticMyriarch card) {
         super(card);
     }
 

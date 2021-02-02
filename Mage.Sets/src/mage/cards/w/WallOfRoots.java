@@ -35,7 +35,7 @@ public final class WallOfRoots extends CardImpl {
         this.addAbility(new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(1)), new PutCountersSourceCost(CounterType.M0M1.createInstance())));
     }
 
-    public WallOfRoots(final WallOfRoots card) {
+    private WallOfRoots(final WallOfRoots card) {
         super(card);
     }
 

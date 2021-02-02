@@ -76,7 +76,7 @@ public final class HakimLoreweaver extends CardImpl {
 
     }
 
-    public HakimLoreweaver(final HakimLoreweaver card) {
+    private HakimLoreweaver(final HakimLoreweaver card) {
         super(card);
     }
 

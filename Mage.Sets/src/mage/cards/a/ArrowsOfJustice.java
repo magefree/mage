@@ -23,7 +23,7 @@ public final class ArrowsOfJustice extends CardImpl {
         getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());
     }
 
-    public ArrowsOfJustice(final ArrowsOfJustice card) {
+    private ArrowsOfJustice(final ArrowsOfJustice card) {
         super(card);
     }
 

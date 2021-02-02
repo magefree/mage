@@ -44,7 +44,7 @@ public final class JhoiraOfTheGhitu extends CardImpl {
 
     }
 
-    public JhoiraOfTheGhitu(final JhoiraOfTheGhitu card) {
+    private JhoiraOfTheGhitu(final JhoiraOfTheGhitu card) {
         super(card);
     }
 

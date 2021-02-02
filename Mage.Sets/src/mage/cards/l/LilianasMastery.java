@@ -37,7 +37,7 @@ public final class LilianasMastery extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 2)));
     }
 
-    public LilianasMastery(final LilianasMastery card) {
+    private LilianasMastery(final LilianasMastery card) {
         super(card);
     }
 

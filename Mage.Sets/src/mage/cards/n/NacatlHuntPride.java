@@ -49,7 +49,7 @@ public final class NacatlHuntPride extends CardImpl {
         
     }
 
-    public NacatlHuntPride(final NacatlHuntPride card) {
+    private NacatlHuntPride(final NacatlHuntPride card) {
         super(card);
     }
 

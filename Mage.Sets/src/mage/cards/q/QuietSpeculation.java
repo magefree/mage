@@ -40,7 +40,7 @@ public final class QuietSpeculation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public QuietSpeculation(final QuietSpeculation card) {
+    private QuietSpeculation(final QuietSpeculation card) {
         super(card);
     }
 

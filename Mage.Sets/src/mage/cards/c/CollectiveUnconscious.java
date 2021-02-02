@@ -22,7 +22,7 @@ public final class CollectiveUnconscious extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE)));
     }
 
-    public CollectiveUnconscious(final CollectiveUnconscious card) {
+    private CollectiveUnconscious(final CollectiveUnconscious card) {
         super(card);
     }
 

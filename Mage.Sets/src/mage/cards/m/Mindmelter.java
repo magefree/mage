@@ -45,7 +45,7 @@ public final class Mindmelter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Mindmelter(final Mindmelter card) {
+    private Mindmelter(final Mindmelter card) {
         super(card);
     }
 

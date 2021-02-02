@@ -38,7 +38,7 @@ public final class RecruiterOfTheGuard extends CardImpl {
                 new TargetCardInLibrary(filter), true, true), true));
     }
 
-    public RecruiterOfTheGuard(final RecruiterOfTheGuard card) {
+    private RecruiterOfTheGuard(final RecruiterOfTheGuard card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class Sizzle extends CardImpl {
         this.getSpellAbility().addEffect(new DamagePlayersEffect(3, TargetController.OPPONENT));
     }
 
-    public Sizzle(final Sizzle card) {
+    private Sizzle(final Sizzle card) {
         super(card);
     }
 

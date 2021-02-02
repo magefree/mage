@@ -42,7 +42,7 @@ public final class GoblinCaves extends CardImpl {
         )));
     }
 
-    public GoblinCaves(final GoblinCaves card) {
+    private GoblinCaves(final GoblinCaves card) {
         super(card);
     }
 

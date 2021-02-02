@@ -51,7 +51,7 @@ public final class Brawn extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, brawnEffect));
     }
 
-    public Brawn(final Brawn card) {
+    private Brawn(final Brawn card) {
         super(card);
     }
 

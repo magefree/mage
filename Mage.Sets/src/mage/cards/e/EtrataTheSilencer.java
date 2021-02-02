@@ -48,7 +48,7 @@ public final class EtrataTheSilencer extends CardImpl {
         this.addAbility(new EtrataTheSilencerTriggeredAbility());
     }
 
-    public EtrataTheSilencer(final EtrataTheSilencer card) {
+    private EtrataTheSilencer(final EtrataTheSilencer card) {
         super(card);
     }
 

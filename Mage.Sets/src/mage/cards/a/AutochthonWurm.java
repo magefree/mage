@@ -31,7 +31,7 @@ public final class AutochthonWurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public AutochthonWurm(final AutochthonWurm card) {
+    private AutochthonWurm(final AutochthonWurm card) {
         super(card);
     }
 

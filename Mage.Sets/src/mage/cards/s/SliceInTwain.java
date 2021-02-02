@@ -24,7 +24,7 @@ public final class SliceInTwain extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
-    public SliceInTwain(final SliceInTwain card) {
+    private SliceInTwain(final SliceInTwain card) {
         super(card);
     }
 

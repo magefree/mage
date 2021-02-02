@@ -31,7 +31,7 @@ public final class WhisperAgent extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SurveilEffect(1), false));
     }
 
-    public WhisperAgent(final WhisperAgent card) {
+    private WhisperAgent(final WhisperAgent card) {
         super(card);
     }
 

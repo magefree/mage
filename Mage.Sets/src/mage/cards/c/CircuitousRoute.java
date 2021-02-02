@@ -38,7 +38,7 @@ public final class CircuitousRoute extends CardImpl {
         ));
     }
 
-    public CircuitousRoute(final CircuitousRoute card) {
+    private CircuitousRoute(final CircuitousRoute card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class SpiderSpawning extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{6}{B}"), TimingRule.SORCERY));
     }
 
-    public SpiderSpawning(final SpiderSpawning card) {
+    private SpiderSpawning(final SpiderSpawning card) {
         super(card);
     }
 

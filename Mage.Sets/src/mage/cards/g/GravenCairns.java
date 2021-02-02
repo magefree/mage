@@ -38,7 +38,7 @@ public final class GravenCairns extends CardImpl {
         this.addAbility(ability);          
     }
 
-    public GravenCairns(final GravenCairns card) {
+    private GravenCairns(final GravenCairns card) {
         super(card);
     }
 

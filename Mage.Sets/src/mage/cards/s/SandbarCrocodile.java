@@ -26,7 +26,7 @@ public final class SandbarCrocodile extends CardImpl {
         this.addAbility(PhasingAbility.getInstance());
     }
 
-    public SandbarCrocodile(final SandbarCrocodile card) {
+    private SandbarCrocodile(final SandbarCrocodile card) {
         super(card);
     }
 

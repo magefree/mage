@@ -51,7 +51,7 @@ public final class CelestialCrusader extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public CelestialCrusader(final CelestialCrusader card) {
+    private CelestialCrusader(final CelestialCrusader card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class Mortiphobia extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Mortiphobia(final Mortiphobia card) {
+    private Mortiphobia(final Mortiphobia card) {
         super(card);
     }
 

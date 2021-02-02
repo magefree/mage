@@ -56,7 +56,7 @@ public final class MercenaryInformer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MercenaryInformer(final MercenaryInformer card) {
+    private MercenaryInformer(final MercenaryInformer card) {
         super(card);
     }
 

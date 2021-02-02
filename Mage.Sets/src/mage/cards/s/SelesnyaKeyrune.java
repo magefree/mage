@@ -32,7 +32,7 @@ public final class SelesnyaKeyrune extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SelesnyaKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{G}{W}")));
     }
 
-    public SelesnyaKeyrune(final SelesnyaKeyrune card) {
+    private SelesnyaKeyrune(final SelesnyaKeyrune card) {
         super(card);
     }
 

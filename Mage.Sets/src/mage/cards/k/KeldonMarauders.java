@@ -44,7 +44,7 @@ public final class KeldonMarauders extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KeldonMarauders(final KeldonMarauders card) {
+    private KeldonMarauders(final KeldonMarauders card) {
         super(card);
     }
 

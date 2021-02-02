@@ -22,7 +22,7 @@ public final class HurloonMinotaur extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public HurloonMinotaur(final HurloonMinotaur card) {
+    private HurloonMinotaur(final HurloonMinotaur card) {
         super(card);
     }
 

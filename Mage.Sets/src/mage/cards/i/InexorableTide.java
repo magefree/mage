@@ -20,7 +20,7 @@ public final class InexorableTide extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new ProliferateEffect(), false));
     }
 
-    public InexorableTide(final InexorableTide card) {
+    private InexorableTide(final InexorableTide card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class PasswallAdept extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PasswallAdept(final PasswallAdept card) {
+    private PasswallAdept(final PasswallAdept card) {
         super(card);
     }
 

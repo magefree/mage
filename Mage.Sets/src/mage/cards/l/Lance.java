@@ -39,7 +39,7 @@ public final class Lance extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public Lance(final Lance card) {
+    private Lance(final Lance card) {
         super(card);
     }
 

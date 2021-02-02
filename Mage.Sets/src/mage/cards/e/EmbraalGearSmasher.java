@@ -38,7 +38,7 @@ public final class EmbraalGearSmasher extends CardImpl {
 
     }
 
-    public EmbraalGearSmasher(final EmbraalGearSmasher card) {
+    private EmbraalGearSmasher(final EmbraalGearSmasher card) {
         super(card);
     }
 

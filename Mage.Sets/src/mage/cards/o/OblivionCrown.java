@@ -44,7 +44,7 @@ public final class OblivionCrown extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn),new DiscardCardCost()), AttachmentType.AURA)));
     }
 
-    public OblivionCrown(final OblivionCrown card) {
+    private OblivionCrown(final OblivionCrown card) {
         super(card);
     }
 

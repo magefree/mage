@@ -41,7 +41,7 @@ public final class FinalPayment extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FinalPayment(final FinalPayment card) {
+    private FinalPayment(final FinalPayment card) {
         super(card);
     }
 

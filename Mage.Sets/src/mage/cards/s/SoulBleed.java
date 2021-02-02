@@ -36,7 +36,7 @@ public final class SoulBleed extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), TargetController.CONTROLLER_ATTACHED_TO, false, true));
     }
 
-    public SoulBleed(final SoulBleed card) {
+    private SoulBleed(final SoulBleed card) {
         super(card);
     }
 

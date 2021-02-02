@@ -22,7 +22,7 @@ public final class WanderingTombshell extends CardImpl {
         this.toughness = new MageInt(6);
     }
 
-    public WanderingTombshell(final WanderingTombshell card) {
+    private WanderingTombshell(final WanderingTombshell card) {
         super(card);
     }
 

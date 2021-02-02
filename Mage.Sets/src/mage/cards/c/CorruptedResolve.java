@@ -29,7 +29,7 @@ public final class CorruptedResolve extends CardImpl {
         this.getSpellAbility().addEffect(new CorruptedResolveEffect());
     }
 
-    public CorruptedResolve(final CorruptedResolve card) {
+    private CorruptedResolve(final CorruptedResolve card) {
         super(card);
     }
 

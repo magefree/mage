@@ -53,7 +53,7 @@ public final class SoratamiMirrorGuard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoratamiMirrorGuard(final SoratamiMirrorGuard card) {
+    private SoratamiMirrorGuard(final SoratamiMirrorGuard card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class VesselOfParamnesia extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VesselOfParamnesia(final VesselOfParamnesia card) {
+    private VesselOfParamnesia(final VesselOfParamnesia card) {
         super(card);
     }
 

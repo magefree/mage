@@ -36,7 +36,7 @@ public final class Lashwrithe extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{B/P}{B/P}")));
     }
 
-    public Lashwrithe(final Lashwrithe card) {
+    private Lashwrithe(final Lashwrithe card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class AkkiDrillmaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AkkiDrillmaster(final AkkiDrillmaster card) {
+    private AkkiDrillmaster(final AkkiDrillmaster card) {
         super(card);
     }
 

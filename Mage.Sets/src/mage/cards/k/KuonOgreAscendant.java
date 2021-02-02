@@ -48,7 +48,7 @@ public final class KuonOgreAscendant extends CardImpl {
                 new CreaturesDiedWatcher());
     }
 
-    public KuonOgreAscendant(final KuonOgreAscendant card) {
+    private KuonOgreAscendant(final KuonOgreAscendant card) {
         super(card);
     }
 

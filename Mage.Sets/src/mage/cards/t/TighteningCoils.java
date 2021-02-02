@@ -47,7 +47,7 @@ public final class TighteningCoils extends CardImpl {
 
     }
 
-    public TighteningCoils(final TighteningCoils card) {
+    private TighteningCoils(final TighteningCoils card) {
         super(card);
     }
 

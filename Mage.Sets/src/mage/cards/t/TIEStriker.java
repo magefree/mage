@@ -25,7 +25,7 @@ public final class TIEStriker extends CardImpl {
         this.addAbility(SpaceflightAbility.getInstance());
     }
 
-    public TIEStriker(final TIEStriker card) {
+    private TIEStriker(final TIEStriker card) {
         super(card);
     }
 

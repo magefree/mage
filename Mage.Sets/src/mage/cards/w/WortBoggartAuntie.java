@@ -45,7 +45,7 @@ public final class WortBoggartAuntie extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WortBoggartAuntie(final WortBoggartAuntie card) {
+    private WortBoggartAuntie(final WortBoggartAuntie card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class KorozdaGorgon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KorozdaGorgon(final KorozdaGorgon card) {
+    private KorozdaGorgon(final KorozdaGorgon card) {
         super(card);
     }
 

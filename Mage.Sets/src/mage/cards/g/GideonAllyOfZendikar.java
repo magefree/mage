@@ -48,7 +48,7 @@ public final class GideonAllyOfZendikar extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new GideonAllyOfZendikarEmblem()), -4));
     }
 
-    public GideonAllyOfZendikar(final GideonAllyOfZendikar card) {
+    private GideonAllyOfZendikar(final GideonAllyOfZendikar card) {
         super(card);
     }
 

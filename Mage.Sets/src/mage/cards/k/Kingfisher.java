@@ -29,7 +29,7 @@ public final class Kingfisher extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public Kingfisher(final Kingfisher card) {
+    private Kingfisher(final Kingfisher card) {
         super(card);
     }
 

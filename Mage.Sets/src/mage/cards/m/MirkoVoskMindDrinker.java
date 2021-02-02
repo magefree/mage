@@ -36,7 +36,7 @@ public final class MirkoVoskMindDrinker extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MirkoVoskMindDrinkerEffect(), false, true));
     }
 
-    public MirkoVoskMindDrinker(final MirkoVoskMindDrinker card) {
+    private MirkoVoskMindDrinker(final MirkoVoskMindDrinker card) {
         super(card);
     }
 

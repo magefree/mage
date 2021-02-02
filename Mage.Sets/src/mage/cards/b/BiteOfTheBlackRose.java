@@ -30,7 +30,7 @@ public final class BiteOfTheBlackRose extends CardImpl {
         this.getSpellAbility().addEffect(new BiteOfTheBlackRoseEffect());
     }
 
-    public BiteOfTheBlackRose(final BiteOfTheBlackRose card) {
+    private BiteOfTheBlackRose(final BiteOfTheBlackRose card) {
         super(card);
     }
 

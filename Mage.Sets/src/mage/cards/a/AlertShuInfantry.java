@@ -27,7 +27,7 @@ public final class AlertShuInfantry extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public AlertShuInfantry(final AlertShuInfantry card) {
+    private AlertShuInfantry(final AlertShuInfantry card) {
         super(card);
     }
 

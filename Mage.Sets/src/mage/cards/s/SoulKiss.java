@@ -42,7 +42,7 @@ public final class SoulKiss extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoulKiss(final SoulKiss card) {
+    private SoulKiss(final SoulKiss card) {
         super(card);
     }
 

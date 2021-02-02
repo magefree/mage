@@ -31,7 +31,7 @@ public final class VialOfDragonfire extends CardImpl {
 
     }
 
-    public VialOfDragonfire(final VialOfDragonfire card) {
+    private VialOfDragonfire(final VialOfDragonfire card) {
         super(card);
     }
 

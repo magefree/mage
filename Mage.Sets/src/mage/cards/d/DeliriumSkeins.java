@@ -21,7 +21,7 @@ public final class DeliriumSkeins extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(3, false));
     }
 
-    public DeliriumSkeins(final DeliriumSkeins card) {
+    private DeliriumSkeins(final DeliriumSkeins card) {
         super(card);
     }
 

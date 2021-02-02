@@ -29,7 +29,7 @@ public final class KamiOfTatteredShoji extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
     }
 
-    public KamiOfTatteredShoji(final KamiOfTatteredShoji card) {
+    private KamiOfTatteredShoji(final KamiOfTatteredShoji card) {
         super(card);
     }
 

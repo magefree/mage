@@ -26,7 +26,7 @@ public final class KamiOfLunacy extends CardImpl {
         this.addAbility(new SoulshiftAbility(5));
     }
 
-    public KamiOfLunacy(final KamiOfLunacy card) {
+    private KamiOfLunacy(final KamiOfLunacy card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class Cloudshift extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect(false));
     }
 
-    public Cloudshift(final Cloudshift card) {
+    private Cloudshift(final Cloudshift card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class BloodshedFever extends CardImpl {
                 new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA)));
     }
 
-    public BloodshedFever(final BloodshedFever card) {
+    private BloodshedFever(final BloodshedFever card) {
         super(card);
     }
 

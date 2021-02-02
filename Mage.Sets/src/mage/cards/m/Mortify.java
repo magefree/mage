@@ -31,7 +31,7 @@ public final class Mortify extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public Mortify(final Mortify card) {
+    private Mortify(final Mortify card) {
         super(card);
     }
 

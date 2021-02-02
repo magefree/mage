@@ -26,7 +26,7 @@ public final class HandOfSilumgar extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public HandOfSilumgar(final HandOfSilumgar card) {
+    private HandOfSilumgar(final HandOfSilumgar card) {
         super(card);
     }
 

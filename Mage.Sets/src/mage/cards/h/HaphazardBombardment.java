@@ -46,7 +46,7 @@ public final class HaphazardBombardment extends CardImpl {
                 "At the beginning of your end step, if two or more permanents you don't control have an aim counter on them, destroy one of those permanents at random"));
     }
 
-    public HaphazardBombardment(final HaphazardBombardment card) {
+    private HaphazardBombardment(final HaphazardBombardment card) {
         super(card);
     }
 

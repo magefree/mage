@@ -41,7 +41,7 @@ public final class CavalryDrillmaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CavalryDrillmaster(final CavalryDrillmaster card) {
+    private CavalryDrillmaster(final CavalryDrillmaster card) {
         super(card);
     }
 

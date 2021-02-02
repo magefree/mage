@@ -33,7 +33,7 @@ public final class NestingDragon extends CardImpl {
         ));
     }
 
-    public NestingDragon(final NestingDragon card) {
+    private NestingDragon(final NestingDragon card) {
         super(card);
     }
 

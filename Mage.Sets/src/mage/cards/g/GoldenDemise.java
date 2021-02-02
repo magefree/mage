@@ -39,7 +39,7 @@ public final class GoldenDemise extends CardImpl {
         ));
     }
 
-    public GoldenDemise(final GoldenDemise card) {
+    private GoldenDemise(final GoldenDemise card) {
         super(card);
     }
 

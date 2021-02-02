@@ -33,7 +33,7 @@ public final class HourOfReckoning extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public HourOfReckoning(final HourOfReckoning card) {
+    private HourOfReckoning(final HourOfReckoning card) {
         super(card);
     }
 

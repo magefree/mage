@@ -28,7 +28,7 @@ public final class AuraBarbs extends CardImpl {
         this.getSpellAbility().addEffect(new AuraBarbsEffect());
     }
 
-    public AuraBarbs(final AuraBarbs card) {
+    private AuraBarbs(final AuraBarbs card) {
         super(card);
     }
 

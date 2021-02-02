@@ -56,7 +56,7 @@ public final class RiseOfTheHobgoblins extends CardImpl {
 
     }
 
-    public RiseOfTheHobgoblins(final RiseOfTheHobgoblins card) {
+    private RiseOfTheHobgoblins(final RiseOfTheHobgoblins card) {
         super(card);
     }
 

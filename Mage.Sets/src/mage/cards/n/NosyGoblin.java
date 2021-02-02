@@ -42,7 +42,7 @@ public final class NosyGoblin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NosyGoblin(final NosyGoblin card) {
+    private NosyGoblin(final NosyGoblin card) {
         super(card);
     }
 

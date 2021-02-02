@@ -48,7 +48,7 @@ public final class Rakavolver extends CardImpl {
 
     }
 
-    public Rakavolver(final Rakavolver card) {
+    private Rakavolver(final Rakavolver card) {
         super(card);
     }
 

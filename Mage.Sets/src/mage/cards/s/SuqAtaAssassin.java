@@ -33,7 +33,7 @@ public final class SuqAtaAssassin extends CardImpl {
         this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(effect, false, true));
     }
 
-    public SuqAtaAssassin(final SuqAtaAssassin card) {
+    private SuqAtaAssassin(final SuqAtaAssassin card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public final class TimeElemental extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public TimeElemental(final TimeElemental card) {
+    private TimeElemental(final TimeElemental card) {
         super(card);
     }
 

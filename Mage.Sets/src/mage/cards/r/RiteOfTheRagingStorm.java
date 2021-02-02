@@ -46,7 +46,7 @@ public final class RiteOfTheRagingStorm extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new RiteOfTheRagingStormEffect(), TargetController.ANY, false));
     }
 
-    public RiteOfTheRagingStorm(final RiteOfTheRagingStorm card) {
+    private RiteOfTheRagingStorm(final RiteOfTheRagingStorm card) {
         super(card);
     }
 

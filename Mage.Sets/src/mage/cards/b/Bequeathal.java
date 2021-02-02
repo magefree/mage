@@ -36,7 +36,7 @@ public final class Bequeathal extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardSourceControllerEffect(2).setText("you draw two cards"), "enchanted creature"));
     }
 
-    public Bequeathal(final Bequeathal card) {
+    private Bequeathal(final Bequeathal card) {
         super(card);
     }
 

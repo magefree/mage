@@ -37,7 +37,7 @@ public final class RiptideBiologist extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}")));
     }
 
-    public RiptideBiologist(final RiptideBiologist card) {
+    private RiptideBiologist(final RiptideBiologist card) {
         super(card);
     }
 

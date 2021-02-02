@@ -48,7 +48,7 @@ public final class ElderDruid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElderDruid(final ElderDruid card) {
+    private ElderDruid(final ElderDruid card) {
         super(card);
     }
 

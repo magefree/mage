@@ -43,7 +43,7 @@ public final class GoblinPyromancer extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DestroyAllEffect(filterPermanent, false), TargetController.ANY, false));
     }
 
-    public GoblinPyromancer(final GoblinPyromancer card) {
+    private GoblinPyromancer(final GoblinPyromancer card) {
         super(card);
     }
 

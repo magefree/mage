@@ -45,7 +45,7 @@ public final class JeskaiAscendancy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JeskaiAscendancy(final JeskaiAscendancy card) {
+    private JeskaiAscendancy(final JeskaiAscendancy card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class Pyrotechnics extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4));
     }
 
-    public Pyrotechnics(final Pyrotechnics card) {
+    private Pyrotechnics(final Pyrotechnics card) {
         super(card);
     }
 

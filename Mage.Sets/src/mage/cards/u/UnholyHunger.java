@@ -31,7 +31,7 @@ public final class UnholyHunger extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public UnholyHunger(final UnholyHunger card) {
+    private UnholyHunger(final UnholyHunger card) {
         super(card);
     }
 

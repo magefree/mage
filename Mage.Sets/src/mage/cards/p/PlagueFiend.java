@@ -33,7 +33,7 @@ public final class PlagueFiend extends CardImpl {
         this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new PlagueFiendEffect(new GenericManaCost(2)), false, true));
     }
 
-    public PlagueFiend(final PlagueFiend card) {
+    private PlagueFiend(final PlagueFiend card) {
         super(card);
     }
 

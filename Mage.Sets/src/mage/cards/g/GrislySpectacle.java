@@ -40,7 +40,7 @@ public final class GrislySpectacle extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public GrislySpectacle(final GrislySpectacle card) {
+    private GrislySpectacle(final GrislySpectacle card) {
         super(card);
     }
 

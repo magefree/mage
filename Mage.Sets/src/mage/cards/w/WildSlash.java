@@ -36,7 +36,7 @@ public final class WildSlash extends CardImpl {
 
     }
 
-    public WildSlash(final WildSlash card) {
+    private WildSlash(final WildSlash card) {
         super(card);
     }
 

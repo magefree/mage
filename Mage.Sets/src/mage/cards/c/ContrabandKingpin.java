@@ -33,7 +33,7 @@ public final class ContrabandKingpin extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new ScryEffect(1), new FilterControlledArtifactPermanent(), false, null, true));
     }
 
-    public ContrabandKingpin(final ContrabandKingpin card) {
+    private ContrabandKingpin(final ContrabandKingpin card) {
         super(card);
     }
 

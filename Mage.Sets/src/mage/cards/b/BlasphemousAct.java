@@ -33,7 +33,7 @@ public final class BlasphemousAct extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(13, new FilterCreaturePermanent()));
     }
 
-    public BlasphemousAct(final BlasphemousAct card) {
+    private BlasphemousAct(final BlasphemousAct card) {
         super(card);
     }
 

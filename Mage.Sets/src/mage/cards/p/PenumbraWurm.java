@@ -32,7 +32,7 @@ public final class PenumbraWurm extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new PenumbraWurmToken(), 1), false));
     }
 
-    public PenumbraWurm(final PenumbraWurm card) {
+    private PenumbraWurm(final PenumbraWurm card) {
         super(card);
     }
 

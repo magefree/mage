@@ -26,7 +26,7 @@ public final class ArmyOfTheDamned extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{B}{B}{B}"), TimingRule.SORCERY));
     }
 
-    public ArmyOfTheDamned(final ArmyOfTheDamned card) {
+    private ArmyOfTheDamned(final ArmyOfTheDamned card) {
         super(card);
     }
 

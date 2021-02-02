@@ -40,7 +40,7 @@ public final class Meadowboon extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{3}{W}"));
     }
 
-    public Meadowboon(final Meadowboon card) {
+    private Meadowboon(final Meadowboon card) {
         super(card);
     }
 

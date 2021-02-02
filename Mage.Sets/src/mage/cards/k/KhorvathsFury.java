@@ -26,7 +26,7 @@ public final class KhorvathsFury extends CardImpl {
         this.getSpellAbility().addEffect(new KhorvathsFuryEffect());
     }
 
-    public KhorvathsFury(final KhorvathsFury card) {
+    private KhorvathsFury(final KhorvathsFury card) {
         super(card);
     }
 

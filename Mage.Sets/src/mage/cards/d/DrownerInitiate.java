@@ -45,7 +45,7 @@ public final class DrownerInitiate extends CardImpl {
 
     }
 
-    public DrownerInitiate(final DrownerInitiate card) {
+    private DrownerInitiate(final DrownerInitiate card) {
         super(card);
     }
 

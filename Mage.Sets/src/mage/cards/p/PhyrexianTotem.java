@@ -42,7 +42,7 @@ public final class PhyrexianTotem extends CardImpl {
         this.addAbility(new PhyrexianTotemTriggeredAbility());
     }
 
-    public PhyrexianTotem(final PhyrexianTotem card) {
+    private PhyrexianTotem(final PhyrexianTotem card) {
         super(card);
     }
 

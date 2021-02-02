@@ -37,7 +37,7 @@ public final class MysticGate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MysticGate(final MysticGate card) {
+    private MysticGate(final MysticGate card) {
         super(card);
     }
 

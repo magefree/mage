@@ -37,7 +37,7 @@ public final class HarmattanEfreet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HarmattanEfreet(final HarmattanEfreet card) {
+    private HarmattanEfreet(final HarmattanEfreet card) {
         super(card);
     }
 

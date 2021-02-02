@@ -31,7 +31,7 @@ public final class NaturesClaim extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
-    public NaturesClaim(final NaturesClaim card) {
+    private NaturesClaim(final NaturesClaim card) {
         super(card);
     }
 

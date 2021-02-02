@@ -43,7 +43,7 @@ public final class GoblinWarchief extends CardImpl {
                 Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.GOBLIN, "Goblins"), false)));
     }
 
-    public GoblinWarchief(final GoblinWarchief card) {
+    private GoblinWarchief(final GoblinWarchief card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class Reinforcements extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 3, new FilterCreatureCard("creature cards from your graveyard")));
     }
 
-    public Reinforcements(final Reinforcements card) {
+    private Reinforcements(final Reinforcements card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class BorosKeyrune extends CardImpl {
                 "", Duration.EndOfTurn), new ManaCostsImpl("{R}{W}")));
     }
 
-    public BorosKeyrune(final BorosKeyrune card) {
+    private BorosKeyrune(final BorosKeyrune card) {
         super(card);
     }
 

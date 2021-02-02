@@ -31,7 +31,7 @@ public final class Repopulate extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public Repopulate(final Repopulate card) {
+    private Repopulate(final Repopulate card) {
         super(card);
     }
 

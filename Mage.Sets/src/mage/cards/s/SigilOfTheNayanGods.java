@@ -46,7 +46,7 @@ public final class SigilOfTheNayanGods extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{G/W}")));
     }
 
-    public SigilOfTheNayanGods(final SigilOfTheNayanGods card) {
+    private SigilOfTheNayanGods(final SigilOfTheNayanGods card) {
         super(card);
     }
 

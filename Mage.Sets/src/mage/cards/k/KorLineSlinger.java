@@ -41,7 +41,7 @@ public final class KorLineSlinger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KorLineSlinger(final KorLineSlinger card) {
+    private KorLineSlinger(final KorLineSlinger card) {
         super(card);
     }
 

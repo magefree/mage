@@ -22,7 +22,7 @@ public final class TrollHornCameo extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public TrollHornCameo(final TrollHornCameo card) {
+    private TrollHornCameo(final TrollHornCameo card) {
         super(card);
     }
 

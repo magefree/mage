@@ -52,7 +52,7 @@ public final class FathomFleetCaptain extends CardImpl {
                 "Whenever {this} attacks, if you control another nontoken Pirate, you may pay {2}. If you do, create a 2/2 black Pirate creature token with menace"));
     }
 
-    public FathomFleetCaptain(final FathomFleetCaptain card) {
+    private FathomFleetCaptain(final FathomFleetCaptain card) {
         super(card);
     }
 

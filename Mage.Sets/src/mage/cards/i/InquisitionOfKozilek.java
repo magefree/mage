@@ -34,7 +34,7 @@ public final class InquisitionOfKozilek extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
     }
 
-    public InquisitionOfKozilek(final InquisitionOfKozilek card) {
+    private InquisitionOfKozilek(final InquisitionOfKozilek card) {
         super(card);
     }
 

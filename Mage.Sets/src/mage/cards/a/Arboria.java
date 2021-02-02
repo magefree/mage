@@ -31,7 +31,7 @@ public final class Arboria extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArboriaEffect()), new PermanentsEnteredBattlefieldYourLastTurnWatcher());
     }
 
-    public Arboria(final Arboria card) {
+    private Arboria(final Arboria card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class RisenSanctuary extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public RisenSanctuary(final RisenSanctuary card) {
+    private RisenSanctuary(final RisenSanctuary card) {
         super(card);
     }
 

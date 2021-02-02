@@ -31,7 +31,7 @@ public final class RuinProcessor extends CardImpl {
 
     }
 
-    public RuinProcessor(final RuinProcessor card) {
+    private RuinProcessor(final RuinProcessor card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class BloodletterQuill extends CardImpl {
                 new RemoveCounterSourceEffect(CounterType.BLOOD.createInstance()), new ManaCostsImpl("{U}{B}")));
     }
 
-    public BloodletterQuill(final BloodletterQuill card) {
+    private BloodletterQuill(final BloodletterQuill card) {
         super(card);
     }
 

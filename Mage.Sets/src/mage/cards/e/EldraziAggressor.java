@@ -48,7 +48,7 @@ public final class EldraziAggressor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public EldraziAggressor(final EldraziAggressor card) {
+    private EldraziAggressor(final EldraziAggressor card) {
         super(card);
     }
 

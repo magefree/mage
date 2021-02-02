@@ -27,7 +27,7 @@ public final class ConsulateDreadnought extends CardImpl {
         this.addAbility(new CrewAbility(6));
     }
 
-    public ConsulateDreadnought(final ConsulateDreadnought card) {
+    private ConsulateDreadnought(final ConsulateDreadnought card) {
         super(card);
     }
 

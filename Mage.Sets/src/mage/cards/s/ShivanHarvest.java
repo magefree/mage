@@ -31,7 +31,7 @@ public final class ShivanHarvest extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShivanHarvest(final ShivanHarvest card) {
+    private ShivanHarvest(final ShivanHarvest card) {
         super(card);
     }
 

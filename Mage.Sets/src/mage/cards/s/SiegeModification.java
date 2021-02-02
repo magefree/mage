@@ -55,7 +55,7 @@ public final class SiegeModification extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SiegeModification(final SiegeModification card) {
+    private SiegeModification(final SiegeModification card) {
         super(card);
     }
 

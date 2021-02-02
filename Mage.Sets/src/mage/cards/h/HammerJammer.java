@@ -45,7 +45,7 @@ public final class HammerJammer extends CardImpl {
 
     }
 
-    public HammerJammer(final HammerJammer card) {
+    private HammerJammer(final HammerJammer card) {
         super(card);
     }
 

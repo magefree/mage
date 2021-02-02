@@ -42,7 +42,7 @@ public final class ThoughtHemorrhage extends CardImpl {
         this.getSpellAbility().addEffect(new ThoughtHemorrhageEffect());
     }
 
-    public ThoughtHemorrhage(final ThoughtHemorrhage card) {
+    private ThoughtHemorrhage(final ThoughtHemorrhage card) {
         super(card);
     }
 

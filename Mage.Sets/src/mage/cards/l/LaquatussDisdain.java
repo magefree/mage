@@ -38,7 +38,7 @@ public final class LaquatussDisdain extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public LaquatussDisdain(final LaquatussDisdain card) {
+    private LaquatussDisdain(final LaquatussDisdain card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class TimeEbb extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TimeEbb(final TimeEbb card) {
+    private TimeEbb(final TimeEbb card) {
         super(card);
     }
 

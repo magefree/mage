@@ -30,7 +30,7 @@ public final class CoordinatedBarrage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());
     }
 
-    public CoordinatedBarrage(final CoordinatedBarrage card) {
+    private CoordinatedBarrage(final CoordinatedBarrage card) {
         super(card);
     }
 

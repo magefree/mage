@@ -48,7 +48,7 @@ public final class GrafHarvest extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GrafHarvest(final GrafHarvest card) {
+    private GrafHarvest(final GrafHarvest card) {
         super(card);
     }
 

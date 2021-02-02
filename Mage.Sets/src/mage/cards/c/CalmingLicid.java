@@ -34,7 +34,7 @@ public final class CalmingLicid extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
     }
 
-    public CalmingLicid(final CalmingLicid card) {
+    private CalmingLicid(final CalmingLicid card) {
         super(card);
     }
 

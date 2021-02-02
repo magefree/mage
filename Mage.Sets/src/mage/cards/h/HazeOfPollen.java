@@ -31,7 +31,7 @@ public final class HazeOfPollen extends CardImpl {
 
     }
 
-    public HazeOfPollen(final HazeOfPollen card) {
+    private HazeOfPollen(final HazeOfPollen card) {
         super(card);
     }
 

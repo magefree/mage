@@ -51,7 +51,7 @@ public final class DragonlordsPrerogative extends CardImpl {
 
     }
 
-    public DragonlordsPrerogative(final DragonlordsPrerogative card) {
+    private DragonlordsPrerogative(final DragonlordsPrerogative card) {
         super(card);
     }
 

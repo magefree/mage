@@ -21,7 +21,7 @@ public final class BroodhunterWurm extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public BroodhunterWurm(final BroodhunterWurm card) {
+    private BroodhunterWurm(final BroodhunterWurm card) {
         super(card);
     }
 

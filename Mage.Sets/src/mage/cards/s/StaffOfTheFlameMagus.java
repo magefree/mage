@@ -37,7 +37,7 @@ public final class StaffOfTheFlameMagus extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), filterLand, false));
     }
 
-    public StaffOfTheFlameMagus(final StaffOfTheFlameMagus card) {
+    private StaffOfTheFlameMagus(final StaffOfTheFlameMagus card) {
         super(card);
     }
 

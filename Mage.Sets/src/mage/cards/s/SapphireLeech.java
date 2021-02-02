@@ -41,7 +41,7 @@ public final class SapphireLeech extends CardImpl {
                 new SpellsCostIncreasingAllEffect(new ManaCostsImpl("{U}"), filter, TargetController.YOU)));
     }
 
-    public SapphireLeech(final SapphireLeech card) {
+    private SapphireLeech(final SapphireLeech card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class SekKuarDeathkeeper extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SekKuarDeathkeeperGravebornToken()), false, filter));
     }
 
-    public SekKuarDeathkeeper(final SekKuarDeathkeeper card) {
+    private SekKuarDeathkeeper(final SekKuarDeathkeeper card) {
         super(card);
     }
 

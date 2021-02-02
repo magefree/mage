@@ -36,7 +36,7 @@ public final class EaterOfTheDead extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EaterOfTheDead(final EaterOfTheDead card) {
+    private EaterOfTheDead(final EaterOfTheDead card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class ThickSkinnedGoblin extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(ProtectionAbility.from(ObjectColor.RED), Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public ThickSkinnedGoblin(final ThickSkinnedGoblin card) {
+    private ThickSkinnedGoblin(final ThickSkinnedGoblin card) {
         super(card);
     }
 

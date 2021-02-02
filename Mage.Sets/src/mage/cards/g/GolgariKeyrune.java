@@ -33,7 +33,7 @@ public final class GolgariKeyrune extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GolgariKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{B}{G}")));
     }
 
-    public GolgariKeyrune(final GolgariKeyrune card) {
+    private GolgariKeyrune(final GolgariKeyrune card) {
         super(card);
     }
 

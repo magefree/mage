@@ -21,7 +21,7 @@ public final class WildCeratok extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public WildCeratok(final WildCeratok card) {
+    private WildCeratok(final WildCeratok card) {
         super(card);
     }
 

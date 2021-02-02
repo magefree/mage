@@ -28,7 +28,7 @@ public final class VileRebirth extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken()));
     }
 
-    public VileRebirth(final VileRebirth card) {
+    private VileRebirth(final VileRebirth card) {
         super(card);
     }
 

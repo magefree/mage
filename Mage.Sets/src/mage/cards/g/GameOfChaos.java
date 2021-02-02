@@ -29,7 +29,7 @@ public final class GameOfChaos extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public GameOfChaos(final GameOfChaos card) {
+    private GameOfChaos(final GameOfChaos card) {
         super(card);
     }
 

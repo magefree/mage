@@ -69,7 +69,7 @@ public final class WaywardAngel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WaywardAngel(final WaywardAngel card) {
+    private WaywardAngel(final WaywardAngel card) {
         super(card);
     }
 

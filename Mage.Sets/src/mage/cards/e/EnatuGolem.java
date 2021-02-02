@@ -26,7 +26,7 @@ public final class EnatuGolem extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(4), false));
     }
 
-    public EnatuGolem(final EnatuGolem card) {
+    private EnatuGolem(final EnatuGolem card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class AssassinsBlade extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public AssassinsBlade(final AssassinsBlade card) {
+    private AssassinsBlade(final AssassinsBlade card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class RageReflection extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false)));
     }
 
-    public RageReflection(final RageReflection card) {
+    private RageReflection(final RageReflection card) {
         super(card);
     }
 

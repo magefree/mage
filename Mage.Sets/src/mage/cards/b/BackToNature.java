@@ -21,7 +21,7 @@ public final class BackToNature extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")));
     }
 
-    public BackToNature(final BackToNature card) {
+    private BackToNature(final BackToNature card) {
         super(card);
     }
 

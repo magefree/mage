@@ -36,7 +36,7 @@ public final class WarrenPilferers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WarrenPilferers(final WarrenPilferers card) {
+    private WarrenPilferers(final WarrenPilferers card) {
         super(card);
     }
 

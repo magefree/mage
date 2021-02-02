@@ -39,7 +39,7 @@ public final class ChimericSphere extends CardImpl {
                 "", Duration.EndOfTurn), new ManaCostsImpl("{2}")));
     }
 
-    public ChimericSphere(final ChimericSphere card) {
+    private ChimericSphere(final ChimericSphere card) {
         super(card);
     }
 

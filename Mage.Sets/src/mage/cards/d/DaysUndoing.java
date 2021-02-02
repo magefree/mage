@@ -30,7 +30,7 @@ public final class DaysUndoing extends CardImpl {
         this.getSpellAbility().addHint(MyTurnHint.instance);
     }
 
-    public DaysUndoing(final DaysUndoing card) {
+    private DaysUndoing(final DaysUndoing card) {
         super(card);
     }
 

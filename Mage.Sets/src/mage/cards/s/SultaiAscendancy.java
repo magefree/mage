@@ -29,7 +29,7 @@ public final class SultaiAscendancy extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false));
     }
 
-    public SultaiAscendancy(final SultaiAscendancy card) {
+    private SultaiAscendancy(final SultaiAscendancy card) {
         super(card);
     }
 

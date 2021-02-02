@@ -36,7 +36,7 @@ public final class Dovescape extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new DovescapeEffect(), filter, false, SetTargetPointer.SPELL));
     }
 
-    public Dovescape(final Dovescape card) {
+    private Dovescape(final Dovescape card) {
         super(card);
     }
 

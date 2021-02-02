@@ -43,7 +43,7 @@ public final class MirrorMockery extends CardImpl {
         this.addAbility(new AttacksAttachedTriggeredAbility(new MirrorMockeryEffect(), AttachmentType.AURA, true));
     }
 
-    public MirrorMockery(final MirrorMockery card) {
+    private MirrorMockery(final MirrorMockery card) {
         super(card);
     }
 

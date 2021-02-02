@@ -44,7 +44,7 @@ public final class InfernalTutor extends CardImpl {
 
     }
 
-    public InfernalTutor(final InfernalTutor card) {
+    private InfernalTutor(final InfernalTutor card) {
         super(card);
     }
 

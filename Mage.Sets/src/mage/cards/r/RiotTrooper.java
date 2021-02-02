@@ -38,7 +38,7 @@ public final class RiotTrooper extends CardImpl {
                     .setText("Each trooper creature you control can block an additional creature each combat")));
     }
 
-    public RiotTrooper(final RiotTrooper card) {
+    private RiotTrooper(final RiotTrooper card) {
         super(card);
     }
 

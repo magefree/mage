@@ -34,7 +34,7 @@ public final class GyreSage extends CardImpl {
         this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new CountersSourceCount(CounterType.P1P1)));
     }
 
-    public GyreSage(final GyreSage card) {
+    private GyreSage(final GyreSage card) {
         super(card);
     }
 

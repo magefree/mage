@@ -37,7 +37,7 @@ public final class BriarShield extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.EndOfTurn), new SacrificeSourceCost()));
     }
 
-    public BriarShield(final BriarShield card) {
+    private BriarShield(final BriarShield card) {
         super(card);
     }
 

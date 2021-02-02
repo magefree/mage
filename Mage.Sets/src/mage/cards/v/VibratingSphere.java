@@ -36,7 +36,7 @@ public final class VibratingSphere extends CardImpl {
                 "As long as it's not your turn, creatures you control get -0/-2")));
     }
 
-    public VibratingSphere(final VibratingSphere card) {
+    private VibratingSphere(final VibratingSphere card) {
         super(card);
     }
 

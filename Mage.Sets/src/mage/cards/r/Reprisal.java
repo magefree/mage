@@ -32,7 +32,7 @@ public final class Reprisal extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public Reprisal(final Reprisal card) {
+    private Reprisal(final Reprisal card) {
         super(card);
     }
 

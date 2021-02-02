@@ -33,7 +33,7 @@ public final class CollectedCompany extends CardImpl {
 
     }
 
-    public CollectedCompany(final CollectedCompany card) {
+    private CollectedCompany(final CollectedCompany card) {
         super(card);
     }
 

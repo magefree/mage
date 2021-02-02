@@ -33,7 +33,7 @@ public final class GostaDirk extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GostaDirkEffect()));
     }
 
-    public GostaDirk(final GostaDirk card) {
+    private GostaDirk(final GostaDirk card) {
         super(card);
     }
 

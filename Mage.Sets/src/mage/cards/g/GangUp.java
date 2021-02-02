@@ -32,7 +32,7 @@ public final class GangUp extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(GangUpAdjuster.instance);
     }
 
-    public GangUp(final GangUp card) {
+    private GangUp(final GangUp card) {
         super(card);
     }
 

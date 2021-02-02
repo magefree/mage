@@ -28,7 +28,7 @@ public final class SkybladeOfTheLegion extends CardImpl {
 
     }
 
-    public SkybladeOfTheLegion(final SkybladeOfTheLegion card) {
+    private SkybladeOfTheLegion(final SkybladeOfTheLegion card) {
         super(card);
     }
 

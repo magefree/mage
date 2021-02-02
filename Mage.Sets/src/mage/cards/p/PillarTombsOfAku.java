@@ -36,7 +36,7 @@ public final class PillarTombsOfAku extends CardImpl {
         ));
     }
 
-    public PillarTombsOfAku(final PillarTombsOfAku card) {
+    private PillarTombsOfAku(final PillarTombsOfAku card) {
         super(card);
     }
 

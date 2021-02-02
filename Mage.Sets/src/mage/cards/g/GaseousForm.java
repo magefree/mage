@@ -32,7 +32,7 @@ public final class GaseousForm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAndByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", true)));
     }
 
-    public GaseousForm(final GaseousForm card) {
+    private GaseousForm(final GaseousForm card) {
         super(card);
     }
 

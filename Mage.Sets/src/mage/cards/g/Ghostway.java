@@ -32,7 +32,7 @@ public final class Ghostway extends CardImpl {
         this.getSpellAbility().addEffect(new GhostwayEffect());
     }
 
-    public Ghostway(final Ghostway card) {
+    private Ghostway(final Ghostway card) {
         super(card);
     }
 

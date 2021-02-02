@@ -51,7 +51,7 @@ public final class BrionStoutarm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BrionStoutarm(final BrionStoutarm card) {
+    private BrionStoutarm(final BrionStoutarm card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class BondsOfMortality extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BondsOfMortality(final BondsOfMortality card) {
+    private BondsOfMortality(final BondsOfMortality card) {
         super(card);
     }
 

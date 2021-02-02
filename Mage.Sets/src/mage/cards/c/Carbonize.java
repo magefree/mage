@@ -30,7 +30,7 @@ public final class Carbonize extends CardImpl {
 
     }
 
-    public Carbonize(final Carbonize card) {
+    private Carbonize(final Carbonize card) {
         super(card);
     }
 

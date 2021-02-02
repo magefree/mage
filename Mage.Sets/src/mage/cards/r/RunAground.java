@@ -23,7 +23,7 @@ public final class RunAground extends CardImpl {
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
     }
 
-    public RunAground(final RunAground card) {
+    private RunAground(final RunAground card) {
         super(card);
     }
 

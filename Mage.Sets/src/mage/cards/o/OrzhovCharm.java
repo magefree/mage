@@ -58,7 +58,7 @@ public final class OrzhovCharm extends CardImpl {
 
     }
 
-    public OrzhovCharm(final OrzhovCharm card) {
+    private OrzhovCharm(final OrzhovCharm card) {
         super(card);
     }
 

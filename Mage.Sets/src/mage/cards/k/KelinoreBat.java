@@ -25,7 +25,7 @@ public final class KelinoreBat extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public KelinoreBat(final KelinoreBat card) {
+    private KelinoreBat(final KelinoreBat card) {
         super(card);
     }
 

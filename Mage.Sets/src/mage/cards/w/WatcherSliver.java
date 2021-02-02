@@ -31,7 +31,7 @@ public final class WatcherSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(0, 2, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public WatcherSliver(final WatcherSliver card) {
+    private WatcherSliver(final WatcherSliver card) {
         super(card);
     }
 

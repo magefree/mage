@@ -36,7 +36,7 @@ public final class ViciousRumors extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(1));
     }
 
-    public ViciousRumors(final ViciousRumors card) {
+    private ViciousRumors(final ViciousRumors card) {
         super(card);
     }
 

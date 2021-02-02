@@ -27,7 +27,7 @@ public final class WillOfTheNaga extends CardImpl {
         this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("Those creatures"));
     }
 
-    public WillOfTheNaga(final WillOfTheNaga card) {
+    private WillOfTheNaga(final WillOfTheNaga card) {
         super(card);
     }
 

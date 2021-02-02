@@ -37,7 +37,7 @@ public final class SpiketailDrakeling extends CardImpl {
 
     }
 
-    public SpiketailDrakeling(final SpiketailDrakeling card) {
+    private SpiketailDrakeling(final SpiketailDrakeling card) {
         super(card);
     }
 

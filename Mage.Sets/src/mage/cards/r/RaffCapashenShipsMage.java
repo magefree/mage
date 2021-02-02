@@ -50,7 +50,7 @@ public final class RaffCapashenShipsMage extends CardImpl {
                         .setText("You may cast historic spells as though they had flash. <i>(Artifacts, legendaries, and Sagas are historic.)</i>")));
     }
 
-    public RaffCapashenShipsMage(final RaffCapashenShipsMage card) {
+    private RaffCapashenShipsMage(final RaffCapashenShipsMage card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class SparkFiend extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SparkFiendUpkeepEffect(), TargetController.YOU, false));
     }
 
-    public SparkFiend(final SparkFiend card) {
+    private SparkFiend(final SparkFiend card) {
         super(card);
     }
 

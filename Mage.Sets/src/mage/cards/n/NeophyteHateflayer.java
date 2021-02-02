@@ -33,7 +33,7 @@ public final class NeophyteHateflayer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NeophyteHateflayer(final NeophyteHateflayer card) {
+    private NeophyteHateflayer(final NeophyteHateflayer card) {
         super(card);
     }
 

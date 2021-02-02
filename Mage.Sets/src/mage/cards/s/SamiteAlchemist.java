@@ -44,7 +44,7 @@ public final class SamiteAlchemist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SamiteAlchemist(final SamiteAlchemist card) {
+    private SamiteAlchemist(final SamiteAlchemist card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class LatullasOrders extends CardImpl {
         this.addAbility(new LatullasOrdersTriggeredAbility());
     }
 
-    public LatullasOrders(final LatullasOrders card) {
+    private LatullasOrders(final LatullasOrders card) {
         super(card);
     }
 

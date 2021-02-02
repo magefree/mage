@@ -25,7 +25,7 @@ public final class FurtiveHomunculus extends CardImpl {
         this.addAbility(new SkulkAbility());
     }
 
-    public FurtiveHomunculus(final FurtiveHomunculus card) {
+    private FurtiveHomunculus(final FurtiveHomunculus card) {
         super(card);
     }
 

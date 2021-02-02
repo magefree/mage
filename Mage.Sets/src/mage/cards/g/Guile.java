@@ -49,7 +49,7 @@ public final class Guile extends CardImpl {
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
     }
 
-    public Guile(final Guile card) {
+    private Guile(final Guile card) {
         super(card);
     }
 

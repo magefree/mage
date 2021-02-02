@@ -29,7 +29,7 @@ public final class LotusGuardian extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public LotusGuardian(final LotusGuardian card) {
+    private LotusGuardian(final LotusGuardian card) {
         super(card);
     }
 

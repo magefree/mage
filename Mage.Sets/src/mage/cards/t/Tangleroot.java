@@ -25,7 +25,7 @@ public final class Tangleroot extends CardImpl {
                 new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(1), "their"), StaticFilters.FILTER_SPELL_A_CREATURE, false, SetTargetPointer.PLAYER));
     }
 
-    public Tangleroot(final Tangleroot card) {
+    private Tangleroot(final Tangleroot card) {
         super(card);
     }
 

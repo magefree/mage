@@ -43,7 +43,7 @@ public final class SkymarcherAspirant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkymarcherAspirant(final SkymarcherAspirant card) {
+    private SkymarcherAspirant(final SkymarcherAspirant card) {
         super(card);
     }
 

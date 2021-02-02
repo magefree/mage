@@ -44,7 +44,7 @@ public final class MetallicMimic extends CardImpl {
 
     }
 
-    public MetallicMimic(final MetallicMimic card) {
+    private MetallicMimic(final MetallicMimic card) {
         super(card);
     }
 

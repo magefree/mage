@@ -30,7 +30,7 @@ public final class MindsDesire extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public MindsDesire(final MindsDesire card) {
+    private MindsDesire(final MindsDesire card) {
         super(card);
     }
 

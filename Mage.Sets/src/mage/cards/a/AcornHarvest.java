@@ -32,7 +32,7 @@ public final class AcornHarvest extends CardImpl {
         
     }
 
-    public AcornHarvest(final AcornHarvest card) {
+    private AcornHarvest(final AcornHarvest card) {
         super(card);
     }
 

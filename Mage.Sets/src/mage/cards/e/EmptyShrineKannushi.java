@@ -40,7 +40,7 @@ public final class EmptyShrineKannushi extends CardImpl {
         this.addAbility(new EmptyShrineKannushiProtectionAbility());
     }
 
-    public EmptyShrineKannushi(final EmptyShrineKannushi card) {
+    private EmptyShrineKannushi(final EmptyShrineKannushi card) {
         super(card);
     }
 

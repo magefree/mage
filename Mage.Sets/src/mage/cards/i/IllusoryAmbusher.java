@@ -35,7 +35,7 @@ public final class IllusoryAmbusher extends CardImpl {
         this.addAbility(new DealtDamageToSourceTriggeredAbility(new IllusoryAmbusherDealtDamageEffect(), false, false, true));
     }
 
-    public IllusoryAmbusher(final IllusoryAmbusher card) {
+    private IllusoryAmbusher(final IllusoryAmbusher card) {
         super(card);
     }
 

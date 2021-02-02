@@ -48,7 +48,7 @@ public final class ChimericEgg extends CardImpl {
                 "", Duration.EndOfTurn), new RemoveCountersSourceCost(new Counter(CounterType.CHARGE.getName(), 3))));
     }
 
-    public ChimericEgg(final ChimericEgg card) {
+    private ChimericEgg(final ChimericEgg card) {
         super(card);
     }
 

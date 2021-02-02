@@ -21,7 +21,7 @@ public final class CausticRain extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public CausticRain(final CausticRain card) {
+    private CausticRain(final CausticRain card) {
         super(card);
     }
 

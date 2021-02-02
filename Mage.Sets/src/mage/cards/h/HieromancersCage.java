@@ -39,7 +39,7 @@ public final class HieromancersCage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HieromancersCage(final HieromancersCage card) {
+    private HieromancersCage(final HieromancersCage card) {
         super(card);
     }
 

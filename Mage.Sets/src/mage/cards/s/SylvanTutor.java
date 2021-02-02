@@ -21,7 +21,7 @@ public final class SylvanTutor extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), true, true));
     }
 
-    public SylvanTutor(final SylvanTutor card) {
+    private SylvanTutor(final SylvanTutor card) {
         super(card);
     }
 

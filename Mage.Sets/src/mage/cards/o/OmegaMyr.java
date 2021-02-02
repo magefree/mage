@@ -22,7 +22,7 @@ public final class OmegaMyr extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public OmegaMyr(final OmegaMyr card) {
+    private OmegaMyr(final OmegaMyr card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class TemptWithVengeance extends CardImpl {
         this.getSpellAbility().addEffect(new TemptWithVengeanceEffect());
     }
 
-    public TemptWithVengeance(final TemptWithVengeance card) {
+    private TemptWithVengeance(final TemptWithVengeance card) {
         super(card);
     }
 

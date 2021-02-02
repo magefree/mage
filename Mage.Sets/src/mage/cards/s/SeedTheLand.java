@@ -27,7 +27,7 @@ public final class SeedTheLand extends CardImpl {
                 "Whenever a land enters the battlefield, its controller creates a 1/1 green Snake creature token."));
     }
 
-    public SeedTheLand(final SeedTheLand card) {
+    private SeedTheLand(final SeedTheLand card) {
         super(card);
     }
 

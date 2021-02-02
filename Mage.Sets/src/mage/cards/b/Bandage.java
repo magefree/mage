@@ -24,7 +24,7 @@ public final class Bandage extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Bandage(final Bandage card) {
+    private Bandage(final Bandage card) {
         super(card);
     }
 

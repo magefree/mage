@@ -60,7 +60,7 @@ public final class SavageThallid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SavageThallid(final SavageThallid card) {
+    private SavageThallid(final SavageThallid card) {
         super(card);
     }
 

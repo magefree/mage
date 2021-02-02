@@ -39,7 +39,7 @@ public final class GoblinRingleader extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealLibraryPutIntoHandEffect(4, filter, Zone.LIBRARY)));
     }
 
-    public GoblinRingleader(final GoblinRingleader card) {
+    private GoblinRingleader(final GoblinRingleader card) {
         super(card);
     }
 

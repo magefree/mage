@@ -31,7 +31,7 @@ public final class BuiltToSmash extends CardImpl {
                 "If its an artifact creature, it gains trample until end of turn"));
     }
 
-    public BuiltToSmash(final BuiltToSmash card) {
+    private BuiltToSmash(final BuiltToSmash card) {
         super(card);
     }
 

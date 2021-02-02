@@ -42,7 +42,7 @@ public final class Abomination extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, filter, false));
     }
 
-    public Abomination(final Abomination card) {
+    private Abomination(final Abomination card) {
         super(card);
     }
 

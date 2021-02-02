@@ -36,7 +36,7 @@ public final class MidnightDuelist extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public MidnightDuelist(final MidnightDuelist card) {
+    private MidnightDuelist(final MidnightDuelist card) {
         super(card);
     }
 

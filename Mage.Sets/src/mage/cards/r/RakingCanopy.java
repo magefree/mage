@@ -30,7 +30,7 @@ public final class RakingCanopy extends CardImpl {
         this.addAbility(new RakingCanopyTriggeredAbility());
     }
 
-    public RakingCanopy(final RakingCanopy card) {
+    private RakingCanopy(final RakingCanopy card) {
         super(card);
     }
 

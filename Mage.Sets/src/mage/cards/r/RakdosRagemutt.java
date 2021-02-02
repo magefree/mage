@@ -30,7 +30,7 @@ public final class RakdosRagemutt extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public RakdosRagemutt(final RakdosRagemutt card) {
+    private RakdosRagemutt(final RakdosRagemutt card) {
         super(card);
     }
 

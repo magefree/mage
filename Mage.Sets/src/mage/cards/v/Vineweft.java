@@ -45,7 +45,7 @@ public final class Vineweft extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{4}{G}")));
     }
 
-    public Vineweft(final Vineweft card) {
+    private Vineweft(final Vineweft card) {
         super(card);
     }
 

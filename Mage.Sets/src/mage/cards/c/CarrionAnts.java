@@ -30,7 +30,7 @@ public final class CarrionAnts extends CardImpl {
         
     }
 
-    public CarrionAnts(final CarrionAnts card) {
+    private CarrionAnts(final CarrionAnts card) {
         super(card);
     }
 

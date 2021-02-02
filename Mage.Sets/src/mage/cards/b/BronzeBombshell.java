@@ -35,7 +35,7 @@ public final class BronzeBombshell extends CardImpl {
 
     }
 
-    public BronzeBombshell(final BronzeBombshell card) {
+    private BronzeBombshell(final BronzeBombshell card) {
         super(card);
     }
 

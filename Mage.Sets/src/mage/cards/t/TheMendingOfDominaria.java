@@ -42,7 +42,7 @@ public final class TheMendingOfDominaria extends CardImpl {
         this.addAbility(sagaAbility);
     }
 
-    public TheMendingOfDominaria(final TheMendingOfDominaria card) {
+    private TheMendingOfDominaria(final TheMendingOfDominaria card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class CelestialDawn extends CardImpl {
 
     }
 
-    public CelestialDawn(final CelestialDawn card) {
+    private CelestialDawn(final CelestialDawn card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class BarrageOfExpendables extends CardImpl {
 
     }
 
-    public BarrageOfExpendables(final BarrageOfExpendables card) {
+    private BarrageOfExpendables(final BarrageOfExpendables card) {
         super(card);
     }
 

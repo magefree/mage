@@ -34,7 +34,7 @@ public final class TurtleshellChangeling extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
     }
 
-    public TurtleshellChangeling(final TurtleshellChangeling card) {
+    private TurtleshellChangeling(final TurtleshellChangeling card) {
         super(card);
     }
 

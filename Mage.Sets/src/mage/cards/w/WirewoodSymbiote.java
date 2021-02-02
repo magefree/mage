@@ -40,7 +40,7 @@ public final class WirewoodSymbiote extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WirewoodSymbiote(final WirewoodSymbiote card) {
+    private WirewoodSymbiote(final WirewoodSymbiote card) {
         super(card);
     }
 

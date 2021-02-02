@@ -37,7 +37,7 @@ public final class MagneticTheft extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public MagneticTheft(final MagneticTheft card) {
+    private MagneticTheft(final MagneticTheft card) {
         super(card);
     }
 

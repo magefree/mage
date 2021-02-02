@@ -22,7 +22,7 @@ public final class ArtifactBlast extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
-    public ArtifactBlast(final ArtifactBlast card) {
+    private ArtifactBlast(final ArtifactBlast card) {
         super(card);
     }
 

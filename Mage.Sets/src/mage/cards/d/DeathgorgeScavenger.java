@@ -38,7 +38,7 @@ public final class DeathgorgeScavenger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeathgorgeScavenger(final DeathgorgeScavenger card) {
+    private DeathgorgeScavenger(final DeathgorgeScavenger card) {
         super(card);
     }
 

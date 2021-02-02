@@ -38,7 +38,7 @@ public final class RoyalDecree extends CardImpl {
         this.addAbility(new RoyalDecreeAbility());
     }
 
-    public RoyalDecree(final RoyalDecree card) {
+    private RoyalDecree(final RoyalDecree card) {
         super(card);
     }
 

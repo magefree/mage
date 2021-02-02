@@ -29,7 +29,7 @@ public final class CrystalRod extends CardImpl {
         this.addAbility(new CrystalRodAbility());
     }
 
-    public CrystalRod(final CrystalRod card) {
+    private CrystalRod(final CrystalRod card) {
         super(card);
     }
 

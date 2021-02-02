@@ -28,7 +28,7 @@ public final class KozileksChanneler extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 
-    public KozileksChanneler(final KozileksChanneler card) {
+    private KozileksChanneler(final KozileksChanneler card) {
         super(card);
     }
 

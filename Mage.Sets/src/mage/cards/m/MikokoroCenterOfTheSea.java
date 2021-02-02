@@ -31,7 +31,7 @@ public final class MikokoroCenterOfTheSea extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MikokoroCenterOfTheSea(final MikokoroCenterOfTheSea card) {
+    private MikokoroCenterOfTheSea(final MikokoroCenterOfTheSea card) {
         super(card);
     }
 

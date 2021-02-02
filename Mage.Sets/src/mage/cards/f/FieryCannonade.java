@@ -29,7 +29,7 @@ public final class FieryCannonade extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(2, filter));
     }
 
-    public FieryCannonade(final FieryCannonade card) {
+    private FieryCannonade(final FieryCannonade card) {
         super(card);
     }
 

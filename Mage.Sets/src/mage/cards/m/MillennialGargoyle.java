@@ -26,7 +26,7 @@ public final class MillennialGargoyle extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public MillennialGargoyle(final MillennialGargoyle card) {
+    private MillennialGargoyle(final MillennialGargoyle card) {
         super(card);
     }
 

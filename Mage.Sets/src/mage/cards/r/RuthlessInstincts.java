@@ -62,7 +62,7 @@ public final class RuthlessInstincts extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public RuthlessInstincts(final RuthlessInstincts card) {
+    private RuthlessInstincts(final RuthlessInstincts card) {
         super(card);
     }
 

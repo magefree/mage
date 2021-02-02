@@ -47,7 +47,7 @@ public final class BubblingCauldron extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public BubblingCauldron(final BubblingCauldron card) {
+    private BubblingCauldron(final BubblingCauldron card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class NaturesWill extends CardImpl {
         addAbility(ability);
     }
 
-    public NaturesWill(final NaturesWill card) {
+    private NaturesWill(final NaturesWill card) {
         super(card);
     }
 

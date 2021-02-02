@@ -55,7 +55,7 @@ public final class MetallurgicSummonings extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MetallurgicSummonings(final MetallurgicSummonings card) {
+    private MetallurgicSummonings(final MetallurgicSummonings card) {
         super(card);
     }
 

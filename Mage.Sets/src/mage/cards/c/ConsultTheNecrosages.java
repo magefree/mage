@@ -29,7 +29,7 @@ public final class ConsultTheNecrosages extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public ConsultTheNecrosages(final ConsultTheNecrosages card) {
+    private ConsultTheNecrosages(final ConsultTheNecrosages card) {
         super(card);
     }
 

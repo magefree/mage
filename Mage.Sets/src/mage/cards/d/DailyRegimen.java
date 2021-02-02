@@ -42,7 +42,7 @@ public final class DailyRegimen extends CardImpl {
                 new ManaCostsImpl("{1}{W}")));
     }
 
-    public DailyRegimen(final DailyRegimen card) {
+    private DailyRegimen(final DailyRegimen card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class HelixPinnacle extends CardImpl {
 
     }
 
-    public HelixPinnacle(final HelixPinnacle card) {
+    private HelixPinnacle(final HelixPinnacle card) {
         super(card);
     }
 

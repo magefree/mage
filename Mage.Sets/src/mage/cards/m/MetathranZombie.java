@@ -30,7 +30,7 @@ public final class MetathranZombie extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public MetathranZombie(final MetathranZombie card) {
+    private MetathranZombie(final MetathranZombie card) {
         super(card);
     }
 

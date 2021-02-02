@@ -33,7 +33,7 @@ public final class FreneticRaptor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAllEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public FreneticRaptor(final FreneticRaptor card) {
+    private FreneticRaptor(final FreneticRaptor card) {
         super(card);
     }
 

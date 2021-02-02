@@ -36,7 +36,7 @@ public final class CleansingRay extends CardImpl {
 
     }
 
-    public CleansingRay(final CleansingRay card) {
+    private CleansingRay(final CleansingRay card) {
         super(card);
     }
 

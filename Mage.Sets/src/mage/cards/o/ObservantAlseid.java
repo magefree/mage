@@ -45,7 +45,7 @@ public final class ObservantAlseid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ObservantAlseid(final ObservantAlseid card) {
+    private ObservantAlseid(final ObservantAlseid card) {
         super(card);
     }
 

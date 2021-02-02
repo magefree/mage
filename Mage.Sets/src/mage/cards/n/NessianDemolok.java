@@ -45,7 +45,7 @@ public final class NessianDemolok extends CardImpl {
                 "When {this} enters the battlefield, if its tribute wasn't paid, destroy target noncreature permanent."));
     }
 
-    public NessianDemolok(final NessianDemolok card) {
+    private NessianDemolok(final NessianDemolok card) {
         super(card);
     }
 

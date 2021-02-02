@@ -49,7 +49,7 @@ public final class TigerClaws extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TigerClaws(final TigerClaws card) {
+    private TigerClaws(final TigerClaws card) {
         super(card);
     }
 

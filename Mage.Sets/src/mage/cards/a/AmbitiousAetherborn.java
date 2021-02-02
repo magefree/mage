@@ -26,7 +26,7 @@ public final class AmbitiousAetherborn extends CardImpl {
         this.addAbility(new FabricateAbility(1));
     }
 
-    public AmbitiousAetherborn(final AmbitiousAetherborn card) {
+    private AmbitiousAetherborn(final AmbitiousAetherborn card) {
         super(card);
     }
 

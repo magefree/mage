@@ -31,7 +31,7 @@ public final class VanquishTheWeak extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public VanquishTheWeak(final VanquishTheWeak card) {
+    private VanquishTheWeak(final VanquishTheWeak card) {
         super(card);
     }
 

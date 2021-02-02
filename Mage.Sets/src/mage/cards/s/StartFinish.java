@@ -41,7 +41,7 @@ public final class StartFinish extends SplitCard {
         getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect("Destroy target creature"));
     }
 
-    public StartFinish(final StartFinish card) {
+    private StartFinish(final StartFinish card) {
         super(card);
     }
 

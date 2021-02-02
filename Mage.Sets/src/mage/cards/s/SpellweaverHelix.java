@@ -47,7 +47,7 @@ public final class SpellweaverHelix extends CardImpl {
         this.addAbility(new SpellweaverHelixTriggeredAbility());
     }
 
-    public SpellweaverHelix(final SpellweaverHelix card) {
+    private SpellweaverHelix(final SpellweaverHelix card) {
         super(card);
     }
 

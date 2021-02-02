@@ -43,7 +43,7 @@ public final class Dwindle extends CardImpl {
         this.addAbility(new DwindleTriggeredAbility());
     }
 
-    public Dwindle(final Dwindle card) {
+    private Dwindle(final Dwindle card) {
         super(card);
     }
 

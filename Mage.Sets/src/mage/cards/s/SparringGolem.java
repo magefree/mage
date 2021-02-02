@@ -32,7 +32,7 @@ public final class SparringGolem extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
-    public SparringGolem(final SparringGolem card) {
+    private SparringGolem(final SparringGolem card) {
         super(card);
     }
 

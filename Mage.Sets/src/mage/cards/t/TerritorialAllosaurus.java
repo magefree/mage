@@ -44,7 +44,7 @@ public final class TerritorialAllosaurus extends CardImpl {
         this.addAbility(conditionalAbility);
     }
 
-    public TerritorialAllosaurus(final TerritorialAllosaurus card) {
+    private TerritorialAllosaurus(final TerritorialAllosaurus card) {
         super(card);
     }
 

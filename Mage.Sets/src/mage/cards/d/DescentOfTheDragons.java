@@ -32,7 +32,7 @@ public final class DescentOfTheDragons extends CardImpl {
 
     }
 
-    public DescentOfTheDragons(final DescentOfTheDragons card) {
+    private DescentOfTheDragons(final DescentOfTheDragons card) {
         super(card);
     }
 

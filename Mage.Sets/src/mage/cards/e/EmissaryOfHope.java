@@ -35,7 +35,7 @@ public final class EmissaryOfHope extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new EmissaryOfHopeEffect(), false, true));
     }
 
-    public EmissaryOfHope(final EmissaryOfHope card) {
+    private EmissaryOfHope(final EmissaryOfHope card) {
         super(card);
     }
 

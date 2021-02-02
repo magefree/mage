@@ -31,7 +31,7 @@ public final class SinuousPredator extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
-    public SinuousPredator(final SinuousPredator card) {
+    private SinuousPredator(final SinuousPredator card) {
         super(card);
     }
 

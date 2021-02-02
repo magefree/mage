@@ -33,7 +33,7 @@ public final class VigilantDrake extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{2}{U}")));
     }
 
-    public VigilantDrake(final VigilantDrake card) {
+    private VigilantDrake(final VigilantDrake card) {
         super(card);
     }
 

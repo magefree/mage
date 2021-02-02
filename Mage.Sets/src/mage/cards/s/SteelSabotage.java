@@ -29,7 +29,7 @@ public final class SteelSabotage extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public SteelSabotage(final SteelSabotage card) {
+    private SteelSabotage(final SteelSabotage card) {
         super(card);
     }
 

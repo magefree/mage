@@ -61,7 +61,7 @@ public final class KiyomaroFirstToStand extends CardImpl {
         ));
     }
 
-    public KiyomaroFirstToStand(final KiyomaroFirstToStand card) {
+    private KiyomaroFirstToStand(final KiyomaroFirstToStand card) {
         super(card);
     }
 

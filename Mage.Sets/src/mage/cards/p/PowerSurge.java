@@ -30,7 +30,7 @@ public final class PowerSurge extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PowerSurgeDamageEffect(), TargetController.ANY, false, true), new PowerSurgeWatcher());
     }
 
-    public PowerSurge(final PowerSurge card) {
+    private PowerSurge(final PowerSurge card) {
         super(card);
     }
 

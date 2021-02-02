@@ -36,7 +36,7 @@ public final class Tamanoa extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Tamanoa(final Tamanoa card) {
+    private Tamanoa(final Tamanoa card) {
         super(card);
     }
 

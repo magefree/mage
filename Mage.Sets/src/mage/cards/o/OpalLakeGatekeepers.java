@@ -47,7 +47,7 @@ public final class OpalLakeGatekeepers extends CardImpl {
                 .addHint(new ConditionHint(gatesCondition, "You control two or more Gates")));
     }
 
-    public OpalLakeGatekeepers(final OpalLakeGatekeepers card) {
+    private OpalLakeGatekeepers(final OpalLakeGatekeepers card) {
         super(card);
     }
 

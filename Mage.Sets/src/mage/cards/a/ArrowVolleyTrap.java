@@ -33,7 +33,7 @@ public final class ArrowVolleyTrap extends CardImpl {
 
     }
 
-    public ArrowVolleyTrap(final ArrowVolleyTrap card) {
+    private ArrowVolleyTrap(final ArrowVolleyTrap card) {
         super(card);
     }
 

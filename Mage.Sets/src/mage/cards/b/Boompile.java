@@ -26,7 +26,7 @@ public final class Boompile extends CardImpl {
                 new FlipCoinEffect(new DestroyAllEffect(new FilterNonlandPermanent("nonland permanents"))), new TapSourceCost()));
     }
 
-    public Boompile(final Boompile card) {
+    private Boompile(final Boompile card) {
         super(card);
     }
 

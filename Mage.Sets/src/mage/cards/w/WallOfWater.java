@@ -34,7 +34,7 @@ public final class WallOfWater extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
     }
 
-    public WallOfWater(final WallOfWater card) {
+    private WallOfWater(final WallOfWater card) {
         super(card);
     }
 

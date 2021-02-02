@@ -30,7 +30,7 @@ public final class MagneticMine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagneticMine(final MagneticMine card) {
+    private MagneticMine(final MagneticMine card) {
         super(card);
     }
 

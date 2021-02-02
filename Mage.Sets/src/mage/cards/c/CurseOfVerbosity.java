@@ -42,7 +42,7 @@ public final class CurseOfVerbosity extends CardImpl {
         this.addAbility(new EnchantedPlayerAttackedTriggeredAbility(new CurseOfVerbosityEffect()));
     }
 
-    public CurseOfVerbosity(final CurseOfVerbosity card) {
+    private CurseOfVerbosity(final CurseOfVerbosity card) {
         super(card);
     }
 

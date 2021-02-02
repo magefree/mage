@@ -38,7 +38,7 @@ public final class MyrIncubator extends CardImpl {
 
     }
 
-    public MyrIncubator(final MyrIncubator card) {
+    private MyrIncubator(final MyrIncubator card) {
         super(card);
     }
 

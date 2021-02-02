@@ -36,7 +36,7 @@ public final class GrislyAnglerfish extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrislyAnglerfishMustAttackEffect(), new ManaCostsImpl("{6}")));
     }
 
-    public GrislyAnglerfish(final GrislyAnglerfish card) {
+    private GrislyAnglerfish(final GrislyAnglerfish card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class SpoilsOfBlood extends CardImpl {
         this.getSpellAbility().addWatcher(new CreaturesDiedThisTurnWatcher());
     }
 
-    public SpoilsOfBlood(final SpoilsOfBlood card) {
+    private SpoilsOfBlood(final SpoilsOfBlood card) {
         super(card);
     }
 

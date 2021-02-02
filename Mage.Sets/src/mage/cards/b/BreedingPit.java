@@ -30,7 +30,7 @@ public final class BreedingPit extends CardImpl {
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new BreedingPitThrullToken()), false));
     }
 
-    public BreedingPit(final BreedingPit card) {
+    private BreedingPit(final BreedingPit card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class Demoralize extends CardImpl {
     }
 
 
-    public Demoralize(final Demoralize card) {
+    private Demoralize(final Demoralize card) {
         super(card);
     }
 

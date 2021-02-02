@@ -40,7 +40,7 @@ public final class ExtraArms extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ExtraArms(final ExtraArms card) {
+    private ExtraArms(final ExtraArms card) {
         super(card);
     }
 

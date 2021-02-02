@@ -34,7 +34,7 @@ public final class KillerBees extends CardImpl {
         
     }
 
-    public KillerBees(final KillerBees card) {
+    private KillerBees(final KillerBees card) {
         super(card);
     }
 

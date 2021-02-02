@@ -22,7 +22,7 @@ public final class HornedTurtle extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public HornedTurtle(final HornedTurtle card) {
+    private HornedTurtle(final HornedTurtle card) {
         super(card);
     }
 

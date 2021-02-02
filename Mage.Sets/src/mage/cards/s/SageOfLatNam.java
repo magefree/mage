@@ -36,7 +36,7 @@ public final class SageOfLatNam extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SageOfLatNam(final SageOfLatNam card) {
+    private SageOfLatNam(final SageOfLatNam card) {
         super(card);
     }
 

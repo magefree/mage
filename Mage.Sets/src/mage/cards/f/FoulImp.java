@@ -30,7 +30,7 @@ public final class FoulImp extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(2)));
     }
 
-    public FoulImp(final FoulImp card) {
+    private FoulImp(final FoulImp card) {
         super(card);
     }
 

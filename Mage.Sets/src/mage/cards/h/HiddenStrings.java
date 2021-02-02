@@ -36,7 +36,7 @@ public final class HiddenStrings extends CardImpl {
         this.getSpellAbility().addEffect(new CipherEffect());
     }
 
-    public HiddenStrings(final HiddenStrings card) {
+    private HiddenStrings(final HiddenStrings card) {
         super(card);
     }
 

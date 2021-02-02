@@ -72,7 +72,7 @@ public final class KrovikanPlague extends CardImpl {
 
     }
 
-    public KrovikanPlague(final KrovikanPlague card) {
+    private KrovikanPlague(final KrovikanPlague card) {
         super(card);
     }
 

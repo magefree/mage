@@ -41,7 +41,7 @@ public final class EmblemOfTheWarmind extends CardImpl {
                 new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, FILTER_PERMANENT_CREATURES)));
     }
 
-    public EmblemOfTheWarmind(final EmblemOfTheWarmind card) {
+    private EmblemOfTheWarmind(final EmblemOfTheWarmind card) {
         super(card);
     }
 

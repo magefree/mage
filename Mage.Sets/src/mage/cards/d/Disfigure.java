@@ -22,7 +22,7 @@ public final class Disfigure extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Disfigure(final Disfigure card) {
+    private Disfigure(final Disfigure card) {
         super(card);
     }
 

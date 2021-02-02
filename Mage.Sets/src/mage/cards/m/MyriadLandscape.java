@@ -48,7 +48,7 @@ public final class MyriadLandscape extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MyriadLandscape(final MyriadLandscape card) {
+    private MyriadLandscape(final MyriadLandscape card) {
         super(card);
     }
 

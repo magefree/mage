@@ -29,7 +29,7 @@ public final class EkunduGriffin extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public EkunduGriffin(final EkunduGriffin card) {
+    private EkunduGriffin(final EkunduGriffin card) {
         super(card);
     }
 

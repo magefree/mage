@@ -40,7 +40,7 @@ public final class WoodlandBellower extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new WoodlandBellowerEffect(), true));
     }
 
-    public WoodlandBellower(final WoodlandBellower card) {
+    private WoodlandBellower(final WoodlandBellower card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class StinkdrinkerDaredevil extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 2)));
     }
 
-    public StinkdrinkerDaredevil(final StinkdrinkerDaredevil card) {
+    private StinkdrinkerDaredevil(final StinkdrinkerDaredevil card) {
         super(card);
     }
 

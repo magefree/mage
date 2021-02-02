@@ -50,7 +50,7 @@ public final class NezumiGraverobber extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NezumiGraverobber(final NezumiGraverobber card) {
+    private NezumiGraverobber(final NezumiGraverobber card) {
         super(card);
     }
 

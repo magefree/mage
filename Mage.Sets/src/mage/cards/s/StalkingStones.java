@@ -26,7 +26,7 @@ public final class StalkingStones extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new StalkingStonesToken(), "land", Duration.WhileOnBattlefield), new GenericManaCost(6)));
     }
 
-    public StalkingStones(final StalkingStones card) {
+    private StalkingStones(final StalkingStones card) {
         super(card);
     }
 

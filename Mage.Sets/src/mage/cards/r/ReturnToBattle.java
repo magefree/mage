@@ -23,7 +23,7 @@ public final class ReturnToBattle extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
-    public ReturnToBattle(final ReturnToBattle card) {
+    private ReturnToBattle(final ReturnToBattle card) {
         super(card);
     }
 

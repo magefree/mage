@@ -43,7 +43,7 @@ public final class PlumesOfPeace extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PlumesOfPeace(final PlumesOfPeace card) {
+    private PlumesOfPeace(final PlumesOfPeace card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class StitchersSupplier extends CardImpl {
         );
     }
 
-    public StitchersSupplier(final StitchersSupplier card) {
+    private StitchersSupplier(final StitchersSupplier card) {
         super(card);
     }
 

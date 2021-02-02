@@ -23,7 +23,7 @@ public final class MindSculpt extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public MindSculpt(final MindSculpt card) {
+    private MindSculpt(final MindSculpt card) {
         super(card);
     }
 

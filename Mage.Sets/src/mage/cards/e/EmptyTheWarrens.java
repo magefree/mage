@@ -24,7 +24,7 @@ public final class EmptyTheWarrens extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public EmptyTheWarrens(final EmptyTheWarrens card) {
+    private EmptyTheWarrens(final EmptyTheWarrens card) {
         super(card);
     }
 

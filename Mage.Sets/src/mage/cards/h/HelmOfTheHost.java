@@ -43,7 +43,7 @@ public final class HelmOfTheHost extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(5)));
     }
 
-    public HelmOfTheHost(final HelmOfTheHost card) {
+    private HelmOfTheHost(final HelmOfTheHost card) {
         super(card);
     }
 

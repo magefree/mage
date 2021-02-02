@@ -29,7 +29,7 @@ public final class GateToTheAether extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GateToTheAetherEffect(), TargetController.ANY, false, true));
     }
 
-    public GateToTheAether(final GateToTheAether card) {
+    private GateToTheAether(final GateToTheAether card) {
         super(card);
     }
 

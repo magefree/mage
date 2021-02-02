@@ -33,7 +33,7 @@ public final class PhyrexianPurge extends CardImpl {
         this.getSpellAbility().setCostAdjuster(PhyrexianPurgeCostAdjuster.instance);
     }
 
-    public PhyrexianPurge(final PhyrexianPurge card) {
+    private PhyrexianPurge(final PhyrexianPurge card) {
         super(card);
     }
 

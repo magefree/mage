@@ -38,7 +38,7 @@ public final class OrderOfSuccession extends CardImpl {
         this.getSpellAbility().addEffect(new OrderOfSuccessionEffect());
     }
 
-    public OrderOfSuccession(final OrderOfSuccession card) {
+    private OrderOfSuccession(final OrderOfSuccession card) {
         super(card);
     }
 

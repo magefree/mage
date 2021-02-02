@@ -44,7 +44,7 @@ public final class StasisCell extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StasisCell(final StasisCell card) {
+    private StasisCell(final StasisCell card) {
         super(card);
     }
 

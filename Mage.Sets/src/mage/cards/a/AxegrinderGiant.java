@@ -23,7 +23,7 @@ public final class AxegrinderGiant extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public AxegrinderGiant(final AxegrinderGiant card) {
+    private AxegrinderGiant(final AxegrinderGiant card) {
         super(card);
     }
 

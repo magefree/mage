@@ -33,7 +33,7 @@ public final class ReversalOfFortune extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public ReversalOfFortune(final ReversalOfFortune card) {
+    private ReversalOfFortune(final ReversalOfFortune card) {
         super(card);
     }
 

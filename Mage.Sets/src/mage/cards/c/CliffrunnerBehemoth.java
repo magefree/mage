@@ -55,7 +55,7 @@ public final class CliffrunnerBehemoth extends CardImpl {
                     new PermanentsOnTheBattlefieldCondition(whitePermanentFilter), "{this} has lifelink as long as you control a white permanent")));
     }
 
-    public CliffrunnerBehemoth(final CliffrunnerBehemoth card) {
+    private CliffrunnerBehemoth(final CliffrunnerBehemoth card) {
         super(card);
     }
 

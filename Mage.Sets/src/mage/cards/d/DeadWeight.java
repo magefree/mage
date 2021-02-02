@@ -38,7 +38,7 @@ public final class DeadWeight extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-2, -2, Duration.WhileOnBattlefield)));
     }
 
-    public DeadWeight(final DeadWeight card) {
+    private DeadWeight(final DeadWeight card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class CountlessGearsRenegade extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CountlessGearsRenegade(final CountlessGearsRenegade card) {
+    private CountlessGearsRenegade(final CountlessGearsRenegade card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class RibbonsOfTheReikai extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public RibbonsOfTheReikai(final RibbonsOfTheReikai card) {
+    private RibbonsOfTheReikai(final RibbonsOfTheReikai card) {
         super(card);
     }
 

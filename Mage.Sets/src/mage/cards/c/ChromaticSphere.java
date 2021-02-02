@@ -30,7 +30,7 @@ public final class ChromaticSphere extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChromaticSphere(final ChromaticSphere card) {
+    private ChromaticSphere(final ChromaticSphere card) {
         super(card);
     }
 

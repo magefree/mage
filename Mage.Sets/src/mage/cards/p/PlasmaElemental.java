@@ -28,7 +28,7 @@ public final class PlasmaElemental extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedSourceEffect()));
     }
 
-    public PlasmaElemental(final PlasmaElemental card) {
+    private PlasmaElemental(final PlasmaElemental card) {
         super(card);
     }
 

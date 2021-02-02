@@ -25,7 +25,7 @@ public final class BondedConstruct extends CardImpl {
         this.addAbility(new CantAttackAloneAbility());
     }
 
-    public BondedConstruct(final BondedConstruct card) {
+    private BondedConstruct(final BondedConstruct card) {
         super(card);
     }
 

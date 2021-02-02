@@ -34,7 +34,7 @@ public final class SimicLocket extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SimicLocket(final SimicLocket card) {
+    private SimicLocket(final SimicLocket card) {
         super(card);
     }
 

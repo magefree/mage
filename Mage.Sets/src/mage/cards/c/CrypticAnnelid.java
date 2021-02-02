@@ -36,7 +36,7 @@ public final class CrypticAnnelid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrypticAnnelid(final CrypticAnnelid card) {
+    private CrypticAnnelid(final CrypticAnnelid card) {
         super(card);
     }
 

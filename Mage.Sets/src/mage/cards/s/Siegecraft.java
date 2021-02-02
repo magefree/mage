@@ -39,7 +39,7 @@ public final class Siegecraft extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 4, Duration.WhileOnBattlefield)));
     }
 
-    public Siegecraft(final Siegecraft card) {
+    private Siegecraft(final Siegecraft card) {
         super(card);
     }
 

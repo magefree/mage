@@ -39,7 +39,7 @@ public final class RhetCropSpearmaster extends CardImpl {
         this.addAbility(new ExertAbility(ability));
     }
 
-    public RhetCropSpearmaster(final RhetCropSpearmaster card) {
+    private RhetCropSpearmaster(final RhetCropSpearmaster card) {
         super(card);
     }
 

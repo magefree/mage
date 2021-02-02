@@ -41,7 +41,7 @@ public final class SoulSculptor extends CardImpl {
 
     }
 
-    public SoulSculptor(final SoulSculptor card) {
+    private SoulSculptor(final SoulSculptor card) {
         super(card);
     }
 

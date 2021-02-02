@@ -50,7 +50,7 @@ public final class CateranEnforcer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CateranEnforcer(final CateranEnforcer card) {
+    private CateranEnforcer(final CateranEnforcer card) {
         super(card);
     }
 

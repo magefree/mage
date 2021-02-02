@@ -34,7 +34,7 @@ public final class MisthoofKirin extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{W}"), true));
     }
 
-    public MisthoofKirin(final MisthoofKirin card) {
+    private MisthoofKirin(final MisthoofKirin card) {
         super(card);
     }
 

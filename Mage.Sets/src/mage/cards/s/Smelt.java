@@ -22,7 +22,7 @@ public final class Smelt extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
-    public Smelt(final Smelt card) {
+    private Smelt(final Smelt card) {
         super(card);
     }
 

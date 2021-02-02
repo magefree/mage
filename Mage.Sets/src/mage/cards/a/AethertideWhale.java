@@ -38,7 +38,7 @@ public final class AethertideWhale extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new PayEnergyCost(4)));
     }
 
-    public AethertideWhale(final AethertideWhale card) {
+    private AethertideWhale(final AethertideWhale card) {
         super(card);
     }
 

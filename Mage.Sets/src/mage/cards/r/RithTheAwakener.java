@@ -44,7 +44,7 @@ public final class RithTheAwakener extends CardImpl {
                 new DoIfCostPaid(new RithTheAwakenerEffect(), new ManaCostsImpl("{2}{G}")), false));
     }
 
-    public RithTheAwakener(final RithTheAwakener card) {
+    private RithTheAwakener(final RithTheAwakener card) {
         super(card);
     }
 

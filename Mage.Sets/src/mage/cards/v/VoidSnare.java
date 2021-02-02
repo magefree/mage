@@ -23,7 +23,7 @@ public final class VoidSnare extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 
-    public VoidSnare(final VoidSnare card) {
+    private VoidSnare(final VoidSnare card) {
         super(card);
     }
 

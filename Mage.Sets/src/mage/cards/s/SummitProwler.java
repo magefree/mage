@@ -22,7 +22,7 @@ public final class SummitProwler extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public SummitProwler(final SummitProwler card) {
+    private SummitProwler(final SummitProwler card) {
         super(card);
     }
 

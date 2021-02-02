@@ -26,7 +26,7 @@ public final class RagingCougar extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public RagingCougar(final RagingCougar card) {
+    private RagingCougar(final RagingCougar card) {
         super(card);
     }
 

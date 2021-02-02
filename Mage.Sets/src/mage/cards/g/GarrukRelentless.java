@@ -50,7 +50,7 @@ public final class GarrukRelentless extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public GarrukRelentless(final GarrukRelentless card) {
+    private GarrukRelentless(final GarrukRelentless card) {
         super(card);
     }
 

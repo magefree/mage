@@ -42,7 +42,7 @@ public final class MarwynTheNurturer extends CardImpl {
         this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new SourcePermanentPowerCount(), "Add an amount of {G} equal to {this}'s power"));
     }
 
-    public MarwynTheNurturer(final MarwynTheNurturer card) {
+    private MarwynTheNurturer(final MarwynTheNurturer card) {
         super(card);
     }
 

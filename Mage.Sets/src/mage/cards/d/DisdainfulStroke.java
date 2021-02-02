@@ -31,7 +31,7 @@ public final class DisdainfulStroke extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public DisdainfulStroke(final DisdainfulStroke card) {
+    private DisdainfulStroke(final DisdainfulStroke card) {
         super(card);
     }
 

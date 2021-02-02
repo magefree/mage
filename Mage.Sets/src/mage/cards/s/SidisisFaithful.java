@@ -35,7 +35,7 @@ public final class SidisisFaithful extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SidisisFaithful(final SidisisFaithful card) {
+    private SidisisFaithful(final SidisisFaithful card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class FungusElemental extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FungusElemental(final FungusElemental card) {
+    private FungusElemental(final FungusElemental card) {
         super(card);
     }
 

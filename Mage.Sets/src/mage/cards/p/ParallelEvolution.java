@@ -34,7 +34,7 @@ public final class ParallelEvolution extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{G}{G}{G}"), TimingRule.SORCERY));
     }
 
-    public ParallelEvolution(final ParallelEvolution card) {
+    private ParallelEvolution(final ParallelEvolution card) {
         super(card);
     }
 

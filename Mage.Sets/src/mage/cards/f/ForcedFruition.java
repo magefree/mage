@@ -26,7 +26,7 @@ public final class ForcedFruition extends CardImpl {
                 StaticFilters.FILTER_SPELL, false, SetTargetPointer.PLAYER));
     }
 
-    public ForcedFruition(final ForcedFruition card) {
+    private ForcedFruition(final ForcedFruition card) {
         super(card);
     }
 

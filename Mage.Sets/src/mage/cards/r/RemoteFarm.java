@@ -38,7 +38,7 @@ public final class RemoteFarm extends CardImpl {
         this.addAbility(ability);       
     }
 
-    public RemoteFarm(final RemoteFarm card) {
+    private RemoteFarm(final RemoteFarm card) {
         super(card);
     }
 

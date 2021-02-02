@@ -32,7 +32,7 @@ public final class SwordPointDiplomacy extends CardImpl {
         this.getSpellAbility().addEffect(new SwordPointDiplomacyEffect());
     }
 
-    public SwordPointDiplomacy(final SwordPointDiplomacy card) {
+    private SwordPointDiplomacy(final SwordPointDiplomacy card) {
         super(card);
     }
 

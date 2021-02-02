@@ -29,7 +29,7 @@ public final class CitywideBust extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public CitywideBust(final CitywideBust card) {
+    private CitywideBust(final CitywideBust card) {
         super(card);
     }
 

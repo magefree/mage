@@ -46,7 +46,7 @@ public final class Karoo extends CardImpl {
 
     }
 
-    public Karoo(final Karoo card) {
+    private Karoo(final Karoo card) {
         super(card);
     }
 

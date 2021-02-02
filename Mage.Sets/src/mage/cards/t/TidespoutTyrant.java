@@ -34,7 +34,7 @@ public final class TidespoutTyrant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TidespoutTyrant(final TidespoutTyrant card) {
+    private TidespoutTyrant(final TidespoutTyrant card) {
         super(card);
     }
 

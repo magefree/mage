@@ -29,7 +29,7 @@ public final class EnterTheUnknown extends CardImpl {
 
     }
 
-    public EnterTheUnknown(final EnterTheUnknown card) {
+    private EnterTheUnknown(final EnterTheUnknown card) {
         super(card);
     }
 

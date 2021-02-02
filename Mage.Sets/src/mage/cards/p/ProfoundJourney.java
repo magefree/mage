@@ -39,7 +39,7 @@ public final class ProfoundJourney extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public ProfoundJourney(final ProfoundJourney card) {
+    private ProfoundJourney(final ProfoundJourney card) {
         super(card);
     }
 

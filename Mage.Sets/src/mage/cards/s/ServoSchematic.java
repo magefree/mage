@@ -24,7 +24,7 @@ public final class ServoSchematic extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new CreateTokenEffect(new ServoToken())));
     }
 
-    public ServoSchematic(final ServoSchematic card) {
+    private ServoSchematic(final ServoSchematic card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class Camaraderie extends CardImpl {
         this.getSpellAbility().addHint(CreaturesYouControlHint.instance);
     }
 
-    public Camaraderie(final Camaraderie card) {
+    private Camaraderie(final Camaraderie card) {
         super(card);
     }
 

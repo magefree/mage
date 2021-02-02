@@ -43,7 +43,7 @@ public final class SolemnRecruit extends CardImpl {
         ), new RevoltWatcher());
     }
 
-    public SolemnRecruit(final SolemnRecruit card) {
+    private SolemnRecruit(final SolemnRecruit card) {
         super(card);
     }
 

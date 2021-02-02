@@ -20,7 +20,7 @@ public final class CommandTower extends CardImpl {
         this.addAbility(new CommanderColorIdentityManaAbility());
     }
 
-    public CommandTower(final CommandTower card) {
+    private CommandTower(final CommandTower card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class GemOfBecoming extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GemOfBecoming(final GemOfBecoming card) {
+    private GemOfBecoming(final GemOfBecoming card) {
         super(card);
     }
 

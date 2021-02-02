@@ -27,7 +27,7 @@ public final class Renounce extends CardImpl {
         this.getSpellAbility().addEffect(new RenounceEffect());
     }
 
-    public Renounce(final Renounce card) {
+    private Renounce(final Renounce card) {
         super(card);
     }
 

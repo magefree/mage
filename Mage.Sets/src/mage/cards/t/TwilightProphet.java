@@ -50,7 +50,7 @@ public final class TwilightProphet extends CardImpl {
 
     }
 
-    public TwilightProphet(final TwilightProphet card) {
+    private TwilightProphet(final TwilightProphet card) {
         super(card);
     }
 

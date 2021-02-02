@@ -40,7 +40,7 @@ public final class ShrillHowler extends CardImpl {
 
     }
 
-    public ShrillHowler(final ShrillHowler card) {
+    private ShrillHowler(final ShrillHowler card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class ThrissNantukoPrimus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThrissNantukoPrimus(final ThrissNantukoPrimus card) {
+    private ThrissNantukoPrimus(final ThrissNantukoPrimus card) {
         super(card);
     }
 

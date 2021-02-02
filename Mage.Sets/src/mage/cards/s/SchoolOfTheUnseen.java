@@ -28,7 +28,7 @@ public final class SchoolOfTheUnseen extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SchoolOfTheUnseen(final SchoolOfTheUnseen card) {
+    private SchoolOfTheUnseen(final SchoolOfTheUnseen card) {
         super(card);
     }
 

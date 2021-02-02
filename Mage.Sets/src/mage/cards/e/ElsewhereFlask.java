@@ -37,7 +37,7 @@ public final class ElsewhereFlask extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new ElsewhereFlaskEffect(), new SacrificeSourceCost()));
     }
 
-    public ElsewhereFlask(final ElsewhereFlask card) {
+    private ElsewhereFlask(final ElsewhereFlask card) {
         super(card);
     }
 

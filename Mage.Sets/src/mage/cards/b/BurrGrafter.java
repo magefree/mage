@@ -36,7 +36,7 @@ public final class BurrGrafter extends CardImpl {
         this.addAbility(new SoulshiftAbility(3));
     }
 
-    public BurrGrafter(final BurrGrafter card) {
+    private BurrGrafter(final BurrGrafter card) {
         super(card);
     }
 

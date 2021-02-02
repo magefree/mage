@@ -27,7 +27,7 @@ public final class HeartbeatOfSpring extends CardImpl {
                 SetTargetPointer.PERMANENT));
     }
 
-    public HeartbeatOfSpring(final HeartbeatOfSpring card) {
+    private HeartbeatOfSpring(final HeartbeatOfSpring card) {
         super(card);
     }
 

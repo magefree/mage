@@ -57,7 +57,7 @@ public final class OutlawHolocron extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OutlawHolocron(final OutlawHolocron card) {
+    private OutlawHolocron(final OutlawHolocron card) {
         super(card);
     }
 

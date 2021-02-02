@@ -57,7 +57,7 @@ public final class KothophedSoulHoarder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KothophedSoulHoarder(final KothophedSoulHoarder card) {
+    private KothophedSoulHoarder(final KothophedSoulHoarder card) {
         super(card);
     }
 

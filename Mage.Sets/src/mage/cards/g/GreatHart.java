@@ -22,7 +22,7 @@ public final class GreatHart extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public GreatHart(final GreatHart card) {
+    private GreatHart(final GreatHart card) {
         super(card);
     }
 

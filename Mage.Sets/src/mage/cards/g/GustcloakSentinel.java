@@ -35,7 +35,7 @@ public final class GustcloakSentinel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GustcloakSentinel(final GustcloakSentinel card) {
+    private GustcloakSentinel(final GustcloakSentinel card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class NetterEnDal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NetterEnDal(final NetterEnDal card) {
+    private NetterEnDal(final NetterEnDal card) {
         super(card);
     }
 

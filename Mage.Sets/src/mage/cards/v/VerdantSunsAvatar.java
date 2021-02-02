@@ -37,7 +37,7 @@ public final class VerdantSunsAvatar extends CardImpl {
         this.addAbility(new VerdantSunsAvatarTriggeredAbility());
     }
 
-    public VerdantSunsAvatar(final VerdantSunsAvatar card) {
+    private VerdantSunsAvatar(final VerdantSunsAvatar card) {
         super(card);
     }
 

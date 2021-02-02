@@ -23,7 +23,7 @@ public final class ShatterskullGiant extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public ShatterskullGiant(final ShatterskullGiant card) {
+    private ShatterskullGiant(final ShatterskullGiant card) {
         super(card);
     }
 

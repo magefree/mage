@@ -47,7 +47,7 @@ public final class BrassTalonChimera extends CardImpl {
         addAbility(ability);
     }
 
-    public BrassTalonChimera(final BrassTalonChimera card) {
+    private BrassTalonChimera(final BrassTalonChimera card) {
         super(card);
     }
 

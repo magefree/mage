@@ -21,7 +21,7 @@ public final class PrecisionBolt extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public PrecisionBolt(final PrecisionBolt card) {
+    private PrecisionBolt(final PrecisionBolt card) {
         super(card);
     }
 

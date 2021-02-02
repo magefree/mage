@@ -39,7 +39,7 @@ public final class VizierOfTheTrue extends CardImpl {
         this.addAbility(new VizierOfTheTrueAbility());
     }
 
-    public VizierOfTheTrue(final VizierOfTheTrue card) {
+    private VizierOfTheTrue(final VizierOfTheTrue card) {
         super(card);
     }
 

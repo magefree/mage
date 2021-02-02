@@ -45,7 +45,7 @@ public final class AmuletOfUnmaking extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AmuletOfUnmaking(final AmuletOfUnmaking card) {
+    private AmuletOfUnmaking(final AmuletOfUnmaking card) {
         super(card);
     }
 

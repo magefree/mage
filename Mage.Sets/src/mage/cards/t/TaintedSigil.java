@@ -36,7 +36,7 @@ public final class TaintedSigil extends CardImpl {
 
     }
 
-    public TaintedSigil(final TaintedSigil card) {
+    private TaintedSigil(final TaintedSigil card) {
         super(card);
     }
 

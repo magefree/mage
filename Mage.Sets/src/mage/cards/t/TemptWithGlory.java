@@ -28,7 +28,7 @@ public final class TemptWithGlory extends CardImpl {
         this.getSpellAbility().addEffect(new TemptWithGloryEffect());
     }
 
-    public TemptWithGlory(final TemptWithGlory card) {
+    private TemptWithGlory(final TemptWithGlory card) {
         super(card);
     }
 

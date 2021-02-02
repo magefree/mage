@@ -34,7 +34,7 @@ public final class EtheriumSculptor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public EtheriumSculptor(final EtheriumSculptor card) {
+    private EtheriumSculptor(final EtheriumSculptor card) {
         super(card);
     }
 

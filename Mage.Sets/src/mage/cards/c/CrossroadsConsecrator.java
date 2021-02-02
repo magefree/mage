@@ -43,7 +43,7 @@ public final class CrossroadsConsecrator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrossroadsConsecrator(final CrossroadsConsecrator card) {
+    private CrossroadsConsecrator(final CrossroadsConsecrator card) {
         super(card);
     }
 

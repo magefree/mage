@@ -40,7 +40,7 @@ public final class TricksOfTheTrade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAttachedEffect(AttachmentType.AURA)));
     }
 
-    public TricksOfTheTrade(final TricksOfTheTrade card) {
+    private TricksOfTheTrade(final TricksOfTheTrade card) {
         super(card);
     }
 

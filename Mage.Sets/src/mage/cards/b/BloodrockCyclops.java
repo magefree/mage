@@ -24,7 +24,7 @@ public final class BloodrockCyclops extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public BloodrockCyclops(final BloodrockCyclops card) {
+    private BloodrockCyclops(final BloodrockCyclops card) {
         super(card);
     }
 

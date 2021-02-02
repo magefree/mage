@@ -47,7 +47,7 @@ public final class TreacherousWerewolf extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TreacherousWerewolf(final TreacherousWerewolf card) {
+    private TreacherousWerewolf(final TreacherousWerewolf card) {
         super(card);
     }
 

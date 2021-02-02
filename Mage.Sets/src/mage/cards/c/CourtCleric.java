@@ -49,7 +49,7 @@ public final class CourtCleric extends CardImpl {
         ));
     }
 
-    public CourtCleric(final CourtCleric card) {
+    private CourtCleric(final CourtCleric card) {
         super(card);
     }
 

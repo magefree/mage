@@ -32,7 +32,7 @@ public final class HealerOfThePride extends CardImpl {
 
     }
 
-    public HealerOfThePride(final HealerOfThePride card) {
+    private HealerOfThePride(final HealerOfThePride card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class SoulOfInnistrad extends CardImpl {
 
     }
 
-    public SoulOfInnistrad(final SoulOfInnistrad card) {
+    private SoulOfInnistrad(final SoulOfInnistrad card) {
         super(card);
     }
 

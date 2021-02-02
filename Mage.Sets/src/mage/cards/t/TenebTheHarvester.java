@@ -42,7 +42,7 @@ public final class TenebTheHarvester extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TenebTheHarvester(final TenebTheHarvester card) {
+    private TenebTheHarvester(final TenebTheHarvester card) {
         super(card);
     }
 

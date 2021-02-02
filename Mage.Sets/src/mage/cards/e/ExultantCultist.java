@@ -27,7 +27,7 @@ public final class ExultantCultist extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public ExultantCultist(final ExultantCultist card) {
+    private ExultantCultist(final ExultantCultist card) {
         super(card);
     }
 

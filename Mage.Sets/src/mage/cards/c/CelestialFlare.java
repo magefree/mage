@@ -27,7 +27,7 @@ public final class CelestialFlare extends CardImpl {
 
     }
 
-    public CelestialFlare(final CelestialFlare card) {
+    private CelestialFlare(final CelestialFlare card) {
         super(card);
     }
 

@@ -60,7 +60,7 @@ public final class BehemothsHerald extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BehemothsHerald(final BehemothsHerald card) {
+    private BehemothsHerald(final BehemothsHerald card) {
         super(card);
     }
 

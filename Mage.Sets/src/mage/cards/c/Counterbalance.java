@@ -33,7 +33,7 @@ public final class Counterbalance extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new CounterbalanceEffect(), StaticFilters.FILTER_SPELL, true, SetTargetPointer.SPELL));
     }
 
-    public Counterbalance(final Counterbalance card) {
+    private Counterbalance(final Counterbalance card) {
         super(card);
     }
 

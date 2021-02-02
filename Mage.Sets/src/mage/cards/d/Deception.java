@@ -22,7 +22,7 @@ public final class Deception extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardTargetEffect(2));
     }
 
-    public Deception(final Deception card) {
+    private Deception(final Deception card) {
         super(card);
     }
 

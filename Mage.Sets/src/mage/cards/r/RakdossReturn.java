@@ -32,7 +32,7 @@ public final class RakdossReturn extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
     }
 
-    public RakdossReturn(final RakdossReturn card) {
+    private RakdossReturn(final RakdossReturn card) {
         super(card);
     }
 

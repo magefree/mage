@@ -33,7 +33,7 @@ public final class EntreatTheDead extends CardImpl {
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{X}{B}{B}")));
     }
 
-    public EntreatTheDead(final EntreatTheDead card) {
+    private EntreatTheDead(final EntreatTheDead card) {
         super(card);
     }
 

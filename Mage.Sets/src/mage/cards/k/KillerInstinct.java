@@ -40,7 +40,7 @@ public final class KillerInstinct extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KillerInstinctEffect(), TargetController.YOU, false));
     }
 
-    public KillerInstinct(final KillerInstinct card) {
+    private KillerInstinct(final KillerInstinct card) {
         super(card);
     }
 

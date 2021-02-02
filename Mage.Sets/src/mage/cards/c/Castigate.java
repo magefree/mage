@@ -23,7 +23,7 @@ public final class Castigate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public Castigate(final Castigate card) {
+    private Castigate(final Castigate card) {
         super(card);
     }
 

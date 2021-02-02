@@ -45,7 +45,7 @@ public final class Silkwrap extends CardImpl {
 
     }
 
-    public Silkwrap(final Silkwrap card) {
+    private Silkwrap(final Silkwrap card) {
         super(card);
     }
 

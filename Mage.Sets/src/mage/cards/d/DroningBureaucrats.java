@@ -40,7 +40,7 @@ public final class DroningBureaucrats extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DroningBureaucrats(final DroningBureaucrats card) {
+    private DroningBureaucrats(final DroningBureaucrats card) {
         super(card);
     }
 

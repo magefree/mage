@@ -35,7 +35,7 @@ public final class PsionicEntity extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PsionicEntity(final PsionicEntity card) {
+    private PsionicEntity(final PsionicEntity card) {
         super(card);
     }
 

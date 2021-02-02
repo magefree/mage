@@ -28,7 +28,7 @@ public final class BorosElite extends CardImpl {
         this.addAbility(new BattalionAbility(new BoostSourceEffect(2,2, Duration.EndOfTurn)));
     }
 
-    public BorosElite(final BorosElite card) {
+    private BorosElite(final BorosElite card) {
         super(card);
     }
 

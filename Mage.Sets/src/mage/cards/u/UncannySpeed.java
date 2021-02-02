@@ -27,7 +27,7 @@ public final class UncannySpeed extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public UncannySpeed(final UncannySpeed card) {
+    private UncannySpeed(final UncannySpeed card) {
         super(card);
     }
 

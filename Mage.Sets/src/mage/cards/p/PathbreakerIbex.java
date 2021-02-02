@@ -36,7 +36,7 @@ public final class PathbreakerIbex extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new PathbreakerIbexEffect(), false));
     }
 
-    public PathbreakerIbex(final PathbreakerIbex card) {
+    private PathbreakerIbex(final PathbreakerIbex card) {
         super(card);
     }
 

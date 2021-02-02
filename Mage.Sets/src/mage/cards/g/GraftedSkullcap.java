@@ -29,7 +29,7 @@ public final class GraftedSkullcap extends CardImpl {
             TargetController.YOU, false));
     }
 
-    public GraftedSkullcap(final GraftedSkullcap card) {
+    private GraftedSkullcap(final GraftedSkullcap card) {
         super(card);
     }
 

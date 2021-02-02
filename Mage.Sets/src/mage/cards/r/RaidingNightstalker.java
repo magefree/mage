@@ -26,7 +26,7 @@ public final class RaidingNightstalker extends CardImpl {
         this.addAbility(new SwampwalkAbility());
     }
 
-    public RaidingNightstalker(final RaidingNightstalker card) {
+    private RaidingNightstalker(final RaidingNightstalker card) {
         super(card);
     }
 

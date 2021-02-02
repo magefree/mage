@@ -39,7 +39,7 @@ public final class DinosaurStampede extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public DinosaurStampede(final DinosaurStampede card) {
+    private DinosaurStampede(final DinosaurStampede card) {
         super(card);
     }
 

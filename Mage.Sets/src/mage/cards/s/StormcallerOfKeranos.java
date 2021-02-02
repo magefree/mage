@@ -33,7 +33,7 @@ public final class StormcallerOfKeranos extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new ManaCostsImpl("{1}{U}")));
     }
 
-    public StormcallerOfKeranos(final StormcallerOfKeranos card) {
+    private StormcallerOfKeranos(final StormcallerOfKeranos card) {
         super(card);
     }
 

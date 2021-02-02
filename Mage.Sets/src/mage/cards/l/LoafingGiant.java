@@ -34,7 +34,7 @@ public final class LoafingGiant extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new LoafingGiantEffect(), false));
     }
 
-    public LoafingGiant(final LoafingGiant card) {
+    private LoafingGiant(final LoafingGiant card) {
         super(card);
     }
 

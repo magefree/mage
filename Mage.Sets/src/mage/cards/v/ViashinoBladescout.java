@@ -36,7 +36,7 @@ public final class ViashinoBladescout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ViashinoBladescout(final ViashinoBladescout card) {
+    private ViashinoBladescout(final ViashinoBladescout card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class Unburden extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public Unburden(final Unburden card) {
+    private Unburden(final Unburden card) {
         super(card);
     }
 

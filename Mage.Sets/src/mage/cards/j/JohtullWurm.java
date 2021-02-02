@@ -34,7 +34,7 @@ public final class JohtullWurm extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
-    public JohtullWurm(final JohtullWurm card) {
+    private JohtullWurm(final JohtullWurm card) {
         super(card);
     }
 

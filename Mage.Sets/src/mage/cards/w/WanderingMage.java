@@ -72,7 +72,7 @@ public final class WanderingMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WanderingMage(final WanderingMage card) {
+    private WanderingMage(final WanderingMage card) {
         super(card);
     }
 

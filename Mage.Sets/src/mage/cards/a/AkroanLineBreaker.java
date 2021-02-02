@@ -39,7 +39,7 @@ public final class AkroanLineBreaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AkroanLineBreaker(final AkroanLineBreaker card) {
+    private AkroanLineBreaker(final AkroanLineBreaker card) {
         super(card);
     }
 

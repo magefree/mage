@@ -49,7 +49,7 @@ public final class LichLordOfUnx extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LichLordOfUnx(final LichLordOfUnx card) {
+    private LichLordOfUnx(final LichLordOfUnx card) {
         super(card);
     }
 

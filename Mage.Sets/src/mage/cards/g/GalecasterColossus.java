@@ -49,7 +49,7 @@ public final class GalecasterColossus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GalecasterColossus(final GalecasterColossus card) {
+    private GalecasterColossus(final GalecasterColossus card) {
         super(card);
     }
 

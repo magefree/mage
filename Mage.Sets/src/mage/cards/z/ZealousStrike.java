@@ -29,7 +29,7 @@ public final class ZealousStrike extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ZealousStrike(final ZealousStrike card) {
+    private ZealousStrike(final ZealousStrike card) {
         super(card);
     }
 

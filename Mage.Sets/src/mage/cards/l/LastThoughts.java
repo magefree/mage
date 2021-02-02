@@ -24,7 +24,7 @@ public final class LastThoughts extends CardImpl {
         this.getSpellAbility().addEffect(new CipherEffect());
     }
 
-    public LastThoughts(final LastThoughts card) {
+    private LastThoughts(final LastThoughts card) {
         super(card);
     }
 

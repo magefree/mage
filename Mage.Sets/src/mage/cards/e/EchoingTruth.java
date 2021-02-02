@@ -36,7 +36,7 @@ public final class EchoingTruth extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandAllNamedPermanentsEffect());
     }
 
-    public EchoingTruth(final EchoingTruth card) {
+    private EchoingTruth(final EchoingTruth card) {
         super(card);
     }
 

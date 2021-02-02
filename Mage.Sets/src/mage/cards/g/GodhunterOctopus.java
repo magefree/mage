@@ -39,7 +39,7 @@ public final class GodhunterOctopus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(filter)));
     }
 
-    public GodhunterOctopus(final GodhunterOctopus card) {
+    private GodhunterOctopus(final GodhunterOctopus card) {
         super(card);
     }
 

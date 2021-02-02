@@ -51,7 +51,7 @@ public final class DungeonGeists extends CardImpl {
         // watcher needed to send normal events to Dungeon Geists ReplacementEffect
     }
 
-    public DungeonGeists(final DungeonGeists card) {
+    private DungeonGeists(final DungeonGeists card) {
         super(card);
     }
 

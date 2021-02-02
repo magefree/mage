@@ -46,7 +46,7 @@ public final class ShipbreakerKraken extends CardImpl {
         this.addAbility(ability, new ShipbreakerKrakenWatcher());
     }
 
-    public ShipbreakerKraken(final ShipbreakerKraken card) {
+    private ShipbreakerKraken(final ShipbreakerKraken card) {
         super(card);
     }
 

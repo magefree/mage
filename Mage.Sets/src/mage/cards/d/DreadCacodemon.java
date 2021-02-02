@@ -48,7 +48,7 @@ public final class DreadCacodemon extends CardImpl {
                 "When {this} enters the battlefield, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control."), new CastFromHandWatcher());
     }
 
-    public DreadCacodemon(final DreadCacodemon card) {
+    private DreadCacodemon(final DreadCacodemon card) {
         super(card);
     }
 

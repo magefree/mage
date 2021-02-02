@@ -41,7 +41,7 @@ public final class ThrullSurgeon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThrullSurgeon(final ThrullSurgeon card) {
+    private ThrullSurgeon(final ThrullSurgeon card) {
         super(card);
     }
 

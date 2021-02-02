@@ -36,7 +36,7 @@ public final class SlaughterGames extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public SlaughterGames(final SlaughterGames card) {
+    private SlaughterGames(final SlaughterGames card) {
         super(card);
     }
 

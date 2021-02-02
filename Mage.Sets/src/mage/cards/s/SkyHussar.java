@@ -50,7 +50,7 @@ public final class SkyHussar extends CardImpl {
         this.addAbility(new ForecastAbility(new DrawCardSourceControllerEffect(1), new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, true))));
     }
 
-    public SkyHussar(final SkyHussar card) {
+    private SkyHussar(final SkyHussar card) {
         super(card);
     }
 

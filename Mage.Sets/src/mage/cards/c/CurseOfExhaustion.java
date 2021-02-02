@@ -39,7 +39,7 @@ public final class CurseOfExhaustion extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CurseOfExhaustionEffect()));
     }
 
-    public CurseOfExhaustion(final CurseOfExhaustion card) {
+    private CurseOfExhaustion(final CurseOfExhaustion card) {
         super(card);
     }
 

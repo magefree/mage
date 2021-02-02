@@ -29,7 +29,7 @@ public final class TyrantsMachine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TyrantsMachine(final TyrantsMachine card) {
+    private TyrantsMachine(final TyrantsMachine card) {
         super(card);
     }
 

@@ -59,7 +59,7 @@ public final class SilumgarScavenger extends CardImpl {
 
     }
 
-    public SilumgarScavenger(final SilumgarScavenger card) {
+    private SilumgarScavenger(final SilumgarScavenger card) {
         super(card);
     }
 

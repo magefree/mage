@@ -35,7 +35,7 @@ public final class GnarlidPack extends CardImpl {
                 "with a +1/+1 counter on it for each time it was kicked"));
     }
 
-    public GnarlidPack(final GnarlidPack card) {
+    private GnarlidPack(final GnarlidPack card) {
         super(card);
     }
 

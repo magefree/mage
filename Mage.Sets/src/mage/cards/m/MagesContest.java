@@ -30,7 +30,7 @@ public final class MagesContest extends CardImpl {
 
     }
 
-    public MagesContest(final MagesContest card) {
+    private MagesContest(final MagesContest card) {
         super(card);
     }
 

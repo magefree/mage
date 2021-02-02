@@ -37,7 +37,7 @@ public final class BelltowerSphinx extends CardImpl {
         this.addAbility(new BelltowerSphinxEffect());
     }
 
-    public BelltowerSphinx(final BelltowerSphinx card) {
+    private BelltowerSphinx(final BelltowerSphinx card) {
         super(card);
     }
 

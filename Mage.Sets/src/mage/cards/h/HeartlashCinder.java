@@ -46,7 +46,7 @@ public final class HeartlashCinder extends CardImpl {
 
     }
 
-    public HeartlashCinder(final HeartlashCinder card) {
+    private HeartlashCinder(final HeartlashCinder card) {
         super(card);
     }
 

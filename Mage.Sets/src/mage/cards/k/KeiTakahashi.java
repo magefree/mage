@@ -37,7 +37,7 @@ public final class KeiTakahashi extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KeiTakahashi(final KeiTakahashi card) {
+    private KeiTakahashi(final KeiTakahashi card) {
         super(card);
     }
 

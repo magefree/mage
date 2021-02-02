@@ -55,7 +55,7 @@ public final class KnightOfTheReliquary extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay), costs));
     }
 
-    public KnightOfTheReliquary(final KnightOfTheReliquary card) {
+    private KnightOfTheReliquary(final KnightOfTheReliquary card) {
         super(card);
     }
 

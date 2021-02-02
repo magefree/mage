@@ -36,7 +36,7 @@ public final class Probe extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(ProbeAdjuster.instance);
     }
 
-    public Probe(final Probe card) {
+    private Probe(final Probe card) {
         super(card);
     }
 

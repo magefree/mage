@@ -41,7 +41,7 @@ public final class MagusOfTheCoffers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagusOfTheCoffers(final MagusOfTheCoffers card) {
+    private MagusOfTheCoffers(final MagusOfTheCoffers card) {
         super(card);
     }
 

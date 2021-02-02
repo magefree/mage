@@ -26,7 +26,7 @@ public final class YoungWeiRecruits extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public YoungWeiRecruits(final YoungWeiRecruits card) {
+    private YoungWeiRecruits(final YoungWeiRecruits card) {
         super(card);
     }
 

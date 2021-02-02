@@ -56,7 +56,7 @@ public final class DemonicPact extends CardImpl {
 
     }
 
-    public DemonicPact(final DemonicPact card) {
+    private DemonicPact(final DemonicPact card) {
         super(card);
     }
 

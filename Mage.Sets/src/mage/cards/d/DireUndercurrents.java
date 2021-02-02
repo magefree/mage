@@ -49,7 +49,7 @@ public final class DireUndercurrents extends CardImpl {
 
     }
 
-    public DireUndercurrents(final DireUndercurrents card) {
+    private DireUndercurrents(final DireUndercurrents card) {
         super(card);
     }
 

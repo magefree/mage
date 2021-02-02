@@ -38,7 +38,7 @@ public final class NecromancersStockpile extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NecromancersStockpile(final NecromancersStockpile card) {
+    private NecromancersStockpile(final NecromancersStockpile card) {
         super(card);
     }
 

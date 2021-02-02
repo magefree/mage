@@ -29,7 +29,7 @@ public final class SilverErne extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public SilverErne(final SilverErne card) {
+    private SilverErne(final SilverErne card) {
         super(card);
     }
 

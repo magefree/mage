@@ -24,7 +24,7 @@ public final class ChordOfCalling extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryWithLessCMCPutInPlayEffect(StaticFilters.FILTER_CARD_CREATURE));
     }
 
-    public ChordOfCalling(final ChordOfCalling card) {
+    private ChordOfCalling(final ChordOfCalling card) {
         super(card);
     }
 

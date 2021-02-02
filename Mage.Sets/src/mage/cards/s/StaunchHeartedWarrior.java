@@ -29,7 +29,7 @@ public final class StaunchHeartedWarrior extends CardImpl {
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2))));
     }
 
-    public StaunchHeartedWarrior(final StaunchHeartedWarrior card) {
+    private StaunchHeartedWarrior(final StaunchHeartedWarrior card) {
         super(card);
     }
 

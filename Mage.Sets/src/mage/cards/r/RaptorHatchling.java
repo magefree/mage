@@ -29,7 +29,7 @@ public final class RaptorHatchling extends CardImpl {
         Ability ability = new DealtDamageToSourceTriggeredAbility(new CreateTokenEffect(new DinosaurToken()), false, true);
         this.addAbility(ability);    }
 
-    public RaptorHatchling(final RaptorHatchling card) {
+    private RaptorHatchling(final RaptorHatchling card) {
         super(card);
     }
 

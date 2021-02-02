@@ -46,7 +46,7 @@ public final class RamosianCommander extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RamosianCommander(final RamosianCommander card) {
+    private RamosianCommander(final RamosianCommander card) {
         super(card);
     }
 

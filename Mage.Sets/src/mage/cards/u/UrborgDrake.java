@@ -29,7 +29,7 @@ public final class UrborgDrake extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public UrborgDrake(final UrborgDrake card) {
+    private UrborgDrake(final UrborgDrake card) {
         super(card);
     }
 

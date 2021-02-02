@@ -25,7 +25,7 @@ public final class RemoteIsle extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public RemoteIsle(final RemoteIsle card) {
+    private RemoteIsle(final RemoteIsle card) {
         super(card);
     }
 

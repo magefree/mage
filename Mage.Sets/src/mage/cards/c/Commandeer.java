@@ -46,7 +46,7 @@ public final class Commandeer extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filterSpell));
     }
 
-    public Commandeer(final Commandeer card) {
+    private Commandeer(final Commandeer card) {
         super(card);
     }
 

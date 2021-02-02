@@ -45,7 +45,7 @@ public final class RavenousWampa extends CardImpl {
         this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new RavenousWampaEffect()));
     }
 
-    public RavenousWampa(final RavenousWampa card) {
+    private RavenousWampa(final RavenousWampa card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class PhantasmalDragon extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public PhantasmalDragon(final PhantasmalDragon card) {
+    private PhantasmalDragon(final PhantasmalDragon card) {
         super(card);
     }
 

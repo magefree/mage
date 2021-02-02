@@ -43,7 +43,7 @@ public final class Recoup extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), TimingRule.SORCERY));
     }
 
-    public Recoup(final Recoup card) {
+    private Recoup(final Recoup card) {
         super(card);
     }
 

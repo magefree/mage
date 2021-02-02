@@ -28,7 +28,7 @@ public final class StaunchDefenders extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4), false));
     }
 
-    public StaunchDefenders(final StaunchDefenders card) {
+    private StaunchDefenders(final StaunchDefenders card) {
         super(card);
     }
 

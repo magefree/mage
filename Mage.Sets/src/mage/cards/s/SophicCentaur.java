@@ -42,7 +42,7 @@ public final class SophicCentaur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SophicCentaur(final SophicCentaur card) {
+    private SophicCentaur(final SophicCentaur card) {
         super(card);
     }
 

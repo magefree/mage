@@ -45,7 +45,7 @@ public final class BearerOfSilence extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public BearerOfSilence(final BearerOfSilence card) {
+    private BearerOfSilence(final BearerOfSilence card) {
         super(card);
     }
 

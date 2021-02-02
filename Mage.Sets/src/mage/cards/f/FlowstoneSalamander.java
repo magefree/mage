@@ -36,7 +36,7 @@ public final class FlowstoneSalamander extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlowstoneSalamander(final FlowstoneSalamander card) {
+    private FlowstoneSalamander(final FlowstoneSalamander card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class ZombieScavengers extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ExileTopCreatureCardOfGraveyardCost(1)));
     }
 
-    public ZombieScavengers(final ZombieScavengers card) {
+    private ZombieScavengers(final ZombieScavengers card) {
         super(card);
     }
 

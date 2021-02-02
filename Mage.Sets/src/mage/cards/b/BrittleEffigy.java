@@ -32,7 +32,7 @@ public final class BrittleEffigy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BrittleEffigy(final BrittleEffigy card) {
+    private BrittleEffigy(final BrittleEffigy card) {
         super(card);
     }
 

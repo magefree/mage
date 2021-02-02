@@ -38,7 +38,7 @@ public final class PatronOfTheValiant extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PatronOfTheValiantEffect()));
     }
 
-    public PatronOfTheValiant(final PatronOfTheValiant card) {
+    private PatronOfTheValiant(final PatronOfTheValiant card) {
         super(card);
     }
 

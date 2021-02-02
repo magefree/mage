@@ -35,7 +35,7 @@ public final class ElectrostaticPummeler extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new SourcePermanentPowerCount(), new SourcePermanentPowerCount(), Duration.EndOfTurn, true), new PayEnergyCost(3)));
     }
 
-    public ElectrostaticPummeler(final ElectrostaticPummeler card) {
+    private ElectrostaticPummeler(final ElectrostaticPummeler card) {
         super(card);
     }
 

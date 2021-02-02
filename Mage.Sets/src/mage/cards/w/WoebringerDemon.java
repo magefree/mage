@@ -41,7 +41,7 @@ public final class WoebringerDemon extends CardImpl {
                 new WoebringerDemonEffect(), TargetController.ANY, false, true));
     }
 
-    public WoebringerDemon(final WoebringerDemon card) {
+    private WoebringerDemon(final WoebringerDemon card) {
         super(card);
     }
 

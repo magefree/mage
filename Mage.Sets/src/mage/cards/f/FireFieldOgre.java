@@ -29,7 +29,7 @@ public final class FireFieldOgre extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{U}{B}{R}")));
     }
 
-    public FireFieldOgre(final FireFieldOgre card) {
+    private FireFieldOgre(final FireFieldOgre card) {
         super(card);
     }
 

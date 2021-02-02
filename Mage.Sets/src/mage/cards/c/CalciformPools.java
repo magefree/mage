@@ -44,7 +44,7 @@ public final class CalciformPools extends CardImpl {
 
     }
 
-    public CalciformPools(final CalciformPools card) {
+    private CalciformPools(final CalciformPools card) {
         super(card);
     }
 

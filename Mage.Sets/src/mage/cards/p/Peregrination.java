@@ -34,7 +34,7 @@ public final class Peregrination extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Peregrination(final Peregrination card) {
+    private Peregrination(final Peregrination card) {
         super(card);
     }
 

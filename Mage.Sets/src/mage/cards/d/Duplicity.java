@@ -51,7 +51,7 @@ public final class Duplicity extends CardImpl {
 
     }
 
-    public Duplicity(final Duplicity card) {
+    private Duplicity(final Duplicity card) {
         super(card);
     }
 

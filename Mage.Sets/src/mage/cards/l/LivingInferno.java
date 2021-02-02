@@ -39,7 +39,7 @@ public final class LivingInferno extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LivingInferno(final LivingInferno card) {
+    private LivingInferno(final LivingInferno card) {
         super(card);
     }
 

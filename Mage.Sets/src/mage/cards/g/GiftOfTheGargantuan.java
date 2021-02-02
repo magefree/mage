@@ -27,7 +27,7 @@ public final class GiftOfTheGargantuan extends CardImpl {
         this.getSpellAbility().addEffect(new GiftOfTheGargantuanEffect());
     }
 
-    public GiftOfTheGargantuan(final GiftOfTheGargantuan card) {
+    private GiftOfTheGargantuan(final GiftOfTheGargantuan card) {
         super(card);
     }
 

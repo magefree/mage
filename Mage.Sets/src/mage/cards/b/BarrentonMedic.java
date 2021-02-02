@@ -41,7 +41,7 @@ public final class BarrentonMedic extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new PutCountersSourceCost(CounterType.M1M1.createInstance(1))));
     }
 
-    public BarrentonMedic(final BarrentonMedic card) {
+    private BarrentonMedic(final BarrentonMedic card) {
         super(card);
     }
 

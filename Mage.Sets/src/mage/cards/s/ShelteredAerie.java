@@ -46,7 +46,7 @@ public final class ShelteredAerie extends CardImpl {
 
     }
 
-    public ShelteredAerie(final ShelteredAerie card) {
+    private ShelteredAerie(final ShelteredAerie card) {
         super(card);
     }
 

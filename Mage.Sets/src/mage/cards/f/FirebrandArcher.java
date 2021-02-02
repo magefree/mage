@@ -37,7 +37,7 @@ public final class FirebrandArcher extends CardImpl {
         addAbility(new SpellCastControllerTriggeredAbility(new DamagePlayersEffect(1, TargetController.OPPONENT), filter, false));
     }
 
-    public FirebrandArcher(final FirebrandArcher card) {
+    private FirebrandArcher(final FirebrandArcher card) {
         super(card);
     }
 

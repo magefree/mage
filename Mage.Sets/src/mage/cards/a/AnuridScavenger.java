@@ -43,7 +43,7 @@ public final class AnuridScavenger extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new AnuridScavengerCost()), TargetController.YOU, false));
     }
 
-    public AnuridScavenger(final AnuridScavenger card) {
+    private AnuridScavenger(final AnuridScavenger card) {
         super(card);
     }
 

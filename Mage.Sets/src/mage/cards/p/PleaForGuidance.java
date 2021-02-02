@@ -28,7 +28,7 @@ public final class PleaForGuidance extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0,2, filter), true, true));
     }
 
-    public PleaForGuidance(final PleaForGuidance card) {
+    private PleaForGuidance(final PleaForGuidance card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class SaprolingMigration extends CardImpl {
                 "Create two 1/1 green Saproling creature tokens. If this spell was kicked, create four of those tokens instead"));
     }
 
-    public SaprolingMigration(final SaprolingMigration card) {
+    private SaprolingMigration(final SaprolingMigration card) {
         super(card);
     }
 

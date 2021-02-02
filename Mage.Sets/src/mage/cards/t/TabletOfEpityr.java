@@ -32,7 +32,7 @@ public final class TabletOfEpityr extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TabletOfEpityr(final TabletOfEpityr card) {
+    private TabletOfEpityr(final TabletOfEpityr card) {
         super(card);
     }
 

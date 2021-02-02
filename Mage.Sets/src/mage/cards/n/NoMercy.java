@@ -27,7 +27,7 @@ public final class NoMercy extends CardImpl {
         this.addAbility(new NoMercyTriggeredAbility());
     }
 
-    public NoMercy(final NoMercy card) {
+    private NoMercy(final NoMercy card) {
         super(card);
     }
 

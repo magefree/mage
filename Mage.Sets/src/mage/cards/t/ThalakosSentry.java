@@ -26,7 +26,7 @@ public final class ThalakosSentry extends CardImpl {
         this.addAbility(ShadowAbility.getInstance());
     }
 
-    public ThalakosSentry(final ThalakosSentry card) {
+    private ThalakosSentry(final ThalakosSentry card) {
         super(card);
     }
 

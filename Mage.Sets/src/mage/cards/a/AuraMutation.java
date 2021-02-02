@@ -28,7 +28,7 @@ public final class AuraMutation extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetConvertedManaCost.instance));
     }
 
-    public AuraMutation(final AuraMutation card) {
+    private AuraMutation(final AuraMutation card) {
         super(card);
     }
 

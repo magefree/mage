@@ -30,7 +30,7 @@ public final class AetherBarrier extends CardImpl {
                 StaticFilters.FILTER_SPELL_A_CREATURE, false, SetTargetPointer.PLAYER));
     }
 
-    public AetherBarrier(final AetherBarrier card) {
+    private AetherBarrier(final AetherBarrier card) {
         super(card);
     }
 

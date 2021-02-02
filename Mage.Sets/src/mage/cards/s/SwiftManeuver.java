@@ -30,7 +30,7 @@ public final class SwiftManeuver extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public SwiftManeuver(final SwiftManeuver card) {
+    private SwiftManeuver(final SwiftManeuver card) {
         super(card);
     }
 

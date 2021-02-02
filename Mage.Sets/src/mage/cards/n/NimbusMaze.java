@@ -47,7 +47,7 @@ public final class NimbusMaze extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(controlPlains)));
     }
 
-    public NimbusMaze(final NimbusMaze card) {
+    private NimbusMaze(final NimbusMaze card) {
         super(card);
     }
 

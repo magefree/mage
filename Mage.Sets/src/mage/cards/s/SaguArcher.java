@@ -31,7 +31,7 @@ public final class SaguArcher extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{G}")));
     }
 
-    public SaguArcher(final SaguArcher card) {
+    private SaguArcher(final SaguArcher card) {
         super(card);
     }
 

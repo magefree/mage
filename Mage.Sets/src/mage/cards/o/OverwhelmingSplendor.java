@@ -48,7 +48,7 @@ public final class OverwhelmingSplendor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OverwhelmingSplendorCantActivateEffect()));
     }
 
-    public OverwhelmingSplendor(final OverwhelmingSplendor card) {
+    private OverwhelmingSplendor(final OverwhelmingSplendor card) {
         super(card);
     }
 

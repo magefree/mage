@@ -51,7 +51,7 @@ public final class TangleKelp extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapIfAttackedLastTurnEnchantedEffect()), new AttackedLastTurnWatcher());
     }
 
-    public TangleKelp(final TangleKelp card) {
+    private TangleKelp(final TangleKelp card) {
         super(card);
     }
 

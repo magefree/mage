@@ -29,7 +29,7 @@ public final class VedalkenArchmage extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
     }
 
-    public VedalkenArchmage(final VedalkenArchmage card) {
+    private VedalkenArchmage(final VedalkenArchmage card) {
         super(card);
     }
 

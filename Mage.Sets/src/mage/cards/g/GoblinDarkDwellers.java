@@ -56,7 +56,7 @@ public final class GoblinDarkDwellers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinDarkDwellers(final GoblinDarkDwellers card) {
+    private GoblinDarkDwellers(final GoblinDarkDwellers card) {
         super(card);
     }
 

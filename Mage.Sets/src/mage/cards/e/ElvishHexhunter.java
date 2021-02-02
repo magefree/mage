@@ -38,7 +38,7 @@ public final class ElvishHexhunter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElvishHexhunter(final ElvishHexhunter card) {
+    private ElvishHexhunter(final ElvishHexhunter card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class GatstafArsonists extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
-    public GatstafArsonists(final GatstafArsonists card) {
+    private GatstafArsonists(final GatstafArsonists card) {
         super(card);
     }
 

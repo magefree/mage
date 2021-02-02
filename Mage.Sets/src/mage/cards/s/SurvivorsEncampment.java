@@ -41,7 +41,7 @@ public final class SurvivorsEncampment extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SurvivorsEncampment(final SurvivorsEncampment card) {
+    private SurvivorsEncampment(final SurvivorsEncampment card) {
         super(card);
     }
 

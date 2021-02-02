@@ -45,7 +45,7 @@ public final class VolcanicStrength extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VolcanicStrength(final VolcanicStrength card) {
+    private VolcanicStrength(final VolcanicStrength card) {
         super(card);
     }
 

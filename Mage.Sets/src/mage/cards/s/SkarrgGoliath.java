@@ -37,7 +37,7 @@ public final class SkarrgGoliath extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkarrgGoliath(final SkarrgGoliath card) {
+    private SkarrgGoliath(final SkarrgGoliath card) {
         super(card);
     }
 

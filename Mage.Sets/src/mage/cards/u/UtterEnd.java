@@ -23,7 +23,7 @@ public final class UtterEnd extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
-    public UtterEnd(final UtterEnd card) {
+    private UtterEnd(final UtterEnd card) {
         super(card);
     }
 

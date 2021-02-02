@@ -40,7 +40,7 @@ public final class GahijiHonoredOne extends CardImpl {
 
     }
 
-    public GahijiHonoredOne(final GahijiHonoredOne card) {
+    private GahijiHonoredOne(final GahijiHonoredOne card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class PlagueSliver extends CardImpl {
                 filterSliver, "All Slivers have \"At the beginning of your upkeep, this permanent deals 1 damage to you.\"")));
     }
 
-    public PlagueSliver(final PlagueSliver card) {
+    private PlagueSliver(final PlagueSliver card) {
         super(card);
     }
 

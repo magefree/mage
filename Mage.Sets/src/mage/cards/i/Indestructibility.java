@@ -40,7 +40,7 @@ public final class Indestructibility extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public Indestructibility(final Indestructibility card) {
+    private Indestructibility(final Indestructibility card) {
         super(card);
     }
 

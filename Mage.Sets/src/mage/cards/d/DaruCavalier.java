@@ -42,7 +42,7 @@ public final class DaruCavalier extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
     }
 
-    public DaruCavalier(final DaruCavalier card) {
+    private DaruCavalier(final DaruCavalier card) {
         super(card);
     }
 

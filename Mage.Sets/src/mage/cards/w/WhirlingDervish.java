@@ -41,7 +41,7 @@ public final class WhirlingDervish extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggered, new DealtDamageToAnOpponent(), ruleText));
     }
 
-    public WhirlingDervish(final WhirlingDervish card) {
+    private WhirlingDervish(final WhirlingDervish card) {
         super(card);
     }
 

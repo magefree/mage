@@ -60,7 +60,7 @@ public final class BetrothedOfFire extends CardImpl {
         ));
     }
 
-    public BetrothedOfFire(final BetrothedOfFire card) {
+    private BetrothedOfFire(final BetrothedOfFire card) {
         super(card);
     }
 

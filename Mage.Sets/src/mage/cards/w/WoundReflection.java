@@ -28,7 +28,7 @@ public final class WoundReflection extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new WoundReflectionEffect(), TargetController.ANY, false));
     }
 
-    public WoundReflection(final WoundReflection card) {
+    private WoundReflection(final WoundReflection card) {
         super(card);
     }
 

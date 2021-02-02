@@ -40,7 +40,7 @@ public final class HonorWornShaku extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HonorWornShaku(final HonorWornShaku card) {
+    private HonorWornShaku(final HonorWornShaku card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class BladeInstructor extends CardImpl {
         this.addAbility(new MentorAbility());
     }
 
-    public BladeInstructor(final BladeInstructor card) {
+    private BladeInstructor(final BladeInstructor card) {
         super(card);
     }
 

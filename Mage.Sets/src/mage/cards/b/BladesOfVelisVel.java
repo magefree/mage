@@ -32,7 +32,7 @@ public final class BladesOfVelisVel extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }
 
-    public BladesOfVelisVel(final BladesOfVelisVel card) {
+    private BladesOfVelisVel(final BladesOfVelisVel card) {
         super(card);
     }
 

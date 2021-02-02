@@ -38,7 +38,7 @@ public final class Weakness extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-2, -1, Duration.WhileOnBattlefield)));
     }
 
-    public Weakness(final Weakness card) {
+    private Weakness(final Weakness card) {
         super(card);
     }
 

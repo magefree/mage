@@ -29,7 +29,7 @@ public final class TempleOfAbandon extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public TempleOfAbandon(final TempleOfAbandon card) {
+    private TempleOfAbandon(final TempleOfAbandon card) {
         super(card);
     }
 

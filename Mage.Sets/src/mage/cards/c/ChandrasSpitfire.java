@@ -35,7 +35,7 @@ public final class ChandrasSpitfire extends CardImpl {
         this.addAbility(new ChandrasSpitfireAbility());
     }
 
-    public ChandrasSpitfire(final ChandrasSpitfire card) {
+    private ChandrasSpitfire(final ChandrasSpitfire card) {
         super(card);
     }
 

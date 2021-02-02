@@ -31,7 +31,7 @@ public final class SteelshapersGift extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(1, 1, filter), true));
     }
 
-    public SteelshapersGift(final SteelshapersGift card) {
+    private SteelshapersGift(final SteelshapersGift card) {
         super(card);
     }
 

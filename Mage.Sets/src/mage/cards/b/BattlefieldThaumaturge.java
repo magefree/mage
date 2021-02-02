@@ -43,7 +43,7 @@ public final class BattlefieldThaumaturge extends CardImpl {
         this.addAbility(new HeroicAbility(new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn)));
     }
 
-    public BattlefieldThaumaturge(final BattlefieldThaumaturge card) {
+    private BattlefieldThaumaturge(final BattlefieldThaumaturge card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class TrooperCommando extends CardImpl {
 
     }
 
-    public TrooperCommando(final TrooperCommando card) {
+    private TrooperCommando(final TrooperCommando card) {
         super(card);
     }
 

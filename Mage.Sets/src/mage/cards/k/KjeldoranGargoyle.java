@@ -33,7 +33,7 @@ public final class KjeldoranGargoyle extends CardImpl {
         this.addAbility(new DealsDamageGainLifeSourceTriggeredAbility());
     }
 
-    public KjeldoranGargoyle(final KjeldoranGargoyle card) {
+    private KjeldoranGargoyle(final KjeldoranGargoyle card) {
         super(card);
     }
 

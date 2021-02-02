@@ -33,7 +33,7 @@ public final class RootwaterMystic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RootwaterMystic(final RootwaterMystic card) {
+    private RootwaterMystic(final RootwaterMystic card) {
         super(card);
     }
 

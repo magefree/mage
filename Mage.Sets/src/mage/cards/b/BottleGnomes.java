@@ -26,7 +26,7 @@ public final class BottleGnomes extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new SacrificeSourceCost()));
     }
 
-    public BottleGnomes(final BottleGnomes card) {
+    private BottleGnomes(final BottleGnomes card) {
         super(card);
     }
 

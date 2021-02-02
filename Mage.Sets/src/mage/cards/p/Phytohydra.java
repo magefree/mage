@@ -33,7 +33,7 @@ public final class Phytohydra extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhytohydraEffect()));
     }
 
-    public Phytohydra(final Phytohydra card) {
+    private Phytohydra(final Phytohydra card) {
         super(card);
     }
 

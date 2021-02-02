@@ -36,7 +36,7 @@ public final class AetherSpellbomb extends CardImpl {
 
     }
 
-    public AetherSpellbomb(final AetherSpellbomb card) {
+    private AetherSpellbomb(final AetherSpellbomb card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class GrovetenderDruids extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GrovetenderDruidsEffect(), false));
     }
 
-    public GrovetenderDruids(final GrovetenderDruids card) {
+    private GrovetenderDruids(final GrovetenderDruids card) {
         super(card);
     }
 

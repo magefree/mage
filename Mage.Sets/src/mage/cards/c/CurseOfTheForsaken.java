@@ -42,7 +42,7 @@ public final class CurseOfTheForsaken extends CardImpl {
 
     }
 
-    public CurseOfTheForsaken(final CurseOfTheForsaken card) {
+    private CurseOfTheForsaken(final CurseOfTheForsaken card) {
         super(card);
     }
 

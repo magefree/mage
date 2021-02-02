@@ -33,7 +33,7 @@ public final class LotusBlossom extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LotusBlossom(final LotusBlossom card) {
+    private LotusBlossom(final LotusBlossom card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class HowlingWolf extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
     }
 
-    public HowlingWolf(final HowlingWolf card) {
+    private HowlingWolf(final HowlingWolf card) {
         super(card);
     }
 

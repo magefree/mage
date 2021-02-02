@@ -26,7 +26,7 @@ public final class BoulderSalvo extends CardImpl {
         addAbility(new SurgeAbility(this, "{1}{R}"));
     }
 
-    public BoulderSalvo(final BoulderSalvo card) {
+    private BoulderSalvo(final BoulderSalvo card) {
         super(card);
     }
 

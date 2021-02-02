@@ -35,7 +35,7 @@ public final class GhastlyHaunting extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
     }
 
-    public GhastlyHaunting(final GhastlyHaunting card) {
+    private GhastlyHaunting(final GhastlyHaunting card) {
         super(card);
     }
 

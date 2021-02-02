@@ -31,7 +31,7 @@ public final class LandbindRitual extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter, 2)));
     }
 
-    public LandbindRitual(final LandbindRitual card) {
+    private LandbindRitual(final LandbindRitual card) {
         super(card);
     }
 

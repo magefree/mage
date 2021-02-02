@@ -37,7 +37,7 @@ public final class FightOrFlight extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new FightOrFlightEffect(), TargetController.OPPONENT, false));
     }
 
-    public FightOrFlight(final FightOrFlight card) {
+    private FightOrFlight(final FightOrFlight card) {
         super(card);
     }
 

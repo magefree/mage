@@ -43,7 +43,7 @@ public final class KrosanVerge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KrosanVerge(final KrosanVerge card) {
+    private KrosanVerge(final KrosanVerge card) {
         super(card);
     }
 

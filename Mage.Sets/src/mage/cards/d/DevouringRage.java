@@ -47,7 +47,7 @@ public final class DevouringRage extends CardImpl {
 
     }
 
-    public DevouringRage(final DevouringRage card) {
+    private DevouringRage(final DevouringRage card) {
         super(card);
     }
 

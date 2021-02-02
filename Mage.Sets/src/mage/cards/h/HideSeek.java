@@ -41,7 +41,7 @@ public final class HideSeek extends SplitCard {
 
     }
 
-    public HideSeek(final HideSeek card) {
+    private HideSeek(final HideSeek card) {
         super(card);
     }
 

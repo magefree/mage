@@ -22,7 +22,7 @@ public final class SavannahLions extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public SavannahLions(final SavannahLions card) {
+    private SavannahLions(final SavannahLions card) {
         super(card);
     }
 

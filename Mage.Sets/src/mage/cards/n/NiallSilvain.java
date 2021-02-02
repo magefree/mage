@@ -34,7 +34,7 @@ public final class NiallSilvain extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NiallSilvain(final NiallSilvain card) {
+    private NiallSilvain(final NiallSilvain card) {
         super(card);
     }
 

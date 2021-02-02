@@ -22,7 +22,7 @@ public final class ForcedRetreat extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ForcedRetreat(final ForcedRetreat card) {
+    private ForcedRetreat(final ForcedRetreat card) {
         super(card);
     }
 

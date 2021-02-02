@@ -33,7 +33,7 @@ public final class SeaGateWreckage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeaGateWreckage(final SeaGateWreckage card) {
+    private SeaGateWreckage(final SeaGateWreckage card) {
         super(card);
     }
 

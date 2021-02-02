@@ -35,7 +35,7 @@ public final class SpiritOfTheLabyrinth extends CardImpl {
         
     }
 
-    public SpiritOfTheLabyrinth(final SpiritOfTheLabyrinth card) {
+    private SpiritOfTheLabyrinth(final SpiritOfTheLabyrinth card) {
         super(card);
     }
 

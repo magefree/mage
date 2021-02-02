@@ -24,7 +24,7 @@ public final class FateForgotten extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
-    public FateForgotten(final FateForgotten card) {
+    private FateForgotten(final FateForgotten card) {
         super(card);
     }
 

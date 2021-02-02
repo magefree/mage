@@ -45,7 +45,7 @@ public final class FalkenrathAristocrat extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FalkenrathAristocrat(final FalkenrathAristocrat card) {
+    private FalkenrathAristocrat(final FalkenrathAristocrat card) {
         super(card);
     }
 

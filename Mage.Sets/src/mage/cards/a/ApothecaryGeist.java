@@ -47,7 +47,7 @@ public final class ApothecaryGeist extends CardImpl {
                 "When {this} enters the battlefield, if you control another Spirit, you gain 3 life."));
     }
 
-    public ApothecaryGeist(final ApothecaryGeist card) {
+    private ApothecaryGeist(final ApothecaryGeist card) {
         super(card);
     }
 

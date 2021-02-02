@@ -25,7 +25,7 @@ public final class AshcoatBear extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
     }
 
-    public AshcoatBear(final AshcoatBear card) {
+    private AshcoatBear(final AshcoatBear card) {
         super(card);
     }
 

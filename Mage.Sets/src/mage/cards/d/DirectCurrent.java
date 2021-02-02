@@ -26,7 +26,7 @@ public final class DirectCurrent extends CardImpl {
 
     }
 
-    public DirectCurrent(final DirectCurrent card) {
+    private DirectCurrent(final DirectCurrent card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class Conflagrate extends CardImpl {
 
     }
 
-    public Conflagrate(final Conflagrate card) {
+    private Conflagrate(final Conflagrate card) {
         super(card);
     }
 

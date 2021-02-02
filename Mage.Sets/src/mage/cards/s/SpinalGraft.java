@@ -46,7 +46,7 @@ public final class SpinalGraft extends CardImpl {
         this.addAbility(new SpinalGraftTriggeredAbility());
     }
 
-    public SpinalGraft(final SpinalGraft card) {
+    private SpinalGraft(final SpinalGraft card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class BlightsteelColossus extends CardImpl {
         this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new RevealAndShuffleIntoLibrarySourceEffect()));
     }
 
-    public BlightsteelColossus(final BlightsteelColossus card) {
+    private BlightsteelColossus(final BlightsteelColossus card) {
         super(card);
     }
 

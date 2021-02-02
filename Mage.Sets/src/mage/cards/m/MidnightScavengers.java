@@ -48,7 +48,7 @@ public final class MidnightScavengers extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("(Melds with Graf Rats.)")));
     }
 
-    public MidnightScavengers(final MidnightScavengers card) {
+    private MidnightScavengers(final MidnightScavengers card) {
         super(card);
     }
 

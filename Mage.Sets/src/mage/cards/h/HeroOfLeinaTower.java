@@ -39,7 +39,7 @@ public final class HeroOfLeinaTower extends CardImpl {
 
     }
 
-    public HeroOfLeinaTower(final HeroOfLeinaTower card) {
+    private HeroOfLeinaTower(final HeroOfLeinaTower card) {
         super(card);
     }
 

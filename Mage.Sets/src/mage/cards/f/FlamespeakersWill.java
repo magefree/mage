@@ -45,7 +45,7 @@ public final class FlamespeakersWill extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlamespeakersWill(final FlamespeakersWill card) {
+    private FlamespeakersWill(final FlamespeakersWill card) {
         super(card);
     }
 

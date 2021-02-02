@@ -20,7 +20,7 @@ public final class Oxidize extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
-    public Oxidize(final Oxidize card) {
+    private Oxidize(final Oxidize card) {
         super(card);
     }
 

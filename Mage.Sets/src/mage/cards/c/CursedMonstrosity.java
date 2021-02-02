@@ -36,7 +36,7 @@ public final class CursedMonstrosity extends CardImpl {
                 )));
     }
 
-    public CursedMonstrosity(final CursedMonstrosity card) {
+    private CursedMonstrosity(final CursedMonstrosity card) {
         super(card);
     }
 

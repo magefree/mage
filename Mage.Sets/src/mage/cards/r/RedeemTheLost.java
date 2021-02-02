@@ -26,7 +26,7 @@ public final class RedeemTheLost extends CardImpl {
         this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());
     }
 
-    public RedeemTheLost(final RedeemTheLost card) {
+    private RedeemTheLost(final RedeemTheLost card) {
         super(card);
     }
 

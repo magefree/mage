@@ -36,7 +36,7 @@ public final class EtherswornCanonist extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EtherswornCanonistReplacementEffect()), new EtherswornCanonistWatcher());
     }
 
-    public EtherswornCanonist(final EtherswornCanonist card) {
+    private EtherswornCanonist(final EtherswornCanonist card) {
         super(card);
     }
 

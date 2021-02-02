@@ -33,7 +33,7 @@ public final class IrrigationDitch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IrrigationDitch(final IrrigationDitch card) {
+    private IrrigationDitch(final IrrigationDitch card) {
         super(card);
     }
 

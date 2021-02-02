@@ -48,7 +48,7 @@ public final class MarblePriest extends CardImpl {
         ));
     }
 
-    public MarblePriest(final MarblePriest card) {
+    private MarblePriest(final MarblePriest card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class InventorsGoggles extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public InventorsGoggles(final InventorsGoggles card) {
+    private InventorsGoggles(final InventorsGoggles card) {
         super(card);
     }
 

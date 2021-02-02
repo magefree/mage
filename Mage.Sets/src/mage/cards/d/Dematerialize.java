@@ -28,7 +28,7 @@ public final class Dematerialize extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{U}{U}"), TimingRule.SORCERY));
     }
 
-    public Dematerialize(final Dematerialize card) {
+    private Dematerialize(final Dematerialize card) {
         super(card);
     }
 

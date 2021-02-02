@@ -28,7 +28,7 @@ public final class FatedInfatuation extends CardImpl {
         this.getSpellAbility().addHint(MyTurnHint.instance);
     }
 
-    public FatedInfatuation(final FatedInfatuation card) {
+    private FatedInfatuation(final FatedInfatuation card) {
         super(card);
     }
 

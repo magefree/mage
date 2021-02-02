@@ -28,7 +28,7 @@ public final class TrustyCompanion extends CardImpl {
         this.addAbility(new CantAttackAloneAbility());
     }
     
-    public TrustyCompanion(final TrustyCompanion card) {
+    private TrustyCompanion(final TrustyCompanion card) {
         super(card);
     }
 

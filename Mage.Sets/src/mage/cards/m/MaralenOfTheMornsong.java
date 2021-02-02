@@ -39,7 +39,7 @@ public final class MaralenOfTheMornsong extends CardImpl {
 
     }
 
-    public MaralenOfTheMornsong(final MaralenOfTheMornsong card) {
+    private MaralenOfTheMornsong(final MaralenOfTheMornsong card) {
         super(card);
     }
 

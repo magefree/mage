@@ -37,7 +37,7 @@ public final class ElvishRejuvenator extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ElvishRejuvenatorEffect(), false));
     }
 
-    public ElvishRejuvenator(final ElvishRejuvenator card) {
+    private ElvishRejuvenator(final ElvishRejuvenator card) {
         super(card);
     }
 

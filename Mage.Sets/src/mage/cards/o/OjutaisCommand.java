@@ -58,7 +58,7 @@ public final class OjutaisCommand extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
     }
 
-    public OjutaisCommand(final OjutaisCommand card) {
+    private OjutaisCommand(final OjutaisCommand card) {
         super(card);
     }
 

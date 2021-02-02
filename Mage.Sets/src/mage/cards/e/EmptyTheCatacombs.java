@@ -28,7 +28,7 @@ public final class EmptyTheCatacombs extends CardImpl {
         this.getSpellAbility().addEffect(new EmptyTheCatacombsEffect());
     }
 
-    public EmptyTheCatacombs(final EmptyTheCatacombs card) {
+    private EmptyTheCatacombs(final EmptyTheCatacombs card) {
         super(card);
     }
 

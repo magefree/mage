@@ -41,7 +41,7 @@ public final class FieryBombardment extends CardImpl {
 
     }
 
-    public FieryBombardment(final FieryBombardment card) {
+    private FieryBombardment(final FieryBombardment card) {
         super(card);
     }
 

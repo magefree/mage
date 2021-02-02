@@ -28,7 +28,7 @@ public final class SyphonLife extends CardImpl {
         this.addAbility(new RetraceAbility(this));
     }
 
-    public SyphonLife(final SyphonLife card) {
+    private SyphonLife(final SyphonLife card) {
         super(card);
     }
 

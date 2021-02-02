@@ -47,7 +47,7 @@ public final class SpectralPrison extends CardImpl {
         this.addAbility(new SpectralPrisonAbility());
     }
 
-    public SpectralPrison(final SpectralPrison card) {
+    private SpectralPrison(final SpectralPrison card) {
         super(card);
     }
 

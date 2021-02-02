@@ -33,7 +33,7 @@ public final class DesperateCastaways extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DesperateCastawaysEffect()));
     }
 
-    public DesperateCastaways(final DesperateCastaways card) {
+    private DesperateCastaways(final DesperateCastaways card) {
         super(card);
     }
 

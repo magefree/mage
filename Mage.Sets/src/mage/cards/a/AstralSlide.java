@@ -33,7 +33,7 @@ public final class AstralSlide extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AstralSlide(final AstralSlide card) {
+    private AstralSlide(final AstralSlide card) {
         super(card);
     }
 

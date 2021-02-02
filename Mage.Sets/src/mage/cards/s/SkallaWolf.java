@@ -45,7 +45,7 @@ public final class SkallaWolf extends CardImpl {
         ));
     }
 
-    public SkallaWolf(final SkallaWolf card) {
+    private SkallaWolf(final SkallaWolf card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class DragonscaleGeneral extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new BolsterEffect(new PermanentsOnBattlefieldCount(filter)), TargetController.YOU, false));
     }
 
-    public DragonscaleGeneral(final DragonscaleGeneral card) {
+    private DragonscaleGeneral(final DragonscaleGeneral card) {
         super(card);
     }
 

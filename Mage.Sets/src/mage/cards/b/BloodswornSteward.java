@@ -47,7 +47,7 @@ public final class BloodswornSteward extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodswornSteward(final BloodswornSteward card) {
+    private BloodswornSteward(final BloodswornSteward card) {
         super(card);
     }
 

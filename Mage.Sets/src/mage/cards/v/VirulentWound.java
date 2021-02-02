@@ -36,7 +36,7 @@ public final class VirulentWound extends CardImpl {
         this.getSpellAbility().addEffect(new VirulentWoundEffect());
     }
 
-    public VirulentWound(final VirulentWound card) {
+    private VirulentWound(final VirulentWound card) {
         super(card);
     }
 

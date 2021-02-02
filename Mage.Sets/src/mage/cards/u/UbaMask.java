@@ -34,7 +34,7 @@ public final class UbaMask extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UbaMaskPlayEffect()), new UbaMaskExiledCardsWatcher());
     }
 
-    public UbaMask(final UbaMask card) {
+    private UbaMask(final UbaMask card) {
         super(card);
     }
 

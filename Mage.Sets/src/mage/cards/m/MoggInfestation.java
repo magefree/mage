@@ -33,7 +33,7 @@ public final class MoggInfestation extends CardImpl {
 
     }
 
-    public MoggInfestation(final MoggInfestation card) {
+    private MoggInfestation(final MoggInfestation card) {
         super(card);
     }
 

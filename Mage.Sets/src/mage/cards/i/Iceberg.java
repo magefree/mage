@@ -38,7 +38,7 @@ public final class Iceberg extends CardImpl {
                 new CountersSourceCount(CounterType.ICE)));
     }
 
-    public Iceberg(final Iceberg card) {
+    private Iceberg(final Iceberg card) {
         super(card);
     }
 

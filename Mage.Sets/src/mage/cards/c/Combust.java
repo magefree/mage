@@ -44,7 +44,7 @@ public final class Combust extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Combust(final Combust card) {
+    private Combust(final Combust card) {
         super(card);
     }
 

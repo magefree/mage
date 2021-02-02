@@ -40,7 +40,7 @@ public final class VigilanteJustice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VigilanteJustice(final VigilanteJustice card) {
+    private VigilanteJustice(final VigilanteJustice card) {
         super(card);
     }
 

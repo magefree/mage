@@ -38,7 +38,7 @@ public final class PardicMiner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PardicMiner(final PardicMiner card) {
+    private PardicMiner(final PardicMiner card) {
         super(card);
     }
 

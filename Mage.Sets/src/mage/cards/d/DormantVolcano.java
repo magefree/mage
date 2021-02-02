@@ -46,7 +46,7 @@ public final class DormantVolcano extends CardImpl {
 
     }
 
-    public DormantVolcano(final DormantVolcano card) {
+    private DormantVolcano(final DormantVolcano card) {
         super(card);
     }
 

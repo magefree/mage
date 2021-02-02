@@ -34,7 +34,7 @@ public final class OpalineBracers extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public OpalineBracers(final OpalineBracers card) {
+    private OpalineBracers(final OpalineBracers card) {
         super(card);
     }
 

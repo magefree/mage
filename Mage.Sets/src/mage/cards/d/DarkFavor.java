@@ -38,7 +38,7 @@ public final class DarkFavor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 1, Duration.WhileOnBattlefield)));
     }
 
-    public DarkFavor(final DarkFavor card) {
+    private DarkFavor(final DarkFavor card) {
         super(card);
     }
 

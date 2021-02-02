@@ -30,7 +30,7 @@ public final class PainfulTruths extends CardImpl {
         getSpellAbility().addEffect(effect);
     }
 
-    public PainfulTruths(final PainfulTruths card) {
+    private PainfulTruths(final PainfulTruths card) {
         super(card);
     }
 

@@ -60,7 +60,7 @@ public final class Sunforger extends CardImpl {
 
     }
 
-    public Sunforger(final Sunforger card) {
+    private Sunforger(final Sunforger card) {
         super(card);
     }
 

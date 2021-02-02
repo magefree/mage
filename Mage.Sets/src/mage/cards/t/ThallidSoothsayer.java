@@ -34,7 +34,7 @@ public final class ThallidSoothsayer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThallidSoothsayer(final ThallidSoothsayer card) {
+    private ThallidSoothsayer(final ThallidSoothsayer card) {
         super(card);
     }
 

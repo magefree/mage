@@ -44,7 +44,7 @@ public final class ThoughtcutterAgent extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThoughtcutterAgent(final ThoughtcutterAgent card) {
+    private ThoughtcutterAgent(final ThoughtcutterAgent card) {
         super(card);
     }
 

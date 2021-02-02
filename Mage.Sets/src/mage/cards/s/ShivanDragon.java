@@ -27,7 +27,7 @@ public final class ShivanDragon extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public ShivanDragon(final ShivanDragon card) {
+    private ShivanDragon(final ShivanDragon card) {
         super(card);
     }
 

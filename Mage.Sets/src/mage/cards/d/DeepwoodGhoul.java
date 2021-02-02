@@ -29,7 +29,7 @@ public final class DeepwoodGhoul extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new PayLifeCost(2)));
    }
 
-    public DeepwoodGhoul(final DeepwoodGhoul card) {
+    private DeepwoodGhoul(final DeepwoodGhoul card) {
         super(card);
     }
 

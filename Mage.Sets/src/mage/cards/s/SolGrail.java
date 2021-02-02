@@ -30,7 +30,7 @@ public final class SolGrail extends CardImpl {
 
     }
 
-    public SolGrail(final SolGrail card) {
+    private SolGrail(final SolGrail card) {
         super(card);
     }
 

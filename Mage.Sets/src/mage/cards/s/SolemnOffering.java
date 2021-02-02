@@ -26,7 +26,7 @@ public final class SolemnOffering extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
     }
 
-    public SolemnOffering(final SolemnOffering card) {
+    private SolemnOffering(final SolemnOffering card) {
         super(card);
     }
 

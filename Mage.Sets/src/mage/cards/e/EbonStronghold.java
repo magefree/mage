@@ -33,7 +33,7 @@ public final class EbonStronghold extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EbonStronghold(final EbonStronghold card) {
+    private EbonStronghold(final EbonStronghold card) {
         super(card);
     }
 

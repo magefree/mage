@@ -36,7 +36,7 @@ public final class RuneTailKitsuneAscendant extends CardImpl {
         this.addAbility(new RuneTailKitsuneAscendantFlipAbility());
     }
 
-    public RuneTailKitsuneAscendant(final RuneTailKitsuneAscendant card) {
+    private RuneTailKitsuneAscendant(final RuneTailKitsuneAscendant card) {
         super(card);
     }
 

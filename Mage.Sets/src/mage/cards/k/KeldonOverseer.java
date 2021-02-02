@@ -48,7 +48,7 @@ public final class KeldonOverseer extends CardImpl {
                 "When {this} enters the battlefield, if it was kicked, gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn."));
     }
 
-    public KeldonOverseer(final KeldonOverseer card) {
+    private KeldonOverseer(final KeldonOverseer card) {
         super(card);
     }
 

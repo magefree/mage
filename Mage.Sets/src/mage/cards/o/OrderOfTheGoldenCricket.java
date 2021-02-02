@@ -36,7 +36,7 @@ public final class OrderOfTheGoldenCricket extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrderOfTheGoldenCricket(final OrderOfTheGoldenCricket card) {
+    private OrderOfTheGoldenCricket(final OrderOfTheGoldenCricket card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class PygmyRazorback extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public PygmyRazorback(final PygmyRazorback card) {
+    private PygmyRazorback(final PygmyRazorback card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class BeastWithin extends CardImpl {
         this.getSpellAbility().addEffect(new BeastWithinEffect());
     }
 
-    public BeastWithin(final BeastWithin card) {
+    private BeastWithin(final BeastWithin card) {
         super(card);
     }
 

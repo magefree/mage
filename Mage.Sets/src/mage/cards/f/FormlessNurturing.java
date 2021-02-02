@@ -30,7 +30,7 @@ public final class FormlessNurturing extends CardImpl {
         this.getSpellAbility().addEffect(new FormlessNurturingEffect());
     }
 
-    public FormlessNurturing(final FormlessNurturing card) {
+    private FormlessNurturing(final FormlessNurturing card) {
         super(card);
     }
 

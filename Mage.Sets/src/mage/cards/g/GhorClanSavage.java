@@ -26,7 +26,7 @@ public final class GhorClanSavage extends CardImpl {
         this.addAbility(new BloodthirstAbility(3));
     }
 
-    public GhorClanSavage(final GhorClanSavage card) {
+    private GhorClanSavage(final GhorClanSavage card) {
         super(card);
     }
 

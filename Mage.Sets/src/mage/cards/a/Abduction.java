@@ -46,7 +46,7 @@ public final class Abduction extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToBattlefieldUnderOwnerControlAttachedEffect(), "enchanted creature", false));
     }
 
-    public Abduction(final Abduction card) {
+    private Abduction(final Abduction card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class CallerOfThePack extends CardImpl {
 
     }
 
-    public CallerOfThePack(final CallerOfThePack card) {
+    private CallerOfThePack(final CallerOfThePack card) {
         super(card);
     }
 

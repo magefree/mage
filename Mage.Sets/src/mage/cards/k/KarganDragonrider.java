@@ -45,7 +45,7 @@ public final class KarganDragonrider extends CardImpl {
         ));
     }
 
-    public KarganDragonrider(final KarganDragonrider card) {
+    private KarganDragonrider(final KarganDragonrider card) {
         super(card);
     }
 

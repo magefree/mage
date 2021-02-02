@@ -32,7 +32,7 @@ public final class GeneralsKabuto extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.PreventDamage, new GenericManaCost(2)));
     }
 
-    public GeneralsKabuto(final GeneralsKabuto card) {
+    private GeneralsKabuto(final GeneralsKabuto card) {
         super(card);
     }
 

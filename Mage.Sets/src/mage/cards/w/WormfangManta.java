@@ -35,7 +35,7 @@ public final class WormfangManta extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new AddExtraTurnControllerEffect(), false));
     }
 
-    public WormfangManta(final WormfangManta card) {
+    private WormfangManta(final WormfangManta card) {
         super(card);
     }
 

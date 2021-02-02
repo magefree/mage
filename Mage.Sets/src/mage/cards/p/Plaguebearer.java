@@ -44,7 +44,7 @@ public final class Plaguebearer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Plaguebearer(final Plaguebearer card) {
+    private Plaguebearer(final Plaguebearer card) {
         super(card);
     }
 

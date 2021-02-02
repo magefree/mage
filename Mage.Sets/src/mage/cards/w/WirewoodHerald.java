@@ -37,7 +37,7 @@ public final class WirewoodHerald extends CardImpl {
                 true));
     }
 
-    public WirewoodHerald(final WirewoodHerald card) {
+    private WirewoodHerald(final WirewoodHerald card) {
         super(card);
     }
 

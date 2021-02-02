@@ -35,7 +35,7 @@ public final class Douse extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Douse(final Douse card) {
+    private Douse(final Douse card) {
         super(card);
     }
 

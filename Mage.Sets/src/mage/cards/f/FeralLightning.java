@@ -26,7 +26,7 @@ public final class FeralLightning extends CardImpl {
 
     }
 
-    public FeralLightning(final FeralLightning card) {
+    private FeralLightning(final FeralLightning card) {
         super(card);
     }
 

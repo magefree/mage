@@ -51,7 +51,7 @@ public final class RevokePrivileges extends CardImpl {
 
     }
 
-    public RevokePrivileges(final RevokePrivileges card) {
+    private RevokePrivileges(final RevokePrivileges card) {
         super(card);
     }
 

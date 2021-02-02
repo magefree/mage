@@ -24,7 +24,7 @@ public final class Scrubland extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public Scrubland(final Scrubland card) {
+    private Scrubland(final Scrubland card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class AggressiveMining extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), cost));
     }
 
-    public AggressiveMining(final AggressiveMining card) {
+    private AggressiveMining(final AggressiveMining card) {
         super(card);
     }
 

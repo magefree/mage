@@ -27,7 +27,7 @@ public final class SuddenStrength extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public SuddenStrength(final SuddenStrength card) {
+    private SuddenStrength(final SuddenStrength card) {
         super(card);
     }
 

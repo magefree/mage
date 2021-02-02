@@ -44,7 +44,7 @@ public final class LysAlanaBowmaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LysAlanaBowmaster(final LysAlanaBowmaster card) {
+    private LysAlanaBowmaster(final LysAlanaBowmaster card) {
         super(card);
     }
 

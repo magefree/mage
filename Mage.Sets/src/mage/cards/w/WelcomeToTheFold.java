@@ -38,7 +38,7 @@ public final class WelcomeToTheFold extends CardImpl {
 
     }
 
-    public WelcomeToTheFold(final WelcomeToTheFold card) {
+    private WelcomeToTheFold(final WelcomeToTheFold card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class WolverinePack extends CardImpl {
         this.addAbility(new RampageAbility(2));
     }
 
-    public WolverinePack(final WolverinePack card) {
+    private WolverinePack(final WolverinePack card) {
         super(card);
     }
 

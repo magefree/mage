@@ -46,7 +46,7 @@ public final class ThranGolem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThranGolem(final ThranGolem card) {
+    private ThranGolem(final ThranGolem card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class JungleBasin extends CardImpl {
 
     }
 
-    public JungleBasin(final JungleBasin card) {
+    private JungleBasin(final JungleBasin card) {
         super(card);
     }
 

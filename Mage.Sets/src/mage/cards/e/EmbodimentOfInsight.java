@@ -53,7 +53,7 @@ public final class EmbodimentOfInsight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EmbodimentOfInsight(final EmbodimentOfInsight card) {
+    private EmbodimentOfInsight(final EmbodimentOfInsight card) {
         super(card);
     }
 

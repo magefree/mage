@@ -31,7 +31,7 @@ public final class SkeletonArcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkeletonArcher(final SkeletonArcher card) {
+    private SkeletonArcher(final SkeletonArcher card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class WarReport extends CardImpl {
         this.getSpellAbility().addEffect(new WarReportEffect());
     }
 
-    public WarReport(final WarReport card) {
+    private WarReport(final WarReport card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class Venom extends CardImpl {
         this.addAbility(new VenomTriggeredAbility(effect));
     }
 
-    public Venom(final Venom card) {
+    private Venom(final Venom card) {
         super(card);
     }
 

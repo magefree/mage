@@ -36,7 +36,7 @@ public final class Abolish extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
-    public Abolish(final Abolish card) {
+    private Abolish(final Abolish card) {
         super(card);
     }
 

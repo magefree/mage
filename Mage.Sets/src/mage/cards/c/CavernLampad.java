@@ -42,7 +42,7 @@ public final class CavernLampad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CavernLampad(final CavernLampad card) {
+    private CavernLampad(final CavernLampad card) {
         super(card);
     }
 

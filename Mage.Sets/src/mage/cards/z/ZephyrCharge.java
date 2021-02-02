@@ -29,7 +29,7 @@ public final class ZephyrCharge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZephyrCharge(final ZephyrCharge card) {
+    private ZephyrCharge(final ZephyrCharge card) {
         super(card);
     }
 

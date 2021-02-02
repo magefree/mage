@@ -40,7 +40,7 @@ public final class ThawingGlaciers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThawingGlaciers(final ThawingGlaciers card) {
+    private ThawingGlaciers(final ThawingGlaciers card) {
         super(card);
     }
 

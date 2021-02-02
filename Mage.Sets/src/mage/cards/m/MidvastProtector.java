@@ -32,7 +32,7 @@ public final class MidvastProtector extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MidvastProtector(final MidvastProtector card) {
+    private MidvastProtector(final MidvastProtector card) {
         super(card);
     }
 

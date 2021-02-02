@@ -21,7 +21,7 @@ public final class Wargate extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryWithLessCMCPutInPlayEffect(new FilterPermanentCard()));
     }
 
-    public Wargate(final Wargate card) {
+    private Wargate(final Wargate card) {
         super(card);
     }
 

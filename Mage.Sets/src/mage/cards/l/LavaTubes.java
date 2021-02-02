@@ -48,7 +48,7 @@ public final class LavaTubes extends CardImpl {
         this.addAbility(ability4);
     }
 
-    public LavaTubes(final LavaTubes card) {
+    private LavaTubes(final LavaTubes card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public final class EzuriClawOfProgress extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EzuriClawOfProgress(final EzuriClawOfProgress card) {
+    private EzuriClawOfProgress(final EzuriClawOfProgress card) {
         super(card);
     }
 

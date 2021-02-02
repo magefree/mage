@@ -26,7 +26,7 @@ public final class ShuCavalry extends CardImpl {
         this.addAbility(HorsemanshipAbility.getInstance());
     }
 
-    public ShuCavalry(final ShuCavalry card) {
+    private ShuCavalry(final ShuCavalry card) {
         super(card);
     }
 

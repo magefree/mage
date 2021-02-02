@@ -40,7 +40,7 @@ public final class GriefTyrant extends CardImpl {
         
     }
     
-    public GriefTyrant(final GriefTyrant card) {
+    private GriefTyrant(final GriefTyrant card) {
         super(card);
     }
     

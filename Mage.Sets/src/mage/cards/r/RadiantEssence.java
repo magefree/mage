@@ -42,7 +42,7 @@ public final class RadiantEssence extends CardImpl {
             "{this} gets +1/+2 as long as an opponent controls a black permanent")));
     }
 
-    public RadiantEssence(final RadiantEssence card) {
+    private RadiantEssence(final RadiantEssence card) {
         super(card);
     }
 

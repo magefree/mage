@@ -59,7 +59,7 @@ public final class NettlingImp extends CardImpl {
 
     }
 
-    public NettlingImp(final NettlingImp card) {
+    private NettlingImp(final NettlingImp card) {
         super(card);
     }
 

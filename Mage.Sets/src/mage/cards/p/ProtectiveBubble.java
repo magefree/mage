@@ -39,7 +39,7 @@ public final class ProtectiveBubble extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public ProtectiveBubble(final ProtectiveBubble card) {
+    private ProtectiveBubble(final ProtectiveBubble card) {
         super(card);
     }
 

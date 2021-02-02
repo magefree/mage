@@ -32,7 +32,7 @@ public final class Hivestone extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public Hivestone(final Hivestone card) {
+    private Hivestone(final Hivestone card) {
         super(card);
     }
 

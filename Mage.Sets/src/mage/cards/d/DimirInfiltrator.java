@@ -29,7 +29,7 @@ public final class DimirInfiltrator extends CardImpl {
         this.addAbility(new TransmuteAbility("{1}{U}{B}"));
     }
 
-    public DimirInfiltrator(final DimirInfiltrator card) {
+    private DimirInfiltrator(final DimirInfiltrator card) {
         super(card);
     }
 

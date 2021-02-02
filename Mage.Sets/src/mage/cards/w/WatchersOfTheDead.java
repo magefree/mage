@@ -37,7 +37,7 @@ public final class WatchersOfTheDead extends CardImpl {
 
     }
 
-    public WatchersOfTheDead(final WatchersOfTheDead card) {
+    private WatchersOfTheDead(final WatchersOfTheDead card) {
         super(card);
     }
 

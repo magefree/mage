@@ -31,7 +31,7 @@ public final class BalothNull extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BalothNull(final BalothNull card) {
+    private BalothNull(final BalothNull card) {
         super(card);
     }
 

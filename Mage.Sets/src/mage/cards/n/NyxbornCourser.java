@@ -24,7 +24,7 @@ public final class NyxbornCourser extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public NyxbornCourser(final NyxbornCourser card) {
+    private NyxbornCourser(final NyxbornCourser card) {
         super(card);
     }
 

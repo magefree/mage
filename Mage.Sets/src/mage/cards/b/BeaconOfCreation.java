@@ -34,7 +34,7 @@ public final class BeaconOfCreation extends CardImpl {
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
     }
 
-    public BeaconOfCreation(final BeaconOfCreation card) {
+    private BeaconOfCreation(final BeaconOfCreation card) {
         super(card);
     }
 

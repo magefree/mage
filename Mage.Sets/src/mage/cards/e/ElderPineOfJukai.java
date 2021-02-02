@@ -34,7 +34,7 @@ public final class ElderPineOfJukai extends CardImpl {
         this.addAbility(new SoulshiftAbility(2));
     }
 
-    public ElderPineOfJukai(final ElderPineOfJukai card) {
+    private ElderPineOfJukai(final ElderPineOfJukai card) {
         super(card);
     }
 

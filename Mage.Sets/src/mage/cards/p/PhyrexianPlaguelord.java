@@ -47,7 +47,7 @@ public final class PhyrexianPlaguelord extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianPlaguelord(final PhyrexianPlaguelord card) {
+    private PhyrexianPlaguelord(final PhyrexianPlaguelord card) {
         super(card);
     }
 

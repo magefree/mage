@@ -28,7 +28,7 @@ public final class AlabasterDragon extends CardImpl {
         // When Alabaster Dragon dies, shuffle it into its owner's library.
         this.addAbility(new DiesSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));                                                                                          }
 
-    public AlabasterDragon(final AlabasterDragon card) {
+    private AlabasterDragon(final AlabasterDragon card) {
         super(card);
     }
 

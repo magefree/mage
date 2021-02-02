@@ -38,7 +38,7 @@ public final class KrosanDruid extends CardImpl {
         ));
     }
 
-    public KrosanDruid(final KrosanDruid card) {
+    private KrosanDruid(final KrosanDruid card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class GorehornMinotaurs extends CardImpl {
         this.addAbility(new BloodthirstAbility(2));
     }
 
-    public GorehornMinotaurs(final GorehornMinotaurs card) {
+    private GorehornMinotaurs(final GorehornMinotaurs card) {
         super(card);
     }
 

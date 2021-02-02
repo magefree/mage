@@ -33,7 +33,7 @@ public final class HealingSalve extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public HealingSalve(final HealingSalve card) {
+    private HealingSalve(final HealingSalve card) {
         super(card);
     }
 

@@ -57,7 +57,7 @@ public final class UginTheSpiritDragon extends CardImpl {
 
     }
 
-    public UginTheSpiritDragon(final UginTheSpiritDragon card) {
+    private UginTheSpiritDragon(final UginTheSpiritDragon card) {
         super(card);
     }
 

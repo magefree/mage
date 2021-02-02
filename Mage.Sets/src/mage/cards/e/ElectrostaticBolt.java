@@ -30,7 +30,7 @@ public final class ElectrostaticBolt extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ElectrostaticBolt(final ElectrostaticBolt card) {
+    private ElectrostaticBolt(final ElectrostaticBolt card) {
         super(card);
     }
 

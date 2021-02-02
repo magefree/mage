@@ -34,7 +34,7 @@ public final class BitterOrdeal extends CardImpl {
         this.addAbility(new GravestormAbility(), new GravestormWatcher());
     }
 
-    public BitterOrdeal(final BitterOrdeal card) {
+    private BitterOrdeal(final BitterOrdeal card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class CastleRaptors extends CardImpl {
             "As long as {this} is untapped, it gets +0/+2.")));
     }
 
-    public CastleRaptors(final CastleRaptors card) {
+    private CastleRaptors(final CastleRaptors card) {
         super(card);
     }
 

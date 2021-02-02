@@ -26,7 +26,7 @@ public final class BloodReckoning extends CardImpl {
         this.addAbility(new AttacksAllTriggeredAbility(effect, false, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PLAYER, true, true));
     }
 
-    public BloodReckoning(final BloodReckoning card) {
+    private BloodReckoning(final BloodReckoning card) {
         super(card);
     }
 

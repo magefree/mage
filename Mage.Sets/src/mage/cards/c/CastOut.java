@@ -46,7 +46,7 @@ public final class CastOut extends CardImpl {
 
     }
 
-    public CastOut(final CastOut card) {
+    private CastOut(final CastOut card) {
         super(card);
     }
 

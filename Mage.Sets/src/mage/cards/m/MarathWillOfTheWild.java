@@ -101,7 +101,7 @@ public final class MarathWillOfTheWild extends CardImpl {
         }
     }
 
-    public MarathWillOfTheWild(final MarathWillOfTheWild card) {
+    private MarathWillOfTheWild(final MarathWillOfTheWild card) {
         super(card);
     }
 

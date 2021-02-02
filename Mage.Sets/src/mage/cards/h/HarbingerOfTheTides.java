@@ -47,7 +47,7 @@ public final class HarbingerOfTheTides extends CardImpl {
 
     }
 
-    public HarbingerOfTheTides(final HarbingerOfTheTides card) {
+    private HarbingerOfTheTides(final HarbingerOfTheTides card) {
         super(card);
     }
 

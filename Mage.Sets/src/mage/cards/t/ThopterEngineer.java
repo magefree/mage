@@ -43,7 +43,7 @@ public final class ThopterEngineer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public ThopterEngineer(final ThopterEngineer card) {
+    private ThopterEngineer(final ThopterEngineer card) {
         super(card);
     }
 

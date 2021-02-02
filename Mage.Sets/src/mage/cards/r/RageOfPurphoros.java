@@ -31,7 +31,7 @@ public final class RageOfPurphoros extends CardImpl {
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
-    public RageOfPurphoros(final RageOfPurphoros card) {
+    private RageOfPurphoros(final RageOfPurphoros card) {
         super(card);
     }
 

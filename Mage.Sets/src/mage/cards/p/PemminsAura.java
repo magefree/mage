@@ -56,7 +56,7 @@ public final class PemminsAura extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PemminsAuraBoostEnchantedEffect(), new ManaCostsImpl("{1}")));
     }
 
-    public PemminsAura(final PemminsAura card) {
+    private PemminsAura(final PemminsAura card) {
         super(card);
     }
 

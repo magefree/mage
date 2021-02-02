@@ -44,7 +44,7 @@ public final class TidalControl extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TidalControl(final TidalControl card) {
+    private TidalControl(final TidalControl card) {
         super(card);
     }
 

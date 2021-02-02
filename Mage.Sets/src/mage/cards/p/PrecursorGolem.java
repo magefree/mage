@@ -44,7 +44,7 @@ public final class PrecursorGolem extends CardImpl {
         this.addAbility(new PrecursorGolemCopyTriggeredAbility());
     }
 
-    public PrecursorGolem(final PrecursorGolem card) {
+    private PrecursorGolem(final PrecursorGolem card) {
         super(card);
     }
 

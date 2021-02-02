@@ -32,7 +32,7 @@ public final class BenefactionOfRhonas extends CardImpl {
         getSpellAbility().addEffect(new BenefactionOfRhonasEffect());
     }
 
-    public BenefactionOfRhonas(final BenefactionOfRhonas card) {
+    private BenefactionOfRhonas(final BenefactionOfRhonas card) {
         super(card);
     }
 

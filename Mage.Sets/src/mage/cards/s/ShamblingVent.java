@@ -39,7 +39,7 @@ public final class ShamblingVent extends CardImpl {
                 new ShamblingVentToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{W}{B}")));
     }
 
-    public ShamblingVent(final ShamblingVent card) {
+    private ShamblingVent(final ShamblingVent card) {
         super(card);
     }
 

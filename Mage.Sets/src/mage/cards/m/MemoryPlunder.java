@@ -39,7 +39,7 @@ public final class MemoryPlunder extends CardImpl {
 
     }
 
-    public MemoryPlunder(final MemoryPlunder card) {
+    private MemoryPlunder(final MemoryPlunder card) {
         super(card);
     }
 

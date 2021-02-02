@@ -37,7 +37,7 @@ public final class Twitch extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Twitch(final Twitch card) {
+    private Twitch(final Twitch card) {
         super(card);
     }
 

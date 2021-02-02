@@ -24,7 +24,7 @@ public final class Omen extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Omen(final Omen card) {
+    private Omen(final Omen card) {
         super(card);
     }
 

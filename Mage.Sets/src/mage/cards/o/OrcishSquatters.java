@@ -49,7 +49,7 @@ public final class OrcishSquatters extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrcishSquatters(final OrcishSquatters card) {
+    private OrcishSquatters(final OrcishSquatters card) {
         super(card);
     }
 

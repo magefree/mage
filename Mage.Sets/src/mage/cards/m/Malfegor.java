@@ -41,7 +41,7 @@ public final class Malfegor extends CardImpl {
 
     }
 
-    public Malfegor(final Malfegor card) {
+    private Malfegor(final Malfegor card) {
         super(card);
     }
 

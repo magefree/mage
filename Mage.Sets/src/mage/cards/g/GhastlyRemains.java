@@ -39,7 +39,7 @@ public final class GhastlyRemains extends CardImpl {
 
     }
 
-    public GhastlyRemains(final GhastlyRemains card) {
+    private GhastlyRemains(final GhastlyRemains card) {
         super(card);
     }
 

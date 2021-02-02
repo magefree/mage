@@ -56,7 +56,7 @@ public final class Degavolver extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public Degavolver(final Degavolver card) {
+    private Degavolver(final Degavolver card) {
         super(card);
     }
 

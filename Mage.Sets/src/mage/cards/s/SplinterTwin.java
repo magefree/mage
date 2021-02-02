@@ -48,7 +48,7 @@ public final class SplinterTwin extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
     }
 
-    public SplinterTwin(final SplinterTwin card) {
+    private SplinterTwin(final SplinterTwin card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class GiltspireAvenger extends CardImpl {
 
     }
 
-    public GiltspireAvenger(final GiltspireAvenger card) {
+    private GiltspireAvenger(final GiltspireAvenger card) {
         super(card);
     }
 

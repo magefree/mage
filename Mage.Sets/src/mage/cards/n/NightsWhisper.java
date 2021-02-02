@@ -23,7 +23,7 @@ public final class NightsWhisper extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
-    public NightsWhisper(final NightsWhisper card) {
+    private NightsWhisper(final NightsWhisper card) {
         super(card);
     }
 

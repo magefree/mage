@@ -26,7 +26,7 @@ public final class InfernalPlunge extends CardImpl {
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.RedMana(3)));
     }
 
-    public InfernalPlunge(final InfernalPlunge card) {
+    private InfernalPlunge(final InfernalPlunge card) {
         super(card);
     }
 

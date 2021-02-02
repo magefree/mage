@@ -39,7 +39,7 @@ public final class Foil extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Foil(final Foil card) {
+    private Foil(final Foil card) {
         super(card);
     }
 

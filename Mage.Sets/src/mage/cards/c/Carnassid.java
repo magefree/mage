@@ -32,7 +32,7 @@ public final class Carnassid extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }
 
-    public Carnassid(final Carnassid card) {
+    private Carnassid(final Carnassid card) {
         super(card);
     }
 

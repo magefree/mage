@@ -39,7 +39,7 @@ public final class PreeminentCaptain extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new PreeminentCaptainEffect(), true));
     }
 
-    public PreeminentCaptain(final PreeminentCaptain card) {
+    private PreeminentCaptain(final PreeminentCaptain card) {
         super(card);
     }
 

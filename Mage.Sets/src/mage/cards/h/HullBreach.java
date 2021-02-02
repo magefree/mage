@@ -42,7 +42,7 @@ public final class HullBreach extends CardImpl {
 
     }
 
-    public HullBreach(final HullBreach card) {
+    private HullBreach(final HullBreach card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class MoonEatingDog extends CardImpl {
         ));
     }
 
-    public MoonEatingDog(final MoonEatingDog card) {
+    private MoonEatingDog(final MoonEatingDog card) {
         super(card);
     }
 

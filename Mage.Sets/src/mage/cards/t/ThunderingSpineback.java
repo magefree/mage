@@ -43,7 +43,7 @@ public final class ThunderingSpineback extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DinosaurToken()), new ManaCostsImpl("{5}{G}")));
     }
 
-    public ThunderingSpineback(final ThunderingSpineback card) {
+    private ThunderingSpineback(final ThunderingSpineback card) {
         super(card);
     }
 

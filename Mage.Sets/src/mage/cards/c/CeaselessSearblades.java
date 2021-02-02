@@ -35,7 +35,7 @@ public final class CeaselessSearblades extends CardImpl {
         
     }
     
-    public CeaselessSearblades(final CeaselessSearblades card) {
+    private CeaselessSearblades(final CeaselessSearblades card) {
         super(card);
     }
 

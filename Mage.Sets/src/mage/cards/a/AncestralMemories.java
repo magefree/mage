@@ -23,7 +23,7 @@ public final class AncestralMemories extends CardImpl {
                 StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false));
     }
 
-    public AncestralMemories(final AncestralMemories card) {
+    private AncestralMemories(final AncestralMemories card) {
         super(card);
     }
 

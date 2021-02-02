@@ -39,7 +39,7 @@ public final class HostileDesert extends CardImpl {
         addAbility(ability);
     }
 
-    public HostileDesert(final HostileDesert card) {
+    private HostileDesert(final HostileDesert card) {
         super(card);
     }
 

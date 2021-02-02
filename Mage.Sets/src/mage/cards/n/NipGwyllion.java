@@ -25,7 +25,7 @@ public final class NipGwyllion extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public NipGwyllion(final NipGwyllion card) {
+    private NipGwyllion(final NipGwyllion card) {
         super(card);
     }
 

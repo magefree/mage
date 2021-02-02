@@ -31,7 +31,7 @@ public final class FlowstoneFlood extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public FlowstoneFlood(final FlowstoneFlood card) {
+    private FlowstoneFlood(final FlowstoneFlood card) {
         super(card);
     }
 

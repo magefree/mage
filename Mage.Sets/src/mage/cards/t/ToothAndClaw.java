@@ -24,7 +24,7 @@ public final class ToothAndClaw extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CarnivoreToken(), 1), new SacrificeTargetCost(new TargetControlledCreaturePermanent(2))));
     }
 
-    public ToothAndClaw(final ToothAndClaw card) {
+    private ToothAndClaw(final ToothAndClaw card) {
         super(card);
     }
 

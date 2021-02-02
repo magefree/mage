@@ -33,7 +33,7 @@ public final class NimReplica extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NimReplica(final NimReplica card) {
+    private NimReplica(final NimReplica card) {
         super(card);
     }
 

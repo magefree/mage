@@ -28,7 +28,7 @@ public final class KillingWave extends CardImpl {
         this.getSpellAbility().addEffect(new KillingWaveEffect());
     }
 
-    public KillingWave(final KillingWave card) {
+    private KillingWave(final KillingWave card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class KorCartographer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterBySubtypeCard(SubType.PLAINS)), true), true));
     }
 
-    public KorCartographer(final KorCartographer card) {
+    private KorCartographer(final KorCartographer card) {
         super(card);
     }
 

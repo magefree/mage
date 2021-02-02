@@ -33,7 +33,7 @@ public final class CoastlineChimera extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{1}{W}")));
     }
 
-    public CoastlineChimera(final CoastlineChimera card) {
+    private CoastlineChimera(final CoastlineChimera card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class VesselOfMalignity extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VesselOfMalignity(final VesselOfMalignity card) {
+    private VesselOfMalignity(final VesselOfMalignity card) {
         super(card);
     }
 

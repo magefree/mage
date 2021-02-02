@@ -48,7 +48,7 @@ public final class KinsbaileBorderguard extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new KithkinToken(), new AllCountersCount())));
     }
 
-    public KinsbaileBorderguard(final KinsbaileBorderguard card) {
+    private KinsbaileBorderguard(final KinsbaileBorderguard card) {
         super(card);
     }
 

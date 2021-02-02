@@ -39,7 +39,7 @@ public final class ShriekingGrotesque extends CardImpl {
             "if {B} was spent to cast this spell, target player discards a card."), new ManaSpentToCastWatcher());
     }
 
-    public ShriekingGrotesque(final ShriekingGrotesque card) {
+    private ShriekingGrotesque(final ShriekingGrotesque card) {
         super(card);
     }
 

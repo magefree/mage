@@ -40,7 +40,7 @@ public final class WarpedResearcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WarpedResearcher(final WarpedResearcher card) {
+    private WarpedResearcher(final WarpedResearcher card) {
         super(card);
     }
 

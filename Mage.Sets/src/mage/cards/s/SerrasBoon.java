@@ -54,7 +54,7 @@ public final class SerrasBoon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SerrasBoon(final SerrasBoon card) {
+    private SerrasBoon(final SerrasBoon card) {
         super(card);
     }
 

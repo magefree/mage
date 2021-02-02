@@ -33,7 +33,7 @@ public final class HavenwoodBattleground extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HavenwoodBattleground(final HavenwoodBattleground card) {
+    private HavenwoodBattleground(final HavenwoodBattleground card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class DrownyardBehemoth extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn)));
     }
 
-    public DrownyardBehemoth(final DrownyardBehemoth card) {
+    private DrownyardBehemoth(final DrownyardBehemoth card) {
         super(card);
     }
 

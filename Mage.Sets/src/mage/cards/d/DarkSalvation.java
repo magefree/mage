@@ -45,7 +45,7 @@ public final class DarkSalvation extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public DarkSalvation(final DarkSalvation card) {
+    private DarkSalvation(final DarkSalvation card) {
         super(card);
     }
 

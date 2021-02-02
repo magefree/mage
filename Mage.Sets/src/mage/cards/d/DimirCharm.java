@@ -57,7 +57,7 @@ public final class DimirCharm extends CardImpl {
         this.getSpellAbility().addMode(mode2);
     }
 
-    public DimirCharm(final DimirCharm card) {
+    private DimirCharm(final DimirCharm card) {
         super(card);
     }
 

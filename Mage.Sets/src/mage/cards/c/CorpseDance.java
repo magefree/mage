@@ -39,7 +39,7 @@ public final class CorpseDance extends CardImpl {
         this.getSpellAbility().addEffect(new CorpseDanceEffect());
     }
 
-    public CorpseDance(final CorpseDance card) {
+    private CorpseDance(final CorpseDance card) {
         super(card);
     }
 

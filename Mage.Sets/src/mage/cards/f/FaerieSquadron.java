@@ -40,7 +40,7 @@ public final class FaerieSquadron extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FaerieSquadron(final FaerieSquadron card) {
+    private FaerieSquadron(final FaerieSquadron card) {
         super(card);
     }
 

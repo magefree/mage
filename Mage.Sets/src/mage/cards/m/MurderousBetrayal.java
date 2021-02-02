@@ -46,7 +46,7 @@ public final class MurderousBetrayal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MurderousBetrayal(final MurderousBetrayal card) {
+    private MurderousBetrayal(final MurderousBetrayal card) {
         super(card);
     }
 

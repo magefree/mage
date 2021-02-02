@@ -46,7 +46,7 @@ public final class ScrapyardMongrel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScrapyardMongrel(final ScrapyardMongrel card) {
+    private ScrapyardMongrel(final ScrapyardMongrel card) {
         super(card);
     }
 

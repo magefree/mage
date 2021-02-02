@@ -61,7 +61,7 @@ public final class MagnigothTreefolk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagnigothTreefolk(final MagnigothTreefolk card) {
+    private MagnigothTreefolk(final MagnigothTreefolk card) {
         super(card);
     }
 

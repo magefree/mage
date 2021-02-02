@@ -30,7 +30,7 @@ public final class Denied extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Denied(final Denied card) {
+    private Denied(final Denied card) {
         super(card);
     }
 

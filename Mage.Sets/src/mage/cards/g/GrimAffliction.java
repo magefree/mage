@@ -24,7 +24,7 @@ public final class GrimAffliction extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public GrimAffliction(final GrimAffliction card) {
+    private GrimAffliction(final GrimAffliction card) {
         super(card);
     }
 

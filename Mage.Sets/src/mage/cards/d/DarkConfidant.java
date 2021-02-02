@@ -34,7 +34,7 @@ public final class DarkConfidant extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DarkConfidantEffect(), TargetController.YOU, false));
     }
 
-    public DarkConfidant(final DarkConfidant card) {
+    private DarkConfidant(final DarkConfidant card) {
         super(card);
     }
 

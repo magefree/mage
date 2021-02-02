@@ -50,7 +50,7 @@ public final class SowerOfTemptation extends CardImpl {
 
     }
 
-    public SowerOfTemptation(final SowerOfTemptation card) {
+    private SowerOfTemptation(final SowerOfTemptation card) {
         super(card);
     }
 

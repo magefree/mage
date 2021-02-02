@@ -39,7 +39,7 @@ public final class BalloonPeddler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BalloonPeddler(final BalloonPeddler card) {
+    private BalloonPeddler(final BalloonPeddler card) {
         super(card);
     }
 

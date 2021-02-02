@@ -34,7 +34,7 @@ public final class Ophiomancer extends CardImpl {
                 "At the beginning of each upkeep, if you control no Snakes, create a 1/1 black Snake creature token with deathtouch."));
     }
 
-    public Ophiomancer(final Ophiomancer card) {
+    private Ophiomancer(final Ophiomancer card) {
         super(card);
     }
 

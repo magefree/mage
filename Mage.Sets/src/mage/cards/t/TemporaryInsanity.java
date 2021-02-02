@@ -42,7 +42,7 @@ public final class TemporaryInsanity extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public TemporaryInsanity(final TemporaryInsanity card) {
+    private TemporaryInsanity(final TemporaryInsanity card) {
         super(card);
     }
 

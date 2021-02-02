@@ -31,7 +31,7 @@ public final class ThatcherRevolt extends CardImpl {
         this.getSpellAbility().addEffect(new ThatcherRevoltEffect());
     }
 
-    public ThatcherRevolt(final ThatcherRevolt card) {
+    private ThatcherRevolt(final ThatcherRevolt card) {
         super(card);
     }
 

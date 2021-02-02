@@ -38,7 +38,7 @@ public final class SigilOfDistinction extends CardImpl {
 
     }
 
-    public SigilOfDistinction(final SigilOfDistinction card) {
+    private SigilOfDistinction(final SigilOfDistinction card) {
         super(card);
     }
 

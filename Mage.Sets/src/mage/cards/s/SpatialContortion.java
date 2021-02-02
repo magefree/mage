@@ -23,7 +23,7 @@ public final class SpatialContortion extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SpatialContortion(final SpatialContortion card) {
+    private SpatialContortion(final SpatialContortion card) {
         super(card);
     }
 

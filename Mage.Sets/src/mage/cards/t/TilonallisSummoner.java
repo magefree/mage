@@ -46,7 +46,7 @@ public final class TilonallisSummoner extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new TilonallisSummonerEffect(), false).addHint(CitysBlessingHint.instance));
     }
 
-    public TilonallisSummoner(final TilonallisSummoner card) {
+    private TilonallisSummoner(final TilonallisSummoner card) {
         super(card);
     }
 

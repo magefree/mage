@@ -44,7 +44,7 @@ public final class GlyphKeeper extends CardImpl {
 
     }
 
-    public GlyphKeeper(final GlyphKeeper card) {
+    private GlyphKeeper(final GlyphKeeper card) {
         super(card);
     }
 

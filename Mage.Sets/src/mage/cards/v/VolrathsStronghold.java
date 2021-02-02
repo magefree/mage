@@ -42,7 +42,7 @@ public final class VolrathsStronghold extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VolrathsStronghold(final VolrathsStronghold card) {
+    private VolrathsStronghold(final VolrathsStronghold card) {
         super(card);
     }
 

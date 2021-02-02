@@ -42,7 +42,7 @@ public final class OrcishCaptain extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrcishCaptain(final OrcishCaptain card) {
+    private OrcishCaptain(final OrcishCaptain card) {
         super(card);
     }
 

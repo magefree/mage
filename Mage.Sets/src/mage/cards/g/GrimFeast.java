@@ -35,7 +35,7 @@ public final class GrimFeast extends CardImpl {
         this.addAbility(new GrimFeastTriggeredAbility());
     }
 
-    public GrimFeast(final GrimFeast card) {
+    private GrimFeast(final GrimFeast card) {
         super(card);
     }
 

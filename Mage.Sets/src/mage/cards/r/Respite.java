@@ -26,7 +26,7 @@ public final class Respite extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(new AttackingCreatureCount()));
     }
 
-    public Respite(final Respite card) {
+    private Respite(final Respite card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class BladeOfSelves extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4)));
     }
 
-    public BladeOfSelves(final BladeOfSelves card) {
+    private BladeOfSelves(final BladeOfSelves card) {
         super(card);
     }
 

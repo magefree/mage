@@ -33,7 +33,7 @@ public final class KokushoTheEveningStar extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new KokushoTheEveningStarEffect(), false));
     }
 
-    public KokushoTheEveningStar(final KokushoTheEveningStar card) {
+    private KokushoTheEveningStar(final KokushoTheEveningStar card) {
         super(card);
     }
 

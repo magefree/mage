@@ -29,7 +29,7 @@ public final class AngelicProtector extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new BoostSourceEffect(0, 3, Duration.EndOfTurn)));
     }
 
-    public AngelicProtector(final AngelicProtector card) {
+    private AngelicProtector(final AngelicProtector card) {
         super(card);
     }
 

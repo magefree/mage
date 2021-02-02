@@ -27,7 +27,7 @@ public final class ConquerorsPledge extends CardImpl {
                 "Create six 1/1 white Kor Soldier creature tokens. if this spell was kicked, create twelve of those tokens instead"));
     }
 
-    public ConquerorsPledge(final ConquerorsPledge card) {
+    private ConquerorsPledge(final ConquerorsPledge card) {
         super(card);
     }
 

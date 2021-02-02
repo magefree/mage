@@ -58,7 +58,7 @@ public final class CallousOppressor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CallousOppressor(final CallousOppressor card) {
+    private CallousOppressor(final CallousOppressor card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class BoilingSeas extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public BoilingSeas(final BoilingSeas card) {
+    private BoilingSeas(final BoilingSeas card) {
         super(card);
     }
 

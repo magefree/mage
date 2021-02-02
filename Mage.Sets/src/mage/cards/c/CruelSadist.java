@@ -53,7 +53,7 @@ public final class CruelSadist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CruelSadist(final CruelSadist card) {
+    private CruelSadist(final CruelSadist card) {
         super(card);
     }
 

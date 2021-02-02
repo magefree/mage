@@ -53,7 +53,7 @@ public final class IcatianMoneychanger extends CardImpl {
                 new GainLifeEffect(new CountersSourceCount(CounterType.CREDIT)), new SacrificeSourceCost(), new IsStepCondition(PhaseStep.UPKEEP), null));
     }
 
-    public IcatianMoneychanger(final IcatianMoneychanger card) {
+    private IcatianMoneychanger(final IcatianMoneychanger card) {
         super(card);
     }
 

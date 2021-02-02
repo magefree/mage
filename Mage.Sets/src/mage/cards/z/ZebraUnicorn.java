@@ -25,7 +25,7 @@ public final class ZebraUnicorn extends CardImpl {
         this.addAbility(new DealsDamageGainLifeSourceTriggeredAbility());
     }
 
-    public ZebraUnicorn(final ZebraUnicorn card) {
+    private ZebraUnicorn(final ZebraUnicorn card) {
         super(card);
     }
 

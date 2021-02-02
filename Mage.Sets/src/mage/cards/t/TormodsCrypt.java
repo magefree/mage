@@ -28,7 +28,7 @@ public final class TormodsCrypt extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TormodsCrypt(final TormodsCrypt card) {
+    private TormodsCrypt(final TormodsCrypt card) {
         super(card);
     }
 

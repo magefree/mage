@@ -45,7 +45,7 @@ public final class JaggedPoppet extends CardImpl {
 
     }
 
-    public JaggedPoppet(final JaggedPoppet card) {
+    private JaggedPoppet(final JaggedPoppet card) {
         super(card);
     }
 

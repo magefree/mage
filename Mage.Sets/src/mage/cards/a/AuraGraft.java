@@ -44,7 +44,7 @@ public final class AuraGraft extends CardImpl {
         this.getSpellAbility().addEffect(new MoveTargetAuraEffect());
     }
 
-    public AuraGraft(final AuraGraft card) {
+    private AuraGraft(final AuraGraft card) {
         super(card);
     }
 

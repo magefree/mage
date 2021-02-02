@@ -50,7 +50,7 @@ public final class ShadowAlleyDenizen extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShadowAlleyDenizen(final ShadowAlleyDenizen card) {
+    private ShadowAlleyDenizen(final ShadowAlleyDenizen card) {
         super(card);
     }
 

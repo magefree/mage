@@ -25,7 +25,7 @@ public final class CoiledTinviper extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public CoiledTinviper(final CoiledTinviper card) {
+    private CoiledTinviper(final CoiledTinviper card) {
         super(card);
     }
 

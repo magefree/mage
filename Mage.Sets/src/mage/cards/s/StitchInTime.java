@@ -27,7 +27,7 @@ public final class StitchInTime extends CardImpl {
 
     }
 
-    public StitchInTime(final StitchInTime card) {
+    private StitchInTime(final StitchInTime card) {
         super(card);
     }
 

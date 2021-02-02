@@ -28,7 +28,7 @@ public final class SearchWarrant extends CardImpl {
 
     }
 
-    public SearchWarrant(final SearchWarrant card) {
+    private SearchWarrant(final SearchWarrant card) {
         super(card);
     }
 

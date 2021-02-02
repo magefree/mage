@@ -36,7 +36,7 @@ public final class Pestilence extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl("{B}")));
     }
 
-    public Pestilence(final Pestilence card) {
+    private Pestilence(final Pestilence card) {
         super(card);
     }
 

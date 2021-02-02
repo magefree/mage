@@ -30,7 +30,7 @@ public final class RangersPath extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filter), true));
     }
 
-    public RangersPath(final RangersPath card) {
+    private RangersPath(final RangersPath card) {
         super(card);
     }
 

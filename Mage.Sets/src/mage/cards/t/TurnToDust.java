@@ -32,7 +32,7 @@ public final class TurnToDust extends CardImpl {
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.GreenMana(1)));
     }
 
-    public TurnToDust(final TurnToDust card) {
+    private TurnToDust(final TurnToDust card) {
         super(card);
     }
 

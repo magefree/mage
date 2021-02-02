@@ -27,7 +27,7 @@ public final class RivalsDuel extends CardImpl {
 
     }
 
-    public RivalsDuel(final RivalsDuel card) {
+    private RivalsDuel(final RivalsDuel card) {
         super(card);
     }
 

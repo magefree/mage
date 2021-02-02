@@ -43,7 +43,7 @@ public final class CrabUmbra extends CardImpl {
         this.addAbility(new TotemArmorAbility());
     }
 
-    public CrabUmbra(final CrabUmbra card) {
+    private CrabUmbra(final CrabUmbra card) {
         super(card);
     }
 

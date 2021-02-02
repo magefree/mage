@@ -56,7 +56,7 @@ public final class TiborAndLumia extends CardImpl {
 
     }
 
-    public TiborAndLumia(final TiborAndLumia card) {
+    private TiborAndLumia(final TiborAndLumia card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class StampedingHorncrest extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public StampedingHorncrest(final StampedingHorncrest card) {
+    private StampedingHorncrest(final StampedingHorncrest card) {
         super(card);
     }
 

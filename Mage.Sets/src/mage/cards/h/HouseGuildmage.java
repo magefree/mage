@@ -46,7 +46,7 @@ public final class HouseGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HouseGuildmage(final HouseGuildmage card) {
+    private HouseGuildmage(final HouseGuildmage card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class VisionaryAugmenter extends CardImpl {
         this.addAbility(new FabricateAbility(2));
     }
 
-    public VisionaryAugmenter(final VisionaryAugmenter card) {
+    private VisionaryAugmenter(final VisionaryAugmenter card) {
         super(card);
     }
 

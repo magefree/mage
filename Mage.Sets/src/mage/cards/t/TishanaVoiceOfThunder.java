@@ -43,7 +43,7 @@ public final class TishanaVoiceOfThunder extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE))));
     }
 
-    public TishanaVoiceOfThunder(final TishanaVoiceOfThunder card) {
+    private TishanaVoiceOfThunder(final TishanaVoiceOfThunder card) {
         super(card);
     }
 

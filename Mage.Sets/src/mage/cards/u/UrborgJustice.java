@@ -32,7 +32,7 @@ public final class UrborgJustice extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public UrborgJustice(final UrborgJustice card) {
+    private UrborgJustice(final UrborgJustice card) {
         super(card);
     }
 

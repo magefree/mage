@@ -32,7 +32,7 @@ public final class Roterothopter extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{2}"), 2));
     }
 
-    public Roterothopter(final Roterothopter card) {
+    private Roterothopter(final Roterothopter card) {
         super(card);
     }
 

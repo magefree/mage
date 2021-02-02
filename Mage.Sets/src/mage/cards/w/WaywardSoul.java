@@ -32,7 +32,7 @@ public final class WaywardSoul extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibrarySourceEffect(true), new ManaCostsImpl("{U}")));
     }
 
-    public WaywardSoul(final WaywardSoul card) {
+    private WaywardSoul(final WaywardSoul card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class TheLadyOfTheMountain extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public TheLadyOfTheMountain(final TheLadyOfTheMountain card) {
+    private TheLadyOfTheMountain(final TheLadyOfTheMountain card) {
         super(card);
     }
 

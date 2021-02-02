@@ -39,7 +39,7 @@ public final class KaronasZealot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KaronasZealot(final KaronasZealot card) {
+    private KaronasZealot(final KaronasZealot card) {
         super(card);
     }
 

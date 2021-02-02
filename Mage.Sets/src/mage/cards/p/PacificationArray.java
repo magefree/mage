@@ -37,7 +37,7 @@ public final class PacificationArray extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PacificationArray(final PacificationArray card) {
+    private PacificationArray(final PacificationArray card) {
         super(card);
     }
 

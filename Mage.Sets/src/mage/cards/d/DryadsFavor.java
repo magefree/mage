@@ -41,7 +41,7 @@ public final class DryadsFavor extends CardImpl {
                 new GainAbilityAttachedEffect(new ForestwalkAbility(), AttachmentType.AURA)));
     }
 
-    public DryadsFavor(final DryadsFavor card) {
+    private DryadsFavor(final DryadsFavor card) {
         super(card);
     }
 

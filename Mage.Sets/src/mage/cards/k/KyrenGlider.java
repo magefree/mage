@@ -31,7 +31,7 @@ public final class KyrenGlider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KyrenGlider(final KyrenGlider card) {
+    private KyrenGlider(final KyrenGlider card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class SteadfastSentinel extends CardImpl {
     }
 
 
-    public SteadfastSentinel(final SteadfastSentinel card) {
+    private SteadfastSentinel(final SteadfastSentinel card) {
         super(card);
     }
 

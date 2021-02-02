@@ -28,7 +28,7 @@ public final class ThunderThrashElder extends CardImpl {
         this.addAbility(new DevourAbility(DevourFactor.Devour3));
     }
 
-    public ThunderThrashElder(final ThunderThrashElder card) {
+    private ThunderThrashElder(final ThunderThrashElder card) {
         super(card);
     }
 

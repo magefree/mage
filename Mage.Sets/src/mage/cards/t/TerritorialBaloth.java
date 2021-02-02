@@ -27,7 +27,7 @@ public final class TerritorialBaloth extends CardImpl {
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public TerritorialBaloth(final TerritorialBaloth card) {
+    private TerritorialBaloth(final TerritorialBaloth card) {
         super(card);
     }
 

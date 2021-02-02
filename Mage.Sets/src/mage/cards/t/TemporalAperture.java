@@ -37,7 +37,7 @@ public final class TemporalAperture extends CardImpl {
 
     }
 
-    public TemporalAperture(final TemporalAperture card) {
+    private TemporalAperture(final TemporalAperture card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public final class SnapcasterMage extends CardImpl {
 
     }
 
-    public SnapcasterMage(final SnapcasterMage card) {
+    private SnapcasterMage(final SnapcasterMage card) {
         super(card);
     }
 

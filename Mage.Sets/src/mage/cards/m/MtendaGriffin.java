@@ -57,7 +57,7 @@ public final class MtendaGriffin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MtendaGriffin(final MtendaGriffin card) {
+    private MtendaGriffin(final MtendaGriffin card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class NullChamber extends CardImpl {
 
     }
 
-    public NullChamber(final NullChamber card) {
+    private NullChamber(final NullChamber card) {
         super(card);
     }
 

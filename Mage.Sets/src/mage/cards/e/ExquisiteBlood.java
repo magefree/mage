@@ -26,7 +26,7 @@ public final class ExquisiteBlood extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ExquisiteBlood(final ExquisiteBlood card) {
+    private ExquisiteBlood(final ExquisiteBlood card) {
         super(card);
     }
 

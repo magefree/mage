@@ -58,7 +58,7 @@ public final class ChandraPyromaster extends CardImpl {
 
     }
 
-    public ChandraPyromaster(final ChandraPyromaster card) {
+    private ChandraPyromaster(final ChandraPyromaster card) {
         super(card);
     }
 

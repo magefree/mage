@@ -32,7 +32,7 @@ public final class GraveTitan extends CardImpl {
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 2)));
     }
 
-    public GraveTitan(final GraveTitan card) {
+    private GraveTitan(final GraveTitan card) {
         super(card);
     }
 

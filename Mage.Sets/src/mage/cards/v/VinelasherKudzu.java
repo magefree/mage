@@ -31,7 +31,7 @@ public final class VinelasherKudzu extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new FilterControlledLandPermanent("a land"), false, null, true));
     }
 
-    public VinelasherKudzu(final VinelasherKudzu card) {
+    private VinelasherKudzu(final VinelasherKudzu card) {
         super(card);
     }
 

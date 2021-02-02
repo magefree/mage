@@ -49,7 +49,7 @@ public final class RegalBehemoth extends CardImpl {
                 effect, new FilterControlledLandPermanent("you tap a land")));
     }
 
-    public RegalBehemoth(final RegalBehemoth card) {
+    private RegalBehemoth(final RegalBehemoth card) {
         super(card);
     }
 

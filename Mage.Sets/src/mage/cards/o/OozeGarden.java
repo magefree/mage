@@ -44,7 +44,7 @@ public final class OozeGarden extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OozeGarden(final OozeGarden card) {
+    private OozeGarden(final OozeGarden card) {
         super(card);
     }
 

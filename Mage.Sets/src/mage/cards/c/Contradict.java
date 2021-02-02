@@ -26,7 +26,7 @@ public final class Contradict extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Contradict(final Contradict card) {
+    private Contradict(final Contradict card) {
         super(card);
     }
 

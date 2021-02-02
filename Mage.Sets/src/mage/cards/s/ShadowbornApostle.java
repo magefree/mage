@@ -51,7 +51,7 @@ public final class ShadowbornApostle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShadowbornApostle(final ShadowbornApostle card) {
+    private ShadowbornApostle(final ShadowbornApostle card) {
         super(card);
     }
 

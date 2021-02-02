@@ -45,7 +45,7 @@ public final class SkywatcherAdept extends LevelerCard {
         setMaxLevelCounters(3);
     }
 
-    public SkywatcherAdept(final SkywatcherAdept card) {
+    private SkywatcherAdept(final SkywatcherAdept card) {
         super(card);
     }
 

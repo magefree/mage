@@ -35,7 +35,7 @@ public final class RendFlesh extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public RendFlesh(final RendFlesh card) {
+    private RendFlesh(final RendFlesh card) {
         super(card);
     }
 

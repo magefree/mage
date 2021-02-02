@@ -30,7 +30,7 @@ public final class IntruderAlarm extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(new UntapAllEffect(FILTER_PERMANENT_CREATURES), new FilterCreaturePermanent("a creature")));
     }
 
-    public IntruderAlarm(final IntruderAlarm card) {
+    private IntruderAlarm(final IntruderAlarm card) {
         super(card);
     }
 

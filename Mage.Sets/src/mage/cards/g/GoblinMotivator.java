@@ -43,7 +43,7 @@ public final class GoblinMotivator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinMotivator(final GoblinMotivator card) {
+    private GoblinMotivator(final GoblinMotivator card) {
         super(card);
     }
 

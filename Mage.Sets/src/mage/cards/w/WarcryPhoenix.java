@@ -43,7 +43,7 @@ public final class WarcryPhoenix extends CardImpl {
                 3, StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
-    public WarcryPhoenix(final WarcryPhoenix card) {
+    private WarcryPhoenix(final WarcryPhoenix card) {
         super(card);
     }
 

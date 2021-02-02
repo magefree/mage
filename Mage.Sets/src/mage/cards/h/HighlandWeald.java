@@ -27,7 +27,7 @@ public final class HighlandWeald extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public HighlandWeald(final HighlandWeald card) {
+    private HighlandWeald(final HighlandWeald card) {
         super(card);
     }
 

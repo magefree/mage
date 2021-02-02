@@ -36,7 +36,7 @@ public final class FourthBridgeProwler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FourthBridgeProwler(final FourthBridgeProwler card) {
+    private FourthBridgeProwler(final FourthBridgeProwler card) {
         super(card);
     }
 

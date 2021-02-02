@@ -44,7 +44,7 @@ public final class CryptolithFragment extends CardImpl {
                 "At the beginning of your upkeep, if each player has 10 or less life, transform Cryptolith Fragment."));
     }
 
-    public CryptolithFragment(final CryptolithFragment card) {
+    private CryptolithFragment(final CryptolithFragment card) {
         super(card);
     }
 

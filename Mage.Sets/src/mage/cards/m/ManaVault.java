@@ -47,7 +47,7 @@ public final class ManaVault extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(3), new TapSourceCost()));
     }
 
-    public ManaVault(final ManaVault card) {
+    private ManaVault(final ManaVault card) {
         super(card);
     }
 

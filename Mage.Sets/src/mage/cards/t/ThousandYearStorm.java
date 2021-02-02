@@ -39,7 +39,7 @@ public final class ThousandYearStorm extends CardImpl {
         this.addAbility(new ThousandYearStormAbility(), new ThousandYearStormWatcher());
     }
 
-    public ThousandYearStorm(final ThousandYearStorm card) {
+    private ThousandYearStorm(final ThousandYearStorm card) {
         super(card);
     }
 

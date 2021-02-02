@@ -28,7 +28,7 @@ public final class SharedTriumph extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, false)));
     }
 
-    public SharedTriumph(final SharedTriumph card) {
+    private SharedTriumph(final SharedTriumph card) {
         super(card);
     }
 

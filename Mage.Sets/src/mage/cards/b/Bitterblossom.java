@@ -29,7 +29,7 @@ public final class Bitterblossom extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Bitterblossom(final Bitterblossom card) {
+    private Bitterblossom(final Bitterblossom card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class DowsingShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DowsingShaman(final DowsingShaman card) {
+    private DowsingShaman(final DowsingShaman card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class FiresOfUndeath extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{B}"), TimingRule.INSTANT));
     }
 
-    public FiresOfUndeath(final FiresOfUndeath card) {
+    private FiresOfUndeath(final FiresOfUndeath card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class BelligerentHatchling extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance(1)), filterWhiteSpell, false));
     }
 
-    public BelligerentHatchling(final BelligerentHatchling card) {
+    private BelligerentHatchling(final BelligerentHatchling card) {
         super(card);
     }
 

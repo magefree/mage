@@ -37,7 +37,7 @@ public final class GideonsResolve extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield)));
     }
 
-    public GideonsResolve(final GideonsResolve card) {
+    private GideonsResolve(final GideonsResolve card) {
         super(card);
     }
 

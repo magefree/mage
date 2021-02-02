@@ -33,7 +33,7 @@ public final class ProfitLoss extends SplitCard {
 
     }
 
-    public ProfitLoss(final ProfitLoss card) {
+    private ProfitLoss(final ProfitLoss card) {
         super(card);
     }
 

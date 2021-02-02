@@ -27,7 +27,7 @@ public final class ShadowbloodRidge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShadowbloodRidge(final ShadowbloodRidge card) {
+    private ShadowbloodRidge(final ShadowbloodRidge card) {
         super(card);
     }
 

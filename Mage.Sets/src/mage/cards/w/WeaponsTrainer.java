@@ -42,7 +42,7 @@ public final class WeaponsTrainer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public WeaponsTrainer(final WeaponsTrainer card) {
+    private WeaponsTrainer(final WeaponsTrainer card) {
         super(card);
     }
 

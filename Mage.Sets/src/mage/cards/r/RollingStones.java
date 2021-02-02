@@ -32,7 +32,7 @@ public final class RollingStones extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItDidntHaveDefenderAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
-    public RollingStones(final RollingStones card) {
+    private RollingStones(final RollingStones card) {
         super(card);
     }
 

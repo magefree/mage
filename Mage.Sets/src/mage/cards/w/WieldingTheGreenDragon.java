@@ -23,7 +23,7 @@ public final class WieldingTheGreenDragon extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WieldingTheGreenDragon(final WieldingTheGreenDragon card) {
+    private WieldingTheGreenDragon(final WieldingTheGreenDragon card) {
         super(card);
     }
 

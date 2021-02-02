@@ -26,7 +26,7 @@ public final class AleshasVanguard extends CardImpl {
         this.addAbility(new DashAbility(this, "{2}{B}"));
     }
 
-    public AleshasVanguard(final AleshasVanguard card) {
+    private AleshasVanguard(final AleshasVanguard card) {
         super(card);
     }
 

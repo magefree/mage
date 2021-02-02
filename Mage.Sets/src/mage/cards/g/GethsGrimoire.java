@@ -24,7 +24,7 @@ public final class GethsGrimoire extends CardImpl {
         this.addAbility(new DiscardsACardOpponentTriggeredAbility(drawTrigger, true));
     }
 
-    public GethsGrimoire(final GethsGrimoire card) {
+    private GethsGrimoire(final GethsGrimoire card) {
         super(card);
     }
 

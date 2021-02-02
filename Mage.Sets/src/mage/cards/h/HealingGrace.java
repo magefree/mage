@@ -30,7 +30,7 @@ public final class HealingGrace extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public HealingGrace(final HealingGrace card) {
+    private HealingGrace(final HealingGrace card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class SkarrganFirebird extends CardImpl {
                 null));
     }
 
-    public SkarrganFirebird(final SkarrganFirebird card) {
+    private SkarrganFirebird(final SkarrganFirebird card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class PleaForPower extends CardImpl {
         this.getSpellAbility().addEffect(new PleaForPowerEffect());
     }
 
-    public PleaForPower(final PleaForPower card) {
+    private PleaForPower(final PleaForPower card) {
         super(card);
     }
 

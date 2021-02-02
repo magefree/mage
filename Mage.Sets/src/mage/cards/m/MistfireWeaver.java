@@ -44,7 +44,7 @@ public final class MistfireWeaver extends CardImpl {
 
     }
 
-    public MistfireWeaver(final MistfireWeaver card) {
+    private MistfireWeaver(final MistfireWeaver card) {
         super(card);
     }
 

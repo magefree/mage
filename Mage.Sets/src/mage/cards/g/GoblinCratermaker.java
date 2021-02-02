@@ -57,7 +57,7 @@ public final class GoblinCratermaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinCratermaker(final GoblinCratermaker card) {
+    private GoblinCratermaker(final GoblinCratermaker card) {
         super(card);
     }
 

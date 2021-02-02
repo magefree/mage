@@ -31,7 +31,7 @@ public final class VialOfPoison extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VialOfPoison(final VialOfPoison card) {
+    private VialOfPoison(final VialOfPoison card) {
         super(card);
     }
 

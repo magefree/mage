@@ -28,7 +28,7 @@ public final class BogardanLancer extends CardImpl {
         this.addAbility(new FlankingAbility());
     }
 
-    public BogardanLancer(final BogardanLancer card) {
+    private BogardanLancer(final BogardanLancer card) {
         super(card);
     }
 

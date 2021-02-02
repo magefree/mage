@@ -55,7 +55,7 @@ public final class TriassicEgg extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TriassicEgg(final TriassicEgg card) {
+    private TriassicEgg(final TriassicEgg card) {
         super(card);
     }
 

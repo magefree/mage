@@ -43,7 +43,7 @@ public final class GodtrackerOfJund extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, true, rule, true));
     }
 
-    public GodtrackerOfJund(final GodtrackerOfJund card) {
+    private GodtrackerOfJund(final GodtrackerOfJund card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class TitansPresence extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TitansPresence(final TitansPresence card) {
+    private TitansPresence(final TitansPresence card) {
         super(card);
     }
 

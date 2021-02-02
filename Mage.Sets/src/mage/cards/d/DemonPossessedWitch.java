@@ -40,7 +40,7 @@ public final class DemonPossessedWitch extends CardImpl {
         this.addAbility(new DemonPossessedWitchAbility());
     }
 
-    public DemonPossessedWitch(final DemonPossessedWitch card) {
+    private DemonPossessedWitch(final DemonPossessedWitch card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class SoulcageFiend extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new LoseLifeAllPlayersEffect(3)));
     }
 
-    public SoulcageFiend(final SoulcageFiend card) {
+    private SoulcageFiend(final SoulcageFiend card) {
         super(card);
     }
 

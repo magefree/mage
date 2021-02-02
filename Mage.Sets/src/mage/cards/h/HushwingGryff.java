@@ -44,7 +44,7 @@ public final class HushwingGryff extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HushwingGryffEffect()));
     }
 
-    public HushwingGryff(final HushwingGryff card) {
+    private HushwingGryff(final HushwingGryff card) {
         super(card);
     }
 

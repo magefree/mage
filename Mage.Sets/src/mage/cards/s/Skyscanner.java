@@ -31,7 +31,7 @@ public final class Skyscanner extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public Skyscanner(final Skyscanner card) {
+    private Skyscanner(final Skyscanner card) {
         super(card);
     }
 

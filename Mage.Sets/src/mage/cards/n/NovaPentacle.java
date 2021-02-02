@@ -37,7 +37,7 @@ public final class NovaPentacle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NovaPentacle(final NovaPentacle card) {
+    private NovaPentacle(final NovaPentacle card) {
         super(card);
     }
 

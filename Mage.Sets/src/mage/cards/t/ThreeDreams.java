@@ -27,7 +27,7 @@ public final class ThreeDreams extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new ThreeDreamsTarget(), true, true));
     }
 
-    public ThreeDreams(final ThreeDreams card) {
+    private ThreeDreams(final ThreeDreams card) {
         super(card);
     }
 

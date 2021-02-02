@@ -59,7 +59,7 @@ public final class UmezawasJitte extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public UmezawasJitte(final UmezawasJitte card) {
+    private UmezawasJitte(final UmezawasJitte card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class GodsEyeGateToTheReikai extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new CreateTokenEffect(new SpiritToken(), 1)));
     }
 
-    public GodsEyeGateToTheReikai(final GodsEyeGateToTheReikai card) {
+    private GodsEyeGateToTheReikai(final GodsEyeGateToTheReikai card) {
         super(card);
     }
 

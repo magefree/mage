@@ -23,7 +23,7 @@ public final class HeadwaterSentries extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public HeadwaterSentries(final HeadwaterSentries card) {
+    private HeadwaterSentries(final HeadwaterSentries card) {
         super(card);
     }
 

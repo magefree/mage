@@ -33,7 +33,7 @@ public final class FontOfFertility extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FontOfFertility(final FontOfFertility card) {
+    private FontOfFertility(final FontOfFertility card) {
         super(card);
     }
 

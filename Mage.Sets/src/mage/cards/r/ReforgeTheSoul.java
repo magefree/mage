@@ -30,7 +30,7 @@ public final class ReforgeTheSoul extends CardImpl {
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{R}")));
     }
 
-    public ReforgeTheSoul(final ReforgeTheSoul card) {
+    private ReforgeTheSoul(final ReforgeTheSoul card) {
         super(card);
     }
 

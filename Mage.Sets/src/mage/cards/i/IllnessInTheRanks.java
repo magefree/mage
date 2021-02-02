@@ -31,7 +31,7 @@ public final class IllnessInTheRanks extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1,-1, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public IllnessInTheRanks(final IllnessInTheRanks card) {
+    private IllnessInTheRanks(final IllnessInTheRanks card) {
         super(card);
     }
 

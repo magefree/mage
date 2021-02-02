@@ -27,7 +27,7 @@ public final class CrawlingFilth extends CardImpl {
         this.addAbility(new SoulshiftAbility(5));
     }
 
-    public CrawlingFilth(final CrawlingFilth card) {
+    private CrawlingFilth(final CrawlingFilth card) {
         super(card);
     }
 

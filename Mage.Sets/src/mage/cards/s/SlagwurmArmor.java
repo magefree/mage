@@ -25,7 +25,7 @@ public final class SlagwurmArmor extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public SlagwurmArmor(final SlagwurmArmor card) {
+    private SlagwurmArmor(final SlagwurmArmor card) {
         super(card);
     }
 

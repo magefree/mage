@@ -22,7 +22,7 @@ public final class Cleanfall extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")));
     }
 
-    public Cleanfall(final Cleanfall card) {
+    private Cleanfall(final Cleanfall card) {
         super(card);
     }
 

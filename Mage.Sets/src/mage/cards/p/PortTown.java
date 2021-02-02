@@ -40,7 +40,7 @@ public final class PortTown extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public PortTown(final PortTown card) {
+    private PortTown(final PortTown card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class SafeholdSentry extends CardImpl {
         
     }
 
-    public SafeholdSentry(final SafeholdSentry card) {
+    private SafeholdSentry(final SafeholdSentry card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class CloseQuarters extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CloseQuarters(final CloseQuarters card) {
+    private CloseQuarters(final CloseQuarters card) {
         super(card);
     }
 

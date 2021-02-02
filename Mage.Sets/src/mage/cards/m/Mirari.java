@@ -33,7 +33,7 @@ public final class Mirari extends CardImpl {
 
     }
 
-    public Mirari(final Mirari card) {
+    private Mirari(final Mirari card) {
         super(card);
     }
 

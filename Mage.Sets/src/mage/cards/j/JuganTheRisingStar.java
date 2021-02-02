@@ -38,7 +38,7 @@ public final class JuganTheRisingStar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JuganTheRisingStar(final JuganTheRisingStar card) {
+    private JuganTheRisingStar(final JuganTheRisingStar card) {
         super(card);
     }
 

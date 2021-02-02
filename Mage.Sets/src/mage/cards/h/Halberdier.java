@@ -27,7 +27,7 @@ public final class Halberdier extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public Halberdier(final Halberdier card) {
+    private Halberdier(final Halberdier card) {
         super(card);
     }
 

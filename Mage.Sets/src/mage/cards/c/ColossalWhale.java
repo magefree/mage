@@ -45,7 +45,7 @@ public final class ColossalWhale extends CardImpl {
 
     }
 
-    public ColossalWhale(final ColossalWhale card) {
+    private ColossalWhale(final ColossalWhale card) {
         super(card);
     }
 

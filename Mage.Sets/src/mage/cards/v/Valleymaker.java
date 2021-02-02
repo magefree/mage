@@ -54,7 +54,7 @@ public final class Valleymaker extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public Valleymaker(final Valleymaker card) {
+    private Valleymaker(final Valleymaker card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class ArmoryAutomaton extends CardImpl {
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new ArmoryAutomatonEffect()));
     }
 
-    public ArmoryAutomaton(final ArmoryAutomaton card) {
+    private ArmoryAutomaton(final ArmoryAutomaton card) {
         super(card);
     }
 

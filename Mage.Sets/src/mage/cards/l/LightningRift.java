@@ -28,7 +28,7 @@ public final class LightningRift extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LightningRift(final LightningRift card) {
+    private LightningRift(final LightningRift card) {
         super(card);
     }
 

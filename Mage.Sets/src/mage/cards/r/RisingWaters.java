@@ -36,7 +36,7 @@ public final class RisingWaters extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new RisingWatersUntapEffect(), TargetController.ANY, false));
     }
 
-    public RisingWaters(final RisingWaters card) {
+    private RisingWaters(final RisingWaters card) {
         super(card);
     }
 

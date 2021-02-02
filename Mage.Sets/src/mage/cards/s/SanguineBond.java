@@ -27,7 +27,7 @@ public final class SanguineBond extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SanguineBond(final SanguineBond card) {
+    private SanguineBond(final SanguineBond card) {
         super(card);
     }
 

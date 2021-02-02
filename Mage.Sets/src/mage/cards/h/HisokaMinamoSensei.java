@@ -47,7 +47,7 @@ public final class HisokaMinamoSensei extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HisokaMinamoSensei(final HisokaMinamoSensei card) {
+    private HisokaMinamoSensei(final HisokaMinamoSensei card) {
         super(card);
     }
 

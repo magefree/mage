@@ -23,7 +23,7 @@ public final class PunctureBlast extends CardImpl {
         this.getSpellAbility().setRuleAtTheTop(false);
     }
 
-    public PunctureBlast(final PunctureBlast card) {
+    private PunctureBlast(final PunctureBlast card) {
         super(card);
     }
 

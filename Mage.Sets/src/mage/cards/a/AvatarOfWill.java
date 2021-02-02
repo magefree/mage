@@ -35,7 +35,7 @@ public final class AvatarOfWill extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public AvatarOfWill(final AvatarOfWill card) {
+    private AvatarOfWill(final AvatarOfWill card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class FinalJudgment extends CardImpl {
         this.getSpellAbility().addEffect(new ExileAllEffect(new FilterCreaturePermanent()));
     }
 
-    public FinalJudgment(final FinalJudgment card) {
+    private FinalJudgment(final FinalJudgment card) {
         super(card);
     }
 

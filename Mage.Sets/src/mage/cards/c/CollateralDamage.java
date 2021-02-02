@@ -28,7 +28,7 @@ public final class CollateralDamage extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
     }
 
-    public CollateralDamage(final CollateralDamage card) {
+    private CollateralDamage(final CollateralDamage card) {
         super(card);
     }
 

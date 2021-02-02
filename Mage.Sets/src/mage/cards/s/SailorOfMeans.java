@@ -29,7 +29,7 @@ public final class SailorOfMeans extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
     }
 
-    public SailorOfMeans(final SailorOfMeans card) {
+    private SailorOfMeans(final SailorOfMeans card) {
         super(card);
     }
 

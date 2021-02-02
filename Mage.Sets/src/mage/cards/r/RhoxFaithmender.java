@@ -39,7 +39,7 @@ public final class RhoxFaithmender extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RhoxFaithmenderEffect()));
     }
 
-    public RhoxFaithmender(final RhoxFaithmender card) {
+    private RhoxFaithmender(final RhoxFaithmender card) {
         super(card);
     }
 

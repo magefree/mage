@@ -35,7 +35,7 @@ public final class MishrasBauble extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MishrasBauble(final MishrasBauble card) {
+    private MishrasBauble(final MishrasBauble card) {
         super(card);
     }
 

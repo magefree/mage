@@ -52,7 +52,7 @@ public final class PrimordialHydra extends CardImpl {
 
     }
 
-    public PrimordialHydra(final PrimordialHydra card) {
+    private PrimordialHydra(final PrimordialHydra card) {
         super(card);
     }
 

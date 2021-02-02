@@ -29,7 +29,7 @@ public final class ScreamsOfTheDamned extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScreamsOfTheDamned(final ScreamsOfTheDamned card) {
+    private ScreamsOfTheDamned(final ScreamsOfTheDamned card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class TimberwatchElf extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TimberwatchElf(final TimberwatchElf card) {
+    private TimberwatchElf(final TimberwatchElf card) {
         super(card);
     }
 

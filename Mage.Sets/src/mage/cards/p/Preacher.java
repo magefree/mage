@@ -43,7 +43,7 @@ public final class Preacher extends CardImpl {
 
     }
 
-    public Preacher(final Preacher card) {
+    private Preacher(final Preacher card) {
         super(card);
     }
 

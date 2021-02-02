@@ -22,7 +22,7 @@ public final class RottedHystrix extends CardImpl {
         this.toughness = new MageInt(6);
     }
 
-    public RottedHystrix(final RottedHystrix card) {
+    private RottedHystrix(final RottedHystrix card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class VenomSliver extends CardImpl {
                         Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
-    public VenomSliver(final VenomSliver card) {
+    private VenomSliver(final VenomSliver card) {
         super(card);
     }
 

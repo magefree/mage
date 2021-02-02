@@ -28,7 +28,7 @@ public final class Humble extends CardImpl {
                 .setText("and becomes 0/1 until end of turn"));
     }
 
-    public Humble(final Humble card) {
+    private Humble(final Humble card) {
         super(card);
     }
 

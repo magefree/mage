@@ -40,7 +40,7 @@ public final class MagusOfTheWheel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagusOfTheWheel(final MagusOfTheWheel card) {
+    private MagusOfTheWheel(final MagusOfTheWheel card) {
         super(card);
     }
 

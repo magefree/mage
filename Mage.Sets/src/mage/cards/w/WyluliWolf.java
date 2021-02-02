@@ -34,7 +34,7 @@ public final class WyluliWolf extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WyluliWolf(final WyluliWolf card) {
+    private WyluliWolf(final WyluliWolf card) {
         super(card);
     }
 

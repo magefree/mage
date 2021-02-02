@@ -49,7 +49,7 @@ public final class TectonicEdge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TectonicEdge(final TectonicEdge card) {
+    private TectonicEdge(final TectonicEdge card) {
         super(card);
     }
 

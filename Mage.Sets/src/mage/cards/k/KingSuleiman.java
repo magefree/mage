@@ -43,7 +43,7 @@ public final class KingSuleiman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KingSuleiman(final KingSuleiman card) {
+    private KingSuleiman(final KingSuleiman card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class YukiOnna extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
     }
 
-    public YukiOnna(final YukiOnna card) {
+    private YukiOnna(final YukiOnna card) {
         super(card);
     }
 

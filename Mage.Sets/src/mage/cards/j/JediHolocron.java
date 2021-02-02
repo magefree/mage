@@ -57,7 +57,7 @@ public final class JediHolocron extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JediHolocron(final JediHolocron card) {
+    private JediHolocron(final JediHolocron card) {
         super(card);
     }
 

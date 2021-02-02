@@ -38,7 +38,7 @@ public final class Carapace extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new SacrificeSourceCost()));
     }
 
-    public Carapace(final Carapace card) {
+    private Carapace(final Carapace card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class HeirOfFalkenrath extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new DiscardCardCost()));
     }
 
-    public HeirOfFalkenrath(final HeirOfFalkenrath card) {
+    private HeirOfFalkenrath(final HeirOfFalkenrath card) {
         super(card);
     }
 

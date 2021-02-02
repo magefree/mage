@@ -27,7 +27,7 @@ public final class HapatrasMark extends CardImpl {
         getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
-    public HapatrasMark(final HapatrasMark card) {
+    private HapatrasMark(final HapatrasMark card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class AmprynTactician extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn)));
     }
 
-    public AmprynTactician(final AmprynTactician card) {
+    private AmprynTactician(final AmprynTactician card) {
         super(card);
     }
 

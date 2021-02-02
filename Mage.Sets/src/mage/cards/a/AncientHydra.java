@@ -38,7 +38,7 @@ public final class AncientHydra extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AncientHydra(final AncientHydra card) {
+    private AncientHydra(final AncientHydra card) {
         super(card);
     }
 

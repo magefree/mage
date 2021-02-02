@@ -49,7 +49,7 @@ public final class VeilOfSecrecy extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility(new ReturnToHandChosenControlledPermanentCost(new TargetControlledCreaturePermanent(filter))));
     }
 
-    public VeilOfSecrecy(final VeilOfSecrecy card) {
+    private VeilOfSecrecy(final VeilOfSecrecy card) {
         super(card);
     }
 

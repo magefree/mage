@@ -43,7 +43,7 @@ public final class PristineSkywise extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PristineSkywise(final PristineSkywise card) {
+    private PristineSkywise(final PristineSkywise card) {
         super(card);
     }
 

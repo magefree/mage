@@ -28,7 +28,7 @@ public final class ManaScrew extends CardImpl {
         this.addAbility(new ManaScrewAbility());
     }
 
-    public ManaScrew(final ManaScrew card) {
+    private ManaScrew(final ManaScrew card) {
         super(card);
     }
 

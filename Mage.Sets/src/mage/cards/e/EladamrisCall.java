@@ -28,7 +28,7 @@ public final class EladamrisCall extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));
     }
 
-    public EladamrisCall(final EladamrisCall card) {
+    private EladamrisCall(final EladamrisCall card) {
         super(card);
     }
 

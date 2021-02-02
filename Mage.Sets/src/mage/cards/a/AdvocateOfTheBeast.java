@@ -43,7 +43,7 @@ public final class AdvocateOfTheBeast extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AdvocateOfTheBeast(final AdvocateOfTheBeast card) {
+    private AdvocateOfTheBeast(final AdvocateOfTheBeast card) {
         super(card);
     }
 

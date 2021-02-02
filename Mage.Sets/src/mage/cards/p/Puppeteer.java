@@ -37,7 +37,7 @@ public final class Puppeteer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Puppeteer(final Puppeteer card) {
+    private Puppeteer(final Puppeteer card) {
         super(card);
     }
 

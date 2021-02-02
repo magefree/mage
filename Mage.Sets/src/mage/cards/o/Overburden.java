@@ -42,7 +42,7 @@ public final class Overburden extends CardImpl {
                 + " that player returns a land they control to its owner's hand."));
     }
 
-    public Overburden(final Overburden card) {
+    private Overburden(final Overburden card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class EyeForAnEye extends CardImpl {
         this.getSpellAbility().addEffect(new EyeForAnEyeEffect());
     }
 
-    public EyeForAnEye(final EyeForAnEye card) {
+    private EyeForAnEye(final EyeForAnEye card) {
         super(card);
     }
 

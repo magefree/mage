@@ -34,7 +34,7 @@ public final class VolcanicVision extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public VolcanicVision(final VolcanicVision card) {
+    private VolcanicVision(final VolcanicVision card) {
         super(card);
     }
 

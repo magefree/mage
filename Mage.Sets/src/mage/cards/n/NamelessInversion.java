@@ -37,7 +37,7 @@ public final class NamelessInversion extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public NamelessInversion(final NamelessInversion card) {
+    private NamelessInversion(final NamelessInversion card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class AwakenTheBear extends CardImpl {
 
     }
 
-    public AwakenTheBear(final AwakenTheBear card) {
+    private AwakenTheBear(final AwakenTheBear card) {
         super(card);
     }
 

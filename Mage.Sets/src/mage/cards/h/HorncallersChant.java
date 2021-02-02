@@ -24,7 +24,7 @@ public final class HorncallersChant extends CardImpl {
         this.getSpellAbility().addEffect(new PopulateEffect("then"));
     }
 
-    public HorncallersChant(final HorncallersChant card) {
+    private HorncallersChant(final HorncallersChant card) {
         super(card);
     }
 

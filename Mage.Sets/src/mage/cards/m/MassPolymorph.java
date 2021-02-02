@@ -33,7 +33,7 @@ public final class MassPolymorph extends CardImpl {
         this.getSpellAbility().addEffect(new MassPolymorphEffect());
     }
 
-    public MassPolymorph(final MassPolymorph card) {
+    private MassPolymorph(final MassPolymorph card) {
         super(card);
     }
 

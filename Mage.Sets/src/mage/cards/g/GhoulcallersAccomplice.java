@@ -35,7 +35,7 @@ public final class GhoulcallersAccomplice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhoulcallersAccomplice(final GhoulcallersAccomplice card) {
+    private GhoulcallersAccomplice(final GhoulcallersAccomplice card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class KamahlFistOfKrosa extends CardImpl {
 		this.addAbility(boostAbility);
     }
 
-    public KamahlFistOfKrosa(final KamahlFistOfKrosa card) {
+    private KamahlFistOfKrosa(final KamahlFistOfKrosa card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class CaveTiger extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
     }
 
-    public CaveTiger(final CaveTiger card) {
+    private CaveTiger(final CaveTiger card) {
         super(card);
     }
 

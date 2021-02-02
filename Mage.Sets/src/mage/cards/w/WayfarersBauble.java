@@ -34,7 +34,7 @@ public final class WayfarersBauble extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WayfarersBauble(final WayfarersBauble card) {
+    private WayfarersBauble(final WayfarersBauble card) {
         super(card);
     }
 

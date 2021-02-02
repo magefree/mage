@@ -34,7 +34,7 @@ public final class SilverchaseFox extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SilverchaseFox(final SilverchaseFox card) {
+    private SilverchaseFox(final SilverchaseFox card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class HiveMind extends CardImpl {
         this.addAbility(new HiveMindTriggeredAbility());
     }
 
-    public HiveMind(final HiveMind card) {
+    private HiveMind(final HiveMind card) {
         super(card);
     }
 

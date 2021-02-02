@@ -26,7 +26,7 @@ public final class TangleSpider extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public TangleSpider(final TangleSpider card) {
+    private TangleSpider(final TangleSpider card) {
         super(card);
     }
 

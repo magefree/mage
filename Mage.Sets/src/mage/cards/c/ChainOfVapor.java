@@ -34,7 +34,7 @@ public final class ChainOfVapor extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
-    public ChainOfVapor(final ChainOfVapor card) {
+    private ChainOfVapor(final ChainOfVapor card) {
         super(card);
     }
 

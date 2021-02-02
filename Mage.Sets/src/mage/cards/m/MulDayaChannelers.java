@@ -53,7 +53,7 @@ public final class MulDayaChannelers extends CardImpl {
 
     }
 
-    public MulDayaChannelers(final MulDayaChannelers card) {
+    private MulDayaChannelers(final MulDayaChannelers card) {
         super(card);
     }
 

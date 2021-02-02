@@ -48,7 +48,7 @@ public final class SultaiCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public SultaiCharm(final SultaiCharm card) {
+    private SultaiCharm(final SultaiCharm card) {
         super(card);
     }
 

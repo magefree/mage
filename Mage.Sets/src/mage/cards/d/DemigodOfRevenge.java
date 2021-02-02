@@ -43,7 +43,7 @@ public final class DemigodOfRevenge extends CardImpl {
         this.addAbility(new CastSourceTriggeredAbility(new DemigodOfRevengeReturnEffect()));
     }
 
-    public DemigodOfRevenge(final DemigodOfRevenge card) {
+    private DemigodOfRevenge(final DemigodOfRevenge card) {
         super(card);
     }
 

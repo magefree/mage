@@ -48,7 +48,7 @@ public final class LeadenFists extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LeadenFists(final LeadenFists card) {
+    private LeadenFists(final LeadenFists card) {
         super(card);
     }
 

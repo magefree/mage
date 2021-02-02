@@ -44,7 +44,7 @@ public final class HermeticStudy extends CardImpl {
             "Enchanted creature has \"{T}: This creature deals 1 damage to any target.\"")));
     }
 
-    public HermeticStudy(final HermeticStudy card) {
+    private HermeticStudy(final HermeticStudy card) {
         super(card);
     }
 

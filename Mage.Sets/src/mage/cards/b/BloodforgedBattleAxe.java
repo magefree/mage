@@ -42,7 +42,7 @@ public final class BloodforgedBattleAxe extends CardImpl {
 
     }
 
-    public BloodforgedBattleAxe(final BloodforgedBattleAxe card) {
+    private BloodforgedBattleAxe(final BloodforgedBattleAxe card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class Crevasse extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CrevasseEffect()));
     }
 
-    public Crevasse(final Crevasse card) {
+    private Crevasse(final Crevasse card) {
         super(card);
     }
 

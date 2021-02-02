@@ -33,7 +33,7 @@ public final class Skinwing extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(6)));
     }
 
-    public Skinwing(final Skinwing card) {
+    private Skinwing(final Skinwing card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class YawgmothsEdict extends CardImpl {
         this.addAbility(ability);
     }
 
-    public YawgmothsEdict(final YawgmothsEdict card) {
+    private YawgmothsEdict(final YawgmothsEdict card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class Scourglass extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Scourglass(final Scourglass card) {
+    private Scourglass(final Scourglass card) {
         super(card);
     }
 

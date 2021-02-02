@@ -36,7 +36,7 @@ public final class ScourgeOfFleets extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScourgeOfFleetsEffect(), false));
     }
 
-    public ScourgeOfFleets(final ScourgeOfFleets card) {
+    private ScourgeOfFleets(final ScourgeOfFleets card) {
         super(card);
     }
 

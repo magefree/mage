@@ -37,7 +37,7 @@ public final class Telethopter extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
     }
 
-    public Telethopter(final Telethopter card) {
+    private Telethopter(final Telethopter card) {
         super(card);
     }
 

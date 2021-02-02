@@ -31,7 +31,7 @@ public final class Hindervines extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true));
     }
 
-    public Hindervines(final Hindervines card) {
+    private Hindervines(final Hindervines card) {
         super(card);
     }
 

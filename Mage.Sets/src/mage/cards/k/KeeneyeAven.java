@@ -31,7 +31,7 @@ public final class KeeneyeAven extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public KeeneyeAven(final KeeneyeAven card) {
+    private KeeneyeAven(final KeeneyeAven card) {
         super(card);
     }
 

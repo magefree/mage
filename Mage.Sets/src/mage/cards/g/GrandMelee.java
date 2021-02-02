@@ -30,7 +30,7 @@ public final class GrandMelee extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleAllEffect(FILTER_PERMANENT_CREATURES)));
     }
 
-    public GrandMelee(final GrandMelee card) {
+    private GrandMelee(final GrandMelee card) {
         super(card);
     }
 

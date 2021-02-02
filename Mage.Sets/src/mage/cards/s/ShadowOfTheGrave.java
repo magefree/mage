@@ -29,7 +29,7 @@ public final class ShadowOfTheGrave extends CardImpl {
 
     }
 
-    public ShadowOfTheGrave(final ShadowOfTheGrave card) {
+    private ShadowOfTheGrave(final ShadowOfTheGrave card) {
         super(card);
     }
 

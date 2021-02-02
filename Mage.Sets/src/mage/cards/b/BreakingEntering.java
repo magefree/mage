@@ -39,7 +39,7 @@ public final class BreakingEntering extends SplitCard {
 
     }
 
-    public BreakingEntering(final BreakingEntering card) {
+    private BreakingEntering(final BreakingEntering card) {
         super(card);
     }
 

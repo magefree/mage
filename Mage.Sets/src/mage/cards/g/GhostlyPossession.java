@@ -38,7 +38,7 @@ public final class GhostlyPossession extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAndByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", true)));
     }
 
-    public GhostlyPossession(final GhostlyPossession card) {
+    private GhostlyPossession(final GhostlyPossession card) {
         super(card);
     }
 

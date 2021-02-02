@@ -24,7 +24,7 @@ public final class ManaCylix extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ManaCylix(final ManaCylix card) {
+    private ManaCylix(final ManaCylix card) {
         super(card);
     }
 

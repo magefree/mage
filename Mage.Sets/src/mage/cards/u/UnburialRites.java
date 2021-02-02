@@ -28,7 +28,7 @@ public final class UnburialRites extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{W}"), TimingRule.SORCERY));
     }
 
-    public UnburialRites(final UnburialRites card) {
+    private UnburialRites(final UnburialRites card) {
         super(card);
     }
 

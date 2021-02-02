@@ -29,7 +29,7 @@ public final class BlurOfBlades extends CardImpl {
         
     }
 
-    public BlurOfBlades(final BlurOfBlades card) {
+    private BlurOfBlades(final BlurOfBlades card) {
         super(card);
     }
 

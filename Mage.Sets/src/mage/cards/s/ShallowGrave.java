@@ -36,7 +36,7 @@ public final class ShallowGrave extends CardImpl {
 
     }
 
-    public ShallowGrave(final ShallowGrave card) {
+    private ShallowGrave(final ShallowGrave card) {
         super(card);
     }
 

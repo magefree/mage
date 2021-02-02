@@ -48,7 +48,7 @@ public final class CrystallineNautilus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrystallineNautilus(final CrystallineNautilus card) {
+    private CrystallineNautilus(final CrystallineNautilus card) {
         super(card);
     }
 

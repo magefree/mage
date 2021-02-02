@@ -46,7 +46,7 @@ public final class OdunosRiverTrawler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OdunosRiverTrawler(final OdunosRiverTrawler card) {
+    private OdunosRiverTrawler(final OdunosRiverTrawler card) {
         super(card);
     }
 

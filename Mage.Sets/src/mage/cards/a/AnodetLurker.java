@@ -27,7 +27,7 @@ public final class AnodetLurker extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(3)));
     }
 
-    public AnodetLurker(final AnodetLurker card) {
+    private AnodetLurker(final AnodetLurker card) {
         super(card);
     }
 

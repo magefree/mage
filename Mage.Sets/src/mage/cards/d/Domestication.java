@@ -49,7 +49,7 @@ public final class Domestication extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability2, new DomesticationCondition(), "At the beginning of your end step, if enchanted creature's power is 4 or greater, sacrifice {this}"));
     }
 
-    public Domestication(final Domestication card) {
+    private Domestication(final Domestication card) {
         super(card);
     }
 

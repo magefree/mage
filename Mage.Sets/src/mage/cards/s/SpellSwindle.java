@@ -28,7 +28,7 @@ public final class SpellSwindle extends CardImpl {
         this.getSpellAbility().addEffect(new SpellSwindleEffect());
     }
 
-    public SpellSwindle(final SpellSwindle card) {
+    private SpellSwindle(final SpellSwindle card) {
         super(card);
     }
 

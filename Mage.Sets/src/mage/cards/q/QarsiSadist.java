@@ -36,7 +36,7 @@ public final class QarsiSadist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QarsiSadist(final QarsiSadist card) {
+    private QarsiSadist(final QarsiSadist card) {
         super(card);
     }
 

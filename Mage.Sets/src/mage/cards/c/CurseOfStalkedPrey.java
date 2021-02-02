@@ -46,7 +46,7 @@ public final class CurseOfStalkedPrey extends CardImpl {
 
     }
 
-    public CurseOfStalkedPrey(final CurseOfStalkedPrey card) {
+    private CurseOfStalkedPrey(final CurseOfStalkedPrey card) {
         super(card);
     }
 

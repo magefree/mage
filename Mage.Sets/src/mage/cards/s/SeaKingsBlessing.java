@@ -29,7 +29,7 @@ public final class SeaKingsBlessing extends CardImpl {
 
     }
 
-    public SeaKingsBlessing(final SeaKingsBlessing card) {
+    private SeaKingsBlessing(final SeaKingsBlessing card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class BlindObedience extends CardImpl {
 
     }
 
-    public BlindObedience(final BlindObedience card) {
+    private BlindObedience(final BlindObedience card) {
         super(card);
     }
 

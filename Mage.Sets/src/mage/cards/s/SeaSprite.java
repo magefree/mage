@@ -29,7 +29,7 @@ public final class SeaSprite extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
-    public SeaSprite(final SeaSprite card) {
+    private SeaSprite(final SeaSprite card) {
         super(card);
     }
 

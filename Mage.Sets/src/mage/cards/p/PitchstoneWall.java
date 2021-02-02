@@ -37,7 +37,7 @@ public final class PitchstoneWall extends CardImpl {
         this.addAbility(new PitchstoneWallTriggeredAbility());
     }
 
-    public PitchstoneWall(final PitchstoneWall card) {
+    private PitchstoneWall(final PitchstoneWall card) {
         super(card);
     }
 

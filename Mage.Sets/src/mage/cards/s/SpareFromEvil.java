@@ -31,7 +31,7 @@ public final class SpareFromEvil extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(new ProtectionAbility(filterNonHuman), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
-    public SpareFromEvil(final SpareFromEvil card) {
+    private SpareFromEvil(final SpareFromEvil card) {
         super(card);
     }
 

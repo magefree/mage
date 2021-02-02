@@ -27,7 +27,7 @@ public final class LeapOfFaith extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public LeapOfFaith(final LeapOfFaith card) {
+    private LeapOfFaith(final LeapOfFaith card) {
         super(card);
     }
 

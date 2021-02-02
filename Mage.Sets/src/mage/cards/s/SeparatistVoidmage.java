@@ -31,7 +31,7 @@ public final class SeparatistVoidmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeparatistVoidmage(final SeparatistVoidmage card) {
+    private SeparatistVoidmage(final SeparatistVoidmage card) {
         super(card);
     }
 

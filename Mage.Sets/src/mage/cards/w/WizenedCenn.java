@@ -36,7 +36,7 @@ public final class WizenedCenn extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public WizenedCenn(final WizenedCenn card) {
+    private WizenedCenn(final WizenedCenn card) {
         super(card);
     }
 

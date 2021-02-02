@@ -28,7 +28,7 @@ public final class EphemeralShields extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public EphemeralShields(final EphemeralShields card) {
+    private EphemeralShields(final EphemeralShields card) {
         super(card);
     }
 

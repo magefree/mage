@@ -45,7 +45,7 @@ public final class StormchaserChimera extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StormchaserChimera(final StormchaserChimera card) {
+    private StormchaserChimera(final StormchaserChimera card) {
         super(card);
     }
 

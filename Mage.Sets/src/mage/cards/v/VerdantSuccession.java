@@ -40,7 +40,7 @@ public final class VerdantSuccession extends CardImpl {
 
     }
 
-    public VerdantSuccession(final VerdantSuccession card) {
+    private VerdantSuccession(final VerdantSuccession card) {
         super(card);
     }
 

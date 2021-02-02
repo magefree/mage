@@ -27,7 +27,7 @@ public final class ForsakenDrifters extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new MillCardsControllerEffect(4)));
     }
 
-    public ForsakenDrifters(final ForsakenDrifters card) {
+    private ForsakenDrifters(final ForsakenDrifters card) {
         super(card);
     }
 

@@ -80,7 +80,7 @@ public final class ClockworkSteed extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ClockworkSteed(final ClockworkSteed card) {
+    private ClockworkSteed(final ClockworkSteed card) {
         super(card);
     }
 

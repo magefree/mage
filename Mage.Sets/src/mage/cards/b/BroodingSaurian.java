@@ -35,7 +35,7 @@ public final class BroodingSaurian extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new BroodingSaurianControlEffect(), TargetController.ANY, false));
     }
 
-    public BroodingSaurian(final BroodingSaurian card) {
+    private BroodingSaurian(final BroodingSaurian card) {
         super(card);
     }
 

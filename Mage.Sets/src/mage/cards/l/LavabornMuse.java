@@ -35,7 +35,7 @@ public final class LavabornMuse extends CardImpl {
                 "At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, {this} deals 3 damage to that player."));
     }
 
-    public LavabornMuse(final LavabornMuse card) {
+    private LavabornMuse(final LavabornMuse card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class GoblinDirigible extends CardImpl {
             new UntapSourceEffect(), new ManaCostsImpl("{4}")), TargetController.YOU, false));
     }
 
-    public GoblinDirigible(final GoblinDirigible card) {
+    private GoblinDirigible(final GoblinDirigible card) {
         super(card);
     }
 

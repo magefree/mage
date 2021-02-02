@@ -34,7 +34,7 @@ public final class PersistentNightmare extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ReturnToHandSourceEffect(), false));
     }
 
-    public PersistentNightmare(final PersistentNightmare card) {
+    private PersistentNightmare(final PersistentNightmare card) {
         super(card);
     }
 

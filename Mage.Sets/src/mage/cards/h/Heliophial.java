@@ -37,7 +37,7 @@ public final class Heliophial extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Heliophial(final Heliophial card) {
+    private Heliophial(final Heliophial card) {
         super(card);
     }
 

@@ -60,7 +60,7 @@ public final class DocentOfPerfection extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DocentOfPerfection(final DocentOfPerfection card) {
+    private DocentOfPerfection(final DocentOfPerfection card) {
         super(card);
     }
 

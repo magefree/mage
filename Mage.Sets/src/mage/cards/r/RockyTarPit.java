@@ -25,7 +25,7 @@ public final class RockyTarPit extends CardImpl {
         this.addAbility(new FetchLandActivatedAbility(false, EnumSet.of(SubType.SWAMP, SubType.MOUNTAIN)));
     }
 
-    public RockyTarPit(final RockyTarPit card) {
+    private RockyTarPit(final RockyTarPit card) {
         super(card);
     }
 

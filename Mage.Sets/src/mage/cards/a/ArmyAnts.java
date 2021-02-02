@@ -38,7 +38,7 @@ public final class ArmyAnts extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArmyAnts(final ArmyAnts card) {
+    private ArmyAnts(final ArmyAnts card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class MisthollowGriffin extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.EXILED, new MisthollowGriffinPlayEffect()));
     }
 
-    public MisthollowGriffin(final MisthollowGriffin card) {
+    private MisthollowGriffin(final MisthollowGriffin card) {
         super(card);
     }
 

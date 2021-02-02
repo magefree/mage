@@ -26,7 +26,7 @@ public final class SunSentinel extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public SunSentinel(final SunSentinel card) {
+    private SunSentinel(final SunSentinel card) {
         super(card);
     }
 

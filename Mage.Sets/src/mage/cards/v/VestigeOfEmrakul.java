@@ -29,7 +29,7 @@ public final class VestigeOfEmrakul extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public VestigeOfEmrakul(final VestigeOfEmrakul card) {
+    private VestigeOfEmrakul(final VestigeOfEmrakul card) {
         super(card);
     }
 

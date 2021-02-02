@@ -42,7 +42,7 @@ public final class WardenOfEvosIsle extends CardImpl {
 
     }
 
-    public WardenOfEvosIsle(final WardenOfEvosIsle card) {
+    private WardenOfEvosIsle(final WardenOfEvosIsle card) {
         super(card);
     }
 

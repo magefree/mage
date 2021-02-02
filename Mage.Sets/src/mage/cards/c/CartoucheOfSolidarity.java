@@ -49,7 +49,7 @@ public final class CartoucheOfSolidarity extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CartoucheOfSolidarity(final CartoucheOfSolidarity card) {
+    private CartoucheOfSolidarity(final CartoucheOfSolidarity card) {
         super(card);
     }
 

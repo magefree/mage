@@ -44,7 +44,7 @@ public final class IntrepidProvisioner extends CardImpl {
 
     }
 
-    public IntrepidProvisioner(final IntrepidProvisioner card) {
+    private IntrepidProvisioner(final IntrepidProvisioner card) {
         super(card);
     }
 

@@ -55,7 +55,7 @@ public final class BriarberryCohort extends CardImpl {
         
     }
 
-    public BriarberryCohort(final BriarberryCohort card) {
+    private BriarberryCohort(final BriarberryCohort card) {
         super(card);
     }
 

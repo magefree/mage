@@ -61,7 +61,7 @@ public final class MarduCharm extends CardImpl {
 
     }
 
-    public MarduCharm(final MarduCharm card) {
+    private MarduCharm(final MarduCharm card) {
         super(card);
     }
 

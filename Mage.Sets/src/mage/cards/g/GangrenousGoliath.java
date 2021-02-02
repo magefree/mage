@@ -40,7 +40,7 @@ public final class GangrenousGoliath extends CardImpl {
                 new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, true))));
     }
 
-    public GangrenousGoliath(final GangrenousGoliath card) {
+    private GangrenousGoliath(final GangrenousGoliath card) {
         super(card);
     }
 

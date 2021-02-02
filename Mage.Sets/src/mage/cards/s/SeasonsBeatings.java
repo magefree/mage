@@ -32,7 +32,7 @@ public final class SeasonsBeatings extends CardImpl {
 
     }
 
-    public SeasonsBeatings(final SeasonsBeatings card) {
+    private SeasonsBeatings(final SeasonsBeatings card) {
         super(card);
     }
 

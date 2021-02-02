@@ -34,7 +34,7 @@ public final class SpectralLynx extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public SpectralLynx(final SpectralLynx card) {
+    private SpectralLynx(final SpectralLynx card) {
         super(card);
     }
 

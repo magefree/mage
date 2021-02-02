@@ -32,7 +32,7 @@ public final class Retribution extends CardImpl {
 
     }
 
-    public Retribution(final Retribution card) {
+    private Retribution(final Retribution card) {
         super(card);
     }
 

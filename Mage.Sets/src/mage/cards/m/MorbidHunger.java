@@ -31,7 +31,7 @@ public final class MorbidHunger extends CardImpl {
         
     }
 
-    public MorbidHunger(final MorbidHunger card) {
+    private MorbidHunger(final MorbidHunger card) {
         super(card);
     }
 

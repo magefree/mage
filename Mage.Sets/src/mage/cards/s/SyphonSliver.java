@@ -33,7 +33,7 @@ public final class SyphonSliver extends CardImpl {
                         Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
-    public SyphonSliver(final SyphonSliver card) {
+    private SyphonSliver(final SyphonSliver card) {
         super(card);
     }
 

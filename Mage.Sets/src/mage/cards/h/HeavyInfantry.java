@@ -39,7 +39,7 @@ public final class HeavyInfantry extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public HeavyInfantry(final HeavyInfantry card) {
+    private HeavyInfantry(final HeavyInfantry card) {
         super(card);
     }
 

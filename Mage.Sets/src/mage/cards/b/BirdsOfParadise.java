@@ -28,7 +28,7 @@ public final class BirdsOfParadise extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public BirdsOfParadise(final BirdsOfParadise card) {
+    private BirdsOfParadise(final BirdsOfParadise card) {
         super(card);
     }
 

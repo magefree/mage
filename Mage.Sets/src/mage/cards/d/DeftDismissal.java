@@ -26,7 +26,7 @@ public final class DeftDismissal extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, new FilterAttackingOrBlockingCreature("attacking or blocking creatures")));
     }
 
-    public DeftDismissal(final DeftDismissal card) {
+    private DeftDismissal(final DeftDismissal card) {
         super(card);
     }
 

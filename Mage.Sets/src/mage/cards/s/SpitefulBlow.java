@@ -27,7 +27,7 @@ public final class SpitefulBlow extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public SpitefulBlow(final SpitefulBlow card) {
+    private SpitefulBlow(final SpitefulBlow card) {
         super(card);
     }
 

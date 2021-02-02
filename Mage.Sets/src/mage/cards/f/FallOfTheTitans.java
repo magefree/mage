@@ -27,7 +27,7 @@ public final class FallOfTheTitans extends CardImpl {
         addAbility(new SurgeAbility(this, "{X}{R}"));
     }
 
-    public FallOfTheTitans(final FallOfTheTitans card) {
+    private FallOfTheTitans(final FallOfTheTitans card) {
         super(card);
     }
 

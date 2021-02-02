@@ -24,7 +24,7 @@ public final class GrizzledLeotau extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public GrizzledLeotau(final GrizzledLeotau card) {
+    private GrizzledLeotau(final GrizzledLeotau card) {
         super(card);
     }
 

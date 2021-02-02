@@ -22,7 +22,7 @@ public final class BurstOfSpeed extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
-    public BurstOfSpeed(final BurstOfSpeed card) {
+    private BurstOfSpeed(final BurstOfSpeed card) {
         super(card);
     }
 

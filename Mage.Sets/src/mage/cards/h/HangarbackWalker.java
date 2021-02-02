@@ -45,7 +45,7 @@ public final class HangarbackWalker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HangarbackWalker(final HangarbackWalker card) {
+    private HangarbackWalker(final HangarbackWalker card) {
         super(card);
     }
 

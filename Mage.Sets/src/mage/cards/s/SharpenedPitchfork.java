@@ -36,7 +36,7 @@ public final class SharpenedPitchfork extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEquippedEffect(1, 1), new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
     }
 
-    public SharpenedPitchfork(final SharpenedPitchfork card) {
+    private SharpenedPitchfork(final SharpenedPitchfork card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class KozileksTranslator extends CardImpl {
         this.addAbility(new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.ColorlessMana(1)), new PayLifeCost(1)));
     }
 
-    public KozileksTranslator(final KozileksTranslator card) {
+    private KozileksTranslator(final KozileksTranslator card) {
         super(card);
     }
 
