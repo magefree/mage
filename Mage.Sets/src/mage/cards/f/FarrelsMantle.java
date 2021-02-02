@@ -101,7 +101,7 @@ class FarrelsMantleEffect extends OneShotEffect{
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent perm = game.getPermanent(source.getSourceId());
-        int damage = CardUtil.addWithOverflowCheck(perm.getPower().getValue(), 2);
+        int damage = CardUtil.overflowInc(perm.getPower().getValue(), 2);
         DamageTargetEffect dmgEffect = new DamageTargetEffect(damage);
         return dmgEffect.apply(game, source);        
     }

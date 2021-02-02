@@ -628,42 +628,47 @@ public final class CardUtil {
         return "<font color = 'blue'>" + text + "</font>";
     }
 
-    public static boolean cardCanBePlayedNow(Card card, UUID playerId, Game game) {
-        if (card.isLand()) {
-            return game.canPlaySorcery(playerId) && game.getPlayer(playerId).canPlayLand();
+    /**
+     * Integer operation with overflow protection
+     *
+     * @param base
+     * @param increment
+     * @return
+     */
+    public static int overflowInc(int base, int increment) {
+        return overflowResult((long) base + increment);
+    }
+
+    /**
+     * Integer operation with overflow protection
+     *
+     * @param base
+     * @param decrement
+     * @return
+     */
+    public static int overflowDec(int base, int decrement) {
+        return overflowResult((long) base - decrement);
+    }
+
+    /**
+     * Integer operation with overflow protection
+     *
+     * @param base
+     * @param multiply
+     * @return
+     */
+    public static int overflowMultiply(int base, int multiply) {
+        return overflowResult((long) base * multiply);
+    }
+
+    private static int overflowResult(long value) {
+        if (value > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        } else if (value < Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
         } else {
-            return card.getSpellAbility() != null && card.getSpellAbility().spellCanBeActivatedRegularlyNow(playerId, game);
+            return (int) value;
         }
-    }
-
-    public static int addWithOverflowCheck(int base, int increment) {
-        long result = ((long) base) + increment;
-        if (result > Integer.MAX_VALUE) {
-            return Integer.MAX_VALUE;
-        } else if (result < Integer.MIN_VALUE) {
-            return Integer.MIN_VALUE;
-        }
-        return base + increment;
-    }
-
-    public static int subtractWithOverflowCheck(int base, int decrement) {
-        long result = ((long) base) - decrement;
-        if (result > Integer.MAX_VALUE) {
-            return Integer.MAX_VALUE;
-        } else if (result < Integer.MIN_VALUE) {
-            return Integer.MIN_VALUE;
-        }
-        return base - decrement;
-    }
-
-    public static int multiplyWithOverflowCheck(int base, int multiply) {
-        long result = ((long) base) * multiply;
-        if (result > Integer.MAX_VALUE) {
-            return Integer.MAX_VALUE;
-        } else if (result < Integer.MIN_VALUE) {
-            return Integer.MIN_VALUE;
-        }
-        return base * multiply;
     }
 
     public static String createObjectRealtedWindowTitle(Ability source, Game game, String textSuffix) {

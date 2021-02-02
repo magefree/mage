@@ -17,7 +17,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -119,7 +118,7 @@ class QuestForPureFlameEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), event.getAmount()));
+        event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 2));
         return false;
     }
 }

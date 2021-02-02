@@ -1026,7 +1026,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 addCounters(CounterType.M1M1.createInstance(actualDamage), game.getControllerId(attackerId), damageSourceAbility, game);
             }
         } else {
-            this.damage = CardUtil.addWithOverflowCheck(this.damage, actualDamage);
+            this.damage = CardUtil.overflowInc(this.damage, actualDamage);
         }
         DamagedEvent damagedEvent = new DamagedCreatureEvent(this.getId(), attackerId, this.getControllerId(), actualDamage, combat);
         damagedEvent.setExcess(actualDamage - lethal);

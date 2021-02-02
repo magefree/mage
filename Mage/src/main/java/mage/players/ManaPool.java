@@ -388,7 +388,7 @@ public class ManaPool implements Serializable {
     private void removeConditional(ConditionalManaInfo manaInfo, Ability ability, Game game, Cost costToPay, Mana usedManaToPay) {
         for (ConditionalMana mana : getConditionalMana()) {
             if (mana.get(manaInfo.manaType) > 0 && mana.apply(ability, game, mana.getManaProducerId(), costToPay)) {
-                mana.set(manaInfo.manaType, CardUtil.subtractWithOverflowCheck(mana.get(manaInfo.manaType), 1));
+                mana.set(manaInfo.manaType, CardUtil.overflowDec(mana.get(manaInfo.manaType), 1));
                 usedManaToPay.increase(manaInfo.manaType, manaInfo.sourceObject.isSnow());
                 GameEvent event = new ManaPaidEvent(ability, mana.getManaProducerId(), mana.getFlag(), mana.getManaProducerOriginalId());
                 game.fireEvent(event);

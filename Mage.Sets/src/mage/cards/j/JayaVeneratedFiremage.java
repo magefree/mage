@@ -96,7 +96,7 @@ class JayaVeneratedFiremageEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), 1));
+        event.setAmount(CardUtil.overflowInc(event.getAmount(), 1));
         return false;
     }
 

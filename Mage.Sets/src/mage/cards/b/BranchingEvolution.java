@@ -52,7 +52,7 @@ class BranchingEvolutionEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmountForCounters(CardUtil.addWithOverflowCheck(event.getAmount(), event.getAmount()), true);
+        event.setAmountForCounters(CardUtil.overflowMultiply(event.getAmount(), 2), true);
         return false;
     }
 

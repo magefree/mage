@@ -76,7 +76,7 @@ class PyromancersGauntletReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), 2));
+        event.setAmount(CardUtil.overflowInc(event.getAmount(), 2));
         return false;
     }
 

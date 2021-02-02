@@ -58,7 +58,7 @@ public class AddConditionalManaEffect extends ManaEffect {
             if (amountAvailableMana > 0) {
                 Mana calculatedMana = mana.copy();
                 for (ManaType manaType : ManaType.getTrueManaTypes()) {
-                    calculatedMana.set(manaType, CardUtil.multiplyWithOverflowCheck(calculatedMana.get(manaType), amountAvailableMana));
+                    calculatedMana.set(manaType, CardUtil.overflowMultiply(calculatedMana.get(manaType), amountAvailableMana));
                 }
                 maxAvailableMana.add(manaBuilder.setMana(calculatedMana, source, game).build());
             }

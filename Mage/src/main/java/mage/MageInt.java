@@ -80,7 +80,7 @@ public class MageInt implements Serializable, Copyable<MageInt> {
     }
 
     public void boostValue(int amount) {
-        this.boostedValue = CardUtil.addWithOverflowCheck(this.boostedValue, amount);
+        this.boostedValue = CardUtil.overflowInc(this.boostedValue, amount);
     }
 
     public void resetToBaseValue() {

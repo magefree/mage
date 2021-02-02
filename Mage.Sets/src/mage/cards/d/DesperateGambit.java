@@ -106,7 +106,7 @@ class DesperateGambitEffect extends PreventionEffectImpl {
         if (controller != null && object != null) {
             if (super.applies(event, source, game) && event instanceof DamageEvent && event.getAmount() > 0) {
                 if (wonFlip) {
-                    event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), event.getAmount()));
+                    event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 2));
                     this.discard();
                 } else {
                     preventDamageAction(event, source, game);

@@ -89,7 +89,7 @@ class InsultDoubleDamageEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(CardUtil.addWithOverflowCheck(event.getAmount(), event.getAmount()));
+        event.setAmount(CardUtil.overflowMultiply(event.getAmount(), 2));
         return false;
     }
 }

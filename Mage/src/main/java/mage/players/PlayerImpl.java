@@ -2004,7 +2004,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE,
                 playerId, source, playerId, amount, atCombat);
         if (!game.replaceEvent(event)) {
-            this.life = CardUtil.subtractWithOverflowCheck(this.life, event.getAmount());
+            this.life = CardUtil.overflowDec(this.life, event.getAmount());
             if (!game.isSimulation()) {
                 UUID needId = attackerId;
                 if (needId == null) {
@@ -2048,7 +2048,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             // TODO: lock life at Integer.MAX_VALUE if reached, until it's set to a different amount
             // (https://magic.wizards.com/en/articles/archive/news/unstable-faqawaslfaqpaftidawabiajtbt-2017-12-06 - "infinite" life total stays infinite no matter how much is gained or lost)
             // this.life += event.getAmount();
-            this.life = CardUtil.addWithOverflowCheck(this.life, event.getAmount());
+            this.life = CardUtil.overflowInc(this.life, event.getAmount());
             if (!game.isSimulation()) {
                 game.informPlayers(this.getLogName() + " gains " + event.getAmount() + " life" + CardUtil.getSourceLogName(game, source));
             }
@@ -3244,7 +3244,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 restVal = 0;
                 availableLifeMana -= oldPayOption.get(manaType);
             } else {
-                restVal = CardUtil.subtractWithOverflowCheck(oldPayOption.get(manaType), availableLifeMana);
+                restVal = CardUtil.overflowDec(oldPayOption.get(manaType), availableLifeMana);
                 availableLifeMana = 0;
             }
             manaCopy.set(manaType, restVal);
