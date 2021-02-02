@@ -61,11 +61,11 @@ public class HasSubtypesSourceEffect extends ContinuousEffectImpl {
             default:
                 for (int i = 0; i < subtypes.size(); i++) {
                     if (i == 0) {
-                        s += subtypes.get(0).getIndefiniteArticle() + " " + subtypes.get(0) + ", ";
+                        s += subtypes.get(i).getIndefiniteArticle() + " " + subtypes.get(i) + ", ";
                     } else if (i == subtypes.size() - 1) {
-                        s += "and " + subtypes.get(0);
+                        s += "and " + subtypes.get(i);
                     } else {
-                        s += subtypes.get(0) + ", ";
+                        s += subtypes.get(i) + ", ";
                     }
                 }
         }

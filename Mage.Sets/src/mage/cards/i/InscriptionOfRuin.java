@@ -48,7 +48,7 @@ public final class InscriptionOfRuin extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // • Return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.
-        Mode mode = new Mode(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        Mode mode = new Mode(new ReturnFromGraveyardToBattlefieldTargetEffect(false, false));
         mode.addTarget(new TargetCardInYourGraveyard(filter));
         this.getSpellAbility().addMode(mode);
 
