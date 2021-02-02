@@ -47,7 +47,7 @@ class RecklessCrewEffect extends OneShotEffect {
 
     RecklessCrewEffect() {
         super(Outcome.Benefit);
-        staticText = "create X 2/1 red Dwarf creature tokens, " +
+        staticText = "create X 2/1 red Dwarf Berserker creature tokens, " +
                 "where X is the number of Vehicles you control plus the number of Equipment you control. " +
                 "For each of those tokens, you may attach an Equipment you control to it";
     }

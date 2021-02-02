@@ -97,7 +97,8 @@ class ElvishWarmasterTriggeredAbility extends EntersBattlefieldControlledTrigger
 
     @Override
     public String getRule() {
-        return super.getRule() + " This ability triggers only once each turn.";
+        return "Whenever one or more other Elves enter the battlefield under your control, " +
+                "create a 1/1 green Elf Warrior creature token. This ability triggers only once each turn.";
     }
 
     @Override

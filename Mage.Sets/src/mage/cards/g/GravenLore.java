@@ -40,7 +40,7 @@ class GravenLoreEffect extends OneShotEffect {
 
     GravenLoreEffect() {
         super(Outcome.Benefit);
-        staticText = "scry X, where is the amount of {S} spent to cast this spell, then draw three cards";
+        staticText = "scry X, where X is the amount of {S} spent to cast this spell, then draw three cards";
     }
 
     private GravenLoreEffect(final GravenLoreEffect effect) {
