@@ -7,6 +7,8 @@ import mage.abilities.condition.Condition;
 import mage.constants.TurnPhase;
 import mage.game.Game;
 
+import java.util.Locale;
+
 /**
  * @author LevelX2
  */
@@ -25,7 +27,7 @@ public class IsPhaseCondition implements Condition {
 
     @Override
     public String toString() {
-        return new StringBuilder("during ").append(turnPhase).toString().toLowerCase();
+        return new StringBuilder("during ").append(turnPhase).toString().toLowerCase(Locale.ENGLISH);
     }
 
 }

@@ -17,6 +17,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -73,7 +74,7 @@ class CreepingRenaissanceEffect extends OneShotEffect {
         if (chosenType == null) {
             return false;
         }
-        FilterCard filter = new FilterCard(chosenType.toString().toLowerCase() + " card");
+        FilterCard filter = new FilterCard(chosenType.toString().toLowerCase(Locale.ENGLISH) + " card");
         filter.add(chosenType.getPredicate());
         return controller.moveCards(controller.getGraveyard().getCards(filter, source.getSourceId(), controller.getId(), game), Zone.HAND, source, game);
     }

@@ -120,7 +120,7 @@ public class CardInfo {
 
     public CardInfo(Card card) {
         this.name = card.getName();
-        this.lower_name = name.toLowerCase();
+        this.lower_name = name.toLowerCase(Locale.ENGLISH);
         this.cardNumber = card.getCardNumber();
         this.setCode = card.getExpansionSetCode();
         this.className = card.getClass().getCanonicalName();
