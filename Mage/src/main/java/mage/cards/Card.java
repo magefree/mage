@@ -86,13 +86,13 @@ public interface Card extends MageObject {
      * @param zone
      * @param source ability which calls that move, can be null
      * @param game
-     * @param flag     If zone
-     *                 <ul>
-     *                 <li>LIBRARY: <ul><li>true - put on top</li><li>false - put on
-     *                 bottom</li></ul></li>
-     *                 <li>BATTLEFIELD: <ul><li>true - tapped</li><li>false -
-     *                 untapped</li></ul></li>
-     *                 </ul>
+     * @param flag   If zone
+     *               <ul>
+     *               <li>LIBRARY: <ul><li>true - put on top</li><li>false - put on
+     *               bottom</li></ul></li>
+     *               <li>BATTLEFIELD: <ul><li>true - tapped</li><li>false -
+     *               untapped</li></ul></li>
+     *               </ul>
      * @return true if card was moved to zone
      */
     boolean moveToZone(Zone zone, Ability source, Game game, boolean flag);
@@ -102,8 +102,8 @@ public interface Card extends MageObject {
     /**
      * Moves the card to an exile zone
      *
-     * @param exileId  set to null for generic exile zone
-     * @param name     used for exile zone with the specified exileId
+     * @param exileId set to null for generic exile zone
+     * @param name    used for exile zone with the specified exileId
      * @param source
      * @param game
      * @return true if card was moved to zone
@@ -183,7 +183,7 @@ public interface Card extends MageObject {
 
     default boolean commanderCost(Game game, Ability source, Ability abilityToModify) {
         CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
-        int castCount = watcher.getPlaysCount(getId());
+        int castCount = watcher.getPlaysCount(getMainCard().getId());
         if (castCount > 0) {
             abilityToModify.getManaCostsToPay().add(ManaUtil.createManaCost(2 * castCount, false));
         }

@@ -65,7 +65,7 @@ public final class LiesaShroudOfDusk extends CardImpl {
     @Override
     public boolean commanderCost(Game game, Ability source, Ability abilityToModify) {
         CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
-        int castCount = watcher.getPlaysCount(getId());
+        int castCount = watcher.getPlaysCount(getMainCard().getId());
         if (castCount > 0) {
             abilityToModify.addCost(new PayLifeCost(2 * castCount));
         }

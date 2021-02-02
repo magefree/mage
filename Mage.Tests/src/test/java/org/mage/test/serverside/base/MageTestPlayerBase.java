@@ -5,8 +5,11 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
 import mage.cards.Card;
@@ -29,6 +32,7 @@ import mage.server.util.ConfigWrapper;
 import mage.server.util.PluginClassLoader;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
+import mage.target.common.TargetAnyTarget;
 import mage.util.Copier;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -441,6 +445,22 @@ public abstract class MageTestPlayerBase {
                 "cost modification " + controller.getName(),
                 controller,
                 new SimpleStaticAbility(effect)
+        );
+    }
+
+    /**
+     * Add target damage ability that can be called by text: "target damage xxx"
+     *
+     * @param controller
+     * @param damageAmount
+     */
+    protected void addCustomEffect_TargetDamage(TestPlayer controller, int damageAmount) {
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(damageAmount).setText("target damage " + damageAmount), new ManaCostsImpl(""));
+        ability.addTarget(new TargetAnyTarget());
+        addCustomCardWithAbility(
+                "target damage " + damageAmount + " for " + controller.getName(),
+                controller,
+                ability
         );
     }
 }

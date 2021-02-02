@@ -13,8 +13,8 @@ import mage.util.CardUtil;
 import mage.util.SubTypes;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -127,6 +127,12 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
         }
     }
 
+    @Override
+    public Set<SuperType> getSuperType() {
+        // CardImpl's constructor can call some code on init, so you must check left/right before
+        // it's a bad workaround
+        return leftHalfCard != null ? leftHalfCard.getSuperType() : supertype;
+    }
 
     @Override
     public ArrayList<CardType> getCardType() {
@@ -152,11 +158,6 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     @Override
     public boolean hasSubtype(SubType subtype, Game game) {
         return leftHalfCard.hasSubtype(subtype, game);
-    }
-
-    @Override
-    public EnumSet<SuperType> getSuperType() {
-        return EnumSet.noneOf(SuperType.class);
     }
 
     @Override

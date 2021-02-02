@@ -239,19 +239,29 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         // Akoum Teeth - land
         addCard(Zone.HAND, playerA, "Akoum Warrior");
 
+        // mdf and legendary
+        addCard(Zone.HAND, playerA, "Halvar, God of Battle");
+
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
 
-        // stats in hand
-        Assert.assertEquals(1, getHandCards(playerA).size());
-        Card card = getHandCards(playerA).get(0);
+        Assert.assertEquals(2, getHandCards(playerA).size());
+
+        // stats in hand - normal
+        Card card = getHandCards(playerA).stream().filter(c -> CardUtil.haveSameNames(c, "Akoum Warrior", currentGame)).findFirst().get();
         Assert.assertFalse("must be non land", card.isLand());
         Assert.assertTrue("must be creature", card.isCreature());
         Assert.assertTrue("must be minotaur", card.hasSubtype(SubType.MINOTAUR, currentGame));
         Assert.assertEquals("power", 4, card.getPower().getValue());
         Assert.assertEquals("toughness", 5, card.getToughness().getValue());
+
+        // stats in hand - mdf
+        card = getHandCards(playerA).stream().filter(c -> CardUtil.haveSameNames(c, "Halvar, God of Battle", currentGame)).findFirst().get();
+        Assert.assertTrue("must be legendary", card.isLegendary());
+        Assert.assertTrue("must be creature", card.isCreature());
+        Assert.assertTrue("must be god", card.hasSubtype(SubType.GOD, currentGame));
     }
 
     @Test

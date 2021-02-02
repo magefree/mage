@@ -5,6 +5,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.*;
@@ -12,7 +13,7 @@ import java.util.*;
 /**
  * Calcs commanders play count only from command zone (spell or land)
  * Cards like Remand can put command to hand and cast it without commander tax increase
- *
+ * <p>
  * Warning, if your code can be called in non commander games then you must watcher in your ability
  * (example: you are using watcher in trigger, hint or effect, but do not checking another things like commander source or cost)
  *
@@ -33,14 +34,17 @@ public class CommanderPlaysCountWatcher extends Watcher {
                 && event.getType() != EventType.SPELL_CAST) {
             return;
         }
+
+        // must control main cards (split/mdf cards support)
         final UUID objectId;
         if (event.getType() == EventType.LAND_PLAYED) {
-            objectId = event.getTargetId();
+            objectId = CardUtil.getMainCardId(game, event.getTargetId());
         } else if (event.getType() == EventType.SPELL_CAST) {
-            objectId = event.getSourceId();
+            objectId = CardUtil.getMainCardId(game, event.getSourceId());
         } else {
             objectId = null;
         }
+
         boolean isCommanderObject = game
                 .getPlayerList()
                 .stream()
@@ -51,8 +55,8 @@ public class CommanderPlaysCountWatcher extends Watcher {
         if (!isCommanderObject || event.getZone() != Zone.COMMAND) {
             return;
         }
-        playsCount.putIfAbsent(event.getSourceId(), 0);
-        playsCount.computeIfPresent(event.getSourceId(), (u, i) -> i + 1);
+        playsCount.putIfAbsent(objectId, 0);
+        playsCount.computeIfPresent(objectId, (u, i) -> i + 1);
         playerCount.putIfAbsent(event.getPlayerId(), 0);
         playerCount.compute(event.getPlayerId(), (u, i) -> i + 1);
     }

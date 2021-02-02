@@ -41,7 +41,12 @@ public class CommanderCostModification extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        return commander.getId().equals(abilityToModify.getSourceId())
+        Card cardToCheck = game.getCard(abilityToModify.getSourceId()); // split/mdf cards support
+        if (cardToCheck == null) {
+            return false;
+        }
+
+        return commander.getId().equals(cardToCheck.getMainCard().getId())
                 && (abilityToModify instanceof CastCommanderAbility
                 || abilityToModify instanceof PlayLandAsCommanderAbility);
     }

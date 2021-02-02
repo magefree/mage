@@ -1,8 +1,11 @@
 package org.mage.test.cards.continuous;
 
+import mage.abilities.dynamicvalue.common.CommanderCastCountValue;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.cards.AdventureCard;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
@@ -11,9 +14,10 @@ import org.mage.test.serverside.base.CardTestCommander4Players;
  */
 public class CommandersCastTest extends CardTestCommander4Players {
 
-    // Player order: A -> D -> C -> B
     @Test
     public void test_CastToBattlefieldOneTime() {
+        // Player order: A -> D -> C -> B
+
         addCard(Zone.COMMAND, playerA, "Balduvian Bears", 1); // {1}{G}, 2/2, commander
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
 
@@ -32,6 +36,7 @@ public class CommandersCastTest extends CardTestCommander4Players {
     @Test
     public void test_CastToBattlefieldTwoTimes() {
         // Player order: A -> D -> C -> B
+
         addCard(Zone.COMMAND, playerA, "Balduvian Bears", 1); // {1}{G}, 2/2, commander
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 6); // 2 + 4
         //
@@ -67,6 +72,8 @@ public class CommandersCastTest extends CardTestCommander4Players {
 
     @Test
     public void test_PlayAsLandOneTime() {
+        // Player order: A -> D -> C -> B
+
         addCard(Zone.COMMAND, playerA, "Academy Ruins", 1);
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Academy Ruins");
@@ -313,5 +320,224 @@ public class CommandersCastTest extends CardTestCommander4Players {
         assertAllCommandsUsed();
 
         assertCommandZoneCount(playerA, "Balduvian Bears", 1);
+    }
+
+    @Test
+    public void test_SplitCard() {
+        // Player order: A -> D -> C -> B
+
+        // use case:
+        // cast left side
+        // return to command zone
+        // cast right side with commander cost
+
+        // Fire, {1}{R}
+        // Fire deals 2 damage divided as you choose among one or two target creatures and/or players.
+        // Ice, {1}{U}
+        // Tap target permanent.
+        // Draw a card.
+        addCard(Zone.COMMAND, playerA, "Fire // Ice", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        // both sides are playable
+        checkCommandCardCount("before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fire // Ice", 1);
+        checkPlayableAbility("before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Fire", true);
+        checkPlayableAbility("before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ice", true);
+
+        // turn 1 - cast left
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fire");
+        addTargetAmount(playerA, playerB, 2);
+        setChoice(playerA, "Yes"); // return commander
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        // can't cast due commander cost added
+        checkCommandCardCount("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fire // Ice", 1);
+        checkPlayableAbility("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Fire", false);
+        checkPlayableAbility("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ice", false);
+
+        // turn 5 - can cost again
+        checkPlayableAbility("before second cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Fire", true);
+        checkPlayableAbility("before second cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ice", true);
+        // cast right and use all mana (4 = card + commander cost)
+        castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Ice");
+        addTarget(playerA, "Mountain"); // tap target
+        setChoice(playerA, "Yes"); // move to commander
+        waitStackResolved(5, PhaseStep.PRECOMBAT_MAIN);
+        checkCommandCardCount("after second cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Fire // Ice", 1);
+        checkPlayableAbility("after second cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Fire", false);
+        checkPlayableAbility("after second cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ice", false);
+        // must used all mana
+        checkPermanentTapped("after second cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Mountain", true, 2);
+        checkPermanentTapped("after second cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Island", true, 2);
+
+        setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_AdventureCard() {
+        // Player order: A -> D -> C -> B
+
+        addCustomEffect_TargetDamage(playerA, 10); // kill creature
+
+        // use case:
+        // cast adventure spell from command zone and keep it in exile (inc next command cost)
+        // cast card from exile (do not inc next command cost)
+        // return commander to command zone
+        // cast as adventure spell (with x1 command cost)
+
+        // Curious Pair, creature, {1}{G}, 1/3
+        // Treats to Share, sorcery, {G}
+        // Create a Food token.
+        addCard(Zone.COMMAND, playerA, "Curious Pair", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.HAND, playerA, "Forest", 3); // for commander cost test
+
+        // commander tax: 0
+        // both sides are playable
+        checkCommandCardCount("before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
+        checkPlayableAbility("before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", true);
+        checkPlayableAbility("before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", true);
+
+        // cast adventure spell
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
+        setChoice(playerA, "Yes"); // return commander
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkCommandCardCount("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
+        checkPermanentCount("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Food", 1);
+        // commander tax: 1x
+        // can't cast due commander cost added (we stil have 2x mana)
+        checkPlayableAbility("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
+        checkPlayableAbility("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
+
+        // commander tax: 1x
+        // play land number 1 and give extra {G}, so total 3x
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
+        checkPlayableAbility("after mana add", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
+        checkPlayableAbility("after mana add", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", true);
+
+
+        // play adventure spell, but keep it
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
+        setChoice(playerA, "No"); // do not return commander
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Food", 2);
+        checkPlayableAbility("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
+        checkPlayableAbility("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
+
+        // wait next turn
+        // commander tax: 2x BUT it doesn't apply to exile zone (e.g. must use 2x mana instead 6x)
+        // it doesn't add commander tax too
+        castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
+        waitStackResolved(5, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after exile cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
+        checkPermanentTapped("after exile cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest", true, 4 - 2);
+
+        // return commander to command zone
+        activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "target damage 10", "Curious Pair");
+        setChoice(playerA, "Yes"); // return to command zone
+        // can't cast - only {2} mana, but need {G} + {2} + {2}
+        checkPlayableAbility("after return 2", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
+        checkPlayableAbility("after return 2", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
+
+        // turn 9
+        // commander tax: 2x
+        // mana: {G}{G}{G}{G}
+        // can't cast adventure spell for {G} + {2} + {2}
+        // can't cast creature spell for {G}{G} + {2} + {2}
+        runCode("check commander tax 2x", 9, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            AdventureCard card = (AdventureCard) game.getCommanderCardsFromCommandZone(player).stream().findFirst().get();
+            Assert.assertEquals(2, CommanderCastCountValue.instance.calculate(game, card.getSpellAbility(), null));
+            Assert.assertEquals(2, CommanderCastCountValue.instance.calculate(game, card.getSpellCard().getSpellAbility(), null));
+        });
+        checkPlayableAbility("before last cast 1", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
+        checkPlayableAbility("before last cast 1", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
+        // play land number 2 - can play adventure spell
+        playLand(9, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
+        // commander tax: 2x
+        // mana: {G}{G}{G}{G}{G}
+        checkPlayableAbility("before last cast 2", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
+        checkPlayableAbility("before last cast 2", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", true);
+
+        // turn 13
+        // play land number 3 - can play all parts
+        playLand(13, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
+        // commander tax: 2x
+        // mana: {G}{G}{G}{G}{G}{G}
+        checkPlayableAbility("before last cast 3", 13, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", true);
+        checkPlayableAbility("before last cast 3", 13, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", true);
+        // cast creature
+        castSpell(13, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
+        waitStackResolved(13, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after last cast", 13, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
+        checkPermanentTapped("after last cast", 13, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest", true, 2 + 2 + 2);
+        runCode("check commander tax 3x", 13, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            AdventureCard card = (AdventureCard) game.getCard(game.getCommandersIds(player).stream().findFirst().get());
+            Assert.assertEquals(3, CommanderCastCountValue.instance.calculate(game, card.getSpellAbility(), null));
+            Assert.assertEquals(3, CommanderCastCountValue.instance.calculate(game, card.getSpellCard().getSpellAbility(), null));
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(13, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_ModalDoubleFacesCard() {
+        // Player order: A -> D -> C -> B
+
+        // use case:
+        // cast left side as commander
+        // return to command zone
+        // cast right side as commander with commander cost
+
+        // Tergrid, God of Fright, {3}{B}{B}, creature
+        // Tergrid's Lantern, {3}{B}, artifact
+        addCard(Zone.COMMAND, playerA, "Tergrid, God of Fright", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        //
+        // Exile target creature or enchantment.
+        addCard(Zone.HAND, playerA, "Angelic Edict", 1); // {4}{W}
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+
+        // both sides are playable
+        checkCommandCardCount("before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tergrid, God of Fright", 1);
+        checkPlayableAbility("before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Tergrid, God of Fright", true);
+        checkPlayableAbility("before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Tergrid's Lantern", true);
+
+        // cast left side
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 5);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tergrid, God of Fright");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tergrid, God of Fright", 1);
+
+        // exile and return
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angelic Edict", "Tergrid, God of Fright");
+        setChoice(playerA, "Yes"); // return to command
+
+        // turn 5 - check commander cost
+        checkPlayableAbility("before second cast 1", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Tergrid, God of Fright", true);
+        checkPlayableAbility("before second cast 1", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Tergrid's Lantern", true);
+
+        // turn 5 - remove angelic's mana, so it can cast only one part
+        activateManaAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 5 - 1);
+        checkPlayableAbility("before second cast 2", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Tergrid, God of Fright", false);
+        checkPlayableAbility("before second cast 2", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Tergrid's Lantern", true);
+
+        // turn 5 - cast right side
+        castSpell(5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Tergrid's Lantern");
+        waitStackResolved(5, PhaseStep.POSTCOMBAT_MAIN);
+        checkPermanentCount("after second cast", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Tergrid's Lantern", 1);
+        // must used all mana
+        checkPermanentTapped("after second cast", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Swamp", true, 5);
+        checkPermanentTapped("after second cast", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Plains", true, 5);
+
+        setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
     }
 }

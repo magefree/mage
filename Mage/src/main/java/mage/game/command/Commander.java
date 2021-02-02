@@ -12,7 +12,6 @@ import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
 import mage.constants.CardType;
-import mage.constants.SpellAbilityType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
@@ -36,16 +35,30 @@ public class Commander implements CommandObject {
         this.sourceObject = card;
 
         // replace spell ability by commander cast spell (to cast from command zone)
-        if (card.getSpellAbility() != null) {
-            abilities.add(new CastCommanderAbility(card, card.getSpellAbility()));
-        }
-
-        // replace alternative spell abilities by commander cast spell (to cast from command zone)
         for (Ability ability : card.getAbilities()) {
             if (ability instanceof SpellAbility) {
                 SpellAbility spellAbility = (SpellAbility) ability;
-                if (spellAbility.getSpellAbilityType() == SpellAbilityType.BASE_ALTERNATE) {
-                    abilities.add(new CastCommanderAbility(card, spellAbility));
+                switch (spellAbility.getSpellAbilityType()) {
+                    case BASE:
+                    case BASE_ALTERNATE:
+                    case SPLIT:
+                    case SPLIT_FUSED:
+                    case SPLIT_LEFT:
+                    case SPLIT_RIGHT:
+                    case MODAL:
+                    case MODAL_LEFT:
+                    case MODAL_RIGHT:
+                    case ADVENTURE_SPELL:
+                        // can be used from command zone
+                        abilities.add(new CastCommanderAbility(card, spellAbility));
+                        break;
+                    case FACE_DOWN_CREATURE: // dynamic added spell for alternative cost like cast as face down
+                    case SPLICE: // only from hand
+                    case SPLIT_AFTERMATH: // only from graveyard
+                        // can't use from command zone
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Error, unknown spell type in commander card: " + spellAbility.getSpellAbilityType() + " from " + card.getName());
                 }
             }
         }
