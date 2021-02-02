@@ -1,4 +1,3 @@
-
 package mage.filter;
 
 import java.io.Serializable;
@@ -115,11 +114,11 @@ public class FilterMana implements Serializable {
 
     @Override
     public String toString() {
-        return (black ? "{B}" : "")
-                + (green ? "{G}" : "")
-                + (red ? "{R}" : "")
+        // wubrg order
+        return (white ? "{W}" : "")
                 + (blue ? "{U}" : "")
-                + (white ? "{W}" : "");
+                + (black ? "{B}" : "")
+                + (red ? "{R}" : "")
+                + (green ? "{G}" : "");
     }
-
 }

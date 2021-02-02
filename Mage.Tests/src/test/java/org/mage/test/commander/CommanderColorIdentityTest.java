@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommander3PlayersFFA;
 
 /**
- *
  * @author LevelX2
  */
 public class CommanderColorIdentityTest extends CardTestCommander3PlayersFFA {
@@ -24,17 +23,17 @@ public class CommanderColorIdentityTest extends CardTestCommander3PlayersFFA {
         Assert.assertEquals("{W}", getColorIdentityString("Silvercoat Lion"));
 
         // Multicolor
-        Assert.assertEquals("{G}{W}", getColorIdentityString("Veteran Warleader"));
+        Assert.assertEquals("{W}{G}", getColorIdentityString("Veteran Warleader"));
         Assert.assertEquals("{B}{R}", getColorIdentityString("Forerunner of Slaughter"));
-        Assert.assertEquals("{R}{U}", getColorIdentityString("Brutal Expulsion"));
+        Assert.assertEquals("{U}{R}", getColorIdentityString("Brutal Expulsion"));
         Assert.assertEquals("{B}{G}", getColorIdentityString("Catacomb Sifter"));
-        Assert.assertEquals("{B}{U}", getColorIdentityString("Fathom Feeder"));
+        Assert.assertEquals("{U}{B}", getColorIdentityString("Fathom Feeder"));
 
-        Assert.assertEquals("{R}{W}", getColorIdentityString("Angelic Captain"));
-        Assert.assertEquals("{G}{U}", getColorIdentityString("Bring to Light"));
-        Assert.assertEquals("{B}{W}", getColorIdentityString("Drana's Emissary"));
-        Assert.assertEquals("{G}{R}", getColorIdentityString("Grove Rumbler"));
-        Assert.assertEquals("{U}{W}", getColorIdentityString("Roil Spout"));
+        Assert.assertEquals("{W}{R}", getColorIdentityString("Angelic Captain"));
+        Assert.assertEquals("{U}{G}", getColorIdentityString("Bring to Light"));
+        Assert.assertEquals("{W}{B}", getColorIdentityString("Drana's Emissary"));
+        Assert.assertEquals("{R}{G}", getColorIdentityString("Grove Rumbler"));
+        Assert.assertEquals("{W}{U}", getColorIdentityString("Roil Spout"));
 
         // Cards with colors in the rule text
         Assert.assertEquals("{B}{R}", getColorIdentityString("Fires of Undeath"));
@@ -47,7 +46,7 @@ public class CommanderColorIdentityTest extends CardTestCommander3PlayersFFA {
         Assert.assertEquals("{B}", getColorIdentityString("Dismember"));
 
         // Hybrid mana
-        Assert.assertEquals("{G}{W}", getColorIdentityString("Kitchen Finks"));
+        Assert.assertEquals("{W}{G}", getColorIdentityString("Kitchen Finks"));
 
         // Lands with colored activation costs
         Assert.assertEquals("{G}", getColorIdentityString("Treetop Village"));
@@ -56,10 +55,18 @@ public class CommanderColorIdentityTest extends CardTestCommander3PlayersFFA {
         Assert.assertEquals("{W}", getColorIdentityString("Knight of Obligation"));
 
         // Two face cards
-        Assert.assertEquals("{G}{R}", getColorIdentityString("Daybreak Ranger"));
-        Assert.assertEquals("{R}{W}", getColorIdentityString("Archangel Avacyn"));
-        Assert.assertEquals("{R}{U}", getColorIdentityString("Civilized Scholar"));
+        Assert.assertEquals("{R}{G}", getColorIdentityString("Daybreak Ranger"));
+        Assert.assertEquals("{W}{R}", getColorIdentityString("Archangel Avacyn"));
+        Assert.assertEquals("{U}{R}", getColorIdentityString("Civilized Scholar"));
 
+        // Split cards
+        Assert.assertEquals("{U}{R}", getColorIdentityString("Fire // Ice"));
+
+        // MDF cards
+        Assert.assertEquals("{W}{U}{B}{R}{G}", getColorIdentityString("Esika, God of the Tree"));
+
+        // Adventure cards
+        Assert.assertEquals("{G}", getColorIdentityString("Rosethorn Acolyte"));
     }
 
     private String getColorIdentityString(String cardName) {

@@ -7,6 +7,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.PermanentCard;
 import mage.util.CardUtil;
+import mage.util.ManaUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -242,12 +243,15 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         // mdf and legendary
         addCard(Zone.HAND, playerA, "Halvar, God of Battle");
 
+        // mdf and color identity
+        addCard(Zone.HAND, playerA, "Esika, God of the Tree");
+
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
 
-        Assert.assertEquals(2, getHandCards(playerA).size());
+        Assert.assertEquals(3, getHandCards(playerA).size());
 
         // stats in hand - normal
         Card card = getHandCards(playerA).stream().filter(c -> CardUtil.haveSameNames(c, "Akoum Warrior", currentGame)).findFirst().get();
@@ -262,6 +266,10 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         Assert.assertTrue("must be legendary", card.isLegendary());
         Assert.assertTrue("must be creature", card.isCreature());
         Assert.assertTrue("must be god", card.hasSubtype(SubType.GOD, currentGame));
+
+        // stats in hand - mdf - color identity must be from both sides
+        card = getHandCards(playerA).stream().filter(c -> CardUtil.haveSameNames(c, "Esika, God of the Tree", currentGame)).findFirst().get();
+        Assert.assertEquals("color identity of mdf card must be from both sides", "{W}{U}{B}{R}{G}", ManaUtil.getColorIdentity(card).toString());
     }
 
     @Test

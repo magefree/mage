@@ -12,7 +12,10 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.mana.*;
+import mage.cards.AdventureCard;
 import mage.cards.Card;
+import mage.cards.ModalDoubleFacesCard;
+import mage.cards.SplitCard;
 import mage.choices.Choice;
 import mage.constants.ColoredManaSymbol;
 import mage.filter.FilterMana;
@@ -610,10 +613,17 @@ public final class ManaUtil {
     }
 
     public static FilterMana getColorIdentity(Card card) {
-        // TODO: is it support mdf cards?
-        // TODO: is it support adventure cards?
-        Card secondSide = card.getSecondCardFace();
-        return getColorIdentity(card.getColor(null), card.getManaCost().getSymbols(), card.getRules(), secondSide);
+        Card secondSide;
+        if (card instanceof SplitCard) {
+            secondSide = ((SplitCard) card).getRightHalfCard();
+        } else if (card instanceof AdventureCard) {
+            secondSide = ((AdventureCard) card).getSpellCard();
+        } else if (card instanceof ModalDoubleFacesCard) {
+            secondSide = ((ModalDoubleFacesCard) card).getRightHalfCard();
+        } else {
+            secondSide = card.getSecondCardFace();
+        }
+        return getColorIdentity(card.getColor(), card.getManaCost().getSymbols(), card.getRules(), secondSide);
     }
 
     public static int getColorIdentityHash(FilterMana colorIdentity) {
