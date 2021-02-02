@@ -34,7 +34,7 @@ public final class SupernaturalStamina extends CardImpl {
         ));
     }
 
-    public SupernaturalStamina(final SupernaturalStamina card) {
+    private SupernaturalStamina(final SupernaturalStamina card) {
         super(card);
     }
 

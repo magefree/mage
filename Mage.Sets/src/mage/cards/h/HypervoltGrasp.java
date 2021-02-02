@@ -47,7 +47,7 @@ public final class HypervoltGrasp extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{U}")));
     }
 
-    public HypervoltGrasp(final HypervoltGrasp card) {
+    private HypervoltGrasp(final HypervoltGrasp card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class AerieMystics extends CardImpl {
                 new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), new ManaCostsImpl("{1}{G}{U}")));
     }
 
-    public AerieMystics(final AerieMystics card) {
+    private AerieMystics(final AerieMystics card) {
         super(card);
     }
 

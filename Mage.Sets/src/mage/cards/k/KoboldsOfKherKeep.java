@@ -22,7 +22,7 @@ public final class KoboldsOfKherKeep extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public KoboldsOfKherKeep(final KoboldsOfKherKeep card) {
+    private KoboldsOfKherKeep(final KoboldsOfKherKeep card) {
         super(card);
     }
 

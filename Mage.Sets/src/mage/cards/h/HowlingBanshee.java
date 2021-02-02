@@ -29,7 +29,7 @@ public final class HowlingBanshee extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeAllPlayersEffect(3), false));
     }
 
-    public HowlingBanshee(final HowlingBanshee card) {
+    private HowlingBanshee(final HowlingBanshee card) {
         super(card);
     }
 

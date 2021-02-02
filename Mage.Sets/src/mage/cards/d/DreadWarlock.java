@@ -40,7 +40,7 @@ public final class DreadWarlock extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public DreadWarlock(final DreadWarlock card) {
+    private DreadWarlock(final DreadWarlock card) {
         super(card);
     }
 

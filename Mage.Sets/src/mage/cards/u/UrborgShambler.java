@@ -39,7 +39,7 @@ public final class UrborgShambler extends CardImpl {
             Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public UrborgShambler(final UrborgShambler card) {
+    private UrborgShambler(final UrborgShambler card) {
         super(card);
     }
 

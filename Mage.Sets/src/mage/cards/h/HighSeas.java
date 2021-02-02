@@ -33,7 +33,7 @@ public final class HighSeas extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(1, filter, TargetController.ANY)));
     }
 
-    public HighSeas(final HighSeas card) {
+    private HighSeas(final HighSeas card) {
         super(card);
     }
 

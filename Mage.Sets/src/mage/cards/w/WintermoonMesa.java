@@ -37,7 +37,7 @@ public final class WintermoonMesa extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WintermoonMesa(final WintermoonMesa card) {
+    private WintermoonMesa(final WintermoonMesa card) {
         super(card);
     }
 

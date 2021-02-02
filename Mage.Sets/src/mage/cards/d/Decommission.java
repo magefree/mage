@@ -32,7 +32,7 @@ public final class Decommission extends CardImpl {
         this.getSpellAbility().addWatcher(new RevoltWatcher());
     }
 
-    public Decommission(final Decommission card) {
+    private Decommission(final Decommission card) {
         super(card);
     }
 

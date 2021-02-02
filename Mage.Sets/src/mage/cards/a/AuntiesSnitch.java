@@ -43,7 +43,7 @@ public final class AuntiesSnitch extends CardImpl {
         this.addAbility(new AuntiesSnitchTriggeredAbility());
     }
 
-    public AuntiesSnitch(final AuntiesSnitch card) {
+    private AuntiesSnitch(final AuntiesSnitch card) {
         super(card);
     }
 

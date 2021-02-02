@@ -45,7 +45,7 @@ public final class AssureAssemble extends SplitCard {
         );
     }
 
-    public AssureAssemble(final AssureAssemble card) {
+    private AssureAssemble(final AssureAssemble card) {
         super(card);
     }
 

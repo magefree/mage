@@ -48,7 +48,7 @@ public final class MarshalsAnthem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MarshalsAnthem(final MarshalsAnthem card) {
+    private MarshalsAnthem(final MarshalsAnthem card) {
         super(card);
     }
 

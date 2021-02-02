@@ -48,7 +48,7 @@ public final class PilferingImp extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PilferingImp(final PilferingImp card) {
+    private PilferingImp(final PilferingImp card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class RelicOfProgenitus extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public RelicOfProgenitus(final RelicOfProgenitus card) {
+    private RelicOfProgenitus(final RelicOfProgenitus card) {
         super(card);
     }
 

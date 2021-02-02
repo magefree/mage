@@ -52,7 +52,7 @@ public final class VedalkenShackles extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VedalkenShackles(final VedalkenShackles card) {
+    private VedalkenShackles(final VedalkenShackles card) {
         super(card);
     }
 

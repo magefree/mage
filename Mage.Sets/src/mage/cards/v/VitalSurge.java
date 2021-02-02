@@ -27,7 +27,7 @@ public final class VitalSurge extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{1}{G}"));
     }
 
-    public VitalSurge(final VitalSurge card) {
+    private VitalSurge(final VitalSurge card) {
         super(card);
     }
 

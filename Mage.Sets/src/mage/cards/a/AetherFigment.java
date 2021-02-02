@@ -42,7 +42,7 @@ public final class AetherFigment extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AetherFigment(final AetherFigment card) {
+    private AetherFigment(final AetherFigment card) {
         super(card);
     }
 

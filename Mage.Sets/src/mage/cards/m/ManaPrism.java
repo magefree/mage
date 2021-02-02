@@ -31,7 +31,7 @@ public final class ManaPrism extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ManaPrism(final ManaPrism card) {
+    private ManaPrism(final ManaPrism card) {
         super(card);
     }
 

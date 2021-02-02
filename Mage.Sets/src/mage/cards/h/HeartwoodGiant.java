@@ -41,7 +41,7 @@ public final class HeartwoodGiant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HeartwoodGiant(final HeartwoodGiant card) {
+    private HeartwoodGiant(final HeartwoodGiant card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ public final class VileRequiem extends CardImpl {
 
     }
 
-    public VileRequiem(final VileRequiem card) {
+    private VileRequiem(final VileRequiem card) {
         super(card);
     }
 

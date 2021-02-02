@@ -36,7 +36,7 @@ public final class HinterlandDrake extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public HinterlandDrake(final HinterlandDrake card) {
+    private HinterlandDrake(final HinterlandDrake card) {
         super(card);
     }
 

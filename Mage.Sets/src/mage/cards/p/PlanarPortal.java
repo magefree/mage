@@ -28,7 +28,7 @@ public final class PlanarPortal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PlanarPortal(final PlanarPortal card) {
+    private PlanarPortal(final PlanarPortal card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class MalevolentAwakening extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MalevolentAwakening(final MalevolentAwakening card) {
+    private MalevolentAwakening(final MalevolentAwakening card) {
         super(card);
     }
 

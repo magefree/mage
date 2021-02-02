@@ -38,7 +38,7 @@ public final class MishrasWarMachine extends CardImpl {
 
     }
 
-    public MishrasWarMachine(final MishrasWarMachine card) {
+    private MishrasWarMachine(final MishrasWarMachine card) {
         super(card);
     }
 

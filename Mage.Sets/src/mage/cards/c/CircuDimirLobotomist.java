@@ -61,7 +61,7 @@ public final class CircuDimirLobotomist extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CircuDimirLobotomistRuleModifyingEffect()));
     }
 
-    public CircuDimirLobotomist(final CircuDimirLobotomist card) {
+    private CircuDimirLobotomist(final CircuDimirLobotomist card) {
         super(card);
     }
 

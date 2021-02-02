@@ -29,7 +29,7 @@ public final class TouchOfDarkness extends CardImpl {
 
     }
 
-    public TouchOfDarkness(final TouchOfDarkness card) {
+    private TouchOfDarkness(final TouchOfDarkness card) {
         super(card);
     }
 

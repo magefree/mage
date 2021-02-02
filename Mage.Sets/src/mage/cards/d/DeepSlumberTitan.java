@@ -40,7 +40,7 @@ public final class DeepSlumberTitan extends CardImpl {
         
     }
 
-    public DeepSlumberTitan(final DeepSlumberTitan card) {
+    private DeepSlumberTitan(final DeepSlumberTitan card) {
         super(card);
     }
 

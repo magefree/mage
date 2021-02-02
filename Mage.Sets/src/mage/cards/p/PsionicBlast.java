@@ -28,7 +28,7 @@ public final class PsionicBlast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public PsionicBlast(final PsionicBlast card) {
+    private PsionicBlast(final PsionicBlast card) {
         super(card);
     }
 

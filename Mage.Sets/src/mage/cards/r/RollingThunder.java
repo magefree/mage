@@ -25,7 +25,7 @@ public final class RollingThunder extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));  
     }
 
-    public RollingThunder(final RollingThunder card) {
+    private RollingThunder(final RollingThunder card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class NafsAsp extends CardImpl {
             false, true));
     }
 
-    public NafsAsp(final NafsAsp card) {
+    private NafsAsp(final NafsAsp card) {
         super(card);
     }
 

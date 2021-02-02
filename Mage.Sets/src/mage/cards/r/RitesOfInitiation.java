@@ -26,7 +26,7 @@ public final class RitesOfInitiation extends CardImpl {
         this.getSpellAbility().addEffect(new RitesOfInitiationEffect());
     }
 
-    public RitesOfInitiation(final RitesOfInitiation card) {
+    private RitesOfInitiation(final RitesOfInitiation card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class MirrorGolem extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MirrorGolemEffect()));
     }
 
-    public MirrorGolem(final MirrorGolem card) {
+    private MirrorGolem(final MirrorGolem card) {
         super(card);
     }
 

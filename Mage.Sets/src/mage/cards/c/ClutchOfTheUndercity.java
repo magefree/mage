@@ -27,7 +27,7 @@ public final class ClutchOfTheUndercity extends CardImpl {
         this.addAbility(new TransmuteAbility("{1}{U}{B}"));
     }
 
-    public ClutchOfTheUndercity(final ClutchOfTheUndercity card) {
+    private ClutchOfTheUndercity(final ClutchOfTheUndercity card) {
         super(card);
     }
 

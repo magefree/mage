@@ -33,7 +33,7 @@ public final class SunCrownedHunters extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SunCrownedHunters(final SunCrownedHunters card) {
+    private SunCrownedHunters(final SunCrownedHunters card) {
         super(card);
     }
 

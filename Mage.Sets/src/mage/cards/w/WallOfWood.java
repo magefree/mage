@@ -25,7 +25,7 @@ public final class WallOfWood extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public WallOfWood(final WallOfWood card) {
+    private WallOfWood(final WallOfWood card) {
         super(card);
     }
 

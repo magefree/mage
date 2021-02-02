@@ -32,7 +32,7 @@ public final class PeregrineMask extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public PeregrineMask(final PeregrineMask card) {
+    private PeregrineMask(final PeregrineMask card) {
         super(card);
     }
 

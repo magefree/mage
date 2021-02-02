@@ -45,7 +45,7 @@ public final class SkeletonShard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkeletonShard(final SkeletonShard card) {
+    private SkeletonShard(final SkeletonShard card) {
         super(card);
     }
 

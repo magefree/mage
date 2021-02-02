@@ -35,7 +35,7 @@ public final class MagistratesScepter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagistratesScepter(final MagistratesScepter card) {
+    private MagistratesScepter(final MagistratesScepter card) {
         super(card);
     }
 

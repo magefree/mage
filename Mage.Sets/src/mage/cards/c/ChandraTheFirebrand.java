@@ -51,7 +51,7 @@ public final class ChandraTheFirebrand extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public ChandraTheFirebrand(final ChandraTheFirebrand card) {
+    private ChandraTheFirebrand(final ChandraTheFirebrand card) {
         super(card);
     }
 

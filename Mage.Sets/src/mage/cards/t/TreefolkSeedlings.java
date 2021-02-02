@@ -37,7 +37,7 @@ public final class TreefolkSeedlings extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.EndOfGame)));
     }
 
-    public TreefolkSeedlings(final TreefolkSeedlings card) {
+    private TreefolkSeedlings(final TreefolkSeedlings card) {
         super(card);
     }
 

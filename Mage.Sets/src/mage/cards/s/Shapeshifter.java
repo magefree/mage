@@ -42,7 +42,7 @@ public final class Shapeshifter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ShapeshifterContinuousEffect()));
     }
 
-    public Shapeshifter(final Shapeshifter card) {
+    private Shapeshifter(final Shapeshifter card) {
         super(card);
     }
 

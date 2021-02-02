@@ -31,7 +31,7 @@ public final class SkullmeadCauldron extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public SkullmeadCauldron(final SkullmeadCauldron card) {
+    private SkullmeadCauldron(final SkullmeadCauldron card) {
         super(card);
     }
 

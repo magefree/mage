@@ -36,7 +36,7 @@ public final class Sturmgeist extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public Sturmgeist(final Sturmgeist card) {
+    private Sturmgeist(final Sturmgeist card) {
         super(card);
     }
 

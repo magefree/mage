@@ -46,7 +46,7 @@ public final class BrimazKingOfOreskos extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new BrimazKingOfOreskosEffect(), false, true));
     }
 
-    public BrimazKingOfOreskos(final BrimazKingOfOreskos card) {
+    private BrimazKingOfOreskos(final BrimazKingOfOreskos card) {
         super(card);
     }
 

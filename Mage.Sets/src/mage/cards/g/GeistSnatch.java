@@ -28,7 +28,7 @@ public final class GeistSnatch extends CardImpl {
         this.getSpellAbility().addEffect(new GeistSnatchCounterTargetEffect());
     }
 
-    public GeistSnatch(final GeistSnatch card) {
+    private GeistSnatch(final GeistSnatch card) {
         super(card);
     }
 

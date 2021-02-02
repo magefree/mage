@@ -45,7 +45,7 @@ public final class DeathknellKami extends CardImpl {
         this.addAbility(new SoulshiftAbility(1));
     }
 
-    public DeathknellKami(final DeathknellKami card) {
+    private DeathknellKami(final DeathknellKami card) {
         super(card);
     }
 

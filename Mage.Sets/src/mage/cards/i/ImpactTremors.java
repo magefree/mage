@@ -29,7 +29,7 @@ public final class ImpactTremors extends CardImpl {
                 false));
     }
 
-    public ImpactTremors(final ImpactTremors card) {
+    private ImpactTremors(final ImpactTremors card) {
         super(card);
     }
 

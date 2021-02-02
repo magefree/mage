@@ -41,7 +41,7 @@ public final class GuardDogs extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GuardDogs(final GuardDogs card) {
+    private GuardDogs(final GuardDogs card) {
         super(card);
     }
 

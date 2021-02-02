@@ -39,7 +39,7 @@ public final class TimmyPowerGamer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TimmyPowerGamer(final TimmyPowerGamer card) {
+    private TimmyPowerGamer(final TimmyPowerGamer card) {
         super(card);
     }
 

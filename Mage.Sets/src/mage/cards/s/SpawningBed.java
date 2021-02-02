@@ -34,7 +34,7 @@ public final class SpawningBed extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpawningBed(final SpawningBed card) {
+    private SpawningBed(final SpawningBed card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class RuricTharTheUnbowed extends CardImpl {
         this.addAbility(new RuricTharTheUnbowedAbility());
     }
 
-    public RuricTharTheUnbowed(final RuricTharTheUnbowed card) {
+    private RuricTharTheUnbowed(final RuricTharTheUnbowed card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class SporolothAncient extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public SporolothAncient(final SporolothAncient card) {
+    private SporolothAncient(final SporolothAncient card) {
         super(card);
     }
 

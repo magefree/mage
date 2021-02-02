@@ -45,7 +45,7 @@ public final class OneWithTheWind extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OneWithTheWind(final OneWithTheWind card) {
+    private OneWithTheWind(final OneWithTheWind card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class MobileFort extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MobileFort(final MobileFort card) {
+    private MobileFort(final MobileFort card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class VerdurousGearhulk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VerdurousGearhulk(final VerdurousGearhulk card) {
+    private VerdurousGearhulk(final VerdurousGearhulk card) {
         super(card);
     }
 

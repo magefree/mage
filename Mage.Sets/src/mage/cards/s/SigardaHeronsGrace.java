@@ -58,7 +58,7 @@ public final class SigardaHeronsGrace extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SigardaHeronsGrace(final SigardaHeronsGrace card) {
+    private SigardaHeronsGrace(final SigardaHeronsGrace card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class ThalakosMistfolk extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibrarySourceEffect(true), new ManaCostsImpl("{U}")));
     }
 
-    public ThalakosMistfolk(final ThalakosMistfolk card) {
+    private ThalakosMistfolk(final ThalakosMistfolk card) {
         super(card);
     }
 

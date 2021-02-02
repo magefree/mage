@@ -50,7 +50,7 @@ public final class ClaimFame extends SplitCard {
 
     }
 
-    public ClaimFame(final ClaimFame card) {
+    private ClaimFame(final ClaimFame card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class PriceOfProgress extends CardImpl {
         this.getSpellAbility().addEffect(new PriceOfProgressEffect());
     }
 
-    public PriceOfProgress(final PriceOfProgress card) {
+    private PriceOfProgress(final PriceOfProgress card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class PrideSovereign extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PrideSovereign(final PrideSovereign card) {
+    private PrideSovereign(final PrideSovereign card) {
         super(card);
     }
 

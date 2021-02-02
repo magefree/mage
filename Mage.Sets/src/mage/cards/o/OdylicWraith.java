@@ -29,7 +29,7 @@ public final class OdylicWraith extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true));
     }
 
-    public OdylicWraith(final OdylicWraith card) {
+    private OdylicWraith(final OdylicWraith card) {
         super(card);
     }
 

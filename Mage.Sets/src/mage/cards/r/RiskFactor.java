@@ -30,7 +30,7 @@ public final class RiskFactor extends CardImpl {
 
     }
 
-    public RiskFactor(final RiskFactor card) {
+    private RiskFactor(final RiskFactor card) {
         super(card);
     }
 

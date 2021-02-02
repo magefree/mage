@@ -34,7 +34,7 @@ public final class OakheartDryads extends CardImpl {
 
     }
 
-    public OakheartDryads(final OakheartDryads card) {
+    private OakheartDryads(final OakheartDryads card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class WildOx extends CardImpl {
         this.addAbility(new SwampwalkAbility());
     }
 
-    public WildOx(final WildOx card) {
+    private WildOx(final WildOx card) {
         super(card);
     }
 

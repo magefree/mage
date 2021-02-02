@@ -41,7 +41,7 @@ public final class TurnBurn extends SplitCard {
 
     }
 
-    public TurnBurn(final TurnBurn card) {
+    private TurnBurn(final TurnBurn card) {
         super(card);
     }
 

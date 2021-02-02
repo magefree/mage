@@ -36,7 +36,7 @@ public final class EsperCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public EsperCharm(final EsperCharm card) {
+    private EsperCharm(final EsperCharm card) {
         super(card);
     }
 

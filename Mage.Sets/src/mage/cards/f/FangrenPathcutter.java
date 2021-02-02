@@ -30,7 +30,7 @@ public final class FangrenPathcutter extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature()), false));
     }
 
-    public FangrenPathcutter(final FangrenPathcutter card) {
+    private FangrenPathcutter(final FangrenPathcutter card) {
         super(card);
     }
 

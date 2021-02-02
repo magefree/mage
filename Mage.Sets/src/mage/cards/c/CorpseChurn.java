@@ -30,7 +30,7 @@ public final class CorpseChurn extends CardImpl {
         getSpellAbility().addEffect(new CorpseChurnEffect());
     }
 
-    public CorpseChurn(final CorpseChurn card) {
+    private CorpseChurn(final CorpseChurn card) {
         super(card);
     }
 

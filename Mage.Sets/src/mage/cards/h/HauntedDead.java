@@ -40,7 +40,7 @@ public final class HauntedDead extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HauntedDead(final HauntedDead card) {
+    private HauntedDead(final HauntedDead card) {
         super(card);
     }
 

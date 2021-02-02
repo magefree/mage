@@ -31,7 +31,7 @@ public final class ToilsOfNightAndDay extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(0, 2, new FilterPermanent(), false));
     }
 
-    public ToilsOfNightAndDay(final ToilsOfNightAndDay card) {
+    private ToilsOfNightAndDay(final ToilsOfNightAndDay card) {
         super(card);
     }
 

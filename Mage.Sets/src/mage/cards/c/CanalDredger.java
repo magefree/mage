@@ -41,7 +41,7 @@ public final class CanalDredger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CanalDredger(final CanalDredger card) {
+    private CanalDredger(final CanalDredger card) {
         super(card);
     }
 

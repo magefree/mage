@@ -36,7 +36,7 @@ public final class SmeltWardMinotaur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SmeltWardMinotaur(final SmeltWardMinotaur card) {
+    private SmeltWardMinotaur(final SmeltWardMinotaur card) {
         super(card);
     }
 

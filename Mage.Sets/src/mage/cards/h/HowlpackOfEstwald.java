@@ -37,7 +37,7 @@ public final class HowlpackOfEstwald extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public HowlpackOfEstwald(final HowlpackOfEstwald card) {
+    private HowlpackOfEstwald(final HowlpackOfEstwald card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class MakeshiftMannequin extends CardImpl {
                 StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
-    public MakeshiftMannequin(final MakeshiftMannequin card) {
+    private MakeshiftMannequin(final MakeshiftMannequin card) {
         super(card);
     }
 

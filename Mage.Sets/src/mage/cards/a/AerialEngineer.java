@@ -55,7 +55,7 @@ public final class AerialEngineer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AerialEngineer(final AerialEngineer card) {
+    private AerialEngineer(final AerialEngineer card) {
         super(card);
     }
 

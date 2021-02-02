@@ -29,7 +29,7 @@ public final class TaintedPact extends CardImpl {
         this.getSpellAbility().addEffect(new TaintedPactEffect());
     }
 
-    public TaintedPact(final TaintedPact card) {
+    private TaintedPact(final TaintedPact card) {
         super(card);
     }
 

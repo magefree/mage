@@ -44,7 +44,7 @@ public final class ApocalypseDemon extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(tapEffect, TargetController.YOU, false));
     }
 
-    public ApocalypseDemon(final ApocalypseDemon card) {
+    private ApocalypseDemon(final ApocalypseDemon card) {
         super(card);
     }
 

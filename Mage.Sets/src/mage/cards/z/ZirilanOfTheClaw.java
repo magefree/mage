@@ -45,7 +45,7 @@ public final class ZirilanOfTheClaw extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZirilanOfTheClaw(final ZirilanOfTheClaw card) {
+    private ZirilanOfTheClaw(final ZirilanOfTheClaw card) {
         super(card);
     }
 

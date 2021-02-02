@@ -34,7 +34,7 @@ public final class LuminousGuardian extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{2}")));
     }
 
-    public LuminousGuardian(final LuminousGuardian card) {
+    private LuminousGuardian(final LuminousGuardian card) {
         super(card);
     }
 

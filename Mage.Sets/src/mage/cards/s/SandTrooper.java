@@ -38,7 +38,7 @@ public final class SandTrooper extends CardImpl {
 
     }
 
-    public SandTrooper(final SandTrooper card) {
+    private SandTrooper(final SandTrooper card) {
         super(card);
     }
 

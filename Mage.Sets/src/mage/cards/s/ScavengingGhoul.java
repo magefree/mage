@@ -38,7 +38,7 @@ public final class ScavengingGhoul extends CardImpl {
             new RemoveCountersSourceCost(CounterType.CORPSE.createInstance())));
     }
 
-    public ScavengingGhoul(final ScavengingGhoul card) {
+    private ScavengingGhoul(final ScavengingGhoul card) {
         super(card);
     }
 

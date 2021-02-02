@@ -38,7 +38,7 @@ public final class KnightsPledge extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2)));
     }
 
-    public KnightsPledge(final KnightsPledge card) {
+    private KnightsPledge(final KnightsPledge card) {
         super(card);
     }
 

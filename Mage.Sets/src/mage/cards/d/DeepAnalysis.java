@@ -31,7 +31,7 @@ public final class DeepAnalysis extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeepAnalysis(final DeepAnalysis card) {
+    private DeepAnalysis(final DeepAnalysis card) {
         super(card);
     }
 

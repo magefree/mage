@@ -39,7 +39,7 @@ public final class MakeshiftMunitions extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MakeshiftMunitions(final MakeshiftMunitions card) {
+    private MakeshiftMunitions(final MakeshiftMunitions card) {
         super(card);
     }
 

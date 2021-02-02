@@ -32,7 +32,7 @@ public final class IncreasingDevotion extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{W}{W}"), TimingRule.SORCERY));
     }
 
-    public IncreasingDevotion(final IncreasingDevotion card) {
+    private IncreasingDevotion(final IncreasingDevotion card) {
         super(card);
     }
 

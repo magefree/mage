@@ -33,7 +33,7 @@ public final class CavernCrawler extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public CavernCrawler(final CavernCrawler card) {
+    private CavernCrawler(final CavernCrawler card) {
         super(card);
     }
 

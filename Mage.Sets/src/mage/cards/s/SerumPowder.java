@@ -35,7 +35,7 @@ public final class SerumPowder extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.HAND, new SerumPowderReplaceEffect()));
     }
 
-    public SerumPowder(final SerumPowder card) {
+    private SerumPowder(final SerumPowder card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class TemporalDistortion extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TemporalDistortionRemovalEffect(), TargetController.ANY, false));
     }
 
-    public TemporalDistortion(final TemporalDistortion card) {
+    private TemporalDistortion(final TemporalDistortion card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class Falter extends CardImpl {
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
     }
 
-    public Falter(final Falter card) {
+    private Falter(final Falter card) {
         super(card);
     }
 

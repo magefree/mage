@@ -30,7 +30,7 @@ public final class FlintGolem extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new FlintGolemEffect(), false));
     }
 
-    public FlintGolem(final FlintGolem card) {
+    private FlintGolem(final FlintGolem card) {
         super(card);
     }
 

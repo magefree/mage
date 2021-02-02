@@ -28,7 +28,7 @@ public final class ChargingPaladin extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(0, 3, Duration.EndOfTurn), false));
     }
 
-    public ChargingPaladin(final ChargingPaladin card) {
+    private ChargingPaladin(final ChargingPaladin card) {
         super(card);
     }
 

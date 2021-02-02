@@ -27,7 +27,7 @@ public final class EarthOriginYak extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn)));
     }
 
-    public EarthOriginYak(final EarthOriginYak card) {
+    private EarthOriginYak(final EarthOriginYak card) {
         super(card);
     }
 

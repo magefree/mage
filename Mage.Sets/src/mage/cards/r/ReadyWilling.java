@@ -42,7 +42,7 @@ public final class ReadyWilling extends SplitCard {
 
     }
 
-    public ReadyWilling(final ReadyWilling card) {
+    private ReadyWilling(final ReadyWilling card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class BogbrewWitch extends CardImpl {
 
     }
 
-    public BogbrewWitch(final BogbrewWitch card) {
+    private BogbrewWitch(final BogbrewWitch card) {
         super(card);
     }
 

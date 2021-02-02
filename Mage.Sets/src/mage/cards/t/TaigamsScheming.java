@@ -24,7 +24,7 @@ public final class TaigamsScheming extends CardImpl {
                 new FilterCard("cards"), Zone.LIBRARY, true, false, true, Zone.GRAVEYARD, false));
     }
 
-    public TaigamsScheming(final TaigamsScheming card) {
+    private TaigamsScheming(final TaigamsScheming card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class DauntlessAven extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DauntlessAven(final DauntlessAven card) {
+    private DauntlessAven(final DauntlessAven card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class MercadiasDownfall extends CardImpl {
 
     }
 
-    public MercadiasDownfall(final MercadiasDownfall card) {
+    private MercadiasDownfall(final MercadiasDownfall card) {
         super(card);
     }
 

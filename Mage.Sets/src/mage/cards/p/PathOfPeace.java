@@ -27,7 +27,7 @@ public final class PathOfPeace extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PathOfPeace(final PathOfPeace card) {
+    private PathOfPeace(final PathOfPeace card) {
         super(card);
     }
 

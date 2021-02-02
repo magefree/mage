@@ -33,7 +33,7 @@ public final class MyrPropagator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MyrPropagator(final MyrPropagator card) {
+    private MyrPropagator(final MyrPropagator card) {
         super(card);
     }
 

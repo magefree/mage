@@ -32,7 +32,7 @@ public final class Swerve extends CardImpl {
         
     }
 
-    public Swerve(final Swerve card) {
+    private Swerve(final Swerve card) {
         super(card);
     }
 

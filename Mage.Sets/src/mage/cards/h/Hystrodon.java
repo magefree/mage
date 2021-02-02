@@ -34,7 +34,7 @@ public final class Hystrodon extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{G}{G}")));
     }
 
-    public Hystrodon(final Hystrodon card) {
+    private Hystrodon(final Hystrodon card) {
         super(card);
     }
 

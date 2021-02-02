@@ -30,7 +30,7 @@ public final class LeoninElder extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new FilterArtifactPermanent(), true));
     }
 
-    public LeoninElder(final LeoninElder card) {
+    private LeoninElder(final LeoninElder card) {
         super(card);
     }
 

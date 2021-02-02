@@ -59,7 +59,7 @@ public final class RowanKenrith extends CardImpl {
         this.addAbility(CanBeYourCommanderAbility.getInstance());
     }
 
-    public RowanKenrith(final RowanKenrith card) {
+    private RowanKenrith(final RowanKenrith card) {
         super(card);
     }
 

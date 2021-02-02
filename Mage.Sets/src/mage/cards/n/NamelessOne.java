@@ -41,7 +41,7 @@ public final class NamelessOne extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}")));
     }
 
-    public NamelessOne(final NamelessOne card) {
+    private NamelessOne(final NamelessOne card) {
         super(card);
     }
 

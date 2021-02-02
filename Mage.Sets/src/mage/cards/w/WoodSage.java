@@ -41,7 +41,7 @@ public final class WoodSage extends CardImpl {
 
     }
 
-    public WoodSage(final WoodSage card) {
+    private WoodSage(final WoodSage card) {
         super(card);
     }
 

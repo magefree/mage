@@ -32,7 +32,7 @@ public final class SwampMosquito extends CardImpl {
         this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(effect, false, true));
     }
 
-    public SwampMosquito(final SwampMosquito card) {
+    private SwampMosquito(final SwampMosquito card) {
         super(card);
     }
 

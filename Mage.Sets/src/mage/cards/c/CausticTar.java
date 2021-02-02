@@ -43,7 +43,7 @@ public final class CausticTar extends CardImpl {
         
     }
 
-    public CausticTar(final CausticTar card) {
+    private CausticTar(final CausticTar card) {
         super(card);
     }
 

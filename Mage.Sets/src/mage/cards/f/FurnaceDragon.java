@@ -48,7 +48,7 @@ public final class FurnaceDragon extends CardImpl {
                 new CastFromHandWatcher());
     }
 
-    public FurnaceDragon(final FurnaceDragon card) {
+    private FurnaceDragon(final FurnaceDragon card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class FlowstoneHellion extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(+1,-1,Duration.EndOfTurn), new GenericManaCost(0)));
     }
 
-    public FlowstoneHellion(final FlowstoneHellion card) {
+    private FlowstoneHellion(final FlowstoneHellion card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class Saltblast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public Saltblast(final Saltblast card) {
+    private Saltblast(final Saltblast card) {
         super(card);
     }
 

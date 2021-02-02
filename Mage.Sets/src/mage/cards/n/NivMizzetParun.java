@@ -52,7 +52,7 @@ public final class NivMizzetParun extends CardImpl {
         ));
     }
 
-    public NivMizzetParun(final NivMizzetParun card) {
+    private NivMizzetParun(final NivMizzetParun card) {
         super(card);
     }
 

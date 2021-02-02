@@ -27,7 +27,7 @@ public final class TurnToFrog extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TurnToFrog(final TurnToFrog card) {
+    private TurnToFrog(final TurnToFrog card) {
         super(card);
     }
 

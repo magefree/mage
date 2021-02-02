@@ -31,7 +31,7 @@ public final class RazorfieldRhino extends CardImpl {
                 .addHint(MetalcraftHint.instance));
     }
 
-    public RazorfieldRhino(final RazorfieldRhino card) {
+    private RazorfieldRhino(final RazorfieldRhino card) {
         super(card);
     }
 

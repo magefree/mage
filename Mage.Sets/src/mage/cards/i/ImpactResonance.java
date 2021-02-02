@@ -36,7 +36,7 @@ public final class ImpactResonance extends CardImpl {
         this.getSpellAbility().addWatcher(new GreatestAmountOfDamageWatcher());
     }
 
-    public ImpactResonance(final ImpactResonance card) {
+    private ImpactResonance(final ImpactResonance card) {
         super(card);
     }
 

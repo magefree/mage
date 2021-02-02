@@ -52,7 +52,7 @@ public final class RecklessBushwhacker extends CardImpl {
 
     }
 
-    public RecklessBushwhacker(final RecklessBushwhacker card) {
+    private RecklessBushwhacker(final RecklessBushwhacker card) {
         super(card);
     }
 

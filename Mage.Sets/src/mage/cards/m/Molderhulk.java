@@ -54,7 +54,7 @@ public final class Molderhulk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Molderhulk(final Molderhulk card) {
+    private Molderhulk(final Molderhulk card) {
         super(card);
     }
 

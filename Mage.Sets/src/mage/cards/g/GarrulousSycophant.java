@@ -40,7 +40,7 @@ public final class GarrulousSycophant extends CardImpl {
 
     }
 
-    public GarrulousSycophant(final GarrulousSycophant card) {
+    private GarrulousSycophant(final GarrulousSycophant card) {
         super(card);
     }
 

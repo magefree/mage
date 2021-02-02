@@ -31,7 +31,7 @@ public final class MoggHollows extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoggHollows(final MoggHollows card) {
+    private MoggHollows(final MoggHollows card) {
         super(card);
     }
 

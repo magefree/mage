@@ -25,7 +25,7 @@ public final class EmeraldOryx extends CardImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public EmeraldOryx(final EmeraldOryx card) {
+    private EmeraldOryx(final EmeraldOryx card) {
         super(card);
     }
 

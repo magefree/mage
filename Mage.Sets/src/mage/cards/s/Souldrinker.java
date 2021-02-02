@@ -28,7 +28,7 @@ public final class Souldrinker extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new PayLifeCost(3)));
     }
 
-    public Souldrinker(final Souldrinker card) {
+    private Souldrinker(final Souldrinker card) {
         super(card);
     }
 

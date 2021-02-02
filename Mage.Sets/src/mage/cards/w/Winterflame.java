@@ -33,7 +33,7 @@ public final class Winterflame extends CardImpl {
 
     }
 
-    public Winterflame(final Winterflame card) {
+    private Winterflame(final Winterflame card) {
         super(card);
     }
 

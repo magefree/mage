@@ -27,7 +27,7 @@ public final class RenegadeTroops extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public RenegadeTroops(final RenegadeTroops card) {
+    private RenegadeTroops(final RenegadeTroops card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class LapisLazuliTalisman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LapisLazuliTalisman(final LapisLazuliTalisman card) {
+    private LapisLazuliTalisman(final LapisLazuliTalisman card) {
         super(card);
     }
 

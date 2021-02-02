@@ -49,7 +49,7 @@ public final class ShieldhideDragon extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false, false));
     }
 
-    public ShieldhideDragon(final ShieldhideDragon card) {
+    private ShieldhideDragon(final ShieldhideDragon card) {
         super(card);
     }
 

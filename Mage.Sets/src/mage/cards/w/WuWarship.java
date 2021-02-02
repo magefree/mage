@@ -29,7 +29,7 @@ public final class WuWarship extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
     }
 
-    public WuWarship(final WuWarship card) {
+    private WuWarship(final WuWarship card) {
         super(card);
     }
 

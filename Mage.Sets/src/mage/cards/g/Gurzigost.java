@@ -51,7 +51,7 @@ public final class Gurzigost extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Gurzigost(final Gurzigost card) {
+    private Gurzigost(final Gurzigost card) {
         super(card);
     }
 

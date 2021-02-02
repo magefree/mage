@@ -32,7 +32,7 @@ public final class BlindingAngel extends CardImpl {
         
     }
     
-    public BlindingAngel(final BlindingAngel card) {
+    private BlindingAngel(final BlindingAngel card) {
         super(card);
     }
     

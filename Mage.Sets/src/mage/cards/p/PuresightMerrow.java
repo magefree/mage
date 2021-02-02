@@ -42,7 +42,7 @@ public final class PuresightMerrow extends CardImpl {
 
     }
 
-    public PuresightMerrow(final PuresightMerrow card) {
+    private PuresightMerrow(final PuresightMerrow card) {
         super(card);
     }
 

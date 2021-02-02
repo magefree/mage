@@ -30,7 +30,7 @@ public final class ArmoryOfIroas extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public ArmoryOfIroas(final ArmoryOfIroas card) {
+    private ArmoryOfIroas(final ArmoryOfIroas card) {
         super(card);
     }
 

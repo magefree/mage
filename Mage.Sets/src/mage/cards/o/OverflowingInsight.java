@@ -22,7 +22,7 @@ public final class OverflowingInsight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public OverflowingInsight(final OverflowingInsight card) {
+    private OverflowingInsight(final OverflowingInsight card) {
         super(card);
     }
 

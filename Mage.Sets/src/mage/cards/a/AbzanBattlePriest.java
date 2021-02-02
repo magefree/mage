@@ -49,7 +49,7 @@ public final class AbzanBattlePriest extends CardImpl {
         ));
     }
 
-    public AbzanBattlePriest(final AbzanBattlePriest card) {
+    private AbzanBattlePriest(final AbzanBattlePriest card) {
         super(card);
     }
 

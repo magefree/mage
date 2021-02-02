@@ -29,7 +29,7 @@ public final class ShadowRift extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public ShadowRift(final ShadowRift card) {
+    private ShadowRift(final ShadowRift card) {
         super(card);
     }
 

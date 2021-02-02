@@ -45,7 +45,7 @@ public final class TrainedCondor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TrainedCondor(final TrainedCondor card) {
+    private TrainedCondor(final TrainedCondor card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class GerrardsCommand extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public GerrardsCommand(final GerrardsCommand card) {
+    private GerrardsCommand(final GerrardsCommand card) {
         super(card);
     }
 

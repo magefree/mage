@@ -35,7 +35,7 @@ public final class ArmoredTransport extends CardImpl {
 
     }
 
-    public ArmoredTransport(final ArmoredTransport card) {
+    private ArmoredTransport(final ArmoredTransport card) {
         super(card);
     }
 

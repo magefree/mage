@@ -49,7 +49,7 @@ public final class IG88B extends CardImpl {
         this.addAbility(new RepairAbility(3));
     }
 
-    public IG88B(final IG88B card) {
+    private IG88B(final IG88B card) {
         super(card);
     }
 

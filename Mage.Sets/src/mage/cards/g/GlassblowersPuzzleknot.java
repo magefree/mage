@@ -40,7 +40,7 @@ public final class GlassblowersPuzzleknot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GlassblowersPuzzleknot(final GlassblowersPuzzleknot card) {
+    private GlassblowersPuzzleknot(final GlassblowersPuzzleknot card) {
         super(card);
     }
 

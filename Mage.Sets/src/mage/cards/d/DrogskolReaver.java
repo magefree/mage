@@ -37,7 +37,7 @@ public final class DrogskolReaver extends CardImpl {
         this.addAbility(new DrogskolReaverAbility());
     }
 
-    public DrogskolReaver(final DrogskolReaver card) {
+    private DrogskolReaver(final DrogskolReaver card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class ShuGeneral extends CardImpl {
         this.addAbility(HorsemanshipAbility.getInstance());
     }
 
-    public ShuGeneral(final ShuGeneral card) {
+    private ShuGeneral(final ShuGeneral card) {
         super(card);
     }
 

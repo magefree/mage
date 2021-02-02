@@ -40,7 +40,7 @@ public final class BattleRampart extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BattleRampart(final BattleRampart card) {
+    private BattleRampart(final BattleRampart card) {
         super(card);
     }
 

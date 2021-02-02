@@ -47,7 +47,7 @@ public final class MechanizedProduction extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MechanizedProductionEffect(), TargetController.YOU, false));
     }
 
-    public MechanizedProduction(final MechanizedProduction card) {
+    private MechanizedProduction(final MechanizedProduction card) {
         super(card);
     }
 

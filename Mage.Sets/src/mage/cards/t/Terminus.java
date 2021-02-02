@@ -32,7 +32,7 @@ public final class Terminus extends CardImpl {
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{W}")));
     }
 
-    public Terminus(final Terminus card) {
+    private Terminus(final Terminus card) {
         super(card);
     }
 

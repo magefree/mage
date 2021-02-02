@@ -44,7 +44,7 @@ public final class KillSuitCultist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KillSuitCultist(final KillSuitCultist card) {
+    private KillSuitCultist(final KillSuitCultist card) {
         super(card);
     }
 

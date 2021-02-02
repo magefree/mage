@@ -50,7 +50,7 @@ public final class MasterOfWaves extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect).addHint(DevotionCount.U.getHint()));
     }
 
-    public MasterOfWaves(final MasterOfWaves card) {
+    private MasterOfWaves(final MasterOfWaves card) {
         super(card);
     }
 

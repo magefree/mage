@@ -40,7 +40,7 @@ public final class WelkinHawk extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
     }
 
-    public WelkinHawk(final WelkinHawk card) {
+    private WelkinHawk(final WelkinHawk card) {
         super(card);
     }
 

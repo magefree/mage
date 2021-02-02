@@ -28,7 +28,7 @@ public final class CullingSun extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public CullingSun(final CullingSun card) {
+    private CullingSun(final CullingSun card) {
         super(card);
     }
 

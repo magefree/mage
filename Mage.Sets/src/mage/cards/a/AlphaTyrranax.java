@@ -23,7 +23,7 @@ public final class AlphaTyrranax extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public AlphaTyrranax(final AlphaTyrranax card) {
+    private AlphaTyrranax(final AlphaTyrranax card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class Doorkeeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Doorkeeper(final Doorkeeper card) {
+    private Doorkeeper(final Doorkeeper card) {
         super(card);
     }
 

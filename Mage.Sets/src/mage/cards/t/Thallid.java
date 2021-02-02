@@ -36,7 +36,7 @@ public final class Thallid extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
     }
 
-    public Thallid(final Thallid card) {
+    private Thallid(final Thallid card) {
         super(card);
     }
 

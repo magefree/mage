@@ -27,7 +27,7 @@ public final class IrresistiblePrey extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public IrresistiblePrey(final IrresistiblePrey card) {
+    private IrresistiblePrey(final IrresistiblePrey card) {
         super(card);
     }
 

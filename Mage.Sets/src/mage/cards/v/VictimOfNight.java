@@ -34,7 +34,7 @@ public final class VictimOfNight extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public VictimOfNight(final VictimOfNight card) {
+    private VictimOfNight(final VictimOfNight card) {
         super(card);
     }
 

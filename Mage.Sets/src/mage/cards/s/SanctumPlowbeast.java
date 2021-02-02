@@ -34,7 +34,7 @@ public final class SanctumPlowbeast extends CardImpl {
         this.addAbility(new IslandcyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public SanctumPlowbeast(final SanctumPlowbeast card) {
+    private SanctumPlowbeast(final SanctumPlowbeast card) {
         super(card);
     }
 

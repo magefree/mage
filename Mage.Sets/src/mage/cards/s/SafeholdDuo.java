@@ -45,7 +45,7 @@ public final class SafeholdDuo extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), whiteFilter, false));
     }
 
-    public SafeholdDuo(final SafeholdDuo card) {
+    private SafeholdDuo(final SafeholdDuo card) {
         super(card);
     }
 

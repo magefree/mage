@@ -39,7 +39,7 @@ public final class SedgeTroll extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public SedgeTroll(final SedgeTroll card) {
+    private SedgeTroll(final SedgeTroll card) {
         super(card);
     }
 

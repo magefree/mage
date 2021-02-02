@@ -22,7 +22,7 @@ public final class AlpineGrizzly extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public AlpineGrizzly(final AlpineGrizzly card) {
+    private AlpineGrizzly(final AlpineGrizzly card) {
         super(card);
     }
 

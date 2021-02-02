@@ -38,7 +38,7 @@ public final class DuskmantleSeer extends CardImpl {
 
     }
 
-    public DuskmantleSeer(final DuskmantleSeer card) {
+    private DuskmantleSeer(final DuskmantleSeer card) {
         super(card);
     }
 

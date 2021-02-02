@@ -22,7 +22,7 @@ public final class SouthernElephant extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public SouthernElephant(final SouthernElephant card) {
+    private SouthernElephant(final SouthernElephant card) {
         super(card);
     }
 

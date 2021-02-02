@@ -57,7 +57,7 @@ public final class NaturesWrath extends CardImpl {
                 "Whenever a player puts a Swamp or black permanent onto the battlefield, they sacrifice a Swamp or black permanent."));
     }
 
-    public NaturesWrath(final NaturesWrath card) {
+    private NaturesWrath(final NaturesWrath card) {
         super(card);
     }
 

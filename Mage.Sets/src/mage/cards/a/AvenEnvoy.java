@@ -27,7 +27,7 @@ public final class AvenEnvoy extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public AvenEnvoy(final AvenEnvoy card) {
+    private AvenEnvoy(final AvenEnvoy card) {
         super(card);
     }
 

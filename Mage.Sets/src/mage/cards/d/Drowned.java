@@ -28,7 +28,7 @@ public final class Drowned extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public Drowned(final Drowned card) {
+    private Drowned(final Drowned card) {
         super(card);
     }
 

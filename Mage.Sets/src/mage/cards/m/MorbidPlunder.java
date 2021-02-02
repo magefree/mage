@@ -24,7 +24,7 @@ public final class MorbidPlunder extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCreatureCard("creature cards from your graveyard")));
     }
 
-    public MorbidPlunder(final MorbidPlunder card) {
+    private MorbidPlunder(final MorbidPlunder card) {
         super(card);
     }
 

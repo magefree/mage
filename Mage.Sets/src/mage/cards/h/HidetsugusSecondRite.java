@@ -26,7 +26,7 @@ public final class HidetsugusSecondRite extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public HidetsugusSecondRite(final HidetsugusSecondRite card) {
+    private HidetsugusSecondRite(final HidetsugusSecondRite card) {
         super(card);
     }
 

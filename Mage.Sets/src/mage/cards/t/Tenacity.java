@@ -31,7 +31,7 @@ public final class Tenacity extends CardImpl {
         this.getSpellAbility().addEffect(new UntapAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, "Untap those creatures"));
     }
 
-    public Tenacity(final Tenacity card) {
+    private Tenacity(final Tenacity card) {
         super(card);
     }
 

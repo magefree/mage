@@ -43,7 +43,7 @@ public final class Necrosavant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Necrosavant(final Necrosavant card) {
+    private Necrosavant(final Necrosavant card) {
         super(card);
     }
 

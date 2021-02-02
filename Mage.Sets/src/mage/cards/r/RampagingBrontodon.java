@@ -42,7 +42,7 @@ public final class RampagingBrontodon extends CardImpl {
                 .addHint(new ValueHint("Lands you control", landsCount)));
     }
 
-    public RampagingBrontodon(final RampagingBrontodon card) {
+    private RampagingBrontodon(final RampagingBrontodon card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class KiAdiMundi extends CardImpl {
         this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{G}")));
     }
 
-    public KiAdiMundi(final KiAdiMundi card) {
+    private KiAdiMundi(final KiAdiMundi card) {
         super(card);
     }
 

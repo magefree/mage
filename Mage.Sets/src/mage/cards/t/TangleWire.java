@@ -37,7 +37,7 @@ public final class TangleWire extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new TangleWireEffect(), TargetController.ANY, false, true));
     }
 
-    public TangleWire(final TangleWire card) {
+    private TangleWire(final TangleWire card) {
         super(card);
     }
 

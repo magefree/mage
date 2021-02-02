@@ -29,7 +29,7 @@ public final class PresenceOfTheMaster extends CardImpl {
         this.addAbility(new PresenceOfTheMasterTriggeredAbility());
     }
 
-    public PresenceOfTheMaster(final PresenceOfTheMaster card) {
+    private PresenceOfTheMaster(final PresenceOfTheMaster card) {
         super(card);
     }
 

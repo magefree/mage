@@ -33,7 +33,7 @@ public final class RonomUnicorn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RonomUnicorn(final RonomUnicorn card) {
+    private RonomUnicorn(final RonomUnicorn card) {
         super(card);
     }
 

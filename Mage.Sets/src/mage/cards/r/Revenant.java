@@ -35,7 +35,7 @@ public final class Revenant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(count, Duration.EndOfGame)));
     }
 
-    public Revenant(final Revenant card) {
+    private Revenant(final Revenant card) {
         super(card);
     }
 

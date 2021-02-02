@@ -28,7 +28,7 @@ public final class RighteousFury extends CardImpl {
         this.getSpellAbility().addEffect(new RighteousFuryEffect());
     }
 
-    public RighteousFury(final RighteousFury card) {
+    private RighteousFury(final RighteousFury card) {
         super(card);
     }
 

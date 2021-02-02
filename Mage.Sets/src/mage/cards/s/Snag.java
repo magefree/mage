@@ -42,7 +42,7 @@ public final class Snag extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(filter2, Duration.EndOfTurn, true));
     }
 
-    public Snag(final Snag card) {
+    private Snag(final Snag card) {
         super(card);
     }
 

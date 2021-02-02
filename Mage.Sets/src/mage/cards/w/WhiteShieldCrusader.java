@@ -41,7 +41,7 @@ public final class WhiteShieldCrusader extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{W}{W}")));
     }
 
-    public WhiteShieldCrusader(final WhiteShieldCrusader card) {
+    private WhiteShieldCrusader(final WhiteShieldCrusader card) {
         super(card);
     }
 

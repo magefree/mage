@@ -52,7 +52,7 @@ public final class AureliaExemplarOfJustice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AureliaExemplarOfJustice(final AureliaExemplarOfJustice card) {
+    private AureliaExemplarOfJustice(final AureliaExemplarOfJustice card) {
         super(card);
     }
 

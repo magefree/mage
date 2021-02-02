@@ -21,7 +21,7 @@ public final class RevivingDose extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public RevivingDose(final RevivingDose card) {
+    private RevivingDose(final RevivingDose card) {
         super(card);
     }
 

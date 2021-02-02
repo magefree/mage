@@ -34,7 +34,7 @@ public final class WearTear extends SplitCard {
         // Fuse (You may cast one or both halves of this card from your hand.)
     }
 
-    public WearTear(final WearTear card) {
+    private WearTear(final WearTear card) {
         super(card);
     }
 

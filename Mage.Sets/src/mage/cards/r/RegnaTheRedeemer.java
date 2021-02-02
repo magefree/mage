@@ -56,7 +56,7 @@ public final class RegnaTheRedeemer extends CardImpl {
         ), new PlayerGainedLifeWatcher());
     }
 
-    public RegnaTheRedeemer(final RegnaTheRedeemer card) {
+    private RegnaTheRedeemer(final RegnaTheRedeemer card) {
         super(card);
     }
 

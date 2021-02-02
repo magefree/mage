@@ -43,7 +43,7 @@ public final class Warmonger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Warmonger(final Warmonger card) {
+    private Warmonger(final Warmonger card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class SurestrikeTrident extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(4)));
     }
 
-    public SurestrikeTrident(final SurestrikeTrident card) {
+    private SurestrikeTrident(final SurestrikeTrident card) {
         super(card);
     }
 

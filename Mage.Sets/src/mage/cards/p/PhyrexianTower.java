@@ -36,7 +36,7 @@ public final class PhyrexianTower extends CardImpl {
 
     }
 
-    public PhyrexianTower(final PhyrexianTower card) {
+    private PhyrexianTower(final PhyrexianTower card) {
         super(card);
     }
 

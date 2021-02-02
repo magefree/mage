@@ -28,7 +28,7 @@ public final class Oasis extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Oasis(final Oasis card) {
+    private Oasis(final Oasis card) {
         super(card);
     }
 

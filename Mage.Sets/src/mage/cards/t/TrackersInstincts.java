@@ -36,7 +36,7 @@ public final class TrackersInstincts extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{U}"), TimingRule.SORCERY));
     }
 
-    public TrackersInstincts(final TrackersInstincts card) {
+    private TrackersInstincts(final TrackersInstincts card) {
         super(card);
     }
 

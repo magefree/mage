@@ -70,7 +70,7 @@ public final class PossessedNomad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PossessedNomad(final PossessedNomad card) {
+    private PossessedNomad(final PossessedNomad card) {
         super(card);
     }
 

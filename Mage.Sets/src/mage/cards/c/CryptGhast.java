@@ -37,7 +37,7 @@ public final class CryptGhast extends CardImpl {
         this.addAbility(new CryptGhastTriggeredAbility());
     }
 
-    public CryptGhast(final CryptGhast card) {
+    private CryptGhast(final CryptGhast card) {
         super(card);
     }
 

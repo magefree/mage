@@ -54,7 +54,7 @@ public final class PhyrexianIngester extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianIngesterBoostEffect()));
     }
 
-    public PhyrexianIngester(final PhyrexianIngester card) {
+    private PhyrexianIngester(final PhyrexianIngester card) {
         super(card);
     }
 

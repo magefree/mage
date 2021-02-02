@@ -23,7 +23,7 @@ public final class BazaarOfBaghdad extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(2, 3), new TapSourceCost()));
     }
 
-    public BazaarOfBaghdad(final BazaarOfBaghdad card) {
+    private BazaarOfBaghdad(final BazaarOfBaghdad card) {
         super(card);
     }
 

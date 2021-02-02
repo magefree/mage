@@ -43,7 +43,7 @@ public final class Atogatog extends CardImpl {
         
     }
 
-    public Atogatog(final Atogatog card) {
+    private Atogatog(final Atogatog card) {
         super(card);
     }
 

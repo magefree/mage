@@ -40,7 +40,7 @@ public final class HeraldsHorn extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new HeraldsHornEffect(), TargetController.YOU, false));
     }
 
-    public HeraldsHorn(final HeraldsHorn card) {
+    private HeraldsHorn(final HeraldsHorn card) {
         super(card);
     }
 

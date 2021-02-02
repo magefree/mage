@@ -37,7 +37,7 @@ public final class ChiefOfTheFoundry extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBoosted, true)));
     }
 
-    public ChiefOfTheFoundry(final ChiefOfTheFoundry card) {
+    private ChiefOfTheFoundry(final ChiefOfTheFoundry card) {
         super(card);
     }
 

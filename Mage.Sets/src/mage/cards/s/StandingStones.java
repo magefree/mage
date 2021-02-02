@@ -27,7 +27,7 @@ public final class StandingStones extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StandingStones(final StandingStones card) {
+    private StandingStones(final StandingStones card) {
         super(card);
     }
 

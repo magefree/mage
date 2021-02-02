@@ -38,7 +38,7 @@ public final class DualcasterMage extends CardImpl {
 
     }
 
-    public DualcasterMage(final DualcasterMage card) {
+    private DualcasterMage(final DualcasterMage card) {
         super(card);
     }
 

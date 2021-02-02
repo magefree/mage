@@ -21,7 +21,7 @@ public final class TitanicPelagosaur extends CardImpl {
         this.toughness = new MageInt(6);
     }
 
-    public TitanicPelagosaur(final TitanicPelagosaur card) {
+    private TitanicPelagosaur(final TitanicPelagosaur card) {
         super(card);
     }
 

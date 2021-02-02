@@ -43,7 +43,7 @@ public final class RakdosAugermage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RakdosAugermage(final RakdosAugermage card) {
+    private RakdosAugermage(final RakdosAugermage card) {
         super(card);
     }
 

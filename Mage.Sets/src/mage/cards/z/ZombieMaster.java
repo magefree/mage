@@ -49,7 +49,7 @@ public final class ZombieMaster extends CardImpl {
 
     }
 
-    public ZombieMaster(final ZombieMaster card) {
+    private ZombieMaster(final ZombieMaster card) {
         super(card);
     }
 

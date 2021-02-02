@@ -30,7 +30,7 @@ public final class ThoughtCourier extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
     }
 
-    public ThoughtCourier(final ThoughtCourier card) {
+    private ThoughtCourier(final ThoughtCourier card) {
         super(card);
     }
 

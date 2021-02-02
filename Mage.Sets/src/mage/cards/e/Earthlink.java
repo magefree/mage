@@ -38,7 +38,7 @@ public final class Earthlink extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new EarthlinkEffect(), false, false, true));
     }
 
-    public Earthlink(final Earthlink card) {
+    private Earthlink(final Earthlink card) {
         super(card);
     }
 

@@ -62,7 +62,7 @@ public final class DivinersWand extends CardImpl {
         this.addAbility(totalAbility);
     }
 
-    public DivinersWand(final DivinersWand card) {
+    private DivinersWand(final DivinersWand card) {
         super(card);
     }
 

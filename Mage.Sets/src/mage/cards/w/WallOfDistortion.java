@@ -39,7 +39,7 @@ public final class WallOfDistortion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WallOfDistortion(final WallOfDistortion card) {
+    private WallOfDistortion(final WallOfDistortion card) {
         super(card);
     }
 

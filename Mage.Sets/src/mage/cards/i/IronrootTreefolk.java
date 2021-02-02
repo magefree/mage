@@ -22,7 +22,7 @@ public final class IronrootTreefolk extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public IronrootTreefolk(final IronrootTreefolk card) {
+    private IronrootTreefolk(final IronrootTreefolk card) {
         super(card);
     }
 

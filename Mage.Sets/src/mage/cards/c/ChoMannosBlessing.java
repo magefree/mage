@@ -44,7 +44,7 @@ public final class ChoMannosBlessing extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionChosenColorAttachedEffect(true)));
     }
 
-    public ChoMannosBlessing(final ChoMannosBlessing card) {
+    private ChoMannosBlessing(final ChoMannosBlessing card) {
         super(card);
     }
 

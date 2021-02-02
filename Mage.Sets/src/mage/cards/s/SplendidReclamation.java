@@ -26,7 +26,7 @@ public final class SplendidReclamation extends CardImpl {
         this.getSpellAbility().addEffect(new ReplenishEffect());
     }
 
-    public SplendidReclamation(final SplendidReclamation card) {
+    private SplendidReclamation(final SplendidReclamation card) {
         super(card);
     }
 

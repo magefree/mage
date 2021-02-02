@@ -21,7 +21,7 @@ public final class TerrainElemental extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public TerrainElemental(final TerrainElemental card) {
+    private TerrainElemental(final TerrainElemental card) {
         super(card);
     }
 

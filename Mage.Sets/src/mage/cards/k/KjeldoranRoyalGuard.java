@@ -40,7 +40,7 @@ public final class KjeldoranRoyalGuard extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new KjeldoranRoyalGuardEffect(), new TapSourceCost()));
     }
 
-    public KjeldoranRoyalGuard(final KjeldoranRoyalGuard card) {
+    private KjeldoranRoyalGuard(final KjeldoranRoyalGuard card) {
         super(card);
     }
 

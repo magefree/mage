@@ -42,7 +42,7 @@ public final class Dreamstealer extends CardImpl {
 
     }
 
-    public Dreamstealer(final Dreamstealer card) {
+    private Dreamstealer(final Dreamstealer card) {
         super(card);
     }
 

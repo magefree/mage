@@ -28,7 +28,7 @@ public final class ValeronOutlander extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
     }
 
-    public ValeronOutlander(final ValeronOutlander card) {
+    private ValeronOutlander(final ValeronOutlander card) {
         super(card);
     }
 

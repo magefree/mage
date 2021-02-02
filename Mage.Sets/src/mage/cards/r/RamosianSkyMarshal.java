@@ -49,7 +49,7 @@ public final class RamosianSkyMarshal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RamosianSkyMarshal(final RamosianSkyMarshal card) {
+    private RamosianSkyMarshal(final RamosianSkyMarshal card) {
         super(card);
     }
 

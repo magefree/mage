@@ -29,7 +29,7 @@ public final class TrainedPronghorn extends CardImpl {
 
     }
 
-    public TrainedPronghorn(final TrainedPronghorn card) {
+    private TrainedPronghorn(final TrainedPronghorn card) {
         super(card);
     }
 

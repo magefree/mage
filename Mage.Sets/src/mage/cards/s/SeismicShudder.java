@@ -30,7 +30,7 @@ public final class SeismicShudder extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filter));
     }
 
-    public SeismicShudder(final SeismicShudder card) {
+    private SeismicShudder(final SeismicShudder card) {
         super(card);
     }
 

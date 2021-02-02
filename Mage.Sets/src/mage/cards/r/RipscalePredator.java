@@ -26,7 +26,7 @@ public final class RipscalePredator extends CardImpl {
         this.addAbility(new MenaceAbility());
     }
 
-    public RipscalePredator(final RipscalePredator card) {
+    private RipscalePredator(final RipscalePredator card) {
         super(card);
     }
 

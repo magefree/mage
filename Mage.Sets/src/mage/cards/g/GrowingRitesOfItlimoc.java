@@ -52,7 +52,7 @@ public final class GrowingRitesOfItlimoc extends CardImpl {
                 "At the beginning of your end step, if you control four or more creatures, transform {this}"));
     }
 
-    public GrowingRitesOfItlimoc(final GrowingRitesOfItlimoc card) {
+    private GrowingRitesOfItlimoc(final GrowingRitesOfItlimoc card) {
         super(card);
     }
 

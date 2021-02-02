@@ -27,7 +27,7 @@ public final class ProtectionOfTheHekma extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionOfTheHekmaEffect()));
     }
 
-    public ProtectionOfTheHekma(final ProtectionOfTheHekma card) {
+    private ProtectionOfTheHekma(final ProtectionOfTheHekma card) {
         super(card);
     }
 

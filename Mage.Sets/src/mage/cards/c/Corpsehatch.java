@@ -35,7 +35,7 @@ public final class Corpsehatch extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken(), 2));
     }
 
-    public Corpsehatch(final Corpsehatch card) {
+    private Corpsehatch(final Corpsehatch card) {
         super(card);
     }
 

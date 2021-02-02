@@ -43,7 +43,7 @@ public final class AvacynianPriest extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AvacynianPriest(final AvacynianPriest card) {
+    private AvacynianPriest(final AvacynianPriest card) {
         super(card);
     }
 

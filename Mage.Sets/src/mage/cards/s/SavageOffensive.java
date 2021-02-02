@@ -45,7 +45,7 @@ public final class SavageOffensive extends CardImpl {
                 "if this spell was kicked, they get +1/+1 until end of turn."));
     }
 
-    public SavageOffensive(final SavageOffensive card) {
+    private SavageOffensive(final SavageOffensive card) {
         super(card);
     }
 

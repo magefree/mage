@@ -33,7 +33,7 @@ public final class SylvanOffering extends CardImpl {
         this.getSpellAbility().addEffect(new SylvanOfferingEffect2());
     }
 
-    public SylvanOffering(final SylvanOffering card) {
+    private SylvanOffering(final SylvanOffering card) {
         super(card);
     }
 

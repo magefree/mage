@@ -25,7 +25,7 @@ public final class GildedLotus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GildedLotus(final GildedLotus card) {
+    private GildedLotus(final GildedLotus card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class WarBarge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WarBarge(final WarBarge card) {
+    private WarBarge(final WarBarge card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class FungalSprouting extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), GreatestPowerAmongControlledCreaturesValue.instance));
     }
 
-    public FungalSprouting(final FungalSprouting card) {
+    private FungalSprouting(final FungalSprouting card) {
         super(card);
     }
 

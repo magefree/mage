@@ -23,7 +23,7 @@ public final class OffBalance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public OffBalance(final OffBalance card) {
+    private OffBalance(final OffBalance card) {
         super(card);
     }
 

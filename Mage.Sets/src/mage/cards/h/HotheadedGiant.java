@@ -48,7 +48,7 @@ public final class HotheadedGiant extends CardImpl {
 
     }
 
-    public HotheadedGiant(final HotheadedGiant card) {
+    private HotheadedGiant(final HotheadedGiant card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class Whipcorder extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{W}")));
     }
 
-    public Whipcorder(final Whipcorder card) {
+    private Whipcorder(final Whipcorder card) {
         super(card);
     }
 

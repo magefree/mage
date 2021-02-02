@@ -24,7 +24,7 @@ public final class Resurrection extends CardImpl {
 
     }
 
-    public Resurrection(final Resurrection card) {
+    private Resurrection(final Resurrection card) {
         super(card);
     }
 

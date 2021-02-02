@@ -53,7 +53,7 @@ public final class WatcherOfTheSpheres extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter1, false));
     }
 
-    public WatcherOfTheSpheres(final WatcherOfTheSpheres card) {
+    private WatcherOfTheSpheres(final WatcherOfTheSpheres card) {
         super(card);
     }
 

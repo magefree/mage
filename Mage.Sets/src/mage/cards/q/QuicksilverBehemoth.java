@@ -36,7 +36,7 @@ public final class QuicksilverBehemoth extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(effect, false));
     }
 
-    public QuicksilverBehemoth(final QuicksilverBehemoth card) {
+    private QuicksilverBehemoth(final QuicksilverBehemoth card) {
         super(card);
     }
 

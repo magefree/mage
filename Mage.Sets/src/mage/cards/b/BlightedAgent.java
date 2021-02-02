@@ -27,7 +27,7 @@ public final class BlightedAgent extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public BlightedAgent(final BlightedAgent card) {
+    private BlightedAgent(final BlightedAgent card) {
         super(card);
     }
 

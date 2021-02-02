@@ -36,7 +36,7 @@ public final class SylvanMight extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{G}{G}"), TimingRule.INSTANT));
     }
 
-    public SylvanMight(final SylvanMight card) {
+    private SylvanMight(final SylvanMight card) {
         super(card);
     }
 

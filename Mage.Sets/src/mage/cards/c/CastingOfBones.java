@@ -37,7 +37,7 @@ public final class CastingOfBones extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new DrawDiscardOneOfThemEffect(3), "enchanted creature"));
     }
 
-    public CastingOfBones(final CastingOfBones card) {
+    private CastingOfBones(final CastingOfBones card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class WoodlandSleuth extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MorbidCondition.instance, staticText));
     }
 
-    public WoodlandSleuth(final WoodlandSleuth card) {
+    private WoodlandSleuth(final WoodlandSleuth card) {
         super(card);
     }
 

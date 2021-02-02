@@ -35,7 +35,7 @@ public final class ButchersGlee extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public ButchersGlee(final ButchersGlee card) {
+    private ButchersGlee(final ButchersGlee card) {
         super(card);
     }
 

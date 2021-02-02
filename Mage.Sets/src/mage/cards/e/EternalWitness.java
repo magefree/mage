@@ -32,7 +32,7 @@ public final class EternalWitness extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EternalWitness(final EternalWitness card) {
+    private EternalWitness(final EternalWitness card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class PouncingCheetah extends CardImpl {
         addAbility(FlashAbility.getInstance());
     }
 
-    public PouncingCheetah(final PouncingCheetah card) {
+    private PouncingCheetah(final PouncingCheetah card) {
         super(card);
     }
 

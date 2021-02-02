@@ -27,7 +27,7 @@ public final class GreenwoodSentinel extends CardImpl {
 
     }
 
-    public GreenwoodSentinel(final GreenwoodSentinel card) {
+    private GreenwoodSentinel(final GreenwoodSentinel card) {
         super(card);
     }
 

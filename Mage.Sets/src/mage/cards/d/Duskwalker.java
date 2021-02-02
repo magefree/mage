@@ -41,7 +41,7 @@ public final class Duskwalker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Duskwalker(final Duskwalker card) {
+    private Duskwalker(final Duskwalker card) {
         super(card);
     }
 

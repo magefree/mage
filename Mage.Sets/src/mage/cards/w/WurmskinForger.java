@@ -32,7 +32,7 @@ public final class WurmskinForger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WurmskinForger(final WurmskinForger card) {
+    private WurmskinForger(final WurmskinForger card) {
         super(card);
     }
 

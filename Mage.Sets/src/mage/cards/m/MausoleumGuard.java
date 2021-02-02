@@ -28,7 +28,7 @@ public final class MausoleumGuard extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken(), 2)));
     }
 
-    public MausoleumGuard(final MausoleumGuard card) {
+    private MausoleumGuard(final MausoleumGuard card) {
         super(card);
     }
 

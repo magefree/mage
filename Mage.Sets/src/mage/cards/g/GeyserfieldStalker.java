@@ -30,7 +30,7 @@ public final class GeyserfieldStalker extends CardImpl {
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public GeyserfieldStalker(final GeyserfieldStalker card) {
+    private GeyserfieldStalker(final GeyserfieldStalker card) {
         super(card);
     }
 

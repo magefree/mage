@@ -32,7 +32,7 @@ public final class FleetingAven extends CardImpl {
         this.addAbility(new CycleAllTriggeredAbility(new ReturnToHandSourceEffect(true), true));
     }
 
-    public FleetingAven(final FleetingAven card) {
+    private FleetingAven(final FleetingAven card) {
         super(card);
     }
 

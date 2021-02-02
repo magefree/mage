@@ -40,7 +40,7 @@ public final class RathsEdge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RathsEdge(final RathsEdge card) {
+    private RathsEdge(final RathsEdge card) {
         super(card);
     }
 

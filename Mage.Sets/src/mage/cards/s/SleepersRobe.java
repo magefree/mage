@@ -45,7 +45,7 @@ public final class SleepersRobe extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1), "enchanted creature", true, false, true, TargetController.OPPONENT));
     }
 
-    public SleepersRobe(final SleepersRobe card) {
+    private SleepersRobe(final SleepersRobe card) {
         super(card);
     }
 

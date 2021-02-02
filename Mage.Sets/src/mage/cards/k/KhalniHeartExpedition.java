@@ -39,7 +39,7 @@ public final class KhalniHeartExpedition extends CardImpl {
         ));
     }
 
-    public KhalniHeartExpedition(final KhalniHeartExpedition card) {
+    private KhalniHeartExpedition(final KhalniHeartExpedition card) {
         super(card);
     }
 

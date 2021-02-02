@@ -28,7 +28,7 @@ public final class GoblinSpy extends CardImpl {
       this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
     }
 
-    public GoblinSpy(final GoblinSpy card) {
+    private GoblinSpy(final GoblinSpy card) {
         super(card);
     }
 

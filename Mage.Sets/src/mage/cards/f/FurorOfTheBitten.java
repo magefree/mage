@@ -39,7 +39,7 @@ public final class FurorOfTheBitten extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FurorOfTheBitten(final FurorOfTheBitten card) {
+    private FurorOfTheBitten(final FurorOfTheBitten card) {
         super(card);
     }
 

@@ -63,7 +63,7 @@ public final class NezahalPrimalTide extends CardImpl {
 
     }
 
-    public NezahalPrimalTide(final NezahalPrimalTide card) {
+    private NezahalPrimalTide(final NezahalPrimalTide card) {
         super(card);
     }
 

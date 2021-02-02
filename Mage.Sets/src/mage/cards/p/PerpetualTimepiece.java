@@ -39,7 +39,7 @@ public final class PerpetualTimepiece extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PerpetualTimepiece(final PerpetualTimepiece card) {
+    private PerpetualTimepiece(final PerpetualTimepiece card) {
         super(card);
     }
 

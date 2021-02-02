@@ -41,7 +41,7 @@ public final class StrandsOfNight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StrandsOfNight(final StrandsOfNight card) {
+    private StrandsOfNight(final StrandsOfNight card) {
         super(card);
     }
 

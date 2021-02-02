@@ -40,7 +40,7 @@ public final class MarshCrocodile extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(), false));
     }
 
-    public MarshCrocodile(final MarshCrocodile card) {
+    private MarshCrocodile(final MarshCrocodile card) {
         super(card);
     }
 

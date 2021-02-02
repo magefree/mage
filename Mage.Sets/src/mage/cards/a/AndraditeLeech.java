@@ -40,7 +40,7 @@ public final class AndraditeLeech extends CardImpl {
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public AndraditeLeech(final AndraditeLeech card) {
+    private AndraditeLeech(final AndraditeLeech card) {
         super(card);
     }
 

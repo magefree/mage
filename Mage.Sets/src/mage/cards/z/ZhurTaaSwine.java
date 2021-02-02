@@ -30,7 +30,7 @@ public final class ZhurTaaSwine extends CardImpl {
 
     }
 
-    public ZhurTaaSwine(final ZhurTaaSwine card) {
+    private ZhurTaaSwine(final ZhurTaaSwine card) {
         super(card);
     }
 

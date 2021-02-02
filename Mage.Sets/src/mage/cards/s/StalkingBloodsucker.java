@@ -37,7 +37,7 @@ public final class StalkingBloodsucker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StalkingBloodsucker(final StalkingBloodsucker card) {
+    private StalkingBloodsucker(final StalkingBloodsucker card) {
         super(card);
     }
 

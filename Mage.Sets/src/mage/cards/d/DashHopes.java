@@ -34,7 +34,7 @@ public final class DashHopes extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public DashHopes(final DashHopes card) {
+    private DashHopes(final DashHopes card) {
         super(card);
     }
 

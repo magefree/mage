@@ -56,7 +56,7 @@ public final class AdarkarValkyrie extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AdarkarValkyrie(final AdarkarValkyrie card) {
+    private AdarkarValkyrie(final AdarkarValkyrie card) {
         super(card);
     }
 

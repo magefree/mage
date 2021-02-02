@@ -28,7 +28,7 @@ public final class AdornedPouncer extends CardImpl {
         addAbility(new EternalizeAbility(new ManaCostsImpl("{3}{W}{W}"), this));
     }
 
-    public AdornedPouncer(final AdornedPouncer card) {
+    private AdornedPouncer(final AdornedPouncer card) {
         super(card);
     }
 

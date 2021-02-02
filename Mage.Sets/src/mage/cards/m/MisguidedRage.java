@@ -23,7 +23,7 @@ public final class MisguidedRage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public MisguidedRage(final MisguidedRage card) {
+    private MisguidedRage(final MisguidedRage card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class StoneHavenOutfitter extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), false, filter));
     }
 
-    public StoneHavenOutfitter(final StoneHavenOutfitter card) {
+    private StoneHavenOutfitter(final StoneHavenOutfitter card) {
         super(card);
     }
 

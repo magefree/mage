@@ -32,7 +32,7 @@ public final class TendrilsOfCorruption extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public TendrilsOfCorruption(final TendrilsOfCorruption card) {
+    private TendrilsOfCorruption(final TendrilsOfCorruption card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class KrosanBeast extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public KrosanBeast(final KrosanBeast card) {
+    private KrosanBeast(final KrosanBeast card) {
         super(card);
     }
 

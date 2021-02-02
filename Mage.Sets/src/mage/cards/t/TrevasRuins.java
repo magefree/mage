@@ -40,7 +40,7 @@ public final class TrevasRuins extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public TrevasRuins(final TrevasRuins card) {
+    private TrevasRuins(final TrevasRuins card) {
         super(card);
     }
 

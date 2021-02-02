@@ -49,7 +49,7 @@ public final class TolsimirWolfblood extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VojaToken()), new TapSourceCost()));
     }
 
-    public TolsimirWolfblood(final TolsimirWolfblood card) {
+    private TolsimirWolfblood(final TolsimirWolfblood card) {
         super(card);
     }
 

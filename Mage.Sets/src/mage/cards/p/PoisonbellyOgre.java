@@ -39,7 +39,7 @@ public final class PoisonbellyOgre extends CardImpl {
         
     }
 
-    public PoisonbellyOgre(final PoisonbellyOgre card) {
+    private PoisonbellyOgre(final PoisonbellyOgre card) {
         super(card);
     }
 

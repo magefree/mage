@@ -31,7 +31,7 @@ public final class Somnomancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Somnomancer(final Somnomancer card) {
+    private Somnomancer(final Somnomancer card) {
         super(card);
     }
 

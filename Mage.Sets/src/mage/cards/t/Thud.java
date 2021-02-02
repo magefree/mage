@@ -30,7 +30,7 @@ public final class Thud extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public Thud(final Thud card) {
+    private Thud(final Thud card) {
         super(card);
     }
 

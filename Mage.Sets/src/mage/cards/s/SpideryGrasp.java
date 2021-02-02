@@ -35,7 +35,7 @@ public final class SpideryGrasp extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SpideryGrasp(final SpideryGrasp card) {
+    private SpideryGrasp(final SpideryGrasp card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class BounteousKirin extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new BounteousKirinEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, true, true));
     }
 
-    public BounteousKirin(final BounteousKirin card) {
+    private BounteousKirin(final BounteousKirin card) {
         super(card);
     }
 

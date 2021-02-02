@@ -36,7 +36,7 @@ public final class SummonThePack extends CardImpl {
         this.getSpellAbility().addEffect(new SummonThePackEffect());
     }
 
-    public SummonThePack(final SummonThePack card) {
+    private SummonThePack(final SummonThePack card) {
         super(card);
     }
 

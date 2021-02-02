@@ -25,7 +25,7 @@ public final class FloodOfRecollection extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public FloodOfRecollection(final FloodOfRecollection card) {
+    private FloodOfRecollection(final FloodOfRecollection card) {
         super(card);
     }
 

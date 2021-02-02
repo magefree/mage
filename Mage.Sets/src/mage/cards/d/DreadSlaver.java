@@ -33,7 +33,7 @@ public final class DreadSlaver extends CardImpl {
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(new DreadSlaverEffect(), false));
     }
 
-    public DreadSlaver(final DreadSlaver card) {
+    private DreadSlaver(final DreadSlaver card) {
         super(card);
     }
 

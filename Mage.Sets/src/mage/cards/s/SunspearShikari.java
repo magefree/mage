@@ -40,7 +40,7 @@ public final class SunspearShikari extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SunspearShikari(final SunspearShikari card) {
+    private SunspearShikari(final SunspearShikari card) {
         super(card);
     }
 

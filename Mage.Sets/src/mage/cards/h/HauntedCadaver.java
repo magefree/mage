@@ -34,7 +34,7 @@ public final class HauntedCadaver extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{B}")));
     }
 
-    public HauntedCadaver(final HauntedCadaver card) {
+    private HauntedCadaver(final HauntedCadaver card) {
         super(card);
     }
 

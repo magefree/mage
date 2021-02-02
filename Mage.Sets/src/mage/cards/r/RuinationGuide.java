@@ -43,7 +43,7 @@ public final class RuinationGuide extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public RuinationGuide(final RuinationGuide card) {
+    private RuinationGuide(final RuinationGuide card) {
         super(card);
     }
 

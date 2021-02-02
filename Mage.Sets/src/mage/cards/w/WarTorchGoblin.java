@@ -38,7 +38,7 @@ public final class WarTorchGoblin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WarTorchGoblin(final WarTorchGoblin card) {
+    private WarTorchGoblin(final WarTorchGoblin card) {
         super(card);
     }
 

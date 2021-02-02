@@ -38,7 +38,7 @@ public final class DeathTrooper extends CardImpl {
 
     }
 
-    public DeathTrooper(final DeathTrooper card) {
+    private DeathTrooper(final DeathTrooper card) {
         super(card);
     }
 

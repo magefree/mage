@@ -25,7 +25,7 @@ public final class LaceWithMoonglove extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public LaceWithMoonglove(final LaceWithMoonglove card) {
+    private LaceWithMoonglove(final LaceWithMoonglove card) {
         super(card);
     }
 

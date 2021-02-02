@@ -42,7 +42,7 @@ public final class GraveSifter extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GraveSifterEffect(), false));
     }
 
-    public GraveSifter(final GraveSifter card) {
+    private GraveSifter(final GraveSifter card) {
         super(card);
     }
 

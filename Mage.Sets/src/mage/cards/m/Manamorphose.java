@@ -25,7 +25,7 @@ public final class Manamorphose extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Manamorphose(final Manamorphose card) {
+    private Manamorphose(final Manamorphose card) {
         super(card);
     }
 

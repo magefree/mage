@@ -29,7 +29,7 @@ public final class NightbirdsClutches extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), TimingRule.SORCERY));
     }
 
-    public NightbirdsClutches(final NightbirdsClutches card) {
+    private NightbirdsClutches(final NightbirdsClutches card) {
         super(card);
     }
 

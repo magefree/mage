@@ -29,7 +29,7 @@ public final class CursedRack extends CardImpl {
 
     }
 
-    public CursedRack(final CursedRack card) {
+    private CursedRack(final CursedRack card) {
         super(card);
     }
 

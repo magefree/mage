@@ -35,7 +35,7 @@ public final class LoseCalm extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public LoseCalm(final LoseCalm card) {
+    private LoseCalm(final LoseCalm card) {
         super(card);
     }
 

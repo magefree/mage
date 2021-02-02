@@ -38,7 +38,7 @@ public final class DeepwoodDrummer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeepwoodDrummer(final DeepwoodDrummer card) {
+    private DeepwoodDrummer(final DeepwoodDrummer card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class HarbingerOfSpring extends CardImpl {
         this.addAbility(new SoulshiftAbility(4));
     }
 
-    public HarbingerOfSpring(final HarbingerOfSpring card) {
+    private HarbingerOfSpring(final HarbingerOfSpring card) {
         super(card);
     }
 

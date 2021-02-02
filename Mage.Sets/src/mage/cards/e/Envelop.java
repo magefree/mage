@@ -30,7 +30,7 @@ public final class Envelop extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public Envelop(final Envelop card) {
+    private Envelop(final Envelop card) {
         super(card);
     }
 

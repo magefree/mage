@@ -44,7 +44,7 @@ public final class PeemaAetherSeer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PeemaAetherSeer(final PeemaAetherSeer card) {
+    private PeemaAetherSeer(final PeemaAetherSeer card) {
         super(card);
     }
 

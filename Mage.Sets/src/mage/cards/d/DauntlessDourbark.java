@@ -58,7 +58,7 @@ public final class DauntlessDourbark extends CardImpl {
         
     }
 
-    public DauntlessDourbark(final DauntlessDourbark card) {
+    private DauntlessDourbark(final DauntlessDourbark card) {
         super(card);
     }
 

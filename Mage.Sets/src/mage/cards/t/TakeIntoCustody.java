@@ -24,7 +24,7 @@ public final class TakeIntoCustody extends CardImpl {
         this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("It"));
     }
 
-    public TakeIntoCustody(final TakeIntoCustody card) {
+    private TakeIntoCustody(final TakeIntoCustody card) {
         super(card);
     }
 

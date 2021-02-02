@@ -39,7 +39,7 @@ public final class CetaDisciple extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public CetaDisciple(final CetaDisciple card) {
+    private CetaDisciple(final CetaDisciple card) {
         super(card);
     }
 

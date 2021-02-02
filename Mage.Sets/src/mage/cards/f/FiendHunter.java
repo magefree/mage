@@ -47,7 +47,7 @@ public final class FiendHunter extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public FiendHunter(final FiendHunter card) {
+    private FiendHunter(final FiendHunter card) {
         super(card);
     }
 

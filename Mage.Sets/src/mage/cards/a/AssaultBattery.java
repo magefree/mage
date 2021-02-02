@@ -30,7 +30,7 @@ public final class AssaultBattery extends SplitCard {
 
     }
 
-    public AssaultBattery(final AssaultBattery card) {
+    private AssaultBattery(final AssaultBattery card) {
         super(card);
     }
 

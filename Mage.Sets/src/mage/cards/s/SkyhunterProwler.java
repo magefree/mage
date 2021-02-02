@@ -28,7 +28,7 @@ public final class SkyhunterProwler extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public SkyhunterProwler(final SkyhunterProwler card) {
+    private SkyhunterProwler(final SkyhunterProwler card) {
         super(card);
     }
 

@@ -57,7 +57,7 @@ public final class EverythingamajigE extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EverythingamajigE(final EverythingamajigE card) {
+    private EverythingamajigE(final EverythingamajigE card) {
         super(card);
     }
 

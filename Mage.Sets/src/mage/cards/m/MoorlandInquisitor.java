@@ -33,7 +33,7 @@ public final class MoorlandInquisitor extends CardImpl {
                 new ManaCostsImpl("{2}{W}")));
     }
 
-    public MoorlandInquisitor(final MoorlandInquisitor card) {
+    private MoorlandInquisitor(final MoorlandInquisitor card) {
         super(card);
     }
 

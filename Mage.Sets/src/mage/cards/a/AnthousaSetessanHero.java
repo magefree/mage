@@ -37,7 +37,7 @@ public final class AnthousaSetessanHero extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AnthousaSetessanHero(final AnthousaSetessanHero card) {
+    private AnthousaSetessanHero(final AnthousaSetessanHero card) {
         super(card);
     }
 

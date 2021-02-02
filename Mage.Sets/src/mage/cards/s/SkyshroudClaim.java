@@ -28,7 +28,7 @@ public final class SkyshroudClaim extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, filter ), false));
     }
 
-    public SkyshroudClaim(final SkyshroudClaim card) {
+    private SkyshroudClaim(final SkyshroudClaim card) {
         super(card);
     }
 

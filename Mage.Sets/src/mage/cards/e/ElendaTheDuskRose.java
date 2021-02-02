@@ -41,7 +41,7 @@ public final class ElendaTheDuskRose extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new IxalanVampireToken(), new SourcePermanentPowerCount())));
     }
 
-    public ElendaTheDuskRose(final ElendaTheDuskRose card) {
+    private ElendaTheDuskRose(final ElendaTheDuskRose card) {
         super(card);
     }
 

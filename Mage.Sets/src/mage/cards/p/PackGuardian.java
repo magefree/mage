@@ -35,7 +35,7 @@ public final class PackGuardian extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new WolfToken()), new DiscardCardCost(new FilterLandCard()))));
     }
 
-    public PackGuardian(final PackGuardian card) {
+    private PackGuardian(final PackGuardian card) {
         super(card);
     }
 

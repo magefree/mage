@@ -38,7 +38,7 @@ public final class HarnessTheStorm extends CardImpl {
                 false), new CastFromHandWatcher());
     }
 
-    public HarnessTheStorm(final HarnessTheStorm card) {
+    private HarnessTheStorm(final HarnessTheStorm card) {
         super(card);
     }
 

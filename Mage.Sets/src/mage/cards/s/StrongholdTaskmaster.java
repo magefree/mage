@@ -40,7 +40,7 @@ public final class StrongholdTaskmaster extends CardImpl {
             Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public StrongholdTaskmaster(final StrongholdTaskmaster card) {
+    private StrongholdTaskmaster(final StrongholdTaskmaster card) {
         super(card);
     }
 

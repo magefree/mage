@@ -42,7 +42,7 @@ public final class TeferiMageOfZhalfir extends CardImpl {
 
     }
 
-    public TeferiMageOfZhalfir(final TeferiMageOfZhalfir card) {
+    private TeferiMageOfZhalfir(final TeferiMageOfZhalfir card) {
         super(card);
     }
 

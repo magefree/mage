@@ -37,7 +37,7 @@ public final class KnuckleboneWitch extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true, filter ));
     }
 
-    public KnuckleboneWitch(final KnuckleboneWitch card) {
+    private KnuckleboneWitch(final KnuckleboneWitch card) {
         super(card);
     }
 

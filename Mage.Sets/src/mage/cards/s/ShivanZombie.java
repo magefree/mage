@@ -27,7 +27,7 @@ public final class ShivanZombie extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
     }
 
-    public ShivanZombie(final ShivanZombie card) {
+    private ShivanZombie(final ShivanZombie card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class ConcussiveBolt extends CardImpl {
         this.getSpellAbility().addHint(MetalcraftHint.instance);
     }
 
-    public ConcussiveBolt(final ConcussiveBolt card) {
+    private ConcussiveBolt(final ConcussiveBolt card) {
         super(card);
     }
 

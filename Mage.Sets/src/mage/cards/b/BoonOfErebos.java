@@ -30,7 +30,7 @@ public final class BoonOfErebos extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
-    public BoonOfErebos(final BoonOfErebos card) {
+    private BoonOfErebos(final BoonOfErebos card) {
         super(card);
     }
 

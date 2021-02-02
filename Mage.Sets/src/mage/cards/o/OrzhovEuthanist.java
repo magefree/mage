@@ -42,7 +42,7 @@ public final class OrzhovEuthanist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrzhovEuthanist(final OrzhovEuthanist card) {
+    private OrzhovEuthanist(final OrzhovEuthanist card) {
         super(card);
     }
 

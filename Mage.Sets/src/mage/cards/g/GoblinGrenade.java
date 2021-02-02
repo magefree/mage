@@ -31,7 +31,7 @@ public final class GoblinGrenade extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public GoblinGrenade(final GoblinGrenade card) {
+    private GoblinGrenade(final GoblinGrenade card) {
         super(card);
     }
 

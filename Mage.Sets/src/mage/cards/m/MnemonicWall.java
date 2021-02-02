@@ -42,7 +42,7 @@ public final class MnemonicWall extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MnemonicWall(final MnemonicWall card) {
+    private MnemonicWall(final MnemonicWall card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class LureOfPrey extends CardImpl {
         this.getSpellAbility().addEffect(new PutCardFromHandOntoBattlefieldEffect(filter));
     }
 
-    public LureOfPrey(final LureOfPrey card) {
+    private LureOfPrey(final LureOfPrey card) {
         super(card);
     }
 

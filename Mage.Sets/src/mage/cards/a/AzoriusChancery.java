@@ -34,7 +34,7 @@ public final class AzoriusChancery extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 0, 0, 0, 0, 0, 0), new TapSourceCost()));
     }
 
-    public AzoriusChancery(final AzoriusChancery card) {
+    private AzoriusChancery(final AzoriusChancery card) {
         super(card);
     }
 

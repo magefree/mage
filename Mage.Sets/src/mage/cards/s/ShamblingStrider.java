@@ -29,7 +29,7 @@ public final class ShamblingStrider extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}{G}")));
     }
 
-    public ShamblingStrider(final ShamblingStrider card) {
+    private ShamblingStrider(final ShamblingStrider card) {
         super(card);
     }
 

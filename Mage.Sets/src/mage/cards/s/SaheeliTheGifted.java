@@ -58,7 +58,7 @@ public final class SaheeliTheGifted extends CardImpl {
         this.addAbility(CanBeYourCommanderAbility.getInstance());
     }
 
-    public SaheeliTheGifted(final SaheeliTheGifted card) {
+    private SaheeliTheGifted(final SaheeliTheGifted card) {
         super(card);
     }
 

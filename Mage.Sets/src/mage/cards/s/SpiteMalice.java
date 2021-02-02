@@ -48,7 +48,7 @@ public final class SpiteMalice extends SplitCard {
         this.getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(filterNonBlackCreature));
     }
 
-    public SpiteMalice(final SpiteMalice card) {
+    private SpiteMalice(final SpiteMalice card) {
         super(card);
     }
 

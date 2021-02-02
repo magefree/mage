@@ -33,7 +33,7 @@ public final class AkoumBoulderfoot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AkoumBoulderfoot(final AkoumBoulderfoot card) {
+    private AkoumBoulderfoot(final AkoumBoulderfoot card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class IcatianScout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IcatianScout(final IcatianScout card) {
+    private IcatianScout(final IcatianScout card) {
         super(card);
     }
 

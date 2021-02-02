@@ -22,7 +22,7 @@ public final class AncientCraving extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(3));
     }
 
-    public AncientCraving(final AncientCraving card) {
+    private AncientCraving(final AncientCraving card) {
         super(card);
     }
 

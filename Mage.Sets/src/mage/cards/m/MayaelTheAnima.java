@@ -48,7 +48,7 @@ public final class MayaelTheAnima extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MayaelTheAnima(final MayaelTheAnima card) {
+    private MayaelTheAnima(final MayaelTheAnima card) {
         super(card);
     }
 

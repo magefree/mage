@@ -42,7 +42,7 @@ public final class WormwoodDryad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WormwoodDryad(final WormwoodDryad card) {
+    private WormwoodDryad(final WormwoodDryad card) {
         super(card);
     }
 

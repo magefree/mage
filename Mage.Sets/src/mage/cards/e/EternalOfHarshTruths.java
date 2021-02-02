@@ -32,7 +32,7 @@ public final class EternalOfHarshTruths extends CardImpl {
         this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public EternalOfHarshTruths(final EternalOfHarshTruths card) {
+    private EternalOfHarshTruths(final EternalOfHarshTruths card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class EntrailsFeaster extends CardImpl {
 
     }
 
-    public EntrailsFeaster(final EntrailsFeaster card) {
+    private EntrailsFeaster(final EntrailsFeaster card) {
         super(card);
     }
 

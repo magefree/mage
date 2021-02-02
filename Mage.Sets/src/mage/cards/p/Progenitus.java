@@ -42,7 +42,7 @@ public final class Progenitus extends CardImpl {
         this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new RevealAndShuffleIntoLibrarySourceEffect()));
     }
 
-    public Progenitus(final Progenitus card) {
+    private Progenitus(final Progenitus card) {
         super(card);
     }
 

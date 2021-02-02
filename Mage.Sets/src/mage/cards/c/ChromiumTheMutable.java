@@ -60,7 +60,7 @@ public final class ChromiumTheMutable extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChromiumTheMutable(final ChromiumTheMutable card) {
+    private ChromiumTheMutable(final ChromiumTheMutable card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class ElvishBranchbender extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElvishBranchbender(final ElvishBranchbender card) {
+    private ElvishBranchbender(final ElvishBranchbender card) {
         super(card);
     }
 

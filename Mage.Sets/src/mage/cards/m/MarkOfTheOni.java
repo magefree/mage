@@ -49,7 +49,7 @@ public final class MarkOfTheOni extends CardImpl {
                 false));
     }
 
-    public MarkOfTheOni(final MarkOfTheOni card) {
+    private MarkOfTheOni(final MarkOfTheOni card) {
         super(card);
     }
 

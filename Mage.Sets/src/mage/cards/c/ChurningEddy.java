@@ -27,7 +27,7 @@ public final class ChurningEddy extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public ChurningEddy(final ChurningEddy card) {
+    private ChurningEddy(final ChurningEddy card) {
         super(card);
     }
 

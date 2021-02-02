@@ -30,7 +30,7 @@ public final class Vermiculos extends CardImpl {
                 new FilterArtifactPermanent("an artifact"), false));
     }
 
-    public Vermiculos(final Vermiculos card) {
+    private Vermiculos(final Vermiculos card) {
         super(card);
     }
 

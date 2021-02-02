@@ -27,7 +27,7 @@ public final class RepentantBlacksmith extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
-    public RepentantBlacksmith(final RepentantBlacksmith card) {
+    private RepentantBlacksmith(final RepentantBlacksmith card) {
         super(card);
     }
 

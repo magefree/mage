@@ -32,7 +32,7 @@ public final class PitilessHorde extends CardImpl {
         this.addAbility(new DashAbility(this, "{2}{B}{B}"));
     }
 
-    public PitilessHorde(final PitilessHorde card) {
+    private PitilessHorde(final PitilessHorde card) {
         super(card);
     }
 

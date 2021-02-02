@@ -31,7 +31,7 @@ public final class AvenTactician extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BolsterEffect(1)));
     }
 
-    public AvenTactician(final AvenTactician card) {
+    private AvenTactician(final AvenTactician card) {
         super(card);
     }
 

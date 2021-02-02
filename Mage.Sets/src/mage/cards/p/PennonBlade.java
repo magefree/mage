@@ -32,7 +32,7 @@ public final class PennonBlade extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4)));
     }
 
-    public PennonBlade(final PennonBlade card) {
+    private PennonBlade(final PennonBlade card) {
         super(card);
     }
 

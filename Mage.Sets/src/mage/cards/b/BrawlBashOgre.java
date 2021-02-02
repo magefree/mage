@@ -43,7 +43,7 @@ public final class BrawlBashOgre extends CardImpl {
         ));
     }
 
-    public BrawlBashOgre(final BrawlBashOgre card) {
+    private BrawlBashOgre(final BrawlBashOgre card) {
         super(card);
     }
 

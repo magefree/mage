@@ -32,7 +32,7 @@ public final class HuttPalace extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public HuttPalace(final HuttPalace card) {
+    private HuttPalace(final HuttPalace card) {
         super(card);
     }
 

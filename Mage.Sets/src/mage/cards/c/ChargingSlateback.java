@@ -29,7 +29,7 @@ public final class ChargingSlateback extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{R}")));
     }
 
-    public ChargingSlateback(final ChargingSlateback card) {
+    private ChargingSlateback(final ChargingSlateback card) {
         super(card);
     }
 

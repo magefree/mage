@@ -42,7 +42,7 @@ public final class SpearpointOread extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpearpointOread(final SpearpointOread card) {
+    private SpearpointOread(final SpearpointOread card) {
         super(card);
     }
 

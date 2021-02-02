@@ -33,7 +33,7 @@ public final class BlightedCataract extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlightedCataract(final BlightedCataract card) {
+    private BlightedCataract(final BlightedCataract card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class SarkhanTheDragonspeaker extends CardImpl {
         this.addAbility(new LoyaltyAbility(effect, -6));
     }
 
-    public SarkhanTheDragonspeaker(final SarkhanTheDragonspeaker card) {
+    private SarkhanTheDragonspeaker(final SarkhanTheDragonspeaker card) {
         super(card);
     }
 

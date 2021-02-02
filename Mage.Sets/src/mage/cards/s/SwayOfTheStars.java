@@ -36,7 +36,7 @@ public final class SwayOfTheStars extends CardImpl {
 
     }
 
-    public SwayOfTheStars(final SwayOfTheStars card) {
+    private SwayOfTheStars(final SwayOfTheStars card) {
         super(card);
     }
 

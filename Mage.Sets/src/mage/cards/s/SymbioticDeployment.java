@@ -42,7 +42,7 @@ public final class SymbioticDeployment extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SymbioticDeployment(final SymbioticDeployment card) {
+    private SymbioticDeployment(final SymbioticDeployment card) {
         super(card);
     }
 

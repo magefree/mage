@@ -46,7 +46,7 @@ public final class AmberPrison extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AmberPrison(final AmberPrison card) {
+    private AmberPrison(final AmberPrison card) {
         super(card);
     }
 

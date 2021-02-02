@@ -42,7 +42,7 @@ public final class StormFleetAerialist extends CardImpl {
                 new PlayerAttackedWatcher());
     }
 
-    public StormFleetAerialist(final StormFleetAerialist card) {
+    private StormFleetAerialist(final StormFleetAerialist card) {
         super(card);
     }
 

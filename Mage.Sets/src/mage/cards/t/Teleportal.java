@@ -48,7 +48,7 @@ public final class Teleportal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Teleportal(final Teleportal card) {
+    private Teleportal(final Teleportal card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class TyrantOfValakut extends CardImpl {
                 "When {this} enters the battlefield, if its surge cost was paid, it deals 3 damage to any target."));
     }
 
-    public TyrantOfValakut(final TyrantOfValakut card) {
+    private TyrantOfValakut(final TyrantOfValakut card) {
         super(card);
     }
 

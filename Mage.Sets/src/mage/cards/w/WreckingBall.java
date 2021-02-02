@@ -32,7 +32,7 @@ public final class WreckingBall extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public WreckingBall(final WreckingBall card) {
+    private WreckingBall(final WreckingBall card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class SylvanParadise extends CardImpl {
 
     }
 
-    public SylvanParadise(final SylvanParadise card) {
+    private SylvanParadise(final SylvanParadise card) {
         super(card);
     }
 

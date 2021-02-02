@@ -28,7 +28,7 @@ public final class GleamOfResistance extends CardImpl {
         this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}{W}")));
     }
 
-    public GleamOfResistance(final GleamOfResistance card) {
+    private GleamOfResistance(final GleamOfResistance card) {
         super(card);
     }
 

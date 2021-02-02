@@ -36,7 +36,7 @@ public final class CanyonSlough extends CardImpl {
 
     }
 
-    public CanyonSlough(final CanyonSlough card) {
+    private CanyonSlough(final CanyonSlough card) {
         super(card);
     }
 

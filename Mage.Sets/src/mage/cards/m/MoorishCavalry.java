@@ -26,7 +26,7 @@ public final class MoorishCavalry extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public MoorishCavalry(final MoorishCavalry card) {
+    private MoorishCavalry(final MoorishCavalry card) {
         super(card);
     }
 

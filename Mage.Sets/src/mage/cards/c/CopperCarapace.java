@@ -31,7 +31,7 @@ public final class CopperCarapace extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttachedEffect(AttachmentType.EQUIPMENT)));
     }
 
-    public CopperCarapace(final CopperCarapace card) {
+    private CopperCarapace(final CopperCarapace card) {
         super(card);
     }
 

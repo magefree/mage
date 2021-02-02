@@ -28,7 +28,7 @@ public final class PinecrestRidge extends CardImpl {
         this.addAbility(greenManaAbility);
     }
 
-    public PinecrestRidge(final PinecrestRidge card) {
+    private PinecrestRidge(final PinecrestRidge card) {
         super(card);
     }
 

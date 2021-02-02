@@ -40,7 +40,7 @@ public final class FrenziedArynx extends CardImpl {
         ));
     }
 
-    public FrenziedArynx(final FrenziedArynx card) {
+    private FrenziedArynx(final FrenziedArynx card) {
         super(card);
     }
 

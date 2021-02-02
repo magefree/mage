@@ -50,7 +50,7 @@ public final class ExavaRakdosBloodWitch extends CardImpl {
 
     }
 
-    public ExavaRakdosBloodWitch(final ExavaRakdosBloodWitch card) {
+    private ExavaRakdosBloodWitch(final ExavaRakdosBloodWitch card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class BorisDevilboon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BorisDevilboon(final BorisDevilboon card) {
+    private BorisDevilboon(final BorisDevilboon card) {
         super(card);
     }
 

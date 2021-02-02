@@ -48,7 +48,7 @@ public final class ForgeOfHeroes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ForgeOfHeroes(final ForgeOfHeroes card) {
+    private ForgeOfHeroes(final ForgeOfHeroes card) {
         super(card);
     }
 

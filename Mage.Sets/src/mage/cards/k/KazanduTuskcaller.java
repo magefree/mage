@@ -52,7 +52,7 @@ public final class KazanduTuskcaller extends LevelerCard {
         setMaxLevelCounters(6);
     }
 
-    public KazanduTuskcaller(final KazanduTuskcaller card) {
+    private KazanduTuskcaller(final KazanduTuskcaller card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class FallenAskari extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public FallenAskari(final FallenAskari card) {
+    private FallenAskari(final FallenAskari card) {
         super(card);
     }
 

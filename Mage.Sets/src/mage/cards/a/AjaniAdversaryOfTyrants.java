@@ -54,7 +54,7 @@ public final class AjaniAdversaryOfTyrants extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new AjaniAdversaryOfTyrantsEmblem()), -7));
     }
 
-    public AjaniAdversaryOfTyrants(final AjaniAdversaryOfTyrants card) {
+    private AjaniAdversaryOfTyrants(final AjaniAdversaryOfTyrants card) {
         super(card);
     }
 

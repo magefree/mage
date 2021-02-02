@@ -29,7 +29,7 @@ public final class Crumble extends CardImpl {
         this.getSpellAbility().addEffect(new CrumbleEffect());
     }
 
-    public Crumble(final Crumble card) {
+    private Crumble(final Crumble card) {
         super(card);
     }
 

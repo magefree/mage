@@ -36,7 +36,7 @@ public final class LightningCloud extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LightningCloud(final LightningCloud card) {
+    private LightningCloud(final LightningCloud card) {
         super(card);
     }
 

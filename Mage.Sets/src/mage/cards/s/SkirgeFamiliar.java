@@ -40,7 +40,7 @@ public final class SkirgeFamiliar extends CardImpl {
                 ));
     }
 
-    public SkirgeFamiliar(final SkirgeFamiliar card) {
+    private SkirgeFamiliar(final SkirgeFamiliar card) {
         super(card);
     }
 

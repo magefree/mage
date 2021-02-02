@@ -37,7 +37,7 @@ public final class RushwoodHerbalist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RushwoodHerbalist(final RushwoodHerbalist card) {
+    private RushwoodHerbalist(final RushwoodHerbalist card) {
         super(card);
     }
 

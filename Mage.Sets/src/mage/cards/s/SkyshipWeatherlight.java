@@ -48,7 +48,7 @@ public final class SkyshipWeatherlight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkyshipWeatherlight(final SkyshipWeatherlight card) {
+    private SkyshipWeatherlight(final SkyshipWeatherlight card) {
         super(card);
     }
 

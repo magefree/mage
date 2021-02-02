@@ -45,7 +45,7 @@ public final class HellkiteHatchling extends CardImpl {
                 "{this} has trample if it devoured a creature")));
     }
 
-    public HellkiteHatchling(final HellkiteHatchling card) {
+    private HellkiteHatchling(final HellkiteHatchling card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class CarryAway extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("equipment")));
     }
 
-    public CarryAway(final CarryAway card) {
+    private CarryAway(final CarryAway card) {
         super(card);
     }
 

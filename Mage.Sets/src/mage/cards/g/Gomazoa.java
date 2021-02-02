@@ -48,7 +48,7 @@ public final class Gomazoa extends CardImpl {
 
     }
 
-    public Gomazoa(final Gomazoa card) {
+    private Gomazoa(final Gomazoa card) {
         super(card);
     }
 

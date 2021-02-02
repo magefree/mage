@@ -48,7 +48,7 @@ public final class VeteranBrawlers extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VeteranBrawlersCantBlockEffect(filter)));
     }
 
-    public VeteranBrawlers(final VeteranBrawlers card) {
+    private VeteranBrawlers(final VeteranBrawlers card) {
         super(card);
     }
 

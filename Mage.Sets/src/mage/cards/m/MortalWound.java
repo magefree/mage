@@ -35,7 +35,7 @@ public final class MortalWound extends CardImpl {
         this.addAbility(new DealtDamageAttachedTriggeredAbility(new DestroyAttachedToEffect("it"), false));
     }
 
-    public MortalWound(final MortalWound card) {
+    private MortalWound(final MortalWound card) {
         super(card);
     }
 

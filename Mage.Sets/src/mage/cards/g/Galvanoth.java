@@ -31,7 +31,7 @@ public final class Galvanoth extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GalvanothEffect(), TargetController.YOU, true));
     }
 
-    public Galvanoth(final Galvanoth card) {
+    private Galvanoth(final Galvanoth card) {
         super(card);
     }
 

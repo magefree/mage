@@ -49,7 +49,7 @@ public final class DepalaPilotExemplar extends CardImpl {
         this.addAbility(new BecomesTappedSourceTriggeredAbility(new DepalaPilotExemplarEffect(), true));
     }
 
-    public DepalaPilotExemplar(final DepalaPilotExemplar card) {
+    private DepalaPilotExemplar(final DepalaPilotExemplar card) {
         super(card);
     }
 

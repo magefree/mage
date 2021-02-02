@@ -31,7 +31,7 @@ public final class PermeatingMass extends CardImpl {
         this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new PermeatingMassEffect(), false, true));
     }
 
-    public PermeatingMass(final PermeatingMass card) {
+    private PermeatingMass(final PermeatingMass card) {
         super(card);
     }
 

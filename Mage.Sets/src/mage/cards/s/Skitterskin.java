@@ -53,7 +53,7 @@ public final class Skitterskin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Skitterskin(final Skitterskin card) {
+    private Skitterskin(final Skitterskin card) {
         super(card);
     }
 

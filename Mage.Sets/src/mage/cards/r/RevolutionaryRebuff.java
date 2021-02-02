@@ -27,7 +27,7 @@ public final class RevolutionaryRebuff extends CardImpl {
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new GenericManaCost(2)));
     }
 
-    public RevolutionaryRebuff(final RevolutionaryRebuff card) {
+    private RevolutionaryRebuff(final RevolutionaryRebuff card) {
         super(card);
     }
 

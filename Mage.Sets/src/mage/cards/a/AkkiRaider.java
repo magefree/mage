@@ -33,7 +33,7 @@ public final class AkkiRaider extends CardImpl {
                 "Whenever a land is put into a graveyard from the battlefield, ", false));
     }
 
-    public AkkiRaider(final AkkiRaider card) {
+    private AkkiRaider(final AkkiRaider card) {
         super(card);
     }
 

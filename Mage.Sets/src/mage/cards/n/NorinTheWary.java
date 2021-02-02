@@ -35,7 +35,7 @@ public final class NorinTheWary extends CardImpl {
 
     }
 
-    public NorinTheWary(final NorinTheWary card) {
+    private NorinTheWary(final NorinTheWary card) {
         super(card);
     }
 

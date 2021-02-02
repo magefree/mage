@@ -26,7 +26,7 @@ public final class TouchOfTheEternal extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new TouchOfTheEternalEffect(), TargetController.YOU, false));
     }
 
-    public TouchOfTheEternal(final TouchOfTheEternal card) {
+    private TouchOfTheEternal(final TouchOfTheEternal card) {
         super(card);
     }
 

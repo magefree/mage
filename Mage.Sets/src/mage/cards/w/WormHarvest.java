@@ -28,7 +28,7 @@ public final class WormHarvest extends CardImpl {
         this.addAbility(new RetraceAbility(this));
     }
 
-    public WormHarvest(final WormHarvest card) {
+    private WormHarvest(final WormHarvest card) {
         super(card);
     }
 

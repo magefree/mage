@@ -40,7 +40,7 @@ public final class StensiaInnkeeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StensiaInnkeeper(final StensiaInnkeeper card) {
+    private StensiaInnkeeper(final StensiaInnkeeper card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class AshesOfTheFallen extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AshesOfTheFallenEffect()));
     }
 
-    public AshesOfTheFallen(final AshesOfTheFallen card) {
+    private AshesOfTheFallen(final AshesOfTheFallen card) {
         super(card);
     }
 

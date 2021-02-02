@@ -28,7 +28,7 @@ public final class MoltenInfluence extends CardImpl {
 
     }
 
-    public MoltenInfluence(final MoltenInfluence card) {
+    private MoltenInfluence(final MoltenInfluence card) {
         super(card);
     }
 

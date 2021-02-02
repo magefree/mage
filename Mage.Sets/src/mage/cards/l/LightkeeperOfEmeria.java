@@ -40,7 +40,7 @@ public final class LightkeeperOfEmeria extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
     }
 
-    public LightkeeperOfEmeria(final LightkeeperOfEmeria card) {
+    private LightkeeperOfEmeria(final LightkeeperOfEmeria card) {
         super(card);
     }
 

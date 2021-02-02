@@ -33,7 +33,7 @@ public final class MishrasHelix extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MishrasHelix(final MishrasHelix card) {
+    private MishrasHelix(final MishrasHelix card) {
         super(card);
     }
 

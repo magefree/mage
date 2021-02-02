@@ -29,7 +29,7 @@ public final class JungleBarrier extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public JungleBarrier(final JungleBarrier card) {
+    private JungleBarrier(final JungleBarrier card) {
         super(card);
     }
 

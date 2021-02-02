@@ -42,7 +42,7 @@ public final class PaladinOfAtonement extends CardImpl {
                 "you gain life equal to it's toughness")));
     }
 
-    public PaladinOfAtonement(final PaladinOfAtonement card) {
+    private PaladinOfAtonement(final PaladinOfAtonement card) {
         super(card);
     }
 

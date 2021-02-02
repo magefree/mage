@@ -33,7 +33,7 @@ public final class RuinsOfTrokair extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RuinsOfTrokair(final RuinsOfTrokair card) {
+    private RuinsOfTrokair(final RuinsOfTrokair card) {
         super(card);
     }
 

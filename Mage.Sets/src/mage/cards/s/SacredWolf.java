@@ -24,7 +24,7 @@ public final class SacredWolf extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    public SacredWolf(final SacredWolf card) {
+    private SacredWolf(final SacredWolf card) {
         super(card);
     }
 

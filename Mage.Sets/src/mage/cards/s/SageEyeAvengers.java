@@ -41,7 +41,7 @@ public final class SageEyeAvengers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SageEyeAvengers(final SageEyeAvengers card) {
+    private SageEyeAvengers(final SageEyeAvengers card) {
         super(card);
     }
 

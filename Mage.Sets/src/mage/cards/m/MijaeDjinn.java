@@ -31,7 +31,7 @@ public final class MijaeDjinn extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new MijaeDjinnEffect(), false));
     }
 
-    public MijaeDjinn(final MijaeDjinn card) {
+    private MijaeDjinn(final MijaeDjinn card) {
         super(card);
     }
 

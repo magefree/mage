@@ -32,7 +32,7 @@ public final class SporeFrog extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SporeFrog(final SporeFrog card) {
+    private SporeFrog(final SporeFrog card) {
         super(card);
     }
 

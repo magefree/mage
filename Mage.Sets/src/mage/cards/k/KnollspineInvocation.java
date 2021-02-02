@@ -55,7 +55,7 @@ public final class KnollspineInvocation extends CardImpl {
         }
     }
 
-    public KnollspineInvocation(final KnollspineInvocation card) {
+    private KnollspineInvocation(final KnollspineInvocation card) {
         super(card);
     }
 

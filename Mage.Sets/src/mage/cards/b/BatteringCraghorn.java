@@ -30,7 +30,7 @@ public final class BatteringCraghorn extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{R}{R}")));
     }
 
-    public BatteringCraghorn(final BatteringCraghorn card) {
+    private BatteringCraghorn(final BatteringCraghorn card) {
         super(card);
     }
 

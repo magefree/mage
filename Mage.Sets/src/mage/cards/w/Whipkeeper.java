@@ -37,7 +37,7 @@ public final class Whipkeeper extends CardImpl {
         
     }
 
-    public Whipkeeper(final Whipkeeper card) {
+    private Whipkeeper(final Whipkeeper card) {
         super(card);
     }
 

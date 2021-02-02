@@ -43,7 +43,7 @@ public final class LayClaim extends CardImpl {
 
     }
 
-    public LayClaim(final LayClaim card) {
+    private LayClaim(final LayClaim card) {
         super(card);
     }
 

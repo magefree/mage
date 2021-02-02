@@ -29,7 +29,7 @@ public final class RapidHybridization extends CardImpl {
         this.getSpellAbility().addEffect(new RapidHybridizationEffect());
     }
 
-    public RapidHybridization(final RapidHybridization card) {
+    private RapidHybridization(final RapidHybridization card) {
         super(card);
     }
 

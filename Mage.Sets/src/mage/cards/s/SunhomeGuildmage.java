@@ -35,7 +35,7 @@ public final class SunhomeGuildmage extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierTokenWithHaste()), new ManaCostsImpl("{2}{R}{W}")));
     }
 
-    public SunhomeGuildmage(final SunhomeGuildmage card) {
+    private SunhomeGuildmage(final SunhomeGuildmage card) {
         super(card);
     }
 

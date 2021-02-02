@@ -47,7 +47,7 @@ public final class CrownOfTheAges extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrownOfTheAges(final CrownOfTheAges card) {
+    private CrownOfTheAges(final CrownOfTheAges card) {
         super(card);
     }
 

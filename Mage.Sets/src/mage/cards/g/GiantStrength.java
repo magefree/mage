@@ -37,7 +37,7 @@ public final class GiantStrength extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
     }
 
-    public GiantStrength(final GiantStrength card) {
+    private GiantStrength(final GiantStrength card) {
         super(card);
     }
 

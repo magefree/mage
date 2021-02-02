@@ -41,7 +41,7 @@ public final class StigmaLasher extends CardImpl {
         
     }
     
-    public StigmaLasher(final StigmaLasher card) {
+    private StigmaLasher(final StigmaLasher card) {
         super(card);
     }
     

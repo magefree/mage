@@ -46,7 +46,7 @@ public final class AethersquallAncient extends CardImpl {
         this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandFromBattlefieldAllEffect(filter), new PayEnergyCost(8)));
     }
 
-    public AethersquallAncient(final AethersquallAncient card) {
+    private AethersquallAncient(final AethersquallAncient card) {
         super(card);
     }
 

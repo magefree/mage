@@ -45,7 +45,7 @@ public final class JolraelEmpressOfBeasts extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JolraelEmpressOfBeasts(final JolraelEmpressOfBeasts card) {
+    private JolraelEmpressOfBeasts(final JolraelEmpressOfBeasts card) {
         super(card);
     }
 

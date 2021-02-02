@@ -30,7 +30,7 @@ public final class StormCauldron extends CardImpl {
         this.addAbility(new TapLandForManaAllTriggeredAbility(effect, false, true, true));
     }
 
-    public StormCauldron(final StormCauldron card) {
+    private StormCauldron(final StormCauldron card) {
         super(card);
     }
 

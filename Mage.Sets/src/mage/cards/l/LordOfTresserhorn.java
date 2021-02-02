@@ -48,7 +48,7 @@ public final class LordOfTresserhorn extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public LordOfTresserhorn(final LordOfTresserhorn card) {
+    private LordOfTresserhorn(final LordOfTresserhorn card) {
         super(card);
     }
 

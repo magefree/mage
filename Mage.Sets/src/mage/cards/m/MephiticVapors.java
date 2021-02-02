@@ -24,7 +24,7 @@ public final class MephiticVapors extends CardImpl {
         this.getSpellAbility().addEffect(new SurveilEffect(2));
     }
 
-    public MephiticVapors(final MephiticVapors card) {
+    private MephiticVapors(final MephiticVapors card) {
         super(card);
     }
 

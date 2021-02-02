@@ -41,7 +41,7 @@ public final class ParadisePlume extends CardImpl {
 
     }
 
-    public ParadisePlume(final ParadisePlume card) {
+    private ParadisePlume(final ParadisePlume card) {
         super(card);
     }
 

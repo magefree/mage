@@ -36,7 +36,7 @@ public final class IvoryCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public IvoryCharm(final IvoryCharm card) {
+    private IvoryCharm(final IvoryCharm card) {
         super(card);
     }
 

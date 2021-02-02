@@ -35,7 +35,7 @@ public final class TerminalMoraine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TerminalMoraine(final TerminalMoraine card) {
+    private TerminalMoraine(final TerminalMoraine card) {
         super(card);
     }
 

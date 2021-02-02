@@ -30,7 +30,7 @@ public final class WolfcallersHowl extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WolfcallersHowlEffect(), TargetController.YOU, false));
     }
 
-    public WolfcallersHowl(final WolfcallersHowl card) {
+    private WolfcallersHowl(final WolfcallersHowl card) {
         super(card);
     }
 

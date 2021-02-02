@@ -32,7 +32,7 @@ public final class ScourgeDevil extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{2}{R}")));
     }
 
-    public ScourgeDevil(final ScourgeDevil card) {
+    private ScourgeDevil(final ScourgeDevil card) {
         super(card);
     }
 

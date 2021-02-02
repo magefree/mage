@@ -37,7 +37,7 @@ public final class Ragnar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Ragnar(final Ragnar card) {
+    private Ragnar(final Ragnar card) {
         super(card);
     }
 

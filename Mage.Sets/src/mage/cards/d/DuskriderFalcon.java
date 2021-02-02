@@ -29,7 +29,7 @@ public final class DuskriderFalcon extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
     }
 
-    public DuskriderFalcon(final DuskriderFalcon card) {
+    private DuskriderFalcon(final DuskriderFalcon card) {
         super(card);
     }
 

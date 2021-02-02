@@ -21,7 +21,7 @@ public final class DesertSandstorm extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterCreaturePermanent()));
     }
 
-    public DesertSandstorm(final DesertSandstorm card) {
+    private DesertSandstorm(final DesertSandstorm card) {
         super(card);
     }
 

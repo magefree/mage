@@ -35,7 +35,7 @@ public final class LeylineOfAnticipation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
-    public LeylineOfAnticipation(final LeylineOfAnticipation card) {
+    private LeylineOfAnticipation(final LeylineOfAnticipation card) {
         super(card);
     }
 

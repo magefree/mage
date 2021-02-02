@@ -29,7 +29,7 @@ public final class MorgueToad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MorgueToad(final MorgueToad card) {
+    private MorgueToad(final MorgueToad card) {
         super(card);
     }
 

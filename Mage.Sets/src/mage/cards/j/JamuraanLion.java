@@ -35,7 +35,7 @@ public final class JamuraanLion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JamuraanLion(final JamuraanLion card) {
+    private JamuraanLion(final JamuraanLion card) {
         super(card);
     }
 

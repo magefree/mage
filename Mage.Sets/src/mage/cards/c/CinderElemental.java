@@ -38,7 +38,7 @@ public final class CinderElemental extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CinderElemental(final CinderElemental card) {
+    private CinderElemental(final CinderElemental card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class RiptideLaboratory extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RiptideLaboratory(final RiptideLaboratory card) {
+    private RiptideLaboratory(final RiptideLaboratory card) {
         super(card);
     }
 

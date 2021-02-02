@@ -44,7 +44,7 @@ public final class VolrathsLaboratory extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VolrathsLaboratory(final VolrathsLaboratory card) {
+    private VolrathsLaboratory(final VolrathsLaboratory card) {
         super(card);
     }
 

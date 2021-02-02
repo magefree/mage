@@ -22,7 +22,7 @@ public final class ZombieGoliath extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public ZombieGoliath(final ZombieGoliath card) {
+    private ZombieGoliath(final ZombieGoliath card) {
         super(card);
     }
 

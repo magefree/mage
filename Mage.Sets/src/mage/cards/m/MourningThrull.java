@@ -29,7 +29,7 @@ public final class MourningThrull extends CardImpl {
         this.addAbility(new DealsDamageGainLifeSourceTriggeredAbility());
     }
 
-    public MourningThrull(final MourningThrull card) {
+    private MourningThrull(final MourningThrull card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class FogBank extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FogBank(final FogBank card) {
+    private FogBank(final FogBank card) {
         super(card);
     }
 

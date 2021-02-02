@@ -28,7 +28,7 @@ public final class AweStrike extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public AweStrike(final AweStrike card) {
+    private AweStrike(final AweStrike card) {
         super(card);
     }
 

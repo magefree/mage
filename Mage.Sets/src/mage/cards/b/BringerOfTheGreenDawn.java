@@ -39,7 +39,7 @@ public final class BringerOfTheGreenDawn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BringerOfTheGreenDawn(final BringerOfTheGreenDawn card) {
+    private BringerOfTheGreenDawn(final BringerOfTheGreenDawn card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class UntamedMight extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(ManacostVariableValue.instance, ManacostVariableValue.instance, Duration.EndOfTurn));
     }
 
-    public UntamedMight(final UntamedMight card) {
+    private UntamedMight(final UntamedMight card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class RavenGuildMaster extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}{U}")));
     }
 
-    public RavenGuildMaster(final RavenGuildMaster card) {
+    private RavenGuildMaster(final RavenGuildMaster card) {
         super(card);
     }
 

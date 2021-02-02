@@ -26,7 +26,7 @@ public final class Luminesce extends CardImpl {
         getSpellAbility().addEffect(new LuminescePreventionEffect());
     }
 
-    public Luminesce(final Luminesce card) {
+    private Luminesce(final Luminesce card) {
         super(card);
     }
 

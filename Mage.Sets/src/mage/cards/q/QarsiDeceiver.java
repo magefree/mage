@@ -36,7 +36,7 @@ public final class QarsiDeceiver extends CardImpl {
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 1, new QarsiDeceiverManaBuilder()));
     }
 
-    public QarsiDeceiver(final QarsiDeceiver card) {
+    private QarsiDeceiver(final QarsiDeceiver card) {
         super(card);
     }
 

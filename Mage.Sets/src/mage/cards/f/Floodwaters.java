@@ -31,7 +31,7 @@ public final class Floodwaters extends CardImpl {
 
     }
 
-    public Floodwaters(final Floodwaters card) {
+    private Floodwaters(final Floodwaters card) {
         super(card);
     }
 

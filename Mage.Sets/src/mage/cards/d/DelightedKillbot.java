@@ -22,7 +22,7 @@ public final class DelightedKillbot extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public DelightedKillbot(final DelightedKillbot card) {
+    private DelightedKillbot(final DelightedKillbot card) {
         super(card);
     }
 

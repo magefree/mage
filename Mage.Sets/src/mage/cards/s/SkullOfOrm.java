@@ -36,7 +36,7 @@ public final class SkullOfOrm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkullOfOrm(final SkullOfOrm card) {
+    private SkullOfOrm(final SkullOfOrm card) {
         super(card);
     }
 

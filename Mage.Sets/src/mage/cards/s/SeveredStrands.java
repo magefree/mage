@@ -34,7 +34,7 @@ public final class SeveredStrands extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
     }
 
-    public SeveredStrands(final SeveredStrands card) {
+    private SeveredStrands(final SeveredStrands card) {
         super(card);
     }
 

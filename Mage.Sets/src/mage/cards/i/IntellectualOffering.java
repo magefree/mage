@@ -32,7 +32,7 @@ public final class IntellectualOffering extends CardImpl {
         this.getSpellAbility().addEffect(new IntellectualOfferingUntapEffect());
     }
 
-    public IntellectualOffering(final IntellectualOffering card) {
+    private IntellectualOffering(final IntellectualOffering card) {
         super(card);
     }
 

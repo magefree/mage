@@ -32,7 +32,7 @@ public final class HoodedHorror extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new HoodedHorrorCantBeBlockedEffect()));
     }
 
-    public HoodedHorror(final HoodedHorror card) {
+    private HoodedHorror(final HoodedHorror card) {
         super(card);
     }
 

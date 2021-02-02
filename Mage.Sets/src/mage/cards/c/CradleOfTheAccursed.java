@@ -37,7 +37,7 @@ public final class CradleOfTheAccursed extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CradleOfTheAccursed(final CradleOfTheAccursed card) {
+    private CradleOfTheAccursed(final CradleOfTheAccursed card) {
         super(card);
     }
 

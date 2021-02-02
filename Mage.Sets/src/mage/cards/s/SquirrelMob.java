@@ -41,7 +41,7 @@ public final class SquirrelMob extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public SquirrelMob(final SquirrelMob card) {
+    private SquirrelMob(final SquirrelMob card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class RewardsOfDiversity extends CardImpl {
                 new GainLifeEffect(4), filter, false));
     }
 
-    public RewardsOfDiversity(final RewardsOfDiversity card) {
+    private RewardsOfDiversity(final RewardsOfDiversity card) {
         super(card);
     }
 

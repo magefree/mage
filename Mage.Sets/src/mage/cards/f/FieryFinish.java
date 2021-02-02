@@ -21,7 +21,7 @@ public final class FieryFinish extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FieryFinish(final FieryFinish card) {
+    private FieryFinish(final FieryFinish card) {
         super(card);
     }
 

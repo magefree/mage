@@ -42,7 +42,7 @@ public final class AgelessSentinels extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AgelessSentinels(final AgelessSentinels card) {
+    private AgelessSentinels(final AgelessSentinels card) {
         super(card);
     }
 

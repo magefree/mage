@@ -31,7 +31,7 @@ public final class BattlefieldScavenger extends CardImpl {
         this.addAbility(new ExertCreatureControllerTriggeredAbility(new RummageEffect()));
     }
 
-    public BattlefieldScavenger(final BattlefieldScavenger card) {
+    private BattlefieldScavenger(final BattlefieldScavenger card) {
         super(card);
     }
 

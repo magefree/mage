@@ -49,7 +49,7 @@ public final class FerocityOfTheUnderworld extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public FerocityOfTheUnderworld(final FerocityOfTheUnderworld card) {
+    private FerocityOfTheUnderworld(final FerocityOfTheUnderworld card) {
         super(card);
     }
 

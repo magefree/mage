@@ -47,7 +47,7 @@ public final class RealmSeekers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RealmSeekers(final RealmSeekers card) {
+    private RealmSeekers(final RealmSeekers card) {
         super(card);
     }
 

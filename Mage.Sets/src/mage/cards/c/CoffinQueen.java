@@ -52,7 +52,7 @@ public final class CoffinQueen extends CardImpl {
 
     }
 
-    public CoffinQueen(final CoffinQueen card) {
+    private CoffinQueen(final CoffinQueen card) {
         super(card);
     }
 

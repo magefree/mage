@@ -30,7 +30,7 @@ public final class KederektCreeper extends CardImpl {
         this.addAbility(new MenaceAbility());
     }
 
-    public KederektCreeper(final KederektCreeper card) {
+    private KederektCreeper(final KederektCreeper card) {
         super(card);
     }
 

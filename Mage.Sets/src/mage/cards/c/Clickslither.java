@@ -52,7 +52,7 @@ public final class Clickslither extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Clickslither(final Clickslither card) {
+    private Clickslither(final Clickslither card) {
         super(card);
     }
 

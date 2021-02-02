@@ -44,7 +44,7 @@ public final class MistbindClique extends CardImpl {
 
     }
 
-    public MistbindClique(final MistbindClique card) {
+    private MistbindClique(final MistbindClique card) {
         super(card);
     }
 

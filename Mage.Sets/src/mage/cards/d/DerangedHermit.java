@@ -45,7 +45,7 @@ public final class DerangedHermit extends CardImpl {
 
     }
 
-    public DerangedHermit(final DerangedHermit card) {
+    private DerangedHermit(final DerangedHermit card) {
         super(card);
     }
 

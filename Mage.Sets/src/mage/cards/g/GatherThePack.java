@@ -32,7 +32,7 @@ public final class GatherThePack extends CardImpl {
         this.getSpellAbility().addEffect(new GatherThePackEffect());
     }
 
-    public GatherThePack(final GatherThePack card) {
+    private GatherThePack(final GatherThePack card) {
         super(card);
     }
 

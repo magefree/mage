@@ -39,7 +39,7 @@ public final class HazardTrooper extends CardImpl {
 
     }
 
-    public HazardTrooper(final HazardTrooper card) {
+    private HazardTrooper(final HazardTrooper card) {
         super(card);
     }
 

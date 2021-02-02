@@ -38,7 +38,7 @@ public final class GoringCeratops extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoringCeratops(final GoringCeratops card) {
+    private GoringCeratops(final GoringCeratops card) {
         super(card);
     }
 

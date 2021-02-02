@@ -38,7 +38,7 @@ public final class DaggerOfTheWorthy extends CardImpl {
         
     }
 
-    public DaggerOfTheWorthy(final DaggerOfTheWorthy card) {
+    private DaggerOfTheWorthy(final DaggerOfTheWorthy card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class VastwoodAnimist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VastwoodAnimist(final VastwoodAnimist card) {
+    private VastwoodAnimist(final VastwoodAnimist card) {
         super(card);
     }
 

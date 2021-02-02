@@ -38,7 +38,7 @@ public final class MysticRemora extends CardImpl {
 
     }
 
-    public MysticRemora(final MysticRemora card) {
+    private MysticRemora(final MysticRemora card) {
         super(card);
     }
 

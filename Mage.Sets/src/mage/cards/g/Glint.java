@@ -31,7 +31,7 @@ public final class Glint extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Glint(final Glint card) {
+    private Glint(final Glint card) {
         super(card);
     }
 

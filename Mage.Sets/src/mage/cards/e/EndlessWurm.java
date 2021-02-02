@@ -39,7 +39,7 @@ public final class EndlessWurm extends CardImpl {
 
     }
 
-    public EndlessWurm(final EndlessWurm card) {
+    private EndlessWurm(final EndlessWurm card) {
         super(card);
     }
 

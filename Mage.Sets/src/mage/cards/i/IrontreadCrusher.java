@@ -27,7 +27,7 @@ public final class IrontreadCrusher extends CardImpl {
         this.addAbility(new CrewAbility(3));
     }
 
-    public IrontreadCrusher(final IrontreadCrusher card) {
+    private IrontreadCrusher(final IrontreadCrusher card) {
         super(card);
     }
 

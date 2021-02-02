@@ -32,7 +32,7 @@ public final class PitImp extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0,Duration.EndOfTurn), new ManaCostsImpl("{B}"), 2));
     }
 
-    public PitImp(final PitImp card) {
+    private PitImp(final PitImp card) {
         super(card);
     }
 

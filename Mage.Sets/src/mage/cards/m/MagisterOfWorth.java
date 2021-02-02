@@ -43,7 +43,7 @@ public final class MagisterOfWorth extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false, true));
     }
 
-    public MagisterOfWorth(final MagisterOfWorth card) {
+    private MagisterOfWorth(final MagisterOfWorth card) {
         super(card);
     }
 

@@ -69,7 +69,7 @@ public final class DeathriteShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeathriteShaman(final DeathriteShaman card) {
+    private DeathriteShaman(final DeathriteShaman card) {
         super(card);
     }
 

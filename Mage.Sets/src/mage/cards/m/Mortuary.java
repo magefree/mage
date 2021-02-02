@@ -24,7 +24,7 @@ public final class Mortuary extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Mortuary(final Mortuary card) {
+    private Mortuary(final Mortuary card) {
         super(card);
     }
 

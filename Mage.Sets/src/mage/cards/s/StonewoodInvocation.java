@@ -35,7 +35,7 @@ public final class StonewoodInvocation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public StonewoodInvocation(final StonewoodInvocation card) {
+    private StonewoodInvocation(final StonewoodInvocation card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class NullmageShepherd extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NullmageShepherd(final NullmageShepherd card) {
+    private NullmageShepherd(final NullmageShepherd card) {
         super(card);
     }
 

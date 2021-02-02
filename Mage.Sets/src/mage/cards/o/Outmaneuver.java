@@ -38,7 +38,7 @@ public final class Outmaneuver extends CardImpl {
 
     }
 
-    public Outmaneuver(final Outmaneuver card) {
+    private Outmaneuver(final Outmaneuver card) {
         super(card);
     }
 

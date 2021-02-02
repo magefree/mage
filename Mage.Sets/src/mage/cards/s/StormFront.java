@@ -36,7 +36,7 @@ public final class StormFront extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StormFront(final StormFront card) {
+    private StormFront(final StormFront card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class ShamblingRemains extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{B}{R}")));
     }
 
-    public ShamblingRemains(final ShamblingRemains card) {
+    private ShamblingRemains(final ShamblingRemains card) {
         super(card);
     }
 

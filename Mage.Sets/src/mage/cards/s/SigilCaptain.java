@@ -38,7 +38,7 @@ public final class SigilCaptain extends CardImpl {
         this.addAbility(new SigilCaptainTriggeredAbility());
     }
 
-    public SigilCaptain(final SigilCaptain card) {
+    private SigilCaptain(final SigilCaptain card) {
         super(card);
     }
 

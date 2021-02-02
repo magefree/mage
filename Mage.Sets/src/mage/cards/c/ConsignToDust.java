@@ -38,7 +38,7 @@ public final class ConsignToDust extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public ConsignToDust(final ConsignToDust card) {
+    private ConsignToDust(final ConsignToDust card) {
         super(card);
     }
 

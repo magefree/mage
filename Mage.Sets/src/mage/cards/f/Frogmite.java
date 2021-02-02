@@ -26,7 +26,7 @@ public final class Frogmite extends CardImpl {
         this.addAbility(new AffinityForArtifactsAbility());
     }
 
-    public Frogmite(final Frogmite card) {
+    private Frogmite(final Frogmite card) {
         super(card);
     }
 

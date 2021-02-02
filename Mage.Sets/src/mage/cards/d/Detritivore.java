@@ -52,7 +52,7 @@ public final class Detritivore extends CardImpl {
 
     }
 
-    public Detritivore(final Detritivore card) {
+    private Detritivore(final Detritivore card) {
         super(card);
     }
 

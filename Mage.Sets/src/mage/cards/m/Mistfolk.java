@@ -50,7 +50,7 @@ public final class Mistfolk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Mistfolk(final Mistfolk card) {
+    private Mistfolk(final Mistfolk card) {
         super(card);
     }
 

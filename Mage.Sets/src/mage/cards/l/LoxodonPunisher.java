@@ -32,7 +32,7 @@ public final class LoxodonPunisher extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
     }
 
-    public LoxodonPunisher(final LoxodonPunisher card) {
+    private LoxodonPunisher(final LoxodonPunisher card) {
         super(card);
     }
 

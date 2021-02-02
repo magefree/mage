@@ -39,7 +39,7 @@ public final class CrumblingAshes extends CardImpl {
         
     }
 
-    public CrumblingAshes(final CrumblingAshes card) {
+    private CrumblingAshes(final CrumblingAshes card) {
         super(card);
     }
 

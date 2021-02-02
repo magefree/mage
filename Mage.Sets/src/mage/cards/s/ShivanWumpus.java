@@ -38,7 +38,7 @@ public final class ShivanWumpus extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ShivanWumpusEffect(), false));
     }
 
-    public ShivanWumpus(final ShivanWumpus card) {
+    private ShivanWumpus(final ShivanWumpus card) {
         super(card);
     }
 

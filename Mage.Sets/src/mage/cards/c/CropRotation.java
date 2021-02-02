@@ -30,7 +30,7 @@ public final class CropRotation extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterLandCard()), false, Outcome.PutLandInPlay));
     }
 
-    public CropRotation(final CropRotation card) {
+    private CropRotation(final CropRotation card) {
         super(card);
     }
 

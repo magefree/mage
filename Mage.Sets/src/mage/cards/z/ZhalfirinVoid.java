@@ -25,7 +25,7 @@ public final class ZhalfirinVoid extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public ZhalfirinVoid(final ZhalfirinVoid card) {
+    private ZhalfirinVoid(final ZhalfirinVoid card) {
         super(card);
     }
 

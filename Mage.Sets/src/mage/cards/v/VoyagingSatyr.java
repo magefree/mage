@@ -34,7 +34,7 @@ public final class VoyagingSatyr extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VoyagingSatyr(final VoyagingSatyr card) {
+    private VoyagingSatyr(final VoyagingSatyr card) {
         super(card);
     }
 

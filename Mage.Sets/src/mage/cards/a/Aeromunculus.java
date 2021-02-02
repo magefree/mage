@@ -30,7 +30,7 @@ public final class Aeromunculus extends CardImpl {
         this.addAbility(new AdaptAbility(1, "{2}{G}{U}"));
     }
 
-    public Aeromunculus(final Aeromunculus card) {
+    private Aeromunculus(final Aeromunculus card) {
         super(card);
     }
 

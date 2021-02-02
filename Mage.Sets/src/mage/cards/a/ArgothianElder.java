@@ -34,7 +34,7 @@ public final class ArgothianElder extends CardImpl {
                 this.addAbility(ability);
         }
 
-    public ArgothianElder(final ArgothianElder card) {
+    private ArgothianElder(final ArgothianElder card) {
         super(card);
     }
 

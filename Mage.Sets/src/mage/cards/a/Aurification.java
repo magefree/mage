@@ -54,7 +54,7 @@ public final class Aurification extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new RemoveAllGoldCountersEffect(), false));
     }
 
-    public Aurification(final Aurification card) {
+    private Aurification(final Aurification card) {
         super(card);
     }
 

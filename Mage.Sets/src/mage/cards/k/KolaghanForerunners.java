@@ -41,7 +41,7 @@ public final class KolaghanForerunners extends CardImpl {
         this.addAbility(new DashAbility(this, "{2}{R}"));
     }
 
-    public KolaghanForerunners(final KolaghanForerunners card) {
+    private KolaghanForerunners(final KolaghanForerunners card) {
         super(card);
     }
 

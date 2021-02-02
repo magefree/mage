@@ -32,7 +32,7 @@ public final class ValleyRannet extends CardImpl {
         this.addAbility(new ForestcyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public ValleyRannet(final ValleyRannet card) {
+    private ValleyRannet(final ValleyRannet card) {
         super(card);
     }
 

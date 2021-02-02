@@ -28,7 +28,7 @@ public final class EndlessObedience extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
     }
 
-    public EndlessObedience(final EndlessObedience card) {
+    private EndlessObedience(final EndlessObedience card) {
         super(card);
     }
 

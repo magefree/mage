@@ -38,7 +38,7 @@ public final class CourtHomunculus extends CardImpl {
                 new ControlsAnotherArtifactCondition(), "{this} gets +1/+1 as long as you control another artifact")));
     }
 
-    public CourtHomunculus(final CourtHomunculus card) {
+    private CourtHomunculus(final CourtHomunculus card) {
         super(card);
     }
 

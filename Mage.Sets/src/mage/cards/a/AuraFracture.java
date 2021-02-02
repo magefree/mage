@@ -32,7 +32,7 @@ public final class AuraFracture extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AuraFracture(final AuraFracture card) {
+    private AuraFracture(final AuraFracture card) {
         super(card);
     }
 

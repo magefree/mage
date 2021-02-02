@@ -25,7 +25,7 @@ public final class CelestialPrism extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CelestialPrism(final CelestialPrism card) {
+    private CelestialPrism(final CelestialPrism card) {
         super(card);
     }
 

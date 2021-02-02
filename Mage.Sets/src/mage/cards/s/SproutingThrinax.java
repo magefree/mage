@@ -31,7 +31,7 @@ public final class SproutingThrinax extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(saprolingToken, 3), false));
     }
 
-    public SproutingThrinax(final SproutingThrinax card) {
+    private SproutingThrinax(final SproutingThrinax card) {
         super(card);
     }
 

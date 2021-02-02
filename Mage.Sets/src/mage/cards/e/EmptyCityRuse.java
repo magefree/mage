@@ -22,7 +22,7 @@ public final class EmptyCityRuse extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public EmptyCityRuse(final EmptyCityRuse card) {
+    private EmptyCityRuse(final EmptyCityRuse card) {
         super(card);
     }
 

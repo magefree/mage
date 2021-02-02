@@ -27,7 +27,7 @@ public final class BoneyardWurm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value, Duration.EndOfGame)));
     }
 
-    public BoneyardWurm(final BoneyardWurm card) {
+    private BoneyardWurm(final BoneyardWurm card) {
         super(card);
     }
 

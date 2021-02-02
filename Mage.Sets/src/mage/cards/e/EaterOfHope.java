@@ -55,7 +55,7 @@ public final class EaterOfHope extends CardImpl {
         this.addAbility(destroyAbility);
     }
 
-    public EaterOfHope(final EaterOfHope card) {
+    private EaterOfHope(final EaterOfHope card) {
         super(card);
     }
 

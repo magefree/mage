@@ -37,7 +37,7 @@ public final class Embersmith extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Embersmith(final Embersmith card) {
+    private Embersmith(final Embersmith card) {
         super(card);
     }
 

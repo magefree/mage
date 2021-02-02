@@ -32,7 +32,7 @@ public final class SeraphOfTheSword extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventCombatDamageToSourceEffect(Duration.WhileOnBattlefield)));
     }
 
-    public SeraphOfTheSword(final SeraphOfTheSword card) {
+    private SeraphOfTheSword(final SeraphOfTheSword card) {
         super(card);
     }
 

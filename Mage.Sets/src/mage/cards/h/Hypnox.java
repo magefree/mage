@@ -50,7 +50,7 @@ public final class Hypnox extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new HypnoxReturnEffect(), false));
     }
 
-    public Hypnox(final Hypnox card) {
+    private Hypnox(final Hypnox card) {
         super(card);
     }
 

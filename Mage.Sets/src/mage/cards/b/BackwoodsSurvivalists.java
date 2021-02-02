@@ -37,7 +37,7 @@ public final class BackwoodsSurvivalists extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BackwoodsSurvivalists(final BackwoodsSurvivalists card) {
+    private BackwoodsSurvivalists(final BackwoodsSurvivalists card) {
         super(card);
     }
 

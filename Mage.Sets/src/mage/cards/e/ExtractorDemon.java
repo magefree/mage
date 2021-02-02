@@ -49,7 +49,7 @@ public final class ExtractorDemon extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{2}{B}")));
     }
 
-    public ExtractorDemon(final ExtractorDemon card) {
+    private ExtractorDemon(final ExtractorDemon card) {
         super(card);
     }
 

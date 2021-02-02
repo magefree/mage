@@ -44,7 +44,7 @@ public final class SteelSquirrel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SteelSquirrel(final SteelSquirrel card) {
+    private SteelSquirrel(final SteelSquirrel card) {
         super(card);
     }
 

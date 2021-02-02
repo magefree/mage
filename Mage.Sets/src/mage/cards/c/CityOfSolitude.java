@@ -29,7 +29,7 @@ public final class CityOfSolitude extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CityOfSolitudeEffect()));
     }
 
-    public CityOfSolitude(final CityOfSolitude card) {
+    private CityOfSolitude(final CityOfSolitude card) {
         super(card);
     }
 

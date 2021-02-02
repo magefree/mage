@@ -47,7 +47,7 @@ public final class StarlitSanctum extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StarlitSanctum(final StarlitSanctum card) {
+    private StarlitSanctum(final StarlitSanctum card) {
         super(card);
     }
 

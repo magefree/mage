@@ -28,7 +28,7 @@ public final class BurningOil extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{W}"), TimingRule.INSTANT));
     }
 
-    public BurningOil(final BurningOil card) {
+    private BurningOil(final BurningOil card) {
         super(card);
     }
 

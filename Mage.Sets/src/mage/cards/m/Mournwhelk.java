@@ -34,7 +34,7 @@ public final class Mournwhelk extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{3}{B}"));
     }
 
-    public Mournwhelk(final Mournwhelk card) {
+    private Mournwhelk(final Mournwhelk card) {
         super(card);
     }
 

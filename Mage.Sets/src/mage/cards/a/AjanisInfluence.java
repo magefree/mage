@@ -43,7 +43,7 @@ public final class AjanisInfluence extends CardImpl {
         );
     }
 
-    public AjanisInfluence(final AjanisInfluence card) {
+    private AjanisInfluence(final AjanisInfluence card) {
         super(card);
     }
 

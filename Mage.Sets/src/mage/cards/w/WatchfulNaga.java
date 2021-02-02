@@ -30,7 +30,7 @@ public final class WatchfulNaga extends CardImpl {
         this.addAbility(new ExertAbility(ability));
     }
 
-    public WatchfulNaga(final WatchfulNaga card) {
+    private WatchfulNaga(final WatchfulNaga card) {
         super(card);
     }
 

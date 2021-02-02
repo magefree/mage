@@ -40,7 +40,7 @@ public final class GarruksPackleader extends CardImpl {
                 Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true));
     }
 
-    public GarruksPackleader(final GarruksPackleader card) {
+    private GarruksPackleader(final GarruksPackleader card) {
         super(card);
     }
 

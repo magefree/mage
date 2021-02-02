@@ -53,7 +53,7 @@ public final class DanithaCapashenParagon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public DanithaCapashenParagon(final DanithaCapashenParagon card) {
+    private DanithaCapashenParagon(final DanithaCapashenParagon card) {
         super(card);
     }
 

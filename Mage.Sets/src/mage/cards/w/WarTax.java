@@ -33,7 +33,7 @@ public final class WarTax extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WarTaxCantAttackUnlessPaysEffect(), new ManaCostsImpl("{X}{U}")));
     }
 
-    public WarTax(final WarTax card) {
+    private WarTax(final WarTax card) {
         super(card);
     }
 

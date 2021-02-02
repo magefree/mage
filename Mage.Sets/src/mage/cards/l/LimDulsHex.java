@@ -28,7 +28,7 @@ public final class LimDulsHex extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LimDulsHexEffect(), TargetController.YOU, false));
     }
 
-    public LimDulsHex(final LimDulsHex card) {
+    private LimDulsHex(final LimDulsHex card) {
         super(card);
     }
 

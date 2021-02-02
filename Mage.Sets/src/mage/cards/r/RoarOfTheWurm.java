@@ -28,7 +28,7 @@ public final class RoarOfTheWurm extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{G}"), TimingRule.SORCERY));
     }
 
-    public RoarOfTheWurm(final RoarOfTheWurm card) {
+    private RoarOfTheWurm(final RoarOfTheWurm card) {
         super(card);
     }
 

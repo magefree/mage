@@ -24,7 +24,7 @@ public final class PathOfAngersFlame extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
-    public PathOfAngersFlame(final PathOfAngersFlame card) {
+    private PathOfAngersFlame(final PathOfAngersFlame card) {
         super(card);
     }
 

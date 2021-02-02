@@ -30,7 +30,7 @@ public final class ForgeArmor extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ForgeArmor(final ForgeArmor card) {
+    private ForgeArmor(final ForgeArmor card) {
         super(card);
     }
 

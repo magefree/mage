@@ -55,7 +55,7 @@ public final class ScourgeOfTheThrone extends CardImpl {
         ));
     }
 
-    public ScourgeOfTheThrone(final ScourgeOfTheThrone card) {
+    private ScourgeOfTheThrone(final ScourgeOfTheThrone card) {
         super(card);
     }
 

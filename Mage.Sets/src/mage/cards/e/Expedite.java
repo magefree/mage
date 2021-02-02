@@ -28,7 +28,7 @@ public final class Expedite extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Expedite(final Expedite card) {
+    private Expedite(final Expedite card) {
         super(card);
     }
 

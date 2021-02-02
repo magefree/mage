@@ -35,7 +35,7 @@ public final class Soilshaper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Soilshaper(final Soilshaper card) {
+    private Soilshaper(final Soilshaper card) {
         super(card);
     }
 

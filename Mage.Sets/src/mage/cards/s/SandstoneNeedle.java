@@ -38,7 +38,7 @@ public final class SandstoneNeedle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SandstoneNeedle(final SandstoneNeedle card) {
+    private SandstoneNeedle(final SandstoneNeedle card) {
         super(card);
     }
 

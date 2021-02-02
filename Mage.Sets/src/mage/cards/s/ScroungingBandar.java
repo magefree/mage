@@ -52,7 +52,7 @@ public final class ScroungingBandar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScroungingBandar(final ScroungingBandar card) {
+    private ScroungingBandar(final ScroungingBandar card) {
         super(card);
     }
 

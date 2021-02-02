@@ -31,7 +31,7 @@ public final class Gravedigger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Gravedigger(final Gravedigger card) {
+    private Gravedigger(final Gravedigger card) {
         super(card);
     }
 

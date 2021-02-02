@@ -28,7 +28,7 @@ public final class QuirionSentinel extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddManaOfAnyColorEffect()));
     }
 
-    public QuirionSentinel(final QuirionSentinel card) {
+    private QuirionSentinel(final QuirionSentinel card) {
         super(card);
     }
 

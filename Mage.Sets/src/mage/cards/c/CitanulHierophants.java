@@ -38,7 +38,7 @@ public final class CitanulHierophants extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new GreenManaAbility(), Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public CitanulHierophants(final CitanulHierophants card) {
+    private CitanulHierophants(final CitanulHierophants card) {
         super(card);
     }
 

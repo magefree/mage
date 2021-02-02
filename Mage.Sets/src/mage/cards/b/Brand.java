@@ -33,7 +33,7 @@ public final class Brand extends CardImpl {
         this.addAbility(new CyclingAbility(new GenericManaCost(2)));
     }
 
-    public Brand(final Brand card) {
+    private Brand(final Brand card) {
         super(card);
     }
 

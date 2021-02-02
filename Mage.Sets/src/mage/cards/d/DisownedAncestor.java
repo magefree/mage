@@ -28,7 +28,7 @@ public final class DisownedAncestor extends CardImpl {
         this.addAbility(new OutlastAbility(new ManaCostsImpl("{1}{B}")));
     }
 
-    public DisownedAncestor(final DisownedAncestor card) {
+    private DisownedAncestor(final DisownedAncestor card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class KrenkosCommand extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 2));
     }
 
-    public KrenkosCommand(final KrenkosCommand card) {
+    private KrenkosCommand(final KrenkosCommand card) {
         super(card);
     }
 

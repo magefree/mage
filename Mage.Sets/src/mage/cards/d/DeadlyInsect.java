@@ -26,7 +26,7 @@ public final class DeadlyInsect extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public DeadlyInsect(final DeadlyInsect card) {
+    private DeadlyInsect(final DeadlyInsect card) {
         super(card);
     }
 

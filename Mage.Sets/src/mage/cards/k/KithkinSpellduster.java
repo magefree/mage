@@ -42,7 +42,7 @@ public final class KithkinSpellduster extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public KithkinSpellduster(final KithkinSpellduster card) {
+    private KithkinSpellduster(final KithkinSpellduster card) {
         super(card);
     }
 

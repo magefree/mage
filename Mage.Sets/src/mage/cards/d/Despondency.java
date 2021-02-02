@@ -43,7 +43,7 @@ public final class Despondency extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public Despondency(final Despondency card) {
+    private Despondency(final Despondency card) {
         super(card);
     }
 

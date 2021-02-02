@@ -53,7 +53,7 @@ public final class CoralNet extends CardImpl {
                 new GainAbilityAttachedEffect(abilityToGain, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }
 
-    public CoralNet(final CoralNet card) {
+    private CoralNet(final CoralNet card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class RoarOfJukai extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility(new GainLifeOpponentCost(5)));
     }
 
-    public RoarOfJukai(final RoarOfJukai card) {
+    private RoarOfJukai(final RoarOfJukai card) {
         super(card);
     }
 

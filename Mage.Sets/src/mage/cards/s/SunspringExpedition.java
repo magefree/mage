@@ -37,7 +37,7 @@ public final class SunspringExpedition extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SunspringExpedition(final SunspringExpedition card) {
+    private SunspringExpedition(final SunspringExpedition card) {
         super(card);
     }
 

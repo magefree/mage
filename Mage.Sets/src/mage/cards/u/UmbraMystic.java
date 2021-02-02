@@ -40,7 +40,7 @@ public final class UmbraMystic extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new TotemArmorAbility(), Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public UmbraMystic(final UmbraMystic card) {
+    private UmbraMystic(final UmbraMystic card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class TorrentElemental extends CardImpl {
 
     }
 
-    public TorrentElemental(final TorrentElemental card) {
+    private TorrentElemental(final TorrentElemental card) {
         super(card);
     }
 

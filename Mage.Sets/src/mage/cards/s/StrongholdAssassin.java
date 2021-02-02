@@ -50,7 +50,7 @@ public final class StrongholdAssassin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StrongholdAssassin(final StrongholdAssassin card) {
+    private StrongholdAssassin(final StrongholdAssassin card) {
         super(card);
     }
 

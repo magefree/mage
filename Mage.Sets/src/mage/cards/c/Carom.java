@@ -42,7 +42,7 @@ public final class Carom extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Carom(final Carom card) {
+    private Carom(final Carom card) {
         super(card);
     }
 

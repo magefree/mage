@@ -32,7 +32,7 @@ public final class PillarOfLight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public PillarOfLight(final PillarOfLight card) {
+    private PillarOfLight(final PillarOfLight card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class RadiantsDragoons extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5)));
     }
 
-    public RadiantsDragoons(final RadiantsDragoons card) {
+    private RadiantsDragoons(final RadiantsDragoons card) {
         super(card);
     }
 

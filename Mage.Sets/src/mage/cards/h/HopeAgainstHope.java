@@ -45,7 +45,7 @@ public final class HopeAgainstHope extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HopeAgainstHope(final HopeAgainstHope card) {
+    private HopeAgainstHope(final HopeAgainstHope card) {
         super(card);
     }
 

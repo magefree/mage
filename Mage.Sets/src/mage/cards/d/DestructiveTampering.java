@@ -41,7 +41,7 @@ public final class DestructiveTampering extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public DestructiveTampering(final DestructiveTampering card) {
+    private DestructiveTampering(final DestructiveTampering card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class BloodcrazedGoblin extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodcrazedGoblinEffect()));
     }
 
-    public BloodcrazedGoblin(final BloodcrazedGoblin card) {
+    private BloodcrazedGoblin(final BloodcrazedGoblin card) {
         super(card);
     }
 

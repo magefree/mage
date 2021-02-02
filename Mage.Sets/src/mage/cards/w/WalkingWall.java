@@ -37,7 +37,7 @@ public final class WalkingWall extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WalkingWall(final WalkingWall card) {
+    private WalkingWall(final WalkingWall card) {
         super(card);
     }
 

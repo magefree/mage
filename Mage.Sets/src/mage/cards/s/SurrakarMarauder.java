@@ -30,7 +30,7 @@ public final class SurrakarMarauder extends CardImpl {
         this.addAbility(new LandfallAbility(new GainAbilitySourceEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn), false));
     }
 
-    public SurrakarMarauder(final SurrakarMarauder card) {
+    private SurrakarMarauder(final SurrakarMarauder card) {
         super(card);
     }
 

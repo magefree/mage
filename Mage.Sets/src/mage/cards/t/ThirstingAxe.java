@@ -55,7 +55,7 @@ public final class ThirstingAxe extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public ThirstingAxe(final ThirstingAxe card) {
+    private ThirstingAxe(final ThirstingAxe card) {
         super(card);
     }
 

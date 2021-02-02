@@ -40,7 +40,7 @@ public final class GilderBairn extends CardImpl {
 
     }
 
-    public GilderBairn(final GilderBairn card) {
+    private GilderBairn(final GilderBairn card) {
         super(card);
     }
 

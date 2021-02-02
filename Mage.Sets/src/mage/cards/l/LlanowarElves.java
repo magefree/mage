@@ -28,7 +28,7 @@ public final class LlanowarElves extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public LlanowarElves(final LlanowarElves card) {
+    private LlanowarElves(final LlanowarElves card) {
         super(card);
     }
 

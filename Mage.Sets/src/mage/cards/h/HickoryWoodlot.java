@@ -38,7 +38,7 @@ public final class HickoryWoodlot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HickoryWoodlot(final HickoryWoodlot card) {
+    private HickoryWoodlot(final HickoryWoodlot card) {
         super(card);
     }
 

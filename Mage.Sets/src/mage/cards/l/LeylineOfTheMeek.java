@@ -33,7 +33,7 @@ public final class LeylineOfTheMeek extends CardImpl {
         ));
     }
 
-    public LeylineOfTheMeek(final LeylineOfTheMeek card) {
+    private LeylineOfTheMeek(final LeylineOfTheMeek card) {
         super(card);
     }
 

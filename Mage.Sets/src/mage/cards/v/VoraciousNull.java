@@ -35,7 +35,7 @@ public final class VoraciousNull extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VoraciousNull(final VoraciousNull card) {
+    private VoraciousNull(final VoraciousNull card) {
         super(card);
     }
 

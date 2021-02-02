@@ -59,7 +59,7 @@ public final class GrimlockDinobotLeader extends CardImpl{
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new ManaCostsImpl("{2}")));
     }
 
-    public GrimlockDinobotLeader(final GrimlockDinobotLeader card) {
+    private GrimlockDinobotLeader(final GrimlockDinobotLeader card) {
         super(card);
     }
 

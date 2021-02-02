@@ -54,7 +54,7 @@ public final class HisokasGuard extends CardImpl {
 
     }
 
-    public HisokasGuard(final HisokasGuard card) {
+    private HisokasGuard(final HisokasGuard card) {
         super(card);
     }
 

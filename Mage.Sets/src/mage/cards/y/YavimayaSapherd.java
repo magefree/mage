@@ -28,7 +28,7 @@ public final class YavimayaSapherd extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SaprolingToken(), 1), false));
     }
 
-    public YavimayaSapherd(final YavimayaSapherd card) {
+    private YavimayaSapherd(final YavimayaSapherd card) {
         super(card);
     }
 

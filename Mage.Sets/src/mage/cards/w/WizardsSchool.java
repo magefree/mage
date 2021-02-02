@@ -37,7 +37,7 @@ public final class WizardsSchool extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WizardsSchool(final WizardsSchool card) {
+    private WizardsSchool(final WizardsSchool card) {
         super(card);
     }
 

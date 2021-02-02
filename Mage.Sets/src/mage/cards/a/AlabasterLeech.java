@@ -38,7 +38,7 @@ public final class AlabasterLeech extends CardImpl {
                 new SpellsCostIncreasingAllEffect(new ManaCostsImpl("{W}"), filter, TargetController.YOU)));
     }
 
-    public AlabasterLeech(final AlabasterLeech card) {
+    private AlabasterLeech(final AlabasterLeech card) {
         super(card);
     }
 

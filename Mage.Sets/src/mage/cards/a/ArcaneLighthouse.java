@@ -50,7 +50,7 @@ public final class ArcaneLighthouse extends CardImpl {
 
     }
 
-    public ArcaneLighthouse(final ArcaneLighthouse card) {
+    private ArcaneLighthouse(final ArcaneLighthouse card) {
         super(card);
     }
 

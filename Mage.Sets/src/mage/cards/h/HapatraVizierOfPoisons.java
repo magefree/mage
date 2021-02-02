@@ -45,7 +45,7 @@ public final class HapatraVizierOfPoisons extends CardImpl {
         this.addAbility(new HapatraVizierOfPoisonsTriggeredAbility());
     }
 
-    public HapatraVizierOfPoisons(final HapatraVizierOfPoisons card) {
+    private HapatraVizierOfPoisons(final HapatraVizierOfPoisons card) {
         super(card);
     }
 

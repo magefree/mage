@@ -33,7 +33,7 @@ public final class CulturalExchange extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer(2));
     }
 
-    public CulturalExchange(final CulturalExchange card) {
+    private CulturalExchange(final CulturalExchange card) {
         super(card);
     }
 

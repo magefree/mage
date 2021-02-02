@@ -29,7 +29,7 @@ public final class CitadelCastellan extends CardImpl {
         this.addAbility(new RenownAbility(2));
     }
 
-    public CitadelCastellan(final CitadelCastellan card) {
+    private CitadelCastellan(final CitadelCastellan card) {
         super(card);
     }
 

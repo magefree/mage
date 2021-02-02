@@ -28,7 +28,7 @@ public final class NotionRain extends CardImpl {
         this.getSpellAbility().addEffect(new DamageControllerEffect(2));
     }
 
-    public NotionRain(final NotionRain card) {
+    private NotionRain(final NotionRain card) {
         super(card);
     }
 

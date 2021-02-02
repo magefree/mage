@@ -41,7 +41,7 @@ public final class PatternOfRebirth extends CardImpl {
 
     }
 
-    public PatternOfRebirth(final PatternOfRebirth card) {
+    private PatternOfRebirth(final PatternOfRebirth card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class ReveilleSquad extends CardImpl {
         this.addAbility(new ReveilleSquadTriggeredAbility());
     }
 
-    public ReveilleSquad(final ReveilleSquad card) {
+    private ReveilleSquad(final ReveilleSquad card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class Moat extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAnyPlayerAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
-    public Moat(final Moat card) {
+    private Moat(final Moat card) {
         super(card);
     }
 

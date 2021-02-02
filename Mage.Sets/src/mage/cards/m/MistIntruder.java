@@ -34,7 +34,7 @@ public final class MistIntruder extends CardImpl {
         this.addAbility(new IngestAbility());
     }
 
-    public MistIntruder(final MistIntruder card) {
+    private MistIntruder(final MistIntruder card) {
         super(card);
     }
 

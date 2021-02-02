@@ -25,7 +25,7 @@ public final class MightOfAlara extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public MightOfAlara(final MightOfAlara card) {
+    private MightOfAlara(final MightOfAlara card) {
         super(card);
     }
 

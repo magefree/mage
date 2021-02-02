@@ -51,7 +51,7 @@ public final class VolrathsDungeon extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public VolrathsDungeon(final VolrathsDungeon card) {
+    private VolrathsDungeon(final VolrathsDungeon card) {
         super(card);
     }
 

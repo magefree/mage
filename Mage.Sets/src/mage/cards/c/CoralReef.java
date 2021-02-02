@@ -65,7 +65,7 @@ public final class CoralReef extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CoralReef(final CoralReef card) {
+    private CoralReef(final CoralReef card) {
         super(card);
     }
 

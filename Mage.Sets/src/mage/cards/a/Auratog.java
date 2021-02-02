@@ -36,7 +36,7 @@ public final class Auratog extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public Auratog(final Auratog card) {
+    private Auratog(final Auratog card) {
         super(card);
     }
 

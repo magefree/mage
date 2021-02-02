@@ -26,7 +26,7 @@ public final class RottingLegion extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
     }
 
-    public RottingLegion(final RottingLegion card) {
+    private RottingLegion(final RottingLegion card) {
         super(card);
     }
 

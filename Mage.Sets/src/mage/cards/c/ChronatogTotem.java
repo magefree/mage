@@ -55,7 +55,7 @@ public final class ChronatogTotem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChronatogTotem(final ChronatogTotem card) {
+    private ChronatogTotem(final ChronatogTotem card) {
         super(card);
     }
 

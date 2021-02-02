@@ -37,7 +37,7 @@ public final class LaccolithWhelp extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LaccolithWhelp(final LaccolithWhelp card) {
+    private LaccolithWhelp(final LaccolithWhelp card) {
         super(card);
     }
 

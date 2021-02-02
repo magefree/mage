@@ -47,7 +47,7 @@ public final class SaruliGatekeepers extends CardImpl {
                 .addHint(new ConditionHint(gatesCondition, "You control two or more Gates")));
     }
 
-    public SaruliGatekeepers(final SaruliGatekeepers card) {
+    private SaruliGatekeepers(final SaruliGatekeepers card) {
         super(card);
     }
 

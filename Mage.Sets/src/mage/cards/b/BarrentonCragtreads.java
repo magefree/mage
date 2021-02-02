@@ -38,7 +38,7 @@ public final class BarrentonCragtreads extends CardImpl {
 
     }
 
-    public BarrentonCragtreads(final BarrentonCragtreads card) {
+    private BarrentonCragtreads(final BarrentonCragtreads card) {
         super(card);
     }
 

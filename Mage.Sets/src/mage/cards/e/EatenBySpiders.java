@@ -38,7 +38,7 @@ public final class EatenBySpiders extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public EatenBySpiders(final EatenBySpiders card) {
+    private EatenBySpiders(final EatenBySpiders card) {
         super(card);
     }
 

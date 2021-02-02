@@ -33,7 +33,7 @@ public final class ProtomatterPowder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ProtomatterPowder(final ProtomatterPowder card) {
+    private ProtomatterPowder(final ProtomatterPowder card) {
         super(card);
     }
 

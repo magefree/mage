@@ -23,7 +23,7 @@ public final class DouseInGloom extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 
-    public DouseInGloom(final DouseInGloom card) {
+    private DouseInGloom(final DouseInGloom card) {
         super(card);
     }
 

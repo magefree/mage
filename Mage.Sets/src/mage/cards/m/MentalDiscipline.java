@@ -27,7 +27,7 @@ public final class MentalDiscipline extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MentalDiscipline(final MentalDiscipline card) {
+    private MentalDiscipline(final MentalDiscipline card) {
         super(card);
     }
 

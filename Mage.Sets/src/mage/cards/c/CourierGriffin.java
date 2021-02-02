@@ -29,7 +29,7 @@ public final class CourierGriffin extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2), false));
     }
 
-    public CourierGriffin(final CourierGriffin card) {
+    private CourierGriffin(final CourierGriffin card) {
         super(card);
     }
 

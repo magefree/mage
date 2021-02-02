@@ -36,7 +36,7 @@ public final class Droideka extends CardImpl {
         this.addAbility(new RepairAbility(3));
     }
 
-    public Droideka(final Droideka card) {
+    private Droideka(final Droideka card) {
         super(card);
     }
 

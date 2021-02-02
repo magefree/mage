@@ -47,7 +47,7 @@ public final class MobMentality extends CardImpl {
         this.addAbility(new MobMentalityTriggeredAbility());
     }
 
-    public MobMentality(final MobMentality card) {
+    private MobMentality(final MobMentality card) {
         super(card);
     }
 

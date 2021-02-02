@@ -36,7 +36,7 @@ public final class TankDroid extends CardImpl {
         this.addAbility(new RepairAbility(3));
     }
 
-    public TankDroid(final TankDroid card) {
+    private TankDroid(final TankDroid card) {
         super(card);
     }
 

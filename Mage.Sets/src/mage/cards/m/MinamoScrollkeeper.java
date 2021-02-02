@@ -36,7 +36,7 @@ public final class MinamoScrollkeeper extends CardImpl {
                 new MaximumHandSizeControllerEffect(1, Duration.WhileOnBattlefield, HandSizeModification.INCREASE)));
     }
 
-    public MinamoScrollkeeper(final MinamoScrollkeeper card) {
+    private MinamoScrollkeeper(final MinamoScrollkeeper card) {
         super(card);
     }
 

@@ -72,7 +72,7 @@ public final class VivienReid extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new VivienReidEmblem()), -8));
     }
 
-    public VivienReid(final VivienReid card) {
+    private VivienReid(final VivienReid card) {
         super(card);
     }
 

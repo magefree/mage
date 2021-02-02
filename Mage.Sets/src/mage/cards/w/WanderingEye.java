@@ -31,7 +31,7 @@ public final class WanderingEye extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.ANY)));
     }
 
-    public WanderingEye(final WanderingEye card) {
+    private WanderingEye(final WanderingEye card) {
         super(card);
     }
 

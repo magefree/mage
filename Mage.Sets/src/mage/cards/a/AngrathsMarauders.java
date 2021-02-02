@@ -35,7 +35,7 @@ public final class AngrathsMarauders extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngrathsMaraudersEffect()));
     }
 
-    public AngrathsMarauders(final AngrathsMarauders card) {
+    private AngrathsMarauders(final AngrathsMarauders card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class AnkleShanker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AnkleShanker(final AnkleShanker card) {
+    private AnkleShanker(final AnkleShanker card) {
         super(card);
     }
 

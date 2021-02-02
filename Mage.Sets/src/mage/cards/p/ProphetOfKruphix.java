@@ -45,7 +45,7 @@ public final class ProphetOfKruphix extends CardImpl {
 
     }
 
-    public ProphetOfKruphix(final ProphetOfKruphix card) {
+    private ProphetOfKruphix(final ProphetOfKruphix card) {
         super(card);
     }
 

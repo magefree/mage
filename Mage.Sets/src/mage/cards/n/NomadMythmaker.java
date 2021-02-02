@@ -51,7 +51,7 @@ public final class NomadMythmaker extends CardImpl {
 
     }
 
-    public NomadMythmaker(final NomadMythmaker card) {
+    private NomadMythmaker(final NomadMythmaker card) {
         super(card);
     }
 

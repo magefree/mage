@@ -40,7 +40,7 @@ public final class AwakenerDruid extends CardImpl {
     }
 
 
-    public AwakenerDruid(final AwakenerDruid card) {
+    private AwakenerDruid(final AwakenerDruid card) {
         super(card);
     }
 

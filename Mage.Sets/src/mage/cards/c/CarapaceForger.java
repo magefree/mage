@@ -36,7 +36,7 @@ public final class CarapaceForger extends CardImpl {
                 .addHint(MetalcraftHint.instance));
     }
 
-    public CarapaceForger(final CarapaceForger card) {
+    private CarapaceForger(final CarapaceForger card) {
         super(card);
     }
 

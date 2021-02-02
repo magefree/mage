@@ -34,7 +34,7 @@ public final class InescapableBrute extends CardImpl {
         
     }
 
-    public InescapableBrute(final InescapableBrute card) {
+    private InescapableBrute(final InescapableBrute card) {
         super(card);
     }
 

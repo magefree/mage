@@ -49,7 +49,7 @@ public final class Dreamwinder extends CardImpl {
     }   
     
 
-    public Dreamwinder(final Dreamwinder card) {
+    private Dreamwinder(final Dreamwinder card) {
         super(card);
     }
 

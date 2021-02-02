@@ -31,7 +31,7 @@ public final class HarnessedLightning extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public HarnessedLightning(final HarnessedLightning card) {
+    private HarnessedLightning(final HarnessedLightning card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class SungracePegasus extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public SungracePegasus(final SungracePegasus card) {
+    private SungracePegasus(final SungracePegasus card) {
         super(card);
     }
 

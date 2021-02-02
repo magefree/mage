@@ -29,7 +29,7 @@ public final class ToArms extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public ToArms(final ToArms card) {
+    private ToArms(final ToArms card) {
         super(card);
     }
 

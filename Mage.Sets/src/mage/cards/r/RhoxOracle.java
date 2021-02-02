@@ -27,7 +27,7 @@ public final class RhoxOracle extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public RhoxOracle(final RhoxOracle card) {
+    private RhoxOracle(final RhoxOracle card) {
         super(card);
     }
 

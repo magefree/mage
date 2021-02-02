@@ -26,7 +26,7 @@ public final class GriffinSentinel extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public GriffinSentinel(final GriffinSentinel card) {
+    private GriffinSentinel(final GriffinSentinel card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class YavimayaCoast extends CardImpl {
         this.addAbility(blueManaAbility);
     }
 
-    public YavimayaCoast(final YavimayaCoast card) {
+    private YavimayaCoast(final YavimayaCoast card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class RingOfImmortals extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RingOfImmortals(final RingOfImmortals card) {
+    private RingOfImmortals(final RingOfImmortals card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class CentaurArcher extends CardImpl {
         this.addAbility(activatedAbility);
     }
 
-    public CentaurArcher(final CentaurArcher card) {
+    private CentaurArcher(final CentaurArcher card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class TelJiladArchers extends CardImpl {
         
     }
 
-    public TelJiladArchers(final TelJiladArchers card) {
+    private TelJiladArchers(final TelJiladArchers card) {
         super(card);
     }
 

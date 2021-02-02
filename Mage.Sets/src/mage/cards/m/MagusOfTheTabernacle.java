@@ -40,7 +40,7 @@ public final class MagusOfTheTabernacle extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(abilityToGain, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, rule)));
     }
 
-    public MagusOfTheTabernacle(final MagusOfTheTabernacle card) {
+    private MagusOfTheTabernacle(final MagusOfTheTabernacle card) {
         super(card);
     }
 

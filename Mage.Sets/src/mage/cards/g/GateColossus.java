@@ -49,7 +49,7 @@ public final class GateColossus extends CardImpl {
         ));
     }
 
-    public GateColossus(final GateColossus card) {
+    private GateColossus(final GateColossus card) {
         super(card);
     }
 

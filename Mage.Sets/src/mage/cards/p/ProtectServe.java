@@ -27,7 +27,7 @@ public final class ProtectServe extends SplitCard {
 
     }
 
-    public ProtectServe(final ProtectServe card) {
+    private ProtectServe(final ProtectServe card) {
         super(card);
     }
 

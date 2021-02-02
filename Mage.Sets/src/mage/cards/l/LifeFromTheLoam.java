@@ -27,7 +27,7 @@ public final class LifeFromTheLoam extends CardImpl {
         this.addAbility(new DredgeAbility(3));
     }
 
-    public LifeFromTheLoam(final LifeFromTheLoam card) {
+    private LifeFromTheLoam(final LifeFromTheLoam card) {
         super(card);
     }
 

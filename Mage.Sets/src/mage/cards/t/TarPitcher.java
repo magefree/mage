@@ -43,7 +43,7 @@ public final class TarPitcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TarPitcher(final TarPitcher card) {
+    private TarPitcher(final TarPitcher card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class GruulCharm extends CardImpl {
         this.getSpellAbility().addMode(mode2);
     }
 
-    public GruulCharm(final GruulCharm card) {
+    private GruulCharm(final GruulCharm card) {
         super(card);
     }
 

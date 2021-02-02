@@ -25,7 +25,7 @@ public final class Crawlspace extends CardImpl {
 
     }
 
-    public Crawlspace(final Crawlspace card) {
+    private Crawlspace(final Crawlspace card) {
         super(card);
     }
 

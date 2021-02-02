@@ -26,7 +26,7 @@ public final class HighlandLake extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public HighlandLake(final HighlandLake card) {
+    private HighlandLake(final HighlandLake card) {
         super(card);
     }
 

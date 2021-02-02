@@ -42,7 +42,7 @@ public final class ShimmeringWings extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ColoredManaCost(ColoredManaSymbol.U)));
     }
 
-    public ShimmeringWings(final ShimmeringWings card) {
+    private ShimmeringWings(final ShimmeringWings card) {
         super(card);
     }
 

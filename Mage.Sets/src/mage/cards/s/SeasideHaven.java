@@ -41,7 +41,7 @@ public final class SeasideHaven extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeasideHaven(final SeasideHaven card) {
+    private SeasideHaven(final SeasideHaven card) {
         super(card);
     }
 

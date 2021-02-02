@@ -43,7 +43,7 @@ public final class RestorationSpecialist extends CardImpl {
 
     }
 
-    public RestorationSpecialist(final RestorationSpecialist card) {
+    private RestorationSpecialist(final RestorationSpecialist card) {
         super(card);
     }
 

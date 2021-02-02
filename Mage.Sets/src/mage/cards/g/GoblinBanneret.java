@@ -38,7 +38,7 @@ public final class GoblinBanneret extends CardImpl {
         ));
     }
 
-    public GoblinBanneret(final GoblinBanneret card) {
+    private GoblinBanneret(final GoblinBanneret card) {
         super(card);
     }
 

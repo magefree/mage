@@ -27,7 +27,7 @@ public final class UnfulfilledDesires extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnfulfilledDesires(final UnfulfilledDesires card) {
+    private UnfulfilledDesires(final UnfulfilledDesires card) {
         super(card);
     }
 

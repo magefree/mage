@@ -48,7 +48,7 @@ public final class CabalArchon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CabalArchon(final CabalArchon card) {
+    private CabalArchon(final CabalArchon card) {
         super(card);
     }
 

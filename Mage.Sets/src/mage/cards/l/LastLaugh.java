@@ -38,7 +38,7 @@ public final class LastLaugh extends CardImpl {
         
     }
 
-    public LastLaugh(final LastLaugh card) {
+    private LastLaugh(final LastLaugh card) {
         super(card);
     }
 

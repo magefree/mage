@@ -28,7 +28,7 @@ public final class OgreLeadfoot extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DestroyTargetEffect(), new FilterArtifactCreaturePermanent("an artifact creature"), false));
     }
 
-    public OgreLeadfoot(final OgreLeadfoot card) {
+    private OgreLeadfoot(final OgreLeadfoot card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class Regeneration extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ManaCostsImpl("{G}")));
     }
 
-    public Regeneration(final Regeneration card) {
+    private Regeneration(final Regeneration card) {
         super(card);
     }
 

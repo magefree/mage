@@ -53,7 +53,7 @@ public final class FrightshroudCourier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FrightshroudCourier(final FrightshroudCourier card) {
+    private FrightshroudCourier(final FrightshroudCourier card) {
         super(card);
     }
 

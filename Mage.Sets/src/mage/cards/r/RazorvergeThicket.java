@@ -33,7 +33,7 @@ public final class RazorvergeThicket extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public RazorvergeThicket(final RazorvergeThicket card) {
+    private RazorvergeThicket(final RazorvergeThicket card) {
         super(card);
     }
 

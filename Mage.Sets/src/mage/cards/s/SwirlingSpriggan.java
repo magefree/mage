@@ -35,7 +35,7 @@ public final class SwirlingSpriggan extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SwirlingSpriggan(final SwirlingSpriggan card) {
+    private SwirlingSpriggan(final SwirlingSpriggan card) {
         super(card);
     }
 

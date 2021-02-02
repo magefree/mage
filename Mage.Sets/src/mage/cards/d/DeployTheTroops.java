@@ -22,7 +22,7 @@ public final class DeployTheTroops extends CardImpl {
 
     }
 
-    public DeployTheTroops(final DeployTheTroops card) {
+    private DeployTheTroops(final DeployTheTroops card) {
         super(card);
     }
 

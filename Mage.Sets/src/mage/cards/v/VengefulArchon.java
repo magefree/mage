@@ -42,7 +42,7 @@ public final class VengefulArchon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VengefulArchon(final VengefulArchon card) {
+    private VengefulArchon(final VengefulArchon card) {
         super(card);
     }
 

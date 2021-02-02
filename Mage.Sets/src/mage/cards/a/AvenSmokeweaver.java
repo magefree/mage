@@ -31,7 +31,7 @@ public final class AvenSmokeweaver extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
-    public AvenSmokeweaver(final AvenSmokeweaver card) {
+    private AvenSmokeweaver(final AvenSmokeweaver card) {
         super(card);
     }
 

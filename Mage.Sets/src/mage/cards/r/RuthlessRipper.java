@@ -53,7 +53,7 @@ public final class RuthlessRipper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RuthlessRipper(final RuthlessRipper card) {
+    private RuthlessRipper(final RuthlessRipper card) {
         super(card);
     }
 

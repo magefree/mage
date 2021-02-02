@@ -46,7 +46,7 @@ public final class KjeldoranOutpost extends CardImpl {
 
     }
 
-    public KjeldoranOutpost(final KjeldoranOutpost card) {
+    private KjeldoranOutpost(final KjeldoranOutpost card) {
         super(card);
     }
 

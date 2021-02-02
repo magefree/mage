@@ -39,7 +39,7 @@ public final class KavuPrimarch extends CardImpl {
                 "If Kavu Primarch was kicked, it enters the battlefield with four +1/+1 counters on it.", ""));
     }
 
-    public KavuPrimarch(final KavuPrimarch card) {
+    private KavuPrimarch(final KavuPrimarch card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class TelJiladStylus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TelJiladStylus(final TelJiladStylus card) {
+    private TelJiladStylus(final TelJiladStylus card) {
         super(card);
     }
 

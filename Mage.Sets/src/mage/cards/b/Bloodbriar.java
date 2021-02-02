@@ -37,7 +37,7 @@ public final class Bloodbriar extends CardImpl {
         this.addAbility(new SacrificeAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, TargetController.YOU, false));
     }
 
-    public Bloodbriar(final Bloodbriar card) {
+    private Bloodbriar(final Bloodbriar card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class RodOfRuin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RodOfRuin(final RodOfRuin card) {
+    private RodOfRuin(final RodOfRuin card) {
         super(card);
     }
 

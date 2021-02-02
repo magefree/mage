@@ -40,7 +40,7 @@ public final class BlazingEffigy extends CardImpl {
         this.addAbility(ability, new BlazingEffigyWatcher());
     }
 
-    public BlazingEffigy(final BlazingEffigy card) {
+    private BlazingEffigy(final BlazingEffigy card) {
         super(card);
     }
 

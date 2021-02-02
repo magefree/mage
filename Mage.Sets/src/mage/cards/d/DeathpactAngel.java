@@ -30,7 +30,7 @@ public final class DeathpactAngel extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new DeathpactAngelToken())));
     }
 
-    public DeathpactAngel(final DeathpactAngel card) {
+    private DeathpactAngel(final DeathpactAngel card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class HeroesReunion extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public HeroesReunion(final HeroesReunion card) {
+    private HeroesReunion(final HeroesReunion card) {
         super(card);
     }
 

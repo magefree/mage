@@ -28,7 +28,7 @@ public final class Parapet extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield)));
     }
 
-    public Parapet(final Parapet card) {
+    private Parapet(final Parapet card) {
         super(card);
     }
 

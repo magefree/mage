@@ -56,7 +56,7 @@ public final class VizierOfTumblingSands extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VizierOfTumblingSands(final VizierOfTumblingSands card) {
+    private VizierOfTumblingSands(final VizierOfTumblingSands card) {
         super(card);
     }
 

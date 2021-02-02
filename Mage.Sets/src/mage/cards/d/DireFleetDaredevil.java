@@ -56,7 +56,7 @@ public final class DireFleetDaredevil extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DireFleetDaredevil(final DireFleetDaredevil card) {
+    private DireFleetDaredevil(final DireFleetDaredevil card) {
         super(card);
     }
 

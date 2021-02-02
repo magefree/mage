@@ -29,7 +29,7 @@ public final class SiegeWurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public SiegeWurm(final SiegeWurm card) {
+    private SiegeWurm(final SiegeWurm card) {
         super(card);
     }
 

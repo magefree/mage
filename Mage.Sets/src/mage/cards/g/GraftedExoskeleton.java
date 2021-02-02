@@ -39,7 +39,7 @@ public final class GraftedExoskeleton extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public GraftedExoskeleton(final GraftedExoskeleton card) {
+    private GraftedExoskeleton(final GraftedExoskeleton card) {
         super(card);
     }
 

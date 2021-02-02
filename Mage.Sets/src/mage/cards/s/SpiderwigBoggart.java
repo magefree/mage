@@ -33,7 +33,7 @@ public final class SpiderwigBoggart extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpiderwigBoggart(final SpiderwigBoggart card) {
+    private SpiderwigBoggart(final SpiderwigBoggart card) {
         super(card);
     }
 

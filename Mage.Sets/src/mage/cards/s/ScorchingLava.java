@@ -47,7 +47,7 @@ public final class ScorchingLava extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public ScorchingLava(final ScorchingLava card) {
+    private ScorchingLava(final ScorchingLava card) {
         super(card);
     }
 

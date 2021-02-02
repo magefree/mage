@@ -25,7 +25,7 @@ public final class ZendikarFarguide extends CardImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public ZendikarFarguide(final ZendikarFarguide card) {
+    private ZendikarFarguide(final ZendikarFarguide card) {
         super(card);
     }
 

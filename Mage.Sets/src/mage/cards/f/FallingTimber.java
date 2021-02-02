@@ -39,7 +39,7 @@ public final class FallingTimber extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(FallingTimberAdjuster.instance);
     }
 
-    public FallingTimber(final FallingTimber card) {
+    private FallingTimber(final FallingTimber card) {
         super(card);
     }
 

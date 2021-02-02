@@ -25,7 +25,7 @@ public final class PorcelainLegionnaire extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public PorcelainLegionnaire(final PorcelainLegionnaire card) {
+    private PorcelainLegionnaire(final PorcelainLegionnaire card) {
         super(card);
     }
 

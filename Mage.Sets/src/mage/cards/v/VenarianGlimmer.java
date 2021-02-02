@@ -33,7 +33,7 @@ public final class VenarianGlimmer extends CardImpl {
         this.getSpellAbility().addEffect(new VenarianGlimmerEffect());
     }
 
-    public VenarianGlimmer(final VenarianGlimmer card) {
+    private VenarianGlimmer(final VenarianGlimmer card) {
         super(card);
     }
 

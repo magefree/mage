@@ -27,7 +27,7 @@ public final class MycosynthWellspring extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true), true));
     }
 
-    public MycosynthWellspring(final MycosynthWellspring card) {
+    private MycosynthWellspring(final MycosynthWellspring card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class DromokaTheEternal extends CardImpl {
                 new BolsterEffect(2), false, new FilterControlledCreaturePermanent(SubType.DRAGON, "Dragon you control")));
     }
 
-    public DromokaTheEternal(final DromokaTheEternal card) {
+    private DromokaTheEternal(final DromokaTheEternal card) {
         super(card);
     }
 

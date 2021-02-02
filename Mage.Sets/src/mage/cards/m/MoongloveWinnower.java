@@ -26,7 +26,7 @@ public final class MoongloveWinnower extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public MoongloveWinnower(final MoongloveWinnower card) {
+    private MoongloveWinnower(final MoongloveWinnower card) {
         super(card);
     }
 

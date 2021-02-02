@@ -38,7 +38,7 @@ public final class GloomwidowsFeast extends CardImpl {
 
     }
 
-    public GloomwidowsFeast(final GloomwidowsFeast card) {
+    private GloomwidowsFeast(final GloomwidowsFeast card) {
         super(card);
     }
 

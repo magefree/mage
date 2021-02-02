@@ -32,7 +32,7 @@ public final class AppetiteForBrains extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public AppetiteForBrains(final AppetiteForBrains card) {
+    private AppetiteForBrains(final AppetiteForBrains card) {
         super(card);
     }
 

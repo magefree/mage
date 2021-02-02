@@ -53,7 +53,7 @@ public final class PheresBandWarchief extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PheresBandWarchief(final PheresBandWarchief card) {
+    private PheresBandWarchief(final PheresBandWarchief card) {
         super(card);
     }
 

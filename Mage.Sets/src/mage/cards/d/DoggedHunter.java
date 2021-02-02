@@ -42,7 +42,7 @@ public final class DoggedHunter extends CardImpl {
         
     }
 
-    public DoggedHunter(final DoggedHunter card) {
+    private DoggedHunter(final DoggedHunter card) {
         super(card);
     }
 

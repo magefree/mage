@@ -34,7 +34,7 @@ public final class NefCropEntangler extends CardImpl {
         this.addAbility(new ExertAbility(new BecomesExertSourceTriggeredAbility(new BoostSourceEffect(1, 2, Duration.EndOfTurn))));
     }
 
-    public NefCropEntangler(final NefCropEntangler card) {
+    private NefCropEntangler(final NefCropEntangler card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class TauntingElf extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect()));
     }
 
-    public TauntingElf(final TauntingElf card) {
+    private TauntingElf(final TauntingElf card) {
         super(card);
     }
 

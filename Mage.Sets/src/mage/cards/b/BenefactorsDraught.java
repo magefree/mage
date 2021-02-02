@@ -36,7 +36,7 @@ public final class BenefactorsDraught extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public BenefactorsDraught(final BenefactorsDraught card) {
+    private BenefactorsDraught(final BenefactorsDraught card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class AetherTunnel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AetherTunnel(final AetherTunnel card) {
+    private AetherTunnel(final AetherTunnel card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class MindTwist extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public MindTwist(final MindTwist card) {
+    private MindTwist(final MindTwist card) {
         super(card);
     }
 

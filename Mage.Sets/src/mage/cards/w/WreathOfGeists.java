@@ -41,7 +41,7 @@ public final class WreathOfGeists extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(value, value)));
     }
 
-    public WreathOfGeists(final WreathOfGeists card) {
+    private WreathOfGeists(final WreathOfGeists card) {
         super(card);
     }
 

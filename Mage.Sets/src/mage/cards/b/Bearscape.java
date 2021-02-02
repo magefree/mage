@@ -31,7 +31,7 @@ public final class Bearscape extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Bearscape(final Bearscape card) {
+    private Bearscape(final Bearscape card) {
         super(card);
     }
 

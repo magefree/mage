@@ -46,7 +46,7 @@ public final class LifebaneZombie extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public LifebaneZombie(final LifebaneZombie card) {
+    private LifebaneZombie(final LifebaneZombie card) {
         super(card);
     }
 

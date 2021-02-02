@@ -37,7 +37,7 @@ public final class HowlpackWolf extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockUnlessYouControlSourceEffect(filter)));
     }
 
-    public HowlpackWolf(final HowlpackWolf card) {
+    private HowlpackWolf(final HowlpackWolf card) {
         super(card);
     }
 

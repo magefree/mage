@@ -47,7 +47,7 @@ public final class HungeringYeti extends CardImpl {
         ).setText("as long as you control a green or blue permanent, you may cast {this} as though it had flash")));
     }
 
-    public HungeringYeti(final HungeringYeti card) {
+    private HungeringYeti(final HungeringYeti card) {
         super(card);
     }
 

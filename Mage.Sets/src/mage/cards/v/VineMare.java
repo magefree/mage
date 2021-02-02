@@ -47,7 +47,7 @@ public final class VineMare extends CardImpl {
         ));
     }
 
-    public VineMare(final VineMare card) {
+    private VineMare(final VineMare card) {
         super(card);
     }
 

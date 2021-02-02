@@ -47,7 +47,7 @@ public final class NekoTe extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(2)));
     }
 
-    public NekoTe(final NekoTe card) {
+    private NekoTe(final NekoTe card) {
         super(card);
     }
 

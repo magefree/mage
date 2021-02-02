@@ -68,7 +68,7 @@ public final class VisceridDrone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VisceridDrone(final VisceridDrone card) {
+    private VisceridDrone(final VisceridDrone card) {
         super(card);
     }
 

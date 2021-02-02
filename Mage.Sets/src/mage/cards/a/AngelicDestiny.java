@@ -54,7 +54,7 @@ public final class AngelicDestiny extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(false, true), "enchanted creature"));
     }
 
-    public AngelicDestiny(final AngelicDestiny card) {
+    private AngelicDestiny(final AngelicDestiny card) {
         super(card);
     }
 

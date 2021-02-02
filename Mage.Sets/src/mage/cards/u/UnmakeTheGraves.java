@@ -28,7 +28,7 @@ public final class UnmakeTheGraves extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCreatureCard("creature cards from your graveyard")));
     }
 
-    public UnmakeTheGraves(final UnmakeTheGraves card) {
+    private UnmakeTheGraves(final UnmakeTheGraves card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class SensorSplicer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public SensorSplicer(final SensorSplicer card) {
+    private SensorSplicer(final SensorSplicer card) {
         super(card);
     }
 

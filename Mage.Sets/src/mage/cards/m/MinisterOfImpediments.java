@@ -33,7 +33,7 @@ public final class MinisterOfImpediments extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MinisterOfImpediments(final MinisterOfImpediments card) {
+    private MinisterOfImpediments(final MinisterOfImpediments card) {
         super(card);
     }
 

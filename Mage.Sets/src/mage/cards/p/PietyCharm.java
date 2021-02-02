@@ -51,7 +51,7 @@ public final class PietyCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public PietyCharm(final PietyCharm card) {
+    private PietyCharm(final PietyCharm card) {
         super(card);
     }
 

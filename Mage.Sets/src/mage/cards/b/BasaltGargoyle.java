@@ -35,7 +35,7 @@ public final class BasaltGargoyle extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public BasaltGargoyle(final BasaltGargoyle card) {
+    private BasaltGargoyle(final BasaltGargoyle card) {
         super(card);
     }
 

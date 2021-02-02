@@ -34,7 +34,7 @@ public final class ThranTome extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThranTome(final ThranTome card) {
+    private ThranTome(final ThranTome card) {
         super(card);
     }
 

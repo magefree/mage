@@ -27,7 +27,7 @@ public final class BowerPassage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BowerPassageEffect()));
     }
 
-    public BowerPassage(final BowerPassage card) {
+    private BowerPassage(final BowerPassage card) {
         super(card);
     }
 

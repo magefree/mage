@@ -43,7 +43,7 @@ public final class SelvalaExplorerReturned extends CardImpl {
         this.addAbility(manaAbility);
     }
 
-    public SelvalaExplorerReturned(final SelvalaExplorerReturned card) {
+    private SelvalaExplorerReturned(final SelvalaExplorerReturned card) {
         super(card);
     }
 

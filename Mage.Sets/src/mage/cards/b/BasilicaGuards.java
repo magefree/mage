@@ -30,7 +30,7 @@ public final class BasilicaGuards extends CardImpl {
         this.addAbility(new ExtortAbility());
     }
 
-    public BasilicaGuards(final BasilicaGuards card) {
+    private BasilicaGuards(final BasilicaGuards card) {
         super(card);
     }
 

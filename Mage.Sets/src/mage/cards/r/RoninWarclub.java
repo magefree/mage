@@ -42,7 +42,7 @@ public final class RoninWarclub extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(5)));
     }
 
-    public RoninWarclub(final RoninWarclub card) {
+    private RoninWarclub(final RoninWarclub card) {
         super(card);
     }
 

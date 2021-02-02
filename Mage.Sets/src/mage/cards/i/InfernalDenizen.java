@@ -60,7 +60,7 @@ public final class InfernalDenizen extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InfernalDenizen(final InfernalDenizen card) {
+    private InfernalDenizen(final InfernalDenizen card) {
         super(card);
     }
 

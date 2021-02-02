@@ -32,7 +32,7 @@ public final class EunuchsIntrigues extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public EunuchsIntrigues(final EunuchsIntrigues card) {
+    private EunuchsIntrigues(final EunuchsIntrigues card) {
         super(card);
     }
 

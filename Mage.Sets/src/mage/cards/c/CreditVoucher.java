@@ -36,7 +36,7 @@ public final class CreditVoucher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CreditVoucher(final CreditVoucher card) {
+    private CreditVoucher(final CreditVoucher card) {
         super(card);
     }
 

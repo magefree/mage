@@ -27,7 +27,7 @@ public final class DeadbridgeGoliath extends CardImpl {
         this.addAbility(new ScavengeAbility(new ManaCostsImpl("{4}{G}{G}")));
     }
 
-    public DeadbridgeGoliath(final DeadbridgeGoliath card) {
+    private DeadbridgeGoliath(final DeadbridgeGoliath card) {
         super(card);
     }
 

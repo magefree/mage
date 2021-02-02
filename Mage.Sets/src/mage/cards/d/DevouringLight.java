@@ -27,7 +27,7 @@ public final class DevouringLight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());
     }
 
-    public DevouringLight(final DevouringLight card) {
+    private DevouringLight(final DevouringLight card) {
         super(card);
     }
 

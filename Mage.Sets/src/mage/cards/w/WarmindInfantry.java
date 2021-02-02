@@ -29,7 +29,7 @@ public final class WarmindInfantry extends CardImpl {
         this.addAbility(new BattalionAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn)));
     }
 
-    public WarmindInfantry(final WarmindInfantry card) {
+    private WarmindInfantry(final WarmindInfantry card) {
         super(card);
     }
 

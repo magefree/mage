@@ -37,7 +37,7 @@ public final class ToilToRenown extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public ToilToRenown(final ToilToRenown card) {
+    private ToilToRenown(final ToilToRenown card) {
         super(card);
     }
 

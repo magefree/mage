@@ -30,7 +30,7 @@ public final class RubyMedallion extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public RubyMedallion(final RubyMedallion card) {
+    private RubyMedallion(final RubyMedallion card) {
         super(card);
     }
 

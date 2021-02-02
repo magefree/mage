@@ -33,7 +33,7 @@ public final class Dreamcatcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Dreamcatcher(final Dreamcatcher card) {
+    private Dreamcatcher(final Dreamcatcher card) {
         super(card);
     }
 

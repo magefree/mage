@@ -32,7 +32,7 @@ public final class GrowFromTheAshes extends CardImpl {
                 "Search your library for a basic land card, put it onto the battlefield, then shuffle your library. If this spell was kicked, instead search your library for two basic land cards, put them onto the battlefield, then shuffle your library."));
     }
 
-    public GrowFromTheAshes(final GrowFromTheAshes card) {
+    private GrowFromTheAshes(final GrowFromTheAshes card) {
         super(card);
     }
 

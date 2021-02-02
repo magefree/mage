@@ -41,7 +41,7 @@ public final class HiddenGibbons extends CardImpl {
                 "When an opponent casts an instant spell, if {this} is an enchantment, {this} becomes a 4/4 Ape creature."));
     }
 
-    public HiddenGibbons(final HiddenGibbons card) {
+    private HiddenGibbons(final HiddenGibbons card) {
         super(card);
     }
 

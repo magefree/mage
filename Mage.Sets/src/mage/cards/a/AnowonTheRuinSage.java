@@ -38,7 +38,7 @@ public final class AnowonTheRuinSage extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeAllEffect(filter), TargetController.YOU, false));
     }
 
-    public AnowonTheRuinSage(final AnowonTheRuinSage card) {
+    private AnowonTheRuinSage(final AnowonTheRuinSage card) {
         super(card);
     }
 

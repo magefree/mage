@@ -39,7 +39,7 @@ public final class ViashinoShanktail extends CardImpl {
 
     }
 
-    public ViashinoShanktail(final ViashinoShanktail card) {
+    private ViashinoShanktail(final ViashinoShanktail card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class HowlFromBeyond extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public HowlFromBeyond(final HowlFromBeyond card) {
+    private HowlFromBeyond(final HowlFromBeyond card) {
         super(card);
     }
 

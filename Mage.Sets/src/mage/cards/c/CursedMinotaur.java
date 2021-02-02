@@ -28,7 +28,7 @@ public final class CursedMinotaur extends CardImpl {
 
     }
 
-    public CursedMinotaur(final CursedMinotaur card) {
+    private CursedMinotaur(final CursedMinotaur card) {
         super(card);
     }
 

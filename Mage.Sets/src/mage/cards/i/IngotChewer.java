@@ -36,7 +36,7 @@ public final class IngotChewer extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{R}"));
     }
 
-    public IngotChewer(final IngotChewer card) {
+    private IngotChewer(final IngotChewer card) {
         super(card);
     }
 

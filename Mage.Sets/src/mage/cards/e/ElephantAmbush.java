@@ -27,7 +27,7 @@ public final class ElephantAmbush extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{6}{G}{G}"), TimingRule.INSTANT));
     }
 
-    public ElephantAmbush(final ElephantAmbush card) {
+    private ElephantAmbush(final ElephantAmbush card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class UndergrowthScavenger extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(effect));
     }
 
-    public UndergrowthScavenger(final UndergrowthScavenger card) {
+    private UndergrowthScavenger(final UndergrowthScavenger card) {
         super(card);
     }
 

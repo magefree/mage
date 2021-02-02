@@ -30,7 +30,7 @@ public final class TerraEternal extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public TerraEternal(final TerraEternal card) {
+    private TerraEternal(final TerraEternal card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class AzorTheLawbringer extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new AzorTheLawbringerAttacksEffect(), false));
     }
 
-    public AzorTheLawbringer(final AzorTheLawbringer card) {
+    private AzorTheLawbringer(final AzorTheLawbringer card) {
         super(card);
     }
 

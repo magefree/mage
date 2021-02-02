@@ -35,7 +35,7 @@ public final class HuntingMoa extends CardImpl {
         this.addAbility(enterAbility);
     }
 
-    public HuntingMoa(final HuntingMoa card) {
+    private HuntingMoa(final HuntingMoa card) {
         super(card);
     }
 

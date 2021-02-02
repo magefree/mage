@@ -62,7 +62,7 @@ public final class ChiefChirpa extends CardImpl {
 
     }
 
-    public ChiefChirpa(final ChiefChirpa card) {
+    private ChiefChirpa(final ChiefChirpa card) {
         super(card);
     }
 

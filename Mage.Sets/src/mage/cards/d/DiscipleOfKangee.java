@@ -45,7 +45,7 @@ public final class DiscipleOfKangee extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DiscipleOfKangee(final DiscipleOfKangee card) {
+    private DiscipleOfKangee(final DiscipleOfKangee card) {
         super(card);
     }
 

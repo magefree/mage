@@ -39,7 +39,7 @@ public final class SkymarchBloodletter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkymarchBloodletter(final SkymarchBloodletter card) {
+    private SkymarchBloodletter(final SkymarchBloodletter card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class LeadBellyChimera extends CardImpl {
         addAbility(ability);
     }
 
-    public LeadBellyChimera(final LeadBellyChimera card) {
+    private LeadBellyChimera(final LeadBellyChimera card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class HelmOfAwakening extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionAllEffect(1)));
     }
 
-    public HelmOfAwakening(final HelmOfAwakening card) {
+    private HelmOfAwakening(final HelmOfAwakening card) {
         super(card);
     }
 

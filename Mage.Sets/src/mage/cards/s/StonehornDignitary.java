@@ -32,7 +32,7 @@ public final class StonehornDignitary extends CardImpl {
         this.addAbility(ability);
     }
     
-    public StonehornDignitary(final StonehornDignitary card) {
+    private StonehornDignitary(final StonehornDignitary card) {
         super(card);
     }
     

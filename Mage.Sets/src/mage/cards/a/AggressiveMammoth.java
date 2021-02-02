@@ -41,7 +41,7 @@ public final class AggressiveMammoth extends CardImpl {
         ));
     }
 
-    public AggressiveMammoth(final AggressiveMammoth card) {
+    private AggressiveMammoth(final AggressiveMammoth card) {
         super(card);
     }
 

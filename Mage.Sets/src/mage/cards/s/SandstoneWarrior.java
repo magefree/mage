@@ -32,7 +32,7 @@ public final class SandstoneWarrior extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public SandstoneWarrior(final SandstoneWarrior card) {
+    private SandstoneWarrior(final SandstoneWarrior card) {
         super(card);
     }
 

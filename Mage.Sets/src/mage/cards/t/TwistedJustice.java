@@ -30,7 +30,7 @@ public final class TwistedJustice extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public TwistedJustice(final TwistedJustice card) {
+    private TwistedJustice(final TwistedJustice card) {
         super(card);
     }
 

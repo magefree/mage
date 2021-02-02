@@ -26,7 +26,7 @@ public final class GarruksCompanion extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public GarruksCompanion(final GarruksCompanion card) {
+    private GarruksCompanion(final GarruksCompanion card) {
         super(card);
     }
 

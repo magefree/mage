@@ -31,7 +31,7 @@ public final class ShadowmageInfiltrator extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
-    public ShadowmageInfiltrator(final ShadowmageInfiltrator card) {
+    private ShadowmageInfiltrator(final ShadowmageInfiltrator card) {
         super(card);
     }
 

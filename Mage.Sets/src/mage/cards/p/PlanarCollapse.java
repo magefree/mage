@@ -33,7 +33,7 @@ public final class PlanarCollapse extends CardImpl {
 
     }
 
-    public PlanarCollapse(final PlanarCollapse card) {
+    private PlanarCollapse(final PlanarCollapse card) {
         super(card);
     }
 

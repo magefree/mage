@@ -25,7 +25,7 @@ public final class BloodrageVampire extends CardImpl {
         this.addAbility(new BloodthirstAbility(1));
     }
 
-    public BloodrageVampire(final BloodrageVampire card) {
+    private BloodrageVampire(final BloodrageVampire card) {
         super(card);
     }
 

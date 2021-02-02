@@ -40,7 +40,7 @@ public final class ThallidShellDweller extends CardImpl {
 
     }
 
-    public ThallidShellDweller(final ThallidShellDweller card) {
+    private ThallidShellDweller(final ThallidShellDweller card) {
         super(card);
     }
 

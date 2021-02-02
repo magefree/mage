@@ -32,7 +32,7 @@ public final class BrassSecretary extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BrassSecretary(final BrassSecretary card) {
+    private BrassSecretary(final BrassSecretary card) {
         super(card);
     }
 

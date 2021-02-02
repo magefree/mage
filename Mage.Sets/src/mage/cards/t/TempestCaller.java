@@ -32,7 +32,7 @@ public final class TempestCaller extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TempestCaller(final TempestCaller card) {
+    private TempestCaller(final TempestCaller card) {
         super(card);
     }
 

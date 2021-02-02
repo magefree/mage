@@ -49,7 +49,7 @@ public final class HerdchaserDragon extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false, false));
     }
 
-    public HerdchaserDragon(final HerdchaserDragon card) {
+    private HerdchaserDragon(final HerdchaserDragon card) {
         super(card);
     }
 

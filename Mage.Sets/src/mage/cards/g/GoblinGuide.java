@@ -41,7 +41,7 @@ public final class GoblinGuide extends CardImpl {
         this.addAbility(new GoblinGuideTriggeredAbility(new GoblinGuideEffect(), false));
     }
 
-    public GoblinGuide(final GoblinGuide card) {
+    private GoblinGuide(final GoblinGuide card) {
         super(card);
     }
 

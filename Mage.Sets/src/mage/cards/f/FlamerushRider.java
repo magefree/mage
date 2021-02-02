@@ -55,7 +55,7 @@ public final class FlamerushRider extends CardImpl {
         this.addAbility(new DashAbility(this, "{2}{R}{R}"));
     }
 
-    public FlamerushRider(final FlamerushRider card) {
+    private FlamerushRider(final FlamerushRider card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class GabrielAngelfire extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GabrielAngelfireGainAbilityEffect(), TargetController.YOU, false));
     }
 
-    public GabrielAngelfire(final GabrielAngelfire card) {
+    private GabrielAngelfire(final GabrielAngelfire card) {
         super(card);
     }
 

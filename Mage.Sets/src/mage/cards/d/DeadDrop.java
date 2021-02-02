@@ -26,7 +26,7 @@ public final class DeadDrop extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public DeadDrop(final DeadDrop card) {
+    private DeadDrop(final DeadDrop card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class Capture extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new BasicManaEffect(Mana.RedMana(3)), new TargetHasCounterCondition(CounterType.BOUNTY)));
     }
 
-    public Capture(final Capture card) {
+    private Capture(final Capture card) {
         super(card);
     }
 

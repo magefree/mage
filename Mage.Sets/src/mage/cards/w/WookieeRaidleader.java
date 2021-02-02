@@ -42,7 +42,7 @@ public final class WookieeRaidleader extends CardImpl {
 
     }
 
-    public WookieeRaidleader(final WookieeRaidleader card) {
+    private WookieeRaidleader(final WookieeRaidleader card) {
         super(card);
     }
 

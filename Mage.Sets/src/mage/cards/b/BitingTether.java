@@ -42,7 +42,7 @@ public final class BitingTether extends CardImpl {
 
     }
 
-    public BitingTether(final BitingTether card) {
+    private BitingTether(final BitingTether card) {
         super(card);
     }
 

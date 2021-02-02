@@ -51,7 +51,7 @@ public final class IdentityThief extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IdentityThief(final IdentityThief card) {
+    private IdentityThief(final IdentityThief card) {
         super(card);
     }
 

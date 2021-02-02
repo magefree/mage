@@ -28,7 +28,7 @@ public final class BloodCrypt extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public BloodCrypt(final BloodCrypt card) {
+    private BloodCrypt(final BloodCrypt card) {
         super(card);
     }
 

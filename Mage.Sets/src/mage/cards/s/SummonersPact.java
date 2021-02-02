@@ -36,7 +36,7 @@ public final class SummonersPact extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{2}{G}{G}"))));
     }
 
-    public SummonersPact(final SummonersPact card) {
+    private SummonersPact(final SummonersPact card) {
         super(card);
     }
 

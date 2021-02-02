@@ -34,7 +34,7 @@ public final class BloodfireMentor extends CardImpl {
 
     }
 
-    public BloodfireMentor(final BloodfireMentor card) {
+    private BloodfireMentor(final BloodfireMentor card) {
         super(card);
     }
 

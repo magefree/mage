@@ -37,7 +37,7 @@ public final class BurntOffering extends CardImpl {
         this.getSpellAbility().addEffect(new BurntOfferingEffect());
     }
 
-    public BurntOffering(final BurntOffering card) {
+    private BurntOffering(final BurntOffering card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class DuneBroodNephilim extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(new DuneBroodNephilimToken(), new PermanentsOnBattlefieldCount(filterLands)), false));
     }
 
-    public DuneBroodNephilim(final DuneBroodNephilim card) {
+    private DuneBroodNephilim(final DuneBroodNephilim card) {
         super(card);
     }
 

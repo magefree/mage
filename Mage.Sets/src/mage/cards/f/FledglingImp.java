@@ -35,7 +35,7 @@ public final class FledglingImp extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FledglingImp(final FledglingImp card) {
+    private FledglingImp(final FledglingImp card) {
         super(card);
     }
 

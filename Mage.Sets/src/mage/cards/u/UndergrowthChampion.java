@@ -40,7 +40,7 @@ public final class UndergrowthChampion extends CardImpl {
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public UndergrowthChampion(final UndergrowthChampion card) {
+    private UndergrowthChampion(final UndergrowthChampion card) {
         super(card);
     }
 

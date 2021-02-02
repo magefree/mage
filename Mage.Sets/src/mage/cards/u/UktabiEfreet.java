@@ -27,7 +27,7 @@ public final class UktabiEfreet extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{G}")));
     }
 
-    public UktabiEfreet(final UktabiEfreet card) {
+    private UktabiEfreet(final UktabiEfreet card) {
         super(card);
     }
 

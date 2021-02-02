@@ -42,7 +42,7 @@ public final class JunkyoBell extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JunkyoBell(final JunkyoBell card) {
+    private JunkyoBell(final JunkyoBell card) {
         super(card);
     }
 

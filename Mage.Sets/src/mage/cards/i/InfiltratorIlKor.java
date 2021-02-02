@@ -30,7 +30,7 @@ public final class InfiltratorIlKor extends CardImpl {
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{1}{U}"), this));
     }
 
-    public InfiltratorIlKor(final InfiltratorIlKor card) {
+    private InfiltratorIlKor(final InfiltratorIlKor card) {
         super(card);
     }
 

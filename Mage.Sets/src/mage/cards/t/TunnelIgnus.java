@@ -36,7 +36,7 @@ public final class TunnelIgnus extends CardImpl {
         this.addAbility(new TunnelIgnusTriggeredAbility(), new TunnelIgnusWatcher());
     }
 
-    public TunnelIgnus(final TunnelIgnus card) {
+    private TunnelIgnus(final TunnelIgnus card) {
         super(card);
     }
 

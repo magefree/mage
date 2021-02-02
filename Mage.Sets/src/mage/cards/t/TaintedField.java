@@ -46,7 +46,7 @@ public final class TaintedField extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter)));
     }
 
-    public TaintedField(final TaintedField card) {
+    private TaintedField(final TaintedField card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class PhyrexianMonitor extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public PhyrexianMonitor(final PhyrexianMonitor card) {
+    private PhyrexianMonitor(final PhyrexianMonitor card) {
         super(card);
     }
 

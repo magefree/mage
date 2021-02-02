@@ -54,7 +54,7 @@ public final class ZadasCommando extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZadasCommando(final ZadasCommando card) {
+    private ZadasCommando(final ZadasCommando card) {
         super(card);
     }
 

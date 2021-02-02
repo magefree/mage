@@ -47,7 +47,7 @@ public final class GruulGuildmage extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public GruulGuildmage(final GruulGuildmage card) {
+    private GruulGuildmage(final GruulGuildmage card) {
         super(card);
     }
 

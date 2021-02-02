@@ -23,7 +23,7 @@ public final class SearingWind extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(10));
     }
 
-    public SearingWind(final SearingWind card) {
+    private SearingWind(final SearingWind card) {
         super(card);
     }
 

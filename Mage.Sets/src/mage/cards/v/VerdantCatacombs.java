@@ -23,7 +23,7 @@ public final class VerdantCatacombs extends CardImpl {
         this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.FOREST, SubType.SWAMP)));
     }
 
-    public VerdantCatacombs(final VerdantCatacombs card) {
+    private VerdantCatacombs(final VerdantCatacombs card) {
         super(card);
     }
 

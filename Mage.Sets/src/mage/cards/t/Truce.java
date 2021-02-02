@@ -24,7 +24,7 @@ public final class Truce extends CardImpl {
         this.getSpellAbility().addEffect(new TruceEffect());
     }
 
-    public Truce(final Truce card) {
+    private Truce(final Truce card) {
         super(card);
     }
 

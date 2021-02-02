@@ -26,7 +26,7 @@ public final class Taiga extends CardImpl {
         
     }
 
-    public Taiga(final Taiga card) {
+    private Taiga(final Taiga card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class ReturnedCentaur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ReturnedCentaur(final ReturnedCentaur card) {
+    private ReturnedCentaur(final ReturnedCentaur card) {
         super(card);
     }
 

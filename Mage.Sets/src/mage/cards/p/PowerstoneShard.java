@@ -34,7 +34,7 @@ public final class PowerstoneShard extends CardImpl {
                 .addHint(new ValueHint("Artifact you control named Powerstone Shard", xValue)));
     }
 
-    public PowerstoneShard(final PowerstoneShard card) {
+    private PowerstoneShard(final PowerstoneShard card) {
         super(card);
     }
 

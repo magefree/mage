@@ -38,7 +38,7 @@ public final class BoneyardParley extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(0, 5, new FilterCard("cards from graveyards")));
     }
 
-    public BoneyardParley(final BoneyardParley card) {
+    private BoneyardParley(final BoneyardParley card) {
         super(card);
     }
 

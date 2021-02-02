@@ -39,7 +39,7 @@ public final class PrismaticCircle extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PrismaticCircleEffect(), new ManaCostsImpl("{1}")));
     }
 
-    public PrismaticCircle(final PrismaticCircle card) {
+    private PrismaticCircle(final PrismaticCircle card) {
         super(card);
     }
 

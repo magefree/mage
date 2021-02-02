@@ -35,7 +35,7 @@ public final class JelennSphinx extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(1, 1, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, true), false));
     }
 
-    public JelennSphinx(final JelennSphinx card) {
+    private JelennSphinx(final JelennSphinx card) {
         super(card);
     }
 

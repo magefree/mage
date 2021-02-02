@@ -32,7 +32,7 @@ public final class MoltenVortex extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoltenVortex(final MoltenVortex card) {
+    private MoltenVortex(final MoltenVortex card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class HieroglyphicIllumination extends CardImpl {
 
     }
 
-    public HieroglyphicIllumination(final HieroglyphicIllumination card) {
+    private HieroglyphicIllumination(final HieroglyphicIllumination card) {
         super(card);
     }
 

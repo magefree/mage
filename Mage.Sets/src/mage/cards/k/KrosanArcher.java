@@ -38,7 +38,7 @@ public final class KrosanArcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KrosanArcher(final KrosanArcher card) {
+    private KrosanArcher(final KrosanArcher card) {
         super(card);
     }
 

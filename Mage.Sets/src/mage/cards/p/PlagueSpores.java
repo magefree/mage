@@ -38,7 +38,7 @@ public final class PlagueSpores extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public PlagueSpores(final PlagueSpores card) {
+    private PlagueSpores(final PlagueSpores card) {
         super(card);
     }
 

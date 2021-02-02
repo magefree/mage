@@ -32,7 +32,7 @@ public final class ChasmGuide extends CardImpl {
                 new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), false));
     }
 
-    public ChasmGuide(final ChasmGuide card) {
+    private ChasmGuide(final ChasmGuide card) {
         super(card);
     }
 

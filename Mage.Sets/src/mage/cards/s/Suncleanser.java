@@ -52,7 +52,7 @@ public final class Suncleanser extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Suncleanser(final Suncleanser card) {
+    private Suncleanser(final Suncleanser card) {
         super(card);
     }
 

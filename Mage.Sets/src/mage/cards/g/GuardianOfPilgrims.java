@@ -31,7 +31,7 @@ public final class GuardianOfPilgrims extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GuardianOfPilgrims(final GuardianOfPilgrims card) {
+    private GuardianOfPilgrims(final GuardianOfPilgrims card) {
         super(card);
     }
 

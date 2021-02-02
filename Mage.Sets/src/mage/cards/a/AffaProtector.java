@@ -27,7 +27,7 @@ public final class AffaProtector extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public AffaProtector(final AffaProtector card) {
+    private AffaProtector(final AffaProtector card) {
         super(card);
     }
 

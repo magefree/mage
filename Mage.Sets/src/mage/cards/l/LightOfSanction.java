@@ -30,7 +30,7 @@ public final class LightOfSanction extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LightOfSanctionEffect()));
     }
 
-    public LightOfSanction(final LightOfSanction card) {
+    private LightOfSanction(final LightOfSanction card) {
         super(card);
     }
 

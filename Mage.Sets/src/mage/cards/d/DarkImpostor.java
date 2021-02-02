@@ -45,7 +45,7 @@ public final class DarkImpostor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DarkImpostorContinuousEffect()));
     }
 
-    public DarkImpostor(final DarkImpostor card) {
+    private DarkImpostor(final DarkImpostor card) {
         super(card);
     }
 

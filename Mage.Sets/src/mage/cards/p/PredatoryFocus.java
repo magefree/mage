@@ -25,7 +25,7 @@ public final class PredatoryFocus extends CardImpl {
         this.getSpellAbility().addEffect(new PredatoryFocusEffect());
     }
 
-    public PredatoryFocus(final PredatoryFocus card) {
+    private PredatoryFocus(final PredatoryFocus card) {
         super(card);
     }
 

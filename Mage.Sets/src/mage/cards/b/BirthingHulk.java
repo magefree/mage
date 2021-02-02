@@ -42,7 +42,7 @@ public final class BirthingHulk extends CardImpl {
 
     }
 
-    public BirthingHulk(final BirthingHulk card) {
+    private BirthingHulk(final BirthingHulk card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class CephalidPathmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CephalidPathmage(final CephalidPathmage card) {
+    private CephalidPathmage(final CephalidPathmage card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class LoyalDrake extends CardImpl {
         ));
     }
 
-    public LoyalDrake(final LoyalDrake card) {
+    private LoyalDrake(final LoyalDrake card) {
         super(card);
     }
 

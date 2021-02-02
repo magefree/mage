@@ -48,7 +48,7 @@ public final class GibberingDescent extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{2}{B}{B}")));
     }
 
-    public GibberingDescent(final GibberingDescent card) {
+    private GibberingDescent(final GibberingDescent card) {
         super(card);
     }
 

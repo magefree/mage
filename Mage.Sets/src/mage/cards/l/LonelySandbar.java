@@ -27,7 +27,7 @@ public final class LonelySandbar extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
     }
 
-    public LonelySandbar(final LonelySandbar card) {
+    private LonelySandbar(final LonelySandbar card) {
         super(card);
     }
 

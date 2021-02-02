@@ -36,7 +36,7 @@ public final class BaneOfTheLiving extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostAllEffect(morphX, morphX, Duration.EndOfTurn, new FilterCreaturePermanent("all creatures"), false, "", true)));
     }
 
-    public BaneOfTheLiving(final BaneOfTheLiving card) {
+    private BaneOfTheLiving(final BaneOfTheLiving card) {
         super(card);
     }
 

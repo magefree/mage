@@ -24,7 +24,7 @@ public final class JadeIdol extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new BecomesCreatureSourceEffect(new JadeIdolToken(), "", Duration.EndOfTurn), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
     }
 
-    public JadeIdol(final JadeIdol card) {
+    private JadeIdol(final JadeIdol card) {
         super(card);
     }
 

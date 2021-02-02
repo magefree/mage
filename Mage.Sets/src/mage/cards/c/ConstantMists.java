@@ -28,7 +28,7 @@ public final class ConstantMists extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
     }
 
-    public ConstantMists(final ConstantMists card) {
+    private ConstantMists(final ConstantMists card) {
         super(card);
     }
 

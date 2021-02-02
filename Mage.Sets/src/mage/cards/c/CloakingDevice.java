@@ -49,7 +49,7 @@ public final class CloakingDevice extends CardImpl {
 
     }
 
-    public CloakingDevice(final CloakingDevice card) {
+    private CloakingDevice(final CloakingDevice card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class MephiticOoze extends CardImpl {
         this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new DestroyTargetEffect(true), false, true));
     }
 
-    public MephiticOoze(final MephiticOoze card) {
+    private MephiticOoze(final MephiticOoze card) {
         super(card);
     }
 

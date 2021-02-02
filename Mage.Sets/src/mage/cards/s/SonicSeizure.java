@@ -25,7 +25,7 @@ public final class SonicSeizure extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public SonicSeizure(final SonicSeizure card) {
+    private SonicSeizure(final SonicSeizure card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class Cyclone extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public Cyclone(final Cyclone card) {
+    private Cyclone(final Cyclone card) {
         super(card);
     }
 

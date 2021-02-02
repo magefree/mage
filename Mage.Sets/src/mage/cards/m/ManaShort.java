@@ -25,7 +25,7 @@ public final class ManaShort extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public ManaShort(final ManaShort card) {
+    private ManaShort(final ManaShort card) {
         super(card);
     }
 

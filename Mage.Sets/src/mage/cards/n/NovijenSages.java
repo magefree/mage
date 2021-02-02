@@ -47,7 +47,7 @@ public final class NovijenSages extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NovijenSages(final NovijenSages card) {
+    private NovijenSages(final NovijenSages card) {
         super(card);
     }
 

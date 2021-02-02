@@ -40,7 +40,7 @@ public final class AtarkaEfreet extends CardImpl {
 
     }
 
-    public AtarkaEfreet(final AtarkaEfreet card) {
+    private AtarkaEfreet(final AtarkaEfreet card) {
         super(card);
     }
 

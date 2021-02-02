@@ -30,7 +30,7 @@ public final class PlasmCapture extends CardImpl {
         this.getSpellAbility().addEffect(new PlasmCaptureCounterEffect());
     }
 
-    public PlasmCapture(final PlasmCapture card) {
+    private PlasmCapture(final PlasmCapture card) {
         super(card);
     }
 

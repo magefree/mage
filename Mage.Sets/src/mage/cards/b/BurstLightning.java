@@ -29,7 +29,7 @@ public final class BurstLightning extends CardImpl {
                 new DamageTargetEffect(2), KickedCondition.instance, "{this} deals 2 damage to any target. if this spell was kicked, it deals 4 damage to that permanent or player instead"));
     }
 
-    public BurstLightning(final BurstLightning card) {
+    private BurstLightning(final BurstLightning card) {
         super(card);
     }
 

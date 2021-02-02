@@ -37,7 +37,7 @@ public final class ActOfAuthority extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ActOfAuthority(final ActOfAuthority card) {
+    private ActOfAuthority(final ActOfAuthority card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class GhituFire extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public GhituFire(final GhituFire card) {
+    private GhituFire(final GhituFire card) {
         super(card);
     }
 

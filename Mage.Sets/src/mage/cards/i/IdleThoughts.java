@@ -27,7 +27,7 @@ public final class IdleThoughts extends CardImpl {
                 new DrawCardSourceControllerEffect(2), new CardsInHandCondition(), "Draw a card if you have no cards in hand"), new ManaCostsImpl("{2}")));
     }
 
-    public IdleThoughts(final IdleThoughts card) {
+    private IdleThoughts(final IdleThoughts card) {
         super(card);
     }
 

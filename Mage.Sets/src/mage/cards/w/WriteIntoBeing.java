@@ -31,7 +31,7 @@ public final class WriteIntoBeing extends CardImpl {
         this.getSpellAbility().addEffect(new WriteIntoBeingEffect());
     }
 
-    public WriteIntoBeing(final WriteIntoBeing card) {
+    private WriteIntoBeing(final WriteIntoBeing card) {
         super(card);
     }
 

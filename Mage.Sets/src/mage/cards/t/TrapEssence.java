@@ -33,7 +33,7 @@ public final class TrapEssence extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
     }
 
-    public TrapEssence(final TrapEssence card) {
+    private TrapEssence(final TrapEssence card) {
         super(card);
     }
 

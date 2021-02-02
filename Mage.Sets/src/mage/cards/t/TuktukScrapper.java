@@ -37,7 +37,7 @@ public final class TuktukScrapper extends CardImpl {
         this.addAbility(new TuktukScrapperTriggeredAbility());
     }
 
-    public TuktukScrapper(final TuktukScrapper card) {
+    private TuktukScrapper(final TuktukScrapper card) {
         super(card);
     }
 

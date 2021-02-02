@@ -40,7 +40,7 @@ public final class PhantasmalTerrain extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhantasmalTerrainContinuousEffect()));
     }
 
-    public PhantasmalTerrain(final PhantasmalTerrain card) {
+    private PhantasmalTerrain(final PhantasmalTerrain card) {
         super(card);
     }
 

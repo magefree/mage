@@ -27,7 +27,7 @@ public final class DromadPurebred extends CardImpl {
         this.addAbility(new DealtDamageToSourceTriggeredAbility(new GainLifeEffect(1), false));
     }
 
-    public DromadPurebred(final DromadPurebred card) {
+    private DromadPurebred(final DromadPurebred card) {
         super(card);
     }
 

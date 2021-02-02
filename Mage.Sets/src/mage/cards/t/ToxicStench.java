@@ -54,7 +54,7 @@ public final class ToxicStench extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public ToxicStench(final ToxicStench card) {
+    private ToxicStench(final ToxicStench card) {
         super(card);
     }
 

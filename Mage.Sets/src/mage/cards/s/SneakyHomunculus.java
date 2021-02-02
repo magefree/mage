@@ -47,7 +47,7 @@ public final class SneakyHomunculus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SneakyHomunculus(final SneakyHomunculus card) {
+    private SneakyHomunculus(final SneakyHomunculus card) {
         super(card);
     }
 

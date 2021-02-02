@@ -36,7 +36,7 @@ public final class AssembledAlphas extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AssembledAlphas(final AssembledAlphas card) {
+    private AssembledAlphas(final AssembledAlphas card) {
         super(card);
     }
 

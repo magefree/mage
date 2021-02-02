@@ -48,7 +48,7 @@ public final class ArcticAven extends CardImpl {
                 new ManaCostsImpl("{W}")));
     }
 
-    public ArcticAven(final ArcticAven card) {
+    private ArcticAven(final ArcticAven card) {
         super(card);
     }
 

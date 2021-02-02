@@ -27,7 +27,7 @@ public final class DiabolicIntent extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary()));
     }
 
-    public DiabolicIntent(final DiabolicIntent card) {
+    private DiabolicIntent(final DiabolicIntent card) {
         super(card);
     }
 

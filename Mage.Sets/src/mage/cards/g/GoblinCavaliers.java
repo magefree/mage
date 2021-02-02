@@ -22,7 +22,7 @@ public final class GoblinCavaliers extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public GoblinCavaliers(final GoblinCavaliers card) {
+    private GoblinCavaliers(final GoblinCavaliers card) {
         super(card);
     }
 

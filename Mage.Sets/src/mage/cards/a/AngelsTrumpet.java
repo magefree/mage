@@ -34,7 +34,7 @@ public final class AngelsTrumpet extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new AngelsTrumpetTapEffect(), TargetController.ANY, false), new AttackedThisTurnWatcher());
     }
 
-    public AngelsTrumpet(final AngelsTrumpet card) {
+    private AngelsTrumpet(final AngelsTrumpet card) {
         super(card);
     }
 

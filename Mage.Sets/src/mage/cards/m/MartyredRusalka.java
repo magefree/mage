@@ -38,7 +38,7 @@ public final class MartyredRusalka extends CardImpl {
 
     }
 
-    public MartyredRusalka(final MartyredRusalka card) {
+    private MartyredRusalka(final MartyredRusalka card) {
         super(card);
     }
 

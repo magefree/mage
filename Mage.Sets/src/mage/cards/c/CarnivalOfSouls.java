@@ -34,7 +34,7 @@ public final class CarnivalOfSouls extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CarnivalOfSouls(final CarnivalOfSouls card) {
+    private CarnivalOfSouls(final CarnivalOfSouls card) {
         super(card);
     }
 

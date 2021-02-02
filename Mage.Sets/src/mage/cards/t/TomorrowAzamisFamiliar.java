@@ -33,7 +33,7 @@ public final class TomorrowAzamisFamiliar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TomorrowAzamisFamiliarReplacementEffect()));
     }
 
-    public TomorrowAzamisFamiliar(final TomorrowAzamisFamiliar card) {
+    private TomorrowAzamisFamiliar(final TomorrowAzamisFamiliar card) {
         super(card);
     }
 

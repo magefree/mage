@@ -25,7 +25,7 @@ public final class WaywardGiant extends CardImpl {
         this.addAbility(new MenaceAbility());
     }
 
-    public WaywardGiant(final WaywardGiant card) {
+    private WaywardGiant(final WaywardGiant card) {
         super(card);
     }
 

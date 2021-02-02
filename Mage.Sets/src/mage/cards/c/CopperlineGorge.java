@@ -33,7 +33,7 @@ public final class CopperlineGorge extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public CopperlineGorge(final CopperlineGorge card) {
+    private CopperlineGorge(final CopperlineGorge card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class TimbermawLarva extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, value, Duration.EndOfTurn), false));
     }
 
-    public TimbermawLarva(final TimbermawLarva card) {
+    private TimbermawLarva(final TimbermawLarva card) {
         super(card);
     }
 

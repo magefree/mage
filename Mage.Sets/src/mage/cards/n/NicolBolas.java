@@ -40,7 +40,7 @@ public final class NicolBolas extends CardImpl {
         this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardHandTargetEffect("that player"), false, false, true));
     }
 
-    public NicolBolas(final NicolBolas card) {
+    private NicolBolas(final NicolBolas card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class Hateflayer extends CardImpl {
         
     }
 
-    public Hateflayer(final Hateflayer card) {
+    private Hateflayer(final Hateflayer card) {
         super(card);
     }
 

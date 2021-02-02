@@ -37,7 +37,7 @@ public final class HourOfRevelation extends CardImpl {
 
     }
 
-    public HourOfRevelation(final HourOfRevelation card) {
+    private HourOfRevelation(final HourOfRevelation card) {
         super(card);
     }
 

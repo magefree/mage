@@ -35,7 +35,7 @@ public final class Galestrike extends CardImpl {
 
     }
 
-    public Galestrike(final Galestrike card) {
+    private Galestrike(final Galestrike card) {
         super(card);
     }
 

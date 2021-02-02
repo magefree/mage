@@ -69,7 +69,7 @@ public final class JoragaTreespeaker extends LevelerCard {
         setMaxLevelCounters(5);
     }
 
-    public JoragaTreespeaker(final JoragaTreespeaker card) {
+    private JoragaTreespeaker(final JoragaTreespeaker card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class SpikeDrone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpikeDrone(final SpikeDrone card) {
+    private SpikeDrone(final SpikeDrone card) {
         super(card);
     }
 

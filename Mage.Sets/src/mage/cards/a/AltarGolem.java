@@ -59,7 +59,7 @@ public final class AltarGolem extends CardImpl {
 
     }
 
-    public AltarGolem(final AltarGolem card) {
+    private AltarGolem(final AltarGolem card) {
         super(card);
     }
 

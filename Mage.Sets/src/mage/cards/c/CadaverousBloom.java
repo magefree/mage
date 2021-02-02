@@ -35,7 +35,7 @@ public final class CadaverousBloom extends CardImpl {
                 new ExileFromHandCost(new TargetCardInHand(new FilterOwnedCard("a card from your hand")))));
     }
 
-    public CadaverousBloom(final CadaverousBloom card) {
+    private CadaverousBloom(final CadaverousBloom card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class JoinShields extends CardImpl {
         ).setText("and indestructible until end of turn"));
     }
 
-    public JoinShields(final JoinShields card) {
+    private JoinShields(final JoinShields card) {
         super(card);
     }
 

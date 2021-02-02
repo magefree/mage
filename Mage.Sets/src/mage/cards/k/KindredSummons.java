@@ -36,7 +36,7 @@ public final class KindredSummons extends CardImpl {
         this.getSpellAbility().addEffect(new KindredSummonsEffect());
     }
 
-    public KindredSummons(final KindredSummons card) {
+    private KindredSummons(final KindredSummons card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class FlameJab extends CardImpl {
         this.addAbility(new RetraceAbility(this));
     }
 
-    public FlameJab(final FlameJab card) {
+    private FlameJab(final FlameJab card) {
         super(card);
     }
 

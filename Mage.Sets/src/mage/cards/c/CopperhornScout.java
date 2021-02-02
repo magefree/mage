@@ -36,7 +36,7 @@ public final class CopperhornScout extends CardImpl {
         this.addAbility(new CopperhornScoutTriggeredAbility());
     }
 
-    public CopperhornScout(final CopperhornScout card) {
+    private CopperhornScout(final CopperhornScout card) {
         super(card);
     }
 

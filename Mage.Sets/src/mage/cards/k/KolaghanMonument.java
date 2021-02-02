@@ -35,7 +35,7 @@ public final class KolaghanMonument extends CardImpl {
             (new KolaghanMonumentToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{4}{B}{R}")));
     }
 
-    public KolaghanMonument(final KolaghanMonument card) {
+    private KolaghanMonument(final KolaghanMonument card) {
         super(card);
     }
 

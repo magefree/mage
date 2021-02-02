@@ -61,7 +61,7 @@ public final class TradingPost extends CardImpl {
 
     }
 
-    public TradingPost(final TradingPost card) {
+    private TradingPost(final TradingPost card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class RitesOfRefusal extends CardImpl {
 
     }
 
-    public RitesOfRefusal(final RitesOfRefusal card) {
+    private RitesOfRefusal(final RitesOfRefusal card) {
         super(card);
     }
 

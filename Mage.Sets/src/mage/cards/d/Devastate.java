@@ -24,7 +24,7 @@ public final class Devastate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public Devastate(final Devastate card) {
+    private Devastate(final Devastate card) {
         super(card);
     }
 

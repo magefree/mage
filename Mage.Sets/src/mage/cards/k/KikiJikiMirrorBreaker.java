@@ -55,7 +55,7 @@ public final class KikiJikiMirrorBreaker extends CardImpl {
 
     }
 
-    public KikiJikiMirrorBreaker(final KikiJikiMirrorBreaker card) {
+    private KikiJikiMirrorBreaker(final KikiJikiMirrorBreaker card) {
         super(card);
     }
 

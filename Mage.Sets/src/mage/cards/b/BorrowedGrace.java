@@ -36,7 +36,7 @@ public final class BorrowedGrace extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public BorrowedGrace(final BorrowedGrace card) {
+    private BorrowedGrace(final BorrowedGrace card) {
         super(card);
     }
 

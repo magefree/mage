@@ -25,7 +25,7 @@ public final class CloudManta extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public CloudManta(final CloudManta card) {
+    private CloudManta(final CloudManta card) {
         super(card);
     }
 

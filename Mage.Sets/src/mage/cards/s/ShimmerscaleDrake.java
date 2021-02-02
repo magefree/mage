@@ -32,7 +32,7 @@ public final class ShimmerscaleDrake extends CardImpl {
 
     }
 
-    public ShimmerscaleDrake(final ShimmerscaleDrake card) {
+    private ShimmerscaleDrake(final ShimmerscaleDrake card) {
         super(card);
     }
 

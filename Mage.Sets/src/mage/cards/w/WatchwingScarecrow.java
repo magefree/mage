@@ -53,7 +53,7 @@ public final class WatchwingScarecrow extends CardImpl {
 
     }
 
-    public WatchwingScarecrow(final WatchwingScarecrow card) {
+    private WatchwingScarecrow(final WatchwingScarecrow card) {
         super(card);
     }
 

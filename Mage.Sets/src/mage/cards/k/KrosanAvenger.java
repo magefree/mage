@@ -41,7 +41,7 @@ public final class KrosanAvenger extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public KrosanAvenger(final KrosanAvenger card) {
+    private KrosanAvenger(final KrosanAvenger card) {
         super(card);
     }
 

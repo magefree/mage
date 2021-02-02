@@ -51,7 +51,7 @@ public final class BobaFett extends CardImpl {
         this.addAbility(new BountyAbility(new DrawDiscardControllerEffect(2, 2, true)));
     }
 
-    public BobaFett(final BobaFett card) {
+    private BobaFett(final BobaFett card) {
         super(card);
     }
 

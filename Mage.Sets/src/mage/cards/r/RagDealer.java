@@ -36,7 +36,7 @@ public final class RagDealer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RagDealer(final RagDealer card) {
+    private RagDealer(final RagDealer card) {
         super(card);
     }
 

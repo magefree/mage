@@ -32,7 +32,7 @@ public final class StensiaBloodhall extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StensiaBloodhall(final StensiaBloodhall card) {
+    private StensiaBloodhall(final StensiaBloodhall card) {
         super(card);
     }
 

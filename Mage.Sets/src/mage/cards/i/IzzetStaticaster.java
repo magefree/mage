@@ -48,7 +48,7 @@ public final class IzzetStaticaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IzzetStaticaster(final IzzetStaticaster card) {
+    private IzzetStaticaster(final IzzetStaticaster card) {
         super(card);
     }
 

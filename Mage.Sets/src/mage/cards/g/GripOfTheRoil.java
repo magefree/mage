@@ -32,7 +32,7 @@ public final class GripOfTheRoil extends CardImpl {
         addAbility(new SurgeAbility(this, "{1}{U}"));
     }
 
-    public GripOfTheRoil(final GripOfTheRoil card) {
+    private GripOfTheRoil(final GripOfTheRoil card) {
         super(card);
     }
 

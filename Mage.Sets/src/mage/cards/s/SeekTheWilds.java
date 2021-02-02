@@ -30,7 +30,7 @@ public final class SeekTheWilds extends CardImpl {
 
     }
 
-    public SeekTheWilds(final SeekTheWilds card) {
+    private SeekTheWilds(final SeekTheWilds card) {
         super(card);
     }
 

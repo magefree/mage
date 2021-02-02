@@ -53,7 +53,7 @@ public final class RattleblazeScarecrow extends CardImpl {
 
     }
 
-    public RattleblazeScarecrow(final RattleblazeScarecrow card) {
+    private RattleblazeScarecrow(final RattleblazeScarecrow card) {
         super(card);
     }
 

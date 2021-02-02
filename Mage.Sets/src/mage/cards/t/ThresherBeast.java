@@ -35,7 +35,7 @@ public final class ThresherBeast extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new ThresherBeastEffect(), false));
     }
 
-    public ThresherBeast(final ThresherBeast card) {
+    private ThresherBeast(final ThresherBeast card) {
         super(card);
     }
 

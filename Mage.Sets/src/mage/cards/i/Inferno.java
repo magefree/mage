@@ -21,7 +21,7 @@ public final class Inferno extends CardImpl {
         this.getSpellAbility().addEffect(new DamageEverythingEffect(6));
     }
 
-    public Inferno(final Inferno card) {
+    private Inferno(final Inferno card) {
         super(card);
     }
 

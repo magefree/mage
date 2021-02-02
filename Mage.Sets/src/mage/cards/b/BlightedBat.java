@@ -35,7 +35,7 @@ public final class BlightedBat extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(1)));
     }
 
-    public BlightedBat(final BlightedBat card) {
+    private BlightedBat(final BlightedBat card) {
         super(card);
     }
 

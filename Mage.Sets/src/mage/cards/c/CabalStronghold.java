@@ -42,7 +42,7 @@ public final class CabalStronghold extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CabalStronghold(final CabalStronghold card) {
+    private CabalStronghold(final CabalStronghold card) {
         super(card);
     }
 

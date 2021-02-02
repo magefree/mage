@@ -28,7 +28,7 @@ public final class CathedralOfWar extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public CathedralOfWar(final CathedralOfWar card) {
+    private CathedralOfWar(final CathedralOfWar card) {
         super(card);
     }
 

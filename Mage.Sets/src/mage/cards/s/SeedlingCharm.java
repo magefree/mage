@@ -53,7 +53,7 @@ public final class SeedlingCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public SeedlingCharm(final SeedlingCharm card) {
+    private SeedlingCharm(final SeedlingCharm card) {
         super(card);
     }
 

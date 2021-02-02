@@ -27,7 +27,7 @@ public final class MartialCoup extends CardImpl {
         this.getSpellAbility().addEffect(new MartialCoupEffect());
     }
 
-    public MartialCoup(final MartialCoup card) {
+    private MartialCoup(final MartialCoup card) {
         super(card);
     }
 

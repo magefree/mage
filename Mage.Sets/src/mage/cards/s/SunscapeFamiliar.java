@@ -43,7 +43,7 @@ public final class SunscapeFamiliar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public SunscapeFamiliar(final SunscapeFamiliar card) {
+    private SunscapeFamiliar(final SunscapeFamiliar card) {
         super(card);
     }
 

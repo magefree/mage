@@ -29,7 +29,7 @@ public final class MasterTheWay extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public MasterTheWay(final MasterTheWay card) {
+    private MasterTheWay(final MasterTheWay card) {
         super(card);
     }
 

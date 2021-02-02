@@ -34,7 +34,7 @@ public final class FavorOfTheMighty extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FavorOfTheMightyEffect()));
     }
 
-    public FavorOfTheMighty(final FavorOfTheMighty card) {
+    private FavorOfTheMighty(final FavorOfTheMighty card) {
         super(card);
     }
 

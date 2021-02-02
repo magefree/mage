@@ -31,7 +31,7 @@ public final class PierceTheSky extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public PierceTheSky(final PierceTheSky card) {
+    private PierceTheSky(final PierceTheSky card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class Hydrosurge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Hydrosurge(final Hydrosurge card) {
+    private Hydrosurge(final Hydrosurge card) {
         super(card);
     }
 

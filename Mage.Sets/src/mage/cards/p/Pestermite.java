@@ -38,7 +38,7 @@ public final class Pestermite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Pestermite(final Pestermite card) {
+    private Pestermite(final Pestermite card) {
         super(card);
     }
 

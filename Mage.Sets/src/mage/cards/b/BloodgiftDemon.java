@@ -39,7 +39,7 @@ public final class BloodgiftDemon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodgiftDemon(final BloodgiftDemon card) {
+    private BloodgiftDemon(final BloodgiftDemon card) {
         super(card);
     }
 

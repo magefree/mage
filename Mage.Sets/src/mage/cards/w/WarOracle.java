@@ -29,7 +29,7 @@ public final class WarOracle extends CardImpl {
         this.addAbility(new RenownAbility(1));
     }
 
-    public WarOracle(final WarOracle card) {
+    private WarOracle(final WarOracle card) {
         super(card);
     }
 

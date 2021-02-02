@@ -35,7 +35,7 @@ public final class PlaguemawBeast extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PlaguemawBeast(final PlaguemawBeast card) {
+    private PlaguemawBeast(final PlaguemawBeast card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class NightMarketLookout extends CardImpl {
 
     }
 
-    public NightMarketLookout(final NightMarketLookout card) {
+    private NightMarketLookout(final NightMarketLookout card) {
         super(card);
     }
 

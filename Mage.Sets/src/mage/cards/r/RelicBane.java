@@ -40,7 +40,7 @@ public final class RelicBane extends CardImpl {
             TargetController.YOU, false), AttachmentType.AURA)));
      }
 
-    public RelicBane(final RelicBane card) {
+    private RelicBane(final RelicBane card) {
         super(card);
     }
 

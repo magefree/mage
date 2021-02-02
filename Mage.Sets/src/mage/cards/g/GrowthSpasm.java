@@ -26,7 +26,7 @@ public final class GrowthSpasm extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken()));
     }
 
-    public GrowthSpasm(final GrowthSpasm card) {
+    private GrowthSpasm(final GrowthSpasm card) {
         super(card);
     }
 

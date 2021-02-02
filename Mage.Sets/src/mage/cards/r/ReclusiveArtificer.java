@@ -43,7 +43,7 @@ public final class ReclusiveArtificer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ReclusiveArtificer(final ReclusiveArtificer card) {
+    private ReclusiveArtificer(final ReclusiveArtificer card) {
         super(card);
     }
 

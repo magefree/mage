@@ -51,7 +51,7 @@ public final class AcademyJourneymage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AcademyJourneymage(final AcademyJourneymage card) {
+    private AcademyJourneymage(final AcademyJourneymage card) {
         super(card);
     }
 

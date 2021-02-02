@@ -35,7 +35,7 @@ public final class WarbreakTrumpeter extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new CreateTokenEffect(new GoblinToken(), morphX)));
     }
 
-    public WarbreakTrumpeter(final WarbreakTrumpeter card) {
+    private WarbreakTrumpeter(final WarbreakTrumpeter card) {
         super(card);
     }
 

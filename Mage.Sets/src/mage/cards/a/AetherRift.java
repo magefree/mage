@@ -34,7 +34,7 @@ public final class AetherRift extends CardImpl {
 
     }
 
-    public AetherRift(final AetherRift card) {
+    private AetherRift(final AetherRift card) {
         super(card);
     }
 

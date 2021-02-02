@@ -38,7 +38,7 @@ public final class AkkiUnderling extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AkkiUnderling(final AkkiUnderling card) {
+    private AkkiUnderling(final AkkiUnderling card) {
         super(card);
     }
 

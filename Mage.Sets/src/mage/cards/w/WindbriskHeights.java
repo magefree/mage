@@ -41,7 +41,7 @@ public final class WindbriskHeights extends CardImpl {
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public WindbriskHeights(final WindbriskHeights card) {
+    private WindbriskHeights(final WindbriskHeights card) {
         super(card);
     }
 

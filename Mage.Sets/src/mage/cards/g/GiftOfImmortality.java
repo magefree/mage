@@ -45,7 +45,7 @@ public final class GiftOfImmortality extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new GiftOfImmortalityEffect(), "enchanted creature", false));
     }
 
-    public GiftOfImmortality(final GiftOfImmortality card) {
+    private GiftOfImmortality(final GiftOfImmortality card) {
         super(card);
     }
 

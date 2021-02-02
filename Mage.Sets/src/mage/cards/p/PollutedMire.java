@@ -26,7 +26,7 @@ public final class PollutedMire extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public PollutedMire(final PollutedMire card) {
+    private PollutedMire(final PollutedMire card) {
         super(card);
     }
 

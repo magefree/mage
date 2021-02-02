@@ -38,7 +38,7 @@ public final class CreatureBond extends CardImpl {
 	this.addAbility( new DiesAttachedTriggeredAbility(new DamageAttachedControllerEffect(AttachedPermanentToughnessValue.instance), "enchanted creature"));
     }
 
-    public CreatureBond(final CreatureBond card) {
+    private CreatureBond(final CreatureBond card) {
         super(card);
     }
 

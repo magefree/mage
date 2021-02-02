@@ -34,7 +34,7 @@ public final class PickTheBrain extends CardImpl {
         this.getSpellAbility().addHint(DeliriumHint.instance);
     }
 
-    public PickTheBrain(final PickTheBrain card) {
+    private PickTheBrain(final PickTheBrain card) {
         super(card);
     }
 

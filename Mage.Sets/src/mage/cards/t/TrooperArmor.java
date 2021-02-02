@@ -40,7 +40,7 @@ public final class TrooperArmor extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public TrooperArmor(final TrooperArmor card) {
+    private TrooperArmor(final TrooperArmor card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class Jokulhaups extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, true));
     }
 
-    public Jokulhaups(final Jokulhaups card) {
+    private Jokulhaups(final Jokulhaups card) {
         super(card);
     }
 

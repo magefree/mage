@@ -46,7 +46,7 @@ public final class RidgedKusite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RidgedKusite(final RidgedKusite card) {
+    private RidgedKusite(final RidgedKusite card) {
         super(card);
     }
 

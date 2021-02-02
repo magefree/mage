@@ -39,7 +39,7 @@ public final class FishliverOil extends CardImpl {
                 new GainAbilityAttachedEffect(new IslandwalkAbility(), AttachmentType.AURA)));
     }
 
-    public FishliverOil(final FishliverOil card) {
+    private FishliverOil(final FishliverOil card) {
         super(card);
     }
 

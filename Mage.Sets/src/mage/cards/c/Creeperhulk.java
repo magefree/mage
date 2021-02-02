@@ -44,7 +44,7 @@ public final class Creeperhulk extends CardImpl {
 
     }
 
-    public Creeperhulk(final Creeperhulk card) {
+    private Creeperhulk(final Creeperhulk card) {
         super(card);
     }
 

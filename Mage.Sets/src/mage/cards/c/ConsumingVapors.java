@@ -33,7 +33,7 @@ public final class ConsumingVapors extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public ConsumingVapors(final ConsumingVapors card) {
+    private ConsumingVapors(final ConsumingVapors card) {
         super(card);
     }
 

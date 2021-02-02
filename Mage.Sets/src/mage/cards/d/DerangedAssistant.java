@@ -30,7 +30,7 @@ public final class DerangedAssistant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DerangedAssistant(final DerangedAssistant card) {
+    private DerangedAssistant(final DerangedAssistant card) {
         super(card);
     }
 

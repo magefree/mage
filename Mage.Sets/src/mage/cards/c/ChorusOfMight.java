@@ -29,7 +29,7 @@ public final class ChorusOfMight extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public ChorusOfMight(final ChorusOfMight card) {
+    private ChorusOfMight(final ChorusOfMight card) {
         super(card);
     }
 

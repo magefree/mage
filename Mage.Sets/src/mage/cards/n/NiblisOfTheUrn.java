@@ -33,7 +33,7 @@ public final class NiblisOfTheUrn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NiblisOfTheUrn(final NiblisOfTheUrn card) {
+    private NiblisOfTheUrn(final NiblisOfTheUrn card) {
         super(card);
     }
 

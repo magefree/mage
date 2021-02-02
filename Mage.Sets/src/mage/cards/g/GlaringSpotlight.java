@@ -48,7 +48,7 @@ public final class GlaringSpotlight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GlaringSpotlight(final GlaringSpotlight card) {
+    private GlaringSpotlight(final GlaringSpotlight card) {
         super(card);
     }
 

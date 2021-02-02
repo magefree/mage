@@ -28,7 +28,7 @@ public final class Skullcrack extends CardImpl {
 
     }
 
-    public Skullcrack(final Skullcrack card) {
+    private Skullcrack(final Skullcrack card) {
         super(card);
     }
 

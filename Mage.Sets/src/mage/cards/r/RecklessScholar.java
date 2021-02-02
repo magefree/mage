@@ -34,7 +34,7 @@ public final class RecklessScholar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RecklessScholar(final RecklessScholar card) {
+    private RecklessScholar(final RecklessScholar card) {
         super(card);
     }
 

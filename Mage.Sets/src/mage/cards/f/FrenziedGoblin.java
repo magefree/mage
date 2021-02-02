@@ -39,7 +39,7 @@ public final class FrenziedGoblin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FrenziedGoblin(final FrenziedGoblin card) {
+    private FrenziedGoblin(final FrenziedGoblin card) {
         super(card);
     }
 

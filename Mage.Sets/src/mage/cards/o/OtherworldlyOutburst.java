@@ -34,7 +34,7 @@ public final class OtherworldlyOutburst extends CardImpl {
         this.getSpellAbility().addEffect(new OtherworldlyOutburstEffect());
     }
 
-    public OtherworldlyOutburst(final OtherworldlyOutburst card) {
+    private OtherworldlyOutburst(final OtherworldlyOutburst card) {
         super(card);
     }
 

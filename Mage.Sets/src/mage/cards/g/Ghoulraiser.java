@@ -35,7 +35,7 @@ public final class Ghoulraiser extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GhoulraiserEffect(), false));
     }
 
-    public Ghoulraiser(final Ghoulraiser card) {
+    private Ghoulraiser(final Ghoulraiser card) {
         super(card);
     }
 

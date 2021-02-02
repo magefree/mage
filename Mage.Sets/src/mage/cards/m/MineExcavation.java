@@ -35,7 +35,7 @@ public final class MineExcavation extends CardImpl {
         this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
     }
 
-    public MineExcavation(final MineExcavation card) {
+    private MineExcavation(final MineExcavation card) {
         super(card);
     }
 

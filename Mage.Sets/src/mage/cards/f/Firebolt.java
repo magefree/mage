@@ -28,7 +28,7 @@ public final class Firebolt extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{R}"), TimingRule.SORCERY));
     }
 
-    public Firebolt(final Firebolt card) {
+    private Firebolt(final Firebolt card) {
         super(card);
     }
 

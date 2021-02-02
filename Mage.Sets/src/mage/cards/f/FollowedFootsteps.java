@@ -43,7 +43,7 @@ public final class FollowedFootsteps extends CardImpl {
         this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new FollowedFootstepsEffect(), false));
     }
 
-    public FollowedFootsteps(final FollowedFootsteps card) {
+    private FollowedFootsteps(final FollowedFootsteps card) {
         super(card);
     }
 

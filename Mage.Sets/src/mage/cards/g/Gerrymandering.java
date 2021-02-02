@@ -33,7 +33,7 @@ public final class Gerrymandering extends CardImpl {
         this.getSpellAbility().addEffect(new GerrymanderingEffect());
     }
 
-    public Gerrymandering(final Gerrymandering card) {
+    private Gerrymandering(final Gerrymandering card) {
         super(card);
     }
 

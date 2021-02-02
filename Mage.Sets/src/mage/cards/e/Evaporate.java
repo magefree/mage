@@ -31,7 +31,7 @@ public final class Evaporate extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filter));
     }
 
-    public Evaporate(final Evaporate card) {
+    private Evaporate(final Evaporate card) {
         super(card);
     }
 

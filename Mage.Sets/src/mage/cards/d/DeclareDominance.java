@@ -26,7 +26,7 @@ public final class DeclareDominance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public DeclareDominance(final DeclareDominance card) {
+    private DeclareDominance(final DeclareDominance card) {
         super(card);
     }
 

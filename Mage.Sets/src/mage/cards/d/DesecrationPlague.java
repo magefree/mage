@@ -32,7 +32,7 @@ public final class DesecrationPlague extends CardImpl {
 
     }
 
-    public DesecrationPlague(final DesecrationPlague card) {
+    private DesecrationPlague(final DesecrationPlague card) {
         super(card);
     }
 

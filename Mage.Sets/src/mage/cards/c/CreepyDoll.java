@@ -40,7 +40,7 @@ public final class CreepyDoll extends CardImpl {
         this.addAbility(new CreepyDollTriggeredAbility());
     }
 
-    public CreepyDoll(final CreepyDoll card) {
+    private CreepyDoll(final CreepyDoll card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class VoyagerDrake extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VoyagerDrake(final VoyagerDrake card) {
+    private VoyagerDrake(final VoyagerDrake card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class ReviveTheFallen extends CardImpl {
         this.getSpellAbility().addEffect(ClashWinReturnToHandSpellEffect.getInstance());
     }
 
-    public ReviveTheFallen(final ReviveTheFallen card) {
+    private ReviveTheFallen(final ReviveTheFallen card) {
         super(card);
     }
 

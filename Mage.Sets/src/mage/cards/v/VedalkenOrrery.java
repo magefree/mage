@@ -31,7 +31,7 @@ public final class VedalkenOrrery extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
-    public VedalkenOrrery(final VedalkenOrrery card) {
+    private VedalkenOrrery(final VedalkenOrrery card) {
         super(card);
     }
 

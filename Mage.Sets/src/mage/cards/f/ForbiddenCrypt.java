@@ -36,7 +36,7 @@ public final class ForbiddenCrypt extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ForbiddenCryptPutIntoYourGraveyardReplacementEffect()));
     }
 
-    public ForbiddenCrypt(final ForbiddenCrypt card) {
+    private ForbiddenCrypt(final ForbiddenCrypt card) {
         super(card);
     }
 

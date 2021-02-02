@@ -30,7 +30,7 @@ public final class FightingChance extends CardImpl {
         this.getSpellAbility().addEffect(new FightingChanceEffect());
     }
 
-    public FightingChance(final FightingChance card) {
+    private FightingChance(final FightingChance card) {
         super(card);
     }
 

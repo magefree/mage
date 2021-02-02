@@ -32,7 +32,7 @@ public final class SteelformSliver extends CardImpl {
                         StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, false)));
     }
 
-    public SteelformSliver(final SteelformSliver card) {
+    private SteelformSliver(final SteelformSliver card) {
         super(card);
     }
 

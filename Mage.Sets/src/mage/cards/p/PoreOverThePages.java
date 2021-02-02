@@ -31,7 +31,7 @@ public final class PoreOverThePages extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public PoreOverThePages(final PoreOverThePages card) {
+    private PoreOverThePages(final PoreOverThePages card) {
         super(card);
     }
 

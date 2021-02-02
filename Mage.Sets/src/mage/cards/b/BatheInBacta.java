@@ -28,7 +28,7 @@ public final class BatheInBacta extends CardImpl {
         this.getSpellAbility().addWatcher(new LifeLossOtherFromCombatWatcher());
     }
 
-    public BatheInBacta(final BatheInBacta card) {
+    private BatheInBacta(final BatheInBacta card) {
         super(card);
     }
 

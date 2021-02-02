@@ -30,7 +30,7 @@ public final class GhostTown extends CardImpl {
                 .addHint(NotMyTurnHint.instance));
     }
 
-    public GhostTown(final GhostTown card) {
+    private GhostTown(final GhostTown card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class BroodhatchNantuko extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{G}")));
     }
 
-    public BroodhatchNantuko(final BroodhatchNantuko card) {
+    private BroodhatchNantuko(final BroodhatchNantuko card) {
         super(card);
     }
 

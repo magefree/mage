@@ -35,7 +35,7 @@ public final class SenatorOnacondaFarr extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SenatorOnacondaFarr(final SenatorOnacondaFarr card) {
+    private SenatorOnacondaFarr(final SenatorOnacondaFarr card) {
         super(card);
     }
 

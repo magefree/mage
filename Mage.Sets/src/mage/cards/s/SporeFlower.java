@@ -38,7 +38,7 @@ public final class SporeFlower extends CardImpl {
                 new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
     }
 
-    public SporeFlower(final SporeFlower card) {
+    private SporeFlower(final SporeFlower card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class DivergentTransformations extends CardImpl {
 
     }
 
-    public DivergentTransformations(final DivergentTransformations card) {
+    private DivergentTransformations(final DivergentTransformations card) {
         super(card);
     }
 

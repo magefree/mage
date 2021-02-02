@@ -33,7 +33,7 @@ public final class MitoticManipulation extends CardImpl {
         this.getSpellAbility().addEffect(new MitoticManipulationEffect());
     }
 
-    public MitoticManipulation(final MitoticManipulation card) {
+    private MitoticManipulation(final MitoticManipulation card) {
         super(card);
     }
 

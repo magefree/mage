@@ -36,7 +36,7 @@ public final class GlintNestCrane extends CardImpl {
                         StaticFilters.FILTER_CARD_ARTIFACT_AN, Zone.LIBRARY, false, true, false, Zone.HAND, true)));
     }
 
-    public GlintNestCrane(final GlintNestCrane card) {
+    private GlintNestCrane(final GlintNestCrane card) {
         super(card);
     }
 

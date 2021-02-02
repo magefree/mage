@@ -44,7 +44,7 @@ public final class Skullwinder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Skullwinder(final Skullwinder card) {
+    private Skullwinder(final Skullwinder card) {
         super(card);
     }
 

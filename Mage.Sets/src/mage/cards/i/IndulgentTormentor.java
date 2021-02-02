@@ -44,7 +44,7 @@ public final class IndulgentTormentor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IndulgentTormentor(final IndulgentTormentor card) {
+    private IndulgentTormentor(final IndulgentTormentor card) {
         super(card);
     }
 

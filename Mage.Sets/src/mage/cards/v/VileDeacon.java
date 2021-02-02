@@ -40,7 +40,7 @@ public final class VileDeacon extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }
 
-    public VileDeacon(final VileDeacon card) {
+    private VileDeacon(final VileDeacon card) {
         super(card);
     }
 

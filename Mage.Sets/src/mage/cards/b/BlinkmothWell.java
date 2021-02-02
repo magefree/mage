@@ -40,7 +40,7 @@ public final class BlinkmothWell extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlinkmothWell(final BlinkmothWell card) {
+    private BlinkmothWell(final BlinkmothWell card) {
         super(card);
     }
 

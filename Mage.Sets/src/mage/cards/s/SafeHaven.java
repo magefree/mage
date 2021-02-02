@@ -44,7 +44,7 @@ public final class SafeHaven extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SafeHaven(final SafeHaven card) {
+    private SafeHaven(final SafeHaven card) {
         super(card);
     }
 

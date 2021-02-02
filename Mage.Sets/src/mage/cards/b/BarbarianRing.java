@@ -44,7 +44,7 @@ public final class BarbarianRing extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public BarbarianRing(final BarbarianRing card) {
+    private BarbarianRing(final BarbarianRing card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class DrainpipeVermin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DrainpipeVermin(final DrainpipeVermin card) {
+    private DrainpipeVermin(final DrainpipeVermin card) {
         super(card);
     }
 

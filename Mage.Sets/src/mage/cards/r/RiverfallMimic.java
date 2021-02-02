@@ -49,7 +49,7 @@ public final class RiverfallMimic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RiverfallMimic(final RiverfallMimic card) {
+    private RiverfallMimic(final RiverfallMimic card) {
         super(card);
     }
 

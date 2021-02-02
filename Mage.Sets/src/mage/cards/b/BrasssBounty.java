@@ -25,7 +25,7 @@ public final class BrasssBounty extends CardImpl {
                         .setText("For each land you control, create a colorless Treasure artifact token with \"{T}, Sacrifice this artifact: Add one mana of any color.\""));
     }
 
-    public BrasssBounty(final BrasssBounty card) {
+    private BrasssBounty(final BrasssBounty card) {
         super(card);
     }
 

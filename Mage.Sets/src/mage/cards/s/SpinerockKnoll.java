@@ -46,7 +46,7 @@ public final class SpinerockKnoll extends CardImpl {
         this.addAbility(ability, new SpinerockKnollWatcher());
     }
 
-    public SpinerockKnoll(final SpinerockKnoll card) {
+    private SpinerockKnoll(final SpinerockKnoll card) {
         super(card);
     }
 

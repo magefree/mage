@@ -49,7 +49,7 @@ public final class ReaverDrone extends CardImpl {
                 "you lose 1 life unless you control another colorless creature"), TargetController.YOU, false));
     }
 
-    public ReaverDrone(final ReaverDrone card) {
+    private ReaverDrone(final ReaverDrone card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class ScreamingSeahawk extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
     }
 
-    public ScreamingSeahawk(final ScreamingSeahawk card) {
+    private ScreamingSeahawk(final ScreamingSeahawk card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class OnduCleric extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)), true));
     }
 
-    public OnduCleric(final OnduCleric card) {
+    private OnduCleric(final OnduCleric card) {
         super(card);
     }
 

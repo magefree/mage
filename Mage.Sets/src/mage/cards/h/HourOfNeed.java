@@ -33,7 +33,7 @@ public final class HourOfNeed extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
-    public HourOfNeed(final HourOfNeed card) {
+    private HourOfNeed(final HourOfNeed card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class QuarryColossus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuarryColossus(final QuarryColossus card) {
+    private QuarryColossus(final QuarryColossus card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class SteamcoreWeird extends CardImpl {
                 new ManaSpentToCastWatcher());        
     }
 
-    public SteamcoreWeird(final SteamcoreWeird card) {
+    private SteamcoreWeird(final SteamcoreWeird card) {
         super(card);
     }
 

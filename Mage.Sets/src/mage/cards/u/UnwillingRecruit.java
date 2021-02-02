@@ -34,7 +34,7 @@ public final class UnwillingRecruit extends CardImpl {
 
     }
 
-    public UnwillingRecruit(final UnwillingRecruit card) {
+    private UnwillingRecruit(final UnwillingRecruit card) {
         super(card);
     }
 

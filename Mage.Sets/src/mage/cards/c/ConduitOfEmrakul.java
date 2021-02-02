@@ -39,7 +39,7 @@ public final class ConduitOfEmrakul extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }
 
-    public ConduitOfEmrakul(final ConduitOfEmrakul card) {
+    private ConduitOfEmrakul(final ConduitOfEmrakul card) {
         super(card);
     }
 

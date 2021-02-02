@@ -32,7 +32,7 @@ public final class MurmuringMystic extends CardImpl {
         ));
     }
 
-    public MurmuringMystic(final MurmuringMystic card) {
+    private MurmuringMystic(final MurmuringMystic card) {
         super(card);
     }
 

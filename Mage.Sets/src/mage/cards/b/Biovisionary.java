@@ -37,7 +37,7 @@ public final class Biovisionary extends CardImpl {
                 false));
     }
 
-    public Biovisionary(final Biovisionary card) {
+    private Biovisionary(final Biovisionary card) {
         super(card);
     }
 

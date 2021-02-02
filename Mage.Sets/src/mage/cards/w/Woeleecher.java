@@ -42,7 +42,7 @@ public final class Woeleecher extends CardImpl {
 
     }
 
-    public Woeleecher(final Woeleecher card) {
+    private Woeleecher(final Woeleecher card) {
         super(card);
     }
 

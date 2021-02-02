@@ -43,7 +43,7 @@ public final class SporecrownThallid extends CardImpl {
         );
     }
 
-    public SporecrownThallid(final SporecrownThallid card) {
+    private SporecrownThallid(final SporecrownThallid card) {
         super(card);
     }
 

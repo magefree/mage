@@ -41,7 +41,7 @@ public final class MaskOfLawAndGrace extends CardImpl {
             AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
-    public MaskOfLawAndGrace(final MaskOfLawAndGrace card) {
+    private MaskOfLawAndGrace(final MaskOfLawAndGrace card) {
         super(card);
     }
 

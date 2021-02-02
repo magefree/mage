@@ -56,7 +56,7 @@ public final class RageForger extends CardImpl {
 
     }
 
-    public RageForger(final RageForger card) {
+    private RageForger(final RageForger card) {
         super(card);
     }
 

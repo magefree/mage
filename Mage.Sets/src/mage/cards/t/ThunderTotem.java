@@ -36,7 +36,7 @@ public final class ThunderTotem extends CardImpl {
                 new ManaCostsImpl("{1}{W}{W}")));
     }
 
-    public ThunderTotem(final ThunderTotem card) {
+    private ThunderTotem(final ThunderTotem card) {
         super(card);
     }
 

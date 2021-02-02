@@ -31,7 +31,7 @@ public final class ShowerOfCoals extends CardImpl {
 
     }
 
-    public ShowerOfCoals(final ShowerOfCoals card) {
+    private ShowerOfCoals(final ShowerOfCoals card) {
         super(card);
     }
 

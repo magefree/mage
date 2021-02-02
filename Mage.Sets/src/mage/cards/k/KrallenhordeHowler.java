@@ -51,7 +51,7 @@ public final class KrallenhordeHowler extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public KrallenhordeHowler(final KrallenhordeHowler card) {
+    private KrallenhordeHowler(final KrallenhordeHowler card) {
         super(card);
     }
 

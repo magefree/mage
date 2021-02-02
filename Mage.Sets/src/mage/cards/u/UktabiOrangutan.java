@@ -31,7 +31,7 @@ public final class UktabiOrangutan extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UktabiOrangutan(final UktabiOrangutan card) {
+    private UktabiOrangutan(final UktabiOrangutan card) {
         super(card);
     }
 

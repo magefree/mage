@@ -43,7 +43,7 @@ public final class ConsecrateLand extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public ConsecrateLand(final ConsecrateLand card) {
+    private ConsecrateLand(final ConsecrateLand card) {
         super(card);
     }
 

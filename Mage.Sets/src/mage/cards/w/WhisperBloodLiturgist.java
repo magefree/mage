@@ -43,7 +43,7 @@ public final class WhisperBloodLiturgist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WhisperBloodLiturgist(final WhisperBloodLiturgist card) {
+    private WhisperBloodLiturgist(final WhisperBloodLiturgist card) {
         super(card);
     }
 

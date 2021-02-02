@@ -28,7 +28,7 @@ public final class Disembowel extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(DisembowelAdjuster.instance);
     }
 
-    public Disembowel(final Disembowel card) {
+    private Disembowel(final Disembowel card) {
         super(card);
     }
 

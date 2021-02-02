@@ -29,7 +29,7 @@ public final class TorturedExistence extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TorturedExistence(final TorturedExistence card) {
+    private TorturedExistence(final TorturedExistence card) {
         super(card);
     }
 

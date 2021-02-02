@@ -38,7 +38,7 @@ public final class KopalaWardenOfWaves extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KopalaWardenOfWavesCostModificationEffect2()));
     }
 
-    public KopalaWardenOfWaves(final KopalaWardenOfWaves card) {
+    private KopalaWardenOfWaves(final KopalaWardenOfWaves card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class PhyrexianGhoul extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
-    public PhyrexianGhoul(final PhyrexianGhoul card) {
+    private PhyrexianGhoul(final PhyrexianGhoul card) {
         super(card);
     }
 

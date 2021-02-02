@@ -40,7 +40,7 @@ public final class DegaDisciple extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public DegaDisciple(final DegaDisciple card) {
+    private DegaDisciple(final DegaDisciple card) {
         super(card);
     }
 

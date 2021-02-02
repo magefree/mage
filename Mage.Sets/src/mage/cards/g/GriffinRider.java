@@ -48,7 +48,7 @@ public final class GriffinRider extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
     }
 
-    public GriffinRider(final GriffinRider card) {
+    private GriffinRider(final GriffinRider card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class BuiltToLast extends CardImpl {
 
     }
 
-    public BuiltToLast(final BuiltToLast card) {
+    private BuiltToLast(final BuiltToLast card) {
         super(card);
     }
 

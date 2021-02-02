@@ -28,7 +28,7 @@ public final class Flux extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Flux(final Flux card) {
+    private Flux(final Flux card) {
         super(card);
     }
 

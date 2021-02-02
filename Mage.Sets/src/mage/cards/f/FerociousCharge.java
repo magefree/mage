@@ -27,7 +27,7 @@ public final class FerociousCharge extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }
 
-    public FerociousCharge(final FerociousCharge card) {
+    private FerociousCharge(final FerociousCharge card) {
         super(card);
     }
 

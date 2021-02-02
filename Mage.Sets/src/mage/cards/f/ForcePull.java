@@ -35,7 +35,7 @@ public final class ForcePull extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(3));
     }
 
-    public ForcePull(final ForcePull card) {
+    private ForcePull(final ForcePull card) {
         super(card);
     }
 

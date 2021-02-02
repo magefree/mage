@@ -51,7 +51,7 @@ public final class CabalPatriarch extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public CabalPatriarch(final CabalPatriarch card) {
+    private CabalPatriarch(final CabalPatriarch card) {
         super(card);
     }
 

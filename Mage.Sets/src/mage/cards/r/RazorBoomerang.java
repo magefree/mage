@@ -44,7 +44,7 @@ public final class RazorBoomerang extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public RazorBoomerang(final RazorBoomerang card) {
+    private RazorBoomerang(final RazorBoomerang card) {
         super(card);
     }
 

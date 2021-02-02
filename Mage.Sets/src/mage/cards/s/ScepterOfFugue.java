@@ -32,7 +32,7 @@ public final class ScepterOfFugue extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScepterOfFugue(final ScepterOfFugue card) {
+    private ScepterOfFugue(final ScepterOfFugue card) {
         super(card);
     }
 

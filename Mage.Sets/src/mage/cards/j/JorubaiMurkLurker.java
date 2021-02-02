@@ -55,7 +55,7 @@ public final class JorubaiMurkLurker extends CardImpl {
 
     }
 
-    public JorubaiMurkLurker(final JorubaiMurkLurker card) {
+    private JorubaiMurkLurker(final JorubaiMurkLurker card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class AdarkarWastes extends CardImpl {
         this.addAbility(blueManaAbility);
     }
 
-    public AdarkarWastes(final AdarkarWastes card) {
+    private AdarkarWastes(final AdarkarWastes card) {
         super(card);
     }
 

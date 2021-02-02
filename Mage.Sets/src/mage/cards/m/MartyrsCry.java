@@ -28,7 +28,7 @@ public final class MartyrsCry extends CardImpl {
         this.getSpellAbility().addEffect(new MartyrsCryEffect());
     }
 
-    public MartyrsCry(final MartyrsCry card) {
+    private MartyrsCry(final MartyrsCry card) {
         super(card);
     }
 

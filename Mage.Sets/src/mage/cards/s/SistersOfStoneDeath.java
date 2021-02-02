@@ -58,7 +58,7 @@ public final class SistersOfStoneDeath extends CardImpl {
 
     }
 
-    public SistersOfStoneDeath(final SistersOfStoneDeath card) {
+    private SistersOfStoneDeath(final SistersOfStoneDeath card) {
         super(card);
     }
 

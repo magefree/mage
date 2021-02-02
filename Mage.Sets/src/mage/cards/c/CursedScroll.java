@@ -35,7 +35,7 @@ public final class CursedScroll extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CursedScroll(final CursedScroll card) {
+    private CursedScroll(final CursedScroll card) {
         super(card);
     }
 

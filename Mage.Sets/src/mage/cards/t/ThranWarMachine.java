@@ -27,7 +27,7 @@ public final class ThranWarMachine extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public ThranWarMachine(final ThranWarMachine card) {
+    private ThranWarMachine(final ThranWarMachine card) {
         super(card);
     }
 

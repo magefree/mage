@@ -50,7 +50,7 @@ public final class AshiokNightmareWeaver extends CardImpl {
 
     }
 
-    public AshiokNightmareWeaver(final AshiokNightmareWeaver card) {
+    private AshiokNightmareWeaver(final AshiokNightmareWeaver card) {
         super(card);
     }
 

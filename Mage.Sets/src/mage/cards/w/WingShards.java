@@ -27,7 +27,7 @@ public final class WingShards extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public WingShards(final WingShards card) {
+    private WingShards(final WingShards card) {
         super(card);
     }
 

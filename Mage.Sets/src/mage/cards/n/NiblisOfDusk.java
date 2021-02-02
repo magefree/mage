@@ -28,7 +28,7 @@ public final class NiblisOfDusk extends CardImpl {
         this.addAbility(new ProwessAbility());
     }
 
-    public NiblisOfDusk(final NiblisOfDusk card) {
+    private NiblisOfDusk(final NiblisOfDusk card) {
         super(card);
     }
 

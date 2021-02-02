@@ -30,7 +30,7 @@ public final class GoblinTutor extends CardImpl {
         this.getSpellAbility().addEffect(new GoblinTutorEffect());
     }
 
-    public GoblinTutor(final GoblinTutor card) {
+    private GoblinTutor(final GoblinTutor card) {
         super(card);
     }
 

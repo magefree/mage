@@ -28,7 +28,7 @@ public final class DrudgeSkeletons extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public DrudgeSkeletons(final DrudgeSkeletons card) {
+    private DrudgeSkeletons(final DrudgeSkeletons card) {
         super(card);
     }
 

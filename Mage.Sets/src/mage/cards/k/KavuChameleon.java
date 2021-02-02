@@ -34,7 +34,7 @@ public final class KavuChameleon extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{G}")));
     }
 
-    public KavuChameleon(final KavuChameleon card) {
+    private KavuChameleon(final KavuChameleon card) {
         super(card);
     }
 

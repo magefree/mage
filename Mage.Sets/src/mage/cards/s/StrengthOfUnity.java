@@ -42,7 +42,7 @@ public final class StrengthOfUnity extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public StrengthOfUnity(final StrengthOfUnity card) {
+    private StrengthOfUnity(final StrengthOfUnity card) {
         super(card);
     }
 

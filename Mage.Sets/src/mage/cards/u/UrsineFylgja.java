@@ -43,7 +43,7 @@ public final class UrsineFylgja extends CardImpl {
             new ManaCostsImpl("{2}{W}")));
     }
 
-    public UrsineFylgja(final UrsineFylgja card) {
+    private UrsineFylgja(final UrsineFylgja card) {
         super(card);
     }
 

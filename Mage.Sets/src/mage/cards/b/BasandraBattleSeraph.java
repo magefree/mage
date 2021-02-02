@@ -46,7 +46,7 @@ public final class BasandraBattleSeraph extends CardImpl {
         
     }
     
-    public BasandraBattleSeraph(final BasandraBattleSeraph card) {
+    private BasandraBattleSeraph(final BasandraBattleSeraph card) {
         super(card);
     }
     

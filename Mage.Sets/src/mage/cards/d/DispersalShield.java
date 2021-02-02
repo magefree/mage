@@ -29,7 +29,7 @@ public final class DispersalShield extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public DispersalShield(final DispersalShield card) {
+    private DispersalShield(final DispersalShield card) {
         super(card);
     }
 

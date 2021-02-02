@@ -49,7 +49,7 @@ public final class NoxiousHatchling extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance()), filterGreenSpell, false));
     }
 
-    public NoxiousHatchling(final NoxiousHatchling card) {
+    private NoxiousHatchling(final NoxiousHatchling card) {
         super(card);
     }
 

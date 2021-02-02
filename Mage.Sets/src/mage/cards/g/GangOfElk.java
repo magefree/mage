@@ -36,7 +36,7 @@ public final class GangOfElk extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
-    public GangOfElk(final GangOfElk card) {
+    private GangOfElk(final GangOfElk card) {
         super(card);
     }
 

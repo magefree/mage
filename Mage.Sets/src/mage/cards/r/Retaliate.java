@@ -30,7 +30,7 @@ public final class Retaliate extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public Retaliate(final Retaliate card) {
+    private Retaliate(final Retaliate card) {
         super(card);
     }
 

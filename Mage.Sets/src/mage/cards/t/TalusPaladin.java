@@ -38,7 +38,7 @@ public final class TalusPaladin extends CardImpl {
         this.addAbility(new TalusPaladinTriggeredAbility());
     }
     
-    public TalusPaladin(final TalusPaladin card) {
+    private TalusPaladin(final TalusPaladin card) {
         super(card);
     }
     

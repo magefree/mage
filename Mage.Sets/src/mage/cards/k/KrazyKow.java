@@ -36,7 +36,7 @@ public final class KrazyKow extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KrazyKowEffect(), TargetController.YOU, false));
     }
 
-    public KrazyKow(final KrazyKow card) {
+    private KrazyKow(final KrazyKow card) {
         super(card);
     }
 

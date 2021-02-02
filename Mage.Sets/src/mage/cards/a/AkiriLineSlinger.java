@@ -47,7 +47,7 @@ public final class AkiriLineSlinger extends CardImpl {
         this.addAbility(PartnerAbility.getInstance());
     }
 
-    public AkiriLineSlinger(final AkiriLineSlinger card) {
+    private AkiriLineSlinger(final AkiriLineSlinger card) {
         super(card);
     }
 

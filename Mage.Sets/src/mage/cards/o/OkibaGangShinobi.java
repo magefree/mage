@@ -33,7 +33,7 @@ public final class OkibaGangShinobi extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(2), false, true));
     }
 
-    public OkibaGangShinobi(final OkibaGangShinobi card) {
+    private OkibaGangShinobi(final OkibaGangShinobi card) {
         super(card);
     }
 

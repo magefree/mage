@@ -54,7 +54,7 @@ public final class PortalMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PortalMage(final PortalMage card) {
+    private PortalMage(final PortalMage card) {
         super(card);
     }
 

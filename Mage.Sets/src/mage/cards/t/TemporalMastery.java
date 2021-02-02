@@ -27,7 +27,7 @@ public final class TemporalMastery extends CardImpl {
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{U}")));
     }
 
-    public TemporalMastery(final TemporalMastery card) {
+    private TemporalMastery(final TemporalMastery card) {
         super(card);
     }
 

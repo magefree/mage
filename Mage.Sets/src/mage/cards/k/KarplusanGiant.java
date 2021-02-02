@@ -44,7 +44,7 @@ public final class KarplusanGiant extends CardImpl {
         ));
     }
 
-    public KarplusanGiant(final KarplusanGiant card) {
+    private KarplusanGiant(final KarplusanGiant card) {
         super(card);
     }
 

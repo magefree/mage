@@ -44,7 +44,7 @@ public final class RiptideDirector extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RiptideDirector(final RiptideDirector card) {
+    private RiptideDirector(final RiptideDirector card) {
         super(card);
     }
 

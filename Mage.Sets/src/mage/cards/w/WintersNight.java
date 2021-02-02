@@ -42,7 +42,7 @@ public final class WintersNight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WintersNight(final WintersNight card) {
+    private WintersNight(final WintersNight card) {
         super(card);
     }
 

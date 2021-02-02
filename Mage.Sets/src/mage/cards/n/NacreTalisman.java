@@ -35,7 +35,7 @@ public final class NacreTalisman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NacreTalisman(final NacreTalisman card) {
+    private NacreTalisman(final NacreTalisman card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class SpinedWurm extends CardImpl {
 
     }
 
-    public SpinedWurm(final SpinedWurm card) {
+    private SpinedWurm(final SpinedWurm card) {
         super(card);
     }
 

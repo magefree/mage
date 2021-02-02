@@ -29,7 +29,7 @@ public final class Wildfire extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(4, StaticFilters.FILTER_PERMANENT_CREATURE));
     }
 
-    public Wildfire(final Wildfire card) {
+    private Wildfire(final Wildfire card) {
         super(card);
     }
 

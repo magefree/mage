@@ -33,7 +33,7 @@ public final class FortunateFew extends CardImpl {
         this.getSpellAbility().addEffect(new FortunateFewEffect());
     }
 
-    public FortunateFew(final FortunateFew card) {
+    private FortunateFew(final FortunateFew card) {
         super(card);
     }
 

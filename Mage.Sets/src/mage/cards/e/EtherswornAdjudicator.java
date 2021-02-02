@@ -54,7 +54,7 @@ public final class EtherswornAdjudicator extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{2}{U}")));
     }
 
-    public EtherswornAdjudicator(final EtherswornAdjudicator card) {
+    private EtherswornAdjudicator(final EtherswornAdjudicator card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class SafewrightQuest extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
     }
 
-    public SafewrightQuest(final SafewrightQuest card) {
+    private SafewrightQuest(final SafewrightQuest card) {
         super(card);
     }
 

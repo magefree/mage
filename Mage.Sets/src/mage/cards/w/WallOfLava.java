@@ -34,7 +34,7 @@ public final class WallOfLava extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public WallOfLava(final WallOfLava card) {
+    private WallOfLava(final WallOfLava card) {
         super(card);
     }
 

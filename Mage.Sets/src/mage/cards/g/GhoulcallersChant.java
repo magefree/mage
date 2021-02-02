@@ -37,7 +37,7 @@ public final class GhoulcallersChant extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public GhoulcallersChant(final GhoulcallersChant card) {
+    private GhoulcallersChant(final GhoulcallersChant card) {
         super(card);
     }
 

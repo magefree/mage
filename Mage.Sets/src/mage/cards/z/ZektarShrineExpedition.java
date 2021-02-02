@@ -40,7 +40,7 @@ public final class ZektarShrineExpedition extends CardImpl {
         ));
     }
 
-    public ZektarShrineExpedition(final ZektarShrineExpedition card) {
+    private ZektarShrineExpedition(final ZektarShrineExpedition card) {
         super(card);
     }
 

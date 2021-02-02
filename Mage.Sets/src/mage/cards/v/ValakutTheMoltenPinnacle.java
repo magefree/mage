@@ -44,7 +44,7 @@ public final class ValakutTheMoltenPinnacle extends CardImpl {
 
     }
 
-    public ValakutTheMoltenPinnacle(final ValakutTheMoltenPinnacle card) {
+    private ValakutTheMoltenPinnacle(final ValakutTheMoltenPinnacle card) {
         super(card);
     }
 

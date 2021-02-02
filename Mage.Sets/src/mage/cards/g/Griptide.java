@@ -23,7 +23,7 @@ public final class Griptide extends CardImpl {
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
     }
 
-    public Griptide(final Griptide card) {
+    private Griptide(final Griptide card) {
         super(card);
     }
 

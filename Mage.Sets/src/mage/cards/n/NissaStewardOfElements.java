@@ -60,7 +60,7 @@ public final class NissaStewardOfElements extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NissaStewardOfElements(final NissaStewardOfElements card) {
+    private NissaStewardOfElements(final NissaStewardOfElements card) {
         super(card);
     }
 

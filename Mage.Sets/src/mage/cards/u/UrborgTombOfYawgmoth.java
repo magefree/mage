@@ -41,7 +41,7 @@ public final class UrborgTombOfYawgmoth extends CardImpl {
 
     }
 
-    public UrborgTombOfYawgmoth(final UrborgTombOfYawgmoth card) {
+    private UrborgTombOfYawgmoth(final UrborgTombOfYawgmoth card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class LightFromWithin extends CardImpl {
 
     }
 
-    public LightFromWithin(final LightFromWithin card) {
+    private LightFromWithin(final LightFromWithin card) {
         super(card);
     }
 

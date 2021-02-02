@@ -32,7 +32,7 @@ public final class DesertedTemple extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DesertedTemple(final DesertedTemple card) {
+    private DesertedTemple(final DesertedTemple card) {
         super(card);
     }
 

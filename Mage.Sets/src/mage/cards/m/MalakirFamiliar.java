@@ -34,7 +34,7 @@ public final class MalakirFamiliar extends CardImpl {
 
     }
 
-    public MalakirFamiliar(final MalakirFamiliar card) {
+    private MalakirFamiliar(final MalakirFamiliar card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class TajuruWarcaller extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new BoostControlledEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public TajuruWarcaller(final TajuruWarcaller card) {
+    private TajuruWarcaller(final TajuruWarcaller card) {
         super(card);
     }
 

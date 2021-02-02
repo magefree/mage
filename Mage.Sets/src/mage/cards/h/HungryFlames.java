@@ -28,7 +28,7 @@ public final class HungryFlames extends CardImpl {
         this.getSpellAbility().addEffect(new HungryFlamesEffect());
     }
 
-    public HungryFlames(final HungryFlames card) {
+    private HungryFlames(final HungryFlames card) {
         super(card);
     }
 

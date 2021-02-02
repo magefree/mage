@@ -47,7 +47,7 @@ public final class WaspOfTheBitterEnd extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WaspOfTheBitterEnd(final WaspOfTheBitterEnd card) {
+    private WaspOfTheBitterEnd(final WaspOfTheBitterEnd card) {
         super(card);
     }
 

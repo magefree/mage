@@ -32,7 +32,7 @@ public final class MonkRealist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MonkRealist(final MonkRealist card) {
+    private MonkRealist(final MonkRealist card) {
         super(card);
     }
 

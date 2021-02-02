@@ -42,7 +42,7 @@ public final class DiamondFaerie extends CardImpl {
             Duration.EndOfTurn, filter), new ManaCostsImpl("{1}{S}")));
     }
 
-    public DiamondFaerie(final DiamondFaerie card) {
+    private DiamondFaerie(final DiamondFaerie card) {
         super(card);
     }
 

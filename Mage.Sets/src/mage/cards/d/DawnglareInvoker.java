@@ -37,7 +37,7 @@ public final class DawnglareInvoker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DawnglareInvoker(final DawnglareInvoker card) {
+    private DawnglareInvoker(final DawnglareInvoker card) {
         super(card);
     }
 

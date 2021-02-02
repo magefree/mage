@@ -35,7 +35,7 @@ public final class TurntimberRanger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TurntimberRanger(final TurntimberRanger card) {
+    private TurntimberRanger(final TurntimberRanger card) {
         super(card);
     }
 

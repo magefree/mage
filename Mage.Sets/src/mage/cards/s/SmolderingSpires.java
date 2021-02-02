@@ -29,7 +29,7 @@ public final class SmolderingSpires extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SmolderingSpires(final SmolderingSpires card) {
+    private SmolderingSpires(final SmolderingSpires card) {
         super(card);
     }
 

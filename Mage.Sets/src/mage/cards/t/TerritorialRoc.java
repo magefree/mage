@@ -25,7 +25,7 @@ public final class TerritorialRoc extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public TerritorialRoc(final TerritorialRoc card) {
+    private TerritorialRoc(final TerritorialRoc card) {
         super(card);
     }
 

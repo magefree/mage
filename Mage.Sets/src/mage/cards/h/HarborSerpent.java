@@ -37,7 +37,7 @@ public final class HarborSerpent extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HarborSerpentEffect()));
     }
 
-    public HarborSerpent(final HarborSerpent card) {
+    private HarborSerpent(final HarborSerpent card) {
         super(card);
     }
 

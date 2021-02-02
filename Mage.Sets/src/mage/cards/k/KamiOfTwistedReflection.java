@@ -31,7 +31,7 @@ public final class KamiOfTwistedReflection extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KamiOfTwistedReflection(final KamiOfTwistedReflection card) {
+    private KamiOfTwistedReflection(final KamiOfTwistedReflection card) {
         super(card);
     }
 

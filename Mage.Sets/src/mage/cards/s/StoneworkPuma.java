@@ -23,7 +23,7 @@ public final class StoneworkPuma extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public StoneworkPuma(final StoneworkPuma card) {
+    private StoneworkPuma(final StoneworkPuma card) {
         super(card);
     }
 

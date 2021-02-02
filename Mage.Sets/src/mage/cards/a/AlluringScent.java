@@ -23,7 +23,7 @@ public final class AlluringScent extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public AlluringScent(final AlluringScent card) {
+    private AlluringScent(final AlluringScent card) {
         super(card);
     }
 

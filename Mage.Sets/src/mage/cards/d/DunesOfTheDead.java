@@ -28,7 +28,7 @@ public final class DunesOfTheDead extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 1)));
     }
 
-    public DunesOfTheDead(final DunesOfTheDead card) {
+    private DunesOfTheDead(final DunesOfTheDead card) {
         super(card);
     }
 

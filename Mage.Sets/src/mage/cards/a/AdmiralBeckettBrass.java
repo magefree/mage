@@ -54,7 +54,7 @@ public final class AdmiralBeckettBrass extends CardImpl {
         this.addAbility(ability, new DamagedByPiratesWatcher());
     }
 
-    public AdmiralBeckettBrass(final AdmiralBeckettBrass card) {
+    private AdmiralBeckettBrass(final AdmiralBeckettBrass card) {
         super(card);
     }
 

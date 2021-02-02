@@ -47,7 +47,7 @@ public final class DrakestownForgotten extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DrakestownForgotten(final DrakestownForgotten card) {
+    private DrakestownForgotten(final DrakestownForgotten card) {
         super(card);
     }
 

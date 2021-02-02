@@ -39,7 +39,7 @@ public final class Outwit extends CardImpl {
         this.getSpellAbility().addTarget(new CustomTargetSpell(filter));
     }
 
-    public Outwit(final Outwit card) {
+    private Outwit(final Outwit card) {
         super(card);
     }
 

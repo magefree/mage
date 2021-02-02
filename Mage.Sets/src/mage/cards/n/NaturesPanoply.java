@@ -29,7 +29,7 @@ public final class NaturesPanoply extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
-    public NaturesPanoply(final NaturesPanoply card) {
+    private NaturesPanoply(final NaturesPanoply card) {
         super(card);
     }
 

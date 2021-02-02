@@ -31,7 +31,7 @@ public final class Firefly extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public Firefly(final Firefly card) {
+    private Firefly(final Firefly card) {
         super(card);
     }
 

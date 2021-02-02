@@ -30,7 +30,7 @@ public final class TempleOfTriumph extends CardImpl {
 
     }
 
-    public TempleOfTriumph(final TempleOfTriumph card) {
+    private TempleOfTriumph(final TempleOfTriumph card) {
         super(card);
     }
 

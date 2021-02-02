@@ -44,7 +44,7 @@ public final class HeritageDruid extends CardImpl {
                 new TapTargetCost(new TargetControlledPermanent(3, 3, filter, true))));
     }
 
-    public HeritageDruid(final HeritageDruid card) {
+    private HeritageDruid(final HeritageDruid card) {
         super(card);
     }
 

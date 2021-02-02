@@ -52,7 +52,7 @@ public final class SosukeSonOfSeshiro extends CardImpl {
         this.addAbility(new SosukeSonOfSeshiroTriggeredAbility(effect));
     }
 
-    public SosukeSonOfSeshiro(final SosukeSonOfSeshiro card) {
+    private SosukeSonOfSeshiro(final SosukeSonOfSeshiro card) {
         super(card);
     }
 

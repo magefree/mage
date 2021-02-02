@@ -29,7 +29,7 @@ public final class Plumeveil extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public Plumeveil(final Plumeveil card) {
+    private Plumeveil(final Plumeveil card) {
         super(card);
     }
 

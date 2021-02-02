@@ -43,7 +43,7 @@ public final class Shackles extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{W}")));
     }
 
-    public Shackles(final Shackles card) {
+    private Shackles(final Shackles card) {
         super(card);
     }
 

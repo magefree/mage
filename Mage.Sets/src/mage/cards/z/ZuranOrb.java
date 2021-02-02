@@ -25,7 +25,7 @@ public final class ZuranOrb extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT))));
     }
 
-    public ZuranOrb(final ZuranOrb card) {
+    private ZuranOrb(final ZuranOrb card) {
         super(card);
     }
 

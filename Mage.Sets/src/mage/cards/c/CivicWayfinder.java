@@ -32,7 +32,7 @@ public final class CivicWayfinder extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, false), true));
     }
 
-    public CivicWayfinder(final CivicWayfinder card) {
+    private CivicWayfinder(final CivicWayfinder card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class DecreeOfSavagery extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DecreeOfSavagery(final DecreeOfSavagery card) {
+    private DecreeOfSavagery(final DecreeOfSavagery card) {
         super(card);
     }
 

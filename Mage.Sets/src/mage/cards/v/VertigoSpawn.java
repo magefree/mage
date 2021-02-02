@@ -34,7 +34,7 @@ public final class VertigoSpawn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VertigoSpawn(final VertigoSpawn card) {
+    private VertigoSpawn(final VertigoSpawn card) {
         super(card);
     }
 

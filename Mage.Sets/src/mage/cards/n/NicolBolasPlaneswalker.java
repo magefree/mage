@@ -60,7 +60,7 @@ public final class NicolBolasPlaneswalker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NicolBolasPlaneswalker(final NicolBolasPlaneswalker card) {
+    private NicolBolasPlaneswalker(final NicolBolasPlaneswalker card) {
         super(card);
     }
 

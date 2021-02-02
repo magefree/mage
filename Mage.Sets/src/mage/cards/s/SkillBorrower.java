@@ -35,7 +35,7 @@ public final class SkillBorrower extends CardImpl {
         this.addAbility(new SkillBorrowerAbility());
     }
 
-    public SkillBorrower(final SkillBorrower card) {
+    private SkillBorrower(final SkillBorrower card) {
         super(card);
     }
 

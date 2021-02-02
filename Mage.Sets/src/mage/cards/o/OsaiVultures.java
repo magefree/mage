@@ -43,7 +43,7 @@ public final class OsaiVultures extends CardImpl {
             new RemoveCountersSourceCost(CounterType.CARRION.createInstance(2))));
     }
 
-    public OsaiVultures(final OsaiVultures card) {
+    private OsaiVultures(final OsaiVultures card) {
         super(card);
     }
 

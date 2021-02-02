@@ -40,7 +40,7 @@ public final class SkarrganSkybreaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkarrganSkybreaker(final SkarrganSkybreaker card) {
+    private SkarrganSkybreaker(final SkarrganSkybreaker card) {
         super(card);
     }
 

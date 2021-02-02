@@ -31,7 +31,7 @@ public final class SharedAnimosity extends CardImpl {
         );
     }
 
-    public SharedAnimosity(final SharedAnimosity card) {
+    private SharedAnimosity(final SharedAnimosity card) {
         super(card);
     }
 

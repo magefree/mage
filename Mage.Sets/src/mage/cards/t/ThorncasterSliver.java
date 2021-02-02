@@ -39,7 +39,7 @@ public final class ThorncasterSliver extends CardImpl {
                         .setText("Sliver creatures you control have \"Whenever this creature attacks, it deals 1 damage to any target.\"")));
     }
 
-    public ThorncasterSliver(final ThorncasterSliver card) {
+    private ThorncasterSliver(final ThorncasterSliver card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class ElvishSpiritGuide extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.HAND, Mana.GreenMana(1), new ExileSourceFromHandCost()));
     }
 
-    public ElvishSpiritGuide(final ElvishSpiritGuide card) {
+    private ElvishSpiritGuide(final ElvishSpiritGuide card) {
         super(card);
     }
 

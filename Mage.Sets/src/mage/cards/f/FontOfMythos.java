@@ -24,7 +24,7 @@ public final class FontOfMythos extends CardImpl {
         this.addAbility(new FontOfMythosAbility());
     }
 
-    public FontOfMythos(final FontOfMythos card) {
+    private FontOfMythos(final FontOfMythos card) {
         super(card);
     }
 

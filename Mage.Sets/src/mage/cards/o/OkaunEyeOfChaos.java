@@ -50,7 +50,7 @@ public final class OkaunEyeOfChaos extends CardImpl {
         ));
     }
 
-    public OkaunEyeOfChaos(final OkaunEyeOfChaos card) {
+    private OkaunEyeOfChaos(final OkaunEyeOfChaos card) {
         super(card);
     }
 

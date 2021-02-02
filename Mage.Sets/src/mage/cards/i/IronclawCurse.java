@@ -39,7 +39,7 @@ public final class IronclawCurse extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IronclawCurseEffect()));
     }
 
-    public IronclawCurse(final IronclawCurse card) {
+    private IronclawCurse(final IronclawCurse card) {
         super(card);
     }
 

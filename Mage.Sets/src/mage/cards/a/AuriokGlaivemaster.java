@@ -38,7 +38,7 @@ public final class AuriokGlaivemaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
     }
 
-    public AuriokGlaivemaster(final AuriokGlaivemaster card) {
+    private AuriokGlaivemaster(final AuriokGlaivemaster card) {
         super(card);
     }
 

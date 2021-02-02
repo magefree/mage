@@ -34,7 +34,7 @@ public final class BehindTheScenes extends CardImpl {
                 new ManaCostsImpl("{4}{W}")));
     }
 
-    public BehindTheScenes(final BehindTheScenes card) {
+    private BehindTheScenes(final BehindTheScenes card) {
         super(card);
     }
 

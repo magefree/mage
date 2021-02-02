@@ -50,7 +50,7 @@ public final class ReyhanLastOfTheAbzan extends CardImpl {
         this.addAbility(PartnerAbility.getInstance());
     }
 
-    public ReyhanLastOfTheAbzan(final ReyhanLastOfTheAbzan card) {
+    private ReyhanLastOfTheAbzan(final ReyhanLastOfTheAbzan card) {
         super(card);
     }
 

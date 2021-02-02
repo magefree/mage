@@ -33,7 +33,7 @@ public final class ValakutInvoker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ValakutInvoker(final ValakutInvoker card) {
+    private ValakutInvoker(final ValakutInvoker card) {
         super(card);
     }
 

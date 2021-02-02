@@ -35,7 +35,7 @@ public final class DruidsFamiliar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostPairedEffect(2, 2, ruleText)));
     }
 
-    public DruidsFamiliar(final DruidsFamiliar card) {
+    private DruidsFamiliar(final DruidsFamiliar card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class MaggotTherapy extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, -2, Duration.WhileOnBattlefield)));
     }
 
-    public MaggotTherapy(final MaggotTherapy card) {
+    private MaggotTherapy(final MaggotTherapy card) {
         super(card);
     }
 

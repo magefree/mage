@@ -35,7 +35,7 @@ public final class GlacialCrasher extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GlacialCrasherEffect()));
     }
 
-    public GlacialCrasher(final GlacialCrasher card) {
+    private GlacialCrasher(final GlacialCrasher card) {
         super(card);
     }
 

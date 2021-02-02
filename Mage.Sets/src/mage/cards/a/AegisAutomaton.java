@@ -41,7 +41,7 @@ public final class AegisAutomaton extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AegisAutomaton(final AegisAutomaton card) {
+    private AegisAutomaton(final AegisAutomaton card) {
         super(card);
     }
 

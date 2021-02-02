@@ -36,7 +36,7 @@ public final class EpicProportions extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public EpicProportions(final EpicProportions card) {
+    private EpicProportions(final EpicProportions card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class LavaFlow extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public LavaFlow(final LavaFlow card) {
+    private LavaFlow(final LavaFlow card) {
         super(card);
     }
 

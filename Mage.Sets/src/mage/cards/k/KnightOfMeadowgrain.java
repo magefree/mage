@@ -28,7 +28,7 @@ public final class KnightOfMeadowgrain extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public KnightOfMeadowgrain(final KnightOfMeadowgrain card) {
+    private KnightOfMeadowgrain(final KnightOfMeadowgrain card) {
         super(card);
     }
 

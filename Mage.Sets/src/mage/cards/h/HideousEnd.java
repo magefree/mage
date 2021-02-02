@@ -35,7 +35,7 @@ public final class HideousEnd extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(2));
     }
 
-    public HideousEnd(final HideousEnd card) {
+    private HideousEnd(final HideousEnd card) {
         super(card);
     }
 

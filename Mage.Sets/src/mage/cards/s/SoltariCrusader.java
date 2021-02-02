@@ -33,7 +33,7 @@ public final class SoltariCrusader extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
     }
 
-    public SoltariCrusader(final SoltariCrusader card) {
+    private SoltariCrusader(final SoltariCrusader card) {
         super(card);
     }
 

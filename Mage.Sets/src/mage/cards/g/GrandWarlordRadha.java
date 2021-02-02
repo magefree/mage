@@ -50,7 +50,7 @@ public final class GrandWarlordRadha extends CardImpl {
         this.addAbility(new GrandWarlordRadhaTriggeredAbility(), new CreaturesAttackedWatcher());
     }
 
-    public GrandWarlordRadha(final GrandWarlordRadha card) {
+    private GrandWarlordRadha(final GrandWarlordRadha card) {
         super(card);
     }
 

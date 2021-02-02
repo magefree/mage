@@ -49,7 +49,7 @@ public final class GarrisonSergeant extends CardImpl {
         ));
     }
 
-    public GarrisonSergeant(final GarrisonSergeant card) {
+    private GarrisonSergeant(final GarrisonSergeant card) {
         super(card);
     }
 

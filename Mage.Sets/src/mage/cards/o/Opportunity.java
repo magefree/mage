@@ -23,7 +23,7 @@ public final class Opportunity extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Opportunity(final Opportunity card) {
+    private Opportunity(final Opportunity card) {
         super(card);
     }
 

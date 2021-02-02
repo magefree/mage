@@ -22,7 +22,7 @@ public final class FearlessHalberdier extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public FearlessHalberdier(final FearlessHalberdier card) {
+    private FearlessHalberdier(final FearlessHalberdier card) {
         super(card);
     }
 

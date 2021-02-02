@@ -34,7 +34,7 @@ public final class BoundingKrasis extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BoundingKrasis(final BoundingKrasis card) {
+    private BoundingKrasis(final BoundingKrasis card) {
         super(card);
     }
 

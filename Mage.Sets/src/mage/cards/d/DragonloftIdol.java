@@ -53,7 +53,7 @@ public final class DragonloftIdol extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DragonloftIdol(final DragonloftIdol card) {
+    private DragonloftIdol(final DragonloftIdol card) {
         super(card);
     }
 

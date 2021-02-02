@@ -35,7 +35,7 @@ public final class Astrolabe extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Astrolabe(final Astrolabe card) {
+    private Astrolabe(final Astrolabe card) {
         super(card);
     }
 

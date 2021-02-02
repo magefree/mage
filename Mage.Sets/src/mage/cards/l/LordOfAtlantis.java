@@ -42,7 +42,7 @@ public final class LordOfAtlantis extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LordOfAtlantis(final LordOfAtlantis card) {
+    private LordOfAtlantis(final LordOfAtlantis card) {
         super(card);
     }
 

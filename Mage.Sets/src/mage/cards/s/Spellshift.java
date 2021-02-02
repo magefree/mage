@@ -37,7 +37,7 @@ public final class Spellshift extends CardImpl {
         this.getSpellAbility().addEffect(new SpellshiftEffect());
     }
 
-    public Spellshift(final Spellshift card) {
+    private Spellshift(final Spellshift card) {
         super(card);
     }
 

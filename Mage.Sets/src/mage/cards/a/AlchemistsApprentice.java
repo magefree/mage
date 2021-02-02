@@ -31,7 +31,7 @@ public final class AlchemistsApprentice extends CardImpl {
                 new SacrificeSourceCost()));
     }
 
-    public AlchemistsApprentice(final AlchemistsApprentice card) {
+    private AlchemistsApprentice(final AlchemistsApprentice card) {
         super(card);
     }
 

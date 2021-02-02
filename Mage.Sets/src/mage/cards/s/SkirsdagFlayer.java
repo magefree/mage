@@ -46,7 +46,7 @@ public final class SkirsdagFlayer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkirsdagFlayer(final SkirsdagFlayer card) {
+    private SkirsdagFlayer(final SkirsdagFlayer card) {
         super(card);
     }
 

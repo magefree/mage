@@ -31,7 +31,7 @@ public final class ScrollOfOrigins extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScrollOfOrigins(final ScrollOfOrigins card) {
+    private ScrollOfOrigins(final ScrollOfOrigins card) {
         super(card);
     }
 

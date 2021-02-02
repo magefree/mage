@@ -34,7 +34,7 @@ public final class IllusoryDemon extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), false));
     }
 
-    public IllusoryDemon(final IllusoryDemon card) {
+    private IllusoryDemon(final IllusoryDemon card) {
         super(card);
     }
 

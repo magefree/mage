@@ -37,7 +37,7 @@ public final class EnergyField extends CardImpl {
 
     }
 
-    public EnergyField(final EnergyField card) {
+    private EnergyField(final EnergyField card) {
         super(card);
     }
 

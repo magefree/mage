@@ -56,7 +56,7 @@ public final class TheUrDragon extends CardImpl {
         this.addAbility(new TheUrDragonTriggeredAbility());
     }
 
-    public TheUrDragon(final TheUrDragon card) {
+    private TheUrDragon(final TheUrDragon card) {
         super(card);
     }
 

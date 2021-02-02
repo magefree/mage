@@ -26,7 +26,7 @@ public final class Withstand extends CardImpl {
         // Draw a card.
     }
 
-    public Withstand(final Withstand card) {
+    private Withstand(final Withstand card) {
         super(card);
     }
 

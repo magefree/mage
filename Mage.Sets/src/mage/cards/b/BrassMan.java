@@ -39,7 +39,7 @@ public final class BrassMan extends CardImpl {
                 false));
     }
 
-    public BrassMan(final BrassMan card) {
+    private BrassMan(final BrassMan card) {
         super(card);
     }
 

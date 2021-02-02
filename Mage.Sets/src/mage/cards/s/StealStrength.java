@@ -41,7 +41,7 @@ public final class StealStrength extends CardImpl {
         this.getSpellAbility().addTarget(target2);
     }
 
-    public StealStrength(final StealStrength card) {
+    private StealStrength(final StealStrength card) {
         super(card);
     }
 

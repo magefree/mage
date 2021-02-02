@@ -36,7 +36,7 @@ public final class PariahsShield extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public PariahsShield(final PariahsShield card) {
+    private PariahsShield(final PariahsShield card) {
         super(card);
     }
 

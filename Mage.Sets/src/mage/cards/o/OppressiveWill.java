@@ -30,7 +30,7 @@ public final class OppressiveWill extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public OppressiveWill(final OppressiveWill card) {
+    private OppressiveWill(final OppressiveWill card) {
         super(card);
     }
 

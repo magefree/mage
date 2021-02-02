@@ -45,7 +45,7 @@ public final class GreatbowDoyen extends CardImpl {
         this.addAbility(new GreatbowDoyenTriggeredAbility());
     }
 
-    public GreatbowDoyen(final GreatbowDoyen card) {
+    private GreatbowDoyen(final GreatbowDoyen card) {
         super(card);
     }
 

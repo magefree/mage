@@ -52,7 +52,7 @@ public final class JourneyToEternity extends CardImpl {
 
     }
 
-    public JourneyToEternity(final JourneyToEternity card) {
+    private JourneyToEternity(final JourneyToEternity card) {
         super(card);
     }
 

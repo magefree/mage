@@ -44,7 +44,7 @@ public final class Lignify extends CardImpl {
 
     }
 
-    public Lignify(final Lignify card) {
+    private Lignify(final Lignify card) {
         super(card);
     }
 

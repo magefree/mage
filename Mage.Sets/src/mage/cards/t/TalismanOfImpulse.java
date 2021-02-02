@@ -31,7 +31,7 @@ public final class TalismanOfImpulse extends CardImpl {
         this.addAbility(greenManaAbility);
     }
 
-    public TalismanOfImpulse(final TalismanOfImpulse card) {
+    private TalismanOfImpulse(final TalismanOfImpulse card) {
         super(card);
     }
 

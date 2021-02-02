@@ -40,7 +40,7 @@ public final class RaidersWake extends CardImpl {
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public RaidersWake(final RaidersWake card) {
+    private RaidersWake(final RaidersWake card) {
         super(card);
     }
 

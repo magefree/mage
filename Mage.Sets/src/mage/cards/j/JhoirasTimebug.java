@@ -46,7 +46,7 @@ public final class JhoirasTimebug extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JhoirasTimebug(final JhoirasTimebug card) {
+    private JhoirasTimebug(final JhoirasTimebug card) {
         super(card);
     }
 

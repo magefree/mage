@@ -26,7 +26,7 @@ public final class EladamrisVineyard extends CardImpl {
                 Zone.BATTLEFIELD, new AddManaToManaPoolTargetControllerEffect(Mana.GreenMana(2), "that player's"), TargetController.ANY, false, true));
     }
 
-    public EladamrisVineyard(final EladamrisVineyard card) {
+    private EladamrisVineyard(final EladamrisVineyard card) {
         super(card);
     }
 

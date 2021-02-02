@@ -23,7 +23,7 @@ public final class EagerCadet extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public EagerCadet(final EagerCadet card) {
+    private EagerCadet(final EagerCadet card) {
         super(card);
     }
 

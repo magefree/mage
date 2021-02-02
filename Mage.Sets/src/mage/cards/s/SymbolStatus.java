@@ -28,7 +28,7 @@ public class SymbolStatus extends CardImpl {
         this.getSpellAbility().addEffect(new SymbolStatusEffect());
     }
 
-    public SymbolStatus(final SymbolStatus card) {
+    private SymbolStatus(final SymbolStatus card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class FinalStingFaerie extends CardImpl {
         this.addAbility(ability); 
     }
 
-    public FinalStingFaerie(final FinalStingFaerie card) {
+    private FinalStingFaerie(final FinalStingFaerie card) {
         super(card);
     }
 

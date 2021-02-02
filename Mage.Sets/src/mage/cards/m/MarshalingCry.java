@@ -39,7 +39,7 @@ public final class MarshalingCry extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{W}"), TimingRule.SORCERY));
     }
 
-    public MarshalingCry(final MarshalingCry card) {
+    private MarshalingCry(final MarshalingCry card) {
         super(card);
     }
 

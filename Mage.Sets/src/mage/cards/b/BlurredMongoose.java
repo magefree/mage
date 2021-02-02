@@ -28,7 +28,7 @@ public final class BlurredMongoose extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public BlurredMongoose(final BlurredMongoose card) {
+    private BlurredMongoose(final BlurredMongoose card) {
         super(card);
     }
 

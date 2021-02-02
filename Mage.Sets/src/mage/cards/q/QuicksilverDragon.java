@@ -46,7 +46,7 @@ public final class QuicksilverDragon extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{4}{U}")));
     }
 
-    public QuicksilverDragon(final QuicksilverDragon card) {
+    private QuicksilverDragon(final QuicksilverDragon card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class AerieBowmasters extends CardImpl {
 
     }
 
-    public AerieBowmasters(final AerieBowmasters card) {
+    private AerieBowmasters(final AerieBowmasters card) {
         super(card);
     }
 

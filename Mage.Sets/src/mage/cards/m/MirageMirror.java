@@ -35,7 +35,7 @@ public final class MirageMirror extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MirageMirror(final MirageMirror card) {
+    private MirageMirror(final MirageMirror card) {
         super(card);
     }
 

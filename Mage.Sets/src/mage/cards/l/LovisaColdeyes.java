@@ -44,7 +44,7 @@ public final class LovisaColdeyes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LovisaColdeyes(final LovisaColdeyes card) {
+    private LovisaColdeyes(final LovisaColdeyes card) {
         super(card);
     }
 

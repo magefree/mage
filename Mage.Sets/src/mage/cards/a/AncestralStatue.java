@@ -34,7 +34,7 @@ public final class AncestralStatue extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
     }
 
-    public AncestralStatue(final AncestralStatue card) {
+    private AncestralStatue(final AncestralStatue card) {
         super(card);
     }
 

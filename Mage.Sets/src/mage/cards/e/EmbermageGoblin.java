@@ -49,7 +49,7 @@ public final class EmbermageGoblin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EmbermageGoblin(final EmbermageGoblin card) {
+    private EmbermageGoblin(final EmbermageGoblin card) {
         super(card);
     }
 

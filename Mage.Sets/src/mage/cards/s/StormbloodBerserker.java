@@ -28,7 +28,7 @@ public final class StormbloodBerserker extends CardImpl {
         this.addAbility(new MenaceAbility());
     }
 
-    public StormbloodBerserker(final StormbloodBerserker card) {
+    private StormbloodBerserker(final StormbloodBerserker card) {
         super(card);
     }
 

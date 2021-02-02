@@ -34,7 +34,7 @@ public final class ThundersongTrumpeter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThundersongTrumpeter(final ThundersongTrumpeter card) {
+    private ThundersongTrumpeter(final ThundersongTrumpeter card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class DemonicTutor extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(target));
     }
 
-    public DemonicTutor(final DemonicTutor card) {
+    private DemonicTutor(final DemonicTutor card) {
         super(card);
     }
 

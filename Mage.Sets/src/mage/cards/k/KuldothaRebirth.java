@@ -30,7 +30,7 @@ public final class KuldothaRebirth extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
     }
 
-    public KuldothaRebirth(final KuldothaRebirth card) {
+    private KuldothaRebirth(final KuldothaRebirth card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class ArborbackStomper extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(5)));
     }
 
-    public ArborbackStomper(final ArborbackStomper card) {
+    private ArborbackStomper(final ArborbackStomper card) {
         super(card);
     }
 

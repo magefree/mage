@@ -34,7 +34,7 @@ public final class Foresight extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public Foresight(final Foresight card) {
+    private Foresight(final Foresight card) {
         super(card);
     }
 

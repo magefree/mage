@@ -40,7 +40,7 @@ public final class HeraldOfKozilek extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public HeraldOfKozilek(final HeraldOfKozilek card) {
+    private HeraldOfKozilek(final HeraldOfKozilek card) {
         super(card);
     }
 

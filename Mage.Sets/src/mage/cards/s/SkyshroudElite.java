@@ -34,7 +34,7 @@ public final class SkyshroudElite extends CardImpl {
                 "{this} gets +1/+2 as long as an opponent controls a nonbasic land")));
     }
 
-    public SkyshroudElite(final SkyshroudElite card) {
+    private SkyshroudElite(final SkyshroudElite card) {
         super(card);
     }
 

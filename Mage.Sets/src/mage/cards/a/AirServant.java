@@ -42,7 +42,7 @@ public final class AirServant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AirServant(final AirServant card) {
+    private AirServant(final AirServant card) {
         super(card);
     }
 

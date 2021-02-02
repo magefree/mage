@@ -51,7 +51,7 @@ public final class HammerOfNazahn extends CardImpl {
 
     }
 
-    public HammerOfNazahn(final HammerOfNazahn card) {
+    private HammerOfNazahn(final HammerOfNazahn card) {
         super(card);
     }
 

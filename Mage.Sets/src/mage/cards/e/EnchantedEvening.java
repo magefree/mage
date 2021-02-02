@@ -24,7 +24,7 @@ public final class EnchantedEvening extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new EnchangedEveningEffect()));
     }
 
-    public EnchantedEvening(final EnchantedEvening card) {
+    private EnchantedEvening(final EnchantedEvening card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class SimicFluxmage extends CardImpl {
 
     }
 
-    public SimicFluxmage(final SimicFluxmage card) {
+    private SimicFluxmage(final SimicFluxmage card) {
         super(card);
     }
 

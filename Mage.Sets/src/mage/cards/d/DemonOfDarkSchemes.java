@@ -55,7 +55,7 @@ public final class DemonOfDarkSchemes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DemonOfDarkSchemes(final DemonOfDarkSchemes card) {
+    private DemonOfDarkSchemes(final DemonOfDarkSchemes card) {
         super(card);
     }
 

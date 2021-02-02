@@ -28,7 +28,7 @@ public final class Dissolve extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public Dissolve(final Dissolve card) {
+    private Dissolve(final Dissolve card) {
         super(card);
     }
 

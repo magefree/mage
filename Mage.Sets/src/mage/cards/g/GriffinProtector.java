@@ -36,7 +36,7 @@ public final class GriffinProtector extends CardImpl {
 
     }
 
-    public GriffinProtector(final GriffinProtector card) {
+    private GriffinProtector(final GriffinProtector card) {
         super(card);
     }
 

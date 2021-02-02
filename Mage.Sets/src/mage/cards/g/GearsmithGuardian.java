@@ -47,7 +47,7 @@ public final class GearsmithGuardian extends CardImpl {
         ));
     }
 
-    public GearsmithGuardian(final GearsmithGuardian card) {
+    private GearsmithGuardian(final GearsmithGuardian card) {
         super(card);
     }
 

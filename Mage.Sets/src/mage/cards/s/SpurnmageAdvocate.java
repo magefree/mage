@@ -49,7 +49,7 @@ public final class SpurnmageAdvocate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpurnmageAdvocate(final SpurnmageAdvocate card) {
+    private SpurnmageAdvocate(final SpurnmageAdvocate card) {
         super(card);
     }
 

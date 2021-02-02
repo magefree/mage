@@ -34,7 +34,7 @@ public final class HeatStroke extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HeatStroke(final HeatStroke card) {
+    private HeatStroke(final HeatStroke card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class SparkJolt extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public SparkJolt(final SparkJolt card) {
+    private SparkJolt(final SparkJolt card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class PerniciousDeed extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PerniciousDeed(final PerniciousDeed card) {
+    private PerniciousDeed(final PerniciousDeed card) {
         super(card);
     }
 

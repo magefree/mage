@@ -30,7 +30,7 @@ public final class Tyrannize extends CardImpl {
         this.getSpellAbility().addEffect(new TyrannizeEffect());
     }
 
-    public Tyrannize(final Tyrannize card) {
+    private Tyrannize(final Tyrannize card) {
         super(card);
     }
 

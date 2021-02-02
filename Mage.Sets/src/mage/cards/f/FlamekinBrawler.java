@@ -30,7 +30,7 @@ public final class FlamekinBrawler extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public FlamekinBrawler(final FlamekinBrawler card) {
+    private FlamekinBrawler(final FlamekinBrawler card) {
         super(card);
     }
 

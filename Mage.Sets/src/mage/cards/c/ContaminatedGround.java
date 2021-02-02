@@ -43,7 +43,7 @@ public final class ContaminatedGround extends CardImpl {
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new LoseLifeControllerAttachedEffect(2), "enchanted land"));
     }
 
-    public ContaminatedGround(final ContaminatedGround card) {
+    private ContaminatedGround(final ContaminatedGround card) {
         super(card);
     }
 

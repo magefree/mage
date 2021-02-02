@@ -29,7 +29,7 @@ public final class SurgingSentinels extends CardImpl {
         this.addAbility(new RippleAbility(4));
     }
 
-    public SurgingSentinels(final SurgingSentinels card) {
+    private SurgingSentinels(final SurgingSentinels card) {
         super(card);
     }
 

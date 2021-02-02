@@ -34,7 +34,7 @@ public final class ForiysianInterceptor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect()));
     }
 
-    public ForiysianInterceptor(final ForiysianInterceptor card) {
+    private ForiysianInterceptor(final ForiysianInterceptor card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class GlintSleeveArtisan extends CardImpl {
         this.addAbility(new FabricateAbility(1));
     }
 
-    public GlintSleeveArtisan(final GlintSleeveArtisan card) {
+    private GlintSleeveArtisan(final GlintSleeveArtisan card) {
         super(card);
     }
 

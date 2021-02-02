@@ -28,7 +28,7 @@ public final class StormriderSpirit extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public StormriderSpirit(final StormriderSpirit card) {
+    private StormriderSpirit(final StormriderSpirit card) {
         super(card);
     }
 

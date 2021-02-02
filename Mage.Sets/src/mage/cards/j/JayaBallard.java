@@ -46,7 +46,7 @@ public final class JayaBallard extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new JayaBallardEmblem()), -8), new CastFromGraveyardWatcher());
     }
 
-    public JayaBallard(final JayaBallard card) {
+    private JayaBallard(final JayaBallard card) {
         super(card);
     }
 

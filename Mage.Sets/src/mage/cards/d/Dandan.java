@@ -36,7 +36,7 @@ public final class Dandan extends CardImpl {
                 new SacrificeSourceEffect()));
     }
 
-    public Dandan(final Dandan card) {
+    private Dandan(final Dandan card) {
         super(card);
     }
 

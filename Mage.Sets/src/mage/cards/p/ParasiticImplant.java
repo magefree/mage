@@ -41,7 +41,7 @@ public final class ParasiticImplant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ParasiticImplant(final ParasiticImplant card) {
+    private ParasiticImplant(final ParasiticImplant card) {
         super(card);
     }
 

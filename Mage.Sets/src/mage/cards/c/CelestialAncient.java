@@ -38,7 +38,7 @@ public final class CelestialAncient extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()),filter, false));
     }
 
-    public CelestialAncient(final CelestialAncient card) {
+    private CelestialAncient(final CelestialAncient card) {
         super(card);
     }
 

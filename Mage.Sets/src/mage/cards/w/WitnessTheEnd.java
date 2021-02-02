@@ -32,7 +32,7 @@ public final class WitnessTheEnd extends CardImpl {
         getSpellAbility().addEffect(effect);
     }
 
-    public WitnessTheEnd(final WitnessTheEnd card) {
+    private WitnessTheEnd(final WitnessTheEnd card) {
         super(card);
     }
 

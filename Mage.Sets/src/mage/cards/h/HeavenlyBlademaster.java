@@ -64,7 +64,7 @@ public final class HeavenlyBlademaster extends CardImpl {
         ));
     }
 
-    public HeavenlyBlademaster(final HeavenlyBlademaster card) {
+    private HeavenlyBlademaster(final HeavenlyBlademaster card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class MizziumTransreliquat extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MizziumTransreliquat(final MizziumTransreliquat card) {
+    private MizziumTransreliquat(final MizziumTransreliquat card) {
         super(card);
     }
 

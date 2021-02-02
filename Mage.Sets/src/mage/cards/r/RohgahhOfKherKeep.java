@@ -58,7 +58,7 @@ public final class RohgahhOfKherKeep extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public RohgahhOfKherKeep(final RohgahhOfKherKeep card) {
+    private RohgahhOfKherKeep(final RohgahhOfKherKeep card) {
         super(card);
     }
 

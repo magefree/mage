@@ -41,7 +41,7 @@ public final class PowderKeg extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PowderKeg(final PowderKeg card) {
+    private PowderKeg(final PowderKeg card) {
         super(card);
     }
 

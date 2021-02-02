@@ -40,7 +40,7 @@ public final class LoamDryad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LoamDryad(final LoamDryad card) {
+    private LoamDryad(final LoamDryad card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class NathOfTheGiltLeaf extends CardImpl {
 
     }
 
-    public NathOfTheGiltLeaf(final NathOfTheGiltLeaf card) {
+    private NathOfTheGiltLeaf(final NathOfTheGiltLeaf card) {
         super(card);
     }
 

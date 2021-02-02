@@ -30,7 +30,7 @@ public final class LavaHounds extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageControllerEffect(4, "it")));
     }
 
-    public LavaHounds(final LavaHounds card) {
+    private LavaHounds(final LavaHounds card) {
         super(card);
     }
 

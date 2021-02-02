@@ -37,7 +37,7 @@ public final class OathswornGiant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OathswornGiant(final OathswornGiant card) {
+    private OathswornGiant(final OathswornGiant card) {
         super(card);
     }
 

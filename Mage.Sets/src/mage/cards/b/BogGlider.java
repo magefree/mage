@@ -52,7 +52,7 @@ public final class BogGlider extends CardImpl {
 	this.addAbility(ability);
     }
 
-    public BogGlider(final BogGlider card) {
+    private BogGlider(final BogGlider card) {
         super(card);
     }
 

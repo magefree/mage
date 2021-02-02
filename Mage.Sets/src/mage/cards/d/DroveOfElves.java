@@ -41,7 +41,7 @@ public final class DroveOfElves extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public DroveOfElves(final DroveOfElves card) {
+    private DroveOfElves(final DroveOfElves card) {
         super(card);
     }
 

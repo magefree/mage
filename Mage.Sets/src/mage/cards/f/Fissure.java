@@ -30,7 +30,7 @@ public final class Fissure extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public Fissure(final Fissure card) {
+    private Fissure(final Fissure card) {
         super(card);
     }
 

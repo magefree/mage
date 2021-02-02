@@ -29,7 +29,7 @@ public final class ReturnOfTheNightstalkers extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnOfTheNightstalkersEffect());
     }
 
-    public ReturnOfTheNightstalkers(final ReturnOfTheNightstalkers card) {
+    private ReturnOfTheNightstalkers(final ReturnOfTheNightstalkers card) {
         super(card);
     }
 

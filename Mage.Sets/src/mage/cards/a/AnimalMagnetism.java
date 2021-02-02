@@ -29,7 +29,7 @@ public final class AnimalMagnetism extends CardImpl {
         this.getSpellAbility().addEffect(new AnimalMagnetismEffect());
     }
 
-    public AnimalMagnetism(final AnimalMagnetism card) {
+    private AnimalMagnetism(final AnimalMagnetism card) {
         super(card);
     }
 

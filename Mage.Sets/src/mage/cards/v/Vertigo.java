@@ -35,7 +35,7 @@ public final class Vertigo extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public Vertigo(final Vertigo card) {
+    private Vertigo(final Vertigo card) {
         super(card);
     }
 

@@ -57,7 +57,7 @@ public final class YamabushisFlame extends CardImpl {
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
-    public YamabushisFlame(final YamabushisFlame card) {
+    private YamabushisFlame(final YamabushisFlame card) {
         super(card);
     }
 

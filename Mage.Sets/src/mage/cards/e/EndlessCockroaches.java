@@ -27,7 +27,7 @@ public final class EndlessCockroaches extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public EndlessCockroaches(final EndlessCockroaches card) {
+    private EndlessCockroaches(final EndlessCockroaches card) {
         super(card);
     }
 

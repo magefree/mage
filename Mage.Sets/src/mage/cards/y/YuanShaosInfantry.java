@@ -31,7 +31,7 @@ public final class YuanShaosInfantry extends CardImpl {
         this.addAbility(new AttacksAloneTriggeredAbility(effect));
     }
 
-    public YuanShaosInfantry(final YuanShaosInfantry card) {
+    private YuanShaosInfantry(final YuanShaosInfantry card) {
         super(card);
     }
 

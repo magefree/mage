@@ -44,7 +44,7 @@ public final class ElderwoodScion extends CardImpl {
         );
     }
 
-    public ElderwoodScion(final ElderwoodScion card) {
+    private ElderwoodScion(final ElderwoodScion card) {
         super(card);
     }
 

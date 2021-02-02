@@ -41,7 +41,7 @@ public final class ChaoticGoo extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ChaoticGooEffect(), TargetController.YOU, true));
     }
 
-    public ChaoticGoo(final ChaoticGoo card) {
+    private ChaoticGoo(final ChaoticGoo card) {
         super(card);
     }
 

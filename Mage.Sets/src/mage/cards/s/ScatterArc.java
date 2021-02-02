@@ -34,7 +34,7 @@ public final class ScatterArc extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public ScatterArc(final ScatterArc card) {
+    private ScatterArc(final ScatterArc card) {
         super(card);
     }
 

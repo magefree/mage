@@ -42,7 +42,7 @@ public final class CanopyVista extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public CanopyVista(final CanopyVista card) {
+    private CanopyVista(final CanopyVista card) {
         super(card);
     }
 

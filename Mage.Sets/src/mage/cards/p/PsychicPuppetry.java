@@ -29,7 +29,7 @@ public final class PsychicPuppetry extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{U}"));
     }
 
-    public PsychicPuppetry(final PsychicPuppetry card) {
+    private PsychicPuppetry(final PsychicPuppetry card) {
         super(card);
     }
 

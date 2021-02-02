@@ -36,7 +36,7 @@ public final class BorosLocket extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BorosLocket(final BorosLocket card) {
+    private BorosLocket(final BorosLocket card) {
         super(card);
     }
 

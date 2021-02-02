@@ -21,7 +21,7 @@ public final class ThornhideWolves extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public ThornhideWolves(final ThornhideWolves card) {
+    private ThornhideWolves(final ThornhideWolves card) {
         super(card);
     }
 

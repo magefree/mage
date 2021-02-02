@@ -38,7 +38,7 @@ public final class FowlPlay extends CardImpl {
                         Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.ABILITIES_SUBTYPE)));
     }
 
-    public FowlPlay(final FowlPlay card) {
+    private FowlPlay(final FowlPlay card) {
         super(card);
     }
 

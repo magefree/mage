@@ -38,7 +38,7 @@ public final class DawnOfHope extends CardImpl {
         ));
     }
 
-    public DawnOfHope(final DawnOfHope card) {
+    private DawnOfHope(final DawnOfHope card) {
         super(card);
     }
 

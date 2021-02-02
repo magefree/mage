@@ -32,7 +32,7 @@ public final class RakshasaGravecaller extends CardImpl {
         this.addAbility(new ExploitCreatureTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 2), false));
     }
 
-    public RakshasaGravecaller(final RakshasaGravecaller card) {
+    private RakshasaGravecaller(final RakshasaGravecaller card) {
         super(card);
     }
 

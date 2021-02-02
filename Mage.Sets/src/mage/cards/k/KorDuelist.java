@@ -38,7 +38,7 @@ public final class KorDuelist extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, new SourceIsEquiped(), ruleText)));
     }
 
-    public KorDuelist(final KorDuelist card) {
+    private KorDuelist(final KorDuelist card) {
         super(card);
     }
 

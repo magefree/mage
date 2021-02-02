@@ -27,7 +27,7 @@ public final class Worldfire extends CardImpl {
         this.getSpellAbility().addEffect(new WorldfireEffect());
     }
 
-    public Worldfire(final Worldfire card) {
+    private Worldfire(final Worldfire card) {
         super(card);
     }
 

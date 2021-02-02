@@ -32,7 +32,7 @@ public final class SecretSalvage extends CardImpl {
         getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterNonlandCard("nonland card from your graveyard")));
     }
 
-    public SecretSalvage(final SecretSalvage card) {
+    private SecretSalvage(final SecretSalvage card) {
         super(card);
     }
 

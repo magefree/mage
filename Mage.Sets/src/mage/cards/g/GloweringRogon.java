@@ -26,7 +26,7 @@ public final class GloweringRogon extends CardImpl {
         this.addAbility(new AmplifyAbility(AmplifyEffect.AmplifyFactor.Amplify1));
     }
 
-    public GloweringRogon(final GloweringRogon card) {
+    private GloweringRogon(final GloweringRogon card) {
         super(card);
     }
 

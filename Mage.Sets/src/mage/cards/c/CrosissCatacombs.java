@@ -40,7 +40,7 @@ public final class CrosissCatacombs extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public CrosissCatacombs(final CrosissCatacombs card) {
+    private CrosissCatacombs(final CrosissCatacombs card) {
         super(card);
     }
 

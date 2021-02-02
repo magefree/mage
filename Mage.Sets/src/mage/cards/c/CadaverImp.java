@@ -37,7 +37,7 @@ public final class CadaverImp extends CardImpl {
 
     }
 
-    public CadaverImp(final CadaverImp card) {
+    private CadaverImp(final CadaverImp card) {
         super(card);
     }
 

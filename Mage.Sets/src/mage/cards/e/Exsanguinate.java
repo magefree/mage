@@ -21,7 +21,7 @@ public final class Exsanguinate extends CardImpl {
         this.getSpellAbility().addEffect(new ExsanguinateEffect());
     }
 
-    public Exsanguinate(final Exsanguinate card) {
+    private Exsanguinate(final Exsanguinate card) {
         super(card);
     }
 

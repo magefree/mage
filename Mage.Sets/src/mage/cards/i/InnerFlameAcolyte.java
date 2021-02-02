@@ -41,7 +41,7 @@ public final class InnerFlameAcolyte extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{R}"));
     }
 
-    public InnerFlameAcolyte(final InnerFlameAcolyte card) {
+    private InnerFlameAcolyte(final InnerFlameAcolyte card) {
         super(card);
     }
 

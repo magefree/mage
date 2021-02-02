@@ -29,7 +29,7 @@ public final class NaturalSelection extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public NaturalSelection(final NaturalSelection card) {
+    private NaturalSelection(final NaturalSelection card) {
         super(card);
     }
 

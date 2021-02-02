@@ -22,7 +22,7 @@ public final class EssenceDrain extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(3).concatBy("and"));
     }
 
-    public EssenceDrain(final EssenceDrain card) {
+    private EssenceDrain(final EssenceDrain card) {
         super(card);
     }
 

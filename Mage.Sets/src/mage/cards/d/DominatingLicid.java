@@ -34,7 +34,7 @@ public final class DominatingLicid extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
     }
 
-    public DominatingLicid(final DominatingLicid card) {
+    private DominatingLicid(final DominatingLicid card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class CutRibbons extends SplitCard {
 
     }
 
-    public CutRibbons(final CutRibbons card) {
+    private CutRibbons(final CutRibbons card) {
         super(card);
     }
 

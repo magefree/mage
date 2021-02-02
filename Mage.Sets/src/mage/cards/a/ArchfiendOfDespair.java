@@ -50,7 +50,7 @@ public final class ArchfiendOfDespair extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new ArchfiendOfDespairEffect(), TargetController.ANY, false));
     }
 
-    public ArchfiendOfDespair(final ArchfiendOfDespair card) {
+    private ArchfiendOfDespair(final ArchfiendOfDespair card) {
         super(card);
     }
 

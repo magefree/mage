@@ -23,7 +23,7 @@ public final class UntamedWilds extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND)));
     }
 
-    public UntamedWilds(final UntamedWilds card) {
+    private UntamedWilds(final UntamedWilds card) {
         super(card);
     }
 

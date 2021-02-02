@@ -37,7 +37,7 @@ public final class SludgeCrawler extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(2)));
     }
 
-    public SludgeCrawler(final SludgeCrawler card) {
+    private SludgeCrawler(final SludgeCrawler card) {
         super(card);
     }
 

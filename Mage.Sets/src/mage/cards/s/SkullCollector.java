@@ -43,7 +43,7 @@ public final class SkullCollector extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }
 
-    public SkullCollector(final SkullCollector card) {
+    private SkullCollector(final SkullCollector card) {
         super(card);
     }
 

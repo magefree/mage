@@ -30,7 +30,7 @@ public final class GrenzosCutthroat extends CardImpl {
         this.addAbility(new DethroneAbility());
     }
 
-    public GrenzosCutthroat(final GrenzosCutthroat card) {
+    private GrenzosCutthroat(final GrenzosCutthroat card) {
         super(card);
     }
 

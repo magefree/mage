@@ -33,7 +33,7 @@ public final class Deicide extends CardImpl {
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
     }
 
-    public Deicide(final Deicide card) {
+    private Deicide(final Deicide card) {
         super(card);
     }
 

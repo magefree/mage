@@ -27,7 +27,7 @@ public final class Breach extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Breach(final Breach card) {
+    private Breach(final Breach card) {
         super(card);
     }
 

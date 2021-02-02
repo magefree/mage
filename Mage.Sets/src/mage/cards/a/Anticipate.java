@@ -26,7 +26,7 @@ public final class Anticipate extends CardImpl {
                 "Put one of them into your hand and the rest on the bottom of your library in any order"));
     }
 
-    public Anticipate(final Anticipate card) {
+    private Anticipate(final Anticipate card) {
         super(card);
     }
 

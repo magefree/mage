@@ -25,7 +25,7 @@ public final class PlagueBeetle extends CardImpl {
         this.addAbility(new SwampwalkAbility());
     }
 
-    public PlagueBeetle(final PlagueBeetle card) {
+    private PlagueBeetle(final PlagueBeetle card) {
         super(card);
     }
 

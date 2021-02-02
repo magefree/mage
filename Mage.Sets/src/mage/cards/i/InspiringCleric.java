@@ -28,7 +28,7 @@ public final class InspiringCleric extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4)));
     }
 
-    public InspiringCleric(final InspiringCleric card) {
+    private InspiringCleric(final InspiringCleric card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class DragonBellMonk extends CardImpl {
         this.addAbility(new ProwessAbility());
     }
 
-    public DragonBellMonk(final DragonBellMonk card) {
+    private DragonBellMonk(final DragonBellMonk card) {
         super(card);
     }
 

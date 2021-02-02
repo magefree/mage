@@ -58,7 +58,7 @@ public final class LinSivviDefiantHero extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LinSivviDefiantHero(final LinSivviDefiantHero card) {
+    private LinSivviDefiantHero(final LinSivviDefiantHero card) {
         super(card);
     }
 

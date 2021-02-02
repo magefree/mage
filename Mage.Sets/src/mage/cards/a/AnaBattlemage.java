@@ -59,7 +59,7 @@ public final class AnaBattlemage extends CardImpl {
                 "When {this} enters the battlefield, if it was kicked with its {1}{B} kicker, tap target untapped creature and that creature deals damage equal to its power to its controller."));
     }
 
-    public AnaBattlemage(final AnaBattlemage card) {
+    private AnaBattlemage(final AnaBattlemage card) {
         super(card);
     }
 

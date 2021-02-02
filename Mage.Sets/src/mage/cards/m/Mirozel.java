@@ -31,7 +31,7 @@ public final class Mirozel extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new ReturnToHandSourceEffect(true)));
     }
 
-    public Mirozel(final Mirozel card) {
+    private Mirozel(final Mirozel card) {
         super(card);
     }
 

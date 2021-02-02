@@ -25,7 +25,7 @@ public final class SporecapSpider extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public SporecapSpider(final SporecapSpider card) {
+    private SporecapSpider(final SporecapSpider card) {
         super(card);
     }
 

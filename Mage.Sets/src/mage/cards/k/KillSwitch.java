@@ -54,7 +54,7 @@ public final class KillSwitch extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public KillSwitch(final KillSwitch card) {
+    private KillSwitch(final KillSwitch card) {
         super(card);
     }
 

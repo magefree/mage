@@ -27,7 +27,7 @@ public final class TalruumMinotaur extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public TalruumMinotaur(final TalruumMinotaur card) {
+    private TalruumMinotaur(final TalruumMinotaur card) {
         super(card);
     }
 

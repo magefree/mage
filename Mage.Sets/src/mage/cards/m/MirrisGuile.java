@@ -23,7 +23,7 @@ public final class MirrisGuile extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LookLibraryControllerEffect(3), TargetController.YOU, true));
     }
 
-    public MirrisGuile(final MirrisGuile card) {
+    private MirrisGuile(final MirrisGuile card) {
         super(card);
     }
 

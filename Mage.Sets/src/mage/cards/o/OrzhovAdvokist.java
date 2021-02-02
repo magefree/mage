@@ -46,7 +46,7 @@ public final class OrzhovAdvokist extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new OrzhovAdvokistEffect(), TargetController.YOU, false));
     }
 
-    public OrzhovAdvokist(final OrzhovAdvokist card) {
+    private OrzhovAdvokist(final OrzhovAdvokist card) {
         super(card);
     }
 

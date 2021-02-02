@@ -53,7 +53,7 @@ public final class MarchesaTheBlackRose extends CardImpl {
 
     }
 
-    public MarchesaTheBlackRose(final MarchesaTheBlackRose card) {
+    private MarchesaTheBlackRose(final MarchesaTheBlackRose card) {
         super(card);
     }
 

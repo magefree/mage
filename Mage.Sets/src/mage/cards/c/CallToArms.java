@@ -58,7 +58,7 @@ public final class CallToArms extends CardImpl {
         this.addAbility(new CallToArmsStateTriggeredAbility());
     }
 
-    public CallToArms(final CallToArms card) {
+    private CallToArms(final CallToArms card) {
         super(card);
     }
 

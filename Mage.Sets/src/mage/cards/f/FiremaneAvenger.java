@@ -38,7 +38,7 @@ public final class FiremaneAvenger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FiremaneAvenger(final FiremaneAvenger card) {
+    private FiremaneAvenger(final FiremaneAvenger card) {
         super(card);
     }
 

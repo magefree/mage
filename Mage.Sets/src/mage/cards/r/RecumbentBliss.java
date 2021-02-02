@@ -35,7 +35,7 @@ public final class RecumbentBliss extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), TargetController.YOU, true));
     }
 
-    public RecumbentBliss(final RecumbentBliss card) {
+    private RecumbentBliss(final RecumbentBliss card) {
         super(card);
     }
 

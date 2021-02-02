@@ -39,7 +39,7 @@ public final class BerserkMurlodont extends CardImpl {
         this.addAbility(new BecomesBlockedAllTriggeredAbility(effect, false, filter, false));
     }
 
-    public BerserkMurlodont(final BerserkMurlodont card) {
+    private BerserkMurlodont(final BerserkMurlodont card) {
         super(card);
     }
 

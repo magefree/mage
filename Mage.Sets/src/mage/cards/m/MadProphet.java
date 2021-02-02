@@ -37,7 +37,7 @@ public final class MadProphet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MadProphet(final MadProphet card) {
+    private MadProphet(final MadProphet card) {
         super(card);
     }
 

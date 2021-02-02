@@ -34,7 +34,7 @@ public final class TrustedForcemage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostPairedEffect(1, 1, ruleText)));
     }
 
-    public TrustedForcemage(final TrustedForcemage card) {
+    private TrustedForcemage(final TrustedForcemage card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class GrafRats extends CardImpl {
                 "At the beginning of combat on your turn, if you both own and control {this} and a creature named Midnight Scavengers, exile them, then meld them into Chittering Host."));
     }
 
-    public GrafRats(final GrafRats card) {
+    private GrafRats(final GrafRats card) {
         super(card);
     }
 

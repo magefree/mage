@@ -47,7 +47,7 @@ public final class HopeCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public HopeCharm(final HopeCharm card) {
+    private HopeCharm(final HopeCharm card) {
         super(card);
     }
 

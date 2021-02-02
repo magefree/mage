@@ -48,7 +48,7 @@ public final class ThunderscapeBattlemage extends CardImpl {
                 "When {this} enters the battlefield, if it was kicked with its {G} kicker, destroy target enchantment."));
     }
 
-    public ThunderscapeBattlemage(final ThunderscapeBattlemage card) {
+    private ThunderscapeBattlemage(final ThunderscapeBattlemage card) {
         super(card);
     }
 

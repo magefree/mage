@@ -31,7 +31,7 @@ public final class DiveDown extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
-    public DiveDown(final DiveDown card) {
+    private DiveDown(final DiveDown card) {
         super(card);
     }
 

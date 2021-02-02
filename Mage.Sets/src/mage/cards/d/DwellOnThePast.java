@@ -33,7 +33,7 @@ public final class DwellOnThePast extends CardImpl {
 
     }
 
-    public DwellOnThePast(final DwellOnThePast card) {
+    private DwellOnThePast(final DwellOnThePast card) {
         super(card);
     }
 

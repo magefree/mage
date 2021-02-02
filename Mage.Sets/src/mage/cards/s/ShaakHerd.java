@@ -38,7 +38,7 @@ public final class ShaakHerd extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShaakHerd(final ShaakHerd card) {
+    private ShaakHerd(final ShaakHerd card) {
         super(card);
     }
 

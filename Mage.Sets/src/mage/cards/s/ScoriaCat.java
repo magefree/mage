@@ -43,7 +43,7 @@ public final class ScoriaCat extends CardImpl {
             "{this} gets +3/+3 as long as you control no untapped lands")));
     }
 
-    public ScoriaCat(final ScoriaCat card) {
+    private ScoriaCat(final ScoriaCat card) {
         super(card);
     }
 

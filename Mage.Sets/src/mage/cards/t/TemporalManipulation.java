@@ -20,7 +20,7 @@ public final class TemporalManipulation extends CardImpl {
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());
     }
 
-    public TemporalManipulation(final TemporalManipulation card) {
+    private TemporalManipulation(final TemporalManipulation card) {
         super(card);
     }
 

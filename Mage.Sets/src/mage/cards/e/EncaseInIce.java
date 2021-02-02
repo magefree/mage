@@ -56,7 +56,7 @@ public final class EncaseInIce extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
-    public EncaseInIce(final EncaseInIce card) {
+    private EncaseInIce(final EncaseInIce card) {
         super(card);
     }
 

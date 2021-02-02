@@ -47,7 +47,7 @@ public final class WasitoraNekoruQueen extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new WasitoraNekoruQueenEffect(), false, true));
     }
 
-    public WasitoraNekoruQueen(final WasitoraNekoruQueen card) {
+    private WasitoraNekoruQueen(final WasitoraNekoruQueen card) {
         super(card);
     }
 

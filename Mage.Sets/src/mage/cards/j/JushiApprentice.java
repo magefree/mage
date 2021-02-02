@@ -47,7 +47,7 @@ public final class JushiApprentice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JushiApprentice(final JushiApprentice card) {
+    private JushiApprentice(final JushiApprentice card) {
         super(card);
     }
 

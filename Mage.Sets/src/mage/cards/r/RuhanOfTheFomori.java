@@ -31,7 +31,7 @@ public final class RuhanOfTheFomori extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new AttackIfAbleTargetRandomOpponentSourceEffect(), TargetController.YOU, false));
     }
 
-    public RuhanOfTheFomori(final RuhanOfTheFomori card) {
+    private RuhanOfTheFomori(final RuhanOfTheFomori card) {
         super(card);
     }
 

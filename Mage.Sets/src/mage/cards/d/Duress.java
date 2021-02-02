@@ -32,7 +32,7 @@ public final class Duress extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
     }
 
-    public Duress(final Duress card) {
+    private Duress(final Duress card) {
         super(card);
     }
 

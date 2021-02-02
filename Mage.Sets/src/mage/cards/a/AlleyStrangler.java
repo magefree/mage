@@ -27,7 +27,7 @@ public final class AlleyStrangler extends CardImpl {
         this.addAbility(new MenaceAbility());
     }
 
-    public AlleyStrangler(final AlleyStrangler card) {
+    private AlleyStrangler(final AlleyStrangler card) {
         super(card);
     }
 

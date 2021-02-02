@@ -22,7 +22,7 @@ public final class RedwoodTreefolk extends CardImpl {
         this.toughness = new MageInt(6);
     }
 
-    public RedwoodTreefolk(final RedwoodTreefolk card) {
+    private RedwoodTreefolk(final RedwoodTreefolk card) {
         super(card);
     }
 

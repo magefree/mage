@@ -26,7 +26,7 @@ public final class EpicureOfBlood extends CardImpl {
         this.addAbility(new GainLifeControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), false));
     }
 
-    public EpicureOfBlood(final EpicureOfBlood card) {
+    private EpicureOfBlood(final EpicureOfBlood card) {
         super(card);
     }
 

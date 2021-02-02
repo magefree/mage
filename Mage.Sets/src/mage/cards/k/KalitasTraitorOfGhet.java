@@ -61,7 +61,7 @@ public final class KalitasTraitorOfGhet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KalitasTraitorOfGhet(final KalitasTraitorOfGhet card) {
+    private KalitasTraitorOfGhet(final KalitasTraitorOfGhet card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class QuagmireLamprey extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(effect, false));
     }
 
-    public QuagmireLamprey(final QuagmireLamprey card) {
+    private QuagmireLamprey(final QuagmireLamprey card) {
         super(card);
     }
 

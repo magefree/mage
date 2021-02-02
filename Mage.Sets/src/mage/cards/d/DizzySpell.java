@@ -27,7 +27,7 @@ public final class DizzySpell extends CardImpl {
         this.addAbility(new TransmuteAbility("{1}{U}{U}"));
     }
 
-    public DizzySpell(final DizzySpell card) {
+    private DizzySpell(final DizzySpell card) {
         super(card);
     }
 

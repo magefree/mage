@@ -34,7 +34,7 @@ public final class JuniperOrderDruid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JuniperOrderDruid(final JuniperOrderDruid card) {
+    private JuniperOrderDruid(final JuniperOrderDruid card) {
         super(card);
     }
 

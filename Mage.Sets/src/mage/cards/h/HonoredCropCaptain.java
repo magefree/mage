@@ -31,7 +31,7 @@ public final class HonoredCropCaptain extends CardImpl {
 
     }
 
-    public HonoredCropCaptain(final HonoredCropCaptain card) {
+    private HonoredCropCaptain(final HonoredCropCaptain card) {
         super(card);
     }
 

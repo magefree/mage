@@ -64,7 +64,7 @@ public final class JabbaTheHutt extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JabbaTheHutt(final JabbaTheHutt card) {
+    private JabbaTheHutt(final JabbaTheHutt card) {
         super(card);
     }
 

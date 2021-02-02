@@ -49,7 +49,7 @@ public final class TortureChamber extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TortureChamber(final TortureChamber card) {
+    private TortureChamber(final TortureChamber card) {
         super(card);
     }
 

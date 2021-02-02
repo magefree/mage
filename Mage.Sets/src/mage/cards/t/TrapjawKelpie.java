@@ -29,7 +29,7 @@ public final class TrapjawKelpie extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public TrapjawKelpie(final TrapjawKelpie card) {
+    private TrapjawKelpie(final TrapjawKelpie card) {
         super(card);
     }
 

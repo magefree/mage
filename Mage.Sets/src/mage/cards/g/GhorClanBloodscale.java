@@ -31,7 +31,7 @@ public final class GhorClanBloodscale extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{3}{G}")));
     }
 
-    public GhorClanBloodscale(final GhorClanBloodscale card) {
+    private GhorClanBloodscale(final GhorClanBloodscale card) {
         super(card);
     }
 

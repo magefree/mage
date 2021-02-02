@@ -28,7 +28,7 @@ public final class LashOut extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public LashOut(final LashOut card) {
+    private LashOut(final LashOut card) {
         super(card);
     }
 

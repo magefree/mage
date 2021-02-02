@@ -29,7 +29,7 @@ public final class MelirasKeepers extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantHaveCountersSourceEffect()));
     }
 
-    public MelirasKeepers(final MelirasKeepers card) {
+    private MelirasKeepers(final MelirasKeepers card) {
         super(card);
     }
 

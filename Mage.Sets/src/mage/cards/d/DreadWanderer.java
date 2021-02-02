@@ -46,7 +46,7 @@ public final class DreadWanderer extends CardImpl {
         addAbility(ability);
     }
 
-    public DreadWanderer(final DreadWanderer card) {
+    private DreadWanderer(final DreadWanderer card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class SapseepForest extends CardImpl {
 
     }
 
-    public SapseepForest(final SapseepForest card) {
+    private SapseepForest(final SapseepForest card) {
         super(card);
     }
 

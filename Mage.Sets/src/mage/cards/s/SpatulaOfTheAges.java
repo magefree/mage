@@ -44,7 +44,7 @@ public final class SpatulaOfTheAges extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpatulaOfTheAges(final SpatulaOfTheAges card) {
+    private SpatulaOfTheAges(final SpatulaOfTheAges card) {
         super(card);
     }
 

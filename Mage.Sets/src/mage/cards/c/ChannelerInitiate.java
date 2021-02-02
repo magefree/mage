@@ -40,7 +40,7 @@ public final class ChannelerInitiate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChannelerInitiate(final ChannelerInitiate card) {
+    private ChannelerInitiate(final ChannelerInitiate card) {
         super(card);
     }
 

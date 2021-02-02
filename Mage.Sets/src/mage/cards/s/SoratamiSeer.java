@@ -42,7 +42,7 @@ public final class SoratamiSeer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoratamiSeer(final SoratamiSeer card) {
+    private SoratamiSeer(final SoratamiSeer card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class GoblinPsychopath extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new GoblinPsychopathEffect(), false));
     }
 
-    public GoblinPsychopath(final GoblinPsychopath card) {
+    private GoblinPsychopath(final GoblinPsychopath card) {
         super(card);
     }
 

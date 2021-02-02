@@ -38,7 +38,7 @@ public final class EnhancedSurveillance extends CardImpl {
         ));
     }
 
-    public EnhancedSurveillance(final EnhancedSurveillance card) {
+    private EnhancedSurveillance(final EnhancedSurveillance card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class Plateau extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public Plateau(final Plateau card) {
+    private Plateau(final Plateau card) {
         super(card);
     }
 

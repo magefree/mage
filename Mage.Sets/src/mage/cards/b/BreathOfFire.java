@@ -21,7 +21,7 @@ public final class BreathOfFire extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public BreathOfFire(final BreathOfFire card) {
+    private BreathOfFire(final BreathOfFire card) {
         super(card);
     }
 

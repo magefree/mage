@@ -47,7 +47,7 @@ public final class TheBattleOfEndor extends CardImpl {
 
     }
 
-    public TheBattleOfEndor(final TheBattleOfEndor card) {
+    private TheBattleOfEndor(final TheBattleOfEndor card) {
         super(card);
     }
 

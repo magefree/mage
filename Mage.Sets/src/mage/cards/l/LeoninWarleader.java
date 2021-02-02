@@ -30,7 +30,7 @@ public final class LeoninWarleader extends CardImpl {
         ));
     }
 
-    public LeoninWarleader(final LeoninWarleader card) {
+    private LeoninWarleader(final LeoninWarleader card) {
         super(card);
     }
 

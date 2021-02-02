@@ -21,7 +21,7 @@ public final class Pyroclasm extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(2, new FilterCreaturePermanent()));
     }
 
-    public Pyroclasm(final Pyroclasm card) {
+    private Pyroclasm(final Pyroclasm card) {
         super(card);
     }
 

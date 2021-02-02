@@ -28,7 +28,7 @@ public final class DeepSeaSerpent extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
     }
 
-    public DeepSeaSerpent(final DeepSeaSerpent card) {
+    private DeepSeaSerpent(final DeepSeaSerpent card) {
         super(card);
     }
 

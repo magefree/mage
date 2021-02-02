@@ -27,7 +27,7 @@ public final class ServantOfVolrath extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, ""), false));
     }
 
-    public ServantOfVolrath(final ServantOfVolrath card) {
+    private ServantOfVolrath(final ServantOfVolrath card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class DeathDenied extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(DeathDeniedAdjuster.instance);
     }
 
-    public DeathDenied(final DeathDenied card) {
+    private DeathDenied(final DeathDenied card) {
         super(card);
     }
 

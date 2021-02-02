@@ -39,7 +39,7 @@ public final class IllusoryWrappings extends CardImpl {
 
     }
 
-    public IllusoryWrappings(final IllusoryWrappings card) {
+    private IllusoryWrappings(final IllusoryWrappings card) {
         super(card);
     }
 

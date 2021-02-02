@@ -36,7 +36,7 @@ public final class RodOfSpanking extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RodOfSpanking(final RodOfSpanking card) {
+    private RodOfSpanking(final RodOfSpanking card) {
         super(card);
     }
 

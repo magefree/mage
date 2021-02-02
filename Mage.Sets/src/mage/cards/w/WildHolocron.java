@@ -57,7 +57,7 @@ public final class WildHolocron extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WildHolocron(final WildHolocron card) {
+    private WildHolocron(final WildHolocron card) {
         super(card);
     }
 

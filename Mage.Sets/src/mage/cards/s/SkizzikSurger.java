@@ -31,7 +31,7 @@ public final class SkizzikSurger extends CardImpl {
         this.addAbility(new EchoAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true))));
     }
 
-    public SkizzikSurger(final SkizzikSurger card) {
+    private SkizzikSurger(final SkizzikSurger card) {
         super(card);
     }
 

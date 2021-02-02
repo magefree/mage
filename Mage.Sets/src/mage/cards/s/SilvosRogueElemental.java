@@ -34,7 +34,7 @@ public final class SilvosRogueElemental extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
     }
 
-    public SilvosRogueElemental(final SilvosRogueElemental card) {
+    private SilvosRogueElemental(final SilvosRogueElemental card) {
         super(card);
     }
 

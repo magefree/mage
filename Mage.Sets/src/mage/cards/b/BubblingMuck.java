@@ -33,7 +33,7 @@ public final class BubblingMuck extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new BubblingMuckTriggeredAbility()));
     }
 
-    public BubblingMuck(final BubblingMuck card) {
+    private BubblingMuck(final BubblingMuck card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class BalanWanderingKnight extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalanWanderingKnightEffect(), new ManaCostsImpl("{1}{W}")));
     }
 
-    public BalanWanderingKnight(final BalanWanderingKnight card) {
+    private BalanWanderingKnight(final BalanWanderingKnight card) {
         super(card);
     }
 

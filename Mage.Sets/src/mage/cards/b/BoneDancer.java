@@ -32,7 +32,7 @@ public final class BoneDancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BoneDancer(final BoneDancer card) {
+    private BoneDancer(final BoneDancer card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class QuietContemplation extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public QuietContemplation(final QuietContemplation card) {
+    private QuietContemplation(final QuietContemplation card) {
         super(card);
     }
 

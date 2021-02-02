@@ -40,7 +40,7 @@ public final class Seizures extends CardImpl {
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new SeizuresEffect(), "enchanted creature"));
     }
 
-    public Seizures(final Seizures card) {
+    private Seizures(final Seizures card) {
         super(card);
     }
 

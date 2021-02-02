@@ -28,7 +28,7 @@ public final class WheelOfFate extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardAllEffect(7).setText(", then draws seven cards"));
     }
 
-    public WheelOfFate(final WheelOfFate card) {
+    private WheelOfFate(final WheelOfFate card) {
         super(card);
     }
 

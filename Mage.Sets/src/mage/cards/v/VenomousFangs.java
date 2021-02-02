@@ -37,7 +37,7 @@ public final class VenomousFangs extends CardImpl {
         
     }
 
-    public VenomousFangs(final VenomousFangs card) {
+    private VenomousFangs(final VenomousFangs card) {
         super(card);
     }
 

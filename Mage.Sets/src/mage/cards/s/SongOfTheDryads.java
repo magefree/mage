@@ -35,7 +35,7 @@ public final class SongOfTheDryads extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesColorlessForestLandEffect()));
     }
 
-    public SongOfTheDryads(final SongOfTheDryads card) {
+    private SongOfTheDryads(final SongOfTheDryads card) {
         super(card);
     }
 

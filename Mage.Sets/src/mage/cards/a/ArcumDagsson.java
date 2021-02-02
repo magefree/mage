@@ -48,7 +48,7 @@ public final class ArcumDagsson extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArcumDagsson(final ArcumDagsson card) {
+    private ArcumDagsson(final ArcumDagsson card) {
         super(card);
     }
 

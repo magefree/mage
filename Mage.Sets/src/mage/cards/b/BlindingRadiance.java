@@ -29,7 +29,7 @@ public final class BlindingRadiance extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public BlindingRadiance(final BlindingRadiance card) {
+    private BlindingRadiance(final BlindingRadiance card) {
         super(card);
     }
 

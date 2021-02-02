@@ -30,7 +30,7 @@ public final class SenatorPadmeAmidala extends CardImpl {
 
     }
 
-    public SenatorPadmeAmidala(final SenatorPadmeAmidala card) {
+    private SenatorPadmeAmidala(final SenatorPadmeAmidala card) {
         super(card);
     }
 

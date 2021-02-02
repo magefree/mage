@@ -36,7 +36,7 @@ public final class GuidedStrike extends CardImpl {
 
     }
 
-    public GuidedStrike(final GuidedStrike card) {
+    private GuidedStrike(final GuidedStrike card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class KiraGreatGlassSpinner extends CardImpl {
 
     }
 
-    public KiraGreatGlassSpinner(final KiraGreatGlassSpinner card) {
+    private KiraGreatGlassSpinner(final KiraGreatGlassSpinner card) {
         super(card);
     }
 

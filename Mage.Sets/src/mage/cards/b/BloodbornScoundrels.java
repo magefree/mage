@@ -37,7 +37,7 @@ public final class BloodbornScoundrels extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodbornScoundrels(final BloodbornScoundrels card) {
+    private BloodbornScoundrels(final BloodbornScoundrels card) {
         super(card);
     }
 

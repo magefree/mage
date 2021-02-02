@@ -29,7 +29,7 @@ public final class AesthirGlider extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public AesthirGlider(final AesthirGlider card) {
+    private AesthirGlider(final AesthirGlider card) {
         super(card);
     }
 

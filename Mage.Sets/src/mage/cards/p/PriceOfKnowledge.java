@@ -33,7 +33,7 @@ public final class PriceOfKnowledge extends CardImpl {
 
     }
 
-    public PriceOfKnowledge(final PriceOfKnowledge card) {
+    private PriceOfKnowledge(final PriceOfKnowledge card) {
         super(card);
     }
 

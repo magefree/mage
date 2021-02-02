@@ -36,7 +36,7 @@ public final class CloakOfMists extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAttachedEffect(AttachmentType.AURA)));
     }
 
-    public CloakOfMists(final CloakOfMists card) {
+    private CloakOfMists(final CloakOfMists card) {
         super(card);
     }
 

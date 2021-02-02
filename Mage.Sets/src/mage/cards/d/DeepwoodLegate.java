@@ -49,7 +49,7 @@ public final class DeepwoodLegate extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public DeepwoodLegate(final DeepwoodLegate card) {
+    private DeepwoodLegate(final DeepwoodLegate card) {
         super(card);
     }
 

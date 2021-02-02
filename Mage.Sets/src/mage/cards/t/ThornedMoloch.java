@@ -41,7 +41,7 @@ public final class ThornedMoloch extends CardImpl {
 
     }
 
-    public ThornedMoloch(final ThornedMoloch card) {
+    private ThornedMoloch(final ThornedMoloch card) {
         super(card);
     }
 

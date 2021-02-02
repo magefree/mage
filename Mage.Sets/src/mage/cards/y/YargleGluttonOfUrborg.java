@@ -25,7 +25,7 @@ public final class YargleGluttonOfUrborg extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public YargleGluttonOfUrborg(final YargleGluttonOfUrborg card) {
+    private YargleGluttonOfUrborg(final YargleGluttonOfUrborg card) {
         super(card);
     }
 

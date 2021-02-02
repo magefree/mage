@@ -28,7 +28,7 @@ public final class ViolentEruption extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{R}{R}")));
     }
 
-    public ViolentEruption(final ViolentEruption card) {
+    private ViolentEruption(final ViolentEruption card) {
         super(card);
     }
 

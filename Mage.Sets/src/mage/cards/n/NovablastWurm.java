@@ -37,7 +37,7 @@ public final class NovablastWurm extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new DestroyAllEffect(filter), false));
     }
 
-    public NovablastWurm(final NovablastWurm card) {
+    private NovablastWurm(final NovablastWurm card) {
         super(card);
     }
 

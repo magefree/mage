@@ -29,7 +29,7 @@ public final class UndercityShade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
-    public UndercityShade(final UndercityShade card) {
+    private UndercityShade(final UndercityShade card) {
         super(card);
     }
 

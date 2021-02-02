@@ -69,7 +69,7 @@ public final class ArahboRoarOfTheWorld extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArahboRoarOfTheWorld(final ArahboRoarOfTheWorld card) {
+    private ArahboRoarOfTheWorld(final ArahboRoarOfTheWorld card) {
         super(card);
     }
 

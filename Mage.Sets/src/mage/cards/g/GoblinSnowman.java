@@ -51,7 +51,7 @@ public final class GoblinSnowman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinSnowman(final GoblinSnowman card) {
+    private GoblinSnowman(final GoblinSnowman card) {
         super(card);
     }
 

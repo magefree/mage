@@ -30,7 +30,7 @@ public final class RockslideAmbush extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter)));                                                                                                     this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public RockslideAmbush(final RockslideAmbush card) {
+    private RockslideAmbush(final RockslideAmbush card) {
         super(card);
     }
 

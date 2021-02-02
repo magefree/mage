@@ -32,7 +32,7 @@ public final class PerilousPredicament extends CardImpl {
         getSpellAbility().addEffect(new PerilousPredicamentSacrificeOpponentsEffect());
     }
 
-    public PerilousPredicament(final PerilousPredicament card) {
+    private PerilousPredicament(final PerilousPredicament card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class InkTreaderNephilim extends CardImpl {
         this.addAbility(new InkTreaderNephilimTriggeredAbility());
     }
 
-    public InkTreaderNephilim(final InkTreaderNephilim card) {
+    private InkTreaderNephilim(final InkTreaderNephilim card) {
         super(card);
     }
 

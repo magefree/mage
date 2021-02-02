@@ -45,7 +45,7 @@ public final class DisruptingShoal extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public DisruptingShoal(final DisruptingShoal card) {
+    private DisruptingShoal(final DisruptingShoal card) {
         super(card);
     }
 

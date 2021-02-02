@@ -34,7 +34,7 @@ public final class ShelkinBrownie extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShelkinBrownie(final ShelkinBrownie card) {
+    private ShelkinBrownie(final ShelkinBrownie card) {
         super(card);
     }
 

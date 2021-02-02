@@ -42,7 +42,7 @@ public final class Opportunist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Opportunist(final Opportunist card) {
+    private Opportunist(final Opportunist card) {
         super(card);
     }
 

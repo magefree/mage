@@ -27,7 +27,7 @@ public final class AngelOfMercy extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3), false));
     }
 
-    public AngelOfMercy(final AngelOfMercy card) {
+    private AngelOfMercy(final AngelOfMercy card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class Oust extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Oust(final Oust card) {
+    private Oust(final Oust card) {
         super(card);
     }
 

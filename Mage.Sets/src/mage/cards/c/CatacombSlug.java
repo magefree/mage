@@ -22,7 +22,7 @@ public final class CatacombSlug extends CardImpl {
         this.toughness = new MageInt(6);
     }
 
-    public CatacombSlug(final CatacombSlug card) {
+    private CatacombSlug(final CatacombSlug card) {
         super(card);
     }
 

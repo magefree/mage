@@ -31,7 +31,7 @@ public final class TeekasDragon extends CardImpl {
         this.addAbility(new RampageAbility(4));
     }
 
-    public TeekasDragon(final TeekasDragon card) {
+    private TeekasDragon(final TeekasDragon card) {
         super(card);
     }
 

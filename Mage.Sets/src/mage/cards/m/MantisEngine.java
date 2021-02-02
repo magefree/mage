@@ -34,7 +34,7 @@ public final class MantisEngine extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(2)));
     }
 
-    public MantisEngine(final MantisEngine card) {
+    private MantisEngine(final MantisEngine card) {
         super(card);
     }
 

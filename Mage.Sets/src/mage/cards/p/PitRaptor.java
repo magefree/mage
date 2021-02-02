@@ -34,7 +34,7 @@ public final class PitRaptor extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{2}{B}{B}")), TargetController.YOU, false));
     }
 
-    public PitRaptor(final PitRaptor card) {
+    private PitRaptor(final PitRaptor card) {
         super(card);
     }
 

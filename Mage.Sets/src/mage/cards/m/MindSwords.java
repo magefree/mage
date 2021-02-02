@@ -51,7 +51,7 @@ public final class MindSwords extends CardImpl {
         this.getSpellAbility().addEffect(new MindSwordsEffect());
     }
 
-    public MindSwords(final MindSwords card) {
+    private MindSwords(final MindSwords card) {
         super(card);
     }
 

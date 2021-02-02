@@ -30,7 +30,7 @@ public final class ScreechingBuzzard extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT), false));
     }
 
-    public ScreechingBuzzard(final ScreechingBuzzard card) {
+    private ScreechingBuzzard(final ScreechingBuzzard card) {
         super(card);
     }
 

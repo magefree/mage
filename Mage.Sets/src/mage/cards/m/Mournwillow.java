@@ -44,7 +44,7 @@ public final class Mournwillow extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Mournwillow(final Mournwillow card) {
+    private Mournwillow(final Mournwillow card) {
         super(card);
     }
 

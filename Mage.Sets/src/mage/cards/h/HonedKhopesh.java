@@ -31,7 +31,7 @@ public final class HonedKhopesh extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public HonedKhopesh(final HonedKhopesh card) {
+    private HonedKhopesh(final HonedKhopesh card) {
         super(card);
     }
 

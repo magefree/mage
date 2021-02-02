@@ -32,7 +32,7 @@ public final class ScourTheLaboratory extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
     }
 
-    public ScourTheLaboratory(final ScourTheLaboratory card) {
+    private ScourTheLaboratory(final ScourTheLaboratory card) {
         super(card);
     }
 

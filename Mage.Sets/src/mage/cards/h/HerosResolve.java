@@ -31,7 +31,7 @@ TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 5, Duration.WhileOnBattlefield)));
     }
 
-    public HerosResolve(final HerosResolve card) {
+    private HerosResolve(final HerosResolve card) {
         super(card);
     }
 

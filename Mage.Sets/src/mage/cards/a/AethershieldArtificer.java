@@ -51,7 +51,7 @@ public final class AethershieldArtificer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AethershieldArtificer(final AethershieldArtificer card) {
+    private AethershieldArtificer(final AethershieldArtificer card) {
         super(card);
     }
 

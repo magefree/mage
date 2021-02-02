@@ -30,7 +30,7 @@ public final class CowerInFear extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false));
     }
 
-    public CowerInFear(final CowerInFear card) {
+    private CowerInFear(final CowerInFear card) {
         super(card);
     }
 

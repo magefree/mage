@@ -47,7 +47,7 @@ public final class SootImp extends CardImpl {
 
     }
 
-    public SootImp(final SootImp card) {
+    private SootImp(final SootImp card) {
         super(card);
     }
 

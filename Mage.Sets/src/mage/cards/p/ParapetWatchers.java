@@ -30,7 +30,7 @@ public final class ParapetWatchers extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W/U}")));
     }
 
-    public ParapetWatchers(final ParapetWatchers card) {
+    private ParapetWatchers(final ParapetWatchers card) {
         super(card);
     }
 

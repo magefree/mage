@@ -25,7 +25,7 @@ public final class HighspireInfusion extends CardImpl {
         getSpellAbility().addEffect(new GetEnergyCountersControllerEffect(2));
     }
 
-    public HighspireInfusion(final HighspireInfusion card) {
+    private HighspireInfusion(final HighspireInfusion card) {
         super(card);
     }
 

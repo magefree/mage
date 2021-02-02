@@ -30,7 +30,7 @@ public final class IgneousGolem extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{2}")));
     }
 
-    public IgneousGolem(final IgneousGolem card) {
+    private IgneousGolem(final IgneousGolem card) {
         super(card);
     }
 

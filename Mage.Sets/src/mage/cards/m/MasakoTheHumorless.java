@@ -34,7 +34,7 @@ public final class MasakoTheHumorless extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlockTappedEffect()));
     }
 
-    public MasakoTheHumorless(final MasakoTheHumorless card) {
+    private MasakoTheHumorless(final MasakoTheHumorless card) {
         super(card);
     }
 

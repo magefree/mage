@@ -46,7 +46,7 @@ public final class TheHauntOfHightower extends CardImpl {
         ));
     }
 
-    public TheHauntOfHightower(final TheHauntOfHightower card) {
+    private TheHauntOfHightower(final TheHauntOfHightower card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class HarborGuardian extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new HarborGuardianEffect(), false));
     }
 
-    public HarborGuardian(final HarborGuardian card) {
+    private HarborGuardian(final HarborGuardian card) {
         super(card);
     }
 

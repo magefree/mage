@@ -46,7 +46,7 @@ public final class KragmaWarcaller extends CardImpl {
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(effect, false, filter1, true));
     }
 
-    public KragmaWarcaller(final KragmaWarcaller card) {
+    private KragmaWarcaller(final KragmaWarcaller card) {
         super(card);
     }
 

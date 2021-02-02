@@ -28,7 +28,7 @@ public final class Befuddle extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Befuddle(final Befuddle card) {
+    private Befuddle(final Befuddle card) {
         super(card);
     }
 

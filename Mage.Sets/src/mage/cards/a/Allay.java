@@ -26,7 +26,7 @@ public final class Allay extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public Allay(final Allay card) {
+    private Allay(final Allay card) {
         super(card);
     }
 

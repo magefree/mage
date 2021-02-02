@@ -39,7 +39,7 @@ public final class BroodOfCockroaches extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new BroodOfCockroachesEffect(), false, true));
     }
 
-    public BroodOfCockroaches(final BroodOfCockroaches card) {
+    private BroodOfCockroaches(final BroodOfCockroaches card) {
         super(card);
     }
 

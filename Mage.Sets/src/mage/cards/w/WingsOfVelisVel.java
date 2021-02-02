@@ -36,7 +36,7 @@ public final class WingsOfVelisVel extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WingsOfVelisVel(final WingsOfVelisVel card) {
+    private WingsOfVelisVel(final WingsOfVelisVel card) {
         super(card);
     }
 

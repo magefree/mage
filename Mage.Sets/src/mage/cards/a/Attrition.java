@@ -40,7 +40,7 @@ public final class Attrition extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Attrition(final Attrition card) {
+    private Attrition(final Attrition card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class NiblisOfTheBreath extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NiblisOfTheBreath(final NiblisOfTheBreath card) {
+    private NiblisOfTheBreath(final NiblisOfTheBreath card) {
         super(card);
     }
 

@@ -20,7 +20,7 @@ public final class TolarianWinds extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardHandDrawSameNumberSourceEffect());
     }
 
-    public TolarianWinds(final TolarianWinds card) {
+    private TolarianWinds(final TolarianWinds card) {
         super(card);
     }
 

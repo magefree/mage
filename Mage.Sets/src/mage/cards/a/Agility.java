@@ -38,7 +38,7 @@ public final class Agility extends CardImpl {
 
     }
 
-    public Agility(final Agility card) {
+    private Agility(final Agility card) {
         super(card);
     }
 

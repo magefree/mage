@@ -31,7 +31,7 @@ public final class Necrologia extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(GetXValue.instance));
     }
 
-    public Necrologia(final Necrologia card) {
+    private Necrologia(final Necrologia card) {
         super(card);
     }
 

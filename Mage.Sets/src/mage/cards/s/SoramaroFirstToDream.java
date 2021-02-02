@@ -50,7 +50,7 @@ public final class SoramaroFirstToDream extends CardImpl {
 
     }
 
-    public SoramaroFirstToDream(final SoramaroFirstToDream card) {
+    private SoramaroFirstToDream(final SoramaroFirstToDream card) {
         super(card);
     }
 

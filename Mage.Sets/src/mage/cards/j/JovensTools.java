@@ -38,7 +38,7 @@ public final class JovensTools extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JovensTools(final JovensTools card) {
+    private JovensTools(final JovensTools card) {
         super(card);
     }
 

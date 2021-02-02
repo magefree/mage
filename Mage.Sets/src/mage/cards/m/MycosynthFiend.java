@@ -31,7 +31,7 @@ public final class MycosynthFiend extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)));
     }
 
-    public MycosynthFiend(final MycosynthFiend card) {
+    private MycosynthFiend(final MycosynthFiend card) {
         super(card);
     }
 

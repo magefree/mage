@@ -35,7 +35,7 @@ public final class DeepWater extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeepWater(final DeepWater card) {
+    private DeepWater(final DeepWater card) {
         super(card);
     }
 

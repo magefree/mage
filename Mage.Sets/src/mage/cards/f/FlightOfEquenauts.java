@@ -30,7 +30,7 @@ public final class FlightOfEquenauts extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public FlightOfEquenauts(final FlightOfEquenauts card) {
+    private FlightOfEquenauts(final FlightOfEquenauts card) {
         super(card);
     }
 

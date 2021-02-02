@@ -52,7 +52,7 @@ public final class SomberwaldAlpha extends CardImpl {
         this.addAbility(ability);  
     }
 
-    public SomberwaldAlpha(final SomberwaldAlpha card) {
+    private SomberwaldAlpha(final SomberwaldAlpha card) {
         super(card);
     }
 

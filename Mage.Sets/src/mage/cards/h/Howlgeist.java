@@ -31,7 +31,7 @@ public final class Howlgeist extends CardImpl {
         this.addAbility(new UndyingAbility());
     }
 
-    public Howlgeist(final Howlgeist card) {
+    private Howlgeist(final Howlgeist card) {
         super(card);
     }
 

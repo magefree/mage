@@ -52,7 +52,7 @@ public final class SiegeDragon extends CardImpl {
         this.addAbility(new SiegeDragonAttacksTriggeredAbility());
     }
 
-    public SiegeDragon(final SiegeDragon card) {
+    private SiegeDragon(final SiegeDragon card) {
         super(card);
     }
 

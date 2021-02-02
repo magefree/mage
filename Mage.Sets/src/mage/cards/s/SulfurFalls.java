@@ -40,7 +40,7 @@ public final class SulfurFalls extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public SulfurFalls(final SulfurFalls card) {
+    private SulfurFalls(final SulfurFalls card) {
         super(card);
     }
 

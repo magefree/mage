@@ -53,7 +53,7 @@ public final class DementiaSliver extends CardImpl {
         ));
     }
 
-    public DementiaSliver(final DementiaSliver card) {
+    private DementiaSliver(final DementiaSliver card) {
         super(card);
     }
 

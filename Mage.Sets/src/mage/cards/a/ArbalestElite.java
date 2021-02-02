@@ -38,7 +38,7 @@ public final class ArbalestElite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArbalestElite(final ArbalestElite card) {
+    private ArbalestElite(final ArbalestElite card) {
         super(card);
     }
 

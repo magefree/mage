@@ -38,7 +38,7 @@ public final class AdvancedStitchwing extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AdvancedStitchwing(final AdvancedStitchwing card) {
+    private AdvancedStitchwing(final AdvancedStitchwing card) {
         super(card);
     }
 

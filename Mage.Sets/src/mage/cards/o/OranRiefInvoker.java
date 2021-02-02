@@ -40,7 +40,7 @@ public final class OranRiefInvoker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OranRiefInvoker(final OranRiefInvoker card) {
+    private OranRiefInvoker(final OranRiefInvoker card) {
         super(card);
     }
 

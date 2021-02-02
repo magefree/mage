@@ -25,7 +25,7 @@ public final class KasimirTheLoneWolf extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public KasimirTheLoneWolf(final KasimirTheLoneWolf card) {
+    private KasimirTheLoneWolf(final KasimirTheLoneWolf card) {
         super(card);
     }
 

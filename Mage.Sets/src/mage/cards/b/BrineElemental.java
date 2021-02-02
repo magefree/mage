@@ -38,7 +38,7 @@ public final class BrineElemental extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BrineElementalEffect()));
     }
 
-    public BrineElemental(final BrineElemental card) {
+    private BrineElemental(final BrineElemental card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class DarigaazTheIgniter extends CardImpl {
                 new DarigaazTheIgniterEffect(), new ManaCostsImpl("{2}{R}")), false, true));
     }
 
-    public DarigaazTheIgniter(final DarigaazTheIgniter card) {
+    private DarigaazTheIgniter(final DarigaazTheIgniter card) {
         super(card);
     }
 

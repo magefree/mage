@@ -41,7 +41,7 @@ public final class SoulLink extends CardImpl {
         this.addAbility(new DealtDamageAttachedTriggeredAbility(new GainLifeEffect(new NumericSetToEffectValues("that much", "damage")), false));
     }
 
-    public SoulLink(final SoulLink card) {
+    private SoulLink(final SoulLink card) {
         super(card);
     }
 

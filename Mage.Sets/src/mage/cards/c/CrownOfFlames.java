@@ -39,7 +39,7 @@ public final class CrownOfFlames extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public CrownOfFlames(final CrownOfFlames card) {
+    private CrownOfFlames(final CrownOfFlames card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class AnHavvaConstable extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnHavvaConstableEffect()));
     }
 
-    public AnHavvaConstable(final AnHavvaConstable card) {
+    private AnHavvaConstable(final AnHavvaConstable card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class FyndhornBrownie extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FyndhornBrownie(final FyndhornBrownie card) {
+    private FyndhornBrownie(final FyndhornBrownie card) {
         super(card);
     }
 

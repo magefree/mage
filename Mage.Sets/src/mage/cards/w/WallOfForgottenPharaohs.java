@@ -59,7 +59,7 @@ public final class WallOfForgottenPharaohs extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WallOfForgottenPharaohs(final WallOfForgottenPharaohs card) {
+    private WallOfForgottenPharaohs(final WallOfForgottenPharaohs card) {
         super(card);
     }
 

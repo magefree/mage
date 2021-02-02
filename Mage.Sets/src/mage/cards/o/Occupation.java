@@ -39,7 +39,7 @@ public final class Occupation extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Occupation(final Occupation card) {
+    private Occupation(final Occupation card) {
         super(card);
     }
 

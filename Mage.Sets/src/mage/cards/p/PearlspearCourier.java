@@ -54,7 +54,7 @@ public final class PearlspearCourier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PearlspearCourier(final PearlspearCourier card) {
+    private PearlspearCourier(final PearlspearCourier card) {
         super(card);
     }
 

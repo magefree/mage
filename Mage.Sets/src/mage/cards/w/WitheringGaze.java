@@ -35,7 +35,7 @@ public final class WitheringGaze extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public WitheringGaze(final WitheringGaze card) {
+    private WitheringGaze(final WitheringGaze card) {
         super(card);
     }
 

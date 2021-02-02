@@ -44,7 +44,7 @@ public final class DoomsdaySpecter extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardCardYouChooseTargetEffect(), false, true));
     }
 
-    public DoomsdaySpecter(final DoomsdaySpecter card) {
+    private DoomsdaySpecter(final DoomsdaySpecter card) {
         super(card);
     }
 

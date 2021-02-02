@@ -39,7 +39,7 @@ public final class TreefolkHealer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TreefolkHealer(final TreefolkHealer card) {
+    private TreefolkHealer(final TreefolkHealer card) {
         super(card);
     }
 

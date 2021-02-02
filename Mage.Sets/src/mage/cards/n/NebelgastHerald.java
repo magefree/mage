@@ -43,7 +43,7 @@ public final class NebelgastHerald extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NebelgastHerald(final NebelgastHerald card) {
+    private NebelgastHerald(final NebelgastHerald card) {
         super(card);
     }
 

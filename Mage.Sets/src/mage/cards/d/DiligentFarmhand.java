@@ -38,7 +38,7 @@ public final class DiligentFarmhand extends CardImpl {
         this.addAbility(mage.cards.m.MuscleBurst.getCountAsAbility());
     }
 
-    public DiligentFarmhand(final DiligentFarmhand card) {
+    private DiligentFarmhand(final DiligentFarmhand card) {
         super(card);
     }
 

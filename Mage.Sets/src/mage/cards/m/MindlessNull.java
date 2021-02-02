@@ -32,7 +32,7 @@ public final class MindlessNull extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockUnlessYouControlSourceEffect(filter)));
     }
 
-    public MindlessNull(final MindlessNull card) {
+    private MindlessNull(final MindlessNull card) {
         super(card);
     }
 

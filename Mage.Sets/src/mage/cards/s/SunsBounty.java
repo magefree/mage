@@ -25,7 +25,7 @@ public final class SunsBounty extends CardImpl {
         this.addAbility(new RecoverAbility(new ManaCostsImpl("{1}{W}"), this));
     }
 
-    public SunsBounty(final SunsBounty card) {
+    private SunsBounty(final SunsBounty card) {
         super(card);
     }
 

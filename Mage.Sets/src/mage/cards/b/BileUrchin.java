@@ -32,7 +32,7 @@ public final class BileUrchin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BileUrchin(final BileUrchin card) {
+    private BileUrchin(final BileUrchin card) {
         super(card);
     }
 

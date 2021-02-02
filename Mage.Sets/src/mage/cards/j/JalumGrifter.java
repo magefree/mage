@@ -52,7 +52,7 @@ public final class JalumGrifter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JalumGrifter(final JalumGrifter card) {
+    private JalumGrifter(final JalumGrifter card) {
         super(card);
     }
 

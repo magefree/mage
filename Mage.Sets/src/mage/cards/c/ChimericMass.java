@@ -41,7 +41,7 @@ public final class ChimericMass extends CardImpl {
                 "", Duration.EndOfTurn, false, true), new GenericManaCost(1)));
     }
 
-    public ChimericMass(final ChimericMass card) {
+    private ChimericMass(final ChimericMass card) {
         super(card);
     }
 

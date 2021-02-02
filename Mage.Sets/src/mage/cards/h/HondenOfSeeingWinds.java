@@ -36,7 +36,7 @@ public final class HondenOfSeeingWinds extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)), TargetController.YOU, false));
     }
 
-    public HondenOfSeeingWinds(final HondenOfSeeingWinds card) {
+    private HondenOfSeeingWinds(final HondenOfSeeingWinds card) {
         super(card);
     }
 

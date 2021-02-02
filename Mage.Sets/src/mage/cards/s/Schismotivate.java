@@ -41,7 +41,7 @@ public final class Schismotivate extends CardImpl {
         this.getSpellAbility().addTarget(target2);
     }
 
-    public Schismotivate(final Schismotivate card) {
+    private Schismotivate(final Schismotivate card) {
         super(card);
     }
 

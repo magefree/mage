@@ -42,7 +42,7 @@ public final class DawnOfTheDead extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DawnOfTheDead(final DawnOfTheDead card) {
+    private DawnOfTheDead(final DawnOfTheDead card) {
         super(card);
     }
 

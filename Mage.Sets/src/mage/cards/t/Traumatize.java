@@ -24,7 +24,7 @@ public final class Traumatize extends CardImpl {
         this.getSpellAbility().addEffect(new TraumatizeEffect());
     }
 
-    public Traumatize(final Traumatize card) {
+    private Traumatize(final Traumatize card) {
         super(card);
     }
 

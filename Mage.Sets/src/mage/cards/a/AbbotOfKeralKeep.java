@@ -39,7 +39,7 @@ public final class AbbotOfKeralKeep extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AbbotOfKeralKeepExileEffect()));
     }
 
-    public AbbotOfKeralKeep(final AbbotOfKeralKeep card) {
+    private AbbotOfKeralKeep(final AbbotOfKeralKeep card) {
         super(card);
     }
 

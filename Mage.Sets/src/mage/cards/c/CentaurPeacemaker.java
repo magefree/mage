@@ -33,7 +33,7 @@ public final class CentaurPeacemaker extends CardImpl {
         ));
     }
 
-    public CentaurPeacemaker(final CentaurPeacemaker card) {
+    private CentaurPeacemaker(final CentaurPeacemaker card) {
         super(card);
     }
 

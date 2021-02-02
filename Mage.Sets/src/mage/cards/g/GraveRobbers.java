@@ -38,7 +38,7 @@ public final class GraveRobbers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GraveRobbers(final GraveRobbers card) {
+    private GraveRobbers(final GraveRobbers card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class LilianaUntouchedByDeath extends CardImpl {
         this.addAbility(new LoyaltyAbility(new LilianaUntouchedByDeathGraveyardEffect(), -3));
     }
 
-    public LilianaUntouchedByDeath(final LilianaUntouchedByDeath card) {
+    private LilianaUntouchedByDeath(final LilianaUntouchedByDeath card) {
         super(card);
     }
 

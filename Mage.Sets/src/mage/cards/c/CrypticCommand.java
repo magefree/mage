@@ -56,7 +56,7 @@ public final class CrypticCommand extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
     }
 
-    public CrypticCommand(final CrypticCommand card) {
+    private CrypticCommand(final CrypticCommand card) {
         super(card);
     }
 

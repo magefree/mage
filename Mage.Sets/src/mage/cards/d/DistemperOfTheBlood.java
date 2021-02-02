@@ -36,7 +36,7 @@ public final class DistemperOfTheBlood extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{R}")));
     }
 
-    public DistemperOfTheBlood(final DistemperOfTheBlood card) {
+    private DistemperOfTheBlood(final DistemperOfTheBlood card) {
         super(card);
     }
 

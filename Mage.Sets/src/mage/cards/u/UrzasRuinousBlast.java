@@ -35,7 +35,7 @@ public final class UrzasRuinousBlast extends CardImpl {
         this.getSpellAbility().addEffect(new ExileAllEffect(filter));
     }
 
-    public UrzasRuinousBlast(final UrzasRuinousBlast card) {
+    private UrzasRuinousBlast(final UrzasRuinousBlast card) {
         super(card);
     }
 

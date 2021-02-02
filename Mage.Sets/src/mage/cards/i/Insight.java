@@ -31,7 +31,7 @@ public final class Insight extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, false));
     }
 
-    public Insight(final Insight card) {
+    private Insight(final Insight card) {
         super(card);
     }
 

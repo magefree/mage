@@ -48,7 +48,7 @@ public final class Nihilith extends CardImpl {
         
     }
 
-    public Nihilith(final Nihilith card) {
+    private Nihilith(final Nihilith card) {
         super(card);
     }
 

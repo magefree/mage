@@ -37,7 +37,7 @@ public final class NomadsEnKor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NomadsEnKor(final NomadsEnKor card) {
+    private NomadsEnKor(final NomadsEnKor card) {
         super(card);
     }
 

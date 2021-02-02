@@ -40,7 +40,7 @@ public final class RiskyMove extends CardImpl {
         this.addAbility(new RiskyMoveTriggeredAbility());
     }
 
-    public RiskyMove(final RiskyMove card) {
+    private RiskyMove(final RiskyMove card) {
         super(card);
     }
 

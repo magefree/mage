@@ -47,7 +47,7 @@ public final class GrangerGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GrangerGuildmage(final GrangerGuildmage card) {
+    private GrangerGuildmage(final GrangerGuildmage card) {
         super(card);
     }
 

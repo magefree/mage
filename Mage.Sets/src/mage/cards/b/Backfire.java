@@ -39,7 +39,7 @@ public final class Backfire extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DamageAttachedControllerEffect(new NumericSetToEffectValues("that much", "damage")), "enchanted creature", false, true, false, TargetController.YOU));
     }
 
-    public Backfire(final Backfire card) {
+    private Backfire(final Backfire card) {
         super(card);
     }
 

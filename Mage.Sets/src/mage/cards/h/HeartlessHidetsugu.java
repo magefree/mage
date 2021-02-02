@@ -32,7 +32,7 @@ public final class HeartlessHidetsugu extends CardImpl {
 
     }
 
-    public HeartlessHidetsugu(final HeartlessHidetsugu card) {
+    private HeartlessHidetsugu(final HeartlessHidetsugu card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class MindlockOrb extends CardImpl {
 
     }
 
-    public MindlockOrb(final MindlockOrb card) {
+    private MindlockOrb(final MindlockOrb card) {
         super(card);
     }
 

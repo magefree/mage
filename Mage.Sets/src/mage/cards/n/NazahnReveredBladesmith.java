@@ -66,7 +66,7 @@ public final class NazahnReveredBladesmith extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NazahnReveredBladesmith(final NazahnReveredBladesmith card) {
+    private NazahnReveredBladesmith(final NazahnReveredBladesmith card) {
         super(card);
     }
 

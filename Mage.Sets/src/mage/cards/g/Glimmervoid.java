@@ -32,7 +32,7 @@ public final class Glimmervoid extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public Glimmervoid(final Glimmervoid card) {
+    private Glimmervoid(final Glimmervoid card) {
         super(card);
     }
 

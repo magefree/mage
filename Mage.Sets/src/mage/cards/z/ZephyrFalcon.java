@@ -27,7 +27,7 @@ public final class ZephyrFalcon extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public ZephyrFalcon(final ZephyrFalcon card) {
+    private ZephyrFalcon(final ZephyrFalcon card) {
         super(card);
     }
 

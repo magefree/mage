@@ -44,7 +44,7 @@ public final class IsolationZone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IsolationZone(final IsolationZone card) {
+    private IsolationZone(final IsolationZone card) {
         super(card);
     }
 

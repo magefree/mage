@@ -47,7 +47,7 @@ public final class WerewolfRansacker extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public WerewolfRansacker(final WerewolfRansacker card) {
+    private WerewolfRansacker(final WerewolfRansacker card) {
         super(card);
     }
 

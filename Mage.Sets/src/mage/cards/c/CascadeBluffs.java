@@ -38,7 +38,7 @@ public final class CascadeBluffs extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public CascadeBluffs(final CascadeBluffs card) {
+    private CascadeBluffs(final CascadeBluffs card) {
         super(card);
     }
 

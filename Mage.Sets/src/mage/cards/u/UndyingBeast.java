@@ -32,7 +32,7 @@ public final class UndyingBeast extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new UndyingBeastEffect()));
     }
 
-    public UndyingBeast(final UndyingBeast card) {
+    private UndyingBeast(final UndyingBeast card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class Chronatog extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Chronatog(final Chronatog card) {
+    private Chronatog(final Chronatog card) {
         super(card);
     }
 

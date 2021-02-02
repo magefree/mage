@@ -56,7 +56,7 @@ public final class AngelOfSerenity extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.HAND, false, true), false));
     }
 
-    public AngelOfSerenity(final AngelOfSerenity card) {
+    private AngelOfSerenity(final AngelOfSerenity card) {
         super(card);
     }
 

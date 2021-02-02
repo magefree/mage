@@ -44,7 +44,7 @@ public final class ShaperApprentice extends CardImpl {
                         new PermanentsOnTheBattlefieldCondition(filter), "{this} has flying as long as you control another Merfolk")));
     }
 
-    public ShaperApprentice(final ShaperApprentice card) {
+    private ShaperApprentice(final ShaperApprentice card) {
         super(card);
     }
 

@@ -61,7 +61,7 @@ public final class AnimateDead extends CardImpl {
 
     }
 
-    public AnimateDead(final AnimateDead card) {
+    private AnimateDead(final AnimateDead card) {
         super(card);
     }
 

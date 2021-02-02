@@ -40,7 +40,7 @@ public final class KavuTitan extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KavuTitan(final KavuTitan card) {
+    private KavuTitan(final KavuTitan card) {
         super(card);
     }
 

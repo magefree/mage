@@ -62,7 +62,7 @@ public final class KeldonBattlewagon extends CardImpl {
 
     }
 
-    public KeldonBattlewagon(final KeldonBattlewagon card) {
+    private KeldonBattlewagon(final KeldonBattlewagon card) {
         super(card);
     }
 

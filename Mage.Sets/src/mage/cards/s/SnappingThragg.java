@@ -40,7 +40,7 @@ public final class SnappingThragg extends CardImpl {
 
     }
 
-    public SnappingThragg(final SnappingThragg card) {
+    private SnappingThragg(final SnappingThragg card) {
         super(card);
     }
 

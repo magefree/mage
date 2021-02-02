@@ -27,7 +27,7 @@ public final class KhalniGarden extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public KhalniGarden(final KhalniGarden card) {
+    private KhalniGarden(final KhalniGarden card) {
         super(card);
     }
 

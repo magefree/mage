@@ -30,7 +30,7 @@ public final class RiotGear extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public RiotGear(final RiotGear card) {
+    private RiotGear(final RiotGear card) {
         super(card);
     }
 

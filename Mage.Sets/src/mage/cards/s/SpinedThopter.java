@@ -25,7 +25,7 @@ public final class SpinedThopter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SpinedThopter(final SpinedThopter card) {
+    private SpinedThopter(final SpinedThopter card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class LowlandOaf extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LowlandOaf(final LowlandOaf card) {
+    private LowlandOaf(final LowlandOaf card) {
         super(card);
     }
 

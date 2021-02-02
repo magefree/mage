@@ -45,7 +45,7 @@ public final class EndlessWhispers extends CardImpl {
 
     }
 
-    public EndlessWhispers(final EndlessWhispers card) {
+    private EndlessWhispers(final EndlessWhispers card) {
         super(card);
     }
 

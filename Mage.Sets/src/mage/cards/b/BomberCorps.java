@@ -31,7 +31,7 @@ public final class BomberCorps extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BomberCorps(final BomberCorps card) {
+    private BomberCorps(final BomberCorps card) {
         super(card);
     }
 

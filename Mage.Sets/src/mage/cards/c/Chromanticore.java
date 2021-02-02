@@ -62,7 +62,7 @@ public final class Chromanticore extends CardImpl {
         
     }
 
-    public Chromanticore(final Chromanticore card) {
+    private Chromanticore(final Chromanticore card) {
         super(card);
     }
 

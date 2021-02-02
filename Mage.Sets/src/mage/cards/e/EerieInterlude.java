@@ -37,7 +37,7 @@ public final class EerieInterlude extends CardImpl {
 
     }
 
-    public EerieInterlude(final EerieInterlude card) {
+    private EerieInterlude(final EerieInterlude card) {
         super(card);
     }
 

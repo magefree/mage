@@ -32,7 +32,7 @@ public final class DutyBoundDead extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{3}{B}")));
     }
 
-    public DutyBoundDead(final DutyBoundDead card) {
+    private DutyBoundDead(final DutyBoundDead card) {
         super(card);
     }
 

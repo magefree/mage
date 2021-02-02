@@ -31,7 +31,7 @@ public final class CoatWithVenom extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public CoatWithVenom(final CoatWithVenom card) {
+    private CoatWithVenom(final CoatWithVenom card) {
         super(card);
     }
 

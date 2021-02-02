@@ -38,7 +38,7 @@ public final class CullingDais extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CullingDais(final CullingDais card) {
+    private CullingDais(final CullingDais card) {
         super(card);
     }
 

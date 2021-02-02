@@ -35,7 +35,7 @@ public final class EchoTracer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EchoTracer(final EchoTracer card) {
+    private EchoTracer(final EchoTracer card) {
         super(card);
     }
 

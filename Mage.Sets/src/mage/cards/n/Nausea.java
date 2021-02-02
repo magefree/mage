@@ -22,7 +22,7 @@ public final class Nausea extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn));
     }
 
-    public Nausea(final Nausea card) {
+    private Nausea(final Nausea card) {
         super(card);
     }
 

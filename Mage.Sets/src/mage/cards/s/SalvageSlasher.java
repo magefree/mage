@@ -36,7 +36,7 @@ public final class SalvageSlasher extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public SalvageSlasher(final SalvageSlasher card) {
+    private SalvageSlasher(final SalvageSlasher card) {
         super(card);
     }
 

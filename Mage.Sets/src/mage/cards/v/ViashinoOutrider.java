@@ -26,7 +26,7 @@ public final class ViashinoOutrider extends CardImpl {
     this.addAbility(new EchoAbility("{2}{R}"));
     }
 
-    public ViashinoOutrider(final ViashinoOutrider card) {
+    private ViashinoOutrider(final ViashinoOutrider card) {
         super(card);
     }
 

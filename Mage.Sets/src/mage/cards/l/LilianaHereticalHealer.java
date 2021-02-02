@@ -55,7 +55,7 @@ public final class LilianaHereticalHealer extends CardImpl {
                 new CreateTokenEffect(new ZombieToken())), false, filter));
     }
 
-    public LilianaHereticalHealer(final LilianaHereticalHealer card) {
+    private LilianaHereticalHealer(final LilianaHereticalHealer card) {
         super(card);
     }
 

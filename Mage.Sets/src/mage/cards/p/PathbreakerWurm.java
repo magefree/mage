@@ -35,7 +35,7 @@ public final class PathbreakerWurm extends CardImpl {
 
     }
 
-    public PathbreakerWurm(final PathbreakerWurm card) {
+    private PathbreakerWurm(final PathbreakerWurm card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class TrustedAdvisor extends CardImpl {
 
     }
 
-    public TrustedAdvisor(final TrustedAdvisor card) {
+    private TrustedAdvisor(final TrustedAdvisor card) {
         super(card);
     }
 

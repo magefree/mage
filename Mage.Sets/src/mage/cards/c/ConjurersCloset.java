@@ -26,7 +26,7 @@ public final class ConjurersCloset extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ConjurersCloset(final ConjurersCloset card) {
+    private ConjurersCloset(final ConjurersCloset card) {
         super(card);
     }
 

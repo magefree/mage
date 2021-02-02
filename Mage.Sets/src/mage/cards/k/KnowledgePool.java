@@ -43,7 +43,7 @@ public final class KnowledgePool extends CardImpl {
         this.addAbility(new KnowledgePoolAbility());
     }
 
-    public KnowledgePool(final KnowledgePool card) {
+    private KnowledgePool(final KnowledgePool card) {
         super(card);
     }
 

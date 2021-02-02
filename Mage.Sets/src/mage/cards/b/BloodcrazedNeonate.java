@@ -31,7 +31,7 @@ public final class BloodcrazedNeonate extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public BloodcrazedNeonate(final BloodcrazedNeonate card) {
+    private BloodcrazedNeonate(final BloodcrazedNeonate card) {
         super(card);
     }
 

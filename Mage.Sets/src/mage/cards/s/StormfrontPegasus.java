@@ -26,7 +26,7 @@ public final class StormfrontPegasus extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public StormfrontPegasus(final StormfrontPegasus card) {
+    private StormfrontPegasus(final StormfrontPegasus card) {
         super(card);
     }
 

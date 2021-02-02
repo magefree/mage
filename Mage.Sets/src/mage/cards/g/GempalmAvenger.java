@@ -50,7 +50,7 @@ public final class GempalmAvenger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GempalmAvenger(final GempalmAvenger card) {
+    private GempalmAvenger(final GempalmAvenger card) {
         super(card);
     }
 

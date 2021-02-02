@@ -46,7 +46,7 @@ public final class RavosSoultender extends CardImpl {
         this.addAbility(PartnerAbility.getInstance());
     }
 
-    public RavosSoultender(final RavosSoultender card) {
+    private RavosSoultender(final RavosSoultender card) {
         super(card);
     }
 

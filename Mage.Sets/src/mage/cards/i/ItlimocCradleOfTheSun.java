@@ -36,7 +36,7 @@ public final class ItlimocCradleOfTheSun extends CardImpl {
         this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED)));
     }
 
-    public ItlimocCradleOfTheSun(final ItlimocCradleOfTheSun card) {
+    private ItlimocCradleOfTheSun(final ItlimocCradleOfTheSun card) {
         super(card);
     }
 

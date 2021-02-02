@@ -33,7 +33,7 @@ public final class ArmorSliver extends CardImpl {
                         new GenericManaCost(2)), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, false)));
     }
 
-    public ArmorSliver(final ArmorSliver card) {
+    private ArmorSliver(final ArmorSliver card) {
         super(card);
     }
 

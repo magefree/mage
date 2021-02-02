@@ -52,7 +52,7 @@ public final class StrongholdOverseer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StrongholdOverseer(final StrongholdOverseer card) {
+    private StrongholdOverseer(final StrongholdOverseer card) {
         super(card);
     }
 

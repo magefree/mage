@@ -38,7 +38,7 @@ public final class LightningGreaves extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(0)));
     }
 
-    public LightningGreaves(final LightningGreaves card) {
+    private LightningGreaves(final LightningGreaves card) {
         super(card);
     }
 

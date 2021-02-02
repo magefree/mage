@@ -39,7 +39,7 @@ public final class EscapeRoutes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EscapeRoutes(final EscapeRoutes card) {
+    private EscapeRoutes(final EscapeRoutes card) {
         super(card);
     }
 

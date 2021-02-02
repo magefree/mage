@@ -45,7 +45,7 @@ public final class GrotesqueHybrid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GrotesqueHybrid(final GrotesqueHybrid card) {
+    private GrotesqueHybrid(final GrotesqueHybrid card) {
         super(card);
     }
 

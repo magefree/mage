@@ -25,7 +25,7 @@ public final class WhirOfInvention extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryWithLessCMCPutInPlayEffect(new FilterArtifactCard()));
     }
 
-    public WhirOfInvention(final WhirOfInvention card) {
+    private WhirOfInvention(final WhirOfInvention card) {
         super(card);
     }
 

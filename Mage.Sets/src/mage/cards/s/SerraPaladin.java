@@ -44,7 +44,7 @@ public final class SerraPaladin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SerraPaladin(final SerraPaladin card) {
+    private SerraPaladin(final SerraPaladin card) {
         super(card);
     }
 

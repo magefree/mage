@@ -49,7 +49,7 @@ public final class MartyrOfBones extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MartyrOfBones(final MartyrOfBones card) {
+    private MartyrOfBones(final MartyrOfBones card) {
         super(card);
     }
 

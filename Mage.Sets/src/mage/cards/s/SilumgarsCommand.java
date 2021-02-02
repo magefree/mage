@@ -62,7 +62,7 @@ public final class SilumgarsCommand extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);        
     }
 
-    public SilumgarsCommand(final SilumgarsCommand card) {
+    private SilumgarsCommand(final SilumgarsCommand card) {
         super(card);
     }
 

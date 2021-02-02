@@ -28,7 +28,7 @@ public final class RakdosGuildgate extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public RakdosGuildgate(final RakdosGuildgate card) {
+    private RakdosGuildgate(final RakdosGuildgate card) {
         super(card);
     }
 

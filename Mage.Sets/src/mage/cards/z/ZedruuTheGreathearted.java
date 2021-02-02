@@ -50,7 +50,7 @@ public final class ZedruuTheGreathearted extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZedruuTheGreathearted(final ZedruuTheGreathearted card) {
+    private ZedruuTheGreathearted(final ZedruuTheGreathearted card) {
         super(card);
     }
 

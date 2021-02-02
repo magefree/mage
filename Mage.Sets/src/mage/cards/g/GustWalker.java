@@ -39,7 +39,7 @@ public final class GustWalker extends CardImpl {
         this.addAbility(new ExertAbility(ability));
     }
 
-    public GustWalker(final GustWalker card) {
+    private GustWalker(final GustWalker card) {
         super(card);
     }
 

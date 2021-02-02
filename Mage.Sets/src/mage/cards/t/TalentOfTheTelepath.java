@@ -38,7 +38,7 @@ public final class TalentOfTheTelepath extends CardImpl {
 
     }
 
-    public TalentOfTheTelepath(final TalentOfTheTelepath card) {
+    private TalentOfTheTelepath(final TalentOfTheTelepath card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class SuddenDeath extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SuddenDeath(final SuddenDeath card) {
+    private SuddenDeath(final SuddenDeath card) {
         super(card);
     }
 

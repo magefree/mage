@@ -42,7 +42,7 @@ public final class EvilEyeOfOrmsByGore extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(cantBeBlockedByFilter, Duration.WhileOnBattlefield)));
     }
 
-    public EvilEyeOfOrmsByGore(final EvilEyeOfOrmsByGore card) {
+    private EvilEyeOfOrmsByGore(final EvilEyeOfOrmsByGore card) {
         super(card);
     }
 

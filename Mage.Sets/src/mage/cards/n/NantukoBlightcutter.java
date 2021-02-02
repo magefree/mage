@@ -53,7 +53,7 @@ public final class NantukoBlightcutter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NantukoBlightcutter(final NantukoBlightcutter card) {
+    private NantukoBlightcutter(final NantukoBlightcutter card) {
         super(card);
     }
 

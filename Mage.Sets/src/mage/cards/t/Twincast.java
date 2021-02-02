@@ -23,7 +23,7 @@ public final class Twincast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Twincast(final Twincast card) {
+    private Twincast(final Twincast card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class SpectersWail extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public SpectersWail(final SpectersWail card) {
+    private SpectersWail(final SpectersWail card) {
         super(card);
     }
 

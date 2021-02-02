@@ -43,7 +43,7 @@ public final class Metamorphose extends CardImpl {
 
     }
 
-    public Metamorphose(final Metamorphose card) {
+    private Metamorphose(final Metamorphose card) {
         super(card);
     }
 

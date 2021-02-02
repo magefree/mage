@@ -33,7 +33,7 @@ public final class CometStorm extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(CometStormAdjuster.instance);
     }
 
-    public CometStorm(final CometStorm card) {
+    private CometStorm(final CometStorm card) {
         super(card);
     }
 

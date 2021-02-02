@@ -32,7 +32,7 @@ public final class RuneCervinRider extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{G/W}{G/W}")));
     }
 
-    public RuneCervinRider(final RuneCervinRider card) {
+    private RuneCervinRider(final RuneCervinRider card) {
         super(card);
     }
 

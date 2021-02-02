@@ -71,7 +71,7 @@ public final class NecropolisFiend extends CardImpl {
 
     }
 
-    public NecropolisFiend(final NecropolisFiend card) {
+    private NecropolisFiend(final NecropolisFiend card) {
         super(card);
     }
 

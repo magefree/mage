@@ -44,7 +44,7 @@ public final class InvaderParasite extends CardImpl {
         this.addAbility(new InvaderParasiteTriggeredAbility());
     }
 
-    public InvaderParasite(final InvaderParasite card) {
+    private InvaderParasite(final InvaderParasite card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class BoundlessRealms extends CardImpl {
         this.getSpellAbility().addEffect(new BoundlessRealmsEffect());
     }
 
-    public BoundlessRealms(final BoundlessRealms card) {
+    private BoundlessRealms(final BoundlessRealms card) {
         super(card);
     }
 

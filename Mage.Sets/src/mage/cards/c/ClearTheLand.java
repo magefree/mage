@@ -29,7 +29,7 @@ public final class ClearTheLand extends CardImpl {
         getSpellAbility().addEffect(new ClearTheLandEffect());
     }
 
-    public ClearTheLand(final ClearTheLand card) {
+    private ClearTheLand(final ClearTheLand card) {
         super(card);
     }
 

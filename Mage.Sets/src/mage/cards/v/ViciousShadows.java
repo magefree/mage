@@ -27,7 +27,7 @@ public final class ViciousShadows extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ViciousShadows(final ViciousShadows card) {
+    private ViciousShadows(final ViciousShadows card) {
         super(card);
     }
 

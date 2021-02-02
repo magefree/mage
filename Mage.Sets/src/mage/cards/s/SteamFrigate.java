@@ -29,7 +29,7 @@ public final class SteamFrigate extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
     }
 
-    public SteamFrigate(final SteamFrigate card) {
+    private SteamFrigate(final SteamFrigate card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class Aggravate extends CardImpl {
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
-    public Aggravate(final Aggravate card) {
+    private Aggravate(final Aggravate card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class HelmOfTheGods extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public HelmOfTheGods(final HelmOfTheGods card) {
+    private HelmOfTheGods(final HelmOfTheGods card) {
         super(card);
     }
 

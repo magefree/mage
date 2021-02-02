@@ -37,7 +37,7 @@ public final class SelflessSpirit extends CardImpl {
                         new FilterControlledCreaturePermanent("creatures you control")), new SacrificeSourceCost()));
     }
 
-    public SelflessSpirit(final SelflessSpirit card) {
+    private SelflessSpirit(final SelflessSpirit card) {
         super(card);
     }
 

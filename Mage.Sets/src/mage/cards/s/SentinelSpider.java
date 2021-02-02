@@ -29,7 +29,7 @@ public final class SentinelSpider extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public SentinelSpider(final SentinelSpider card) {
+    private SentinelSpider(final SentinelSpider card) {
         super(card);
     }
 

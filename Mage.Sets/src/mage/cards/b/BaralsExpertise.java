@@ -35,7 +35,7 @@ public final class BaralsExpertise extends CardImpl {
         getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(4));
     }
 
-    public BaralsExpertise(final BaralsExpertise card) {
+    private BaralsExpertise(final BaralsExpertise card) {
         super(card);
     }
 

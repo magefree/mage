@@ -37,7 +37,7 @@ public final class ArdentRecruit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArdentRecruit(final ArdentRecruit card) {
+    private ArdentRecruit(final ArdentRecruit card) {
         super(card);
     }
 

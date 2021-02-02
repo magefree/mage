@@ -43,7 +43,7 @@ public final class RelentlessDead extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new RelentlessDeadEffect()));
     }
 
-    public RelentlessDead(final RelentlessDead card) {
+    private RelentlessDead(final RelentlessDead card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class ZephyrNet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZephyrNet(final ZephyrNet card) {
+    private ZephyrNet(final ZephyrNet card) {
         super(card);
     }
 

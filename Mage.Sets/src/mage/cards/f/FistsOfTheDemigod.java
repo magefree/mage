@@ -50,7 +50,7 @@ public final class FistsOfTheDemigod extends CardImpl {
         this.addAbility(redAbility);
     }
 
-    public FistsOfTheDemigod(final FistsOfTheDemigod card) {
+    private FistsOfTheDemigod(final FistsOfTheDemigod card) {
         super(card);
     }
 

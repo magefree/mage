@@ -59,7 +59,7 @@ public final class ShiftingShadow extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShiftingShadow(final ShiftingShadow card) {
+    private ShiftingShadow(final ShiftingShadow card) {
         super(card);
     }
 

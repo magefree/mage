@@ -34,7 +34,7 @@ public final class AdviceFromTheFae extends CardImpl {
 
     }
 
-    public AdviceFromTheFae(final AdviceFromTheFae card) {
+    private AdviceFromTheFae(final AdviceFromTheFae card) {
         super(card);
     }
 

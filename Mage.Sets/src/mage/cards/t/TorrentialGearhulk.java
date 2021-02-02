@@ -50,7 +50,7 @@ public final class TorrentialGearhulk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TorrentialGearhulk(final TorrentialGearhulk card) {
+    private TorrentialGearhulk(final TorrentialGearhulk card) {
         super(card);
     }
 

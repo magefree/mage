@@ -26,7 +26,7 @@ public final class SaprazzanRaider extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new ReturnToHandSourceEffect(), false));
     }
 
-    public SaprazzanRaider(final SaprazzanRaider card) {
+    private SaprazzanRaider(final SaprazzanRaider card) {
         super(card);
     }
 

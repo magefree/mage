@@ -30,7 +30,7 @@ public final class StreetWraith extends CardImpl {
         this.addAbility(new CyclingAbility(new PayLifeCost(2)));
     }
 
-    public StreetWraith(final StreetWraith card) {
+    private StreetWraith(final StreetWraith card) {
         super(card);
     }
 

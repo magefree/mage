@@ -31,7 +31,7 @@ public final class HypnoticCloud extends CardImpl {
 
     }
 
-    public HypnoticCloud(final HypnoticCloud card) {
+    private HypnoticCloud(final HypnoticCloud card) {
         super(card);
     }
 

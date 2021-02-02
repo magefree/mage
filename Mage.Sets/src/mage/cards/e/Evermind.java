@@ -38,7 +38,7 @@ public final class Evermind extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{1}{U}"));
     }
 
-    public Evermind(final Evermind card) {
+    private Evermind(final Evermind card) {
         super(card);
     }
 

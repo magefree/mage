@@ -23,7 +23,7 @@ public final class SliverConstruct extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public SliverConstruct(final SliverConstruct card) {
+    private SliverConstruct(final SliverConstruct card) {
         super(card);
     }
 

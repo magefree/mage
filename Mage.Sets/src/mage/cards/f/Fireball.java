@@ -30,7 +30,7 @@ public final class Fireball extends CardImpl {
         this.getSpellAbility().setCostAdjuster(FireballAdjuster.instance);
     }
 
-    public Fireball(final Fireball card) {
+    private Fireball(final Fireball card) {
         super(card);
     }
 

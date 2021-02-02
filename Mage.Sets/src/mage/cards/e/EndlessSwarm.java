@@ -29,7 +29,7 @@ public final class EndlessSwarm extends CardImpl {
         
     }
 
-    public EndlessSwarm(final EndlessSwarm card) {
+    private EndlessSwarm(final EndlessSwarm card) {
         super(card);
     }
 

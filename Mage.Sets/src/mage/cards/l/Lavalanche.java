@@ -32,7 +32,7 @@ public final class Lavalanche extends CardImpl {
 
     }
 
-    public Lavalanche(final Lavalanche card) {
+    private Lavalanche(final Lavalanche card) {
         super(card);
     }
 

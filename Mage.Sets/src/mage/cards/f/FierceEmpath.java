@@ -39,7 +39,7 @@ public final class FierceEmpath extends CardImpl {
                 true));
     }
 
-    public FierceEmpath(final FierceEmpath card) {
+    private FierceEmpath(final FierceEmpath card) {
         super(card);
     }
 

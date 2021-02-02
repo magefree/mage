@@ -33,7 +33,7 @@ public final class DromarsAttendant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DromarsAttendant(final DromarsAttendant card) {
+    private DromarsAttendant(final DromarsAttendant card) {
         super(card);
     }
 

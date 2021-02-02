@@ -27,7 +27,7 @@ public final class MoltenBirth extends CardImpl {
 
     }
 
-    public MoltenBirth(final MoltenBirth card) {
+    private MoltenBirth(final MoltenBirth card) {
         super(card);
     }
 

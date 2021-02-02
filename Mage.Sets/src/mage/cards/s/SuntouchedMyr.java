@@ -25,7 +25,7 @@ public final class SuntouchedMyr extends CardImpl {
         this.addAbility(new SunburstAbility(this));
     }
 
-    public SuntouchedMyr(final SuntouchedMyr card) {
+    private SuntouchedMyr(final SuntouchedMyr card) {
         super(card);
     }
 

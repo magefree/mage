@@ -50,7 +50,7 @@ public final class SolitaryCamel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SolitaryCamel(final SolitaryCamel card) {
+    private SolitaryCamel(final SolitaryCamel card) {
         super(card);
     }
 

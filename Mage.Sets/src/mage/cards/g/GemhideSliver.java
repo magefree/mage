@@ -38,7 +38,7 @@ public final class GemhideSliver extends CardImpl {
                         "All Slivers have \"{T}: Add one mana of any color.\"")));
     }
 
-    public GemhideSliver(final GemhideSliver card) {
+    private GemhideSliver(final GemhideSliver card) {
         super(card);
     }
 

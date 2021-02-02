@@ -25,7 +25,7 @@ public final class Nightspider extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public Nightspider(final Nightspider card) {
+    private Nightspider(final Nightspider card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class CracklingClub extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CracklingClub(final CracklingClub card) {
+    private CracklingClub(final CracklingClub card) {
         super(card);
     }
 

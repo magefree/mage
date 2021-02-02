@@ -40,7 +40,7 @@ public final class HadanasClimb extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HadanasClimb(final HadanasClimb card) {
+    private HadanasClimb(final HadanasClimb card) {
         super(card);
     }
 

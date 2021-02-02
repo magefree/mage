@@ -29,7 +29,7 @@ public final class AphettoRunecaster extends CardImpl {
         this.addAbility(new TurnedFaceUpAllTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new FilterPermanent("a permanent"), false, true));
     }
 
-    public AphettoRunecaster(final AphettoRunecaster card) {
+    private AphettoRunecaster(final AphettoRunecaster card) {
         super(card);
     }
 

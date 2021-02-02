@@ -30,7 +30,7 @@ public final class VineSnare extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true));
     }
 
-    public VineSnare(final VineSnare card) {
+    private VineSnare(final VineSnare card) {
         super(card);
     }
 

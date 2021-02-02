@@ -34,7 +34,7 @@ public final class GlobalRuin extends CardImpl {
         this.getSpellAbility().addEffect(new GlobalRuinDestroyLandEffect());
     }
 
-    public GlobalRuin(final GlobalRuin card) {
+    private GlobalRuin(final GlobalRuin card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class Trickbind extends CardImpl {
         this.getSpellAbility().addTarget(new TargetActivatedOrTriggeredAbility());
     }
 
-    public Trickbind(final Trickbind card) {
+    private Trickbind(final Trickbind card) {
         super(card);
     }
 

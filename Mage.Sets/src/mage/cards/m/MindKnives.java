@@ -22,7 +22,7 @@ public final class MindKnives extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public MindKnives(final MindKnives card) {
+    private MindKnives(final MindKnives card) {
         super(card);
     }
 

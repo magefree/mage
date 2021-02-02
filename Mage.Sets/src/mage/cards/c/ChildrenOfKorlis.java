@@ -38,7 +38,7 @@ public final class ChildrenOfKorlis extends CardImpl {
                 new SacrificeSourceCost()));
     }
 
-    public ChildrenOfKorlis(final ChildrenOfKorlis card) {
+    private ChildrenOfKorlis(final ChildrenOfKorlis card) {
         super(card);
     }
 

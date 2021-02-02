@@ -35,7 +35,7 @@ public final class BaneOfProgress extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BaneOfProgressEffect(), false));
     }
 
-    public BaneOfProgress(final BaneOfProgress card) {
+    private BaneOfProgress(final BaneOfProgress card) {
         super(card);
     }
 

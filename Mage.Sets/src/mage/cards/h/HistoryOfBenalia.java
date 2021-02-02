@@ -35,7 +35,7 @@ public final class HistoryOfBenalia extends CardImpl {
         this.addAbility(sagaAbility);
     }
 
-    public HistoryOfBenalia(final HistoryOfBenalia card) {
+    private HistoryOfBenalia(final HistoryOfBenalia card) {
         super(card);
     }
 

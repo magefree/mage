@@ -32,7 +32,7 @@ public final class Soulblast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public Soulblast(final Soulblast card) {
+    private Soulblast(final Soulblast card) {
         super(card);
     }
 

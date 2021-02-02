@@ -36,7 +36,7 @@ public final class ValeronWardens extends CardImpl {
         this.addAbility(new ValeronWardensTriggeredAbility());
     }
 
-    public ValeronWardens(final ValeronWardens card) {
+    private ValeronWardens(final ValeronWardens card) {
         super(card);
     }
 

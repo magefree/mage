@@ -41,7 +41,7 @@ public final class VictualSliver extends CardImpl {
                         "All Slivers have \"{2}, Sacrifice this permanent: You gain 4 life.\"")));
     }
 
-    public VictualSliver(final VictualSliver card) {
+    private VictualSliver(final VictualSliver card) {
         super(card);
     }
 

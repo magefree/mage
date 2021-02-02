@@ -22,7 +22,7 @@ public final class LilianasCaress extends CardImpl {
         this.addAbility(new DiscardsACardOpponentTriggeredAbility(new LoseLifeTargetEffect(2), false, SetTargetPointer.PLAYER));
     }
 
-    public LilianasCaress(final LilianasCaress card) {
+    private LilianasCaress(final LilianasCaress card) {
         super(card);
     }
 

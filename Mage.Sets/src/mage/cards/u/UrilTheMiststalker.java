@@ -38,7 +38,7 @@ public final class UrilTheMiststalker extends CardImpl {
 
     }
 
-    public UrilTheMiststalker(final UrilTheMiststalker card) {
+    private UrilTheMiststalker(final UrilTheMiststalker card) {
         super(card);
     }
 

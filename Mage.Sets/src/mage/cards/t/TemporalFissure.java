@@ -26,7 +26,7 @@ public final class TemporalFissure extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public TemporalFissure(final TemporalFissure card) {
+    private TemporalFissure(final TemporalFissure card) {
         super(card);
     }
 

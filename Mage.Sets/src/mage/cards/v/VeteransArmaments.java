@@ -53,7 +53,7 @@ public final class VeteransArmaments extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public VeteransArmaments(final VeteransArmaments card) {
+    private VeteransArmaments(final VeteransArmaments card) {
         super(card);
     }
 

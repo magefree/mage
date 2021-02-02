@@ -33,7 +33,7 @@ public final class RiddleOfLightning extends CardImpl {
         this.getSpellAbility().addEffect(new RiddleOfLightningEffect());
     }
 
-    public RiddleOfLightning(final RiddleOfLightning card) {
+    private RiddleOfLightning(final RiddleOfLightning card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class MolimoMaroSorcerer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public MolimoMaroSorcerer(final MolimoMaroSorcerer card) {
+    private MolimoMaroSorcerer(final MolimoMaroSorcerer card) {
         super(card);
     }
 

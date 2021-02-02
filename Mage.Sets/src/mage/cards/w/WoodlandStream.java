@@ -26,7 +26,7 @@ public final class WoodlandStream extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public WoodlandStream(final WoodlandStream card) {
+    private WoodlandStream(final WoodlandStream card) {
         super(card);
     }
 

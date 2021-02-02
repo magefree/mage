@@ -36,7 +36,7 @@ public final class PlanarBridge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PlanarBridge(final PlanarBridge card) {
+    private PlanarBridge(final PlanarBridge card) {
         super(card);
     }
 

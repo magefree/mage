@@ -29,7 +29,7 @@ public final class SyphonFlesh extends CardImpl {
         this.getSpellAbility().addEffect(new SyphonFleshEffect());
     }
 
-    public SyphonFlesh(final SyphonFlesh card) {
+    private SyphonFlesh(final SyphonFlesh card) {
         super(card);
     }
 

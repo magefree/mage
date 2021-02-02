@@ -39,7 +39,7 @@ public final class ManaforgeCinder extends CardImpl {
 
     }
 
-    public ManaforgeCinder(final ManaforgeCinder card) {
+    private ManaforgeCinder(final ManaforgeCinder card) {
         super(card);
     }
 

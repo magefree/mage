@@ -31,7 +31,7 @@ public final class ChampionOfRhonas extends CardImpl {
         this.addAbility(new ExertAbility(ability));
     }
 
-    public ChampionOfRhonas(final ChampionOfRhonas card) {
+    private ChampionOfRhonas(final ChampionOfRhonas card) {
         super(card);
     }
 

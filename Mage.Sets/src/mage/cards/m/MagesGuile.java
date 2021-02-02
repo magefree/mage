@@ -28,7 +28,7 @@ public final class MagesGuile extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{U}")));
     }
 
-    public MagesGuile(final MagesGuile card) {
+    private MagesGuile(final MagesGuile card) {
         super(card);
     }
 

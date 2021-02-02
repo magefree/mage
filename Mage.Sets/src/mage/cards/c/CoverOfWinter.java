@@ -42,7 +42,7 @@ public final class CoverOfWinter extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.AGE.createInstance()), new ManaCostsImpl("{S}")));
     }
 
-    public CoverOfWinter(final CoverOfWinter card) {
+    private CoverOfWinter(final CoverOfWinter card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class MothdustChangeling extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public MothdustChangeling(final MothdustChangeling card) {
+    private MothdustChangeling(final MothdustChangeling card) {
         super(card);
     }
 

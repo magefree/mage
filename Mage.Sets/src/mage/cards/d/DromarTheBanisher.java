@@ -43,7 +43,7 @@ public final class DromarTheBanisher extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new DromarTheBanisherEffect(), new ManaCostsImpl("{2}{U}")), false));
     }
 
-    public DromarTheBanisher(final DromarTheBanisher card) {
+    private DromarTheBanisher(final DromarTheBanisher card) {
         super(card);
     }
 

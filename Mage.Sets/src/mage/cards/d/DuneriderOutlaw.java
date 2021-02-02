@@ -42,7 +42,7 @@ public final class DuneriderOutlaw extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggered, new DealtDamageToAnOpponent(), ruleText));
     }
 
-    public DuneriderOutlaw(final DuneriderOutlaw card) {
+    private DuneriderOutlaw(final DuneriderOutlaw card) {
         super(card);
     }
 

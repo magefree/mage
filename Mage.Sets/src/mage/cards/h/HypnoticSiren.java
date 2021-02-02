@@ -48,7 +48,7 @@ public final class HypnoticSiren extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public HypnoticSiren(final HypnoticSiren card) {
+    private HypnoticSiren(final HypnoticSiren card) {
         super(card);
     }
 

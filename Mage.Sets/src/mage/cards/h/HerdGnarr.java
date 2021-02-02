@@ -36,7 +36,7 @@ public final class HerdGnarr extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), filter));
     }
 
-    public HerdGnarr(final HerdGnarr card) {
+    private HerdGnarr(final HerdGnarr card) {
         super(card);
     }
 

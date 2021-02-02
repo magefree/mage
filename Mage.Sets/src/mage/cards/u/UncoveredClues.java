@@ -31,7 +31,7 @@ public final class UncoveredClues extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(4, 2, filter, true));
     }
 
-    public UncoveredClues(final UncoveredClues card) {
+    private UncoveredClues(final UncoveredClues card) {
         super(card);
     }
 

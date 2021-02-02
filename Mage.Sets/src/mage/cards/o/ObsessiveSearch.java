@@ -26,7 +26,7 @@ public final class ObsessiveSearch extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{U}")));
     }
 
-    public ObsessiveSearch(final ObsessiveSearch card) {
+    private ObsessiveSearch(final ObsessiveSearch card) {
         super(card);
     }
 

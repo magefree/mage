@@ -39,7 +39,7 @@ public final class ForcedAdaptation extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1), TargetController.YOU, false));
     }
 
-    public ForcedAdaptation(final ForcedAdaptation card) {
+    private ForcedAdaptation(final ForcedAdaptation card) {
         super(card);
     }
 

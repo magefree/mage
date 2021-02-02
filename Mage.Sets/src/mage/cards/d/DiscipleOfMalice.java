@@ -31,7 +31,7 @@ public final class DiscipleOfMalice extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public DiscipleOfMalice(final DiscipleOfMalice card) {
+    private DiscipleOfMalice(final DiscipleOfMalice card) {
         super(card);
     }
 

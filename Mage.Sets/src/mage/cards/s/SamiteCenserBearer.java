@@ -39,7 +39,7 @@ public final class SamiteCenserBearer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SamiteCenserBearer(final SamiteCenserBearer card) {
+    private SamiteCenserBearer(final SamiteCenserBearer card) {
         super(card);
     }
 

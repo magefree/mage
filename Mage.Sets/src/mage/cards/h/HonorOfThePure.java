@@ -32,7 +32,7 @@ public final class HonorOfThePure extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public HonorOfThePure(final HonorOfThePure card) {
+    private HonorOfThePure(final HonorOfThePure card) {
         super(card);
     }
 

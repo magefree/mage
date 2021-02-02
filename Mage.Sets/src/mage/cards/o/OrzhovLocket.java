@@ -34,7 +34,7 @@ public final class OrzhovLocket extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrzhovLocket(final OrzhovLocket card) {
+    private OrzhovLocket(final OrzhovLocket card) {
         super(card);
     }
 

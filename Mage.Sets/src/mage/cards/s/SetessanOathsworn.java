@@ -29,7 +29,7 @@ public final class SetessanOathsworn extends CardImpl {
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2), true)));
     }
 
-    public SetessanOathsworn(final SetessanOathsworn card) {
+    private SetessanOathsworn(final SetessanOathsworn card) {
         super(card);
     }
 

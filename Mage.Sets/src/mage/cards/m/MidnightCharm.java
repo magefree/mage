@@ -37,7 +37,7 @@ public final class MidnightCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public MidnightCharm(final MidnightCharm card) {
+    private MidnightCharm(final MidnightCharm card) {
         super(card);
     }
 

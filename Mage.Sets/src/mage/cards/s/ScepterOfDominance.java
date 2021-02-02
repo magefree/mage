@@ -29,7 +29,7 @@ public final class ScepterOfDominance extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScepterOfDominance(ScepterOfDominance card) {
+    private ScepterOfDominance(ScepterOfDominance card) {
         super(card);
     }
 

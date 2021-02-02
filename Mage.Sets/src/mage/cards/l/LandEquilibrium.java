@@ -27,7 +27,7 @@ public final class LandEquilibrium extends CardImpl {
         this.addAbility(new LandEquilibriumAbility());
     }
 
-    public LandEquilibrium(final LandEquilibrium card) {
+    private LandEquilibrium(final LandEquilibrium card) {
         super(card);
     }
 

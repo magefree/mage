@@ -37,7 +37,7 @@ public final class AbzanBanner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AbzanBanner(final AbzanBanner card) {
+    private AbzanBanner(final AbzanBanner card) {
         super(card);
     }
 

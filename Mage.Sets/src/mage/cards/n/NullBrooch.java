@@ -39,7 +39,7 @@ public final class NullBrooch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NullBrooch(final NullBrooch card) {
+    private NullBrooch(final NullBrooch card) {
         super(card);
     }
 

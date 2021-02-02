@@ -37,7 +37,7 @@ public final class ContaminatedBond extends CardImpl {
         this.addAbility(new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeControllerAttachedEffect(3)));
     }
 
-    public ContaminatedBond(final ContaminatedBond card) {
+    private ContaminatedBond(final ContaminatedBond card) {
         super(card);
     }
 

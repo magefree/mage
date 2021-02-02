@@ -39,7 +39,7 @@ public final class BoobyTrap extends CardImpl {
         this.addAbility(new BoobyTrapTriggeredAbility());
     }
 
-    public BoobyTrap(final BoobyTrap card) {
+    private BoobyTrap(final BoobyTrap card) {
         super(card);
     }
 

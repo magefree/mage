@@ -33,7 +33,7 @@ public final class DarkHeartOfTheWood extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public DarkHeartOfTheWood(final DarkHeartOfTheWood card) {
+    private DarkHeartOfTheWood(final DarkHeartOfTheWood card) {
         super(card);
     }
 

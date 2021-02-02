@@ -31,7 +31,7 @@ public final class Vulptex extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Vulptex(final Vulptex card) {
+    private Vulptex(final Vulptex card) {
         super(card);
     }
 

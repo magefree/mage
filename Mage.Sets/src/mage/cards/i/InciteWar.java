@@ -52,7 +52,7 @@ public final class InciteWar extends CardImpl {
         this.addAbility(new EntwineAbility("{2}"));
     }
 
-    public InciteWar(final InciteWar card) {
+    private InciteWar(final InciteWar card) {
         super(card);
     }
 

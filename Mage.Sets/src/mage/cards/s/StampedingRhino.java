@@ -24,7 +24,7 @@ public final class StampedingRhino extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public StampedingRhino(final StampedingRhino card) {
+    private StampedingRhino(final StampedingRhino card) {
         super(card);
     }
 

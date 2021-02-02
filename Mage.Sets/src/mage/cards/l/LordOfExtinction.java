@@ -34,7 +34,7 @@ public final class LordOfExtinction extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new LordOfExtinctionDynamicCount(), Duration.EndOfGame)));
     }
 
-    public LordOfExtinction(final LordOfExtinction card) {
+    private LordOfExtinction(final LordOfExtinction card) {
         super(card);
     }
 

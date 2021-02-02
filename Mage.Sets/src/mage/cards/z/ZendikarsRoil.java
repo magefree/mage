@@ -25,7 +25,7 @@ public final class ZendikarsRoil extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(effect, new FilterLandPermanent("a land")));
     }
 
-    public ZendikarsRoil(final ZendikarsRoil card) {
+    private ZendikarsRoil(final ZendikarsRoil card) {
         super(card);
     }
 

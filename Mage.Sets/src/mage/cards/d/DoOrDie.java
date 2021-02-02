@@ -32,7 +32,7 @@ public final class DoOrDie extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public DoOrDie(final DoOrDie card) {
+    private DoOrDie(final DoOrDie card) {
         super(card);
     }
 

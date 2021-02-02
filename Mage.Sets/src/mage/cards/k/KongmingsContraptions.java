@@ -42,7 +42,7 @@ public final class KongmingsContraptions extends CardImpl {
         this.addAbility(ability, new PlayerAttackedStepWatcher());
     }
 
-    public KongmingsContraptions(final KongmingsContraptions card) {
+    private KongmingsContraptions(final KongmingsContraptions card) {
         super(card);
     }
 

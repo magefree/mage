@@ -26,7 +26,7 @@ public final class CovertOperative extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public CovertOperative(final CovertOperative card) {
+    private CovertOperative(final CovertOperative card) {
         super(card);
     }
 

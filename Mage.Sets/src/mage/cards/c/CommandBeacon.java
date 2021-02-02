@@ -36,7 +36,7 @@ public final class CommandBeacon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CommandBeacon(final CommandBeacon card) {
+    private CommandBeacon(final CommandBeacon card) {
         super(card);
     }
 

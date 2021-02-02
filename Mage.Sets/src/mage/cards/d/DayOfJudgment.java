@@ -21,7 +21,7 @@ public final class DayOfJudgment extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
-    public DayOfJudgment(final DayOfJudgment card) {
+    private DayOfJudgment(final DayOfJudgment card) {
         super(card);
     }
 

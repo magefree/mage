@@ -23,7 +23,7 @@ public final class ExpeditionEnvoy extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public ExpeditionEnvoy(final ExpeditionEnvoy card) {
+    private ExpeditionEnvoy(final ExpeditionEnvoy card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class TortoiseFormation extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
     }
 
-    public TortoiseFormation(final TortoiseFormation card) {
+    private TortoiseFormation(final TortoiseFormation card) {
         super(card);
     }
 

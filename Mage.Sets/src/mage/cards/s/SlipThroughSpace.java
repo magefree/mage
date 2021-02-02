@@ -30,7 +30,7 @@ public final class SlipThroughSpace extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public SlipThroughSpace(final SlipThroughSpace card) {
+    private SlipThroughSpace(final SlipThroughSpace card) {
         super(card);
     }
 

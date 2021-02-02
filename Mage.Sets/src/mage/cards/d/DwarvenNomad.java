@@ -42,7 +42,7 @@ public final class DwarvenNomad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DwarvenNomad(final DwarvenNomad card) {
+    private DwarvenNomad(final DwarvenNomad card) {
         super(card);
     }
 

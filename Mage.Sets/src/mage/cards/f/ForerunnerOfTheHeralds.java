@@ -57,7 +57,7 @@ public final class ForerunnerOfTheHeralds extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ForerunnerOfTheHeralds(final ForerunnerOfTheHeralds card) {
+    private ForerunnerOfTheHeralds(final ForerunnerOfTheHeralds card) {
         super(card);
     }
 

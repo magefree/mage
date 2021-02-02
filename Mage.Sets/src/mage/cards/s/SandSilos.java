@@ -53,7 +53,7 @@ public final class SandSilos extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SandSilos(final SandSilos card) {
+    private SandSilos(final SandSilos card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class IntoTheNorth extends CardImpl {
         
     }
 
-    public IntoTheNorth(final IntoTheNorth card) {
+    private IntoTheNorth(final IntoTheNorth card) {
         super(card);
     }
 

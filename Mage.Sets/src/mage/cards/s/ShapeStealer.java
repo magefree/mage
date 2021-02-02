@@ -40,7 +40,7 @@ public final class ShapeStealer extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new ShapeStealerEffect(), false));
     }
 
-    public ShapeStealer(final ShapeStealer card) {
+    private ShapeStealer(final ShapeStealer card) {
         super(card);
     }
 

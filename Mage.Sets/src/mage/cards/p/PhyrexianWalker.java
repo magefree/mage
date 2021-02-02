@@ -21,7 +21,7 @@ public final class PhyrexianWalker extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public PhyrexianWalker(final PhyrexianWalker card) {
+    private PhyrexianWalker(final PhyrexianWalker card) {
         super(card);
     }
 

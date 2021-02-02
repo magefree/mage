@@ -34,7 +34,7 @@ public final class CauldronOfSouls extends CardImpl {
 
     }
 
-    public CauldronOfSouls(final CauldronOfSouls card) {
+    private CauldronOfSouls(final CauldronOfSouls card) {
         super(card);
     }
 

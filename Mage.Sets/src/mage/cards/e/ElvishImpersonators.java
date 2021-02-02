@@ -33,7 +33,7 @@ public final class ElvishImpersonators extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ElvishImpersonatorsEffect()));
     }
 
-    public ElvishImpersonators(final ElvishImpersonators card) {
+    private ElvishImpersonators(final ElvishImpersonators card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class SnowhornRider extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{G}{U}{R}")));
     }
 
-    public SnowhornRider(final SnowhornRider card) {
+    private SnowhornRider(final SnowhornRider card) {
         super(card);
     }
 

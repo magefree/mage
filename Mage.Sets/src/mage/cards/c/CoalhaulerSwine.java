@@ -31,7 +31,7 @@ public final class CoalhaulerSwine extends CardImpl {
         this.addAbility(new DealtDamageToSourceTriggeredAbility(new CoalhaulerSwineEffect(), false, false, true));
     }
 
-    public CoalhaulerSwine(final CoalhaulerSwine card) {
+    private CoalhaulerSwine(final CoalhaulerSwine card) {
         super(card);
     }
 

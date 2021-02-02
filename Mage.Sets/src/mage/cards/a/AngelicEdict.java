@@ -30,7 +30,7 @@ public final class AngelicEdict extends CardImpl {
         getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public AngelicEdict(final AngelicEdict card) {
+    private AngelicEdict(final AngelicEdict card) {
         super(card);
     }
 

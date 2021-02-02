@@ -31,7 +31,7 @@ public final class ColdsteelHeart extends CardImpl {
 
     }
 
-    public ColdsteelHeart(final ColdsteelHeart card) {
+    private ColdsteelHeart(final ColdsteelHeart card) {
         super(card);
     }
 

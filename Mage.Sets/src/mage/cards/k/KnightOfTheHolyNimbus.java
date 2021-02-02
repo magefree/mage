@@ -41,7 +41,7 @@ public final class KnightOfTheHolyNimbus extends CardImpl {
 
     }
 
-    public KnightOfTheHolyNimbus(final KnightOfTheHolyNimbus card) {
+    private KnightOfTheHolyNimbus(final KnightOfTheHolyNimbus card) {
         super(card);
     }
 

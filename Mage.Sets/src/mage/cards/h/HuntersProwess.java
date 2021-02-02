@@ -41,7 +41,7 @@ public final class HuntersProwess extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public HuntersProwess(final HuntersProwess card) {
+    private HuntersProwess(final HuntersProwess card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class DarthVader extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new UnboostCreaturesDefendingPlayerEffect(), false, null, SetTargetPointer.PLAYER));
     }
 
-    public DarthVader(final DarthVader card) {
+    private DarthVader(final DarthVader card) {
         super(card);
     }
 

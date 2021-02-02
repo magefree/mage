@@ -27,7 +27,7 @@ public final class AshenMonstrosity extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public AshenMonstrosity(final AshenMonstrosity card) {
+    private AshenMonstrosity(final AshenMonstrosity card) {
         super(card);
     }
 

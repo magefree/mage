@@ -29,7 +29,7 @@ public final class BattleTactics extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public BattleTactics(final BattleTactics card) {
+    private BattleTactics(final BattleTactics card) {
         super(card);
     }
 

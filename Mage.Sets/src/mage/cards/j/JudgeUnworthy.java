@@ -34,7 +34,7 @@ public final class JudgeUnworthy extends CardImpl {
         this.getSpellAbility().addEffect(new JudgeUnworthyEffect());  
     }
 
-    public JudgeUnworthy(final JudgeUnworthy card) {
+    private JudgeUnworthy(final JudgeUnworthy card) {
         super(card);
     }
 

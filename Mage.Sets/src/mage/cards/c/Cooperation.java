@@ -39,7 +39,7 @@ public final class Cooperation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(BandingAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public Cooperation(final Cooperation card) {
+    private Cooperation(final Cooperation card) {
         super(card);
     }
 

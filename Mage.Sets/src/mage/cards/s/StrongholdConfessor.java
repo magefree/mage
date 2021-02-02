@@ -37,7 +37,7 @@ public final class StrongholdConfessor extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.instance, "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it.", ""));
     }
 
-    public StrongholdConfessor(final StrongholdConfessor card) {
+    private StrongholdConfessor(final StrongholdConfessor card) {
         super(card);
     }
 

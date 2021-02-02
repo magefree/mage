@@ -40,7 +40,7 @@ public final class ElkinLair extends CardImpl {
 
     }
 
-    public ElkinLair(final ElkinLair card) {
+    private ElkinLair(final ElkinLair card) {
         super(card);
     }
 

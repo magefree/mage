@@ -27,7 +27,7 @@ public final class HellionEruption extends CardImpl {
         this.getSpellAbility().addEffect(new HellionEruptionEffect());
     }
 
-    public HellionEruption(final HellionEruption card) {
+    private HellionEruption(final HellionEruption card) {
         super(card);
     }
 

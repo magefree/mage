@@ -48,7 +48,7 @@ public final class MoltingSnakeskin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoltingSnakeskin(final MoltingSnakeskin card) {
+    private MoltingSnakeskin(final MoltingSnakeskin card) {
         super(card);
     }
 

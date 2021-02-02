@@ -25,7 +25,7 @@ public final class BogWraith extends CardImpl {
         this.addAbility(new SwampwalkAbility());
     }
 
-    public BogWraith(final BogWraith card) {
+    private BogWraith(final BogWraith card) {
         super(card);
     }
 

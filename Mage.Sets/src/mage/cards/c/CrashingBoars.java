@@ -39,7 +39,7 @@ public final class CrashingBoars extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new CrashingBoarsEffect(), false, "", SetTargetPointer.PLAYER));
     }
 
-    public CrashingBoars(final CrashingBoars card) {
+    private CrashingBoars(final CrashingBoars card) {
         super(card);
     }
 

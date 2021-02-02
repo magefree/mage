@@ -32,7 +32,7 @@ public final class ShoreSnapper extends CardImpl {
                 new ManaCostsImpl("{U}")));
     }
 
-    public ShoreSnapper(final ShoreSnapper card) {
+    private ShoreSnapper(final ShoreSnapper card) {
         super(card);
     }
 

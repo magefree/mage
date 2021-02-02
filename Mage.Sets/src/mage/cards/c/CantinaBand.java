@@ -42,7 +42,7 @@ public final class CantinaBand extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CantinaBand(final CantinaBand card) {
+    private CantinaBand(final CantinaBand card) {
         super(card);
     }
 

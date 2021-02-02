@@ -36,7 +36,7 @@ public final class ZulaportCutthroat extends CardImpl {
 
     }
 
-    public ZulaportCutthroat(final ZulaportCutthroat card) {
+    private ZulaportCutthroat(final ZulaportCutthroat card) {
         super(card);
     }
 

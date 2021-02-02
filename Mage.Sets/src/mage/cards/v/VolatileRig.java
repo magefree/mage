@@ -46,7 +46,7 @@ public final class VolatileRig extends CardImpl {
 
     }
 
-    public VolatileRig(final VolatileRig card) {
+    private VolatileRig(final VolatileRig card) {
         super(card);
     }
 

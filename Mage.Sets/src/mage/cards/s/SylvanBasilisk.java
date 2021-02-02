@@ -26,7 +26,7 @@ public final class SylvanBasilisk extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DestroyTargetEffect(), false));
     }
 
-    public SylvanBasilisk(final SylvanBasilisk card) {
+    private SylvanBasilisk(final SylvanBasilisk card) {
         super(card);
     }
 

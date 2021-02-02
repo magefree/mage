@@ -32,7 +32,7 @@ public final class ChannelHarm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ChannelHarm(final ChannelHarm card) {
+    private ChannelHarm(final ChannelHarm card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class SarkhansTriumph extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true));
     }
 
-    public SarkhansTriumph(final SarkhansTriumph card) {
+    private SarkhansTriumph(final SarkhansTriumph card) {
         super(card);
     }
 

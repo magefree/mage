@@ -48,7 +48,7 @@ public final class JunkGolem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JunkGolem(final JunkGolem card) {
+    private JunkGolem(final JunkGolem card) {
         super(card);
     }
 

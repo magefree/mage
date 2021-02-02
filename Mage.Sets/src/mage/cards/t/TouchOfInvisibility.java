@@ -27,7 +27,7 @@ public final class TouchOfInvisibility extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public TouchOfInvisibility(final TouchOfInvisibility card) {
+    private TouchOfInvisibility(final TouchOfInvisibility card) {
         super(card);
     }
 

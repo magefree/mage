@@ -50,7 +50,7 @@ public final class RunechantersPike extends CardImpl {
 
     }
 
-    public RunechantersPike(final RunechantersPike card) {
+    private RunechantersPike(final RunechantersPike card) {
         super(card);
     }
 

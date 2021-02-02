@@ -43,7 +43,7 @@ public final class FathomFleetBoarder extends CardImpl {
                  false));
     }
 
-    public FathomFleetBoarder(final FathomFleetBoarder card) {
+    private FathomFleetBoarder(final FathomFleetBoarder card) {
         super(card);
     }
 

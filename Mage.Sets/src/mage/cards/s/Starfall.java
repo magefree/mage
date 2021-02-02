@@ -28,7 +28,7 @@ public final class Starfall extends CardImpl {
 
     }
 
-    public Starfall(final Starfall card) {
+    private Starfall(final Starfall card) {
         super(card);
     }
 

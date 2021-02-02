@@ -42,7 +42,7 @@ public final class NaturesBlessing extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NaturesBlessing(final NaturesBlessing card) {
+    private NaturesBlessing(final NaturesBlessing card) {
         super(card);
     }
 

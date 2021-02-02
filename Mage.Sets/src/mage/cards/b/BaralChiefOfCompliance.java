@@ -47,7 +47,7 @@ public final class BaralChiefOfCompliance extends CardImpl {
         this.addAbility(new SpellCounteredControllerTriggeredAbility(new DrawDiscardControllerEffect(), true));
     }
 
-    public BaralChiefOfCompliance(final BaralChiefOfCompliance card) {
+    private BaralChiefOfCompliance(final BaralChiefOfCompliance card) {
         super(card);
     }
 

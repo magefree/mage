@@ -33,7 +33,7 @@ public final class ZarichiTiger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZarichiTiger(final ZarichiTiger card) {
+    private ZarichiTiger(final ZarichiTiger card) {
         super(card);
     }
 

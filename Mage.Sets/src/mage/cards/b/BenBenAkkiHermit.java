@@ -45,7 +45,7 @@ public final class BenBenAkkiHermit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BenBenAkkiHermit(final BenBenAkkiHermit card) {
+    private BenBenAkkiHermit(final BenBenAkkiHermit card) {
         super(card);
     }
 

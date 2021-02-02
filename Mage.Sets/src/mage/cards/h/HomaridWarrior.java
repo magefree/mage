@@ -41,7 +41,7 @@ public final class HomaridWarrior extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HomaridWarrior(final HomaridWarrior card) {
+    private HomaridWarrior(final HomaridWarrior card) {
         super(card);
     }
 

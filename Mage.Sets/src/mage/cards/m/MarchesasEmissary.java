@@ -30,7 +30,7 @@ public final class MarchesasEmissary extends CardImpl {
         this.addAbility(new DethroneAbility());
     }
 
-    public MarchesasEmissary(final MarchesasEmissary card) {
+    private MarchesasEmissary(final MarchesasEmissary card) {
         super(card);
     }
 

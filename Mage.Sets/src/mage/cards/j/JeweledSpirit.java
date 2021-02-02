@@ -46,7 +46,7 @@ public final class JeweledSpirit extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true))));
     }
 
-    public JeweledSpirit(final JeweledSpirit card) {
+    private JeweledSpirit(final JeweledSpirit card) {
         super(card);
     }
 

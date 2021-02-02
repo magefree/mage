@@ -34,7 +34,7 @@ public final class OathOfGideon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OathOfGideonReplacementEffect()));
     }
 
-    public OathOfGideon(final OathOfGideon card) {
+    private OathOfGideon(final OathOfGideon card) {
         super(card);
     }
 

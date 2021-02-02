@@ -30,7 +30,7 @@ public final class Stormbind extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Stormbind(final Stormbind card) {
+    private Stormbind(final Stormbind card) {
         super(card);
     }
 

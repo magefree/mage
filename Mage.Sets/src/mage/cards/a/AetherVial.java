@@ -39,7 +39,7 @@ public final class AetherVial extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AetherVialEffect(), new TapSourceCost()));
     }
 
-    public AetherVial(final AetherVial card) {
+    private AetherVial(final AetherVial card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class SandsteppeMastodon extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BolsterEffect(5), false));
     }
 
-    public SandsteppeMastodon(final SandsteppeMastodon card) {
+    private SandsteppeMastodon(final SandsteppeMastodon card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class CoatOfArms extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CoatOfArmsEffect()));
     }
 
-    public CoatOfArms(final CoatOfArms card) {
+    private CoatOfArms(final CoatOfArms card) {
         super(card);
     }
 

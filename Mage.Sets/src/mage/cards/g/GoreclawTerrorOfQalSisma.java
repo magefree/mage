@@ -64,7 +64,7 @@ public final class GoreclawTerrorOfQalSisma extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoreclawTerrorOfQalSisma(final GoreclawTerrorOfQalSisma card) {
+    private GoreclawTerrorOfQalSisma(final GoreclawTerrorOfQalSisma card) {
         super(card);
     }
 

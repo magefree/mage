@@ -50,7 +50,7 @@ public final class OrissSamiteGuardian extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrissSamiteGuardian(final OrissSamiteGuardian card) {
+    private OrissSamiteGuardian(final OrissSamiteGuardian card) {
         super(card);
     }
 

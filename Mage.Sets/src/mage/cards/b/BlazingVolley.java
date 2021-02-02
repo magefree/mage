@@ -21,7 +21,7 @@ public final class BlazingVolley extends CardImpl {
         getSpellAbility().addEffect(new DamageAllEffect(1, new FilterOpponentsCreaturePermanent("creature your opponents control")));
     }
 
-    public BlazingVolley(final BlazingVolley card) {
+    private BlazingVolley(final BlazingVolley card) {
         super(card);
     }
 

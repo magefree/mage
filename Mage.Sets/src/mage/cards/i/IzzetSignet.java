@@ -27,7 +27,7 @@ public final class IzzetSignet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IzzetSignet(final IzzetSignet card) {
+    private IzzetSignet(final IzzetSignet card) {
         super(card);
     }
 

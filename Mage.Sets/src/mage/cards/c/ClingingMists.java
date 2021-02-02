@@ -39,7 +39,7 @@ public final class ClingingMists extends CardImpl {
 
     }
 
-    public ClingingMists(final ClingingMists card) {
+    private ClingingMists(final ClingingMists card) {
         super(card);
     }
 

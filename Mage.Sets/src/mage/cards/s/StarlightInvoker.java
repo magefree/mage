@@ -29,7 +29,7 @@ public final class StarlightInvoker extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(5), new ManaCostsImpl("{7}{W}")));
     }
 
-    public StarlightInvoker(final StarlightInvoker card) {
+    private StarlightInvoker(final StarlightInvoker card) {
         super(card);
     }
 

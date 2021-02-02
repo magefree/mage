@@ -38,7 +38,7 @@ public final class DarkheartSliver extends CardImpl {
                         "All Slivers have \"Sacrifice this permanent: You gain 3 life.\"")));
     }
 
-    public DarkheartSliver(final DarkheartSliver card) {
+    private DarkheartSliver(final DarkheartSliver card) {
         super(card);
     }
 

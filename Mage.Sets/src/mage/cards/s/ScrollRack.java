@@ -35,7 +35,7 @@ public final class ScrollRack extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScrollRack(final ScrollRack card) {
+    private ScrollRack(final ScrollRack card) {
         super(card);
     }
 

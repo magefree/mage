@@ -25,7 +25,7 @@ public final class LastCaress extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br><br>Draw a card"));
     }
 
-    public LastCaress(final LastCaress card) {
+    private LastCaress(final LastCaress card) {
         super(card);
     }
 

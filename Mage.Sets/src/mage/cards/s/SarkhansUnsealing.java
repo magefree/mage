@@ -63,7 +63,7 @@ public final class SarkhansUnsealing extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SarkhansUnsealing(final SarkhansUnsealing card) {
+    private SarkhansUnsealing(final SarkhansUnsealing card) {
         super(card);
     }
 

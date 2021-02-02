@@ -41,7 +41,7 @@ public final class MaulfistDoorbuster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MaulfistDoorbuster(final MaulfistDoorbuster card) {
+    private MaulfistDoorbuster(final MaulfistDoorbuster card) {
         super(card);
     }
 

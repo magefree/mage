@@ -42,7 +42,7 @@ public final class AirBladder extends CardImpl {
 
     }
 
-    public AirBladder(final AirBladder card) {
+    private AirBladder(final AirBladder card) {
         super(card);
     }
 

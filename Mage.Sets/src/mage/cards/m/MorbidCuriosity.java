@@ -36,7 +36,7 @@ public final class MorbidCuriosity extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new SacrificeCostConvertedMana("permanent")));
     }
 
-    public MorbidCuriosity(final MorbidCuriosity card) {
+    private MorbidCuriosity(final MorbidCuriosity card) {
         super(card);
     }
 

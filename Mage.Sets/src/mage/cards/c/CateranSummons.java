@@ -31,7 +31,7 @@ public final class CateranSummons extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
     }
 
-    public CateranSummons(final CateranSummons card) {
+    private CateranSummons(final CateranSummons card) {
         super(card);
     }
 

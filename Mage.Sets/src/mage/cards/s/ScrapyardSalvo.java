@@ -23,7 +23,7 @@ public final class ScrapyardSalvo extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(new CardsInControllerGraveyardCount(new FilterArtifactCard())));
     }
 
-    public ScrapyardSalvo(final ScrapyardSalvo card) {
+    private ScrapyardSalvo(final ScrapyardSalvo card) {
         super(card);
     }
 

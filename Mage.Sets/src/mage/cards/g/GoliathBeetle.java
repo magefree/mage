@@ -26,7 +26,7 @@ public final class GoliathBeetle extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public GoliathBeetle(final GoliathBeetle card) {
+    private GoliathBeetle(final GoliathBeetle card) {
         super(card);
     }
 

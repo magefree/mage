@@ -48,7 +48,7 @@ public final class DevotedCaretaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DevotedCaretaker(final DevotedCaretaker card) {
+    private DevotedCaretaker(final DevotedCaretaker card) {
         super(card);
     }
 

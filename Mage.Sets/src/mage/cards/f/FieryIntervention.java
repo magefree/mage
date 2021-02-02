@@ -32,7 +32,7 @@ public final class FieryIntervention extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public FieryIntervention(final FieryIntervention card) {
+    private FieryIntervention(final FieryIntervention card) {
         super(card);
     }
 

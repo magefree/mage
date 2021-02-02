@@ -30,7 +30,7 @@ public final class BogWreckage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BogWreckage(final BogWreckage card) {
+    private BogWreckage(final BogWreckage card) {
         super(card);
     }
 

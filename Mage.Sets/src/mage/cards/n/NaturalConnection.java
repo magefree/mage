@@ -25,7 +25,7 @@ public final class NaturalConnection extends CardImpl {
 
     }
 
-    public NaturalConnection(final NaturalConnection card) {
+    private NaturalConnection(final NaturalConnection card) {
         super(card);
     }
 

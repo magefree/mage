@@ -48,7 +48,7 @@ public final class Duplicant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DuplicantContinuousEffect()));
     }
 
-    public Duplicant(final Duplicant card) {
+    private Duplicant(final Duplicant card) {
         super(card);
     }
 

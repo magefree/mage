@@ -36,7 +36,7 @@ public final class YavimayaEnchantress extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield)));
     }
 
-    public YavimayaEnchantress(final YavimayaEnchantress card) {
+    private YavimayaEnchantress(final YavimayaEnchantress card) {
         super(card);
     }
 

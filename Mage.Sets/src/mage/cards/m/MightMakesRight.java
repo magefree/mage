@@ -50,7 +50,7 @@ public final class MightMakesRight extends CardImpl {
         this.addAbility(conditionalAbility);
     }
 
-    public MightMakesRight(final MightMakesRight card) {
+    private MightMakesRight(final MightMakesRight card) {
         super(card);
     }
 

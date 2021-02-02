@@ -45,7 +45,7 @@ public final class CorruptedRoots extends CardImpl {
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new LoseLifeControllerAttachedEffect(2), "enchanted land"));
     }
 
-    public CorruptedRoots(final CorruptedRoots card) {
+    private CorruptedRoots(final CorruptedRoots card) {
         super(card);
     }
 

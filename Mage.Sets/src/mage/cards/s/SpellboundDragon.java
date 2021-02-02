@@ -40,7 +40,7 @@ public final class SpellboundDragon extends CardImpl {
 
     }
 
-    public SpellboundDragon(final SpellboundDragon card) {
+    private SpellboundDragon(final SpellboundDragon card) {
         super(card);
     }
 

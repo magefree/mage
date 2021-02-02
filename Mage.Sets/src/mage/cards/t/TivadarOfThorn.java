@@ -51,7 +51,7 @@ public final class TivadarOfThorn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TivadarOfThorn(final TivadarOfThorn card) {
+    private TivadarOfThorn(final TivadarOfThorn card) {
         super(card);
     }
 

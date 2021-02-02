@@ -30,7 +30,7 @@ public final class HowlingGolem extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new DrawCardAllEffect(1), false));
     }
 
-    public HowlingGolem(final HowlingGolem card) {
+    private HowlingGolem(final HowlingGolem card) {
         super(card);
     }
 

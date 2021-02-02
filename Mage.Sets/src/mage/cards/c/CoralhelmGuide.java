@@ -35,7 +35,7 @@ public final class CoralhelmGuide extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CoralhelmGuide(final CoralhelmGuide card) {
+    private CoralhelmGuide(final CoralhelmGuide card) {
         super(card);
     }
 

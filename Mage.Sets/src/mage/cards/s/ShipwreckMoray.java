@@ -35,7 +35,7 @@ public final class ShipwreckMoray extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -2, Duration.EndOfTurn), new PayEnergyCost(1)));
     }
 
-    public ShipwreckMoray(final ShipwreckMoray card) {
+    private ShipwreckMoray(final ShipwreckMoray card) {
         super(card);
     }
 

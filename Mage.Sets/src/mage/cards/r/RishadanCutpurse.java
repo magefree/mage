@@ -27,7 +27,7 @@ public final class RishadanCutpurse extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeOpponentsUnlessPayEffect(1)));
     }
 
-    public RishadanCutpurse(final RishadanCutpurse card) {
+    private RishadanCutpurse(final RishadanCutpurse card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class EngulfingFlames extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), TimingRule.INSTANT));
     }
 
-    public EngulfingFlames(final EngulfingFlames card) {
+    private EngulfingFlames(final EngulfingFlames card) {
         super(card);
     }
 

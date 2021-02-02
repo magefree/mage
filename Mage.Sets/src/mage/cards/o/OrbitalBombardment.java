@@ -29,7 +29,7 @@ public final class OrbitalBombardment extends CardImpl {
         getSpellAbility().getEffects().add(new DestroyAllEffect(new FilterCreaturePermanent(filter)));
     }
 
-    public OrbitalBombardment(final OrbitalBombardment card) {
+    private OrbitalBombardment(final OrbitalBombardment card) {
         super(card);
     }
 

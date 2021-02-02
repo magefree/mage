@@ -26,7 +26,7 @@ public final class ShelteringLight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ShelteringLight(final ShelteringLight card) {
+    private ShelteringLight(final ShelteringLight card) {
         super(card);
     }
 

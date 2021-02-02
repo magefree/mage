@@ -42,7 +42,7 @@ public final class DiscipleOfTeveshSzat extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DiscipleOfTeveshSzat(final DiscipleOfTeveshSzat card) {
+    private DiscipleOfTeveshSzat(final DiscipleOfTeveshSzat card) {
         super(card);
     }
 

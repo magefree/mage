@@ -30,7 +30,7 @@ public final class AkromasMemorial extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(compoundAbilities, Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures"))));
     }
 
-    public AkromasMemorial(final AkromasMemorial card) {
+    private AkromasMemorial(final AkromasMemorial card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class BarrinsUnmaking extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
-    public BarrinsUnmaking(final BarrinsUnmaking card) {
+    private BarrinsUnmaking(final BarrinsUnmaking card) {
         super(card);
     }
 

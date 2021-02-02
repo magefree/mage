@@ -29,7 +29,7 @@ public final class CrudeRampart extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{W}")));
     }
 
-    public CrudeRampart(final CrudeRampart card) {
+    private CrudeRampart(final CrudeRampart card) {
         super(card);
     }
 

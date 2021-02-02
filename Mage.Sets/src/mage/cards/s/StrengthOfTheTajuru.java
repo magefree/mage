@@ -33,7 +33,7 @@ public final class StrengthOfTheTajuru extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(StrengthOfTheTajuruAdjuster.instance);
     }
 
-    public StrengthOfTheTajuru(final StrengthOfTheTajuru card) {
+    private StrengthOfTheTajuru(final StrengthOfTheTajuru card) {
         super(card);
     }
 

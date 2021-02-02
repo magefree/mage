@@ -30,7 +30,7 @@ public final class JungleHollow extends CardImpl {
         
     }
 
-    public JungleHollow(final JungleHollow card) {
+    private JungleHollow(final JungleHollow card) {
         super(card);
     }
 

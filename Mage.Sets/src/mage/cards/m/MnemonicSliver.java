@@ -38,7 +38,7 @@ public final class MnemonicSliver extends CardImpl {
                 new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, false)));
     }
 
-    public MnemonicSliver(final MnemonicSliver card) {
+    private MnemonicSliver(final MnemonicSliver card) {
         super(card);
     }
 

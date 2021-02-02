@@ -44,7 +44,7 @@ public final class TilonallisKnight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TilonallisKnight(final TilonallisKnight card) {
+    private TilonallisKnight(final TilonallisKnight card) {
         super(card);
     }
 

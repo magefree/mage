@@ -35,7 +35,7 @@ public final class TitaniasSong extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new TitaniasSongEffect(Duration.EndOfTurn), false));
     }
 
-    public TitaniasSong(final TitaniasSong card) {
+    private TitaniasSong(final TitaniasSong card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class KjeldoranWarCry extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public KjeldoranWarCry(final KjeldoranWarCry card) {
+    private KjeldoranWarCry(final KjeldoranWarCry card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class VenerableLammasu extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public VenerableLammasu(final VenerableLammasu card) {
+    private VenerableLammasu(final VenerableLammasu card) {
         super(card);
     }
 

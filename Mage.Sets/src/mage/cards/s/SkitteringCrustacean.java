@@ -41,7 +41,7 @@ public final class SkitteringCrustacean extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkitteringCrustacean(final SkitteringCrustacean card) {
+    private SkitteringCrustacean(final SkitteringCrustacean card) {
         super(card);
     }
 

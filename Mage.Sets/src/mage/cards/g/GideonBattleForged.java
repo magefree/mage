@@ -70,7 +70,7 @@ public final class GideonBattleForged extends CardImpl {
 
     }
 
-    public GideonBattleForged(final GideonBattleForged card) {
+    private GideonBattleForged(final GideonBattleForged card) {
         super(card);
     }
 

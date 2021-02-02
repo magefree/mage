@@ -34,7 +34,7 @@ public final class VengefulRebirth extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public VengefulRebirth(final VengefulRebirth card) {
+    private VengefulRebirth(final VengefulRebirth card) {
         super(card);
     }
 

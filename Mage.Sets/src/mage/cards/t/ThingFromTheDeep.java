@@ -38,7 +38,7 @@ public final class ThingFromTheDeep extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }
 
-    public ThingFromTheDeep(final ThingFromTheDeep card) {
+    private ThingFromTheDeep(final ThingFromTheDeep card) {
         super(card);
     }
 

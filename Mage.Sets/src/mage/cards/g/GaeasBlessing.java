@@ -40,7 +40,7 @@ public final class GaeasBlessing extends CardImpl {
         this.addAbility(new GaeasBlessingTriggeredAbility());
     }
 
-    public GaeasBlessing(final GaeasBlessing card) {
+    private GaeasBlessing(final GaeasBlessing card) {
         super(card);
     }
 

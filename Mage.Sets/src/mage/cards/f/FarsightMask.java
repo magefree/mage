@@ -24,7 +24,7 @@ public final class FarsightMask extends CardImpl {
         this.addAbility(new FarsightMaskTriggeredAbility());
     }
 
-    public FarsightMask(final FarsightMask card) {
+    private FarsightMask(final FarsightMask card) {
         super(card);
     }
 

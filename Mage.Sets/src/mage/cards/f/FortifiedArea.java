@@ -39,7 +39,7 @@ public final class FortifiedArea extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FortifiedArea(final FortifiedArea card) {
+    private FortifiedArea(final FortifiedArea card) {
         super(card);
     }
 

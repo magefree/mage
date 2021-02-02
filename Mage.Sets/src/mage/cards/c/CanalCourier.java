@@ -44,7 +44,7 @@ public final class CanalCourier extends CardImpl {
 
     }
 
-    public CanalCourier(final CanalCourier card) {
+    private CanalCourier(final CanalCourier card) {
         super(card);
     }
 

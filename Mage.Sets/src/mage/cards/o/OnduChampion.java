@@ -32,7 +32,7 @@ public final class OnduChampion extends CardImpl {
                 new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), false));
     }
 
-    public OnduChampion(final OnduChampion card) {
+    private OnduChampion(final OnduChampion card) {
         super(card);
     }
 

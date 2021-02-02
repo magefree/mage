@@ -52,7 +52,7 @@ public final class MadblindMountain extends CardImpl {
 
     }
 
-    public MadblindMountain(final MadblindMountain card) {
+    private MadblindMountain(final MadblindMountain card) {
         super(card);
     }
 

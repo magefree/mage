@@ -45,7 +45,7 @@ public final class LustForWar extends CardImpl {
             new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA)));
     }
 
-    public LustForWar(final LustForWar card) {
+    private LustForWar(final LustForWar card) {
         super(card);
     }
 

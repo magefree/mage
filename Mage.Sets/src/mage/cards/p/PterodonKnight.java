@@ -42,7 +42,7 @@ public final class PterodonKnight extends CardImpl {
                         new PermanentsOnTheBattlefieldCondition(filter), "{this} has flying as long as you control a Dinosaur")));
     }
 
-    public PterodonKnight(final PterodonKnight card) {
+    private PterodonKnight(final PterodonKnight card) {
         super(card);
     }
 

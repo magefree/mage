@@ -47,7 +47,7 @@ public final class Heroism extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new HeroismEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
     }
 
-    public Heroism(final Heroism card) {
+    private Heroism(final Heroism card) {
         super(card);
     }
 

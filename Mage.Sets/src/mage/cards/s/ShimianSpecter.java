@@ -47,7 +47,7 @@ public final class ShimianSpecter extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ShimianSpecterEffect(), false, true));
     }
 
-    public ShimianSpecter(final ShimianSpecter card) {
+    private ShimianSpecter(final ShimianSpecter card) {
         super(card);
     }
 

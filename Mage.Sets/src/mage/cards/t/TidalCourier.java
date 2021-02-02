@@ -42,7 +42,7 @@ public final class TidalCourier extends CardImpl {
                 Duration.EndOfTurn), new ManaCostsImpl("{3}{U}")));
     }
 
-    public TidalCourier(final TidalCourier card) {
+    private TidalCourier(final TidalCourier card) {
         super(card);
     }
 

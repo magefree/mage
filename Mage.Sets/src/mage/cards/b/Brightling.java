@@ -72,7 +72,7 @@ public final class Brightling extends CardImpl {
         ));
     }
 
-    public Brightling(final Brightling card) {
+    private Brightling(final Brightling card) {
         super(card);
     }
 

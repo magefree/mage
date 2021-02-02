@@ -39,7 +39,7 @@ public final class EverflameEidolon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
     }
 
-    public EverflameEidolon(final EverflameEidolon card) {
+    private EverflameEidolon(final EverflameEidolon card) {
         super(card);
     }
 

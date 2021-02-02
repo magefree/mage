@@ -23,7 +23,7 @@ public final class UrGolemsEye extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 
-    public UrGolemsEye(final UrGolemsEye card) {
+    private UrGolemsEye(final UrGolemsEye card) {
         super(card);
     }
 

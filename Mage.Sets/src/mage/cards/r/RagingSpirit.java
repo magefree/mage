@@ -30,7 +30,7 @@ public final class RagingSpirit extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(new ObjectColor(), Duration.EndOfTurn), new ManaCostsImpl("{2}")));
     }
 
-    public RagingSpirit(final RagingSpirit card) {
+    private RagingSpirit(final RagingSpirit card) {
         super(card);
     }
 

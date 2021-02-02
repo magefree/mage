@@ -39,7 +39,7 @@ public final class SacredMesa extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PegasusToken()), new ManaCostsImpl<>("{1}{W}")));
     }
 
-    public SacredMesa(final SacredMesa card) {
+    private SacredMesa(final SacredMesa card) {
         super(card);
     }
 

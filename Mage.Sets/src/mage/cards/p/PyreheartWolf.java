@@ -42,7 +42,7 @@ public final class PyreheartWolf extends CardImpl {
 
     }
 
-    public PyreheartWolf(final PyreheartWolf card) {
+    private PyreheartWolf(final PyreheartWolf card) {
         super(card);
     }
 

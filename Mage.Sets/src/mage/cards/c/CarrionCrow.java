@@ -31,7 +31,7 @@ public final class CarrionCrow extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
     }
 
-    public CarrionCrow(final CarrionCrow card) {
+    private CarrionCrow(final CarrionCrow card) {
         super(card);
     }
 

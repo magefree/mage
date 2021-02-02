@@ -51,7 +51,7 @@ public final class WoollyRazorback extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new RemoveCounterSourceEffect(CounterType.ICE.createInstance()).setText("remove an ice counter from it"), false));
     }
 
-    public WoollyRazorback(final WoollyRazorback card) {
+    private WoollyRazorback(final WoollyRazorback card) {
         super(card);
     }
 

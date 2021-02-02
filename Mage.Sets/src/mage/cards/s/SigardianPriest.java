@@ -43,7 +43,7 @@ public final class SigardianPriest extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SigardianPriest(final SigardianPriest card) {
+    private SigardianPriest(final SigardianPriest card) {
         super(card);
     }
 

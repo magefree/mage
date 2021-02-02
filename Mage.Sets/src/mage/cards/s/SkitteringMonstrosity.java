@@ -27,7 +27,7 @@ public final class SkitteringMonstrosity extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false));
     }
 
-    public SkitteringMonstrosity(final SkitteringMonstrosity card) {
+    private SkitteringMonstrosity(final SkitteringMonstrosity card) {
         super(card);
     }
 

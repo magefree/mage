@@ -40,7 +40,7 @@ public final class MistmoonGriffin extends CardImpl {
 
     }
 
-    public MistmoonGriffin(final MistmoonGriffin card) {
+    private MistmoonGriffin(final MistmoonGriffin card) {
         super(card);
     }
 

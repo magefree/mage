@@ -57,7 +57,7 @@ public final class BontuTheGlorified extends CardImpl {
 
     }
 
-    public BontuTheGlorified(final BontuTheGlorified card) {
+    private BontuTheGlorified(final BontuTheGlorified card) {
         super(card);
     }
 

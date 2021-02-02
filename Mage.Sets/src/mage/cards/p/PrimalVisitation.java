@@ -43,7 +43,7 @@ public final class PrimalVisitation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
-    public PrimalVisitation(final PrimalVisitation card) {
+    private PrimalVisitation(final PrimalVisitation card) {
         super(card);
     }
 

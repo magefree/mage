@@ -47,7 +47,7 @@ public final class RazorfinAbolisher extends CardImpl {
         
     }
 
-    public RazorfinAbolisher(final RazorfinAbolisher card) {
+    private RazorfinAbolisher(final RazorfinAbolisher card) {
         super(card);
     }
 

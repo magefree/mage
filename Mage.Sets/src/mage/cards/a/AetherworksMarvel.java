@@ -46,7 +46,7 @@ public final class AetherworksMarvel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AetherworksMarvel(final AetherworksMarvel card) {
+    private AetherworksMarvel(final AetherworksMarvel card) {
         super(card);
     }
 

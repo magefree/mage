@@ -45,7 +45,7 @@ public final class OgreGeargrabber extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OgreGeargrabber(final OgreGeargrabber card) {
+    private OgreGeargrabber(final OgreGeargrabber card) {
         super(card);
     }
 

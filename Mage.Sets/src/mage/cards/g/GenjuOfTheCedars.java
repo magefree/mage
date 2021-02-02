@@ -50,7 +50,7 @@ public final class GenjuOfTheCedars extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public GenjuOfTheCedars(final GenjuOfTheCedars card) {
+    private GenjuOfTheCedars(final GenjuOfTheCedars card) {
         super(card);
     }
 

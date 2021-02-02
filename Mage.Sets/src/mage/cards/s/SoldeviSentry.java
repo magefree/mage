@@ -35,7 +35,7 @@ public final class SoldeviSentry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoldeviSentry(final SoldeviSentry card) {
+    private SoldeviSentry(final SoldeviSentry card) {
         super(card);
     }
 

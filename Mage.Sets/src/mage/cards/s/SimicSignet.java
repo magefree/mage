@@ -27,7 +27,7 @@ public final class SimicSignet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SimicSignet(final SimicSignet card) {
+    private SimicSignet(final SimicSignet card) {
         super(card);
     }
 

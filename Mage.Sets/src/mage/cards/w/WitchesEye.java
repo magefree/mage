@@ -38,7 +38,7 @@ public final class WitchesEye extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(1)));
     }
 
-    public WitchesEye(final WitchesEye card) {
+    private WitchesEye(final WitchesEye card) {
         super(card);
     }
 

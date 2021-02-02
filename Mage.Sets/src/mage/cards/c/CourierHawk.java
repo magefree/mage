@@ -27,7 +27,7 @@ public final class CourierHawk extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public CourierHawk(final CourierHawk card) {
+    private CourierHawk(final CourierHawk card) {
         super(card);
     }
 

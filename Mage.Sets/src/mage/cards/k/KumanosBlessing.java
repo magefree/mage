@@ -49,7 +49,7 @@ public final class KumanosBlessing extends CardImpl {
 
     }
 
-    public KumanosBlessing(final KumanosBlessing card) {
+    private KumanosBlessing(final KumanosBlessing card) {
         super(card);
     }
 

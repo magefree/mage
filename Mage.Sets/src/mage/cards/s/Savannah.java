@@ -24,7 +24,7 @@ public final class Savannah extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public Savannah(final Savannah card) {
+    private Savannah(final Savannah card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class DictateOfErebos extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new SacrificeOpponentsEffect(new FilterControlledCreaturePermanent("creature")), false, filter));
     }
 
-    public DictateOfErebos(final DictateOfErebos card) {
+    private DictateOfErebos(final DictateOfErebos card) {
         super(card);
     }
 

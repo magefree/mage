@@ -46,7 +46,7 @@ public final class JuniperOrderAdvocate extends CardImpl {
             "As long as {this} is untapped, green creatures you control get +1/+1.")));
     }
 
-    public JuniperOrderAdvocate(final JuniperOrderAdvocate card) {
+    private JuniperOrderAdvocate(final JuniperOrderAdvocate card) {
         super(card);
     }
 

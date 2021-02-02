@@ -28,7 +28,7 @@ public final class ShambleBack extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 
-    public ShambleBack(final ShambleBack card) {
+    private ShambleBack(final ShambleBack card) {
         super(card);
     }
 

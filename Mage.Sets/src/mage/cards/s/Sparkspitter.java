@@ -36,7 +36,7 @@ public final class Sparkspitter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Sparkspitter(final Sparkspitter card) {
+    private Sparkspitter(final Sparkspitter card) {
         super(card);
     }
 

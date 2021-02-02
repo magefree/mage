@@ -23,7 +23,7 @@ public final class WuInfantry extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public WuInfantry(final WuInfantry card) {
+    private WuInfantry(final WuInfantry card) {
         super(card);
     }
 

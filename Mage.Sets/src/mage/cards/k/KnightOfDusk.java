@@ -38,7 +38,7 @@ public final class KnightOfDusk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KnightOfDusk(final KnightOfDusk card) {
+    private KnightOfDusk(final KnightOfDusk card) {
         super(card);
     }
 

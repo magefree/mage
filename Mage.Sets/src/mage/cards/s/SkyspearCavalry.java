@@ -30,7 +30,7 @@ public final class SkyspearCavalry extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
     }
 
-    public SkyspearCavalry(final SkyspearCavalry card) {
+    private SkyspearCavalry(final SkyspearCavalry card) {
         super(card);
     }
 

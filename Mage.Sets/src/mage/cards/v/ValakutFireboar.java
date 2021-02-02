@@ -28,7 +28,7 @@ public final class ValakutFireboar extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), false));
     }
 
-    public ValakutFireboar(final ValakutFireboar card) {
+    private ValakutFireboar(final ValakutFireboar card) {
         super(card);
     }
 

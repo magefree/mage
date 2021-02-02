@@ -35,7 +35,7 @@ public final class GalvanicBlast extends CardImpl {
         this.getSpellAbility().addHint(MetalcraftHint.instance);
     }
 
-    public GalvanicBlast(final GalvanicBlast card) {
+    private GalvanicBlast(final GalvanicBlast card) {
         super(card);
     }
 

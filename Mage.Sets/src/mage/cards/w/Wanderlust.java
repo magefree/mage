@@ -39,7 +39,7 @@ public final class Wanderlust extends CardImpl {
             TargetController.CONTROLLER_ATTACHED_TO, false, true));
     }
 
-    public Wanderlust(final Wanderlust card) {
+    private Wanderlust(final Wanderlust card) {
         super(card);
     }
 

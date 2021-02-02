@@ -25,7 +25,7 @@ public final class BakeIntoAPie extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new FoodToken(), 1));
     }
 
-    public BakeIntoAPie(final BakeIntoAPie card) {
+    private BakeIntoAPie(final BakeIntoAPie card) {
         super(card);
     }
 

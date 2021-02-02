@@ -39,7 +39,7 @@ public final class SagesDousing extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter),"If you control a Wizard, draw a card"));
     }
 
-    public SagesDousing(final SagesDousing card) {
+    private SagesDousing(final SagesDousing card) {
         super(card);
     }
 

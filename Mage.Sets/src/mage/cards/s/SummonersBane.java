@@ -25,7 +25,7 @@ public final class SummonersBane extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new IllusionToken()));
     }
 
-    public SummonersBane(final SummonersBane card) {
+    private SummonersBane(final SummonersBane card) {
         super(card);
     }
 

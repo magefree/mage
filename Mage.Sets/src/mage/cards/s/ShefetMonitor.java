@@ -48,7 +48,7 @@ public final class ShefetMonitor extends CardImpl {
                 true));
     }
 
-    public ShefetMonitor(final ShefetMonitor card) {
+    private ShefetMonitor(final ShefetMonitor card) {
         super(card);
     }
 

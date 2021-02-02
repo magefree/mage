@@ -42,7 +42,7 @@ public final class PressIntoService extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public PressIntoService(final PressIntoService card) {
+    private PressIntoService(final PressIntoService card) {
         super(card);
     }
 

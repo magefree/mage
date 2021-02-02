@@ -49,7 +49,7 @@ public final class BrudicladTelchorEngineer extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new BrudicladTelchorEngineerEffect(), TargetController.YOU, false));
     }
 
-    public BrudicladTelchorEngineer(final BrudicladTelchorEngineer card) {
+    private BrudicladTelchorEngineer(final BrudicladTelchorEngineer card) {
         super(card);
     }
 

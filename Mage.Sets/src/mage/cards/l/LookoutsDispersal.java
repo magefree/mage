@@ -44,7 +44,7 @@ public final class LookoutsDispersal extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public LookoutsDispersal(final LookoutsDispersal card) {
+    private LookoutsDispersal(final LookoutsDispersal card) {
         super(card);
     }
 

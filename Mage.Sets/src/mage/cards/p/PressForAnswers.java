@@ -32,7 +32,7 @@ public final class PressForAnswers extends CardImpl {
 
     }
 
-    public PressForAnswers(final PressForAnswers card) {
+    private PressForAnswers(final PressForAnswers card) {
         super(card);
     }
 

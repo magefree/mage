@@ -23,7 +23,7 @@ public final class ElvenCache extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
     }
 
-    public ElvenCache(final ElvenCache card) {
+    private ElvenCache(final ElvenCache card) {
         super(card);
     }
 

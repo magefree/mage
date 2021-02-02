@@ -55,7 +55,7 @@ public final class Gigantiform extends CardImpl {
                 "When {this} enters the battlefield, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle your library."));
     }
 
-    public Gigantiform(final Gigantiform card) {
+    private Gigantiform(final Gigantiform card) {
         super(card);
     }
 

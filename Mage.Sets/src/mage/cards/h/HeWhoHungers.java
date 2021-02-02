@@ -59,7 +59,7 @@ public final class HeWhoHungers extends CardImpl {
         this.addAbility(new SoulshiftAbility(4));
     }
 
-    public HeWhoHungers(final HeWhoHungers card) {
+    private HeWhoHungers(final HeWhoHungers card) {
         super(card);
     }
 

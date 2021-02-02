@@ -48,7 +48,7 @@ public final class MystifyingMaze extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MystifyingMaze(final MystifyingMaze card) {
+    private MystifyingMaze(final MystifyingMaze card) {
         super(card);
     }
 

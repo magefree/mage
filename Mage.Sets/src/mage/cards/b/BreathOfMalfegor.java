@@ -25,7 +25,7 @@ public final class BreathOfMalfegor extends CardImpl {
         
     }
 
-    public BreathOfMalfegor(final BreathOfMalfegor card) {
+    private BreathOfMalfegor(final BreathOfMalfegor card) {
         super(card);
     }
 

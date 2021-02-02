@@ -33,7 +33,7 @@ public final class GoForTheThroat extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public GoForTheThroat(final GoForTheThroat card) {
+    private GoForTheThroat(final GoForTheThroat card) {
         super(card);
     }
 

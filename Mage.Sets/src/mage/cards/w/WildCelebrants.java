@@ -33,7 +33,7 @@ public final class WildCelebrants extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WildCelebrants(final WildCelebrants card) {
+    private WildCelebrants(final WildCelebrants card) {
         super(card);
     }
 

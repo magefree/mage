@@ -25,7 +25,7 @@ public final class Dispossess extends CardImpl {
         this.getSpellAbility().addEffect(new DispossessEffect());
     }
 
-    public Dispossess(final Dispossess card) {
+    private Dispossess(final Dispossess card) {
         super(card);
     }
 

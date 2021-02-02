@@ -35,7 +35,7 @@ public final class Edgewalker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, new ManaCostsImpl<>("{W}{B}"))));
     }
 
-    public Edgewalker(final Edgewalker card) {
+    private Edgewalker(final Edgewalker card) {
         super(card);
     }
 

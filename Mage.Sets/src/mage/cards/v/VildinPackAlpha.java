@@ -45,7 +45,7 @@ public final class VildinPackAlpha extends CardImpl {
 
     }
 
-    public VildinPackAlpha(final VildinPackAlpha card) {
+    private VildinPackAlpha(final VildinPackAlpha card) {
         super(card);
     }
 

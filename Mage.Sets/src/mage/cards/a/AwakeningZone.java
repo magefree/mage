@@ -22,7 +22,7 @@ public final class AwakeningZone extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken()), TargetController.YOU, true));
     }
 
-    public AwakeningZone(final AwakeningZone card) {
+    private AwakeningZone(final AwakeningZone card) {
         super(card);
     }
 

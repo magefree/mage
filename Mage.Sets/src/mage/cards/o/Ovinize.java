@@ -32,7 +32,7 @@ public final class Ovinize extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Ovinize(final Ovinize card) {
+    private Ovinize(final Ovinize card) {
         super(card);
     }
 

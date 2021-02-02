@@ -57,7 +57,7 @@ public final class DarkbladeAgent extends CardImpl {
         this.addAbility(ability, new DarkbladeAgentWatcher());
     }
 
-    public DarkbladeAgent(final DarkbladeAgent card) {
+    private DarkbladeAgent(final DarkbladeAgent card) {
         super(card);
     }
 

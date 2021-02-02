@@ -49,7 +49,7 @@ public final class TrigonOfRage extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public TrigonOfRage(final TrigonOfRage card) {
+    private TrigonOfRage(final TrigonOfRage card) {
         super(card);
     }
 

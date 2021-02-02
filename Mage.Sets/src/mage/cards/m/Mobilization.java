@@ -36,7 +36,7 @@ public final class Mobilization extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierToken(), 1), new ManaCostsImpl("{2}{W}")));
     }
 
-    public Mobilization(final Mobilization card) {
+    private Mobilization(final Mobilization card) {
         super(card);
     }
 

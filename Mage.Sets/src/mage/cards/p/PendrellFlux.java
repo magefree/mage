@@ -45,7 +45,7 @@ public final class PendrellFlux extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public PendrellFlux(final PendrellFlux card) {
+    private PendrellFlux(final PendrellFlux card) {
         super(card);
     }
 

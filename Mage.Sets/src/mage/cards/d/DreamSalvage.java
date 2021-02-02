@@ -33,7 +33,7 @@ public final class DreamSalvage extends CardImpl {
 
     }
 
-    public DreamSalvage(final DreamSalvage card) {
+    private DreamSalvage(final DreamSalvage card) {
         super(card);
     }
 

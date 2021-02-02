@@ -26,7 +26,7 @@ public final class DingusStaff extends CardImpl {
         addAbility(new DiesCreatureTriggeredAbility(new DingusStaffEffect(), false, false, true));
     }
 
-    public DingusStaff(final DingusStaff card) {
+    private DingusStaff(final DingusStaff card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class MinersBane extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MinersBane(final MinersBane card) {
+    private MinersBane(final MinersBane card) {
         super(card);
     }
 

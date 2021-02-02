@@ -37,7 +37,7 @@ public final class GwendlynDiCorci extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GwendlynDiCorci(final GwendlynDiCorci card) {
+    private GwendlynDiCorci(final GwendlynDiCorci card) {
         super(card);
     }
 

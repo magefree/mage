@@ -38,7 +38,7 @@ public final class EndangeredArmodon extends CardImpl {
                 new SacrificeSourceEffect()));
     }
 
-    public EndangeredArmodon(final EndangeredArmodon card) {
+    private EndangeredArmodon(final EndangeredArmodon card) {
         super(card);
     }
 

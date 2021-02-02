@@ -29,7 +29,7 @@ public final class InGarruksWake extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public InGarruksWake(final InGarruksWake card) {
+    private InGarruksWake(final InGarruksWake card) {
         super(card);
     }
 

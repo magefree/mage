@@ -33,7 +33,7 @@ public final class TreefolkMystic extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new TreefolkMysticEffect(), false));
     }
 
-    public TreefolkMystic(final TreefolkMystic card) {
+    private TreefolkMystic(final TreefolkMystic card) {
         super(card);
     }
 

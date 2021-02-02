@@ -53,7 +53,7 @@ public final class ShieldMare extends CardImpl {
         this.addAbility(new ShieldMareTriggeredAbility());
     }
 
-    public ShieldMare(final ShieldMare card) {
+    private ShieldMare(final ShieldMare card) {
         super(card);
     }
 

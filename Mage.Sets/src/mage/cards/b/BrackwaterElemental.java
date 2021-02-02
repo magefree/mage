@@ -38,7 +38,7 @@ public final class BrackwaterElemental extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{2}{U}")));
     }
 
-    public BrackwaterElemental(final BrackwaterElemental card) {
+    private BrackwaterElemental(final BrackwaterElemental card) {
         super(card);
     }
 

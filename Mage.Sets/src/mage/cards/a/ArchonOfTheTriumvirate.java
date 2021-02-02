@@ -44,7 +44,7 @@ public final class ArchonOfTheTriumvirate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArchonOfTheTriumvirate(final ArchonOfTheTriumvirate card) {
+    private ArchonOfTheTriumvirate(final ArchonOfTheTriumvirate card) {
         super(card);
     }
 

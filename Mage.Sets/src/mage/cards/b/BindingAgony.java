@@ -37,7 +37,7 @@ public final class BindingAgony extends CardImpl {
         this.addAbility(new DealtDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, effect, false, SetTargetPointer.PLAYER));
     }
 
-    public BindingAgony(final BindingAgony card) {
+    private BindingAgony(final BindingAgony card) {
         super(card);
     }
 

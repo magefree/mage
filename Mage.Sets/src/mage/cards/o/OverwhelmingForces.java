@@ -29,7 +29,7 @@ public final class OverwhelmingForces extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public OverwhelmingForces(final OverwhelmingForces card) {
+    private OverwhelmingForces(final OverwhelmingForces card) {
         super(card);
     }
 

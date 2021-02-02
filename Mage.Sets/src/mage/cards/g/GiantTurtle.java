@@ -34,7 +34,7 @@ public final class GiantTurtle extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackIfAttackedLastTurnEffect()), new AttackedLastTurnWatcher());
     }
 
-    public GiantTurtle(final GiantTurtle card) {
+    private GiantTurtle(final GiantTurtle card) {
         super(card);
     }
 

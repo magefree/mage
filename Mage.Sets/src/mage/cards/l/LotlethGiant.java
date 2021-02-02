@@ -37,7 +37,7 @@ public final class LotlethGiant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LotlethGiant(final LotlethGiant card) {
+    private LotlethGiant(final LotlethGiant card) {
         super(card);
     }
 

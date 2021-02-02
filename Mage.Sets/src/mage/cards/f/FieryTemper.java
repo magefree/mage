@@ -28,7 +28,7 @@ public final class FieryTemper extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{R}")));
     }
 
-    public FieryTemper(final FieryTemper card) {
+    private FieryTemper(final FieryTemper card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class ArmamentOfNyx extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArmamentOfNyx(final ArmamentOfNyx card) {
+    private ArmamentOfNyx(final ArmamentOfNyx card) {
         super(card);
     }
 

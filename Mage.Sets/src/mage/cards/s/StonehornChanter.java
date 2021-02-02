@@ -37,7 +37,7 @@ public final class StonehornChanter extends CardImpl {
 
     }
 
-    public StonehornChanter(final StonehornChanter card) {
+    private StonehornChanter(final StonehornChanter card) {
         super(card);
     }
 

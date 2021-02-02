@@ -31,7 +31,7 @@ public final class MoralityShift extends CardImpl {
         
     }
 
-    public MoralityShift(final MoralityShift card) {
+    private MoralityShift(final MoralityShift card) {
         super(card);
     }
 

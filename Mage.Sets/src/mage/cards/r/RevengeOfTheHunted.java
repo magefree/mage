@@ -37,7 +37,7 @@ public final class RevengeOfTheHunted extends CardImpl {
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{G}")));
     }
 
-    public RevengeOfTheHunted(final RevengeOfTheHunted card) {
+    private RevengeOfTheHunted(final RevengeOfTheHunted card) {
         super(card);
     }
 

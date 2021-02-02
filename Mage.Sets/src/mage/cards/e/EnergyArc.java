@@ -27,7 +27,7 @@ public final class EnergyArc extends CardImpl {
         this.getSpellAbility().addEffect(new PreventDamageToTargetEffect(Duration.EndOfTurn, true).setText("and dealt by those creatures this turn."));
     }
 
-    public EnergyArc(final EnergyArc card) {
+    private EnergyArc(final EnergyArc card) {
         super(card);
     }
 

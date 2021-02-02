@@ -56,7 +56,7 @@ public final class NightveilSpecter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NightveilSpecterEffect()));
     }
 
-    public NightveilSpecter(final NightveilSpecter card) {
+    private NightveilSpecter(final NightveilSpecter card) {
         super(card);
     }
 

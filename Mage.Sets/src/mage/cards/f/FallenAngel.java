@@ -36,7 +36,7 @@ public final class FallenAngel extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
-    public FallenAngel(final FallenAngel card) {
+    private FallenAngel(final FallenAngel card) {
         super(card);
     }
 

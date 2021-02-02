@@ -47,7 +47,7 @@ public final class DuskDawn extends SplitCard {
 
     }
 
-    public DuskDawn(final DuskDawn card) {
+    private DuskDawn(final DuskDawn card) {
         super(card);
     }
 

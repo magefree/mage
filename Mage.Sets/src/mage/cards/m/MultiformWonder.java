@@ -48,7 +48,7 @@ public final class MultiformWonder extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MultiformWonder2Effect(), new PayEnergyCost(1)));
     }
 
-    public MultiformWonder(final MultiformWonder card) {
+    private MultiformWonder(final MultiformWonder card) {
         super(card);
     }
 

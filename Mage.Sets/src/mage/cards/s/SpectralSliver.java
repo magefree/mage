@@ -36,7 +36,7 @@ public final class SpectralSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
-    public SpectralSliver(final SpectralSliver card) {
+    private SpectralSliver(final SpectralSliver card) {
         super(card);
     }
 

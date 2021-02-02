@@ -44,7 +44,7 @@ public final class CallToTheKindred extends CardImpl {
         this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new CallToTheKindredEffect(), true));
     }
 
-    public CallToTheKindred(final CallToTheKindred card) {
+    private CallToTheKindred(final CallToTheKindred card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class BindingGrasp extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, 1, Duration.WhileOnBattlefield)));
     }
 
-    public BindingGrasp(final BindingGrasp card) {
+    private BindingGrasp(final BindingGrasp card) {
         super(card);
     }
 

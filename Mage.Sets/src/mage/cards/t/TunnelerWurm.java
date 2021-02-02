@@ -28,7 +28,7 @@ public final class TunnelerWurm extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new DiscardCardCost()));
     }
 
-    public TunnelerWurm(final TunnelerWurm card) {
+    private TunnelerWurm(final TunnelerWurm card) {
         super(card);
     }
 

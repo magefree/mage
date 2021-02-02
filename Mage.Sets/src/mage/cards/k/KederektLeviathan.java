@@ -38,7 +38,7 @@ public final class KederektLeviathan extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{6}{U}")));
     }
 
-    public KederektLeviathan(final KederektLeviathan card) {
+    private KederektLeviathan(final KederektLeviathan card) {
         super(card);
     }
 

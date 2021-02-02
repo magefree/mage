@@ -51,7 +51,7 @@ public final class WhipVine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WhipVine(final WhipVine card) {
+    private WhipVine(final WhipVine card) {
         super(card);
     }
 

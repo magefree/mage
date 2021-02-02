@@ -44,7 +44,7 @@ public final class FurystokeGiant extends CardImpl {
         
     }
 
-    public FurystokeGiant(final FurystokeGiant card) {
+    private FurystokeGiant(final FurystokeGiant card) {
         super(card);
     }
 

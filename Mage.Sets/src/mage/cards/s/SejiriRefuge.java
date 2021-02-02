@@ -26,7 +26,7 @@ public final class SejiriRefuge extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public SejiriRefuge(final SejiriRefuge card) {
+    private SejiriRefuge(final SejiriRefuge card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class CorpseBlockade extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true))));
     }
 
-    public CorpseBlockade(final CorpseBlockade card) {
+    private CorpseBlockade(final CorpseBlockade card) {
         super(card);
     }
 

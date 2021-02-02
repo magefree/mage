@@ -21,7 +21,7 @@ public final class Boomerang extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
-    public Boomerang(final Boomerang card) {
+    private Boomerang(final Boomerang card) {
         super(card);
     }
 

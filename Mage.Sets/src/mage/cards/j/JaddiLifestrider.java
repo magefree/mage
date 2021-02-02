@@ -36,7 +36,7 @@ public final class JaddiLifestrider extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new JaddiLifestriderEffect(), true));
     }
 
-    public JaddiLifestrider(final JaddiLifestrider card) {
+    private JaddiLifestrider(final JaddiLifestrider card) {
         super(card);
     }
 

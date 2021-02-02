@@ -27,7 +27,7 @@ public final class Starstorm extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
     }
 
-    public Starstorm(final Starstorm card) {
+    private Starstorm(final Starstorm card) {
         super(card);
     }
 

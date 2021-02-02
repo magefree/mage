@@ -40,7 +40,7 @@ public final class ArchangelOfTithes extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArchangelOfTithesPayManaToBlockAllEffect()));
     }
 
-    public ArchangelOfTithes(final ArchangelOfTithes card) {
+    private ArchangelOfTithes(final ArchangelOfTithes card) {
         super(card);
     }
 

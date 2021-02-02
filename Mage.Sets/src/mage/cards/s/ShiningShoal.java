@@ -49,7 +49,7 @@ public final class ShiningShoal extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public ShiningShoal(final ShiningShoal card) {
+    private ShiningShoal(final ShiningShoal card) {
         super(card);
     }
 

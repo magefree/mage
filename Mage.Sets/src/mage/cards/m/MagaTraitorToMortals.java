@@ -42,7 +42,7 @@ public final class MagaTraitorToMortals extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagaTraitorToMortals(final MagaTraitorToMortals card) {
+    private MagaTraitorToMortals(final MagaTraitorToMortals card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class BasiliskCollar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), AttachmentType.EQUIPMENT)));
     }
 
-    public BasiliskCollar(final BasiliskCollar card) {
+    private BasiliskCollar(final BasiliskCollar card) {
         super(card);
     }
 

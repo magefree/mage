@@ -45,7 +45,7 @@ public final class Jilt extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(JiltAdjuster.instance);
     }
 
-    public Jilt(final Jilt card) {
+    private Jilt(final Jilt card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class DictateOfKruphix extends CardImpl {
         this.addAbility(new DictateOfKruphixAbility());
     }
 
-    public DictateOfKruphix(final DictateOfKruphix card) {
+    private DictateOfKruphix(final DictateOfKruphix card) {
         super(card);
     }
 

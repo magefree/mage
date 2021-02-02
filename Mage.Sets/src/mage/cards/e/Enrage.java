@@ -26,7 +26,7 @@ public final class Enrage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Enrage(final Enrage card) {
+    private Enrage(final Enrage card) {
         super(card);
     }
 

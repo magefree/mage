@@ -40,7 +40,7 @@ public final class NeurokStealthsuit extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
-    public NeurokStealthsuit(final NeurokStealthsuit card) {
+    private NeurokStealthsuit(final NeurokStealthsuit card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class Workhorse extends CardImpl {
                 new CountersSourceCount(CounterType.P1P1)));
     }
 
-    public Workhorse(final Workhorse card) {
+    private Workhorse(final Workhorse card) {
         super(card);
     }
 

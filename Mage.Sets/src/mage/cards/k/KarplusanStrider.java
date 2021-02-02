@@ -34,7 +34,7 @@ public final class KarplusanStrider extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KarplusanStriderEffect()));
     }
 
-    public KarplusanStrider(final KarplusanStrider card) {
+    private KarplusanStrider(final KarplusanStrider card) {
         super(card);
     }
 

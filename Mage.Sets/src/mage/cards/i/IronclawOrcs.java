@@ -36,7 +36,7 @@ public final class IronclawOrcs extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
     }
 
-    public IronclawOrcs(final IronclawOrcs card) {
+    private IronclawOrcs(final IronclawOrcs card) {
         super(card);
     }
 

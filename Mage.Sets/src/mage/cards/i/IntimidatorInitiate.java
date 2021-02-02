@@ -44,7 +44,7 @@ public final class IntimidatorInitiate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IntimidatorInitiate(final IntimidatorInitiate card) {
+    private IntimidatorInitiate(final IntimidatorInitiate card) {
         super(card);
     }
 

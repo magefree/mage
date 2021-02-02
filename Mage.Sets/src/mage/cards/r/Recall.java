@@ -32,7 +32,7 @@ public final class Recall extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public Recall(final Recall card) {
+    private Recall(final Recall card) {
         super(card);
     }
 

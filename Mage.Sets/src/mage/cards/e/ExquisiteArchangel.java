@@ -41,7 +41,7 @@ public final class ExquisiteArchangel extends CardImpl {
 
     }
 
-    public ExquisiteArchangel(final ExquisiteArchangel card) {
+    private ExquisiteArchangel(final ExquisiteArchangel card) {
         super(card);
     }
 

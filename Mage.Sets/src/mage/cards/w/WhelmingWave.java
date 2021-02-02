@@ -37,7 +37,7 @@ public final class WhelmingWave extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public WhelmingWave(final WhelmingWave card) {
+    private WhelmingWave(final WhelmingWave card) {
         super(card);
     }
 

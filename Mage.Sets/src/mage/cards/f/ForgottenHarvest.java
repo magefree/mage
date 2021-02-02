@@ -37,7 +37,7 @@ public final class ForgottenHarvest extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ForgottenHarvest(final ForgottenHarvest card) {
+    private ForgottenHarvest(final ForgottenHarvest card) {
         super(card);
     }
 

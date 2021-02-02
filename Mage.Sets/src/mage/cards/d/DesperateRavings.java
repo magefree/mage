@@ -32,7 +32,7 @@ public final class DesperateRavings extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{U}"), TimingRule.INSTANT));
     }
 
-    public DesperateRavings(final DesperateRavings card) {
+    private DesperateRavings(final DesperateRavings card) {
         super(card);
     }
 

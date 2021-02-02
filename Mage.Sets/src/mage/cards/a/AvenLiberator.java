@@ -39,7 +39,7 @@ public final class AvenLiberator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AvenLiberator(final AvenLiberator card) {
+    private AvenLiberator(final AvenLiberator card) {
         super(card);
     }
 

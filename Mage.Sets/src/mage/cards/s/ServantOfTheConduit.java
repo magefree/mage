@@ -36,7 +36,7 @@ public final class ServantOfTheConduit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ServantOfTheConduit(final ServantOfTheConduit card) {
+    private ServantOfTheConduit(final ServantOfTheConduit card) {
         super(card);
     }
 

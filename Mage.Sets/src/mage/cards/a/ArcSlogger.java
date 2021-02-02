@@ -35,7 +35,7 @@ public final class ArcSlogger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArcSlogger(final ArcSlogger card) {
+    private ArcSlogger(final ArcSlogger card) {
         super(card);
     }
 

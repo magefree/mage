@@ -31,7 +31,7 @@ public final class FlowstoneStrike extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FlowstoneStrike(final FlowstoneStrike card) {
+    private FlowstoneStrike(final FlowstoneStrike card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class HowlOfTheHorde extends CardImpl {
         this.getSpellAbility().addHint(RaidHint.instance);
     }
 
-    public HowlOfTheHorde(final HowlOfTheHorde card) {
+    private HowlOfTheHorde(final HowlOfTheHorde card) {
         super(card);
     }
 

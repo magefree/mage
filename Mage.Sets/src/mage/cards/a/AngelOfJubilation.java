@@ -52,7 +52,7 @@ public final class AngelOfJubilation extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AngelOfJubilation(final AngelOfJubilation card) {
+    private AngelOfJubilation(final AngelOfJubilation card) {
         super(card);
     }
 

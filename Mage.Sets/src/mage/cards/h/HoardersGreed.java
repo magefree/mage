@@ -26,7 +26,7 @@ public final class HoardersGreed extends CardImpl {
         this.getSpellAbility().addEffect(new HoardersGreedEffect());
     }
 
-    public HoardersGreed(final HoardersGreed card) {
+    private HoardersGreed(final HoardersGreed card) {
         super(card);
     }
 

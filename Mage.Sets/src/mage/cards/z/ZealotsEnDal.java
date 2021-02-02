@@ -47,7 +47,7 @@ public final class ZealotsEnDal extends CardImpl {
         ));
     }
 
-    public ZealotsEnDal(final ZealotsEnDal card) {
+    private ZealotsEnDal(final ZealotsEnDal card) {
         super(card);
     }
 

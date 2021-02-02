@@ -38,7 +38,7 @@ public final class WeightOfTheUnderworld extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-3,-2, Duration.WhileOnBattlefield)));
     }
 
-    public WeightOfTheUnderworld(final WeightOfTheUnderworld card) {
+    private WeightOfTheUnderworld(final WeightOfTheUnderworld card) {
         super(card);
     }
 

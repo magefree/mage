@@ -34,7 +34,7 @@ public final class OnduRising extends CardImpl {
         this.addAbility(new AwakenAbility(this, 4, "{4}{W}"));
     }
 
-    public OnduRising(final OnduRising card) {
+    private OnduRising(final OnduRising card) {
         super(card);
     }
 

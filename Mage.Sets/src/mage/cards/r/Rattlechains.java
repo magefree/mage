@@ -56,7 +56,7 @@ public final class Rattlechains extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filterCard, false)));
     }
 
-    public Rattlechains(final Rattlechains card) {
+    private Rattlechains(final Rattlechains card) {
         super(card);
     }
 

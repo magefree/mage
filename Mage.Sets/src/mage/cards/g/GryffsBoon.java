@@ -52,7 +52,7 @@ public final class GryffsBoon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GryffsBoon(final GryffsBoon card) {
+    private GryffsBoon(final GryffsBoon card) {
         super(card);
     }
 

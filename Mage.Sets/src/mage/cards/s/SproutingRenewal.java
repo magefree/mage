@@ -36,7 +36,7 @@ public final class SproutingRenewal extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public SproutingRenewal(final SproutingRenewal card) {
+    private SproutingRenewal(final SproutingRenewal card) {
         super(card);
     }
 

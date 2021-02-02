@@ -38,7 +38,7 @@ public final class ForceProjection extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }
 
-    public ForceProjection(final ForceProjection card) {
+    private ForceProjection(final ForceProjection card) {
         super(card);
     }
 

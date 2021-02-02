@@ -43,7 +43,7 @@ public final class SigilOfValor extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public SigilOfValor(final SigilOfValor card) {
+    private SigilOfValor(final SigilOfValor card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class InsidiousDreams extends CardImpl {
 
     }
 
-    public InsidiousDreams(final InsidiousDreams card) {
+    private InsidiousDreams(final InsidiousDreams card) {
         super(card);
     }
 

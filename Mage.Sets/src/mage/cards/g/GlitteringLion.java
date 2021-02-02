@@ -37,7 +37,7 @@ public final class GlitteringLion extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public GlitteringLion(final GlitteringLion card) {
+    private GlitteringLion(final GlitteringLion card) {
         super(card);
     }
 

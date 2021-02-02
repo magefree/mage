@@ -35,7 +35,7 @@ public final class Annihilate extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Annihilate(final Annihilate card) {
+    private Annihilate(final Annihilate card) {
         super(card);
     }
 

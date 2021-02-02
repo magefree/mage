@@ -26,7 +26,7 @@ public final class RiseFromTheGrave extends CardImpl {
         this.getSpellAbility().addEffect(new BecomesBlackZombieAdditionEffect());
     }
 
-    public RiseFromTheGrave(final RiseFromTheGrave card) {
+    private RiseFromTheGrave(final RiseFromTheGrave card) {
         super(card);
     }
 

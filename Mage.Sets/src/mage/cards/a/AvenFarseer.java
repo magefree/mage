@@ -32,7 +32,7 @@ public final class AvenFarseer extends CardImpl {
         this.addAbility(new TurnedFaceUpAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new FilterPermanent("a permanent")));
     }
 
-    public AvenFarseer(final AvenFarseer card) {
+    private AvenFarseer(final AvenFarseer card) {
         super(card);
     }
 

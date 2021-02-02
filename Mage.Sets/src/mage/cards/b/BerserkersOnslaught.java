@@ -27,7 +27,7 @@ public final class BerserkersOnslaught extends CardImpl {
 
     }
 
-    public BerserkersOnslaught(final BerserkersOnslaught card) {
+    private BerserkersOnslaught(final BerserkersOnslaught card) {
         super(card);
     }
 

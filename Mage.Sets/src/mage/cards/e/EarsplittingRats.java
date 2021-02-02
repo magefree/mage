@@ -33,7 +33,7 @@ public final class EarsplittingRats extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new DiscardCardCost()));
     }
 
-    public EarsplittingRats(final EarsplittingRats card) {
+    private EarsplittingRats(final EarsplittingRats card) {
         super(card);
     }
 

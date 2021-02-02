@@ -42,7 +42,7 @@ public final class VisceridArmor extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl("{1}{U}")));
     }
 
-    public VisceridArmor(final VisceridArmor card) {
+    private VisceridArmor(final VisceridArmor card) {
         super(card);
     }
 

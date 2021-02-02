@@ -30,7 +30,7 @@ public final class AugmentingAutomaton extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}{B}")));
     }
 
-    public AugmentingAutomaton(final AugmentingAutomaton card) {
+    private AugmentingAutomaton(final AugmentingAutomaton card) {
         super(card);
     }
 

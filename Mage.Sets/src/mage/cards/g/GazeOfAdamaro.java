@@ -28,7 +28,7 @@ public final class GazeOfAdamaro extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public GazeOfAdamaro(final GazeOfAdamaro card) {
+    private GazeOfAdamaro(final GazeOfAdamaro card) {
         super(card);
     }
 

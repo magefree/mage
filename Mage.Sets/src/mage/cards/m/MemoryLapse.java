@@ -24,7 +24,7 @@ public final class MemoryLapse extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public MemoryLapse(final MemoryLapse card) {
+    private MemoryLapse(final MemoryLapse card) {
         super(card);
     }
 

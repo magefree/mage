@@ -57,7 +57,7 @@ public final class JelevaNephaliasScourge extends CardImpl {
 
     }
 
-    public JelevaNephaliasScourge(final JelevaNephaliasScourge card) {
+    private JelevaNephaliasScourge(final JelevaNephaliasScourge card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class SoulfireGrandMaster extends CardImpl {
 
     }
 
-    public SoulfireGrandMaster(final SoulfireGrandMaster card) {
+    private SoulfireGrandMaster(final SoulfireGrandMaster card) {
         super(card);
     }
 

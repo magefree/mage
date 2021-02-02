@@ -58,7 +58,7 @@ public final class SelvalaHeartOfTheWilds extends CardImpl {
 
     }
 
-    public SelvalaHeartOfTheWilds(final SelvalaHeartOfTheWilds card) {
+    private SelvalaHeartOfTheWilds(final SelvalaHeartOfTheWilds card) {
         super(card);
     }
 

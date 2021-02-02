@@ -25,7 +25,7 @@ public final class BartizanBats extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public BartizanBats(final BartizanBats card) {
+    private BartizanBats(final BartizanBats card) {
         super(card);
     }
 

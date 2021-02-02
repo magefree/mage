@@ -24,7 +24,7 @@ public final class Runeboggle extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Runeboggle(final Runeboggle card) {
+    private Runeboggle(final Runeboggle card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class ElvishSoultiller extends CardImpl {
 
     }
 
-    public ElvishSoultiller(final ElvishSoultiller card) {
+    private ElvishSoultiller(final ElvishSoultiller card) {
         super(card);
     }
 

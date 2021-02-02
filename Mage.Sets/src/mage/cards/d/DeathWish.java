@@ -29,7 +29,7 @@ public final class DeathWish extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public DeathWish(final DeathWish card) {
+    private DeathWish(final DeathWish card) {
         super(card);
     }
 

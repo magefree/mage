@@ -39,7 +39,7 @@ public final class OrchardWarden extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new OrchardWardenffect(), filter, true, SetTargetPointer.PERMANENT, ""));
     }
 
-    public OrchardWarden(final OrchardWarden card) {
+    private OrchardWarden(final OrchardWarden card) {
         super(card);
     }
 

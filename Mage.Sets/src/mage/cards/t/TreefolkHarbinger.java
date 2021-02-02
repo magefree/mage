@@ -36,7 +36,7 @@ public final class TreefolkHarbinger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true), true));
     }
 
-    public TreefolkHarbinger(final TreefolkHarbinger card) {
+    private TreefolkHarbinger(final TreefolkHarbinger card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class OasisRitualist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OasisRitualist(final OasisRitualist card) {
+    private OasisRitualist(final OasisRitualist card) {
         super(card);
     }
 

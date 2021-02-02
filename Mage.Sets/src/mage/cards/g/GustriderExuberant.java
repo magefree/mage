@@ -43,7 +43,7 @@ public final class GustriderExuberant extends CardImpl {
                 new SacrificeSourceCost()));
     }
 
-    public GustriderExuberant(final GustriderExuberant card) {
+    private GustriderExuberant(final GustriderExuberant card) {
         super(card);
     }
 

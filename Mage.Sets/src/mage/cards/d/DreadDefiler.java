@@ -45,7 +45,7 @@ public final class DreadDefiler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DreadDefiler(final DreadDefiler card) {
+    private DreadDefiler(final DreadDefiler card) {
         super(card);
     }
 

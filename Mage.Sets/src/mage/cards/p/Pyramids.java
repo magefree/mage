@@ -51,7 +51,7 @@ public final class Pyramids extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Pyramids(final Pyramids card) {
+    private Pyramids(final Pyramids card) {
         super(card);
     }
 

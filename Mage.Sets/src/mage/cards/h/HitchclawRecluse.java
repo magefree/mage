@@ -25,7 +25,7 @@ public final class HitchclawRecluse extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public HitchclawRecluse(final HitchclawRecluse card) {
+    private HitchclawRecluse(final HitchclawRecluse card) {
         super(card);
     }
 

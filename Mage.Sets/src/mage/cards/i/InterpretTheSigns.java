@@ -25,7 +25,7 @@ public final class InterpretTheSigns extends CardImpl {
         this.getSpellAbility().addEffect(new InterpretTheSignsEffect());
     }
 
-    public InterpretTheSigns(final InterpretTheSigns card) {
+    private InterpretTheSigns(final InterpretTheSigns card) {
         super(card);
     }
 

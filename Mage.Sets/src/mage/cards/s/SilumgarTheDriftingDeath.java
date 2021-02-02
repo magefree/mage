@@ -49,7 +49,7 @@ public final class SilumgarTheDriftingDeath extends CardImpl {
                         false, filter, SetTargetPointer.PLAYER, false));
     }
 
-    public SilumgarTheDriftingDeath(final SilumgarTheDriftingDeath card) {
+    private SilumgarTheDriftingDeath(final SilumgarTheDriftingDeath card) {
         super(card);
     }
 

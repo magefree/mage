@@ -30,7 +30,7 @@ public final class PitilessVizier extends CardImpl {
         addAbility(new CycleOrDiscardControllerTriggeredAbility(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn)));
     }
 
-    public PitilessVizier(final PitilessVizier card) {
+    private PitilessVizier(final PitilessVizier card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class OathswornVampire extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new OathswornVampirePlayEffect()), new PlayerGainedLifeWatcher());
     }
 
-    public OathswornVampire(final OathswornVampire card) {
+    private OathswornVampire(final OathswornVampire card) {
         super(card);
     }
 

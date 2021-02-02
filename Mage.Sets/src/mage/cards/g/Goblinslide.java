@@ -32,7 +32,7 @@ public final class Goblinslide extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new GoblinToken(true)), new GenericManaCost(1)), filter, false));
     }
 
-    public Goblinslide(final Goblinslide card) {
+    private Goblinslide(final Goblinslide card) {
         super(card);
     }
 

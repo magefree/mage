@@ -42,7 +42,7 @@ public final class HellsCaretaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HellsCaretaker(final HellsCaretaker card) {
+    private HellsCaretaker(final HellsCaretaker card) {
         super(card);
     }
 

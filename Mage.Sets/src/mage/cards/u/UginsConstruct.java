@@ -35,7 +35,7 @@ public final class UginsConstruct extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(filter, 1, null)));
     }
 
-    public UginsConstruct(final UginsConstruct card) {
+    private UginsConstruct(final UginsConstruct card) {
         super(card);
     }
 

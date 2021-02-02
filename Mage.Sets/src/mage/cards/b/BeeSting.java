@@ -22,7 +22,7 @@ public final class BeeSting extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public BeeSting(final BeeSting card) {
+    private BeeSting(final BeeSting card) {
         super(card);
     }
 

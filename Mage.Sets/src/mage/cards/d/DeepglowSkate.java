@@ -37,7 +37,7 @@ public final class DeepglowSkate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeepglowSkate(final DeepglowSkate card) {
+    private DeepglowSkate(final DeepglowSkate card) {
         super(card);
     }
 

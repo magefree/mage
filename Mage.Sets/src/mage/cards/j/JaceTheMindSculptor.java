@@ -56,7 +56,7 @@ public final class JaceTheMindSculptor extends CardImpl {
 
     }
 
-    public JaceTheMindSculptor(final JaceTheMindSculptor card) {
+    private JaceTheMindSculptor(final JaceTheMindSculptor card) {
         super(card);
     }
 

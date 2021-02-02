@@ -30,7 +30,7 @@ public final class BashToBits extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{R}{R}"), TimingRule.INSTANT));
     }
 
-    public BashToBits(final BashToBits card) {
+    private BashToBits(final BashToBits card) {
         super(card);
     }
 

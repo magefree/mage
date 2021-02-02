@@ -32,7 +32,7 @@ public final class ViashinoSandscout extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.ANY, false));
     }
 
-    public ViashinoSandscout(final ViashinoSandscout card) {
+    private ViashinoSandscout(final ViashinoSandscout card) {
         super(card);
     }
 

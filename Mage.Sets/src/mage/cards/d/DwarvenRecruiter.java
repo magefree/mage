@@ -33,7 +33,7 @@ public final class DwarvenRecruiter extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RecruiterEffect(filter), false));
     }
 
-    public DwarvenRecruiter(final DwarvenRecruiter card) {
+    private DwarvenRecruiter(final DwarvenRecruiter card) {
         super(card);
     }
 

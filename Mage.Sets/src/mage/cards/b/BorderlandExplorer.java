@@ -39,7 +39,7 @@ public final class BorderlandExplorer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BorderlandExplorerEffect()));
     }
 
-    public BorderlandExplorer(final BorderlandExplorer card) {
+    private BorderlandExplorer(final BorderlandExplorer card) {
         super(card);
     }
 

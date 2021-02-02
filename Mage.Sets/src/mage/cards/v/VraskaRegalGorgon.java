@@ -55,7 +55,7 @@ public final class VraskaRegalGorgon extends CardImpl {
         this.addAbility(new LoyaltyAbility(new VraskaRegalGorgonEffect(), -10));
     }
 
-    public VraskaRegalGorgon(final VraskaRegalGorgon card) {
+    private VraskaRegalGorgon(final VraskaRegalGorgon card) {
         super(card);
     }
 

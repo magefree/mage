@@ -41,7 +41,7 @@ public final class Contagion extends CardImpl {
         this.getSpellAbility().addEffect(new DistributeCountersEffect(CounterType.M2M1, 2, false, "one or two target creatures"));
     }
 
-    public Contagion(final Contagion card) {
+    private Contagion(final Contagion card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class KeymasterRogue extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent())));
     }
 
-    public KeymasterRogue(final KeymasterRogue card) {
+    private KeymasterRogue(final KeymasterRogue card) {
         super(card);
     }
 

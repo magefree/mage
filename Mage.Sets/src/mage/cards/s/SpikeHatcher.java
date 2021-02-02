@@ -47,7 +47,7 @@ public final class SpikeHatcher extends CardImpl {
         
     }
 
-    public SpikeHatcher(final SpikeHatcher card) {
+    private SpikeHatcher(final SpikeHatcher card) {
         super(card);
     }
 

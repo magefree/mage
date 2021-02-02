@@ -32,7 +32,7 @@ public final class StrategySchmategy extends CardImpl {
         this.getSpellAbility().addEffect(new StrategySchmategyffect());
     }
 
-    public StrategySchmategy(final StrategySchmategy card) {
+    private StrategySchmategy(final StrategySchmategy card) {
         super(card);
     }
 

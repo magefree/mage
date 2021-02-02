@@ -41,7 +41,7 @@ public final class VinesOfVastwood extends CardImpl {
                 new LockedInCondition(KickedCondition.instance), staticText));
     }
 
-    public VinesOfVastwood(final VinesOfVastwood card) {
+    private VinesOfVastwood(final VinesOfVastwood card) {
         super(card);
     }
 

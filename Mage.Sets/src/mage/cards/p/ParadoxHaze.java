@@ -44,7 +44,7 @@ public final class ParadoxHaze extends CardImpl {
         this.addAbility(new ParadoxHazeTriggeredAbility(), new FirstTimeStepWatcher(EventType.UPKEEP_STEP_POST));
     }
 
-    public ParadoxHaze(final ParadoxHaze card) {
+    private ParadoxHaze(final ParadoxHaze card) {
         super(card);
     }
 

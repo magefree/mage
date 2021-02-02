@@ -32,7 +32,7 @@ public final class StormchaserMage extends CardImpl {
         this.addAbility(new ProwessAbility());
     }
 
-    public StormchaserMage(final StormchaserMage card) {
+    private StormchaserMage(final StormchaserMage card) {
         super(card);
     }
 

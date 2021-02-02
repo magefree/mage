@@ -46,7 +46,7 @@ public final class EverbarkShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EverbarkShaman(final EverbarkShaman card) {
+    private EverbarkShaman(final EverbarkShaman card) {
         super(card);
     }
 

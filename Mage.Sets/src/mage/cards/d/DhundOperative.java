@@ -46,7 +46,7 @@ public final class DhundOperative extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DhundOperative(final DhundOperative card) {
+    private DhundOperative(final DhundOperative card) {
         super(card);
     }
 

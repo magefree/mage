@@ -34,7 +34,7 @@ public final class RealityTwist extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RealityTwistEffect()));
     }
 
-    public RealityTwist(final RealityTwist card) {
+    private RealityTwist(final RealityTwist card) {
         super(card);
     }
 

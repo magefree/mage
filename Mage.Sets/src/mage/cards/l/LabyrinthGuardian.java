@@ -41,7 +41,7 @@ public final class LabyrinthGuardian extends CardImpl {
 
     }
 
-    public LabyrinthGuardian(final LabyrinthGuardian card) {
+    private LabyrinthGuardian(final LabyrinthGuardian card) {
         super(card);
     }
 

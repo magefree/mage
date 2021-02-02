@@ -37,7 +37,7 @@ public final class CommandOfUnsummoning extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature(1, 2, new FilterAttackingCreature(), false));
     }
 
-    public CommandOfUnsummoning(final CommandOfUnsummoning card) {
+    private CommandOfUnsummoning(final CommandOfUnsummoning card) {
         super(card);
     }
 

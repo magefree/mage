@@ -34,7 +34,7 @@ public final class UphillBattle extends CardImpl {
         addAbility(tapAbility);
     }
 
-    public UphillBattle(final UphillBattle card) {
+    private UphillBattle(final UphillBattle card) {
         super(card);
     }
 

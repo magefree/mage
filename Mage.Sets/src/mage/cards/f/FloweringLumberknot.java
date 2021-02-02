@@ -32,7 +32,7 @@ public final class FloweringLumberknot extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FloweringLumberknotEffect()));
     }
 
-    public FloweringLumberknot(final FloweringLumberknot card) {
+    private FloweringLumberknot(final FloweringLumberknot card) {
         super(card);
     }
 

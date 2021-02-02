@@ -38,7 +38,7 @@ public final class SpectralForce extends CardImpl {
         this.addAbility(new SpectralForceTriggeredAbility());
     }
 
-    public SpectralForce(final SpectralForce card) {
+    private SpectralForce(final SpectralForce card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class Ragemonger extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, new ManaCostsImpl<>("{B}{R}"))));
     }
 
-    public Ragemonger(final Ragemonger card) {
+    private Ragemonger(final Ragemonger card) {
         super(card);
     }
 

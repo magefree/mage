@@ -44,7 +44,7 @@ public final class Riftsweeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Riftsweeper(final Riftsweeper card) {
+    private Riftsweeper(final Riftsweeper card) {
         super(card);
     }
 

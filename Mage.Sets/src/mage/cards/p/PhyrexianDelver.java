@@ -39,7 +39,7 @@ public final class PhyrexianDelver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianDelver(final PhyrexianDelver card) {
+    private PhyrexianDelver(final PhyrexianDelver card) {
         super(card);
     }
 

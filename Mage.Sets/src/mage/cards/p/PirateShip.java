@@ -45,7 +45,7 @@ public final class PirateShip extends CardImpl {
                 new SacrificeSourceEffect()));
     }
 
-    public PirateShip(final PirateShip card) {
+    private PirateShip(final PirateShip card) {
         super(card);
     }
 

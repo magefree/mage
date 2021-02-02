@@ -34,7 +34,7 @@ public final class InfernalReckoning extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public InfernalReckoning(final InfernalReckoning card) {
+    private InfernalReckoning(final InfernalReckoning card) {
         super(card);
     }
 

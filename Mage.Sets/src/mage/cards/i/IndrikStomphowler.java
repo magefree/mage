@@ -30,7 +30,7 @@ public final class IndrikStomphowler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IndrikStomphowler(final IndrikStomphowler card) {
+    private IndrikStomphowler(final IndrikStomphowler card) {
         super(card);
     }
 

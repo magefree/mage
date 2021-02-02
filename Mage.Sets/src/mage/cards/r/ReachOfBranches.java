@@ -37,7 +37,7 @@ public final class ReachOfBranches extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), filter, true, "", true));
     }
 
-    public ReachOfBranches(final ReachOfBranches card) {
+    private ReachOfBranches(final ReachOfBranches card) {
         super(card);
     }
 

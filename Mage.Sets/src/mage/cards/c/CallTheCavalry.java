@@ -22,7 +22,7 @@ public final class CallTheCavalry extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KnightToken(), 2));
     }
 
-    public CallTheCavalry(final CallTheCavalry card) {
+    private CallTheCavalry(final CallTheCavalry card) {
         super(card);
     }
 

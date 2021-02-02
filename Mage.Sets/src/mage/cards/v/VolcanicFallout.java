@@ -24,7 +24,7 @@ public final class VolcanicFallout extends CardImpl {
         this.getSpellAbility().addEffect(new DamageEverythingEffect(2));
     }
 
-    public VolcanicFallout(final VolcanicFallout card) {
+    private VolcanicFallout(final VolcanicFallout card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class Withdraw extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public Withdraw(final Withdraw card) {
+    private Withdraw(final Withdraw card) {
         super(card);
     }
 

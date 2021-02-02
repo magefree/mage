@@ -39,7 +39,7 @@ public final class ScourgeOfGeierReach extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
     }
 
-    public ScourgeOfGeierReach(final ScourgeOfGeierReach card) {
+    private ScourgeOfGeierReach(final ScourgeOfGeierReach card) {
         super(card);
     }
 

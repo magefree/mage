@@ -27,7 +27,7 @@ public final class FlameWave extends CardImpl {
         );
     }
 
-    public FlameWave(final FlameWave card) {
+    private FlameWave(final FlameWave card) {
         super(card);
     }
 

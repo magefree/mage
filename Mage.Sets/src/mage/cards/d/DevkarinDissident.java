@@ -34,7 +34,7 @@ public final class DevkarinDissident extends CardImpl {
         ));
     }
 
-    public DevkarinDissident(final DevkarinDissident card) {
+    private DevkarinDissident(final DevkarinDissident card) {
         super(card);
     }
 

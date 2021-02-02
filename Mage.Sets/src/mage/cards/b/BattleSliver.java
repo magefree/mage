@@ -32,7 +32,7 @@ public final class BattleSliver extends CardImpl {
 
     }
 
-    public BattleSliver(final BattleSliver card) {
+    private BattleSliver(final BattleSliver card) {
         super(card);
     }
 

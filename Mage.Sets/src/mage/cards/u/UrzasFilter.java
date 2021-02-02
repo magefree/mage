@@ -30,7 +30,7 @@ public final class UrzasFilter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionAllEffect(filter, 2, true)));
     }
 
-    public UrzasFilter(final UrzasFilter card) {
+    private UrzasFilter(final UrzasFilter card) {
         super(card);
     }
 

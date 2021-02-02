@@ -35,7 +35,7 @@ public final class JestersMask extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JestersMask(final JestersMask card) {
+    private JestersMask(final JestersMask card) {
         super(card);
     }
 

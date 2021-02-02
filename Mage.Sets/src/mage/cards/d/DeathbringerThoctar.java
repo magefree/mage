@@ -42,7 +42,7 @@ public final class DeathbringerThoctar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeathbringerThoctar(final DeathbringerThoctar card) {
+    private DeathbringerThoctar(final DeathbringerThoctar card) {
         super(card);
     }
 

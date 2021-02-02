@@ -31,7 +31,7 @@ public final class StandDeliver extends SplitCard {
         this.getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent());
     }
 
-    public StandDeliver(final StandDeliver card) {
+    private StandDeliver(final StandDeliver card) {
         super(card);
     }
 

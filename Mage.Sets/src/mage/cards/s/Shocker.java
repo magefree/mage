@@ -29,7 +29,7 @@ public final class Shocker extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new ShockerEffect(), false, true));
     }
 
-    public Shocker(final Shocker card) {
+    private Shocker(final Shocker card) {
         super(card);
     }
 

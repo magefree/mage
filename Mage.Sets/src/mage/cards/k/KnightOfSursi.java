@@ -33,7 +33,7 @@ public final class KnightOfSursi extends CardImpl {
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{W}"), this));
     }
 
-    public KnightOfSursi(final KnightOfSursi card) {
+    private KnightOfSursi(final KnightOfSursi card) {
         super(card);
     }
 

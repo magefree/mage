@@ -53,7 +53,7 @@ public final class WallOfLimbs extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WallOfLimbs(final WallOfLimbs card) {
+    private WallOfLimbs(final WallOfLimbs card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class CryptCreeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CryptCreeper(final CryptCreeper card) {
+    private CryptCreeper(final CryptCreeper card) {
         super(card);
     }
 

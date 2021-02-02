@@ -37,7 +37,7 @@ public final class PalladiaMors extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{R}{G}{W}")), TargetController.YOU, false));
     }
 
-    public PalladiaMors(final PalladiaMors card) {
+    private PalladiaMors(final PalladiaMors card) {
         super(card);
     }
 

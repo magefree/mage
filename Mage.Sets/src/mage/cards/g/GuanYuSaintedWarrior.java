@@ -33,7 +33,7 @@ public final class GuanYuSaintedWarrior extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect(), true));
     }
 
-    public GuanYuSaintedWarrior(final GuanYuSaintedWarrior card) {
+    private GuanYuSaintedWarrior(final GuanYuSaintedWarrior card) {
         super(card);
     }
 

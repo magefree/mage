@@ -41,7 +41,7 @@ public final class Lithatog extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land")))));
     }
 
-    public Lithatog(final Lithatog card) {
+    private Lithatog(final Lithatog card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class KinjallisCaller extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public KinjallisCaller(final KinjallisCaller card) {
+    private KinjallisCaller(final KinjallisCaller card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class TraumaticVisions extends CardImpl {
         this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}{U}")));
     }
 
-    public TraumaticVisions(final TraumaticVisions card) {
+    private TraumaticVisions(final TraumaticVisions card) {
         super(card);
     }
 

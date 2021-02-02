@@ -42,7 +42,7 @@ public final class CurseOfChaos extends CardImpl {
         this.addAbility(new CurseOfChaosTriggeredAbility());
     }
 
-    public CurseOfChaos(final CurseOfChaos card) {
+    private CurseOfChaos(final CurseOfChaos card) {
         super(card);
     }
 

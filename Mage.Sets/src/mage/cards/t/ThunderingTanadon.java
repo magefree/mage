@@ -25,7 +25,7 @@ public final class ThunderingTanadon extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public ThunderingTanadon(final ThunderingTanadon card) {
+    private ThunderingTanadon(final ThunderingTanadon card) {
         super(card);
     }
 

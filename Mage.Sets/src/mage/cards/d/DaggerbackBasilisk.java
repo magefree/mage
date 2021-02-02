@@ -25,7 +25,7 @@ public final class DaggerbackBasilisk extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public DaggerbackBasilisk(final DaggerbackBasilisk card) {
+    private DaggerbackBasilisk(final DaggerbackBasilisk card) {
         super(card);
     }
 

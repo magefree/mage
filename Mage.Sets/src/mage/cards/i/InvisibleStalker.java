@@ -29,7 +29,7 @@ public final class InvisibleStalker extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public InvisibleStalker(final InvisibleStalker card) {
+    private InvisibleStalker(final InvisibleStalker card) {
         super(card);
     }
 

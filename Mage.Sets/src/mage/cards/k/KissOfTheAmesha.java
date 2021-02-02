@@ -24,7 +24,7 @@ public final class KissOfTheAmesha extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(2).setText("and draws two cards"));
     }
 
-    public KissOfTheAmesha(final KissOfTheAmesha card) {
+    private KissOfTheAmesha(final KissOfTheAmesha card) {
         super(card);
     }
 

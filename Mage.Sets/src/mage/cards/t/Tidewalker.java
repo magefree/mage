@@ -47,7 +47,7 @@ public final class Tidewalker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CountersSourceCount(CounterType.TIME), Duration.EndOfGame)));
     }
 
-    public Tidewalker(final Tidewalker card) {
+    private Tidewalker(final Tidewalker card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class HeraldOfTheHost extends CardImpl {
         this.addAbility(new MyriadAbility());
     }
 
-    public HeraldOfTheHost(final HeraldOfTheHost card) {
+    private HeraldOfTheHost(final HeraldOfTheHost card) {
         super(card);
     }
 

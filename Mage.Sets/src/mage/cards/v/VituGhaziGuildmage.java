@@ -36,7 +36,7 @@ public final class VituGhaziGuildmage extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PopulateEffect(), new ManaCostsImpl("{2}{G}{W}")));
     }
 
-    public VituGhaziGuildmage(final VituGhaziGuildmage card) {
+    private VituGhaziGuildmage(final VituGhaziGuildmage card) {
         super(card);
     }
 

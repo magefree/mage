@@ -32,7 +32,7 @@ public final class MorbidBloom extends CardImpl {
         
     }
 
-    public MorbidBloom(final MorbidBloom card) {
+    private MorbidBloom(final MorbidBloom card) {
         super(card);
     }
 

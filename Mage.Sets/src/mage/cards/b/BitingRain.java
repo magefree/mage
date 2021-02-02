@@ -26,7 +26,7 @@ public final class BitingRain extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{2}{B}")));
     }
 
-    public BitingRain(final BitingRain card) {
+    private BitingRain(final BitingRain card) {
         super(card);
     }
 

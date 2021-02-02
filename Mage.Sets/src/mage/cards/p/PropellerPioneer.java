@@ -29,7 +29,7 @@ public final class PropellerPioneer extends CardImpl {
         this.addAbility(new FabricateAbility(1));
     }
 
-    public PropellerPioneer(final PropellerPioneer card) {
+    private PropellerPioneer(final PropellerPioneer card) {
         super(card);
     }
 

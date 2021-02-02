@@ -35,7 +35,7 @@ public final class TwoHeadedSliver extends CardImpl {
                 "All Sliver creatures have menace. <i>(They can't be blocked except by two or more creatures.)</i>")));
     }
 
-    public TwoHeadedSliver(final TwoHeadedSliver card) {
+    private TwoHeadedSliver(final TwoHeadedSliver card) {
         super(card);
     }
 

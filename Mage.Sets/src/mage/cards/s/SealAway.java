@@ -42,7 +42,7 @@ public final class SealAway extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SealAway(final SealAway card) {
+    private SealAway(final SealAway card) {
         super(card);
     }
 

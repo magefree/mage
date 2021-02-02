@@ -45,7 +45,7 @@ public final class DwynensElite extends CardImpl {
                 "When {this} enters the battlefield, if you control another Elf, create a 1/1 green Elf Warrior creature token."));
     }
 
-    public DwynensElite(final DwynensElite card) {
+    private DwynensElite(final DwynensElite card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class DragonlordAtarka extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DragonlordAtarka(final DragonlordAtarka card) {
+    private DragonlordAtarka(final DragonlordAtarka card) {
         super(card);
     }
 

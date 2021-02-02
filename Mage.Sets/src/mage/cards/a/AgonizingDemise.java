@@ -46,7 +46,7 @@ public final class AgonizingDemise extends CardImpl {
 
     }
 
-    public AgonizingDemise(final AgonizingDemise card) {
+    private AgonizingDemise(final AgonizingDemise card) {
         super(card);
     }
 

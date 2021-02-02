@@ -41,7 +41,7 @@ public final class SelvalasEnforcer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SelvalasEnforcer(final SelvalasEnforcer card) {
+    private SelvalasEnforcer(final SelvalasEnforcer card) {
         super(card);
     }
 

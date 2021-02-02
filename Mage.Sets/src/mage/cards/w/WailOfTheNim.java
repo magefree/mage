@@ -32,7 +32,7 @@ public final class WailOfTheNim extends CardImpl {
         this.addAbility(new EntwineAbility("{B}"));
     }
 
-    public WailOfTheNim(final WailOfTheNim card) {
+    private WailOfTheNim(final WailOfTheNim card) {
         super(card);
     }
 

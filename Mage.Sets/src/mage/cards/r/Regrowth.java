@@ -24,7 +24,7 @@ public final class Regrowth extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
     }
 
-    public Regrowth(final Regrowth card) {
+    private Regrowth(final Regrowth card) {
         super(card);
     }
 

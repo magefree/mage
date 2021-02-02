@@ -20,7 +20,7 @@ public final class Tranquility extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterEnchantmentPermanent("enchantments")));
     }
 
-    public Tranquility(final Tranquility card) {
+    private Tranquility(final Tranquility card) {
         super(card);
     }
 

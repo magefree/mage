@@ -29,7 +29,7 @@ public final class CorpulentCorpse extends CardImpl {
         this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{B}"), this));
     }
 
-    public CorpulentCorpse(final CorpulentCorpse card) {
+    private CorpulentCorpse(final CorpulentCorpse card) {
         super(card);
     }
 

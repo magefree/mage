@@ -28,7 +28,7 @@ public final class Oblation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
-    public Oblation(final Oblation card) {
+    private Oblation(final Oblation card) {
         super(card);
     }
 

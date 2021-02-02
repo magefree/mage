@@ -27,7 +27,7 @@ public final class GiantWarthog extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public GiantWarthog(final GiantWarthog card) {
+    private GiantWarthog(final GiantWarthog card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class CephalidRetainer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CephalidRetainer(final CephalidRetainer card) {
+    private CephalidRetainer(final CephalidRetainer card) {
         super(card);
     }
 

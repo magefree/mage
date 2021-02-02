@@ -27,7 +27,7 @@ public final class HedronScrabbler extends CardImpl {
         this.addAbility(new LandfallAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
     }
 
-    public HedronScrabbler(final HedronScrabbler card) {
+    private HedronScrabbler(final HedronScrabbler card) {
         super(card);
     }
 

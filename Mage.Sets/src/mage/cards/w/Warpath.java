@@ -32,7 +32,7 @@ public final class Warpath extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(3, filter));
     }
 
-    public Warpath(final Warpath card) {
+    private Warpath(final Warpath card) {
         super(card);
     }
 

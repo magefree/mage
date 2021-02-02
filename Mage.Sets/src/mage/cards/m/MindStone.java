@@ -29,7 +29,7 @@ public final class MindStone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MindStone(final MindStone card) {
+    private MindStone(final MindStone card) {
         super(card);
     }
 

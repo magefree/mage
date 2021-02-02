@@ -27,7 +27,7 @@ public final class RiseFromTheTides extends CardImpl {
         this.getSpellAbility().addHint(new ValueHint("Instant and sorcery card in your graveyard", cardsCount));
     }
 
-    public RiseFromTheTides(final RiseFromTheTides card) {
+    private RiseFromTheTides(final RiseFromTheTides card) {
         super(card);
     }
 

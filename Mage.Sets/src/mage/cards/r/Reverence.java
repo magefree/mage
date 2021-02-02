@@ -32,7 +32,7 @@ public final class Reverence extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
-    public Reverence(final Reverence card) {
+    private Reverence(final Reverence card) {
         super(card);
     }
 

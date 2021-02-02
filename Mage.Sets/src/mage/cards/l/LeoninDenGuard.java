@@ -42,7 +42,7 @@ public final class LeoninDenGuard extends CardImpl {
 
     }
 
-    public LeoninDenGuard(final LeoninDenGuard card) {
+    private LeoninDenGuard(final LeoninDenGuard card) {
         super(card);
     }
 

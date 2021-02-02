@@ -44,7 +44,7 @@ public final class SunscourgeChampion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SunscourgeChampion(final SunscourgeChampion card) {
+    private SunscourgeChampion(final SunscourgeChampion card) {
         super(card);
     }
 

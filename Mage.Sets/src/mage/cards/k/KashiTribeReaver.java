@@ -39,7 +39,7 @@ public final class KashiTribeReaver extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }
 
-    public KashiTribeReaver(final KashiTribeReaver card) {
+    private KashiTribeReaver(final KashiTribeReaver card) {
         super(card);
     }
 

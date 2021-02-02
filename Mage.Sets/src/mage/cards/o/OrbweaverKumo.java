@@ -30,7 +30,7 @@ public final class OrbweaverKumo extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(new ForestwalkAbility(), Duration.EndOfTurn), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
     }
 
-    public OrbweaverKumo(final OrbweaverKumo card) {
+    private OrbweaverKumo(final OrbweaverKumo card) {
         super(card);
     }
 

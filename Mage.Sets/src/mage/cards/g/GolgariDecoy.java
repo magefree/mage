@@ -33,7 +33,7 @@ public final class GolgariDecoy extends CardImpl {
         this.addAbility(new ScavengeAbility(new ManaCostsImpl("{3}{G}{G}")));
     }
 
-    public GolgariDecoy(final GolgariDecoy card) {
+    private GolgariDecoy(final GolgariDecoy card) {
         super(card);
     }
 

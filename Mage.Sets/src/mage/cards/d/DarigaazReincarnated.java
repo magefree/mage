@@ -62,7 +62,7 @@ public final class DarigaazReincarnated extends CardImpl {
         this.addAbility(new DarigaazReincarnatedInterveningIfTriggeredAbility());
     }
 
-    public DarigaazReincarnated(final DarigaazReincarnated card) {
+    private DarigaazReincarnated(final DarigaazReincarnated card) {
         super(card);
     }
 

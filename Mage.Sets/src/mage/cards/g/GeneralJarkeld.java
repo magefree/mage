@@ -45,7 +45,7 @@ public final class GeneralJarkeld extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GeneralJarkeld(final GeneralJarkeld card) {
+    private GeneralJarkeld(final GeneralJarkeld card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class GoldenBear extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public GoldenBear(final GoldenBear card) {
+    private GoldenBear(final GoldenBear card) {
         super(card);
     }
 

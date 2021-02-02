@@ -37,7 +37,7 @@ public final class HornedKavu extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
     }
 
-    public HornedKavu(final HornedKavu card) {
+    private HornedKavu(final HornedKavu card) {
         super(card);
     }
 

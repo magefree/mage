@@ -56,7 +56,7 @@ public final class ProgenitorMimic extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 
-    public ProgenitorMimic(final ProgenitorMimic card) {
+    private ProgenitorMimic(final ProgenitorMimic card) {
         super(card);
     }
 

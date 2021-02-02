@@ -46,7 +46,7 @@ public final class NoxiousGearhulk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NoxiousGearhulk(final NoxiousGearhulk card) {
+    private NoxiousGearhulk(final NoxiousGearhulk card) {
         super(card);
     }
 

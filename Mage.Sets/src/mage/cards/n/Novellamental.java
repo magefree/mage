@@ -28,7 +28,7 @@ public final class Novellamental extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public Novellamental(final Novellamental card) {
+    private Novellamental(final Novellamental card) {
         super(card);
     }
 

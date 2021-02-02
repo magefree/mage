@@ -37,7 +37,7 @@ public final class Thunderbolt extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public Thunderbolt(final Thunderbolt card) {
+    private Thunderbolt(final Thunderbolt card) {
         super(card);
     }
 

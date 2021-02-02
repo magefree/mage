@@ -50,7 +50,7 @@ public final class FavorOfTheOverbeing extends CardImpl {
         this.addAbility(blueAbility);
     }
 
-    public FavorOfTheOverbeing(final FavorOfTheOverbeing card) {
+    private FavorOfTheOverbeing(final FavorOfTheOverbeing card) {
         super(card);
     }
 

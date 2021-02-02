@@ -26,7 +26,7 @@ public final class SpectralRider extends CardImpl {
         this.addAbility(IntimidateAbility.getInstance());
     }
 
-    public SpectralRider(final SpectralRider card) {
+    private SpectralRider(final SpectralRider card) {
         super(card);
     }
 

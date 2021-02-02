@@ -30,7 +30,7 @@ public final class PropheticPrism extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PropheticPrism(final PropheticPrism card) {
+    private PropheticPrism(final PropheticPrism card) {
         super(card);
     }
 

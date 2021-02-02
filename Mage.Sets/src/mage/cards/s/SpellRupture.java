@@ -36,7 +36,7 @@ public final class SpellRupture extends CardImpl {
         this.getSpellAbility().addHint(new ValueHint("Greatest power among your creatures", new GreatestPowerCountCreatureYouControl()));
     }
 
-    public SpellRupture(final SpellRupture card) {
+    private SpellRupture(final SpellRupture card) {
         super(card);
     }
 

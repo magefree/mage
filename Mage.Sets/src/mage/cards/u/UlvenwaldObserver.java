@@ -37,7 +37,7 @@ public final class UlvenwaldObserver extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), false, filter));
     }
 
-    public UlvenwaldObserver(final UlvenwaldObserver card) {
+    private UlvenwaldObserver(final UlvenwaldObserver card) {
         super(card);
     }
 

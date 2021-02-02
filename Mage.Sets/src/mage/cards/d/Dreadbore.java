@@ -33,7 +33,7 @@ public final class Dreadbore extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public Dreadbore(final Dreadbore card) {
+    private Dreadbore(final Dreadbore card) {
         super(card);
     }
 

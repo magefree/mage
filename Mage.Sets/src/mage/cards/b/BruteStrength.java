@@ -31,7 +31,7 @@ public final class BruteStrength extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public BruteStrength(final BruteStrength card) {
+    private BruteStrength(final BruteStrength card) {
         super(card);
     }
 

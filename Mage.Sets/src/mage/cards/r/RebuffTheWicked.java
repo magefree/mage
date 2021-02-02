@@ -31,7 +31,7 @@ public final class RebuffTheWicked extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public RebuffTheWicked(final RebuffTheWicked card) {
+    private RebuffTheWicked(final RebuffTheWicked card) {
         super(card);
     }
 

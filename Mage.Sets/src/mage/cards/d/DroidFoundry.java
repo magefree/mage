@@ -32,7 +32,7 @@ public final class DroidFoundry extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public DroidFoundry(final DroidFoundry card) {
+    private DroidFoundry(final DroidFoundry card) {
         super(card);
     }
 

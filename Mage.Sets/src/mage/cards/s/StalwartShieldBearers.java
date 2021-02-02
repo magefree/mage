@@ -39,7 +39,7 @@ public final class StalwartShieldBearers extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public StalwartShieldBearers(final StalwartShieldBearers card) {
+    private StalwartShieldBearers(final StalwartShieldBearers card) {
         super(card);
     }
 

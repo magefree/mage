@@ -23,7 +23,7 @@ public final class OreskosSwiftclaw extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public OreskosSwiftclaw(final OreskosSwiftclaw card) {
+    private OreskosSwiftclaw(final OreskosSwiftclaw card) {
         super(card);
     }
 

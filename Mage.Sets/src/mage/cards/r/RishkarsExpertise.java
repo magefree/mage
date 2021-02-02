@@ -27,7 +27,7 @@ public final class RishkarsExpertise extends CardImpl {
         this.getSpellAbility().addEffect(new CastWithoutPayingManaCostEffect(5));
     }
 
-    public RishkarsExpertise(final RishkarsExpertise card) {
+    private RishkarsExpertise(final RishkarsExpertise card) {
         super(card);
     }
 

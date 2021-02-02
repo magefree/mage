@@ -27,7 +27,7 @@ public final class BarrenMoor extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{B}")));
     }
 
-    public BarrenMoor(final BarrenMoor card) {
+    private BarrenMoor(final BarrenMoor card) {
         super(card);
     }
 

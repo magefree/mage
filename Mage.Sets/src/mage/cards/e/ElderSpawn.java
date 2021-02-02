@@ -45,7 +45,7 @@ public final class ElderSpawn extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public ElderSpawn(final ElderSpawn card) {
+    private ElderSpawn(final ElderSpawn card) {
         super(card);
     }
 

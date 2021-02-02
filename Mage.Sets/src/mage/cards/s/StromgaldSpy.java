@@ -47,7 +47,7 @@ public final class StromgaldSpy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StromgaldSpy(final StromgaldSpy card) {
+    private StromgaldSpy(final StromgaldSpy card) {
         super(card);
     }
 

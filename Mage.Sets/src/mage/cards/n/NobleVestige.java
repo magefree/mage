@@ -35,7 +35,7 @@ public final class NobleVestige extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NobleVestige(final NobleVestige card) {
+    private NobleVestige(final NobleVestige card) {
         super(card);
     }
 

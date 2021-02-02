@@ -30,7 +30,7 @@ public final class VampiricSpirit extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(4)));
     }
 
-    public VampiricSpirit(final VampiricSpirit card) {
+    private VampiricSpirit(final VampiricSpirit card) {
         super(card);
     }
 

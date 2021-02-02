@@ -34,7 +34,7 @@ public final class GuulDrazOverseer extends CardImpl {
         this.addAbility(new LandfallAbility(Zone.BATTLEFIELD, new GuulDrazOverseerEffect(), false, SetTargetPointer.PERMANENT));
     }
 
-    public GuulDrazOverseer(final GuulDrazOverseer card) {
+    private GuulDrazOverseer(final GuulDrazOverseer card) {
         super(card);
     }
 

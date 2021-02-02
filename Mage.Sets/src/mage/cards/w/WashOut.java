@@ -39,7 +39,7 @@ public final class WashOut extends CardImpl {
 
     }
 
-    public WashOut(final WashOut card) {
+    private WashOut(final WashOut card) {
         super(card);
     }
 

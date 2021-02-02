@@ -36,7 +36,7 @@ public final class GraveShellScarab extends CardImpl {
         this.addAbility(new DredgeAbility(1));
     }
 
-    public GraveShellScarab(final GraveShellScarab card) {
+    private GraveShellScarab(final GraveShellScarab card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class AislingLeprechaun extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AislingLeprechaun(final AislingLeprechaun card) {
+    private AislingLeprechaun(final AislingLeprechaun card) {
         super(card);
     }
 

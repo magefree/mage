@@ -31,7 +31,7 @@ public final class FlamecastWheel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlamecastWheel(final FlamecastWheel card) {
+    private FlamecastWheel(final FlamecastWheel card) {
         super(card);
     }
 

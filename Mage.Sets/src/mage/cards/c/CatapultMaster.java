@@ -44,7 +44,7 @@ public final class CatapultMaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CatapultMaster(final CatapultMaster card) {
+    private CatapultMaster(final CatapultMaster card) {
         super(card);
     }
 

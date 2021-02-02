@@ -29,7 +29,7 @@ public final class VoiceOfDuty extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.GREEN));
     }
 
-    public VoiceOfDuty(final VoiceOfDuty card) {
+    private VoiceOfDuty(final VoiceOfDuty card) {
         super(card);
     }
 

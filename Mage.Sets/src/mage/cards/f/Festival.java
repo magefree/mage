@@ -30,7 +30,7 @@ public final class Festival extends CardImpl {
 
     }
 
-    public Festival(final Festival card) {
+    private Festival(final Festival card) {
         super(card);
     }
 

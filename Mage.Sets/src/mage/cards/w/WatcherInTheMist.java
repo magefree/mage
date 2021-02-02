@@ -32,7 +32,7 @@ public final class WatcherInTheMist extends CardImpl {
         ));
     }
 
-    public WatcherInTheMist(final WatcherInTheMist card) {
+    private WatcherInTheMist(final WatcherInTheMist card) {
         super(card);
     }
 

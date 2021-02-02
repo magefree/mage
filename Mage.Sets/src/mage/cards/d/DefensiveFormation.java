@@ -20,7 +20,7 @@ public final class DefensiveFormation extends CardImpl {
         this.addAbility(ControllerAssignCombatDamageToBlockersAbility.getInstance());
     }
 
-    public DefensiveFormation(final DefensiveFormation card) {
+    private DefensiveFormation(final DefensiveFormation card) {
         super(card);
     }
 

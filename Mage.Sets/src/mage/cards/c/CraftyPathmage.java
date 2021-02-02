@@ -43,7 +43,7 @@ public final class CraftyPathmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CraftyPathmage(final CraftyPathmage card) {
+    private CraftyPathmage(final CraftyPathmage card) {
         super(card);
     }
 

@@ -58,7 +58,7 @@ public final class NissaVitalForce extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new NissaVitalForceEmblem()), -6));
     }
 
-    public NissaVitalForce(final NissaVitalForce card) {
+    private NissaVitalForce(final NissaVitalForce card) {
         super(card);
     }
 

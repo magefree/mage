@@ -33,7 +33,7 @@ public final class YevasForcemage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public YevasForcemage(final YevasForcemage card) {
+    private YevasForcemage(final YevasForcemage card) {
         super(card);
     }
 

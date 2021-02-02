@@ -26,7 +26,7 @@ public final class BurnTrail extends CardImpl {
         this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
     }
 
-    public BurnTrail(final BurnTrail card) {
+    private BurnTrail(final BurnTrail card) {
         super(card);
     }
 

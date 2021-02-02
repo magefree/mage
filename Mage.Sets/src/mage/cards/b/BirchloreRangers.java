@@ -49,7 +49,7 @@ public final class BirchloreRangers extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{G}")));
     }
 
-    public BirchloreRangers(final BirchloreRangers card) {
+    private BirchloreRangers(final BirchloreRangers card) {
         super(card);
     }
 

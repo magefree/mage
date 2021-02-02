@@ -28,7 +28,7 @@ public final class BorealDruid extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public BorealDruid(final BorealDruid card) {
+    private BorealDruid(final BorealDruid card) {
         super(card);
     }
 

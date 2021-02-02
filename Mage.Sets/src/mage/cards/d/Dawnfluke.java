@@ -40,7 +40,7 @@ public final class Dawnfluke extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{W}"));
     }
 
-    public Dawnfluke(final Dawnfluke card) {
+    private Dawnfluke(final Dawnfluke card) {
         super(card);
     }
 

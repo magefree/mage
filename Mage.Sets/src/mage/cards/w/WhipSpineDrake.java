@@ -29,7 +29,7 @@ public final class WhipSpineDrake extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{W}")));
     }
 
-    public WhipSpineDrake(final WhipSpineDrake card) {
+    private WhipSpineDrake(final WhipSpineDrake card) {
         super(card);
     }
 

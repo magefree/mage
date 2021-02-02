@@ -43,7 +43,7 @@ public final class GoblinChieftain extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinChieftain(final GoblinChieftain card) {
+    private GoblinChieftain(final GoblinChieftain card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class Gainsay extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public Gainsay(final Gainsay card) {
+    private Gainsay(final Gainsay card) {
         super(card);
     }
 

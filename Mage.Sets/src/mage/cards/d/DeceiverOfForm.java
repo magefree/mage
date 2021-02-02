@@ -34,7 +34,7 @@ public final class DeceiverOfForm extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new DeceiverOfFormEffect(), TargetController.YOU, false));
     }
 
-    public DeceiverOfForm(final DeceiverOfForm card) {
+    private DeceiverOfForm(final DeceiverOfForm card) {
         super(card);
     }
 

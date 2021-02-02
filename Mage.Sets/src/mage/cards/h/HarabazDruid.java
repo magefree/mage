@@ -38,7 +38,7 @@ public final class HarabazDruid extends CardImpl {
                 "Add X mana of any one color, where X is the number of Allies you control", true));
     }
 
-    public HarabazDruid(final HarabazDruid card) {
+    private HarabazDruid(final HarabazDruid card) {
         super(card);
     }
 

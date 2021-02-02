@@ -39,7 +39,7 @@ public final class NecromasterDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NecromasterDragon(final NecromasterDragon card) {
+    private NecromasterDragon(final NecromasterDragon card) {
         super(card);
     }
 

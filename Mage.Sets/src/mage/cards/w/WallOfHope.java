@@ -37,7 +37,7 @@ public final class WallOfHope extends CardImpl {
 
     }
 
-    public WallOfHope(final WallOfHope card) {
+    private WallOfHope(final WallOfHope card) {
         super(card);
     }
 

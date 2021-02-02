@@ -26,7 +26,7 @@ public final class HornOfGreed extends CardImpl {
         this.addAbility(new HornOfGreedAbility());
     }
 
-    public HornOfGreed(final HornOfGreed card) {
+    private HornOfGreed(final HornOfGreed card) {
         super(card);
     }
 

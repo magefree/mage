@@ -39,7 +39,7 @@ public final class BoarUmbra extends CardImpl {
         this.addAbility(new TotemArmorAbility());
     }
 
-    public BoarUmbra(final BoarUmbra card) {
+    private BoarUmbra(final BoarUmbra card) {
         super(card);
     }
 

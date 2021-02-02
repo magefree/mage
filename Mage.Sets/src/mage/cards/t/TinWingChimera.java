@@ -49,7 +49,7 @@ public final class TinWingChimera extends CardImpl {
         addAbility(ability);
     }
 
-    public TinWingChimera(final TinWingChimera card) {
+    private TinWingChimera(final TinWingChimera card) {
         super(card);
     }
 

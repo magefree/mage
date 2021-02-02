@@ -36,7 +36,7 @@ public final class WasteNot extends CardImpl {
         this.addAbility(new WasteNotOtherTriggeredAbility());
     }
 
-    public WasteNot(final WasteNot card) {
+    private WasteNot(final WasteNot card) {
         super(card);
     }
 

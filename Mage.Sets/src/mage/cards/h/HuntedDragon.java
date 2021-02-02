@@ -38,7 +38,7 @@ public final class HuntedDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HuntedDragon(final HuntedDragon card) {
+    private HuntedDragon(final HuntedDragon card) {
         super(card);
     }
 

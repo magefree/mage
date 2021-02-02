@@ -25,7 +25,7 @@ public final class KingCheetah extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
     }
 
-    public KingCheetah(final KingCheetah card) {
+    private KingCheetah(final KingCheetah card) {
         super(card);
     }
 

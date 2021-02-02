@@ -34,7 +34,7 @@ public final class BarbedSextant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BarbedSextant(final BarbedSextant card) {
+    private BarbedSextant(final BarbedSextant card) {
         super(card);
     }
 

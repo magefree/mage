@@ -33,7 +33,7 @@ public final class TerrainGenerator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TerrainGenerator(final TerrainGenerator card) {
+    private TerrainGenerator(final TerrainGenerator card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class AuraShards extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AuraShards(final AuraShards card) {
+    private AuraShards(final AuraShards card) {
         super(card);
     }
 

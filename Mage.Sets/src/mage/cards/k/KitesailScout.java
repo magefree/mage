@@ -26,7 +26,7 @@ public final class KitesailScout extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public KitesailScout(final KitesailScout card) {
+    private KitesailScout(final KitesailScout card) {
         super(card);
     }
 

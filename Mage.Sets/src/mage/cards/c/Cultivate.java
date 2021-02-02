@@ -30,7 +30,7 @@ public final class Cultivate extends CardImpl {
 
     }
 
-    public Cultivate(final Cultivate card) {
+    private Cultivate(final Cultivate card) {
         super(card);
     }
 

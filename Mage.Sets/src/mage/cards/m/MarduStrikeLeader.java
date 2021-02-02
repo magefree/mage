@@ -32,7 +32,7 @@ public final class MarduStrikeLeader extends CardImpl {
         this.addAbility(new DashAbility(this, "{3}{B}"));
     }
 
-    public MarduStrikeLeader(final MarduStrikeLeader card) {
+    private MarduStrikeLeader(final MarduStrikeLeader card) {
         super(card);
     }
 

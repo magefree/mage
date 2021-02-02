@@ -30,7 +30,7 @@ public final class VirtuesRuin extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public VirtuesRuin(final VirtuesRuin card) {
+    private VirtuesRuin(final VirtuesRuin card) {
         super(card);
     }
 

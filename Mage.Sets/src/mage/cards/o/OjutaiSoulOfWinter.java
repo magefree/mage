@@ -52,7 +52,7 @@ public final class OjutaiSoulOfWinter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OjutaiSoulOfWinter(final OjutaiSoulOfWinter card) {
+    private OjutaiSoulOfWinter(final OjutaiSoulOfWinter card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class Shadowstorm extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(2, filter));
     }
 
-    public Shadowstorm(final Shadowstorm card) {
+    private Shadowstorm(final Shadowstorm card) {
         super(card);
     }
 

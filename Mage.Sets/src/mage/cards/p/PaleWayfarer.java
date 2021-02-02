@@ -52,7 +52,7 @@ public final class PaleWayfarer extends CardImpl {
 
     }
 
-    public PaleWayfarer(final PaleWayfarer card) {
+    private PaleWayfarer(final PaleWayfarer card) {
         super(card);
     }
 

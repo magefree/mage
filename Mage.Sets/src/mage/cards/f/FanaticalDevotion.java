@@ -31,7 +31,7 @@ public final class FanaticalDevotion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FanaticalDevotion(final FanaticalDevotion card) {
+    private FanaticalDevotion(final FanaticalDevotion card) {
         super(card);
     }
 

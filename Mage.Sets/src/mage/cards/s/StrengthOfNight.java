@@ -40,7 +40,7 @@ public final class StrengthOfNight extends CardImpl {
             "if this spell was kicked, Zombie creatures you control get an additional +2/+2 until end of turn."));
     }
 
-    public StrengthOfNight(final StrengthOfNight card) {
+    private StrengthOfNight(final StrengthOfNight card) {
         super(card);
     }
 

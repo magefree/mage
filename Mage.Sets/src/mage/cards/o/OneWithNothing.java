@@ -21,7 +21,7 @@ public final class OneWithNothing extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardHandControllerEffect());
     }
 
-    public OneWithNothing(final OneWithNothing card) {
+    private OneWithNothing(final OneWithNothing card) {
         super(card);
     }
 

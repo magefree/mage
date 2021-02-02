@@ -29,7 +29,7 @@ public final class LuminousAngel extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken(), 1), TargetController.YOU, true));
     }
 
-    public LuminousAngel(final LuminousAngel card) {
+    private LuminousAngel(final LuminousAngel card) {
         super(card);
     }
 

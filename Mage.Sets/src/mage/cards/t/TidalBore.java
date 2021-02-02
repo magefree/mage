@@ -36,7 +36,7 @@ public final class TidalBore extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TidalBore(final TidalBore card) {
+    private TidalBore(final TidalBore card) {
         super(card);
     }
 

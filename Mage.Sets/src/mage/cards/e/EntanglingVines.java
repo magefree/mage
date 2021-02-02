@@ -44,7 +44,7 @@ public final class EntanglingVines extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
-    public EntanglingVines(final EntanglingVines card) {
+    private EntanglingVines(final EntanglingVines card) {
         super(card);
     }
 

@@ -19,7 +19,7 @@ public final class MakeObsolete extends CardImpl {
         this.getSpellAbility().addEffect(new BoostOpponentsEffect(-1, -1, Duration.EndOfTurn));
     }
 
-    public MakeObsolete(final MakeObsolete card) {
+    private MakeObsolete(final MakeObsolete card) {
         super(card);
     }
 

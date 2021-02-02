@@ -40,7 +40,7 @@ public final class HomaridSpawningBed extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HomaridSpawningBed(final HomaridSpawningBed card) {
+    private HomaridSpawningBed(final HomaridSpawningBed card) {
         super(card);
     }
 

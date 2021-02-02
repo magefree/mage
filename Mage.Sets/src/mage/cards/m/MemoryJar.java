@@ -36,7 +36,7 @@ public final class MemoryJar extends CardImpl {
 
     }
 
-    public MemoryJar(final MemoryJar card) {
+    private MemoryJar(final MemoryJar card) {
         super(card);
     }
 

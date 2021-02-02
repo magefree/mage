@@ -25,7 +25,7 @@ public final class Overwhelm extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(3, 3, Duration.EndOfTurn));
     }
 
-    public Overwhelm(final Overwhelm card) {
+    private Overwhelm(final Overwhelm card) {
         super(card);
     }
 

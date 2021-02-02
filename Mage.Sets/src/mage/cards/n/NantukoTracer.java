@@ -31,7 +31,7 @@ public final class NantukoTracer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NantukoTracer(final NantukoTracer card) {
+    private NantukoTracer(final NantukoTracer card) {
         super(card);
     }
 

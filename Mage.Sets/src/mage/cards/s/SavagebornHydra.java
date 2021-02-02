@@ -39,7 +39,7 @@ public final class SavagebornHydra extends CardImpl {
         this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{1}{R/G}")));
     }
 
-    public SavagebornHydra(final SavagebornHydra card) {
+    private SavagebornHydra(final SavagebornHydra card) {
         super(card);
     }
 

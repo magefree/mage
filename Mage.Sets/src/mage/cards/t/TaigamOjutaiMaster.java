@@ -60,7 +60,7 @@ public final class TaigamOjutaiMaster extends CardImpl {
         this.addAbility(ability, new AttackedThisTurnWatcher());
     }
 
-    public TaigamOjutaiMaster(final TaigamOjutaiMaster card) {
+    private TaigamOjutaiMaster(final TaigamOjutaiMaster card) {
         super(card);
     }
 

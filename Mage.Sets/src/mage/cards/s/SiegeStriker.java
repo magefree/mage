@@ -41,7 +41,7 @@ public final class SiegeStriker extends CardImpl {
 
     }
 
-    public SiegeStriker(final SiegeStriker card) {
+    private SiegeStriker(final SiegeStriker card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class JackInTheMox extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JackInTheMox(final JackInTheMox card) {
+    private JackInTheMox(final JackInTheMox card) {
         super(card);
     }
 

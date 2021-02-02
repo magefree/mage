@@ -26,7 +26,7 @@ public final class WildGriffin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WildGriffin(final WildGriffin card) {
+    private WildGriffin(final WildGriffin card) {
         super(card);
     }
 

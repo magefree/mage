@@ -37,7 +37,7 @@ public final class JungleWayfinder extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new JungleWayfinderEffect(), false));
     }
 
-    public JungleWayfinder(final JungleWayfinder card) {
+    private JungleWayfinder(final JungleWayfinder card) {
         super(card);
     }
 

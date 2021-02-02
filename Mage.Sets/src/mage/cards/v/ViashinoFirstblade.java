@@ -33,7 +33,7 @@ public final class ViashinoFirstblade extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn)));
     }
 
-    public ViashinoFirstblade(final ViashinoFirstblade card) {
+    private ViashinoFirstblade(final ViashinoFirstblade card) {
         super(card);
     }
 

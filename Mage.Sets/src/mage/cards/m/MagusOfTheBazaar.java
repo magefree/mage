@@ -28,7 +28,7 @@ public final class MagusOfTheBazaar extends CardImpl {
         // {tap}: Draw two cards, then discard three cards.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(2, 3), new TapSourceCost()));                                                                          }
 
-    public MagusOfTheBazaar(final MagusOfTheBazaar card) {
+    private MagusOfTheBazaar(final MagusOfTheBazaar card) {
         super(card);
     }
 

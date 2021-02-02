@@ -22,7 +22,7 @@ public final class DefendTheHearth extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageToPlayersEffect(Duration.EndOfTurn, true));
     }
 
-    public DefendTheHearth(final DefendTheHearth card) {
+    private DefendTheHearth(final DefendTheHearth card) {
         super(card);
     }
 

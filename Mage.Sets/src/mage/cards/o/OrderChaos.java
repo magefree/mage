@@ -30,7 +30,7 @@ public final class OrderChaos extends SplitCard {
 
     }
 
-    public OrderChaos(final OrderChaos card) {
+    private OrderChaos(final OrderChaos card) {
         super(card);
     }
 

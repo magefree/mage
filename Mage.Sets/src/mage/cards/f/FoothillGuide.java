@@ -37,7 +37,7 @@ public final class FoothillGuide extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{W}")));
     }
 
-    public FoothillGuide(final FoothillGuide card) {
+    private FoothillGuide(final FoothillGuide card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class KessigRecluse extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public KessigRecluse(final KessigRecluse card) {
+    private KessigRecluse(final KessigRecluse card) {
         super(card);
     }
 

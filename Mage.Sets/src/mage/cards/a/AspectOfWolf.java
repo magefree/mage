@@ -39,7 +39,7 @@ public final class AspectOfWolf extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(new HalfForestsDownCount(), new  HalfForestsUpCount(), Duration.WhileOnBattlefield)));
     }
 
-    public AspectOfWolf(final AspectOfWolf card) {
+    private AspectOfWolf(final AspectOfWolf card) {
         super(card);
     }
 

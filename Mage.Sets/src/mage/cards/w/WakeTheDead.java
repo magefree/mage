@@ -46,7 +46,7 @@ public final class WakeTheDead extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(WakeTheDeadAdjuster.instance);
     }
 
-    public WakeTheDead(final WakeTheDead card) {
+    private WakeTheDead(final WakeTheDead card) {
         super(card);
     }
 

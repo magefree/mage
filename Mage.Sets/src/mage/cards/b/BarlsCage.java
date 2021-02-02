@@ -26,7 +26,7 @@ public final class BarlsCage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BarlsCage(final BarlsCage card) {
+    private BarlsCage(final BarlsCage card) {
         super(card);
     }
 

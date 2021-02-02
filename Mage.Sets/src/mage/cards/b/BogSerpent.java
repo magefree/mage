@@ -36,7 +36,7 @@ public final class BogSerpent extends CardImpl {
                 new SacrificeSourceEffect()));
     }
 
-    public BogSerpent(final BogSerpent card) {
+    private BogSerpent(final BogSerpent card) {
         super(card);
     }
 

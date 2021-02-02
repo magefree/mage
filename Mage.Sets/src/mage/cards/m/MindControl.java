@@ -39,7 +39,7 @@ public final class MindControl extends CardImpl {
 
     }
 
-    public MindControl(final MindControl card) {
+    private MindControl(final MindControl card) {
         super(card);
     }
 

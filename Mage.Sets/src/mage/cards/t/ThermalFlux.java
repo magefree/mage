@@ -57,7 +57,7 @@ public final class ThermalFlux extends CardImpl {
 
     }
 
-    public ThermalFlux(final ThermalFlux card) {
+    private ThermalFlux(final ThermalFlux card) {
         super(card);
     }
 

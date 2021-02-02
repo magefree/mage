@@ -40,7 +40,7 @@ public final class TreeOfPerdition extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TreeOfPerdition(final TreeOfPerdition card) {
+    private TreeOfPerdition(final TreeOfPerdition card) {
         super(card);
     }
 

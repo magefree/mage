@@ -38,7 +38,7 @@ public final class TundraKavu extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TundraKavu(final TundraKavu card) {
+    private TundraKavu(final TundraKavu card) {
         super(card);
     }
 

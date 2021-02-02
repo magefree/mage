@@ -60,7 +60,7 @@ public final class StatusStatue extends SplitCard {
         );
     }
 
-    public StatusStatue(final StatusStatue card) {
+    private StatusStatue(final StatusStatue card) {
         super(card);
     }
 

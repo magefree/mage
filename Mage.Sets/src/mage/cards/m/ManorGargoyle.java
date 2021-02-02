@@ -77,7 +77,7 @@ public final class ManorGargoyle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ManorGargoyle(final ManorGargoyle card) {
+    private ManorGargoyle(final ManorGargoyle card) {
         super(card);
     }
 

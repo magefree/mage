@@ -54,7 +54,7 @@ public final class FreyaliseLlanowarsFury extends CardImpl {
         this.addAbility(CanBeYourCommanderAbility.getInstance());
     }
 
-    public FreyaliseLlanowarsFury(final FreyaliseLlanowarsFury card) {
+    private FreyaliseLlanowarsFury(final FreyaliseLlanowarsFury card) {
         super(card);
     }
 

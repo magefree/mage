@@ -35,7 +35,7 @@ public final class MirranMettle extends CardImpl {
         this.getSpellAbility().addHint(MetalcraftHint.instance);
     }
 
-    public MirranMettle(final MirranMettle card) {
+    private MirranMettle(final MirranMettle card) {
         super(card);
     }
 

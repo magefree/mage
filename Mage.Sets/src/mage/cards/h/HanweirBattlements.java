@@ -47,7 +47,7 @@ public final class HanweirBattlements extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HanweirBattlements(final HanweirBattlements card) {
+    private HanweirBattlements(final HanweirBattlements card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class WallOfFaith extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public WallOfFaith(final WallOfFaith card) {
+    private WallOfFaith(final WallOfFaith card) {
         super(card);
     }
 

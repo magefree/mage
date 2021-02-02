@@ -36,7 +36,7 @@ public final class RithsCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public RithsCharm(final RithsCharm card) {
+    private RithsCharm(final RithsCharm card) {
         super(card);
     }
 

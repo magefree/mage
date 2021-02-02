@@ -27,7 +27,7 @@ public final class TrainedCheetah extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
     }
 
-    public TrainedCheetah(final TrainedCheetah card) {
+    private TrainedCheetah(final TrainedCheetah card) {
         super(card);
     }
 

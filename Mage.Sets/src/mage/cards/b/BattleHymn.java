@@ -21,7 +21,7 @@ public final class BattleHymn extends CardImpl {
         this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), CreaturesYouControlCount.instance));
     }
 
-    public BattleHymn(final BattleHymn card) {
+    private BattleHymn(final BattleHymn card) {
         super(card);
     }
 

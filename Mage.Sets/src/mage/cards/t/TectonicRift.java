@@ -36,7 +36,7 @@ public final class TectonicRift extends CardImpl {
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
     }
 
-    public TectonicRift(final TectonicRift card) {
+    private TectonicRift(final TectonicRift card) {
         super(card);
     }
 

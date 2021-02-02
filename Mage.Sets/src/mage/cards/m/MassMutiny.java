@@ -36,7 +36,7 @@ public final class MassMutiny extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(MassMutinyAdjuster.instance);
     }
 
-    public MassMutiny(final MassMutiny card) {
+    private MassMutiny(final MassMutiny card) {
         super(card);
     }
 

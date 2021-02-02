@@ -32,7 +32,7 @@ public final class Mindcrank extends CardImpl {
         this.addAbility(new MindcrankTriggeredAbility());
     }
 
-    public Mindcrank(final Mindcrank card) {
+    private Mindcrank(final Mindcrank card) {
         super(card);
     }
 

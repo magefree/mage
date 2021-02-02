@@ -36,7 +36,7 @@ public final class ChampionsVictory extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
-    public ChampionsVictory(final ChampionsVictory card) {
+    private ChampionsVictory(final ChampionsVictory card) {
         super(card);
     }
 

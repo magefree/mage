@@ -29,7 +29,7 @@ public final class PersonalSanctuary extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PersonalSanctuaryEffect()));
     }
 
-    public PersonalSanctuary(final PersonalSanctuary card) {
+    private PersonalSanctuary(final PersonalSanctuary card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class MaelstromArchangel extends CardImpl {
 
     }
 
-    public MaelstromArchangel(final MaelstromArchangel card) {
+    private MaelstromArchangel(final MaelstromArchangel card) {
         super(card);
     }
 

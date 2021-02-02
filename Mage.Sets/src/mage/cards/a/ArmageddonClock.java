@@ -42,7 +42,7 @@ public final class ArmageddonClock extends CardImpl {
 
     }
 
-    public ArmageddonClock(final ArmageddonClock card) {
+    private ArmageddonClock(final ArmageddonClock card) {
         super(card);
     }
 

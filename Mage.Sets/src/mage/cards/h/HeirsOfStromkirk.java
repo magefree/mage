@@ -30,7 +30,7 @@ public final class HeirsOfStromkirk extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public HeirsOfStromkirk(final HeirsOfStromkirk card) {
+    private HeirsOfStromkirk(final HeirsOfStromkirk card) {
         super(card);
     }
 

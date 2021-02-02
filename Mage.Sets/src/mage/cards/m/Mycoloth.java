@@ -40,7 +40,7 @@ public final class Mycoloth extends CardImpl {
             ));
     }
 
-    public Mycoloth(final Mycoloth card) {
+    private Mycoloth(final Mycoloth card) {
         super(card);
     }
 

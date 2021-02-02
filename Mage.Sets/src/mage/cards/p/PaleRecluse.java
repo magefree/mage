@@ -35,7 +35,7 @@ public final class PaleRecluse extends CardImpl {
         this.addAbility(new PlainscyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public PaleRecluse(final PaleRecluse card) {
+    private PaleRecluse(final PaleRecluse card) {
         super(card);
     }
 

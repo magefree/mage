@@ -29,7 +29,7 @@ public final class GratuitousViolence extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GratuitousViolenceReplacementEffect()));
     }
 
-    public GratuitousViolence(final GratuitousViolence card) {
+    private GratuitousViolence(final GratuitousViolence card) {
         super(card);
     }
 

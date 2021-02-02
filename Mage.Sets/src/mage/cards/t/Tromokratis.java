@@ -48,7 +48,7 @@ public final class Tromokratis extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedUnlessAllEffect()));
     }
 
-    public Tromokratis(final Tromokratis card) {
+    private Tromokratis(final Tromokratis card) {
         super(card);
     }
 

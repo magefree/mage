@@ -23,7 +23,7 @@ public final class Hex extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(6));
     }
 
-    public Hex(final Hex card) {
+    private Hex(final Hex card) {
         super(card);
     }
 

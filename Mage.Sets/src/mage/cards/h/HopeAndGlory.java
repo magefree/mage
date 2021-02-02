@@ -26,7 +26,7 @@ public final class HopeAndGlory extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
     }
 
-    public HopeAndGlory(final HopeAndGlory card) {
+    private HopeAndGlory(final HopeAndGlory card) {
         super(card);
     }
 

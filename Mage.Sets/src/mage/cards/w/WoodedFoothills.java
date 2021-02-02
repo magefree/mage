@@ -24,7 +24,7 @@ public final class WoodedFoothills extends CardImpl {
         this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.MOUNTAIN, SubType.FOREST)));
     }
 
-    public WoodedFoothills(final WoodedFoothills card) {
+    private WoodedFoothills(final WoodedFoothills card) {
         super(card);
     }
 

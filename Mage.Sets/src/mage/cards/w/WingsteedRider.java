@@ -32,7 +32,7 @@ public final class WingsteedRider extends CardImpl {
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), true)));
     }
 
-    public WingsteedRider(final WingsteedRider card) {
+    private WingsteedRider(final WingsteedRider card) {
         super(card);
     }
 

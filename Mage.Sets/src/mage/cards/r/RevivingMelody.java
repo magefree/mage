@@ -40,7 +40,7 @@ public final class RevivingMelody extends CardImpl {
 
     }
 
-    public RevivingMelody(final RevivingMelody card) {
+    private RevivingMelody(final RevivingMelody card) {
         super(card);
     }
 

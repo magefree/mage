@@ -31,7 +31,7 @@ public final class TwinbladeSlasher extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
     }
 
-    public TwinbladeSlasher(final TwinbladeSlasher card) {
+    private TwinbladeSlasher(final TwinbladeSlasher card) {
         super(card);
     }
 

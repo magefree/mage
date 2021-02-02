@@ -43,7 +43,7 @@ public final class HeraldOfThePantheon extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(1), filter2, false));
     }
 
-    public HeraldOfThePantheon(final HeraldOfThePantheon card) {
+    private HeraldOfThePantheon(final HeraldOfThePantheon card) {
         super(card);
     }
 

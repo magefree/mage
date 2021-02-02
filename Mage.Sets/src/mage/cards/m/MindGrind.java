@@ -36,7 +36,7 @@ public final class MindGrind extends CardImpl {
         }
     }
 
-    public MindGrind(final MindGrind card) {
+    private MindGrind(final MindGrind card) {
         super(card);
     }
 

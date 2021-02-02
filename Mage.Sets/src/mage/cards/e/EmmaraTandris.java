@@ -37,7 +37,7 @@ public final class EmmaraTandris extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURE_TOKENS)));
     }
 
-    public EmmaraTandris(final EmmaraTandris card) {
+    private EmmaraTandris(final EmmaraTandris card) {
         super(card);
     }
 

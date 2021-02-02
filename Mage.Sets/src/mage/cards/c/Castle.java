@@ -26,7 +26,7 @@ public final class Castle extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield, new FilterUntappedCreature())));
     }
 
-    public Castle(final Castle card) {
+    private Castle(final Castle card) {
         super(card);
     }
 

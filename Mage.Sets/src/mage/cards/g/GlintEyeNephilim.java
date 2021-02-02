@@ -42,7 +42,7 @@ public final class GlintEyeNephilim extends CardImpl {
 
     }
 
-    public GlintEyeNephilim(final GlintEyeNephilim card) {
+    private GlintEyeNephilim(final GlintEyeNephilim card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class Abeyance extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Abeyance(final Abeyance card) {
+    private Abeyance(final Abeyance card) {
         super(card);
     }
 

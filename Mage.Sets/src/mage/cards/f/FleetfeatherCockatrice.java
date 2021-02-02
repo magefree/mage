@@ -35,7 +35,7 @@ public final class FleetfeatherCockatrice extends CardImpl {
         this.addAbility(new MonstrosityAbility("{5}{G}{U}",3));
     }
 
-    public FleetfeatherCockatrice(final FleetfeatherCockatrice card) {
+    private FleetfeatherCockatrice(final FleetfeatherCockatrice card) {
         super(card);
     }
 

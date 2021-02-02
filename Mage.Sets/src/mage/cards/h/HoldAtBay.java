@@ -24,7 +24,7 @@ public final class HoldAtBay extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public HoldAtBay(final HoldAtBay card) {
+    private HoldAtBay(final HoldAtBay card) {
         super(card);
     }
 

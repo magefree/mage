@@ -55,7 +55,7 @@ public final class VenarianGold extends CardImpl {
 
     }
 
-    public VenarianGold(final VenarianGold card) {
+    private VenarianGold(final VenarianGold card) {
         super(card);
     }
 

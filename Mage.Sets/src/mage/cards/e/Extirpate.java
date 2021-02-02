@@ -47,7 +47,7 @@ public final class Extirpate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
     }
 
-    public Extirpate(final Extirpate card) {
+    private Extirpate(final Extirpate card) {
         super(card);
     }
 

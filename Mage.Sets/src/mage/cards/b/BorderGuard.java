@@ -22,7 +22,7 @@ public final class BorderGuard extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public BorderGuard(final BorderGuard card) {
+    private BorderGuard(final BorderGuard card) {
         super(card);
     }
 

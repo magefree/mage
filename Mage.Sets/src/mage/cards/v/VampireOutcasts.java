@@ -27,7 +27,7 @@ public final class VampireOutcasts extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public VampireOutcasts(final VampireOutcasts card) {
+    private VampireOutcasts(final VampireOutcasts card) {
         super(card);
     }
 

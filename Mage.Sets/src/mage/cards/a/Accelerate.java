@@ -28,7 +28,7 @@ public final class Accelerate extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Accelerate(final Accelerate card) {
+    private Accelerate(final Accelerate card) {
         super(card);
     }
 

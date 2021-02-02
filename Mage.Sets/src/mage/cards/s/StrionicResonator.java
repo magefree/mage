@@ -35,7 +35,7 @@ public final class StrionicResonator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StrionicResonator(final StrionicResonator card) {
+    private StrionicResonator(final StrionicResonator card) {
         super(card);
     }
 

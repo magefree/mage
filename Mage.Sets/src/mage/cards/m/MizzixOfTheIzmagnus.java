@@ -50,7 +50,7 @@ public final class MizzixOfTheIzmagnus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MizzixOfTheIzmagnusCostReductionEffect()));
     }
 
-    public MizzixOfTheIzmagnus(final MizzixOfTheIzmagnus card) {
+    private MizzixOfTheIzmagnus(final MizzixOfTheIzmagnus card) {
         super(card);
     }
 

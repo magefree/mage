@@ -33,7 +33,7 @@ public final class AnuridSwarmsnapper extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{1}{G}")));
     }
 
-    public AnuridSwarmsnapper(final AnuridSwarmsnapper card) {
+    private AnuridSwarmsnapper(final AnuridSwarmsnapper card) {
         super(card);
     }
 

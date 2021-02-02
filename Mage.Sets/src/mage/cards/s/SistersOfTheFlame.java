@@ -26,7 +26,7 @@ public final class SistersOfTheFlame extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public SistersOfTheFlame(final SistersOfTheFlame card) {
+    private SistersOfTheFlame(final SistersOfTheFlame card) {
         super(card);
     }
 

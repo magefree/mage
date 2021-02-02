@@ -22,7 +22,7 @@ public final class RighteousCharge extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(2,2, Duration.EndOfTurn));
     }
 
-    public RighteousCharge(final RighteousCharge card) {
+    private RighteousCharge(final RighteousCharge card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class TheBattleOfYavin extends CardImpl {
 
     }
 
-    public TheBattleOfYavin(final TheBattleOfYavin card) {
+    private TheBattleOfYavin(final TheBattleOfYavin card) {
         super(card);
     }
 

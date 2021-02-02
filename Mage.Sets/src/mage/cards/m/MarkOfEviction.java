@@ -45,7 +45,7 @@ public final class MarkOfEviction extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MarkOfEvictionEffect(), TargetController.YOU, false));
     }
 
-    public MarkOfEviction(final MarkOfEviction card) {
+    private MarkOfEviction(final MarkOfEviction card) {
         super(card);
     }
 

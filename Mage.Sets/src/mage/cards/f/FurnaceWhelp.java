@@ -31,7 +31,7 @@ public final class FurnaceWhelp extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public FurnaceWhelp(final FurnaceWhelp card) {
+    private FurnaceWhelp(final FurnaceWhelp card) {
         super(card);
     }
 

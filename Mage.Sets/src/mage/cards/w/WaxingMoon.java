@@ -42,7 +42,7 @@ public final class WaxingMoon extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), "Creatures you control gain trample until end of turn"));
     }
 
-    public WaxingMoon(final WaxingMoon card) {
+    private WaxingMoon(final WaxingMoon card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class UncagedFury extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public UncagedFury(final UncagedFury card) {
+    private UncagedFury(final UncagedFury card) {
         super(card);
     }
 

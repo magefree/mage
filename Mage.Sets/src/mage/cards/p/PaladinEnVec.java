@@ -31,7 +31,7 @@ public final class PaladinEnVec extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK, ObjectColor.RED));
     }
 
-    public PaladinEnVec(final PaladinEnVec card) {
+    private PaladinEnVec(final PaladinEnVec card) {
         super(card);
     }
 

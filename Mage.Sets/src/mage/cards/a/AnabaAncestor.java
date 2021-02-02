@@ -43,7 +43,7 @@ public final class AnabaAncestor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AnabaAncestor(final AnabaAncestor card) {
+    private AnabaAncestor(final AnabaAncestor card) {
         super(card);
     }
 

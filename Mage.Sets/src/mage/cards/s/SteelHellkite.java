@@ -56,7 +56,7 @@ public final class SteelHellkite extends CardImpl {
 
     }
 
-    public SteelHellkite(final SteelHellkite card) {
+    private SteelHellkite(final SteelHellkite card) {
         super(card);
     }
 

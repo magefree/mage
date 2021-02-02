@@ -47,7 +47,7 @@ public final class CourtStreetDenizen extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CourtStreetDenizen(final CourtStreetDenizen card) {
+    private CourtStreetDenizen(final CourtStreetDenizen card) {
         super(card);
     }
 

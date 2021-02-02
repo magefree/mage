@@ -34,7 +34,7 @@ public final class FireBellyChangeling extends CardImpl {
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}"), 2));
     }
 
-    public FireBellyChangeling(final FireBellyChangeling card) {
+    private FireBellyChangeling(final FireBellyChangeling card) {
         super(card);
     }
 

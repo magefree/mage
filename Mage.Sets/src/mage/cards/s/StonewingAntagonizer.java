@@ -29,7 +29,7 @@ public final class StonewingAntagonizer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public StonewingAntagonizer(final StonewingAntagonizer card) {
+    private StonewingAntagonizer(final StonewingAntagonizer card) {
         super(card);
     }
 

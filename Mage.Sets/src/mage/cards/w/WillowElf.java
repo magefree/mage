@@ -22,7 +22,7 @@ public final class WillowElf extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public WillowElf(final WillowElf card) {
+    private WillowElf(final WillowElf card) {
         super(card);
     }
 

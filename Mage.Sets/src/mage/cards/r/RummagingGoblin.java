@@ -34,7 +34,7 @@ public final class RummagingGoblin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RummagingGoblin(final RummagingGoblin card) {
+    private RummagingGoblin(final RummagingGoblin card) {
         super(card);
     }
 

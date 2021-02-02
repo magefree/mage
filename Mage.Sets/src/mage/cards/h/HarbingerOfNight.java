@@ -31,7 +31,7 @@ public final class HarbingerOfNight extends CardImpl {
             TargetController.YOU, false));
     }
 
-    public HarbingerOfNight(final HarbingerOfNight card) {
+    private HarbingerOfNight(final HarbingerOfNight card) {
         super(card);
     }
 

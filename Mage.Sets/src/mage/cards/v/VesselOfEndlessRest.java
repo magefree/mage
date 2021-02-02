@@ -28,7 +28,7 @@ public final class VesselOfEndlessRest extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public VesselOfEndlessRest(final VesselOfEndlessRest card) {
+    private VesselOfEndlessRest(final VesselOfEndlessRest card) {
         super(card);
     }
 

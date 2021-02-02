@@ -36,7 +36,7 @@ public final class PacksDisdain extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PacksDisdain(final PacksDisdain card) {
+    private PacksDisdain(final PacksDisdain card) {
         super(card);
     }
 

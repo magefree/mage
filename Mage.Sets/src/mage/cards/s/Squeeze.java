@@ -31,7 +31,7 @@ public final class Squeeze extends CardImpl {
         );
     }
 
-    public Squeeze(final Squeeze card) {
+    private Squeeze(final Squeeze card) {
         super(card);
     }
 

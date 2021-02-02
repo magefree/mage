@@ -50,7 +50,7 @@ public final class ManticoreOfTheGauntlet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ManticoreOfTheGauntlet(final ManticoreOfTheGauntlet card) {
+    private ManticoreOfTheGauntlet(final ManticoreOfTheGauntlet card) {
         super(card);
     }
 

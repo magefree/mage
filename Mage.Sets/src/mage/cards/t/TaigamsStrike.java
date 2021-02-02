@@ -32,7 +32,7 @@ public final class TaigamsStrike extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public TaigamsStrike(final TaigamsStrike card) {
+    private TaigamsStrike(final TaigamsStrike card) {
         super(card);
     }
 

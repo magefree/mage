@@ -36,7 +36,7 @@ public final class LavaRunner extends CardImpl {
         this.addAbility(new LavaRunnerAbility());
     }
 
-    public LavaRunner(final LavaRunner card) {
+    private LavaRunner(final LavaRunner card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class GhostsOfTheInnocent extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GhostsOfTheInnocentPreventDamageEffect()));
     }
 
-    public GhostsOfTheInnocent(final GhostsOfTheInnocent card) {
+    private GhostsOfTheInnocent(final GhostsOfTheInnocent card) {
         super(card);
     }
 

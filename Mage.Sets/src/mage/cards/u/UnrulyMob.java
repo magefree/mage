@@ -38,7 +38,7 @@ public final class UnrulyMob extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter));
     }
 
-    public UnrulyMob(final UnrulyMob card) {
+    private UnrulyMob(final UnrulyMob card) {
         super(card);
     }
 

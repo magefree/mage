@@ -47,7 +47,7 @@ public final class ScavengerGrounds extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public ScavengerGrounds(final ScavengerGrounds card) {
+    private ScavengerGrounds(final ScavengerGrounds card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class StrangeAugmentation extends CardImpl {
                 .addHint(DeliriumHint.instance));
     }
 
-    public StrangeAugmentation(final StrangeAugmentation card) {
+    private StrangeAugmentation(final StrangeAugmentation card) {
         super(card);
     }
 

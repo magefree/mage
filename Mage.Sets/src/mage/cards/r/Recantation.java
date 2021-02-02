@@ -42,7 +42,7 @@ public final class Recantation extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Recantation(final Recantation card) {
+    private Recantation(final Recantation card) {
         super(card);
     }
 

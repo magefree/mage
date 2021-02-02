@@ -54,7 +54,7 @@ public final class ColossusOfAkros extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ColossusOfAkros(final ColossusOfAkros card) {
+    private ColossusOfAkros(final ColossusOfAkros card) {
         super(card);
     }
 

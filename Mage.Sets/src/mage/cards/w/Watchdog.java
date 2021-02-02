@@ -39,7 +39,7 @@ public final class Watchdog extends CardImpl {
                 new BoostAllEffect(-1, 0, Duration.WhileOnBattlefield, new WatchdogFilter(), false), new InvertCondition(SourceTappedCondition.instance), "As long as {this} is untapped, all creatures attacking you get -1/-0")));
     }
 
-    public Watchdog(final Watchdog card) {
+    private Watchdog(final Watchdog card) {
         super(card);
     }
 

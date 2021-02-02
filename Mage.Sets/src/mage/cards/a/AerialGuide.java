@@ -46,7 +46,7 @@ public final class AerialGuide extends CardImpl {
         
     }
 
-    public AerialGuide(final AerialGuide card) {
+    private AerialGuide(final AerialGuide card) {
         super(card);
     }
 

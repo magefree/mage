@@ -54,7 +54,7 @@ public final class RimeTransfusion extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public RimeTransfusion(final RimeTransfusion card) {
+    private RimeTransfusion(final RimeTransfusion card) {
         super(card);
     }
 

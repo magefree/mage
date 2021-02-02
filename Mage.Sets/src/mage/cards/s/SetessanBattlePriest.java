@@ -28,7 +28,7 @@ public final class SetessanBattlePriest extends CardImpl {
         this.addAbility(new HeroicAbility(new GainLifeEffect(2), false));
     }
 
-    public SetessanBattlePriest(final SetessanBattlePriest card) {
+    private SetessanBattlePriest(final SetessanBattlePriest card) {
         super(card);
     }
 

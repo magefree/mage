@@ -27,7 +27,7 @@ public final class BloodbondVampire extends CardImpl {
         this.addAbility(new GainLifeControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public BloodbondVampire(final BloodbondVampire card) {
+    private BloodbondVampire(final BloodbondVampire card) {
         super(card);
     }
 

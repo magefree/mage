@@ -50,7 +50,7 @@ public final class ThaumaticCompass extends CardImpl {
                 "At the beginning of your end step, if you control seven or more lands, transform {this}."));
     }
 
-    public ThaumaticCompass(final ThaumaticCompass card) {
+    private ThaumaticCompass(final ThaumaticCompass card) {
         super(card);
     }
 

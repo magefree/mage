@@ -37,7 +37,7 @@ public final class KoskunKeep extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KoskunKeep(final KoskunKeep card) {
+    private KoskunKeep(final KoskunKeep card) {
         super(card);
     }
 

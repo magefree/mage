@@ -43,7 +43,7 @@ public final class DeityOfScars extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeityOfScars(final DeityOfScars card) {
+    private DeityOfScars(final DeityOfScars card) {
         super(card);
     }
 

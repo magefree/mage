@@ -41,7 +41,7 @@ public final class InfernalDarkness extends CardImpl {
 
     }
 
-    public InfernalDarkness(final InfernalDarkness card) {
+    private InfernalDarkness(final InfernalDarkness card) {
         super(card);
     }
 

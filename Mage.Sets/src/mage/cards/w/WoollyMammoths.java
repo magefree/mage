@@ -53,7 +53,7 @@ public final class WoollyMammoths extends CardImpl {
         ));
     }
 
-    public WoollyMammoths(final WoollyMammoths card) {
+    private WoollyMammoths(final WoollyMammoths card) {
         super(card);
     }
 

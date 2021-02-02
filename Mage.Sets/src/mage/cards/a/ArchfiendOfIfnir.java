@@ -43,7 +43,7 @@ public final class ArchfiendOfIfnir extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public ArchfiendOfIfnir(final ArchfiendOfIfnir card) {
+    private ArchfiendOfIfnir(final ArchfiendOfIfnir card) {
         super(card);
     }
 

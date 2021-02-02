@@ -35,7 +35,7 @@ public final class Renewal extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public Renewal(final Renewal card) {
+    private Renewal(final Renewal card) {
         super(card);
     }
 

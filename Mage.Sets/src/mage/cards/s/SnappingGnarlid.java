@@ -27,7 +27,7 @@ public final class SnappingGnarlid extends CardImpl {
         this.addAbility(new LandfallAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
     }
 
-    public SnappingGnarlid(final SnappingGnarlid card) {
+    private SnappingGnarlid(final SnappingGnarlid card) {
         super(card);
     }
 

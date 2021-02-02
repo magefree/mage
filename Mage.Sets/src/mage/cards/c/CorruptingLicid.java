@@ -35,7 +35,7 @@ public final class CorruptingLicid extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public CorruptingLicid(final CorruptingLicid card) {
+    private CorruptingLicid(final CorruptingLicid card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class Thraximundar extends CardImpl {
 
     }
 
-    public Thraximundar(final Thraximundar card) {
+    private Thraximundar(final Thraximundar card) {
         super(card);
     }
 

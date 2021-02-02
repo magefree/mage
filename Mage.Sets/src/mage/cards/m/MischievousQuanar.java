@@ -48,7 +48,7 @@ public final class MischievousQuanar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MischievousQuanar(final MischievousQuanar card) {
+    private MischievousQuanar(final MischievousQuanar card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class Cloudseeder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Cloudseeder(final Cloudseeder card) {
+    private Cloudseeder(final Cloudseeder card) {
         super(card);
     }
 

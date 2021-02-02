@@ -42,7 +42,7 @@ public final class SenTriplets extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SenTriplets(final SenTriplets card) {
+    private SenTriplets(final SenTriplets card) {
         super(card);
     }
 

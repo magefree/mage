@@ -35,7 +35,7 @@ public final class FoulFamiliar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FoulFamiliar(final FoulFamiliar card) {
+    private FoulFamiliar(final FoulFamiliar card) {
         super(card);
     }
 

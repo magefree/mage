@@ -23,7 +23,7 @@ public final class QueensBaySoldier extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public QueensBaySoldier(final QueensBaySoldier card) {
+    private QueensBaySoldier(final QueensBaySoldier card) {
         super(card);
     }
 

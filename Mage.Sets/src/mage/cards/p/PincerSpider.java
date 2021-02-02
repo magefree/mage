@@ -42,7 +42,7 @@ public final class PincerSpider extends CardImpl {
         
     }
 
-    public PincerSpider(final PincerSpider card) {
+    private PincerSpider(final PincerSpider card) {
         super(card);
     }
 

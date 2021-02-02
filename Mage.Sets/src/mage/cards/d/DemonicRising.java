@@ -28,7 +28,7 @@ public final class DemonicRising extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new CreatureCountCondition(1, TargetController.YOU), ruleText));
     }
 
-    public DemonicRising(final DemonicRising card) {
+    private DemonicRising(final DemonicRising card) {
         super(card);
     }
 

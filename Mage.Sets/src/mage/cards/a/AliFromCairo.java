@@ -31,7 +31,7 @@ public final class AliFromCairo extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AliFromCairoReplacementEffect()));
     }
 
-    public AliFromCairo(final AliFromCairo card) {
+    private AliFromCairo(final AliFromCairo card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class ZahidDjinnOfTheLamp extends CardImpl {
 
     }
 
-    public ZahidDjinnOfTheLamp(final ZahidDjinnOfTheLamp card) {
+    private ZahidDjinnOfTheLamp(final ZahidDjinnOfTheLamp card) {
         super(card);
     }
 

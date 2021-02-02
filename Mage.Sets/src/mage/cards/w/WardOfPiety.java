@@ -46,7 +46,7 @@ public final class WardOfPiety extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WardOfPiety(final WardOfPiety card) {
+    private WardOfPiety(final WardOfPiety card) {
         super(card);
     }
 

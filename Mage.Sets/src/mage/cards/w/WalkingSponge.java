@@ -45,7 +45,7 @@ public final class WalkingSponge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WalkingSponge(final WalkingSponge card) {
+    private WalkingSponge(final WalkingSponge card) {
         super(card);
     }
 

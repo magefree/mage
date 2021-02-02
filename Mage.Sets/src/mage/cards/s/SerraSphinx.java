@@ -27,7 +27,7 @@ public final class SerraSphinx extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public SerraSphinx(final SerraSphinx card) {
+    private SerraSphinx(final SerraSphinx card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class StrongholdMachinist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StrongholdMachinist(final StrongholdMachinist card) {
+    private StrongholdMachinist(final StrongholdMachinist card) {
         super(card);
     }
 

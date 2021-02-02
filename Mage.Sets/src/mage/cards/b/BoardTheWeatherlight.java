@@ -37,7 +37,7 @@ public final class BoardTheWeatherlight extends CardImpl {
         );
     }
 
-    public BoardTheWeatherlight(final BoardTheWeatherlight card) {
+    private BoardTheWeatherlight(final BoardTheWeatherlight card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class BorealShelf extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public BorealShelf(final BorealShelf card) {
+    private BorealShelf(final BorealShelf card) {
         super(card);
     }
 

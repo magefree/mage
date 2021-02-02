@@ -29,7 +29,7 @@ public final class CabalRitual extends CardImpl {
                 "Add {B}{B}{B}.<br/><br/><i>Threshold</i> &mdash; Add {B}{B}{B}{B}{B} instead if seven or more cards are in your graveyard"));
     }
 
-    public CabalRitual(final CabalRitual card) {
+    private CabalRitual(final CabalRitual card) {
         super(card);
     }
 

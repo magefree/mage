@@ -42,7 +42,7 @@ public final class MesmericSliver extends CardImpl {
                 filterSliver, "All Slivers have \"When this permanent enters the battlefield, you may fateseal 1.\" <i>(To fateseal 1, its controller looks at the top card of an opponent's library, then they may put that card on the bottom of that library.)</i>")));
     }
 
-    public MesmericSliver(final MesmericSliver card) {
+    private MesmericSliver(final MesmericSliver card) {
         super(card);
     }
 

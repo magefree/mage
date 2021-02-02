@@ -30,7 +30,7 @@ public final class AbzanSkycaptain extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new BolsterEffect(2)));
     }
 
-    public AbzanSkycaptain(final AbzanSkycaptain card) {
+    private AbzanSkycaptain(final AbzanSkycaptain card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class HundingGjornersen extends CardImpl {
         this.addAbility(new RampageAbility(1));
     }
 
-    public HundingGjornersen(final HundingGjornersen card) {
+    private HundingGjornersen(final HundingGjornersen card) {
         super(card);
     }
 

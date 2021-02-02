@@ -54,7 +54,7 @@ public final class GoblinChainwhirler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinChainwhirler(final GoblinChainwhirler card) {
+    private GoblinChainwhirler(final GoblinChainwhirler card) {
         super(card);
     }
 

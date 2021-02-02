@@ -34,7 +34,7 @@ public final class TrenchWurm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TrenchWurm(final TrenchWurm card) {
+    private TrenchWurm(final TrenchWurm card) {
         super(card);
     }
 

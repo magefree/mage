@@ -29,7 +29,7 @@ public final class GrixisSlavedriver extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{3}{B}")));
     }
 
-    public GrixisSlavedriver(final GrixisSlavedriver card) {
+    private GrixisSlavedriver(final GrixisSlavedriver card) {
         super(card);
     }
 

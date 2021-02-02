@@ -31,7 +31,7 @@ public final class InspiringStatuary extends CardImpl {
 
     }
 
-    public InspiringStatuary(final InspiringStatuary card) {
+    private InspiringStatuary(final InspiringStatuary card) {
         super(card);
     }
 

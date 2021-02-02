@@ -32,7 +32,7 @@ public final class RazorgrassScreen extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleSourceEffect(Duration.WhileOnBattlefield)));
     }
 
-    public RazorgrassScreen(final RazorgrassScreen card) {
+    private RazorgrassScreen(final RazorgrassScreen card) {
         super(card);
     }
 

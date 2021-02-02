@@ -33,7 +33,7 @@ public final class Groundswell extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Groundswell(final Groundswell card) {
+    private Groundswell(final Groundswell card) {
         super(card);
     }
 

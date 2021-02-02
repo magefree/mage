@@ -50,7 +50,7 @@ public final class RiptideReplicator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RiptideReplicator(final RiptideReplicator card) {
+    private RiptideReplicator(final RiptideReplicator card) {
         super(card);
     }
 

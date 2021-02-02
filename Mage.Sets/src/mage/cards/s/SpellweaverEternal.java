@@ -32,7 +32,7 @@ public final class SpellweaverEternal extends CardImpl {
         this.addAbility(new AfflictAbility(2));
     }
 
-    public SpellweaverEternal(final SpellweaverEternal card) {
+    private SpellweaverEternal(final SpellweaverEternal card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class JhovallQueen extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public JhovallQueen(final JhovallQueen card) {
+    private JhovallQueen(final JhovallQueen card) {
         super(card);
     }
 

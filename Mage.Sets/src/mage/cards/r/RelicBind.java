@@ -56,7 +56,7 @@ public final class RelicBind extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public RelicBind(final RelicBind card) {
+    private RelicBind(final RelicBind card) {
         super(card);
     }
 

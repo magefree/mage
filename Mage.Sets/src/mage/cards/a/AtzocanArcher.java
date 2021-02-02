@@ -47,7 +47,7 @@ public final class AtzocanArcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AtzocanArcher(final AtzocanArcher card) {
+    private AtzocanArcher(final AtzocanArcher card) {
         super(card);
     }
 

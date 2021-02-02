@@ -36,7 +36,7 @@ public final class JediEnclave extends CardImpl {
 
     }
 
-    public JediEnclave(final JediEnclave card) {
+    private JediEnclave(final JediEnclave card) {
         super(card);
     }
 

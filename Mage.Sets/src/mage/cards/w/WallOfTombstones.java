@@ -36,7 +36,7 @@ public final class WallOfTombstones extends CardImpl {
 
     }
 
-    public WallOfTombstones(final WallOfTombstones card) {
+    private WallOfTombstones(final WallOfTombstones card) {
         super(card);
     }
 

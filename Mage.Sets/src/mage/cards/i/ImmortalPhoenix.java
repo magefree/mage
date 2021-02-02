@@ -29,7 +29,7 @@ public final class ImmortalPhoenix extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public ImmortalPhoenix(final ImmortalPhoenix card) {
+    private ImmortalPhoenix(final ImmortalPhoenix card) {
         super(card);
     }
 

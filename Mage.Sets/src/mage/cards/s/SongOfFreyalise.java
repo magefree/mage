@@ -52,7 +52,7 @@ public final class SongOfFreyalise extends CardImpl {
         this.addAbility(sagaAbility);
     }
 
-    public SongOfFreyalise(final SongOfFreyalise card) {
+    private SongOfFreyalise(final SongOfFreyalise card) {
         super(card);
     }
 

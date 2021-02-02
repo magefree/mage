@@ -40,7 +40,7 @@ public final class PsychicTrance extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public PsychicTrance(final PsychicTrance card) {
+    private PsychicTrance(final PsychicTrance card) {
         super(card);
     }
 

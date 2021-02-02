@@ -21,7 +21,7 @@ public final class MoonlitWake extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new GainLifeEffect(1), false));
     }
 
-    public MoonlitWake(final MoonlitWake card) {
+    private MoonlitWake(final MoonlitWake card) {
         super(card);
     }
 

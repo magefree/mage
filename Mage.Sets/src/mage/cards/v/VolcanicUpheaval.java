@@ -23,7 +23,7 @@ public final class VolcanicUpheaval extends CardImpl {
 
     }
 
-    public VolcanicUpheaval(final VolcanicUpheaval card) {
+    private VolcanicUpheaval(final VolcanicUpheaval card) {
         super(card);
     }
 

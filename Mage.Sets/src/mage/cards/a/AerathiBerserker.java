@@ -26,7 +26,7 @@ public final class AerathiBerserker extends CardImpl {
         this.addAbility(new RampageAbility(3));
     }
 
-    public AerathiBerserker(final AerathiBerserker card) {
+    private AerathiBerserker(final AerathiBerserker card) {
         super(card);
     }
 

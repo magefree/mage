@@ -45,7 +45,7 @@ public final class MiracleWorker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MiracleWorker(final MiracleWorker card) {
+    private MiracleWorker(final MiracleWorker card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class CurseOfBloodletting extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CurseOfBloodlettingEffect()));
     }
 
-    public CurseOfBloodletting(final CurseOfBloodletting card) {
+    private CurseOfBloodletting(final CurseOfBloodletting card) {
         super(card);
     }
 

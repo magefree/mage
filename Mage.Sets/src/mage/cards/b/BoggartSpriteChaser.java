@@ -44,7 +44,7 @@ public final class BoggartSpriteChaser extends CardImpl {
 
     }
 
-    public BoggartSpriteChaser(final BoggartSpriteChaser card) {
+    private BoggartSpriteChaser(final BoggartSpriteChaser card) {
         super(card);
     }
 

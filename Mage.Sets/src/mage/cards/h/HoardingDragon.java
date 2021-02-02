@@ -47,7 +47,7 @@ public final class HoardingDragon extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ReturnFromExileEffect(this.getId(), Zone.HAND), false));
     }
 
-    public HoardingDragon(final HoardingDragon card) {
+    private HoardingDragon(final HoardingDragon card) {
         super(card);
     }
 

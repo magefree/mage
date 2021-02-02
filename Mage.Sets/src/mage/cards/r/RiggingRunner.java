@@ -42,7 +42,7 @@ public final class RiggingRunner extends CardImpl {
                 new PlayerAttackedWatcher());
     }
 
-    public RiggingRunner(final RiggingRunner card) {
+    private RiggingRunner(final RiggingRunner card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class InspiredCharge extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 1, Duration.EndOfTurn));
     }
 
-    public InspiredCharge(final InspiredCharge card) {
+    private InspiredCharge(final InspiredCharge card) {
         super(card);
     }
 

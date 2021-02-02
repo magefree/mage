@@ -51,7 +51,7 @@ public final class SpinyStarfish extends CardImpl {
                 new SpinyStarfishWatcher());
     }
 
-    public SpinyStarfish(final SpinyStarfish card) {
+    private SpinyStarfish(final SpinyStarfish card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class HumOfTheRadix extends CardImpl {
 
     }
 
-    public HumOfTheRadix(final HumOfTheRadix card) {
+    private HumOfTheRadix(final HumOfTheRadix card) {
         super(card);
     }
 

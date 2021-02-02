@@ -28,7 +28,7 @@ public final class OpenTheVaults extends CardImpl {
         this.getSpellAbility().addEffect(new OpenTheVaultsEffect());
     }
 
-    public OpenTheVaults(final OpenTheVaults card) {
+    private OpenTheVaults(final OpenTheVaults card) {
         super(card);
     }
 

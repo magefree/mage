@@ -31,7 +31,7 @@ public final class Smite extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect(false));
     }
 
-    public Smite(final Smite card) {
+    private Smite(final Smite card) {
         super(card);
     }
 

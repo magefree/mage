@@ -80,7 +80,7 @@ public final class CollectiveEffort extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public CollectiveEffort(final CollectiveEffort card) {
+    private CollectiveEffort(final CollectiveEffort card) {
         super(card);
     }
 

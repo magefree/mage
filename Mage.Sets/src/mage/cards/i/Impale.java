@@ -22,7 +22,7 @@ public final class Impale extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Impale(final Impale card) {
+    private Impale(final Impale card) {
         super(card);
     }
 

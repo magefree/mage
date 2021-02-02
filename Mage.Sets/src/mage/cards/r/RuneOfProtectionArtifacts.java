@@ -36,7 +36,7 @@ public final class RuneOfProtectionArtifacts extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public RuneOfProtectionArtifacts(final RuneOfProtectionArtifacts card) {
+    private RuneOfProtectionArtifacts(final RuneOfProtectionArtifacts card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class OketrasLastMercy extends CardImpl {
                 .setText("Lands you control don't untap during your next untap phase"));
     }
 
-    public OketrasLastMercy(final OketrasLastMercy card) {
+    private OketrasLastMercy(final OketrasLastMercy card) {
         super(card);
     }
 

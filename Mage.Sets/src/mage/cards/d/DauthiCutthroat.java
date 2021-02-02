@@ -46,7 +46,7 @@ public final class DauthiCutthroat extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DauthiCutthroat(final DauthiCutthroat card) {
+    private DauthiCutthroat(final DauthiCutthroat card) {
         super(card);
     }
 

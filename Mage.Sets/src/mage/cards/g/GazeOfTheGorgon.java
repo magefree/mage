@@ -37,7 +37,7 @@ public final class GazeOfTheGorgon extends CardImpl {
         this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
     }
 
-    public GazeOfTheGorgon(final GazeOfTheGorgon card) {
+    private GazeOfTheGorgon(final GazeOfTheGorgon card) {
         super(card);
     }
 

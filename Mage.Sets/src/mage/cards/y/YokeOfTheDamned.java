@@ -40,7 +40,7 @@ public final class YokeOfTheDamned extends CardImpl {
 
     }
 
-    public YokeOfTheDamned(final YokeOfTheDamned card) {
+    private YokeOfTheDamned(final YokeOfTheDamned card) {
         super(card);
     }
 

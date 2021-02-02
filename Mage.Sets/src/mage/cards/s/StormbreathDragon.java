@@ -43,7 +43,7 @@ public final class StormbreathDragon extends CardImpl {
         this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new StormbreathDragonDamageEffect()));
     }
 
-    public StormbreathDragon(final StormbreathDragon card) {
+    private StormbreathDragon(final StormbreathDragon card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public final class GraspOfTheHieromancer extends CardImpl {
         
     }
        
-    public GraspOfTheHieromancer(final GraspOfTheHieromancer card) {
+    private GraspOfTheHieromancer(final GraspOfTheHieromancer card) {
         super(card);
     }
 

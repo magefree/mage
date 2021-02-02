@@ -23,7 +23,7 @@ public final class KnightOfNewBenalia extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public KnightOfNewBenalia(final KnightOfNewBenalia card) {
+    private KnightOfNewBenalia(final KnightOfNewBenalia card) {
         super(card);
     }
 

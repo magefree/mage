@@ -22,7 +22,7 @@ public final class FuriousReprisal extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget(2, 2));
     }
 
-    public FuriousReprisal(final FuriousReprisal card) {
+    private FuriousReprisal(final FuriousReprisal card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class KrosanTusker extends CardImpl {
                 true));
     }
 
-    public KrosanTusker(final KrosanTusker card) {
+    private KrosanTusker(final KrosanTusker card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class SproutingPhytohydra extends CardImpl {
         this.addAbility(new DealtDamageToSourceTriggeredAbility(effect, true));
     }
 
-    public SproutingPhytohydra(final SproutingPhytohydra card) {
+    private SproutingPhytohydra(final SproutingPhytohydra card) {
         super(card);
     }
 

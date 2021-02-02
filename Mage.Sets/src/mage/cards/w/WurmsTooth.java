@@ -25,7 +25,7 @@ public final class WurmsTooth extends CardImpl {
         this.addAbility(new WurmsToothAbility());
     }
 
-    public WurmsTooth(final WurmsTooth card) {
+    private WurmsTooth(final WurmsTooth card) {
         super(card);
     }
 

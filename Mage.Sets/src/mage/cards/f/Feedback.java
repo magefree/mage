@@ -40,7 +40,7 @@ public final class Feedback extends CardImpl {
                 "At the beginning of the upkeep of enchanted enchantment's controller, "));
     }
 
-    public Feedback(final Feedback card) {
+    private Feedback(final Feedback card) {
         super(card);
     }
 

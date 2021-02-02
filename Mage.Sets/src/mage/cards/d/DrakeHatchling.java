@@ -32,7 +32,7 @@ public final class DrakeHatchling extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
     }
 
-    public DrakeHatchling(final DrakeHatchling card) {
+    private DrakeHatchling(final DrakeHatchling card) {
         super(card);
     }
 

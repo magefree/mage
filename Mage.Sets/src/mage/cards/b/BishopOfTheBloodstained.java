@@ -41,7 +41,7 @@ public final class BishopOfTheBloodstained extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BishopOfTheBloodstained(final BishopOfTheBloodstained card) {
+    private BishopOfTheBloodstained(final BishopOfTheBloodstained card) {
         super(card);
     }
 

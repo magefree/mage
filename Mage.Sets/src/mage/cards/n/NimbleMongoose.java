@@ -41,7 +41,7 @@ public final class NimbleMongoose extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NimbleMongoose(final NimbleMongoose card) {
+    private NimbleMongoose(final NimbleMongoose card) {
         super(card);
     }
 

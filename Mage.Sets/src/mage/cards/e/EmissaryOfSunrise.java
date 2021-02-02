@@ -32,7 +32,7 @@ public final class EmissaryOfSunrise extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExploreSourceEffect()));
     }
 
-    public EmissaryOfSunrise(final EmissaryOfSunrise card) {
+    private EmissaryOfSunrise(final EmissaryOfSunrise card) {
         super(card);
     }
 

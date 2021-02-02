@@ -23,7 +23,7 @@ public final class HymnToTourach extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public HymnToTourach(final HymnToTourach card) {
+    private HymnToTourach(final HymnToTourach card) {
         super(card);
     }
 

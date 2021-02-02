@@ -39,7 +39,7 @@ public final class WitchMawNephilim extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new WitchMawNephilimEffect(), false));
     }
 
-    public WitchMawNephilim(final WitchMawNephilim card) {
+    private WitchMawNephilim(final WitchMawNephilim card) {
         super(card);
     }
 

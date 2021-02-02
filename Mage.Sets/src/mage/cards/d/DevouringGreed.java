@@ -43,7 +43,7 @@ public final class DevouringGreed extends CardImpl {
 
     }
 
-    public DevouringGreed(final DevouringGreed card) {
+    private DevouringGreed(final DevouringGreed card) {
         super(card);
     }
 

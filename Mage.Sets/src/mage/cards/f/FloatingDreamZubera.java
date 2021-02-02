@@ -28,7 +28,7 @@ public final class FloatingDreamZubera extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(ZuberasDiedDynamicValue.instance)), new ZuberasDiedWatcher());
     }
 
-    public FloatingDreamZubera(final FloatingDreamZubera card) {
+    private FloatingDreamZubera(final FloatingDreamZubera card) {
         super(card);
     }
 

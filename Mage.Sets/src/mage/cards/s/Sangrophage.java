@@ -30,7 +30,7 @@ public final class Sangrophage extends CardImpl {
 
     }
 
-    public Sangrophage(final Sangrophage card) {
+    private Sangrophage(final Sangrophage card) {
         super(card);
     }
 

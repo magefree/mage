@@ -73,7 +73,7 @@ public final class IncrementalBlight extends CardImpl {
         this.getSpellAbility().addTarget(target3);
     }
 
-    public IncrementalBlight(final IncrementalBlight card) {
+    private IncrementalBlight(final IncrementalBlight card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class CracklingDoom extends CardImpl {
 
     }
 
-    public CracklingDoom(final CracklingDoom card) {
+    private CracklingDoom(final CracklingDoom card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class FelhideBrawler extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockUnlessYouControlSourceEffect(filter)));
     }
 
-    public FelhideBrawler(final FelhideBrawler card) {
+    private FelhideBrawler(final FelhideBrawler card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class Blightcaster extends CardImpl {
 
     }
 
-    public Blightcaster(final Blightcaster card) {
+    private Blightcaster(final Blightcaster card) {
         super(card);
     }
 

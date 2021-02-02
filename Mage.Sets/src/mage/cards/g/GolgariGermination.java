@@ -33,7 +33,7 @@ public final class GolgariGermination extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), false, filter));
     }
 
-    public GolgariGermination(final GolgariGermination card) {
+    private GolgariGermination(final GolgariGermination card) {
         super(card);
     }
 

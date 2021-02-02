@@ -48,7 +48,7 @@ public final class OraclesInsight extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
-    public OraclesInsight(final OraclesInsight card) {
+    private OraclesInsight(final OraclesInsight card) {
         super(card);
     }
 

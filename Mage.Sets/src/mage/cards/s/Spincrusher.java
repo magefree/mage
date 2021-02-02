@@ -36,7 +36,7 @@ public final class Spincrusher extends CardImpl {
                 new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1))));
     }
 
-    public Spincrusher(final Spincrusher card) {
+    private Spincrusher(final Spincrusher card) {
         super(card);
     }
 

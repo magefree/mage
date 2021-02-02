@@ -37,7 +37,7 @@ public final class InfernoTrap extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public InfernoTrap(final InfernoTrap card) {
+    private InfernoTrap(final InfernoTrap card) {
         super(card);
     }
 

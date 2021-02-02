@@ -44,7 +44,7 @@ public final class ArmedProtocolDroid extends CardImpl {
         this.addAbility(new RepairAbility(3));
     }
 
-    public ArmedProtocolDroid(final ArmedProtocolDroid card) {
+    private ArmedProtocolDroid(final ArmedProtocolDroid card) {
         super(card);
     }
 

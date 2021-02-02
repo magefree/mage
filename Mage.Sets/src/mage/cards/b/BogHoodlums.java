@@ -32,7 +32,7 @@ public final class BogHoodlums extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfClashWonEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()))));        
     }
 
-    public BogHoodlums(final BogHoodlums card) {
+    private BogHoodlums(final BogHoodlums card) {
         super(card);
     }
 

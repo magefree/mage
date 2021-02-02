@@ -32,7 +32,7 @@ public final class Crosswinds extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-2, 0, Duration.WhileOnBattlefield, filter1, false)));
     }
 
-    public Crosswinds(final Crosswinds card) {
+    private Crosswinds(final Crosswinds card) {
         super(card);
     }
 

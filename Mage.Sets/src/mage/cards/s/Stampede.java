@@ -30,7 +30,7 @@ public final class Stampede extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Stampede(final Stampede card) {
+    private Stampede(final Stampede card) {
         super(card);
     }
 

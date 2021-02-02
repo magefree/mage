@@ -38,7 +38,7 @@ public final class RevenantPatriarch extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
     
-    public RevenantPatriarch(final RevenantPatriarch card) {
+    private RevenantPatriarch(final RevenantPatriarch card) {
         super(card);
     }
     

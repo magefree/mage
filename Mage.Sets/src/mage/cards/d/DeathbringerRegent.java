@@ -49,7 +49,7 @@ public final class DeathbringerRegent extends CardImpl {
                 new CastFromHandWatcher());
     }
 
-    public DeathbringerRegent(final DeathbringerRegent card) {
+    private DeathbringerRegent(final DeathbringerRegent card) {
         super(card);
     }
 

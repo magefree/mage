@@ -63,7 +63,7 @@ public final class GoldenGuardian extends CardImpl {
 
     }
 
-    public GoldenGuardian(final GoldenGuardian card) {
+    private GoldenGuardian(final GoldenGuardian card) {
         super(card);
     }
 

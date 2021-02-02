@@ -32,7 +32,7 @@ public final class UnhallowedCathar extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public UnhallowedCathar(final UnhallowedCathar card) {
+    private UnhallowedCathar(final UnhallowedCathar card) {
         super(card);
     }
 

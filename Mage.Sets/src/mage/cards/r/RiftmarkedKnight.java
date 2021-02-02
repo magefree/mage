@@ -45,7 +45,7 @@ public final class RiftmarkedKnight extends CardImpl {
         this.addAbility(new RiftmarkedKnightTriggeredAbility());
     }
 
-    public RiftmarkedKnight(final RiftmarkedKnight card) {
+    private RiftmarkedKnight(final RiftmarkedKnight card) {
         super(card);
     }
 

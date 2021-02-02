@@ -26,7 +26,7 @@ public final class AzureDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public AzureDrake(final AzureDrake card) {
+    private AzureDrake(final AzureDrake card) {
         super(card);
     }
 

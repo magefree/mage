@@ -27,7 +27,7 @@ public final class GiftOfTusks extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public GiftOfTusks(final GiftOfTusks card) {
+    private GiftOfTusks(final GiftOfTusks card) {
         super(card);
     }
 

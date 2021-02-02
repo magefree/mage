@@ -39,7 +39,7 @@ public final class KinjallisSunwing extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KinjallisSunwingEffect()));
     }
 
-    public KinjallisSunwing(final KinjallisSunwing card) {
+    private KinjallisSunwing(final KinjallisSunwing card) {
         super(card);
     }
 

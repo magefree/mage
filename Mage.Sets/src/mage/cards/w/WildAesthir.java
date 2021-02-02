@@ -36,7 +36,7 @@ public final class WildAesthir extends CardImpl {
                 new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{W}{W}")));
     }
 
-    public WildAesthir(final WildAesthir card) {
+    private WildAesthir(final WildAesthir card) {
         super(card);
     }
 

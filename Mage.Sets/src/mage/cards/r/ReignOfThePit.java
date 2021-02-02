@@ -31,7 +31,7 @@ public final class ReignOfThePit extends CardImpl {
         this.getSpellAbility().addEffect(new ReignOfThePitEffect());
     }
 
-    public ReignOfThePit(final ReignOfThePit card) {
+    private ReignOfThePit(final ReignOfThePit card) {
         super(card);
     }
 

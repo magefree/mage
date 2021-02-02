@@ -48,7 +48,7 @@ public final class StoneforgeMystic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StoneforgeMystic(final StoneforgeMystic card) {
+    private StoneforgeMystic(final StoneforgeMystic card) {
         super(card);
     }
 

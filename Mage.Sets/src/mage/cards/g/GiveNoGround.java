@@ -33,7 +33,7 @@ public final class GiveNoGround extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public GiveNoGround(final GiveNoGround card) {
+    private GiveNoGround(final GiveNoGround card) {
         super(card);
     }
 

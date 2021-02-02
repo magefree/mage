@@ -36,7 +36,7 @@ public final class CrocodileOfTheCrossing extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrocodileOfTheCrossing(final CrocodileOfTheCrossing card) {
+    private CrocodileOfTheCrossing(final CrocodileOfTheCrossing card) {
         super(card);
     }
 

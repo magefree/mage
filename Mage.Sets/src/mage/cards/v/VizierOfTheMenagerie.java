@@ -44,7 +44,7 @@ public final class VizierOfTheMenagerie extends CardImpl {
 
     }
 
-    public VizierOfTheMenagerie(final VizierOfTheMenagerie card) {
+    private VizierOfTheMenagerie(final VizierOfTheMenagerie card) {
         super(card);
     }
 

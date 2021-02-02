@@ -29,7 +29,7 @@ public final class AbbeyGargoyles extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
-    public AbbeyGargoyles(final AbbeyGargoyles card) {
+    private AbbeyGargoyles(final AbbeyGargoyles card) {
         super(card);
     }
 

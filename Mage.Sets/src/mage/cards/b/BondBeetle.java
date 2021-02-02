@@ -32,7 +32,7 @@ public final class BondBeetle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BondBeetle(final BondBeetle card) {
+    private BondBeetle(final BondBeetle card) {
         super(card);
     }
 

@@ -62,7 +62,7 @@ public final class TheMirariConjecture extends CardImpl {
 
     }
 
-    public TheMirariConjecture(final TheMirariConjecture card) {
+    private TheMirariConjecture(final TheMirariConjecture card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class RestlessDreams extends CardImpl {
 
     }
 
-    public RestlessDreams(final RestlessDreams card) {
+    private RestlessDreams(final RestlessDreams card) {
         super(card);
     }
 

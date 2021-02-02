@@ -27,7 +27,7 @@ public final class DiminishingReturns extends CardImpl {
         this.getSpellAbility().addEffect(new DiminishingReturnsEffect());        
     }
 
-    public DiminishingReturns(final DiminishingReturns card) {
+    private DiminishingReturns(final DiminishingReturns card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class ImplementsOfSacrifice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ImplementsOfSacrifice(final ImplementsOfSacrifice card) {
+    private ImplementsOfSacrifice(final ImplementsOfSacrifice card) {
         super(card);
     }
 

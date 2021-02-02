@@ -36,7 +36,7 @@ public final class Retaliation extends CardImpl {
                 effect));
     }
 
-    public Retaliation(final Retaliation card) {
+    private Retaliation(final Retaliation card) {
         super(card);
     }
 

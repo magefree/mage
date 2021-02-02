@@ -41,7 +41,7 @@ public final class SeverSoul extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEqualToToughnessEffect());
     }
 
-    public SeverSoul(final SeverSoul card) {
+    private SeverSoul(final SeverSoul card) {
         super(card);
     }
 

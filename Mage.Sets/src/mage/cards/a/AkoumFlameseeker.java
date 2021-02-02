@@ -48,7 +48,7 @@ public final class AkoumFlameseeker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AkoumFlameseeker(final AkoumFlameseeker card) {
+    private AkoumFlameseeker(final AkoumFlameseeker card) {
         super(card);
     }
 

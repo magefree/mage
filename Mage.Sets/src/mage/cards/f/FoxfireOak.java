@@ -30,7 +30,7 @@ public final class FoxfireOak extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 0, Duration.EndOfTurn), new ManaCostsImpl("{R/G}{R/G}{R/G}")));
     }
 
-    public FoxfireOak(final FoxfireOak card) {
+    private FoxfireOak(final FoxfireOak card) {
         super(card);
     }
 

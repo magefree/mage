@@ -30,7 +30,7 @@ public final class CullingDrone extends CardImpl {
         this.addAbility(new IngestAbility());
     }
 
-    public CullingDrone(final CullingDrone card) {
+    private CullingDrone(final CullingDrone card) {
         super(card);
     }
 

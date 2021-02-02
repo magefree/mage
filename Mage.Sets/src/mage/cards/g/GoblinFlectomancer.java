@@ -35,7 +35,7 @@ public final class GoblinFlectomancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinFlectomancer(final GoblinFlectomancer card) {
+    private GoblinFlectomancer(final GoblinFlectomancer card) {
         super(card);
     }
 

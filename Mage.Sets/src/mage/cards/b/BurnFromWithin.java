@@ -35,7 +35,7 @@ public final class BurnFromWithin extends CardImpl {
 
     }
 
-    public BurnFromWithin(final BurnFromWithin card) {
+    private BurnFromWithin(final BurnFromWithin card) {
         super(card);
     }
 

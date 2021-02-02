@@ -40,7 +40,7 @@ public final class ArcboundRavager extends CardImpl {
         this.addAbility(new ModularAbility(this, 1));
     }
 
-    public ArcboundRavager(final ArcboundRavager card) {
+    private ArcboundRavager(final ArcboundRavager card) {
         super(card);
     }
 

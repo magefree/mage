@@ -43,7 +43,7 @@ public final class Doomfall extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public Doomfall(final Doomfall card) {
+    private Doomfall(final Doomfall card) {
         super(card);
     }
 

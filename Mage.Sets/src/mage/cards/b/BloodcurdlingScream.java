@@ -25,7 +25,7 @@ public final class BloodcurdlingScream extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public BloodcurdlingScream(final BloodcurdlingScream card) {
+    private BloodcurdlingScream(final BloodcurdlingScream card) {
         super(card);
     }
 

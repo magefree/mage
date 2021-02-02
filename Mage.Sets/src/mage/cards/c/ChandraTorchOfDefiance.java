@@ -56,7 +56,7 @@ public final class ChandraTorchOfDefiance extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new ChandraTorchOfDefianceEmblem()), -7));
     }
 
-    public ChandraTorchOfDefiance(final ChandraTorchOfDefiance card) {
+    private ChandraTorchOfDefiance(final ChandraTorchOfDefiance card) {
         super(card);
     }
 

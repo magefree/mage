@@ -40,7 +40,7 @@ public final class MarionetteMaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MarionetteMaster(final MarionetteMaster card) {
+    private MarionetteMaster(final MarionetteMaster card) {
         super(card);
     }
 

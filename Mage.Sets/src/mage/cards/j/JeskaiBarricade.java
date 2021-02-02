@@ -47,7 +47,7 @@ public final class JeskaiBarricade extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JeskaiBarricade(final JeskaiBarricade card) {
+    private JeskaiBarricade(final JeskaiBarricade card) {
         super(card);
     }
 

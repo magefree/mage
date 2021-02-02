@@ -35,7 +35,7 @@ public final class HavengulSkaab extends CardImpl {
         this.addAbility(new HavengulSkaabAbility());
     }
 
-    public HavengulSkaab(final HavengulSkaab card) {
+    private HavengulSkaab(final HavengulSkaab card) {
         super(card);
     }
 

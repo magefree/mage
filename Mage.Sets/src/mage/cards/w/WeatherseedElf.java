@@ -37,7 +37,7 @@ public final class WeatherseedElf extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WeatherseedElf(final WeatherseedElf card) {
+    private WeatherseedElf(final WeatherseedElf card) {
         super(card);
     }
 

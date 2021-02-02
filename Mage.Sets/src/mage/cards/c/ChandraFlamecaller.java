@@ -44,7 +44,7 @@ public final class ChandraFlamecaller extends CardImpl {
         )));
     }
 
-    public ChandraFlamecaller(final ChandraFlamecaller card) {
+    private ChandraFlamecaller(final ChandraFlamecaller card) {
         super(card);
     }
 

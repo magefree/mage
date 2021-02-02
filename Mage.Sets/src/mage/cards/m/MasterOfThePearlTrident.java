@@ -39,7 +39,7 @@ public final class MasterOfThePearlTrident extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new IslandwalkAbility(), Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public MasterOfThePearlTrident(final MasterOfThePearlTrident card) {
+    private MasterOfThePearlTrident(final MasterOfThePearlTrident card) {
         super(card);
     }
 

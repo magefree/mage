@@ -35,7 +35,7 @@ public final class DuskriderPeregrine extends CardImpl {
         this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{W}"), this));
     }
 
-    public DuskriderPeregrine(final DuskriderPeregrine card) {
+    private DuskriderPeregrine(final DuskriderPeregrine card) {
         super(card);
     }
 

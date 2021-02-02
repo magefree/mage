@@ -35,7 +35,7 @@ public final class SkyshroudRanger extends CardImpl {
 
     }
 
-    public SkyshroudRanger(final SkyshroudRanger card) {
+    private SkyshroudRanger(final SkyshroudRanger card) {
         super(card);
     }
 

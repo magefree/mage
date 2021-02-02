@@ -30,7 +30,7 @@ public final class BomatBazaarBarge extends CardImpl {
         this.addAbility(new CrewAbility(3));
     }
 
-    public BomatBazaarBarge(final BomatBazaarBarge card) {
+    private BomatBazaarBarge(final BomatBazaarBarge card) {
         super(card);
     }
 

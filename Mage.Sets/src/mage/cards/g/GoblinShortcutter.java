@@ -33,7 +33,7 @@ public final class GoblinShortcutter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinShortcutter(final GoblinShortcutter card) {
+    private GoblinShortcutter(final GoblinShortcutter card) {
         super(card);
     }
 

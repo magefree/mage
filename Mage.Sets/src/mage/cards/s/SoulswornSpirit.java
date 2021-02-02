@@ -45,7 +45,7 @@ public final class SoulswornSpirit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoulswornSpirit(final SoulswornSpirit card) {
+    private SoulswornSpirit(final SoulswornSpirit card) {
         super(card);
     }
 

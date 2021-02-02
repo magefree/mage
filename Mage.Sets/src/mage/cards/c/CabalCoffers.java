@@ -34,7 +34,7 @@ public final class CabalCoffers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CabalCoffers(final CabalCoffers card) {
+    private CabalCoffers(final CabalCoffers card) {
         super(card);
     }
 

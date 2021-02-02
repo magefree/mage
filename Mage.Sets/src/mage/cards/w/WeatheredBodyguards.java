@@ -42,7 +42,7 @@ public final class WeatheredBodyguards extends CardImpl {
 
     }
 
-    public WeatheredBodyguards(final WeatheredBodyguards card) {
+    private WeatheredBodyguards(final WeatheredBodyguards card) {
         super(card);
     }
 

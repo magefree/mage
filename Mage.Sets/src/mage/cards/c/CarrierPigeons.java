@@ -34,7 +34,7 @@ public final class CarrierPigeons extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false)));
     }
 
-    public CarrierPigeons(final CarrierPigeons card) {
+    private CarrierPigeons(final CarrierPigeons card) {
         super(card);
     }
 

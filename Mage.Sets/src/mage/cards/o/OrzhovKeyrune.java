@@ -33,7 +33,7 @@ public final class OrzhovKeyrune extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new OrzhovKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{W}{B}")));
     }
 
-    public OrzhovKeyrune(final OrzhovKeyrune card) {
+    private OrzhovKeyrune(final OrzhovKeyrune card) {
         super(card);
     }
 

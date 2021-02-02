@@ -28,7 +28,7 @@ public final class RushOfIce extends CardImpl {
         this.addAbility(new AwakenAbility(this, 3, "{4}{U}"));
     }
 
-    public RushOfIce(final RushOfIce card) {
+    private RushOfIce(final RushOfIce card) {
         super(card);
     }
 

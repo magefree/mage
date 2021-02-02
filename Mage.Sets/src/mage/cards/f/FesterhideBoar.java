@@ -33,7 +33,7 @@ public final class FesterhideBoar extends CardImpl {
                 MorbidCondition.instance, ""), "with two +1/+1 counters on it if a creature died this turn"));
     }
 
-    public FesterhideBoar(final FesterhideBoar card) {
+    private FesterhideBoar(final FesterhideBoar card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class RootKinAlly extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, true))));
     }
 
-    public RootKinAlly(final RootKinAlly card) {
+    private RootKinAlly(final RootKinAlly card) {
         super(card);
     }
 

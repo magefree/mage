@@ -34,7 +34,7 @@ public final class PainKami extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PainKami(final PainKami card) {
+    private PainKami(final PainKami card) {
         super(card);
     }
 

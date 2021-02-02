@@ -36,7 +36,7 @@ public final class RakishHeir extends CardImpl {
         this.addAbility(new RakishHeirTriggeredAbility());
     }
 
-    public RakishHeir(final RakishHeir card) {
+    private RakishHeir(final RakishHeir card) {
         super(card);
     }
 

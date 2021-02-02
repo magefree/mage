@@ -24,7 +24,7 @@ public final class FamiliarGround extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneAllEffect(new FilterControlledCreaturePermanent())));
     }
 
-    public FamiliarGround(final FamiliarGround card) {
+    private FamiliarGround(final FamiliarGround card) {
         super(card);
     }
 

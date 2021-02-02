@@ -47,7 +47,7 @@ public final class DiamondKaleidoscope extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DiamondKaleidoscope(final DiamondKaleidoscope card) {
+    private DiamondKaleidoscope(final DiamondKaleidoscope card) {
         super(card);
     }
 

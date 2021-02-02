@@ -56,7 +56,7 @@ public final class ElspethKnightErrant extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new ElspethKnightErrantEmblem()), -8));
     }
 
-    public ElspethKnightErrant(final ElspethKnightErrant card) {
+    private ElspethKnightErrant(final ElspethKnightErrant card) {
         super(card);
     }
 

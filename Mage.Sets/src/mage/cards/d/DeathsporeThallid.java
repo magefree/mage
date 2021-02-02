@@ -52,7 +52,7 @@ public final class DeathsporeThallid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeathsporeThallid(final DeathsporeThallid card) {
+    private DeathsporeThallid(final DeathsporeThallid card) {
         super(card);
     }
 

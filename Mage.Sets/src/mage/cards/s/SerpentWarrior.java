@@ -28,7 +28,7 @@ public final class SerpentWarrior extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(3)));
     }
 
-    public SerpentWarrior(final SerpentWarrior card) {
+    private SerpentWarrior(final SerpentWarrior card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class KytheonsTactics extends CardImpl {
                 "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, those creatures also gain vigilance until end of turn"));
     }
 
-    public KytheonsTactics(final KytheonsTactics card) {
+    private KytheonsTactics(final KytheonsTactics card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class ChainsOfMephistopheles extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChainsOfMephistophelesReplacementEffect()), new CardsDrawnDuringDrawStepWatcher());
     }
 
-    public ChainsOfMephistopheles(final ChainsOfMephistopheles card) {
+    private ChainsOfMephistopheles(final ChainsOfMephistopheles card) {
         super(card);
     }
 

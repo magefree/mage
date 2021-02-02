@@ -35,7 +35,7 @@ public final class ObstinateFamiliar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ObstinateFamiliarReplacementEffect()));
     }
 
-    public ObstinateFamiliar(final ObstinateFamiliar card) {
+    private ObstinateFamiliar(final ObstinateFamiliar card) {
         super(card);
     }
 

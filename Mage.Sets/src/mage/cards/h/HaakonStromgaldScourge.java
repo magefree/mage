@@ -45,7 +45,7 @@ public final class HaakonStromgaldScourge extends CardImpl {
 
     }
 
-    public HaakonStromgaldScourge(final HaakonStromgaldScourge card) {
+    private HaakonStromgaldScourge(final HaakonStromgaldScourge card) {
         super(card);
     }
 

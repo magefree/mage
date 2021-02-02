@@ -44,7 +44,7 @@ public final class Deadshot extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public Deadshot(final Deadshot card) {
+    private Deadshot(final Deadshot card) {
         super(card);
     }
 

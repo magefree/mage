@@ -27,7 +27,7 @@ public final class ExiledBoggart extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DiscardControllerEffect(1), false));
     }
 
-    public ExiledBoggart(final ExiledBoggart card) {
+    private ExiledBoggart(final ExiledBoggart card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class NephaliaSmuggler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NephaliaSmuggler(final NephaliaSmuggler card) {
+    private NephaliaSmuggler(final NephaliaSmuggler card) {
         super(card);
     }
 

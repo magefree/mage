@@ -34,7 +34,7 @@ public final class NakayaShade extends CardImpl {
                 new ManaCostsImpl("{B}")));
     }
 
-    public NakayaShade(final NakayaShade card) {
+    private NakayaShade(final NakayaShade card) {
         super(card);
     }
 

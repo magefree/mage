@@ -28,7 +28,7 @@ public final class ConcordantCrossroads extends CardImpl {
                 new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
     }
 
-    public ConcordantCrossroads(final ConcordantCrossroads card) {
+    private ConcordantCrossroads(final ConcordantCrossroads card) {
         super(card);
     }
 

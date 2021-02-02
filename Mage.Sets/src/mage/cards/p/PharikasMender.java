@@ -42,7 +42,7 @@ public final class PharikasMender extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PharikasMender(final PharikasMender card) {
+    private PharikasMender(final PharikasMender card) {
         super(card);
     }
 

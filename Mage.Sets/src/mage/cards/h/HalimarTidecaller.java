@@ -55,7 +55,7 @@ public final class HalimarTidecaller extends CardImpl {
 
     }
 
-    public HalimarTidecaller(final HalimarTidecaller card) {
+    private HalimarTidecaller(final HalimarTidecaller card) {
         super(card);
     }
 

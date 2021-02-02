@@ -34,7 +34,7 @@ public final class DrogskolShieldmate extends CardImpl {
                 new BoostControlledEffect(0, 1, Duration.EndOfTurn, FILTER_PERMANENT_CREATURES, true), false));
     }
 
-    public DrogskolShieldmate(final DrogskolShieldmate card) {
+    private DrogskolShieldmate(final DrogskolShieldmate card) {
         super(card);
     }
 

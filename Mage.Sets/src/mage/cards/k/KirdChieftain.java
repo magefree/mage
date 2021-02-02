@@ -60,7 +60,7 @@ public final class KirdChieftain extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KirdChieftain(final KirdChieftain card) {
+    private KirdChieftain(final KirdChieftain card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class Undertaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Undertaker(final Undertaker card) {
+    private Undertaker(final Undertaker card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class OrzhovSignet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrzhovSignet(final OrzhovSignet card) {
+    private OrzhovSignet(final OrzhovSignet card) {
         super(card);
     }
 

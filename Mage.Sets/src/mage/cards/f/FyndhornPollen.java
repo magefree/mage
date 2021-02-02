@@ -35,7 +35,7 @@ public final class FyndhornPollen extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, 0, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{1}{G}")));
     }
 
-    public FyndhornPollen(final FyndhornPollen card) {
+    private FyndhornPollen(final FyndhornPollen card) {
         super(card);
     }
 

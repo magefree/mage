@@ -25,7 +25,7 @@ public final class TundraWolves extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public TundraWolves(final TundraWolves card) {
+    private TundraWolves(final TundraWolves card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class BrassSquire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BrassSquire(final BrassSquire card) {
+    private BrassSquire(final BrassSquire card) {
         super(card);
     }
 

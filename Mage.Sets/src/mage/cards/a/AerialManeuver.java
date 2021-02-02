@@ -29,7 +29,7 @@ public final class AerialManeuver extends CardImpl {
         getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public AerialManeuver(final AerialManeuver card) {
+    private AerialManeuver(final AerialManeuver card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class SpectralShield extends CardImpl {
 
     }
 
-    public SpectralShield(final mage.cards.s.SpectralShield card) {
+    private SpectralShield(final mage.cards.s.SpectralShield card) {
         super(card);
     }
 

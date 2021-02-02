@@ -37,7 +37,7 @@ public final class TillingTreefolk extends CardImpl {
         
     }
 
-    public TillingTreefolk(final TillingTreefolk card) {
+    private TillingTreefolk(final TillingTreefolk card) {
         super(card);
     }
 

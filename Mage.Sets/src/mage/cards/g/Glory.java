@@ -36,7 +36,7 @@ public final class Glory extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, effect, new ManaCostsImpl("{2}{W}")));
     }
 
-    public Glory(final Glory card) {
+    private Glory(final Glory card) {
         super(card);
     }
 

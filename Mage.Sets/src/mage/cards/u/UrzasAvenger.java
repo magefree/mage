@@ -40,7 +40,7 @@ public final class UrzasAvenger extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UrzasAvengerEffect(), new ManaCostsImpl("{0}")));
     }
 
-    public UrzasAvenger(final UrzasAvenger card) {
+    private UrzasAvenger(final UrzasAvenger card) {
         super(card);
     }
 

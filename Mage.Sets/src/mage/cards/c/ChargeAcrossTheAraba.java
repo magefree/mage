@@ -29,7 +29,7 @@ public final class ChargeAcrossTheAraba extends CardImpl {
 
     }
 
-    public ChargeAcrossTheAraba(final ChargeAcrossTheAraba card) {
+    private ChargeAcrossTheAraba(final ChargeAcrossTheAraba card) {
         super(card);
     }
 

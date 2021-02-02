@@ -33,7 +33,7 @@ public final class LonghornFirebeast extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LonghornFirebeastEffect(), false));
     }
 
-    public LonghornFirebeast(final LonghornFirebeast card) {
+    private LonghornFirebeast(final LonghornFirebeast card) {
         super(card);
     }
 

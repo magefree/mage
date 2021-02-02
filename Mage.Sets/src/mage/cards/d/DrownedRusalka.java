@@ -37,7 +37,7 @@ public final class DrownedRusalka extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DrownedRusalka(final DrownedRusalka card) {
+    private DrownedRusalka(final DrownedRusalka card) {
         super(card);
     }
 

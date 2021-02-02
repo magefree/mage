@@ -48,7 +48,7 @@ public final class Mindsparker extends CardImpl {
 
     }
 
-    public Mindsparker(final Mindsparker card) {
+    private Mindsparker(final Mindsparker card) {
         super(card);
     }
 

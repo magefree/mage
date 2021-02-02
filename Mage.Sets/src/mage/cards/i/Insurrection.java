@@ -31,7 +31,7 @@ public final class Insurrection extends CardImpl {
         this.getSpellAbility().addEffect(new InsurrectionEffect());
     }
 
-    public Insurrection(final Insurrection card) {
+    private Insurrection(final Insurrection card) {
         super(card);
     }
 

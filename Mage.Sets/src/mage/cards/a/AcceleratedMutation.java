@@ -26,7 +26,7 @@ public final class AcceleratedMutation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public AcceleratedMutation(final AcceleratedMutation card) {
+    private AcceleratedMutation(final AcceleratedMutation card) {
         super(card);
     }
 

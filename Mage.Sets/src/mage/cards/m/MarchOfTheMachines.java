@@ -28,7 +28,7 @@ public final class MarchOfTheMachines extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MarchOfTheMachinesEffect()));
     }
 
-    public MarchOfTheMachines(final MarchOfTheMachines card) {
+    private MarchOfTheMachines(final MarchOfTheMachines card) {
         super(card);
     }
 

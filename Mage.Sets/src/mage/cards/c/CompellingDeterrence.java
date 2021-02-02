@@ -30,7 +30,7 @@ public final class CompellingDeterrence extends CardImpl {
         getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
-    public CompellingDeterrence(final CompellingDeterrence card) {
+    private CompellingDeterrence(final CompellingDeterrence card) {
         super(card);
     }
 

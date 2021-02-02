@@ -46,7 +46,7 @@ public final class StreetRiot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StreetRiot(final StreetRiot card) {
+    private StreetRiot(final StreetRiot card) {
         super(card);
     }
 

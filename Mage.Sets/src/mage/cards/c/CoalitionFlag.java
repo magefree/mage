@@ -41,7 +41,7 @@ public final class CoalitionFlag extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new TargetsHaveToTargetPermanentIfAbleEffect()));
     }
 
-    public CoalitionFlag(final CoalitionFlag card) {
+    private CoalitionFlag(final CoalitionFlag card) {
         super(card);
     }
 

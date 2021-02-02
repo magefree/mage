@@ -31,7 +31,7 @@ public final class EpicStruggle extends CardImpl {
                 "At the beginning of your upkeep, if you control twenty or more creatures, you win the game."));
     }
 
-    public EpicStruggle(final EpicStruggle card) {
+    private EpicStruggle(final EpicStruggle card) {
         super(card);
     }
 

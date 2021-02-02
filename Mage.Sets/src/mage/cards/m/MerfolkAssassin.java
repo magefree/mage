@@ -42,7 +42,7 @@ public final class MerfolkAssassin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MerfolkAssassin(final MerfolkAssassin card) {
+    private MerfolkAssassin(final MerfolkAssassin card) {
         super(card);
     }
 

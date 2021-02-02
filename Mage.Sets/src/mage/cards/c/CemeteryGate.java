@@ -30,7 +30,7 @@ public final class CemeteryGate extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
     }
 
-    public CemeteryGate(final CemeteryGate card) {
+    private CemeteryGate(final CemeteryGate card) {
         super(card);
     }
 

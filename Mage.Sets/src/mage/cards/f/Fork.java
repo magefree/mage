@@ -31,7 +31,7 @@ public final class Fork extends CardImpl {
 
     }
 
-    public Fork(final Fork card) {
+    private Fork(final Fork card) {
         super(card);
     }
 

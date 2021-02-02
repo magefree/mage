@@ -28,7 +28,7 @@ public final class SacredFoundry extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public SacredFoundry(final SacredFoundry card) {
+    private SacredFoundry(final SacredFoundry card) {
         super(card);
     }
 

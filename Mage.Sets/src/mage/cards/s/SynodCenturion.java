@@ -31,7 +31,7 @@ public final class SynodCenturion extends CardImpl {
         this.addAbility(new SynodCenturionStateTriggeredAbility());
     }
 
-    public SynodCenturion(final SynodCenturion card) {
+    private SynodCenturion(final SynodCenturion card) {
         super(card);
     }
 

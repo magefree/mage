@@ -25,7 +25,7 @@ public final class WoodlandChangeling extends CardImpl {
         this.addAbility(new ChangelingAbility());
     }
 
-    public WoodlandChangeling(final WoodlandChangeling card) {
+    private WoodlandChangeling(final WoodlandChangeling card) {
         super(card);
     }
 

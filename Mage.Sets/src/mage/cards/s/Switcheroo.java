@@ -25,7 +25,7 @@ public final class Switcheroo extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
     }
 
-    public Switcheroo(final Switcheroo card) {
+    private Switcheroo(final Switcheroo card) {
         super(card);
     }
 

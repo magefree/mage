@@ -37,7 +37,7 @@ public final class CrookedScales extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrookedScales(final CrookedScales card) {
+    private CrookedScales(final CrookedScales card) {
         super(card);
     }
 

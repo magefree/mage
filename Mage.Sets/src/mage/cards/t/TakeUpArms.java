@@ -22,7 +22,7 @@ public final class TakeUpArms extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WarriorToken(), 3));
     }
 
-    public TakeUpArms(final TakeUpArms card) {
+    private TakeUpArms(final TakeUpArms card) {
         super(card);
     }
 

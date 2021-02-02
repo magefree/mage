@@ -22,7 +22,7 @@ public final class ShieldWall extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(0, 2, Duration.EndOfTurn));
     }
 
-    public ShieldWall(final ShieldWall card) {
+    private ShieldWall(final ShieldWall card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class TimestreamNavigator extends CardImpl {
 
     }
 
-    public TimestreamNavigator(final TimestreamNavigator card) {
+    private TimestreamNavigator(final TimestreamNavigator card) {
         super(card);
     }
 

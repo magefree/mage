@@ -27,7 +27,7 @@ public final class FlowstoneSlide extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(xPos, xNeg, Duration.EndOfTurn));
     }
 
-    public FlowstoneSlide(final FlowstoneSlide card) {
+    private FlowstoneSlide(final FlowstoneSlide card) {
         super(card);
     }
 

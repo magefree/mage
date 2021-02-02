@@ -28,7 +28,7 @@ public final class SunderingGrowth extends CardImpl {
         this.getSpellAbility().addEffect(new PopulateEffect("then"));
     }
 
-    public SunderingGrowth(final SunderingGrowth card) {
+    private SunderingGrowth(final SunderingGrowth card) {
         super(card);
     }
 

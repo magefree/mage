@@ -49,7 +49,7 @@ public final class MysticMight extends CardImpl {
             Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Target creature gets +2/+2 until end of turn.\"")));
     }
 
-    public MysticMight(final MysticMight card) {
+    private MysticMight(final MysticMight card) {
         super(card);
     }
 

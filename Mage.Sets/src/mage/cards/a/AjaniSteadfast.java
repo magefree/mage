@@ -73,7 +73,7 @@ public final class AjaniSteadfast extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new AjaniSteadfastEmblem()), -7));
     }
 
-    public AjaniSteadfast(final AjaniSteadfast card) {
+    private AjaniSteadfast(final AjaniSteadfast card) {
         super(card);
     }
 

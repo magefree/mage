@@ -47,7 +47,7 @@ public final class DauntlessRiverMarshal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DauntlessRiverMarshal(final DauntlessRiverMarshal card) {
+    private DauntlessRiverMarshal(final DauntlessRiverMarshal card) {
         super(card);
     }
 

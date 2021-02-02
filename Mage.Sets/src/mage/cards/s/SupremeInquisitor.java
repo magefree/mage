@@ -52,7 +52,7 @@ public final class SupremeInquisitor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SupremeInquisitor(final SupremeInquisitor card) {
+    private SupremeInquisitor(final SupremeInquisitor card) {
         super(card);
     }
 

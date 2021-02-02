@@ -40,7 +40,7 @@ public final class HyenaUmbra extends CardImpl {
         this.addAbility(new TotemArmorAbility());
     }
 
-    public HyenaUmbra(final HyenaUmbra card) {
+    private HyenaUmbra(final HyenaUmbra card) {
         super(card);
     }
 

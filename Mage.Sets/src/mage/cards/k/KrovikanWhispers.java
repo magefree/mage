@@ -53,7 +53,7 @@ public final class KrovikanWhispers extends CardImpl {
         ));
     }
 
-    public KrovikanWhispers(final KrovikanWhispers card) {
+    private KrovikanWhispers(final KrovikanWhispers card) {
         super(card);
     }
 

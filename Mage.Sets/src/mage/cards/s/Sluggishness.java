@@ -44,7 +44,7 @@ public final class Sluggishness extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public Sluggishness(final Sluggishness card) {
+    private Sluggishness(final Sluggishness card) {
         super(card);
     }
 

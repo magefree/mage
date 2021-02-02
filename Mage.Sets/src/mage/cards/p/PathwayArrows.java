@@ -42,7 +42,7 @@ public final class PathwayArrows extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public PathwayArrows(final PathwayArrows card) {
+    private PathwayArrows(final PathwayArrows card) {
         super(card);
     }
 

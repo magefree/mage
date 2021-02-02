@@ -35,7 +35,7 @@ public final class HeroOfGomaFada extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HeroOfGomaFada(final HeroOfGomaFada card) {
+    private HeroOfGomaFada(final HeroOfGomaFada card) {
         super(card);
     }
 

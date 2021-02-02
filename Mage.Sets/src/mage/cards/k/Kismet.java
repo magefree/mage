@@ -30,7 +30,7 @@ public final class Kismet extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KismetEffect()));
     }
 
-    public Kismet(final Kismet card) {
+    private Kismet(final Kismet card) {
         super(card);
     }
 

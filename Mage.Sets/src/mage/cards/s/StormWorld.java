@@ -26,7 +26,7 @@ public final class StormWorld extends CardImpl {
 
     }
 
-    public StormWorld(final StormWorld card) {
+    private StormWorld(final StormWorld card) {
         super(card);
     }
 

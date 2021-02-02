@@ -28,7 +28,7 @@ public final class KindleTheCarnage extends CardImpl {
 
     }
 
-    public KindleTheCarnage(final KindleTheCarnage card) {
+    private KindleTheCarnage(final KindleTheCarnage card) {
         super(card);
     }
 

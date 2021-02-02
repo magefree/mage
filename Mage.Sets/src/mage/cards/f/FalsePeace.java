@@ -22,7 +22,7 @@ public final class FalsePeace extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
     
-    public FalsePeace(final FalsePeace card) {
+    private FalsePeace(final FalsePeace card) {
         super(card);
     }
     

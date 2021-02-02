@@ -60,7 +60,7 @@ public final class MaddeningImp extends CardImpl {
 
     }
 
-    public MaddeningImp(final MaddeningImp card) {
+    private MaddeningImp(final MaddeningImp card) {
         super(card);
     }
 

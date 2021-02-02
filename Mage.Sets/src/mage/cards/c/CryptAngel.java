@@ -46,7 +46,7 @@ public final class CryptAngel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CryptAngel(final CryptAngel card) {
+    private CryptAngel(final CryptAngel card) {
         super(card);
     }
 

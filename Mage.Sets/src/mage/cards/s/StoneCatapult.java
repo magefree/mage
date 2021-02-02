@@ -47,7 +47,7 @@ public final class StoneCatapult extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StoneCatapult(final StoneCatapult card) {
+    private StoneCatapult(final StoneCatapult card) {
         super(card);
     }
 

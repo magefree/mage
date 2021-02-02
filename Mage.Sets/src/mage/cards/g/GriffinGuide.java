@@ -42,7 +42,7 @@ public final class GriffinGuide extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new CreateTokenEffect(new GriffinToken()), "enchanted creature"));
     }
 
-    public GriffinGuide(final GriffinGuide card) {
+    private GriffinGuide(final GriffinGuide card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class RepublicFrigate extends CardImpl {
         this.addAbility(SpaceflightAbility.getInstance());
     }
 
-    public RepublicFrigate(final RepublicFrigate card) {
+    private RepublicFrigate(final RepublicFrigate card) {
         super(card);
     }
 

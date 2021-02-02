@@ -39,7 +39,7 @@ public final class ShrewdNegotiation extends CardImpl {
         getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public ShrewdNegotiation(final ShrewdNegotiation card) {
+    private ShrewdNegotiation(final ShrewdNegotiation card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class BoneSaw extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
 }
 
-    public BoneSaw(final BoneSaw card) {
+    private BoneSaw(final BoneSaw card) {
         super(card);
     }
 

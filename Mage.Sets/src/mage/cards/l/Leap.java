@@ -27,7 +27,7 @@ public final class Leap extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Leap(final Leap card) {
+    private Leap(final Leap card) {
         super(card);
     }
 

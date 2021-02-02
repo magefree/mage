@@ -46,7 +46,7 @@ public final class OrimsCure extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public OrimsCure(final OrimsCure card) {
+    private OrimsCure(final OrimsCure card) {
         super(card);
     }
 

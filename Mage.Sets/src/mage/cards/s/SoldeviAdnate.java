@@ -47,7 +47,7 @@ public final class SoldeviAdnate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoldeviAdnate(final SoldeviAdnate card) {
+    private SoldeviAdnate(final SoldeviAdnate card) {
         super(card);
     }
 

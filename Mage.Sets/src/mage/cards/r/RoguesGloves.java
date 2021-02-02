@@ -29,7 +29,7 @@ public final class RoguesGloves extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public RoguesGloves(final RoguesGloves card) {
+    private RoguesGloves(final RoguesGloves card) {
         super(card);
     }
 

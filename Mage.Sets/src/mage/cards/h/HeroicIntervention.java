@@ -30,7 +30,7 @@ public final class HeroicIntervention extends CardImpl {
         getSpellAbility().addEffect(effect);
     }
 
-    public HeroicIntervention(final HeroicIntervention card) {
+    private HeroicIntervention(final HeroicIntervention card) {
         super(card);
     }
 

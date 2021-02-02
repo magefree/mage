@@ -39,7 +39,7 @@ public final class LegionsLanding extends CardImpl {
         this.addAbility(new LegionsLandingTriggeredAbility(new TransformSourceEffect(true)));
     }
 
-    public LegionsLanding(final LegionsLanding card) {
+    private LegionsLanding(final LegionsLanding card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class MistyRainforest extends CardImpl {
         this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.FOREST, SubType.ISLAND)));
     }
 
-    public MistyRainforest(final MistyRainforest card) {
+    private MistyRainforest(final MistyRainforest card) {
         super(card);
     }
 

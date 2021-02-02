@@ -46,7 +46,7 @@ public final class EelUmbra extends CardImpl {
         this.addAbility(new TotemArmorAbility());
     }
 
-    public EelUmbra(final EelUmbra card) {
+    private EelUmbra(final EelUmbra card) {
         super(card);
     }
 

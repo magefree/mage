@@ -38,7 +38,7 @@ public final class ChitinousCloak extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
     }
 
-    public ChitinousCloak(final ChitinousCloak card) {
+    private ChitinousCloak(final ChitinousCloak card) {
         super(card);
     }
 

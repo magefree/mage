@@ -44,7 +44,7 @@ public final class GhostHounds extends CardImpl {
 
     }
 
-    public GhostHounds(final GhostHounds card) {
+    private GhostHounds(final GhostHounds card) {
         super(card);
     }
     @Override

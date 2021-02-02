@@ -33,7 +33,7 @@ public final class AlpineMoon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AlpineMoonEffect()));
     }
 
-    public AlpineMoon(final AlpineMoon card) {
+    private AlpineMoon(final AlpineMoon card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class ReaverAmbush extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect());
     }
 
-    public ReaverAmbush(final ReaverAmbush card) {
+    private ReaverAmbush(final ReaverAmbush card) {
         super(card);
     }
 

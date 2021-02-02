@@ -52,7 +52,7 @@ public final class OtarianJuggernaut extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OtarianJuggernaut(final OtarianJuggernaut card) {
+    private OtarianJuggernaut(final OtarianJuggernaut card) {
         super(card);
     }
 

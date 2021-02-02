@@ -37,7 +37,7 @@ public final class RotfeasterMaggot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RotfeasterMaggot(final RotfeasterMaggot card) {
+    private RotfeasterMaggot(final RotfeasterMaggot card) {
         super(card);
     }
 

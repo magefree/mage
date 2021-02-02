@@ -29,7 +29,7 @@ public final class AngelicBenediction extends CardImpl {
         this.addAbility(new AngelicBenedictionTriggeredAbility());
     }
 
-    public AngelicBenediction(final AngelicBenediction card) {
+    private AngelicBenediction(final AngelicBenediction card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class Qumulox extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public Qumulox(final Qumulox card) {
+    private Qumulox(final Qumulox card) {
         super(card);
     }
 

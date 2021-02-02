@@ -42,7 +42,7 @@ public final class RakdosCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public RakdosCharm(final RakdosCharm card) {
+    private RakdosCharm(final RakdosCharm card) {
         super(card);
     }
 

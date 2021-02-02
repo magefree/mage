@@ -48,7 +48,7 @@ public final class Cloudthresher extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{2}{G}{G}"));
     }
 
-    public Cloudthresher(final Cloudthresher card) {
+    private Cloudthresher(final Cloudthresher card) {
         super(card);
     }
 

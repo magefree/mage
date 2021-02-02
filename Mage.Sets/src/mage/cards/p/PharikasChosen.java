@@ -26,7 +26,7 @@ public final class PharikasChosen extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public PharikasChosen(final PharikasChosen card) {
+    private PharikasChosen(final PharikasChosen card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class GhastlordOfFugue extends CardImpl {
 
     }
 
-    public GhastlordOfFugue(final GhastlordOfFugue card) {
+    private GhastlordOfFugue(final GhastlordOfFugue card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class MarshHulk extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{6}{B}"), true));
     }
 
-    public MarshHulk(final MarshHulk card) {
+    private MarshHulk(final MarshHulk card) {
         super(card);
     }
 

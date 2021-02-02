@@ -67,7 +67,7 @@ public final class Seasinger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Seasinger(final Seasinger card) {
+    private Seasinger(final Seasinger card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class VigilantSentry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VigilantSentry(final VigilantSentry card) {
+    private VigilantSentry(final VigilantSentry card) {
         super(card);
     }
 

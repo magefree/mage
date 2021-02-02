@@ -46,7 +46,7 @@ public final class CavernOfSouls extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new CavernOfSoulsCantCounterEffect()));
     }
 
-    public CavernOfSouls(final CavernOfSouls card) {
+    private CavernOfSouls(final CavernOfSouls card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class OcularHalo extends CardImpl {
             AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public OcularHalo(final OcularHalo card) {
+    private OcularHalo(final OcularHalo card) {
         super(card);
     }
 

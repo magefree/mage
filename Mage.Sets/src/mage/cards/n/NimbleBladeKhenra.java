@@ -28,7 +28,7 @@ public final class NimbleBladeKhenra extends CardImpl {
 
     }
 
-    public NimbleBladeKhenra(final NimbleBladeKhenra card) {
+    private NimbleBladeKhenra(final NimbleBladeKhenra card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public final class DralnuLichLord extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DralnuLichLord(final DralnuLichLord card) {
+    private DralnuLichLord(final DralnuLichLord card) {
         super(card);
     }
 

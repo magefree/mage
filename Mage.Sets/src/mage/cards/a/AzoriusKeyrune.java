@@ -39,7 +39,7 @@ public final class AzoriusKeyrune extends CardImpl {
                 "", Duration.EndOfTurn), new ManaCostsImpl("{W}{U}")));
     }
 
-    public AzoriusKeyrune(final AzoriusKeyrune card) {
+    private AzoriusKeyrune(final AzoriusKeyrune card) {
         super(card);
     }
 

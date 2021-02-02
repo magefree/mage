@@ -26,7 +26,7 @@ public final class LongTermPlans extends CardImpl {
         this.getSpellAbility().addEffect(new LongTermPlansEffect());
     }
 
-    public LongTermPlans(final LongTermPlans card) {
+    private LongTermPlans(final LongTermPlans card) {
         super(card);
     }
 

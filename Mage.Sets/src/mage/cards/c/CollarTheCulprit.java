@@ -31,7 +31,7 @@ public final class CollarTheCulprit extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public CollarTheCulprit(final CollarTheCulprit card) {
+    private CollarTheCulprit(final CollarTheCulprit card) {
         super(card);
     }
 

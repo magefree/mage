@@ -33,7 +33,7 @@ public final class BenalishHeralds extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BenalishHeralds(final BenalishHeralds card) {
+    private BenalishHeralds(final BenalishHeralds card) {
         super(card);
     }
 

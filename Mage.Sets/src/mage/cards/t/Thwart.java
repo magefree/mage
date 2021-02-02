@@ -35,7 +35,7 @@ public final class Thwart extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Thwart(final Thwart card) {
+    private Thwart(final Thwart card) {
         super(card);
     }
 

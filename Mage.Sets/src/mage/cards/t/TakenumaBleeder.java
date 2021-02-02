@@ -34,7 +34,7 @@ public final class TakenumaBleeder extends CardImpl {
         
     }
 
-    public TakenumaBleeder(final TakenumaBleeder card) {
+    private TakenumaBleeder(final TakenumaBleeder card) {
         super(card);
     }
 

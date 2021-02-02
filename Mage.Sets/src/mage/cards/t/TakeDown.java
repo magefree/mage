@@ -39,7 +39,7 @@ public final class TakeDown extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public TakeDown(final TakeDown card) {
+    private TakeDown(final TakeDown card) {
         super(card);
     }
 

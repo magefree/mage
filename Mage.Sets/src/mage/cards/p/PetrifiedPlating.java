@@ -43,7 +43,7 @@ public final class PetrifiedPlating extends CardImpl {
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{G}"), this));
     }
 
-    public PetrifiedPlating(final PetrifiedPlating card) {
+    private PetrifiedPlating(final PetrifiedPlating card) {
         super(card);
     }
 

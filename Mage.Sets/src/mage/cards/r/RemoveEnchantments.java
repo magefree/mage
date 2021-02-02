@@ -64,7 +64,7 @@ public final class RemoveEnchantments extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter6).setText("and all other Auras attached to attacking creatures your opponents control"));
     }
 
-    public RemoveEnchantments(final RemoveEnchantments card) {
+    private RemoveEnchantments(final RemoveEnchantments card) {
         super(card);
     }
 

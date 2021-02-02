@@ -25,7 +25,7 @@ public final class MightOfTheMasses extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(value, value, Duration.EndOfTurn, true));
     }
 
-    public MightOfTheMasses(final MightOfTheMasses card) {
+    private MightOfTheMasses(final MightOfTheMasses card) {
         super(card);
     }
 

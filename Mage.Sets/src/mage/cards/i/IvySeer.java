@@ -43,7 +43,7 @@ public final class IvySeer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IvySeer(final IvySeer card) {
+    private IvySeer(final IvySeer card) {
         super(card);
     }
 

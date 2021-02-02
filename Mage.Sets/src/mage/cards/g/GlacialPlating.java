@@ -54,7 +54,7 @@ public final class GlacialPlating extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public GlacialPlating(final GlacialPlating card) {
+    private GlacialPlating(final GlacialPlating card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class TolarianEntrancer extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new TolarianEntrancerDelayedTriggeredAbility()), false));
     }
 
-    public TolarianEntrancer(final TolarianEntrancer card) {
+    private TolarianEntrancer(final TolarianEntrancer card) {
         super(card);
     }
 

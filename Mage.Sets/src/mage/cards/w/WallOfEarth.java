@@ -26,7 +26,7 @@ public final class WallOfEarth extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public WallOfEarth(final WallOfEarth card) {
+    private WallOfEarth(final WallOfEarth card) {
         super(card);
     }
 

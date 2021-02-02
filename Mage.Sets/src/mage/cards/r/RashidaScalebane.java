@@ -52,7 +52,7 @@ public final class RashidaScalebane extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RashidaScalebane(final RashidaScalebane card) {
+    private RashidaScalebane(final RashidaScalebane card) {
         super(card);
     }
 

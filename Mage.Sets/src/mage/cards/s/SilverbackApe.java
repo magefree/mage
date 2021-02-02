@@ -22,7 +22,7 @@ public final class SilverbackApe extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public SilverbackApe(final SilverbackApe card) {
+    private SilverbackApe(final SilverbackApe card) {
         super(card);
     }
 

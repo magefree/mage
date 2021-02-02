@@ -55,7 +55,7 @@ public final class RamunapHydra extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RamunapHydraBoostEffect(1, 1)));
     }
 
-    public RamunapHydra(final RamunapHydra card) {
+    private RamunapHydra(final RamunapHydra card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class ResplendentGriffin extends CardImpl {
                 .addHint(CitysBlessingHint.instance));
     }
 
-    public ResplendentGriffin(final ResplendentGriffin card) {
+    private ResplendentGriffin(final ResplendentGriffin card) {
         super(card);
     }
 

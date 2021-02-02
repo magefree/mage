@@ -31,7 +31,7 @@ public final class NantukoShade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public NantukoShade(final NantukoShade card) {
+    private NantukoShade(final NantukoShade card) {
         super(card);
     }
 

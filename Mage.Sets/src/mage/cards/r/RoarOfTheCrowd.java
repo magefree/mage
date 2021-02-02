@@ -32,7 +32,7 @@ public final class RoarOfTheCrowd extends CardImpl {
         this.getSpellAbility().addEffect(new RoarOfTheCrowdEffect());
     }
 
-    public RoarOfTheCrowd(final RoarOfTheCrowd card) {
+    private RoarOfTheCrowd(final RoarOfTheCrowd card) {
         super(card);
     }
 

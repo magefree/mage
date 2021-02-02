@@ -54,7 +54,7 @@ public final class DragonWhisperer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DragonWhisperer(final DragonWhisperer card) {
+    private DragonWhisperer(final DragonWhisperer card) {
         super(card);
     }
 

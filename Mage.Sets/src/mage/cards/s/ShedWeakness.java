@@ -34,7 +34,7 @@ public final class ShedWeakness extends CardImpl {
         getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ShedWeakness(final ShedWeakness card) {
+    private ShedWeakness(final ShedWeakness card) {
         super(card);
     }
 

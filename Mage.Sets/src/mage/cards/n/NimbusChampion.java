@@ -42,7 +42,7 @@ public final class NimbusChampion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NimbusChampion(final NimbusChampion card) {
+    private NimbusChampion(final NimbusChampion card) {
         super(card);
     }
 

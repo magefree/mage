@@ -63,7 +63,7 @@ public final class RedScarab extends CardImpl {
                 "Enchanted creature gets +2/+2 as long as an opponent controls a red permanent")));
     }
 
-    public RedScarab(final RedScarab card) {
+    private RedScarab(final RedScarab card) {
         super(card);
     }
 

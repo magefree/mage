@@ -38,7 +38,7 @@ public final class LastBreath extends CardImpl {
 
     }
 
-    public LastBreath(final LastBreath card) {
+    private LastBreath(final LastBreath card) {
         super(card);
     }
 

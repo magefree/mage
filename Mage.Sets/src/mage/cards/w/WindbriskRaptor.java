@@ -47,7 +47,7 @@ public final class WindbriskRaptor extends CardImpl {
         
     }
 
-    public WindbriskRaptor(final WindbriskRaptor card) {
+    private WindbriskRaptor(final WindbriskRaptor card) {
         super(card);
     }
 

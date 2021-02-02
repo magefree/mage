@@ -57,7 +57,7 @@ public final class MinionOfLeshrac extends CardImpl {
 
     }
 
-    public MinionOfLeshrac(final MinionOfLeshrac card) {
+    private MinionOfLeshrac(final MinionOfLeshrac card) {
         super(card);
     }
 

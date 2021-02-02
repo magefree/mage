@@ -33,7 +33,7 @@ public final class CouncilsJudgment extends CardImpl {
         this.getSpellAbility().addEffect(new CouncilsJudgmentEffect());
     }
 
-    public CouncilsJudgment(final CouncilsJudgment card) {
+    private CouncilsJudgment(final CouncilsJudgment card) {
         super(card);
     }
 

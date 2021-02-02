@@ -51,7 +51,7 @@ public final class KheruMindEater extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new KheruMindEaterLookAtCardEffect()));
     }
 
-    public KheruMindEater(final KheruMindEater card) {
+    private KheruMindEater(final KheruMindEater card) {
         super(card);
     }
 

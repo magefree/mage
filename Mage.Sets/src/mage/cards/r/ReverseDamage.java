@@ -29,7 +29,7 @@ public final class ReverseDamage extends CardImpl {
         this.getSpellAbility().addEffect(new ReverseDamageEffect());
     }
 
-    public ReverseDamage(final ReverseDamage card) {
+    private ReverseDamage(final ReverseDamage card) {
         super(card);
     }
 

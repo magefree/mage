@@ -54,7 +54,7 @@ public final class KheruLichLord extends CardImpl {
                 new DoIfCostPaid(new KheruLichLordEffect(), new ManaCostsImpl("{2}{B}"), "Return creature card from your graveyard?"), TargetController.YOU, false));
     }
 
-    public KheruLichLord(final KheruLichLord card) {
+    private KheruLichLord(final KheruLichLord card) {
         super(card);
     }
 

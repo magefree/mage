@@ -20,7 +20,7 @@ public final class LeadByExample extends CardImpl {
         getSpellAbility().addEffect(new SupportEffect(this, 2, false));
     }
 
-    public LeadByExample(final LeadByExample card) {
+    private LeadByExample(final LeadByExample card) {
         super(card);
     }
 

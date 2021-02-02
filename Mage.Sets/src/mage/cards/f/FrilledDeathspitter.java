@@ -33,7 +33,7 @@ public final class FrilledDeathspitter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FrilledDeathspitter(final FrilledDeathspitter card) {
+    private FrilledDeathspitter(final FrilledDeathspitter card) {
         super(card);
     }
 

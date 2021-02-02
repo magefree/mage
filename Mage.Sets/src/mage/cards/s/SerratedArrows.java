@@ -48,7 +48,7 @@ public final class SerratedArrows extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SerratedArrows(final SerratedArrows card) {
+    private SerratedArrows(final SerratedArrows card) {
         super(card);
     }
 

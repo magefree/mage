@@ -37,7 +37,7 @@ public final class EronTheRelentless extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EronTheRelentless(final EronTheRelentless card) {
+    private EronTheRelentless(final EronTheRelentless card) {
         super(card);
     }
 

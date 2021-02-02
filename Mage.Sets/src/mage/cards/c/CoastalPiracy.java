@@ -27,7 +27,7 @@ public final class CoastalPiracy extends CardImpl {
         this.addAbility(new CoastalPiracyTriggeredAbility());
     }
 
-    public CoastalPiracy(final CoastalPiracy card) {
+    private CoastalPiracy(final CoastalPiracy card) {
         super(card);
     }
 

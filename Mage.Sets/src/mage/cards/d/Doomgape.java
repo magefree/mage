@@ -42,7 +42,7 @@ public final class Doomgape extends CardImpl {
 
     }
 
-    public Doomgape(final Doomgape card) {
+    private Doomgape(final Doomgape card) {
         super(card);
     }
 

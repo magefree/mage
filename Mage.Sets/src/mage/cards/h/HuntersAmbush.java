@@ -32,7 +32,7 @@ public final class HuntersAmbush extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(filter, Duration.EndOfTurn, true));
     }
 
-    public HuntersAmbush(final HuntersAmbush card) {
+    private HuntersAmbush(final HuntersAmbush card) {
         super(card);
     }
 

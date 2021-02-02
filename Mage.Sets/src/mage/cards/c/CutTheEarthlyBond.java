@@ -36,7 +36,7 @@ public final class CutTheEarthlyBond extends CardImpl {
 
     }
 
-    public CutTheEarthlyBond(final CutTheEarthlyBond card) {
+    private CutTheEarthlyBond(final CutTheEarthlyBond card) {
         super(card);
     }
 

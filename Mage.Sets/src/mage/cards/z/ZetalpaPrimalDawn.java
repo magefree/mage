@@ -41,7 +41,7 @@ public final class ZetalpaPrimalDawn extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
     }
 
-    public ZetalpaPrimalDawn(final ZetalpaPrimalDawn card) {
+    private ZetalpaPrimalDawn(final ZetalpaPrimalDawn card) {
         super(card);
     }
 

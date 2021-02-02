@@ -35,7 +35,7 @@ public final class DescendantsPath extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DescendantsPath(final DescendantsPath card) {
+    private DescendantsPath(final DescendantsPath card) {
         super(card);
     }
 

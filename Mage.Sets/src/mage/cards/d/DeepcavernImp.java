@@ -34,7 +34,7 @@ public final class DeepcavernImp extends CardImpl {
         this.addAbility(new EchoAbility(new DiscardCardCost()));
     }
 
-    public DeepcavernImp(final DeepcavernImp card) {
+    private DeepcavernImp(final DeepcavernImp card) {
         super(card);
     }
 

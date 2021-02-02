@@ -57,7 +57,7 @@ public final class AnnihilatingFire extends CardImpl {
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
-    public AnnihilatingFire(final AnnihilatingFire card) {
+    private AnnihilatingFire(final AnnihilatingFire card) {
         super(card);
     }
 

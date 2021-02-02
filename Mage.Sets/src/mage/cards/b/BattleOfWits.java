@@ -30,7 +30,7 @@ public final class BattleOfWits extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new BattleOfWitsCondition(), "At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game."));
     }
 
-    public BattleOfWits(final BattleOfWits card) {
+    private BattleOfWits(final BattleOfWits card) {
         super(card);
     }
 

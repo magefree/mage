@@ -28,7 +28,7 @@ public final class InspiringCaptain extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES)));
     }
 
-    public InspiringCaptain(final InspiringCaptain card) {
+    private InspiringCaptain(final InspiringCaptain card) {
         super(card);
     }
 

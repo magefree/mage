@@ -40,7 +40,7 @@ public final class MoggJailer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public MoggJailer(final MoggJailer card) {
+    private MoggJailer(final MoggJailer card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class Peppersmoke extends CardImpl {
                 "If you control a Faerie, draw a card"));
     }
 
-    public Peppersmoke(final Peppersmoke card) {
+    private Peppersmoke(final Peppersmoke card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class BraveTheSands extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureAllEffect(1, new FilterControlledCreaturePermanent("Each creature you control"), Duration.WhileOnBattlefield)));
     }
 
-    public BraveTheSands(final BraveTheSands card) {
+    private BraveTheSands(final BraveTheSands card) {
         super(card);
     }
 

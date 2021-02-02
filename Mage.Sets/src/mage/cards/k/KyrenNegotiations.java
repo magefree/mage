@@ -40,7 +40,7 @@ public final class KyrenNegotiations extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KyrenNegotiations(final KyrenNegotiations card) {
+    private KyrenNegotiations(final KyrenNegotiations card) {
         super(card);
     }
 

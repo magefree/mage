@@ -25,7 +25,7 @@ public final class ScrybSprites extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public ScrybSprites(final ScrybSprites card) {
+    private ScrybSprites(final ScrybSprites card) {
         super(card);
     }
 

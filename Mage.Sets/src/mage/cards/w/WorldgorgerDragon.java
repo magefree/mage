@@ -53,7 +53,7 @@ public final class WorldgorgerDragon extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new WorldgorgerDragonLeavesEffect(), false));
     }
 
-    public WorldgorgerDragon(final WorldgorgerDragon card) {
+    private WorldgorgerDragon(final WorldgorgerDragon card) {
         super(card);
     }
 

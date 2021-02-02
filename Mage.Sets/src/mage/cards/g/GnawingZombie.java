@@ -39,7 +39,7 @@ public final class GnawingZombie extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GnawingZombie(final GnawingZombie card) {
+    private GnawingZombie(final GnawingZombie card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class KrarkClanEngineers extends CardImpl {
         
     }
 
-    public KrarkClanEngineers(final KrarkClanEngineers card) {
+    private KrarkClanEngineers(final KrarkClanEngineers card) {
         super(card);
     }
 

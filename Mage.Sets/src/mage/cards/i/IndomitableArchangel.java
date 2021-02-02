@@ -47,7 +47,7 @@ public final class IndomitableArchangel extends CardImpl {
         );
     }
 
-    public IndomitableArchangel(final IndomitableArchangel card) {
+    private IndomitableArchangel(final IndomitableArchangel card) {
         super(card);
     }
 

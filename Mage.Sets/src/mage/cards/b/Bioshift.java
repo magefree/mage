@@ -47,7 +47,7 @@ public final class Bioshift extends CardImpl {
     }
     
 
-    public Bioshift(final Bioshift card) {
+    private Bioshift(final Bioshift card) {
         super(card);
     }
 

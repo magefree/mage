@@ -45,7 +45,7 @@ public final class BloodsoakedChampion extends CardImpl {
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public BloodsoakedChampion(final BloodsoakedChampion card) {
+    private BloodsoakedChampion(final BloodsoakedChampion card) {
         super(card);
     }
 

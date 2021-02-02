@@ -32,7 +32,7 @@ public final class FencerClique extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibrarySourceEffect(true), new ManaCostsImpl("{U}")));
     }
 
-    public FencerClique(final FencerClique card) {
+    private FencerClique(final FencerClique card) {
         super(card);
     }
 

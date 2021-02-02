@@ -27,7 +27,7 @@ public final class ComboAttack extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(1));
     }
 
-    public ComboAttack(final ComboAttack card) {
+    private ComboAttack(final ComboAttack card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class WingedTempleOfOrazca extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WingedTempleOfOrazca(final WingedTempleOfOrazca card) {
+    private WingedTempleOfOrazca(final WingedTempleOfOrazca card) {
         super(card);
     }
 

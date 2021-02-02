@@ -25,7 +25,7 @@ public final class DualShot extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }
 
-    public DualShot(final DualShot card) {
+    private DualShot(final DualShot card) {
         super(card);
     }
 

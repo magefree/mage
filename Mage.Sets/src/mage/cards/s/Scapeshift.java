@@ -31,7 +31,7 @@ public final class Scapeshift extends CardImpl {
         this.getSpellAbility().addEffect(new ScapeshiftEffect());
     }
 
-    public Scapeshift(final Scapeshift card) {
+    private Scapeshift(final Scapeshift card) {
         super(card);
     }
 

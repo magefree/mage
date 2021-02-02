@@ -32,7 +32,7 @@ public final class Hallow extends CardImpl {
 
     }
 
-    public Hallow(final Hallow card) {
+    private Hallow(final Hallow card) {
         super(card);
     }
 

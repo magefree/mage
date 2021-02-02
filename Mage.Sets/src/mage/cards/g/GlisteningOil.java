@@ -49,7 +49,7 @@ public final class GlisteningOil extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public GlisteningOil(final GlisteningOil card) {
+    private GlisteningOil(final GlisteningOil card) {
         super(card);
     }
 

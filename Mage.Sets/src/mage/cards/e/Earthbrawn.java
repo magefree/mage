@@ -25,7 +25,7 @@ public final class Earthbrawn extends CardImpl {
         this.addAbility(new ReinforceAbility(1, new ManaCostsImpl("{1}{G}")));
     }
 
-    public Earthbrawn(final Earthbrawn card) {
+    private Earthbrawn(final Earthbrawn card) {
         super(card);
     }
 

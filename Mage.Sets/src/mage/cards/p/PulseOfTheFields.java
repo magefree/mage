@@ -28,7 +28,7 @@ public final class PulseOfTheFields extends CardImpl {
         this.getSpellAbility().addEffect(new PulseOfTheFieldsReturnToHandEffect());
     }
 
-    public PulseOfTheFields(final PulseOfTheFields card) {
+    private PulseOfTheFields(final PulseOfTheFields card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class WallOfWonder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WallOfWonder(final WallOfWonder card) {
+    private WallOfWonder(final WallOfWonder card) {
         super(card);
     }
 

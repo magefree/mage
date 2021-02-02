@@ -38,7 +38,7 @@ public final class RiptideShapeshifter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RiptideShapeshifter(final RiptideShapeshifter card) {
+    private RiptideShapeshifter(final RiptideShapeshifter card) {
         super(card);
     }
 

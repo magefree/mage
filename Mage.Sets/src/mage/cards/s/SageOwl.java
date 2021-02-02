@@ -29,7 +29,7 @@ public final class SageOwl extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryControllerEffect(4)));
     }
 
-    public SageOwl(final SageOwl card) {
+    private SageOwl(final SageOwl card) {
         super(card);
     }
 

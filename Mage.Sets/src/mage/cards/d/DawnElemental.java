@@ -36,7 +36,7 @@ public final class DawnElemental extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public DawnElemental(final DawnElemental card) {
+    private DawnElemental(final DawnElemental card) {
         super(card);
     }
 

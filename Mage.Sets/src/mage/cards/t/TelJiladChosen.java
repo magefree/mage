@@ -27,7 +27,7 @@ public final class TelJiladChosen extends CardImpl {
         this.addAbility(new ProtectionAbility(new FilterArtifactCard("artifacts")));
     }
 
-    public TelJiladChosen(final TelJiladChosen card) {
+    private TelJiladChosen(final TelJiladChosen card) {
         super(card);
     }
 

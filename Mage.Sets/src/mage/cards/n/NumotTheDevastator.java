@@ -43,7 +43,7 @@ public final class NumotTheDevastator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NumotTheDevastator(final NumotTheDevastator card) {
+    private NumotTheDevastator(final NumotTheDevastator card) {
         super(card);
     }
 

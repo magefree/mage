@@ -23,7 +23,7 @@ public final class PlanarGate extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(new FilterCreatureCard("Creature spells"), 2, true)));
     }
 
-    public PlanarGate(final PlanarGate card) {
+    private PlanarGate(final PlanarGate card) {
         super(card);
     }
 

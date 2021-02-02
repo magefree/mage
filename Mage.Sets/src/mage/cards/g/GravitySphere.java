@@ -37,7 +37,7 @@ public final class GravitySphere extends CardImpl {
 
     }
 
-    public GravitySphere(final GravitySphere card) {
+    private GravitySphere(final GravitySphere card) {
         super(card);
     }
 

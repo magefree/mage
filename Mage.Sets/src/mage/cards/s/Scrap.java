@@ -24,7 +24,7 @@ public final class Scrap extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public Scrap(final Scrap card) {
+    private Scrap(final Scrap card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class TelJiladJustice extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }
 
-    public TelJiladJustice(final TelJiladJustice card) {
+    private TelJiladJustice(final TelJiladJustice card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class WortTheRaidmother extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WortGainConspireEffect()));
     }
 
-    public WortTheRaidmother(final WortTheRaidmother card) {
+    private WortTheRaidmother(final WortTheRaidmother card) {
         super(card);
     }
 

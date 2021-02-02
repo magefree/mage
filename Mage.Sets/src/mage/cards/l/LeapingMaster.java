@@ -33,7 +33,7 @@ public final class LeapingMaster extends CardImpl {
                 new ManaCostsImpl("{2}{W}")));
     }
 
-    public LeapingMaster(final LeapingMaster card) {
+    private LeapingMaster(final LeapingMaster card) {
         super(card);
     }
 

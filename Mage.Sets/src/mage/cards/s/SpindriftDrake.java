@@ -31,7 +31,7 @@ public final class SpindriftDrake extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{U}")), TargetController.YOU, false));
     }
 
-    public SpindriftDrake(final SpindriftDrake card) {
+    private SpindriftDrake(final SpindriftDrake card) {
         super(card);
     }
 

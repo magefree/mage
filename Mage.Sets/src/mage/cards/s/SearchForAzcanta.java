@@ -40,7 +40,7 @@ public final class SearchForAzcanta extends CardImpl {
         this.addAbility(new TransformAbility());
     }
 
-    public SearchForAzcanta(final SearchForAzcanta card) {
+    private SearchForAzcanta(final SearchForAzcanta card) {
         super(card);
     }
 

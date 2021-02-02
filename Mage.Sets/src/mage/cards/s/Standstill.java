@@ -31,7 +31,7 @@ public final class Standstill extends CardImpl {
         this.addAbility(new SpellCastTriggeredAbility());
     }
 
-    public Standstill(final Standstill card) {
+    private Standstill(final Standstill card) {
         super(card);
     }
 

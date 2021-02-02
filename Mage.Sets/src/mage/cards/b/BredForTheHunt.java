@@ -27,7 +27,7 @@ public final class BredForTheHunt extends CardImpl {
         this.addAbility(new BredForTheHuntTriggeredAbility());
     }
 
-    public BredForTheHunt(final BredForTheHunt card) {
+    private BredForTheHunt(final BredForTheHunt card) {
         super(card);
     }
 

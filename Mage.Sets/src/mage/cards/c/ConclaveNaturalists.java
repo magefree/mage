@@ -32,7 +32,7 @@ public final class ConclaveNaturalists extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ConclaveNaturalists(final ConclaveNaturalists card) {
+    private ConclaveNaturalists(final ConclaveNaturalists card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class AvenCloudchaser extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AvenCloudchaser(final AvenCloudchaser card) {
+    private AvenCloudchaser(final AvenCloudchaser card) {
         super(card);
     }
 

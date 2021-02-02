@@ -31,7 +31,7 @@ public final class WordsOfWilding extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWildingEffect(), new ManaCostsImpl("{1}")));
     }
 
-    public WordsOfWilding(final WordsOfWilding card) {
+    private WordsOfWilding(final WordsOfWilding card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class IriniSengir extends CardImpl {
         );
     }
 
-    public IriniSengir(final IriniSengir card) {
+    private IriniSengir(final IriniSengir card) {
         super(card);
     }
 

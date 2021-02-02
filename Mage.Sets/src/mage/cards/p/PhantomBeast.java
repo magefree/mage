@@ -29,7 +29,7 @@ public final class PhantomBeast extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public PhantomBeast(final PhantomBeast card) {
+    private PhantomBeast(final PhantomBeast card) {
         super(card);
     }
 

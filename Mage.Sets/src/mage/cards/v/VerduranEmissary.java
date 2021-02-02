@@ -38,7 +38,7 @@ public final class VerduranEmissary extends CardImpl {
                 "When {this} enters the battlefield, if it was kicked, destroy target artifact. It can't be regenerated."));
     }
 
-    public VerduranEmissary(final VerduranEmissary card) {
+    private VerduranEmissary(final VerduranEmissary card) {
         super(card);
     }
 

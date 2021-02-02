@@ -30,7 +30,7 @@ public final class OreGorger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OreGorger(final OreGorger card) {
+    private OreGorger(final OreGorger card) {
         super(card);
     }
 

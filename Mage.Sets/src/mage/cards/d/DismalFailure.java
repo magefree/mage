@@ -26,7 +26,7 @@ public final class DismalFailure extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public DismalFailure(final DismalFailure card) {
+    private DismalFailure(final DismalFailure card) {
         super(card);
     }
 

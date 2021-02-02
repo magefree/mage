@@ -34,7 +34,7 @@ public final class SaprolingSymbiosis extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public SaprolingSymbiosis(final SaprolingSymbiosis card) {
+    private SaprolingSymbiosis(final SaprolingSymbiosis card) {
         super(card);
     }
 

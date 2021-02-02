@@ -41,7 +41,7 @@ public final class OashraCultivator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OashraCultivator(final OashraCultivator card) {
+    private OashraCultivator(final OashraCultivator card) {
         super(card);
     }
 

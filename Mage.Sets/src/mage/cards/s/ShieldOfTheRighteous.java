@@ -40,7 +40,7 @@ public final class ShieldOfTheRighteous extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), new TargetControlledCreaturePermanent()));
     }
 
-    public ShieldOfTheRighteous(final ShieldOfTheRighteous card) {
+    private ShieldOfTheRighteous(final ShieldOfTheRighteous card) {
         super(card);
     }
 

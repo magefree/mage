@@ -28,7 +28,7 @@ public final class TestOfEndurance extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new FiftyOrMoreLifeCondition(), "At the beginning of your upkeep, if you have 50 or more life, you win the game."));
     }
 
-    public TestOfEndurance(final TestOfEndurance card) {
+    private TestOfEndurance(final TestOfEndurance card) {
         super(card);
     }
 

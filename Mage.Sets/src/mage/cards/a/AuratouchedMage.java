@@ -37,7 +37,7 @@ public final class AuratouchedMage extends CardImpl {
 
     }
 
-    public AuratouchedMage(final AuratouchedMage card) {
+    private AuratouchedMage(final AuratouchedMage card) {
         super(card);
     }
 

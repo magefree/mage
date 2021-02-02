@@ -35,7 +35,7 @@ public final class VampireLacerator extends CardImpl {
                     "you lose 1 life unless an opponent has 10 or less life"), TargetController.YOU, false));
     }
 
-    public VampireLacerator(final VampireLacerator card) {
+    private VampireLacerator(final VampireLacerator card) {
         super(card);
     }
 

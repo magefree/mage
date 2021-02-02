@@ -38,7 +38,7 @@ public final class ImperialGunner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ImperialGunner(final ImperialGunner card) {
+    private ImperialGunner(final ImperialGunner card) {
         super(card);
     }
 

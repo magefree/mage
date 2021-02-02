@@ -36,7 +36,7 @@ public final class ResoundingSilence extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ResoundingSilence(final ResoundingSilence card) {
+    private ResoundingSilence(final ResoundingSilence card) {
         super(card);
     }
 

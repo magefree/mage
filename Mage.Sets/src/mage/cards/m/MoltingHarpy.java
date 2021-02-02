@@ -35,7 +35,7 @@ public final class MoltingHarpy extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{2}")), TargetController.YOU, false));
     }
 
-    public MoltingHarpy(final MoltingHarpy card) {
+    private MoltingHarpy(final MoltingHarpy card) {
         super(card);
     }
 

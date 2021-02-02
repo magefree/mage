@@ -23,7 +23,7 @@ public final class KeepersOfTheFaith extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public KeepersOfTheFaith(final KeepersOfTheFaith card) {
+    private KeepersOfTheFaith(final KeepersOfTheFaith card) {
         super(card);
     }
 

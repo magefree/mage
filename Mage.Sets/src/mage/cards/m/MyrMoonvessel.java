@@ -24,7 +24,7 @@ public final class MyrMoonvessel extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new BasicManaEffect(Mana.ColorlessMana(1))));
     }
 
-    public MyrMoonvessel(final MyrMoonvessel card) {
+    private MyrMoonvessel(final MyrMoonvessel card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class KyrenLegate extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(null, condition));
     }
 
-    public KyrenLegate(final KyrenLegate card) {
+    private KyrenLegate(final KyrenLegate card) {
         super(card);
     }
 

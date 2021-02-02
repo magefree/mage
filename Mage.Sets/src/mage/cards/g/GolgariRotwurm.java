@@ -39,7 +39,7 @@ public final class GolgariRotwurm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GolgariRotwurm(final GolgariRotwurm card) {
+    private GolgariRotwurm(final GolgariRotwurm card) {
         super(card);
     }
 

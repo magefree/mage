@@ -36,7 +36,7 @@ public final class Voidwalk extends CardImpl {
         this.getSpellAbility().addEffect(new CipherEffect());
     }
 
-    public Voidwalk(final Voidwalk card) {
+    private Voidwalk(final Voidwalk card) {
         super(card);
     }
 

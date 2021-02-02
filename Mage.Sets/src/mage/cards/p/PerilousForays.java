@@ -47,7 +47,7 @@ public final class PerilousForays extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PerilousForays(final PerilousForays card) {
+    private PerilousForays(final PerilousForays card) {
         super(card);
     }
 

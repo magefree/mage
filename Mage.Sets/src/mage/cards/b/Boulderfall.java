@@ -23,7 +23,7 @@ public final class Boulderfall extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(5));
     }
 
-    public Boulderfall(final Boulderfall card) {
+    private Boulderfall(final Boulderfall card) {
         super(card);
     }
 

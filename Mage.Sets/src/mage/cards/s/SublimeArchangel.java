@@ -37,7 +37,7 @@ public final class SublimeArchangel extends CardImpl {
                 new GainAbilityControlledEffect(new ExaltedAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, true)));
     }
 
-    public SublimeArchangel(final SublimeArchangel card) {
+    private SublimeArchangel(final SublimeArchangel card) {
         super(card);
     }
 

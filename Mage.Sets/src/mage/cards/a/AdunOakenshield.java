@@ -39,7 +39,7 @@ public final class AdunOakenshield extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AdunOakenshield(final AdunOakenshield card) {
+    private AdunOakenshield(final AdunOakenshield card) {
         super(card);
     }
 

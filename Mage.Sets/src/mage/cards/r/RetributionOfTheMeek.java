@@ -30,7 +30,7 @@ public final class RetributionOfTheMeek extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, true));
     }
     
-    public RetributionOfTheMeek(final RetributionOfTheMeek card) {
+    private RetributionOfTheMeek(final RetributionOfTheMeek card) {
         super(card);
     }
     

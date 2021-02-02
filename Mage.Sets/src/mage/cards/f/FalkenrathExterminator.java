@@ -40,7 +40,7 @@ public final class FalkenrathExterminator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FalkenrathExterminator(final FalkenrathExterminator card) {
+    private FalkenrathExterminator(final FalkenrathExterminator card) {
         super(card);
     }
 

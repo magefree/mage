@@ -29,7 +29,7 @@ public final class GorillaChieftain extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }
 
-    public GorillaChieftain(final GorillaChieftain card) {
+    private GorillaChieftain(final GorillaChieftain card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class DistantMelody extends CardImpl {
         this.getSpellAbility().addEffect(new DistantMelodyEffect());
     }
 
-    public DistantMelody(final DistantMelody card) {
+    private DistantMelody(final DistantMelody card) {
         super(card);
     }
 

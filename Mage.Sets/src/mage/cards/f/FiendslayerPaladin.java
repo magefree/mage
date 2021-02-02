@@ -46,7 +46,7 @@ public final class FiendslayerPaladin extends CardImpl {
         
     }
 
-    public FiendslayerPaladin(final FiendslayerPaladin card) {
+    private FiendslayerPaladin(final FiendslayerPaladin card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class NathsBuffoon extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public NathsBuffoon(final NathsBuffoon card) {
+    private NathsBuffoon(final NathsBuffoon card) {
         super(card);
     }
 

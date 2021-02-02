@@ -41,7 +41,7 @@ public final class BattleScreech extends CardImpl {
         this.addAbility(new FlashbackAbility(new TapTargetCost(new TargetControlledCreaturePermanent(3,3, filter, true)), TimingRule.SORCERY));
     }
 
-    public BattleScreech(final BattleScreech card) {
+    private BattleScreech(final BattleScreech card) {
         super(card);
     }
 

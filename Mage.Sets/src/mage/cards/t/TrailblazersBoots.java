@@ -32,7 +32,7 @@ public final class TrailblazersBoots extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public TrailblazersBoots(final TrailblazersBoots card) {
+    private TrailblazersBoots(final TrailblazersBoots card) {
         super(card);
     }
 

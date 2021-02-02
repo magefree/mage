@@ -31,7 +31,7 @@ public final class UniversalSolvent extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UniversalSolvent(final UniversalSolvent card) {
+    private UniversalSolvent(final UniversalSolvent card) {
         super(card);
     }
 

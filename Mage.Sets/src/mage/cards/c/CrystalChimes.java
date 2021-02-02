@@ -33,7 +33,7 @@ public final class CrystalChimes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrystalChimes(final CrystalChimes card) {
+    private CrystalChimes(final CrystalChimes card) {
         super(card);
     }
 

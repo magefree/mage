@@ -43,7 +43,7 @@ public final class ArgentSphinx extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArgentSphinx(final ArgentSphinx card) {
+    private ArgentSphinx(final ArgentSphinx card) {
         super(card);
     }
 

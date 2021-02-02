@@ -42,7 +42,7 @@ public final class AeronautAdmiral extends CardImpl {
                 new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public AeronautAdmiral(final AeronautAdmiral card) {
+    private AeronautAdmiral(final AeronautAdmiral card) {
         super(card);
     }
 

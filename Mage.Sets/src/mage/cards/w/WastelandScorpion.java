@@ -32,7 +32,7 @@ public final class WastelandScorpion extends CardImpl {
 
     }
 
-    public WastelandScorpion(final WastelandScorpion card) {
+    private WastelandScorpion(final WastelandScorpion card) {
         super(card);
     }
 

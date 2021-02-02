@@ -26,7 +26,7 @@ public final class LostSoul extends CardImpl {
         this.addAbility(new SwampwalkAbility());
     }
 
-    public LostSoul(final LostSoul card) {
+    private LostSoul(final LostSoul card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class PrideOfLions extends CardImpl {
         this.addAbility(DamageAsThoughNotBlockedAbility.getInstance());
     }
 
-    public PrideOfLions(final PrideOfLions card) {
+    private PrideOfLions(final PrideOfLions card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class VexingShusher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VexingShusher(final VexingShusher card) {
+    private VexingShusher(final VexingShusher card) {
         super(card);
     }
 

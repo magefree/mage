@@ -50,7 +50,7 @@ public final class PrimalAmulet extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new PrimalAmuletEffect(), new FilterInstantOrSorcerySpell(), false));
     }
 
-    public PrimalAmulet(final PrimalAmulet card) {
+    private PrimalAmulet(final PrimalAmulet card) {
         super(card);
     }
 

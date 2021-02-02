@@ -36,7 +36,7 @@ public final class DwarvenDriller extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DwarvenDriller(final DwarvenDriller card) {
+    private DwarvenDriller(final DwarvenDriller card) {
         super(card);
     }
 

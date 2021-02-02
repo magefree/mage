@@ -38,7 +38,7 @@ public final class NightIncarnate extends CardImpl {
 
     }
 
-    public NightIncarnate(final NightIncarnate card) {
+    private NightIncarnate(final NightIncarnate card) {
         super(card);
     }
 

@@ -55,7 +55,7 @@ public final class RamunapRuins extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RamunapRuins(final RamunapRuins card) {
+    private RamunapRuins(final RamunapRuins card) {
         super(card);
     }
 

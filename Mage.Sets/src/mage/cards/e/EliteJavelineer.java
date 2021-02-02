@@ -33,7 +33,7 @@ public final class EliteJavelineer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EliteJavelineer(final EliteJavelineer card) {
+    private EliteJavelineer(final EliteJavelineer card) {
         super(card);
     }
 

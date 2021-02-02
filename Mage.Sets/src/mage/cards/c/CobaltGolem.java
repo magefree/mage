@@ -28,7 +28,7 @@ public final class CobaltGolem extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
     }
 
-    public CobaltGolem(final CobaltGolem card) {
+    private CobaltGolem(final CobaltGolem card) {
         super(card);
     }
 

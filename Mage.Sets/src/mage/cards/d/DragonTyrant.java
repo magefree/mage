@@ -43,7 +43,7 @@ public final class DragonTyrant extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public DragonTyrant(final DragonTyrant card) {
+    private DragonTyrant(final DragonTyrant card) {
         super(card);
     }
 

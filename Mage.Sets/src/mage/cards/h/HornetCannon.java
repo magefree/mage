@@ -35,7 +35,7 @@ public final class HornetCannon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HornetCannon(final HornetCannon card) {
+    private HornetCannon(final HornetCannon card) {
         super(card);
     }
 

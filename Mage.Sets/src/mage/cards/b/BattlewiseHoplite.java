@@ -32,7 +32,7 @@ public final class BattlewiseHoplite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BattlewiseHoplite(final BattlewiseHoplite card) {
+    private BattlewiseHoplite(final BattlewiseHoplite card) {
         super(card);
     }
 

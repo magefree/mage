@@ -36,7 +36,7 @@ public final class GreaterRealmOfPreservation extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{W}")));
     }
 
-    public GreaterRealmOfPreservation(final GreaterRealmOfPreservation card) {
+    private GreaterRealmOfPreservation(final GreaterRealmOfPreservation card) {
         super(card);
     }
 

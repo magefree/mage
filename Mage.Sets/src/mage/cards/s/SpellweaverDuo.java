@@ -44,7 +44,7 @@ public final class SpellweaverDuo extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpellweaverDuo(final SpellweaverDuo card) {
+    private SpellweaverDuo(final SpellweaverDuo card) {
         super(card);
     }
 

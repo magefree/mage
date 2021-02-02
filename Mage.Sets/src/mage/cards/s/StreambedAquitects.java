@@ -55,7 +55,7 @@ public final class StreambedAquitects extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StreambedAquitects(final StreambedAquitects card) {
+    private StreambedAquitects(final StreambedAquitects card) {
         super(card);
     }
 

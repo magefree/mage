@@ -36,7 +36,7 @@ public final class EvilPresence extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect(SubType.SWAMP)));
     }
 
-    public EvilPresence(final EvilPresence card) {
+    private EvilPresence(final EvilPresence card) {
         super(card);
     }
 

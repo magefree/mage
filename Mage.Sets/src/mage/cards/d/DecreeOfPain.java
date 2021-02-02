@@ -36,7 +36,7 @@ public final class DecreeOfPain extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DecreeOfPain(final DecreeOfPain card) {
+    private DecreeOfPain(final DecreeOfPain card) {
         super(card);
     }
 

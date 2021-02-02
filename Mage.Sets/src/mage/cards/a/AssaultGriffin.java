@@ -26,7 +26,7 @@ public final class AssaultGriffin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public AssaultGriffin(final AssaultGriffin card) {
+    private AssaultGriffin(final AssaultGriffin card) {
         super(card);
     }
 

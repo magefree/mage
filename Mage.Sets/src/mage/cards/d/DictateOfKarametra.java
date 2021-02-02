@@ -31,7 +31,7 @@ public final class DictateOfKarametra extends CardImpl {
         
     }
 
-    public DictateOfKarametra(final DictateOfKarametra card) {
+    private DictateOfKarametra(final DictateOfKarametra card) {
         super(card);
     }
 

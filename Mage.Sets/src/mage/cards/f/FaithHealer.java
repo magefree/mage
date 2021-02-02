@@ -33,7 +33,7 @@ public final class FaithHealer extends CardImpl {
             new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledEnchantmentPermanent()))));
     }
 
-    public FaithHealer(final FaithHealer card) {
+    private FaithHealer(final FaithHealer card) {
         super(card);
     }
 

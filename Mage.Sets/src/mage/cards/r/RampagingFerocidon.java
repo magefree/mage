@@ -55,7 +55,7 @@ public final class RampagingFerocidon extends CardImpl {
                 Zone.BATTLEFIELD, new DamageTargetEffect(1, true, "that creature's controller"), filter, false, SetTargetPointer.PLAYER, ""));
     }
 
-    public RampagingFerocidon(final RampagingFerocidon card) {
+    private RampagingFerocidon(final RampagingFerocidon card) {
         super(card);
     }
 

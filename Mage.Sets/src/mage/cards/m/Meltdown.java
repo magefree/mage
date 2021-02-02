@@ -25,7 +25,7 @@ public final class Meltdown extends CardImpl {
         this.getSpellAbility().addEffect(new MeltdownEffect());
     }
 
-    public Meltdown(final Meltdown card) {
+    private Meltdown(final Meltdown card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class RekindledFlame extends CardImpl {
 
     }
 
-    public RekindledFlame(final RekindledFlame card) {
+    private RekindledFlame(final RekindledFlame card) {
         super(card);
     }
 

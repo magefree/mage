@@ -44,7 +44,7 @@ public final class SachiDaughterOfSeshiro extends CardImpl {
                 new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()), Duration.WhileOnBattlefield, shamanFilter, false)));
     }
 
-    public SachiDaughterOfSeshiro(final SachiDaughterOfSeshiro card) {
+    private SachiDaughterOfSeshiro(final SachiDaughterOfSeshiro card) {
         super(card);
     }
 

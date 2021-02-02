@@ -31,7 +31,7 @@ public final class CallToGlory extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter, false));
     }
 
-    public CallToGlory(final CallToGlory card) {
+    private CallToGlory(final CallToGlory card) {
         super(card);
     }
 

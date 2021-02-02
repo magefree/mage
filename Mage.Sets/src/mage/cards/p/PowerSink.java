@@ -34,7 +34,7 @@ public final class PowerSink extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public PowerSink(final PowerSink card) {
+    private PowerSink(final PowerSink card) {
         super(card);
     }
 

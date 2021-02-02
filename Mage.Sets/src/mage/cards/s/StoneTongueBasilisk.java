@@ -47,7 +47,7 @@ public final class StoneTongueBasilisk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StoneTongueBasilisk(final StoneTongueBasilisk card) {
+    private StoneTongueBasilisk(final StoneTongueBasilisk card) {
         super(card);
     }
 

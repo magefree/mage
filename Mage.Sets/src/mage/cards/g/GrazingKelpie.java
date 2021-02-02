@@ -40,7 +40,7 @@ public final class GrazingKelpie extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public GrazingKelpie(final GrazingKelpie card) {
+    private GrazingKelpie(final GrazingKelpie card) {
         super(card);
     }
 

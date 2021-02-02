@@ -32,7 +32,7 @@ public final class ForceLightning extends CardImpl {
 
     }
 
-    public ForceLightning(final ForceLightning card) {
+    private ForceLightning(final ForceLightning card) {
         super(card);
     }
 

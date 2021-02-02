@@ -54,7 +54,7 @@ public final class MyojinOfSeeingWinds extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MyojinOfSeeingWinds(final MyojinOfSeeingWinds card) {
+    private MyojinOfSeeingWinds(final MyojinOfSeeingWinds card) {
         super(card);
     }
 

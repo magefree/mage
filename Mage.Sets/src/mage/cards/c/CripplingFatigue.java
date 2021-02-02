@@ -33,7 +33,7 @@ public final class CripplingFatigue extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CripplingFatigue(final CripplingFatigue card) {
+    private CripplingFatigue(final CripplingFatigue card) {
         super(card);
     }
 

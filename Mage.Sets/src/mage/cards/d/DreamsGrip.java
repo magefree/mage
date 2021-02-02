@@ -42,7 +42,7 @@ public final class DreamsGrip extends CardImpl {
         this.addAbility(new EntwineAbility("{1}"));
     }
 
-    public DreamsGrip(final DreamsGrip card) {
+    private DreamsGrip(final DreamsGrip card) {
         super(card);
     }
 

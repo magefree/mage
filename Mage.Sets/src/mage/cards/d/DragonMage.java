@@ -37,7 +37,7 @@ public final class DragonMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DragonMage(final DragonMage card) {
+    private DragonMage(final DragonMage card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class Blustersquall extends CardImpl {
 
     }
 
-    public Blustersquall(final Blustersquall card) {
+    private Blustersquall(final Blustersquall card) {
         super(card);
     }
 

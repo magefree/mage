@@ -29,7 +29,7 @@ public final class RipjawRaptor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RipjawRaptor(final RipjawRaptor card) {
+    private RipjawRaptor(final RipjawRaptor card) {
         super(card);
     }
 

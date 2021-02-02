@@ -47,7 +47,7 @@ public final class ElvishSkysweeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElvishSkysweeper(final ElvishSkysweeper card) {
+    private ElvishSkysweeper(final ElvishSkysweeper card) {
         super(card);
     }
 

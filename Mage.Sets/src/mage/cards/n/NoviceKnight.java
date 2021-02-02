@@ -40,7 +40,7 @@ public final class NoviceKnight extends CardImpl {
         ));
     }
 
-    public NoviceKnight(final NoviceKnight card) {
+    private NoviceKnight(final NoviceKnight card) {
         super(card);
     }
 

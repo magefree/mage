@@ -51,7 +51,7 @@ public final class YawgmothsVileOffering extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public YawgmothsVileOffering(final YawgmothsVileOffering card) {
+    private YawgmothsVileOffering(final YawgmothsVileOffering card) {
         super(card);
     }
 

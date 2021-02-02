@@ -35,7 +35,7 @@ public final class RogueElephant extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
     }
 
-    public RogueElephant(final RogueElephant card) {
+    private RogueElephant(final RogueElephant card) {
         super(card);
     }
 

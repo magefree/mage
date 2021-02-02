@@ -31,7 +31,7 @@ public final class HarshSustenance extends CardImpl {
         getSpellAbility().addHint(CreaturesYouControlHint.instance);
     }
 
-    public HarshSustenance(final HarshSustenance card) {
+    private HarshSustenance(final HarshSustenance card) {
         super(card);
     }
 

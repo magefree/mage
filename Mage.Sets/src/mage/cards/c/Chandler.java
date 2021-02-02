@@ -44,7 +44,7 @@ public final class Chandler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Chandler(final Chandler card) {
+    private Chandler(final Chandler card) {
         super(card);
     }
 

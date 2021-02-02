@@ -39,7 +39,7 @@ public final class VodalianSerpent extends CardImpl {
             KickedCondition.instance, "If {this} was kicked, it enters the battlefield with four +1/+1 counters on it.", ""));
     }
 
-    public VodalianSerpent(final VodalianSerpent card) {
+    private VodalianSerpent(final VodalianSerpent card) {
         super(card);
     }
 

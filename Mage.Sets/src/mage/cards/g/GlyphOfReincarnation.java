@@ -51,7 +51,7 @@ public final class GlyphOfReincarnation extends CardImpl {
         this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
     }
 
-    public GlyphOfReincarnation(final GlyphOfReincarnation card) {
+    private GlyphOfReincarnation(final GlyphOfReincarnation card) {
         super(card);
     }
 

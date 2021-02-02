@@ -42,7 +42,7 @@ public final class YawgmothsAgenda extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new YawgmothsAgendaReplacementEffect()));
     }
 
-    public YawgmothsAgenda(final YawgmothsAgenda card) {
+    private YawgmothsAgenda(final YawgmothsAgenda card) {
         super(card);
     }
 

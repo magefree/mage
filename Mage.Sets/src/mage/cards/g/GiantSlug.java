@@ -42,7 +42,7 @@ public final class GiantSlug extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(ability), new ManaCostsImpl("{5}")));
     }
 
-    public GiantSlug(final GiantSlug card) {
+    private GiantSlug(final GiantSlug card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class Mutilate extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Mutilate(final Mutilate card) {
+    private Mutilate(final Mutilate card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class MuckRats extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public MuckRats(final MuckRats card) {
+    private MuckRats(final MuckRats card) {
         super(card);
     }
 

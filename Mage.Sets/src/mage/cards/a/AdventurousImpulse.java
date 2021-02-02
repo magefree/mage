@@ -30,7 +30,7 @@ public final class AdventurousImpulse extends CardImpl {
 
     }
 
-    public AdventurousImpulse(final AdventurousImpulse card) {
+    private AdventurousImpulse(final AdventurousImpulse card) {
         super(card);
     }
 

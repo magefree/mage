@@ -22,7 +22,7 @@ public final class TheBattleOfHoth extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ATATToken(), ManacostVariableValue.instance));
     }
 
-    public TheBattleOfHoth(final TheBattleOfHoth card) {
+    private TheBattleOfHoth(final TheBattleOfHoth card) {
         super(card);
     }
 

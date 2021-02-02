@@ -41,7 +41,7 @@ public final class JolraelsFavor extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ManaCostsImpl("{1}{G}")));
     }
 
-    public JolraelsFavor(final JolraelsFavor card) {
+    private JolraelsFavor(final JolraelsFavor card) {
         super(card);
     }
 

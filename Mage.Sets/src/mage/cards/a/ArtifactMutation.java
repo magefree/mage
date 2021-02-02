@@ -27,7 +27,7 @@ public final class ArtifactMutation extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), TargetConvertedManaCost.instance).setText("create X 1/1 green Saproling creature tokens, where X is that artifact's converted mana cost"));
     }
 
-    public ArtifactMutation(final ArtifactMutation card) {
+    private ArtifactMutation(final ArtifactMutation card) {
         super(card);
     }
 

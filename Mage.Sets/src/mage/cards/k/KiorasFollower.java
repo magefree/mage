@@ -40,7 +40,7 @@ public final class KiorasFollower extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KiorasFollower(final KiorasFollower card) {
+    private KiorasFollower(final KiorasFollower card) {
         super(card);
     }
 

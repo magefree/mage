@@ -37,7 +37,7 @@ public final class HoldTheGates extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HoldTheGates(final HoldTheGates card) {
+    private HoldTheGates(final HoldTheGates card) {
         super(card);
     }
 

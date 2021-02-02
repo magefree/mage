@@ -45,7 +45,7 @@ public final class CanopyCover extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedAttachedEffect(filter, Duration.WhileOnBattlefield, AttachmentType.AURA, TargetController.OPPONENT)));
     }
 
-    public CanopyCover(final CanopyCover card) {
+    private CanopyCover(final CanopyCover card) {
         super(card);
     }
 

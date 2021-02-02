@@ -33,7 +33,7 @@ public final class EssenceFlux extends CardImpl {
         this.getSpellAbility().addEffect(new EssenceFluxEffect());
     }
 
-    public EssenceFlux(final EssenceFlux card) {
+    private EssenceFlux(final EssenceFlux card) {
         super(card);
     }
 

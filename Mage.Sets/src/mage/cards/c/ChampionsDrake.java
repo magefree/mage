@@ -42,7 +42,7 @@ public final class ChampionsDrake extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public ChampionsDrake(final ChampionsDrake card) {
+    private ChampionsDrake(final ChampionsDrake card) {
         super(card);
     }
 

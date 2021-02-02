@@ -32,7 +32,7 @@ public final class BasalThrull extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BasalThrull(final BasalThrull card) {
+    private BasalThrull(final BasalThrull card) {
         super(card);
     }
 

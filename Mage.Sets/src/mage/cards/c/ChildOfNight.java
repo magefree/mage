@@ -26,7 +26,7 @@ public final class ChildOfNight extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public ChildOfNight(final ChildOfNight card) {
+    private ChildOfNight(final ChildOfNight card) {
         super(card);
     }
 

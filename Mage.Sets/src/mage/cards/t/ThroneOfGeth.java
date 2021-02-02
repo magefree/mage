@@ -35,7 +35,7 @@ public final class ThroneOfGeth extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThroneOfGeth(final ThroneOfGeth card) {
+    private ThroneOfGeth(final ThroneOfGeth card) {
         super(card);
     }
 

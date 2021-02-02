@@ -26,7 +26,7 @@ public final class ConstrictingTendrils extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public ConstrictingTendrils(final ConstrictingTendrils card) {
+    private ConstrictingTendrils(final ConstrictingTendrils card) {
         super(card);
     }
 

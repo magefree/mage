@@ -27,7 +27,7 @@ public final class SproutSwarm extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken()));
     }
 
-    public SproutSwarm(final SproutSwarm card) {
+    private SproutSwarm(final SproutSwarm card) {
         super(card);
     }
 

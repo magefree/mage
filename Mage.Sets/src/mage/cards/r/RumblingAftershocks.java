@@ -43,7 +43,7 @@ public final class RumblingAftershocks extends CardImpl {
 
     }
 
-    public RumblingAftershocks(final RumblingAftershocks card) {
+    private RumblingAftershocks(final RumblingAftershocks card) {
         super(card);
     }
 

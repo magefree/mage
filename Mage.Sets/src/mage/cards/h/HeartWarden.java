@@ -37,7 +37,7 @@ public final class HeartWarden extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HeartWarden(final HeartWarden card) {
+    private HeartWarden(final HeartWarden card) {
         super(card);
     }
 

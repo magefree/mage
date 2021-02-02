@@ -29,7 +29,7 @@ public final class ChainLightning extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public ChainLightning(final ChainLightning card) {
+    private ChainLightning(final ChainLightning card) {
         super(card);
     }
 

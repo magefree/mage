@@ -24,7 +24,7 @@ public final class DarkNourishment extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
     }
 
-    public DarkNourishment(final DarkNourishment card) {
+    private DarkNourishment(final DarkNourishment card) {
         super(card);
     }
 

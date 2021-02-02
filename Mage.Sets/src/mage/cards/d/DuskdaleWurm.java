@@ -26,7 +26,7 @@ public final class DuskdaleWurm extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public DuskdaleWurm(final DuskdaleWurm card) {
+    private DuskdaleWurm(final DuskdaleWurm card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class BattleAtTheBridge extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(ManacostVariableValue.instance));
     }
 
-    public BattleAtTheBridge(final BattleAtTheBridge card) {
+    private BattleAtTheBridge(final BattleAtTheBridge card) {
         super(card);
     }
 

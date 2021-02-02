@@ -25,7 +25,7 @@ public final class EvasiveAction extends CardImpl {
         this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);
     }
 
-    public EvasiveAction(final EvasiveAction card) {
+    private EvasiveAction(final EvasiveAction card) {
         super(card);
     }
 

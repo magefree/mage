@@ -38,7 +38,7 @@ public final class FaadiyahSeer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FaadiyahSeerEffect(), new TapSourceCost()));
     }
 
-    public FaadiyahSeer(final FaadiyahSeer card) {
+    private FaadiyahSeer(final FaadiyahSeer card) {
         super(card);
     }
 

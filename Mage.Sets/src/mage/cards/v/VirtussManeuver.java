@@ -37,7 +37,7 @@ public final class VirtussManeuver extends CardImpl {
         this.getSpellAbility().addEffect(new VirtussManeuverEffect());
     }
 
-    public VirtussManeuver(final VirtussManeuver card) {
+    private VirtussManeuver(final VirtussManeuver card) {
         super(card);
     }
 

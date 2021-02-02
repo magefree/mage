@@ -40,7 +40,7 @@ public final class StupefyingTouch extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantActivateAbilitiesAttachedEffect()));
     }
 
-    public StupefyingTouch(final StupefyingTouch card) {
+    private StupefyingTouch(final StupefyingTouch card) {
         super(card);
     }
 

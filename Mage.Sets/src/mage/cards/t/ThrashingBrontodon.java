@@ -35,7 +35,7 @@ public final class ThrashingBrontodon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThrashingBrontodon(final ThrashingBrontodon card) {
+    private ThrashingBrontodon(final ThrashingBrontodon card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class Mindmoil extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new MindmoilEffect(), false));
     }
 
-    public Mindmoil(final Mindmoil card) {
+    private Mindmoil(final Mindmoil card) {
         super(card);
     }
 

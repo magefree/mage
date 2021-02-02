@@ -36,7 +36,7 @@ public final class BloodsporeThrinax extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodsporeThrinaxEntersBattlefieldEffect()));
     }
 
-    public BloodsporeThrinax(final BloodsporeThrinax card) {
+    private BloodsporeThrinax(final BloodsporeThrinax card) {
         super(card);
     }
 

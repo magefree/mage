@@ -27,7 +27,7 @@ public final class RelicBarrier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RelicBarrier(final RelicBarrier card) {
+    private RelicBarrier(final RelicBarrier card) {
         super(card);
     }
 

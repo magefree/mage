@@ -27,7 +27,7 @@ public final class OfferingToAsha extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
     }
 
-    public OfferingToAsha(final OfferingToAsha card) {
+    private OfferingToAsha(final OfferingToAsha card) {
         super(card);
     }
 

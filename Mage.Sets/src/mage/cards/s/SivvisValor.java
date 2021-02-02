@@ -53,7 +53,7 @@ public final class SivvisValor extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SivvisValor(final SivvisValor card) {
+    private SivvisValor(final SivvisValor card) {
         super(card);
     }
 

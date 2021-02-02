@@ -47,7 +47,7 @@ public final class DreamscapeArtist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DreamscapeArtist(final DreamscapeArtist card) {
+    private DreamscapeArtist(final DreamscapeArtist card) {
         super(card);
     }
 

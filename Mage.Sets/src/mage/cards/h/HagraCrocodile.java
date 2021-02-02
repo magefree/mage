@@ -29,7 +29,7 @@ public final class HagraCrocodile extends CardImpl {
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public HagraCrocodile(final HagraCrocodile card) {
+    private HagraCrocodile(final HagraCrocodile card) {
         super(card);
     }
 

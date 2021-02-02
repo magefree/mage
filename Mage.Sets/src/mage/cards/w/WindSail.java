@@ -27,7 +27,7 @@ public final class WindSail extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(1, 2));
     }
 
-    public WindSail(final WindSail card) {
+    private WindSail(final WindSail card) {
         super(card);
     }
 

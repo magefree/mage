@@ -35,7 +35,7 @@ public final class NightmareLash extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new PayLifeCost(3)));
     }
 
-    public NightmareLash(final NightmareLash card) {
+    private NightmareLash(final NightmareLash card) {
         super(card);
     }
 

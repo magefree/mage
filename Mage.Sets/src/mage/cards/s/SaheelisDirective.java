@@ -36,7 +36,7 @@ public final class SaheelisDirective extends CardImpl {
         this.getSpellAbility().addEffect(new SaheelisDirectiveEffect());
     }
 
-    public SaheelisDirective(final SaheelisDirective card) {
+    private SaheelisDirective(final SaheelisDirective card) {
         super(card);
     }
 

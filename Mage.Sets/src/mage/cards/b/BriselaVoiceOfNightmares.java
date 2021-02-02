@@ -50,7 +50,7 @@ public final class BriselaVoiceOfNightmares extends MeldCard {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BriselaVoiceOfNightmaresCantCastEffect()));
     }
 
-    public BriselaVoiceOfNightmares(final BriselaVoiceOfNightmares card) {
+    private BriselaVoiceOfNightmares(final BriselaVoiceOfNightmares card) {
         super(card);
     }
 

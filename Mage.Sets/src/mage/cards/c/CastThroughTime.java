@@ -37,7 +37,7 @@ public final class CastThroughTime extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainReboundEffect()));
     }
 
-    public CastThroughTime(final CastThroughTime card) {
+    private CastThroughTime(final CastThroughTime card) {
         super(card);
     }
 

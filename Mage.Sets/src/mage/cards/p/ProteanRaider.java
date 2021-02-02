@@ -36,7 +36,7 @@ public final class ProteanRaider extends CardImpl {
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public ProteanRaider(final ProteanRaider card) {
+    private ProteanRaider(final ProteanRaider card) {
         super(card);
     }
 

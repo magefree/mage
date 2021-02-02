@@ -33,7 +33,7 @@ public final class ConfirmSuspicions extends CardImpl {
         getSpellAbility().addEffect(effect);
     }
 
-    public ConfirmSuspicions(final ConfirmSuspicions card) {
+    private ConfirmSuspicions(final ConfirmSuspicions card) {
         super(card);
     }
 

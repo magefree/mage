@@ -28,7 +28,7 @@ public final class SoulStrings extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(2, new FilterCreatureCard("creature cards from your graveyard")));
     }
 
-    public SoulStrings(final SoulStrings card) {
+    private SoulStrings(final SoulStrings card) {
         super(card);
     }
 

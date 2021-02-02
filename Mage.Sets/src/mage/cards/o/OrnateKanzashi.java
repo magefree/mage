@@ -42,7 +42,7 @@ public final class OrnateKanzashi extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrnateKanzashi(final OrnateKanzashi card) {
+    private OrnateKanzashi(final OrnateKanzashi card) {
         super(card);
     }
 

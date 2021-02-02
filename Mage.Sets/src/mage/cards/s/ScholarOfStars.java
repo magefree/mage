@@ -35,7 +35,7 @@ public final class ScholarOfStars extends CardImpl {
         ));
     }
 
-    public ScholarOfStars(final ScholarOfStars card) {
+    private ScholarOfStars(final ScholarOfStars card) {
         super(card);
     }
 

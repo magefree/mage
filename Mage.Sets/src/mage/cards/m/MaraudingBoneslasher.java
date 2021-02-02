@@ -39,7 +39,7 @@ public final class MaraudingBoneslasher extends CardImpl {
 
     }
 
-    public MaraudingBoneslasher(final MaraudingBoneslasher card) {
+    private MaraudingBoneslasher(final MaraudingBoneslasher card) {
         super(card);
     }
 

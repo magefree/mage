@@ -35,7 +35,7 @@ public final class TidalVisionary extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TidalVisionary(final TidalVisionary card) {
+    private TidalVisionary(final TidalVisionary card) {
         super(card);
     }
 

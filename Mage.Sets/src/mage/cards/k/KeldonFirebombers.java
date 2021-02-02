@@ -40,7 +40,7 @@ public final class KeldonFirebombers extends CardImpl {
 
     }
 
-    public KeldonFirebombers(final KeldonFirebombers card) {
+    private KeldonFirebombers(final KeldonFirebombers card) {
         super(card);
     }
 

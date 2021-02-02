@@ -53,7 +53,7 @@ public final class ThundercloudElemental extends CardImpl {
 
     }
 
-    public ThundercloudElemental(final ThundercloudElemental card) {
+    private ThundercloudElemental(final ThundercloudElemental card) {
         super(card);
     }
 

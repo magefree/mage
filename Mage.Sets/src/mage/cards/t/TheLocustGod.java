@@ -55,7 +55,7 @@ public final class TheLocustGod extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new TheLocustGodEffect()));
     }
 
-    public TheLocustGod(final TheLocustGod card) {
+    private TheLocustGod(final TheLocustGod card) {
         super(card);
     }
 

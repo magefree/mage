@@ -27,7 +27,7 @@ public final class AcidRain extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public AcidRain(final AcidRain card) {
+    private AcidRain(final AcidRain card) {
         super(card);
     }
 

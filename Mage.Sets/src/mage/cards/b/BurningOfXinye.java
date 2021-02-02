@@ -34,7 +34,7 @@ public final class BurningOfXinye extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(4, new FilterCreaturePermanent()));
     }
 
-    public BurningOfXinye(final BurningOfXinye card) {
+    private BurningOfXinye(final BurningOfXinye card) {
         super(card);
     }
 

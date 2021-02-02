@@ -43,7 +43,7 @@ public final class ProfaneProcession extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ProfaneProcession(final ProfaneProcession card) {
+    private ProfaneProcession(final ProfaneProcession card) {
         super(card);
     }
 

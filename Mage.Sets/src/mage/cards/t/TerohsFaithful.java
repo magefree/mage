@@ -28,7 +28,7 @@ public final class TerohsFaithful extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(4), false));
     }
 
-    public TerohsFaithful(final TerohsFaithful card) {
+    private TerohsFaithful(final TerohsFaithful card) {
         super(card);
     }
 

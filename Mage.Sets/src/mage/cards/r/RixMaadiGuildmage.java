@@ -54,7 +54,7 @@ public final class RixMaadiGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RixMaadiGuildmage(final RixMaadiGuildmage card) {
+    private RixMaadiGuildmage(final RixMaadiGuildmage card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class ShieldedPassage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ShieldedPassage(final ShieldedPassage card) {
+    private ShieldedPassage(final ShieldedPassage card) {
         super(card);
     }
 

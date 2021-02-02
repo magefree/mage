@@ -38,7 +38,7 @@ public final class SmogElemental extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1,-1, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public SmogElemental(final SmogElemental card) {
+    private SmogElemental(final SmogElemental card) {
         super(card);
     }
 

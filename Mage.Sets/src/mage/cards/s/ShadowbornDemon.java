@@ -59,7 +59,7 @@ public final class ShadowbornDemon extends CardImpl {
 
     }
 
-    public ShadowbornDemon(final ShadowbornDemon card) {
+    private ShadowbornDemon(final ShadowbornDemon card) {
         super(card);
     }
 

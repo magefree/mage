@@ -32,7 +32,7 @@ public final class AttendedKnight extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SoldierToken())));
     }
 
-    public AttendedKnight(final AttendedKnight card) {
+    private AttendedKnight(final AttendedKnight card) {
         super(card);
     }
 

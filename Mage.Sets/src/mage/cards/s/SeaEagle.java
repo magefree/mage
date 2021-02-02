@@ -26,7 +26,7 @@ public final class SeaEagle extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SeaEagle(final SeaEagle card) {
+    private SeaEagle(final SeaEagle card) {
         super(card);
     }
 

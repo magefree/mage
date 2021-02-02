@@ -36,7 +36,7 @@ public final class Pyrohemia extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl("{R}")));
     }
 
-    public Pyrohemia(final Pyrohemia card) {
+    private Pyrohemia(final Pyrohemia card) {
         super(card);
     }
 

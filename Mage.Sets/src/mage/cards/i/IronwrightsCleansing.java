@@ -25,7 +25,7 @@ public final class IronwrightsCleansing extends CardImpl {
 
     }
 
-    public IronwrightsCleansing(final IronwrightsCleansing card) {
+    private IronwrightsCleansing(final IronwrightsCleansing card) {
         super(card);
     }
 

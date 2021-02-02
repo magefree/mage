@@ -40,7 +40,7 @@ public final class TaroxBladewing extends CardImpl {
         this.addAbility(new GrandeurAbility(new BoostSourceEffect(x, x, Duration.EndOfTurn, true), "Tarox Bladewing"));
     }
 
-    public TaroxBladewing(final TaroxBladewing card) {
+    private TaroxBladewing(final TaroxBladewing card) {
         super(card);
     }
 

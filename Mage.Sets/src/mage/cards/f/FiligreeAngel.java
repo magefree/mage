@@ -35,7 +35,7 @@ public final class FiligreeAngel extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new FiligreeAngelEffect()).addHint(ArtifactYouControlHint.instance));
     }
 
-    public FiligreeAngel(final FiligreeAngel card) {
+    private FiligreeAngel(final FiligreeAngel card) {
         super(card);
     }
 

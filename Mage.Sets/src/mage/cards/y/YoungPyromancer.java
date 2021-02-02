@@ -33,7 +33,7 @@ public final class YoungPyromancer extends CardImpl {
 
     }
 
-    public YoungPyromancer(final YoungPyromancer card) {
+    private YoungPyromancer(final YoungPyromancer card) {
         super(card);
     }
 

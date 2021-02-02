@@ -42,7 +42,7 @@ public final class ConquerorsGalleon extends CardImpl {
         this.addAbility(new CrewAbility(4));
     }
 
-    public ConquerorsGalleon(final ConquerorsGalleon card) {
+    private ConquerorsGalleon(final ConquerorsGalleon card) {
         super(card);
     }
 

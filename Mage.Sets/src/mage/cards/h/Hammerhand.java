@@ -56,7 +56,7 @@ public final class Hammerhand extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Hammerhand(final Hammerhand card) {
+    private Hammerhand(final Hammerhand card) {
         super(card);
     }
 

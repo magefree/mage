@@ -32,7 +32,7 @@ public final class EyeGouge extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public EyeGouge(final EyeGouge card) {
+    private EyeGouge(final EyeGouge card) {
         super(card);
     }
 

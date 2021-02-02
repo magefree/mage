@@ -37,7 +37,7 @@ public final class LunarMystic extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new GenericManaCost(1)), filter, false));
     }
 
-    public LunarMystic(final LunarMystic card) {
+    private LunarMystic(final LunarMystic card) {
         super(card);
     }
 

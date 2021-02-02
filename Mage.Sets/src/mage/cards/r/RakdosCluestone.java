@@ -38,7 +38,7 @@ public final class RakdosCluestone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RakdosCluestone(final RakdosCluestone card) {
+    private RakdosCluestone(final RakdosCluestone card) {
         super(card);
     }
 

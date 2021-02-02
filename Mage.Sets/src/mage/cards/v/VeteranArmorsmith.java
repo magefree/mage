@@ -35,7 +35,7 @@ public final class VeteranArmorsmith extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public VeteranArmorsmith(final VeteranArmorsmith card) {
+    private VeteranArmorsmith(final VeteranArmorsmith card) {
         super(card);
     }
 

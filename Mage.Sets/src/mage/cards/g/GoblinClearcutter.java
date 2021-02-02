@@ -46,7 +46,7 @@ public final class GoblinClearcutter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinClearcutter(final GoblinClearcutter card) {
+    private GoblinClearcutter(final GoblinClearcutter card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class CryptChampion extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.R)), false), new ManaSpentToCastWatcher());
     }
 
-    public CryptChampion(final CryptChampion card) {
+    private CryptChampion(final CryptChampion card) {
         super(card);
     }
 

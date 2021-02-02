@@ -27,7 +27,7 @@ public final class WellOfKnowledge extends CardImpl {
 
     }
 
-    public WellOfKnowledge(final WellOfKnowledge card) {
+    private WellOfKnowledge(final WellOfKnowledge card) {
         super(card);
     }
 

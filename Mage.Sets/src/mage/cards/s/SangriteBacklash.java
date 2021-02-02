@@ -42,7 +42,7 @@ public final class SangriteBacklash extends CardImpl {
         
     }
 
-    public SangriteBacklash(final SangriteBacklash card) {
+    private SangriteBacklash(final SangriteBacklash card) {
         super(card);
     }
 

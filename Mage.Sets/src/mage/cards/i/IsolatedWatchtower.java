@@ -42,7 +42,7 @@ public final class IsolatedWatchtower extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IsolatedWatchtower(final IsolatedWatchtower card) {
+    private IsolatedWatchtower(final IsolatedWatchtower card) {
         super(card);
     }
 

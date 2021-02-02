@@ -27,7 +27,7 @@ public final class CopyArtifact extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 
-    public CopyArtifact(final CopyArtifact card) {
+    private CopyArtifact(final CopyArtifact card) {
         super(card);
     }
 

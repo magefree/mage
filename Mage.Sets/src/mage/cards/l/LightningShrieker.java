@@ -40,7 +40,7 @@ public final class LightningShrieker extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY, null, false));
     }
 
-    public LightningShrieker(final LightningShrieker card) {
+    private LightningShrieker(final LightningShrieker card) {
         super(card);
     }
 

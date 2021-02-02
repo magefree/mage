@@ -37,7 +37,7 @@ public final class Auramancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Auramancer(final Auramancer card) {
+    private Auramancer(final Auramancer card) {
         super(card);
     }
 

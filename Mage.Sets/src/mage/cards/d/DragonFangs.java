@@ -53,7 +53,7 @@ public final class DragonFangs extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonFangsEffect(), filter, true, SetTargetPointer.PERMANENT, null));
     }
 
-    public DragonFangs(final DragonFangs card) {
+    private DragonFangs(final DragonFangs card) {
         super(card);
     }
 

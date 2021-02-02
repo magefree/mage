@@ -27,7 +27,7 @@ public final class WallOfSwords extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WallOfSwords(final WallOfSwords card) {
+    private WallOfSwords(final WallOfSwords card) {
         super(card);
     }
 

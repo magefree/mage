@@ -37,7 +37,7 @@ public final class DiamondMare extends CardImpl {
         this.addAbility(new DiamondMareTriggeredAbility());
     }
 
-    public DiamondMare(final DiamondMare card) {
+    private DiamondMare(final DiamondMare card) {
         super(card);
     }
 

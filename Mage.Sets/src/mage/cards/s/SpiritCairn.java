@@ -29,7 +29,7 @@ public final class SpiritCairn extends CardImpl {
                 false, false));
     }
 
-    public SpiritCairn(final SpiritCairn card) {
+    private SpiritCairn(final SpiritCairn card) {
         super(card);
     }
 

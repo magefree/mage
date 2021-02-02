@@ -24,7 +24,7 @@ public final class Deathlace extends CardImpl {
         this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.BLACK, Duration.Custom));
     }
 
-    public Deathlace(final Deathlace card) {
+    private Deathlace(final Deathlace card) {
         super(card);
     }
 

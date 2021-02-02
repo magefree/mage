@@ -26,7 +26,7 @@ public final class ImpsTaunt extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ImpsTaunt(final ImpsTaunt card) {
+    private ImpsTaunt(final ImpsTaunt card) {
         super(card);
     }
 

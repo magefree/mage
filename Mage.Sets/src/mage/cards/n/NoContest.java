@@ -34,7 +34,7 @@ public final class NoContest extends CardImpl {
 
     }
 
-    public NoContest(final NoContest card) {
+    private NoContest(final NoContest card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class SummaryDismissal extends CardImpl {
         this.getSpellAbility().addEffect(new SummaryDismissalEffect());
     }
 
-    public SummaryDismissal(final SummaryDismissal card) {
+    private SummaryDismissal(final SummaryDismissal card) {
         super(card);
     }
 

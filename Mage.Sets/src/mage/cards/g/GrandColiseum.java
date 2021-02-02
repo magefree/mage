@@ -30,7 +30,7 @@ public final class GrandColiseum extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GrandColiseum(final GrandColiseum card) {
+    private GrandColiseum(final GrandColiseum card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class CruelFeeding extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
-    public CruelFeeding(final CruelFeeding card) {
+    private CruelFeeding(final CruelFeeding card) {
         super(card);
     }
 

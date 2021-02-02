@@ -30,7 +30,7 @@ public final class HeraldOfFaith extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new GainLifeEffect(2), false));
     }
 
-    public HeraldOfFaith(final HeraldOfFaith card) {
+    private HeraldOfFaith(final HeraldOfFaith card) {
         super(card);
     }
 

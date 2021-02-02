@@ -24,7 +24,7 @@ public final class MassHysteria extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false)));
     }
 
-    public MassHysteria(final MassHysteria card) {
+    private MassHysteria(final MassHysteria card) {
         super(card);
     }
 

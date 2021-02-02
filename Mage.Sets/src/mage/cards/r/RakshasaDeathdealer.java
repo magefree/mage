@@ -34,7 +34,7 @@ public final class RakshasaDeathdealer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}{G}")));
     }
 
-    public RakshasaDeathdealer(final RakshasaDeathdealer card) {
+    private RakshasaDeathdealer(final RakshasaDeathdealer card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class OnceMoreWithFeeling extends CardImpl {
         this.getSpellAbility().addEffect(new InfoEffect("<br>DCI ruling &mdash; A deck can have only one card named {this}"));
     }
 
-    public OnceMoreWithFeeling(final OnceMoreWithFeeling card) {
+    private OnceMoreWithFeeling(final OnceMoreWithFeeling card) {
         super(card);
     }
 

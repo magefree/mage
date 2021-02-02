@@ -45,7 +45,7 @@ public final class AmrouSeekers extends CardImpl {
 
     }
 
-    public AmrouSeekers(final AmrouSeekers card) {
+    private AmrouSeekers(final AmrouSeekers card) {
         super(card);
     }
 

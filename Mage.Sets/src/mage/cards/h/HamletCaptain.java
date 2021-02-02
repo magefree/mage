@@ -36,7 +36,7 @@ public final class HamletCaptain extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter, true), false));
     }
 
-    public HamletCaptain(final HamletCaptain card) {
+    private HamletCaptain(final HamletCaptain card) {
         super(card);
     }
 

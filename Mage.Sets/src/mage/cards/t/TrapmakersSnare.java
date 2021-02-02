@@ -30,7 +30,7 @@ public final class TrapmakersSnare extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
     }
 
-    public TrapmakersSnare(final TrapmakersSnare card) {
+    private TrapmakersSnare(final TrapmakersSnare card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class ThiefOfHope extends CardImpl {
         this.addAbility(new SoulshiftAbility(2));
     }
 
-    public ThiefOfHope(final ThiefOfHope card) {
+    private ThiefOfHope(final ThiefOfHope card) {
         super(card);
     }
 

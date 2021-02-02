@@ -53,7 +53,7 @@ public final class Endbringer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Endbringer(final Endbringer card) {
+    private Endbringer(final Endbringer card) {
         super(card);
     }
 

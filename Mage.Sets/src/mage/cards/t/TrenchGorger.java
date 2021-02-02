@@ -36,7 +36,7 @@ public final class TrenchGorger extends CardImpl {
 
     }
 
-    public TrenchGorger(final TrenchGorger card) {
+    private TrenchGorger(final TrenchGorger card) {
         super(card);
     }
 

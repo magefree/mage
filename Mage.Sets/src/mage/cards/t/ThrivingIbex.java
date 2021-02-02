@@ -35,7 +35,7 @@ public final class ThrivingIbex extends CardImpl {
                 "Whenever {this} attacks you may pay {E}{E}. If you do, put a +1/+1 counter on it."));
     }
 
-    public ThrivingIbex(final ThrivingIbex card) {
+    private ThrivingIbex(final ThrivingIbex card) {
         super(card);
     }
 

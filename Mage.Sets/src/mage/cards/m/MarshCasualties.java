@@ -43,7 +43,7 @@ public final class MarshCasualties extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public MarshCasualties(final MarshCasualties card) {
+    private MarshCasualties(final MarshCasualties card) {
         super(card);
     }
 

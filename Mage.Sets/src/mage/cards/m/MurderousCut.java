@@ -27,7 +27,7 @@ public final class MurderousCut extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public MurderousCut(final MurderousCut card) {
+    private MurderousCut(final MurderousCut card) {
         super(card);
     }
 

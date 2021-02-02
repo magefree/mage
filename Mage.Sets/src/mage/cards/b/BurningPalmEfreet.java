@@ -46,7 +46,7 @@ public final class BurningPalmEfreet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BurningPalmEfreet(final BurningPalmEfreet card) {
+    private BurningPalmEfreet(final BurningPalmEfreet card) {
         super(card);
     }
 

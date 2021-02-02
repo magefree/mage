@@ -32,7 +32,7 @@ public final class GangOfDevils extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GangOfDevils(final GangOfDevils card) {
+    private GangOfDevils(final GangOfDevils card) {
         super(card);
     }
 

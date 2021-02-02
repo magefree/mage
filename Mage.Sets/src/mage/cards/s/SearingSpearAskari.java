@@ -36,7 +36,7 @@ public final class SearingSpearAskari extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new MenaceAbility(), Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
     }
 
-    public SearingSpearAskari(final SearingSpearAskari card) {
+    private SearingSpearAskari(final SearingSpearAskari card) {
         super(card);
     }
 

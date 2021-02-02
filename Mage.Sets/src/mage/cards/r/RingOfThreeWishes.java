@@ -35,7 +35,7 @@ public final class RingOfThreeWishes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RingOfThreeWishes(final RingOfThreeWishes card) {
+    private RingOfThreeWishes(final RingOfThreeWishes card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class DuneDiviner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DuneDiviner(final DuneDiviner card) {
+    private DuneDiviner(final DuneDiviner card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class CryptOfTheEternals extends CardImpl {
         }
     }
 
-    public CryptOfTheEternals(final CryptOfTheEternals card) {
+    private CryptOfTheEternals(final CryptOfTheEternals card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class TajuruStalwart extends CardImpl {
 
     }
 
-    public TajuruStalwart(final TajuruStalwart card) {
+    private TajuruStalwart(final TajuruStalwart card) {
         super(card);
     }
 

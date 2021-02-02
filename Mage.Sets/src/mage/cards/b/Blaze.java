@@ -24,7 +24,7 @@ public final class Blaze extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public Blaze(final Blaze card) {
+    private Blaze(final Blaze card) {
         super(card);
     }
 

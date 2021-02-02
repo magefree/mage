@@ -56,7 +56,7 @@ public final class GleamOfAuthority extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GleamOfAuthority(final GleamOfAuthority card) {
+    private GleamOfAuthority(final GleamOfAuthority card) {
         super(card);
     }
 

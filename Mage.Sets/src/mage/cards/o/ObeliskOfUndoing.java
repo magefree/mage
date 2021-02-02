@@ -38,7 +38,7 @@ public final class ObeliskOfUndoing extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ObeliskOfUndoing(final ObeliskOfUndoing card) {
+    private ObeliskOfUndoing(final ObeliskOfUndoing card) {
         super(card);
     }
 

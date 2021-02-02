@@ -28,7 +28,7 @@ public final class RelicCrush extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT, false));
     }
 
-    public RelicCrush(final RelicCrush card) {
+    private RelicCrush(final RelicCrush card) {
         super(card);
     }
 

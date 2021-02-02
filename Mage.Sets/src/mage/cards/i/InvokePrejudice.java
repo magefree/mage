@@ -33,7 +33,7 @@ public final class InvokePrejudice extends CardImpl {
         this.addAbility(new InvokePrejudiceTriggeredAbility());
     }
 
-    public InvokePrejudice(final InvokePrejudice card) {
+    private InvokePrejudice(final InvokePrejudice card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class MakindiSliderunner extends CardImpl {
         this.addAbility(new LandfallAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
     }
 
-    public MakindiSliderunner(final MakindiSliderunner card) {
+    private MakindiSliderunner(final MakindiSliderunner card) {
         super(card);
     }
 

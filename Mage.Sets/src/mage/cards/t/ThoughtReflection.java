@@ -31,7 +31,7 @@ public final class ThoughtReflection extends CardImpl {
 
     }
 
-    public ThoughtReflection(final ThoughtReflection card) {
+    private ThoughtReflection(final ThoughtReflection card) {
         super(card);
     }
 

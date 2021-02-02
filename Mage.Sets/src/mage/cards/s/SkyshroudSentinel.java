@@ -37,7 +37,7 @@ public final class SkyshroudSentinel extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
     }
 
-    public SkyshroudSentinel(final SkyshroudSentinel card) {
+    private SkyshroudSentinel(final SkyshroudSentinel card) {
         super(card);
     }
 

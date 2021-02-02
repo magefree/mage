@@ -45,7 +45,7 @@ public final class BonePicker extends CardImpl {
 
     }
 
-    public BonePicker(final BonePicker card) {
+    private BonePicker(final BonePicker card) {
         super(card);
     }
 

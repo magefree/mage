@@ -29,7 +29,7 @@ public final class WardenOfGeometries extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public WardenOfGeometries(final WardenOfGeometries card) {
+    private WardenOfGeometries(final WardenOfGeometries card) {
         super(card);
     }
 

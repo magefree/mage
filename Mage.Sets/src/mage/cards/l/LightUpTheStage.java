@@ -33,7 +33,7 @@ public final class LightUpTheStage extends CardImpl {
         this.addAbility(new SpectacleAbility(this, new ManaCostsImpl("{R}")));
     }
 
-    public LightUpTheStage(final LightUpTheStage card) {
+    private LightUpTheStage(final LightUpTheStage card) {
         super(card);
     }
 

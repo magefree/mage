@@ -54,7 +54,7 @@ public final class DragonGrip extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DragonGrip(final DragonGrip card) {
+    private DragonGrip(final DragonGrip card) {
         super(card);
     }
 

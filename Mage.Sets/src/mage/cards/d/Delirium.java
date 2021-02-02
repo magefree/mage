@@ -46,7 +46,7 @@ public final class Delirium extends CardImpl {
         this.getSpellAbility().addEffect(new PreventDamageByTargetEffect(Duration.EndOfTurn, true).setText("and dealt by the creature this turn."));
     }
 
-    public Delirium(final Delirium card) {
+    private Delirium(final Delirium card) {
         super(card);
     }
 

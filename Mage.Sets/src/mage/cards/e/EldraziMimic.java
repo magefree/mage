@@ -43,7 +43,7 @@ public final class EldraziMimic extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new EldraziMimicEffect(), FILTER, true, SetTargetPointer.PERMANENT, null));
     }
 
-    public EldraziMimic(final EldraziMimic card) {
+    private EldraziMimic(final EldraziMimic card) {
         super(card);
     }
 

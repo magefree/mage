@@ -35,7 +35,7 @@ public final class LoxodonMystic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LoxodonMystic(final LoxodonMystic card) {
+    private LoxodonMystic(final LoxodonMystic card) {
         super(card);
     }
 

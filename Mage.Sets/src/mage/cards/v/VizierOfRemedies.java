@@ -31,7 +31,7 @@ public final class VizierOfRemedies extends CardImpl {
 
     }
 
-    public VizierOfRemedies(final VizierOfRemedies card) {
+    private VizierOfRemedies(final VizierOfRemedies card) {
         super(card);
     }
 

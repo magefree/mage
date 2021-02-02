@@ -43,7 +43,7 @@ public final class MysticConfluence extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
     }
 
-    public MysticConfluence(final MysticConfluence card) {
+    private MysticConfluence(final MysticConfluence card) {
         super(card);
     }
 

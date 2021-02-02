@@ -26,7 +26,7 @@ public final class SurgingAether extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
-    public SurgingAether(final SurgingAether card) {
+    private SurgingAether(final SurgingAether card) {
         super(card);
     }
 

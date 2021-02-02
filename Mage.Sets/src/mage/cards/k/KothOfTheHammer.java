@@ -58,7 +58,7 @@ public final class KothOfTheHammer extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new KothOfTheHammerEmblem()), -5));
     }
 
-    public KothOfTheHammer(final KothOfTheHammer card) {
+    private KothOfTheHammer(final KothOfTheHammer card) {
         super(card);
     }
 

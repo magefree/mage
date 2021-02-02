@@ -27,7 +27,7 @@ public final class Skullscorch extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Skullscorch(final Skullscorch card) {
+    private Skullscorch(final Skullscorch card) {
         super(card);
     }
 

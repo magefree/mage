@@ -34,7 +34,7 @@ public final class ConsulateCrackdown extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ConsulateCracksownExileEffect(), false));
     }
 
-    public ConsulateCrackdown(final ConsulateCrackdown card) {
+    private ConsulateCrackdown(final ConsulateCrackdown card) {
         super(card);
     }
 

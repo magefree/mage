@@ -57,7 +57,7 @@ public final class SarkhanDragonsoul extends CardImpl {
         this.addAbility(new LoyaltyAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter)), -9));
     }
 
-    public SarkhanDragonsoul(final SarkhanDragonsoul card) {
+    private SarkhanDragonsoul(final SarkhanDragonsoul card) {
         super(card);
     }
 

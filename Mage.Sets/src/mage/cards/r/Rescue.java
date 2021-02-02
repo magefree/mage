@@ -22,7 +22,7 @@ public final class Rescue extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledPermanent());
     }
 
-    public Rescue(final Rescue card) {
+    private Rescue(final Rescue card) {
         super(card);
     }
 

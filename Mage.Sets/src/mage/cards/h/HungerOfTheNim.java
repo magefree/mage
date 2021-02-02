@@ -28,7 +28,7 @@ public final class HungerOfTheNim extends CardImpl {
         getSpellAbility().addHint(ArtifactYouControlHint.instance);
     }
 
-    public HungerOfTheNim(final HungerOfTheNim card) {
+    private HungerOfTheNim(final HungerOfTheNim card) {
         super(card);
     }
 

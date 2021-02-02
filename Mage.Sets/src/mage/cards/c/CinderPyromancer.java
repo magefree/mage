@@ -44,7 +44,7 @@ public final class CinderPyromancer extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, true));
     }
 
-    public CinderPyromancer(final CinderPyromancer card) {
+    private CinderPyromancer(final CinderPyromancer card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class EnergyChamber extends CardImpl {
 
     }
 
-    public EnergyChamber(final EnergyChamber card) {
+    private EnergyChamber(final EnergyChamber card) {
         super(card);
     }
 

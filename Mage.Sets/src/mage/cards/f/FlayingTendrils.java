@@ -35,7 +35,7 @@ public final class FlayingTendrils extends CardImpl {
         this.getSpellAbility().addEffect(new FlayingTendrilsReplacementEffect());
     }
 
-    public FlayingTendrils(final FlayingTendrils card) {
+    private FlayingTendrils(final FlayingTendrils card) {
         super(card);
     }
 

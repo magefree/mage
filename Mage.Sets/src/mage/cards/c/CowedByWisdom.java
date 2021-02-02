@@ -45,7 +45,7 @@ public final class CowedByWisdom extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CowedByWisdomayCostToAttackBlockEffect()));
     }
 
-    public CowedByWisdom(final CowedByWisdom card) {
+    private CowedByWisdom(final CowedByWisdom card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class InfuseWithTheElements extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public InfuseWithTheElements(final InfuseWithTheElements card) {
+    private InfuseWithTheElements(final InfuseWithTheElements card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class Vengevine extends CardImpl {
         this.addAbility(new VengevineAbility(), new VengevineWatcher());
     }
 
-    public Vengevine(final Vengevine card) {
+    private Vengevine(final Vengevine card) {
         super(card);
     }
 

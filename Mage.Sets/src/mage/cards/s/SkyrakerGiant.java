@@ -25,7 +25,7 @@ public final class SkyrakerGiant extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public SkyrakerGiant(final SkyrakerGiant card) {
+    private SkyrakerGiant(final SkyrakerGiant card) {
         super(card);
     }
 

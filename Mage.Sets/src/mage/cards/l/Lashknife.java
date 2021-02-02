@@ -59,7 +59,7 @@ public final class Lashknife extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public Lashknife(final Lashknife card) {
+    private Lashknife(final Lashknife card) {
         super(card);
     }
 

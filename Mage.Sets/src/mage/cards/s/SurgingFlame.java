@@ -26,7 +26,7 @@ public final class SurgingFlame extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public SurgingFlame(final SurgingFlame card) {
+    private SurgingFlame(final SurgingFlame card) {
         super(card);
     }
 

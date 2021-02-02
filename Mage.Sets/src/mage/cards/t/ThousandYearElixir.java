@@ -40,7 +40,7 @@ public final class ThousandYearElixir extends CardImpl {
 
     }
 
-    public ThousandYearElixir(final ThousandYearElixir card) {
+    private ThousandYearElixir(final ThousandYearElixir card) {
         super(card);
     }
 

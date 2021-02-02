@@ -36,7 +36,7 @@ public final class AkoumStonewaker extends CardImpl {
 
     }
 
-    public AkoumStonewaker(final AkoumStonewaker card) {
+    private AkoumStonewaker(final AkoumStonewaker card) {
         super(card);
     }
 

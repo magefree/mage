@@ -41,7 +41,7 @@ public final class Draco extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DracoSacrificeUnlessPaysEffect(), TargetController.YOU, false));
     }
 
-    public Draco(final Draco card) {
+    private Draco(final Draco card) {
         super(card);
     }
 

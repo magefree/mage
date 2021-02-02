@@ -32,7 +32,7 @@ public final class NightmaresThirst extends CardImpl {
         this.getSpellAbility().addWatcher(new PlayerGainedLifeWatcher());
     }
 
-    public NightmaresThirst(final NightmaresThirst card) {
+    private NightmaresThirst(final NightmaresThirst card) {
         super(card);
     }
 

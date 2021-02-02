@@ -30,7 +30,7 @@ public final class BoaConstrictor extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn), new TapSourceCost()));
     }
 
-    public BoaConstrictor(final BoaConstrictor card) {
+    private BoaConstrictor(final BoaConstrictor card) {
         super(card);
     }
 

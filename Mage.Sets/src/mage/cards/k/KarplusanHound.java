@@ -40,7 +40,7 @@ public final class KarplusanHound extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KarplusanHound(final KarplusanHound card) {
+    private KarplusanHound(final KarplusanHound card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class MournersShield extends CardImpl {
         this.addAbility(preventAbility);
     }
 
-    public MournersShield(final MournersShield card) {
+    private MournersShield(final MournersShield card) {
         super(card);
     }
 

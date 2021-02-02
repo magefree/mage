@@ -23,7 +23,7 @@ public final class HowlingFury extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public HowlingFury(final HowlingFury card) {
+    private HowlingFury(final HowlingFury card) {
         super(card);
     }
 

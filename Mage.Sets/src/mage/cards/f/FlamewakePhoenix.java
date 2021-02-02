@@ -49,7 +49,7 @@ public final class FlamewakePhoenix extends CardImpl {
         ).addHint(FerociousHint.instance));
     }
 
-    public FlamewakePhoenix(final FlamewakePhoenix card) {
+    private FlamewakePhoenix(final FlamewakePhoenix card) {
         super(card);
     }
 

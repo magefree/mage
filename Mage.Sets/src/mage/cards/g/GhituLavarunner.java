@@ -46,7 +46,7 @@ public final class GhituLavarunner extends CardImpl{
         this.addAbility(ability);
     }
 
-    public GhituLavarunner(final GhituLavarunner card) {
+    private GhituLavarunner(final GhituLavarunner card) {
         super(card);
     }
 

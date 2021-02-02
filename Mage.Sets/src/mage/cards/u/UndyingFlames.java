@@ -33,7 +33,7 @@ public final class UndyingFlames extends CardImpl {
 
     }
 
-    public UndyingFlames(final UndyingFlames card) {
+    private UndyingFlames(final UndyingFlames card) {
         super(card);
     }
 

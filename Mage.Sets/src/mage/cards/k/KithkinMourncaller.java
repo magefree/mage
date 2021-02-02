@@ -36,7 +36,7 @@ public final class KithkinMourncaller extends CardImpl {
             true, filter, false, true));
     }
 
-    public KithkinMourncaller(final KithkinMourncaller card) {
+    private KithkinMourncaller(final KithkinMourncaller card) {
         super(card);
     }
 

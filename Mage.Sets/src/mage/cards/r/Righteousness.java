@@ -27,7 +27,7 @@ public final class Righteousness extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public Righteousness(final Righteousness card) {
+    private Righteousness(final Righteousness card) {
         super(card);
     }
 

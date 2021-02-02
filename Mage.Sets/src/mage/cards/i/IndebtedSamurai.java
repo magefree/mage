@@ -41,7 +41,7 @@ public final class IndebtedSamurai extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true, filter));
     }
 
-    public IndebtedSamurai(final IndebtedSamurai card) {
+    private IndebtedSamurai(final IndebtedSamurai card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class SoulReap extends CardImpl {
 
     }
 
-    public SoulReap(final SoulReap card) {
+    private SoulReap(final SoulReap card) {
         super(card);
     }
 

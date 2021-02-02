@@ -28,7 +28,7 @@ public final class GhoulsFeast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public GhoulsFeast(final GhoulsFeast card) {
+    private GhoulsFeast(final GhoulsFeast card) {
         super(card);
     }
 

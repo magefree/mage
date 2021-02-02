@@ -21,7 +21,7 @@ public final class SeagrafSkaab extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public SeagrafSkaab(final SeagrafSkaab card) {
+    private SeagrafSkaab(final SeagrafSkaab card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class NikkoOnna extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
     }
 
-    public NikkoOnna(final NikkoOnna card) {
+    private NikkoOnna(final NikkoOnna card) {
         super(card);
     }
 

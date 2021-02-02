@@ -35,7 +35,7 @@ public final class FoulRenewal extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FoulRenewal(final FoulRenewal card) {
+    private FoulRenewal(final FoulRenewal card) {
         super(card);
     }
 

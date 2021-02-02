@@ -34,7 +34,7 @@ public final class BadMoon extends CardImpl {
         
     }
 
-    public BadMoon(final BadMoon card) {
+    private BadMoon(final BadMoon card) {
         super(card);
     }
 

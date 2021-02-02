@@ -37,7 +37,7 @@ public final class DragonArch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DragonArch(final DragonArch card) {
+    private DragonArch(final DragonArch card) {
         super(card);
     }
 

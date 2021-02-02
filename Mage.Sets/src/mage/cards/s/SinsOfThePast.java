@@ -35,7 +35,7 @@ public final class SinsOfThePast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterInstantOrSorceryCard()));
     }
 
-    public SinsOfThePast(final SinsOfThePast card) {
+    private SinsOfThePast(final SinsOfThePast card) {
         super(card);
     }
 

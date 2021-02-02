@@ -44,7 +44,7 @@ public final class MuscleBurst extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public MuscleBurst(final MuscleBurst card) {
+    private MuscleBurst(final MuscleBurst card) {
         super(card);
     }
 

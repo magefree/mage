@@ -25,7 +25,7 @@ public final class DrossProwler extends CardImpl {
         this.addAbility(FearAbility.getInstance());
     }
 
-    public DrossProwler(final DrossProwler card) {
+    private DrossProwler(final DrossProwler card) {
         super(card);
     }
 

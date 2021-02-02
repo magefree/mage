@@ -72,7 +72,7 @@ public final class AngelOfCondemnation extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AngelOfCondemnation(final AngelOfCondemnation card) {
+    private AngelOfCondemnation(final AngelOfCondemnation card) {
         super(card);
     }
 

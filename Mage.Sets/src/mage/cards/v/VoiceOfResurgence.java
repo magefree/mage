@@ -45,7 +45,7 @@ public final class VoiceOfResurgence extends CardImpl {
 
     }
 
-    public VoiceOfResurgence(final VoiceOfResurgence card) {
+    private VoiceOfResurgence(final VoiceOfResurgence card) {
         super(card);
     }
 

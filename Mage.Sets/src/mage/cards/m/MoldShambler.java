@@ -47,7 +47,7 @@ public final class MoldShambler extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, destroy target noncreature permanent."));
     }
 
-    public MoldShambler(final MoldShambler card) {
+    private MoldShambler(final MoldShambler card) {
         super(card);
     }
 

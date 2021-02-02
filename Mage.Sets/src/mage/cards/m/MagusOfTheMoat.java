@@ -39,7 +39,7 @@ public final class MagusOfTheMoat extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAnyPlayerAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
-    public MagusOfTheMoat(final MagusOfTheMoat card) {
+    private MagusOfTheMoat(final MagusOfTheMoat card) {
         super(card);
     }
 

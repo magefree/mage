@@ -43,7 +43,7 @@ public final class StormscapeApprentice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StormscapeApprentice(final StormscapeApprentice card) {
+    private StormscapeApprentice(final StormscapeApprentice card) {
         super(card);
     }
 

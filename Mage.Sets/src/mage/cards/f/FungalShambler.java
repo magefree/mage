@@ -39,7 +39,7 @@ public final class FungalShambler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FungalShambler(final FungalShambler card) {
+    private FungalShambler(final FungalShambler card) {
         super(card);
     }
 

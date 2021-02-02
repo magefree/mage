@@ -22,7 +22,7 @@ public final class HyenaPack extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public HyenaPack(final HyenaPack card) {
+    private HyenaPack(final HyenaPack card) {
         super(card);
     }
 

@@ -55,7 +55,7 @@ public final class NissaVastwoodSeer extends CardImpl {
                 "Whenever a land enters the battlefield under your control, if you control seven or more lands, exile {this}, then return her to the battlefield transformed under her owner's control."));
     }
 
-    public NissaVastwoodSeer(final NissaVastwoodSeer card) {
+    private NissaVastwoodSeer(final NissaVastwoodSeer card) {
         super(card);
     }
 

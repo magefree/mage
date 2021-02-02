@@ -39,7 +39,7 @@ public final class Banefire extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new BanefireCantCounterEffect()));
     }
 
-    public Banefire(final Banefire card) {
+    private Banefire(final Banefire card) {
         super(card);
     }
 

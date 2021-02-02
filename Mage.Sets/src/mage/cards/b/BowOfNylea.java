@@ -74,7 +74,7 @@ public final class BowOfNylea extends CardImpl {
 
     }
 
-    public BowOfNylea(final BowOfNylea card) {
+    private BowOfNylea(final BowOfNylea card) {
         super(card);
     }
 

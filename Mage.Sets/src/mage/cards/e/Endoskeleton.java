@@ -37,7 +37,7 @@ public final class Endoskeleton extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Endoskeleton(final Endoskeleton card) {
+    private Endoskeleton(final Endoskeleton card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class ShieldOfDutyAndReason extends CardImpl {
             AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
-    public ShieldOfDutyAndReason(final ShieldOfDutyAndReason card) {
+    private ShieldOfDutyAndReason(final ShieldOfDutyAndReason card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class Rupture extends CardImpl {
         this.getSpellAbility().addEffect(new RuptureEffect());
     }
 
-    public Rupture(final Rupture card) {
+    private Rupture(final Rupture card) {
         super(card);
     }
 

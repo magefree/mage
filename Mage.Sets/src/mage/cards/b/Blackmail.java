@@ -24,7 +24,7 @@ public final class Blackmail extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Blackmail(final Blackmail card) {
+    private Blackmail(final Blackmail card) {
         super(card);
     }
 

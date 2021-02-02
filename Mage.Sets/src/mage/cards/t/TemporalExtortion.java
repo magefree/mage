@@ -31,7 +31,7 @@ public final class TemporalExtortion extends CardImpl {
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());
     }
 
-    public TemporalExtortion(final TemporalExtortion card) {
+    private TemporalExtortion(final TemporalExtortion card) {
         super(card);
     }
 

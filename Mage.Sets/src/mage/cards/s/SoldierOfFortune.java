@@ -36,7 +36,7 @@ public final class SoldierOfFortune extends CardImpl {
 		this.addAbility(ability);
     }
 
-    public SoldierOfFortune(final SoldierOfFortune card) {
+    private SoldierOfFortune(final SoldierOfFortune card) {
         super(card);
     }
 

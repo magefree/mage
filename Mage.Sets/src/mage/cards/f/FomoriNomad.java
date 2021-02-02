@@ -23,7 +23,7 @@ public final class FomoriNomad extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public FomoriNomad(final FomoriNomad card) {
+    private FomoriNomad(final FomoriNomad card) {
         super(card);
     }
 

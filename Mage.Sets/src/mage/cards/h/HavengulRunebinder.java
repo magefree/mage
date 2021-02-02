@@ -52,7 +52,7 @@ public final class HavengulRunebinder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HavengulRunebinder(final HavengulRunebinder card) {
+    private HavengulRunebinder(final HavengulRunebinder card) {
         super(card);
     }
 

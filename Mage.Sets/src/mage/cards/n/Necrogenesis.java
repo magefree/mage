@@ -31,7 +31,7 @@ public final class Necrogenesis extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Necrogenesis(final Necrogenesis card) {
+    private Necrogenesis(final Necrogenesis card) {
         super(card);
     }
 

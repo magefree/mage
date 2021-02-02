@@ -29,7 +29,7 @@ public final class ChainersEdict extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{B}{B}"), TimingRule.SORCERY));
     }
 
-    public ChainersEdict(final ChainersEdict card) {
+    private ChainersEdict(final ChainersEdict card) {
         super(card);
     }
 

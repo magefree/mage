@@ -32,7 +32,7 @@ public final class AkromasDevoted extends CardImpl {
             Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.CLERIC, "Cleric creatures"))));
     }
 
-    public AkromasDevoted(final AkromasDevoted card) {
+    private AkromasDevoted(final AkromasDevoted card) {
         super(card);
     }
 

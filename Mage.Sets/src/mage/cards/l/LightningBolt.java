@@ -21,7 +21,7 @@ public final class LightningBolt extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
     }
 
-    public LightningBolt(final LightningBolt card) {
+    private LightningBolt(final LightningBolt card) {
         super(card);
     }
 

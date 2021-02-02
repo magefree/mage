@@ -28,7 +28,7 @@ public final class OjutaisBreath extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public OjutaisBreath(final OjutaisBreath card) {
+    private OjutaisBreath(final OjutaisBreath card) {
         super(card);
     }
 

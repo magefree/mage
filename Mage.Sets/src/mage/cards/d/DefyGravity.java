@@ -29,7 +29,7 @@ public final class DefyGravity extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{U}"), TimingRule.INSTANT));
     }
 
-    public DefyGravity(final DefyGravity card) {
+    private DefyGravity(final DefyGravity card) {
         super(card);
     }
 

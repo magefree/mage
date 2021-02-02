@@ -55,7 +55,7 @@ public final class SoulOfShandalar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoulOfShandalar(final SoulOfShandalar card) {
+    private SoulOfShandalar(final SoulOfShandalar card) {
         super(card);
     }
 

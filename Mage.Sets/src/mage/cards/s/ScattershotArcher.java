@@ -39,7 +39,7 @@ public final class ScattershotArcher extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new TapSourceCost()));
     }
 
-    public ScattershotArcher(final ScattershotArcher card) {
+    private ScattershotArcher(final ScattershotArcher card) {
         super(card);
     }
 

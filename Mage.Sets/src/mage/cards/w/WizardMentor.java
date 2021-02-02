@@ -48,7 +48,7 @@ public final class WizardMentor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WizardMentor(final WizardMentor card) {
+    private WizardMentor(final WizardMentor card) {
         super(card);
     }
 

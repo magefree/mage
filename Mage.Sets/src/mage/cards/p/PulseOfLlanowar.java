@@ -34,7 +34,7 @@ public final class PulseOfLlanowar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PulseOfLlanowarReplacementEffect()));
     }
 
-    public PulseOfLlanowar(final PulseOfLlanowar card) {
+    private PulseOfLlanowar(final PulseOfLlanowar card) {
         super(card);
     }
 

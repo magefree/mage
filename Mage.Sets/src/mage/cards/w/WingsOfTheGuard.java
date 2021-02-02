@@ -28,7 +28,7 @@ public final class WingsOfTheGuard extends CardImpl {
         this.addAbility(new MeleeAbility());
     }
 
-    public WingsOfTheGuard(final WingsOfTheGuard card) {
+    private WingsOfTheGuard(final WingsOfTheGuard card) {
         super(card);
     }
 

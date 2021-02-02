@@ -39,7 +39,7 @@ public final class SphinxsTutelage extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl<>("{5}{U}")));
     }
 
-    public SphinxsTutelage(final SphinxsTutelage card) {
+    private SphinxsTutelage(final SphinxsTutelage card) {
         super(card);
     }
 

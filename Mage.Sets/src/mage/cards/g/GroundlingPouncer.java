@@ -57,7 +57,7 @@ public final class GroundlingPouncer extends CardImpl {
 
     }
 
-    public GroundlingPouncer(final GroundlingPouncer card) {
+    private GroundlingPouncer(final GroundlingPouncer card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class SnowCoveredSwamp extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public SnowCoveredSwamp(final SnowCoveredSwamp card) {
+    private SnowCoveredSwamp(final SnowCoveredSwamp card) {
         super(card);
     }
 

@@ -70,7 +70,7 @@ public final class TamiyoFieldResearcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TamiyoFieldResearcher(final TamiyoFieldResearcher card) {
+    private TamiyoFieldResearcher(final TamiyoFieldResearcher card) {
         super(card);
     }
 

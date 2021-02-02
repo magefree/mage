@@ -42,7 +42,7 @@ public final class FrogtosserBanneret extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public FrogtosserBanneret(final FrogtosserBanneret card) {
+    private FrogtosserBanneret(final FrogtosserBanneret card) {
         super(card);
     }
 

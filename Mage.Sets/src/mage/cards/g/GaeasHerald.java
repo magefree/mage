@@ -34,7 +34,7 @@ public final class GaeasHerald extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCounterEffect()));
     }
 
-    public GaeasHerald(final GaeasHerald card) {
+    private GaeasHerald(final GaeasHerald card) {
         super(card);
     }
 

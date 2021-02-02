@@ -31,7 +31,7 @@ public final class DeadlyRecluse extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public DeadlyRecluse(final DeadlyRecluse card) {
+    private DeadlyRecluse(final DeadlyRecluse card) {
         super(card);
     }
 

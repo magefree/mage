@@ -23,7 +23,7 @@ public final class LumengridWarden extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public LumengridWarden(final LumengridWarden card) {
+    private LumengridWarden(final LumengridWarden card) {
         super(card);
     }
 

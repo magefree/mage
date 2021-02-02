@@ -38,7 +38,7 @@ public final class TrestleTroll extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}{G}")));
     }
 
-    public TrestleTroll(final TrestleTroll card) {
+    private TrestleTroll(final TrestleTroll card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class Disentomb extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 
-    public Disentomb(final Disentomb card) {
+    private Disentomb(final Disentomb card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class PavelMaliki extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{B}{R}")));
     }
 
-    public PavelMaliki(final PavelMaliki card) {
+    private PavelMaliki(final PavelMaliki card) {
         super(card);
     }
 

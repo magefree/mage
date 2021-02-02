@@ -29,7 +29,7 @@ public final class CrystalVein extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrystalVein(final CrystalVein card) {
+    private CrystalVein(final CrystalVein card) {
         super(card);
     }
 

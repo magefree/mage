@@ -42,7 +42,7 @@ public final class TeferisProtection extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public TeferisProtection(final TeferisProtection card) {
+    private TeferisProtection(final TeferisProtection card) {
         super(card);
     }
 

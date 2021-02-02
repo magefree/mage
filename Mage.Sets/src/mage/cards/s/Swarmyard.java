@@ -46,7 +46,7 @@ public final class Swarmyard extends CardImpl {
 
     }
 
-    public Swarmyard(final Swarmyard card) {
+    private Swarmyard(final Swarmyard card) {
         super(card);
     }
 

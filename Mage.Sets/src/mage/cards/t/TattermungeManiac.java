@@ -26,7 +26,7 @@ public final class TattermungeManiac extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public TattermungeManiac(final TattermungeManiac card) {
+    private TattermungeManiac(final TattermungeManiac card) {
         super(card);
     }
 

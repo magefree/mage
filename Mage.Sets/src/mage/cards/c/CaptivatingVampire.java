@@ -52,7 +52,7 @@ public final class CaptivatingVampire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CaptivatingVampire(final CaptivatingVampire card) {
+    private CaptivatingVampire(final CaptivatingVampire card) {
         super(card);
     }
 

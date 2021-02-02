@@ -38,7 +38,7 @@ public final class DruidLyrist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DruidLyrist(final DruidLyrist card) {
+    private DruidLyrist(final DruidLyrist card) {
         super(card);
     }
 

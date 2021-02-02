@@ -48,7 +48,7 @@ public final class VedalkenCertarch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VedalkenCertarch(final VedalkenCertarch card) {
+    private VedalkenCertarch(final VedalkenCertarch card) {
         super(card);
     }
 

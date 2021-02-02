@@ -37,7 +37,7 @@ public final class Sandskin extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAndByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", true)));
     }
 
-    public Sandskin(final Sandskin card) {
+    private Sandskin(final Sandskin card) {
         super(card);
     }
 

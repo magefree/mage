@@ -52,7 +52,7 @@ public final class GeralfsMasterpiece extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GeralfsMasterpiece(final GeralfsMasterpiece card) {
+    private GeralfsMasterpiece(final GeralfsMasterpiece card) {
         super(card);
     }
 

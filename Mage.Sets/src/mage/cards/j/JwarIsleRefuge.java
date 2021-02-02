@@ -26,7 +26,7 @@ public final class JwarIsleRefuge extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
     }
 
-    public JwarIsleRefuge(final JwarIsleRefuge card) {
+    private JwarIsleRefuge(final JwarIsleRefuge card) {
         super(card);
     }
 

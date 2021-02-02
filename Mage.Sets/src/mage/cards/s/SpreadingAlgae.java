@@ -47,7 +47,7 @@ public final class SpreadingAlgae extends CardImpl {
 
     }
 
-    public SpreadingAlgae(final SpreadingAlgae card) {
+    private SpreadingAlgae(final SpreadingAlgae card) {
         super(card);
     }
 

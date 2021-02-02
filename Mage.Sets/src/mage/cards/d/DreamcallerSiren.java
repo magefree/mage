@@ -59,7 +59,7 @@ public final class DreamcallerSiren extends CardImpl {
                 "when {this} enters the battlefield, if you control another Pirate, tap up to two target nonland permanents."));
     }
 
-    public DreamcallerSiren(final DreamcallerSiren card) {
+    private DreamcallerSiren(final DreamcallerSiren card) {
         super(card);
     }
 

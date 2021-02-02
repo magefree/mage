@@ -30,7 +30,7 @@ public final class KeldonRaider extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost())));
     }
 
-    public KeldonRaider(final KeldonRaider card) {
+    private KeldonRaider(final KeldonRaider card) {
         super(card);
     }
 

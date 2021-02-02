@@ -40,7 +40,7 @@ public final class BarbedBackWurm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BarbedBackWurm(final BarbedBackWurm card) {
+    private BarbedBackWurm(final BarbedBackWurm card) {
         super(card);
     }
 

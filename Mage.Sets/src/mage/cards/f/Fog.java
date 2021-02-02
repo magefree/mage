@@ -22,7 +22,7 @@ public final class Fog extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
     }
 
-    public Fog(final Fog card) {
+    private Fog(final Fog card) {
         super(card);
     }
 

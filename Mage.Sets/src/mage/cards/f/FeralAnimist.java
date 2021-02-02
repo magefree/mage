@@ -35,7 +35,7 @@ public final class FeralAnimist extends CardImpl {
                 new GenericManaCost(3)));
     }
 
-    public FeralAnimist(final FeralAnimist card) {
+    private FeralAnimist(final FeralAnimist card) {
         super(card);
     }
 

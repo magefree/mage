@@ -25,7 +25,7 @@ public final class DuskImp extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public DuskImp(final DuskImp card) {
+    private DuskImp(final DuskImp card) {
         super(card);
     }
 

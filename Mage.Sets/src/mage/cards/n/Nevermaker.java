@@ -40,7 +40,7 @@ public final class Nevermaker extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{3}{U}"));
     }
 
-    public Nevermaker(final Nevermaker card) {
+    private Nevermaker(final Nevermaker card) {
         super(card);
     }
 

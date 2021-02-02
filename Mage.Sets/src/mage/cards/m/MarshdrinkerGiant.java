@@ -45,7 +45,7 @@ public final class MarshdrinkerGiant extends CardImpl {
         
     }
 
-    public MarshdrinkerGiant(final MarshdrinkerGiant card) {
+    private MarshdrinkerGiant(final MarshdrinkerGiant card) {
         super(card);
     }
 

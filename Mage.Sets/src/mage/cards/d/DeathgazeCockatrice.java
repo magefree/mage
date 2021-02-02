@@ -29,7 +29,7 @@ public final class DeathgazeCockatrice extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public DeathgazeCockatrice(final DeathgazeCockatrice card) {
+    private DeathgazeCockatrice(final DeathgazeCockatrice card) {
         super(card);
     }
 

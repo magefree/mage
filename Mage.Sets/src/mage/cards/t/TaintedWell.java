@@ -42,7 +42,7 @@ public final class TaintedWell extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect(SubType.SWAMP)));
     }
 
-    public TaintedWell(final TaintedWell card) {
+    private TaintedWell(final TaintedWell card) {
         super(card);
     }
 

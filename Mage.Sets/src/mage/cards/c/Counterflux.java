@@ -56,7 +56,7 @@ public final class Counterflux extends CardImpl {
         this.addAbility(new OverloadAbility(this, new CounterfluxEffect(), new ManaCostsImpl("{1}{U}{U}{R}")));
     }
 
-    public Counterflux(final Counterflux card) {
+    private Counterflux(final Counterflux card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class ClingingAnemones extends CardImpl {
         this.addAbility(new EvolveAbility());
     }
 
-    public ClingingAnemones(final ClingingAnemones card) {
+    private ClingingAnemones(final ClingingAnemones card) {
         super(card);
     }
 

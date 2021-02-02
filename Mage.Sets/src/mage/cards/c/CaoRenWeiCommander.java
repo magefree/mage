@@ -33,7 +33,7 @@ public final class CaoRenWeiCommander extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(3)));
     }
 
-    public CaoRenWeiCommander(final CaoRenWeiCommander card) {
+    private CaoRenWeiCommander(final CaoRenWeiCommander card) {
         super(card);
     }
 

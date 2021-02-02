@@ -29,7 +29,7 @@ public final class PowerstoneMinefield extends CardImpl {
         this.addAbility(new PowerstoneMinefieldTriggeredAbility());
     }
 
-    public PowerstoneMinefield(final PowerstoneMinefield card) {
+    private PowerstoneMinefield(final PowerstoneMinefield card) {
         super(card);
     }
 

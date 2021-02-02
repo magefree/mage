@@ -45,7 +45,7 @@ public final class BountySpotter extends CardImpl {
 
     }
 
-    public BountySpotter(final BountySpotter card) {
+    private BountySpotter(final BountySpotter card) {
         super(card);
     }
 

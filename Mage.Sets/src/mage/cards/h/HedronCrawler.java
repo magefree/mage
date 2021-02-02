@@ -25,7 +25,7 @@ public final class HedronCrawler extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public HedronCrawler(final HedronCrawler card) {
+    private HedronCrawler(final HedronCrawler card) {
         super(card);
     }
 

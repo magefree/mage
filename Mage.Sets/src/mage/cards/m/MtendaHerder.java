@@ -27,7 +27,7 @@ public final class MtendaHerder extends CardImpl {
         this.addAbility(new FlankingAbility());
     }
 
-    public MtendaHerder(final MtendaHerder card) {
+    private MtendaHerder(final MtendaHerder card) {
         super(card);
     }
 

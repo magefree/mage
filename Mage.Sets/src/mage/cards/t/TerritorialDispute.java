@@ -39,7 +39,7 @@ public final class TerritorialDispute extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TerritorialDisputeEffect()));
     }
 
-    public TerritorialDispute(final TerritorialDispute card) {
+    private TerritorialDispute(final TerritorialDispute card) {
         super(card);
     }
 

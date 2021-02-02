@@ -27,7 +27,7 @@ public final class NightmareVoid extends CardImpl {
         this.addAbility(new DredgeAbility(2));
     }
 
-    public NightmareVoid(final NightmareVoid card) {
+    private NightmareVoid(final NightmareVoid card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class PowerLeak extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PowerLeakEffect(), TargetController.CONTROLLER_ATTACHED_TO, false, true, "At the beginning of the upkeep of enchanted enchantment's controller, "));
     }
 
-    public PowerLeak(final PowerLeak card) {
+    private PowerLeak(final PowerLeak card) {
         super(card);
     }
 

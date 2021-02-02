@@ -38,7 +38,7 @@ public final class ChampionOfTheParish extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
     }
 
-    public ChampionOfTheParish(final ChampionOfTheParish card) {
+    private ChampionOfTheParish(final ChampionOfTheParish card) {
         super(card);
     }
 

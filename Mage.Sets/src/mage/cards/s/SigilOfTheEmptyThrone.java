@@ -30,7 +30,7 @@ public final class SigilOfTheEmptyThrone extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new AngelToken()), filter, false));
     }
 
-    public SigilOfTheEmptyThrone(final SigilOfTheEmptyThrone card) {
+    private SigilOfTheEmptyThrone(final SigilOfTheEmptyThrone card) {
         super(card);
     }
 

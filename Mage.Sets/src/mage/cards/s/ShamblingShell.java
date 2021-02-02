@@ -38,7 +38,7 @@ public final class ShamblingShell extends CardImpl {
         this.addAbility(new DredgeAbility(3));
     }
 
-    public ShamblingShell(final ShamblingShell card) {
+    private ShamblingShell(final ShamblingShell card) {
         super(card);
     }
 

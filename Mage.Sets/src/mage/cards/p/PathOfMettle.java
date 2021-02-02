@@ -55,7 +55,7 @@ public final class PathOfMettle extends CardImpl {
         this.addAbility(new PathOfMettleTriggeredAbility());
     }
 
-    public PathOfMettle(final PathOfMettle card) {
+    private PathOfMettle(final PathOfMettle card) {
         super(card);
     }
 

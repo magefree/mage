@@ -23,7 +23,7 @@ public final class HeatRay extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public HeatRay(final HeatRay card) {
+    private HeatRay(final HeatRay card) {
         super(card);
     }
 

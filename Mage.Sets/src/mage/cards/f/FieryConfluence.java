@@ -42,7 +42,7 @@ public final class FieryConfluence extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
     }
 
-    public FieryConfluence(final FieryConfluence card) {
+    private FieryConfluence(final FieryConfluence card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class BenalishMissionary extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BenalishMissionary(final BenalishMissionary card) {
+    private BenalishMissionary(final BenalishMissionary card) {
         super(card);
     }
 

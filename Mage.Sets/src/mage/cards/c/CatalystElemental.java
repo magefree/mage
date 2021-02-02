@@ -29,7 +29,7 @@ public final class CatalystElemental extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new SacrificeSourceCost()));
     }
 
-    public CatalystElemental(final CatalystElemental card) {
+    private CatalystElemental(final CatalystElemental card) {
         super(card);
     }
 

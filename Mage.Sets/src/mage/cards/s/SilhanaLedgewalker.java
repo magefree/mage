@@ -37,7 +37,7 @@ public final class SilhanaLedgewalker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SilhanaLedgewalkerEffect()));
     }
 
-    public SilhanaLedgewalker(final SilhanaLedgewalker card) {
+    private SilhanaLedgewalker(final SilhanaLedgewalker card) {
         super(card);
     }
 

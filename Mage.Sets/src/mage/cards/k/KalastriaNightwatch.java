@@ -30,7 +30,7 @@ public final class KalastriaNightwatch extends CardImpl {
         this.addAbility(new GainLifeControllerTriggeredAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), false));
     }
 
-    public KalastriaNightwatch(final KalastriaNightwatch card) {
+    private KalastriaNightwatch(final KalastriaNightwatch card) {
         super(card);
     }
 

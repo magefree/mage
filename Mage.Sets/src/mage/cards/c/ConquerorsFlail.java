@@ -44,7 +44,7 @@ public final class ConquerorsFlail extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public ConquerorsFlail(final ConquerorsFlail card) {
+    private ConquerorsFlail(final ConquerorsFlail card) {
         super(card);
     }
 

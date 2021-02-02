@@ -44,7 +44,7 @@ public final class AuriokSurvivors extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AuriokSurvivors(final AuriokSurvivors card) {
+    private AuriokSurvivors(final AuriokSurvivors card) {
         super(card);
     }
 

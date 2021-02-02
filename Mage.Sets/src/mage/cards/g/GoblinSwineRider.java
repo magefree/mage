@@ -27,7 +27,7 @@ public final class GoblinSwineRider extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new DamageAllEffect(2, "it", new FilterAttackingOrBlockingCreature("attacking creature and each blocking creature")), false));
     }
 
-    public GoblinSwineRider(final GoblinSwineRider card) {
+    private GoblinSwineRider(final GoblinSwineRider card) {
         super(card);
     }
 

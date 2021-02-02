@@ -38,7 +38,7 @@ public final class AcademyResearchers extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AcademyResearchersEffect(), true));
     }
 
-    public AcademyResearchers(final AcademyResearchers card) {
+    private AcademyResearchers(final AcademyResearchers card) {
         super(card);
     }
 

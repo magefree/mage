@@ -45,7 +45,7 @@ public final class KambalConsulOfAllocation extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KambalConsulOfAllocation(final KambalConsulOfAllocation card) {
+    private KambalConsulOfAllocation(final KambalConsulOfAllocation card) {
         super(card);
     }
 

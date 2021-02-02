@@ -58,7 +58,7 @@ public final class DaybreakCoronet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DaybreakCoronet(final DaybreakCoronet card) {
+    private DaybreakCoronet(final DaybreakCoronet card) {
         super(card);
     }
 

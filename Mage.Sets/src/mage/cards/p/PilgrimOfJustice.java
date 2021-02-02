@@ -43,7 +43,7 @@ public final class PilgrimOfJustice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PilgrimOfJustice(final PilgrimOfJustice card) {
+    private PilgrimOfJustice(final PilgrimOfJustice card) {
         super(card);
     }
 

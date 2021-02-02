@@ -49,7 +49,7 @@ public final class FlowerFlourish extends SplitCard {
         );
     }
 
-    public FlowerFlourish(final FlowerFlourish card) {
+    private FlowerFlourish(final FlowerFlourish card) {
         super(card);
     }
 

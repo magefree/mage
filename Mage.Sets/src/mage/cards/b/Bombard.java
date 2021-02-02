@@ -22,7 +22,7 @@ public final class Bombard extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
     }
 
-    public Bombard(final Bombard card) {
+    private Bombard(final Bombard card) {
         super(card);
     }
 

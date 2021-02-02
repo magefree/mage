@@ -49,7 +49,7 @@ public final class ForgottenAncient extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ForgottenAncientEffect(), TargetController.YOU, true));
     }
 
-    public ForgottenAncient(final ForgottenAncient card) {
+    private ForgottenAncient(final ForgottenAncient card) {
         super(card);
     }
 

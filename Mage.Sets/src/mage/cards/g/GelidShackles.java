@@ -43,7 +43,7 @@ public final class GelidShackles extends CardImpl {
             AttachmentType.AURA, Duration.EndOfTurn), new ManaCostsImpl("{S}")));        
     }
 
-    public GelidShackles(final GelidShackles card) {
+    private GelidShackles(final GelidShackles card) {
         super(card);
     }
 

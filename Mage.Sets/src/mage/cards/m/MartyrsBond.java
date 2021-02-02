@@ -35,7 +35,7 @@ public final class MartyrsBond extends CardImpl {
         this.addAbility(new MartyrsBondTriggeredAbility());
     }
 
-    public MartyrsBond(final MartyrsBond card) {
+    private MartyrsBond(final MartyrsBond card) {
         super(card);
     }
 

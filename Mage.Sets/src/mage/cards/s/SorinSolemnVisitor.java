@@ -50,7 +50,7 @@ public final class SorinSolemnVisitor extends CardImpl {
 
     }
 
-    public SorinSolemnVisitor(final SorinSolemnVisitor card) {
+    private SorinSolemnVisitor(final SorinSolemnVisitor card) {
         super(card);
     }
 

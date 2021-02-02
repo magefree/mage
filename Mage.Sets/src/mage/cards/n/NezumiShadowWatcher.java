@@ -40,7 +40,7 @@ public final class NezumiShadowWatcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NezumiShadowWatcher(final NezumiShadowWatcher card) {
+    private NezumiShadowWatcher(final NezumiShadowWatcher card) {
         super(card);
     }
 

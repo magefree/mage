@@ -44,7 +44,7 @@ public final class ClaimOfErebos extends CardImpl {
         
     }
 
-    public ClaimOfErebos(final ClaimOfErebos card) {
+    private ClaimOfErebos(final ClaimOfErebos card) {
         super(card);
     }
 

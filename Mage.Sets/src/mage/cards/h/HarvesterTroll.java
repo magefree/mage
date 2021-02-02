@@ -41,7 +41,7 @@ public final class HarvesterTroll extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HarvesterTroll(final HarvesterTroll card) {
+    private HarvesterTroll(final HarvesterTroll card) {
         super(card);
     }
 

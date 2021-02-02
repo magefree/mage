@@ -43,7 +43,7 @@ public final class CabalInterrogator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CabalInterrogator(final CabalInterrogator card) {
+    private CabalInterrogator(final CabalInterrogator card) {
         super(card);
     }
 

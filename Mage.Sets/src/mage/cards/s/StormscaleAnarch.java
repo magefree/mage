@@ -39,7 +39,7 @@ public final class StormscaleAnarch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StormscaleAnarch(final StormscaleAnarch card) {
+    private StormscaleAnarch(final StormscaleAnarch card) {
         super(card);
     }
 

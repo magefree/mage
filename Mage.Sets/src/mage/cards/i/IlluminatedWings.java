@@ -46,7 +46,7 @@ public final class IlluminatedWings extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IlluminatedWings(final IlluminatedWings card) {
+    private IlluminatedWings(final IlluminatedWings card) {
         super(card);
     }
 

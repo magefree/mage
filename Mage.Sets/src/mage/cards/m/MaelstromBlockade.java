@@ -23,7 +23,7 @@ public final class MaelstromBlockade extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
-    public MaelstromBlockade(final MaelstromBlockade card) {
+    private MaelstromBlockade(final MaelstromBlockade card) {
         super(card);
     }
 

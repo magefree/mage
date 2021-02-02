@@ -34,7 +34,7 @@ public final class UrborgMindsucker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UrborgMindsucker(final UrborgMindsucker card) {
+    private UrborgMindsucker(final UrborgMindsucker card) {
         super(card);
     }
 

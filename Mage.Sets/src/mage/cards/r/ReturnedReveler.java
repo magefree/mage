@@ -29,7 +29,7 @@ public final class ReturnedReveler extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new MillCardsEachPlayerEffect(3, TargetController.ANY)));
     }
 
-    public ReturnedReveler(final ReturnedReveler card) {
+    private ReturnedReveler(final ReturnedReveler card) {
         super(card);
     }
 

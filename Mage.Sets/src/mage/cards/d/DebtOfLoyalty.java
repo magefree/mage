@@ -27,7 +27,7 @@ public final class DebtOfLoyalty extends CardImpl {
         this.getSpellAbility().addEffect(new DebtOfLoyaltyEffect());
     }
 
-    public DebtOfLoyalty(final DebtOfLoyalty card) {
+    private DebtOfLoyalty(final DebtOfLoyalty card) {
         super(card);
     }
 

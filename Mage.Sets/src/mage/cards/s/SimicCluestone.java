@@ -38,7 +38,7 @@ public final class SimicCluestone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SimicCluestone(final SimicCluestone card) {
+    private SimicCluestone(final SimicCluestone card) {
         super(card);
     }
 

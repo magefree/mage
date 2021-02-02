@@ -47,7 +47,7 @@ public final class ChitteringHost extends MeldCard {
         this.addAbility(ability);
     }
 
-    public ChitteringHost(final ChitteringHost card) {
+    private ChitteringHost(final ChitteringHost card) {
         super(card);
     }
 

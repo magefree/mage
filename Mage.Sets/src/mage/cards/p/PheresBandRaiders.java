@@ -32,7 +32,7 @@ public final class PheresBandRaiders extends CardImpl {
 
     }
 
-    public PheresBandRaiders(final PheresBandRaiders card) {
+    private PheresBandRaiders(final PheresBandRaiders card) {
         super(card);
     }
 

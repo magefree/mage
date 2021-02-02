@@ -45,7 +45,7 @@ public final class OraclesVault extends CardImpl {
                         + "Activate this ability only if there are three or more brick counters on {this}"));
     }
 
-    public OraclesVault(final OraclesVault card) {
+    private OraclesVault(final OraclesVault card) {
         super(card);
     }
 

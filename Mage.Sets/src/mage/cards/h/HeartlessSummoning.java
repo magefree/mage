@@ -29,7 +29,7 @@ public final class HeartlessSummoning extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(-1, -1, Duration.WhileOnBattlefield)));
     }
 
-    public HeartlessSummoning(final HeartlessSummoning card) {
+    private HeartlessSummoning(final HeartlessSummoning card) {
         super(card);
     }
 

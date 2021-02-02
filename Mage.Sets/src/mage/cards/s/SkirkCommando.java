@@ -39,7 +39,7 @@ public final class SkirkCommando extends CardImpl {
 
     }
 
-    public SkirkCommando(final SkirkCommando card) {
+    private SkirkCommando(final SkirkCommando card) {
         super(card);
     }
 

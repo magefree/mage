@@ -27,7 +27,7 @@ public final class WildCantor extends CardImpl {
         this.addAbility(new AnyColorManaAbility(new SacrificeSourceCost()));
     }
 
-    public WildCantor(final WildCantor card) {
+    private WildCantor(final WildCantor card) {
         super(card);
     }
 

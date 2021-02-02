@@ -31,7 +31,7 @@ public final class Flash extends CardImpl {
         this.getSpellAbility().addEffect(new FlashEffect());
     }
 
-    public Flash(final Flash card) {
+    private Flash(final Flash card) {
         super(card);
     }
 

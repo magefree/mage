@@ -41,7 +41,7 @@ public final class AshlingsPrerogative extends CardImpl {
 
     }
 
-    public AshlingsPrerogative(final AshlingsPrerogative card) {
+    private AshlingsPrerogative(final AshlingsPrerogative card) {
         super(card);
     }
 

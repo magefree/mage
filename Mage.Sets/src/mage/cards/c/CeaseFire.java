@@ -34,7 +34,7 @@ public final class CeaseFire extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public CeaseFire(final CeaseFire card) {
+    private CeaseFire(final CeaseFire card) {
         super(card);
     }
 

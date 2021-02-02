@@ -32,7 +32,7 @@ public final class RadiantPurge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public RadiantPurge(final RadiantPurge card) {
+    private RadiantPurge(final RadiantPurge card) {
         super(card);
     }
 

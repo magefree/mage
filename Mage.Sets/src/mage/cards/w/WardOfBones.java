@@ -36,7 +36,7 @@ public final class WardOfBones extends CardImpl {
 
     }
 
-    public WardOfBones(final WardOfBones card) {
+    private WardOfBones(final WardOfBones card) {
         super(card);
     }
 

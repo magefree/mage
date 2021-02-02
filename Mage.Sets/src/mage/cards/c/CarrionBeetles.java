@@ -34,7 +34,7 @@ public final class CarrionBeetles extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CarrionBeetles(final CarrionBeetles card) {
+    private CarrionBeetles(final CarrionBeetles card) {
         super(card);
     }
 

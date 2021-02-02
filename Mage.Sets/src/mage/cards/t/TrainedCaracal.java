@@ -26,7 +26,7 @@ public final class TrainedCaracal extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public TrainedCaracal(final TrainedCaracal card) {
+    private TrainedCaracal(final TrainedCaracal card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class ManaweftSliver extends CardImpl {
         )));
     }
 
-    public ManaweftSliver(final ManaweftSliver card) {
+    private ManaweftSliver(final ManaweftSliver card) {
         super(card);
     }
 

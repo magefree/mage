@@ -57,7 +57,7 @@ public final class Blizzard extends CardImpl {
         ));
     }
 
-    public Blizzard(final Blizzard card) {
+    private Blizzard(final Blizzard card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class AxisOfMortality extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AxisOfMortality(final AxisOfMortality card) {
+    private AxisOfMortality(final AxisOfMortality card) {
         super(card);
     }
 

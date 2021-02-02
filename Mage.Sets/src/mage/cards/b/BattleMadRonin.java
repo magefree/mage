@@ -31,7 +31,7 @@ public final class BattleMadRonin extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public BattleMadRonin(final BattleMadRonin card) {
+    private BattleMadRonin(final BattleMadRonin card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class InitiatesCompanion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InitiatesCompanion(final InitiatesCompanion card) {
+    private InitiatesCompanion(final InitiatesCompanion card) {
         super(card);
     }
 

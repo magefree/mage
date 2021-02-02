@@ -40,7 +40,7 @@ public final class KrosanDrover extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public KrosanDrover(final KrosanDrover card) {
+    private KrosanDrover(final KrosanDrover card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class HeroOfIroas extends CardImpl {
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 
-    public HeroOfIroas(final HeroOfIroas card) {
+    private HeroOfIroas(final HeroOfIroas card) {
         super(card);
     }
 

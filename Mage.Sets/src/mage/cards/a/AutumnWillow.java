@@ -37,7 +37,7 @@ public final class AutumnWillow extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AutumnWillow(final AutumnWillow card) {
+    private AutumnWillow(final AutumnWillow card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class BlackMarket extends CardImpl {
 
     }
 
-    public BlackMarket(final BlackMarket card) {
+    private BlackMarket(final BlackMarket card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class DeadReveler extends CardImpl {
         this.addAbility(new UnleashAbility());
     }
  
-    public DeadReveler(final DeadReveler card) {
+    private DeadReveler(final DeadReveler card) {
         super(card);
     }
  

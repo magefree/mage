@@ -35,7 +35,7 @@ public final class GrimRoustabout extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }
  
-    public GrimRoustabout(final GrimRoustabout card) {
+    private GrimRoustabout(final GrimRoustabout card) {
         super(card);
     }
  

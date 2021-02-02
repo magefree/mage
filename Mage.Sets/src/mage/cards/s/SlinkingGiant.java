@@ -31,7 +31,7 @@ public final class SlinkingGiant extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(-3, 0, Duration.EndOfTurn), false));
     }
 
-    public SlinkingGiant(final SlinkingGiant card) {
+    private SlinkingGiant(final SlinkingGiant card) {
         super(card);
     }
 

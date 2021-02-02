@@ -33,7 +33,7 @@ public final class Donate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledPermanent());
     }
 
-    public Donate(final Donate card) {
+    private Donate(final Donate card) {
         super(card);
     }
 

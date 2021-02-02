@@ -37,7 +37,7 @@ public final class Bonehoard extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public Bonehoard(final Bonehoard card) {
+    private Bonehoard(final Bonehoard card) {
         super(card);
     }
 

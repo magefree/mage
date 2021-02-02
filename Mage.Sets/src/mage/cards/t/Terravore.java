@@ -35,7 +35,7 @@ public final class Terravore extends CardImpl {
                 new CardsInAllGraveyardsCount(new FilterLandCard("land cards")), Duration.EndOfGame)));
     }
 
-    public Terravore(final Terravore card) {
+    private Terravore(final Terravore card) {
         super(card);
     }
 

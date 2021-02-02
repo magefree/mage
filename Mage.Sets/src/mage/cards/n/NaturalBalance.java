@@ -34,7 +34,7 @@ public final class NaturalBalance extends CardImpl {
         this.getSpellAbility().addEffect(new NaturalBalanceEffect());
     }
 
-    public NaturalBalance(final NaturalBalance card) {
+    private NaturalBalance(final NaturalBalance card) {
         super(card);
     }
 

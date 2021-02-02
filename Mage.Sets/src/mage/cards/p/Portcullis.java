@@ -46,7 +46,7 @@ public final class Portcullis extends CardImpl {
 
     }
 
-    public Portcullis(final Portcullis card) {
+    private Portcullis(final Portcullis card) {
         super(card);
     }
 

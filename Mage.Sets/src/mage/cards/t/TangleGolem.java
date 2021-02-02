@@ -25,7 +25,7 @@ public final class TangleGolem extends CardImpl {
         this.addAbility(new AffinityForLandTypeAbility(SubType.FOREST, "Forests"));
     }
 
-    public TangleGolem(final TangleGolem card) {
+    private TangleGolem(final TangleGolem card) {
         super(card);
     }
 

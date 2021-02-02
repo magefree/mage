@@ -27,7 +27,7 @@ public final class AkoumRefuge extends CardImpl {
 
     }
 
-    public AkoumRefuge(final AkoumRefuge card) {
+    private AkoumRefuge(final AkoumRefuge card) {
         super(card);
     }
 

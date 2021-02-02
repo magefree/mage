@@ -30,7 +30,7 @@ public final class FrostburnWeird extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{U/R}")));
     }
 
-    public FrostburnWeird(final FrostburnWeird card) {
+    private FrostburnWeird(final FrostburnWeird card) {
         super(card);
     }
 

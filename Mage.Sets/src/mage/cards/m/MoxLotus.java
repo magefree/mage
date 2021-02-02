@@ -33,7 +33,7 @@ public final class MoxLotus extends CardImpl {
         // Situation normal??
     }
 
-    public MoxLotus(final MoxLotus card) {
+    private MoxLotus(final MoxLotus card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class Momentum extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(new CountersSourceCount(CounterType.GROWTH), new CountersSourceCount(CounterType.GROWTH))));
     }
 
-    public Momentum(final Momentum card) {
+    private Momentum(final Momentum card) {
         super(card);
     }
 

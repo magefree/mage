@@ -38,7 +38,7 @@ public final class Windscouter extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(effect, false));
     }
 
-    public Windscouter(final Windscouter card) {
+    private Windscouter(final Windscouter card) {
         super(card);
     }
 

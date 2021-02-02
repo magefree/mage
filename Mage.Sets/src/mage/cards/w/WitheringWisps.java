@@ -40,7 +40,7 @@ public final class WitheringWisps extends CardImpl {
         this.addAbility(new WitheringWispsActivatedAbility());
     }
 
-    public WitheringWisps(final WitheringWisps card) {
+    private WitheringWisps(final WitheringWisps card) {
         super(card);
     }
 

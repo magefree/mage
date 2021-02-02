@@ -32,7 +32,7 @@ public final class TrustyPackbeast extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TrustyPackbeast(final TrustyPackbeast card) {
+    private TrustyPackbeast(final TrustyPackbeast card) {
         super(card);
     }
 

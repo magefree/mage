@@ -23,7 +23,7 @@ public final class ImmolatingGlare extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public ImmolatingGlare(final ImmolatingGlare card) {
+    private ImmolatingGlare(final ImmolatingGlare card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class LegionLoyalist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LegionLoyalist(final LegionLoyalist card) {
+    private LegionLoyalist(final LegionLoyalist card) {
         super(card);
     }
 

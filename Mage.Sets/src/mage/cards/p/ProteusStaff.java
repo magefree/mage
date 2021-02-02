@@ -38,7 +38,7 @@ public final class ProteusStaff extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ProteusStaff(final ProteusStaff card) {
+    private ProteusStaff(final ProteusStaff card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class HealersHawk extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public HealersHawk(final HealersHawk card) {
+    private HealersHawk(final HealersHawk card) {
         super(card);
     }
 

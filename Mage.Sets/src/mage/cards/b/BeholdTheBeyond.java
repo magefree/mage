@@ -28,7 +28,7 @@ public final class BeholdTheBeyond extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public BeholdTheBeyond(final BeholdTheBeyond card) {
+    private BeholdTheBeyond(final BeholdTheBeyond card) {
         super(card);
     }
 

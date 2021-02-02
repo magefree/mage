@@ -39,7 +39,7 @@ public final class ClockOfOmens extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ClockOfOmens(final ClockOfOmens card) {
+    private ClockOfOmens(final ClockOfOmens card) {
         super(card);
     }
 

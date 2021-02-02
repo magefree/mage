@@ -29,7 +29,7 @@ public final class AggravatedAssault extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AggravatedAssault(final AggravatedAssault card) {
+    private AggravatedAssault(final AggravatedAssault card) {
         super(card);
     }
 

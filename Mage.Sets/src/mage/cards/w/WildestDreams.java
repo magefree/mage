@@ -32,7 +32,7 @@ public final class WildestDreams extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public WildestDreams(final WildestDreams card) {
+    private WildestDreams(final WildestDreams card) {
         super(card);
     }
 

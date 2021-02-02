@@ -37,7 +37,7 @@ public final class PhyrexianHydra extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianHydraEffect()));
     }
 
-    public PhyrexianHydra(final PhyrexianHydra card) {
+    private PhyrexianHydra(final PhyrexianHydra card) {
         super(card);
     }
 

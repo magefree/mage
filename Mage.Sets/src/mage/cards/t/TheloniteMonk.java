@@ -48,7 +48,7 @@ public final class TheloniteMonk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TheloniteMonk(final TheloniteMonk card) {
+    private TheloniteMonk(final TheloniteMonk card) {
         super(card);
     }
 

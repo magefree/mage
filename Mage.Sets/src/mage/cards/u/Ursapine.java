@@ -31,7 +31,7 @@ public final class Ursapine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Ursapine(final Ursapine card) {
+    private Ursapine(final Ursapine card) {
         super(card);
     }
 

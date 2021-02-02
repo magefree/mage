@@ -28,7 +28,7 @@ public final class ZhangLiaoHeroOfHefei extends CardImpl {
         this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardTargetEffect(1), false, false, true));
     }
 
-    public ZhangLiaoHeroOfHefei(final ZhangLiaoHeroOfHefei card) {
+    private ZhangLiaoHeroOfHefei(final ZhangLiaoHeroOfHefei card) {
         super(card);
     }
 

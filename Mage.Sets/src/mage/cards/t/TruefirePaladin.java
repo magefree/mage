@@ -41,7 +41,7 @@ public final class TruefirePaladin extends CardImpl {
 
     }
 
-    public TruefirePaladin(final TruefirePaladin card) {
+    private TruefirePaladin(final TruefirePaladin card) {
         super(card);
     }
 

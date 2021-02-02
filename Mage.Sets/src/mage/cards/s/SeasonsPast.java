@@ -33,7 +33,7 @@ public final class SeasonsPast extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToLibrarySpellEffect(false));
     }
 
-    public SeasonsPast(final SeasonsPast card) {
+    private SeasonsPast(final SeasonsPast card) {
         super(card);
     }
 

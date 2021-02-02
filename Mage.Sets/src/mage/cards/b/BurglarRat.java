@@ -33,7 +33,7 @@ public final class BurglarRat extends CardImpl {
         ));
     }
 
-    public BurglarRat(final BurglarRat card) {
+    private BurglarRat(final BurglarRat card) {
         super(card);
     }
 

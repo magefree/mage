@@ -29,7 +29,7 @@ public final class SealOfPrimordium extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SealOfPrimordium(final SealOfPrimordium card) {
+    private SealOfPrimordium(final SealOfPrimordium card) {
         super(card);
     }
 

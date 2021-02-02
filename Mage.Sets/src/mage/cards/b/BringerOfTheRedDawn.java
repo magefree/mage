@@ -52,7 +52,7 @@ public final class BringerOfTheRedDawn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BringerOfTheRedDawn(final BringerOfTheRedDawn card) {
+    private BringerOfTheRedDawn(final BringerOfTheRedDawn card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class HandsOfBinding extends CardImpl {
         
     }
 
-    public HandsOfBinding(final HandsOfBinding card) {
+    private HandsOfBinding(final HandsOfBinding card) {
         super(card);
     }
 

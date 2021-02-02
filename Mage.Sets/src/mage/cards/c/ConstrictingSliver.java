@@ -52,7 +52,7 @@ public final class ConstrictingSliver extends CardImpl {
 
     }
 
-    public ConstrictingSliver(final ConstrictingSliver card) {
+    private ConstrictingSliver(final ConstrictingSliver card) {
         super(card);
     }
 

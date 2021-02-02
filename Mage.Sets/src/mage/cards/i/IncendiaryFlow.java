@@ -30,7 +30,7 @@ public final class IncendiaryFlow extends CardImpl {
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
-    public IncendiaryFlow(final IncendiaryFlow card) {
+    private IncendiaryFlow(final IncendiaryFlow card) {
         super(card);
     }
 

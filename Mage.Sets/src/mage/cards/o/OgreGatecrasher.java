@@ -40,7 +40,7 @@ public final class OgreGatecrasher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OgreGatecrasher(final OgreGatecrasher card) {
+    private OgreGatecrasher(final OgreGatecrasher card) {
         super(card);
     }
 

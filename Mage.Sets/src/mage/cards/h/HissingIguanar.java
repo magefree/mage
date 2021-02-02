@@ -30,7 +30,7 @@ public final class HissingIguanar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HissingIguanar(final HissingIguanar card) {
+    private HissingIguanar(final HissingIguanar card) {
         super(card);
     }
 

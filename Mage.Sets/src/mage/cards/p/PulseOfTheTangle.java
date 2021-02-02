@@ -33,7 +33,7 @@ public final class PulseOfTheTangle extends CardImpl {
         this.getSpellAbility().addEffect(new PulseOfTheTangleReturnToHandEffect());
     }
 
-    public PulseOfTheTangle(final PulseOfTheTangle card) {
+    private PulseOfTheTangle(final PulseOfTheTangle card) {
         super(card);
     }
 

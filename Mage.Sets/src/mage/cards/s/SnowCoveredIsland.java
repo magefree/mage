@@ -25,7 +25,7 @@ public final class SnowCoveredIsland extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public SnowCoveredIsland(final SnowCoveredIsland card) {
+    private SnowCoveredIsland(final SnowCoveredIsland card) {
         super(card);
     }
 

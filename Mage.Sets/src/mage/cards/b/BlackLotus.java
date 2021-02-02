@@ -27,7 +27,7 @@ public final class BlackLotus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlackLotus(final BlackLotus card) {
+    private BlackLotus(final BlackLotus card) {
         super(card);
     }
 

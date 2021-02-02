@@ -61,7 +61,7 @@ public final class Topplegeist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Topplegeist(final Topplegeist card) {
+    private Topplegeist(final Topplegeist card) {
         super(card);
     }
 

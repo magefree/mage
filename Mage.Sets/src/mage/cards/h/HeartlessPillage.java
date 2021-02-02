@@ -37,7 +37,7 @@ public final class HeartlessPillage extends CardImpl {
         this.getSpellAbility().addHint(RaidHint.instance);
     }
 
-    public HeartlessPillage(final HeartlessPillage card) {
+    private HeartlessPillage(final HeartlessPillage card) {
         super(card);
     }
 

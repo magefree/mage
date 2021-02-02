@@ -30,7 +30,7 @@ public final class CloudcrestLake extends CardImpl {
         this.addAbility(blueManaAbility);
     }
 
-    public CloudcrestLake(final CloudcrestLake card) {
+    private CloudcrestLake(final CloudcrestLake card) {
         super(card);
     }
 

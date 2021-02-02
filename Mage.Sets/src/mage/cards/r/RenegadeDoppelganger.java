@@ -36,7 +36,7 @@ public final class RenegadeDoppelganger extends CardImpl {
         this.addAbility(new RenegadeDoppelgangerTriggeredAbility());
     }
 
-    public RenegadeDoppelganger(final RenegadeDoppelganger card) {
+    private RenegadeDoppelganger(final RenegadeDoppelganger card) {
         super(card);
     }
 

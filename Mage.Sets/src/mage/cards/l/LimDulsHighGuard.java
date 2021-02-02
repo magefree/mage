@@ -31,7 +31,7 @@ public final class LimDulsHighGuard extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }
 
-    public LimDulsHighGuard(final LimDulsHighGuard card) {
+    private LimDulsHighGuard(final LimDulsHighGuard card) {
         super(card);
     }
 

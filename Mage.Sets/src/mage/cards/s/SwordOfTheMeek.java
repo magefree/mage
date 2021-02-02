@@ -45,7 +45,7 @@ public final class SwordOfTheMeek extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.GRAVEYARD, new SwordOfTheMeekEffect(), filter, true, SetTargetPointer.PERMANENT, ""));
     }
 
-    public SwordOfTheMeek(final SwordOfTheMeek card) {
+    private SwordOfTheMeek(final SwordOfTheMeek card) {
         super(card);
     }
 

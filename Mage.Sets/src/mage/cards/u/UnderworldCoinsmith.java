@@ -38,7 +38,7 @@ public final class UnderworldCoinsmith extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnderworldCoinsmith(final UnderworldCoinsmith card) {
+    private UnderworldCoinsmith(final UnderworldCoinsmith card) {
         super(card);
     }
 

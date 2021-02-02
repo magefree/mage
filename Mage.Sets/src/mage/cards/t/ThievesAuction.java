@@ -32,7 +32,7 @@ public final class ThievesAuction extends CardImpl {
         this.getSpellAbility().addEffect(new ThievesAuctionEffect());
     }
 
-    public ThievesAuction(final ThievesAuction card) {
+    private ThievesAuction(final ThievesAuction card) {
         super(card);
     }
 

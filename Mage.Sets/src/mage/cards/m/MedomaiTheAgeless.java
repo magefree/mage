@@ -45,7 +45,7 @@ public final class MedomaiTheAgeless extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public MedomaiTheAgeless(final MedomaiTheAgeless card) {
+    private MedomaiTheAgeless(final MedomaiTheAgeless card) {
         super(card);
     }
 

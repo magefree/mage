@@ -45,7 +45,7 @@ public final class Fleshwrither extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Fleshwrither(final Fleshwrither card) {
+    private Fleshwrither(final Fleshwrither card) {
         super(card);
     }
 

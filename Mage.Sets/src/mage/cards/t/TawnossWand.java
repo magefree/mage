@@ -38,7 +38,7 @@ public final class TawnossWand extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public TawnossWand(final TawnossWand card) {
+    private TawnossWand(final TawnossWand card) {
         super(card);
     }
 

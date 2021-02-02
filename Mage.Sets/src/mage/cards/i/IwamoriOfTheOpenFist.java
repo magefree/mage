@@ -40,7 +40,7 @@ public final class IwamoriOfTheOpenFist extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new IwamoriOfTheOpenFistEffect(), false));
     }
 
-    public IwamoriOfTheOpenFist(final IwamoriOfTheOpenFist card) {
+    private IwamoriOfTheOpenFist(final IwamoriOfTheOpenFist card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class Triskelion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Triskelion(final Triskelion card) {
+    private Triskelion(final Triskelion card) {
         super(card);
     }
 

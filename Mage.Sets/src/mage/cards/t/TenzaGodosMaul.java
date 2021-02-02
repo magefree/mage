@@ -83,7 +83,7 @@ public final class TenzaGodosMaul extends CardImpl {
 
     }
 
-    public TenzaGodosMaul(final TenzaGodosMaul card) {
+    private TenzaGodosMaul(final TenzaGodosMaul card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class SerpentOfTheEndlessSea extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
     }
 
-    public SerpentOfTheEndlessSea(final SerpentOfTheEndlessSea card) {
+    private SerpentOfTheEndlessSea(final SerpentOfTheEndlessSea card) {
         super(card);
     }
 

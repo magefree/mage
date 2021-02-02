@@ -36,7 +36,7 @@ public final class ChromescaleDrake extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealLibraryPutIntoHandEffect(3, new FilterArtifactCard("artifact cards"), Zone.GRAVEYARD)));
     }
 
-    public ChromescaleDrake(final ChromescaleDrake card) {
+    private ChromescaleDrake(final ChromescaleDrake card) {
         super(card);
     }
 

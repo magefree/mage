@@ -31,7 +31,7 @@ public final class IntoTheMawOfHell extends CardImpl {
         this.getSpellAbility().addEffect(new IntoTheMawOfHellEffect());
     }
 
-    public IntoTheMawOfHell(final IntoTheMawOfHell card) {
+    private IntoTheMawOfHell(final IntoTheMawOfHell card) {
         super(card);
     }
 

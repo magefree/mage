@@ -27,7 +27,7 @@ public final class ShardlessAgent extends CardImpl {
         this.addAbility(new CascadeAbility());
     }
 
-    public ShardlessAgent(final ShardlessAgent card) {
+    private ShardlessAgent(final ShardlessAgent card) {
         super(card);
     }
 

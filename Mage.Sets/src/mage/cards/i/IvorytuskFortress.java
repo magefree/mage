@@ -36,7 +36,7 @@ public final class IvorytuskFortress extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UntapAllDuringEachOtherPlayersUntapStepEffect(filter)));
     }
 
-    public IvorytuskFortress(final IvorytuskFortress card) {
+    private IvorytuskFortress(final IvorytuskFortress card) {
         super(card);
     }
 

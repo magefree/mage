@@ -31,7 +31,7 @@ public final class OrderOfYawgmoth extends CardImpl {
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1, false), false, true));
     }
 
-    public OrderOfYawgmoth(final OrderOfYawgmoth card) {
+    private OrderOfYawgmoth(final OrderOfYawgmoth card) {
         super(card);
     }
 

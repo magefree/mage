@@ -43,7 +43,7 @@ public final class NevinyrralsDisk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NevinyrralsDisk(final NevinyrralsDisk card) {
+    private NevinyrralsDisk(final NevinyrralsDisk card) {
         super(card);
     }
 

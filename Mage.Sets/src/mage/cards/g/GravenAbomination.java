@@ -40,7 +40,7 @@ public final class GravenAbomination extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GravenAbomination(final GravenAbomination card) {
+    private GravenAbomination(final GravenAbomination card) {
         super(card);
     }
 

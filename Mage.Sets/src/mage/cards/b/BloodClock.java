@@ -31,7 +31,7 @@ public final class BloodClock extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodClock(final BloodClock card) {
+    private BloodClock(final BloodClock card) {
         super(card);
     }
 

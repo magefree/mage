@@ -35,7 +35,7 @@ public final class SnakeOfTheGoldenGrove extends CardImpl {
                 "When {this} enters the battlefield, if its tribute wasn't paid, you gain 4 life."));
     }
 
-    public SnakeOfTheGoldenGrove(final SnakeOfTheGoldenGrove card) {
+    private SnakeOfTheGoldenGrove(final SnakeOfTheGoldenGrove card) {
         super(card);
     }
 

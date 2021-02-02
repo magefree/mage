@@ -34,7 +34,7 @@ public final class SalvageSquad extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
     }
 
-    public SalvageSquad(final SalvageSquad card) {
+    private SalvageSquad(final SalvageSquad card) {
         super(card);
     }
 

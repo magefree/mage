@@ -45,7 +45,7 @@ public final class Backslide extends CardImpl {
 
     }
 
-    public Backslide(final Backslide card) {
+    private Backslide(final Backslide card) {
         super(card);
     }
 

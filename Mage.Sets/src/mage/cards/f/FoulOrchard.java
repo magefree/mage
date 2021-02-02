@@ -26,7 +26,7 @@ public final class FoulOrchard extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public FoulOrchard(final FoulOrchard card) {
+    private FoulOrchard(final FoulOrchard card) {
         super(card);
     }
 

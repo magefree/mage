@@ -53,7 +53,7 @@ public final class SithMagic extends CardImpl {
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }
 
-    public SithMagic(final SithMagic card) {
+    private SithMagic(final SithMagic card) {
         super(card);
     }
 

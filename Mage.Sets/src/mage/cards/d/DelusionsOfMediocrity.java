@@ -25,7 +25,7 @@ public final class DelusionsOfMediocrity extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new LoseLifeSourceControllerEffect(10), false));
     }
 
-    public DelusionsOfMediocrity(final DelusionsOfMediocrity card) {
+    private DelusionsOfMediocrity(final DelusionsOfMediocrity card) {
         super(card);
     }
 

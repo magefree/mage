@@ -36,7 +36,7 @@ public final class RabidWombat extends CardImpl {
 
     }
 
-    public RabidWombat(final RabidWombat card) {
+    private RabidWombat(final RabidWombat card) {
         super(card);
     }
 

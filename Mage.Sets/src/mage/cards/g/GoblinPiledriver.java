@@ -45,7 +45,7 @@ public final class GoblinPiledriver extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, StaticValue.get(0), Duration.EndOfTurn, true), false));
     }
 
-    public GoblinPiledriver(final GoblinPiledriver card) {
+    private GoblinPiledriver(final GoblinPiledriver card) {
         super(card);
     }
 

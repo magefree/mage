@@ -37,7 +37,7 @@ public final class MetalspinnersPuzzleknot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MetalspinnersPuzzleknot(final MetalspinnersPuzzleknot card) {
+    private MetalspinnersPuzzleknot(final MetalspinnersPuzzleknot card) {
         super(card);
     }
 

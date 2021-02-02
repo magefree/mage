@@ -66,7 +66,7 @@ public final class RavagerOfTheFells extends CardImpl {
         ));
     }
 
-    public RavagerOfTheFells(final RavagerOfTheFells card) {
+    private RavagerOfTheFells(final RavagerOfTheFells card) {
         super(card);
     }
 

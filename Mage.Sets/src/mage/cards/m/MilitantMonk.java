@@ -38,7 +38,7 @@ public final class MilitantMonk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MilitantMonk(final MilitantMonk card) {
+    private MilitantMonk(final MilitantMonk card) {
         super(card);
     }
 

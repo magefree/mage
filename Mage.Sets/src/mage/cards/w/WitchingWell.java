@@ -33,7 +33,7 @@ public final class WitchingWell extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WitchingWell(final WitchingWell card) {
+    private WitchingWell(final WitchingWell card) {
         super(card);
     }
 

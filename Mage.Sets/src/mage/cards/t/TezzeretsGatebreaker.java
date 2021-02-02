@@ -62,7 +62,7 @@ public final class TezzeretsGatebreaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TezzeretsGatebreaker(final TezzeretsGatebreaker card) {
+    private TezzeretsGatebreaker(final TezzeretsGatebreaker card) {
         super(card);
     }
 

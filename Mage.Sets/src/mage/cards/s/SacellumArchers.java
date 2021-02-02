@@ -36,7 +36,7 @@ public final class SacellumArchers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SacellumArchers(final SacellumArchers card) {
+    private SacellumArchers(final SacellumArchers card) {
         super(card);
     }
 

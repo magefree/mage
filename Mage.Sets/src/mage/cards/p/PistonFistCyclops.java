@@ -48,7 +48,7 @@ public final class PistonFistCyclops extends CardImpl {
                  new SpellsCastWatcher());
     }
 
-    public PistonFistCyclops(final PistonFistCyclops card) {
+    private PistonFistCyclops(final PistonFistCyclops card) {
         super(card);
     }
 

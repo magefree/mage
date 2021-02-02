@@ -42,7 +42,7 @@ public final class ValorousStance extends CardImpl {
 
     }
 
-    public ValorousStance(final ValorousStance card) {
+    private ValorousStance(final ValorousStance card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class HeavyBallista extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HeavyBallista(final HeavyBallista card) {
+    private HeavyBallista(final HeavyBallista card) {
         super(card);
     }
 

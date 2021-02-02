@@ -33,7 +33,7 @@ public final class Rhox extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{G}")));
     }
 
-    public Rhox(final Rhox card) {
+    private Rhox(final Rhox card) {
         super(card);
     }
 

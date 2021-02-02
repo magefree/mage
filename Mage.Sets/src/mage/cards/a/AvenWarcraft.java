@@ -31,7 +31,7 @@ public final class AvenWarcraft extends CardImpl {
         this.getSpellAbility().addEffect(new AvenWarcraftEffect());
     }
 
-    public AvenWarcraft(final AvenWarcraft card) {
+    private AvenWarcraft(final AvenWarcraft card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class AkoumFirebird extends CardImpl {
                 new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{4}{R}{R}")), false));
     }
 
-    public AkoumFirebird(final AkoumFirebird card) {
+    private AkoumFirebird(final AkoumFirebird card) {
         super(card);
     }
 

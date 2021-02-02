@@ -27,7 +27,7 @@ public final class PoisonTheWell extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public PoisonTheWell(final PoisonTheWell card) {
+    private PoisonTheWell(final PoisonTheWell card) {
         super(card);
     }
 

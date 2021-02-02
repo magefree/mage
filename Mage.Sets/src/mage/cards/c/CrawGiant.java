@@ -28,7 +28,7 @@ public final class CrawGiant extends CardImpl {
         this.addAbility(new RampageAbility(2));
     }
 
-    public CrawGiant(final CrawGiant card) {
+    private CrawGiant(final CrawGiant card) {
         super(card);
     }
 

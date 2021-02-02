@@ -50,7 +50,7 @@ public final class StrengthOfIsolation extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{W}")));
     }
 
-    public StrengthOfIsolation(final StrengthOfIsolation card) {
+    private StrengthOfIsolation(final StrengthOfIsolation card) {
         super(card);
     }
 

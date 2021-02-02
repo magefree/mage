@@ -20,7 +20,7 @@ public final class ChaplainsBlessing extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(5));        
     }
 
-    public ChaplainsBlessing(final ChaplainsBlessing card) {
+    private ChaplainsBlessing(final ChaplainsBlessing card) {
         super(card);
     }
 

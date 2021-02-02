@@ -36,7 +36,7 @@ public final class AshnodsBattleGear extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AshnodsBattleGear(final AshnodsBattleGear card) {
+    private AshnodsBattleGear(final AshnodsBattleGear card) {
         super(card);
     }
 

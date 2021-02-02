@@ -25,7 +25,7 @@ public final class MysteriesOfTheDeep extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(3), new DrawCardSourceControllerEffect(2), LandfallCondition.instance, "Draw 2 cards. Landfall - If you had a land enter the battlefield under your control this turn, draw three cards instead"));
     }
 
-    public MysteriesOfTheDeep(final MysteriesOfTheDeep card) {
+    private MysteriesOfTheDeep(final MysteriesOfTheDeep card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class AuramancersGuise extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public AuramancersGuise(final AuramancersGuise card) {
+    private AuramancersGuise(final AuramancersGuise card) {
         super(card);
     }
 

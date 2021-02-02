@@ -47,7 +47,7 @@ public final class PriceOfFame extends CardImpl {
         this.getSpellAbility().addEffect(new SurveilEffect(2));
     }
 
-    public PriceOfFame(final PriceOfFame card) {
+    private PriceOfFame(final PriceOfFame card) {
         super(card);
     }
 

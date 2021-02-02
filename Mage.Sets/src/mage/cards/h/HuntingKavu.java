@@ -47,7 +47,7 @@ public final class HuntingKavu extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HuntingKavu(final HuntingKavu card) {
+    private HuntingKavu(final HuntingKavu card) {
         super(card);
     }
 

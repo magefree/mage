@@ -68,7 +68,7 @@ public final class GarrukApexPredator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GarrukApexPredator(final GarrukApexPredator card) {
+    private GarrukApexPredator(final GarrukApexPredator card) {
         super(card);
     }
 

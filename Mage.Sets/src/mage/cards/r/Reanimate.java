@@ -30,7 +30,7 @@ public final class Reanimate extends CardImpl {
         getSpellAbility().addEffect(effect);  
     }
 
-    public Reanimate(final Reanimate card) {
+    private Reanimate(final Reanimate card) {
         super(card);
     }
 

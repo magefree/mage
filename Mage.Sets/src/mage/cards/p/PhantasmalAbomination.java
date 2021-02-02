@@ -28,7 +28,7 @@ public final class PhantasmalAbomination extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public PhantasmalAbomination(final PhantasmalAbomination card) {
+    private PhantasmalAbomination(final PhantasmalAbomination card) {
         super(card);
     }
 

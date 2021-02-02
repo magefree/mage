@@ -39,7 +39,7 @@ public final class RealmRazer extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new RealmRazerEffect(), false));
     }
 
-    public RealmRazer(final RealmRazer card) {
+    private RealmRazer(final RealmRazer card) {
         super(card);
     }
 

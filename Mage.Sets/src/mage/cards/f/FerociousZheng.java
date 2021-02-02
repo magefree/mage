@@ -22,7 +22,7 @@ public final class FerociousZheng extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public FerociousZheng(final FerociousZheng card) {
+    private FerociousZheng(final FerociousZheng card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class SylvanPrimordial extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SylvanPrimordial(final SylvanPrimordial card) {
+    private SylvanPrimordial(final SylvanPrimordial card) {
         super(card);
     }
 

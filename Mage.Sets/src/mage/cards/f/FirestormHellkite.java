@@ -32,7 +32,7 @@ public final class FirestormHellkite extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{U}{R}")));
     }
 
-    public FirestormHellkite(final FirestormHellkite card) {
+    private FirestormHellkite(final FirestormHellkite card) {
         super(card);
     }
 

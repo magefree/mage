@@ -27,7 +27,7 @@ public final class SkullOfRamos extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new SacrificeSourceCost()));
     }
 
-    public SkullOfRamos(final SkullOfRamos card) {
+    private SkullOfRamos(final SkullOfRamos card) {
         super(card);
     }
 

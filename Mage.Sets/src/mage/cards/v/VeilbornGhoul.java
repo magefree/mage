@@ -41,7 +41,7 @@ public final class VeilbornGhoul extends CardImpl {
 
     }
 
-    public VeilbornGhoul(final VeilbornGhoul card) {
+    private VeilbornGhoul(final VeilbornGhoul card) {
         super(card);
     }
 

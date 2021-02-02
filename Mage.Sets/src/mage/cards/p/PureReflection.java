@@ -31,7 +31,7 @@ public final class PureReflection extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new PureReflectionEffect(), new FilterCreatureSpell(), false, SetTargetPointer.SPELL));
     }
 
-    public PureReflection(final PureReflection card) {
+    private PureReflection(final PureReflection card) {
         super(card);
     }
 

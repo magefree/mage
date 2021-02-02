@@ -29,7 +29,7 @@ public final class CallTheScions extends CardImpl {
 
     }
 
-    public CallTheScions(final CallTheScions card) {
+    private CallTheScions(final CallTheScions card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class GuardianOfTheGreatConduit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GuardianOfTheGreatConduit(final GuardianOfTheGreatConduit card) {
+    private GuardianOfTheGreatConduit(final GuardianOfTheGreatConduit card) {
         super(card);
     }
 

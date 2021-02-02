@@ -36,7 +36,7 @@ public final class EmberHauler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EmberHauler(final EmberHauler card) {
+    private EmberHauler(final EmberHauler card) {
         super(card);
     }
 

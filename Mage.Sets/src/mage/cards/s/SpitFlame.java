@@ -40,7 +40,7 @@ public final class SpitFlame extends CardImpl {
         ));
     }
 
-    public SpitFlame(final SpitFlame card) {
+    private SpitFlame(final SpitFlame card) {
         super(card);
     }
 

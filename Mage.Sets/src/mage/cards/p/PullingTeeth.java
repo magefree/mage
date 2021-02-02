@@ -28,7 +28,7 @@ public final class PullingTeeth extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public PullingTeeth(final PullingTeeth card) {
+    private PullingTeeth(final PullingTeeth card) {
         super(card);
     }
 

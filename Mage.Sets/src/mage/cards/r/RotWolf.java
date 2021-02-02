@@ -29,7 +29,7 @@ public final class RotWolf extends CardImpl {
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
-    public RotWolf(final RotWolf card) {
+    private RotWolf(final RotWolf card) {
         super(card);
     }
 

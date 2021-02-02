@@ -30,7 +30,7 @@ public final class RosemaneCentaur extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public RosemaneCentaur(final RosemaneCentaur card) {
+    private RosemaneCentaur(final RosemaneCentaur card) {
         super(card);
     }
 

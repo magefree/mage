@@ -29,7 +29,7 @@ public final class RiversRebuke extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public RiversRebuke(final RiversRebuke card) {
+    private RiversRebuke(final RiversRebuke card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class Resistance extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Resistance(final Resistance card) {
+    private Resistance(final Resistance card) {
         super(card);
     }
 

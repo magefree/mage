@@ -41,7 +41,7 @@ public final class WatertrapWeaver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WatertrapWeaver(final WatertrapWeaver card) {
+    private WatertrapWeaver(final WatertrapWeaver card) {
         super(card);
     }
 

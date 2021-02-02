@@ -37,7 +37,7 @@ public final class QuietusSpike extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public QuietusSpike(final QuietusSpike card) {
+    private QuietusSpike(final QuietusSpike card) {
         super(card);
     }
 

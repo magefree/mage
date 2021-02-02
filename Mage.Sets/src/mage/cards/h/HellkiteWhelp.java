@@ -45,7 +45,7 @@ public final class HellkiteWhelp extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HellkiteWhelp(final HellkiteWhelp card) {
+    private HellkiteWhelp(final HellkiteWhelp card) {
         super(card);
     }
 

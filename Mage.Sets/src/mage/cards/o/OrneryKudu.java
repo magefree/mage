@@ -32,7 +32,7 @@ public final class OrneryKudu extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrneryKudu(final OrneryKudu card) {
+    private OrneryKudu(final OrneryKudu card) {
         super(card);
     }
 

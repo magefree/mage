@@ -35,7 +35,7 @@ public final class IthorianInitiate extends CardImpl {
         this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{G}")));
     }
 
-    public IthorianInitiate(final IthorianInitiate card) {
+    private IthorianInitiate(final IthorianInitiate card) {
         super(card);
     }
 

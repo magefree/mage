@@ -25,7 +25,7 @@ public final class GelatinousGenesis extends CardImpl {
         this.getSpellAbility().addEffect(new GelatinousGenesisEffect());
     }
 
-    public GelatinousGenesis(final GelatinousGenesis card) {
+    private GelatinousGenesis(final GelatinousGenesis card) {
         super(card);
     }
 

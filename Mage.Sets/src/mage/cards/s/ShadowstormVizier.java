@@ -33,7 +33,7 @@ public final class ShadowstormVizier extends CardImpl {
         this.addAbility(new CycleOrDiscardControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
     }
 
-    public ShadowstormVizier(final ShadowstormVizier card) {
+    private ShadowstormVizier(final ShadowstormVizier card) {
         super(card);
     }
 

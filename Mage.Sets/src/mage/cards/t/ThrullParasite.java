@@ -39,7 +39,7 @@ public final class ThrullParasite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThrullParasite(final ThrullParasite card) {
+    private ThrullParasite(final ThrullParasite card) {
         super(card);
     }
 

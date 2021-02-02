@@ -41,7 +41,7 @@ public final class NestingWurm extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
     }
 
-    public NestingWurm(final NestingWurm card) {
+    private NestingWurm(final NestingWurm card) {
         super(card);
     }
 

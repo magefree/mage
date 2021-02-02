@@ -28,7 +28,7 @@ public final class SkyreachManta extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SkyreachManta(final SkyreachManta card) {
+    private SkyreachManta(final SkyreachManta card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class ThermoAlchemist extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), new FilterInstantOrSorcerySpell(), false));
     }
 
-    public ThermoAlchemist(final ThermoAlchemist card) {
+    private ThermoAlchemist(final ThermoAlchemist card) {
         super(card);
     }
 

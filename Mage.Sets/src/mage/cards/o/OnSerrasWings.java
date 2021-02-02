@@ -63,7 +63,7 @@ public final class OnSerrasWings extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OnSerrasWings(final OnSerrasWings card) {
+    private OnSerrasWings(final OnSerrasWings card) {
         super(card);
     }
 

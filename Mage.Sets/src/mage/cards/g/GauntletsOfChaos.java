@@ -42,7 +42,7 @@ public final class GauntletsOfChaos extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GauntletsOfChaos(final GauntletsOfChaos card) {
+    private GauntletsOfChaos(final GauntletsOfChaos card) {
         super(card);
     }
 

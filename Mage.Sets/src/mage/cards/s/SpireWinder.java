@@ -45,7 +45,7 @@ public final class SpireWinder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpireWinder(final SpireWinder card) {
+    private SpireWinder(final SpireWinder card) {
         super(card);
     }
 

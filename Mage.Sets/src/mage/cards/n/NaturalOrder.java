@@ -38,7 +38,7 @@ public final class NaturalOrder extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(1 , filterCard), false, true));
     }
 
-    public NaturalOrder(final NaturalOrder card) {
+    private NaturalOrder(final NaturalOrder card) {
         super(card);
     }
 

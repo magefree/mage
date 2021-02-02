@@ -49,7 +49,7 @@ public final class VialSmasherTheFierce extends CardImpl {
         this.addAbility(PartnerAbility.getInstance());
     }
 
-    public VialSmasherTheFierce(final VialSmasherTheFierce card) {
+    private VialSmasherTheFierce(final VialSmasherTheFierce card) {
         super(card);
     }
 

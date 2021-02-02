@@ -35,7 +35,7 @@ public final class GeistFueledScarecrow extends CardImpl {
                 new SpellsCostIncreasingAllEffect(1, filter, TargetController.YOU)));
     }
 
-    public GeistFueledScarecrow(final GeistFueledScarecrow card) {
+    private GeistFueledScarecrow(final GeistFueledScarecrow card) {
         super(card);
     }
 

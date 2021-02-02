@@ -42,7 +42,7 @@ public final class LatchkeyFaerie extends CardImpl {
 
     }
 
-    public LatchkeyFaerie(final LatchkeyFaerie card) {
+    private LatchkeyFaerie(final LatchkeyFaerie card) {
         super(card);
     }
 

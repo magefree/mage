@@ -41,7 +41,7 @@ public final class ElderDeepFiend extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElderDeepFiend(final ElderDeepFiend card) {
+    private ElderDeepFiend(final ElderDeepFiend card) {
         super(card);
     }
 

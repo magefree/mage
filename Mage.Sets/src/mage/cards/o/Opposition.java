@@ -50,7 +50,7 @@ public final class Opposition extends CardImpl {
 
     }
 
-    public Opposition(final Opposition card) {
+    private Opposition(final Opposition card) {
         super(card);
     }
 

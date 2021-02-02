@@ -36,7 +36,7 @@ public final class AzoriusHerald extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new ManaWasSpentCondition(ColoredManaSymbol.U)), false), new ManaSpentToCastWatcher());        
     }
 
-    public AzoriusHerald(final AzoriusHerald card) {
+    private AzoriusHerald(final AzoriusHerald card) {
         super(card);
     }
 

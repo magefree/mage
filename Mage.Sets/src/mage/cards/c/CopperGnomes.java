@@ -37,7 +37,7 @@ public final class CopperGnomes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CopperGnomes(final CopperGnomes card) {
+    private CopperGnomes(final CopperGnomes card) {
         super(card);
     }
 

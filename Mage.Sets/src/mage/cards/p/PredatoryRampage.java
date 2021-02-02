@@ -35,7 +35,7 @@ public final class PredatoryRampage extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(BlocksThisTurnMarkerAbility.getInstance(), Duration.EndOfTurn, filter, ""));
     }
 
-    public PredatoryRampage(final PredatoryRampage card) {
+    private PredatoryRampage(final PredatoryRampage card) {
         super(card);
     }
 

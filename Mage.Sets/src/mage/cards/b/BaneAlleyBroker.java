@@ -81,7 +81,7 @@ public final class BaneAlleyBroker extends CardImpl {
 
     }
 
-    public BaneAlleyBroker(final BaneAlleyBroker card) {
+    private BaneAlleyBroker(final BaneAlleyBroker card) {
         super(card);
     }
 

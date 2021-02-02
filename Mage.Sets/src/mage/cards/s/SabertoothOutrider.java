@@ -40,7 +40,7 @@ public final class SabertoothOutrider extends CardImpl {
 
     }
 
-    public SabertoothOutrider(final SabertoothOutrider card) {
+    private SabertoothOutrider(final SabertoothOutrider card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class FeastOfDreams extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public FeastOfDreams(final FeastOfDreams card) {
+    private FeastOfDreams(final FeastOfDreams card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class TrygonPredator extends CardImpl {
         this.addAbility(new TrygonPredatorTriggeredAbility());
     }
 
-    public TrygonPredator(final TrygonPredator card) {
+    private TrygonPredator(final TrygonPredator card) {
         super(card);
     }
 

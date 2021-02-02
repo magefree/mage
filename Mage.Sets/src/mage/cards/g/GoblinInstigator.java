@@ -29,7 +29,7 @@ public final class GoblinInstigator extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken())));
     }
 
-    public GoblinInstigator(final GoblinInstigator card) {
+    private GoblinInstigator(final GoblinInstigator card) {
         super(card);
     }
 

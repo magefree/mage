@@ -43,7 +43,7 @@ public final class CastawaysDespair extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
-    public CastawaysDespair(final CastawaysDespair card) {
+    private CastawaysDespair(final CastawaysDespair card) {
         super(card);
     }
 

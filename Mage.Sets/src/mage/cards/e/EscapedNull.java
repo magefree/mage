@@ -30,7 +30,7 @@ public final class EscapedNull extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(5, 0, Duration.EndOfTurn), false));
     }
 
-    public EscapedNull(final EscapedNull card) {
+    private EscapedNull(final EscapedNull card) {
         super(card);
     }
 

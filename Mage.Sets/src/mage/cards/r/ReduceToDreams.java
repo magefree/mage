@@ -22,7 +22,7 @@ public final class ReduceToDreams extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
-    public ReduceToDreams(final ReduceToDreams card) {
+    private ReduceToDreams(final ReduceToDreams card) {
         super(card);
     }
 

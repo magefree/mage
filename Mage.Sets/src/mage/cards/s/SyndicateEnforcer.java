@@ -27,7 +27,7 @@ public final class SyndicateEnforcer extends CardImpl {
         this.addAbility(new ExtortAbility());
     }
 
-    public SyndicateEnforcer(final SyndicateEnforcer card) {
+    private SyndicateEnforcer(final SyndicateEnforcer card) {
         super(card);
     }
 

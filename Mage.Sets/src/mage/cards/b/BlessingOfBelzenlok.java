@@ -35,7 +35,7 @@ public final class BlessingOfBelzenlok extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public BlessingOfBelzenlok(final BlessingOfBelzenlok card) {
+    private BlessingOfBelzenlok(final BlessingOfBelzenlok card) {
         super(card);
     }
 

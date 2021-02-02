@@ -39,7 +39,7 @@ public final class HumbleDefector extends CardImpl {
 
     }
 
-    public HumbleDefector(final HumbleDefector card) {
+    private HumbleDefector(final HumbleDefector card) {
         super(card);
     }
 

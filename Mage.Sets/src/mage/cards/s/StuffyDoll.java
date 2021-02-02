@@ -44,7 +44,7 @@ public final class StuffyDoll extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageSelfEffect(1), new TapSourceCost()));
     }
 
-    public StuffyDoll(final StuffyDoll card) {
+    private StuffyDoll(final StuffyDoll card) {
         super(card);
     }
 

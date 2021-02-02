@@ -35,7 +35,7 @@ public final class TerritorialGorger extends CardImpl {
         this.addAbility(new TerritorialGorgerTriggeredAbility());
     }
 
-    public TerritorialGorger(final TerritorialGorger card) {
+    private TerritorialGorger(final TerritorialGorger card) {
         super(card);
     }
 

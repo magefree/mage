@@ -44,7 +44,7 @@ public final class MindwhipSliver extends CardImpl {
                         "All Slivers have \"{2}, Sacrifice this permanent: Target player discards a card at random. Activate this ability only any time you could cast a sorcery.\"")));
     }
 
-    public MindwhipSliver(final MindwhipSliver card) {
+    private MindwhipSliver(final MindwhipSliver card) {
         super(card);
     }
 

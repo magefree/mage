@@ -43,7 +43,7 @@ public final class AspectOfMongoose extends CardImpl {
 
     }
 
-    public AspectOfMongoose(final AspectOfMongoose card) {
+    private AspectOfMongoose(final AspectOfMongoose card) {
         super(card);
     }
 

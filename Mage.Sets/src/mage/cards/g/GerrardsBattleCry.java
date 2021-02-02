@@ -24,7 +24,7 @@ public final class GerrardsBattleCry extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false), new ManaCostsImpl("{2}{W}")));
     }
 
-    public GerrardsBattleCry(final GerrardsBattleCry card) {
+    private GerrardsBattleCry(final GerrardsBattleCry card) {
         super(card);
     }
 

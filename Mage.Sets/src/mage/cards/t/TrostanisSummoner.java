@@ -36,7 +36,7 @@ public final class TrostanisSummoner extends CardImpl {
 
     }
 
-    public TrostanisSummoner(final TrostanisSummoner card) {
+    private TrostanisSummoner(final TrostanisSummoner card) {
         super(card);
     }
 

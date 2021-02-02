@@ -28,7 +28,7 @@ public final class Plagiarize extends CardImpl {
         this.getSpellAbility().addEffect(new PlagiarizeEffect());
     }
 
-    public Plagiarize(final Plagiarize card) {
+    private Plagiarize(final Plagiarize card) {
         super(card);
     }
 

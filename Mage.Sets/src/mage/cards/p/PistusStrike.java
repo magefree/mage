@@ -38,7 +38,7 @@ public final class PistusStrike extends CardImpl {
         this.getSpellAbility().addEffect(new PoisonControllerTargetCreatureEffect());
     }
 
-    public PistusStrike(final PistusStrike card) {
+    private PistusStrike(final PistusStrike card) {
         super(card);
     }
 

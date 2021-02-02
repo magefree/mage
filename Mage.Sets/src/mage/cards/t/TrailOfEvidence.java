@@ -31,7 +31,7 @@ public final class TrailOfEvidence extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new InvestigateEffect(), filter, false));
     }
 
-    public TrailOfEvidence(final TrailOfEvidence card) {
+    private TrailOfEvidence(final TrailOfEvidence card) {
         super(card);
     }
 

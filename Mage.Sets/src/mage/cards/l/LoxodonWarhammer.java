@@ -41,7 +41,7 @@ public final class LoxodonWarhammer extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
     }
 
-    public LoxodonWarhammer(final LoxodonWarhammer card) {
+    private LoxodonWarhammer(final LoxodonWarhammer card) {
         super(card);
     }
 

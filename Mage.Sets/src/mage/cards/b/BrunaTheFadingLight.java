@@ -59,7 +59,7 @@ public final class BrunaTheFadingLight extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("(Melds with Gisela, the Broken Blade.)")));
     }
 
-    public BrunaTheFadingLight(final BrunaTheFadingLight card) {
+    private BrunaTheFadingLight(final BrunaTheFadingLight card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class HighMarket extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HighMarket(final HighMarket card) {
+    private HighMarket(final HighMarket card) {
         super(card);
     }
 

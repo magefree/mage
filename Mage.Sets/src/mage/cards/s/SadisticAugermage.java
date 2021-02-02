@@ -35,7 +35,7 @@ public final class SadisticAugermage extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new WidespreadPanicEffect()));
     }
 
-    public SadisticAugermage(final SadisticAugermage card) {
+    private SadisticAugermage(final SadisticAugermage card) {
         super(card);
     }
 

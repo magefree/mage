@@ -37,7 +37,7 @@ public final class SparkMage extends CardImpl {
         this.addAbility(new SparkMageTriggeredAbility());
     }
 
-    public SparkMage(final SparkMage card) {
+    private SparkMage(final SparkMage card) {
         super(card);
     }
 

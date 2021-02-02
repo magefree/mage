@@ -29,7 +29,7 @@ public final class RainOfDaggers extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public RainOfDaggers(final RainOfDaggers card) {
+    private RainOfDaggers(final RainOfDaggers card) {
         super(card);
     }
 

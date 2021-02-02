@@ -33,7 +33,7 @@ public final class SedrisTheTraitorKing extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SedrisTheTraitorKingEffect()));
     }
 
-    public SedrisTheTraitorKing(final SedrisTheTraitorKing card) {
+    private SedrisTheTraitorKing(final SedrisTheTraitorKing card) {
         super(card);
     }
 

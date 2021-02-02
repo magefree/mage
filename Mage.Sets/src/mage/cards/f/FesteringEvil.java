@@ -32,7 +32,7 @@ public final class FesteringEvil extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FesteringEvil(final FesteringEvil card) {
+    private FesteringEvil(final FesteringEvil card) {
         super(card);
     }
 

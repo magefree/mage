@@ -34,7 +34,7 @@ public final class PatronOfTheAkki extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(2, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false), false));
     }
 
-    public PatronOfTheAkki(final PatronOfTheAkki card) {
+    private PatronOfTheAkki(final PatronOfTheAkki card) {
         super(card);
     }
 

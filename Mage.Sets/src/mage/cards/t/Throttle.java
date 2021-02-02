@@ -24,7 +24,7 @@ public final class Throttle extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Throttle(final Throttle card) {
+    private Throttle(final Throttle card) {
         super(card);
     }
 

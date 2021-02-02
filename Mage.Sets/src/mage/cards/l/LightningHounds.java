@@ -26,7 +26,7 @@ public final class LightningHounds extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public LightningHounds(final LightningHounds card) {
+    private LightningHounds(final LightningHounds card) {
         super(card);
     }
 

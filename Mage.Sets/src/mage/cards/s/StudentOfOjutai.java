@@ -35,7 +35,7 @@ public final class StudentOfOjutai extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(2), filterNonCreature, false));
     }
 
-    public StudentOfOjutai(final StudentOfOjutai card) {
+    private StudentOfOjutai(final StudentOfOjutai card) {
         super(card);
     }
 

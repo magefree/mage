@@ -44,7 +44,7 @@ public final class CavalryPegasus extends CardImpl {
 
     }
 
-    public CavalryPegasus(final CavalryPegasus card) {
+    private CavalryPegasus(final CavalryPegasus card) {
         super(card);
     }
 

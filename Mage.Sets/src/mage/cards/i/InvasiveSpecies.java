@@ -37,7 +37,7 @@ public final class InvasiveSpecies extends CardImpl {
         
     }
 
-    public InvasiveSpecies(final InvasiveSpecies card) {
+    private InvasiveSpecies(final InvasiveSpecies card) {
         super(card);
     }
 

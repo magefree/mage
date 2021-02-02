@@ -31,7 +31,7 @@ public final class KeeningStone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KeeningStone(final KeeningStone card) {
+    private KeeningStone(final KeeningStone card) {
         super(card);
     }
 

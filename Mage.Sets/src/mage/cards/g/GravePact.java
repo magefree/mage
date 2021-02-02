@@ -32,7 +32,7 @@ public final class GravePact extends CardImpl {
         this.addAbility(new GravePactTriggeredAbility());
     }
 
-    public GravePact(final GravePact card) {
+    private GravePact(final GravePact card) {
         super(card);
     }
 

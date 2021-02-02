@@ -47,7 +47,7 @@ public final class AirdropCondor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AirdropCondor(final AirdropCondor card) {
+    private AirdropCondor(final AirdropCondor card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class StoneGolem extends CardImpl {
 
     }
 
-    public StoneGolem(final StoneGolem card) {
+    private StoneGolem(final StoneGolem card) {
         super(card);
     }
 

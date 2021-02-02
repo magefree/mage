@@ -40,7 +40,7 @@ public final class MetathranAerostat extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new MetathranAerostatEffect(), new ManaCostsImpl("{X}{U}")));
     }
 
-    public MetathranAerostat(final MetathranAerostat card) {
+    private MetathranAerostat(final MetathranAerostat card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class BorosSwiftblade extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
     }
 
-    public BorosSwiftblade(final BorosSwiftblade card) {
+    private BorosSwiftblade(final BorosSwiftblade card) {
         super(card);
     }
 

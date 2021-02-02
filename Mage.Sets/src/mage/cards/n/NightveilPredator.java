@@ -33,7 +33,7 @@ public final class NightveilPredator extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    public NightveilPredator(final NightveilPredator card) {
+    private NightveilPredator(final NightveilPredator card) {
         super(card);
     }
 

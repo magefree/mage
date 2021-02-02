@@ -46,7 +46,7 @@ public final class ToothyImaginaryFriend extends CardImpl {
                         .setText("draw a card for each +1/+1 counter on it"), false));
     }
 
-    public ToothyImaginaryFriend(final ToothyImaginaryFriend card) {
+    private ToothyImaginaryFriend(final ToothyImaginaryFriend card) {
         super(card);
     }
 

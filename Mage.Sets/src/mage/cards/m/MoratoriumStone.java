@@ -53,7 +53,7 @@ public final class MoratoriumStone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoratoriumStone(final MoratoriumStone card) {
+    private MoratoriumStone(final MoratoriumStone card) {
         super(card);
     }
 

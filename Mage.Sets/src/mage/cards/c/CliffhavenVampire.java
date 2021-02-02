@@ -32,7 +32,7 @@ public final class CliffhavenVampire extends CardImpl {
         this.addAbility(new GainLifeControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), false));
     }
 
-    public CliffhavenVampire(final CliffhavenVampire card) {
+    private CliffhavenVampire(final CliffhavenVampire card) {
         super(card);
     }
 

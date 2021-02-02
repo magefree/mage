@@ -31,7 +31,7 @@ public final class LightningBlow extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false));
     }
 
-    public LightningBlow(final LightningBlow card) {
+    private LightningBlow(final LightningBlow card) {
         super(card);
     }
 

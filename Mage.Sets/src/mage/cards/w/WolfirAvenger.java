@@ -32,7 +32,7 @@ public final class WolfirAvenger extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }
 
-    public WolfirAvenger(final WolfirAvenger card) {
+    private WolfirAvenger(final WolfirAvenger card) {
         super(card);
     }
 

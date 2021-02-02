@@ -31,7 +31,7 @@ public final class LuBuMasterAtArms extends CardImpl {
         this.addAbility(HorsemanshipAbility.getInstance());
     }
 
-    public LuBuMasterAtArms(final LuBuMasterAtArms card) {
+    private LuBuMasterAtArms(final LuBuMasterAtArms card) {
         super(card);
     }
 

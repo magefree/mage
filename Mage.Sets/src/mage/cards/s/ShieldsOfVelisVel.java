@@ -36,7 +36,7 @@ public final class ShieldsOfVelisVel extends CardImpl {
 
     }
 
-    public ShieldsOfVelisVel(final ShieldsOfVelisVel card) {
+    private ShieldsOfVelisVel(final ShieldsOfVelisVel card) {
         super(card);
     }
 

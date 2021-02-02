@@ -43,7 +43,7 @@ public final class WispweaverAngel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WispweaverAngel(final WispweaverAngel card) {
+    private WispweaverAngel(final WispweaverAngel card) {
         super(card);
     }
 

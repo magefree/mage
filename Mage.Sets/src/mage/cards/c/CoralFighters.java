@@ -31,7 +31,7 @@ public final class CoralFighters extends CardImpl {
         this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new CoralFightersEffect(), false, true));
     }
 
-    public CoralFighters(final CoralFighters card) {
+    private CoralFighters(final CoralFighters card) {
         super(card);
     }
 

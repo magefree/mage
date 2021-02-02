@@ -42,7 +42,7 @@ public final class ImperialLancer extends CardImpl {
                         new PermanentsOnTheBattlefieldCondition(filter), "{this} has double strike as long as you control a Dinosaur")));
     }
 
-    public ImperialLancer(final ImperialLancer card) {
+    private ImperialLancer(final ImperialLancer card) {
         super(card);
     }
 

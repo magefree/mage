@@ -37,7 +37,7 @@ public final class Scuttlemutt extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Scuttlemutt(final Scuttlemutt card) {
+    private Scuttlemutt(final Scuttlemutt card) {
         super(card);
     }
 

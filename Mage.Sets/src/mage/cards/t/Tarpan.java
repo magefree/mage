@@ -27,7 +27,7 @@ public final class Tarpan extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(1), false));
     }
 
-    public Tarpan(final Tarpan card) {
+    private Tarpan(final Tarpan card) {
         super(card);
     }
 

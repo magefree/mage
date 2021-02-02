@@ -42,7 +42,7 @@ public final class PyreZombie extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PyreZombie(final PyreZombie card) {
+    private PyreZombie(final PyreZombie card) {
         super(card);
     }
 

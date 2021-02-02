@@ -54,7 +54,7 @@ public final class BINGO extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
     }
 
-    public BINGO(final BINGO card) {
+    private BINGO(final BINGO card) {
         super(card);
     }
 

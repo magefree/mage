@@ -32,7 +32,7 @@ public final class SoaringShowOff extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardAllEffect(1)));
     }
 
-    public SoaringShowOff(final SoaringShowOff card) {
+    private SoaringShowOff(final SoaringShowOff card) {
         super(card);
     }
 

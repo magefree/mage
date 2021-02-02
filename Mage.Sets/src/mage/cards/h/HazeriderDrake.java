@@ -29,7 +29,7 @@ public final class HazeriderDrake extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
-    public HazeriderDrake(final HazeriderDrake card) {
+    private HazeriderDrake(final HazeriderDrake card) {
         super(card);
     }
 

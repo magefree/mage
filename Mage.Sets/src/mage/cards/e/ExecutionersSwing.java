@@ -33,7 +33,7 @@ public final class ExecutionersSwing extends CardImpl {
         this.getSpellAbility().addWatcher(new SourceDidDamageWatcher());
     }
 
-    public ExecutionersSwing(final ExecutionersSwing card) {
+    private ExecutionersSwing(final ExecutionersSwing card) {
         super(card);
     }
 

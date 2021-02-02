@@ -28,7 +28,7 @@ public final class Cloudskate extends CardImpl {
         this.addAbility(new FadingAbility(3, this));
     }
 
-    public Cloudskate(final Cloudskate card) {
+    private Cloudskate(final Cloudskate card) {
         super(card);
     }
 

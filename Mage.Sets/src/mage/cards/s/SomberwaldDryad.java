@@ -25,7 +25,7 @@ public final class SomberwaldDryad extends CardImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public SomberwaldDryad(final SomberwaldDryad card) {
+    private SomberwaldDryad(final SomberwaldDryad card) {
         super(card);
     }
 

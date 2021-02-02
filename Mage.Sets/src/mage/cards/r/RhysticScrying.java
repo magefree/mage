@@ -28,7 +28,7 @@ public final class RhysticScrying extends CardImpl {
         this.getSpellAbility().addEffect(new RhysticScryingEffect());
     }
 
-    public RhysticScrying(final RhysticScrying card) {
+    private RhysticScrying(final RhysticScrying card) {
         super(card);
     }
 

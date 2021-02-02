@@ -33,7 +33,7 @@ public final class RithsAttendant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RithsAttendant(final RithsAttendant card) {
+    private RithsAttendant(final RithsAttendant card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class MasterOfTheFeast extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardAllEffect(1, TargetController.OPPONENT), TargetController.YOU, false));
     }
 
-    public MasterOfTheFeast(final MasterOfTheFeast card) {
+    private MasterOfTheFeast(final MasterOfTheFeast card) {
         super(card);
     }
 

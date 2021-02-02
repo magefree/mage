@@ -37,7 +37,7 @@ public final class ObzedatsAid extends CardImpl {
         
     }
 
-    public ObzedatsAid(final ObzedatsAid card) {
+    private ObzedatsAid(final ObzedatsAid card) {
         super(card);
     }
 

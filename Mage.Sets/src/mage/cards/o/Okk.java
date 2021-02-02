@@ -35,7 +35,7 @@ public final class Okk extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OkkBlockEffect()));
     }
 
-    public Okk(final Okk card) {
+    private Okk(final Okk card) {
         super(card);
     }
 

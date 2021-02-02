@@ -41,7 +41,7 @@ public final class CogworkAssembler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CogworkAssembler(final CogworkAssembler card) {
+    private CogworkAssembler(final CogworkAssembler card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class YahenniUndyingPartisan extends CardImpl {
         );
     }
 
-    public YahenniUndyingPartisan(final YahenniUndyingPartisan card) {
+    private YahenniUndyingPartisan(final YahenniUndyingPartisan card) {
         super(card);
     }
 

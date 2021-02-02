@@ -69,7 +69,7 @@ public final class KumenaTyrantOfOrazca extends CardImpl {
 
     }
 
-    public KumenaTyrantOfOrazca(final KumenaTyrantOfOrazca card) {
+    private KumenaTyrantOfOrazca(final KumenaTyrantOfOrazca card) {
         super(card);
     }
 

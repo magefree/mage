@@ -33,7 +33,7 @@ public final class HollowhengeScavenger extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, MorbidCondition.instance, staticText));
     }
 
-    public HollowhengeScavenger(final HollowhengeScavenger card) {
+    private HollowhengeScavenger(final HollowhengeScavenger card) {
         super(card);
     }
 

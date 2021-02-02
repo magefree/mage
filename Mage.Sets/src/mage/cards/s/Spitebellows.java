@@ -34,7 +34,7 @@ public final class Spitebellows extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{1}{R}{R}"));
     }
 
-    public Spitebellows(final Spitebellows card) {
+    private Spitebellows(final Spitebellows card) {
         super(card);
     }
 

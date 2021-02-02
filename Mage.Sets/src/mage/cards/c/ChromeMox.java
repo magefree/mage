@@ -44,7 +44,7 @@ public final class ChromeMox extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ChromeMoxManaEffect(), new TapSourceCost()));
     }
 
-    public ChromeMox(final ChromeMox card) {
+    private ChromeMox(final ChromeMox card) {
         super(card);
     }
 

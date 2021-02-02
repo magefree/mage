@@ -34,7 +34,7 @@ public final class GruulKeyrune extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GruulKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{R}{G}")));
     }
 
-    public GruulKeyrune(final GruulKeyrune card) {
+    private GruulKeyrune(final GruulKeyrune card) {
         super(card);
     }
 

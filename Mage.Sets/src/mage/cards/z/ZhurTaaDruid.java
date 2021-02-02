@@ -36,7 +36,7 @@ public final class ZhurTaaDruid extends CardImpl {
 
     }
 
-    public ZhurTaaDruid(final ZhurTaaDruid card) {
+    private ZhurTaaDruid(final ZhurTaaDruid card) {
         super(card);
     }
 

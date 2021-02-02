@@ -32,7 +32,7 @@ public final class HarmlessOffering extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledPermanent());
     }
 
-    public HarmlessOffering(final HarmlessOffering card) {
+    private HarmlessOffering(final HarmlessOffering card) {
         super(card);
     }
 

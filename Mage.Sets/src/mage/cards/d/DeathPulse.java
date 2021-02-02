@@ -34,7 +34,7 @@ public final class DeathPulse extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeathPulse(final DeathPulse card) {
+    private DeathPulse(final DeathPulse card) {
         super(card);
     }
 

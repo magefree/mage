@@ -26,7 +26,7 @@ public final class ScarabFeast extends CardImpl {
         addAbility(new CyclingAbility(new ManaCostsImpl("{B}")));
     }
 
-    public ScarabFeast(final ScarabFeast card) {
+    private ScarabFeast(final ScarabFeast card) {
         super(card);
     }
 

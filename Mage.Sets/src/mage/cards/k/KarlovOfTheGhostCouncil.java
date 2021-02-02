@@ -43,7 +43,7 @@ public final class KarlovOfTheGhostCouncil extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KarlovOfTheGhostCouncil(final KarlovOfTheGhostCouncil card) {
+    private KarlovOfTheGhostCouncil(final KarlovOfTheGhostCouncil card) {
         super(card);
     }
 

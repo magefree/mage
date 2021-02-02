@@ -36,7 +36,7 @@ public final class BanthaHerd extends CardImpl {
         this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new BathaHerdEffect()));
     }
 
-    public BanthaHerd(final BanthaHerd card) {
+    private BanthaHerd(final BanthaHerd card) {
         super(card);
     }
 

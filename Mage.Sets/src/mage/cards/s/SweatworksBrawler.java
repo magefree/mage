@@ -31,7 +31,7 @@ public final class SweatworksBrawler extends CardImpl {
         this.addAbility(new MenaceAbility());
     }
 
-    public SweatworksBrawler(final SweatworksBrawler card) {
+    private SweatworksBrawler(final SweatworksBrawler card) {
         super(card);
     }
 

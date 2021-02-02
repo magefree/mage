@@ -46,7 +46,7 @@ public final class DarksteelGarrison extends CardImpl {
 
     }
 
-    public DarksteelGarrison(final DarksteelGarrison card) {
+    private DarksteelGarrison(final DarksteelGarrison card) {
         super(card);
     }
 

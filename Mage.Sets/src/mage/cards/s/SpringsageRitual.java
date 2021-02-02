@@ -26,7 +26,7 @@ public final class SpringsageRitual extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
     }
 
-    public SpringsageRitual(final SpringsageRitual card) {
+    private SpringsageRitual(final SpringsageRitual card) {
         super(card);
     }
 

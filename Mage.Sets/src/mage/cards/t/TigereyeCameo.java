@@ -22,7 +22,7 @@ public final class TigereyeCameo extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public TigereyeCameo(final TigereyeCameo card) {
+    private TigereyeCameo(final TigereyeCameo card) {
         super(card);
     }
 

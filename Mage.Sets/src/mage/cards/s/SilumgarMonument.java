@@ -35,7 +35,7 @@ public final class SilumgarMonument extends CardImpl {
             (new OjutaiMonumentToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{4}{U}{B}")));
     }
 
-    public SilumgarMonument(final SilumgarMonument card) {
+    private SilumgarMonument(final SilumgarMonument card) {
         super(card);
     }
 

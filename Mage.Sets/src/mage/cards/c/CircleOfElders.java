@@ -43,7 +43,7 @@ public final class CircleOfElders extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CircleOfElders(final CircleOfElders card) {
+    private CircleOfElders(final CircleOfElders card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class ScionOfVituGhazi extends CardImpl {
                 new CastFromHandWatcher());
     }
 
-    public ScionOfVituGhazi(final ScionOfVituGhazi card) {
+    private ScionOfVituGhazi(final ScionOfVituGhazi card) {
         super(card);
     }
 

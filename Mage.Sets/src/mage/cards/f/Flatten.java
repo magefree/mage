@@ -23,7 +23,7 @@ public final class Flatten extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Flatten(final Flatten card) {
+    private Flatten(final Flatten card) {
         super(card);
     }
 

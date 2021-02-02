@@ -40,7 +40,7 @@ public final class NahirisWrath extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(NahirisWrathAdjuster.instance);
     }
 
-    public NahirisWrath(final NahirisWrath card) {
+    private NahirisWrath(final NahirisWrath card) {
         super(card);
     }
 

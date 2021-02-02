@@ -50,7 +50,7 @@ public final class FoundryHornet extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter), rule));
     }
 
-    public FoundryHornet(final FoundryHornet card) {
+    private FoundryHornet(final FoundryHornet card) {
         super(card);
     }
 

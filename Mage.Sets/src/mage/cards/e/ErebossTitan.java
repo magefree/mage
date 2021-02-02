@@ -56,7 +56,7 @@ public final class ErebossTitan extends CardImpl {
 
     }
 
-    public ErebossTitan(final ErebossTitan card) {
+    private ErebossTitan(final ErebossTitan card) {
         super(card);
     }
 

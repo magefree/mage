@@ -36,7 +36,7 @@ public final class Narcissism extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Narcissism(final Narcissism card) {
+    private Narcissism(final Narcissism card) {
         super(card);
     }
 

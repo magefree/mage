@@ -34,7 +34,7 @@ public final class PsychicSurgery extends CardImpl {
         this.addAbility(new PsychicSurgeryTriggeredAbility());
     }
 
-    public PsychicSurgery(final PsychicSurgery card) {
+    private PsychicSurgery(final PsychicSurgery card) {
         super(card);
     }
 

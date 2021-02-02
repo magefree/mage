@@ -38,7 +38,7 @@ public final class HardenedScaleArmor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
     }
 
-    public HardenedScaleArmor(final HardenedScaleArmor card) {
+    private HardenedScaleArmor(final HardenedScaleArmor card) {
         super(card);
     }
 

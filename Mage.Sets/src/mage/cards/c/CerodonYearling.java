@@ -29,7 +29,7 @@ public final class CerodonYearling extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public CerodonYearling(final CerodonYearling card) {
+    private CerodonYearling(final CerodonYearling card) {
         super(card);
     }
 

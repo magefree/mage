@@ -34,7 +34,7 @@ public final class ImplementOfCombustion extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public ImplementOfCombustion(final ImplementOfCombustion card) {
+    private ImplementOfCombustion(final ImplementOfCombustion card) {
         super(card);
     }
 

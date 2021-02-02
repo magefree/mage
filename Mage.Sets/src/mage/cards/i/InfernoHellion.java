@@ -50,7 +50,7 @@ public final class InfernoHellion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InfernoHellion(final InfernoHellion card) {
+    private InfernoHellion(final InfernoHellion card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class WallOfDeceit extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{U}")));
     }
 
-    public WallOfDeceit(final WallOfDeceit card) {
+    private WallOfDeceit(final WallOfDeceit card) {
         super(card);
     }
 

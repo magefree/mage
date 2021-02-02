@@ -45,7 +45,7 @@ public final class FlinthoofBoar extends CardImpl {
                 new ManaCostsImpl("{R}")));
     }
 
-    public FlinthoofBoar(final FlinthoofBoar card) {
+    private FlinthoofBoar(final FlinthoofBoar card) {
         super(card);
     }
 

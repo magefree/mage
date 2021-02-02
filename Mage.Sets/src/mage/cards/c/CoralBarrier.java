@@ -32,7 +32,7 @@ public final class CoralBarrier extends CardImpl {
 
     }
 
-    public CoralBarrier(final CoralBarrier card) {
+    private CoralBarrier(final CoralBarrier card) {
         super(card);
     }
 

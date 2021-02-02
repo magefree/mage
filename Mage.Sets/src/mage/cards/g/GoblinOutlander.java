@@ -28,7 +28,7 @@ public final class GoblinOutlander extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
     }
 
-    public GoblinOutlander(final GoblinOutlander card) {
+    private GoblinOutlander(final GoblinOutlander card) {
         super(card);
     }
 

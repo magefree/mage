@@ -52,7 +52,7 @@ public final class Berserk extends CardImpl {
 
     }
 
-    public Berserk(final Berserk card) {
+    private Berserk(final Berserk card) {
         super(card);
     }
 

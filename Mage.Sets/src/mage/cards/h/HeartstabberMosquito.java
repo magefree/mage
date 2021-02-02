@@ -41,7 +41,7 @@ public final class HeartstabberMosquito extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, destroy target creature."));
     }
 
-    public HeartstabberMosquito(final HeartstabberMosquito card) {
+    private HeartstabberMosquito(final HeartstabberMosquito card) {
         super(card);
     }
 

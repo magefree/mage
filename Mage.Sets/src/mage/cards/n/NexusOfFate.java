@@ -24,7 +24,7 @@ public final class NexusOfFate extends CardImpl {
         this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new RevealAndShuffleIntoLibrarySourceEffect()));
     }
 
-    public NexusOfFate(final NexusOfFate card) {
+    private NexusOfFate(final NexusOfFate card) {
         super(card);
     }
 

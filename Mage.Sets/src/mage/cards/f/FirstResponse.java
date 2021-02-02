@@ -28,7 +28,7 @@ public final class FirstResponse extends CardImpl {
                 "At the beginning of each upkeep, if you lost life last turn, create a 1/1 white Soldier creature token."));
     }
 
-    public FirstResponse(final FirstResponse card) {
+    private FirstResponse(final FirstResponse card) {
         super(card);
     }
 

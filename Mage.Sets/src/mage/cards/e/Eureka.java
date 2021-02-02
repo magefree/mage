@@ -30,7 +30,7 @@ public final class Eureka extends CardImpl {
         this.getSpellAbility().addEffect(new EurekaEffect());
     }
 
-    public Eureka(final Eureka card) {
+    private Eureka(final Eureka card) {
         super(card);
     }
 

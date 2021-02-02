@@ -29,7 +29,7 @@ public final class AkroanSergeant extends CardImpl {
         this.addAbility(new RenownAbility(1));
     }
 
-    public AkroanSergeant(final AkroanSergeant card) {
+    private AkroanSergeant(final AkroanSergeant card) {
         super(card);
     }
 

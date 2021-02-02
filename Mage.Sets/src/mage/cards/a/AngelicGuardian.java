@@ -41,7 +41,7 @@ public final class AngelicGuardian extends CardImpl {
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new AngelicGuardianGainEffect(), 1));
     }
 
-    public AngelicGuardian(final AngelicGuardian card) {
+    private AngelicGuardian(final AngelicGuardian card) {
         super(card);
     }
 

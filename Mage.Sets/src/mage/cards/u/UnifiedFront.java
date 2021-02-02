@@ -27,7 +27,7 @@ public final class UnifiedFront extends CardImpl {
         getSpellAbility().addEffect(effect);
     }
 
-    public UnifiedFront(final UnifiedFront card) {
+    private UnifiedFront(final UnifiedFront card) {
         super(card);
     }
 

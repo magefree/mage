@@ -32,7 +32,7 @@ public final class CountervailingWinds extends CardImpl {
 
     }
 
-    public CountervailingWinds(final CountervailingWinds card) {
+    private CountervailingWinds(final CountervailingWinds card) {
         super(card);
     }
 

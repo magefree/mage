@@ -38,7 +38,7 @@ public final class DivebomberGriffin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DivebomberGriffin(final DivebomberGriffin card) {
+    private DivebomberGriffin(final DivebomberGriffin card) {
         super(card);
     }
 

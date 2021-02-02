@@ -28,7 +28,7 @@ public final class LifeAndLimb extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LifeAndLimbEffect()));
     }
 
-    public LifeAndLimb(final LifeAndLimb card) {
+    private LifeAndLimb(final LifeAndLimb card) {
         super(card);
     }
 

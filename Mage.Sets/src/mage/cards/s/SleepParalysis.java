@@ -40,7 +40,7 @@ public final class SleepParalysis extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
-    public SleepParalysis(final SleepParalysis card) {
+    private SleepParalysis(final SleepParalysis card) {
         super(card);
     }
 

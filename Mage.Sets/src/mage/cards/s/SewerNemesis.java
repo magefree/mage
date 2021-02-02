@@ -47,7 +47,7 @@ public final class SewerNemesis extends CardImpl {
 
     }
 
-    public SewerNemesis(final SewerNemesis card) {
+    private SewerNemesis(final SewerNemesis card) {
         super(card);
     }
 

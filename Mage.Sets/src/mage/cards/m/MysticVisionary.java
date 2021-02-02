@@ -39,7 +39,7 @@ public final class MysticVisionary extends CardImpl {
        this.addAbility(ability);
     }
 
-    public MysticVisionary(final MysticVisionary card) {
+    private MysticVisionary(final MysticVisionary card) {
         super(card);
     }
 

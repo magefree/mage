@@ -30,7 +30,7 @@ public final class Embolden extends CardImpl {
 
     }
 
-    public Embolden(final Embolden card) {
+    private Embolden(final Embolden card) {
         super(card);
     }
 

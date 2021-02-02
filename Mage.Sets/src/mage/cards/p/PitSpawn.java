@@ -37,7 +37,7 @@ public final class PitSpawn extends CardImpl {
         this.addAbility(new DealsDamageToACreatureTriggeredAbility(new ExileTargetEffect("exile that creature"), false, false, true));
     }   
 
-    public PitSpawn(final PitSpawn card) {
+    private PitSpawn(final PitSpawn card) {
         super(card);
     }
 

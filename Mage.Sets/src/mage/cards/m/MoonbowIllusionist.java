@@ -44,7 +44,7 @@ public final class MoonbowIllusionist extends CardImpl {
 
     }
 
-    public MoonbowIllusionist(final MoonbowIllusionist card) {
+    private MoonbowIllusionist(final MoonbowIllusionist card) {
         super(card);
     }
 

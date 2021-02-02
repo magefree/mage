@@ -53,7 +53,7 @@ public final class SquiresDevotion extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new IxalanVampireToken())));
     }
 
-    public SquiresDevotion(final SquiresDevotion card) {
+    private SquiresDevotion(final SquiresDevotion card) {
         super(card);
     }
 

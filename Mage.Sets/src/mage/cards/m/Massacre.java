@@ -42,7 +42,7 @@ public final class Massacre extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
     }
 
-    public Massacre(final Massacre card) {
+    private Massacre(final Massacre card) {
         super(card);
     }
 

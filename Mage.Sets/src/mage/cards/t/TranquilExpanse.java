@@ -26,7 +26,7 @@ public final class TranquilExpanse extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public TranquilExpanse(final TranquilExpanse card) {
+    private TranquilExpanse(final TranquilExpanse card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class FacesOfThePast extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new FacesOfThePastEffect(), false, false, true));
     }
 
-    public FacesOfThePast(final FacesOfThePast card) {
+    private FacesOfThePast(final FacesOfThePast card) {
         super(card);
     }
 

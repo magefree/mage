@@ -38,7 +38,7 @@ public final class DacksDuplicate extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(effect, true));
     }
 
-    public DacksDuplicate(final DacksDuplicate card) {
+    private DacksDuplicate(final DacksDuplicate card) {
         super(card);
     }
 

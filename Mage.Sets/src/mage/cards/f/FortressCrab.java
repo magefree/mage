@@ -22,7 +22,7 @@ public final class FortressCrab extends CardImpl {
         this.toughness = new MageInt(6);
     }
 
-    public FortressCrab(final FortressCrab card) {
+    private FortressCrab(final FortressCrab card) {
         super(card);
     }
 

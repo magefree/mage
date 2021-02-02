@@ -38,7 +38,7 @@ public final class NovijenHeartOfProgress extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NovijenHeartOfProgress(final NovijenHeartOfProgress card) {
+    private NovijenHeartOfProgress(final NovijenHeartOfProgress card) {
         super(card);
     }
 

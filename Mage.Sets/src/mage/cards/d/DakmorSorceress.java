@@ -37,7 +37,7 @@ public final class DakmorSorceress extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public DakmorSorceress(final DakmorSorceress card) {
+    private DakmorSorceress(final DakmorSorceress card) {
         super(card);
     }
 

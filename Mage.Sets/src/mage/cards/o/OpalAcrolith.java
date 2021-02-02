@@ -46,7 +46,7 @@ public final class OpalAcrolith extends CardImpl {
 
     }
 
-    public OpalAcrolith(final OpalAcrolith card) {
+    private OpalAcrolith(final OpalAcrolith card) {
         super(card);
     }
 

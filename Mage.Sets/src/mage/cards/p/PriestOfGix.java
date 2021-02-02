@@ -29,7 +29,7 @@ public final class PriestOfGix extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BasicManaEffect(Mana.BlackMana(3))));
     }
 
-    public PriestOfGix(final PriestOfGix card) {
+    private PriestOfGix(final PriestOfGix card) {
         super(card);
     }
 

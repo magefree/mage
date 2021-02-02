@@ -37,7 +37,7 @@ public final class StoneSpirit extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public StoneSpirit(final StoneSpirit card) {
+    private StoneSpirit(final StoneSpirit card) {
         super(card);
     }
 

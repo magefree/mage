@@ -29,7 +29,7 @@ public final class ZombieBrute extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public ZombieBrute(final ZombieBrute card) {
+    private ZombieBrute(final ZombieBrute card) {
         super(card);
     }
 

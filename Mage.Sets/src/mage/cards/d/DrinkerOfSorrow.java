@@ -32,7 +32,7 @@ public final class DrinkerOfSorrow extends CardImpl {
         this.addAbility(new DealsCombatDamageTriggeredAbility(new SacrificeEffect(new FilterPermanent(), 1, ""), false));
     }
 
-    public DrinkerOfSorrow(final DrinkerOfSorrow card) {
+    private DrinkerOfSorrow(final DrinkerOfSorrow card) {
         super(card);
     }
 

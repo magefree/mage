@@ -28,7 +28,7 @@ public final class TempleGarden extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public TempleGarden(final TempleGarden card) {
+    private TempleGarden(final TempleGarden card) {
         super(card);
     }
 

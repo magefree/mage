@@ -32,7 +32,7 @@ public final class StompingSlabs extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public StompingSlabs(final StompingSlabs card) {
+    private StompingSlabs(final StompingSlabs card) {
         super(card);
     }
 

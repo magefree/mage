@@ -39,7 +39,7 @@ public final class ScryingSheets extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScryingSheets(final ScryingSheets card) {
+    private ScryingSheets(final ScryingSheets card) {
         super(card);
     }
 

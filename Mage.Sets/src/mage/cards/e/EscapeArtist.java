@@ -38,7 +38,7 @@ public final class EscapeArtist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EscapeArtist(final EscapeArtist card) {
+    private EscapeArtist(final EscapeArtist card) {
         super(card);
     }
 

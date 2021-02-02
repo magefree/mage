@@ -44,7 +44,7 @@ public final class BreakThroughTheLine extends CardImpl {
         
     }
 
-    public BreakThroughTheLine(final BreakThroughTheLine card) {
+    private BreakThroughTheLine(final BreakThroughTheLine card) {
         super(card);
     }
 

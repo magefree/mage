@@ -42,7 +42,7 @@ public final class SeekerOfInsight extends CardImpl {
                 new SpellsCastWatcher());
     }
 
-    public SeekerOfInsight(final SeekerOfInsight card) {
+    private SeekerOfInsight(final SeekerOfInsight card) {
         super(card);
     }
 

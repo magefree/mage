@@ -44,7 +44,7 @@ public final class OonasBlackguard extends CardImpl {
 
     }
 
-    public OonasBlackguard(final OonasBlackguard card) {
+    private OonasBlackguard(final OonasBlackguard card) {
         super(card);
     }
 

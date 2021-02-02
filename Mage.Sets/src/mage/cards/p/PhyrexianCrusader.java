@@ -35,7 +35,7 @@ public final class PhyrexianCrusader extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
     }
 
-    public PhyrexianCrusader(final PhyrexianCrusader card) {
+    private PhyrexianCrusader(final PhyrexianCrusader card) {
         super(card);
     }
 

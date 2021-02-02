@@ -43,7 +43,7 @@ public final class NightshadeSeer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NightshadeSeer(final NightshadeSeer card) {
+    private NightshadeSeer(final NightshadeSeer card) {
         super(card);
     }
 

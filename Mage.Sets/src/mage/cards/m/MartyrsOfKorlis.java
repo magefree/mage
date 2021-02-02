@@ -41,7 +41,7 @@ public final class MartyrsOfKorlis extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public MartyrsOfKorlis(final MartyrsOfKorlis card) {
+    private MartyrsOfKorlis(final MartyrsOfKorlis card) {
         super(card);
     }
 

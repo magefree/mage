@@ -30,7 +30,7 @@ public final class ThalakosDrifters extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShadowAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost()));
     }
 
-    public ThalakosDrifters(final ThalakosDrifters card) {
+    private ThalakosDrifters(final ThalakosDrifters card) {
         super(card);
     }
 

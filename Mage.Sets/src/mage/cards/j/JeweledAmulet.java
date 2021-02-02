@@ -47,7 +47,7 @@ public final class JeweledAmulet extends CardImpl {
 
     }
 
-    public JeweledAmulet(final JeweledAmulet card) {
+    private JeweledAmulet(final JeweledAmulet card) {
         super(card);
     }
 

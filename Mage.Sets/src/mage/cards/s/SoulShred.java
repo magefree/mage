@@ -34,7 +34,7 @@ public final class SoulShred extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(3));
     }
 
-    public SoulShred(final SoulShred card) {
+    private SoulShred(final SoulShred card) {
         super(card);
     }
 

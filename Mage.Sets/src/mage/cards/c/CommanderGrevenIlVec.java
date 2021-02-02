@@ -35,7 +35,7 @@ public final class CommanderGrevenIlVec extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, ""), false));
     }
 
-    public CommanderGrevenIlVec(final CommanderGrevenIlVec card) {
+    private CommanderGrevenIlVec(final CommanderGrevenIlVec card) {
         super(card);
     }
 

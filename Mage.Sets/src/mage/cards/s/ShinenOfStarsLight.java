@@ -35,7 +35,7 @@ public final class ShinenOfStarsLight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShinenOfStarsLight(final ShinenOfStarsLight card) {
+    private ShinenOfStarsLight(final ShinenOfStarsLight card) {
         super(card);
     }
 

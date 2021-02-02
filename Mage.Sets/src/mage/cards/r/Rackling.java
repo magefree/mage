@@ -28,7 +28,7 @@ public final class Rackling extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new RacklingEffect(), TargetController.OPPONENT, false, true));
     }
 
-    public Rackling(final Rackling card) {
+    private Rackling(final Rackling card) {
         super(card);
     }
 

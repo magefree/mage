@@ -31,7 +31,7 @@ public final class NoblePanther extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}")));
     }
 
-    public NoblePanther(final NoblePanther card) {
+    private NoblePanther(final NoblePanther card) {
         super(card);
     }
 

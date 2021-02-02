@@ -23,7 +23,7 @@ public final class Squire extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public Squire(final Squire card) {
+    private Squire(final Squire card) {
         super(card);
     }
 

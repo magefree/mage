@@ -43,7 +43,7 @@ public final class MagmaVein extends CardImpl {
         
     }
 
-    public MagmaVein(final MagmaVein card) {
+    private MagmaVein(final MagmaVein card) {
         super(card);
     }
 

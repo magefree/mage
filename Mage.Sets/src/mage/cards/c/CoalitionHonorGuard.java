@@ -30,7 +30,7 @@ public final class CoalitionHonorGuard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new TargetsHaveToTargetPermanentIfAbleEffect()));
     }
 
-    public CoalitionHonorGuard(final CoalitionHonorGuard card) {
+    private CoalitionHonorGuard(final CoalitionHonorGuard card) {
         super(card);
     }
 

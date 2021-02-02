@@ -27,7 +27,7 @@ public final class SegmentedWurm extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance())));
     }
 
-    public SegmentedWurm(final SegmentedWurm card) {
+    private SegmentedWurm(final SegmentedWurm card) {
         super(card);
     }
 

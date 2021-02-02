@@ -42,7 +42,7 @@ public final class SoldierOfThePantheon extends CardImpl {
 
     }
 
-    public SoldierOfThePantheon(final SoldierOfThePantheon card) {
+    private SoldierOfThePantheon(final SoldierOfThePantheon card) {
         super(card);
     }
 

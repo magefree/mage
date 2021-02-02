@@ -47,7 +47,7 @@ public final class BranchingBolt extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public BranchingBolt(final BranchingBolt card) {
+    private BranchingBolt(final BranchingBolt card) {
         super(card);
     }
 

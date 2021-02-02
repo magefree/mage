@@ -53,7 +53,7 @@ public final class FallenIdeal extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public FallenIdeal(final FallenIdeal card) {
+    private FallenIdeal(final FallenIdeal card) {
         super(card);
     }
 

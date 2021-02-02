@@ -44,7 +44,7 @@ public final class IxallisKeeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IxallisKeeper(final IxallisKeeper card) {
+    private IxallisKeeper(final IxallisKeeper card) {
         super(card);
     }
 

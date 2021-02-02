@@ -46,7 +46,7 @@ public final class BurningAnger extends CardImpl {
                 "Enchanted creature has \"{T}: This creature deals damage equal to its power to any target.\"")));
     }
 
-    public BurningAnger(final BurningAnger card) {
+    private BurningAnger(final BurningAnger card) {
         super(card);
     }
 

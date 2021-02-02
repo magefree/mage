@@ -39,7 +39,7 @@ public final class IceOver extends CardImpl {
 
     }
 
-    public IceOver(final IceOver card) {
+    private IceOver(final IceOver card) {
         super(card);
     }
 

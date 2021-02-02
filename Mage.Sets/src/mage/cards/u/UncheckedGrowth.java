@@ -32,7 +32,7 @@ public final class UncheckedGrowth extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public UncheckedGrowth(final UncheckedGrowth card) {
+    private UncheckedGrowth(final UncheckedGrowth card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class GearshiftAce extends CardImpl {
                 "that Vehicle gains first strike until end of turn")));
     }
 
-    public GearshiftAce(final GearshiftAce card) {
+    private GearshiftAce(final GearshiftAce card) {
         super(card);
     }
 

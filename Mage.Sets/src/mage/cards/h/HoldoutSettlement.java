@@ -38,7 +38,7 @@ public final class HoldoutSettlement extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HoldoutSettlement(final HoldoutSettlement card) {
+    private HoldoutSettlement(final HoldoutSettlement card) {
         super(card);
     }
 

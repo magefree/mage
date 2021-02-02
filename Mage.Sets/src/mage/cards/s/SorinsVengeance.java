@@ -23,7 +23,7 @@ public final class SorinsVengeance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    public SorinsVengeance(final SorinsVengeance card) {
+    private SorinsVengeance(final SorinsVengeance card) {
         super(card);
     }
 

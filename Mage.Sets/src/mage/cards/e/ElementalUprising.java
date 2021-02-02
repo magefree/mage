@@ -33,7 +33,7 @@ public final class ElementalUprising extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public ElementalUprising(final ElementalUprising card) {
+    private ElementalUprising(final ElementalUprising card) {
         super(card);
     }
 

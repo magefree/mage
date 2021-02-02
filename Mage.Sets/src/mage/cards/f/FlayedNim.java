@@ -38,7 +38,7 @@ public final class FlayedNim extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
     }
 
-    public FlayedNim(final FlayedNim card) {
+    private FlayedNim(final FlayedNim card) {
         super(card);
     }
 

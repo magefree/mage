@@ -38,7 +38,7 @@ public final class KjeldoranKnight extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 2, Duration.EndOfTurn), new ManaCostsImpl("{W}{W}")));
     }
 
-    public KjeldoranKnight(final KjeldoranKnight card) {
+    private KjeldoranKnight(final KjeldoranKnight card) {
         super(card);
     }
 

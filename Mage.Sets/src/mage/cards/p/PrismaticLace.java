@@ -23,7 +23,7 @@ public final class PrismaticLace extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
-    public PrismaticLace(final PrismaticLace card) {
+    private PrismaticLace(final PrismaticLace card) {
         super(card);
     }
 

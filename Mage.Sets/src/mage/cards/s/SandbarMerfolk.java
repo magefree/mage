@@ -26,7 +26,7 @@ public final class SandbarMerfolk extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public SandbarMerfolk(final SandbarMerfolk card) {
+    private SandbarMerfolk(final SandbarMerfolk card) {
         super(card);
     }
 

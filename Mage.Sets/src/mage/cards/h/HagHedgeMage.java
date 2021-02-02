@@ -55,7 +55,7 @@ public final class HagHedgeMage extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public HagHedgeMage(final HagHedgeMage card) {
+    private HagHedgeMage(final HagHedgeMage card) {
         super(card);
     }
 

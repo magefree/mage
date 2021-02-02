@@ -65,7 +65,7 @@ public final class CharnelTroll extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CharnelTroll(final CharnelTroll card) {
+    private CharnelTroll(final CharnelTroll card) {
         super(card);
     }
 

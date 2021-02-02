@@ -38,7 +38,7 @@ public final class Juggernaut extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public Juggernaut(final Juggernaut card) {
+    private Juggernaut(final Juggernaut card) {
         super(card);
     }
 

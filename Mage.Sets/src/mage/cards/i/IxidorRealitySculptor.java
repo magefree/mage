@@ -48,7 +48,7 @@ public final class IxidorRealitySculptor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IxidorRealitySculptor(final IxidorRealitySculptor card) {
+    private IxidorRealitySculptor(final IxidorRealitySculptor card) {
         super(card);
     }
 

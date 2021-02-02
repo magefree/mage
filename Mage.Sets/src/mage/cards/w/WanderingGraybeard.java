@@ -29,7 +29,7 @@ public final class WanderingGraybeard extends CardImpl {
         this.addAbility(new KinshipAbility(new GainLifeEffect(4)));
     }
 
-    public WanderingGraybeard(final WanderingGraybeard card) {
+    private WanderingGraybeard(final WanderingGraybeard card) {
         super(card);
     }
 

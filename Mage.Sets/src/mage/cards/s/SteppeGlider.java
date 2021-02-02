@@ -55,7 +55,7 @@ public final class SteppeGlider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SteppeGlider(final SteppeGlider card) {
+    private SteppeGlider(final SteppeGlider card) {
         super(card);
     }
 

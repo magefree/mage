@@ -43,7 +43,7 @@ public final class SyndicateEnforcerSWS extends CardImpl {
         this.addAbility(new SyndicateEnforcerTriggeredAbility());
     }
 
-    public SyndicateEnforcerSWS(final SyndicateEnforcerSWS card) {
+    private SyndicateEnforcerSWS(final SyndicateEnforcerSWS card) {
         super(card);
     }
 

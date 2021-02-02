@@ -41,7 +41,7 @@ public final class GohamDjinn extends CardImpl {
                         "{this} gets -2/-2 as long as black is the most common color among all permanents or is tied for most common")));
     }
 
-    public GohamDjinn(final GohamDjinn card) {
+    private GohamDjinn(final GohamDjinn card) {
         super(card);
     }
 

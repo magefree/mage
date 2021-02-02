@@ -34,7 +34,7 @@ public final class RimeDryad extends CardImpl {
         this.addAbility(new LandwalkAbility(filter));
     }
 
-    public RimeDryad(final RimeDryad card) {
+    private RimeDryad(final RimeDryad card) {
         super(card);
     }
 

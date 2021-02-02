@@ -45,7 +45,7 @@ public final class PrognosticSphinx extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new ScryEffect(3), false));
     }
 
-    public PrognosticSphinx(final PrognosticSphinx card) {
+    private PrognosticSphinx(final PrognosticSphinx card) {
         super(card);
     }
 

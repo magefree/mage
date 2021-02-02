@@ -23,7 +23,7 @@ public final class Transmutation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Transmutation(final Transmutation card) {
+    private Transmutation(final Transmutation card) {
         super(card);
     }
 

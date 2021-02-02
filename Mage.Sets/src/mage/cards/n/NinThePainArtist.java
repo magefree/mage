@@ -42,7 +42,7 @@ public final class NinThePainArtist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NinThePainArtist(final NinThePainArtist card) {
+    private NinThePainArtist(final NinThePainArtist card) {
         super(card);
     }
 

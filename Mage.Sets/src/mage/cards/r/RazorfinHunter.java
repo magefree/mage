@@ -33,7 +33,7 @@ public final class RazorfinHunter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RazorfinHunter(final RazorfinHunter card) {
+    private RazorfinHunter(final RazorfinHunter card) {
         super(card);
     }
 

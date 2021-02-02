@@ -41,7 +41,7 @@ public final class BetrayalOfFlesh extends CardImpl {
         this.addAbility(new EntwineAbility(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledLandPermanent("three lands"), true))));
     }
 
-    public BetrayalOfFlesh(final BetrayalOfFlesh card) {
+    private BetrayalOfFlesh(final BetrayalOfFlesh card) {
         super(card);
     }
 

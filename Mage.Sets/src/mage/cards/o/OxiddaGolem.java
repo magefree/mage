@@ -29,7 +29,7 @@ public final class OxiddaGolem extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public OxiddaGolem(final OxiddaGolem card) {
+    private OxiddaGolem(final OxiddaGolem card) {
         super(card);
     }
 

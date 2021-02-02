@@ -23,7 +23,7 @@ public final class GutterSkulk extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public GutterSkulk(final GutterSkulk card) {
+    private GutterSkulk(final GutterSkulk card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class FlowstoneCharger extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(3, -3, Duration.EndOfTurn), false));
     }
 
-    public FlowstoneCharger(final FlowstoneCharger card) {
+    private FlowstoneCharger(final FlowstoneCharger card) {
         super(card);
     }
 

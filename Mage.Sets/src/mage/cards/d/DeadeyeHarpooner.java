@@ -50,7 +50,7 @@ public final class DeadeyeHarpooner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeadeyeHarpooner(final DeadeyeHarpooner card) {
+    private DeadeyeHarpooner(final DeadeyeHarpooner card) {
         super(card);
     }
 

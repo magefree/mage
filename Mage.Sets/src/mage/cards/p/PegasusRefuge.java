@@ -28,7 +28,7 @@ public final class PegasusRefuge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PegasusRefuge(final PegasusRefuge card) {
+    private PegasusRefuge(final PegasusRefuge card) {
         super(card);
     }
 

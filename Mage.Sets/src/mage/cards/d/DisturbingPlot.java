@@ -28,7 +28,7 @@ public final class DisturbingPlot extends CardImpl {
 
     }
 
-    public DisturbingPlot(final DisturbingPlot card) {
+    private DisturbingPlot(final DisturbingPlot card) {
         super(card);
     }
 

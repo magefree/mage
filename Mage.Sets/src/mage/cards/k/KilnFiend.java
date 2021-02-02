@@ -32,7 +32,7 @@ public final class KilnFiend extends CardImpl {
         ));
     }
 
-    public KilnFiend(final KilnFiend card) {
+    private KilnFiend(final KilnFiend card) {
         super(card);
     }
 

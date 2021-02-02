@@ -42,7 +42,7 @@ public final class UlvenwaldCaptive extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new ManaCostsImpl("{5}{G}{G}")));
     }
 
-    public UlvenwaldCaptive(final UlvenwaldCaptive card) {
+    private UlvenwaldCaptive(final UlvenwaldCaptive card) {
         super(card);
     }
 

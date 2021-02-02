@@ -62,7 +62,7 @@ public final class PrimalCommand extends CardImpl {
 
     }
 
-    public PrimalCommand(final PrimalCommand card) {
+    private PrimalCommand(final PrimalCommand card) {
         super(card);
     }
 

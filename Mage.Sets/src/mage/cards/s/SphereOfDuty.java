@@ -23,7 +23,7 @@ public final class SphereOfDuty extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageByColorEffect(ObjectColor.GREEN, 2)));
     }
 
-    public SphereOfDuty(final SphereOfDuty card) {
+    private SphereOfDuty(final SphereOfDuty card) {
         super(card);
     }
 

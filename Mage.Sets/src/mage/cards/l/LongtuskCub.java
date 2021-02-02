@@ -34,7 +34,7 @@ public final class LongtuskCub extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new PayEnergyCost(2)));
     }
 
-    public LongtuskCub(final LongtuskCub card) {
+    private LongtuskCub(final LongtuskCub card) {
         super(card);
     }
 

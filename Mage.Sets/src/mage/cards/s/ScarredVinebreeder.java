@@ -44,7 +44,7 @@ public final class ScarredVinebreeder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScarredVinebreeder(final ScarredVinebreeder card) {
+    private ScarredVinebreeder(final ScarredVinebreeder card) {
         super(card);
     }
 

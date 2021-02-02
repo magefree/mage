@@ -32,7 +32,7 @@ public final class EchoingDecay extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public EchoingDecay(final EchoingDecay card) {
+    private EchoingDecay(final EchoingDecay card) {
         super(card);
     }
 

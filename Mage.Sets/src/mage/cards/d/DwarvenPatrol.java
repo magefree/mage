@@ -42,7 +42,7 @@ public final class DwarvenPatrol extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, false));
     }
 
-    public DwarvenPatrol(final DwarvenPatrol card) {
+    private DwarvenPatrol(final DwarvenPatrol card) {
         super(card);
     }
 

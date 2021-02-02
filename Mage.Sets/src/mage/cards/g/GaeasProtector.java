@@ -30,7 +30,7 @@ public final class GaeasProtector extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
     }
 
-    public GaeasProtector(final GaeasProtector card) {
+    private GaeasProtector(final GaeasProtector card) {
         super(card);
     }
 

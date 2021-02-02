@@ -39,7 +39,7 @@ public final class SlumberingDragon extends CardImpl {
         this.addAbility(new AttacksAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, StaticFilters.FILTER_PERMANENT_CREATURE, SetTargetPointer.PERMANENT, true));
     }
 
-    public SlumberingDragon(final SlumberingDragon card) {
+    private SlumberingDragon(final SlumberingDragon card) {
         super(card);
     }
 

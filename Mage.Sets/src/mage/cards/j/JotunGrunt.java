@@ -36,7 +36,7 @@ public final class JotunGrunt extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new JotunGruntCost()));
     }
 
-    public JotunGrunt(final JotunGrunt card) {
+    private JotunGrunt(final JotunGrunt card) {
         super(card);
     }
 

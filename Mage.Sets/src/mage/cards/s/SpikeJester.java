@@ -27,7 +27,7 @@ public final class SpikeJester extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public SpikeJester(final SpikeJester card) {
+    private SpikeJester(final SpikeJester card) {
         super(card);
     }
 

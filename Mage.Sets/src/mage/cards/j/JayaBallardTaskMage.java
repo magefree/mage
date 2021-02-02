@@ -69,7 +69,7 @@ public final class JayaBallardTaskMage extends CardImpl {
         
     }
 
-    public JayaBallardTaskMage(final JayaBallardTaskMage card) {
+    private JayaBallardTaskMage(final JayaBallardTaskMage card) {
         super(card);
     }
 

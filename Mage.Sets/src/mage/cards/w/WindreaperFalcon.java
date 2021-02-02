@@ -29,7 +29,7 @@ public final class WindreaperFalcon extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
     }
 
-    public WindreaperFalcon(final WindreaperFalcon card) {
+    private WindreaperFalcon(final WindreaperFalcon card) {
         super(card);
     }
 

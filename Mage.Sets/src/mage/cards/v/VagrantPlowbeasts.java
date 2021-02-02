@@ -42,7 +42,7 @@ public final class VagrantPlowbeasts extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VagrantPlowbeasts(final VagrantPlowbeasts card) {
+    private VagrantPlowbeasts(final VagrantPlowbeasts card) {
         super(card);
     }
 

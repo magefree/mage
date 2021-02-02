@@ -26,7 +26,7 @@ public final class VulshokMorningstar extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public VulshokMorningstar(final VulshokMorningstar card) {
+    private VulshokMorningstar(final VulshokMorningstar card) {
         super(card);
     }
 

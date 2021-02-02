@@ -42,7 +42,7 @@ public final class Moggcatcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Moggcatcher(final Moggcatcher card) {
+    private Moggcatcher(final Moggcatcher card) {
         super(card);
     }
 

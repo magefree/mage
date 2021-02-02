@@ -35,7 +35,7 @@ public final class TatyovaBenthicDruid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TatyovaBenthicDruid(final TatyovaBenthicDruid card) {
+    private TatyovaBenthicDruid(final TatyovaBenthicDruid card) {
         super(card);
     }
 

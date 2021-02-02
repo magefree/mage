@@ -35,7 +35,7 @@ public final class Headhunter extends CardImpl {
 
     }
 
-    public Headhunter(final Headhunter card) {
+    private Headhunter(final Headhunter card) {
         super(card);
     }
 

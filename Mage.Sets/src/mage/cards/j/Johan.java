@@ -49,7 +49,7 @@ public final class Johan extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Johan(final Johan card) {
+    private Johan(final Johan card) {
         super(card);
     }
 

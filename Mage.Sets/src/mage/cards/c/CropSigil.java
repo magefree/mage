@@ -51,7 +51,7 @@ public final class CropSigil extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CropSigil(final CropSigil card) {
+    private CropSigil(final CropSigil card) {
         super(card);
     }
 

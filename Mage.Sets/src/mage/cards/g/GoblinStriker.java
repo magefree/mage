@@ -28,7 +28,7 @@ public final class GoblinStriker extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public GoblinStriker(final GoblinStriker card) {
+    private GoblinStriker(final GoblinStriker card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class GoblinSecretAgent extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GoblinSecretAgentEffect(), TargetController.YOU, false));
     }
 
-    public GoblinSecretAgent(final GoblinSecretAgent card) {
+    private GoblinSecretAgent(final GoblinSecretAgent card) {
         super(card);
     }
 

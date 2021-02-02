@@ -23,7 +23,7 @@ public final class FrostOgre extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public FrostOgre(final FrostOgre card) {
+    private FrostOgre(final FrostOgre card) {
         super(card);
     }
 

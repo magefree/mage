@@ -45,7 +45,7 @@ public final class CovetedJewel extends CardImpl {
         this.addAbility(new CovetedJewelTriggeredAbility());
     }
 
-    public CovetedJewel(final CovetedJewel card) {
+    private CovetedJewel(final CovetedJewel card) {
         super(card);
     }
 

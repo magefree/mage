@@ -41,7 +41,7 @@ public final class SkylineCascade extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public SkylineCascade(final SkylineCascade card) {
+    private SkylineCascade(final SkylineCascade card) {
         super(card);
     }
 

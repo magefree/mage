@@ -34,7 +34,7 @@ public final class RunicRepetition extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 
-    public RunicRepetition(final RunicRepetition card) {
+    private RunicRepetition(final RunicRepetition card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class WinterBlast extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(WinterBlastAdjuster.instance);
     }
 
-    public WinterBlast(final WinterBlast card) {
+    private WinterBlast(final WinterBlast card) {
         super(card);
     }
 

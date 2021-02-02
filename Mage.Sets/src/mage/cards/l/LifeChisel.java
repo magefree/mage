@@ -41,7 +41,7 @@ public final class LifeChisel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LifeChisel(final LifeChisel card) {
+    private LifeChisel(final LifeChisel card) {
         super(card);
     }
 

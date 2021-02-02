@@ -27,7 +27,7 @@ public final class NorwoodArchers extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public NorwoodArchers(final NorwoodArchers card) {
+    private NorwoodArchers(final NorwoodArchers card) {
         super(card);
     }
 

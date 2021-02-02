@@ -41,7 +41,7 @@ public final class DomesticatedHydra extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DomesticatedHydra(final DomesticatedHydra card) {
+    private DomesticatedHydra(final DomesticatedHydra card) {
         super(card);
     }
 

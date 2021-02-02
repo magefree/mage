@@ -24,7 +24,7 @@ public final class AjanisWelcome extends CardImpl {
         ));
     }
 
-    public AjanisWelcome(final AjanisWelcome card) {
+    private AjanisWelcome(final AjanisWelcome card) {
         super(card);
     }
 

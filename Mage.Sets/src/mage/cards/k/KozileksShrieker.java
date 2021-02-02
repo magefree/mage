@@ -43,7 +43,7 @@ public final class KozileksShrieker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KozileksShrieker(final KozileksShrieker card) {
+    private KozileksShrieker(final KozileksShrieker card) {
         super(card);
     }
 

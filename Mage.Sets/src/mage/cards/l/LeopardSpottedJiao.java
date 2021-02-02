@@ -21,7 +21,7 @@ public final class LeopardSpottedJiao extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public LeopardSpottedJiao(final LeopardSpottedJiao card) {
+    private LeopardSpottedJiao(final LeopardSpottedJiao card) {
         super(card);
     }
 

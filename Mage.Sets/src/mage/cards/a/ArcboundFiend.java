@@ -46,7 +46,7 @@ public final class ArcboundFiend extends CardImpl {
         this.addAbility(new ModularAbility(this, 3));
     }
 
-    public ArcboundFiend(final ArcboundFiend card) {
+    private ArcboundFiend(final ArcboundFiend card) {
         super(card);
     }
 

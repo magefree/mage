@@ -63,7 +63,7 @@ public final class VeteranWarleader extends CardImpl {
                 new VeteranWarleaderEffect(), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, true))));
     }
 
-    public VeteranWarleader(final VeteranWarleader card) {
+    private VeteranWarleader(final VeteranWarleader card) {
         super(card);
     }
 

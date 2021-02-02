@@ -35,7 +35,7 @@ public final class ScorchingWinds extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterAttackingCreature()));
     }
 
-    public ScorchingWinds(final ScorchingWinds card) {
+    private ScorchingWinds(final ScorchingWinds card) {
         super(card);
     }
 

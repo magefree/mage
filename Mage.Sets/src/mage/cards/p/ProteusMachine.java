@@ -32,7 +32,7 @@ public final class ProteusMachine extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BecomesChosenCreatureTypeSourceEffect(false, Duration.Custom)));
     }
 
-    public ProteusMachine(final ProteusMachine card) {
+    private ProteusMachine(final ProteusMachine card) {
         super(card);
     }
 

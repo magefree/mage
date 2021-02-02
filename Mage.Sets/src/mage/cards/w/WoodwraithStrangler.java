@@ -32,7 +32,7 @@ public final class WoodwraithStrangler extends CardImpl {
                 new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("a creature card from your graveyard")))));
     }
 
-    public WoodwraithStrangler(final WoodwraithStrangler card) {
+    private WoodwraithStrangler(final WoodwraithStrangler card) {
         super(card);
     }
 

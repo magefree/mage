@@ -34,7 +34,7 @@ public final class GruulLocket extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GruulLocket(final GruulLocket card) {
+    private GruulLocket(final GruulLocket card) {
         super(card);
     }
 

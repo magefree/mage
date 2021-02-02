@@ -44,7 +44,7 @@ public final class GrixisPanorama extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GrixisPanorama(final GrixisPanorama card) {
+    private GrixisPanorama(final GrixisPanorama card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class InduceParanoia extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public InduceParanoia(final InduceParanoia card) {
+    private InduceParanoia(final InduceParanoia card) {
         super(card);
     }
 

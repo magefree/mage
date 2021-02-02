@@ -28,7 +28,7 @@ public final class DreamCache extends CardImpl {
         this.getSpellAbility().addEffect(new DreamCacheEffect());
     }
 
-    public DreamCache(final DreamCache card) {
+    private DreamCache(final DreamCache card) {
         super(card);
     }
 

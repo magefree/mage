@@ -31,7 +31,7 @@ public final class CircularLogic extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl<>("{U}")));
     }
 
-    public CircularLogic(final CircularLogic card) {
+    private CircularLogic(final CircularLogic card) {
         super(card);
     }
 

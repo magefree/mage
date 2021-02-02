@@ -31,7 +31,7 @@ public final class CliffsideLookout extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{4}{W}")));
     }
 
-    public CliffsideLookout(final CliffsideLookout card) {
+    private CliffsideLookout(final CliffsideLookout card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class SpellBurst extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(SpellBurstAdjuster.instance);
     }
 
-    public SpellBurst(final SpellBurst card) {
+    private SpellBurst(final SpellBurst card) {
         super(card);
     }
 

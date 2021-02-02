@@ -35,7 +35,7 @@ public final class SkywingAven extends CardImpl {
             new DiscardCardCost()));
     }
 
-    public SkywingAven(final SkywingAven card) {
+    private SkywingAven(final SkywingAven card) {
         super(card);
     }
 

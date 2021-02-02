@@ -34,7 +34,7 @@ public final class AkroanPhalanx extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}")));
     }
 
-    public AkroanPhalanx(final AkroanPhalanx card) {
+    private AkroanPhalanx(final AkroanPhalanx card) {
         super(card);
     }
 

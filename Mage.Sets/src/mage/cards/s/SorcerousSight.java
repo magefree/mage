@@ -29,7 +29,7 @@ public final class SorcerousSight extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public SorcerousSight(final SorcerousSight card) {
+    private SorcerousSight(final SorcerousSight card) {
         super(card);
     }
 

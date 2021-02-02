@@ -31,7 +31,7 @@ public final class UktabiDrake extends CardImpl {
         this.addAbility(new EchoAbility("{1}{G}{G}"));
     }
 
-    public UktabiDrake(final UktabiDrake card) {
+    private UktabiDrake(final UktabiDrake card) {
         super(card);
     }
 

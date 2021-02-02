@@ -33,7 +33,7 @@ public final class Repeal extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Repeal(final Repeal card) {
+    private Repeal(final Repeal card) {
         super(card);
     }
 

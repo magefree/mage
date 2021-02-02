@@ -28,7 +28,7 @@ public final class ReefWorm extends CardImpl {
         addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new ReefWormFishToken())));
     }
 
-    public ReefWorm(final ReefWorm card) {
+    private ReefWorm(final ReefWorm card) {
         super(card);
     }
 

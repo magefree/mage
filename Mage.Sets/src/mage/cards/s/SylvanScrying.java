@@ -25,7 +25,7 @@ public final class SylvanScrying extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
     }
 
-    public SylvanScrying(final SylvanScrying card) {
+    private SylvanScrying(final SylvanScrying card) {
         super(card);
     }
 

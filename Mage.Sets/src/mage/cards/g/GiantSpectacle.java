@@ -45,7 +45,7 @@ public final class GiantSpectacle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GiantSpectacle(final GiantSpectacle card) {
+    private GiantSpectacle(final GiantSpectacle card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class AvatarOfWoe extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AvatarOfWoe(final AvatarOfWoe card) {
+    private AvatarOfWoe(final AvatarOfWoe card) {
         super(card);
     }
 

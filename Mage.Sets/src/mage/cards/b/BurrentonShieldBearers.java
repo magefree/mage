@@ -30,7 +30,7 @@ public final class BurrentonShieldBearers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BurrentonShieldBearers(final BurrentonShieldBearers card) {
+    private BurrentonShieldBearers(final BurrentonShieldBearers card) {
         super(card);
     }
 

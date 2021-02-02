@@ -27,7 +27,7 @@ public final class ShriekRaptor extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
     }
 
-    public ShriekRaptor(final ShriekRaptor card) {
+    private ShriekRaptor(final ShriekRaptor card) {
         super(card);
     }
 

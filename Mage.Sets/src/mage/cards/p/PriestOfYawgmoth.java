@@ -41,7 +41,7 @@ public final class PriestOfYawgmoth extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PriestOfYawgmoth(final PriestOfYawgmoth card) {
+    private PriestOfYawgmoth(final PriestOfYawgmoth card) {
         super(card);
     }
 

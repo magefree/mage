@@ -53,7 +53,7 @@ public final class GalepowderMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GalepowderMage(final GalepowderMage card) {
+    private GalepowderMage(final GalepowderMage card) {
         super(card);
     }
 

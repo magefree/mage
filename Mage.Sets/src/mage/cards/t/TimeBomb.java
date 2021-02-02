@@ -41,7 +41,7 @@ public final class TimeBomb extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TimeBomb(final TimeBomb card) {
+    private TimeBomb(final TimeBomb card) {
         super(card);
     }
 

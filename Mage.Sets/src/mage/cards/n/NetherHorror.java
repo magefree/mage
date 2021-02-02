@@ -24,7 +24,7 @@ public final class NetherHorror extends CardImpl {
 
     }
 
-    public NetherHorror(final NetherHorror card) {
+    private NetherHorror(final NetherHorror card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class GruesomeSlaughter extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public GruesomeSlaughter(final GruesomeSlaughter card) {
+    private GruesomeSlaughter(final GruesomeSlaughter card) {
         super(card);
     }
 

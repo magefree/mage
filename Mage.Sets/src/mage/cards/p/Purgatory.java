@@ -51,7 +51,7 @@ public final class Purgatory extends CardImpl {
             false));
     }
 
-    public Purgatory(final Purgatory card) {
+    private Purgatory(final Purgatory card) {
         super(card);
     }
 

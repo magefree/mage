@@ -21,7 +21,7 @@ public final class WintersGrasp extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public WintersGrasp(final WintersGrasp card) {
+    private WintersGrasp(final WintersGrasp card) {
         super(card);
     }
 

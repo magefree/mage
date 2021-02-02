@@ -28,7 +28,7 @@ public final class JackalopeHerd extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), new FilterSpell("a spell"), false));
     }
 
-    public JackalopeHerd(final JackalopeHerd card) {
+    private JackalopeHerd(final JackalopeHerd card) {
         super(card);
     }
 

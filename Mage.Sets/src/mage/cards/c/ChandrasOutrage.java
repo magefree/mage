@@ -28,7 +28,7 @@ public final class ChandrasOutrage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ChandrasOutrage(final ChandrasOutrage card) {
+    private ChandrasOutrage(final ChandrasOutrage card) {
         super(card);
     }
 

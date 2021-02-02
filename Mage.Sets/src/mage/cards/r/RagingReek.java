@@ -29,7 +29,7 @@ public final class RagingReek extends CardImpl {
         this.addAbility(new MonstrosityAbility("{5}{R}", 2));
     }
 
-    public RagingReek(final RagingReek card) {
+    private RagingReek(final RagingReek card) {
         super(card);
     }
 

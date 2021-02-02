@@ -30,7 +30,7 @@ public final class AmassTheComponents extends CardImpl {
 
     }
 
-    public AmassTheComponents(final AmassTheComponents card) {
+    private AmassTheComponents(final AmassTheComponents card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class LivingHive extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LivingHiveEffect(), false, true));
     }
 
-    public LivingHive(final LivingHive card) {
+    private LivingHive(final LivingHive card) {
         super(card);
     }
 

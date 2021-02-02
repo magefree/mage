@@ -36,7 +36,7 @@ public final class GoblinGoon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoblinGoonCantBlockEffect()));
     }
 
-    public GoblinGoon(final GoblinGoon card) {
+    private GoblinGoon(final GoblinGoon card) {
         super(card);
     }
 

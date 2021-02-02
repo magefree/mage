@@ -38,7 +38,7 @@ public final class GorillaWarCry extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public GorillaWarCry(final GorillaWarCry card) {
+    private GorillaWarCry(final GorillaWarCry card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class SpikeBreeder extends CardImpl {
 
     }
 
-    public SpikeBreeder(final SpikeBreeder card) {
+    private SpikeBreeder(final SpikeBreeder card) {
         super(card);
     }
 

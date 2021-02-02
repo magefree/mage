@@ -28,7 +28,7 @@ public final class ArabaMothrider extends CardImpl {
         this.addAbility(new BushidoAbility(1));
     }
 
-    public ArabaMothrider(final ArabaMothrider card) {
+    private ArabaMothrider(final ArabaMothrider card) {
         super(card);
     }
 

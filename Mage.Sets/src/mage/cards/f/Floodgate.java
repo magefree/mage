@@ -77,7 +77,7 @@ public final class Floodgate extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new FloodgateDamageEffect(), false));
     }
 
-    public Floodgate(final Floodgate card) {
+    private Floodgate(final Floodgate card) {
         super(card);
     }
 

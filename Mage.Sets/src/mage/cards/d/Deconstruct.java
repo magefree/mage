@@ -31,7 +31,7 @@ public final class Deconstruct extends CardImpl {
         this.getSpellAbility().addEffect(new BasicManaEffect(Mana.GreenMana(3)));
     }
 
-    public Deconstruct(final Deconstruct card) {
+    private Deconstruct(final Deconstruct card) {
         super(card);
     }
 

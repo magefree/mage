@@ -47,7 +47,7 @@ public final class CavernHarpy extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new PayLifeCost(1)));
     }
 
-    public CavernHarpy(final CavernHarpy card) {
+    private CavernHarpy(final CavernHarpy card) {
         super(card);
     }
 

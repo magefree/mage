@@ -38,7 +38,7 @@ public final class KrarkClanOgre extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KrarkClanOgre(final KrarkClanOgre card) {
+    private KrarkClanOgre(final KrarkClanOgre card) {
         super(card);
     }
 

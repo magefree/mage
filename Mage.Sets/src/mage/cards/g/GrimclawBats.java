@@ -35,7 +35,7 @@ public final class GrimclawBats extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GrimclawBats(final GrimclawBats card) {
+    private GrimclawBats(final GrimclawBats card) {
         super(card);
     }
 

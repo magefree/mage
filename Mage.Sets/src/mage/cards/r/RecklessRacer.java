@@ -34,7 +34,7 @@ public final class RecklessRacer extends CardImpl {
         this.addAbility(new BecomesTappedSourceTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()), false));
     }
 
-    public RecklessRacer(final RecklessRacer card) {
+    private RecklessRacer(final RecklessRacer card) {
         super(card);
     }
 

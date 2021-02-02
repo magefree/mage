@@ -33,7 +33,7 @@ public final class KherKeep extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KherKeep(final KherKeep card) {
+    private KherKeep(final KherKeep card) {
         super(card);
     }
 

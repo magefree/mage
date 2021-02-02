@@ -34,7 +34,7 @@ public final class BlurSliver extends CardImpl {
         
     }
 
-    public BlurSliver(final BlurSliver card) {
+    private BlurSliver(final BlurSliver card) {
         super(card);
     }
 

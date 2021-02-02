@@ -21,7 +21,7 @@ public final class Counterspell extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Counterspell(final Counterspell card) {
+    private Counterspell(final Counterspell card) {
         super(card);
     }
 

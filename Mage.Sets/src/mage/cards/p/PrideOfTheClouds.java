@@ -52,7 +52,7 @@ public final class PrideOfTheClouds extends CardImpl {
         this.addAbility(new ForecastAbility(new CreateTokenEffect(new BirdToken()), new ManaCostsImpl("{2}{W}{U}")));
     }
 
-    public PrideOfTheClouds(final PrideOfTheClouds card) {
+    private PrideOfTheClouds(final PrideOfTheClouds card) {
         super(card);
     }
 

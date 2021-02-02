@@ -48,7 +48,7 @@ public final class Dracoplasm extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public Dracoplasm(final Dracoplasm card) {
+    private Dracoplasm(final Dracoplasm card) {
         super(card);
     }
 

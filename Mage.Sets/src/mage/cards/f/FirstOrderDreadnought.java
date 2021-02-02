@@ -37,7 +37,7 @@ public final class FirstOrderDreadnought extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FirstOrderDreadnought(final FirstOrderDreadnought card) {
+    private FirstOrderDreadnought(final FirstOrderDreadnought card) {
         super(card);
     }
 

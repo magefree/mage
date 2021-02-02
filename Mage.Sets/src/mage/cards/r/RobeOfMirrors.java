@@ -36,7 +36,7 @@ public final class RobeOfMirrors extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public RobeOfMirrors(final RobeOfMirrors card) {
+    private RobeOfMirrors(final RobeOfMirrors card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class WindriderPatrol extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ScryEffect(2), false));
     }
 
-    public WindriderPatrol(final WindriderPatrol card) {
+    private WindriderPatrol(final WindriderPatrol card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class RunedStalactite extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{2}")));
     }
 
-    public RunedStalactite(final RunedStalactite card) {
+    private RunedStalactite(final RunedStalactite card) {
         super(card);
     }
 

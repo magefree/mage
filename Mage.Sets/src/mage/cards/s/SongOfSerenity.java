@@ -28,7 +28,7 @@ public final class SongOfSerenity extends CardImpl {
 
     }
 
-    public SongOfSerenity(final SongOfSerenity card) {
+    private SongOfSerenity(final SongOfSerenity card) {
         super(card);
     }
 

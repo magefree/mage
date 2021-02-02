@@ -40,7 +40,7 @@ public final class PonybackBrigade extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{R}{W}{B}")));
     }
 
-    public PonybackBrigade(final PonybackBrigade card) {
+    private PonybackBrigade(final PonybackBrigade card) {
         super(card);
     }
 

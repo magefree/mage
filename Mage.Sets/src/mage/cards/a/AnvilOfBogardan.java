@@ -32,7 +32,7 @@ public final class AnvilOfBogardan extends CardImpl {
         this.addAbility(new BeginningOfDrawTriggeredAbility(Zone.BATTLEFIELD, new AnvilOfBogardanEffect(), TargetController.ANY, false));
     }
     
-    public AnvilOfBogardan(final AnvilOfBogardan card) {
+    private AnvilOfBogardan(final AnvilOfBogardan card) {
         super(card);
     }
     

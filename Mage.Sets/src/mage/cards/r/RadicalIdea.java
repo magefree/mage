@@ -23,7 +23,7 @@ public final class RadicalIdea extends CardImpl {
         this.addAbility(new JumpStartAbility(this));
     }
 
-    public RadicalIdea(final RadicalIdea card) {
+    private RadicalIdea(final RadicalIdea card) {
         super(card);
     }
 

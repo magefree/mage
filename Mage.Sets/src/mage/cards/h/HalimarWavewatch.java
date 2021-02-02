@@ -42,7 +42,7 @@ public final class HalimarWavewatch extends LevelerCard {
         setMaxLevelCounters(5);
     }
 
-    public HalimarWavewatch(final HalimarWavewatch card) {
+    private HalimarWavewatch(final HalimarWavewatch card) {
         super(card);
     }
 

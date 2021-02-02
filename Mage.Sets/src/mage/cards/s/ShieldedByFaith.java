@@ -51,7 +51,7 @@ public final class ShieldedByFaith extends CardImpl {
                 new FilterCreaturePermanent("a creature"), true, SetTargetPointer.PERMANENT, null, false));
     }
 
-    public ShieldedByFaith(final ShieldedByFaith card) {
+    private ShieldedByFaith(final ShieldedByFaith card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class CentaurGarden extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public CentaurGarden(final CentaurGarden card) {
+    private CentaurGarden(final CentaurGarden card) {
         super(card);
     }
 

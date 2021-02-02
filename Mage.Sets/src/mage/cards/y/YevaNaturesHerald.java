@@ -44,7 +44,7 @@ public final class YevaNaturesHerald extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
-    public YevaNaturesHerald(final YevaNaturesHerald card) {
+    private YevaNaturesHerald(final YevaNaturesHerald card) {
         super(card);
     }
 

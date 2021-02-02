@@ -41,7 +41,7 @@ public final class GrindDust extends SplitCard {
 
     }
 
-    public GrindDust(final GrindDust card) {
+    private GrindDust(final GrindDust card) {
         super(card);
     }
 

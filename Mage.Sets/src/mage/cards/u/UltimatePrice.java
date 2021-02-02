@@ -31,7 +31,7 @@ public final class UltimatePrice extends CardImpl {
 
     }
 
-    public UltimatePrice(final UltimatePrice card) {
+    private UltimatePrice(final UltimatePrice card) {
         super(card);
     }
 

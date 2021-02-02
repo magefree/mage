@@ -35,7 +35,7 @@ public final class VividMarsh extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VividMarsh(final VividMarsh card) {
+    private VividMarsh(final VividMarsh card) {
         super(card);
     }
 

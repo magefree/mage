@@ -31,7 +31,7 @@ public final class FreewindFalcon extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
-    public FreewindFalcon(final FreewindFalcon card) {
+    private FreewindFalcon(final FreewindFalcon card) {
         super(card);
     }
 

@@ -61,7 +61,7 @@ public final class AtalyaSamiteMaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AtalyaSamiteMaster(final AtalyaSamiteMaster card) {
+    private AtalyaSamiteMaster(final AtalyaSamiteMaster card) {
         super(card);
     }
 

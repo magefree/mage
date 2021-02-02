@@ -40,7 +40,7 @@ public final class LotusVale extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost()));
     }
 
-    public LotusVale(final LotusVale card) {
+    private LotusVale(final LotusVale card) {
         super(card);
     }
 

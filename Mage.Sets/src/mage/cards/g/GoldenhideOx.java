@@ -32,7 +32,7 @@ public final class GoldenhideOx extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoldenhideOx(final GoldenhideOx card) {
+    private GoldenhideOx(final GoldenhideOx card) {
         super(card);
     }
 

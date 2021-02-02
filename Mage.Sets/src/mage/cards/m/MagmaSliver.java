@@ -53,7 +53,7 @@ public final class MagmaSliver extends CardImpl {
                 effect));
     }
 
-    public MagmaSliver(final MagmaSliver card) {
+    private MagmaSliver(final MagmaSliver card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class TajNarSwordsmith extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TajNarSwordsmithEffect()));
     }
 
-    public TajNarSwordsmith(final TajNarSwordsmith card) {
+    private TajNarSwordsmith(final TajNarSwordsmith card) {
         super(card);
     }
 

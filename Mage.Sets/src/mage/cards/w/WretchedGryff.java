@@ -36,7 +36,7 @@ public final class WretchedGryff extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WretchedGryff(final WretchedGryff card) {
+    private WretchedGryff(final WretchedGryff card) {
         super(card);
     }
 

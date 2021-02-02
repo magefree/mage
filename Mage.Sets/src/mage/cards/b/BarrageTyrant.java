@@ -53,7 +53,7 @@ public final class BarrageTyrant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BarrageTyrant(final BarrageTyrant card) {
+    private BarrageTyrant(final BarrageTyrant card) {
         super(card);
     }
 

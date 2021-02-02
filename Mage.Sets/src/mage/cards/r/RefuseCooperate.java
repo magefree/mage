@@ -38,7 +38,7 @@ public final class RefuseCooperate extends SplitCard {
         getRightHalfCard().getSpellAbility().addTarget(new TargetSpell(new FilterInstantOrSorcerySpell()));
     }
 
-    public RefuseCooperate(final RefuseCooperate card) {
+    private RefuseCooperate(final RefuseCooperate card) {
         super(card);
     }
 

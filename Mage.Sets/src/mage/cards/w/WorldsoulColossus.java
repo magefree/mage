@@ -35,7 +35,7 @@ public final class WorldsoulColossus extends CardImpl {
         ));
     }
 
-    public WorldsoulColossus(final WorldsoulColossus card) {
+    private WorldsoulColossus(final WorldsoulColossus card) {
         super(card);
     }
 

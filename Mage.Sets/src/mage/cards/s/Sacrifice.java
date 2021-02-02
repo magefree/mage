@@ -28,7 +28,7 @@ public final class Sacrifice extends CardImpl {
                 "add an amount of {B} equal to the sacrificed creature's converted mana cost"));
     }
 
-    public Sacrifice(final Sacrifice card) {
+    private Sacrifice(final Sacrifice card) {
         super(card);
     }
 

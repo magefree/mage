@@ -22,7 +22,7 @@ public final class SecureTheWastes extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WarriorToken(), ManacostVariableValue.instance));
     }
 
-    public SecureTheWastes(final SecureTheWastes card) {
+    private SecureTheWastes(final SecureTheWastes card) {
         super(card);
     }
 

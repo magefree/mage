@@ -26,7 +26,7 @@ public final class ZombieOutlander extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.GREEN));
     }
 
-    public ZombieOutlander(final ZombieOutlander card) {
+    private ZombieOutlander(final ZombieOutlander card) {
         super(card);
     }
 

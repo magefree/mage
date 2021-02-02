@@ -38,7 +38,7 @@ public final class LaccolithWarrior extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LaccolithWarrior(final LaccolithWarrior card) {
+    private LaccolithWarrior(final LaccolithWarrior card) {
         super(card);
     }
 

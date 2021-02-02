@@ -31,7 +31,7 @@ public final class LifecraftersBestiary extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{G}")), StaticFilters.FILTER_SPELL_A_CREATURE, false));
     }
 
-    public LifecraftersBestiary(final LifecraftersBestiary card) {
+    private LifecraftersBestiary(final LifecraftersBestiary card) {
         super(card);
     }
 

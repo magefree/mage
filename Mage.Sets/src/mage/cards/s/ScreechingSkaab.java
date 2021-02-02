@@ -27,7 +27,7 @@ public final class ScreechingSkaab extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(2)));
     }
 
-    public ScreechingSkaab(final ScreechingSkaab card) {
+    private ScreechingSkaab(final ScreechingSkaab card) {
         super(card);
     }
 

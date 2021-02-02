@@ -26,7 +26,7 @@ public final class GisasBidding extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{2}{B}")));
     }
 
-    public GisasBidding(final GisasBidding card) {
+    private GisasBidding(final GisasBidding card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class Shyft extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ShyftEffect(), TargetController.YOU, true));
     }
 
-    public Shyft(final Shyft card) {
+    private Shyft(final Shyft card) {
         super(card);
     }
 

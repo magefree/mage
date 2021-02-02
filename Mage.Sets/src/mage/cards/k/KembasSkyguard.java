@@ -30,7 +30,7 @@ public final class KembasSkyguard extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2)));
     }
 
-    public KembasSkyguard(final KembasSkyguard card) {
+    private KembasSkyguard(final KembasSkyguard card) {
         super(card);
     }
 

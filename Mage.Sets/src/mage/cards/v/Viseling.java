@@ -32,7 +32,7 @@ public final class Viseling extends CardImpl {
 
     }
 
-    public Viseling(final Viseling card) {
+    private Viseling(final Viseling card) {
         super(card);
     }
 

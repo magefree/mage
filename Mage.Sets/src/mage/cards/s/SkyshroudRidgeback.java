@@ -25,7 +25,7 @@ public final class SkyshroudRidgeback extends CardImpl {
         this.addAbility(new FadingAbility(2, this));
     }
 
-    public SkyshroudRidgeback(final SkyshroudRidgeback card) {
+    private SkyshroudRidgeback(final SkyshroudRidgeback card) {
         super(card);
     }
 

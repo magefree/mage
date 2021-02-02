@@ -62,7 +62,7 @@ public final class UlashtTheHateSeed extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UlashtTheHateSeed(final UlashtTheHateSeed card) {
+    private UlashtTheHateSeed(final UlashtTheHateSeed card) {
         super(card);
     }
 

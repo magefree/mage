@@ -29,7 +29,7 @@ public final class RorixBladewing extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public RorixBladewing(final RorixBladewing card) {
+    private RorixBladewing(final RorixBladewing card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class MirrorEntity extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MirrorEntity(final MirrorEntity card) {
+    private MirrorEntity(final MirrorEntity card) {
         super(card);
     }
 

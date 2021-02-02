@@ -43,7 +43,7 @@ public final class QuestForPureFlame extends CardImpl {
         ));
     }
 
-    public QuestForPureFlame(final QuestForPureFlame card) {
+    private QuestForPureFlame(final QuestForPureFlame card) {
         super(card);
     }
 

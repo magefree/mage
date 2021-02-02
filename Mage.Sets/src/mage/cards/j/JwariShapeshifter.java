@@ -38,7 +38,7 @@ public final class JwariShapeshifter extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(filter), true));
     }
 
-    public JwariShapeshifter(final JwariShapeshifter card) {
+    private JwariShapeshifter(final JwariShapeshifter card) {
         super(card);
     }
 

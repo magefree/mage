@@ -42,7 +42,7 @@ public final class CouncilOfTheAbsolute extends CardImpl {
 
     }
 
-    public CouncilOfTheAbsolute(final CouncilOfTheAbsolute card) {
+    private CouncilOfTheAbsolute(final CouncilOfTheAbsolute card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class HaplessResearcher extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new SacrificeSourceCost()));
     }
 
-    public HaplessResearcher(final HaplessResearcher card) {
+    private HaplessResearcher(final HaplessResearcher card) {
         super(card);
     }
 

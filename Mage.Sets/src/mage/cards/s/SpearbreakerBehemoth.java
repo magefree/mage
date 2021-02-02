@@ -47,7 +47,7 @@ public final class SpearbreakerBehemoth extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpearbreakerBehemoth(final SpearbreakerBehemoth card) {
+    private SpearbreakerBehemoth(final SpearbreakerBehemoth card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class PeaceAndQuiet extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(2, StaticFilters.FILTER_ENCHANTMENT_PERMANENT));
     }
 
-    public PeaceAndQuiet(final PeaceAndQuiet card) {
+    private PeaceAndQuiet(final PeaceAndQuiet card) {
         super(card);
     }
 

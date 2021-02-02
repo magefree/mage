@@ -25,7 +25,7 @@ public final class Zap extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Zap(final Zap card) {
+    private Zap(final Zap card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class BloomTender extends CardImpl {
 
     }
 
-    public BloomTender(final BloomTender card) {
+    private BloomTender(final BloomTender card) {
         super(card);
     }
 

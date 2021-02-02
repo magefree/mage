@@ -34,7 +34,7 @@ public final class GemstoneMine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GemstoneMine(final GemstoneMine card) {
+    private GemstoneMine(final GemstoneMine card) {
         super(card);
     }
 

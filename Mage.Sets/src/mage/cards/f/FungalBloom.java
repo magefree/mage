@@ -38,7 +38,7 @@ public final class FungalBloom extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FungalBloom(final FungalBloom card) {
+    private FungalBloom(final FungalBloom card) {
         super(card);
     }
 

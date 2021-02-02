@@ -28,7 +28,7 @@ public final class FiddleheadKami extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new RegenerateSourceEffect(), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
     }
 
-    public FiddleheadKami(final FiddleheadKami card) {
+    private FiddleheadKami(final FiddleheadKami card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class OgreJailbreaker extends CardImpl {
 
     }
 
-    public OgreJailbreaker(final OgreJailbreaker card) {
+    private OgreJailbreaker(final OgreJailbreaker card) {
         super(card);
     }
 

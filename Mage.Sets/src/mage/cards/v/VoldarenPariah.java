@@ -53,7 +53,7 @@ public final class VoldarenPariah extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{B}{B}{B}")));
     }
 
-    public VoldarenPariah(final VoldarenPariah card) {
+    private VoldarenPariah(final VoldarenPariah card) {
         super(card);
     }
 

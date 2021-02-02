@@ -37,7 +37,7 @@ public final class ChiefOfTheEdge extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public ChiefOfTheEdge(final ChiefOfTheEdge card) {
+    private ChiefOfTheEdge(final ChiefOfTheEdge card) {
         super(card);
     }
 

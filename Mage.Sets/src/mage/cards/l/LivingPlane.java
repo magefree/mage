@@ -29,7 +29,7 @@ public final class LivingPlane extends CardImpl {
                 "lands", StaticFilters.FILTER_LANDS, Duration.WhileOnBattlefield, false)));
     }
 
-    public LivingPlane(final LivingPlane card) {
+    private LivingPlane(final LivingPlane card) {
         super(card);
     }
 

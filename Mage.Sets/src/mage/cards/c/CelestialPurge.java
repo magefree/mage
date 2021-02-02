@@ -34,7 +34,7 @@ public final class CelestialPurge extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect());
     }
 
-    public CelestialPurge(final CelestialPurge card) {
+    private CelestialPurge(final CelestialPurge card) {
         super(card);
     }
 

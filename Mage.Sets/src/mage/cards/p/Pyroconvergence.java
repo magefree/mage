@@ -27,7 +27,7 @@ public final class Pyroconvergence extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Pyroconvergence(final Pyroconvergence card) {
+    private Pyroconvergence(final Pyroconvergence card) {
         super(card);
     }
 

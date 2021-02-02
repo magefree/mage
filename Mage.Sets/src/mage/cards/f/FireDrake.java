@@ -34,7 +34,7 @@ public final class FireDrake extends CardImpl {
         
     }
 
-    public FireDrake(final FireDrake card) {
+    private FireDrake(final FireDrake card) {
         super(card);
     }
 

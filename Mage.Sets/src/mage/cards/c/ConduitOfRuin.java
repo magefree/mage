@@ -60,7 +60,7 @@ public final class ConduitOfRuin extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect), new ConduitOfRuinWatcher());
     }
 
-    public ConduitOfRuin(final ConduitOfRuin card) {
+    private ConduitOfRuin(final ConduitOfRuin card) {
         super(card);
     }
 

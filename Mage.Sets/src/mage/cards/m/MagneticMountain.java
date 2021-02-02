@@ -45,7 +45,7 @@ public final class MagneticMountain extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new MagneticMountainEffect(), TargetController.ANY, false));
     }
 
-    public MagneticMountain(final MagneticMountain card) {
+    private MagneticMountain(final MagneticMountain card) {
         super(card);
     }
 

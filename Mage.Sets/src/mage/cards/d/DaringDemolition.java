@@ -31,7 +31,7 @@ public final class DaringDemolition extends CardImpl {
         getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public DaringDemolition(final DaringDemolition card) {
+    private DaringDemolition(final DaringDemolition card) {
         super(card);
     }
 

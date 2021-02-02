@@ -33,7 +33,7 @@ public final class HornOfDeafening extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HornOfDeafening(final HornOfDeafening card) {
+    private HornOfDeafening(final HornOfDeafening card) {
         super(card);
     }
 

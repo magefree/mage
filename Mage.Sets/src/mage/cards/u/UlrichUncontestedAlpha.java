@@ -49,7 +49,7 @@ public final class UlrichUncontestedAlpha extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public UlrichUncontestedAlpha(final UlrichUncontestedAlpha card) {
+    private UlrichUncontestedAlpha(final UlrichUncontestedAlpha card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class PhantomWhelp extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(effect, false));
     }
 
-    public PhantomWhelp(final PhantomWhelp card) {
+    private PhantomWhelp(final PhantomWhelp card) {
         super(card);
     }
 

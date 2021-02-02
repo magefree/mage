@@ -33,7 +33,7 @@ public final class SilentArbiter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SilentArbiterBlockRestrictionEffect()));
     }
 
-    public SilentArbiter(final SilentArbiter card) {
+    private SilentArbiter(final SilentArbiter card) {
         super(card);
     }
 

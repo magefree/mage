@@ -30,7 +30,7 @@ public final class Endure extends CardImpl {
 
     }
 
-    public Endure(final Endure card) {
+    private Endure(final Endure card) {
         super(card);
     }
 

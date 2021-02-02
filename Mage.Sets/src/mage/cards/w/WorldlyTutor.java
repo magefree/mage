@@ -21,7 +21,7 @@ public final class WorldlyTutor extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), true, true));
     }
 
-    public WorldlyTutor(final WorldlyTutor card) {
+    private WorldlyTutor(final WorldlyTutor card) {
         super(card);
     }
 

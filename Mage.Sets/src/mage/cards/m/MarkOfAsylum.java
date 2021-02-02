@@ -30,7 +30,7 @@ public final class MarkOfAsylum extends CardImpl {
         ));
     }
 
-    public MarkOfAsylum(final MarkOfAsylum card) {
+    private MarkOfAsylum(final MarkOfAsylum card) {
         super(card);
     }
 

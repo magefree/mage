@@ -32,7 +32,7 @@ public final class DwarvenShrine extends CardImpl {
         this.addAbility(new DwarvenShrineTriggeredAbility());
     }
 
-    public DwarvenShrine(final DwarvenShrine card) {
+    private DwarvenShrine(final DwarvenShrine card) {
         super(card);
     }
 

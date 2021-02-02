@@ -25,7 +25,7 @@ public final class ViolentOutburst extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Duration.EndOfTurn));
     }
 
-    public ViolentOutburst(final ViolentOutburst card) {
+    private ViolentOutburst(final ViolentOutburst card) {
         super(card);
     }
 

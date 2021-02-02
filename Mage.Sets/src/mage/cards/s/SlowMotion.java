@@ -47,7 +47,7 @@ public final class SlowMotion extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public SlowMotion(final SlowMotion card) {
+    private SlowMotion(final SlowMotion card) {
         super(card);
     }
 

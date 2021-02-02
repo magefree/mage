@@ -42,7 +42,7 @@ public final class UnderworldCerberus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnderworldCerberus(final UnderworldCerberus card) {
+    private UnderworldCerberus(final UnderworldCerberus card) {
         super(card);
     }
 

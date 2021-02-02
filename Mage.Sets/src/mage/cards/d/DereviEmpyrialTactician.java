@@ -53,7 +53,7 @@ public final class DereviEmpyrialTactician extends CardImpl {
         this.addAbility(new DereviEmpyrialTacticianAbility());
     }
 
-    public DereviEmpyrialTactician(final DereviEmpyrialTactician card) {
+    private DereviEmpyrialTactician(final DereviEmpyrialTactician card) {
         super(card);
     }
 

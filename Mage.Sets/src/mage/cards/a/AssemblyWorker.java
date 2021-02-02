@@ -41,7 +41,7 @@ public final class AssemblyWorker extends CardImpl {
        this.addAbility(ability);
     }
 
-    public AssemblyWorker(final AssemblyWorker card) {
+    private AssemblyWorker(final AssemblyWorker card) {
         super(card);
     }
 

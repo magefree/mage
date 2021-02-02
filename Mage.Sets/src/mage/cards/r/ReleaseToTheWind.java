@@ -29,7 +29,7 @@ public final class ReleaseToTheWind extends CardImpl {
         getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
-    public ReleaseToTheWind(final ReleaseToTheWind card) {
+    private ReleaseToTheWind(final ReleaseToTheWind card) {
         super(card);
     }
 

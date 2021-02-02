@@ -40,7 +40,7 @@ public final class ToothAndNail extends CardImpl {
         this.addAbility(new EntwineAbility("{2}"));
     }
 
-    public ToothAndNail(final ToothAndNail card) {
+    private ToothAndNail(final ToothAndNail card) {
         super(card);
     }
 

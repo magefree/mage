@@ -51,7 +51,7 @@ public final class LilianaOfTheVeil extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LilianaOfTheVeil(final LilianaOfTheVeil card) {
+    private LilianaOfTheVeil(final LilianaOfTheVeil card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class DeftbladeElite extends CardImpl {
 
     }
 
-    public DeftbladeElite(final DeftbladeElite card) {
+    private DeftbladeElite(final DeftbladeElite card) {
         super(card);
     }
 

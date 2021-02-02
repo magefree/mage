@@ -23,7 +23,7 @@ public final class Reconstruction extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterArtifactCard("artifact card from your graveyard")));
     }
 
-    public Reconstruction(final Reconstruction card) {
+    private Reconstruction(final Reconstruction card) {
         super(card);
     }
 

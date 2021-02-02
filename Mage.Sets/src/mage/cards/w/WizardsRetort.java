@@ -43,7 +43,7 @@ public final class WizardsRetort extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
-    public WizardsRetort(final WizardsRetort card) {
+    private WizardsRetort(final WizardsRetort card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class Xenograft extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new XenograftAddSubtypeEffect()));
     }
 
-    public Xenograft(final Xenograft card) {
+    private Xenograft(final Xenograft card) {
         super(card);
     }
 

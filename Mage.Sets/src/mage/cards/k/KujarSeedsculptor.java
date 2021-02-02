@@ -32,7 +32,7 @@ public final class KujarSeedsculptor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KujarSeedsculptor(final KujarSeedsculptor card) {
+    private KujarSeedsculptor(final KujarSeedsculptor card) {
         super(card);
     }
 

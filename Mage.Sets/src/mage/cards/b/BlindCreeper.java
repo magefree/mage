@@ -32,7 +32,7 @@ public final class BlindCreeper extends CardImpl {
         this.addAbility(new BlindCreeperAbility());
     }
 
-    public BlindCreeper(final BlindCreeper card) {
+    private BlindCreeper(final BlindCreeper card) {
         super(card);
     }
 

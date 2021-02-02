@@ -44,7 +44,7 @@ public final class AngrathsFury extends CardImpl {
 
     }
 
-    public AngrathsFury(final AngrathsFury card) {
+    private AngrathsFury(final AngrathsFury card) {
         super(card);
     }
 

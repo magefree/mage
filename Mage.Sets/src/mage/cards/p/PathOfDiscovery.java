@@ -27,7 +27,7 @@ public final class PathOfDiscovery extends CardImpl {
 
     }
 
-    public PathOfDiscovery(final PathOfDiscovery card) {
+    private PathOfDiscovery(final PathOfDiscovery card) {
         super(card);
     }
 

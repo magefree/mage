@@ -32,7 +32,7 @@ public final class UncleIstvan extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceByCardTypeEffect()));
     }
 
-    public UncleIstvan(final UncleIstvan card) {
+    private UncleIstvan(final UncleIstvan card) {
         super(card);
     }
 

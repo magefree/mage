@@ -41,7 +41,7 @@ public final class GlintwingInvoker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GlintwingInvoker(final GlintwingInvoker card) {
+    private GlintwingInvoker(final GlintwingInvoker card) {
         super(card);
     }
 

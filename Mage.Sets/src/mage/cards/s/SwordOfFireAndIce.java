@@ -45,7 +45,7 @@ public final class SwordOfFireAndIce extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(2)));
     }
 
-    public SwordOfFireAndIce(final SwordOfFireAndIce card) {
+    private SwordOfFireAndIce(final SwordOfFireAndIce card) {
         super(card);
     }
 

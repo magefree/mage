@@ -36,7 +36,7 @@ public final class KindlyStranger extends CardImpl {
                 .addHint(DeliriumHint.instance));
     }
 
-    public KindlyStranger(final KindlyStranger card) {
+    private KindlyStranger(final KindlyStranger card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class EnchantersBane extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EnchantersBane(final EnchantersBane card) {
+    private EnchantersBane(final EnchantersBane card) {
         super(card);
     }
 

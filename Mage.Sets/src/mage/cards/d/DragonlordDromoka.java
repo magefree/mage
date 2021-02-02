@@ -40,7 +40,7 @@ public final class DragonlordDromoka extends CardImpl {
         
     }
 
-    public DragonlordDromoka(final DragonlordDromoka card) {
+    private DragonlordDromoka(final DragonlordDromoka card) {
         super(card);
     }
 

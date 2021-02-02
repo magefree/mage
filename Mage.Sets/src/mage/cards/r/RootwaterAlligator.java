@@ -36,7 +36,7 @@ public final class RootwaterAlligator extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public RootwaterAlligator(final RootwaterAlligator card) {
+    private RootwaterAlligator(final RootwaterAlligator card) {
         super(card);
     }
 

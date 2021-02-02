@@ -32,7 +32,7 @@ public final class PsychosisCrawler extends CardImpl {
         this.addAbility(new DrawCardControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), false));
     }
 
-    public PsychosisCrawler(final PsychosisCrawler card) {
+    private PsychosisCrawler(final PsychosisCrawler card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class WaterElemental extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public WaterElemental(final WaterElemental card) {
+    private WaterElemental(final WaterElemental card) {
         super(card);
     }
 

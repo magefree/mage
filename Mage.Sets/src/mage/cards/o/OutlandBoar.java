@@ -25,7 +25,7 @@ public final class OutlandBoar extends CardImpl {
         this.addAbility(new DauntAbility());
     }
 
-    public OutlandBoar(final OutlandBoar card) {
+    private OutlandBoar(final OutlandBoar card) {
         super(card);
     }
 

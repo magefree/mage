@@ -30,7 +30,7 @@ public final class InkwellLeviathan extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public InkwellLeviathan(final InkwellLeviathan card) {
+    private InkwellLeviathan(final InkwellLeviathan card) {
         super(card);
     }
 

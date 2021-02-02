@@ -47,7 +47,7 @@ public final class SightlessBrawler extends CardImpl {
 
     }
 
-    public SightlessBrawler(final SightlessBrawler card) {
+    private SightlessBrawler(final SightlessBrawler card) {
         super(card);
     }
 

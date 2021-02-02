@@ -45,7 +45,7 @@ public final class SkaabRuinator extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, new SkaabRuinatorPlayEffect()));
     }
 
-    public SkaabRuinator(final SkaabRuinator card) {
+    private SkaabRuinator(final SkaabRuinator card) {
         super(card);
     }
 

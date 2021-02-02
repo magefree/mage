@@ -36,7 +36,7 @@ public final class ScionSummoner extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
     }
 
-    public ScionSummoner(final ScionSummoner card) {
+    private ScionSummoner(final ScionSummoner card) {
         super(card);
     }
 

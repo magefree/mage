@@ -29,7 +29,7 @@ public final class Meteorite extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public Meteorite(final Meteorite card) {
+    private Meteorite(final Meteorite card) {
         super(card);
     }
 

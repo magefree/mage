@@ -24,7 +24,7 @@ public final class RallyingRoar extends CardImpl {
         this.getSpellAbility().addEffect(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), "Untap them."));
     }
 
-    public RallyingRoar(final RallyingRoar card) {
+    private RallyingRoar(final RallyingRoar card) {
         super(card);
     }
 

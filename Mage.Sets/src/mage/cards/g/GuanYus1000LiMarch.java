@@ -28,7 +28,7 @@ public final class GuanYus1000LiMarch extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter, false));
     }
 
-    public GuanYus1000LiMarch(final GuanYus1000LiMarch card) {
+    private GuanYus1000LiMarch(final GuanYus1000LiMarch card) {
         super(card);
     }
 

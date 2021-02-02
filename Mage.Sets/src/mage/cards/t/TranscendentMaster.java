@@ -53,7 +53,7 @@ public final class TranscendentMaster extends LevelerCard {
         setMaxLevelCounters(12);
     }
 
-    public TranscendentMaster(final TranscendentMaster card) {
+    private TranscendentMaster(final TranscendentMaster card) {
         super(card);
     }
 

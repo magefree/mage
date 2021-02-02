@@ -26,7 +26,7 @@ public final class BurstOfStrength extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public BurstOfStrength(final BurstOfStrength card) {
+    private BurstOfStrength(final BurstOfStrength card) {
         super(card);
     }
 

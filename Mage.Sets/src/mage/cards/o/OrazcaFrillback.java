@@ -23,7 +23,7 @@ public final class OrazcaFrillback extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public OrazcaFrillback(final OrazcaFrillback card) {
+    private OrazcaFrillback(final OrazcaFrillback card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class GurmagAngler extends CardImpl {
         this.addAbility(new DelveAbility());
     }
 
-    public GurmagAngler(final GurmagAngler card) {
+    private GurmagAngler(final GurmagAngler card) {
         super(card);
     }
 

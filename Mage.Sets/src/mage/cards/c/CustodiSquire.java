@@ -40,7 +40,7 @@ public final class CustodiSquire extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CustodiSquireVoteEffect(), false, true));
     }
 
-    public CustodiSquire(final CustodiSquire card) {
+    private CustodiSquire(final CustodiSquire card) {
         super(card);
     }
 

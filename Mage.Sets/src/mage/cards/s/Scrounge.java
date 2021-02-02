@@ -29,7 +29,7 @@ public final class Scrounge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public Scrounge(final Scrounge card) {
+    private Scrounge(final Scrounge card) {
         super(card);
     }
 

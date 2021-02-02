@@ -26,7 +26,7 @@ public final class Fumigate extends CardImpl {
         this.getSpellAbility().addEffect(new FumigateEffect());
     }
 
-    public Fumigate(final Fumigate card) {
+    private Fumigate(final Fumigate card) {
         super(card);
     }
 

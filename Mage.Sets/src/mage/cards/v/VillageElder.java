@@ -44,7 +44,7 @@ public final class VillageElder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VillageElder(final VillageElder card) {
+    private VillageElder(final VillageElder card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class TraverseTheUlvenwald extends CardImpl {
         this.getSpellAbility().addHint(DeliriumHint.instance);
     }
 
-    public TraverseTheUlvenwald(final TraverseTheUlvenwald card) {
+    private TraverseTheUlvenwald(final TraverseTheUlvenwald card) {
         super(card);
     }
 

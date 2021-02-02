@@ -44,7 +44,7 @@ public final class OblivionSower extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OblivionSower(final OblivionSower card) {
+    private OblivionSower(final OblivionSower card) {
         super(card);
     }
 

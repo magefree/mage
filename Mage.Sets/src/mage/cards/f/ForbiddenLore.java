@@ -40,7 +40,7 @@ public final class ForbiddenLore extends CardImpl {
             Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Target creature gets +2/+1 until end of turn.\"")));
     }
 
-    public ForbiddenLore(final ForbiddenLore card) {
+    private ForbiddenLore(final ForbiddenLore card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class SnowMercy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SnowMercy(final SnowMercy card) {
+    private SnowMercy(final SnowMercy card) {
         super(card);
     }
 

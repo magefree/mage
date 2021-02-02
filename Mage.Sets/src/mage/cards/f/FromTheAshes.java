@@ -32,7 +32,7 @@ public final class FromTheAshes extends CardImpl {
         this.getSpellAbility().addEffect(new FromTheAshesEffect());
     }
 
-    public FromTheAshes(final FromTheAshes card) {
+    private FromTheAshes(final FromTheAshes card) {
         super(card);
     }
 

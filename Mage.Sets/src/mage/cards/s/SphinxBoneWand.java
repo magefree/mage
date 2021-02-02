@@ -39,7 +39,7 @@ public final class SphinxBoneWand extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SphinxBoneWand(final SphinxBoneWand card) {
+    private SphinxBoneWand(final SphinxBoneWand card) {
         super(card);
     }
 

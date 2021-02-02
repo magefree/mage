@@ -35,7 +35,7 @@ public final class IntoTheRoil extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
-    public IntoTheRoil(final IntoTheRoil card) {
+    private IntoTheRoil(final IntoTheRoil card) {
         super(card);
     }
 

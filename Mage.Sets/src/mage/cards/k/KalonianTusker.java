@@ -22,7 +22,7 @@ public final class KalonianTusker extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public KalonianTusker(final KalonianTusker card) {
+    private KalonianTusker(final KalonianTusker card) {
         super(card);
     }
 

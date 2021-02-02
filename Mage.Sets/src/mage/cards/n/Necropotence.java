@@ -47,7 +47,7 @@ public final class Necropotence extends CardImpl {
 
     }
 
-    public Necropotence(final Necropotence card) {
+    private Necropotence(final Necropotence card) {
         super(card);
     }
 

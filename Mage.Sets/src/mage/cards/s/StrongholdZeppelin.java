@@ -28,7 +28,7 @@ public final class StrongholdZeppelin extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public StrongholdZeppelin(final StrongholdZeppelin card) {
+    private StrongholdZeppelin(final StrongholdZeppelin card) {
         super(card);
     }
 

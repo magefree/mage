@@ -57,7 +57,7 @@ public final class ArlinnEmbracedByTheMoon extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new ArlinnEmbracedByTheMoonEmblem()), -6));
     }
 
-    public ArlinnEmbracedByTheMoon(final ArlinnEmbracedByTheMoon card) {
+    private ArlinnEmbracedByTheMoon(final ArlinnEmbracedByTheMoon card) {
         super(card);
     }
 

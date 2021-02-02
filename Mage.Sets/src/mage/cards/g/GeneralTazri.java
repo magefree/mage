@@ -55,7 +55,7 @@ public final class GeneralTazri extends CardImpl {
 
     }
 
-    public GeneralTazri(final GeneralTazri card) {
+    private GeneralTazri(final GeneralTazri card) {
         super(card);
     }
 

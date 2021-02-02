@@ -34,7 +34,7 @@ public final class DarkOffering extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public DarkOffering(final DarkOffering card) {
+    private DarkOffering(final DarkOffering card) {
         super(card);
     }
 

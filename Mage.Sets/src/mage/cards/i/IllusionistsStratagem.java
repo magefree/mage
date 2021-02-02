@@ -30,7 +30,7 @@ public final class IllusionistsStratagem extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public IllusionistsStratagem(final IllusionistsStratagem card) {
+    private IllusionistsStratagem(final IllusionistsStratagem card) {
         super(card);
     }
 

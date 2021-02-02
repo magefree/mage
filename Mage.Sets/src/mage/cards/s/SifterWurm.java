@@ -40,7 +40,7 @@ public final class SifterWurm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SifterWurm(final SifterWurm card) {
+    private SifterWurm(final SifterWurm card) {
         super(card);
     }
 

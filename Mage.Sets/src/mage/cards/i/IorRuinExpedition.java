@@ -36,7 +36,7 @@ public final class IorRuinExpedition extends CardImpl {
         ));
     }
 
-    public IorRuinExpedition(final IorRuinExpedition card) {
+    private IorRuinExpedition(final IorRuinExpedition card) {
         super(card);
     }
 

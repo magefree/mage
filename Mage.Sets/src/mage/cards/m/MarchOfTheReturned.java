@@ -24,7 +24,7 @@ public final class MarchOfTheReturned extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0,2, new FilterCreatureCard("creature cards from your graveyard")));
     }
 
-    public MarchOfTheReturned(final MarchOfTheReturned card) {
+    private MarchOfTheReturned(final MarchOfTheReturned card) {
         super(card);
     }
 

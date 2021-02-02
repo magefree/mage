@@ -59,7 +59,7 @@ public final class SmeltWardGatekeepers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SmeltWardGatekeepers(final SmeltWardGatekeepers card) {
+    private SmeltWardGatekeepers(final SmeltWardGatekeepers card) {
         super(card);
     }
 

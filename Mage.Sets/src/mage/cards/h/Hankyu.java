@@ -47,7 +47,7 @@ public final class Hankyu extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4)));
     }
 
-    public Hankyu(final Hankyu card) {
+    private Hankyu(final Hankyu card) {
         super(card);
     }
 

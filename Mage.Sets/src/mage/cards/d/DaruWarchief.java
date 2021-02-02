@@ -43,7 +43,7 @@ public final class DaruWarchief extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 2, Duration.WhileOnBattlefield, filterCreatures, false)));
     }
 
-    public DaruWarchief(final DaruWarchief card) {
+    private DaruWarchief(final DaruWarchief card) {
         super(card);
     }
 

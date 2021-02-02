@@ -29,7 +29,7 @@ public final class DissentersDeliverance extends CardImpl {
 
     }
 
-    public DissentersDeliverance(final DissentersDeliverance card) {
+    private DissentersDeliverance(final DissentersDeliverance card) {
         super(card);
     }
 

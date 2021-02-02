@@ -39,7 +39,7 @@ public final class RagebloodShaman extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public RagebloodShaman(final RagebloodShaman card) {
+    private RagebloodShaman(final RagebloodShaman card) {
         super(card);
     }
 

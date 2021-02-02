@@ -31,7 +31,7 @@ public final class WeirdHarvest extends CardImpl {
         getSpellAbility().addEffect(new WeirdHarvestEffect());
     }
 
-    public WeirdHarvest(final WeirdHarvest card) {
+    private WeirdHarvest(final WeirdHarvest card) {
         super(card);
     }
 

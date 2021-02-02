@@ -29,7 +29,7 @@ public final class Needlebug extends CardImpl {
         this.addAbility(new ProtectionAbility(new FilterArtifactCard("artifacts")));
     }
 
-    public Needlebug(final Needlebug card) {
+    private Needlebug(final Needlebug card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class SentinelsOfGlenElendra extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SentinelsOfGlenElendra(final SentinelsOfGlenElendra card) {
+    private SentinelsOfGlenElendra(final SentinelsOfGlenElendra card) {
         super(card);
     }
 

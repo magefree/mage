@@ -38,7 +38,7 @@ public final class PestilenceRats extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public PestilenceRats(final PestilenceRats card) {
+    private PestilenceRats(final PestilenceRats card) {
         super(card);
     }
 

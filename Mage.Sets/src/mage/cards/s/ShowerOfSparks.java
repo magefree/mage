@@ -31,7 +31,7 @@ public final class ShowerOfSparks extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    public ShowerOfSparks(final ShowerOfSparks card) {
+    private ShowerOfSparks(final ShowerOfSparks card) {
         super(card);
     }
 

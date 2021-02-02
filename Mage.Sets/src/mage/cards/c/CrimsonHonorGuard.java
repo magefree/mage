@@ -40,7 +40,7 @@ public final class CrimsonHonorGuard extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new CrimsonHonorGuardEffect(), TargetController.ANY, false));
     }
 
-    public CrimsonHonorGuard(final CrimsonHonorGuard card) {
+    private CrimsonHonorGuard(final CrimsonHonorGuard card) {
         super(card);
     }
 

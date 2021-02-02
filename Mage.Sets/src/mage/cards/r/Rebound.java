@@ -32,7 +32,7 @@ public final class Rebound extends CardImpl {
 
     }
 
-    public Rebound(final Rebound card) {
+    private Rebound(final Rebound card) {
         super(card);
     }
 

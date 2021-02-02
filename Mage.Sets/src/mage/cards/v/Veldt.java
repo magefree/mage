@@ -48,7 +48,7 @@ public final class Veldt extends CardImpl {
         this.addAbility(ability4);
     }
 
-    public Veldt(final Veldt card) {
+    private Veldt(final Veldt card) {
         super(card);
     }
 

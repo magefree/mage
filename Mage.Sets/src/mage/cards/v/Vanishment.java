@@ -28,7 +28,7 @@ public final class Vanishment extends CardImpl {
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{U}")));
     }
 
-    public Vanishment(final Vanishment card) {
+    private Vanishment(final Vanishment card) {
         super(card);
     }
 

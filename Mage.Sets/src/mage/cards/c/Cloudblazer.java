@@ -38,7 +38,7 @@ public final class Cloudblazer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Cloudblazer(final Cloudblazer card) {
+    private Cloudblazer(final Cloudblazer card) {
         super(card);
     }
 

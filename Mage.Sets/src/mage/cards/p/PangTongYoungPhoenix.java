@@ -38,7 +38,7 @@ public final class PangTongYoungPhoenix extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PangTongYoungPhoenix(final PangTongYoungPhoenix card) {
+    private PangTongYoungPhoenix(final PangTongYoungPhoenix card) {
         super(card);
     }
 

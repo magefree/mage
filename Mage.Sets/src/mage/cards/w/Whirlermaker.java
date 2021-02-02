@@ -28,7 +28,7 @@ public final class Whirlermaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Whirlermaker(final Whirlermaker card) {
+    private Whirlermaker(final Whirlermaker card) {
         super(card);
     }
 

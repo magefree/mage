@@ -31,7 +31,7 @@ public final class OutlandColossus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
-    public OutlandColossus(final OutlandColossus card) {
+    private OutlandColossus(final OutlandColossus card) {
         super(card);
     }
 

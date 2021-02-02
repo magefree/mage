@@ -28,7 +28,7 @@ public final class Restock extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public Restock(final Restock card) {
+    private Restock(final Restock card) {
         super(card);
     }
 

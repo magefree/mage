@@ -23,7 +23,7 @@ public final class GiantGrowth extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
     }
 
-    public GiantGrowth(final GiantGrowth card) {
+    private GiantGrowth(final GiantGrowth card) {
         super(card);
     }
 

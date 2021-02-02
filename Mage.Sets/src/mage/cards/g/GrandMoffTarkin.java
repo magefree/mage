@@ -41,7 +41,7 @@ public final class GrandMoffTarkin extends CardImpl {
         this.addAbility(new GrandMoffTarkinTriggeredAbility(new GrandMoffTarkinEffect(), false));
     }
 
-    public GrandMoffTarkin(final GrandMoffTarkin card) {
+    private GrandMoffTarkin(final GrandMoffTarkin card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class DeadRingers extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2, filter, false));
     }
 
-    public DeadRingers(final DeadRingers card) {
+    private DeadRingers(final DeadRingers card) {
         super(card);
     }
 

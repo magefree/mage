@@ -27,7 +27,7 @@ public final class GalinasKnight extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
-    public GalinasKnight(final GalinasKnight card) {
+    private GalinasKnight(final GalinasKnight card) {
         super(card);
     }
 

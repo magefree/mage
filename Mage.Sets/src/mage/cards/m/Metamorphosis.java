@@ -33,7 +33,7 @@ public final class Metamorphosis extends CardImpl {
         // Add X mana of any one color, where X is one plus the sacrificed creature's converted mana cost. Spend this mana only to cast creature spells.
     }
 
-    public Metamorphosis(final Metamorphosis card) {
+    private Metamorphosis(final Metamorphosis card) {
         super(card);
     }
 

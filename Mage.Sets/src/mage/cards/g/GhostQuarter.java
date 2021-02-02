@@ -40,7 +40,7 @@ public final class GhostQuarter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhostQuarter(final GhostQuarter card) {
+    private GhostQuarter(final GhostQuarter card) {
         super(card);
     }
 

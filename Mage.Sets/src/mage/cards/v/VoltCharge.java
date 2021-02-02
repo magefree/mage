@@ -23,7 +23,7 @@ public final class VoltCharge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public VoltCharge(final VoltCharge card) {
+    private VoltCharge(final VoltCharge card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class UncontrollableAnger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UncontrollableAnger(final UncontrollableAnger card) {
+    private UncontrollableAnger(final UncontrollableAnger card) {
         super(card);
     }
 

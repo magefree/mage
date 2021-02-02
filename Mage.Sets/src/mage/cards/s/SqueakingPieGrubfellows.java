@@ -31,7 +31,7 @@ public final class SqueakingPieGrubfellows extends CardImpl {
         this.addAbility(new KinshipAbility(new DiscardEachPlayerEffect(StaticValue.get(1), false, TargetController.OPPONENT)));
     }
 
-    public SqueakingPieGrubfellows(final SqueakingPieGrubfellows card) {
+    private SqueakingPieGrubfellows(final SqueakingPieGrubfellows card) {
         super(card);
     }
 

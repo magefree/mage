@@ -42,7 +42,7 @@ public final class MagewrightsStone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagewrightsStone(final MagewrightsStone card) {
+    private MagewrightsStone(final MagewrightsStone card) {
         super(card);
     }
 

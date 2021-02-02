@@ -45,7 +45,7 @@ public final class LakeOfTheDead extends CardImpl {
 
     }
 
-    public LakeOfTheDead(final LakeOfTheDead card) {
+    private LakeOfTheDead(final LakeOfTheDead card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class AlAbarasCarpet extends CardImpl {
 
     }
 
-    public AlAbarasCarpet(final AlAbarasCarpet card) {
+    private AlAbarasCarpet(final AlAbarasCarpet card) {
         super(card);
     }
 

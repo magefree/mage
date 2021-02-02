@@ -43,7 +43,7 @@ public final class CopperhoofVorrac extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
     }
 
-    public CopperhoofVorrac(final CopperhoofVorrac card) {
+    private CopperhoofVorrac(final CopperhoofVorrac card) {
         super(card);
     }
 

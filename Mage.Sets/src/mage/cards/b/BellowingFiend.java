@@ -39,7 +39,7 @@ public final class BellowingFiend extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BellowingFiend(final BellowingFiend card) {
+    private BellowingFiend(final BellowingFiend card) {
         super(card);
     }
 

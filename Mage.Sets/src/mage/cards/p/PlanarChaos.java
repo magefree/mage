@@ -36,7 +36,7 @@ public final class PlanarChaos extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new PlanarChaosCastAllEffect(), new FilterSpell("a spell"), false, SetTargetPointer.SPELL));
     }
 
-    public PlanarChaos(final PlanarChaos card) {
+    private PlanarChaos(final PlanarChaos card) {
         super(card);
     }
 

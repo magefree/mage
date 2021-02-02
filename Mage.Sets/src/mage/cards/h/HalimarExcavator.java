@@ -41,7 +41,7 @@ public final class HalimarExcavator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HalimarExcavator(final HalimarExcavator card) {
+    private HalimarExcavator(final HalimarExcavator card) {
         super(card);
     }
 

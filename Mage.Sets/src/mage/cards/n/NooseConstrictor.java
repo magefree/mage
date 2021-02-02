@@ -33,7 +33,7 @@ public final class NooseConstrictor extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new DiscardCardCost()));
     }
 
-    public NooseConstrictor(final NooseConstrictor card) {
+    private NooseConstrictor(final NooseConstrictor card) {
         super(card);
     }
 

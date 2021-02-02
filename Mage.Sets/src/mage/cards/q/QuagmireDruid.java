@@ -41,7 +41,7 @@ public final class QuagmireDruid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuagmireDruid(final QuagmireDruid card) {
+    private QuagmireDruid(final QuagmireDruid card) {
         super(card);
     }
 

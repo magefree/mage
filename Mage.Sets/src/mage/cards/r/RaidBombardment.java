@@ -27,7 +27,7 @@ public final class RaidBombardment extends CardImpl {
         this.addAbility(new RaidBombardmentTriggeredAbility());
     }
 
-    public RaidBombardment(final RaidBombardment card) {
+    private RaidBombardment(final RaidBombardment card) {
         super(card);
     }
 

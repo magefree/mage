@@ -32,7 +32,7 @@ public final class GraniteGargoyle extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public GraniteGargoyle(final GraniteGargoyle card) {
+    private GraniteGargoyle(final GraniteGargoyle card) {
         super(card);
     }
 

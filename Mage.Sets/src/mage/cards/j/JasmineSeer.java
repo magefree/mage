@@ -40,7 +40,7 @@ public final class JasmineSeer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JasmineSeer(final JasmineSeer card) {
+    private JasmineSeer(final JasmineSeer card) {
         super(card);
     }
 

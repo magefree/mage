@@ -43,7 +43,7 @@ public final class NightDay extends SplitCard {
 
     }
 
-    public NightDay(final NightDay card) {
+    private NightDay(final NightDay card) {
         super(card);
     }
 

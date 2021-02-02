@@ -33,7 +33,7 @@ public final class SolarBlast extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SolarBlast(final SolarBlast card) {
+    private SolarBlast(final SolarBlast card) {
         super(card);
     }
 

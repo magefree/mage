@@ -29,7 +29,7 @@ public final class ArchangelsLight extends CardImpl {
 
     }
 
-    public ArchangelsLight(final ArchangelsLight card) {
+    private ArchangelsLight(final ArchangelsLight card) {
         super(card);
     }
 

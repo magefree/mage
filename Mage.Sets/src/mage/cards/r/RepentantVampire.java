@@ -65,7 +65,7 @@ public final class RepentantVampire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RepentantVampire(final RepentantVampire card) {
+    private RepentantVampire(final RepentantVampire card) {
         super(card);
     }
 

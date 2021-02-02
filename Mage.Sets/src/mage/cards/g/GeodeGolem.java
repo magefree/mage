@@ -43,7 +43,7 @@ public final class GeodeGolem extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new GeodeGolemEffect(), true));
     }
 
-    public GeodeGolem(final GeodeGolem card) {
+    private GeodeGolem(final GeodeGolem card) {
         super(card);
     }
 

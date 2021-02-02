@@ -39,7 +39,7 @@ public final class ButchersCleaver extends CardImpl {
 
     }
 
-    public ButchersCleaver(final ButchersCleaver card) {
+    private ButchersCleaver(final ButchersCleaver card) {
         super(card);
     }
 

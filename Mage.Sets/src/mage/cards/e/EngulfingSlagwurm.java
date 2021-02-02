@@ -35,7 +35,7 @@ public final class EngulfingSlagwurm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EngulfingSlagwurm(final EngulfingSlagwurm card) {
+    private EngulfingSlagwurm(final EngulfingSlagwurm card) {
         super(card);
     }
 

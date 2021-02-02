@@ -37,7 +37,7 @@ public final class CarrionFeeder extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
-    public CarrionFeeder(final CarrionFeeder card) {
+    private CarrionFeeder(final CarrionFeeder card) {
         super(card);
     }
 

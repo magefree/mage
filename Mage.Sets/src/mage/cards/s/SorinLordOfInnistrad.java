@@ -60,7 +60,7 @@ public final class SorinLordOfInnistrad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SorinLordOfInnistrad(final SorinLordOfInnistrad card) {
+    private SorinLordOfInnistrad(final SorinLordOfInnistrad card) {
         super(card);
     }
 

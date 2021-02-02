@@ -38,7 +38,7 @@ public final class MurkStrider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MurkStrider(final MurkStrider card) {
+    private MurkStrider(final MurkStrider card) {
         super(card);
     }
 

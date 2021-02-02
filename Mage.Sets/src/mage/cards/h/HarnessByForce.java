@@ -36,7 +36,7 @@ public final class HarnessByForce extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
-    public HarnessByForce(final HarnessByForce card) {
+    private HarnessByForce(final HarnessByForce card) {
         super(card);
     }
 

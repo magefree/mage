@@ -25,7 +25,7 @@ public final class DragDown extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public DragDown(final DragDown card) {
+    private DragDown(final DragDown card) {
         super(card);
     }
 

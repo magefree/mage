@@ -43,7 +43,7 @@ public final class EvraHalcyonWitness extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new EvraHalcyonWitnessEffect(), new ManaCostsImpl("{4}")));
     }
 
-    public EvraHalcyonWitness(final EvraHalcyonWitness card) {
+    private EvraHalcyonWitness(final EvraHalcyonWitness card) {
         super(card);
     }
 

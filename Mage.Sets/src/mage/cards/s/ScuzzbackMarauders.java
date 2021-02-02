@@ -31,7 +31,7 @@ public final class ScuzzbackMarauders extends CardImpl {
 
     }
 
-    public ScuzzbackMarauders(final ScuzzbackMarauders card) {
+    private ScuzzbackMarauders(final ScuzzbackMarauders card) {
         super(card);
     }
 

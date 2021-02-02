@@ -47,7 +47,7 @@ public final class AethertorchRenegade extends CardImpl {
 
     }
 
-    public AethertorchRenegade(final AethertorchRenegade card) {
+    private AethertorchRenegade(final AethertorchRenegade card) {
         super(card);
     }
 

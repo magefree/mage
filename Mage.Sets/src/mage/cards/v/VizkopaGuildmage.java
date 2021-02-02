@@ -58,7 +58,7 @@ public final class VizkopaGuildmage extends CardImpl {
 
     }
 
-    public VizkopaGuildmage(final VizkopaGuildmage card) {
+    private VizkopaGuildmage(final VizkopaGuildmage card) {
         super(card);
     }
 

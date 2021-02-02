@@ -29,7 +29,7 @@ public final class DimirGuildgate extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public DimirGuildgate(final DimirGuildgate card) {
+    private DimirGuildgate(final DimirGuildgate card) {
         super(card);
     }
 

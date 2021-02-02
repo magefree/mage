@@ -40,7 +40,7 @@ public final class ManaChains extends CardImpl {
             new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")), AttachmentType.AURA)));
     }
 
-    public ManaChains(final ManaChains card) {
+    private ManaChains(final ManaChains card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public final class TilonallisSkinshifter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TilonallisSkinshifter(final TilonallisSkinshifter card) {
+    private TilonallisSkinshifter(final TilonallisSkinshifter card) {
         super(card);
     }
 

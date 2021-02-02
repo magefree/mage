@@ -33,7 +33,7 @@ public final class FaithOfTheDevoted extends CardImpl {
         this.addAbility(new CycleOrDiscardControllerTriggeredAbility(effect));
     }
 
-    public FaithOfTheDevoted(final FaithOfTheDevoted card) {
+    private FaithOfTheDevoted(final FaithOfTheDevoted card) {
         super(card);
     }
 

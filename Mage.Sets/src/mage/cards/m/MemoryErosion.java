@@ -28,7 +28,7 @@ public final class MemoryErosion extends CardImpl {
         this.addAbility(new SpellCastTriggeredAbility());
     }
 
-    public MemoryErosion(final MemoryErosion card) {
+    private MemoryErosion(final MemoryErosion card) {
         super(card);
     }
 

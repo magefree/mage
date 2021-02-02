@@ -36,7 +36,7 @@ public final class GriffinCanyon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GriffinCanyon(final GriffinCanyon card) {
+    private GriffinCanyon(final GriffinCanyon card) {
         super(card);
     }
 

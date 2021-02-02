@@ -32,7 +32,7 @@ public final class MakindiPatrol extends CardImpl {
                 new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("creatures")), false));
     }
 
-    public MakindiPatrol(final MakindiPatrol card) {
+    private MakindiPatrol(final MakindiPatrol card) {
         super(card);
     }
 

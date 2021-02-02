@@ -31,7 +31,7 @@ public final class EyeblightsEnding extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public EyeblightsEnding(final EyeblightsEnding card) {
+    private EyeblightsEnding(final EyeblightsEnding card) {
         super(card);
     }
 

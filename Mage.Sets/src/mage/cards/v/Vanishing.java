@@ -38,7 +38,7 @@ public final class Vanishing extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhaseOutAttachedEffect(), new ManaCostsImpl("{U}{U}")));
     }
 
-    public Vanishing(final Vanishing card) {
+    private Vanishing(final Vanishing card) {
         super(card);
     }
 

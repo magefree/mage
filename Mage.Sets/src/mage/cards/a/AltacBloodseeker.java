@@ -54,7 +54,7 @@ public final class AltacBloodseeker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AltacBloodseeker(final AltacBloodseeker card) {
+    private AltacBloodseeker(final AltacBloodseeker card) {
         super(card);
     }
 

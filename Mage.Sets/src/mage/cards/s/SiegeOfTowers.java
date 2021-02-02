@@ -42,7 +42,7 @@ public final class SiegeOfTowers extends CardImpl {
 
     }
 
-    public SiegeOfTowers(final SiegeOfTowers card) {
+    private SiegeOfTowers(final SiegeOfTowers card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class DwarvenMiner extends CardImpl {
         
     }
     
-    public DwarvenMiner(final DwarvenMiner card) {
+    private DwarvenMiner(final DwarvenMiner card) {
         super(card);
     }
     

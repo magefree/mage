@@ -63,7 +63,7 @@ public final class GrandArchitect extends CardImpl {
         this.addAbility(new GrandArchitectManaAbility(filter));
     }
 
-    public GrandArchitect(final GrandArchitect card) {
+    private GrandArchitect(final GrandArchitect card) {
         super(card);
     }
 

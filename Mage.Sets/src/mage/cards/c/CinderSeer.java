@@ -42,7 +42,7 @@ public final class CinderSeer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CinderSeer(final CinderSeer card) {
+    private CinderSeer(final CinderSeer card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class SignalTheClans extends CardImpl {
         this.getSpellAbility().addEffect(new SignalTheClansEffect());
     }
 
-    public SignalTheClans(final SignalTheClans card) {
+    private SignalTheClans(final SignalTheClans card) {
         super(card);
     }
 

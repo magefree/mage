@@ -45,7 +45,7 @@ public final class SkeletalGrimace extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
     }
 
-    public SkeletalGrimace(final SkeletalGrimace card) {
+    private SkeletalGrimace(final SkeletalGrimace card) {
         super(card);
     }
 

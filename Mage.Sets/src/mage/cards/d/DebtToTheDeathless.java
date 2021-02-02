@@ -24,7 +24,7 @@ public final class DebtToTheDeathless extends CardImpl {
         this.getSpellAbility().addEffect(new DebtToTheDeathlessEffect());
     }
 
-    public DebtToTheDeathless(final DebtToTheDeathless card) {
+    private DebtToTheDeathless(final DebtToTheDeathless card) {
         super(card);
     }
 

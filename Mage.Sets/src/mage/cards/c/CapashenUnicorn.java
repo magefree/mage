@@ -38,7 +38,7 @@ public final class CapashenUnicorn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CapashenUnicorn(final CapashenUnicorn card) {
+    private CapashenUnicorn(final CapashenUnicorn card) {
         super(card);
     }
 

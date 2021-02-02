@@ -39,7 +39,7 @@ public final class LeoninArmorguard extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false)));
     }
 
-    public LeoninArmorguard(final LeoninArmorguard card) {
+    private LeoninArmorguard(final LeoninArmorguard card) {
         super(card);
     }
 

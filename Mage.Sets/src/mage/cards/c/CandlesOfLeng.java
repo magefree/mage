@@ -33,7 +33,7 @@ public final class CandlesOfLeng extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CandlesOfLeng(final CandlesOfLeng card) {
+    private CandlesOfLeng(final CandlesOfLeng card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class AngelicRenewal extends CardImpl {
                 new FilterCreaturePermanent("a creature"), true, true));
     }
 
-    public AngelicRenewal(final AngelicRenewal card) {
+    private AngelicRenewal(final AngelicRenewal card) {
         super(card);
     }
 

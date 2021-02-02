@@ -48,7 +48,7 @@ public final class StromkirkOccultist extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{R}")));
     }
 
-    public StromkirkOccultist(final StromkirkOccultist card) {
+    private StromkirkOccultist(final StromkirkOccultist card) {
         super(card);
     }
 

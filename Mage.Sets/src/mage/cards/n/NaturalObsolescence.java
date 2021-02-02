@@ -22,7 +22,7 @@ public final class NaturalObsolescence extends CardImpl {
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(false));
     }
 
-    public NaturalObsolescence(final NaturalObsolescence card) {
+    private NaturalObsolescence(final NaturalObsolescence card) {
         super(card);
     }
 

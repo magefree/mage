@@ -26,7 +26,7 @@ public final class BecomeImmense extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public BecomeImmense(final BecomeImmense card) {
+    private BecomeImmense(final BecomeImmense card) {
         super(card);
     }
 

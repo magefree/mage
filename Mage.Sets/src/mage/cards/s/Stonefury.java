@@ -27,7 +27,7 @@ public final class Stonefury extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Stonefury(final Stonefury card) {
+    private Stonefury(final Stonefury card) {
         super(card);
     }
 

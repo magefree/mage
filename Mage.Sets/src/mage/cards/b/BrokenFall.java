@@ -26,7 +26,7 @@ public final class BrokenFall extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BrokenFall(final BrokenFall card) {
+    private BrokenFall(final BrokenFall card) {
         super(card);
     }
 

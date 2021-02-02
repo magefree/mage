@@ -36,7 +36,7 @@ public final class BreakOfDay extends CardImpl {
         ));
     }
 
-    public BreakOfDay(final BreakOfDay card) {
+    private BreakOfDay(final BreakOfDay card) {
         super(card);
     }
 

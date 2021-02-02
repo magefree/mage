@@ -36,7 +36,7 @@ public final class FrostRaptor extends CardImpl {
             ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{S}{S}")));
     }
 
-    public FrostRaptor(final FrostRaptor card) {
+    private FrostRaptor(final FrostRaptor card) {
         super(card);
     }
 

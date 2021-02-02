@@ -46,7 +46,7 @@ public final class BomatCourier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BomatCourier(final BomatCourier card) {
+    private BomatCourier(final BomatCourier card) {
         super(card);
     }
 

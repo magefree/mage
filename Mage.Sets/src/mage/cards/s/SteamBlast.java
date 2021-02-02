@@ -20,7 +20,7 @@ public final class SteamBlast extends CardImpl {
         this.getSpellAbility().addEffect(new DamageEverythingEffect(2));
     }
 
-    public SteamBlast(final SteamBlast card) {
+    private SteamBlast(final SteamBlast card) {
         super(card);
     }
 

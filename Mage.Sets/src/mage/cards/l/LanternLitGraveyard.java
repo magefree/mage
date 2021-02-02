@@ -28,7 +28,7 @@ public final class LanternLitGraveyard extends CardImpl {
         this.addAbility(redManaAbility);
     }
 
-    public LanternLitGraveyard(final LanternLitGraveyard card) {
+    private LanternLitGraveyard(final LanternLitGraveyard card) {
         super(card);
     }
 

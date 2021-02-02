@@ -33,7 +33,7 @@ public final class FarmMarket extends SplitCard {
 
     }
 
-    public FarmMarket(final FarmMarket card) {
+    private FarmMarket(final FarmMarket card) {
         super(card);
     }
 

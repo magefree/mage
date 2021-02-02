@@ -42,7 +42,7 @@ public final class DarkMaze extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DarkMaze(final DarkMaze card) {
+    private DarkMaze(final DarkMaze card) {
         super(card);
     }
 

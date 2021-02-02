@@ -34,7 +34,7 @@ public final class BallistaCharger extends CardImpl {
         this.addAbility(new CrewAbility(3));
     }
 
-    public BallistaCharger(final BallistaCharger card) {
+    private BallistaCharger(final BallistaCharger card) {
         super(card);
     }
 

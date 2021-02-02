@@ -23,7 +23,7 @@ public final class RegathanFirecat extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public RegathanFirecat(final RegathanFirecat card) {
+    private RegathanFirecat(final RegathanFirecat card) {
         super(card);
     }
 

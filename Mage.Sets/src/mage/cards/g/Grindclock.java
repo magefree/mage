@@ -33,7 +33,7 @@ public final class Grindclock extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Grindclock(final Grindclock card) {
+    private Grindclock(final Grindclock card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class TectonicInstability extends CardImpl {
             false, SetTargetPointer.PLAYER, "Whenever a land enters the battlefield, tap all lands its controller controls."));
     }
 
-    public TectonicInstability(final TectonicInstability card) {
+    private TectonicInstability(final TectonicInstability card) {
         super(card);
     }
 

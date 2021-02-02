@@ -31,7 +31,7 @@ public final class BurningSands extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BurningSands(final BurningSands card) {
+    private BurningSands(final BurningSands card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class CaterwaulingBoggart extends CardImpl {
                 "Each Elemental you control has menace. (They can't be blocked except by two or more creatures.)")));
     }
 
-    public CaterwaulingBoggart(final CaterwaulingBoggart card) {
+    private CaterwaulingBoggart(final CaterwaulingBoggart card) {
         super(card);
     }
 

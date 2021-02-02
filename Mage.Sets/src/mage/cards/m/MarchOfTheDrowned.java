@@ -38,7 +38,7 @@ public final class MarchOfTheDrowned extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public MarchOfTheDrowned(final MarchOfTheDrowned card) {
+    private MarchOfTheDrowned(final MarchOfTheDrowned card) {
         super(card);
     }
 

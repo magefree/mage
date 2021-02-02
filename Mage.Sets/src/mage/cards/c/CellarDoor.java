@@ -34,7 +34,7 @@ public final class CellarDoor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CellarDoor(final CellarDoor card) {
+    private CellarDoor(final CellarDoor card) {
         super(card);
     }
 

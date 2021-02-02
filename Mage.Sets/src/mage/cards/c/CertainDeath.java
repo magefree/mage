@@ -27,7 +27,7 @@ public final class CertainDeath extends CardImpl {
         this.getSpellAbility().addEffect(new CertainDeathEffect());
     }
 
-    public CertainDeath(final CertainDeath card) {
+    private CertainDeath(final CertainDeath card) {
         super(card);
     }
 

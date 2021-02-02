@@ -30,7 +30,7 @@ public final class BlessedLight extends CardImpl {
         getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public BlessedLight(final BlessedLight card) {
+    private BlessedLight(final BlessedLight card) {
         super(card);
     }
 

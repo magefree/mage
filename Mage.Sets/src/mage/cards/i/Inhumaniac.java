@@ -33,7 +33,7 @@ public final class Inhumaniac extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InhumaniacEffect(), TargetController.YOU, false));
     }
 
-    public Inhumaniac(final Inhumaniac card) {
+    private Inhumaniac(final Inhumaniac card) {
         super(card);
     }
 

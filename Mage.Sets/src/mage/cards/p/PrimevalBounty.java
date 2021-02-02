@@ -51,7 +51,7 @@ public final class PrimevalBounty extends CardImpl {
 
     }
 
-    public PrimevalBounty(final PrimevalBounty card) {
+    private PrimevalBounty(final PrimevalBounty card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class Misinformation extends CardImpl {
         this.getSpellAbility().addEffect(new MisinformationEffect());
     }
 
-    public Misinformation(final Misinformation card) {
+    private Misinformation(final Misinformation card) {
         super(card);
     }
 

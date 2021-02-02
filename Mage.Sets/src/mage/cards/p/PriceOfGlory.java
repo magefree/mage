@@ -28,7 +28,7 @@ public final class PriceOfGlory extends CardImpl {
         this.addAbility(new PriceOfGloryAbility());
     }
 
-    public PriceOfGlory(final PriceOfGlory card) {
+    private PriceOfGlory(final PriceOfGlory card) {
         super(card);
     }
 

@@ -58,7 +58,7 @@ public final class PetrifiedWoodKin extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public PetrifiedWoodKin(final PetrifiedWoodKin card) {
+    private PetrifiedWoodKin(final PetrifiedWoodKin card) {
         super(card);
     }
 

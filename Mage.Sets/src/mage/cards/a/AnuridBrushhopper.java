@@ -33,7 +33,7 @@ public final class AnuridBrushhopper extends CardImpl {
                 new DiscardTargetCost(new TargetCardInHand(2, new FilterCard("two cards")))));
     }
 
-    public AnuridBrushhopper(final AnuridBrushhopper card) {
+    private AnuridBrushhopper(final AnuridBrushhopper card) {
         super(card);
     }
 

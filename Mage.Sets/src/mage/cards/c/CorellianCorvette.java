@@ -30,7 +30,7 @@ public final class CorellianCorvette extends CardImpl {
 
     }
 
-    public CorellianCorvette(final CorellianCorvette card) {
+    private CorellianCorvette(final CorellianCorvette card) {
         super(card);
     }
 

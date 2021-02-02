@@ -32,7 +32,7 @@ public final class HaruOnna extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(true), StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
     }
 
-    public HaruOnna(final HaruOnna card) {
+    private HaruOnna(final HaruOnna card) {
         super(card);
     }
 

@@ -57,7 +57,7 @@ public final class PiousEvangel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PiousEvangel(final PiousEvangel card) {
+    private PiousEvangel(final PiousEvangel card) {
         super(card);
     }
 

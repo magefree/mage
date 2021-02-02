@@ -37,7 +37,7 @@ public final class ProclamationOfRebirth extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ProclamationOfRebirth(final ProclamationOfRebirth card) {
+    private ProclamationOfRebirth(final ProclamationOfRebirth card) {
         super(card);
     }
 

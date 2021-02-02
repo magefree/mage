@@ -41,7 +41,7 @@ public final class WeldfastEngineer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WeldfastEngineer(final WeldfastEngineer card) {
+    private WeldfastEngineer(final WeldfastEngineer card) {
         super(card);
     }
 

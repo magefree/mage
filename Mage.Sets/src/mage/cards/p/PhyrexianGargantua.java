@@ -29,7 +29,7 @@ public final class PhyrexianGargantua extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianGargantua(final PhyrexianGargantua card) {
+    private PhyrexianGargantua(final PhyrexianGargantua card) {
         super(card);
     }
 

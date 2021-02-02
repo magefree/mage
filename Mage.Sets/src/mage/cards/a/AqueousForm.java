@@ -39,7 +39,7 @@ public final class AqueousForm extends CardImpl {
         this.addAbility(new AttacksAttachedTriggeredAbility(new ScryEffect(1), AttachmentType.AURA,false));
     }
 
-    public AqueousForm(final AqueousForm card) {
+    private AqueousForm(final AqueousForm card) {
         super(card);
     }
 

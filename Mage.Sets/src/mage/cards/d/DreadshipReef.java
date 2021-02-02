@@ -44,7 +44,7 @@ public final class DreadshipReef extends CardImpl {
 
     }
 
-    public DreadshipReef(final DreadshipReef card) {
+    private DreadshipReef(final DreadshipReef card) {
         super(card);
     }
 

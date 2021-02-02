@@ -36,7 +36,7 @@ public final class SliverHivelord extends CardImpl {
 
     }
 
-    public SliverHivelord(final SliverHivelord card) {
+    private SliverHivelord(final SliverHivelord card) {
         super(card);
     }
 

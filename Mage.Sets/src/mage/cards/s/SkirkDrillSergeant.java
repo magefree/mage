@@ -47,7 +47,7 @@ public final class SkirkDrillSergeant extends CardImpl {
 
     }
 
-    public SkirkDrillSergeant(final SkirkDrillSergeant card) {
+    private SkirkDrillSergeant(final SkirkDrillSergeant card) {
         super(card);
     }
 

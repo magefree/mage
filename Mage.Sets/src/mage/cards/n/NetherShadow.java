@@ -36,7 +36,7 @@ public final class NetherShadow extends CardImpl {
         this.addAbility(new NetherShadowTriggerdAbility());
     }
 
-    public NetherShadow(final NetherShadow card) {
+    private NetherShadow(final NetherShadow card) {
         super(card);
     }
 

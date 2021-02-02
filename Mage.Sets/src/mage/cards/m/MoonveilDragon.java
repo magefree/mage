@@ -29,7 +29,7 @@ public final class MoonveilDragon extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public MoonveilDragon(final MoonveilDragon card) {
+    private MoonveilDragon(final MoonveilDragon card) {
         super(card);
     }
 

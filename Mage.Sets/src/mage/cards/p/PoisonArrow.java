@@ -34,7 +34,7 @@ public final class PoisonArrow extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public PoisonArrow(final PoisonArrow card) {
+    private PoisonArrow(final PoisonArrow card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class IcatianCrier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IcatianCrier(final IcatianCrier card) {
+    private IcatianCrier(final IcatianCrier card) {
         super(card);
     }
 

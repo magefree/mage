@@ -29,7 +29,7 @@ public final class RageExtractor extends CardImpl {
         this.addAbility(new RageExtractorTriggeredAbility());
     }
 
-    public RageExtractor(final RageExtractor card) {
+    private RageExtractor(final RageExtractor card) {
         super(card);
     }
 

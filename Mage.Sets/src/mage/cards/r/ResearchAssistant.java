@@ -35,7 +35,7 @@ public final class ResearchAssistant extends CardImpl {
 
     }
 
-    public ResearchAssistant(final ResearchAssistant card) {
+    private ResearchAssistant(final ResearchAssistant card) {
         super(card);
     }
 

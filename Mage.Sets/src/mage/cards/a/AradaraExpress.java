@@ -28,7 +28,7 @@ public final class AradaraExpress extends CardImpl {
         this.addAbility(new CrewAbility(4));
     }
 
-    public AradaraExpress(final AradaraExpress card) {
+    private AradaraExpress(final AradaraExpress card) {
         super(card);
     }
 

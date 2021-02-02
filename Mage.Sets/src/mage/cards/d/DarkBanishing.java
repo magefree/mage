@@ -31,7 +31,7 @@ public final class DarkBanishing extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public DarkBanishing(final DarkBanishing card) {
+    private DarkBanishing(final DarkBanishing card) {
         super(card);
     }
 

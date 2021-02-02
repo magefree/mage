@@ -40,7 +40,7 @@ public final class RiftstonePortal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RiftstonePortal(final RiftstonePortal card) {
+    private RiftstonePortal(final RiftstonePortal card) {
         super(card);
     }
 

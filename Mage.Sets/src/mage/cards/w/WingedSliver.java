@@ -34,7 +34,7 @@ public final class WingedSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public WingedSliver(final WingedSliver card) {
+    private WingedSliver(final WingedSliver card) {
         super(card);
     }
 

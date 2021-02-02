@@ -28,7 +28,7 @@ public final class BishopsSoldier extends CardImpl {
 
     }
 
-    public BishopsSoldier(final BishopsSoldier card) {
+    private BishopsSoldier(final BishopsSoldier card) {
         super(card);
     }
 

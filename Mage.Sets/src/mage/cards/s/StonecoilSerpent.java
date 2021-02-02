@@ -44,7 +44,7 @@ public final class StonecoilSerpent extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
     }
 
-    public StonecoilSerpent(final StonecoilSerpent card) {
+    private StonecoilSerpent(final StonecoilSerpent card) {
         super(card);
     }
 

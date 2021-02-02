@@ -45,7 +45,7 @@ public final class WarpingWurm extends CardImpl {
         this.addAbility(new PhaseInTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public WarpingWurm(final WarpingWurm card) {
+    private WarpingWurm(final WarpingWurm card) {
         super(card);
     }
 

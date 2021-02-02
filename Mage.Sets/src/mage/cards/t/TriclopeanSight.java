@@ -52,7 +52,7 @@ public final class TriclopeanSight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TriclopeanSight(final TriclopeanSight card) {
+    private TriclopeanSight(final TriclopeanSight card) {
         super(card);
     }
 

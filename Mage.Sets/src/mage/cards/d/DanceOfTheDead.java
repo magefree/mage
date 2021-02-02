@@ -75,7 +75,7 @@ public final class DanceOfTheDead extends CardImpl {
 
     }
 
-    public DanceOfTheDead(final DanceOfTheDead card) {
+    private DanceOfTheDead(final DanceOfTheDead card) {
         super(card);
     }
 

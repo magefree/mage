@@ -53,7 +53,7 @@ public final class AsajjVentress extends CardImpl {
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }
 
-    public AsajjVentress(final AsajjVentress card) {
+    private AsajjVentress(final AsajjVentress card) {
         super(card);
     }
 

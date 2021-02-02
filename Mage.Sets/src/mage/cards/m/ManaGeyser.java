@@ -31,7 +31,7 @@ public final class ManaGeyser extends CardImpl {
         this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public ManaGeyser(final ManaGeyser card) {
+    private ManaGeyser(final ManaGeyser card) {
         super(card);
     }
 

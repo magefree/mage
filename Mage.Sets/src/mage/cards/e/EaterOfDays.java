@@ -32,7 +32,7 @@ public final class EaterOfDays extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SkipNextTurnSourceEffect(2)));
     }
 
-    public EaterOfDays(final EaterOfDays card) {
+    private EaterOfDays(final EaterOfDays card) {
         super(card);
     }
 

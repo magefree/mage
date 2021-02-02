@@ -30,7 +30,7 @@ public final class BrazenWolves extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }
 
-    public BrazenWolves(final BrazenWolves card) {
+    private BrazenWolves(final BrazenWolves card) {
         super(card);
     }
 

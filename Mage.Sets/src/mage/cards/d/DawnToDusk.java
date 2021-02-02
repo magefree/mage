@@ -40,7 +40,7 @@ public final class DawnToDusk extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public DawnToDusk(final DawnToDusk card) {
+    private DawnToDusk(final DawnToDusk card) {
         super(card);
     }
 

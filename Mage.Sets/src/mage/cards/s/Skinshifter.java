@@ -47,7 +47,7 @@ public final class Skinshifter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Skinshifter(final Skinshifter card) {
+    private Skinshifter(final Skinshifter card) {
         super(card);
     }
 

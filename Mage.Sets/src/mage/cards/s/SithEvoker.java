@@ -48,7 +48,7 @@ public final class SithEvoker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SithEvoker(final SithEvoker card) {
+    private SithEvoker(final SithEvoker card) {
         super(card);
     }
 

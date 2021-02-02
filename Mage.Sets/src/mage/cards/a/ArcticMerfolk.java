@@ -38,7 +38,7 @@ public final class ArcticMerfolk extends CardImpl {
                 KickedCondition.instance,"If Arctic Merfolk was kicked, it enters the battlefield with a +1/+1 counter on it.",""));
     }
 
-    public ArcticMerfolk(final ArcticMerfolk card) {
+    private ArcticMerfolk(final ArcticMerfolk card) {
         super(card);
     }
 

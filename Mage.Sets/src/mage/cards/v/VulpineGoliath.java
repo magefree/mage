@@ -26,7 +26,7 @@ public final class VulpineGoliath extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public VulpineGoliath(final VulpineGoliath card) {
+    private VulpineGoliath(final VulpineGoliath card) {
         super(card);
     }
 

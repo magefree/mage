@@ -32,7 +32,7 @@ public final class IllusoryAngel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastOnlyIfYouHaveCastAnotherSpellEffect()));
     }
 
-    public IllusoryAngel(final IllusoryAngel card) {
+    private IllusoryAngel(final IllusoryAngel card) {
         super(card);
     }
 

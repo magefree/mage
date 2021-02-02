@@ -30,7 +30,7 @@ public final class SphereOfSafety extends CardImpl {
 
     }
 
-    public SphereOfSafety(final SphereOfSafety card) {
+    private SphereOfSafety(final SphereOfSafety card) {
         super(card);
     }
 

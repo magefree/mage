@@ -30,7 +30,7 @@ public final class GreenweaverDruid extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()));
     }
 
-    public GreenweaverDruid(final GreenweaverDruid card) {
+    private GreenweaverDruid(final GreenweaverDruid card) {
         super(card);
     }
 

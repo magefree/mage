@@ -31,7 +31,7 @@ public final class HeadHunting extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public HeadHunting(final HeadHunting card) {
+    private HeadHunting(final HeadHunting card) {
         super(card);
     }
 

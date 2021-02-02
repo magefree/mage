@@ -32,7 +32,7 @@ public final class EwokVillage extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public EwokVillage(final EwokVillage card) {
+    private EwokVillage(final EwokVillage card) {
         super(card);
     }
 

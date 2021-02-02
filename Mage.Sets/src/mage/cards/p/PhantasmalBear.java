@@ -28,7 +28,7 @@ public final class PhantasmalBear extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public PhantasmalBear(final PhantasmalBear card) {
+    private PhantasmalBear(final PhantasmalBear card) {
         super(card);
     }
 

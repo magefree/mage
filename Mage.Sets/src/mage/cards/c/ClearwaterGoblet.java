@@ -28,7 +28,7 @@ public final class ClearwaterGoblet extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(new CountersSourceCount(CounterType.CHARGE)), TargetController.YOU, true));
     }
 
-    public ClearwaterGoblet(final ClearwaterGoblet card) {
+    private ClearwaterGoblet(final ClearwaterGoblet card) {
         super(card);
     }
 

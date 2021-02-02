@@ -36,7 +36,7 @@ public final class EtchedMonstrosity extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EtchedMonstrosity(final EtchedMonstrosity card) {
+    private EtchedMonstrosity(final EtchedMonstrosity card) {
         super(card);
     }
 

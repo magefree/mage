@@ -51,7 +51,7 @@ public final class DragonThroneOfTarkir extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
     }
 
-    public DragonThroneOfTarkir(final DragonThroneOfTarkir card) {
+    private DragonThroneOfTarkir(final DragonThroneOfTarkir card) {
         super(card);
     }
 

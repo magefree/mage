@@ -30,7 +30,7 @@ public final class PaperfinRascal extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfClashWonEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()))));   
     }
 
-    public PaperfinRascal(final PaperfinRascal card) {
+    private PaperfinRascal(final PaperfinRascal card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class GoblinMachinist extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new GoblinMachinistEffect(), new ManaCostsImpl("{2}{R}")));
     }
 
-    public GoblinMachinist(final GoblinMachinist card) {
+    private GoblinMachinist(final GoblinMachinist card) {
         super(card);
     }
 

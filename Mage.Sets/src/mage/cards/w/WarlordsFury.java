@@ -29,7 +29,7 @@ public final class WarlordsFury extends CardImpl {
 
     }
 
-    public WarlordsFury(final WarlordsFury card) {
+    private WarlordsFury(final WarlordsFury card) {
         super(card);
     }
 

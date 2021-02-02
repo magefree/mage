@@ -47,7 +47,7 @@ public final class RootSliver extends CardImpl {
 
     }
 
-    public RootSliver(final RootSliver card) {
+    private RootSliver(final RootSliver card) {
         super(card);
     }
 

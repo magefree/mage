@@ -73,7 +73,7 @@ public final class SimicGuildmage extends CardImpl {
 
     }
 
-    public SimicGuildmage(final SimicGuildmage card) {
+    private SimicGuildmage(final SimicGuildmage card) {
         super(card);
     }
 

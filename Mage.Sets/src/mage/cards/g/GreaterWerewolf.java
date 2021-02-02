@@ -38,7 +38,7 @@ public final class GreaterWerewolf extends CardImpl {
         this.addAbility(new EndOfCombatTriggeredAbility(new GreaterWerewolfEffect(), false));
     }
 
-    public GreaterWerewolf(final GreaterWerewolf card) {
+    private GreaterWerewolf(final GreaterWerewolf card) {
         super(card);
     }
 

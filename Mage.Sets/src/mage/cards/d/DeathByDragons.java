@@ -29,7 +29,7 @@ public final class DeathByDragons extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public DeathByDragons(final DeathByDragons card) {
+    private DeathByDragons(final DeathByDragons card) {
         super(card);
     }
 

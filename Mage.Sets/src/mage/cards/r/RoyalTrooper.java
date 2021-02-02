@@ -31,7 +31,7 @@ public final class RoyalTrooper extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(effect, false));
     }
 
-    public RoyalTrooper(final RoyalTrooper card) {
+    private RoyalTrooper(final RoyalTrooper card) {
         super(card);
     }
 

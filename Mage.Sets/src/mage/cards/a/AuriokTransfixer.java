@@ -41,7 +41,7 @@ public final class AuriokTransfixer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AuriokTransfixer(final AuriokTransfixer card) {
+    private AuriokTransfixer(final AuriokTransfixer card) {
         super(card);
     }
 

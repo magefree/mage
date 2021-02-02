@@ -34,7 +34,7 @@ public final class DarksteelColossus extends CardImpl {
         this.addAbility(new PutIntoGraveFromAnywhereSourceAbility(new RevealAndShuffleIntoLibrarySourceEffect()));
     }
 
-    public DarksteelColossus(final DarksteelColossus card) {
+    private DarksteelColossus(final DarksteelColossus card) {
         super(card);
     }
 

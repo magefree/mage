@@ -37,7 +37,7 @@ public final class GoreVassal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoreVassal(final GoreVassal card) {
+    private GoreVassal(final GoreVassal card) {
         super(card);
     }
 

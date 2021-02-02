@@ -53,7 +53,7 @@ public final class ThornwatchScarecrow extends CardImpl {
         
     }
 
-    public ThornwatchScarecrow(final ThornwatchScarecrow card) {
+    private ThornwatchScarecrow(final ThornwatchScarecrow card) {
         super(card);
     }
 

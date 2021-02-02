@@ -58,7 +58,7 @@ public final class BrothersYamazaki extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BrothersYamazaki(final BrothersYamazaki card) {
+    private BrothersYamazaki(final BrothersYamazaki card) {
         super(card);
     }
 

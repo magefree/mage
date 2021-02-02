@@ -40,7 +40,7 @@ public final class ThoughtweftTrio extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));
     }
 
-    public ThoughtweftTrio(final ThoughtweftTrio card) {
+    private ThoughtweftTrio(final ThoughtweftTrio card) {
         super(card);
     }
 

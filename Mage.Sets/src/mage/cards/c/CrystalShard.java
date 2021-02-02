@@ -39,7 +39,7 @@ public final class CrystalShard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrystalShard(final CrystalShard card) {
+    private CrystalShard(final CrystalShard card) {
         super(card);
     }
 

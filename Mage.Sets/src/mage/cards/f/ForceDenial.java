@@ -42,7 +42,7 @@ public final class ForceDenial extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public ForceDenial(final ForceDenial card) {
+    private ForceDenial(final ForceDenial card) {
         super(card);
     }
 

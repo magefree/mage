@@ -32,7 +32,7 @@ public final class AlleyGrifters extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new AlleyGriftersDiscardEffect(), false));
     }
 
-    public AlleyGrifters(final AlleyGrifters card) {
+    private AlleyGrifters(final AlleyGrifters card) {
         super(card);
     }
 

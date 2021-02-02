@@ -54,7 +54,7 @@ public final class PalaceSiege extends CardImpl {
 
     }
 
-    public PalaceSiege(final PalaceSiege card) {
+    private PalaceSiege(final PalaceSiege card) {
         super(card);
     }
 

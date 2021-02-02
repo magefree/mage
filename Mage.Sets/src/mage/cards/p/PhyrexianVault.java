@@ -29,7 +29,7 @@ public final class PhyrexianVault extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianVault(final PhyrexianVault card) {
+    private PhyrexianVault(final PhyrexianVault card) {
         super(card);
     }
 

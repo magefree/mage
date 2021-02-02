@@ -34,7 +34,7 @@ public final class UncontrolledInfestation extends CardImpl {
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DestroyAttachedToEffect("it"), "enchanted land"));
     }
 
-    public UncontrolledInfestation(final UncontrolledInfestation card) {
+    private UncontrolledInfestation(final UncontrolledInfestation card) {
         super(card);
     }
 

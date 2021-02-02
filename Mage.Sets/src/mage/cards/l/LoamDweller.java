@@ -30,7 +30,7 @@ public final class LoamDweller extends CardImpl {
                 StaticFilters.SPIRIT_OR_ARCANE_CARD, true));
     }
 
-    public LoamDweller(final LoamDweller card) {
+    private LoamDweller(final LoamDweller card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class FallenFerromancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FallenFerromancer(final FallenFerromancer card) {
+    private FallenFerromancer(final FallenFerromancer card) {
         super(card);
     }
 

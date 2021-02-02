@@ -33,7 +33,7 @@ public final class EvolvingWilds extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EvolvingWilds(final EvolvingWilds card) {
+    private EvolvingWilds(final EvolvingWilds card) {
         super(card);
     }
 

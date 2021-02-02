@@ -55,7 +55,7 @@ public final class VelaTheNightClad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VelaTheNightClad(final VelaTheNightClad card) {
+    private VelaTheNightClad(final VelaTheNightClad card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class UndeadExecutioner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UndeadExecutioner(final UndeadExecutioner card) {
+    private UndeadExecutioner(final UndeadExecutioner card) {
         super(card);
     }
 

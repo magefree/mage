@@ -42,7 +42,7 @@ public final class LeoninBladetrap extends CardImpl {
 
     }
 
-    public LeoninBladetrap(final LeoninBladetrap card) {
+    private LeoninBladetrap(final LeoninBladetrap card) {
         super(card);
     }
 

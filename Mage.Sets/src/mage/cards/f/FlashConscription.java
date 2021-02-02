@@ -45,7 +45,7 @@ public final class FlashConscription extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FlashConscription(final FlashConscription card) {
+    private FlashConscription(final FlashConscription card) {
         super(card);
     }
 

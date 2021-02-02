@@ -31,7 +31,7 @@ public final class Nightcreep extends CardImpl {
         this.getSpellAbility().addEffect(new NightcreepLandEffect());
     }
 
-    public Nightcreep(final Nightcreep card) {
+    private Nightcreep(final Nightcreep card) {
         super(card);
     }
 

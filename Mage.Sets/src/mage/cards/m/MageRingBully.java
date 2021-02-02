@@ -30,7 +30,7 @@ public final class MageRingBully extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public MageRingBully(final MageRingBully card) {
+    private MageRingBully(final MageRingBully card) {
         super(card);
     }
 

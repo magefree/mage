@@ -38,7 +38,7 @@ public final class Contamination extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ContaminationReplacementEffect()));
     }
 
-    public Contamination(final Contamination card) {
+    private Contamination(final Contamination card) {
         super(card);
     }
 

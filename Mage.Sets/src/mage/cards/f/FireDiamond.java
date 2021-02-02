@@ -24,7 +24,7 @@ public final class FireDiamond extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public FireDiamond(final FireDiamond card) {
+    private FireDiamond(final FireDiamond card) {
         super(card);
     }
 

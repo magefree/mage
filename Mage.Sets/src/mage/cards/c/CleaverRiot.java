@@ -23,7 +23,7 @@ public final class CleaverRiot extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
-    public CleaverRiot(final CleaverRiot card) {
+    private CleaverRiot(final CleaverRiot card) {
         super(card);
     }
 

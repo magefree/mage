@@ -32,7 +32,7 @@ public final class CallousGiant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CallousGiantEffect()));
     }
 
-    public CallousGiant(final CallousGiant card) {
+    private CallousGiant(final CallousGiant card) {
         super(card);
     }
 

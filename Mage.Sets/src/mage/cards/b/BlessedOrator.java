@@ -30,7 +30,7 @@ public final class BlessedOrator extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, true)));
     }
 
-    public BlessedOrator(final BlessedOrator card) {
+    private BlessedOrator(final BlessedOrator card) {
         super(card);
     }
 

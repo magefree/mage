@@ -45,7 +45,7 @@ public final class QuietDisrepair extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuietDisrepair(final QuietDisrepair card) {
+    private QuietDisrepair(final QuietDisrepair card) {
         super(card);
     }
 

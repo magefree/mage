@@ -20,7 +20,7 @@ public final class RootSnare extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
     }
 
-    public RootSnare(final RootSnare card) {
+    private RootSnare(final RootSnare card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class MysticRetrieval extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{R}"), TimingRule.SORCERY));
     }
 
-    public MysticRetrieval(final MysticRetrieval card) {
+    private MysticRetrieval(final MysticRetrieval card) {
         super(card);
     }
 

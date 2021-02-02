@@ -49,7 +49,7 @@ public final class DevoutChaplain extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DevoutChaplain(final DevoutChaplain card) {
+    private DevoutChaplain(final DevoutChaplain card) {
         super(card);
     }
 

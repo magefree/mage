@@ -40,7 +40,7 @@ public final class RowdyCrew extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RowdyCrewEffect()));
     }
 
-    public RowdyCrew(final RowdyCrew card) {
+    private RowdyCrew(final RowdyCrew card) {
         super(card);
     }
 

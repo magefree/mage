@@ -42,7 +42,7 @@ public final class OrcishSettlers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrcishSettlers(final OrcishSettlers card) {
+    private OrcishSettlers(final OrcishSettlers card) {
         super(card);
     }
 

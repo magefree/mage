@@ -47,7 +47,7 @@ public final class MishrasFactory extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MishrasFactory(final MishrasFactory card) {
+    private MishrasFactory(final MishrasFactory card) {
         super(card);
     }
 

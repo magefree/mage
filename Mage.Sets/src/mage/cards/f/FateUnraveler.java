@@ -27,7 +27,7 @@ public final class FateUnraveler extends CardImpl {
         this.addAbility(new DrawCardOpponentTriggeredAbility(new DamageTargetEffect(1, true, "that player"), false, true));
     }
 
-    public FateUnraveler(final FateUnraveler card) {
+    private FateUnraveler(final FateUnraveler card) {
         super(card);
     }
 

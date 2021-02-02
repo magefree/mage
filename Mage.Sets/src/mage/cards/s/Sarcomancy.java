@@ -33,7 +33,7 @@ public final class Sarcomancy extends CardImpl {
                 "At the beginning of your upkeep, if there are no Zombies on the battlefield, {this} deals 1 damage to you."));        
     }
 
-    public Sarcomancy(final Sarcomancy card) {
+    private Sarcomancy(final Sarcomancy card) {
         super(card);
     }
 

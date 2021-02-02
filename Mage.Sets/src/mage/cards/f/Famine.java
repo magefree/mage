@@ -21,7 +21,7 @@ public final class Famine extends CardImpl {
         this.getSpellAbility().addEffect(new DamageEverythingEffect(3));
     }
 
-    public Famine(final Famine card) {
+    private Famine(final Famine card) {
         super(card);
     }
 

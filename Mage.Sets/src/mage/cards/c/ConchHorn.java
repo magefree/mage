@@ -34,7 +34,7 @@ public final class ConchHorn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ConchHorn(final ConchHorn card) {
+    private ConchHorn(final ConchHorn card) {
         super(card);
     }
 

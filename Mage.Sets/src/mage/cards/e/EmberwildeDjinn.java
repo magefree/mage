@@ -45,7 +45,7 @@ public final class EmberwildeDjinn extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EmberwildeDjinnEffect(), TargetController.ANY, false));
     }
 
-    public EmberwildeDjinn(final EmberwildeDjinn card) {
+    private EmberwildeDjinn(final EmberwildeDjinn card) {
         super(card);
     }
 

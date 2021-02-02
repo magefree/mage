@@ -35,7 +35,7 @@ public final class WordsOfWind extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWindEffect(), new ManaCostsImpl("{1}")));
     }
 
-    public WordsOfWind(final WordsOfWind card) {
+    private WordsOfWind(final WordsOfWind card) {
         super(card);
     }
 

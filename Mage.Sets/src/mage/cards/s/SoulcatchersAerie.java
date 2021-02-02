@@ -43,7 +43,7 @@ public final class SoulcatchersAerie extends CardImpl {
                 "Bird creatures get +1/+1 for each feather counter on {this}.")));
     }
 
-    public SoulcatchersAerie(final SoulcatchersAerie card) {
+    private SoulcatchersAerie(final SoulcatchersAerie card) {
         super(card);
     }
 

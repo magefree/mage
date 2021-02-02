@@ -46,7 +46,7 @@ public final class GroveOfTheGuardian extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GroveOfTheGuardian(final GroveOfTheGuardian card) {
+    private GroveOfTheGuardian(final GroveOfTheGuardian card) {
         super(card);
     }
 

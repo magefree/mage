@@ -34,7 +34,7 @@ public final class Bamboozle extends CardImpl {
 
     }
 
-    public Bamboozle(final Bamboozle card) {
+    private Bamboozle(final Bamboozle card) {
         super(card);
     }
 

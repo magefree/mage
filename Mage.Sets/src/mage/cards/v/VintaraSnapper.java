@@ -44,7 +44,7 @@ public final class VintaraSnapper extends CardImpl {
             "{this} has shroud as long as you control no untapped lands")));
     }
 
-    public VintaraSnapper(final VintaraSnapper card) {
+    private VintaraSnapper(final VintaraSnapper card) {
         super(card);
     }
 

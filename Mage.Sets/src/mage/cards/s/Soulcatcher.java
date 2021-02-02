@@ -40,7 +40,7 @@ public final class Soulcatcher extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter));
     }
 
-    public Soulcatcher(final Soulcatcher card) {
+    private Soulcatcher(final Soulcatcher card) {
         super(card);
     }
 

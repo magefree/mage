@@ -30,7 +30,7 @@ public final class MastermindsAcquisition extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public MastermindsAcquisition(final MastermindsAcquisition card) {
+    private MastermindsAcquisition(final MastermindsAcquisition card) {
         super(card);
     }
 

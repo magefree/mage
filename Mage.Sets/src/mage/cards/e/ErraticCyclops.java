@@ -36,7 +36,7 @@ public final class ErraticCyclops extends CardImpl {
         this.addAbility(new ErraticCyclopsTriggeredAbility());
     }
 
-    public ErraticCyclops(final ErraticCyclops card) {
+    private ErraticCyclops(final ErraticCyclops card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class BlackcleaveCliffs extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public BlackcleaveCliffs(final BlackcleaveCliffs card) {
+    private BlackcleaveCliffs(final BlackcleaveCliffs card) {
         super(card);
     }
 

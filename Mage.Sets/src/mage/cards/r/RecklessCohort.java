@@ -43,7 +43,7 @@ public final class RecklessCohort extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public RecklessCohort(final RecklessCohort card) {
+    private RecklessCohort(final RecklessCohort card) {
         super(card);
     }
 

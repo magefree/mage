@@ -22,7 +22,7 @@ public final class TempleBell extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardAllEffect(1), new TapSourceCost()));
     }
 
-    public TempleBell(final TempleBell card) {
+    private TempleBell(final TempleBell card) {
         super(card);
     }
 

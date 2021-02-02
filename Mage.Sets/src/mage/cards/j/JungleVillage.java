@@ -36,7 +36,7 @@ public final class JungleVillage extends CardImpl {
 
     }
 
-    public JungleVillage(final JungleVillage card) {
+    private JungleVillage(final JungleVillage card) {
         super(card);
     }
 

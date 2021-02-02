@@ -34,7 +34,7 @@ public final class SpinEngine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpinEngine(final SpinEngine card) {
+    private SpinEngine(final SpinEngine card) {
         super(card);
     }
 

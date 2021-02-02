@@ -35,7 +35,7 @@ public final class ArmorThrull extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArmorThrull(final ArmorThrull card) {
+    private ArmorThrull(final ArmorThrull card) {
         super(card);
     }
 

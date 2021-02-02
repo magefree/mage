@@ -39,7 +39,7 @@ public final class DescendantOfMasumaro extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DescendantOfMasumaro(final DescendantOfMasumaro card) {
+    private DescendantOfMasumaro(final DescendantOfMasumaro card) {
         super(card);
     }
 

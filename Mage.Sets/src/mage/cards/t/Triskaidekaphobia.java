@@ -33,7 +33,7 @@ public final class Triskaidekaphobia extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Triskaidekaphobia(final Triskaidekaphobia card) {
+    private Triskaidekaphobia(final Triskaidekaphobia card) {
         super(card);
     }
 

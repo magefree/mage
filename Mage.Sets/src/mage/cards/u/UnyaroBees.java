@@ -41,7 +41,7 @@ public final class UnyaroBees extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnyaroBees(final UnyaroBees card) {
+    private UnyaroBees(final UnyaroBees card) {
         super(card);
     }
 

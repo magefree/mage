@@ -48,7 +48,7 @@ public final class DrillSkimmer extends CardImpl {
                 condition, "{this} has shroud as long as you control another artifact creature.")));
     }
 
-    public DrillSkimmer(final DrillSkimmer card) {
+    private DrillSkimmer(final DrillSkimmer card) {
         super(card);
     }
 

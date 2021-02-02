@@ -30,7 +30,7 @@ public final class JoinerAdept extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new AnyColorManaAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_LANDS, false)));
     }
 
-    public JoinerAdept(final JoinerAdept card) {
+    private JoinerAdept(final JoinerAdept card) {
         super(card);
     }
 

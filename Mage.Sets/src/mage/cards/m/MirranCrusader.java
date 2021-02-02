@@ -29,7 +29,7 @@ public final class MirranCrusader extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK, ObjectColor.GREEN));
     }
 
-    public MirranCrusader(final MirranCrusader card) {
+    private MirranCrusader(final MirranCrusader card) {
         super(card);
     }
 

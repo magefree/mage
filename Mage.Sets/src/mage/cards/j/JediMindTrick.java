@@ -23,7 +23,7 @@ public final class JediMindTrick extends CardImpl {
 
     }
 
-    public JediMindTrick(final JediMindTrick card) {
+    private JediMindTrick(final JediMindTrick card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class RevengeStarWars extends CardImpl {
 
     }
 
-    public RevengeStarWars(final RevengeStarWars card) {
+    private RevengeStarWars(final RevengeStarWars card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class ColfenorsPlans extends CardImpl {
 
     }
 
-    public ColfenorsPlans(final ColfenorsPlans card) {
+    private ColfenorsPlans(final ColfenorsPlans card) {
         super(card);
     }
 

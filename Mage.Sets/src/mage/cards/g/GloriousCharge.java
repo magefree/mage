@@ -22,7 +22,7 @@ public final class GloriousCharge extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false));
     }
 
-    public GloriousCharge(final GloriousCharge card) {
+    private GloriousCharge(final GloriousCharge card) {
         super(card);
     }
 

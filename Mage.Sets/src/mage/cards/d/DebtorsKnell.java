@@ -31,7 +31,7 @@ public final class DebtorsKnell extends CardImpl {
         
     }
 
-    public DebtorsKnell(final DebtorsKnell card) {
+    private DebtorsKnell(final DebtorsKnell card) {
         super(card);
     }
 

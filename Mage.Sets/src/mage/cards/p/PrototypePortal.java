@@ -43,7 +43,7 @@ public final class PrototypePortal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PrototypePortal(final PrototypePortal card) {
+    private PrototypePortal(final PrototypePortal card) {
         super(card);
     }
 

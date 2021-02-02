@@ -23,7 +23,7 @@ public final class Coercion extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect());
     }
 
-    public Coercion(final Coercion card) {
+    private Coercion(final Coercion card) {
         super(card);
     }
 

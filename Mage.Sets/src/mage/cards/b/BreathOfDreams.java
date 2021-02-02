@@ -37,7 +37,7 @@ public final class BreathOfDreams extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")), Duration.WhileOnBattlefield, filter)));
     }
 
-    public BreathOfDreams(final BreathOfDreams card) {
+    private BreathOfDreams(final BreathOfDreams card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class KarmicJustice extends CardImpl {
         this.addAbility(new KarmicJusticeTriggeredAbility());
     }
 
-    public KarmicJustice(final KarmicJustice card) {
+    private KarmicJustice(final KarmicJustice card) {
         super(card);
     }
 

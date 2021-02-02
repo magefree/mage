@@ -47,7 +47,7 @@ public final class GhituChronicler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhituChronicler(final GhituChronicler card) {
+    private GhituChronicler(final GhituChronicler card) {
         super(card);
     }
 

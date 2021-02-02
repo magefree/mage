@@ -41,7 +41,7 @@ public final class ThassasEmissary extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3,3)));
     }
 
-    public ThassasEmissary(final ThassasEmissary card) {
+    private ThassasEmissary(final ThassasEmissary card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class QuillmaneBaku extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuillmaneBaku(final QuillmaneBaku card) {
+    private QuillmaneBaku(final QuillmaneBaku card) {
         super(card);
     }
 

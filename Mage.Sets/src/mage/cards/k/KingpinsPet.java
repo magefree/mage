@@ -29,7 +29,7 @@ public final class KingpinsPet extends CardImpl {
         this.addAbility(new ExtortAbility());
     }
 
-    public KingpinsPet(final KingpinsPet card) {
+    private KingpinsPet(final KingpinsPet card) {
         super(card);
     }
 

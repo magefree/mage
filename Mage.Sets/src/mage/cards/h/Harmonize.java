@@ -21,7 +21,7 @@ public final class Harmonize extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
     }
 
-    public Harmonize(final Harmonize card) {
+    private Harmonize(final Harmonize card) {
         super(card);
     }
 

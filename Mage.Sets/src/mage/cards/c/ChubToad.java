@@ -32,7 +32,7 @@ public final class ChubToad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChubToad(final ChubToad card) {
+    private ChubToad(final ChubToad card) {
         super(card);
     }
 

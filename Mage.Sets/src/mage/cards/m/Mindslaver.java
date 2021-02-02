@@ -32,7 +32,7 @@ public final class Mindslaver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Mindslaver(final Mindslaver card) {
+    private Mindslaver(final Mindslaver card) {
         super(card);
     }
 

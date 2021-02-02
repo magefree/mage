@@ -28,7 +28,7 @@ public final class RallyTheHorde extends CardImpl {
         this.getSpellAbility().addEffect(new RallyTheHordeEffect());
     }
 
-    public RallyTheHorde(final RallyTheHorde card) {
+    private RallyTheHorde(final RallyTheHorde card) {
         super(card);
     }
 

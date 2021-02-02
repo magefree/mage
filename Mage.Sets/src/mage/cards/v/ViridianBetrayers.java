@@ -40,7 +40,7 @@ public final class ViridianBetrayers extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public ViridianBetrayers(final ViridianBetrayers card) {
+    private ViridianBetrayers(final ViridianBetrayers card) {
         super(card);
     }
 

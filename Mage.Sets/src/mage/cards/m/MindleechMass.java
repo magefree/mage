@@ -42,7 +42,7 @@ public final class MindleechMass extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MindleechMassEffect(), true, true));
     }
 
-    public MindleechMass(final MindleechMass card) {
+    private MindleechMass(final MindleechMass card) {
         super(card);
     }
 

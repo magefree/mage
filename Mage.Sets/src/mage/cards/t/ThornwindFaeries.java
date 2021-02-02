@@ -36,7 +36,7 @@ public final class ThornwindFaeries extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThornwindFaeries(final ThornwindFaeries card) {
+    private ThornwindFaeries(final ThornwindFaeries card) {
         super(card);
     }
 

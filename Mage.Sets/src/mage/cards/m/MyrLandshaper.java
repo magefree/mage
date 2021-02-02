@@ -35,7 +35,7 @@ public final class MyrLandshaper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MyrLandshaper(final MyrLandshaper card) {
+    private MyrLandshaper(final MyrLandshaper card) {
         super(card);
     }
 

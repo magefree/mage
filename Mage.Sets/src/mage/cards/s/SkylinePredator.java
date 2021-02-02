@@ -29,7 +29,7 @@ public final class SkylinePredator extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SkylinePredator(final SkylinePredator card) {
+    private SkylinePredator(final SkylinePredator card) {
         super(card);
     }
 

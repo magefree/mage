@@ -26,7 +26,7 @@ public final class WildElephant extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public WildElephant(final WildElephant card) {
+    private WildElephant(final WildElephant card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class EssenceFilter extends CardImpl {
         this.getSpellAbility().addEffect(new EssenceFilterEffect());
     }
 
-    public EssenceFilter(final EssenceFilter card) {
+    private EssenceFilter(final EssenceFilter card) {
         super(card);
     }
 

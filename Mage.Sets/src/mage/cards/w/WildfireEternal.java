@@ -41,7 +41,7 @@ public final class WildfireEternal extends CardImpl {
         this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new WildfireEternalCastEffect(), false, true));
     }
 
-    public WildfireEternal(final WildfireEternal card) {
+    private WildfireEternal(final WildfireEternal card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class SlipperyKarst extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public SlipperyKarst(final SlipperyKarst card) {
+    private SlipperyKarst(final SlipperyKarst card) {
         super(card);
     }
 

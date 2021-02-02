@@ -53,7 +53,7 @@ public final class HundredHandedOne extends CardImpl {
 
     }
 
-    public HundredHandedOne(final HundredHandedOne card) {
+    private HundredHandedOne(final HundredHandedOne card) {
         super(card);
     }
 

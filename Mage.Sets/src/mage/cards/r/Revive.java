@@ -32,7 +32,7 @@ public final class Revive extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
     }
 
-    public Revive(final Revive card) {
+    private Revive(final Revive card) {
         super(card);
     }
 

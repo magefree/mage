@@ -47,7 +47,7 @@ public final class DreamCoat extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BecomesColorOrColorsEnchantedEffect(), new GenericManaCost(0), 1));
     }
 
-    public DreamCoat(final DreamCoat card) {
+    private DreamCoat(final DreamCoat card) {
         super(card);
     }
 

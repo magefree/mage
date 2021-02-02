@@ -36,7 +36,7 @@ public final class PeopleOfTheWoods extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterLands), Duration.EndOfGame)));
     }
 
-    public PeopleOfTheWoods(final PeopleOfTheWoods card) {
+    private PeopleOfTheWoods(final PeopleOfTheWoods card) {
         super(card);
     }
 

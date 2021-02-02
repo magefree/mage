@@ -29,7 +29,7 @@ public final class BlinkingSpirit extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new GenericManaCost(0)));
     }
 
-    public BlinkingSpirit(final BlinkingSpirit card) {
+    private BlinkingSpirit(final BlinkingSpirit card) {
         super(card);
     }
 

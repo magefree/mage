@@ -34,7 +34,7 @@ public final class DescendantOfSoramaro extends CardImpl {
                 effect, new ManaCostsImpl("{1}{U}")));
     }
 
-    public DescendantOfSoramaro(final DescendantOfSoramaro card) {
+    private DescendantOfSoramaro(final DescendantOfSoramaro card) {
         super(card);
     }
 

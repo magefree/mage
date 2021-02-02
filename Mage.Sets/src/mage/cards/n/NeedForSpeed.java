@@ -36,7 +36,7 @@ public final class NeedForSpeed extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NeedForSpeed(final NeedForSpeed card) {
+    private NeedForSpeed(final NeedForSpeed card) {
         super(card);
     }
 

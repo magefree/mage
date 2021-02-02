@@ -56,7 +56,7 @@ public final class NissaVoiceOfZendikar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NissaVoiceOfZendikar(final NissaVoiceOfZendikar card) {
+    private NissaVoiceOfZendikar(final NissaVoiceOfZendikar card) {
         super(card);
     }
 

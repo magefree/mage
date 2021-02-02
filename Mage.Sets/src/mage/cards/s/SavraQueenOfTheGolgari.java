@@ -46,7 +46,7 @@ public final class SavraQueenOfTheGolgari extends CardImpl {
         this.addAbility(new SavraSacrificeGreenCreatureAbility());
     }
 
-    public SavraQueenOfTheGolgari(final SavraQueenOfTheGolgari card) {
+    private SavraQueenOfTheGolgari(final SavraQueenOfTheGolgari card) {
         super(card);
     }
 

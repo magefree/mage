@@ -35,7 +35,7 @@ public final class LeylineOfPunishment extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeylineOfPunishmentEffect2()));
     }
 
-    public LeylineOfPunishment(final LeylineOfPunishment card) {
+    private LeylineOfPunishment(final LeylineOfPunishment card) {
         super(card);
     }
 

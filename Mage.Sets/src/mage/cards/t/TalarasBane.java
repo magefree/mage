@@ -34,7 +34,7 @@ public final class TalarasBane extends CardImpl {
 
     }
 
-    public TalarasBane(final TalarasBane card) {
+    private TalarasBane(final TalarasBane card) {
         super(card);
     }
 

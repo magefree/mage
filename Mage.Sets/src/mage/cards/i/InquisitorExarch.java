@@ -35,7 +35,7 @@ public final class InquisitorExarch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InquisitorExarch(final InquisitorExarch card) {
+    private InquisitorExarch(final InquisitorExarch card) {
         super(card);
     }
 

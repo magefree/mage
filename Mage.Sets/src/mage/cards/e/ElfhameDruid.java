@@ -32,7 +32,7 @@ public final class ElfhameDruid extends CardImpl {
         this.addAbility(new ConditionalColoredManaAbility(new TapSourceCost(), Mana.GreenMana(2), new ElfhameDruidManaBuilder()));
     }
 
-    public ElfhameDruid(final ElfhameDruid card) {
+    private ElfhameDruid(final ElfhameDruid card) {
         super(card);
     }
 

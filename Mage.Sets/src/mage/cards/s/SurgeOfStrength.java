@@ -47,7 +47,7 @@ public final class SurgeOfStrength extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SurgeOfStrength(final SurgeOfStrength card) {
+    private SurgeOfStrength(final SurgeOfStrength card) {
         super(card);
     }
 

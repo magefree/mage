@@ -31,7 +31,7 @@ public final class UnnaturalEndurance extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public UnnaturalEndurance(final UnnaturalEndurance card) {
+    private UnnaturalEndurance(final UnnaturalEndurance card) {
         super(card);
     }
 

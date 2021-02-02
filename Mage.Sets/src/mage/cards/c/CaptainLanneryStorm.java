@@ -50,7 +50,7 @@ public final class CaptainLanneryStorm extends CardImpl {
         this.addAbility(new SacrificePermanentTriggeredAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), filter));
     }
 
-    public CaptainLanneryStorm(final CaptainLanneryStorm card) {
+    private CaptainLanneryStorm(final CaptainLanneryStorm card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class PulseOfTheDross extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public PulseOfTheDross(final PulseOfTheDross card) {
+    private PulseOfTheDross(final PulseOfTheDross card) {
         super(card);
     }
 

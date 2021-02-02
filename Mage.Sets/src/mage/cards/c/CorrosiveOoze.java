@@ -47,7 +47,7 @@ public final class CorrosiveOoze extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(effect, filter, false), new CorrosiveOozeCombatWatcher());
     }
 
-    public CorrosiveOoze(final CorrosiveOoze card) {
+    private CorrosiveOoze(final CorrosiveOoze card) {
         super(card);
     }
 

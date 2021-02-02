@@ -46,7 +46,7 @@ public final class RendingVolley extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public RendingVolley(final RendingVolley card) {
+    private RendingVolley(final RendingVolley card) {
         super(card);
     }
 

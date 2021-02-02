@@ -39,7 +39,7 @@ public final class ImpsMischief extends CardImpl {
         
     }
 
-    public ImpsMischief(final ImpsMischief card) {
+    private ImpsMischief(final ImpsMischief card) {
         super(card);
     }
 

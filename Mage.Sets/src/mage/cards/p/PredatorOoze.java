@@ -36,7 +36,7 @@ public final class PredatorOoze extends CardImpl {
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 
-    public PredatorOoze(final PredatorOoze card) {
+    private PredatorOoze(final PredatorOoze card) {
         super(card);
     }
 

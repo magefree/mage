@@ -37,7 +37,7 @@ public final class CantoBightEnforcer extends CardImpl {
         this.addAbility(new BountyAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 
-    public CantoBightEnforcer(final CantoBightEnforcer card) {
+    private CantoBightEnforcer(final CantoBightEnforcer card) {
         super(card);
     }
 

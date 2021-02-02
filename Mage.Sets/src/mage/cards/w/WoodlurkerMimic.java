@@ -50,7 +50,7 @@ public final class WoodlurkerMimic extends CardImpl {
 
     }
 
-    public WoodlurkerMimic(final WoodlurkerMimic card) {
+    private WoodlurkerMimic(final WoodlurkerMimic card) {
         super(card);
     }
 

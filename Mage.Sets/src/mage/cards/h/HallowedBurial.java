@@ -28,7 +28,7 @@ public final class HallowedBurial extends CardImpl {
 
     }
 
-    public HallowedBurial(final HallowedBurial card) {
+    private HallowedBurial(final HallowedBurial card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class GoblinGame extends CardImpl {
 
     }
 
-    public GoblinGame(final GoblinGame card) {
+    private GoblinGame(final GoblinGame card) {
         super(card);
     }
 

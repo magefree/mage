@@ -20,7 +20,7 @@ public final class VampireNoble extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public VampireNoble(final VampireNoble card) {
+    private VampireNoble(final VampireNoble card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class DenyExistence extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(new FilterCreatureSpell()));
     }
 
-    public DenyExistence(final DenyExistence card) {
+    private DenyExistence(final DenyExistence card) {
         super(card);
     }
 

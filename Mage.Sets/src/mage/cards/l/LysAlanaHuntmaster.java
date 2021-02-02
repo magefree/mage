@@ -34,7 +34,7 @@ public final class LysAlanaHuntmaster extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new ElfToken()), filter, true));
     }
 
-    public LysAlanaHuntmaster(final LysAlanaHuntmaster card) {
+    private LysAlanaHuntmaster(final LysAlanaHuntmaster card) {
         super(card);
     }
 

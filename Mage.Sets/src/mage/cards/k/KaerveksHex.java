@@ -33,7 +33,7 @@ public final class KaerveksHex extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filter2).setText("and an additional 1 damage to each green creature"));
     }
 
-    public KaerveksHex(final KaerveksHex card) {
+    private KaerveksHex(final KaerveksHex card) {
         super(card);
     }
 

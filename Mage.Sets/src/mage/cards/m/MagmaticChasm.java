@@ -31,7 +31,7 @@ public final class MagmaticChasm extends CardImpl {
         this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
     }
 
-    public MagmaticChasm(final MagmaticChasm card) {
+    private MagmaticChasm(final MagmaticChasm card) {
         super(card);
     }
 

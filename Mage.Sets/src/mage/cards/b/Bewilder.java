@@ -27,7 +27,7 @@ public final class Bewilder extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Bewilder(final Bewilder card) {
+    private Bewilder(final Bewilder card) {
         super(card);
     }
 

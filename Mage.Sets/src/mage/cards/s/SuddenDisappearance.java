@@ -33,7 +33,7 @@ public final class SuddenDisappearance extends CardImpl {
 
     }
 
-    public SuddenDisappearance(final SuddenDisappearance card) {
+    private SuddenDisappearance(final SuddenDisappearance card) {
         super(card);
     }
 

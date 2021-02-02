@@ -24,7 +24,7 @@ public final class MutagenicGrowth extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
     }
 
-    public MutagenicGrowth(final MutagenicGrowth card) {
+    private MutagenicGrowth(final MutagenicGrowth card) {
         super(card);
     }
 

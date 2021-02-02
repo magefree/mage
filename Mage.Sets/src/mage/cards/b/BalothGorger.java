@@ -38,7 +38,7 @@ public final class BalothGorger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BalothGorger(final BalothGorger card) {
+    private BalothGorger(final BalothGorger card) {
         super(card);
     }
 

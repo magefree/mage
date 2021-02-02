@@ -46,7 +46,7 @@ public final class GolgariRaiders extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GolgariRaiders(final GolgariRaiders card) {
+    private GolgariRaiders(final GolgariRaiders card) {
         super(card);
     }
 

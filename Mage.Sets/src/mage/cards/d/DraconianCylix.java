@@ -31,7 +31,7 @@ public final class DraconianCylix extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DraconianCylix(final DraconianCylix card) {
+    private DraconianCylix(final DraconianCylix card) {
         super(card);
     }
 

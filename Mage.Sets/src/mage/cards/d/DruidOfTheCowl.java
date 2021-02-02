@@ -27,7 +27,7 @@ public final class DruidOfTheCowl extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public DruidOfTheCowl(final DruidOfTheCowl card) {
+    private DruidOfTheCowl(final DruidOfTheCowl card) {
         super(card);
     }
 

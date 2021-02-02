@@ -41,7 +41,7 @@ public final class SaplingOfColfenor extends CardImpl {
 
     }
 
-    public SaplingOfColfenor(final SaplingOfColfenor card) {
+    private SaplingOfColfenor(final SaplingOfColfenor card) {
         super(card);
     }
 

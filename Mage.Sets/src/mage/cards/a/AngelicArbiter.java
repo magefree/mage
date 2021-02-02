@@ -40,7 +40,7 @@ public final class AngelicArbiter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelicArbiterEffect2()), new PlayerAttackedWatcher());
     }
 
-    public AngelicArbiter(final AngelicArbiter card) {
+    private AngelicArbiter(final AngelicArbiter card) {
         super(card);
     }
 

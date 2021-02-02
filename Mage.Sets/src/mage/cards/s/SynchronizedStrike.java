@@ -28,7 +28,7 @@ public final class SynchronizedStrike extends CardImpl {
         getSpellAbility().addEffect(effect);
     }
 
-    public SynchronizedStrike(final SynchronizedStrike card) {
+    private SynchronizedStrike(final SynchronizedStrike card) {
         super(card);
     }
 

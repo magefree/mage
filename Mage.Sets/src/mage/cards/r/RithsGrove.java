@@ -40,7 +40,7 @@ public final class RithsGrove extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public RithsGrove(final RithsGrove card) {
+    private RithsGrove(final RithsGrove card) {
         super(card);
     }
 

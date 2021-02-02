@@ -34,7 +34,7 @@ public final class FulminatorMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FulminatorMage(final FulminatorMage card) {
+    private FulminatorMage(final FulminatorMage card) {
         super(card);
     }
 

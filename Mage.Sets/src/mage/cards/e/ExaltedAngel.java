@@ -33,7 +33,7 @@ public final class ExaltedAngel extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{W}{W}")));
     }
 
-    public ExaltedAngel(final ExaltedAngel card) {
+    private ExaltedAngel(final ExaltedAngel card) {
         super(card);
     }
 

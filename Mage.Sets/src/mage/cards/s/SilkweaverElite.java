@@ -43,7 +43,7 @@ public final class SilkweaverElite extends CardImpl {
 
     }
 
-    public SilkweaverElite(final SilkweaverElite card) {
+    private SilkweaverElite(final SilkweaverElite card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class FelhideSpiritbinder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FelhideSpiritbinder(final FelhideSpiritbinder card) {
+    private FelhideSpiritbinder(final FelhideSpiritbinder card) {
         super(card);
     }
 

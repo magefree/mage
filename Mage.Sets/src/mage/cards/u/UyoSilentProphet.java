@@ -44,7 +44,7 @@ public final class UyoSilentProphet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UyoSilentProphet(final UyoSilentProphet card) {
+    private UyoSilentProphet(final UyoSilentProphet card) {
         super(card);
     }
 

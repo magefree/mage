@@ -45,7 +45,7 @@ public final class PyxisOfPandemonium extends CardImpl {
 
     }
 
-    public PyxisOfPandemonium(final PyxisOfPandemonium card) {
+    private PyxisOfPandemonium(final PyxisOfPandemonium card) {
         super(card);
     }
 

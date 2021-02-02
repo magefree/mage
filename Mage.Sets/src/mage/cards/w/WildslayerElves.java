@@ -26,7 +26,7 @@ public final class WildslayerElves extends CardImpl {
         this.addAbility(WitherAbility.getInstance());
     }
 
-    public WildslayerElves(final WildslayerElves card) {
+    private WildslayerElves(final WildslayerElves card) {
         super(card);
     }
 

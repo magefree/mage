@@ -35,7 +35,7 @@ public final class MizziumMeddler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MizziumMeddler(final MizziumMeddler card) {
+    private MizziumMeddler(final MizziumMeddler card) {
         super(card);
     }
 

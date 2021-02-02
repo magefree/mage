@@ -45,7 +45,7 @@ public final class MasterTrinketeer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ServoToken(), 1), new ManaCostsImpl("{3}{W}")));
     }
 
-    public MasterTrinketeer(final MasterTrinketeer card) {
+    private MasterTrinketeer(final MasterTrinketeer card) {
         super(card);
     }
 

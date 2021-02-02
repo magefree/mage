@@ -49,7 +49,7 @@ public final class RathiFiend extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RathiFiend(final RathiFiend card) {
+    private RathiFiend(final RathiFiend card) {
         super(card);
     }
 

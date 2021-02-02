@@ -43,7 +43,7 @@ public final class RelicWard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public RelicWard(final RelicWard card) {
+    private RelicWard(final RelicWard card) {
         super(card);
     }
 

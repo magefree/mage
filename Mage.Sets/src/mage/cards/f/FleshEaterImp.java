@@ -35,7 +35,7 @@ public final class FleshEaterImp extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
-    public FleshEaterImp(final FleshEaterImp card) {
+    private FleshEaterImp(final FleshEaterImp card) {
         super(card);
     }
 

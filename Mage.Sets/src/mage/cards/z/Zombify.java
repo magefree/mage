@@ -23,7 +23,7 @@ public final class Zombify extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
-    public Zombify(final Zombify card) {
+    private Zombify(final Zombify card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class BoldImpaler extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}")));
     }
 
-    public BoldImpaler(final BoldImpaler card) {
+    private BoldImpaler(final BoldImpaler card) {
         super(card);
     }
 

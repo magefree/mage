@@ -43,7 +43,7 @@ public final class Stonecloaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Stonecloaker(final Stonecloaker card) {
+    private Stonecloaker(final Stonecloaker card) {
         super(card);
     }
 

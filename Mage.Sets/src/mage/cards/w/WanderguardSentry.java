@@ -34,7 +34,7 @@ public final class WanderguardSentry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WanderguardSentry(final WanderguardSentry card) {
+    private WanderguardSentry(final WanderguardSentry card) {
         super(card);
     }
 

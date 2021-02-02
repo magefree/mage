@@ -35,7 +35,7 @@ public final class VeilOfBirds extends CardImpl {
                 "Whenever an opponent casts a spell, if Veil of Birds is an enchantment, Veil of Birds becomes a 1/1 Bird creature with flying."));
     }
 
-    public VeilOfBirds(final VeilOfBirds card) {
+    private VeilOfBirds(final VeilOfBirds card) {
         super(card);
     }
 

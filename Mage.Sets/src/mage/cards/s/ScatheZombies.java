@@ -22,7 +22,7 @@ public final class ScatheZombies extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public ScatheZombies(final ScatheZombies card) {
+    private ScatheZombies(final ScatheZombies card) {
         super(card);
     }
 

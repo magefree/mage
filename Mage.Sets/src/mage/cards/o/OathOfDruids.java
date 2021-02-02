@@ -36,7 +36,7 @@ public final class OathOfDruids extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OathOfDruids(final OathOfDruids card) {
+    private OathOfDruids(final OathOfDruids card) {
         super(card);
     }
 

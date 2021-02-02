@@ -39,7 +39,7 @@ public final class Fear extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public Fear(final Fear card) {
+    private Fear(final Fear card) {
         super(card);
     }
 

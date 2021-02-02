@@ -40,7 +40,7 @@ public final class DawningPurist extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{1}{W}")));
     }
 
-    public DawningPurist(final DawningPurist card) {
+    private DawningPurist(final DawningPurist card) {
         super(card);
     }
 

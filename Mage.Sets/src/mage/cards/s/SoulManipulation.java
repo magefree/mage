@@ -36,7 +36,7 @@ public final class SoulManipulation extends CardImpl {
 
     }
 
-    public SoulManipulation(final SoulManipulation card) {
+    private SoulManipulation(final SoulManipulation card) {
         super(card);
     }
 

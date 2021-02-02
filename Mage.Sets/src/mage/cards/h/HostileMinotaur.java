@@ -27,7 +27,7 @@ public final class HostileMinotaur extends CardImpl {
 
     }
 
-    public HostileMinotaur(final HostileMinotaur card) {
+    private HostileMinotaur(final HostileMinotaur card) {
         super(card);
     }
 

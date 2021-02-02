@@ -26,7 +26,7 @@ public final class BarkhideMauler extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public BarkhideMauler(final BarkhideMauler card) {
+    private BarkhideMauler(final BarkhideMauler card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class KnightOfTheSkywardEye extends CardImpl {
 
     }
 
-    public KnightOfTheSkywardEye(final KnightOfTheSkywardEye card) {
+    private KnightOfTheSkywardEye(final KnightOfTheSkywardEye card) {
         super(card);
     }
 

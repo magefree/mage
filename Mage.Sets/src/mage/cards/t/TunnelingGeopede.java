@@ -27,7 +27,7 @@ public final class TunnelingGeopede extends CardImpl {
         this.addAbility(new LandfallAbility(new DamagePlayersEffect(1, TargetController.OPPONENT), false));
     }
     
-    public TunnelingGeopede(final TunnelingGeopede card) {
+    private TunnelingGeopede(final TunnelingGeopede card) {
         super(card);
     }
 

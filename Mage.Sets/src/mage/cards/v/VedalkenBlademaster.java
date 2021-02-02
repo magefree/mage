@@ -26,7 +26,7 @@ public final class VedalkenBlademaster extends CardImpl {
         this.addAbility(new ProwessAbility());
     }
 
-    public VedalkenBlademaster(final VedalkenBlademaster card) {
+    private VedalkenBlademaster(final VedalkenBlademaster card) {
         super(card);
     }
 

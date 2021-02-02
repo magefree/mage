@@ -43,7 +43,7 @@ public final class DimirDoppelganger extends CardImpl {
 
     }
 
-    public DimirDoppelganger(final DimirDoppelganger card) {
+    private DimirDoppelganger(final DimirDoppelganger card) {
         super(card);
     }
 

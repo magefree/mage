@@ -45,7 +45,7 @@ public final class DetainmentSpell extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DetainmentSpell(final DetainmentSpell card) {
+    private DetainmentSpell(final DetainmentSpell card) {
         super(card);
     }
 

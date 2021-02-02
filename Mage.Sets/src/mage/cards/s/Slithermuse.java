@@ -37,7 +37,7 @@ public final class Slithermuse extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{3}{U}"));
     }
 
-    public Slithermuse(final Slithermuse card) {
+    private Slithermuse(final Slithermuse card) {
         super(card);
     }
 

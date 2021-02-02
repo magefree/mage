@@ -31,7 +31,7 @@ public final class KodamasReach extends CardImpl {
         this.getSpellAbility().addEffect(new KodamasReachEffect());
     }
 
-    public KodamasReach(final KodamasReach card) {
+    private KodamasReach(final KodamasReach card) {
         super(card);
     }
 

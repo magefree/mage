@@ -41,7 +41,7 @@ public final class VedalkenEngineer extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new VedalkenEngineerEffect(2, new VedalkenEngineerManaBuilder()), new TapSourceCost()));
     }
 
-    public VedalkenEngineer(final VedalkenEngineer card) {
+    private VedalkenEngineer(final VedalkenEngineer card) {
         super(card);
     }
 

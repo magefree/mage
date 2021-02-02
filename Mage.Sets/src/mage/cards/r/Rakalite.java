@@ -34,7 +34,7 @@ public final class Rakalite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Rakalite(final Rakalite card) {
+    private Rakalite(final Rakalite card) {
         super(card);
     }
 

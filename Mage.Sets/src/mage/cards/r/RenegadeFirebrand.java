@@ -46,7 +46,7 @@ public final class RenegadeFirebrand extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RenegadeFirebrand(final RenegadeFirebrand card) {
+    private RenegadeFirebrand(final RenegadeFirebrand card) {
         super(card);
     }
 

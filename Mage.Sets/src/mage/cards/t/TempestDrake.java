@@ -29,7 +29,7 @@ public final class TempestDrake extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public TempestDrake(final TempestDrake card) {
+    private TempestDrake(final TempestDrake card) {
         super(card);
     }
 

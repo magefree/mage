@@ -50,7 +50,7 @@ public final class IfhBiffEfreet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IfhBiffEfreet(final IfhBiffEfreet card) {
+    private IfhBiffEfreet(final IfhBiffEfreet card) {
         super(card);
     }
 

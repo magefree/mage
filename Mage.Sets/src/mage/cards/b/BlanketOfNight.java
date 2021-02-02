@@ -31,7 +31,7 @@ public final class BlanketOfNight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlanketOfNight(final BlanketOfNight card) {
+    private BlanketOfNight(final BlanketOfNight card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class RushwoodElemental extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU, true));
     }
 
-    public RushwoodElemental(final RushwoodElemental card) {
+    private RushwoodElemental(final RushwoodElemental card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class DevouringSwarm extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
-    public DevouringSwarm(final DevouringSwarm card) {
+    private DevouringSwarm(final DevouringSwarm card) {
         super(card);
     }
 

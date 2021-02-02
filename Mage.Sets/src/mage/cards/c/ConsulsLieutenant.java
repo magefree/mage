@@ -41,7 +41,7 @@ public final class ConsulsLieutenant extends CardImpl {
 
     }
 
-    public ConsulsLieutenant(final ConsulsLieutenant card) {
+    private ConsulsLieutenant(final ConsulsLieutenant card) {
         super(card);
     }
 

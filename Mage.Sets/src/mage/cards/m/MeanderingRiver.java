@@ -26,7 +26,7 @@ public final class MeanderingRiver extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public MeanderingRiver(final MeanderingRiver card) {
+    private MeanderingRiver(final MeanderingRiver card) {
         super(card);
     }
 

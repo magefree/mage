@@ -43,7 +43,7 @@ public final class SlayerOfTheWicked extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SlayerOfTheWicked(final SlayerOfTheWicked card) {
+    private SlayerOfTheWicked(final SlayerOfTheWicked card) {
         super(card);
     }
 

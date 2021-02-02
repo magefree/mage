@@ -28,7 +28,7 @@ public final class CacklingFlames extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public CacklingFlames(final CacklingFlames card) {
+    private CacklingFlames(final CacklingFlames card) {
         super(card);
     }
 

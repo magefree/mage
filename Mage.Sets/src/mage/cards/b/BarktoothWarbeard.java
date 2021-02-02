@@ -24,7 +24,7 @@ public final class BarktoothWarbeard extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public BarktoothWarbeard(final BarktoothWarbeard card) {
+    private BarktoothWarbeard(final BarktoothWarbeard card) {
         super(card);
     }
 

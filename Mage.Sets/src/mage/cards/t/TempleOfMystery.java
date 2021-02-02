@@ -30,7 +30,7 @@ public final class TempleOfMystery extends CardImpl {
 
     }
 
-    public TempleOfMystery(final TempleOfMystery card) {
+    private TempleOfMystery(final TempleOfMystery card) {
         super(card);
     }
 

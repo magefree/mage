@@ -48,7 +48,7 @@ public final class DeceiverExarch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeceiverExarch(final DeceiverExarch card) {
+    private DeceiverExarch(final DeceiverExarch card) {
         super(card);
     }
 

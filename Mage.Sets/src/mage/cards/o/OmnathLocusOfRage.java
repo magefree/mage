@@ -47,7 +47,7 @@ public final class OmnathLocusOfRage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OmnathLocusOfRage(final OmnathLocusOfRage card) {
+    private OmnathLocusOfRage(final OmnathLocusOfRage card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class OgreMarauder extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new OgreMarauderEffect(), false));
     }
 
-    public OgreMarauder(final OgreMarauder card) {
+    private OgreMarauder(final OgreMarauder card) {
         super(card);
     }
 

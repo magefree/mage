@@ -29,7 +29,7 @@ public final class TripNoose extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TripNoose(final TripNoose card) {
+    private TripNoose(final TripNoose card) {
         super(card);
     }
 

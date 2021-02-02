@@ -30,7 +30,7 @@ public final class ThornOfAmethyst extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(1, filter, TargetController.ANY)));
     }
 
-    public ThornOfAmethyst(final ThornOfAmethyst card) {
+    private ThornOfAmethyst(final ThornOfAmethyst card) {
         super(card);
     }
 

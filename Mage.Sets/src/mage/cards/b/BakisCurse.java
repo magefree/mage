@@ -27,7 +27,7 @@ public final class BakisCurse extends CardImpl {
         this.getSpellAbility().addEffect(new BakisCurseEffect());
     }
 
-    public BakisCurse(final BakisCurse card) {
+    private BakisCurse(final BakisCurse card) {
         super(card);
     }
 

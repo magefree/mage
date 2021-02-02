@@ -29,7 +29,7 @@ public final class GlacialRay extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{1}{R}"));
     }
 
-    public GlacialRay(final GlacialRay card) {
+    private GlacialRay(final GlacialRay card) {
         super(card);
     }
 

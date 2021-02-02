@@ -37,7 +37,7 @@ public final class WoollySpider extends CardImpl {
         this.addAbility(new BlocksCreatureWithFlyingTriggeredAbility(new BoostSourceEffect(0, 2, Duration.EndOfTurn), false));
     }
 
-    public WoollySpider(final WoollySpider card) {
+    private WoollySpider(final WoollySpider card) {
         super(card);
     }
 

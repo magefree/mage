@@ -40,7 +40,7 @@ public final class ExecutionersCapsule extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ExecutionersCapsule(final ExecutionersCapsule card) {
+    private ExecutionersCapsule(final ExecutionersCapsule card) {
         super(card);
     }
 

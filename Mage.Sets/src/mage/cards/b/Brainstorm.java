@@ -20,7 +20,7 @@ public final class Brainstorm extends CardImpl {
         this.getSpellAbility().addEffect(new BrainstormEffect());
     }
 
-    public Brainstorm(final Brainstorm card) {
+    private Brainstorm(final Brainstorm card) {
         super(card);
     }
 

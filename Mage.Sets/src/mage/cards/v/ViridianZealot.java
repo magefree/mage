@@ -37,7 +37,7 @@ public final class ViridianZealot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ViridianZealot(final ViridianZealot card) {
+    private ViridianZealot(final ViridianZealot card) {
         super(card);
     }
 

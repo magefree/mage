@@ -44,7 +44,7 @@ public final class GaeasEmbrace extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
-    public GaeasEmbrace(final GaeasEmbrace card) {
+    private GaeasEmbrace(final GaeasEmbrace card) {
         super(card);
     }
 

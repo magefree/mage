@@ -37,7 +37,7 @@ public final class LeylineOfSanctity extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(HexproofAbility.getInstance())));
     }
 
-    public LeylineOfSanctity(final LeylineOfSanctity card) {
+    private LeylineOfSanctity(final LeylineOfSanctity card) {
         super(card);
     }
 

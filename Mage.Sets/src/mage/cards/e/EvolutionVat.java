@@ -44,7 +44,7 @@ public final class EvolutionVat extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EvolutionVat(final EvolutionVat card) {
+    private EvolutionVat(final EvolutionVat card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class ShelteringPrayers extends CardImpl {
 
     }
 
-    public ShelteringPrayers(final ShelteringPrayers card) {
+    private ShelteringPrayers(final ShelteringPrayers card) {
         super(card);
     }
 

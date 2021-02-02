@@ -50,7 +50,7 @@ public final class MinionReflector extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MinionReflector(final MinionReflector card) {
+    private MinionReflector(final MinionReflector card) {
         super(card);
     }
 

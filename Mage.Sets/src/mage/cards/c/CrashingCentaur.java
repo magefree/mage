@@ -56,7 +56,7 @@ public final class CrashingCentaur extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public CrashingCentaur(final CrashingCentaur card) {
+    private CrashingCentaur(final CrashingCentaur card) {
         super(card);
     }
 

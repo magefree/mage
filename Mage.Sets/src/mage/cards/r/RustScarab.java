@@ -40,7 +40,7 @@ public final class RustScarab extends CardImpl {
 
     }
 
-    public RustScarab(final RustScarab card) {
+    private RustScarab(final RustScarab card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class ParadoxEngine extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapAllControllerEffect(new FilterNonlandPermanent()), false));
     }
 
-    public ParadoxEngine(final ParadoxEngine card) {
+    private ParadoxEngine(final ParadoxEngine card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class FleetfeatherSandals extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public FleetfeatherSandals(final FleetfeatherSandals card) {
+    private FleetfeatherSandals(final FleetfeatherSandals card) {
         super(card);
     }
 

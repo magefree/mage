@@ -37,7 +37,7 @@ public final class QuicksilverWall extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuicksilverWall(final QuicksilverWall card) {
+    private QuicksilverWall(final QuicksilverWall card) {
         super(card);
     }
 

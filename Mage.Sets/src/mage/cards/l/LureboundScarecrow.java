@@ -38,7 +38,7 @@ public final class LureboundScarecrow extends CardImpl {
         this.addAbility(new LureboundScarecrowTriggeredAbility());
     }
 
-    public LureboundScarecrow(final LureboundScarecrow card) {
+    private LureboundScarecrow(final LureboundScarecrow card) {
         super(card);
     }
 

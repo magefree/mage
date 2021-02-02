@@ -47,7 +47,7 @@ public final class VoidMaw extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new VoidMawCost()));
     }
 
-    public VoidMaw(final VoidMaw card) {
+    private VoidMaw(final VoidMaw card) {
         super(card);
     }
 

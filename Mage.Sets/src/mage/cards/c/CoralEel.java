@@ -22,7 +22,7 @@ public final class CoralEel extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public CoralEel(final CoralEel card) {
+    private CoralEel(final CoralEel card) {
         super(card);
     }
 

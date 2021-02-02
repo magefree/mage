@@ -39,7 +39,7 @@ public final class Zoologist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Zoologist(final Zoologist card) {
+    private Zoologist(final Zoologist card) {
         super(card);
     }
 

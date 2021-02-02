@@ -44,7 +44,7 @@ public final class WardenOfTheEye extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WardenOfTheEye(final WardenOfTheEye card) {
+    private WardenOfTheEye(final WardenOfTheEye card) {
         super(card);
     }
 

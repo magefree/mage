@@ -48,7 +48,7 @@ public final class LyevSkyknight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LyevSkyknight(final LyevSkyknight card) {
+    private LyevSkyknight(final LyevSkyknight card) {
         super(card);
     }
 

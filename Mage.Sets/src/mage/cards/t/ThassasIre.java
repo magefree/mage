@@ -28,7 +28,7 @@ public final class ThassasIre extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThassasIre(final ThassasIre card) {
+    private ThassasIre(final ThassasIre card) {
         super(card);
     }
 

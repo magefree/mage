@@ -36,7 +36,7 @@ public final class HeavyTrooper extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public HeavyTrooper(final HeavyTrooper card) {
+    private HeavyTrooper(final HeavyTrooper card) {
         super(card);
     }
 

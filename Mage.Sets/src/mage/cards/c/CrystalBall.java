@@ -26,7 +26,7 @@ public final class CrystalBall extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrystalBall(final CrystalBall card) {
+    private CrystalBall(final CrystalBall card) {
         super(card);
     }
 

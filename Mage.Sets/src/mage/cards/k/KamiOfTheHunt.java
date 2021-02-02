@@ -27,7 +27,7 @@ public final class KamiOfTheHunt extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
     }
 
-    public KamiOfTheHunt(final KamiOfTheHunt card) {
+    private KamiOfTheHunt(final KamiOfTheHunt card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class ActOfAggression extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn."));
     }
 
-    public ActOfAggression(final ActOfAggression card) {
+    private ActOfAggression(final ActOfAggression card) {
         super(card);
     }
 

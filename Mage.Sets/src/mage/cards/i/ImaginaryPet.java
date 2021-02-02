@@ -33,7 +33,7 @@ public final class ImaginaryPet extends CardImpl {
             "At the beginning of your upkeep, if you have a card in hand, return {this} to its owner's hand."));
     }
 
-    public ImaginaryPet(final ImaginaryPet card) {
+    private ImaginaryPet(final ImaginaryPet card) {
         super(card);
     }
 

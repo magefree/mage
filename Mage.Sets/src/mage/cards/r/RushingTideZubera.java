@@ -36,7 +36,7 @@ public final class RushingTideZubera extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RushingTideZubera(final RushingTideZubera card) {
+    private RushingTideZubera(final RushingTideZubera card) {
         super(card);
     }
 

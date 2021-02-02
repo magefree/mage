@@ -35,7 +35,7 @@ public final class SkirsdagSupplicant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkirsdagSupplicant(final SkirsdagSupplicant card) {
+    private SkirsdagSupplicant(final SkirsdagSupplicant card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class BoneSplinters extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy target creature"));
     }
 
-    public BoneSplinters(final BoneSplinters card) {
+    private BoneSplinters(final BoneSplinters card) {
         super(card);
     }
 

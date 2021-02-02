@@ -33,7 +33,7 @@ public final class ShimmerMyr extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, new FilterArtifactCard("artifact spells"), false)));
     }
 
-    public ShimmerMyr(final ShimmerMyr card) {
+    private ShimmerMyr(final ShimmerMyr card) {
         super(card);
     }
 

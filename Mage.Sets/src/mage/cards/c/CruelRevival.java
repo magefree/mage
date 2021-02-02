@@ -43,7 +43,7 @@ public final class CruelRevival extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 1, filter2));
     }
 
-    public CruelRevival(final CruelRevival card) {
+    private CruelRevival(final CruelRevival card) {
         super(card);
     }
 

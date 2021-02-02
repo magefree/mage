@@ -37,7 +37,7 @@ public final class SunkenRuins extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SunkenRuins(final SunkenRuins card) {
+    private SunkenRuins(final SunkenRuins card) {
         super(card);
     }
 

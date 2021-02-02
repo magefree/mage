@@ -30,7 +30,7 @@ public final class VigeanIntuition extends CardImpl {
         this.getSpellAbility().addEffect(new VigeanIntuitionEffect());
     }
 
-    public VigeanIntuition(final VigeanIntuition card) {
+    private VigeanIntuition(final VigeanIntuition card) {
         super(card);
     }
 

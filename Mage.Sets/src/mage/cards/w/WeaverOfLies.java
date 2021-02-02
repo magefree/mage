@@ -53,7 +53,7 @@ public final class WeaverOfLies extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WeaverOfLies(final WeaverOfLies card) {
+    private WeaverOfLies(final WeaverOfLies card) {
         super(card);
     }
 

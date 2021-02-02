@@ -34,7 +34,7 @@ public final class VividGrove extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VividGrove(final VividGrove card) {
+    private VividGrove(final VividGrove card) {
         super(card);
     }
 

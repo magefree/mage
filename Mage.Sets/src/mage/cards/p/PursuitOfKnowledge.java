@@ -40,7 +40,7 @@ public final class PursuitOfKnowledge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PursuitOfKnowledge(final PursuitOfKnowledge card) {
+    private PursuitOfKnowledge(final PursuitOfKnowledge card) {
         super(card);
     }
 

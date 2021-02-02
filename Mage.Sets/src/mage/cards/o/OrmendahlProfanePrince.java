@@ -40,7 +40,7 @@ public final class OrmendahlProfanePrince extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public OrmendahlProfanePrince(final OrmendahlProfanePrince card) {
+    private OrmendahlProfanePrince(final OrmendahlProfanePrince card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class NaturesRevolt extends CardImpl {
                 "lands", new FilterLandPermanent(), Duration.WhileOnBattlefield, false)));
     }
 
-    public NaturesRevolt(final NaturesRevolt card) {
+    private NaturesRevolt(final NaturesRevolt card) {
         super(card);
     }
 

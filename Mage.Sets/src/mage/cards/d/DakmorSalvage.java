@@ -26,7 +26,7 @@ public final class DakmorSalvage extends CardImpl {
         this.addAbility(new DredgeAbility(2));
     }
 
-    public DakmorSalvage(final DakmorSalvage card) {
+    private DakmorSalvage(final DakmorSalvage card) {
         super(card);
     }
 

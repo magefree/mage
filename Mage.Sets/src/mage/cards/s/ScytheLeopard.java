@@ -27,7 +27,7 @@ public final class ScytheLeopard extends CardImpl {
         this.addAbility(new LandfallAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
     }
 
-    public ScytheLeopard(final ScytheLeopard card) {
+    private ScytheLeopard(final ScytheLeopard card) {
         super(card);
     }
 

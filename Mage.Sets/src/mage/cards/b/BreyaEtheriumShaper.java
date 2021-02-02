@@ -61,7 +61,7 @@ public final class BreyaEtheriumShaper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BreyaEtheriumShaper(final BreyaEtheriumShaper card) {
+    private BreyaEtheriumShaper(final BreyaEtheriumShaper card) {
         super(card);
     }
 

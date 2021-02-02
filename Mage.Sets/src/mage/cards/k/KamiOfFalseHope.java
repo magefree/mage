@@ -32,7 +32,7 @@ public final class KamiOfFalseHope extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KamiOfFalseHope(final KamiOfFalseHope card) {
+    private KamiOfFalseHope(final KamiOfFalseHope card) {
         super(card);
     }
 

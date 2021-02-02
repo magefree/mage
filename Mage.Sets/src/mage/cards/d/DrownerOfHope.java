@@ -56,7 +56,7 @@ public final class DrownerOfHope extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DrownerOfHope(final DrownerOfHope card) {
+    private DrownerOfHope(final DrownerOfHope card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class Snap extends CardImpl {
         this.getSpellAbility().addEffect(new UntapLandsEffect(2));
     }
 
-    public Snap(final Snap card) {
+    private Snap(final Snap card) {
         super(card);
     }
 

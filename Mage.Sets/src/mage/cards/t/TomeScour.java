@@ -22,7 +22,7 @@ public final class TomeScour extends CardImpl {
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(5));
     }
 
-    public TomeScour(final TomeScour card) {
+    private TomeScour(final TomeScour card) {
         super(card);
     }
 

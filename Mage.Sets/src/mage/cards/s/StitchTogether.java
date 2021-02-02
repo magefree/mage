@@ -33,7 +33,7 @@ public final class StitchTogether extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
-    public StitchTogether(final StitchTogether card) {
+    private StitchTogether(final StitchTogether card) {
         super(card);
     }
 

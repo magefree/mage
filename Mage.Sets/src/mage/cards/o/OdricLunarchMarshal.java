@@ -32,7 +32,7 @@ public final class OdricLunarchMarshal extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new OdricLunarchMarshalEffect(), TargetController.ANY, false));
     }
 
-    public OdricLunarchMarshal(final OdricLunarchMarshal card) {
+    private OdricLunarchMarshal(final OdricLunarchMarshal card) {
         super(card);
     }
 

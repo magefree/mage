@@ -48,7 +48,7 @@ public final class EbonyHorse extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EbonyHorse(final EbonyHorse card) {
+    private EbonyHorse(final EbonyHorse card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class TerramorphicExpanse extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TerramorphicExpanse(final TerramorphicExpanse card) {
+    private TerramorphicExpanse(final TerramorphicExpanse card) {
         super(card);
     }
 

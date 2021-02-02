@@ -55,7 +55,7 @@ public final class WisdomOfTheJedi extends CardImpl {
 
     }
 
-    public WisdomOfTheJedi(final WisdomOfTheJedi card) {
+    private WisdomOfTheJedi(final WisdomOfTheJedi card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class ServantOfTymaret extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{2}{B}")));
     }
 
-    public ServantOfTymaret(final ServantOfTymaret card) {
+    private ServantOfTymaret(final ServantOfTymaret card) {
         super(card);
     }
 

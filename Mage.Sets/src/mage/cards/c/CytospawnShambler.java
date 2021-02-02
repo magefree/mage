@@ -46,7 +46,7 @@ public final class CytospawnShambler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CytospawnShambler(final CytospawnShambler card) {
+    private CytospawnShambler(final CytospawnShambler card) {
         super(card);
     }
 

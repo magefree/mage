@@ -37,7 +37,7 @@ public final class GiantCaterpillar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GiantCaterpillar(final GiantCaterpillar card) {
+    private GiantCaterpillar(final GiantCaterpillar card) {
         super(card);
     }
 

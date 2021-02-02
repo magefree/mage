@@ -44,7 +44,7 @@ public final class AvenSurveyor extends CardImpl {
         this.addAbility(ability);  
     }
 
-    public AvenSurveyor(final AvenSurveyor card) {
+    private AvenSurveyor(final AvenSurveyor card) {
         super(card);
     }
 

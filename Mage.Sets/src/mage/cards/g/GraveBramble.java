@@ -36,7 +36,7 @@ public final class GraveBramble extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public GraveBramble(final GraveBramble card) {
+    private GraveBramble(final GraveBramble card) {
         super(card);
     }
 

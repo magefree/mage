@@ -32,7 +32,7 @@ public final class SeedsOfRenewal extends CardImpl {
 
     }
 
-    public SeedsOfRenewal(final SeedsOfRenewal card) {
+    private SeedsOfRenewal(final SeedsOfRenewal card) {
         super(card);
     }
 

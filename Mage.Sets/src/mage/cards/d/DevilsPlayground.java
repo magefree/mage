@@ -24,7 +24,7 @@ public final class DevilsPlayground extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public DevilsPlayground(final DevilsPlayground card) {
+    private DevilsPlayground(final DevilsPlayground card) {
         super(card);
     }
 

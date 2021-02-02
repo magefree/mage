@@ -39,7 +39,7 @@ public final class HinterlandHarbor extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public HinterlandHarbor(final HinterlandHarbor card) {
+    private HinterlandHarbor(final HinterlandHarbor card) {
         super(card);
     }
 

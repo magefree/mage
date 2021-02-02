@@ -28,7 +28,7 @@ public final class CleverImpersonator extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(new FilterNonlandPermanent()), true));
     }
 
-    public CleverImpersonator(final CleverImpersonator card) {
+    private CleverImpersonator(final CleverImpersonator card) {
         super(card);
     }
 

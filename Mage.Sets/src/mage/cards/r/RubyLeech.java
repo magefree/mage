@@ -41,7 +41,7 @@ public final class RubyLeech extends CardImpl {
                 new SpellsCostIncreasingAllEffect(new ManaCostsImpl("{R}"), filter, TargetController.YOU)));
     }
 
-    public RubyLeech(final RubyLeech card) {
+    private RubyLeech(final RubyLeech card) {
         super(card);
     }
 

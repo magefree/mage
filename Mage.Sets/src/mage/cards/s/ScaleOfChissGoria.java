@@ -33,7 +33,7 @@ public final class ScaleOfChissGoria extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScaleOfChissGoria(final ScaleOfChissGoria card) {
+    private ScaleOfChissGoria(final ScaleOfChissGoria card) {
         super(card);
     }
 

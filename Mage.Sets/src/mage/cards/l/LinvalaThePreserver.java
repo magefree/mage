@@ -45,7 +45,7 @@ public final class LinvalaThePreserver extends CardImpl {
                 "When {this} enters the battlefield, if an opponent controls more creatures than you, create a 3/3 white Angel creature token with flying."));
     }
 
-    public LinvalaThePreserver(final LinvalaThePreserver card) {
+    private LinvalaThePreserver(final LinvalaThePreserver card) {
         super(card);
     }
 

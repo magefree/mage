@@ -43,7 +43,7 @@ public final class DelifsCone extends CardImpl {
         
     }
 
-    public DelifsCone(final DelifsCone card) {
+    private DelifsCone(final DelifsCone card) {
         super(card);
     }
 

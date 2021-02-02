@@ -31,7 +31,7 @@ public final class FanaticalFever extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FanaticalFever(final FanaticalFever card) {
+    private FanaticalFever(final FanaticalFever card) {
         super(card);
     }
 

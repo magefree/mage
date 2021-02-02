@@ -48,7 +48,7 @@ public final class MagetaTheLion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagetaTheLion(final MagetaTheLion card) {
+    private MagetaTheLion(final MagetaTheLion card) {
         super(card);
     }
 

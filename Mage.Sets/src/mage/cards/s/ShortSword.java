@@ -30,7 +30,7 @@ public final class ShortSword extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public ShortSword(final ShortSword card) {
+    private ShortSword(final ShortSword card) {
         super(card);
     }
 

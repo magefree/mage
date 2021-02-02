@@ -52,7 +52,7 @@ public final class BuzzingWhackADoodle extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public BuzzingWhackADoodle(final BuzzingWhackADoodle card) {
+    private BuzzingWhackADoodle(final BuzzingWhackADoodle card) {
         super(card);
     }
 

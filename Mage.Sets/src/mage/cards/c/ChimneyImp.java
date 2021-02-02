@@ -41,7 +41,7 @@ public final class ChimneyImp extends CardImpl {
         
     }
 
-    public ChimneyImp(final ChimneyImp card) {
+    private ChimneyImp(final ChimneyImp card) {
         super(card);
     }
 

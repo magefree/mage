@@ -26,7 +26,7 @@ public final class CauldronHaze extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
-    public CauldronHaze(final CauldronHaze card) {
+    private CauldronHaze(final CauldronHaze card) {
         super(card);
     }
 

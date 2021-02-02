@@ -41,7 +41,7 @@ public final class ScrapperChampion extends CardImpl {
                 "Whenever {this} attacks, you may pay {E}{E}. If you do, put a +1/+1 counter on it."));
     }
 
-    public ScrapperChampion(final ScrapperChampion card) {
+    private ScrapperChampion(final ScrapperChampion card) {
         super(card);
     }
 

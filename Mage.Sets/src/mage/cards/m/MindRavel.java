@@ -28,7 +28,7 @@ public final class MindRavel extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public MindRavel(final MindRavel card) {
+    private MindRavel(final MindRavel card) {
         super(card);
     }
 

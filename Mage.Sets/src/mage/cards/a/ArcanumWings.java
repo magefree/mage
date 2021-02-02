@@ -40,7 +40,7 @@ public final class ArcanumWings extends CardImpl {
         this.addAbility(new AuraSwapAbility(new ManaCostsImpl("{2}{U}")));
     }
 
-    public ArcanumWings(final ArcanumWings card) {
+    private ArcanumWings(final ArcanumWings card) {
         super(card);
     }
 

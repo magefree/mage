@@ -36,7 +36,7 @@ public final class DroidFactory extends CardImpl {
 
     }
 
-    public DroidFactory(final DroidFactory card) {
+    private DroidFactory(final DroidFactory card) {
         super(card);
     }
 

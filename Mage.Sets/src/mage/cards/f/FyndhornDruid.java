@@ -35,7 +35,7 @@ public final class FyndhornDruid extends CardImpl {
                 "When {this} dies, if it was blocked this turn, you gain 4 life."), new WasBlockedThisTurnWatcher());
     }
 
-    public FyndhornDruid(final FyndhornDruid card) {
+    private FyndhornDruid(final FyndhornDruid card) {
         super(card);
     }
 

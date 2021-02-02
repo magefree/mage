@@ -52,7 +52,7 @@ public final class NicolBolasTheRavager extends CardImpl {
         ));
     }
 
-    public NicolBolasTheRavager(final NicolBolasTheRavager card) {
+    private NicolBolasTheRavager(final NicolBolasTheRavager card) {
         super(card);
     }
 

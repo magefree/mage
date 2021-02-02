@@ -44,7 +44,7 @@ public final class Errantry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Errantry(final Errantry card) {
+    private Errantry(final Errantry card) {
         super(card);
     }
 

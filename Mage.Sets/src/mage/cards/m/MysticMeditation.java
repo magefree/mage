@@ -31,7 +31,7 @@ public final class MysticMeditation extends CardImpl {
 
     }
 
-    public MysticMeditation(final MysticMeditation card) {
+    private MysticMeditation(final MysticMeditation card) {
         super(card);
     }
 

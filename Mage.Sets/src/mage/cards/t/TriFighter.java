@@ -30,7 +30,7 @@ public final class TriFighter extends CardImpl {
         this.addAbility(new RepairAbility(3));
     }
 
-    public TriFighter(final TriFighter card) {
+    private TriFighter(final TriFighter card) {
         super(card);
     }
 

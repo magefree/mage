@@ -38,7 +38,7 @@ public final class NiambiFaithfulHealer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryGraveyardPutInHandEffect(filter), true));
     }
 
-    public NiambiFaithfulHealer(final NiambiFaithfulHealer card) {
+    private NiambiFaithfulHealer(final NiambiFaithfulHealer card) {
         super(card);
     }
 

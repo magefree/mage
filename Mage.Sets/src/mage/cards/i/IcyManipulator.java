@@ -38,7 +38,7 @@ public final class IcyManipulator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IcyManipulator(final IcyManipulator card) {
+    private IcyManipulator(final IcyManipulator card) {
         super(card);
     }
 

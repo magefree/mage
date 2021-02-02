@@ -38,7 +38,7 @@ public final class CommandersAuthority extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
     }
 
-    public CommandersAuthority(final CommandersAuthority card) {
+    private CommandersAuthority(final CommandersAuthority card) {
         super(card);
     }
 

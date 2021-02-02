@@ -29,7 +29,7 @@ public final class ManipulateFate extends CardImpl {
 
     }
 
-    public ManipulateFate(final ManipulateFate card) {
+    private ManipulateFate(final ManipulateFate card) {
         super(card);
     }
 

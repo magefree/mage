@@ -28,7 +28,7 @@ public final class ScaledHulk extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), StaticFilters.SPIRIT_OR_ARCANE_CARD, false));
     }
 
-    public ScaledHulk(final ScaledHulk card) {
+    private ScaledHulk(final ScaledHulk card) {
         super(card);
     }
 

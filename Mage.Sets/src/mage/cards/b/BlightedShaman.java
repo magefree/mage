@@ -52,7 +52,7 @@ public final class BlightedShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlightedShaman(final BlightedShaman card) {
+    private BlightedShaman(final BlightedShaman card) {
         super(card);
     }
 

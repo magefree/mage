@@ -28,7 +28,7 @@ public final class Condescend extends CardImpl {
 
     }
 
-    public Condescend(final Condescend card) {
+    private Condescend(final Condescend card) {
         super(card);
     }
 

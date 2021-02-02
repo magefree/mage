@@ -42,7 +42,7 @@ public final class GravenDominator extends CardImpl {
 
     }
 
-    public GravenDominator(final GravenDominator card) {
+    private GravenDominator(final GravenDominator card) {
         super(card);
     }
 

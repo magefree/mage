@@ -32,7 +32,7 @@ public final class MercenaryKnight extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand(new FilterCreatureCard("a creature card"))))));
     }
 
-    public MercenaryKnight(final MercenaryKnight card) {
+    private MercenaryKnight(final MercenaryKnight card) {
         super(card);
     }
 

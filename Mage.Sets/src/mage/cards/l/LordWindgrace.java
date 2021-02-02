@@ -68,7 +68,7 @@ public final class LordWindgrace extends CardImpl {
         this.addAbility(CanBeYourCommanderAbility.getInstance());
     }
 
-    public LordWindgrace(final LordWindgrace card) {
+    private LordWindgrace(final LordWindgrace card) {
         super(card);
     }
 

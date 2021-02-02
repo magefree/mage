@@ -35,7 +35,7 @@ public final class DarksteelBrute extends CardImpl {
                 "", Duration.EndOfTurn), new GenericManaCost(3)));
     }
 
-    public DarksteelBrute(final DarksteelBrute card) {
+    private DarksteelBrute(final DarksteelBrute card) {
         super(card);
     }
 

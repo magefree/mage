@@ -61,7 +61,7 @@ public final class WorldBreaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WorldBreaker(final WorldBreaker card) {
+    private WorldBreaker(final WorldBreaker card) {
         super(card);
     }
 

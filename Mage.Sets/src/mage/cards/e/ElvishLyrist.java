@@ -37,7 +37,7 @@ public final class ElvishLyrist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElvishLyrist(final ElvishLyrist card) {
+    private ElvishLyrist(final ElvishLyrist card) {
         super(card);
     }
 

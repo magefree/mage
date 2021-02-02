@@ -30,7 +30,7 @@ public final class PredatorsHowl extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public PredatorsHowl(final PredatorsHowl card) {
+    private PredatorsHowl(final PredatorsHowl card) {
         super(card);
     }
 

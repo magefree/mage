@@ -38,7 +38,7 @@ public final class ShimatsuTheBloodcloaked extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ShimatsuTheBloodcloakedEffect()));
     }
 
-    public ShimatsuTheBloodcloaked(final ShimatsuTheBloodcloaked card) {
+    private ShimatsuTheBloodcloaked(final ShimatsuTheBloodcloaked card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class CallowJushi extends CardImpl {
                 "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it."));
     }
 
-    public CallowJushi(final CallowJushi card) {
+    private CallowJushi(final CallowJushi card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class QuicksilverDagger extends CardImpl {
         ));
     }
 
-    public QuicksilverDagger(final QuicksilverDagger card) {
+    private QuicksilverDagger(final QuicksilverDagger card) {
         super(card);
     }
 

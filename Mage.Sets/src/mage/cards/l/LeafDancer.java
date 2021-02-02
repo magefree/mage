@@ -26,7 +26,7 @@ public final class LeafDancer extends CardImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public LeafDancer(final LeafDancer card) {
+    private LeafDancer(final LeafDancer card) {
         super(card);
     }
 

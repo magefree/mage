@@ -37,7 +37,7 @@ public final class MouthOfRonom extends CardImpl {
 
     }
 
-    public MouthOfRonom(final MouthOfRonom card) {
+    private MouthOfRonom(final MouthOfRonom card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class VassalSoul extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public VassalSoul(final VassalSoul card) {
+    private VassalSoul(final VassalSoul card) {
         super(card);
     }
 

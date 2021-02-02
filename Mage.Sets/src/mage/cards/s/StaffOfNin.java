@@ -32,7 +32,7 @@ public final class StaffOfNin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StaffOfNin(final StaffOfNin card) {
+    private StaffOfNin(final StaffOfNin card) {
         super(card);
     }
 

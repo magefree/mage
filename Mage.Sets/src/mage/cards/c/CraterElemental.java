@@ -52,7 +52,7 @@ public final class CraterElemental extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CraterElemental(final CraterElemental card) {
+    private CraterElemental(final CraterElemental card) {
         super(card);
     }
 

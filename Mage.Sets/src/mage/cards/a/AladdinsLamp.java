@@ -34,7 +34,7 @@ public final class AladdinsLamp extends CardImpl {
 
     }
 
-    public AladdinsLamp(final AladdinsLamp card) {
+    private AladdinsLamp(final AladdinsLamp card) {
         super(card);
     }
 

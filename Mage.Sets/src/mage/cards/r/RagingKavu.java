@@ -27,7 +27,7 @@ public final class RagingKavu extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public RagingKavu(final RagingKavu card) {
+    private RagingKavu(final RagingKavu card) {
         super(card);
     }
 

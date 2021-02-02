@@ -33,7 +33,7 @@ public final class ChangelingBerserker extends CardImpl {
         this.addAbility(new ChampionAbility(this, true));
     }
 
-    public ChangelingBerserker(final ChangelingBerserker card) {
+    private ChangelingBerserker(final ChangelingBerserker card) {
         super(card);
     }
 

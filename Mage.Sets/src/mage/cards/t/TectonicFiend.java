@@ -28,7 +28,7 @@ public final class TectonicFiend extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public TectonicFiend(final TectonicFiend card) {
+    private TectonicFiend(final TectonicFiend card) {
         super(card);
     }
 

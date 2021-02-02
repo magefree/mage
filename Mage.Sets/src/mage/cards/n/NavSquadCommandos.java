@@ -33,7 +33,7 @@ public final class NavSquadCommandos extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NavSquadCommandos(final NavSquadCommandos card) {
+    private NavSquadCommandos(final NavSquadCommandos card) {
         super(card);
     }
 

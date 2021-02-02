@@ -35,7 +35,7 @@ public final class TrueheartDuelist extends CardImpl {
         this.addAbility(new EmbalmAbility(new ManaCostsImpl("{2}{W}"), this));
     }
 
-    public TrueheartDuelist(final TrueheartDuelist card) {
+    private TrueheartDuelist(final TrueheartDuelist card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class LeechingBite extends CardImpl {
         this.getSpellAbility().addTarget(target2);
     }
 
-    public LeechingBite(final LeechingBite card) {
+    private LeechingBite(final LeechingBite card) {
         super(card);
     }
 

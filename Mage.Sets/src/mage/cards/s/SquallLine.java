@@ -29,7 +29,7 @@ public final class SquallLine extends CardImpl {
         // Squall Line deals X damage to each creature with flying and each player.
         this.getSpellAbility().addEffect(new DamageEverythingEffect(ManacostVariableValue.instance, filter));                                                                                                  }
 
-    public SquallLine(final SquallLine card) {
+    private SquallLine(final SquallLine card) {
         super(card);
     }
 

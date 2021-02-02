@@ -52,7 +52,7 @@ public final class HeronsGraceChampion extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public HeronsGraceChampion(final HeronsGraceChampion card) {
+    private HeronsGraceChampion(final HeronsGraceChampion card) {
         super(card);
     }
 

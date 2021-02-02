@@ -36,7 +36,7 @@ public final class Bloodletter extends CardImpl {
         this.addAbility(new BloodletterStateTriggeredAbility());
     }
 
-    public Bloodletter(final Bloodletter card) {
+    private Bloodletter(final Bloodletter card) {
         super(card);
     }
 

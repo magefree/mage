@@ -36,7 +36,7 @@ public final class VoyagerStaff extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VoyagerStaff(final VoyagerStaff card) {
+    private VoyagerStaff(final VoyagerStaff card) {
         super(card);
     }
 

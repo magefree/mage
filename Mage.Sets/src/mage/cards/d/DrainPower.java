@@ -40,7 +40,7 @@ public final class DrainPower extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public DrainPower(final DrainPower card) {
+    private DrainPower(final DrainPower card) {
         super(card);
     }
 

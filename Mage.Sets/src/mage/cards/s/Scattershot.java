@@ -26,7 +26,7 @@ public final class Scattershot extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public Scattershot(final Scattershot card) {
+    private Scattershot(final Scattershot card) {
         super(card);
     }
 

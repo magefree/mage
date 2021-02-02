@@ -30,7 +30,7 @@ public final class GhostflameSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GhostflameSliverEffect()));
     }
 
-    public GhostflameSliver(final GhostflameSliver card) {
+    private GhostflameSliver(final GhostflameSliver card) {
         super(card);
     }
 

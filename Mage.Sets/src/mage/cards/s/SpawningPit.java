@@ -33,7 +33,7 @@ public final class SpawningPit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpawningPit(final SpawningPit card) {
+    private SpawningPit(final SpawningPit card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class ArisenGorgon extends CardImpl {
         ));
     }
 
-    public ArisenGorgon(final ArisenGorgon card) {
+    private ArisenGorgon(final ArisenGorgon card) {
         super(card);
     }
 

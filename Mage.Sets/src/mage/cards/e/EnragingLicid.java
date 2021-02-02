@@ -35,7 +35,7 @@ public final class EnragingLicid extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public EnragingLicid(final EnragingLicid card) {
+    private EnragingLicid(final EnragingLicid card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class ElgaudInquisitor extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken())));
     }
 
-    public ElgaudInquisitor(final ElgaudInquisitor card) {
+    private ElgaudInquisitor(final ElgaudInquisitor card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class ShieldingPlax extends CardImpl {
                 new CantBeTargetedAttachedEffect(filter, Duration.WhileOnBattlefield, AttachmentType.AURA, TargetController.OPPONENT)));
     }
 
-    public ShieldingPlax(final ShieldingPlax card) {
+    private ShieldingPlax(final ShieldingPlax card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class SaprazzanCove extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SaprazzanCove(final SaprazzanCove card) {
+    private SaprazzanCove(final SaprazzanCove card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class FinalPunishment extends CardImpl {
         this.getSpellAbility().addWatcher(new AmountOfDamageAPlayerReceivedThisTurnWatcher());
     }
 
-    public FinalPunishment(final FinalPunishment card) {
+    private FinalPunishment(final FinalPunishment card) {
         super(card);
     }
 

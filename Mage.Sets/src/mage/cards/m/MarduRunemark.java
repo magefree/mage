@@ -56,7 +56,7 @@ public final class MarduRunemark extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter), "{this} has first strike as long as you control a white or black permanent")));
     }
 
-    public MarduRunemark(final MarduRunemark card) {
+    private MarduRunemark(final MarduRunemark card) {
         super(card);
     }
 

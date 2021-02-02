@@ -49,7 +49,7 @@ public final class RunnersBane extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
-    public RunnersBane(final RunnersBane card) {
+    private RunnersBane(final RunnersBane card) {
         super(card);
     }
 

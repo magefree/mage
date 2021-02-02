@@ -35,7 +35,7 @@ public final class Shriekhorn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Shriekhorn(final Shriekhorn card) {
+    private Shriekhorn(final Shriekhorn card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class CrimsonMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrimsonMage(final CrimsonMage card) {
+    private CrimsonMage(final CrimsonMage card) {
         super(card);
     }
 

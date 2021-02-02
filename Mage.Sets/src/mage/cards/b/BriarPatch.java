@@ -29,7 +29,7 @@ public final class BriarPatch extends CardImpl {
         addAbility(ability);
     }
 
-    public BriarPatch(final BriarPatch card) {
+    private BriarPatch(final BriarPatch card) {
         super(card);
     }
 

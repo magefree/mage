@@ -67,7 +67,7 @@ public final class VindictiveLich extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VindictiveLich(final VindictiveLich card) {
+    private VindictiveLich(final VindictiveLich card) {
         super(card);
     }
 

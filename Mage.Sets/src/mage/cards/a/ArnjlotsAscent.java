@@ -33,7 +33,7 @@ public final class ArnjlotsAscent extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArnjlotsAscent(final ArnjlotsAscent card) {
+    private ArnjlotsAscent(final ArnjlotsAscent card) {
         super(card);
     }
 

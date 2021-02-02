@@ -34,7 +34,7 @@ public final class ZhalfirinKnight extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}{W}")));
     }
 
-    public ZhalfirinKnight(final ZhalfirinKnight card) {
+    private ZhalfirinKnight(final ZhalfirinKnight card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class Ambush extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter, false));
     }
 
-    public Ambush(final Ambush card) {
+    private Ambush(final Ambush card) {
         super(card);
     }
 

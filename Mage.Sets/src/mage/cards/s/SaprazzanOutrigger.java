@@ -30,7 +30,7 @@ public final class SaprazzanOutrigger extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(ability, true), false));
     }
 
-    public SaprazzanOutrigger(final SaprazzanOutrigger card) {
+    private SaprazzanOutrigger(final SaprazzanOutrigger card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class MurderousCompulsion extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{B}")));
     }
 
-    public MurderousCompulsion(final MurderousCompulsion card) {
+    private MurderousCompulsion(final MurderousCompulsion card) {
         super(card);
     }
 

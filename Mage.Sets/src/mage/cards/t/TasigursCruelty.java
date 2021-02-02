@@ -26,7 +26,7 @@ public final class TasigursCruelty extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(StaticValue.get(2), false, TargetController.OPPONENT));
     }
 
-    public TasigursCruelty(final TasigursCruelty card) {
+    private TasigursCruelty(final TasigursCruelty card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class SynapseSliver extends CardImpl {
                         true, SetTargetPointer.PLAYER, true));
     }
 
-    public SynapseSliver(final SynapseSliver card) {
+    private SynapseSliver(final SynapseSliver card) {
         super(card);
     }
 

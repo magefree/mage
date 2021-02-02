@@ -44,7 +44,7 @@ public final class IceFloe extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IceFloe(final IceFloe card) {
+    private IceFloe(final IceFloe card) {
         super(card);
     }
 

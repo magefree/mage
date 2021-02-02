@@ -43,7 +43,7 @@ public final class ScorchedEarth extends CardImpl {
         this.getSpellAbility().setCostAdjuster(ScorchedEarthCostAdjuster.instance);
     }
 
-    public ScorchedEarth(final ScorchedEarth card) {
+    private ScorchedEarth(final ScorchedEarth card) {
         super(card);
     }
 

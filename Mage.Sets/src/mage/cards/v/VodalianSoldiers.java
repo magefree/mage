@@ -23,7 +23,7 @@ public final class VodalianSoldiers extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public VodalianSoldiers(final VodalianSoldiers card) {
+    private VodalianSoldiers(final VodalianSoldiers card) {
         super(card);
     }
 

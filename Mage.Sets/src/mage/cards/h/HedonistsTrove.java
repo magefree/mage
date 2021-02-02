@@ -43,7 +43,7 @@ public final class HedonistsTrove extends CardImpl {
 
     }
 
-    public HedonistsTrove(final HedonistsTrove card) {
+    private HedonistsTrove(final HedonistsTrove card) {
         super(card);
     }
 

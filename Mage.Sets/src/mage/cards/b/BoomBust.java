@@ -41,7 +41,7 @@ public final class BoomBust extends SplitCard {
 
     }
 
-    public BoomBust(final BoomBust card) {
+    private BoomBust(final BoomBust card) {
         super(card);
     }
 

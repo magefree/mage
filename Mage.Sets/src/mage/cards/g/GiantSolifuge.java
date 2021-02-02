@@ -29,7 +29,7 @@ public final class GiantSolifuge extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public GiantSolifuge(final GiantSolifuge card) {
+    private GiantSolifuge(final GiantSolifuge card) {
         super(card);
     }
 

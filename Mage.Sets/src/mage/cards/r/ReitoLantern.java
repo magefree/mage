@@ -28,7 +28,7 @@ public final class ReitoLantern extends CardImpl {
 
     }
 
-    public ReitoLantern(final ReitoLantern card) {
+    private ReitoLantern(final ReitoLantern card) {
         super(card);
     }
 

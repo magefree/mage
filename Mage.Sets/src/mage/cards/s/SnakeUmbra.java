@@ -49,7 +49,7 @@ public final class SnakeUmbra extends CardImpl {
         this.addAbility(new TotemArmorAbility());
     }
 
-    public SnakeUmbra(final SnakeUmbra card) {
+    private SnakeUmbra(final SnakeUmbra card) {
         super(card);
     }
 

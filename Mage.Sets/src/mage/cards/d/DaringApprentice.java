@@ -36,7 +36,7 @@ public final class DaringApprentice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DaringApprentice(final DaringApprentice card) {
+    private DaringApprentice(final DaringApprentice card) {
         super(card);
     }
 

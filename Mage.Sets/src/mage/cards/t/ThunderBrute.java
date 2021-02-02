@@ -40,7 +40,7 @@ public final class ThunderBrute extends CardImpl {
                 "When {this} enters the battlefield, if its tribute wasn't paid, it gains haste until end of turn."));        
     }
 
-    public ThunderBrute(final ThunderBrute card) {
+    private ThunderBrute(final ThunderBrute card) {
         super(card);
     }
 

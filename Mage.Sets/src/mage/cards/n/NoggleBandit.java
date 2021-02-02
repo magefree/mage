@@ -41,7 +41,7 @@ public final class NoggleBandit extends CardImpl {
 
     }
 
-    public NoggleBandit(final NoggleBandit card) {
+    private NoggleBandit(final NoggleBandit card) {
         super(card);
     }
 

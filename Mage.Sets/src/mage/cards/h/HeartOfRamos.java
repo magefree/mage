@@ -27,7 +27,7 @@ public final class HeartOfRamos extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new SacrificeSourceCost()));
     }
 
-    public HeartOfRamos(final HeartOfRamos card) {
+    private HeartOfRamos(final HeartOfRamos card) {
         super(card);
     }
 

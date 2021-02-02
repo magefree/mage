@@ -42,7 +42,7 @@ public final class Magmaw extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Magmaw(final Magmaw card) {
+    private Magmaw(final Magmaw card) {
         super(card);
     }
 

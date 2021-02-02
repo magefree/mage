@@ -31,7 +31,7 @@ public final class EmpyrialPlate extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public EmpyrialPlate(final EmpyrialPlate card) {
+    private EmpyrialPlate(final EmpyrialPlate card) {
         super(card);
     }
 

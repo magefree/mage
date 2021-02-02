@@ -38,7 +38,7 @@ public final class PetraSphinx extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PetraSphinx(final PetraSphinx card) {
+    private PetraSphinx(final PetraSphinx card) {
         super(card);
     }
 

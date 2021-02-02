@@ -36,7 +36,7 @@ public final class Afterburn extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public Afterburn(final Afterburn card) {
+    private Afterburn(final Afterburn card) {
         super(card);
     }
 

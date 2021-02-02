@@ -29,7 +29,7 @@ public final class RishadanAirship extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public RishadanAirship(final RishadanAirship card) {
+    private RishadanAirship(final RishadanAirship card) {
         super(card);
     }
 

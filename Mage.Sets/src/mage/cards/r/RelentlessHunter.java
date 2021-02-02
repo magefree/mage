@@ -40,7 +40,7 @@ public final class RelentlessHunter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RelentlessHunter(final RelentlessHunter card) {
+    private RelentlessHunter(final RelentlessHunter card) {
         super(card);
     }
 

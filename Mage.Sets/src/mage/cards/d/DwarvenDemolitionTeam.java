@@ -40,7 +40,7 @@ public final class DwarvenDemolitionTeam extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DwarvenDemolitionTeam(final DwarvenDemolitionTeam card) {
+    private DwarvenDemolitionTeam(final DwarvenDemolitionTeam card) {
         super(card);
     }
 

@@ -65,7 +65,7 @@ public final class ChampionOfStraySouls extends CardImpl {
                 new ManaCostsImpl("{5}{B}{B}")));
     }
 
-    public ChampionOfStraySouls(final ChampionOfStraySouls card) {
+    private ChampionOfStraySouls(final ChampionOfStraySouls card) {
         super(card);
     }
 

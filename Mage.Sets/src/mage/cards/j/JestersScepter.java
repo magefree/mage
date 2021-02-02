@@ -51,7 +51,7 @@ public final class JestersScepter extends CardImpl {
 
     }
 
-    public JestersScepter(final JestersScepter card) {
+    private JestersScepter(final JestersScepter card) {
         super(card);
     }
 

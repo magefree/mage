@@ -34,7 +34,7 @@ public final class SlipstreamEel extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{U}")));
     }
 
-    public SlipstreamEel(final SlipstreamEel card) {
+    private SlipstreamEel(final SlipstreamEel card) {
         super(card);
     }
 

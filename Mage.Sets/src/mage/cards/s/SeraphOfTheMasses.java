@@ -37,7 +37,7 @@ public final class SeraphOfTheMasses extends CardImpl {
                 .addHint(CreaturesYouControlHint.instance));
     }
 
-    public SeraphOfTheMasses(final SeraphOfTheMasses card) {
+    private SeraphOfTheMasses(final SeraphOfTheMasses card) {
         super(card);
     }
 

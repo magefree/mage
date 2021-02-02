@@ -60,7 +60,7 @@ public final class DizzyingGaze extends CardImpl {
 
     }
 
-    public DizzyingGaze(final DizzyingGaze card) {
+    private DizzyingGaze(final DizzyingGaze card) {
         super(card);
     }
 

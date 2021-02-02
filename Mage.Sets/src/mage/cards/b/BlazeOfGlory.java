@@ -41,7 +41,7 @@ public final class BlazeOfGlory extends CardImpl {
         this.getSpellAbility().addEffect(new BlazeOfGloryRequirementEffect());
     }
 
-    public BlazeOfGlory(final BlazeOfGlory card) {
+    private BlazeOfGlory(final BlazeOfGlory card) {
         super(card);
     }
 

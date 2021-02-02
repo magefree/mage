@@ -22,7 +22,7 @@ public final class SorinsThirst extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SorinsThirst(final SorinsThirst card) {
+    private SorinsThirst(final SorinsThirst card) {
         super(card);
     }
 

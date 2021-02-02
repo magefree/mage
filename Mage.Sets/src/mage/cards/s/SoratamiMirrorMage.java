@@ -44,7 +44,7 @@ public final class SoratamiMirrorMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoratamiMirrorMage(final SoratamiMirrorMage card) {
+    private SoratamiMirrorMage(final SoratamiMirrorMage card) {
         super(card);
     }
 

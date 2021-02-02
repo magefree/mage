@@ -33,7 +33,7 @@ public final class BringLow extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public BringLow(final BringLow card) {
+    private BringLow(final BringLow card) {
         super(card);
     }
 

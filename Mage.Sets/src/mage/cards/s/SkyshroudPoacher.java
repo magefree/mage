@@ -42,7 +42,7 @@ public final class SkyshroudPoacher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkyshroudPoacher(final SkyshroudPoacher card) {
+    private SkyshroudPoacher(final SkyshroudPoacher card) {
         super(card);
     }
 

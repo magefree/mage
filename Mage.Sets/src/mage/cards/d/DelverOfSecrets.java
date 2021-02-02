@@ -41,7 +41,7 @@ public final class DelverOfSecrets extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DelverOfSecretsEffect(), TargetController.YOU, false));
     }
 
-    public DelverOfSecrets(final DelverOfSecrets card) {
+    private DelverOfSecrets(final DelverOfSecrets card) {
         super(card);
     }
 

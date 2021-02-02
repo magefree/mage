@@ -24,7 +24,7 @@ public final class ChandrasPyrohelix extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(2));
     }
 
-    public ChandrasPyrohelix(final ChandrasPyrohelix card) {
+    private ChandrasPyrohelix(final ChandrasPyrohelix card) {
         super(card);
     }
 

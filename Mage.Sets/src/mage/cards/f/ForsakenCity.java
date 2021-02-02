@@ -37,7 +37,7 @@ public final class ForsakenCity extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public ForsakenCity(final ForsakenCity card) {
+    private ForsakenCity(final ForsakenCity card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class TelimTor extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false), false));
     }
 
-    public TelimTor(final TelimTor card) {
+    private TelimTor(final TelimTor card) {
         super(card);
     }
 

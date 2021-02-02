@@ -30,7 +30,7 @@ public final class Dynacharge extends CardImpl {
         this.addAbility(new OverloadAbility(this, new BoostControlledEffect(2,0, Duration.EndOfTurn), new ManaCostsImpl("{2}{R}")));
     }
 
-    public Dynacharge(final Dynacharge card) {
+    private Dynacharge(final Dynacharge card) {
         super(card);
     }
 

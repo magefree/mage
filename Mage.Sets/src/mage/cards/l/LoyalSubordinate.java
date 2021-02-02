@@ -41,7 +41,7 @@ public final class LoyalSubordinate extends CardImpl {
         ));
     }
 
-    public LoyalSubordinate(final LoyalSubordinate card) {
+    private LoyalSubordinate(final LoyalSubordinate card) {
         super(card);
     }
 

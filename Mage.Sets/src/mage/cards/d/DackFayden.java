@@ -51,7 +51,7 @@ public final class DackFayden extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DackFayden(final DackFayden card) {
+    private DackFayden(final DackFayden card) {
         super(card);
     }
 

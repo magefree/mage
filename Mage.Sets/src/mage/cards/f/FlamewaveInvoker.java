@@ -32,7 +32,7 @@ public final class FlamewaveInvoker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlamewaveInvoker(final FlamewaveInvoker card) {
+    private FlamewaveInvoker(final FlamewaveInvoker card) {
         super(card);
     }
 

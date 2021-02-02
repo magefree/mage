@@ -43,7 +43,7 @@ public final class DakmorLancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DakmorLancer(final DakmorLancer card) {
+    private DakmorLancer(final DakmorLancer card) {
         super(card);
     }
 

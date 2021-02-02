@@ -25,7 +25,7 @@ public final class CrowStorm extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public CrowStorm(final CrowStorm card) {
+    private CrowStorm(final CrowStorm card) {
         super(card);
     }
 

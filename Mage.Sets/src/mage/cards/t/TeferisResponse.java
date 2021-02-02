@@ -40,7 +40,7 @@ public final class TeferisResponse extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
-    public TeferisResponse(final TeferisResponse card) {
+    private TeferisResponse(final TeferisResponse card) {
         super(card);
     }
 

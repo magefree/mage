@@ -35,7 +35,7 @@ public final class SpireGarden extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public SpireGarden(final SpireGarden card) {
+    private SpireGarden(final SpireGarden card) {
         super(card);
     }
 

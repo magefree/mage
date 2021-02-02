@@ -53,7 +53,7 @@ public final class MirrorSigilSergeant extends CardImpl {
 
     }
 
-    public MirrorSigilSergeant(final MirrorSigilSergeant card) {
+    private MirrorSigilSergeant(final MirrorSigilSergeant card) {
         super(card);
     }
 

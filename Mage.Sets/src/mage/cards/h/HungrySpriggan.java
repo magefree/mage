@@ -30,7 +30,7 @@ public final class HungrySpriggan extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(3, 3, Duration.EndOfTurn), false));
     }
 
-    public HungrySpriggan(final HungrySpriggan card) {
+    private HungrySpriggan(final HungrySpriggan card) {
         super(card);
     }
 

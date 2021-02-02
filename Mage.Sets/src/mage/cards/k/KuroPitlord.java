@@ -37,7 +37,7 @@ public final class KuroPitlord extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KuroPitlord(final KuroPitlord card) {
+    private KuroPitlord(final KuroPitlord card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class GrotagThrasher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GrotagThrasher(final GrotagThrasher card) {
+    private GrotagThrasher(final GrotagThrasher card) {
         super(card);
     }
 

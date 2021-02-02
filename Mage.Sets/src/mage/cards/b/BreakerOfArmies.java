@@ -28,7 +28,7 @@ public final class BreakerOfArmies extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect(Duration.WhileOnBattlefield)));
     }
 
-    public BreakerOfArmies(final BreakerOfArmies card) {
+    private BreakerOfArmies(final BreakerOfArmies card) {
         super(card);
     }
 

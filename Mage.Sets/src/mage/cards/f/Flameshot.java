@@ -36,7 +36,7 @@ public final class Flameshot extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3));
     }
 
-    public Flameshot(final Flameshot card) {
+    private Flameshot(final Flameshot card) {
         super(card);
     }
 

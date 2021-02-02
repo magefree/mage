@@ -54,7 +54,7 @@ public final class SapphireCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public SapphireCharm(final SapphireCharm card) {
+    private SapphireCharm(final SapphireCharm card) {
         super(card);
     }
 

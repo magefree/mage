@@ -23,7 +23,7 @@ public final class AmbitionsCost extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(3).concatBy("and"));
     }
 
-    public AmbitionsCost(final AmbitionsCost card) {
+    private AmbitionsCost(final AmbitionsCost card) {
         super(card);
     }
 

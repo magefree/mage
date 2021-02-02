@@ -51,7 +51,7 @@ public final class MartyrOfFrost extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MartyrOfFrost(final MartyrOfFrost card) {
+    private MartyrOfFrost(final MartyrOfFrost card) {
         super(card);
     }
 

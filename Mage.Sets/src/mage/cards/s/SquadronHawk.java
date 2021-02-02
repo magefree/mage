@@ -40,7 +40,7 @@ public final class SquadronHawk extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
     }
 
-    public SquadronHawk(final SquadronHawk card) {
+    private SquadronHawk(final SquadronHawk card) {
         super(card);
     }
 

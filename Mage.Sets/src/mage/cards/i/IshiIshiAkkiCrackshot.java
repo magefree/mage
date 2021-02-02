@@ -35,7 +35,7 @@ public final class IshiIshiAkkiCrackshot extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that player"), filter, false, SetTargetPointer.PLAYER));
     }
 
-    public IshiIshiAkkiCrackshot(final IshiIshiAkkiCrackshot card) {
+    private IshiIshiAkkiCrackshot(final IshiIshiAkkiCrackshot card) {
         super(card);
     }
 

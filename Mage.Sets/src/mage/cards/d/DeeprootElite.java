@@ -48,7 +48,7 @@ public final class DeeprootElite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeeprootElite(final DeeprootElite card) {
+    private DeeprootElite(final DeeprootElite card) {
         super(card);
     }
 

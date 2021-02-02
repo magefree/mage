@@ -55,7 +55,7 @@ public final class BlazingTorch extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
-    public BlazingTorch(final BlazingTorch card) {
+    private BlazingTorch(final BlazingTorch card) {
         super(card);
     }
 

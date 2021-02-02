@@ -50,7 +50,7 @@ public final class TitaniaProtectorOfArgoth extends CardImpl {
 
     }
 
-    public TitaniaProtectorOfArgoth(final TitaniaProtectorOfArgoth card) {
+    private TitaniaProtectorOfArgoth(final TitaniaProtectorOfArgoth card) {
         super(card);
     }
 

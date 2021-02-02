@@ -48,7 +48,7 @@ public final class ChimeOfNight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChimeOfNight(final ChimeOfNight card) {
+    private ChimeOfNight(final ChimeOfNight card) {
         super(card);
     }
 

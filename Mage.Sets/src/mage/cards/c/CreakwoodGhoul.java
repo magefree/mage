@@ -35,7 +35,7 @@ public final class CreakwoodGhoul extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CreakwoodGhoul(final CreakwoodGhoul card) {
+    private CreakwoodGhoul(final CreakwoodGhoul card) {
         super(card);
     }
 

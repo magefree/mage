@@ -36,7 +36,7 @@ public final class Fumble extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Fumble(final Fumble card) {
+    private Fumble(final Fumble card) {
         super(card);
     }
 

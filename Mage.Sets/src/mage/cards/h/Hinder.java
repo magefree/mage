@@ -24,7 +24,7 @@ public final class Hinder extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Hinder(final Hinder card) {
+    private Hinder(final Hinder card) {
         super(card);
     }
 

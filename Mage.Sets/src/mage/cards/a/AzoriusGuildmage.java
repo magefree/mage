@@ -40,7 +40,7 @@ public final class AzoriusGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AzoriusGuildmage(final AzoriusGuildmage card) {
+    private AzoriusGuildmage(final AzoriusGuildmage card) {
         super(card);
     }
 

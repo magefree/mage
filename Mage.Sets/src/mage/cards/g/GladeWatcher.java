@@ -41,7 +41,7 @@ public final class GladeWatcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GladeWatcher(final GladeWatcher card) {
+    private GladeWatcher(final GladeWatcher card) {
         super(card);
     }
 

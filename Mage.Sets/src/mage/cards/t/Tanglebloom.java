@@ -26,7 +26,7 @@ public final class Tanglebloom extends CardImpl {
         // {1}, {tap}: You gain 1 life.
     }
 
-    public Tanglebloom(final Tanglebloom card) {
+    private Tanglebloom(final Tanglebloom card) {
         super(card);
     }
 

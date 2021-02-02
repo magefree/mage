@@ -21,7 +21,7 @@ public final class WalkingCorpse extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public WalkingCorpse(final WalkingCorpse card) {
+    private WalkingCorpse(final WalkingCorpse card) {
         super(card);
     }
 

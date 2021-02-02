@@ -40,7 +40,7 @@ public final class SoltariVisionary extends CardImpl {
         this.addAbility(new SoltariVisionaryTriggeredAbility());
     }
 
-    public SoltariVisionary(final SoltariVisionary card) {
+    private SoltariVisionary(final SoltariVisionary card) {
         super(card);
     }
 

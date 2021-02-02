@@ -38,7 +38,7 @@ public final class GatekeeperGargoyle extends CardImpl {
         ).addHint(GateYouControlHint.instance));
     }
 
-    public GatekeeperGargoyle(final GatekeeperGargoyle card) {
+    private GatekeeperGargoyle(final GatekeeperGargoyle card) {
         super(card);
     }
 

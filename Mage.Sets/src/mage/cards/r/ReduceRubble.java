@@ -38,7 +38,7 @@ public final class ReduceRubble extends SplitCard {
         getRightHalfCard().getSpellAbility().addTarget(new TargetPermanent(0, 3, new FilterLandPermanent(), false));
     }
 
-    public ReduceRubble(final ReduceRubble card) {
+    private ReduceRubble(final ReduceRubble card) {
         super(card);
     }
 

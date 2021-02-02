@@ -27,7 +27,7 @@ public final class WildColos extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public WildColos(final WildColos card) {
+    private WildColos(final WildColos card) {
         super(card);
     }
 

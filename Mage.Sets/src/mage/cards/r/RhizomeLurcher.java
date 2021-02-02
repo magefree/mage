@@ -40,7 +40,7 @@ public final class RhizomeLurcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RhizomeLurcher(final RhizomeLurcher card) {
+    private RhizomeLurcher(final RhizomeLurcher card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class SeleniaDarkAngel extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new PayLifeCost(2)));
     }
 
-    public SeleniaDarkAngel(final SeleniaDarkAngel card) {
+    private SeleniaDarkAngel(final SeleniaDarkAngel card) {
         super(card);
     }
 

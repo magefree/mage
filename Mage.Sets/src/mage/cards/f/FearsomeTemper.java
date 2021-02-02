@@ -49,7 +49,7 @@ public final class FearsomeTemper extends CardImpl {
 
     }
 
-    public FearsomeTemper(final FearsomeTemper card) {
+    private FearsomeTemper(final FearsomeTemper card) {
         super(card);
     }
 

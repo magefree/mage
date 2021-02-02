@@ -35,7 +35,7 @@ public final class ReturnToTheRanks extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(ReturnToTheRanksAdjuster.instance);
     }
 
-    public ReturnToTheRanks(final ReturnToTheRanks card) {
+    private ReturnToTheRanks(final ReturnToTheRanks card) {
         super(card);
     }
 

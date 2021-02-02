@@ -55,7 +55,7 @@ public final class IceCauldron extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public IceCauldron(final IceCauldron card) {
+    private IceCauldron(final IceCauldron card) {
         super(card);
     }
 

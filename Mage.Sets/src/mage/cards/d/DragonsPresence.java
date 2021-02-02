@@ -21,7 +21,7 @@ public final class DragonsPresence extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingOrBlockingCreature());
     }
 
-    public DragonsPresence(final DragonsPresence card) {
+    private DragonsPresence(final DragonsPresence card) {
         super(card);
     }
 

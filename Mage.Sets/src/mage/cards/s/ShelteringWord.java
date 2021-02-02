@@ -32,7 +32,7 @@ public final class ShelteringWord extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
-    public ShelteringWord(final ShelteringWord card) {
+    private ShelteringWord(final ShelteringWord card) {
         super(card);
     }
 

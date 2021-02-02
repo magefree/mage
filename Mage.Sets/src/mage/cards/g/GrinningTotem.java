@@ -45,7 +45,7 @@ public final class GrinningTotem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GrinningTotem(final GrinningTotem card) {
+    private GrinningTotem(final GrinningTotem card) {
         super(card);
     }
 

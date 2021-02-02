@@ -32,7 +32,7 @@ public final class MeteorStorm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MeteorStorm(final MeteorStorm card) {
+    private MeteorStorm(final MeteorStorm card) {
         super(card);
     }
 

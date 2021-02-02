@@ -34,7 +34,7 @@ public final class BriarpackAlpha extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BriarpackAlpha(final BriarpackAlpha card) {
+    private BriarpackAlpha(final BriarpackAlpha card) {
         super(card);
     }
 

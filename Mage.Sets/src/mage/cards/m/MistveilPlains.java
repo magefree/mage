@@ -54,7 +54,7 @@ public final class MistveilPlains extends CardImpl {
 
     }
 
-    public MistveilPlains(final MistveilPlains card) {
+    private MistveilPlains(final MistveilPlains card) {
         super(card);
     }
 

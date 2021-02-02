@@ -50,7 +50,7 @@ public final class SokenzanRenegade extends CardImpl {
 
     }
 
-    public SokenzanRenegade(final SokenzanRenegade card) {
+    private SokenzanRenegade(final SokenzanRenegade card) {
         super(card);
     }
 

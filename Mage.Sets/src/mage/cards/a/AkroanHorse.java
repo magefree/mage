@@ -43,7 +43,7 @@ public final class AkroanHorse extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AkroanHorseCreateTokenEffect(), TargetController.YOU, false));
     }
 
-    public AkroanHorse(final AkroanHorse card) {
+    private AkroanHorse(final AkroanHorse card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class TitaniumGolem extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
     }
 
-    public TitaniumGolem(final TitaniumGolem card) {
+    private TitaniumGolem(final TitaniumGolem card) {
         super(card);
     }
 

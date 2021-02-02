@@ -40,7 +40,7 @@ public final class MasumaroFirstToLive extends CardImpl {
 
     }
 
-    public MasumaroFirstToLive(final MasumaroFirstToLive card) {
+    private MasumaroFirstToLive(final MasumaroFirstToLive card) {
         super(card);
     }
 

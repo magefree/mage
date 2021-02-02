@@ -32,7 +32,7 @@ public final class KarplusanForest extends CardImpl {
         this.addAbility(greenManaAbility);
     }
 
-    public KarplusanForest(final KarplusanForest card) {
+    private KarplusanForest(final KarplusanForest card) {
         super(card);
     }
 

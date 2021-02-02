@@ -32,7 +32,7 @@ public final class EternityVessel extends CardImpl {
         this.addAbility(new LandfallAbility(Zone.BATTLEFIELD, new EternityVesselEffect2(), true));
     }
 
-    public EternityVessel(final EternityVessel card) {
+    private EternityVessel(final EternityVessel card) {
         super(card);
     }
 

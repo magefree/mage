@@ -37,7 +37,7 @@ public final class ArjunTheShiftingFlame extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new ArjunTheShiftingFlameEffect(), false));
     }
 
-    public ArjunTheShiftingFlame(final ArjunTheShiftingFlame card) {
+    private ArjunTheShiftingFlame(final ArjunTheShiftingFlame card) {
         super(card);
     }
 

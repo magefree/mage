@@ -29,7 +29,7 @@ public final class OrneryGoblin extends CardImpl {
         ));
     }
 
-    public OrneryGoblin(final OrneryGoblin card) {
+    private OrneryGoblin(final OrneryGoblin card) {
         super(card);
     }
 

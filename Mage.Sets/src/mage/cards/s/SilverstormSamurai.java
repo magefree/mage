@@ -28,7 +28,7 @@ public final class SilverstormSamurai extends CardImpl {
         this.addAbility(new BushidoAbility(1));
     }
 
-    public SilverstormSamurai(final SilverstormSamurai card) {
+    private SilverstormSamurai(final SilverstormSamurai card) {
         super(card);
     }
 

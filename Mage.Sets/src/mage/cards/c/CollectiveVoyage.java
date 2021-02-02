@@ -32,7 +32,7 @@ public final class CollectiveVoyage extends CardImpl {
         this.getSpellAbility().addEffect(new CollectiveVoyageEffect());
     }
 
-    public CollectiveVoyage(final CollectiveVoyage card) {
+    private CollectiveVoyage(final CollectiveVoyage card) {
         super(card);
     }
 

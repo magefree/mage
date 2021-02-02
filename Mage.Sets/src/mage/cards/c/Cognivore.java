@@ -41,7 +41,7 @@ public final class Cognivore extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value, Duration.EndOfGame)));
     }
 
-    public Cognivore(final Cognivore card) {
+    private Cognivore(final Cognivore card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class SarkhanTheMad extends CardImpl {
         this.addAbility(damageAbility);
     }
 
-    public SarkhanTheMad(final SarkhanTheMad card) {
+    private SarkhanTheMad(final SarkhanTheMad card) {
         super(card);
     }
 

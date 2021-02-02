@@ -34,7 +34,7 @@ public final class SnapsailGlider extends CardImpl {
                 .addHint(MetalcraftHint.instance));
     }
 
-    public SnapsailGlider(final SnapsailGlider card) {
+    private SnapsailGlider(final SnapsailGlider card) {
         super(card);
     }
 

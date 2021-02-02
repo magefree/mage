@@ -37,7 +37,7 @@ public final class Aethersnipe extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{1}{U}{U}"));
     }
 
-    public Aethersnipe(final Aethersnipe card) {
+    private Aethersnipe(final Aethersnipe card) {
         super(card);
     }
 

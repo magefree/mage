@@ -43,7 +43,7 @@ public final class SoulStairExpedition extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoulStairExpedition(final SoulStairExpedition card) {
+    private SoulStairExpedition(final SoulStairExpedition card) {
         super(card);
     }
 

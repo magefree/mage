@@ -46,7 +46,7 @@ public final class IsperiasSkywatch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IsperiasSkywatch(final IsperiasSkywatch card) {
+    private IsperiasSkywatch(final IsperiasSkywatch card) {
         super(card);
     }
 

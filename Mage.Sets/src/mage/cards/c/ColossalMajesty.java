@@ -33,7 +33,7 @@ public final class ColossalMajesty extends CardImpl {
         ).addHint(FerociousHint.instance));
     }
 
-    public ColossalMajesty(final ColossalMajesty card) {
+    private ColossalMajesty(final ColossalMajesty card) {
         super(card);
     }
 

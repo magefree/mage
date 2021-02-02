@@ -34,7 +34,7 @@ public final class IngeniousSkaab extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
     }
 
-    public IngeniousSkaab(final IngeniousSkaab card) {
+    private IngeniousSkaab(final IngeniousSkaab card) {
         super(card);
     }
 

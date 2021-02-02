@@ -32,7 +32,7 @@ public final class FodderLaunch extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetControllerEffect(5));
     }
 
-    public FodderLaunch(final FodderLaunch card) {
+    private FodderLaunch(final FodderLaunch card) {
         super(card);
     }
 

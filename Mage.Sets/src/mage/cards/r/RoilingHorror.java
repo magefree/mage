@@ -52,7 +52,7 @@ public final class RoilingHorror extends CardImpl {
 
     }
 
-    public RoilingHorror(final RoilingHorror card) {
+    private RoilingHorror(final RoilingHorror card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class KarplusanMinotaur extends CardImpl {
         this.addAbility(new KarplusanMinotaurFlipLoseTriggeredAbility());
     }
 
-    public KarplusanMinotaur(final KarplusanMinotaur card) {
+    private KarplusanMinotaur(final KarplusanMinotaur card) {
         super(card);
     }
 

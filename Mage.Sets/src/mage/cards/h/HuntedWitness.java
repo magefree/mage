@@ -29,7 +29,7 @@ public final class HuntedWitness extends CardImpl {
         ));
     }
 
-    public HuntedWitness(final HuntedWitness card) {
+    private HuntedWitness(final HuntedWitness card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class Curiosity extends CardImpl {
         this.addAbility(new CuriosityAbility());
     }
 
-    public Curiosity(final Curiosity card) {
+    private Curiosity(final Curiosity card) {
         super(card);
     }
 

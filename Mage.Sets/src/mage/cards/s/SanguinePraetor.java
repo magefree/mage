@@ -42,7 +42,7 @@ public final class SanguinePraetor extends CardImpl {
 
     }
 
-    public SanguinePraetor(final SanguinePraetor card) {
+    private SanguinePraetor(final SanguinePraetor card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class SinkIntoTakenuma extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public SinkIntoTakenuma(final SinkIntoTakenuma card) {
+    private SinkIntoTakenuma(final SinkIntoTakenuma card) {
         super(card);
     }
 

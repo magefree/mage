@@ -37,7 +37,7 @@ public final class YomijiWhoBarsTheWay extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(effect, false, filter, true));
     }
 
-    public YomijiWhoBarsTheWay(final YomijiWhoBarsTheWay card) {
+    private YomijiWhoBarsTheWay(final YomijiWhoBarsTheWay card) {
         super(card);
     }
 

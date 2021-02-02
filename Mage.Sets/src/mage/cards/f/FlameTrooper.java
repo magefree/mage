@@ -37,7 +37,7 @@ public final class FlameTrooper extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public FlameTrooper(final FlameTrooper card) {
+    private FlameTrooper(final FlameTrooper card) {
         super(card);
     }
 

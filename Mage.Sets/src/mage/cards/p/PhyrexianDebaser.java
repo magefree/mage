@@ -40,7 +40,7 @@ public final class PhyrexianDebaser extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianDebaser(final PhyrexianDebaser card) {
+    private PhyrexianDebaser(final PhyrexianDebaser card) {
         super(card);
     }
 

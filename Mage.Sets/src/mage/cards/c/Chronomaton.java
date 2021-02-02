@@ -34,7 +34,7 @@ public final class Chronomaton extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Chronomaton(final Chronomaton card) {
+    private Chronomaton(final Chronomaton card) {
         super(card);
     }
 

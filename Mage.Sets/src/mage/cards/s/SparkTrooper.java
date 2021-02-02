@@ -39,7 +39,7 @@ public final class SparkTrooper extends CardImpl {
 
     }
 
-    public SparkTrooper(final SparkTrooper card) {
+    private SparkTrooper(final SparkTrooper card) {
         super(card);
     }
 

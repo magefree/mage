@@ -39,7 +39,7 @@ public final class LegacyOfTheBeloved extends CardImpl {
         this.getSpellAbility().addEffect(new LegacyOfTheBelovedEffect());
     }
 
-    public LegacyOfTheBeloved(final LegacyOfTheBeloved card) {
+    private LegacyOfTheBeloved(final LegacyOfTheBeloved card) {
         super(card);
     }
 

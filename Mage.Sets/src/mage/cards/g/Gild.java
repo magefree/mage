@@ -27,7 +27,7 @@ public final class Gild extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Gild(final Gild card) {
+    private Gild(final Gild card) {
         super(card);
     }
 

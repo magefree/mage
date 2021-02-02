@@ -45,7 +45,7 @@ public final class Ramroller extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public Ramroller(final Ramroller card) {
+    private Ramroller(final Ramroller card) {
         super(card);
     }
 

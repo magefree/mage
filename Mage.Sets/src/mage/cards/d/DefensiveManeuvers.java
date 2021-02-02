@@ -30,7 +30,7 @@ public final class DefensiveManeuvers extends CardImpl {
         this.getSpellAbility().addEffect(new DefensiveManeuversEffect());
     }
 
-    public DefensiveManeuvers(final DefensiveManeuvers card) {
+    private DefensiveManeuvers(final DefensiveManeuvers card) {
         super(card);
     }
 

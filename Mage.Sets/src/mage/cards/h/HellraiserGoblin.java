@@ -42,7 +42,7 @@ public final class HellraiserGoblin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HellraiserGoblin(final HellraiserGoblin card) {
+    private HellraiserGoblin(final HellraiserGoblin card) {
         super(card);
     }
 

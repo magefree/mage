@@ -47,7 +47,7 @@ public final class LedevChampion extends CardImpl {
         ));
     }
 
-    public LedevChampion(final LedevChampion card) {
+    private LedevChampion(final LedevChampion card) {
         super(card);
     }
 

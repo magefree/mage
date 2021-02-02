@@ -33,7 +33,7 @@ public final class ElvenLyre extends CardImpl {
 
     }
 
-    public ElvenLyre(final ElvenLyre card) {
+    private ElvenLyre(final ElvenLyre card) {
         super(card);
     }
 

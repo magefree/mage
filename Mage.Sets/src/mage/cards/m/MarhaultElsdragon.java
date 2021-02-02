@@ -28,7 +28,7 @@ public final class MarhaultElsdragon extends CardImpl {
         this.addAbility(new RampageAbility(1));
     }
 
-    public MarhaultElsdragon(final MarhaultElsdragon card) {
+    private MarhaultElsdragon(final MarhaultElsdragon card) {
         super(card);
     }
 

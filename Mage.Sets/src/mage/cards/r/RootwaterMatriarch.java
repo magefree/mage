@@ -38,7 +38,7 @@ public final class RootwaterMatriarch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RootwaterMatriarch(final RootwaterMatriarch card) {
+    private RootwaterMatriarch(final RootwaterMatriarch card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class Piety extends CardImpl {
         //this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_POST, "end Piety", true, new BoostAllEffect(0, 3, Duration.EndOfTurn, filter, false)));
     }
 
-    public Piety(final Piety card) {
+    private Piety(final Piety card) {
         super(card);
     }
 

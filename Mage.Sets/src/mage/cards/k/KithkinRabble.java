@@ -41,7 +41,7 @@ public final class KithkinRabble extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public KithkinRabble(final KithkinRabble card) {
+    private KithkinRabble(final KithkinRabble card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class ManaConfluence extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ManaConfluence(final ManaConfluence card) {
+    private ManaConfluence(final ManaConfluence card) {
         super(card);
     }
 

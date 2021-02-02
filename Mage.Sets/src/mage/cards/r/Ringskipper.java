@@ -32,7 +32,7 @@ public final class Ringskipper extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DoIfClashWonEffect(new ReturnToHandSourceEffect())));
     }
 
-    public Ringskipper(final Ringskipper card) {
+    private Ringskipper(final Ringskipper card) {
         super(card);
     }
 

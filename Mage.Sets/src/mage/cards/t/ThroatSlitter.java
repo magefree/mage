@@ -44,7 +44,7 @@ public final class ThroatSlitter extends CardImpl {
         this.addAbility(new ThroatSlitterTriggeredAbility());
     }
 
-    public ThroatSlitter(final ThroatSlitter card) {
+    private ThroatSlitter(final ThroatSlitter card) {
         super(card);
     }
 

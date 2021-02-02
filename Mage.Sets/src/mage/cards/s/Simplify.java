@@ -21,7 +21,7 @@ public final class Simplify extends CardImpl {
         this.getSpellAbility().addEffect(new SacrificeAllEffect(1, new FilterControlledEnchantmentPermanent("enchantment")));
     }
 
-    public Simplify(final Simplify card) {
+    private Simplify(final Simplify card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class WeatherseedTotem extends CardImpl {
         ));
     }
 
-    public WeatherseedTotem(final WeatherseedTotem card) {
+    private WeatherseedTotem(final WeatherseedTotem card) {
         super(card);
     }
 

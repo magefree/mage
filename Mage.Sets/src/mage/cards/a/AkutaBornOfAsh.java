@@ -48,7 +48,7 @@ public final class AkutaBornOfAsh extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AkutaBornOfAsh(final AkutaBornOfAsh card) {
+    private AkutaBornOfAsh(final AkutaBornOfAsh card) {
         super(card);
     }
 

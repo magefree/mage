@@ -30,7 +30,7 @@ public final class HarmonicConvergence extends CardImpl {
         this.getSpellAbility().addEffect(new HarmonicConvergenceEffect());
     }
 
-    public HarmonicConvergence(final HarmonicConvergence card) {
+    private HarmonicConvergence(final HarmonicConvergence card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class DwarvenLightsmith extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false)));
     }
 
-    public DwarvenLightsmith(final DwarvenLightsmith card) {
+    private DwarvenLightsmith(final DwarvenLightsmith card) {
         super(card);
     }
 

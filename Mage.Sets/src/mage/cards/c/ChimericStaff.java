@@ -24,7 +24,7 @@ public final class ChimericStaff extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new ChimericStaffEffect(), new ManaCostsImpl("{X}")));
     }
 
-    public ChimericStaff(final ChimericStaff card) {
+    private ChimericStaff(final ChimericStaff card) {
         super(card);
     }
 

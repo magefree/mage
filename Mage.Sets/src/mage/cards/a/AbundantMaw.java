@@ -37,7 +37,7 @@ public final class AbundantMaw extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AbundantMaw(final AbundantMaw card) {
+    private AbundantMaw(final AbundantMaw card) {
         super(card);
     }
 

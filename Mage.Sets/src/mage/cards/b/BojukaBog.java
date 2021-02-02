@@ -30,7 +30,7 @@ public final class BojukaBog extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public BojukaBog(final BojukaBog card) {
+    private BojukaBog(final BojukaBog card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class TrespassingSouleater extends CardImpl {
                 new PhyrexianManaCost(ColoredManaSymbol.U)));
     }
 
-    public TrespassingSouleater(final TrespassingSouleater card) {
+    private TrespassingSouleater(final TrespassingSouleater card) {
         super(card);
     }
 

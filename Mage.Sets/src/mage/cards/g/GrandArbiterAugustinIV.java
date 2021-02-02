@@ -45,7 +45,7 @@ public final class GrandArbiterAugustinIV extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(1, new FilterCard("Spells"), TargetController.OPPONENT)));
     }
 
-    public GrandArbiterAugustinIV(final GrandArbiterAugustinIV card) {
+    private GrandArbiterAugustinIV(final GrandArbiterAugustinIV card) {
         super(card);
     }
 

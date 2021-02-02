@@ -40,7 +40,7 @@ public final class Rouse extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Rouse(final Rouse card) {
+    private Rouse(final Rouse card) {
         super(card);
     }
 

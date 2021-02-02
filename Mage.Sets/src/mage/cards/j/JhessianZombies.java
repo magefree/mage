@@ -35,7 +35,7 @@ public final class JhessianZombies extends CardImpl {
         this.addAbility(new SwampcyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public JhessianZombies(final JhessianZombies card) {
+    private JhessianZombies(final JhessianZombies card) {
         super(card);
     }
 

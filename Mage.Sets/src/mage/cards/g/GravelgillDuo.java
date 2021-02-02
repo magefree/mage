@@ -45,7 +45,7 @@ public final class GravelgillDuo extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn), blackFilter, false));
     }
 
-    public GravelgillDuo(final GravelgillDuo card) {
+    private GravelgillDuo(final GravelgillDuo card) {
         super(card);
     }
 

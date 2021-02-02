@@ -40,7 +40,7 @@ public final class EmberwildeAugur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EmberwildeAugur(final EmberwildeAugur card) {
+    private EmberwildeAugur(final EmberwildeAugur card) {
         super(card);
     }
 

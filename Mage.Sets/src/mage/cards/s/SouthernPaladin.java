@@ -45,7 +45,7 @@ public final class SouthernPaladin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SouthernPaladin(final SouthernPaladin card) {
+    private SouthernPaladin(final SouthernPaladin card) {
         super(card);
     }
 

@@ -60,7 +60,7 @@ public final class RonaDiscipleOfGix extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RonaDiscipleOfGix(final RonaDiscipleOfGix card) {
+    private RonaDiscipleOfGix(final RonaDiscipleOfGix card) {
         super(card);
     }
 

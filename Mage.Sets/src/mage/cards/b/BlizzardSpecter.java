@@ -47,7 +47,7 @@ public final class BlizzardSpecter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlizzardSpecter(final BlizzardSpecter card) {
+    private BlizzardSpecter(final BlizzardSpecter card) {
         super(card);
     }
 

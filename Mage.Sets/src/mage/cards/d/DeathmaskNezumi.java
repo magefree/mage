@@ -42,7 +42,7 @@ public final class DeathmaskNezumi extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeathmaskNezumi(final DeathmaskNezumi card) {
+    private DeathmaskNezumi(final DeathmaskNezumi card) {
         super(card);
     }
 

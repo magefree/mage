@@ -33,7 +33,7 @@ public final class RakdosKeyrune extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new RakdosKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{B}{R}")));
     }
 
-    public RakdosKeyrune(final RakdosKeyrune card) {
+    private RakdosKeyrune(final RakdosKeyrune card) {
         super(card);
     }
 

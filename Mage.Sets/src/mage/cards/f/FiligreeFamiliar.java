@@ -31,7 +31,7 @@ public final class FiligreeFamiliar extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public FiligreeFamiliar(final FiligreeFamiliar card) {
+    private FiligreeFamiliar(final FiligreeFamiliar card) {
         super(card);
     }
 

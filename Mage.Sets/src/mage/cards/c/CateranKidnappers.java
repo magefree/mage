@@ -45,7 +45,7 @@ public final class CateranKidnappers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CateranKidnappers(final CateranKidnappers card) {
+    private CateranKidnappers(final CateranKidnappers card) {
         super(card);
     }
 

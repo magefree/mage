@@ -33,7 +33,7 @@ public final class Relearn extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
     }
 
-    public Relearn(final Relearn card) {
+    private Relearn(final Relearn card) {
         super(card);
     }
 

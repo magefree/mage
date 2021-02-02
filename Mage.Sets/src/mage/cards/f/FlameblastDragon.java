@@ -41,7 +41,7 @@ public final class FlameblastDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlameblastDragon(final FlameblastDragon card) {
+    private FlameblastDragon(final FlameblastDragon card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class Deadfall extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DeadfallEffect()));
     }
 
-    public Deadfall(final Deadfall card) {
+    private Deadfall(final Deadfall card) {
         super(card);
     }
 

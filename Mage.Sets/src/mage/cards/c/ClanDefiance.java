@@ -50,7 +50,7 @@ public final class ClanDefiance extends CardImpl {
 
     }
 
-    public ClanDefiance(final ClanDefiance card) {
+    private ClanDefiance(final ClanDefiance card) {
         super(card);
     }
 

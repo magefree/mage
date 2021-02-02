@@ -30,7 +30,7 @@ public final class CongregationAtDawn extends CardImpl {
         this.getSpellAbility().addEffect(new CongregationAtDawnEffect());
     }
 
-    public CongregationAtDawn(final CongregationAtDawn card) {
+    private CongregationAtDawn(final CongregationAtDawn card) {
         super(card);
     }
 

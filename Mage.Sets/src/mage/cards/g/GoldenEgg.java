@@ -45,7 +45,7 @@ public final class GoldenEgg extends CardImpl {
         this.addAbility(ability1);
     }
 
-    public GoldenEgg(final GoldenEgg card) {
+    private GoldenEgg(final GoldenEgg card) {
         super(card);
     }
 

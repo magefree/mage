@@ -49,7 +49,7 @@ public final class SkirkFireMarshal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkirkFireMarshal(final SkirkFireMarshal card) {
+    private SkirkFireMarshal(final SkirkFireMarshal card) {
         super(card);
     }
 

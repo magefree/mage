@@ -43,7 +43,7 @@ public final class SuspensionField extends CardImpl {
 
     }
 
-    public SuspensionField(final SuspensionField card) {
+    private SuspensionField(final SuspensionField card) {
         super(card);
     }
 

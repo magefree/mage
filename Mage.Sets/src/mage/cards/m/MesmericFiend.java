@@ -46,7 +46,7 @@ public final class MesmericFiend extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new MesmericFiendLeaveEffect(), false));
     }
     
-    public MesmericFiend(final MesmericFiend card) {
+    private MesmericFiend(final MesmericFiend card) {
         super(card);
     }
     

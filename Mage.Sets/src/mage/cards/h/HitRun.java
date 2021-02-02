@@ -41,7 +41,7 @@ public final class HitRun extends SplitCard {
 
     }
 
-    public HitRun(final HitRun card) {
+    private HitRun(final HitRun card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class MossfireValley extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MossfireValley(final MossfireValley card) {
+    private MossfireValley(final MossfireValley card) {
         super(card);
     }
 

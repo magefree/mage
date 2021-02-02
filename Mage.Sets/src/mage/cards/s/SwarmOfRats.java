@@ -37,7 +37,7 @@ public final class SwarmOfRats extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public SwarmOfRats(final SwarmOfRats card) {
+    private SwarmOfRats(final SwarmOfRats card) {
         super(card);
     }
 

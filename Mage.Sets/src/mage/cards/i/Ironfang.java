@@ -40,7 +40,7 @@ public final class Ironfang extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public Ironfang(final Ironfang card) {
+    private Ironfang(final Ironfang card) {
         super(card);
     }
 

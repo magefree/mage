@@ -28,7 +28,7 @@ public final class AshmouthHound extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new DamageTargetEffect(1, true, "that creature"), false));
     }
 
-    public AshmouthHound(final AshmouthHound card) {
+    private AshmouthHound(final AshmouthHound card) {
         super(card);
     }
 

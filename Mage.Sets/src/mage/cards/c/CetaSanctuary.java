@@ -28,7 +28,7 @@ public final class CetaSanctuary extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CetaSanctuary(final CetaSanctuary card) {
+    private CetaSanctuary(final CetaSanctuary card) {
         super(card);
     }
 

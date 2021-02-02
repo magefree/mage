@@ -48,7 +48,7 @@ public final class SkysovereignConsulFlagship extends CardImpl {
         this.addAbility(new CrewAbility(3));
     }
 
-    public SkysovereignConsulFlagship(final SkysovereignConsulFlagship card) {
+    private SkysovereignConsulFlagship(final SkysovereignConsulFlagship card) {
         super(card);
     }
 

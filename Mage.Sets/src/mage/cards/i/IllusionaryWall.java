@@ -36,7 +36,7 @@ public final class IllusionaryWall extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{U}")));
     }
 
-    public IllusionaryWall(final IllusionaryWall card) {
+    private IllusionaryWall(final IllusionaryWall card) {
         super(card);
     }
 

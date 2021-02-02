@@ -53,7 +53,7 @@ public final class InfectiousCurse extends CardImpl {
         this.addAbility(curseAbility);
     }
 
-    public InfectiousCurse(final InfectiousCurse card) {
+    private InfectiousCurse(final InfectiousCurse card) {
         super(card);
     }
 

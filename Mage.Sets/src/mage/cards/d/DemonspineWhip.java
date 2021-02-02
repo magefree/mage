@@ -37,7 +37,7 @@ public final class DemonspineWhip extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public DemonspineWhip(final DemonspineWhip card) {
+    private DemonspineWhip(final DemonspineWhip card) {
         super(card);
     }
 

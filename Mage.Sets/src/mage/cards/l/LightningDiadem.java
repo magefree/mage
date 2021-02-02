@@ -47,7 +47,7 @@ public final class LightningDiadem extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2,2,Duration.WhileOnBattlefield)));
     }
 
-    public LightningDiadem(final LightningDiadem card) {
+    private LightningDiadem(final LightningDiadem card) {
         super(card);
     }
 

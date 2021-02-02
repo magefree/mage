@@ -59,7 +59,7 @@ public final class StarDestroyer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StarDestroyer(final StarDestroyer card) {
+    private StarDestroyer(final StarDestroyer card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class ToxicNim extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public ToxicNim(final ToxicNim card) {
+    private ToxicNim(final ToxicNim card) {
         super(card);
     }
 

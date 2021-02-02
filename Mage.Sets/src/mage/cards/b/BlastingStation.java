@@ -37,7 +37,7 @@ public final class BlastingStation extends CardImpl {
 
     }
 
-    public BlastingStation(final BlastingStation card) {
+    private BlastingStation(final BlastingStation card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class TroveOfTemptation extends CardImpl {
         addAbility(new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new TreasureToken()), false));
     }
 
-    public TroveOfTemptation(final TroveOfTemptation card) {
+    private TroveOfTemptation(final TroveOfTemptation card) {
         super(card);
     }
 

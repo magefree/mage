@@ -30,7 +30,7 @@ public final class SonicAssault extends CardImpl {
         this.addAbility(new JumpStartAbility(this));
     }
 
-    public SonicAssault(final SonicAssault card) {
+    private SonicAssault(final SonicAssault card) {
         super(card);
     }
 

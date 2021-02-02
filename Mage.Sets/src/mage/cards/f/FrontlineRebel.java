@@ -27,7 +27,7 @@ public final class FrontlineRebel extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public FrontlineRebel(final FrontlineRebel card) {
+    private FrontlineRebel(final FrontlineRebel card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class AlabasterKirin extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public AlabasterKirin(final AlabasterKirin card) {
+    private AlabasterKirin(final AlabasterKirin card) {
         super(card);
     }
 

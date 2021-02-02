@@ -47,7 +47,7 @@ public final class SteadfastArmasaur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SteadfastArmasaur(final SteadfastArmasaur card) {
+    private SteadfastArmasaur(final SteadfastArmasaur card) {
         super(card);
     }
 

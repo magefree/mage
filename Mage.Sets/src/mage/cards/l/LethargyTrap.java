@@ -41,7 +41,7 @@ public final class LethargyTrap extends CardImpl {
 
     }
 
-    public LethargyTrap(final LethargyTrap card) {
+    private LethargyTrap(final LethargyTrap card) {
         super(card);
     }
 

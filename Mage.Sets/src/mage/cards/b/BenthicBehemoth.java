@@ -25,7 +25,7 @@ public final class BenthicBehemoth extends CardImpl {
         this.addAbility(new IslandwalkAbility());
     }
 
-    public BenthicBehemoth(final BenthicBehemoth card) {
+    private BenthicBehemoth(final BenthicBehemoth card) {
         super(card);
     }
 

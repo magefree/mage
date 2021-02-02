@@ -56,7 +56,7 @@ public final class Ovinomancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Ovinomancer(final Ovinomancer card) {
+    private Ovinomancer(final Ovinomancer card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class ArtificersIntuition extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArtificersIntuition(final ArtificersIntuition card) {
+    private ArtificersIntuition(final ArtificersIntuition card) {
         super(card);
     }
 

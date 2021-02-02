@@ -36,7 +36,7 @@ public final class AmbassadorLaquatus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AmbassadorLaquatus(final AmbassadorLaquatus card) {
+    private AmbassadorLaquatus(final AmbassadorLaquatus card) {
         super(card);
     }
 

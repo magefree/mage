@@ -41,7 +41,7 @@ public final class AnafenzaKinTreeSpirit extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new BolsterEffect(1), filter, false));
     }
 
-    public AnafenzaKinTreeSpirit(final AnafenzaKinTreeSpirit card) {
+    private AnafenzaKinTreeSpirit(final AnafenzaKinTreeSpirit card) {
         super(card);
     }
 

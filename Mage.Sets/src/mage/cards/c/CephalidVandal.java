@@ -39,7 +39,7 @@ public final class CephalidVandal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CephalidVandal(final CephalidVandal card) {
+    private CephalidVandal(final CephalidVandal card) {
         super(card);
     }
 

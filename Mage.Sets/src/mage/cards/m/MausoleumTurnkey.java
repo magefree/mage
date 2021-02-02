@@ -40,7 +40,7 @@ public final class MausoleumTurnkey extends CardImpl {
 
     }
 
-    public MausoleumTurnkey(final MausoleumTurnkey card) {
+    private MausoleumTurnkey(final MausoleumTurnkey card) {
         super(card);
     }
 

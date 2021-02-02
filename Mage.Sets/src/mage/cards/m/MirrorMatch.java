@@ -37,7 +37,7 @@ public final class MirrorMatch extends CardImpl {
 
     }
 
-    public MirrorMatch(final MirrorMatch card) {
+    private MirrorMatch(final MirrorMatch card) {
         super(card);
     }
 

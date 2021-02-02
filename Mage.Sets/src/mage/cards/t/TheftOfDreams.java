@@ -30,7 +30,7 @@ public final class TheftOfDreams extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public TheftOfDreams(final TheftOfDreams card) {
+    private TheftOfDreams(final TheftOfDreams card) {
         super(card);
     }
 

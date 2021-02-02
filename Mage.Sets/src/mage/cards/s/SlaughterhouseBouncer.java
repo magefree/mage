@@ -41,7 +41,7 @@ public final class SlaughterhouseBouncer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SlaughterhouseBouncer(final SlaughterhouseBouncer card) {
+    private SlaughterhouseBouncer(final SlaughterhouseBouncer card) {
         super(card);
     }
 

@@ -55,7 +55,7 @@ public final class GremlinMine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GremlinMine(final GremlinMine card) {
+    private GremlinMine(final GremlinMine card) {
         super(card);
     }
 

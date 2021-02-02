@@ -32,7 +32,7 @@ public final class PrecinctCaptain extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(new SoldierToken()), false));
     }
 
-    public PrecinctCaptain(final PrecinctCaptain card) {
+    private PrecinctCaptain(final PrecinctCaptain card) {
         super(card);
     }
 

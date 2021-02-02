@@ -40,7 +40,7 @@ public final class DiscipleOfGriselbrand extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DiscipleOfGriselbrand(final DiscipleOfGriselbrand card) {
+    private DiscipleOfGriselbrand(final DiscipleOfGriselbrand card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class NacatlOutlander extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
     }
 
-    public NacatlOutlander(final NacatlOutlander card) {
+    private NacatlOutlander(final NacatlOutlander card) {
         super(card);
     }
 

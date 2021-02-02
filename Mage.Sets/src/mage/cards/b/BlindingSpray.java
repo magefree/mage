@@ -34,7 +34,7 @@ public final class BlindingSpray extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public BlindingSpray(final BlindingSpray card) {
+    private BlindingSpray(final BlindingSpray card) {
         super(card);
     }
 

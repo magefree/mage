@@ -36,7 +36,7 @@ public final class BalefulAmmit extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BalefulAmmit(final BalefulAmmit card) {
+    private BalefulAmmit(final BalefulAmmit card) {
         super(card);
     }
 

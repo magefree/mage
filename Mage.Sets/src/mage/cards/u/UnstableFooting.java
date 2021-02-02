@@ -42,7 +42,7 @@ public final class UnstableFooting extends CardImpl {
 
     }
 
-    public UnstableFooting(final UnstableFooting card) {
+    private UnstableFooting(final UnstableFooting card) {
         super(card);
     }
 

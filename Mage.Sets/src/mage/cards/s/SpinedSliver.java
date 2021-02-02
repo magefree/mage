@@ -37,7 +37,7 @@ public final class SpinedSliver extends CardImpl {
         this.addAbility(new BecomesBlockedAllTriggeredAbility(effect, false, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS, true));
     }
 
-    public SpinedSliver(final SpinedSliver card) {
+    private SpinedSliver(final SpinedSliver card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class LoyalRetainers extends CardImpl {
 
     }
 
-    public LoyalRetainers(final LoyalRetainers card) {
+    private LoyalRetainers(final LoyalRetainers card) {
         super(card);
     }
 

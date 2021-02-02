@@ -37,7 +37,7 @@ public final class SeverTheBloodline extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{B}{B}"), TimingRule.SORCERY));
     }
 
-    public SeverTheBloodline(final SeverTheBloodline card) {
+    private SeverTheBloodline(final SeverTheBloodline card) {
         super(card);
     }
 

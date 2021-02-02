@@ -43,7 +43,7 @@ public final class HungryDragonsnake extends CardImpl {
                 "Whenever a creature enters the battlefield under an opponents's control, put a +1/+1 counter on {this}.", false));
     }
 
-    public HungryDragonsnake(final HungryDragonsnake card) {
+    private HungryDragonsnake(final HungryDragonsnake card) {
         super(card);
     }
 

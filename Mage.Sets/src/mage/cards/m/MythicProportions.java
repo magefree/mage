@@ -45,7 +45,7 @@ public final class MythicProportions extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MythicProportions(final MythicProportions card) {
+    private MythicProportions(final MythicProportions card) {
         super(card);
     }
 

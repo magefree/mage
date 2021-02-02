@@ -34,7 +34,7 @@ public final class GutterGrime extends CardImpl {
         this.addAbility(new GutterGrimeTriggeredAbility());
     }
 
-    public GutterGrime(final GutterGrime card) {
+    private GutterGrime(final GutterGrime card) {
         super(card);
     }
 

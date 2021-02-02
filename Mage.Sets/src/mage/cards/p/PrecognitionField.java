@@ -47,7 +47,7 @@ public final class PrecognitionField extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new PrecognitionFieldExileEffect(), new GenericManaCost(3)));
     }
 
-    public PrecognitionField(final PrecognitionField card) {
+    private PrecognitionField(final PrecognitionField card) {
         super(card);
     }
 

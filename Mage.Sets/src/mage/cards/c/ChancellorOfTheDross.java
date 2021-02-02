@@ -40,7 +40,7 @@ public final class ChancellorOfTheDross extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public ChancellorOfTheDross(final ChancellorOfTheDross card) {
+    private ChancellorOfTheDross(final ChancellorOfTheDross card) {
         super(card);
     }
 

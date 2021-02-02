@@ -50,7 +50,7 @@ public final class LandoCalrissian extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LandoCalrissian(final LandoCalrissian card) {
+    private LandoCalrissian(final LandoCalrissian card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class NomadOutpost extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public NomadOutpost(final NomadOutpost card) {
+    private NomadOutpost(final NomadOutpost card) {
         super(card);
     }
 

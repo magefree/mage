@@ -82,7 +82,7 @@ public final class InallaArchmageRitualist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InallaArchmageRitualist(final InallaArchmageRitualist card) {
+    private InallaArchmageRitualist(final InallaArchmageRitualist card) {
         super(card);
     }
 

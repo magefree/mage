@@ -40,7 +40,7 @@ public final class CopperLeafAngel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CopperLeafAngel(final CopperLeafAngel card) {
+    private CopperLeafAngel(final CopperLeafAngel card) {
         super(card);
     }
 

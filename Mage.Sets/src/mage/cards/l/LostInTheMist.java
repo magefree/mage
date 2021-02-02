@@ -32,7 +32,7 @@ public final class LostInTheMist extends CardImpl {
         this.getSpellAbility().addEffect(new LostInTheMistEffect());
     }
 
-    public LostInTheMist(final LostInTheMist card) {
+    private LostInTheMist(final LostInTheMist card) {
         super(card);
     }
 

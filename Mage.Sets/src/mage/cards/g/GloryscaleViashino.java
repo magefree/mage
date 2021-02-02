@@ -30,7 +30,7 @@ public final class GloryscaleViashino extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(3, 3, Duration.EndOfTurn), StaticFilters.FILTER_SPELL_A_MULTICOLORED, false));
     }
 
-    public GloryscaleViashino(final GloryscaleViashino card) {
+    private GloryscaleViashino(final GloryscaleViashino card) {
         super(card);
     }
 

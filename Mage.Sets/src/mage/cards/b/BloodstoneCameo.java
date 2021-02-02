@@ -22,7 +22,7 @@ public final class BloodstoneCameo extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public BloodstoneCameo(final BloodstoneCameo card) {
+    private BloodstoneCameo(final BloodstoneCameo card) {
         super(card);
     }
 

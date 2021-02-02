@@ -20,7 +20,7 @@ public final class SoulSummons extends CardImpl {
         this.getSpellAbility().addEffect(new ManifestEffect(1));
     }
 
-    public SoulSummons(final SoulSummons card) {
+    private SoulSummons(final SoulSummons card) {
         super(card);
     }
 

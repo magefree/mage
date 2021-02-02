@@ -43,7 +43,7 @@ public final class ContestedWarZone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ContestedWarZone(final ContestedWarZone card) {
+    private ContestedWarZone(final ContestedWarZone card) {
         super(card);
     }
 

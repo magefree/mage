@@ -45,7 +45,7 @@ public final class SeshiroTheAnointed extends CardImpl {
         this.addAbility(new SeshiroTheAnointedAbility());
     }
 
-    public SeshiroTheAnointed(final SeshiroTheAnointed card) {
+    private SeshiroTheAnointed(final SeshiroTheAnointed card) {
         super(card);
     }
 

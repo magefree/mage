@@ -37,7 +37,7 @@ public final class GavonyUnhallowed extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter));
     }
 
-    public GavonyUnhallowed(final GavonyUnhallowed card) {
+    private GavonyUnhallowed(final GavonyUnhallowed card) {
         super(card);
     }
 

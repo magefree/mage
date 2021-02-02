@@ -37,7 +37,7 @@ public final class AncientAmphitheater extends CardImpl {
         
     }
 
-    public AncientAmphitheater(final AncientAmphitheater card) {
+    private AncientAmphitheater(final AncientAmphitheater card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class Counterlash extends CardImpl {
         this.getSpellAbility().addEffect(new CounterlashEffect());
     }
 
-    public Counterlash(final Counterlash card) {
+    private Counterlash(final Counterlash card) {
         super(card);
     }
 

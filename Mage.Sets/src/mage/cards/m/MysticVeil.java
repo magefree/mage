@@ -45,7 +45,7 @@ public final class MysticVeil extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public MysticVeil(final MysticVeil card) {
+    private MysticVeil(final MysticVeil card) {
         super(card);
     }
 

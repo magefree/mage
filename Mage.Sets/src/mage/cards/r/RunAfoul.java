@@ -30,7 +30,7 @@ public final class RunAfoul extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public RunAfoul(final RunAfoul card) {
+    private RunAfoul(final RunAfoul card) {
         super(card);
     }
 

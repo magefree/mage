@@ -35,7 +35,7 @@ public final class HecklingFiends extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HecklingFiends(final HecklingFiends card) {
+    private HecklingFiends(final HecklingFiends card) {
         super(card);
     }
 

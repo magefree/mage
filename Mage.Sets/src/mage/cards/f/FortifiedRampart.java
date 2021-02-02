@@ -25,7 +25,7 @@ public final class FortifiedRampart extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public FortifiedRampart(final FortifiedRampart card) {
+    private FortifiedRampart(final FortifiedRampart card) {
         super(card);
     }
 

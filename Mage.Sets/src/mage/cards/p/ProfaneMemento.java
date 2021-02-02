@@ -27,7 +27,7 @@ public final class ProfaneMemento extends CardImpl {
         this.addAbility(new ProfaneMementoTriggeredAbility());
     }
 
-    public ProfaneMemento(final ProfaneMemento card) {
+    private ProfaneMemento(final ProfaneMemento card) {
         super(card);
     }
 

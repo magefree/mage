@@ -30,7 +30,7 @@ public final class RagingRegisaur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RagingRegisaur(final RagingRegisaur card) {
+    private RagingRegisaur(final RagingRegisaur card) {
         super(card);
     }
 

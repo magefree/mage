@@ -43,7 +43,7 @@ public final class RagMan extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RagMan(final RagMan card) {
+    private RagMan(final RagMan card) {
         super(card);
     }
 

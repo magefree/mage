@@ -33,7 +33,7 @@ public final class WildOnslaught extends CardImpl {
 
     }
 
-    public WildOnslaught(final WildOnslaught card) {
+    private WildOnslaught(final WildOnslaught card) {
         super(card);
     }
 

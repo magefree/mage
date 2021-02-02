@@ -30,7 +30,7 @@ public final class RazorGolem extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public RazorGolem(final RazorGolem card) {
+    private RazorGolem(final RazorGolem card) {
         super(card);
     }
 

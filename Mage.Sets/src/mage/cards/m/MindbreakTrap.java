@@ -36,7 +36,7 @@ public final class MindbreakTrap extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect("Exile any number of target spells", true));
     }
 
-    public MindbreakTrap(final MindbreakTrap card) {
+    private MindbreakTrap(final MindbreakTrap card) {
         super(card);
     }
 

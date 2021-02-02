@@ -45,7 +45,7 @@ public final class DevotedCropMate extends CardImpl {
 
     }
 
-    public DevotedCropMate(final DevotedCropMate card) {
+    private DevotedCropMate(final DevotedCropMate card) {
         super(card);
     }
 

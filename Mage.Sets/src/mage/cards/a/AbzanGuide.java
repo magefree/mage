@@ -31,7 +31,7 @@ public final class AbzanGuide extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{W}{B}{G}")));
     }
 
-    public AbzanGuide(final AbzanGuide card) {
+    private AbzanGuide(final AbzanGuide card) {
         super(card);
     }
 

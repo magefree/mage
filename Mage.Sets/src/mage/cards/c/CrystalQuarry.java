@@ -30,7 +30,7 @@ public final class CrystalQuarry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrystalQuarry(final CrystalQuarry card) {
+    private CrystalQuarry(final CrystalQuarry card) {
         super(card);
     }
 

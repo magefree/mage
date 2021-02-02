@@ -30,7 +30,7 @@ public final class StormcragElemental extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{R}{R}"), true));
     }
 
-    public StormcragElemental(final StormcragElemental card) {
+    private StormcragElemental(final StormcragElemental card) {
         super(card);
     }
 

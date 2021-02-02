@@ -45,7 +45,7 @@ public final class SadisticSacrament extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public SadisticSacrament(final SadisticSacrament card) {
+    private SadisticSacrament(final SadisticSacrament card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class TarSnare extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TarSnare(final TarSnare card) {
+    private TarSnare(final TarSnare card) {
         super(card);
     }
 

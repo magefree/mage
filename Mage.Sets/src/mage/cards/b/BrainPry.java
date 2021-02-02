@@ -30,7 +30,7 @@ public final class BrainPry extends CardImpl {
         this.getSpellAbility().addEffect(new BrainPryEffect());
     }
 
-    public BrainPry(final BrainPry card) {
+    private BrainPry(final BrainPry card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class MilitantAngel extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
     }
 
-    public MilitantAngel(final MilitantAngel card) {
+    private MilitantAngel(final MilitantAngel card) {
         super(card);
     }
 

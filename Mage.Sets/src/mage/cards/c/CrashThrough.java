@@ -28,7 +28,7 @@ public final class CrashThrough extends CardImpl {
         getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public CrashThrough(final CrashThrough card) {
+    private CrashThrough(final CrashThrough card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class Slaughterhorn extends CardImpl {
         this.addAbility(new BloodrushAbility("{G}", new BoostTargetEffect(3,2, Duration.EndOfTurn)));
     }
 
-    public Slaughterhorn(final Slaughterhorn card) {
+    private Slaughterhorn(final Slaughterhorn card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class DuergarAssailant extends CardImpl {
         
     }
 
-    public DuergarAssailant(final DuergarAssailant card) {
+    private DuergarAssailant(final DuergarAssailant card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class WrackWithMadness extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WrackWithMadness(final WrackWithMadness card) {
+    private WrackWithMadness(final WrackWithMadness card) {
         super(card);
     }
 

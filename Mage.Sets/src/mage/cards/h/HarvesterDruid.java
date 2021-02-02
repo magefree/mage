@@ -27,7 +27,7 @@ public final class HarvesterDruid extends CardImpl {
         this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.YOU));
     }
 
-    public HarvesterDruid(final HarvesterDruid card) {
+    private HarvesterDruid(final HarvesterDruid card) {
         super(card);
     }
 

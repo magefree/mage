@@ -36,7 +36,7 @@ public final class WaveOfTerror extends CardImpl {
         this.addAbility(new BeginningOfDrawTriggeredAbility(new WaveOfTerrorEffect(), TargetController.YOU, false));
     }
 
-    public WaveOfTerror(final WaveOfTerror card) {
+    private WaveOfTerror(final WaveOfTerror card) {
         super(card);
     }
 

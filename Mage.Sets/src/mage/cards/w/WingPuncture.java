@@ -38,7 +38,7 @@ public final class WingPuncture extends CardImpl {
         this.getSpellAbility().addEffect(new WingPunctureEffect());
     }
 
-    public WingPuncture(final WingPuncture card) {
+    private WingPuncture(final WingPuncture card) {
         super(card);
     }
 

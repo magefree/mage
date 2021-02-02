@@ -27,7 +27,7 @@ public final class EnlightenedManiac extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziHorrorToken()), false));
     }
 
-    public EnlightenedManiac(final EnlightenedManiac card) {
+    private EnlightenedManiac(final EnlightenedManiac card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class AllosaurusRider extends CardImpl {
 
     }
 
-    public AllosaurusRider(final AllosaurusRider card) {
+    private AllosaurusRider(final AllosaurusRider card) {
         super(card);
     }
 

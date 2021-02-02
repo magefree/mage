@@ -43,7 +43,7 @@ public final class ShapersOfNature extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShapersOfNature(final ShapersOfNature card) {
+    private ShapersOfNature(final ShapersOfNature card) {
         super(card);
     }
 

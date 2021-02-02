@@ -27,7 +27,7 @@ public final class SkyshroudBlessing extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public SkyshroudBlessing(final SkyshroudBlessing card) {
+    private SkyshroudBlessing(final SkyshroudBlessing card) {
         super(card);
     }
 

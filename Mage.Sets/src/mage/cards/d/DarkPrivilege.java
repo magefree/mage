@@ -50,7 +50,7 @@ public final class DarkPrivilege extends CardImpl {
 
     }
 
-    public DarkPrivilege(final DarkPrivilege card) {
+    private DarkPrivilege(final DarkPrivilege card) {
         super(card);
     }
 

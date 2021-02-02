@@ -28,7 +28,7 @@ public final class PropheticBolt extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(4), false, StaticValue.get(1), new FilterCard(), Zone.LIBRARY, false, false));
     }
 
-    public PropheticBolt(final PropheticBolt card) {
+    private PropheticBolt(final PropheticBolt card) {
         super(card);
     }
 

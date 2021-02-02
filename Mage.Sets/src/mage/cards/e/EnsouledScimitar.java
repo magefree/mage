@@ -37,7 +37,7 @@ public final class EnsouledScimitar extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{2}")));
     }
 
-    public EnsouledScimitar(final EnsouledScimitar card) {
+    private EnsouledScimitar(final EnsouledScimitar card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class SyndicOfTithes extends CardImpl {
         this.addAbility(new ExtortAbility());
     }
 
-    public SyndicOfTithes(final SyndicOfTithes card) {
+    private SyndicOfTithes(final SyndicOfTithes card) {
         super(card);
     }
 

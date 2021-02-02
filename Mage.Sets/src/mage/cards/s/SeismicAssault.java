@@ -30,7 +30,7 @@ public final class SeismicAssault extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeismicAssault(final SeismicAssault card) {
+    private SeismicAssault(final SeismicAssault card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class NightscapeFamiliar extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }
 
-    public NightscapeFamiliar(final NightscapeFamiliar card) {
+    private NightscapeFamiliar(final NightscapeFamiliar card) {
         super(card);
     }
 

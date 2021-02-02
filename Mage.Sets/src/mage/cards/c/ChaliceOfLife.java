@@ -34,7 +34,7 @@ public final class ChaliceOfLife extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChaliceOfLifeEffect(), new TapSourceCost()));
     }
 
-    public ChaliceOfLife(final ChaliceOfLife card) {
+    private ChaliceOfLife(final ChaliceOfLife card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class FlameRift extends CardImpl {
         this.getSpellAbility().addEffect(new DamagePlayersEffect(4, TargetController.ANY));
     }
 
-    public FlameRift(final FlameRift card) {
+    private FlameRift(final FlameRift card) {
         super(card);
     }
 

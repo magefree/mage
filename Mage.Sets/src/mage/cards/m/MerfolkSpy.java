@@ -36,7 +36,7 @@ public final class MerfolkSpy extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MerfolkSpyEffect(), false, true));
     }
 
-    public MerfolkSpy(final MerfolkSpy card) {
+    private MerfolkSpy(final MerfolkSpy card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class VillageBellRinger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(), rule), false));
     }
 
-    public VillageBellRinger(final VillageBellRinger card) {
+    private VillageBellRinger(final VillageBellRinger card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class ImperialEdict extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public ImperialEdict(final ImperialEdict card) {
+    private ImperialEdict(final ImperialEdict card) {
         super(card);
     }
 

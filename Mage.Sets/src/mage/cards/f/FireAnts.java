@@ -40,7 +40,7 @@ public final class FireAnts extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new TapSourceCost()));
     }
 
-    public FireAnts(final FireAnts card) {
+    private FireAnts(final FireAnts card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class JodahsAvenger extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new JodahsAvengerEffect(), new ManaCostsImpl("{0}")));
     }
 
-    public JodahsAvenger(final JodahsAvenger card) {
+    private JodahsAvenger(final JodahsAvenger card) {
         super(card);
     }
 

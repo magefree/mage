@@ -53,7 +53,7 @@ public final class TerritorialHellkite extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new AttackIfAbleTargetRandoOpponentSourceEffect(), TargetController.YOU, false), new AttackedLastCombatWatcher());
     }
 
-    public TerritorialHellkite(final TerritorialHellkite card) {
+    private TerritorialHellkite(final TerritorialHellkite card) {
         super(card);
     }
 

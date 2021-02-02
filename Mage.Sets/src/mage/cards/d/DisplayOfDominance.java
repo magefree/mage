@@ -55,7 +55,7 @@ public final class DisplayOfDominance extends CardImpl {
         this.getSpellAbility().getModes().addMode(mode);
     }
 
-    public DisplayOfDominance(final DisplayOfDominance card) {
+    private DisplayOfDominance(final DisplayOfDominance card) {
         super(card);
     }
 

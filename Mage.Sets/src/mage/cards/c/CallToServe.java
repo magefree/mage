@@ -55,7 +55,7 @@ public final class CallToServe extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CallToServe(final CallToServe card) {
+    private CallToServe(final CallToServe card) {
         super(card);
     }
 

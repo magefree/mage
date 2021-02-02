@@ -40,7 +40,7 @@ public final class DragonskullSummit extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public DragonskullSummit(final DragonskullSummit card) {
+    private DragonskullSummit(final DragonskullSummit card) {
         super(card);
     }
 

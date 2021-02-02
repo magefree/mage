@@ -26,7 +26,7 @@ public final class Bind extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Bind(final Bind card) {
+    private Bind(final Bind card) {
         super(card);
     }
 

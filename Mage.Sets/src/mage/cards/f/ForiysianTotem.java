@@ -42,7 +42,7 @@ public final class ForiysianTotem extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new CanBlockAdditionalCreatureEffect(1), new SourceMatchesFilterCondition(new FilterCreaturePermanent()), ruleText)));
     }
 
-    public ForiysianTotem(final ForiysianTotem card) {
+    private ForiysianTotem(final ForiysianTotem card) {
         super(card);
     }
 

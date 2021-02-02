@@ -32,7 +32,7 @@ public final class InsectileAberration extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public InsectileAberration(final InsectileAberration card) {
+    private InsectileAberration(final InsectileAberration card) {
         super(card);
     }
 

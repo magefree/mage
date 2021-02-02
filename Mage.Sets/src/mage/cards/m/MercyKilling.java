@@ -28,7 +28,7 @@ public final class MercyKilling extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public MercyKilling(final MercyKilling card) {
+    private MercyKilling(final MercyKilling card) {
         super(card);
     }
 

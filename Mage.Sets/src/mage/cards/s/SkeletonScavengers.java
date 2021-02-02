@@ -44,7 +44,7 @@ public final class SkeletonScavengers extends CardImpl {
 
     }
 
-    public SkeletonScavengers(final SkeletonScavengers card) {
+    private SkeletonScavengers(final SkeletonScavengers card) {
         super(card);
     }
 

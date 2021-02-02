@@ -31,7 +31,7 @@ public final class MassCalcify extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public MassCalcify(final MassCalcify card) {
+    private MassCalcify(final MassCalcify card) {
         super(card);
     }
 

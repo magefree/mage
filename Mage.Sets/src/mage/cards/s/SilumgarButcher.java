@@ -37,7 +37,7 @@ public final class SilumgarButcher extends CardImpl {
         
     }
 
-    public SilumgarButcher(final SilumgarButcher card) {
+    private SilumgarButcher(final SilumgarButcher card) {
         super(card);
     }
 

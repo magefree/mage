@@ -32,7 +32,7 @@ public final class TritonCavalry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TritonCavalry(final TritonCavalry card) {
+    private TritonCavalry(final TritonCavalry card) {
         super(card);
     }
 

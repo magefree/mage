@@ -32,7 +32,7 @@ public final class EmbalmedBrawler extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new LoseLifeSourceControllerEffect(new CountersSourceCount(CounterType.P1P1)), false));
     }
 
-    public EmbalmedBrawler(final EmbalmedBrawler card) {
+    private EmbalmedBrawler(final EmbalmedBrawler card) {
         super(card);
     }
 

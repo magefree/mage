@@ -48,7 +48,7 @@ public final class FullMoonsRise extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FullMoonsRiseEffect(filter), new SacrificeSourceCost()));
     }
 
-    public FullMoonsRise(final FullMoonsRise card) {
+    private FullMoonsRise(final FullMoonsRise card) {
         super(card);
     }
 

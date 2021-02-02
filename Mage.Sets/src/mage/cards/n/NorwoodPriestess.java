@@ -44,7 +44,7 @@ public final class NorwoodPriestess extends CardImpl {
         ));
     }
 
-    public NorwoodPriestess(final NorwoodPriestess card) {
+    private NorwoodPriestess(final NorwoodPriestess card) {
         super(card);
     }
 

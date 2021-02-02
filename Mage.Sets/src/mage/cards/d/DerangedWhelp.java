@@ -25,7 +25,7 @@ public final class DerangedWhelp extends CardImpl {
         this.addAbility(new MenaceAbility());
     }
 
-    public DerangedWhelp(final DerangedWhelp card) {
+    private DerangedWhelp(final DerangedWhelp card) {
         super(card);
     }
 

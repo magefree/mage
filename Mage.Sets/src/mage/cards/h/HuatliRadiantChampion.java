@@ -48,7 +48,7 @@ public final class HuatliRadiantChampion extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new HuatliRadiantChampionEmblem()), -8));
     }
 
-    public HuatliRadiantChampion(final HuatliRadiantChampion card) {
+    private HuatliRadiantChampion(final HuatliRadiantChampion card) {
         super(card);
     }
 

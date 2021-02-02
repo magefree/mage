@@ -56,7 +56,7 @@ public final class LilianaTheLastHope extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new LilianaTheLastHopeEmblem()), -7));
     }
 
-    public LilianaTheLastHope(final LilianaTheLastHope card) {
+    private LilianaTheLastHope(final LilianaTheLastHope card) {
         super(card);
     }
 

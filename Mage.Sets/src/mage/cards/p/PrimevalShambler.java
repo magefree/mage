@@ -32,7 +32,7 @@ public final class PrimevalShambler extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public PrimevalShambler(final PrimevalShambler card) {
+    private PrimevalShambler(final PrimevalShambler card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class StromkirkPatrol extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public StromkirkPatrol(final StromkirkPatrol card) {
+    private StromkirkPatrol(final StromkirkPatrol card) {
         super(card);
     }
 

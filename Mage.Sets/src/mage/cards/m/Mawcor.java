@@ -33,7 +33,7 @@ public final class Mawcor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Mawcor(final Mawcor card) {
+    private Mawcor(final Mawcor card) {
         super(card);
     }
 

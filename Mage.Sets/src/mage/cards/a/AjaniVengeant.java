@@ -58,7 +58,7 @@ public final class AjaniVengeant extends CardImpl {
 
     }
 
-    public AjaniVengeant(final AjaniVengeant card) {
+    private AjaniVengeant(final AjaniVengeant card) {
         super(card);
     }
 

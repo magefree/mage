@@ -40,7 +40,7 @@ public final class SultaiFlayer extends CardImpl {
 
     }
 
-    public SultaiFlayer(final SultaiFlayer card) {
+    private SultaiFlayer(final SultaiFlayer card) {
         super(card);
     }
 

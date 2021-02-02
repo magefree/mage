@@ -48,7 +48,7 @@ public final class WalkingDream extends CardImpl {
 
     }
 
-    public WalkingDream(final WalkingDream card) {
+    private WalkingDream(final WalkingDream card) {
         super(card);
     }
 

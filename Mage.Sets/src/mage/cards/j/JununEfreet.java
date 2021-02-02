@@ -31,7 +31,7 @@ public final class JununEfreet extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}{B}")), TargetController.YOU, false));
     }
 
-    public JununEfreet(final JununEfreet card) {
+    private JununEfreet(final JununEfreet card) {
         super(card);
     }
 

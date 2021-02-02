@@ -32,7 +32,7 @@ public final class HengeGuardian extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{2}")));
     }
 
-    public HengeGuardian(final HengeGuardian card) {
+    private HengeGuardian(final HengeGuardian card) {
         super(card);
     }
 

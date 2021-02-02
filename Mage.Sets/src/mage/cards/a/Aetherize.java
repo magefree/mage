@@ -22,7 +22,7 @@ public final class Aetherize extends CardImpl {
         ).setText("Return all attacking creatures to their owner's hand."));
     }
 
-    public Aetherize(final Aetherize card) {
+    private Aetherize(final Aetherize card) {
         super(card);
     }
 

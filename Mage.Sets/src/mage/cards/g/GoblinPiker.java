@@ -25,7 +25,7 @@ public final class GoblinPiker extends CardImpl {
 
     }
 
-    public GoblinPiker(final GoblinPiker card) {
+    private GoblinPiker(final GoblinPiker card) {
         super(card);
     }
 

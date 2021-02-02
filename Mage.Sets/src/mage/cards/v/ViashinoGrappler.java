@@ -28,7 +28,7 @@ public final class ViashinoGrappler extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
-    public ViashinoGrappler(final ViashinoGrappler card) {
+    private ViashinoGrappler(final ViashinoGrappler card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class PostmortemLunge extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(PostmortemLungeAdjuster.instance);
     }
 
-    public PostmortemLunge(final PostmortemLunge card) {
+    private PostmortemLunge(final PostmortemLunge card) {
         super(card);
     }
 

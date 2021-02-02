@@ -26,7 +26,7 @@ public final class Replenish extends CardImpl {
         this.getSpellAbility().addEffect(new ReplenishEffect());
     }
 
-    public Replenish(final Replenish card) {
+    private Replenish(final Replenish card) {
         super(card);
     }
 

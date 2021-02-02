@@ -28,7 +28,7 @@ public final class PillarOfFlame extends CardImpl {
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
-    public PillarOfFlame(final PillarOfFlame card) {
+    private PillarOfFlame(final PillarOfFlame card) {
         super(card);
     }
 

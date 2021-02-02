@@ -40,7 +40,7 @@ public final class PollenRemedy extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(PollenRemedyAdjuster.instance);
     }
 
-    public PollenRemedy(final PollenRemedy card) {
+    private PollenRemedy(final PollenRemedy card) {
         super(card);
     }
 

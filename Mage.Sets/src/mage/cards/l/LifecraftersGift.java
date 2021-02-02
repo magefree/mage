@@ -32,7 +32,7 @@ public final class LifecraftersGift extends CardImpl {
         getSpellAbility().addEffect(new LifecraftersGiftEffect());
     }
 
-    public LifecraftersGift(final LifecraftersGift card) {
+    private LifecraftersGift(final LifecraftersGift card) {
         super(card);
     }
 

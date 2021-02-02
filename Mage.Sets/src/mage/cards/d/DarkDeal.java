@@ -27,7 +27,7 @@ public final class DarkDeal extends CardImpl {
         this.getSpellAbility().addEffect(new DarkDealEffect());
     }
 
-    public DarkDeal(final DarkDeal card) {
+    private DarkDeal(final DarkDeal card) {
         super(card);
     }
 

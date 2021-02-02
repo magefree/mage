@@ -36,7 +36,7 @@ public final class SpikeshotGoblin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpikeshotGoblin(final SpikeshotGoblin card) {
+    private SpikeshotGoblin(final SpikeshotGoblin card) {
         super(card);
     }
 

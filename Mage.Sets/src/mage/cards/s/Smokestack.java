@@ -35,7 +35,7 @@ public final class Smokestack extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SmokestackEffect(), TargetController.ANY, false));
     }
 
-    public Smokestack(final Smokestack card) {
+    private Smokestack(final Smokestack card) {
         super(card);
     }
 

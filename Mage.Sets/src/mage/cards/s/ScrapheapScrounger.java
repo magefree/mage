@@ -46,7 +46,7 @@ public final class ScrapheapScrounger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScrapheapScrounger(final ScrapheapScrounger card) {
+    private ScrapheapScrounger(final ScrapheapScrounger card) {
         super(card);
     }
 

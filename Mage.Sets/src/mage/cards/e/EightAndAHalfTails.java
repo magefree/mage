@@ -49,7 +49,7 @@ public final class EightAndAHalfTails extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EightAndAHalfTails(final EightAndAHalfTails card) {
+    private EightAndAHalfTails(final EightAndAHalfTails card) {
         super(card);
     }
 

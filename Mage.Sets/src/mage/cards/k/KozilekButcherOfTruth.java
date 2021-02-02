@@ -37,7 +37,7 @@ public final class KozilekButcherOfTruth extends CardImpl {
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibraryGraveOfSourceOwnerEffect(), false));
     }
 
-    public KozilekButcherOfTruth(final KozilekButcherOfTruth card) {
+    private KozilekButcherOfTruth(final KozilekButcherOfTruth card) {
         super(card);
     }
 

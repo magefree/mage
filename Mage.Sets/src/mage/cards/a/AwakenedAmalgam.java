@@ -37,7 +37,7 @@ public final class AwakenedAmalgam extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value, Duration.EndOfGame)));
     }
 
-    public AwakenedAmalgam(final AwakenedAmalgam card) {
+    private AwakenedAmalgam(final AwakenedAmalgam card) {
         super(card);
     }
 

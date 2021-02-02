@@ -29,7 +29,7 @@ public final class OrbOfDreams extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OrbOfDreamsEffect()));
     }
 
-    public OrbOfDreams(final OrbOfDreams card) {
+    private OrbOfDreams(final OrbOfDreams card) {
         super(card);
     }
 

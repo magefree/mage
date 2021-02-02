@@ -38,7 +38,7 @@ public final class DimirCluestone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DimirCluestone(final DimirCluestone card) {
+    private DimirCluestone(final DimirCluestone card) {
         super(card);
     }
 

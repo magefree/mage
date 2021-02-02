@@ -36,7 +36,7 @@ public final class CausticCaterpillar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CausticCaterpillar(final CausticCaterpillar card) {
+    private CausticCaterpillar(final CausticCaterpillar card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class ShamanOfForgottenWays extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShamanOfForgottenWays(final ShamanOfForgottenWays card) {
+    private ShamanOfForgottenWays(final ShamanOfForgottenWays card) {
         super(card);
     }
 

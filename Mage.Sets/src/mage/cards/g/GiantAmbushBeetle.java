@@ -39,7 +39,7 @@ public final class GiantAmbushBeetle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GiantAmbushBeetle(final GiantAmbushBeetle card) {
+    private GiantAmbushBeetle(final GiantAmbushBeetle card) {
         super(card);
     }
 

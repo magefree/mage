@@ -33,7 +33,7 @@ public final class MistformMutant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MistformMutant(final MistformMutant card) {
+    private MistformMutant(final MistformMutant card) {
         super(card);
     }
 

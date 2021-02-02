@@ -39,7 +39,7 @@ public final class PoliticalTrickery extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public PoliticalTrickery(final PoliticalTrickery card) {
+    private PoliticalTrickery(final PoliticalTrickery card) {
         super(card);
     }
 

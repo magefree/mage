@@ -38,7 +38,7 @@ public final class SadisticHypnotist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SadisticHypnotist(final SadisticHypnotist card) {
+    private SadisticHypnotist(final SadisticHypnotist card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class ThelonsChant extends CardImpl {
                 "Whenever a player puts a Swamp onto the battlefield, {this} deals 3 damage to that player unless they put a -1/-1 counter on a creature they control."));
     }
 
-    public ThelonsChant(final ThelonsChant card) {
+    private ThelonsChant(final ThelonsChant card) {
         super(card);
     }
 

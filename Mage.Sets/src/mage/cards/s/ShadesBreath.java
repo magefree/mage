@@ -38,7 +38,7 @@ public final class ShadesBreath extends CardImpl {
         );
     }
 
-    public ShadesBreath(final ShadesBreath card) {
+    private ShadesBreath(final ShadesBreath card) {
         super(card);
     }
 

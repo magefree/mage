@@ -35,7 +35,7 @@ public final class UndeadLeotau extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{2}{B}")));
     }
 
-    public UndeadLeotau(final UndeadLeotau card) {
+    private UndeadLeotau(final UndeadLeotau card) {
         super(card);
     }
 

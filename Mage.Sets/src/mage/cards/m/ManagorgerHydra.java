@@ -31,7 +31,7 @@ public final class ManagorgerHydra extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public ManagorgerHydra(final ManagorgerHydra card) {
+    private ManagorgerHydra(final ManagorgerHydra card) {
         super(card);
     }
 

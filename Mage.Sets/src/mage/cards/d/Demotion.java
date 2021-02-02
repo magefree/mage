@@ -36,7 +36,7 @@ public final class Demotion extends CardImpl {
               
     }
 
-    public Demotion(final Demotion card) {
+    private Demotion(final Demotion card) {
         super(card);
     }
 

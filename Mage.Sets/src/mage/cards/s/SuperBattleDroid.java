@@ -25,7 +25,7 @@ public final class SuperBattleDroid extends CardImpl {
         this.addAbility(new RepairAbility(2));
     }
 
-    public SuperBattleDroid(final SuperBattleDroid card) {
+    private SuperBattleDroid(final SuperBattleDroid card) {
         super(card);
     }
 

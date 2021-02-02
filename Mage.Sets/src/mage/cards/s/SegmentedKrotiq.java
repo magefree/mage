@@ -26,7 +26,7 @@ public final class SegmentedKrotiq extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{6}{G}"), true));
     }
 
-    public SegmentedKrotiq(final SegmentedKrotiq card) {
+    private SegmentedKrotiq(final SegmentedKrotiq card) {
         super(card);
     }
 

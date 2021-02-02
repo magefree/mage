@@ -46,7 +46,7 @@ public final class ThornscapeApprentice extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public ThornscapeApprentice(final ThornscapeApprentice card) {
+    private ThornscapeApprentice(final ThornscapeApprentice card) {
         super(card);
     }
 

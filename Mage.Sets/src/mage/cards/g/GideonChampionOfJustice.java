@@ -59,7 +59,7 @@ public final class GideonChampionOfJustice extends CardImpl {
 
     }
 
-    public GideonChampionOfJustice(final GideonChampionOfJustice card) {
+    private GideonChampionOfJustice(final GideonChampionOfJustice card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class MasterOfPredicaments extends CardImpl {
                 new MasterOfPredicamentsEffect(), false, true));
     }
 
-    public MasterOfPredicaments(final MasterOfPredicaments card) {
+    private MasterOfPredicaments(final MasterOfPredicaments card) {
         super(card);
     }
 

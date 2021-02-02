@@ -35,7 +35,7 @@ public final class TurbulentDreams extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(TurbulentDreamsAdjuster.instance);
     }
 
-    public TurbulentDreams(final TurbulentDreams card) {
+    private TurbulentDreams(final TurbulentDreams card) {
         super(card);
     }
 

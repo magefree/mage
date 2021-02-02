@@ -26,7 +26,7 @@ public final class SibsigIcebreakers extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect(1, false), false));
     }
 
-    public SibsigIcebreakers(final SibsigIcebreakers card) {
+    private SibsigIcebreakers(final SibsigIcebreakers card) {
         super(card);
     }
 

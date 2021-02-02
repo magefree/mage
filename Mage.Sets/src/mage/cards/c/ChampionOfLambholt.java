@@ -45,7 +45,7 @@ public final class ChampionOfLambholt extends CardImpl {
 
     }
 
-    public ChampionOfLambholt(final ChampionOfLambholt card) {
+    private ChampionOfLambholt(final ChampionOfLambholt card) {
         super(card);
     }
 

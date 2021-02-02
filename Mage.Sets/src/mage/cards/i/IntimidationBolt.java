@@ -29,7 +29,7 @@ public final class IntimidationBolt extends CardImpl {
 
     }
 
-    public IntimidationBolt(final IntimidationBolt card) {
+    private IntimidationBolt(final IntimidationBolt card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class DefilerOfSouls extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DefilerOfSoulsEffect(), TargetController.ANY, false, true));
     }
 
-    public DefilerOfSouls(final DefilerOfSouls card) {
+    private DefilerOfSouls(final DefilerOfSouls card) {
         super(card);
     }
 

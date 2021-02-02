@@ -57,7 +57,7 @@ public final class PriestOfTheWakeningSun extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public PriestOfTheWakeningSun(final PriestOfTheWakeningSun card) {
+    private PriestOfTheWakeningSun(final PriestOfTheWakeningSun card) {
         super(card);
     }
 

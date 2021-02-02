@@ -38,7 +38,7 @@ public final class FlowstoneEmbrace extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, -2, Duration.EndOfTurn), new TapSourceCost()));
     }
 
-    public FlowstoneEmbrace(final FlowstoneEmbrace card) {
+    private FlowstoneEmbrace(final FlowstoneEmbrace card) {
         super(card);
     }
 

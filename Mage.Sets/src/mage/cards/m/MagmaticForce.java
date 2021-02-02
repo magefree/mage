@@ -33,7 +33,7 @@ public final class MagmaticForce extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagmaticForce(final MagmaticForce card) {
+    private MagmaticForce(final MagmaticForce card) {
         super(card);
     }
 

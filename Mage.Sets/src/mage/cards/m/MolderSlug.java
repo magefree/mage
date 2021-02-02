@@ -35,7 +35,7 @@ public final class MolderSlug extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MolderSlug(final MolderSlug card) {
+    private MolderSlug(final MolderSlug card) {
         super(card);
     }
 

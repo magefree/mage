@@ -28,7 +28,7 @@ public final class PuppetsVerdict extends CardImpl {
         this.getSpellAbility().addEffect(new PuppetsVerdictEffect());
     }
 
-    public PuppetsVerdict(final PuppetsVerdict card) {
+    private PuppetsVerdict(final PuppetsVerdict card) {
         super(card);
     }
 

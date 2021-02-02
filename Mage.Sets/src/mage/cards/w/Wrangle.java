@@ -42,7 +42,7 @@ public final class Wrangle extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public Wrangle(final Wrangle card) {
+    private Wrangle(final Wrangle card) {
         super(card);
     }
 

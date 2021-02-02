@@ -48,7 +48,7 @@ public final class UrborgStalker extends CardImpl {
         ));
     }
 
-    public UrborgStalker(final UrborgStalker card) {
+    private UrborgStalker(final UrborgStalker card) {
         super(card);
     }
 

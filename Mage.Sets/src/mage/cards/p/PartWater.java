@@ -31,7 +31,7 @@ public final class PartWater extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(PartWaterAdjuster.instance);
     }
 
-    public PartWater(final PartWater card) {
+    private PartWater(final PartWater card) {
         super(card);
     }
 

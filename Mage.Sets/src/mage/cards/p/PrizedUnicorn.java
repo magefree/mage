@@ -28,7 +28,7 @@ public final class PrizedUnicorn extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect()));
     }
 
-    public PrizedUnicorn(final PrizedUnicorn card) {
+    private PrizedUnicorn(final PrizedUnicorn card) {
         super(card);
     }
 

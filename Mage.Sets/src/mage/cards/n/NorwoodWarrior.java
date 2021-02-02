@@ -31,7 +31,7 @@ public final class NorwoodWarrior extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
-    public NorwoodWarrior(final NorwoodWarrior card) {
+    private NorwoodWarrior(final NorwoodWarrior card) {
         super(card);
     }
 

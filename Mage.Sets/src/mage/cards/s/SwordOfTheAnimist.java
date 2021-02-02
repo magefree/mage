@@ -40,7 +40,7 @@ public final class SwordOfTheAnimist extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public SwordOfTheAnimist(final SwordOfTheAnimist card) {
+    private SwordOfTheAnimist(final SwordOfTheAnimist card) {
         super(card);
     }
 

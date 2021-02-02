@@ -40,7 +40,7 @@ public final class CallForBlood extends CardImpl {
 
     }
 
-    public CallForBlood(final CallForBlood card) {
+    private CallForBlood(final CallForBlood card) {
         super(card);
     }
 

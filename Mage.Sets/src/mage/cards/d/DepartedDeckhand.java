@@ -68,7 +68,7 @@ public final class DepartedDeckhand extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DepartedDeckhand(final DepartedDeckhand card) {
+    private DepartedDeckhand(final DepartedDeckhand card) {
         super(card);
     }
 

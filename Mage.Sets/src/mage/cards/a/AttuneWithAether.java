@@ -28,7 +28,7 @@ public final class AttuneWithAether extends CardImpl {
         this.getSpellAbility().addEffect(new GetEnergyCountersControllerEffect(2));
     }
 
-    public AttuneWithAether(final AttuneWithAether card) {
+    private AttuneWithAether(final AttuneWithAether card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class TezzeretTheSchemer extends CardImpl {
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new TezzeretTheSchemerEmblem()), -7));
     }
 
-    public TezzeretTheSchemer(final TezzeretTheSchemer card) {
+    private TezzeretTheSchemer(final TezzeretTheSchemer card) {
         super(card);
     }
 

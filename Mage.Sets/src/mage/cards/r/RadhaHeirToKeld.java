@@ -36,7 +36,7 @@ public final class RadhaHeirToKeld extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public RadhaHeirToKeld(final RadhaHeirToKeld card) {
+    private RadhaHeirToKeld(final RadhaHeirToKeld card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class SeekerOfTheWay extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), filter, false));
     }
 
-    public SeekerOfTheWay(final SeekerOfTheWay card) {
+    private SeekerOfTheWay(final SeekerOfTheWay card) {
         super(card);
     }
 

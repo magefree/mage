@@ -38,7 +38,7 @@ public final class DustBowl extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DustBowl(final DustBowl card) {
+    private DustBowl(final DustBowl card) {
         super(card);
     }
 

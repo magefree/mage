@@ -25,7 +25,7 @@ public final class DestructiveFlow extends CardImpl {
 
     }
 
-    public DestructiveFlow(final DestructiveFlow card) {
+    private DestructiveFlow(final DestructiveFlow card) {
         super(card);
     }
 

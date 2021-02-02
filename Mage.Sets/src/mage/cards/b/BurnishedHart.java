@@ -39,7 +39,7 @@ public final class BurnishedHart extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BurnishedHart(final BurnishedHart card) {
+    private BurnishedHart(final BurnishedHart card) {
         super(card);
     }
 

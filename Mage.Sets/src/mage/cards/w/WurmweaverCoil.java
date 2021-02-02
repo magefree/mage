@@ -52,7 +52,7 @@ public final class WurmweaverCoil extends CardImpl {
         this.addAbility(activatedAbility);
     }
 
-    public WurmweaverCoil(final WurmweaverCoil card) {
+    private WurmweaverCoil(final WurmweaverCoil card) {
         super(card);
     }
 

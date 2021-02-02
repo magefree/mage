@@ -38,7 +38,7 @@ public final class ThranWeaponry extends CardImpl {
         
     }
 
-    public ThranWeaponry(final ThranWeaponry card) {
+    private ThranWeaponry(final ThranWeaponry card) {
         super(card);
     }
 

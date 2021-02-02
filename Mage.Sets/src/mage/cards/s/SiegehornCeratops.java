@@ -30,7 +30,7 @@ public final class SiegehornCeratops extends CardImpl {
                         .setText("put two +1/+1 counter on it"), false, true));
     }
 
-    public SiegehornCeratops(final SiegehornCeratops card) {
+    private SiegehornCeratops(final SiegehornCeratops card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class ChildOfThorns extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChildOfThorns(final ChildOfThorns card) {
+    private ChildOfThorns(final ChildOfThorns card) {
         super(card);
     }
 

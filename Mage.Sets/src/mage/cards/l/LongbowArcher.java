@@ -30,7 +30,7 @@ public final class LongbowArcher extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public LongbowArcher(final LongbowArcher card) {
+    private LongbowArcher(final LongbowArcher card) {
         super(card);
     }
 

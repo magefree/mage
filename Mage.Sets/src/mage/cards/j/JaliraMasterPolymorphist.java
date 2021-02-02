@@ -50,7 +50,7 @@ public final class JaliraMasterPolymorphist extends CardImpl {
 
     }
 
-    public JaliraMasterPolymorphist(final JaliraMasterPolymorphist card) {
+    private JaliraMasterPolymorphist(final JaliraMasterPolymorphist card) {
         super(card);
     }
 

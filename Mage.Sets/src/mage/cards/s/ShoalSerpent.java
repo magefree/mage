@@ -34,7 +34,7 @@ public final class ShoalSerpent extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShoalSerpent(final ShoalSerpent card) {
+    private ShoalSerpent(final ShoalSerpent card) {
         super(card);
     }
 

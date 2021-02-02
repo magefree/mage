@@ -38,7 +38,7 @@ public final class ThunderbreakRegent extends CardImpl {
         this.addAbility(new ThunderbreakRegentTriggeredAbility(new DamageTargetEffect(3)));
     }
 
-    public ThunderbreakRegent(final ThunderbreakRegent card) {
+    private ThunderbreakRegent(final ThunderbreakRegent card) {
         super(card);
     }
 

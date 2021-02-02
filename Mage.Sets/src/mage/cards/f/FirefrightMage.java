@@ -53,7 +53,7 @@ public final class FirefrightMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FirefrightMage(final FirefrightMage card) {
+    private FirefrightMage(final FirefrightMage card) {
         super(card);
     }
 

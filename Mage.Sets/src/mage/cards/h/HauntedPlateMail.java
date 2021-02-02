@@ -46,7 +46,7 @@ public final class HauntedPlateMail extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{4}")));
     }
 
-    public HauntedPlateMail(final HauntedPlateMail card) {
+    private HauntedPlateMail(final HauntedPlateMail card) {
         super(card);
     }
 

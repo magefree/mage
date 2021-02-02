@@ -43,7 +43,7 @@ public final class ChorusOfTheConclave extends CardImpl {
 
     }
 
-    public ChorusOfTheConclave(final ChorusOfTheConclave card) {
+    private ChorusOfTheConclave(final ChorusOfTheConclave card) {
         super(card);
     }
 

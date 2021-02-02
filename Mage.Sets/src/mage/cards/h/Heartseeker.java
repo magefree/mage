@@ -40,7 +40,7 @@ public final class Heartseeker extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(5)));
     }
 
-    public Heartseeker(final Heartseeker card) {
+    private Heartseeker(final Heartseeker card) {
         super(card);
     }
 

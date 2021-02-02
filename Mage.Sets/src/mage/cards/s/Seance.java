@@ -38,7 +38,7 @@ public final class Seance extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Seance(final Seance card) {
+    private Seance(final Seance card) {
         super(card);
     }
 

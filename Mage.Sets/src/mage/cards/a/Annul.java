@@ -31,7 +31,7 @@ public final class Annul extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public Annul(final Annul card) {
+    private Annul(final Annul card) {
         super(card);
     }
 

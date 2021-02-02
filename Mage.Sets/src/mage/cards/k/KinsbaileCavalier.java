@@ -36,7 +36,7 @@ public final class KinsbaileCavalier extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public KinsbaileCavalier(final KinsbaileCavalier card) {
+    private KinsbaileCavalier(final KinsbaileCavalier card) {
         super(card);
     }
 

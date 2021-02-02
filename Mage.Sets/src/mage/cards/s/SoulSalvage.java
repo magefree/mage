@@ -23,7 +23,7 @@ public final class SoulSalvage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 2, new FilterCreatureCard("creature cards from your graveyard")));
     }
 
-    public SoulSalvage(final SoulSalvage card) {
+    private SoulSalvage(final SoulSalvage card) {
         super(card);
     }
 

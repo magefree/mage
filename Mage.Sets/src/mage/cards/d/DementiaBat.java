@@ -35,7 +35,7 @@ public final class DementiaBat extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DementiaBat(final DementiaBat card) {
+    private DementiaBat(final DementiaBat card) {
         super(card);
     }
 

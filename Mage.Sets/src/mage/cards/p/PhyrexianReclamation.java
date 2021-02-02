@@ -30,7 +30,7 @@ public final class PhyrexianReclamation extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianReclamation(final PhyrexianReclamation card) {
+    private PhyrexianReclamation(final PhyrexianReclamation card) {
         super(card);
     }
 

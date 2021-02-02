@@ -27,7 +27,7 @@ public final class Attunement extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Attunement(final Attunement card) {
+    private Attunement(final Attunement card) {
         super(card);
     }
 

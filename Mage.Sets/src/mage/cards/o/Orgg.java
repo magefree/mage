@@ -50,7 +50,7 @@ public final class Orgg extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effectBlock));
     }
 
-    public Orgg(final Orgg card) {
+    private Orgg(final Orgg card) {
         super(card);
     }
 

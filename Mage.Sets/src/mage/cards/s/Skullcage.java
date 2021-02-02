@@ -26,7 +26,7 @@ public final class Skullcage extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SkullcageEffect(), TargetController.OPPONENT, false, true));
     }
 
-    public Skullcage(final Skullcage card) {
+    private Skullcage(final Skullcage card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public final class FarrelsMantle extends CardImpl {
         
     }
 
-    public FarrelsMantle(final FarrelsMantle card) {
+    private FarrelsMantle(final FarrelsMantle card) {
         super(card);
     }
 

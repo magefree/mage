@@ -46,7 +46,7 @@ public final class Necroplasm extends CardImpl {
         this.addAbility(new DredgeAbility(2));
     }
 
-    public Necroplasm(final Necroplasm card) {
+    private Necroplasm(final Necroplasm card) {
         super(card);
     }
 

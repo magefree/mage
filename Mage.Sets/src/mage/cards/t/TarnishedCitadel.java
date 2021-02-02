@@ -30,7 +30,7 @@ public final class TarnishedCitadel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TarnishedCitadel(final TarnishedCitadel card) {
+    private TarnishedCitadel(final TarnishedCitadel card) {
         super(card);
     }
 

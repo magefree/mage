@@ -46,7 +46,7 @@ public final class ImmortalCoil extends CardImpl {
         this.addAbility(new ImmortalCoilAbility());
     }
 
-    public ImmortalCoil(final ImmortalCoil card) {
+    private ImmortalCoil(final ImmortalCoil card) {
         super(card);
     }
 

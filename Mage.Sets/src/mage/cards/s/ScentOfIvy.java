@@ -31,7 +31,7 @@ public final class ScentOfIvy extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ScentOfIvy(final ScentOfIvy card) {
+    private ScentOfIvy(final ScentOfIvy card) {
         super(card);
     }
 

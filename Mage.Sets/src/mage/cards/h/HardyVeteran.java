@@ -40,7 +40,7 @@ public final class HardyVeteran extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HardyVeteran(final HardyVeteran card) {
+    private HardyVeteran(final HardyVeteran card) {
         super(card);
     }
 

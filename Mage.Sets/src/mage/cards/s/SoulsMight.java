@@ -28,7 +28,7 @@ public final class SoulsMight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public SoulsMight(final SoulsMight card) {
+    private SoulsMight(final SoulsMight card) {
         super(card);
     }
 

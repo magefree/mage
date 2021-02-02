@@ -36,7 +36,7 @@ public final class SelectiveSnare extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(SelectiveSnareAdjuster.instance);
     }
 
-    public SelectiveSnare(final SelectiveSnare card) {
+    private SelectiveSnare(final SelectiveSnare card) {
         super(card);
     }
 

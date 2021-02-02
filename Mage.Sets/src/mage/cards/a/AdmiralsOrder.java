@@ -33,7 +33,7 @@ public final class AdmiralsOrder extends CardImpl {
         this.getSpellAbility().addHint(RaidHint.instance);
     }
 
-    public AdmiralsOrder(final AdmiralsOrder card) {
+    private AdmiralsOrder(final AdmiralsOrder card) {
         super(card);
     }
 

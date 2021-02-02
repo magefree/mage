@@ -34,7 +34,7 @@ public final class ElvesOfDeepShadow extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElvesOfDeepShadow(final ElvesOfDeepShadow card) {
+    private ElvesOfDeepShadow(final ElvesOfDeepShadow card) {
         super(card);
     }
 

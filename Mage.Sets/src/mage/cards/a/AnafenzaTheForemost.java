@@ -55,7 +55,7 @@ public final class AnafenzaTheForemost extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnafenzaTheForemostEffect()));
     }
 
-    public AnafenzaTheForemost(final AnafenzaTheForemost card) {
+    private AnafenzaTheForemost(final AnafenzaTheForemost card) {
         super(card);
     }
 

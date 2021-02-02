@@ -53,7 +53,7 @@ public final class HazoretTheFervent extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HazoretTheFervent(final HazoretTheFervent card) {
+    private HazoretTheFervent(final HazoretTheFervent card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class Terraformer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new TerraformerEffect(), new GenericManaCost(1)));
     }
 
-    public Terraformer(final Terraformer card) {
+    private Terraformer(final Terraformer card) {
         super(card);
     }
 

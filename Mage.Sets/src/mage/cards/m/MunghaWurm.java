@@ -34,7 +34,7 @@ public final class MunghaWurm extends CardImpl {
          this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MunghaWurmEffect()));
     }
 
-    public MunghaWurm(final MunghaWurm card) {
+    private MunghaWurm(final MunghaWurm card) {
         super(card);
     }
 

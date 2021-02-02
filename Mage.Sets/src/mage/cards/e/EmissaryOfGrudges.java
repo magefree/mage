@@ -52,7 +52,7 @@ public class EmissaryOfGrudges extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EmissaryOfGrudges(final EmissaryOfGrudges card) {
+    private EmissaryOfGrudges(final EmissaryOfGrudges card) {
         super(card);
     }
 

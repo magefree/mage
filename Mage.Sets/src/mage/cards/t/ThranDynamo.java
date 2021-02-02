@@ -24,7 +24,7 @@ public final class ThranDynamo extends CardImpl {
         
     }
 
-    public ThranDynamo(final ThranDynamo card) {
+    private ThranDynamo(final ThranDynamo card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class EyeOfSingularity extends CardImpl {
         this.addAbility(new EyeOfSingularityTriggeredAbility());
     }
 
-    public EyeOfSingularity(final EyeOfSingularity card) {
+    private EyeOfSingularity(final EyeOfSingularity card) {
         super(card);
     }
 

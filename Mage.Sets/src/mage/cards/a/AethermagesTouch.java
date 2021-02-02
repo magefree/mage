@@ -31,7 +31,7 @@ public final class AethermagesTouch extends CardImpl {
         this.getSpellAbility().addEffect(new AethermagesTouchEffect());
     }
 
-    public AethermagesTouch(final AethermagesTouch card) {
+    private AethermagesTouch(final AethermagesTouch card) {
         super(card);
     }
 

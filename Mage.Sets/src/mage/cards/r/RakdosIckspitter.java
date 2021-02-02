@@ -37,7 +37,7 @@ public final class RakdosIckspitter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RakdosIckspitter(final RakdosIckspitter card) {
+    private RakdosIckspitter(final RakdosIckspitter card) {
         super(card);
     }
 

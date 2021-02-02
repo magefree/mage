@@ -37,7 +37,7 @@ public final class BarrinsCodex extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BarrinsCodex(final BarrinsCodex card) {
+    private BarrinsCodex(final BarrinsCodex card) {
         super(card);
     }
 

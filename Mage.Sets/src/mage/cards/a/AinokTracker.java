@@ -31,7 +31,7 @@ public final class AinokTracker extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{R}")));
     }
 
-    public AinokTracker(final AinokTracker card) {
+    private AinokTracker(final AinokTracker card) {
         super(card);
     }
 

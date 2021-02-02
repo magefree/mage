@@ -26,7 +26,7 @@ public final class ShatteringPulse extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
-    public ShatteringPulse(final ShatteringPulse card) {
+    private ShatteringPulse(final ShatteringPulse card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class KederektParasite extends CardImpl {
         this.addAbility(new KederektParasiteTriggeredAbility());
     }
 
-    public KederektParasite(final KederektParasite card) {
+    private KederektParasite(final KederektParasite card) {
         super(card);
     }
 

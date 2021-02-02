@@ -42,7 +42,7 @@ public final class RocketTrooper extends CardImpl {
 
     }
 
-    public RocketTrooper(final RocketTrooper card) {
+    private RocketTrooper(final RocketTrooper card) {
         super(card);
     }
 

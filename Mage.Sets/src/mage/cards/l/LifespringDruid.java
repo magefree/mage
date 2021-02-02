@@ -26,7 +26,7 @@ public final class LifespringDruid extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public LifespringDruid(final LifespringDruid card) {
+    private LifespringDruid(final LifespringDruid card) {
         super(card);
     }
 

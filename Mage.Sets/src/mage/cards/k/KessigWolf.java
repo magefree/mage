@@ -33,7 +33,7 @@ public final class KessigWolf extends CardImpl {
                 new ManaCostsImpl("{1}{R}")));
     }
 
-    public KessigWolf(final KessigWolf card) {
+    private KessigWolf(final KessigWolf card) {
         super(card);
     }
 

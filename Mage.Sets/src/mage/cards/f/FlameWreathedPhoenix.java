@@ -46,7 +46,7 @@ public final class FlameWreathedPhoenix extends CardImpl {
 
     }
 
-    public FlameWreathedPhoenix(final FlameWreathedPhoenix card) {
+    private FlameWreathedPhoenix(final FlameWreathedPhoenix card) {
         super(card);
     }
 

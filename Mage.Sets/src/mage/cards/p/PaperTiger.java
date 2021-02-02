@@ -37,7 +37,7 @@ public final class PaperTiger extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
-    public PaperTiger(final PaperTiger card) {
+    private PaperTiger(final PaperTiger card) {
         super(card);
     }
 

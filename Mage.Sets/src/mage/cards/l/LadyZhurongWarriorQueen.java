@@ -29,7 +29,7 @@ public final class LadyZhurongWarriorQueen extends CardImpl {
         this.addAbility(HorsemanshipAbility.getInstance());
     }
 
-    public LadyZhurongWarriorQueen(final LadyZhurongWarriorQueen card) {
+    private LadyZhurongWarriorQueen(final LadyZhurongWarriorQueen card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class SiegeRhino extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SiegeRhino(final SiegeRhino card) {
+    private SiegeRhino(final SiegeRhino card) {
         super(card);
     }
 

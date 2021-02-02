@@ -25,7 +25,7 @@ public final class PitilessGorgon extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public PitilessGorgon(final PitilessGorgon card) {
+    private PitilessGorgon(final PitilessGorgon card) {
         super(card);
     }
 

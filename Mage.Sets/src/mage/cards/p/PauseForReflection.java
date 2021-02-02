@@ -24,7 +24,7 @@ public final class PauseForReflection extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
     }
 
-    public PauseForReflection(final PauseForReflection card) {
+    private PauseForReflection(final PauseForReflection card) {
         super(card);
     }
 

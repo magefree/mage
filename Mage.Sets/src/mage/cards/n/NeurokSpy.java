@@ -37,7 +37,7 @@ public final class NeurokSpy extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public NeurokSpy(final NeurokSpy card) {
+    private NeurokSpy(final NeurokSpy card) {
         super(card);
     }
 

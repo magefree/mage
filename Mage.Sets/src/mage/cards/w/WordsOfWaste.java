@@ -31,7 +31,7 @@ public final class WordsOfWaste extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWasteEffect(), new ManaCostsImpl("{1}")));
     }
 
-    public WordsOfWaste(final WordsOfWaste card) {
+    private WordsOfWaste(final WordsOfWaste card) {
         super(card);
     }
 

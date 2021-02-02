@@ -31,7 +31,7 @@ public final class SplittingSlime extends CardImpl {
 
     }
 
-    public SplittingSlime(final SplittingSlime card) {
+    private SplittingSlime(final SplittingSlime card) {
         super(card);
     }
 

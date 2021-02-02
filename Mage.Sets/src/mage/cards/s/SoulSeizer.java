@@ -47,7 +47,7 @@ public final class SoulSeizer extends CardImpl {
         this.addAbility(new SoulSeizerTriggeredAbility());
     }
 
-    public SoulSeizer(final SoulSeizer card) {
+    private SoulSeizer(final SoulSeizer card) {
         super(card);
     }
 

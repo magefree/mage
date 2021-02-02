@@ -26,7 +26,7 @@ public final class IntoThinAir extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
-    public IntoThinAir(final IntoThinAir card) {
+    private IntoThinAir(final IntoThinAir card) {
         super(card);
     }
 

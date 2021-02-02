@@ -33,7 +33,7 @@ public final class LayBareTheHeart extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
     }
 
-    public LayBareTheHeart(final LayBareTheHeart card) {
+    private LayBareTheHeart(final LayBareTheHeart card) {
         super(card);
     }
 

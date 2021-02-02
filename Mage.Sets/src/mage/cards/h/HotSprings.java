@@ -47,7 +47,7 @@ public final class HotSprings extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public HotSprings(final HotSprings card) {
+    private HotSprings(final HotSprings card) {
         super(card);
     }
 

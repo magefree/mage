@@ -43,7 +43,7 @@ public final class KukemssaPirates extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KukemssaPirates(final KukemssaPirates card) {
+    private KukemssaPirates(final KukemssaPirates card) {
         super(card);
     }
 

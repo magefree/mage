@@ -39,7 +39,7 @@ public final class EssenceDepleter extends CardImpl {
 
     }
 
-    public EssenceDepleter(final EssenceDepleter card) {
+    private EssenceDepleter(final EssenceDepleter card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class GladecoverScout extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    public GladecoverScout(final GladecoverScout card) {
+    private GladecoverScout(final GladecoverScout card) {
         super(card);
     }
 

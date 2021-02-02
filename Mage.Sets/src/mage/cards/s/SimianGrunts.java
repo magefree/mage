@@ -29,7 +29,7 @@ public final class SimianGrunts extends CardImpl {
         this.addAbility(new EchoAbility("{2}{G}"));
     }
 
-    public SimianGrunts(final SimianGrunts card) {
+    private SimianGrunts(final SimianGrunts card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class Halfdane extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Halfdane(final Halfdane card) {
+    private Halfdane(final Halfdane card) {
         super(card);
     }
 

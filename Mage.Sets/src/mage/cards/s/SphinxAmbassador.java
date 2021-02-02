@@ -41,7 +41,7 @@ public final class SphinxAmbassador extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SphinxAmbassadorEffect(), false, true));
     }
 
-    public SphinxAmbassador(final SphinxAmbassador card) {
+    private SphinxAmbassador(final SphinxAmbassador card) {
         super(card);
     }
 

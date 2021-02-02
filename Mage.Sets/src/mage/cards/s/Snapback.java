@@ -37,7 +37,7 @@ public final class Snapback extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 
-    public Snapback(final Snapback card) {
+    private Snapback(final Snapback card) {
         super(card);
     }
 

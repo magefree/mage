@@ -48,7 +48,7 @@ public final class GatecreeperVine extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
     }
 
-    public GatecreeperVine(final GatecreeperVine card) {
+    private GatecreeperVine(final GatecreeperVine card) {
         super(card);
     }
 

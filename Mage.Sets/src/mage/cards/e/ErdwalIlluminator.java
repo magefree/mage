@@ -38,7 +38,7 @@ public final class ErdwalIlluminator extends CardImpl {
 
     }
 
-    public ErdwalIlluminator(final ErdwalIlluminator card) {
+    private ErdwalIlluminator(final ErdwalIlluminator card) {
         super(card);
     }
 

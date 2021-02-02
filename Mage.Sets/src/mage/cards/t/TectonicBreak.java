@@ -22,7 +22,7 @@ public final class TectonicBreak extends CardImpl {
         this.getSpellAbility().addEffect(new SacrificeAllEffect(ManacostVariableValue.instance, new FilterControlledLandPermanent("lands")));
     }
 
-    public TectonicBreak(final TectonicBreak card) {
+    private TectonicBreak(final TectonicBreak card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class Exhume extends CardImpl {
         this.getSpellAbility().addEffect(new ExhumeEffect());
     }
 
-    public Exhume(final Exhume card) {
+    private Exhume(final Exhume card) {
         super(card);
     }
 

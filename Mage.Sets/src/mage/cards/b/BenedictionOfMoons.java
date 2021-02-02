@@ -30,7 +30,7 @@ public final class BenedictionOfMoons extends CardImpl {
 
     }
 
-    public BenedictionOfMoons(final BenedictionOfMoons card) {
+    private BenedictionOfMoons(final BenedictionOfMoons card) {
         super(card);
     }
 

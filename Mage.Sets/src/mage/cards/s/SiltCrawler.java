@@ -27,7 +27,7 @@ public final class SiltCrawler extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(new FilterControlledLandPermanent("lands you control")), false));
     }
 
-    public SiltCrawler(final SiltCrawler card) {
+    private SiltCrawler(final SiltCrawler card) {
         super(card);
     }
 

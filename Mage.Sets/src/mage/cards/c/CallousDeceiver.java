@@ -42,7 +42,7 @@ public final class CallousDeceiver extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new CallousDeceiverEffect(), new ManaCostsImpl("{2}")));
     }
 
-    public CallousDeceiver(final CallousDeceiver card) {
+    private CallousDeceiver(final CallousDeceiver card) {
         super(card);
     }
 

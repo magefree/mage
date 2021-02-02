@@ -29,7 +29,7 @@ public final class VenerableMonk extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(2)));
     }
 
-    public VenerableMonk(final VenerableMonk card) {
+    private VenerableMonk(final VenerableMonk card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class KeeningApparition extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KeeningApparition(final KeeningApparition card) {
+    private KeeningApparition(final KeeningApparition card) {
         super(card);
     }
 

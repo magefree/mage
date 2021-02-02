@@ -42,7 +42,7 @@ public final class ManaChargedDragon extends CardImpl {
         this.addAbility(new ManaChargedDragonTriggeredAbility());
     }
 
-    public ManaChargedDragon(final ManaChargedDragon card) {
+    private ManaChargedDragon(final ManaChargedDragon card) {
         super(card);
     }
 

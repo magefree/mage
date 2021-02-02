@@ -34,7 +34,7 @@ public final class FleshmadSteed extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new TapSourceEffect(), false, filter));
     }
 
-    public FleshmadSteed(final FleshmadSteed card) {
+    private FleshmadSteed(final FleshmadSteed card) {
         super(card);
     }
 

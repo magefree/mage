@@ -32,7 +32,7 @@ public final class TribalUnity extends CardImpl {
         this.getSpellAbility().addEffect(new TribalUnityEffect(ManacostVariableValue.instance));
     }
 
-    public TribalUnity(final TribalUnity card) {
+    private TribalUnity(final TribalUnity card) {
         super(card);
     }
 

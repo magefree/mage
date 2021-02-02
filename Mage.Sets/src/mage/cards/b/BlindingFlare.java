@@ -26,7 +26,7 @@ public final class BlindingFlare extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
-    public BlindingFlare(final BlindingFlare card) {
+    private BlindingFlare(final BlindingFlare card) {
         super(card);
     }
 

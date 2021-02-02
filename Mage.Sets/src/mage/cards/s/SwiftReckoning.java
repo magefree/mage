@@ -42,7 +42,7 @@ public final class SwiftReckoning extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public SwiftReckoning(final SwiftReckoning card) {
+    private SwiftReckoning(final SwiftReckoning card) {
         super(card);
     }
 

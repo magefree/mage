@@ -41,7 +41,7 @@ public final class MishrasSelfReplicator extends CardImpl {
 
     }
 
-    public MishrasSelfReplicator(final MishrasSelfReplicator card) {
+    private MishrasSelfReplicator(final MishrasSelfReplicator card) {
         super(card);
     }
 

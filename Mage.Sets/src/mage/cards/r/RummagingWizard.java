@@ -35,7 +35,7 @@ public final class RummagingWizard extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RummagingWizardLookLibraryEffect(), new ManaCostsImpl("{2}{U}")));
     }
 
-    public RummagingWizard(final RummagingWizard card) {
+    private RummagingWizard(final RummagingWizard card) {
         super(card);
     }
 

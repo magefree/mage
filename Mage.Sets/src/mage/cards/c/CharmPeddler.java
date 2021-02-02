@@ -38,7 +38,7 @@ public final class CharmPeddler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CharmPeddler(final CharmPeddler card) {
+    private CharmPeddler(final CharmPeddler card) {
         super(card);
     }
 

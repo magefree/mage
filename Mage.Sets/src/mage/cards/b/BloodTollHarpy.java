@@ -30,7 +30,7 @@ public final class BloodTollHarpy extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeAllPlayersEffect(1)));
     }
 
-    public BloodTollHarpy(final BloodTollHarpy card) {
+    private BloodTollHarpy(final BloodTollHarpy card) {
         super(card);
     }
 

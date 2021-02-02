@@ -40,7 +40,7 @@ public final class ArcMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArcMage(final ArcMage card) {
+    private ArcMage(final ArcMage card) {
         super(card);
     }
 

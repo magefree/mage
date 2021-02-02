@@ -39,7 +39,7 @@ public final class MundaAmbushLeader extends CardImpl {
 
     }
 
-    public MundaAmbushLeader(final MundaAmbushLeader card) {
+    private MundaAmbushLeader(final MundaAmbushLeader card) {
         super(card);
     }
 

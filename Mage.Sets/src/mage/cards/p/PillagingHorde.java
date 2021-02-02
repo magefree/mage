@@ -29,7 +29,7 @@ public final class PillagingHorde extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardCardCost(true))));
     }
 
-    public PillagingHorde(final PillagingHorde card) {
+    private PillagingHorde(final PillagingHorde card) {
         super(card);
     }
 

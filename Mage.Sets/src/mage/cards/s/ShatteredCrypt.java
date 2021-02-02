@@ -33,7 +33,7 @@ public final class ShatteredCrypt extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(ShatteredCryptAdjuster.instance);
     }
 
-    public ShatteredCrypt(final ShatteredCrypt card) {
+    private ShatteredCrypt(final ShatteredCrypt card) {
         super(card);
     }
 

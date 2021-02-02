@@ -39,7 +39,7 @@ public final class DroolingOgre extends CardImpl {
         this.addAbility(new DroolingOgreTriggeredAbility());
     }
 
-    public DroolingOgre(final DroolingOgre card) {
+    private DroolingOgre(final DroolingOgre card) {
         super(card);
     }
 

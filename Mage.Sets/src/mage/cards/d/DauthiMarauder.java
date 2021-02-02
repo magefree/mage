@@ -26,7 +26,7 @@ public final class DauthiMarauder extends CardImpl {
         this.addAbility(ShadowAbility.getInstance());
     }
 
-    public DauthiMarauder(final DauthiMarauder card) {
+    private DauthiMarauder(final DauthiMarauder card) {
         super(card);
     }
 

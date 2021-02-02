@@ -41,7 +41,7 @@ public final class HypersonicDragon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
-    public HypersonicDragon(final HypersonicDragon card) {
+    private HypersonicDragon(final HypersonicDragon card) {
         super(card);
     }
 

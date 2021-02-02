@@ -31,7 +31,7 @@ public final class BalothWoodcrasher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BalothWoodcrasher(final BalothWoodcrasher card) {
+    private BalothWoodcrasher(final BalothWoodcrasher card) {
         super(card);
     }
 

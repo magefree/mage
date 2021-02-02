@@ -20,7 +20,7 @@ public final class MoxRuby extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public MoxRuby(final MoxRuby card) {
+    private MoxRuby(final MoxRuby card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class Onslaught extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Onslaught(final Onslaught card) {
+    private Onslaught(final Onslaught card) {
         super(card);
     }
 

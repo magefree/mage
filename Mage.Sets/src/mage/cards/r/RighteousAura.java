@@ -28,7 +28,7 @@ public final class RighteousAura extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RighteousAura(final RighteousAura card) {
+    private RighteousAura(final RighteousAura card) {
         super(card);
     }
 

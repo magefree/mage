@@ -36,7 +36,7 @@ public final class HuntedWumpus extends CardImpl {
 
     }
 
-    public HuntedWumpus(final HuntedWumpus card) {
+    private HuntedWumpus(final HuntedWumpus card) {
         super(card);
     }
 

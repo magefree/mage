@@ -37,7 +37,7 @@ public final class DrossScorpion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DrossScorpion(final DrossScorpion card) {
+    private DrossScorpion(final DrossScorpion card) {
         super(card);
     }
 

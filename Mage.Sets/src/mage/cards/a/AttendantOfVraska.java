@@ -46,7 +46,7 @@ public final class AttendantOfVraska extends CardImpl {
         ));
     }
 
-    public AttendantOfVraska(final AttendantOfVraska card) {
+    private AttendantOfVraska(final AttendantOfVraska card) {
         super(card);
     }
 

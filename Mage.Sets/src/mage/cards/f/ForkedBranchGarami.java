@@ -27,7 +27,7 @@ public final class ForkedBranchGarami extends CardImpl {
         this.addAbility(new SoulshiftAbility(4));
     }
 
-    public ForkedBranchGarami(final ForkedBranchGarami card) {
+    private ForkedBranchGarami(final ForkedBranchGarami card) {
         super(card);
     }
 

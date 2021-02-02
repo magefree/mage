@@ -33,7 +33,7 @@ public final class SpinalCentipede extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpinalCentipede(final SpinalCentipede card) {
+    private SpinalCentipede(final SpinalCentipede card) {
         super(card);
     }
 

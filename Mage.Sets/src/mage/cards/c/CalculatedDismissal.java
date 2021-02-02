@@ -29,7 +29,7 @@ public final class CalculatedDismissal extends CardImpl {
                 "<br><i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, scry 2"));
     }
 
-    public CalculatedDismissal(final CalculatedDismissal card) {
+    private CalculatedDismissal(final CalculatedDismissal card) {
         super(card);
     }
 

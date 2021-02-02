@@ -41,7 +41,7 @@ public final class MysticRestraints extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
-    public MysticRestraints(final MysticRestraints card) {
+    private MysticRestraints(final MysticRestraints card) {
         super(card);
     }
 

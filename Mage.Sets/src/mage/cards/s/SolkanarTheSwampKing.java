@@ -37,7 +37,7 @@ public final class SolkanarTheSwampKing extends CardImpl {
 
     }
 
-    public SolkanarTheSwampKing(final SolkanarTheSwampKing card) {
+    private SolkanarTheSwampKing(final SolkanarTheSwampKing card) {
         super(card);
     }
 

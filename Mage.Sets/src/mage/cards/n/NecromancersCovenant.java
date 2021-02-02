@@ -42,7 +42,7 @@ public final class NecromancersCovenant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public NecromancersCovenant(final NecromancersCovenant card) {
+    private NecromancersCovenant(final NecromancersCovenant card) {
         super(card);
     }
 

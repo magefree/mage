@@ -33,7 +33,7 @@ public final class WindbornMuse extends CardImpl {
 
     }
 
-    public WindbornMuse(final WindbornMuse card) {
+    private WindbornMuse(final WindbornMuse card) {
         super(card);
     }
 

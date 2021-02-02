@@ -30,7 +30,7 @@ public final class ChainOfSmog extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public ChainOfSmog(final ChainOfSmog card) {
+    private ChainOfSmog(final ChainOfSmog card) {
         super(card);
     }
 

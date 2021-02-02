@@ -57,7 +57,7 @@ public final class EzuriRenegadeLeader extends CardImpl {
         this.addAbility(ezuriBoost);
     }
 
-    public EzuriRenegadeLeader(final EzuriRenegadeLeader card) {
+    private EzuriRenegadeLeader(final EzuriRenegadeLeader card) {
         super(card);
     }
 

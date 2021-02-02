@@ -51,7 +51,7 @@ public final class FindFinality extends SplitCard {
         );
     }
 
-    public FindFinality(final FindFinality card) {
+    private FindFinality(final FindFinality card) {
         super(card);
     }
 

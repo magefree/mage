@@ -42,7 +42,7 @@ public final class GrapeshotCatapult extends CardImpl {
         this.addAbility(activatedAbility);
     }
 
-    public GrapeshotCatapult(final GrapeshotCatapult card) {
+    private GrapeshotCatapult(final GrapeshotCatapult card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class BloodfireEnforcers extends CardImpl {
      
     }
 
-    public BloodfireEnforcers(final BloodfireEnforcers card) {
+    private BloodfireEnforcers(final BloodfireEnforcers card) {
         super(card);
     }
 

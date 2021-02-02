@@ -29,7 +29,7 @@ public final class HavocFestival extends CardImpl {
 
     }
 
-    public HavocFestival(final HavocFestival card) {
+    private HavocFestival(final HavocFestival card) {
         super(card);
     }
 

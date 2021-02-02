@@ -26,7 +26,7 @@ public final class HiredPoisoner extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public HiredPoisoner(final HiredPoisoner card) {
+    private HiredPoisoner(final HiredPoisoner card) {
         super(card);
     }
 

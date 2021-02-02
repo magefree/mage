@@ -30,7 +30,7 @@ public final class BeaconOfTomorrows extends CardImpl {
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
     }
 
-    public BeaconOfTomorrows(final BeaconOfTomorrows card) {
+    private BeaconOfTomorrows(final BeaconOfTomorrows card) {
         super(card);
     }
 

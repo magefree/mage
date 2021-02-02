@@ -31,7 +31,7 @@ public final class JeskaiSage extends CardImpl {
 
     }
 
-    public JeskaiSage(final JeskaiSage card) {
+    private JeskaiSage(final JeskaiSage card) {
         super(card);
     }
 

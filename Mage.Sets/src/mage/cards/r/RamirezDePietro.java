@@ -29,7 +29,7 @@ public final class RamirezDePietro extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public RamirezDePietro(final RamirezDePietro card) {
+    private RamirezDePietro(final RamirezDePietro card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class GaeasCradle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GaeasCradle(final GaeasCradle card) {
+    private GaeasCradle(final GaeasCradle card) {
         super(card);
     }
 

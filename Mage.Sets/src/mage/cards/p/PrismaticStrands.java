@@ -48,7 +48,7 @@ public final class PrismaticStrands extends CardImpl {
         this.addAbility(new FlashbackAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)), TimingRule.INSTANT));
     }
 
-    public PrismaticStrands(final PrismaticStrands card) {
+    private PrismaticStrands(final PrismaticStrands card) {
         super(card);
     }
 

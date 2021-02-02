@@ -29,7 +29,7 @@ public final class QuicksilverAmulet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public QuicksilverAmulet(final QuicksilverAmulet card) {
+    private QuicksilverAmulet(final QuicksilverAmulet card) {
         super(card);
     }
 

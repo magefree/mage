@@ -57,7 +57,7 @@ public final class ConsecratedByBlood extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ConsecratedByBlood(final ConsecratedByBlood card) {
+    private ConsecratedByBlood(final ConsecratedByBlood card) {
         super(card);
     }
 

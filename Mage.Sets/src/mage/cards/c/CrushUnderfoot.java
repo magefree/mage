@@ -35,7 +35,7 @@ public final class CrushUnderfoot extends CardImpl {
 
     }
 
-    public CrushUnderfoot(final CrushUnderfoot card) {
+    private CrushUnderfoot(final CrushUnderfoot card) {
         super(card);
     }
 

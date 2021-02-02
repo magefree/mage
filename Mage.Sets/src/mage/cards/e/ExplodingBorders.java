@@ -28,7 +28,7 @@ public final class ExplodingBorders extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    public ExplodingBorders(final ExplodingBorders card) {
+    private ExplodingBorders(final ExplodingBorders card) {
         super(card);
     }
 

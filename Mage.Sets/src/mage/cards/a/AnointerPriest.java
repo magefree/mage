@@ -42,7 +42,7 @@ public final class AnointerPriest extends CardImpl {
         this.addAbility(new EmbalmAbility(new ManaCostsImpl("{3}{W}"), this));
     }
 
-    public AnointerPriest(final AnointerPriest card) {
+    private AnointerPriest(final AnointerPriest card) {
         super(card);
     }
 

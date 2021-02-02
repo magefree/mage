@@ -53,7 +53,7 @@ public final class HeartWolf extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HeartWolf(final HeartWolf card) {
+    private HeartWolf(final HeartWolf card) {
         super(card);
     }
 

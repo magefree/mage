@@ -41,7 +41,7 @@ public final class AegisOfTheMeek extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AegisOfTheMeek(final AegisOfTheMeek card) {
+    private AegisOfTheMeek(final AegisOfTheMeek card) {
         super(card);
     }
 

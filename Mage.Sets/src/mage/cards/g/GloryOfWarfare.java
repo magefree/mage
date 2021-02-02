@@ -36,7 +36,7 @@ public final class GloryOfWarfare extends CardImpl {
                 "As long as it's not your turn, creatures you control get +0/+2")));
     }
 
-    public GloryOfWarfare(final GloryOfWarfare card) {
+    private GloryOfWarfare(final GloryOfWarfare card) {
         super(card);
     }
 

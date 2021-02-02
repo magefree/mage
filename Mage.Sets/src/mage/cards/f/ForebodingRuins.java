@@ -40,7 +40,7 @@ public final class ForebodingRuins extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public ForebodingRuins(final ForebodingRuins card) {
+    private ForebodingRuins(final ForebodingRuins card) {
         super(card);
     }
 

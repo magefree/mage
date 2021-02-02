@@ -41,7 +41,7 @@ public final class VillageMessenger extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
-    public VillageMessenger(final VillageMessenger card) {
+    private VillageMessenger(final VillageMessenger card) {
         super(card);
     }
 

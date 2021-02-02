@@ -24,7 +24,7 @@ public final class SleightOfHand extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(2), false, StaticValue.get(1), new FilterCard(), Zone.LIBRARY, false, false));
     }
 
-    public SleightOfHand(final SleightOfHand card) {
+    private SleightOfHand(final SleightOfHand card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class OpalCaryatid extends CardImpl {
                 "When an opponent casts a creature spell, if {this} is an enchantment, {this} becomes a 2/2 Soldier creature."));
     }
 
-    public OpalCaryatid(final OpalCaryatid card) {
+    private OpalCaryatid(final OpalCaryatid card) {
         super(card);
     }
 

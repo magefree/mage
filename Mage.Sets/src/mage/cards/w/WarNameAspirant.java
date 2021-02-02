@@ -49,7 +49,7 @@ public final class WarNameAspirant extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public WarNameAspirant(final WarNameAspirant card) {
+    private WarNameAspirant(final WarNameAspirant card) {
         super(card);
     }
 

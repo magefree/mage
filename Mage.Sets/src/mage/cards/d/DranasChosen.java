@@ -48,7 +48,7 @@ public final class DranasChosen extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DranasChosen(final DranasChosen card) {
+    private DranasChosen(final DranasChosen card) {
         super(card);
     }
 

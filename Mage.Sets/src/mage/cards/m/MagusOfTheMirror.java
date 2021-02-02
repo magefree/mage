@@ -42,7 +42,7 @@ public final class MagusOfTheMirror extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagusOfTheMirror(final MagusOfTheMirror card) {
+    private MagusOfTheMirror(final MagusOfTheMirror card) {
         super(card);
     }
 

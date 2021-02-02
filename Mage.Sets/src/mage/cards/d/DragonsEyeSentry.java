@@ -29,7 +29,7 @@ public final class DragonsEyeSentry extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public DragonsEyeSentry(final DragonsEyeSentry card) {
+    private DragonsEyeSentry(final DragonsEyeSentry card) {
         super(card);
     }
 

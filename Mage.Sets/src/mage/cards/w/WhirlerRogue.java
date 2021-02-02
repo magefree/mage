@@ -53,7 +53,7 @@ public final class WhirlerRogue extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WhirlerRogue(final WhirlerRogue card) {
+    private WhirlerRogue(final WhirlerRogue card) {
         super(card);
     }
 

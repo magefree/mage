@@ -25,7 +25,7 @@ public final class FrostBreath extends CardImpl {
         this.getSpellAbility().addEffect(new DontUntapInControllersNextUntapStepTargetEffect("Those creatures"));
     }
 
-    public FrostBreath(final FrostBreath card) {
+    private FrostBreath(final FrostBreath card) {
         super(card);
     }
 

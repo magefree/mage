@@ -35,7 +35,7 @@ public final class DaringLeap extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public DaringLeap(final DaringLeap card) {
+    private DaringLeap(final DaringLeap card) {
         super(card);
     }
 

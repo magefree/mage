@@ -43,7 +43,7 @@ public final class DrainingWhelk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DrainingWhelk(final DrainingWhelk card) {
+    private DrainingWhelk(final DrainingWhelk card) {
         super(card);
     }
 

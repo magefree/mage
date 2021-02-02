@@ -37,7 +37,7 @@ public final class BoggartHarbinger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(target, true, true)));
     }
 
-    public BoggartHarbinger(final BoggartHarbinger card) {
+    private BoggartHarbinger(final BoggartHarbinger card) {
         super(card);
     }
 

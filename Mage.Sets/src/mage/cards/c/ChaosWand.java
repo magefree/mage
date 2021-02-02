@@ -37,7 +37,7 @@ public final class ChaosWand extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChaosWand(final ChaosWand card) {
+    private ChaosWand(final ChaosWand card) {
         super(card);
     }
 

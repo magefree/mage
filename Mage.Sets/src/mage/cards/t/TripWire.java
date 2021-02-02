@@ -30,7 +30,7 @@ public final class TripWire extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public TripWire(final TripWire card) {
+    private TripWire(final TripWire card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class FuryOfTheHorde extends CardImpl {
 
     }
 
-    public FuryOfTheHorde(final FuryOfTheHorde card) {
+    private FuryOfTheHorde(final FuryOfTheHorde card) {
         super(card);
     }
 

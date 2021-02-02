@@ -40,7 +40,7 @@ public final class LairwatchGiant extends CardImpl {
 
     }
 
-    public LairwatchGiant(final LairwatchGiant card) {
+    private LairwatchGiant(final LairwatchGiant card) {
         super(card);
     }
 

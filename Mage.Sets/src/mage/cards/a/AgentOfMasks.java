@@ -30,7 +30,7 @@ public final class AgentOfMasks extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AgentOfMasksEffect(), TargetController.YOU, false));
     }
 
-    public AgentOfMasks(final AgentOfMasks card) {
+    private AgentOfMasks(final AgentOfMasks card) {
         super(card);
     }
 

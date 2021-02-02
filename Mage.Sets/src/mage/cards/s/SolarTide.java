@@ -44,7 +44,7 @@ public final class SolarTide extends CardImpl {
         this.addAbility(new EntwineAbility(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, new FilterControlledLandPermanent("two lands"), true))));
     }
 
-    public SolarTide(final SolarTide card) {
+    private SolarTide(final SolarTide card) {
         super(card);
     }
 

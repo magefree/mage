@@ -45,7 +45,7 @@ public final class DivineIntervention extends CardImpl {
         this.addAbility(new DivineInterventionAbility());
     }
 
-    public DivineIntervention(final DivineIntervention card) {
+    private DivineIntervention(final DivineIntervention card) {
         super(card);
     }
 

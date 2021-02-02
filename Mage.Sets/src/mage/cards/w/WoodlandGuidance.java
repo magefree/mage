@@ -33,7 +33,7 @@ public final class WoodlandGuidance extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public WoodlandGuidance(final WoodlandGuidance card) {
+    private WoodlandGuidance(final WoodlandGuidance card) {
         super(card);
     }
 

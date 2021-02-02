@@ -34,7 +34,7 @@ public final class HourOfPromise extends CardImpl {
 
     }
 
-    public HourOfPromise(final HourOfPromise card) {
+    private HourOfPromise(final HourOfPromise card) {
         super(card);
     }
 

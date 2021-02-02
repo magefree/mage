@@ -38,7 +38,7 @@ public final class RoninCliffrider extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new RoninCliffriderEffect(), true));
     }
 
-    public RoninCliffrider(final RoninCliffrider card) {
+    private RoninCliffrider(final RoninCliffrider card) {
         super(card);
     }
 

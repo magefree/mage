@@ -33,7 +33,7 @@ public final class TidalSurge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 3, filter, false));
     }
 
-    public TidalSurge(final TidalSurge card) {
+    private TidalSurge(final TidalSurge card) {
         super(card);
     }
 

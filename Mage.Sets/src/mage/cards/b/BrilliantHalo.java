@@ -38,7 +38,7 @@ public final class BrilliantHalo extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public BrilliantHalo(final BrilliantHalo card) {
+    private BrilliantHalo(final BrilliantHalo card) {
         super(card);
     }
 

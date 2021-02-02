@@ -36,7 +36,7 @@ public final class BloodhunterBat extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodhunterBat(final BloodhunterBat card) {
+    private BloodhunterBat(final BloodhunterBat card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class OonasGatewarden extends CardImpl {
         this.addAbility(WitherAbility.getInstance());
     }
 
-    public OonasGatewarden(final OonasGatewarden card) {
+    private OonasGatewarden(final OonasGatewarden card) {
         super(card);
     }
 

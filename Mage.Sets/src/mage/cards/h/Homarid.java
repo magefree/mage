@@ -55,7 +55,7 @@ public final class Homarid extends CardImpl {
         this.addAbility(new HomaridTriggeredAbility(new RemoveAllCountersSourceEffect(CounterType.TIDE)));
     }
 
-    public Homarid(final Homarid card) {
+    private Homarid(final Homarid card) {
         super(card);
     }
 

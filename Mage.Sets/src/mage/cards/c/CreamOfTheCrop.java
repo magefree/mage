@@ -39,7 +39,7 @@ public final class CreamOfTheCrop extends CardImpl {
                 + "your library in any order"));
     }
 
-    public CreamOfTheCrop(final CreamOfTheCrop card) {
+    private CreamOfTheCrop(final CreamOfTheCrop card) {
         super(card);
     }
 

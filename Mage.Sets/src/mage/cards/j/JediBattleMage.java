@@ -37,7 +37,7 @@ public final class JediBattleMage extends CardImpl {
         this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{U}")));
     }
 
-    public JediBattleMage(final JediBattleMage card) {
+    private JediBattleMage(final JediBattleMage card) {
         super(card);
     }
 

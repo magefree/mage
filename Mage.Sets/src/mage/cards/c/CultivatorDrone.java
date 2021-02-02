@@ -43,7 +43,7 @@ public final class CultivatorDrone extends CardImpl {
         this.addAbility(new ConditionalColorlessManaAbility(new TapSourceCost(), 1, new CultivatorDroneManaBuilder()));
     }
 
-    public CultivatorDrone(final CultivatorDrone card) {
+    private CultivatorDrone(final CultivatorDrone card) {
         super(card);
     }
 

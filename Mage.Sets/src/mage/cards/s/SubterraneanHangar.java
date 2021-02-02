@@ -43,7 +43,7 @@ public final class SubterraneanHangar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SubterraneanHangar(final SubterraneanHangar card) {
+    private SubterraneanHangar(final SubterraneanHangar card) {
         super(card);
     }
 

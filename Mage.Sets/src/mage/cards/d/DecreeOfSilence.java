@@ -51,7 +51,7 @@ public final class DecreeOfSilence extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DecreeOfSilence(final DecreeOfSilence card) {
+    private DecreeOfSilence(final DecreeOfSilence card) {
         super(card);
     }
 

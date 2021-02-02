@@ -32,7 +32,7 @@ public final class CobbledWings extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public CobbledWings(final CobbledWings card) {
+    private CobbledWings(final CobbledWings card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class SurveyTheWreckage extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken()));
     }
 
-    public SurveyTheWreckage(final SurveyTheWreckage card) {
+    private SurveyTheWreckage(final SurveyTheWreckage card) {
         super(card);
     }
 

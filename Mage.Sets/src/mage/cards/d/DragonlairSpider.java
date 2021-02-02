@@ -35,7 +35,7 @@ public final class DragonlairSpider extends CardImpl {
 
     }
 
-    public DragonlairSpider(final DragonlairSpider card) {
+    private DragonlairSpider(final DragonlairSpider card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class IronLance extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IronLance(final IronLance card) {
+    private IronLance(final IronLance card) {
         super(card);
     }
 

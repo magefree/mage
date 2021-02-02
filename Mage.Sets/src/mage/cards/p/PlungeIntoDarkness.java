@@ -48,7 +48,7 @@ public final class PlungeIntoDarkness extends CardImpl {
         this.addAbility(new EntwineAbility("{B}"));
     }
 
-    public PlungeIntoDarkness(final PlungeIntoDarkness card) {
+    private PlungeIntoDarkness(final PlungeIntoDarkness card) {
         super(card);
     }
 

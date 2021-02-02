@@ -31,7 +31,7 @@ public final class LayBare extends CardImpl {
         this.getSpellAbility().addEffect(new LayBareEffect());
     }
 
-    public LayBare(final LayBare card) {
+    private LayBare(final LayBare card) {
         super(card);
     }
 

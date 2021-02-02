@@ -36,7 +36,7 @@ public final class StonybrookAngler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StonybrookAngler(final StonybrookAngler card) {
+    private StonybrookAngler(final StonybrookAngler card) {
         super(card);
     }
 

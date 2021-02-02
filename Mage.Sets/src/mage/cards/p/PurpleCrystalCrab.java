@@ -26,7 +26,7 @@ public final class PurpleCrystalCrab extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public PurpleCrystalCrab(final PurpleCrystalCrab card) {
+    private PurpleCrystalCrab(final PurpleCrystalCrab card) {
         super(card);
     }
 

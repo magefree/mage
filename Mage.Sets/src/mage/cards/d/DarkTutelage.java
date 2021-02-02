@@ -24,7 +24,7 @@ public final class DarkTutelage extends CardImpl {
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new DarkTutelageEffect(), false));
     }
 
-    public DarkTutelage(final DarkTutelage card) {
+    private DarkTutelage(final DarkTutelage card) {
         super(card);
     }
 

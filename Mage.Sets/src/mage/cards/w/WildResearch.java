@@ -45,7 +45,7 @@ public final class WildResearch extends CardImpl {
 
     }
 
-    public WildResearch(final WildResearch card) {
+    private WildResearch(final WildResearch card) {
         super(card);
     }
 

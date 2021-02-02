@@ -50,7 +50,7 @@ public final class EddytrailHawk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EddytrailHawk(final EddytrailHawk card) {
+    private EddytrailHawk(final EddytrailHawk card) {
         super(card);
     }
 

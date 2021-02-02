@@ -45,7 +45,7 @@ public final class BrandOfIllOmen extends CardImpl {
 
     }
 
-    public BrandOfIllOmen(final BrandOfIllOmen card) {
+    private BrandOfIllOmen(final BrandOfIllOmen card) {
         super(card);
     }
 

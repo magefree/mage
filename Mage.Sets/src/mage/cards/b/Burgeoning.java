@@ -26,7 +26,7 @@ public final class Burgeoning extends CardImpl {
         this.addAbility(new BurgeoningTriggeredAbility());
     }
 
-    public Burgeoning(final Burgeoning card) {
+    private Burgeoning(final Burgeoning card) {
         super(card);
     }
 

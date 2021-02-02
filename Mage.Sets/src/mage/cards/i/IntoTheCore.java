@@ -26,7 +26,7 @@ public final class IntoTheCore extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public IntoTheCore(final IntoTheCore card) {
+    private IntoTheCore(final IntoTheCore card) {
         super(card);
     }
 

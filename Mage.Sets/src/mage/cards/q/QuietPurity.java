@@ -25,7 +25,7 @@ public final class QuietPurity extends CardImpl {
     }
 
 
-    public QuietPurity(final QuietPurity card) {
+    private QuietPurity(final QuietPurity card) {
         super(card);
     }
 

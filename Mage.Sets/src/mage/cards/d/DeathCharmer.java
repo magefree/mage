@@ -29,7 +29,7 @@ public final class DeathCharmer extends CardImpl {
         this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new LoseLifeTargetControllerEffect(2), new ManaCostsImpl("{2}")), false, true));
     }
 
-    public DeathCharmer(final DeathCharmer card) {
+    private DeathCharmer(final DeathCharmer card) {
         super(card);
     }
 

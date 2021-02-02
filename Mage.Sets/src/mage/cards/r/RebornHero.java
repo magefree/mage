@@ -54,7 +54,7 @@ public final class RebornHero extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RebornHero(final RebornHero card) {
+    private RebornHero(final RebornHero card) {
         super(card);
     }
 

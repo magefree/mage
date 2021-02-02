@@ -39,7 +39,7 @@ public final class Mindwarper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Mindwarper(final Mindwarper card) {
+    private Mindwarper(final Mindwarper card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class SymbolOfUnsummoning extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public SymbolOfUnsummoning(final SymbolOfUnsummoning card) {
+    private SymbolOfUnsummoning(final SymbolOfUnsummoning card) {
         super(card);
     }
 

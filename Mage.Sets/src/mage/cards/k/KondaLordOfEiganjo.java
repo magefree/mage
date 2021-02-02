@@ -32,7 +32,7 @@ public final class KondaLordOfEiganjo extends CardImpl {
         this.addAbility(new BushidoAbility(5));
     }
 
-    public KondaLordOfEiganjo(final KondaLordOfEiganjo card) {
+    private KondaLordOfEiganjo(final KondaLordOfEiganjo card) {
         super(card);
     }
 

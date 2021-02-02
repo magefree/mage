@@ -23,7 +23,7 @@ public final class RottingMastodon extends CardImpl {
         this.toughness = new MageInt(8);
     }
 
-    public RottingMastodon(final RottingMastodon card) {
+    private RottingMastodon(final RottingMastodon card) {
         super(card);
     }
 

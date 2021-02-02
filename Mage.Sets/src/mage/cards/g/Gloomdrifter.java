@@ -54,7 +54,7 @@ public final class Gloomdrifter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Gloomdrifter(final Gloomdrifter card) {
+    private Gloomdrifter(final Gloomdrifter card) {
         super(card);
     }
 

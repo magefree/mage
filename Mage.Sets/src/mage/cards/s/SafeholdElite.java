@@ -27,7 +27,7 @@ public final class SafeholdElite extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public SafeholdElite(final SafeholdElite card) {
+    private SafeholdElite(final SafeholdElite card) {
         super(card);
     }
 

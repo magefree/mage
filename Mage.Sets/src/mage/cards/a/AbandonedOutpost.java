@@ -35,7 +35,7 @@ public final class AbandonedOutpost extends CardImpl {
 		
     }
 	
-    public AbandonedOutpost(final AbandonedOutpost card) {
+    private AbandonedOutpost(final AbandonedOutpost card) {
         super(card);
     }
 

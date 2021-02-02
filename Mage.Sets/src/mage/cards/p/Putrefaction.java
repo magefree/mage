@@ -29,7 +29,7 @@ public final class Putrefaction extends CardImpl {
         this.addAbility(new PutrefactionTriggeredAbility());
     }
 
-    public Putrefaction(final Putrefaction card) {
+    private Putrefaction(final Putrefaction card) {
         super(card);
     }
 

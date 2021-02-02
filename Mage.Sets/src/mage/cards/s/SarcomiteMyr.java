@@ -35,7 +35,7 @@ public final class SarcomiteMyr extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SarcomiteMyr(final SarcomiteMyr card) {
+    private SarcomiteMyr(final SarcomiteMyr card) {
         super(card);
     }
 

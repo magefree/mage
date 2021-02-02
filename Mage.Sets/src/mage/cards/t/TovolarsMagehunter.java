@@ -49,7 +49,7 @@ public final class TovolarsMagehunter extends CardImpl {
                 TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public TovolarsMagehunter(final TovolarsMagehunter card) {
+    private TovolarsMagehunter(final TovolarsMagehunter card) {
         super(card);
     }
 

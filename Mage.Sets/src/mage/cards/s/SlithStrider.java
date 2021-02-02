@@ -29,7 +29,7 @@ public final class SlithStrider extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false));
     }
 
-    public SlithStrider(final SlithStrider card) {
+    private SlithStrider(final SlithStrider card) {
         super(card);
     }
 

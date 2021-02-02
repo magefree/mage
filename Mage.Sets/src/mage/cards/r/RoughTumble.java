@@ -44,7 +44,7 @@ public final class RoughTumble extends SplitCard {
 
     }
 
-    public RoughTumble(final RoughTumble card) {
+    private RoughTumble(final RoughTumble card) {
         super(card);
     }
 

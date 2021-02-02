@@ -42,7 +42,7 @@ public final class ScreechingSilcaw extends CardImpl {
         this.addAbility(conditional);
     }
 
-    public ScreechingSilcaw(final ScreechingSilcaw card) {
+    private ScreechingSilcaw(final ScreechingSilcaw card) {
         super(card);
     }
 

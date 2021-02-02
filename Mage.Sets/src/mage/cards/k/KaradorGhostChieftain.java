@@ -48,7 +48,7 @@ public final class KaradorGhostChieftain extends CardImpl {
                 new KaradorGhostChieftainWatcher());
     }
 
-    public KaradorGhostChieftain(final KaradorGhostChieftain card) {
+    private KaradorGhostChieftain(final KaradorGhostChieftain card) {
         super(card);
     }
 

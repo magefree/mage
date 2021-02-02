@@ -42,7 +42,7 @@ public final class TitanOfEternalFire extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public TitanOfEternalFire(final TitanOfEternalFire card) {
+    private TitanOfEternalFire(final TitanOfEternalFire card) {
         super(card);
     }
 

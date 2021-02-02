@@ -58,7 +58,7 @@ public final class VeteransVoice extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public VeteransVoice(final VeteransVoice card) {
+    private VeteransVoice(final VeteransVoice card) {
         super(card);
     }
 

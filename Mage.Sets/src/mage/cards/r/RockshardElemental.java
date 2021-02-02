@@ -29,7 +29,7 @@ public final class RockshardElemental extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{R}{R}")));
     }
 
-    public RockshardElemental(final RockshardElemental card) {
+    private RockshardElemental(final RockshardElemental card) {
         super(card);
     }
 

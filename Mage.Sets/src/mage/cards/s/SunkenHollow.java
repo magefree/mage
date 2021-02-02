@@ -43,7 +43,7 @@ public final class SunkenHollow extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public SunkenHollow(final SunkenHollow card) {
+    private SunkenHollow(final SunkenHollow card) {
         super(card);
     }
 

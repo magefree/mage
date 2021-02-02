@@ -41,7 +41,7 @@ public final class GlowsporeShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GlowsporeShaman(final GlowsporeShaman card) {
+    private GlowsporeShaman(final GlowsporeShaman card) {
         super(card);
     }
 

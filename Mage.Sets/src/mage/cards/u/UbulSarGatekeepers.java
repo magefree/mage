@@ -52,7 +52,7 @@ public final class UbulSarGatekeepers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UbulSarGatekeepers(final UbulSarGatekeepers card) {
+    private UbulSarGatekeepers(final UbulSarGatekeepers card) {
         super(card);
     }
 

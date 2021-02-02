@@ -26,7 +26,7 @@ public final class NimbusOfTheIsles extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public NimbusOfTheIsles(final NimbusOfTheIsles card) {
+    private NimbusOfTheIsles(final NimbusOfTheIsles card) {
         super(card);
     }
 

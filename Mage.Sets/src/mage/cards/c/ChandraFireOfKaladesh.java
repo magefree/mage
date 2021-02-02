@@ -60,7 +60,7 @@ public final class ChandraFireOfKaladesh extends CardImpl {
 
     }
 
-    public ChandraFireOfKaladesh(final ChandraFireOfKaladesh card) {
+    private ChandraFireOfKaladesh(final ChandraFireOfKaladesh card) {
         super(card);
     }
 

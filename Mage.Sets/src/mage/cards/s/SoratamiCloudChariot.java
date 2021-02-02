@@ -44,7 +44,7 @@ public final class SoratamiCloudChariot extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public SoratamiCloudChariot(final SoratamiCloudChariot card) {
+    private SoratamiCloudChariot(final SoratamiCloudChariot card) {
         super(card);
     }
 

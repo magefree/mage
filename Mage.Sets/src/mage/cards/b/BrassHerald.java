@@ -40,7 +40,7 @@ public final class BrassHerald extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, false)));
     }
 
-    public BrassHerald(final BrassHerald card) {
+    private BrassHerald(final BrassHerald card) {
         super(card);
     }
 

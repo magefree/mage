@@ -56,7 +56,7 @@ public final class VizierOfTheAnointed extends CardImpl {
 
     }
 
-    public VizierOfTheAnointed(final VizierOfTheAnointed card) {
+    private VizierOfTheAnointed(final VizierOfTheAnointed card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class RoughshodMentor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public RoughshodMentor(final RoughshodMentor card) {
+    private RoughshodMentor(final RoughshodMentor card) {
         super(card);
     }
 

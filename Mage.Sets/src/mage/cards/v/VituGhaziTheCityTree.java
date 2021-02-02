@@ -31,7 +31,7 @@ public final class VituGhaziTheCityTree extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VituGhaziTheCityTree(final VituGhaziTheCityTree card) {
+    private VituGhaziTheCityTree(final VituGhaziTheCityTree card) {
         super(card);
     }
 

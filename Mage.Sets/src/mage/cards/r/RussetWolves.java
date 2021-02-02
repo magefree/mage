@@ -22,7 +22,7 @@ public final class RussetWolves extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public RussetWolves(final RussetWolves card) {
+    private RussetWolves(final RussetWolves card) {
         super(card);
     }
 

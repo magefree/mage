@@ -32,7 +32,7 @@ public final class Sleep extends CardImpl {
         this.getSpellAbility().addEffect(new SleepEffect());
     }
 
-    public Sleep(final Sleep card) {
+    private Sleep(final Sleep card) {
         super(card);
     }
 

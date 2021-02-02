@@ -29,7 +29,7 @@ public final class PurifyTheGrave extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{W}"), TimingRule.INSTANT));
     }
 
-    public PurifyTheGrave(final PurifyTheGrave card) {
+    private PurifyTheGrave(final PurifyTheGrave card) {
         super(card);
     }
 

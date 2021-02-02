@@ -27,7 +27,7 @@ public final class InfernoElemental extends CardImpl {
         this.addAbility(new BlocksOrBecomesBlockedSourceTriggeredAbility(new DamageTargetEffect(3, true, "that creature"), false));
     }
 
-    public InfernoElemental(final InfernoElemental card) {
+    private InfernoElemental(final InfernoElemental card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class ExhumerThrull extends CardImpl {
 
     }
 
-    public ExhumerThrull(final ExhumerThrull card) {
+    private ExhumerThrull(final ExhumerThrull card) {
         super(card);
     }
 

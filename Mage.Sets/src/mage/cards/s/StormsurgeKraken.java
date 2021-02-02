@@ -37,7 +37,7 @@ public final class StormsurgeKraken extends CardImpl {
         this.addAbility(new LieutenantAbility(effect));
     }
 
-    public StormsurgeKraken(final StormsurgeKraken card) {
+    private StormsurgeKraken(final StormsurgeKraken card) {
         super(card);
     }
 

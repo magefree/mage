@@ -34,7 +34,7 @@ public final class HeartSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public HeartSliver(final HeartSliver card) {
+    private HeartSliver(final HeartSliver card) {
         super(card);
     }
 

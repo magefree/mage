@@ -28,7 +28,7 @@ public final class Incite extends CardImpl {
         this.getSpellAbility().addEffect(new AttacksIfAbleTargetEffect(Duration.EndOfTurn));
     }
 
-    public Incite(final Incite card) {
+    private Incite(final Incite card) {
         super(card);
     }
 

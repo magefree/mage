@@ -51,7 +51,7 @@ public final class StonehewerGiant extends CardImpl {
 
     }
 
-    public StonehewerGiant(final StonehewerGiant card) {
+    private StonehewerGiant(final StonehewerGiant card) {
         super(card);
     }
 

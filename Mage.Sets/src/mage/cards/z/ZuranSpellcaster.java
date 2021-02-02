@@ -30,7 +30,7 @@ public final class ZuranSpellcaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZuranSpellcaster(final ZuranSpellcaster card) {
+    private ZuranSpellcaster(final ZuranSpellcaster card) {
         super(card);
     }
 

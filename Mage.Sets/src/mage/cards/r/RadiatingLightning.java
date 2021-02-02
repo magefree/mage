@@ -27,7 +27,7 @@ public final class RadiatingLightning extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public RadiatingLightning(final RadiatingLightning card) {
+    private RadiatingLightning(final RadiatingLightning card) {
         super(card);
     }
 

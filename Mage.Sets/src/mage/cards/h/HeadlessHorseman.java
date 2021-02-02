@@ -23,7 +23,7 @@ public final class HeadlessHorseman extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public HeadlessHorseman(final HeadlessHorseman card) {
+    private HeadlessHorseman(final HeadlessHorseman card) {
         super(card);
     }
 

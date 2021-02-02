@@ -28,7 +28,7 @@ public final class SlithPredator extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false));
     }
 
-    public SlithPredator(final SlithPredator card) {
+    private SlithPredator(final SlithPredator card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class KnollspineDragon extends CardImpl {
 
     }
 
-    public KnollspineDragon(final KnollspineDragon card) {
+    private KnollspineDragon(final KnollspineDragon card) {
         super(card);
     }
 

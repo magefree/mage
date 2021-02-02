@@ -34,7 +34,7 @@ public final class ElvishAberration extends CardImpl {
         this.addAbility(new ForestcyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public ElvishAberration(final ElvishAberration card) {
+    private ElvishAberration(final ElvishAberration card) {
         super(card);
     }
 

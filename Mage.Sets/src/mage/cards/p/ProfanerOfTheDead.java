@@ -38,7 +38,7 @@ public final class ProfanerOfTheDead extends CardImpl {
 
     }
 
-    public ProfanerOfTheDead(final ProfanerOfTheDead card) {
+    private ProfanerOfTheDead(final ProfanerOfTheDead card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class SkywardEyeProphets extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RevealTopLandToBattlefieldElseHandEffect(), new TapSourceCost()));
     }
 
-    public SkywardEyeProphets(final SkywardEyeProphets card) {
+    private SkywardEyeProphets(final SkywardEyeProphets card) {
         super(card);
     }
 

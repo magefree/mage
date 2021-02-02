@@ -36,7 +36,7 @@ public final class GolgariFindbroker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GolgariFindbroker(final GolgariFindbroker card) {
+    private GolgariFindbroker(final GolgariFindbroker card) {
         super(card);
     }
 

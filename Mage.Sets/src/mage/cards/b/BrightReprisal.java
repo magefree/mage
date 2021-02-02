@@ -26,7 +26,7 @@ public final class BrightReprisal extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public BrightReprisal(final BrightReprisal card) {
+    private BrightReprisal(final BrightReprisal card) {
         super(card);
     }
 

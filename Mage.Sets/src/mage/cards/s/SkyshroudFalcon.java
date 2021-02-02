@@ -29,7 +29,7 @@ public final class SkyshroudFalcon extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public SkyshroudFalcon(final SkyshroudFalcon card) {
+    private SkyshroudFalcon(final SkyshroudFalcon card) {
         super(card);
     }
 

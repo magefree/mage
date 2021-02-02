@@ -28,7 +28,7 @@ public final class RamunapExcavator extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayLandsFromGraveyardControllerEffect()));
     }
 
-    public RamunapExcavator(final RamunapExcavator card) {
+    private RamunapExcavator(final RamunapExcavator card) {
         super(card);
     }
 

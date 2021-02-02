@@ -52,7 +52,7 @@ public final class SinkingFeeling extends CardImpl {
 
     }
 
-    public SinkingFeeling(final SinkingFeeling card) {
+    private SinkingFeeling(final SinkingFeeling card) {
         super(card);
     }
 

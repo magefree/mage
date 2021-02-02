@@ -34,7 +34,7 @@ public final class ArmillarySphere extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArmillarySphere(final ArmillarySphere card) {
+    private ArmillarySphere(final ArmillarySphere card) {
         super(card);
     }
 

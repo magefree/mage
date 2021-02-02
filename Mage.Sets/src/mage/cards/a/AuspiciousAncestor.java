@@ -40,7 +40,7 @@ public final class AuspiciousAncestor extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new DoIfCostPaid(new GainLifeEffect(1), new ManaCostsImpl("{1}")), filter, false));
     }
 
-    public AuspiciousAncestor(final AuspiciousAncestor card) {
+    private AuspiciousAncestor(final AuspiciousAncestor card) {
         super(card);
     }
 

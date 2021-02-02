@@ -43,7 +43,7 @@ public final class FlightOfFancy extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public FlightOfFancy(final FlightOfFancy card) {
+    private FlightOfFancy(final FlightOfFancy card) {
         super(card);
     }
 

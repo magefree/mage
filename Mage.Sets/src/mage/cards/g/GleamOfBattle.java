@@ -23,7 +23,7 @@ public final class GleamOfBattle extends CardImpl {
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false, true));
     }
 
-    public GleamOfBattle(final GleamOfBattle card) {
+    private GleamOfBattle(final GleamOfBattle card) {
         super(card);
     }
 

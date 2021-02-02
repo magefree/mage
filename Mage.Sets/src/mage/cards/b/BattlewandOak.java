@@ -40,7 +40,7 @@ public final class BattlewandOak extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), filterTreefolk, false));
     }
 
-    public BattlewandOak(final BattlewandOak card) {
+    private BattlewandOak(final BattlewandOak card) {
         super(card);
     }
 

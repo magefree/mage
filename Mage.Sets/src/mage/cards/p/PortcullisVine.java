@@ -53,7 +53,7 @@ public final class PortcullisVine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PortcullisVine(final PortcullisVine card) {
+    private PortcullisVine(final PortcullisVine card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class MnemonicNexus extends CardImpl {
         this.getSpellAbility().addEffect(new MnemonicNexusEffect());
     }
 
-    public MnemonicNexus(final MnemonicNexus card) {
+    private MnemonicNexus(final MnemonicNexus card) {
         super(card);
     }
 

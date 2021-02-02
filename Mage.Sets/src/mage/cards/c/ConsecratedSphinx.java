@@ -35,7 +35,7 @@ public final class ConsecratedSphinx extends CardImpl {
         this.addAbility(new ConsecratedSphinxTriggeredAbility());
     }
 
-    public ConsecratedSphinx(final ConsecratedSphinx card) {
+    private ConsecratedSphinx(final ConsecratedSphinx card) {
         super(card);
     }
 

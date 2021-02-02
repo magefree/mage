@@ -35,7 +35,7 @@ public final class SeaDrake extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeaDrake(final SeaDrake card) {
+    private SeaDrake(final SeaDrake card) {
         super(card);
     }
 

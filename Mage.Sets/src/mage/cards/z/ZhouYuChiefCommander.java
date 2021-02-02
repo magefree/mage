@@ -30,7 +30,7 @@ public final class ZhouYuChiefCommander extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
     }
 
-    public ZhouYuChiefCommander(final ZhouYuChiefCommander card) {
+    private ZhouYuChiefCommander(final ZhouYuChiefCommander card) {
         super(card);
     }
 

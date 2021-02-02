@@ -35,7 +35,7 @@ public final class Corpseweft extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Corpseweft(final Corpseweft card) {
+    private Corpseweft(final Corpseweft card) {
         super(card);
     }
 

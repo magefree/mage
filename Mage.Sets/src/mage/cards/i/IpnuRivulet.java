@@ -53,7 +53,7 @@ public final class IpnuRivulet extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IpnuRivulet(final IpnuRivulet card) {
+    private IpnuRivulet(final IpnuRivulet card) {
         super(card);
     }
 

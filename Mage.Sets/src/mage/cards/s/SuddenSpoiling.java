@@ -36,7 +36,7 @@ public final class SuddenSpoiling extends CardImpl {
 
     }
 
-    public SuddenSpoiling(final SuddenSpoiling card) {
+    private SuddenSpoiling(final SuddenSpoiling card) {
         super(card);
     }
 

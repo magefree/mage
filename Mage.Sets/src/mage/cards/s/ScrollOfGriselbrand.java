@@ -40,7 +40,7 @@ public final class ScrollOfGriselbrand extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScrollOfGriselbrand(final ScrollOfGriselbrand card) {
+    private ScrollOfGriselbrand(final ScrollOfGriselbrand card) {
         super(card);
     }
 

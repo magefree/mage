@@ -26,7 +26,7 @@ public final class KnightOfThePilgrimsRoad extends CardImpl {
         this.addAbility(new RenownAbility(1));
     }
 
-    public KnightOfThePilgrimsRoad(final KnightOfThePilgrimsRoad card) {
+    private KnightOfThePilgrimsRoad(final KnightOfThePilgrimsRoad card) {
         super(card);
     }
 

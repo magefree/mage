@@ -27,7 +27,7 @@ public final class Petrahydrox extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new ReturnToHandSourceEffect(true)));
     }
 
-    public Petrahydrox(final Petrahydrox card) {
+    private Petrahydrox(final Petrahydrox card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class HighSentinelsOfArashin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HighSentinelsOfArashin(final HighSentinelsOfArashin card) {
+    private HighSentinelsOfArashin(final HighSentinelsOfArashin card) {
         super(card);
     }
 

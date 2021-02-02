@@ -24,7 +24,7 @@ public final class Pounce extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
     }
 
-    public Pounce(final Pounce card) {
+    private Pounce(final Pounce card) {
         super(card);
     }
 

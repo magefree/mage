@@ -39,7 +39,7 @@ public final class HinderingLight extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public HinderingLight(final HinderingLight card) {
+    private HinderingLight(final HinderingLight card) {
         super(card);
     }
 

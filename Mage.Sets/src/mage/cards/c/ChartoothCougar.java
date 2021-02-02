@@ -34,7 +34,7 @@ public final class ChartoothCougar extends CardImpl {
         this.addAbility(new MountaincyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public ChartoothCougar(final ChartoothCougar card) {
+    private ChartoothCougar(final ChartoothCougar card) {
         super(card);
     }
 

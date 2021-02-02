@@ -27,7 +27,7 @@ public final class Aethersnatch extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Aethersnatch(final Aethersnatch card) {
+    private Aethersnatch(final Aethersnatch card) {
         super(card);
     }
 

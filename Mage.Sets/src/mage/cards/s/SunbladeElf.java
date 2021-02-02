@@ -44,7 +44,7 @@ public final class SunbladeElf extends CardImpl {
 
     }
 
-    public SunbladeElf(final SunbladeElf card) {
+    private SunbladeElf(final SunbladeElf card) {
         super(card);
     }
 

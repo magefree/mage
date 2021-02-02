@@ -41,7 +41,7 @@ public final class MycosynthLattice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MycosynthLattice(final MycosynthLattice card) {
+    private MycosynthLattice(final MycosynthLattice card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class Benthicore extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Benthicore(final Benthicore card) {
+    private Benthicore(final Benthicore card) {
         super(card);
     }
 

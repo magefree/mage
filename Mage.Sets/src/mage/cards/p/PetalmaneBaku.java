@@ -46,7 +46,7 @@ public final class PetalmaneBaku extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PetalmaneBaku(final PetalmaneBaku card) {
+    private PetalmaneBaku(final PetalmaneBaku card) {
         super(card);
     }
 

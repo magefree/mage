@@ -47,7 +47,7 @@ public final class RingOfValkas extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
-    public RingOfValkas(final RingOfValkas card) {
+    private RingOfValkas(final RingOfValkas card) {
         super(card);
     }
 

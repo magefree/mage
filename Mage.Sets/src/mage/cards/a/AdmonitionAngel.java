@@ -53,7 +53,7 @@ public final class AdmonitionAngel extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public AdmonitionAngel(final AdmonitionAngel card) {
+    private AdmonitionAngel(final AdmonitionAngel card) {
         super(card);
     }
 

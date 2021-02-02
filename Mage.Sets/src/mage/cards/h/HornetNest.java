@@ -36,7 +36,7 @@ public final class HornetNest extends CardImpl {
         this.addAbility(new DealtDamageToSourceTriggeredAbility(new HornetNestDealDamageEffect(), false, false, true));
     }
 
-    public HornetNest(final HornetNest card) {
+    private HornetNest(final HornetNest card) {
         super(card);
     }
 

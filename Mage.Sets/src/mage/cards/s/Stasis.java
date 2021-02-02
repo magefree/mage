@@ -30,7 +30,7 @@ public final class Stasis extends CardImpl {
 
     }
 
-    public Stasis(final Stasis card) {
+    private Stasis(final Stasis card) {
         super(card);
     }
 

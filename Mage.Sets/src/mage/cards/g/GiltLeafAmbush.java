@@ -35,7 +35,7 @@ public final class GiltLeafAmbush extends CardImpl {
         this.getSpellAbility().addEffect(new GiltLeafAmbushCreateTokenEffect());
     }
 
-    public GiltLeafAmbush(final GiltLeafAmbush card) {
+    private GiltLeafAmbush(final GiltLeafAmbush card) {
         super(card);
     }
 

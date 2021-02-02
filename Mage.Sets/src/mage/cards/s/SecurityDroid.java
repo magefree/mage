@@ -31,7 +31,7 @@ public final class SecurityDroid extends CardImpl {
         this.addAbility(new RepairAbility(3));
     }
 
-    public SecurityDroid(final SecurityDroid card) {
+    private SecurityDroid(final SecurityDroid card) {
         super(card);
     }
 

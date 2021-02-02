@@ -37,7 +37,7 @@ public final class MarshLurker extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public MarshLurker(final MarshLurker card) {
+    private MarshLurker(final MarshLurker card) {
         super(card);
     }
 

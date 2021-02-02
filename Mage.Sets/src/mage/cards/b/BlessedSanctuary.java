@@ -38,7 +38,7 @@ public class BlessedSanctuary extends CardImpl {
                 new CreateTokenEffect(new UnicornToken()), filterNontoken, false));
     }
 
-    public BlessedSanctuary(final BlessedSanctuary card) {
+    private BlessedSanctuary(final BlessedSanctuary card) {
         super(card);
     }
 

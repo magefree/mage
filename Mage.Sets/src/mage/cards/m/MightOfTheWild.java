@@ -51,7 +51,7 @@ public final class MightOfTheWild extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public MightOfTheWild(final MightOfTheWild card) {
+    private MightOfTheWild(final MightOfTheWild card) {
         super(card);
     }
 

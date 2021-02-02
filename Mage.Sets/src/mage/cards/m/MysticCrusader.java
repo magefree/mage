@@ -47,7 +47,7 @@ public final class MysticCrusader extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MysticCrusader(final MysticCrusader card) {
+    private MysticCrusader(final MysticCrusader card) {
         super(card);
     }
 

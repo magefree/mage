@@ -52,7 +52,7 @@ public final class AvenSoulgazer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AvenSoulgazer(final AvenSoulgazer card) {
+    private AvenSoulgazer(final AvenSoulgazer card) {
         super(card);
     }
 

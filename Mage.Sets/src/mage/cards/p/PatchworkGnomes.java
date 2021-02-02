@@ -31,7 +31,7 @@ public final class PatchworkGnomes extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new DiscardTargetCost(new TargetCardInHand(new FilterCard("a card")))));
     }
 
-    public PatchworkGnomes(final PatchworkGnomes card) {
+    private PatchworkGnomes(final PatchworkGnomes card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class ZendikarIncarnate extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(controlledLands, Duration.EndOfGame)));
     }
 
-    public ZendikarIncarnate(final ZendikarIncarnate card) {
+    private ZendikarIncarnate(final ZendikarIncarnate card) {
         super(card);
     }
 

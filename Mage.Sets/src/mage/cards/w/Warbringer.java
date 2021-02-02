@@ -40,7 +40,7 @@ public final class Warbringer extends CardImpl {
         this.addAbility(new DashAbility(this, "{2}{R}"));
     }
 
-    public Warbringer(final Warbringer card) {
+    private Warbringer(final Warbringer card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class YoreTillerNephilim extends CardImpl {
         this.addAbility(ability);
     }
 
-    public YoreTillerNephilim(final YoreTillerNephilim card) {
+    private YoreTillerNephilim(final YoreTillerNephilim card) {
         super(card);
     }
 

@@ -58,7 +58,7 @@ public final class RakdosRiteknife extends CardImpl {
         this.addAbility(new EquipAbility(2));
     }
 
-    public RakdosRiteknife(final RakdosRiteknife card) {
+    private RakdosRiteknife(final RakdosRiteknife card) {
         super(card);
     }
 

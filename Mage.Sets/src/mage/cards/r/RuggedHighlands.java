@@ -30,7 +30,7 @@ public final class RuggedHighlands extends CardImpl {
                 
     }
 
-    public RuggedHighlands(final RuggedHighlands card) {
+    private RuggedHighlands(final RuggedHighlands card) {
         super(card);
     }
 

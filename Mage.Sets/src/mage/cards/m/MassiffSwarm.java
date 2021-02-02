@@ -27,7 +27,7 @@ public final class MassiffSwarm extends CardImpl {
 
     }
 
-    public MassiffSwarm(final MassiffSwarm card) {
+    private MassiffSwarm(final MassiffSwarm card) {
         super(card);
     }
 

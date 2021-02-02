@@ -35,7 +35,7 @@ public final class PatrolSignaler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PatrolSignaler(final PatrolSignaler card) {
+    private PatrolSignaler(final PatrolSignaler card) {
         super(card);
     }
 

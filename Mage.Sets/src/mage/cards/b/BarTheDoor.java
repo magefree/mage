@@ -22,7 +22,7 @@ public final class BarTheDoor extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(0, 4, Duration.EndOfTurn));
     }
 
-    public BarTheDoor(final BarTheDoor card) {
+    private BarTheDoor(final BarTheDoor card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class LargerThanLife extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public LargerThanLife(final LargerThanLife card) {
+    private LargerThanLife(final LargerThanLife card) {
         super(card);
     }
 

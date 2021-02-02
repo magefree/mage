@@ -50,7 +50,7 @@ public final class KrosanWarchief extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KrosanWarchief(final KrosanWarchief card) {
+    private KrosanWarchief(final KrosanWarchief card) {
         super(card);
     }
 

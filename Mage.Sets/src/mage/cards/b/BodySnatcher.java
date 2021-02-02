@@ -44,7 +44,7 @@ public final class BodySnatcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BodySnatcher(final BodySnatcher card) {
+    private BodySnatcher(final BodySnatcher card) {
         super(card);
     }
 

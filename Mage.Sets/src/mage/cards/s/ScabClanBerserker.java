@@ -46,7 +46,7 @@ public final class ScabClanBerserker extends CardImpl {
                 "Whenever an opponent casts a noncreature spell, if Scab-Clan Berserker is renowned, Scab-Clan Berserker deals 2 damage to that player"));
     }
 
-    public ScabClanBerserker(final ScabClanBerserker card) {
+    private ScabClanBerserker(final ScabClanBerserker card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class SivvisRuse extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED));
     }
 
-    public SivvisRuse(final SivvisRuse card) {
+    private SivvisRuse(final SivvisRuse card) {
         super(card);
     }
 

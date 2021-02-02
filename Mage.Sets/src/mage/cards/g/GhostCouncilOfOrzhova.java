@@ -52,7 +52,7 @@ public final class GhostCouncilOfOrzhova extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhostCouncilOfOrzhova(final GhostCouncilOfOrzhova card) {
+    private GhostCouncilOfOrzhova(final GhostCouncilOfOrzhova card) {
         super(card);
     }
 

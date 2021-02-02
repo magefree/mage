@@ -34,7 +34,7 @@ public final class TrompTheDomains extends CardImpl {
 
     }
 
-    public TrompTheDomains(final TrompTheDomains card) {
+    private TrompTheDomains(final TrompTheDomains card) {
         super(card);
     }
 

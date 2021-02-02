@@ -25,7 +25,7 @@ public final class TriplicateSpirits extends CardImpl {
 
     }
 
-    public TriplicateSpirits(final TriplicateSpirits card) {
+    private TriplicateSpirits(final TriplicateSpirits card) {
         super(card);
     }
 

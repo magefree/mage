@@ -37,7 +37,7 @@ public final class PriestOfIroas extends CardImpl {
 
     }
 
-    public PriestOfIroas(final PriestOfIroas card) {
+    private PriestOfIroas(final PriestOfIroas card) {
         super(card);
     }
 

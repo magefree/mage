@@ -22,7 +22,7 @@ public final class Infiltrate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Infiltrate(final Infiltrate card) {
+    private Infiltrate(final Infiltrate card) {
         super(card);
     }
 

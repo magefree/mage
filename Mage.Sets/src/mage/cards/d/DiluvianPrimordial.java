@@ -51,7 +51,7 @@ public final class DiluvianPrimordial extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DiluvianPrimordial(final DiluvianPrimordial card) {
+    private DiluvianPrimordial(final DiluvianPrimordial card) {
         super(card);
     }
 

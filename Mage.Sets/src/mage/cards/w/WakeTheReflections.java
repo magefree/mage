@@ -24,7 +24,7 @@ public final class WakeTheReflections extends CardImpl {
         this.getSpellAbility().addEffect(new PopulateEffect());
     }
 
-    public WakeTheReflections(final WakeTheReflections card) {
+    private WakeTheReflections(final WakeTheReflections card) {
         super(card);
     }
 

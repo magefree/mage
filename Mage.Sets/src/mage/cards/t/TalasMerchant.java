@@ -23,7 +23,7 @@ public final class TalasMerchant extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public TalasMerchant(final TalasMerchant card) {
+    private TalasMerchant(final TalasMerchant card) {
         super(card);
     }
 

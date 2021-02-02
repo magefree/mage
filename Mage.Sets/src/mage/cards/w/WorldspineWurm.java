@@ -36,7 +36,7 @@ public final class WorldspineWurm extends CardImpl {
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
     }
 
-    public WorldspineWurm(final WorldspineWurm card) {
+    private WorldspineWurm(final WorldspineWurm card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class TitaniasBoon extends CardImpl {
 		this.getSpellAbility().addEffect(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED));
     }
 
-    public TitaniasBoon(final TitaniasBoon card) {
+    private TitaniasBoon(final TitaniasBoon card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class GolgariGraveTroll extends CardImpl {
         this.addAbility(new DredgeAbility(6));
     }
 
-    public GolgariGraveTroll(final GolgariGraveTroll card) {
+    private GolgariGraveTroll(final GolgariGraveTroll card) {
         super(card);
     }
 

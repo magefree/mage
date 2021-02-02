@@ -46,7 +46,7 @@ public final class FlowstoneSculpture extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlowstoneSculpture(final FlowstoneSculpture card) {
+    private FlowstoneSculpture(final FlowstoneSculpture card) {
         super(card);
     }
 

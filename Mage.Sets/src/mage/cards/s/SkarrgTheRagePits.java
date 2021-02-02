@@ -33,7 +33,7 @@ public final class SkarrgTheRagePits extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkarrgTheRagePits(final SkarrgTheRagePits card) {
+    private SkarrgTheRagePits(final SkarrgTheRagePits card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class GenesisHydra extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
     }
 
-    public GenesisHydra(final GenesisHydra card) {
+    private GenesisHydra(final GenesisHydra card) {
         super(card);
     }
 

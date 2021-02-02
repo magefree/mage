@@ -48,7 +48,7 @@ public final class MuseVessel extends CardImpl {
         this.addAbility(playAbility);
     }
 
-    public MuseVessel(final MuseVessel card) {
+    private MuseVessel(final MuseVessel card) {
         super(card);
     }
 

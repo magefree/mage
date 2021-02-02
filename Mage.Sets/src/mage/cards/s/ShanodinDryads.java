@@ -26,7 +26,7 @@ public final class ShanodinDryads extends CardImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public ShanodinDryads(final ShanodinDryads card) {
+    private ShanodinDryads(final ShanodinDryads card) {
         super(card);
     }
 

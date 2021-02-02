@@ -41,7 +41,7 @@ public final class StartledAwake extends CardImpl {
 
     }
 
-    public StartledAwake(final StartledAwake card) {
+    private StartledAwake(final StartledAwake card) {
         super(card);
     }
 

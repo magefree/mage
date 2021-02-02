@@ -59,7 +59,7 @@ public final class KioraTheCrashingWave extends CardImpl {
 
     }
 
-    public KioraTheCrashingWave(final KioraTheCrashingWave card) {
+    private KioraTheCrashingWave(final KioraTheCrashingWave card) {
         super(card);
     }
 

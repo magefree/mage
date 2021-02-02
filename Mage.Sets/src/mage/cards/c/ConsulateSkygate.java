@@ -28,7 +28,7 @@ public final class ConsulateSkygate extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public ConsulateSkygate(final ConsulateSkygate card) {
+    private ConsulateSkygate(final ConsulateSkygate card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class ThunderbladeCharge extends CardImpl {
                                 + "If you do, you may cast it without paying its mana cost")));
     }
 
-    public ThunderbladeCharge(final ThunderbladeCharge card) {
+    private ThunderbladeCharge(final ThunderbladeCharge card) {
         super(card);
     }
 

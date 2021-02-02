@@ -48,7 +48,7 @@ public final class XenicPoltergeist extends CardImpl {
 
     }
 
-    public XenicPoltergeist(final XenicPoltergeist card) {
+    private XenicPoltergeist(final XenicPoltergeist card) {
         super(card);
     }
 

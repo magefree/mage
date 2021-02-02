@@ -25,7 +25,7 @@ public final class MawOfTheMire extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(4));
     }
 
-    public MawOfTheMire(final MawOfTheMire card) {
+    private MawOfTheMire(final MawOfTheMire card) {
         super(card);
     }
 

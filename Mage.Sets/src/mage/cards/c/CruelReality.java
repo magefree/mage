@@ -47,7 +47,7 @@ public final class CruelReality extends CardImpl {
 
     }
 
-    public CruelReality(final CruelReality card) {
+    private CruelReality(final CruelReality card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class Regenerate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Regenerate(final Regenerate card) {
+    private Regenerate(final Regenerate card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class Censor extends CardImpl {
 
     }
 
-    public Censor(final Censor card) {
+    private Censor(final Censor card) {
         super(card);
     }
 

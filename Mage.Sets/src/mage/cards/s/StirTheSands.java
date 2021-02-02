@@ -30,7 +30,7 @@ public final class StirTheSands extends CardImpl {
         this.addAbility(new CycleTriggeredAbility(new CreateTokenEffect(new ZombieToken())));
     }
 
-    public StirTheSands(final StirTheSands card) {
+    private StirTheSands(final StirTheSands card) {
         super(card);
     }
 

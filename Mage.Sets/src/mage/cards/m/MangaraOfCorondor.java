@@ -38,7 +38,7 @@ public final class MangaraOfCorondor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MangaraOfCorondor(final MangaraOfCorondor card) {
+    private MangaraOfCorondor(final MangaraOfCorondor card) {
         super(card);
     }
 

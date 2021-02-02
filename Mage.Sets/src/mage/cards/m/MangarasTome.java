@@ -40,7 +40,7 @@ public final class MangarasTome extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MangarasTomeReplacementEffect(), new GenericManaCost(2)));
     }
 
-    public MangarasTome(final MangarasTome card) {
+    private MangarasTome(final MangarasTome card) {
         super(card);
     }
 

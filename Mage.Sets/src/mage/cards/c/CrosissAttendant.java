@@ -33,7 +33,7 @@ public final class CrosissAttendant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrosissAttendant(final CrosissAttendant card) {
+    private CrosissAttendant(final CrosissAttendant card) {
         super(card);
     }
 

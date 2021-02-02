@@ -48,7 +48,7 @@ public final class SacredWhiteDeer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SacredWhiteDeer(final SacredWhiteDeer card) {
+    private SacredWhiteDeer(final SacredWhiteDeer card) {
         super(card);
     }
 

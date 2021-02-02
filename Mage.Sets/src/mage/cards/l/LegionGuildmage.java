@@ -56,7 +56,7 @@ public final class LegionGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LegionGuildmage(final LegionGuildmage card) {
+    private LegionGuildmage(final LegionGuildmage card) {
         super(card);
     }
 

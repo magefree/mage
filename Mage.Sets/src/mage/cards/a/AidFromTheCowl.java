@@ -36,7 +36,7 @@ public final class AidFromTheCowl extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, RevoltCondition.instance, ruleText), new RevoltWatcher());
     }
 
-    public AidFromTheCowl(final AidFromTheCowl card) {
+    private AidFromTheCowl(final AidFromTheCowl card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class RakdosLocket extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RakdosLocket(final RakdosLocket card) {
+    private RakdosLocket(final RakdosLocket card) {
         super(card);
     }
 

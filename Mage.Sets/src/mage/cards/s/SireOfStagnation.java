@@ -46,7 +46,7 @@ public final class SireOfStagnation extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SireOfStagnation(final SireOfStagnation card) {
+    private SireOfStagnation(final SireOfStagnation card) {
         super(card);
     }
 

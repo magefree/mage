@@ -35,7 +35,7 @@ public final class MageIlVec extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MageIlVec(final MageIlVec card) {
+    private MageIlVec(final MageIlVec card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class VampiricEmbrace extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new DealtDamageAndDiedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false), AttachmentType.AURA)));
     }
 
-    public VampiricEmbrace(final VampiricEmbrace card) {
+    private VampiricEmbrace(final VampiricEmbrace card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class LandsEdge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LandsEdge(final LandsEdge card) {
+    private LandsEdge(final LandsEdge card) {
         super(card);
     }
 

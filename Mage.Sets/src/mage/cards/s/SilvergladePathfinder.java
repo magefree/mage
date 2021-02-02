@@ -40,7 +40,7 @@ public final class SilvergladePathfinder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SilvergladePathfinder(final SilvergladePathfinder card) {
+    private SilvergladePathfinder(final SilvergladePathfinder card) {
         super(card);
     }
 

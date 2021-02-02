@@ -50,7 +50,7 @@ public final class MarkedByHonor extends CardImpl {
 
     }
 
-    public MarkedByHonor(final MarkedByHonor card) {
+    private MarkedByHonor(final MarkedByHonor card) {
         super(card);
     }
 

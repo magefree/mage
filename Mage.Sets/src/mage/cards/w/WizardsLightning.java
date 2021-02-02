@@ -43,7 +43,7 @@ public final class WizardsLightning extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
     }
 
-    public WizardsLightning(final WizardsLightning card) {
+    private WizardsLightning(final WizardsLightning card) {
         super(card);
     }
 

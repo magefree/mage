@@ -31,7 +31,7 @@ public final class HoodedKavu extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public HoodedKavu(final HoodedKavu card) {
+    private HoodedKavu(final HoodedKavu card) {
         super(card);
     }
 

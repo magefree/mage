@@ -36,7 +36,7 @@ public final class HaazdaShieldMate extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public HaazdaShieldMate(final HaazdaShieldMate card) {
+    private HaazdaShieldMate(final HaazdaShieldMate card) {
         super(card);
     }
 

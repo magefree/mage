@@ -42,7 +42,7 @@ public final class ArtificersHex extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ArtificersHexEffect(), TargetController.YOU, false, true));
     }
 
-    public ArtificersHex(final ArtificersHex card) {
+    private ArtificersHex(final ArtificersHex card) {
         super(card);
     }
 

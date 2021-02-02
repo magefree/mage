@@ -33,7 +33,7 @@ public final class HurrJackal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HurrJackal(final HurrJackal card) {
+    private HurrJackal(final HurrJackal card) {
         super(card);
     }
 

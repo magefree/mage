@@ -36,7 +36,7 @@ public final class FootstepsOfTheGoryo extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
     }
 
-    public FootstepsOfTheGoryo(final FootstepsOfTheGoryo card) {
+    private FootstepsOfTheGoryo(final FootstepsOfTheGoryo card) {
         super(card);
     }
 

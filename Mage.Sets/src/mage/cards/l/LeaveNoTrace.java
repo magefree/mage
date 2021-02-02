@@ -33,7 +33,7 @@ public final class LeaveNoTrace extends CardImpl {
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent());
     }
 
-    public LeaveNoTrace(final LeaveNoTrace card) {
+    private LeaveNoTrace(final LeaveNoTrace card) {
         super(card);
     }
 

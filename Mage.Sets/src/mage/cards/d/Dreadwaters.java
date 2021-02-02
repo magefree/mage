@@ -33,7 +33,7 @@ public final class Dreadwaters extends CardImpl {
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public Dreadwaters(final Dreadwaters card) {
+    private Dreadwaters(final Dreadwaters card) {
         super(card);
     }
 

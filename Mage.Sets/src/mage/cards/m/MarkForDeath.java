@@ -43,7 +43,7 @@ public final class MarkForDeath extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public MarkForDeath(final MarkForDeath card) {
+    private MarkForDeath(final MarkForDeath card) {
         super(card);
     }
 

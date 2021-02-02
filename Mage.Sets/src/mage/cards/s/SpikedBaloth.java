@@ -26,7 +26,7 @@ public final class SpikedBaloth extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public SpikedBaloth(final SpikedBaloth card) {
+    private SpikedBaloth(final SpikedBaloth card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class SplendidAgony extends CardImpl {
 
     }
 
-    public SplendidAgony(final SplendidAgony card) {
+    private SplendidAgony(final SplendidAgony card) {
         super(card);
     }
 

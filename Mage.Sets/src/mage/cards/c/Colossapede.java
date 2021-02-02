@@ -19,7 +19,7 @@ public final class Colossapede extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public Colossapede(final Colossapede card) {
+    private Colossapede(final Colossapede card) {
         super(card);
     }
 

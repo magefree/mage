@@ -31,7 +31,7 @@ public final class LifesLegacy extends CardImpl {
 
     }
 
-    public LifesLegacy(final LifesLegacy card) {
+    private LifesLegacy(final LifesLegacy card) {
         super(card);
     }
 

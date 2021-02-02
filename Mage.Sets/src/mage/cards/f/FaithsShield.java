@@ -37,7 +37,7 @@ public final class FaithsShield extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledPermanent());
     }
 
-    public FaithsShield(final FaithsShield card) {
+    private FaithsShield(final FaithsShield card) {
         super(card);
     }
 

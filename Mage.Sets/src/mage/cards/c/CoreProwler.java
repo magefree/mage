@@ -29,7 +29,7 @@ public final class CoreProwler extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ProliferateEffect()));
     }
 
-    public CoreProwler(final CoreProwler card) {
+    private CoreProwler(final CoreProwler card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class FitOfRage extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public FitOfRage(final FitOfRage card) {
+    private FitOfRage(final FitOfRage card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class PhantasmalFiend extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
     }
 
-    public PhantasmalFiend(final PhantasmalFiend card) {
+    private PhantasmalFiend(final PhantasmalFiend card) {
         super(card);
     }
 

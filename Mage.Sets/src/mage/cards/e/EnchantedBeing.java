@@ -36,7 +36,7 @@ public final class EnchantedBeing extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public EnchantedBeing(final EnchantedBeing card) {
+    private EnchantedBeing(final EnchantedBeing card) {
         super(card);
     }
 

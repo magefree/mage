@@ -22,7 +22,7 @@ public final class BladeOfTheSixthPride extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public BladeOfTheSixthPride(final BladeOfTheSixthPride card) {
+    private BladeOfTheSixthPride(final BladeOfTheSixthPride card) {
         super(card);
     }
 

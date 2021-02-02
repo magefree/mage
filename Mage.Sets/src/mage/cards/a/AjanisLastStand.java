@@ -46,7 +46,7 @@ public final class AjanisLastStand extends CardImpl {
         ));
     }
 
-    public AjanisLastStand(final AjanisLastStand card) {
+    private AjanisLastStand(final AjanisLastStand card) {
         super(card);
     }
 

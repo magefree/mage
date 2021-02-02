@@ -32,7 +32,7 @@ public final class Liquify extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public Liquify(final Liquify card) {
+    private Liquify(final Liquify card) {
         super(card);
     }
 

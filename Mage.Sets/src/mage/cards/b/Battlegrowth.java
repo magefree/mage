@@ -22,7 +22,7 @@ public final class Battlegrowth extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Battlegrowth(final Battlegrowth card) {
+    private Battlegrowth(final Battlegrowth card) {
         super(card);
     }
 

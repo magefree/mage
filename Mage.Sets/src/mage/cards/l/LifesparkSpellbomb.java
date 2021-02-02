@@ -39,7 +39,7 @@ public final class LifesparkSpellbomb extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public LifesparkSpellbomb(final LifesparkSpellbomb card) {
+    private LifesparkSpellbomb(final LifesparkSpellbomb card) {
         super(card);
     }
 

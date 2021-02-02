@@ -47,7 +47,7 @@ public final class SifterOfSkulls extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(effect, false, filter));
     }
 
-    public SifterOfSkulls(final SifterOfSkulls card) {
+    private SifterOfSkulls(final SifterOfSkulls card) {
         super(card);
     }
 

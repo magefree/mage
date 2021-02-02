@@ -33,7 +33,7 @@ public final class Necropouncer extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public Necropouncer(final Necropouncer card) {
+    private Necropouncer(final Necropouncer card) {
         super(card);
     }
 

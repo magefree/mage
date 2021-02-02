@@ -37,7 +37,7 @@ public final class GoblinHeelcutter extends CardImpl {
 
     }
 
-    public GoblinHeelcutter(final GoblinHeelcutter card) {
+    private GoblinHeelcutter(final GoblinHeelcutter card) {
         super(card);
     }
 

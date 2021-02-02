@@ -27,7 +27,7 @@ public final class Capsize extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
-    public Capsize(final Capsize card) {
+    private Capsize(final Capsize card) {
         super(card);
     }
 

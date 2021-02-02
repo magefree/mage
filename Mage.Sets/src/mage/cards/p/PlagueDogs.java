@@ -38,7 +38,7 @@ public final class PlagueDogs extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PlagueDogs(final PlagueDogs card) {
+    private PlagueDogs(final PlagueDogs card) {
         super(card);
     }
 

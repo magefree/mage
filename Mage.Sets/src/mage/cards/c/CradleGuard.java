@@ -28,7 +28,7 @@ public final class CradleGuard extends CardImpl {
     this.addAbility(new EchoAbility("{1}{G}{G}"));
     }
 
-    public CradleGuard(final CradleGuard card) {
+    private CradleGuard(final CradleGuard card) {
         super(card);
     }
 

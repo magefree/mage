@@ -34,7 +34,7 @@ public final class Repurpose extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
-    public Repurpose(final Repurpose card) {
+    private Repurpose(final Repurpose card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class HeirloomBlade extends CardImpl {
 
     }
 
-    public HeirloomBlade(final HeirloomBlade card) {
+    private HeirloomBlade(final HeirloomBlade card) {
         super(card);
     }
 

@@ -20,7 +20,7 @@ public final class MoxJet extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public MoxJet(final MoxJet card) {
+    private MoxJet(final MoxJet card) {
         super(card);
     }
 

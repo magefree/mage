@@ -34,7 +34,7 @@ public final class SkyblinderStaff extends CardImpl {
 
     }
 
-    public SkyblinderStaff(final SkyblinderStaff card) {
+    private SkyblinderStaff(final SkyblinderStaff card) {
         super(card);
     }
 

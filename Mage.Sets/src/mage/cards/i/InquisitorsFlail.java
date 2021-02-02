@@ -38,7 +38,7 @@ public final class InquisitorsFlail extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public InquisitorsFlail(final InquisitorsFlail card) {
+    private InquisitorsFlail(final InquisitorsFlail card) {
         super(card);
     }
 

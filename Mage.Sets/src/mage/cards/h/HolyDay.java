@@ -22,7 +22,7 @@ public final class HolyDay extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true));
     }
 
-    public HolyDay(final HolyDay card) {
+    private HolyDay(final HolyDay card) {
         super(card);
     }
 

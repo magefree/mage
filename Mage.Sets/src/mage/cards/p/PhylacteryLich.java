@@ -46,7 +46,7 @@ public final class PhylacteryLich extends CardImpl {
         this.addAbility(new PhylacteryLichAbility());
     }
 
-    public PhylacteryLich(final PhylacteryLich card) {
+    private PhylacteryLich(final PhylacteryLich card) {
         super(card);
     }
 

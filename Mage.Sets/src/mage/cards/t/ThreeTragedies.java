@@ -25,7 +25,7 @@ public final class ThreeTragedies extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public ThreeTragedies(final ThreeTragedies card) {
+    private ThreeTragedies(final ThreeTragedies card) {
         super(card);
     }
 

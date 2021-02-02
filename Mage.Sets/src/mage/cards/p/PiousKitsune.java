@@ -48,7 +48,7 @@ public final class PiousKitsune extends CardImpl {
         
     }
 
-    public PiousKitsune(final PiousKitsune card) {
+    private PiousKitsune(final PiousKitsune card) {
         super(card);
     }
 

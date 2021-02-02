@@ -41,7 +41,7 @@ public final class TransmogrifyingLicid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TransmogrifyingLicid(final TransmogrifyingLicid card) {
+    private TransmogrifyingLicid(final TransmogrifyingLicid card) {
         super(card);
     }
 

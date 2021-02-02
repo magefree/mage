@@ -49,7 +49,7 @@ public final class SmokeTeller extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SmokeTeller(final SmokeTeller card) {
+    private SmokeTeller(final SmokeTeller card) {
         super(card);
     }
 

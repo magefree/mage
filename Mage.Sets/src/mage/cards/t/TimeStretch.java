@@ -28,7 +28,7 @@ public final class TimeStretch extends CardImpl {
 
     }
 
-    public TimeStretch(final TimeStretch card) {
+    private TimeStretch(final TimeStretch card) {
         super(card);
     }
 

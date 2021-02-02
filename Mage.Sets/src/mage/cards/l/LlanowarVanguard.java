@@ -30,7 +30,7 @@ public final class LlanowarVanguard extends CardImpl {
             new BoostSourceEffect(0, 4, Duration.EndOfTurn), new TapSourceCost()));
     }
 
-    public LlanowarVanguard(final LlanowarVanguard card) {
+    private LlanowarVanguard(final LlanowarVanguard card) {
         super(card);
     }
 

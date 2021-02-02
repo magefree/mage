@@ -44,7 +44,7 @@ public final class SleepingPotion extends CardImpl {
         this.addAbility(new BecomesTargetAttachedTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public SleepingPotion(final SleepingPotion card) {
+    private SleepingPotion(final SleepingPotion card) {
         super(card);
     }
 

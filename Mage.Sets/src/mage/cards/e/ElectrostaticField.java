@@ -35,7 +35,7 @@ public final class ElectrostaticField extends CardImpl {
         ));
     }
 
-    public ElectrostaticField(final ElectrostaticField card) {
+    private ElectrostaticField(final ElectrostaticField card) {
         super(card);
     }
 

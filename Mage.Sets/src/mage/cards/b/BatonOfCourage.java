@@ -35,7 +35,7 @@ public final class BatonOfCourage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BatonOfCourage(final BatonOfCourage card) {
+    private BatonOfCourage(final BatonOfCourage card) {
         super(card);
     }
 

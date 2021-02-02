@@ -39,7 +39,7 @@ public final class AshenFirebeast extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new ManaCostsImpl("{1}{R}")));
     }
 
-    public AshenFirebeast(final AshenFirebeast card) {
+    private AshenFirebeast(final AshenFirebeast card) {
         super(card);
     }
 

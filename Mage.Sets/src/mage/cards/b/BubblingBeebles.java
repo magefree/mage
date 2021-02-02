@@ -37,7 +37,7 @@ public final class BubblingBeebles extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public BubblingBeebles(final BubblingBeebles card) {
+    private BubblingBeebles(final BubblingBeebles card) {
         super(card);
     }
 

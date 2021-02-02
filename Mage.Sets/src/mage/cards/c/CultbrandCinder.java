@@ -33,7 +33,7 @@ public final class CultbrandCinder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CultbrandCinder(final CultbrandCinder card) {
+    private CultbrandCinder(final CultbrandCinder card) {
         super(card);
     }
 

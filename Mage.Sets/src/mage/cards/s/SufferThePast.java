@@ -31,7 +31,7 @@ public final class SufferThePast extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public SufferThePast(final SufferThePast card) {
+    private SufferThePast(final SufferThePast card) {
         super(card);
     }
 

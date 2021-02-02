@@ -56,7 +56,7 @@ public final class CarnifexDemon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CarnifexDemon(final CarnifexDemon card) {
+    private CarnifexDemon(final CarnifexDemon card) {
         super(card);
     }
 

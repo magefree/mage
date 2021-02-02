@@ -34,7 +34,7 @@ public final class SanityGnawers extends CardImpl {
         
     }
 
-    public SanityGnawers(final SanityGnawers card) {
+    private SanityGnawers(final SanityGnawers card) {
         super(card);
     }
 

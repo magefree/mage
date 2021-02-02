@@ -28,7 +28,7 @@ public final class PlatedCrusher extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    public PlatedCrusher(final PlatedCrusher card) {
+    private PlatedCrusher(final PlatedCrusher card) {
         super(card);
     }
 

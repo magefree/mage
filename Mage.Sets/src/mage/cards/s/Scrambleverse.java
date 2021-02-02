@@ -31,7 +31,7 @@ public final class Scrambleverse extends CardImpl {
         this.getSpellAbility().addEffect(new ScrambleverseEffect());
     }
 
-    public Scrambleverse(final Scrambleverse card) {
+    private Scrambleverse(final Scrambleverse card) {
         super(card);
     }
 

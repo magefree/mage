@@ -39,7 +39,7 @@ public final class GolgariCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public GolgariCharm(final GolgariCharm card) {
+    private GolgariCharm(final GolgariCharm card) {
         super(card);
     }
 

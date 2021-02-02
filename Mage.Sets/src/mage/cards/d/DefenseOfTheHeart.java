@@ -36,7 +36,7 @@ public final class DefenseOfTheHeart extends CardImpl {
 
     }
 
-    public DefenseOfTheHeart(final DefenseOfTheHeart card) {
+    private DefenseOfTheHeart(final DefenseOfTheHeart card) {
         super(card);
     }
 

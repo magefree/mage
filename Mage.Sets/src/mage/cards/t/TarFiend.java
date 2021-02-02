@@ -37,7 +37,7 @@ public final class TarFiend extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TarFiend(final TarFiend card) {
+    private TarFiend(final TarFiend card) {
         super(card);
     }
 

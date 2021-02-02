@@ -37,7 +37,7 @@ public final class DefiantBloodlord extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DefiantBloodlord(final DefiantBloodlord card) {
+    private DefiantBloodlord(final DefiantBloodlord card) {
         super(card);
     }
 

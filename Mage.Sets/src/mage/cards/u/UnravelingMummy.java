@@ -56,7 +56,7 @@ public final class UnravelingMummy extends CardImpl {
 
     }
 
-    public UnravelingMummy(final UnravelingMummy card) {
+    private UnravelingMummy(final UnravelingMummy card) {
         super(card);
     }
 

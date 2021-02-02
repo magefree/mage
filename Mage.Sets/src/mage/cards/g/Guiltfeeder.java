@@ -33,7 +33,7 @@ public final class Guiltfeeder extends CardImpl {
         this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(effect, false, true));
     }
 
-    public Guiltfeeder(final Guiltfeeder card) {
+    private Guiltfeeder(final Guiltfeeder card) {
         super(card);
     }
 

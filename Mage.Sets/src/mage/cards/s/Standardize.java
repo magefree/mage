@@ -32,7 +32,7 @@ public final class Standardize extends CardImpl {
         this.getSpellAbility().addEffect(new StandardizeEffect());
     }
 
-    public Standardize(final Standardize card) {
+    private Standardize(final Standardize card) {
         super(card);
     }
 

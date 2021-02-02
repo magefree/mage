@@ -29,7 +29,7 @@ public final class CarefulConsideration extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public CarefulConsideration(final CarefulConsideration card) {
+    private CarefulConsideration(final CarefulConsideration card) {
         super(card);
     }
 

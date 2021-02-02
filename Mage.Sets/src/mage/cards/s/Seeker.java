@@ -53,7 +53,7 @@ public final class Seeker extends CardImpl {
 
     }
 
-    public Seeker(final Seeker card) {
+    private Seeker(final Seeker card) {
         super(card);
     }
 

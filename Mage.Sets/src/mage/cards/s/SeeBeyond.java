@@ -27,7 +27,7 @@ public final class SeeBeyond extends CardImpl {
         this.getSpellAbility().addEffect(new SeeBeyondEffect());
     }
 
-    public SeeBeyond(final SeeBeyond card) {
+    private SeeBeyond(final SeeBeyond card) {
         super(card);
     }
 

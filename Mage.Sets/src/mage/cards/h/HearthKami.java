@@ -42,7 +42,7 @@ public final class HearthKami extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HearthKami(final HearthKami card) {
+    private HearthKami(final HearthKami card) {
         super(card);
     }
 

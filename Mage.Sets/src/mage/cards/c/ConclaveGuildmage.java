@@ -51,7 +51,7 @@ public final class ConclaveGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ConclaveGuildmage(final ConclaveGuildmage card) {
+    private ConclaveGuildmage(final ConclaveGuildmage card) {
         super(card);
     }
 

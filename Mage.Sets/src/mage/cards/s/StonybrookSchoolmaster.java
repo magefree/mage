@@ -28,7 +28,7 @@ public final class StonybrookSchoolmaster extends CardImpl {
         this.addAbility(new BecomesTappedSourceTriggeredAbility(new CreateTokenEffect(new MerfolkWizardToken()), true));
     }
 
-    public StonybrookSchoolmaster(final StonybrookSchoolmaster card) {
+    private StonybrookSchoolmaster(final StonybrookSchoolmaster card) {
         super(card);
     }
 

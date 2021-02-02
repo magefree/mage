@@ -30,7 +30,7 @@ public final class RabidBloodsucker extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LoseLifeAllPlayersEffect(2), false));
     }
 
-    public RabidBloodsucker(final RabidBloodsucker card) {
+    private RabidBloodsucker(final RabidBloodsucker card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class Instigator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Instigator(final Instigator card) {
+    private Instigator(final Instigator card) {
         super(card);
     }
 

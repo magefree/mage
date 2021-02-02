@@ -51,7 +51,7 @@ public final class PrizedElephant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PrizedElephant(final PrizedElephant card) {
+    private PrizedElephant(final PrizedElephant card) {
         super(card);
     }
 

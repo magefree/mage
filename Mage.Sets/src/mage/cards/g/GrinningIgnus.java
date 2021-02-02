@@ -33,7 +33,7 @@ public final class GrinningIgnus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GrinningIgnus(final GrinningIgnus card) {
+    private GrinningIgnus(final GrinningIgnus card) {
         super(card);
     }
 

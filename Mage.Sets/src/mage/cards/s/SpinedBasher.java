@@ -27,7 +27,7 @@ public final class SpinedBasher extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{B}")));
     }
 
-    public SpinedBasher(final SpinedBasher card) {
+    private SpinedBasher(final SpinedBasher card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class FalseMourning extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
     }
 
-    public FalseMourning(final FalseMourning card) {
+    private FalseMourning(final FalseMourning card) {
         super(card);
     }
 

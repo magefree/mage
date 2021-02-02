@@ -32,7 +32,7 @@ public final class GoblinAssault extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, Duration.WhileOnBattlefield)), new AttackedThisTurnWatcher());
     }
 
-    public GoblinAssault(final GoblinAssault card) {
+    private GoblinAssault(final GoblinAssault card) {
         super(card);
     }
 

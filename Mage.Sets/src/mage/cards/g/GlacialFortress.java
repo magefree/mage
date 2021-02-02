@@ -40,7 +40,7 @@ public final class GlacialFortress extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public GlacialFortress(final GlacialFortress card) {
+    private GlacialFortress(final GlacialFortress card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class AncestralMask extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(countEnchantments, countEnchantments, Duration.WhileOnBattlefield)));
     }
 
-    public AncestralMask(final AncestralMask card) {
+    private AncestralMask(final AncestralMask card) {
         super(card);
     }
 

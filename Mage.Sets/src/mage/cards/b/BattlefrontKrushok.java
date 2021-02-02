@@ -40,7 +40,7 @@ public final class BattlefrontKrushok extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneAllEffect(filter)));
     }
 
-    public BattlefrontKrushok(final BattlefrontKrushok card) {
+    private BattlefrontKrushok(final BattlefrontKrushok card) {
         super(card);
     }
 

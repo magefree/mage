@@ -52,7 +52,7 @@ public final class MortalObstinacy extends CardImpl {
 
     }
 
-    public MortalObstinacy(final MortalObstinacy card) {
+    private MortalObstinacy(final MortalObstinacy card) {
         super(card);
     }
 

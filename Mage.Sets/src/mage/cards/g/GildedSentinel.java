@@ -23,7 +23,7 @@ public final class GildedSentinel extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public GildedSentinel(final GildedSentinel card) {
+    private GildedSentinel(final GildedSentinel card) {
         super(card);
     }
 

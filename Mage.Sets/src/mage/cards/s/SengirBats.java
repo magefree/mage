@@ -30,7 +30,7 @@ public final class SengirBats extends CardImpl {
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
     }
 
-    public SengirBats(final SengirBats card) {
+    private SengirBats(final SengirBats card) {
         super(card);
     }
 

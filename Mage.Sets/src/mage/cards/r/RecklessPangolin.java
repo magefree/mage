@@ -27,7 +27,7 @@ public final class RecklessPangolin extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
     }
 
-    public RecklessPangolin(final RecklessPangolin card) {
+    private RecklessPangolin(final RecklessPangolin card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class EchoChamber extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EchoChamber(final EchoChamber card) {
+    private EchoChamber(final EchoChamber card) {
         super(card);
     }
 

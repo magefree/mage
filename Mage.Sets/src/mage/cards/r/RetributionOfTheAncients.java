@@ -43,7 +43,7 @@ public final class RetributionOfTheAncients extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RetributionOfTheAncients(final RetributionOfTheAncients card) {
+    private RetributionOfTheAncients(final RetributionOfTheAncients card) {
         super(card);
     }
 

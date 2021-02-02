@@ -38,7 +38,7 @@ public final class StoicEphemera extends CardImpl {
         ));
     }
 
-    public StoicEphemera(final StoicEphemera card) {
+    private StoicEphemera(final StoicEphemera card) {
         super(card);
     }
 

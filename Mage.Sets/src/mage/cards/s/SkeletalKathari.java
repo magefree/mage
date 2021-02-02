@@ -37,7 +37,7 @@ public final class SkeletalKathari extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkeletalKathari(final SkeletalKathari card) {
+    private SkeletalKathari(final SkeletalKathari card) {
         super(card);
     }
 

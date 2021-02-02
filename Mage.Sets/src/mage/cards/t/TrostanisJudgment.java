@@ -26,7 +26,7 @@ public final class TrostanisJudgment extends CardImpl {
         this.getSpellAbility().addEffect(new PopulateEffect("then"));
     }
 
-    public TrostanisJudgment(final TrostanisJudgment card) {
+    private TrostanisJudgment(final TrostanisJudgment card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class OddsEnds extends SplitCard {
 
     }
 
-    public OddsEnds(final OddsEnds card) {
+    private OddsEnds(final OddsEnds card) {
         super(card);
     }
 

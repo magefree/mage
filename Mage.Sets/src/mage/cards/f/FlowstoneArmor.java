@@ -37,7 +37,7 @@ public final class FlowstoneArmor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlowstoneArmor(final FlowstoneArmor card) {
+    private FlowstoneArmor(final FlowstoneArmor card) {
         super(card);
     }
 

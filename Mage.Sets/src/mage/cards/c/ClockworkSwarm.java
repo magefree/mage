@@ -83,7 +83,7 @@ public final class ClockworkSwarm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ClockworkSwarm(final ClockworkSwarm card) {
+    private ClockworkSwarm(final ClockworkSwarm card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class PithDriller extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PithDriller(final PithDriller card) {
+    private PithDriller(final PithDriller card) {
         super(card);
     }
 

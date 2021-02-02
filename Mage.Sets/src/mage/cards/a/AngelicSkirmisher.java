@@ -45,7 +45,7 @@ public final class AngelicSkirmisher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AngelicSkirmisher(final AngelicSkirmisher card) {
+    private AngelicSkirmisher(final AngelicSkirmisher card) {
         super(card);
     }
 

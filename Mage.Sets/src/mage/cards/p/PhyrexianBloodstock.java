@@ -39,7 +39,7 @@ public final class PhyrexianBloodstock extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianBloodstock(final PhyrexianBloodstock card) {
+    private PhyrexianBloodstock(final PhyrexianBloodstock card) {
         super(card);
     }
 

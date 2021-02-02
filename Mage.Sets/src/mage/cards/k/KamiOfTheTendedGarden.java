@@ -32,7 +32,7 @@ public final class KamiOfTheTendedGarden extends CardImpl {
         this.addAbility(new SoulshiftAbility(3));
     }
 
-    public KamiOfTheTendedGarden(final KamiOfTheTendedGarden card) {
+    private KamiOfTheTendedGarden(final KamiOfTheTendedGarden card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class DurkwoodBoars extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public DurkwoodBoars(final DurkwoodBoars card) {
+    private DurkwoodBoars(final DurkwoodBoars card) {
         super(card);
     }
 

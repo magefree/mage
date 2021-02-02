@@ -48,7 +48,7 @@ public final class BishopOfRebirth extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BishopOfRebirth(final BishopOfRebirth card) {
+    private BishopOfRebirth(final BishopOfRebirth card) {
         super(card);
     }
 

@@ -58,7 +58,7 @@ public final class JaceTheLivingGuildpact extends CardImpl {
 
     }
 
-    public JaceTheLivingGuildpact(final JaceTheLivingGuildpact card) {
+    private JaceTheLivingGuildpact(final JaceTheLivingGuildpact card) {
         super(card);
     }
 

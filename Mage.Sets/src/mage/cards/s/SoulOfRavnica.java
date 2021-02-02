@@ -41,7 +41,7 @@ public final class SoulOfRavnica extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoulOfRavnica(final SoulOfRavnica card) {
+    private SoulOfRavnica(final SoulOfRavnica card) {
         super(card);
     }
 

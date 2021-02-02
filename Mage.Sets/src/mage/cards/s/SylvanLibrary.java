@@ -41,7 +41,7 @@ public final class SylvanLibrary extends CardImpl {
 
     }
 
-    public SylvanLibrary(final SylvanLibrary card) {
+    private SylvanLibrary(final SylvanLibrary card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class Skyshooter extends CardImpl {
 
     }
 
-    public Skyshooter(final Skyshooter card) {
+    private Skyshooter(final Skyshooter card) {
         super(card);
     }
 

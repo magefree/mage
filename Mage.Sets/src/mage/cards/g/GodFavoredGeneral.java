@@ -31,7 +31,7 @@ public final class GodFavoredGeneral extends CardImpl {
         this.addAbility(new InspiredAbility(new DoIfCostPaid(new CreateTokenEffect(new GodFavoredGeneralSoldierToken(), 2), new ManaCostsImpl("{2}{W}"))));
     }
 
-    public GodFavoredGeneral(final GodFavoredGeneral card) {
+    private GodFavoredGeneral(final GodFavoredGeneral card) {
         super(card);
     }
 

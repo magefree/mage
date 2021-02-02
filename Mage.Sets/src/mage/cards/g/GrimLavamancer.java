@@ -40,7 +40,7 @@ public final class GrimLavamancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GrimLavamancer(final GrimLavamancer card) {
+    private GrimLavamancer(final GrimLavamancer card) {
         super(card);
     }
 

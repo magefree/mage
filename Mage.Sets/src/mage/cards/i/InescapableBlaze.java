@@ -25,7 +25,7 @@ public final class InescapableBlaze extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public InescapableBlaze(final InescapableBlaze card) {
+    private InescapableBlaze(final InescapableBlaze card) {
         super(card);
     }
 

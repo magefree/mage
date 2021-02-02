@@ -26,7 +26,7 @@ public final class MantaRiders extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.U)));
     }
 
-    public MantaRiders(final MantaRiders card) {
+    private MantaRiders(final MantaRiders card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class HaazdaMarshal extends CardImpl {
         this.addAbility(new HaazdaMarshalTriggeredAbility());
     }
 
-    public HaazdaMarshal(final HaazdaMarshal card) {
+    private HaazdaMarshal(final HaazdaMarshal card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class HallowedSpiritkeeper extends CardImpl {
 
     }
 
-    public HallowedSpiritkeeper(final HallowedSpiritkeeper card) {
+    private HallowedSpiritkeeper(final HallowedSpiritkeeper card) {
         super(card);
     }
 

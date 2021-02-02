@@ -41,7 +41,7 @@ public final class BringerOfTheBlackDawn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BringerOfTheBlackDawn(final BringerOfTheBlackDawn card) {
+    private BringerOfTheBlackDawn(final BringerOfTheBlackDawn card) {
         super(card);
     }
 

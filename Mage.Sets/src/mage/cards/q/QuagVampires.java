@@ -40,7 +40,7 @@ public final class QuagVampires extends CardImpl {
                 "with a +1/+1 counter on it for each time it was kicked"));
     }
 
-    public QuagVampires(final QuagVampires card) {
+    private QuagVampires(final QuagVampires card) {
         super(card);
     }
 

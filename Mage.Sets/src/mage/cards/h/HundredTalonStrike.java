@@ -51,7 +51,7 @@ public final class HundredTalonStrike extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility(new TapTargetCost(new TargetControlledCreaturePermanent(1,1,filter,false))));
     }
 
-    public HundredTalonStrike(final HundredTalonStrike card) {
+    private HundredTalonStrike(final HundredTalonStrike card) {
         super(card);
     }
 

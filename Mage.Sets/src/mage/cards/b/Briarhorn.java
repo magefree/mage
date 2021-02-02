@@ -38,7 +38,7 @@ public final class Briarhorn extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{1}{G}"));
     }
 
-    public Briarhorn(final Briarhorn card) {
+    private Briarhorn(final Briarhorn card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class TheFallenApart extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TheFallenApartRestrictionEffect()));
     }
 
-    public TheFallenApart(final TheFallenApart card) {
+    private TheFallenApart(final TheFallenApart card) {
         super(card);
     }
 

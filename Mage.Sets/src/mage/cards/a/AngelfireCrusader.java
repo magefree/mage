@@ -27,7 +27,7 @@ public final class AngelfireCrusader extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public AngelfireCrusader(final AngelfireCrusader card) {
+    private AngelfireCrusader(final AngelfireCrusader card) {
         super(card);
     }
 

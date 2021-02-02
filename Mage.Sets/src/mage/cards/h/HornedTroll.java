@@ -29,7 +29,7 @@ public final class HornedTroll extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
     }
 
-    public HornedTroll(final HornedTroll card) {
+    private HornedTroll(final HornedTroll card) {
         super(card);
     }
 

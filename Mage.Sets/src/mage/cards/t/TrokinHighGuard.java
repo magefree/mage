@@ -23,7 +23,7 @@ public final class TrokinHighGuard extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public TrokinHighGuard(final TrokinHighGuard card) {
+    private TrokinHighGuard(final TrokinHighGuard card) {
         super(card);
     }
 

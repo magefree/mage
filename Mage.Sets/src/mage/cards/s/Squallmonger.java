@@ -47,7 +47,7 @@ public final class Squallmonger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Squallmonger(final Squallmonger card) {
+    private Squallmonger(final Squallmonger card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class DreamProwler extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public DreamProwler(final DreamProwler card) {
+    private DreamProwler(final DreamProwler card) {
         super(card);
     }
 

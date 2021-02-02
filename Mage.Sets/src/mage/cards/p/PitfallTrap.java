@@ -43,7 +43,7 @@ public final class PitfallTrap extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature(1, 1, filter, false));
     }
 
-    public PitfallTrap(final PitfallTrap card) {
+    private PitfallTrap(final PitfallTrap card) {
         super(card);
     }
 

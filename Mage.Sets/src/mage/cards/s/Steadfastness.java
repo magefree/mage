@@ -21,7 +21,7 @@ public final class Steadfastness extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(0, 3, Duration.EndOfTurn));
     }
 
-    public Steadfastness(final Steadfastness card) {
+    private Steadfastness(final Steadfastness card) {
         super(card);
     }
 

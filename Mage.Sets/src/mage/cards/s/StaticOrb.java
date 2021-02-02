@@ -28,7 +28,7 @@ public final class StaticOrb extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StaticOrbEffect()));
     }
 
-    public StaticOrb(final StaticOrb card) {
+    private StaticOrb(final StaticOrb card) {
         super(card);
     }
 

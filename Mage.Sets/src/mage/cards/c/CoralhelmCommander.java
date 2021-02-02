@@ -57,7 +57,7 @@ public final class CoralhelmCommander extends LevelerCard {
         setMaxLevelCounters(4);
     }
 
-    public CoralhelmCommander(final CoralhelmCommander card) {
+    private CoralhelmCommander(final CoralhelmCommander card) {
         super(card);
     }
 

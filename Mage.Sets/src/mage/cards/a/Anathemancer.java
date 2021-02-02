@@ -43,7 +43,7 @@ public final class Anathemancer extends CardImpl {
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{5}{B}{R}")));
     }
 
-    public Anathemancer(final Anathemancer card) {
+    private Anathemancer(final Anathemancer card) {
         super(card);
     }
 

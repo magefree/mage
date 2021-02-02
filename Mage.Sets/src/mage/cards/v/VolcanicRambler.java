@@ -32,7 +32,7 @@ public final class VolcanicRambler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VolcanicRambler(final VolcanicRambler card) {
+    private VolcanicRambler(final VolcanicRambler card) {
         super(card);
     }
 

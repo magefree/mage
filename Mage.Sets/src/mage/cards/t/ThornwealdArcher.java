@@ -28,7 +28,7 @@ public final class ThornwealdArcher extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public ThornwealdArcher(final ThornwealdArcher card) {
+    private ThornwealdArcher(final ThornwealdArcher card) {
         super(card);
     }
 

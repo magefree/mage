@@ -41,7 +41,7 @@ public final class DoubtlessOne extends CardImpl {
         this.addAbility(new DealsDamageGainLifeSourceTriggeredAbility());
     }
 
-    public DoubtlessOne(final DoubtlessOne card) {
+    private DoubtlessOne(final DoubtlessOne card) {
         super(card);
     }
 

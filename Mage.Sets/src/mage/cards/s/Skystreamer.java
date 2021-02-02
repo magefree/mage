@@ -39,7 +39,7 @@ public final class Skystreamer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Skystreamer(final Skystreamer card) {
+    private Skystreamer(final Skystreamer card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class RevivingVapors extends CardImpl {
         this.getSpellAbility().addEffect(new RevivingVaporsEffect());
     }
 
-    public RevivingVapors(final RevivingVapors card) {
+    private RevivingVapors(final RevivingVapors card) {
         super(card);
     }
 

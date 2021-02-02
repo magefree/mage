@@ -41,7 +41,7 @@ public final class MyrRetriever extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MyrRetriever(final MyrRetriever card) {
+    private MyrRetriever(final MyrRetriever card) {
         super(card);
     }
 

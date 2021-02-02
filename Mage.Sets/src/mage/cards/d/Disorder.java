@@ -35,7 +35,7 @@ public final class Disorder extends CardImpl {
         this.getSpellAbility().addEffect(new DisorderEffect());
     }
 
-    public Disorder(final Disorder card) {
+    private Disorder(final Disorder card) {
         super(card);
     }
 

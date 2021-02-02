@@ -41,7 +41,7 @@ public final class StudentOfElements extends CardImpl {
         this.addAbility(new StudentOfElementsHasFlyingAbility());
     }
 
-    public StudentOfElements(final StudentOfElements card) {
+    private StudentOfElements(final StudentOfElements card) {
         super(card);
     }
 

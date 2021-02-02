@@ -37,7 +37,7 @@ public final class RathiTrapper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RathiTrapper(final RathiTrapper card) {
+    private RathiTrapper(final RathiTrapper card) {
         super(card);
     }
 

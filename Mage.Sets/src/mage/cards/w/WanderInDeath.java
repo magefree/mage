@@ -28,7 +28,7 @@ public final class WanderInDeath extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public WanderInDeath(final WanderInDeath card) {
+    private WanderInDeath(final WanderInDeath card) {
         super(card);
     }
 

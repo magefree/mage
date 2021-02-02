@@ -30,7 +30,7 @@ public final class StalwartAven extends CardImpl {
         this.addAbility(new RenownAbility(1));
     }
 
-    public StalwartAven(final StalwartAven card) {
+    private StalwartAven(final StalwartAven card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class ReleaseTheGremlins extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(ReleaseTheGremlinsAdjuster.instance);
     }
 
-    public ReleaseTheGremlins(final ReleaseTheGremlins card) {
+    private ReleaseTheGremlins(final ReleaseTheGremlins card) {
         super(card);
     }
 

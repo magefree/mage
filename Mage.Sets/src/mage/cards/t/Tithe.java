@@ -30,7 +30,7 @@ public final class Tithe extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public Tithe(final Tithe card) {
+    private Tithe(final Tithe card) {
         super(card);
     }
 

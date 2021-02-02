@@ -41,7 +41,7 @@ public final class KamiOfTheHonoredDead extends CardImpl {
         this.addAbility(new SoulshiftAbility(6));
     }
 
-    public KamiOfTheHonoredDead(final KamiOfTheHonoredDead card) {
+    private KamiOfTheHonoredDead(final KamiOfTheHonoredDead card) {
         super(card);
     }
 

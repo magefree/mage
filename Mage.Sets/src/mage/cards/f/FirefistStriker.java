@@ -32,7 +32,7 @@ public final class FirefistStriker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FirefistStriker(final FirefistStriker card) {
+    private FirefistStriker(final FirefistStriker card) {
         super(card);
     }
 

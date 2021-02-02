@@ -25,7 +25,7 @@ public final class KalonianBehemoth extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public KalonianBehemoth(final KalonianBehemoth card) {
+    private KalonianBehemoth(final KalonianBehemoth card) {
         super(card);
     }
 

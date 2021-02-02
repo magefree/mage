@@ -40,7 +40,7 @@ public final class ItThatBetrays extends CardImpl {
         this.addAbility(new OpponentSacrificesNonTokenPermanentTriggeredAbility(new ReturnToBattlefieldUnderYourControlTargetEffect()));
     }
 
-    public ItThatBetrays(final ItThatBetrays card) {
+    private ItThatBetrays(final ItThatBetrays card) {
         super(card);
     }
 

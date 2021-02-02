@@ -30,7 +30,7 @@ public final class BloodVassal extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new SacrificeSourceCost()));
     }
 
-    public BloodVassal(final BloodVassal card) {
+    private BloodVassal(final BloodVassal card) {
         super(card);
     }
 

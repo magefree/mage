@@ -27,7 +27,7 @@ public final class ValakutPredator extends CardImpl {
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public ValakutPredator(final ValakutPredator card) {
+    private ValakutPredator(final ValakutPredator card) {
         super(card);
     }
 

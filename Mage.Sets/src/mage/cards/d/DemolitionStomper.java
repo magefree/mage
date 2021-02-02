@@ -28,7 +28,7 @@ public final class DemolitionStomper extends CardImpl {
         this.addAbility(new CrewAbility(5));
     }
 
-    public DemolitionStomper(final DemolitionStomper card) {
+    private DemolitionStomper(final DemolitionStomper card) {
         super(card);
     }
 

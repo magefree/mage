@@ -40,7 +40,7 @@ public final class Bifurcate extends CardImpl {
         this.getSpellAbility().addEffect(new BifurcateEffect());
     }
 
-    public Bifurcate(final Bifurcate card) {
+    private Bifurcate(final Bifurcate card) {
         super(card);
     }
 

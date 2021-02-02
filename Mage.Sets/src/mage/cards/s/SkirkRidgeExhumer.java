@@ -36,7 +36,7 @@ public final class SkirkRidgeExhumer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkirkRidgeExhumer(final SkirkRidgeExhumer card) {
+    private SkirkRidgeExhumer(final SkirkRidgeExhumer card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class CirclingVultures extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ExileTopCreatureCardOfGraveyardCost(1)), TargetController.YOU, false));
     }
 
-    public CirclingVultures(final CirclingVultures card) {
+    private CirclingVultures(final CirclingVultures card) {
         super(card);
     }
 

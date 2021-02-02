@@ -35,7 +35,7 @@ public final class DauthiMindripper extends CardImpl {
         this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(new DoIfCostPaid(effect, new SacrificeSourceCost()), false, true));
     }
 
-    public DauthiMindripper(final DauthiMindripper card) {
+    private DauthiMindripper(final DauthiMindripper card) {
         super(card);
     }
 

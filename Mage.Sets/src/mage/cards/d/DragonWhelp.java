@@ -46,7 +46,7 @@ public final class DragonWhelp extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DragonWhelp(final DragonWhelp card) {
+    private DragonWhelp(final DragonWhelp card) {
         super(card);
     }
 

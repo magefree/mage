@@ -35,7 +35,7 @@ public final class MountedArchers extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.EndOfTurn, 1), new ManaCostsImpl("{W}")));
     }
 
-    public MountedArchers(final MountedArchers card) {
+    private MountedArchers(final MountedArchers card) {
         super(card);
     }
 

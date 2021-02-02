@@ -32,7 +32,7 @@ public final class MorgueBurst extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public MorgueBurst(final MorgueBurst card) {
+    private MorgueBurst(final MorgueBurst card) {
         super(card);
     }
 

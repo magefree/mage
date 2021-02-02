@@ -47,7 +47,7 @@ public final class ClashOfRealities extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability2, Duration.WhileOnBattlefield, filterNotSpirit, "Non-Spirit creatures have \"When this creature enters the battlefield, you may have it deal 3 damage to target Spirit creature.\"")));
     }
 
-    public ClashOfRealities(final ClashOfRealities card) {
+    private ClashOfRealities(final ClashOfRealities card) {
         super(card);
     }
 

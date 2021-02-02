@@ -51,7 +51,7 @@ public final class LilianasContract extends CardImpl {
         ));
     }
 
-    public LilianasContract(final LilianasContract card) {
+    private LilianasContract(final LilianasContract card) {
         super(card);
     }
 

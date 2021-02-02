@@ -26,7 +26,7 @@ public final class RubblebackRhino extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    public RubblebackRhino(final RubblebackRhino card) {
+    private RubblebackRhino(final RubblebackRhino card) {
         super(card);
     }
 

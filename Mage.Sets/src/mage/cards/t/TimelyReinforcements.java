@@ -29,7 +29,7 @@ public final class TimelyReinforcements extends CardImpl {
         this.getSpellAbility().addEffect(new TimelyReinforcementsEffect());
     }
 
-    public TimelyReinforcements(final TimelyReinforcements card) {
+    private TimelyReinforcements(final TimelyReinforcements card) {
         super(card);
     }
 

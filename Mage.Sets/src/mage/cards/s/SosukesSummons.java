@@ -44,7 +44,7 @@ public final class SosukesSummons extends CardImpl {
         );
     }
 
-    public SosukesSummons(final SosukesSummons card) {
+    private SosukesSummons(final SosukesSummons card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class GreenManaBattery extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GreenManaBattery(final GreenManaBattery card) {
+    private GreenManaBattery(final GreenManaBattery card) {
         super(card);
     }
 

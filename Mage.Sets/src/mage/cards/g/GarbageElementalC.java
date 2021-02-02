@@ -41,7 +41,7 @@ public final class GarbageElementalC extends CardImpl {
 
     }
 
-    public GarbageElementalC(final GarbageElementalC card) {
+    private GarbageElementalC(final GarbageElementalC card) {
         super(card);
     }
 

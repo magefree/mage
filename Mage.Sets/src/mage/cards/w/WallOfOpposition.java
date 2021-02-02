@@ -34,7 +34,7 @@ public final class WallOfOpposition extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(1)));
     }
 
-    public WallOfOpposition(final WallOfOpposition card) {
+    private WallOfOpposition(final WallOfOpposition card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class PulsatingIllusion extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(4, 4, Duration.EndOfTurn), new DiscardTargetCost(new TargetCardInHand())));
     }
 
-    public PulsatingIllusion(final PulsatingIllusion card) {
+    private PulsatingIllusion(final PulsatingIllusion card) {
         super(card);
     }
 

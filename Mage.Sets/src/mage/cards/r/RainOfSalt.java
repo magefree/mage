@@ -28,7 +28,7 @@ public final class RainOfSalt extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(2, filter));
     }
 
-    public RainOfSalt(final RainOfSalt card) {
+    private RainOfSalt(final RainOfSalt card) {
         super(card);
     }
 

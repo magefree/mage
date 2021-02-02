@@ -35,7 +35,7 @@ public final class Phytotitan extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new PhytotitanEffect()));
     }
 
-    public Phytotitan(final Phytotitan card) {
+    private Phytotitan(final Phytotitan card) {
         super(card);
     }
 

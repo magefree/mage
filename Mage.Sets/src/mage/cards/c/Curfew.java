@@ -29,7 +29,7 @@ public final class Curfew extends CardImpl {
         this.getSpellAbility().addEffect(new CurfewEffect());
     }
 
-    public Curfew(final Curfew card) {
+    private Curfew(final Curfew card) {
         super(card);
     }
 

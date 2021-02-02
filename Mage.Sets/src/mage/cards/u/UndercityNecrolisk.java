@@ -58,7 +58,7 @@ public final class UndercityNecrolisk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UndercityNecrolisk(final UndercityNecrolisk card) {
+    private UndercityNecrolisk(final UndercityNecrolisk card) {
         super(card);
     }
 

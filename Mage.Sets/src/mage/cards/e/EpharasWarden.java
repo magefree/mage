@@ -44,7 +44,7 @@ public final class EpharasWarden extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EpharasWarden(final EpharasWarden card) {
+    private EpharasWarden(final EpharasWarden card) {
         super(card);
     }
 

@@ -55,7 +55,7 @@ public final class HadaSpyPatrol extends LevelerCard {
         setMaxLevelCounters(3);
     }
 
-    public HadaSpyPatrol(final HadaSpyPatrol card) {
+    private HadaSpyPatrol(final HadaSpyPatrol card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class EliteCatWarrior extends CardImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public EliteCatWarrior(final EliteCatWarrior card) {
+    private EliteCatWarrior(final EliteCatWarrior card) {
         super(card);
     }
 

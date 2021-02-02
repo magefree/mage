@@ -46,7 +46,7 @@ public final class GlintSleeveSiphoner extends CardImpl {
                 "At the beginning of your upkeep, "));
     }
 
-    public GlintSleeveSiphoner(final GlintSleeveSiphoner card) {
+    private GlintSleeveSiphoner(final GlintSleeveSiphoner card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class HighTide extends CardImpl {
 
     }
 
-    public HighTide(final HighTide card) {
+    private HighTide(final HighTide card) {
         super(card);
     }
 

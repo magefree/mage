@@ -34,7 +34,7 @@ public final class BalothCageTrap extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken2()));
     }
 
-    public BalothCageTrap(final BalothCageTrap card) {
+    private BalothCageTrap(final BalothCageTrap card) {
         super(card);
     }
 

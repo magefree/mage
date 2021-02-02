@@ -45,7 +45,7 @@ public final class FireDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FireDragon(final FireDragon card) {
+    private FireDragon(final FireDragon card) {
         super(card);
     }
 

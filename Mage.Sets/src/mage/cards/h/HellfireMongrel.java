@@ -38,7 +38,7 @@ public final class HellfireMongrel extends CardImpl {
         ));
     }
 
-    public HellfireMongrel(final HellfireMongrel card) {
+    private HellfireMongrel(final HellfireMongrel card) {
         super(card);
     }
 

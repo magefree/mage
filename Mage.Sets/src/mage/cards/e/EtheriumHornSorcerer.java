@@ -35,7 +35,7 @@ public final class EtheriumHornSorcerer extends CardImpl {
         this.addAbility(new CascadeAbility());
     }
 
-    public EtheriumHornSorcerer(final EtheriumHornSorcerer card) {
+    private EtheriumHornSorcerer(final EtheriumHornSorcerer card) {
         super(card);
     }
 

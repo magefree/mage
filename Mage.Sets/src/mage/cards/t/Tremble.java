@@ -22,7 +22,7 @@ public final class Tremble extends CardImpl {
         this.getSpellAbility().addEffect(new SacrificeAllEffect(1, new FilterControlledLandPermanent("land")));
     }
 
-    public Tremble(final Tremble card) {
+    private Tremble(final Tremble card) {
         super(card);
     }
 

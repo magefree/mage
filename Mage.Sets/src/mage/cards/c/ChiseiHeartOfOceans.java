@@ -49,7 +49,7 @@ public final class ChiseiHeartOfOceans extends CardImpl {
 
     }
 
-    public ChiseiHeartOfOceans(final ChiseiHeartOfOceans card) {
+    private ChiseiHeartOfOceans(final ChiseiHeartOfOceans card) {
         super(card);
     }
 

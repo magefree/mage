@@ -38,7 +38,7 @@ public final class FreejamRegent extends CardImpl {
                 new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
     }
 
-    public FreejamRegent(final FreejamRegent card) {
+    private FreejamRegent(final FreejamRegent card) {
         super(card);
     }
 

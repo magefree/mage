@@ -25,7 +25,7 @@ public final class CennsEnlistment extends CardImpl {
         this.addAbility(new RetraceAbility(this));
     }
 
-    public CennsEnlistment(final CennsEnlistment card) {
+    private CennsEnlistment(final CennsEnlistment card) {
         super(card);
     }
 

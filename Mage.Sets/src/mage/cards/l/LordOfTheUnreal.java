@@ -42,7 +42,7 @@ public final class LordOfTheUnreal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LordOfTheUnreal(final LordOfTheUnreal card) {
+    private LordOfTheUnreal(final LordOfTheUnreal card) {
         super(card);
     }
 

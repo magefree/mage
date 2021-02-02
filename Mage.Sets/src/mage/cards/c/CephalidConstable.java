@@ -38,7 +38,7 @@ public final class CephalidConstable extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CephalidConstable(final CephalidConstable card) {
+    private CephalidConstable(final CephalidConstable card) {
         super(card);
     }
 

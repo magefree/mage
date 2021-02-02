@@ -29,7 +29,7 @@ public final class ThoughtVessel extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public ThoughtVessel(final ThoughtVessel card) {
+    private ThoughtVessel(final ThoughtVessel card) {
         super(card);
     }
 

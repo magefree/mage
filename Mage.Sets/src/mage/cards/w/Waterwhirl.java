@@ -23,7 +23,7 @@ public final class Waterwhirl extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }
 
-    public Waterwhirl(final Waterwhirl card) {
+    private Waterwhirl(final Waterwhirl card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class RealityHemorrhage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public RealityHemorrhage(final RealityHemorrhage card) {
+    private RealityHemorrhage(final RealityHemorrhage card) {
         super(card);
     }
 

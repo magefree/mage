@@ -30,7 +30,7 @@ public final class BatteringWurm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
     }
 
-    public BatteringWurm(final BatteringWurm card) {
+    private BatteringWurm(final BatteringWurm card) {
         super(card);
     }
 

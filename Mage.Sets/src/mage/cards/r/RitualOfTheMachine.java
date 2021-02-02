@@ -39,7 +39,7 @@ public final class RitualOfTheMachine extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public RitualOfTheMachine(final RitualOfTheMachine card) {
+    private RitualOfTheMachine(final RitualOfTheMachine card) {
         super(card);
     }
 

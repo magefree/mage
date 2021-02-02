@@ -23,7 +23,7 @@ public final class AncientZiggurat extends CardImpl {
         this.addAbility(new ConditionalAnyColorManaAbility(1, new AncientZigguratManaBuilder()));
     }
 
-    public AncientZiggurat(final AncientZiggurat card) {
+    private AncientZiggurat(final AncientZiggurat card) {
         super(card);
     }
 

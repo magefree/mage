@@ -28,7 +28,7 @@ public final class SomberwaldVigilante extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(1, true, "that creature"), false));
     }
 
-    public SomberwaldVigilante(final SomberwaldVigilante card) {
+    private SomberwaldVigilante(final SomberwaldVigilante card) {
         super(card);
     }
 

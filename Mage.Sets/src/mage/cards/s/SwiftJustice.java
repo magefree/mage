@@ -37,7 +37,7 @@ public final class SwiftJustice extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public SwiftJustice(final SwiftJustice card) {
+    private SwiftJustice(final SwiftJustice card) {
         super(card);
     }
 

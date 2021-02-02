@@ -39,7 +39,7 @@ public final class WineOfBloodAndIron extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WineOfBloodAndIron(final WineOfBloodAndIron card) {
+    private WineOfBloodAndIron(final WineOfBloodAndIron card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class StolenGrain extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
     }
 
-    public StolenGrain(final StolenGrain card) {
+    private StolenGrain(final StolenGrain card) {
         super(card);
     }
 

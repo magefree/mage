@@ -27,7 +27,7 @@ public final class DrownyardExplorers extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InvestigateEffect(), false));
     }
 
-    public DrownyardExplorers(final DrownyardExplorers card) {
+    private DrownyardExplorers(final DrownyardExplorers card) {
         super(card);
     }
 

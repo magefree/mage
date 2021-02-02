@@ -43,7 +43,7 @@ public final class MoltenSlagheap extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoltenSlagheap(final MoltenSlagheap card) {
+    private MoltenSlagheap(final MoltenSlagheap card) {
         super(card);
     }
 

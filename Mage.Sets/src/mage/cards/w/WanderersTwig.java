@@ -32,7 +32,7 @@ public final class WanderersTwig extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WanderersTwig(final WanderersTwig card) {
+    private WanderersTwig(final WanderersTwig card) {
         super(card);
     }
 

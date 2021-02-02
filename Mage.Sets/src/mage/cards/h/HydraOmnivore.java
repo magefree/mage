@@ -32,7 +32,7 @@ public final class HydraOmnivore extends CardImpl {
         this.addAbility(new DealsDamageToOpponentTriggeredAbility(new HydraOmnivoreEffect(), false, true, true));
     }
 
-    public HydraOmnivore(final HydraOmnivore card) {
+    private HydraOmnivore(final HydraOmnivore card) {
         super(card);
     }
 

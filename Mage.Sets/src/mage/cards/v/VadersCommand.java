@@ -62,7 +62,7 @@ public final class VadersCommand extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public VadersCommand(final VadersCommand card) {
+    private VadersCommand(final VadersCommand card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class ShieldOfTheAges extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.EndOfTurn, 1), new GenericManaCost(2)));
     }
 
-    public ShieldOfTheAges(final ShieldOfTheAges card) {
+    private ShieldOfTheAges(final ShieldOfTheAges card) {
         super(card);
     }
 

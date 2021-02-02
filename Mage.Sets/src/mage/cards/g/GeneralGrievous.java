@@ -40,7 +40,7 @@ public final class GeneralGrievous extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
     }
 
-    public GeneralGrievous(final GeneralGrievous card) {
+    private GeneralGrievous(final GeneralGrievous card) {
         super(card);
     }
 

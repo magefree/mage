@@ -34,7 +34,7 @@ public final class OvalchaseDragster extends CardImpl {
         this.addAbility(new CrewAbility(1));
     }
 
-    public OvalchaseDragster(final OvalchaseDragster card) {
+    private OvalchaseDragster(final OvalchaseDragster card) {
         super(card);
     }
 

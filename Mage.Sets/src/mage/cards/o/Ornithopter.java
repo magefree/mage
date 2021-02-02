@@ -25,7 +25,7 @@ public final class Ornithopter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public Ornithopter(final Ornithopter card) {
+    private Ornithopter(final Ornithopter card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class AngelicVoices extends CardImpl {
         ));
     }
 
-    public AngelicVoices(final AngelicVoices card) {
+    private AngelicVoices(final AngelicVoices card) {
         super(card);
     }
 

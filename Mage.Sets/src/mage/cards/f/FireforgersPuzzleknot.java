@@ -36,7 +36,7 @@ public final class FireforgersPuzzleknot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FireforgersPuzzleknot(final FireforgersPuzzleknot card) {
+    private FireforgersPuzzleknot(final FireforgersPuzzleknot card) {
         super(card);
     }
 

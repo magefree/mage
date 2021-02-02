@@ -39,7 +39,7 @@ public final class ReturnToTheEarth extends CardImpl {
 
     }
 
-    public ReturnToTheEarth(final ReturnToTheEarth card) {
+    private ReturnToTheEarth(final ReturnToTheEarth card) {
         super(card);
     }
 

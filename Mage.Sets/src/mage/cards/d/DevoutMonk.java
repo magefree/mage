@@ -28,7 +28,7 @@ public final class DevoutMonk extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1), false));
     }
 
-    public DevoutMonk(final DevoutMonk card) {
+    private DevoutMonk(final DevoutMonk card) {
         super(card);
     }
 

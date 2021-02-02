@@ -37,7 +37,7 @@ public final class TwilightsCall extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public TwilightsCall(final TwilightsCall card) {
+    private TwilightsCall(final TwilightsCall card) {
         super(card);
     }
 

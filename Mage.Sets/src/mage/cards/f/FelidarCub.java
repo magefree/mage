@@ -33,7 +33,7 @@ public final class FelidarCub extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FelidarCub(final FelidarCub card) {
+    private FelidarCub(final FelidarCub card) {
         super(card);
     }
 

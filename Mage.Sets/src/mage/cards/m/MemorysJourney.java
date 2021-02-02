@@ -37,7 +37,7 @@ public final class MemorysJourney extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{G}"), TimingRule.INSTANT));
     }
 
-    public MemorysJourney(final MemorysJourney card) {
+    private MemorysJourney(final MemorysJourney card) {
         super(card);
     }
 

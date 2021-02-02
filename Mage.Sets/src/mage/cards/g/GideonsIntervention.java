@@ -45,7 +45,7 @@ public final class GideonsIntervention extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GideonsInterventionPreventAllDamageEffect()));
     }
 
-    public GideonsIntervention(final GideonsIntervention card) {
+    private GideonsIntervention(final GideonsIntervention card) {
         super(card);
     }
 

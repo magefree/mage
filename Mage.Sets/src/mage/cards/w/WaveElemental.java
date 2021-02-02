@@ -46,7 +46,7 @@ public final class WaveElemental extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WaveElemental(final WaveElemental card) {
+    private WaveElemental(final WaveElemental card) {
         super(card);
     }
 

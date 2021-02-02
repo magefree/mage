@@ -41,7 +41,7 @@ public final class SteelLeafPaladin extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
     }
 
-    public SteelLeafPaladin(final SteelLeafPaladin card) {
+    private SteelLeafPaladin(final SteelLeafPaladin card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class FireJuggler extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new DoIfClashWonEffect(new DamageAllEffect(4,filter)),false));
     }
 
-    public FireJuggler(final FireJuggler card) {
+    private FireJuggler(final FireJuggler card) {
         super(card);
     }
 

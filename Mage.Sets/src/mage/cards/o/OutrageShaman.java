@@ -38,7 +38,7 @@ public final class OutrageShaman extends CardImpl {
         
     }
 
-    public OutrageShaman(final OutrageShaman card) {
+    private OutrageShaman(final OutrageShaman card) {
         super(card);
     }
 

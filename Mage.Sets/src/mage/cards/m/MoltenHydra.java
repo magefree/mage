@@ -48,7 +48,7 @@ public final class MoltenHydra extends CardImpl {
 
     }
 
-    public MoltenHydra(final MoltenHydra card) {
+    private MoltenHydra(final MoltenHydra card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class RustedSentinel extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
     }
 
-    public RustedSentinel(final RustedSentinel card) {
+    private RustedSentinel(final RustedSentinel card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class ControlMagic extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
     }
 
-    public ControlMagic(final ControlMagic card) {
+    private ControlMagic(final ControlMagic card) {
         super(card);
     }
 

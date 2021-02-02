@@ -28,7 +28,7 @@ public final class WanderingWolf extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
     }
 
-    public WanderingWolf(final WanderingWolf card) {
+    private WanderingWolf(final WanderingWolf card) {
         super(card);
     }
 

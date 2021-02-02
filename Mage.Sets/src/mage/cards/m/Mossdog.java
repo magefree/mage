@@ -32,7 +32,7 @@ public final class Mossdog extends CardImpl {
         this.addAbility(new MossdogAbility());
     }
 
-    public Mossdog(final Mossdog card) {
+    private Mossdog(final Mossdog card) {
         super(card);
     }
 

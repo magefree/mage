@@ -33,7 +33,7 @@ public final class EncroachingWastes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EncroachingWastes(final EncroachingWastes card) {
+    private EncroachingWastes(final EncroachingWastes card) {
         super(card);
     }
 

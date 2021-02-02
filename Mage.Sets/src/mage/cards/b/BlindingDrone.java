@@ -39,7 +39,7 @@ public final class BlindingDrone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlindingDrone(final BlindingDrone card) {
+    private BlindingDrone(final BlindingDrone card) {
         super(card);
     }
 

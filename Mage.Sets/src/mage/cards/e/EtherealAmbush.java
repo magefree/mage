@@ -20,7 +20,7 @@ public final class EtherealAmbush extends CardImpl {
         this.getSpellAbility().addEffect(new ManifestEffect(2));
     }
 
-    public EtherealAmbush(final EtherealAmbush card) {
+    private EtherealAmbush(final EtherealAmbush card) {
         super(card);
     }
 

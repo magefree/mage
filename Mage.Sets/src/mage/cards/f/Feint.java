@@ -33,7 +33,7 @@ public final class Feint extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
-    public Feint(final Feint card) {
+    private Feint(final Feint card) {
         super(card);
     }
 

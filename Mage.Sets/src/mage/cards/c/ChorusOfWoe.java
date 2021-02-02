@@ -21,7 +21,7 @@ public final class ChorusOfWoe extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Duration.EndOfTurn));
     }
 
-    public ChorusOfWoe(final ChorusOfWoe card) {
+    private ChorusOfWoe(final ChorusOfWoe card) {
         super(card);
     }
 

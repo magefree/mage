@@ -26,7 +26,7 @@ public final class Ionize extends CardImpl {
         this.getSpellAbility().addEffect(new IonizeEffect());
     }
 
-    public Ionize(final Ionize card) {
+    private Ionize(final Ionize card) {
         super(card);
     }
 

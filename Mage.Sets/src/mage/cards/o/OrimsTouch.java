@@ -36,7 +36,7 @@ public final class OrimsTouch extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public OrimsTouch(final OrimsTouch card) {
+    private OrimsTouch(final OrimsTouch card) {
         super(card);
     }
 

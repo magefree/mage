@@ -30,7 +30,7 @@ public final class SultaiScavenger extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SultaiScavenger(final SultaiScavenger card) {
+    private SultaiScavenger(final SultaiScavenger card) {
         super(card);
     }
 

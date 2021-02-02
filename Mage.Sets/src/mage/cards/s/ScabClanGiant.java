@@ -45,7 +45,7 @@ public final class ScabClanGiant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScabClanGiant(final ScabClanGiant card) {
+    private ScabClanGiant(final ScabClanGiant card) {
         super(card);
     }
 

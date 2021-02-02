@@ -45,7 +45,7 @@ public final class RagingRiver extends CardImpl {
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new RagingRiverEffect(), 1));
     }
 
-    public RagingRiver(final RagingRiver card) {
+    private RagingRiver(final RagingRiver card) {
         super(card);
     }
 

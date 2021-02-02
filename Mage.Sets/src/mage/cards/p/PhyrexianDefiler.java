@@ -36,7 +36,7 @@ public final class PhyrexianDefiler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianDefiler(final PhyrexianDefiler card) {
+    private PhyrexianDefiler(final PhyrexianDefiler card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class DinOfTheFireherd extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public DinOfTheFireherd(final DinOfTheFireherd card) {
+    private DinOfTheFireherd(final DinOfTheFireherd card) {
         super(card);
     }
 

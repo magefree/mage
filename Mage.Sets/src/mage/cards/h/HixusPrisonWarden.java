@@ -47,7 +47,7 @@ public final class HixusPrisonWarden extends CardImpl {
         this.addAbility(new HixusPrisonWardenTriggeredAbility(new HixusPrisonWardenExileEffect()));
     }
 
-    public HixusPrisonWarden(final HixusPrisonWarden card) {
+    private HixusPrisonWarden(final HixusPrisonWarden card) {
         super(card);
     }
 

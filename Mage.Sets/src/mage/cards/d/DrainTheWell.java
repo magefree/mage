@@ -24,7 +24,7 @@ public final class DrainTheWell extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public DrainTheWell(final DrainTheWell card) {
+    private DrainTheWell(final DrainTheWell card) {
         super(card);
     }
 

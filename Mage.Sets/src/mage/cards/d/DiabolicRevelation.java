@@ -30,7 +30,7 @@ public final class DiabolicRevelation extends CardImpl {
         this.getSpellAbility().addEffect(new DiabolicRevelationEffect());
     }
 
-    public DiabolicRevelation(final DiabolicRevelation card) {
+    private DiabolicRevelation(final DiabolicRevelation card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class VoidmageApprentice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VoidmageApprentice(final VoidmageApprentice card) {
+    private VoidmageApprentice(final VoidmageApprentice card) {
         super(card);
     }
 

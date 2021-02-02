@@ -39,7 +39,7 @@ public final class FateForetold extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1),"enchanted creature", false));
     }
 
-    public FateForetold(final FateForetold card) {
+    private FateForetold(final FateForetold card) {
         super(card);
     }
 

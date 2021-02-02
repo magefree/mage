@@ -58,7 +58,7 @@ public final class ParagonOfEternalWilds extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ParagonOfEternalWilds(final ParagonOfEternalWilds card) {
+    private ParagonOfEternalWilds(final ParagonOfEternalWilds card) {
         super(card);
     }
 

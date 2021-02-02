@@ -39,7 +39,7 @@ public final class BattleCry extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new BattleCryTriggeredAbility()));
     }
 
-    public BattleCry(final BattleCry card) {
+    private BattleCry(final BattleCry card) {
         super(card);
     }
 

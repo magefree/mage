@@ -30,7 +30,7 @@ public final class SluicewayScorpion extends CardImpl {
         this.addAbility(new ScavengeAbility(new ManaCostsImpl("{1}{B}{G}")));
     }
 
-    public SluicewayScorpion(final SluicewayScorpion card) {
+    private SluicewayScorpion(final SluicewayScorpion card) {
         super(card);
     }
 

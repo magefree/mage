@@ -43,7 +43,7 @@ public final class MercadianBazaar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MercadianBazaar(final MercadianBazaar card) {
+    private MercadianBazaar(final MercadianBazaar card) {
         super(card);
     }
 

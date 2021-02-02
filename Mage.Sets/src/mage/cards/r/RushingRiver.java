@@ -43,7 +43,7 @@ public final class RushingRiver extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(RushingRiverAdjuster.instance);
     }
 
-    public RushingRiver(final RushingRiver card) {
+    private RushingRiver(final RushingRiver card) {
         super(card);
     }
 

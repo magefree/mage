@@ -32,7 +32,7 @@ public final class SkycloudEgg extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkycloudEgg(final SkycloudEgg card) {
+    private SkycloudEgg(final SkycloudEgg card) {
         super(card);
     }
 

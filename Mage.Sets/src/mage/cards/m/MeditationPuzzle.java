@@ -24,7 +24,7 @@ public final class MeditationPuzzle extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(8));
     }
 
-    public MeditationPuzzle(final MeditationPuzzle card) {
+    private MeditationPuzzle(final MeditationPuzzle card) {
         super(card);
     }
 

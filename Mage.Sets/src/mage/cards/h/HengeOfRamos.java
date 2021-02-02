@@ -28,7 +28,7 @@ public final class HengeOfRamos extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HengeOfRamos(final HengeOfRamos card) {
+    private HengeOfRamos(final HengeOfRamos card) {
         super(card);
     }
 

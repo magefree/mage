@@ -50,7 +50,7 @@ public final class ProdigiousGrowth extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ProdigiousGrowth(final ProdigiousGrowth card) {
+    private ProdigiousGrowth(final ProdigiousGrowth card) {
         super(card);
     }
 

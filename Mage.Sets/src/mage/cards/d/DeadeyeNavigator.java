@@ -40,7 +40,7 @@ public final class DeadeyeNavigator extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ability, ruleText)));
     }
 
-    public DeadeyeNavigator(final DeadeyeNavigator card) {
+    private DeadeyeNavigator(final DeadeyeNavigator card) {
         super(card);
     }
 

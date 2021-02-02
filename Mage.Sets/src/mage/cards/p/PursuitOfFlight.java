@@ -45,7 +45,7 @@ public final class PursuitOfFlight extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public PursuitOfFlight(final PursuitOfFlight card) {
+    private PursuitOfFlight(final PursuitOfFlight card) {
         super(card);
     }
 

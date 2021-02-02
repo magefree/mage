@@ -54,7 +54,7 @@ public final class SerraBestiary extends CardImpl {
 
     }
 
-    public SerraBestiary(final SerraBestiary card) {
+    private SerraBestiary(final SerraBestiary card) {
         super(card);
     }
 

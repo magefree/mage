@@ -38,7 +38,7 @@ public final class UlamogsReclaimer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UlamogsReclaimer(final UlamogsReclaimer card) {
+    private UlamogsReclaimer(final UlamogsReclaimer card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class Vampirism extends CardImpl {
 
     }
 
-    public Vampirism(final Vampirism card) {
+    private Vampirism(final Vampirism card) {
         super(card);
     }
 

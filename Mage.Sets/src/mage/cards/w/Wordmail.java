@@ -43,7 +43,7 @@ public final class Wordmail extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(count, count, Duration.WhileOnBattlefield)));
     }
 
-    public Wordmail(final Wordmail card) {
+    private Wordmail(final Wordmail card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class LibraryOfLeng extends CardImpl {
 
     }
 
-    public LibraryOfLeng(final LibraryOfLeng card) {
+    private LibraryOfLeng(final LibraryOfLeng card) {
         super(card);
     }
 

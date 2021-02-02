@@ -29,7 +29,7 @@ public final class AbyssalNightstalker extends CardImpl {
         this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(effect, false, true));
     }
 
-    public AbyssalNightstalker(final AbyssalNightstalker card) {
+    private AbyssalNightstalker(final AbyssalNightstalker card) {
         super(card);
     }
 

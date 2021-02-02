@@ -22,7 +22,7 @@ public final class BonebreakerGiant extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public BonebreakerGiant(final BonebreakerGiant card) {
+    private BonebreakerGiant(final BonebreakerGiant card) {
         super(card);
     }
 

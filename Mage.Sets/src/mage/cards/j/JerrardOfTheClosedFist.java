@@ -25,7 +25,7 @@ public final class JerrardOfTheClosedFist extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public JerrardOfTheClosedFist(final JerrardOfTheClosedFist card) {
+    private JerrardOfTheClosedFist(final JerrardOfTheClosedFist card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class FiveAlarmFire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FiveAlarmFire(final FiveAlarmFire card) {
+    private FiveAlarmFire(final FiveAlarmFire card) {
         super(card);
     }
 

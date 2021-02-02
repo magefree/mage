@@ -41,7 +41,7 @@ public final class UlamogsDespoiler extends CardImpl {
                 "As {this} enters the battlefield, you may put two cards your opponents own from exile into their owners' graveyards. If you do, {this} enters the battlefield with four +1/+1 counters on it", null));
     }
 
-    public UlamogsDespoiler(final UlamogsDespoiler card) {
+    private UlamogsDespoiler(final UlamogsDespoiler card) {
         super(card);
     }
 

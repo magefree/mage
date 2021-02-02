@@ -23,7 +23,7 @@ public final class OnakkeOgre extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public OnakkeOgre(final OnakkeOgre card) {
+    private OnakkeOgre(final OnakkeOgre card) {
         super(card);
     }
 

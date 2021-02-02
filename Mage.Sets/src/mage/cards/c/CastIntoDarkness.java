@@ -43,7 +43,7 @@ public final class CastIntoDarkness extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CastIntoDarkness(final CastIntoDarkness card) {
+    private CastIntoDarkness(final CastIntoDarkness card) {
         super(card);
     }
 

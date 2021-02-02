@@ -30,7 +30,7 @@ public final class DrakewingKrasis extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public DrakewingKrasis(final DrakewingKrasis card) {
+    private DrakewingKrasis(final DrakewingKrasis card) {
         super(card);
     }
 

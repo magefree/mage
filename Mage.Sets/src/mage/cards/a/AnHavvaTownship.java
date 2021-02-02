@@ -37,7 +37,7 @@ public final class AnHavvaTownship extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AnHavvaTownship(final AnHavvaTownship card) {
+    private AnHavvaTownship(final AnHavvaTownship card) {
         super(card);
     }
 

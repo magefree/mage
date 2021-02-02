@@ -53,7 +53,7 @@ public final class BloodwaterEntity extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodwaterEntity(final BloodwaterEntity card) {
+    private BloodwaterEntity(final BloodwaterEntity card) {
         super(card);
     }
 

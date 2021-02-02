@@ -35,7 +35,7 @@ public final class AkroanMastiff extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AkroanMastiff(final AkroanMastiff card) {
+    private AkroanMastiff(final AkroanMastiff card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class BlackWard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public BlackWard(final BlackWard card) {
+    private BlackWard(final BlackWard card) {
         super(card);
     }
 

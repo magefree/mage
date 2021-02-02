@@ -41,7 +41,7 @@ public final class DireFleetRavager extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DireFleetRavagerEffect()));
     }
 
-    public DireFleetRavager(final DireFleetRavager card) {
+    private DireFleetRavager(final DireFleetRavager card) {
         super(card);
     }
 

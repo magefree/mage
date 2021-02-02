@@ -35,7 +35,7 @@ public final class CarnageTyrant extends CardImpl {
 
     }
 
-    public CarnageTyrant(final CarnageTyrant card) {
+    private CarnageTyrant(final CarnageTyrant card) {
         super(card);
     }
 

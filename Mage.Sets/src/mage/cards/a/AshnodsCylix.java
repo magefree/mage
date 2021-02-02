@@ -37,7 +37,7 @@ public final class AshnodsCylix extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AshnodsCylix(final AshnodsCylix card) {
+    private AshnodsCylix(final AshnodsCylix card) {
         super(card);
     }
 

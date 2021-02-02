@@ -36,7 +36,7 @@ public final class EightfoldMaze extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature());
     }
 
-    public EightfoldMaze(final EightfoldMaze card) {
+    private EightfoldMaze(final EightfoldMaze card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class Pillage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public Pillage(final Pillage card) {
+    private Pillage(final Pillage card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class NayaHushblade extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NayaHushblade(final NayaHushblade card) {
+    private NayaHushblade(final NayaHushblade card) {
         super(card);
     }
 

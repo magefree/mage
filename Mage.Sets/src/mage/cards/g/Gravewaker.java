@@ -43,7 +43,7 @@ public final class Gravewaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Gravewaker(final Gravewaker card) {
+    private Gravewaker(final Gravewaker card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class SpellBlast extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(SpellBlastAdjuster.instance);
     }
 
-    public SpellBlast(final SpellBlast card) {
+    private SpellBlast(final SpellBlast card) {
         super(card);
     }
 

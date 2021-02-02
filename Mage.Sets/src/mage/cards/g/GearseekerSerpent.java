@@ -39,7 +39,7 @@ public final class GearseekerSerpent extends CardImpl {
                 new ManaCostsImpl<>("{5}{U}")));
     }
 
-    public GearseekerSerpent(final GearseekerSerpent card) {
+    private GearseekerSerpent(final GearseekerSerpent card) {
         super(card);
     }
 

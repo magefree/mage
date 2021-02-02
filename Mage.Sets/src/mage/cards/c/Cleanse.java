@@ -29,7 +29,7 @@ public final class Cleanse extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public Cleanse(final Cleanse card) {
+    private Cleanse(final Cleanse card) {
         super(card);
     }
 

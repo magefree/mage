@@ -29,7 +29,7 @@ public final class DirgurNemesis extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{6}{U}"), true));
     }
 
-    public DirgurNemesis(final DirgurNemesis card) {
+    private DirgurNemesis(final DirgurNemesis card) {
         super(card);
     }
 

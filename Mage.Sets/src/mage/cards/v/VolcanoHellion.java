@@ -41,7 +41,7 @@ public final class VolcanoHellion extends CardImpl {
 
     }
 
-    public VolcanoHellion(final VolcanoHellion card) {
+    private VolcanoHellion(final VolcanoHellion card) {
         super(card);
     }
 

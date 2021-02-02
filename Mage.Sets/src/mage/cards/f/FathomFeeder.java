@@ -51,7 +51,7 @@ public final class FathomFeeder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FathomFeeder(final FathomFeeder card) {
+    private FathomFeeder(final FathomFeeder card) {
         super(card);
     }
 

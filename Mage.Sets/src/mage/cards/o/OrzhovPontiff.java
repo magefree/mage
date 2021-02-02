@@ -46,7 +46,7 @@ public final class OrzhovPontiff extends CardImpl {
 
     }
 
-    public OrzhovPontiff(final OrzhovPontiff card) {
+    private OrzhovPontiff(final OrzhovPontiff card) {
         super(card);
     }
 

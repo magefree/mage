@@ -31,7 +31,7 @@ public final class DeathsPresence extends CardImpl {
         this.addAbility(new DeathsPresenceTriggeredAbility());
     }
 
-    public DeathsPresence(final DeathsPresence card) {
+    private DeathsPresence(final DeathsPresence card) {
         super(card);
     }
 

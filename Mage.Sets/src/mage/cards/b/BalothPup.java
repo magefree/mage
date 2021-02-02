@@ -35,7 +35,7 @@ public final class BalothPup extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public BalothPup(final BalothPup card) {
+    private BalothPup(final BalothPup card) {
         super(card);
     }
 

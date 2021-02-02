@@ -31,7 +31,7 @@ public final class Skyshaper extends CardImpl {
                 new SacrificeSourceCost()));        
     }
 
-    public Skyshaper(final Skyshaper card) {
+    private Skyshaper(final Skyshaper card) {
         super(card);
     }
 

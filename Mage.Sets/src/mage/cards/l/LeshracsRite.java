@@ -39,7 +39,7 @@ public final class LeshracsRite extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new SwampwalkAbility(), AttachmentType.AURA)));
     }
 
-    public LeshracsRite(final LeshracsRite card) {
+    private LeshracsRite(final LeshracsRite card) {
         super(card);
     }
 

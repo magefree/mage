@@ -40,7 +40,7 @@ public final class PoeDameron extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.EndOfTurn, filterStarship, false), filter, false));
     }
 
-    public PoeDameron(final PoeDameron card) {
+    private PoeDameron(final PoeDameron card) {
         super(card);
     }
 

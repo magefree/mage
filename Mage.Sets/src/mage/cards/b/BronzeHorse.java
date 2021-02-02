@@ -51,7 +51,7 @@ public final class BronzeHorse extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public BronzeHorse(final BronzeHorse card) {
+    private BronzeHorse(final BronzeHorse card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class RiotDevils extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public RiotDevils(final RiotDevils card) {
+    private RiotDevils(final RiotDevils card) {
         super(card);
     }
 

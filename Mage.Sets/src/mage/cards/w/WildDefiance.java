@@ -30,7 +30,7 @@ public final class WildDefiance extends CardImpl {
         this.addAbility(new CreaturesYouControlBecomesTargetTriggeredAbility(new BoostTargetEffect(3, 3, Duration.EndOfTurn)));
     }
 
-    public WildDefiance(final WildDefiance card) {
+    private WildDefiance(final WildDefiance card) {
         super(card);
     }
 

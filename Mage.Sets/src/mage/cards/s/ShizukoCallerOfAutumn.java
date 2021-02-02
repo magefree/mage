@@ -37,7 +37,7 @@ public final class ShizukoCallerOfAutumn extends CardImpl {
         
     }
 
-    public ShizukoCallerOfAutumn(final ShizukoCallerOfAutumn card) {
+    private ShizukoCallerOfAutumn(final ShizukoCallerOfAutumn card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class PyricSalamander extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PyricSalamander(final PyricSalamander card) {
+    private PyricSalamander(final PyricSalamander card) {
         super(card);
     }
 

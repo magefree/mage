@@ -32,7 +32,7 @@ public final class LashknifeBarrier extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LashknifeBarrierEffect()));
     }
 
-    public LashknifeBarrier(final LashknifeBarrier card) {
+    private LashknifeBarrier(final LashknifeBarrier card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class Energizer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Energizer(final Energizer card) {
+    private Energizer(final Energizer card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class WordsOfWorship extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WordsOfWorship(final WordsOfWorship card) {
+    private WordsOfWorship(final WordsOfWorship card) {
         super(card);
     }
 

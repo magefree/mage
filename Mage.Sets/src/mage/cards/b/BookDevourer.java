@@ -34,7 +34,7 @@ public final class BookDevourer extends CardImpl {
         ));
     }
 
-    public BookDevourer(final BookDevourer card) {
+    private BookDevourer(final BookDevourer card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class VecTownships extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VecTownships(final VecTownships card) {
+    private VecTownships(final VecTownships card) {
         super(card);
     }
 

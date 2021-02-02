@@ -45,7 +45,7 @@ public final class SavageSilhouette extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
     }
 
-    public SavageSilhouette(final SavageSilhouette card) {
+    private SavageSilhouette(final SavageSilhouette card) {
         super(card);
     }
 

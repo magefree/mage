@@ -25,7 +25,7 @@ public final class NightsoilKami extends CardImpl {
         this.addAbility(new SoulshiftAbility(5));
     }
 
-    public NightsoilKami(final NightsoilKami card) {
+    private NightsoilKami(final NightsoilKami card) {
         super(card);
     }
 

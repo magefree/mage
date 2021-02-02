@@ -29,7 +29,7 @@ public final class AngelOfRetribution extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public AngelOfRetribution(final AngelOfRetribution card) {
+    private AngelOfRetribution(final AngelOfRetribution card) {
         super(card);
     }
 

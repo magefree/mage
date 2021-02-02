@@ -36,7 +36,7 @@ public final class WorldAtWar extends CardImpl {
         this.addAbility(new ReboundAbility(), new AttackedThisTurnWatcher());
     }
 
-    public WorldAtWar(final WorldAtWar card) {
+    private WorldAtWar(final WorldAtWar card) {
         super(card);
     }
 

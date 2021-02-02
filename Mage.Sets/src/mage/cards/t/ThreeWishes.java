@@ -40,7 +40,7 @@ public final class ThreeWishes extends CardImpl {
 
     }
 
-    public ThreeWishes(final ThreeWishes card) {
+    private ThreeWishes(final ThreeWishes card) {
         super(card);
     }
 

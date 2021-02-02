@@ -57,7 +57,7 @@ public final class HopeOfGhirapur extends CardImpl {
         this.addAbility(ability, new HopeOfGhirapurCombatDamageWatcher());
     }
 
-    public HopeOfGhirapur(final HopeOfGhirapur card) {
+    private HopeOfGhirapur(final HopeOfGhirapur card) {
         super(card);
     }
 

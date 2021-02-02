@@ -43,7 +43,7 @@ public final class RattleclawMystic extends CardImpl {
 
     }
 
-    public RattleclawMystic(final RattleclawMystic card) {
+    private RattleclawMystic(final RattleclawMystic card) {
         super(card);
     }
 

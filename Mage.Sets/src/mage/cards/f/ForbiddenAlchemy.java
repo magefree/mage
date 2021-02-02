@@ -29,7 +29,7 @@ public final class ForbiddenAlchemy extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{6}{B}"), TimingRule.INSTANT));
     }
 
-    public ForbiddenAlchemy(final ForbiddenAlchemy card) {
+    private ForbiddenAlchemy(final ForbiddenAlchemy card) {
         super(card);
     }
 

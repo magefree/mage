@@ -28,7 +28,7 @@ public final class HoverguardObserver extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public HoverguardObserver(final HoverguardObserver card) {
+    private HoverguardObserver(final HoverguardObserver card) {
         super(card);
     }
 

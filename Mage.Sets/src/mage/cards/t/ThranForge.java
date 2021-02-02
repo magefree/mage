@@ -45,7 +45,7 @@ public final class ThranForge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThranForge(final ThranForge card) {
+    private ThranForge(final ThranForge card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class OrochiSustainer extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public OrochiSustainer(final OrochiSustainer card) {
+    private OrochiSustainer(final OrochiSustainer card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class PowerOfFire extends CardImpl {
         
     }
 
-    public PowerOfFire(final PowerOfFire card) {
+    private PowerOfFire(final PowerOfFire card) {
         super(card);
     }
 

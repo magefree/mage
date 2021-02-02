@@ -29,7 +29,7 @@ public final class TahCropSkirmisher extends CardImpl {
 
     }
 
-    public TahCropSkirmisher(final TahCropSkirmisher card) {
+    private TahCropSkirmisher(final TahCropSkirmisher card) {
         super(card);
     }
 

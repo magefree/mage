@@ -23,7 +23,7 @@ public final class RackAndRuin extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent(2));
     }
 
-    public RackAndRuin(final RackAndRuin card) {
+    private RackAndRuin(final RackAndRuin card) {
         super(card);
     }
 

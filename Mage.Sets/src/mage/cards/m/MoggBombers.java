@@ -49,7 +49,7 @@ public final class MoggBombers extends CardImpl {
 
     }
 
-    public MoggBombers(final MoggBombers card) {
+    private MoggBombers(final MoggBombers card) {
         super(card);
     }
 

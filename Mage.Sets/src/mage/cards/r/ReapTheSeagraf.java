@@ -22,7 +22,7 @@ public final class ReapTheSeagraf extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{U}"), TimingRule.SORCERY));
     }
 
-    public ReapTheSeagraf(final ReapTheSeagraf card) {
+    private ReapTheSeagraf(final ReapTheSeagraf card) {
         super(card);
     }
 

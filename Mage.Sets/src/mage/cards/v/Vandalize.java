@@ -32,7 +32,7 @@ public final class Vandalize extends CardImpl {
 
     }
 
-    public Vandalize(final Vandalize card) {
+    private Vandalize(final Vandalize card) {
         super(card);
     }
 

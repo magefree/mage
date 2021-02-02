@@ -56,7 +56,7 @@ public final class HollowbornBarghest extends CardImpl {
         this.addAbility(new HollowbornBarghestTriggeredAbility());
     }
 
-    public HollowbornBarghest(final HollowbornBarghest card) {
+    private HollowbornBarghest(final HollowbornBarghest card) {
         super(card);
     }
 

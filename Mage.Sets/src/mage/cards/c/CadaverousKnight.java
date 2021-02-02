@@ -33,7 +33,7 @@ public final class CadaverousKnight extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}{B}")));
     }
 
-    public CadaverousKnight(final CadaverousKnight card) {
+    private CadaverousKnight(final CadaverousKnight card) {
         super(card);
     }
 

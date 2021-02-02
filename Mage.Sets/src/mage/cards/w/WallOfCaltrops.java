@@ -37,7 +37,7 @@ public final class WallOfCaltrops extends CardImpl {
         this.addAbility(new WallOfCaltropsAbility());
     }
 
-    public WallOfCaltrops(final WallOfCaltrops card) {
+    private WallOfCaltrops(final WallOfCaltrops card) {
         super(card);
     }
 

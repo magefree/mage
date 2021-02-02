@@ -41,7 +41,7 @@ public final class RequiemAngel extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken(), 1), false, filter));
     }
 
-    public RequiemAngel(final RequiemAngel card) {
+    private RequiemAngel(final RequiemAngel card) {
         super(card);
     }
 

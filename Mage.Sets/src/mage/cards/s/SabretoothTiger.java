@@ -25,7 +25,7 @@ public final class SabretoothTiger extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public SabretoothTiger(final SabretoothTiger card) {
+    private SabretoothTiger(final SabretoothTiger card) {
         super(card);
     }
 

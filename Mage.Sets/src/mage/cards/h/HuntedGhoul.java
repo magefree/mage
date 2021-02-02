@@ -27,7 +27,7 @@ public final class HuntedGhoul extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBlockCreaturesSourceEffect(new FilterCreaturePermanent(SubType.HUMAN, "Humans"))));
     }
 
-    public HuntedGhoul(final HuntedGhoul card) {
+    private HuntedGhoul(final HuntedGhoul card) {
         super(card);
     }
 

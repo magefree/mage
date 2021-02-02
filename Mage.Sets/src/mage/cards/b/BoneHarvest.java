@@ -29,7 +29,7 @@ public final class BoneHarvest extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public BoneHarvest(final BoneHarvest card) {
+    private BoneHarvest(final BoneHarvest card) {
         super(card);
     }
 

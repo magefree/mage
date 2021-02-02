@@ -35,7 +35,7 @@ public final class LeyDruid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LeyDruid(final LeyDruid card) {
+    private LeyDruid(final LeyDruid card) {
         super(card);
     }
 

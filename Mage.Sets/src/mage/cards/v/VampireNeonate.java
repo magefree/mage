@@ -36,7 +36,7 @@ public final class VampireNeonate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VampireNeonate(final VampireNeonate card) {
+    private VampireNeonate(final VampireNeonate card) {
         super(card);
     }
 

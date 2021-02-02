@@ -46,7 +46,7 @@ public final class PendelhavenElder extends CardImpl {
         ));
     }
 
-    public PendelhavenElder(final PendelhavenElder card) {
+    private PendelhavenElder(final PendelhavenElder card) {
         super(card);
     }
 

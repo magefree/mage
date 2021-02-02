@@ -39,7 +39,7 @@ public final class TrialOfZeal extends CardImpl {
                 "When a Cartouche enters the battlefield under your control, return {this} to its owner's hand"));
     }
 
-    public TrialOfZeal(final TrialOfZeal card) {
+    private TrialOfZeal(final TrialOfZeal card) {
         super(card);
     }
 

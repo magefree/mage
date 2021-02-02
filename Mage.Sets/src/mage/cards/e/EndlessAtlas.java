@@ -37,7 +37,7 @@ public final class EndlessAtlas extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EndlessAtlas(final EndlessAtlas card) {
+    private EndlessAtlas(final EndlessAtlas card) {
         super(card);
     }
 

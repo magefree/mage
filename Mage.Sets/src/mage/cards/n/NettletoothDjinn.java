@@ -26,7 +26,7 @@ public final class NettletoothDjinn extends CardImpl {
         // At the beginning of your upkeep, Nettletooth Djinn deals 1 damage to you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), TargetController.YOU, false));                                                                                 }
 
-    public NettletoothDjinn(final NettletoothDjinn card) {
+    private NettletoothDjinn(final NettletoothDjinn card) {
         super(card);
     }
 

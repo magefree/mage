@@ -32,7 +32,7 @@ public final class KithkinDaggerdare extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KithkinDaggerdare(final KithkinDaggerdare card) {
+    private KithkinDaggerdare(final KithkinDaggerdare card) {
         super(card);
     }
 

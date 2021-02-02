@@ -28,7 +28,7 @@ public final class DreadStatuary extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new DreadStatuaryToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{4}")));
     }
 
-    public DreadStatuary(final DreadStatuary card) {
+    private DreadStatuary(final DreadStatuary card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class SzadekLordOfSecrets extends CardImpl {
 
     }
 
-    public SzadekLordOfSecrets(final SzadekLordOfSecrets card) {
+    private SzadekLordOfSecrets(final SzadekLordOfSecrets card) {
         super(card);
     }
 

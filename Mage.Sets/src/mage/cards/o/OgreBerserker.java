@@ -27,7 +27,7 @@ public final class OgreBerserker extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public OgreBerserker(final OgreBerserker card) {
+    private OgreBerserker(final OgreBerserker card) {
         super(card);
     }
 

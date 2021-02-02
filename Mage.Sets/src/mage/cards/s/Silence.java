@@ -27,7 +27,7 @@ public final class Silence extends CardImpl {
         this.getSpellAbility().addEffect(new SilenceEffect());
     }
 
-    public Silence(final Silence card) {
+    private Silence(final Silence card) {
         super(card);
     }
 

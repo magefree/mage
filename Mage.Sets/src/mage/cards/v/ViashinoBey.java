@@ -41,7 +41,7 @@ public final class ViashinoBey extends CardImpl {
 
     }
 
-    public ViashinoBey(final ViashinoBey card) {
+    private ViashinoBey(final ViashinoBey card) {
         super(card);
     }
 

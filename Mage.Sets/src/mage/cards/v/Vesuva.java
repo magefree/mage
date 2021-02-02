@@ -37,7 +37,7 @@ public final class Vesuva extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Vesuva(final Vesuva card) {
+    private Vesuva(final Vesuva card) {
         super(card);
     }
 

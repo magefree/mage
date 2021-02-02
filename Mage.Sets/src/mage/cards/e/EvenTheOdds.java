@@ -28,7 +28,7 @@ public final class EvenTheOdds extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SoldierToken(), 3));
     }
 
-    public EvenTheOdds(final EvenTheOdds card) {
+    private EvenTheOdds(final EvenTheOdds card) {
         super(card);
     }
 

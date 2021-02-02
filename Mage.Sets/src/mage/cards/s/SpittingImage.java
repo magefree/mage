@@ -34,7 +34,7 @@ public final class SpittingImage extends CardImpl {
 
     }
 
-    public SpittingImage(final SpittingImage card) {
+    private SpittingImage(final SpittingImage card) {
         super(card);
     }
 

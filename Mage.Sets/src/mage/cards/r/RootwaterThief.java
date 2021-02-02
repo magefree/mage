@@ -43,7 +43,7 @@ public final class RootwaterThief extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new RootwaterThiefEffect(), false, true));
     }
 
-    public RootwaterThief(final RootwaterThief card) {
+    private RootwaterThief(final RootwaterThief card) {
         super(card);
     }
 

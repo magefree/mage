@@ -31,7 +31,7 @@ public final class CloudreaderSphinx extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(2)));
     }
 
-    public CloudreaderSphinx(final CloudreaderSphinx card) {
+    private CloudreaderSphinx(final CloudreaderSphinx card) {
         super(card);
     }
 

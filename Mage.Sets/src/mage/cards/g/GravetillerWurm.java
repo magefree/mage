@@ -33,7 +33,7 @@ public final class GravetillerWurm extends CardImpl {
                 MorbidCondition.instance, ""), "with four +1/+1 counters on it if a creature died this turn"));
     }
 
-    public GravetillerWurm(final GravetillerWurm card) {
+    private GravetillerWurm(final GravetillerWurm card) {
         super(card);
     }
 

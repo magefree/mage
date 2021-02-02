@@ -35,7 +35,7 @@ public final class BlightHerder extends CardImpl {
         this.addAbility(new CastSourceTriggeredAbility(new BlightHerderEffect(), true));
     }
 
-    public BlightHerder(final BlightHerder card) {
+    private BlightHerder(final BlightHerder card) {
         super(card);
     }
 

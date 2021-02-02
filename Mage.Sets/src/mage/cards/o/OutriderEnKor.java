@@ -40,7 +40,7 @@ public final class OutriderEnKor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OutriderEnKor(final OutriderEnKor card) {
+    private OutriderEnKor(final OutriderEnKor card) {
         super(card);
     }
 

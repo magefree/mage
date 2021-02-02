@@ -34,7 +34,7 @@ public final class KembasLegion extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KembasLegionEffect()));
     }
 
-    public KembasLegion(final KembasLegion card) {
+    private KembasLegion(final KembasLegion card) {
         super(card);
     }
 

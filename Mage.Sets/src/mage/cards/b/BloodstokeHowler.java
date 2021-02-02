@@ -40,7 +40,7 @@ public final class BloodstokeHowler extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new BoostControlledEffect(3, 0, Duration.EndOfTurn, filter)));
     }
 
-    public BloodstokeHowler(final BloodstokeHowler card) {
+    private BloodstokeHowler(final BloodstokeHowler card) {
         super(card);
     }
 

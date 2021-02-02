@@ -41,7 +41,7 @@ public final class ShriekingMogg extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShriekingMogg(final ShriekingMogg card) {
+    private ShriekingMogg(final ShriekingMogg card) {
         super(card);
     }
 

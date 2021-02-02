@@ -27,7 +27,7 @@ public final class HonorGuard extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W)));
     }
 
-    public HonorGuard(final HonorGuard card) {
+    private HonorGuard(final HonorGuard card) {
         super(card);
     }
 

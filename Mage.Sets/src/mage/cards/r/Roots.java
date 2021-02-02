@@ -50,7 +50,7 @@ public final class Roots extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
-    public Roots(final Roots card) {
+    private Roots(final Roots card) {
         super(card);
     }
 

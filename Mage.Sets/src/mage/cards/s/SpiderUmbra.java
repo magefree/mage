@@ -39,7 +39,7 @@ public final class SpiderUmbra extends CardImpl {
         this.addAbility(new TotemArmorAbility());
     }
 
-    public SpiderUmbra(final SpiderUmbra card) {
+    private SpiderUmbra(final SpiderUmbra card) {
         super(card);
     }
 

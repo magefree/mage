@@ -32,7 +32,7 @@ public final class SoulRend extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public SoulRend(final SoulRend card) {
+    private SoulRend(final SoulRend card) {
         super(card);
     }
 

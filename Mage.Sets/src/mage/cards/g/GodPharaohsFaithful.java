@@ -37,7 +37,7 @@ public final class GodPharaohsFaithful extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(1), filter, false));
     }
 
-    public GodPharaohsFaithful(final GodPharaohsFaithful card) {
+    private GodPharaohsFaithful(final GodPharaohsFaithful card) {
         super(card);
     }
 

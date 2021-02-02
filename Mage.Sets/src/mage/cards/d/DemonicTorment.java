@@ -37,7 +37,7 @@ public final class DemonicTorment extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", false)));
     }
 
-    public DemonicTorment(final DemonicTorment card) {
+    private DemonicTorment(final DemonicTorment card) {
         super(card);
     }
 

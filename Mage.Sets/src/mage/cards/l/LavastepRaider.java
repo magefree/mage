@@ -30,7 +30,7 @@ public final class LavastepRaider extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{2}{R}")));
     }
 
-    public LavastepRaider(final LavastepRaider card) {
+    private LavastepRaider(final LavastepRaider card) {
         super(card);
     }
 

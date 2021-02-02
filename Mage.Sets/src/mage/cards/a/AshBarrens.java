@@ -25,7 +25,7 @@ public final class AshBarrens extends CardImpl {
         this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}")));
     }
 
-    public AshBarrens(final AshBarrens card) {
+    private AshBarrens(final AshBarrens card) {
         super(card);
     }
 

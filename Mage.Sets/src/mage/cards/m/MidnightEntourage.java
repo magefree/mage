@@ -45,7 +45,7 @@ public final class MidnightEntourage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MidnightEntourage(final MidnightEntourage card) {
+    private MidnightEntourage(final MidnightEntourage card) {
         super(card);
     }
 

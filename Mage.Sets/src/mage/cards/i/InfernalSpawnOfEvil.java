@@ -59,7 +59,7 @@ public final class InfernalSpawnOfEvil extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InfernalSpawnOfEvil(final InfernalSpawnOfEvil card) {
+    private InfernalSpawnOfEvil(final InfernalSpawnOfEvil card) {
         super(card);
     }
 

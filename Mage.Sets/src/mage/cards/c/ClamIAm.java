@@ -33,7 +33,7 @@ public final class ClamIAm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ClamIAmEffect()));
     }
 
-    public ClamIAm(final ClamIAm card) {
+    private ClamIAm(final ClamIAm card) {
         super(card);
     }
 

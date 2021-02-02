@@ -52,7 +52,7 @@ public final class ObNixilisUnshackled extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, true));
     }
 
-    public ObNixilisUnshackled(final ObNixilisUnshackled card) {
+    private ObNixilisUnshackled(final ObNixilisUnshackled card) {
         super(card);
     }
 

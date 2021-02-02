@@ -38,7 +38,7 @@ public final class InitiatesOfTheEbonHand extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InitiatesOfTheEbonHand(final InitiatesOfTheEbonHand card) {
+    private InitiatesOfTheEbonHand(final InitiatesOfTheEbonHand card) {
         super(card);
     }
 

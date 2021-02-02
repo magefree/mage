@@ -31,7 +31,7 @@ public final class SnakeBasket extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SnakeBasket(final SnakeBasket card) {
+    private SnakeBasket(final SnakeBasket card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class EnshroudingMist extends CardImpl {
 
     }
 
-    public EnshroudingMist(final EnshroudingMist card) {
+    private EnshroudingMist(final EnshroudingMist card) {
         super(card);
     }
 

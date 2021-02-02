@@ -55,7 +55,7 @@ public final class HoodedHydra extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HoodedHydra(final HoodedHydra card) {
+    private HoodedHydra(final HoodedHydra card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class ChainStasis extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ChainStasis(final ChainStasis card) {
+    private ChainStasis(final ChainStasis card) {
         super(card);
     }
 

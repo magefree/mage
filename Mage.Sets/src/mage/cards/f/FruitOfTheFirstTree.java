@@ -40,7 +40,7 @@ public final class FruitOfTheFirstTree extends CardImpl {
         this.addAbility( new DiesAttachedTriggeredAbility(new FruitOfTheFirstTreeEffect(), "enchanted creature"));
     }
 
-    public FruitOfTheFirstTree(final FruitOfTheFirstTree card) {
+    private FruitOfTheFirstTree(final FruitOfTheFirstTree card) {
         super(card);
     }
 

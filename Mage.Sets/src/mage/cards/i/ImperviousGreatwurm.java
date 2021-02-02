@@ -31,7 +31,7 @@ public final class ImperviousGreatwurm extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
     }
 
-    public ImperviousGreatwurm(final ImperviousGreatwurm card) {
+    private ImperviousGreatwurm(final ImperviousGreatwurm card) {
         super(card);
     }
 

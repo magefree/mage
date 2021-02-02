@@ -41,7 +41,7 @@ public final class WindsOfQalSisma extends CardImpl {
         this.getSpellAbility().addHint(FerociousHint.instance);
     }
 
-    public WindsOfQalSisma(final WindsOfQalSisma card) {
+    private WindsOfQalSisma(final WindsOfQalSisma card) {
         super(card);
     }
 

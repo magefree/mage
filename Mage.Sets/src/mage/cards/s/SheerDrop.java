@@ -34,7 +34,7 @@ public final class SheerDrop extends CardImpl {
         this.addAbility(new AwakenAbility(this, 3, "{5}{W}"));
     }
 
-    public SheerDrop(final SheerDrop card) {
+    private SheerDrop(final SheerDrop card) {
         super(card);
     }
 

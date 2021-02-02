@@ -34,7 +34,7 @@ public final class Deathmark extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public Deathmark(final Deathmark card) {
+    private Deathmark(final Deathmark card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class ShelldockIsle extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShelldockIsle(final ShelldockIsle card) {
+    private ShelldockIsle(final ShelldockIsle card) {
         super(card);
     }
 

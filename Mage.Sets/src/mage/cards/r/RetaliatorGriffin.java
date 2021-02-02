@@ -38,7 +38,7 @@ public final class RetaliatorGriffin extends CardImpl {
         this.addAbility(new RetaliatorGriffinTriggeredAbility());
     }
 
-    public RetaliatorGriffin(final RetaliatorGriffin card) {
+    private RetaliatorGriffin(final RetaliatorGriffin card) {
         super(card);
     }
 

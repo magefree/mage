@@ -50,7 +50,7 @@ public final class PeltCollector extends CardImpl {
         ));
     }
 
-    public PeltCollector(final PeltCollector card) {
+    private PeltCollector(final PeltCollector card) {
         super(card);
     }
 

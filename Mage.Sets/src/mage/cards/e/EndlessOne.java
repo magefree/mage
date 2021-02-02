@@ -27,7 +27,7 @@ public final class EndlessOne extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
     }
 
-    public EndlessOne(final EndlessOne card) {
+    private EndlessOne(final EndlessOne card) {
         super(card);
     }
 

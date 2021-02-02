@@ -29,7 +29,7 @@ public final class FeralThrowback extends CardImpl {
         this.addAbility(new ProvokeAbility());
     }
 
-    public FeralThrowback(final FeralThrowback card) {
+    private FeralThrowback(final FeralThrowback card) {
         super(card);
     }
 

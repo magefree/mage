@@ -28,7 +28,7 @@ public final class IronLeagueSteed extends CardImpl {
         this.addAbility(new FabricateAbility(1));
     }
 
-    public IronLeagueSteed(final IronLeagueSteed card) {
+    private IronLeagueSteed(final IronLeagueSteed card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class GethsVerdict extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public GethsVerdict(final GethsVerdict card) {
+    private GethsVerdict(final GethsVerdict card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class TolariaWest extends CardImpl {
         this.addAbility(new TransmuteAbility("{1}{U}{U}"));
     }
 
-    public TolariaWest(final TolariaWest card) {
+    private TolariaWest(final TolariaWest card) {
         super(card);
     }
 

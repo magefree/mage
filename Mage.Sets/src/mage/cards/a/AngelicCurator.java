@@ -30,7 +30,7 @@ public final class AngelicCurator extends CardImpl {
         this.addAbility(new ProtectionAbility(new FilterArtifactCard("artifacts")));
     }
 
-    public AngelicCurator(final AngelicCurator card) {
+    private AngelicCurator(final AngelicCurator card) {
         super(card);
     }
 

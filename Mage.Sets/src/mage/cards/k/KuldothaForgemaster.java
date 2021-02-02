@@ -38,7 +38,7 @@ public final class KuldothaForgemaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KuldothaForgemaster(final KuldothaForgemaster card) {
+    private KuldothaForgemaster(final KuldothaForgemaster card) {
         super(card);
     }
 

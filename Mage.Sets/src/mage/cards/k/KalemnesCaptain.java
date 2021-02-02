@@ -45,7 +45,7 @@ public final class KalemnesCaptain extends CardImpl {
         this.addAbility(new BecomesMonstrousSourceTriggeredAbility(new ExileAllEffect(filter)));
     }
 
-    public KalemnesCaptain(final KalemnesCaptain card) {
+    private KalemnesCaptain(final KalemnesCaptain card) {
         super(card);
     }
 

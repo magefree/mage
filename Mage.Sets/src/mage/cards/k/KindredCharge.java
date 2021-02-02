@@ -36,7 +36,7 @@ public final class KindredCharge extends CardImpl {
         this.getSpellAbility().addEffect(new KindredChargeEffect());
     }
 
-    public KindredCharge(final KindredCharge card) {
+    private KindredCharge(final KindredCharge card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class TitanForge extends CardImpl {
 
     }
 
-    public TitanForge(final TitanForge card) {
+    private TitanForge(final TitanForge card) {
         super(card);
     }
 

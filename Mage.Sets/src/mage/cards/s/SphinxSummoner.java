@@ -39,7 +39,7 @@ public final class SphinxSummoner extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, false), true));
     }
 
-    public SphinxSummoner(final SphinxSummoner card) {
+    private SphinxSummoner(final SphinxSummoner card) {
         super(card);
     }
 

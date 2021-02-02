@@ -27,7 +27,7 @@ public final class PsychicTransfer extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public PsychicTransfer(final PsychicTransfer card) {
+    private PsychicTransfer(final PsychicTransfer card) {
         super(card);
     }
 

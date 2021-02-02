@@ -29,7 +29,7 @@ public final class TradeSecrets extends CardImpl {
 
     }
 
-    public TradeSecrets(final TradeSecrets card) {
+    private TradeSecrets(final TradeSecrets card) {
         super(card);
     }
 

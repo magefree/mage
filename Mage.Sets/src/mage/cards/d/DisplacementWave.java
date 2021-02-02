@@ -26,7 +26,7 @@ public final class DisplacementWave extends CardImpl {
         this.getSpellAbility().addEffect(new DisplacementWaveEffect());
     }
 
-    public DisplacementWave(final DisplacementWave card) {
+    private DisplacementWave(final DisplacementWave card) {
         super(card);
     }
 

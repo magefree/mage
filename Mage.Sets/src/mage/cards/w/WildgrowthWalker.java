@@ -36,7 +36,7 @@ public final class WildgrowthWalker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WildgrowthWalker(final WildgrowthWalker card) {
+    private WildgrowthWalker(final WildgrowthWalker card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class JaceVrynsProdigy extends CardImpl {
 
     }
 
-    public JaceVrynsProdigy(final JaceVrynsProdigy card) {
+    private JaceVrynsProdigy(final JaceVrynsProdigy card) {
         super(card);
     }
 

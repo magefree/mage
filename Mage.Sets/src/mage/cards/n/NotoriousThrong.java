@@ -44,7 +44,7 @@ public final class NotoriousThrong extends CardImpl {
         this.getSpellAbility().addHint(ProwlCostWasPaidHint.instance);
     }
 
-    public NotoriousThrong(final NotoriousThrong card) {
+    private NotoriousThrong(final NotoriousThrong card) {
         super(card);
     }
 

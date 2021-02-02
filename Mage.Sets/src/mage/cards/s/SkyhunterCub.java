@@ -39,7 +39,7 @@ public final class SkyhunterCub extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
     }
 
-    public SkyhunterCub(final SkyhunterCub card) {
+    private SkyhunterCub(final SkyhunterCub card) {
         super(card);
     }
 

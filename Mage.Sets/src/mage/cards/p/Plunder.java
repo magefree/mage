@@ -34,7 +34,7 @@ public final class Plunder extends CardImpl {
         this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{1}{R}"), this));
     }
 
-    public Plunder(final Plunder card) {
+    private Plunder(final Plunder card) {
         super(card);
     }
 

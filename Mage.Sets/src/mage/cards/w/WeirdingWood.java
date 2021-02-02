@@ -49,7 +49,7 @@ public final class WeirdingWood extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public WeirdingWood(final WeirdingWood card) {
+    private WeirdingWood(final WeirdingWood card) {
         super(card);
     }
 

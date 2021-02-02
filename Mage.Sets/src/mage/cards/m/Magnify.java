@@ -21,7 +21,7 @@ public final class Magnify extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(1, 1, Duration.EndOfTurn));
     }
 
-    public Magnify(final Magnify card) {
+    private Magnify(final Magnify card) {
         super(card);
     }
 

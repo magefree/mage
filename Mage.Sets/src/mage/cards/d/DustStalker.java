@@ -47,7 +47,7 @@ public final class DustStalker extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0), false));
     }
 
-    public DustStalker(final DustStalker card) {
+    private DustStalker(final DustStalker card) {
         super(card);
     }
 

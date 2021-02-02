@@ -29,7 +29,7 @@ public final class GoreHouseChainwalker extends CardImpl {
         
     }
  
-    public GoreHouseChainwalker(final GoreHouseChainwalker card) {
+    private GoreHouseChainwalker(final GoreHouseChainwalker card) {
         super(card);
     }
  

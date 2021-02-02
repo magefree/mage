@@ -30,7 +30,7 @@ public final class WojekHalberdiers extends CardImpl {
         this.addAbility(new BattalionAbility(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn)));
     }
 
-    public WojekHalberdiers(final WojekHalberdiers card) {
+    private WojekHalberdiers(final WojekHalberdiers card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class CennsTactician extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureAllEffect(1, filterCounter, Duration.WhileOnBattlefield)));
     }
 
-    public CennsTactician(final CennsTactician card) {
+    private CennsTactician(final CennsTactician card) {
         super(card);
     }
 

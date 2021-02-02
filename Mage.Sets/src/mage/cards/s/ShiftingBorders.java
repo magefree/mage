@@ -30,7 +30,7 @@ public final class ShiftingBorders extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{3}{U}"));
     }
 
-    public ShiftingBorders(final ShiftingBorders card) {
+    private ShiftingBorders(final ShiftingBorders card) {
         super(card);
     }
 

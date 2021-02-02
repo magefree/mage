@@ -34,7 +34,7 @@ public final class CitanulFlute extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CitanulFlute(final CitanulFlute card) {
+    private CitanulFlute(final CitanulFlute card) {
         super(card);
     }
 

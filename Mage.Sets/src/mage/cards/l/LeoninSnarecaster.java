@@ -32,7 +32,7 @@ public final class LeoninSnarecaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LeoninSnarecaster(final LeoninSnarecaster card) {
+    private LeoninSnarecaster(final LeoninSnarecaster card) {
         super(card);
     }
 

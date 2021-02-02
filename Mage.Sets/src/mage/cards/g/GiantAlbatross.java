@@ -43,7 +43,7 @@ public final class GiantAlbatross extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GiantAlbatross(final GiantAlbatross card) {
+    private GiantAlbatross(final GiantAlbatross card) {
         super(card);
     }
 

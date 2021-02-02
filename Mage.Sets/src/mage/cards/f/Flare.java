@@ -28,7 +28,7 @@ public final class Flare extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public Flare(final Flare card) {
+    private Flare(final Flare card) {
         super(card);
     }
 

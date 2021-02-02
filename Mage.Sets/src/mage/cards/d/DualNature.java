@@ -58,7 +58,7 @@ public final class DualNature extends CardImpl {
         this.addAbility(new DualNatureLeavesBattlefieldTriggeredAbility());
     }
 
-    public DualNature(final DualNature card) {
+    private DualNature(final DualNature card) {
         super(card);
     }
 

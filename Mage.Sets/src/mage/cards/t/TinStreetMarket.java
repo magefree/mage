@@ -44,7 +44,7 @@ public final class TinStreetMarket extends CardImpl {
         
     }
 
-    public TinStreetMarket(final TinStreetMarket card) {
+    private TinStreetMarket(final TinStreetMarket card) {
         super(card);
     }
 

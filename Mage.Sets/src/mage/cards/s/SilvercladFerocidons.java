@@ -27,7 +27,7 @@ public final class SilvercladFerocidons extends CardImpl {
         this.addAbility(new DealtDamageToSourceTriggeredAbility(new SacrificeOpponentsEffect(new FilterPermanent()), false, true));
     }
 
-    public SilvercladFerocidons(final SilvercladFerocidons card) {
+    private SilvercladFerocidons(final SilvercladFerocidons card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class Panharmonicon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PanharmoniconEffect()));
     }
 
-    public Panharmonicon(final Panharmonicon card) {
+    private Panharmonicon(final Panharmonicon card) {
         super(card);
     }
 

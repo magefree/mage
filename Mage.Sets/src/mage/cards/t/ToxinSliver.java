@@ -33,7 +33,7 @@ public final class ToxinSliver extends CardImpl {
 
     }
 
-    public ToxinSliver(final ToxinSliver card) {
+    private ToxinSliver(final ToxinSliver card) {
         super(card);
     }
 

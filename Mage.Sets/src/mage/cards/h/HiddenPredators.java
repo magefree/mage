@@ -26,7 +26,7 @@ public final class HiddenPredators extends CardImpl {
         this.addAbility(new HiddenPredatorsStateTriggeredAbility());
     }
 
-    public HiddenPredators(final HiddenPredators card) {
+    private HiddenPredators(final HiddenPredators card) {
         super(card);
     }
 

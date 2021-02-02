@@ -29,7 +29,7 @@ public final class VampiricTouch extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
     }
 
-    public VampiricTouch(final VampiricTouch card) {
+    private VampiricTouch(final VampiricTouch card) {
         super(card);
     }
 

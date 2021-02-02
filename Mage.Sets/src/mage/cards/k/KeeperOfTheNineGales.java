@@ -49,7 +49,7 @@ public final class KeeperOfTheNineGales extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KeeperOfTheNineGales(final KeeperOfTheNineGales card) {
+    private KeeperOfTheNineGales(final KeeperOfTheNineGales card) {
         super(card);
     }
 

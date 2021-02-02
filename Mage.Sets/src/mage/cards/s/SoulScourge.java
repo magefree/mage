@@ -45,7 +45,7 @@ public final class SoulScourge extends CardImpl {
         this.addAbility(new SoulScourgeLeavesBattlefieldTriggeredAbility());
     }
 
-    public SoulScourge(final SoulScourge card) {
+    private SoulScourge(final SoulScourge card) {
         super(card);
     }
 

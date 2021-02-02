@@ -41,7 +41,7 @@ public final class MaliciousIntent extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
     }
 
-    public MaliciousIntent(final MaliciousIntent card) {
+    private MaliciousIntent(final MaliciousIntent card) {
         super(card);
     }
 

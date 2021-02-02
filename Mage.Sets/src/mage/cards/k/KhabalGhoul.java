@@ -31,7 +31,7 @@ public final class KhabalGhoul extends CardImpl {
             CreaturesDiedThisTurnCount.instance, true), TargetController.ANY, false), new CreaturesDiedWatcher());
     }
 
-    public KhabalGhoul(final KhabalGhoul card) {
+    private KhabalGhoul(final KhabalGhoul card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class LiuBeiLordOfShu extends CardImpl {
             "{this} gets +2/+2 as long as you control a permanent named Guan Yu, Sainted Warrior or a permanent named Zhang Fei, Fierce Warrior")));
     }
 
-    public LiuBeiLordOfShu(final LiuBeiLordOfShu card) {
+    private LiuBeiLordOfShu(final LiuBeiLordOfShu card) {
         super(card);
     }
 

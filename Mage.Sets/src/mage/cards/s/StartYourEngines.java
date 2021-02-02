@@ -29,7 +29,7 @@ public final class StartYourEngines extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn));
     }
 
-    public StartYourEngines(final StartYourEngines card) {
+    private StartYourEngines(final StartYourEngines card) {
         super(card);
     }
 

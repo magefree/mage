@@ -36,7 +36,7 @@ public final class VedalkenMastermind extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VedalkenMastermind(final VedalkenMastermind card) {
+    private VedalkenMastermind(final VedalkenMastermind card) {
         super(card);
     }
 

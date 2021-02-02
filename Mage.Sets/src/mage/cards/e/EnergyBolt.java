@@ -30,7 +30,7 @@ public final class EnergyBolt extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public EnergyBolt(final EnergyBolt card) {
+    private EnergyBolt(final EnergyBolt card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class VengefulDreams extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(VengefulDreamsAdjuster.instance);
     }
 
-    public VengefulDreams(final VengefulDreams card) {
+    private VengefulDreams(final VengefulDreams card) {
         super(card);
     }
 

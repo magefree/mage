@@ -34,7 +34,7 @@ public final class AzoriusLocket extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AzoriusLocket(final AzoriusLocket card) {
+    private AzoriusLocket(final AzoriusLocket card) {
         super(card);
     }
 

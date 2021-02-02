@@ -36,7 +36,7 @@ public final class SunderingTitan extends CardImpl {
         this.addAbility(new EntersBattlefieldOrLeavesSourceTriggeredAbility(new SunderingTitanDestroyLandEffect(), false));
     }
 
-    public SunderingTitan(final SunderingTitan card) {
+    private SunderingTitan(final SunderingTitan card) {
         super(card);
     }
 

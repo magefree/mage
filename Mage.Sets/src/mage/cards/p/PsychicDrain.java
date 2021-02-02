@@ -28,7 +28,7 @@ public final class PsychicDrain extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public PsychicDrain(final PsychicDrain card) {
+    private PsychicDrain(final PsychicDrain card) {
         super(card);
     }
 

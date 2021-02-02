@@ -40,7 +40,7 @@ public final class ErgRaiders extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ErgRaiders(final ErgRaiders card) {
+    private ErgRaiders(final ErgRaiders card) {
         super(card);
     }
 

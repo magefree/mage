@@ -42,7 +42,7 @@ public final class MissDemeanor extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new MissDemeanorEffect(), TargetController.NOT_YOU, false, true));
     }
 
-    public MissDemeanor(final MissDemeanor card) {
+    private MissDemeanor(final MissDemeanor card) {
         super(card);
     }
 

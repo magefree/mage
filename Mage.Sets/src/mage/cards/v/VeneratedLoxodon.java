@@ -45,7 +45,7 @@ public final class VeneratedLoxodon extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new VeneratedLoxodonEffect(), false), new VeneratedLoxodonWatcher());
     }
 
-    public VeneratedLoxodon(final VeneratedLoxodon card) {
+    private VeneratedLoxodon(final VeneratedLoxodon card) {
         super(card);
     }
 

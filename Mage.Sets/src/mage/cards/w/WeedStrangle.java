@@ -30,7 +30,7 @@ public final class WeedStrangle extends CardImpl {
 
     }
 
-    public WeedStrangle(final WeedStrangle card) {
+    private WeedStrangle(final WeedStrangle card) {
         super(card);
     }
 

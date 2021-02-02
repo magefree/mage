@@ -36,7 +36,7 @@ public final class SkyriderTrainee extends CardImpl {
                 "{this} has flying as long as it's enchanted")));
     }
 
-    public SkyriderTrainee(final SkyriderTrainee card) {
+    private SkyriderTrainee(final SkyriderTrainee card) {
         super(card);
     }
 

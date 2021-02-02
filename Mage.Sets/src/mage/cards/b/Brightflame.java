@@ -32,7 +32,7 @@ public final class Brightflame extends CardImpl {
         this.getSpellAbility().setAbilityWord(AbilityWord.RADIANCE);
     }
 
-    public Brightflame(final Brightflame card) {
+    private Brightflame(final Brightflame card) {
         super(card);
     }
 

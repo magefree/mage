@@ -41,7 +41,7 @@ public final class ZuoCiTheMockingSage extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public ZuoCiTheMockingSage(final ZuoCiTheMockingSage card) {
+    private ZuoCiTheMockingSage(final ZuoCiTheMockingSage card) {
         super(card);
     }
 

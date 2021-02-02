@@ -36,7 +36,7 @@ public final class BoldDefense extends CardImpl {
                 "and gain first strike until end of turn"));
     }
 
-    public BoldDefense(final BoldDefense card) {
+    private BoldDefense(final BoldDefense card) {
         super(card);
     }
 

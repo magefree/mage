@@ -38,7 +38,7 @@ public final class NeedletoothRaptor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NeedletoothRaptor(final NeedletoothRaptor card) {
+    private NeedletoothRaptor(final NeedletoothRaptor card) {
         super(card);
     }
 

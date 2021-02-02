@@ -32,7 +32,7 @@ public final class ZhurTaaAncient extends CardImpl {
                 SetTargetPointer.PERMANENT));
     }
 
-    public ZhurTaaAncient(final ZhurTaaAncient card) {
+    private ZhurTaaAncient(final ZhurTaaAncient card) {
         super(card);
     }
 

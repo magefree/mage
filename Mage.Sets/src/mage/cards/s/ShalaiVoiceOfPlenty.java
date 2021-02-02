@@ -70,7 +70,7 @@ public final class ShalaiVoiceOfPlenty extends CardImpl {
 
     }
 
-    public ShalaiVoiceOfPlenty(final ShalaiVoiceOfPlenty card) {
+    private ShalaiVoiceOfPlenty(final ShalaiVoiceOfPlenty card) {
         super(card);
     }
 

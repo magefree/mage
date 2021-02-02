@@ -37,7 +37,7 @@ public final class UmbralMantle extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl()));
     }
 
-    public UmbralMantle(final UmbralMantle card) {
+    private UmbralMantle(final UmbralMantle card) {
         super(card);
     }
 

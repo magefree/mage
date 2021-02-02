@@ -41,7 +41,7 @@ public final class Drought extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DroughtAdditionalCostEffect(false)));
     }
 
-    public Drought(final Drought card) {
+    private Drought(final Drought card) {
         super(card);
     }
 

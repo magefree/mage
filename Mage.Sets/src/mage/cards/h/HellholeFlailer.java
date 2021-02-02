@@ -42,7 +42,7 @@ public final class HellholeFlailer extends CardImpl {
 
     }
 
-    public HellholeFlailer(final HellholeFlailer card) {
+    private HellholeFlailer(final HellholeFlailer card) {
         super(card);
     }
 

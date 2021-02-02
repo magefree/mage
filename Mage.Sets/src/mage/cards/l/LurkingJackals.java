@@ -27,7 +27,7 @@ public final class LurkingJackals extends CardImpl {
         this.addAbility(new LurkingJackalsStateTriggeredAbility());
     }
 
-    public LurkingJackals(final LurkingJackals card) {
+    private LurkingJackals(final LurkingJackals card) {
         super(card);
     }
 

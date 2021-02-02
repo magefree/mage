@@ -29,7 +29,7 @@ public final class MarduShadowspear extends CardImpl {
         this.addAbility(new DashAbility(this, "{1}{B}"));
     }
 
-    public MarduShadowspear(final MarduShadowspear card) {
+    private MarduShadowspear(final MarduShadowspear card) {
         super(card);
     }
 

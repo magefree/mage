@@ -36,7 +36,7 @@ public final class SternMarshal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SternMarshal(final SternMarshal card) {
+    private SternMarshal(final SternMarshal card) {
         super(card);
     }
 

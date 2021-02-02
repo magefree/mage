@@ -37,7 +37,7 @@ public final class ZurgoBellstriker extends CardImpl {
         this.addAbility(new DashAbility(this, "{1}{R}"));
     }
 
-    public ZurgoBellstriker(final ZurgoBellstriker card) {
+    private ZurgoBellstriker(final ZurgoBellstriker card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class TroublesomeSpirit extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new TapAllEffect(new FilterControlledLandPermanent("lands you control")), TargetController.YOU, false));
     }
 
-    public TroublesomeSpirit(final TroublesomeSpirit card) {
+    private TroublesomeSpirit(final TroublesomeSpirit card) {
         super(card);
     }
 

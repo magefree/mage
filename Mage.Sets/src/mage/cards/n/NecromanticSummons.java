@@ -40,7 +40,7 @@ public final class NecromanticSummons extends CardImpl {
                 + "battlefield with two additional +1/+1 counters on it."));
     }
 
-    public NecromanticSummons(final NecromanticSummons card) {
+    private NecromanticSummons(final NecromanticSummons card) {
         super(card);
     }
 

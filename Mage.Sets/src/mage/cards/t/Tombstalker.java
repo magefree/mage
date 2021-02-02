@@ -32,7 +32,7 @@ public final class Tombstalker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Tombstalker(final Tombstalker card) {
+    private Tombstalker(final Tombstalker card) {
         super(card);
     }
 

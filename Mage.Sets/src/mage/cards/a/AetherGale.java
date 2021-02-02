@@ -24,7 +24,7 @@ public final class AetherGale extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent(6,6, new FilterNonlandPermanent(), false));
     }
 
-    public AetherGale(final AetherGale card) {
+    private AetherGale(final AetherGale card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class GeothermalCrevice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GeothermalCrevice(final GeothermalCrevice card) {
+    private GeothermalCrevice(final GeothermalCrevice card) {
         super(card);
     }
 

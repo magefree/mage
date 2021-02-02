@@ -38,7 +38,7 @@ public final class Groffskithur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Groffskithur(final Groffskithur card) {
+    private Groffskithur(final Groffskithur card) {
         super(card);
     }
 

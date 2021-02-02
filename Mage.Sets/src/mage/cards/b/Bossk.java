@@ -47,7 +47,7 @@ public final class Bossk extends CardImpl {
         this.addAbility(new BountyAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true), true));
     }
 
-    public Bossk(final Bossk card) {
+    private Bossk(final Bossk card) {
         super(card);
     }
 

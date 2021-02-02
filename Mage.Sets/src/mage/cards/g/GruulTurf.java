@@ -32,7 +32,7 @@ public final class GruulTurf extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 1, 1, 0, 0, 0), new TapSourceCost()));
     }
 
-    public GruulTurf(final GruulTurf card) {
+    private GruulTurf(final GruulTurf card) {
         super(card);
     }
 

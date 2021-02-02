@@ -34,7 +34,7 @@ public final class StarvedRusalka extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StarvedRusalka(final StarvedRusalka card) {
+    private StarvedRusalka(final StarvedRusalka card) {
         super(card);
     }
 

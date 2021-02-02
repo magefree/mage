@@ -28,7 +28,7 @@ public final class Rethink extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public Rethink(final Rethink card) {
+    private Rethink(final Rethink card) {
         super(card);
     }
 

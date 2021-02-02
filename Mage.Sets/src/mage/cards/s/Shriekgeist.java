@@ -36,7 +36,7 @@ public final class Shriekgeist extends CardImpl {
         this.addAbility(new ShriekgeistTriggeredAbility());
     }
 
-    public Shriekgeist(final Shriekgeist card) {
+    private Shriekgeist(final Shriekgeist card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class TakeVengeance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public TakeVengeance(final TakeVengeance card) {
+    private TakeVengeance(final TakeVengeance card) {
         super(card);
     }
 

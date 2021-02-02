@@ -33,7 +33,7 @@ public final class TaureanMauler extends CardImpl {
         
     }
 
-    public TaureanMauler(final TaureanMauler card) {
+    private TaureanMauler(final TaureanMauler card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class MaelstromDjinn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MaelstromDjinn(final MaelstromDjinn card) {
+    private MaelstromDjinn(final MaelstromDjinn card) {
         super(card);
     }
 

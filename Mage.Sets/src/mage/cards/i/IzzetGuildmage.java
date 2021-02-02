@@ -57,7 +57,7 @@ public final class IzzetGuildmage extends CardImpl {
 
     }
 
-    public IzzetGuildmage(final IzzetGuildmage card) {
+    private IzzetGuildmage(final IzzetGuildmage card) {
         super(card);
     }
 

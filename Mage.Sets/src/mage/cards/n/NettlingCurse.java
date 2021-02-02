@@ -41,7 +41,7 @@ public final class NettlingCurse extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new AttacksIfAbleAttachedEffect(Duration.EndOfTurn, AttachmentType.AURA).setText("Enchanted creature attacks this turn if able."), new ManaCostsImpl("{1}{R}")));
     }
 
-    public NettlingCurse(final NettlingCurse card) {
+    private NettlingCurse(final NettlingCurse card) {
         super(card);
     }
 

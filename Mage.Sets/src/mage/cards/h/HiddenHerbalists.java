@@ -38,7 +38,7 @@ public final class HiddenHerbalists extends CardImpl {
         );
     }
 
-    public HiddenHerbalists(final HiddenHerbalists card) {
+    private HiddenHerbalists(final HiddenHerbalists card) {
         super(card);
     }
 

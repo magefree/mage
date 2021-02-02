@@ -52,7 +52,7 @@ public final class AuriokSteelshaper extends CardImpl {
         )));
     }
 
-    public AuriokSteelshaper(final AuriokSteelshaper card) {
+    private AuriokSteelshaper(final AuriokSteelshaper card) {
         super(card);
     }
 

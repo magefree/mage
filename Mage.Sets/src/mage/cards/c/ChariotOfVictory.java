@@ -43,7 +43,7 @@ public final class ChariotOfVictory extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public ChariotOfVictory(final ChariotOfVictory card) {
+    private ChariotOfVictory(final ChariotOfVictory card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class DeepfireElemental extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeepfireElemental(final DeepfireElemental card) {
+    private DeepfireElemental(final DeepfireElemental card) {
         super(card);
     }
 

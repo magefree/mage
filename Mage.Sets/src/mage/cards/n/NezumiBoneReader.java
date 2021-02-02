@@ -38,7 +38,7 @@ public final class NezumiBoneReader extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NezumiBoneReader(final NezumiBoneReader card) {
+    private NezumiBoneReader(final NezumiBoneReader card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class SunhomeStalwart extends CardImpl {
         this.addAbility(new MentorAbility());
     }
 
-    public SunhomeStalwart(final SunhomeStalwart card) {
+    private SunhomeStalwart(final SunhomeStalwart card) {
         super(card);
     }
 

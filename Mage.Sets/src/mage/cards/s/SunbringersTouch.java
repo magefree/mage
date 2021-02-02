@@ -37,7 +37,7 @@ public final class SunbringersTouch extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public SunbringersTouch(final SunbringersTouch card) {
+    private SunbringersTouch(final SunbringersTouch card) {
         super(card);
     }
 

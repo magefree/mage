@@ -34,7 +34,7 @@ public final class SpiketailHatchling extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpiketailHatchling(final SpiketailHatchling card) {
+    private SpiketailHatchling(final SpiketailHatchling card) {
         super(card);
     }
 

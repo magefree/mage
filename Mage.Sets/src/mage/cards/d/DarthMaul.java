@@ -48,7 +48,7 @@ public final class DarthMaul extends CardImpl {
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }
 
-    public DarthMaul(final DarthMaul card) {
+    private DarthMaul(final DarthMaul card) {
         super(card);
     }
 

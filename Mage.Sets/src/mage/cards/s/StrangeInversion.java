@@ -30,7 +30,7 @@ public final class StrangeInversion extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{1}{R}"));
     }
 
-    public StrangeInversion(final StrangeInversion card) {
+    private StrangeInversion(final StrangeInversion card) {
         super(card);
     }
 

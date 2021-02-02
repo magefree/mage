@@ -52,7 +52,7 @@ public final class ConquerorsFoothold extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public ConquerorsFoothold(final ConquerorsFoothold card) {
+    private ConquerorsFoothold(final ConquerorsFoothold card) {
         super(card);
     }
 

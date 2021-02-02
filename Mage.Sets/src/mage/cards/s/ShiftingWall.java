@@ -30,7 +30,7 @@ public final class ShiftingWall extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
     }
 
-    public ShiftingWall(final ShiftingWall card) {
+    private ShiftingWall(final ShiftingWall card) {
         super(card);
     }
 

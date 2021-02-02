@@ -43,7 +43,7 @@ public final class ToxicIguanar extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter), "{this} has deathtouch as long as you control a green permanent")));
     }
 
-    public ToxicIguanar(final ToxicIguanar card) {
+    private ToxicIguanar(final ToxicIguanar card) {
         super(card);
     }
 

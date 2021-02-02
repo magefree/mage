@@ -41,7 +41,7 @@ public final class FeastOrFamine extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public FeastOrFamine(final FeastOrFamine card) {
+    private FeastOrFamine(final FeastOrFamine card) {
         super(card);
     }
 

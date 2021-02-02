@@ -38,7 +38,7 @@ public final class VisaraTheDreadful extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VisaraTheDreadful(final VisaraTheDreadful card) {
+    private VisaraTheDreadful(final VisaraTheDreadful card) {
         super(card);
     }
 

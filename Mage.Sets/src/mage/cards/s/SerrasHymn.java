@@ -44,7 +44,7 @@ public final class SerrasHymn extends CardImpl {
 
     }
 
-    public SerrasHymn(final SerrasHymn card) {
+    private SerrasHymn(final SerrasHymn card) {
         super(card);
     }
 

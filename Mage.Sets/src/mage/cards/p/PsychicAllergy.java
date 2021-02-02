@@ -51,7 +51,7 @@ public final class PsychicAllergy extends CardImpl {
                 false));
     }
 
-    public PsychicAllergy(final PsychicAllergy card) {
+    private PsychicAllergy(final PsychicAllergy card) {
         super(card);
     }
 

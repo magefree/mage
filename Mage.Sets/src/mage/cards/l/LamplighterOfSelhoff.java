@@ -44,7 +44,7 @@ public final class LamplighterOfSelhoff extends CardImpl {
                 "When {this} enters the battlefield, if you control another Zombie, you may a draw card. If you do, discard a card."));
     }
 
-    public LamplighterOfSelhoff(final LamplighterOfSelhoff card) {
+    private LamplighterOfSelhoff(final LamplighterOfSelhoff card) {
         super(card);
     }
 

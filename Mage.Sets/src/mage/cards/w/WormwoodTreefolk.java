@@ -42,7 +42,7 @@ public final class WormwoodTreefolk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WormwoodTreefolk(final WormwoodTreefolk card) {
+    private WormwoodTreefolk(final WormwoodTreefolk card) {
         super(card);
     }
 

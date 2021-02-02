@@ -42,7 +42,7 @@ public final class AlchemistsRefuge extends CardImpl {
                 new CompositeCost(new ManaCostsImpl("{G}{U}"), new TapSourceCost(), "{G}{U}, {T}")));
     }
 
-    public AlchemistsRefuge(final AlchemistsRefuge card) {
+    private AlchemistsRefuge(final AlchemistsRefuge card) {
         super(card);
     }
 

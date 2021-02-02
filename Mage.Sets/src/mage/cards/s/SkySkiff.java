@@ -29,7 +29,7 @@ public final class SkySkiff extends CardImpl {
         this.addAbility(new CrewAbility(1));
     }
 
-    public SkySkiff(final SkySkiff card) {
+    private SkySkiff(final SkySkiff card) {
         super(card);
     }
 

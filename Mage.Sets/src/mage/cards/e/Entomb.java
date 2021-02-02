@@ -27,7 +27,7 @@ public final class Entomb extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInGraveyard());
     }
 
-    public Entomb(final Entomb card) {
+    private Entomb(final Entomb card) {
         super(card);
     }
 

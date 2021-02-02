@@ -33,7 +33,7 @@ public final class SeaSnidd extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeaSnidd(final SeaSnidd card) {
+    private SeaSnidd(final SeaSnidd card) {
         super(card);
     }
 

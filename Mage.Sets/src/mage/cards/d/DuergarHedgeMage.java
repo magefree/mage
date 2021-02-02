@@ -53,7 +53,7 @@ public final class DuergarHedgeMage extends CardImpl {
 
     }
 
-    public DuergarHedgeMage(final DuergarHedgeMage card) {
+    private DuergarHedgeMage(final DuergarHedgeMage card) {
         super(card);
     }
 

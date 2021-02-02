@@ -42,7 +42,7 @@ public final class IcyPrison extends CardImpl {
 
     }
 
-    public IcyPrison(final IcyPrison card) {
+    private IcyPrison(final IcyPrison card) {
         super(card);
     }
 

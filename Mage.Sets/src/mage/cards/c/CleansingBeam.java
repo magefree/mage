@@ -29,7 +29,7 @@ public final class CleansingBeam extends CardImpl {
         this.getSpellAbility().setAbilityWord(AbilityWord.RADIANCE);
     }
 
-    public CleansingBeam(final CleansingBeam card) {
+    private CleansingBeam(final CleansingBeam card) {
         super(card);
     }
 

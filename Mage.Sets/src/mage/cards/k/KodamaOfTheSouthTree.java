@@ -34,7 +34,7 @@ public final class KodamaOfTheSouthTree extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KodamaOfTheSouthTree(final KodamaOfTheSouthTree card) {
+    private KodamaOfTheSouthTree(final KodamaOfTheSouthTree card) {
         super(card);
     }
 

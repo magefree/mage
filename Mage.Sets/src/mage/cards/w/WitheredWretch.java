@@ -34,7 +34,7 @@ public final class WitheredWretch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WitheredWretch(final WitheredWretch card) {
+    private WitheredWretch(final WitheredWretch card) {
         super(card);
     }
 

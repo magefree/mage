@@ -29,7 +29,7 @@ public final class RetreatToEmeria extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RetreatToEmeria(final RetreatToEmeria card) {
+    private RetreatToEmeria(final RetreatToEmeria card) {
         super(card);
     }
 

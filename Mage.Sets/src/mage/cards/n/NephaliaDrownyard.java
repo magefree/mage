@@ -32,7 +32,7 @@ public final class NephaliaDrownyard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NephaliaDrownyard(final NephaliaDrownyard card) {
+    private NephaliaDrownyard(final NephaliaDrownyard card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class LeylineOfLightning extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LeylineOfLightning(final LeylineOfLightning card) {
+    private LeylineOfLightning(final LeylineOfLightning card) {
         super(card);
     }
 

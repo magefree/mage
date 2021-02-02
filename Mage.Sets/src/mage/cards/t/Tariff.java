@@ -37,7 +37,7 @@ public final class Tariff extends CardImpl {
         this.getSpellAbility().addEffect(new TariffEffect());
     }
 
-    public Tariff(final Tariff card) {
+    private Tariff(final Tariff card) {
         super(card);
     }
 

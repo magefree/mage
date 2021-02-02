@@ -27,7 +27,7 @@ public final class GrislySalvage extends CardImpl {
         this.getSpellAbility().addEffect(new GrislySalvageEffect());
     }
 
-    public GrislySalvage(final GrislySalvage card) {
+    private GrislySalvage(final GrislySalvage card) {
         super(card);
     }
 

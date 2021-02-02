@@ -31,7 +31,7 @@ public final class CutthroatManeuver extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,2));
     }
 
-    public CutthroatManeuver(final CutthroatManeuver card) {
+    private CutthroatManeuver(final CutthroatManeuver card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class AlmsBeast extends CardImpl {
         )));
     }
 
-    public AlmsBeast(final AlmsBeast card) {
+    private AlmsBeast(final AlmsBeast card) {
         super(card);
     }
 

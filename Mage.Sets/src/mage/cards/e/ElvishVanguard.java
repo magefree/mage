@@ -37,7 +37,7 @@ public final class ElvishVanguard extends CardImpl {
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
     }
 
-    public ElvishVanguard(final ElvishVanguard card) {
+    private ElvishVanguard(final ElvishVanguard card) {
         super(card);
     }
 

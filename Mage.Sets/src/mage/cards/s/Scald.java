@@ -34,7 +34,7 @@ public final class Scald extends CardImpl {
                 SetTargetPointer.PLAYER));
     }
 
-    public Scald(final Scald card) {
+    private Scald(final Scald card) {
         super(card);
     }
 

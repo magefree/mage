@@ -30,7 +30,7 @@ public final class FrilledOculus extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
     }
 
-    public FrilledOculus(final FrilledOculus card) {
+    private FrilledOculus(final FrilledOculus card) {
         super(card);
     }
 

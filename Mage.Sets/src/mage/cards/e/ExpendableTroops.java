@@ -37,7 +37,7 @@ public final class ExpendableTroops extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ExpendableTroops(final ExpendableTroops card) {
+    private ExpendableTroops(final ExpendableTroops card) {
         super(card);
     }
 

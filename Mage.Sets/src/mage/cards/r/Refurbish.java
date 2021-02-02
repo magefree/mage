@@ -23,7 +23,7 @@ public final class Refurbish extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
     }
 
-    public Refurbish(final Refurbish card) {
+    private Refurbish(final Refurbish card) {
         super(card);
     }
 

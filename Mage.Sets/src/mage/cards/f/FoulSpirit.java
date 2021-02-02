@@ -31,7 +31,7 @@ public final class FoulSpirit extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_LAND, 1, ""), false));
     }
 
-    public FoulSpirit(final FoulSpirit card) {
+    private FoulSpirit(final FoulSpirit card) {
         super(card);
     }
 

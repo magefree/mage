@@ -35,7 +35,7 @@ public final class MasterHealer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MasterHealer(final MasterHealer card) {
+    private MasterHealer(final MasterHealer card) {
         super(card);
     }
 

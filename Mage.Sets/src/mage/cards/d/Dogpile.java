@@ -33,7 +33,7 @@ public final class Dogpile extends CardImpl {
 
     }
 
-    public Dogpile(final Dogpile card) {
+    private Dogpile(final Dogpile card) {
         super(card);
     }
 

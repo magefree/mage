@@ -48,7 +48,7 @@ public final class ZulaportChainmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZulaportChainmage(final ZulaportChainmage card) {
+    private ZulaportChainmage(final ZulaportChainmage card) {
         super(card);
     }
 

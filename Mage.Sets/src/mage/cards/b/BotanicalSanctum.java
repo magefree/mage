@@ -35,7 +35,7 @@ public final class BotanicalSanctum extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public BotanicalSanctum(final BotanicalSanctum card) {
+    private BotanicalSanctum(final BotanicalSanctum card) {
         super(card);
     }
 

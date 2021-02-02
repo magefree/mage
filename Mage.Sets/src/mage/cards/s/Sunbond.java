@@ -47,7 +47,7 @@ public final class Sunbond extends CardImpl {
         
     }
 
-    public Sunbond(final Sunbond card) {
+    private Sunbond(final Sunbond card) {
         super(card);
     }
 

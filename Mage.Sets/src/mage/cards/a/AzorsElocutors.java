@@ -38,7 +38,7 @@ public final class AzorsElocutors extends CardImpl {
         this.addAbility(new AzorsElocutorsTriggeredAbility());
     }
 
-    public AzorsElocutors(final AzorsElocutors card) {
+    private AzorsElocutors(final AzorsElocutors card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class RhysticDeluge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RhysticDeluge(final RhysticDeluge card) {
+    private RhysticDeluge(final RhysticDeluge card) {
         super(card);
     }
 

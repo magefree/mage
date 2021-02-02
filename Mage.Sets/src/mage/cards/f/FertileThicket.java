@@ -40,7 +40,7 @@ public final class FertileThicket extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public FertileThicket(final FertileThicket card) {
+    private FertileThicket(final FertileThicket card) {
         super(card);
     }
 

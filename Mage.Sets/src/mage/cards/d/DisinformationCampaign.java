@@ -36,7 +36,7 @@ public final class DisinformationCampaign extends CardImpl {
         this.addAbility(new DisinformationCampaignTriggeredAbility());
     }
 
-    public DisinformationCampaign(final DisinformationCampaign card) {
+    private DisinformationCampaign(final DisinformationCampaign card) {
         super(card);
     }
 

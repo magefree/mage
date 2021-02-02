@@ -31,7 +31,7 @@ public final class TheCheeseStandsAlone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TheCheeseStandsAlone(final TheCheeseStandsAlone card) {
+    private TheCheeseStandsAlone(final TheCheeseStandsAlone card) {
         super(card);
     }
 

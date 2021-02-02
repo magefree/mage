@@ -25,7 +25,7 @@ public final class Exploration extends CardImpl {
 				new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));
     }
 
-    public Exploration(final Exploration card) {
+    private Exploration(final Exploration card) {
         super(card);
     }
 

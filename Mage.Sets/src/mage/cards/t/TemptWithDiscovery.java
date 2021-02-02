@@ -33,7 +33,7 @@ public final class TemptWithDiscovery extends CardImpl {
         this.getSpellAbility().addEffect(new TemptWithDiscoveryEffect());
     }
 
-    public TemptWithDiscovery(final TemptWithDiscovery card) {
+    private TemptWithDiscovery(final TemptWithDiscovery card) {
         super(card);
     }
 

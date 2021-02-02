@@ -31,7 +31,7 @@ public final class InfectiousHost extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InfectiousHost(final InfectiousHost card) {
+    private InfectiousHost(final InfectiousHost card) {
         super(card);
     }
 

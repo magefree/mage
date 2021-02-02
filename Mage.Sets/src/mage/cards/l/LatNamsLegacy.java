@@ -31,7 +31,7 @@ public final class LatNamsLegacy extends CardImpl {
         this.getSpellAbility().addEffect(new LatNamsLegacyEffect());
     }
 
-    public LatNamsLegacy(final LatNamsLegacy card) {
+    private LatNamsLegacy(final LatNamsLegacy card) {
         super(card);
     }
 

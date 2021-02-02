@@ -40,7 +40,7 @@ public final class ClockworkBeetle extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkBeetleEffect(), false));
     }
 
-    public ClockworkBeetle(final ClockworkBeetle card) {
+    private ClockworkBeetle(final ClockworkBeetle card) {
         super(card);
     }
 

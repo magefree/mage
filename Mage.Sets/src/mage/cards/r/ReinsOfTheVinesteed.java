@@ -46,7 +46,7 @@ public final class ReinsOfTheVinesteed extends CardImpl {
 
     }
 
-    public ReinsOfTheVinesteed(final ReinsOfTheVinesteed card) {
+    private ReinsOfTheVinesteed(final ReinsOfTheVinesteed card) {
         super(card);
     }
 

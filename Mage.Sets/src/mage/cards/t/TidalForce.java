@@ -32,7 +32,7 @@ public final class TidalForce extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TidalForce(final TidalForce card) {
+    private TidalForce(final TidalForce card) {
         super(card);
     }
 

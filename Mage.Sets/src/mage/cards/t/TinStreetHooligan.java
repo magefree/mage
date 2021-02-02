@@ -39,7 +39,7 @@ public final class TinStreetHooligan extends CardImpl {
         this.addAbility(ability, new ManaSpentToCastWatcher());
     }
 
-    public TinStreetHooligan(final TinStreetHooligan card) {
+    private TinStreetHooligan(final TinStreetHooligan card) {
         super(card);
     }
 

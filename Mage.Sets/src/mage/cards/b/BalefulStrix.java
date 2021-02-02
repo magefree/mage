@@ -35,7 +35,7 @@ public final class BalefulStrix extends CardImpl {
 
     }
 
-    public BalefulStrix(final BalefulStrix card) {
+    private BalefulStrix(final BalefulStrix card) {
         super(card);
     }
 

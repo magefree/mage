@@ -32,7 +32,7 @@ public final class GleamingBarrier extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
     }
 
-    public GleamingBarrier(final GleamingBarrier card) {
+    private GleamingBarrier(final GleamingBarrier card) {
         super(card);
     }
 

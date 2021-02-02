@@ -27,7 +27,7 @@ public final class HerbalPoultice extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HerbalPoultice(final HerbalPoultice card) {
+    private HerbalPoultice(final HerbalPoultice card) {
         super(card);
     }
 

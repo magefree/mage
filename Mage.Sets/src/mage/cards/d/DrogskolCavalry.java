@@ -48,7 +48,7 @@ public final class DrogskolCavalry extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl("{3}{W}")));
     }
 
-    public DrogskolCavalry(final DrogskolCavalry card) {
+    private DrogskolCavalry(final DrogskolCavalry card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class PloKoon extends CardImpl {
         this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{W}")));
     }
 
-    public PloKoon(final PloKoon card) {
+    private PloKoon(final PloKoon card) {
         super(card);
     }
 

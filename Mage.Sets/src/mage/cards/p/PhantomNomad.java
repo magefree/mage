@@ -38,7 +38,7 @@ public final class PhantomNomad extends CardImpl {
 
     }
 
-    public PhantomNomad(final PhantomNomad card) {
+    private PhantomNomad(final PhantomNomad card) {
         super(card);
     }
 

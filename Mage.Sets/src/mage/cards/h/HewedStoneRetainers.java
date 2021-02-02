@@ -27,7 +27,7 @@ public final class HewedStoneRetainers extends CardImpl {
        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CastOnlyIfYouHaveCastAnotherSpellEffect()));
     }
 
-    public HewedStoneRetainers(final HewedStoneRetainers card) {
+    private HewedStoneRetainers(final HewedStoneRetainers card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class TyphoidRats extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public TyphoidRats(final TyphoidRats card) {
+    private TyphoidRats(final TyphoidRats card) {
         super(card);
     }
 

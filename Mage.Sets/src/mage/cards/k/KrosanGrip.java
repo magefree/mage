@@ -27,7 +27,7 @@ public final class KrosanGrip extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public KrosanGrip(final KrosanGrip card) {
+    private KrosanGrip(final KrosanGrip card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class Tinker extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterArtifactCard("an artifact card"))));
     }
 
-    public Tinker(final Tinker card) {
+    private Tinker(final Tinker card) {
         super(card);
     }
 

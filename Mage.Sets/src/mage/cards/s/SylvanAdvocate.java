@@ -54,7 +54,7 @@ public final class SylvanAdvocate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SylvanAdvocate(final SylvanAdvocate card) {
+    private SylvanAdvocate(final SylvanAdvocate card) {
         super(card);
     }
 

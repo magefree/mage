@@ -26,7 +26,7 @@ public final class WellOfLostDreams extends CardImpl {
         this.addAbility(new GainLifeControllerTriggeredAbility(new WellOfLostDreamsEffect(), true, true));
     }
 
-    public WellOfLostDreams(final WellOfLostDreams card) {
+    private WellOfLostDreams(final WellOfLostDreams card) {
         super(card);
     }
 

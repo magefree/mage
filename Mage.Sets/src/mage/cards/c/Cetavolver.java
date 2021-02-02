@@ -53,7 +53,7 @@ public final class Cetavolver extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public Cetavolver(final Cetavolver card) {
+    private Cetavolver(final Cetavolver card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class SedraxisAlchemist extends CardImpl {
         
     }
 
-    public SedraxisAlchemist(final SedraxisAlchemist card) {
+    private SedraxisAlchemist(final SedraxisAlchemist card) {
         super(card);
     }
 

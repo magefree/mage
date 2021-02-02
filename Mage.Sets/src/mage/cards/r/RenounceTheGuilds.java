@@ -31,7 +31,7 @@ public final class RenounceTheGuilds extends CardImpl {
         this.getSpellAbility().addEffect(new SacrificeAllEffect(filter));
     }
 
-    public RenounceTheGuilds(final RenounceTheGuilds card) {
+    private RenounceTheGuilds(final RenounceTheGuilds card) {
         super(card);
     }
 

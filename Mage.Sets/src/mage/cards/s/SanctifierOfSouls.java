@@ -52,7 +52,7 @@ public final class SanctifierOfSouls extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SanctifierOfSouls(final SanctifierOfSouls card) {
+    private SanctifierOfSouls(final SanctifierOfSouls card) {
         super(card);
     }
 

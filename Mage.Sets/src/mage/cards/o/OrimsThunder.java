@@ -42,7 +42,7 @@ public final class OrimsThunder extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(OrimsThunderAdjuster.instance);
     }
 
-    public OrimsThunder(final OrimsThunder card) {
+    private OrimsThunder(final OrimsThunder card) {
         super(card);
     }
 

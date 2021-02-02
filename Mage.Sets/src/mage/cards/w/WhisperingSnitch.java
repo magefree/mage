@@ -36,7 +36,7 @@ public final class WhisperingSnitch extends CardImpl {
         this.addAbility(new WhisperingSnitchTriggeredAbility());
     }
 
-    public WhisperingSnitch(final WhisperingSnitch card) {
+    private WhisperingSnitch(final WhisperingSnitch card) {
         super(card);
     }
 

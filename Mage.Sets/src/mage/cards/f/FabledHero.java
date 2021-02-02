@@ -32,7 +32,7 @@ public final class FabledHero extends CardImpl {
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 
-    public FabledHero(final FabledHero card) {
+    private FabledHero(final FabledHero card) {
         super(card);
     }
 

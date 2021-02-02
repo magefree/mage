@@ -43,7 +43,7 @@ public final class GoblinGloryChaser extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinGloryChaser(final GoblinGloryChaser card) {
+    private GoblinGloryChaser(final GoblinGloryChaser card) {
         super(card);
     }
 

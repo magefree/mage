@@ -23,7 +23,7 @@ public final class SisaysRing extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 
-    public SisaysRing(final SisaysRing card) {
+    private SisaysRing(final SisaysRing card) {
         super(card);
     }
 

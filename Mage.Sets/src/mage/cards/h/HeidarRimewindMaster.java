@@ -49,7 +49,7 @@ public final class HeidarRimewindMaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HeidarRimewindMaster(final HeidarRimewindMaster card) {
+    private HeidarRimewindMaster(final HeidarRimewindMaster card) {
         super(card);
     }
 

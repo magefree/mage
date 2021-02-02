@@ -23,7 +23,7 @@ public final class CabalEvangel extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public CabalEvangel(final CabalEvangel card) {
+    private CabalEvangel(final CabalEvangel card) {
         super(card);
     }
 

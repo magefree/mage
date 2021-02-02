@@ -51,7 +51,7 @@ public final class ScourgeOfKherRidges extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public ScourgeOfKherRidges(final ScourgeOfKherRidges card) {
+    private ScourgeOfKherRidges(final ScourgeOfKherRidges card) {
         super(card);
     }
 

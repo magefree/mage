@@ -43,7 +43,7 @@ public final class SpurGrappler extends CardImpl {
             "{this} gets +2/+1 as long as you control no untapped lands")));
     }
 
-    public SpurGrappler(final SpurGrappler card) {
+    private SpurGrappler(final SpurGrappler card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class PillarOfOrigins extends CardImpl {
         this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new PillarOfOriginsManaBuilder(), true));
     }
 
-    public PillarOfOrigins(final PillarOfOrigins card) {
+    private PillarOfOrigins(final PillarOfOrigins card) {
         super(card);
     }
 

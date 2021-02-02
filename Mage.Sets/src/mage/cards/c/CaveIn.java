@@ -35,7 +35,7 @@ public final class CaveIn extends CardImpl {
         this.getSpellAbility().addEffect(new DamageEverythingEffect(2));
     }
 
-    public CaveIn(final CaveIn card) {
+    private CaveIn(final CaveIn card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ public final class AboshanCephalidEmperor extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapAllEffect(filter2), new ManaCostsImpl("{U}{U}{U}")));
     }
 
-    public AboshanCephalidEmperor(final AboshanCephalidEmperor card) {
+    private AboshanCephalidEmperor(final AboshanCephalidEmperor card) {
         super(card);
     }
 

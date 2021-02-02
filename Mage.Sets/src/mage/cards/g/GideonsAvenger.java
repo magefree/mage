@@ -37,7 +37,7 @@ public final class GideonsAvenger extends CardImpl {
         this.addAbility(new BecomesTappedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter));
     }
 
-    public GideonsAvenger(final GideonsAvenger card) {
+    private GideonsAvenger(final GideonsAvenger card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class ChargingBadger extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public ChargingBadger(final ChargingBadger card) {
+    private ChargingBadger(final ChargingBadger card) {
         super(card);
     }
 

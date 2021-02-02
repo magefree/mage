@@ -43,7 +43,7 @@ public final class AngrathsAmbusher extends CardImpl {
                         "{this} gets +2/+0 as long as you control an Angrath planeswalker")));
     }
 
-    public AngrathsAmbusher(final AngrathsAmbusher card) {
+    private AngrathsAmbusher(final AngrathsAmbusher card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class FlameheartWerewolf extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public FlameheartWerewolf(final FlameheartWerewolf card) {
+    private FlameheartWerewolf(final FlameheartWerewolf card) {
         super(card);
     }
 

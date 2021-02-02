@@ -46,7 +46,7 @@ public final class CloakOfConfusion extends CardImpl {
 
     }
 
-    public CloakOfConfusion(final CloakOfConfusion card) {
+    private CloakOfConfusion(final CloakOfConfusion card) {
         super(card);
     }
 

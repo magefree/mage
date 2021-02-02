@@ -58,7 +58,7 @@ public final class SinstrikersWill extends CardImpl {
         ));
     }
 
-    public SinstrikersWill(final SinstrikersWill card) {
+    private SinstrikersWill(final SinstrikersWill card) {
         super(card);
     }
 

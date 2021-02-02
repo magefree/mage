@@ -45,7 +45,7 @@ public final class DwynenGiltLeafDaen extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)), false));
     }
 
-    public DwynenGiltLeafDaen(final DwynenGiltLeafDaen card) {
+    private DwynenGiltLeafDaen(final DwynenGiltLeafDaen card) {
         super(card);
     }
 

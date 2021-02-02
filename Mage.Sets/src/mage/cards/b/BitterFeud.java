@@ -39,7 +39,7 @@ public final class BitterFeud extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BitterFeudEffect()));
     }
 
-    public BitterFeud(final BitterFeud card) {
+    private BitterFeud(final BitterFeud card) {
         super(card);
     }
 

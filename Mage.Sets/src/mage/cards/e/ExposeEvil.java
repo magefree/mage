@@ -26,7 +26,7 @@ public final class ExposeEvil extends CardImpl {
         this.getSpellAbility().addEffect(new InvestigateEffect());
     }
 
-    public ExposeEvil(final ExposeEvil card) {
+    private ExposeEvil(final ExposeEvil card) {
         super(card);
     }
 

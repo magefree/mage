@@ -43,7 +43,7 @@ public final class GuildscornWard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
-    public GuildscornWard(final GuildscornWard card) {
+    private GuildscornWard(final GuildscornWard card) {
         super(card);
     }
 

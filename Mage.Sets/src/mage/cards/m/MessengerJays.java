@@ -38,7 +38,7 @@ public final class MessengerJays extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MessengerJaysDilemmaEffect(), false, "<i>Council's dilemma</i> &mdash; "));
     }
 
-    public MessengerJays(final MessengerJays card) {
+    private MessengerJays(final MessengerJays card) {
         super(card);
     }
 

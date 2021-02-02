@@ -36,7 +36,7 @@ public final class BeaconOfUnrest extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public BeaconOfUnrest(final BeaconOfUnrest card) {
+    private BeaconOfUnrest(final BeaconOfUnrest card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class Inspiration extends CardImpl {
 
     }
 
-    public Inspiration(final Inspiration card) {
+    private Inspiration(final Inspiration card) {
         super(card);
     }
 

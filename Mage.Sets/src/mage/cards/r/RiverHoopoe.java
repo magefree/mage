@@ -40,7 +40,7 @@ public final class RiverHoopoe extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RiverHoopoe(final RiverHoopoe card) {
+    private RiverHoopoe(final RiverHoopoe card) {
         super(card);
     }
 

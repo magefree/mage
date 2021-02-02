@@ -29,7 +29,7 @@ public final class TeeteringPeaks extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public TeeteringPeaks(final TeeteringPeaks card) {
+    private TeeteringPeaks(final TeeteringPeaks card) {
         super(card);
     }
 

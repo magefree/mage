@@ -34,7 +34,7 @@ public final class SimicGrowthChamber extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 0, 0, 1, 0, 0, 0), new TapSourceCost()));
     }
 
-    public SimicGrowthChamber(final SimicGrowthChamber card) {
+    private SimicGrowthChamber(final SimicGrowthChamber card) {
         super(card);
     }
 

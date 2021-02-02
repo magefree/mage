@@ -26,7 +26,7 @@ public final class ElvishArchers extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public ElvishArchers(final ElvishArchers card) {
+    private ElvishArchers(final ElvishArchers card) {
         super(card);
     }
 

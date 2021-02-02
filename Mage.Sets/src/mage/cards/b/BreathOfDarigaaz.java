@@ -38,7 +38,7 @@ public final class BreathOfDarigaaz extends CardImpl {
                 "{this} deals 1 damage to each creature without flying and each player. if this spell was kicked, it deals 4 damage to each creature without flying and each player instead."));
     }
 
-    public BreathOfDarigaaz(final BreathOfDarigaaz card) {
+    private BreathOfDarigaaz(final BreathOfDarigaaz card) {
         super(card);
     }
 

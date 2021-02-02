@@ -38,7 +38,7 @@ public final class TandemLookout extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ability, ruleText)));
     }
 
-    public TandemLookout(final TandemLookout card) {
+    private TandemLookout(final TandemLookout card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class ShorecrasherElemental extends CardImpl {
 
     }
 
-    public ShorecrasherElemental(final ShorecrasherElemental card) {
+    private ShorecrasherElemental(final ShorecrasherElemental card) {
         super(card);
     }
 

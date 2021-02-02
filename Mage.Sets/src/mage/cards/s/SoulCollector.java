@@ -34,7 +34,7 @@ public final class SoulCollector extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{B}{B}{B}")));
     }
 
-    public SoulCollector(final SoulCollector card) {
+    private SoulCollector(final SoulCollector card) {
         super(card);
     }
 

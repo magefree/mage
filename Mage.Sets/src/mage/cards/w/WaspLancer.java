@@ -26,7 +26,7 @@ public final class WaspLancer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WaspLancer(final WaspLancer card) {
+    private WaspLancer(final WaspLancer card) {
         super(card);
     }
 

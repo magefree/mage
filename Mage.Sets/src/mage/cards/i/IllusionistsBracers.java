@@ -38,7 +38,7 @@ public final class IllusionistsBracers extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
     }
 
-    public IllusionistsBracers(final IllusionistsBracers card) {
+    private IllusionistsBracers(final IllusionistsBracers card) {
         super(card);
     }
 

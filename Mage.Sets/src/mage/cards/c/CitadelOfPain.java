@@ -35,7 +35,7 @@ public final class CitadelOfPain extends CardImpl {
         this.addAbility(triggered);
     }
 
-    public CitadelOfPain(final CitadelOfPain card) {
+    private CitadelOfPain(final CitadelOfPain card) {
         super(card);
     }
 

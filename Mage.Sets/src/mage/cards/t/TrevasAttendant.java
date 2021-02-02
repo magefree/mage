@@ -33,7 +33,7 @@ public final class TrevasAttendant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TrevasAttendant(final TrevasAttendant card) {
+    private TrevasAttendant(final TrevasAttendant card) {
         super(card);
     }
 

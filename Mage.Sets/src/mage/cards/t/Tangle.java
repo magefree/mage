@@ -36,7 +36,7 @@ public final class Tangle extends CardImpl {
         this.getSpellAbility().addEffect(new TangleEffect());
     }
 
-    public Tangle(final Tangle card) {
+    private Tangle(final Tangle card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class ScepterOfInsight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScepterOfInsight(final ScepterOfInsight card) {
+    private ScepterOfInsight(final ScepterOfInsight card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class Compulsion extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public Compulsion(final Compulsion card) {
+    private Compulsion(final Compulsion card) {
         super(card);
     }
 

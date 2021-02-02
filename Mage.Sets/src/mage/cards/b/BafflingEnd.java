@@ -48,7 +48,7 @@ public final class BafflingEnd extends CardImpl {
 
     }
 
-    public BafflingEnd(final BafflingEnd card) {
+    private BafflingEnd(final BafflingEnd card) {
         super(card);
     }
 

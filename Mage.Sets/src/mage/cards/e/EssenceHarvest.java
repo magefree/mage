@@ -28,7 +28,7 @@ public final class EssenceHarvest extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public EssenceHarvest(final EssenceHarvest card) {
+    private EssenceHarvest(final EssenceHarvest card) {
         super(card);
     }
 

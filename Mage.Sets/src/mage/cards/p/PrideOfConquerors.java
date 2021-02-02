@@ -32,7 +32,7 @@ public final class PrideOfConquerors extends CardImpl {
                 "Creatures you control get +1/+1 until end of turn. If you have the city's blessing, those creatures get +2/+2 until end of turn instead"));
     }
 
-    public PrideOfConquerors(final PrideOfConquerors card) {
+    private PrideOfConquerors(final PrideOfConquerors card) {
         super(card);
     }
 

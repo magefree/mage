@@ -36,7 +36,7 @@ public final class WoodlandWanderer extends CardImpl {
                 null, "<i>Converge</i> &mdash; {this} enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.", null));
     }
 
-    public WoodlandWanderer(final WoodlandWanderer card) {
+    private WoodlandWanderer(final WoodlandWanderer card) {
         super(card);
     }
 

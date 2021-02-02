@@ -32,7 +32,7 @@ public final class MyrMindservant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MyrMindservant(final MyrMindservant card) {
+    private MyrMindservant(final MyrMindservant card) {
         super(card);
     }
 

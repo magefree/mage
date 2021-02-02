@@ -25,7 +25,7 @@ public final class FinalRevels extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public FinalRevels(final FinalRevels card) {
+    private FinalRevels(final FinalRevels card) {
         super(card);
     }
 

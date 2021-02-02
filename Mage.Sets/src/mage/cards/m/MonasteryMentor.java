@@ -40,7 +40,7 @@ public final class MonasteryMentor extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new MonasteryMentorToken()), filter, false));
     }
 
-    public MonasteryMentor(final MonasteryMentor card) {
+    private MonasteryMentor(final MonasteryMentor card) {
         super(card);
     }
 

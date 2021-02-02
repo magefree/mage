@@ -38,7 +38,7 @@ public final class SabertoothCobra extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SabertoothCobra(final SabertoothCobra card) {
+    private SabertoothCobra(final SabertoothCobra card) {
         super(card);
     }
 

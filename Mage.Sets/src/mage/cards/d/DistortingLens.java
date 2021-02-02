@@ -35,7 +35,7 @@ public final class DistortingLens extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DistortingLens(final DistortingLens card) {
+    private DistortingLens(final DistortingLens card) {
         super(card);
     }
 

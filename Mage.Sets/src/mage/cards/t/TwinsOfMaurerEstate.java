@@ -26,7 +26,7 @@ public final class TwinsOfMaurerEstate extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{2}{B}")));
     }
 
-    public TwinsOfMaurerEstate(final TwinsOfMaurerEstate card) {
+    private TwinsOfMaurerEstate(final TwinsOfMaurerEstate card) {
         super(card);
     }
 

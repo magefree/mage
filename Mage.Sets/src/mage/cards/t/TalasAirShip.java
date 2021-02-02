@@ -27,7 +27,7 @@ public final class TalasAirShip extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public TalasAirShip(final TalasAirShip card) {
+    private TalasAirShip(final TalasAirShip card) {
         super(card);
     }
 

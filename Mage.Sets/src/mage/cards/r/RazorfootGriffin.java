@@ -27,7 +27,7 @@ public final class RazorfootGriffin extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public RazorfootGriffin(final RazorfootGriffin card) {
+    private RazorfootGriffin(final RazorfootGriffin card) {
         super(card);
     }
 

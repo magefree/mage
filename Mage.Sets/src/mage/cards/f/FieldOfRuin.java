@@ -54,7 +54,7 @@ public final class FieldOfRuin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FieldOfRuin(final FieldOfRuin card) {
+    private FieldOfRuin(final FieldOfRuin card) {
         super(card);
     }
 

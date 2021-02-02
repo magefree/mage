@@ -33,7 +33,7 @@ public final class Leveler extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LevelerExileLibraryEffect(), false));
     }
 
-    public Leveler(final Leveler card) {
+    private Leveler(final Leveler card) {
         super(card);
     }
 

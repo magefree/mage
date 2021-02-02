@@ -35,7 +35,7 @@ public final class ParalyzingGrasp extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
-    public ParalyzingGrasp(final ParalyzingGrasp card) {
+    private ParalyzingGrasp(final ParalyzingGrasp card) {
         super(card);
     }
 

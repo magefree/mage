@@ -36,7 +36,7 @@ public final class BalshanBeguiler extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new BalshanBeguilerEffect(), false, true));
     }
 
-    public BalshanBeguiler(final BalshanBeguiler card) {
+    private BalshanBeguiler(final BalshanBeguiler card) {
         super(card);
     }
 

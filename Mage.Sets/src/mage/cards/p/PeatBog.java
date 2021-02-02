@@ -38,7 +38,7 @@ public final class PeatBog extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public PeatBog(final PeatBog card) {
+    private PeatBog(final PeatBog card) {
         super(card);
     }
 

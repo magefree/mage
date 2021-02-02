@@ -51,7 +51,7 @@ public final class GravityNegator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GravityNegator(final GravityNegator card) {
+    private GravityNegator(final GravityNegator card) {
         super(card);
     }
 

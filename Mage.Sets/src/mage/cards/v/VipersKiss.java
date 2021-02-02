@@ -45,7 +45,7 @@ public final class VipersKiss extends CardImpl {
 
     }
 
-    public VipersKiss(final VipersKiss card) {
+    private VipersKiss(final VipersKiss card) {
         super(card);
     }
 

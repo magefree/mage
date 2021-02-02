@@ -24,7 +24,7 @@ public final class VolcanicIsland extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public VolcanicIsland(final VolcanicIsland card) {
+    private VolcanicIsland(final VolcanicIsland card) {
         super(card);
     }
 

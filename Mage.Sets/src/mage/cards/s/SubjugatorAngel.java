@@ -38,7 +38,7 @@ public final class SubjugatorAngel extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect(filter)));
     }
 
-    public SubjugatorAngel(final SubjugatorAngel card) {
+    private SubjugatorAngel(final SubjugatorAngel card) {
         super(card);
     }
 

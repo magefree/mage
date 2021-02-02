@@ -25,7 +25,7 @@ public final class ArgentMutation extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public ArgentMutation(final ArgentMutation card) {
+    private ArgentMutation(final ArgentMutation card) {
         super(card);
     }
 

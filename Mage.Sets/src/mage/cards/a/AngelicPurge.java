@@ -38,7 +38,7 @@ public final class AngelicPurge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public AngelicPurge(final AngelicPurge card) {
+    private AngelicPurge(final AngelicPurge card) {
         super(card);
     }
 

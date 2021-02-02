@@ -33,7 +33,7 @@ public final class SelectForInspection extends CardImpl {
 
     }
 
-    public SelectForInspection(final SelectForInspection card) {
+    private SelectForInspection(final SelectForInspection card) {
         super(card);
     }
 

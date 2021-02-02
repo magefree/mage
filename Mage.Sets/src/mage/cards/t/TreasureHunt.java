@@ -27,7 +27,7 @@ public final class TreasureHunt extends CardImpl {
         this.getSpellAbility().addEffect(new TreasureHuntEffect());
     }
 
-    public TreasureHunt(final TreasureHunt card) {
+    private TreasureHunt(final TreasureHunt card) {
         super(card);
     }
 

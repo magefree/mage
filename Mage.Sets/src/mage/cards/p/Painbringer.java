@@ -45,7 +45,7 @@ public final class Painbringer extends CardImpl {
         
     }
 
-    public Painbringer(final Painbringer card) {
+    private Painbringer(final Painbringer card) {
         super(card);
     }
 

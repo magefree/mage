@@ -35,7 +35,7 @@ public final class StranglingSoot extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{R}"), TimingRule.INSTANT));
     }
 
-    public StranglingSoot(final StranglingSoot card) {
+    private StranglingSoot(final StranglingSoot card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class ScavengedWeaponry extends CardImpl {
          this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
     }
 
-    public ScavengedWeaponry(final ScavengedWeaponry card) {
+    private ScavengedWeaponry(final ScavengedWeaponry card) {
         super(card);
     }
 

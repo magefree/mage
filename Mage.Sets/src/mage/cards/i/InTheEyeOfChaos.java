@@ -35,7 +35,7 @@ public final class InTheEyeOfChaos extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(Zone.BATTLEFIELD, new InTheEyeOfChaosEffect(), filter, false, SetTargetPointer.SPELL));
     }
 
-    public InTheEyeOfChaos(final InTheEyeOfChaos card) {
+    private InTheEyeOfChaos(final InTheEyeOfChaos card) {
         super(card);
     }
 

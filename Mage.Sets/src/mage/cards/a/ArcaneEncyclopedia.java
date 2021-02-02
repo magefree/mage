@@ -30,7 +30,7 @@ public final class ArcaneEncyclopedia extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArcaneEncyclopedia(final ArcaneEncyclopedia card) {
+    private ArcaneEncyclopedia(final ArcaneEncyclopedia card) {
         super(card);
     }
 

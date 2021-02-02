@@ -46,7 +46,7 @@ public final class PlaxcasterFrogling extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public PlaxcasterFrogling(final PlaxcasterFrogling card) {
+    private PlaxcasterFrogling(final PlaxcasterFrogling card) {
         super(card);
     }
 

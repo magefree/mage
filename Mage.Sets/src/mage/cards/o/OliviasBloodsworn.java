@@ -50,7 +50,7 @@ public final class OliviasBloodsworn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OliviasBloodsworn(final OliviasBloodsworn card) {
+    private OliviasBloodsworn(final OliviasBloodsworn card) {
         super(card);
     }
 

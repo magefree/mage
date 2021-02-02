@@ -39,7 +39,7 @@ public final class Persuasion extends CardImpl {
         this.addAbility(controlAbility);
     }
 
-    public Persuasion(final Persuasion card) {
+    private Persuasion(final Persuasion card) {
         super(card);
     }
 

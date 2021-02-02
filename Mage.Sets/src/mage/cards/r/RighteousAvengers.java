@@ -27,7 +27,7 @@ public final class RighteousAvengers extends CardImpl {
         this.addAbility(new PlainswalkAbility());
     }
 
-    public RighteousAvengers(final RighteousAvengers card) {
+    private RighteousAvengers(final RighteousAvengers card) {
         super(card);
     }
 

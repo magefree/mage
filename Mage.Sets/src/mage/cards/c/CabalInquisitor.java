@@ -45,7 +45,7 @@ public final class CabalInquisitor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CabalInquisitor(final CabalInquisitor card) {
+    private CabalInquisitor(final CabalInquisitor card) {
         super(card);
     }
 

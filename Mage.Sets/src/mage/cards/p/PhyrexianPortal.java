@@ -37,7 +37,7 @@ public final class PhyrexianPortal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianPortal(final PhyrexianPortal card) {
+    private PhyrexianPortal(final PhyrexianPortal card) {
         super(card);
     }
 

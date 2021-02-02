@@ -23,7 +23,7 @@ public final class DosansOldestChant extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public DosansOldestChant(final DosansOldestChant card) {
+    private DosansOldestChant(final DosansOldestChant card) {
         super(card);
     }
 

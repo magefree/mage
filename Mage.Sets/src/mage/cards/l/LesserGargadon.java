@@ -28,7 +28,7 @@ public final class LesserGargadon extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new SacrificeControllerEffect(new FilterLandPermanent(), 1, ""), false));
     }
 
-    public LesserGargadon(final LesserGargadon card) {
+    private LesserGargadon(final LesserGargadon card) {
         super(card);
     }
 

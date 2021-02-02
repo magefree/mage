@@ -28,7 +28,7 @@ public final class Chronostutter extends CardImpl {
 
     }
 
-    public Chronostutter(final Chronostutter card) {
+    private Chronostutter(final Chronostutter card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class SanguineGuard extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }
 
-    public SanguineGuard(final SanguineGuard card) {
+    private SanguineGuard(final SanguineGuard card) {
         super(card);
     }
 

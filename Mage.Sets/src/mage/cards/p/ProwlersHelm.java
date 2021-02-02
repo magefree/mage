@@ -35,7 +35,7 @@ public final class ProwlersHelm extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(2)));
     }
 
-    public ProwlersHelm(final ProwlersHelm card) {
+    private ProwlersHelm(final ProwlersHelm card) {
         super(card);
     }
 

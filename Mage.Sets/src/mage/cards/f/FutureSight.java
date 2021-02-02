@@ -25,7 +25,7 @@ public final class FutureSight extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect()));
     }
 
-    public FutureSight(final FutureSight card) {
+    private FutureSight(final FutureSight card) {
         super(card);
     }
 

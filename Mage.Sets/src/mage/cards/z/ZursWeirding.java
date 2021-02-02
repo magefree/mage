@@ -36,7 +36,7 @@ public final class ZursWeirding extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ZursWeirdingReplacementEffect()));
     }
 
-    public ZursWeirding(final ZursWeirding card) {
+    private ZursWeirding(final ZursWeirding card) {
         super(card);
     }
 

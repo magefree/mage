@@ -28,7 +28,7 @@ public final class CelestialForce extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(3), TargetController.ANY, false));
     }
 
-    public CelestialForce(final CelestialForce card) {
+    private CelestialForce(final CelestialForce card) {
         super(card);
     }
 

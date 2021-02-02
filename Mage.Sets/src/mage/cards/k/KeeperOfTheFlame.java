@@ -48,7 +48,7 @@ public final class KeeperOfTheFlame extends CardImpl {
         
     }
     
-    public KeeperOfTheFlame(final KeeperOfTheFlame card) {
+    private KeeperOfTheFlame(final KeeperOfTheFlame card) {
         super(card);
     }
     

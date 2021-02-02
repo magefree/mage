@@ -31,7 +31,7 @@ public final class Scapegoat extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, new FilterControlledCreaturePermanent(), false));
     }
 
-    public Scapegoat(final Scapegoat card) {
+    private Scapegoat(final Scapegoat card) {
         super(card);
     }
 

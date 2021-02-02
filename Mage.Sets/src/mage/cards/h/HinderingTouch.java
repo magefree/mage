@@ -27,7 +27,7 @@ public final class HinderingTouch extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public HinderingTouch(final HinderingTouch card) {
+    private HinderingTouch(final HinderingTouch card) {
         super(card);
     }
 

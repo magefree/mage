@@ -56,7 +56,7 @@ public final class Lich extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new LoseGameSourceControllerEffect()));
     }
 
-    public Lich(final Lich card) {
+    private Lich(final Lich card) {
         super(card);
     }
 

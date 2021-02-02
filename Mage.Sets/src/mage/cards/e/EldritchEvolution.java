@@ -41,7 +41,7 @@ public final class EldritchEvolution extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public EldritchEvolution(final EldritchEvolution card) {
+    private EldritchEvolution(final EldritchEvolution card) {
         super(card);
     }
 

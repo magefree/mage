@@ -47,7 +47,7 @@ public final class CurseOfVengeance extends CardImpl {
         this.addAbility(new CurseOfVengeancePlayerLosesTriggeredAbility());
     }
 
-    public CurseOfVengeance(final CurseOfVengeance card) {
+    private CurseOfVengeance(final CurseOfVengeance card) {
         super(card);
     }
 

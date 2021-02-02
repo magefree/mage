@@ -35,7 +35,7 @@ public final class CatharsCompanion extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), filter, false));
     }
 
-    public CatharsCompanion(final CatharsCompanion card) {
+    private CatharsCompanion(final CatharsCompanion card) {
         super(card);
     }
 

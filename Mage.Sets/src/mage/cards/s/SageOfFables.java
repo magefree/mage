@@ -42,7 +42,7 @@ public final class SageOfFables extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SageOfFables(final SageOfFables card) {
+    private SageOfFables(final SageOfFables card) {
         super(card);
     }
 

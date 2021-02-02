@@ -25,7 +25,7 @@ public final class LightningJavelin extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));        
     }
 
-    public LightningJavelin(final LightningJavelin card) {
+    private LightningJavelin(final LightningJavelin card) {
         super(card);
     }
 

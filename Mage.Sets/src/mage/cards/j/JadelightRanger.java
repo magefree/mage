@@ -30,7 +30,7 @@ public final class JadelightRanger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JadelightRanger(final JadelightRanger card) {
+    private JadelightRanger(final JadelightRanger card) {
         super(card);
     }
 

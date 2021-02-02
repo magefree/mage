@@ -38,7 +38,7 @@ public final class ArrowStorm extends CardImpl {
         this.getSpellAbility().addHint(RaidHint.instance);
     }
 
-    public ArrowStorm(final ArrowStorm card) {
+    private ArrowStorm(final ArrowStorm card) {
         super(card);
     }
 

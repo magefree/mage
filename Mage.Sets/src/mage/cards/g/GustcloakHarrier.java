@@ -38,7 +38,7 @@ public final class GustcloakHarrier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GustcloakHarrier(final GustcloakHarrier card) {
+    private GustcloakHarrier(final GustcloakHarrier card) {
         super(card);
     }
 

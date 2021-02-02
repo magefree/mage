@@ -38,7 +38,7 @@ public final class RayneAcademyChancellor extends CardImpl {
         this.addAbility(new RayneAcademyChancellorTriggeredAbility());
     }
 
-    public RayneAcademyChancellor(final RayneAcademyChancellor card) {
+    private RayneAcademyChancellor(final RayneAcademyChancellor card) {
         super(card);
     }
 

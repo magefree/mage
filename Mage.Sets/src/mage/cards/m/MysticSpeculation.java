@@ -24,7 +24,7 @@ public final class MysticSpeculation extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(3));
     }
 
-    public MysticSpeculation(final MysticSpeculation card) {
+    private MysticSpeculation(final MysticSpeculation card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class Swelter extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2, 2));
     }
 
-    public Swelter(final Swelter card) {
+    private Swelter(final Swelter card) {
         super(card);
     }
 

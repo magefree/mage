@@ -41,7 +41,7 @@ public final class ShrikeHarpy extends CardImpl {
                 "When {this} enters the battlefield, if its tribute wasn't paid, target opponent sacrifices a creature."));
     }
 
-    public ShrikeHarpy(final ShrikeHarpy card) {
+    private ShrikeHarpy(final ShrikeHarpy card) {
         super(card);
     }
 

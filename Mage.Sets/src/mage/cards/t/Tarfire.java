@@ -24,7 +24,7 @@ public final class Tarfire extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public Tarfire(final Tarfire card) {
+    private Tarfire(final Tarfire card) {
         super(card);
     }
 

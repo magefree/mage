@@ -36,7 +36,7 @@ public final class ScatteredGroves extends CardImpl {
 
     }
 
-    public ScatteredGroves(final ScatteredGroves card) {
+    private ScatteredGroves(final ScatteredGroves card) {
         super(card);
     }
 

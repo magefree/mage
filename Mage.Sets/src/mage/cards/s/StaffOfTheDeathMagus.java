@@ -37,7 +37,7 @@ public final class StaffOfTheDeathMagus extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), filterLand, false));
     }
 
-    public StaffOfTheDeathMagus(final StaffOfTheDeathMagus card) {
+    private StaffOfTheDeathMagus(final StaffOfTheDeathMagus card) {
         super(card);
     }
 

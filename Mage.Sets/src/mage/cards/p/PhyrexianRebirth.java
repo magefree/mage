@@ -26,7 +26,7 @@ public final class PhyrexianRebirth extends CardImpl {
         this.getSpellAbility().addEffect(new PhyrexianRebirthEffect());
     }
 
-    public PhyrexianRebirth(final PhyrexianRebirth card) {
+    private PhyrexianRebirth(final PhyrexianRebirth card) {
         super(card);
     }
 

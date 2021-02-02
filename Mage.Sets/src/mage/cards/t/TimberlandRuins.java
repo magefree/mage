@@ -30,7 +30,7 @@ public final class TimberlandRuins extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TimberlandRuins(final TimberlandRuins card) {
+    private TimberlandRuins(final TimberlandRuins card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class EssenceOfTheWild extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EssenceOfTheWildEffect()));
     }
 
-    public EssenceOfTheWild(final EssenceOfTheWild card) {
+    private EssenceOfTheWild(final EssenceOfTheWild card) {
         super(card);
     }
 

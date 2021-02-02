@@ -50,7 +50,7 @@ public final class LlanowarAugur extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LlanowarAugur(final LlanowarAugur card) {
+    private LlanowarAugur(final LlanowarAugur card) {
         super(card);
     }
 

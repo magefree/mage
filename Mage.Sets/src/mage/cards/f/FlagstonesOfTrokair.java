@@ -35,7 +35,7 @@ public final class FlagstonesOfTrokair extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(FILTER), true, false), true, false));
     }
 
-    public FlagstonesOfTrokair(final FlagstonesOfTrokair card) {
+    private FlagstonesOfTrokair(final FlagstonesOfTrokair card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class PrismRing extends CardImpl {
         this.addAbility(new PrismRingTriggeredAbility());
     }
 
-    public PrismRing(final PrismRing card) {
+    private PrismRing(final PrismRing card) {
         super(card);
     }
 

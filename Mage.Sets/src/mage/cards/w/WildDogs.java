@@ -41,7 +41,7 @@ public final class WildDogs extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public WildDogs(final WildDogs card) {
+    private WildDogs(final WildDogs card) {
         super(card);
     }
 

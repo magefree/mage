@@ -35,7 +35,7 @@ public final class SpringjackKnight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpringjackKnight(final SpringjackKnight card) {
+    private SpringjackKnight(final SpringjackKnight card) {
         super(card);
     }
 

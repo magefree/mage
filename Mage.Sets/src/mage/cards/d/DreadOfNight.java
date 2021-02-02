@@ -31,7 +31,7 @@ public final class DreadOfNight extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public DreadOfNight(final DreadOfNight card) {
+    private DreadOfNight(final DreadOfNight card) {
         super(card);
     }
 

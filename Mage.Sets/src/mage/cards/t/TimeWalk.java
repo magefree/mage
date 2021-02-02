@@ -21,7 +21,7 @@ public final class TimeWalk extends CardImpl {
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());
     }
 
-    public TimeWalk(final TimeWalk card) {
+    private TimeWalk(final TimeWalk card) {
         super(card);
     }
 

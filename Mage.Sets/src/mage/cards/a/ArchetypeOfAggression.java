@@ -40,7 +40,7 @@ public final class ArchetypeOfAggression extends CardImpl {
         
     }
 
-    public ArchetypeOfAggression(final ArchetypeOfAggression card) {
+    private ArchetypeOfAggression(final ArchetypeOfAggression card) {
         super(card);
     }
 

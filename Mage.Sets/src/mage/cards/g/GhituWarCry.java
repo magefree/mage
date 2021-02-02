@@ -29,7 +29,7 @@ public final class GhituWarCry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhituWarCry(final GhituWarCry card) {
+    private GhituWarCry(final GhituWarCry card) {
         super(card);
     }
 

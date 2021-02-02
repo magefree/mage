@@ -37,7 +37,7 @@ public final class EiganjoCastle extends CardImpl {
     }
 
 
-    public EiganjoCastle(final EiganjoCastle card) {
+    private EiganjoCastle(final EiganjoCastle card) {
         super(card);
     }
 

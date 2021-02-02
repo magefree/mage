@@ -45,7 +45,7 @@ public final class DriftOfTheDead extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public DriftOfTheDead(final DriftOfTheDead card) {
+    private DriftOfTheDead(final DriftOfTheDead card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class CaptivatingGlance extends CardImpl {
 
     }
 
-    public CaptivatingGlance(final CaptivatingGlance card) {
+    private CaptivatingGlance(final CaptivatingGlance card) {
         super(card);
     }
 

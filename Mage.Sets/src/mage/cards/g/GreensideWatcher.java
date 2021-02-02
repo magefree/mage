@@ -40,7 +40,7 @@ public final class GreensideWatcher extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GreensideWatcher(final GreensideWatcher card) {
+    private GreensideWatcher(final GreensideWatcher card) {
         super(card);
     }
 

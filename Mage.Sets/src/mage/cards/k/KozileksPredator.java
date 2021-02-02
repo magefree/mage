@@ -29,7 +29,7 @@ public final class KozileksPredator extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 2), false));
     }
 
-    public KozileksPredator(final KozileksPredator card) {
+    private KozileksPredator(final KozileksPredator card) {
         super(card);
     }
 

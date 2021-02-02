@@ -41,7 +41,7 @@ public final class ColossusOfSardia extends CardImpl {
                 new UntapSourceEffect(), new ManaCostsImpl("{9}"), new IsStepCondition(PhaseStep.UPKEEP), null));
     }
 
-    public ColossusOfSardia(final ColossusOfSardia card) {
+    private ColossusOfSardia(final ColossusOfSardia card) {
         super(card);
     }
 

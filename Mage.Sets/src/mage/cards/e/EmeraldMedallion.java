@@ -30,7 +30,7 @@ public final class EmeraldMedallion extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public EmeraldMedallion(final EmeraldMedallion card) {
+    private EmeraldMedallion(final EmeraldMedallion card) {
         super(card);
     }
 

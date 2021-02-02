@@ -28,7 +28,7 @@ public final class DingusEgg extends CardImpl {
         this.addAbility(new DingusEggTriggeredAbility());
     }
 
-    public DingusEgg(final DingusEgg card) {
+    private DingusEgg(final DingusEgg card) {
         super(card);
     }
 

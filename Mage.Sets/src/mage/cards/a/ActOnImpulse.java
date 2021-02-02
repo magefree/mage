@@ -20,7 +20,7 @@ public final class ActOnImpulse extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTopXMayPlayUntilEndOfTurnEffect(3));
     }
 
-    public ActOnImpulse(final ActOnImpulse card) {
+    private ActOnImpulse(final ActOnImpulse card) {
         super(card);
     }
 

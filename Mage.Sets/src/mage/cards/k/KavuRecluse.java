@@ -34,7 +34,7 @@ public final class KavuRecluse extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KavuRecluse(final KavuRecluse card) {
+    private KavuRecluse(final KavuRecluse card) {
         super(card);
     }
 

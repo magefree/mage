@@ -41,7 +41,7 @@ public final class ViewFromAbove extends CardImpl {
                 "If you control a white permanent, return {this} to its owner's hand"));
     }
 
-    public ViewFromAbove(final ViewFromAbove card) {
+    private ViewFromAbove(final ViewFromAbove card) {
         super(card);
     }
 

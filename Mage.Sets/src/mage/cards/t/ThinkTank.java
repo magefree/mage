@@ -31,7 +31,7 @@ public final class ThinkTank extends CardImpl {
 
     }
 
-    public ThinkTank(final ThinkTank card) {
+    private ThinkTank(final ThinkTank card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class DrafnasRestoration extends CardImpl {
         this.getSpellAbility().addTarget(new DrafnasRestorationTarget());
     }
 
-    public DrafnasRestoration(final DrafnasRestoration card) {
+    private DrafnasRestoration(final DrafnasRestoration card) {
         super(card);
     }
 

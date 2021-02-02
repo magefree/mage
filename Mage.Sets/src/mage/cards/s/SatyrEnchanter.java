@@ -36,7 +36,7 @@ public final class SatyrEnchanter extends CardImpl {
         ));
     }
 
-    public SatyrEnchanter(final SatyrEnchanter card) {
+    private SatyrEnchanter(final SatyrEnchanter card) {
         super(card);
     }
 

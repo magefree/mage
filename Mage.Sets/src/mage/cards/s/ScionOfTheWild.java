@@ -30,7 +30,7 @@ public final class ScionOfTheWild extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
-    public ScionOfTheWild(final ScionOfTheWild card) {
+    private ScionOfTheWild(final ScionOfTheWild card) {
         super(card);
     }
 

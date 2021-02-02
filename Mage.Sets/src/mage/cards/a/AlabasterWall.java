@@ -36,7 +36,7 @@ public final class AlabasterWall extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AlabasterWall(final AlabasterWall card) {
+    private AlabasterWall(final AlabasterWall card) {
         super(card);
     }
 

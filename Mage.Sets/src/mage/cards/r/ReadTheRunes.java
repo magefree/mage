@@ -29,7 +29,7 @@ public final class ReadTheRunes extends CardImpl {
         this.getSpellAbility().addEffect(new ReadTheRunesEffect());
     }
 
-    public ReadTheRunes(final ReadTheRunes card) {
+    private ReadTheRunes(final ReadTheRunes card) {
         super(card);
     }
 

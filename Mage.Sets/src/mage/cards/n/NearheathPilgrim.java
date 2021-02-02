@@ -35,7 +35,7 @@ public final class NearheathPilgrim extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(LifelinkAbility.getInstance(), ruleText)));
     }
 
-    public NearheathPilgrim(final NearheathPilgrim card) {
+    private NearheathPilgrim(final NearheathPilgrim card) {
         super(card);
     }
 

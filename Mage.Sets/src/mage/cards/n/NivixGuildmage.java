@@ -51,7 +51,7 @@ public final class NivixGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NivixGuildmage(final NivixGuildmage card) {
+    private NivixGuildmage(final NivixGuildmage card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class HellSwarm extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-1, 0, Duration.EndOfTurn, new FilterCreaturePermanent("All creatures"), false));
     }
 
-    public HellSwarm(final HellSwarm card) {
+    private HellSwarm(final HellSwarm card) {
         super(card);
     }
 

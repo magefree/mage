@@ -46,7 +46,7 @@ public final class BatwingBrume extends CardImpl {
 
     }
 
-    public BatwingBrume(final BatwingBrume card) {
+    private BatwingBrume(final BatwingBrume card) {
         super(card);
     }
 

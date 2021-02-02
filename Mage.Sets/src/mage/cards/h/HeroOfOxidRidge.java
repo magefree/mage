@@ -34,7 +34,7 @@ public final class HeroOfOxidRidge extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new HeroOfOxidRidgeEffect(), false));
     }
 
-    public HeroOfOxidRidge(final HeroOfOxidRidge card) {
+    private HeroOfOxidRidge(final HeroOfOxidRidge card) {
         super(card);
     }
 

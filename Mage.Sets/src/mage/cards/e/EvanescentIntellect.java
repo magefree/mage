@@ -42,7 +42,7 @@ public final class EvanescentIntellect extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
-    public EvanescentIntellect(final EvanescentIntellect card) {
+    private EvanescentIntellect(final EvanescentIntellect card) {
         super(card);
     }
 

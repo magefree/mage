@@ -49,7 +49,7 @@ public final class TritonTactics extends CardImpl {
 
     }
 
-    public TritonTactics(final TritonTactics card) {
+    private TritonTactics(final TritonTactics card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class StingingShot extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public StingingShot(final StingingShot card) {
+    private StingingShot(final StingingShot card) {
         super(card);
     }
 

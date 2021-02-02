@@ -25,7 +25,7 @@ public final class HarshScrutiny extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public HarshScrutiny(final HarshScrutiny card) {
+    private HarshScrutiny(final HarshScrutiny card) {
         super(card);
     }
 

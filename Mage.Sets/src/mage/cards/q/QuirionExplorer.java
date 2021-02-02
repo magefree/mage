@@ -28,7 +28,7 @@ public final class QuirionExplorer extends CardImpl {
         this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.OPPONENT));
     }
 
-    public QuirionExplorer(final QuirionExplorer card) {
+    private QuirionExplorer(final QuirionExplorer card) {
         super(card);
     }
 

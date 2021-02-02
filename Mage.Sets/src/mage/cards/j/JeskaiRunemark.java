@@ -56,7 +56,7 @@ public final class JeskaiRunemark extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter), "{this} has flying as long as you control a red or white permanent")));
     }
 
-    public JeskaiRunemark(final JeskaiRunemark card) {
+    private JeskaiRunemark(final JeskaiRunemark card) {
         super(card);
     }
 

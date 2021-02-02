@@ -30,7 +30,7 @@ public final class TranquilCove extends CardImpl {
         
     }
 
-    public TranquilCove(final TranquilCove card) {
+    private TranquilCove(final TranquilCove card) {
         super(card);
     }
 

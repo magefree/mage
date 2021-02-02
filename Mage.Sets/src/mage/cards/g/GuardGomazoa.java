@@ -34,7 +34,7 @@ public final class GuardGomazoa extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventCombatDamageToSourceEffect(Duration.WhileOnBattlefield)));
     }
 
-    public GuardGomazoa(final GuardGomazoa card) {
+    private GuardGomazoa(final GuardGomazoa card) {
         super(card);
     }
 

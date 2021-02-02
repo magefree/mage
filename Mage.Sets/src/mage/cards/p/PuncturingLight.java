@@ -32,7 +32,7 @@ public final class PuncturingLight extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
-    public PuncturingLight(final PuncturingLight card) {
+    private PuncturingLight(final PuncturingLight card) {
         super(card);
     }
 

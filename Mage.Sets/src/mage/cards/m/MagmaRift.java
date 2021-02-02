@@ -28,7 +28,7 @@ public final class MagmaRift extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public MagmaRift(final MagmaRift card) {
+    private MagmaRift(final MagmaRift card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class Reveillark extends CardImpl {
         this.addAbility(new EvokeAbility(this, "{5}{W}"));
     }
 
-    public Reveillark(final Reveillark card) {
+    private Reveillark(final Reveillark card) {
         super(card);
     }
 

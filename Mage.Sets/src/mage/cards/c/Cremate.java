@@ -26,7 +26,7 @@ public final class Cremate extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Cremate(final Cremate card) {
+    private Cremate(final Cremate card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class CoilsOfTheMedusa extends CardImpl {
         );
     }
 
-    public CoilsOfTheMedusa(final CoilsOfTheMedusa card) {
+    private CoilsOfTheMedusa(final CoilsOfTheMedusa card) {
         super(card);
     }
 

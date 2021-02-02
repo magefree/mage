@@ -27,7 +27,7 @@ public final class MisfortunesGain extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public MisfortunesGain(final MisfortunesGain card) {
+    private MisfortunesGain(final MisfortunesGain card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class GalvanicAlchemist extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ability, ruleText)));
     }
 
-    public GalvanicAlchemist(final GalvanicAlchemist card) {
+    private GalvanicAlchemist(final GalvanicAlchemist card) {
         super(card);
     }
 

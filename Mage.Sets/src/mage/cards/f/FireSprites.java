@@ -35,7 +35,7 @@ public final class FireSprites extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FireSprites(final FireSprites card) {
+    private FireSprites(final FireSprites card) {
         super(card);
     }
 

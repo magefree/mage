@@ -44,7 +44,7 @@ public final class CloudchaserKestrel extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CloudchaserKestrel(final CloudchaserKestrel card) {
+    private CloudchaserKestrel(final CloudchaserKestrel card) {
         super(card);
     }
 

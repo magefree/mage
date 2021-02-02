@@ -34,7 +34,7 @@ public final class Grindstone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Grindstone(final Grindstone card) {
+    private Grindstone(final Grindstone card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class AcademyRector extends CardImpl {
         ));
     }
 
-    public AcademyRector(final AcademyRector card) {
+    private AcademyRector(final AcademyRector card) {
         super(card);
     }
 

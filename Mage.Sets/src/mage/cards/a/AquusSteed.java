@@ -36,7 +36,7 @@ public final class AquusSteed extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public AquusSteed(final AquusSteed card) {
+    private AquusSteed(final AquusSteed card) {
         super(card);
     }
 

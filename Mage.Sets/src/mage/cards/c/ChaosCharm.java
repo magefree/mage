@@ -46,7 +46,7 @@ public final class ChaosCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public ChaosCharm(final ChaosCharm card) {
+    private ChaosCharm(final ChaosCharm card) {
         super(card);
     }
 

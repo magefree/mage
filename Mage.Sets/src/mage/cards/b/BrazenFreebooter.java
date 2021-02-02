@@ -28,7 +28,7 @@ public final class BrazenFreebooter extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken()), false));
     }
 
-    public BrazenFreebooter(final BrazenFreebooter card) {
+    private BrazenFreebooter(final BrazenFreebooter card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class GhostlyVisit extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public GhostlyVisit(final GhostlyVisit card) {
+    private GhostlyVisit(final GhostlyVisit card) {
         super(card);
     }
 

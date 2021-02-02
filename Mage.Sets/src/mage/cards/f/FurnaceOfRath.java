@@ -29,7 +29,7 @@ public final class FurnaceOfRath extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FurnaceOfRathEffect()));
     }
 
-    public FurnaceOfRath(final FurnaceOfRath card) {
+    private FurnaceOfRath(final FurnaceOfRath card) {
         super(card);
     }
 

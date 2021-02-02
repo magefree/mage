@@ -40,7 +40,7 @@ public final class JotunOwlKeeper extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new BirdToken(), new CountersSourceCount(CounterType.AGE))));
     }
 
-    public JotunOwlKeeper(final JotunOwlKeeper card) {
+    private JotunOwlKeeper(final JotunOwlKeeper card) {
         super(card);
     }
 

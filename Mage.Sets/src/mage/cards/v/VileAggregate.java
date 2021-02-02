@@ -50,7 +50,7 @@ public final class VileAggregate extends CardImpl {
         this.addAbility(new IngestAbility());
     }
 
-    public VileAggregate(final VileAggregate card) {
+    private VileAggregate(final VileAggregate card) {
         super(card);
     }
 

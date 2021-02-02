@@ -36,7 +36,7 @@ public final class HondenOfNightsReach extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HondenOfNightsReach(final HondenOfNightsReach card) {
+    private HondenOfNightsReach(final HondenOfNightsReach card) {
         super(card);
     }
 

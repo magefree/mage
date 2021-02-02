@@ -45,7 +45,7 @@ public final class SawbackManticore extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SawbackManticore(final SawbackManticore card) {
+    private SawbackManticore(final SawbackManticore card) {
         super(card);
     }
 

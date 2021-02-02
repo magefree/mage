@@ -41,7 +41,7 @@ public final class DevoutLightcaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DevoutLightcaster(final DevoutLightcaster card) {
+    private DevoutLightcaster(final DevoutLightcaster card) {
         super(card);
     }
 

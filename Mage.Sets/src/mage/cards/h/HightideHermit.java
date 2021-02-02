@@ -37,7 +37,7 @@ public final class HightideHermit extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new PayEnergyCost(2)));
     }
 
-    public HightideHermit(final HightideHermit card) {
+    private HightideHermit(final HightideHermit card) {
         super(card);
     }
 

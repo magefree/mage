@@ -45,7 +45,7 @@ public final class GodEternalKefnet extends CardImpl {
         this.addAbility(new GodEternalDiesTriggeredAbility());
     }
 
-    public GodEternalKefnet(final GodEternalKefnet card) {
+    private GodEternalKefnet(final GodEternalKefnet card) {
         super(card);
     }
 

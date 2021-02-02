@@ -32,7 +32,7 @@ public final class SliverQueen extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SliverToken()), new ManaCostsImpl("{2}")));
     }
 
-    public SliverQueen(final SliverQueen card) {
+    private SliverQueen(final SliverQueen card) {
         super(card);
     }
 

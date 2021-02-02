@@ -37,7 +37,7 @@ public final class SpinalParasite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpinalParasite(final SpinalParasite card) {
+    private SpinalParasite(final SpinalParasite card) {
         super(card);
     }
 

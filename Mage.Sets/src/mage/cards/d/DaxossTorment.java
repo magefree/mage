@@ -31,7 +31,7 @@ public final class DaxossTorment extends CardImpl {
                 "previous types", Duration.EndOfTurn)));
     }
 
-    public DaxossTorment(final DaxossTorment card) {
+    private DaxossTorment(final DaxossTorment card) {
         super(card);
     }
 

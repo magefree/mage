@@ -44,7 +44,7 @@ public final class AbzanKinGuard extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter), "{this} has lifelink as long as you control a white or black permanent")));
     }
 
-    public AbzanKinGuard(final AbzanKinGuard card) {
+    private AbzanKinGuard(final AbzanKinGuard card) {
         super(card);
     }
 

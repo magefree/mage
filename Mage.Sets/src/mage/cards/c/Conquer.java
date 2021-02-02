@@ -38,7 +38,7 @@ public final class Conquer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("land")));
     }
 
-    public Conquer(final Conquer card) {
+    private Conquer(final Conquer card) {
         super(card);
     }
 

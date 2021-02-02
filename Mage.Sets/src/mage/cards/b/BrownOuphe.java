@@ -43,7 +43,7 @@ public final class BrownOuphe extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BrownOuphe(final BrownOuphe card) {
+    private BrownOuphe(final BrownOuphe card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class Reincarnation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Reincarnation(final Reincarnation card) {
+    private Reincarnation(final Reincarnation card) {
         super(card);
     }
 

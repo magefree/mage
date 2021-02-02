@@ -34,7 +34,7 @@ public final class ScorchTheFields extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(1, filter));
     }
 
-    public ScorchTheFields(final ScorchTheFields card) {
+    private ScorchTheFields(final ScorchTheFields card) {
         super(card);
     }
 

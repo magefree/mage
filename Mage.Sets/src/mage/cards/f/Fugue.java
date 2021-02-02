@@ -22,7 +22,7 @@ public final class Fugue extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Fugue(final Fugue card) {
+    private Fugue(final Fugue card) {
         super(card);
     }
 

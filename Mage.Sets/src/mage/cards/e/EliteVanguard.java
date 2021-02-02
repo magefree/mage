@@ -24,7 +24,7 @@ public final class EliteVanguard extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public EliteVanguard(final EliteVanguard card) {
+    private EliteVanguard(final EliteVanguard card) {
         super(card);
     }
 

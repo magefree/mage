@@ -63,7 +63,7 @@ public final class ElvishClancaller extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElvishClancaller(final ElvishClancaller card) {
+    private ElvishClancaller(final ElvishClancaller card) {
         super(card);
     }
 

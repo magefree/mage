@@ -46,7 +46,7 @@ public final class Prickleboar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Prickleboar(final Prickleboar card) {
+    private Prickleboar(final Prickleboar card) {
         super(card);
     }
 

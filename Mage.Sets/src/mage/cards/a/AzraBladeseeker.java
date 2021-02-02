@@ -37,7 +37,7 @@ public final class AzraBladeseeker extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AzraBladeseekerEffect(), false));
     }
 
-    public AzraBladeseeker(final AzraBladeseeker card) {
+    private AzraBladeseeker(final AzraBladeseeker card) {
         super(card);
     }
 

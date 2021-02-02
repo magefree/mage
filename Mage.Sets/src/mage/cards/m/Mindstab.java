@@ -28,7 +28,7 @@ public final class Mindstab extends CardImpl {
         this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{B}"), this));
     }
 
-    public Mindstab(final Mindstab card) {
+    private Mindstab(final Mindstab card) {
         super(card);
     }
 

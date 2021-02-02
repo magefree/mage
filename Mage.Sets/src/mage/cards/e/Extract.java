@@ -32,7 +32,7 @@ public final class Extract extends CardImpl {
    
     }
 
-    public Extract(final Extract card) {
+    private Extract(final Extract card) {
         super(card);
     }
 

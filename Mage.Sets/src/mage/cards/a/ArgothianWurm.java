@@ -38,7 +38,7 @@ public final class ArgothianWurm extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ArgothianWurmEffect(), false));
     }
 
-    public ArgothianWurm(final ArgothianWurm card) {
+    private ArgothianWurm(final ArgothianWurm card) {
         super(card);
     }
 

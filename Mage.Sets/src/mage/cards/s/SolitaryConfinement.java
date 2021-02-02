@@ -40,7 +40,7 @@ public final class SolitaryConfinement extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.WhileOnBattlefield)));
     }
 
-    public SolitaryConfinement(final SolitaryConfinement card) {
+    private SolitaryConfinement(final SolitaryConfinement card) {
         super(card);
     }
 

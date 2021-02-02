@@ -61,7 +61,7 @@ public final class OrcishHealer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrcishHealer(final OrcishHealer card) {
+    private OrcishHealer(final OrcishHealer card) {
         super(card);
     }
 

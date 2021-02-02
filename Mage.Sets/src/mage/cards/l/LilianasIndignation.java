@@ -28,7 +28,7 @@ public final class LilianasIndignation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public LilianasIndignation(final LilianasIndignation card) {
+    private LilianasIndignation(final LilianasIndignation card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class UnholyCitadel extends CardImpl {
         ));
     }
 
-    public UnholyCitadel(final UnholyCitadel card) {
+    private UnholyCitadel(final UnholyCitadel card) {
         super(card);
     }
 

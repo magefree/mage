@@ -50,7 +50,7 @@ public final class TalonOfPain extends CardImpl {
 
     }
 
-    public TalonOfPain(final TalonOfPain card) {
+    private TalonOfPain(final TalonOfPain card) {
         super(card);
     }
 

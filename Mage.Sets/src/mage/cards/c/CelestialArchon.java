@@ -49,7 +49,7 @@ public final class CelestialArchon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CelestialArchon(final CelestialArchon card) {
+    private CelestialArchon(final CelestialArchon card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class ImplementOfMalice extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public ImplementOfMalice(final ImplementOfMalice card) {
+    private ImplementOfMalice(final ImplementOfMalice card) {
         super(card);
     }
 

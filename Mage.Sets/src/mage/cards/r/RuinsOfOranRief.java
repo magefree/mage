@@ -45,7 +45,7 @@ public final class RuinsOfOranRief extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RuinsOfOranRief(final RuinsOfOranRief card) {
+    private RuinsOfOranRief(final RuinsOfOranRief card) {
         super(card);
     }
 

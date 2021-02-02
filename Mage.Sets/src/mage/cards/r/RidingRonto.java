@@ -40,7 +40,7 @@ public final class RidingRonto extends CardImpl {
 
     }
 
-    public RidingRonto(final RidingRonto card) {
+    private RidingRonto(final RidingRonto card) {
         super(card);
     }
 

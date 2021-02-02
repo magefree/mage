@@ -41,7 +41,7 @@ public final class SeaGateLoremaster extends CardImpl {
                 new TapSourceCost()));
     }
 
-    public SeaGateLoremaster(final SeaGateLoremaster card) {
+    private SeaGateLoremaster(final SeaGateLoremaster card) {
         super(card);
     }
 

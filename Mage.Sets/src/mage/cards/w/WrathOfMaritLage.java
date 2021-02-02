@@ -39,7 +39,7 @@ public final class WrathOfMaritLage extends CardImpl {
                 new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
     }
 
-    public WrathOfMaritLage(final WrathOfMaritLage card) {
+    private WrathOfMaritLage(final WrathOfMaritLage card) {
         super(card);
     }
 

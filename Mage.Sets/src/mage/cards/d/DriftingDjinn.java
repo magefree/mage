@@ -32,7 +32,7 @@ public final class DriftingDjinn extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public DriftingDjinn(final DriftingDjinn card) {
+    private DriftingDjinn(final DriftingDjinn card) {
         super(card);
     }
 

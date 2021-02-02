@@ -29,7 +29,7 @@ public final class DivineDeflection extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public DivineDeflection(final DivineDeflection card) {
+    private DivineDeflection(final DivineDeflection card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class SetAdrift extends CardImpl {
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
-    public SetAdrift(final SetAdrift card) {
+    private SetAdrift(final SetAdrift card) {
         super(card);
     }
 

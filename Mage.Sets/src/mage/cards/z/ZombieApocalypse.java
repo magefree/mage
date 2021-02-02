@@ -29,7 +29,7 @@ public final class ZombieApocalypse extends CardImpl {
         this.getSpellAbility().addEffect(new ZombieApocalypseEffect());
     }
 
-    public ZombieApocalypse(final ZombieApocalypse card) {
+    private ZombieApocalypse(final ZombieApocalypse card) {
         super(card);
     }
 

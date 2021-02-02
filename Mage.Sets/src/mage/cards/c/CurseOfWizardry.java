@@ -35,7 +35,7 @@ public final class CurseOfWizardry extends CardImpl {
 
     }
 
-    public CurseOfWizardry(final CurseOfWizardry card) {
+    private CurseOfWizardry(final CurseOfWizardry card) {
         super(card);
     }
 

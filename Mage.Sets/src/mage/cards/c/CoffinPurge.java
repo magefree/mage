@@ -29,7 +29,7 @@ public final class CoffinPurge extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{B}"), TimingRule.INSTANT));
     }
 
-    public CoffinPurge(final CoffinPurge card) {
+    private CoffinPurge(final CoffinPurge card) {
         super(card);
     }
 

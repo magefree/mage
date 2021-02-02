@@ -51,7 +51,7 @@ public final class Malfunction extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect("permanent")));
     }
 
-    public Malfunction(final Malfunction card) {
+    private Malfunction(final Malfunction card) {
         super(card);
     }
 

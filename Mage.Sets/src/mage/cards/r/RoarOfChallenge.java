@@ -35,7 +35,7 @@ public final class RoarOfChallenge extends CardImpl {
         this.getSpellAbility().addHint(FerociousHint.instance);
     }
 
-    public RoarOfChallenge(final RoarOfChallenge card) {
+    private RoarOfChallenge(final RoarOfChallenge card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class OgreArsonist extends CardImpl {
 
     }
 
-    public OgreArsonist(final OgreArsonist card) {
+    private OgreArsonist(final OgreArsonist card) {
         super(card);
     }
 

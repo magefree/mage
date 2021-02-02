@@ -26,7 +26,7 @@ public final class VoidSquall extends CardImpl {
         this.addAbility(new ReboundAbility());
     }
 
-    public VoidSquall(final VoidSquall card) {
+    private VoidSquall(final VoidSquall card) {
         super(card);
     }
 

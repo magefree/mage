@@ -51,7 +51,7 @@ public final class GlamerSpinners extends CardImpl {
 
     }
 
-    public GlamerSpinners(final GlamerSpinners card) {
+    private GlamerSpinners(final GlamerSpinners card) {
         super(card);
     }
 

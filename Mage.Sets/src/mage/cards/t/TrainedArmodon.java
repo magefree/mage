@@ -22,7 +22,7 @@ public final class TrainedArmodon extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public TrainedArmodon(final TrainedArmodon card) {
+    private TrainedArmodon(final TrainedArmodon card) {
         super(card);
     }
 

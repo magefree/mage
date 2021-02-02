@@ -47,7 +47,7 @@ public final class RubiniaSoulsinger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RubiniaSoulsinger(final RubiniaSoulsinger card) {
+    private RubiniaSoulsinger(final RubiniaSoulsinger card) {
         super(card);
     }
 

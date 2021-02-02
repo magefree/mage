@@ -30,7 +30,7 @@ public final class TempleOfSilence extends CardImpl {
 
     }
 
-    public TempleOfSilence(final TempleOfSilence card) {
+    private TempleOfSilence(final TempleOfSilence card) {
         super(card);
     }
 

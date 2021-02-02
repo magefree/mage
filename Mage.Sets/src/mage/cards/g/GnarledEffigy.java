@@ -31,7 +31,7 @@ public final class GnarledEffigy extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GnarledEffigy(final GnarledEffigy card) {
+    private GnarledEffigy(final GnarledEffigy card) {
         super(card);
     }
 

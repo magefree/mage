@@ -30,7 +30,7 @@ public final class Vorapede extends CardImpl {
         this.addAbility(new UndyingAbility());
     }
 
-    public Vorapede(final Vorapede card) {
+    private Vorapede(final Vorapede card) {
         super(card);
     }
 

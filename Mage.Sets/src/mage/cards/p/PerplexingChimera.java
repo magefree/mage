@@ -85,7 +85,7 @@ public final class PerplexingChimera extends CardImpl {
         this.addAbility(new PerplexingChimeraTriggeredAbility());
     }
 
-    public PerplexingChimera(final PerplexingChimera card) {
+    private PerplexingChimera(final PerplexingChimera card) {
         super(card);
     }
 

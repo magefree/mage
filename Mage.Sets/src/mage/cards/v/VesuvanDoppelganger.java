@@ -44,7 +44,7 @@ public final class VesuvanDoppelganger extends CardImpl {
 
     }
 
-    public VesuvanDoppelganger(final VesuvanDoppelganger card) {
+    private VesuvanDoppelganger(final VesuvanDoppelganger card) {
         super(card);
     }
 

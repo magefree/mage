@@ -39,7 +39,7 @@ public final class LoneRevenant extends CardImpl {
         this.addAbility(new LoneRevenantTriggeredAbility());
     }
 
-    public LoneRevenant(final LoneRevenant card) {
+    private LoneRevenant(final LoneRevenant card) {
         super(card);
     }
 

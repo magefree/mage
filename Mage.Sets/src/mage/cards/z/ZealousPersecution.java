@@ -25,7 +25,7 @@ public final class ZealousPersecution extends CardImpl {
         ).setText("and creatures your opponents control get -1/-1"));
     }
 
-    public ZealousPersecution(final ZealousPersecution card) {
+    private ZealousPersecution(final ZealousPersecution card) {
         super(card);
     }
 

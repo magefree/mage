@@ -25,7 +25,7 @@ public final class MistralCharger extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public MistralCharger(final MistralCharger card) {
+    private MistralCharger(final MistralCharger card) {
         super(card);
     }
 

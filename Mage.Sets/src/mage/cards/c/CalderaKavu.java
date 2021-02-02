@@ -33,7 +33,7 @@ public final class CalderaKavu extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{G}")));
     }
 
-    public CalderaKavu(final CalderaKavu card) {
+    private CalderaKavu(final CalderaKavu card) {
         super(card);
     }
 

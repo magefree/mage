@@ -40,7 +40,7 @@ public final class AssassinsTrophy extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public AssassinsTrophy(final AssassinsTrophy card) {
+    private AssassinsTrophy(final AssassinsTrophy card) {
         super(card);
     }
 

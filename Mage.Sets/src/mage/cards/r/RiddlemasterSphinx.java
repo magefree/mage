@@ -35,7 +35,7 @@ public final class RiddlemasterSphinx extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RiddlemasterSphinx(final RiddlemasterSphinx card) {
+    private RiddlemasterSphinx(final RiddlemasterSphinx card) {
         super(card);
     }
 

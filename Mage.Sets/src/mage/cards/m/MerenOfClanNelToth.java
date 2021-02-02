@@ -56,7 +56,7 @@ public final class MerenOfClanNelToth extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MerenOfClanNelToth(final MerenOfClanNelToth card) {
+    private MerenOfClanNelToth(final MerenOfClanNelToth card) {
         super(card);
     }
 

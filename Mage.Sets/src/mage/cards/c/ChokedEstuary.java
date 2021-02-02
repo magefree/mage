@@ -40,7 +40,7 @@ public final class ChokedEstuary extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public ChokedEstuary(final ChokedEstuary card) {
+    private ChokedEstuary(final ChokedEstuary card) {
         super(card);
     }
 

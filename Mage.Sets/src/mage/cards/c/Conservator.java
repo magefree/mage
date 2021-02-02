@@ -31,7 +31,7 @@ public final class Conservator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Conservator(final Conservator card) {
+    private Conservator(final Conservator card) {
         super(card);
     }
 

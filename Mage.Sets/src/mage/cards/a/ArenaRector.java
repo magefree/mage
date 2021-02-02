@@ -38,7 +38,7 @@ public final class ArenaRector extends CardImpl {
         ));
     }
 
-    public ArenaRector(final ArenaRector card) {
+    private ArenaRector(final ArenaRector card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class SandstormEidolon extends CardImpl {
                 new ReturnSourceFromGraveyardToHandEffect(), StaticFilters.FILTER_SPELL_A_MULTICOLORED, true, false));
     }
 
-    public SandstormEidolon(final SandstormEidolon card) {
+    private SandstormEidolon(final SandstormEidolon card) {
         super(card);
     }
 

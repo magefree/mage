@@ -30,7 +30,7 @@ public final class JetMedallion extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public JetMedallion(final JetMedallion card) {
+    private JetMedallion(final JetMedallion card) {
         super(card);
     }
 

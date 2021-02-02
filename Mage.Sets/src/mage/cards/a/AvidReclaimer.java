@@ -46,7 +46,7 @@ public final class AvidReclaimer extends CardImpl {
         this.addAbility(BlueManaAbility);
     }
 
-    public AvidReclaimer(final AvidReclaimer card) {
+    private AvidReclaimer(final AvidReclaimer card) {
         super(card);
     }
 

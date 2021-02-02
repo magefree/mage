@@ -42,7 +42,7 @@ public final class KithkinShielddare extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KithkinShielddare(final KithkinShielddare card) {
+    private KithkinShielddare(final KithkinShielddare card) {
         super(card);
     }
 

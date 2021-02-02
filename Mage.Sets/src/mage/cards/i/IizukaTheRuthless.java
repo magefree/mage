@@ -43,7 +43,7 @@ public final class IizukaTheRuthless extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IizukaTheRuthless(final IizukaTheRuthless card) {
+    private IizukaTheRuthless(final IizukaTheRuthless card) {
         super(card);
     }
 

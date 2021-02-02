@@ -56,7 +56,7 @@ public final class RikuOfTwoReflections extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filterPermanent, false, SetTargetPointer.PERMANENT, null));
     }
 
-    public RikuOfTwoReflections(final RikuOfTwoReflections card) {
+    private RikuOfTwoReflections(final RikuOfTwoReflections card) {
         super(card);
     }
 

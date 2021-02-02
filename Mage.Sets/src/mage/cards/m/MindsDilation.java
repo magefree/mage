@@ -38,7 +38,7 @@ public final class MindsDilation extends CardImpl {
                 false), new SpellsCastWatcher());
     }
 
-    public MindsDilation(final MindsDilation card) {
+    private MindsDilation(final MindsDilation card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class StompingGround extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public StompingGround(final StompingGround card) {
+    private StompingGround(final StompingGround card) {
         super(card);
     }
 

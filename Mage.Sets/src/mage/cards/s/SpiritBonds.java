@@ -55,7 +55,7 @@ public final class SpiritBonds extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpiritBonds(final SpiritBonds card) {
+    private SpiritBonds(final SpiritBonds card) {
         super(card);
     }
 

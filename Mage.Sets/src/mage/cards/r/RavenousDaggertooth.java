@@ -29,7 +29,7 @@ public final class RavenousDaggertooth extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RavenousDaggertooth(final RavenousDaggertooth card) {
+    private RavenousDaggertooth(final RavenousDaggertooth card) {
         super(card);
     }
 

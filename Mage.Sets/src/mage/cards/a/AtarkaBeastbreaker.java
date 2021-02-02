@@ -35,7 +35,7 @@ public final class AtarkaBeastbreaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AtarkaBeastbreaker(final AtarkaBeastbreaker card) {
+    private AtarkaBeastbreaker(final AtarkaBeastbreaker card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class Exhaustion extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public Exhaustion(final Exhaustion card) {
+    private Exhaustion(final Exhaustion card) {
         super(card);
     }
 

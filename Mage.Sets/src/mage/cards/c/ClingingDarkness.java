@@ -38,7 +38,7 @@ public final class ClingingDarkness extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-4, -1, Duration.WhileOnBattlefield)));
     }
 
-    public ClingingDarkness(final ClingingDarkness card) {
+    private ClingingDarkness(final ClingingDarkness card) {
         super(card);
     }
 

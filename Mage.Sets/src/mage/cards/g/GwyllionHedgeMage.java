@@ -59,7 +59,7 @@ public final class GwyllionHedgeMage extends CardImpl {
 
     }
 
-    public GwyllionHedgeMage(final GwyllionHedgeMage card) {
+    private GwyllionHedgeMage(final GwyllionHedgeMage card) {
         super(card);
     }
 

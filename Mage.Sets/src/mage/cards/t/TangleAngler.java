@@ -34,7 +34,7 @@ public final class TangleAngler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TangleAngler(final TangleAngler card) {
+    private TangleAngler(final TangleAngler card) {
         super(card);
     }
 

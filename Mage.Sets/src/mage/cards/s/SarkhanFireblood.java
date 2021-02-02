@@ -57,7 +57,7 @@ public final class SarkhanFireblood extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new DragonToken2(), 4), -7));
     }
 
-    public SarkhanFireblood(final SarkhanFireblood card) {
+    private SarkhanFireblood(final SarkhanFireblood card) {
         super(card);
     }
 

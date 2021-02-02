@@ -28,7 +28,7 @@ public final class CinderCloud extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public CinderCloud(final CinderCloud card) {
+    private CinderCloud(final CinderCloud card) {
         super(card);
     }
 

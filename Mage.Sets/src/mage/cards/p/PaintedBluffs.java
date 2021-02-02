@@ -32,7 +32,7 @@ public final class PaintedBluffs extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PaintedBluffs(final PaintedBluffs card) {
+    private PaintedBluffs(final PaintedBluffs card) {
         super(card);
     }
 

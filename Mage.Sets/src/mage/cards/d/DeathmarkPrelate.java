@@ -50,7 +50,7 @@ public final class DeathmarkPrelate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeathmarkPrelate(final DeathmarkPrelate card) {
+    private DeathmarkPrelate(final DeathmarkPrelate card) {
         super(card);
     }
 

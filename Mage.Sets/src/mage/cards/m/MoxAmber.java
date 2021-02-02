@@ -32,7 +32,7 @@ public final class MoxAmber extends CardImpl {
         this.addAbility(new AnyColorPermanentTypesManaAbility(TargetController.YOU, filter));
     }
 
-    public MoxAmber(final MoxAmber card) {
+    private MoxAmber(final MoxAmber card) {
         super(card);
     }
 

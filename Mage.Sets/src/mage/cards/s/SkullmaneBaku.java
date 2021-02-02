@@ -51,7 +51,7 @@ public final class SkullmaneBaku extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkullmaneBaku(final SkullmaneBaku card) {
+    private SkullmaneBaku(final SkullmaneBaku card) {
         super(card);
     }
 

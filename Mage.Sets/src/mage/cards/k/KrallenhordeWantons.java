@@ -38,7 +38,7 @@ public final class KrallenhordeWantons extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public KrallenhordeWantons(final KrallenhordeWantons card) {
+    private KrallenhordeWantons(final KrallenhordeWantons card) {
         super(card);
     }
 

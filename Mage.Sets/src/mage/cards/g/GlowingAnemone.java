@@ -32,7 +32,7 @@ public final class GlowingAnemone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GlowingAnemone(final GlowingAnemone card) {
+    private GlowingAnemone(final GlowingAnemone card) {
         super(card);
     }
 

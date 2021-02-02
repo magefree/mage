@@ -29,7 +29,7 @@ public final class Boil extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public Boil(final Boil card) {
+    private Boil(final Boil card) {
         super(card);
     }
 

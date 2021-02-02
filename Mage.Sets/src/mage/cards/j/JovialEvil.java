@@ -29,7 +29,7 @@ public final class JovialEvil extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public JovialEvil(final JovialEvil card) {
+    private JovialEvil(final JovialEvil card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class MercilessExecutioner extends CardImpl {
 
     }
 
-    public MercilessExecutioner(final MercilessExecutioner card) {
+    private MercilessExecutioner(final MercilessExecutioner card) {
         super(card);
     }
 

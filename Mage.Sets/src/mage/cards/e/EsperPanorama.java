@@ -44,7 +44,7 @@ public final class EsperPanorama extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EsperPanorama(final EsperPanorama card) {
+    private EsperPanorama(final EsperPanorama card) {
         super(card);
     }
 

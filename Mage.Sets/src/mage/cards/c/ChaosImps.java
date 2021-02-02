@@ -43,7 +43,7 @@ public final class ChaosImps extends CardImpl {
         
     }
  
-    public ChaosImps(final ChaosImps card) {
+    private ChaosImps(final ChaosImps card) {
         super(card);
     }
  

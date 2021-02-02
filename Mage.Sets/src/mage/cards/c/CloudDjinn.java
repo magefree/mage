@@ -29,7 +29,7 @@ public final class CloudDjinn extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public CloudDjinn(final CloudDjinn card) {
+    private CloudDjinn(final CloudDjinn card) {
         super(card);
     }
 

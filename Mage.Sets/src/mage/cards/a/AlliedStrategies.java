@@ -26,7 +26,7 @@ public final class AlliedStrategies extends CardImpl {
 
     }
 
-    public AlliedStrategies(final AlliedStrategies card) {
+    private AlliedStrategies(final AlliedStrategies card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class Landslide extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    public Landslide(final Landslide card) {
+    private Landslide(final Landslide card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class IncitedRabble extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{2}")));
     }
 
-    public IncitedRabble(final IncitedRabble card) {
+    private IncitedRabble(final IncitedRabble card) {
         super(card);
     }
 

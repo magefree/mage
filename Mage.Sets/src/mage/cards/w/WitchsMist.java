@@ -38,7 +38,7 @@ public final class WitchsMist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WitchsMist(final WitchsMist card) {
+    private WitchsMist(final WitchsMist card) {
         super(card);
     }
 

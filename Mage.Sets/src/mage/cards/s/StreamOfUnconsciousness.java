@@ -39,7 +39,7 @@ public final class StreamOfUnconsciousness extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter),"If you control a Wizard, draw a card"));
     }
 
-    public StreamOfUnconsciousness(final StreamOfUnconsciousness card) {
+    private StreamOfUnconsciousness(final StreamOfUnconsciousness card) {
         super(card);
     }
 

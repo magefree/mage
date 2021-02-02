@@ -29,7 +29,7 @@ public final class GoblinGlider extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public GoblinGlider(final GoblinGlider card) {
+    private GoblinGlider(final GoblinGlider card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class RiverKelpie extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public RiverKelpie(final RiverKelpie card) {
+    private RiverKelpie(final RiverKelpie card) {
         super(card);
     }
 

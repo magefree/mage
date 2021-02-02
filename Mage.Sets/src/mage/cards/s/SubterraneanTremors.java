@@ -33,7 +33,7 @@ public final class SubterraneanTremors extends CardImpl {
         this.getSpellAbility().addEffect(new SubterraneanTremorsEffect());
     }
 
-    public SubterraneanTremors(final SubterraneanTremors card) {
+    private SubterraneanTremors(final SubterraneanTremors card) {
         super(card);
     }
 

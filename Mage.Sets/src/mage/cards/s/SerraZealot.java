@@ -26,7 +26,7 @@ public final class SerraZealot extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public SerraZealot(final SerraZealot card) {
+    private SerraZealot(final SerraZealot card) {
         super(card);
     }
 

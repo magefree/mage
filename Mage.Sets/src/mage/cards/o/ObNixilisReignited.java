@@ -49,7 +49,7 @@ public final class ObNixilisReignited extends CardImpl {
         this.addAbility(ability3);
     }
 
-    public ObNixilisReignited(final ObNixilisReignited card) {
+    private ObNixilisReignited(final ObNixilisReignited card) {
         super(card);
     }
 

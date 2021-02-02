@@ -32,7 +32,7 @@ public final class MoggWarMarshal extends CardImpl {
         this.addAbility(new EntersBattlefieldOrDiesSourceTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 1), false));
     }
 
-    public MoggWarMarshal(final MoggWarMarshal card) {
+    private MoggWarMarshal(final MoggWarMarshal card) {
         super(card);
     }
 

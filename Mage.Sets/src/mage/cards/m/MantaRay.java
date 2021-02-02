@@ -49,7 +49,7 @@ public final class MantaRay extends CardImpl {
 
     }
 
-    public MantaRay(final MantaRay card) {
+    private MantaRay(final MantaRay card) {
         super(card);
     }
 

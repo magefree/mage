@@ -48,7 +48,7 @@ public final class BoggartLoggers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BoggartLoggers(final BoggartLoggers card) {
+    private BoggartLoggers(final BoggartLoggers card) {
         super(card);
     }
 

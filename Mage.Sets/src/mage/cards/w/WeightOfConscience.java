@@ -50,7 +50,7 @@ public final class WeightOfConscience extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WeightOfConscienceEffect(), new TapTargetCost(new WeightOfConscienceTarget())));
     }
 
-    public WeightOfConscience(final WeightOfConscience card) {
+    private WeightOfConscience(final WeightOfConscience card) {
         super(card);
     }
 

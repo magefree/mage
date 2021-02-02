@@ -30,7 +30,7 @@ public final class Inquisition extends CardImpl {
         this.getSpellAbility().addEffect(new InquisitionEffect());
     }
 
-    public Inquisition(final Inquisition card) {
+    private Inquisition(final Inquisition card) {
         super(card);
     }
 

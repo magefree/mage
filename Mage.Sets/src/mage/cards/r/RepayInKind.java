@@ -25,7 +25,7 @@ public final class RepayInKind extends CardImpl {
         this.getSpellAbility().addEffect(new RepayInKindEffect());
     }
 
-    public RepayInKind(final RepayInKind card) {
+    private RepayInKind(final RepayInKind card) {
         super(card);
     }
 

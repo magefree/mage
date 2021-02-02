@@ -43,7 +43,7 @@ public final class Rootgrapple extends CardImpl {
                 "If you control a Treefolk, draw a card"));
     }
 
-    public Rootgrapple(final Rootgrapple card) {
+    private Rootgrapple(final Rootgrapple card) {
         super(card);
     }
 

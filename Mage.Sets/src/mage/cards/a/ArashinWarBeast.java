@@ -36,7 +36,7 @@ public final class ArashinWarBeast extends CardImpl {
 
     }
 
-    public ArashinWarBeast(final ArashinWarBeast card) {
+    private ArashinWarBeast(final ArashinWarBeast card) {
         super(card);
     }
 

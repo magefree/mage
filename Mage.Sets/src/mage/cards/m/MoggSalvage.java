@@ -43,7 +43,7 @@ public final class MoggSalvage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent());
     }
 
-    public MoggSalvage(final MoggSalvage card) {
+    private MoggSalvage(final MoggSalvage card) {
         super(card);
     }
 

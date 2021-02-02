@@ -39,7 +39,7 @@ public final class VassalsDuty extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VassalsDuty(final VassalsDuty card) {
+    private VassalsDuty(final VassalsDuty card) {
         super(card);
     }
 

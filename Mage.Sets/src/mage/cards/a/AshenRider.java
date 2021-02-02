@@ -34,7 +34,7 @@ public final class AshenRider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AshenRider(final AshenRider card) {
+    private AshenRider(final AshenRider card) {
         super(card);
     }
 

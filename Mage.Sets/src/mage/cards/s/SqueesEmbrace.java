@@ -43,7 +43,7 @@ public final class SqueesEmbrace extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted creature"));
     }
 
-    public SqueesEmbrace(final SqueesEmbrace card) {
+    private SqueesEmbrace(final SqueesEmbrace card) {
         super(card);
     }
 

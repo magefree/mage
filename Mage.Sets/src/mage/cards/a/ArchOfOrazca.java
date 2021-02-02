@@ -40,7 +40,7 @@ public final class ArchOfOrazca extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArchOfOrazca(final ArchOfOrazca card) {
+    private ArchOfOrazca(final ArchOfOrazca card) {
         super(card);
     }
 

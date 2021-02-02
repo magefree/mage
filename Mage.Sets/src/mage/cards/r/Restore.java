@@ -33,7 +33,7 @@ public final class Restore extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public Restore(final Restore card) {
+    private Restore(final Restore card) {
         super(card);
     }
 

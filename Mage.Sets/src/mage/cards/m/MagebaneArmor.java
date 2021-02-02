@@ -38,7 +38,7 @@ public final class MagebaneArmor extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public MagebaneArmor(final MagebaneArmor card) {
+    private MagebaneArmor(final MagebaneArmor card) {
         super(card);
     }
 

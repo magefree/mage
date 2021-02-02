@@ -40,7 +40,7 @@ public final class OversoulOfDusk extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public OversoulOfDusk(final OversoulOfDusk card) {
+    private OversoulOfDusk(final OversoulOfDusk card) {
         super(card);
     }
 

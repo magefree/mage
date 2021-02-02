@@ -22,7 +22,7 @@ public final class LoomingAltisaur extends CardImpl {
         this.toughness = new MageInt(7);
     }
 
-    public LoomingAltisaur(final LoomingAltisaur card) {
+    private LoomingAltisaur(final LoomingAltisaur card) {
         super(card);
     }
 

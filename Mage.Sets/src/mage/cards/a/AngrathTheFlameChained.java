@@ -61,7 +61,7 @@ public final class AngrathTheFlameChained extends CardImpl {
 
     }
 
-    public AngrathTheFlameChained(final AngrathTheFlameChained card) {
+    private AngrathTheFlameChained(final AngrathTheFlameChained card) {
         super(card);
     }
 

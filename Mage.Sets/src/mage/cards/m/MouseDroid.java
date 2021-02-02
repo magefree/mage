@@ -30,7 +30,7 @@ public final class MouseDroid extends CardImpl {
         this.addAbility(new RepairAbility(3));
     }
 
-    public MouseDroid(final MouseDroid card) {
+    private MouseDroid(final MouseDroid card) {
         super(card);
     }
 

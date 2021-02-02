@@ -31,7 +31,7 @@ public final class MindFuneral extends CardImpl {
 
     }
 
-    public MindFuneral(final MindFuneral card) {
+    private MindFuneral(final MindFuneral card) {
         super(card);
     }
 

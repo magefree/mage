@@ -31,7 +31,7 @@ public final class PhobianPhantasm extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{B}")));
     }
 
-    public PhobianPhantasm(final PhobianPhantasm card) {
+    private PhobianPhantasm(final PhobianPhantasm card) {
         super(card);
     }
 

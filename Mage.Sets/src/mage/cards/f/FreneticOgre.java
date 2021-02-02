@@ -34,7 +34,7 @@ public final class FreneticOgre extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FreneticOgre(final FreneticOgre card) {
+    private FreneticOgre(final FreneticOgre card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class Ornitharch extends CardImpl {
                 "When {this} enters the battlefield, if its tribute wasn't paid, create two 1/1 white Bird creature tokens with flying."));
     }
 
-    public Ornitharch(final Ornitharch card) {
+    private Ornitharch(final Ornitharch card) {
         super(card);
     }
 

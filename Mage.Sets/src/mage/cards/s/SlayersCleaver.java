@@ -32,7 +32,7 @@ public final class SlayersCleaver extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{4}")));
     }
 
-    public SlayersCleaver(final SlayersCleaver card) {
+    private SlayersCleaver(final SlayersCleaver card) {
         super(card);
     }
 

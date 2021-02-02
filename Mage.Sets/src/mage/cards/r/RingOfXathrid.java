@@ -46,7 +46,7 @@ public final class RingOfXathrid extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
-    public RingOfXathrid(final RingOfXathrid card) {
+    private RingOfXathrid(final RingOfXathrid card) {
         super(card);
     }
 

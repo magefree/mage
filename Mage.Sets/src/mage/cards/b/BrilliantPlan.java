@@ -21,7 +21,7 @@ public final class BrilliantPlan extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
     }
 
-    public BrilliantPlan(final BrilliantPlan card) {
+    private BrilliantPlan(final BrilliantPlan card) {
         super(card);
     }
 

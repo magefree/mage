@@ -34,7 +34,7 @@ public final class SnappingSailback extends CardImpl {
                         .setText("put a +1/+1 counter on it"), false, true));
     }
 
-    public SnappingSailback(final SnappingSailback card) {
+    private SnappingSailback(final SnappingSailback card) {
         super(card);
     }
 

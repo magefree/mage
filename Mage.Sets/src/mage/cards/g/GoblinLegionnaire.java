@@ -42,7 +42,7 @@ public final class GoblinLegionnaire extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public GoblinLegionnaire(final GoblinLegionnaire card) {
+    private GoblinLegionnaire(final GoblinLegionnaire card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class RimeboundDead extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{S}")));
     }
 
-    public RimeboundDead(final RimeboundDead card) {
+    private RimeboundDead(final RimeboundDead card) {
         super(card);
     }
 

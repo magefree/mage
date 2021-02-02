@@ -50,7 +50,7 @@ public final class GrotagSiegeRunner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GrotagSiegeRunner(final GrotagSiegeRunner card) {
+    private GrotagSiegeRunner(final GrotagSiegeRunner card) {
         super(card);
     }
 

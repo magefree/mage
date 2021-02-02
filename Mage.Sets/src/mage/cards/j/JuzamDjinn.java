@@ -28,7 +28,7 @@ public final class JuzamDjinn extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), TargetController.YOU, false));
     }
 
-    public JuzamDjinn(final JuzamDjinn card) {
+    private JuzamDjinn(final JuzamDjinn card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class PainfulQuandary extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new PainfulQuandryEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.PLAYER));
     }
 
-    public PainfulQuandary(final PainfulQuandary card) {
+    private PainfulQuandary(final PainfulQuandary card) {
         super(card);
     }
 

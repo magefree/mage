@@ -49,7 +49,7 @@ public final class ShieldOfKaldra extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(4)));
     }
 
-    public ShieldOfKaldra(final ShieldOfKaldra card) {
+    private ShieldOfKaldra(final ShieldOfKaldra card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class KabutoMoth extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KabutoMoth(final KabutoMoth card) {
+    private KabutoMoth(final KabutoMoth card) {
         super(card);
     }
 

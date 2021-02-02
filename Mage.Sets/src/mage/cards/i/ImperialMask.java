@@ -45,7 +45,7 @@ public final class ImperialMask extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(HexproofAbility.getInstance())));
     }
 
-    public ImperialMask(final ImperialMask card) {
+    private ImperialMask(final ImperialMask card) {
         super(card);
     }
 

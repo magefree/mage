@@ -24,7 +24,7 @@ public final class ServoExhibition extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public ServoExhibition(final ServoExhibition card) {
+    private ServoExhibition(final ServoExhibition card) {
         super(card);
     }
 

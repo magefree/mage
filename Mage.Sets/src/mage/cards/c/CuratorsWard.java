@@ -50,7 +50,7 @@ public final class CuratorsWard extends CardImpl {
         this.addAbility(new CuratorsWardTriggeredAbility());
     }
 
-    public CuratorsWard(final CuratorsWard card) {
+    private CuratorsWard(final CuratorsWard card) {
         super(card);
     }
 

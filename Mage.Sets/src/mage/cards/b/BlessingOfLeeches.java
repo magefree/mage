@@ -44,7 +44,7 @@ public final class BlessingOfLeeches extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA),new GenericManaCost(0)));
     }
 
-    public BlessingOfLeeches(final BlessingOfLeeches card) {
+    private BlessingOfLeeches(final BlessingOfLeeches card) {
         super(card);
     }
 

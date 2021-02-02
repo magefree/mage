@@ -25,7 +25,7 @@ public final class BoggartBrute extends CardImpl {
         this.addAbility(new MenaceAbility());
     }
 
-    public BoggartBrute(final BoggartBrute card) {
+    private BoggartBrute(final BoggartBrute card) {
         super(card);
     }
 

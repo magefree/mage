@@ -35,7 +35,7 @@ public final class WarrenScourgeElf extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public WarrenScourgeElf(final WarrenScourgeElf card) {
+    private WarrenScourgeElf(final WarrenScourgeElf card) {
         super(card);
     }
 

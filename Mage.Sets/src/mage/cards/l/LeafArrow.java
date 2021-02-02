@@ -31,7 +31,7 @@ public final class LeafArrow extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
     }
 
-    public LeafArrow(final LeafArrow card) {
+    private LeafArrow(final LeafArrow card) {
         super(card);
     }
 

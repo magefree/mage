@@ -38,7 +38,7 @@ public final class ScreechingGriffin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScreechingGriffin(final ScreechingGriffin card) {
+    private ScreechingGriffin(final ScreechingGriffin card) {
         super(card);
     }
 

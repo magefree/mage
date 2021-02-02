@@ -48,7 +48,7 @@ public final class RiverDelta extends CardImpl {
         this.addAbility(ability4);
     }
 
-    public RiverDelta(final RiverDelta card) {
+    private RiverDelta(final RiverDelta card) {
         super(card);
     }
 

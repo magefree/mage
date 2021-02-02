@@ -40,7 +40,7 @@ public final class BoonweaverGiant extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoonweaverGiantEffect(), true));
     }
 
-    public BoonweaverGiant(final BoonweaverGiant card) {
+    private BoonweaverGiant(final BoonweaverGiant card) {
         super(card);
     }
 

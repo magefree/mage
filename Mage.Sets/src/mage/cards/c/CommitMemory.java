@@ -51,7 +51,7 @@ public final class CommitMemory extends SplitCard {
         getRightHalfCard().getSpellAbility().addEffect(effect);
     }
 
-    public CommitMemory(final CommitMemory card) {
+    private CommitMemory(final CommitMemory card) {
         super(card);
     }
 

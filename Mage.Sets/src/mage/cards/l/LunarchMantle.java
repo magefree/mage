@@ -53,7 +53,7 @@ public final class LunarchMantle extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public LunarchMantle(final LunarchMantle card) {
+    private LunarchMantle(final LunarchMantle card) {
         super(card);
     }
 

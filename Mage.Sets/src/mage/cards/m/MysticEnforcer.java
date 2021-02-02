@@ -47,7 +47,7 @@ public final class MysticEnforcer extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public MysticEnforcer(final MysticEnforcer card) {
+    private MysticEnforcer(final MysticEnforcer card) {
         super(card);
     }
 

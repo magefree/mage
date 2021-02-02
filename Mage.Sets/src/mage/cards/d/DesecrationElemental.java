@@ -31,7 +31,7 @@ public final class DesecrationElemental extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, ""), false));
     }
 
-    public DesecrationElemental(final DesecrationElemental card) {
+    private DesecrationElemental(final DesecrationElemental card) {
         super(card);
     }
 

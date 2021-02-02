@@ -49,7 +49,7 @@ public final class BramblewoodParagon extends CardImpl {
 
     }
 
-    public BramblewoodParagon(final BramblewoodParagon card) {
+    private BramblewoodParagon(final BramblewoodParagon card) {
         super(card);
     }
 

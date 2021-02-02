@@ -43,7 +43,7 @@ public final class CreepingTarPit extends CardImpl {
                 "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{U}{B}")));
     }
 
-    public CreepingTarPit(final CreepingTarPit card) {
+    private CreepingTarPit(final CreepingTarPit card) {
         super(card);
     }
 

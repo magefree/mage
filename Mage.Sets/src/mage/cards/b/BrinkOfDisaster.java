@@ -46,7 +46,7 @@ public final class BrinkOfDisaster extends CardImpl {
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DestroyAttachedToEffect("it"), "enchanted permanent"));
     }
 
-    public BrinkOfDisaster(final BrinkOfDisaster card) {
+    private BrinkOfDisaster(final BrinkOfDisaster card) {
         super(card);
     }
 

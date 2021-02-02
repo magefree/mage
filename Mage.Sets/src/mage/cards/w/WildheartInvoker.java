@@ -38,7 +38,7 @@ public final class WildheartInvoker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WildheartInvoker(final WildheartInvoker card) {
+    private WildheartInvoker(final WildheartInvoker card) {
         super(card);
     }
 

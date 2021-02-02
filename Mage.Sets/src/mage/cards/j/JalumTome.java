@@ -27,7 +27,7 @@ public final class JalumTome extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JalumTome(final JalumTome card) {
+    private JalumTome(final JalumTome card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class WolfbriarElemental extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WolfToken(), MultikickerCount.instance)));
     }
 
-    public WolfbriarElemental(final WolfbriarElemental card) {
+    private WolfbriarElemental(final WolfbriarElemental card) {
         super(card);
     }
 

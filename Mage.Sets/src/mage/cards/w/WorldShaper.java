@@ -39,7 +39,7 @@ public final class WorldShaper extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new WorldShaperEffect(), false));
     }
 
-    public WorldShaper(final WorldShaper card) {
+    private WorldShaper(final WorldShaper card) {
         super(card);
     }
 

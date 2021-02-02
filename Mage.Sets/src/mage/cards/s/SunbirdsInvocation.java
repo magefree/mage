@@ -42,7 +42,7 @@ public final class SunbirdsInvocation extends CardImpl {
         this.addAbility(new SunbirdsInvocationTriggeredAbility());
     }
 
-    public SunbirdsInvocation(final SunbirdsInvocation card) {
+    private SunbirdsInvocation(final SunbirdsInvocation card) {
         super(card);
     }
 

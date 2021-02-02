@@ -31,7 +31,7 @@ public final class KumanosPupils extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DealtDamageToCreatureBySourceDies(this, Duration.WhileOnBattlefield)), new DamagedByWatcher(false));
     }
 
-    public KumanosPupils(final KumanosPupils card) {
+    private KumanosPupils(final KumanosPupils card) {
         super(card);
     }
 

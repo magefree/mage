@@ -34,7 +34,7 @@ public final class ShakeTheFoundations extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public ShakeTheFoundations(final ShakeTheFoundations card) {
+    private ShakeTheFoundations(final ShakeTheFoundations card) {
         super(card);
     }
 

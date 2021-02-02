@@ -22,7 +22,7 @@ public final class PrakhataClubSecurity extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public PrakhataClubSecurity(final PrakhataClubSecurity card) {
+    private PrakhataClubSecurity(final PrakhataClubSecurity card) {
         super(card);
     }
 

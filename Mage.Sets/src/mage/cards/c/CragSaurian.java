@@ -38,7 +38,7 @@ public final class CragSaurian extends CardImpl {
         this.addAbility(new CragSaurianTriggeredAbility());
     }
 
-    public CragSaurian(final CragSaurian card) {
+    private CragSaurian(final CragSaurian card) {
         super(card);
     }
 

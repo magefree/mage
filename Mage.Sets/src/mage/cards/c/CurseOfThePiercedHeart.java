@@ -44,7 +44,7 @@ public final class CurseOfThePiercedHeart extends CardImpl {
         this.addAbility(new CurseOfThePiercedHeartAbility());
     }
 
-    public CurseOfThePiercedHeart(final CurseOfThePiercedHeart card) {
+    private CurseOfThePiercedHeart(final CurseOfThePiercedHeart card) {
         super(card);
     }
 

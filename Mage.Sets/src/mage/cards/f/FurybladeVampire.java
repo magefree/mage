@@ -38,7 +38,7 @@ public final class FurybladeVampire extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FurybladeVampire(final FurybladeVampire card) {
+    private FurybladeVampire(final FurybladeVampire card) {
         super(card);
     }
 

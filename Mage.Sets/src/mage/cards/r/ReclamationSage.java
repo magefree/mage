@@ -34,7 +34,7 @@ public final class ReclamationSage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ReclamationSage(final ReclamationSage card) {
+    private ReclamationSage(final ReclamationSage card) {
         super(card);
     }
 

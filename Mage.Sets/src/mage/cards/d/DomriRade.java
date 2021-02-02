@@ -60,7 +60,7 @@ public final class DomriRade extends CardImpl {
 
     }
 
-    public DomriRade(final DomriRade card) {
+    private DomriRade(final DomriRade card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class CollectiveRestraint extends CardImpl {
 
     }
 
-    public CollectiveRestraint(final CollectiveRestraint card) {
+    private CollectiveRestraint(final CollectiveRestraint card) {
         super(card);
     }
 

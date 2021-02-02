@@ -32,7 +32,7 @@ public final class GlitteringWish extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public GlitteringWish(final GlitteringWish card) {
+    private GlitteringWish(final GlitteringWish card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class TemporalSpring extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
-    public TemporalSpring(final TemporalSpring card) {
+    private TemporalSpring(final TemporalSpring card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class CanopySpider extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public CanopySpider(final CanopySpider card) {
+    private CanopySpider(final CanopySpider card) {
         super(card);
     }
 

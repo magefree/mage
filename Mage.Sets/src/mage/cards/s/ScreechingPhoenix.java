@@ -37,7 +37,7 @@ public final class ScreechingPhoenix extends CardImpl {
         ));
     }
 
-    public ScreechingPhoenix(final ScreechingPhoenix card) {
+    private ScreechingPhoenix(final ScreechingPhoenix card) {
         super(card);
     }
 

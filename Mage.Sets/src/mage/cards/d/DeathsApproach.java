@@ -50,7 +50,7 @@ public final class DeathsApproach extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeathsApproach(final DeathsApproach card) {
+    private DeathsApproach(final DeathsApproach card) {
         super(card);
     }
 

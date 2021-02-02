@@ -28,7 +28,7 @@ public final class UnworthyDead extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));
     }
 
-    public UnworthyDead(final UnworthyDead card) {
+    private UnworthyDead(final UnworthyDead card) {
         super(card);
     }
 

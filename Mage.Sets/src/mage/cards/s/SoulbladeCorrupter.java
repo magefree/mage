@@ -45,7 +45,7 @@ public final class SoulbladeCorrupter extends CardImpl {
         this.addAbility(new SoulbladeCorrupterTriggeredAbility());
     }
 
-    public SoulbladeCorrupter(final SoulbladeCorrupter card) {
+    private SoulbladeCorrupter(final SoulbladeCorrupter card) {
         super(card);
     }
 

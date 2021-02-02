@@ -45,7 +45,7 @@ public final class GoblinArchaeologist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinArchaeologist(final GoblinArchaeologist card) {
+    private GoblinArchaeologist(final GoblinArchaeologist card) {
         super(card);
     }
 

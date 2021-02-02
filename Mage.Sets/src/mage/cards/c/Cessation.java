@@ -38,7 +38,7 @@ public final class Cessation extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public Cessation(final Cessation card) {
+    private Cessation(final Cessation card) {
         super(card);
     }
 

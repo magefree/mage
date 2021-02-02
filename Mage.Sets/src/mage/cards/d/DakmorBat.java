@@ -26,7 +26,7 @@ public final class DakmorBat extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public DakmorBat(final DakmorBat card) {
+    private DakmorBat(final DakmorBat card) {
         super(card);
     }
 

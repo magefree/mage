@@ -44,7 +44,7 @@ public final class CurseOfEchoes extends CardImpl {
         this.addAbility(new CurseOfEchoesCopyTriggeredAbility());
     }
 
-    public CurseOfEchoes(final CurseOfEchoes card) {
+    private CurseOfEchoes(final CurseOfEchoes card) {
         super(card);
     }
 

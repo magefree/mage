@@ -29,7 +29,7 @@ public final class HaunterOfNightveil extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostOpponentsEffect(-1,0, Duration.WhileOnBattlefield)));
     }
 
-    public HaunterOfNightveil(final HaunterOfNightveil card) {
+    private HaunterOfNightveil(final HaunterOfNightveil card) {
         super(card);
     }
 

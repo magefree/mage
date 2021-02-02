@@ -26,7 +26,7 @@ public final class DarkestHour extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DarkestHourEffect()));
     }
 
-    public DarkestHour(final DarkestHour card) {
+    private DarkestHour(final DarkestHour card) {
         super(card);
     }
 

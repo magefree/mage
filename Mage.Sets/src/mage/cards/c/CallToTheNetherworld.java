@@ -35,7 +35,7 @@ public final class CallToTheNetherworld extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{0}")));
     }
 
-    public CallToTheNetherworld(final CallToTheNetherworld card) {
+    private CallToTheNetherworld(final CallToTheNetherworld card) {
         super(card);
     }
 

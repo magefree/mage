@@ -28,7 +28,7 @@ public final class WeldingSparks extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WeldingSparks(final WeldingSparks card) {
+    private WeldingSparks(final WeldingSparks card) {
         super(card);
     }
 

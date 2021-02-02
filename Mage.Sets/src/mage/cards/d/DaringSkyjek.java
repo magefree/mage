@@ -30,7 +30,7 @@ public final class DaringSkyjek extends CardImpl {
         this.addAbility(new BattalionAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn)));
     }
 
-    public DaringSkyjek(final DaringSkyjek card) {
+    private DaringSkyjek(final DaringSkyjek card) {
         super(card);
     }
 

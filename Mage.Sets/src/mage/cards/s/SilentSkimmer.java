@@ -34,7 +34,7 @@ public final class SilentSkimmer extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new LoseLifeDefendingPlayerEffect(2, true), false));
     }
 
-    public SilentSkimmer(final SilentSkimmer card) {
+    private SilentSkimmer(final SilentSkimmer card) {
         super(card);
     }
 

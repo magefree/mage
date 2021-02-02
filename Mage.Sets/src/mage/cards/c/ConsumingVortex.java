@@ -28,7 +28,7 @@ public final class ConsumingVortex extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{3}{U}"));
     }
 
-    public ConsumingVortex(final ConsumingVortex card) {
+    private ConsumingVortex(final ConsumingVortex card) {
         super(card);
     }
 

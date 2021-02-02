@@ -45,7 +45,7 @@ public final class SkilledAnimator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkilledAnimator(final SkilledAnimator card) {
+    private SkilledAnimator(final SkilledAnimator card) {
         super(card);
     }
 

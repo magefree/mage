@@ -33,7 +33,7 @@ public final class KarplusanWolverine extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KarplusanWolverine(final KarplusanWolverine card) {
+    private KarplusanWolverine(final KarplusanWolverine card) {
         super(card);
     }
 

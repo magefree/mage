@@ -29,7 +29,7 @@ public final class DemonicDread extends CardImpl {
 
     }
 
-    public DemonicDread(final DemonicDread card) {
+    private DemonicDread(final DemonicDread card) {
         super(card);
     }
 

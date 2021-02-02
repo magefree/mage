@@ -31,7 +31,7 @@ public final class BeastmasterAscension extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BeastmasterAscensionEffect()));
     }
 
-    public BeastmasterAscension(final BeastmasterAscension card) {
+    private BeastmasterAscension(final BeastmasterAscension card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class AnointerOfChampions extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AnointerOfChampions(final AnointerOfChampions card) {
+    private AnointerOfChampions(final AnointerOfChampions card) {
         super(card);
     }
 

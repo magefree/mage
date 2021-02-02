@@ -31,7 +31,7 @@ public final class ScentOfNightshade extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ScentOfNightshade(final ScentOfNightshade card) {
+    private ScentOfNightshade(final ScentOfNightshade card) {
         super(card);
     }
 

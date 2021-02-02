@@ -52,7 +52,7 @@ public final class FiresongAndSunspeaker extends CardImpl {
         this.addAbility(new FiresongAndSunspeakerTriggeredAbility());
     }
 
-    public FiresongAndSunspeaker(final FiresongAndSunspeaker card) {
+    private FiresongAndSunspeaker(final FiresongAndSunspeaker card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class PureSimple extends SplitCard {
         getRightHalfCard().getSpellAbility().addEffect(new DestroyAllEffect(filterDestroy));
     }
 
-    public PureSimple(final PureSimple card) {
+    private PureSimple(final PureSimple card) {
         super(card);
     }
 

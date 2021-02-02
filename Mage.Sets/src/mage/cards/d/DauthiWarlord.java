@@ -45,7 +45,7 @@ public final class DauthiWarlord extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
     }
 
-    public DauthiWarlord(final DauthiWarlord card) {
+    private DauthiWarlord(final DauthiWarlord card) {
         super(card);
     }
 

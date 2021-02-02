@@ -61,7 +61,7 @@ public final class Mirrorpool extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Mirrorpool(final Mirrorpool card) {
+    private Mirrorpool(final Mirrorpool card) {
         super(card);
     }
 

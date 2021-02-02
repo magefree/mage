@@ -39,7 +39,7 @@ public final class ForceReflex extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public ForceReflex(final ForceReflex card) {
+    private ForceReflex(final ForceReflex card) {
         super(card);
     }
 

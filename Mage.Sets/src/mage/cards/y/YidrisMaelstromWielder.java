@@ -37,7 +37,7 @@ public final class YidrisMaelstromWielder extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new YidrisMaelstromWielderGainCascadeEffect(), false));
     }
 
-    public YidrisMaelstromWielder(final YidrisMaelstromWielder card) {
+    private YidrisMaelstromWielder(final YidrisMaelstromWielder card) {
         super(card);
     }
 

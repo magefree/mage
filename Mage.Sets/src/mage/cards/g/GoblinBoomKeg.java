@@ -30,7 +30,7 @@ public final class GoblinBoomKeg extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinBoomKeg(final GoblinBoomKeg card) {
+    private GoblinBoomKeg(final GoblinBoomKeg card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class XathridNecromancer extends CardImpl {
 
     }
 
-    public XathridNecromancer(final XathridNecromancer card) {
+    private XathridNecromancer(final XathridNecromancer card) {
         super(card);
     }
 

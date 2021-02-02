@@ -28,7 +28,7 @@ public final class KnightOfTheTusk extends CardImpl {
 
     }
 
-    public KnightOfTheTusk(final KnightOfTheTusk card) {
+    private KnightOfTheTusk(final KnightOfTheTusk card) {
         super(card);
     }
 

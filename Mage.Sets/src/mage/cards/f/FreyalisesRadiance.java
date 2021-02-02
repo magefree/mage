@@ -37,7 +37,7 @@ public final class FreyalisesRadiance extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
     }
 
-    public FreyalisesRadiance(final FreyalisesRadiance card) {
+    private FreyalisesRadiance(final FreyalisesRadiance card) {
         super(card);
     }
 

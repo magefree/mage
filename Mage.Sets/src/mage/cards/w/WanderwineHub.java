@@ -36,7 +36,7 @@ public final class WanderwineHub extends CardImpl {
 
     }
 
-    public WanderwineHub(final WanderwineHub card) {
+    private WanderwineHub(final WanderwineHub card) {
         super(card);
     }
 

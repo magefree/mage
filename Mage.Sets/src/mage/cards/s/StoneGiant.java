@@ -42,7 +42,7 @@ public final class StoneGiant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StoneGiant(final StoneGiant card) {
+    private StoneGiant(final StoneGiant card) {
         super(card);
     }
 

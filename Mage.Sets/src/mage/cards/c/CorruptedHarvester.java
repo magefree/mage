@@ -33,7 +33,7 @@ public final class CorruptedHarvester extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CorruptedHarvester(final CorruptedHarvester card) {
+    private CorruptedHarvester(final CorruptedHarvester card) {
         super(card);
     }
 

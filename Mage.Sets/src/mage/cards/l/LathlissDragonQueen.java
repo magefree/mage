@@ -64,7 +64,7 @@ public final class LathlissDragonQueen extends CardImpl {
         ));
     }
 
-    public LathlissDragonQueen(final LathlissDragonQueen card) {
+    private LathlissDragonQueen(final LathlissDragonQueen card) {
         super(card);
     }
 

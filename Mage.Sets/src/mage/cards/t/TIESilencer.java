@@ -41,7 +41,7 @@ public final class TIESilencer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TIESilencer(final TIESilencer card) {
+    private TIESilencer(final TIESilencer card) {
         super(card);
     }
 

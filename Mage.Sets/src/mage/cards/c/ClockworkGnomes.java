@@ -41,7 +41,7 @@ public final class ClockworkGnomes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ClockworkGnomes(final ClockworkGnomes card) {
+    private ClockworkGnomes(final ClockworkGnomes card) {
         super(card);
     }
 

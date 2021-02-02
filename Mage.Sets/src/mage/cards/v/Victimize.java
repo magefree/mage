@@ -32,7 +32,7 @@ public final class Victimize extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(2, new FilterCreatureCard("creature cards in your graveyard")));
     }
 
-    public Victimize(final Victimize card) {
+    private Victimize(final Victimize card) {
         super(card);
     }
 

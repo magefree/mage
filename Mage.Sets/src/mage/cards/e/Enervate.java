@@ -39,7 +39,7 @@ public final class Enervate extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
     }
 
-    public Enervate(final Enervate card) {
+    private Enervate(final Enervate card) {
         super(card);
     }
 

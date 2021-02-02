@@ -31,7 +31,7 @@ public final class SwayOfIllusion extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public SwayOfIllusion(final SwayOfIllusion card) {
+    private SwayOfIllusion(final SwayOfIllusion card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class MagistratesVeto extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAllEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public MagistratesVeto(final MagistratesVeto card) {
+    private MagistratesVeto(final MagistratesVeto card) {
         super(card);
     }
 

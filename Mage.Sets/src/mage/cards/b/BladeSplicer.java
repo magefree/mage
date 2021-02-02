@@ -42,7 +42,7 @@ public final class BladeSplicer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public BladeSplicer(final BladeSplicer card) {
+    private BladeSplicer(final BladeSplicer card) {
         super(card);
     }
 

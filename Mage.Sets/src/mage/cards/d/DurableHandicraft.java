@@ -43,7 +43,7 @@ public final class DurableHandicraft extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DurableHandicraft(final DurableHandicraft card) {
+    private DurableHandicraft(final DurableHandicraft card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class SamiteSanctuary extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SamiteSanctuary(final SamiteSanctuary card) {
+    private SamiteSanctuary(final SamiteSanctuary card) {
         super(card);
     }
 

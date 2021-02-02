@@ -52,7 +52,7 @@ public final class AkroanConscriptor extends CardImpl {
 
     }
 
-    public AkroanConscriptor(final AkroanConscriptor card) {
+    private AkroanConscriptor(final AkroanConscriptor card) {
         super(card);
     }
 

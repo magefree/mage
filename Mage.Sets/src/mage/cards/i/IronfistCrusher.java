@@ -33,7 +33,7 @@ public final class IronfistCrusher extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{W}")));
     }
 
-    public IronfistCrusher(final IronfistCrusher card) {
+    private IronfistCrusher(final IronfistCrusher card) {
         super(card);
     }
 

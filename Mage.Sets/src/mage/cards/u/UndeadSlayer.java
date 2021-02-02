@@ -46,7 +46,7 @@ public final class UndeadSlayer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UndeadSlayer(final UndeadSlayer card) {
+    private UndeadSlayer(final UndeadSlayer card) {
         super(card);
     }
 

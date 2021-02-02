@@ -51,7 +51,7 @@ public final class InfiltratorsMagemark extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InfiltratorsMagemark(final InfiltratorsMagemark card) {
+    private InfiltratorsMagemark(final InfiltratorsMagemark card) {
         super(card);
     }
 

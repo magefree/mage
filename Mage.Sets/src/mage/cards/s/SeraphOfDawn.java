@@ -27,7 +27,7 @@ public final class SeraphOfDawn extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public SeraphOfDawn(final SeraphOfDawn card) {
+    private SeraphOfDawn(final SeraphOfDawn card) {
         super(card);
     }
 

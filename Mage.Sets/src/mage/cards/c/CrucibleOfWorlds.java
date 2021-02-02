@@ -21,7 +21,7 @@ public final class CrucibleOfWorlds extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayLandsFromGraveyardControllerEffect()));
     }
 
-    public CrucibleOfWorlds(final CrucibleOfWorlds card) {
+    private CrucibleOfWorlds(final CrucibleOfWorlds card) {
         super(card);
     }
 

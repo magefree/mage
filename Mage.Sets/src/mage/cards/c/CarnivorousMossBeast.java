@@ -32,7 +32,7 @@ public final class CarnivorousMossBeast extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{5}{G}{G}")));
     }
 
-    public CarnivorousMossBeast(final CarnivorousMossBeast card) {
+    private CarnivorousMossBeast(final CarnivorousMossBeast card) {
         super(card);
     }
 

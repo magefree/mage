@@ -44,7 +44,7 @@ public final class AshenGhoul extends CardImpl {
         ));
     }
 
-    public AshenGhoul(final AshenGhoul card) {
+    private AshenGhoul(final AshenGhoul card) {
         super(card);
     }
 

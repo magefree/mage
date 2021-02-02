@@ -21,7 +21,7 @@ public final class TasseledDromedary extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public TasseledDromedary(final TasseledDromedary card) {
+    private TasseledDromedary(final TasseledDromedary card) {
         super(card);
     }
 

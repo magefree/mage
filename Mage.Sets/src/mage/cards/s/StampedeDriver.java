@@ -42,7 +42,7 @@ public final class StampedeDriver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StampedeDriver(final StampedeDriver card) {
+    private StampedeDriver(final StampedeDriver card) {
         super(card);
     }
 

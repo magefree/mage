@@ -36,7 +36,7 @@ public final class PyrrhicRevival extends CardImpl {
 
     }
 
-    public PyrrhicRevival(final PyrrhicRevival card) {
+    private PyrrhicRevival(final PyrrhicRevival card) {
         super(card);
     }
 

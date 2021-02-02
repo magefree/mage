@@ -44,7 +44,7 @@ public final class WaywardDisciple extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WaywardDisciple(final WaywardDisciple card) {
+    private WaywardDisciple(final WaywardDisciple card) {
         super(card);
     }
 

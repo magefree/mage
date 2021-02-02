@@ -32,7 +32,7 @@ public final class ExtinguishAllHope extends CardImpl {
         
     }
 
-    public ExtinguishAllHope(final ExtinguishAllHope card) {
+    private ExtinguishAllHope(final ExtinguishAllHope card) {
         super(card);
     }
 

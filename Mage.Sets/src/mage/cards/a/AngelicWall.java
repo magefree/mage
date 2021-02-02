@@ -27,7 +27,7 @@ public final class AngelicWall extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public AngelicWall(final AngelicWall card) {
+    private AngelicWall(final AngelicWall card) {
         super(card);
     }
 

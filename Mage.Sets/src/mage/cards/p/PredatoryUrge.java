@@ -47,7 +47,7 @@ public final class PredatoryUrge extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public PredatoryUrge(final PredatoryUrge card) {
+    private PredatoryUrge(final PredatoryUrge card) {
         super(card);
     }
 

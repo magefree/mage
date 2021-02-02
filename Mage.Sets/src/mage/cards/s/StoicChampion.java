@@ -29,7 +29,7 @@ public final class StoicChampion extends CardImpl {
         this.addAbility(new CycleAllTriggeredAbility(new BoostSourceEffect(2,2,Duration.EndOfTurn), false));
     }
 
-    public StoicChampion(final StoicChampion card) {
+    private StoicChampion(final StoicChampion card) {
         super(card);
     }
 

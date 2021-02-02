@@ -35,7 +35,7 @@ public final class NobilisOfWar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect));
     }
 
-    public NobilisOfWar(final NobilisOfWar card) {
+    private NobilisOfWar(final NobilisOfWar card) {
         super(card);
     }
 

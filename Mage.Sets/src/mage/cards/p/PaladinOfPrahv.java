@@ -46,7 +46,7 @@ public final class PaladinOfPrahv extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PaladinOfPrahv(final PaladinOfPrahv card) {
+    private PaladinOfPrahv(final PaladinOfPrahv card) {
         super(card);
     }
 

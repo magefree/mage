@@ -37,7 +37,7 @@ public final class FlameElemental extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlameElemental(final FlameElemental card) {
+    private FlameElemental(final FlameElemental card) {
         super(card);
     }
 

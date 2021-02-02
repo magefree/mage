@@ -40,7 +40,7 @@ public final class QuestForTheGoblinLord extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, filter, false), new SourceHasCounterCondition(CounterType.QUEST, 5, Integer.MAX_VALUE), rule)));
     }
 
-    public QuestForTheGoblinLord(final QuestForTheGoblinLord card) {
+    private QuestForTheGoblinLord(final QuestForTheGoblinLord card) {
         super(card);
     }
 

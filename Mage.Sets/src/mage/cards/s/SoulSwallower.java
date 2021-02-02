@@ -40,7 +40,7 @@ public final class SoulSwallower extends CardImpl {
                 .addHint(DeliriumHint.instance));
     }
 
-    public SoulSwallower(final SoulSwallower card) {
+    private SoulSwallower(final SoulSwallower card) {
         super(card);
     }
 

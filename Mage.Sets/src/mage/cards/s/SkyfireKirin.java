@@ -50,7 +50,7 @@ public final class SkyfireKirin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkyfireKirin(final SkyfireKirin card) {
+    private SkyfireKirin(final SkyfireKirin card) {
         super(card);
     }
 

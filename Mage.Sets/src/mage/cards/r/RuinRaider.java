@@ -40,7 +40,7 @@ public final class RuinRaider extends CardImpl {
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public RuinRaider(final RuinRaider card) {
+    private RuinRaider(final RuinRaider card) {
         super(card);
     }
 

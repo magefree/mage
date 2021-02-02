@@ -43,7 +43,7 @@ public final class ErhnamDjinn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ErhnamDjinn(final ErhnamDjinn card) {
+    private ErhnamDjinn(final ErhnamDjinn card) {
         super(card);
     }
 

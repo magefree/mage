@@ -31,7 +31,7 @@ public final class CunningWish extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public CunningWish(final CunningWish card) {
+    private CunningWish(final CunningWish card) {
         super(card);
     }
 

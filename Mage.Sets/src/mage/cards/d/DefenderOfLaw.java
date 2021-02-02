@@ -28,7 +28,7 @@ public final class DefenderOfLaw extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
-    public DefenderOfLaw(final DefenderOfLaw card) {
+    private DefenderOfLaw(final DefenderOfLaw card) {
         super(card);
     }
 

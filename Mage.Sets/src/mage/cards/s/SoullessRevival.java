@@ -28,7 +28,7 @@ public final class SoullessRevival extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{1}{B}"));
     }
 
-    public SoullessRevival(final SoullessRevival card) {
+    private SoullessRevival(final SoullessRevival card) {
         super(card);
     }
 

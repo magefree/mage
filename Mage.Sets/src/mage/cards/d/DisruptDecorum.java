@@ -20,7 +20,7 @@ public final class DisruptDecorum extends CardImpl {
         this.getSpellAbility().addEffect(new GoadAllEffect());
     }
 
-    public DisruptDecorum(final DisruptDecorum card) {
+    private DisruptDecorum(final DisruptDecorum card) {
         super(card);
     }
 

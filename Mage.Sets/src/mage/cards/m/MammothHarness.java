@@ -51,7 +51,7 @@ public final class MammothHarness extends CardImpl {
         this.addAbility(new MammothHarnessTriggeredAbility());
     }
 
-    public MammothHarness(final MammothHarness card) {
+    private MammothHarness(final MammothHarness card) {
         super(card);
     }
 

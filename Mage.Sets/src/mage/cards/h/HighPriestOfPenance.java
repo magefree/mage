@@ -32,7 +32,7 @@ public final class HighPriestOfPenance extends CardImpl {
         this.addAbility(new HighPriestOfPenanceTriggeredAbility());
     }
 
-    public HighPriestOfPenance(final HighPriestOfPenance card) {
+    private HighPriestOfPenance(final HighPriestOfPenance card) {
         super(card);
     }
 

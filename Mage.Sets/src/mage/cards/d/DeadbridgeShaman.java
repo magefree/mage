@@ -31,7 +31,7 @@ public final class DeadbridgeShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeadbridgeShaman(final DeadbridgeShaman card) {
+    private DeadbridgeShaman(final DeadbridgeShaman card) {
         super(card);
     }
 

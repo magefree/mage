@@ -26,7 +26,7 @@ public final class OrimsPrayer extends CardImpl {
         this.addAbility(new OrimsPrayerTriggeredAbility());
     }
 
-    public OrimsPrayer(final OrimsPrayer card) {
+    private OrimsPrayer(final OrimsPrayer card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class ShivanEmissary extends CardImpl {
             "When {this} enters the battlefield, if it was kicked, destroy target nonblack creature. It can't be regenerated."));
     }
 
-    public ShivanEmissary(final ShivanEmissary card) {
+    private ShivanEmissary(final ShivanEmissary card) {
         super(card);
     }
 

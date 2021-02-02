@@ -46,7 +46,7 @@ public final class BloodLust extends CardImpl {
 
     }
 
-    public BloodLust(final BloodLust card) {
+    private BloodLust(final BloodLust card) {
         super(card);
     }
 

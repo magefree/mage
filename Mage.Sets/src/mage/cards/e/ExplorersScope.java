@@ -33,7 +33,7 @@ public final class ExplorersScope extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public ExplorersScope(final ExplorersScope card) {
+    private ExplorersScope(final ExplorersScope card) {
         super(card);
     }
 

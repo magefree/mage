@@ -31,7 +31,7 @@ public final class BringToTrial extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public BringToTrial(final BringToTrial card) {
+    private BringToTrial(final BringToTrial card) {
         super(card);
     }
 

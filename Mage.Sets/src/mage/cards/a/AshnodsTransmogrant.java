@@ -45,7 +45,7 @@ public final class AshnodsTransmogrant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AshnodsTransmogrant(final AshnodsTransmogrant card) {
+    private AshnodsTransmogrant(final AshnodsTransmogrant card) {
         super(card);
     }
 

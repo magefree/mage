@@ -35,7 +35,7 @@ public final class SternProctor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SternProctor(final SternProctor card) {
+    private SternProctor(final SternProctor card) {
         super(card);
     }
 

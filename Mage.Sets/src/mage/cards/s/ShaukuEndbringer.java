@@ -50,7 +50,7 @@ public final class ShaukuEndbringer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShaukuEndbringer(final ShaukuEndbringer card) {
+    private ShaukuEndbringer(final ShaukuEndbringer card) {
         super(card);
     }
 

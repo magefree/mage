@@ -36,7 +36,7 @@ public final class KhenraCharioteer extends CardImpl {
 
     }
 
-    public KhenraCharioteer(final KhenraCharioteer card) {
+    private KhenraCharioteer(final KhenraCharioteer card) {
         super(card);
     }
 

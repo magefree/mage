@@ -37,7 +37,7 @@ public final class HeartwoodShard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HeartwoodShard(final HeartwoodShard card) {
+    private HeartwoodShard(final HeartwoodShard card) {
         super(card);
     }
 

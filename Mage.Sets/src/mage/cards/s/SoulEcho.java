@@ -49,7 +49,7 @@ public final class SoulEcho extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoulEcho(final SoulEcho card) {
+    private SoulEcho(final SoulEcho card) {
         super(card);
     }
 

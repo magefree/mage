@@ -50,7 +50,7 @@ public final class TheAntiquitiesWar extends CardImpl {
 
     }
 
-    public TheAntiquitiesWar(final TheAntiquitiesWar card) {
+    private TheAntiquitiesWar(final TheAntiquitiesWar card) {
         super(card);
     }
 

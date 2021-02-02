@@ -46,7 +46,7 @@ public final class KuldothaPhoenix extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KuldothaPhoenix(final KuldothaPhoenix card) {
+    private KuldothaPhoenix(final KuldothaPhoenix card) {
         super(card);
     }
 

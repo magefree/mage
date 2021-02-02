@@ -38,7 +38,7 @@ public final class Crypsis extends CardImpl {
 
     }
 
-    public Crypsis(final Crypsis card) {
+    private Crypsis(final Crypsis card) {
         super(card);
     }
 

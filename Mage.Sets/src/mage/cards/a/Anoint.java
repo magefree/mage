@@ -27,7 +27,7 @@ public final class Anoint extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Anoint(final Anoint card) {
+    private Anoint(final Anoint card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class BattleFrenzy extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Duration.EndOfTurn, filter2));
     }
 
-    public BattleFrenzy(final BattleFrenzy card) {
+    private BattleFrenzy(final BattleFrenzy card) {
         super(card);
     }
 

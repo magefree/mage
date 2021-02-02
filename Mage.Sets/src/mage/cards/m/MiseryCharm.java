@@ -48,7 +48,7 @@ public final class MiseryCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public MiseryCharm(final MiseryCharm card) {
+    private MiseryCharm(final MiseryCharm card) {
         super(card);
     }
 

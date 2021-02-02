@@ -41,7 +41,7 @@ public final class AuraGnarlid extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
     }
 
-    public AuraGnarlid(final AuraGnarlid card) {
+    private AuraGnarlid(final AuraGnarlid card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class TidyConclusion extends CardImpl {
         this.getSpellAbility().addHint(ArtifactYouControlHint.instance);
     }
 
-    public TidyConclusion(final TidyConclusion card) {
+    private TidyConclusion(final TidyConclusion card) {
         super(card);
     }
 

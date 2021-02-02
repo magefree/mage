@@ -29,7 +29,7 @@ public final class ShardVolley extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public ShardVolley(final ShardVolley card) {
+    private ShardVolley(final ShardVolley card) {
         super(card);
     }
 

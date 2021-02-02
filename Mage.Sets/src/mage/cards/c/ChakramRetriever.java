@@ -42,7 +42,7 @@ public final class ChakramRetriever extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChakramRetriever(final ChakramRetriever card) {
+    private ChakramRetriever(final ChakramRetriever card) {
         super(card);
     }
 

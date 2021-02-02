@@ -32,7 +32,7 @@ public final class Intervene extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
-    public Intervene(final Intervene card) {
+    private Intervene(final Intervene card) {
         super(card);
     }
 

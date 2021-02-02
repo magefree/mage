@@ -27,7 +27,7 @@ public final class WitnessOfTheAges extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{5}")));
     }
 
-    public WitnessOfTheAges(final WitnessOfTheAges card) {
+    private WitnessOfTheAges(final WitnessOfTheAges card) {
         super(card);
     }
 

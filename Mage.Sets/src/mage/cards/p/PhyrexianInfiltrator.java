@@ -35,7 +35,7 @@ public final class PhyrexianInfiltrator extends CardImpl {
 
     }
 
-    public PhyrexianInfiltrator(final PhyrexianInfiltrator card) {
+    private PhyrexianInfiltrator(final PhyrexianInfiltrator card) {
         super(card);
     }
 

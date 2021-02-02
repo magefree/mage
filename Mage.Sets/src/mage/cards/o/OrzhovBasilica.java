@@ -36,7 +36,7 @@ public final class OrzhovBasilica extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 1, 0, 0, 0, 0, 0), new TapSourceCost()));
     }
 
-    public OrzhovBasilica(final OrzhovBasilica card) {
+    private OrzhovBasilica(final OrzhovBasilica card) {
         super(card);
     }
 

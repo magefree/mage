@@ -45,7 +45,7 @@ public final class DarajaGriffin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DarajaGriffin(final DarajaGriffin card) {
+    private DarajaGriffin(final DarajaGriffin card) {
         super(card);
     }
 

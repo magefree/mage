@@ -50,7 +50,7 @@ public final class DrivenDespair extends SplitCard {
 
     }
 
-    public DrivenDespair(final DrivenDespair card) {
+    private DrivenDespair(final DrivenDespair card) {
         super(card);
     }
 

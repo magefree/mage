@@ -38,7 +38,7 @@ public final class StealEnchantment extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("enchantment")));
     }
 
-    public StealEnchantment(final StealEnchantment card) {
+    private StealEnchantment(final StealEnchantment card) {
         super(card);
     }
 

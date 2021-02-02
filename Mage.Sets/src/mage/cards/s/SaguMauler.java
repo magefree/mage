@@ -33,7 +33,7 @@ public final class SaguMauler extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{G}{U}")));
     }
 
-    public SaguMauler(final SaguMauler card) {
+    private SaguMauler(final SaguMauler card) {
         super(card);
     }
 

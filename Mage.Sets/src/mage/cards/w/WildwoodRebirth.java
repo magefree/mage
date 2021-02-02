@@ -22,7 +22,7 @@ public final class WildwoodRebirth extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
     }
 
-    public WildwoodRebirth(final WildwoodRebirth card) {
+    private WildwoodRebirth(final WildwoodRebirth card) {
         super(card);
     }
 

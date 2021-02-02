@@ -70,7 +70,7 @@ public class KeeperOfTheMind extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KeeperOfTheMind(final KeeperOfTheMind card) {
+    private KeeperOfTheMind(final KeeperOfTheMind card) {
         super(card);
     }
 

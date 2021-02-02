@@ -34,7 +34,7 @@ public final class SinProdder extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SinProdderEffect(), TargetController.YOU, false));
     }
 
-    public SinProdder(final SinProdder card) {
+    private SinProdder(final SinProdder card) {
         super(card);
     }
 

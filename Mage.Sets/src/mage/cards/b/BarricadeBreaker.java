@@ -30,7 +30,7 @@ public final class BarricadeBreaker extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public BarricadeBreaker(final BarricadeBreaker card) {
+    private BarricadeBreaker(final BarricadeBreaker card) {
         super(card);
     }
 

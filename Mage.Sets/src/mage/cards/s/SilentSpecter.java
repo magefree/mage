@@ -34,7 +34,7 @@ public final class SilentSpecter extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{B}{B}")));
     }
 
-    public SilentSpecter(final SilentSpecter card) {
+    private SilentSpecter(final SilentSpecter card) {
         super(card);
     }
 

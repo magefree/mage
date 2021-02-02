@@ -36,7 +36,7 @@ public final class AmphinPathmage extends CardImpl {
 
     }
 
-    public AmphinPathmage(final AmphinPathmage card) {
+    private AmphinPathmage(final AmphinPathmage card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class EmperorCrocodile extends CardImpl {
         this.addAbility(new EmperorCrocodileStateTriggeredAbility());
     }
 
-    public EmperorCrocodile(final EmperorCrocodile card) {
+    private EmperorCrocodile(final EmperorCrocodile card) {
         super(card);
     }
 

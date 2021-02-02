@@ -38,7 +38,7 @@ public final class MudbrawlerRaiders extends CardImpl {
         
     }
 
-    public MudbrawlerRaiders(final MudbrawlerRaiders card) {
+    private MudbrawlerRaiders(final MudbrawlerRaiders card) {
         super(card);
     }
 

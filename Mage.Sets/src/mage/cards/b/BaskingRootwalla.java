@@ -35,7 +35,7 @@ public final class BaskingRootwalla extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{0}")));
     }
 
-    public BaskingRootwalla(final BaskingRootwalla card) {
+    private BaskingRootwalla(final BaskingRootwalla card) {
         super(card);
     }
 

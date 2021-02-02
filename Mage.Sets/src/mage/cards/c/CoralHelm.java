@@ -30,7 +30,7 @@ public final class CoralHelm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CoralHelm(final CoralHelm card) {
+    private CoralHelm(final CoralHelm card) {
         super(card);
     }
 

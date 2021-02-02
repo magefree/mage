@@ -36,7 +36,7 @@ public final class SilverInlaidDagger extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEquippedEffect(1, 0), new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
     }
 
-    public SilverInlaidDagger(final SilverInlaidDagger card) {
+    private SilverInlaidDagger(final SilverInlaidDagger card) {
         super(card);
     }
 

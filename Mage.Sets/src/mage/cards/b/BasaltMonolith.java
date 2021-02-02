@@ -32,7 +32,7 @@ public final class BasaltMonolith extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new GenericManaCost(3)));
     }
 
-    public BasaltMonolith(final BasaltMonolith card) {
+    private BasaltMonolith(final BasaltMonolith card) {
         super(card);
     }
 

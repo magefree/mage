@@ -35,7 +35,7 @@ public final class AetherTradewinds extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public AetherTradewinds(final AetherTradewinds card) {
+    private AetherTradewinds(final AetherTradewinds card) {
         super(card);
     }
 

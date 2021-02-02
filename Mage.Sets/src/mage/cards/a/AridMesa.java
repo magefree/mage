@@ -23,7 +23,7 @@ public final class AridMesa extends CardImpl {
         this.addAbility(new FetchLandActivatedAbility(EnumSet.of(SubType.MOUNTAIN, SubType.PLAINS)));
     }
 
-    public AridMesa(final AridMesa card) {
+    private AridMesa(final AridMesa card) {
         super(card);
     }
 

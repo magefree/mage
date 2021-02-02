@@ -43,7 +43,7 @@ public final class KorSpiritdancer extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter, true));
     }
 
-    public KorSpiritdancer(final KorSpiritdancer card) {
+    private KorSpiritdancer(final KorSpiritdancer card) {
         super(card);
     }
 

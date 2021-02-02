@@ -27,7 +27,7 @@ public final class VulshokBerserker extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public VulshokBerserker(final VulshokBerserker card) {
+    private VulshokBerserker(final VulshokBerserker card) {
         super(card);
     }
 

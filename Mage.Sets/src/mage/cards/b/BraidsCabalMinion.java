@@ -39,7 +39,7 @@ public final class BraidsCabalMinion extends CardImpl {
 
     }
 
-    public BraidsCabalMinion(final BraidsCabalMinion card) {
+    private BraidsCabalMinion(final BraidsCabalMinion card) {
         super(card);
     }
 

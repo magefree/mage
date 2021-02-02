@@ -34,7 +34,7 @@ public final class HanweirGarrison extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("(Melds with Hannweir Battlements.)")));
     }
 
-    public HanweirGarrison(final HanweirGarrison card) {
+    private HanweirGarrison(final HanweirGarrison card) {
         super(card);
     }
 

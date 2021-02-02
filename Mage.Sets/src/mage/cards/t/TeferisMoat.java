@@ -33,7 +33,7 @@ public final class TeferisMoat extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TeferisMoatRestrictionEffect()));
     }
 
-    public TeferisMoat(final TeferisMoat card) {
+    private TeferisMoat(final TeferisMoat card) {
         super(card);
     }
 

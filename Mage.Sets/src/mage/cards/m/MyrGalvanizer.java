@@ -45,7 +45,7 @@ public final class MyrGalvanizer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MyrGalvanizer(final MyrGalvanizer card) {
+    private MyrGalvanizer(final MyrGalvanizer card) {
         super(card);
     }
 

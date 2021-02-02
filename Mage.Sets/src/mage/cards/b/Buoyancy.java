@@ -40,7 +40,7 @@ public final class Buoyancy extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public Buoyancy(final Buoyancy card) {
+    private Buoyancy(final Buoyancy card) {
         super(card);
     }
 

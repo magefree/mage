@@ -22,7 +22,7 @@ public final class Forfend extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageToAllEffect(Duration.EndOfTurn, FILTER_PERMANENT_CREATURES));
     }
 
-    public Forfend(final Forfend card) {
+    private Forfend(final Forfend card) {
         super(card);
     }
 

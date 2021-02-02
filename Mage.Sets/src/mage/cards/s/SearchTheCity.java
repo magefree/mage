@@ -40,7 +40,7 @@ public final class SearchTheCity extends CardImpl {
 
     }
 
-    public SearchTheCity(final SearchTheCity card) {
+    private SearchTheCity(final SearchTheCity card) {
         super(card);
     }
 

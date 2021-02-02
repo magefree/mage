@@ -37,7 +37,7 @@ public final class TideshaperMystic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TideshaperMystic(final TideshaperMystic card) {
+    private TideshaperMystic(final TideshaperMystic card) {
         super(card);
     }
 

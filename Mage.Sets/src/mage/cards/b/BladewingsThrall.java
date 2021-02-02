@@ -43,7 +43,7 @@ public final class BladewingsThrall extends CardImpl {
                 new ReturnSourceFromGraveyardToBattlefieldEffect(), new FilterPermanent(SubType.DRAGON, "a Dragon"), true));
     }
 
-    public BladewingsThrall(final BladewingsThrall card) {
+    private BladewingsThrall(final BladewingsThrall card) {
         super(card);
     }
 

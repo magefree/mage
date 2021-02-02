@@ -47,7 +47,7 @@ public final class Hecatomb extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Hecatomb(final Hecatomb card) {
+    private Hecatomb(final Hecatomb card) {
         super(card);
     }
 

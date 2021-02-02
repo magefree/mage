@@ -37,7 +37,7 @@ public final class Flood extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Flood(final Flood card) {
+    private Flood(final Flood card) {
         super(card);
     }
 

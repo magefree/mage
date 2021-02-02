@@ -38,7 +38,7 @@ public final class ChitteringRats extends CardImpl {
 
     }
 
-    public ChitteringRats(final ChitteringRats card) {
+    private ChitteringRats(final ChitteringRats card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class KithkinHealer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KithkinHealer(final KithkinHealer card) {
+    private KithkinHealer(final KithkinHealer card) {
         super(card);
     }
 

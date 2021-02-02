@@ -45,7 +45,7 @@ public final class UntamedHunger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UntamedHunger(final UntamedHunger card) {
+    private UntamedHunger(final UntamedHunger card) {
         super(card);
     }
 

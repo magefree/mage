@@ -50,7 +50,7 @@ public final class NomadDecoy extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public NomadDecoy(final NomadDecoy card) {
+    private NomadDecoy(final NomadDecoy card) {
         super(card);
     }
 

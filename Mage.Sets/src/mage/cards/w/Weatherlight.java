@@ -53,7 +53,7 @@ public final class Weatherlight extends CardImpl {
         this.addAbility(new CrewAbility(3));
     }
 
-    public Weatherlight(final Weatherlight card) {
+    private Weatherlight(final Weatherlight card) {
         super(card);
     }
 

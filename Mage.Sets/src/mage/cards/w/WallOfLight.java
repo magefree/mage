@@ -29,7 +29,7 @@ public final class WallOfLight extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
     }
 
-    public WallOfLight(final WallOfLight card) {
+    private WallOfLight(final WallOfLight card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class TrialError extends SplitCard {
 
     }
 
-    public TrialError(final TrialError card) {
+    private TrialError(final TrialError card) {
         super(card);
     }
 

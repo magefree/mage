@@ -35,7 +35,7 @@ public final class RotlungReanimator extends CardImpl {
         this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new CreateTokenEffect(new ZombieToken()), false, filter));
     }
 
-    public RotlungReanimator(final RotlungReanimator card) {
+    private RotlungReanimator(final RotlungReanimator card) {
         super(card);
     }
 

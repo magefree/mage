@@ -23,7 +23,7 @@ public final class NorwoodRanger extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public NorwoodRanger(final NorwoodRanger card) {
+    private NorwoodRanger(final NorwoodRanger card) {
         super(card);
     }
 

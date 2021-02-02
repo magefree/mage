@@ -36,7 +36,7 @@ public final class SupremeExemplar extends CardImpl {
         this.addAbility(new ChampionAbility(this, SubType.ELEMENTAL, false));
     }
 
-    public SupremeExemplar(final SupremeExemplar card) {
+    private SupremeExemplar(final SupremeExemplar card) {
         super(card);
     }
 

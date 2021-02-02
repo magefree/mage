@@ -23,7 +23,7 @@ public final class DesertTwister extends CardImpl {
 		this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
-    public DesertTwister(final DesertTwister card) {
+    private DesertTwister(final DesertTwister card) {
         super(card);
     }
 

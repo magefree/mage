@@ -28,7 +28,7 @@ public final class MentalVapors extends CardImpl {
 
     }
 
-    public MentalVapors(final MentalVapors card) {
+    private MentalVapors(final MentalVapors card) {
         super(card);
     }
 

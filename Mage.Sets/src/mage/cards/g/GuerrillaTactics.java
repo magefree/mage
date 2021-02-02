@@ -29,7 +29,7 @@ public final class GuerrillaTactics extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GuerrillaTactics(final GuerrillaTactics card) {
+    private GuerrillaTactics(final GuerrillaTactics card) {
         super(card);
     }
 

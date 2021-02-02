@@ -31,7 +31,7 @@ public final class NightstalkerEngine extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(count, Duration.EndOfGame)));
     }
 
-    public NightstalkerEngine(final NightstalkerEngine card) {
+    private NightstalkerEngine(final NightstalkerEngine card) {
         super(card);
     }
 

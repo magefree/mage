@@ -32,7 +32,7 @@ public final class ExplosiveGrowth extends CardImpl {
                 "Target creature gets +2/+2 until end of turn. If this spell was kicked, that creature gets +5/+5 until end of turn instead."));
     }
 
-    public ExplosiveGrowth(final ExplosiveGrowth card) {
+    private ExplosiveGrowth(final ExplosiveGrowth card) {
         super(card);
     }
 

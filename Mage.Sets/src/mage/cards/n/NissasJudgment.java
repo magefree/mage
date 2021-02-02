@@ -45,7 +45,7 @@ public final class NissasJudgment extends CardImpl {
         getSpellAbility().addEffect(effect);
     }
 
-    public NissasJudgment(final NissasJudgment card) {
+    private NissasJudgment(final NissasJudgment card) {
         super(card);
     }
 

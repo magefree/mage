@@ -27,7 +27,7 @@ public final class LeaveInTheDust extends CardImpl {
 
     }
 
-    public LeaveInTheDust(final LeaveInTheDust card) {
+    private LeaveInTheDust(final LeaveInTheDust card) {
         super(card);
     }
 

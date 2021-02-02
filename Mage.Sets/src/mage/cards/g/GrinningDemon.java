@@ -31,7 +31,7 @@ public final class GrinningDemon extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{B}{B}")));
     }
 
-    public GrinningDemon(final GrinningDemon card) {
+    private GrinningDemon(final GrinningDemon card) {
         super(card);
     }
 

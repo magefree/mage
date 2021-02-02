@@ -47,7 +47,7 @@ public final class EldraziMonument extends CardImpl {
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new EldraziMonumentEffect()));
     }
 
-    public EldraziMonument(final EldraziMonument card) {
+    private EldraziMonument(final EldraziMonument card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class SkyRuinDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SkyRuinDrake(final SkyRuinDrake card) {
+    private SkyRuinDrake(final SkyRuinDrake card) {
         super(card);
     }
 

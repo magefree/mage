@@ -47,7 +47,7 @@ public final class ClericOfLifesBond extends CardImpl {
 
     }
 
-    public ClericOfLifesBond(final ClericOfLifesBond card) {
+    private ClericOfLifesBond(final ClericOfLifesBond card) {
         super(card);
     }
 

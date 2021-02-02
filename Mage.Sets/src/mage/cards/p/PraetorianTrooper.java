@@ -37,7 +37,7 @@ public final class PraetorianTrooper extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public PraetorianTrooper(final PraetorianTrooper card) {
+    private PraetorianTrooper(final PraetorianTrooper card) {
         super(card);
     }
 

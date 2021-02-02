@@ -26,7 +26,7 @@ public final class RustwingFalcon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public RustwingFalcon(final RustwingFalcon card) {
+    private RustwingFalcon(final RustwingFalcon card) {
         super(card);
     }
 

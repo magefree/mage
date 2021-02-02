@@ -58,7 +58,7 @@ public final class RakshaGoldenCub extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RakshaGoldenCub(final RakshaGoldenCub card) {
+    private RakshaGoldenCub(final RakshaGoldenCub card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class MossfireEgg extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MossfireEgg(final MossfireEgg card) {
+    private MossfireEgg(final MossfireEgg card) {
         super(card);
     }
 

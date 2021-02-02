@@ -40,7 +40,7 @@ public final class UnholyGrotto extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnholyGrotto(final UnholyGrotto card) {
+    private UnholyGrotto(final UnholyGrotto card) {
         super(card);
     }
 

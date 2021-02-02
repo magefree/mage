@@ -34,7 +34,7 @@ public final class SilentDart extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SilentDart(final SilentDart card) {
+    private SilentDart(final SilentDart card) {
         super(card);
     }
 

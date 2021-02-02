@@ -24,7 +24,7 @@ public final class AltarsLight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
     }
 
-    public AltarsLight(final AltarsLight card) {
+    private AltarsLight(final AltarsLight card) {
         super(card);
     }
 

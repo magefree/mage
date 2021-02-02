@@ -42,7 +42,7 @@ public final class LifecraftCavalry extends CardImpl {
         );
     }
 
-    public LifecraftCavalry(final LifecraftCavalry card) {
+    private LifecraftCavalry(final LifecraftCavalry card) {
         super(card);
     }
 

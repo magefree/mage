@@ -25,7 +25,7 @@ public final class GuardiansOfMeletis extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public GuardiansOfMeletis(final GuardiansOfMeletis card) {
+    private GuardiansOfMeletis(final GuardiansOfMeletis card) {
         super(card);
     }
 

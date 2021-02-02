@@ -33,7 +33,7 @@ public final class AdrianaCaptainOfTheGuard extends CardImpl {
 
     }
 
-    public AdrianaCaptainOfTheGuard(final AdrianaCaptainOfTheGuard card) {
+    private AdrianaCaptainOfTheGuard(final AdrianaCaptainOfTheGuard card) {
         super(card);
     }
 

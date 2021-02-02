@@ -29,7 +29,7 @@ public final class GruulGuildgate extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public GruulGuildgate(final GruulGuildgate card) {
+    private GruulGuildgate(final GruulGuildgate card) {
         super(card);
     }
 

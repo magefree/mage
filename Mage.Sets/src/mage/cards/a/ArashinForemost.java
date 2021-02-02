@@ -45,7 +45,7 @@ public final class ArashinForemost extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArashinForemost(final ArashinForemost card) {
+    private ArashinForemost(final ArashinForemost card) {
         super(card);
     }
 

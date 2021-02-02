@@ -37,7 +37,7 @@ public final class PiousWarrior extends CardImpl {
         this.addAbility(new PiousWarriorTriggeredAbility());
     }
 
-    public PiousWarrior(final PiousWarrior card) {
+    private PiousWarrior(final PiousWarrior card) {
         super(card);
     }
 

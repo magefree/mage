@@ -47,7 +47,7 @@ public final class StreetSweeper extends CardImpl {
  
     }
  
-    public StreetSweeper(final StreetSweeper card) {
+    private StreetSweeper(final StreetSweeper card) {
         super(card);
     }
  

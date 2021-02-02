@@ -53,7 +53,7 @@ public final class HiredMuscle extends CardImpl {
                 "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it."));
     }
 
-    public HiredMuscle(final HiredMuscle card) {
+    private HiredMuscle(final HiredMuscle card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class LapseOfCertainty extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public LapseOfCertainty(final LapseOfCertainty card) {
+    private LapseOfCertainty(final LapseOfCertainty card) {
         super(card);
     }
 

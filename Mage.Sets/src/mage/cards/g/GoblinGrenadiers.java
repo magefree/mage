@@ -37,7 +37,7 @@ public final class GoblinGrenadiers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinGrenadiers(final GoblinGrenadiers card) {
+    private GoblinGrenadiers(final GoblinGrenadiers card) {
         super(card);
     }
 

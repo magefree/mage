@@ -33,7 +33,7 @@ public final class Cartographer extends CardImpl {
       
     }
 
-    public Cartographer(final Cartographer card) {
+    private Cartographer(final Cartographer card) {
         super(card);
     }
 

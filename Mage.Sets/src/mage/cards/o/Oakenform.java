@@ -41,7 +41,7 @@ public final class Oakenform extends CardImpl {
     this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OakenformEffect()));
     }
 
-    public Oakenform(final Oakenform card) {
+    private Oakenform(final Oakenform card) {
         super(card);
     }
 

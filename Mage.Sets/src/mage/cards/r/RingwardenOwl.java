@@ -28,7 +28,7 @@ public final class RingwardenOwl extends CardImpl {
         this.addAbility(new ProwessAbility());
     }
 
-    public RingwardenOwl(final RingwardenOwl card) {
+    private RingwardenOwl(final RingwardenOwl card) {
         super(card);
     }
 

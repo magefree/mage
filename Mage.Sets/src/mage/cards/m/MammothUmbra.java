@@ -42,7 +42,7 @@ public final class MammothUmbra extends CardImpl {
         this.addAbility(new TotemArmorAbility());
     }
 
-    public MammothUmbra(final MammothUmbra card) {
+    private MammothUmbra(final MammothUmbra card) {
         super(card);
     }
 

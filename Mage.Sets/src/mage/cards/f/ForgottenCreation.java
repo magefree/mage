@@ -35,7 +35,7 @@ public final class ForgottenCreation extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForgottenCreationEffect(), TargetController.YOU, true));
     }
 
-    public ForgottenCreation(final ForgottenCreation card) {
+    private ForgottenCreation(final ForgottenCreation card) {
         super(card);
     }
 

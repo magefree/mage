@@ -28,7 +28,7 @@ public final class DragonBlood extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DragonBlood(final DragonBlood card) {
+    private DragonBlood(final DragonBlood card) {
         super(card);
     }
 

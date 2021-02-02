@@ -31,7 +31,7 @@ public final class ReversePolarity extends CardImpl {
         this.getSpellAbility().addWatcher(new ReversePolarityWatcher());
     }
 
-    public ReversePolarity(final ReversePolarity card) {
+    private ReversePolarity(final ReversePolarity card) {
         super(card);
     }
 

@@ -70,7 +70,7 @@ public final class SavageAlliance extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public SavageAlliance(final SavageAlliance card) {
+    private SavageAlliance(final SavageAlliance card) {
         super(card);
     }
 

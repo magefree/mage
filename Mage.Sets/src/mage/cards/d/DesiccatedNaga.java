@@ -46,7 +46,7 @@ public final class DesiccatedNaga extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DesiccatedNaga(final DesiccatedNaga card) {
+    private DesiccatedNaga(final DesiccatedNaga card) {
         super(card);
     }
 

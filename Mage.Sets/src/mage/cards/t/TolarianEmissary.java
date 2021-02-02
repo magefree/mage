@@ -41,7 +41,7 @@ public final class TolarianEmissary extends CardImpl {
             "When {this} enters the battlefield, if it was kicked, destroy target enchantment."));
     }
 
-    public TolarianEmissary(final TolarianEmissary card) {
+    private TolarianEmissary(final TolarianEmissary card) {
         super(card);
     }
 

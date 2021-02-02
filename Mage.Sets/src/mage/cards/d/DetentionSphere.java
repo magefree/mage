@@ -51,7 +51,7 @@ public final class DetentionSphere extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new DetentionSphereLeavesEffect(), false));
     }
 
-    public DetentionSphere(final DetentionSphere card) {
+    private DetentionSphere(final DetentionSphere card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class DirgeOfDread extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DirgeOfDread(final DirgeOfDread card) {
+    private DirgeOfDread(final DirgeOfDread card) {
         super(card);
     }
 

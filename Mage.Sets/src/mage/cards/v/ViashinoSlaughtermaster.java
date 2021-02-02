@@ -33,7 +33,7 @@ public final class ViashinoSlaughtermaster extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}{G}")));
     }
 
-    public ViashinoSlaughtermaster(final ViashinoSlaughtermaster card) {
+    private ViashinoSlaughtermaster(final ViashinoSlaughtermaster card) {
         super(card);
     }
 

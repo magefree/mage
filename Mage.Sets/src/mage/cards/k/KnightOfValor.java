@@ -40,7 +40,7 @@ public final class KnightOfValor extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false), new ManaCostsImpl("{1}{W}")));
     }
 
-    public KnightOfValor(final KnightOfValor card) {
+    private KnightOfValor(final KnightOfValor card) {
         super(card);
     }
 

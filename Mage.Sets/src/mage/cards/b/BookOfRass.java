@@ -27,7 +27,7 @@ public final class BookOfRass extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BookOfRass(final BookOfRass card) {
+    private BookOfRass(final BookOfRass card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class BreakingPoint extends CardImpl {
         this.getSpellAbility().addEffect(new BreakingPointDestroyEffect());
     }
 
-    public BreakingPoint(final BreakingPoint card) {
+    private BreakingPoint(final BreakingPoint card) {
         super(card);
     }
 

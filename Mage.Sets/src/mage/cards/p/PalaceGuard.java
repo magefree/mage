@@ -30,7 +30,7 @@ public final class PalaceGuard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));
     }
 
-    public PalaceGuard(final PalaceGuard card) {
+    private PalaceGuard(final PalaceGuard card) {
         super(card);
     }
 

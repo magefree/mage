@@ -25,7 +25,7 @@ public final class TrainOfThought extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public TrainOfThought(final TrainOfThought card) {
+    private TrainOfThought(final TrainOfThought card) {
         super(card);
     }
 

@@ -55,7 +55,7 @@ public final class InfiniteHourglass extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InfiniteHourglass(final InfiniteHourglass card) {
+    private InfiniteHourglass(final InfiniteHourglass card) {
         super(card);
     }
 

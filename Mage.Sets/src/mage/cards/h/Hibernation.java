@@ -29,7 +29,7 @@ public final class Hibernation extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(filter));
     }
 
-    public Hibernation(final Hibernation card) {
+    private Hibernation(final Hibernation card) {
         super(card);
     }
 

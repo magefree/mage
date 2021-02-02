@@ -24,7 +24,7 @@ public final class IvoryMask extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(ShroudAbility.getInstance())));
     }
 
-    public IvoryMask(final IvoryMask card) {
+    private IvoryMask(final IvoryMask card) {
         super(card);
     }
 

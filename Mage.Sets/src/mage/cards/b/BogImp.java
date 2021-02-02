@@ -25,7 +25,7 @@ public final class BogImp extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public BogImp(final BogImp card) {
+    private BogImp(final BogImp card) {
         super(card);
     }
 

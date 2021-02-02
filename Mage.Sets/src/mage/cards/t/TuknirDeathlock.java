@@ -41,7 +41,7 @@ public final class TuknirDeathlock extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TuknirDeathlock(final TuknirDeathlock card) {
+    private TuknirDeathlock(final TuknirDeathlock card) {
         super(card);
     }
 

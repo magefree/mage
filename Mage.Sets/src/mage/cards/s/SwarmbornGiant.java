@@ -51,7 +51,7 @@ public final class SwarmbornGiant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SwarmbornGiant(final SwarmbornGiant card) {
+    private SwarmbornGiant(final SwarmbornGiant card) {
         super(card);
     }
 

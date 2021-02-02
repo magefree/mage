@@ -32,7 +32,7 @@ public final class IceCave extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(Zone.BATTLEFIELD, new IceCaveEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL));
     }
 
-    public IceCave(final IceCave card) {
+    private IceCave(final IceCave card) {
         super(card);
     }
 

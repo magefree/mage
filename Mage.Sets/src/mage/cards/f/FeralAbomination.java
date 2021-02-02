@@ -27,7 +27,7 @@ public final class FeralAbomination extends CardImpl {
 
     }
 
-    public FeralAbomination(final FeralAbomination card) {
+    private FeralAbomination(final FeralAbomination card) {
         super(card);
     }
 

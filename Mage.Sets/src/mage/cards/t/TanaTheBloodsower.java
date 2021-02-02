@@ -43,7 +43,7 @@ public final class TanaTheBloodsower extends CardImpl {
         this.addAbility(PartnerAbility.getInstance());
     }
 
-    public TanaTheBloodsower(final TanaTheBloodsower card) {
+    private TanaTheBloodsower(final TanaTheBloodsower card) {
         super(card);
     }
 

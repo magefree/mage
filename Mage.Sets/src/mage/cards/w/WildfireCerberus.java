@@ -48,7 +48,7 @@ public final class WildfireCerberus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WildfireCerberus(final WildfireCerberus card) {
+    private WildfireCerberus(final WildfireCerberus card) {
         super(card);
     }
 

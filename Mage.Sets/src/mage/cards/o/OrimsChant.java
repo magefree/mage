@@ -39,7 +39,7 @@ public final class OrimsChant extends CardImpl {
         this.getSpellAbility().addEffect(new OrimsChantEffect());
     }
 
-    public OrimsChant(final OrimsChant card) {
+    private OrimsChant(final OrimsChant card) {
         super(card);
     }
 

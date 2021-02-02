@@ -38,7 +38,7 @@ public final class WitchbaneOrb extends CardImpl {
 
     }
 
-    public WitchbaneOrb(final WitchbaneOrb card) {
+    private WitchbaneOrb(final WitchbaneOrb card) {
         super(card);
     }
 

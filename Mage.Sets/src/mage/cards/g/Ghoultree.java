@@ -37,7 +37,7 @@ public final class Ghoultree extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Ghoultree(final Ghoultree card) {
+    private Ghoultree(final Ghoultree card) {
         super(card);
     }
 

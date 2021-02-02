@@ -26,7 +26,7 @@ public final class Gridlock extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(GridlockAdjuster.instance);
     }
 
-    public Gridlock(final Gridlock card) {
+    private Gridlock(final Gridlock card) {
         super(card);
     }
 

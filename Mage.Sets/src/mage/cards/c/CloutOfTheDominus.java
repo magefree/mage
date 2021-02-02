@@ -55,7 +55,7 @@ public final class CloutOfTheDominus extends CardImpl {
         this.addAbility(redAbility);
     }
 
-    public CloutOfTheDominus(final CloutOfTheDominus card) {
+    private CloutOfTheDominus(final CloutOfTheDominus card) {
         super(card);
     }
 

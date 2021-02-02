@@ -26,7 +26,7 @@ public final class YoungWolf extends CardImpl {
         this.addAbility(new UndyingAbility());
     }
 
-    public YoungWolf(final YoungWolf card) {
+    private YoungWolf(final YoungWolf card) {
         super(card);
     }
 

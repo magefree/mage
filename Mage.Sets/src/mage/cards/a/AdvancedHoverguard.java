@@ -34,7 +34,7 @@ public final class AdvancedHoverguard extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{U}")));
     }
 
-    public AdvancedHoverguard(final AdvancedHoverguard card) {
+    private AdvancedHoverguard(final AdvancedHoverguard card) {
         super(card);
     }
 

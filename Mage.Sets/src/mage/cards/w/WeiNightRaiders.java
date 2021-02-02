@@ -30,7 +30,7 @@ public final class WeiNightRaiders extends CardImpl {
         this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardTargetEffect(1), false, false, true));
     }
 
-    public WeiNightRaiders(final WeiNightRaiders card) {
+    private WeiNightRaiders(final WeiNightRaiders card) {
         super(card);
     }
 

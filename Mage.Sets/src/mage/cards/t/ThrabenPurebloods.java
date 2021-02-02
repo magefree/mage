@@ -22,7 +22,7 @@ public final class ThrabenPurebloods extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public ThrabenPurebloods(final ThrabenPurebloods card) {
+    private ThrabenPurebloods(final ThrabenPurebloods card) {
         super(card);
     }
 

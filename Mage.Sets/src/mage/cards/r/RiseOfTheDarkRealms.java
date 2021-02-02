@@ -28,7 +28,7 @@ public final class RiseOfTheDarkRealms extends CardImpl {
         this.getSpellAbility().addEffect(new RiseOfTheDarkRealmsEffect());
     }
 
-    public RiseOfTheDarkRealms(final RiseOfTheDarkRealms card) {
+    private RiseOfTheDarkRealms(final RiseOfTheDarkRealms card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class LivingLore extends CardImpl {
         this.addAbility(new DealsCombatDamageTriggeredAbility(new LivingLoreSacrificeEffect(), true));
     }
 
-    public LivingLore(final LivingLore card) {
+    private LivingLore(final LivingLore card) {
         super(card);
     }
 

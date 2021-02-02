@@ -31,7 +31,7 @@ public final class MedicineBag extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MedicineBag(final MedicineBag card) {
+    private MedicineBag(final MedicineBag card) {
         super(card);
     }
 

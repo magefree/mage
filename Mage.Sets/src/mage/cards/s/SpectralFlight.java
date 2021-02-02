@@ -38,7 +38,7 @@ public final class SpectralFlight extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public SpectralFlight(final SpectralFlight card) {
+    private SpectralFlight(final SpectralFlight card) {
         super(card);
     }
 

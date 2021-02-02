@@ -36,7 +36,7 @@ public final class CrypticSerpent extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CrypticSerpent(final CrypticSerpent card) {
+    private CrypticSerpent(final CrypticSerpent card) {
         super(card);
     }
 

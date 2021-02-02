@@ -40,7 +40,7 @@ public final class Tephraderm extends CardImpl {
         this.addAbility(new TephradermSpellDamageTriggeredAbility());
     }
 
-    public Tephraderm(final Tephraderm card) {
+    private Tephraderm(final Tephraderm card) {
         super(card);
     }
 

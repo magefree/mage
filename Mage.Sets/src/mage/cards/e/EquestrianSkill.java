@@ -43,7 +43,7 @@ public final class EquestrianSkill extends CardImpl {
         )));
     }
 
-    public EquestrianSkill(final EquestrianSkill card) {
+    private EquestrianSkill(final EquestrianSkill card) {
         super(card);
     }
 

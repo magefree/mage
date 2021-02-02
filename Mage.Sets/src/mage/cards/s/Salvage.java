@@ -22,7 +22,7 @@ public final class Salvage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
     }
 
-    public Salvage(final Salvage card) {
+    private Salvage(final Salvage card) {
         super(card);
     }
 

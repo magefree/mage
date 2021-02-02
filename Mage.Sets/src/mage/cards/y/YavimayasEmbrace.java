@@ -49,7 +49,7 @@ public final class YavimayasEmbrace extends CardImpl {
         this.addAbility(ability);
 }
 
-    public YavimayasEmbrace(final YavimayasEmbrace card) {
+    private YavimayasEmbrace(final YavimayasEmbrace card) {
         super(card);
     }
 

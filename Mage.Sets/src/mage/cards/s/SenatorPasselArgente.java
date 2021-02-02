@@ -29,7 +29,7 @@ public final class SenatorPasselArgente extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new LoseLifeOpponentsEffect(1), false));
     }
 
-    public SenatorPasselArgente(final SenatorPasselArgente card) {
+    private SenatorPasselArgente(final SenatorPasselArgente card) {
         super(card);
     }
 

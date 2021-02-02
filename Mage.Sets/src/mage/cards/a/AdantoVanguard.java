@@ -48,7 +48,7 @@ public final class AdantoVanguard extends CardImpl {
 
     }
 
-    public AdantoVanguard(final AdantoVanguard card) {
+    private AdantoVanguard(final AdantoVanguard card) {
         super(card);
     }
 

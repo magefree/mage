@@ -27,7 +27,7 @@ public final class AjanisSunstriker extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public AjanisSunstriker(final AjanisSunstriker card) {
+    private AjanisSunstriker(final AjanisSunstriker card) {
         super(card);
     }
 

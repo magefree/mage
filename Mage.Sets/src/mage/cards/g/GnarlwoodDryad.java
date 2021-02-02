@@ -41,7 +41,7 @@ public final class GnarlwoodDryad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GnarlwoodDryad(final GnarlwoodDryad card) {
+    private GnarlwoodDryad(final GnarlwoodDryad card) {
         super(card);
     }
 

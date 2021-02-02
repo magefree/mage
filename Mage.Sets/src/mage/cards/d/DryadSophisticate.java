@@ -27,7 +27,7 @@ public final class DryadSophisticate extends CardImpl {
         this.addAbility(new LandwalkAbility(FilterLandPermanent.nonbasicLand()));
     }
 
-    public DryadSophisticate(final DryadSophisticate card) {
+    private DryadSophisticate(final DryadSophisticate card) {
         super(card);
     }
 

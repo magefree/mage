@@ -46,7 +46,7 @@ public final class PresenceOfGond extends CardImpl {
                 "Enchanted creature has \"{T}: Create a 1/1 green Elf Warrior creature token.\"")));
     }
 
-    public PresenceOfGond(final PresenceOfGond card) {
+    private PresenceOfGond(final PresenceOfGond card) {
         super(card);
     }
 

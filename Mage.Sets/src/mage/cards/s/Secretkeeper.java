@@ -42,7 +42,7 @@ public final class Secretkeeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Secretkeeper(final Secretkeeper card) {
+    private Secretkeeper(final Secretkeeper card) {
         super(card);
     }
 

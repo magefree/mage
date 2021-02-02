@@ -28,7 +28,7 @@ public final class CanyonLurkers extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{R}")));
     }
 
-    public CanyonLurkers(final CanyonLurkers card) {
+    private CanyonLurkers(final CanyonLurkers card) {
         super(card);
     }
 

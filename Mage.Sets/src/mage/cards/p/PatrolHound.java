@@ -31,7 +31,7 @@ public final class PatrolHound extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost()));
     }
 
-    public PatrolHound(final PatrolHound card) {
+    private PatrolHound(final PatrolHound card) {
         super(card);
     }
 

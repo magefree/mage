@@ -43,7 +43,7 @@ public final class RunedHalo extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RunedHalo(final RunedHalo card) {
+    private RunedHalo(final RunedHalo card) {
         super(card);
     }
 

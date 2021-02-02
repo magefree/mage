@@ -48,7 +48,7 @@ public final class SetonKrosanProtector extends CardImpl {
                 new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
     }
 
-    public SetonKrosanProtector(final SetonKrosanProtector card) {
+    private SetonKrosanProtector(final SetonKrosanProtector card) {
         super(card);
     }
 

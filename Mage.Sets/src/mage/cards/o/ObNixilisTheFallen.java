@@ -37,7 +37,7 @@ public final class ObNixilisTheFallen extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ObNixilisTheFallen(final ObNixilisTheFallen card) {
+    private ObNixilisTheFallen(final ObNixilisTheFallen card) {
         super(card);
     }
 

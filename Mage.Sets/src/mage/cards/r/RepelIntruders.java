@@ -41,7 +41,7 @@ public final class RepelIntruders extends CardImpl {
         
     }
 
-    public RepelIntruders(final RepelIntruders card) {
+    private RepelIntruders(final RepelIntruders card) {
         super(card);
     }
 

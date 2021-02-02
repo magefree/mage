@@ -35,7 +35,7 @@ public final class SamitePilgrim extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SamitePilgrim(final SamitePilgrim card) {
+    private SamitePilgrim(final SamitePilgrim card) {
         super(card);
     }
 

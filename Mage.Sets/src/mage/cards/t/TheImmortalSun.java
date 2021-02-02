@@ -44,7 +44,7 @@ public final class TheImmortalSun extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield)));
     }
 
-    public TheImmortalSun(final TheImmortalSun card) {
+    private TheImmortalSun(final TheImmortalSun card) {
         super(card);
     }
 

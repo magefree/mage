@@ -29,7 +29,7 @@ public final class GoblinCannon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinCannon(final GoblinCannon card) {
+    private GoblinCannon(final GoblinCannon card) {
         super(card);
     }
 

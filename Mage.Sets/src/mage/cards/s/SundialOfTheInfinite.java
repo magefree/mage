@@ -29,7 +29,7 @@ public final class SundialOfTheInfinite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SundialOfTheInfinite(final SundialOfTheInfinite card) {
+    private SundialOfTheInfinite(final SundialOfTheInfinite card) {
         super(card);
     }
 

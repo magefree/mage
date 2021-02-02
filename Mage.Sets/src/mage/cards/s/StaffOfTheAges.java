@@ -27,7 +27,7 @@ public final class StaffOfTheAges extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StaffOfTheAgesEffect()));
     }
 
-    public StaffOfTheAges(final StaffOfTheAges card) {
+    private StaffOfTheAges(final StaffOfTheAges card) {
         super(card);
     }
 

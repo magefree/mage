@@ -49,7 +49,7 @@ public final class SoldeviGolem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoldeviGolem(final SoldeviGolem card) {
+    private SoldeviGolem(final SoldeviGolem card) {
         super(card);
     }
 

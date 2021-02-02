@@ -48,7 +48,7 @@ public final class NotoriousAssassin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NotoriousAssassin(final NotoriousAssassin card) {
+    private NotoriousAssassin(final NotoriousAssassin card) {
         super(card);
     }
 

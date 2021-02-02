@@ -29,7 +29,7 @@ public final class FlayerHusk extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public FlayerHusk(final FlayerHusk card) {
+    private FlayerHusk(final FlayerHusk card) {
         super(card);
     }
 

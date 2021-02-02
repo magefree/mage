@@ -38,7 +38,7 @@ public final class TorpidMoloch extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledLandPermanent("three lands"), true))));
     }
 
-    public TorpidMoloch(final TorpidMoloch card) {
+    private TorpidMoloch(final TorpidMoloch card) {
         super(card);
     }
 

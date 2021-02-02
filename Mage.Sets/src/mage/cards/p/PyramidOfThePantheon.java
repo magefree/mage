@@ -38,7 +38,7 @@ public final class PyramidOfThePantheon extends CardImpl {
                 new SourceHasCounterCondition(CounterType.BRICK, 3)));
     }
 
-    public PyramidOfThePantheon(final PyramidOfThePantheon card) {
+    private PyramidOfThePantheon(final PyramidOfThePantheon card) {
         super(card);
     }
 

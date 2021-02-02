@@ -51,7 +51,7 @@ public final class JangoFett extends CardImpl {
         this.addAbility(new JangoFettTriggeredAbility(new JangoFettEffect(), false));
     }
 
-    public JangoFett(final JangoFett card) {
+    private JangoFett(final JangoFett card) {
         super(card);
     }
 

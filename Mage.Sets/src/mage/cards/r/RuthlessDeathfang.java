@@ -39,7 +39,7 @@ public final class RuthlessDeathfang extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RuthlessDeathfang(final RuthlessDeathfang card) {
+    private RuthlessDeathfang(final RuthlessDeathfang card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class MountainYeti extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
     }
 
-    public MountainYeti(final MountainYeti card) {
+    private MountainYeti(final MountainYeti card) {
         super(card);
     }
 

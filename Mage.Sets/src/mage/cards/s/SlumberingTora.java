@@ -38,7 +38,7 @@ public final class SlumberingTora extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SlumberingTora(final SlumberingTora card) {
+    private SlumberingTora(final SlumberingTora card) {
         super(card);
     }
 

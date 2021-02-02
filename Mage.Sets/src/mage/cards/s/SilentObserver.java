@@ -25,7 +25,7 @@ public final class SilentObserver extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public SilentObserver(final SilentObserver card) {
+    private SilentObserver(final SilentObserver card) {
         super(card);
     }
 

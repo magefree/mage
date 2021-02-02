@@ -46,7 +46,7 @@ public final class RishadanPawnshop extends CardImpl {
 
     }
 
-    public RishadanPawnshop(final RishadanPawnshop card) {
+    private RishadanPawnshop(final RishadanPawnshop card) {
         super(card);
     }
 

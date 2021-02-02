@@ -43,7 +43,7 @@ public final class UntamedKavu extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UntamedKavu(final UntamedKavu card) {
+    private UntamedKavu(final UntamedKavu card) {
         super(card);
     }
 

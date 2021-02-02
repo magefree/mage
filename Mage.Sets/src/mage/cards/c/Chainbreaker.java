@@ -42,7 +42,7 @@ public final class Chainbreaker extends CardImpl {
         
     }
     
-    public Chainbreaker(final Chainbreaker card) {
+    private Chainbreaker(final Chainbreaker card) {
         super(card);
     }
     

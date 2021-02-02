@@ -70,7 +70,7 @@ public final class HungryLynx extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(effect2, false, filterRat));
     }
 
-    public HungryLynx(final HungryLynx card) {
+    private HungryLynx(final HungryLynx card) {
         super(card);
     }
 

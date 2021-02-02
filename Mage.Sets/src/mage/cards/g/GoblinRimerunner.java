@@ -42,7 +42,7 @@ public final class GoblinRimerunner extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{S}")));
     }
 
-    public GoblinRimerunner(final GoblinRimerunner card) {
+    private GoblinRimerunner(final GoblinRimerunner card) {
         super(card);
     }
 

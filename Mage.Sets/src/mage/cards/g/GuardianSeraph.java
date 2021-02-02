@@ -35,7 +35,7 @@ public final class GuardianSeraph extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GuardianSeraphEffect()));
     }
 
-    public GuardianSeraph(final GuardianSeraph card) {
+    private GuardianSeraph(final GuardianSeraph card) {
         super(card);
     }
 

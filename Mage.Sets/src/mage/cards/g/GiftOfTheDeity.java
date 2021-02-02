@@ -56,7 +56,7 @@ public final class GiftOfTheDeity extends CardImpl {
         this.addAbility(greenAbility);
     }
 
-    public GiftOfTheDeity(final GiftOfTheDeity card) {
+    private GiftOfTheDeity(final GiftOfTheDeity card) {
         super(card);
     }
 

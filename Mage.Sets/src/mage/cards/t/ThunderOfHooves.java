@@ -38,7 +38,7 @@ public final class ThunderOfHooves extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public ThunderOfHooves(final ThunderOfHooves card) {
+    private ThunderOfHooves(final ThunderOfHooves card) {
         super(card);
     }
 

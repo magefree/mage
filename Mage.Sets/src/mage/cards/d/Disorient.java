@@ -24,7 +24,7 @@ public final class Disorient extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(-7, 0, Duration.EndOfTurn));
     }
 
-    public Disorient(final Disorient card) {
+    private Disorient(final Disorient card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class MidnightHaunting extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken(), 2));
     }
 
-    public MidnightHaunting(final MidnightHaunting card) {
+    private MidnightHaunting(final MidnightHaunting card) {
         super(card);
     }
 

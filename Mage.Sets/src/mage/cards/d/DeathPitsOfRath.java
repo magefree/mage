@@ -26,7 +26,7 @@ public final class DeathPitsOfRath extends CardImpl {
         this.addAbility(new DeathPitsOfRathTriggeredAbility());
     }
 
-    public DeathPitsOfRath(final DeathPitsOfRath card) {
+    private DeathPitsOfRath(final DeathPitsOfRath card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class Humility extends CardImpl {
 
     }
 
-    public Humility(final Humility card) {
+    private Humility(final Humility card) {
         super(card);
     }
 

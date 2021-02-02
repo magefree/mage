@@ -38,7 +38,7 @@ public final class Chromium extends CardImpl {
             new ManaCostsImpl("{W}{U}{B}")), TargetController.YOU, false));
     }
 
-    public Chromium(final Chromium card) {
+    private Chromium(final Chromium card) {
         super(card);
     }
 

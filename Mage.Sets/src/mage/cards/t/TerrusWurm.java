@@ -28,7 +28,7 @@ public final class TerrusWurm extends CardImpl {
         this.addAbility(new ScavengeAbility(new ManaCostsImpl("{6}{B}")));
     }
 
-    public TerrusWurm(final TerrusWurm card) {
+    private TerrusWurm(final TerrusWurm card) {
         super(card);
     }
 

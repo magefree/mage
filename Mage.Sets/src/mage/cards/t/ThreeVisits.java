@@ -28,7 +28,7 @@ public final class ThreeVisits extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)));
     }
 
-    public ThreeVisits(final ThreeVisits card) {
+    private ThreeVisits(final ThreeVisits card) {
         super(card);
     }
 

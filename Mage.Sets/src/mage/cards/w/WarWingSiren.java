@@ -32,7 +32,7 @@ public final class WarWingSiren extends CardImpl {
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false)));
     }
 
-    public WarWingSiren(final WarWingSiren card) {
+    private WarWingSiren(final WarWingSiren card) {
         super(card);
     }
 

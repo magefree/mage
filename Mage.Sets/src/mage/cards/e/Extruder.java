@@ -43,7 +43,7 @@ public final class Extruder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Extruder(final Extruder card) {
+    private Extruder(final Extruder card) {
         super(card);
     }
 

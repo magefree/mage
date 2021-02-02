@@ -31,7 +31,7 @@ public final class NantukoElder extends CardImpl {
 
     }
 
-    public NantukoElder(final NantukoElder card) {
+    private NantukoElder(final NantukoElder card) {
         super(card);
     }
 

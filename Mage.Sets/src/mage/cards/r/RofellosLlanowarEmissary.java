@@ -39,7 +39,7 @@ public final class RofellosLlanowarEmissary extends CardImpl {
 		this.addAbility(new DynamicManaAbility(Mana.GreenMana(1), new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public RofellosLlanowarEmissary(final RofellosLlanowarEmissary card) {
+    private RofellosLlanowarEmissary(final RofellosLlanowarEmissary card) {
         super(card);
     }
 

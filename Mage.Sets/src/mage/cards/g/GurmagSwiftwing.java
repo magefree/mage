@@ -32,7 +32,7 @@ public final class GurmagSwiftwing extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public GurmagSwiftwing(final GurmagSwiftwing card) {
+    private GurmagSwiftwing(final GurmagSwiftwing card) {
         super(card);
     }
 

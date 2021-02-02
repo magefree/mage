@@ -33,7 +33,7 @@ public final class PhyrexianScuta extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.instance, "If Phyrexian Scuta was kicked, it enters the battlefield with two +1/+1 counters on it.", ""));
     }
 
-    public PhyrexianScuta(final PhyrexianScuta card) {
+    private PhyrexianScuta(final PhyrexianScuta card) {
         super(card);
     }
 

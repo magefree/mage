@@ -67,7 +67,7 @@ public final class TidalInfluence extends CardImpl {
         this.addAbility(new TidalInfluenceTriggeredAbility(new RemoveAllCountersSourceEffect(CounterType.TIDE)));
     }
 
-    public TidalInfluence(final TidalInfluence card) {
+    private TidalInfluence(final TidalInfluence card) {
         super(card);
     }
 

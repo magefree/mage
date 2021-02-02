@@ -40,7 +40,7 @@ public final class HoundOfTheFarbogs extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HoundOfTheFarbogs(final HoundOfTheFarbogs card) {
+    private HoundOfTheFarbogs(final HoundOfTheFarbogs card) {
         super(card);
     }
 

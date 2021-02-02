@@ -35,7 +35,7 @@ public final class HardenedBerserker extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new HardenedBerserkerSpellsCostReductionEffect(), false));
     }
 
-    public HardenedBerserker(final HardenedBerserker card) {
+    private HardenedBerserker(final HardenedBerserker card) {
         super(card);
     }
 

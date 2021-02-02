@@ -44,7 +44,7 @@ public final class AbundantGrowth extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public AbundantGrowth(final AbundantGrowth card) {
+    private AbundantGrowth(final AbundantGrowth card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class ParhelionPatrol extends CardImpl {
         this.addAbility(new MentorAbility());
     }
 
-    public ParhelionPatrol(final ParhelionPatrol card) {
+    private ParhelionPatrol(final ParhelionPatrol card) {
         super(card);
     }
 

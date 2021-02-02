@@ -26,7 +26,7 @@ public final class FuryStorm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
     }
 
-    public FuryStorm(final FuryStorm card) {
+    private FuryStorm(final FuryStorm card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class ZodiacMonkey extends CardImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public ZodiacMonkey(final ZodiacMonkey card) {
+    private ZodiacMonkey(final ZodiacMonkey card) {
         super(card);
     }
 

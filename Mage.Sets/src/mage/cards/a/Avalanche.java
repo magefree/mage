@@ -28,7 +28,7 @@ public final class Avalanche extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(AvalancheAdjuster.instance);
     }
 
-    public Avalanche(final Avalanche card) {
+    private Avalanche(final Avalanche card) {
         super(card);
     }
 

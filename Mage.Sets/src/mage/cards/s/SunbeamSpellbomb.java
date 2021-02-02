@@ -31,7 +31,7 @@ public final class SunbeamSpellbomb extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public SunbeamSpellbomb(final SunbeamSpellbomb card) {
+    private SunbeamSpellbomb(final SunbeamSpellbomb card) {
         super(card);
     }
 

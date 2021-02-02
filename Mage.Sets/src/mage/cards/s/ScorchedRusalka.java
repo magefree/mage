@@ -36,7 +36,7 @@ public final class ScorchedRusalka extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ScorchedRusalka(final ScorchedRusalka card) {
+    private ScorchedRusalka(final ScorchedRusalka card) {
         super(card);
     }
 

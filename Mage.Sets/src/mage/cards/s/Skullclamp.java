@@ -33,7 +33,7 @@ public final class Skullclamp extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
-    public Skullclamp(final Skullclamp card) {
+    private Skullclamp(final Skullclamp card) {
         super(card);
     }
 

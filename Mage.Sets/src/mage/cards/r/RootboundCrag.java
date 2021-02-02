@@ -40,7 +40,7 @@ public final class RootboundCrag extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public RootboundCrag(final RootboundCrag card) {
+    private RootboundCrag(final RootboundCrag card) {
         super(card);
     }
 

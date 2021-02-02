@@ -40,7 +40,7 @@ public final class SidewinderSliver extends CardImpl {
         ));
     }
 
-    public SidewinderSliver(final SidewinderSliver card) {
+    private SidewinderSliver(final SidewinderSliver card) {
         super(card);
     }
 

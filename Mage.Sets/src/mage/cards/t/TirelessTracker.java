@@ -45,7 +45,7 @@ public final class TirelessTracker extends CardImpl {
         this.addAbility(new TirelessTrackerTriggeredAbility());
     }
 
-    public TirelessTracker(final TirelessTracker card) {
+    private TirelessTracker(final TirelessTracker card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class Intuition extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public Intuition(final Intuition card) {
+    private Intuition(final Intuition card) {
         super(card);
     }
 

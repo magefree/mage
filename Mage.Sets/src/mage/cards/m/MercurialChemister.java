@@ -46,7 +46,7 @@ public final class MercurialChemister extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MercurialChemister(final MercurialChemister card) {
+    private MercurialChemister(final MercurialChemister card) {
         super(card);
     }
 

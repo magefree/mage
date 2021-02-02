@@ -34,7 +34,7 @@ public final class ReliquaryMonk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ReliquaryMonk(final ReliquaryMonk card) {
+    private ReliquaryMonk(final ReliquaryMonk card) {
         super(card);
     }
 

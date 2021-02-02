@@ -35,7 +35,7 @@ public final class CinderWall extends CardImpl {
         ));
     }
 
-    public CinderWall(final CinderWall card) {
+    private CinderWall(final CinderWall card) {
         super(card);
     }
 

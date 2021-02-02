@@ -41,7 +41,7 @@ public final class AscendantEvincar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filterNonBlack, false)));
     }
 
-    public AscendantEvincar(final AscendantEvincar card) {
+    private AscendantEvincar(final AscendantEvincar card) {
         super(card);
     }
 

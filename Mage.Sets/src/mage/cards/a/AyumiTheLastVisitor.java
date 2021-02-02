@@ -35,7 +35,7 @@ public final class AyumiTheLastVisitor extends CardImpl {
 
     }
 
-    public AyumiTheLastVisitor(final AyumiTheLastVisitor card) {
+    private AyumiTheLastVisitor(final AyumiTheLastVisitor card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class MerrowHarbinger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(filter), true, true), true));
     }
 
-    public MerrowHarbinger(final MerrowHarbinger card) {
+    private MerrowHarbinger(final MerrowHarbinger card) {
         super(card);
     }
 

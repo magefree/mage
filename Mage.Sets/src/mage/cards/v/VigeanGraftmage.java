@@ -45,7 +45,7 @@ public final class VigeanGraftmage extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public VigeanGraftmage(final VigeanGraftmage card) {
+    private VigeanGraftmage(final VigeanGraftmage card) {
         super(card);
     }
 

@@ -55,7 +55,7 @@ public final class BaruFistOfKrosa extends CardImpl {
         this.addAbility(new GrandeurAbility(new BaruFistOfKrosaEffect(), "Baru, Fist of Krosa"));
     }
 
-    public BaruFistOfKrosa(final BaruFistOfKrosa card) {
+    private BaruFistOfKrosa(final BaruFistOfKrosa card) {
         super(card);
     }
 

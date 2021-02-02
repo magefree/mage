@@ -39,7 +39,7 @@ public final class TakeHeart extends CardImpl {
         ).setText("You gain 1 life for each attacking creature you control."));
     }
 
-    public TakeHeart(final TakeHeart card) {
+    private TakeHeart(final TakeHeart card) {
         super(card);
     }
 

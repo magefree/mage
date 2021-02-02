@@ -39,7 +39,7 @@ public final class GruesomeDeformity extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public GruesomeDeformity(final GruesomeDeformity card) {
+    private GruesomeDeformity(final GruesomeDeformity card) {
         super(card);
     }
 

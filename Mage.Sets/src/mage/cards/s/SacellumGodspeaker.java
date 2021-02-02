@@ -38,7 +38,7 @@ public final class SacellumGodspeaker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SacellumGodspeaker(final SacellumGodspeaker card) {
+    private SacellumGodspeaker(final SacellumGodspeaker card) {
         super(card);
     }
 

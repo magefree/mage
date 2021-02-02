@@ -41,7 +41,7 @@ public final class FightWithFire extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(FightWithFireAdjuster.instance);
     }
 
-    public FightWithFire(final FightWithFire card) {
+    private FightWithFire(final FightWithFire card) {
         super(card);
     }
 

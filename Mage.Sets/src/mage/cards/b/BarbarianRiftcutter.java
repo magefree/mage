@@ -35,7 +35,7 @@ public final class BarbarianRiftcutter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BarbarianRiftcutter(final BarbarianRiftcutter card) {
+    private BarbarianRiftcutter(final BarbarianRiftcutter card) {
         super(card);
     }
 

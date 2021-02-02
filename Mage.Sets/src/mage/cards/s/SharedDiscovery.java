@@ -34,7 +34,7 @@ public final class SharedDiscovery extends CardImpl {
         this.getSpellAbility().addCost(new TapTargetCost(new TargetControlledCreaturePermanent(4, 4, filter, true)));
     }
 
-    public SharedDiscovery(final SharedDiscovery card) {
+    private SharedDiscovery(final SharedDiscovery card) {
         super(card);
     }
 

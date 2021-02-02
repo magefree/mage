@@ -44,7 +44,7 @@ public final class PatronOfTheMoon extends CardImpl {
 
     }
 
-    public PatronOfTheMoon(final PatronOfTheMoon card) {
+    private PatronOfTheMoon(final PatronOfTheMoon card) {
         super(card);
     }
 

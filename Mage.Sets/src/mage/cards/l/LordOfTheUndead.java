@@ -49,7 +49,7 @@ public final class LordOfTheUndead extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LordOfTheUndead(final LordOfTheUndead card) {
+    private LordOfTheUndead(final LordOfTheUndead card) {
         super(card);
     }
 

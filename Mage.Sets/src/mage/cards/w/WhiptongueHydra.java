@@ -39,7 +39,7 @@ public final class WhiptongueHydra extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new WhiptongueHydraEffect(), false));
     }
 
-    public WhiptongueHydra(final WhiptongueHydra card) {
+    private WhiptongueHydra(final WhiptongueHydra card) {
         super(card);
     }
 

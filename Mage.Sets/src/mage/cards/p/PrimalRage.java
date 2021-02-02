@@ -24,7 +24,7 @@ public final class PrimalRage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false)));
     }
 
-    public PrimalRage(final PrimalRage card) {
+    private PrimalRage(final PrimalRage card) {
         super(card);
     }
 

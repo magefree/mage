@@ -46,7 +46,7 @@ public final class OakStreetInnkeeper extends CardImpl {
 
     }
 
-    public OakStreetInnkeeper(final OakStreetInnkeeper card) {
+    private OakStreetInnkeeper(final OakStreetInnkeeper card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class KwendePrideOfFemeref extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public KwendePrideOfFemeref(final KwendePrideOfFemeref card) {
+    private KwendePrideOfFemeref(final KwendePrideOfFemeref card) {
         super(card);
     }
 

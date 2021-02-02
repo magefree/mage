@@ -33,7 +33,7 @@ public final class FarrelsZealot extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FarrelsZealot(final FarrelsZealot card) {
+    private FarrelsZealot(final FarrelsZealot card) {
         super(card);
     }
 

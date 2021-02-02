@@ -48,7 +48,7 @@ public final class SithManipulator extends CardImpl {
 
     }
 
-    public SithManipulator(final SithManipulator card) {
+    private SithManipulator(final SithManipulator card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class SoulsGrace extends CardImpl {
         this.getSpellAbility().addEffect(new SoulsGraceEffect());
     }
 
-    public SoulsGrace(final SoulsGrace card) {
+    private SoulsGrace(final SoulsGrace card) {
         super(card);
     }
 

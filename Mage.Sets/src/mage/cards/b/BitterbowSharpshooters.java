@@ -32,7 +32,7 @@ public final class BitterbowSharpshooters extends CardImpl {
 
     }
 
-    public BitterbowSharpshooters(final BitterbowSharpshooters card) {
+    private BitterbowSharpshooters(final BitterbowSharpshooters card) {
         super(card);
     }
 

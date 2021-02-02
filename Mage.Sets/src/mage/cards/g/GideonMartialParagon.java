@@ -59,7 +59,7 @@ public final class GideonMartialParagon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GideonMartialParagon(final GideonMartialParagon card) {
+    private GideonMartialParagon(final GideonMartialParagon card) {
         super(card);
     }
 

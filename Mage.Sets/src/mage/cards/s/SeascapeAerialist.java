@@ -39,7 +39,7 @@ public final class SeascapeAerialist extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter), true));
     }
 
-    public SeascapeAerialist(final SeascapeAerialist card) {
+    private SeascapeAerialist(final SeascapeAerialist card) {
         super(card);
     }
 

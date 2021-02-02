@@ -30,7 +30,7 @@ public final class ResourcefulReturn extends CardImpl {
 
     }
 
-    public ResourcefulReturn(final ResourcefulReturn card) {
+    private ResourcefulReturn(final ResourcefulReturn card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class TarPitWarrior extends CardImpl {
         this.addAbility(new BecomesTargetTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public TarPitWarrior(final TarPitWarrior card) {
+    private TarPitWarrior(final TarPitWarrior card) {
         super(card);
     }
 

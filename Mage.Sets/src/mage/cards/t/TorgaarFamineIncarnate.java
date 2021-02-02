@@ -47,7 +47,7 @@ public final class TorgaarFamineIncarnate extends CardImpl {
 
     }
 
-    public TorgaarFamineIncarnate(final TorgaarFamineIncarnate card) {
+    private TorgaarFamineIncarnate(final TorgaarFamineIncarnate card) {
         super(card);
     }
 

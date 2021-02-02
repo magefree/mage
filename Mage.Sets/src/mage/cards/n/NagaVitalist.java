@@ -28,7 +28,7 @@ public final class NagaVitalist extends CardImpl {
         this.addAbility(new AnyColorLandsProduceManaAbility(TargetController.YOU, false));
     }
 
-    public NagaVitalist(final NagaVitalist card) {
+    private NagaVitalist(final NagaVitalist card) {
         super(card);
     }
 

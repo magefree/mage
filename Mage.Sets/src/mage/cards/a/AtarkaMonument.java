@@ -39,7 +39,7 @@ public final class AtarkaMonument extends CardImpl {
                 "", Duration.EndOfTurn), new ManaCostsImpl("{4}{R}{G}")));
     }
 
-    public AtarkaMonument(final AtarkaMonument card) {
+    private AtarkaMonument(final AtarkaMonument card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class Tundra extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public Tundra(final Tundra card) {
+    private Tundra(final Tundra card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class DreadReturn extends CardImpl {
         this.addAbility(new FlashbackAbility(new SacrificeTargetCost(new TargetControlledCreaturePermanent(3, 3, new FilterControlledCreaturePermanent("three creatures"), true)), TimingRule.SORCERY));
     }
 
-    public DreadReturn(final DreadReturn card) {
+    private DreadReturn(final DreadReturn card) {
         super(card);
     }
 

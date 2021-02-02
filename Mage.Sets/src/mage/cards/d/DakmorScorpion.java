@@ -22,7 +22,7 @@ public final class DakmorScorpion extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public DakmorScorpion(final DakmorScorpion card) {
+    private DakmorScorpion(final DakmorScorpion card) {
         super(card);
     }
 

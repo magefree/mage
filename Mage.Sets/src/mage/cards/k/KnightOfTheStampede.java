@@ -35,7 +35,7 @@ public final class KnightOfTheStampede extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 2)));
     }
 
-    public KnightOfTheStampede(final KnightOfTheStampede card) {
+    private KnightOfTheStampede(final KnightOfTheStampede card) {
         super(card);
     }
 

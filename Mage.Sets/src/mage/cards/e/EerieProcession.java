@@ -32,7 +32,7 @@ public final class EerieProcession extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true));
     }
 
-    public EerieProcession(final EerieProcession card) {
+    private EerieProcession(final EerieProcession card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class AnimateLand extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public AnimateLand(final AnimateLand card) {
+    private AnimateLand(final AnimateLand card) {
         super(card);
     }
 

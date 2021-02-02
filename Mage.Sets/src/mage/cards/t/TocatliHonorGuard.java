@@ -28,7 +28,7 @@ public final class TocatliHonorGuard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TorporOrbEffect()));
     }
 
-    public TocatliHonorGuard(final TocatliHonorGuard card) {
+    private TocatliHonorGuard(final TocatliHonorGuard card) {
         super(card);
     }
 

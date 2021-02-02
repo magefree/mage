@@ -53,7 +53,7 @@ public final class GrenzoHavocRaiser extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GrenzoHavocRaiser(final GrenzoHavocRaiser card) {
+    private GrenzoHavocRaiser(final GrenzoHavocRaiser card) {
         super(card);
     }
 

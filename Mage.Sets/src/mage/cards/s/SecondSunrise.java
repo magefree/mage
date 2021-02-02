@@ -34,7 +34,7 @@ public final class SecondSunrise extends CardImpl {
         this.getSpellAbility().addWatcher(new SecondSunriseWatcher());
     }
 
-    public SecondSunrise(final SecondSunrise card) {
+    private SecondSunrise(final SecondSunrise card) {
         super(card);
     }
 

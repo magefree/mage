@@ -39,7 +39,7 @@ public final class GoblinMasons extends CardImpl {
     
     }
 
-    public GoblinMasons(final GoblinMasons card) {
+    private GoblinMasons(final GoblinMasons card) {
         super(card);
     }
 

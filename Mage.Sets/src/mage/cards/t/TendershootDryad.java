@@ -53,7 +53,7 @@ public final class TendershootDryad extends CardImpl {
                 .addHint(CitysBlessingHint.instance));
     }
 
-    public TendershootDryad(final TendershootDryad card) {
+    private TendershootDryad(final TendershootDryad card) {
         super(card);
     }
 

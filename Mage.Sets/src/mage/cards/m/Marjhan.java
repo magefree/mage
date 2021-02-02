@@ -73,7 +73,7 @@ public final class Marjhan extends CardImpl {
                 new SacrificeSourceEffect()));
     }
 
-    public Marjhan(final Marjhan card) {
+    private Marjhan(final Marjhan card) {
         super(card);
     }
 

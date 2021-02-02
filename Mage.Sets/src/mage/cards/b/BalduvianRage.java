@@ -32,7 +32,7 @@ public final class BalduvianRage extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)),false));
     }
 
-    public BalduvianRage(final BalduvianRage card) {
+    private BalduvianRage(final BalduvianRage card) {
         super(card);
     }
 

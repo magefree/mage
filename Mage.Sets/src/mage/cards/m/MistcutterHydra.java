@@ -38,7 +38,7 @@ public final class MistcutterHydra extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
     }
 
-    public MistcutterHydra(final MistcutterHydra card) {
+    private MistcutterHydra(final MistcutterHydra card) {
         super(card);
     }
 

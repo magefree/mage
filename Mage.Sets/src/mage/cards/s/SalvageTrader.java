@@ -47,7 +47,7 @@ public final class SalvageTrader extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SalvageTrader(final SalvageTrader card) {
+    private SalvageTrader(final SalvageTrader card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class SporesowerThallid extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
     }
 
-    public SporesowerThallid(final SporesowerThallid card) {
+    private SporesowerThallid(final SporesowerThallid card) {
         super(card);
     }
 

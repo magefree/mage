@@ -25,7 +25,7 @@ public final class Chaoslace extends CardImpl {
         this.getSpellAbility().addEffect(new BecomesColorTargetEffect(ObjectColor.RED, Duration.Custom));
     }
 
-    public Chaoslace(final Chaoslace card) {
+    private Chaoslace(final Chaoslace card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class MysticFamiliar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MysticFamiliar(final MysticFamiliar card) {
+    private MysticFamiliar(final MysticFamiliar card) {
         super(card);
     }
 

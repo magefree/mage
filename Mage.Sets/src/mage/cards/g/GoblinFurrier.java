@@ -33,7 +33,7 @@ public final class GoblinFurrier extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoblinFurrierPreventEffectEffect(Duration.WhileOnBattlefield)));
     }
 
-    public GoblinFurrier(final GoblinFurrier card) {
+    private GoblinFurrier(final GoblinFurrier card) {
         super(card);
     }
 

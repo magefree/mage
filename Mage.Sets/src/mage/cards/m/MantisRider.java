@@ -33,7 +33,7 @@ public final class MantisRider extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public MantisRider(final MantisRider card) {
+    private MantisRider(final MantisRider card) {
         super(card);
     }
 

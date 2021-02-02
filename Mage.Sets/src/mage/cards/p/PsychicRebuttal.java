@@ -43,7 +43,7 @@ public final class PsychicRebuttal extends CardImpl {
         // <i>Spell mastery</i> &mdash; If there are two or more instant and/or sorcery cards in your graveyard, you may copy the spell countered this way. You may choose new targets for the copy.
     }
 
-    public PsychicRebuttal(final PsychicRebuttal card) {
+    private PsychicRebuttal(final PsychicRebuttal card) {
         super(card);
     }
 

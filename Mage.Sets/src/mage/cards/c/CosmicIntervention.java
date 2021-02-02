@@ -39,7 +39,7 @@ public final class CosmicIntervention extends CardImpl {
 
     }
 
-    public CosmicIntervention(final CosmicIntervention card) {
+    private CosmicIntervention(final CosmicIntervention card) {
         super(card);
     }
 

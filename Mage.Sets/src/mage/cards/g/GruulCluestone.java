@@ -38,7 +38,7 @@ public final class GruulCluestone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GruulCluestone(final GruulCluestone card) {
+    private GruulCluestone(final GruulCluestone card) {
         super(card);
     }
 

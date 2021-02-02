@@ -45,7 +45,7 @@ public final class WarDance extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WarDance(final WarDance card) {
+    private WarDance(final WarDance card) {
         super(card);
     }
 

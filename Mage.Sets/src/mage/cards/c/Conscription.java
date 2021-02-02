@@ -37,7 +37,7 @@ public final class Conscription extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public Conscription(final Conscription card) {
+    private Conscription(final Conscription card) {
         super(card);
     }
 

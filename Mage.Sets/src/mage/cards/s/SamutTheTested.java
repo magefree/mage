@@ -56,7 +56,7 @@ public final class SamutTheTested extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SamutTheTested(final SamutTheTested card) {
+    private SamutTheTested(final SamutTheTested card) {
         super(card);
     }
 

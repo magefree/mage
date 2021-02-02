@@ -28,7 +28,7 @@ public final class SejiriSteppe extends CardImpl {
         this.addAbility(new WhiteManaAbility());
     }
 
-    public SejiriSteppe(final SejiriSteppe card) {
+    private SejiriSteppe(final SejiriSteppe card) {
         super(card);
     }
 

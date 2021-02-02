@@ -39,7 +39,7 @@ public final class DeadeyeRigHauler extends CardImpl {
         this.addAbility(ability, new PlayerAttackedWatcher());
     }
 
-    public DeadeyeRigHauler(final DeadeyeRigHauler card) {
+    private DeadeyeRigHauler(final DeadeyeRigHauler card) {
         super(card);
     }
 

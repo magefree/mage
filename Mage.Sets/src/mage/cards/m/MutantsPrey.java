@@ -38,7 +38,7 @@ public final class MutantsPrey extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter2));
     }
 
-    public MutantsPrey(final MutantsPrey card) {
+    private MutantsPrey(final MutantsPrey card) {
         super(card);
     }
 

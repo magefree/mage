@@ -32,7 +32,7 @@ public final class NoggleRansacker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NoggleRansacker(final NoggleRansacker card) {
+    private NoggleRansacker(final NoggleRansacker card) {
         super(card);
     }
 

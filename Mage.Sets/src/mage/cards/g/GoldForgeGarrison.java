@@ -43,7 +43,7 @@ public final class GoldForgeGarrison extends CardImpl {
 
     }
 
-    public GoldForgeGarrison(final GoldForgeGarrison card) {
+    private GoldForgeGarrison(final GoldForgeGarrison card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class Lynx extends CardImpl {
         this.addAbility(new ForestwalkAbility());
     }
 
-    public Lynx(final Lynx card) {
+    private Lynx(final Lynx card) {
         super(card);
     }
 

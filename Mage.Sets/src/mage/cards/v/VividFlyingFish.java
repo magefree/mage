@@ -42,7 +42,7 @@ public final class VividFlyingFish extends CardImpl {
         ));
     }
 
-    public VividFlyingFish(final VividFlyingFish card) {
+    private VividFlyingFish(final VividFlyingFish card) {
         super(card);
     }
 

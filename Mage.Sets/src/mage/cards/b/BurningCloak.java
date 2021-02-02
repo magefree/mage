@@ -28,7 +28,7 @@ public final class BurningCloak extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public BurningCloak(final BurningCloak card) {
+    private BurningCloak(final BurningCloak card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class WillowFaerie extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WillowFaerie(final WillowFaerie card) {
+    private WillowFaerie(final WillowFaerie card) {
         super(card);
     }
 

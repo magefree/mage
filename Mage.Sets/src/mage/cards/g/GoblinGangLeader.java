@@ -28,7 +28,7 @@ public final class GoblinGangLeader extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken("ANA"), 2)));
     }
 
-    public GoblinGangLeader(final GoblinGangLeader card) {
+    private GoblinGangLeader(final GoblinGangLeader card) {
         super(card);
     }
 

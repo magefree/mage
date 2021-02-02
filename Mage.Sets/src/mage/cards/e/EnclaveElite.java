@@ -40,7 +40,7 @@ public final class EnclaveElite extends CardImpl {
                 "with a +1/+1 counter on it for each time it was kicked"));
     }
 
-    public EnclaveElite(final EnclaveElite card) {
+    private EnclaveElite(final EnclaveElite card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class NimShrieker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.WhileOnBattlefield)));
     }
 
-    public NimShrieker(final NimShrieker card) {
+    private NimShrieker(final NimShrieker card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class WindDrake extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WindDrake(final WindDrake card) {
+    private WindDrake(final WindDrake card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class BloodshotCyclops extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodshotCyclops(final BloodshotCyclops card) {
+    private BloodshotCyclops(final BloodshotCyclops card) {
         super(card);
     }
 

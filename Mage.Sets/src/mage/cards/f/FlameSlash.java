@@ -22,7 +22,7 @@ public final class FlameSlash extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
     }
 
-    public FlameSlash(final FlameSlash card) {
+    private FlameSlash(final FlameSlash card) {
         super(card);
     }
 

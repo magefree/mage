@@ -59,7 +59,7 @@ public final class DirtyWererat extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public DirtyWererat(final DirtyWererat card) {
+    private DirtyWererat(final DirtyWererat card) {
         super(card);
     }
 

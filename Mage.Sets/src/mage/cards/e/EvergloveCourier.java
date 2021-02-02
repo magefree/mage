@@ -53,7 +53,7 @@ public final class EvergloveCourier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EvergloveCourier(final EvergloveCourier card) {
+    private EvergloveCourier(final EvergloveCourier card) {
         super(card);
     }
 

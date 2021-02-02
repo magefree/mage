@@ -30,7 +30,7 @@ public final class NecraSanctuary extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NecraSanctuary(final NecraSanctuary card) {
+    private NecraSanctuary(final NecraSanctuary card) {
         super(card);
     }
 

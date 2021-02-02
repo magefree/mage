@@ -39,7 +39,7 @@ public final class DoorOfDestinies extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostCreatureEffectEffect()));
     }
 
-    public DoorOfDestinies(final DoorOfDestinies card) {
+    private DoorOfDestinies(final DoorOfDestinies card) {
         super(card);
     }
 

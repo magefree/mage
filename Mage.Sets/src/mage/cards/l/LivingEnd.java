@@ -26,7 +26,7 @@ public final class LivingEnd extends CardImpl {
         this.getSpellAbility().addEffect(new LivingDeathEffect());
     }
 
-    public LivingEnd(final LivingEnd card) {
+    private LivingEnd(final LivingEnd card) {
         super(card);
     }
 

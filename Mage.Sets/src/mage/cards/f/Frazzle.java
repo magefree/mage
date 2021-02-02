@@ -32,7 +32,7 @@ public final class Frazzle extends CardImpl {
         // Counter target nonblue spell.
     }
 
-    public Frazzle(final Frazzle card) {
+    private Frazzle(final Frazzle card) {
         super(card);
     }
 

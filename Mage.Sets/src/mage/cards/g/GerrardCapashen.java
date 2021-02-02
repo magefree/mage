@@ -45,7 +45,7 @@ public final class GerrardCapashen extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public GerrardCapashen(final GerrardCapashen card) {
+    private GerrardCapashen(final GerrardCapashen card) {
         super(card);
     }
 

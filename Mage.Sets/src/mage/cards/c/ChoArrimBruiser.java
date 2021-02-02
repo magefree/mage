@@ -32,7 +32,7 @@ public final class ChoArrimBruiser extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChoArrimBruiser(final ChoArrimBruiser card) {
+    private ChoArrimBruiser(final ChoArrimBruiser card) {
         super(card);
     }
 

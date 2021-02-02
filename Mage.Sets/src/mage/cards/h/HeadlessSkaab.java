@@ -32,7 +32,7 @@ public final class HeadlessSkaab extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
     }
 
-    public HeadlessSkaab(final HeadlessSkaab card) {
+    private HeadlessSkaab(final HeadlessSkaab card) {
         super(card);
     }
 

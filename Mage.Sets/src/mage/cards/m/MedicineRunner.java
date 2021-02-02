@@ -32,7 +32,7 @@ public final class MedicineRunner extends CardImpl {
 
     }
 
-    public MedicineRunner(final MedicineRunner card) {
+    private MedicineRunner(final MedicineRunner card) {
         super(card);
     }
 

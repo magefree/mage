@@ -36,7 +36,7 @@ public final class UnhallowedPact extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToBattlefieldUnderYourControlAttachedEffect(), "enchanted creature"));
     }
 
-    public UnhallowedPact(final UnhallowedPact card) {
+    private UnhallowedPact(final UnhallowedPact card) {
         super(card);
     }
 

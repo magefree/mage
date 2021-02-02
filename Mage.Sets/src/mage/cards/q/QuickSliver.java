@@ -38,7 +38,7 @@ public final class QuickSliver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public QuickSliver(final QuickSliver card) {
+    private QuickSliver(final QuickSliver card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class Watercourser extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
     }
 
-    public Watercourser(final Watercourser card) {
+    private Watercourser(final Watercourser card) {
         super(card);
     }
 

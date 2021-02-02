@@ -49,7 +49,7 @@ public final class ScionOfOona extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public ScionOfOona(final ScionOfOona card) {
+    private ScionOfOona(final ScionOfOona card) {
         super(card);
     }
 

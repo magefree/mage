@@ -21,7 +21,7 @@ public final class DouserOfLights extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public DouserOfLights(final DouserOfLights card) {
+    private DouserOfLights(final DouserOfLights card) {
         super(card);
     }
 

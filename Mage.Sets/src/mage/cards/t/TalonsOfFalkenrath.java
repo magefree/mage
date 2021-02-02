@@ -44,7 +44,7 @@ public final class TalonsOfFalkenrath extends CardImpl {
                 AttachmentType.AURA)));
     }
 
-    public TalonsOfFalkenrath(final TalonsOfFalkenrath card) {
+    private TalonsOfFalkenrath(final TalonsOfFalkenrath card) {
         super(card);
     }
 

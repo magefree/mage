@@ -41,7 +41,7 @@ public final class NightDealings extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NightDealings(final NightDealings card) {
+    private NightDealings(final NightDealings card) {
         super(card);
     }
 

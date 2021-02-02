@@ -36,7 +36,7 @@ public final class SavingGrasp extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{W}"), TimingRule.INSTANT));
     }
 
-    public SavingGrasp(final SavingGrasp card) {
+    private SavingGrasp(final SavingGrasp card) {
         super(card);
     }
 

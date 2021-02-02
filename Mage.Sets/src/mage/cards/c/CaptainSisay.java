@@ -40,7 +40,7 @@ public final class CaptainSisay extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true, true), new TapSourceCost()));
     }
 
-    public CaptainSisay(final CaptainSisay card) {
+    private CaptainSisay(final CaptainSisay card) {
         super(card);
     }
 

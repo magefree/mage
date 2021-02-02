@@ -42,7 +42,7 @@ public final class CelestialConvergence extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CelestialConvergence(final CelestialConvergence card) {
+    private CelestialConvergence(final CelestialConvergence card) {
         super(card);
     }
 

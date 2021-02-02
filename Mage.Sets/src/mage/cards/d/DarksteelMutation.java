@@ -45,7 +45,7 @@ public final class DarksteelMutation extends CardImpl {
 
     }
 
-    public DarksteelMutation(final DarksteelMutation card) {
+    private DarksteelMutation(final DarksteelMutation card) {
         super(card);
     }
 

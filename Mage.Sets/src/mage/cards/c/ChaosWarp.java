@@ -34,7 +34,7 @@ public final class ChaosWarp extends CardImpl {
 
     }
 
-    public ChaosWarp(final ChaosWarp card) {
+    private ChaosWarp(final ChaosWarp card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class AvenBattlePriest extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)));
     }
 
-    public AvenBattlePriest(final AvenBattlePriest card) {
+    private AvenBattlePriest(final AvenBattlePriest card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class BarkshellBlessing extends CardImpl {
         this.addAbility(new ConspireAbility(getId(), ConspireAbility.ConspireTargets.ONE));
     }
 
-    public BarkshellBlessing(final BarkshellBlessing card) {
+    private BarkshellBlessing(final BarkshellBlessing card) {
         super(card);
     }
 

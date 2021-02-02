@@ -39,7 +39,7 @@ public final class InfernalCaretaker extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(effect));
     }
 
-    public InfernalCaretaker(final InfernalCaretaker card) {
+    private InfernalCaretaker(final InfernalCaretaker card) {
         super(card);
     }
 

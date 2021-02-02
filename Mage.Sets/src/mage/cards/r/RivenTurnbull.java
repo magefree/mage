@@ -28,7 +28,7 @@ public final class RivenTurnbull extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public RivenTurnbull(final RivenTurnbull card) {
+    private RivenTurnbull(final RivenTurnbull card) {
         super(card);
     }
 

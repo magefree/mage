@@ -40,7 +40,7 @@ public final class OtherworldlyJourney extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public OtherworldlyJourney(final OtherworldlyJourney card) {
+    private OtherworldlyJourney(final OtherworldlyJourney card) {
         super(card);
     }
 

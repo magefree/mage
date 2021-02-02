@@ -44,7 +44,7 @@ public final class AnimarSoulOfElements extends CardImpl {
 
     }
 
-    public AnimarSoulOfElements(final AnimarSoulOfElements card) {
+    private AnimarSoulOfElements(final AnimarSoulOfElements card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class NivMizzetDracogenius extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NivMizzetDracogenius(final NivMizzetDracogenius card) {
+    private NivMizzetDracogenius(final NivMizzetDracogenius card) {
         super(card);
     }
 

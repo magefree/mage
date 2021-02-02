@@ -36,7 +36,7 @@ public final class SerratedBiskelion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SerratedBiskelion(final SerratedBiskelion card) {
+    private SerratedBiskelion(final SerratedBiskelion card) {
         super(card);
     }
 

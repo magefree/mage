@@ -36,7 +36,7 @@ public final class PharagaxGiant extends CardImpl {
                 "When {this} enters the battlefield, if its tribute wasn't paid, {this} deals 5 damage to each opponent."));
     }
 
-    public PharagaxGiant(final PharagaxGiant card) {
+    private PharagaxGiant(final PharagaxGiant card) {
         super(card);
     }
 

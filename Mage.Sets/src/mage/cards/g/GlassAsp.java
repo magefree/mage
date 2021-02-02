@@ -32,7 +32,7 @@ public final class GlassAsp extends CardImpl {
                 false, true));
     }
 
-    public GlassAsp(final GlassAsp card) {
+    private GlassAsp(final GlassAsp card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class SapphireDrake extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter, rule)));
     }
 
-    public SapphireDrake(final SapphireDrake card) {
+    private SapphireDrake(final SapphireDrake card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class ManaWeb extends CardImpl {
         this.addAbility(new ManaWebTriggeredAbility());
     }
 
-    public ManaWeb(final ManaWeb card) {
+    private ManaWeb(final ManaWeb card) {
         super(card);
     }
 

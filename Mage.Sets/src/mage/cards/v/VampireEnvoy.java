@@ -32,7 +32,7 @@ public final class VampireEnvoy extends CardImpl {
         this.addAbility(new BecomesTappedSourceTriggeredAbility(new GainLifeEffect(1)));
     }
 
-    public VampireEnvoy(final VampireEnvoy card) {
+    private VampireEnvoy(final VampireEnvoy card) {
         super(card);
     }
 

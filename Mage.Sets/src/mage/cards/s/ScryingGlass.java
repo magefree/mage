@@ -35,7 +35,7 @@ public final class ScryingGlass extends CardImpl {
         
     }
     
-    public ScryingGlass(final ScryingGlass card) {
+    private ScryingGlass(final ScryingGlass card) {
         super(card);
     }
     

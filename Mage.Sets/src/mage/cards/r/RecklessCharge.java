@@ -33,7 +33,7 @@ public final class RecklessCharge extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{R}"), TimingRule.INSTANT));
     }
 
-    public RecklessCharge(final RecklessCharge card) {
+    private RecklessCharge(final RecklessCharge card) {
         super(card);
     }
 

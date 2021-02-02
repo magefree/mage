@@ -26,7 +26,7 @@ public final class FeralShadow extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public FeralShadow(final FeralShadow card) {
+    private FeralShadow(final FeralShadow card) {
         super(card);
     }
 

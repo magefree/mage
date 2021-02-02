@@ -40,7 +40,7 @@ public final class MoltenFirebird extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new ExileSourceEffect(), new ManaCostsImpl("{4}{R}")));
     }
 
-    public MoltenFirebird(final MoltenFirebird card) {
+    private MoltenFirebird(final MoltenFirebird card) {
         super(card);
     }
 

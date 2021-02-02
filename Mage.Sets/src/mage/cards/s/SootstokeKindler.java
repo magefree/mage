@@ -50,7 +50,7 @@ public final class SootstokeKindler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SootstokeKindler(final SootstokeKindler card) {
+    private SootstokeKindler(final SootstokeKindler card) {
         super(card);
     }
 

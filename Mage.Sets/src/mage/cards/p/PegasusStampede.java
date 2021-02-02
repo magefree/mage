@@ -28,7 +28,7 @@ public final class PegasusStampede extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new PegasusToken()));
     }
 
-    public PegasusStampede(final PegasusStampede card) {
+    private PegasusStampede(final PegasusStampede card) {
         super(card);
     }
 

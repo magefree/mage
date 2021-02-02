@@ -33,7 +33,7 @@ public final class FilthyCur extends CardImpl {
 
     }
 
-    public FilthyCur(final FilthyCur card) {
+    private FilthyCur(final FilthyCur card) {
         super(card);
     }
 

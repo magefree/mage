@@ -40,7 +40,7 @@ public final class RuhamDjinn extends CardImpl {
                         "{this} gets -2/-2 as long as white is the most common color among all permanents or is tied for most common")));
     }
 
-    public RuhamDjinn(final RuhamDjinn card) {
+    private RuhamDjinn(final RuhamDjinn card) {
         super(card);
     }
 

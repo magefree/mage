@@ -38,7 +38,7 @@ public final class BodyDouble extends CardImpl {
 
     }
 
-    public BodyDouble(final BodyDouble card) {
+    private BodyDouble(final BodyDouble card) {
         super(card);
     }
 

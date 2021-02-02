@@ -33,7 +33,7 @@ public final class PrakhataPillarBug extends CardImpl {
 
     }
 
-    public PrakhataPillarBug(final PrakhataPillarBug card) {
+    private PrakhataPillarBug(final PrakhataPillarBug card) {
         super(card);
     }
 

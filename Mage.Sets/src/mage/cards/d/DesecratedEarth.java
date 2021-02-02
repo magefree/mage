@@ -30,7 +30,7 @@ public final class DesecratedEarth extends CardImpl {
 
     }
 
-    public DesecratedEarth(final DesecratedEarth card) {
+    private DesecratedEarth(final DesecratedEarth card) {
         super(card);
     }
 

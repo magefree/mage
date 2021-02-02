@@ -55,7 +55,7 @@ public final class LimDulsPaladin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LimDulsPaladin(final LimDulsPaladin card) {
+    private LimDulsPaladin(final LimDulsPaladin card) {
         super(card);
     }
 

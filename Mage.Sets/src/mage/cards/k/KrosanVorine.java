@@ -32,7 +32,7 @@ public final class KrosanVorine extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
-    public KrosanVorine(final KrosanVorine card) {
+    private KrosanVorine(final KrosanVorine card) {
         super(card);
     }
 

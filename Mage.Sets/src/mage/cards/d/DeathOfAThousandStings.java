@@ -46,7 +46,7 @@ public final class DeathOfAThousandStings extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeathOfAThousandStings(final DeathOfAThousandStings card) {
+    private DeathOfAThousandStings(final DeathOfAThousandStings card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class FurybornHellkite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public FurybornHellkite(final FurybornHellkite card) {
+    private FurybornHellkite(final FurybornHellkite card) {
         super(card);
     }
 

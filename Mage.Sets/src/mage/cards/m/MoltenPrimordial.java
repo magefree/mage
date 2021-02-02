@@ -48,7 +48,7 @@ public final class MoltenPrimordial extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoltenPrimordial(final MoltenPrimordial card) {
+    private MoltenPrimordial(final MoltenPrimordial card) {
         super(card);
     }
 

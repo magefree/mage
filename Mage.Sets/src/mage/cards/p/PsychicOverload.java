@@ -53,7 +53,7 @@ public final class PsychicOverload extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,  effect));
     }
 
-    public PsychicOverload(final PsychicOverload card) {
+    private PsychicOverload(final PsychicOverload card) {
         super(card);
     }
 

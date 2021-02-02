@@ -32,7 +32,7 @@ public final class GoldnightCommander extends CardImpl {
                 new BoostControlledEffect(1, 1, Duration.EndOfTurn), StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, null, true));
     }
 
-    public GoldnightCommander(final GoldnightCommander card) {
+    private GoldnightCommander(final GoldnightCommander card) {
         super(card);
     }
 

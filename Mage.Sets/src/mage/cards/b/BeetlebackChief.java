@@ -29,7 +29,7 @@ public final class BeetlebackChief extends CardImpl {
 
     }
 
-    public BeetlebackChief(final BeetlebackChief card) {
+    private BeetlebackChief(final BeetlebackChief card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class TrigonOfInfestation extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public TrigonOfInfestation(final TrigonOfInfestation card) {
+    private TrigonOfInfestation(final TrigonOfInfestation card) {
         super(card);
     }
 

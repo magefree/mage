@@ -23,7 +23,7 @@ public final class HideousVisage extends CardImpl {
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures")));
     }
 
-    public HideousVisage(final HideousVisage card) {
+    private HideousVisage(final HideousVisage card) {
         super(card);
     }
 

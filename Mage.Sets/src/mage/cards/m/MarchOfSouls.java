@@ -28,7 +28,7 @@ public final class MarchOfSouls extends CardImpl {
         this.getSpellAbility().addEffect(new MarchOfSoulsEffect());
     }
 
-    public MarchOfSouls(final MarchOfSouls card) {
+    private MarchOfSouls(final MarchOfSouls card) {
         super(card);
     }
 

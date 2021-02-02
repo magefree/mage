@@ -29,7 +29,7 @@ public final class NightMarketGuard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.WhileOnBattlefield, 1)));
     }
 
-    public NightMarketGuard(final NightMarketGuard card) {
+    private NightMarketGuard(final NightMarketGuard card) {
         super(card);
     }
 

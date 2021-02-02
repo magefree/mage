@@ -26,7 +26,7 @@ public final class DefenseGrid extends CardImpl {
 
     }
 
-    public DefenseGrid(final DefenseGrid card) {
+    private DefenseGrid(final DefenseGrid card) {
         super(card);
     }
 

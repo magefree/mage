@@ -22,7 +22,7 @@ public final class DiabolicVision extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(5), false, StaticValue.get(1), new FilterCard(), true, false));
     }
 
-    public DiabolicVision(final DiabolicVision card) {
+    private DiabolicVision(final DiabolicVision card) {
         super(card);
     }
 

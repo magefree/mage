@@ -53,7 +53,7 @@ public final class RingOfEvosIsle extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
-    public RingOfEvosIsle(final RingOfEvosIsle card) {
+    private RingOfEvosIsle(final RingOfEvosIsle card) {
         super(card);
     }
 

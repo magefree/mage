@@ -44,7 +44,7 @@ public final class SoltariGuerrillas extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoltariGuerrillas(final SoltariGuerrillas card) {
+    private SoltariGuerrillas(final SoltariGuerrillas card) {
         super(card);
     }
 

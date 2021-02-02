@@ -31,7 +31,7 @@ public final class GoblinCommando extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinCommando(final GoblinCommando card) {
+    private GoblinCommando(final GoblinCommando card) {
         super(card);
     }
 

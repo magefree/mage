@@ -37,7 +37,7 @@ public final class RixMaadiReveler extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RixMaadiRevelerEffect(), false));
     }
 
-    public RixMaadiReveler(final RixMaadiReveler card) {
+    private RixMaadiReveler(final RixMaadiReveler card) {
         super(card);
     }
 

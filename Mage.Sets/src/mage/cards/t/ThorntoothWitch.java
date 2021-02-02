@@ -39,7 +39,7 @@ public final class ThorntoothWitch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThorntoothWitch(final ThorntoothWitch card) {
+    private ThorntoothWitch(final ThorntoothWitch card) {
         super(card);
     }
 

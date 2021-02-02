@@ -33,7 +33,7 @@ public final class SylvokLifestaff extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
-    public SylvokLifestaff(final SylvokLifestaff card) {
+    private SylvokLifestaff(final SylvokLifestaff card) {
         super(card);
     }
 

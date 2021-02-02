@@ -37,7 +37,7 @@ public final class CloudstoneCurio extends CardImpl {
 
     }
 
-    public CloudstoneCurio(final CloudstoneCurio card) {
+    private CloudstoneCurio(final CloudstoneCurio card) {
         super(card);
     }
 

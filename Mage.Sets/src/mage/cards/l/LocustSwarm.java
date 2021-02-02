@@ -37,7 +37,7 @@ public final class LocustSwarm extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{G}")));
     }
 
-    public LocustSwarm(final LocustSwarm card) {
+    private LocustSwarm(final LocustSwarm card) {
         super(card);
     }
 

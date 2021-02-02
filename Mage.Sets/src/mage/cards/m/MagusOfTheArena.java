@@ -42,7 +42,7 @@ public final class MagusOfTheArena extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagusOfTheArena(final MagusOfTheArena card) {
+    private MagusOfTheArena(final MagusOfTheArena card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class FlamecoreElemental extends CardImpl {
         this.addAbility(new EchoAbility("{2}{R}{R}"));
     }
 
-    public FlamecoreElemental(final FlamecoreElemental card) {
+    private FlamecoreElemental(final FlamecoreElemental card) {
         super(card);
     }
 

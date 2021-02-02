@@ -43,7 +43,7 @@ public final class OviyaPashiriSageLifecrafter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OviyaPashiriSageLifecrafter(final OviyaPashiriSageLifecrafter card) {
+    private OviyaPashiriSageLifecrafter(final OviyaPashiriSageLifecrafter card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class DragonsClaw extends CardImpl {
         this.addAbility(new SpellCastAllTriggeredAbility(new GainLifeEffect(1), filter, true));
     }
 
-    public DragonsClaw(final DragonsClaw card) {
+    private DragonsClaw(final DragonsClaw card) {
         super(card);
     }
 

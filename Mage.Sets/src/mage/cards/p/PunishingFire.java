@@ -33,7 +33,7 @@ public final class PunishingFire extends CardImpl {
         this.addAbility(new PunishingFireTriggeredAbility());
     }
 
-    public PunishingFire(final PunishingFire card) {
+    private PunishingFire(final PunishingFire card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class CrazedGoblin extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public CrazedGoblin(final CrazedGoblin card) {
+    private CrazedGoblin(final CrazedGoblin card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class GiftedInitiate extends CardImpl {
         this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{W}")));
     }
 
-    public GiftedInitiate(final GiftedInitiate card) {
+    private GiftedInitiate(final GiftedInitiate card) {
         super(card);
     }
 

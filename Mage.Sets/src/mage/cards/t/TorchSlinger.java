@@ -38,7 +38,7 @@ public final class TorchSlinger extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, it deals 2 damage to target creature."));
     }
 
-    public TorchSlinger(final TorchSlinger card) {
+    private TorchSlinger(final TorchSlinger card) {
         super(card);
     }
 

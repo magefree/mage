@@ -22,7 +22,7 @@ public final class WitchsFamiliar extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public WitchsFamiliar(final WitchsFamiliar card) {
+    private WitchsFamiliar(final WitchsFamiliar card) {
         super(card);
     }
 

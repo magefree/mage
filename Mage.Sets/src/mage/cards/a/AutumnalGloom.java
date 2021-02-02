@@ -39,7 +39,7 @@ public final class AutumnalGloom extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AutumnalGloom(final AutumnalGloom card) {
+    private AutumnalGloom(final AutumnalGloom card) {
         super(card);
     }
 

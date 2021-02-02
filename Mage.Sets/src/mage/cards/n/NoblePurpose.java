@@ -28,7 +28,7 @@ public final class NoblePurpose extends CardImpl {
         this.addAbility(new NoblePurposeTriggeredAbility());
     }
 
-    public NoblePurpose(final NoblePurpose card) {
+    private NoblePurpose(final NoblePurpose card) {
         super(card);
     }
 

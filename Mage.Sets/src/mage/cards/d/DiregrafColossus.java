@@ -48,7 +48,7 @@ public final class DiregrafColossus extends CardImpl {
 
     }
 
-    public DiregrafColossus(final DiregrafColossus card) {
+    private DiregrafColossus(final DiregrafColossus card) {
         super(card);
     }
 

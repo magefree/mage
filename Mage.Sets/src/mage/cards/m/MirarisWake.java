@@ -36,7 +36,7 @@ public final class MirarisWake extends CardImpl {
 
     }
 
-    public MirarisWake(final MirarisWake card) {
+    private MirarisWake(final MirarisWake card) {
         super(card);
     }
 

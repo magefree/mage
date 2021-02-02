@@ -33,7 +33,7 @@ public final class DiplomacyOfTheWastes extends CardImpl {
 
     }
 
-    public DiplomacyOfTheWastes(final DiplomacyOfTheWastes card) {
+    private DiplomacyOfTheWastes(final DiplomacyOfTheWastes card) {
         super(card);
     }
 

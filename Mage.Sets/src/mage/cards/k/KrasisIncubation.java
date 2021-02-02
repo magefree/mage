@@ -48,7 +48,7 @@ public final class KrasisIncubation extends CardImpl {
 
     }
 
-    public KrasisIncubation(final KrasisIncubation card) {
+    private KrasisIncubation(final KrasisIncubation card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class ShamanicRevelation extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public ShamanicRevelation(final ShamanicRevelation card) {
+    private ShamanicRevelation(final ShamanicRevelation card) {
         super(card);
     }
 

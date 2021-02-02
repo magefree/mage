@@ -26,7 +26,7 @@ public final class ShadowRider extends CardImpl {
         this.addAbility(new FlankingAbility());
     }
 
-    public ShadowRider(final ShadowRider card) {
+    private ShadowRider(final ShadowRider card) {
         super(card);
     }
 

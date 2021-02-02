@@ -38,7 +38,7 @@ public final class RavenousIntruder extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public RavenousIntruder(final RavenousIntruder card) {
+    private RavenousIntruder(final RavenousIntruder card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class SweepAway extends CardImpl {
         this.getSpellAbility().addEffect(new SweepAwayEffect());
     }
 
-    public SweepAway(final SweepAway card) {
+    private SweepAway(final SweepAway card) {
         super(card);
     }
 

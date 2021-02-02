@@ -23,7 +23,7 @@ public final class BloodTithe extends CardImpl {
         this.getSpellAbility().addEffect(new BloodTitheEffect());
     }
 
-    public BloodTithe(final BloodTithe card) {
+    private BloodTithe(final BloodTithe card) {
         super(card);
     }
 

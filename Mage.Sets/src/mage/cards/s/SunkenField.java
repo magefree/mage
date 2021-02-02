@@ -47,7 +47,7 @@ public final class SunkenField extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public SunkenField(final SunkenField card) {
+    private SunkenField(final SunkenField card) {
         super(card);
     }
 

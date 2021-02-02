@@ -51,7 +51,7 @@ public final class DragonsoulKnight extends CardImpl {
 
     }
 
-    public DragonsoulKnight(final DragonsoulKnight card) {
+    private DragonsoulKnight(final DragonsoulKnight card) {
         super(card);
     }
 

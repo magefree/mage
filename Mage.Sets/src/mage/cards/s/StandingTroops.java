@@ -26,7 +26,7 @@ public final class StandingTroops extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public StandingTroops(final StandingTroops card) {
+    private StandingTroops(final StandingTroops card) {
         super(card);
     }
 

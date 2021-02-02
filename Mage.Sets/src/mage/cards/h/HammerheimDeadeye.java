@@ -45,7 +45,7 @@ public final class HammerheimDeadeye extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HammerheimDeadeye(final HammerheimDeadeye card) {
+    private HammerheimDeadeye(final HammerheimDeadeye card) {
         super(card);
     }
 

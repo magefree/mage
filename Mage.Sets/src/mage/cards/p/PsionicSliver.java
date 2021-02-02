@@ -49,7 +49,7 @@ public final class PsionicSliver extends CardImpl {
         );
     }
 
-    public PsionicSliver(final PsionicSliver card) {
+    private PsionicSliver(final PsionicSliver card) {
         super(card);
     }
 

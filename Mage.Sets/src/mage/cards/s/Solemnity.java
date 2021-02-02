@@ -35,7 +35,7 @@ public final class Solemnity extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SolemnityEffect2()));
     }
 
-    public Solemnity(final Solemnity card) {
+    private Solemnity(final Solemnity card) {
         super(card);
     }
 

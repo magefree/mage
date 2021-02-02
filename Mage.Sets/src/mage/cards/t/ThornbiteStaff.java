@@ -57,7 +57,7 @@ public final class ThornbiteStaff extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
     }
 
-    public ThornbiteStaff(final ThornbiteStaff card) {
+    private ThornbiteStaff(final ThornbiteStaff card) {
         super(card);
     }
 

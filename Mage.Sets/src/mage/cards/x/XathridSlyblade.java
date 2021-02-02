@@ -48,7 +48,7 @@ public final class XathridSlyblade extends CardImpl {
         this.addAbility(ability);
     }
 
-    public XathridSlyblade(final XathridSlyblade card) {
+    private XathridSlyblade(final XathridSlyblade card) {
         super(card);
     }
 

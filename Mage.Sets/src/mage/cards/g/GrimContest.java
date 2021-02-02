@@ -37,7 +37,7 @@ public final class GrimContest extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public GrimContest(final GrimContest card) {
+    private GrimContest(final GrimContest card) {
         super(card);
     }
 

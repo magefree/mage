@@ -67,7 +67,7 @@ public final class InfectiousBloodlust extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), "enchanted creature", true));
     }
 
-    public InfectiousBloodlust(final InfectiousBloodlust card) {
+    private InfectiousBloodlust(final InfectiousBloodlust card) {
         super(card);
     }
 

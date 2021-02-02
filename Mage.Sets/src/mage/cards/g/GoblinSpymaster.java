@@ -36,7 +36,7 @@ public final class GoblinSpymaster extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new SpyMasterGoblinCreateTokenEffect(), TargetController.OPPONENT, null, false));
     }
 
-    public GoblinSpymaster(final GoblinSpymaster card) {
+    private GoblinSpymaster(final GoblinSpymaster card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class HeraldOfSecretStreams extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAllEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public HeraldOfSecretStreams(final HeraldOfSecretStreams card) {
+    private HeraldOfSecretStreams(final HeraldOfSecretStreams card) {
         super(card);
     }
 

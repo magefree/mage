@@ -43,7 +43,7 @@ public final class GrasslandCrusader extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GrasslandCrusader(final GrasslandCrusader card) {
+    private GrasslandCrusader(final GrasslandCrusader card) {
         super(card);
     }
 

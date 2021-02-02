@@ -34,7 +34,7 @@ public final class DroidUprising extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new DroidToken(), 2));
     }
 
-    public DroidUprising(final DroidUprising card) {
+    private DroidUprising(final DroidUprising card) {
         super(card);
     }
 

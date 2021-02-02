@@ -59,7 +59,7 @@ public final class ToothCollector extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ToothCollector(final ToothCollector card) {
+    private ToothCollector(final ToothCollector card) {
         super(card);
     }
 

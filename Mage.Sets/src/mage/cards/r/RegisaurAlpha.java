@@ -46,7 +46,7 @@ public final class RegisaurAlpha extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new DinosaurToken())));
     }
 
-    public RegisaurAlpha(final RegisaurAlpha card) {
+    private RegisaurAlpha(final RegisaurAlpha card) {
         super(card);
     }
 

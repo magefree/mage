@@ -32,7 +32,7 @@ public final class WildHunger extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), TimingRule.INSTANT));
     }
 
-    public WildHunger(final WildHunger card) {
+    private WildHunger(final WildHunger card) {
         super(card);
     }
 

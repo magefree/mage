@@ -41,7 +41,7 @@ public final class BansheesBlade extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public BansheesBlade(final BansheesBlade card) {
+    private BansheesBlade(final BansheesBlade card) {
         super(card);
     }
 

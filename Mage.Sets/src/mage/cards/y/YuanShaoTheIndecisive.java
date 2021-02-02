@@ -35,7 +35,7 @@ public final class YuanShaoTheIndecisive extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneAllEffect(new FilterControlledCreaturePermanent())));
     }
 
-    public YuanShaoTheIndecisive(final YuanShaoTheIndecisive card) {
+    private YuanShaoTheIndecisive(final YuanShaoTheIndecisive card) {
         super(card);
     }
 

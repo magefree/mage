@@ -36,7 +36,7 @@ public final class MagmaBurst extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(MagmaBurstAdjuster.instance);
     }
 
-    public MagmaBurst(final MagmaBurst card) {
+    private MagmaBurst(final MagmaBurst card) {
         super(card);
     }
 

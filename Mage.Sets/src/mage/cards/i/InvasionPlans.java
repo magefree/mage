@@ -29,7 +29,7 @@ public final class InvasionPlans extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InvasionPlansEffect()));
     }
 
-    public InvasionPlans(final InvasionPlans card) {
+    private InvasionPlans(final InvasionPlans card) {
         super(card);
     }
 

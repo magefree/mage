@@ -44,7 +44,7 @@ public final class ThunderscapeMaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThunderscapeMaster(final ThunderscapeMaster card) {
+    private ThunderscapeMaster(final ThunderscapeMaster card) {
         super(card);
     }
 

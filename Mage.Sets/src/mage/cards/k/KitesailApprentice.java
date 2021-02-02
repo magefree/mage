@@ -40,7 +40,7 @@ public final class KitesailApprentice extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
     }
 
-    public KitesailApprentice(final KitesailApprentice card) {
+    private KitesailApprentice(final KitesailApprentice card) {
         super(card);
     }
 

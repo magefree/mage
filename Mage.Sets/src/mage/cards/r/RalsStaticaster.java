@@ -53,7 +53,7 @@ public final class RalsStaticaster extends CardImpl {
         ));
     }
 
-    public RalsStaticaster(final RalsStaticaster card) {
+    private RalsStaticaster(final RalsStaticaster card) {
         super(card);
     }
 

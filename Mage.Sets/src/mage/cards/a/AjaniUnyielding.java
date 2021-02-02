@@ -57,7 +57,7 @@ public final class AjaniUnyielding extends CardImpl {
         this.addAbility(ajaniAbility3);
     }
 
-    public AjaniUnyielding(final AjaniUnyielding card) {
+    private AjaniUnyielding(final AjaniUnyielding card) {
         super(card);
     }
 

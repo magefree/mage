@@ -41,7 +41,7 @@ public final class Crash extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(effectFilter));
     }
 
-    public Crash(final Crash card) {
+    private Crash(final Crash card) {
         super(card);
     }
 

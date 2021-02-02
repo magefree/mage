@@ -28,7 +28,7 @@ public final class StainTheMind extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public StainTheMind(final StainTheMind card) {
+    private StainTheMind(final StainTheMind card) {
         super(card);
     }
 

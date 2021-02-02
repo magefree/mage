@@ -36,7 +36,7 @@ public final class RuneOfProtectionRed extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public RuneOfProtectionRed(final RuneOfProtectionRed card) {
+    private RuneOfProtectionRed(final RuneOfProtectionRed card) {
         super(card);
     }
 

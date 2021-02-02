@@ -43,7 +43,7 @@ public final class UnholyIndenture extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new UnholyIndentureReturnEffect(), "enchanted creature"));
     }
 
-    public UnholyIndenture(final UnholyIndenture card) {
+    private UnholyIndenture(final UnholyIndenture card) {
         super(card);
     }
 

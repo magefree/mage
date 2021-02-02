@@ -51,7 +51,7 @@ public final class ValiantKnight extends CardImpl {
         ));
     }
 
-    public ValiantKnight(final ValiantKnight card) {
+    private ValiantKnight(final ValiantKnight card) {
         super(card);
     }
 

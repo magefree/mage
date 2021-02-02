@@ -33,7 +33,7 @@ public final class BurnAway extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new BurnAwayDelayedTriggeredAbility(), true));
     }
 
-    public BurnAway(final BurnAway card) {
+    private BurnAway(final BurnAway card) {
         super(card);
     }
 

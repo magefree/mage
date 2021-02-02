@@ -37,7 +37,7 @@ public final class ShadowedCaravel extends CardImpl {
 
     }
 
-    public ShadowedCaravel(final ShadowedCaravel card) {
+    private ShadowedCaravel(final ShadowedCaravel card) {
         super(card);
     }
 

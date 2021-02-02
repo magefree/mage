@@ -48,7 +48,7 @@ public final class N1Starfighter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public N1Starfighter(final N1Starfighter card) {
+    private N1Starfighter(final N1Starfighter card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class NorwoodRiders extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
-    public NorwoodRiders(final NorwoodRiders card) {
+    private NorwoodRiders(final NorwoodRiders card) {
         super(card);
     }
 

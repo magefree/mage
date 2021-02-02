@@ -31,7 +31,7 @@ public final class BloodCelebrant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodCelebrant(final BloodCelebrant card) {
+    private BloodCelebrant(final BloodCelebrant card) {
         super(card);
     }
 

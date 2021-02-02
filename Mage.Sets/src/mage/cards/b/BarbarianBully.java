@@ -32,7 +32,7 @@ public final class BarbarianBully extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BarbarianBullyEffect(), new DiscardCardCost(true)));
     }
 
-    public BarbarianBully(final BarbarianBully card) {
+    private BarbarianBully(final BarbarianBully card) {
         super(card);
     }
 

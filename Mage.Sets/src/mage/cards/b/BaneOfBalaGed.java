@@ -35,7 +35,7 @@ public final class BaneOfBalaGed extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BaneOfBalaGedEffect(), false, "", SetTargetPointer.PLAYER));
     }
 
-    public BaneOfBalaGed(final BaneOfBalaGed card) {
+    private BaneOfBalaGed(final BaneOfBalaGed card) {
         super(card);
     }
 

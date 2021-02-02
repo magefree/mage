@@ -35,7 +35,7 @@ public final class SupplyLineCranes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SupplyLineCranes(final SupplyLineCranes card) {
+    private SupplyLineCranes(final SupplyLineCranes card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class Rile extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br><br>Draw a card"));
     }
 
-    public Rile(final Rile card) {
+    private Rile(final Rile card) {
         super(card);
     }
 

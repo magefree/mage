@@ -37,7 +37,7 @@ public final class PatriciansScorn extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_ENCHANTMENT_PERMANENT));
     }
 
-    public PatriciansScorn(final PatriciansScorn card) {
+    private PatriciansScorn(final PatriciansScorn card) {
         super(card);
     }
 

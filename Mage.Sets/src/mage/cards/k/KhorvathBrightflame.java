@@ -49,7 +49,7 @@ public final class KhorvathBrightflame extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KhorvathBrightflame(final KhorvathBrightflame card) {
+    private KhorvathBrightflame(final KhorvathBrightflame card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class BloodcrazedHoplite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodcrazedHoplite(final BloodcrazedHoplite card) {
+    private BloodcrazedHoplite(final BloodcrazedHoplite card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ public final class RhysTheRedeemed extends CardImpl {
 
     }
 
-    public RhysTheRedeemed(final RhysTheRedeemed card) {
+    private RhysTheRedeemed(final RhysTheRedeemed card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class TezzeretsGambit extends CardImpl {
         this.getSpellAbility().addEffect(new ProliferateEffect().concatBy(", then"));
     }
 
-    public TezzeretsGambit(final TezzeretsGambit card) {
+    private TezzeretsGambit(final TezzeretsGambit card) {
         super(card);
     }
 

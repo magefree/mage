@@ -32,7 +32,7 @@ public final class MindSlash extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MindSlash(final MindSlash card) {
+    private MindSlash(final MindSlash card) {
         super(card);
     }
 

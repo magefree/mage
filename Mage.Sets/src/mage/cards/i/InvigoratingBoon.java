@@ -26,7 +26,7 @@ public final class InvigoratingBoon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InvigoratingBoon(final InvigoratingBoon card) {
+    private InvigoratingBoon(final InvigoratingBoon card) {
         super(card);
     }
 

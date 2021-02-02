@@ -44,7 +44,7 @@ public final class BastionProtector extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BastionProtector(final BastionProtector card) {
+    private BastionProtector(final BastionProtector card) {
         super(card);
     }
 

@@ -23,7 +23,7 @@ public final class ArmoredCancrix extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public ArmoredCancrix(final ArmoredCancrix card) {
+    private ArmoredCancrix(final ArmoredCancrix card) {
         super(card);
     }
 

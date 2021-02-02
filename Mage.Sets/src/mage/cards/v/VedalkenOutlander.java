@@ -27,7 +27,7 @@ public final class VedalkenOutlander extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
     }
 
-    public VedalkenOutlander(final VedalkenOutlander card) {
+    private VedalkenOutlander(final VedalkenOutlander card) {
         super(card);
     }
 

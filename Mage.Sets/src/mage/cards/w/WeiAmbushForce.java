@@ -28,7 +28,7 @@ public final class WeiAmbushForce extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
     }
 
-    public WeiAmbushForce(final WeiAmbushForce card) {
+    private WeiAmbushForce(final WeiAmbushForce card) {
         super(card);
     }
 

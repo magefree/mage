@@ -45,7 +45,7 @@ public final class BurningTreeBloodscale extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public BurningTreeBloodscale(final BurningTreeBloodscale card) {
+    private BurningTreeBloodscale(final BurningTreeBloodscale card) {
         super(card);
     }
 

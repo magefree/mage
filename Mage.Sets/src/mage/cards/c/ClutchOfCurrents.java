@@ -26,7 +26,7 @@ public final class ClutchOfCurrents extends CardImpl {
         this.addAbility(new AwakenAbility(this, 3, "{4}{U}"));
     }
 
-    public ClutchOfCurrents(final ClutchOfCurrents card) {
+    private ClutchOfCurrents(final ClutchOfCurrents card) {
         super(card);
     }
 

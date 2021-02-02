@@ -54,7 +54,7 @@ public final class VorelOfTheHullClade extends CardImpl {
         
     }
 
-    public VorelOfTheHullClade(final VorelOfTheHullClade card) {
+    private VorelOfTheHullClade(final VorelOfTheHullClade card) {
         super(card);
     }
 

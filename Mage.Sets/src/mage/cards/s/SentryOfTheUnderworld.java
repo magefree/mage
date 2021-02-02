@@ -40,7 +40,7 @@ public final class SentryOfTheUnderworld extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SentryOfTheUnderworld(final SentryOfTheUnderworld card) {
+    private SentryOfTheUnderworld(final SentryOfTheUnderworld card) {
         super(card);
     }
 

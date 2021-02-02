@@ -28,7 +28,7 @@ public final class FiligreeCrawler extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken())));
     }
 
-    public FiligreeCrawler(final FiligreeCrawler card) {
+    private FiligreeCrawler(final FiligreeCrawler card) {
         super(card);
     }
 

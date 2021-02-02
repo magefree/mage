@@ -31,7 +31,7 @@ public final class UnlicensedDisintegration extends CardImpl {
         
     }
 
-    public UnlicensedDisintegration(final UnlicensedDisintegration card) {
+    private UnlicensedDisintegration(final UnlicensedDisintegration card) {
         super(card);
     }
 

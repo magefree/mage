@@ -42,7 +42,7 @@ public final class StampedingWildebeests extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ReturnToHandChosenControlledPermanentEffect(filter, 1), TargetController.YOU, false));
     }
 
-    public StampedingWildebeests(final StampedingWildebeests card) {
+    private StampedingWildebeests(final StampedingWildebeests card) {
         super(card);
     }
 

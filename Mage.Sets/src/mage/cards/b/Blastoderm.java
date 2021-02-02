@@ -29,7 +29,7 @@ public final class Blastoderm extends CardImpl {
         this.addAbility(new FadingAbility(3, this));
     }
 
-    public Blastoderm(final Blastoderm card) {
+    private Blastoderm(final Blastoderm card) {
         super(card);
     }
 

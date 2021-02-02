@@ -34,7 +34,7 @@ public final class SimicKeyrune extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SimicKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{G}{U}")));
     }
 
-    public SimicKeyrune(final SimicKeyrune card) {
+    private SimicKeyrune(final SimicKeyrune card) {
         super(card);
     }
 

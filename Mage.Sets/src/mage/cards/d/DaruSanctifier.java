@@ -35,7 +35,7 @@ public final class DaruSanctifier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DaruSanctifier(final DaruSanctifier card) {
+    private DaruSanctifier(final DaruSanctifier card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public final class SilumgarAssassin extends CardImpl {
 
     }
 
-    public SilumgarAssassin(final SilumgarAssassin card) {
+    private SilumgarAssassin(final SilumgarAssassin card) {
         super(card);
     }
 

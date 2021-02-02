@@ -34,7 +34,7 @@ public final class UrgentExorcism extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
-    public UrgentExorcism(final UrgentExorcism card) {
+    private UrgentExorcism(final UrgentExorcism card) {
         super(card);
     }
 

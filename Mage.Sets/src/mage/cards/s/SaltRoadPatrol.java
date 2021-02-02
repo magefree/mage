@@ -28,7 +28,7 @@ public final class SaltRoadPatrol extends CardImpl {
         this.addAbility(new OutlastAbility(new ManaCostsImpl("{1}{W}")));
     }
 
-    public SaltRoadPatrol(final SaltRoadPatrol card) {
+    private SaltRoadPatrol(final SaltRoadPatrol card) {
         super(card);
     }
 

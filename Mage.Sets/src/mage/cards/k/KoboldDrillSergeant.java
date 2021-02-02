@@ -44,7 +44,7 @@ public final class KoboldDrillSergeant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KoboldDrillSergeant(final KoboldDrillSergeant card) {
+    private KoboldDrillSergeant(final KoboldDrillSergeant card) {
         super(card);
     }
 

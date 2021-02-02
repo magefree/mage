@@ -35,7 +35,7 @@ public final class MasterSplicer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public MasterSplicer(final MasterSplicer card) {
+    private MasterSplicer(final MasterSplicer card) {
         super(card);
     }
 

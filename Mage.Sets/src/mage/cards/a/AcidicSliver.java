@@ -42,7 +42,7 @@ public final class AcidicSliver extends CardImpl {
                         "All Slivers have \"{2}, Sacrifice this permanent: This permanent deals 2 damage to any target.\"")));
     }
 
-    public AcidicSliver(final AcidicSliver card) {
+    private AcidicSliver(final AcidicSliver card) {
         super(card);
     }
 

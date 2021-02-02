@@ -33,7 +33,7 @@ public final class Tanglesap extends CardImpl {
         
     }
 
-    public Tanglesap(final Tanglesap card) {
+    private Tanglesap(final Tanglesap card) {
         super(card);
     }
 

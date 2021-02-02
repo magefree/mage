@@ -33,7 +33,7 @@ public final class BlossomDryad extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlossomDryad(final BlossomDryad card) {
+    private BlossomDryad(final BlossomDryad card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class KitsuneRiftwalker extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
     }
 
-    public KitsuneRiftwalker(final KitsuneRiftwalker card) {
+    private KitsuneRiftwalker(final KitsuneRiftwalker card) {
         super(card);
     }
 

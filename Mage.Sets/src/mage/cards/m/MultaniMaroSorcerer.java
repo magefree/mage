@@ -36,7 +36,7 @@ public final class MultaniMaroSorcerer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(CardsInAllHandsCount.instance, Duration.EndOfGame)));
     }
 
-    public MultaniMaroSorcerer(final MultaniMaroSorcerer card) {
+    private MultaniMaroSorcerer(final MultaniMaroSorcerer card) {
         super(card);
     }
 

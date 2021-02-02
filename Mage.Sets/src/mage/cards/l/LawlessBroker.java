@@ -32,7 +32,7 @@ public final class LawlessBroker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LawlessBroker(final LawlessBroker card) {
+    private LawlessBroker(final LawlessBroker card) {
         super(card);
     }
 

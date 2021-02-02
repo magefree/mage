@@ -29,7 +29,7 @@ public final class Countermand extends CardImpl {
         this.getSpellAbility().addEffect(new CountermandEffect());
     }
 
-    public Countermand(final Countermand card) {
+    private Countermand(final Countermand card) {
         super(card);
     }
 

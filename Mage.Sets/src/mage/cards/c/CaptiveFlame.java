@@ -29,7 +29,7 @@ public final class CaptiveFlame extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CaptiveFlame(final CaptiveFlame card) {
+    private CaptiveFlame(final CaptiveFlame card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class TetheredGriffin extends CardImpl {
                 new SacrificeSourceEffect()));
     }
 
-    public TetheredGriffin(final TetheredGriffin card) {
+    private TetheredGriffin(final TetheredGriffin card) {
         super(card);
     }
 

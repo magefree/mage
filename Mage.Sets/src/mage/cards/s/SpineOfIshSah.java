@@ -29,7 +29,7 @@ public final class SpineOfIshSah extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public SpineOfIshSah(final SpineOfIshSah card) {
+    private SpineOfIshSah(final SpineOfIshSah card) {
         super(card);
     }
 

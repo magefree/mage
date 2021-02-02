@@ -24,7 +24,7 @@ public final class RewardTheFaithful extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
     }
 
-    public RewardTheFaithful(final RewardTheFaithful card) {
+    private RewardTheFaithful(final RewardTheFaithful card) {
         super(card);
     }
 

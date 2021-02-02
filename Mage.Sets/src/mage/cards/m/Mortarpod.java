@@ -50,7 +50,7 @@ public final class Mortarpod extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public Mortarpod(final Mortarpod card) {
+    private Mortarpod(final Mortarpod card) {
         super(card);
     }
 

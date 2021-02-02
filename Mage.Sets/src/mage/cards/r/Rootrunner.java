@@ -39,7 +39,7 @@ public final class Rootrunner extends CardImpl {
         this.addAbility(new SoulshiftAbility(3));
     }
 
-    public Rootrunner(final Rootrunner card) {
+    private Rootrunner(final Rootrunner card) {
         super(card);
     }
 

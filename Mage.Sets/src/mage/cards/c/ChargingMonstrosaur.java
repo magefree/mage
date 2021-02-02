@@ -31,7 +31,7 @@ public final class ChargingMonstrosaur extends CardImpl {
 
     }
 
-    public ChargingMonstrosaur(final ChargingMonstrosaur card) {
+    private ChargingMonstrosaur(final ChargingMonstrosaur card) {
         super(card);
     }
 

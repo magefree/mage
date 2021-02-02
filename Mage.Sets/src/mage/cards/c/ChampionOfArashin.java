@@ -26,7 +26,7 @@ public final class ChampionOfArashin extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public ChampionOfArashin(final ChampionOfArashin card) {
+    private ChampionOfArashin(final ChampionOfArashin card) {
         super(card);
     }
 

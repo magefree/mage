@@ -31,7 +31,7 @@ public final class StorageMatrix extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StorageMatrixRestrictionEffect()));
     }
 
-    public StorageMatrix(final StorageMatrix card) {
+    private StorageMatrix(final StorageMatrix card) {
         super(card);
     }
 

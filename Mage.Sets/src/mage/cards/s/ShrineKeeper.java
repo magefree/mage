@@ -21,7 +21,7 @@ public final class ShrineKeeper extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public ShrineKeeper(final ShrineKeeper card) {
+    private ShrineKeeper(final ShrineKeeper card) {
         super(card);
     }
 

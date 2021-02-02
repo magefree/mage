@@ -30,7 +30,7 @@ public final class DanceOfTheSkywise extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
-    public DanceOfTheSkywise(final DanceOfTheSkywise card) {
+    private DanceOfTheSkywise(final DanceOfTheSkywise card) {
         super(card);
     }
 

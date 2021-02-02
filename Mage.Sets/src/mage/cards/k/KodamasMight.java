@@ -29,7 +29,7 @@ public final class KodamasMight extends CardImpl {
         this.addAbility(new SpliceOntoArcaneAbility("{G}"));
     }
 
-    public KodamasMight(final KodamasMight card) {
+    private KodamasMight(final KodamasMight card) {
         super(card);
     }
 

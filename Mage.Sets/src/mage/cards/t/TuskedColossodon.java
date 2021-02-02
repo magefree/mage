@@ -22,7 +22,7 @@ public final class TuskedColossodon extends CardImpl {
         this.toughness = new MageInt(5);
     }
 
-    public TuskedColossodon(final TuskedColossodon card) {
+    private TuskedColossodon(final TuskedColossodon card) {
         super(card);
     }
 

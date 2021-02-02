@@ -30,7 +30,7 @@ public final class Larceny extends CardImpl {
         this.addAbility(new LarcenyTriggeredAbility());
     }
 
-    public Larceny(final Larceny card) {
+    private Larceny(final Larceny card) {
         super(card);
     }
 

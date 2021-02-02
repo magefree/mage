@@ -36,7 +36,7 @@ public final class FetidPools extends CardImpl {
 
     }
 
-    public FetidPools(final FetidPools card) {
+    private FetidPools(final FetidPools card) {
         super(card);
     }
 

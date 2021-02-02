@@ -52,7 +52,7 @@ public final class VraskaTheUnseen extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new AssassinToken(), 3), -7));
     }
 
-    public VraskaTheUnseen(final VraskaTheUnseen card) {
+    private VraskaTheUnseen(final VraskaTheUnseen card) {
         super(card);
     }
 

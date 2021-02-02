@@ -24,7 +24,7 @@ public final class FlurryOfWings extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BirdSoldierToken(), new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public FlurryOfWings(final FlurryOfWings card) {
+    private FlurryOfWings(final FlurryOfWings card) {
         super(card);
     }
 

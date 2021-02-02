@@ -26,7 +26,7 @@ public final class GrazingWhiptail extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public GrazingWhiptail(final GrazingWhiptail card) {
+    private GrazingWhiptail(final GrazingWhiptail card) {
         super(card);
     }
 

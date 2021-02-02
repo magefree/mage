@@ -41,7 +41,7 @@ public final class TamiyosJournal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TamiyosJournal(final TamiyosJournal card) {
+    private TamiyosJournal(final TamiyosJournal card) {
         super(card);
     }
 

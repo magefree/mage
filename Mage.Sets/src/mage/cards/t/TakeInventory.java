@@ -33,7 +33,7 @@ public final class TakeInventory extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public TakeInventory(final TakeInventory card) {
+    private TakeInventory(final TakeInventory card) {
         super(card);
     }
 

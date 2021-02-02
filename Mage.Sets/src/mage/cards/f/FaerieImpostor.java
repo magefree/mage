@@ -42,7 +42,7 @@ public final class FaerieImpostor extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new FaerieImpostorEffect()));
     }
 
-    public FaerieImpostor(final FaerieImpostor card) {
+    private FaerieImpostor(final FaerieImpostor card) {
         super(card);
     }
 

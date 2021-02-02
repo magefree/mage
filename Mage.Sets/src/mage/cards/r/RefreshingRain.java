@@ -43,7 +43,7 @@ public final class RefreshingRain extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public RefreshingRain(final RefreshingRain card) {
+    private RefreshingRain(final RefreshingRain card) {
         super(card);
     }
 

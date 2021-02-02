@@ -33,7 +33,7 @@ public final class InsatiableSouleater extends CardImpl {
                 new PhyrexianManaCost(ColoredManaSymbol.G)));
     }
 
-    public InsatiableSouleater(final InsatiableSouleater card) {
+    private InsatiableSouleater(final InsatiableSouleater card) {
         super(card);
     }
 

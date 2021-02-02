@@ -39,7 +39,7 @@ public final class GloryBoundInitiate extends CardImpl {
         this.addAbility(new ExertAbility(ability));
     }
 
-    public GloryBoundInitiate(final GloryBoundInitiate card) {
+    private GloryBoundInitiate(final GloryBoundInitiate card) {
         super(card);
     }
 

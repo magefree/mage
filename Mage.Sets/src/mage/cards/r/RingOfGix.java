@@ -44,7 +44,7 @@ public final class RingOfGix extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RingOfGix(final RingOfGix card) {
+    private RingOfGix(final RingOfGix card) {
         super(card);
     }
 

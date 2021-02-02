@@ -48,7 +48,7 @@ public final class HarbingerOfTheHunt extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter2), new ManaCostsImpl("{2}{G}")));
     }
 
-    public HarbingerOfTheHunt(final HarbingerOfTheHunt card) {
+    private HarbingerOfTheHunt(final HarbingerOfTheHunt card) {
         super(card);
     }
 

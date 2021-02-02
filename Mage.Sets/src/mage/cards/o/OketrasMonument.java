@@ -46,7 +46,7 @@ public final class OketrasMonument extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new WarriorVigilantToken()), filter2, false));
     }
 
-    public OketrasMonument(final OketrasMonument card) {
+    private OketrasMonument(final OketrasMonument card) {
         super(card);
     }
 

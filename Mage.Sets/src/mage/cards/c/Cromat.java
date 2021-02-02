@@ -56,7 +56,7 @@ public final class Cromat extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibrarySourceEffect(true), new ManaCostsImpl("{G}{U}")));
     }
 
-    public Cromat(final Cromat card) {
+    private Cromat(final Cromat card) {
         super(card);
     }
 

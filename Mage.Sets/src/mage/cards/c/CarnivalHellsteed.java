@@ -38,7 +38,7 @@ public final class CarnivalHellsteed extends CardImpl {
         
     }
  
-    public CarnivalHellsteed(final CarnivalHellsteed card) {
+    private CarnivalHellsteed(final CarnivalHellsteed card) {
         super(card);
     }
  

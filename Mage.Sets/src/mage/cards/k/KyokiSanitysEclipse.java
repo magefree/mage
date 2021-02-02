@@ -38,7 +38,7 @@ public final class KyokiSanitysEclipse extends CardImpl {
         
     }
 
-    public KyokiSanitysEclipse(final KyokiSanitysEclipse card) {
+    private KyokiSanitysEclipse(final KyokiSanitysEclipse card) {
         super(card);
     }
 

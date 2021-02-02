@@ -21,7 +21,7 @@ public final class CommandTheStorm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public CommandTheStorm(final CommandTheStorm card) {
+    private CommandTheStorm(final CommandTheStorm card) {
         super(card);
     }
 

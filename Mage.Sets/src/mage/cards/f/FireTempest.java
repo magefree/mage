@@ -20,7 +20,7 @@ public final class FireTempest extends CardImpl {
         this.getSpellAbility().addEffect(new DamageEverythingEffect(6));
     }
 
-    public FireTempest(final FireTempest card) {
+    private FireTempest(final FireTempest card) {
         super(card);
     }
 

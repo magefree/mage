@@ -31,7 +31,7 @@ public final class RelentlessSkaabs extends CardImpl {
         this.addAbility(new UndyingAbility());
     }
 
-    public RelentlessSkaabs(final RelentlessSkaabs card) {
+    private RelentlessSkaabs(final RelentlessSkaabs card) {
         super(card);
     }
 

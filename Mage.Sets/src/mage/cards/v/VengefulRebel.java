@@ -44,7 +44,7 @@ public final class VengefulRebel extends CardImpl {
         this.addAbility(ability, new RevoltWatcher());
     }
 
-    public VengefulRebel(final VengefulRebel card) {
+    private VengefulRebel(final VengefulRebel card) {
         super(card);
     }
 

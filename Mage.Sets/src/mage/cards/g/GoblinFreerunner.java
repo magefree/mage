@@ -31,7 +31,7 @@ public final class GoblinFreerunner extends CardImpl {
         this.addAbility(new MenaceAbility());
     }
 
-    public GoblinFreerunner(final GoblinFreerunner card) {
+    private GoblinFreerunner(final GoblinFreerunner card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class GoblinCadets extends CardImpl {
 
     }
 
-    public GoblinCadets(final GoblinCadets card) {
+    private GoblinCadets(final GoblinCadets card) {
         super(card);
     }
 

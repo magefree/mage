@@ -41,7 +41,7 @@ public final class LurkingArynx extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LurkingArynx(final LurkingArynx card) {
+    private LurkingArynx(final LurkingArynx card) {
         super(card);
     }
 

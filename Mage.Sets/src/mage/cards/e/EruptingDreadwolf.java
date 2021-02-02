@@ -34,7 +34,7 @@ public final class EruptingDreadwolf extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EruptingDreadwolf(final EruptingDreadwolf card) {
+    private EruptingDreadwolf(final EruptingDreadwolf card) {
         super(card);
     }
 

@@ -52,7 +52,7 @@ public final class BalduvianTradingPost extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BalduvianTradingPost(final BalduvianTradingPost card) {
+    private BalduvianTradingPost(final BalduvianTradingPost card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class AnchorToTheAether extends CardImpl {
 
     }
 
-    public AnchorToTheAether(final AnchorToTheAether card) {
+    private AnchorToTheAether(final AnchorToTheAether card) {
         super(card);
     }
 

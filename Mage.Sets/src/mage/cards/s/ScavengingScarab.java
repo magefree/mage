@@ -24,7 +24,7 @@ public final class ScavengingScarab extends CardImpl {
         this.addAbility(new CantBlockAbility());
     }
 
-    public ScavengingScarab(final ScavengingScarab card) {
+    private ScavengingScarab(final ScavengingScarab card) {
         super(card);
     }
 

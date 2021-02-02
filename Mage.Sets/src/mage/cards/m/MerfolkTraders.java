@@ -26,7 +26,7 @@ public final class MerfolkTraders extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect()));
     }
 
-    public MerfolkTraders(final MerfolkTraders card) {
+    private MerfolkTraders(final MerfolkTraders card) {
         super(card);
     }
 

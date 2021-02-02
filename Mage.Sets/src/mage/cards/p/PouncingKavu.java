@@ -43,7 +43,7 @@ public final class PouncingKavu extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PouncingKavu(final PouncingKavu card) {
+    private PouncingKavu(final PouncingKavu card) {
         super(card);
     }
 

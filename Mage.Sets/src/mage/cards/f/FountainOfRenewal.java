@@ -32,7 +32,7 @@ public final class FountainOfRenewal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FountainOfRenewal(final FountainOfRenewal card) {
+    private FountainOfRenewal(final FountainOfRenewal card) {
         super(card);
     }
 

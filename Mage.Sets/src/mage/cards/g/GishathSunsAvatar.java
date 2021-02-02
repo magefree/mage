@@ -51,7 +51,7 @@ public final class GishathSunsAvatar extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new GishathSunsAvatarEffect(), false, true));
     }
 
-    public GishathSunsAvatar(final GishathSunsAvatar card) {
+    private GishathSunsAvatar(final GishathSunsAvatar card) {
         super(card);
     }
 

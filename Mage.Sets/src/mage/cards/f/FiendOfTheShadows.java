@@ -52,7 +52,7 @@ public final class FiendOfTheShadows extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
     }
 
-    public FiendOfTheShadows(final FiendOfTheShadows card) {
+    private FiendOfTheShadows(final FiendOfTheShadows card) {
         super(card);
     }
 

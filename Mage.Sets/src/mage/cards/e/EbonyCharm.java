@@ -43,7 +43,7 @@ public final class EbonyCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public EbonyCharm(final EbonyCharm card) {
+    private EbonyCharm(final EbonyCharm card) {
         super(card);
     }
 

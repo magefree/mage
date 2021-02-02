@@ -46,7 +46,7 @@ public final class PsychicPossession extends CardImpl {
         this.addAbility(new PsychicPossessionTriggeredAbility());
     }
 
-    public PsychicPossession(final PsychicPossession card) {
+    private PsychicPossession(final PsychicPossession card) {
         super(card);
     }
 

@@ -57,7 +57,7 @@ public final class DarthTyranusCountOfSerenno extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DarthTyranusCountOfSerenno(final DarthTyranusCountOfSerenno card) {
+    private DarthTyranusCountOfSerenno(final DarthTyranusCountOfSerenno card) {
         super(card);
     }
 

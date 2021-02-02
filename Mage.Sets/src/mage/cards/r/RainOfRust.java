@@ -33,7 +33,7 @@ public final class RainOfRust extends CardImpl {
         this.addAbility(new EntwineAbility("{3}{R}"));
     }
 
-    public RainOfRust(final RainOfRust card) {
+    private RainOfRust(final RainOfRust card) {
         super(card);
     }
 

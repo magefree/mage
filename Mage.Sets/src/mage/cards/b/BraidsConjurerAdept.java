@@ -40,7 +40,7 @@ public final class BraidsConjurerAdept extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(filter, true), TargetController.ANY, false));
     }
 
-    public BraidsConjurerAdept(final BraidsConjurerAdept card) {
+    private BraidsConjurerAdept(final BraidsConjurerAdept card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class Electrolyze extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Electrolyze(final Electrolyze card) {
+    private Electrolyze(final Electrolyze card) {
         super(card);
     }
 

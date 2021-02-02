@@ -31,7 +31,7 @@ public final class MiraculousRecovery extends CardImpl {
         this.getSpellAbility().addEffect(new MiraculousRecoveryEffect());
     }
 
-    public MiraculousRecovery(final MiraculousRecovery card) {
+    private MiraculousRecovery(final MiraculousRecovery card) {
         super(card);
     }
 

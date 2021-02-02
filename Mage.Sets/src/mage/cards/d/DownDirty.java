@@ -28,7 +28,7 @@ public final class DownDirty extends SplitCard {
 
     }
 
-    public DownDirty(final DownDirty card) {
+    private DownDirty(final DownDirty card) {
         super(card);
     }
 

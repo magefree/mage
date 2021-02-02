@@ -57,7 +57,7 @@ public final class GiantOyster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GiantOyster(final GiantOyster card) {
+    private GiantOyster(final GiantOyster card) {
         super(card);
     }
 

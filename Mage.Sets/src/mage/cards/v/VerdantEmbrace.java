@@ -49,7 +49,7 @@ public final class VerdantEmbrace extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VerdantEmbrace(final VerdantEmbrace card) {
+    private VerdantEmbrace(final VerdantEmbrace card) {
         super(card);
     }
 

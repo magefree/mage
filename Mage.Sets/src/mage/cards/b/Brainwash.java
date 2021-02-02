@@ -37,7 +37,7 @@ public final class Brainwash extends CardImpl {
 
     }
 
-    public Brainwash(final Brainwash card) {
+    private Brainwash(final Brainwash card) {
         super(card);
     }
 

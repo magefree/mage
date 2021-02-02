@@ -28,7 +28,7 @@ public final class AetherFlash extends CardImpl {
                 false, SetTargetPointer.PERMANENT, null));
     }
 
-    public AetherFlash(final AetherFlash card) {
+    private AetherFlash(final AetherFlash card) {
         super(card);
     }
 

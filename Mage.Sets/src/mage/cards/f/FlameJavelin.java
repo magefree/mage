@@ -23,7 +23,7 @@ public final class FlameJavelin extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public FlameJavelin(final FlameJavelin card) {
+    private FlameJavelin(final FlameJavelin card) {
         super(card);
     }
 

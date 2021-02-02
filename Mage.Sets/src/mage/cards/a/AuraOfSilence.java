@@ -43,7 +43,7 @@ public final class AuraOfSilence extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AuraOfSilence(final AuraOfSilence card) {
+    private AuraOfSilence(final AuraOfSilence card) {
         super(card);
     }
 

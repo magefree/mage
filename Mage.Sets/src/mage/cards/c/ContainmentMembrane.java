@@ -41,7 +41,7 @@ public final class ContainmentMembrane extends CardImpl {
         addAbility(new SurgeAbility(this, "{U}"));
     }
 
-    public ContainmentMembrane(final ContainmentMembrane card) {
+    private ContainmentMembrane(final ContainmentMembrane card) {
         super(card);
     }
 

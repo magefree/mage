@@ -37,7 +37,7 @@ public final class Archaeomancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Archaeomancer(final Archaeomancer card) {
+    private Archaeomancer(final Archaeomancer card) {
         super(card);
     }
 

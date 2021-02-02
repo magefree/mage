@@ -38,7 +38,7 @@ public final class SharuumTheHegemon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SharuumTheHegemon(final SharuumTheHegemon card) {
+    private SharuumTheHegemon(final SharuumTheHegemon card) {
         super(card);
     }
 

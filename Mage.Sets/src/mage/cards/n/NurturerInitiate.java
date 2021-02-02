@@ -44,7 +44,7 @@ public final class NurturerInitiate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NurturerInitiate(final NurturerInitiate card) {
+    private NurturerInitiate(final NurturerInitiate card) {
         super(card);
     }
 

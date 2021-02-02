@@ -31,7 +31,7 @@ public final class ReaveSoul extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public ReaveSoul(final ReaveSoul card) {
+    private ReaveSoul(final ReaveSoul card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class ATST extends CardImpl {
 
     }
 
-    public ATST(final ATST card) {
+    private ATST(final ATST card) {
         super(card);
     }
 

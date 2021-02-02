@@ -27,7 +27,7 @@ public final class HornOfRamos extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(1), new SacrificeSourceCost()));
     }
 
-    public HornOfRamos(final HornOfRamos card) {
+    private HornOfRamos(final HornOfRamos card) {
         super(card);
     }
 

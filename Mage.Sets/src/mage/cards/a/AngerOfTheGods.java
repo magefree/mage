@@ -29,7 +29,7 @@ public final class AngerOfTheGods extends CardImpl {
         this.getSpellAbility().addWatcher(new DamagedByWatcher(false));
     }
 
-    public AngerOfTheGods(final AngerOfTheGods card) {
+    private AngerOfTheGods(final AngerOfTheGods card) {
         super(card);
     }
 

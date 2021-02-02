@@ -73,7 +73,7 @@ public final class BushiTenderfoot extends CardImpl {
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(effect));
     }
 
-    public BushiTenderfoot(final BushiTenderfoot card) {
+    private BushiTenderfoot(final BushiTenderfoot card) {
         super(card);
     }
 

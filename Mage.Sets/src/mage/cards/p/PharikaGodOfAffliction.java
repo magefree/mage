@@ -50,7 +50,7 @@ public final class PharikaGodOfAffliction extends CardImpl {
 
     }
 
-    public PharikaGodOfAffliction(final PharikaGodOfAffliction card) {
+    private PharikaGodOfAffliction(final PharikaGodOfAffliction card) {
         super(card);
     }
 

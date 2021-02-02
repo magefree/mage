@@ -38,7 +38,7 @@ public final class CephalidBroker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CephalidBroker(final CephalidBroker card) {
+    private CephalidBroker(final CephalidBroker card) {
         super(card);
     }
 

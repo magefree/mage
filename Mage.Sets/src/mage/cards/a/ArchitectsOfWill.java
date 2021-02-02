@@ -39,7 +39,7 @@ public final class ArchitectsOfWill extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{U/B}")));
     }
 
-    public ArchitectsOfWill(final ArchitectsOfWill card) {
+    private ArchitectsOfWill(final ArchitectsOfWill card) {
         super(card);
     }
 

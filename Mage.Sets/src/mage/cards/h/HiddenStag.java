@@ -42,7 +42,7 @@ public final class HiddenStag extends CardImpl {
 
     }
 
-    public HiddenStag(final HiddenStag card) {
+    private HiddenStag(final HiddenStag card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class Aetherplasm extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new DoIfCostPaid(new AetherplasmEffect(), new ReturnToHandFromBattlefieldSourceCost()), false, true));
     }
 
-    public Aetherplasm(final Aetherplasm card) {
+    private Aetherplasm(final Aetherplasm card) {
         super(card);
     }
 

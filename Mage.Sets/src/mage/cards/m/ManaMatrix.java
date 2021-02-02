@@ -33,7 +33,7 @@ public final class ManaMatrix extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 2, true)));        
     }
 
-    public ManaMatrix(final ManaMatrix card) {
+    private ManaMatrix(final ManaMatrix card) {
         super(card);
     }
 

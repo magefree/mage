@@ -28,7 +28,7 @@ public final class GenerousStray extends CardImpl {
         ));
     }
 
-    public GenerousStray(final GenerousStray card) {
+    private GenerousStray(final GenerousStray card) {
         super(card);
     }
 

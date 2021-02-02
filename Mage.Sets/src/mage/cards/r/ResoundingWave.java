@@ -35,7 +35,7 @@ public final class ResoundingWave extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ResoundingWave(final ResoundingWave card) {
+    private ResoundingWave(final ResoundingWave card) {
         super(card);
     }
 

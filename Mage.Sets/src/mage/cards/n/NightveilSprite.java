@@ -31,7 +31,7 @@ public final class NightveilSprite extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new SurveilEffect(1), false));
     }
 
-    public NightveilSprite(final NightveilSprite card) {
+    private NightveilSprite(final NightveilSprite card) {
         super(card);
     }
 

@@ -61,7 +61,7 @@ public final class DragonsHerald extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DragonsHerald(final DragonsHerald card) {
+    private DragonsHerald(final DragonsHerald card) {
         super(card);
     }
 

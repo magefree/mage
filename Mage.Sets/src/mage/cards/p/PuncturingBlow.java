@@ -24,7 +24,7 @@ public final class PuncturingBlow extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public PuncturingBlow(final PuncturingBlow card) {
+    private PuncturingBlow(final PuncturingBlow card) {
         super(card);
     }
 

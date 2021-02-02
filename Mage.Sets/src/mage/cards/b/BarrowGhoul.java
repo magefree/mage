@@ -28,7 +28,7 @@ public final class BarrowGhoul extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ExileTopCreatureCardOfGraveyardCost(1)), TargetController.YOU, false));
     }
 
-    public BarrowGhoul(final BarrowGhoul card) {
+    private BarrowGhoul(final BarrowGhoul card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class ClergyOfTheHolyNimbus extends CardImpl {
         this.addAbility(new ActivateOnlyByOpponentActivatedAbility(Zone.BATTLEFIELD, new CantBeRegeneratedSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}")));
     }
 
-    public ClergyOfTheHolyNimbus(final ClergyOfTheHolyNimbus card) {
+    private ClergyOfTheHolyNimbus(final ClergyOfTheHolyNimbus card) {
         super(card);
     }
 

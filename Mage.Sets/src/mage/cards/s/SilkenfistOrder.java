@@ -30,7 +30,7 @@ public final class SilkenfistOrder extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(effect, false));
     }
 
-    public SilkenfistOrder(final SilkenfistOrder card) {
+    private SilkenfistOrder(final SilkenfistOrder card) {
         super(card);
     }
 

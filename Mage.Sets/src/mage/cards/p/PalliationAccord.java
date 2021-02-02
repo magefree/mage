@@ -40,7 +40,7 @@ public final class PalliationAccord extends CardImpl {
                 new RemoveCountersSourceCost(CounterType.SHIELD.createInstance())));
     }
 
-    public PalliationAccord(final PalliationAccord card) {
+    private PalliationAccord(final PalliationAccord card) {
         super(card);
     }
 

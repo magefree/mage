@@ -53,7 +53,7 @@ public final class Blightspeaker extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public Blightspeaker(final Blightspeaker card) {
+    private Blightspeaker(final Blightspeaker card) {
         super(card);
     }
 

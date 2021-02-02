@@ -36,7 +36,7 @@ public final class AvenTrailblazer extends CardImpl {
         
     }
 
-    public AvenTrailblazer(final AvenTrailblazer card) {
+    private AvenTrailblazer(final AvenTrailblazer card) {
         super(card);
     }
 

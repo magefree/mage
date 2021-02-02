@@ -35,7 +35,7 @@ public final class ThrivingRats extends CardImpl {
                 "Whenever {this} attacks you may pay {E}{E}. If you do, put a +1/+1 counter on it."));
     }
 
-    public ThrivingRats(final ThrivingRats card) {
+    private ThrivingRats(final ThrivingRats card) {
         super(card);
     }
 

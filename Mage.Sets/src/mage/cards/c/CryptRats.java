@@ -48,7 +48,7 @@ public final class CryptRats extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CryptRats(final CryptRats card) {
+    private CryptRats(final CryptRats card) {
         super(card);
     }
 

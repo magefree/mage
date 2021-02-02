@@ -48,7 +48,7 @@ public final class StaffOfDomination extends CardImpl {
         this.addAbility(ability5);
     }
 
-    public StaffOfDomination(final StaffOfDomination card) {
+    private StaffOfDomination(final StaffOfDomination card) {
         super(card);
     }
 

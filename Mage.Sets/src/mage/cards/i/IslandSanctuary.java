@@ -35,7 +35,7 @@ public final class IslandSanctuary extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IslandSanctuaryEffect()));
     }
 
-    public IslandSanctuary(final IslandSanctuary card) {
+    private IslandSanctuary(final IslandSanctuary card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class StymiedHopes extends CardImpl {
 
     }
 
-    public StymiedHopes(final StymiedHopes card) {
+    private StymiedHopes(final StymiedHopes card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class FlowstoneCrusher extends CardImpl {
             new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public FlowstoneCrusher(final FlowstoneCrusher card) {
+    private FlowstoneCrusher(final FlowstoneCrusher card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class UndeadGladiator extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{1}{B}")));
     }
 
-    public UndeadGladiator(final UndeadGladiator card) {
+    private UndeadGladiator(final UndeadGladiator card) {
         super(card);
     }
 

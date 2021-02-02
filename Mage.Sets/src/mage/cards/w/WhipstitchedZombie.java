@@ -28,7 +28,7 @@ public final class WhipstitchedZombie extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}")), TargetController.YOU, false));
     }
 
-    public WhipstitchedZombie(final WhipstitchedZombie card) {
+    private WhipstitchedZombie(final WhipstitchedZombie card) {
         super(card);
     }
 

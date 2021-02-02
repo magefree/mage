@@ -29,7 +29,7 @@ public final class SprintingWarbrute extends CardImpl {
         this.addAbility(new DashAbility(this, "{3}{R}"));
     }
 
-    public SprintingWarbrute(final SprintingWarbrute card) {
+    private SprintingWarbrute(final SprintingWarbrute card) {
         super(card);
     }
 

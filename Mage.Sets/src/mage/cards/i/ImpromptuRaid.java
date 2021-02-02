@@ -43,7 +43,7 @@ public final class ImpromptuRaid extends CardImpl {
 
     }
 
-    public ImpromptuRaid(final ImpromptuRaid card) {
+    private ImpromptuRaid(final ImpromptuRaid card) {
         super(card);
     }
 

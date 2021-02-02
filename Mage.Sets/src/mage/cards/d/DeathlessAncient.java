@@ -48,7 +48,7 @@ public final class DeathlessAncient extends CardImpl {
 
     }
 
-    public DeathlessAncient(final DeathlessAncient card) {
+    private DeathlessAncient(final DeathlessAncient card) {
         super(card);
     }
 

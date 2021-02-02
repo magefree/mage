@@ -32,7 +32,7 @@ public final class RangersGuile extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public RangersGuile(final RangersGuile card) {
+    private RangersGuile(final RangersGuile card) {
         super(card);
     }
 

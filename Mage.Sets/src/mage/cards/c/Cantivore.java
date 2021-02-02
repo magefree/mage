@@ -43,7 +43,7 @@ public final class Cantivore extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(value , Duration.EndOfGame))); 
     }
 
-    public Cantivore(final Cantivore card) {
+    private Cantivore(final Cantivore card) {
         super(card);
     }
 

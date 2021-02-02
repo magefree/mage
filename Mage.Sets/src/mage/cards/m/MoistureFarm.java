@@ -37,7 +37,7 @@ public final class MoistureFarm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoistureFarm(final MoistureFarm card) {
+    private MoistureFarm(final MoistureFarm card) {
         super(card);
     }
 

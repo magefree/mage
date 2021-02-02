@@ -24,7 +24,7 @@ public final class Redeem extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }
 
-    public Redeem(final Redeem card) {
+    private Redeem(final Redeem card) {
         super(card);
     }
 

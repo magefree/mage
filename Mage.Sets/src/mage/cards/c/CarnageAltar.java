@@ -27,7 +27,7 @@ public final class CarnageAltar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CarnageAltar(final CarnageAltar card) {
+    private CarnageAltar(final CarnageAltar card) {
         super(card);
     }
 

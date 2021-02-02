@@ -29,7 +29,7 @@ public final class SavorTheMoment extends CardImpl {
         this.getSpellAbility().addEffect(new SkipNextUntapStepSourceControllerEffect());
     }
 
-    public SavorTheMoment(final SavorTheMoment card) {
+    private SavorTheMoment(final SavorTheMoment card) {
         super(card);
     }
 

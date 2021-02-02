@@ -28,7 +28,7 @@ public final class HauntedCrossroads extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HauntedCrossroads(final HauntedCrossroads card) {
+    private HauntedCrossroads(final HauntedCrossroads card) {
         super(card);
     }
 

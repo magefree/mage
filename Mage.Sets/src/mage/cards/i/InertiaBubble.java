@@ -34,7 +34,7 @@ public final class InertiaBubble extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect("artifact")));
     }
 
-    public InertiaBubble(final InertiaBubble card) {
+    private InertiaBubble(final InertiaBubble card) {
         super(card);
     }
 

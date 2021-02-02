@@ -31,7 +31,7 @@ public final class DarklitGargoyle extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -1, Duration.EndOfTurn), new ManaCostsImpl(("{B}"))));
     }
 
-    public DarklitGargoyle(final DarklitGargoyle card) {
+    private DarklitGargoyle(final DarklitGargoyle card) {
         super(card);
     }
 

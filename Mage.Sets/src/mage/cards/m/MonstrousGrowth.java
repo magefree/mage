@@ -24,7 +24,7 @@ public final class MonstrousGrowth extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public MonstrousGrowth(final MonstrousGrowth card) {
+    private MonstrousGrowth(final MonstrousGrowth card) {
         super(card);
     }
 

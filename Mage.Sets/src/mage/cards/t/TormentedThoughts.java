@@ -35,7 +35,7 @@ public final class TormentedThoughts extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public TormentedThoughts(final TormentedThoughts card) {
+    private TormentedThoughts(final TormentedThoughts card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class JadeMage extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new ManaCostsImpl("{2}{G}")));
     }
 
-    public JadeMage(final JadeMage card) {
+    private JadeMage(final JadeMage card) {
         super(card);
     }
 

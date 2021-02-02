@@ -35,7 +35,7 @@ public final class SelesnyaSanctuary extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 0, 1, 0, 0, 0), new TapSourceCost()));
     }
 
-    public SelesnyaSanctuary(final SelesnyaSanctuary card) {
+    private SelesnyaSanctuary(final SelesnyaSanctuary card) {
         super(card);
     }
 

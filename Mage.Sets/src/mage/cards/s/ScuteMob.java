@@ -32,7 +32,7 @@ public final class ScuteMob extends CardImpl {
         this.addAbility(new ScuteMobAbility());
     }
 
-    public ScuteMob(final ScuteMob card) {
+    private ScuteMob(final ScuteMob card) {
         super(card);
     }
 

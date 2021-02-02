@@ -41,7 +41,7 @@ public final class NyleasPresence extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new NyleasPresenceLandTypeEffect()));
     }
 
-    public NyleasPresence(final NyleasPresence card) {
+    private NyleasPresence(final NyleasPresence card) {
         super(card);
     }
 

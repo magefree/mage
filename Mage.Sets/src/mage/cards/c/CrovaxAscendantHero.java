@@ -50,7 +50,7 @@ public final class CrovaxAscendantHero extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new PayLifeCost(2)));
     }
 
-    public CrovaxAscendantHero(final CrovaxAscendantHero card) {
+    private CrovaxAscendantHero(final CrovaxAscendantHero card) {
         super(card);
     }
 

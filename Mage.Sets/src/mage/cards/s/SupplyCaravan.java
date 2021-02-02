@@ -41,7 +41,7 @@ public final class SupplyCaravan extends CardImpl {
                 "When {this} enters the battlefield, if you control a tapped creature, create a 1/1 white Warrior creature token with vigilance."));
     }
 
-    public SupplyCaravan(final SupplyCaravan card) {
+    private SupplyCaravan(final SupplyCaravan card) {
         super(card);
     }
 

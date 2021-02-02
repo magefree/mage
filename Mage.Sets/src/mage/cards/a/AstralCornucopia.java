@@ -36,7 +36,7 @@ public final class AstralCornucopia extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AstralCornucopiaManaEffect(), new TapSourceCost()));
     }
 
-    public AstralCornucopia(final AstralCornucopia card) {
+    private AstralCornucopia(final AstralCornucopia card) {
         super(card);
     }
 

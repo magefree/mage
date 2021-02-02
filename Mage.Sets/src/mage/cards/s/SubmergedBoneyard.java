@@ -26,7 +26,7 @@ public final class SubmergedBoneyard extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public SubmergedBoneyard(final SubmergedBoneyard card) {
+    private SubmergedBoneyard(final SubmergedBoneyard card) {
         super(card);
     }
 

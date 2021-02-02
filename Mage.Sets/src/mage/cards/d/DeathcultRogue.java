@@ -33,7 +33,7 @@ public final class DeathcultRogue extends CardImpl {
 
     }
 
-    public DeathcultRogue(final DeathcultRogue card) {
+    private DeathcultRogue(final DeathcultRogue card) {
         super(card);
     }
 

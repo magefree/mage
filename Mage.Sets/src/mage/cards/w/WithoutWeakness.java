@@ -30,7 +30,7 @@ public final class WithoutWeakness extends CardImpl {
 
     }
 
-    public WithoutWeakness(final WithoutWeakness card) {
+    private WithoutWeakness(final WithoutWeakness card) {
         super(card);
     }
 

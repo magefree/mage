@@ -39,7 +39,7 @@ public final class UtvaraHellkite extends CardImpl {
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(new CreateTokenEffect(new UtvaraHellkiteDragonToken()), false, filter));
     }
 
-    public UtvaraHellkite(final UtvaraHellkite card) {
+    private UtvaraHellkite(final UtvaraHellkite card) {
         super(card);
     }
 

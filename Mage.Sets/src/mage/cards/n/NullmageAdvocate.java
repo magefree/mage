@@ -47,7 +47,7 @@ public final class NullmageAdvocate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NullmageAdvocate(final NullmageAdvocate card) {
+    private NullmageAdvocate(final NullmageAdvocate card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class SkyWeaver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SkyWeaver(final SkyWeaver card) {
+    private SkyWeaver(final SkyWeaver card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class DreamstoneHedron extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DreamstoneHedron(final DreamstoneHedron card) {
+    private DreamstoneHedron(final DreamstoneHedron card) {
         super(card);
     }
 

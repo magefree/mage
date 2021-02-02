@@ -35,7 +35,7 @@ public final class IronFistOfTheEmpire extends CardImpl {
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }
 
-    public IronFistOfTheEmpire(final IronFistOfTheEmpire card) {
+    private IronFistOfTheEmpire(final IronFistOfTheEmpire card) {
         super(card);
     }
 

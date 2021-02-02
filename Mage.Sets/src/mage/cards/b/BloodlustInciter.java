@@ -35,7 +35,7 @@ public final class BloodlustInciter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodlustInciter(final BloodlustInciter card) {
+    private BloodlustInciter(final BloodlustInciter card) {
         super(card);
     }
 

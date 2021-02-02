@@ -29,7 +29,7 @@ public final class SagesKnowledge extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
     }
 
-    public SagesKnowledge(final SagesKnowledge card) {
+    private SagesKnowledge(final SagesKnowledge card) {
         super(card);
     }
 

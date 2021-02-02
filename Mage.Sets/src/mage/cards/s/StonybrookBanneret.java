@@ -42,7 +42,7 @@ public final class StonybrookBanneret extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public StonybrookBanneret(final StonybrookBanneret card) {
+    private StonybrookBanneret(final StonybrookBanneret card) {
         super(card);
     }
 

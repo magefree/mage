@@ -36,7 +36,7 @@ public final class SigardaHostOfHerons extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SigardaHostOfHeronsEffect()));
     }
 
-    public SigardaHostOfHerons(final SigardaHostOfHerons card) {
+    private SigardaHostOfHerons(final SigardaHostOfHerons card) {
         super(card);
     }
 

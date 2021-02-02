@@ -41,7 +41,7 @@ public final class JudgesFamiliar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JudgesFamiliar(final JudgesFamiliar card) {
+    private JudgesFamiliar(final JudgesFamiliar card) {
         super(card);
     }
 

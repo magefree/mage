@@ -22,7 +22,7 @@ public final class EyeSpy extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public EyeSpy(final EyeSpy card) {
+    private EyeSpy(final EyeSpy card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class LurkingCrocodile extends CardImpl {
         this.addAbility(new IslandwalkAbility());
     }
 
-    public LurkingCrocodile(final LurkingCrocodile card) {
+    private LurkingCrocodile(final LurkingCrocodile card) {
         super(card);
     }
 

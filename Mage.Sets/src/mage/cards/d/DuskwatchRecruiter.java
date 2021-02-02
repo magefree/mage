@@ -52,7 +52,7 @@ public final class DuskwatchRecruiter extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
-    public DuskwatchRecruiter(final DuskwatchRecruiter card) {
+    private DuskwatchRecruiter(final DuskwatchRecruiter card) {
         super(card);
     }
 

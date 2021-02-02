@@ -31,7 +31,7 @@ public final class GrappleWithThePast extends CardImpl {
         getSpellAbility().addEffect(new GrappleWithThePastEffect());
     }
 
-    public GrappleWithThePast(final GrappleWithThePast card) {
+    private GrappleWithThePast(final GrappleWithThePast card) {
         super(card);
     }
 

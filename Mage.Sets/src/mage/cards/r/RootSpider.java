@@ -37,7 +37,7 @@ public final class RootSpider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RootSpider(final RootSpider card) {
+    private RootSpider(final RootSpider card) {
         super(card);
     }
 

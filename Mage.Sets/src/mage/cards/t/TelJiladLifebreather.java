@@ -45,7 +45,7 @@ public final class TelJiladLifebreather extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TelJiladLifebreather(final TelJiladLifebreather card) {
+    private TelJiladLifebreather(final TelJiladLifebreather card) {
         super(card);
     }
 

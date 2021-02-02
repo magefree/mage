@@ -37,7 +37,7 @@ public final class CoastalHornclaw extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public CoastalHornclaw(final CoastalHornclaw card) {
+    private CoastalHornclaw(final CoastalHornclaw card) {
         super(card);
     }
 

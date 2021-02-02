@@ -41,7 +41,7 @@ public final class LoxodonMender extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LoxodonMender(final LoxodonMender card) {
+    private LoxodonMender(final LoxodonMender card) {
         super(card);
     }
 

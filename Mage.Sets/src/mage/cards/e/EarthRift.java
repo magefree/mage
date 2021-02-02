@@ -28,7 +28,7 @@ public final class EarthRift extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{R}{R}"), TimingRule.SORCERY));
     }
 
-    public EarthRift(final EarthRift card) {
+    private EarthRift(final EarthRift card) {
         super(card);
     }
 

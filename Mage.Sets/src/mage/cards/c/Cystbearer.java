@@ -27,7 +27,7 @@ public final class Cystbearer extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
     }
 
-    public Cystbearer(final Cystbearer card) {
+    private Cystbearer(final Cystbearer card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class FaithsReward extends CardImpl {
         this.getSpellAbility().addWatcher(new FaithsRewardWatcher());
     }
 
-    public FaithsReward(final FaithsReward card) {
+    private FaithsReward(final FaithsReward card) {
         super(card);
     }
 

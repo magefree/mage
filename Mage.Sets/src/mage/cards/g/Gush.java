@@ -34,7 +34,7 @@ public final class Gush extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
-    public Gush(final Gush card) {
+    private Gush(final Gush card) {
         super(card);
     }
 

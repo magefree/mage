@@ -43,7 +43,7 @@ public final class OuterRimSlaver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OuterRimSlaver(final OuterRimSlaver card) {
+    private OuterRimSlaver(final OuterRimSlaver card) {
         super(card);
     }
 

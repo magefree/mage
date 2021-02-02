@@ -32,7 +32,7 @@ public final class DeadbridgeChant extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DeadbridgeChantEffect(), TargetController.YOU, false));
     }
 
-    public DeadbridgeChant(final DeadbridgeChant card) {
+    private DeadbridgeChant(final DeadbridgeChant card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class GazeOfPain extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new GazeOfPainDelayedTriggeredAbility()));
     }
 
-    public GazeOfPain(final GazeOfPain card) {
+    private GazeOfPain(final GazeOfPain card) {
         super(card);
     }
 

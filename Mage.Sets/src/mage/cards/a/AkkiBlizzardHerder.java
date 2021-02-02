@@ -32,7 +32,7 @@ public final class AkkiBlizzardHerder extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new SacrificeAllEffect(filter)));
     }
 
-    public AkkiBlizzardHerder(final AkkiBlizzardHerder card) {
+    private AkkiBlizzardHerder(final AkkiBlizzardHerder card) {
         super(card);
     }
 

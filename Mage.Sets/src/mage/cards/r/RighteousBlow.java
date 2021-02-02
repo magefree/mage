@@ -22,7 +22,7 @@ public final class RighteousBlow extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
     }
 
-    public RighteousBlow(final RighteousBlow card) {
+    private RighteousBlow(final RighteousBlow card) {
         super(card);
     }
 

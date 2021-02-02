@@ -23,7 +23,7 @@ public final class BottomlessPit extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(1, true), TargetController.ANY, false));
     }
 
-    public BottomlessPit(final BottomlessPit card) {
+    private BottomlessPit(final BottomlessPit card) {
         super(card);
     }
 

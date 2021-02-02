@@ -36,7 +36,7 @@ public final class LethalSting extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public LethalSting(final LethalSting card) {
+    private LethalSting(final LethalSting card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class IllTemperedCyclops extends CardImpl {
         this.addAbility(new MonstrosityAbility("{5}{R}", 3));
     }
 
-    public IllTemperedCyclops(final IllTemperedCyclops card) {
+    private IllTemperedCyclops(final IllTemperedCyclops card) {
         super(card);
     }
 

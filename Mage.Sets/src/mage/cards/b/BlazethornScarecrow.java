@@ -52,7 +52,7 @@ public final class BlazethornScarecrow extends CardImpl {
         
     }
 
-    public BlazethornScarecrow(final BlazethornScarecrow card) {
+    private BlazethornScarecrow(final BlazethornScarecrow card) {
         super(card);
     }
 

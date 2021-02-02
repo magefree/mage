@@ -25,7 +25,7 @@ public final class ChitteringDoom extends CardImpl {
         this.addAbility(new ChitteringDoomTriggeredAbility());
     }
 
-    public ChitteringDoom(final ChitteringDoom card) {
+    private ChitteringDoom(final ChitteringDoom card) {
         super(card);
     }
 

@@ -55,7 +55,7 @@ public final class GreaterHarvester extends CardImpl {
         this.addAbility(new GreaterHarvesterAbility());
     }
 
-    public GreaterHarvester(final GreaterHarvester card) {
+    private GreaterHarvester(final GreaterHarvester card) {
         super(card);
     }
 

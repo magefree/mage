@@ -34,7 +34,7 @@ public final class HedronArchive extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HedronArchive(final HedronArchive card) {
+    private HedronArchive(final HedronArchive card) {
         super(card);
     }
 

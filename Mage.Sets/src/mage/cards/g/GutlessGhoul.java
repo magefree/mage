@@ -36,7 +36,7 @@ public final class GutlessGhoul extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GutlessGhoul(final GutlessGhoul card) {
+    private GutlessGhoul(final GutlessGhoul card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class GluttonousCyclops extends CardImpl {
 
     }
 
-    public GluttonousCyclops(final GluttonousCyclops card) {
+    private GluttonousCyclops(final GluttonousCyclops card) {
         super(card);
     }
 

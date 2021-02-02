@@ -22,7 +22,7 @@ public final class PristineTalisman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PristineTalisman(final PristineTalisman card) {
+    private PristineTalisman(final PristineTalisman card) {
         super(card);
     }
 

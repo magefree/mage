@@ -29,7 +29,7 @@ public final class Harrow extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
     }
 
-    public Harrow(final Harrow card) {
+    private Harrow(final Harrow card) {
         super(card);
     }
 

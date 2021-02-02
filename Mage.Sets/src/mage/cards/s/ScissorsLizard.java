@@ -37,7 +37,7 @@ public final class ScissorsLizard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
-    public ScissorsLizard(final ScissorsLizard card) {
+    private ScissorsLizard(final ScissorsLizard card) {
         super(card);
     }
 

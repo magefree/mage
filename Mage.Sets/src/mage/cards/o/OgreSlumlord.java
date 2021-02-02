@@ -51,7 +51,7 @@ public final class OgreSlumlord extends CardImpl {
 
     }
 
-    public OgreSlumlord(final OgreSlumlord card) {
+    private OgreSlumlord(final OgreSlumlord card) {
         super(card);
     }
 

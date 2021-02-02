@@ -23,7 +23,7 @@ public final class WarpathGhoul extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public WarpathGhoul(final WarpathGhoul card) {
+    private WarpathGhoul(final WarpathGhoul card) {
         super(card);
     }
 

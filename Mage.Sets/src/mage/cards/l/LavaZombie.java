@@ -44,7 +44,7 @@ public final class LavaZombie extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{2}")));
     }
 
-    public LavaZombie(final LavaZombie card) {
+    private LavaZombie(final LavaZombie card) {
         super(card);
     }
 

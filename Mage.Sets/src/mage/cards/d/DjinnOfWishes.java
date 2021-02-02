@@ -48,7 +48,7 @@ public final class DjinnOfWishes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DjinnOfWishes(final DjinnOfWishes card) {
+    private DjinnOfWishes(final DjinnOfWishes card) {
         super(card);
     }
 

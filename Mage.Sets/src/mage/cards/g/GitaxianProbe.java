@@ -26,7 +26,7 @@ public final class GitaxianProbe extends CardImpl {
 
     }
 
-    public GitaxianProbe(final GitaxianProbe card) {
+    private GitaxianProbe(final GitaxianProbe card) {
         super(card);
     }
 

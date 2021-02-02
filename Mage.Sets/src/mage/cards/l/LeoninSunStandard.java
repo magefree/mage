@@ -23,7 +23,7 @@ public final class LeoninSunStandard extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, false), new ManaCostsImpl("{1}{W}")));
     }
 
-    public LeoninSunStandard(final LeoninSunStandard card) {
+    private LeoninSunStandard(final LeoninSunStandard card) {
         super(card);
     }
 

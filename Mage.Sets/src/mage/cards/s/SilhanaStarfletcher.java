@@ -41,7 +41,7 @@ public final class SilhanaStarfletcher extends CardImpl {
 
     }
 
-    public SilhanaStarfletcher(final SilhanaStarfletcher card) {
+    private SilhanaStarfletcher(final SilhanaStarfletcher card) {
         super(card);
     }
 

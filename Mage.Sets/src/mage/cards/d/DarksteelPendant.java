@@ -30,7 +30,7 @@ public final class DarksteelPendant extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DarksteelPendant(final DarksteelPendant card) {
+    private DarksteelPendant(final DarksteelPendant card) {
         super(card);
     }
 

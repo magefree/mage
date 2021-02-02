@@ -45,7 +45,7 @@ public final class ZephidsEmbrace extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ZephidsEmbrace(final ZephidsEmbrace card) {
+    private ZephidsEmbrace(final ZephidsEmbrace card) {
         super(card);
     }
 

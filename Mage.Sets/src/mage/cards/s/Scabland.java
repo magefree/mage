@@ -34,7 +34,7 @@ public final class Scabland extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Scabland(final Scabland card) {
+    private Scabland(final Scabland card) {
         super(card);
     }
 

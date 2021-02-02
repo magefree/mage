@@ -29,7 +29,7 @@ public final class CryptCobra extends CardImpl {
         this.addAbility(new AttacksAndIsNotBlockedTriggeredAbility(effect, false, true));
     }
 
-    public CryptCobra(final CryptCobra card) {
+    private CryptCobra(final CryptCobra card) {
         super(card);
     }
 

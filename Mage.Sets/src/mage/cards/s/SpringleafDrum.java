@@ -32,7 +32,7 @@ public final class SpringleafDrum extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpringleafDrum(final SpringleafDrum card) {
+    private SpringleafDrum(final SpringleafDrum card) {
         super(card);
     }
 

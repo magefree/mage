@@ -33,7 +33,7 @@ public final class RousingOfSouls extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public RousingOfSouls(final RousingOfSouls card) {
+    private RousingOfSouls(final RousingOfSouls card) {
         super(card);
     }
 

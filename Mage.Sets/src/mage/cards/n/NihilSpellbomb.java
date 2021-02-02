@@ -34,7 +34,7 @@ public final class NihilSpellbomb extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{B}")), false));
     }
 
-    public NihilSpellbomb(final NihilSpellbomb card) {
+    private NihilSpellbomb(final NihilSpellbomb card) {
         super(card);
     }
 

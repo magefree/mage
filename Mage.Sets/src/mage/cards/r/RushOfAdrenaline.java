@@ -31,7 +31,7 @@ public final class RushOfAdrenaline extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public RushOfAdrenaline(final RushOfAdrenaline card) {
+    private RushOfAdrenaline(final RushOfAdrenaline card) {
         super(card);
     }
 

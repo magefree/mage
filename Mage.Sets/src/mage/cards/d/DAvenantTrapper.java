@@ -42,7 +42,7 @@ public final class DAvenantTrapper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DAvenantTrapper(final DAvenantTrapper card) {
+    private DAvenantTrapper(final DAvenantTrapper card) {
         super(card);
     }
 

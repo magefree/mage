@@ -50,7 +50,7 @@ public final class UktabiKong extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new UktabiKongApeToken()), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true))));
     }
 
-    public UktabiKong(final UktabiKong card) {
+    private UktabiKong(final UktabiKong card) {
         super(card);
     }
 

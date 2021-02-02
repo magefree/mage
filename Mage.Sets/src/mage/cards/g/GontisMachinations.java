@@ -43,7 +43,7 @@ public final class GontisMachinations extends CardImpl {
 
     }
 
-    public GontisMachinations(final GontisMachinations card) {
+    private GontisMachinations(final GontisMachinations card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class ConcertedEffort extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConcertedEffortEffect(), TargetController.ANY, false));
     }
 
-    public ConcertedEffort(final ConcertedEffort card) {
+    private ConcertedEffort(final ConcertedEffort card) {
         super(card);
     }
 

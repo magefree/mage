@@ -28,7 +28,7 @@ public final class VugLizard extends CardImpl {
     this.addAbility(new EchoAbility("{1}{R}{R}"));
     }
 
-    public VugLizard(final VugLizard card) {
+    private VugLizard(final VugLizard card) {
         super(card);
     }
 

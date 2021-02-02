@@ -27,7 +27,7 @@ public final class TerrifyingPresence extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TerrifyingPresence(final TerrifyingPresence card) {
+    private TerrifyingPresence(final TerrifyingPresence card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class ConsignToDream extends CardImpl {
 
     }
 
-    public ConsignToDream(final ConsignToDream card) {
+    private ConsignToDream(final ConsignToDream card) {
         super(card);
     }
 

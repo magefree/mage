@@ -35,7 +35,7 @@ public final class AviaryMechanic extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), true));
     }
 
-    public AviaryMechanic(final AviaryMechanic card) {
+    private AviaryMechanic(final AviaryMechanic card) {
         super(card);
     }
 

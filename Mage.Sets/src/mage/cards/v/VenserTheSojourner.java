@@ -57,7 +57,7 @@ public final class VenserTheSojourner extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public VenserTheSojourner(final VenserTheSojourner card) {
+    private VenserTheSojourner(final VenserTheSojourner card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class TezzeretsSimulacrum extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TezzeretsSimulacrum(final TezzeretsSimulacrum card) {
+    private TezzeretsSimulacrum(final TezzeretsSimulacrum card) {
         super(card);
     }
 

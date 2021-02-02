@@ -27,7 +27,7 @@ public final class ForceMastery extends CardImpl {
 
     }
 
-    public ForceMastery(final ForceMastery card) {
+    private ForceMastery(final ForceMastery card) {
         super(card);
     }
 

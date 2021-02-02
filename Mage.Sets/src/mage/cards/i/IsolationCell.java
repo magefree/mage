@@ -30,7 +30,7 @@ public final class IsolationCell extends CardImpl {
         this.addAbility(new IsolationCellTriggeredAbility());
     }
 
-    public IsolationCell(final IsolationCell card) {
+    private IsolationCell(final IsolationCell card) {
         super(card);
     }
 

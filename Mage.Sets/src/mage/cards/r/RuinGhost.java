@@ -37,7 +37,7 @@ public final class RuinGhost extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RuinGhost(final RuinGhost card) {
+    private RuinGhost(final RuinGhost card) {
         super(card);
     }
 

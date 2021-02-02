@@ -33,7 +33,7 @@ public final class AshesOfTheAbhorrent extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new GainLifeEffect(1), false));
     }
 
-    public AshesOfTheAbhorrent(final AshesOfTheAbhorrent card) {
+    private AshesOfTheAbhorrent(final AshesOfTheAbhorrent card) {
         super(card);
     }
 

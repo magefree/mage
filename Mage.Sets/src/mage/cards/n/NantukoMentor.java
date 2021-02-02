@@ -43,7 +43,7 @@ public final class NantukoMentor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NantukoMentor(final NantukoMentor card) {
+    private NantukoMentor(final NantukoMentor card) {
         super(card);
     }
 

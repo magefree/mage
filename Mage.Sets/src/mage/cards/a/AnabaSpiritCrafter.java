@@ -36,7 +36,7 @@ public final class AnabaSpiritCrafter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public AnabaSpiritCrafter(final AnabaSpiritCrafter card) {
+    private AnabaSpiritCrafter(final AnabaSpiritCrafter card) {
         super(card);
     }
 

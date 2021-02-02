@@ -48,7 +48,7 @@ public final class UWing extends CardImpl {
                 "As long as {this} is untapped, it gets +0/+1")));
     }
 
-    public UWing(final UWing card) {
+    private UWing(final UWing card) {
         super(card);
     }
 

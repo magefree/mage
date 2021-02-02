@@ -33,7 +33,7 @@ public final class CommuneWithDinosaurs extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(StaticValue.get(5), false, StaticValue.get(1), filter, false));
     }
 
-    public CommuneWithDinosaurs(final CommuneWithDinosaurs card) {
+    private CommuneWithDinosaurs(final CommuneWithDinosaurs card) {
         super(card);
     }
 

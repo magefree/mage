@@ -28,7 +28,7 @@ public final class PsychicMiasma extends CardImpl {
         this.getSpellAbility().addEffect(new PsychicMiasmaEffect());
     }
 
-    public PsychicMiasma(final PsychicMiasma card) {
+    private PsychicMiasma(final PsychicMiasma card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class InBolassClutches extends CardImpl {
         ));
     }
 
-    public InBolassClutches(final InBolassClutches card) {
+    private InBolassClutches(final InBolassClutches card) {
         super(card);
     }
 

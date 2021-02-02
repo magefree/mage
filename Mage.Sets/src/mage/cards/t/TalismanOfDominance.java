@@ -31,7 +31,7 @@ public final class TalismanOfDominance extends CardImpl {
         this.addAbility(blackManaAbility);
     }
 
-    public TalismanOfDominance(final TalismanOfDominance card) {
+    private TalismanOfDominance(final TalismanOfDominance card) {
         super(card);
     }
 

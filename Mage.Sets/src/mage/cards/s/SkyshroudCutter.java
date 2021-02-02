@@ -35,7 +35,7 @@ public final class SkyshroudCutter extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(new GainLifePlayersCost(5), new PermanentsOnTheBattlefieldCondition(filter)));
     }
 
-    public SkyshroudCutter(final SkyshroudCutter card) {
+    private SkyshroudCutter(final SkyshroudCutter card) {
         super(card);
     }
 

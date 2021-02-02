@@ -29,7 +29,7 @@ public final class JointAssault extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public JointAssault(final JointAssault card) {
+    private JointAssault(final JointAssault card) {
         super(card);
     }
 

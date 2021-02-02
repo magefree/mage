@@ -42,7 +42,7 @@ public final class NettleSentinel extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, true));
     }
 
-    public NettleSentinel(final NettleSentinel card) {
+    private NettleSentinel(final NettleSentinel card) {
         super(card);
     }
 

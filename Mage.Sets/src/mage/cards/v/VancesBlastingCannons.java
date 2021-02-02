@@ -48,7 +48,7 @@ public final class VancesBlastingCannons extends CardImpl {
         this.addAbility(new VancesBlastingCannonsFlipTrigger(), new CastSpellLastTurnWatcher());
     }
 
-    public VancesBlastingCannons(final VancesBlastingCannons card) {
+    private VancesBlastingCannons(final VancesBlastingCannons card) {
         super(card);
     }
 

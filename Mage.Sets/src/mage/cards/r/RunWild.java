@@ -36,7 +36,7 @@ public final class RunWild extends CardImpl {
 
     }
 
-    public RunWild(final RunWild card) {
+    private RunWild(final RunWild card) {
         super(card);
     }
 

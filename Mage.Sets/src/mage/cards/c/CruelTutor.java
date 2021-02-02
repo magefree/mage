@@ -25,7 +25,7 @@ public final class CruelTutor extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2));
     }
 
-    public CruelTutor(final CruelTutor card) {
+    private CruelTutor(final CruelTutor card) {
         super(card);
     }
 

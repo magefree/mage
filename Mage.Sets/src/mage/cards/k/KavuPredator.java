@@ -38,7 +38,7 @@ public final class KavuPredator extends CardImpl {
         this.addAbility(new KavuPredatorTriggeredAbility());
     }
 
-    public KavuPredator(final KavuPredator card) {
+    private KavuPredator(final KavuPredator card) {
         super(card);
     }
 

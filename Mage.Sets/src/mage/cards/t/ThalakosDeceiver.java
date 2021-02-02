@@ -37,7 +37,7 @@ public final class ThalakosDeceiver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ThalakosDeceiver(final ThalakosDeceiver card) {
+    private ThalakosDeceiver(final ThalakosDeceiver card) {
         super(card);
     }
 

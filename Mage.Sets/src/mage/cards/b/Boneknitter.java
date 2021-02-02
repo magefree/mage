@@ -43,7 +43,7 @@ public final class Boneknitter extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{B}")));
     }
 
-    public Boneknitter(final Boneknitter card) {
+    private Boneknitter(final Boneknitter card) {
         super(card);
     }
 

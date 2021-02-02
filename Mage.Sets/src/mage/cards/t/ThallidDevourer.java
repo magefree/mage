@@ -47,7 +47,7 @@ public final class ThallidDevourer extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filter, false))));
     }
 
-    public ThallidDevourer(final ThallidDevourer card) {
+    private ThallidDevourer(final ThallidDevourer card) {
         super(card);
     }
 

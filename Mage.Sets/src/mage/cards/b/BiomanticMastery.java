@@ -29,7 +29,7 @@ public final class BiomanticMastery extends CardImpl {
 
     }
 
-    public BiomanticMastery(final BiomanticMastery card) {
+    private BiomanticMastery(final BiomanticMastery card) {
         super(card);
     }
 

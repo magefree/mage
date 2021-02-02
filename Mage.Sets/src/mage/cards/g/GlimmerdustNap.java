@@ -43,7 +43,7 @@ public final class GlimmerdustNap extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
-    public GlimmerdustNap(final GlimmerdustNap card) {
+    private GlimmerdustNap(final GlimmerdustNap card) {
         super(card);
     }
 

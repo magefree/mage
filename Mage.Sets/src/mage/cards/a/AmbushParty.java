@@ -28,7 +28,7 @@ public final class AmbushParty extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public AmbushParty(final AmbushParty card) {
+    private AmbushParty(final AmbushParty card) {
         super(card);
     }
 

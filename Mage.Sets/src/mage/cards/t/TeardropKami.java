@@ -33,7 +33,7 @@ public final class TeardropKami extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TeardropKami(final TeardropKami card) {
+    private TeardropKami(final TeardropKami card) {
         super(card);
     }
 

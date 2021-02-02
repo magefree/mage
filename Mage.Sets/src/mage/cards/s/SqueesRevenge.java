@@ -24,7 +24,7 @@ public final class SqueesRevenge extends CardImpl {
         this.getSpellAbility().addEffect(new SqueesRevengeEffect());
     }
 
-    public SqueesRevenge(final SqueesRevenge card) {
+    private SqueesRevenge(final SqueesRevenge card) {
         super(card);
     }
 

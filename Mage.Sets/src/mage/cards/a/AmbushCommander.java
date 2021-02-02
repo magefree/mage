@@ -53,7 +53,7 @@ public final class AmbushCommander extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AmbushCommander(final AmbushCommander card) {
+    private AmbushCommander(final AmbushCommander card) {
         super(card);
     }
 

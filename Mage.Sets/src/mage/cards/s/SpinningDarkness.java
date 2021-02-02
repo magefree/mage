@@ -49,7 +49,7 @@ public final class SpinningDarkness extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public SpinningDarkness(final SpinningDarkness card) {
+    private SpinningDarkness(final SpinningDarkness card) {
         super(card);
     }
 

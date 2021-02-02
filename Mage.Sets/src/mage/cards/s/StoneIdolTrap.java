@@ -36,7 +36,7 @@ public final class StoneIdolTrap extends CardImpl {
         this.getSpellAbility().addEffect(new StoneIdolTrapEffect());
     }
 
-    public StoneIdolTrap(final StoneIdolTrap card) {
+    private StoneIdolTrap(final StoneIdolTrap card) {
         super(card);
     }
 

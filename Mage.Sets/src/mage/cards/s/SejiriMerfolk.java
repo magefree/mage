@@ -46,7 +46,7 @@ public final class SejiriMerfolk extends CardImpl {
 
     }
 
-    public SejiriMerfolk(final SejiriMerfolk card) {
+    private SejiriMerfolk(final SejiriMerfolk card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class EndlessScream extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(new CountersSourceCount(CounterType.SCREAM), StaticValue.get(0), Duration.WhileOnBattlefield)));
     }
 
-    public EndlessScream(final EndlessScream card) {
+    private EndlessScream(final EndlessScream card) {
         super(card);
     }
 

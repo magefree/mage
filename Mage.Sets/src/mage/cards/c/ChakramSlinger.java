@@ -39,7 +39,7 @@ public final class ChakramSlinger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChakramSlinger(final ChakramSlinger card) {
+    private ChakramSlinger(final ChakramSlinger card) {
         super(card);
     }
 

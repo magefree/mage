@@ -31,7 +31,7 @@ public final class ManicVandal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ManicVandal(final ManicVandal card) {
+    private ManicVandal(final ManicVandal card) {
         super(card);
     }
 

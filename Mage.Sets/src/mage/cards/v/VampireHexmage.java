@@ -40,7 +40,7 @@ public final class VampireHexmage extends CardImpl {
         this.addAbility(vampireHexmageAbility);
     }
 
-    public VampireHexmage(final VampireHexmage card) {
+    private VampireHexmage(final VampireHexmage card) {
         super(card);
     }
 

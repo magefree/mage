@@ -27,7 +27,7 @@ public final class CripplingChill extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public CripplingChill(final CripplingChill card) {
+    private CripplingChill(final CripplingChill card) {
         super(card);
     }
 

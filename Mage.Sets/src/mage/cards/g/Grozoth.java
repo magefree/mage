@@ -52,7 +52,7 @@ public final class Grozoth extends CardImpl {
         this.addAbility(new TransmuteAbility("{1}{U}{U}"));        
     }
 
-    public Grozoth(final Grozoth card) {
+    private Grozoth(final Grozoth card) {
         super(card);
     }
 

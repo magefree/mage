@@ -25,7 +25,7 @@ public final class UncomfortableChill extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public UncomfortableChill(final UncomfortableChill card) {
+    private UncomfortableChill(final UncomfortableChill card) {
         super(card);
     }
 

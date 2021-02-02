@@ -28,7 +28,7 @@ public final class DeathbloomThallid extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), false));
     }
 
-    public DeathbloomThallid(final DeathbloomThallid card) {
+    private DeathbloomThallid(final DeathbloomThallid card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class AetherMembrane extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(effect)), false, true));
     }
 
-    public AetherMembrane(final AetherMembrane card) {
+    private AetherMembrane(final AetherMembrane card) {
         super(card);
     }
 

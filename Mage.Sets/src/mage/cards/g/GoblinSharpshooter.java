@@ -41,7 +41,7 @@ public final class GoblinSharpshooter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinSharpshooter(final GoblinSharpshooter card) {
+    private GoblinSharpshooter(final GoblinSharpshooter card) {
         super(card);
     }
 

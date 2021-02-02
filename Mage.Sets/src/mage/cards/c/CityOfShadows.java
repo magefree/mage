@@ -37,7 +37,7 @@ public final class CityOfShadows extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CityOfShadows(final CityOfShadows card) {
+    private CityOfShadows(final CityOfShadows card) {
         super(card);
     }
 

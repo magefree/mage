@@ -31,7 +31,7 @@ public final class Thrummingbird extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ProliferateEffect(), false));
     }
 
-    public Thrummingbird(final Thrummingbird card) {
+    private Thrummingbird(final Thrummingbird card) {
         super(card);
     }
 

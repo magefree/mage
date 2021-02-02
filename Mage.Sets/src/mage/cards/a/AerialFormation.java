@@ -34,7 +34,7 @@ public final class AerialFormation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
     }
 
-    public AerialFormation(final AerialFormation card) {
+    private AerialFormation(final AerialFormation card) {
         super(card);
     }
 

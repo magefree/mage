@@ -36,7 +36,7 @@ public final class ZoZuThePunisher extends CardImpl {
         this.addAbility(new ZoZuThePunisherAbility());
     }
 
-    public ZoZuThePunisher(final ZoZuThePunisher card) {
+    private ZoZuThePunisher(final ZoZuThePunisher card) {
             super(card);
     }
 

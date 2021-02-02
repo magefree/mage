@@ -42,7 +42,7 @@ public final class DragonMantle extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted creature has \"{R}: This creature gets +1/+0 until end of turn.\"")));
     }
 
-    public DragonMantle(final DragonMantle card) {
+    private DragonMantle(final DragonMantle card) {
         super(card);
     }
 

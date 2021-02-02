@@ -41,7 +41,7 @@ public final class CullingScales extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CullingScales(final CullingScales card) {
+    private CullingScales(final CullingScales card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class LocketOfYesterdays extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LocketOfYesterdaysCostReductionEffect()));
     }
 
-    public LocketOfYesterdays(final LocketOfYesterdays card) {
+    private LocketOfYesterdays(final LocketOfYesterdays card) {
         super(card);
     }
 

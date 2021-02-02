@@ -47,7 +47,7 @@ public final class IsochronScepter extends CardImpl {
 
     }
 
-    public IsochronScepter(final IsochronScepter card) {
+    private IsochronScepter(final IsochronScepter card) {
         super(card);
     }
 

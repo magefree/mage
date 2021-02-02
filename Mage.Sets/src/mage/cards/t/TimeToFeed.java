@@ -62,7 +62,7 @@ public final class TimeToFeed extends CardImpl {
         
     }
 
-    public TimeToFeed(final TimeToFeed card) {
+    private TimeToFeed(final TimeToFeed card) {
         super(card);
     }
 

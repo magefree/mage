@@ -50,7 +50,7 @@ public final class JinxedRing extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JinxedRing(final JinxedRing card) {
+    private JinxedRing(final JinxedRing card) {
         super(card);
     }
 

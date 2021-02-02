@@ -47,7 +47,7 @@ public final class ArmoredAscension extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArmoredAscension(final ArmoredAscension card) {
+    private ArmoredAscension(final ArmoredAscension card) {
         super(card);
     }
 

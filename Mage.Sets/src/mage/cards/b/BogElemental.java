@@ -39,7 +39,7 @@ public final class BogElemental extends CardImpl {
                 false));
     }
 
-    public BogElemental(final BogElemental card) {
+    private BogElemental(final BogElemental card) {
         super(card);
     }
 

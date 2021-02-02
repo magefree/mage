@@ -47,7 +47,7 @@ public final class DistendedMindbender extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DistendedMindbender(final DistendedMindbender card) {
+    private DistendedMindbender(final DistendedMindbender card) {
         super(card);
     }
 

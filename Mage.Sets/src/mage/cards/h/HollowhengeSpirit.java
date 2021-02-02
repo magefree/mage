@@ -38,7 +38,7 @@ public final class HollowhengeSpirit extends CardImpl {
 
     }
 
-    public HollowhengeSpirit(final HollowhengeSpirit card) {
+    private HollowhengeSpirit(final HollowhengeSpirit card) {
         super(card);
     }
 

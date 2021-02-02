@@ -40,7 +40,7 @@ public final class SvyelunitePriest extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SvyelunitePriest(final SvyelunitePriest card) {
+    private SvyelunitePriest(final SvyelunitePriest card) {
         super(card);
     }
 

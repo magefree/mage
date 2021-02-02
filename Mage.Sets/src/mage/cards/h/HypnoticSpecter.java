@@ -30,7 +30,7 @@ public final class HypnoticSpecter extends CardImpl {
         this.addAbility(new DealsDamageToOpponentTriggeredAbility(new DiscardTargetEffect(1, true), false, false, true));
     }
 
-    public HypnoticSpecter(final HypnoticSpecter card) {
+    private HypnoticSpecter(final HypnoticSpecter card) {
         super(card);
     }
 

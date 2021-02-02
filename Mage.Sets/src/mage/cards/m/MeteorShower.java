@@ -26,7 +26,7 @@ public final class MeteorShower extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));
     }
 
-    public MeteorShower(final MeteorShower card) {
+    private MeteorShower(final MeteorShower card) {
         super(card);
     }
 

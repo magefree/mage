@@ -33,7 +33,7 @@ public final class RootbornDefenses extends CardImpl {
 
     }
 
-    public RootbornDefenses(final RootbornDefenses card) {
+    private RootbornDefenses(final RootbornDefenses card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class RepelTheAbominable extends CardImpl {
         this.getSpellAbility().addEffect(new PreventAllDamageByAllObjectsEffect(filter, Duration.EndOfTurn, false));
     }
 
-    public RepelTheAbominable(final RepelTheAbominable card) {
+    private RepelTheAbominable(final RepelTheAbominable card) {
         super(card);
     }
 

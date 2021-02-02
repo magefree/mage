@@ -25,7 +25,7 @@ public final class PlanarVoid extends CardImpl {
         this.addAbility(new PlanarVoidTriggeredAbility());
     }
 
-    public PlanarVoid(final PlanarVoid card) {
+    private PlanarVoid(final PlanarVoid card) {
         super(card);
     }
 

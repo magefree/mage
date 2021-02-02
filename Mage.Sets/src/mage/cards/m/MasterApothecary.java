@@ -48,7 +48,7 @@ public final class MasterApothecary extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MasterApothecary(final MasterApothecary card) {
+    private MasterApothecary(final MasterApothecary card) {
         super(card);
     }
 

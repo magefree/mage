@@ -33,7 +33,7 @@ public final class TerashisVerdict extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAttackingCreature(1, 1, filter, false));
     }
 
-    public TerashisVerdict(final TerashisVerdict card) {
+    private TerashisVerdict(final TerashisVerdict card) {
         super(card);
     }
 

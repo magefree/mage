@@ -33,7 +33,7 @@ public final class PestilentSouleater extends CardImpl {
                 new PhyrexianManaCost(ColoredManaSymbol.B)));
     }
 
-    public PestilentSouleater(final PestilentSouleater card) {
+    private PestilentSouleater(final PestilentSouleater card) {
         super(card);
     }
 

@@ -58,7 +58,7 @@ public final class SynodArtificer extends CardImpl {
         this.addAbility(untapAbility);
     }
 
-    public SynodArtificer(final SynodArtificer card) {
+    private SynodArtificer(final SynodArtificer card) {
         super(card);
     }
 

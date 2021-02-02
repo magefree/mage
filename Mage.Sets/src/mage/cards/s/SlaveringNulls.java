@@ -38,7 +38,7 @@ public final class SlaveringNulls extends CardImpl {
         this.addAbility(new SlaveringNullsTriggeredAbility());
     }
 
-    public SlaveringNulls(final SlaveringNulls card) {
+    private SlaveringNulls(final SlaveringNulls card) {
         super(card);
     }
 

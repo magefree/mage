@@ -28,7 +28,7 @@ public final class DemonicCollusion extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(),false));
     }
 
-    public DemonicCollusion(final DemonicCollusion card) {
+    private DemonicCollusion(final DemonicCollusion card) {
         super(card);
     }
 

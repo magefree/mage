@@ -47,7 +47,7 @@ public final class ArchdemonOfUnx extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ArchdemonOfUnx(final ArchdemonOfUnx card) {
+    private ArchdemonOfUnx(final ArchdemonOfUnx card) {
         super(card);
     }
 

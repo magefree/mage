@@ -25,7 +25,7 @@ public final class Arachnoid extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
     }
 
-    public Arachnoid(final Arachnoid card) {
+    private Arachnoid(final Arachnoid card) {
         super(card);
     }
 

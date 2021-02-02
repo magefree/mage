@@ -39,7 +39,7 @@ public final class NephaliaAcademy extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public NephaliaAcademy(final NephaliaAcademy card) {
+    private NephaliaAcademy(final NephaliaAcademy card) {
         super(card);
     }
 

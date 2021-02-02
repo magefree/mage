@@ -39,7 +39,7 @@ public final class BottledCloister extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BottledCloister(final BottledCloister card) {
+    private BottledCloister(final BottledCloister card) {
         super(card);
     }
 

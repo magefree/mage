@@ -38,7 +38,7 @@ public final class FaerieMacabre extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FaerieMacabre(final FaerieMacabre card) {
+    private FaerieMacabre(final FaerieMacabre card) {
         super(card);
     }
 

@@ -62,7 +62,7 @@ public final class JaradGolgariLichLord extends CardImpl {
 
     }
 
-    public JaradGolgariLichLord(final JaradGolgariLichLord card) {
+    private JaradGolgariLichLord(final JaradGolgariLichLord card) {
         super(card);
     }
 

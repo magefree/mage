@@ -53,7 +53,7 @@ public final class FleshCarver extends CardImpl {
         this.addAbility(new FleshCarverAbility());
     }
 
-    public FleshCarver(final FleshCarver card) {
+    private FleshCarver(final FleshCarver card) {
         super(card);
     }
 

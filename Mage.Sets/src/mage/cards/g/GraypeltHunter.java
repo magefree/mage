@@ -31,7 +31,7 @@ public final class GraypeltHunter extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
 
-    public GraypeltHunter(final GraypeltHunter card) {
+    private GraypeltHunter(final GraypeltHunter card) {
         super(card);
     }
 

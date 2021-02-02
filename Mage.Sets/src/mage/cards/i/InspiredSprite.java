@@ -42,7 +42,7 @@ public final class InspiredSprite extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
     }
 
-    public InspiredSprite(final InspiredSprite card) {
+    private InspiredSprite(final InspiredSprite card) {
         super(card);
     }
 

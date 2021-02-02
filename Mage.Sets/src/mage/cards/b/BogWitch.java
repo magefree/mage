@@ -34,7 +34,7 @@ public final class BogWitch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BogWitch(final BogWitch card) {
+    private BogWitch(final BogWitch card) {
         super(card);
     }
 

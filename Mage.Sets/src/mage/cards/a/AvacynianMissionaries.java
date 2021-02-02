@@ -36,7 +36,7 @@ public final class AvacynianMissionaries extends CardImpl {
 
     }
 
-    public AvacynianMissionaries(final AvacynianMissionaries card) {
+    private AvacynianMissionaries(final AvacynianMissionaries card) {
         super(card);
     }
 

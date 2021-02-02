@@ -44,7 +44,7 @@ public final class AtraxaPraetorsVoice extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new ProliferateEffect(), TargetController.YOU, false));
     }
 
-    public AtraxaPraetorsVoice(final AtraxaPraetorsVoice card) {
+    private AtraxaPraetorsVoice(final AtraxaPraetorsVoice card) {
         super(card);
     }
 

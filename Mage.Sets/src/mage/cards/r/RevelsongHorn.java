@@ -34,7 +34,7 @@ public final class RevelsongHorn extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RevelsongHorn(final RevelsongHorn card) {
+    private RevelsongHorn(final RevelsongHorn card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class FeldonsCane extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FeldonsCane(final FeldonsCane card) {
+    private FeldonsCane(final FeldonsCane card) {
         super(card);
     }
 

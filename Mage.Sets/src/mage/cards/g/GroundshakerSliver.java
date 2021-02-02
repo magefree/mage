@@ -33,7 +33,7 @@ public final class GroundshakerSliver extends CardImpl {
                         Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
-    public GroundshakerSliver(final GroundshakerSliver card) {
+    private GroundshakerSliver(final GroundshakerSliver card) {
         super(card);
     }
 

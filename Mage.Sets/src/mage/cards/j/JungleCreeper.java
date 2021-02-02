@@ -29,7 +29,7 @@ public final class JungleCreeper extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{3}{B}{G}")));
     }
 
-    public JungleCreeper(final JungleCreeper card) {
+    private JungleCreeper(final JungleCreeper card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class MatterReshaper extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new MatterReshaperEffect(), false));
     }
 
-    public MatterReshaper(final MatterReshaper card) {
+    private MatterReshaper(final MatterReshaper card) {
         super(card);
     }
 

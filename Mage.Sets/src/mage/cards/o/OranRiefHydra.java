@@ -40,7 +40,7 @@ public final class OranRiefHydra extends CardImpl {
         this.addAbility(new OranRiefHydraTriggeredAbility());
     }
 
-    public OranRiefHydra(final OranRiefHydra card) {
+    private OranRiefHydra(final OranRiefHydra card) {
         super(card);
     }
 

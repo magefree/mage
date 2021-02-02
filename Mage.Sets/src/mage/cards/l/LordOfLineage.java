@@ -49,7 +49,7 @@ public final class LordOfLineage extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VampireToken()), new TapSourceCost()));
     }
 
-    public LordOfLineage(final LordOfLineage card) {
+    private LordOfLineage(final LordOfLineage card) {
         super(card);
     }
 

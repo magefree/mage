@@ -51,7 +51,7 @@ public final class CrabappleCohort extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public CrabappleCohort(final CrabappleCohort card) {
+    private CrabappleCohort(final CrabappleCohort card) {
         super(card);
     }
 

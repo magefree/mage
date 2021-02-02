@@ -34,7 +34,7 @@ public final class HammerOfBogardan extends CardImpl {
                 new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl("{2}{R}{R}{R}"), new IsStepCondition(PhaseStep.UPKEEP), null));
     }
 
-    public HammerOfBogardan(final HammerOfBogardan card) {
+    private HammerOfBogardan(final HammerOfBogardan card) {
         super(card);
     }
 

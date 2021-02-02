@@ -43,7 +43,7 @@ public final class ScornedVillager extends CardImpl {
                 TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
-    public ScornedVillager(final ScornedVillager card) {
+    private ScornedVillager(final ScornedVillager card) {
         super(card);
     }
 

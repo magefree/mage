@@ -39,7 +39,7 @@ public final class CatalystStone extends CardImpl {
 
     }
 
-    public CatalystStone(final CatalystStone card) {
+    private CatalystStone(final CatalystStone card) {
         super(card);
     }
 

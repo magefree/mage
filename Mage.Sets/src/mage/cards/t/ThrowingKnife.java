@@ -43,7 +43,7 @@ public final class ThrowingKnife extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public ThrowingKnife(final ThrowingKnife card) {
+    private ThrowingKnife(final ThrowingKnife card) {
         super(card);
     }
 

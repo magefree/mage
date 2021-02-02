@@ -44,7 +44,7 @@ public final class SlingshotGoblin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SlingshotGoblin(final SlingshotGoblin card) {
+    private SlingshotGoblin(final SlingshotGoblin card) {
         super(card);
     }
 

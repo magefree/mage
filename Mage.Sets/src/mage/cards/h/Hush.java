@@ -24,7 +24,7 @@ public final class Hush extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public Hush(final Hush card) {
+    private Hush(final Hush card) {
         super(card);
     }
 

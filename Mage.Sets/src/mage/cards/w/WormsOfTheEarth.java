@@ -39,7 +39,7 @@ public final class WormsOfTheEarth extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WormsOfTheEarthDestroyEffect(), TargetController.EACH_PLAYER, false));
     }
 
-    public WormsOfTheEarth(final WormsOfTheEarth card) {
+    private WormsOfTheEarth(final WormsOfTheEarth card) {
         super(card);
     }
 

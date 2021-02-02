@@ -24,7 +24,7 @@ public final class FestivalOfTrokin extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(amount));
     }
 
-    public FestivalOfTrokin(final FestivalOfTrokin card) {
+    private FestivalOfTrokin(final FestivalOfTrokin card) {
         super(card);
     }
 

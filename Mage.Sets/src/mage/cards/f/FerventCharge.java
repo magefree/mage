@@ -25,7 +25,7 @@ public final class FerventCharge extends CardImpl {
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(effect, false, true));
     }
 
-    public FerventCharge(final FerventCharge card) {
+    private FerventCharge(final FerventCharge card) {
         super(card);
     }
 

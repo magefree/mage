@@ -34,7 +34,7 @@ public final class BartelRuneaxe extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BartelRuneaxeEffect()));
     }
 
-    public BartelRuneaxe(final BartelRuneaxe card) {
+    private BartelRuneaxe(final BartelRuneaxe card) {
         super(card);
     }
 

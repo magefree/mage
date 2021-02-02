@@ -31,7 +31,7 @@ public final class GracefulCat extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }
 
-    public GracefulCat(final GracefulCat card) {
+    private GracefulCat(final GracefulCat card) {
         super(card);
     }
 

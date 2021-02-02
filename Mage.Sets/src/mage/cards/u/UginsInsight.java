@@ -25,7 +25,7 @@ public final class UginsInsight extends CardImpl {
         this.getSpellAbility().addEffect(new UginsInsightEffect());
     }
 
-    public UginsInsight(final UginsInsight card) {
+    private UginsInsight(final UginsInsight card) {
         super(card);
     }
 

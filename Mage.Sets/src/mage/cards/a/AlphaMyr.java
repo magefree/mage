@@ -22,7 +22,7 @@ public final class AlphaMyr extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public AlphaMyr(final AlphaMyr card) {
+    private AlphaMyr(final AlphaMyr card) {
         super(card);
     }
 

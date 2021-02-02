@@ -23,7 +23,7 @@ public final class AlabornTrooper extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public AlabornTrooper(final AlabornTrooper card) {
+    private AlabornTrooper(final AlabornTrooper card) {
         super(card);
     }
 

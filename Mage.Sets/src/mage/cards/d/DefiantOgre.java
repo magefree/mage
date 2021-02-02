@@ -39,7 +39,7 @@ public final class DefiantOgre extends CardImpl {
         this.addAbility(ability);           
     }
 
-    public DefiantOgre(final DefiantOgre card) {
+    private DefiantOgre(final DefiantOgre card) {
         super(card);
     }
 

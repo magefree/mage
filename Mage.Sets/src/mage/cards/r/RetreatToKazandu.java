@@ -30,7 +30,7 @@ public final class RetreatToKazandu extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RetreatToKazandu(final RetreatToKazandu card) {
+    private RetreatToKazandu(final RetreatToKazandu card) {
         super(card);
     }
 

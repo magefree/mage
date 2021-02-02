@@ -51,7 +51,7 @@ public final class TenaciousHunter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TenaciousHunter(final TenaciousHunter card) {
+    private TenaciousHunter(final TenaciousHunter card) {
         super(card);
     }
 

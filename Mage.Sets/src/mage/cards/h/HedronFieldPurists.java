@@ -55,7 +55,7 @@ public final class HedronFieldPurists extends LevelerCard {
         setMaxLevelCounters(5);
     }
 
-    public HedronFieldPurists(final HedronFieldPurists card) {
+    private HedronFieldPurists(final HedronFieldPurists card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class DiligentExcavator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DiligentExcavator(final DiligentExcavator card) {
+    private DiligentExcavator(final DiligentExcavator card) {
         super(card);
     }
 

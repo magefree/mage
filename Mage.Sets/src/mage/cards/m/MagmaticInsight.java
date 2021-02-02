@@ -26,7 +26,7 @@ public final class MagmaticInsight extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
-    public MagmaticInsight(final MagmaticInsight card) {
+    private MagmaticInsight(final MagmaticInsight card) {
         super(card);
     }
 

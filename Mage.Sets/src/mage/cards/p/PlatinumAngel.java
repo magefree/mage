@@ -35,7 +35,7 @@ public final class PlatinumAngel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlatinumAngelEffect()));
     }
 
-    public PlatinumAngel(final PlatinumAngel card) {
+    private PlatinumAngel(final PlatinumAngel card) {
         super(card);
     }
 

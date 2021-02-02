@@ -36,7 +36,7 @@ public final class HellsThunder extends CardImpl {
 
     }
 
-    public HellsThunder(final HellsThunder card) {
+    private HellsThunder(final HellsThunder card) {
         super(card);
     }
 

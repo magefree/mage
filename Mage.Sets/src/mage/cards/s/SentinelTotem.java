@@ -32,7 +32,7 @@ public final class SentinelTotem extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SentinelTotem(final SentinelTotem card) {
+    private SentinelTotem(final SentinelTotem card) {
         super(card);
     }
 

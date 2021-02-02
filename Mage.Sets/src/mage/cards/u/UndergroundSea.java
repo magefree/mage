@@ -24,7 +24,7 @@ public final class UndergroundSea extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public UndergroundSea(final UndergroundSea card) {
+    private UndergroundSea(final UndergroundSea card) {
         super(card);
     }
 

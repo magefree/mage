@@ -29,7 +29,7 @@ public final class AgentOfStromgald extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new ManaCostsImpl("{R}")));
     }
 
-    public AgentOfStromgald(final AgentOfStromgald card) {
+    private AgentOfStromgald(final AgentOfStromgald card) {
         super(card);
     }
 

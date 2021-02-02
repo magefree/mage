@@ -55,7 +55,7 @@ public final class AssaultSuit extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.Detriment, new GenericManaCost(3)));
     }
 
-    public AssaultSuit(final AssaultSuit card) {
+    private AssaultSuit(final AssaultSuit card) {
         super(card);
     }
 

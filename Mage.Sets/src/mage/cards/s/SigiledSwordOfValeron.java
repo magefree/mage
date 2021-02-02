@@ -55,7 +55,7 @@ public final class SigiledSwordOfValeron extends CardImpl {
         this.addAbility(new EquipAbility(3));
     }
 
-    public SigiledSwordOfValeron(final SigiledSwordOfValeron card) {
+    private SigiledSwordOfValeron(final SigiledSwordOfValeron card) {
         super(card);
     }
 

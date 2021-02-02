@@ -36,7 +36,7 @@ public final class Leashling extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new PutCardFromHandOnTopOfLibrary()));
     }
 
-    public Leashling(final Leashling card) {
+    private Leashling(final Leashling card) {
         super(card);
     }
 

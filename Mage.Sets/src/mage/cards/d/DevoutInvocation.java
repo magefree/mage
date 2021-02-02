@@ -33,7 +33,7 @@ public final class DevoutInvocation extends CardImpl {
 
     }
 
-    public DevoutInvocation(final DevoutInvocation card) {
+    private DevoutInvocation(final DevoutInvocation card) {
         super(card);
     }
 

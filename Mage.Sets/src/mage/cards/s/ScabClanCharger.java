@@ -29,7 +29,7 @@ public final class ScabClanCharger extends CardImpl {
         this.addAbility(new BloodrushAbility("{1}{G}", new BoostTargetEffect(2, 4, Duration.EndOfTurn)));
     }
 
-    public ScabClanCharger(final ScabClanCharger card) {
+    private ScabClanCharger(final ScabClanCharger card) {
         super(card);
     }
 

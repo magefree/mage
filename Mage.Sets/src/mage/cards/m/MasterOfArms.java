@@ -40,7 +40,7 @@ public final class MasterOfArms extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MasterOfArms(final MasterOfArms card) {
+    private MasterOfArms(final MasterOfArms card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class BattlefieldForge extends CardImpl {
         this.addAbility(whiteManaAbility);
     }
 
-    public BattlefieldForge(final BattlefieldForge card) {
+    private BattlefieldForge(final BattlefieldForge card) {
         super(card);
     }
 

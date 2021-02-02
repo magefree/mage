@@ -22,7 +22,7 @@ public final class YokedOx extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public YokedOx(final YokedOx card) {
+    private YokedOx(final YokedOx card) {
         super(card);
     }
 

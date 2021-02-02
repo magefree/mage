@@ -29,7 +29,7 @@ public final class MindstormCrown extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MindstormCrownEffect(), TargetController.YOU, false), new MindstormCrownWatcher());
     }
 
-    public MindstormCrown(final MindstormCrown card) {
+    private MindstormCrown(final MindstormCrown card) {
         super(card);
     }
 

@@ -45,7 +45,7 @@ public final class TemporalIsolation extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", false)));
     }
 
-    public TemporalIsolation(final TemporalIsolation card) {
+    private TemporalIsolation(final TemporalIsolation card) {
         super(card);
     }
 

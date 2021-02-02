@@ -58,7 +58,7 @@ public final class AurraSingBaneOfJedi extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AurraSingBaneOfJedi(final AurraSingBaneOfJedi card) {
+    private AurraSingBaneOfJedi(final AurraSingBaneOfJedi card) {
         super(card);
     }
 

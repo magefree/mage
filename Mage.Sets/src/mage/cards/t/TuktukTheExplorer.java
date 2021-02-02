@@ -30,7 +30,7 @@ public final class TuktukTheExplorer extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new TuktukTheReturnedToken(expansionSetCode))));
     }
 
-    public TuktukTheExplorer(final TuktukTheExplorer card) {
+    private TuktukTheExplorer(final TuktukTheExplorer card) {
         super(card);
     }
 

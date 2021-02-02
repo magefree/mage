@@ -26,7 +26,7 @@ public final class GerrerasRevolutionary extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public GerrerasRevolutionary(final GerrerasRevolutionary card) {
+    private GerrerasRevolutionary(final GerrerasRevolutionary card) {
         super(card);
     }
 

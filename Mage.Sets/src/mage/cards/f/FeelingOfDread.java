@@ -29,7 +29,7 @@ public final class FeelingOfDread extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{U}"), TimingRule.INSTANT));
     }
 
-    public FeelingOfDread(final FeelingOfDread card) {
+    private FeelingOfDread(final FeelingOfDread card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class Vex extends CardImpl {
         getSpellAbility().addEffect(new VexEffect());
     }
 
-    public Vex(final Vex card) {
+    private Vex(final Vex card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class BloodhallPriest extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{1}{B}{R}")));
     }
 
-    public BloodhallPriest(final BloodhallPriest card) {
+    private BloodhallPriest(final BloodhallPriest card) {
         super(card);
     }
 

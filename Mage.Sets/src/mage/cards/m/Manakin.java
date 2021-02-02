@@ -23,7 +23,7 @@ public final class Manakin extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public Manakin(final Manakin card) {
+    private Manakin(final Manakin card) {
         super(card);
     }
 

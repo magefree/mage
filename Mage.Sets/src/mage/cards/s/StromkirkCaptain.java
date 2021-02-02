@@ -40,7 +40,7 @@ public final class StromkirkCaptain extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public StromkirkCaptain(final StromkirkCaptain card) {
+    private StromkirkCaptain(final StromkirkCaptain card) {
         super(card);
     }
 

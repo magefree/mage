@@ -40,7 +40,7 @@ public final class BorosReckoner extends CardImpl {
                 Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R/W}")));
     }
 
-    public BorosReckoner(final BorosReckoner card) {
+    private BorosReckoner(final BorosReckoner card) {
         super(card);
     }
 

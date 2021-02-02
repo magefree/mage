@@ -35,7 +35,7 @@ public final class TowerOfCoireall extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TowerOfCoireall(final TowerOfCoireall card) {
+    private TowerOfCoireall(final TowerOfCoireall card) {
         super(card);
     }
 

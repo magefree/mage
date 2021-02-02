@@ -29,7 +29,7 @@ public final class Millstone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Millstone(final Millstone card) {
+    private Millstone(final Millstone card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class RotShambler extends CardImpl {
 
     }
 
-    public RotShambler(final RotShambler card) {
+    private RotShambler(final RotShambler card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class SpiritShield extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpiritShield(final SpiritShield card) {
+    private SpiritShield(final SpiritShield card) {
         super(card);
     }
 

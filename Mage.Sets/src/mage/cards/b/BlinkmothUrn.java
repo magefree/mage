@@ -36,7 +36,7 @@ public final class BlinkmothUrn extends CardImpl {
         this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(new BlinkmothUrnEffect(), TargetController.ANY, false));
     }
 
-    public BlinkmothUrn(final BlinkmothUrn card) {
+    private BlinkmothUrn(final BlinkmothUrn card) {
         super(card);
     }
 

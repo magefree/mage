@@ -51,7 +51,7 @@ public final class HelmOfTheGhastlord extends CardImpl {
         this.addAbility(blackAbility);
     }
 
-    public HelmOfTheGhastlord(final HelmOfTheGhastlord card) {
+    private HelmOfTheGhastlord(final HelmOfTheGhastlord card) {
         super(card);
     }
 

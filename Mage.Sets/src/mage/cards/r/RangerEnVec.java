@@ -33,7 +33,7 @@ public final class RangerEnVec extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
-    public RangerEnVec(final RangerEnVec card) {
+    private RangerEnVec(final RangerEnVec card) {
         super(card);
     }
 

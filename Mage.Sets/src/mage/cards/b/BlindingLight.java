@@ -31,7 +31,7 @@ public final class BlindingLight extends CardImpl {
         this.getSpellAbility().addEffect(new TapAllEffect(filter));
     }
 
-    public BlindingLight(final BlindingLight card) {
+    private BlindingLight(final BlindingLight card) {
         super(card);
     }
 

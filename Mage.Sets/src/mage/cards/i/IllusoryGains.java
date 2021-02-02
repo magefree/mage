@@ -56,7 +56,7 @@ public final class IllusoryGains extends CardImpl {
                 Zone.BATTLEFIELD, new IllusoryGainsEffect(), filter, false, SetTargetPointer.PERMANENT, "Whenever a creature enters the battlefield under an opponent's control, attach Illusory Gains to that creature."));
     }
 
-    public IllusoryGains(final IllusoryGains card) {
+    private IllusoryGains(final IllusoryGains card) {
         super(card);
     }
 

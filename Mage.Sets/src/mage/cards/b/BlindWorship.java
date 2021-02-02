@@ -45,7 +45,7 @@ public final class BlindWorship extends CardImpl {
 
     }
 
-    public BlindWorship(final BlindWorship card) {
+    private BlindWorship(final BlindWorship card) {
         super(card);
     }
 

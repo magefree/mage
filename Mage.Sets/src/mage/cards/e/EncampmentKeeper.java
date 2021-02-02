@@ -40,7 +40,7 @@ public final class EncampmentKeeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EncampmentKeeper(final EncampmentKeeper card) {
+    private EncampmentKeeper(final EncampmentKeeper card) {
         super(card);
     }
 

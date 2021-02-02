@@ -33,7 +33,7 @@ public final class EarthSurge extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public EarthSurge(final EarthSurge card) {
+    private EarthSurge(final EarthSurge card) {
         super(card);
     }
 

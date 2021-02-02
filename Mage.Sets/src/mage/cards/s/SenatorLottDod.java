@@ -37,7 +37,7 @@ public final class SenatorLottDod extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SenatorLottDodSpellsTargetingCreatureCostModificationEffect()));
     }
 
-    public SenatorLottDod(final SenatorLottDod card) {
+    private SenatorLottDod(final SenatorLottDod card) {
         super(card);
     }
 

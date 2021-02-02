@@ -26,7 +26,7 @@ public final class GoneMissing extends CardImpl {
         this.getSpellAbility().addEffect(new InvestigateEffect());
     }
 
-    public GoneMissing(final GoneMissing card) {
+    private GoneMissing(final GoneMissing card) {
         super(card);
     }
 

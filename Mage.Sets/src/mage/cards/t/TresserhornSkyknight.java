@@ -41,7 +41,7 @@ public final class TresserhornSkyknight extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TresserhornSkyknightEffect()));
     }
 
-    public TresserhornSkyknight(final TresserhornSkyknight card) {
+    private TresserhornSkyknight(final TresserhornSkyknight card) {
         super(card);
     }
 

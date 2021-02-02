@@ -50,7 +50,7 @@ public final class FesteringNewt extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FesteringNewt(final FesteringNewt card) {
+    private FesteringNewt(final FesteringNewt card) {
         super(card);
     }
 

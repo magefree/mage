@@ -41,7 +41,7 @@ public final class ArchangelOfThune extends CardImpl {
         ));
     }
 
-    public ArchangelOfThune(final ArchangelOfThune card) {
+    private ArchangelOfThune(final ArchangelOfThune card) {
         super(card);
     }
 

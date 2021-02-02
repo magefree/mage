@@ -35,7 +35,7 @@ public final class Havoc extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false, SetTargetPointer.PLAYER));
     }
 
-    public Havoc(final Havoc card) {
+    private Havoc(final Havoc card) {
         super(card);
     }
 

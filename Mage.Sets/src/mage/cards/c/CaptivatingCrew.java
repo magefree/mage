@@ -53,7 +53,7 @@ public final class CaptivatingCrew extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CaptivatingCrew(final CaptivatingCrew card) {
+    private CaptivatingCrew(final CaptivatingCrew card) {
         super(card);
     }
 

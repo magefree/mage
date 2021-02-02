@@ -42,7 +42,7 @@ public final class TheBrute extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ManaCostsImpl("{R}{R}{R}")));
     }
 
-    public TheBrute(final TheBrute card) {
+    private TheBrute(final TheBrute card) {
         super(card);
     }
 

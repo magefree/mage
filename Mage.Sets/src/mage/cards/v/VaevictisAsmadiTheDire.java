@@ -48,7 +48,7 @@ public final class VaevictisAsmadiTheDire extends CardImpl {
         this.addAbility(new VaevictisAsmadiTheDireTriggeredAbility());
     }
 
-    public VaevictisAsmadiTheDire(final VaevictisAsmadiTheDire card) {
+    private VaevictisAsmadiTheDire(final VaevictisAsmadiTheDire card) {
         super(card);
     }
 

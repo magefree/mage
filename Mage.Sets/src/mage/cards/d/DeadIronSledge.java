@@ -38,7 +38,7 @@ public final class DeadIronSledge extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public DeadIronSledge(final DeadIronSledge card) {
+    private DeadIronSledge(final DeadIronSledge card) {
         super(card);
     }
 

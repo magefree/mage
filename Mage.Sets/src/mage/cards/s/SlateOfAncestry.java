@@ -34,7 +34,7 @@ public final class SlateOfAncestry extends CardImpl {
 
     }
 
-    public SlateOfAncestry(final SlateOfAncestry card) {
+    private SlateOfAncestry(final SlateOfAncestry card) {
         super(card);
     }
 

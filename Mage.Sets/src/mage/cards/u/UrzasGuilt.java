@@ -29,7 +29,7 @@ public final class UrzasGuilt extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public UrzasGuilt(final UrzasGuilt card) {
+    private UrzasGuilt(final UrzasGuilt card) {
         super(card);
     }
 

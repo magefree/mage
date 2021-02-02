@@ -36,7 +36,7 @@ public final class MoltensteelDragon extends CardImpl {
                 new PhyrexianManaCost(ColoredManaSymbol.R)));
     }
 
-    public MoltensteelDragon(final MoltensteelDragon card) {
+    private MoltensteelDragon(final MoltensteelDragon card) {
         super(card);
     }
 

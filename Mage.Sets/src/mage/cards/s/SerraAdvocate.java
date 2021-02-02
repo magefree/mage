@@ -38,7 +38,7 @@ public final class SerraAdvocate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SerraAdvocate(final SerraAdvocate card) {
+    private SerraAdvocate(final SerraAdvocate card) {
         super(card);
     }
 

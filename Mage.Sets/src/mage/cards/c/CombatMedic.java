@@ -35,7 +35,7 @@ public final class CombatMedic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CombatMedic(final CombatMedic card) {
+    private CombatMedic(final CombatMedic card) {
         super(card);
     }
 

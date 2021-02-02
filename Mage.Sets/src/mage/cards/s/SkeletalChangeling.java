@@ -31,7 +31,7 @@ public final class SkeletalChangeling extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }
 
-    public SkeletalChangeling(final SkeletalChangeling card) {
+    private SkeletalChangeling(final SkeletalChangeling card) {
         super(card);
     }
 

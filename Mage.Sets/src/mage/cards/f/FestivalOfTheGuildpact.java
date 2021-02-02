@@ -26,7 +26,7 @@ public final class FestivalOfTheGuildpact extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public FestivalOfTheGuildpact(final FestivalOfTheGuildpact card) {
+    private FestivalOfTheGuildpact(final FestivalOfTheGuildpact card) {
         super(card);
     }
 

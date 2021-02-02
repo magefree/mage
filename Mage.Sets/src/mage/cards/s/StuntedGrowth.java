@@ -33,7 +33,7 @@ public final class StuntedGrowth extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public StuntedGrowth(final StuntedGrowth card) {
+    private StuntedGrowth(final StuntedGrowth card) {
         super(card);
     }
 

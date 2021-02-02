@@ -21,7 +21,7 @@ public final class OrazcaRaptor extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public OrazcaRaptor(final OrazcaRaptor card) {
+    private OrazcaRaptor(final OrazcaRaptor card) {
         super(card);
     }
 

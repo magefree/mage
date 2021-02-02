@@ -32,7 +32,7 @@ public final class ImpalerShrike extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ImpalerShrike(final ImpalerShrike card) {
+    private ImpalerShrike(final ImpalerShrike card) {
         super(card);
     }
 

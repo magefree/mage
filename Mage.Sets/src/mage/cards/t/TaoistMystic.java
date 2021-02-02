@@ -37,7 +37,7 @@ public final class TaoistMystic extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
-    public TaoistMystic(final TaoistMystic card) {
+    private TaoistMystic(final TaoistMystic card) {
         super(card);
     }
 

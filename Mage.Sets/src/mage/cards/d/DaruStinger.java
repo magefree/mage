@@ -38,7 +38,7 @@ public final class DaruStinger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DaruStinger(final DaruStinger card) {
+    private DaruStinger(final DaruStinger card) {
         super(card);
     }
 

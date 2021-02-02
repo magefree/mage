@@ -46,7 +46,7 @@ public final class InfestedRoothold extends CardImpl {
 
     }
 
-    public InfestedRoothold(final InfestedRoothold card) {
+    private InfestedRoothold(final InfestedRoothold card) {
         super(card);
     }
 

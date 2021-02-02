@@ -31,7 +31,7 @@ public final class AssassinsStrike extends CardImpl {
         this.getSpellAbility().addEffect(new AssassinsStrikeEffect());
     }
 
-    public AssassinsStrike(final AssassinsStrike card) {
+    private AssassinsStrike(final AssassinsStrike card) {
         super(card);
     }
 

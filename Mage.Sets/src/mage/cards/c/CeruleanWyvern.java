@@ -29,7 +29,7 @@ public final class CeruleanWyvern extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.GREEN));
     }
 
-    public CeruleanWyvern(final CeruleanWyvern card) {
+    private CeruleanWyvern(final CeruleanWyvern card) {
         super(card);
     }
 

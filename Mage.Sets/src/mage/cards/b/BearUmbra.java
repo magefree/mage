@@ -44,7 +44,7 @@ public final class BearUmbra extends CardImpl {
         this.addAbility(new TotemArmorAbility());
     }
 
-    public BearUmbra(final BearUmbra card) {
+    private BearUmbra(final BearUmbra card) {
         super(card);
     }
 

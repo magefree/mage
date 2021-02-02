@@ -51,7 +51,7 @@ public final class TianaShipsCaretaker extends CardImpl {
         this.addAbility(new TianaShipsCaretakerTriggeredAbility());
     }
 
-    public TianaShipsCaretaker(final TianaShipsCaretaker card) {
+    private TianaShipsCaretaker(final TianaShipsCaretaker card) {
         super(card);
     }
 

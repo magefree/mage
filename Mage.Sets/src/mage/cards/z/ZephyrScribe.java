@@ -45,7 +45,7 @@ public final class ZephyrScribe extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, false));        
     }
 
-    public ZephyrScribe(final ZephyrScribe card) {
+    private ZephyrScribe(final ZephyrScribe card) {
         super(card);
     }
 

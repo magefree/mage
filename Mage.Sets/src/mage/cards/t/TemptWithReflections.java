@@ -31,7 +31,7 @@ public final class TemptWithReflections extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
-    public TemptWithReflections(final TemptWithReflections card) {
+    private TemptWithReflections(final TemptWithReflections card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class BonethornValesk extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BonethornValesk(final BonethornValesk card) {
+    private BonethornValesk(final BonethornValesk card) {
         super(card);
     }
 

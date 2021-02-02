@@ -38,7 +38,7 @@ public final class MoriokScavenger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoriokScavenger(final MoriokScavenger card) {
+    private MoriokScavenger(final MoriokScavenger card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class CreepingDread extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreepingDreadEffect(), TargetController.YOU, false));
     }
 
-    public CreepingDread(final CreepingDread card) {
+    private CreepingDread(final CreepingDread card) {
         super(card);
     }
 

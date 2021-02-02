@@ -29,7 +29,7 @@ public final class UrzasIncubator extends CardImpl {
                 new SpellsCostReductionAllOfChosenSubtypeEffect(new FilterCreatureCard("creature spells of the chosen type"), 2)));
     }
 
-    public UrzasIncubator(final UrzasIncubator card) {
+    private UrzasIncubator(final UrzasIncubator card) {
         super(card);
     }
 

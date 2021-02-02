@@ -42,7 +42,7 @@ public final class DeepwaterHypnotist extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public DeepwaterHypnotist(final DeepwaterHypnotist card) {
+    private DeepwaterHypnotist(final DeepwaterHypnotist card) {
         super(card);
     }
 

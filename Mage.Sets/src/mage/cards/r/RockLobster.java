@@ -37,7 +37,7 @@ public final class RockLobster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
-    public RockLobster(final RockLobster card) {
+    private RockLobster(final RockLobster card) {
         super(card);
     }
 

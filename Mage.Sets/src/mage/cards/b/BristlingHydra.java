@@ -44,7 +44,7 @@ public final class BristlingHydra extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BristlingHydra(final BristlingHydra card) {
+    private BristlingHydra(final BristlingHydra card) {
         super(card);
     }
 

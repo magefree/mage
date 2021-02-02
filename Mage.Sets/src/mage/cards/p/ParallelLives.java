@@ -22,7 +22,7 @@ public final class ParallelLives extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreateTwiceThatManyTokensEffect()));
     }
 
-    public ParallelLives(final ParallelLives card) {
+    private ParallelLives(final ParallelLives card) {
         super(card);
     }
 

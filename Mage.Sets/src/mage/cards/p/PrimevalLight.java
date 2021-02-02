@@ -24,7 +24,7 @@ public final class PrimevalLight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public PrimevalLight(final PrimevalLight card) {
+    private PrimevalLight(final PrimevalLight card) {
         super(card);
     }
 

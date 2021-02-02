@@ -30,7 +30,7 @@ public final class PalaceFamiliar extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
     }
 
-    public PalaceFamiliar(final PalaceFamiliar card) {
+    private PalaceFamiliar(final PalaceFamiliar card) {
         super(card);
     }
 

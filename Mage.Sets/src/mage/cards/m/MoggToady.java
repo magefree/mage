@@ -35,7 +35,7 @@ public final class MoggToady extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MoggToadyCantBlockEffect()));
     }
 
-    public MoggToady(final MoggToady card) {
+    private MoggToady(final MoggToady card) {
         super(card);
     }
 

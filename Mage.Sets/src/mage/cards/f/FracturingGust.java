@@ -27,7 +27,7 @@ public final class FracturingGust extends CardImpl {
         this.getSpellAbility().addEffect(new FracturingGustDestroyEffect());
     }
 
-    public FracturingGust(final FracturingGust card) {
+    private FracturingGust(final FracturingGust card) {
         super(card);
     }
 

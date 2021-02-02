@@ -45,7 +45,7 @@ public final class ParallaxWave extends CardImpl {
 
     }
 
-    public ParallaxWave(final ParallaxWave card) {
+    private ParallaxWave(final ParallaxWave card) {
         super(card);
     }
 

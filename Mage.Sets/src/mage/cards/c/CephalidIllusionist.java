@@ -50,7 +50,7 @@ public final class CephalidIllusionist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CephalidIllusionist(final CephalidIllusionist card) {
+    private CephalidIllusionist(final CephalidIllusionist card) {
         super(card);
     }
 

@@ -28,7 +28,7 @@ public final class ThunderousWrath extends CardImpl {
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{R}")));
     }
 
-    public ThunderousWrath(final ThunderousWrath card) {
+    private ThunderousWrath(final ThunderousWrath card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ public final class IvoryGuardians extends CardImpl {
                 "Creatures named Ivory Guardians get +1/+1 as long as an opponent controls a nontoken red permanent")));
     }
 
-    public IvoryGuardians(final IvoryGuardians card) {
+    private IvoryGuardians(final IvoryGuardians card) {
         super(card);
     }
 

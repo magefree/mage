@@ -35,7 +35,7 @@ public final class Twinstrike extends CardImpl {
      
     }
 
-    public Twinstrike(final Twinstrike card) {
+    private Twinstrike(final Twinstrike card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class JungleDelver extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{3}{G}")));
     }
 
-    public JungleDelver(final JungleDelver card) {
+    private JungleDelver(final JungleDelver card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class Deprive extends CardImpl {
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }
 
-    public Deprive(final Deprive card) {
+    private Deprive(final Deprive card) {
         super(card);
     }
 

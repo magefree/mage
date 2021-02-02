@@ -48,7 +48,7 @@ public final class DrudgeSpell extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new DestroyAllEffect(filter, true), false));
     }
 
-    public DrudgeSpell(final DrudgeSpell card) {
+    private DrudgeSpell(final DrudgeSpell card) {
         super(card);
     }
 

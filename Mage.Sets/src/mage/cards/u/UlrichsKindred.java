@@ -49,7 +49,7 @@ public final class UlrichsKindred extends CardImpl {
 
     }
 
-    public UlrichsKindred(final UlrichsKindred card) {
+    private UlrichsKindred(final UlrichsKindred card) {
         super(card);
     }
 

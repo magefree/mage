@@ -63,7 +63,7 @@ public final class HellkiteTyrant extends CardImpl {
 
     }
 
-    public HellkiteTyrant(final HellkiteTyrant card) {
+    private HellkiteTyrant(final HellkiteTyrant card) {
         super(card);
     }
 

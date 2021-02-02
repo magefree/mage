@@ -29,7 +29,7 @@ public final class MerfolkSeer extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl("{1}{U}"))));
     }
 
-    public MerfolkSeer(final MerfolkSeer card) {
+    private MerfolkSeer(final MerfolkSeer card) {
         super(card);
     }
 

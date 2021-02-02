@@ -33,7 +33,7 @@ public final class FableOfWolfAndOwl extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new OwlToken(), 1), filterBlueSpell, true));
     }
 
-    public FableOfWolfAndOwl(final FableOfWolfAndOwl card) {
+    private FableOfWolfAndOwl(final FableOfWolfAndOwl card) {
         super(card);
     }
 

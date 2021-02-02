@@ -54,7 +54,7 @@ public final class MudbrawlerCohort extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public MudbrawlerCohort(final MudbrawlerCohort card) {
+    private MudbrawlerCohort(final MudbrawlerCohort card) {
         super(card);
     }
 

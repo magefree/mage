@@ -33,7 +33,7 @@ public final class AdvanceScout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AdvanceScout(final AdvanceScout card) {
+    private AdvanceScout(final AdvanceScout card) {
         super(card);
     }
 

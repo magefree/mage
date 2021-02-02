@@ -30,7 +30,7 @@ public final class RakaSanctuary extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RakaSanctuary(final RakaSanctuary card) {
+    private RakaSanctuary(final RakaSanctuary card) {
         super(card);
     }
 

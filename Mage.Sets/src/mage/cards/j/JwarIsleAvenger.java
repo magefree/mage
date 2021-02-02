@@ -29,7 +29,7 @@ public final class JwarIsleAvenger extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public JwarIsleAvenger(final JwarIsleAvenger card) {
+    private JwarIsleAvenger(final JwarIsleAvenger card) {
         super(card);
     }
 

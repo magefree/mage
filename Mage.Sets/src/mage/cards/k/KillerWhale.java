@@ -33,7 +33,7 @@ public final class KillerWhale extends CardImpl {
                     new ManaCostsImpl("U")));
     }
 
-    public KillerWhale(final KillerWhale card) {
+    private KillerWhale(final KillerWhale card) {
         super(card);
     }
 

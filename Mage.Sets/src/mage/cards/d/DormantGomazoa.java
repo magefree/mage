@@ -40,7 +40,7 @@ public final class DormantGomazoa extends CardImpl {
         this.addAbility(new BecomesTargetControllerSpellTriggeredAbility(new UntapSourceEffect(), true));
     }
 
-    public DormantGomazoa(final DormantGomazoa card) {
+    private DormantGomazoa(final DormantGomazoa card) {
         super(card);
     }
 

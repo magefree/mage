@@ -50,7 +50,7 @@ public final class GhoulcallerGisa extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GhoulcallerGisa(final GhoulcallerGisa card) {
+    private GhoulcallerGisa(final GhoulcallerGisa card) {
         super(card);
     }
 

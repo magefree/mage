@@ -22,7 +22,7 @@ public final class Undo extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(2));
     }
 
-    public Undo(final Undo card) {
+    private Undo(final Undo card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class LifesFinale extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
-    public LifesFinale(final LifesFinale card) {
+    private LifesFinale(final LifesFinale card) {
         super(card);
     }
 

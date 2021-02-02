@@ -63,7 +63,7 @@ public final class SwordOfDungeonsAndDragons extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public SwordOfDungeonsAndDragons(final SwordOfDungeonsAndDragons card) {
+    private SwordOfDungeonsAndDragons(final SwordOfDungeonsAndDragons card) {
         super(card);
     }
 

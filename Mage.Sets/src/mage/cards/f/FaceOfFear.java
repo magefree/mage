@@ -35,7 +35,7 @@ public final class FaceOfFear extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FaceOfFear(final FaceOfFear card) {
+    private FaceOfFear(final FaceOfFear card) {
         super(card);
     }
 

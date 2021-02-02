@@ -30,7 +30,7 @@ public final class BrightstoneRitual extends CardImpl {
         this.getSpellAbility().addEffect(new DynamicManaEffect(Mana.RedMana(1), new PermanentsOnBattlefieldCount(filter)));
     }
 
-    public BrightstoneRitual(final BrightstoneRitual card) {
+    private BrightstoneRitual(final BrightstoneRitual card) {
         super(card);
     }
 

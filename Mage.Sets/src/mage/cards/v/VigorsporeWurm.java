@@ -58,7 +58,7 @@ public final class VigorsporeWurm extends CardImpl {
         ));
     }
 
-    public VigorsporeWurm(final VigorsporeWurm card) {
+    private VigorsporeWurm(final VigorsporeWurm card) {
         super(card);
     }
 

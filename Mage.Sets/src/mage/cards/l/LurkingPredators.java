@@ -30,7 +30,7 @@ public final class LurkingPredators extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(new LurkingPredatorsEffect(), false));
     }
 
-    public LurkingPredators(final LurkingPredators card) {
+    private LurkingPredators(final LurkingPredators card) {
         super(card);
     }
 

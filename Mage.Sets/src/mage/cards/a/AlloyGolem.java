@@ -30,7 +30,7 @@ public final class AlloyGolem extends CardImpl {
             null, "As {this} enters the battlefield, choose a color.\n{this} is the chosen color.", ""));
     }
 
-    public AlloyGolem(final AlloyGolem card) {
+    private AlloyGolem(final AlloyGolem card) {
         super(card);
     }
 

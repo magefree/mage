@@ -35,7 +35,7 @@ public final class NeedlebiteTrap extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public NeedlebiteTrap(final NeedlebiteTrap card) {
+    private NeedlebiteTrap(final NeedlebiteTrap card) {
         super(card);
     }
 

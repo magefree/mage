@@ -26,7 +26,7 @@ public final class WiltLeafCavaliers extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public WiltLeafCavaliers(final WiltLeafCavaliers card) {
+    private WiltLeafCavaliers(final WiltLeafCavaliers card) {
         super(card);
     }
 

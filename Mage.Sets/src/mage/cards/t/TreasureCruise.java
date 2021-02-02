@@ -24,7 +24,7 @@ public final class TreasureCruise extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
     }
 
-    public TreasureCruise(final TreasureCruise card) {
+    private TreasureCruise(final TreasureCruise card) {
         super(card);
     }
 

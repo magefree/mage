@@ -26,7 +26,7 @@ public final class GaeasSkyfolk extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public GaeasSkyfolk(final GaeasSkyfolk card) {
+    private GaeasSkyfolk(final GaeasSkyfolk card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class LoreBroker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LoreBroker(final LoreBroker card) {
+    private LoreBroker(final LoreBroker card) {
         super(card);
     }
 

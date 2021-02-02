@@ -48,7 +48,7 @@ public final class DuskmantleGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DuskmantleGuildmage(final DuskmantleGuildmage card) {
+    private DuskmantleGuildmage(final DuskmantleGuildmage card) {
         super(card);
     }
 

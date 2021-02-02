@@ -36,7 +36,7 @@ public final class Steamclaw extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Steamclaw(final Steamclaw card) {
+    private Steamclaw(final Steamclaw card) {
         super(card);
     }
 

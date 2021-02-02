@@ -29,7 +29,7 @@ public final class DeepReconnaissance extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{G}"), TimingRule.SORCERY));
     }
 
-    public DeepReconnaissance(final DeepReconnaissance card) {
+    private DeepReconnaissance(final DeepReconnaissance card) {
         super(card);
     }
 

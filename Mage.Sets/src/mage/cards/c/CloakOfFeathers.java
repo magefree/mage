@@ -28,7 +28,7 @@ public final class CloakOfFeathers extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public CloakOfFeathers(final CloakOfFeathers card) {
+    private CloakOfFeathers(final CloakOfFeathers card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class AlphaBrawl extends CardImpl {
 
     }
 
-    public AlphaBrawl(final AlphaBrawl card) {
+    private AlphaBrawl(final AlphaBrawl card) {
         super(card);
     }
 

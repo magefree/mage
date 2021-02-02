@@ -44,7 +44,7 @@ public final class AkromaAngelOfFury extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{3}{R}{R}{R}")));
     }
 
-    public AkromaAngelOfFury(final AkromaAngelOfFury card) {
+    private AkromaAngelOfFury(final AkromaAngelOfFury card) {
         super(card);
     }
 

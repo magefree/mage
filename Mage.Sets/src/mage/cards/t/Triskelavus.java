@@ -43,7 +43,7 @@ public final class Triskelavus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Triskelavus(final Triskelavus card) {
+    private Triskelavus(final Triskelavus card) {
         super(card);
     }
 

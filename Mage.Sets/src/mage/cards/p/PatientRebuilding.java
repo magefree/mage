@@ -34,7 +34,7 @@ public final class PatientRebuilding extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PatientRebuilding(final PatientRebuilding card) {
+    private PatientRebuilding(final PatientRebuilding card) {
         super(card);
     }
 

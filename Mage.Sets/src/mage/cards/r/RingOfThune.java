@@ -47,7 +47,7 @@ public final class RingOfThune extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
-    public RingOfThune(final RingOfThune card) {
+    private RingOfThune(final RingOfThune card) {
         super(card);
     }
 

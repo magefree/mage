@@ -34,7 +34,7 @@ public final class WhirlpoolDrake extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ShuffleHandIntoLibraryDrawThatManySourceEffect(), false));
     }
 
-    public WhirlpoolDrake(final WhirlpoolDrake card) {
+    private WhirlpoolDrake(final WhirlpoolDrake card) {
         super(card);
     }
 

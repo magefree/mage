@@ -36,7 +36,7 @@ public final class ShelteredThicket extends CardImpl {
 
     }
 
-    public ShelteredThicket(final ShelteredThicket card) {
+    private ShelteredThicket(final ShelteredThicket card) {
         super(card);
     }
 

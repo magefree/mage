@@ -26,7 +26,7 @@ public final class AltarOfBone extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_CREATURE), true));
     }
 
-    public AltarOfBone(final AltarOfBone card) {
+    private AltarOfBone(final AltarOfBone card) {
         super(card);
     }
 

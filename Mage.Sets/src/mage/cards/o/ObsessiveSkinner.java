@@ -47,7 +47,7 @@ public final class ObsessiveSkinner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ObsessiveSkinner(final ObsessiveSkinner card) {
+    private ObsessiveSkinner(final ObsessiveSkinner card) {
         super(card);
     }
 

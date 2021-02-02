@@ -42,7 +42,7 @@ public final class ScytheSpecter extends CardImpl {
 
     }
 
-    public ScytheSpecter(final ScytheSpecter card) {
+    private ScytheSpecter(final ScytheSpecter card) {
         super(card);
     }
 

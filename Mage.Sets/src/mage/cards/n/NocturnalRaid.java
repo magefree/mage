@@ -30,7 +30,7 @@ public final class NocturnalRaid extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(2, 0, Duration.EndOfTurn, filter, false));
     }
 
-    public NocturnalRaid(final NocturnalRaid card) {
+    private NocturnalRaid(final NocturnalRaid card) {
         super(card);
     }
 

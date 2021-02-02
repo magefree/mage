@@ -33,7 +33,7 @@ public final class GreenSunsZenith extends CardImpl {
         this.getSpellAbility().addEffect(ShuffleSpellEffect.getInstance());
     }
 
-    public GreenSunsZenith(final GreenSunsZenith card) {
+    private GreenSunsZenith(final GreenSunsZenith card) {
         super(card);
     }
 

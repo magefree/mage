@@ -36,7 +36,7 @@ public final class GodPharaohsGift extends CardImpl {
 
     }
 
-    public GodPharaohsGift(final GodPharaohsGift card) {
+    private GodPharaohsGift(final GodPharaohsGift card) {
         super(card);
     }
 

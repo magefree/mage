@@ -35,7 +35,7 @@ public final class LibraryOfLatNam extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public LibraryOfLatNam(final LibraryOfLatNam card) {
+    private LibraryOfLatNam(final LibraryOfLatNam card) {
         super(card);
     }
 

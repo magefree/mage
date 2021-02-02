@@ -31,7 +31,7 @@ public final class Didgeridoo extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(filter), new ManaCostsImpl("{3}")));
     }
 
-    public Didgeridoo(final Didgeridoo card) {
+    private Didgeridoo(final Didgeridoo card) {
         super(card);
     }
 

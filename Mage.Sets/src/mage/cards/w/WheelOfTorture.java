@@ -27,7 +27,7 @@ public final class WheelOfTorture extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WheelOfTorture(final WheelOfTorture card) {
+    private WheelOfTorture(final WheelOfTorture card) {
         super(card);
     }
 

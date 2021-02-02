@@ -34,7 +34,7 @@ public final class Quagnoth extends CardImpl {
         this.addAbility(new DiscardedByOpponentTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public Quagnoth(final Quagnoth card) {
+    private Quagnoth(final Quagnoth card) {
         super(card);
     }
 

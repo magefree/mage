@@ -41,7 +41,7 @@ public final class TrepanationBlade extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public TrepanationBlade(final TrepanationBlade card) {
+    private TrepanationBlade(final TrepanationBlade card) {
         super(card);
     }
 

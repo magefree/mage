@@ -55,7 +55,7 @@ public final class IfnirDeadlands extends CardImpl {
         
     }
 
-    public IfnirDeadlands(final IfnirDeadlands card) {
+    private IfnirDeadlands(final IfnirDeadlands card) {
         super(card);
     }
 

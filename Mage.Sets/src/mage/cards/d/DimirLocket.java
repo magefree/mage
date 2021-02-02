@@ -36,7 +36,7 @@ public final class DimirLocket extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DimirLocket(final DimirLocket card) {
+    private DimirLocket(final DimirLocket card) {
         super(card);
     }
 

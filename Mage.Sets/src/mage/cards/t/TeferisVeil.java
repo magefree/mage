@@ -26,7 +26,7 @@ public final class TeferisVeil extends CardImpl {
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(effect, false, true));
     }
 
-    public TeferisVeil(final TeferisVeil card) {
+    private TeferisVeil(final TeferisVeil card) {
         super(card);
     }
 

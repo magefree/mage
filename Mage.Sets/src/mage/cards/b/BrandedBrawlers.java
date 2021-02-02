@@ -48,7 +48,7 @@ public final class BrandedBrawlers extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BrandedBrawlersCantBlockEffect(filter)));
     }
 
-    public BrandedBrawlers(final BrandedBrawlers card) {
+    private BrandedBrawlers(final BrandedBrawlers card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class AmbushViper extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public AmbushViper(final AmbushViper card) {
+    private AmbushViper(final AmbushViper card) {
         super(card);
     }
 

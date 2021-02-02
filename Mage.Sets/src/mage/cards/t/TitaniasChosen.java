@@ -35,7 +35,7 @@ public final class TitaniasChosen extends CardImpl {
 		this.addAbility(new TitaniasChosenAbility());
     }
 
-    public TitaniasChosen(final TitaniasChosen card) {
+    private TitaniasChosen(final TitaniasChosen card) {
         super(card);
     }
 

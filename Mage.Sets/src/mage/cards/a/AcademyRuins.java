@@ -35,7 +35,7 @@ public final class AcademyRuins extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AcademyRuins(final AcademyRuins card) {
+    private AcademyRuins(final AcademyRuins card) {
         super(card);
     }
 

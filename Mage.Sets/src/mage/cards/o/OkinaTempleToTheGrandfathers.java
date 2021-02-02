@@ -36,7 +36,7 @@ public final class OkinaTempleToTheGrandfathers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OkinaTempleToTheGrandfathers(final OkinaTempleToTheGrandfathers card) {
+    private OkinaTempleToTheGrandfathers(final OkinaTempleToTheGrandfathers card) {
         super(card);
     }
 

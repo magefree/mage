@@ -36,7 +36,7 @@ public final class NeverendingTorment extends CardImpl {
         this.getSpellAbility().addEffect(new EpicEffect());
     }
 
-    public NeverendingTorment(final NeverendingTorment card) {
+    private NeverendingTorment(final NeverendingTorment card) {
         super(card);
     }
 

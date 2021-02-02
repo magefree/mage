@@ -40,7 +40,7 @@ public final class PteronGhost extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PteronGhost(final PteronGhost card) {
+    private PteronGhost(final PteronGhost card) {
         super(card);
     }
 

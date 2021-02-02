@@ -47,7 +47,7 @@ public final class LaccolithRig extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public LaccolithRig(final LaccolithRig card) {
+    private LaccolithRig(final LaccolithRig card) {
         super(card);
     }
 

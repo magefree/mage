@@ -48,7 +48,7 @@ public final class TrophyHunter extends CardImpl {
         this.addAbility(new DealtDamageAndDiedTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter));
     }
 
-    public TrophyHunter(final TrophyHunter card) {
+    private TrophyHunter(final TrophyHunter card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class SeizeTheDay extends CardImpl {
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{R}"), TimingRule.SORCERY));
     }
 
-    public SeizeTheDay(final SeizeTheDay card) {
+    private SeizeTheDay(final SeizeTheDay card) {
         super(card);
     }
 

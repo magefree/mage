@@ -26,7 +26,7 @@ public final class BlessedReversal extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(new BlessedReversalCount()));
     }
 
-    public BlessedReversal(final BlessedReversal card) {
+    private BlessedReversal(final BlessedReversal card) {
         super(card);
     }
 

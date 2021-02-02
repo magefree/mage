@@ -29,7 +29,7 @@ public final class Pox extends CardImpl {
         this.getSpellAbility().addEffect(new PoxEffect());
     }
 
-    public Pox(final Pox card) {
+    private Pox(final Pox card) {
         super(card);
     }
 

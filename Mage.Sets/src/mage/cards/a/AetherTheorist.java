@@ -38,7 +38,7 @@ public final class AetherTheorist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AetherTheorist(final AetherTheorist card) {
+    private AetherTheorist(final AetherTheorist card) {
         super(card);
     }
 

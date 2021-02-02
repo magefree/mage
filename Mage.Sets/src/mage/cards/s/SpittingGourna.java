@@ -29,7 +29,7 @@ public final class SpittingGourna extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{G}")));
     }
 
-    public SpittingGourna(final SpittingGourna card) {
+    private SpittingGourna(final SpittingGourna card) {
         super(card);
     }
 

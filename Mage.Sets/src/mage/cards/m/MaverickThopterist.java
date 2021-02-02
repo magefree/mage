@@ -33,7 +33,7 @@ public final class MaverickThopterist extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ThopterColorlessToken(), 2)));
     }
 
-    public MaverickThopterist(final MaverickThopterist card) {
+    private MaverickThopterist(final MaverickThopterist card) {
         super(card);
     }
 

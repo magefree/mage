@@ -44,7 +44,7 @@ public final class Quickling extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new QuicklingEffect()));
     }
 
-    public Quickling(final Quickling card) {
+    private Quickling(final Quickling card) {
         super(card);
     }
 

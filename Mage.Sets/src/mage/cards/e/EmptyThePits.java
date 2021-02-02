@@ -27,7 +27,7 @@ public final class EmptyThePits extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), ManacostVariableValue.instance, true, false));
     }
 
-    public EmptyThePits(final EmptyThePits card) {
+    private EmptyThePits(final EmptyThePits card) {
         super(card);
     }
 

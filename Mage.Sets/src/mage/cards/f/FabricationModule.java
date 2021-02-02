@@ -39,7 +39,7 @@ public final class FabricationModule extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FabricationModule(final FabricationModule card) {
+    private FabricationModule(final FabricationModule card) {
         super(card);
     }
 

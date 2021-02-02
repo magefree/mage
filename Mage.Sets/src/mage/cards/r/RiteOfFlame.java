@@ -25,7 +25,7 @@ public final class RiteOfFlame extends CardImpl {
         this.getSpellAbility().addEffect(new RiteOfFlameManaEffect());
     }
 
-    public RiteOfFlame(final RiteOfFlame card) {
+    private RiteOfFlame(final RiteOfFlame card) {
         super(card);
     }
 

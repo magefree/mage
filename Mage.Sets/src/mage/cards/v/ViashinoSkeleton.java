@@ -34,7 +34,7 @@ public final class ViashinoSkeleton extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ViashinoSkeleton(final ViashinoSkeleton card) {
+    private ViashinoSkeleton(final ViashinoSkeleton card) {
         super(card);
     }
 

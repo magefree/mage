@@ -30,7 +30,7 @@ public final class Drekavac extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_A_NON_CREATURE)))));
     }
 
-    public Drekavac(final Drekavac card) {
+    private Drekavac(final Drekavac card) {
         super(card);
     }
 

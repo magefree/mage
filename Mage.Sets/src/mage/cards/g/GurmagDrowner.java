@@ -34,7 +34,7 @@ public final class GurmagDrowner extends CardImpl {
                 StaticFilters.FILTER_CARD, Zone.GRAVEYARD, false, false, false, Zone.HAND, false), false));
     }
 
-    public GurmagDrowner(final GurmagDrowner card) {
+    private GurmagDrowner(final GurmagDrowner card) {
         super(card);
     }
 

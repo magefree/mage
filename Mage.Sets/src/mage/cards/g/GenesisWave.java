@@ -31,7 +31,7 @@ public final class GenesisWave extends CardImpl {
         this.getSpellAbility().addEffect(new GenesisWaveEffect());
     }
 
-    public GenesisWave(final GenesisWave card) {
+    private GenesisWave(final GenesisWave card) {
         super(card);
     }
 

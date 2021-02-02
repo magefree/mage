@@ -43,7 +43,7 @@ public final class Vigor extends CardImpl {
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
     }
 
-    public Vigor(final Vigor card) {
+    private Vigor(final Vigor card) {
         super(card);
     }
 

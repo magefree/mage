@@ -40,7 +40,7 @@ public final class GearsmithProdigy extends CardImpl {
         ));
     }
 
-    public GearsmithProdigy(final GearsmithProdigy card) {
+    private GearsmithProdigy(final GearsmithProdigy card) {
         super(card);
     }
 

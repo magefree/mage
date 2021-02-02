@@ -26,7 +26,7 @@ public final class BoneToAsh extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public BoneToAsh(final BoneToAsh card) {
+    private BoneToAsh(final BoneToAsh card) {
         super(card);
     }
 

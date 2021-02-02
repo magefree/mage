@@ -43,7 +43,7 @@ public final class SeaSerpent extends CardImpl {
                 new SacrificeSourceEffect()));
     }
 
-    public SeaSerpent(final SeaSerpent card) {
+    private SeaSerpent(final SeaSerpent card) {
         super(card);
     }
 

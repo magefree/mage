@@ -35,7 +35,7 @@ public final class ImpendingDisaster extends CardImpl {
         
     }
 
-    public ImpendingDisaster(final ImpendingDisaster card) {
+    private ImpendingDisaster(final ImpendingDisaster card) {
         super(card);
     }
 

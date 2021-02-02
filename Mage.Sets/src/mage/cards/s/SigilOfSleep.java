@@ -46,7 +46,7 @@ public final class SigilOfSleep extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SigilOfSleep(final SigilOfSleep card) {
+    private SigilOfSleep(final SigilOfSleep card) {
         super(card);
     }
 

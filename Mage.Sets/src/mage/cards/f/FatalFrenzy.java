@@ -43,7 +43,7 @@ public final class FatalFrenzy extends CardImpl {
 
     }
 
-    public FatalFrenzy(final FatalFrenzy card) {
+    private FatalFrenzy(final FatalFrenzy card) {
         super(card);
     }
 

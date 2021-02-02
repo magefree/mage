@@ -41,7 +41,7 @@ public final class WardenOfTheWall extends CardImpl {
                 .addHint(NotMyTurnHint.instance));
     }
 
-    public WardenOfTheWall(final WardenOfTheWall card) {
+    private WardenOfTheWall(final WardenOfTheWall card) {
         super(card);
     }
 

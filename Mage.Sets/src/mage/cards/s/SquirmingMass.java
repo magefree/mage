@@ -26,7 +26,7 @@ public final class SquirmingMass extends CardImpl {
         this.addAbility(FearAbility.getInstance());
     }
 
-    public SquirmingMass(final SquirmingMass card) {
+    private SquirmingMass(final SquirmingMass card) {
         super(card);
     }
 

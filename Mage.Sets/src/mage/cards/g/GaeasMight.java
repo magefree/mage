@@ -26,7 +26,7 @@ public final class GaeasMight extends CardImpl {
         this.getSpellAbility().setAbilityWord(AbilityWord.DOMAIN);
     }
 
-    public GaeasMight(final GaeasMight card) {
+    private GaeasMight(final GaeasMight card) {
         super(card);
     }
 

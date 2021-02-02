@@ -57,7 +57,7 @@ public final class NightscapeBattlemage extends CardImpl {
             "When {this} enters the battlefield, if it was kicked with its {2}{R} kicker, destroy target land."));
     }
 
-    public NightscapeBattlemage(final NightscapeBattlemage card) {
+    private NightscapeBattlemage(final NightscapeBattlemage card) {
         super(card);
     }
 

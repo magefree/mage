@@ -31,7 +31,7 @@ public final class BloodthroneVampire extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(FILTER_CONTROLLED_CREATURE_SHORT_TEXT))));
     }
 
-    public BloodthroneVampire(final BloodthroneVampire card) {
+    private BloodthroneVampire(final BloodthroneVampire card) {
         super(card);
     }
 

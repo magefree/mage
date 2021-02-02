@@ -32,7 +32,7 @@ public final class BrokenAmbitions extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public BrokenAmbitions(final BrokenAmbitions card) {
+    private BrokenAmbitions(final BrokenAmbitions card) {
         super(card);
     }
 

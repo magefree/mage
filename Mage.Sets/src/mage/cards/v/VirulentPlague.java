@@ -30,7 +30,7 @@ public final class VirulentPlague extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-2,-2, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public VirulentPlague(final VirulentPlague card) {
+    private VirulentPlague(final VirulentPlague card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class IncubatorDrone extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
     }
 
-    public IncubatorDrone(final IncubatorDrone card) {
+    private IncubatorDrone(final IncubatorDrone card) {
         super(card);
     }
 

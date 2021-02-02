@@ -51,7 +51,7 @@ public final class Scarecrone extends CardImpl {
         this.addAbility(secondAbility);
     }
 
-    public Scarecrone(final Scarecrone card) {
+    private Scarecrone(final Scarecrone card) {
         super(card);
     }
 

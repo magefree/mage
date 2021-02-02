@@ -26,7 +26,7 @@ public final class DisturbedBurial extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
     }
 
-    public DisturbedBurial(final DisturbedBurial card) {
+    private DisturbedBurial(final DisturbedBurial card) {
         super(card);
     }
 

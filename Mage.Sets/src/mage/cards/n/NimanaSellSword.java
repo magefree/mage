@@ -29,7 +29,7 @@ public final class NimanaSellSword extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
 
-    public NimanaSellSword(final NimanaSellSword card) {
+    private NimanaSellSword(final NimanaSellSword card) {
         super(card);
     }
 

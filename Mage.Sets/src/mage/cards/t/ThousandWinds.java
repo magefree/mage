@@ -44,7 +44,7 @@ public final class ThousandWinds extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter)));
     }
 
-    public ThousandWinds(final ThousandWinds card) {
+    private ThousandWinds(final ThousandWinds card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class AerieOuphes extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public AerieOuphes(final AerieOuphes card) {
+    private AerieOuphes(final AerieOuphes card) {
         super(card);
     }
 

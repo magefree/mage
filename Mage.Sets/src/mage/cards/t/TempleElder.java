@@ -33,7 +33,7 @@ public final class TempleElder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TempleElder(final TempleElder card) {
+    private TempleElder(final TempleElder card) {
         super(card);
     }
 

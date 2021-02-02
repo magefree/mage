@@ -38,7 +38,7 @@ public final class DimirSpybug extends CardImpl {
         this.addAbility(new DimirSpybugTriggeredAbility());
     }
 
-    public DimirSpybug(final DimirSpybug card) {
+    private DimirSpybug(final DimirSpybug card) {
         super(card);
     }
 

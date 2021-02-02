@@ -30,7 +30,7 @@ public final class DefyDeath extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
     }
 
-    public DefyDeath(final DefyDeath card) {
+    private DefyDeath(final DefyDeath card) {
         super(card);
     }
 

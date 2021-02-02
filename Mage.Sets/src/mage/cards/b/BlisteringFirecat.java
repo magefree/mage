@@ -38,7 +38,7 @@ public final class BlisteringFirecat extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{R}{R}")));
     }
 
-    public BlisteringFirecat(final BlisteringFirecat card) {
+    private BlisteringFirecat(final BlisteringFirecat card) {
         super(card);
     }
 

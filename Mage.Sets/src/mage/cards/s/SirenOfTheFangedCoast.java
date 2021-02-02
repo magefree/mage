@@ -41,7 +41,7 @@ public final class SirenOfTheFangedCoast extends CardImpl {
                 "When {this} enters the battlefield, if its tribute wasn't paid, gain control of target creature."));        
     }
 
-    public SirenOfTheFangedCoast(final SirenOfTheFangedCoast card) {
+    private SirenOfTheFangedCoast(final SirenOfTheFangedCoast card) {
         super(card);
     }
 

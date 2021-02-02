@@ -41,7 +41,7 @@ public final class StromkirkMentor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StromkirkMentor(final StromkirkMentor card) {
+    private StromkirkMentor(final StromkirkMentor card) {
         super(card);
     }
 

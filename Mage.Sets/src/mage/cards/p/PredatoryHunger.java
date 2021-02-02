@@ -44,7 +44,7 @@ public final class PredatoryHunger extends CardImpl {
         ));
     }
 
-    public PredatoryHunger(final PredatoryHunger card) {
+    private PredatoryHunger(final PredatoryHunger card) {
         super(card);
     }
 

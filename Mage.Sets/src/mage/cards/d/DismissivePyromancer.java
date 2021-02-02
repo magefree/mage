@@ -53,7 +53,7 @@ public final class DismissivePyromancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DismissivePyromancer(final DismissivePyromancer card) {
+    private DismissivePyromancer(final DismissivePyromancer card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class AuguryOwl extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(3)));
     }
 
-    public AuguryOwl(final AuguryOwl card) {
+    private AuguryOwl(final AuguryOwl card) {
         super(card);
     }
 

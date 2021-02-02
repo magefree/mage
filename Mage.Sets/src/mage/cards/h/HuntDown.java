@@ -37,7 +37,7 @@ public final class HuntDown extends CardImpl {
         
     }
 
-    public HuntDown(final HuntDown card) {
+    private HuntDown(final HuntDown card) {
         super(card);
     }
 

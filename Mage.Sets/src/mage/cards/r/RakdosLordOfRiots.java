@@ -44,7 +44,7 @@ public final class RakdosLordOfRiots extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RakdosLordOfRiotsCostReductionEffect()));
     }
 
-    public RakdosLordOfRiots(final RakdosLordOfRiots card) {
+    private RakdosLordOfRiots(final RakdosLordOfRiots card) {
         super(card);
     }
 

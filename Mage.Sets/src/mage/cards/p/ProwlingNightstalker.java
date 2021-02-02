@@ -37,7 +37,7 @@ public final class ProwlingNightstalker extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(notBlackCreatures, Duration.WhileOnBattlefield)));
     }
 
-    public ProwlingNightstalker(final ProwlingNightstalker card) {
+    private ProwlingNightstalker(final ProwlingNightstalker card) {
         super(card);
     }
 

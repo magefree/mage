@@ -39,7 +39,7 @@ public final class EternalDominion extends CardImpl {
 
     }
 
-    public EternalDominion(final EternalDominion card) {
+    private EternalDominion(final EternalDominion card) {
         super(card);
     }
 

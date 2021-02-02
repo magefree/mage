@@ -22,7 +22,7 @@ public final class GolgariLonglegs extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public GolgariLonglegs(final GolgariLonglegs card) {
+    private GolgariLonglegs(final GolgariLonglegs card) {
         super(card);
     }
 

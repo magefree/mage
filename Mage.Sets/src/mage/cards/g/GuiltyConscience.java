@@ -39,7 +39,7 @@ public final class GuiltyConscience extends CardImpl {
         this.addAbility(new DealsDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, new DamageAttachedEffect(new NumericSetToEffectValues("that much", "damage")), false));
     }
 
-    public GuiltyConscience(final GuiltyConscience card) {
+    private GuiltyConscience(final GuiltyConscience card) {
         super(card);
     }
 

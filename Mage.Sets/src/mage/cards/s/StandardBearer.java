@@ -28,7 +28,7 @@ public final class StandardBearer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new TargetsHaveToTargetPermanentIfAbleEffect()));
     }
 
-    public StandardBearer(final StandardBearer card) {
+    private StandardBearer(final StandardBearer card) {
         super(card);
     }
 

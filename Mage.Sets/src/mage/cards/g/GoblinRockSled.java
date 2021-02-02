@@ -53,7 +53,7 @@ public final class GoblinRockSled extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(filter)));
     }
 
-    public GoblinRockSled(final GoblinRockSled card) {
+    private GoblinRockSled(final GoblinRockSled card) {
         super(card);
     }
 

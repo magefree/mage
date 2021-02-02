@@ -31,7 +31,7 @@ public final class JadecraftArtisan extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JadecraftArtisan(final JadecraftArtisan card) {
+    private JadecraftArtisan(final JadecraftArtisan card) {
         super(card);
     }
 

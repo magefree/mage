@@ -36,7 +36,7 @@ public final class Dystopia extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, "that player"), TargetController.ANY, false));
     }
 
-    public Dystopia(final Dystopia card) {
+    private Dystopia(final Dystopia card) {
         super(card);
     }
 

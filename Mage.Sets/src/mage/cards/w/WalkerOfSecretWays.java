@@ -57,7 +57,7 @@ public final class WalkerOfSecretWays extends CardImpl {
 
     }
 
-    public WalkerOfSecretWays(final WalkerOfSecretWays card) {
+    private WalkerOfSecretWays(final WalkerOfSecretWays card) {
         super(card);
     }
 

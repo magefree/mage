@@ -40,7 +40,7 @@ public final class RocketLauncher extends CardImpl {
         this.addAbility(ability, watcher);
     }
 
-    public RocketLauncher(final RocketLauncher card) {
+    private RocketLauncher(final RocketLauncher card) {
         super(card);
     }
 

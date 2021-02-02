@@ -36,7 +36,7 @@ public final class RuneSnag extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
-    public RuneSnag(final RuneSnag card) {
+    private RuneSnag(final RuneSnag card) {
         super(card);
     }
 

@@ -60,7 +60,7 @@ public final class RimescaleDragon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public RimescaleDragon(final RimescaleDragon card) {
+    private RimescaleDragon(final RimescaleDragon card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class ThassasBounty extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public ThassasBounty(final ThassasBounty card) {
+    private ThassasBounty(final ThassasBounty card) {
         super(card);
     }
 

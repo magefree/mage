@@ -28,7 +28,7 @@ public final class Omenspeaker extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(2), false));
     }
 
-    public Omenspeaker(final Omenspeaker card) {
+    private Omenspeaker(final Omenspeaker card) {
         super(card);
     }
 

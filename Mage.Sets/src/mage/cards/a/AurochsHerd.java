@@ -51,7 +51,7 @@ public final class AurochsHerd extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, StaticValue.get(0), Duration.EndOfTurn, true), false));
     }
 
-    public AurochsHerd(final AurochsHerd card) {
+    private AurochsHerd(final AurochsHerd card) {
         super(card);
     }
 

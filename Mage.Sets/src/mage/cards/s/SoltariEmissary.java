@@ -32,7 +32,7 @@ public final class SoltariEmissary extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShadowAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
-    public SoltariEmissary(final SoltariEmissary card) {
+    private SoltariEmissary(final SoltariEmissary card) {
         super(card);
     }
 

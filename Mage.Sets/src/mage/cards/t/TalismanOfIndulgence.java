@@ -31,7 +31,7 @@ public final class TalismanOfIndulgence extends CardImpl {
         this.addAbility(redManaAbility);
     }
 
-    public TalismanOfIndulgence(final TalismanOfIndulgence card) {
+    private TalismanOfIndulgence(final TalismanOfIndulgence card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class RampagingBaloths extends CardImpl {
         this.addAbility(new LandfallAbility(new CreateTokenEffect(new BeastToken2()), true));
     }
 
-    public RampagingBaloths(final RampagingBaloths card) {
+    private RampagingBaloths(final RampagingBaloths card) {
         super(card);
     }
 

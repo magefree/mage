@@ -26,7 +26,7 @@ public final class Gigadrowse extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent());
     }
 
-    public Gigadrowse(final Gigadrowse card) {
+    private Gigadrowse(final Gigadrowse card) {
         super(card);
     }
 

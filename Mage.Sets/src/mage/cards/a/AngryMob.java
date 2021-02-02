@@ -47,7 +47,7 @@ public final class AngryMob extends CardImpl {
 
     }
 
-    public AngryMob(final AngryMob card) {
+    private AngryMob(final AngryMob card) {
         super(card);
     }
 

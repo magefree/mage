@@ -45,7 +45,7 @@ public final class GuulDrazVampire extends CardImpl {
 
     }
 
-    public GuulDrazVampire(final GuulDrazVampire card) {
+    private GuulDrazVampire(final GuulDrazVampire card) {
         super(card);
     }
 

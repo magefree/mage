@@ -37,7 +37,7 @@ public final class PryingBlade extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public PryingBlade(final PryingBlade card) {
+    private PryingBlade(final PryingBlade card) {
         super(card);
     }
 

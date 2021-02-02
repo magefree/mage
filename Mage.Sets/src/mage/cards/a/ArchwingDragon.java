@@ -34,7 +34,7 @@ public final class ArchwingDragon extends CardImpl {
 
     }
 
-    public ArchwingDragon(final ArchwingDragon card) {
+    private ArchwingDragon(final ArchwingDragon card) {
         super(card);
     }
 

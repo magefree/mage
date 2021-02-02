@@ -48,7 +48,7 @@ public final class UndergroundForum extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public UndergroundForum(final UndergroundForum card) {
+    private UndergroundForum(final UndergroundForum card) {
         super(card);
     }
 

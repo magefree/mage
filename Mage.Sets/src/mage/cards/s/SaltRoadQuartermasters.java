@@ -44,7 +44,7 @@ public final class SaltRoadQuartermasters extends CardImpl {
 
     }
 
-    public SaltRoadQuartermasters(final SaltRoadQuartermasters card) {
+    private SaltRoadQuartermasters(final SaltRoadQuartermasters card) {
         super(card);
     }
 

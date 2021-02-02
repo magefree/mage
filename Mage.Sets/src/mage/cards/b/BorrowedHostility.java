@@ -49,7 +49,7 @@ public final class BorrowedHostility extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public BorrowedHostility(final BorrowedHostility card) {
+    private BorrowedHostility(final BorrowedHostility card) {
         super(card);
     }
 

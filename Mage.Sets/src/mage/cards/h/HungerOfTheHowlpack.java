@@ -32,7 +32,7 @@ public final class HungerOfTheHowlpack extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public HungerOfTheHowlpack(final HungerOfTheHowlpack card) {
+    private HungerOfTheHowlpack(final HungerOfTheHowlpack card) {
         super(card);
     }
 

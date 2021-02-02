@@ -49,7 +49,7 @@ public final class KabiraVindicator extends LevelerCard {
         setMaxLevelCounters(5);
     }
 
-    public KabiraVindicator(final KabiraVindicator card) {
+    private KabiraVindicator(final KabiraVindicator card) {
         super(card);
     }
 

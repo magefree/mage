@@ -34,7 +34,7 @@ public final class JourneyForTheElixir extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new JourneyForTheElixirLibraryTarget()));
     }
 
-    public JourneyForTheElixir(final JourneyForTheElixir card) {
+    private JourneyForTheElixir(final JourneyForTheElixir card) {
         super(card);
     }
 

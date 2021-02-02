@@ -35,7 +35,7 @@ public final class BenevolentAncestor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BenevolentAncestor(final BenevolentAncestor card) {
+    private BenevolentAncestor(final BenevolentAncestor card) {
         super(card);
     }
 

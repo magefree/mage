@@ -45,7 +45,7 @@ public final class AugurOfSkulls extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AugurOfSkulls(final AugurOfSkulls card) {
+    private AugurOfSkulls(final AugurOfSkulls card) {
         super(card);
     }
 

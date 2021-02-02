@@ -24,7 +24,7 @@ public final class GatherTheTownsfolk extends CardImpl {
                 FatefulHourCondition.instance, "Create two 1/1 white Human creature tokens. <br><i>Fateful hour</i> &mdash; If you have 5 or less life, create five of those tokens instead"));
     }
 
-    public GatherTheTownsfolk(final GatherTheTownsfolk card) {
+    private GatherTheTownsfolk(final GatherTheTownsfolk card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class TorGiant extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public TorGiant(final TorGiant card) {
+    private TorGiant(final TorGiant card) {
         super(card);
     }
 

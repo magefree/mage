@@ -31,7 +31,7 @@ public final class GrotesqueMutation extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public GrotesqueMutation(final GrotesqueMutation card) {
+    private GrotesqueMutation(final GrotesqueMutation card) {
         super(card);
     }
 

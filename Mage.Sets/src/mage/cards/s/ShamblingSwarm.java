@@ -31,7 +31,7 @@ public final class ShamblingSwarm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShamblingSwarm(final ShamblingSwarm card) {
+    private ShamblingSwarm(final ShamblingSwarm card) {
         super(card);
     }
 

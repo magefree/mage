@@ -34,7 +34,7 @@ public final class MercurialKite extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MercurialKite(final MercurialKite card) {
+    private MercurialKite(final MercurialKite card) {
         super(card);
     }
 

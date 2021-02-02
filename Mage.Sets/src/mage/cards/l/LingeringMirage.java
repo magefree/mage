@@ -42,7 +42,7 @@ public final class LingeringMirage extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public LingeringMirage(final LingeringMirage card) {
+    private LingeringMirage(final LingeringMirage card) {
         super(card);
     }
 

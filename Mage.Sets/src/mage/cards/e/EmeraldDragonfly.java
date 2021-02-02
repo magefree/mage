@@ -35,7 +35,7 @@ public final class EmeraldDragonfly extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G}{G}")));
     }
 
-    public EmeraldDragonfly(final EmeraldDragonfly card) {
+    private EmeraldDragonfly(final EmeraldDragonfly card) {
         super(card);
     }
 

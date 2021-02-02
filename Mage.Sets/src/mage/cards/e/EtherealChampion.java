@@ -33,7 +33,7 @@ public final class EtherealChampion extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new PayLifeCost(1)));
     }
 
-    public EtherealChampion(final EtherealChampion card) {
+    private EtherealChampion(final EtherealChampion card) {
         super(card);
     }
 

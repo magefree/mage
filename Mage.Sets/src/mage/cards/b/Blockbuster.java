@@ -35,7 +35,7 @@ public final class Blockbuster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Blockbuster(final Blockbuster card) {
+    private Blockbuster(final Blockbuster card) {
         super(card);
     }
 

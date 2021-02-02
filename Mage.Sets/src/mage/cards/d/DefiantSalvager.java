@@ -44,7 +44,7 @@ public final class DefiantSalvager extends CardImpl {
 
     }
 
-    public DefiantSalvager(final DefiantSalvager card) {
+    private DefiantSalvager(final DefiantSalvager card) {
         super(card);
     }
 

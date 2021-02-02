@@ -36,7 +36,7 @@ public final class GreenwheelLiberator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GreenwheelLiberator(final GreenwheelLiberator card) {
+    private GreenwheelLiberator(final GreenwheelLiberator card) {
         super(card);
     }
 

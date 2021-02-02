@@ -44,7 +44,7 @@ public final class EsperSojourners extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}{U}")));
     }
 
-    public EsperSojourners(final EsperSojourners card) {
+    private EsperSojourners(final EsperSojourners card) {
         super(card);
     }
 

@@ -53,7 +53,7 @@ public final class SkinInvasion extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new SkinInvasionEffect(), "enchanted creature", false));
     }
 
-    public SkinInvasion(final SkinInvasion card) {
+    private SkinInvasion(final SkinInvasion card) {
         super(card);
     }
 

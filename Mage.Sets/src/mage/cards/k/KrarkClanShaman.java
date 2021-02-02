@@ -42,7 +42,7 @@ public final class KrarkClanShaman extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filterTargetedCreatures), new SacrificeTargetCost(new TargetControlledPermanent(filterSacrificed))));
     }
 
-    public KrarkClanShaman(final KrarkClanShaman card) {
+    private KrarkClanShaman(final KrarkClanShaman card) {
         super(card);
     }
 

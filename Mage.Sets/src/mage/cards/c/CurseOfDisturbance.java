@@ -43,7 +43,7 @@ public final class CurseOfDisturbance extends CardImpl {
         this.addAbility(new EnchantedPlayerAttackedTriggeredAbility(new CurseOfDisturbanceEffect()));
     }
 
-    public CurseOfDisturbance(final CurseOfDisturbance card) {
+    private CurseOfDisturbance(final CurseOfDisturbance card) {
         super(card);
     }
 

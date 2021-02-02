@@ -37,7 +37,7 @@ public final class SeismicMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SeismicMage(final SeismicMage card) {
+    private SeismicMage(final SeismicMage card) {
         super(card);
     }
 

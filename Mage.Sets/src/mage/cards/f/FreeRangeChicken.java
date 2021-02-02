@@ -34,7 +34,7 @@ public final class FreeRangeChicken extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FreeRangeChickenEffect(), new ManaCostsImpl("{1}{G}")), new FreeRangeChickenWatcher());
     }
 
-    public FreeRangeChicken(final FreeRangeChicken card) {
+    private FreeRangeChicken(final FreeRangeChicken card) {
         super(card);
     }
 

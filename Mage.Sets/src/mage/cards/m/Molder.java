@@ -32,7 +32,7 @@ public final class Molder extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(MolderAdjuster.instance);
     }
 
-    public Molder(final Molder card) {
+    private Molder(final Molder card) {
         super(card);
     }
 

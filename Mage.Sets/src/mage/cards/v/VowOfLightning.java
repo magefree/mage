@@ -50,7 +50,7 @@ public final class VowOfLightning extends CardImpl {
         this.addAbility(ability);        
     }
 
-    public VowOfLightning(final VowOfLightning card) {
+    private VowOfLightning(final VowOfLightning card) {
         super(card);
     }
 

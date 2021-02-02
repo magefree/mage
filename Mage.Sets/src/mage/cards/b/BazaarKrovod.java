@@ -44,7 +44,7 @@ public final class BazaarKrovod extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BazaarKrovod(final BazaarKrovod card) {
+    private BazaarKrovod(final BazaarKrovod card) {
         super(card);
     }
 

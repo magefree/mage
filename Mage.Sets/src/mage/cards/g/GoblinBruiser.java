@@ -22,7 +22,7 @@ public final class GoblinBruiser extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public GoblinBruiser(final GoblinBruiser card) {
+    private GoblinBruiser(final GoblinBruiser card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class UktabiFaerie extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UktabiFaerie(final UktabiFaerie card) {
+    private UktabiFaerie(final UktabiFaerie card) {
         super(card);
     }
 

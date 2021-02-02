@@ -56,7 +56,7 @@ public final class TemurRunemark extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter), "{this} has trample as long as you control a blue or red permanent")));
     }
 
-    public TemurRunemark(final TemurRunemark card) {
+    private TemurRunemark(final TemurRunemark card) {
         super(card);
     }
 

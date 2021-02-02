@@ -37,7 +37,7 @@ public final class ShadowLance extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{B}")));
     }
 
-    public ShadowLance(final ShadowLance card) {
+    private ShadowLance(final ShadowLance card) {
         super(card);
     }
 

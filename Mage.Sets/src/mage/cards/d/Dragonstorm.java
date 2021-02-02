@@ -32,7 +32,7 @@ public final class Dragonstorm extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public Dragonstorm(final Dragonstorm card) {
+    private Dragonstorm(final Dragonstorm card) {
         super(card);
     }
 

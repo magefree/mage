@@ -48,7 +48,7 @@ public final class AquitectsWill extends CardImpl {
                 "If you control a Merfolk, draw a card"));
     }
 
-    public AquitectsWill(final AquitectsWill card) {
+    private AquitectsWill(final AquitectsWill card) {
         super(card);
     }
 

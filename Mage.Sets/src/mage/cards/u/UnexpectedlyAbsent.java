@@ -28,7 +28,7 @@ public final class UnexpectedlyAbsent extends CardImpl {
 
     }
 
-    public UnexpectedlyAbsent(final UnexpectedlyAbsent card) {
+    private UnexpectedlyAbsent(final UnexpectedlyAbsent card) {
         super(card);
     }
 

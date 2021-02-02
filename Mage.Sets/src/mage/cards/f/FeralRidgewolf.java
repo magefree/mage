@@ -32,7 +32,7 @@ public final class FeralRidgewolf extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
     }
 
-    public FeralRidgewolf(final FeralRidgewolf card) {
+    private FeralRidgewolf(final FeralRidgewolf card) {
         super(card);
     }
 

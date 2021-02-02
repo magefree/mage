@@ -40,7 +40,7 @@ public final class StingerflingSpider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public StingerflingSpider(final StingerflingSpider card) {
+    private StingerflingSpider(final StingerflingSpider card) {
         super(card);
     }
 

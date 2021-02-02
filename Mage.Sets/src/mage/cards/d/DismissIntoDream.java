@@ -36,7 +36,7 @@ public final class DismissIntoDream extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DismissIntoDreamEffect(filter)));
     }
 
-    public DismissIntoDream(final DismissIntoDream card) {
+    private DismissIntoDream(final DismissIntoDream card) {
         super(card);
     }
 

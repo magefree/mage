@@ -29,7 +29,7 @@ public final class CloakedSiren extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public CloakedSiren(final CloakedSiren card) {
+    private CloakedSiren(final CloakedSiren card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class DayOfDestiny extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public DayOfDestiny(final DayOfDestiny card) {
+    private DayOfDestiny(final DayOfDestiny card) {
         super(card);
     }
 

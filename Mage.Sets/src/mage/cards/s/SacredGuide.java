@@ -43,7 +43,7 @@ public final class SacredGuide extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SacredGuide(final SacredGuide card) {
+    private SacredGuide(final SacredGuide card) {
         super(card);
     }
 

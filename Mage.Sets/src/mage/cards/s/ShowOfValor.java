@@ -24,7 +24,7 @@ public final class ShowOfValor extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ShowOfValor(final ShowOfValor card) {
+    private ShowOfValor(final ShowOfValor card) {
         super(card);
     }
 

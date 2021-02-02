@@ -44,7 +44,7 @@ public final class CurseOfOblivion extends CardImpl {
         this.addAbility(new CurseOfOblivionAbility());
     }
 
-    public CurseOfOblivion(final CurseOfOblivion card) {
+    private CurseOfOblivion(final CurseOfOblivion card) {
         super(card);
     }
 

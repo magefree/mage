@@ -21,7 +21,7 @@ public final class ScoutingTrek extends CardImpl {
         this.getSpellAbility().addEffect(new RecruiterEffect(new FilterBasicLandCard("basic land cards")));
     }
 
-    public ScoutingTrek(final ScoutingTrek card) {
+    private ScoutingTrek(final ScoutingTrek card) {
         super(card);
     }
 

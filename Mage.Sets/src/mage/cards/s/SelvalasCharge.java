@@ -32,7 +32,7 @@ public final class SelvalasCharge extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public SelvalasCharge(final SelvalasCharge card) {
+    private SelvalasCharge(final SelvalasCharge card) {
         super(card);
     }
 

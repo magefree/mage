@@ -31,7 +31,7 @@ public final class Festergloom extends CardImpl {
         this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false));
     }
 
-    public Festergloom(final Festergloom card) {
+    private Festergloom(final Festergloom card) {
         super(card);
     }
 

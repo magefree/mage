@@ -32,7 +32,7 @@ public final class TreetopSentinel extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.GREEN));
     }
 
-    public TreetopSentinel(final TreetopSentinel card) {
+    private TreetopSentinel(final TreetopSentinel card) {
         super(card);
     }
 

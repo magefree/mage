@@ -40,7 +40,7 @@ public final class PsychicTheft extends CardImpl {
 
     }
 
-    public PsychicTheft(final PsychicTheft card) {
+    private PsychicTheft(final PsychicTheft card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class PyromancersSwath extends CardImpl {
 
     }
 
-    public PyromancersSwath(final PyromancersSwath card) {
+    private PyromancersSwath(final PyromancersSwath card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class RebelInformer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RebelInformer(final RebelInformer card) {
+    private RebelInformer(final RebelInformer card) {
         super(card);
     }
 

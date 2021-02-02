@@ -41,7 +41,7 @@ public final class AvacynThePurifier extends CardImpl {
         this.addAbility(new AvacynThePurifierAbility());
     }
 
-    public AvacynThePurifier(final AvacynThePurifier card) {
+    private AvacynThePurifier(final AvacynThePurifier card) {
         super(card);
     }
 

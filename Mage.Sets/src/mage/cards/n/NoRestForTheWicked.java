@@ -35,7 +35,7 @@ public final class NoRestForTheWicked extends CardImpl {
         addAbility(ability, watcher);
     }
 
-    public NoRestForTheWicked(final NoRestForTheWicked card) {
+    private NoRestForTheWicked(final NoRestForTheWicked card) {
         super(card);
     }
 

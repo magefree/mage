@@ -23,7 +23,7 @@ public final class HarrierNaga extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public HarrierNaga(final HarrierNaga card) {
+    private HarrierNaga(final HarrierNaga card) {
         super(card);
     }
 

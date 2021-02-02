@@ -27,7 +27,7 @@ public final class KolaghanAspirant extends CardImpl {
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DamageTargetEffect(1, true, "that creature"), false));
     }
 
-    public KolaghanAspirant(final KolaghanAspirant card) {
+    private KolaghanAspirant(final KolaghanAspirant card) {
         super(card);
     }
 

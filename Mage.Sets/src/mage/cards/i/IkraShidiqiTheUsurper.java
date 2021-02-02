@@ -44,7 +44,7 @@ public final class IkraShidiqiTheUsurper extends CardImpl {
         this.addAbility(PartnerAbility.getInstance());
     }
 
-    public IkraShidiqiTheUsurper(final IkraShidiqiTheUsurper card) {
+    private IkraShidiqiTheUsurper(final IkraShidiqiTheUsurper card) {
         super(card);
     }
 

@@ -54,7 +54,7 @@ public final class MoonringIsland extends CardImpl {
 
     }
 
-    public MoonringIsland(final MoonringIsland card) {
+    private MoonringIsland(final MoonringIsland card) {
         super(card);
     }
 

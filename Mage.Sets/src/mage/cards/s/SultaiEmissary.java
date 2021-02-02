@@ -27,7 +27,7 @@ public final class SultaiEmissary extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ManifestEffect(1)));
     }
 
-    public SultaiEmissary(final SultaiEmissary card) {
+    private SultaiEmissary(final SultaiEmissary card) {
         super(card);
     }
 

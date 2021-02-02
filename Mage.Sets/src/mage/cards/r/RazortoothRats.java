@@ -25,7 +25,7 @@ public final class RazortoothRats extends CardImpl {
         this.addAbility(FearAbility.getInstance());
     }
 
-    public RazortoothRats(final RazortoothRats card) {
+    private RazortoothRats(final RazortoothRats card) {
         super(card);
     }
 

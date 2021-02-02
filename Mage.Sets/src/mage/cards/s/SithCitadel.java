@@ -33,7 +33,7 @@ public final class SithCitadel extends CardImpl {
 
     }
 
-    public SithCitadel(final SithCitadel card) {
+    private SithCitadel(final SithCitadel card) {
         super(card);
     }
 

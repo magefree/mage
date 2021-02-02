@@ -28,7 +28,7 @@ public final class Tsunami extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public Tsunami(final Tsunami card) {
+    private Tsunami(final Tsunami card) {
         super(card);
     }
 

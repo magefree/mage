@@ -49,7 +49,7 @@ public final class AvatarOfGrowth extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AvatarOfGrowthSearchEffect()));
     }
 
-    public AvatarOfGrowth(final AvatarOfGrowth card) {
+    private AvatarOfGrowth(final AvatarOfGrowth card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class TroubledHealer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TroubledHealer(final TroubledHealer card) {
+    private TroubledHealer(final TroubledHealer card) {
         super(card);
     }
 

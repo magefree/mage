@@ -28,7 +28,7 @@ public final class MultanisDecree extends CardImpl {
         this.getSpellAbility().addEffect(new MultanisDecreeDestroyEffect());
     }
 
-    public MultanisDecree(final MultanisDecree card) {
+    private MultanisDecree(final MultanisDecree card) {
         super(card);
     }
 

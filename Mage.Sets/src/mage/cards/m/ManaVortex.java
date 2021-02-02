@@ -46,7 +46,7 @@ public final class ManaVortex extends CardImpl {
         this.addAbility(new ManaVortexStateTriggeredAbility());
     }
 
-    public ManaVortex(final ManaVortex card) {
+    private ManaVortex(final ManaVortex card) {
         super(card);
     }
 

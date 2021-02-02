@@ -48,7 +48,7 @@ public final class FeldonOfTheThirdPath extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FeldonOfTheThirdPath(final FeldonOfTheThirdPath card) {
+    private FeldonOfTheThirdPath(final FeldonOfTheThirdPath card) {
         super(card);
     }
 

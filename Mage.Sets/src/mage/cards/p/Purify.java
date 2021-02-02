@@ -31,7 +31,7 @@ public final class Purify extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
     }
 
-    public Purify(final Purify card) {
+    private Purify(final Purify card) {
         super(card);
     }
 

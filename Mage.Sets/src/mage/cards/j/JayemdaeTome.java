@@ -25,7 +25,7 @@ public final class JayemdaeTome extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JayemdaeTome(final JayemdaeTome card) {
+    private JayemdaeTome(final JayemdaeTome card) {
         super(card);
     }
 

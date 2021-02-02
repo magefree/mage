@@ -38,7 +38,7 @@ public final class DayOfTheDragons extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new DayOfTheDragonsLeavesEffect(), false));
     }
 
-    public DayOfTheDragons(final DayOfTheDragons card) {
+    private DayOfTheDragons(final DayOfTheDragons card) {
         super(card);
     }
 

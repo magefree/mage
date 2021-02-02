@@ -23,7 +23,7 @@ public final class FlamesOfTheFirebrand extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(3));
     }
 
-    public FlamesOfTheFirebrand(final FlamesOfTheFirebrand card) {
+    private FlamesOfTheFirebrand(final FlamesOfTheFirebrand card) {
         super(card);
     }
 

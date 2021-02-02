@@ -40,7 +40,7 @@ public final class VoidstoneGargoyle extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VoidstoneGargoyleRuleModifyingEffect2()));
     }
 
-    public VoidstoneGargoyle(final VoidstoneGargoyle card) {
+    private VoidstoneGargoyle(final VoidstoneGargoyle card) {
         super(card);
     }
 

@@ -25,7 +25,7 @@ public final class WanderingStream extends CardImpl {
         this.getSpellAbility().addEffect(effect);
      }
 
-    public WanderingStream(final WanderingStream card) {
+    private WanderingStream(final WanderingStream card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class SpinedFluke extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
-    public SpinedFluke(final SpinedFluke card) {
+    private SpinedFluke(final SpinedFluke card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class Drelnoch extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new DrawCardSourceControllerEffect(2), true));
     }
 
-    public Drelnoch(final Drelnoch card) {
+    private Drelnoch(final Drelnoch card) {
         super(card);
     }
 

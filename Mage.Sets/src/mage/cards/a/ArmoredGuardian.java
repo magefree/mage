@@ -41,7 +41,7 @@ public final class ArmoredGuardian extends CardImpl {
             new ManaCostsImpl("{1}{U}{U}")));
     }
 
-    public ArmoredGuardian(final ArmoredGuardian card) {
+    private ArmoredGuardian(final ArmoredGuardian card) {
         super(card);
     }
 

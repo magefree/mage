@@ -37,7 +37,7 @@ public final class Crackdown extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter)));
     }
 
-    public Crackdown(final Crackdown card) {
+    private Crackdown(final Crackdown card) {
         super(card);
     }
 

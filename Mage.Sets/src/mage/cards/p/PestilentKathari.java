@@ -35,7 +35,7 @@ public final class PestilentKathari extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{2}{R}")));
     }
 
-    public PestilentKathari(final PestilentKathari card) {
+    private PestilentKathari(final PestilentKathari card) {
         super(card);
     }
 

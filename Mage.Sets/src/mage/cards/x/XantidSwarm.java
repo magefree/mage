@@ -41,7 +41,7 @@ public final class XantidSwarm extends CardImpl {
         this.addAbility(ability);
     }
 
-    public XantidSwarm(final XantidSwarm card) {
+    private XantidSwarm(final XantidSwarm card) {
         super(card);
     }
 

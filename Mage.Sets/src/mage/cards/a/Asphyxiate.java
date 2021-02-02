@@ -32,7 +32,7 @@ public final class Asphyxiate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public Asphyxiate(final Asphyxiate card) {
+    private Asphyxiate(final Asphyxiate card) {
         super(card);
     }
 

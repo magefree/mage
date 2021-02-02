@@ -33,7 +33,7 @@ public final class LunarForce extends CardImpl {
 
     }
 
-    public LunarForce(final LunarForce card) {
+    private LunarForce(final LunarForce card) {
         super(card);
     }
 

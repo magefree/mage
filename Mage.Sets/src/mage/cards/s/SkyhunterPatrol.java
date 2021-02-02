@@ -28,7 +28,7 @@ public final class SkyhunterPatrol extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public SkyhunterPatrol(final SkyhunterPatrol card) {
+    private SkyhunterPatrol(final SkyhunterPatrol card) {
         super(card);
     }
 

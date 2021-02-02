@@ -24,7 +24,7 @@ public final class AggressiveUrge extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public AggressiveUrge(final AggressiveUrge card) {
+    private AggressiveUrge(final AggressiveUrge card) {
         super(card);
     }
 

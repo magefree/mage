@@ -44,7 +44,7 @@ public final class MerfolkSeastalkers extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MerfolkSeastalkers(final MerfolkSeastalkers card) {
+    private MerfolkSeastalkers(final MerfolkSeastalkers card) {
         super(card);
     }
 

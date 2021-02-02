@@ -30,7 +30,7 @@ public final class DauthiEmbrace extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DauthiEmbrace(final DauthiEmbrace card) {
+    private DauthiEmbrace(final DauthiEmbrace card) {
         super(card);
     }
 

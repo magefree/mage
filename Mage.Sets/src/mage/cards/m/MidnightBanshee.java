@@ -41,7 +41,7 @@ public final class MidnightBanshee extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAllEffect(CounterType.M1M1.createInstance(), filter), TargetController.YOU, false));
     }
 
-    public MidnightBanshee(final MidnightBanshee card) {
+    private MidnightBanshee(final MidnightBanshee card) {
         super(card);
     }
 

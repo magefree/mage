@@ -46,7 +46,7 @@ public final class LightningTalons extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LightningTalons(final LightningTalons card) {
+    private LightningTalons(final LightningTalons card) {
         super(card);
     }
 

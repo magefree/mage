@@ -33,7 +33,7 @@ public final class KitsuneDawnblade extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KitsuneDawnblade(final KitsuneDawnblade card) {
+    private KitsuneDawnblade(final KitsuneDawnblade card) {
         super(card);
     }
 

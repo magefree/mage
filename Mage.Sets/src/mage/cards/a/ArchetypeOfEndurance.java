@@ -40,7 +40,7 @@ public final class ArchetypeOfEndurance extends CardImpl {
 
     }
 
-    public ArchetypeOfEndurance(final ArchetypeOfEndurance card) {
+    private ArchetypeOfEndurance(final ArchetypeOfEndurance card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class AdmiralAckbar extends CardImpl {
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new DrawCardSourceControllerEffect(1), 2, filter));
     }
 
-    public AdmiralAckbar(final AdmiralAckbar card) {
+    private AdmiralAckbar(final AdmiralAckbar card) {
         super(card);
     }
 

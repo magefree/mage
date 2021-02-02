@@ -27,7 +27,7 @@ public final class GoblinFirebug extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_LAND, 1, ""), false));
     }
 
-    public GoblinFirebug(final GoblinFirebug card) {
+    private GoblinFirebug(final GoblinFirebug card) {
         super(card);
     }
 

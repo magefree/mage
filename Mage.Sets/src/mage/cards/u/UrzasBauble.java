@@ -39,7 +39,7 @@ public final class UrzasBauble extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UrzasBauble(final UrzasBauble card) {
+    private UrzasBauble(final UrzasBauble card) {
         super(card);
     }
 

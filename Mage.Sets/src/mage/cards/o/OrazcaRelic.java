@@ -42,7 +42,7 @@ public final class OrazcaRelic extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrazcaRelic(final OrazcaRelic card) {
+    private OrazcaRelic(final OrazcaRelic card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class NarstadScrapper extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(2)));
     }
 
-    public NarstadScrapper(final NarstadScrapper card) {
+    private NarstadScrapper(final NarstadScrapper card) {
         super(card);
     }
 

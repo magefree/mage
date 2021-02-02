@@ -41,7 +41,7 @@ public final class StromgaldCrusader extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl("{B}{B}")));                
     }
 
-    public StromgaldCrusader(final StromgaldCrusader card) {
+    private StromgaldCrusader(final StromgaldCrusader card) {
         super(card);
     }
 

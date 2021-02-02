@@ -43,7 +43,7 @@ public final class SwordOfFeastAndFamine extends CardImpl {
         this.addAbility(new SwordOfFeastAndFamineAbility());
     }
 
-    public SwordOfFeastAndFamine(final SwordOfFeastAndFamine card) {
+    private SwordOfFeastAndFamine(final SwordOfFeastAndFamine card) {
         super(card);
     }
 

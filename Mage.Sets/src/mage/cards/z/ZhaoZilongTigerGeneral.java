@@ -32,7 +32,7 @@ public final class ZhaoZilongTigerGeneral extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
     }
 
-    public ZhaoZilongTigerGeneral(final ZhaoZilongTigerGeneral card) {
+    private ZhaoZilongTigerGeneral(final ZhaoZilongTigerGeneral card) {
         super(card);
     }
 

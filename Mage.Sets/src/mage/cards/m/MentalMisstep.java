@@ -31,7 +31,7 @@ public final class MentalMisstep extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(FILTER));
     }
 
-    public MentalMisstep(final MentalMisstep card) {
+    private MentalMisstep(final MentalMisstep card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class TempOfTheDamned extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TempOfTheDamnedUpkeepEffect(), TargetController.YOU, false));
     }
 
-    public TempOfTheDamned(final TempOfTheDamned card) {
+    private TempOfTheDamned(final TempOfTheDamned card) {
         super(card);
     }
 

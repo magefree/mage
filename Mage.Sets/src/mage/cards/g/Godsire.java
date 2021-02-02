@@ -30,7 +30,7 @@ public final class Godsire extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GodSireBeastToken()), new TapSourceCost()));
     }
 
-    public Godsire(final Godsire card) {
+    private Godsire(final Godsire card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class JinxedIdol extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JinxedIdol(final JinxedIdol card) {
+    private JinxedIdol(final JinxedIdol card) {
         super(card);
     }
 

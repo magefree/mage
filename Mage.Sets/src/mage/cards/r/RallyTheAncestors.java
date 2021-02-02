@@ -42,7 +42,7 @@ public final class RallyTheAncestors extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public RallyTheAncestors(final RallyTheAncestors card) {
+    private RallyTheAncestors(final RallyTheAncestors card) {
         super(card);
     }
 

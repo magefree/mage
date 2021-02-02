@@ -40,7 +40,7 @@ public final class HeartOfLight extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HeartOfLightEffect()));
     }
 
-    public HeartOfLight(final HeartOfLight card) {
+    private HeartOfLight(final HeartOfLight card) {
         super(card);
     }
 

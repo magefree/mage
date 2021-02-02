@@ -32,7 +32,7 @@ public final class ReveredUnicorn extends CardImpl {
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new GainLifeEffect(new CountersSourceCount(CounterType.AGE)), false));
     }
 
-    public ReveredUnicorn(final ReveredUnicorn card) {
+    private ReveredUnicorn(final ReveredUnicorn card) {
         super(card);
     }
 

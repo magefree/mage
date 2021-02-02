@@ -46,7 +46,7 @@ public final class GempalmPolluter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GempalmPolluter(final GempalmPolluter card) {
+    private GempalmPolluter(final GempalmPolluter card) {
         super(card);
     }
 

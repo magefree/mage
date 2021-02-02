@@ -42,7 +42,7 @@ public final class MyrServitor extends CardImpl {
 
     }
 
-    public MyrServitor(final MyrServitor card) {
+    private MyrServitor(final MyrServitor card) {
         super(card);
     }
 

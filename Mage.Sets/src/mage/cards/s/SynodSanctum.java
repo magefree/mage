@@ -54,7 +54,7 @@ public final class SynodSanctum extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public SynodSanctum(final SynodSanctum card) {
+    private SynodSanctum(final SynodSanctum card) {
         super(card);
     }
 

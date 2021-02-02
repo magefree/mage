@@ -55,7 +55,7 @@ public final class Jokulmorder extends CardImpl {
         this.addAbility(new JokulmorderTriggeredAbility());
     }
 
-    public Jokulmorder(final Jokulmorder card) {
+    private Jokulmorder(final Jokulmorder card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class MagosiTheWaterveil extends CardImpl {
 
     }
 
-    public MagosiTheWaterveil(final MagosiTheWaterveil card) {
+    private MagosiTheWaterveil(final MagosiTheWaterveil card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class Vebulid extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DestroySourceEffect())), false));
     }
 
-    public Vebulid(final Vebulid card) {
+    private Vebulid(final Vebulid card) {
         super(card);
     }
 

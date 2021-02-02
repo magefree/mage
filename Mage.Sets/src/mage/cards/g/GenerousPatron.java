@@ -35,7 +35,7 @@ public final class GenerousPatron extends CardImpl {
         this.addAbility(new GenerousPatronTriggeredAbility());
     }
 
-    public GenerousPatron(final GenerousPatron card) {
+    private GenerousPatron(final GenerousPatron card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class LoamingShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LoamingShaman(final LoamingShaman card) {
+    private LoamingShaman(final LoamingShaman card) {
         super(card);
     }
 

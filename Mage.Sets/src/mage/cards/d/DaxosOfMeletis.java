@@ -46,7 +46,7 @@ public final class DaxosOfMeletis extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DaxosOfMeletisEffect(), false, true));
     }
 
-    public DaxosOfMeletis(final DaxosOfMeletis card) {
+    private DaxosOfMeletis(final DaxosOfMeletis card) {
         super(card);
     }
 

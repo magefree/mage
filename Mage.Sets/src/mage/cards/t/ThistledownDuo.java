@@ -45,7 +45,7 @@ public final class ThistledownDuo extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), blueFilter, false));
     }
 
-    public ThistledownDuo(final ThistledownDuo card) {
+    private ThistledownDuo(final ThistledownDuo card) {
         super(card);
     }
 

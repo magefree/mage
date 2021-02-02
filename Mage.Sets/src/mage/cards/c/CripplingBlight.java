@@ -35,7 +35,7 @@ public final class CripplingBlight extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttachedEffect(AttachmentType.AURA)));
     }
 
-    public CripplingBlight(final CripplingBlight card) {
+    private CripplingBlight(final CripplingBlight card) {
         super(card);
     }
 

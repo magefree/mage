@@ -30,7 +30,7 @@ public final class GoblinGeneral extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, false), false));
     }
 
-    public GoblinGeneral(final GoblinGeneral card) {
+    private GoblinGeneral(final GoblinGeneral card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class DominusOfFealty extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DominusOfFealty(final DominusOfFealty card) {
+    private DominusOfFealty(final DominusOfFealty card) {
         super(card);
     }
 

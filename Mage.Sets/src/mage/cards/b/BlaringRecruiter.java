@@ -34,7 +34,7 @@ public final class BlaringRecruiter extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new WarriorToken()), new ManaCostsImpl("{2}{W}")));
     }
 
-    public BlaringRecruiter(final BlaringRecruiter card) {
+    private BlaringRecruiter(final BlaringRecruiter card) {
         super(card);
     }
 

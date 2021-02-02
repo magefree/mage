@@ -29,7 +29,7 @@ public final class TaintedRemedy extends CardImpl {
 
     }
 
-    public TaintedRemedy(final TaintedRemedy card) {
+    private TaintedRemedy(final TaintedRemedy card) {
         super(card);
     }
 

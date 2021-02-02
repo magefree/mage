@@ -33,7 +33,7 @@ public final class Sideswipe extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public Sideswipe(final Sideswipe card) {
+    private Sideswipe(final Sideswipe card) {
         super(card);
     }
 

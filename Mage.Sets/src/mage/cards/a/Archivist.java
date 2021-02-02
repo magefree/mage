@@ -30,7 +30,7 @@ public final class Archivist extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost()));
     }
 
-    public Archivist(final Archivist card) {
+    private Archivist(final Archivist card) {
         super(card);
     }
 

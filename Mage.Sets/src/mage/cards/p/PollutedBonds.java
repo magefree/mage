@@ -43,7 +43,7 @@ public final class PollutedBonds extends CardImpl {
 
     }
 
-    public PollutedBonds(final PollutedBonds card) {
+    private PollutedBonds(final PollutedBonds card) {
         super(card);
     }
 

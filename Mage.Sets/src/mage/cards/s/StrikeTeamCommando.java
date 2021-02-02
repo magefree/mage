@@ -42,7 +42,7 @@ public final class StrikeTeamCommando extends CardImpl {
 
     }
 
-    public StrikeTeamCommando(final StrikeTeamCommando card) {
+    private StrikeTeamCommando(final StrikeTeamCommando card) {
         super(card);
     }
 

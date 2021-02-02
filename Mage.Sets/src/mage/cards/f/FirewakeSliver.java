@@ -54,7 +54,7 @@ public final class FirewakeSliver extends CardImpl {
 
     }
 
-    public FirewakeSliver(final FirewakeSliver card) {
+    private FirewakeSliver(final FirewakeSliver card) {
         super(card);
     }
 

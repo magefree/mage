@@ -43,7 +43,7 @@ public final class JaceIngeniousMindMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JaceIngeniousMindMage(final JaceIngeniousMindMage card) {
+    private JaceIngeniousMindMage(final JaceIngeniousMindMage card) {
         super(card);
     }
 

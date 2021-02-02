@@ -38,7 +38,7 @@ public final class AlmsCollector extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AlmsCollectorReplacementEffect()));
     }
 
-    public AlmsCollector(final AlmsCollector card) {
+    private AlmsCollector(final AlmsCollector card) {
         super(card);
     }
 

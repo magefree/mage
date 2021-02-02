@@ -38,7 +38,7 @@ public final class BurdenOfGuilt extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapEnchantedEffect(), new GenericManaCost(1)));
     }
 
-    public BurdenOfGuilt(final BurdenOfGuilt card) {
+    private BurdenOfGuilt(final BurdenOfGuilt card) {
         super(card);
     }
 

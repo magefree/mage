@@ -28,7 +28,7 @@ public final class AncientSilverback extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{G}")));
     }
 
-    public AncientSilverback(final AncientSilverback card) {
+    private AncientSilverback(final AncientSilverback card) {
         super(card);
     }
 

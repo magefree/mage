@@ -49,7 +49,7 @@ public final class DeepSeaKraken extends CardImpl {
                 "Whenever an opponent casts a spell, if Deep-Sea Kraken is suspended, remove a time counter from it."));
     }
 
-    public DeepSeaKraken(final DeepSeaKraken card) {
+    private DeepSeaKraken(final DeepSeaKraken card) {
         super(card);
     }
 

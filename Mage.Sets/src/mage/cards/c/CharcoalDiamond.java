@@ -24,7 +24,7 @@ public final class CharcoalDiamond extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public CharcoalDiamond(final CharcoalDiamond card) {
+    private CharcoalDiamond(final CharcoalDiamond card) {
         super(card);
     }
 

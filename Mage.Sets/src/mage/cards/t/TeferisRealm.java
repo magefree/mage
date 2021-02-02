@@ -36,7 +36,7 @@ public final class TeferisRealm extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TeferisRealmEffect(), TargetController.ANY, false));
     }
 
-    public TeferisRealm(final TeferisRealm card) {
+    private TeferisRealm(final TeferisRealm card) {
         super(card);
     }
 

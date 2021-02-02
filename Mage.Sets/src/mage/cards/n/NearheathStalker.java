@@ -27,7 +27,7 @@ public final class NearheathStalker extends CardImpl {
         this.addAbility(new UndyingAbility());
     }
 
-    public NearheathStalker(final NearheathStalker card) {
+    private NearheathStalker(final NearheathStalker card) {
         super(card);
     }
 

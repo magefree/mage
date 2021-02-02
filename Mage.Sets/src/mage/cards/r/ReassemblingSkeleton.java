@@ -30,7 +30,7 @@ public final class ReassemblingSkeleton extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl("{1}{B}")));
     }
 
-    public ReassemblingSkeleton(final ReassemblingSkeleton card) {
+    private ReassemblingSkeleton(final ReassemblingSkeleton card) {
         super(card);
     }
 

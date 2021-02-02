@@ -45,7 +45,7 @@ public final class Fasting extends CardImpl {
 
     }
 
-    public Fasting(final Fasting card) {
+    private Fasting(final Fasting card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class Web extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ReachAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public Web(final Web card) {
+    private Web(final Web card) {
         super(card);
     }
 

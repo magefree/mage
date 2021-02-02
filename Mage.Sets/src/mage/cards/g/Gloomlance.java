@@ -28,7 +28,7 @@ public final class Gloomlance extends CardImpl {
 
     }
 
-    public Gloomlance(final Gloomlance card) {
+    private Gloomlance(final Gloomlance card) {
         super(card);
     }
 

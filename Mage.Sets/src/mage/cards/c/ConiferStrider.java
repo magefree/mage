@@ -25,7 +25,7 @@ public final class ConiferStrider extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
     }
 
-    public ConiferStrider(final ConiferStrider card) {
+    private ConiferStrider(final ConiferStrider card) {
         super(card);
     }
 

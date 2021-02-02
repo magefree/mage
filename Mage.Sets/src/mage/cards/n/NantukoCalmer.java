@@ -49,7 +49,7 @@ public final class NantukoCalmer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NantukoCalmer(final NantukoCalmer card) {
+    private NantukoCalmer(final NantukoCalmer card) {
         super(card);
     }
 

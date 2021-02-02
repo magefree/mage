@@ -31,7 +31,7 @@ public final class FierceInvocation extends CardImpl {
         this.getSpellAbility().addEffect(new FierceInvocationEffect());
     }
 
-    public FierceInvocation(final FierceInvocation card) {
+    private FierceInvocation(final FierceInvocation card) {
         super(card);
     }
 

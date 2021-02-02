@@ -21,7 +21,7 @@ public final class CanalMonitor extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public CanalMonitor(final CanalMonitor card) {
+    private CanalMonitor(final CanalMonitor card) {
         super(card);
     }
 

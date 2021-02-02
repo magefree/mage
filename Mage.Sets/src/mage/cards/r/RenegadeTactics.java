@@ -26,7 +26,7 @@ public final class RenegadeTactics extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public RenegadeTactics(final RenegadeTactics card) {
+    private RenegadeTactics(final RenegadeTactics card) {
         super(card);
     }
 

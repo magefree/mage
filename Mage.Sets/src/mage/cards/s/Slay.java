@@ -34,7 +34,7 @@ public final class Slay extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Slay(final Slay card) {
+    private Slay(final Slay card) {
         super(card);
     }
 

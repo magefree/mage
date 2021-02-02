@@ -39,7 +39,7 @@ public final class RavingDead extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new RavingDeadDamageEffect(), false, true));
     }
 
-    public RavingDead(final RavingDead card) {
+    private RavingDead(final RavingDead card) {
         super(card);
     }
 

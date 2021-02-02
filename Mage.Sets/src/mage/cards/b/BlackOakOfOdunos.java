@@ -49,7 +49,7 @@ public final class BlackOakOfOdunos extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlackOakOfOdunos(final BlackOakOfOdunos card) {
+    private BlackOakOfOdunos(final BlackOakOfOdunos card) {
         super(card);
     }
 

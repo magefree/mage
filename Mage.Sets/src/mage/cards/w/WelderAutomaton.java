@@ -30,7 +30,7 @@ public final class WelderAutomaton extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), new ManaCostsImpl("{3}{R}")));
     }
 
-    public WelderAutomaton(final WelderAutomaton card) {
+    private WelderAutomaton(final WelderAutomaton card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class LoomingShade extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{B}")));
     }
 
-    public LoomingShade(final LoomingShade card) {
+    private LoomingShade(final LoomingShade card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class Insolence extends CardImpl {
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DamageAttachedControllerEffect(2), "enchanted creature"));
     }
 
-    public Insolence(final Insolence card) {
+    private Insolence(final Insolence card) {
         super(card);
     }
 

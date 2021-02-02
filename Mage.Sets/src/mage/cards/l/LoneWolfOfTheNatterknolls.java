@@ -48,7 +48,7 @@ public final class LoneWolfOfTheNatterknolls extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public LoneWolfOfTheNatterknolls(final LoneWolfOfTheNatterknolls card) {
+    private LoneWolfOfTheNatterknolls(final LoneWolfOfTheNatterknolls card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class TIEInterceptor extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new TIEInterceptorEffect(), false));
     }
 
-    public TIEInterceptor(final TIEInterceptor card) {
+    private TIEInterceptor(final TIEInterceptor card) {
         super(card);
     }
 

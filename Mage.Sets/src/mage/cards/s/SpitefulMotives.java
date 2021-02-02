@@ -50,7 +50,7 @@ public final class SpitefulMotives extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpitefulMotives(final SpitefulMotives card) {
+    private SpitefulMotives(final SpitefulMotives card) {
         super(card);
     }
 

@@ -39,7 +39,7 @@ public final class HalamDjinn extends CardImpl {
                         "{this} gets -2/-2 as long as red is the most common color among all permanents or is tied for most common")));
     }
 
-    public HalamDjinn(final HalamDjinn card) {
+    private HalamDjinn(final HalamDjinn card) {
         super(card);
     }
 

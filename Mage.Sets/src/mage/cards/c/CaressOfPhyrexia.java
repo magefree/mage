@@ -26,7 +26,7 @@ public final class CaressOfPhyrexia extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public CaressOfPhyrexia(final CaressOfPhyrexia card) {
+    private CaressOfPhyrexia(final CaressOfPhyrexia card) {
         super(card);
     }
 

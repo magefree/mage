@@ -40,7 +40,7 @@ public final class SylvanSafekeeper extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SylvanSafekeeper(final SylvanSafekeeper card) {
+    private SylvanSafekeeper(final SylvanSafekeeper card) {
         super(card);
     }
 

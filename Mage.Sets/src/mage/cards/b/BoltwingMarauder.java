@@ -43,7 +43,7 @@ public final class BoltwingMarauder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BoltwingMarauder(final BoltwingMarauder card) {
+    private BoltwingMarauder(final BoltwingMarauder card) {
         super(card);
     }
 

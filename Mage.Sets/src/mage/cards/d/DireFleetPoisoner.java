@@ -57,7 +57,7 @@ public final class DireFleetPoisoner extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DireFleetPoisoner(final DireFleetPoisoner card) {
+    private DireFleetPoisoner(final DireFleetPoisoner card) {
         super(card);
     }
 

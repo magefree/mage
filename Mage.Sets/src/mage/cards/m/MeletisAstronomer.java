@@ -35,7 +35,7 @@ public final class MeletisAstronomer extends CardImpl {
         this.addAbility(new HeroicAbility(new LookLibraryAndPickControllerEffect(3, 1, filter, true, false, Zone.HAND, true), false));
     }
 
-    public MeletisAstronomer(final MeletisAstronomer card) {
+    private MeletisAstronomer(final MeletisAstronomer card) {
         super(card);
     }
 

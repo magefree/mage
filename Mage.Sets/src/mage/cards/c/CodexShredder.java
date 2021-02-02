@@ -37,7 +37,7 @@ public final class CodexShredder extends CardImpl {
         
     }
 
-    public CodexShredder(final CodexShredder card) {
+    private CodexShredder(final CodexShredder card) {
         super(card);
     }
 

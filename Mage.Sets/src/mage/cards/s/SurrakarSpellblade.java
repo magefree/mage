@@ -44,7 +44,7 @@ public final class SurrakarSpellblade extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.CHARGE)), true));
     }
 
-    public SurrakarSpellblade(final SurrakarSpellblade card) {
+    private SurrakarSpellblade(final SurrakarSpellblade card) {
         super(card);
     }
 

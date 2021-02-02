@@ -44,7 +44,7 @@ public final class BloodCursedKnight extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodCursedKnight(final BloodCursedKnight card) {
+    private BloodCursedKnight(final BloodCursedKnight card) {
         super(card);
     }
 

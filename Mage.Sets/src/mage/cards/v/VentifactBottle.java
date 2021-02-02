@@ -49,7 +49,7 @@ public final class VentifactBottle extends CardImpl {
                 + "Add {C} for each charge counter removed this way"));
     }
 
-    public VentifactBottle(final VentifactBottle card) {
+    private VentifactBottle(final VentifactBottle card) {
         super(card);
     }
 

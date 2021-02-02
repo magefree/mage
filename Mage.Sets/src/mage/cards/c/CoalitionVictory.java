@@ -54,7 +54,7 @@ public final class CoalitionVictory extends CardImpl {
                 "You win the game if you control a land of each basic land type and a creature of each color."));
     }
 
-    public CoalitionVictory(final CoalitionVictory card) {
+    private CoalitionVictory(final CoalitionVictory card) {
         super(card);
     }
 

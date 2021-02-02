@@ -29,7 +29,7 @@ public final class BoonReflection extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoonReflectionEffect()));
     }
 
-    public BoonReflection(final BoonReflection card) {
+    private BoonReflection(final BoonReflection card) {
         super(card);
     }
 

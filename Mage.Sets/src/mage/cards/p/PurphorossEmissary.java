@@ -44,7 +44,7 @@ public final class PurphorossEmissary extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PurphorossEmissary(final PurphorossEmissary card) {
+    private PurphorossEmissary(final PurphorossEmissary card) {
         super(card);
     }
 

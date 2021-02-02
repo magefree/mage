@@ -33,7 +33,7 @@ public final class StalkingDrone extends CardImpl {
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 2, Duration.EndOfTurn), new ManaCostsImpl("{C}")));
     }
 
-    public StalkingDrone(final StalkingDrone card) {
+    private StalkingDrone(final StalkingDrone card) {
         super(card);
     }
 

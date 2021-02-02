@@ -38,7 +38,7 @@ public final class JacesArchivist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JacesArchivist(final JacesArchivist card) {
+    private JacesArchivist(final JacesArchivist card) {
         super(card);
     }
 

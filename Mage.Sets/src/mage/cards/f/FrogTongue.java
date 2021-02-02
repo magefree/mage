@@ -38,7 +38,7 @@ public final class FrogTongue extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ReachAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public FrogTongue(final FrogTongue card) {
+    private FrogTongue(final FrogTongue card) {
         super(card);
     }
 

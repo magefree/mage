@@ -32,7 +32,7 @@ public final class DemonmailHauberk extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(4, 2)));
     }
 
-    public DemonmailHauberk(final DemonmailHauberk card) {
+    private DemonmailHauberk(final DemonmailHauberk card) {
         super(card);
     }
 

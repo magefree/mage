@@ -31,7 +31,7 @@ public final class RainOfGore extends CardImpl {
 
     }
 
-    public RainOfGore(final RainOfGore card) {
+    private RainOfGore(final RainOfGore card) {
         super(card);
     }
 

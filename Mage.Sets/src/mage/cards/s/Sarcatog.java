@@ -44,7 +44,7 @@ public final class Sarcatog extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("artifact")))));
     }
 
-    public Sarcatog(final Sarcatog card) {
+    private Sarcatog(final Sarcatog card) {
         super(card);
     }
 

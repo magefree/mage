@@ -29,7 +29,7 @@ public final class FalseProphet extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new ExileAllEffect(new FilterCreaturePermanent())));
     }
 
-    public FalseProphet(final FalseProphet card) {
+    private FalseProphet(final FalseProphet card) {
         super(card);
     }
 

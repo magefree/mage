@@ -26,7 +26,7 @@ public final class HearthfireHobgoblin extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
     }
 
-    public HearthfireHobgoblin(final HearthfireHobgoblin card) {
+    private HearthfireHobgoblin(final HearthfireHobgoblin card) {
         super(card);
     }
 

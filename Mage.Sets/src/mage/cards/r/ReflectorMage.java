@@ -45,7 +45,7 @@ public final class ReflectorMage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ReflectorMage(final ReflectorMage card) {
+    private ReflectorMage(final ReflectorMage card) {
         super(card);
     }
 

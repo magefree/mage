@@ -26,7 +26,7 @@ public final class RidgeRannet extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public RidgeRannet(final RidgeRannet card) {
+    private RidgeRannet(final RidgeRannet card) {
         super(card);
     }
 

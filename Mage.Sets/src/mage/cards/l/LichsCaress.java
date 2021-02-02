@@ -23,7 +23,7 @@ public final class LichsCaress extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public LichsCaress(final LichsCaress card) {
+    private LichsCaress(final LichsCaress card) {
         super(card);
     }
 

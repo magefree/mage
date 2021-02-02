@@ -40,7 +40,7 @@ public final class InfectedVermin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public InfectedVermin(final InfectedVermin card) {
+    private InfectedVermin(final InfectedVermin card) {
         super(card);
     }
 

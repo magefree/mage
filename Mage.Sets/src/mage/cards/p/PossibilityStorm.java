@@ -39,7 +39,7 @@ public final class PossibilityStorm extends CardImpl {
         this.addAbility(new PossibilityStormTriggeredAbility());
     }
 
-    public PossibilityStorm(final PossibilityStorm card) {
+    private PossibilityStorm(final PossibilityStorm card) {
         super(card);
     }
 

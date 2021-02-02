@@ -47,7 +47,7 @@ public final class EraOfInnovation extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EraOfInnovation(final EraOfInnovation card) {
+    private EraOfInnovation(final EraOfInnovation card) {
         super(card);
     }
 

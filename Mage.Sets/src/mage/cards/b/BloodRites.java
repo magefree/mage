@@ -29,7 +29,7 @@ public final class BloodRites extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodRites(final BloodRites card) {
+    private BloodRites(final BloodRites card) {
         super(card);
     }
 

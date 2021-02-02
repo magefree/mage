@@ -34,7 +34,7 @@ public final class EchoingRuin extends CardImpl {
         this.getSpellAbility().addEffect(new EchoingRuinEffect());
     }
 
-    public EchoingRuin(final EchoingRuin card) {
+    private EchoingRuin(final EchoingRuin card) {
         super(card);
     }
 

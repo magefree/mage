@@ -48,7 +48,7 @@ public final class StitchersGraft extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
-    public StitchersGraft(final StitchersGraft card) {
+    private StitchersGraft(final StitchersGraft card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class RampagingWerewolf extends CardImpl {
 
     }
 
-    public RampagingWerewolf(final RampagingWerewolf card) {
+    private RampagingWerewolf(final RampagingWerewolf card) {
         super(card);
     }
 

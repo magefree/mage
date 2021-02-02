@@ -48,7 +48,7 @@ public final class KravTheUnredeemed extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KravTheUnredeemed(final KravTheUnredeemed card) {
+    private KravTheUnredeemed(final KravTheUnredeemed card) {
         super(card);
     }
 

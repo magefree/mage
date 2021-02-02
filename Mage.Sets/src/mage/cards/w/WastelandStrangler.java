@@ -39,7 +39,7 @@ public final class WastelandStrangler extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WastelandStrangler(final WastelandStrangler card) {
+    private WastelandStrangler(final WastelandStrangler card) {
         super(card);
     }
 

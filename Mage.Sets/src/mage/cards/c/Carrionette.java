@@ -37,7 +37,7 @@ public final class Carrionette extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Carrionette(final Carrionette card) {
+    private Carrionette(final Carrionette card) {
         super(card);
     }
 

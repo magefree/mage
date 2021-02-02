@@ -49,7 +49,7 @@ public final class ThelonsCurse extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ThelonsCurseEffect(), TargetController.ANY, false));
     }
 
-    public ThelonsCurse(final ThelonsCurse card) {
+    private ThelonsCurse(final ThelonsCurse card) {
         super(card);
     }
 

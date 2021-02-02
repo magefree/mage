@@ -55,7 +55,7 @@ public final class PentarchPaladin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PentarchPaladin(final PentarchPaladin card) {
+    private PentarchPaladin(final PentarchPaladin card) {
         super(card);
     }
 

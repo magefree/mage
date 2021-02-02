@@ -30,7 +30,7 @@ public final class RavagedHighlands extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RavagedHighlands(final RavagedHighlands card) {
+    private RavagedHighlands(final RavagedHighlands card) {
         super(card);
     }
 

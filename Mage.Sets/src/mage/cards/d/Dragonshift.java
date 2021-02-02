@@ -52,7 +52,7 @@ public final class Dragonshift extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Dragonshift(final Dragonshift card) {
+    private Dragonshift(final Dragonshift card) {
         super(card);
     }
 

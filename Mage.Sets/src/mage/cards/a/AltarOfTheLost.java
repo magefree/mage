@@ -34,7 +34,7 @@ public final class AltarOfTheLost extends CardImpl {
         this.addAbility(new ConditionalAnyColorManaAbility(2, new AltarOfTheLostManaBuilder()));
     }
 
-    public AltarOfTheLost(final AltarOfTheLost card) {
+    private AltarOfTheLost(final AltarOfTheLost card) {
         super(card);
     }
 

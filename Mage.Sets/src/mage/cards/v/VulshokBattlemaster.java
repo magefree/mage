@@ -34,7 +34,7 @@ public final class VulshokBattlemaster extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new VulshokBattlemasterEffect()));
     }
 
-    public VulshokBattlemaster(final VulshokBattlemaster card) {
+    private VulshokBattlemaster(final VulshokBattlemaster card) {
         super(card);
     }
 

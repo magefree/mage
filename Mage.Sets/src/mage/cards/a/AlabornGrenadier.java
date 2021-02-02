@@ -27,7 +27,7 @@ public final class AlabornGrenadier extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public AlabornGrenadier(final AlabornGrenadier card) {
+    private AlabornGrenadier(final AlabornGrenadier card) {
         super(card);
     }
 

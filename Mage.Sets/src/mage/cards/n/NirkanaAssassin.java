@@ -30,7 +30,7 @@ public final class NirkanaAssassin extends CardImpl {
         this.addAbility(new GainLifeControllerTriggeredAbility(new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), false));
     }
 
-    public NirkanaAssassin(final NirkanaAssassin card) {
+    private NirkanaAssassin(final NirkanaAssassin card) {
         super(card);
     }
 

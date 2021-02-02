@@ -29,7 +29,7 @@ public final class IllusionaryForces extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{U}")));
     }
 
-    public IllusionaryForces(final IllusionaryForces card) {
+    private IllusionaryForces(final IllusionaryForces card) {
         super(card);
     }
 

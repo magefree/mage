@@ -38,7 +38,7 @@ public final class FeastOfTheUnicorn extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(4, 0, Duration.WhileOnBattlefield)));
     }
 
-    public FeastOfTheUnicorn(final FeastOfTheUnicorn card) {
+    private FeastOfTheUnicorn(final FeastOfTheUnicorn card) {
         super(card);
     }
 

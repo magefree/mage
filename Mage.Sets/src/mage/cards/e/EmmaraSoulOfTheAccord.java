@@ -32,7 +32,7 @@ public final class EmmaraSoulOfTheAccord extends CardImpl {
         ));
     }
 
-    public EmmaraSoulOfTheAccord(final EmmaraSoulOfTheAccord card) {
+    private EmmaraSoulOfTheAccord(final EmmaraSoulOfTheAccord card) {
         super(card);
     }
 

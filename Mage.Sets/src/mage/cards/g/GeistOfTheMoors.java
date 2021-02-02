@@ -26,7 +26,7 @@ public final class GeistOfTheMoors extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public GeistOfTheMoors(final GeistOfTheMoors card) {
+    private GeistOfTheMoors(final GeistOfTheMoors card) {
         super(card);
     }
 

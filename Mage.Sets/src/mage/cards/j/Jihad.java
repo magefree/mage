@@ -54,7 +54,7 @@ public final class Jihad extends CardImpl {
         this.addAbility(new JihadTriggeredAbility(new SacrificeSourceEffect()));
     }
 
-    public Jihad(final Jihad card) {
+    private Jihad(final Jihad card) {
         super(card);
     }
 

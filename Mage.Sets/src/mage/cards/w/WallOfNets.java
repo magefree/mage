@@ -39,7 +39,7 @@ public final class WallOfNets extends CardImpl {
             Zone.BATTLEFIELD, "return all cards exiled with {this} to the battlefield under their owners' control"), false));
     }
 
-    public WallOfNets(final WallOfNets card) {
+    private WallOfNets(final WallOfNets card) {
         super(card);
     }
 

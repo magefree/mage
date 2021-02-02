@@ -43,7 +43,7 @@ public final class RashmiEternitiesCrafter extends CardImpl {
         this.addAbility(new RashmiEternitiesCrafterTriggeredAbility(), new SpellsCastWatcher());
     }
 
-    public RashmiEternitiesCrafter(final RashmiEternitiesCrafter card) {
+    private RashmiEternitiesCrafter(final RashmiEternitiesCrafter card) {
         super(card);
     }
 

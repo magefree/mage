@@ -50,7 +50,7 @@ public final class UktabiWildcats extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UktabiWildcats(final UktabiWildcats card) {
+    private UktabiWildcats(final UktabiWildcats card) {
         super(card);
     }
 

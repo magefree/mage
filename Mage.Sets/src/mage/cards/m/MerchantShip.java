@@ -39,7 +39,7 @@ public final class MerchantShip extends CardImpl {
                 new SacrificeSourceEffect()));
    }
 
-    public MerchantShip(final MerchantShip card) {
+    private MerchantShip(final MerchantShip card) {
         super(card);
     }
 

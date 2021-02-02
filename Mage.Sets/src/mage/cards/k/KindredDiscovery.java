@@ -31,7 +31,7 @@ public final class KindredDiscovery extends CardImpl {
         this.addAbility(new EntersBattlefieldOrAttacksAllTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, false));
     }
 
-    public KindredDiscovery(final KindredDiscovery card) {
+    private KindredDiscovery(final KindredDiscovery card) {
         super(card);
     }
 

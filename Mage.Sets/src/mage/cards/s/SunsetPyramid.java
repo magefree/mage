@@ -42,7 +42,7 @@ public final class SunsetPyramid extends CardImpl {
 
     }
 
-    public SunsetPyramid(final SunsetPyramid card) {
+    private SunsetPyramid(final SunsetPyramid card) {
         super(card);
     }
 

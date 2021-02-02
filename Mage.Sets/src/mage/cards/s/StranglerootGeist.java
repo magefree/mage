@@ -28,7 +28,7 @@ public final class StranglerootGeist extends CardImpl {
         this.addAbility(new UndyingAbility());
     }
 
-    public StranglerootGeist(final StranglerootGeist card) {
+    private StranglerootGeist(final StranglerootGeist card) {
         super(card);
     }
 

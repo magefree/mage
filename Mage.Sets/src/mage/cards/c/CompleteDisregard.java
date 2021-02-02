@@ -35,7 +35,7 @@ public final class CompleteDisregard extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public CompleteDisregard(final CompleteDisregard card) {
+    private CompleteDisregard(final CompleteDisregard card) {
         super(card);
     }
 

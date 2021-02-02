@@ -40,7 +40,7 @@ public final class TombRobber extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TombRobber(final TombRobber card) {
+    private TombRobber(final TombRobber card) {
         super(card);
     }
 

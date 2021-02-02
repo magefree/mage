@@ -43,7 +43,7 @@ public final class AncestralVengeance extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Duration.WhileOnBattlefield)));
     }
 
-    public AncestralVengeance(final AncestralVengeance card) {
+    private AncestralVengeance(final AncestralVengeance card) {
         super(card);
     }
 

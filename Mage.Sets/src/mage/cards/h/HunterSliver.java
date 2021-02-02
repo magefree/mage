@@ -32,7 +32,7 @@ public final class HunterSliver extends CardImpl {
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
-    public HunterSliver(final HunterSliver card) {
+    private HunterSliver(final HunterSliver card) {
         super(card);
     }
 

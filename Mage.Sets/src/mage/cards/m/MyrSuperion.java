@@ -32,7 +32,7 @@ public final class MyrSuperion extends CardImpl {
         this.getSpellAbility().getManaCosts().setSourceFilter(StaticFilters.FILTER_PERMANENT_CREATURES);
     }
 
-    public MyrSuperion(final MyrSuperion card) {
+    private MyrSuperion(final MyrSuperion card) {
         super(card);
     }
 

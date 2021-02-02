@@ -36,7 +36,7 @@ public final class LagonnaBandElder extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LagonnaBandElder(final LagonnaBandElder card) {
+    private LagonnaBandElder(final LagonnaBandElder card) {
         super(card);
     }
 

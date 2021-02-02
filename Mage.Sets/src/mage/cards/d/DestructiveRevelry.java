@@ -29,7 +29,7 @@ public final class DestructiveRevelry extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public DestructiveRevelry(final DestructiveRevelry card) {
+    private DestructiveRevelry(final DestructiveRevelry card) {
         super(card);
     }
 

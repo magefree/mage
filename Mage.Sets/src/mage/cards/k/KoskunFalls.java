@@ -45,7 +45,7 @@ public final class KoskunFalls extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouUnlessPayManaAllEffect(new ManaCostsImpl("{2}"))));
     }
 
-    public KoskunFalls(final KoskunFalls card) {
+    private KoskunFalls(final KoskunFalls card) {
         super(card);
     }
 

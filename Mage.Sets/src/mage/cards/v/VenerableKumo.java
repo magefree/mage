@@ -26,7 +26,7 @@ public final class VenerableKumo extends CardImpl {
         this.addAbility(new SoulshiftAbility(4));
     }
 
-    public VenerableKumo(final VenerableKumo card) {
+    private VenerableKumo(final VenerableKumo card) {
         super(card);
     }
 

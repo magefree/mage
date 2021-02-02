@@ -61,7 +61,7 @@ public final class KozilekTheGreatDistortion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KozilekTheGreatDistortion(final KozilekTheGreatDistortion card) {
+    private KozilekTheGreatDistortion(final KozilekTheGreatDistortion card) {
         super(card);
     }
 

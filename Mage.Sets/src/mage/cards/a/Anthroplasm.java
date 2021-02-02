@@ -42,7 +42,7 @@ public final class Anthroplasm extends CardImpl {
 
     }
 
-    public Anthroplasm(final Anthroplasm card) {
+    private Anthroplasm(final Anthroplasm card) {
         super(card);
     }
 

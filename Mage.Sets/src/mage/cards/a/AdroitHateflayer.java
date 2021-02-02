@@ -30,7 +30,7 @@ public final class AdroitHateflayer extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new LoseLifeAllPlayersEffect(2), false));
     }
 
-    public AdroitHateflayer(final AdroitHateflayer card) {
+    private AdroitHateflayer(final AdroitHateflayer card) {
         super(card);
     }
 

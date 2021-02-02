@@ -32,7 +32,7 @@ public final class PainSeer extends CardImpl {
         this.addAbility(new InspiredAbility(new PainSeerEffect()));
     }
 
-    public PainSeer(final PainSeer card) {
+    private PainSeer(final PainSeer card) {
         super(card);
     }
 

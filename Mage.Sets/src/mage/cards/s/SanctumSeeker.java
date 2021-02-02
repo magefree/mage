@@ -42,7 +42,7 @@ public final class SanctumSeeker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SanctumSeeker(final SanctumSeeker card) {
+    private SanctumSeeker(final SanctumSeeker card) {
         super(card);
     }
 

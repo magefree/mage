@@ -38,7 +38,7 @@ public final class ArgothianEnchantress extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), filter, false));
     }
 
-    public ArgothianEnchantress(final ArgothianEnchantress card) {
+    private ArgothianEnchantress(final ArgothianEnchantress card) {
         super(card);
     }
 

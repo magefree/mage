@@ -33,7 +33,7 @@ public final class RiteOfConsumption extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    public RiteOfConsumption(final RiteOfConsumption card) {
+    private RiteOfConsumption(final RiteOfConsumption card) {
         super(card);
     }
 

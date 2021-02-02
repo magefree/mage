@@ -26,7 +26,7 @@ public final class GoblinBrigand extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
     }
 
-    public GoblinBrigand(final GoblinBrigand card) {
+    private GoblinBrigand(final GoblinBrigand card) {
         super(card);
     }
 

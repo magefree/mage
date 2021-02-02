@@ -36,7 +36,7 @@ public final class BalefulEidolon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BalefulEidolon(final BalefulEidolon card) {
+    private BalefulEidolon(final BalefulEidolon card) {
         super(card);
     }
 

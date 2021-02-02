@@ -58,7 +58,7 @@ public final class GoblinTrashmaster extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinTrashmaster(final GoblinTrashmaster card) {
+    private GoblinTrashmaster(final GoblinTrashmaster card) {
         super(card);
     }
 

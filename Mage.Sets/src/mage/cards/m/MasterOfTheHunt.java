@@ -28,7 +28,7 @@ public final class MasterOfTheHunt extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WolvesOfTheHuntToken()), new ManaCostsImpl("{2}{G}{G}")));
     }
 
-    public MasterOfTheHunt(final MasterOfTheHunt card) {
+    private MasterOfTheHunt(final MasterOfTheHunt card) {
         super(card);
     }
 

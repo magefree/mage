@@ -40,7 +40,7 @@ public final class PillarOfWar extends CardImpl {
         
     }
 
-    public PillarOfWar(final PillarOfWar card) {
+    private PillarOfWar(final PillarOfWar card) {
         super(card);
     }
 

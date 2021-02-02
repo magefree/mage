@@ -29,7 +29,7 @@ public final class WallOfRazors extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public WallOfRazors(final WallOfRazors card) {
+    private WallOfRazors(final WallOfRazors card) {
         super(card);
     }
 

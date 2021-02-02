@@ -42,7 +42,7 @@ public final class ElvishPathcutter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElvishPathcutter(final ElvishPathcutter card) {
+    private ElvishPathcutter(final ElvishPathcutter card) {
         super(card);
     }
 

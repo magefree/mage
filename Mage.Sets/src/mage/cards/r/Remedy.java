@@ -24,7 +24,7 @@ public final class Remedy extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(5));
     }
 
-    public Remedy(final Remedy card) {
+    private Remedy(final Remedy card) {
         super(card);
     }
 

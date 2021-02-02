@@ -50,7 +50,7 @@ public final class ArchdemonOfGreed extends CardImpl {
         this.addAbility(new OnEventTriggeredAbility(GameEvent.EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new ArchdemonOfGreedEffect(), false));
     }
 
-    public ArchdemonOfGreed(final ArchdemonOfGreed card) {
+    private ArchdemonOfGreed(final ArchdemonOfGreed card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class ShieldmageAdvocate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShieldmageAdvocate(final ShieldmageAdvocate card) {
+    private ShieldmageAdvocate(final ShieldmageAdvocate card) {
         super(card);
     }
 

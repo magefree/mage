@@ -33,7 +33,7 @@ public final class AscendingAven extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{2}{U}")));
     }
 
-    public AscendingAven(final AscendingAven card) {
+    private AscendingAven(final AscendingAven card) {
         super(card);
     }
 

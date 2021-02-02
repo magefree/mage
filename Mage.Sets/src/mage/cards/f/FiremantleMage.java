@@ -32,7 +32,7 @@ public final class FiremantleMage extends CardImpl {
                 new GainAbilityControlledEffect(new MenaceAbility(), Duration.EndOfTurn, FILTER_PERMANENT_CREATURES), false));
     }
 
-    public FiremantleMage(final FiremantleMage card) {
+    private FiremantleMage(final FiremantleMage card) {
         super(card);
     }
 

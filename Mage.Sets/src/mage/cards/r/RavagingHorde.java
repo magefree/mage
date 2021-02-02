@@ -32,7 +32,7 @@ public final class RavagingHorde extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RavagingHorde(final RavagingHorde card) {
+    private RavagingHorde(final RavagingHorde card) {
         super(card);
     }
 

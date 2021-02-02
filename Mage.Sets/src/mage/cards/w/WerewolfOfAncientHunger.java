@@ -56,7 +56,7 @@ public final class WerewolfOfAncientHunger extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public WerewolfOfAncientHunger(final WerewolfOfAncientHunger card) {
+    private WerewolfOfAncientHunger(final WerewolfOfAncientHunger card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class MonasterySiege extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MonasterySiegeCostIncreaseEffect()));
     }
 
-    public MonasterySiege(final MonasterySiege card) {
+    private MonasterySiege(final MonasterySiege card) {
         super(card);
     }
 

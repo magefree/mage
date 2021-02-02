@@ -52,7 +52,7 @@ public final class ChandraRoaringFlame extends CardImpl {
 
     }
 
-    public ChandraRoaringFlame(final ChandraRoaringFlame card) {
+    private ChandraRoaringFlame(final ChandraRoaringFlame card) {
         super(card);
     }
 

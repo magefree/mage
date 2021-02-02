@@ -53,7 +53,7 @@ public final class DreamsOfTheDead extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DreamsOfTheDead(final DreamsOfTheDead card) {
+    private DreamsOfTheDead(final DreamsOfTheDead card) {
         super(card);
     }
 

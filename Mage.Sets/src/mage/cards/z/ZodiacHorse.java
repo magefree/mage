@@ -26,7 +26,7 @@ public final class ZodiacHorse extends CardImpl {
         this.addAbility(new IslandwalkAbility());
     }
 
-    public ZodiacHorse(final ZodiacHorse card) {
+    private ZodiacHorse(final ZodiacHorse card) {
         super(card);
     }
 

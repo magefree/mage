@@ -57,7 +57,7 @@ public final class PrisonTerm extends CardImpl {
                 Zone.BATTLEFIELD, new PrisonTermEffect(), filter, true, SetTargetPointer.PERMANENT, "Whenever a creature enters the battlefield under an opponent's control, you may attach Prison Term to that creature."));
     }
 
-    public PrisonTerm(final PrisonTerm card) {
+    private PrisonTerm(final PrisonTerm card) {
         super(card);
     }
 

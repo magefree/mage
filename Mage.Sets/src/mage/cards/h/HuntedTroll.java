@@ -42,7 +42,7 @@ public final class HuntedTroll extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
-    public HuntedTroll(final HuntedTroll card) {
+    private HuntedTroll(final HuntedTroll card) {
         super(card);
     }
 

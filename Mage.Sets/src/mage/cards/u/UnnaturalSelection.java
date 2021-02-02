@@ -27,7 +27,7 @@ public final class UnnaturalSelection extends CardImpl {
         this.addAbility(ability);
     }
 
-    public UnnaturalSelection(final UnnaturalSelection card) {
+    private UnnaturalSelection(final UnnaturalSelection card) {
         super(card);
     }
 

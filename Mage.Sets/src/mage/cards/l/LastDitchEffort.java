@@ -29,7 +29,7 @@ public final class LastDitchEffort extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public LastDitchEffort(final LastDitchEffort card) {
+    private LastDitchEffort(final LastDitchEffort card) {
         super(card);
     }
 

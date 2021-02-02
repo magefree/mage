@@ -38,7 +38,7 @@ public final class LensOfClarity extends CardImpl {
         this.addAbility(new LensOfClarityLookFaceDownAbility());
     }
 
-    public LensOfClarity(final LensOfClarity card) {
+    private LensOfClarity(final LensOfClarity card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class SphereOfTheSuns extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SphereOfTheSuns(final SphereOfTheSuns card) {
+    private SphereOfTheSuns(final SphereOfTheSuns card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class PaintersServant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PaintersServantEffect()));
     }
 
-    public PaintersServant(final PaintersServant card) {
+    private PaintersServant(final PaintersServant card) {
         super(card);
     }
 

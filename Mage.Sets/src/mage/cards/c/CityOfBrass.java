@@ -25,7 +25,7 @@ public final class CityOfBrass extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
     }
 
-    public CityOfBrass(final CityOfBrass card) {
+    private CityOfBrass(final CityOfBrass card) {
         super(card);
     }
 

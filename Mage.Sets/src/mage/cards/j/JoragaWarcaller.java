@@ -56,7 +56,7 @@ public final class JoragaWarcaller extends CardImpl {
         
     }
 
-    public JoragaWarcaller(final JoragaWarcaller card) {
+    private JoragaWarcaller(final JoragaWarcaller card) {
         super(card);
     }
 

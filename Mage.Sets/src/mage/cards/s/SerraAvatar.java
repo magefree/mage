@@ -35,7 +35,7 @@ public final class SerraAvatar extends CardImpl {
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));
     }
 
-    public SerraAvatar(final SerraAvatar card) {
+    private SerraAvatar(final SerraAvatar card) {
         super(card);
     }
 

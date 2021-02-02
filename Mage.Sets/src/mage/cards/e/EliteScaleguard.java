@@ -49,7 +49,7 @@ public final class EliteScaleguard extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EliteScaleguard(final EliteScaleguard card) {
+    private EliteScaleguard(final EliteScaleguard card) {
         super(card);
     }
 

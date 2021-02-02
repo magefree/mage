@@ -36,7 +36,7 @@ public final class KasetoOrochiArchmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KasetoOrochiArchmage(final KasetoOrochiArchmage card) {
+    private KasetoOrochiArchmage(final KasetoOrochiArchmage card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class FemerefHealer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FemerefHealer(final FemerefHealer card) {
+    private FemerefHealer(final FemerefHealer card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class ReliquaryTower extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public ReliquaryTower(final ReliquaryTower card) {
+    private ReliquaryTower(final ReliquaryTower card) {
         super(card);
     }
 

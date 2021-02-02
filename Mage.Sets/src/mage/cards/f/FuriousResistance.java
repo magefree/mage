@@ -37,7 +37,7 @@ public final class FuriousResistance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
     }
 
-    public FuriousResistance(final FuriousResistance card) {
+    private FuriousResistance(final FuriousResistance card) {
         super(card);
     }
 

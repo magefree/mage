@@ -45,7 +45,7 @@ public final class WarmongerHellkite extends CardImpl {
 
     }
 
-    public WarmongerHellkite(final WarmongerHellkite card) {
+    private WarmongerHellkite(final WarmongerHellkite card) {
         super(card);
     }
 

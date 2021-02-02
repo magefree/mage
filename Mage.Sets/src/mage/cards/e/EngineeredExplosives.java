@@ -37,7 +37,7 @@ public final class EngineeredExplosives extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EngineeredExplosives(final EngineeredExplosives card) {
+    private EngineeredExplosives(final EngineeredExplosives card) {
         super(card);
     }
 

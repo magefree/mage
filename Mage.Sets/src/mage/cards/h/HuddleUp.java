@@ -26,7 +26,7 @@ public final class HuddleUp extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer(2));
     }
 
-    public HuddleUp(final HuddleUp card) {
+    private HuddleUp(final HuddleUp card) {
         super(card);
     }
 

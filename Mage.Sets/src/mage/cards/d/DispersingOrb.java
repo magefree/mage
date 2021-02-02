@@ -30,7 +30,7 @@ public final class DispersingOrb extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DispersingOrb(final DispersingOrb card) {
+    private DispersingOrb(final DispersingOrb card) {
         super(card);
     }
 

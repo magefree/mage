@@ -34,7 +34,7 @@ public final class Electropotence extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Electropotence(final Electropotence card) {
+    private Electropotence(final Electropotence card) {
         super(card);
     }
 

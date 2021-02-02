@@ -49,7 +49,7 @@ public final class EmeriaShepherd extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EmeriaShepherd(final EmeriaShepherd card) {
+    private EmeriaShepherd(final EmeriaShepherd card) {
         super(card);
     }
 

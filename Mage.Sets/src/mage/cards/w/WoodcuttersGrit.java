@@ -31,7 +31,7 @@ public final class WoodcuttersGrit extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public WoodcuttersGrit(final WoodcuttersGrit card) {
+    private WoodcuttersGrit(final WoodcuttersGrit card) {
         super(card);
     }
 

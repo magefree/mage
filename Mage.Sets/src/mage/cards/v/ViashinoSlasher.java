@@ -28,7 +28,7 @@ public final class ViashinoSlasher extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public ViashinoSlasher(final ViashinoSlasher card) {
+    private ViashinoSlasher(final ViashinoSlasher card) {
         super(card);
     }
 

@@ -67,7 +67,7 @@ public final class RescueFromTheUnderworld extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
-    public RescueFromTheUnderworld(final RescueFromTheUnderworld card) {
+    private RescueFromTheUnderworld(final RescueFromTheUnderworld card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class EarthenArms extends CardImpl {
         this.addAbility(new AwakenAbility(this, 4, "{6}{G}"));
     }
 
-    public EarthenArms(final EarthenArms card) {
+    private EarthenArms(final EarthenArms card) {
         super(card);
     }
 

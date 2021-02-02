@@ -23,7 +23,7 @@ public final class ElvishWarrior extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public ElvishWarrior(final ElvishWarrior card) {
+    private ElvishWarrior(final ElvishWarrior card) {
         super(card);
     }
 

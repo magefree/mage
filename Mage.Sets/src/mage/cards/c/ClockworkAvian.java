@@ -74,7 +74,7 @@ public final class ClockworkAvian extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ClockworkAvian(final ClockworkAvian card) {
+    private ClockworkAvian(final ClockworkAvian card) {
         super(card);
     }
 

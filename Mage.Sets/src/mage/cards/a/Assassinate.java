@@ -31,7 +31,7 @@ public final class Assassinate extends CardImpl {
 
     }
 
-    public Assassinate(final Assassinate card) {
+    private Assassinate(final Assassinate card) {
         super(card);
     }
 

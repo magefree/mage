@@ -36,7 +36,7 @@ public final class CostlyPlunder extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
     }
 
-    public CostlyPlunder(final CostlyPlunder card) {
+    private CostlyPlunder(final CostlyPlunder card) {
         super(card);
     }
 

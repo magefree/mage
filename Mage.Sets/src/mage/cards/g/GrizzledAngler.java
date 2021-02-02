@@ -40,7 +40,7 @@ public final class GrizzledAngler extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrizzledAnglerEffect(), new TapSourceCost()));
     }
 
-    public GrizzledAngler(final GrizzledAngler card) {
+    private GrizzledAngler(final GrizzledAngler card) {
         super(card);
     }
 

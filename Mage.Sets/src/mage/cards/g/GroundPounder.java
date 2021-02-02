@@ -44,7 +44,7 @@ public final class GroundPounder extends CardImpl {
         this.addAbility(new GroundPounderTriggeredAbility());
     }
 
-    public GroundPounder(final GroundPounder card) {
+    private GroundPounder(final GroundPounder card) {
         super(card);
     }
 

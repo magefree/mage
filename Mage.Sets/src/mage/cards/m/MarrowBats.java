@@ -32,7 +32,7 @@ public final class MarrowBats extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new PayLifeCost(4)));
     }
 
-    public MarrowBats(final MarrowBats card) {
+    private MarrowBats(final MarrowBats card) {
         super(card);
     }
 

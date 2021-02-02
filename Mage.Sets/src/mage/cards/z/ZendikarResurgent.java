@@ -35,7 +35,7 @@ public final class ZendikarResurgent extends CardImpl {
                 new DrawCardSourceControllerEffect(1), StaticFilters.FILTER_SPELL_A_CREATURE, false));
     }
 
-    public ZendikarResurgent(final ZendikarResurgent card) {
+    private ZendikarResurgent(final ZendikarResurgent card) {
         super(card);
     }
 

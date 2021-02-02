@@ -36,7 +36,7 @@ public final class KrarkClanStoker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KrarkClanStoker(final KrarkClanStoker card) {
+    private KrarkClanStoker(final KrarkClanStoker card) {
         super(card);
     }
 

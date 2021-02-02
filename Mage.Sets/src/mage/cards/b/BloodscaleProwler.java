@@ -25,7 +25,7 @@ public final class BloodscaleProwler extends CardImpl {
         this.addAbility(new BloodthirstAbility(1));
     }
 
-    public BloodscaleProwler(final BloodscaleProwler card) {
+    private BloodscaleProwler(final BloodscaleProwler card) {
         super(card);
     }
 

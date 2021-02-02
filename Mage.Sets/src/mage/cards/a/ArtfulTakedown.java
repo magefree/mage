@@ -44,7 +44,7 @@ public final class ArtfulTakedown extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public ArtfulTakedown(final ArtfulTakedown card) {
+    private ArtfulTakedown(final ArtfulTakedown card) {
         super(card);
     }
 

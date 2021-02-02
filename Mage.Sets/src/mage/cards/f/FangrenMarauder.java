@@ -31,7 +31,7 @@ public final class FangrenMarauder extends CardImpl {
                 "Whenever an artifact is put into a graveyard from the battlefield, ", true));
     }
 
-    public FangrenMarauder(final FangrenMarauder card) {
+    private FangrenMarauder(final FangrenMarauder card) {
         super(card);
     }
 

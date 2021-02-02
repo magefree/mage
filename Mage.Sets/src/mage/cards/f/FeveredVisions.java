@@ -27,7 +27,7 @@ public final class FeveredVisions extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new FeveredVisionsEffect(), TargetController.ANY, false));
     }
 
-    public FeveredVisions(final FeveredVisions card) {
+    private FeveredVisions(final FeveredVisions card) {
         super(card);
     }
 

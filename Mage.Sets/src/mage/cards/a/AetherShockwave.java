@@ -36,7 +36,7 @@ public final class AetherShockwave extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public AetherShockwave(final AetherShockwave card) {
+    private AetherShockwave(final AetherShockwave card) {
         super(card);
     }
 

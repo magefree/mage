@@ -48,7 +48,7 @@ public final class MinionOfTeveshSzat extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MinionOfTeveshSzat(final MinionOfTeveshSzat card) {
+    private MinionOfTeveshSzat(final MinionOfTeveshSzat card) {
         super(card);
     }
 

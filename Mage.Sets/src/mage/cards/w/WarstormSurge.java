@@ -32,7 +32,7 @@ public final class WarstormSurge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WarstormSurge(final WarstormSurge card) {
+    private WarstormSurge(final WarstormSurge card) {
         super(card);
     }
 

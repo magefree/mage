@@ -34,7 +34,7 @@ public final class SendToSleep extends CardImpl {
         this.getSpellAbility().addEffect(effect);
     }
 
-    public SendToSleep(final SendToSleep card) {
+    private SendToSleep(final SendToSleep card) {
         super(card);
     }
 

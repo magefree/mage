@@ -69,7 +69,7 @@ public class UrborgPanther extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public UrborgPanther(final UrborgPanther card) {
+    private UrborgPanther(final UrborgPanther card) {
         super(card);
     }
 

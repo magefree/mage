@@ -48,7 +48,7 @@ public final class IsaoEnlightenedBushi extends CardImpl {
         this.addAbility(ability);
     }
 
-    public IsaoEnlightenedBushi(final IsaoEnlightenedBushi card) {
+    private IsaoEnlightenedBushi(final IsaoEnlightenedBushi card) {
         super(card);
     }
 

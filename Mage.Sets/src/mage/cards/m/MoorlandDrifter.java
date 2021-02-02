@@ -31,7 +31,7 @@ public final class MoorlandDrifter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(DeliriumHint.instance));
     }
 
-    public MoorlandDrifter(final MoorlandDrifter card) {
+    private MoorlandDrifter(final MoorlandDrifter card) {
         super(card);
     }
 

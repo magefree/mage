@@ -45,7 +45,7 @@ public final class UnnervingAssault extends CardImpl {
 
     }
 
-    public UnnervingAssault(final UnnervingAssault card) {
+    private UnnervingAssault(final UnnervingAssault card) {
         super(card);
     }
 

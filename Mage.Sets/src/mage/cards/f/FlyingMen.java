@@ -25,7 +25,7 @@ public final class FlyingMen extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public FlyingMen(final FlyingMen card) {
+    private FlyingMen(final FlyingMen card) {
         super(card);
     }
 

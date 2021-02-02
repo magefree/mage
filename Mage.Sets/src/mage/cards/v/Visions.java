@@ -22,7 +22,7 @@ public final class Visions extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Visions(final Visions card) {
+    private Visions(final Visions card) {
         super(card);
     }
 

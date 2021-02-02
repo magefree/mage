@@ -36,7 +36,7 @@ public final class VioletPall extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new FaerieRogueToken(), 1));
     }
 
-    public VioletPall(final VioletPall card) {
+    private VioletPall(final VioletPall card) {
         super(card);
     }
 

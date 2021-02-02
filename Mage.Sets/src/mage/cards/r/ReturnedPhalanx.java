@@ -34,7 +34,7 @@ public final class ReturnedPhalanx extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
     }
 
-    public ReturnedPhalanx(final ReturnedPhalanx card) {
+    private ReturnedPhalanx(final ReturnedPhalanx card) {
         super(card);
     }
 

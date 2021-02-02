@@ -49,7 +49,7 @@ public final class AcidSpewerDragon extends CardImpl {
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false, false));
     }
 
-    public AcidSpewerDragon(final AcidSpewerDragon card) {
+    private AcidSpewerDragon(final AcidSpewerDragon card) {
         super(card);
     }
 

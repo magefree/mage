@@ -43,7 +43,7 @@ public final class AmoeboidChangeling extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AmoeboidChangeling(final AmoeboidChangeling card) {
+    private AmoeboidChangeling(final AmoeboidChangeling card) {
         super(card);
     }
 

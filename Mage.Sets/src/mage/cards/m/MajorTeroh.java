@@ -47,7 +47,7 @@ public final class MajorTeroh extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MajorTeroh(final MajorTeroh card) {
+    private MajorTeroh(final MajorTeroh card) {
         super(card);
     }
 

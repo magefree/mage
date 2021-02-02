@@ -29,7 +29,7 @@ public final class FatefulShowdown extends CardImpl {
 
     }
 
-    public FatefulShowdown(final FatefulShowdown card) {
+    private FatefulShowdown(final FatefulShowdown card) {
         super(card);
     }
 

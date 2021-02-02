@@ -38,7 +38,7 @@ public final class Facevaulter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Facevaulter(final Facevaulter card) {
+    private Facevaulter(final Facevaulter card) {
         super(card);
     }
 

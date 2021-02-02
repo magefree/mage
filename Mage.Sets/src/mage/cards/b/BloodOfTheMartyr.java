@@ -27,7 +27,7 @@ public final class BloodOfTheMartyr extends CardImpl {
         this.getSpellAbility().addEffect(new BloodOfTheMartyrEffect());
     }
 
-    public BloodOfTheMartyr(final BloodOfTheMartyr card) {
+    private BloodOfTheMartyr(final BloodOfTheMartyr card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class HazoretsMonument extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()), filter2, false));
     }
 
-    public HazoretsMonument(final HazoretsMonument card) {
+    private HazoretsMonument(final HazoretsMonument card) {
         super(card);
     }
 

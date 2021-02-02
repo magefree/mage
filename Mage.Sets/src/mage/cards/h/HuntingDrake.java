@@ -44,7 +44,7 @@ public final class HuntingDrake extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HuntingDrake(final HuntingDrake card) {
+    private HuntingDrake(final HuntingDrake card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class GrimoireOfTheDead extends CardImpl {
 
     }
 
-    public GrimoireOfTheDead(final GrimoireOfTheDead card) {
+    private GrimoireOfTheDead(final GrimoireOfTheDead card) {
         super(card);
     }
 

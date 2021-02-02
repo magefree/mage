@@ -31,7 +31,7 @@ public final class SylvanYeti extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
     }
 
-    public SylvanYeti(final SylvanYeti card) {
+    private SylvanYeti(final SylvanYeti card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class StormwatchEagle extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent("a land")))));
     }
 
-    public StormwatchEagle(final StormwatchEagle card) {
+    private StormwatchEagle(final StormwatchEagle card) {
         super(card);
     }
 

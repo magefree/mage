@@ -29,7 +29,7 @@ public final class StirTheGrave extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(StirTheGraveAdjuster.instance);
     }
 
-    public StirTheGrave(final StirTheGrave card) {
+    private StirTheGrave(final StirTheGrave card) {
         super(card);
     }
 

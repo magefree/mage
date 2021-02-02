@@ -34,7 +34,7 @@ public final class KeeningBanshee extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KeeningBanshee(final KeeningBanshee card) {
+    private KeeningBanshee(final KeeningBanshee card) {
         super(card);
     }
 

@@ -50,7 +50,7 @@ public final class YennettCrypticSovereign extends CardImpl {
         ));
     }
 
-    public YennettCrypticSovereign(final YennettCrypticSovereign card) {
+    private YennettCrypticSovereign(final YennettCrypticSovereign card) {
         super(card);
     }
 

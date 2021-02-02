@@ -46,7 +46,7 @@ public final class VortexElemental extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VortexElemental(final VortexElemental card) {
+    private VortexElemental(final VortexElemental card) {
         super(card);
     }
 

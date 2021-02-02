@@ -48,7 +48,7 @@ public final class EdificeOfAuthority extends CardImpl {
 
     }
 
-    public EdificeOfAuthority(final EdificeOfAuthority card) {
+    private EdificeOfAuthority(final EdificeOfAuthority card) {
         super(card);
     }
 

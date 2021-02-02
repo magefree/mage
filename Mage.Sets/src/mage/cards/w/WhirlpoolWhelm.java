@@ -29,7 +29,7 @@ public final class WhirlpoolWhelm extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public WhirlpoolWhelm(final WhirlpoolWhelm card) {
+    private WhirlpoolWhelm(final WhirlpoolWhelm card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class TalismanOfUnity extends CardImpl {
         this.addAbility(whiteManaAbility);
     }
 
-    public TalismanOfUnity(final TalismanOfUnity card) {
+    private TalismanOfUnity(final TalismanOfUnity card) {
         super(card);
     }
 

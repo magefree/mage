@@ -35,7 +35,7 @@ public final class DespoticScepter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DespoticScepter(final DespoticScepter card) {
+    private DespoticScepter(final DespoticScepter card) {
         super(card);
     }
 

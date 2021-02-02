@@ -26,7 +26,7 @@ public final class SimicInitiate extends CardImpl {
         this.addAbility(new GraftAbility(this, 1));
     }
 
-    public SimicInitiate(final SimicInitiate card) {
+    private SimicInitiate(final SimicInitiate card) {
         super(card);
     }
 

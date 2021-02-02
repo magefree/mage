@@ -44,7 +44,7 @@ public final class Joven extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Joven(final Joven card) {
+    private Joven(final Joven card) {
         super(card);
     }
 

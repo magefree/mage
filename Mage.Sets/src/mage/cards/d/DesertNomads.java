@@ -43,7 +43,7 @@ public final class DesertNomads extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToSourceBySubtypeEffect(SubType.DESERT)));
     }
 
-    public DesertNomads(final DesertNomads card) {
+    private DesertNomads(final DesertNomads card) {
         super(card);
     }
 

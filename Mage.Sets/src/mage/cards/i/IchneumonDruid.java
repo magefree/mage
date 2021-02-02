@@ -39,7 +39,7 @@ public final class IchneumonDruid extends CardImpl {
         this.addAbility(new IchneumonDruidAbility(), new IchneumonDruidWatcher());
     }
 
-    public IchneumonDruid(final IchneumonDruid card) {
+    private IchneumonDruid(final IchneumonDruid card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class AphettoDredging extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(AphettoDredgingAdjuster.instance);
     }
 
-    public AphettoDredging(final AphettoDredging card) {
+    private AphettoDredging(final AphettoDredging card) {
         super(card);
     }
 

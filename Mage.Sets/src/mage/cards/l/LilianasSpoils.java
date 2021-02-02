@@ -42,7 +42,7 @@ public final class LilianasSpoils extends CardImpl {
         );
     }
 
-    public LilianasSpoils(final LilianasSpoils card) {
+    private LilianasSpoils(final LilianasSpoils card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class DejaVu extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
     }
 
-    public DejaVu(final DejaVu card) {
+    private DejaVu(final DejaVu card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class RenownedWeaponsmith extends CardImpl {
 
     }
 
-    public RenownedWeaponsmith(final RenownedWeaponsmith card) {
+    private RenownedWeaponsmith(final RenownedWeaponsmith card) {
         super(card);
     }
 

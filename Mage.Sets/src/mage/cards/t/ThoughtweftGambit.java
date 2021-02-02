@@ -28,7 +28,7 @@ public final class ThoughtweftGambit extends CardImpl {
 
     }
 
-    public ThoughtweftGambit(final ThoughtweftGambit card) {
+    private ThoughtweftGambit(final ThoughtweftGambit card) {
         super(card);
     }
 

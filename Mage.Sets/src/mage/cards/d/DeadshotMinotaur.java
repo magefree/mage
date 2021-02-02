@@ -46,7 +46,7 @@ public final class DeadshotMinotaur extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{R/G}")));
     }
 
-    public DeadshotMinotaur(final DeadshotMinotaur card) {
+    private DeadshotMinotaur(final DeadshotMinotaur card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class RavagingRiftwurm extends CardImpl {
             KickedCondition.instance, "If {this} was kicked, it enters the battlefield with three additional time counters on it.", ""));
     }
 
-    public RavagingRiftwurm(final RavagingRiftwurm card) {
+    private RavagingRiftwurm(final RavagingRiftwurm card) {
         super(card);
     }
 

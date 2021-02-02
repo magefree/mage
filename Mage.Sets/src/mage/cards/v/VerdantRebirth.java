@@ -33,7 +33,7 @@ public final class VerdantRebirth extends CardImpl {
         getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).setText("<br><br>Draw a card"));
     }
 
-    public VerdantRebirth(final VerdantRebirth card) {
+    private VerdantRebirth(final VerdantRebirth card) {
         super(card);
     }
 

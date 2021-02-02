@@ -41,7 +41,7 @@ public final class AngelOfGlorysRise extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AngelOfGlorysRise(final AngelOfGlorysRise card) {
+    private AngelOfGlorysRise(final AngelOfGlorysRise card) {
         super(card);
     }
 

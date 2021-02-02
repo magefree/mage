@@ -44,7 +44,7 @@ public final class CivicGuildmage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CivicGuildmage(final CivicGuildmage card) {
+    private CivicGuildmage(final CivicGuildmage card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class Thaumatog extends CardImpl {
                 new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledEnchantmentPermanent("enchantment")))));
     }
 
-    public Thaumatog(final Thaumatog card) {
+    private Thaumatog(final Thaumatog card) {
         super(card);
     }
 

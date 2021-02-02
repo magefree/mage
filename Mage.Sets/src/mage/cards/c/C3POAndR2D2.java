@@ -39,7 +39,7 @@ public final class C3POAndR2D2 extends CardImpl {
         this.addAbility(new RepairAbility(2));
     }
 
-    public C3POAndR2D2(final C3POAndR2D2 card) {
+    private C3POAndR2D2(final C3POAndR2D2 card) {
         super(card);
     }
 

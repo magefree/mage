@@ -28,7 +28,7 @@ public final class MultanisPresence extends CardImpl {
         this.addAbility(new MultanisPresenceTriggeredAbility(), new MultanisPresenceWatcher());
     }
 
-    public MultanisPresence(final MultanisPresence card) {
+    private MultanisPresence(final MultanisPresence card) {
         super(card);
     }
 

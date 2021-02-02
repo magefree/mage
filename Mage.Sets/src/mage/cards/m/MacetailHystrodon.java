@@ -33,7 +33,7 @@ public final class MacetailHystrodon extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{3}")));
     }
 
-    public MacetailHystrodon(final MacetailHystrodon card) {
+    private MacetailHystrodon(final MacetailHystrodon card) {
         super(card);
     }
 

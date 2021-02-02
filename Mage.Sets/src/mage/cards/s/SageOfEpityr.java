@@ -28,7 +28,7 @@ public final class SageOfEpityr extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryControllerEffect(4)));
     }
 
-    public SageOfEpityr(final SageOfEpityr card) {
+    private SageOfEpityr(final SageOfEpityr card) {
         super(card);
     }
 

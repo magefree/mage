@@ -33,7 +33,7 @@ public final class WalkingAtlas extends CardImpl {
         ));
     }
 
-    public WalkingAtlas(final WalkingAtlas card) {
+    private WalkingAtlas(final WalkingAtlas card) {
         super(card);
     }
 

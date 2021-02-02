@@ -32,7 +32,7 @@ public final class SoulSnare extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SoulSnare(final SoulSnare card) {
+    private SoulSnare(final SoulSnare card) {
         super(card);
     }
 

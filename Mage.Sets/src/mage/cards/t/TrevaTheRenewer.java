@@ -41,7 +41,7 @@ public final class TrevaTheRenewer extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new TrevaTheRenewerEffect(), new ManaCostsImpl("{2}{W}")), false));
     }
 
-    public TrevaTheRenewer(final TrevaTheRenewer card) {
+    private TrevaTheRenewer(final TrevaTheRenewer card) {
         super(card);
     }
 

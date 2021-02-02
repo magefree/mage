@@ -42,7 +42,7 @@ public final class KorAeronaut extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.instance, "When {this} enters the battlefield, if it was kicked, target creature gains flying until end of turn."));
     }
 
-    public KorAeronaut(final KorAeronaut card) {
+    private KorAeronaut(final KorAeronaut card) {
         super(card);
     }
 

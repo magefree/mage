@@ -43,7 +43,7 @@ public final class ShaleskinBruiser extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(value, StaticValue.get(0), Duration.EndOfTurn, true), false));
     }
 
-    public ShaleskinBruiser(final ShaleskinBruiser card) {
+    private ShaleskinBruiser(final ShaleskinBruiser card) {
         super(card);
     }
 

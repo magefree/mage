@@ -53,7 +53,7 @@ public final class SlobadGoblinTinkerer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SlobadGoblinTinkerer(final SlobadGoblinTinkerer card) {
+    private SlobadGoblinTinkerer(final SlobadGoblinTinkerer card) {
         super(card);
     }
 

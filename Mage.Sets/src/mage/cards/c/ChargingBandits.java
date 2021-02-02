@@ -31,7 +31,7 @@ public final class ChargingBandits extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(effect, false));
     }
 
-    public ChargingBandits(final ChargingBandits card) {
+    private ChargingBandits(final ChargingBandits card) {
         super(card);
     }
 

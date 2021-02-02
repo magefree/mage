@@ -32,7 +32,7 @@ public final class EwokAmbush extends CardImpl {
         this.getSpellAbility().addEffect(new EwokAmbushCreateTokenEffect());
     }
 
-    public EwokAmbush(final EwokAmbush card) {
+    private EwokAmbush(final EwokAmbush card) {
         super(card);
     }
 

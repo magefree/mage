@@ -34,7 +34,7 @@ public final class MwonvuliAcidMoss extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterForest), true, true));
     }
 
-    public MwonvuliAcidMoss(final MwonvuliAcidMoss card) {
+    private MwonvuliAcidMoss(final MwonvuliAcidMoss card) {
         super(card);
     }
 

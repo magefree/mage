@@ -44,7 +44,7 @@ public final class HowltoothHollow extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HowltoothHollow(final HowltoothHollow card) {
+    private HowltoothHollow(final HowltoothHollow card) {
         super(card);
     }
 

@@ -70,7 +70,7 @@ public final class TriadOfFates extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TriadOfFates(final TriadOfFates card) {
+    private TriadOfFates(final TriadOfFates card) {
         super(card);
     }
 

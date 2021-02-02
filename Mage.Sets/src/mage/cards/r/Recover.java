@@ -26,7 +26,7 @@ public final class Recover extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Recover(final Recover card) {
+    private Recover(final Recover card) {
         super(card);
     }
 

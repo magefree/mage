@@ -38,7 +38,7 @@ public final class RudeAwakening extends CardImpl {
         this.addAbility(new EntwineAbility("{2}{G}"));
     }
 
-    public RudeAwakening(final RudeAwakening card) {
+    private RudeAwakening(final RudeAwakening card) {
         super(card);
     }
 

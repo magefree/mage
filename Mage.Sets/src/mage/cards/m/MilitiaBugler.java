@@ -45,7 +45,7 @@ public final class MilitiaBugler extends CardImpl {
         ), false));
     }
 
-    public MilitiaBugler(final MilitiaBugler card) {
+    private MilitiaBugler(final MilitiaBugler card) {
         super(card);
     }
 

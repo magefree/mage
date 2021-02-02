@@ -36,7 +36,7 @@ public final class PlantElemental extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
     }
 
-    public PlantElemental(final PlantElemental card) {
+    private PlantElemental(final PlantElemental card) {
         super(card);
     }
 

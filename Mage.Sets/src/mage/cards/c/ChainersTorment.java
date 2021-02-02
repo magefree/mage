@@ -41,7 +41,7 @@ public final class ChainersTorment extends CardImpl {
         this.addAbility(sagaAbility);
     }
 
-    public ChainersTorment(final ChainersTorment card) {
+    private ChainersTorment(final ChainersTorment card) {
         super(card);
     }
 

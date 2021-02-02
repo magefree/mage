@@ -50,7 +50,7 @@ public final class PiratesCutlass extends CardImpl {
 
     }
 
-    public PiratesCutlass(final PiratesCutlass card) {
+    private PiratesCutlass(final PiratesCutlass card) {
         super(card);
     }
 

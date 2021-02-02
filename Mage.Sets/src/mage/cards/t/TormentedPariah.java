@@ -39,7 +39,7 @@ public final class TormentedPariah extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
-    public TormentedPariah(final TormentedPariah card) {
+    private TormentedPariah(final TormentedPariah card) {
         super(card);
     }
 

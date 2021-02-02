@@ -48,7 +48,7 @@ public final class VisionsOfBrutality extends CardImpl {
         this.addAbility(new DealsDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, new VisionsOfBrutalityEffect(), false));
     }
 
-    public VisionsOfBrutality(final VisionsOfBrutality card) {
+    private VisionsOfBrutality(final VisionsOfBrutality card) {
         super(card);
     }
 

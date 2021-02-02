@@ -37,7 +37,7 @@ public final class VisageOfBolas extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public VisageOfBolas(final VisageOfBolas card) {
+    private VisageOfBolas(final VisageOfBolas card) {
         super(card);
     }
 

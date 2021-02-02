@@ -30,7 +30,7 @@ public final class DubiousChallenge extends CardImpl {
         getSpellAbility().addEffect(new DubiousChallengeMoveToBattlefieldEffect());
     }
 
-    public DubiousChallenge(final DubiousChallenge card) {
+    private DubiousChallenge(final DubiousChallenge card) {
         super(card);
     }
 

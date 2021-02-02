@@ -31,7 +31,7 @@ public final class SpellSnare extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
-    public SpellSnare(final SpellSnare card) {
+    private SpellSnare(final SpellSnare card) {
         super(card);
     }
 

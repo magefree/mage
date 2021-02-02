@@ -51,7 +51,7 @@ public final class GusthasScepter extends CardImpl {
 
     }
 
-    public GusthasScepter(final GusthasScepter card) {
+    private GusthasScepter(final GusthasScepter card) {
         super(card);
     }
 

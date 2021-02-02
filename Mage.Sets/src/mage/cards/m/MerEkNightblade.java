@@ -46,7 +46,7 @@ public final class MerEkNightblade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter, "Each creature you control with a +1/+1 counter on it has deathtouch")));
     }
 
-    public MerEkNightblade(final MerEkNightblade card) {
+    private MerEkNightblade(final MerEkNightblade card) {
         super(card);
     }
 

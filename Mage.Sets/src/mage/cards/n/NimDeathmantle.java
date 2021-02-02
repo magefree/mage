@@ -58,7 +58,7 @@ public final class NimDeathmantle extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
     }
 
-    public NimDeathmantle(final NimDeathmantle card) {
+    private NimDeathmantle(final NimDeathmantle card) {
         super(card);
     }
 

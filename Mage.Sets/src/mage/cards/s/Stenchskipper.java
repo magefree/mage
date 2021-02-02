@@ -39,7 +39,7 @@ public final class Stenchskipper extends CardImpl {
                 false));
     }
 
-    public Stenchskipper(final Stenchskipper card) {
+    private Stenchskipper(final Stenchskipper card) {
         super(card);
     }
 

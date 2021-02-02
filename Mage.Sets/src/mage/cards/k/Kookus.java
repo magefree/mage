@@ -62,7 +62,7 @@ public final class Kookus extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
-    public Kookus(final Kookus card) {
+    private Kookus(final Kookus card) {
         super(card);
     }
 

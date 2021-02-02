@@ -36,7 +36,7 @@ public final class QuickeningLicid extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public QuickeningLicid(final QuickeningLicid card) {
+    private QuickeningLicid(final QuickeningLicid card) {
         super(card);
     }
 

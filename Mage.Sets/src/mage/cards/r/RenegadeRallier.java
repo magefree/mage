@@ -51,7 +51,7 @@ public final class RenegadeRallier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RenegadeRallier(final RenegadeRallier card) {
+    private RenegadeRallier(final RenegadeRallier card) {
         super(card);
     }
 

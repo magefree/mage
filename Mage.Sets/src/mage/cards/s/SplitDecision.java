@@ -28,7 +28,7 @@ public final class SplitDecision extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
     }
 
-    public SplitDecision(final SplitDecision card) {
+    private SplitDecision(final SplitDecision card) {
         super(card);
     }
 

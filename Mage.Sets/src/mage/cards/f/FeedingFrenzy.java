@@ -37,7 +37,7 @@ public final class FeedingFrenzy extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FeedingFrenzy(final FeedingFrenzy card) {
+    private FeedingFrenzy(final FeedingFrenzy card) {
         super(card);
     }
 

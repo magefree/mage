@@ -34,7 +34,7 @@ public final class PowerArmor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PowerArmor(final PowerArmor card) {
+    private PowerArmor(final PowerArmor card) {
         super(card);
     }
 

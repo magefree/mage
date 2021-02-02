@@ -35,7 +35,7 @@ public final class ForbiddingWatchtower extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ForbiddingWatchtowerToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{W}")));
     }
 
-    public ForbiddingWatchtower(final ForbiddingWatchtower card) {
+    private ForbiddingWatchtower(final ForbiddingWatchtower card) {
         super(card);
     }
 

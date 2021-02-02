@@ -49,7 +49,7 @@ public final class MaceWindu extends CardImpl {
         this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{U}")));
     }
 
-    public MaceWindu(final MaceWindu card) {
+    private MaceWindu(final MaceWindu card) {
         super(card);
     }
 

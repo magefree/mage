@@ -35,7 +35,7 @@ public final class DragonlordsServant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
-    public DragonlordsServant(final DragonlordsServant card) {
+    private DragonlordsServant(final DragonlordsServant card) {
         super(card);
     }
 

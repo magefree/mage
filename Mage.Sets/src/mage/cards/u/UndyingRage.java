@@ -51,7 +51,7 @@ public final class UndyingRage extends CardImpl {
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
-    public UndyingRage(final UndyingRage card) {
+    private UndyingRage(final UndyingRage card) {
         super(card);
     }
 

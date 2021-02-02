@@ -56,7 +56,7 @@ public final class MyojinOfCleansingFire extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance())));
     }
 
-    public MyojinOfCleansingFire(final MyojinOfCleansingFire card) {
+    private MyojinOfCleansingFire(final MyojinOfCleansingFire card) {
         super(card);
     }
 

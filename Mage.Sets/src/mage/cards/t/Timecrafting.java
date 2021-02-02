@@ -42,7 +42,7 @@ public final class Timecrafting extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public Timecrafting(final Timecrafting card) {
+    private Timecrafting(final Timecrafting card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class EzurisPredation extends CardImpl {
         this.getSpellAbility().addEffect(new EzurisPredationEffect());
     }
 
-    public EzurisPredation(final EzurisPredation card) {
+    private EzurisPredation(final EzurisPredation card) {
         super(card);
     }
 

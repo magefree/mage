@@ -44,7 +44,7 @@ public final class SaiOfTheShinobi extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
-    public SaiOfTheShinobi(final SaiOfTheShinobi card) {
+    private SaiOfTheShinobi(final SaiOfTheShinobi card) {
         super(card);
     }
 

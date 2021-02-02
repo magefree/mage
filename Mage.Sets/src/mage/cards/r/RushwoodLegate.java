@@ -41,7 +41,7 @@ public final class RushwoodLegate extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(null, condition));
     }
 
-    public RushwoodLegate(final RushwoodLegate card) {
+    private RushwoodLegate(final RushwoodLegate card) {
         super(card);
     }
 

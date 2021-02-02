@@ -27,7 +27,7 @@ public final class MoltingSkin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoltingSkin(final MoltingSkin card) {
+    private MoltingSkin(final MoltingSkin card) {
         super(card);
     }
 

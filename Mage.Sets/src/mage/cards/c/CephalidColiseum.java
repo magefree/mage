@@ -44,7 +44,7 @@ public final class CephalidColiseum extends CardImpl {
         this.addAbility(thresholdAbility);
     }
 
-    public CephalidColiseum(final CephalidColiseum card) {
+    private CephalidColiseum(final CephalidColiseum card) {
         super(card);
     }
 

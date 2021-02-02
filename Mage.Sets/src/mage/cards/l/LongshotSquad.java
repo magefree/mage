@@ -48,7 +48,7 @@ public final class LongshotSquad extends CardImpl {
 
     }
 
-    public LongshotSquad(final LongshotSquad card) {
+    private LongshotSquad(final LongshotSquad card) {
         super(card);
     }
 

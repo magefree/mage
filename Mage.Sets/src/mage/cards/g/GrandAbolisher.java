@@ -36,7 +36,7 @@ public final class GrandAbolisher extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GrandAbolisherEffect()));
     }
 
-    public GrandAbolisher(final GrandAbolisher card) {
+    private GrandAbolisher(final GrandAbolisher card) {
         super(card);
     }
 

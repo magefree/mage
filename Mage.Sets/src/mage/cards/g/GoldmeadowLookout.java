@@ -36,7 +36,7 @@ public final class GoldmeadowLookout extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoldmeadowLookout(final GoldmeadowLookout card) {
+    private GoldmeadowLookout(final GoldmeadowLookout card) {
         super(card);
     }
 

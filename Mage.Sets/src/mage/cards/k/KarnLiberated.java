@@ -52,7 +52,7 @@ public final class KarnLiberated extends CardImpl {
         this.addAbility(new LoyaltyAbility(new KarnLiberatedEffect(), -14));
     }
 
-    public KarnLiberated(final KarnLiberated card) {
+    private KarnLiberated(final KarnLiberated card) {
         super(card);
     }
 

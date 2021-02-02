@@ -52,7 +52,7 @@ public final class VitasporeThallid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VitasporeThallid(final VitasporeThallid card) {
+    private VitasporeThallid(final VitasporeThallid card) {
         super(card);
     }
 

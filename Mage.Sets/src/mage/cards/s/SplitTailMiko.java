@@ -33,7 +33,7 @@ public final class SplitTailMiko extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SplitTailMiko(final SplitTailMiko card) {
+    private SplitTailMiko(final SplitTailMiko card) {
         super(card);
     }
 

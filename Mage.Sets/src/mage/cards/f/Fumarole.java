@@ -30,7 +30,7 @@ public final class Fumarole extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public Fumarole(final Fumarole card) {
+    private Fumarole(final Fumarole card) {
         super(card);
     }
 

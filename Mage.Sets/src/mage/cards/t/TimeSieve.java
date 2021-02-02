@@ -30,7 +30,7 @@ public final class TimeSieve extends CardImpl {
 
     }
 
-    public TimeSieve(final TimeSieve card) {
+    private TimeSieve(final TimeSieve card) {
         super(card);
     }
 

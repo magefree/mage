@@ -22,7 +22,7 @@ public final class SwornCompanions extends CardImpl {
         );
     }
 
-    public SwornCompanions(final SwornCompanions card) {
+    private SwornCompanions(final SwornCompanions card) {
         super(card);
     }
 

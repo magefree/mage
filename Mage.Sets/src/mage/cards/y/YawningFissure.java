@@ -22,7 +22,7 @@ public final class YawningFissure extends CardImpl {
         this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(new FilterControlledLandPermanent("a land")));
     }
 
-    public YawningFissure(final YawningFissure card) {
+    private YawningFissure(final YawningFissure card) {
         super(card);
     }
 

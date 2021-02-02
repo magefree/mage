@@ -41,7 +41,7 @@ public final class Enslave extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new EnslaveEffect(), TargetController.YOU, false, false));
     }
 
-    public Enslave(final Enslave card) {
+    private Enslave(final Enslave card) {
         super(card);
     }
 

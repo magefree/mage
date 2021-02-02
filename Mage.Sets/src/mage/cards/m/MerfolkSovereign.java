@@ -47,7 +47,7 @@ public final class MerfolkSovereign extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MerfolkSovereign(final MerfolkSovereign card) {
+    private MerfolkSovereign(final MerfolkSovereign card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class TezzeretsStrider extends CardImpl {
         ));
     }
 
-    public TezzeretsStrider(final TezzeretsStrider card) {
+    private TezzeretsStrider(final TezzeretsStrider card) {
         super(card);
     }
 

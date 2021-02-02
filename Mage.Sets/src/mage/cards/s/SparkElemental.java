@@ -31,7 +31,7 @@ public final class SparkElemental extends CardImpl {
         this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new SacrificeSourceEffect()));
     }
 
-    public SparkElemental(final SparkElemental card) {
+    private SparkElemental(final SparkElemental card) {
         super(card);
     }
 

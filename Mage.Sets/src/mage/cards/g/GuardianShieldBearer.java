@@ -46,7 +46,7 @@ public final class GuardianShieldBearer extends CardImpl {
 
     }
 
-    public GuardianShieldBearer(final GuardianShieldBearer card) {
+    private GuardianShieldBearer(final GuardianShieldBearer card) {
         super(card);
     }
 

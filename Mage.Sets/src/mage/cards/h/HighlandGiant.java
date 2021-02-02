@@ -22,7 +22,7 @@ public final class HighlandGiant extends CardImpl {
         this.toughness = new MageInt(4);
     }
 
-    public HighlandGiant(final HighlandGiant card) {
+    private HighlandGiant(final HighlandGiant card) {
         super(card);
     }
 

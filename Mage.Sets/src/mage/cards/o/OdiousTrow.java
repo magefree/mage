@@ -28,7 +28,7 @@ public final class OdiousTrow extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B/G}")));
     }
 
-    public OdiousTrow(final OdiousTrow card) {
+    private OdiousTrow(final OdiousTrow card) {
         super(card);
     }
 

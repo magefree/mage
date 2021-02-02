@@ -29,7 +29,7 @@ public final class BojukaBrigand extends CardImpl {
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
 
-    public BojukaBrigand(final BojukaBrigand card) {
+    private BojukaBrigand(final BojukaBrigand card) {
         super(card);
     }
 

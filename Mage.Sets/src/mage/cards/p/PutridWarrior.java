@@ -43,7 +43,7 @@ public final class PutridWarrior extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PutridWarrior(final PutridWarrior card) {
+    private PutridWarrior(final PutridWarrior card) {
         super(card);
     }
 

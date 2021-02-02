@@ -35,7 +35,7 @@ public final class FireUrchin extends CardImpl {
         ));
     }
 
-    public FireUrchin(final FireUrchin card) {
+    private FireUrchin(final FireUrchin card) {
         super(card);
     }
 

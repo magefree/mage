@@ -57,7 +57,7 @@ public final class RunawaySteamKin extends CardImpl {
         ));
     }
 
-    public RunawaySteamKin(final RunawaySteamKin card) {
+    private RunawaySteamKin(final RunawaySteamKin card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class FreyalisesCharm extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl("{G}{G}")));
     }
 
-    public FreyalisesCharm(final FreyalisesCharm card) {
+    private FreyalisesCharm(final FreyalisesCharm card) {
         super(card);
     }
 

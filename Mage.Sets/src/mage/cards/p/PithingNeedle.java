@@ -35,7 +35,7 @@ public final class PithingNeedle extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PithingNeedleEffect()));
     }
 
-    public PithingNeedle(final PithingNeedle card) {
+    private PithingNeedle(final PithingNeedle card) {
         super(card);
     }
 

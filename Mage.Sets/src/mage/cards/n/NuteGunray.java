@@ -55,7 +55,7 @@ public final class NuteGunray extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NuteGunray(final NuteGunray card) {
+    private NuteGunray(final NuteGunray card) {
         super(card);
     }
 

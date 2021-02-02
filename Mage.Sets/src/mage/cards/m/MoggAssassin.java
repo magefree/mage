@@ -47,7 +47,7 @@ public final class MoggAssassin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MoggAssassin(final MoggAssassin card) {
+    private MoggAssassin(final MoggAssassin card) {
         super(card);
     }
 

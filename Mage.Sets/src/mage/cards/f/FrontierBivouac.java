@@ -27,7 +27,7 @@ public final class FrontierBivouac extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public FrontierBivouac(final FrontierBivouac card) {
+    private FrontierBivouac(final FrontierBivouac card) {
         super(card);
     }
 

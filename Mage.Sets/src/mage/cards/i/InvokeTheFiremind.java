@@ -28,7 +28,7 @@ public final class InvokeTheFiremind extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public InvokeTheFiremind(final InvokeTheFiremind card) {
+    private InvokeTheFiremind(final InvokeTheFiremind card) {
         super(card);
     }
 

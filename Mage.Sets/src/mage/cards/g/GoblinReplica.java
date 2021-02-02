@@ -39,7 +39,7 @@ public final class GoblinReplica extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinReplica(final GoblinReplica card) {
+    private GoblinReplica(final GoblinReplica card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class DrownInSorrow extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public DrownInSorrow(final DrownInSorrow card) {
+    private DrownInSorrow(final DrownInSorrow card) {
         super(card);
     }
 

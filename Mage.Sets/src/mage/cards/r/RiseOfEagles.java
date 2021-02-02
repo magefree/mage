@@ -23,7 +23,7 @@ public final class RiseOfEagles extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(1));
     }
 
-    public RiseOfEagles(final RiseOfEagles card) {
+    private RiseOfEagles(final RiseOfEagles card) {
         super(card);
     }
 

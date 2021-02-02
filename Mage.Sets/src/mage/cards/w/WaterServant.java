@@ -31,7 +31,7 @@ public final class WaterServant extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, 1, Duration.EndOfTurn), new ManaCostsImpl("{U}")));
     }
 
-    public WaterServant(final WaterServant card) {
+    private WaterServant(final WaterServant card) {
         super(card);
     }
 

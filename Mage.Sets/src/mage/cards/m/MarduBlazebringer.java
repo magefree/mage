@@ -31,7 +31,7 @@ public final class MarduBlazebringer extends CardImpl {
                 new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())), false));
     }
 
-    public MarduBlazebringer(final MarduBlazebringer card) {
+    private MarduBlazebringer(final MarduBlazebringer card) {
         super(card);
     }
 

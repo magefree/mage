@@ -37,7 +37,7 @@ public final class WildRicochet extends CardImpl {
         this.getSpellAbility().addTarget(new TargetStackObject(filter));
     }
 
-    public WildRicochet(final WildRicochet card) {
+    private WildRicochet(final WildRicochet card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class DaruHealer extends CardImpl {
 
     }
 
-    public DaruHealer(final DaruHealer card) {
+    private DaruHealer(final DaruHealer card) {
         super(card);
     }
 

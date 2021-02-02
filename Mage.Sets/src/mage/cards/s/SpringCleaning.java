@@ -35,7 +35,7 @@ public final class SpringCleaning extends CardImpl {
         this.getSpellAbility().addEffect(new DoIfClashWonEffect(new DestroyAllEffect(filter)));
     }
 
-    public SpringCleaning(final SpringCleaning card) {
+    private SpringCleaning(final SpringCleaning card) {
         super(card);
     }
 

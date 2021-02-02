@@ -31,7 +31,7 @@ public final class RixMaadiDungeonPalace extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RixMaadiDungeonPalace(final RixMaadiDungeonPalace card) {
+    private RixMaadiDungeonPalace(final RixMaadiDungeonPalace card) {
         super(card);
     }
 

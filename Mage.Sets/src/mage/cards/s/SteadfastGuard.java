@@ -26,7 +26,7 @@ public final class SteadfastGuard extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public SteadfastGuard(final SteadfastGuard card) {
+    private SteadfastGuard(final SteadfastGuard card) {
         super(card);
     }
 

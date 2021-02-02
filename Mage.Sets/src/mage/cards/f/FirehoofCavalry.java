@@ -41,7 +41,7 @@ public final class FirehoofCavalry extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FirehoofCavalry(final FirehoofCavalry card) {
+    private FirehoofCavalry(final FirehoofCavalry card) {
         super(card);
     }
 

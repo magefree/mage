@@ -26,7 +26,7 @@ public final class SaprazzanHeir extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new DrawCardSourceControllerEffect(3), true));
     }
 
-    public SaprazzanHeir(final SaprazzanHeir card) {
+    private SaprazzanHeir(final SaprazzanHeir card) {
         super(card);
     }
 

@@ -59,7 +59,7 @@ public final class DarthSidiousSithLord extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DarthSidiousSithLord(final DarthSidiousSithLord card) {
+    private DarthSidiousSithLord(final DarthSidiousSithLord card) {
         super(card);
     }
 

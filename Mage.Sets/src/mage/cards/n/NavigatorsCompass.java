@@ -36,7 +36,7 @@ public final class NavigatorsCompass extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NavigatorsCompass(final NavigatorsCompass card) {
+    private NavigatorsCompass(final NavigatorsCompass card) {
         super(card);
     }
 

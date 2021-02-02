@@ -26,7 +26,7 @@ public final class Lull extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public Lull(final Lull card) {
+    private Lull(final Lull card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class VirtuousCharge extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
     }
 
-    public VirtuousCharge(final VirtuousCharge card) {
+    private VirtuousCharge(final VirtuousCharge card) {
         super(card);
     }
 

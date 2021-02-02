@@ -58,7 +58,7 @@ public final class TalonsOfWildwood extends CardImpl {
         ));
     }
 
-    public TalonsOfWildwood(final TalonsOfWildwood card) {
+    private TalonsOfWildwood(final TalonsOfWildwood card) {
         super(card);
     }
 

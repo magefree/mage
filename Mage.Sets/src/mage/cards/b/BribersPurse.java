@@ -38,7 +38,7 @@ public final class BribersPurse extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BribersPurse(final BribersPurse card) {
+    private BribersPurse(final BribersPurse card) {
         super(card);
     }
 

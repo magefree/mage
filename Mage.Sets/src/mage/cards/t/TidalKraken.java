@@ -26,7 +26,7 @@ public final class TidalKraken extends CardImpl {
         this.addAbility(new CantBeBlockedSourceAbility());
     }
 
-    public TidalKraken(final TidalKraken card) {
+    private TidalKraken(final TidalKraken card) {
         super(card);
     }
 

@@ -48,7 +48,7 @@ public final class WoodwraithCorrupter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WoodwraithCorrupter(final WoodwraithCorrupter card) {
+    private WoodwraithCorrupter(final WoodwraithCorrupter card) {
         super(card);
     }
 

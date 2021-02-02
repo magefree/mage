@@ -48,7 +48,7 @@ public final class VedalkenPlotter extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VedalkenPlotter(final VedalkenPlotter card) {
+    private VedalkenPlotter(final VedalkenPlotter card) {
         super(card);
     }
 

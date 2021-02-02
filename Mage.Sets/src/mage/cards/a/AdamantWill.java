@@ -32,7 +32,7 @@ public final class AdamantWill extends CardImpl {
 
     }
 
-    public AdamantWill(final AdamantWill card) {
+    private AdamantWill(final AdamantWill card) {
         super(card);
     }
 

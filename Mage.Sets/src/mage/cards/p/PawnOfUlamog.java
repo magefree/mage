@@ -40,7 +40,7 @@ public final class PawnOfUlamog extends CardImpl {
         this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken()), true, filter));
     }
 
-    public PawnOfUlamog(final PawnOfUlamog card) {
+    private PawnOfUlamog(final PawnOfUlamog card) {
         super(card);
     }
 

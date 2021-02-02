@@ -31,7 +31,7 @@ public final class FirstVolley extends CardImpl {
 
     }
 
-    public FirstVolley(final FirstVolley card) {
+    private FirstVolley(final FirstVolley card) {
         super(card);
     }
 

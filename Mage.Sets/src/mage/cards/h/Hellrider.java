@@ -35,7 +35,7 @@ public final class Hellrider extends CardImpl {
         this.addAbility(new HellriderTriggeredAbility());
     }
 
-    public Hellrider(final Hellrider card) {
+    private Hellrider(final Hellrider card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class EidolonOfRhetoric extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCastMoreThanOneSpellEffect(TargetController.ANY)));   
     }
 
-    public EidolonOfRhetoric(final EidolonOfRhetoric card) {
+    private EidolonOfRhetoric(final EidolonOfRhetoric card) {
         super(card);
     }
 

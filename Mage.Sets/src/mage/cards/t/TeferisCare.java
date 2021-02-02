@@ -47,7 +47,7 @@ public final class TeferisCare extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TeferisCare(final TeferisCare card) {
+    private TeferisCare(final TeferisCare card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class AdamaroFirstToDesire extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new MostCardsInOpponentsHandCount(), Duration.WhileOnBattlefield)));
     }
 
-    public AdamaroFirstToDesire(final AdamaroFirstToDesire card) {
+    private AdamaroFirstToDesire(final AdamaroFirstToDesire card) {
         super(card);
     }
 

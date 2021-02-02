@@ -40,7 +40,7 @@ public final class ArbiterOfTheIdeal extends CardImpl {
 
     }
 
-    public ArbiterOfTheIdeal(final ArbiterOfTheIdeal card) {
+    private ArbiterOfTheIdeal(final ArbiterOfTheIdeal card) {
         super(card);
     }
 

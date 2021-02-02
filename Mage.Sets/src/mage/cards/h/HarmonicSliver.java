@@ -46,7 +46,7 @@ public final class HarmonicSliver extends CardImpl {
                 filterSliver, "All Slivers have \"When this permanent enters the battlefield, destroy target artifact or enchantment.\"")));
     }
 
-    public HarmonicSliver(final HarmonicSliver card) {
+    private HarmonicSliver(final HarmonicSliver card) {
         super(card);
     }
 

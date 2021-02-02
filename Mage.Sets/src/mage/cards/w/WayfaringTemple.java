@@ -36,7 +36,7 @@ public final class WayfaringTemple extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new PopulateEffect(), false));
     }
 
-    public WayfaringTemple(final WayfaringTemple card) {
+    private WayfaringTemple(final WayfaringTemple card) {
         super(card);
     }
 

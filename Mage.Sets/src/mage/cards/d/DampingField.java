@@ -29,7 +29,7 @@ public final class DampingField extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DampingFieldEffect()));
     }
 
-    public DampingField(final DampingField card) {
+    private DampingField(final DampingField card) {
         super(card);
     }
 

@@ -32,7 +32,7 @@ public final class Inundate extends CardImpl {
         
     }
 
-    public Inundate(final Inundate card) {
+    private Inundate(final Inundate card) {
         super(card);
     }
 

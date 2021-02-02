@@ -29,7 +29,7 @@ public final class Carnophage extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(1)), TargetController.YOU, false));
     }
 
-    public Carnophage(final Carnophage card) {
+    private Carnophage(final Carnophage card) {
         super(card);
     }
 

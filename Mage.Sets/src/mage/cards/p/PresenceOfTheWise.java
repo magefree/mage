@@ -23,7 +23,7 @@ public final class PresenceOfTheWise extends CardImpl {
                 new MultipliedValue(CardsInControllerHandCount.instance, 2),"You gain 2 life for each card in your hand"));
     }
 
-    public PresenceOfTheWise(final PresenceOfTheWise card) {
+    private PresenceOfTheWise(final PresenceOfTheWise card) {
         super(card);
     }
 

@@ -36,7 +36,7 @@ public final class TorchFiend extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TorchFiend(final TorchFiend card) {
+    private TorchFiend(final TorchFiend card) {
         super(card);
     }
 

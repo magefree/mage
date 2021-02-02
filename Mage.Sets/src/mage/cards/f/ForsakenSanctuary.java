@@ -26,7 +26,7 @@ public final class ForsakenSanctuary extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public ForsakenSanctuary(final ForsakenSanctuary card) {
+    private ForsakenSanctuary(final ForsakenSanctuary card) {
         super(card);
     }
 

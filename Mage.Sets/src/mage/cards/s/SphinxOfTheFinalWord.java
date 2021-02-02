@@ -49,7 +49,7 @@ public final class SphinxOfTheFinalWord extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeCounteredControlledEffect(filterTarget, null, Duration.WhileOnBattlefield)));
     }
 
-    public SphinxOfTheFinalWord(final SphinxOfTheFinalWord card) {
+    private SphinxOfTheFinalWord(final SphinxOfTheFinalWord card) {
         super(card);
     }
 

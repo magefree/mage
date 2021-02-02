@@ -32,7 +32,7 @@ public final class StrongholdGambit extends CardImpl {
         getSpellAbility().addEffect(new StrongholdGambitEffect());
     }
 
-    public StrongholdGambit(final StrongholdGambit card) {
+    private StrongholdGambit(final StrongholdGambit card) {
         super(card);
     }
 

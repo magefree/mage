@@ -30,7 +30,7 @@ public final class WarriorAngel extends CardImpl {
         this.addAbility(new DealsDamageGainLifeSourceTriggeredAbility());
     }
 
-    public WarriorAngel(final WarriorAngel card) {
+    private WarriorAngel(final WarriorAngel card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class ElusiveSpellfist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ElusiveSpellfist(final ElusiveSpellfist card) {
+    private ElusiveSpellfist(final ElusiveSpellfist card) {
         super(card);
     }
 

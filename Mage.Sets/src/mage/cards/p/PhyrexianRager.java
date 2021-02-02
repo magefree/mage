@@ -30,7 +30,7 @@ public final class PhyrexianRager extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianRager(final PhyrexianRager card) {
+    private PhyrexianRager(final PhyrexianRager card) {
         super(card);
     }
 

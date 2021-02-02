@@ -33,7 +33,7 @@ public final class ConsulateSurveillance extends CardImpl {
 
     }
 
-    public ConsulateSurveillance(final ConsulateSurveillance card) {
+    private ConsulateSurveillance(final ConsulateSurveillance card) {
         super(card);
     }
 

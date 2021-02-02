@@ -46,7 +46,7 @@ public final class MinotaurIllusionist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MinotaurIllusionist(final MinotaurIllusionist card) {
+    private MinotaurIllusionist(final MinotaurIllusionist card) {
         super(card);
     }
 

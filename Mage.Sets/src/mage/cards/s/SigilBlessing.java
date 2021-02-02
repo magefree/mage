@@ -32,7 +32,7 @@ public final class SigilBlessing extends CardImpl {
         this.getSpellAbility().addEffect(new SigilBlessingBoostControlledEffect());
     }
 
-    public SigilBlessing(final SigilBlessing card) {
+    private SigilBlessing(final SigilBlessing card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class KamiOfThePaintedRoad extends CardImpl {
 
     }
 
-    public KamiOfThePaintedRoad(final KamiOfThePaintedRoad card) {
+    private KamiOfThePaintedRoad(final KamiOfThePaintedRoad card) {
         super(card);
     }
 

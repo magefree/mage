@@ -30,7 +30,7 @@ public final class KnowledgeAndPower extends CardImpl {
 
     }
 
-    public KnowledgeAndPower(final KnowledgeAndPower card) {
+    private KnowledgeAndPower(final KnowledgeAndPower card) {
         super(card);
     }
 

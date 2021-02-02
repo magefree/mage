@@ -32,7 +32,7 @@ public final class Wasteland extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Wasteland(final Wasteland card) {
+    private Wasteland(final Wasteland card) {
         super(card);
     }
 

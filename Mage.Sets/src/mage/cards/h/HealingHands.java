@@ -25,7 +25,7 @@ public final class HealingHands extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));   
     }
 
-    public HealingHands(final HealingHands card) {
+    private HealingHands(final HealingHands card) {
         super(card);
     }
 

@@ -41,7 +41,7 @@ public final class WingbeatWarrior extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WingbeatWarrior(final WingbeatWarrior card) {
+    private WingbeatWarrior(final WingbeatWarrior card) {
         super(card);
     }
 

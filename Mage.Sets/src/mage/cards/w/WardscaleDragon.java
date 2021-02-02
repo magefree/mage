@@ -38,7 +38,7 @@ public final class WardscaleDragon extends CardImpl {
 
     }
 
-    public WardscaleDragon(final WardscaleDragon card) {
+    private WardscaleDragon(final WardscaleDragon card) {
         super(card);
     }
 

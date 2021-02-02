@@ -46,7 +46,7 @@ public final class RageWeaver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RageWeaver(final RageWeaver card) {
+    private RageWeaver(final RageWeaver card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class Sandstorm extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(1, new FilterAttackingCreature()));
     }
 
-    public Sandstorm(final Sandstorm card) {
+    private Sandstorm(final Sandstorm card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class CragganwickCremator extends CardImpl {
 
     }
 
-    public CragganwickCremator(final CragganwickCremator card) {
+    private CragganwickCremator(final CragganwickCremator card) {
         super(card);
     }
 

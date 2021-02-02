@@ -34,7 +34,7 @@ public final class CrackdownConstruct extends CardImpl {
         this.addAbility(new CrackdownConstructTriggeredAbility());
     }
 
-    public CrackdownConstruct(final CrackdownConstruct card) {
+    private CrackdownConstruct(final CrackdownConstruct card) {
         super(card);
     }
 

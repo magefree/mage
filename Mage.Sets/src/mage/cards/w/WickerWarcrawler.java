@@ -35,7 +35,7 @@ public final class WickerWarcrawler extends CardImpl {
 
     }
 
-    public WickerWarcrawler(final WickerWarcrawler card) {
+    private WickerWarcrawler(final WickerWarcrawler card) {
         super(card);
     }
 

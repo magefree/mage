@@ -34,7 +34,7 @@ public final class HallowedMoonlight extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public HallowedMoonlight(final HallowedMoonlight card) {
+    private HallowedMoonlight(final HallowedMoonlight card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class Clairvoyance extends CardImpl {
                 new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1), Duration.OneUse), false));
     }
 
-    public Clairvoyance(final Clairvoyance card) {
+    private Clairvoyance(final Clairvoyance card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class LingeringPhantom extends CardImpl {
         ));
     }
 
-    public LingeringPhantom(final LingeringPhantom card) {
+    private LingeringPhantom(final LingeringPhantom card) {
         super(card);
     }
 

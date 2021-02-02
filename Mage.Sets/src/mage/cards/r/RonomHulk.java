@@ -37,7 +37,7 @@ public final class RonomHulk extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
     }
 
-    public RonomHulk(final RonomHulk card) {
+    private RonomHulk(final RonomHulk card) {
         super(card);
     }
 

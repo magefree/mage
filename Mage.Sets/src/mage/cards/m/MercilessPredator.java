@@ -37,7 +37,7 @@ public final class MercilessPredator extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
-    public MercilessPredator(final MercilessPredator card) {
+    private MercilessPredator(final MercilessPredator card) {
         super(card);
     }
 

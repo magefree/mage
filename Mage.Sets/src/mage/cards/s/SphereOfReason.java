@@ -23,7 +23,7 @@ public final class SphereOfReason extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageByColorEffect(ObjectColor.BLUE, 2)));
     }
 
-    public SphereOfReason(final SphereOfReason card) {
+    private SphereOfReason(final SphereOfReason card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class GallowsWarden extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
-    public GallowsWarden(final GallowsWarden card) {
+    private GallowsWarden(final GallowsWarden card) {
         super(card);
     }
 

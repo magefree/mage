@@ -38,7 +38,7 @@ public final class GrizzledOutcasts extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
-    public GrizzledOutcasts(final GrizzledOutcasts card) {
+    private GrizzledOutcasts(final GrizzledOutcasts card) {
         super(card);
     }
 

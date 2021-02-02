@@ -39,7 +39,7 @@ public final class ClawsOfWirewood extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public ClawsOfWirewood(final ClawsOfWirewood card) {
+    private ClawsOfWirewood(final ClawsOfWirewood card) {
         super(card);
     }
 

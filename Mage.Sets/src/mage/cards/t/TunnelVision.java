@@ -30,7 +30,7 @@ public final class TunnelVision extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public TunnelVision(final TunnelVision card) {
+    private TunnelVision(final TunnelVision card) {
         super(card);
     }
 

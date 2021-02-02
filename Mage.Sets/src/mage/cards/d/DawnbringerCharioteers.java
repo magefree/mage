@@ -35,7 +35,7 @@ public final class DawnbringerCharioteers extends CardImpl {
         this.addAbility(new HeroicAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 
-    public DawnbringerCharioteers(final DawnbringerCharioteers card) {
+    private DawnbringerCharioteers(final DawnbringerCharioteers card) {
         super(card);
     }
 

@@ -31,7 +31,7 @@ public final class Ophidian extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Ophidian(final Ophidian card) {
+    private Ophidian(final Ophidian card) {
         super(card);
     }
 

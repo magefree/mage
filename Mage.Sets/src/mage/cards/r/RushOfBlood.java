@@ -26,7 +26,7 @@ public final class RushOfBlood extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public RushOfBlood(final RushOfBlood card) {
+    private RushOfBlood(final RushOfBlood card) {
         super(card);
     }
 

@@ -58,7 +58,7 @@ public final class ArcaneArtisan extends CardImpl {
         this.addAbility(new ArcaneArtisanLeavesBattlefieldTriggeredAbility());
     }
 
-    public ArcaneArtisan(final ArcaneArtisan card) {
+    private ArcaneArtisan(final ArcaneArtisan card) {
         super(card);
     }
 

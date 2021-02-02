@@ -36,7 +36,7 @@ public final class Quicken extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
     }
 
-    public Quicken(final Quicken card) {
+    private Quicken(final Quicken card) {
         super(card);
     }
 

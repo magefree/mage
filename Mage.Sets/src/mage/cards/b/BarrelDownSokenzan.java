@@ -30,7 +30,7 @@ public final class BarrelDownSokenzan extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public BarrelDownSokenzan(final BarrelDownSokenzan card) {
+    private BarrelDownSokenzan(final BarrelDownSokenzan card) {
         super(card);
     }
 

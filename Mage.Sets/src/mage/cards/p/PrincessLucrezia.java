@@ -28,7 +28,7 @@ public final class PrincessLucrezia extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public PrincessLucrezia(final PrincessLucrezia card) {
+    private PrincessLucrezia(final PrincessLucrezia card) {
         super(card);
     }
 

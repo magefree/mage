@@ -25,7 +25,7 @@ public final class Fatigue extends CardImpl {
         
     }
 
-    public Fatigue(final Fatigue card) {
+    private Fatigue(final Fatigue card) {
         super(card);
     }
 

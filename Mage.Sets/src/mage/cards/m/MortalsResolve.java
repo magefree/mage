@@ -32,7 +32,7 @@ public final class MortalsResolve extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public MortalsResolve(final MortalsResolve card) {
+    private MortalsResolve(final MortalsResolve card) {
         super(card);
     }
 

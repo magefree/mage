@@ -50,7 +50,7 @@ public final class CateranSlaver extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CateranSlaver(final CateranSlaver card) {
+    private CateranSlaver(final CateranSlaver card) {
         super(card);
     }
 

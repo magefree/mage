@@ -32,7 +32,7 @@ public final class RiotSpikes extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, -1, Duration.WhileOnBattlefield)));
     }
 
-    public RiotSpikes(final RiotSpikes card) {
+    private RiotSpikes(final RiotSpikes card) {
         super(card);
     }
 

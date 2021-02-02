@@ -41,7 +41,7 @@ public final class FalkenrathTorturer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FalkenrathTorturer(final FalkenrathTorturer card) {
+    private FalkenrathTorturer(final FalkenrathTorturer card) {
         super(card);
     }
 

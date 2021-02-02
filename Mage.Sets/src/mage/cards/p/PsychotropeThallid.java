@@ -54,7 +54,7 @@ public final class PsychotropeThallid extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PsychotropeThallid(final PsychotropeThallid card) {
+    private PsychotropeThallid(final PsychotropeThallid card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class PrismaticWard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrismaticWardPreventDamageEffect()));
     }
 
-    public PrismaticWard(final PrismaticWard card) {
+    private PrismaticWard(final PrismaticWard card) {
         super(card);
     }
 

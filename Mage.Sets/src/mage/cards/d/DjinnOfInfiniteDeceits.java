@@ -48,7 +48,7 @@ public final class DjinnOfInfiniteDeceits extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DjinnOfInfiniteDeceits(final DjinnOfInfiniteDeceits card) {
+    private DjinnOfInfiniteDeceits(final DjinnOfInfiniteDeceits card) {
         super(card);
     }
 

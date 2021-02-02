@@ -29,7 +29,7 @@ public final class ThroneOfBone extends CardImpl {
         this.addAbility(new ThroneOfBoneAbility());
     }
 
-    public ThroneOfBone(final ThroneOfBone card) {
+    private ThroneOfBone(final ThroneOfBone card) {
         super(card);
     }
 

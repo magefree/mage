@@ -22,7 +22,7 @@ public final class VitalizingWind extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(7, 7, Duration.EndOfTurn));
     }
 
-    public VitalizingWind(final VitalizingWind card) {
+    private VitalizingWind(final VitalizingWind card) {
         super(card);
     }
 

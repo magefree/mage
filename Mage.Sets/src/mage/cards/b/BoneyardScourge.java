@@ -52,7 +52,7 @@ public final class BoneyardScourge extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BoneyardScourge(final BoneyardScourge card) {
+    private BoneyardScourge(final BoneyardScourge card) {
         super(card);
     }
 

@@ -56,7 +56,7 @@ public final class TibaltTheFiendBlooded extends CardImpl {
         this.addAbility(new LoyaltyAbility(new TibaltTheFiendBloodedThirdEffect(), -6));
     }
 
-    public TibaltTheFiendBlooded(final TibaltTheFiendBlooded card) {
+    private TibaltTheFiendBlooded(final TibaltTheFiendBlooded card) {
         super(card);
     }
 

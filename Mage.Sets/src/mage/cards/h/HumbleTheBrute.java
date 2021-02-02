@@ -35,7 +35,7 @@ public final class HumbleTheBrute extends CardImpl {
         this.getSpellAbility().addEffect(new InvestigateEffect());
     }
 
-    public HumbleTheBrute(final HumbleTheBrute card) {
+    private HumbleTheBrute(final HumbleTheBrute card) {
         super(card);
     }
 

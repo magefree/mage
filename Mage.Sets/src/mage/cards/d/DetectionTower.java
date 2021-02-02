@@ -37,7 +37,7 @@ public final class DetectionTower extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DetectionTower(final DetectionTower card) {
+    private DetectionTower(final DetectionTower card) {
         super(card);
     }
 

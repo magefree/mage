@@ -33,7 +33,7 @@ public final class RiteOfPassage extends CardImpl {
 
     }
 
-    public RiteOfPassage(final RiteOfPassage card) {
+    private RiteOfPassage(final RiteOfPassage card) {
         super(card);
     }
 

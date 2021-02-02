@@ -34,7 +34,7 @@ public final class LuXunScholarGeneral extends CardImpl {
 
     }
 
-    public LuXunScholarGeneral(final LuXunScholarGeneral card) {
+    private LuXunScholarGeneral(final LuXunScholarGeneral card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class FiremaneAngel extends CardImpl {
                 new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{6}{R}{R}{W}{W}"), new IsStepCondition(PhaseStep.UPKEEP), null));
     }
 
-    public FiremaneAngel(final FiremaneAngel card) {
+    private FiremaneAngel(final FiremaneAngel card) {
         super(card);
     }
 

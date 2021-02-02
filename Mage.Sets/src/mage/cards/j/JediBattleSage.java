@@ -40,7 +40,7 @@ public final class JediBattleSage extends CardImpl {
         this.addAbility(new MeditateAbility(new ManaCostsImpl("{1}{G}")));
     }
 
-    public JediBattleSage(final JediBattleSage card) {
+    private JediBattleSage(final JediBattleSage card) {
         super(card);
     }
 

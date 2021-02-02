@@ -42,7 +42,7 @@ public final class Whiteout extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
-    public Whiteout(final Whiteout card) {
+    private Whiteout(final Whiteout card) {
         super(card);
     }
 

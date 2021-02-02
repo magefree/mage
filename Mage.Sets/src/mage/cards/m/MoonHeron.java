@@ -26,7 +26,7 @@ public final class MoonHeron extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public MoonHeron(final MoonHeron card) {
+    private MoonHeron(final MoonHeron card) {
         super(card);
     }
 

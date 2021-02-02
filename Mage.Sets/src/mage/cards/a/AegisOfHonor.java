@@ -35,7 +35,7 @@ public final class AegisOfHonor extends CardImpl {
 
     }
 
-    public AegisOfHonor(final AegisOfHonor card) {
+    private AegisOfHonor(final AegisOfHonor card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class VoiceOfReason extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
     }
 
-    public VoiceOfReason(final VoiceOfReason card) {
+    private VoiceOfReason(final VoiceOfReason card) {
         super(card);
     }
 

@@ -22,7 +22,7 @@ public final class Mulch extends CardImpl {
         this.getSpellAbility().addEffect(new RevealLibraryPutIntoHandEffect(4, new FilterLandCard("land cards"), Zone.GRAVEYARD));
     }
 
-    public Mulch(final Mulch card) {
+    private Mulch(final Mulch card) {
         super(card);
     }
 

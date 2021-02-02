@@ -61,7 +61,7 @@ public final class PristineAngel extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), true));
     }
 
-    public PristineAngel(final PristineAngel card) {
+    private PristineAngel(final PristineAngel card) {
         super(card);
     }
 

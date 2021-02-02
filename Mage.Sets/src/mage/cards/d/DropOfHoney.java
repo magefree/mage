@@ -39,7 +39,7 @@ public final class DropOfHoney extends CardImpl {
         this.addAbility(new DropOfHoneyStateTriggeredAbility());
     }
 
-    public DropOfHoney(final DropOfHoney card) {
+    private DropOfHoney(final DropOfHoney card) {
         super(card);
     }
 

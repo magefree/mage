@@ -30,7 +30,7 @@ public final class HealingLeaves extends CardImpl {
         this.getSpellAbility().addMode(mode);
     }
 
-    public HealingLeaves(final HealingLeaves card) {
+    private HealingLeaves(final HealingLeaves card) {
         super(card);
     }
 

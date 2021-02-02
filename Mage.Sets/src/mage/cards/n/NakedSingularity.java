@@ -34,7 +34,7 @@ public final class NakedSingularity extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NakedSingularityEffect()));
     }
 
-    public NakedSingularity(final NakedSingularity card) {
+    private NakedSingularity(final NakedSingularity card) {
         super(card);
     }
 

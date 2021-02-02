@@ -40,7 +40,7 @@ public final class CephalidSnitch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CephalidSnitch(final CephalidSnitch card) {
+    private CephalidSnitch(final CephalidSnitch card) {
         super(card);
     }
 

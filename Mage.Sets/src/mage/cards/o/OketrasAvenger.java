@@ -31,7 +31,7 @@ public final class OketrasAvenger extends CardImpl {
         this.addAbility(new ExertAbility(ability));
     }
 
-    public OketrasAvenger(final OketrasAvenger card) {
+    private OketrasAvenger(final OketrasAvenger card) {
         super(card);
     }
 

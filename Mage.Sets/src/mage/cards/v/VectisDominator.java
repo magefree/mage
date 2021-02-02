@@ -40,7 +40,7 @@ public final class VectisDominator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VectisDominator(final VectisDominator card) {
+    private VectisDominator(final VectisDominator card) {
         super(card);
     }
 

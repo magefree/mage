@@ -53,7 +53,7 @@ public final class JiwariTheEarthAflame extends CardImpl {
         this.addAbility(new ChannelAbility("{X}{R}{R}{R}", new DamageAllEffect(ManacostVariableValue.instance, filter)));
     }
 
-    public JiwariTheEarthAflame(final JiwariTheEarthAflame card) {
+    private JiwariTheEarthAflame(final JiwariTheEarthAflame card) {
         super(card);
     }
 

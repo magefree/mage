@@ -32,7 +32,7 @@ public final class RiverMerfolk extends CardImpl {
                 new ManaCostsImpl("{U}")));
     }
 
-    public RiverMerfolk(final RiverMerfolk card) {
+    private RiverMerfolk(final RiverMerfolk card) {
         super(card);
     }
 

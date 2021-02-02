@@ -40,7 +40,7 @@ public final class ShelteringAncient extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ShelteringAncientCost()));
     }
 
-    public ShelteringAncient(final ShelteringAncient card) {
+    private ShelteringAncient(final ShelteringAncient card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class DreadSlag extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public DreadSlag(final DreadSlag card) {
+    private DreadSlag(final DreadSlag card) {
         super(card);
     }
 

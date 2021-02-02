@@ -31,7 +31,7 @@ public final class InsatiableGorgers extends CardImpl {
         this.addAbility(new MadnessAbility(this, new ManaCostsImpl("{3}{R}")));
     }
 
-    public InsatiableGorgers(final InsatiableGorgers card) {
+    private InsatiableGorgers(final InsatiableGorgers card) {
         super(card);
     }
 

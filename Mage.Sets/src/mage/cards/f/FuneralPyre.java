@@ -32,7 +32,7 @@ public final class FuneralPyre extends CardImpl {
         
     }
 
-    public FuneralPyre(final FuneralPyre card) {
+    private FuneralPyre(final FuneralPyre card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class MyrEnforcer extends CardImpl {
         this.addAbility(new AffinityForArtifactsAbility());
     }
 
-    public MyrEnforcer(final MyrEnforcer card) {
+    private MyrEnforcer(final MyrEnforcer card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class AnimalBoneyard extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public AnimalBoneyard(final AnimalBoneyard card) {
+    private AnimalBoneyard(final AnimalBoneyard card) {
         super(card);
     }
 

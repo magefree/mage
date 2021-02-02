@@ -25,7 +25,7 @@ public final class DepthsOfDesire extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new TreasureToken()));
     }
 
-    public DepthsOfDesire(final DepthsOfDesire card) {
+    private DepthsOfDesire(final DepthsOfDesire card) {
         super(card);
     }
 

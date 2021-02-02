@@ -40,7 +40,7 @@ public final class AlwaysWatching extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AlwaysWatching(final AlwaysWatching card) {
+    private AlwaysWatching(final AlwaysWatching card) {
         super(card);
     }
 

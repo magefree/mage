@@ -27,7 +27,7 @@ public final class WavesOfAggression extends CardImpl {
         this.addAbility(new RetraceAbility(this));
     }
 
-    public WavesOfAggression(final WavesOfAggression card) {
+    private WavesOfAggression(final WavesOfAggression card) {
         super(card);
     }
 

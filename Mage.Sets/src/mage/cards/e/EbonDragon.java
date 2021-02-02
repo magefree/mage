@@ -37,7 +37,7 @@ public final class EbonDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public EbonDragon(final EbonDragon card) {
+    private EbonDragon(final EbonDragon card) {
         super(card);
     }
 

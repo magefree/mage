@@ -31,7 +31,7 @@ public final class JackalPup extends CardImpl {
 
     }
 
-    public JackalPup(final JackalPup card) {
+    private JackalPup(final JackalPup card) {
         super(card);
     }
 

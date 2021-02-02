@@ -29,7 +29,7 @@ public final class SpeciesGorger extends CardImpl {
         
     }
 
-    public SpeciesGorger(final SpeciesGorger card) {
+    private SpeciesGorger(final SpeciesGorger card) {
         super(card);
     }
 

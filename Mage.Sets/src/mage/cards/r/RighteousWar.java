@@ -52,7 +52,7 @@ public final class RighteousWar extends CardImpl {
         ));
     }
 
-    public RighteousWar(final RighteousWar card) {
+    private RighteousWar(final RighteousWar card) {
         super(card);
     }
 

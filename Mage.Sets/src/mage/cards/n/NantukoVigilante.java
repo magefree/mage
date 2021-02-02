@@ -39,7 +39,7 @@ public final class NantukoVigilante extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NantukoVigilante(final NantukoVigilante card) {
+    private NantukoVigilante(final NantukoVigilante card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class OkinaNightwatch extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OkinaNightwatch(final OkinaNightwatch card) {
+    private OkinaNightwatch(final OkinaNightwatch card) {
         super(card);
     }
 

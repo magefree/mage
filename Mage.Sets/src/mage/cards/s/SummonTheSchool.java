@@ -40,7 +40,7 @@ public final class SummonTheSchool extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), new TapTargetCost(new TargetControlledPermanent(4, 4, filter, false))));
     }
 
-    public SummonTheSchool(final SummonTheSchool card) {
+    private SummonTheSchool(final SummonTheSchool card) {
         super(card);
     }
 

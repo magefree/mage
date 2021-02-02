@@ -29,7 +29,7 @@ public final class PsychicMembrane extends CardImpl {
         this.addAbility(new BlocksSourceTriggeredAbility(new DrawCardSourceControllerEffect(1), true));
     }
 
-    public PsychicMembrane(final PsychicMembrane card) {
+    private PsychicMembrane(final PsychicMembrane card) {
         super(card);
     }
 

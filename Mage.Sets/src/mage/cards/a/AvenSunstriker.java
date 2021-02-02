@@ -33,7 +33,7 @@ public final class AvenSunstriker extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{W}"), true));
     }
 
-    public AvenSunstriker(final AvenSunstriker card) {
+    private AvenSunstriker(final AvenSunstriker card) {
         super(card);
     }
 

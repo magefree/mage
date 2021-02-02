@@ -40,7 +40,7 @@ public final class GreelsCaress extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-3, 0, Duration.WhileOnBattlefield)));
     }
 
-    public GreelsCaress(final GreelsCaress card) {
+    private GreelsCaress(final GreelsCaress card) {
         super(card);
     }
 

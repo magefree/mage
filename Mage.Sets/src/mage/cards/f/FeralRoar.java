@@ -22,7 +22,7 @@ public final class FeralRoar extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public FeralRoar(final FeralRoar card) {
+    private FeralRoar(final FeralRoar card) {
         super(card);
     }
 

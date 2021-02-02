@@ -47,7 +47,7 @@ public final class ReaperKing extends CardImpl {
 
     }
 
-    public ReaperKing(final ReaperKing card) {
+    private ReaperKing(final ReaperKing card) {
         super(card);
     }
 

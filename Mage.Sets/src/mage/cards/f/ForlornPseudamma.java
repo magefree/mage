@@ -33,7 +33,7 @@ public final class ForlornPseudamma extends CardImpl {
         this.addAbility(new InspiredAbility(new DoIfCostPaid(new CreateTokenEffect(new ForlornPseudammaZombieToken()), new ManaCostsImpl("{2}{B}"))));
     }
 
-    public ForlornPseudamma(final ForlornPseudamma card) {
+    private ForlornPseudamma(final ForlornPseudamma card) {
         super(card);
     }
 

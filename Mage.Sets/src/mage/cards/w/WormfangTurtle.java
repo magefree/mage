@@ -48,7 +48,7 @@ public final class WormfangTurtle extends CardImpl {
         this.addAbility(ability2);
     }
 
-    public WormfangTurtle(final WormfangTurtle card) {
+    private WormfangTurtle(final WormfangTurtle card) {
         super(card);
     }
 

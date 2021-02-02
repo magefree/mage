@@ -35,7 +35,7 @@ public final class Retether extends CardImpl {
         this.getSpellAbility().addEffect(new RetetherEffect());
     }
 
-    public Retether(final Retether card) {
+    private Retether(final Retether card) {
         super(card);
     }
 

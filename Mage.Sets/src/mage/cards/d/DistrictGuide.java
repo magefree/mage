@@ -47,7 +47,7 @@ public final class DistrictGuide extends CardImpl {
         ));
     }
 
-    public DistrictGuide(final DistrictGuide card) {
+    private DistrictGuide(final DistrictGuide card) {
         super(card);
     }
 

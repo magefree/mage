@@ -41,7 +41,7 @@ public final class InfernalOffering extends CardImpl {
         this.getSpellAbility().addEffect(new InfernalOfferingReturnEffect());
     }
 
-    public InfernalOffering(final InfernalOffering card) {
+    private InfernalOffering(final InfernalOffering card) {
         super(card);
     }
 

@@ -44,7 +44,7 @@ public final class CuombajjWitches extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CuombajjWitches(final CuombajjWitches card) {
+    private CuombajjWitches(final CuombajjWitches card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class CartoucheOfZeal extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CartoucheOfZeal(final CartoucheOfZeal card) {
+    private CartoucheOfZeal(final CartoucheOfZeal card) {
         super(card);
     }
 

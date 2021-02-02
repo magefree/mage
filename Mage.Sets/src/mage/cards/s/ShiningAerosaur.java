@@ -27,7 +27,7 @@ public final class ShiningAerosaur extends CardImpl {
 
     }
 
-    public ShiningAerosaur(final ShiningAerosaur card) {
+    private ShiningAerosaur(final ShiningAerosaur card) {
         super(card);
     }
 

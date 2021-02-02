@@ -40,7 +40,7 @@ public final class NourishingShoal extends CardImpl {
 
     }
 
-    public NourishingShoal(final NourishingShoal card) {
+    private NourishingShoal(final NourishingShoal card) {
         super(card);
     }
 

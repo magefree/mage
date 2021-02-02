@@ -43,7 +43,7 @@ public final class MarkOfFury extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.ANY, false));
     }
 
-    public MarkOfFury(final MarkOfFury card) {
+    private MarkOfFury(final MarkOfFury card) {
         super(card);
     }
 

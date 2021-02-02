@@ -33,7 +33,7 @@ public final class ConsulateTurret extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ConsulateTurret(final ConsulateTurret card) {
+    private ConsulateTurret(final ConsulateTurret card) {
         super(card);
     }
 

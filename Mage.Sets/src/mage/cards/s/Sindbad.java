@@ -35,7 +35,7 @@ public final class Sindbad extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SindbadEffect(), new TapSourceCost()));
     }
 
-    public Sindbad(final Sindbad card) {
+    private Sindbad(final Sindbad card) {
         super(card);
     }
 

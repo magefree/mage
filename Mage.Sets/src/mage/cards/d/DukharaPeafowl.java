@@ -31,7 +31,7 @@ public final class DukharaPeafowl extends CardImpl {
 
     }
 
-    public DukharaPeafowl(final DukharaPeafowl card) {
+    private DukharaPeafowl(final DukharaPeafowl card) {
         super(card);
     }
 

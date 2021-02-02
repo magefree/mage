@@ -39,7 +39,7 @@ public final class SpyNetwork extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public SpyNetwork(final SpyNetwork card) {
+    private SpyNetwork(final SpyNetwork card) {
         super(card);
     }
 

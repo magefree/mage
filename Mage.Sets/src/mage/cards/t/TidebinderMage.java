@@ -59,7 +59,7 @@ public final class TidebinderMage extends CardImpl {
 
     }
 
-    public TidebinderMage(final TidebinderMage card) {
+    private TidebinderMage(final TidebinderMage card) {
         super(card);
     }
 

@@ -42,7 +42,7 @@ public final class PrimalClay extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new PrimalPlasmaReplacementEffect()));
     }
 
-    public PrimalClay(final PrimalClay card) {
+    private PrimalClay(final PrimalClay card) {
         super(card);
     }
 

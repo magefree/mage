@@ -32,7 +32,7 @@ public final class Tombfire extends CardImpl {
 
     }
 
-    public Tombfire(final Tombfire card) {
+    private Tombfire(final Tombfire card) {
         super(card);
     }
 

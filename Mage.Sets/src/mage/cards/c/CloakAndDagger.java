@@ -46,7 +46,7 @@ public final class CloakAndDagger extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public CloakAndDagger(final CloakAndDagger card) {
+    private CloakAndDagger(final CloakAndDagger card) {
         super(card);
     }
 

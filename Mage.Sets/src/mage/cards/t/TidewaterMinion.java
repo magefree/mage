@@ -46,7 +46,7 @@ public final class TidewaterMinion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TidewaterMinion(final TidewaterMinion card) {
+    private TidewaterMinion(final TidewaterMinion card) {
         super(card);
     }
 

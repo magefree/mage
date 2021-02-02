@@ -32,7 +32,7 @@ public final class Upwelling extends CardImpl {
 
     }
 
-    public Upwelling(final Upwelling card) {
+    private Upwelling(final Upwelling card) {
         super(card);
     }
 

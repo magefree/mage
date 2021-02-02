@@ -44,7 +44,7 @@ public final class FaultRiders extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FaultRiders(final FaultRiders card) {
+    private FaultRiders(final FaultRiders card) {
         super(card);
     }
 

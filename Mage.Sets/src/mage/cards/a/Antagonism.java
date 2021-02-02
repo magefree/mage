@@ -30,7 +30,7 @@ public final class Antagonism extends CardImpl {
 
     }
 
-    public Antagonism(final Antagonism card) {
+    private Antagonism(final Antagonism card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class GoblinFireslinger extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GoblinFireslinger(final GoblinFireslinger card) {
+    private GoblinFireslinger(final GoblinFireslinger card) {
         super(card);
     }
 

@@ -26,7 +26,7 @@ public final class SandbarSerpent extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public SandbarSerpent(final SandbarSerpent card) {
+    private SandbarSerpent(final SandbarSerpent card) {
         super(card);
     }
 

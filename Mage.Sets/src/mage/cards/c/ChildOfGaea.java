@@ -35,7 +35,7 @@ public final class ChildOfGaea extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{G}")));
     }
 
-    public ChildOfGaea(final ChildOfGaea card) {
+    private ChildOfGaea(final ChildOfGaea card) {
         super(card);
     }
 

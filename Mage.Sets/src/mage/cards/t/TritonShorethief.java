@@ -23,7 +23,7 @@ public final class TritonShorethief extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public TritonShorethief(final TritonShorethief card) {
+    private TritonShorethief(final TritonShorethief card) {
         super(card);
     }
 

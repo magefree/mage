@@ -28,7 +28,7 @@ public final class Gloomwidow extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public Gloomwidow(final Gloomwidow card) {
+    private Gloomwidow(final Gloomwidow card) {
         super(card);
     }
 

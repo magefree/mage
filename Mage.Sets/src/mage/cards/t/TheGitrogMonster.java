@@ -47,7 +47,7 @@ public final class TheGitrogMonster extends CardImpl {
         this.addAbility(new TheGitrogMonsterTriggeredAbility());
     }
 
-    public TheGitrogMonster(final TheGitrogMonster card) {
+    private TheGitrogMonster(final TheGitrogMonster card) {
         super(card);
     }
 

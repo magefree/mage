@@ -37,7 +37,7 @@ public final class BackFromTheBrink extends CardImpl {
 
     }
 
-    public BackFromTheBrink(final BackFromTheBrink card) {
+    private BackFromTheBrink(final BackFromTheBrink card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class SwiftwaterCliffs extends CardImpl {
               
     }
 
-    public SwiftwaterCliffs(final SwiftwaterCliffs card) {
+    private SwiftwaterCliffs(final SwiftwaterCliffs card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class GOTOJAIL extends CardImpl {
         this.addAbility(new GoToJailTriggeredAbility());
     }
 
-    public GOTOJAIL(final GOTOJAIL card) {
+    private GOTOJAIL(final GOTOJAIL card) {
         super(card);
     }
 

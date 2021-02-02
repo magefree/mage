@@ -30,7 +30,7 @@ public final class KefnetsLastWord extends CardImpl {
                 .setText("Lands you control don't untap during your next untap phase"));
     }
 
-    public KefnetsLastWord(final KefnetsLastWord card) {
+    private KefnetsLastWord(final KefnetsLastWord card) {
         super(card);
     }
 

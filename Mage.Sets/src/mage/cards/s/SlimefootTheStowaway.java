@@ -49,7 +49,7 @@ public final class SlimefootTheStowaway extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new ManaCostsImpl("{4}")));
     }
 
-    public SlimefootTheStowaway(final SlimefootTheStowaway card) {
+    private SlimefootTheStowaway(final SlimefootTheStowaway card) {
         super(card);
     }
 

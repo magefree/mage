@@ -41,7 +41,7 @@ public final class LightwielderPaladin extends CardImpl {
         this.addAbility(new LightwielderPaladinTriggeredAbility());
     }
 
-    public LightwielderPaladin(final LightwielderPaladin card) {
+    private LightwielderPaladin(final LightwielderPaladin card) {
         super(card);
     }
 

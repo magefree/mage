@@ -28,7 +28,7 @@ public final class BreedingPool extends CardImpl {
         this.addAbility(new BlueManaAbility());
     }
 
-    public BreedingPool(final BreedingPool card) {
+    private BreedingPool(final BreedingPool card) {
         super(card);
     }
 

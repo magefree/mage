@@ -28,7 +28,7 @@ public final class MonstrousOnslaught extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(xValue));
     }
 
-    public MonstrousOnslaught(final MonstrousOnslaught card) {
+    private MonstrousOnslaught(final MonstrousOnslaught card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class AjanisMantra extends CardImpl {
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new GainLifeEffect(1), true));
     }
 
-    public AjanisMantra(final AjanisMantra card) {
+    private AjanisMantra(final AjanisMantra card) {
         super(card);
     }
 

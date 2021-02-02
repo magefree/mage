@@ -25,7 +25,7 @@ public final class RadiantFountain extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
     }
 
-    public RadiantFountain(final RadiantFountain card) {
+    private RadiantFountain(final RadiantFountain card) {
         super(card);
     }
 

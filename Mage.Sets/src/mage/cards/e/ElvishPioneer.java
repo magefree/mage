@@ -29,7 +29,7 @@ public final class ElvishPioneer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_BASIC_LAND_A, false, true), false));
     }
 
-    public ElvishPioneer(final ElvishPioneer card) {
+    private ElvishPioneer(final ElvishPioneer card) {
         super(card);
     }
 

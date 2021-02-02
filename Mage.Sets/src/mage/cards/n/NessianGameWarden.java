@@ -40,7 +40,7 @@ public final class NessianGameWarden extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new NessianGameWardenEffect(), false));
     }
 
-    public NessianGameWarden(final NessianGameWarden card) {
+    private NessianGameWarden(final NessianGameWarden card) {
         super(card);
     }
 

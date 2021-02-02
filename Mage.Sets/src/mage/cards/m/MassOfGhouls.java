@@ -23,7 +23,7 @@ public final class MassOfGhouls extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public MassOfGhouls(final MassOfGhouls card) {
+    private MassOfGhouls(final MassOfGhouls card) {
         super(card);
     }
 

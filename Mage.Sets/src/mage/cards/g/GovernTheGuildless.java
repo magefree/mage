@@ -39,7 +39,7 @@ public final class GovernTheGuildless extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GovernTheGuildless(final GovernTheGuildless card) {
+    private GovernTheGuildless(final GovernTheGuildless card) {
         super(card);
     }
 

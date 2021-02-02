@@ -52,7 +52,7 @@ public final class ChromeshellCrab extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChromeshellCrab(final ChromeshellCrab card) {
+    private ChromeshellCrab(final ChromeshellCrab card) {
         super(card);
     }
 

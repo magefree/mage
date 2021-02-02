@@ -30,7 +30,7 @@ public final class Hesitation extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Hesitation(final Hesitation card) {
+    private Hesitation(final Hesitation card) {
         super(card);
     }
 

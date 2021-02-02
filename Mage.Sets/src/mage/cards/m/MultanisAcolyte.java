@@ -30,7 +30,7 @@ public final class MultanisAcolyte extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
     }
 
-    public MultanisAcolyte(final MultanisAcolyte card) {
+    private MultanisAcolyte(final MultanisAcolyte card) {
         super(card);
     }
 

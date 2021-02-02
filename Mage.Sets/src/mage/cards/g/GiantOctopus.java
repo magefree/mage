@@ -22,7 +22,7 @@ public final class GiantOctopus extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public GiantOctopus(final GiantOctopus card) {
+    private GiantOctopus(final GiantOctopus card) {
         super(card);
     }
 

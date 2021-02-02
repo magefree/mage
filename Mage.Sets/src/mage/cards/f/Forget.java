@@ -27,7 +27,7 @@ public final class Forget extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public Forget(final Forget card) {
+    private Forget(final Forget card) {
         super(card);
     }
 

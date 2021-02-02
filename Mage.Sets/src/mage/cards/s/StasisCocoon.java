@@ -42,7 +42,7 @@ public final class StasisCocoon extends CardImpl {
         
     }
 
-    public StasisCocoon(final StasisCocoon card) {
+    private StasisCocoon(final StasisCocoon card) {
         super(card);
     }
 

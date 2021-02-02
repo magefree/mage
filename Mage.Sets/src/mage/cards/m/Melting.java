@@ -32,7 +32,7 @@ public final class Melting extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeltingEffect()));
     }
 
-    public Melting(final Melting card) {
+    private Melting(final Melting card) {
         super(card);
     }
 

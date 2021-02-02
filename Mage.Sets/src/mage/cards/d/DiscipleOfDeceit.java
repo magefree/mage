@@ -44,7 +44,7 @@ public final class DiscipleOfDeceit extends CardImpl {
         
     }
 
-    public DiscipleOfDeceit(final DiscipleOfDeceit card) {
+    private DiscipleOfDeceit(final DiscipleOfDeceit card) {
         super(card);
     }
 

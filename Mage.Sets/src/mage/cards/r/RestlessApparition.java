@@ -33,7 +33,7 @@ public final class RestlessApparition extends CardImpl {
         this.addAbility(new PersistAbility());
     }
 
-    public RestlessApparition(final RestlessApparition card) {
+    private RestlessApparition(final RestlessApparition card) {
         super(card);
     }
 

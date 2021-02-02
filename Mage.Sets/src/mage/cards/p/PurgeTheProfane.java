@@ -25,7 +25,7 @@ public final class PurgeTheProfane extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 
-    public PurgeTheProfane(final PurgeTheProfane card) {
+    private PurgeTheProfane(final PurgeTheProfane card) {
         super(card);
     }
 

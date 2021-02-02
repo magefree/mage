@@ -35,7 +35,7 @@ public final class BloodBaronOfVizkopa extends CardImpl {
 
     }
 
-    public BloodBaronOfVizkopa(final BloodBaronOfVizkopa card) {
+    private BloodBaronOfVizkopa(final BloodBaronOfVizkopa card) {
         super(card);
     }
 

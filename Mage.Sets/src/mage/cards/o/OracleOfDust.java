@@ -36,7 +36,7 @@ public final class OracleOfDust extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OracleOfDust(final OracleOfDust card) {
+    private OracleOfDust(final OracleOfDust card) {
         super(card);
     }
 

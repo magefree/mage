@@ -39,7 +39,7 @@ public final class BorosFuryShield extends CardImpl {
                 new ManaWasSpentCondition(ColoredManaSymbol.R), "If {R} was spent to cast this spell, it deals damage to that creature's controller equal to the creature's power"));
     }
 
-    public BorosFuryShield(final BorosFuryShield card) {
+    private BorosFuryShield(final BorosFuryShield card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class SpawnsireOfUlamog extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CastCardFromOutsideTheGameEffect(filter, ruleText), new GenericManaCost(20)));
     }
 
-    public SpawnsireOfUlamog(final SpawnsireOfUlamog card) {
+    private SpawnsireOfUlamog(final SpawnsireOfUlamog card) {
         super(card);
     }
 

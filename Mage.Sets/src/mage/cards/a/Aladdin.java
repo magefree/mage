@@ -43,7 +43,7 @@ public final class Aladdin extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Aladdin(final Aladdin card) {
+    private Aladdin(final Aladdin card) {
         super(card);
     }
 

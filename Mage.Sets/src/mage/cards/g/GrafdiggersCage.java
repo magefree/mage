@@ -33,7 +33,7 @@ public final class GrafdiggersCage extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GrafdiggersCageEffect2()));
     }
 
-    public GrafdiggersCage(final GrafdiggersCage card) {
+    private GrafdiggersCage(final GrafdiggersCage card) {
         super(card);
     }
 

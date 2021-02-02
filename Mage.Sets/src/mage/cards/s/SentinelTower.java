@@ -35,7 +35,7 @@ public final class SentinelTower extends CardImpl {
         this.addAbility(new SentinelTowerTriggeredAbility(), new SentinelTowerWatcher());
     }
 
-    public SentinelTower(final SentinelTower card) {
+    private SentinelTower(final SentinelTower card) {
         super(card);
     }
 

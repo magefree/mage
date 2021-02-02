@@ -40,7 +40,7 @@ public final class StoicAngel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StoicAngelEffect()));
     }
 
-    public StoicAngel(final StoicAngel card) {
+    private StoicAngel(final StoicAngel card) {
         super(card);
     }
 

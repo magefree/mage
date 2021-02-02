@@ -51,7 +51,7 @@ public final class SeaLegs extends CardImpl {
         );
     }
 
-    public SeaLegs(final SeaLegs card) {
+    private SeaLegs(final SeaLegs card) {
         super(card);
     }
 

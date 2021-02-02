@@ -25,7 +25,7 @@ public final class OblivionStrike extends CardImpl {
         getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public OblivionStrike(final OblivionStrike card) {
+    private OblivionStrike(final OblivionStrike card) {
         super(card);
     }
 

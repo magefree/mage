@@ -40,7 +40,7 @@ public final class ForsakenWastes extends CardImpl {
         this.addAbility(new ForsakenWastesTriggeredAbility());
     }
 
-    public ForsakenWastes(final ForsakenWastes card) {
+    private ForsakenWastes(final ForsakenWastes card) {
         super(card);
     }
 

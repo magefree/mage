@@ -41,7 +41,7 @@ public final class Witchstalker extends CardImpl {
 
     }
 
-    public Witchstalker(final Witchstalker card) {
+    private Witchstalker(final Witchstalker card) {
         super(card);
     }
 

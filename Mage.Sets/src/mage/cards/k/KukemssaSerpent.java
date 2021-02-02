@@ -56,7 +56,7 @@ public final class KukemssaSerpent extends CardImpl {
                 new SacrificeSourceEffect()));
     }
 
-    public KukemssaSerpent(final KukemssaSerpent card) {
+    private KukemssaSerpent(final KukemssaSerpent card) {
         super(card);
     }
 

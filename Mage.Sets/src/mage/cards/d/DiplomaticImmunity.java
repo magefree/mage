@@ -42,7 +42,7 @@ public final class DiplomaticImmunity extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA)));
     }
 
-    public DiplomaticImmunity(final DiplomaticImmunity card) {
+    private DiplomaticImmunity(final DiplomaticImmunity card) {
         super(card);
     }
 

@@ -51,7 +51,7 @@ public final class MartyrOfSands extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MartyrOfSands(final MartyrOfSands card) {
+    private MartyrOfSands(final MartyrOfSands card) {
         super(card);
     }
 

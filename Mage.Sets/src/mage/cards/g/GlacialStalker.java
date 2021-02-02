@@ -27,7 +27,7 @@ public final class GlacialStalker extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl("{4}{U}")));
     }
 
-    public GlacialStalker(final GlacialStalker card) {
+    private GlacialStalker(final GlacialStalker card) {
         super(card);
     }
 

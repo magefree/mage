@@ -31,7 +31,7 @@ public final class VoraciousWurm extends CardImpl {
                 new PlayerGainedLifeWatcher());
     }
 
-    public VoraciousWurm(final VoraciousWurm card) {
+    private VoraciousWurm(final VoraciousWurm card) {
         super(card);
     }
 

@@ -49,7 +49,7 @@ public final class EyeOfUgin extends CardImpl {
         this.addAbility(searchAbility);
     }
 
-    public EyeOfUgin(final EyeOfUgin card) {
+    private EyeOfUgin(final EyeOfUgin card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public final class KirtarsDesire extends CardImpl {
 
     }
 
-    public KirtarsDesire(final KirtarsDesire card) {
+    private KirtarsDesire(final KirtarsDesire card) {
         super(card);
     }
 

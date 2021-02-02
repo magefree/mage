@@ -27,7 +27,7 @@ public final class ReapingTheRewards extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
     }
 
-    public ReapingTheRewards(final ReapingTheRewards card) {
+    private ReapingTheRewards(final ReapingTheRewards card) {
         super(card);
     }
 

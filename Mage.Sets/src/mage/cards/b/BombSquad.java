@@ -53,7 +53,7 @@ public final class BombSquad extends CardImpl {
         this.addAbility(new BombSquadTriggeredAbility());
     }
 
-    public BombSquad(final BombSquad card) {
+    private BombSquad(final BombSquad card) {
         super(card);
     }
 

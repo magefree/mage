@@ -28,7 +28,7 @@ public final class Archweaver extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public Archweaver(final Archweaver card) {
+    private Archweaver(final Archweaver card) {
         super(card);
     }
 

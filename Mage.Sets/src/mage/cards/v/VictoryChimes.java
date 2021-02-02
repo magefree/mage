@@ -38,7 +38,7 @@ public final class VictoryChimes extends CardImpl {
         this.addAbility(ability);
     }
 
-    public VictoryChimes(final VictoryChimes card) {
+    private VictoryChimes(final VictoryChimes card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class DreadbringerLampads extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DreadbringerLampads(final DreadbringerLampads card) {
+    private DreadbringerLampads(final DreadbringerLampads card) {
         super(card);
     }
 

@@ -34,7 +34,7 @@ public final class ChandrasOutburst extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryGraveyardPutInHandEffect(filter));
     }
 
-    public ChandrasOutburst(final ChandrasOutburst card) {
+    private ChandrasOutburst(final ChandrasOutburst card) {
         super(card);
     }
 

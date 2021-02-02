@@ -27,7 +27,7 @@ public final class Phytoburst extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Phytoburst(final Phytoburst card) {
+    private Phytoburst(final Phytoburst card) {
         super(card);
     }
 

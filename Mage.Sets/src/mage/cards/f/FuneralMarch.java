@@ -43,7 +43,7 @@ public final class FuneralMarch extends CardImpl {
         this.addAbility(new FuneralMarchTriggeredAbility());
     }
 
-    public FuneralMarch(final FuneralMarch card) {
+    private FuneralMarch(final FuneralMarch card) {
         super(card);
     }
 

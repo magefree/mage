@@ -41,7 +41,7 @@ public final class OrcishLibrarian extends CardImpl {
         this.addAbility(ability);
     }
 
-    public OrcishLibrarian(final OrcishLibrarian card) {
+    private OrcishLibrarian(final OrcishLibrarian card) {
         super(card);
     }
 

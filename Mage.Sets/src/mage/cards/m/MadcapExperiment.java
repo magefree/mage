@@ -26,7 +26,7 @@ public final class MadcapExperiment extends CardImpl {
         this.getSpellAbility().addEffect(new MadcapExperimentEffect());
     }
 
-    public MadcapExperiment(final MadcapExperiment card) {
+    private MadcapExperiment(final MadcapExperiment card) {
         super(card);
     }
 

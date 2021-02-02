@@ -20,7 +20,7 @@ public final class CachedDefenses extends CardImpl {
         this.getSpellAbility().addEffect(new BolsterEffect(3));
     }
 
-    public CachedDefenses(final CachedDefenses card) {
+    private CachedDefenses(final CachedDefenses card) {
         super(card);
     }
 

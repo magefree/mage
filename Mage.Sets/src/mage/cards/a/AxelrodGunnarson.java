@@ -44,7 +44,7 @@ public final class AxelrodGunnarson extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AxelrodGunnarson(final AxelrodGunnarson card) {
+    private AxelrodGunnarson(final AxelrodGunnarson card) {
         super(card);
     }
 

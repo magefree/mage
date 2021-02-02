@@ -43,7 +43,7 @@ public final class PhyrexianFurnace extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PhyrexianFurnace(final PhyrexianFurnace card) {
+    private PhyrexianFurnace(final PhyrexianFurnace card) {
         super(card);
     }
 

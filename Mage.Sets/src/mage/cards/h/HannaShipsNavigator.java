@@ -48,7 +48,7 @@ public final class HannaShipsNavigator extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HannaShipsNavigator(final HannaShipsNavigator card) {
+    private HannaShipsNavigator(final HannaShipsNavigator card) {
         super(card);
     }
 

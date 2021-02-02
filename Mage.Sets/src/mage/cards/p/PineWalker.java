@@ -36,7 +36,7 @@ public final class PineWalker extends CardImpl {
 
     }
 
-    public PineWalker(final PineWalker card) {
+    private PineWalker(final PineWalker card) {
         super(card);
     }
 

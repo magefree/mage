@@ -45,7 +45,7 @@ public final class GuardiansMagemark extends CardImpl {
         this.addAbility(ability);
     }
 
-    public GuardiansMagemark(final GuardiansMagemark card) {
+    private GuardiansMagemark(final GuardiansMagemark card) {
         super(card);
     }
 

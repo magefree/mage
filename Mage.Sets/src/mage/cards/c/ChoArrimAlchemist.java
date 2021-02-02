@@ -42,7 +42,7 @@ public final class ChoArrimAlchemist extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ChoArrimAlchemist(final ChoArrimAlchemist card) {
+    private ChoArrimAlchemist(final ChoArrimAlchemist card) {
         super(card);
     }
 

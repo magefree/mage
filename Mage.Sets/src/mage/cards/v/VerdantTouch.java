@@ -28,7 +28,7 @@ public final class VerdantTouch extends CardImpl {
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 
-    public VerdantTouch(final VerdantTouch card) {
+    private VerdantTouch(final VerdantTouch card) {
         super(card);
     }
 

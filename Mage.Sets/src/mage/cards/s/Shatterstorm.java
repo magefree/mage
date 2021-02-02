@@ -21,7 +21,7 @@ public final class Shatterstorm extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(new FilterArtifactPermanent("artifacts"), true));
     }
 
-    public Shatterstorm(final Shatterstorm card) {
+    private Shatterstorm(final Shatterstorm card) {
         super(card);
     }
 

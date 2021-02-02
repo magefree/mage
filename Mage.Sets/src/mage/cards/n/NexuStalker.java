@@ -43,7 +43,7 @@ public final class NexuStalker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NexuStalker(final NexuStalker card) {
+    private NexuStalker(final NexuStalker card) {
         super(card);
     }
 

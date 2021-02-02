@@ -28,7 +28,7 @@ public final class CloudSprite extends CardImpl {
         this.addAbility(new CanBlockOnlyFlyingAbility());
     }
 
-    public CloudSprite(final CloudSprite card) {
+    private CloudSprite(final CloudSprite card) {
         super(card);
     }
 

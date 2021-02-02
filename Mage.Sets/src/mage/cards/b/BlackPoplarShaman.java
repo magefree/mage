@@ -39,7 +39,7 @@ public final class BlackPoplarShaman extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BlackPoplarShaman(final BlackPoplarShaman card) {
+    private BlackPoplarShaman(final BlackPoplarShaman card) {
         super(card);
     }
 

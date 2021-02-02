@@ -54,7 +54,7 @@ public final class ConniveConcoct extends SplitCard {
         this.getRightHalfCard().getSpellAbility().addEffect(new ConcoctEffect());
     }
 
-    public ConniveConcoct(final ConniveConcoct card) {
+    private ConniveConcoct(final ConniveConcoct card) {
         super(card);
     }
 

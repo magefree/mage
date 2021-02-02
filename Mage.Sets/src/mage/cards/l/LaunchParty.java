@@ -30,7 +30,7 @@ public final class LaunchParty extends CardImpl {
         this.getSpellAbility().addEffect(new LoseLifeTargetControllerEffect(2));
     }
 
-    public LaunchParty(final LaunchParty card) {
+    private LaunchParty(final LaunchParty card) {
         super(card);
     }
 

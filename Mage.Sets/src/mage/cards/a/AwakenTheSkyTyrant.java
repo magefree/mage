@@ -27,7 +27,7 @@ public final class AwakenTheSkyTyrant extends CardImpl {
         this.addAbility(new AwakenTheSkyTyrantTriggeredAbility());
     }
 
-    public AwakenTheSkyTyrant(final AwakenTheSkyTyrant card) {
+    private AwakenTheSkyTyrant(final AwakenTheSkyTyrant card) {
         super(card);
     }
 

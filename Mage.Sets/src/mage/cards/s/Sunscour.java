@@ -36,7 +36,7 @@ public final class Sunscour extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
-    public Sunscour(final Sunscour card) {
+    private Sunscour(final Sunscour card) {
         super(card);
     }
 

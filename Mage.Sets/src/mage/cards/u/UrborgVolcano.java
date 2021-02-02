@@ -25,7 +25,7 @@ public final class UrborgVolcano extends CardImpl {
         this.addAbility(new RedManaAbility());
     }
 
-    public UrborgVolcano(final UrborgVolcano card) {
+    private UrborgVolcano(final UrborgVolcano card) {
         super(card);
     }
 

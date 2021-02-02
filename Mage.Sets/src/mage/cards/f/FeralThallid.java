@@ -34,7 +34,7 @@ public final class FeralThallid extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
     }
 
-    public FeralThallid(final FeralThallid card) {
+    private FeralThallid(final FeralThallid card) {
         super(card);
     }
 

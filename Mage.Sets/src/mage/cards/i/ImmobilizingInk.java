@@ -57,7 +57,7 @@ public final class ImmobilizingInk extends CardImpl {
                                                     Duration.WhileOnBattlefield, "Enchanted creature has \"{1}, Discard a card: Untap this creature.\"")));
     }
 
-    public ImmobilizingInk(final ImmobilizingInk card) {
+    private ImmobilizingInk(final ImmobilizingInk card) {
         super(card);
     }
 

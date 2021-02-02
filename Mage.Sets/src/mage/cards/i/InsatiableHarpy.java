@@ -29,7 +29,7 @@ public final class InsatiableHarpy extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
     }
 
-    public InsatiableHarpy(final InsatiableHarpy card) {
+    private InsatiableHarpy(final InsatiableHarpy card) {
         super(card);
     }
 

@@ -21,7 +21,7 @@ public final class ScareTactics extends CardImpl {
         this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Duration.EndOfTurn));
     }
 
-    public ScareTactics(final ScareTactics card) {
+    private ScareTactics(final ScareTactics card) {
         super(card);
     }
 

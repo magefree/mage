@@ -36,7 +36,7 @@ public final class GrenzosRuffians extends CardImpl {
         this.addAbility(new DealsDamageToOpponentTriggeredAbility(new GrenzosRuffiansEffect(), false, true, true));
     }
 
-    public GrenzosRuffians(final GrenzosRuffians card) {
+    private GrenzosRuffians(final GrenzosRuffians card) {
         super(card);
     }
 

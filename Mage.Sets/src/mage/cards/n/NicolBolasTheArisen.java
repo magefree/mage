@@ -71,7 +71,7 @@ public final class NicolBolasTheArisen extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NicolBolasTheArisen(final NicolBolasTheArisen card) {
+    private NicolBolasTheArisen(final NicolBolasTheArisen card) {
         super(card);
     }
 

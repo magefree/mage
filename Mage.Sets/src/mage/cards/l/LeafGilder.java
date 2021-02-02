@@ -25,7 +25,7 @@ public final class LeafGilder extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public LeafGilder(final LeafGilder card) {
+    private LeafGilder(final LeafGilder card) {
         super(card);
     }
 

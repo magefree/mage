@@ -46,7 +46,7 @@ public final class CabalTorturer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CabalTorturer(final CabalTorturer card) {
+    private CabalTorturer(final CabalTorturer card) {
         super(card);
     }
 

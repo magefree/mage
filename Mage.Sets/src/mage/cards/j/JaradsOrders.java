@@ -28,7 +28,7 @@ public final class JaradsOrders extends CardImpl {
         this.getSpellAbility().addEffect(new JaradsOrdersEffect());
     }
 
-    public JaradsOrders(final JaradsOrders card) {
+    private JaradsOrders(final JaradsOrders card) {
         super(card);
     }
 

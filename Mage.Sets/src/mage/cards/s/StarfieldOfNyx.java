@@ -63,7 +63,7 @@ public final class StarfieldOfNyx extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
-    public StarfieldOfNyx(final StarfieldOfNyx card) {
+    private StarfieldOfNyx(final StarfieldOfNyx card) {
         super(card);
     }
 

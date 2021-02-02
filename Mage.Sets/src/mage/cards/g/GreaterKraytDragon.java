@@ -38,7 +38,7 @@ public final class GreaterKraytDragon extends CardImpl {
 
     }
 
-    public GreaterKraytDragon(final GreaterKraytDragon card) {
+    private GreaterKraytDragon(final GreaterKraytDragon card) {
         super(card);
     }
 

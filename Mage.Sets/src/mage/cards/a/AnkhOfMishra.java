@@ -31,7 +31,7 @@ public final class AnkhOfMishra extends CardImpl {
 
     }
 
-    public AnkhOfMishra(final AnkhOfMishra card) {
+    private AnkhOfMishra(final AnkhOfMishra card) {
         super(card);
     }
 

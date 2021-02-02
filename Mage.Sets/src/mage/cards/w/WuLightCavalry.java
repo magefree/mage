@@ -26,7 +26,7 @@ public final class WuLightCavalry extends CardImpl {
         this.addAbility(HorsemanshipAbility.getInstance());
     }
 
-    public WuLightCavalry(final WuLightCavalry card) {
+    private WuLightCavalry(final WuLightCavalry card) {
         super(card);
     }
 

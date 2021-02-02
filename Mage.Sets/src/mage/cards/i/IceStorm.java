@@ -23,7 +23,7 @@ public final class IceStorm extends CardImpl {
         
     }
 
-    public IceStorm(final IceStorm card) {
+    private IceStorm(final IceStorm card) {
         super(card);
     }
 

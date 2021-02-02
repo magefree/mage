@@ -35,7 +35,7 @@ public final class ElvishHerder extends CardImpl {
        this.addAbility(ability);
     }
 
-    public ElvishHerder(final ElvishHerder card) {
+    private ElvishHerder(final ElvishHerder card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class Mirrorweave extends CardImpl {
 
     }
 
-    public Mirrorweave(final Mirrorweave card) {
+    private Mirrorweave(final Mirrorweave card) {
         super(card);
     }
 

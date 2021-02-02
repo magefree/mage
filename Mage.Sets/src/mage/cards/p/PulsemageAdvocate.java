@@ -50,7 +50,7 @@ public final class PulsemageAdvocate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PulsemageAdvocate(final PulsemageAdvocate card) {
+    private PulsemageAdvocate(final PulsemageAdvocate card) {
         super(card);
     }
 

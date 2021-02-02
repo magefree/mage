@@ -55,7 +55,7 @@ public final class DescentIntoMadness extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DescentIntoMadnessEffect(), TargetController.YOU, false));
     }
 
-    public DescentIntoMadness(final DescentIntoMadness card) {
+    private DescentIntoMadness(final DescentIntoMadness card) {
         super(card);
     }
 

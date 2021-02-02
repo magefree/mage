@@ -35,7 +35,7 @@ public final class SecludedGlen extends CardImpl {
         this.addAbility(new BlackManaAbility());
     }
 
-    public SecludedGlen(final SecludedGlen card) {
+    private SecludedGlen(final SecludedGlen card) {
         super(card);
     }
 

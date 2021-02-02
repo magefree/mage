@@ -34,7 +34,7 @@ public final class BearerOfTheHeavens extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(effect, false));
     }
 
-    public BearerOfTheHeavens(final BearerOfTheHeavens card) {
+    private BearerOfTheHeavens(final BearerOfTheHeavens card) {
         super(card);
     }
 

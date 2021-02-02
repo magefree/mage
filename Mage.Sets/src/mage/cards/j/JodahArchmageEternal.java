@@ -32,7 +32,7 @@ public final class JodahArchmageEternal extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WUBRGInsteadEffect()));
     }
 
-    public JodahArchmageEternal(final JodahArchmageEternal card) {
+    private JodahArchmageEternal(final JodahArchmageEternal card) {
         super(card);
     }
 

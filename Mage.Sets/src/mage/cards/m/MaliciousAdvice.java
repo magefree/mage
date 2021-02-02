@@ -33,7 +33,7 @@ public final class MaliciousAdvice extends CardImpl {
         this.getSpellAbility().setTargetAdjuster(MaliciousAdviceAdjuster.instance);
     }
 
-    public MaliciousAdvice(final MaliciousAdvice card) {
+    private MaliciousAdvice(final MaliciousAdvice card) {
         super(card);
     }
 

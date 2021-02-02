@@ -29,7 +29,7 @@ public final class Browse extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Browse(final Browse card) {
+    private Browse(final Browse card) {
         super(card);
     }
 

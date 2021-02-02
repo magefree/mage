@@ -29,7 +29,7 @@ public final class ChainOfPlasma extends CardImpl {
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
 
-    public ChainOfPlasma(final ChainOfPlasma card) {
+    private ChainOfPlasma(final ChainOfPlasma card) {
         super(card);
     }
 

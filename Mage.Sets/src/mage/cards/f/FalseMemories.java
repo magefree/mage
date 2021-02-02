@@ -25,7 +25,7 @@ public final class FalseMemories extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ExileCardFromOwnGraveyardControllerEffect(7))));
     }
 
-    public FalseMemories(final FalseMemories card) {
+    private FalseMemories(final FalseMemories card) {
         super(card);
     }
 

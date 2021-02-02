@@ -35,7 +35,7 @@ public final class AdventurersGuildhouse extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new BandsWithOtherAbility(SuperType.LEGENDARY), Duration.WhileOnBattlefield, filter).withForceQuotes()));
     }
 
-    public AdventurersGuildhouse(final AdventurersGuildhouse card) {
+    private AdventurersGuildhouse(final AdventurersGuildhouse card) {
         super(card);
     }
 

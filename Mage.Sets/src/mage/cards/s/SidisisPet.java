@@ -32,7 +32,7 @@ public final class SidisisPet extends CardImpl {
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{1}{B}")));
     }
 
-    public SidisisPet(final SidisisPet card) {
+    private SidisisPet(final SidisisPet card) {
         super(card);
     }
 

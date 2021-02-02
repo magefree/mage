@@ -36,7 +36,7 @@ public final class Thunderclap extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public Thunderclap(final Thunderclap card) {
+    private Thunderclap(final Thunderclap card) {
         super(card);
     }
 

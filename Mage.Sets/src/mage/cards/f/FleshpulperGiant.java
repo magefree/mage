@@ -41,7 +41,7 @@ public final class FleshpulperGiant extends CardImpl {
         
     }
 
-    public FleshpulperGiant(final FleshpulperGiant card) {
+    private FleshpulperGiant(final FleshpulperGiant card) {
         super(card);
     }
 

@@ -33,7 +33,7 @@ public final class ShreddingWinds extends CardImpl {
         this.getSpellAbility().addTarget(target);
     }
 
-    public ShreddingWinds(final ShreddingWinds card) {
+    private ShreddingWinds(final ShreddingWinds card) {
         super(card);
     }
 

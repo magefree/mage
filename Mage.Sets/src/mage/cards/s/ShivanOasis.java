@@ -22,7 +22,7 @@ public final class ShivanOasis extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public ShivanOasis(final ShivanOasis card) {
+    private ShivanOasis(final ShivanOasis card) {
         super(card);
     }
 

@@ -35,7 +35,7 @@ public final class WhirlingCatapult extends CardImpl {
         this.addAbility(ability);
     }
 
-    public WhirlingCatapult(final WhirlingCatapult card) {
+    private WhirlingCatapult(final WhirlingCatapult card) {
         super(card);
     }
 

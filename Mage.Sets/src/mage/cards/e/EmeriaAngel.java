@@ -30,7 +30,7 @@ public final class EmeriaAngel extends CardImpl {
         this.addAbility(new LandfallAbility(new CreateTokenEffect(new BirdToken()), true));
     }
 
-    public EmeriaAngel(final EmeriaAngel card) {
+    private EmeriaAngel(final EmeriaAngel card) {
         super(card);
     }
 

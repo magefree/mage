@@ -34,7 +34,7 @@ public final class SerraAviary extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter1, false)));
     }
 
-    public SerraAviary(final SerraAviary card) {
+    private SerraAviary(final SerraAviary card) {
         super(card);
     }
 

@@ -37,7 +37,7 @@ public final class GoldmeadowDodger extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(FILTER, Duration.WhileOnBattlefield)));
     }
 
-    public GoldmeadowDodger(final GoldmeadowDodger card) {
+    private GoldmeadowDodger(final GoldmeadowDodger card) {
         super(card);
     }
 

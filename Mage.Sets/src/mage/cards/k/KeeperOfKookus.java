@@ -34,7 +34,7 @@ public final class KeeperOfKookus extends CardImpl {
         this.addAbility(ability);
     }
 
-    public KeeperOfKookus(final KeeperOfKookus card) {
+    private KeeperOfKookus(final KeeperOfKookus card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class GoblinLocksmith extends CardImpl {
         ));
     }
 
-    public GoblinLocksmith(final GoblinLocksmith card) {
+    private GoblinLocksmith(final GoblinLocksmith card) {
         super(card);
     }
 

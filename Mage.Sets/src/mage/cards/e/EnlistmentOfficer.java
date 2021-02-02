@@ -40,7 +40,7 @@ public final class EnlistmentOfficer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new RevealLibraryPutIntoHandEffect(4, filter, Zone.LIBRARY)));
     }
 
-    public EnlistmentOfficer(final EnlistmentOfficer card) {
+    private EnlistmentOfficer(final EnlistmentOfficer card) {
         super(card);
     }
 

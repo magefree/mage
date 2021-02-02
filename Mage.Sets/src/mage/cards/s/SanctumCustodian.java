@@ -34,7 +34,7 @@ public final class SanctumCustodian extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SanctumCustodian(final SanctumCustodian card) {
+    private SanctumCustodian(final SanctumCustodian card) {
         super(card);
     }
 

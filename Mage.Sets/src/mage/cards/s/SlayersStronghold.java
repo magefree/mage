@@ -43,7 +43,7 @@ public final class SlayersStronghold extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SlayersStronghold(final SlayersStronghold card) {
+    private SlayersStronghold(final SlayersStronghold card) {
         super(card);
     }
 

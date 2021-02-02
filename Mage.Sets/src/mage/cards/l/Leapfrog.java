@@ -46,7 +46,7 @@ public final class Leapfrog extends CardImpl {
         ), new SpellsCastWatcher());
     }
 
-    public Leapfrog(final Leapfrog card) {
+    private Leapfrog(final Leapfrog card) {
         super(card);
     }
 

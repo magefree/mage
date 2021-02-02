@@ -34,7 +34,7 @@ public final class RavenousTrap extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public RavenousTrap(final RavenousTrap card) {
+    private RavenousTrap(final RavenousTrap card) {
         super(card);
     }
 

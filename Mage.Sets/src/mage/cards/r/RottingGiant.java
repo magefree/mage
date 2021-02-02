@@ -31,7 +31,7 @@ public final class RottingGiant extends CardImpl {
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ExileFromGraveCost(target)), false));
     }
 
-    public RottingGiant(final RottingGiant card) {
+    private RottingGiant(final RottingGiant card) {
         super(card);
     }
 

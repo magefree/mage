@@ -28,7 +28,7 @@ public final class AbbeyGriffin extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public AbbeyGriffin(final AbbeyGriffin card) {
+    private AbbeyGriffin(final AbbeyGriffin card) {
         super(card);
     }
 

@@ -29,7 +29,7 @@ public final class MaggotCarrier extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MaggotCarrier(final MaggotCarrier card) {
+    private MaggotCarrier(final MaggotCarrier card) {
         super(card);
     }
 

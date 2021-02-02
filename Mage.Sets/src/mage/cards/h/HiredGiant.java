@@ -36,7 +36,7 @@ public final class HiredGiant extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new HiredGiantEffect()));
     }
 
-    public HiredGiant(final HiredGiant card) {
+    private HiredGiant(final HiredGiant card) {
         super(card);
     }
 

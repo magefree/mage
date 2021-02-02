@@ -44,7 +44,7 @@ public final class DerangedOutcast extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DerangedOutcast(final DerangedOutcast card) {
+    private DerangedOutcast(final DerangedOutcast card) {
         super(card);
     }
 

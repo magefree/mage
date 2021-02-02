@@ -37,7 +37,7 @@ public final class TemurBattleRage extends CardImpl {
         this.getSpellAbility().addHint(FerociousHint.instance);
     }
 
-    public TemurBattleRage(final TemurBattleRage card) {
+    private TemurBattleRage(final TemurBattleRage card) {
         super(card);
     }
 

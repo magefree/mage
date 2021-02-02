@@ -25,7 +25,7 @@ public final class HornedCheetah extends CardImpl {
         this.addAbility(new DealsDamageGainLifeSourceTriggeredAbility());
     }
 
-    public HornedCheetah(final HornedCheetah card) {
+    private HornedCheetah(final HornedCheetah card) {
         super(card);
     }
 

@@ -38,7 +38,7 @@ public final class GhazbanOgre extends CardImpl {
 
     }
 
-    public GhazbanOgre(final GhazbanOgre card) {
+    private GhazbanOgre(final GhazbanOgre card) {
         super(card);
     }
 

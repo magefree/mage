@@ -46,7 +46,7 @@ public final class DeepfathomSkulker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DeepfathomSkulker(final DeepfathomSkulker card) {
+    private DeepfathomSkulker(final DeepfathomSkulker card) {
         super(card);
     }
 

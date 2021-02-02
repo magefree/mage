@@ -59,7 +59,7 @@ public final class KorozdaGuildmage extends CardImpl {
         
     }
 
-    public KorozdaGuildmage(final KorozdaGuildmage card) {
+    private KorozdaGuildmage(final KorozdaGuildmage card) {
         super(card);
     }
 

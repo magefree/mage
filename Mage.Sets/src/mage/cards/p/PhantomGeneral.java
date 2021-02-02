@@ -39,7 +39,7 @@ public final class PhantomGeneral extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
-    public PhantomGeneral(final PhantomGeneral card) {
+    private PhantomGeneral(final PhantomGeneral card) {
         super(card);
     }
 

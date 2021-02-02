@@ -31,7 +31,7 @@ public final class DenyingWind extends CardImpl {
         getSpellAbility().addTarget(new TargetPlayer());
     }
 
-    public DenyingWind(final DenyingWind card) {
+    private DenyingWind(final DenyingWind card) {
         super(card);
     }
 

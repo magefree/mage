@@ -42,7 +42,7 @@ public final class GoblinTestPilot extends CardImpl {
 
     }
 
-    public GoblinTestPilot(final GoblinTestPilot card) {
+    private GoblinTestPilot(final GoblinTestPilot card) {
         super(card);
     }
 

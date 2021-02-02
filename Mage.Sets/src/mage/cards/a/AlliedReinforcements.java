@@ -21,7 +21,7 @@ public final class AlliedReinforcements extends CardImpl {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new KnightAllyToken(), 2));
     }
 
-    public AlliedReinforcements(final AlliedReinforcements card) {
+    private AlliedReinforcements(final AlliedReinforcements card) {
         super(card);
     }
 

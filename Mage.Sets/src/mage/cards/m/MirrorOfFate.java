@@ -38,7 +38,7 @@ public final class MirrorOfFate extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MirrorOfFate(final MirrorOfFate card) {
+    private MirrorOfFate(final MirrorOfFate card) {
         super(card);
     }
 

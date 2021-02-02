@@ -23,7 +23,7 @@ public final class EchoesOfTheKinTree extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BolsterEffect(1),new ManaCostsImpl("{2}{W}")));
     }
 
-    public EchoesOfTheKinTree(final EchoesOfTheKinTree card) {
+    private EchoesOfTheKinTree(final EchoesOfTheKinTree card) {
         super(card);
     }
 

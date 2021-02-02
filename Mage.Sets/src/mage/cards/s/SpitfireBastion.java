@@ -37,7 +37,7 @@ public final class SpitfireBastion extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SpitfireBastion(final SpitfireBastion card) {
+    private SpitfireBastion(final SpitfireBastion card) {
         super(card);
     }
 

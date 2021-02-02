@@ -45,7 +45,7 @@ public final class MaulfistRevolutionary extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MaulfistRevolutionary(final MaulfistRevolutionary card) {
+    private MaulfistRevolutionary(final MaulfistRevolutionary card) {
         super(card);
     }
 

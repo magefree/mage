@@ -24,7 +24,7 @@ public final class RampantGrowth extends CardImpl {
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true));
     }
 
-    public RampantGrowth(final RampantGrowth card) {
+    private RampantGrowth(final RampantGrowth card) {
         super(card);
     }
 

@@ -24,7 +24,7 @@ public final class GloriousAnthem extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, false)));
     }
 
-    public GloriousAnthem(final GloriousAnthem card) {
+    private GloriousAnthem(final GloriousAnthem card) {
         super(card);
     }
 

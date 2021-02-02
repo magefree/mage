@@ -31,7 +31,7 @@ public final class ShowAndTell extends CardImpl {
         this.getSpellAbility().addEffect(new ShowAndTellEffect());
     }
 
-    public ShowAndTell(final ShowAndTell card) {
+    private ShowAndTell(final ShowAndTell card) {
         super(card);
     }
 

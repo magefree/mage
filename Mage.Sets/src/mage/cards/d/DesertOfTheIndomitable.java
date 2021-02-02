@@ -33,7 +33,7 @@ public final class DesertOfTheIndomitable extends CardImpl {
 
     }
 
-    public DesertOfTheIndomitable(final DesertOfTheIndomitable card) {
+    private DesertOfTheIndomitable(final DesertOfTheIndomitable card) {
         super(card);
     }
 

@@ -43,7 +43,7 @@ public final class CinderGlade extends CardImpl {
         this.addAbility(new GreenManaAbility());
     }
 
-    public CinderGlade(final CinderGlade card) {
+    private CinderGlade(final CinderGlade card) {
         super(card);
     }
 

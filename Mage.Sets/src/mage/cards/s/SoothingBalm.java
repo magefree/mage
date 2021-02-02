@@ -22,7 +22,7 @@ public final class SoothingBalm extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeTargetEffect(5));
     }
 
-    public SoothingBalm(final SoothingBalm card) {
+    private SoothingBalm(final SoothingBalm card) {
         super(card);
     }
 

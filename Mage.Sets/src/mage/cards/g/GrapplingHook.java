@@ -37,7 +37,7 @@ public final class GrapplingHook extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
     }
 
-    public GrapplingHook(final GrapplingHook card) {
+    private GrapplingHook(final GrapplingHook card) {
         super(card);
     }
 

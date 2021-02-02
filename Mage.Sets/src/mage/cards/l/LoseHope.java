@@ -27,7 +27,7 @@ public final class LoseHope extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(2));
     }
 
-    public LoseHope(final LoseHope card) {
+    private LoseHope(final LoseHope card) {
         super(card);
     }
 

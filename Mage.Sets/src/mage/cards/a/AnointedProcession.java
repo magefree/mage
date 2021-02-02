@@ -22,7 +22,7 @@ public final class AnointedProcession extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreateTwiceThatManyTokensEffect()));
     }
 
-    public AnointedProcession(final AnointedProcession card) {
+    private AnointedProcession(final AnointedProcession card) {
         super(card);
     }
 

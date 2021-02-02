@@ -39,7 +39,7 @@ public final class DebilitatingInjury extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-2,-2, Duration.WhileOnBattlefield)));
     }
 
-    public DebilitatingInjury(final DebilitatingInjury card) {
+    private DebilitatingInjury(final DebilitatingInjury card) {
         super(card);
     }
 

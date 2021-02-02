@@ -45,7 +45,7 @@ public final class Petradon extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
-    public Petradon(final Petradon card) {
+    private Petradon(final Petradon card) {
         super(card);
     }
 

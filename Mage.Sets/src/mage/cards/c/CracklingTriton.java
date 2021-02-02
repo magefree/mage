@@ -36,7 +36,7 @@ public final class CracklingTriton extends CardImpl {
         this.addAbility(ability);
     }
 
-    public CracklingTriton(final CracklingTriton card) {
+    private CracklingTriton(final CracklingTriton card) {
         super(card);
     }
 

@@ -30,7 +30,7 @@ public final class MortalCombat extends CardImpl {
                 "At the beginning of your upkeep, if twenty or more creature cards are in your graveyard, you win the game."));
     }
 
-    public MortalCombat(final MortalCombat card) {
+    private MortalCombat(final MortalCombat card) {
         super(card);
     }
 

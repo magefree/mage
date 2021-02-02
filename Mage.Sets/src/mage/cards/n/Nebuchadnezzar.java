@@ -40,7 +40,7 @@ public final class Nebuchadnezzar extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Nebuchadnezzar(final Nebuchadnezzar card) {
+    private Nebuchadnezzar(final Nebuchadnezzar card) {
         super(card);
     }
 

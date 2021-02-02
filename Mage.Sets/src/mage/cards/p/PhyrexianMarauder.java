@@ -43,7 +43,7 @@ public final class PhyrexianMarauder extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianMarauderCantAttackUnlessYouPayEffect()));
     }
 
-    public PhyrexianMarauder(final PhyrexianMarauder card) {
+    private PhyrexianMarauder(final PhyrexianMarauder card) {
         super(card);
     }
 

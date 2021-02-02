@@ -54,7 +54,7 @@ public final class ThantisTheWarweaver extends CardImpl {
         ));
     }
 
-    public ThantisTheWarweaver(final ThantisTheWarweaver card) {
+    private ThantisTheWarweaver(final ThantisTheWarweaver card) {
         super(card);
     }
 

@@ -27,7 +27,7 @@ public final class SecludedSteppe extends CardImpl {
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{W}")));
     }
 
-    public SecludedSteppe(final SecludedSteppe card) {
+    private SecludedSteppe(final SecludedSteppe card) {
         super(card);
     }
 

@@ -40,7 +40,7 @@ public final class GlazeFiend extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), filter));
     }
 
-    public GlazeFiend(final GlazeFiend card) {
+    private GlazeFiend(final GlazeFiend card) {
         super(card);
     }
 

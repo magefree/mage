@@ -31,7 +31,7 @@ public final class Fastbond extends CardImpl {
         this.addAbility(new PlayALandTriggeredAbility());
     }
 
-    public Fastbond(final Fastbond card) {
+    private Fastbond(final Fastbond card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class TaintedIsle extends CardImpl {
 
     }
 
-    public TaintedIsle(final TaintedIsle card) {
+    private TaintedIsle(final TaintedIsle card) {
         super(card);
     }
 

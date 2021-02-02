@@ -27,7 +27,7 @@ public final class MerfolkOfTheDepths extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
     }
 
-    public MerfolkOfTheDepths(final MerfolkOfTheDepths card) {
+    private MerfolkOfTheDepths(final MerfolkOfTheDepths card) {
         super(card);
     }
 

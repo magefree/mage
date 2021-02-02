@@ -35,7 +35,7 @@ public final class LuSuWuAdvisor extends CardImpl {
         this.addAbility(ability);
     }
 
-    public LuSuWuAdvisor(final LuSuWuAdvisor card) {
+    private LuSuWuAdvisor(final LuSuWuAdvisor card) {
         super(card);
     }
 

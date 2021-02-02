@@ -41,7 +41,7 @@ public final class MagmaticCore extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MagmaticCore(final MagmaticCore card) {
+    private MagmaticCore(final MagmaticCore card) {
         super(card);
     }
 

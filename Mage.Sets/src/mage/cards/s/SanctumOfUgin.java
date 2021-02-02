@@ -45,7 +45,7 @@ public final class SanctumOfUgin extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(effect, new SacrificeSourceCost()), filterSpells, false));
     }
 
-    public SanctumOfUgin(final SanctumOfUgin card) {
+    private SanctumOfUgin(final SanctumOfUgin card) {
         super(card);
     }
 

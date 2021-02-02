@@ -55,7 +55,7 @@ public final class BloodthirstyOgre extends CardImpl {
         this.addAbility(ability);
     }
 
-    public BloodthirstyOgre(final BloodthirstyOgre card) {
+    private BloodthirstyOgre(final BloodthirstyOgre card) {
         super(card);
     }
 

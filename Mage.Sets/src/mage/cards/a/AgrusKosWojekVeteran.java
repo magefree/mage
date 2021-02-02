@@ -44,7 +44,7 @@ public final class AgrusKosWojekVeteran extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(0, 2, Duration.EndOfTurn, filterWhite, false), false));
     }
 
-    public AgrusKosWojekVeteran(final AgrusKosWojekVeteran card) {
+    private AgrusKosWojekVeteran(final AgrusKosWojekVeteran card) {
         super(card);
     }
 

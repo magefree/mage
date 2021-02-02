@@ -39,7 +39,7 @@ public final class CorruptOfficial extends CardImpl {
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new CorruptOfficialDiscardEffect(), false));
     }
 
-    public CorruptOfficial(final CorruptOfficial card) {
+    private CorruptOfficial(final CorruptOfficial card) {
         super(card);
     }
 

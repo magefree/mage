@@ -27,7 +27,7 @@ public final class VoicelessSpirit extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
     }
 
-    public VoicelessSpirit(final VoicelessSpirit card) {
+    private VoicelessSpirit(final VoicelessSpirit card) {
         super(card);
     }
 

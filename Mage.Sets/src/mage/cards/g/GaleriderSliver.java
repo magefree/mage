@@ -33,7 +33,7 @@ public final class GaleriderSliver extends CardImpl {
                         Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_SLIVERS)));
     }
 
-    public GaleriderSliver(final GaleriderSliver card) {
+    private GaleriderSliver(final GaleriderSliver card) {
         super(card);
     }
 

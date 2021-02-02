@@ -37,7 +37,7 @@ public final class GroundRift extends CardImpl {
         this.addAbility(new StormAbility());
     }
 
-    public GroundRift(final GroundRift card) {
+    private GroundRift(final GroundRift card) {
         super(card);
     }
 

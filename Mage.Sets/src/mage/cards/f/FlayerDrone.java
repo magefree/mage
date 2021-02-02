@@ -50,7 +50,7 @@ public final class FlayerDrone extends CardImpl {
         this.addAbility(ability);
     }
 
-    public FlayerDrone(final FlayerDrone card) {
+    private FlayerDrone(final FlayerDrone card) {
         super(card);
     }
 

@@ -47,7 +47,7 @@ public final class TaintedPeak extends CardImpl {
 
     }
 
-    public TaintedPeak(final TaintedPeak card) {
+    private TaintedPeak(final TaintedPeak card) {
         super(card);
     }
 

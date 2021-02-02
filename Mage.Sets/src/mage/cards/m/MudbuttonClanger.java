@@ -30,7 +30,7 @@ public final class MudbuttonClanger extends CardImpl {
         this.addAbility(new KinshipAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn)));
     }
 
-    public MudbuttonClanger(final MudbuttonClanger card) {
+    private MudbuttonClanger(final MudbuttonClanger card) {
         super(card);
     }
 

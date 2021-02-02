@@ -22,7 +22,7 @@ public final class AncientBrontodon extends CardImpl {
         this.toughness = new MageInt(9);
     }
 
-    public AncientBrontodon(final AncientBrontodon card) {
+    private AncientBrontodon(final AncientBrontodon card) {
         super(card);
     }
 

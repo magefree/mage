@@ -50,7 +50,7 @@ public final class NimDevourer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NimDevourer(final NimDevourer card) {
+    private NimDevourer(final NimDevourer card) {
         super(card);
     }
 

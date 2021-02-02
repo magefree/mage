@@ -37,7 +37,7 @@ public final class ShinkaTheBloodsoakedKeep extends CardImpl {
         this.addAbility(ability);
     }
 
-    public ShinkaTheBloodsoakedKeep(final ShinkaTheBloodsoakedKeep card) {
+    private ShinkaTheBloodsoakedKeep(final ShinkaTheBloodsoakedKeep card) {
         super(card);
     }
 

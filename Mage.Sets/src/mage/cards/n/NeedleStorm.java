@@ -27,7 +27,7 @@ public final class NeedleStorm extends CardImpl {
         this.getSpellAbility().addEffect(new DamageAllEffect(4, filter));
     }
 
-    public NeedleStorm(final NeedleStorm card) {
+    private NeedleStorm(final NeedleStorm card) {
         super(card);
     }
 

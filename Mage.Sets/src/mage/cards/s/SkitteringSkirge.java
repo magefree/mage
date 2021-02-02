@@ -31,7 +31,7 @@ public final class SkitteringSkirge extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), StaticFilters.FILTER_SPELL_A_CREATURE, false));
     }
 
-    public SkitteringSkirge(final SkitteringSkirge card) {
+    private SkitteringSkirge(final SkitteringSkirge card) {
         super(card);
     }
 

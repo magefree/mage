@@ -33,7 +33,7 @@ public final class SatyrGrovedancer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SatyrGrovedancer(final SatyrGrovedancer card) {
+    private SatyrGrovedancer(final SatyrGrovedancer card) {
         super(card);
     }
 
