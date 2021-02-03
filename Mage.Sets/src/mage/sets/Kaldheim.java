@@ -30,14 +30,14 @@ public final class Kaldheim extends ExpansionSet {
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
-        this.numBoosterCommon = 9;
+        this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
         this.numBoosterDoubleFaced = 1;
         this.maxCardNumberInBooster = 285;
-        this.ratioBoosterSpecialLand = 12; // TODO: change when actual ratio is known
-        this.ratioBoosterSpecialLandNumerator = 5; // TODO: change when actual ratio is known
+        this.ratioBoosterSpecialLand = 12;
+        this.ratioBoosterSpecialLandNumerator = 5;
 
         cards.add(new SetCardInfo("Absorb Identity", 383, Rarity.UNCOMMON, mage.cards.a.AbsorbIdentity.class));
         cards.add(new SetCardInfo("Aegar, the Freezing Flame", 200, Rarity.UNCOMMON, mage.cards.a.AegarTheFreezingFlame.class, NON_FULL_USE_VARIOUS));
@@ -474,7 +474,7 @@ public final class Kaldheim extends ExpansionSet {
         if (savedSpecialLand.isEmpty()) {
             CardCriteria criteria = new CardCriteria();
             criteria.setCodes(this.code);
-            criteria.rarities(Rarity.COMMON);
+            criteria.rarities(Rarity.COMMON, Rarity.LAND);
             criteria.types(CardType.LAND);
             criteria.supertypes("Snow");
             savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
