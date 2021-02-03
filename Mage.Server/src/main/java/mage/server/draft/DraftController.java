@@ -12,7 +12,6 @@ import mage.server.managers.ManagerFactory;
 import mage.view.DraftPickView;
 import org.apache.log4j.Logger;
 
-import java.io.File;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
@@ -26,7 +25,6 @@ import java.util.concurrent.ConcurrentMap;
 public class DraftController {
 
     private static final Logger logger = Logger.getLogger(GameController.class);
-    public static final String INIT_FILE_PATH = "config" + File.separator + "init.txt";
 
     private final ManagerFactory managerFactory;
     private final ConcurrentMap<UUID, DraftSession> draftSessions = new ConcurrentHashMap<>();
@@ -34,7 +32,6 @@ public class DraftController {
     private final UUID draftSessionId;
     private final Draft draft;
     private final UUID tableId;
-    private final UUID markedCard;
 
     public DraftController(ManagerFactory managerFactory, Draft draft, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
         this.managerFactory = managerFactory;
@@ -42,7 +39,6 @@ public class DraftController {
         this.userPlayerMap = userPlayerMap;
         this.draft = draft;
         this.tableId = tableId;
-        this.markedCard = null;
         init();
     }
 

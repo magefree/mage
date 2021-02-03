@@ -26,7 +26,7 @@ import java.util.UUID;
 
 /**
  * Main class for drawing Mage card object.
- *
+ * <p>
  * WARNING, if you want to catch mouse events then use cardEventSource and related code. You can't use outer listeners.
  *
  * @author arcane, nantuko, noxx, JayDi85
@@ -48,10 +48,11 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
     private static final float ROT_CENTER_TO_TOP_CORNER = 1.0295630140987000315797369464196f;
     private static final float ROT_CENTER_TO_BOTTOM_CORNER = 0.7071067811865475244008443621048f;
 
-    private CardView gameCard;
+    private CardView gameCard; // current card side, can be different for double faces cards (it's a gui sides, not mtg - so mdf cards will have second side too)
     private CardView updateCard;
 
-    // for two faced cards
+    // if null then gameCard contains main card
+    // if not null then gameCard contains second side
     private CardView temporary;
 
     private double tappedAngle = 0;
@@ -584,7 +585,13 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     public CardView getOriginal() {
-        return this.getGameCard();
+        if (this.temporary == null) {
+            // current side: main, return: main
+            return this.getGameCard();
+        } else {
+            // current side: second, return: main
+            return this.temporary;
+        }
     }
 
     @Override
@@ -646,7 +653,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         }
     }
 
-   @Override
+    @Override
     public void mouseExited(MouseEvent e) {
         if (getGameCard().hideInfo()) {
             return;
@@ -836,7 +843,6 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
                 BufferedImage day = ImageManagerImpl.instance.getDayImage();
                 dayNightButton.setIcon(new ImageIcon(day));
             }
-
             if (!isPermanent) { // use only for custom transformation (when pressing day-night button)
                 copySelections(this.getGameCard().getSecondCardFace(), this.getGameCard());
                 update(this.getTemporary());

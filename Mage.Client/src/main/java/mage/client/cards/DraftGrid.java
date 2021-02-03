@@ -46,13 +46,11 @@ public class DraftGrid extends javax.swing.JPanel implements CardEventProducer {
             @Override
             public void event(Event event) {
                 if (event.getEventType() == ClientEventType.CARD_DOUBLE_CLICK) {
-                    logger.info("draft grid: catch double click");
                     CardView card = (CardView) event.getSource();
                     cardEventSource.fireEvent(card, ClientEventType.DRAFT_PICK_CARD);
                     hidePopup();
                     AudioManager.playOnDraftSelect();
                 } else if (event.getEventType() == ClientEventType.CARD_CLICK) {
-                    logger.info("draft grid: catch single click");
                     CardView card = (CardView) event.getSource();
                     MageCard cardPanel = (MageCard) event.getComponent();
                     if (markedCard != null) {

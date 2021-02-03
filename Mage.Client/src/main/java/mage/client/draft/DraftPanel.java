@@ -271,7 +271,7 @@
          if (this.pickingCardsListener == null) {
              this.pickingCardsListener = event -> {
                  if (event.getEventType() == ClientEventType.DRAFT_PICK_CARD) {
-                     logger.info("draft panel: catch pick card");
+                     // PICK card
                      SimpleCardView source = (SimpleCardView) event.getSource();
                      DraftPickView view = SessionHandler.sendCardPick(draftId, source.getId(), cardsHidden);
                      if (view != null) {
@@ -281,7 +281,7 @@
                          setMessage("Waiting for other players");
                      }
                  } else if (event.getEventType() == ClientEventType.DRAFT_MARK_CARD) {
-                     logger.info("draft panel: catch mark card");
+                     // MARK card
                      SimpleCardView source = (SimpleCardView) event.getSource();
                      SessionHandler.sendCardMark(draftId, source.getId());
                  }
