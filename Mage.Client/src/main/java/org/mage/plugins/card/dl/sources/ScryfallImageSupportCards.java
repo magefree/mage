@@ -492,6 +492,7 @@ public class ScryfallImageSupportCards {
             add("CMR"); // Commander Legends
             add("CC1"); // Commander Collection: Green
             add("KHM"); // Kaldheim
+            add("KHC"); // Kaldheim Commander
         }
     };
 
