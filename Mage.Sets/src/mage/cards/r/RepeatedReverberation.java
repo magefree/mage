@@ -60,8 +60,8 @@ class RepeatedReverberationTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST
-                || event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
+        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY
+                || event.getType() == GameEvent.EventType.SPELL_CAST;
     }
 
     @Override
@@ -69,28 +69,37 @@ class RepeatedReverberationTriggeredAbility extends DelayedTriggeredAbility {
         if (!event.getPlayerId().equals(this.getControllerId())) {
             return false;
         }
-        Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && spell.isInstantOrSorcery()) {
-            this.getEffects().clear();
-            this.addEffect(
-                    new CopyTargetSpellEffect(true)
-                            .setTargetPointer(new FixedTarget(event.getTargetId(), game))
-            );
-            this.addEffect(
-                    new CopyTargetSpellEffect(true)
-                            .setTargetPointer(new FixedTarget(event.getTargetId(), game))
-            );
-            return true;
+
+        // activated ability
+        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
+            StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
+            if (stackAbility != null && stackAbility.getStackAbility() instanceof LoyaltyAbility) {
+                this.getEffects().clear();
+                this.addEffect(
+                        new RepeatedReverberationEffect()
+                                .setTargetPointer(new FixedTarget(event.getTargetId(), game))
+                );
+                return true;
+            }
         }
-        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-        if (stackAbility != null && stackAbility.getStackAbility() instanceof LoyaltyAbility) {
-            this.getEffects().clear();
-            this.addEffect(
-                    new RepeatedReverberationEffect()
-                            .setTargetPointer(new FixedTarget(event.getTargetId(), game))
-            );
-            return true;
+
+        // spell
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            if (spell != null && spell.isInstantOrSorcery()) {
+                this.getEffects().clear();
+                this.addEffect(
+                        new CopyTargetSpellEffect(true)
+                                .setTargetPointer(new FixedTarget(event.getTargetId(), game))
+                );
+                this.addEffect(
+                        new CopyTargetSpellEffect(true)
+                                .setTargetPointer(new FixedTarget(event.getTargetId(), game))
+                );
+                return true;
+            }
         }
+
         return false;
     }
 

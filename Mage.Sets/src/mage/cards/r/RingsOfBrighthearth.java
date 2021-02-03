@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,13 +13,13 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RingsOfBrighthearth extends CardImpl {
