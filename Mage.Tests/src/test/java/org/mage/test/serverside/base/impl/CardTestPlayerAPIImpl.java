@@ -655,11 +655,14 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         if (gameZone == Zone.BATTLEFIELD) {
             for (int i = 0; i < count; i++) {
                 CardInfo cardInfo = CardRepository.instance.findCard(cardName);
-                Card card = cardInfo != null ? cardInfo.getCard() : null;
-                if (card == null) {
+                Card newCard = cardInfo != null ? cardInfo.getCard() : null;
+                if (newCard == null) {
                     throw new IllegalArgumentException("[TEST] Couldn't find a card: " + cardName);
                 }
-                PermanentCard p = new PermanentCard(card.copy(), player.getId(), currentGame);
+
+                Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+
+                PermanentCard p = new PermanentCard(permCard, player.getId(), currentGame);
                 p.setTapped(tapped);
                 getBattlefieldCards(player).add(p);
 

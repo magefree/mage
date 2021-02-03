@@ -33,6 +33,7 @@ import mage.server.util.PluginClassLoader;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
 import mage.util.Copier;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -250,14 +251,15 @@ public abstract class MageTestPlayerBase {
                 } else {
                     for (int i = 0; i < amount; i++) {
                         CardInfo cardInfo = CardRepository.instance.findCard(cardName);
-                        Card card = cardInfo != null ? cardInfo.getCard() : null;
-                        if (card != null) {
+                        Card newCard = cardInfo != null ? cardInfo.getCard() : null;
+                        if (newCard != null) {
                             if (gameZone == Zone.BATTLEFIELD) {
-                                PermanentCard p = new PermanentCard(card, null, currentGame);
+                                Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+                                PermanentCard p = new PermanentCard(permCard, null, currentGame);
                                 p.setTapped(tapped);
                                 perms.add(p);
                             } else {
-                                cards.add(card);
+                                cards.add(newCard);
                             }
                         } else {
                             logger.fatal("Couldn't find a card: " + cardName);
@@ -404,23 +406,25 @@ public abstract class MageTestPlayerBase {
         CustomTestCard.addAdditionalSubtypes(customName, additionalSubTypes);
 
         CardSetInfo testSet = new CardSetInfo(customName, "custom", "123", Rarity.COMMON);
-        PermanentCard card = new PermanentCard(new CustomTestCard(controllerPlayer.getId(), testSet, cardType, spellCost), controllerPlayer.getId(), currentGame);
+        Card newCard = new CustomTestCard(controllerPlayer.getId(), testSet, cardType, spellCost);
+        Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+        PermanentCard permanent = new PermanentCard(permCard, controllerPlayer.getId(), currentGame);
 
         switch (putAtZone) {
             case BATTLEFIELD:
-                getBattlefieldCards(controllerPlayer).add(card);
+                getBattlefieldCards(controllerPlayer).add(permanent);
                 break;
             case GRAVEYARD:
-                getGraveCards(controllerPlayer).add(card);
+                getGraveCards(controllerPlayer).add(newCard);
                 break;
             case HAND:
-                getHandCards(controllerPlayer).add(card);
+                getHandCards(controllerPlayer).add(newCard);
                 break;
             case LIBRARY:
-                getLibraryCards(controllerPlayer).add(card);
+                getLibraryCards(controllerPlayer).add(newCard);
                 break;
             case COMMAND:
-                getCommandCards(controllerPlayer).add(card);
+                getCommandCards(controllerPlayer).add(newCard);
                 break;
             default:
                 Assert.fail("Unsupported zone: " + putAtZone);

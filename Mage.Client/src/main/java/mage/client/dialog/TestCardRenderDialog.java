@@ -15,10 +15,8 @@ import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.themes.ThemeType;
-import mage.client.util.ClientEventType;
+import mage.client.util.*;
 import mage.client.util.Event;
-import mage.client.util.GUISizeHelper;
-import mage.client.util.Listener;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
@@ -33,6 +31,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.players.StubPlayer;
+import mage.util.CardUtil;
 import mage.util.RandomUtil;
 import mage.view.*;
 import org.apache.log4j.Logger;
@@ -107,16 +106,19 @@ public class TestCardRenderDialog extends MageDialog {
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
         CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
                 new CardGraphicInfo(cardInfo.getFrameStyle(), cardInfo.usesVariousArt()));
-        Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
-        if (extraAbilities != null) {
-            extraAbilities.forEach(ability -> card.addAbility(ability));
-        }
+        Card newCard = CardImpl.createCard(cardInfo.getClassName(), testSet);
 
         Set<Card> cardsList = new HashSet<>();
-        cardsList.add(card);
+        cardsList.add(newCard);
         game.loadCards(cardsList, controllerId);
 
-        PermanentCard perm = new PermanentCard(card, controllerId, game);
+        Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+
+        if (extraAbilities != null) {
+            extraAbilities.forEach(ability -> permCard.addAbility(ability));
+        }
+
+        PermanentCard perm = new PermanentCard(permCard, controllerId, game);
         if (damage > 0) perm.damage(damage, controllerId, null, game);
         if (power > 0) perm.getPower().setValue(power);
         if (toughness > 0) perm.getToughness().setValue(toughness);
@@ -125,8 +127,7 @@ public class TestCardRenderDialog extends MageDialog {
         if (perm.isTransformable()) {
             perm.setTransformed(true);
         }
-        PermanentView cardView = new PermanentView(perm, card, controllerId, game);
-        //cardView.setInViewerOnly(true);
+        PermanentView cardView = new PermanentView(perm, permCard, controllerId, game);
 
         return cardView;
     }
@@ -136,13 +137,15 @@ public class TestCardRenderDialog extends MageDialog {
         ExpansionInfo setInfo = ExpansionRepository.instance.getSetByCode(code);
         CardSetInfo testSet = new CardSetInfo(cardInfo.getName(), setInfo.getCode(), cardNumber, cardInfo.getRarity(),
                 new CardGraphicInfo(cardInfo.getFrameStyle(), cardInfo.usesVariousArt()));
-        Card card = CardImpl.createCard(cardInfo.getClassName(), testSet);
+        Card newCard = CardImpl.createCard(cardInfo.getClassName(), testSet);
 
         Set<Card> cardsList = new HashSet<>();
-        cardsList.add(card);
+        cardsList.add(newCard);
         game.loadCards(cardsList, controllerId);
 
-        PermanentCard perm = new PermanentCard(card, controllerId, game);
+        Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+
+        PermanentCard perm = new PermanentCard(permCard, controllerId, game);
         perm.setFaceDown(true, game);
         perm.setMorphed(isMorphed);
         perm.setManifested(isManifested);
@@ -151,7 +154,7 @@ public class TestCardRenderDialog extends MageDialog {
         if (perm.isTransformable()) {
             perm.setTransformed(true);
         }
-        PermanentView cardView = new PermanentView(perm, card, controllerId, game);
+        PermanentView cardView = new PermanentView(perm, permCard, controllerId, game);
         cardView.setInViewerOnly(false); // must false for face down
         return cardView;
     }
@@ -293,6 +296,8 @@ public class TestCardRenderDialog extends MageDialog {
         cardViews.add(createHandCard(game, playerYou.getId(), "DKA", "140")); // Huntmaster of the Fells, transforms
         cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "401", 1, 1, 0, false, additionalIcons)); // Hinterland Drake
         cardViews.add(createPermanentCard(game, playerYou.getId(), "MB1", "1441", 1, 1, 0, true, additionalIcons)); // Kathari Remnant
+        cardViews.add(createPermanentCard(game, playerYou.getId(), "KHM", "50", 1, 1, 0, true, additionalIcons)); // Cosima, God of the Voyage
+
 
         //*/
 

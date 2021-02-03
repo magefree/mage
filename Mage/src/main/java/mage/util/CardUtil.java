@@ -15,10 +15,7 @@ import mage.abilities.effects.common.asthought.CanPlayCardControllerEffect;
 import mage.abilities.effects.common.asthought.YouMaySpendManaAsAnyColorToCastTargetEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.HintUtils;
-import mage.cards.Card;
-import mage.cards.MeldCard;
-import mage.cards.ModalDoubleFacesCard;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -896,33 +893,36 @@ public final class CardUtil {
     /**
      * Put card to battlefield without resolve (for cheats and tests only)
      *
-     * @param source must be non null (if you need it empty then use fakeSourceAbility)
+     * @param source  must be non null (if you need it empty then use fakeSourceAbility)
      * @param game
-     * @param card
+     * @param newCard
      * @param player
      */
-    public static void putCardOntoBattlefieldWithEffects(Ability source, Game game, Card card, Player player) {
+    public static void putCardOntoBattlefieldWithEffects(Ability source, Game game, Card newCard, Player player) {
         // same logic as ZonesHandler->maybeRemoveFromSourceZone
 
+        // workaround to put real permanent from one side (example: you call mdf card by cheats)
+        Card permCard = getDefaultCardSideForBattlefield(newCard);
+
         // prepare card and permanent
-        card.setZone(Zone.BATTLEFIELD, game);
-        card.setOwnerId(player.getId());
+        permCard.setZone(Zone.BATTLEFIELD, game);
+        permCard.setOwnerId(player.getId());
         PermanentCard permanent;
-        if (card instanceof MeldCard) {
-            permanent = new PermanentMeld(card, player.getId(), game);
+        if (permCard instanceof MeldCard) {
+            permanent = new PermanentMeld(permCard, player.getId(), game);
         } else {
-            permanent = new PermanentCard(card, player.getId(), game);
+            permanent = new PermanentCard(permCard, player.getId(), game);
         }
 
         // put onto battlefield with possible counters
         game.getPermanentsEntering().put(permanent.getId(), permanent);
-        card.checkForCountersToAdd(permanent, source, game);
+        permCard.checkForCountersToAdd(permanent, source, game);
         permanent.entersBattlefield(source, game, Zone.OUTSIDE, false);
         game.addPermanent(permanent, game.getState().getNextPermanentOrderNumber());
         game.getPermanentsEntering().remove(permanent.getId());
 
         // workaround for special tapped status from test framework's command (addCard)
-        if (card instanceof PermanentCard && ((PermanentCard) card).isTapped()) {
+        if (permCard instanceof PermanentCard && ((PermanentCard) permCard).isTapped()) {
             permanent.setTapped(true);
         }
 
@@ -936,6 +936,27 @@ public final class CardUtil {
                 effect.init(ability.get(), game, player.getId());
             }
         }
+    }
+
+    /**
+     * Choose default card's part to put on battlefield (for cheats and tests only)
+     *
+     * @param card
+     * @return
+     */
+    public static Card getDefaultCardSideForBattlefield(Card card) {
+        // chose left side all time
+        Card permCard;
+        if (card instanceof SplitCard) {
+            permCard = card;
+        } else if (card instanceof AdventureCard) {
+            permCard = card;
+        } else if (card instanceof ModalDoubleFacesCard) {
+            permCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+        } else {
+            permCard = card;
+        }
+        return permCard;
     }
 
     /**

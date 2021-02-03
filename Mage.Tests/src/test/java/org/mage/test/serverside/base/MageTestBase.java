@@ -21,6 +21,7 @@ import mage.server.util.ConfigWrapper;
 import mage.server.util.PluginClassLoader;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
+import mage.util.CardUtil;
 import mage.util.Copier;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -247,14 +248,15 @@ public abstract class MageTestBase {
                 } else {
                     for (int i = 0; i < amount; i++) {
                         CardInfo cardInfo = CardRepository.instance.findCard(cardName);
-                        Card card = cardInfo != null ? cardInfo.getCard() : null;
-                        if (card != null) {
+                        Card newCard = cardInfo != null ? cardInfo.getCard() : null;
+                        if (newCard != null) {
                             if (gameZone == Zone.BATTLEFIELD) {
-                                PermanentCard p = new PermanentCard(card, null, currentGame);
+                                Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+                                PermanentCard p = new PermanentCard(permCard, null, currentGame);
                                 p.setTapped(tapped);
                                 perms.add(p);
                             } else {
-                                cards.add(card);
+                                cards.add(newCard);
                             }
                         } else {
                             logger.fatal("Couldn't find a card: " + cardName);

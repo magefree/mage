@@ -1,6 +1,7 @@
 package org.mage.test.serverside.performance;
 
 import mage.abilities.keyword.InfectAbility;
+import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.PhaseStep;
@@ -11,6 +12,7 @@ import mage.game.mulligan.LondonMulligan;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentImpl;
 import mage.remote.traffic.ZippedObjectImpl;
+import mage.util.CardUtil;
 import mage.utils.CompressUtil;
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,7 +26,9 @@ public class SerializationTest extends CardTestPlayerBase {
     @Test
     public void test_PermanentImpl_Simple() {
         CardInfo cardInfo = CardRepository.instance.findCard("Balduvian Bears");
-        PermanentImpl permanent = new PermanentCard(cardInfo.getCard(), playerA.getId(), currentGame);
+        Card newCard = cardInfo.getCard();
+        Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+        PermanentImpl permanent = new PermanentCard(permCard, playerA.getId(), currentGame);
         currentGame.addPermanent(permanent, 0);
 
         Object compressed = CompressUtil.compress(permanent);
@@ -36,7 +40,9 @@ public class SerializationTest extends CardTestPlayerBase {
     @Test
     public void test_PermanentImpl_MarkedDamageInfo() {
         CardInfo cardInfo = CardRepository.instance.findCard("Balduvian Bears");
-        PermanentImpl permanent = new PermanentCard(cardInfo.getCard(), playerA.getId(), currentGame);
+        Card newCard = cardInfo.getCard();
+        Card permCard = CardUtil.getDefaultCardSideForBattlefield(newCard);
+        PermanentImpl permanent = new PermanentCard(permCard, playerA.getId(), currentGame);
         currentGame.addPermanent(permanent, 0);
 
         // mark damage from infected ability
