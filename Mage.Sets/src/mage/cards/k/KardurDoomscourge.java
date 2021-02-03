@@ -2,7 +2,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -10,29 +10,21 @@ import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.combat.AttacksIfAbleAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
+import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.watchers.common.AttackedThisTurnWatcher;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
  * @author TheElk801
  */
 public final class KardurDoomscourge extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("an attacking creature");
-
-    static {
-        filter.add(AttackingPredicate.instance);
-    }
 
     public KardurDoomscourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
@@ -48,12 +40,11 @@ public final class KardurDoomscourge extends CardImpl {
                 StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE, Duration.UntilYourNextTurn
         ).setText("until your next turn, creatures your opponents control attack each combat if able"));
         ability.addEffect(new KardurDoomscourgeEffect());
+        ability.addWatcher(new AttackedThisTurnWatcher());
         this.addAbility(ability);
 
         // Whenever an attacking creature dies, each opponent loses 1 life and you gain 1 life.
-        ability = new DiesCreatureTriggeredAbility(new LoseLifeOpponentsEffect(1), false, filter);
-        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
-        this.addAbility(ability);
+        this.addAbility(new KardurDoomscourgeTriggeredAbility());
     }
 
     private KardurDoomscourge(final KardurDoomscourge card) {
@@ -99,5 +90,59 @@ class KardurDoomscourgeEffect extends RestrictionEffect {
         }
         // The controller is the defender
         return !defenderId.equals(source.getControllerId());
+    }
+}
+
+class KardurDoomscourgeTriggeredAbility extends TriggeredAbilityImpl {
+
+    private List<UUID> attackers = null;
+
+    public KardurDoomscourgeTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1), false);
+        this.addEffect(new GainLifeEffect(1).concatBy("and"));
+    }
+
+    private KardurDoomscourgeTriggeredAbility(final KardurDoomscourgeTriggeredAbility ability) {
+        super(ability);
+        this.attackers = ability.attackers;
+    }
+
+    @Override
+    public KardurDoomscourgeTriggeredAbility copy() {
+        return new KardurDoomscourgeTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        switch (event.getType()) {
+            case DECLARE_ATTACKERS_STEP:
+            case END_COMBAT_STEP_POST:
+            case ZONE_CHANGE:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        switch (event.getType()) {
+            case DECLARE_ATTACKERS_STEP:
+                attackers = game.getCombat().getAttackers();
+                return false;
+            case END_COMBAT_STEP_POST:
+                attackers = null;
+                return false;
+            case ZONE_CHANGE:
+                ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+                return zEvent.isDiesEvent() && attackers != null && attackers.contains(zEvent.getTargetId());
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever an attacking creature dies, " + super.getRule();
     }
 }
