@@ -43,6 +43,7 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.*;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
+import mage.game.command.Commander;
 import mage.game.events.*;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
@@ -1576,41 +1577,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         game.setCheckPlayableState(true);
         try {
             // collect and filter playable activated abilities
-            // GUI: user clicks on card, but it must activate ability from any card's parts (main, left, right)
-            UUID needId1, needId2, needId3;
-            if (object instanceof SplitCard) {
-                needId1 = object.getId();
-                needId2 = ((SplitCard) object).getLeftHalfCard().getId();
-                needId3 = ((SplitCard) object).getRightHalfCard().getId();
-            } else if (object instanceof ModalDoubleFacesCard) {
-                needId1 = object.getId();
-                needId2 = ((ModalDoubleFacesCard) object).getLeftHalfCard().getId();
-                needId3 = ((ModalDoubleFacesCard) object).getRightHalfCard().getId();
-            } else if (object instanceof AdventureCard) {
-                needId1 = object.getId();
-                needId2 = ((AdventureCard) object).getMainCard().getId();
-                needId3 = ((AdventureCard) object).getSpellCard().getId();
-            } else if (object instanceof AdventureCardSpell) {
-                needId1 = object.getId();
-                needId2 = ((AdventureCardSpell) object).getParentCard().getId();
-                needId3 = object.getId();
-            } else if (object instanceof Spell) {
-                // example: activate Lightning Storm's ability from the spell on the stack
-                needId1 = object.getId();
-                needId2 = ((Spell) object).getCard().getId();
-                needId3 = null;
-            } else {
-                needId1 = object.getId();
-                needId2 = null;
-                needId3 = null;
-            }
+            // GUI: user clicks on card, but it must activate ability from ANY card's parts (main, left, right)
+            Set<UUID> needIds = getObjectParts(object);
 
             // workaround to find all abilities first and filter it for one object
             List<ActivatedAbility> allPlayable = getPlayable(game, true, zone, false);
             for (ActivatedAbility ability : allPlayable) {
-                if (Objects.equals(ability.getSourceId(), needId1)
-                        || Objects.equals(ability.getSourceId(), needId2)
-                        || Objects.equals(ability.getSourceId(), needId3)) {
+                if (needIds.contains(ability.getSourceId())) {
                     useable.putIfAbsent(ability.getId(), ability);
                 }
             }
@@ -1618,6 +1591,40 @@ public abstract class PlayerImpl implements Player, Serializable {
             game.setCheckPlayableState(previousState);
         }
         return useable;
+    }
+
+    protected Set<UUID> getObjectParts(MageObject object) {
+        // collect all possible object's parts (example: all sides in mdf/split cards)
+        Set<UUID> res = new HashSet<>();
+        if (object instanceof SplitCard || object instanceof SplitCardHalf) {
+            SplitCard mainCard = (SplitCard) ((Card) object).getMainCard();
+            res.add(object.getId());
+            res.add(mainCard.getId());
+            res.add(mainCard.getLeftHalfCard().getId());
+            res.add(mainCard.getRightHalfCard().getId());
+        } else if (object instanceof ModalDoubleFacesCard || object instanceof ModalDoubleFacesCardHalf) {
+            ModalDoubleFacesCard mainCard = (ModalDoubleFacesCard) ((Card) object).getMainCard();
+            res.add(object.getId());
+            res.add(mainCard.getId());
+            res.add(mainCard.getLeftHalfCard().getId());
+            res.add(mainCard.getRightHalfCard().getId());
+        } else if (object instanceof AdventureCard || object instanceof AdventureCardSpell) {
+            AdventureCard mainCard = (AdventureCard) ((Card) object).getMainCard();
+            res.add(object.getId());
+            res.add(mainCard.getId());
+            res.add(mainCard.getSpellCard().getId());
+        } else if (object instanceof Spell) {
+            // example: activate Lightning Storm's ability from the spell on the stack
+            res.add(object.getId());
+            res.add(((Spell) object).getCard().getId()); // only single side goes to the stack
+        } else if (object instanceof Commander) {
+            // commander can contains double sides
+            res.add(object.getId());
+            res.addAll(getObjectParts(((Commander) object).getSourceObject()));
+        } else {
+            res.add(object.getId());
+        }
+        return res;
     }
 
     protected LinkedHashMap<UUID, ActivatedManaAbilityImpl> getUseableManaAbilities(MageObject object, Zone zone, Game game) {
