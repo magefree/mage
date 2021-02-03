@@ -11,9 +11,7 @@ import mage.abilities.effects.RequirementEffect;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaAbility;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.ModalDoubleFacesCardHalf;
+import mage.cards.*;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
@@ -43,6 +41,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetDefender;
+import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
 import mage.util.MessageToClient;
@@ -1992,15 +1991,39 @@ public class HumanPlayer extends PlayerImpl {
         }
     }
 
+    /**
+     * Hide ability picker dialog on one available ability to activate
+     *
+     * @param ability
+     * @param game
+     * @return
+     */
     private boolean suppressAbilityPicker(ActivatedAbility ability, Game game) {
         if (getControllingPlayersUserData(game).isShowAbilityPickerForced()) {
+            // user activated an ability picker in preferences
+
+            // force to show ability picker for double faces cards in hand/commander/exile and other zones
+            Card mainCard = game.getCard(CardUtil.getMainCardId(game, ability.getSourceId()));
+            if (mainCard != null && !Zone.BATTLEFIELD.equals(game.getState().getZone(mainCard.getId()))) {
+                if (mainCard instanceof SplitCard
+                        || mainCard instanceof AdventureCard
+                        || mainCard instanceof ModalDoubleFacesCard) {
+                    return false;
+                }
+            }
+
+            // hide on land play
             if (ability instanceof PlayLandAbility) {
                 return true;
             }
+
+            // hide on alternative cost activated
             if (!getCastSourceIdWithAlternateMana().contains(ability.getSourceId())
                     && ability.getManaCostsToPay().convertedManaCost() > 0) {
                 return true;
             }
+
+            // hide on mana activate and show all other
             return ability instanceof ActivatedManaAbilityImpl;
         }
         return true;
