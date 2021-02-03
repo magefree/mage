@@ -1281,7 +1281,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         LOGGER.info("Logging level: " + LOGGER.getEffectiveLevel());
         LOGGER.info("Default charset: " + Charset.defaultCharset());
         if (!Charset.defaultCharset().toString().equals("UTF-8")) {
-            LOGGER.warn("WARNING, found wrong default charset. You must:");
+            LOGGER.warn("WARNING, bad charset. Some images will not be downloaded. You must:");
             LOGGER.warn("* Open launcher -> settings -> java -> client java options");
             LOGGER.warn("* Insert additional command at the the end: -Dfile.encoding=UTF-8");
         }
