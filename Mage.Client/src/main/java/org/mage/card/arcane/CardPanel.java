@@ -808,6 +808,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         if (source != null && dest != null) {
             dest.setSelected(source.isSelected());
             dest.setChoosable(source.isChoosable());
+            dest.setPlayableStats(source.getPlayableStats());
         }
     }
 
