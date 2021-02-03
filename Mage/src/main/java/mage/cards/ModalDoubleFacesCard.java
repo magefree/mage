@@ -7,7 +7,9 @@ import mage.abilities.*;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.constants.*;
+import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.GameState;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.CardUtil;
 import mage.util.SubTypes;
@@ -109,6 +111,16 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
         super.updateZoneChangeCounter(game, event);
         leftHalfCard.updateZoneChangeCounter(game, event);
         rightHalfCard.updateZoneChangeCounter(game, event);
+    }
+
+    @Override
+    public Counters getCounters(Game game) {
+        return leftHalfCard.getCounters(game.getState());
+    }
+
+    @Override
+    public Counters getCounters(GameState state) {
+        return state.getCardState(leftHalfCard.getId()).getCounters();
     }
 
     @Override

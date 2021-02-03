@@ -102,8 +102,13 @@ class CosimaGodOfTheVoyageEffect extends OneShotEffect {
             return false;
         }
         Card card = game.getCard(permanent.getId());
-        player.moveCards(permanent, Zone.EXILED, source, game);
-        if (card == null || game.getState().getZone(card.getId()) != Zone.EXILED) {
+        if (card == null) {
+            return false;
+        }
+
+        String exileName = "Exiled to the voyage";
+        player.moveCardsToExile(permanent, source, game, true, source.getSourceId(), exileName);
+        if (game.getState().getZone(card.getId()) != Zone.EXILED) {
             return true;
         }
         game.addEffect(new CosimaGodOfTheVoyageGainAbilityEffect(new MageObjectReference(card, game)), source);
@@ -206,19 +211,29 @@ class CosimaGodOfTheVoyageReturnEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        if (player.chooseUse(outcome, "Add a voyage counter?", source, game)
+
+        // AI hint to return card on 2+ counters
+        int currentCount = card.getCounters(game).getCount(CounterType.VOYAGE);
+        Outcome aiOutcome = (currentCount >= 2) ? Outcome.Benefit : Outcome.Detriment;
+
+        if (player.chooseUse(aiOutcome, "Add a voyage counter (current: " + currentCount + ")?", null,
+                "Yes, add counter", "No, return to battlefield", source, game)
                 && card.addCounters(CounterType.VOYAGE.createInstance(), player.getId(), source, game)) {
             return true;
         }
-        int counterCount = card.getCounters(game).getCount(CounterType.VOYAGE);
+
+        // return to battle
+        int newCount = card.getCounters(game).getCount(CounterType.VOYAGE);
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        if (counterCount < 1) {
+        if (newCount < 1) {
             return true;
         }
-        player.drawCards(counterCount, source, game);
+
+        // draw and boost
+        player.drawCards(newCount, source, game);
         Permanent permanent = game.getPermanent(card.getId());
         if (permanent != null) {
-            permanent.addCounters(CounterType.P1P1.createInstance(counterCount), player.getId(), source, game);
+            permanent.addCounters(CounterType.P1P1.createInstance(newCount), player.getId(), source, game);
         }
         return true;
     }
