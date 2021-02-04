@@ -72,9 +72,10 @@ class TibaltCosmicImposterPlayFromExileEffect extends AsThoughEffectImpl {
         if (cardInExile == null) {
             return false;
         }
-        if (exile.contains(cardInExile.getId())
+        UUID mainCardId = cardInExile.getMainCard().getId();
+        if (exile.contains(mainCardId)
                 && affectedControllerId.equals(source.getControllerId())
-                && game.getState().getZone(cardInExile.getId()).equals(Zone.EXILED)) {
+                && game.getState().getZone(mainCardId).equals(Zone.EXILED)) {
             CardUtil.makeCardPlayableAndSpendManaAsAnyColor(game, source, cardInExile, Duration.Custom);
             return true;
         }
