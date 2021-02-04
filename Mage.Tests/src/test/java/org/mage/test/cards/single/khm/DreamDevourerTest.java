@@ -61,4 +61,148 @@ public class DreamDevourerTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Grizzly Bears", 2);
     }
+
+    @Test
+    public void testSplitCard() {
+        removeAllCardsFromHand(playerA);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Dream Devourer");
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 5);
+        addCard(Zone.HAND, playerA, "Discovery // Dispersal", 2);
+
+        checkPlayableAbility("normal cast left side", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Discovery", true);
+        checkPlayableAbility("normal cast right side", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Dispersal", true);
+        checkPlayableAbility("foretell exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell", true);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("after foretell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Discovery // Dispersal", 2);
+
+        checkPlayableAbility("foretell cast left side", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {U/B}", true);
+        checkPlayableAbility("foretell cast right side", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {1}{U}{B}", true);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {U/B}");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {1}{U}{B}");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("after foretell cast", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Discovery // Dispersal", 0);
+
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void testMDFCLand() {
+        removeAllCardsFromHand(playerA);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Dream Devourer");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.HAND, playerA, "Akoum Warrior", 1);
+
+        checkPlayableAbility("normal cast left side", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Akoum Warrior", true);
+        checkPlayableAbility("play land right side", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Play Akoum Teeth", true);
+        checkPlayableAbility("foretell exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell", true);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("after foretell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+
+        // Check that cost reduction worked (Foretell cost should be {3}{R})
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 2);
+
+        checkPlayableAbility("foretell cast left side", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Foretell {3}{R}", true);
+        checkPlayableAbility("play foretold land", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Play Akoum Teeth", false);
+        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Foretell {3}{R}");
+        waitStackResolved(3, PhaseStep.POSTCOMBAT_MAIN);
+        checkPermanentCount("after foretell cast", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Akoum Warrior", 1);
+        checkExileCount("after foretell cast", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Akoum Warrior", 0);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Akoum Warrior", 1);
+    }
+
+    @Test
+    public void testMDFCNonland() {
+        removeAllCardsFromHand(playerA);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Dream Devourer");
+        addCard(Zone.BATTLEFIELD, playerA, "City of Brass", 4);
+        addCard(Zone.HAND, playerA, "Jorn, God of Winter", 2);
+
+        checkPlayableAbility("normal cast left side", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Jorn", true);
+        checkPlayableAbility("normal cast right side", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Kaldring", true);
+        checkPlayableAbility("foretell exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell", true);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("after foretell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jorn, God of Winter", 2);
+
+        checkPlayableAbility("foretell cast left side", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {G}", true);
+        checkPlayableAbility("foretell cast right side", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {U}{B}", true);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {G}");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {U}{B}");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after foretell cast", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Jorn, God of Winter", 1);
+        checkPermanentCount("after foretell cast", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Kaldring, the Rimestaff", 1);
+        checkExileCount("after foretell cast", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Jorn, God of Winter", 0);
+
+        setStopAt(3, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Jorn, God of Winter", 1);
+        assertPermanentCount(playerA, "Kaldring, the Rimestaff", 1);
+    }
+
+    @Test
+    public void testAdventureCard() {
+        removeAllCardsFromHand(playerA);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Dream Devourer");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
+        addCard(Zone.HAND, playerA, "Lonesome Unicorn", 2);
+
+        checkPlayableAbility("creature cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lone", true);
+        checkPlayableAbility("adventure cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Rider", true);
+        checkPlayableAbility("foretell exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell", true);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("after foretell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lonesome Unicorn", 2);
+
+        checkPlayableAbility("foretell creature cast", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {2}{W}", true);
+        checkPlayableAbility("foretell adventure cast", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {W}", true);
+        checkPlayableAbility("creature cast", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lone", false);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Foretell {W}");
+        waitStackResolved(3, PhaseStep.PRECOMBAT_MAIN);
+
+        // Check that the creature is playable from adventure zone after casting with Foretell
+        checkPlayableAbility("creature cast after foretell", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lone", true);
+
+        // Tap 2 lands to verify cost reduction worked
+        activateManaAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}", 2);
+        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Foretell {2}{W}");
+        waitStackResolved(3, PhaseStep.POSTCOMBAT_MAIN);
+        checkPermanentCount("after foretell cast", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lonesome Unicorn", 1);
+        checkPermanentCount("after foretell cast", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Knight", 1);
+
+        activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lonesome Unicorn");
+        waitStackResolved(5, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after adventure cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Lonesome Unicorn", 2);
+        checkExileCount("after foretell cast", 5, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lonesome Unicorn", 0);
+
+        setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Lonesome Unicorn", 2);
+        assertPermanentCount(playerA, "Knight", 1);
+    }
 }
