@@ -407,7 +407,28 @@ public class ForetellAbility extends SpecialAction {
 
         @Override
         public String getRule(boolean all) {
-            return "";
+            StringBuilder sbRule = new StringBuilder("Foretell");
+            if (!costs.isEmpty()) {
+                sbRule.append("&mdash;");
+            } else {
+                sbRule.append(' ');
+            }
+            if (!manaCosts.isEmpty()) {
+                sbRule.append(manaCosts.getText());
+            }
+            if (!costs.isEmpty()) {
+                if (!manaCosts.isEmpty()) {
+                    sbRule.append(", ");
+                }
+                sbRule.append(costs.getText());
+                sbRule.append('.');
+            }
+            if (abilityName != null) {
+                sbRule.append(' ');
+                sbRule.append(abilityName);
+            }
+            sbRule.append(" <i>(You may cast this card from exile for its foretell cost.)</i>");
+            return sbRule.toString();
         }
 
         /**
