@@ -1,10 +1,4 @@
-
 package mage.target.common;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
 
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -14,12 +8,17 @@ import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetCardInLibrary extends TargetCard {
@@ -27,7 +26,7 @@ public class TargetCardInLibrary extends TargetCard {
     private int librarySearchLimit;
 
     public TargetCardInLibrary() {
-        this(1, 1, new FilterCard());
+        this(1, 1, StaticFilters.FILTER_CARD);
     }
 
     public TargetCardInLibrary(FilterCard filter) {
@@ -93,7 +92,7 @@ public class TargetCardInLibrary extends TargetCard {
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Card card = game.getPlayer(source.getControllerId()).getLibrary().getCard(id, game);
-        return card != null && filter.match(card, game);
+        return card != null && filter.match(card, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override
