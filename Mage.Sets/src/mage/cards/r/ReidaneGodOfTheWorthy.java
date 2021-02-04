@@ -169,7 +169,7 @@ class ValkmiraProtectorsShieldPreventionEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!game.getOpponents(event.getSourceId()).contains(source.getControllerId())) {
+        if (!game.getOpponents(game.getControllerId(event.getSourceId())).contains(source.getControllerId())) {
             return false;
         }
         switch (event.getType()) {
