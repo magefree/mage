@@ -84,31 +84,38 @@ class DreamDevourerAddAbilityEffect extends ContinuousEffectImpl {
             return false;
         }
         for (Card card : controller.getHand().getCards(filter, game)) {
-            ForetellAbility foretellAbility;
+            ForetellAbility foretellAbility = null;
             if (card instanceof SplitCard) {
-                String leftHalfCost = CardUtil.reduceCost(((SplitCard) card).getLeftHalfCard().getSpellAbility().getManaCostsToPay(), 2).getText();
-                String rightHalfCost = CardUtil.reduceCost(((SplitCard) card).getRightHalfCard().getSpellAbility().getManaCostsToPay(), 2).getText();
+                String leftHalfCost = CardUtil.reduceCost(((SplitCard) card).getLeftHalfCard().getManaCost(), 2).getText();
+                String rightHalfCost = CardUtil.reduceCost(((SplitCard) card).getRightHalfCard().getManaCost(), 2).getText();
                 foretellAbility = new ForetellAbility(card, leftHalfCost, rightHalfCost);
             } else if (card instanceof ModalDoubleFacesCard) {
-                String leftHalfCost = CardUtil.reduceCost(((ModalDoubleFacesCard) card).getLeftHalfCard().getSpellAbility().getManaCostsToPay(), 2).getText();
-                ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
-                if (rightHalfCard.isLand()) {
-                    foretellAbility = new ForetellAbility(card, leftHalfCost);
-                } else {
-                    String rightHalfCost = CardUtil.reduceCost(rightHalfCard.getSpellAbility().getManaCostsToPay(), 2).getText();
-                    foretellAbility = new ForetellAbility(card, leftHalfCost, rightHalfCost);
+                ModalDoubleFacesCardHalf leftHalfCard = ((ModalDoubleFacesCard) card).getLeftHalfCard();
+                // If front side of MDFC is land, do nothing as Dream Devourer does not apply to lands
+                // MDFC cards in hand are considered lands if front side is land
+                if (!leftHalfCard.isLand()) {
+                    String leftHalfCost = CardUtil.reduceCost(leftHalfCard.getManaCost(), 2).getText();
+                    ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+                    if (rightHalfCard.isLand()) {
+                        foretellAbility = new ForetellAbility(card, leftHalfCost);
+                    } else {
+                        String rightHalfCost = CardUtil.reduceCost(rightHalfCard.getManaCost(), 2).getText();
+                        foretellAbility = new ForetellAbility(card, leftHalfCost, rightHalfCost);
+                    }
                 }
             } else if (card instanceof AdventureCard) {
-                String creatureCost = CardUtil.reduceCost(card.getSpellAbility().getManaCostsToPay(), 2).getText();
-                String spellCost = CardUtil.reduceCost(((AdventureCard) card).getSpellCard().getSpellAbility().getManaCostsToPay(), 2).getText();
+                String creatureCost = CardUtil.reduceCost(card.getMainCard().getManaCost(), 2).getText();
+                String spellCost = CardUtil.reduceCost(((AdventureCard) card).getSpellCard().getManaCost(), 2).getText();
                 foretellAbility = new ForetellAbility(card, creatureCost, spellCost);
             } else {
-                String costText = CardUtil.reduceCost(card.getSpellAbility().getManaCostsToPay(), 2).getText();
+                String costText = CardUtil.reduceCost(card.getManaCost(), 2).getText();
                 foretellAbility = new ForetellAbility(card, costText);
             }
-            foretellAbility.setSourceId(card.getId());
-            foretellAbility.setControllerId(card.getOwnerId());
-            game.getState().addOtherAbility(card, foretellAbility);
+            if (foretellAbility != null) {
+                foretellAbility.setSourceId(card.getId());
+                foretellAbility.setControllerId(card.getOwnerId());
+                game.getState().addOtherAbility(card, foretellAbility);
+            }
         }
         return true;
     }
