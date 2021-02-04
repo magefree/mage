@@ -49,7 +49,7 @@ public final class TheTricksterGodsHeist extends CardImpl {
                 new ExchangeControlTargetEffect(
                         Duration.EndOfGame, "exchange control of two target nonbasic, " +
                         "noncreature permanents that share a card type"
-                ), new TargetCreaturePermanent(2), true
+                ), new TheTricksterGodsHeistTarget(), true
         );
 
         // III — Target player loses 3 life and you gain 3 life.
