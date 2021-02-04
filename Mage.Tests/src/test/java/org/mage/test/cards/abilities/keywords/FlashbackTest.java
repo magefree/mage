@@ -1,9 +1,11 @@
 package org.mage.test.cards.abilities.keywords;
 
+import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -579,6 +581,50 @@ public class FlashbackTest extends CardTestPlayerBase {
         assertCounterCount(playerA, CounterType.EXPERIENCE, 2);
 
         assertLife(playerA, 17);
+    }
 
+    @Test
+    public void test_SplitCards_EachPartMustGainFlashback() {
+        // When Snapcaster Mage enters the battlefield, target instant or sorcery card in your graveyard gains
+        // flashback until end of turn. The flashback cost is equal to its mana cost.
+        addCard(Zone.HAND, playerA, "Snapcaster Mage", 1); // {1}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        //
+        // Fire, {1}{R}
+        // Fire deals 2 damage divided as you choose among one or two target creatures and/or players.
+        // Ice, {1}{U}
+        // Tap target permanent.
+        // Draw a card.
+        addCard(Zone.GRAVEYARD, playerA, "Fire // Ice", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Fire", false);
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ice", false);
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {1}{R}{1}{U}", false);
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {1}{R}", false);
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {1}{U}", false);
+
+        // cast mage and give flashback
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snapcaster Mage");
+        addTarget(playerA, "Fire // Ice");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPlayableAbility("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Fire", false);
+        checkPlayableAbility("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Ice", false);
+        checkPlayableAbility("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {1}{R}{1}{U}", false); // no fuse
+        checkPlayableAbility("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {1}{R}", true);
+        checkPlayableAbility("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {1}{U}", true);
+        runCode("test", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            long flashbackCount = player.getPlayable(game, true).stream()
+                    .filter(ability -> ability instanceof FlashbackAbility)
+                    .count();
+            Assert.assertEquals("must have only two playable abilities without duplicates", 2, flashbackCount);
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
     }
 }
