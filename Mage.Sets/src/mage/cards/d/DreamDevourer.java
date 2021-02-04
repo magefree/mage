@@ -8,10 +8,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ForetellAbility;
-import mage.cards.Card;
+import mage.cards.*;
 import mage.constants.SubType;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -86,9 +84,28 @@ class DreamDevourerAddAbilityEffect extends ContinuousEffectImpl {
             return false;
         }
         for (Card card : controller.getHand().getCards(filter, game)) {
-            String costText = CardUtil.reduceCost(card.getSpellAbility().getManaCostsToPay(), 2).getText();
-            game.getState().setValue(card.getId().toString() + "Foretell Cost", costText);
-            ForetellAbility foretellAbility = new ForetellAbility(card, costText);
+            ForetellAbility foretellAbility;
+            if (card instanceof SplitCard) {
+                String leftHalfCost = CardUtil.reduceCost(((SplitCard) card).getLeftHalfCard().getSpellAbility().getManaCostsToPay(), 2).getText();
+                String rightHalfCost = CardUtil.reduceCost(((SplitCard) card).getRightHalfCard().getSpellAbility().getManaCostsToPay(), 2).getText();
+                foretellAbility = new ForetellAbility(card, leftHalfCost, rightHalfCost);
+            } else if (card instanceof ModalDoubleFacesCard) {
+                String leftHalfCost = CardUtil.reduceCost(((ModalDoubleFacesCard) card).getLeftHalfCard().getSpellAbility().getManaCostsToPay(), 2).getText();
+                ModalDoubleFacesCardHalf rightHalfCard = ((ModalDoubleFacesCard) card).getRightHalfCard();
+                if (rightHalfCard.isLand()) {
+                    foretellAbility = new ForetellAbility(card, leftHalfCost);
+                } else {
+                    String rightHalfCost = CardUtil.reduceCost(rightHalfCard.getSpellAbility().getManaCostsToPay(), 2).getText();
+                    foretellAbility = new ForetellAbility(card, leftHalfCost, rightHalfCost);
+                }
+            } else if (card instanceof AdventureCard) {
+                String creatureCost = CardUtil.reduceCost(card.getSpellAbility().getManaCostsToPay(), 2).getText();
+                String spellCost = CardUtil.reduceCost(((AdventureCard) card).getSpellCard().getSpellAbility().getManaCostsToPay(), 2).getText();
+                foretellAbility = new ForetellAbility(card, creatureCost, spellCost);
+            } else {
+                String costText = CardUtil.reduceCost(card.getSpellAbility().getManaCostsToPay(), 2).getText();
+                foretellAbility = new ForetellAbility(card, costText);
+            }
             foretellAbility.setSourceId(card.getId());
             foretellAbility.setControllerId(card.getOwnerId());
             game.getState().addOtherAbility(card, foretellAbility);
