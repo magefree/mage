@@ -60,6 +60,10 @@ public final class CardUtil {
 
     public static final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 
+    private static final List<String> costWords = Arrays.asList(
+            "put", "return", "exile", "discard", "sacrifice", "remove", "tap", "reveal", "pay"
+    );
+
     /**
      * Increase spell or ability cost to be paid.
      *
@@ -1168,5 +1172,9 @@ public final class CardUtil {
             zcc = game.getState().getZoneChangeCounter(source.getSourceId());
         }
         return zcc;
+    }
+
+    public static boolean checkCostWords(String text) {
+        return text != null && costWords.stream().anyMatch(text.toLowerCase(Locale.ENGLISH)::startsWith);
     }
 }

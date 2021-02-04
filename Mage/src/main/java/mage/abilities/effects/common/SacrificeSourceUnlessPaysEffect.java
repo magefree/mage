@@ -11,6 +11,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.util.ManaUtil;
 
 import java.util.Locale;
@@ -96,12 +97,7 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder("sacrifice {this} unless you ");
         String costText = cost != null ? cost.getText() : "{X}";
 
-        if (costText.toLowerCase(Locale.ENGLISH).startsWith("discard")
-                || costText.toLowerCase(Locale.ENGLISH).startsWith("remove")
-                || costText.toLowerCase(Locale.ENGLISH).startsWith("return")
-                || costText.toLowerCase(Locale.ENGLISH).startsWith("put")
-                || costText.toLowerCase(Locale.ENGLISH).startsWith("exile")
-                || costText.toLowerCase(Locale.ENGLISH).startsWith("sacrifice")) {
+        if (CardUtil.checkCostWords(costText)) {
             sb.append(costText.substring(0, 1).toLowerCase(Locale.ENGLISH));
             sb.append(costText.substring(1));
         } else {

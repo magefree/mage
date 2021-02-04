@@ -11,8 +11,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.Locale;
-
 public class DoWhenCostPaid extends OneShotEffect {
 
     private final ReflexiveTriggeredAbility ability;
@@ -80,16 +78,7 @@ public class DoWhenCostPaid extends OneShotEffect {
     private String getCostText() {
         StringBuilder sb = new StringBuilder();
         String costText = cost.getText();
-        if (costText != null
-                && !costText.toLowerCase(Locale.ENGLISH).startsWith("put")
-                && !costText.toLowerCase(Locale.ENGLISH).startsWith("return")
-                && !costText.toLowerCase(Locale.ENGLISH).startsWith("exile")
-                && !costText.toLowerCase(Locale.ENGLISH).startsWith("discard")
-                && !costText.toLowerCase(Locale.ENGLISH).startsWith("sacrifice")
-                && !costText.toLowerCase(Locale.ENGLISH).startsWith("remove")
-                && !costText.toLowerCase(Locale.ENGLISH).startsWith("tap")
-                && !costText.toLowerCase(Locale.ENGLISH).startsWith("reveal")
-                && !costText.toLowerCase(Locale.ENGLISH).startsWith("pay")) {
+        if (!CardUtil.checkCostWords(costText)) {
             sb.append("pay ");
         }
         return sb.append(costText).toString();
