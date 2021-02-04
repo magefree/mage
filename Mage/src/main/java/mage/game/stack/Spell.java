@@ -35,6 +35,7 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
 import mage.util.SubTypes;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -42,6 +43,8 @@ import java.util.*;
  * @author BetaSteward_at_googlemail.com
  */
 public class Spell extends StackObjImpl implements Card {
+
+    private static final Logger logger = Logger.getLogger(Spell.class);
 
     private final List<SpellAbility> spellAbilities = new ArrayList<>();
     private final List<Card> spellCards = new ArrayList<>();

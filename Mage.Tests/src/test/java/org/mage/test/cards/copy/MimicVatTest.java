@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.copy;
 
 import mage.constants.PhaseStep;
@@ -7,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class MimicVatTest extends CardTestPlayerBase {
@@ -25,31 +23,40 @@ public class MimicVatTest extends CardTestPlayerBase {
     public void TestClone() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
         // Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.
-        // {3}, {T}: Create a tokenonto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
+        // {3}, {T}: Create a token that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
         addCard(Zone.BATTLEFIELD, playerA, "Mimic Vat", 1); // Artifact {3}
         // {2}, {T}, Sacrifice a creature: Draw a card.
         addCard(Zone.BATTLEFIELD, playerA, "Phyrexian Vault", 1);
 
         // You may have Clone enter the battlefield as a copy of any creature on the battlefield.
         addCard(Zone.HAND, playerA, "Clone", 1);// Creature {3}{U}
-
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
+        // clone the opponent's creature
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        setChoice(playerA, "Yes"); // use clone on etb
         setChoice(playerA, "Silvercoat Lion");
+
+        // kill clone and exile it (imprint into vat)
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Sacrifice a creature");
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "Silvercoat Lion");
+        setChoice(playerA, "Yes"); // exile killed card by vat
 
+        // turn 3
+
+        // create a token from exile (imprinted card: clone)
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}, {T}: Create a token");
+        setChoice(playerA, "Yes"); // use clone on etb
         setChoice(playerA, "Silvercoat Lion");
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertExileCount("Clone", 1);
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
-
     }
 
     @Test

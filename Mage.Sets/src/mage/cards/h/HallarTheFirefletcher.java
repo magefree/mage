@@ -1,30 +1,22 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class HallarTheFirefletcher extends CardImpl {
@@ -80,15 +72,10 @@ class HallarTheFirefletcherTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell != null && spell.isControlledBy(controllerId)) {
-            for (Ability ability : spell.getAbilities()) {
-                if (ability instanceof KickerAbility && ((KickerAbility) ability).getKickedCounter(game, spell.getSpellAbility()) > 0) {
-                    return true;
-                }
-            }
+        if (!isControlledBy(event.getPlayerId())) {
+            return false;
         }
-        return false;
+        return KickerAbility.getSpellKickedCount(game, event.getTargetId()) > 0;
     }
 
     @Override

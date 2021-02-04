@@ -6,6 +6,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.cards.Card;
 import mage.constants.EmptyNames;
 import mage.game.Game;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
 
 import java.util.UUID;
@@ -117,6 +118,14 @@ public class PermanentToken extends PermanentImpl {
         } else {
             super.adjustCosts(ability, game);
         }
+    }
+
+    @Override
+    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
+        // token must change zcc on enters to battlefield (like cards do with stack),
+        // so it can keep abilities settings synced with copied spell/card
+        // example: kicker ability of copied creature spell
+        super.updateZoneChangeCounter(game, event);
     }
 
     @Override

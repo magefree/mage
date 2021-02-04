@@ -35,6 +35,7 @@ import mage.util.Copyable;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
+import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
@@ -52,6 +53,7 @@ import static java.util.Collections.emptyList;
  */
 public class GameState implements Serializable, Copyable<GameState> {
 
+    private static final Logger logger = Logger.getLogger(GameState.class);
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(1024);
 
     public static final String COPIED_FROM_CARD_KEY = "CopiedFromCard";
@@ -1225,9 +1227,10 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void updateZoneChangeCounter(UUID objectId) {
-        Integer value = getZoneChangeCounter(objectId);
+        int value = getZoneChangeCounter(objectId);
         value++;
-        this.zoneChangeCounter.put(objectId, value);
+        setZoneChangeCounter(objectId, value);
+
         // card is changing zone so clear state
         if (cardState.containsKey(objectId)) {
             this.cardState.get(objectId).clear();

@@ -509,6 +509,51 @@ public class KickerTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_ZCC_CopiedCreaturesSpellMustWork() {
+        // bug:
+        // Lost kicker status after creature spell copy by Verazol, the Split Current
+
+        // Verazol, the Split Current enters the battlefield with a +1/+1 counter on it for each mana spent to cast it.
+        // Whenever you cast a kicked spell, you may remove two +1/+1 counters from Verazol, the Split Current. If you
+        // do, copy that spell. You may choose new targets for that copy.
+        addCard(Zone.HAND, playerA, "Verazol, the Split Current", 1); // {X}{G}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2 + 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        //
+        // Multikicker {R}
+        // When Deathforge Shaman enters the battlefield, it deals damage to target player equal to twice the number of times it was kicked.
+        addCard(Zone.HAND, playerA, "Deathforge Shaman", 1); // {4}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5 + 2 * 2); // for 2x kicker
+
+        // prepare varazol with 4x counters
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 3);
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Verazol, the Split Current");
+        setChoice(playerA, "X=2"); // add 2 + 2 counters
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Verazol, the Split Current", 1);
+        checkPermanentCounters("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Verazol, the Split Current", CounterType.P1P1, 4);
+
+        // cast 2x kicked spell for 4x damage
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Deathforge Shaman");
+        setChoice(playerA, "Yes"); // 1x kick
+        setChoice(playerA, "Yes"); // 2x kick
+        setChoice(playerA, "No"); // stop multikicker
+        setChoice(playerA, "Yes"); // remove counters and activate verazol's copy
+        addTarget(playerA, playerA); // on resolve: target for copied spell
+        addTarget(playerA, playerB); // on resolve: target for original spell
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        //
+        checkLife("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 20 - 4);
+        checkLife("after", 1, PhaseStep.PRECOMBAT_MAIN, playerB, 20 - 4);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
     public void test_Single_OrimsChants() {
         // bug:
         // When I cast Orim's Chant with Kicker cost, the player can play spells

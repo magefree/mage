@@ -8,9 +8,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class AttachEffect extends OneShotEffect {
@@ -37,10 +37,10 @@ public class AttachEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
+            // if it activating on the stack then allow +1 zcc
             int zcc = game.getState().getZoneChangeCounter(sourcePermanent.getId());
-            if (zcc == source.getSourceObjectZoneChangeCounter()
-                    || zcc == source.getSourceObjectZoneChangeCounter() + 1
-                    || zcc == source.getSourceObjectZoneChangeCounter() + 2) {
+            if (zcc == CardUtil.getActualSourceObjectZoneChangeCounter(game, source)
+                    || zcc == CardUtil.getActualSourceObjectZoneChangeCounter(game, source) + 1) {
                 Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
                 if (permanent != null) {
                     return permanent.addAttachment(source.getSourceId(), source, game);

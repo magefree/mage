@@ -328,6 +328,7 @@ public final class ZonesHandler {
                 return false;
             }
         }
+
         if (!game.replaceEvent(event)) {
             Zone fromZone = event.getFromZone();
             if (event.getToZone() == Zone.BATTLEFIELD) {
@@ -382,6 +383,11 @@ public final class ZonesHandler {
             }
         }
         if (success) {
+            // change ZCC on real enter
+            // warning, tokens creation code uses same zcc logic as cards (+1 zcc on enter to battlefield)
+            // so if you want to change zcc logic here (but I know you don't) then change token code
+            // too in TokenImpl.putOntoBattlefieldHelper
+            // KickerTest do many tests for token's zcc
             if (event.getToZone() == Zone.BATTLEFIELD && event.getTarget() != null) {
                 event.getTarget().updateZoneChangeCounter(game, event);
             } else if (!(card instanceof Permanent)) {

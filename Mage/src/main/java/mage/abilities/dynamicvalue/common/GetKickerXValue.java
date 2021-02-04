@@ -10,6 +10,8 @@ import mage.game.stack.Spell;
 
 
 /**
+ * Kicker {X}
+ *
  * @author JayDi85
  */
 public enum GetKickerXValue implements DynamicValue {
@@ -23,7 +25,7 @@ public enum GetKickerXValue implements DynamicValue {
         // only one X value per card possible
         // kicker can be calls multiple times (use getKickedCounter)
 
-        int finalValue = 0;
+        int countX = 0;
         Spell spell = game.getSpellOrLKIStack(sourceAbility.getSourceId());
         if (spell != null && spell.getSpellAbility() != null) {
             int xValue = spell.getSpellAbility().getManaCostsToPay().getX();
@@ -39,13 +41,13 @@ public enum GetKickerXValue implements DynamicValue {
                     if (haveVarCost) {
                         int kickedCount = ((KickerAbility) ability).getKickedCounter(game, sourceAbility);
                         if (kickedCount > 0) {
-                            finalValue += kickedCount * xValue;
+                            countX += kickedCount * xValue;
                         }
                     }
                 }
             }
         }
-        return finalValue;
+        return countX;
     }
 
     @Override

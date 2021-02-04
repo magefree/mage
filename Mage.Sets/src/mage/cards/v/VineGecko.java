@@ -76,7 +76,8 @@ enum VineGeckoPredicate implements ObjectPlayerPredicate<ObjectPlayer<Card>> {
         if (watcher == null || watcher.checkPlayer(input.getPlayerId())) {
             return false;
         }
-        for (Ability ability : input.getObject().getAbilities()) {
+
+        for (Ability ability : input.getObject().getAbilities(game)) {
             if (ability instanceof KickerAbility
                     && ((KickerAbility) ability).getKickedCounter(game, input.getObject().getSpellAbility()) > 0) {
                 return true;

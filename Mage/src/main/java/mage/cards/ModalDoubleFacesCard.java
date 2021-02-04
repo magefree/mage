@@ -115,7 +115,7 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
 
     @Override
     public Counters getCounters(Game game) {
-        return leftHalfCard.getCounters(game.getState());
+        return getCounters(game.getState());
     }
 
     @Override

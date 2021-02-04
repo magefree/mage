@@ -198,51 +198,68 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
 
         Token token = event.getToken();
         int amount = event.getAmount();
-
-        List<Permanent> permanents = new ArrayList<>();
-        List<Permanent> permanentsEntered = new ArrayList<>();
-
         String setCode = token instanceof TokenImpl ? ((TokenImpl) token).getSetCode(game, event.getSourceId()) : null;
 
+        List<Permanent> needTokens = new ArrayList<>();
+        List<Permanent> allowedTokens = new ArrayList<>();
+
+        // prepare tokens to enter
         for (int i = 0; i < amount; i++) {
-            PermanentToken newToken = new PermanentToken(token, event.getPlayerId(), setCode, game); // use event.getPlayerId() because it can be replaced by replacement effect
-            game.getState().addCard(newToken);
-            permanents.add(newToken);
-            game.getPermanentsEntering().put(newToken.getId(), newToken);
-            newToken.setTapped(tapped);
+            // use event.getPlayerId() as controller cause it can be replaced by replacement effect
+            PermanentToken newPermanent = new PermanentToken(token, event.getPlayerId(), setCode, game);
+            game.getState().addCard(newPermanent);
+            needTokens.add(newPermanent);
+            game.getPermanentsEntering().put(newPermanent.getId(), newPermanent);
+            newPermanent.setTapped(tapped);
+
+            ZoneChangeEvent emptyEvent = new ZoneChangeEvent(newPermanent, newPermanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD);
+            // tokens zcc must simulate card's zcc too keep copied card/spell settings
+            // (example: etb's kicker ability of copied creature spell, see tests with Deathforge Shaman)
+            newPermanent.updateZoneChangeCounter(game, emptyEvent);
         }
+
+        // check ETB effects
         game.setScopeRelevant(true);
-        for (Permanent permanent : permanents) {
+        for (Permanent permanent : needTokens) {
             if (permanent.entersBattlefield(source, game, Zone.OUTSIDE, true)) {
-                permanentsEntered.add(permanent);
+                allowedTokens.add(permanent);
             } else {
                 game.getPermanentsEntering().remove(permanent.getId());
             }
         }
         game.setScopeRelevant(false);
+
+        // put allowed tokens to play
         int createOrder = game.getState().getNextPermanentOrderNumber();
-        for (Permanent permanent : permanentsEntered) {
+        for (Permanent permanent : allowedTokens) {
             game.addPermanent(permanent, createOrder);
             permanent.setZone(Zone.BATTLEFIELD, game);
             game.getPermanentsEntering().remove(permanent.getId());
 
+            // keep tokens ids
             if (token instanceof TokenImpl) {
                 ((TokenImpl) token).lastAddedTokenIds.add(permanent.getId());
                 ((TokenImpl) token).lastAddedTokenId = permanent.getId();
             }
-            game.addSimultaneousEvent(new ZoneChangeEvent(permanent, permanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD));
+
+            // created token events
+            ZoneChangeEvent zccEvent = new ZoneChangeEvent(permanent, permanent.getControllerId(), Zone.OUTSIDE, Zone.BATTLEFIELD);
+            game.addSimultaneousEvent(zccEvent);
             if (permanent instanceof PermanentToken && created) {
                 game.addSimultaneousEvent(new CreatedTokenEvent(source, (PermanentToken) permanent));
             }
+
+            // must attack
             if (attacking && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
                 game.getCombat().addAttackingCreature(permanent.getId(), game, attackedPlayer);
             }
+
+            // game logs
             if (created) {
                 game.informPlayers(controller.getLogName() + " creates a " + permanent.getLogName() + " token");
             } else {
                 game.informPlayers(permanent.getLogName() + " enters the battlefield as a token under " + controller.getLogName() + "'s control'");
             }
-
         }
         game.getState().applyEffects(game); // Needed to do it here without LKIReset i.e. do get SwordOfTheMeekTest running correctly.
     }

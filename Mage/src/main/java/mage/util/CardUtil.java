@@ -1149,4 +1149,24 @@ public final class CardUtil {
         }
         return CardUtil.getSourceLogName(game, " (source: ", source, ")", "");
     }
+
+    /**
+     * Find actual ZCC of source object, works in any moment (even before source ability activated)
+     * <p>
+     * Use case for usage: if you want to get actual object ZCC before ability resolve
+     * (ability gets zcc after resolve/activate/trigger only -- ?wtf workaround to targets setup I think?)
+     *
+     * @param game
+     * @param source
+     * @return
+     */
+    public static int getActualSourceObjectZoneChangeCounter(Game game, Ability source) {
+        // current object zcc, find from source object (it can be permanent or spell on stack)
+        int zcc = source.getSourceObjectZoneChangeCounter();
+        if (zcc == 0) {
+            // if ability is not activated yet then use current object's zcc (example: triggered etb ability checking the kicker conditional)
+            zcc = game.getState().getZoneChangeCounter(source.getSourceId());
+        }
+        return zcc;
+    }
 }

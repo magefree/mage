@@ -1,21 +1,21 @@
 package mage.abilities.keyword;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.costs.*;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.constants.AbilityType;
+import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.util.CardUtil;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -45,7 +45,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Otherwise, the spell is cast as if it did not have those targets. See rule
  * 601.2c.
  *
- * @author LevelX2
+ * @author LevelX2, JayDi85
  */
 public class KickerAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
 
@@ -203,17 +203,25 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
      * @return
      */
     public static String getActivationKey(Ability source, Game game) {
-        // must use ZCC from the moment of spell's ability activation
-        int zcc = source.getSourceObjectZoneChangeCounter();
-        if (zcc == 0) {
-            // if ability is not activated yet (example: triggered ability checking the kicker conditional)
-            zcc = game.getState().getZoneChangeCounter(source.getSourceId());
-        }
+        // Kicker activates in STACK zone so all zcc must be from "stack moment"
+        // Use cases:
+        // * resolving spell have same zcc (example: check kicker status in sorcery/instant);
+        // * copied spell have same zcc as source spell (see Spell.copySpell and zcc sync);
+        // * creature/token from resolved spell have +1 zcc after moved to battlefield (example: check kicker status in ETB triggers/effects);
 
-        // triggers or activated abilities moves to stack and card's ZCC is changed -- so you must use workaround to find spell's zcc
-        if (source.getAbilityType() == AbilityType.TRIGGERED || source.getAbilityType() == AbilityType.ACTIVATED) {
+        // find object info from the source ability (it can be a permanent or a spell on stack, on the moment of trigger/resolve)
+        MageObject sourceObject = source.getSourceObject(game);
+        Zone sourceObjectZone = game.getState().getZone(sourceObject.getId());
+        int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
+
+        // find "stack moment" zcc:
+        // * permanent cards enters from STACK to BATTLEFIELD (+1 zcc)
+        // * permanent tokens enters from OUTSIDE to BATTLEFIELD (+1 zcc, see prepare code in TokenImpl.putOntoBattlefieldHelper)
+        // * spells and copied spells resolves on STACK (zcc not changes)
+        if (sourceObjectZone != Zone.STACK) {
             --zcc;
         }
+
         return zcc + "";
     }
 
@@ -307,5 +315,45 @@ public class KickerAbility extends StaticAbility implements OptionalAdditionalSo
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Find spell's kicked stats. Must be used on stack only, e.g. for SPELL_CAST events
+     *
+     * @param game
+     * @param spellId
+     * @return
+     */
+    public static int getSpellKickedCount(Game game, UUID spellId) {
+        int count = 0;
+        Spell spell = game.getSpellOrLKIStack(spellId);
+        if (spell != null) {
+            for (Ability ability : spell.getAbilities(game)) {
+                if (ability instanceof KickerAbility) {
+                    count += ((KickerAbility) ability).getKickedCounter(game, spell.getSpellAbility());
+                }
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Find source object's kicked stats. Can be used in any places, e.g. in ETB effects
+     *
+     * @param game
+     * @param abilityToCheck
+     * @return
+     */
+    public static int getSourceObjectKickedCount(Game game, Ability abilityToCheck) {
+        MageObject sourceObject = abilityToCheck.getSourceObject(game);
+        int count = 0;
+        if (sourceObject instanceof Card) {
+            for (Ability ability : ((Card) sourceObject).getAbilities(game)) {
+                if (ability instanceof KickerAbility) {
+                    count += ((KickerAbility) ability).getKickedCounter(game, abilityToCheck);
+                }
+            }
+        }
+        return count;
     }
 }

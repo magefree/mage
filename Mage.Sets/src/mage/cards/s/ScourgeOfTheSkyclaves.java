@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 
 import java.util.Objects;
@@ -64,17 +63,7 @@ enum ScourgeOfTheSkyclavesCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getSpell(source.getSourceId());
-        if (spell == null) {
-            return false;
-        }
-        for (Ability ability : spell.getAbilities()) {
-            if (ability instanceof KickerAbility
-                    && ((KickerAbility) ability).getKickedCounter(game, spell.getSpellAbility()) > 0) {
-                return true;
-            }
-        }
-        return false;
+        return KickerAbility.getSpellKickedCount(game, source.getSourceId()) > 0;
     }
 }
 
