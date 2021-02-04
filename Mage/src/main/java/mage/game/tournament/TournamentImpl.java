@@ -1,4 +1,3 @@
-
 package mage.game.tournament;
 
 import java.util.ArrayList;
@@ -12,9 +11,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import org.apache.log4j.Logger;
-
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.constants.TournamentPlayerState;
@@ -37,6 +33,7 @@ import mage.game.result.ResultProtos.TourneyRoundProto;
 import mage.players.Player;
 import mage.players.PlayerType;
 import mage.util.RandomUtil;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -411,7 +408,11 @@ public abstract class TournamentImpl implements Tournament {
                     player.getDeck().getSideboard().addAll(cube.createBooster());
                 }
             } else if (options.getLimitedOptions().getIsJumpstart()) {
-                player.getDeck().getCards().addAll(JumpstartPoolGenerator.generatePool());
+                if (options.getLimitedOptions().jumpstartPacks == null) {
+                    player.getDeck().getCards().addAll(JumpstartPoolGenerator.generatePool());
+                } else {
+                    player.getDeck().getCards().addAll(JumpstartPoolGenerator.generatePool(options.getLimitedOptions().jumpstartPacks));
+                }
             } else {
                 for (ExpansionSet set : sets) {
                     player.getDeck().getSideboard().addAll(set.createBooster());
