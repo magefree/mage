@@ -48,9 +48,14 @@ public class JumpstartPoolGenerator {
    * Deck Lists: https://magic.wizards.com/en/articles/archive/feature/jumpstart-decklists-2020-06-18
      */
     private static final String RESOURCE_NAME = "jumpstart/jumpstart.txt";
-    private static List<JumpstartPack> JUMPSTART_PACKS;
+    private static final List<JumpstartPack> JUMPSTART_PACKS;
 
-    private static void setupPacks(String jumpstartPacks, boolean useDefault) {
+    static {
+        List<JumpstartPack> packs = getPacks ("", true);
+        JUMPSTART_PACKS = Collections.unmodifiableList(packs);
+    }
+
+    private static List<JumpstartPack> getPacks(String jumpstartPacks, boolean useDefault) {
         try {
             CharSource source;
             if (useDefault) {
@@ -77,19 +82,19 @@ public class JumpstartPoolGenerator {
                     }
                 }
             }
-            JUMPSTART_PACKS = Collections.unmodifiableList(packs);
+            return packs;
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
     }
 
-    private static Set<Card> doGeneratePool() {
+    private static Set<Card> doGeneratePool(List<JumpstartPack> packs) {
         try {
             DeckCardLists list = new DeckCardLists();
             SecureRandom random = new SecureRandom();
             for (int i = 0; i < 2; i++) {
-                int index = random.nextInt(JUMPSTART_PACKS.size());
-                list.getCards().addAll(JUMPSTART_PACKS.get(index).getCards());
+                int index = random.nextInt(packs.size());
+                list.getCards().addAll(packs.get(index).getCards());
             }
             return Deck.load(list, false, false).getCards();
         } catch (GameException e) {
@@ -111,13 +116,15 @@ public class JumpstartPoolGenerator {
    *    https://mtg.gamepedia.com/Jumpstart#Marketing
      */
     public static Set<Card> generatePool() {
-        setupPacks("", true);
-        return doGeneratePool();
+        return doGeneratePool(JUMPSTART_PACKS);
     }
 
     public static Set<Card> generatePool(String userJumpstartPacks) {
-        setupPacks(userJumpstartPacks, false);
-        return doGeneratePool();
+        if (userJumpstartPacks == null || userJumpstartPacks.length() > 300000) {
+            return generatePool();
+        }
+        List<JumpstartPack> packs = getPacks(userJumpstartPacks, false);
+        return doGeneratePool(packs);
     }
 
     public static class JumpstartPack {

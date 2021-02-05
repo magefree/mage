@@ -785,19 +785,21 @@ public class NewTournamentDialog extends MageDialog {
         return "";
     }
 
+    private JFileChooser fcJumpstartSelectDeck = null;
+
     protected String playerLoadJumpstartPacks() {
-        if (fcSelectDeck == null) {
-            fcSelectDeck = new JFileChooser();
-            fcSelectDeck.setAcceptAllFileFilterUsed(false);
-            fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("txt", "Jumpstart Packs (*.txt)"));
+        if (fcJumpstartSelectDeck == null) {
+            fcJumpstartSelectDeck = new JFileChooser();
+            fcJumpstartSelectDeck.setAcceptAllFileFilterUsed(false);
+            fcJumpstartSelectDeck.addChoosableFileFilter(new DeckFileFilter("txt", "Jumpstart Packs (*.txt)"));
         }
         String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
         if (!lastFolder.isEmpty()) {
-            fcSelectDeck.setCurrentDirectory(new File(lastFolder));
+            fcJumpstartSelectDeck.setCurrentDirectory(new File(lastFolder));
         }
-        int ret = fcSelectDeck.showDialog(this, "Select Jumpstart Packs file");
+        int ret = fcJumpstartSelectDeck.showDialog(this, "Select Jumpstart Packs file");
         if (ret == JFileChooser.APPROVE_OPTION) {
-            File file = fcSelectDeck.getSelectedFile();
+            File file = fcJumpstartSelectDeck.getSelectedFile();
             return (file.getPath());
         }
         return "";
@@ -1234,6 +1236,10 @@ public class NewTournamentDialog extends MageDialog {
                     String jumpstartPacksData = "";
                     try {
                         jumpstartPacksData = new String(Files.readAllBytes(Paths.get(jumpstartPacksFilename)));
+                        if (jumpstartPacksData.length() > 300000) {
+                            JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Chosen file too big", "Jumpstart Packs data is too long.  Please trim or choose another file.", JOptionPane.ERROR_MESSAGE);
+                            jumpstartPacksData = "";
+                        }
                     } catch (IOException e2) {
                         JOptionPane.showMessageDialog(MageFrame.getDesktop(), e2.getMessage(), "Error loading Jumpstart Packs data", JOptionPane.ERROR_MESSAGE);
                     }
