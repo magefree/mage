@@ -19,7 +19,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -63,7 +62,7 @@ class YawgmothsAgendaCanPlayCardsFromGraveyardEffect extends ContinuousEffectImp
         staticText = "You may play cards from your graveyard";
     }
 
-    public YawgmothsAgendaCanPlayCardsFromGraveyardEffect(final YawgmothsAgendaCanPlayCardsFromGraveyardEffect effect) {
+    private YawgmothsAgendaCanPlayCardsFromGraveyardEffect(final YawgmothsAgendaCanPlayCardsFromGraveyardEffect effect) {
         super(effect);
     }
 
@@ -76,13 +75,7 @@ class YawgmothsAgendaCanPlayCardsFromGraveyardEffect extends ContinuousEffectImp
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (UUID playerId: game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null)
-                {
-                    player.setPlayCardsFromGraveyard(true);
-                }
-            }
+            controller.setPlayCardsFromGraveyard(true);
             return true;
         }
         return false;
@@ -97,7 +90,7 @@ class YawgmothsAgendaReplacementEffect extends ReplacementEffectImpl {
         this.staticText = "If a card would be put into your graveyard from anywhere, exile it instead";
     }
 
-    public YawgmothsAgendaReplacementEffect(final YawgmothsAgendaReplacementEffect effect) {
+    private YawgmothsAgendaReplacementEffect(final YawgmothsAgendaReplacementEffect effect) {
         super(effect);
     }
 
