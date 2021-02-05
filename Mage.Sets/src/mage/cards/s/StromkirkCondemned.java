@@ -17,7 +17,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class StromkirkCondemned extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampires");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Vampires you control");
 
     static {
         filter.add(SubType.VAMPIRE.getPredicate());
