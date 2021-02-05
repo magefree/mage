@@ -1,6 +1,8 @@
 package mage.cards.o;
 
 import mage.MageInt;
+import mage.MageItem;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.DiscardedByOpponentTriggeredAbility;
@@ -18,8 +20,10 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Controllable;
 import mage.game.Game;
@@ -85,6 +89,12 @@ enum OrvarTheAllFormCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = (Spell) source.getEffects().get(0).getValue("spellCast");
+        MageObjectReference mor;
+        if (source.getSourceObjectZoneChangeCounter() == 0) {
+            mor = new MageObjectReference(source.getSourceId(), game);
+        } else {
+            mor = new MageObjectReference(source);
+        }
         return spell != null && spell
                 .getSpellAbility()
                 .getModes()
@@ -94,9 +104,9 @@ enum OrvarTheAllFormCondition implements Condition {
                 .flatMap(Collection::stream)
                 .map(Target::getTargets)
                 .flatMap(Collection::stream)
-                .filter(uuid -> uuid != source.getSourceId())
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
+                .filter(p -> !mor.refersTo(p, game))
                 .map(Controllable::getControllerId)
                 .anyMatch(source::isControlledBy);
     }
@@ -121,7 +131,7 @@ class OrvarTheAllFormEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Spell spell = (Spell) this.getValue("spellCast");
-        if (spell == null) {
+        if (player == null || spell == null) {
             return false;
         }
         List<Predicate<Permanent>> predicates = spell
@@ -133,18 +143,17 @@ class OrvarTheAllFormEffect extends OneShotEffect {
                 .flatMap(Collection::stream)
                 .map(Target::getTargets)
                 .flatMap(Collection::stream)
-                .filter(uuid -> uuid != source.getSourceId())
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .map(Controllable::getControllerId)
-                .filter(source::isControlledBy)
+                .map(MageItem::getId)
                 .map(PermanentIdPredicate::new)
                 .collect(Collectors.toList());
         if (predicates.isEmpty()) {
             return false;
         }
-        FilterPermanent filter = new FilterPermanent("a permanent targeted by this spell");
+        FilterPermanent filter = new FilterControlledPermanent("a permanent you control targeted by that spell");
         filter.add(Predicates.or(predicates));
+        filter.add(Predicates.not(new MageObjectReferencePredicate(new MageObjectReference(source))));
         TargetPermanent target = new TargetPermanent(filter);
         target.setNotTarget(true);
         player.choose(outcome, target, source.getSourceId(), game);

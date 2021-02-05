@@ -1,5 +1,6 @@
 package mage;
 
+import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -50,6 +51,15 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
     public MageObjectReference(UUID sourceId) {
         this.sourceId = sourceId;
         this.zoneChangeCounter = -1;
+    }
+
+    public MageObjectReference(Ability source) {
+        this(source, 0);
+    }
+
+    public MageObjectReference(Ability source, int modifier) {
+        this.sourceId = source.getSourceId();
+        this.zoneChangeCounter = source.getSourceObjectZoneChangeCounter() + modifier;
     }
 
     /**
