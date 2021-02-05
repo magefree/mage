@@ -74,7 +74,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
     private boolean showCastingCost;
     private float alpha = 1.0f;
 
-    private ActionCallback callback;
+    private ActionCallback callback; // callback can be null after closed game/dialog, so you must check it before call
 
     protected boolean tooltipShowing;
     protected final TextPopup tooltipText;
@@ -596,6 +596,9 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        if (callback == null) {
+            return;
+        }
         data.setComponent(this);
         data.setCard(this.getGameCard());
         data.setGameId(this.gameId);
@@ -624,10 +627,12 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             mouseResetTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    if (mouseClicksCount == 1) {
-                        callback.mouseClicked(e, data, false);
-                    } else if (mouseClicksCount > 1) {
-                        callback.mouseClicked(e, data, true);
+                    if (callback != null) {
+                        if (mouseClicksCount == 1) {
+                            callback.mouseClicked(e, data, false);
+                        } else if (mouseClicksCount > 1) {
+                            callback.mouseClicked(e, data, true);
+                        }
                     }
                     mouseClicksCount = 0;
                 }
@@ -637,6 +642,9 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        if (callback == null) {
+            return;
+        }
         if (getGameCard().hideInfo()) {
             return;
         }
@@ -655,6 +663,9 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     public void mouseExited(MouseEvent e) {
+        if (callback == null) {
+            return;
+        }
         if (getGameCard().hideInfo()) {
             return;
         }
@@ -673,6 +684,9 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     public void mousePressed(MouseEvent e) {
+        if (callback == null) {
+            return;
+        }
         data.setComponent(this);
         data.setCard(this.getGameCard());
         data.setGameId(this.gameId);
@@ -681,6 +695,9 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        if (callback == null) {
+            return;
+        }
         data.setComponent(this);
         data.setCard(this.getGameCard());
         data.setGameId(this.gameId);
@@ -689,6 +706,9 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        if (callback == null) {
+            return;
+        }
         data.setComponent(this);
         data.setCard(this.getGameCard());
         data.setGameId(this.gameId);
@@ -697,6 +717,9 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        if (callback == null) {
+            return;
+        }
         if (getGameCard().hideInfo()) {
             return;
         }
@@ -708,6 +731,9 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
+        if (callback == null) {
+            return;
+        }
         if (getGameCard().hideInfo()) {
             return;
         }
