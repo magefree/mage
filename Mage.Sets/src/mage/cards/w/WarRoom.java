@@ -14,6 +14,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.CommanderCardType;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.Player;
@@ -64,7 +65,7 @@ enum WarRoomValue implements DynamicValue {
         ObjectColor color = new ObjectColor();
         // if no commander then cost can't be paid
         boolean hasCommander = false;
-        for (UUID commanderId : game.getCommandersIds(controller)) {
+        for (UUID commanderId : game.getCommandersIds(controller, CommanderCardType.COMMANDER_OR_OATHBREAKER, false)) {
             Card commander = game.getCard(commanderId);
             if (commander == null) {
                 continue;

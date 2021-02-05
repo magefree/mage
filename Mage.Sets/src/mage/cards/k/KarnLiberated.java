@@ -14,7 +14,6 @@ import mage.game.Game;
 import mage.game.GameImpl;
 import mage.game.command.Commander;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentImpl;
 import mage.players.Player;
@@ -109,7 +108,7 @@ class KarnLiberatedEffect extends OneShotEffect {
                     if (card.isOwnedBy(player.getId()) && !card.isCopy() // no copies
                             && !player.getSideboard().contains(card.getId())
                             && !cards.contains(card)) { // not the exiled cards
-                        if (game.getCommandersIds(player).contains(card.getId())) {
+                        if (game.getCommandersIds(player, CommanderCardType.ANY, false).contains(card.getId())) {
                             game.addCommander(new Commander(card)); // TODO: check restart and init
                             // no needs in initCommander call -- it's used on game startup (init)
                             game.setZone(card.getId(), Zone.COMMAND);

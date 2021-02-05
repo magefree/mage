@@ -58,7 +58,7 @@ public final class OpalPalace extends CardImpl {
 
 class OpalPalaceWatcher extends Watcher {
 
-    private List<UUID> commanderId = new ArrayList<>();
+    private final List<UUID> commanderPartsId = new ArrayList<>();
     private final String originalId;
 
     public OpalPalaceWatcher(String originalId) {
@@ -66,8 +66,8 @@ class OpalPalaceWatcher extends Watcher {
         this.originalId = originalId;
     }
 
-    public boolean manaUsedToCastCommander(UUID id){
-        return commanderId.contains(id);
+    public boolean manaUsedToCastCommanderPart(UUID id) {
+        return commanderPartsId.contains(id);
     }
 
     @Override
@@ -81,8 +81,9 @@ class OpalPalaceWatcher extends Watcher {
                         for (UUID playerId : game.getPlayerList()) {
                             Player player = game.getPlayer(playerId);
                             if (player != null) {
-                                if (game.getCommandersIds(player).contains(card.getId())) {
-                                    commanderId.add(card.getId());
+                                // need check all card parts (example: mdf cards)
+                                if (game.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, true).contains(card.getId())) {
+                                    commanderPartsId.add(card.getId());
                                     break;
                                 }
                             }
@@ -96,7 +97,7 @@ class OpalPalaceWatcher extends Watcher {
     @Override
     public void reset() {
         super.reset();
-        commanderId.clear();
+        commanderPartsId.clear();
     }
 }
 
@@ -119,7 +120,7 @@ class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         OpalPalaceWatcher watcher = game.getState().getWatcher(OpalPalaceWatcher.class, source.getSourceId());
-        return watcher != null && watcher.manaUsedToCastCommander(event.getTargetId());
+        return watcher != null && watcher.manaUsedToCastCommanderPart(event.getTargetId());
     }
 
     @Override

@@ -14,6 +14,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 
 import java.util.UUID;
 
@@ -62,9 +63,17 @@ class SkyfirePhoenixTriggeredAbility extends SpellCastControllerTriggeredAbility
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return super.checkTrigger(event, game) && game.getCommandersIds(
-                game.getPlayer(getControllerId()), CommanderCardType.COMMANDER_OR_OATHBREAKER
-        ).contains(event.getSourceId());
+        if (!super.checkTrigger(event, game)) {
+            return false;
+        }
+
+        Player controller = game.getPlayer(getControllerId());
+        if (controller == null) {
+            return false;
+        }
+
+        // must check all parts (example: cast one from from mdf/split card)
+        return game.getCommandersIds(controller, CommanderCardType.COMMANDER_OR_OATHBREAKER, true).contains(event.getSourceId());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package mage.watchers.common;
 
+import mage.constants.CommanderCardType;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -45,11 +46,12 @@ public class CommanderPlaysCountWatcher extends Watcher {
             objectId = null;
         }
 
+        // must calc all commanders and signature spell cause uses in commander tax
         boolean isCommanderObject = game
                 .getPlayerList()
                 .stream()
                 .map(game::getPlayer)
-                .map(game::getCommandersIds)
+                .map(player -> game.getCommandersIds(player, CommanderCardType.ANY, false))
                 .flatMap(Collection::stream)
                 .anyMatch(id -> Objects.equals(id, objectId));
         if (!isCommanderObject || event.getZone() != Zone.COMMAND) {

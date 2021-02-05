@@ -1893,8 +1893,9 @@ public abstract class GameImpl implements Game, Serializable {
 
         // If a commander is in a graveyard or in exile and that card was put into that zone
         // since the last time state-based actions were checked, its owner may put it into the command zone.
+        // signature spells goes to command zone all the time
         for (Player player : state.getPlayers().values()) {
-            Set<UUID> commanderIds = getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER);
+            Set<UUID> commanderIds = getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, false);
             if (commanderIds.isEmpty()) {
                 continue;
             }
@@ -3419,8 +3420,28 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public Set<UUID> getCommandersIds(Player player, CommanderCardType commanderCardType) {
-        return player.getCommandersIds();
+    public Set<UUID> getCommandersIds(Player player, CommanderCardType commanderCardType, boolean returnAllCardParts) {
+        //noinspection deprecation - it's ok to use it in inner method
+        Set<UUID> mainCards = player.getCommandersIds();
+        return filterCommandersBySearchZone(mainCards, returnAllCardParts);
+    }
+
+    final protected Set<UUID> filterCommandersBySearchZone(Set<UUID> commanderMainCards, boolean returnAllCardParts) {
+        // filter by zone search (example: if you search commanders on battlefield then must see all sides of mdf cards)
+        Set<UUID> filteredCards = new HashSet<>();
+        if (returnAllCardParts) {
+            // need all card parts
+            commanderMainCards.stream()
+                    .map(this::getCard)
+                    .filter(Objects::nonNull)
+                    .forEach(card -> {
+                        filteredCards.addAll(CardUtil.getObjectParts(card));
+                    });
+        } else {
+            filteredCards.addAll(commanderMainCards);
+        }
+
+        return filteredCards;
     }
 
     @Override

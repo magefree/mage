@@ -3,6 +3,7 @@ package org.mage.test.cards.continuous;
 import mage.abilities.dynamicvalue.common.CommanderCastCountValue;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.AdventureCard;
+import mage.constants.CommanderCardType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
@@ -448,7 +449,7 @@ public class CommandersCastTest extends CardTestCommander4Players {
         // can't cast adventure spell for {G} + {2} + {2}
         // can't cast creature spell for {G}{G} + {2} + {2}
         runCode("check commander tax 2x", 9, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            AdventureCard card = (AdventureCard) game.getCommanderCardsFromCommandZone(player).stream().findFirst().get();
+            AdventureCard card = (AdventureCard) game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY).stream().findFirst().get();
             Assert.assertEquals(2, CommanderCastCountValue.instance.calculate(game, card.getSpellAbility(), null));
             Assert.assertEquals(2, CommanderCastCountValue.instance.calculate(game, card.getSpellCard().getSpellAbility(), null));
         });
@@ -474,7 +475,7 @@ public class CommandersCastTest extends CardTestCommander4Players {
         checkPermanentCount("after last cast", 13, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
         checkPermanentTapped("after last cast", 13, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest", true, 2 + 2 + 2);
         runCode("check commander tax 3x", 13, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            AdventureCard card = (AdventureCard) game.getCard(game.getCommandersIds(player).stream().findFirst().get());
+            AdventureCard card = (AdventureCard) game.getCard(game.getCommandersIds(player, CommanderCardType.ANY, false).stream().findFirst().get());
             Assert.assertEquals(3, CommanderCastCountValue.instance.calculate(game, card.getSpellAbility(), null));
             Assert.assertEquals(3, CommanderCastCountValue.instance.calculate(game, card.getSpellCard().getSpellAbility(), null));
         });
@@ -486,7 +487,7 @@ public class CommandersCastTest extends CardTestCommander4Players {
     }
 
     @Test
-    public void test_ModalDoubleFacesCard() {
+    public void test_ModalDoubleFacesCard_1() {
         // Player order: A -> D -> C -> B
 
         // use case:
@@ -537,6 +538,43 @@ public class CommandersCastTest extends CardTestCommander4Players {
 
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_ModalDoubleFacesCard_CanReturnAfterKillAndCommanderControlCondition() {
+        // Player order: A -> D -> C -> B
+
+        // Cosima, God of the Voyage, {2}{U}, creature, 2/4
+        // The Omenkeel, {1}{U}, artifact, vehicle
+        addCard(Zone.COMMAND, playerA, "Cosima, God of the Voyage", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        //
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        //
+        // If you control a commander, you may cast this spell without paying its mana cost.
+        // Counter target noncreature spell.
+        addCard(Zone.HAND, playerA, "Fierce Guardianship", 1); // {2}{U}
+
+        // prepare commander on battlefield
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 3);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cosima, God of the Voyage");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cosima, God of the Voyage", 1);
+
+        // kill and return to command zone
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Cosima, God of the Voyage");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Cosima, God of the Voyage");
+        // check what commander control condition works with mdf parts
+        checkStackSize("must have 2 bolts on stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2);
+        checkPlayableAbility("must see commander on battle for free cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Fierce Guardianship", true);
+        //
+        setChoice(playerA, "Yes"); // return to command zone after kill
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
     }

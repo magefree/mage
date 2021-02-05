@@ -8,6 +8,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.keyword.PartnerAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -23,11 +24,10 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static mage.constants.Outcome.Benefit;
 
@@ -110,10 +110,12 @@ class TeveshSzatDoomOfFoolsSacrificeEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        boolean isCommander = game.getCommandersIds(
-                game.getPlayer(permanent.getControllerId()),
-                CommanderCardType.COMMANDER_OR_OATHBREAKER
-        ).contains(permanent.getId());
+
+        // must check all card parts (example: mdf commander)
+        Player permanentController = game.getPlayer(permanent.getControllerId());
+        boolean isCommander = permanentController != null
+                && game.getCommandersIds(permanentController, CommanderCardType.COMMANDER_OR_OATHBREAKER, true).contains(permanent.getId());
+
         if (!permanent.sacrifice(source, game)) {
             return false;
         }
@@ -154,6 +156,8 @@ class TeveshSzatDoomOfFoolsCommanderEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
+
+        // gain control of all commanders
         for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 filter, source.getControllerId(), source.getSourceId(), game
         )) {
@@ -161,16 +165,17 @@ class TeveshSzatDoomOfFoolsCommanderEffect extends OneShotEffect {
                     Duration.Custom, true
             ).setTargetPointer(new FixedTarget(permanent, game)), source);
         }
-        Set<UUID> commanders = game
-                .getPlayerList()
-                .stream()
+
+        // put all commanders to battlefield under control
+        // TODO: doesn't support range of influence (e.g. take control of all commanders)
+        Set<Card> commandersToPut = new HashSet<>();
+        game.getPlayerList().stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
-                .map(player -> game.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER))
-                .flatMap(Collection::stream)
-                .filter(uuid -> game.getState().getZone(uuid) == Zone.COMMAND)
-                .collect(Collectors.toSet());
-        controller.moveCards(new CardsImpl(commanders), Zone.BATTLEFIELD, source, game);
+                .forEach(player -> {
+                    commandersToPut.addAll(game.getCommanderCardsFromCommandZone(player, CommanderCardType.COMMANDER_OR_OATHBREAKER));
+                });
+        controller.moveCards(new CardsImpl(commandersToPut), Zone.BATTLEFIELD, source, game);
         return true;
     }
 }

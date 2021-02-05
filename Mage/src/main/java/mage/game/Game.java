@@ -507,25 +507,42 @@ public interface Game extends MageItem, Serializable {
 
     Mulligan getMulligan();
 
-    Set<UUID> getCommandersIds(Player player, CommanderCardType commanderCardType);
-
-    default Set<UUID> getCommandersIds(Player player) {
-        return getCommandersIds(player, CommanderCardType.ANY);
-    }
+    Set<UUID> getCommandersIds(Player player, CommanderCardType commanderCardType, boolean returnAllCardParts);
 
     /**
      * Return not played commander cards from command zone
+     * Read comments for CommanderCardType for more info on commanderCardType usage
      *
      * @param player
      * @return
      */
-    default Set<Card> getCommanderCardsFromCommandZone(Player player) {
+    default Set<Card> getCommanderCardsFromCommandZone(Player player, CommanderCardType commanderCardType) {
         // commanders in command zone aren't cards so you must call getCard instead getObject
-        return getCommandersIds(player).stream()
+        return getCommandersIds(player, commanderCardType, false).stream()
                 .map(this::getCard)
                 .filter(Objects::nonNull)
                 .filter(card -> Zone.COMMAND.equals(this.getState().getZone(card.getId())))
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Return commander cards from any zones (main card from command and permanent card from battlefield)
+     * Read comments for CommanderCardType for more info on commanderCardType usage
+     *
+     * @param player
+     * @param commanderCardType commander or signature spell
+     * @return
+     */
+    default Set<Card> getCommanderCardsFromAnyZones(Player player, CommanderCardType commanderCardType) {
+        // from command zone
+        Set<Card> res = getCommanderCardsFromCommandZone(player, commanderCardType);
+
+        // from battlefield
+        this.getCommandersIds(player, commanderCardType, true).stream()
+                .map(this::getPermanent)
+                .filter(Objects::nonNull)
+                .forEach(res::add);
+        return res;
     }
 
     /**
@@ -546,7 +563,7 @@ public interface Game extends MageItem, Serializable {
         if (object instanceof Card) {
             idToCheck = ((Card) object).getMainCard().getId();
         }
-        return idToCheck != null && this.getCommandersIds(player).contains(idToCheck);
+        return idToCheck != null && this.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, false).contains(idToCheck);
     }
 
     void setGameStopped(boolean gameStopped);

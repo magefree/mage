@@ -66,13 +66,7 @@ class CommandBeaconEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            List<Card> commandersInCommandZone = new ArrayList<>(1);
-            for (UUID commanderId : game.getCommandersIds(controller, CommanderCardType.COMMANDER_OR_OATHBREAKER)) {
-                Card commander = game.getCard(commanderId);
-                if (commander != null && game.getState().getZone(commander.getId()) == Zone.COMMAND) {
-                    commandersInCommandZone.add(commander);
-                }
-            }
+            List<Card> commandersInCommandZone = new ArrayList<>(game.getCommanderCardsFromCommandZone(controller, CommanderCardType.COMMANDER_OR_OATHBREAKER));
             if (commandersInCommandZone.size() == 1) {
                 controller.moveCards(commandersInCommandZone.get(0), Zone.HAND, source, game);
             } else if (commandersInCommandZone.size() == 2) {

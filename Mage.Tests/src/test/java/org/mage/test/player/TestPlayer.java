@@ -943,7 +943,7 @@ public class TestPlayer implements Player {
                         // show command
                         if (params[0].equals(SHOW_COMMAND_COMMAND) && params.length == 1) {
                             printStart(action.getActionName());
-                            CardsImpl cards = new CardsImpl(game.getCommandersIds(computerPlayer));
+                            CardsImpl cards = new CardsImpl(game.getCommandersIds(computerPlayer, CommanderCardType.ANY, false));
                             printCards(cards.getCards(game));
                             printEnd();
                             actions.remove(action);
@@ -1421,7 +1421,7 @@ public class TestPlayer implements Player {
 
     private void assertCommandCardCount(PlayerAction action, Game game, Player player, String cardName, int count) {
         int realCount = 0;
-        for (UUID cardId : game.getCommandersIds(player)) {
+        for (UUID cardId : game.getCommandersIds(player, CommanderCardType.ANY, false)) {
             Card card = game.getCard(cardId);
             if (hasObjectTargetNameOrAlias(card, cardName) && Zone.COMMAND.equals(game.getState().getZone(cardId))) {
                 realCount++;
@@ -1430,7 +1430,7 @@ public class TestPlayer implements Player {
 
         if (realCount != count) {
             printStart("Cards in command zone from " + player.getName());
-            printCards(game.getCommanderCardsFromCommandZone(player));
+            printCards(game.getCommanderCardsFromCommandZone(player, CommanderCardType.COMMANDER_OR_OATHBREAKER));
             printEnd();
             Assert.fail(action.getActionName() + " - must have " + count + " cards with name " + cardName + ", but found " + realCount);
         }

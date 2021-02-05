@@ -115,7 +115,7 @@ class CommandersPlateEffect extends ContinuousEffectImpl {
                 permanent = game.getPermanentOrLKIBattlefield(equipment.getAttachedTo());
             }
         }
-        Set<UUID> commanders = game.getCommandersIds(player);
+        Set<UUID> commanders = game.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, false);
         if (commanders.isEmpty()) {
             return false;
         }

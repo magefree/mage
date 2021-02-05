@@ -52,7 +52,7 @@ enum CommandersInsigniaValue implements DynamicValue {
             return 0;
         }
         return game
-                .getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER)
+                .getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, false)
                 .stream()
                 .mapToInt(watcher::getPlaysCount)
                 .sum();

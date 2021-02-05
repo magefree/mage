@@ -1,6 +1,5 @@
 package mage.abilities.keyword;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
@@ -10,6 +9,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CommanderCardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -20,6 +20,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * 702.47. Ninjutsu
@@ -43,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
 public class NinjutsuAbility extends ActivatedAbilityImpl {
 
     private final boolean commander;
-    private static final FilterControlledCreaturePermanent filter = 
+    private static final FilterControlledCreaturePermanent filter =
             new FilterControlledCreaturePermanent("unblocked attacker you control");
 
     static {
@@ -150,7 +153,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl {
             for (UUID targetId : targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 Player controller = game.getPlayer(controllerId);
-                if (permanent == null 
+                if (permanent == null
                         || controller == null) {
                     return false;
                 }
@@ -194,16 +197,29 @@ class RevealNinjutsuCardCost extends CostImpl {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(controllerId);
 
+        // used from hand
         Card card = player.getHand().get(ability.getSourceId(), game);
-        if (card == null && commander
-                && game.getCommandersIds(player).contains(ability.getSourceId())) {
+
+        // rules:
+        // Commander ninjutsu is a variant of ninjutsu that can be activated from the command zone as
+        // well as from your hand. Just as with regular ninjutsu, the Ninja enters attacking the player
+        // or planeswalker that the returned creature was attacking.
+
+        // used from command zone
+        // must search all card sides for ability (example: mdf card with Ninjutsu in command zone)
+        if (card == null
+                && commander
+                && game.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, true).contains(ability.getSourceId())) {
             for (CommandObject coj : game.getState().getCommand()) {
                 if (coj != null && coj.getId().equals(ability.getSourceId())) {
-                    card = game.getCard(ability.getSourceId());
-                    break;
+                    if (CardUtil.getObjectParts(coj).contains(ability.getSourceId())) {
+                        card = game.getCard(CardUtil.getMainCardId(game, ability.getSourceId()));
+                        break;
+                    }
                 }
             }
         }
+
         if (card != null) {
             Cards cards = new CardsImpl(card);
             player.revealCards("Ninjutsu", cards, game);

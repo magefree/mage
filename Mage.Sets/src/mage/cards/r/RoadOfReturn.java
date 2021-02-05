@@ -76,15 +76,7 @@ class RoadOfReturnEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        List<Card> commandersInCommandZone = new ArrayList<>(1);
-        game.getCommandersIds(
-                controller, CommanderCardType.COMMANDER_OR_OATHBREAKER
-        ).stream().forEach(commanderId -> {
-            Card commander = game.getCard(commanderId);
-            if (commander != null && game.getState().getZone(commander.getId()) == Zone.COMMAND) {
-                commandersInCommandZone.add(commander);
-            }
-        });
+        List<Card> commandersInCommandZone = new ArrayList<>(game.getCommanderCardsFromCommandZone(controller, CommanderCardType.COMMANDER_OR_OATHBREAKER));
         if (commandersInCommandZone.size() == 1) {
             controller.moveCards(commandersInCommandZone.get(0), Zone.HAND, source, game);
         } else if (commandersInCommandZone.size() == 2) {

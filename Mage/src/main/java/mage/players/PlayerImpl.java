@@ -43,7 +43,6 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.*;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
-import mage.game.command.Commander;
 import mage.game.events.*;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
@@ -314,7 +313,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.sideboard = player.getSideboard().copy();
         this.hand = player.getHand().copy();
         this.graveyard = player.getGraveyard().copy();
+
+        //noinspection deprecation - it's ok to use it in inner methods
         this.commandersIds = new HashSet<>(player.getCommandersIds());
+
         this.abilities = player.getAbilities().copy();
         this.counters = player.getCounters().copy();
 
@@ -1578,7 +1580,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         try {
             // collect and filter playable activated abilities
             // GUI: user clicks on card, but it must activate ability from ANY card's parts (main, left, right)
-            Set<UUID> needIds = getObjectParts(object);
+            Set<UUID> needIds = CardUtil.getObjectParts(object);
 
             // workaround to find all abilities first and filter it for one object
             List<ActivatedAbility> allPlayable = getPlayable(game, true, zone, false);
@@ -1591,40 +1593,6 @@ public abstract class PlayerImpl implements Player, Serializable {
             game.setCheckPlayableState(previousState);
         }
         return useable;
-    }
-
-    protected Set<UUID> getObjectParts(MageObject object) {
-        // collect all possible object's parts (example: all sides in mdf/split cards)
-        Set<UUID> res = new HashSet<>();
-        if (object instanceof SplitCard || object instanceof SplitCardHalf) {
-            SplitCard mainCard = (SplitCard) ((Card) object).getMainCard();
-            res.add(object.getId());
-            res.add(mainCard.getId());
-            res.add(mainCard.getLeftHalfCard().getId());
-            res.add(mainCard.getRightHalfCard().getId());
-        } else if (object instanceof ModalDoubleFacesCard || object instanceof ModalDoubleFacesCardHalf) {
-            ModalDoubleFacesCard mainCard = (ModalDoubleFacesCard) ((Card) object).getMainCard();
-            res.add(object.getId());
-            res.add(mainCard.getId());
-            res.add(mainCard.getLeftHalfCard().getId());
-            res.add(mainCard.getRightHalfCard().getId());
-        } else if (object instanceof AdventureCard || object instanceof AdventureCardSpell) {
-            AdventureCard mainCard = (AdventureCard) ((Card) object).getMainCard();
-            res.add(object.getId());
-            res.add(mainCard.getId());
-            res.add(mainCard.getSpellCard().getId());
-        } else if (object instanceof Spell) {
-            // example: activate Lightning Storm's ability from the spell on the stack
-            res.add(object.getId());
-            res.add(((Spell) object).getCard().getId()); // only single side goes to the stack
-        } else if (object instanceof Commander) {
-            // commander can contains double sides
-            res.add(object.getId());
-            res.addAll(getObjectParts(((Commander) object).getSourceObject()));
-        } else {
-            res.add(object.getId());
-        }
-        return res;
     }
 
     protected LinkedHashMap<UUID, ActivatedManaAbilityImpl> getUseableManaAbilities(MageObject object, Zone zone, Game game) {

@@ -117,12 +117,12 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
     }
 
     @Override
-    public Set<UUID> getCommandersIds(Player player, CommanderCardType commanderCardType) {
+    public Set<UUID> getCommandersIds(Player player, CommanderCardType commanderCardType, boolean returnAllCardParts) {
         Set<UUID> res = new HashSet<>();
         if (player != null) {
             Set<UUID> commanders = this.playerOathbreakers.getOrDefault(player.getId(), new HashSet<>());
             Set<UUID> spells = this.playerSignatureSpells.getOrDefault(player.getId(), new HashSet<>());
-            for (UUID commanderId : super.getCommandersIds(player, commanderCardType)) {
+            for (UUID commanderId : super.getCommandersIds(player, commanderCardType, returnAllCardParts)) {
                 switch (commanderCardType) {
                     case ANY:
                         res.add(commanderId);
@@ -133,6 +133,7 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
                         }
                         break;
                     case SIGNATURE_SPELL:
+                        // TODO: doesn't filter mdf cards with different sides (creature + spell)
                         if (spells.contains(commanderId)) {
                             res.add(commanderId);
                         }
@@ -142,6 +143,6 @@ public class OathbreakerFreeForAll extends GameCommanderImpl {
                 }
             }
         }
-        return res;
+        return super.filterCommandersBySearchZone(res, returnAllCardParts);
     }
 }

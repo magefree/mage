@@ -1177,4 +1177,50 @@ public final class CardUtil {
     public static boolean checkCostWords(String text) {
         return text != null && costWords.stream().anyMatch(text.toLowerCase(Locale.ENGLISH)::startsWith);
     }
+
+    /**
+     * Collect all possible object's parts (example: all sides in mdf/split cards)
+     * <p>
+     * Works with any objects, so commander object can return four ids: commander + main card + left card + right card
+     * If you pass Card object then it return main card + all parts
+     *
+     * @param object
+     * @return
+     */
+    public static Set<UUID> getObjectParts(MageObject object) {
+        Set<UUID> res = new HashSet<>();
+        if (object == null) {
+            return res;
+        }
+
+        if (object instanceof SplitCard || object instanceof SplitCardHalf) {
+            SplitCard mainCard = (SplitCard) ((Card) object).getMainCard();
+            res.add(object.getId());
+            res.add(mainCard.getId());
+            res.add(mainCard.getLeftHalfCard().getId());
+            res.add(mainCard.getRightHalfCard().getId());
+        } else if (object instanceof ModalDoubleFacesCard || object instanceof ModalDoubleFacesCardHalf) {
+            ModalDoubleFacesCard mainCard = (ModalDoubleFacesCard) ((Card) object).getMainCard();
+            res.add(object.getId());
+            res.add(mainCard.getId());
+            res.add(mainCard.getLeftHalfCard().getId());
+            res.add(mainCard.getRightHalfCard().getId());
+        } else if (object instanceof AdventureCard || object instanceof AdventureCardSpell) {
+            AdventureCard mainCard = (AdventureCard) ((Card) object).getMainCard();
+            res.add(object.getId());
+            res.add(mainCard.getId());
+            res.add(mainCard.getSpellCard().getId());
+        } else if (object instanceof Spell) {
+            // example: activate Lightning Storm's ability from the spell on the stack
+            res.add(object.getId());
+            res.addAll(getObjectParts(((Spell) object).getCard()));
+        } else if (object instanceof Commander) {
+            // commander can contains double sides
+            res.add(object.getId());
+            res.addAll(getObjectParts(((Commander) object).getSourceObject()));
+        } else {
+            res.add(object.getId());
+        }
+        return res;
+    }
 }

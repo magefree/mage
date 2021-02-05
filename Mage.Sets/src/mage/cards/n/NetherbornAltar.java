@@ -17,10 +17,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -68,13 +67,8 @@ class NetherbornAltarEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        List<Card> commandersInCommandZone = game
-                .getCommandersIds(controller, CommanderCardType.COMMANDER_OR_OATHBREAKER)
-                .stream()
-                .map(game::getCard)
-                .filter(Objects::nonNull)
-                .filter(commander -> game.getState().getZone(commander.getId()) == Zone.COMMAND)
-                .collect(Collectors.toList());
+
+        List<Card> commandersInCommandZone = new ArrayList<>(game.getCommanderCardsFromCommandZone(controller, CommanderCardType.COMMANDER_OR_OATHBREAKER));
         if (commandersInCommandZone.size() == 1) {
             controller.moveCards(commandersInCommandZone.get(0), Zone.HAND, source, game);
         } else if (commandersInCommandZone.size() == 2) {

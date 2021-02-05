@@ -7,10 +7,7 @@ import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.abilities.effects.common.cost.CommanderCostModification;
 import mage.abilities.keyword.CompanionAbility;
 import mage.cards.Card;
-import mage.constants.MultiplayerAttackOption;
-import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.mulligan.Mulligan;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
@@ -67,7 +64,7 @@ public abstract class GameCommanderImpl extends GameImpl {
                 }
 
                 // init commanders
-                for (UUID commanderId : this.getCommandersIds(player)) {
+                for (UUID commanderId : this.getCommandersIds(player, CommanderCardType.ANY, false)) {
                     Card commander = this.getCard(commanderId);
                     if (commander != null) {
                         initCommander(commander, player);
@@ -193,7 +190,7 @@ public abstract class GameCommanderImpl extends GameImpl {
     @Override
     protected boolean checkStateBasedActions() {
         for (Player player : getPlayers().values()) {
-            for (UUID commanderId : this.getCommandersIds(player)) {
+            for (UUID commanderId : this.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, false)) {
                 CommanderInfoWatcher damageWatcher = getState().getWatcher(CommanderInfoWatcher.class, commanderId);
                 if (damageWatcher == null) {
                     continue;

@@ -98,8 +98,8 @@ class TeferiMageOfZhalfirAddFlashEffect extends ContinuousEffectImpl {
                     game.getState().addOtherAbility(card, FlashAbility.getInstance());
                 }
             }
-            // commander in command zone
-            game.getCommanderCardsFromCommandZone(controller).stream()
+            // cards in command zone
+            game.getCommanderCardsFromCommandZone(controller, CommanderCardType.ANY).stream()
                     .filter(MageObject::isCreature)
                     .forEach(card -> {
                         game.getState().addOtherAbility(card, FlashAbility.getInstance());

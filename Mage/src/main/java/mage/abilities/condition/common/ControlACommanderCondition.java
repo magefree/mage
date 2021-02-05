@@ -21,7 +21,7 @@ public enum ControlACommanderCondition implements Condition {
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)
-                .map(player -> game.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER))
+                .map(player -> game.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, true)) // must search all card parts (example: mdf commander on battlefield)
                 .flatMap(Collection::stream)
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)

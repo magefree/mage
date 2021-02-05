@@ -88,7 +88,7 @@ enum JeskaThriceRebornValue implements DynamicValue {
         }
         CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
         return watcher == null ? 0 : game
-                .getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER)
+                .getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, false)
                 .stream()
                 .mapToInt(watcher::getPlaysCount)
                 .sum();

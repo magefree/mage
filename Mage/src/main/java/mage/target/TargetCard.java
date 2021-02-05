@@ -4,10 +4,10 @@ import mage.MageItem;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;
+import mage.constants.CommanderCardType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.TargetEvent;
 import mage.players.Player;
 
@@ -115,6 +115,22 @@ public class TargetCard extends TargetObject {
                             }
                         }
                         break;
+                    case COMMAND:
+                        List<Card> possibleCards = game.getCommandersIds(player, CommanderCardType.ANY, false).stream()
+                                .map(game::getCard)
+                                .filter(Objects::nonNull)
+                                .filter(card -> game.getState().getZone(card.getId()).equals(Zone.COMMAND))
+                                .filter(card -> filter.match(card, sourceId, sourceControllerId, game))
+                                .collect(Collectors.toList());
+                        for (Card card : possibleCards) {
+                            if (sourceId == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, sourceId, sourceControllerId))) {
+                                possibleTargets++;
+                                if (possibleTargets >= this.minNumberOfTargets) {
+                                    return true;
+                                }
+                            }
+                        }
+                        break;
                 }
             }
         }
@@ -173,7 +189,7 @@ public class TargetCard extends TargetObject {
                         }
                         break;
                     case COMMAND:
-                        List<Card> possibleCards = game.getCommandersIds(player).stream()
+                        List<Card> possibleCards = game.getCommandersIds(player, CommanderCardType.ANY, false).stream()
                                 .map(game::getCard)
                                 .filter(Objects::nonNull)
                                 .filter(card -> game.getState().getZone(card.getId()).equals(Zone.COMMAND))

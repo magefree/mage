@@ -2,10 +2,7 @@ package mage.abilities.effects;
 
 import mage.abilities.Ability;
 import mage.cards.Card;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.filter.FilterObject;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -62,7 +59,7 @@ public class GainAbilitySpellsEffect extends ContinuousEffectImpl {
             }
 
             // workaround to gain cost reduction abilities to commanders before cast (make it playable)
-            game.getCommanderCardsFromCommandZone(player).stream()
+            game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY).stream()
                     .filter(card -> filter.match(card, game))
                     .forEach(card -> {
                         game.getState().addOtherAbility(card, ability);

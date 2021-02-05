@@ -10,7 +10,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -89,7 +88,7 @@ class CommanderStormEffect extends OneShotEffect {
             return false;
         }
         int stormCount = game
-                .getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER)
+                .getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, false)
                 .stream()
                 .mapToInt(watcher::getPlaysCount)
                 .sum();
