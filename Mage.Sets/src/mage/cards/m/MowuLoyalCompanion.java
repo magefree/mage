@@ -52,7 +52,7 @@ public final class MowuLoyalCompanion extends CardImpl {
 class MowuLoyalCompanionEffect extends ReplacementEffectImpl {
 
     MowuLoyalCompanionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
+        super(Duration.WhileOnBattlefield, Outcome.BoostCreature, true);
         staticText = "If one or more +1/+1 counters would be put on {this}, " +
                 "that many plus one +1/+1 counters are put on it instead";
     }
