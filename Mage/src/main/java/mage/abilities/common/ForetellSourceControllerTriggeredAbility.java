@@ -29,7 +29,6 @@ public class ForetellSourceControllerTriggeredAbility extends TriggeredAbilityIm
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        //UUID specialAction = event.getTargetId();
         Card card = game.getCard(event.getSourceId());
         Player player = game.getPlayer(event.getPlayerId());
         if (card == null || player == null) {
