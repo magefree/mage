@@ -100,6 +100,7 @@
         <tournamentType name="Sealed Swiss (Cube)" jar="mage-tournament-sealed-${project.version}.jar" className="mage.tournament.SealedSwissTournament" typeName="mage.tournament.SealedSwissCubeTournamentType"/>
         <tournamentType name="Jumpstart Elimination" jar="mage-tournament-sealed-${project.version}.jar" className="mage.tournament.JumpstartEliminationTournament" typeName="mage.tournament.JumpstartEliminationTournamentType"/>
         <tournamentType name="Jumpstart Swiss" jar="mage-tournament-sealed-${project.version}.jar" className="mage.tournament.JumpstartSwissTournament" typeName="mage.tournament.JumpstartSwissTournamentType"/>
+        <tournamentType name="Jumpstart Elimination (Custom)" jar="mage-tournament-sealed-${project.version}.jar" className="mage.tournament.JumpstartEliminationCustomTournament" typeName="mage.tournament.JumpstartEliminationCustomTournamentType"/>        
     </tournamentTypes>
     <draftCubes>
         <draftCube name="Adam Styborski's Pauper Cube" jar="mage-tournament-booster-draft-${project.version}.jar" className="mage.tournament.cubes.AdamStyborskisPauperCube"/>

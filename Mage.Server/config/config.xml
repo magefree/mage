@@ -95,7 +95,9 @@
         <tournamentType name="Booster Draft Elimination" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationTournamentType"/>
         <tournamentType name="Booster Draft Elimination (Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftEliminationTournament" typeName="mage.tournament.BoosterDraftEliminationCubeTournamentType"/>
         <tournamentType name="Booster Draft Elimination (Random)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RandomBoosterDraftEliminationTournament" typeName="mage.tournament.RandomBoosterDraftEliminationTournamentType"/>
+
         <tournamentType name="Booster Draft Elimination (Rich Man)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RichManDraftEliminationTournament" typeName="mage.tournament.RichManDraftEliminationTournamentType"/>
+
         <tournamentType name="Booster Draft Elimination (Rich Man Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.RichManCubeDraftEliminationTournament" typeName="mage.tournament.RichManCubeDraftEliminationTournamentType"/>
         <tournamentType name="Booster Draft Swiss" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftSwissTournament" typeName="mage.tournament.BoosterDraftSwissTournamentType"/>
         <tournamentType name="Booster Draft Swiss (Cube)" jar="mage-tournament-booster-draft.jar" className="mage.tournament.BoosterDraftSwissTournament" typeName="mage.tournament.BoosterDraftSwissCubeTournamentType"/>
@@ -106,6 +108,7 @@
         <tournamentType name="Sealed Swiss (Cube)" jar="mage-tournament-sealed.jar" className="mage.tournament.SealedSwissTournament" typeName="mage.tournament.SealedSwissCubeTournamentType"/>
         <tournamentType name="Jumpstart Elimination" jar="mage-tournament-sealed.jar" className="mage.tournament.JumpstartEliminationTournament" typeName="mage.tournament.JumpstartEliminationTournamentType"/>
         <tournamentType name="Jumpstart Swiss" jar="mage-tournament-sealed.jar" className="mage.tournament.JumpstartSwissTournament" typeName="mage.tournament.JumpstartSwissTournamentType"/>
+        <tournamentType name="Jumpstart Elimination (Custom)" jar="mage-tournament-sealed.jar" className="mage.tournament.JumpstartCustomEliminationTournament" typeName="mage.tournament.JumpstartCustomEliminationTournamentType"/>
     </tournamentTypes>
     <draftCubes>
         <draftCube name="Adam Styborski's Pauper Cube" jar="mage-tournament-booster-draft.jar" className="mage.tournament.cubes.AdamStyborskisPauperCube"/>
