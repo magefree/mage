@@ -53,6 +53,7 @@ import static org.mage.plugins.card.images.DownloadPicturesService.getTokenCardU
 public class MageBook extends JComponent {
 
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = Logger.getLogger(MageBook.class);
 
     public static final String LAYOUT_3X3 = "small";
     public static final String LAYOUT_4X4 = "big";
@@ -214,60 +215,131 @@ public class MageBook extends JComponent {
         }
     }
 
-    private void showCardsOrTokens() {
+    public void showCardsOrTokens() {
         stateChanged = false;
+        updateCardStats(currentSet, showCardsOrTokens);
+
+        List<Object> items;
         if (showCardsOrTokens) {
-            updateCardStats(currentSet, true);
-            showCards();
+            // cards
+            items = loadCards();
         } else {
-            updateCardStats(currentSet, false);
-            int numTokens = showTokens();
-            int numTokensEmblems = numTokens + showEmblems(numTokens);
-            int numTokensEmblemsPlanes = numTokens + showPlanes(numTokensEmblems);
+            items = loadTokens();
         }
+        showItems(items);
     }
 
-    public void showCards() {
-        jLayeredPane.removeAll();
+    public List<Object> loadTokens() {
+        List<Object> res = new ArrayList<>();
 
-        // stats info
-        updateCardStats(currentSet, true);
-
-        List<CardInfo> cards = getCards(currentPage, currentSet);
-        int size = cards.size();
-
-        Rectangle rectangle = new Rectangle();
-        rectangle.translate(OFFSET_X, OFFSET_Y);
-        for (int i = 0; i < min(conf.CARDS_PER_PAGE / 2, size); i++) {
-            Card card = cards.get(i).getMockCard();
-            addCard(new CardView(card), bigCard, null, rectangle);
-            rectangle = CardPosition.translatePosition(i, rectangle, conf);
+        // tokens
+        List<CardDownloadData> allTokens = getTokenCardUrls();
+        for (CardDownloadData token : allTokens) {
+            if (token.getSet().equals(currentSet)) {
+                try {
+                    String className = token.getName();
+                    className = className.replaceAll("[^a-zA-Z0-9]", "");
+                    className = "mage.game.permanent.token." + className + "Token";
+                    if (token.getTokenClassName() != null && token.getTokenClassName().length() > 0) {
+                        if (token.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*token.*")) {
+                            className = token.getTokenClassName();
+                            className = "mage.game.permanent.token." + className;
+                        } else if (token.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*emblem.*")) {
+                            continue;
+                        }
+                    }
+                    Class<?> c = Class.forName(className);
+                    Constructor<?> cons = c.getConstructor();
+                    Object newToken = cons.newInstance();
+                    if (newToken instanceof Token) {
+                        ((Token) newToken).setOriginalExpansionSetCode(currentSet);
+                        ((Token) newToken).setExpansionSetCodeForImage(currentSet);
+                        ((Token) newToken).setTokenType(token.getType());
+                        res.add(newToken);
+                    }
+                } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                    // Swallow exception
+                }
+            }
         }
 
-        // calculate the x offset of the second (right) page
-        int second_page_x = (conf.WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH)
-                - (cardDimensions.getFrameWidth() + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
-
-        rectangle.setLocation(second_page_x, OFFSET_Y);
-        for (int i = conf.CARDS_PER_PAGE / 2; i < min(conf.CARDS_PER_PAGE, size); i++) {
-            Card card = cards.get(i).getMockCard();
-            addCard(new CardView(card), bigCard, null, rectangle);
-            rectangle = CardPosition.translatePosition(i - conf.CARDS_PER_PAGE / 2, rectangle, conf);
+        // emblems
+        List<CardDownloadData> allEmblems = getTokenCardUrls();
+        for (CardDownloadData emblem : allEmblems) {
+            if (emblem.getSet().equals(currentSet)) {
+                try {
+                    String className = emblem.getName();
+                    if (emblem.getTokenClassName() != null && emblem.getTokenClassName().length() > 0) {
+                        if (emblem.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*emblem.*")) {
+                            className = emblem.getTokenClassName();
+                            className = "mage.game.command.emblems." + className;
+                        }
+                    } else {
+                        continue;
+                    }
+                    Class<?> c = Class.forName(className);
+                    Constructor<?> cons = c.getConstructor();
+                    Object newEmblem = cons.newInstance();
+                    if (newEmblem instanceof Emblem) {
+                        ((Emblem) newEmblem).setExpansionSetCodeForImage(currentSet);
+                        res.add(newEmblem);
+                    }
+                } catch (ClassNotFoundException | InvocationTargetException | IllegalArgumentException | IllegalAccessException | InstantiationException | SecurityException | NoSuchMethodException ex) {
+                    // Swallow exception
+                }
+            }
         }
 
-        jLayeredPane.repaint();
+        // planes
+        List<CardDownloadData> allPlanes = getTokenCardUrls();
+        for (CardDownloadData plane : allPlanes) {
+            if (plane.getSet().equals(currentSet)) {
+                try {
+                    String className = plane.getName();
+                    if (plane.getTokenClassName() != null && plane.getTokenClassName().length() > 0) {
+                        if (plane.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*plane.*")) {
+                            className = plane.getTokenClassName();
+                            className = "mage.game.command.planes." + className;
+                        }
+                    } else {
+                        continue;
+                    }
+                    Class<?> c = Class.forName(className);
+                    Constructor<?> cons = c.getConstructor();
+                    Object newPlane = cons.newInstance();
+                    if (newPlane instanceof Plane) {
+                        ((Plane) newPlane).setExpansionSetCodeForImage(currentSet);
+                        res.add(newPlane);
+                    }
+                } catch (ClassNotFoundException | InvocationTargetException | IllegalArgumentException | IllegalAccessException | InstantiationException | SecurityException | NoSuchMethodException ex) {
+                    // Swallow exception
+                }
+            }
+        }
+
+        return res;
     }
 
-    public int showTokens() {
+    public void showItems(List<Object> allItems) {
         jLayeredPane.removeAll();
-        List<Token> tokens = getTokens(currentPage, currentSet);
-        if (tokens != null && !tokens.isEmpty()) {
-            int size = tokens.size();
+
+        int start = currentPage * conf.CARDS_PER_PAGE;
+        int end = Math.min(allItems.size(), start + conf.CARDS_PER_PAGE);
+        List<Object> needItems = allItems.subList(start, end); // end is exclusive from sublist
+
+        // visible pages
+        pageRight.setVisible(allItems.size() > end);
+        pageLeft.setVisible(currentPage > 0);
+
+        if (!needItems.isEmpty()) {
+            // start position
+            int size = needItems.size();
             Rectangle rectangle = new Rectangle();
             rectangle.translate(OFFSET_X, OFFSET_Y);
+
+            // left side
             for (int i = 0; i < min(conf.CARDS_PER_PAGE / 2, size); i++) {
-                Token token = tokens.get(i);
-                addToken(token, bigCard, null, rectangle);
+                addItem(needItems.get(i), rectangle);
                 rectangle = CardPosition.translatePosition(i, rectangle, conf);
             }
 
@@ -275,130 +347,32 @@ public class MageBook extends JComponent {
             int second_page_x = (conf.WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH)
                     - (cardDimensions.getFrameWidth() + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
 
+            // right side
             rectangle.setLocation(second_page_x, OFFSET_Y);
             for (int i = conf.CARDS_PER_PAGE / 2; i < min(conf.CARDS_PER_PAGE, size); i++) {
-                Token token = tokens.get(i);
-                addToken(token, bigCard, null, rectangle);
+                addItem(needItems.get(i), rectangle);
                 rectangle = CardPosition.translatePosition(i - conf.CARDS_PER_PAGE / 2, rectangle, conf);
             }
 
             jLayeredPane.repaint();
-            return tokens.size();
         }
-        return 0;
     }
 
-    public int showEmblems(int numTokens) {
-        List<Emblem> emblems = getEmblems(currentPage, currentSet, numTokens);
-        int numEmblems = 0;
-        if (emblems != null && !emblems.isEmpty()) {
-            int size = emblems.size();
-            numEmblems = size;
-            Rectangle rectangle = new Rectangle();
-            rectangle.translate(OFFSET_X, OFFSET_Y);
-            // calculate the x offset of the second (right) page
-            int second_page_x = (conf.WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH)
-                    - (cardDimensions.getFrameWidth() + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
-
-            // Already have numTokens tokens presented. Appending the emblems to the end of these.
-            numTokens = numTokens % conf.CARDS_PER_PAGE;
-            if (numTokens < conf.CARDS_PER_PAGE / 2) {
-                // page 1 with tokens
-                for (int z = 0; z < numTokens && z < conf.CARDS_PER_PAGE / 2; z++) {
-                    rectangle = CardPosition.translatePosition(z, rectangle, conf);
-                }
-            } else {
-                // page 2 with tokens
-                rectangle.setLocation(second_page_x, OFFSET_Y);
-                for (int z = 0; z < numTokens - conf.CARDS_PER_PAGE / 2; z++) {
-                    rectangle = CardPosition.translatePosition(z, rectangle, conf);
-                }
-            }
-
-            // page 1 with emblems after tokens
-            int lastI = 0;
-            boolean needContinueFromPage1 = false;
-            for (int i = 0; i < size && i + numTokens < conf.CARDS_PER_PAGE / 2; i++) {
-                Emblem emblem = emblems.get(i);
-                addEmblem(emblem, bigCard, null, rectangle);
-                rectangle = CardPosition.translatePosition(i + numTokens, rectangle, conf);
-                lastI++;
-                needContinueFromPage1 = true;
-            }
-
-            // page 2 with emblems after tokens
-            if (needContinueFromPage1) {
-                rectangle.setLocation(second_page_x, OFFSET_Y);
-            }
-            if (size + numTokens > conf.CARDS_PER_PAGE / 2) {
-                for (int i = lastI; i < size && i + numTokens < conf.CARDS_PER_PAGE; i++) {
-                    Emblem emblem = emblems.get(i);
-                    addEmblem(emblem, bigCard, null, rectangle);
-                    rectangle = CardPosition.translatePosition(i + numTokens - conf.CARDS_PER_PAGE / 2, rectangle, conf);
-                }
-            }
-
-            jLayeredPane.repaint();
+    private void addItem(Object item, Rectangle position) {
+        if (item instanceof CardView) {
+            addCard((CardView) item, bigCard, null, position, true);
+        } else if (item instanceof Token) {
+            addToken((Token) item, bigCard, null, position);
+        } else if (item instanceof Emblem) {
+            addEmblem((Emblem) item, bigCard, null, position);
+        } else if (item instanceof Plane) {
+            addPlane((Plane) item, bigCard, null, position);
+        } else {
+            logger.error("ERROR, unknown extra item type in mage viewer: " + item.getClass().getCanonicalName(), new Throwable());
         }
-        return numEmblems;
     }
 
-    public int showPlanes(int numTokensEmblems) {
-        List<Plane> planes = getPlanes(currentPage, currentSet, numTokensEmblems);
-        int numPlanes = 0;
-
-        if (!planes.isEmpty()) {
-            int size = planes.size();
-            numPlanes = size;
-            Rectangle rectangle = new Rectangle();
-            rectangle.translate(OFFSET_X, OFFSET_Y);
-
-            int second_page_x = (conf.WIDTH - 2 * LEFT_RIGHT_PAGES_WIDTH)
-                    - (cardDimensions.getFrameWidth() + CardPosition.GAP_X) * conf.CARD_COLUMNS + CardPosition.GAP_X - OFFSET_X;
-
-            numTokensEmblems = numTokensEmblems % conf.CARDS_PER_PAGE;
-            if (numTokensEmblems < conf.CARDS_PER_PAGE / 2) {
-                // page 1 with tokens/emblems
-                for (int z = 0; z < numTokensEmblems && z < conf.CARDS_PER_PAGE / 2; z++) {
-                    rectangle = CardPosition.translatePosition(z, rectangle, conf);
-                }
-            } else {
-                // page 2 with tokens/emblems
-                rectangle.setLocation(second_page_x, OFFSET_Y);
-                for (int z = 0; z < numTokensEmblems - conf.CARDS_PER_PAGE / 2; z++) {
-                    rectangle = CardPosition.translatePosition(z, rectangle, conf);
-                }
-            }
-
-            // page 1 with planes after tokens/emblems
-            int lastI = 0;
-            boolean needContinueFromPage1 = false;
-            for (int i = 0; i < size && i + numTokensEmblems < conf.CARDS_PER_PAGE / 2; i++) {
-                Plane plane = planes.get(i);
-                addPlane(plane, bigCard, null, rectangle);
-                rectangle = CardPosition.translatePosition(i + numTokensEmblems, rectangle, conf);
-                lastI++;
-                needContinueFromPage1 = true;
-            }
-
-            // page 2 with planes after tokens/emblems
-            if (needContinueFromPage1) {
-                rectangle.setLocation(second_page_x, OFFSET_Y);
-            }
-            if (size + numTokensEmblems > conf.CARDS_PER_PAGE / 2) {
-                for (int i = lastI; i < size && i + numTokensEmblems < conf.CARDS_PER_PAGE; i++) {
-                    Plane plane = planes.get(i);
-                    addPlane(plane, bigCard, null, rectangle);
-                    rectangle = CardPosition.translatePosition(i + numTokensEmblems - conf.CARDS_PER_PAGE / 2, rectangle, conf);
-                }
-            }
-
-            jLayeredPane.repaint();
-        }
-        return numPlanes;
-    }
-
-    private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle) {
+    private void addCard(CardView card, BigCard bigCard, UUID gameId, Rectangle rectangle, boolean asCard) {
         if (cardDimension == null) {
             cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight());
         }
@@ -411,27 +385,29 @@ public class MageBook extends JComponent {
         // card caption must be below real card caption to see full name even with mana icons
         cardImg.setCardCaptionTopOffset(CARD_CAPTION_OFFSET_Y);
 
-        // card number label
-        JLabel cardNumber = new JLabel();
-        int dy = -5; // image panel have empty space in bottom (bug?), need to move label up
-        cardNumber.setBounds(rectangle.x, rectangle.y + cardImg.getCardLocation().getCardHeight() + dy, cardDimensions.getFrameWidth(), 20);
-        cardNumber.setHorizontalAlignment(SwingConstants.CENTER);
-        cardNumber.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
-        cardNumber.setText(card.getCardNumber());
-        jLayeredPane.add(cardNumber);
+        if (asCard) {
+            // card number label
+            JLabel cardNumber = new JLabel();
+            int dy = -5; // image panel have empty space in bottom (bug?), need to move label up
+            cardNumber.setBounds(rectangle.x, rectangle.y + cardImg.getCardLocation().getCardHeight() + dy, cardDimensions.getFrameWidth(), 20);
+            cardNumber.setHorizontalAlignment(SwingConstants.CENTER);
+            cardNumber.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
+            cardNumber.setText(card.getCardNumber());
+            jLayeredPane.add(cardNumber);
 
-        // draft rating label
-        JLabel draftRating = new JLabel();
-        dy = -5 * 2 + cardNumber.getHeight(); // under card number
-        draftRating.setBounds(rectangle.x, rectangle.y + cardImg.getCardLocation().getCardHeight() + dy, cardDimensions.getFrameWidth(), 20);
-        draftRating.setHorizontalAlignment(SwingConstants.CENTER);
-        draftRating.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
-        if (card.getOriginalCard() != null) {
-            draftRating.setText("draft rating: " + RateCard.rateCard(card.getOriginalCard(), null));
-        } else {
-            draftRating.setText("");
+            // draft rating label
+            JLabel draftRating = new JLabel();
+            dy = -5 * 2 + cardNumber.getHeight(); // under card number
+            draftRating.setBounds(rectangle.x, rectangle.y + cardImg.getCardLocation().getCardHeight() + dy, cardDimensions.getFrameWidth(), 20);
+            draftRating.setHorizontalAlignment(SwingConstants.CENTER);
+            draftRating.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
+            if (card.getOriginalCard() != null) {
+                draftRating.setText("draft rating: " + RateCard.rateCard(card.getOriginalCard(), null));
+            } else {
+                draftRating.setText("");
+            }
+            jLayeredPane.add(draftRating);
         }
-        jLayeredPane.add(draftRating);
     }
 
     private void addToken(Token token, BigCard bigCard, UUID gameId, Rectangle rectangle) {
@@ -451,12 +427,22 @@ public class MageBook extends JComponent {
 
     private void addEmblem(Emblem emblem, BigCard bigCard, UUID gameId, Rectangle rectangle) {
         CardView cardView = new CardView(new EmblemView(emblem));
-        addCard(cardView, bigCard, gameId, rectangle);
+        addCard(cardView, bigCard, gameId, rectangle, false);
     }
 
     private void addPlane(Plane plane, BigCard bigCard, UUID gameId, Rectangle rectangle) {
         CardView cardView = new CardView(new PlaneView(plane));
-        addCard(cardView, bigCard, gameId, rectangle);
+        addCard(cardView, bigCard, gameId, rectangle, false);
+    }
+
+    private List<Object> loadCards() {
+        CardCriteria criteria = new CardCriteria();
+        criteria.setCodes(currentSet);
+        List<CardInfo> cards = CardRepository.instance.findCards(criteria);
+        cards.sort(new NaturalOrderCardNumberComparator());
+        List<Object> res = new ArrayList<>();
+        cards.forEach(card -> res.add(new CardView(card.getMockCard())));
+        return res;
     }
 
     private List<CardInfo> getCards(int page, String set) {
@@ -532,211 +518,6 @@ public class MageBook extends JComponent {
         } else {
             setInfo.setForeground(jLayeredPane.getForeground());
         }
-    }
-
-    private List<Token> getTokens(int page, String set) {
-        List<CardDownloadData> allTokens = getTokenCardUrls();
-        List<Token> tokens = new ArrayList<>();
-
-        for (CardDownloadData token : allTokens) {
-            if (token.getSet().equals(set)) {
-                try {
-                    String className = token.getName();
-                    className = className.replaceAll("[^a-zA-Z0-9]", "");
-                    className = "mage.game.permanent.token." + className + "Token";
-                    if (token.getTokenClassName() != null && token.getTokenClassName().length() > 0) {
-                        if (token.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*token.*")) {
-                            className = token.getTokenClassName();
-                            className = "mage.game.permanent.token." + className;
-                        } else if (token.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*emblem.*")) {
-                            continue;
-                        }
-                    }
-                    Class<?> c = Class.forName(className);
-                    Constructor<?> cons = c.getConstructor();
-                    Object newToken = cons.newInstance();
-                    if (newToken instanceof Token) {
-                        ((Token) newToken).setOriginalExpansionSetCode(set);
-                        ((Token) newToken).setExpansionSetCodeForImage(set);
-                        ((Token) newToken).setTokenType(token.getType());
-                        tokens.add((Token) newToken);
-                    }
-                } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    // Swallow exception
-                }
-            }
-        }
-        int start = page * conf.CARDS_PER_PAGE;
-        int end = page * conf.CARDS_PER_PAGE + conf.CARDS_PER_PAGE;
-        int ttokens = tokens.size();
-        int temblems = getTotalNumEmblems(set);
-        int tplanes = getTotalNumPlanes(set);
-        int numTokensEmblemsPlanes = ttokens + temblems + tplanes;
-        if (end > numTokensEmblemsPlanes) {
-            end = numTokensEmblemsPlanes;
-        }
-        if (numTokensEmblemsPlanes > end) {
-            pageRight.setVisible(true);
-        }
-
-        end = Math.min(end, ttokens);
-        if (start < ttokens) {
-            return tokens.subList(start, end);
-        }
-        return null;
-    }
-
-    private List<Emblem> getEmblems(int page, String set, int numTokensEmblems) {
-        List<CardDownloadData> allEmblems = getTokenCardUrls();
-        List<Emblem> emblems = new ArrayList<>();
-
-        for (CardDownloadData emblem : allEmblems) {
-            if (emblem.getSet().equals(set)) {
-                try {
-                    String className = emblem.getName();
-                    if (emblem.getTokenClassName() != null && emblem.getTokenClassName().length() > 0) {
-                        if (emblem.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*emblem.*")) {
-                            className = emblem.getTokenClassName();
-                            className = "mage.game.command.emblems." + className;
-                        }
-                    } else {
-                        continue;
-                    }
-                    Class<?> c = Class.forName(className);
-                    Constructor<?> cons = c.getConstructor();
-                    Object newEmblem = cons.newInstance();
-                    if (newEmblem instanceof Emblem) {
-                        ((Emblem) newEmblem).setExpansionSetCodeForImage(set);
-
-                        emblems.add((Emblem) newEmblem);
-                    }
-                } catch (ClassNotFoundException | InvocationTargetException | IllegalArgumentException | IllegalAccessException | InstantiationException | SecurityException | NoSuchMethodException ex) {
-                    // Swallow exception
-                }
-            }
-        }
-
-        if (emblems.size() == 0) {
-            return emblems;
-        }
-
-        int totalTokens = getTotalNumTokens(set);
-        int start = 0;
-        if (!(page * conf.CARDS_PER_PAGE <= totalTokens && (page + 1) * conf.CARDS_PER_PAGE >= totalTokens)) {
-            start = page * conf.CARDS_PER_PAGE - totalTokens;
-        }
-
-        int end = emblems.size();
-        if ((page + 1) * conf.CARDS_PER_PAGE < totalTokens + emblems.size()) {
-            end = (page + 1) * conf.CARDS_PER_PAGE - totalTokens;
-        }
-
-        start = Math.min(start, end);
-        return emblems.subList(start, end);
-    }
-
-    private List<Plane> getPlanes(int page, String set, int numTokensEmblems) {
-        List<CardDownloadData> allPlanes = getTokenCardUrls();
-        List<Plane> planes = new ArrayList<>();
-
-        for (CardDownloadData plane : allPlanes) {
-            if (plane.getSet().equals(set)) {
-                try {
-                    String className = plane.getName();
-                    if (plane.getTokenClassName() != null && plane.getTokenClassName().length() > 0) {
-                        if (plane.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*plane.*")) {
-                            className = plane.getTokenClassName();
-                            className = "mage.game.command.planes." + className;
-                        }
-                    } else {
-                        continue;
-                    }
-                    Class<?> c = Class.forName(className);
-                    Constructor<?> cons = c.getConstructor();
-                    Object newPlane = cons.newInstance();
-                    if (newPlane instanceof Plane) {
-                        ((Plane) newPlane).setExpansionSetCodeForImage(set);
-
-                        planes.add((Plane) newPlane);
-                    }
-                } catch (ClassNotFoundException | InvocationTargetException | IllegalArgumentException | IllegalAccessException | InstantiationException | SecurityException | NoSuchMethodException ex) {
-                    // Swallow exception
-                }
-            }
-        }
-
-        int totalTokens = getTotalNumTokens(set);
-        int totalTokensEmblems = totalTokens + getTotalNumEmblems(set);
-        int start = 0;
-        if (!(page * conf.CARDS_PER_PAGE <= totalTokensEmblems && (page + 1) * conf.CARDS_PER_PAGE >= totalTokensEmblems)) {
-            start = Math.max(0, page * conf.CARDS_PER_PAGE - totalTokensEmblems);
-            pageRight.setVisible(true);
-        }
-
-        int end = planes.size();
-        if ((page + 1) * conf.CARDS_PER_PAGE < totalTokensEmblems + planes.size()) {
-            end = Math.max(0, (page + 1) * conf.CARDS_PER_PAGE - totalTokensEmblems);
-            pageRight.setVisible(true);
-        } else {
-            pageRight.setVisible(false);
-        }
-
-        if (numTokensEmblems + planes.size() > conf.CARDS_PER_PAGE && page > 0) {
-            pageLeft.setVisible(true);
-        }
-        start = Math.min(start, end);
-        return planes.subList(start, end);
-    }
-
-    private int getTotalNumTokens(String set) {
-        List<CardDownloadData> allTokens = getTokenCardUrls();
-        int numTokens = 0;
-
-        for (CardDownloadData token : allTokens) {
-            if (token.getSet().equals(set)) {
-                String className = token.getName();
-                if (token.getTokenClassName() != null && token.getTokenClassName().length() > 0) {
-                    if (token.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*token.*")) {
-                        numTokens++;
-                    }
-                }
-            }
-        }
-        return numTokens;
-    }
-
-    private int getTotalNumEmblems(String set) {
-        List<CardDownloadData> allEmblems = getTokenCardUrls();
-        int numEmblems = 0;
-
-        for (CardDownloadData emblem : allEmblems) {
-            if (emblem.getSet().equals(set)) {
-                String className = emblem.getName();
-                if (emblem.getTokenClassName() != null && emblem.getTokenClassName().length() > 0) {
-                    if (emblem.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*emblem.*")) {
-                        numEmblems++;
-                    }
-                }
-            }
-        }
-        return numEmblems;
-    }
-
-    private int getTotalNumPlanes(String set) {
-        List<CardDownloadData> allPlanes = getTokenCardUrls();
-        int numPlanes = 0;
-
-        for (CardDownloadData plane : allPlanes) {
-            if (plane.getSet().equals(set)) {
-                String className = plane.getName();
-                if (plane.getTokenClassName() != null && plane.getTokenClassName().length() > 0) {
-                    if (plane.getTokenClassName().toLowerCase(Locale.ENGLISH).matches(".*plane.*")) {
-                        numPlanes++;
-                    }
-                }
-            }
-        }
-        return numPlanes;
     }
 
     private ImagePanel getImagePanel(String filename, ImagePanelStyle type) {
@@ -891,8 +672,6 @@ public class MageBook extends JComponent {
 
     private int currentPage = 0;
     private String currentSet = "RTR";
-    private final int currentCardsInSet = 0;
-    private final int currentCardsNotInSet = 0;
 
     private static CardDimensions cardDimensions = new CardDimensions(1.2d);
     private static final Logger log = Logger.getLogger(MageBook.class);

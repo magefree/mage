@@ -250,7 +250,7 @@ public final class CollectionViewerPanel extends JPanel {
 
     public void showCards() {
         if (mageBook != null) {
-            mageBook.showCards();
+            mageBook.showCardsOrTokens();
         }
     }
 
