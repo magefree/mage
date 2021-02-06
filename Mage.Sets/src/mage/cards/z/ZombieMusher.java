@@ -1,27 +1,25 @@
-
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.LandwalkAbility;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.filter.common.FilterControlledLandPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class ZombieMusher extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("snow land");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("snow land");
 
     static {
         filter.add(SuperType.SNOW.getPredicate());
@@ -39,7 +37,7 @@ public final class ZombieMusher extends CardImpl {
         this.addAbility(new LandwalkAbility(filter));
 
         // {snow}: Regenerate Zombie Musher.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{S}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl("{S}")));
     }
 
     private ZombieMusher(final ZombieMusher card) {

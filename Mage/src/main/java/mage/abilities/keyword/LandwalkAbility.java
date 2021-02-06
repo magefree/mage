@@ -5,7 +5,7 @@ import mage.abilities.EvasionAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Duration;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -20,15 +20,15 @@ public class LandwalkAbility extends EvasionAbility {
      *
      * @param filter
      */
-    public LandwalkAbility(FilterLandPermanent filter) {
+    public LandwalkAbility(FilterControlledLandPermanent filter) {
         this(filter, true);
     }
 
-    public LandwalkAbility(FilterLandPermanent filter, boolean withHintText) {
+    public LandwalkAbility(FilterControlledLandPermanent filter, boolean withHintText) {
         this.addEffect(new LandwalkEffect(filter, withHintText));
     }
 
-    public LandwalkAbility(final LandwalkAbility ability) {
+    protected LandwalkAbility(final LandwalkAbility ability) {
         super(ability);
     }
 
@@ -49,15 +49,15 @@ public class LandwalkAbility extends EvasionAbility {
 
 class LandwalkEffect extends RestrictionEffect {
 
-    protected FilterLandPermanent filter;
+    private final FilterControlledLandPermanent filter;
 
-    public LandwalkEffect(FilterLandPermanent filter, boolean withHintText) {
+    LandwalkEffect(FilterControlledLandPermanent filter, boolean withHintText) {
         super(Duration.WhileOnBattlefield);
         this.filter = filter;
         staticText = setText(withHintText);
     }
 
-    public LandwalkEffect(final LandwalkEffect effect) {
+    private LandwalkEffect(final LandwalkEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }
@@ -95,6 +95,9 @@ class LandwalkEffect extends RestrictionEffect {
     }
 
     private String setText(boolean withHintText) {
+        if (filter.getMessage().startsWith("chosen type")) {
+            return "landwalk of the chosen type";
+        }
         // Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)
         StringBuilder sb = new StringBuilder();
         sb.append(filter.getMessage()).append("walk");

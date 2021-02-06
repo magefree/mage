@@ -1,33 +1,25 @@
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.BandsWithOtherAbility;
-import mage.abilities.keyword.CumulativeUpkeepAbility;
-import mage.abilities.keyword.EchoAbility;
-import mage.abilities.keyword.FadingAbility;
-import mage.abilities.keyword.FlankingAbility;
-import mage.abilities.keyword.LandwalkAbility;
-import mage.abilities.keyword.PhasingAbility;
-import mage.abilities.keyword.ProtectionAbility;
-import mage.abilities.keyword.RampageAbility;
+import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class OldFogey extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Homarids");
-    private static final FilterLandPermanent filter2 = new FilterLandPermanent("snow-covered plains");
+    private static final FilterControlledLandPermanent filter2 = new FilterControlledLandPermanent("snow-covered plains");
 
     static {
         filter.add(SubType.HOMARID.getPredicate());

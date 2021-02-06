@@ -2,6 +2,7 @@
 package mage.abilities.keyword;
 
 import mage.constants.SubType;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
 
 /**
@@ -10,7 +11,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class ForestwalkAbility extends LandwalkAbility {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("forest");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("forest");
 
     static {
         filter.add(SubType.FOREST.getPredicate());

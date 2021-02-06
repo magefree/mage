@@ -16,7 +16,7 @@ import mage.abilities.keyword.LandwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
@@ -30,6 +30,12 @@ import java.util.UUID;
  * @author emerald000
  */
 public final class TravelersCloak extends CardImpl {
+
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("chosen type");
+
+    static {
+        filter.add(TravelersCloakChosenSubtypePredicate.instance);
+    }
 
     public TravelersCloak(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
@@ -49,8 +55,6 @@ public final class TravelersCloak extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
 
         // Enchanted creature has landwalk of the chosen type.
-        FilterLandPermanent filter = new FilterLandPermanent("Landwalk of the chosen type");
-        filter.add(TravelersCloakChosenSubtypePredicate.instance);
         Effect effect = new TravelersCloakGainAbilityAttachedEffect(filter);
         effect.setText("Enchanted creature has landwalk of the chosen type");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
@@ -68,7 +72,7 @@ public final class TravelersCloak extends CardImpl {
 
 class TravelersCloakGainAbilityAttachedEffect extends GainAbilityAttachedEffect {
 
-    public TravelersCloakGainAbilityAttachedEffect(FilterLandPermanent filter) {
+    TravelersCloakGainAbilityAttachedEffect(FilterControlledLandPermanent filter) {
         super(new LandwalkAbility(filter), AttachmentType.AURA);
     }
 

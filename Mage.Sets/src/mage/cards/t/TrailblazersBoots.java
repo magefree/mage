@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -9,25 +7,32 @@ import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.LandwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.common.FilterLandPermanent;
+import mage.constants.*;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.predicate.Predicates;
+
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class TrailblazersBoots extends CardImpl {
 
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("nonbasic land");
+
+    static {
+        filter.add(Predicates.not(SuperType.BASIC.getPredicate()));
+    }
+
     public TrailblazersBoots(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has nonbasic landwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new LandwalkAbility(FilterLandPermanent.nonbasicLand()), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
+                new LandwalkAbility(filter), AttachmentType.EQUIPMENT
+        )));
+
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }

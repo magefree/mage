@@ -2,6 +2,7 @@
 package mage.abilities.keyword;
 
 import mage.constants.SubType;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandPermanent;
 
 /**
@@ -10,7 +11,7 @@ import mage.filter.common.FilterLandPermanent;
  */
 public class SwampwalkAbility extends LandwalkAbility {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("swamp");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("swamp");
 
     static {
         filter.add(SubType.SWAMP.getPredicate());
