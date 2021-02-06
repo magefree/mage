@@ -1,7 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -14,20 +12,21 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.mana.BlackManaAbility;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.game.command.emblems.TyvarKellEmblem;
-import mage.game.permanent.token.ElfToken;
+import mage.game.permanent.token.ElfWarriorToken;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class TyvarKell extends CardImpl {
@@ -57,7 +56,7 @@ public final class TyvarKell extends CardImpl {
         this.addAbility(ability);
 
         // 0: Create a 1/1 green Elf Warrior creature token.
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new ElfToken()), 0));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new ElfWarriorToken()), 0));
 
         // −6: You get an emblem with "Whenever you cast an Elf spell, it gains haste until end of turn and you draw two cards."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new TyvarKellEmblem()), -6));

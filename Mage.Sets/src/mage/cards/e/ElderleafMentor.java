@@ -7,7 +7,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.ElfToken;
+import mage.game.permanent.token.ElfWarriorToken;
 
 import java.util.UUID;
 
@@ -25,7 +25,7 @@ public final class ElderleafMentor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Elderleaf Mentor enters the battlefield, create a 1/1 green Elf Warrior creature token.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElfToken())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElfWarriorToken())));
     }
 
     private ElderleafMentor(final ElderleafMentor card) {

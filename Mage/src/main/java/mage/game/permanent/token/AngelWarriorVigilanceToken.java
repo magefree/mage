@@ -6,6 +6,8 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 public final class AngelWarriorVigilanceToken extends TokenImpl {
 
     public AngelWarriorVigilanceToken() {
@@ -16,8 +18,11 @@ public final class AngelWarriorVigilanceToken extends TokenImpl {
         subtype.add(SubType.WARRIOR);
         power = new MageInt(4);
         toughness = new MageInt(4);
+
         addAbility(FlyingAbility.getInstance());
         addAbility(VigilanceAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("KHM");
     }
 
     private AngelWarriorVigilanceToken(final AngelWarriorVigilanceToken token) {

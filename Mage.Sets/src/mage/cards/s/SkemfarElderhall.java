@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.ElfToken;
+import mage.game.permanent.token.ElfWarriorToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -41,7 +41,7 @@ public final class SkemfarElderhall extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addEffect(new CreateTokenEffect(new ElfToken(), 2));
+        ability.addEffect(new CreateTokenEffect(new ElfWarriorToken(), 2));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
         this.addAbility(ability);
     }

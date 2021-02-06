@@ -4,6 +4,8 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 public final class KomasCoilToken extends TokenImpl {
 
     public KomasCoilToken() {
@@ -13,6 +15,8 @@ public final class KomasCoilToken extends TokenImpl {
         color.setBlue(true);
         power = new MageInt(3);
         toughness = new MageInt(3);
+
+        availableImageSetCodes = Arrays.asList("KHM");
     }
 
     private KomasCoilToken(final KomasCoilToken token) {

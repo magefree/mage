@@ -19,7 +19,7 @@ public final class GreenCat2Token extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
 
-        availableImageSetCodes.addAll(Arrays.asList("M21", "KHM"));
+        availableImageSetCodes = Arrays.asList("M21", "KHM");
     }
 
     private GreenCat2Token(final GreenCat2Token token) {

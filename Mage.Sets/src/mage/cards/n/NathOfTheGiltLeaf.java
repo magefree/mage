@@ -1,7 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -15,18 +13,18 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.game.permanent.token.ElfToken;
+import mage.game.permanent.token.ElfWarriorToken;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class NathOfTheGiltLeaf extends CardImpl {
 
     public NathOfTheGiltLeaf(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ELF);
         this.subtype.add(SubType.WARRIOR);
@@ -42,7 +40,7 @@ public final class NathOfTheGiltLeaf extends CardImpl {
         this.addAbility(ability);
 
         // Whenever an opponent discards a card, you may create a 1/1 green Elf Warrior creature token.
-        Effect effect2 = new CreateTokenEffect(new ElfToken());
+        Effect effect2 = new CreateTokenEffect(new ElfWarriorToken());
         effect2.setText("you may create a 1/1 green Elf Warrior creature token");
         this.addAbility(new DiscardsACardOpponentTriggeredAbility(effect2, true));
 

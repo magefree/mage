@@ -1,13 +1,12 @@
-
-
 package mage.game.permanent.token;
 
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public final class BearToken extends TokenImpl {
@@ -19,6 +18,8 @@ public final class BearToken extends TokenImpl {
         subtype.add(SubType.BEAR);
         power = new MageInt(2);
         toughness = new MageInt(2);
+
+        availableImageSetCodes = Arrays.asList("C15", "JUD", "LGN", "ODY", "ONS", "VMA", "MH1", "ELD", "KHM");
     }
 
     public BearToken(final BearToken token) {

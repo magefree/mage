@@ -4,9 +4,11 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public final class GiantsAmuletToken extends TokenImpl {
+import java.util.Arrays;
 
-    public GiantsAmuletToken() {
+public final class GiantWizardToken extends TokenImpl {
+
+    public GiantWizardToken() {
         super("Giant Wizard", "4/4 blue Giant Wizard creature token");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
@@ -14,13 +16,15 @@ public final class GiantsAmuletToken extends TokenImpl {
         subtype.add(SubType.WIZARD);
         power = new MageInt(4);
         toughness = new MageInt(4);
+
+        availableImageSetCodes = Arrays.asList("KHM");
     }
 
-    public GiantsAmuletToken(final GiantsAmuletToken token) {
+    public GiantWizardToken(final GiantWizardToken token) {
         super(token);
     }
 
-    public GiantsAmuletToken copy() {
-        return new GiantsAmuletToken(this);
+    public GiantWizardToken copy() {
+        return new GiantWizardToken(this);
     }
 }

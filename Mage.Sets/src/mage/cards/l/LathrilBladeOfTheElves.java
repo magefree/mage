@@ -20,7 +20,7 @@ import mage.constants.SuperType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.UntappedPredicate;
 import mage.game.Game;
-import mage.game.permanent.token.ElfToken;
+import mage.game.permanent.token.ElfWarriorToken;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
@@ -51,7 +51,7 @@ public final class LathrilBladeOfTheElves extends CardImpl {
 
         // Whenever Lathril, Blade of the Elves deals combat damage to a player, create that many 1/1 green Elf Warrior creature tokens.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(
-                new ElfToken(), LathrilBladeOfTheElvesValue.instance
+                new ElfWarriorToken(), LathrilBladeOfTheElvesValue.instance
         ).setText("create that many 1/1 green Elf Warrior creature tokens"), false, true));
 
         // {T}, Tap ten untapped Elves you control: Each opponent loses 10 life and you gain 10 life.

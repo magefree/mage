@@ -1,6 +1,5 @@
 package mage.game.command.emblems;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
@@ -14,18 +13,17 @@ import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class TibaltCosmicImposterEmblem extends Emblem {
     // You may play cards exiled with Tibalt, Cosmic Impostor, and you may spend mana as though it were mana of any color to cast those spells."
 
     public TibaltCosmicImposterEmblem() {
-        setName("Emblem Tibalt Cosmic Imposter");
-        this.setExpansionSetCodeForImage("KHM");
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new TibaltCosmicImposterPlayFromExileEffect());
-        this.getAbilities().add(ability);
+        setName("Emblem Tibalt");
+        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new TibaltCosmicImposterPlayFromExileEffect()));
     }
 }
 

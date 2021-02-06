@@ -17,18 +17,17 @@ import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
  */
 public class DirectLinksForDownload implements Iterable<DownloadJob> {
 
-    private static final String backsideUrl = "https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg";
-
     private static final Map<String, String> directLinks = new LinkedHashMap<>();
 
     public static final String cardbackFilename = "cardback.jpg";
-    public static final String tokenFrameFilename = "tokenFrame.png";
+    public static final String foretellFilename = "foretell.jpg";
 
     static {
-        directLinks.put(cardbackFilename, backsideUrl);
+        directLinks.put(cardbackFilename, "https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg");
+        directLinks.put(foretellFilename, "https://api.scryfall.com/cards/tkhm/23/en?format=image");
     }
 
-    private File outDir;
+    private final File outDir;
 
     public DirectLinksForDownload() {
         this.outDir = new File(getImagesDir() + Constants.RESOURCE_PATH_DEFAULT_IMAGES);

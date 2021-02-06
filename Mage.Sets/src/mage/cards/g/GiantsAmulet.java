@@ -18,7 +18,7 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.permanent.token.GiantsAmuletToken;
+import mage.game.permanent.token.GiantWizardToken;
 
 import java.util.UUID;
 
@@ -34,7 +34,7 @@ public final class GiantsAmulet extends CardImpl {
 
         // When Giant's Amulet enters the battlefield, you may pay {3}{U}. If you do, create a 4/4 blue Giant Wizard creature token, then attach Giant's Amulet to it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
-                new CreateTokenAttachSourceEffect(new GiantsAmuletToken()), new ManaCostsImpl<>("{3}{U}")
+                new CreateTokenAttachSourceEffect(new GiantWizardToken()), new ManaCostsImpl<>("{3}{U}")
         )));
 
         // Equipped creature gets +0/+1 and has "This creature has hexproof as long as it's untapped."

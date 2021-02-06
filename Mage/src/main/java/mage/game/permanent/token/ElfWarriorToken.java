@@ -9,9 +9,9 @@ import java.util.Arrays;
 /**
  * @author Loki
  */
-public final class ElfToken extends TokenImpl {
+public final class ElfWarriorToken extends TokenImpl {
 
-    public ElfToken() {
+    public ElfWarriorToken() {
         super("Elf Warrior", "1/1 green Elf Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
@@ -20,16 +20,16 @@ public final class ElfToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        availableImageSetCodes = Arrays.asList("C13", "C14", "EVG", "EMA", "LRW", "MOR", "ORI", "SHM", "M19", "CMR");
+        availableImageSetCodes = Arrays.asList("C13", "C14", "EVG", "EMA", "LRW", "MOR", "ORI", "SHM", "M19", "CMR", "KHM");
     }
 
-    public ElfToken(final ElfToken token) {
+    public ElfWarriorToken(final ElfWarriorToken token) {
         super(token);
     }
 
     @Override
-    public ElfToken copy() {
-        return new ElfToken(this);
+    public ElfWarriorToken copy() {
+        return new ElfWarriorToken(this);
     }
 
     @Override

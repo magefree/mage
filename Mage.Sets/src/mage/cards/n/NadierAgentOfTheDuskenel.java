@@ -19,7 +19,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ElfToken;
+import mage.game.permanent.token.ElfWarriorToken;
 
 import java.util.UUID;
 
@@ -91,7 +91,7 @@ class NadierAgentOfTheDuskenelEffect extends OneShotEffect {
         if (!permanent.isCreature() || permanent.getPower().getValue() < 1) {
             return false;
         }
-        return new ElfToken().putOntoBattlefield(permanent.getPower().getValue(), game, source, source.getControllerId()
+        return new ElfWarriorToken().putOntoBattlefield(permanent.getPower().getValue(), game, source, source.getControllerId()
         );
     }
 }

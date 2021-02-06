@@ -17,7 +17,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ElfToken;
+import mage.game.permanent.token.ElfWarriorToken;
 
 import java.util.UUID;
 
@@ -42,7 +42,7 @@ public final class WolverineRiders extends CardImpl {
 
         // At the beginning of each upkeep, create a 1/1 green Elf Warrior creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenEffect(new ElfToken()), TargetController.EACH_PLAYER, false
+                new CreateTokenEffect(new ElfWarriorToken()), TargetController.EACH_PLAYER, false
         ));
 
         // Whenever another Elf enters the battlefield under your control, you gain life equal to its toughness.

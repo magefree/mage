@@ -5,35 +5,24 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author LoneFox
  */
 public final class DragonToken2 extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("WWK", "10E", "BFZ", "C15", "CN2", "CMA", "C19"));
-    }
-
     public DragonToken2() {
-        this((String) null);
-    }
-
-    public DragonToken2(String setCode) {
         super("Dragon", "5/5 red Dragon creature token with flying");
-        availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.DRAGON);
         power = new MageInt(5);
         toughness = new MageInt(5);
+
         addAbility(FlyingAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("10E", "BFZ", "C15", "C19", "CMA", "CMD", "ONS", "ROE", "SCG", "WWK", "M19", "KHM");
     }
 
     public DragonToken2(final DragonToken2 token) {
@@ -42,5 +31,14 @@ public final class DragonToken2 extends TokenImpl {
 
     public DragonToken2 copy() {
         return new DragonToken2(this);
+    }
+
+    @Override
+    public void setExpansionSetCodeForImage(String code) {
+        super.setExpansionSetCodeForImage(code);
+
+        if (getOriginalExpansionSetCode() != null && getOriginalExpansionSetCode().equals("M19")) {
+            this.setTokenType(2);
+        }
     }
 }

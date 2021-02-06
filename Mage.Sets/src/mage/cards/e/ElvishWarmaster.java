@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
@@ -11,21 +10,22 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DeathtouchAbility;
-import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.token.ElfToken;
+import mage.game.permanent.token.ElfWarriorToken;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class ElvishWarmaster extends CardImpl {
@@ -46,7 +46,7 @@ public final class ElvishWarmaster extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever one or more other Elves enters the battlefield under your control, create a 1/1 green Elf Warrior creature token. This ability triggers only once each turn.
-        this.addAbility(new ElvishWarmasterTriggeredAbility(new CreateTokenEffect(new ElfToken()), filter));
+        this.addAbility(new ElvishWarmasterTriggeredAbility(new CreateTokenEffect(new ElfWarriorToken()), filter));
 
         // {5}{G}{G}: Elves you control get +2/+2 and gain deathtouch until end of turn.
         Ability ability = new SimpleActivatedAbility(new BoostControlledEffect(

@@ -17,7 +17,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ElfToken;
+import mage.game.permanent.token.ElfWarriorToken;
 import mage.game.permanent.token.HumanWarriorToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -45,7 +45,7 @@ public final class BattleForBretagard extends CardImpl {
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new CreateTokenEffect(new HumanWarriorToken()));
 
         // II — Create a 1/1 green Elf Warrior creature token.
-        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new CreateTokenEffect(new ElfToken()));
+        sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_II, new CreateTokenEffect(new ElfWarriorToken()));
 
         // III — Choose any number of artifact tokens and/or creature tokens you control with different names. For each of them, create a token thats a copy of it.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_III, new BattleForBretagardEffect());
@@ -87,7 +87,7 @@ class BattleForBretagardEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        TargetPermanent target=new BattleForBretagardTarget();
+        TargetPermanent target = new BattleForBretagardTarget();
         player.choose(outcome, target, source.getSourceId(), game);
         for (UUID targetId : target.getTargets()) {
             new CreateTokenCopyTargetEffect()

@@ -15,7 +15,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.ElfToken;
+import mage.game.permanent.token.ElfWarriorToken;
 
 import java.util.UUID;
 
@@ -31,7 +31,7 @@ public final class ElvenBow extends CardImpl {
 
         // When Elven Bow enters the battlefield, you may pay {2}. If you do, create a 1/1 green Elf Warrior creature token, then attach Elven Bow to it.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DoIfCostPaid(
-                new CreateTokenAttachSourceEffect(new ElfToken()), new GenericManaCost(2)
+                new CreateTokenAttachSourceEffect(new ElfWarriorToken()), new GenericManaCost(2)
         )));
 
         // Equipped creature gets +1/+2 and has reach.

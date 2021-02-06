@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import mage.MageInt;
@@ -13,12 +12,11 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.game.permanent.token.ElfToken;
+import mage.game.permanent.token.ElfWarriorToken;
 
 import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class DwynensElite extends CardImpl {
@@ -38,7 +36,7 @@ public final class DwynensElite extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Dwynen's Elite enters the battlefield, if you control another Elf, create a 1/1 green Elf Warrior creature token.
-        TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElfToken()));
+        TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElfWarriorToken()));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility,
                 new PermanentsOnTheBattlefieldCondition(filter),

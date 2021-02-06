@@ -13,7 +13,7 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ElfToken;
+import mage.game.permanent.token.ElfWarriorToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -75,7 +75,7 @@ class ReturnUponTheTideEffect extends OneShotEffect {
             return false;
         }
         if (permanent.hasSubtype(SubType.ELF, game)) {
-            new ElfToken().putOntoBattlefield(2, game, source, player.getId());
+            new ElfWarriorToken().putOntoBattlefield(2, game, source, player.getId());
         }
         return true;
     }

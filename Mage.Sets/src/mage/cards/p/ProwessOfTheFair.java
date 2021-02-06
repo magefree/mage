@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -12,10 +10,11 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.ElfToken;
+import mage.game.permanent.token.ElfWarriorToken;
+
+import java.util.UUID;
 
 /**
- *
  * @author LoneFox
  */
 public final class ProwessOfTheFair extends CardImpl {
@@ -29,12 +28,12 @@ public final class ProwessOfTheFair extends CardImpl {
     }
 
     public ProwessOfTheFair(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{B}");
         this.subtype.add(SubType.ELF);
 
         // Whenever another nontoken Elf is put into your graveyard from the battlefield, you may create a 1/1 green Elf Warrior creature token.
-        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new CreateTokenEffect(new ElfToken()),
-            true, filter, false, true));
+        this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(new CreateTokenEffect(new ElfWarriorToken()),
+                true, filter, false, true));
     }
 
     private ProwessOfTheFair(final ProwessOfTheFair card) {

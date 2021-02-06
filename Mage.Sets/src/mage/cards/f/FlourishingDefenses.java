@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -11,18 +9,18 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.ElfToken;
+import mage.game.permanent.token.ElfWarriorToken;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class FlourishingDefenses extends CardImpl {
 
     public FlourishingDefenses(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
 
         // Whenever a -1/-1 counter is put on a creature, you may create a 1/1 green Elf Warrior creature token.
         this.addAbility(new FlourishingDefensesTriggeredAbility());
@@ -42,7 +40,7 @@ public final class FlourishingDefenses extends CardImpl {
 class FlourishingDefensesTriggeredAbility extends TriggeredAbilityImpl {
 
     FlourishingDefensesTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ElfToken()), true);
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new ElfWarriorToken()), true);
     }
 
     FlourishingDefensesTriggeredAbility(final FlourishingDefensesTriggeredAbility ability) {
@@ -63,9 +61,7 @@ class FlourishingDefensesTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getData().equals(CounterType.M1M1.getName())) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (permanent != null && permanent.isCreature()) {
-                return true;
-            }
+            return permanent != null && permanent.isCreature();
         }
         return false;
     }

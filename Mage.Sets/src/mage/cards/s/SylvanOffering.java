@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -11,15 +9,16 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.ElfToken;
+import mage.game.permanent.token.ElfWarriorToken;
 import mage.game.permanent.token.SylvanOfferingTreefolkToken;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SylvanOffering extends CardImpl {
@@ -105,7 +104,7 @@ class SylvanOfferingEffect2 extends OneShotEffect {
             Player opponent = game.getPlayer(target.getFirstTarget());
             if (opponent != null) {
                 int xValue = source.getManaCostsToPay().getX();
-                Effect effect = new CreateTokenTargetEffect(new ElfToken(), xValue);
+                Effect effect = new CreateTokenTargetEffect(new ElfWarriorToken(), xValue);
                 effect.setTargetPointer(new FixedTarget(controller.getId()));
                 effect.apply(game, source);
                 effect.setTargetPointer(new FixedTarget(opponent.getId()));

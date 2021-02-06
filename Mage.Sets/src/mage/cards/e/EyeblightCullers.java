@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.ElfToken;
+import mage.game.permanent.token.ElfWarriorToken;
 
 import java.util.UUID;
 
@@ -27,7 +27,7 @@ public final class EyeblightCullers extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Eyeblight Cullers dies, create three 1/1 green Elf Warrior creature tokens, then mill three cards.
-        Ability ability = new DiesSourceTriggeredAbility(new CreateTokenEffect(new ElfToken(), 3));
+        Ability ability = new DiesSourceTriggeredAbility(new CreateTokenEffect(new ElfWarriorToken(), 3));
         ability.addEffect(new MillCardsControllerEffect(3).concatBy(", then"));
         this.addAbility(ability);
     }

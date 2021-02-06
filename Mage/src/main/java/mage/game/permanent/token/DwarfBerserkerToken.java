@@ -4,6 +4,8 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 public final class DwarfBerserkerToken extends TokenImpl {
 
     public DwarfBerserkerToken() {
@@ -14,6 +16,8 @@ public final class DwarfBerserkerToken extends TokenImpl {
         subtype.add(SubType.BERSERKER);
         power = new MageInt(2);
         toughness = new MageInt(1);
+
+        availableImageSetCodes = Arrays.asList("KHM");
     }
 
     public DwarfBerserkerToken(final DwarfBerserkerToken token) {

@@ -496,6 +496,30 @@ public class ScryfallImageSupportTokens {
             put("CMR/Treasure", "https://api.scryfall.com/cards/tcmr/12/en?format=image");
             put("CMR/Zombie", "https://api.scryfall.com/cards/tcmr/6/en?format=image");
 
+            // KHM
+            put("KHM/Angel Warrior", "https://api.scryfall.com/cards/tkhm/2/en?format=image");
+            put("KHM/Bear", "https://api.scryfall.com/cards/tkhm/13/en?format=image");
+            put("KHM/Bird", "https://api.scryfall.com/cards/tkhm/5/en?format=image");
+            put("KHM/Cat", "https://api.scryfall.com/cards/tkhm/14/en?format=image");
+            put("KHM/Demon Berserker", "https://api.scryfall.com/cards/tkhm/10/en?format=image");
+            put("KHM/Dragon", "https://api.scryfall.com/cards/tkhm/11/en?format=image");
+            put("KHM/Dwarf Berserker", "https://api.scryfall.com/cards/tkhm/12/en?format=image");
+            put("KHM/Elf Warrior", "https://api.scryfall.com/cards/tkhm/15/en?format=image");
+            put("KHM/Giant Wizard", "https://api.scryfall.com/cards/tkhm/6/en?format=image");
+            put("KHM/Human Warrior", "https://api.scryfall.com/cards/tkhm/3/en?format=image");
+            put("KHM/Icy Manalith", "https://api.scryfall.com/cards/tkhm/17/en?format=image");
+            put("KHM/Koma's Coil", "https://api.scryfall.com/cards/tkhm/7/en?format=image");
+            put("KHM/Replicated Ring", "https://api.scryfall.com/cards/tkhm/18/en?format=image");
+            put("KHM/Shapeshifter", "https://api.scryfall.com/cards/tkhm/8/en?format=image");
+            put("KHM/Shard", "https://api.scryfall.com/cards/tkhm/1/en?format=image");
+            put("KHM/Spirit", "https://api.scryfall.com/cards/tkhm/4/en?format=image");
+            put("KHM/Treasure", "https://api.scryfall.com/cards/tkhm/19/en?format=image");
+            put("KHM/Troll Warrior", "https://api.scryfall.com/cards/tkhm/16/en?format=image");
+            put("KHM/Zombie Berserker", "https://api.scryfall.com/cards/tkhm/9/en?format=image");
+            put("KHM/Emblem Kaya the Inexorable", "https://api.scryfall.com/cards/tkhm/20/en?format=image");
+            put("KHM/Emblem Tibalt Cosmic Imposter", "https://api.scryfall.com/cards/tkhm/21/en?format=image");
+            put("KHM/Emblem Tyvar Kell", "https://api.scryfall.com/cards/tkhm/22/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

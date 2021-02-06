@@ -29,7 +29,7 @@ public final class TreasureToken extends TokenImpl {
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
 
-        availableImageSetCodes = Arrays.asList("XLN", "RNA", "M20", "C19", "C20", "M21", "CMR");
+        availableImageSetCodes = Arrays.asList("XLN", "RNA", "M20", "C19", "C20", "M21", "CMR", "KHM");
     }
 
     public TreasureToken(final TreasureToken token) {
