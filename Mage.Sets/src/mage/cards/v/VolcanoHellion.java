@@ -1,7 +1,5 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -11,15 +9,16 @@ import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class VolcanoHellion extends CardImpl {
@@ -54,7 +53,7 @@ public final class VolcanoHellion extends CardImpl {
 class VolcanoHellionEffect extends OneShotEffect {
 
     public VolcanoHellionEffect() {
-        super(Outcome.AIDontUseIt);
+        super(Outcome.Damage);
         this.staticText = "it deals an amount of damage of your choice to you and target creature. The damage can't be prevented";
     }
 
@@ -72,7 +71,20 @@ class VolcanoHellionEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (controller != null) {
-            int amount = controller.getAmount(0, Integer.MAX_VALUE, "Choose the amount of damage to deliver to you and a target creature.  The damage can't be prevented.", game);
+            int amount;
+            if (!controller.isHuman() && !controller.isTestMode()) {
+                // AI hint: have much life and can destroy target permanent
+                int safeLifeToLost = Math.min(6, controller.getLife() / 2);
+                if (permanent != null && permanent.getToughness().getValue() <= safeLifeToLost) {
+                    amount = permanent.getToughness().getValue();
+                } else {
+                    amount = 0;
+                }
+            } else {
+                //Human choose
+                amount = controller.getAmount(0, Integer.MAX_VALUE, "Choose the amount of damage to deliver to you and a target creature. The damage can't be prevented.", game);
+            }
+
             if (amount > 0) {
                 controller.damage(amount, source.getSourceId(), source, game, false, false);
                 if (permanent != null) {

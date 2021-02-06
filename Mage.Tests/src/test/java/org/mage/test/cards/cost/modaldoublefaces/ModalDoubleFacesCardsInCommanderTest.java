@@ -46,10 +46,6 @@ public class ModalDoubleFacesCardsInCommanderTest extends CardTestCommanderDuelB
         addCard(Zone.LIBRARY, playerA, "Forest");
         addCard(Zone.LIBRARY, playerA, "Grizzly Bears");
         addCard(Zone.LIBRARY, playerA, "Forest");
-        //
-        // Exile target artifact or enchantment.
-        addCard(Zone.HAND, playerB, "Ironwright's Cleansing"); // {2}{W}
-        addCard(Zone.BATTLEFIELD, playerB, "Plains");
 
         // prepare mdf
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge");

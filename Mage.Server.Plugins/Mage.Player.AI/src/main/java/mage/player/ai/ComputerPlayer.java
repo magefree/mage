@@ -50,10 +50,7 @@ import mage.players.net.UserData;
 import mage.players.net.UserGroup;
 import mage.target.*;
 import mage.target.common.*;
-import mage.util.Copier;
-import mage.util.RandomUtil;
-import mage.util.TournamentUtil;
-import mage.util.TreeNode;
+import mage.util.*;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -1666,8 +1663,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     @Override
     public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variablCost) {
         log.debug("announceXCost");
-        //TODO: improve this
-        int value = RandomUtil.nextInt(max + 1);
+        int value = RandomUtil.nextInt(CardUtil.overflowInc(max, 1));
         if (value < min) {
             value = min;
         }
@@ -1964,9 +1960,8 @@ public class ComputerPlayer extends PlayerImpl implements Player {
         if (message.startsWith("Assign damage to ")) {
             return min;
         }
-        //TODO: improve this
         if (min < max && min == 0) {
-            return RandomUtil.nextInt(max + 1);
+            return RandomUtil.nextInt(CardUtil.overflowInc(max, 1));
         }
         return min;
     }
