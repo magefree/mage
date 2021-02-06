@@ -520,6 +520,16 @@ public class ScryfallImageSupportTokens {
             put("KHM/Emblem Tibalt Cosmic Imposter", "https://api.scryfall.com/cards/tkhm/21/en?format=image");
             put("KHM/Emblem Tyvar Kell", "https://api.scryfall.com/cards/tkhm/22/en?format=image");
 
+            // TKHC
+            put("KHC/Bird", "https://api.scryfall.com/cards/tkhc/1/en?format=image");
+            put("KHC/Boar", "https://api.scryfall.com/cards/tkhc/5/en?format=image");
+            put("KHC/Elemental", "https://api.scryfall.com/cards/tkhc/6/en?format=image");
+            put("KHC/Kithkin Soldier", "https://api.scryfall.com/cards/tkhc/2/en?format=image");
+            put("KHC/Pegasus", "https://api.scryfall.com/cards/tkhc/3/en?format=image");
+            put("KHC/Servo", "https://api.scryfall.com/cards/tkhc/7/en?format=image");
+            put("KHC/Soldier", "https://api.scryfall.com/cards/tkhc/4/en?format=image");
+            put("KHC/Thopter", "https://api.scryfall.com/cards/tkhc/8/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

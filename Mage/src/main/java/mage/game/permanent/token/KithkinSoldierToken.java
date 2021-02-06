@@ -1,17 +1,17 @@
 package mage.game.permanent.token;
 
-import java.util.Arrays;
 import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
+import java.util.Arrays;
+
 /**
- *
  * @author Loki
  */
-public final class KithkinToken extends TokenImpl {
+public final class KithkinSoldierToken extends TokenImpl {
 
-    public KithkinToken() {
+    public KithkinSoldierToken() {
         super("Kithkin Soldier", "1/1 white Kithkin Soldier creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
@@ -19,14 +19,15 @@ public final class KithkinToken extends TokenImpl {
         subtype.add(SubType.SOLDIER);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        availableImageSetCodes.addAll(Arrays.asList("LRW", "SHM", "MMA"));
+
+        availableImageSetCodes = Arrays.asList("CMD", "EVE", "FUT", "LRW", "MMA", "MOR", "SHM", "MMA", "KHC");
     }
 
-    public KithkinToken(final KithkinToken token) {
+    public KithkinSoldierToken(final KithkinSoldierToken token) {
         super(token);
     }
 
-    public KithkinToken copy() {
-        return new KithkinToken(this);
+    public KithkinSoldierToken copy() {
+        return new KithkinSoldierToken(this);
     }
 }

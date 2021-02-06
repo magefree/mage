@@ -1,14 +1,13 @@
-
-
 package mage.game.permanent.token;
 
-import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.Arrays;
 
 /**
- *
  * @author LoneFox
  */
 public final class PegasusToken extends TokenImpl {
@@ -20,8 +19,10 @@ public final class PegasusToken extends TokenImpl {
         subtype.add(SubType.PEGASUS);
         power = new MageInt(1);
         toughness = new MageInt(1);
+
         addAbility(FlyingAbility.getInstance());
-        setOriginalExpansionSetCode("C14");
+
+        availableImageSetCodes = Arrays.asList("C14", "C19", "CMD", "EXO", "GPT", "MIR", "TMP", "TPR", "TSP", "THB", "KHC");
     }
 
     public PegasusToken(final PegasusToken token) {

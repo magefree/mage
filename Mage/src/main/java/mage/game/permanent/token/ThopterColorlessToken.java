@@ -23,7 +23,7 @@ public final class ThopterColorlessToken extends TokenImpl {
 
         addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes = Arrays.asList("C18", "EXO", "KLD", "MBS", "ORI", "TPR", "VMA", "M19", "ZNC");
+        availableImageSetCodes = Arrays.asList("C18", "EXO", "KLD", "MBS", "ORI", "TPR", "VMA", "M19", "ZNC", "KHC");
     }
 
     @Override

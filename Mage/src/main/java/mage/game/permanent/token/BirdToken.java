@@ -20,9 +20,10 @@ public final class BirdToken extends TokenImpl {
         subtype.add(SubType.BIRD);
         power = new MageInt(1);
         toughness = new MageInt(1);
+
         addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes.addAll(Arrays.asList("BNG", "CSP", "DGM", "JUD", "MM3", "RTR", "VMA", "ZEN", "MH1", "C20", "M21", "ZNC"));
+        availableImageSetCodes.addAll(Arrays.asList("BNG", "CSP", "DGM", "JUD", "MM3", "RTR", "VMA", "ZEN", "MH1", "C20", "M21", "ZNC", "KHC"));
     }
 
     public BirdToken(final BirdToken token) {

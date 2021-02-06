@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -16,18 +14,18 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.KithkinToken;
+import mage.game.permanent.token.KithkinSoldierToken;
+
+import java.util.UUID;
 
 /**
- *
  * @author Styxo
  */
 public final class MilitiasPride extends CardImpl {
 
     public MilitiasPride(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{1}{W}");
         this.subtype.add(SubType.KITHKIN);
 
         // Whenever a creature you control attacks, you may pay {W}. If you do create a 1/1 white Kithkin Soldier creature token in play tapped and attacking
@@ -48,7 +46,7 @@ public final class MilitiasPride extends CardImpl {
 class MilitiasPrideTriggerAbility extends TriggeredAbilityImpl {
 
     public MilitiasPrideTriggerAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new KithkinToken(), 1, true, true), new ManaCostsImpl("{W}")));
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new CreateTokenEffect(new KithkinSoldierToken(), 1, true, true), new ManaCostsImpl("{W}")));
     }
 
     public MilitiasPrideTriggerAbility(final MilitiasPrideTriggerAbility ability) {

@@ -448,7 +448,7 @@
 |Generate|TOK:C14|Elf Druid|||LlanowarElvesToken|
 |Generate|TOK:CMA|Elf Warrior||
 |Generate|TOK:CMA|Gargoyle|||GargoyleToken|
-|Generate|TOK:CMA|Kithkin Soldier|||KithkinToken|
+|Generate|TOK:CMA|Kithkin Soldier|||KithkinSoldierToken|
 |Generate|TOK:CMA|Knight|||KnightToken|
 |Generate|TOK:CMA|Saproling|||SaprolingToken|
 |Generate|TOK:CMA|Spirit|||SpiritWhiteToken|
@@ -462,7 +462,7 @@
 |Generate|TOK:CMD|Elemental|||CallTheSkyBreakerElementalToken|
 |Generate|TOK:CMD|Elephant|||ElephantToken|
 |Generate|TOK:CMD|Insect|||InsectToken|
-|Generate|TOK:CMD|Kithkin Soldier|||KithkinToken|
+|Generate|TOK:CMD|Kithkin Soldier|||KithkinSoldierToken|
 |Generate|TOK:CMD|Pegasus|||PegasusToken|
 |Generate|TOK:CMD|Saproling|||SaprolingToken|
 |Generate|TOK:CMD|Snake|||SnakeToken|
@@ -659,7 +659,7 @@
 |Generate|TOK:EVE|Elemental|||CallTheSkyBreakerElementalToken|
 |Generate|TOK:EVE|Goat|||GoatToken|
 |Generate|TOK:EVE|Goblin Soldier|||GoblinTrenchesToken|
-|Generate|TOK:EVE|Kithkin Soldier|||KithkinToken|
+|Generate|TOK:EVE|Kithkin Soldier|||KithkinSoldierToken|
 |Generate|TOK:EVE|Spirit|||BeckonApparitionToken|
 |Generate|TOK:EVE|Wolf|||WolfToken|
 |Generate|TOK:EVE|Worm|||WormHarvestToken|
@@ -684,7 +684,7 @@
 |Generate|TOK:FUT|Elf Druid|||FreyaliseLlanowarsFuryToken|
 |Generate|TOK:FUT|Elf Druid|||LlanowarElvesToken|
 |Generate|TOK:FUT|Giant|||GiantToken|
-|Generate|TOK:FUT|Kithkin Soldier|||KithkinToken|
+|Generate|TOK:FUT|Kithkin Soldier|||KithkinSoldierToken|
 |Generate|TOK:FUT|Saproling|||SaprolingToken|
 |Generate|TOK:FUT|Sliver|||SliversmithToken|
 |Generate|TOK:FUT|Soldier|||SoldierToken|
@@ -803,7 +803,7 @@
 |Generate|TOK:LRW|Elemental|2||WhiteElementalToken|
 |Generate|TOK:LRW|Elf Warrior|||ElfWarriorToken|
 |Generate|TOK:LRW|Goblin Rogue|||GoblinRogueToken|
-|Generate|TOK:LRW|Kithkin Soldier|||KithkinToken|
+|Generate|TOK:LRW|Kithkin Soldier|||KithkinSoldierToken|
 |Generate|TOK:LRW|Merfolk Wizard||
 |Generate|TOK:LRW|Shapeshifter|||CribSwapShapeshifterWhiteToken|
 |Generate|TOK:LRW|Wolf|||WolfToken|
@@ -939,7 +939,7 @@
 |Generate|TOK:MMA|Goblin Rogue|||GoblinRogueToken|
 |Generate|TOK:MMA|Goblin|||GoblinToken|
 |Generate|TOK:MMA|Illusion|||MelokuTheCloudedMirrorToken|
-|Generate|TOK:MMA|Kithkin Soldier|||KithkinToken|
+|Generate|TOK:MMA|Kithkin Soldier|||KithkinSoldierToken|
 |Generate|TOK:MMA|Saproling|||SaprolingToken|
 |Generate|TOK:MMA|Soldier|||SoldierToken|
 |Generate|TOK:MMA|Spider|||PenumbraSpiderToken|
@@ -959,7 +959,7 @@
 |Generate|TOK:MOR|Faerie Rogue|||FaerieRogueToken|
 |Generate|TOK:MOR|Giant Warrior|||GiantWarriorToken|
 |Generate|TOK:MOR|Goblin Rogue|||GoblinRogueToken|
-|Generate|TOK:MOR|Kithkin Soldier|||KithkinToken|
+|Generate|TOK:MOR|Kithkin Soldier|||KithkinSoldierToken|
 |Generate|TOK:MOR|Treefolk Shaman|||TreefolkShamanToken|
 |Generate|TOK:MOR|Wolf|||WolfToken|
 |Generate|TOK:MRD|Beast|||OneDozenEyesBeastToken|
@@ -1092,7 +1092,7 @@
 |Generate|TOK:SHM|Faerie Rogue|||OonaQueenFaerieToken|
 |Generate|TOK:SHM|Giant Warrior|||GiantBaitingGiantWarriorToken|
 |Generate|TOK:SHM|Goblin Warrior|||WortTheRaidmotherToken|
-|Generate|TOK:SHM|Kithkin Soldier|||KithkinToken|
+|Generate|TOK:SHM|Kithkin Soldier|||KithkinSoldierToken|
 |Generate|TOK:SHM|Rat|||RatToken|
 |Generate|TOK:SHM|Spider|||SpiderToken|
 |Generate|TOK:SHM|Spirit|||SpiritWhiteToken|
@@ -1144,7 +1144,7 @@
 |Generate|TOK:SWS|Tusken Raider|||TuskenRaiderToken|
 |Generate|TOK:SWS|Droid|||DroidToken|
 |Generate|TOK:THS|Bird|||SwanSongBirdToken|
-|Generate|TOK:THS|Boar|||CurseOfTheSwineBoarToken|
+|Generate|TOK:THS|Boar|||Boar2Token|
 |Generate|TOK:THS|Cleric|||HeliodGodOfTheSunToken|
 |Generate|TOK:THS|Elemental|||MasterOfWavesElementalToken|
 |Generate|TOK:THS|Golem|||HammerOfPurphorosGolemToken|
@@ -1503,3 +1503,13 @@
 |Generate|TOK:KHM|Treasure|||TreasureToken|
 |Generate|TOK:KHM|Troll Warrior|||TrollWarriorToken|
 |Generate|TOK:KHM|Zombie Berserker|||ZombieBerserkerToken|
+
+# KHC
+|Generate|TOK:KHC|Bird|||BirdToken|
+|Generate|TOK:KHC|Boar|||Boar2Token|
+|Generate|TOK:KHC|Elemental|||VoiceOfTheWoodsElementalToken|
+|Generate|TOK:KHC|Kithkin Soldier|||KithkinSoldierToken|
+|Generate|TOK:KHC|Pegasus|||PegasusToken|
+|Generate|TOK:KHC|Servo|||ServoToken|
+|Generate|TOK:KHC|Soldier|||SoldierToken|
+|Generate|TOK:KHC|Thopter|||ThopterColorlessToken|

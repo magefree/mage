@@ -9,7 +9,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.CurseOfTheSwineBoarToken;
+import mage.game.permanent.token.Boar2Token;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetAdjuster;
@@ -85,7 +85,7 @@ class CurseOfTheSwineEffect extends OneShotEffect {
                     }
                 }
             }
-            CurseOfTheSwineBoarToken swineToken = new CurseOfTheSwineBoarToken();
+            Boar2Token swineToken = new Boar2Token();
             for (Map.Entry<UUID, Integer> exiledByController : playersWithTargets.entrySet()) {
                 swineToken.putOntoBattlefield(exiledByController.getValue(), game, source, exiledByController.getKey());
             }

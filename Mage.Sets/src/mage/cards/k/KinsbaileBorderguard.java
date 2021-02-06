@@ -1,7 +1,5 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
@@ -20,10 +18,11 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.KithkinToken;
+import mage.game.permanent.token.KithkinSoldierToken;
+
+import java.util.UUID;
 
 /**
- *
  * @author LoneFox
  */
 public final class KinsbaileBorderguard extends CardImpl {
@@ -35,7 +34,7 @@ public final class KinsbaileBorderguard extends CardImpl {
     }
 
     public KinsbaileBorderguard(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");
         this.subtype.add(SubType.KITHKIN);
         this.subtype.add(SubType.SOLDIER);
         this.power = new MageInt(1);
@@ -43,9 +42,9 @@ public final class KinsbaileBorderguard extends CardImpl {
 
         // Kinsbaile Borderguard enters the battlefield with a +1/+1 counter on it for each other Kithkin you control.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(0),
-            new PermanentsOnBattlefieldCount(filter), true), "with a +1/+1 counter on it for each other Kithkin you control"));
+                new PermanentsOnBattlefieldCount(filter), true), "with a +1/+1 counter on it for each other Kithkin you control"));
         // When Kinsbaile Borderguard dies, create a 1/1 white Kithkin Soldier creature token for each counter on it.
-        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new KithkinToken(), new AllCountersCount())));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new KithkinSoldierToken(), new AllCountersCount())));
     }
 
     private KinsbaileBorderguard(final KinsbaileBorderguard card) {
@@ -63,9 +62,9 @@ class AllCountersCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(sourceAbility.getSourceId());
-        if(sourcePermanent != null) {
+        if (sourcePermanent != null) {
             int total = 0;
-            for(Counter counter : sourcePermanent.getCounters(game).values()) {
+            for (Counter counter : sourcePermanent.getCounters(game).values()) {
                 total += counter.getCount();
             }
             return total;

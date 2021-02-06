@@ -1,20 +1,19 @@
-
-
 package mage.game.permanent.token;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.keyword.TrampleAbility;
+import mage.constants.CardType;
+import mage.constants.SubType;
+
+import java.util.Arrays;
 
 /**
- *
  * @author spjspj
  */
 public final class VoiceOfTheWoodsElementalToken extends TokenImpl {
 
     public VoiceOfTheWoodsElementalToken() {
         super("Elemental", "7/7 green Elemental creature token with trample");
-        this.setOriginalExpansionSetCode("EVG");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELEMENTAL);
 
@@ -23,6 +22,8 @@ public final class VoiceOfTheWoodsElementalToken extends TokenImpl {
         toughness = new MageInt(7);
 
         addAbility(TrampleAbility.getInstance());
+
+        availableImageSetCodes.addAll(Arrays.asList("EVG", "KHC"));
     }
 
     public VoiceOfTheWoodsElementalToken(final VoiceOfTheWoodsElementalToken token) {
