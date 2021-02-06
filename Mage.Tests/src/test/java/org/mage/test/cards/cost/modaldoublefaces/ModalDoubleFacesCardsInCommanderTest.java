@@ -53,8 +53,6 @@ public class ModalDoubleFacesCardsInCommanderTest extends CardTestCommanderDuelB
         checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "The Prismatic Bridge", 1);
         checkLibraryCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears", 5);
 
-        // possible bug: you can catch choose dialog for duplicated upkeep triggers
-
         // turn 3, first upkeep and bear move
         checkLibraryCount("after upkeep 1", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears", 5 - 1);
         checkPermanentCount("after upkeep 1", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears", 1);
@@ -65,7 +63,29 @@ public class ModalDoubleFacesCardsInCommanderTest extends CardTestCommanderDuelB
 
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
+        execute();  // possible bug: you can catch choose dialog for duplicated upkeep triggers
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_Triggers_MustWorkFromCommandZone() {
+        // Oloro, Ageless Ascetic
+        // At the beginning of your upkeep, if Oloro, Ageless Ascetic is in the command zone, you gain 2 life.
+        addCard(Zone.COMMAND, playerA, "Oloro, Ageless Ascetic");
+
+        // turn 1, +2 life on upkeep
+        checkLife("after upkeep 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 40 + 2);
+
+        // turn 3, +2 life on upkeep
+        checkLife("after upkeep 2", 3, PhaseStep.PRECOMBAT_MAIN, playerA, 40 + 2 + 2);
+
+        // turn 5, +2 life on upkeep
+        checkLife("after upkeep 3", 5, PhaseStep.PRECOMBAT_MAIN, playerA, 40 + 2 + 2 + 2);
+
+        setStrictChooseMode(true);
+        setStopAt(5, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
     }
+
 }

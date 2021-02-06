@@ -102,6 +102,12 @@ public abstract class AdventureCard extends CardImpl {
     }
 
     @Override
+    public Abilities<Ability> getInitAbilities() {
+        // must init only parent related abilities, spell card must be init separately
+        return super.getAbilities();
+    }
+
+    @Override
     public Abilities<Ability> getAbilities(Game game) {
         Abilities<Ability> allAbilities = new AbilitiesImpl<>();
         allAbilities.addAll(spellCard.getAbilities(game));

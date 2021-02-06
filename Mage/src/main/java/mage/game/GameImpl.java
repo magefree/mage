@@ -244,6 +244,9 @@ public abstract class GameImpl implements Game, Serializable {
                 card = ((PermanentCard) card).getCard();
             }
 
+            // init each card by parts... if you add new type here then getInitAbilities must be
+            // implemented too (it allows to split abilities between card and parts)
+
             // main card
             card.setOwnerId(ownerId);
             addCardToState(card);

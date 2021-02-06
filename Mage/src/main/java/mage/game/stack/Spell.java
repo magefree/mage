@@ -4,10 +4,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
-import mage.abilities.Abilities;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.SpellAbility;
+import mage.abilities.*;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.costs.mana.ManaCost;
@@ -568,6 +565,11 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public Abilities<Ability> getAbilities() {
         return card.getAbilities();
+    }
+
+    @Override
+    public Abilities<Ability> getInitAbilities() {
+        return new AbilitiesImpl<>();
     }
 
     @Override

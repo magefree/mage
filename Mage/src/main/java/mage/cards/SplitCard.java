@@ -127,7 +127,8 @@ public abstract class SplitCard extends CardImpl {
     public Abilities<Ability> getAbilities() {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
         for (Ability ability : super.getAbilities()) {
-            // ignore split abilities TODO: why it here, for GUI's cleanup in card texts? Maybe it can be removed
+            // ignore split abilities
+            // TODO: why it here, for GUI's cleanup in card texts? Maybe it can be removed, see mdf cards
             if (ability instanceof SpellAbility
                     && (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
                     || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH)) {
@@ -138,6 +139,12 @@ public abstract class SplitCard extends CardImpl {
         allAbilites.addAll(leftHalfCard.getAbilities());
         allAbilites.addAll(rightHalfCard.getAbilities());
         return allAbilites;
+    }
+
+    @Override
+    public Abilities<Ability> getInitAbilities() {
+        // must init only full split card aiblities like fuse, parts must be init separately
+        return super.getAbilities();
     }
 
     /**
@@ -155,7 +162,8 @@ public abstract class SplitCard extends CardImpl {
     public Abilities<Ability> getAbilities(Game game) {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
         for (Ability ability : super.getAbilities(game)) {
-            // ignore split abilities TODO: why it here, for GUI's cleanup in card texts? Maybe it can be removed
+            // ignore split abilities
+            // TODO: why it here, for GUI's cleanup in card texts? Maybe it can be removed, see mdf cards
             if (ability instanceof SpellAbility
                     && (((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT
                     || ((SpellAbility) ability).getSpellAbilityType() == SpellAbilityType.SPLIT_AFTERMATH)) {

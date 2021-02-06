@@ -174,7 +174,13 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
 
     @Override
     public Abilities<Ability> getAbilities() {
-        return getInnerAbilities(false);
+        return getInnerAbilities(true, true);
+    }
+
+    @Override
+    public Abilities<Ability> getInitAbilities() {
+        // must init only parent related abilities, spell card must be init separately
+        return getInnerAbilities(false, false);
     }
 
     public Abilities<Ability> getSharedAbilities(Game game) {
@@ -184,7 +190,7 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
 
     @Override
     public Abilities<Ability> getAbilities(Game game) {
-        return getInnerAbilities(game, false);
+        return getInnerAbilities(game, true, true);
     }
 
     private boolean isIgnoreDefaultAbility(Ability ability) {
@@ -200,7 +206,7 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
         return ability instanceof PlayLandAbility;
     }
 
-    private Abilities<Ability> getInnerAbilities(Game game, boolean showOnlyMainSide) {
+    private Abilities<Ability> getInnerAbilities(Game game, boolean showLeftSide, boolean showRightSide) {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
 
         for (Ability ability : super.getAbilities(game)) {
@@ -210,15 +216,17 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
             allAbilites.add(ability);
         }
 
-        allAbilites.addAll(leftHalfCard.getAbilities(game));
-        if (!showOnlyMainSide) {
+        if (showLeftSide) {
+            allAbilites.addAll(leftHalfCard.getAbilities(game));
+        }
+        if (showRightSide) {
             allAbilites.addAll(rightHalfCard.getAbilities(game));
         }
 
         return allAbilites;
     }
 
-    private Abilities<Ability> getInnerAbilities(boolean showOnlyMainSide) {
+    private Abilities<Ability> getInnerAbilities(boolean showLeftSide, boolean showRightSide) {
         Abilities<Ability> allAbilites = new AbilitiesImpl<>();
 
         for (Ability ability : super.getAbilities()) {
@@ -228,8 +236,11 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
             allAbilites.add(ability);
         }
 
-        allAbilites.addAll(leftHalfCard.getAbilities());
-        if (!showOnlyMainSide) {
+        if (showLeftSide) {
+            allAbilites.addAll(leftHalfCard.getAbilities());
+        }
+
+        if (showRightSide) {
             allAbilites.addAll(rightHalfCard.getAbilities());
         }
 
@@ -240,8 +251,11 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     public List<String> getRules() {
         // rules must show only main side (another side visible by toggle/transform button in GUI)
         // card hints from both sides
-        return CardUtil.getCardRulesWithAdditionalInfo(this.getId(), this.getName(),
-                this.getInnerAbilities(true), this.getInnerAbilities(false)
+        return CardUtil.getCardRulesWithAdditionalInfo(
+                this.getId(),
+                this.getName(),
+                this.getInnerAbilities(true, false),
+                this.getInnerAbilities(true, true)
         );
     }
 
@@ -249,8 +263,12 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     public List<String> getRules(Game game) {
         // rules must show only main side (another side visible by toggle/transform button in GUI)
         // card hints from both sides
-        return CardUtil.getCardRulesWithAdditionalInfo(game, this.getId(), this.getName(),
-                this.getInnerAbilities(game, true), this.getInnerAbilities(game, false)
+        return CardUtil.getCardRulesWithAdditionalInfo(
+                game,
+                this.getId(),
+                this.getName(),
+                this.getInnerAbilities(game, true, false),
+                this.getInnerAbilities(game, true, true)
         );
     }
 

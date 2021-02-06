@@ -19,10 +19,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.util.GameLog;
 import mage.util.SubTypes;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class Commander implements CommandObject {
 
@@ -33,6 +30,11 @@ public class Commander implements CommandObject {
 
     public Commander(Card card) {
         this.sourceObject = card;
+
+        // All abilities must be added to the game before usage. It adding by addCard and addCommandObject calls
+        // Example: if commander from mdf card then
+        // * commander object adds cast/play as commander abilities
+        // * sourceObject adds normal cast/play abilities and all other things
 
         // replace spell ability by commander cast spell (to cast from command zone)
         for (Ability ability : card.getAbilities()) {
@@ -78,14 +80,7 @@ public class Commander implements CommandObject {
                 continue;
             }
 
-            // skip triggers
-            // workaround to fix double triggers for commanders on battlefield (example: Esika, God of the Tree)
-            // TODO: is commanders on command zone can have triggers (is there a card with triggered ability in all zones)?
-            if (ability instanceof TriggeredAbility) {
-                continue;
-            }
-
-            // OK, can add it (example: activated, static, alternative cost, etc)
+            // all other abilities must be added to commander (example: triggers from command zone, alternative cost, etc)
             Ability newAbility = ability.copy();
             abilities.add(newAbility);
         }
@@ -184,6 +179,22 @@ public class Commander implements CommandObject {
     @Override
     public Abilities<Ability> getAbilities() {
         return abilities;
+    }
+
+    @Override
+    public Abilities<Ability> getInitAbilities() {
+        // see commander contruction comments for more info
+
+        // collect ignore list
+        Set<UUID> ignore = new HashSet<>();
+        sourceObject.getAbilities().forEach(ability -> ignore.add(ability.getId()));
+
+        // return only object specific abilities
+        Abilities<Ability> res = new AbilitiesImpl<>();
+        this.getAbilities().stream()
+                .filter(ability -> !ignore.contains(ability.getId()))
+                .forEach(res::add);
+        return res;
     }
 
     @Override

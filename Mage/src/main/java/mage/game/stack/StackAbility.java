@@ -44,12 +44,12 @@ import java.util.UUID;
  */
 public class StackAbility extends StackObjImpl implements Ability {
 
-    private static ArrayList<CardType> emptyCardType = new ArrayList<>();
-    private static List<String> emptyString = new ArrayList<>();
-    private static ObjectColor emptyColor = new ObjectColor();
-    private static ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
-    private static Costs<Cost> emptyCosts = new CostsImpl<>();
-    private static Abilities<Ability> emptyAbilites = new AbilitiesImpl<>();
+    private static final ArrayList<CardType> emptyCardType = new ArrayList<>();
+    private static final List<String> emptyString = new ArrayList<>();
+    private static final ObjectColor emptyColor = new ObjectColor();
+    private static final ManaCosts<ManaCost> emptyCost = new ManaCostsImpl<>();
+    private static final Costs<Cost> emptyCosts = new CostsImpl<>();
+    private static final Abilities<Ability> emptyAbilites = new AbilitiesImpl<>();
 
     private final Ability ability;
     private UUID controllerId;
@@ -184,6 +184,11 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public Abilities<Ability> getAbilities() {
         return new AbilitiesImpl<>(ability);
+    }
+
+    @Override
+    public Abilities<Ability> getInitAbilities() {
+        return new AbilitiesImpl<>();
     }
 
     @Override

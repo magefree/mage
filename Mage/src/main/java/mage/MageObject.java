@@ -55,12 +55,26 @@ public interface MageObject extends MageItem, Serializable {
     Set<SuperType> getSuperType();
 
     /**
-     * For cards: return basic abilities (without dynamic added) For permanents:
-     * return all abilities (dynamic ability inserts into permanent)
+     * For cards: return basic abilities (without dynamic added)
+     * For permanents: return all abilities (dynamic ability inserts into permanent)
      *
      * @return
      */
     Abilities<Ability> getAbilities();
+
+    /**
+     * Must return object specific abilities that will be added to the game
+     * It's a one time action on card/command object putting to the game
+     * <p>
+     * If your object contains inner cards/parts then each card will be added separately,
+     * see GameImpl.loadCards. So you must return only parent specific abilities here. All
+     * other abilities will be added from the parts.
+     *
+     * @return
+     */
+    default Abilities<Ability> getInitAbilities() {
+        return getAbilities();
+    }
 
     boolean hasAbility(Ability ability, Game game);
 

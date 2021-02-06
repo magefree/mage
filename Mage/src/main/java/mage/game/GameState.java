@@ -847,14 +847,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     public void addCard(Card card) {
         setZone(card.getId(), Zone.OUTSIDE);
 
-        // dirty hack to fix double triggers, see https://github.com/magefree/mage/issues/7187
-        // main mdf card don't have attached abilities, only parts contains it
-        if (card instanceof ModalDoubleFacesCard) {
-            return;
-        }
-
-        // add card's abilities to game
-        for (Ability ability : card.getAbilities()) {
+        // add card specific abilities to game
+        for (Ability ability : card.getInitAbilities()) {
             addAbility(ability, null, card);
         }
     }
@@ -912,10 +906,10 @@ public class GameState implements Serializable, Copyable<GameState> {
      * span
      *
      * @param ability
-     * @param sourceId
+     * @param sourceId   - if source object can be moved between zones then you must set it here (each game cycle clear all source related triggers)
      * @param attachedTo
      */
-    public void addAbility(Ability ability, UUID sourceId, Card attachedTo) {
+    public void addAbility(Ability ability, UUID sourceId, MageObject attachedTo) {
         if (ability instanceof StaticAbility) {
             for (UUID modeId : ability.getModes().getSelectedModes()) {
                 Mode mode = ability.getModes().get(modeId);
@@ -932,7 +926,13 @@ public class GameState implements Serializable, Copyable<GameState> {
         List<Watcher> watcherList = new ArrayList<>(ability.getWatchers()); // Workaround to prevent ConcurrentModificationException, not clear to me why this is happening now
         for (Watcher watcher : watcherList) {
             // TODO: Check that watcher for commanderAbility (where attachedTo = null) also work correctly
-            watcher.setControllerId(attachedTo == null ? ability.getControllerId() : attachedTo.getOwnerId());
+            UUID controllerId = ability.getControllerId();
+            if (attachedTo instanceof Card) {
+                controllerId = ((Card) attachedTo).getOwnerId();
+            } else if (attachedTo instanceof Controllable) {
+                controllerId = ((Controllable) attachedTo).getControllerId();
+            }
+            watcher.setControllerId(controllerId);
             watcher.setSourceId(attachedTo == null ? ability.getSourceId() : attachedTo.getId());
             watchers.add(watcher);
         }
@@ -944,7 +944,7 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addDesignation(Designation designation, Game game, UUID controllerId) {
         getDesignations().add(designation);
-        for (Ability ability : designation.getAbilities()) {
+        for (Ability ability : designation.getInitAbilities()) {
             ability.setControllerId(controllerId);
             addAbility(ability, designation.getId(), null);
         }
@@ -967,7 +967,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     public void addCommandObject(CommandObject commandObject) {
         getCommand().add(commandObject);
         setZone(commandObject.getId(), Zone.COMMAND);
-        for (Ability ability : commandObject.getAbilities()) {
+
+        // must add only command object specific abilities, all other abilities adds from card parts (on loadCards)
+        for (Ability ability : commandObject.getInitAbilities()) {
             addAbility(ability, commandObject);
         }
     }
