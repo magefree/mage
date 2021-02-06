@@ -78,7 +78,7 @@ class RecklessCrewEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        if (vehicleCount < 1) {
+        if (equipCount < 1) {
             return true;
         }
         for (UUID tokenId : token.getLastAddedTokenIds()) {
