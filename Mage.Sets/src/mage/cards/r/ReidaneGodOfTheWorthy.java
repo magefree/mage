@@ -169,17 +169,18 @@ class ValkmiraProtectorsShieldPreventionEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!game.getOpponents(game.getControllerId(event.getSourceId())).contains(source.getControllerId())) {
-            return false;
-        }
         switch (event.getType()) {
             case DAMAGE_PLAYER:
-                return source.isControlledBy(event.getTargetId())
+                boolean isOpponent = game.getOpponents(game.getControllerId(event.getSourceId())).contains(source.getControllerId());
+                return isOpponent
+                        && source.isControlledBy(event.getTargetId())
                         && super.applies(event, source, game);
             case DAMAGE_CREATURE:
             case DAMAGE_PLANESWALKER:
+                isOpponent = game.getOpponents(game.getControllerId(event.getSourceId())).contains(source.getControllerId());
                 Permanent permanent = game.getPermanent(event.getTargetId());
-                return permanent != null
+                return isOpponent
+                        && permanent != null
                         && permanent.isControlledBy(source.getControllerId())
                         && super.applies(event, source, game);
         }

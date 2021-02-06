@@ -135,6 +135,10 @@ public interface Game extends MageItem, Serializable {
      */
     default Set<UUID> getOpponents(UUID playerId) {
         Player player = getPlayer(playerId);
+        if (player == null) {
+            return new HashSet<>();
+        }
+
         return player.getInRange().stream()
                 .filter(opponentId -> !opponentId.equals(playerId))
                 .collect(Collectors.toSet());
