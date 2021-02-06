@@ -73,10 +73,21 @@ public class Commander implements CommandObject {
 
         // other abilities
         for (Ability ability : card.getAbilities()) {
-            if (!(ability instanceof SpellAbility) && !(ability instanceof PlayLandAbility)) {
-                Ability newAbility = ability.copy();
-                abilities.add(newAbility);
+            // skip already added above
+            if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
+                continue;
             }
+
+            // skip triggers
+            // workaround to fix double triggers for commanders on battlefield (example: Esika, God of the Tree)
+            // TODO: is commanders on command zone can have triggers (is there a card with triggered ability in all zones)?
+            if (ability instanceof TriggeredAbility) {
+                continue;
+            }
+
+            // OK, can add it (example: activated, static, alternative cost, etc)
+            Ability newAbility = ability.copy();
+            abilities.add(newAbility);
         }
     }
 

@@ -630,10 +630,6 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
-    private void addTrigger(TriggeredAbility ability, MageObject attachedTo) {
-        addTrigger(ability, null, attachedTo);
-    }
-
     private void addTrigger(TriggeredAbility ability, UUID sourceId, MageObject attachedTo) {
         if (sourceId == null) {
             triggers.add(ability, attachedTo);

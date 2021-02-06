@@ -925,7 +925,7 @@ public class TestPlayer implements Player {
                         // show library
                         if (params[0].equals(SHOW_COMMAND_LIBRARY) && params.length == 1) {
                             printStart(action.getActionName());
-                            printCards(computerPlayer.getLibrary().getCards(game));
+                            printCards(computerPlayer.getLibrary().getCards(game), false); // do not sort
                             printEnd();
                             actions.remove(action);
                             wasProccessed = true;
@@ -973,7 +973,7 @@ public class TestPlayer implements Player {
                             printStart(action.getActionName());
                             printCards(game.getExile().getAllCards(game).stream()
                                     .filter(card -> card.isOwnedBy(computerPlayer.getId()))
-                                    .collect(Collectors.toList()));
+                                    .collect(Collectors.toList()), true);
                             printEnd();
                             actions.remove(action);
                             wasProccessed = true;
@@ -1108,16 +1108,23 @@ public class TestPlayer implements Player {
     }
 
     private void printCards(Set<Card> cards) {
-        printCards(new ArrayList<>(cards));
+        printCards(new ArrayList<>(cards), true);
     }
 
-    private void printCards(List<Card> cards) {
+    private void printCards(List<Card> cards, boolean sorted) {
         System.out.println("Total cards: " + cards.size());
 
-        List<String> data = cards.stream()
-                .map(Card::getIdName)
-                .sorted()
-                .collect(Collectors.toList());
+        List<String> data;
+        if (sorted) {
+            data = cards.stream()
+                    .map(Card::getIdName)
+                    .sorted()
+                    .collect(Collectors.toList());
+        } else {
+            data = cards.stream()
+                    .map(Card::getIdName)
+                    .collect(Collectors.toList());
+        }
 
         for (String s : data) {
             System.out.println(s);
@@ -1365,7 +1372,7 @@ public class TestPlayer implements Player {
 
         if (foundCount != count) {
             printStart("Exile cards");
-            printCards(game.getExile().getAllCards(game));
+            printCards(game.getExile().getAllCards(game), true);
             printEnd();
             Assert.fail(action.getActionName() + " - exile zone must have " + count + " cards with name " + permanentName + ", but found " + foundCount);
         }

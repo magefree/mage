@@ -57,9 +57,7 @@ public final class EsikaGodOfTheTree extends ModalDoubleFacesCard {
         // Legendary Enchantment
         this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
 
-        // At the beginning of your upkeep, reveal cards from the top of your library until you reveal
-        // a creature or planeswalker card. Put that card onto the battlefield and the rest
-        // on the bottom of your library in a random order.
+        // At the beginning of your upkeep, reveal cards from the top of your library until you reveal a creature or planeswalker card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
         this.getRightHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD, new PrismaticBridgeEffect(), TargetController.YOU, false, false
         ));

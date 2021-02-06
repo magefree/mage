@@ -598,6 +598,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     /**
      * Add a card to specified zone of specified player.
+     * <p>
+     * Zone.LIBRARY - adding by put on top (e.g. last added card goes to top of the library)
      *
      * @param gameZone {@link mage.constants.Zone} to add cards to.
      * @param player   {@link Player} to add cards for. Use either playerA or
