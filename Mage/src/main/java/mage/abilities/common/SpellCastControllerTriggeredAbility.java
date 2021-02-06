@@ -68,7 +68,8 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
+            if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)
+                    && game.getState().getZone(this.getSourceId()) == zone) {
                 if (rememberSource) {
                     this.getEffects().setValue("spellCast", spell);
                     if (rememberSourceAsCard) {
