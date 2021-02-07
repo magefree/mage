@@ -125,14 +125,14 @@ class KardurDoomscourgeTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         switch (event.getType()) {
             case DECLARE_ATTACKERS_STEP:
-                game.getState().setValue(this.getId() + "Attackers", game.getCombat().getAttackers());
+                game.getState().setValue(this.getSourceId() + "Attackers", game.getCombat().getAttackers());
                 return false;
             case END_COMBAT_STEP_POST:
-                game.getState().setValue(this.getId() + "Attackers", null);
+                game.getState().setValue(this.getSourceId() + "Attackers", null);
                 return false;
             case ZONE_CHANGE:
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-                List<UUID> attackers = (List<UUID>) game.getState().getValue(this.getId() + "Attackers");
+                List<UUID> attackers = (List<UUID>) game.getState().getValue(this.getSourceId() + "Attackers");
                 return zEvent.isDiesEvent() && attackers != null && attackers.contains(zEvent.getTargetId());
             default:
                 return false;
