@@ -34,6 +34,7 @@ public final class IceFangCoatl extends CardImpl {
 
     private static final Condition condition
             = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 2);
+    private static final ConditionHint hint = new ConditionHint(condition, "You control at least three other snow permanents");
 
     public IceFangCoatl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}");

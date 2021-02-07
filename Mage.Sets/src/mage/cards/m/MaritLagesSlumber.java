@@ -35,6 +35,7 @@ public final class MaritLagesSlumber extends CardImpl {
 
     private static final Condition condition
             = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 9);
+    private static final ConditionHint hint = new ConditionHint(condition, "You control ten or more snow permanents");
 
     public MaritLagesSlumber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");

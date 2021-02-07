@@ -29,6 +29,7 @@ public final class DeadOfWinter extends CardImpl {
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter2, -1);
+    private static final Hint hint = new ValueHint("Snow permanents you control", xValue);
 
     public DeadOfWinter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");

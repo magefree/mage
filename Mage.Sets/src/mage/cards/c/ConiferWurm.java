@@ -31,6 +31,7 @@ public final class ConiferWurm extends CardImpl {
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+    private static final Hint hint = new ValueHint("Snow permanents you control", xValue);
 
     public ConiferWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
