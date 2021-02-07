@@ -95,8 +95,6 @@ class KardurDoomscourgeEffect extends RestrictionEffect {
 
 class KardurDoomscourgeTriggeredAbility extends TriggeredAbilityImpl {
 
-    private List<UUID> attackers = null;
-
     public KardurDoomscourgeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1), false);
         this.addEffect(new GainLifeEffect(1).concatBy("and"));
@@ -104,7 +102,6 @@ class KardurDoomscourgeTriggeredAbility extends TriggeredAbilityImpl {
 
     private KardurDoomscourgeTriggeredAbility(final KardurDoomscourgeTriggeredAbility ability) {
         super(ability);
-        this.attackers = ability.attackers;
     }
 
     @Override
@@ -128,13 +125,14 @@ class KardurDoomscourgeTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         switch (event.getType()) {
             case DECLARE_ATTACKERS_STEP:
-                attackers = game.getCombat().getAttackers();
+                game.getState().setValue(this.getId() + "Attackers", game.getCombat().getAttackers());
                 return false;
             case END_COMBAT_STEP_POST:
-                attackers = null;
+                game.getState().setValue(this.getId() + "Attackers", null);
                 return false;
             case ZONE_CHANGE:
                 ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+                List<UUID> attackers = (List<UUID>) game.getState().getValue(this.getId() + "Attackers");
                 return zEvent.isDiesEvent() && attackers != null && attackers.contains(zEvent.getTargetId());
             default:
                 return false;
