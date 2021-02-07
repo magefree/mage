@@ -9,6 +9,8 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,6 +37,7 @@ public final class MaritLagesSlumber extends CardImpl {
 
     private static final Condition condition
             = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 9);
+    private static final ConditionHint hint = new ConditionHint(condition, "You control ten or more snow permanents");
 
     public MaritLagesSlumber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
@@ -55,7 +58,7 @@ public final class MaritLagesSlumber extends CardImpl {
                 ), TargetController.YOU, false), condition, "At the beginning of your upkeep, " +
                 "if you control ten or more snow permanents, sacrifice {this}. If you do, create Marit Lage, " +
                 "a legendary 20/20 black Avatar creature token with flying and indestructible."
-        ));
+        ).addHint(hint));
     }
 
     private MaritLagesSlumber(final MaritLagesSlumber card) {

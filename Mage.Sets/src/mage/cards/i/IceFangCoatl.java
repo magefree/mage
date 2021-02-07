@@ -8,6 +8,8 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.hint.ConditionHint;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -34,6 +36,7 @@ public final class IceFangCoatl extends CardImpl {
 
     private static final Condition condition
             = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 2);
+    private static final ConditionHint hint = new ConditionHint(condition, "You control at least three other snow permanents");
 
     public IceFangCoatl(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{U}");
@@ -57,7 +60,7 @@ public final class IceFangCoatl extends CardImpl {
                 new GainAbilitySourceEffect(
                         DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield
                 ), condition, "{this} has deathtouch as long as you control at least three other snow permanents."
-        )));
+        )).addHint(hint));
     }
 
     private IceFangCoatl(final IceFangCoatl card) {

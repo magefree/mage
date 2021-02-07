@@ -6,6 +6,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,6 +33,7 @@ public final class ConiferWurm extends CardImpl {
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+    private static final Hint hint = new ValueHint("Snow permanents you control", xValue);
 
     public ConiferWurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
@@ -46,7 +49,7 @@ public final class ConiferWurm extends CardImpl {
         // {3}{G}: Conifer Wurm gets +X/+X until end of turn, where X is the number of snow permanents you control.
         this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn), new ManaCostsImpl("{3}{G}")
-        ));
+        ).addHint(hint));
     }
 
     private ConiferWurm(final ConiferWurm card) {

@@ -3,6 +3,8 @@ package mage.cards.d;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,6 +31,7 @@ public final class DeadOfWinter extends CardImpl {
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter2, -1);
+    private static final Hint hint = new ValueHint("Snow permanents you control", xValue);
 
     public DeadOfWinter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
@@ -39,6 +42,7 @@ public final class DeadOfWinter extends CardImpl {
                 "All nonsnow creatures get -X/-X until end of turn," +
                         " where X is the number of snow permanents you control.", true
         ));
+        this.getSpellAbility().addHint(hint);
     }
 
     private DeadOfWinter(final DeadOfWinter card) {
