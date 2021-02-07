@@ -10,6 +10,7 @@ import mage.constants.Outcome;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
@@ -76,9 +77,9 @@ class BlessingOfFrostEffect extends OneShotEffect {
         }
         int snow = source.getManaCostsToPay().getUsedManaToPay().getSnow();
         if (snow > 0) {
-            TargetAmount target = new TargetCreaturePermanentAmount(snow);
+            TargetAmount target = new TargetCreaturePermanentAmount(snow, StaticFilters.FILTER_CONTROLLED_CREATURE);
             target.setNotTarget(true);
-            player.choose(outcome, target, source.getSourceId(), game);
+            target.chooseTarget(outcome, player.getId(), source, game);
             for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
