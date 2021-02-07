@@ -210,6 +210,7 @@ public class VerifyCardDataTest {
         // file name must be related to sample-decks folder
         // for linux/windows build system use paths constructor
         skipListCreate(SKIP_LIST_SAMPLE_DECKS);
+        skipListAddName(SKIP_LIST_SAMPLE_DECKS, Paths.get("Jumpstart", "jumpstart_custom.txt").toString()); // it's not a deck file
         skipListAddName(SKIP_LIST_SAMPLE_DECKS, Paths.get("Commander", "Commander 2019", "Merciless Rage.dck").toString()); // TODO: delete after Aeon Engine implemented
     }
 
