@@ -60,7 +60,7 @@ public final class IceFangCoatl extends CardImpl {
                 new GainAbilitySourceEffect(
                         DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield
                 ), condition, "{this} has deathtouch as long as you control at least three other snow permanents."
-        )));
+        ))).addHint(hint);
     }
 
     private IceFangCoatl(final IceFangCoatl card) {
