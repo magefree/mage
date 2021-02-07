@@ -799,14 +799,23 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     protected void play(UUID nextPlayerId) {
+        boolean forcedToFinished = false;
         if (!isPaused() && !checkIfGameIsOver()) {
             playerList = state.getPlayerList(nextPlayerId);
             Player playerByOrder = getPlayer(playerList.get());
-            state.setPlayerByOrderId(playerByOrder.getId());
+            state.setPlayerByOrderId(playerByOrder == null ? null : playerByOrder.getId());
+
+            // PLAY game
             while (!isPaused() && !checkIfGameIsOver()) {
                 if (!playExtraTurns()) {
                     break;
                 }
+                if (playerByOrder == null) {
+                    logger.error("Can't find next player by order, but game stil run. Finish it.");
+                    forcedToFinished = true;
+                    break;
+                }
+
                 GameEvent event = new GameEvent(GameEvent.EventType.PLAY_TURN, null, null, playerByOrder.getId());
                 if (!replaceEvent(event)) {
                     if (!playTurn(playerByOrder)) {
@@ -822,9 +831,11 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         }
-        if (checkIfGameIsOver() && !isSimulation()) {
+
+        // END game
+        if (checkIfGameIsOver() && !isSimulation() || forcedToFinished) {
             winnerId = findWinnersAndLosers();
-            StringBuilder sb = new StringBuilder("GAME END  gameId: ").append(this.getId()).append(' ');
+            StringBuilder sb = new StringBuilder("GAME END gameId: ").append(this.getId()).append(' ');
             int count = 0;
             for (Player player : this.getState().getPlayers().values()) {
                 if (count > 0) {
