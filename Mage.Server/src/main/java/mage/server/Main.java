@@ -55,7 +55,7 @@ public final class Main {
     private static final String adminPasswordArg = "-adminPassword=";
     /**
      * The property that holds the path to the configuration file. Defaults to "config/config.xml".
-     *
+     * <p>
      * To set up a different one, start the application with the java option "-Dxmage.config.path=&lt;path&gt;"
      */
     private static final String configPathProp = "xmage.config.path";
@@ -161,33 +161,48 @@ public final class Main {
         UserStatsRepository.instance.updateUserStats();
         logger.info("Done.");
         deleteSavedGames();
+
+        int gameTypes = 0;
         for (GamePlugin plugin : config.getGameTypes()) {
+            gameTypes++;
             GameFactory.instance.addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
         }
+
+        int tourneyTypes = 0;
         for (GamePlugin plugin : config.getTournamentTypes()) {
+            tourneyTypes++;
             TournamentFactory.instance.addTournamentType(plugin.getName(), loadTournamentType(plugin), loadPlugin(plugin));
         }
+
+        int playerTypes = 0;
         for (Plugin plugin : config.getPlayerTypes()) {
+            playerTypes++;
             PlayerFactory.instance.addPlayerType(plugin.getName(), loadPlugin(plugin));
         }
+
+        int cubeTypes = 0;
         for (Plugin plugin : config.getDraftCubes()) {
+            cubeTypes++;
             CubeFactory.instance.addDraftCube(plugin.getName(), loadPlugin(plugin));
         }
+
+        int deckTypes = 0;
         for (Plugin plugin : config.getDeckTypes()) {
+            deckTypes++;
             DeckValidatorFactory.instance.addDeckType(plugin.getName(), loadPlugin(plugin));
         }
 
         for (ExtensionPackage pkg : extensions) {
-            Map<String, Class> draftCubes = pkg.getDraftCubes();
-            draftCubes.forEach((name, draftCube) -> {
-                logger.info("Loading extension: [" + name + "] " + draftCube.toString());
-                CubeFactory.instance.addDraftCube(name, draftCube);
-            });
-            Map<String, Class> deckTypes = pkg.getDeckTypes();
-            deckTypes.forEach((name, deckType) -> {
-                logger.info("Loading extension: [" + name + "] " + deckType);
-                DeckValidatorFactory.instance.addDeckType(name, deckType);
-            });
+            for (Map.Entry<String, Class> entry : pkg.getDraftCubes().entrySet()) {
+                logger.info("Loading extension: [" + entry.getKey() + "] " + entry.getValue().toString());
+                cubeTypes++;
+                CubeFactory.instance.addDraftCube(entry.getKey(), entry.getValue());
+            }
+            for (Map.Entry<String, Class> entry : pkg.getDeckTypes().entrySet()) {
+                logger.info("Loading extension: [" + entry.getKey() + "] " + entry.getValue().toString());
+                deckTypes++;
+                DeckValidatorFactory.instance.addDeckType(entry.getKey(), entry.getValue());
+            }
         }
 
         logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());
@@ -214,6 +229,15 @@ public final class Main {
         logger.info("Config - mail passw. len.: " + config.getMailPassword().length());
         logger.info("Config - mail from addre.: " + config.getMailFromAddress());
         logger.info("Config - google account  : " + config.getGoogleAccount());
+
+        logger.info("Loaded game types: " + gameTypes
+                + ", tourneys: " + tourneyTypes
+                + ", players: " + playerTypes
+                + ", cubes: " + cubeTypes
+                + ", decks: " + deckTypes);
+        if (gameTypes == 0) {
+            logger.error("ERROR, can't load any game types. Check your config.xml in server's config folder (example: old jar versions after update).");
+        }
 
         Connection connection = new Connection("&maxPoolSize=" + config.getMaxPoolSize());
         connection.setHost(config.getServerAddress());
