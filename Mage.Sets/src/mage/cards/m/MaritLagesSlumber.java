@@ -58,7 +58,7 @@ public final class MaritLagesSlumber extends CardImpl {
                 ), TargetController.YOU, false), condition, "At the beginning of your upkeep, " +
                 "if you control ten or more snow permanents, sacrifice {this}. If you do, create Marit Lage, " +
                 "a legendary 20/20 black Avatar creature token with flying and indestructible."
-        )).addHint(hint);
+        ).addHint(hint));
     }
 
     private MaritLagesSlumber(final MaritLagesSlumber card) {

@@ -42,7 +42,7 @@ public final class DeadOfWinter extends CardImpl {
                 "All nonsnow creatures get -X/-X until end of turn," +
                         " where X is the number of snow permanents you control.", true
         ));
-        this.getSpellAbility().addHint(hint)
+        this.getSpellAbility().addHint(hint);
     }
 
     private DeadOfWinter(final DeadOfWinter card) {

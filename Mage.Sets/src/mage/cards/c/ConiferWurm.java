@@ -49,7 +49,7 @@ public final class ConiferWurm extends CardImpl {
         // {3}{G}: Conifer Wurm gets +X/+X until end of turn, where X is the number of snow permanents you control.
         this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn), new ManaCostsImpl("{3}{G}")
-        )).addHint(hint);
+        ).addHint(hint));
     }
 
     private ConiferWurm(final ConiferWurm card) {
