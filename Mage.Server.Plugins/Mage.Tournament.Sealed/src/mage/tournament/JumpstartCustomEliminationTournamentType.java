@@ -1,5 +1,3 @@
-
-
 package mage.tournament;
 
 import mage.game.tournament.TournamentType;
