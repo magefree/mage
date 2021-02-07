@@ -1,14 +1,20 @@
 package mage.abilities.common;
 
+import mage.MageObject;
+import mage.abilities.MageSingleton;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.command.Emblem;
+import mage.game.command.Plane;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author North
@@ -68,8 +74,7 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)
-                    && game.getState().getZone(this.getSourceId()) == zone) {
+            if (spell != null && filter.match(spell, getSourceId(), getControllerId(), game)) {
                 if (rememberSource) {
                     this.getEffects().setValue("spellCast", spell);
                     if (rememberSourceAsCard) {
@@ -83,6 +88,38 @@ public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
+    }
+
+    // https://github.com/magefree/mage/issues/7095
+    // Code copied from AbilityImpl with check for getShortLivingLKI removed
+    // Ability must not trigger if source was sacrificed as a cost of casting the spell
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        if (!this.hasSourceObjectAbility(game, source, event)) {
+            return false;
+        }
+        if (zone == Zone.COMMAND) {
+            if (this.getSourceId() == null) { // commander effects
+                return true;
+            }
+            MageObject object = game.getObject(this.getSourceId());
+            // emblem/planes are always actual
+            if (object instanceof Emblem || object instanceof Plane) {
+                return true;
+            }
+        }
+
+        UUID parameterSourceId;
+        // for singleton abilities like Flying we can't rely on abilities' source because it's only once in continuous effects
+        // so will use the sourceId of the object itself that came as a parameter if it is not null
+        if (this instanceof MageSingleton && source != null) {
+            parameterSourceId = source.getId();
+        } else {
+            parameterSourceId = getSourceId();
+        }
+        // check against current state
+        Zone test = game.getState().getZone(parameterSourceId);
+        return test != null && zone.match(test);
     }
 
     @Override
