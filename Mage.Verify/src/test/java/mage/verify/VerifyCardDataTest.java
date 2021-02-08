@@ -3,6 +3,7 @@ package mage.verify;
 import com.google.common.base.CharMatcher;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MultikickerAbility;
@@ -1273,6 +1274,11 @@ public class VerifyCardDataTest {
         // special check: kicker ability must be in rules
         if (card.getAbilities().containsClass(MultikickerAbility.class) && card.getRules().stream().noneMatch(rule -> rule.contains("Multikicker"))) {
             fail(card, "abilities", "card have Multikicker ability, but missing it in rules text");
+        }
+
+        // special check: Sagas need to have saga ability added
+        if (card.hasSubtype(SubType.SAGA, null) && !card.getAbilities().containsClass(SagaAbility.class)) {
+            fail(card, "abilities", "card is a Saga but is missing this.addAbility(sagaAbility)");
         }
 
         // special check: missing or wrong ability/effect hints

@@ -54,6 +54,8 @@ public final class TheBearsOfLittjara extends CardImpl {
                 this, SagaChapter.CHAPTER_III, SagaChapter.CHAPTER_III,
                 new TheBearsOfLittjaraEffect(), new TargetCreatureOrPlaneswalker(0, 1)
         );
+
+        this.addAbility(sagaAbility);
     }
 
     private TheBearsOfLittjara(final TheBearsOfLittjara card) {
