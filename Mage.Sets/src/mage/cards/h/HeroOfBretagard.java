@@ -8,14 +8,11 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasAnyCountersCondition;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.AddCardSubTypeSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -23,9 +20,9 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 
 import java.util.UUID;
+import mage.game.events.ZoneChangeGroupEvent;
 
 /**
  * @author jeffwadsworth
@@ -52,7 +49,7 @@ public final class HeroOfBretagard extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you exile one or more cards from your hand and/or permanents from the battlefield, put that many +1/+1 counters on Hero of Bretagard.
-        this.addAbility(new HeroOfBretagardTriggeredAbility(new HeroOfBretagardEffect()));
+        this.addAbility(new HeroOfBretagardTriggeredAbility());
 
         // As long as Hero of Bretagard has five or more counters on it, it has flying and is an Angel in addition to its other types.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
@@ -87,8 +84,8 @@ public final class HeroOfBretagard extends CardImpl {
 
 class HeroOfBretagardTriggeredAbility extends TriggeredAbilityImpl {
 
-    HeroOfBretagardTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
+    HeroOfBretagardTriggeredAbility() {
+        super(Zone.BATTLEFIELD, null, false);
     }
 
     HeroOfBretagardTriggeredAbility(final HeroOfBretagardTriggeredAbility ability) {
@@ -102,39 +99,42 @@ class HeroOfBretagardTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
         if (zEvent != null
                 && Zone.HAND == zEvent.getFromZone()
                 && Zone.EXILED == zEvent.getToZone()
-                && zEvent.getTargetId() != null) {
-            Card card = game.getCard(zEvent.getTargetId());
-            if (card != null) {
-                UUID cardOwnerId = card.getOwnerId();
-                if (cardOwnerId != null
-                        && card.isOwnedBy(getControllerId())) {
-                    this.getEffects().get(0).setValue("number", 1);
-                    return true;
-                }
+                && zEvent.getCards() != null) {
+            int cardCount = 0;
+            cardCount = zEvent.getCards().stream().filter((card)
+                    -> (card != null && card.isOwnedBy(getControllerId()))).map((_item)
+                    -> 1).reduce(cardCount, Integer::sum);
+            if (cardCount == 0) {
+                return false;
             }
+            this.getEffects().clear();
+            this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance(cardCount)));
+            return true;
         }
+        // the permanent exiled does not have to be controlled/owned by anyone in particular
         if (zEvent != null
                 && Zone.BATTLEFIELD == zEvent.getFromZone()
                 && Zone.EXILED == zEvent.getToZone()
-                && zEvent.getTargetId() != null) {
-            Card card = game.getCard(zEvent.getTargetId());
-            if (card != null) {
-                UUID cardOwnerId = card.getOwnerId();
-                if (cardOwnerId != null
-                        && card.isOwnedBy(getControllerId())) {
-                    this.getEffects().get(0).setValue("number", 1);
-                    return true;
-                }
+                && zEvent.getCards() != null) {
+            int cardCount = 0;
+            cardCount = zEvent.getCards().stream().filter((card)
+                    -> (card != null)).map((_item)
+                    -> 1).reduce(cardCount, Integer::sum);
+            if (cardCount == 0) {
+                return false;
             }
+            this.getEffects().clear();
+            this.getEffects().add(new AddCountersSourceEffect(CounterType.P1P1.createInstance(cardCount)));
+            return true;
         }
         return false;
     }
@@ -143,26 +143,5 @@ class HeroOfBretagardTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever you exile one or more cards from your hand and/or permanents from the battlefield, put that many +1/+1 counters on {this}.";
 
-    }
-}
-
-class HeroOfBretagardEffect extends OneShotEffect {
-
-    public HeroOfBretagardEffect() {
-        super(Outcome.Benefit);
-    }
-
-    public HeroOfBretagardEffect(final HeroOfBretagardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HeroOfBretagardEffect copy() {
-        return new HeroOfBretagardEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return new AddCountersSourceEffect(CounterType.P1P1.createInstance((Integer) this.getValue("number"))).apply(game, source);
     }
 }
