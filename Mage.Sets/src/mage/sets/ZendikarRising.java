@@ -1,8 +1,12 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -21,11 +25,10 @@ public final class ZendikarRising extends ExpansionSet {
         this.hasBasicLands = true;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
-        this.numBoosterCommon = 9;
+        this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        this.numBoosterDoubleFaced = 1;
         this.maxCardNumberInBooster = 280;
 
         cards.add(new SetCardInfo("Acquisitions Expert", 89, Rarity.UNCOMMON, mage.cards.a.AcquisitionsExpert.class));
@@ -419,5 +422,11 @@ public final class ZendikarRising extends ExpansionSet {
         cards.add(new SetCardInfo("Zareth San, the Trickster", 373, Rarity.RARE, mage.cards.z.ZarethSanTheTrickster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zof Consumption", 132, Rarity.UNCOMMON, mage.cards.z.ZofConsumption.class));
         cards.add(new SetCardInfo("Zulaport Duelist", 88, Rarity.COMMON, mage.cards.z.ZulaportDuelist.class));
+    }
+
+    @Override
+    protected boolean boosterIsValid(List<Card> booster) {
+        return super.boosterIsValid(booster)
+                && booster.stream().filter(ModalDoubleFacesCard.class::isInstance).count() == 1;
     }
 }

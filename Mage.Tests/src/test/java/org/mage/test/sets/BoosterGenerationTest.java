@@ -298,6 +298,39 @@ public class BoosterGenerationTest extends MageTestBase {
     }
 
     @Test
+    public void testZendikarRising_MDFC() {
+        for (int i = 0; i < 20; i++) {
+            List<Card> booster = ZendikarRising.getInstance().createBooster();
+
+            assertEquals("Booster does not have 15 cards", 15, booster.size());
+            assertTrue(
+                    "Booster contains cards from another set",
+                    booster.stream().map(Card::getExpansionSetCode).allMatch("ZNR"::equals)
+            );
+            assertEquals(
+                    "Booster must contain exactly 1 basic land", 1,
+                    booster.stream().filter(MageObject::isBasic).count()
+            );
+            assertEquals(
+                    "Booster must contain exactly 1 rare or mythic", 1,
+                    booster.stream().map(Card::getRarity).filter(rarity -> rarity == Rarity.RARE || rarity == Rarity.MYTHIC).count()
+            );
+            assertEquals(
+                    "Booster must contain exactly 3 uncommons", 3,
+                    booster.stream().map(Card::getRarity).filter(Rarity.UNCOMMON::equals).count()
+            );
+            assertEquals(
+                    "Booster must contain exactly 10 uncommons", 10,
+                    booster.stream().map(Card::getRarity).filter(Rarity.COMMON::equals).count()
+            );
+            assertEquals(
+                    "Booster must contain exactly 1 MDFC", 1,
+                    booster.stream().filter(ModalDoubleFacesCard.class::isInstance).count()
+            );
+        }
+    }
+
+    @Test
     public void testKaldheim_SnowLandAndMDFC() {
         boolean foundVale = false;
         boolean foundMDFC = false;
