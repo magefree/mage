@@ -28,7 +28,7 @@ public final class ZendikarRising extends ExpansionSet {
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
-        this.ratioBoosterMythic = 8;
+        this.ratioBoosterMythic = 7.4;
         this.maxCardNumberInBooster = 280;
 
         cards.add(new SetCardInfo("Acquisitions Expert", 89, Rarity.UNCOMMON, mage.cards.a.AcquisitionsExpert.class));

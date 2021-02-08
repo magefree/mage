@@ -108,7 +108,7 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterUncommon;
     protected int numBoosterRare;
     protected int numBoosterDoubleFaced; // -1 = include normally 0 = exclude  1-n = include explicit
-    protected int ratioBoosterMythic;
+    protected double ratioBoosterMythic;
     protected boolean hasPartnerMechanic = false;
 
     protected boolean needsLegendCreature = false;
@@ -333,6 +333,10 @@ public abstract class ExpansionSet implements Serializable {
         return true;
     }
 
+    private boolean checkMythic() {
+        return ratioBoosterMythic > 0 && ratioBoosterMythic * RandomUtil.nextDouble() <= 1;
+    }
+
     public List<Card> createPartnerBooster() {
 
         List<Card> booster = new ArrayList<>();
@@ -369,7 +373,7 @@ public abstract class ExpansionSet implements Serializable {
         List<CardInfo> rares = getCardsByRarity(Rarity.RARE);
         List<CardInfo> mythics = getCardsByRarity(Rarity.MYTHIC);
         for (int i = 0; i < numBoosterRare; i++) {
-            if (ratioBoosterMythic > 0 && RandomUtil.nextInt(ratioBoosterMythic) == 0) {
+            if (checkMythic()) {
                 while (true) {
                     addToBooster(booster, mythics);
                     int check = addMissingPartner(booster, partnerAllowed, -1, 1);
@@ -448,7 +452,7 @@ public abstract class ExpansionSet implements Serializable {
         List<CardInfo> rares = getCardsByRarity(Rarity.RARE);
         List<CardInfo> mythics = getCardsByRarity(Rarity.MYTHIC);
         for (int i = 0; i < numBoosterRare; i++) {
-            if (ratioBoosterMythic > 0 && RandomUtil.nextInt(ratioBoosterMythic) == 0) {
+            if (checkMythic()) {
                 addToBooster(booster, mythics);
             } else {
                 addToBooster(booster, rares);

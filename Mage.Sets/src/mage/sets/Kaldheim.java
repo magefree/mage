@@ -34,7 +34,7 @@ public final class Kaldheim extends ExpansionSet {
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
-        this.ratioBoosterMythic = 8;
+        this.ratioBoosterMythic = 7.4;
         this.maxCardNumberInBooster = 285;
         this.ratioBoosterSpecialLand = 12;
         this.ratioBoosterSpecialLandNumerator = 5;
