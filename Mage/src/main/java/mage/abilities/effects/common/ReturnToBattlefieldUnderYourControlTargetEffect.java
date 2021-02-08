@@ -10,6 +10,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -76,8 +77,9 @@ public class ReturnToBattlefieldUnderYourControlTargetEffect extends OneShotEffe
             Cards cardsToBattlefield = new CardsImpl();
             if (returnFromExileZoneOnly) {
                 for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
-                    if (game.getExile().containsId(targetId, game)) {
-                        cardsToBattlefield.add(targetId);
+                    UUID mainCardId = CardUtil.getMainCardId(game, targetId);
+                    if (game.getExile().containsId(mainCardId, game)) {
+                        cardsToBattlefield.add(mainCardId);
                     } else {
                         Card card = game.getCard(targetId);
                         if (card instanceof MeldCard) {
