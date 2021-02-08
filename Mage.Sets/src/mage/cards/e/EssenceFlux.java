@@ -16,6 +16,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -65,8 +66,9 @@ class EssenceFluxEffect extends OneShotEffect {
         if (controller != null) {
             Cards cardsToBattlefield = new CardsImpl();
             for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
-                if (game.getExile().containsId(targetId, game)) {
-                    cardsToBattlefield.add(targetId);
+                UUID mainCardId = CardUtil.getMainCardId(game, targetId);
+                if (game.getExile().containsId(mainCardId, game)) {
+                    cardsToBattlefield.add(mainCardId);
                 } else {
                     Card card = game.getCard(targetId);
                     if (card instanceof MeldCard) {
