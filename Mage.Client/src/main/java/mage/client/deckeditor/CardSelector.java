@@ -687,7 +687,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbColor.add(chkPennyDreadful);
 
         btnBooster.setText("Open Booster");
-        btnBooster.setToolTipText("(CURRENTLY NOT WORKING) Generates a booster of the selected set and adds the cards to the card selector.");
+        btnBooster.setToolTipText("Generates a booster of the selected set and adds the cards to the card selector.");
         btnBooster.setFocusable(false);
         btnBooster.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnBooster.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

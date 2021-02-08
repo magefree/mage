@@ -239,7 +239,7 @@
         <Component class="javax.swing.JButton" name="btnBooster">
           <Properties>
             <Property name="text" type="java.lang.String" value="Open Booster"/>
-            <Property name="toolTipText" type="java.lang.String" value="(CURRENTLY NOT WORKING) Generates a booster of the selected set and adds the cards to the card selector."/>
+            <Property name="toolTipText" type="java.lang.String" value="Generates a booster of the selected set and adds the cards to the card selector."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
