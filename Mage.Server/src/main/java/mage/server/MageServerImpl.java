@@ -1,5 +1,6 @@
 package mage.server;
 
+import com.j256.ormlite.stmt.query.In;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.DeckValidatorFactory;
@@ -702,6 +703,18 @@ public class MageServerImpl implements MageServer {
             Optional<User> user = managerFactory.sessionManager().getUser(sessionId);
             if (user.isPresent()) {
                 user.get().sendPlayerInteger(gameId, data);
+            } else {
+                logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
+            }
+        });
+    }
+
+    @Override
+    public void sendPlayerListInteger(final UUID gameId, final String sessionId, final List<Integer> data) throws MageException {
+        execute("sendPlayerListInteger", sessionId, () -> {
+            Optional<User> user = managerFactory.sessionManager().getUser(sessionId);
+            if (user.isPresent()) {
+                user.get().sendPlayerListInteger(gameId, data);
             } else {
                 logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
             }

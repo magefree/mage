@@ -3,6 +3,7 @@
 package mage.view;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -42,6 +43,10 @@ public class GameClientMessage implements Serializable {
     private Map<String, Serializable> options;
     @Expose
     private Choice choice;
+    @Expose
+    private int amount;
+    @Expose
+    private List<String> messages;
 
     public GameClientMessage(GameView gameView) {
         this.gameView = gameView;
@@ -91,6 +96,11 @@ public class GameClientMessage implements Serializable {
     public GameClientMessage(CardsView cardView, String name) {
         this.cardsView = cardView;
         this.message = name;
+    }
+
+    public GameClientMessage(int amount, List<String> messages) {
+        this.amount = amount;
+        this.messages = messages;
     }
 
     public GameClientMessage(Choice choice) {
@@ -143,6 +153,14 @@ public class GameClientMessage implements Serializable {
 
     public Choice getChoice() {
         return choice;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public List<String> getMessages() {
+        return messages;
     }
 
     public String toJson() {

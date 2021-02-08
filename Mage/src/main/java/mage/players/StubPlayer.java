@@ -206,6 +206,17 @@ public class StubPlayer extends PlayerImpl implements Player {
     }
 
     @Override
+    public List<Integer> getMultiAmount(int amount, List<String> messages, Game game) {
+        int size = messages.size();
+        List<Integer> defaultList = new ArrayList<>(size);
+        defaultList.add(amount);
+        for (int i = 1; i < size; i++) {
+            defaultList.add(0);
+        }
+        return defaultList;
+    }
+
+    @Override
     public void sideboard(Match match, Deck deck) {
 
     }

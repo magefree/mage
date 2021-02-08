@@ -27,6 +27,7 @@ import mage.client.util.gui.MageDialogState;
 import mage.constants.*;
 import mage.game.events.PlayerQueryEvent;
 import mage.players.PlayableObjectsList;
+import mage.remote.Session;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
@@ -86,6 +87,7 @@ public final class GamePanel extends javax.swing.JPanel {
     GamePane gamePane;
     private ReplayTask replayTask;
     private final PickNumberDialog pickNumber;
+    private final PickMultiNumberDialog pickMultiNumber;
     private JLayeredPane jLayeredPane;
     private String chosenHandKey = "You";
     private boolean smallMode = false;
@@ -133,6 +135,9 @@ public final class GamePanel extends javax.swing.JPanel {
 
         pickNumber = new PickNumberDialog();
         MageFrame.getDesktop().add(pickNumber, JLayeredPane.MODAL_LAYER);
+
+        pickMultiNumber = new PickMultiNumberDialog();
+        MageFrame.getDesktop().add(pickMultiNumber, JLayeredPane.MODAL_LAYER);
 
         this.feedbackPanel.setConnectedChatPanel(this.userChatPanel);
 
@@ -237,6 +242,9 @@ public final class GamePanel extends javax.swing.JPanel {
 
         if (pickNumber != null) {
             pickNumber.removeDialog();
+        }
+        if (pickMultiNumber != null) {
+            pickMultiNumber.removeDialog();
         }
         for (CardInfoWindowDialog exileDialog : exiles.values()) {
             exileDialog.cleanUp();
@@ -1614,6 +1622,15 @@ public final class GamePanel extends javax.swing.JPanel {
             SessionHandler.sendPlayerBoolean(gameId, false);
         } else {
             SessionHandler.sendPlayerInteger(gameId, pickNumber.getAmount());
+        }
+    }
+
+    public void getMultiAmount(int amount, List<String> messages) {
+        pickMultiNumber.showDialog(amount, messages);
+        if (pickMultiNumber.isCancel()) {
+            SessionHandler.sendPlayerBoolean(gameId, false);
+        } else {
+            SessionHandler.sendPlayerListInteger(gameId, pickMultiNumber.getMultiAmount());
         }
     }
 

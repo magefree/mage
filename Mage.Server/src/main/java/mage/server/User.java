@@ -312,6 +312,11 @@ public class User {
         managerFactory.gameManager().sendPlayerInteger(gameId, userId, data);
     }
 
+    public void sendPlayerListInteger(final UUID gameId, final List<Integer> data) {
+        lastActivity = new Date();
+        managerFactory.gameManager().sendPlayerListInteger(gameId, userId, data);
+    }
+
     public void updateLastActivity(String pingInfo) {
         if (pingInfo != null) {
             this.pingInfo = pingInfo;

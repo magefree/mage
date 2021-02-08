@@ -277,6 +277,8 @@ public interface Game extends MageItem, Serializable {
 
     void fireGetAmountEvent(UUID playerId, String message, int min, int max);
 
+    void fireGetMultiAmountEvent(UUID playerId, int amount, List<String> messages);
+
     void fireChoosePileEvent(UUID playerId, String message, List<? extends Card> pile1, List<? extends Card> pile2);
 
     void fireInformEvent(String message);

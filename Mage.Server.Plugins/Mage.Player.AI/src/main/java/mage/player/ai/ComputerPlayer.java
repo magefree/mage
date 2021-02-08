@@ -1967,6 +1967,17 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
+    public List<Integer> getMultiAmount(int amount, List<String> messages, Game game) {
+        int size = messages.size();
+        List<Integer> defaultList = new ArrayList<>(size);
+        defaultList.add(amount);
+        for (int i = 1; i < size; i++) {
+            defaultList.add(0);
+        }
+        return defaultList;
+    }
+
+    @Override
     public UUID chooseAttackerOrder(List<Permanent> attackers, Game game) {
         //TODO: improve this
         return attackers.iterator().next().getId();

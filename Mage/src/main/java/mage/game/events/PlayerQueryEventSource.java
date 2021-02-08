@@ -84,6 +84,10 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
         dispatcher.fireEvent(PlayerQueryEvent.amountEvent(playerId, message, min, max));
     }
 
+    public void multiAmount(UUID playerId, int amount, List<String> messages) {
+        dispatcher.fireEvent(PlayerQueryEvent.multiAmountEvent(playerId, amount, messages));
+    }
+
     public void chooseChoice(UUID playerId, Choice choice) {
         dispatcher.fireEvent(PlayerQueryEvent.chooseChoiceEvent(playerId, choice));
     }

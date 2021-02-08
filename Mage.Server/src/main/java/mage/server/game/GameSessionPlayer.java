@@ -114,6 +114,13 @@ public class GameSessionPlayer extends GameSessionWatcher {
         }
     }
 
+    public void getMultiAmount(final int amount, final List<String> messages) {
+        if (!killed) {
+            userManager.getUser(userId).ifPresent(user
+                    -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_GET_MULTI_AMOUNT, game.getId(), new GameClientMessage(amount, messages))));
+        }
+    }
+
     public void endGameInfo(Table table) {
         if (!killed) {
             userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.END_GAME_INFO, game.getId(), getGameEndView(playerId, table))));
@@ -184,6 +191,10 @@ public class GameSessionPlayer extends GameSessionWatcher {
 
     public void sendPlayerInteger(Integer data) {
         game.getPlayer(playerId).setResponseInteger(data);
+    }
+
+    public void sendPlayerListInteger(List<Integer> data) {
+        game.getPlayer(playerId).setResponseListInteger(data);
     }
 
     @Override

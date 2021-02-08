@@ -122,6 +122,8 @@ public interface MageServer {
 
     void sendPlayerInteger(UUID gameId, String sessionId, Integer data) throws MageException;
 
+    void sendPlayerListInteger(UUID gameId, String sessionId, List<Integer> data) throws MageException;
+
     void sendPlayerManaType(UUID gameId, UUID playerId, String sessionId, ManaType data) throws MageException;
 
     void quitMatch(UUID gameId, String sessionId) throws MageException;

@@ -44,6 +44,7 @@ public enum ClientCallbackMethod {
     GAME_PLAY_MANA("gamePlayMana"),
     GAME_PLAY_XMANA("gamePlayXMana"),
     GAME_GET_AMOUNT("gameSelectAmount"),
+    GAME_GET_MULTI_AMOUNT("gameSelectMultiAmount"),
     DRAFT_INIT("draftInit"),
     DRAFT_PICK("draftPick"),
     DRAFT_UPDATE("draftUpdate");

@@ -2,6 +2,7 @@
 package mage.player.human;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 import mage.constants.ManaType;
 
@@ -18,6 +19,7 @@ public class PlayerResponse implements Serializable {
     private ManaType responseManaType;
     private UUID responseManaTypePlayerId;
     private Boolean responseConcedeCheck;
+    private List<Integer> responseListInteger;
 
     public PlayerResponse() {
         clear();
@@ -97,8 +99,16 @@ public class PlayerResponse implements Serializable {
         return responseInteger;
     }
 
+    public List<Integer> getListInteger() {
+        return responseListInteger;
+    }
+
     public void setInteger(Integer responseInteger) {
         this.responseInteger = responseInteger;
+    }
+
+    public void setListInteger(List<Integer> responseListInteger) {
+        this.responseListInteger = responseListInteger;
     }
 
     public ManaType getManaType() {

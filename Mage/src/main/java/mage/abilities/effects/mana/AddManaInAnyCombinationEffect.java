@@ -106,26 +106,20 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
     public Mana produceMana(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
+            int size = manaSymbols.size();
             Mana mana = new Mana();
-            int amountOfManaLeft = amount.calculate(game, source, this);
-            int maxAmount = amountOfManaLeft;
-
-            while (amountOfManaLeft > 0 && player.canRespond()) {
-                for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
-                    int number = player.getAmount(0, amountOfManaLeft, "Distribute mana by color (" + mana.count()
-                            + " of " + maxAmount + " done). How many <b>" + coloredManaSymbol.getColorHtmlName() + "</b> mana to add (enter 0 to pass to next color)?", game);
-                    if (number > 0) {
-                        for (int i = 0; i < number; i++) {
-                            mana.add(new Mana(coloredManaSymbol));
-                        }
-                        amountOfManaLeft -= number;
-                    }
-                    if (amountOfManaLeft == 0) {
-                        break;
-                    }
+            List<String> manaStrings = new ArrayList<>(size);
+            for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
+                manaStrings.add(coloredManaSymbol.getColorHtmlName());
+            }
+            List<Integer> manaList = player.getMultiAmount(amount.calculate(game, source, this), manaStrings, game);
+            for (int i = 0; i < size; i++) {
+                ColoredManaSymbol coloredManaSymbol = manaSymbols.get(i);
+                int amount = manaList.get(i);
+                for (int j = 0; j < amount; j++) {
+                    mana.add(new Mana(coloredManaSymbol));
                 }
             }
-
             return mana;
         }
         return null;

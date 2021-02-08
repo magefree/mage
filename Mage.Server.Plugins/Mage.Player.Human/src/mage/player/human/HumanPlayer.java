@@ -50,6 +50,7 @@ import org.apache.log4j.Logger;
 import java.awt.*;
 import java.io.Serializable;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
 
@@ -1881,6 +1882,39 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
+    public List<Integer> getMultiAmount(int amount, List<String> messages, Game game) {
+        int size = messages.size();
+        List<Integer> defaultList = new ArrayList<>(size);
+        defaultList.add(amount);
+        for (int i = 1; i < size; i++) {
+            defaultList.add(0);
+        }
+
+        if (gameInCheckPlayableState(game)) {
+            return defaultList;
+        }
+
+        while (canRespond()) {
+            updateGameStatePriority("getMultiAmount", game);
+            prepareForResponse(game);
+            if (!isExecutingMacro()) {
+                game.fireGetMultiAmountEvent(playerId, amount, messages);
+            }
+            waitForResponse(game);
+
+            if (response.getListInteger() != null) {
+                break;
+            }
+        }
+
+        if (response.getListInteger() != null) {
+            return response.getListInteger();
+        } else {
+            return defaultList;
+        }
+    }
+
+    @Override
     public void sideboard(Match match, Deck deck) {
         match.fireSideboardEvent(playerId, deck);
     }
@@ -2250,6 +2284,16 @@ public class HumanPlayer extends PlayerImpl {
             response.setInteger(responseInteger);
             response.notifyAll();
             logger.debug("Got response integer from player: " + getId());
+        }
+    }
+
+    @Override
+    public void setResponseListInteger(List<Integer> responseListInteger) {
+        waitResponseOpen();
+        synchronized (response) {
+            response.setListInteger(responseListInteger);
+            response.notifyAll();
+            logger.debug("Got response list integer for player: " + getId());
         }
     }
 

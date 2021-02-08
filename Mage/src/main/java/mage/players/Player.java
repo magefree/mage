@@ -554,6 +554,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void setResponseInteger(Integer data);
 
+    void setResponseListInteger(List<Integer> responseListInteger);
+
     void setResponseManaType(UUID manaTypePlayerId, ManaType responseManaType);
 
     boolean priority(Game game);
@@ -666,6 +668,8 @@ public interface Player extends MageItem, Copyable<Player> {
     void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID attackerId, Ability source, Game game);
 
     int getAmount(int min, int max, String message, Game game);
+
+    List<Integer> getMultiAmount(int amount, List<String> messages, Game game);
 
     void sideboard(Match match, Deck deck);
 

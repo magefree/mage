@@ -2653,6 +2653,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public List<Integer> getMultiAmount(int amount, List<String> messages, Game game) {
+        return computerPlayer.getMultiAmount(amount, messages, game);
+    }
+
+    @Override
     public void addAbility(Ability ability) {
         computerPlayer.addAbility(ability);
     }
@@ -3226,6 +3231,11 @@ public class TestPlayer implements Player {
     @Override
     public void setResponseInteger(Integer responseInteger) {
         computerPlayer.setResponseInteger(responseInteger);
+    }
+
+    @Override
+    public void setResponseListInteger(List <Integer> responseListInteger) {
+        computerPlayer.setResponseListInteger(responseListInteger);
     }
 
     @Override

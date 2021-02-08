@@ -806,6 +806,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void setResponseListInteger(List<Integer> data) {
+
+    }
+
+    @Override
     public void setResponseManaType(UUID manaTypePlayerId, ManaType responseManaType) {
 
     }
@@ -963,6 +968,17 @@ public class PlayerStub implements Player {
     @Override
     public int getAmount(int min, int max, String message, Game game) {
         return 0;
+    }
+
+    @Override
+    public List<Integer> getMultiAmount(int amount, List<String> messages, Game game) {
+        int size = messages.size();
+        List<Integer> defaultList = new ArrayList<>(size);
+        defaultList.add(amount);
+        for (int i = 1; i < size; i++) {
+            defaultList.add(0);
+        }
+        return defaultList;
     }
 
     @Override
