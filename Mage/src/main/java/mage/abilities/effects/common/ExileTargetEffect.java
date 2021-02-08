@@ -31,6 +31,7 @@ public class ExileTargetEffect extends OneShotEffect {
     private UUID exileId = null;
     protected boolean multitargetHandling;
     private boolean toSourceExileZone = false; // exile the targets to a source object specific exile zone (takes care of zone change counter)
+    private boolean withName = true;
 
     public ExileTargetEffect(String effectText) {
         this(effectText, false);
@@ -73,6 +74,7 @@ public class ExileTargetEffect extends OneShotEffect {
         this.onlyFromZone = effect.onlyFromZone;
         this.multitargetHandling = effect.multitargetHandling;
         this.toSourceExileZone = effect.toSourceExileZone;
+        this.withName = effect.withName;
     }
 
     @Override
@@ -83,6 +85,10 @@ public class ExileTargetEffect extends OneShotEffect {
     public ExileTargetEffect setToSourceExileZone(boolean toSourceExileZone) {
         this.toSourceExileZone = toSourceExileZone;
         return this;
+    }
+
+    public void setWithName(boolean withName) {
+        this.withName = withName;
     }
 
     @Override
@@ -160,7 +166,7 @@ public class ExileTargetEffect extends OneShotEffect {
                     exileZone = sourceObject.getIdName();
                 }
             }
-            controller.moveCardsToExile(toExile, source, game, true, exileId, exileZone);
+            controller.moveCardsToExile(toExile, source, game, withName, exileId, exileZone);
             return true;
         }
         return false;

@@ -84,6 +84,11 @@ public class ForetellAbility extends SpecialAction {
                 + "Cast it on a later turn for its foretell cost.)</i>";
     }
 
+    @Override
+    public String getGameLogMessage(Game game) {
+        return " foretells a card from hand";
+    }
+
     public class ForetellExileEffect extends OneShotEffect {
 
         private final Card card;
@@ -119,7 +124,7 @@ public class ForetellAbility extends SpecialAction {
                 UUID exileId = CardUtil.getExileZoneId(mainCardId.toString() + "foretellAbility", game);
 
                 // foretell turn number shows up on exile window
-                Effect effect = new ExileTargetEffect(exileId, " Foretell Turn Number: " + game.getTurnNum());
+                ExileTargetEffect effect = new ExileTargetEffect(exileId, " Foretell Turn Number: " + game.getTurnNum());
 
                 // remember turn number it was cast
                 game.getState().setValue(mainCardId.toString() + "Foretell Turn Number", game.getTurnNum());
@@ -129,6 +134,7 @@ public class ForetellAbility extends SpecialAction {
                 game.getState().setValue(mainCardId.toString() + "Foretell Split Cost", foretellSplitCost);
 
                 // exile the card face-down
+                effect.setWithName(false);
                 effect.setTargetPointer(new FixedTarget(card.getId()));
                 effect.apply(game, source);
                 card.setFaceDown(true, game);
