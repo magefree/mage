@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.Card;
+import mage.cards.ModalDoubleFacesCard;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardScanner;
 import mage.constants.CardType;
@@ -17,8 +18,7 @@ import org.mage.test.serverside.base.MageTestBase;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * @author nigelzor, JayDi85
@@ -295,5 +295,90 @@ public class BoosterGenerationTest extends MageTestBase {
             // Regal Caracal is top-boxer card, not booster
             assertFalse("Amonkhet Remastered's booster must not contains Regal Caracal", contains(booster, "Regal Caracal", null));
         }
+    }
+
+    @Test
+    public void testKaldheim_SnowLandAndMDFC() {
+        boolean foundVale = false;
+        boolean foundMDFC = false;
+        boolean foundNoMDFC = false;
+        for (int i = 1; i <= 100; i++) {
+            List<Card> booster = Kaldheim.getInstance().createBooster();
+
+            assertEquals("Booster does not have 15 cards", 15, booster.size());
+            assertTrue(
+                    "Booster contains cards from another set",
+                    booster.stream().map(Card::getExpansionSetCode).allMatch("KHM"::equals)
+            );
+            assertFalse(
+                    "Booster cannot contain non-snow basic lands",
+                    booster.stream().anyMatch(card -> card.isBasic() && !card.isSnow())
+            );
+            assertEquals(
+                    "Booster must contain exactly 1 rare or mythic", 1,
+                    booster.stream().map(Card::getRarity).filter(rarity -> rarity == Rarity.RARE || rarity == Rarity.MYTHIC).count()
+            );
+            assertEquals(
+                    "Booster must contain exactly 3 uncommons", 3,
+                    booster.stream().map(Card::getRarity).filter(Rarity.UNCOMMON::equals).count()
+            );
+
+            List<Card> snowLands = booster.stream().filter(card -> card.isSnow() && card.isLand()).collect(Collectors.toList());
+            switch (snowLands.size()) {
+                case 0:
+                    fail("Booster must have snow lands");
+                case 1:
+                    Card snowLand = snowLands.get(0);
+                    assertTrue(
+                            "Only one snow land, must be basic or common",
+                            snowLand.isBasic() || snowLand.getRarity() == Rarity.COMMON
+                    );
+                    assertNotEquals(
+                            "Only one snow land, can't be Shimmerdrift Vale",
+                            "Shimmerdrift Vale", snowLand.getName()
+                    );
+                    assertNotEquals(
+                            "Only one snow land, can't be Faceless Haven",
+                            "Faceless Haven", snowLand.getName()
+                    );
+                    break;
+                case 2:
+                    assertEquals(
+                            "Booster can't have two snow lands unless one is Shimmerdrift Vale or Faceless Haven", 1,
+                            snowLands.stream().filter(card -> card.getName().equals("Shimmerdrift Vale") || card.getName().equals("Faceless Haven")).count()
+                    );
+                    assertEquals(
+                            "Booster can't have two snow lands unless one is not Shimmerdrift Vale or Faceless Haven", 1,
+                            snowLands.stream().filter(card -> !card.getName().equals("Shimmerdrift Vale") && !card.getName().equals("Faceless Haven")).count()
+                    );
+                    break;
+                case 3:
+                    assertEquals("Booster can't have three snow lands unless one is Shimmerdrift Vale", 1,
+                            snowLands.stream().filter(card -> card.getName().equals("Shimmerdrift Vale")).count()
+                    );
+                    assertEquals("Booster can't have three snow lands unless one is Faceless Haven", 1,
+                            snowLands.stream().filter(card -> card.getName().equals("Faceless Haven")).count()
+                    );
+                    assertEquals("Booster can't have three snow lands unless one is not Shimmerdrift Vale or Faceless Haven", 1,
+                            snowLands.stream().filter(card -> !card.getName().equals("Shimmerdrift Vale") && !card.getName().equals("Faceless Haven")).count()
+                    );
+                    break;
+                default:
+                    fail("Booster can't have more than three snow lands");
+            }
+
+            long mdfcCount = booster.stream().filter(card -> card instanceof ModalDoubleFacesCard).count();
+            assertTrue("Booster can't have more than one MDFC", mdfcCount < 2);
+
+            foundMDFC |= mdfcCount > 0;
+            foundNoMDFC |= mdfcCount == 0;
+            foundVale |= booster.stream().map(MageObject::getName).anyMatch("Shimmerdrift Vale"::equals);
+            if (foundVale && foundMDFC && foundNoMDFC && i > 20) {
+                break;
+            }
+        }
+        assertTrue("No booster contained Shimmerdrift Vale", foundVale);
+        assertTrue("No booster contained an MDFC", foundMDFC);
+        assertTrue("Every booster contained an MDFC", foundNoMDFC);
     }
 }

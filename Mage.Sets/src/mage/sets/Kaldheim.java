@@ -7,6 +7,7 @@ import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.constants.SuperType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,6 @@ public final class Kaldheim extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
-        this.numBoosterDoubleFaced = 1;
         this.maxCardNumberInBooster = 285;
         this.ratioBoosterSpecialLand = 12;
         this.ratioBoosterSpecialLandNumerator = 5;
@@ -448,24 +448,28 @@ public final class Kaldheim extends ExpansionSet {
 
     @Override
     public List<CardInfo> getCardsByRarity(Rarity rarity) {
-        if (rarity != Rarity.COMMON) {
-            return super.getCardsByRarity(rarity);
+        if (savedCards.containsKey(rarity)) {
+            return new ArrayList<>(savedCards.get(rarity));
         }
-        List<CardInfo> savedCardsInfos = savedCards.get(rarity);
-        if (savedCardsInfos == null) {
-            CardCriteria criteria = new CardCriteria();
-            criteria.setCodes(this.code).notTypes(CardType.LAND);
-            criteria.rarities(rarity).doubleFaced(false);
-            savedCardsInfos = CardRepository.instance.findCards(criteria);
-            if (maxCardNumberInBooster != Integer.MAX_VALUE) {
-                savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster);
-            }
-            criteria = new CardCriteria();
-            criteria.setCodes(this.code).nameExact("Shimmerdrift Vale");
-            savedCardsInfos.addAll(CardRepository.instance.findCards(criteria));
-            savedCards.put(rarity, savedCardsInfos);
+        CardCriteria criteria = new CardCriteria();
+        criteria.setCodes(this.code);
+        criteria.rarities(rarity);
+        List<CardInfo> savedCardsInfos = CardRepository.instance.findCards(criteria);
+        switch (rarity) {
+            case LAND:
+                savedCardsInfos.removeIf(cardInfo -> !cardInfo.getSupertypes().contains(SuperType.SNOW));
+                savedCardsInfos.removeIf(cardInfo -> !cardInfo.getSupertypes().contains(SuperType.BASIC));
+                break;
+            case COMMON:
+                savedCardsInfos.removeIf(cardInfo ->
+                        cardInfo.getCard().isSnow()
+                                && cardInfo.getCard().isLand()
+                                && !cardInfo.getCard().getName().equals("Shimmerdrift Vale")
+                );
+                break;
         }
-        // Return a copy of the saved cards information, as not to modify the original.
+        savedCardsInfos.removeIf(next -> next.getCardNumberAsInt() > maxCardNumberInBooster);
+        savedCards.put(rarity, savedCardsInfos);
         return new ArrayList<>(savedCardsInfos);
     }
 
@@ -474,11 +478,12 @@ public final class Kaldheim extends ExpansionSet {
         if (savedSpecialLand.isEmpty()) {
             CardCriteria criteria = new CardCriteria();
             criteria.setCodes(this.code);
-            criteria.rarities(Rarity.COMMON, Rarity.LAND);
             criteria.types(CardType.LAND);
-            criteria.supertypes("Snow");
             savedSpecialLand.addAll(CardRepository.instance.findCards(criteria));
-            savedSpecialLand.removeIf(cardInfo -> cardInfo.getName() == "Shimmerdrift Vale");
+            savedSpecialLand.removeIf(cardInfo -> cardInfo.getSupertypes().contains(SuperType.BASIC));
+            savedSpecialLand.removeIf(cardInfo -> !cardInfo.getSupertypes().contains(SuperType.SNOW));
+            savedSpecialLand.removeIf(cardInfo -> cardInfo.getName().equals("Shimmerdrift Vale"));
+            savedSpecialLand.removeIf(cardInfo -> cardInfo.getName().equals("Faceless Haven"));
             savedSpecialLand.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() > maxCardNumberInBooster);
         }
         return new ArrayList<>(savedSpecialLand);
