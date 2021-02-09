@@ -1912,16 +1912,13 @@ public class HumanPlayer extends PlayerImpl {
             List<Integer> responseList = new ArrayList<>(size);
             int responseAmount = 0;
             // Validate string data sent from client and parse into integer list
-            while (scanner.hasNextInt()) {
+            while (scanner.hasNextInt() && responseList.size() < size) {
                 int nextInt = scanner.nextInt();
                 if (nextInt < 0 || nextInt + responseAmount > amount) {
                     nextInt = 0;
                 }
                 responseAmount += nextInt;
                 responseList.add(nextInt);
-                if (responseList.size() == size) {
-                    break;
-                }
             }
             while (responseList.size() < size) {
                 responseList.add(0);

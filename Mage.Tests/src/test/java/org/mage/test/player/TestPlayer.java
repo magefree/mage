@@ -2654,7 +2654,34 @@ public class TestPlayer implements Player {
 
     @Override
     public List<Integer> getMultiAmount(int amount, List<String> messages, Game game) {
-        return computerPlayer.getMultiAmount(amount, messages, game);
+        assertAliasSupportInChoices(false);
+        int size = messages.size();
+        int choiceAmount = 0;
+        boolean allValuesChosen = true;
+        List<Integer> multiAmount = new ArrayList<>(size);
+        for (String message : messages) {
+            if (choices.isEmpty() || !choices.get(0).startsWith("X=")) {
+                this.chooseStrictModeFailed("choice", game, message);
+                allValuesChosen = false;
+                break;
+            }
+            int xValue = Integer.parseInt(choices.get(0).substring(2));
+            choiceAmount += xValue;
+            multiAmount.add(xValue);
+            choices.remove(0);
+        }
+        if (!allValuesChosen) {
+            while (multiAmount.size() < size) {
+                multiAmount.add(0);
+            }
+            if (choiceAmount < amount) {
+                int lastIndex = multiAmount.size() - 1;
+                int lastInt = multiAmount.get(lastIndex);
+                lastInt += amount - choiceAmount;
+                multiAmount.set(lastIndex, lastInt);
+            }
+        }
+        return multiAmount;
     }
 
     @Override
