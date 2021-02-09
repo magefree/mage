@@ -334,6 +334,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Volcanic Dragon", 201, Rarity.RARE, mage.cards.v.VolcanicDragon.class));
         cards.add(new SetCardInfo("Volcanic Geyser", 202, Rarity.UNCOMMON, mage.cards.v.VolcanicGeyser.class));
         cards.add(new SetCardInfo("Waiting in the Weeds", 252, Rarity.RARE, mage.cards.w.WaitingInTheWeeds.class));
+        cards.add(new SetCardInfo("Wall of Corpses", 151, Rarity.COMMON, mage.cards.w.WallOfCorpses.class));
         cards.add(new SetCardInfo("Wall of Resistance", 46, Rarity.COMMON, mage.cards.w.WallOfResistance.class));
         cards.add(new SetCardInfo("Wall of Roots", 253, Rarity.COMMON, mage.cards.w.WallOfRoots.class));
         cards.add(new SetCardInfo("Ward of Lights", 47, Rarity.COMMON, mage.cards.w.WardOfLights.class));
