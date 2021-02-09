@@ -269,6 +269,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Savage Twister", 280, Rarity.UNCOMMON, mage.cards.s.SavageTwister.class));
         cards.add(new SetCardInfo("Sawback Manticore", 281, Rarity.RARE, mage.cards.s.SawbackManticore.class));
         cards.add(new SetCardInfo("Sea Scryer", 90, Rarity.COMMON, mage.cards.s.SeaScryer.class));
+        cards.add(new SetCardInfo("Sealed Fate", 282, Rarity.UNCOMMON, mage.cards.s.SealedFate.class));
         cards.add(new SetCardInfo("Searing Spear Askari", 191, Rarity.COMMON, mage.cards.s.SearingSpearAskari.class));
         cards.add(new SetCardInfo("Seedling Charm", 240, Rarity.COMMON, mage.cards.s.SeedlingCharm.class));
         cards.add(new SetCardInfo("Seeds of Innocence", 241, Rarity.RARE, mage.cards.s.SeedsOfInnocence.class));
