@@ -752,10 +752,6 @@ public class GameController implements GameCallback {
 
     }
 
-    public void sendPlayerListInteger(UUID userId, final List<Integer> data) {
-        sendMessage(userId, playerId -> getGameSession(playerId).sendPlayerListInteger(data));
-    }
-
     private synchronized void updateGame() {
         if (!timers.isEmpty()) {
             for (Player player : game.getState().getPlayers().values()) {

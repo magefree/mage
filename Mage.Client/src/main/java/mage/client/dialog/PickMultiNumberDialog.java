@@ -56,19 +56,18 @@ public class PickMultiNumberDialog extends MageDialog {
         this.setVisible(true);
     }
 
-    public List<Integer> getMultiAmount() {
-        List<Integer> multiAmount = new ArrayList<>();
-        int num1 = ((Number) jSpinner1.getValue()).intValue();
-        multiAmount.add(num1);
-        int num2 = ((Number) jSpinner2.getValue()).intValue();
-        multiAmount.add(num2);
-        int num3 = ((Number) jSpinner3.getValue()).intValue();
-        multiAmount.add(num3);
-        int num4 = ((Number) jSpinner4.getValue()).intValue();
-        multiAmount.add(num4);
-        int num5 = ((Number) jSpinner5.getValue()).intValue();
-        multiAmount.add(num5);
-        return multiAmount;
+    public String getMultiAmount() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(((Number) jSpinner1.getValue()).intValue());
+        sb.append(' ');
+        sb.append(((Number) jSpinner2.getValue()).intValue());
+        sb.append(' ');
+        sb.append(((Number) jSpinner3.getValue()).intValue());
+        sb.append(' ');
+        sb.append(((Number) jSpinner4.getValue()).intValue());
+        sb.append(' ');
+        sb.append(((Number) jSpinner5.getValue()).intValue());
+        return sb.toString();
     }
 
     public boolean isCancel() {

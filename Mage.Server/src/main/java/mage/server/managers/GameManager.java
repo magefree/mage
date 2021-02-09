@@ -8,7 +8,6 @@ import mage.game.GameOptions;
 import mage.server.game.GameController;
 import mage.view.GameView;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -30,8 +29,6 @@ public interface GameManager {
     void sendPlayerBoolean(UUID gameId, UUID userId, Boolean data);
 
     void sendPlayerInteger(UUID gameId, UUID userId, Integer data);
-
-    void sendPlayerListInteger(UUID gameId, UUID userId, List<Integer> data);
 
     void quitMatch(UUID gameId, UUID userId);
 

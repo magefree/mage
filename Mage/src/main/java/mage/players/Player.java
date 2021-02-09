@@ -554,8 +554,6 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void setResponseInteger(Integer data);
 
-    void setResponseListInteger(List<Integer> responseListInteger);
-
     void setResponseManaType(UUID manaTypePlayerId, ManaType responseManaType);
 
     boolean priority(Game game);

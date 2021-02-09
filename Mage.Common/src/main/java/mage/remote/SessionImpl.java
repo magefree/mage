@@ -890,25 +890,6 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public boolean sendPlayerListInteger(UUID gameId, List<Integer> data) {
-        try {
-            if(isConnected()) {
-                ActionData actionData = new ActionData("SEND_PLAYER_LIST_INTEGER", gameId, getSessionId());
-                actionData.value = data;
-                appendJsonLog(actionData);
-
-                server.sendPlayerListInteger(gameId, sessionId, data);
-                return true;
-            }
-        } catch (MageException ex) {
-            handleMageException(ex);
-        } catch (Throwable t) {
-            handleThrowable(t);
-        }
-        return false;
-    }
-
-    @Override
     public boolean sendPlayerString(UUID gameId, String data) {
         try {
             if (isConnected()) {

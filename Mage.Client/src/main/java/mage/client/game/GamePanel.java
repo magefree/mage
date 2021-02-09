@@ -27,7 +27,6 @@ import mage.client.util.gui.MageDialogState;
 import mage.constants.*;
 import mage.game.events.PlayerQueryEvent;
 import mage.players.PlayableObjectsList;
-import mage.remote.Session;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
@@ -1630,7 +1629,7 @@ public final class GamePanel extends javax.swing.JPanel {
         if (pickMultiNumber.isCancel()) {
             SessionHandler.sendPlayerBoolean(gameId, false);
         } else {
-            SessionHandler.sendPlayerListInteger(gameId, pickMultiNumber.getMultiAmount());
+            SessionHandler.sendPlayerString(gameId, pickMultiNumber.getMultiAmount());
         }
     }
 

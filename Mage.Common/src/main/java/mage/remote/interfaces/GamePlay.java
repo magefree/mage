@@ -1,7 +1,6 @@
 
 package mage.remote.interfaces;
 
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.cards.decks.DeckCardLists;
@@ -25,8 +24,6 @@ public interface GamePlay {
     boolean sendPlayerBoolean(UUID gameId, boolean data);
 
     boolean sendPlayerInteger(UUID gameId, int data);
-
-    boolean sendPlayerListInteger(UUID gameId, List<Integer> data);
 
     boolean sendPlayerString(UUID gameId, String data);
 

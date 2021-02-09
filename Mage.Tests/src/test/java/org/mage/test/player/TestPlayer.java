@@ -3234,11 +3234,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void setResponseListInteger(List <Integer> responseListInteger) {
-        computerPlayer.setResponseListInteger(responseListInteger);
-    }
-
-    @Override
     public boolean isPassed() {
         return computerPlayer.isPassed();
     }

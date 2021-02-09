@@ -124,10 +124,6 @@ public final class SessionHandler {
         session.sendPlayerInteger(gameId, data);
     }
 
-    public static void sendPlayerListInteger(UUID gameId, List<Integer> data) {
-        session.sendPlayerListInteger(gameId, data);
-    }
-
     public static void sendPlayerString(UUID gameId, String data) {
         session.sendPlayerString(gameId, data);
     }

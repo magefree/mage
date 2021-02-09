@@ -9,7 +9,10 @@ import mage.server.managers.GameManager;
 import mage.server.managers.ManagerFactory;
 import mage.view.GameView;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.Lock;
@@ -106,14 +109,6 @@ public class GameManagerImpl implements GameManager {
         GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
             gameController.sendPlayerInteger(userId, data);
-        }
-    }
-
-    @Override
-    public void sendPlayerListInteger(UUID gameId, UUID userId, List<Integer> data) {
-        GameController gameController = getGameControllerSafe(gameId);
-        if (gameController != null) {
-            gameController.sendPlayerListInteger(userId, data);
         }
     }
 

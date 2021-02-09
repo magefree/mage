@@ -193,10 +193,6 @@ public class GameSessionPlayer extends GameSessionWatcher {
         game.getPlayer(playerId).setResponseInteger(data);
     }
 
-    public void sendPlayerListInteger(List<Integer> data) {
-        game.getPlayer(playerId).setResponseListInteger(data);
-    }
-
     @Override
     public GameView getGameView() {
         Player player = game.getPlayer(playerId);

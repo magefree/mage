@@ -2273,10 +2273,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void setResponseListInteger(List<Integer> responseListInteger) {
-    }
-
-    @Override
     public boolean isPassed() {
         return passed;
     }

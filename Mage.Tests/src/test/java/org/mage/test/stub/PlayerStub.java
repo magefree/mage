@@ -806,11 +806,6 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public void setResponseListInteger(List<Integer> data) {
-
-    }
-
-    @Override
     public void setResponseManaType(UUID manaTypePlayerId, ManaType responseManaType) {
 
     }

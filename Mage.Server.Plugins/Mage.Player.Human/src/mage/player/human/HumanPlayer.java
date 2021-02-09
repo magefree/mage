@@ -1902,13 +1902,37 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
 
-            if (response.getListInteger() != null) {
+            if (response.getString() != null) {
                 break;
             }
         }
 
-        if (response.getListInteger() != null) {
-            return response.getListInteger();
+        if (response.getString() != null) {
+            Scanner scanner = new Scanner(response.getString());
+            List<Integer> responseList = new ArrayList<>(size);
+            int responseAmount = 0;
+            // Validate string data sent from client and parse into integer list
+            while (scanner.hasNextInt()) {
+                int nextInt = scanner.nextInt();
+                if (nextInt < 0 || nextInt + responseAmount > amount) {
+                    nextInt = 0;
+                }
+                responseAmount += nextInt;
+                responseList.add(nextInt);
+                if (responseList.size() == size) {
+                    break;
+                }
+            }
+            while (responseList.size() < size) {
+                responseList.add(0);
+            }
+            if (responseAmount < amount) {
+                int lastIndex = responseList.size() - 1;
+                int lastInt = responseList.get(lastIndex);
+                lastInt += amount - responseAmount;
+                responseList.set(lastIndex, lastInt);
+            }
+            return responseList;
         } else {
             return defaultList;
         }
@@ -2284,16 +2308,6 @@ public class HumanPlayer extends PlayerImpl {
             response.setInteger(responseInteger);
             response.notifyAll();
             logger.debug("Got response integer from player: " + getId());
-        }
-    }
-
-    @Override
-    public void setResponseListInteger(List<Integer> responseListInteger) {
-        waitResponseOpen();
-        synchronized (response) {
-            response.setListInteger(responseListInteger);
-            response.notifyAll();
-            logger.debug("Got response list integer for player: " + getId());
         }
     }
 
