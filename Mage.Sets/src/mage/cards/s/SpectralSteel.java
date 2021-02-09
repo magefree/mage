@@ -17,6 +17,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetCreaturePermanent;
@@ -36,6 +37,7 @@ public final class SpectralSteel extends CardImpl {
                 SubType.AURA.getPredicate(),
                 SubType.EQUIPMENT.getPredicate()
         ));
+        filter.add(AnotherPredicate.instance);
     }
 
     public SpectralSteel(UUID ownerId, CardSetInfo setInfo) {
