@@ -1,10 +1,6 @@
 package mage.sets;
 
-import mage.cards.Card;
 import mage.cards.ExpansionSet;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
@@ -13,10 +9,7 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -29,10 +22,8 @@ public final class TherosBeyondDeath extends ExpansionSet {
         return instance;
     }
 
-    private final BoosterCollator collator = new TherosBeyondDeathCollator();
-
     private TherosBeyondDeath() {
-        super("Theros Beyond Death", "THB", ExpansionSet.buildDate(2020, 1, 24), SetType.EXPANSION);
+        super("Theros Beyond Death", "THB", ExpansionSet.buildDate(2020, 1, 24), SetType.EXPANSION, new TherosBeyondDeathCollator());
         this.blockName = "Theros Beyond Death";
         this.hasBoosters = true;
         this.numBoosterLands = 1;
@@ -400,14 +391,6 @@ public final class TherosBeyondDeath extends ExpansionSet {
         cards.add(new SetCardInfo("Wolfwillow Haven", 357, Rarity.UNCOMMON, mage.cards.w.WolfwillowHaven.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wrap in Flames", 164, Rarity.COMMON, mage.cards.w.WrapInFlames.class));
     }
-
-    public List<String> makeBooster() {
-        return collator.makeBooster();
-    }
-
-    public void shuffle() {
-        collator.shuffle();
-    }
 }
 
 class TherosBeyondDeathCollator implements BoosterCollator {
@@ -429,16 +412,85 @@ class TherosBeyondDeathCollator implements BoosterCollator {
     }
 
     private static class TherosBeyondDeathStructure extends BoosterStructure {
-        private static final TherosBeyondDeathStructure C1 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1);
-        private static final TherosBeyondDeathStructure C2 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1);
-        private static final TherosBeyondDeathStructure C3 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonC2, TherosBeyondDeathRun.commonC2, TherosBeyondDeathRun.commonC2, TherosBeyondDeathRun.commonC2);
-        private static final TherosBeyondDeathStructure C4 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonC2, TherosBeyondDeathRun.commonC2, TherosBeyondDeathRun.commonC2);
-        private static final TherosBeyondDeathStructure C5 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonC2, TherosBeyondDeathRun.commonC2);
-        private static final TherosBeyondDeathStructure U1 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.uncommonA, TherosBeyondDeathRun.uncommonB, TherosBeyondDeathRun.uncommonB);
-        private static final TherosBeyondDeathStructure U2 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.uncommonA, TherosBeyondDeathRun.uncommonA, TherosBeyondDeathRun.uncommonB);
-        private static final TherosBeyondDeathStructure R1 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.rare);
-        private static final TherosBeyondDeathStructure M1 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.mythic);
-        private static final TherosBeyondDeathStructure L1 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.land);
+        private static final TherosBeyondDeathStructure C1 = new TherosBeyondDeathStructure(
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonB,
+                TherosBeyondDeathRun.commonB,
+                TherosBeyondDeathRun.commonC1,
+                TherosBeyondDeathRun.commonC1,
+                TherosBeyondDeathRun.commonC1,
+                TherosBeyondDeathRun.commonC1,
+                TherosBeyondDeathRun.commonC1,
+                TherosBeyondDeathRun.commonC1
+        );
+        private static final TherosBeyondDeathStructure C2 = new TherosBeyondDeathStructure(
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonB,
+                TherosBeyondDeathRun.commonB,
+                TherosBeyondDeathRun.commonC1,
+                TherosBeyondDeathRun.commonC1,
+                TherosBeyondDeathRun.commonC1,
+                TherosBeyondDeathRun.commonC1,
+                TherosBeyondDeathRun.commonC1
+        );
+        private static final TherosBeyondDeathStructure C3 = new TherosBeyondDeathStructure(
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonB,
+                TherosBeyondDeathRun.commonB,
+                TherosBeyondDeathRun.commonC2,
+                TherosBeyondDeathRun.commonC2,
+                TherosBeyondDeathRun.commonC2,
+                TherosBeyondDeathRun.commonC2
+        );
+        private static final TherosBeyondDeathStructure C4 = new TherosBeyondDeathStructure(
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonB,
+                TherosBeyondDeathRun.commonB,
+                TherosBeyondDeathRun.commonB,
+                TherosBeyondDeathRun.commonC2,
+                TherosBeyondDeathRun.commonC2,
+                TherosBeyondDeathRun.commonC2
+        );
+        private static final TherosBeyondDeathStructure C5 = new TherosBeyondDeathStructure(
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonA,
+                TherosBeyondDeathRun.commonB,
+                TherosBeyondDeathRun.commonB,
+                TherosBeyondDeathRun.commonB,
+                TherosBeyondDeathRun.commonB,
+                TherosBeyondDeathRun.commonC2,
+                TherosBeyondDeathRun.commonC2
+        );
+        private static final TherosBeyondDeathStructure U1 = new TherosBeyondDeathStructure(
+                TherosBeyondDeathRun.uncommonA,
+                TherosBeyondDeathRun.uncommonB,
+                TherosBeyondDeathRun.uncommonB
+        );
+        private static final TherosBeyondDeathStructure U2 = new TherosBeyondDeathStructure(
+                TherosBeyondDeathRun.uncommonA,
+                TherosBeyondDeathRun.uncommonA,
+                TherosBeyondDeathRun.uncommonB
+        );
+        private static final TherosBeyondDeathStructure R1 = new TherosBeyondDeathStructure(
+                TherosBeyondDeathRun.rare
+        );
+        private static final TherosBeyondDeathStructure M1 = new TherosBeyondDeathStructure(
+                TherosBeyondDeathRun.mythic
+        );
+        private static final TherosBeyondDeathStructure L1 = new TherosBeyondDeathStructure(
+                TherosBeyondDeathRun.land
+        );
 
         private TherosBeyondDeathStructure(CardRun... runs) {
             super(runs);
