@@ -110,7 +110,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
             Mana mana = new Mana();
             List<String> manaStrings = new ArrayList<>(size);
             for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
-                manaStrings.add(coloredManaSymbol.getColorHtmlName());
+                manaStrings.add(coloredManaSymbol.toString());
             }
             List<Integer> manaList = player.getMultiAmount(amount.calculate(game, source, this), manaStrings, game);
             for (int i = 0; i < size; i++) {
