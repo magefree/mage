@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.ReachAbility;
@@ -11,7 +12,8 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardIdPredicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -63,7 +65,7 @@ class ColfenorTheLastYewTriggeredAbility extends DiesThisOrAnotherCreatureTrigge
         filter.add(TargetController.YOU.getControllerPredicate());
     }
 
-    public ColfenorTheLastYewTriggeredAbility() {
+    ColfenorTheLastYewTriggeredAbility() {
         super(new ReturnFromGraveyardToHandTargetEffect(), false, filter);
     }
 
@@ -88,7 +90,7 @@ class ColfenorTheLastYewTriggeredAbility extends DiesThisOrAnotherCreatureTrigge
         }
         FilterCard filterCard = new FilterCreatureCard("creature card with toughness less than " + permanent.getToughness().getValue());
         filterCard.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, permanent.getToughness().getValue()));
-        filterCard.add(new CardIdPredicate(zEvent.getTarget().getId()));
+        filterCard.add(Predicates.not(new MageObjectReferencePredicate(new MageObjectReference(permanent, game))));
         this.getTargets().clear();
         this.addTarget(new TargetCardInYourGraveyard(0, 1, filterCard));
         return true;
