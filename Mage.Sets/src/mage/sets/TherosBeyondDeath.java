@@ -393,6 +393,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
     }
 }
 
+// Booster collation info from https://www.lethe.xyz/mtg/collation/thb.html
 class TherosBeyondDeathCollator implements BoosterCollator {
 
     private static class TherosBeyondDeathRun extends CardRun {
