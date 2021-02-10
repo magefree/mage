@@ -1,14 +1,22 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-import mage.util.RandomUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -21,7 +29,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
         return instance;
     }
 
-    private final Collator collator = new Collator();
+    private final BoosterCollator collator = new TherosBeyondDeathCollator();
 
     private TherosBeyondDeath() {
         super("Theros Beyond Death", "THB", ExpansionSet.buildDate(2020, 1, 24), SetType.EXPANSION);
@@ -402,145 +410,86 @@ public final class TherosBeyondDeath extends ExpansionSet {
     }
 }
 
-class Collator {
-    private static class Rotater<T> {
-        private final List<T> items;
-        private final boolean keepOrder;
-        private int position = 0;
+class TherosBeyondDeathCollator implements BoosterCollator {
 
-        private Rotater(T item) {
-            this(true, item);
-        }
+    private static class TherosBeyondDeathRun extends CardRun {
+        private static final TherosBeyondDeathRun commonA = new TherosBeyondDeathRun(true, "Stampede Rider", "Nyxborn Courser", "Vexing Gull", "Aspect of Manticore", "Sunmane Pegasus", "Nyxborn Seaguard", "Thrill of Possibility", "Triumphant Surge", "Sleep of the Dead", "Incendiary Oracle", "Omen of the Sun", "Triton Waverider", "Underworld Rage-Hound", "Leonin of the Lost Pride", "Naiad of Hidden Coves", "Hero of the Games", "Indomitable Will", "Stern Dismissal", "Nyxborn Brute", "Heliod's Pilgrim", "Starlit Mantle", "Oread of Mountain's Blaze", "Karametra's Blessing", "Elite Instructor", "Final Flare", "Transcendent Envoy", "Riptide Turtle", "Thrill of Possibility", "Nyxborn Courser", "Ichthyomorphosis", "Wrap in Flames", "Glory Bearers", "Nyxborn Seaguard", "Portent of Betrayal", "Sunmane Pegasus", "Sleep of the Dead", "Aspect of Manticore", "Omen of the Sun", "Deny the Divine", "Nyxborn Brute", "Sentinel's Eyes", "Vexing Gull", "Stampede Rider", "Triumphant Surge", "Starlit Mantle", "Hero of the Games", "Leonin of the Lost Pride", "Triton Waverider", "Incendiary Oracle", "Indomitable Will", "Naiad of Hidden Coves", "Underworld Rage-Hound", "Heliod's Pilgrim", "Elite Instructor", "Oread of Mountain's Blaze", "Transcendent Envoy", "Stern Dismissal", "Final Flare", "Glory Bearers", "Ichthyomorphosis", "Portent of Betrayal", "Karametra's Blessing", "Deny the Divine", "Wrap in Flames", "Sentinel's Eyes", "Riptide Turtle");
+        private static final TherosBeyondDeathRun commonB = new TherosBeyondDeathRun(true, "Nylea's Forerunner", "Aspect of Lamprey", "Nyxborn Colossus", "Temple Thief", "Setessan Training", "Lampad of Death's Vigil", "Skola Grovedancer", "Soulreaper of Mogis", "Nexus Wardens", "Underworld Charger", "Plummet", "Omen of the Dead", "Omen of the Hunt", "Discordant Piper", "Loathsome Chimera", "Rage-Scarred Berserker", "Gift of Strength", "Blight-Breath Catoblepas", "Relentless Pursuit", "Nyxborn Marauder", "Moss Viper", "Scavenging Harpy", "Skola Grovedancer", "Aspect of Lamprey", "Setessan Training", "Lampad of Death's Vigil", "Nexus Wardens", "Temple Thief", "Nylea's Forerunner", "Soulreaper of Mogis", "Omen of the Hunt", "Omen of the Dead", "Nyxborn Colossus", "Scavenging Harpy", "Loathsome Chimera", "Underworld Charger", "Plummet", "Discordant Piper", "Gift of Strength", "Rage-Scarred Berserker", "Moss Viper", "Blight-Breath Catoblepas", "Relentless Pursuit", "Nyxborn Marauder", "Setessan Training", "Aspect of Lamprey", "Nexus Wardens", "Temple Thief", "Skola Grovedancer", "Omen of the Dead", "Nylea's Forerunner", "Lampad of Death's Vigil", "Nyxborn Colossus", "Soulreaper of Mogis", "Omen of the Hunt", "Scavenging Harpy", "Moss Viper", "Rage-Scarred Berserker", "Plummet", "Nyxborn Marauder", "Relentless Pursuit", "Blight-Breath Catoblepas", "Loathsome Chimera", "Discordant Piper", "Gift of Strength", "Underworld Charger");
+        private static final TherosBeyondDeathRun commonC1 = new TherosBeyondDeathRun(true, "Voracious Typhon", "Skophos Warleader", "Mire's Grasp", "Towering-Wave Mystic", "Daybreak Chimera", "Ilysian Caryatid", "Omen of the Sea", "Flicker of Fate", "Infuriate", "Thaumaturge's Familiar", "Venomous Hierophant", "Chain to Memory", "Hyrax Tower Scout", "Satyr's Cunning", "Hero of the Pride", "Traveler's Amulet", "Grim Physician", "Thirst for Meaning", "Setessan Skirmisher", "Iroas's Blessing", "Funeral Rites", "Dreadful Apathy", "Eidolon of Philosophy", "Voracious Typhon", "Wings of Hubris", "Skophos Warleader", "Mire's Grasp", "Rumbling Sentry", "Witness of Tomorrows", "Ilysian Caryatid", "Towering-Wave Mystic", "Daybreak Chimera", "Traveler's Amulet", "Infuriate", "Grim Physician", "Omen of the Sea", "Thaumaturge's Familiar", "Venomous Hierophant", "Bronze Sword", "Satyr's Cunning", "Hero of the Pride", "Chain to Memory", "Pharika's Libation", "Hyrax Tower Scout", "Wings of Hubris", "Flicker of Fate", "Thirst for Meaning", "Funeral Rites", "Eidolon of Philosophy", "Dreadful Apathy", "Setessan Skirmisher", "Iroas's Blessing", "Pharika's Libation", "Witness of Tomorrows", "Rumbling Sentry");
+        private static final TherosBeyondDeathRun commonC2 = new TherosBeyondDeathRun(true, "Brine Giant", "Fruit of Tizerus", "Return to Nature", "Omen of the Forge", "Bronze Sword", "Revoke Existence", "Arena Trickster", "Warbriar Blessing", "Unknown Shores", "Memory Drain", "Flummoxed Cyclops", "Altar of the Pantheon", "Nylea's Huntmaster", "Inspire Awe", "Brine Giant", "Irreverent Revelers", "Final Death", "Fruit of Tizerus", "Return to Nature", "Flummoxed Cyclops", "Mogis's Favor", "Captivating Unicorn", "Pious Wayfarer", "Warbriar Blessing", "Arena Trickster", "Revoke Existence", "Memory Drain", "Unknown Shores", "Omen of the Forge", "Altar of the Pantheon", "Nylea's Huntmaster", "Fruit of Tizerus", "Captivating Unicorn", "Irreverent Revelers", "Brine Giant", "Mogis's Favor", "Revoke Existence", "Inspire Awe", "Flummoxed Cyclops", "Unknown Shores", "Final Death", "Return to Nature", "Memory Drain", "Warbriar Blessing", "Arena Trickster", "Pious Wayfarer", "Captivating Unicorn", "Inspire Awe", "Final Death", "Altar of the Pantheon", "Omen of the Forge", "Mogis's Favor", "Nylea's Huntmaster", "Pious Wayfarer", "Irreverent Revelers");
+        private static final TherosBeyondDeathRun uncommonA = new TherosBeyondDeathRun(true, "Mischievous Chimera", "Shoal Kraken", "Skophos Maze-Warden", "Dawn Evangel", "Pharika's Spawn", "Slaughter-Priest of Mogis", "Gray Merchant of Asphodel", "Chainweb Aracnir", "Reverent Hoplite", "Heroes of the Revel", "Banishing Light", "Nyx Herald", "Staggering Insight", "Callaphe, Beloved of the Sea", "One with the Stars", "Mystic Repeal", "Mire Triton", "Alseid of Life's Bounty", "Furious Rise", "Renata, Called to the Hunt", "Acolyte of Affliction", "Impending Doom", "Agonizing Remorse", "Drag to the Underworld", "Entrancing Lyre", "Phalanx Tactics", "Dreamstalker Manticore", "Elspeth's Nightmare", "Hero of the Nyxborn", "Pheres-Band Brawler", "Lagonna-Band Storyteller", "Fateful End", "Shimmerwing Chimera", "Setessan Petitioner", "Devourer of Memory", "Anax, Hardened in the Forge", "Alirios, Enraptured", "Skophos Maze-Warden", "Wolfwillow Haven", "Dawn Evangel", "Furious Rise", "Banishing Light", "Nyx Herald", "Reverent Hoplite", "Mischievous Chimera", "Archon of Falling Stars", "Heroes of the Revel", "Pharika's Spawn", "Lagonna-Band Storyteller", "Entrancing Lyre", "Callaphe, Beloved of the Sea", "Mystic Repeal", "Phalanx Tactics", "One with the Stars", "Gray Merchant of Asphodel", "Dreamstalker Manticore", "Mire Triton", "Renata, Called to the Hunt", "Whirlwind Denial", "Impending Doom", "Staggering Insight", "Chainweb Aracnir", "Fateful End", "Hero of the Nyxborn", "Shoal Kraken", "Alseid of Life's Bounty", "Agonizing Remorse", "Anax, Hardened in the Forge", "Acolyte of Affliction", "Pheres-Band Brawler", "Alirios, Enraptured", "Elspeth's Nightmare", "Slaughter-Priest of Mogis", "Drag to the Underworld", "Setessan Petitioner", "Skophos Maze-Warden", "Dawn Evangel", "Whirlwind Denial", "Devourer of Memory", "Shimmerwing Chimera", "Pharika's Spawn", "Mischievous Chimera", "Banishing Light", "Furious Rise", "Wolfwillow Haven", "Mire Triton", "Impending Doom", "Gray Merchant of Asphodel", "Shoal Kraken", "Archon of Falling Stars", "Mystic Repeal", "Staggering Insight", "One with the Stars", "Alseid of Life's Bounty", "Entrancing Lyre", "Callaphe, Beloved of the Sea", "Nyx Herald", "Slaughter-Priest of Mogis", "Reverent Hoplite", "Renata, Called to the Hunt", "Agonizing Remorse", "Heroes of the Revel", "Acolyte of Affliction", "Alirios, Enraptured", "Hero of the Nyxborn", "Chainweb Aracnir", "Dreamstalker Manticore", "Phalanx Tactics", "Drag to the Underworld", "Pheres-Band Brawler", "Elspeth's Nightmare", "Anax, Hardened in the Forge", "Devourer of Memory", "Setessan Petitioner", "Whirlwind Denial", "Lagonna-Band Storyteller", "Archon of Falling Stars", "Shimmerwing Chimera", "Fateful End", "Wolfwillow Haven");
+        private static final TherosBeyondDeathRun uncommonB = new TherosBeyondDeathRun(true, "Siona, Captain of the Pyleas", "Hateful Eidolon", "Blood Aspirant", "Nessian Wanderer", "Heliod's Punishment", "Mirror Shield", "Cling to Dust", "Glimpse of Freedom", "Field of Ruin", "Klothys's Design", "Thundering Chariot", "Escape Velocity", "Daxos, Blessed by the Sun", "Eutropia the Twice-Favored", "Sage of Mysteries", "Tymaret, Chosen from Death", "Hydra's Growth", "The Triumph of Anax", "Minion's Return", "Stinging Lionfish", "Destiny Spinner", "Rise to Glory", "Dreamshaper Shaman", "Soul-Guide Lantern", "Sea God's Scorn", "Favored of Iroas", "Inevitable End", "The Binding of the Titans", "The Birth of Meletis", "Careless Celebrant", "Underworld Dreams", "Medomai's Prophecy", "Thundering Chariot", "Sweet Oblivion", "Nessian Hornbeetle", "Blood Aspirant", "Heliod's Punishment", "Mirror Shield", "Enemy of Enlightenment", "Stinging Lionfish", "Hateful Eidolon", "The Triumph of Anax", "Hero of the Winds", "Warden of the Chained", "Threnody Singer", "Dreamshaper Shaman", "Minion's Return", "Hydra's Growth", "Glimpse of Freedom", "Commanding Presence", "Underworld Fires", "Cling to Dust", "Nessian Wanderer", "Siona, Captain of the Pyleas", "Sage of Mysteries", "Eutropia the Twice-Favored", "Daxos, Blessed by the Sun", "Escape Velocity", "Klothys's Design", "Soul-Guide Lantern", "Tymaret, Chosen from Death", "Favored of Iroas", "Field of Ruin", "Sea God's Scorn", "The Birth of Meletis", "Rise to Glory", "Destiny Spinner", "Careless Celebrant", "Underworld Dreams", "Medomai's Prophecy", "Warden of the Chained", "Heliod's Punishment", "Sweet Oblivion", "Inevitable End", "The Binding of the Titans", "Blood Aspirant", "Enemy of Enlightenment", "Mirror Shield", "Hero of the Winds", "Nessian Wanderer", "The Triumph of Anax", "Minion's Return", "Threnody Singer", "Siona, Captain of the Pyleas", "Underworld Fires", "Commanding Presence", "Thundering Chariot", "Nessian Hornbeetle", "Daxos, Blessed by the Sun", "Escape Velocity", "Hateful Eidolon", "Stinging Lionfish", "Hydra's Growth", "Eutropia the Twice-Favored", "Field of Ruin", "Glimpse of Freedom", "Klothys's Design", "Cling to Dust", "Rise to Glory", "Sage of Mysteries", "Favored of Iroas", "Destiny Spinner", "Tymaret, Chosen from Death", "Soul-Guide Lantern", "Dreamshaper Shaman", "The Birth of Meletis", "Sweet Oblivion", "Inevitable End", "The Binding of the Titans", "Sea God's Scorn", "Hero of the Winds", "Careless Celebrant", "Underworld Dreams", "Medomai's Prophecy", "Nessian Hornbeetle", "Commanding Presence", "Underworld Fires", "Warden of the Chained", "Enemy of Enlightenment", "Threnody Singer");
+        private static final TherosBeyondDeathRun rare = new TherosBeyondDeathRun(false, "Allure of the Unknown", "Aphemia, the Cacophony", "Arasta of the Endless Web", "Archon of Sun's Grace", "Ashiok's Erasure", "Atris, Oracle of Half-Truths", "Bronzehide Lion", "Dalakos, Crafter of Wonders", "Dream Trawler", "Dryad of the Ilysian Grove", "Eat to Extinction", "Eidolon of Obstruction", "Elspeth Conquers Death", "Enigmatic Incarnation", "Erebos's Intervention", "Gallia of the Endless Dance", "Gravebreaker Lamia", "Haktos the Unscarred", "Heliod's Intervention", "Idyllic Tutor", "Kunoros, Hound of Athreos", "Labyrinth of Skophos", "Mantle of the Wolf", "Nadir Kraken", "Nessian Boar", "Nightmare Shepherd", "Nylea's Intervention", "Nyx Lotus", "Phoenix of Ash", "Protean Thaumaturge", "Purphoros's Intervention", "Setessan Champion", "Shadowspear", "Shatter the Sky", "Storm Herald", "Storm's Wrath", "Taranika, Akroan Veteran", "Tectonic Giant", "Temple of Abandon", "Temple of Deceit", "Temple of Enlightenment", "Temple of Malice", "Temple of Plenty", "Thassa's Intervention", "Thassa's Oracle", "The Akroan War", "The First Iroan Games", "Thryx, the Sudden Storm", "Treacherous Blessing", "Tymaret Calls the Dead", "Underworld Breach", "Wavebreak Hippocamp", "Woe Strider");
+        private static final TherosBeyondDeathRun mythic = new TherosBeyondDeathRun(false, "Ashiok, Nightmare Muse", "Calix, Destiny's Hand", "Elspeth, Sun's Nemesis", "Erebos, Bleak-Hearted", "Heliod, Sun-Crowned", "Kiora Bests the Sea God", "Klothys, God of Destiny", "Kroxa, Titan of Death's Hunger", "Nylea, Keen-Eyed", "Nyxbloom Ancient", "Ox of Agonas", "Polukranos, Unchained", "Purphoros, Bronze-Blooded", "Thassa, Deep-Dwelling", "Uro, Titan of Nature's Wrath");
+        private static final TherosBeyondDeathRun land = new TherosBeyondDeathRun(false, "Plains", "Island", "Swamp", "Mountain", "Forest");
 
-        private Rotater(T item1, T item2) {
-            this(true, item1, item2);
-        }
-
-        private Rotater(boolean keepOrder, T... items) {
-            this.items = Arrays.asList(items);
-            this.keepOrder = keepOrder;
-        }
-
-        private int iterate() {
-            int i = position;
-            position++;
-            position %= items.size();
-            return i;
-        }
-
-        private T getNext() {
-            return items.get(iterate());
-        }
-
-        private void shuffle() {
-            position = RandomUtil.nextInt(items.size());
-            if (!keepOrder) {
-                Collections.shuffle(items, RandomUtil.getRandom());
-            }
+        private TherosBeyondDeathRun(boolean keepOrder, String... names) {
+            super(keepOrder, names);
         }
     }
 
-    private static enum Run {
-        commonA(true, "Stampede Rider", "Nyxborn Courser", "Vexing Gull", "Aspect of Manticore", "Sunmane Pegasus", "Nyxborn Seaguard", "Thrill of Possibility", "Triumphant Surge", "Sleep of the Dead", "Incendiary Oracle", "Omen of the Sun", "Triton Waverider", "Underworld Rage-Hound", "Leonin of the Lost Pride", "Naiad of Hidden Coves", "Hero of the Games", "Indomitable Will", "Stern Dismissal", "Nyxborn Brute", "Heliod's Pilgrim", "Starlit Mantle", "Oread of Mountain's Blaze", "Karametra's Blessing", "Elite Instructor", "Final Flare", "Transcendent Envoy", "Riptide Turtle", "Thrill of Possibility", "Nyxborn Courser", "Ichthyomorphosis", "Wrap in Flames", "Glory Bearers", "Nyxborn Seaguard", "Portent of Betrayal", "Sunmane Pegasus", "Sleep of the Dead", "Aspect of Manticore", "Omen of the Sun", "Deny the Divine", "Nyxborn Brute", "Sentinel's Eyes", "Vexing Gull", "Stampede Rider", "Triumphant Surge", "Starlit Mantle", "Hero of the Games", "Leonin of the Lost Pride", "Triton Waverider", "Incendiary Oracle", "Indomitable Will", "Naiad of Hidden Coves", "Underworld Rage-Hound", "Heliod's Pilgrim", "Elite Instructor", "Oread of Mountain's Blaze", "Transcendent Envoy", "Stern Dismissal", "Final Flare", "Glory Bearers", "Ichthyomorphosis", "Portent of Betrayal", "Karametra's Blessing", "Deny the Divine", "Wrap in Flames", "Sentinel's Eyes", "Riptide Turtle"),
-        commonB(true, "Nylea's Forerunner", "Aspect of Lamprey", "Nyxborn Colossus", "Temple Thief", "Setessan Training", "Lampad of Death's Vigil", "Skola Grovedancer", "Soulreaper of Mogis", "Nexus Wardens", "Underworld Charger", "Plummet", "Omen of the Dead", "Omen of the Hunt", "Discordant Piper", "Loathsome Chimera", "Rage-Scarred Berserker", "Gift of Strength", "Blight-Breath Catoblepas", "Relentless Pursuit", "Nyxborn Marauder", "Moss Viper", "Scavenging Harpy", "Skola Grovedancer", "Aspect of Lamprey", "Setessan Training", "Lampad of Death's Vigil", "Nexus Wardens", "Temple Thief", "Nylea's Forerunner", "Soulreaper of Mogis", "Omen of the Hunt", "Omen of the Dead", "Nyxborn Colossus", "Scavenging Harpy", "Loathsome Chimera", "Underworld Charger", "Plummet", "Discordant Piper", "Gift of Strength", "Rage-Scarred Berserker", "Moss Viper", "Blight-Breath Catoblepas", "Relentless Pursuit", "Nyxborn Marauder", "Setessan Training", "Aspect of Lamprey", "Nexus Wardens", "Temple Thief", "Skola Grovedancer", "Omen of the Dead", "Nylea's Forerunner", "Lampad of Death's Vigil", "Nyxborn Colossus", "Soulreaper of Mogis", "Omen of the Hunt", "Scavenging Harpy", "Moss Viper", "Rage-Scarred Berserker", "Plummet", "Nyxborn Marauder", "Relentless Pursuit", "Blight-Breath Catoblepas", "Loathsome Chimera", "Discordant Piper", "Gift of Strength", "Underworld Charger"),
-        commonC1(true, "Voracious Typhon", "Skophos Warleader", "Mire's Grasp", "Towering-Wave Mystic", "Daybreak Chimera", "Ilysian Caryatid", "Omen of the Sea", "Flicker of Fate", "Infuriate", "Thaumaturge's Familiar", "Venomous Hierophant", "Chain to Memory", "Hyrax Tower Scout", "Satyr's Cunning", "Hero of the Pride", "Traveler's Amulet", "Grim Physician", "Thirst for Meaning", "Setessan Skirmisher", "Iroas's Blessing", "Funeral Rites", "Dreadful Apathy", "Eidolon of Philosophy", "Voracious Typhon", "Wings of Hubris", "Skophos Warleader", "Mire's Grasp", "Rumbling Sentry", "Witness of Tomorrows", "Ilysian Caryatid", "Towering-Wave Mystic", "Daybreak Chimera", "Traveler's Amulet", "Infuriate", "Grim Physician", "Omen of the Sea", "Thaumaturge's Familiar", "Venomous Hierophant", "Bronze Sword", "Satyr's Cunning", "Hero of the Pride", "Chain to Memory", "Pharika's Libation", "Hyrax Tower Scout", "Wings of Hubris", "Flicker of Fate", "Thirst for Meaning", "Funeral Rites", "Eidolon of Philosophy", "Dreadful Apathy", "Setessan Skirmisher", "Iroas's Blessing", "Pharika's Libation", "Witness of Tomorrows", "Rumbling Sentry"),
-        commonC2(true, "Brine Giant", "Fruit of Tizerus", "Return to Nature", "Omen of the Forge", "Bronze Sword", "Revoke Existence", "Arena Trickster", "Warbriar Blessing", "Unknown Shores", "Memory Drain", "Flummoxed Cyclops", "Altar of the Pantheon", "Nylea's Huntmaster", "Inspire Awe", "Brine Giant", "Irreverent Revelers", "Final Death", "Fruit of Tizerus", "Return to Nature", "Flummoxed Cyclops", "Mogis's Favor", "Captivating Unicorn", "Pious Wayfarer", "Warbriar Blessing", "Arena Trickster", "Revoke Existence", "Memory Drain", "Unknown Shores", "Omen of the Forge", "Altar of the Pantheon", "Nylea's Huntmaster", "Fruit of Tizerus", "Captivating Unicorn", "Irreverent Revelers", "Brine Giant", "Mogis's Favor", "Revoke Existence", "Inspire Awe", "Flummoxed Cyclops", "Unknown Shores", "Final Death", "Return to Nature", "Memory Drain", "Warbriar Blessing", "Arena Trickster", "Pious Wayfarer", "Captivating Unicorn", "Inspire Awe", "Final Death", "Altar of the Pantheon", "Omen of the Forge", "Mogis's Favor", "Nylea's Huntmaster", "Pious Wayfarer", "Irreverent Revelers"),
-        uncommonA(true, "Mischievous Chimera", "Shoal Kraken", "Skophos Maze-Warden", "Dawn Evangel", "Pharika's Spawn", "Slaughter-Priest of Mogis", "Gray Merchant of Asphodel", "Chainweb Aracnir", "Reverent Hoplite", "Heroes of the Revel", "Banishing Light", "Nyx Herald", "Staggering Insight", "Callaphe, Beloved of the Sea", "One with the Stars", "Mystic Repeal", "Mire Triton", "Alseid of Life's Bounty", "Furious Rise", "Renata, Called to the Hunt", "Acolyte of Affliction", "Impending Doom", "Agonizing Remorse", "Drag to the Underworld", "Entrancing Lyre", "Phalanx Tactics", "Dreamstalker Manticore", "Elspeth's Nightmare", "Hero of the Nyxborn", "Pheres-Band Brawler", "Lagonna-Band Storyteller", "Fateful End", "Shimmerwing Chimera", "Setessan Petitioner", "Devourer of Memory", "Anax, Hardened in the Forge", "Alirios, Enraptured", "Skophos Maze-Warden", "Wolfwillow Haven", "Dawn Evangel", "Furious Rise", "Banishing Light", "Nyx Herald", "Reverent Hoplite", "Mischievous Chimera", "Archon of Falling Stars", "Heroes of the Revel", "Pharika's Spawn", "Lagonna-Band Storyteller", "Entrancing Lyre", "Callaphe, Beloved of the Sea", "Mystic Repeal", "Phalanx Tactics", "One with the Stars", "Gray Merchant of Asphodel", "Dreamstalker Manticore", "Mire Triton", "Renata, Called to the Hunt", "Whirlwind Denial", "Impending Doom", "Staggering Insight", "Chainweb Aracnir", "Fateful End", "Hero of the Nyxborn", "Shoal Kraken", "Alseid of Life's Bounty", "Agonizing Remorse", "Anax, Hardened in the Forge", "Acolyte of Affliction", "Pheres-Band Brawler", "Alirios, Enraptured", "Elspeth's Nightmare", "Slaughter-Priest of Mogis", "Drag to the Underworld", "Setessan Petitioner", "Skophos Maze-Warden", "Dawn Evangel", "Whirlwind Denial", "Devourer of Memory", "Shimmerwing Chimera", "Pharika's Spawn", "Mischievous Chimera", "Banishing Light", "Furious Rise", "Wolfwillow Haven", "Mire Triton", "Impending Doom", "Gray Merchant of Asphodel", "Shoal Kraken", "Archon of Falling Stars", "Mystic Repeal", "Staggering Insight", "One with the Stars", "Alseid of Life's Bounty", "Entrancing Lyre", "Callaphe, Beloved of the Sea", "Nyx Herald", "Slaughter-Priest of Mogis", "Reverent Hoplite", "Renata, Called to the Hunt", "Agonizing Remorse", "Heroes of the Revel", "Acolyte of Affliction", "Alirios, Enraptured", "Hero of the Nyxborn", "Chainweb Aracnir", "Dreamstalker Manticore", "Phalanx Tactics", "Drag to the Underworld", "Pheres-Band Brawler", "Elspeth's Nightmare", "Anax, Hardened in the Forge", "Devourer of Memory", "Setessan Petitioner", "Whirlwind Denial", "Lagonna-Band Storyteller", "Archon of Falling Stars", "Shimmerwing Chimera", "Fateful End", "Wolfwillow Haven"),
-        uncommonB(true, "Siona, Captain of the Pyleas", "Hateful Eidolon", "Blood Aspirant", "Nessian Wanderer", "Heliod's Punishment", "Mirror Shield", "Cling to Dust", "Glimpse of Freedom", "Field of Ruin", "Klothys's Design", "Thundering Chariot", "Escape Velocity", "Daxos, Blessed by the Sun", "Eutropia the Twice-Favored", "Sage of Mysteries", "Tymaret, Chosen from Death", "Hydra's Growth", "The Triumph of Anax", "Minion's Return", "Stinging Lionfish", "Destiny Spinner", "Rise to Glory", "Dreamshaper Shaman", "Soul-Guide Lantern", "Sea God's Scorn", "Favored of Iroas", "Inevitable End", "The Binding of the Titans", "The Birth of Meletis", "Careless Celebrant", "Underworld Dreams", "Medomai's Prophecy", "Thundering Chariot", "Sweet Oblivion", "Nessian Hornbeetle", "Blood Aspirant", "Heliod's Punishment", "Mirror Shield", "Enemy of Enlightenment", "Stinging Lionfish", "Hateful Eidolon", "The Triumph of Anax", "Hero of the Winds", "Warden of the Chained", "Threnody Singer", "Dreamshaper Shaman", "Minion's Return", "Hydra's Growth", "Glimpse of Freedom", "Commanding Presence", "Underworld Fires", "Cling to Dust", "Nessian Wanderer", "Siona, Captain of the Pyleas", "Sage of Mysteries", "Eutropia the Twice-Favored", "Daxos, Blessed by the Sun", "Escape Velocity", "Klothys's Design", "Soul-Guide Lantern", "Tymaret, Chosen from Death", "Favored of Iroas", "Field of Ruin", "Sea God's Scorn", "The Birth of Meletis", "Rise to Glory", "Destiny Spinner", "Careless Celebrant", "Underworld Dreams", "Medomai's Prophecy", "Warden of the Chained", "Heliod's Punishment", "Sweet Oblivion", "Inevitable End", "The Binding of the Titans", "Blood Aspirant", "Enemy of Enlightenment", "Mirror Shield", "Hero of the Winds", "Nessian Wanderer", "The Triumph of Anax", "Minion's Return", "Threnody Singer", "Siona, Captain of the Pyleas", "Underworld Fires", "Commanding Presence", "Thundering Chariot", "Nessian Hornbeetle", "Daxos, Blessed by the Sun", "Escape Velocity", "Hateful Eidolon", "Stinging Lionfish", "Hydra's Growth", "Eutropia the Twice-Favored", "Field of Ruin", "Glimpse of Freedom", "Klothys's Design", "Cling to Dust", "Rise to Glory", "Sage of Mysteries", "Favored of Iroas", "Destiny Spinner", "Tymaret, Chosen from Death", "Soul-Guide Lantern", "Dreamshaper Shaman", "The Birth of Meletis", "Sweet Oblivion", "Inevitable End", "The Binding of the Titans", "Sea God's Scorn", "Hero of the Winds", "Careless Celebrant", "Underworld Dreams", "Medomai's Prophecy", "Nessian Hornbeetle", "Commanding Presence", "Underworld Fires", "Warden of the Chained", "Enemy of Enlightenment", "Threnody Singer"),
-        rare(false, "Allure of the Unknown", "Aphemia, the Cacophony", "Arasta of the Endless Web", "Archon of Sun's Grace", "Ashiok's Erasure", "Atris, Oracle of Half-Truths", "Bronzehide Lion", "Dalakos, Crafter of Wonders", "Dream Trawler", "Dryad of the Ilysian Grove", "Eat to Extinction", "Eidolon of Obstruction", "Elspeth Conquers Death", "Enigmatic Incarnation", "Erebos's Intervention", "Gallia of the Endless Dance", "Gravebreaker Lamia", "Haktos the Unscarred", "Heliod's Intervention", "Idyllic Tutor", "Kunoros, Hound of Athreos", "Labyrinth of Skophos", "Mantle of the Wolf", "Nadir Kraken", "Nessian Boar", "Nightmare Shepherd", "Nylea's Intervention", "Nyx Lotus", "Phoenix of Ash", "Protean Thaumaturge", "Purphoros's Intervention", "Setessan Champion", "Shadowspear", "Shatter the Sky", "Storm Herald", "Storm's Wrath", "Taranika, Akroan Veteran", "Tectonic Giant", "Temple of Abandon", "Temple of Deceit", "Temple of Enlightenment", "Temple of Malice", "Temple of Plenty", "Thassa's Intervention", "Thassa's Oracle", "The Akroan War", "The First Iroan Games", "Thryx, the Sudden Storm", "Treacherous Blessing", "Tymaret Calls the Dead", "Underworld Breach", "Wavebreak Hippocamp", "Woe Strider"),
-        mythic(false, "Ashiok, Nightmare Muse", "Calix, Destiny's Hand", "Elspeth, Sun's Nemesis", "Erebos, Bleak-Hearted", "Heliod, Sun-Crowned", "Kiora Bests the Sea God", "Klothys, God of Destiny", "Kroxa, Titan of Death's Hunger", "Nylea, Keen-Eyed", "Nyxbloom Ancient", "Ox of Agonas", "Polukranos, Unchained", "Purphoros, Bronze-Blooded", "Thassa, Deep-Dwelling", "Uro, Titan of Nature's Wrath"),
-        land(false, "Plains", "Island", "Swamp", "Mountain", "Forest");
+    private static class TherosBeyondDeathStructure extends BoosterStructure {
+        private static final TherosBeyondDeathStructure C1 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1);
+        private static final TherosBeyondDeathStructure C2 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1, TherosBeyondDeathRun.commonC1);
+        private static final TherosBeyondDeathStructure C3 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonC2, TherosBeyondDeathRun.commonC2, TherosBeyondDeathRun.commonC2, TherosBeyondDeathRun.commonC2);
+        private static final TherosBeyondDeathStructure C4 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonC2, TherosBeyondDeathRun.commonC2, TherosBeyondDeathRun.commonC2);
+        private static final TherosBeyondDeathStructure C5 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonA, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonB, TherosBeyondDeathRun.commonC2, TherosBeyondDeathRun.commonC2);
+        private static final TherosBeyondDeathStructure U1 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.uncommonA, TherosBeyondDeathRun.uncommonB, TherosBeyondDeathRun.uncommonB);
+        private static final TherosBeyondDeathStructure U2 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.uncommonA, TherosBeyondDeathRun.uncommonA, TherosBeyondDeathRun.uncommonB);
+        private static final TherosBeyondDeathStructure R1 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.rare);
+        private static final TherosBeyondDeathStructure M1 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.mythic);
+        private static final TherosBeyondDeathStructure L1 = new TherosBeyondDeathStructure(TherosBeyondDeathRun.land);
 
-        private final Rotater<String> names;
-
-        Run(boolean keepOrder, String... names) {
-            this.names = new Rotater<>(keepOrder, names);
+        private TherosBeyondDeathStructure(CardRun... runs) {
+            super(runs);
         }
     }
 
-    private static enum BoosterStructure {
-        C1(Run.commonA, Run.commonA, Run.commonB, Run.commonB, Run.commonC1, Run.commonC1, Run.commonC1, Run.commonC1, Run.commonC1, Run.commonC1),
-        C2(Run.commonA, Run.commonA, Run.commonA, Run.commonB, Run.commonB, Run.commonC1, Run.commonC1, Run.commonC1, Run.commonC1, Run.commonC1),
-        C3(Run.commonA, Run.commonA, Run.commonA, Run.commonA, Run.commonB, Run.commonB, Run.commonC2, Run.commonC2, Run.commonC2, Run.commonC2),
-        C4(Run.commonA, Run.commonA, Run.commonA, Run.commonA, Run.commonB, Run.commonB, Run.commonB, Run.commonC2, Run.commonC2, Run.commonC2),
-        C5(Run.commonA, Run.commonA, Run.commonA, Run.commonA, Run.commonB, Run.commonB, Run.commonB, Run.commonB, Run.commonC2, Run.commonC2),
-        U1(Run.uncommonA, Run.uncommonB, Run.uncommonB),
-        U2(Run.uncommonA, Run.uncommonA, Run.uncommonB),
-        R1(Run.rare),
-        M1(Run.mythic),
-        L1(Run.land);
-
-        private final List<Run> boosterStructure;
-
-        BoosterStructure(Run... runs) {
-            this.boosterStructure = Arrays.asList(runs);
-        }
-
-        private List<String> makeRun() {
-            List<String> cards = new ArrayList<>();
-            for (Run run : this.boosterStructure) {
-                cards.add(run.names.getNext());
-            }
-            return cards;
-        }
-
-        private void shuffle() {
-            for (Run run : boosterStructure) {
-                run.names.shuffle();
-            }
-        }
-    }
-
-    private final Rotater<BoosterStructure> commonRuns = new Rotater<>(
+    private final RarityConfiguration commonRuns = new RarityConfiguration(
             false,
-            BoosterStructure.C1,
-            BoosterStructure.C2,
-            BoosterStructure.C3,
-            BoosterStructure.C4,
-            BoosterStructure.C5,
-            BoosterStructure.C1,
-            BoosterStructure.C2,
-            BoosterStructure.C3,
-            BoosterStructure.C4,
-            BoosterStructure.C5,
-            BoosterStructure.C4,
-            BoosterStructure.C5
+            TherosBeyondDeathStructure.C1,
+            TherosBeyondDeathStructure.C2,
+            TherosBeyondDeathStructure.C3,
+            TherosBeyondDeathStructure.C4,
+            TherosBeyondDeathStructure.C5,
+            TherosBeyondDeathStructure.C1,
+            TherosBeyondDeathStructure.C2,
+            TherosBeyondDeathStructure.C3,
+            TherosBeyondDeathStructure.C4,
+            TherosBeyondDeathStructure.C5,
+            TherosBeyondDeathStructure.C4,
+            TherosBeyondDeathStructure.C5
     );
-    private final Rotater<BoosterStructure> uncommonRuns = new Rotater<>(
-            BoosterStructure.U1,
-            BoosterStructure.U2
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(
+            TherosBeyondDeathStructure.U1,
+            TherosBeyondDeathStructure.U2
     );
-    private final Rotater<BoosterStructure> rareRuns = new Rotater<>(
+    private final RarityConfiguration rareRuns = new RarityConfiguration(
             false,
-            BoosterStructure.R1,
-            BoosterStructure.R1,
-            BoosterStructure.R1,
-            BoosterStructure.R1,
-            BoosterStructure.R1,
-            BoosterStructure.R1,
-            BoosterStructure.R1,
-            BoosterStructure.M1
+            TherosBeyondDeathStructure.R1,
+            TherosBeyondDeathStructure.R1,
+            TherosBeyondDeathStructure.R1,
+            TherosBeyondDeathStructure.R1,
+            TherosBeyondDeathStructure.R1,
+            TherosBeyondDeathStructure.R1,
+            TherosBeyondDeathStructure.R1,
+            TherosBeyondDeathStructure.M1
     );
-    private final Rotater<BoosterStructure> landRuns = new Rotater<>(
-            BoosterStructure.L1
+    private final RarityConfiguration landRuns = new RarityConfiguration(
+            TherosBeyondDeathStructure.L1
     );
 
+
+    @Override
     public void shuffle() {
-        for (BoosterStructure structure : commonRuns.items) {
-            structure.shuffle();
-        }
-        for (BoosterStructure structure : uncommonRuns.items) {
-            structure.shuffle();
-        }
-        for (BoosterStructure structure : rareRuns.items) {
-            structure.shuffle();
-        }
-        for (BoosterStructure structure : landRuns.items) {
-            structure.shuffle();
-        }
+        commonRuns.shuffle();
+        uncommonRuns.shuffle();
+        rareRuns.shuffle();
+        landRuns.shuffle();
     }
 
-    List<String> makeBooster() {
+    @Override
+    public List<String> makeBooster() {
         List<String> booster = new ArrayList<>();
         booster.addAll(commonRuns.getNext().makeRun());
         booster.addAll(uncommonRuns.getNext().makeRun());
