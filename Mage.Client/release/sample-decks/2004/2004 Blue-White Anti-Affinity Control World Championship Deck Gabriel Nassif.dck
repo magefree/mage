@@ -1,0 +1,23 @@
+3 [5DN:165] Wayfarer's Bauble
+2 [SCG:12] Eternal Dragon
+3 [ONS:28] Exalted Angel
+3 [KHM:42] Annul
+3 [5DN:27] Condescend
+4 [M12:63] Mana Leak
+3 [M21:63] Rewind
+4 [MRD:53] Thirst for Knowledge
+2 [ONS:2] Akroma's Vengeance
+4 [SCG:8] Decree of Justice
+4 [10E:61] Wrath of God
+4 [MRD:280] Cloudpost
+4 [KTK:233] Flooded Strand
+7 [KHM:395] Island
+7 [KHM:394] Plains
+3 [SCG:143] Temple of the False God
+SB: 4 [DST:12] Purge
+SB: 3 [IKO:25] Pacifism
+SB: 2 [5DN:147] Relic Barrier
+SB: 3 [RNA:238] Scrabbling Claws
+SB: 3 [SCG:52] Stifle
+LAYOUT MAIN:(1,5)(CARD_TYPE,false,93)|([5DN:165],[5DN:165],[5DN:165])([SCG:12],[SCG:12],[ONS:28],[ONS:28],[ONS:28])([KHM:42],[KHM:42],[KHM:42],[5DN:27],[5DN:27],[5DN:27],[M12:63],[M12:63],[M12:63],[M12:63],[M21:63],[M21:63],[M21:63],[MRD:53],[MRD:53],[MRD:53],[MRD:53])([MRD:280],[MRD:280],[MRD:280],[MRD:280],[KTK:233],[KTK:233],[KTK:233],[KTK:233],[KHM:395],[KHM:395],[KHM:395],[KHM:395],[KHM:395],[KHM:395],[KHM:395],[KHM:394],[KHM:394],[KHM:394],[KHM:394],[KHM:394],[KHM:394],[KHM:394],[SCG:143],[SCG:143],[SCG:143])([ONS:2],[ONS:2],[SCG:8],[SCG:8],[SCG:8],[SCG:8],[10E:61],[10E:61],[10E:61],[10E:61])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([DST:12],[DST:12],[DST:12],[DST:12],[IKO:25],[IKO:25],[IKO:25],[5DN:147],[5DN:147],[RNA:238],[RNA:238],[RNA:238],[SCG:52],[SCG:52],[SCG:52])
