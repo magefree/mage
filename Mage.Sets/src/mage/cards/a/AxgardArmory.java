@@ -35,7 +35,7 @@ public final class AxgardArmory extends CardImpl {
 
         // {1}{R}{R}{W}, {T}: Sacrifice Axgard Armory: Search your library for an Aura card and/or Equipment card, reveal them, put them into your hand, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(
-                new SearchLibraryPutInHandEffect(new AxgardArmoryTarget())
+                new SearchLibraryPutInHandEffect(new AxgardArmoryTarget(), true)
                         .setText("search your library for an Aura card and/or an Equipment card, reveal them, " +
                                 "put them into your hand, then shuffle your library"),
                 new ManaCostsImpl("{1}{R}{R}{W}")
