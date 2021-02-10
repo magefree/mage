@@ -335,6 +335,8 @@ public class BoosterGenerationTest extends MageTestBase {
         boolean foundVale = false;
         boolean foundMDFC = false;
         boolean foundNoMDFC = false;
+
+        Kaldheim.getInstance().shuffleCollator();
         for (int i = 1; i <= 100; i++) {
             List<Card> booster = Kaldheim.getInstance().createBooster();
 

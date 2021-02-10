@@ -4,6 +4,10 @@ import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -26,7 +30,7 @@ public final class Kaldheim extends ExpansionSet {
     private final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private Kaldheim() {
-        super("Kaldheim", "KHM", ExpansionSet.buildDate(2021, 2, 5), SetType.EXPANSION);
+        super("Kaldheim", "KHM", ExpansionSet.buildDate(2021, 2, 5), SetType.EXPANSION, new KaldheimCollator());
         this.blockName = "Kaldheim";
         this.hasBasicLands = true;
         this.hasBoosters = true;
@@ -487,5 +491,164 @@ public final class Kaldheim extends ExpansionSet {
             savedSpecialLand.removeIf(cardInfo -> cardInfo.getCardNumberAsInt() > maxCardNumberInBooster);
         }
         return new ArrayList<>(savedSpecialLand);
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/khm.html
+class KaldheimCollator implements BoosterCollator {
+
+    private static class KaldheimRun extends CardRun {
+        private static final KaldheimRun commonA = new KaldheimRun(true, "Story Seeker", "Strategic Planning", "Fearless Pup", "Gods' Hall Guardian", "Undersea Invader", "Seize the Spoils", "Battlefield Raptor", "Berg Strider", "Craven Hulk", "Goldmaw Champion", "Mists of Littjara", "Hagi Mob", "Master Skald", "Disdainful Stroke", "Breakneck Berserker", "Warhorn Blast", "Brinebarrow Intruder", "Run Amok", "Wings of the Cosmos", "Draugr Thought-Thief", "Tuskeri Firewalker", "Axgard Braggart", "Depart the Realm", "Immersturm Raider", "Valor of the Worthy", "Littjara Kinseekers", "Cinderheart Giant", "Doomskar Oracle", "Pilfering Hawk", "Tormentor's Helm", "Beskir Shieldmate", "Karfell Harbinger", "Axgard Cavalry", "Gods' Hall Guardian", "Strategic Planning", "Fearless Pup", "Story Seeker", "Undersea Invader", "Craven Hulk", "Battlefield Raptor", "Berg Strider", "Seize the Spoils", "Goldmaw Champion", "Disdainful Stroke", "Breakneck Berserker", "Warhorn Blast", "Mists of Littjara", "Hagi Mob", "Master Skald", "Draugr Thought-Thief", "Run Amok", "Wings of the Cosmos", "Brinebarrow Intruder", "Tuskeri Firewalker", "Valor of the Worthy", "Depart the Realm", "Immersturm Raider", "Doomskar Oracle", "Karfell Harbinger", "Tormentor's Helm", "Axgard Braggart", "Pilfering Hawk", "Axgard Cavalry", "Beskir Shieldmate", "Littjara Kinseekers", "Cinderheart Giant");
+        private static final KaldheimRun commonB = new KaldheimRun(true, "Koma's Faithful", "Icehide Troll", "Draugr Recruiter", "Mammoth Growth", "Elderfang Disciple", "Masked Vandal", "Priest of the Haunted Edge", "Jaspera Sentinel", "Village Rites", "Guardian Gladewalker", "Skull Raid", "Glittering Frost", "Grim Draugr", "Snakeskin Veil", "Demonic Gifts", "Icehide Troll", "Withercrown", "King Harald's Revenge", "Deathknell Berserker", "Broken Wings", "Dread Rider", "Gnottvold Recluse", "Draugr Recruiter", "Horizon Seeker", "Koma's Faithful", "Mammoth Growth", "Priest of the Haunted Edge", "Jaspera Sentinel", "Elderfang Disciple", "Guardian Gladewalker", "Village Rites", "Masked Vandal", "Skull Raid", "Glittering Frost", "Demonic Gifts", "Snakeskin Veil", "Withercrown", "Broken Wings", "Grim Draugr", "King Harald's Revenge", "Dread Rider", "Icehide Troll", "Deathknell Berserker", "Gnottvold Recluse", "Koma's Faithful", "Horizon Seeker", "Draugr Recruiter", "Jaspera Sentinel", "Priest of the Haunted Edge", "Guardian Gladewalker", "Elderfang Disciple", "Mammoth Growth", "Village Rites", "Glittering Frost", "Withercrown", "Masked Vandal", "Demonic Gifts", "Broken Wings", "Skull Raid", "Snakeskin Veil", "Dread Rider", "King Harald's Revenge", "Grim Draugr", "Gnottvold Recluse", "Deathknell Berserker", "Horizon Seeker");
+        private static final KaldheimRun commonC1 = new KaldheimRun(true, "Ravenous Lindwurm", "Squash", "Raiders' Karve", "Behold the Multiverse", "Grizzled Outrider", "Revitalize", "Karfell Kennel-Master", "Scorn Effigy", "Bind the Monster", "Roots of Wisdom", "Starnheim Courser", "Smashing Success", "Infernal Pet", "Mistwalker", "Shimmerdrift Vale", "Stalwart Valkyrie", "Duskwielder", "Sarulf's Packmate", "Open the Omenpaths", "Frostpeak Yeti", "Jarl of the Forsaken", "Raven Wings", "Raise the Draugr", "Invoke the Divine", "Dwarven Reinforcements", "Annul", "Struggle for Skemfar", "Funeral Longboat", "Ravenous Lindwurm", "Behold the Multiverse", "Revitalize", "Raiders' Karve", "Squash", "Grizzled Outrider", "Bind the Monster", "Starnheim Courser", "Scorn Effigy", "Roots of Wisdom", "Smashing Success", "Karfell Kennel-Master", "Stalwart Valkyrie", "Mistwalker", "Infernal Pet", "Shimmerdrift Vale", "Duskwielder", "Dwarven Reinforcements", "Raise the Draugr", "Frostpeak Yeti", "Invoke the Divine", "Sarulf's Packmate", "Jarl of the Forsaken", "Open the Omenpaths", "Raven Wings", "Struggle for Skemfar", "Annul");
+        private static final KaldheimRun commonC2 = new KaldheimRun(true, "Giant Ox", "Sculptor of Winter", "Feed the Serpent", "Vault Robber", "Iron Verdict", "Goldvein Pick", "Augury Raven", "Arachnoform", "Demon Bolt", "Codespell Cleric", "Weigh Down", "Dogged Pursuit", "Frost Bite", "Run Ashore", "Elderleaf Mentor", "Giant Ox", "Demon Bolt", "Sculptor of Winter", "Shackles of Treachery", "Ravenform", "Bound in Gold", "Feed the Serpent", "Arachnoform", "Run Ashore", "Vault Robber", "Iron Verdict", "Dogged Pursuit", "Goldvein Pick", "Weigh Down", "Frost Bite", "Augury Raven", "Codespell Cleric", "Funeral Longboat", "Sculptor of Winter", "Shackles of Treachery", "Elderleaf Mentor", "Bound in Gold", "Ravenform", "Vault Robber", "Feed the Serpent", "Giant Ox", "Augury Raven", "Arachnoform", "Goldvein Pick", "Demon Bolt", "Iron Verdict", "Dogged Pursuit", "Run Ashore", "Codespell Cleric", "Weigh Down", "Bound in Gold", "Shackles of Treachery", "Elderleaf Mentor", "Frost Bite", "Ravenform");
+        private static final KaldheimRun uncommonA = new KaldheimRun(true, "Invasion of the Giants", "Colossal Plow", "Harald, King of Skemfar", "Fall of the Impostor", "Spirit of the Aldergard", "Narfi, Betrayer King", "Vega, the Watcher", "Clarion Spirit", "The Trickster-God's Heist", "Kaya's Onslaught", "Return Upon the Tide", "Skemfar Elderhall", "Firja, Judge of Valor", "Blizzard Brawl", "Divine Gambit", "Saw It Coming", "Basalt Ravager", "Draugr's Helm", "Littjara Glade-Warden", "Binding the Old Gods", "Ascent of the Worthy", "Icebind Pillar", "Skemfar Shadowsage", "Dual Strike", "Aegar, the Freezing Flame", "Koll, the Forgemaster", "Surtland Frostpyre", "Forging the Tyrite Sword", "Provoke the Trolls", "Poison the Cup", "Invasion of the Giants", "Colossal Plow", "Gnottvold Slumbermound", "Frost Augur", "Boreal Outrider", "Tergrid's Shadow", "Shepherd of the Cosmos", "Niko Defies Destiny", "Battershield Warrior", "Frostpyre Arcanist", "Immersturm Skullcairn", "Rune of Speed", "The Trickster-God's Heist", "Blizzard Brawl", "Narfi, Betrayer King", "Fall of the Impostor", "Spirit of the Aldergard", "Harald, King of Skemfar", "Skemfar Elderhall", "Kaya's Onslaught", "Return Upon the Tide", "Clarion Spirit", "Vega, the Watcher", "Divine Gambit", "Saw It Coming", "Basalt Ravager", "Firja, Judge of Valor", "Draugr's Helm", "Littjara Glade-Warden", "Binding the Old Gods", "Ascent of the Worthy", "Icebind Pillar", "Skemfar Shadowsage", "Dual Strike", "Aegar, the Freezing Flame", "Koll, the Forgemaster", "Surtland Frostpyre", "Forging the Tyrite Sword", "Provoke the Trolls", "Gnottvold Slumbermound", "Battershield Warrior", "Shepherd of the Cosmos", "Immersturm Skullcairn", "Tergrid's Shadow", "Niko Defies Destiny", "Poison the Cup", "Colossal Plow", "Boreal Outrider", "Frost Augur", "Invasion of the Giants", "Rune of Speed", "Frostpyre Arcanist", "Narfi, Betrayer King", "Spirit of the Aldergard", "Clarion Spirit", "The Trickster-God's Heist", "Vega, the Watcher", "Kaya's Onslaught", "Harald, King of Skemfar", "Blizzard Brawl", "Skemfar Elderhall", "Return Upon the Tide", "Fall of the Impostor", "Poison the Cup", "Firja, Judge of Valor", "Saw It Coming", "Basalt Ravager", "Draugr's Helm", "Littjara Glade-Warden", "Binding the Old Gods", "Ascent of the Worthy", "Icebind Pillar", "Skemfar Shadowsage", "Dual Strike", "Aegar, the Freezing Flame", "Koll, the Forgemaster", "Surtland Frostpyre", "Forging the Tyrite Sword", "Provoke the Trolls", "Divine Gambit", "Frostpyre Arcanist", "Shepherd of the Cosmos", "Gnottvold Slumbermound", "Tergrid's Shadow", "Frost Augur", "Rune of Speed", "Battershield Warrior", "Immersturm Skullcairn", "Niko Defies Destiny", "Boreal Outrider");
+        private static final KaldheimRun uncommonB = new KaldheimRun(true, "Spectral Steel", "Elven Bow", "Rune of Flight", "Arni Slays the Troll", "Port of Karfell", "Maja, Bretagard Protector", "Avalanche Caller", "Fearless Liberator", "Gates of Istfell", "Rune of Might", "The Three Seasons", "Bloodline Pretender", "Valkyrie's Sword", "Axgard Armory", "Fynn, the Fangbearer", "Crush the Weak", "Rune of Sustenance", "Weathered Runestone", "Littjara Mirrorlake", "Usher of the Fallen", "Hailstorm Valkyrie", "Path to the World Tree", "Moritte of the Frost", "Giant's Amulet", "Glimpse the Cosmos", "Doomskar Titan", "Kardur, Doomscourge", "Bloodsky Berserker", "Replicating Ring", "Great Hall of Starnheim", "Kardur's Vicious Return", "Dwarven Hammer", "Inga Rune-Eyes", "Runed Crown", "Rune of Mortality", "Rootless Yew", "Svella, Ice Shaper", "Frenzied Raider", "Vengeful Reaper", "Bretagard Stronghold", "Spectral Steel", "Elven Bow", "Rune of Flight", "Arni Slays the Troll", "Port of Karfell", "Maja, Bretagard Protector", "Avalanche Caller", "Crush the Weak", "Gates of Istfell", "Weathered Runestone", "Bloodline Pretender", "Valkyrie's Sword", "Rune of Might", "Rune of Sustenance", "Fynn, the Fangbearer", "Axgard Armory", "Fearless Liberator", "The Three Seasons", "Path to the World Tree", "Usher of the Fallen", "Glimpse the Cosmos", "Kardur, Doomscourge", "Hailstorm Valkyrie", "Doomskar Titan", "Giant's Amulet", "Littjara Mirrorlake", "Replicating Ring", "Bloodsky Berserker", "Moritte of the Frost", "Great Hall of Starnheim", "Dwarven Hammer", "Kardur's Vicious Return", "Inga Rune-Eyes", "Runed Crown", "Rune of Mortality", "Rootless Yew", "Svella, Ice Shaper", "Frenzied Raider", "Vengeful Reaper", "Bretagard Stronghold", "Spectral Steel", "Elven Bow", "Rune of Flight", "Arni Slays the Troll", "Port of Karfell", "Maja, Bretagard Protector", "Avalanche Caller", "Gates of Istfell", "Rune of Might", "Bloodline Pretender", "Fynn, the Fangbearer", "Fearless Liberator", "Valkyrie's Sword", "Crush the Weak", "Rune of Sustenance", "Weathered Runestone", "Axgard Armory", "The Three Seasons", "Usher of the Fallen", "Moritte of the Frost", "Glimpse the Cosmos", "Doomskar Titan", "Hailstorm Valkyrie", "Littjara Mirrorlake", "Kardur, Doomscourge", "Path to the World Tree", "Giant's Amulet", "Replicating Ring", "Bloodsky Berserker", "Great Hall of Starnheim", "Kardur's Vicious Return", "Dwarven Hammer", "Inga Rune-Eyes", "Runed Crown", "Rune of Mortality", "Rootless Yew", "Svella, Ice Shaper", "Frenzied Raider", "Vengeful Reaper", "Bretagard Stronghold");
+        private static final KaldheimRun rare = new KaldheimRun(false, "Arni Brokenbrow", "Ascendant Spirit", "Barkchannel Pathway", "Battle for Bretagard", "Battle of Frost and Fire", "Birgi, God of Storytelling", "Blessing of Frost", "Blightstep Pathway", "Blood on the Snow", "Calamity Bearer", "Cosima, God of the Voyage", "Cosmos Charger", "Cosmos Elixir", "Crippling Fear", "Cyclone Summoner", "Darkbore Pathway", "Doomskar", "Dragonkin Berserker", "Draugr Necromancer", "Dream Devourer", "Egon, God of Death", "Elvish Warmaster", "Esika's Chariot", "Faceless Haven", "Firja's Retribution", "Glorious Protector", "Graven Lore", "Harald Unites the Elves", "Hengegate Pathway", "Icebreaker Kraken", "Immersturm Predator", "In Search of Greatness", "Jorn, God of Winter", "King Narfi's Betrayal", "Kolvori, God of Kinship", "Magda, Brazen Outlaw", "Maskwood Nexus", "Mystic Reflection", "Old-Growth Troll", "Pyre of Heroes", "Rally the Ranks", "Realmwalker", "Reckless Crew", "Reflections of Littjara", "Reidane, God of the Worthy", "Righteous Valkyrie", "Rise of the Dread Marn", "Runeforge Champion", "Sarulf, Realm Eater", "Search for Glory", "Showdown of the Skalds", "Sigrid, God-Favored", "Skemfar Avenger", "Tergrid, God of Fright", "The Bears of Littjara", "The Bloodsky Massacre", "The Raven's Warning", "The World Tree", "Tibalt's Trickery", "Toski, Bearer of Secrets", "Tundra Fumarole", "Tyrite Sanctum", "Varragoth, Bloodsky Sire", "Waking the Trolls");
+        private static final KaldheimRun mythic = new KaldheimRun(false, "Alrund, God of the Cosmos", "Alrund's Epiphany", "Battle Mammoth", "Burning-Rune Demon", "Eradicator Valkyrie", "Esika, God of the Tree", "Goldspan Dragon", "Halvar, God of Battle", "Haunting Voyage", "Kaya the Inexorable", "Koma, Cosmos Serpent", "Niko Aris", "Orvar, the All-Form", "Quakebringer", "Resplendent Marshal", "Starnheim Unleashed", "Toralf, God of Fury", "Tyvar Kell", "Valki, God of Lies", "Vorinclex, Monstrous Raider");
+        private static final KaldheimRun land = new KaldheimRun(true, "Sulfurous Mire", "Snow-Covered Mountain", "Alpine Meadow", "Snow-Covered Plains", "Snow-Covered Plains", "Snow-Covered Swamp", "Snow-Covered Island", "Rimewood Falls", "Sulfurous Mire", "Snow-Covered Mountain", "Snow-Covered Mountain", "Snow-Covered Forest", "Woodland Chasm", "Snow-Covered Plains", "Snow-Covered Swamp", "Snow-Covered Island", "Ice Tunnel", "Snow-Covered Forest", "Snow-Covered Mountain", "Alpine Meadow", "Snow-Covered Mountain", "Snow-Covered Plains", "Snowfield Sinkhole", "Snow-Covered Plains", "Snow-Covered Swamp", "Snow-Covered Forest", "Snow-Covered Swamp", "Arctic Treeline", "Glacial Floodplain", "Snow-Covered Forest", "Snow-Covered Plains", "Arctic Treeline", "Snow-Covered Swamp", "Snow-Covered Forest", "Snow-Covered Mountain", "Rimewood Falls", "Glacial Floodplain", "Snow-Covered Swamp", "Snowfield Sinkhole", "Snow-Covered Swamp", "Highland Forest", "Snow-Covered Plains", "Snow-Covered Plains", "Snow-Covered Mountain", "Arctic Treeline", "Snow-Covered Island", "Snow-Covered Forest", "Alpine Meadow", "Snow-Covered Plains", "Snow-Covered Forest", "Snow-Covered Island", "Highland Forest", "Snowfield Sinkhole", "Glacial Floodplain", "Arctic Treeline", "Alpine Meadow", "Snow-Covered Mountain", "Sulfurous Mire", "Snow-Covered Forest", "Snow-Covered Plains", "Snow-Covered Mountain", "Snow-Covered Forest", "Sulfurous Mire", "Snow-Covered Island", "Alpine Meadow", "Snow-Covered Island", "Snowfield Sinkhole", "Snow-Covered Swamp", "Woodland Chasm", "Snow-Covered Swamp", "Snow-Covered Island", "Glacial Floodplain", "Snow-Covered Swamp", "Snow-Covered Forest", "Snow-Covered Plains", "Glacial Floodplain", "Woodland Chasm", "Volatile Fjord", "Snow-Covered Island", "Snow-Covered Plains", "Ice Tunnel", "Rimewood Falls", "Snow-Covered Forest", "Snow-Covered Swamp", "Volatile Fjord", "Snow-Covered Mountain", "Snow-Covered Island", "Ice Tunnel", "Snow-Covered Swamp", "Snow-Covered Island", "Woodland Chasm", "Ice Tunnel", "Snow-Covered Mountain", "Snow-Covered Mountain", "Snow-Covered Island", "Ice Tunnel", "Snow-Covered Island", "Highland Forest", "Snow-Covered Forest", "Volatile Fjord", "Rimewood Falls", "Snow-Covered Mountain", "Highland Forest", "Snow-Covered Swamp", "Snow-Covered Forest", "Rimewood Falls", "Snow-Covered Island", "Sulfurous Mire", "Snow-Covered Forest", "Snow-Covered Mountain", "Snow-Covered Swamp", "Snow-Covered Plains", "Snow-Covered Plains", "Volatile Fjord", "Snow-Covered Island", "Snowfield Sinkhole", "Volatile Fjord", "Arctic Treeline", "Highland Forest", "Woodland Chasm");
+
+        private KaldheimRun(boolean keepOrder, String... names) {
+            super(keepOrder, names);
+        }
+    }
+
+    private static class KaldheimStructure extends BoosterStructure {
+        private static final KaldheimStructure C1 = new KaldheimStructure(
+                KaldheimRun.commonA,
+                KaldheimRun.commonA,
+                KaldheimRun.commonB,
+                KaldheimRun.commonB,
+                KaldheimRun.commonC1,
+                KaldheimRun.commonC1,
+                KaldheimRun.commonC1,
+                KaldheimRun.commonC1,
+                KaldheimRun.commonC1,
+                KaldheimRun.commonC1
+        );
+        private static final KaldheimStructure C2 = new KaldheimStructure(
+                KaldheimRun.commonA,
+                KaldheimRun.commonA,
+                KaldheimRun.commonA,
+                KaldheimRun.commonB,
+                KaldheimRun.commonB,
+                KaldheimRun.commonC1,
+                KaldheimRun.commonC1,
+                KaldheimRun.commonC1,
+                KaldheimRun.commonC1,
+                KaldheimRun.commonC1
+        );
+        private static final KaldheimStructure C3 = new KaldheimStructure(
+                KaldheimRun.commonA,
+                KaldheimRun.commonA,
+                KaldheimRun.commonA,
+                KaldheimRun.commonB,
+                KaldheimRun.commonB,
+                KaldheimRun.commonB,
+                KaldheimRun.commonC2,
+                KaldheimRun.commonC2,
+                KaldheimRun.commonC2,
+                KaldheimRun.commonC2
+        );
+        private static final KaldheimStructure C4 = new KaldheimStructure(
+                KaldheimRun.commonA,
+                KaldheimRun.commonA,
+                KaldheimRun.commonA,
+                KaldheimRun.commonA,
+                KaldheimRun.commonB,
+                KaldheimRun.commonB,
+                KaldheimRun.commonB,
+                KaldheimRun.commonC2,
+                KaldheimRun.commonC2,
+                KaldheimRun.commonC2
+        );
+        private static final KaldheimStructure C5 = new KaldheimStructure(
+                KaldheimRun.commonA,
+                KaldheimRun.commonA,
+                KaldheimRun.commonA,
+                KaldheimRun.commonA,
+                KaldheimRun.commonB,
+                KaldheimRun.commonB,
+                KaldheimRun.commonC2,
+                KaldheimRun.commonC2,
+                KaldheimRun.commonC2,
+                KaldheimRun.commonC2
+        );
+        private static final KaldheimStructure U1 = new KaldheimStructure(
+                KaldheimRun.uncommonA,
+                KaldheimRun.uncommonA,
+                KaldheimRun.uncommonA
+        );
+        private static final KaldheimStructure U2 = new KaldheimStructure(
+                KaldheimRun.uncommonB,
+                KaldheimRun.uncommonB,
+                KaldheimRun.uncommonB
+        );
+        private static final KaldheimStructure R1 = new KaldheimStructure(
+                KaldheimRun.rare
+        );
+        private static final KaldheimStructure M1 = new KaldheimStructure(
+                KaldheimRun.mythic
+        );
+        private static final KaldheimStructure L1 = new KaldheimStructure(
+                KaldheimRun.land
+        );
+
+        private KaldheimStructure(CardRun... runs) {
+            super(runs);
+        }
+    }
+
+    private final RarityConfiguration commonRuns = new RarityConfiguration(
+            false,
+            KaldheimStructure.C1,
+            KaldheimStructure.C2,
+            KaldheimStructure.C3,
+            KaldheimStructure.C4,
+            KaldheimStructure.C5,
+            KaldheimStructure.C1,
+            KaldheimStructure.C2,
+            KaldheimStructure.C3,
+            KaldheimStructure.C4,
+            KaldheimStructure.C5,
+            KaldheimStructure.C4,
+            KaldheimStructure.C5
+    );
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(
+            KaldheimStructure.U1,
+            KaldheimStructure.U2
+    );
+    private final RarityConfiguration rareRuns = new RarityConfiguration(
+            false,
+            KaldheimStructure.R1,
+            KaldheimStructure.R1,
+            KaldheimStructure.R1,
+            KaldheimStructure.R1,
+            KaldheimStructure.R1,
+            KaldheimStructure.R1,
+            KaldheimStructure.R1,
+            KaldheimStructure.M1
+    );
+    private final RarityConfiguration landRuns = new RarityConfiguration(
+            KaldheimStructure.L1
+    );
+
+
+    @Override
+    public void shuffle() {
+        commonRuns.shuffle();
+        uncommonRuns.shuffle();
+        rareRuns.shuffle();
+        landRuns.shuffle();
+    }
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(commonRuns.getNext().makeRun());
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        booster.addAll(landRuns.getNext().makeRun());
+        return booster;
     }
 }
