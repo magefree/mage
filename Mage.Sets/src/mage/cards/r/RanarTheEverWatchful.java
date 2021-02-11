@@ -121,6 +121,7 @@ class RanarTheEverWatchfulTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent != null
                 && Zone.HAND == zEvent.getFromZone()
                 && Zone.EXILED == zEvent.getToZone()
+                && zEvent.getPlayerId() == controllerId
                 && zEvent.getCards() != null) {
             for (Card card : zEvent.getCards()) {
                 if (card != null) {
@@ -135,6 +136,7 @@ class RanarTheEverWatchfulTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent != null
                 && Zone.BATTLEFIELD == zEvent.getFromZone()
                 && Zone.EXILED == zEvent.getToZone()
+                && zEvent.getPlayerId() == controllerId
                 && zEvent.getCards() != null) {
             return true;
 
