@@ -791,55 +791,73 @@ public class HumanPlayer extends PlayerImpl {
             abilityControllerId = target.getAbilityController();
         }
 
-        while (canRespond()) {
-            Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), abilityControllerId, game);
-            boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
+        int amount = target.getAmountRemaining();
+        if (amount < 1) {
+            return false;
+        }
+
+        Map<UUID, String> targets = new LinkedHashMap<>(amount);
+        Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), abilityControllerId, game);
+        boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
+
+        while (canRespond() && targets.size() < amount) {
             if (possibleTargets.isEmpty()
-                    || target.getTargets().size() >= target.getNumberOfTargets()) {
+                    || targets.size() >= target.getNumberOfTargets()) {
                 required = false;
             }
 
             updateGameStatePriority("chooseTargetAmount", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
-                String selectedNames = target.getTargetedName(game);
-                game.fireSelectTargetEvent(playerId, new MessageToClient(target.getMessage()
-                                + "<br> Amount remaining: " + target.getAmountRemaining()
-                                + (selectedNames.isEmpty() ? "" : ", selected: " + selectedNames),
-                                getRelatedObjectName(source, game)),
-                        possibleTargets,
-                        required,
-                        getOptions(target, null));
+                StringBuilder sb = new StringBuilder();
+                int index = target.getMessage().indexOf(" (selected");
+                if (index > 0) {
+                    sb.append(target.getMessage(), 0, index);
+                } else {
+                    sb.append(target.getMessage());
+                }
+                sb.append(" (selected ");
+                sb.append(targets.size());
+                sb.append(" of ");
+                sb.append(amount);
+                sb.append(')');
+                game.fireSelectTargetEvent(playerId, new MessageToClient(sb.toString(), getRelatedObjectName(source, game)),
+                        possibleTargets, required, getOptions(target, null));
             }
             waitForResponse(game);
 
             UUID responseId = getFixedResponseUUID(game);
             if (responseId != null) {
-                if (target.canTarget(abilityControllerId, responseId, source, game)) {
-                    UUID targetId = responseId;
-                    MageObject targetObject = game.getObject(targetId);
-
-                    boolean removeMode = target.getTargets().contains(targetId)
-                            && chooseUse(outcome, "What do you want to do with " + (targetObject != null ? targetObject.getLogName() : " target") + "?", "",
-                            "Remove from selected", "Add extra amount (remaining " + target.getAmountRemaining() + ")", source, game);
-
-                    if (removeMode) {
-                        target.remove(targetId);
+                if (targets.containsKey(responseId)) {
+                    targets.remove(responseId);
+                    possibleTargets.add(responseId);
+                } else if (possibleTargets.contains(responseId) && target.canTarget(abilityControllerId, responseId, source, game)) {
+                    MageObject targetObject = game.getObject(responseId);
+                    String targetString;
+                    if (targetObject != null) {
+                        targetString = targetObject.getIdName();
                     } else {
-                        if (target.getAmountRemaining() > 0) {
-                            int amountSelected = getAmount(1, target.getAmountRemaining(), "Select amount", game);
-                            target.addTarget(targetId, amountSelected, source, game);
-                        }
+                        targetString = responseId.toString();
                     }
-
-                    return true;
+                    targets.put(responseId, targetString);
+                    possibleTargets.remove(responseId);
                 }
             } else if (!required) {
-                return false;
+                break;
             }
         }
 
-        return false;
+        if (targets.isEmpty()) {
+            return false;
+        }
+
+        List<Integer> amountList = getMultiAmount(amount, new ArrayList<>(targets.values()), game);
+        int i = 0;
+        for (UUID targetId : targets.keySet()) {
+            target.addTarget(targetId, amountList.get(i), source, game);
+            i++;
+        }
+        return true;
     }
 
     @Override
