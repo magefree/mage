@@ -3,9 +3,9 @@ package mage.collation;
 /**
  * @author TheElk801
  */
-public abstract class CardRun extends Rotater<String> {
+public abstract class CardRun extends Rotater<Integer> {
 
-    public CardRun(boolean keepOrder, String... names) {
+    public CardRun(boolean keepOrder, Integer... names) {
         super(keepOrder, names);
     }
 }

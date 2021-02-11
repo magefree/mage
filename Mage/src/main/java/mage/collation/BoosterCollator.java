@@ -9,5 +9,5 @@ public interface BoosterCollator {
 
     public void shuffle();
 
-    public List<String> makeBooster();
+    public List<Integer> makeBooster();
 }
