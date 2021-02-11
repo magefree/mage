@@ -60,7 +60,6 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
     private List<? extends Card> pile2;
     private Choice choice;
     private List<String> messages;
-    private int amount;
 
     private PlayerQueryEvent(UUID playerId, String message, List<? extends Ability> abilities, Set<String> choices, Set<UUID> targets, Cards cards, QueryType queryType, int min, int max, boolean required, Map<String, Serializable> options) {
         super(playerId);
@@ -139,12 +138,14 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
         this.playerId = playerId;
     }
 
-    private PlayerQueryEvent(UUID playerId, int amount, List<String> messages) {
+    private PlayerQueryEvent(UUID playerId, List<String> messages, int min, int max, Map<String, Serializable> options) {
         super(playerId);
-        this.playerId = playerId;
         this.queryType = QueryType.MULTI_AMOUNT;
+        this.playerId = playerId;
         this.messages = messages;
-        this.amount = amount;
+        this.min = min;
+        this.max = max;
+        this.options = options;
     }
 
     public static PlayerQueryEvent askEvent(UUID playerId, String message, Ability source, Map<String, Serializable> options) {
@@ -218,8 +219,8 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
         return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.AMOUNT, min, max, false, null);
     }
 
-    public static PlayerQueryEvent multiAmountEvent(UUID playerId, int amount, List<String> messages) {
-        return new PlayerQueryEvent(playerId, amount, messages);
+    public static PlayerQueryEvent multiAmountEvent(UUID playerId, List<String> messages, int min, int max, Map<String, Serializable> options) {
+        return new PlayerQueryEvent(playerId, messages, min, max, options);
     }
 
     public static PlayerQueryEvent pickCard(UUID playerId, String message, List<Card> booster, int time) {
@@ -304,9 +305,5 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
 
     public List<String> getMessages() {
         return messages;
-    }
-
-    public int getAmount() {
-        return amount;
     }
 }

@@ -304,7 +304,7 @@ public class CallbackClientImpl implements CallbackClient {
                         if (panel != null) {
                             appendJsonEvent("GAME_GET_MULTI_AMOUNT", callback.getObjectId(), message);
 
-                            panel.getMultiAmount(message.getAmount(), message.getMessages());
+                            panel.getMultiAmount(message.getMessages(), message.getMin(), message.getMax(), message.getOptions());
                         }
                         break;
                     }

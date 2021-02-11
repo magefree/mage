@@ -851,7 +851,7 @@ public class HumanPlayer extends PlayerImpl {
             return false;
         }
 
-        List<Integer> amountList = getMultiAmount(amount, new ArrayList<>(targets.values()), game);
+        List<Integer> amountList = getMultiAmount(new ArrayList<>(targets.values()), 1, amount, MultiAmountType.DAMAGE, game);
         int i = 0;
         for (UUID targetId : targets.keySet()) {
             target.addTarget(targetId, amountList.get(i), source, game);
@@ -1900,12 +1900,19 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public List<Integer> getMultiAmount(int amount, List<String> messages, Game game) {
+    public List<Integer> getMultiAmount(List<String> messages, int min, int max, MultiAmountType type, Game game) {
         int size = messages.size();
+        int total = min * size;
+        int i = 0;
         List<Integer> defaultList = new ArrayList<>(size);
-        defaultList.add(amount);
-        for (int i = 1; i < size; i++) {
-            defaultList.add(0);
+        if (total < max) {
+            int diff = max - total;
+            defaultList.add(min + diff);
+            i++;
+        }
+        while (i < size) {
+            defaultList.add(min);
+            i++;
         }
 
         if (gameInCheckPlayableState(game)) {
@@ -1916,7 +1923,10 @@ public class HumanPlayer extends PlayerImpl {
             updateGameStatePriority("getMultiAmount", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
-                game.fireGetMultiAmountEvent(playerId, amount, messages);
+                Map<String, Serializable> options = new HashMap<>(2);
+                options.put("title", type.getTitle());
+                options.put("header", type.getHeader());
+                game.fireGetMultiAmountEvent(playerId, messages, min, max, options);
             }
             waitForResponse(game);
 
@@ -1932,8 +1942,8 @@ public class HumanPlayer extends PlayerImpl {
             // Validate string data sent from client and parse into integer list
             while (scanner.hasNextInt() && responseList.size() < size) {
                 int nextInt = scanner.nextInt();
-                if (nextInt < 0 || nextInt + responseAmount > amount) {
-                    nextInt = 0;
+                if (nextInt < min || nextInt + responseAmount > max) {
+                    nextInt = min;
                 }
                 responseAmount += nextInt;
                 responseList.add(nextInt);
@@ -1941,10 +1951,10 @@ public class HumanPlayer extends PlayerImpl {
             while (responseList.size() < size) {
                 responseList.add(0);
             }
-            if (responseAmount < amount) {
+            if (responseAmount < max) {
                 int lastIndex = responseList.size() - 1;
                 int lastInt = responseList.get(lastIndex);
-                lastInt += amount - responseAmount;
+                lastInt += max - responseAmount;
                 responseList.set(lastIndex, lastInt);
             }
             return responseList;

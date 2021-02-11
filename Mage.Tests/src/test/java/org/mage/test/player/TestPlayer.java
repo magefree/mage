@@ -2653,7 +2653,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(int amount, List<String> messages, Game game) {
+    public List<Integer> getMultiAmount(List<String> messages, int min, int max, MultiAmountType type, Game game) {
         assertAliasSupportInChoices(false);
         int size = messages.size();
         int choiceAmount = 0;
@@ -2674,10 +2674,10 @@ public class TestPlayer implements Player {
             while (multiAmount.size() < size) {
                 multiAmount.add(0);
             }
-            if (choiceAmount < amount) {
+            if (choiceAmount < max) {
                 int lastIndex = multiAmount.size() - 1;
                 int lastInt = multiAmount.get(lastIndex);
-                lastInt += amount - choiceAmount;
+                lastInt += max - choiceAmount;
                 multiAmount.set(lastIndex, lastInt);
             }
         }

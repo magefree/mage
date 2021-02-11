@@ -114,10 +114,10 @@ public class GameSessionPlayer extends GameSessionWatcher {
         }
     }
 
-    public void getMultiAmount(final int amount, final List<String> messages) {
+    public void getMultiAmount(final List<String> messages, final int min, final int max, final Map<String, Serializable> options) {
         if (!killed) {
             userManager.getUser(userId).ifPresent(user
-                    -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_GET_MULTI_AMOUNT, game.getId(), new GameClientMessage(amount, messages))));
+                    -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_GET_MULTI_AMOUNT, game.getId(), new GameClientMessage(messages, min, max, options))));
         }
     }
 

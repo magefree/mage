@@ -11,6 +11,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.constants.MultiAmountType;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.filter.FilterMana;
@@ -206,14 +207,8 @@ public class StubPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(int amount, List<String> messages, Game game) {
-        int size = messages.size();
-        List<Integer> defaultList = new ArrayList<>(size);
-        defaultList.add(amount);
-        for (int i = 1; i < size; i++) {
-            defaultList.add(0);
-        }
-        return defaultList;
+    public List<Integer> getMultiAmount(List<String> messages, int min, int max, MultiAmountType type, Game game) {
+        return null;
     }
 
     @Override

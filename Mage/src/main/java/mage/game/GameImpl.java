@@ -2492,11 +2492,11 @@ public abstract class GameImpl implements Game, Serializable {
     }
 
     @Override
-    public void fireGetMultiAmountEvent(UUID playerId, int amount, List<String> messages) {
+    public void fireGetMultiAmountEvent(UUID playerId, List<String> messages, int min, int max, Map<String, Serializable> options) {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.multiAmount(playerId, amount, messages);
+        playerQueryEventSource.multiAmount(playerId, messages, min, max, options);
     }
 
     @Override

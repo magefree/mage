@@ -1624,8 +1624,8 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public void getMultiAmount(int amount, List<String> messages) {
-        pickMultiNumber.showDialog(amount, messages);
+    public void getMultiAmount(List<String> messages, int min, int max, Map<String, Serializable> options) {
+        pickMultiNumber.showDialog(messages, min, max, options);
         SessionHandler.sendPlayerString(gameId, pickMultiNumber.getMultiAmount());
     }
 

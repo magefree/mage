@@ -13,6 +13,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
+import mage.constants.MultiAmountType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -112,7 +113,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
             for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
                 manaStrings.add(coloredManaSymbol.toString());
             }
-            List<Integer> manaList = player.getMultiAmount(amount.calculate(game, source, this), manaStrings, game);
+            List<Integer> manaList = player.getMultiAmount(manaStrings, 0, amount.calculate(game, source, this), MultiAmountType.MANA, game);
             for (int i = 0; i < size; i++) {
                 ColoredManaSymbol coloredManaSymbol = manaSymbols.get(i);
                 int amount = manaList.get(i);

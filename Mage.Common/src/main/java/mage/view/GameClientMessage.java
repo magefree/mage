@@ -44,8 +44,6 @@ public class GameClientMessage implements Serializable {
     @Expose
     private Choice choice;
     @Expose
-    private int amount;
-    @Expose
     private List<String> messages;
 
     public GameClientMessage(GameView gameView) {
@@ -98,9 +96,11 @@ public class GameClientMessage implements Serializable {
         this.message = name;
     }
 
-    public GameClientMessage(int amount, List<String> messages) {
-        this.amount = amount;
+    public GameClientMessage(List<String> messages, int min, int max, Map<String, Serializable> options) {
         this.messages = messages;
+        this.min = min;
+        this.max = max;
+        this.options = options;
     }
 
     public GameClientMessage(Choice choice) {
@@ -153,10 +153,6 @@ public class GameClientMessage implements Serializable {
 
     public Choice getChoice() {
         return choice;
-    }
-
-    public int getAmount() {
-        return amount;
     }
 
     public List<String> getMessages() {

@@ -1967,12 +1967,20 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(int amount, List<String> messages, Game game) {
+    public List<Integer> getMultiAmount(List<String> messages, int min, int max, MultiAmountType type, Game game) {
+        log.debug("getMultiAmount");
         int size = messages.size();
+        int total = min * size;
+        int i = 0;
         List<Integer> defaultList = new ArrayList<>(size);
-        defaultList.add(amount);
-        for (int i = 1; i < size; i++) {
-            defaultList.add(0);
+        if (total < max) {
+            int diff = max - total;
+            defaultList.add(min + diff);
+            i++;
+        }
+       while (i < size) {
+            defaultList.add(min);
+            i++;
         }
         return defaultList;
     }

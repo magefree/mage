@@ -3,8 +3,10 @@ package mage.client.dialog;
 import org.mage.card.arcane.ManaSymbols;
 
 import javax.swing.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -23,7 +25,7 @@ public class PickMultiNumberDialog extends MageDialog {
         this.setModal(true);
     }
 
-    public void showDialog(int amount, List<String> messages) {
+    public void showDialog(List<String> messages, int min, int max, Map<String, Serializable> options) {
         if (textList != null) {
             for (JTextPane textPane : textList) {
                 this.remove(textPane);
@@ -61,7 +63,7 @@ public class PickMultiNumberDialog extends MageDialog {
             textList.add(textPane);
 
             JSpinner spinner = new JSpinner();
-            spinner.setModel(new SpinnerNumberModel(0, 0, amount, 1));
+            spinner.setModel(new SpinnerNumberModel(min, min, max, 1));
             spinner.setLocation(200, 40 + (i * 30));
             spinner.setSize(100, 26);
             spinner.addChangeListener(e -> {
@@ -69,14 +71,16 @@ public class PickMultiNumberDialog extends MageDialog {
                 for (JSpinner jSpinner : spinnerList) {
                     totalChosenAmount += ((Number) jSpinner.getValue()).intValue();
                 }
-                counterText.setText(totalChosenAmount + " out of " + amount);
-                chooseButton.setEnabled(totalChosenAmount == amount);
+                counterText.setText(totalChosenAmount + " out of " + max);
+                chooseButton.setEnabled(totalChosenAmount == max);
             });
             this.add(spinner);
             spinnerList.add(spinner);
         }
-        this.chooseButton.setEnabled(false);
-        this.counterText.setText("0 of " + amount);
+        int totalChosenAmount = min * size;
+        this.counterText.setText(totalChosenAmount + " out of " + max);
+        this.chooseButton.setEnabled(totalChosenAmount == max);
+        this.setTitle((String) options.get("title"));
         this.pack();
         this.makeWindowCentered();
         this.setVisible(true);
