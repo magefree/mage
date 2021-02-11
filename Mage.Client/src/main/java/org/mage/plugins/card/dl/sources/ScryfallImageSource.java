@@ -145,6 +145,16 @@ public enum ScryfallImageSource implements CardImageSource {
 
         preparedUrls.clear();
 
+        // prepare stats
+        int needPrepareCount = 0;
+        int currentPrepareCount = 0;
+        for (CardDownloadData card : downloadList) {
+            if (card.isTwoFacedCard() && card.isSecondSide()) {
+                needPrepareCount++;
+            }
+        }
+        updatePrepareStats(downloadServiceInfo, needPrepareCount, currentPrepareCount);
+
         for (CardDownloadData card : downloadList) {
             // need cancel
             if (downloadServiceInfo.isNeedCancel()) {
@@ -153,6 +163,7 @@ public enum ScryfallImageSource implements CardImageSource {
 
             // prepare the back face URL
             if (card.isTwoFacedCard() && card.isSecondSide()) {
+                currentPrepareCount++;
                 final String defaultCode = CardLanguage.ENGLISH.getCode();
                 final String localizedCode = languageAliases.getOrDefault(this.getCurrentLanguage(), defaultCode);
 
@@ -160,14 +171,14 @@ public enum ScryfallImageSource implements CardImageSource {
 
                 try {
                     url = getFaceImageUrl(proxy, card, card.isToken(), localizedCode);
+                    preparedUrls.put(card, url);
                 } catch (Exception e) {
                     logger.warn("Failed to prepare image URL (back face) for " + card.getName() + " (" + card.getSet() + ") #"
                             + card.getCollectorId() + ", Error Message: " + e.getMessage());
                     downloadServiceInfo.incErrorCount();
-                    continue;
                 }
 
-                preparedUrls.put(card, url);
+                updatePrepareStats(downloadServiceInfo, needPrepareCount, currentPrepareCount);
             }
 
             // inc error count to stop on too many errors
@@ -177,10 +188,15 @@ public enum ScryfallImageSource implements CardImageSource {
         return true;
     }
 
+    private void updatePrepareStats(DownloadServiceInfo service, int need, int current) {
+        synchronized (service.getSync()) {
+            service.updateProgressMessage(String.format("Preparing download list... %d of %d", current, need));
+        }
+    }
+
     @Override
     public CardImageUrls generateCardUrl(CardDownloadData card) throws Exception {
         return innerGenerateURL(card, false);
-
     }
 
     @Override

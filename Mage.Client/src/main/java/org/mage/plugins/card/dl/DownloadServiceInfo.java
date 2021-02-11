@@ -13,7 +13,11 @@ public interface DownloadServiceInfo {
 
     void incErrorCount();
 
-    void updateMessage(String text);
+    void updateGlobalMessage(String text);
+
+    void updateProgressMessage(String text);
 
     void showDownloadControls(boolean needToShow);
+
+    Object getSync();
 }

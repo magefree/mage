@@ -124,6 +124,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         CardImageUtils.checkAndFixImageFiles();
     }
 
+    @Override
     public boolean isNeedCancel() {
         return this.needCancel || (this.errorCount > MAX_ERRORS_COUNT_BEFORE_CANCEL);
     }
@@ -132,6 +133,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         this.needCancel = needCancel;
     }
 
+    @Override
     public void incErrorCount() {
         this.errorCount = this.errorCount + 1;
 
@@ -209,23 +211,23 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     }
 
     public void findMissingCards() {
-        updateMessage("Loading...");
+        updateGlobalMessage("Loading...");
         this.cardsAll.clear();
         this.cardsMissing.clear();
         this.cardsDownloadQueue.clear();
 
-        updateMessage("Loading cards list...");
+        updateGlobalMessage("Loading cards list...");
         this.cardsAll = Collections.synchronizedList(CardRepository.instance.findCards(new CardCriteria()));
 
-        updateMessage("Finding missing images...");
+        updateGlobalMessage("Finding missing images...");
         this.cardsMissing = prepareMissingCards(this.cardsAll, uiDialog.getRedownloadCheckbox().isSelected());
 
-        updateMessage("Finding available sets from selected source...");
+        updateGlobalMessage("Finding available sets from selected source...");
         this.uiDialog.getSetsCombo().setModel(new DefaultComboBoxModel<>(getSetsForCurrentImageSource()));
         reloadCardsToDownload(this.uiDialog.getSetsCombo().getSelectedItem().toString());
 
         this.uiDialog.showDownloadControls(true);
-        updateMessage("");
+        updateGlobalMessage("");
         showDownloadControls(true);
     }
 
@@ -251,10 +253,17 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         }
     }
 
-    public void updateMessage(String text) {
+    @Override
+    public void updateGlobalMessage(String text) {
         this.uiDialog.setGlobalInfo(text);
     }
 
+    @Override
+    public void updateProgressMessage(String text) {
+        this.uiDialog.getProgressBar().setString(text);
+    }
+
+    @Override
     public void showDownloadControls(boolean needToShow) {
         // auto-size form on show
         this.uiDialog.showDownloadControls(needToShow);
@@ -390,7 +399,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         uiDialog.setCurrentInfo("Missing: " + missingCardsCount + " card images / " + missingTokensCount + " token images");
         int imageSum = cardCount + tokenCount;
         float mb = (imageSum * selectedSource.getAverageSize()) / 1024;
-        uiDialog.getProgressBar().setString(String.format(
+        updateProgressMessage(String.format(
                 cardIndex == imageSum
                         ? "%d of %d (%d cards/%d tokens) image downloads finished! Please close!"
                         : "%d of %d (%d cards/%d tokens) image downloads finished! Please wait! [%.1f Mb]",
@@ -631,7 +640,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     + " from source: " + selectedSource.getSourceName()
                     + ", language: " + selectedSource.getCurrentLanguage().getCode()
                     + ", threads: " + downloadThreadsAmount);
-            uiDialog.getProgressBar().setString("Preparing download list...");
+            updateProgressMessage("Preparing download list...");
             if (selectedSource.prepareDownloadList(this, cardsDownloadQueue)) {
                 update(0, cardsDownloadQueue.size());
                 ExecutorService executor = Executors.newFixedThreadPool(downloadThreadsAmount);
@@ -939,7 +948,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         if (cardIndex < needDownloadCount) {
             // downloading
             float mb = ((needDownloadCount - lastCardIndex) * selectedSource.getAverageSize()) / 1024;
-            uiDialog.getProgressBar().setString(String.format("%d of %d image downloads finished! Please wait! [%.1f Mb]",
+            updateProgressMessage(String.format("%d of %d image downloads finished! Please wait! [%.1f Mb]",
                     lastCardIndex, needDownloadCount, mb));
         } else {
             // finished
@@ -957,7 +966,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
             if (this.cardsDownloadQueue.isEmpty()) {
                 // stop download
-                uiDialog.getProgressBar().setString("0 images remaining. Please close.");
+                updateProgressMessage("0 images remaining. Please close.");
             } else {
                 // try download again
             }
@@ -974,8 +983,14 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         uiDialog.getStartButton().setEnabled(true);
     }
 
+    @Override
     public Proxy getProxy() {
         return proxy;
+    }
+
+    @Override
+    public Object getSync() {
+        return sync;
     }
 }
 
