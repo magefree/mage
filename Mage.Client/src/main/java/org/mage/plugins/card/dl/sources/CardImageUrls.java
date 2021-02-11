@@ -27,7 +27,6 @@ public class CardImageUrls {
         this.baseUrl = baseUrl;
 
         if (alternativeUrl != null
-                && alternativeUrl != null
                 && !alternativeUrl.isEmpty()
                 && !Objects.equals(baseUrl, alternativeUrl)) {
             this.alternativeUrls.add(alternativeUrl);

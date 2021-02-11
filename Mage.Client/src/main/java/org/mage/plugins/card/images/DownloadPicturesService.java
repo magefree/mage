@@ -138,7 +138,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         this.errorCount = this.errorCount + 1;
 
         if (this.errorCount == MAX_ERRORS_COUNT_BEFORE_CANCEL + 1) {
-            logger.warn("Too many errors (> " + MAX_ERRORS_COUNT_BEFORE_CANCEL + ") in images download");
+            logger.warn("Too many errors (> " + MAX_ERRORS_COUNT_BEFORE_CANCEL + ") in images download. Stop.");
         }
     }
 
