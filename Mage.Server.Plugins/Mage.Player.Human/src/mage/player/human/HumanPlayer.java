@@ -1942,20 +1942,32 @@ public class HumanPlayer extends PlayerImpl {
             // Validate string data sent from client and parse into integer list
             while (scanner.hasNextInt() && responseList.size() < size) {
                 int nextInt = scanner.nextInt();
-                if (nextInt < min || nextInt + responseAmount > max) {
+                if (nextInt < min) {
                     nextInt = min;
                 }
                 responseAmount += nextInt;
                 responseList.add(nextInt);
             }
             while (responseList.size() < size) {
-                responseList.add(0);
+                responseList.add(min);
             }
             if (responseAmount < max) {
                 int lastIndex = responseList.size() - 1;
                 int lastInt = responseList.get(lastIndex);
                 lastInt += max - responseAmount;
                 responseList.set(lastIndex, lastInt);
+            } else if (responseAmount > max) {
+                int index = 0;
+                while (responseAmount > max && index < responseList.size()) {
+                    int responseInt = responseList.get(index);
+                    if (responseInt > min) {
+                        responseInt--;
+                        responseList.set(index, responseInt);
+                        responseAmount--;
+                    } else {
+                        index++;
+                    }
+                }
             }
             return responseList;
         } else {

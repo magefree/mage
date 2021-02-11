@@ -673,6 +673,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param messages  List of options to distribute amount among
      * @param min       Minimum value per option
      * @param max       Total amount to be distributed
+     * @param type      MultiAmountType enum to set dialog options such as title and header
      * @param game      Game
      * @return          List of integers with size equal to messages.size().  The sum of the integers is equal to max.
      */
