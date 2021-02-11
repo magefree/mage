@@ -8,7 +8,9 @@ on:
   pull_request:
     types: [opened]
   pull_request_review:
-    type: [submitted]
+    types: [submitted]
+  pull_request_review_comment:
+    types: [created]
 
 jobs:
   fetch-card-references:
