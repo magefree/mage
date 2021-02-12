@@ -1,8 +1,10 @@
 package mage.client.dialog;
 
+import mage.constants.ColoredManaSymbol;
 import org.mage.card.arcane.ManaSymbols;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,7 @@ import java.util.Map;
  */
 public class PickMultiNumberDialog extends MageDialog {
 
-    private List<JTextPane> textList = null;
+    private List<JLabel> labelList = null;
     private List<JSpinner> spinnerList = null;
 
     /**
@@ -26,9 +28,9 @@ public class PickMultiNumberDialog extends MageDialog {
     }
 
     public void showDialog(List<String> messages, int min, int max, Map<String, Serializable> options) {
-        if (textList != null) {
-            for (JTextPane textPane : textList) {
-                this.remove(textPane);
+        if (labelList != null) {
+            for (JLabel label : labelList) {
+                this.remove(label);
             }
         }
         if (spinnerList != null) {
@@ -37,35 +39,47 @@ public class PickMultiNumberDialog extends MageDialog {
             }
         }
         int size = messages.size();
-        textList = new ArrayList<>(size);
+        labelList = new ArrayList<>(size);
         spinnerList = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
-            String text;
-            JTextPane textPane = new JTextPane();
-            textPane.setContentType("text/html");
-            switch (messages.get(i)) {
+            String input = messages.get(i);
+            String manaText = null;
+            JLabel label = new JLabel();
+            switch (input) {
                 case "W":
-                case "U":
-                case "B":
-                case "R":
-                case "G":
-                    String manaString = '{' + messages.get(i) + '}';
-                    text = ManaSymbols.replaceSymbolsWithHTML(manaString, ManaSymbols.Type.DIALOG);
+                    manaText = htmlWrapper(ColoredManaSymbol.W.getColorHtmlName());
                     break;
-                default:
-                    text = messages.get(i);
+                case "U":
+                    manaText = htmlWrapper(ColoredManaSymbol.U.getColorHtmlName());
+                    break;
+                case "B":
+                    manaText = htmlWrapper(ColoredManaSymbol.B.getColorHtmlName());
+                    break;
+                case "R":
+                    manaText = htmlWrapper(ColoredManaSymbol.R.getColorHtmlName());
+                    break;
+                case "G":
+                    manaText = htmlWrapper(ColoredManaSymbol.G.getColorHtmlName());
+                    break;
             }
-            textPane.setText(text);
-            textPane.setEditable(false);
-            textPane.setLocation(10, 40 + (i * 30));
-            textPane.setSize(100, 26);
-            this.add(textPane);
-            textList.add(textPane);
+            if (manaText != null) {
+                label.setText(manaText);
+                Image image = ManaSymbols.getSizedManaSymbol(input);
+                if (image != null) {
+                    label.setIcon(new ImageIcon(image));
+                }
+            } else {
+                label.setText(input);
+            }
+            label.setLocation(10, 40 + (i * 30));
+            label.setSize(300, 26);
+            this.add(label);
+            labelList.add(label);
 
             JSpinner spinner = new JSpinner();
             spinner.setModel(new SpinnerNumberModel(min, min, max, 1));
-            spinner.setLocation(200, 40 + (i * 30));
-            spinner.setSize(100, 26);
+            spinner.setLocation(375, 40 + (i * 30));
+            spinner.setSize(50, 26);
             spinner.addChangeListener(e -> {
                 int totalChosenAmount = 0;
                 for (JSpinner jSpinner : spinnerList) {
@@ -78,7 +92,10 @@ public class PickMultiNumberDialog extends MageDialog {
             spinnerList.add(spinner);
         }
         int totalChosenAmount = min * size;
+        this.header.setText((String) options.get("header"));
+        this.header.setHorizontalAlignment(SwingConstants.CENTER);
         this.counterText.setText(totalChosenAmount + " out of " + max);
+        this.counterText.setHorizontalAlignment(SwingConstants.CENTER);
         this.chooseButton.setEnabled(totalChosenAmount == max);
         this.setTitle((String) options.get("title"));
         this.pack();
@@ -95,6 +112,10 @@ public class PickMultiNumberDialog extends MageDialog {
         return sb.toString();
     }
 
+    private String htmlWrapper(String text) {
+        return "<html>" + text + "</html>";
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,7 +126,8 @@ public class PickMultiNumberDialog extends MageDialog {
     private void initComponents() {
 
         chooseButton = new javax.swing.JButton();
-        counterText = new javax.swing.JTextField();
+        header = new javax.swing.JLabel();
+        counterText = new javax.swing.JLabel();
 
         chooseButton.setText("Choose");
         chooseButton.setEnabled(false);
@@ -115,25 +137,33 @@ public class PickMultiNumberDialog extends MageDialog {
             }
         });
 
-        counterText.setEditable(false);
+        header.setText("Header");
+
+        counterText.setText("Counter");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(129, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(chooseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(counterText))
-                .addGap(128, 128, 128))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(header, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(counterText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(184, 184, 184)
+                .addComponent(chooseButton)
+                .addContainerGap(184, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(counterText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 514, Short.MAX_VALUE)
+                .addComponent(header)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(counterText)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 288, Short.MAX_VALUE)
                 .addComponent(chooseButton)
                 .addContainerGap())
         );
@@ -146,6 +176,7 @@ public class PickMultiNumberDialog extends MageDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton chooseButton;
-    private javax.swing.JTextField counterText;
+    private javax.swing.JLabel counterText;
+    private javax.swing.JLabel header;
     // End of variables declaration//GEN-END:variables
 }
