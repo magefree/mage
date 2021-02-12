@@ -167,19 +167,19 @@ public class CardInfo {
 
         // mana cost can contains multiple cards (split left/right, modal double faces, card/adventure)
         if (card instanceof SplitCard) {
-            List<String> manaCostLeft = ((SplitCard) card).getLeftHalfCard().getManaCost().getSymbols();
-            List<String> manaCostRight = ((SplitCard) card).getRightHalfCard().getManaCost().getSymbols();
+            List<String> manaCostLeft = ((SplitCard) card).getLeftHalfCard().getManaCostSymbols();
+            List<String> manaCostRight = ((SplitCard) card).getRightHalfCard().getManaCostSymbols();
             this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
         } else if (card instanceof ModalDoubleFacesCard) {
-            List<String> manaCostLeft = ((ModalDoubleFacesCard) card).getLeftHalfCard().getManaCost().getSymbols();
-            List<String> manaCostRight = ((ModalDoubleFacesCard) card).getRightHalfCard().getManaCost().getSymbols();
+            List<String> manaCostLeft = ((ModalDoubleFacesCard) card).getLeftHalfCard().getManaCostSymbols();
+            List<String> manaCostRight = ((ModalDoubleFacesCard) card).getRightHalfCard().getManaCostSymbols();
             this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
         } else if (card instanceof AdventureCard) {
-            List<String> manaCostLeft = ((AdventureCard) card).getSpellCard().getManaCost().getSymbols();
-            List<String> manaCostRight = card.getManaCost().getSymbols();
+            List<String> manaCostLeft = ((AdventureCard) card).getSpellCard().getManaCostSymbols();
+            List<String> manaCostRight = card.getManaCostSymbols();
             this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
         } else {
-            this.setManaCosts(card.getManaCost().getSymbols());
+            this.setManaCosts(card.getManaCostSymbols());
         }
 
         int length = 0;

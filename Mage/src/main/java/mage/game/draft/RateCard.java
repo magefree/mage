@@ -317,10 +317,10 @@ public final class RateCard {
      * @return
      */
     private static int getManaCostScore(Card card, List<ColoredManaSymbol> allowedColors) {
-        int converted = card.getManaCost().convertedManaCost();
+        int converted = card.getConvertedManaCost();
         if (allowedColors == null) {
             int colorPenalty = 0;
-            for (String symbol : card.getManaCost().getSymbols()) {
+            for (String symbol : card.getManaCostSymbols()) {
                 if (isColoredMana(symbol)) {
                     colorPenalty++;
                 }
@@ -329,7 +329,7 @@ public final class RateCard {
         }
         final Map<String, Integer> singleCount = new HashMap<>();
         int maxSingleCount = 0;
-        for (String symbol : card.getManaCost().getSymbols()) {
+        for (String symbol : card.getManaCostSymbols()) {
             int count = 0;
             symbol = symbol.replace("{", "").replace("}", "");
             if (isColoredMana(symbol)) {
@@ -385,7 +385,7 @@ public final class RateCard {
      */
     public static int getColorManaCount(Card card) {
         int count = 0;
-        for (String symbol : card.getManaCost().getSymbols()) {
+        for (String symbol : card.getManaCostSymbols()) {
             if (isColoredMana(symbol)) {
                 count++;
             }
@@ -401,7 +401,7 @@ public final class RateCard {
      */
     public static int getDifferentColorManaCount(Card card) {
         Set<String> symbols = new HashSet<>();
-        for (String symbol : card.getManaCost().getSymbols()) {
+        for (String symbol : card.getManaCostSymbols()) {
             if (isColoredMana(symbol)) {
                 symbols.add(symbol);
             }

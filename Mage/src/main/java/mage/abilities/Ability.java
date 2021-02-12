@@ -22,6 +22,7 @@ import mage.target.targetadjustment.TargetAdjuster;
 import mage.watchers.Watcher;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.MageIdentifier;
@@ -122,6 +123,14 @@ public interface Ability extends Controllable, Serializable {
      * @return All {@link ManaCosts} that must be paid.
      */
     ManaCosts<ManaCost> getManaCosts();
+
+    default List<String> getManaCostSymbols() {
+        List<String> symbols = new ArrayList<>();
+        for (ManaCost cost : getManaCosts()) {
+            symbols.add(cost.getText());
+        }
+        return symbols;
+    }
 
     /**
      * Gets all the {@link ManaCosts} that must be paid before activating this

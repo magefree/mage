@@ -576,7 +576,7 @@ public final class ManaUtil {
             res.setWhite(res.isWhite() || secondColor.isWhite());
 
             // from mana
-            List<String> secondManaSymbols = secondSideCard.getManaCost().getSymbols();
+            List<String> secondManaSymbols = secondSideCard.getManaCostSymbols();
             res.setWhite(res.isWhite() || containsManaSymbol(secondManaSymbols, "W"));
             res.setBlue(res.isBlue() || containsManaSymbol(secondManaSymbols, "U"));
             res.setBlack(res.isBlack() || containsManaSymbol(secondManaSymbols, "B"));
@@ -628,7 +628,7 @@ public final class ManaUtil {
         } else {
             secondSide = card.getSecondCardFace();
         }
-        return getColorIdentity(card.getColor(), String.join("", card.getManaCost().getSymbols()), card.getRules(), secondSide);
+        return getColorIdentity(card.getColor(), String.join("", card.getManaCostSymbols()), card.getRules(), secondSide);
     }
 
     public static int getColorIdentityHash(FilterMana colorIdentity) {

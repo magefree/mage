@@ -1621,7 +1621,7 @@ public class VerifyCardDataTest {
         }
 
         String expected = ref.manaCost;
-        String cost = String.join("", card.getManaCost().getSymbols());
+        String cost = String.join("", card.getManaCostSymbols());
         if (cost.isEmpty()) {
             cost = null;
         }

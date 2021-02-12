@@ -506,15 +506,6 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
-    public List<String> getSymbols() {
-        List<String> symbols = new ArrayList<>();
-        for (ManaCost cost : this) {
-            symbols.add(cost.getText());
-        }
-        return symbols;
-    }
-
-    @Override
     public UUID getId() {
         return this.id;
     }

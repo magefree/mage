@@ -31,7 +31,7 @@ public class AbilityView extends CardView {
         this.subTypes = new SubTypes();
         this.superTypes = EnumSet.noneOf(SuperType.class);
         this.color = new ObjectColor();
-        this.manaCostLeftStr = String.join("", ability.getManaCosts().getSymbols());
+        this.manaCostLeftStr = String.join("", ability.getManaCostSymbols());
         this.manaCostRightStr = "";
     }
 

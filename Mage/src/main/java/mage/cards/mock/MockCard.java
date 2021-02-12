@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.CardImpl;
 import mage.cards.ModalDoubleFacesCard;
 import mage.cards.repository.CardInfo;
@@ -35,6 +34,7 @@ public class MockCard extends CardImpl {
     protected List<String> manaCostStr;
     protected String adventureSpellName;
     protected boolean isModalDoubleFacesCard;
+    protected int convertedManaCost;
 
     public MockCard(CardInfo card) {
         super(null, card.getName());
@@ -49,10 +49,11 @@ public class MockCard extends CardImpl {
 
         this.usesVariousArt = card.usesVariousArt();
 
-        this.manaCost = new ManaCostsImpl(join(card.getManaCosts(CardInfo.ManaCostSide.ALL)));
+        //this.manaCost = new ManaCostsImpl(join(card.getManaCosts(CardInfo.ManaCostSide.ALL)));
         this.manaCostLeftStr = card.getManaCosts(CardInfo.ManaCostSide.LEFT);
         this.manaCostRightStr = card.getManaCosts(CardInfo.ManaCostSide.RIGHT);
         this.manaCostStr = card.getManaCosts(CardInfo.ManaCostSide.ALL);
+        this.convertedManaCost = card.getConvertedManaCost();
 
         this.color = card.getColor();
 
@@ -112,21 +113,20 @@ public class MockCard extends CardImpl {
 
     @Override
     public ManaCosts<ManaCost> getManaCost() {
-        return manaCost;
+        // only split half cards can store mana cost in objects list instead strings (memory optimization)
+        // see https://github.com/magefree/mage/issues/7515
+        throw new IllegalArgumentException("Unsupport method call: getManaCost in " + this.getClass().getCanonicalName());
     }
 
-    /*
-    private ManaCosts<ManaCost> getManaCost(CardInfo.ManaCostSide manaCostSide) {
-        switch (manaCostSide) {
-            case LEFT:
-                return manaCostLeft;
-            case RIGHT:
-                return manaCostRight;
-            default:
-            case ALL:
-                return manaCost;
-        }
-    }*/
+    @Override
+    public List<String> getManaCostSymbols() {
+        return getManaCostStr(CardInfo.ManaCostSide.ALL);
+    }
+
+    @Override
+    public int getConvertedManaCost() {
+        return this.convertedManaCost;
+    }
 
     public List<String> getManaCostStr(CardInfo.ManaCostSide manaCostSide) {
         switch (manaCostSide) {
@@ -162,14 +162,6 @@ public class MockCard extends CardImpl {
         } catch (NumberFormatException e) {
             return new MageInt(0, value);
         }
-    }
-
-    private String join(List<String> strings) {
-        StringBuilder sb = new StringBuilder();
-        for (String string : strings) {
-            sb.append(string);
-        }
-        return sb.toString();
     }
 
     private Ability textAbilityFromString(final String text) {

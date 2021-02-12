@@ -37,9 +37,7 @@ public class SpellsCostReductionControllerEffect extends CostModificationEffectI
 
         StringBuilder sb = new StringBuilder();
         sb.append(filter.getMessage()).append(" you cast cost ");
-        for (String manaSymbol : manaCostsToReduce.getSymbols()) {
-            sb.append(manaSymbol);
-        }
+        sb.append(manaCostsToReduce.getText());
         sb.append(" less to cast. This effect reduces only the amount of colored mana you pay.");
         this.staticText = sb.toString();
     }

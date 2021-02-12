@@ -2316,7 +2316,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                 if (differentColorsInCost > 0 && differentColorsInCost < 3) {
                     // if some colors were already chosen, total amount shouldn't be more than 3
                     if (chosenSymbols.size() + differentColorsInCost < 4) {
-                        for (String symbol : picked.card.getManaCost().getSymbols()) {
+                        for (String symbol : picked.card.getManaCostSymbols()) {
                             symbol = symbol.replace("{", "").replace("}", "");
                             if (RateCard.isColoredMana(symbol)) {
                                 chosenSymbols.add(symbol);

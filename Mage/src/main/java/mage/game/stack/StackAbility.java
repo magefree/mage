@@ -1,9 +1,6 @@
 package mage.game.stack;
 
-import mage.MageIdentifier;
-import mage.MageInt;
-import mage.MageObject;
-import mage.ObjectColor;
+import mage.*;
 import mage.abilities.*;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostAdjuster;
@@ -220,6 +217,11 @@ public class StackAbility extends StackObjImpl implements Ability {
     @Override
     public ManaCosts<ManaCost> getManaCost() {
         return emptyCost;
+    }
+
+    @Override
+    public List<String> getManaCostSymbols() {
+        return super.getManaCostSymbols();
     }
 
     @Override

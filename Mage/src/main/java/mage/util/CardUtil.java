@@ -133,15 +133,22 @@ public final class CardUtil {
     }
 
     private static ManaCosts<ManaCost> adjustCost(ManaCosts<ManaCost> manaCosts, int reduceCount) {
-        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<>();
+        ManaCosts<ManaCost> newCost = new ManaCostsImpl<>();
 
         // nothing to change
         if (reduceCount == 0) {
             for (ManaCost manaCost : manaCosts) {
-                adjustedCost.add(manaCost.copy());
+                newCost.add(manaCost.copy());
             }
-            return adjustedCost;
+            return newCost;
         }
+
+        // keep same order for costs
+        Map<ManaCost, ManaCost> changedCost = new LinkedHashMap<>(); // must be ordered
+        List<ManaCost> addedCost = new ArrayList<>();
+        manaCosts.forEach(manaCost -> {
+            changedCost.put(manaCost, manaCost);
+        });
 
         // remove or save cost
         if (reduceCount > 0) {
@@ -149,13 +156,14 @@ public final class CardUtil {
 
             // first run - priority for single option costs (generic)
             for (ManaCost manaCost : manaCosts) {
+
+                // ignore snow mana
                 if (manaCost instanceof SnowManaCost) {
-                    adjustedCost.add(manaCost);
                     continue;
                 }
 
+                // ignore unknown mana
                 if (manaCost.getOptions().size() == 0) {
-                    adjustedCost.add(manaCost);
                     continue;
                 }
 
@@ -171,15 +179,15 @@ public final class CardUtil {
                     if ((colorless - restToReduce) > 0) {
                         // partly reduce
                         int newColorless = colorless - restToReduce;
-                        adjustedCost.add(new GenericManaCost(newColorless));
+                        changedCost.put(manaCost, new GenericManaCost(newColorless));
                         restToReduce = 0;
                     } else {
                         // full reduce - ignore cost
+                        changedCost.put(manaCost, null);
                         restToReduce -= colorless;
                     }
                 } else {
                     // nothing to reduce
-                    adjustedCost.add(manaCost.copy());
                 }
             }
 
@@ -203,22 +211,21 @@ public final class CardUtil {
                         if ((colorless - restToReduce) > 0) {
                             // partly reduce
                             int newColorless = colorless - restToReduce;
-                            adjustedCost.add(new MonoHybridManaCost(mono.getManaColor(), newColorless));
+                            changedCost.put(manaCost, new MonoHybridManaCost(mono.getManaColor(), newColorless));
                             restToReduce = 0;
                         } else {
                             // full reduce
-                            adjustedCost.add(new MonoHybridManaCost(mono.getManaColor(), 0));
+                            changedCost.put(manaCost, new MonoHybridManaCost(mono.getManaColor(), 0));
                             restToReduce -= colorless;
                         }
                     } else {
                         // nothing to reduce
-                        adjustedCost.add(mono.copy());
                     }
                     continue;
                 }
 
                 // unsupported multi-option mana types for reduce (like HybridManaCost)
-                adjustedCost.add(manaCost.copy());
+                // nothing to do
             }
         }
 
@@ -226,22 +233,38 @@ public final class CardUtil {
         if (reduceCount < 0) {
             boolean added = false;
             for (ManaCost manaCost : manaCosts) {
+                // ignore already reduced cost (add new cost to the start)
+                if (changedCost.get(manaCost) == null) {
+                    continue;
+                }
+
+                // add to existing cost
                 if (reduceCount != 0 && manaCost instanceof GenericManaCost) {
-                    // add increase cost to existing generic
                     GenericManaCost gen = (GenericManaCost) manaCost;
-                    adjustedCost.add(new GenericManaCost(gen.getOptions().get(0).getGeneric() + -reduceCount));
+                    changedCost.put(manaCost, new GenericManaCost(gen.getOptions().get(0).getGeneric() + -reduceCount));
                     reduceCount = 0;
                     added = true;
                 } else {
                     // non-generic mana
-                    adjustedCost.add(manaCost.copy());
                 }
             }
+
+            // add as new cost
             if (!added) {
-                // add increase cost as new
-                adjustedCost.add(new GenericManaCost(-reduceCount));
+                addedCost.add(new GenericManaCost(-reduceCount));
             }
         }
+
+        // collect final result
+        addedCost.forEach(cost -> {
+            newCost.add(cost.copy());
+        });
+        changedCost.forEach((key, value) -> {
+            // ignore fully reduced and add changed
+            if (value != null) {
+                newCost.add(value.copy());
+            }
+        });
 
         // cost modifying effects requiring snow mana unnecessarily (fixes #6000)
         Filter filter = manaCosts.stream()
@@ -251,9 +274,10 @@ public final class CardUtil {
                 .findFirst()
                 .orElse(null);
         if (filter != null) {
-            adjustedCost.setSourceFilter(filter);
+            newCost.setSourceFilter(filter);
         }
-        return adjustedCost;
+
+        return newCost;
     }
 
     public static void reduceCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce) {

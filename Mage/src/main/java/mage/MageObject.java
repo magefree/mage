@@ -88,6 +88,14 @@ public interface MageObject extends MageItem, Serializable {
 
     ManaCosts<ManaCost> getManaCost();
 
+    default List<String> getManaCostSymbols() {
+        List<String> symbols = new ArrayList<>();
+        for (ManaCost cost : getManaCost()) {
+            symbols.add(cost.getText());
+        }
+        return symbols;
+    }
+
     int getConvertedManaCost();
 
     MageInt getPower();
