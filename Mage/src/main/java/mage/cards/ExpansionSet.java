@@ -27,7 +27,7 @@ public abstract class ExpansionSet implements Serializable {
     public static final CardGraphicInfo FULL_ART_BFZ_VARIOUS = new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true);
     public static final CardGraphicInfo FULL_ART_ZEN_VARIOUS = new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true);
 
-    public class SetCardInfo implements Serializable {
+    public static class SetCardInfo implements Serializable {
 
         private final String name;
         private final String cardNumber;
@@ -136,6 +136,9 @@ public abstract class ExpansionSet implements Serializable {
         this.maxCardNumberInBooster = Integer.MAX_VALUE;
         savedCards = new EnumMap<>(Rarity.class);
         this.boosterCollator = boosterCollator;
+        if (this.boosterCollator != null) {
+            this.boosterCollator.shuffle();
+        }
     }
 
     public String getName() {
