@@ -95,6 +95,7 @@ class AscentOfTheWorthyEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
+        game.informPlayers(player.getName() + " chooses to have all damage redirected to " + permanent.getIdName());
         game.addEffect(new AscentOfTheWorthyRedirectEffect(new MageObjectReference(permanent, game)), source);
         return false;
     }
@@ -161,7 +162,7 @@ class AscentOfTheWorthyReturnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getSourceId());
+        Player player = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getFirstTarget());
         if (player == null || card == null) {
             return false;
