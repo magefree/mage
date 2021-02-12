@@ -86,6 +86,9 @@ class SurtlandFlingerEffect extends OneShotEffect {
             power *= 2;
         }
         power = Math.max(power, 0);
+        if (!permanent.sacrifice(source, game)) {
+            return false;
+        }
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
                 new DamageTargetEffect(power), false, rule
         );
