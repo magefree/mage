@@ -495,6 +495,7 @@ public final class Kaldheim extends ExpansionSet {
 }
 
 // Booster collation info from https://www.lethe.xyz/mtg/collation/khm.html
+// Using USA collation for common/uncommon and JP for rare/mythic
 class KaldheimCollator implements BoosterCollator {
 
     private static class KaldheimRun extends CardRun {

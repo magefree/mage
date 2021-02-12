@@ -394,6 +394,7 @@ public final class TherosBeyondDeath extends ExpansionSet {
 }
 
 // Booster collation info from https://www.lethe.xyz/mtg/collation/thb.html
+// Using USA collation for common/uncommon, rare collation inferred from other sets
 class TherosBeyondDeathCollator implements BoosterCollator {
 
     private static class TherosBeyondDeathRun extends CardRun {

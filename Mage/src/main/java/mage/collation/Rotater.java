@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * A class for shuffling a list by choosing a random starting point and looping through it
+ *
  * @author TheElk801
  */
 public class Rotater<T> {

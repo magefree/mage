@@ -5,6 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * Current implementation is built only for sequential collation
+ * Boosters are collated through a variety of different methods
+ * Striped collation not supported yet
+ * For more information: https://www.lethe.xyz/mtg/collation/
+ *
  * @author TheElk801
  */
 public abstract class BoosterStructure {
