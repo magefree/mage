@@ -27,12 +27,15 @@ import mage.filter.predicate.other.ExpansionSetPredicate;
 import mage.game.events.Listener;
 import mage.view.CardView;
 import mage.view.CardsView;
+import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbolsCellRenderer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.*;
 
@@ -42,6 +45,8 @@ import static mage.client.dialog.PreferencesDialog.*;
  * @author BetaSteward_at_googlemail.com, nantuko
  */
 public class CardSelector extends javax.swing.JPanel implements ComponentListener, DragCardTarget {
+
+    private static final Logger logger = Logger.getLogger(CardSelector.class);
 
     private final java.util.List<Card> cards = new ArrayList<>();
     private BigCard bigCard;
@@ -412,6 +417,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         FilterCard filter = buildFilter();
         MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
         try {
+
+            // debug
+            //debugObjectMemorySize("Old cards size", this.currentView.getCardsStore());
+            this.currentView.clearCardsStoreBeforeUpdate();
+
             java.util.List<Card> filteredCards = new ArrayList<>();
 
             if (chkPennyDreadful.isSelected() && pdAllowed.isEmpty()) {
@@ -426,25 +436,49 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 }
             } else {
                 java.util.List<CardInfo> foundCards = CardRepository.instance.findCards(buildCriteria());
+
                 for (CardInfo cardInfo : foundCards) {
-                    Card card = cardInfo.getMockCard();
-                    if (filter.match(card, null)) {
-                        if (chkPennyDreadful.isSelected()) {
-                            if (!pdAllowed.containsKey(card.getName())) {
-                                continue;
-                            }
+                    // filter by penny
+                    if (chkPennyDreadful.isSelected()) {
+                        if (!pdAllowed.containsKey(cardInfo.getName())) {
+                            continue;
                         }
-                        filteredCards.add(card);
                     }
+                    // filter by settings
+                    Card card = cardInfo.getMockCard();
+                    if (!filter.match(card, null)) {
+                        continue;
+                    }
+                    // found
+                    filteredCards.add(card);
                 }
             }
+
+            // force to list mode on too much cards
             if (currentView instanceof CardGrid && filteredCards.size() > CardGrid.MAX_IMAGES) {
                 this.toggleViewMode();
             }
+
+            // debug
+            //debugObjectMemorySize("New cards size", filteredCards);
+
             this.currentView.loadCards(new CardsView(filteredCards), sortSetting, bigCard, null, false);
             this.cardCount.setText(String.valueOf(filteredCards.size()));
         } finally {
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
+    }
+
+    private void debugObjectMemorySize(String name, Object object) {
+        // just debug code, don't use it in production
+        // need 2x memory for find a size
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(object);
+            logger.info(name + ": " + baos.size());
+        } catch (Throwable e) {
+            logger.fatal("Can't find object size: " + e.getMessage(), e);
         }
     }
 
@@ -1212,6 +1246,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 this.limited = true;
                 cards.clear();
             }
+            // accumulate boosters in one list
             ExpansionSet expansionSet = Sets.getInstance().get(sets.get(0));
             if (expansionSet != null) {
                 java.util.List<Card> booster = expansionSet.createBooster();

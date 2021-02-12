@@ -72,6 +72,17 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
     }
 
     @Override
+    public Object getCardsStore() {
+        return this.cards;
+    }
+
+    @Override
+    public void clearCardsStoreBeforeUpdate() {
+        this.cards.clear();
+        this.view.clear();
+    }
+
+    @Override
     public void loadCards(CardsView showCards, SortSetting sortSetting, BigCard bigCard, UUID gameId) {
         this.loadCards(showCards, sortSetting, bigCard, gameId, true);
     }

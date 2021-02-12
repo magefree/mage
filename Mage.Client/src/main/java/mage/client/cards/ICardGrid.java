@@ -26,4 +26,11 @@ public interface ICardGrid {
     void refresh();
 
     int cardsSize();
+
+    // only for debug, return inner cards list
+    Object getCardsStore();
+
+    // specil memory optimization to clean inner cards list before new cards load, so you don't need 2x memory
+    // WARNING, you must call it in same code as new cards list prepare
+    void clearCardsStoreBeforeUpdate();
 }
