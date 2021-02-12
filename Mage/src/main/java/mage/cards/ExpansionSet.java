@@ -6,6 +6,7 @@ import mage.abilities.keyword.PartnerWithAbility;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.collation.BoosterCollator;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.CardUtil;
@@ -26,7 +27,7 @@ public abstract class ExpansionSet implements Serializable {
     public static final CardGraphicInfo FULL_ART_BFZ_VARIOUS = new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true);
     public static final CardGraphicInfo FULL_ART_ZEN_VARIOUS = new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true);
 
-    public class SetCardInfo implements Serializable {
+    public static class SetCardInfo implements Serializable {
 
         private final String name;
         private final String cardNumber;
@@ -92,6 +93,7 @@ public abstract class ExpansionSet implements Serializable {
     protected Date releaseDate;
     protected ExpansionSet parentSet;
     protected SetType setType;
+    protected BoosterCollator boosterCollator;
 
     // TODO: 03.10.2018, hasBasicLands can be removed someday -- it's uses to optimize lands search in deck generation and lands adding (search all available lands from sets)
     protected boolean hasBasicLands = true;
@@ -120,14 +122,23 @@ public abstract class ExpansionSet implements Serializable {
     protected int maxCardNumberInBooster; // used to omit cards with collector numbers beyond the regular cards in a set for boosters
 
     protected final EnumMap<Rarity, List<CardInfo>> savedCards;
+    protected final Map<Integer, CardInfo> inBoosterMap = new HashMap<>();
 
     public ExpansionSet(String name, String code, Date releaseDate, SetType setType) {
+        this(name, code, releaseDate, setType, null);
+    }
+
+    public ExpansionSet(String name, String code, Date releaseDate, SetType setType, BoosterCollator boosterCollator) {
         this.name = name;
         this.code = code;
         this.releaseDate = releaseDate;
         this.setType = setType;
         this.maxCardNumberInBooster = Integer.MAX_VALUE;
         savedCards = new EnumMap<>(Rarity.class);
+        this.boosterCollator = boosterCollator;
+        if (this.boosterCollator != null) {
+            this.boosterCollator.shuffle();
+        }
     }
 
     public String getName() {
@@ -240,6 +251,9 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     public List<Card> createBooster() {
+        if (boosterCollator != null) {
+            return createBoosterUsingCollator();
+        }
 
         for (int i = 0; i < 100; i++) {//don't want to somehow loop forever
 
@@ -260,6 +274,30 @@ public abstract class ExpansionSet implements Serializable {
         // return random booster if can't do valid
         logger.error(String.format("Can't generate valid booster for set [%s - %s]", this.getCode(), this.getName()));
         return tryBooster();
+    }
+
+    public void shuffleCollator() {
+        if (boosterCollator != null) {
+            boosterCollator.shuffle();
+        }
+    }
+
+    private List<Card> createBoosterUsingCollator() {
+        if (inBoosterMap.isEmpty()) {
+            CardCriteria criteria = new CardCriteria();
+            criteria.setCodes(code);
+            CardRepository
+                    .instance
+                    .findCards(criteria)
+                    .stream()
+                    .forEach(cardInfo -> inBoosterMap.put(cardInfo.getCardNumberAsInt(), cardInfo));
+        }
+        return boosterCollator
+                .makeBooster()
+                .stream()
+                .map(inBoosterMap::get)
+                .map(CardInfo::getCard)
+                .collect(Collectors.toList());
     }
 
     protected boolean boosterIsValid(List<Card> booster) {
