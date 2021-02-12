@@ -57,7 +57,7 @@ public abstract class MageObjectImpl implements MageObject {
         color = new ObjectColor();
         frameColor = new ObjectColor();
         frameStyle = FrameStyle.M15_NORMAL;
-        manaCost = new ManaCostsImpl<>("");
+        manaCost = new ManaCostsImpl<>();
         abilities = new AbilitiesImpl<>();
         textParts = new ArrayList<>();
     }

@@ -215,7 +215,7 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                 return c.getDisplayFullName(); // show full name in deck editor table, e.g. adventure with spell name
             case 2:
                 // new svg images version
-                return ManaSymbols.getStringManaCost(c.getManaCost());
+                return ManaSymbols.getClearManaCost(c.getManaCostStr());
                 /*
                 // old html images version
                 String manaCost = "";

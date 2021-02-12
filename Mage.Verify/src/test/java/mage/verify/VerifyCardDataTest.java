@@ -1621,7 +1621,7 @@ public class VerifyCardDataTest {
         }
 
         String expected = ref.manaCost;
-        String cost = join(card.getManaCost().getSymbols());
+        String cost = String.join("", card.getManaCost().getSymbols());
         if (cost.isEmpty()) {
             cost = null;
         }
@@ -1672,14 +1672,6 @@ public class VerifyCardDataTest {
                 fail(card, "supertype", "only basic land can be SuperType.BASIC");
             }
         }
-    }
-
-    private String join(Iterable<?> items) {
-        StringBuilder result = new StringBuilder();
-        for (Object item : items) {
-            result.append(item);
-        }
-        return result.toString();
     }
 
     @Test

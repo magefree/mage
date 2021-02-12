@@ -7,7 +7,6 @@ import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.icon.CardIcon;
@@ -65,8 +64,8 @@ public class CardView extends SimpleCardView {
     protected ObjectColor frameColor;
     protected FrameStyle frameStyle;
     // can combine multiple costs for MockCard from deck editor or db (left/right, card/adventure)
-    protected List<String> manaCostLeft;
-    protected List<String> manaCostRight;
+    protected String manaCostLeftStr;
+    protected String manaCostRightStr;
     protected int convertedManaCost;
     protected Rarity rarity;
 
@@ -91,11 +90,11 @@ public class CardView extends SimpleCardView {
 
     protected boolean isSplitCard;
     protected String leftSplitName;
-    protected ManaCosts leftSplitCosts;
+    protected String leftSplitCostsStr;
     protected List<String> leftSplitRules;
     protected String leftSplitTypeLine;
     protected String rightSplitName;
-    protected ManaCosts rightSplitCosts;
+    protected String rightSplitCostsStr;
     protected List<String> rightSplitRules;
     protected String rightSplitTypeLine;
 
@@ -173,8 +172,8 @@ public class CardView extends SimpleCardView {
         this.color = cardView.color;
         this.frameColor = cardView.frameColor;
         this.frameStyle = cardView.frameStyle;
-        this.manaCostLeft = new ArrayList<>(cardView.manaCostLeft);
-        this.manaCostRight = new ArrayList<>(cardView.manaCostRight);
+        this.manaCostLeftStr = cardView.manaCostLeftStr;
+        this.manaCostRightStr = cardView.manaCostRightStr;
         this.convertedManaCost = cardView.convertedManaCost;
         this.rarity = cardView.rarity;
 
@@ -195,11 +194,11 @@ public class CardView extends SimpleCardView {
 
         this.isSplitCard = cardView.isSplitCard;
         this.leftSplitName = cardView.leftSplitName;
-        this.leftSplitCosts = cardView.leftSplitCosts == null ? null : cardView.leftSplitCosts.copy();
+        this.leftSplitCostsStr = cardView.leftSplitCostsStr;
         this.leftSplitRules = cardView.leftSplitRules == null ? null : new ArrayList<>(cardView.leftSplitRules);
         this.leftSplitTypeLine = cardView.leftSplitTypeLine;
         this.rightSplitName = cardView.rightSplitName;
-        this.rightSplitCosts = cardView.rightSplitCosts == null ? null : cardView.rightSplitCosts.copy();
+        this.rightSplitCostsStr = cardView.rightSplitCostsStr;
         this.rightSplitRules = cardView.rightSplitRules == null ? null : new ArrayList<>(cardView.rightSplitRules);
         this.rightSplitTypeLine = cardView.rightSplitTypeLine;
 
@@ -348,40 +347,39 @@ public class CardView extends SimpleCardView {
         if (splitCard != null) {
             this.isSplitCard = true;
             leftSplitName = splitCard.getLeftHalfCard().getName();
-            leftSplitCosts = splitCard.getLeftHalfCard().getManaCost();
+            leftSplitCostsStr = String.join("", splitCard.getLeftHalfCard().getManaCost().getSymbols());
             leftSplitRules = splitCard.getLeftHalfCard().getRules(game);
             leftSplitTypeLine = getCardTypeLine(game, splitCard.getLeftHalfCard());
             rightSplitName = splitCard.getRightHalfCard().getName();
-            rightSplitCosts = splitCard.getRightHalfCard().getManaCost();
+            rightSplitCostsStr = String.join("", splitCard.getRightHalfCard().getManaCost().getSymbols());
             rightSplitRules = splitCard.getRightHalfCard().getRules(game);
             rightSplitTypeLine = getCardTypeLine(game, splitCard.getRightHalfCard());
 
             fullCardName = card.getName(); // split card contains full name as normal
-            this.manaCostLeft = splitCard.getLeftHalfCard().getManaCost().getSymbols();
-            this.manaCostRight = splitCard.getRightHalfCard().getManaCost().getSymbols();
+            this.manaCostLeftStr = String.join("", splitCard.getLeftHalfCard().getManaCost().getSymbols());
+            this.manaCostRightStr = String.join("", splitCard.getRightHalfCard().getManaCost().getSymbols());
         } else if (card instanceof ModalDoubleFacesCard) {
             this.isModalDoubleFacesCard = true;
             ModalDoubleFacesCard mainCard = ((ModalDoubleFacesCard) card);
             fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
-            this.manaCostLeft = mainCard.getLeftHalfCard().getManaCost().getSymbols();
-            this.manaCostRight = mainCard.getRightHalfCard().getManaCost().getSymbols();
+            this.manaCostLeftStr = String.join("", mainCard.getLeftHalfCard().getManaCost().getSymbols());
+            this.manaCostRightStr = String.join("", mainCard.getRightHalfCard().getManaCost().getSymbols());
         } else if (card instanceof AdventureCard) {
             AdventureCard adventureCard = ((AdventureCard) card);
             AdventureCardSpell adventureCardSpell = ((AdventureCardSpell) adventureCard.getSpellCard());
             fullCardName = adventureCard.getName() + MockCard.ADVENTURE_NAME_SEPARATOR + adventureCardSpell.getName();
-            this.manaCostLeft = adventureCardSpell.getManaCost().getSymbols();
-            this.manaCostRight = adventureCard.getManaCost().getSymbols();
+            this.manaCostLeftStr = String.join("", adventureCardSpell.getManaCost().getSymbols());
+            this.manaCostRightStr = String.join("", adventureCard.getManaCost().getSymbols());
         } else if (card instanceof MockCard) {
             // deck editor cards
             fullCardName = ((MockCard) card).getFullName(true);
-            this.manaCostLeft = ((MockCard) card).getManaCost(CardInfo.ManaCostSide.LEFT).getSymbols();
-            this.manaCostRight = ((MockCard) card).getManaCost(CardInfo.ManaCostSide.RIGHT).getSymbols();
+            this.manaCostLeftStr = String.join("", ((MockCard) card).getManaCostStr(CardInfo.ManaCostSide.LEFT));
+            this.manaCostRightStr = String.join("", ((MockCard) card).getManaCostStr(CardInfo.ManaCostSide.RIGHT));
         } else {
             fullCardName = card.getName();
-            this.manaCostLeft = card.getManaCost().getSymbols();
-            this.manaCostRight = new ArrayList<>();
+            this.manaCostLeftStr = String.join("", card.getManaCost().getSymbols());
+            this.manaCostRightStr = "";
         }
-        //this.manaCost = card.getManaCost().getSymbols();
 
         this.name = card.getImageName();
         this.displayName = card.getName();
@@ -565,8 +563,8 @@ public class CardView extends SimpleCardView {
         this.subTypes = object.getSubtype(game);
         this.superTypes = object.getSuperType();
         this.color = object.getColor(game);
-        this.manaCostLeft = object.getManaCost().getSymbols();
-        this.manaCostRight = new ArrayList<>();
+        this.manaCostLeftStr = String.join("", object.getManaCost().getSymbols());
+        this.manaCostRightStr = "";
         this.convertedManaCost = object.getManaCost().convertedManaCost();
         if (object instanceof PermanentToken) {
             this.mageObjectType = MageObjectType.TOKEN;
@@ -686,8 +684,8 @@ public class CardView extends SimpleCardView {
         this.color = new ObjectColor();
         this.frameColor = new ObjectColor();
         this.frameStyle = FrameStyle.M15_NORMAL;
-        this.manaCostLeft = new ArrayList<>();
-        this.manaCostRight = new ArrayList<>();
+        this.manaCostLeftStr = "";
+        this.manaCostRightStr = "";
         this.convertedManaCost = 0;
 
         // the controller can see more information (e.g. enlarged image) than other players for face down cards (e.g. Morph played face down)
@@ -735,8 +733,8 @@ public class CardView extends SimpleCardView {
         this.color = token.getColor(game);
         this.frameColor = token.getFrameColor(game);
         this.frameStyle = token.getFrameStyle();
-        this.manaCostLeft = token.getManaCost().getSymbols();
-        this.manaCostRight = new ArrayList<>();
+        this.manaCostLeftStr = String.join("", token.getManaCost().getSymbols());
+        this.manaCostRightStr = "";
         this.rarity = Rarity.SPECIAL;
         this.type = token.getTokenType();
         this.tokenDescriptor = token.getTokenDescriptor();
@@ -846,8 +844,8 @@ public class CardView extends SimpleCardView {
         return frameStyle;
     }
 
-    public List<String> getManaCost() {
-        return CardUtil.concatManaSymbols(CardInfo.SPLIT_MANA_SEPARATOR_FULL, this.manaCostLeft, this.manaCostRight);
+    public String getManaCostStr() {
+        return CardUtil.concatManaSymbols(CardInfo.SPLIT_MANA_SEPARATOR_FULL, this.manaCostLeftStr, this.manaCostRightStr);
     }
 
     public int getConvertedManaCost() {
@@ -963,8 +961,8 @@ public class CardView extends SimpleCardView {
         return leftSplitName;
     }
 
-    public ManaCosts getLeftSplitCosts() {
-        return leftSplitCosts;
+    public String getLeftSplitCostsStr() {
+        return leftSplitCostsStr;
     }
 
     public List<String> getLeftSplitRules() {
@@ -979,8 +977,8 @@ public class CardView extends SimpleCardView {
         return rightSplitName;
     }
 
-    public ManaCosts getRightSplitCosts() {
-        return rightSplitCosts;
+    public String getRightSplitCostsStr() {
+        return rightSplitCostsStr;
     }
 
     public List<String> getRightSplitRules() {

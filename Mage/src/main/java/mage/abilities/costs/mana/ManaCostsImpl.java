@@ -194,11 +194,11 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     private void handleLikePhyrexianManaCosts(Player player, Ability source, Game game) {
         if (this.isEmpty()) {
             return; // nothing to be done without any mana costs. prevents NRE from occurring here
-        }        
+        }
         FilterMana phyrexianColors = player.getPhyrexianColors();
         if (player.getPhyrexianColors() != null) {
             Costs<PayLifeCost> tempCosts = new CostsImpl<>();
-            
+
             Iterator<T> manaCostIterator = this.iterator();
             while (manaCostIterator.hasNext()) {
                 ManaCost manaCost = manaCostIterator.next();
@@ -440,15 +440,16 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     @Override
     public final void load(String mana, boolean extractMonoHybridGenericValue) {
         this.clear();
-        if (!extractMonoHybridGenericValue && mana != null && costsCache.containsKey(mana)) {
+        if (mana == null || mana.isEmpty()) {
+            return;
+        }
+
+        if (!extractMonoHybridGenericValue && costsCache.containsKey(mana)) {
             ManaCosts<ManaCost> savedCosts = costsCache.get(mana);
             for (ManaCost cost : savedCosts) {
                 this.add(cost.copy());
             }
         } else {
-            if (mana == null || mana.isEmpty()) {
-                return;
-            }
             String[] symbols = mana.split("^\\{|}\\{|}$");
             int modifierForX = 0;
             for (String symbol : symbols) {
@@ -463,15 +464,15 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                         } else if (!symbol.equals("X")) {
                             this.add(new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
                         } else // check X wasn't added before
-                        if (modifierForX == 0) {
-                            // count X occurence
-                            for (String s : symbols) {
-                                if (s.equals("X")) {
-                                    modifierForX++;
+                            if (modifierForX == 0) {
+                                // count X occurence
+                                for (String s : symbols) {
+                                    if (s.equals("X")) {
+                                        modifierForX++;
+                                    }
                                 }
-                            }
-                            this.add(new VariableManaCost(modifierForX));
-                        } //TODO: handle multiple {X} and/or {Y} symbols
+                                this.add(new VariableManaCost(modifierForX));
+                            } //TODO: handle multiple {X} and/or {Y} symbols
                     } else if (Character.isDigit(symbol.charAt(0))) {
                         MonoHybridManaCost cost;
                         if (extractMonoHybridGenericValue) {
@@ -534,14 +535,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
         StringBuilder sbText = new StringBuilder();
         for (ManaCost cost : this) {
-            if (cost instanceof GenericManaCost) {
-                sbText.append(cost.getText());
-            }
-        }
-        for (ManaCost cost : this) {
-            if (!(cost instanceof GenericManaCost)) {
-                sbText.append(cost.getText());
-            }
+            sbText.append(cost.getText());
         }
         return sbText.toString();
     }

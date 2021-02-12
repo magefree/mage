@@ -56,7 +56,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
         try {
             SwingUtilities.invokeLater(() -> {
                 TextLines textLines = GuiDisplayUtil.getTextLinesfromCardView(card);
-                StringBuilder buffer = GuiDisplayUtil.getRulefromCardView(card, textLines);
+                StringBuilder buffer = GuiDisplayUtil.getRulesFromCardView(card, textLines);
                 resizeTooltipIfNeeded(container, textLines.getBasicTextLength(), textLines.getLines().size());
                 setText(buffer.toString());
                 setCaretPosition(0);

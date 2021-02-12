@@ -789,8 +789,8 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             }
         } else {
             sb.append(card.getName());
-            if (!card.getManaCost().isEmpty()) {
-                sb.append('\n').append(card.getManaCost());
+            if (!card.getManaCostStr().isEmpty()) {
+                sb.append('\n').append(card.getManaCostStr());
             }
             sb.append('\n').append(cardType);
             if (card.getColor().hasColor()) {

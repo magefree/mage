@@ -523,7 +523,7 @@ public final class ManaUtil {
      * @param secondSideCard  second side of double faces card
      * @return
      */
-    public static FilterMana getColorIdentity(ObjectColor cardColor, List<String> cardManaSymbols, List<String> cardRules, Card secondSideCard) {
+    public static FilterMana getColorIdentity(ObjectColor cardColor, String cardManaSymbols, List<String> cardRules, Card secondSideCard) {
         // 20210121
         // 903.4
         // The Commander variant uses color identity to determine what cards can be in a deck with a certain
@@ -612,6 +612,11 @@ public final class ManaUtil {
         return cardManaSymbols.stream().anyMatch(s -> s.contains(needSymbol));
     }
 
+    private static boolean containsManaSymbol(String cardManaSymbols, String needSymbol) {
+        // search R in {R/B}
+        return cardManaSymbols.contains(needSymbol);
+    }
+
     public static FilterMana getColorIdentity(Card card) {
         Card secondSide;
         if (card instanceof SplitCard) {
@@ -623,7 +628,7 @@ public final class ManaUtil {
         } else {
             secondSide = card.getSecondCardFace();
         }
-        return getColorIdentity(card.getColor(), card.getManaCost().getSymbols(), card.getRules(), secondSide);
+        return getColorIdentity(card.getColor(), String.join("", card.getManaCost().getSymbols()), card.getRules(), secondSide);
     }
 
     public static int getColorIdentityHash(FilterMana colorIdentity) {

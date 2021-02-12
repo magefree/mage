@@ -529,7 +529,7 @@ public class CardPanelRenderModeImage extends CardPanel {
 
             int symbolMarginX = 2; // 2 px between icons
 
-            String manaCost = ManaSymbols.getStringManaCost(getGameCard().getManaCost());
+            String manaCost = ManaSymbols.getClearManaCost(getGameCard().getManaCostStr());
             int manaWidth = getManaWidth(manaCost, symbolMarginX);
 
             // right top corner with margin (sizes from any sample card, length from black border to mana icon)

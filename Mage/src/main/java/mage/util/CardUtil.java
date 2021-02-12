@@ -791,6 +791,15 @@ public final class CardUtil {
         return res;
     }
 
+    public static String concatManaSymbols(String delimeter, String mana1, String mana2) {
+        String res = mana1;
+        if (!res.isEmpty() && !mana2.isEmpty() && delimeter != null && !delimeter.isEmpty()) {
+            res += delimeter;
+        }
+        res += mana2;
+        return res;
+    }
+
     public static ColoredManaSymbol manaTypeToColoredManaSymbol(ManaType manaType) {
         switch (manaType) {
             case BLACK:

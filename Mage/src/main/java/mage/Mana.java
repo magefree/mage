@@ -24,6 +24,10 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         private ManaColor() {
         }
 
+        protected ManaColor(final ManaColor manaColor) {
+            this.copyFrom(manaColor);
+        }
+
         private ManaColor(int amount) {
             this.amount = amount;
         }
@@ -76,9 +80,12 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         }
 
         protected ManaColor copy() {
-            ManaColor copy = new ManaColor();
-            copy.incrementAmount(this);
-            return copy;
+            return new ManaColor(this);
+        }
+
+        protected void copyFrom(final ManaColor manaColor) {
+            this.amount = manaColor.amount;
+            this.snowAmount = manaColor.snowAmount;
         }
 
         @Override
@@ -1202,14 +1209,15 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
      * @param mana the mana to set this object to.
      */
     public void setToMana(final Mana mana) {
-        this.any = mana.any.copy();
-        this.white = mana.white.copy();
-        this.blue = mana.blue.copy();
-        this.black = mana.black.copy();
-        this.red = mana.red.copy();
-        this.green = mana.green.copy();
-        this.colorless = mana.colorless.copy();
-        this.generic = mana.generic.copy();
+        this.any.copyFrom(mana.any);
+        this.white.copyFrom(mana.white);
+        this.blue.copyFrom(mana.blue.copy());
+        this.black.copyFrom(mana.black.copy());
+        this.red.copyFrom(mana.red.copy());
+        this.green.copyFrom(mana.green.copy());
+        this.colorless.copyFrom(mana.colorless.copy());
+        this.generic.copyFrom(mana.generic.copy());
+        //this.flag = mana.flag;
     }
 
     /**

@@ -293,7 +293,7 @@ public class CardInfo {
         return sb.toString();
     }
 
-    private List<String> parseList(String list, ManaCostSide manaCostSide) {
+    public static List<String> parseList(String list, ManaCostSide manaCostSide) {
         if (list.isEmpty()) {
             return Collections.emptyList();
         }

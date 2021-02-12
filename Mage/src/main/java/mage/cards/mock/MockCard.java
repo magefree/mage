@@ -29,8 +29,10 @@ public class MockCard extends CardImpl {
     private int startingLoyalty;
 
     // mana cost extra info for multiple mana drawing
-    protected ManaCosts<ManaCost> manaCostLeft;
-    protected ManaCosts<ManaCost> manaCostRight;
+    // warning, don't use ManaCost objects here due too much memory consumptions
+    protected List<String> manaCostLeftStr;
+    protected List<String> manaCostRightStr;
+    protected List<String> manaCostStr;
     protected String adventureSpellName;
     protected boolean isModalDoubleFacesCard;
 
@@ -47,9 +49,10 @@ public class MockCard extends CardImpl {
 
         this.usesVariousArt = card.usesVariousArt();
 
-        this.manaCostLeft = new ManaCostsImpl(join(card.getManaCosts(CardInfo.ManaCostSide.LEFT)));
-        this.manaCostRight = new ManaCostsImpl(join(card.getManaCosts(CardInfo.ManaCostSide.RIGHT)));
         this.manaCost = new ManaCostsImpl(join(card.getManaCosts(CardInfo.ManaCostSide.ALL)));
+        this.manaCostLeftStr = card.getManaCosts(CardInfo.ManaCostSide.LEFT);
+        this.manaCostRightStr = card.getManaCosts(CardInfo.ManaCostSide.RIGHT);
+        this.manaCostStr = card.getManaCosts(CardInfo.ManaCostSide.ALL);
 
         this.color = card.getColor();
 
@@ -112,7 +115,8 @@ public class MockCard extends CardImpl {
         return manaCost;
     }
 
-    public ManaCosts<ManaCost> getManaCost(CardInfo.ManaCostSide manaCostSide) {
+    /*
+    private ManaCosts<ManaCost> getManaCost(CardInfo.ManaCostSide manaCostSide) {
         switch (manaCostSide) {
             case LEFT:
                 return manaCostLeft;
@@ -121,6 +125,18 @@ public class MockCard extends CardImpl {
             default:
             case ALL:
                 return manaCost;
+        }
+    }*/
+
+    public List<String> getManaCostStr(CardInfo.ManaCostSide manaCostSide) {
+        switch (manaCostSide) {
+            case LEFT:
+                return manaCostLeftStr;
+            case RIGHT:
+                return manaCostRightStr;
+            default:
+            case ALL:
+                return manaCostStr;
         }
     }
 
