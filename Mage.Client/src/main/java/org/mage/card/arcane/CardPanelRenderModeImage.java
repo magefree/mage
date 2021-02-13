@@ -563,10 +563,22 @@ public class CardPanelRenderModeImage extends CardPanel {
     public void doLayout() {
         super.doLayout();
 
-        int cardWidth = getCardLocation().getCardWidth(); // must use current panel sizes to scale real image
-        int cardHeight = getCardLocation().getCardHeight();
+        int cardWidth;
+        int cardHeight;
         int cardXOffset = 0;
         int cardYOffset = 0;
+
+        // workaround to fix a rare NPE error with image loading
+        // reason: panel runs image load in another thread and that thread can be completed before top panel init, see updateArtImage
+        if (getTopPanelRef() == null) {
+            //noinspection deprecation - it's ok for workaround
+            cardWidth = this.getWidth();
+            //noinspection deprecation - it's ok for workaround
+            cardHeight = this.getHeight();
+        } else {
+            cardWidth = getCardLocation().getCardWidth(); // must use real card sizes to scale real image
+            cardHeight = getCardLocation().getCardHeight();
+        }
 
         CardSizes sizes = new CardSizes(getInsets(), cardXOffset, cardYOffset, cardWidth, cardHeight);
 

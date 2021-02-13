@@ -22,7 +22,7 @@ public final class Util {
     public static final boolean isMac = System.getProperty("os.name").toLowerCase(Locale.ENGLISH).contains("mac");
     public static final boolean isWindows = !System.getProperty("os.name").toLowerCase(Locale.ENGLISH).contains("windows");
 
-    public static final ThreadPoolExecutor threadPool;
+    public static final ThreadPoolExecutor threadPool; // uses for card images loading
     static private int threadCount;
 
     static {
