@@ -130,7 +130,7 @@ public class TinyLeaders extends Constructed {
              * would be legal independently.
              */
 
-            if (commander == null || commander.getManaCost().convertedManaCost() > 3) {
+            if (commander == null || commander.getConvertedManaCost() > 3) {
                 if (commander == null) {
                     if (deck.getName() == null) {
                         addError(DeckValidatorErrorType.PRIMARY, "Leader", "You have to save your deck with the leader card name entered to the DECK NAME field of the DECK EDITOR (top left) so that XMage knows your leader."
@@ -141,7 +141,7 @@ public class TinyLeaders extends Constructed {
 
                     }
                 }
-                if (commander != null && commander.getManaCost().convertedManaCost() > 3) {
+                if (commander != null && commander.getConvertedManaCost() > 3) {
                     addError(DeckValidatorErrorType.PRIMARY, "Leader", "Commanders converted mana cost is greater than 3");
                 }
                 return false;
@@ -201,13 +201,13 @@ public class TinyLeaders extends Constructed {
         // as zero for this purpose. Split cards are legal only if both of their halves would be legal independently.
         List<Integer> costs = new ArrayList<>();
         if (card instanceof SplitCard) {
-            costs.add(((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost());
-            costs.add(((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost());
+            costs.add(((SplitCard) card).getLeftHalfCard().getConvertedManaCost());
+            costs.add(((SplitCard) card).getRightHalfCard().getConvertedManaCost());
         } else if (card instanceof ModalDoubleFacesCard) {
-            costs.add(((ModalDoubleFacesCard) card).getLeftHalfCard().getManaCost().convertedManaCost());
-            costs.add(((ModalDoubleFacesCard) card).getRightHalfCard().getManaCost().convertedManaCost());
+            costs.add(((ModalDoubleFacesCard) card).getLeftHalfCard().getConvertedManaCost());
+            costs.add(((ModalDoubleFacesCard) card).getRightHalfCard().getConvertedManaCost());
         } else {
-            costs.add(card.getManaCost().convertedManaCost());
+            costs.add(card.getConvertedManaCost());
         }
 
         return costs.stream().allMatch(cost -> {

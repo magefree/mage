@@ -473,12 +473,13 @@ public class AddLandDialog extends MageDialog {
             land_number = 0;
         }
         for (Card cd : cards) {
-            Mana m = cd.getManaCost().getMana();
-            red += m.getRed();
-            green += m.getGreen();
-            black += m.getBlack();
-            blue += m.getBlue();
-            white += m.getWhite();
+            for (String s : cd.getManaCostSymbols()) {
+                if (s.contains("W")) white++;
+                if (s.contains("U")) blue++;
+                if (s.contains("B")) black++;
+                if (s.contains("R")) red++;
+                if (s.contains("G")) green++;
+            }
         }
         int total = red + green + black + blue + white;
 
