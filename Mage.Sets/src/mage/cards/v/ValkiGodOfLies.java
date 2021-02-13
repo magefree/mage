@@ -196,11 +196,11 @@ class ValkiGodOfLiesReturnExiledCardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject Valki = game.getObject(source.getSourceId());
+        MageObject ValkiOnBattlefield = game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         if (controller != null
-                && Valki != null) {
-            // Valki, God of Lies has changed zone, so make sure to get the exile zone information from its previous state
-            UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + (Valki.getZoneChangeCounter(game) - 1), game);
+                && ValkiOnBattlefield != null) {
+            // Valki, God of Lies has changed zone, so make sure to get the exile zone via its last known battlefield state
+            UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + (ValkiOnBattlefield.getZoneChangeCounter(game)), game);
             ExileZone exile = game.getExile().getExileZone(exileId);
             Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (exile != null
