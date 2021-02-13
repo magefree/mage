@@ -3,6 +3,7 @@ package org.mage.test.cards.single.dka;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -20,8 +21,11 @@ public class AltarOfTheLostTest extends CardTestPlayerBase {
         // Flashback {1}{B}
         addCard(Zone.GRAVEYARD, playerA, "Lingering Souls");
 
-        setChoice(playerA, "Black");
-        setChoice(playerA, "Black");
+        // Add 2 black mana (mana choice in WUBRG order)
+        setChoice(playerA, "X=0");
+        setChoice(playerA, "X=0");
+        setChoice(playerA, "X=2");
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {1}{B}");
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
@@ -38,8 +42,10 @@ public class AltarOfTheLostTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Altar of the Lost");
         addCard(Zone.HAND, playerA, "Lingering Souls");
 
-        setChoice(playerA, "Black");
-        setChoice(playerA, "Black");
+        setChoice(playerA, "X=0");
+        setChoice(playerA, "X=0");
+        setChoice(playerA, "X=2");
+        setChoice(playerA, TestPlayer.CHOICE_SKIP);
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lingering Souls");
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
