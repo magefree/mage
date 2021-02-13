@@ -574,4 +574,14 @@ public abstract class TargetImpl implements Target {
     public void setEventReporting(boolean shouldReport) {
         this.shouldReportEvents = shouldReport;
     }
+
+    @Override
+    public int getSize() {
+        return targets.size();
+    }
+
+    @Override
+    public boolean contains(UUID targetId) {
+        return targets.containsKey(targetId);
+    }
 }

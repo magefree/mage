@@ -792,17 +792,15 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         int amount = target.getAmountRemaining();
-        if (amount < 1) {
+        if (amount < 1 || target.getSize() > amount) {
             return false;
         }
 
-        Map<UUID, String> targets = new LinkedHashMap<>(amount);
-        Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), abilityControllerId, game);
-        boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
-
-        while (canRespond() && targets.size() < amount) {
+        while (canRespond() && target.getSize() < amount) {
+            Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), abilityControllerId, game);
+            boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
             if (possibleTargets.isEmpty()
-                    || targets.size() >= target.getNumberOfTargets()) {
+                    || target.getSize() >= target.getNumberOfTargets()) {
                 required = false;
             }
 
@@ -817,7 +815,7 @@ public class HumanPlayer extends PlayerImpl {
                     sb.append(target.getMessage());
                 }
                 sb.append(" (selected ");
-                sb.append(targets.size());
+                sb.append(target.getSize());
                 sb.append(" of ");
                 sb.append(amount);
                 sb.append(')');
@@ -828,35 +826,49 @@ public class HumanPlayer extends PlayerImpl {
 
             UUID responseId = getFixedResponseUUID(game);
             if (responseId != null) {
-                if (targets.containsKey(responseId)) {
-                    targets.remove(responseId);
-                    possibleTargets.add(responseId);
+                if (target.contains(responseId)) {
+                    target.remove(responseId);
                 } else if (possibleTargets.contains(responseId) && target.canTarget(abilityControllerId, responseId, source, game)) {
-                    MageObject targetObject = game.getObject(responseId);
-                    String targetString;
-                    if (targetObject != null) {
-                        targetString = targetObject.getIdName();
-                    } else {
-                        targetString = responseId.toString();
-                    }
-                    targets.put(responseId, targetString);
-                    possibleTargets.remove(responseId);
+                    target.addTarget(responseId, source, game);
                 }
             } else if (!required) {
                 break;
             }
         }
 
+        List<UUID> targets = target.getTargets();
         if (targets.isEmpty()) {
             return false;
         }
 
-        List<Integer> amountList = getMultiAmount(new ArrayList<>(targets.values()), 1, amount, MultiAmountType.DAMAGE, game);
+        List<String> targetStrings = new ArrayList<>(amount);
+        for (UUID targetId : targets) {
+            MageObject targetObject = game.getObject(targetId);
+            if (targetObject != null) {
+                StringBuilder sb = new StringBuilder();
+                sb.append(targetObject.getIdName());
+                sb.append(", ");
+                sb.append(targetObject.getPower().getValue());
+                sb.append('/');
+                sb.append(targetObject.getToughness().getValue());
+                targetStrings.add(sb.toString());
+            } else {
+                Player player = game.getPlayer(targetId);
+                if (player != null) {
+                    targetStrings.add(player.getName());
+                } else {
+                    targetStrings.add(targetId.toString());
+                }
+            }
+        }
+
+        List<Integer> amountList = getMultiAmount(targetStrings, 1, amount, MultiAmountType.DAMAGE, game);
         int i = 0;
-        for (UUID targetId : targets.keySet()) {
-            target.addTarget(targetId, amountList.get(i), source, game);
+        for (UUID targetId : targets) {
+            target.setTargetAmount(targetId, amountList.get(i), game);
             i++;
         }
+        target.clearRemainingAmount();
         return true;
     }
 

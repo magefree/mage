@@ -163,4 +163,8 @@ public abstract class TargetAmount extends TargetImpl {
             }
         }
     }
+
+    public void clearRemainingAmount() {
+        remainingAmount = 0;
+    }
 }
