@@ -2660,19 +2660,26 @@ public class TestPlayer implements Player {
         boolean allValuesChosen = true;
         List<Integer> multiAmount = new ArrayList<>(size);
         for (String message : messages) {
-            if (choices.isEmpty() || !choices.get(0).startsWith("X=")) {
+            if (choices.isEmpty()) {
                 this.chooseStrictModeFailed("choice", game, message);
+                return computerPlayer.getMultiAmount(messages, min, max, type, game);
+            } else if (choices.get(0).startsWith("X=")) {
+                int xValue = Integer.parseInt(choices.get(0).substring(2));
+                choiceAmount += xValue;
+                multiAmount.add(xValue);
+                choices.remove(0);
+            } else if (choices.get(0).equals(CHOICE_SKIP)) {
                 allValuesChosen = false;
+                choices.remove(0);
                 break;
+            } else {
+                throw new AssertionError(choices.get(0) + " is an invalid choice for " + message);
             }
-            int xValue = Integer.parseInt(choices.get(0).substring(2));
-            choiceAmount += xValue;
-            multiAmount.add(xValue);
-            choices.remove(0);
         }
         if (!allValuesChosen) {
             while (multiAmount.size() < size) {
-                multiAmount.add(0);
+                choiceAmount += min;
+                multiAmount.add(min);
             }
             if (choiceAmount < max) {
                 int lastIndex = multiAmount.size() - 1;
