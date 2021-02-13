@@ -30,17 +30,20 @@ public class PickMultiNumberDialog extends MageDialog {
     public void showDialog(List<String> messages, int min, int max, Map<String, Serializable> options) {
         if (labelList != null) {
             for (JLabel label : labelList) {
-                this.remove(label);
+                jPanel1.remove(label);
             }
         }
         if (spinnerList != null) {
             for (JSpinner spinner : spinnerList) {
-                this.remove(spinner);
+                jPanel1.remove(spinner);
             }
         }
         int size = messages.size();
         labelList = new ArrayList<>(size);
         spinnerList = new ArrayList<>(size);
+        jPanel1.setLayout(new GridBagLayout());
+        GridBagConstraints labelC = new GridBagConstraints();
+        GridBagConstraints spinnerC = new GridBagConstraints();
         for (int i = 0; i < size; i++) {
             String input = messages.get(i);
             String manaText = null;
@@ -71,15 +74,18 @@ public class PickMultiNumberDialog extends MageDialog {
             } else {
                 label.setText(input);
             }
-            label.setLocation(10, 40 + (i * 30));
-            label.setSize(300, 26);
-            this.add(label);
+            labelC.weightx = 0.5;
+            labelC.gridx = 0;
+            labelC.gridy = i;
+            jPanel1.add(label, labelC);
             labelList.add(label);
 
             JSpinner spinner = new JSpinner();
             spinner.setModel(new SpinnerNumberModel(min, min, max, 1));
-            spinner.setLocation(375, 40 + (i * 30));
-            spinner.setSize(50, 26);
+            spinnerC.weightx = 0.5;
+            spinnerC.gridx = 1;
+            spinnerC.gridy = i;
+            spinnerC.ipadx = 20;
             spinner.addChangeListener(e -> {
                 int totalChosenAmount = 0;
                 for (JSpinner jSpinner : spinnerList) {
@@ -88,7 +94,7 @@ public class PickMultiNumberDialog extends MageDialog {
                 counterText.setText(totalChosenAmount + " out of " + max);
                 chooseButton.setEnabled(totalChosenAmount == max);
             });
-            this.add(spinner);
+            jPanel1.add(spinner, spinnerC);
             spinnerList.add(spinner);
         }
         int totalChosenAmount = min * size;
@@ -128,6 +134,8 @@ public class PickMultiNumberDialog extends MageDialog {
         chooseButton = new javax.swing.JButton();
         header = new javax.swing.JLabel();
         counterText = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
 
         chooseButton.setText("Choose");
         chooseButton.setEnabled(false);
@@ -141,20 +149,38 @@ public class PickMultiNumberDialog extends MageDialog {
 
         counterText.setText("Counter");
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 413, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 273, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(jPanel1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(header, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(counterText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(header, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(counterText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(184, 184, 184)
+                        .addComponent(chooseButton)
+                        .addGap(0, 172, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(184, 184, 184)
-                .addComponent(chooseButton)
-                .addContainerGap(184, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +189,9 @@ public class PickMultiNumberDialog extends MageDialog {
                 .addComponent(header)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(counterText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 288, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chooseButton)
                 .addContainerGap())
         );
@@ -178,5 +206,7 @@ public class PickMultiNumberDialog extends MageDialog {
     private javax.swing.JButton chooseButton;
     private javax.swing.JLabel counterText;
     private javax.swing.JLabel header;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
