@@ -161,7 +161,7 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
                 TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
                 lion.getSpellAbility().addTarget(auraTarget);
                 lion.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
-                lion.addAbility(new EnchantAbility(auraTarget.getTargetName()));
+                lion.addAbility(new EnchantAbility(auraTarget.getTargetName()), source.getSourceId(), game);
 
                 // add the activated ability
                 activatedAbility.setControllerId(source.getControllerId());
