@@ -471,7 +471,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
     private void debugObjectMemorySize(String name, Object object) {
         // just debug code, don't use it in production
-        // need 2x memory for find a size
+        // need 2x memory to find a size
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(baos);

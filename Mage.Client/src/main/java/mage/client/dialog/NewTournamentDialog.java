@@ -692,6 +692,20 @@ public class NewTournamentDialog extends MageDialog {
             // message must be send by server!
             return;
         }
+
+        // join AI
+        for (TournamentPlayerPanel player : players) {
+            if (player.getPlayerType().getSelectedItem() != PlayerType.HUMAN) {
+                if (!player.joinTournamentTable(roomId, table.getTableId(), DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile(), true))) {
+                    // error message must be send by sever
+                    SessionHandler.removeTable(roomId, table.getTableId());
+                    table = null;
+                    return;
+                }
+            }
+        }
+
+        // join itself
         if (SessionHandler.joinTournamentTable(
                 roomId,
                 table.getTableId(),
@@ -699,19 +713,11 @@ public class NewTournamentDialog extends MageDialog {
                 PlayerType.HUMAN, 1,
                 DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile(), true),
                 tOptions.getPassword())) {
-            for (TournamentPlayerPanel player : players) {
-                if (player.getPlayerType().getSelectedItem() != PlayerType.HUMAN) {
-                    if (!player.joinTournamentTable(roomId, table.getTableId(), DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile(), true))) {
-                        // error message must be send by sever
-                        SessionHandler.removeTable(roomId, table.getTableId());
-                        table = null;
-                        return;
-                    }
-                }
-            }
+            // all fine, can close create dialog (join dialog will be opened after feedback from server)
             this.hideDialog();
             return;
         }
+
         JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining tournament.", "Error", JOptionPane.ERROR_MESSAGE);
         SessionHandler.removeTable(roomId, table.getTableId());
         table = null;

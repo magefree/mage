@@ -608,7 +608,7 @@ public class CallbackClientImpl implements CallbackClient {
         logger.fatal("Client error\n", ex);
         String errorMessage = ex.getMessage();
         if (errorMessage == null || errorMessage.isEmpty() || errorMessage.equals("Null")) {
-            errorMessage = ex.getClass().getSimpleName() + " - look server logs for more details";
+            errorMessage = ex.getClass().getSimpleName() + " - look server or client logs for more details";
         }
         frame.showError("Server's error: " + errorMessage);
     }

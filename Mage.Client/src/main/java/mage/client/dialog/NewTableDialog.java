@@ -522,6 +522,19 @@ public class NewTableDialog extends MageDialog {
             return;
         }
         try {
+            // join AI
+            for (TablePlayerPanel player : players) {
+                if (player.getPlayerType() != PlayerType.HUMAN) {
+                    if (!player.joinTable(roomId, table.getTableId())) {
+                        // error message must be send by the server
+                        SessionHandler.removeTable(roomId, table.getTableId());
+                        table = null;
+                        return;
+                    }
+                }
+            }
+
+            // join itself
             if (SessionHandler.joinTable(
                     roomId,
                     table.getTableId(),
@@ -529,16 +542,7 @@ public class NewTableDialog extends MageDialog {
                     PlayerType.HUMAN, 1,
                     DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile(), true),
                     this.txtPassword.getText())) {
-                for (TablePlayerPanel player : players) {
-                    if (player.getPlayerType() != PlayerType.HUMAN) {
-                        if (!player.joinTable(roomId, table.getTableId())) {
-                            // error message must be send by the server
-                            SessionHandler.removeTable(roomId, table.getTableId());
-                            table = null;
-                            return;
-                        }
-                    }
-                }
+                // all fine, can close create dialog (join dialog will be opened after feedback from server)
                 this.hideDialog();
                 return;
             }
