@@ -122,7 +122,7 @@ public abstract class ExpansionSet implements Serializable {
     protected int maxCardNumberInBooster; // used to omit cards with collector numbers beyond the regular cards in a set for boosters
 
     protected final EnumMap<Rarity, List<CardInfo>> savedCards;
-    protected final Map<Integer, CardInfo> inBoosterMap = new HashMap<>();
+    protected final Map<String, CardInfo> inBoosterMap = new HashMap<>();
 
     public ExpansionSet(String name, String code, Date releaseDate, SetType setType) {
         this(name, code, releaseDate, setType, null);
@@ -290,7 +290,7 @@ public abstract class ExpansionSet implements Serializable {
                     .instance
                     .findCards(criteria)
                     .stream()
-                    .forEach(cardInfo -> inBoosterMap.put(cardInfo.getCardNumberAsInt(), cardInfo));
+                    .forEach(cardInfo -> inBoosterMap.put(cardInfo.getCardNumber(), cardInfo));
         }
         return boosterCollator
                 .makeBooster()

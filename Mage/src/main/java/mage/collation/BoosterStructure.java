@@ -20,8 +20,8 @@ public abstract class BoosterStructure {
         this.slots = Arrays.asList(runs);
     }
 
-    public List<Integer> makeRun() {
-        List<Integer> cards = new ArrayList<>();
+    public List<String> makeRun() {
+        List<String> cards = new ArrayList<>();
         for (CardRun run : this.slots) {
             cards.add(run.getNext());
         }
