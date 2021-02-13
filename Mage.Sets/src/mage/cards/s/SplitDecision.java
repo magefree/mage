@@ -1,27 +1,26 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.choices.TwoChoiceVote;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
- * @author fireshoes
+ * @author fireshoes, TheElk801
  */
 public final class SplitDecision extends CardImpl {
 
     public SplitDecision(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Will of the council - Choose target instant or sorcery spell. Starting with you, each player votes for denial or duplication. If denial gets more votes, counter the spell. If duplication gets more votes or the vote is tied, copy the spell. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(new SplitDecisionEffect());
@@ -42,10 +41,13 @@ class SplitDecisionEffect extends OneShotEffect {
 
     SplitDecisionEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Will of the council</i> &mdash; Choose target instant or sorcery spell. Starting with you, each player votes for denial or duplication. If denial gets more votes, counter the spell. If duplication gets more votes or the vote is tied, copy the spell. You may choose new targets for the copy";
+        this.staticText = "<i>Will of the council</i> &mdash; Choose target instant or sorcery spell. " +
+                "Starting with you, each player votes for denial or duplication. If denial gets more votes, " +
+                "counter the spell. If duplication gets more votes or the vote is tied, copy the spell. " +
+                "You may choose new targets for the copy";
     }
 
-    SplitDecisionEffect(final SplitDecisionEffect effect) {
+    private SplitDecisionEffect(final SplitDecisionEffect effect) {
         super(effect);
     }
 
@@ -56,28 +58,12 @@ class SplitDecisionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int denialCount = 0;
-            int duplicationCount = 0;
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    if (player.chooseUse(Outcome.ExtraTurn, "Choose denial?", source, game)) {
-                        denialCount++;
-                        game.informPlayers(player.getLogName() + " has voted for denial");
-                    } else {
-                        duplicationCount++;
-                        game.informPlayers(player.getLogName() + " has voted for duplication");
-                    }
-                }
-            }
-            if (denialCount > duplicationCount) {
-                return game.getStack().counter(getTargetPointer().getFirst(game, source), source, game);
-            } else {
-                return new CopyTargetSpellEffect().apply(game, source);
-            }
+        TwoChoiceVote vote = new TwoChoiceVote("denial", "duplication");
+        vote.doVotes(source, game);
+
+        if (vote.getVoteCount(true) > vote.getVoteCount(false)) {
+            return game.getStack().counter(getTargetPointer().getFirst(game, source), source, game);
         }
-        return false;
+        return new CopyTargetSpellEffect().apply(game, source);
     }
 }
