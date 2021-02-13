@@ -236,7 +236,6 @@ public final class Main {
         logger.info("Config - mail from addre.: " + config.getMailFromAddress());
         logger.info("Config - google account  : " + config.getGoogleAccount());
 
-<<<<<<< HEAD
         logger.info("Loaded game types: " + gameTypes
                 + ", tourneys: " + tourneyTypes
                 + ", players: " + playerTypes
@@ -246,10 +245,6 @@ public final class Main {
             logger.error("ERROR, can't load any game types. Check your config.xml in server's config folder (example: old jar versions after update).");
         }
 
-        Connection connection = new Connection("&maxPoolSize=" + config.getMaxPoolSize());
-        connection.setHost(config.getServerAddress());
-        connection.setPort(config.getPort());
-=======
         final String defaultHost = ServerConnection.computeLocalAddress();
         logger.info(String.format("Computed default address=%s", defaultHost));
         /*
@@ -260,7 +255,6 @@ public final class Main {
                 .replaceAll("%3A", ":")
                 .replaceAll("%21", "!");
         logger.info(String.format("Computed connection string=%s", connectionString));
->>>>>>> [multi-home]: Define multi home connections
         final ManagerFactory managerFactory = new MainManagerFactory(config);
         try {
             // Parameter: serializationtype => jboss
