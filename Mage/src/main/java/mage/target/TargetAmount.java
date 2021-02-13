@@ -164,7 +164,11 @@ public abstract class TargetAmount extends TargetImpl {
         }
     }
 
-    public void clearRemainingAmount() {
-        remainingAmount = 0;
+    public void setTargetAmount(UUID targetId, int amount, Ability source, Game game) {
+        if (!amountWasSet) {
+            setAmount(source, game);
+        }
+        remainingAmount -= (amount - this.getTargetAmount(targetId));
+        this.setTargetAmount(targetId, amount, game);
     }
 }

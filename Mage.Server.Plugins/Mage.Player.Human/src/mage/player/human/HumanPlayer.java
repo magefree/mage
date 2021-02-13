@@ -865,10 +865,9 @@ public class HumanPlayer extends PlayerImpl {
         List<Integer> amountList = getMultiAmount(targetStrings, 1, amount, MultiAmountType.DAMAGE, game);
         int i = 0;
         for (UUID targetId : targets) {
-            target.setTargetAmount(targetId, amountList.get(i), game);
+            target.setTargetAmount(targetId, amountList.get(i), source, game);
             i++;
         }
-        target.clearRemainingAmount();
         return true;
     }
 
