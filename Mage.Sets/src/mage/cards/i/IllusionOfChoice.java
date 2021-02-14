@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +38,7 @@ public final class IllusionOfChoice extends CardImpl {
     }
 }
 
-class IllusionOfChoiceReplacementEffect extends ReplacementEffectImpl {
+class IllusionOfChoiceReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     IllusionOfChoiceReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
@@ -61,11 +61,6 @@ class IllusionOfChoiceReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         event.setPlayerId(source.getControllerId());
         return false;
     }
