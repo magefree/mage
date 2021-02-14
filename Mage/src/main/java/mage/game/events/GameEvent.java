@@ -437,7 +437,7 @@ public class GameEvent implements Serializable {
         COMBAT_DAMAGE_APPLIED,
         SELECTED_ATTACKER, SELECTED_BLOCKER,
         //voting
-        VOTE,
+        VOTE, FINISHED_VOTING,
         //custom events
         CUSTOM_EVENT
     }
@@ -494,8 +494,7 @@ public class GameEvent implements Serializable {
         return new GameEvent(customEventType, targetId, source, playerId);
     }
 
-    private GameEvent(EventType type, UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount, boolean flag)
-    {
+    private GameEvent(EventType type, UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount, boolean flag) {
         this(type, customEventType, targetId, source, playerId, amount, flag, null);
     }
 

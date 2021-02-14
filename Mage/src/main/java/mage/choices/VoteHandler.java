@@ -3,6 +3,7 @@ package mage.choices;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.VotedEvent;
 import mage.players.Player;
 
 import java.util.*;
@@ -34,6 +35,7 @@ public abstract class VoteHandler<T> {
                 playerMap.computeIfAbsent(playerId, x -> new ArrayList<>()).add(vote);
             }
         }
+        game.fireEvent(new VotedEvent(source, this));
     }
 
     public abstract T playerChoose(Player player, Player decidingPlayer, Ability source, Game game);
@@ -73,6 +75,19 @@ public abstract class VoteHandler<T> {
                 .entrySet()
                 .stream()
                 .filter(e -> e.getValue() >= max)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<UUID> getDidntVote(UUID playerId) {
+        if (playerMap.computeIfAbsent(playerId, x -> new ArrayList<>()).isEmpty()) {
+            return playerMap.keySet();
+        }
+        return playerMap
+                .entrySet()
+                .stream()
+                .filter(e -> e.getValue() != null && !e.getValue().isEmpty())
+                .filter(e -> !e.getValue().stream().allMatch(playerMap.get(playerId)::contains))
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toSet());
     }
