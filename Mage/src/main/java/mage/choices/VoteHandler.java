@@ -5,6 +5,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -51,5 +52,21 @@ public abstract class VoteHandler<T> {
                 .filter(entry -> entry.getValue() != null && entry.getValue().contains(vote))
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
+    }
+
+    public Set<T> getMostVoted() {
+        Map<T, Integer> map = new HashMap<>();
+        playerMap
+                .values()
+                .stream()
+                .flatMap(Collection::stream)
+                .map(t -> map.compute(t, (s, i) -> i == null ? 1 : Integer.sum(i, 1)));
+        int max = map.values().stream().mapToInt(x -> x).max().orElse(0);
+        return map
+                .entrySet()
+                .stream()
+                .filter(e -> e.getValue() >= max)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toSet());
     }
 }
