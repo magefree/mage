@@ -6,12 +6,11 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
  */
-public class TwoChoiceVote implements VoteHandler<Boolean> {
+public class TwoChoiceVote extends VoteHandler<Boolean> {
 
     private final String choice1;
     private final String choice2;
@@ -23,42 +22,13 @@ public class TwoChoiceVote implements VoteHandler<Boolean> {
     }
 
     @Override
-    public void doVotes(Ability source, Game game) {
-        playerMap.clear();
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
-            }
-            boolean vote = player.chooseUse(Outcome.Neutral, "Vote", null, choice1, choice2, source, game);
-            game.informPlayers(player.getName() + " voted for " + (vote ? choice1 : choice2));
-            playerMap.computeIfAbsent(playerId, x -> new ArrayList<>()).add(vote);
+    public Boolean playerChoose(Player player, Player decidingPlayer, Ability source, Game game) {
+        boolean vote = decidingPlayer.chooseUse(Outcome.Neutral, "Vote", null, choice1, choice2, source, game);
+        String message = player.getName() + " voted for " + (vote ? choice1 : choice2);
+        if (!Objects.equals(player, decidingPlayer)) {
+            message += " (chosen by " + decidingPlayer.getName() + ')';
         }
-    }
-
-    @Override
-    public List<Boolean> getVotes(UUID playerId) {
-        return playerMap.computeIfAbsent(playerId, x -> new ArrayList<>());
-    }
-
-    @Override
-    public int getVoteCount(Boolean vote) {
-        return playerMap
-                .values()
-                .stream()
-                .flatMap(Collection::stream)
-                .filter(vote::equals)
-                .mapToInt(x -> x ? 1 : 0)
-                .sum();
-    }
-
-    @Override
-    public List<UUID> getVotedFor(Boolean vote) {
-        return playerMap
-                .entrySet()
-                .stream()
-                .filter(entry -> entry.getValue() != null && entry.getValue().contains(vote))
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+        game.informPlayers(message);
+        return vote;
     }
 }
