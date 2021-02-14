@@ -18,14 +18,16 @@ public abstract class VoteHandler<T> {
     public void doVotes(Ability source, Game game) {
         playerMap.clear();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            Player player = game.getPlayer(playerId);
-            if (player == null) {
+            GameEvent event = GameEvent.getEvent(GameEvent.EventType.VOTE, playerId, source, playerId, 1);
+            game.replaceEvent(event);
+            Player player = game.getPlayer(event.getTargetId());
+            Player decidingPlayer = game.getPlayer(event.getPlayerId());
+            if (player == null || decidingPlayer == null) {
                 continue;
             }
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.VOTE, playerId, source, playerId, 1);
             int voteCount = event.getAmount();
             for (int i = 0; i < voteCount; i++) {
-                T vote = playerChoose(player, player, source, game);
+                T vote = playerChoose(player, decidingPlayer, source, game);
                 if (vote == null) {
                     continue;
                 }

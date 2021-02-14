@@ -122,6 +122,7 @@ public final class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Hundred-Handed One", 93, Rarity.RARE, mage.cards.h.HundredHandedOne.class));
         cards.add(new SetCardInfo("Hurly-Burly", 165, Rarity.COMMON, mage.cards.h.HurlyBurly.class));
         cards.add(new SetCardInfo("Ill-Tempered Cyclops", 166, Rarity.COMMON, mage.cards.i.IllTemperedCyclops.class));
+        cards.add(new SetCardInfo("Illusion of Choice", 31, Rarity.UNCOMMON, mage.cards.i.IllusionOfChoice.class));
         cards.add(new SetCardInfo("Infest", 139, Rarity.UNCOMMON, mage.cards.i.Infest.class));
         cards.add(new SetCardInfo("Inquisition of Kozilek", 140, Rarity.RARE, mage.cards.i.InquisitionOfKozilek.class));
         cards.add(new SetCardInfo("Into the Void", 112, Rarity.UNCOMMON, mage.cards.i.IntoTheVoid.class));
