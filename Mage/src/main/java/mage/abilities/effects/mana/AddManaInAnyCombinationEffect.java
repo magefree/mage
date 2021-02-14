@@ -151,7 +151,8 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
 
     private String setText() {
         StringBuilder sb = new StringBuilder("Add ");
-        sb.append(CardUtil.numberToText(amount.toString()));
+        String amountString = CardUtil.numberToText(amount.toString());
+        sb.append(amountString);
         sb.append(" mana in any combination of ");
         if (manaSymbols.size() == 5) {
             sb.append("colors");
@@ -164,6 +165,10 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
                 }
                 sb.append('{').append(coloredManaSymbol.toString()).append('}');
             }
+        }
+        if (amountString.equals("X")) {
+            sb.append(", where X is ");
+            sb.append(amount.getMessage());
         }
         return sb.toString();
     }
