@@ -39,6 +39,7 @@ public final class Conspiracy extends ExpansionSet {
         cards.add(new SetCardInfo("Basandra, Battle Seraph", 184, Rarity.RARE, mage.cards.b.BasandraBattleSeraph.class));
         cards.add(new SetCardInfo("Bite of the Black Rose", 26, Rarity.UNCOMMON, mage.cards.b.BiteOfTheBlackRose.class));
         cards.add(new SetCardInfo("Boldwyr Intimidator", 137, Rarity.UNCOMMON, mage.cards.b.BoldwyrIntimidator.class));
+        cards.add(new SetCardInfo("Brago's Representative", 14, Rarity.COMMON, mage.cards.b.BragosRepresentative.class));
         cards.add(new SetCardInfo("Brago, King Eternal", 41, Rarity.RARE, mage.cards.b.BragoKingEternal.class));
         cards.add(new SetCardInfo("Brainstorm", 91, Rarity.COMMON, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Breakthrough", 92, Rarity.UNCOMMON, mage.cards.b.Breakthrough.class));

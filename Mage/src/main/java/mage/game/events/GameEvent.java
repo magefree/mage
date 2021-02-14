@@ -436,6 +436,8 @@ public class GameEvent implements Serializable {
         //combat events
         COMBAT_DAMAGE_APPLIED,
         SELECTED_ATTACKER, SELECTED_BLOCKER,
+        //voting
+        VOTE,
         //custom events
         CUSTOM_EVENT
     }

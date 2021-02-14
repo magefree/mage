@@ -2,6 +2,7 @@ package mage.choices;
 
 import mage.abilities.Ability;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 
 import java.util.*;
@@ -21,11 +22,15 @@ public abstract class VoteHandler<T> {
             if (player == null) {
                 continue;
             }
-            T vote = playerChoose(player, player, source, game);
-            if (vote == null) {
-                continue;
+            GameEvent event = GameEvent.getEvent(GameEvent.EventType.VOTE, playerId, source, playerId, 1);
+            int voteCount = event.getAmount();
+            for (int i = 0; i < voteCount; i++) {
+                T vote = playerChoose(player, player, source, game);
+                if (vote == null) {
+                    continue;
+                }
+                playerMap.computeIfAbsent(playerId, x -> new ArrayList<>()).add(vote);
             }
-            playerMap.computeIfAbsent(playerId, x -> new ArrayList<>()).add(vote);
         }
     }
 
