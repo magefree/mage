@@ -73,7 +73,7 @@ class ExpropriateEffect extends OneShotEffect {
             return false;
         }
 
-        TwoChoiceVote vote = new TwoChoiceVote("time", "money");
+        TwoChoiceVote vote = new TwoChoiceVote("time", "money", Outcome.Detriment);
         vote.doVotes(source, game);
 
         int timeCount = vote.getVoteCount(true);

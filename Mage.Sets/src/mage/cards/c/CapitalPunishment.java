@@ -57,7 +57,7 @@ class CapitalPunishmentEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("death", "taxes");
+        TwoChoiceVote vote = new TwoChoiceVote("death", "taxes", Outcome.Sacrifice);
         vote.doVotes(source, game);
         int deathCount = vote.getVoteCount(true);
         int taxesCount = vote.getVoteCount(false);

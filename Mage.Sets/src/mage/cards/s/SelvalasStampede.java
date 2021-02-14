@@ -62,7 +62,7 @@ class SelvalasStampedeEffect extends OneShotEffect {
             return false;
         }
 
-        TwoChoiceVote vote = new TwoChoiceVote("wild", "free");
+        TwoChoiceVote vote = new TwoChoiceVote("wild", "free", Outcome.Detriment);
         vote.doVotes(source, game);
 
         int wildCount = vote.getVoteCount(true);

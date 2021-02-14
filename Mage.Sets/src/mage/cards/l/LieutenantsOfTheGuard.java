@@ -68,7 +68,7 @@ class LieutenantsOfTheGuardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("strength", "numbers");
+        TwoChoiceVote vote = new TwoChoiceVote("strength", "numbers", Outcome.Benefit);
         vote.doVotes(source, game);
         int strengthCount = vote.getVoteCount(true);
         int numbersCount = vote.getVoteCount(false);

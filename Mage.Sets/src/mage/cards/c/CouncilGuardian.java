@@ -89,7 +89,7 @@ class CouncilGuardianVote extends VoteHandler<String> {
     public String playerChoose(Player player, Player decidingPlayer, Ability source, Game game) {
         ChoiceColor choice = new ChoiceColor();
         choice.getChoices().remove("White");
-        decidingPlayer.choose(Outcome.Detriment, choice, game);
+        decidingPlayer.choose(Outcome.AddAbility, choice, game);
         String vote = choice.getChoice();
         if (vote != null) {
             String message = player.getName() + " voted for " + vote;

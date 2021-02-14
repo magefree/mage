@@ -55,7 +55,7 @@ class PleaForPowerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("time", "knowledge");
+        TwoChoiceVote vote = new TwoChoiceVote("time", "knowledge", Outcome.Detriment);
         vote.doVotes(source, game);
         if (vote.getVoteCount(true) > vote.getVoteCount(false)) {
             return new AddExtraTurnControllerEffect().apply(game, source);

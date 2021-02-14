@@ -58,7 +58,7 @@ class SplitDecisionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("denial", "duplication");
+        TwoChoiceVote vote = new TwoChoiceVote("denial", "duplication", Outcome.Benefit);
         vote.doVotes(source, game);
 
         if (vote.getVoteCount(true) > vote.getVoteCount(false)) {

@@ -63,7 +63,7 @@ class CoercivePortalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("carnage", "homage");
+        TwoChoiceVote vote = new TwoChoiceVote("carnage", "homage", Outcome.DestroyPermanent);
         vote.doVotes(source, game);
         if (vote.getVoteCount(true) <= vote.getVoteCount(false)) {
             Player player = game.getPlayer(source.getControllerId());

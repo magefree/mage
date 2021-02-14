@@ -69,7 +69,7 @@ class MessengerJaysEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("feather", "quill");
+        TwoChoiceVote vote = new TwoChoiceVote("feather", "quill", Outcome.BoostCreature);
         vote.doVotes(source, game);
         int featherCount = vote.getVoteCount(true);
         int quillCount = vote.getVoteCount(false);

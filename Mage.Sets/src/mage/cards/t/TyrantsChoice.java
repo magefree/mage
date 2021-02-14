@@ -57,7 +57,7 @@ class TyrantsChoiceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("death", "torture");
+        TwoChoiceVote vote = new TwoChoiceVote("death", "torture", Outcome.Sacrifice);
         vote.doVotes(source, game);
         if (vote.getVoteCount(true) > vote.getVoteCount(false)) {
             return new SacrificeOpponentsEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT).apply(game, source);

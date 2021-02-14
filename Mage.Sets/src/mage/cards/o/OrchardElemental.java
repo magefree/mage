@@ -65,7 +65,7 @@ class OrchardElementalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("sprout", "harvest");
+        TwoChoiceVote vote = new TwoChoiceVote("sprout", "harvest", Outcome.BoostCreature);
         vote.doVotes(source, game);
         int sproutCount = vote.getVoteCount(true);
         int harvestCount = vote.getVoteCount(false);

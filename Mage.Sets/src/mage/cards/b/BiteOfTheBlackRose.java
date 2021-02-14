@@ -60,7 +60,7 @@ class BiteOfTheBlackRoseEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("Sickness", "Psychosis");
+        TwoChoiceVote vote = new TwoChoiceVote("Sickness", "Psychosis", Outcome.UnboostCreature);
         vote.doVotes(source, game);
 
         Player controller = game.getPlayer(source.getControllerId());
