@@ -12,6 +12,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.VoteEvent;
 
 import java.util.UUID;
 
@@ -46,7 +47,7 @@ class BragosRepresentativeReplacementEffect extends ReplacementEffectImpl {
 
     BragosRepresentativeReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "While voting, you get an additional vote.";
+        staticText = "while voting, you get an additional vote";
     }
 
     private BragosRepresentativeReplacementEffect(final BragosRepresentativeReplacementEffect effect) {
@@ -70,7 +71,7 @@ class BragosRepresentativeReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 1);
+        ((VoteEvent) event).incrementExtraVotes();
         return false;
     }
 }

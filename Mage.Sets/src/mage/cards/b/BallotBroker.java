@@ -12,7 +12,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
+import mage.game.events.VoteEvent;
 
 import java.util.UUID;
 
@@ -47,7 +47,7 @@ class BallotBrokerReplacementEffect extends ReplacementEffectImpl {
 
     BallotBrokerReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "While voting, you may vote an additional time";
+        staticText = "while voting, you may vote an additional time";
     }
 
     private BallotBrokerReplacementEffect(final BallotBrokerReplacementEffect effect) {
@@ -71,12 +71,7 @@ class BallotBrokerReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.chooseUse(
-                outcome, "Vote an additional time?", source, game
-        )) {
-            event.setAmount(event.getAmount() + 1);
-        }
+        ((VoteEvent) event).incrementOptionalVotes();
         return false;
     }
 }

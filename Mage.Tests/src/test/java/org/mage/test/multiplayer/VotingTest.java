@@ -124,9 +124,9 @@ public class VotingTest extends CardTestMultiPlayerBase {
 
         setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lieutenant);
+        setChoices("Yes", "Yes", "No", "No");
         setChoice(playerA, "Yes"); // to have an additional vote
         setChoice(playerA, "No"); // the additional vote
-        setChoices("Yes", "Yes", "No", "No");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

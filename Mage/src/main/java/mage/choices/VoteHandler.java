@@ -1,8 +1,9 @@
 package mage.choices;
 
 import mage.abilities.Ability;
+import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.game.events.VoteEvent;
 import mage.game.events.VotedEvent;
 import mage.players.Player;
 
@@ -19,15 +20,20 @@ public abstract class VoteHandler<T> {
     public void doVotes(Ability source, Game game) {
         playerMap.clear();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            GameEvent event = GameEvent.getEvent(GameEvent.EventType.VOTE, playerId, source, playerId, 1);
+            VoteEvent event = new VoteEvent(playerId, source);
             game.replaceEvent(event);
             Player player = game.getPlayer(event.getTargetId());
             Player decidingPlayer = game.getPlayer(event.getPlayerId());
             if (player == null || decidingPlayer == null) {
                 continue;
             }
-            int voteCount = event.getAmount();
+            int voteCount = event.getExtraVotes() + event.getOptionalVotes() + 1;
             for (int i = 0; i < voteCount; i++) {
+                if (i > event.getExtraVotes() && !player.chooseUse(
+                        Outcome.Neutral, "Use an extra vote?", source, game
+                )) {
+                    continue;
+                }
                 T vote = playerChoose(player, decidingPlayer, source, game);
                 if (vote == null) {
                     continue;
