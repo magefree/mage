@@ -19,7 +19,6 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -106,14 +105,11 @@ class CustodiSquireVote extends VoteHandler<Card> {
         TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
         target.setNotTarget(true);
         decidingPlayer.choose(Outcome.ReturnToHand, controller.getGraveyard(), target, game);
-        Card card = controller.getGraveyard().get(target.getFirstTarget(), game);
-        if (card != null) {
-            String message = player.getName() + " votes for " + card.getIdName();
-            if (!Objects.equals(player, decidingPlayer)) {
-                message += " (chosen by " + decidingPlayer.getName() + ')';
-            }
-            game.informPlayers(message);
-        }
-        return card;
+        return controller.getGraveyard().get(target.getFirstTarget(), game);
+    }
+
+    @Override
+    protected String voteName(Card vote) {
+        return vote.getIdName();
     }
 }

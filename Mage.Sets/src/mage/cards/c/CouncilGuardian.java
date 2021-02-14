@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -91,12 +90,11 @@ class CouncilGuardianVote extends VoteHandler<String> {
         choice.getChoices().remove("White");
         decidingPlayer.choose(Outcome.AddAbility, choice, game);
         String vote = choice.getChoice();
-        if (vote != null) {
-            String message = player.getName() + " voted for " + vote;
-            if (!Objects.equals(player, decidingPlayer)) {
-                message += " (chosen by " + decidingPlayer.getName() + ')';
-            }
-        }
+        return vote;
+    }
+
+    @Override
+    protected String voteName(String vote) {
         return vote;
     }
 }

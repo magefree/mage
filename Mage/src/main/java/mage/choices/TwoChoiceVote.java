@@ -5,7 +5,10 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -25,12 +28,11 @@ public class TwoChoiceVote extends VoteHandler<Boolean> {
 
     @Override
     public Boolean playerChoose(Player player, Player decidingPlayer, Ability source, Game game) {
-        boolean vote = decidingPlayer.chooseUse(outcome, "Vote", null, choice1, choice2, source, game);
-        String message = player.getName() + " voted for " + (vote ? choice1 : choice2);
-        if (!Objects.equals(player, decidingPlayer)) {
-            message += " (chosen by " + decidingPlayer.getName() + ')';
-        }
-        game.informPlayers(message);
-        return vote;
+        return decidingPlayer.chooseUse(outcome, "Vote", null, choice1, choice2, source, game);
+    }
+
+    @Override
+    protected String voteName(Boolean vote) {
+        return (vote ? choice1 : choice2);
     }
 }

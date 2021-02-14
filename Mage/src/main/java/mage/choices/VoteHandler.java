@@ -38,13 +38,20 @@ public abstract class VoteHandler<T> {
                 if (vote == null) {
                     continue;
                 }
+                String message = player.getName() + " voted for " + voteName(vote);
+                if (!Objects.equals(player, decidingPlayer)) {
+                    message += " (chosen by " + decidingPlayer.getName() + ')';
+                }
+                game.informPlayers(message);
                 playerMap.computeIfAbsent(playerId, x -> new ArrayList<>()).add(vote);
             }
         }
         game.fireEvent(new VotedEvent(source, this));
     }
 
-    public abstract T playerChoose(Player player, Player decidingPlayer, Ability source, Game game);
+    protected abstract T playerChoose(Player player, Player decidingPlayer, Ability source, Game game);
+
+    protected abstract String voteName(T vote);
 
     public List<T> getVotes(UUID playerId) {
         return playerMap.computeIfAbsent(playerId, x -> new ArrayList<>());

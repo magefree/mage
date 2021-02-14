@@ -19,7 +19,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -92,14 +91,11 @@ class CouncilsJudgmentVote extends VoteHandler<Permanent> {
         TargetPermanent target = new TargetPermanent(1, filter);
         target.setNotTarget(true);
         decidingPlayer.choose(Outcome.Exile, target, source.getSourceId(), game);
-        Permanent permanent = game.getPermanent(target.getFirstTarget());
-        if (permanent != null) {
-            String message = player.getName() + " votes for " + permanent.getIdName();
-            if (!Objects.equals(player, decidingPlayer)) {
-                message += " (chosen by " + decidingPlayer.getName() + ')';
-            }
-            game.informPlayers(message);
-        }
-        return permanent;
+        return game.getPermanent(target.getFirstTarget());
+    }
+
+    @Override
+    protected String voteName(Permanent vote) {
+        return vote.getIdName();
     }
 }
