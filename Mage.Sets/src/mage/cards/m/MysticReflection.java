@@ -1,11 +1,12 @@
 package mage.cards.m;
 
-import mage.MageItem;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.ForetellAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -15,15 +16,16 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
-import mage.watchers.Watcher;
-
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
+import mage.MageItem;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.cards.Card;
+import mage.game.events.ZoneChangeGroupEvent;
+import mage.target.targetpointer.FixedTarget;
+import mage.watchers.Watcher;
 
 /**
  * @author TheElk801
@@ -62,8 +64,8 @@ class MysticReflectionEffect extends OneShotEffect {
 
     MysticReflectionEffect() {
         super(Outcome.Benefit);
-        staticText = "Choose target nonlegendary creature. The next time one or more creatures or planeswalkers " +
-                "enter the battlefield this turn, they enter as copies of the chosen creature.";
+        staticText = "Choose target nonlegendary creature. The next time one or more creatures or planeswalkers "
+                + "enter the battlefield this turn, they enter as copies of the chosen creature.";
     }
 
     private MysticReflectionEffect(final MysticReflectionEffect effect) {
@@ -77,31 +79,38 @@ class MysticReflectionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent targetedPermanent = game.getPermanent(source.getFirstTarget());
+        // store the permanent that was targeted
+        game.getState().setValue("MysticReflection" + source.getSourceId().toString(), targetedPermanent);
         MysticReflectionWatcher watcher = game.getState().getWatcher(MysticReflectionWatcher.class);
-        if (permanent == null || watcher == null) {
-            return false;
-        }
-        game.addEffect(new MysticReflectionCopyEffect(permanent, watcher.getEnteredThisTurn()), source);
+        // The sourceId must be sent to the next class, otherwise it gets lost.  Thus, the identifier parameter.
+        // Otherwise, the state of the permanent that was targeted gets lost if it leaves the battlefield, etc.
+        // The zone is ALL because if the targeted permanent leaves the battlefield, the replacement effect still applies.
+        SimpleStaticAbility staticAbilityOnCard = new SimpleStaticAbility(Zone.ALL, new MysticReflectionReplacementEffect(watcher.getEnteredThisTurn(), source.getSourceId().toString()));
+        MysticReflectionGainAbilityEffect gainAbilityEffect = new MysticReflectionGainAbilityEffect(staticAbilityOnCard);
+        gainAbilityEffect.setTargetPointer(new FixedTarget(targetedPermanent.getMainCard().getId()));
+        game.addEffect(gainAbilityEffect, source);
         return true;
     }
 }
 
-class MysticReflectionCopyEffect extends ReplacementEffectImpl {
+class MysticReflectionReplacementEffect extends ReplacementEffectImpl {
 
-    private final Permanent permanent;
-    private final int enteredThisTurn;
+    final private int enteredThisTurn;
+    final private String identifier;
 
-    MysticReflectionCopyEffect(Permanent permanent, int enteredThisTurn) {
-        super(Duration.Custom, Outcome.Copy, false);
-        this.permanent = permanent;
+    public MysticReflectionReplacementEffect(int enteredThisTurn, String identifier) {
+        super(Duration.EndOfTurn, Outcome.Copy, false);
         this.enteredThisTurn = enteredThisTurn;
+        this.identifier = identifier;
+        staticText = "The next time one or more creatures or planeswalkers "
+                + "enter the battlefield this turn, they enter as copies of {this}";
     }
 
-    private MysticReflectionCopyEffect(MysticReflectionCopyEffect effect) {
+    public MysticReflectionReplacementEffect(MysticReflectionReplacementEffect effect) {
         super(effect);
-        this.permanent = effect.permanent;
         this.enteredThisTurn = effect.enteredThisTurn;
+        this.identifier = effect.identifier;
     }
 
     @Override
@@ -111,34 +120,33 @@ class MysticReflectionCopyEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (permanent == null) {
-            discard();
-            return false;
-        }
         MysticReflectionWatcher watcher = game.getState().getWatcher(MysticReflectionWatcher.class);
-        if (watcher != null && watcher.getEnteredThisTurn() > this.enteredThisTurn) {
-            discard();
-            return false;
+        if (watcher != null) {
+            if (watcher.getEnteredThisTurn() > this.enteredThisTurn) {
+                discard();
+                return false;
+            }
         }
-        Permanent perm = ((EntersTheBattlefieldEvent) event).getTarget();
-        return perm != null
-                && (perm.isCreature() || perm.isPlaneswalker())
-                && perm.isControlledBy(source.getControllerId());
+        Permanent permanentEnteringTheBattlefield = ((EntersTheBattlefieldEvent) event).getTarget();
+        Permanent targetedPermanent = (Permanent) game.getState().getValue("MysticReflection" + identifier);
+        return permanentEnteringTheBattlefield != null
+                && targetedPermanent != null
+                && permanentEnteringTheBattlefield.isCreature();
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (this.permanent != null) {
-            game.copyPermanent(this.permanent, event.getTargetId(), source, null);
+        Permanent targetedPermanent = (Permanent) game.getState().getValue("MysticReflection" + identifier);
+        if (targetedPermanent != null) {
+            game.copyPermanent(targetedPermanent, event.getTargetId(), source, null);
         }
         return false;
     }
 
     @Override
-    public MysticReflectionCopyEffect copy() {
-        return new MysticReflectionCopyEffect(this);
+    public MysticReflectionReplacementEffect copy() {
+        return new MysticReflectionReplacementEffect(this);
     }
-
 }
 
 class MysticReflectionWatcher extends Watcher {
@@ -179,5 +187,41 @@ class MysticReflectionWatcher extends Watcher {
 
     public int getEnteredThisTurn() {
         return enteredThisTurn;
+    }
+}
+
+class MysticReflectionGainAbilityEffect extends ContinuousEffectImpl {
+
+    final private Ability ability;
+
+    public MysticReflectionGainAbilityEffect(Ability ability) {
+        super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.ability = ability;
+    }
+
+    public MysticReflectionGainAbilityEffect(final MysticReflectionGainAbilityEffect effect) {
+        super(effect);
+        this.ability = effect.ability;
+    }
+
+    @Override
+    public MysticReflectionGainAbilityEffect copy() {
+        return new MysticReflectionGainAbilityEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent targetedPermanent = (Permanent) game.getState().getValue("MysticReflection" + source.getSourceId().toString());
+        // The ability must be put on the card.  If it leaves the battlefield, the replacement effect must still fire and copy its "permanent" state.
+        if (targetedPermanent == null) {
+            return false;
+        }
+        Card card = targetedPermanent.getMainCard();
+        if (card != null
+                && !card.getAbilities().contains(ability)) {
+            game.getState().addOtherAbility(card, ability);
+            return true;
+        }
+        return false;
     }
 }
