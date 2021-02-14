@@ -33,6 +33,7 @@ public final class ConspiracyTakeTheCrown extends ExpansionSet {
         cards.add(new SetCardInfo("Altar's Reap", 127, Rarity.COMMON, mage.cards.a.AltarsReap.class));
         cards.add(new SetCardInfo("Ascended Lawmage", 198, Rarity.UNCOMMON, mage.cards.a.AscendedLawmage.class));
         cards.add(new SetCardInfo("Avatar of Woe", 128, Rarity.MYTHIC, mage.cards.a.AvatarOfWoe.class));
+        cards.add(new SetCardInfo("Ballot Broker", 13, Rarity.COMMON, mage.cards.b.BallotBroker.class));
         cards.add(new SetCardInfo("Beast Within", 174, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Berserk", 175, Rarity.MYTHIC, mage.cards.b.Berserk.class));
         cards.add(new SetCardInfo("Besmirch", 49, Rarity.UNCOMMON, mage.cards.b.Besmirch.class));
