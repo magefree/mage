@@ -28,6 +28,7 @@ public class Pioneer extends Constructed {
         banned.add("Polluted Delta");
         banned.add("Windswept Heath");
         banned.add("Wooded Foothills");
+        banned.add("Balustrade Spy");
         banned.add("Felidar Guardian");
         banned.add("Field of the Dead");
         banned.add("Inverter of Truth");
@@ -37,8 +38,12 @@ public class Pioneer extends Constructed {
         banned.add("Oko, Thief of Crowns");
         banned.add("Once Upon a Time");
         banned.add("Smuggler's Copter");
+        banned.add("Teferi, Time Raveler");
+        banned.add("Undercity Informer");
         banned.add("Underworld Breach");
+        banned.add("Uro, Titan of Nature's Wrath");
         banned.add("Veil of Summer");
         banned.add("Walking Ballista");
+        banned.add("Wilderness Reclamation");
     }
 }

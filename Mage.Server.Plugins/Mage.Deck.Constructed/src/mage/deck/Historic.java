@@ -31,6 +31,7 @@ public class Historic extends Constructed {
         banned.add("Omnath, Locus of Creation");
         banned.add("Once Upon a Time");
         banned.add("Teferi, Time Raveler");
+        banned.add("Uro, Titan of Nature's Wrath");
         banned.add("Veil of Summer");
         banned.add("Wilderness Reclamation");
         banned.add("Winota, Joiner of Forces");

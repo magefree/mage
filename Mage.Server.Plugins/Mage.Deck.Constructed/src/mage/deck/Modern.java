@@ -36,6 +36,7 @@ public class Modern extends Constructed {
         banned.add("Dread Return");
         banned.add("Eye of Ugin");
         banned.add("Faithless Looting");
+        banned.add("Field of the Dead");
         banned.add("Gitaxian Probe");
         banned.add("Glimpse of Nature");
         banned.add("Golgari Grave-Troll");
@@ -47,6 +48,7 @@ public class Modern extends Constructed {
         banned.add("Mental Misstep");
         banned.add("Mox Opal");
         banned.add("Mycosynth Lattice");
+        banned.add("Mystic Sanctuary");
         banned.add("Oko, Thief of Crowns");
         banned.add("Once Upon a Time");
         banned.add("Ponder");
@@ -57,12 +59,15 @@ public class Modern extends Constructed {
         banned.add("Second Sunrise");
         banned.add("Seething Song");
         banned.add("Sensei's Divining Top");
+        banned.add("Simian Spirit Guide");
         banned.add("Skullclamp");
         banned.add("Splinter Twin");
         banned.add("Summer Bloom");
+        banned.add("Tibalt's Trickery");
         banned.add("Treasure Cruise");
         banned.add("Tree of Tales");
         banned.add("Umezawa's Jitte");
+        banned.add("Uro, Titan of Nature's Wrath");
         banned.add("Vault of Whispers");
     }
 }
