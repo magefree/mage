@@ -1,26 +1,21 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.game.Game;
+import mage.constants.SubType;
 import mage.game.permanent.token.TokenImpl;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -28,17 +23,23 @@ import mage.players.Player;
 public final class IzzetKeyrune extends CardImpl {
 
     public IzzetKeyrune(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {T}: Add {U} or {R}.
         this.addAbility(new BlueManaAbility());
         this.addAbility(new RedManaAbility());
 
         // {U}{R}: Until end of turn, Izzet Keyrune becomes a 2/1 blue and red Elemental artifact creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new IzzetKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{U}{R}")));
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
+                new IzzetKeyruneToken(), "", Duration.EndOfTurn
+        ), new ManaCostsImpl("{U}{R}")));
 
         // Whenever Izzet Keyrune deals combat damage to a player, you may draw a card. If you do, discard a card.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new IzzetKeyruneEffect(), true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+                new DrawDiscardControllerEffect(1, 1, true)
+                        .setText("you may draw a card. If you do, discard a card"),
+                false
+        ));
     }
 
     private IzzetKeyrune(final IzzetKeyrune card) {
@@ -50,37 +51,8 @@ public final class IzzetKeyrune extends CardImpl {
         return new IzzetKeyrune(this);
     }
 
-    private static class IzzetKeyruneEffect extends OneShotEffect {
-
-        public IzzetKeyruneEffect() {
-            super(Outcome.DrawCard);
-            this.staticText = "you may draw a card. If you do, discard a card";
-        }
-
-        public IzzetKeyruneEffect(final IzzetKeyruneEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public IzzetKeyruneEffect copy() {
-            return new IzzetKeyruneEffect(this);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null && player.chooseUse(Outcome.DrawCard, "Do you wish to draw a card? If you do, discard a card.", source, game)) {
-                if (player.drawCards(1, source, game) > 0) {
-                    player.discard(1, false, false, source, game);
-                }
-                return true;
-            }
-            return false;
-        }
-    }
-
     private static class IzzetKeyruneToken extends TokenImpl {
-        IzzetKeyruneToken() {
+        private IzzetKeyruneToken() {
             super("", "2/1 blue and red Elemental artifact creature");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
@@ -91,7 +63,7 @@ public final class IzzetKeyrune extends CardImpl {
             toughness = new MageInt(1);
         }
 
-        public IzzetKeyruneToken(final IzzetKeyruneToken token) {
+        private IzzetKeyruneToken(final IzzetKeyruneToken token) {
             super(token);
         }
 
@@ -100,4 +72,3 @@ public final class IzzetKeyrune extends CardImpl {
         }
     }
 }
-

@@ -76,7 +76,7 @@ class SearchForAzcantaLookLibraryEffect extends OneShotEffect {
                 Card card = controller.getLibrary().getFromTop(game);
                 if (card != null) {
                     controller.lookAtCards(sourceObject.getIdName(), new CardsImpl(card), game);
-                    if (controller.chooseUse(Outcome.Neutral, "Do you wish to put the card into your graveyard?", source, game)) {
+                    if (controller.chooseUse(Outcome.Neutral, "Put that card into your graveyard?", source, game)) {
                         controller.moveCards(card, Zone.GRAVEYARD, source, game);
                     }
                     if (controller.getGraveyard().size() > 6 && controller.chooseUse(Outcome.Neutral, "Transform " + sourceObject.getLogName() + "?", source, game)) {

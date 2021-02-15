@@ -87,7 +87,7 @@ class GemstoneCavernsAbility extends StaticAbility implements OpeningHandAction 
 
     @Override
     public boolean askUseOpeningHandAction(Card card, Player player, Game game) {
-        return player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put " + card.getIdName() + " into play?", this, game);
+        return player.chooseUse(Outcome.PutCardInPlay, "Put " + card.getIdName() + " onto the battlefield?", this, game);
     }
 
     @Override

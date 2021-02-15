@@ -94,7 +94,7 @@ class PayLifeActivePlayerCost extends CostImpl {
         }
 
         int lifeToPayAmount = amount.calculate(game, ability, null);
-        if (activatingPlayer.chooseUse(Outcome.LoseLife, "Do you wish to pay " + lifeToPayAmount + " life?", ability, game)) {
+        if (activatingPlayer.chooseUse(Outcome.LoseLife, "Pay " + lifeToPayAmount + " life?", ability, game)) {
             this.paid = CardUtil.tryPayLife(lifeToPayAmount, activatingPlayer, source, game);
             return this.paid;
         }

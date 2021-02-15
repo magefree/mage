@@ -43,7 +43,7 @@ public class LeylineAbility extends StaticAbility implements MageSingleton, Open
 
     @Override
     public boolean askUseOpeningHandAction(Card card, Player player, Game game) {
-        return player.chooseUse(Outcome.PutCardInPlay, "Do you wish to put " + card.getName() + " on the battlefield?", this, game);
+        return player.chooseUse(Outcome.PutCardInPlay, "Put " + card.getName() + " on the battlefield?", this, game);
     }
 
     @Override

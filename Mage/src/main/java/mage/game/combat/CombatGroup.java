@@ -167,8 +167,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 } else {
                     Player player = game.getPlayer(defenderAssignsCombatDamage(game) ? defendingPlayerId : attacker.getControllerId());
                     if ((attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId()) &&
-                            player.chooseUse(Outcome.Damage, "Do you wish to assign damage for "
-                                    + attacker.getLogName() + " as though it weren't blocked?", null, game)) ||
+                            player.chooseUse(Outcome.Damage, "Have " + attacker.getLogName() + " assign damage as though it weren't blocked?", null, game)) ||
                             game.getContinuousEffects().asThough(attacker.getId(), AsThoughEffectType.DAMAGE_NOT_BLOCKED,
                                     null, attacker.getControllerId(), game) != null) {
                         // for handling creatures like Thorn Elemental
@@ -887,7 +886,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             // 10/4/2004 	If it is blocked but then all of its blockers are removed before combat damage is assigned, then it won't be able to deal combat damage and you won't be able to use its ability.
             // (same principle should apply if it's blocking and its blocked attacker is removed from combat)
             if (!((blocked && blockers.isEmpty() && isAttacking) || (attackers.isEmpty() && !isAttacking)) && canDamage(creature, first)) {
-                if (player.chooseUse(Outcome.Damage, "Do you wish to assign " + creature.getLogName() + "'s combat damage divided among defending player and/or any number of defending creatures?", null, game)) {
+                if (player.chooseUse(Outcome.Damage, "Have " + creature.getLogName() + " assign its combat damage divided among defending player and/or any number of defending creatures?", null, game)) {
                     defendingPlayerAndOrDefendingCreaturesDividedDamage(creature, player, first, game, isAttacking);
                     return true;
                 }

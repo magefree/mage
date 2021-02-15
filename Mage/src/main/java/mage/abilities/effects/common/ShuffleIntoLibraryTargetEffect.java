@@ -42,7 +42,7 @@ public class ShuffleIntoLibraryTargetEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (cardObject != null && controller != null && cardObject instanceof Card) {
             if (!optional
-                    || controller.chooseUse(Outcome.Benefit, "Do you wish to shuffle " + cardObject.getIdName() + " into "
+                    || controller.chooseUse(Outcome.Benefit, "Shuffle " + cardObject.getIdName() + " into "
                             + (((Card) cardObject).getOwnerId().equals(source.getControllerId()) ? "your" : "its owners")
                             + " library?", source, game)) {
                 Player owner = game.getPlayer(((Card) cardObject).getOwnerId());

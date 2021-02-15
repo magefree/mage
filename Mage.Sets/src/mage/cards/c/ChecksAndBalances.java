@@ -90,7 +90,7 @@ class ChecksAndBalancesEffect extends OneShotEffect {
             for (UUID uuid : game.getOpponents(spell.getControllerId())) {
                 Player player = game.getPlayer(uuid);
                 if (player != null) {
-                    if (!player.chooseUse(outcome, "Do you wish to discard a card to counter " + spell.getLogName() + '?', source, game)) {
+                    if (!player.chooseUse(outcome, "Discard a card to counter " + spell.getLogName() + '?', source, game)) {
                         game.informPlayers(player.getLogName() + " refuses to discard a card to counter " + spell.getLogName());
                         return true;
                     } else {

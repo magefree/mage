@@ -82,7 +82,7 @@ class DelverOfSecretsEffect extends OneShotEffect {
                 Cards cards = new CardsImpl();
                 cards.add(card);
                 player.lookAtCards(sourcePermanent.getName(), cards, game);
-                if (player.chooseUse(Outcome.DrawCard, "Do you wish to reveal the card at the top of the library?", source, game)) {
+                if (player.chooseUse(Outcome.DrawCard, "Reveal the top card of your library?", source, game)) {
                     player.revealCards(sourcePermanent.getName(), cards, game);
                     if (filter.match(card, game)) {
                         return new TransformSourceEffect(true, true).apply(game, source);

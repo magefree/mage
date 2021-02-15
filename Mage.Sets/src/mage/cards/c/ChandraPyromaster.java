@@ -231,21 +231,21 @@ class ChandraPyromasterEffect3 extends OneShotEffect {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     ApprovingObject approvingObject = new ApprovingObject(source, game);
-                    if (controller.chooseUse(outcome, "Do you wish to cast copy 1 of " + card.getName(), source, game)) {
+                    if (controller.chooseUse(outcome, "Cast copy 1 of " + card.getName(), source, game)) {
                         Card copy1 = game.copyCard(card, source, source.getControllerId());
                         game.getState().setValue("PlayFromNotOwnHandZone" + copy1.getId(), Boolean.TRUE);
                         controller.cast(controller.chooseAbilityForCast(copy1, game, true),
                                 game, true, approvingObject);
                         game.getState().setValue("PlayFromNotOwnHandZone" + copy1.getId(), null);
                     }
-                    if (controller.chooseUse(outcome, "Do you wish to cast copy 2 of " + card.getName(), source, game)) {
+                    if (controller.chooseUse(outcome, "Cast copy 2 of " + card.getName(), source, game)) {
                         Card copy2 = game.copyCard(card, source, source.getControllerId());
                         game.getState().setValue("PlayFromNotOwnHandZone" + copy2.getId(), Boolean.TRUE);
                         controller.cast(controller.chooseAbilityForCast(copy2, game, true),
                                 game, true, approvingObject);
                         game.getState().setValue("PlayFromNotOwnHandZone" + copy2.getId(), null);
                     }
-                    if (controller.chooseUse(outcome, "Do you wish to cast copy 3 of " + card.getName(), source, game)) {
+                    if (controller.chooseUse(outcome, "Cast copy 3 of " + card.getName(), source, game)) {
                         Card copy3 = game.copyCard(card, source, source.getControllerId());
                         game.getState().setValue("PlayFromNotOwnHandZone" + copy3.getId(), Boolean.TRUE);
                         controller.cast(controller.chooseAbilityForCast(copy3, game, true),

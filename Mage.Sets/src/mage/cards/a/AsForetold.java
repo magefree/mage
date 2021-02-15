@@ -105,7 +105,7 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
         Permanent asForetold = game.getPermanent(getSourceId());
         if (controller != null
                 && asForetold != null) {
-            if (controller.chooseUse(Outcome.Neutral, "Do you wish to use "
+            if (controller.chooseUse(Outcome.Neutral, "Use "
                     + asForetold.getLogName() + " to pay the alternative cost ?", ability, game)) {
                 wasActivated = super.askToActivateAlternativeCosts(ability, game);
                 if (wasActivated) {

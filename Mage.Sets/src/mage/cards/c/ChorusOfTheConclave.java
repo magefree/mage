@@ -90,7 +90,7 @@ class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
         int xCost = 0;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            if (controller.chooseUse(Outcome.Benefit, "Do you wish to pay the additonal cost to add +1/+1 counters to the creature you cast?", source, game)) {
+            if (controller.chooseUse(Outcome.Benefit, "Pay the additonal cost to add +1/+1 counters to the creature you cast?", source, game)) {
                 xCost += ManaUtil.playerPaysXGenericMana(false, "Chorus of the Conclave", controller, source, game);
                 // save the x value to be available for ETB replacement effect
                 Object object = game.getState().getValue("spellX" + source.getSourceId());

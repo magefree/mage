@@ -124,8 +124,7 @@ class CloakOfConfusionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent enchantedCreature = game.getPermanent(game.getPermanent(source.getSourceId()).getAttachedTo());
-        if (controller != null && controller.chooseUse(outcome, "Do you wish to not assign combat damage from "
-                + enchantedCreature.getName() + " and have the defending player discard a card at random?", source, game)) {
+        if (controller != null && controller.chooseUse(outcome, "Have defending player discard a card at random? " + enchantedCreature.getName() + " will not assign combat damage.", source, game)) {
             ContinuousEffect effect = new AssignNoCombatDamageTargetEffect();
             effect.setTargetPointer(new FixedTarget(enchantedCreature.getId()));
             game.addEffect(effect, source);
