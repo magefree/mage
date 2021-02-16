@@ -1,38 +1,36 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
- * @author MarcoMarin
+ * @author TheElk801
  */
 public final class FarrelsMantle extends CardImpl {
 
-    
     public FarrelsMantle(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.subtype.add(SubType.AURA);
 
         // Enchant creature
@@ -41,17 +39,9 @@ public final class FarrelsMantle extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        
+
         // Whenever enchanted creature attacks and isn't blocked, its controller may have it deal damage equal to its power plus 2 to another target creature. If that player does, the attacking creature assigns no combat damage this turn.
-        FilterPermanent filter = new FilterCreaturePermanent();
-        filter.add(Predicates.not(new AttachmentByUUIDPredicate(this.getId()))); 
-        
-        Ability ability2 = new AttacksAndIsNotBlockedTriggeredAbility(new FarrelsMantleEffect(), true);
-        ability2.addTarget(new TargetPermanent(filter));
-        ability2.addEffect(new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn));
-        
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.AURA)));
-        
+        this.addAbility(new FarrelsMantleTriggeredAbility());
     }
 
     private FarrelsMantle(final FarrelsMantle card) {
@@ -63,36 +53,69 @@ public final class FarrelsMantle extends CardImpl {
         return new FarrelsMantle(this);
     }
 }
-class AttachmentByUUIDPredicate implements Predicate<Permanent> {
 
-    private final UUID id;
+class FarrelsMantleTriggeredAbility extends TriggeredAbilityImpl {
 
-    public AttachmentByUUIDPredicate(UUID id) {
-        this.id = id;
+    FarrelsMantleTriggeredAbility() {
+        super(Zone.BATTLEFIELD, null, false);
+    }
+
+    private FarrelsMantleTriggeredAbility(final FarrelsMantleTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public boolean apply(Permanent input, Game game) {
-        return input.getAttachments().contains(id);            
+    public FarrelsMantleTriggeredAbility copy() {
+        return new FarrelsMantleTriggeredAbility(this);
     }
 
     @Override
-    public String toString() {
-        return "AttachmentUUID(" + id + ')';
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UNBLOCKED_ATTACKER;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        Permanent aura = getSourcePermanentOrLKI(game);
+        if (aura == null
+                || !event.getTargetId().equals(aura.getAttachedTo())
+                || game.getPermanent(aura.getAttachedTo()) == null) {
+            return false;
+        }
+        MageObjectReference mor = new MageObjectReference(event.getTargetId(), game);
+        FilterPermanent filter = new FilterCreaturePermanent();
+        filter.add(Predicates.not(new MageObjectReferencePredicate(mor)));
+        TargetPermanent target = new TargetPermanent(filter);
+        target.setTargetController(game.getControllerId(event.getTargetId()));
+        this.getTargets().clear();
+        this.addTarget(target);
+        this.getEffects().clear();
+        this.addEffect(new FarrelsMantleEffect(mor));
+        return true;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever enchanted creature attacks and isn't blocked, its controller may have it deal damage " +
+                "equal to its power plus 2 to another target creature. If that player does, " +
+                "the attacking creature assigns no combat damage this turn.";
     }
 }
 
-class FarrelsMantleEffect extends OneShotEffect{
-                      
-    public FarrelsMantleEffect() {
-        super(Outcome.Damage);
-        this.setText("its controller may have it deal damage equal to its power plus 2 to another target creature.");
+class FarrelsMantleEffect extends OneShotEffect {
+
+    private final MageObjectReference mor;
+
+    FarrelsMantleEffect(MageObjectReference mor) {
+        super(Outcome.Benefit);
+        this.mor = mor;
     }
-    
-    public FarrelsMantleEffect(final FarrelsMantleEffect effect) {
+
+    private FarrelsMantleEffect(final FarrelsMantleEffect effect) {
         super(effect);
+        this.mor = effect.mor;
     }
-    
+
     @Override
     public FarrelsMantleEffect copy() {
         return new FarrelsMantleEffect(this);
@@ -100,9 +123,67 @@ class FarrelsMantleEffect extends OneShotEffect{
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent perm = game.getPermanent(source.getSourceId());
-        int damage = CardUtil.overflowInc(perm.getPower().getValue(), 2);
-        DamageTargetEffect dmgEffect = new DamageTargetEffect(damage);
-        return dmgEffect.apply(game, source);        
+        Permanent permanent = mor.getPermanent(game);
+        Permanent targeted = game.getPermanent(source.getFirstTarget());
+        if (permanent == null || targeted == null) {
+            return false;
+        }
+        int damage = permanent.getPower().getValue() + 2;
+        Player player = game.getPlayer(permanent.getControllerId());
+        if (damage > 0 && player != null && player.chooseUse(
+                outcome, "Have " + permanent.getIdName() + " deal "
+                        + damage + " to " + targeted.getIdName() + '?', source, game
+        ) && targeted.damage(damage, permanent.getId(), source, game) > 0) {
+            game.addEffect(new FarrelsMantleDamageEffect(mor), source);
+            return true;
+        }
+        return false;
+    }
+}
+
+class FarrelsMantleDamageEffect extends ReplacementEffectImpl {
+
+    private final MageObjectReference mor;
+
+    FarrelsMantleDamageEffect(MageObjectReference mor) {
+        super(Duration.EndOfTurn, Outcome.Neutral);
+        this.mor = mor;
+    }
+
+    private FarrelsMantleDamageEffect(final FarrelsMantleDamageEffect effect) {
+        super(effect);
+        this.mor = effect.mor;
+    }
+
+    @Override
+    public FarrelsMantleDamageEffect copy() {
+        return new FarrelsMantleDamageEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        switch (event.getType()) {
+            case DAMAGE_CREATURE:
+            case DAMAGE_PLAYER:
+            case DAMAGE_PLANESWALKER:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return ((DamageEvent) event).isCombatDamage() && mor.refersTo(event.getSourceId(), game);
     }
 }

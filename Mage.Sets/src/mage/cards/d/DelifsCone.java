@@ -1,46 +1,44 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author MarcoMarin
  */
 public final class DelifsCone extends CardImpl {
 
     public DelifsCone(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{0}");
 
-        Ability ability2 = new AttacksAndIsNotBlockedTriggeredAbility(new DelifsConeEffect(), true);
-        ability2.addEffect(new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn));
         // {tap}, Sacrifice Delif's Cone: This turn, when target creature you control attacks and isn't blocked, you may gain life equal to its power. If you do, it assigns no combat damage this turn.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(ability2, Duration.EndOfTurn),
-                new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(
+                new CreateDelayedTriggeredAbilityEffect(
+                        new DelifsConeTriggeredAbility(), false
+                ), new TapSourceCost()
+        );
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
-        
         this.addAbility(ability);
-        
     }
 
     private DelifsCone(final DelifsCone card) {
@@ -52,26 +50,106 @@ public final class DelifsCone extends CardImpl {
         return new DelifsCone(this);
     }
 }
-class DelifsConeEffect extends OneShotEffect{
-                      
-    public DelifsConeEffect() {
-        super(Outcome.Damage);
-        this.setText("you may gain life equal to its power");
+
+class DelifsConeTriggeredAbility extends DelayedTriggeredAbility {
+
+    DelifsConeTriggeredAbility() {
+        super(new DelifsConeLifeEffect(), Duration.EndOfTurn, false, true);
+        this.addEffect(new DelifsConePreventEffect());
     }
-    
-    public DelifsConeEffect(final DelifsConeEffect effect) {
+
+    private DelifsConeTriggeredAbility(final DelifsConeTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UNBLOCKED_ATTACKER;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getTargetId().equals(getFirstTarget());
+    }
+
+    @Override
+    public DelifsConeTriggeredAbility copy() {
+        return new DelifsConeTriggeredAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return "This turn, when target creature you control attacks and isn't blocked, " +
+                "you may gain life equal to its power. If you do, it assigns no combat damage this turn.";
+    }
+}
+
+class DelifsConeLifeEffect extends OneShotEffect {
+
+    DelifsConeLifeEffect() {
+        super(Outcome.Benefit);
+    }
+
+    private DelifsConeLifeEffect(final DelifsConeLifeEffect effect) {
         super(effect);
     }
-    
+
     @Override
-    public DelifsConeEffect copy() {
-        return new DelifsConeEffect(this);
+    public DelifsConeLifeEffect copy() {
+        return new DelifsConeLifeEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent perm = game.getPermanent(source.getSourceId());
-        GainLifeEffect lifeEffect = new GainLifeEffect(perm.getPower().getValue());
-        return lifeEffect.apply(game, source);        
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (player != null || permanent != null) {
+            player.gainLife(permanent.getPower().getValue(), game, source);
+            return true;
+        }
+        return false;
+    }
+}
+
+class DelifsConePreventEffect extends ReplacementEffectImpl {
+
+    DelifsConePreventEffect() {
+        super(Duration.EndOfTurn, Outcome.Neutral);
+    }
+
+    private DelifsConePreventEffect(final DelifsConePreventEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DelifsConePreventEffect copy() {
+        return new DelifsConePreventEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        switch (event.getType()) {
+            case DAMAGE_CREATURE:
+            case DAMAGE_PLAYER:
+            case DAMAGE_PLANESWALKER:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return ((DamageEvent) event).isCombatDamage() && event.getTargetId().equals(targetPointer.getFirst(game, source));
     }
 }

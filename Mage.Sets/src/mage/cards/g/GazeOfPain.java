@@ -1,23 +1,17 @@
 package mage.cards.g;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -25,8 +19,9 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class GazeOfPain extends CardImpl {
@@ -50,38 +45,29 @@ public final class GazeOfPain extends CardImpl {
 
 class GazeOfPainDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    Set<UUID> creatures = new HashSet<>();
-
-    public GazeOfPainDelayedTriggeredAbility() {
-        super(new GazeOfPainEffect(), Duration.EndOfTurn, false, true);
+    GazeOfPainDelayedTriggeredAbility() {
+        super(null, Duration.EndOfTurn, false, true);
+        this.addTarget(new TargetCreaturePermanent());
     }
 
-    public GazeOfPainDelayedTriggeredAbility(GazeOfPainDelayedTriggeredAbility ability) {
+    private GazeOfPainDelayedTriggeredAbility(final GazeOfPainDelayedTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_BLOCKERS_STEP;
+        return event.getType() == GameEvent.EventType.UNBLOCKED_ATTACKER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        for (CombatGroup combatGroup : game.getCombat().getGroups()) {
-            if (combatGroup.getBlockers().isEmpty()) {
-                for (UUID attackerId : combatGroup.getAttackers()) {
-                    if (game.getPermanent(attackerId).getControllerId() == controllerId
-                            && game.getPermanent(attackerId).isAttacking()) {
-                        creatures.add(attackerId);
-                    }
-                }
-            }
+        if (!isControlledBy(game.getControllerId(event.getTargetId()))) {
+            return false;
         }
-        if (!creatures.isEmpty()) {
-            game.getState().setValue("gazeOfPain", creatures);
-            return true;
-        }
-        return false;
+        this.getEffects().clear();
+        this.addEffect(new GazeOfPainEffect(new MageObjectReference(event.getTargetId(), game)));
+        this.addEffect(new GazeOfPainDamageEffect().setTargetPointer(new FixedTarget(event.getTargetId(), game)));
+        return true;
     }
 
     @Override
@@ -91,21 +77,24 @@ class GazeOfPainDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Until end of turn, whenever a creature you control attacks and isn't blocked, " + super.getRule();
+        return "Until end of turn, whenever a creature you control attacks and isn't blocked, " +
+                "you may choose to have it deal damage equal to its power to a target creature. " +
+                "If you do, it assigns no combat damage this turn.";
     }
 }
 
 class GazeOfPainEffect extends OneShotEffect {
 
-    Set<UUID> creatures = new HashSet<>();
+    private final MageObjectReference mor;
 
-    GazeOfPainEffect() {
+    GazeOfPainEffect(MageObjectReference mor) {
         super(Outcome.Benefit);
-        this.staticText = "you may choose to have it deal damage equal to its power to a target creature. If you do, it assigns no combat damage this turn.";
+        this.mor = mor;
     }
 
-    GazeOfPainEffect(final GazeOfPainEffect effect) {
+    private GazeOfPainEffect(final GazeOfPainEffect effect) {
         super(effect);
+        this.mor = effect.mor;
     }
 
     @Override
@@ -115,46 +104,29 @@ class GazeOfPainEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        creatures = (Set<UUID>) game.getState().getValue("gazeOfPain");
-        if (!creatures.isEmpty()) {
-            for (UUID attackerId : creatures) {
-                Permanent attacker = game.getPermanent(attackerId);
-                if (controller != null
-                        && attacker != null) {
-                    if (controller.chooseUse(outcome, "Do you wish to deal damage equal to " + attacker.getName() + "'s power to a target creature?", source, game)) {
-                        TargetCreaturePermanent target = new TargetCreaturePermanent();
-                        if (target.canChoose(source.getSourceId(), controller.getId(), game)
-                                && controller.choose(Outcome.Detriment, target, source.getSourceId(), game)) {
-                            Effect effect = new DamageTargetEffect(attacker.getPower().getValue());
-                            effect.setTargetPointer(new FixedTarget(target.getFirstTarget()));
-                            effect.apply(game, source);
-                            ContinuousEffect effect2 = new AssignNoCombatDamageTargetEffect();
-                            effect2.setTargetPointer(new FixedTarget(attackerId));
-                            game.addEffect(effect2, source);
-                        }
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent creature = mor.getPermanent(game);
+        Permanent targeted = game.getPermanent(source.getFirstTarget());
+        return player != null
+                && creature != null
+                && targeted != null
+                && targeted.damage(creature.getPower().getValue(), creature.getId(), source, game) > 0;
     }
 }
 
-class AssignNoCombatDamageTargetEffect extends ReplacementEffectImpl {
+class GazeOfPainDamageEffect extends ReplacementEffectImpl {
 
-    public AssignNoCombatDamageTargetEffect() {
+    GazeOfPainDamageEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);
     }
 
-    public AssignNoCombatDamageTargetEffect(final AssignNoCombatDamageTargetEffect effect) {
+    private GazeOfPainDamageEffect(final GazeOfPainDamageEffect effect) {
         super(effect);
     }
 
     @Override
-    public AssignNoCombatDamageTargetEffect copy() {
-        return new AssignNoCombatDamageTargetEffect(this);
+    public GazeOfPainDamageEffect copy() {
+        return new GazeOfPainDamageEffect(this);
     }
 
     @Override
@@ -181,8 +153,6 @@ class AssignNoCombatDamageTargetEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        DamageEvent damageEvent = (DamageEvent) event;
-        return event.getSourceId().equals(targetPointer.getFirst(game, source))
-                && damageEvent.isCombatDamage();
+        return ((DamageEvent) event).isCombatDamage() && event.getSourceId().equals(targetPointer.getFirst(game, source));
     }
 }

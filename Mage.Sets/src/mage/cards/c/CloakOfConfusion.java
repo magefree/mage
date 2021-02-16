@@ -2,21 +2,18 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
@@ -43,7 +40,6 @@ public final class CloakOfConfusion extends CardImpl {
         // Whenever enchanted creature attacks and isn't blocked, you may have it assign no combat damage this turn. 
         // If you do, defending player discards a card at random.
         this.addAbility(new CloakOfConfusionTriggeredAbility());
-
     }
 
     private CloakOfConfusion(final CloakOfConfusion card) {
@@ -58,11 +54,12 @@ public final class CloakOfConfusion extends CardImpl {
 
 class CloakOfConfusionTriggeredAbility extends TriggeredAbilityImpl {
 
-    public CloakOfConfusionTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CloakOfConfusionEffect(), true);
+    CloakOfConfusionTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DiscardTargetEffect(1, true), false);
+        this.addEffect(new CloakOfConfusionEffect());
     }
 
-    public CloakOfConfusionTriggeredAbility(final CloakOfConfusionTriggeredAbility ability) {
+    private CloakOfConfusionTriggeredAbility(final CloakOfConfusionTriggeredAbility ability) {
         super(ability);
     }
 
@@ -73,85 +70,40 @@ class CloakOfConfusionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_BLOCKERS_STEP;
+        return event.getType() == EventType.UNBLOCKED_ATTACKER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent aura = game.getPermanentOrLKIBattlefield(getSourceId());
-        if (aura != null) {
-            Permanent enchantedCreature = game.getPermanent(aura.getAttachedTo());
-            if (enchantedCreature != null
-                    && enchantedCreature.isAttacking()) {
-                for (CombatGroup combatGroup : game.getCombat().getGroups()) {
-                    if (combatGroup.getBlockers().isEmpty()
-                            && combatGroup.getAttackers().contains(enchantedCreature.getId())) {
-                        this.getEffects().setTargetPointer(
-                                new FixedTarget(game.getCombat().getDefendingPlayerId(
-                                        enchantedCreature.getId(), game)));
-                        return true;
-                    }
-                }
-            }
+        Permanent aura = getSourcePermanentOrLKI(game);
+        if (aura != null && event.getTargetId().equals(aura.getAttachedTo())) {
+            this.getEffects().setTargetPointer(new FixedTarget(game.getCombat().getDefendingPlayerId(aura.getAttachedTo(), game)));
+            return true;
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever enchanted creature attacks and isn't blocked, " + super.getRule();
+        return "Whenever enchanted creature attacks and isn't blocked, " +
+                "you may have it assign no combat damage this turn. " +
+                "If you do, defending player discards a card at random";
     }
 }
 
-class CloakOfConfusionEffect extends OneShotEffect {
+class CloakOfConfusionEffect extends ReplacementEffectImpl {
 
-    public CloakOfConfusionEffect() {
-        super(Outcome.Neutral);
-        this.staticText = "you may have it assign no combat damage this turn. "
-                + "If you do, defending player discards a card at random";
+    CloakOfConfusionEffect() {
+        super(Duration.EndOfTurn, Outcome.Neutral);
     }
 
-    public CloakOfConfusionEffect(final CloakOfConfusionEffect effect) {
+    private CloakOfConfusionEffect(final CloakOfConfusionEffect effect) {
         super(effect);
     }
 
     @Override
     public CloakOfConfusionEffect copy() {
         return new CloakOfConfusionEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent enchantedCreature = game.getPermanent(game.getPermanent(source.getSourceId()).getAttachedTo());
-        if (controller != null && controller.chooseUse(outcome, "Have defending player discard a card at random? " + enchantedCreature.getName() + " will not assign combat damage.", source, game)) {
-            ContinuousEffect effect = new AssignNoCombatDamageTargetEffect();
-            effect.setTargetPointer(new FixedTarget(enchantedCreature.getId()));
-            game.addEffect(effect, source);
-            Player defendingPlayer = game.getPlayer(targetPointer.getFirst(game, source));
-            if (defendingPlayer != null) {
-                defendingPlayer.discard(1, true, false, source, game);
-            }
-            return true;
-        }
-
-        return false;
-    }
-}
-
-class AssignNoCombatDamageTargetEffect extends ReplacementEffectImpl {
-
-    public AssignNoCombatDamageTargetEffect() {
-        super(Duration.EndOfTurn, Outcome.Neutral);
-    }
-
-    public AssignNoCombatDamageTargetEffect(final AssignNoCombatDamageTargetEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AssignNoCombatDamageTargetEffect copy() {
-        return new AssignNoCombatDamageTargetEffect(this);
     }
 
     @Override
@@ -178,8 +130,10 @@ class AssignNoCombatDamageTargetEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        DamageEvent damageEvent = (DamageEvent) event;
-        return event.getSourceId().equals(targetPointer.getFirst(game, source))
-                && damageEvent.isCombatDamage();
+        if (!((DamageEvent) event).isCombatDamage()) {
+            return false;
+        }
+        Permanent aura = source.getSourcePermanentOrLKI(game);
+        return aura != null && event.getSourceId().equals(aura.getAttachedTo());
     }
 }

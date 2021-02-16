@@ -1,55 +1,49 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.RegenerateTargetEffect;
-import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.game.events.DamageEvent;
+import mage.game.events.GameEvent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
- * @author MarcoMarin
+ * @author TheElk801
  */
 public final class DelifsCube extends CardImpl {
 
     public DelifsCube(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        Ability ability2 = new AttacksAndIsNotBlockedTriggeredAbility(new DelifsCubeEffect(this.getId()), false);        
-        ability2.addEffect(new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn));        
         // {2}, {tap}: This turn, when target creature you control attacks and isn't blocked, it assigns no combat damage this turn and you put a cube counter on Delif's Cube.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(ability2, Duration.EndOfTurn),
-                new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(
+                new CreateDelayedTriggeredAbilityEffect(new DelifsCubeTriggeredAbility()), new GenericManaCost(2)
+        );
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
-        
         this.addAbility(ability);
+
         // {2}, Remove a cube counter from Delif's Cube: Regenerate target creature.
-        SimpleActivatedAbility ability3 = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new RegenerateTargetEffect(),
-                new ManaCostsImpl("{2}"));
-        ability3.addCost(new RemoveCountersSourceCost(CounterType.CUBE.createInstance()));
-        ability3.addTarget(new TargetControlledCreaturePermanent());
-        
-        this.addAbility(ability3);
+        ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new GenericManaCost(2));
+        ability.addCost(new RemoveCountersSourceCost(CounterType.CUBE.createInstance()));
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        this.addAbility(ability);
     }
 
     private DelifsCube(final DelifsCube card) {
@@ -62,31 +56,78 @@ public final class DelifsCube extends CardImpl {
     }
 }
 
-class DelifsCubeEffect extends OneShotEffect{
-                      
-    private UUID cubeId;
-    
-    public DelifsCubeEffect(UUID cubeId) {
-        super(Outcome.Benefit);
-        this.cubeId = cubeId;
-        this.setText("This turn, when target creature you control attacks and isn't blocked, it assigns no combat damage this turn and you put a cube counter on Delif's Cube");
+class DelifsCubeTriggeredAbility extends DelayedTriggeredAbility {
+
+    DelifsCubeTriggeredAbility() {
+        super(new DelifsCubePreventEffect(), Duration.EndOfTurn, false, false);
+        this.addEffect(new AddCountersSourceEffect(CounterType.CUBE.createInstance()));
     }
-    
-    public DelifsCubeEffect(final DelifsCubeEffect effect) {
-        super(effect);
-        this.cubeId = effect.cubeId;
+
+    private DelifsCubeTriggeredAbility(final DelifsCubeTriggeredAbility ability) {
+        super(ability);
     }
-    
+
     @Override
-    public DelifsCubeEffect copy() {
-        return new DelifsCubeEffect(this);
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UNBLOCKED_ATTACKER;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return event.getTargetId().equals(getFirstTarget());
+    }
+
+    @Override
+    public DelifsCubeTriggeredAbility copy() {
+        return new DelifsCubeTriggeredAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return "This turn, when target creature you control attacks and isn't blocked, " +
+                "it assigns no combat damage this turn and you put a cube counter on {this}.";
+    }
+}
+
+class DelifsCubePreventEffect extends ReplacementEffectImpl {
+
+    DelifsCubePreventEffect() {
+        super(Duration.EndOfTurn, Outcome.Neutral);
+    }
+
+    private DelifsCubePreventEffect(final DelifsCubePreventEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DelifsCubePreventEffect copy() {
+        return new DelifsCubePreventEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent perm = game.getPermanent(cubeId);
-        if (perm == null) return false;
-        perm.addCounters(CounterType.CUBE.createInstance(), source.getControllerId(), source, game);
-        return true;         
+        return true;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
+    }
+
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        switch (event.getType()) {
+            case DAMAGE_CREATURE:
+            case DAMAGE_PLAYER:
+            case DAMAGE_PLANESWALKER:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return ((DamageEvent) event).isCombatDamage() && event.getTargetId().equals(targetPointer.getFirst(game, source));
     }
 }
