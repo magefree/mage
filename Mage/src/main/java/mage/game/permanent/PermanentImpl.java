@@ -50,15 +50,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
 
     private static final Logger logger = Logger.getLogger(PermanentImpl.class);
 
-    static class MarkedDamageInfo implements Serializable {
+    private static class MarkedDamageInfo implements Serializable {
 
-        public MarkedDamageInfo(Counter counter, MageObject sourceObject) {
+        private final Counter counter;
+        private final MageObject sourceObject;
+        private final boolean addCounters;
+
+        private MarkedDamageInfo(Counter counter, MageObject sourceObject, boolean addCounters) {
             this.counter = counter;
             this.sourceObject = sourceObject;
+            this.addCounters = addCounters;
         }
-
-        Counter counter;
-        MageObject sourceObject;
     }
 
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(300);
@@ -146,7 +148,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (permanent.markedDamage != null) {
             markedDamage = new ArrayList<>();
             for (MarkedDamageInfo mdi : permanent.markedDamage) {
-                markedDamage.add(new MarkedDamageInfo(mdi.counter.copy(), mdi.sourceObject));
+                markedDamage.add(new MarkedDamageInfo(mdi.counter.copy(), mdi.sourceObject, mdi.addCounters));
             }
         }
         if (permanent.info != null) {
@@ -877,13 +879,13 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             return 0;
         }
         int lethal = getLethalDamage(attackerId, game);
+        MageObject attacker = game.getObject(attackerId);
         if (this.isCreature()) {
-            MageObject attacker = game.getObject(attackerId);
             if (attacker != null && (attacker.getAbilities().containsKey(InfectAbility.getInstance().getId())
                     || attacker.getAbilities().containsKey(WitherAbility.getInstance().getId()))) {
                 if (markDamage) {
                     // mark damage only
-                    markDamage(CounterType.M1M1.createInstance(actualDamage), attacker);
+                    markDamage(CounterType.M1M1.createInstance(actualDamage), attacker, true);
                 } else {
                     Ability damageSourceAbility = null;
                     if (attacker instanceof Permanent) {
@@ -899,7 +901,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (this.isPlaneswalker()) {
             int loyalty = getCounters(game).getCount(CounterType.LOYALTY);
             int countersToRemove = Math.min(actualDamage, loyalty);
-            removeCounters(CounterType.LOYALTY.getName(), countersToRemove, source, game);
+            if (attacker != null && markDamage) {
+                markDamage(CounterType.LOYALTY.createInstance(countersToRemove), attacker, false);
+            } else {
+                removeCounters(CounterType.LOYALTY.getName(), countersToRemove, source, game);
+            }
         }
         DamagedEvent damagedEvent = new DamagedPermanentEvent(this.getId(), attackerId, this.getControllerId(), actualDamage, combat);
         damagedEvent.setExcess(actualDamage - lethal);
@@ -911,7 +917,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         UUID sourceControllerId = null;
         Abilities sourceAbilities = null;
-        MageObject attacker = game.getPermanentOrLKIBattlefield(attackerId);
+        attacker = game.getPermanentOrLKIBattlefield(attackerId);
         if (attacker == null) {
             StackObject stackObject = game.getStack().getStackObject(attackerId);
             if (stackObject != null) {
@@ -996,7 +1002,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             } else if (mdi.sourceObject instanceof Permanent) {
                 source = ((Permanent) mdi.sourceObject).getSpellAbility();
             }
-            addCounters(mdi.counter, game.getControllerId(mdi.sourceObject.getId()), source, game);
+            if (mdi.addCounters) {
+                addCounters(mdi.counter, game.getControllerId(mdi.sourceObject.getId()), source, game);
+            } else {
+                removeCounters(mdi.counter, source, game);
+            }
         }
         markedDamage.clear();
         return 0;
@@ -1043,11 +1053,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return event.getAmount();
     }
 
-    private void markDamage(Counter counter, MageObject source) {
+    private void markDamage(Counter counter, MageObject source, boolean addCounters) {
         if (markedDamage == null) {
             markedDamage = new ArrayList<>();
         }
-        markedDamage.add(new MarkedDamageInfo(counter, source));
+        markedDamage.add(new MarkedDamageInfo(counter, source, addCounters));
     }
 
     @Override

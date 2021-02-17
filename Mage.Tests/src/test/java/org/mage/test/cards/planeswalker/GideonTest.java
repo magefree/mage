@@ -160,4 +160,25 @@ public class GideonTest extends CardTestPlayerBase {
         assertDamageReceived(playerA, "Gideon Jura", 3);
         assertCounterCount(playerA, "Gideon Jura", CounterType.LOYALTY, 3);
     }
+
+    @Test
+    public void testGideonJuraNoPreventionCombat() {
+        addCard(Zone.BATTLEFIELD, playerA, "Gideon Jura");
+        addCard(Zone.BATTLEFIELD, playerA, "Leyline of Punishment");
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "0:");
+        attack(1, playerA, "Gideon Jura", playerB);
+        block(1, playerB, "Grizzly Bears", "Gideon Jura");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertType("Gideon Jura", CardType.CREATURE, true);
+        assertDamageReceived(playerA, "Gideon Jura", 2);
+        assertCounterCount(playerA, "Gideon Jura", CounterType.LOYALTY, 4);
+        assertGraveyardCount(playerB, "Grizzly Bears", 1);
+    }
 }

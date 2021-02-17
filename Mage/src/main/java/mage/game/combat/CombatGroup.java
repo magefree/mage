@@ -8,7 +8,6 @@ import mage.abilities.keyword.*;
 import mage.constants.AsThoughEffectType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.BlockerDeclaredEvent;
 import mage.game.events.DeclareBlockerEvent;
@@ -210,6 +209,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
         for (UUID uuid : blockers) {
             Permanent permanent = game.getPermanent(uuid);
+            if (permanent != null) {
+                permanent.applyDamage(game);
+            }
+        }
+        if (defenderIsPlaneswalker) {
+            Permanent permanent = game.getPermanent(defenderId);
             if (permanent != null) {
                 permanent.applyDamage(game);
             }
