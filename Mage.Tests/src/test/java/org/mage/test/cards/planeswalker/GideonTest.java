@@ -142,7 +142,7 @@ public class GideonTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testGideonJura() {
+    public void testGideonJuraNoPrevention() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Zone.BATTLEFIELD, playerA, "Gideon Jura");
         addCard(Zone.BATTLEFIELD, playerA, "Leyline of Punishment");

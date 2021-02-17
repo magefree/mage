@@ -876,18 +876,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (actualDamage < 1) {
             return 0;
         }
-        int lethal = 0;
+        int lethal = getLethalDamage(attackerId, game);
         if (this.isCreature()) {
             MageObject attacker = game.getObject(attackerId);
-            if (game.getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters().stream().anyMatch(f -> f.match(this, game))) {
-                lethal = power.getValue();
-            } else {
-                lethal = toughness.getValue();
-            }
-            lethal = Math.max(lethal - this.damage, 0);
-            if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
-                lethal = Math.min(1, lethal);
-            }
             if (attacker != null && (attacker.getAbilities().containsKey(InfectAbility.getInstance().getId())
                     || attacker.getAbilities().containsKey(WitherAbility.getInstance().getId()))) {
                 if (markDamage) {
@@ -908,7 +899,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (this.isPlaneswalker()) {
             int loyalty = getCounters(game).getCount(CounterType.LOYALTY);
             int countersToRemove = Math.min(actualDamage, loyalty);
-            lethal = isCreature() ? Math.min(lethal, loyalty) : loyalty;
             removeCounters(CounterType.LOYALTY.getName(), countersToRemove, source, game);
         }
         DamagedEvent damagedEvent = new DamagedPermanentEvent(this.getId(), attackerId, this.getControllerId(), actualDamage, combat);
@@ -1010,6 +1000,27 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
         markedDamage.clear();
         return 0;
+    }
+
+    @Override
+    public int getLethalDamage(UUID attackerId, Game game) {
+        int lethal = Integer.MAX_VALUE;
+        if (this.isCreature()) {
+            if (game.getState().getActivePowerInsteadOfToughnessForDamageLethalityFilters().stream().anyMatch(f -> f.match(this, game))) {
+                lethal = Math.min(lethal, power.getValue());
+            } else {
+                lethal = Math.min(lethal, toughness.getValue());
+            }
+            lethal = Math.max(lethal - this.damage, 0);
+            MageObject attacker = game.getObject(attackerId);
+            if (attacker != null && attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
+                lethal = Math.min(1, lethal);
+            }
+        }
+        if (this.isPlaneswalker()) {
+            lethal = Math.min(lethal, this.getCounters(game).getCount(CounterType.LOYALTY));
+        }
+        return lethal;
     }
 
     @Override

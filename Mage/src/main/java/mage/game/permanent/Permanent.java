@@ -101,7 +101,7 @@ public interface Permanent extends Card, Controllable {
 
     /**
      * @param attachment
-     * @param source can be null for default checks like state base
+     * @param source     can be null for default checks like state base
      * @param game
      * @param silentMode - use it to ignore warning message for users (e.g. for
      *                   checking only)
@@ -123,8 +123,8 @@ public interface Permanent extends Card, Controllable {
      * Uses in replace events only
      *
      * @param damage
-     * @param attackerId id of the permanent or player who make damage (source.getSourceId() in most cases)
-     * @param source can be null for default game actions like combat
+     * @param attackerId     id of the permanent or player who make damage (source.getSourceId() in most cases)
+     * @param source         can be null for default game actions like combat
      * @param game
      * @param combat
      * @param preventable
@@ -137,8 +137,8 @@ public interface Permanent extends Card, Controllable {
      * Uses in combat only to deal damage at the same time
      *
      * @param damage
-     * @param attackerId id of the permanent or player who make damage (source.getSourceId() in most cases)
-     * @param source can be null for default game actions like combat
+     * @param attackerId  id of the permanent or player who make damage (source.getSourceId() in most cases)
+     * @param source      can be null for default game actions like combat
      * @param game
      * @param preventable
      * @param combat
@@ -150,6 +150,8 @@ public interface Permanent extends Card, Controllable {
 
     int applyDamage(Game game);
 
+    int getLethalDamage(UUID attackerId, Game game);
+
     void removeAllDamage(Game game);
 
     void reset(Game game);
@@ -159,7 +161,6 @@ public interface Permanent extends Card, Controllable {
     boolean destroy(Ability source, Game game, boolean noRegen);
 
     /**
-     *
      * @param source can be null for state base actions
      * @param game
      * @return
