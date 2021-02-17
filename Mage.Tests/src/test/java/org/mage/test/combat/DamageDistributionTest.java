@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author ayrat
  */
 public class DamageDistributionTest extends CardTestPlayerBase {
