@@ -6,6 +6,6 @@ package mage.game.events;
 public class DamagedPermanentBatchEvent extends DamagedBatchEvent {
 
     public DamagedPermanentBatchEvent() {
-        super(EventType.DAMAGED_PERMANENT_BATCH, DamagedCreatureEvent.class);
+        super(EventType.DAMAGED_PERMANENT_BATCH, DamagedPermanentEvent.class);
     }
 }

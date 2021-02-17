@@ -16,6 +16,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedCreatureEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -73,7 +74,7 @@ class SoulsOfTheFaultlessTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.sourceId)
-                && ((DamagedCreatureEvent) event).isCombatDamage()) {
+                && ((DamagedEvent) event).isCombatDamage()) {
             Permanent source = game.getPermanent(event.getSourceId());
             if (source == null) {
                 source = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);

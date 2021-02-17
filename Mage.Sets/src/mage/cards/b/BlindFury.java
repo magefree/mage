@@ -12,6 +12,7 @@ import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -71,7 +72,7 @@ class FurnaceOfRathEffect extends ReplacementEffectImpl {
         Permanent permanent = game.getPermanent(event.getSourceId());
         return permanent != null
                 && permanent.isCreature()
-                && ((DamageCreatureEvent) event).isCombatDamage();
+                && ((DamageEvent) event).isCombatDamage();
 
     }
 

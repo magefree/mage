@@ -2,6 +2,7 @@ package mage.cards.k;
 
 import java.util.UUID;
 import mage.constants.SubType;
+import mage.game.events.DamageEvent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -155,11 +156,11 @@ class KithkinArmorPreventionEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)
-                && event instanceof DamageCreatureEvent
+                && event instanceof DamageEvent
                 && event.getAmount() > 0
                 && !this.used) {
             UUID enchantedCreatureId = (UUID) game.getState().getValue(source.getSourceId().toString() + "attachedToPermanent");
-            DamageCreatureEvent damageEvent = (DamageCreatureEvent) event;
+            DamageEvent damageEvent = (DamageEvent) event;
             if (enchantedCreatureId != null
                     && event.getTargetId().equals(enchantedCreatureId)
                     && damageEvent.getSourceId().equals(source.getFirstTarget()))      {

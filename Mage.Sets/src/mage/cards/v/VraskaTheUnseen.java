@@ -12,6 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.DamagedEvent;
 import mage.game.events.DamagedPlaneswalkerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -120,7 +121,7 @@ class VraskaTheUnseenTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((DamagedPlaneswalkerEvent) event).isCombatDamage() && getSourceId().equals(event.getTargetId())) {
+        if (((DamagedEvent) event).isCombatDamage() && getSourceId().equals(event.getTargetId())) {
             Permanent sourceOfDamage = game.getPermanent(event.getSourceId());
             if (sourceOfDamage != null && sourceOfDamage.isCreature()) {
                 Effect effect = this.getEffects().get(0);

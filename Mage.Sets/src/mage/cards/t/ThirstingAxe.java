@@ -20,6 +20,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedCreatureEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
@@ -93,7 +94,7 @@ class CombatDamageToCreatureWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() != GameEvent.EventType.DAMAGED_PERMANENT
-                || !((DamagedCreatureEvent) event).isCombatDamage()) {
+                || !((DamagedEvent) event).isCombatDamage()) {
             return;
         }
         Permanent permanent = game.getPermanent(event.getTargetId());

@@ -16,6 +16,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.DamagedPlaneswalkerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -93,7 +95,7 @@ class ZagrasThiefOfHeartbeatsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!((DamagedPlaneswalkerEvent) event).isCombatDamage()) {
+        if (!((DamagedEvent) event).isCombatDamage()) {
             return false;
         }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());

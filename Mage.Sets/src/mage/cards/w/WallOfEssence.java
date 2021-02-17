@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedCreatureEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -74,7 +75,7 @@ class WallOfEssenceTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent == null
                 || !permanent.isCreature()
                 || !event.getTargetId().equals(this.sourceId)
-                || !((DamagedCreatureEvent) event).isCombatDamage()) {
+                || !((DamagedEvent) event).isCombatDamage()) {
             return false;
         }
         this.getEffects().setValue("damageAmount", event.getAmount());

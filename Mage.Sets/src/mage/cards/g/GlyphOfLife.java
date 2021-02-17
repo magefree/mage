@@ -15,6 +15,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.DamagedCreatureEvent;
 import mage.game.events.GameEvent.EventType;
@@ -76,7 +77,7 @@ class GlyphOfLifeTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getTargetId().equals(this.getFirstTarget())) {
-            DamagedCreatureEvent damageEvent = (DamagedCreatureEvent) event;
+            DamagedEvent damageEvent = (DamagedEvent) event;
             Permanent attackingCreature = game.getPermanentOrLKIBattlefield(damageEvent.getSourceId());
             if (attackingCreature != null && attackingCreature.isCreature() && attackingCreature.isAttacking()) {
                 this.getEffects().get(0).setValue("damageAmount", event.getAmount());

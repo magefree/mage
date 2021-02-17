@@ -6,6 +6,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedCreatureEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 
 /**
@@ -60,7 +61,7 @@ public class DealtDamageToSourceTriggeredAbility extends TriggeredAbilityImpl {
                 }
                 return true;
             } else {
-                if (((DamagedCreatureEvent) event).isCombatDamage()) {
+                if (((DamagedEvent) event).isCombatDamage()) {
                     if (!usedForCombatDamageStep) {
                         usedForCombatDamageStep = true;
                         return true;

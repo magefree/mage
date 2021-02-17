@@ -33,11 +33,8 @@ public abstract class DamagedBatchEvent extends GameEvent {
         if (damagedEvent instanceof DamagedPlayerEvent) {
             event = new DamagedPlayerBatchEvent();
             event.addEvent(damagedEvent);
-        } else if (damagedEvent instanceof DamagedCreatureEvent) {
-            event = new DamagedCreatureBatchEvent();
-            event.addEvent(damagedEvent);
-        } else if (damagedEvent instanceof DamagedPlaneswalkerEvent) {
-            event = new DamagedPlaneswalkerBatchEvent();
+        } else if (damagedEvent instanceof DamagedPermanentEvent) {
+            event = new DamagedPermanentBatchEvent();
             event.addEvent(damagedEvent);
         }
         return event;

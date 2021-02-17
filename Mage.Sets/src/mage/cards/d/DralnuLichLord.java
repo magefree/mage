@@ -20,6 +20,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -76,7 +77,7 @@ class DralnuLichLordReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        DamageCreatureEvent damageEvent = (DamageCreatureEvent) event;
+        DamageEvent damageEvent = (DamageEvent) event;
         new SacrificeControllerEffect(new FilterPermanent(), damageEvent.getAmount(), "").apply(game, source);
         return true;
     }
