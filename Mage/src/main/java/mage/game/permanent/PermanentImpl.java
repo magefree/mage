@@ -869,7 +869,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         if (damageAmount < 1 || !canDamage(game.getObject(attackerId), game)) {
             return 0;
         }
-        GameEvent event = new DamagePermanentEvent(objectId, attackerId, controllerId, damageAmount, preventable, combat);
+        DamageEvent event = new DamagePermanentEvent(objectId, attackerId, controllerId, damageAmount, preventable, combat);
         event.setAppliedEffects(appliedEffects);
         if (game.replaceEvent(event)) {
             return 0;
@@ -881,8 +881,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         int lethal = getLethalDamage(attackerId, game);
         MageObject attacker = game.getObject(attackerId);
         if (this.isCreature()) {
-            if (attacker != null && (attacker.getAbilities().containsKey(InfectAbility.getInstance().getId())
-                    || attacker.getAbilities().containsKey(WitherAbility.getInstance().getId()))) {
+            if (checkWither(event, attacker)) {
                 if (markDamage) {
                     // mark damage only
                     markDamage(CounterType.M1M1.createInstance(actualDamage), attacker, true);
@@ -969,6 +968,17 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             game.informPlayers(attacker.getLogName() + " deals " + damageDone + " damage to " + getLogName());
         }
         return damageDone;
+    }
+
+    private boolean checkWither(DamageEvent event, MageObject attacker) {
+        if (event.isAsThoughWither() || event.isAsThoughInfect()) {
+            return true;
+        }
+        if (attacker == null) {
+            return false;
+        }
+        return attacker.getAbilities().containsKey(InfectAbility.getInstance().getId())
+                || attacker.getAbilities().containsKey(WitherAbility.getInstance().getId());
     }
 
     @Override

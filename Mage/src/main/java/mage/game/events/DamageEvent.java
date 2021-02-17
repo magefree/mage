@@ -9,6 +9,7 @@ public abstract class DamageEvent extends GameEvent {
 
     protected boolean combat;
     private boolean asThoughInfect = false;
+    private boolean asThoughWither = false;
 
     public DamageEvent(EventType type, UUID targetId, UUID damageSourceId, UUID targetControllerId, int amount, boolean preventable, boolean combat) {
         super(type, targetId, null, targetControllerId, amount, preventable);
@@ -30,5 +31,13 @@ public abstract class DamageEvent extends GameEvent {
 
     public boolean isAsThoughInfect() {
         return asThoughInfect;
+    }
+
+    public void setAsThoughWither(boolean asThoughWither) {
+        this.asThoughWither = asThoughWither;
+    }
+
+    public boolean isAsThoughWither() {
+        return asThoughWither;
     }
 }
