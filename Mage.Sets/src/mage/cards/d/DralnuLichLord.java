@@ -19,7 +19,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.events.DamageCreatureEvent;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInYourGraveyard;

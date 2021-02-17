@@ -18,7 +18,6 @@ import mage.filter.predicate.permanent.BlockedByIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.DamageCreatureEvent;
 import mage.game.permanent.Permanent;
 
 /**

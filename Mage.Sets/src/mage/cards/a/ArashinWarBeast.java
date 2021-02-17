@@ -14,10 +14,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.BlockingPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedCreatureEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
