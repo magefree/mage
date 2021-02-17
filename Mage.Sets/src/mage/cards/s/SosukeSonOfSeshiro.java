@@ -14,16 +14,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.DamagedCreatureEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
 /**
- *
  * @author LevelX
  */
 public final class SosukeSonOfSeshiro extends CardImpl {
@@ -31,11 +29,11 @@ public final class SosukeSonOfSeshiro extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Snake creatures");
 
     static {
-            filter.add(SubType.SNAKE.getPredicate());
+        filter.add(SubType.SNAKE.getPredicate());
     }
 
     public SosukeSonOfSeshiro(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.WARRIOR);
@@ -79,21 +77,25 @@ class SosukeSonOfSeshiroTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((DamagedCreatureEvent) event).isCombatDamage()) {
-            Permanent sourceCreature = game.getPermanent(event.getSourceId());
-            Permanent targetCreature = game.getPermanent(event.getTargetId());
-            if (sourceCreature != null && sourceCreature.isControlledBy(this.getControllerId())
-                && targetCreature != null && sourceCreature.hasSubtype(SubType.WARRIOR, game)) {
-                    this.getEffects().get(0).setTargetPointer(new FixedTarget(targetCreature.getId()));
-                    return true;
-            }
+        if (!((DamagedEvent) event).isCombatDamage()) {
+            return false;
         }
-        return false;
+        Permanent sourceCreature = game.getPermanent(event.getSourceId());
+        Permanent targetCreature = game.getPermanent(event.getTargetId());
+        if (sourceCreature == null
+                || !sourceCreature.isControlledBy(this.getControllerId())
+                || targetCreature == null
+                || !targetCreature.isCreature()
+                || !sourceCreature.hasSubtype(SubType.WARRIOR, game)) {
+            return false;
+        }
+        this.getEffects().setTargetPointer(new FixedTarget(targetCreature, game));
+        return true;
     }
 
     @Override

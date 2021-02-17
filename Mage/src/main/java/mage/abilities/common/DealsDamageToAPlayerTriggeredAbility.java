@@ -7,6 +7,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -44,21 +45,27 @@ public class DealsDamageToAPlayerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || (orPlaneswalker && event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER);
+                || event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.sourceId)) {
-            if (setTargetPointer) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                    effect.setValue("damage", event.getAmount());
-                }
-            }
-            return true;
+        if (!event.getSourceId().equals(this.sourceId)) {
+            return false;
         }
-        return false;
+        if (event.getType() == GameEvent.EventType.DAMAGED_PERMANENT) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent == null
+                    || !permanent.isPlaneswalker()
+                    || !orPlaneswalker) {
+                return false;
+            }
+        }
+        if (setTargetPointer) {
+            getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+            getEffects().setValue("damage", event.getAmount());
+        }
+        return true;
     }
 
     @Override

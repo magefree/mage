@@ -72,8 +72,7 @@ class TheFlameOfKeldDamageEffect extends ReplacementEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         switch (event.getType()) {
-            case DAMAGE_CREATURE:
-            case DAMAGE_PLANESWALKER:
+            case DAMAGE_PERMANENT:
             case DAMAGE_PLAYER:
                 return true;
             default:

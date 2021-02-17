@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -23,6 +22,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AssassinToken2;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -84,21 +85,23 @@ class VraskaSwarmsEminenceTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER;
+                || event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getSourceId());
-        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
-            for (Effect effect : this.getEffects()) {
-                effect.setValue("damage", event.getAmount());
-                effect.setValue("sourceId", event.getSourceId());
-                effect.setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));
-            }
-            return true;
+        if (permanent == null || !filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            return false;
         }
-        return false;
+        Permanent damaged = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        if (damaged != null && !damaged.isPlaneswalker()) {
+            return false;
+        }
+        getEffects().setValue("damage", event.getAmount());
+        getEffects().setValue("sourceId", event.getSourceId());
+        getEffects().setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));
+        return true;
     }
 
     @Override

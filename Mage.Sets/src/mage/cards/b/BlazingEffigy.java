@@ -89,7 +89,7 @@ class BlazingEffigyWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_PERMANENT) {
             if (!event.getSourceId().equals(event.getTargetId())) {
                 MageObjectReference damageSourceRef = new MageObjectReference(event.getSourceId(), game);
                 MageObjectReference damageTargetRef = new MageObjectReference(event.getTargetId(), game);

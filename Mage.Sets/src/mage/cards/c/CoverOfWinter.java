@@ -65,7 +65,7 @@ class CoverOfWinterEffect extends PreventionEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER || event.getType() == GameEvent.EventType.DAMAGE_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER || event.getType() == GameEvent.EventType.DAMAGE_PERMANENT;
     }
 
     @Override
@@ -86,9 +86,9 @@ class CoverOfWinterEffect extends PreventionEffectImpl {
             return super.applies(event, source, game);
         }
 
-        if (event.getType() == GameEvent.EventType.DAMAGE_CREATURE) {
+        if (event.getType() == GameEvent.EventType.DAMAGE_PERMANENT) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.isControlledBy(source.getControllerId())) {
+            if (permanent != null && permanent.isCreature() && permanent.isControlledBy(source.getControllerId())) {
                 return super.applies(event, source, game);
             }
         }

@@ -2,18 +2,18 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
+import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -39,7 +39,7 @@ public final class VolatileRig extends CardImpl {
         this.addAbility(new AttacksEachCombatStaticAbility());
 
         // Whenever Volatile Rig is dealt damage, flip a coin. If you lose the flip, sacrifice Volatile Rig.
-        this.addAbility(new VolatileRigTriggeredAbility());
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(new VolatileRigEffect(), false));
 
         // When Volatile Rig dies, flip a coin. If you lose the flip, it deals 4 damage to each creature and each player.
         this.addAbility(new DiesSourceTriggeredAbility(new VolatileRigEffect2()));
@@ -56,60 +56,6 @@ public final class VolatileRig extends CardImpl {
     }
 }
 
-class VolatileRigTriggeredAbility extends TriggeredAbilityImpl {
-
-    private boolean triggerdThisCombatStep = false;
-
-    public VolatileRigTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new VolatileRigEffect());
-    }
-
-    public VolatileRigTriggeredAbility(final VolatileRigTriggeredAbility effect) {
-        super(effect);
-        this.triggerdThisCombatStep = effect.triggerdThisCombatStep;
-    }
-
-    @Override
-    public VolatileRigTriggeredAbility copy() {
-        return new VolatileRigTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST
-                || event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        /*
-         * If Volatile Rig is dealt damage by multiple sources at the same time
-         * (for example, multiple blocking creatures), its first triggered ability
-         * will trigger only once.
-         */
-        if (triggerdThisCombatStep && event.getType() == GameEvent.EventType.COMBAT_DAMAGE_STEP_POST) {
-            triggerdThisCombatStep = false;
-        }
-
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && event.getTargetId().equals(this.sourceId)) {
-            if (game.getPhase().getStep().getType() == PhaseStep.COMBAT_DAMAGE) {
-                if (triggerdThisCombatStep) {
-                    return false;
-                } else {
-                    triggerdThisCombatStep = true;
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} is dealt damage, " + super.getRule();
-    }
-}
-
 class VolatileRigEffect extends OneShotEffect {
 
     VolatileRigEffect() {
@@ -117,7 +63,7 @@ class VolatileRigEffect extends OneShotEffect {
         staticText = "flip a coin. If you lose the flip, sacrifice {this}";
     }
 
-    VolatileRigEffect(final VolatileRigEffect effect) {
+    private VolatileRigEffect(final VolatileRigEffect effect) {
         super(effect);
     }
 

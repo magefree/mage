@@ -59,10 +59,7 @@ class FurnaceOfRathEffect extends ReplacementEffectImpl {
     public boolean checksEventType(GameEvent event, Game game) {
         switch (event.getType()) {
             case DAMAGE_PLAYER:
-                return true;
-            case DAMAGE_CREATURE:
-                return true;
-            case DAMAGE_PLANESWALKER:
+            case DAMAGE_PERMANENT:
                 return true;
         }
         return false;

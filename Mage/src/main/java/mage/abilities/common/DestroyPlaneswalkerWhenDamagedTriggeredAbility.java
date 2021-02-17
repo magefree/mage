@@ -35,22 +35,23 @@ public class DestroyPlaneswalkerWhenDamagedTriggeredAbility extends TriggeredAbi
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = getSourcePermanentIfItStillExists(game);
-        if (permanent != null) {
-            boolean applies = filter != null ?
-                filter.match(permanent, game) : event.getSourceId().equals(getSourceId());
-            if (applies) {
-                Effect effect = new DestroyTargetEffect();
-                effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
-                this.getEffects().clear();
-                this.addEffect(effect);
-                return true;
-            }
+        if (permanent == null) {
+            return false;
+        }
+        boolean applies = filter != null ?
+                permanent.isPlaneswalker() && filter.match(permanent, game) : event.getSourceId().equals(getSourceId());
+        if (applies) {
+            Effect effect = new DestroyTargetEffect();
+            effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
+            this.getEffects().clear();
+            this.addEffect(effect);
+            return true;
         }
         return false;
     }

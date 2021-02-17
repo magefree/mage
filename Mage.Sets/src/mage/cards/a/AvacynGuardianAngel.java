@@ -1,7 +1,5 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
@@ -24,8 +22,9 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class AvacynGuardianAngel extends CardImpl {
@@ -80,7 +79,7 @@ class AvacynGuardianAngelPreventToCreatureEffect extends OneShotEffect {
         this.staticText = "Prevent all damage that would be dealt to another target creature this turn by sources of the color of your choice";
     }
 
-    AvacynGuardianAngelPreventToCreatureEffect(final AvacynGuardianAngelPreventToCreatureEffect effect) {
+    private AvacynGuardianAngelPreventToCreatureEffect(final AvacynGuardianAngelPreventToCreatureEffect effect) {
         super(effect);
     }
 
@@ -112,7 +111,7 @@ class AvacynGuardianAngelPreventToCreaturePreventionEffect extends PreventionEff
         this.color = color;
     }
 
-    AvacynGuardianAngelPreventToCreaturePreventionEffect(AvacynGuardianAngelPreventToCreaturePreventionEffect effect) {
+    private AvacynGuardianAngelPreventToCreaturePreventionEffect(AvacynGuardianAngelPreventToCreaturePreventionEffect effect) {
         super(effect);
         this.color = effect.color;
     }
@@ -124,16 +123,13 @@ class AvacynGuardianAngelPreventToCreaturePreventionEffect extends PreventionEff
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            if (event.getType() == GameEvent.EventType.DAMAGE_CREATURE
-                    && event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
-                MageObject sourceObject = game.getObject(event.getSourceId());
-                if (sourceObject != null && sourceObject.getColor(game).shares(this.color)) {
-                    return true;
-                }
-            }
+        if (!super.applies(event, source, game)
+                || event.getType() != GameEvent.EventType.DAMAGE_PERMANENT
+                || !event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
+            return false;
         }
-        return false;
+        MageObject sourceObject = game.getObject(event.getSourceId());
+        return sourceObject != null && sourceObject.getColor(game).shares(this.color);
     }
 
     @Override
@@ -149,7 +145,7 @@ class AvacynGuardianAngelPreventToPlayerEffect extends OneShotEffect {
         this.staticText = "Prevent all damage that would be dealt to target player or planeswalker this turn by sources of the color of your choice";
     }
 
-    AvacynGuardianAngelPreventToPlayerEffect(final AvacynGuardianAngelPreventToPlayerEffect effect) {
+    private AvacynGuardianAngelPreventToPlayerEffect(final AvacynGuardianAngelPreventToPlayerEffect effect) {
         super(effect);
     }
 
@@ -181,7 +177,7 @@ class AvacynGuardianAngelPreventToPlayerPreventionEffect extends PreventionEffec
         this.color = color;
     }
 
-    AvacynGuardianAngelPreventToPlayerPreventionEffect(AvacynGuardianAngelPreventToPlayerPreventionEffect effect) {
+    private AvacynGuardianAngelPreventToPlayerPreventionEffect(AvacynGuardianAngelPreventToPlayerPreventionEffect effect) {
         super(effect);
         this.color = effect.color;
     }
@@ -193,17 +189,11 @@ class AvacynGuardianAngelPreventToPlayerPreventionEffect extends PreventionEffec
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            if ((event.getType() == GameEvent.EventType.DAMAGE_PLAYER
-                    || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER)
-                    && event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
-                MageObject sourceObject = game.getObject(event.getSourceId());
-                if (sourceObject != null && sourceObject.getColor(game).shares(this.color)) {
-                    return true;
-                }
-            }
+        if (!super.applies(event, source, game) || !event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {
+            return false;
         }
-        return false;
+        MageObject sourceObject = game.getObject(event.getSourceId());
+        return sourceObject != null && sourceObject.getColor(game).shares(this.color);
     }
 
     @Override

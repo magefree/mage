@@ -2,24 +2,24 @@
 
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedCreatureEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX
  */
 public class DealsCombatDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl {
 
-    private boolean setTargetPointer;
+    private final boolean setTargetPointer;
 
     public DealsCombatDamageToACreatureTriggeredAbility(Effect effect, boolean optional) {
-            this(effect, optional, false);
+        this(effect, optional, false);
     }
 
     public DealsCombatDamageToACreatureTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
@@ -28,38 +28,41 @@ public class DealsCombatDamageToACreatureTriggeredAbility extends TriggeredAbili
     }
 
     public DealsCombatDamageToACreatureTriggeredAbility(final DealsCombatDamageToACreatureTriggeredAbility ability) {
-            super(ability);
-            this.setTargetPointer = ability.setTargetPointer;
+        super(ability);
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
     public DealsCombatDamageToACreatureTriggeredAbility copy() {
-            return new DealsCombatDamageToACreatureTriggeredAbility(this);
+        return new DealsCombatDamageToACreatureTriggeredAbility(this);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-      if (event.getSourceId().equals(this.sourceId)
-        && ((DamagedCreatureEvent) event).isCombatDamage()) {
-                if (setTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                            effect.setValue("damage", event.getAmount());
-                    }
-                }
-                return true;
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent == null
+                || !permanent.isCreature()
+                || !event.getSourceId().equals(this.sourceId)
+                || !((DamagedEvent) event).isCombatDamage()) {
+            return false;
         }
-        return false;
+        if (setTargetPointer) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
+                effect.setValue("damage", event.getAmount());
+            }
+        }
+        return true;
     }
 
     @Override
     public String getRule() {
-            return "Whenever {this} deals combat damage to a creature, " + super.getRule();
+        return "Whenever {this} deals combat damage to a creature, " + super.getRule();
     }
 
 }

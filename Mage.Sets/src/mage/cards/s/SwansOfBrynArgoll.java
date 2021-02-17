@@ -119,7 +119,7 @@ class SwansOfBrynArgollEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE
+        return event.getType() == EventType.DAMAGE_PERMANENT
                 && event.getTargetId().equals(source.getSourceId());
     }
 

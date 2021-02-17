@@ -88,7 +88,7 @@ class ZagrasThiefOfHeartbeatsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
@@ -100,6 +100,10 @@ class ZagrasThiefOfHeartbeatsTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent == null
                 || !permanent.isCreature()
                 || !permanent.isControlledBy(getControllerId())) {
+            return false;
+        }
+        Permanent damaged = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        if (damaged == null || !permanent.isPlaneswalker()) {
             return false;
         }
         this.getEffects().clear();
