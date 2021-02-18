@@ -49,7 +49,7 @@ public final class CyclopeanTomb extends CardImpl {
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.MIRE.createInstance()), new GenericManaCost(2), new IsStepCondition(PhaseStep.UPKEEP), "{2}, {T}: Put a mire counter on target non-Swamp land. That land is a Swamp for as long as it has a mire counter on it. Activate this ability only during your upkeep.");
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetLandPermanent(filter));
-        ability.addEffect(new BecomeSwampEffect(Duration.Custom, false, true, SubType.SWAMP));
+        ability.addEffect(new BecomeSwampEffect());
         this.addAbility(ability, new CyclopeanTombCounterWatcher());
 
         // When Cyclopean Tomb is put into a graveyard from the battlefield, at the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with Cyclopean Tomb but that a mire counter has not been removed from with Cyclopean Tomb.
@@ -68,8 +68,8 @@ public final class CyclopeanTomb extends CardImpl {
 
 class BecomeSwampEffect extends BecomesBasicLandTargetEffect {
 
-    BecomeSwampEffect(Duration duration, boolean chooseLandType, boolean loseOther, SubType... landNames) {
-        super(duration, chooseLandType, loseOther, landNames);
+    BecomeSwampEffect() {
+        super(Duration.Custom, false, true, SubType.SWAMP);
         staticText = "That land is a Swamp for as long as it has a mire counter on it";
     }
 
@@ -80,14 +80,11 @@ class BecomeSwampEffect extends BecomesBasicLandTargetEffect {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
-        if (land == null) {
-            // if permanent left battlefield the effect can be removed because it was only valid for that object
+        if (land == null || land.getCounters(game).getCount(CounterType.MIRE) < 1) {
             this.discard();
-        } else if (land.getCounters(game).getCount(CounterType.MIRE) > 0) {
-            // only if Mire counter is on the object it becomes a Swamp.
-            super.apply(layer, sublayer, source, game);
+            return false;
         }
-        return true;
+        return super.apply(layer, sublayer, source, game);
     }
 
     @Override
