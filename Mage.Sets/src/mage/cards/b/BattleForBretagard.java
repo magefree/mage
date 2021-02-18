@@ -133,9 +133,11 @@ class BattleForBretagardTarget extends TargetPermanent {
         Set<String> names = this.getTargets()
                 .stream()
                 .map(game::getPermanent)
-                .map(MageObject::getName)
                 .filter(Objects::nonNull)
+                .map(MageObject::getName)
                 .collect(Collectors.toSet());
+        names.removeIf(Objects::isNull);
+        names.removeIf(String::isEmpty);
         Permanent permanent = game.getPermanent(id);
         return permanent != null && !names.contains(permanent.getName());
     }
@@ -147,12 +149,14 @@ class BattleForBretagardTarget extends TargetPermanent {
         Set<String> names = this.getTargets()
                 .stream()
                 .map(game::getPermanent)
-                .map(MageObject::getName)
                 .filter(Objects::nonNull)
+                .map(MageObject::getName)
                 .collect(Collectors.toSet());
+        names.removeIf(Objects::isNull);
+        names.removeIf(String::isEmpty);
         possibleTargets.removeIf(uuid -> {
             Permanent permanent = game.getPermanent(uuid);
-            return permanent != null && !names.contains(permanent.getName());
+            return permanent == null || names.contains(permanent.getName());
         });
         return possibleTargets;
     }
