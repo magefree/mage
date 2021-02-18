@@ -183,7 +183,7 @@ class LivingLoreSacrificeEffect extends OneShotEffect {
                             }
                         }
                         if (exiledCard != null) {
-                            if (exiledCard.getSpellAbility().canChooseTarget(game)) {
+                            if (exiledCard.getSpellAbility().canChooseTarget(game, controller.getId())) {
                                 game.getState().setValue("PlayFromNotOwnHandZone" + exiledCard.getId(), Boolean.TRUE);
                                 controller.cast(controller.chooseAbilityForCast(exiledCard, game, true),
                                         game, true, new ApprovingObject(source, game));

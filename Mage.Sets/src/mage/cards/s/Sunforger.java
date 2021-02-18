@@ -179,7 +179,7 @@ class CardCanBeCastPredicate implements Predicate<Card> {
         SpellAbility ability = input.getSpellAbility().copy();
         ability.setControllerId(controllerId);
         input.adjustTargets(ability, game);
-        return ability.canChooseTarget(game);
+        return ability.canChooseTarget(game, controllerId);
     }
 
     @Override

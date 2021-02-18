@@ -81,7 +81,7 @@ class MaelstromArchangelCastEffect extends OneShotEffect {
                 while (controller.canRespond() && !cancel) {
                     if (controller.chooseTarget(outcome, target, source, game)) {
                         cardToCast = game.getCard(target.getFirstTarget());
-                        if (cardToCast != null && cardToCast.getSpellAbility().canChooseTarget(game)) {
+                        if (cardToCast != null && cardToCast.getSpellAbility().canChooseTarget(game, controller.getId())) {
                             cancel = true;
                         }
                     } else {

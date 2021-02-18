@@ -118,7 +118,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     @Override
     public boolean triggerAbility(TriggeredAbility source, Game game) {
 //        logger.info("trigger");
-        if (source != null && source.canChooseTarget(game)) {
+        if (source != null && source.canChooseTarget(game, playerId)) {
             Ability ability;
             List<Ability> options = getPlayableOptions(source, game);
             if (options.isEmpty()) {

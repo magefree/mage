@@ -437,8 +437,8 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public boolean canChooseTarget(Game game) {
-        return ability.canChooseTarget(game);
+    public boolean canChooseTarget(Game game, UUID playerId) {
+        return ability.canChooseTarget(game, playerId);
     }
 
     @Override

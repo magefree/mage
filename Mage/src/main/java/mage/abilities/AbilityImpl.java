@@ -901,24 +901,24 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public boolean canChooseTarget(Game game) {
+    public boolean canChooseTarget(Game game, UUID playerId) {
         if (this instanceof SpellAbility) {
             if (SpellAbilityType.SPLIT_FUSED.equals(((SpellAbility) this).getSpellAbilityType())) {
                 Card card = game.getCard(getSourceId());
                 if (card != null) {
-                    return canChooseTargetAbility(((SplitCard) card).getLeftHalfCard().getSpellAbility(), game, getControllerId())
-                            && canChooseTargetAbility(((SplitCard) card).getRightHalfCard().getSpellAbility(), game, getControllerId());
+                    return canChooseTargetAbility(((SplitCard) card).getLeftHalfCard().getSpellAbility(), game, playerId)
+                            && canChooseTargetAbility(((SplitCard) card).getRightHalfCard().getSpellAbility(), game, playerId);
                 }
                 return false;
             }
         }
-        return canChooseTargetAbility(this, game, getControllerId());
+        return canChooseTargetAbility(this, game, playerId);
     }
 
     private static boolean canChooseTargetAbility(Ability ability, Game game, UUID controllerId) {
         int found = 0;
         for (Mode mode : ability.getModes().values()) {
-            if (mode.getTargets().canChoose(ability.getSourceId(), ability.getControllerId(), game)) {
+            if (mode.getTargets().canChoose(ability.getSourceId(), controllerId, game)) {
                 found++;
                 if (ability.getModes().isEachModeMoreThanOnce()) {
                     return true;
