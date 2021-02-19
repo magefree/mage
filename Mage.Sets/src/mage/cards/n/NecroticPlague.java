@@ -21,6 +21,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
+import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
 
@@ -49,6 +50,7 @@ public final class NecroticPlague extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         ability = new DiesAttachedTriggeredAbility(new NecroticPlagueEffect(), "enchanted creature", false);
+        ability.setTargetAdjuster(NecroticPlagueAdjuster.instance);
         this.addAbility(ability);
 
     }
@@ -62,6 +64,29 @@ public final class NecroticPlague extends CardImpl {
         return new NecroticPlague(this);
     }
 
+}
+
+enum NecroticPlagueAdjuster implements TargetAdjuster {
+    instance;
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        Permanent attachedTo = null;
+        for (Effect effect : ability.getEffects()) {
+            attachedTo = (Permanent) effect.getValue("attachedTo");
+        }
+        if (attachedTo == null) {
+            return;
+        }
+        Player creatureController = game.getPlayer(attachedTo.getControllerId());
+        if (creatureController == null) {
+            return;
+        }
+        ability.setControllerId(creatureController.getId());
+        ability.getTargets().clear();
+        TargetPermanent target = new TargetOpponentsCreaturePermanent();
+        ability.getTargets().add(target);
+    }
 }
 
 class NecroticPlagueEffect extends OneShotEffect {
@@ -79,20 +104,15 @@ class NecroticPlagueEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent attachedTo = (Permanent) this.getValue("attachedTo");
-        Player sourceController = game.getPlayer(source.getControllerId());
-        Card sourceEnchantmentCard = game.getCard(source.getSourceId());
-        if (attachedTo != null && sourceController != null && sourceEnchantmentCard != null) {
+        if (attachedTo != null) {
             Player creatureController = game.getPlayer(attachedTo.getControllerId());
             if (creatureController != null) {
-                TargetOpponentsCreaturePermanent target = new TargetOpponentsCreaturePermanent();
-                if (target.canChoose(sourceEnchantmentCard.getId(), creatureController.getId(), game)) {
-                    creatureController.chooseTarget(outcome, target, source, game);
-                    Permanent creature = game.getPermanent(target.getFirstTarget());
-                    if (creature != null) {
-                        game.getState().setValue("attachTo:" + sourceEnchantmentCard.getId(), creature);
-                        sourceController.moveCards(sourceEnchantmentCard, Zone.BATTLEFIELD, source, game);
-                        return creature.addAttachment(sourceEnchantmentCard.getId(), source, game);
-                    }
+                Card sourceEnchantmentCard = game.getCard(source.getSourceId());
+                Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+                if (sourceEnchantmentCard != null && creature != null) {
+                    game.getState().setValue("attachTo:" + sourceEnchantmentCard.getId(), creature);
+                    creatureController.moveCards(sourceEnchantmentCard, Zone.BATTLEFIELD, source, game);
+                    return creature.addAttachment(sourceEnchantmentCard.getId(), source, game);
                 }
             }
         }
