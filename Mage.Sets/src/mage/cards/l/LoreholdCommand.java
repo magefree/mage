@@ -45,10 +45,12 @@ public final class LoreholdCommand extends CardImpl {
                 1, 0, Duration.EndOfTurn
         ).setText("creatures you control get +1/+0"));
         mode.addEffect(new GainAbilityControlledEffect(
-                IndestructibleAbility.getInstance(), Duration.EndOfTurn
+                IndestructibleAbility.getInstance(), Duration.EndOfTurn,
+                StaticFilters.FILTER_PERMANENT_CREATURES
         ).setText("and gain indestructible"));
         mode.addEffect(new GainAbilityControlledEffect(
-                HasteAbility.getInstance(), Duration.EndOfTurn
+                HasteAbility.getInstance(), Duration.EndOfTurn,
+                StaticFilters.FILTER_PERMANENT_CREATURES
         ).setText("and haste until end of turn"));
         this.getSpellAbility().addMode(mode);
 
