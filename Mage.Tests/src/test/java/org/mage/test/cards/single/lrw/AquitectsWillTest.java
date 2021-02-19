@@ -18,7 +18,6 @@ public class AquitectsWillTest extends CardTestPlayerBase {
     private static final String recall = "Ancestral Recall";
     private static final String hexmage = "Vampire Hexmage";
 
-    @Ignore // TODO: this test currently fails, the mana option is there but can't be selected for some reason
     @Test
     public void testProduceBlueDuringCast() {
         addCard(Zone.BATTLEFIELD, playerA, "Island");
