@@ -36,6 +36,9 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
      */
     public ConditionalInterveningIfTriggeredAbility(TriggeredAbility ability, Condition condition, String text) {
         super(ability.getZone(), null);
+        if (ability.isLeavesTheBattlefieldTrigger()) {
+            this.setLeavesTheBattlefieldTrigger(true);
+        }
         this.ability = ability;
         this.condition = condition;
         this.abilityText = text;
