@@ -26,6 +26,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         this.ratioBoosterMythic = 7.4;
         this.maxCardNumberInBooster = 275;
 
-        cards.add(new SetCardInfo("Prismari Command", 215, Rarity.RARE, mage.cards.p.PrismariCommand.class));
+        cards.add(new SetCardInfo("Prismari Command", 214, Rarity.RARE, mage.cards.p.PrismariCommand.class));
+        cards.add(new SetCardInfo("Silverquill Command", 232, Rarity.RARE, mage.cards.s.SilverquillCommand.class));
     }
 }
