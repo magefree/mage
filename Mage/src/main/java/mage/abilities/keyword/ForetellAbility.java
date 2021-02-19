@@ -48,7 +48,9 @@ public class ForetellAbility extends SpecialAction {
         // exile the card and it can't be cast the turn it was foretold
         this.addEffect(new ForetellExileEffect(card, foretellCost, foretellSplitCost));
         // look at face-down card anytime
-        addSubAbility(new SimpleStaticAbility(Zone.ALL, new ForetellLookAtCardEffect()));
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new ForetellLookAtCardEffect());
+        ability.setControllerId(controllerId);  // if not set, anyone can look at the card in exile
+        addSubAbility(ability);
         this.setRuleVisible(true);
         this.addWatcher(new ForetoldWatcher());
     }
