@@ -87,7 +87,7 @@ class WitherbloomCommandEffect extends OneShotEffect {
 
     WitherbloomCommandEffect() {
         super(Outcome.ReturnToHand);
-        staticText = "target player mills three cards, then you return a land card from your graveyard to your hand";
+        staticText = ", then you return a land card from your graveyard to your hand";
     }
 
     private WitherbloomCommandEffect(final WitherbloomCommandEffect effect) {
