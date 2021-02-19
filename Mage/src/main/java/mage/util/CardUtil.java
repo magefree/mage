@@ -586,6 +586,10 @@ public final class CardUtil {
         return getExileZoneId(getCardZoneString(SOURCE_EXILE_ZONE_TEXT, sourceId, game, previous), game);
     }
 
+    public static UUID getExileZoneId(Game game, Ability source) {
+        return getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
+    }
+
     public static UUID getExileZoneId(Game game, UUID objectId, int zoneChangeCounter) {
         return getExileZoneId(getObjectZoneString(SOURCE_EXILE_ZONE_TEXT, objectId, game, zoneChangeCounter, false), game);
     }
