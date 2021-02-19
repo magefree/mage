@@ -18,23 +18,23 @@ import java.util.UUID;
 /**
  * @author jeffwadsworth
  */
-public final class TibaltCosmicImposterEmblem extends Emblem {
+public final class TibaltCosmicImpostorEmblem extends Emblem {
     // You may play cards exiled with Tibalt, Cosmic Impostor, and you may spend mana as though it were mana of any color to cast those spells."
 
-    public TibaltCosmicImposterEmblem() {
+    public TibaltCosmicImpostorEmblem() {
         setName("Emblem Tibalt");
-        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new TibaltCosmicImposterPlayFromExileEffect()));
+        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new TibaltCosmicImpostorPlayFromExileEffect()));
     }
 }
 
-class TibaltCosmicImposterPlayFromExileEffect extends AsThoughEffectImpl {
+class TibaltCosmicImpostorPlayFromExileEffect extends AsThoughEffectImpl {
 
-    TibaltCosmicImposterPlayFromExileEffect() {
+    TibaltCosmicImpostorPlayFromExileEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may play cards exiled with Tibalt, Cosmic Impostor, and you may spend mana as though it were mana of any color to cast those spells";
     }
 
-    TibaltCosmicImposterPlayFromExileEffect(final TibaltCosmicImposterPlayFromExileEffect effect) {
+    TibaltCosmicImpostorPlayFromExileEffect(final TibaltCosmicImpostorPlayFromExileEffect effect) {
         super(effect);
     }
 
@@ -44,8 +44,8 @@ class TibaltCosmicImposterPlayFromExileEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public TibaltCosmicImposterPlayFromExileEffect copy() {
-        return new TibaltCosmicImposterPlayFromExileEffect(this);
+    public TibaltCosmicImpostorPlayFromExileEffect copy() {
+        return new TibaltCosmicImpostorPlayFromExileEffect(this);
     }
 
     @Override
@@ -54,7 +54,7 @@ class TibaltCosmicImposterPlayFromExileEffect extends AsThoughEffectImpl {
         if (tibaltEmblem == null) {
             return false;
         }
-        // the exile zone of the Tibalt, Cosmic Imposter that spawned the emblem only
+        // the exile zone of the Tibalt, Cosmic Impostor that spawned the emblem only
         UUID exileId = CardUtil.getExileZoneId(tibaltEmblem.getSourceObject().getId().toString(), game);
         if (exileId == null) {
             return false;
