@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -24,5 +25,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 7.4;
         this.maxCardNumberInBooster = 275;
+
+        cards.add(new SetCardInfo("Prismari Command", 215, Rarity.RARE, mage.cards.p.PrismariCommand.class));
     }
 }
