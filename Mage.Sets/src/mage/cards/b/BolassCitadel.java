@@ -11,16 +11,16 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
-import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 
@@ -89,69 +89,37 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return applies(objectId, null, source, game, affectedControllerId);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
-        if (!Objects.equals(source.getControllerId(), playerId)) {
+        // current card's part
+        Card cardToCheck = game.getCard(objectId);
+        if (cardToCheck == null) {
             return false;
         }
 
-        Player player = game.getPlayer(playerId);
-        if (player != null) {
-            Card topCard = player.getLibrary().getFromTop(game);
-            UUID objectIdToCast = CardUtil.getMainCardId(game, objectId); // for adventure cards
-            if (topCard == null || !topCard.getId().equals(objectIdToCast)) {
-                return false;
-            }
-
-            if (topCard instanceof SplitCard || topCard instanceof ModalDoubleFacesCard) {
-                // double faces cards
-                Card card1;
-                Card card2;
-                if (topCard instanceof SplitCard) {
-                    card1 = ((SplitCard) topCard).getLeftHalfCard();
-                    card2 = ((SplitCard) topCard).getRightHalfCard();
-                } else {
-                    card1 = ((ModalDoubleFacesCard) topCard).getLeftHalfCard();
-                    card2 = ((ModalDoubleFacesCard) topCard).getRightHalfCard();
-                }
-
-                // left
-                if (!card1.isLand()) {
-                    PayLifeCost lifeCost = new PayLifeCost(card1.getSpellAbility().getManaCosts().convertedManaCost());
-                    Costs newCosts = new CostsImpl();
-                    newCosts.add(lifeCost);
-                    newCosts.addAll(card1.getSpellAbility().getCosts());
-                    player.setCastSourceIdWithAlternateMana(card1.getId(), null, newCosts);
-                }
-
-                // right
-                if (!card2.isLand()) {
-                    PayLifeCost lifeCost = new PayLifeCost(card2.getSpellAbility().getManaCosts().convertedManaCost());
-                    Costs newCosts = new CostsImpl();
-                    newCosts.add(lifeCost);
-                    newCosts.addAll(card2.getSpellAbility().getCosts());
-                    player.setCastSourceIdWithAlternateMana(card2.getId(), null, newCosts);
-                }
-            } else {
-                // other single face cards
-                if (!topCard.isLand()) {
-                    if (affectedAbility == null) {
-                        affectedAbility = topCard.getSpellAbility();
-                    } else {
-                        objectIdToCast = affectedAbility.getSourceId();
-                    }
-                    PayLifeCost cost = new PayLifeCost(affectedAbility.getManaCosts().convertedManaCost());
-                    Costs costs = new CostsImpl();
-                    costs.add(cost);
-                    costs.addAll(affectedAbility.getCosts());
-                    player.setCastSourceIdWithAlternateMana(objectIdToCast, null, costs);
-                }
-            }
-            return true;
+        // must be you
+        if (!affectedControllerId.equals(source.getControllerId())) {
+            return false;
         }
-        return false;
+
+        // must be your card
+        Player player = game.getPlayer(cardToCheck.getOwnerId());
+        if (player == null) {
+            return false;
+        }
+
+        // must be from your library
+        Card topCard = player.getLibrary().getFromTop(game);
+        if (topCard == null || !topCard.getId().equals(cardToCheck.getMainCard().getId())) {
+            return false;
+        }
+
+        // allows to play/cast with alternative life cost
+        if (!cardToCheck.isLand()) {
+            PayLifeCost lifeCost = new PayLifeCost(cardToCheck.getSpellAbility().getManaCosts().convertedManaCost());
+            Costs newCosts = new CostsImpl();
+            newCosts.add(lifeCost);
+            newCosts.addAll(cardToCheck.getSpellAbility().getCosts());
+            player.setCastSourceIdWithAlternateMana(cardToCheck.getId(), null, newCosts);
+        }
+        return true;
     }
 }

@@ -1,9 +1,6 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -14,9 +11,10 @@ import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
 
+import java.util.UUID;
+
 
 /**
- *
  * @author North
  */
 public final class Mutilate extends CardImpl {
@@ -31,14 +29,15 @@ public final class Mutilate extends CardImpl {
     }
 
     public Mutilate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
 
         // All creatures get -1/-1 until end of turn for each Swamp you control.
         PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter, -1);
-        ContinuousEffect effect = new BoostAllEffect(count, count, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, false, null, true);
-        effect.overrideRuleText(ruleText);
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(
+                new BoostAllEffect(count, count, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, false, null, true)
+                        .setText(ruleText)
+        );
     }
 
     private Mutilate(final Mutilate card) {

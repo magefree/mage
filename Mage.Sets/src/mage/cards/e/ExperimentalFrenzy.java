@@ -30,7 +30,7 @@ public final class ExperimentalFrenzy extends CardImpl {
         // You may look at the top card of your library any time.
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
-        // You may play the top card of your library.
+        // You may play lands and cast spells from the top of your library.
         this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect()));
 
         // You can't play cards from your hand.

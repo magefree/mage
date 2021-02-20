@@ -24,7 +24,7 @@ public final class RamunapExcavator extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // You may play land cards from your graveyard.
+        // You may play lands from your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayLandsFromGraveyardControllerEffect()));
     }
 

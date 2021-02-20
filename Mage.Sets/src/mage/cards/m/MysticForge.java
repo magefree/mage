@@ -43,7 +43,7 @@ public final class MysticForge extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast artifact spells and colorless spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter, false)));
 
         // {T}, Pay 1 life: Exile the top card of your library.
         Ability ability = new SimpleActivatedAbility(new MysticForgeExileEffect(), new TapSourceCost());

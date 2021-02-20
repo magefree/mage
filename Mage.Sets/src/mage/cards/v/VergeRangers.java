@@ -11,21 +11,22 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 
 import java.util.Comparator;
 import java.util.UUID;
 
 /**
- *
  * @author htrajan
  */
 public final class VergeRangers extends CardImpl {
 
     public VergeRangers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
-        
+
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SCOUT);
         this.power = new MageInt(3);
@@ -53,9 +54,11 @@ public final class VergeRangers extends CardImpl {
 
 class VergeRangersEffect extends PlayTheTopCardEffect {
 
+    private static final FilterCard filter = new FilterLandCard("play lands");
+
     public VergeRangersEffect() {
-        super(StaticFilters.FILTER_CARD_LAND);
-        staticText = "As long as an opponent controls more lands than you, you may play lands from the top of your library.";
+        super(filter, false);
+        staticText = "As long as an opponent controls more lands than you, you may play lands from the top of your library";
     }
 
     public VergeRangersEffect(final VergeRangersEffect effect) {
@@ -68,15 +71,16 @@ class VergeRangersEffect extends PlayTheTopCardEffect {
     }
 
     @Override
-    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
-        if (super.applies(objectId, affectedAbility, source, game, playerId)) {
-            int myLandCount = game.getBattlefield().countAll(StaticFilters.FILTER_LAND, playerId, game);
-            int maxOpponentLandCount = game.getOpponents(playerId).stream()
-                    .map(opponentId -> game.getBattlefield().countAll(StaticFilters.FILTER_LAND, opponentId, game))
-                    .max(Comparator.naturalOrder())
-                    .orElse(0);
-            return maxOpponentLandCount > myLandCount;
+    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+        if (!super.applies(objectId, source, affectedControllerId, game)) {
+            return false;
         }
-        return false;
+
+        int myLandCount = game.getBattlefield().countAll(StaticFilters.FILTER_LAND, source.getControllerId(), game);
+        int maxOpponentLandCount = game.getOpponents(source.getControllerId()).stream()
+                .map(opponentId -> game.getBattlefield().countAll(StaticFilters.FILTER_LAND, opponentId, game))
+                .max(Comparator.naturalOrder())
+                .orElse(0);
+        return maxOpponentLandCount > myLandCount;
     }
 }

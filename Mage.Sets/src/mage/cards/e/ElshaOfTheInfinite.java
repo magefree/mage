@@ -45,8 +45,8 @@ public final class ElshaOfTheInfinite extends CardImpl {
         // You may look at the top card of your library any time.
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
-        // You may cast the top card of your library if it's a noncreature, nonland card, and you may cast it as though it had flash.
-        Ability ability = new SimpleStaticAbility(new PlayTheTopCardEffect(filter));
+        // You may cast noncreature spells from the top of your library. If you cast a spell this way, you may cast it as though it had flash.
+        Ability ability = new SimpleStaticAbility(new PlayTheTopCardEffect(filter, false));
         ability.addEffect(new CastAsThoughItHadFlashAllEffect(
                 Duration.WhileOnBattlefield, filter
         ).setText("If you cast a spell this way, you may cast it as though it had flash."));

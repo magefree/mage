@@ -34,8 +34,8 @@ public final class GarruksHorde extends CardImpl {
         // Play with the top card of your library revealed.
         this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
 
-        // You may cast the top card of your library if it's a creature card.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter)));
+        // You may cast creature spells from the top of your library.
+        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter, false)));
     }
 
     private GarruksHorde(final GarruksHorde card) {

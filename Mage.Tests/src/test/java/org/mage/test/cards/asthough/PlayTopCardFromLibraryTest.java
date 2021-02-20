@@ -94,6 +94,7 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Bolas's Citadel", 1);
 
         // Double your life total. Target opponent loses half their life, rounded up.
+        checkPlayableAbility("playable", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Revenge", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Revenge", playerB); // {4}{W}{B} = 6 life
 
         setStrictChooseMode(true);
@@ -113,6 +114,7 @@ public class PlayTopCardFromLibraryTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerA, "Balduvian Bears", 1);
 
         // Return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.
+        checkPlayableAbility("playable", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Revival", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Revival", "Balduvian Bears"); // {W/B}{W/B} = 2 life
 
         setStrictChooseMode(true);

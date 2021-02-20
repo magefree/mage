@@ -10,7 +10,6 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -28,7 +27,7 @@ public class PlayLandsFromGraveyardControllerEffect extends AsThoughEffectImpl {
     public PlayLandsFromGraveyardControllerEffect(FilterCard filter) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.filter = filter;
-        staticText = "You may play " + filter.getMessage() + " from your graveyard";
+        this.staticText = "You may play " + filter.getMessage() + " from your graveyard";
     }
 
     public PlayLandsFromGraveyardControllerEffect(final PlayLandsFromGraveyardControllerEffect effect) {
@@ -49,30 +48,35 @@ public class PlayLandsFromGraveyardControllerEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return applies(objectId, null, source, game, affectedControllerId);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
+        // current card's part
         Card cardToCheck = game.getCard(objectId);
-        objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         if (cardToCheck == null) {
             return false;
         }
 
+        // must be you
+        if (!affectedControllerId.equals(source.getControllerId())) {
+            return false;
+        }
+
+        // must be your card
         Player player = game.getPlayer(cardToCheck.getOwnerId());
         if (player == null) {
             return false;
         }
 
-        UUID needCardId = objectId;
+        // must be from your graveyard
+        UUID needCardId = cardToCheck.getMainCard().getId();
         if (player.getGraveyard().getCards(game).stream().noneMatch(c -> c.getId().equals(needCardId))) {
             return false;
         }
 
-        return playerId.equals(source.getControllerId())
-                && cardToCheck.isOwnedBy(source.getControllerId())
-                && (!cardToCheck.getManaCost().isEmpty() || cardToCheck.isLand())
-                && filter.match(cardToCheck, game);
+        // can't cast without mana cost
+        if (!cardToCheck.isLand() && cardToCheck.getManaCost().isEmpty()) {
+            return false;
+        }
+
+        // must be correct card
+        return filter.match(cardToCheck, source.getSourceId(), source.getControllerId(), game);
     }
 }

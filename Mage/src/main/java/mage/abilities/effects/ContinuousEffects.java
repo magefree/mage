@@ -532,7 +532,10 @@ public class ContinuousEffects implements Serializable {
             }
 
             UUID idToCheck;
-            if (objectToCheck instanceof SplitCardHalf) {
+            if (!type.needPlayCardAbility() && objectToCheck instanceof SplitCardHalf) {
+                // each split side uses own characteristics to check for playing, all other cases must use main card
+                // rules:
+                // 708.4. In every zone except the stack, the characteristics of a split card are those of its two halves combined.
                 idToCheck = ((SplitCardHalf) objectToCheck).getMainCard().getId();
             } else if (!type.needPlayCardAbility() && objectToCheck instanceof AdventureCardSpell) {
                 // adventure spell uses alternative characteristics for spell/stack, all other cases must use main card

@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class CourserOfKruphix extends CardImpl {
 
-    private static final FilterCard filter = new FilterLandCard("play land cards");
+    private static final FilterCard filter = new FilterLandCard("play lands");
 
     public CourserOfKruphix(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{G}{G}");
@@ -33,8 +33,8 @@ public final class CourserOfKruphix extends CardImpl {
         // Play with the top card of your library revealed.
         this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
 
-        // You may play the top card of your library if it's a land card.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter)));
+        // You may play lands from the top of your library.
+        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter, false)));
 
         // Whenever a land enters the battlefield under your control, you gain 1 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), StaticFilters.FILTER_LAND_A));

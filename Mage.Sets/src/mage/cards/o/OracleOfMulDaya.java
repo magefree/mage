@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class OracleOfMulDaya extends CardImpl {
 
-    private static final FilterCard filter = new FilterLandCard("play land cards");
+    private static final FilterCard filter = new FilterLandCard("play lands");
 
     public OracleOfMulDaya(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
@@ -38,8 +38,8 @@ public final class OracleOfMulDaya extends CardImpl {
         // Play with the top card of your library revealed.
         this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
 
-        // You may play the top card of your library if it's a land card.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter)));
+        // You may play lands from the top of your library.
+        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(filter, false)));
     }
 
     private OracleOfMulDaya(final OracleOfMulDaya card) {

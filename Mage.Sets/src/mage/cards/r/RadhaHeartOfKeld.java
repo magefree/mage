@@ -31,7 +31,7 @@ import java.util.UUID;
  */
 public final class RadhaHeartOfKeld extends CardImpl {
 
-    private static final FilterCard filter = new FilterLandCard("play land cards");
+    private static final FilterCard filter = new FilterLandCard("play lands");
 
     public RadhaHeartOfKeld(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}");
@@ -50,9 +50,9 @@ public final class RadhaHeartOfKeld extends CardImpl {
 
         // You may look at the top card of your library any time, and you may play lands from the top of your library.
         LookAtTopCardOfLibraryAnyTimeEffect lookEffect = new LookAtTopCardOfLibraryAnyTimeEffect();
-        lookEffect.overrideRuleText("You may look at the top card of your library any time");
-        PlayTheTopCardEffect playEffect = new PlayTheTopCardEffect(filter);
-        playEffect.overrideRuleText(", and you may play lands from the top of your library");
+        lookEffect.setText("You may look at the top card of your library any time");
+        PlayTheTopCardEffect playEffect = new PlayTheTopCardEffect(filter, false);
+        playEffect.setText(", and you may play lands from the top of your library");
 
         SimpleStaticAbility lookAndPlayAbility = new SimpleStaticAbility(lookEffect);
         lookAndPlayAbility.addEffect(playEffect);
@@ -61,7 +61,7 @@ public final class RadhaHeartOfKeld extends CardImpl {
         // 4RG: Radha gets +X/+X until end of turn, where X is the number of lands you control.
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS);
         BoostSourceEffect bse = new BoostSourceEffect(controlledLands, controlledLands, Duration.EndOfTurn, true);
-        bse.overrideRuleText("Radha gets +X/+X until end of turn, where X is the number of lands you control");
+        bse.setText("Radha gets +X/+X until end of turn, where X is the number of lands you control");
         this.addAbility(new SimpleActivatedAbility(bse, new ManaCostsImpl("{4}{R}{G}")));
     }
 
