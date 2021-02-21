@@ -11,7 +11,6 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -61,7 +60,7 @@ public final class RuneOfMight extends CardImpl {
         // As long as enchanted permanent is an Equipment, it has "Equipped creature gets +1/+1 and has trample."
         ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 1));
         ability.addEffect(new GainAbilityAttachedEffect(
-                FlyingAbility.getInstance(), AttachmentType.EQUIPMENT
+                TrampleAbility.getInstance(), AttachmentType.EQUIPMENT
         ).setText("and has trample"));
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(ability, AttachmentType.AURA),
