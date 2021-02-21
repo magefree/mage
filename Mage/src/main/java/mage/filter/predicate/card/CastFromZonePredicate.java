@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.filter.predicate.other;
+package mage.filter.predicate.card;
 
 import mage.cards.Card;
 import mage.constants.Zone;

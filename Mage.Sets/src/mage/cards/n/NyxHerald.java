@@ -14,7 +14,7 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.EnchantmentOrEnchantedPredicate;
+import mage.filter.predicate.permanent.EnchantmentOrEnchantedPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;

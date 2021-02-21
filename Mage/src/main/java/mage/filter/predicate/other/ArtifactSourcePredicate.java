@@ -1,5 +1,5 @@
 
-package mage.filter.predicate.ability;
+package mage.filter.predicate.other;
 
 import mage.filter.predicate.Predicate;
 import mage.game.Game;

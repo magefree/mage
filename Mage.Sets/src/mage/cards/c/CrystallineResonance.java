@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.util.functions.CopyApplier;

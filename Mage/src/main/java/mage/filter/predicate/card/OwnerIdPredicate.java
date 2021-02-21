@@ -1,5 +1,5 @@
 
-package mage.filter.predicate.other;
+package mage.filter.predicate.card;
 
 import java.util.UUID;
 import mage.cards.Card;

@@ -18,7 +18,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.EnchantedPredicate;
 import mage.filter.predicate.permanent.EquippedPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;

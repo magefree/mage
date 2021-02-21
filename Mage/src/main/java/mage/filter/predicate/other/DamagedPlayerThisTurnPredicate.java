@@ -1,4 +1,4 @@
-package mage.filter.predicate.permanent;
+package mage.filter.predicate.other;
 
 import mage.constants.TargetController;
 import mage.filter.predicate.ObjectPlayer;

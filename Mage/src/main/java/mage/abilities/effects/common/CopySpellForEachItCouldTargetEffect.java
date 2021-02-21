@@ -8,7 +8,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterImpl;
 import mage.filter.FilterInPlay;
-import mage.filter.predicate.mageobject.FromSetPredicate;
+import mage.filter.predicate.other.FromSetPredicate;
 import mage.game.Game;
 import mage.game.events.CopiedStackObjectEvent;
 import mage.game.stack.Spell;

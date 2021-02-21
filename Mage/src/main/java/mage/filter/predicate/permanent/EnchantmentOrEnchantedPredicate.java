@@ -1,4 +1,4 @@
-package mage.filter.predicate.mageobject;
+package mage.filter.predicate.permanent;
 
 import mage.constants.SubType;
 import mage.filter.predicate.Predicate;

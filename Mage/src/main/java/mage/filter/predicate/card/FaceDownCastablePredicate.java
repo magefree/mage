@@ -1,4 +1,4 @@
-package mage.filter.predicate.other;
+package mage.filter.predicate.card;
 
 import mage.abilities.keyword.MorphAbility;
 import mage.cards.Card;

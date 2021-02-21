@@ -1,4 +1,4 @@
-package mage.filter.predicate.mageobject;
+package mage.filter.predicate.card;
 
 import mage.cards.Card;
 import mage.filter.predicate.ObjectPlayer;

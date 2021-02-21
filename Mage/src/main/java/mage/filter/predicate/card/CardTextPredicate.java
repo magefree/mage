@@ -1,4 +1,4 @@
-package mage.filter.predicate.other;
+package mage.filter.predicate.card;
 
 import mage.cards.AdventureCard;
 import mage.cards.Card;

@@ -1,27 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package mage.filter.predicate.other;
+package mage.filter.predicate.mageobject;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Mode;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
-import mage.players.Player;
 import mage.target.Target;
 
-/**
- *
- * @author jeffwadsworth
- */
-public class TargetsPlayerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+import java.util.UUID;
 
-    public TargetsPlayerPredicate() {
+/**
+ * @author LoneFox
+ */
+public class TargetsPermanentPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+
+    private final FilterPermanent targetFilter;
+
+    public TargetsPermanentPredicate(FilterPermanent targetFilter) {
+        this.targetFilter = targetFilter;
     }
 
     @Override
@@ -31,9 +30,14 @@ public class TargetsPlayerPredicate implements ObjectSourcePlayerPredicate<Objec
             for (UUID modeId : object.getStackAbility().getModes().getSelectedModes()) {
                 Mode mode = object.getStackAbility().getModes().get(modeId);
                 for (Target target : mode.getTargets()) {
+                    if (target.isNotTarget()) {
+                        continue;
+                    }
                     for (UUID targetId : target.getTargets()) {
-                        Player player = game.getPlayer(targetId);
-                        return player != null;
+                        Permanent permanent = game.getPermanentOrLKIBattlefield(targetId);
+                        if (permanent != null && targetFilter.match(permanent, input.getSourceId(), input.getPlayerId(), game)) {
+                            return true;
+                        }
                     }
                 }
             }
@@ -43,6 +47,6 @@ public class TargetsPlayerPredicate implements ObjectSourcePlayerPredicate<Objec
 
     @Override
     public String toString() {
-        return "that targets a player";
+        return "that targets " + targetFilter.getMessage();
     }
 }

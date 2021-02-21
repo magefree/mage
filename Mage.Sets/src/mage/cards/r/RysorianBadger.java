@@ -8,7 +8,7 @@ import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.permanent.DefendingPlayerOwnsCardPredicate;
+import mage.filter.predicate.card.DefendingPlayerOwnsCardPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;

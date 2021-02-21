@@ -22,7 +22,7 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.command.emblems.AjaniSteadfastEmblem;
 import mage.target.common.TargetCreaturePermanent;
 

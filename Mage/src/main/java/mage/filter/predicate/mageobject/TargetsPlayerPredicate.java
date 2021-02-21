@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mage.filter.predicate.other;
+package mage.filter.predicate.mageobject;
 
 import java.util.UUID;
 import mage.MageObject;
@@ -19,9 +19,9 @@ import mage.target.Target;
  *
  * @author jeffwadsworth
  */
-public class TargetsOnlyOnePlayerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
+public class TargetsPlayerPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePlayer<MageObject>> {
 
-    public TargetsOnlyOnePlayerPredicate() {
+    public TargetsPlayerPredicate() {
     }
 
     @Override
@@ -31,8 +31,8 @@ public class TargetsOnlyOnePlayerPredicate implements ObjectSourcePlayerPredicat
             for (UUID modeId : object.getStackAbility().getModes().getSelectedModes()) {
                 Mode mode = object.getStackAbility().getModes().get(modeId);
                 for (Target target : mode.getTargets()) {
-                    if (target.getTargets().size() == 1) { // only one player targeted
-                        Player player = game.getPlayer(target.getFirstTarget());
+                    for (UUID targetId : target.getTargets()) {
+                        Player player = game.getPlayer(targetId);
                         return player != null;
                     }
                 }
@@ -43,6 +43,6 @@ public class TargetsOnlyOnePlayerPredicate implements ObjectSourcePlayerPredicat
 
     @Override
     public String toString() {
-        return "that targets only one player";
+        return "that targets a player";
     }
 }

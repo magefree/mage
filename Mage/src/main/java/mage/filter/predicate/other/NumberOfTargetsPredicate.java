@@ -1,4 +1,4 @@
-package mage.filter.predicate.mageobject;
+package mage.filter.predicate.other;
 
 import java.util.UUID;
 import mage.abilities.Mode;

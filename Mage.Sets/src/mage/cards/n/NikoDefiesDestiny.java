@@ -24,7 +24,7 @@ import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.filter.predicate.other.OwnerIdPredicate;
+import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;

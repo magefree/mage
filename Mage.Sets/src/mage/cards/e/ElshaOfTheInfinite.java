@@ -16,7 +16,7 @@ import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardOnTopOfLibraryPredicate;
+import mage.filter.predicate.card.CardOnTopOfLibraryPredicate;
 
 import java.util.UUID;
 

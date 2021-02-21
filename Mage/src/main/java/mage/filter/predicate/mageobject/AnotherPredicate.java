@@ -1,5 +1,5 @@
 
-package mage.filter.predicate.permanent;
+package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
 import mage.filter.predicate.ObjectSourcePlayer;

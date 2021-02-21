@@ -15,7 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.mageobject.AttachmentAttachedToCardTypePredicate;
+import mage.filter.predicate.permanent.AttachmentAttachedToCardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
