@@ -1,8 +1,5 @@
-
-
 package mage.abilities.effects.common.continuous;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.keyword.MorphAbility;
@@ -14,8 +11,9 @@ import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.game.Game;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 
@@ -69,10 +67,10 @@ public class CastAsThoughItHadFlashAllEffect extends AsThoughEffectImpl {
                         Card cardCopy = card.copy();
                         cardCopy.getCardType().clear();
                         cardCopy.addCardType(CardType.CREATURE);
-                        return filter.match(cardCopy, game);
+                        return filter.match(cardCopy, source.getSourceId(), affectedControllerId, game);
                     }
                 }
-                return filter.match(card, game);
+                return filter.match(card, source.getSourceId(), affectedControllerId, game);
             }
         }
         return false;

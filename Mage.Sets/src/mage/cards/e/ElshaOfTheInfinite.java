@@ -16,6 +16,7 @@ import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardOnTopOfLibraryPredicate;
 
 import java.util.UUID;
 
@@ -28,6 +29,7 @@ public final class ElshaOfTheInfinite extends CardImpl {
 
     static {
         filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        filter.add(CardOnTopOfLibraryPredicate.instance);
     }
 
     public ElshaOfTheInfinite(UUID ownerId, CardSetInfo setInfo) {
@@ -62,3 +64,4 @@ public final class ElshaOfTheInfinite extends CardImpl {
         return new ElshaOfTheInfinite(this);
     }
 }
+

@@ -98,6 +98,6 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
         }
 
         // must be correct card
-        return filter.match(cardToCheck, source.getSourceId(), source.getControllerId(), game);
+        return filter.match(cardToCheck, source.getSourceId(), affectedControllerId, game);
     }
 }
