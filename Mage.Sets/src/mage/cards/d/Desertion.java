@@ -1,7 +1,5 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,8 +16,10 @@ import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.TargetSpell;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author Quercitron
  */
 public final class Desertion extends CardImpl {
@@ -30,7 +30,7 @@ public final class Desertion extends CardImpl {
         // Counter target spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
-        
+
         // If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new DesertionReplacementEffect()));
     }
@@ -80,13 +80,13 @@ class DesertionReplacementEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {        
-        if (!event.getSourceId().equals(source.getSourceId())               
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (!Objects.equals(event.getSourceId(), source.getSourceId())
                 || !(((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD)) {
             return false;
         }
-        MageObject mageObject =  game.getObject(event.getTargetId());
-        return mageObject != null 
+        MageObject mageObject = game.getObject(event.getTargetId());
+        return mageObject != null
                 && (mageObject.isArtifact() || mageObject.isCreature());
     }
 }

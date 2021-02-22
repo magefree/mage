@@ -403,8 +403,8 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public void counter(Ability source, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
-        // source can be null for fizzled spells, found only one place with that usage -- Rebound Ability:
-        // event.getSourceId().equals(source.getSourceId())
+        // source can be null for fizzled spells, don't use that code in your ZONE_CHANGE watchers/triggers:
+        // event.getSourceId().equals
         // TODO: so later it must be replaced to another technics with non null source
         UUID counteringSourceId = (source == null ? null : source.getSourceId());
         this.countered = true;
