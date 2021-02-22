@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.util.functions.CopyApplier;
 
@@ -23,6 +23,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class MoritteOfTheFrost extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent("a permanent you control");
 
     public MoritteOfTheFrost(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{U}{U}");
@@ -37,11 +39,7 @@ public final class MoritteOfTheFrost extends CardImpl {
         this.addAbility(new ChangelingAbility());
 
         // You may have Moritte of the Frost enter the battlefield as a copy of a permanent you control, except it's legendary and snow in addition to its other types and, if it's a creature, it enters with two additional +1/+1 counters on it and has changeling.
-        this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(
-                StaticFilters.FILTER_CONTROLLED_PERMANENT, new MoritteOfTheFrostCopyApplier()
-        ).setText("as a copy of a permanent you control, except it's legendary and snow in addition to its other types " +
-                "and, if it's a creature, it enters with two additional +1/+1 counters on it and has changeling."
-        ), true));
+        this.addAbility(new EntersBattlefieldAbility(new CopyPermanentEffect(filter, new MoritteOfTheFrostCopyApplier()), true));
     }
 
     private MoritteOfTheFrost(final MoritteOfTheFrost card) {
@@ -55,6 +53,12 @@ public final class MoritteOfTheFrost extends CardImpl {
 }
 
 class MoritteOfTheFrostCopyApplier extends CopyApplier {
+
+    @Override
+    public String getText() {
+        return ", except it's legendary and snow in addition to its other types and, if it's a creature, "
+                + "it enters with two additional +1/+1 counters on it and has changeling";
+    }
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
