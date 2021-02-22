@@ -4146,7 +4146,8 @@ public class TestPlayer implements Player {
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         assertAliasSupportInChoices(false);
 
-        Map<UUID, ActivatedAbility> useable = PlayerImpl.getSpellAbilities(this.getId(), card, game.getState().getZone(card.getId()), game);
+        MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
+        Map<UUID, ActivatedAbility> useable = PlayerImpl.getSpellAbilities(this.getId(), object, game.getState().getZone(object.getId()), game);
         String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
         if (useable.size() == 1) {
             return (SpellAbility) useable.values().iterator().next();

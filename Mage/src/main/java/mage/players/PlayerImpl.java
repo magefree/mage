@@ -1521,7 +1521,14 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     public static LinkedHashMap<UUID, ActivatedAbility> getSpellAbilities(UUID playerId, MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
-        for (Ability ability : object.getAbilities()) {
+        Abilities<Ability> allAbilities;
+        if (object instanceof Card) {
+            allAbilities = ((Card) object).getAbilities(game);
+        } else {
+            allAbilities = object.getAbilities();
+        }
+
+        for (Ability ability : allAbilities) {
             if (ability instanceof SpellAbility) {
                 switch (((SpellAbility) ability).getSpellAbilityType()) {
                     case BASE_ALTERNATE:
