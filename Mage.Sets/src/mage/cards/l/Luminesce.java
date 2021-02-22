@@ -56,8 +56,7 @@ class LuminescePreventionEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
             if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER
-                    || event.getType() == GameEvent.EventType.DAMAGE_CREATURE
-                    || event.getType() == GameEvent.EventType.DAMAGE_PLANESWALKER) {
+                    || event.getType() == GameEvent.EventType.DAMAGE_PERMANENT) {
                 MageObject sourceObject = game.getObject(event.getSourceId());
                 if (sourceObject != null
                         && (sourceObject.getColor(game).shares(ObjectColor.BLACK) || sourceObject.getColor(game).shares(ObjectColor.RED))) {

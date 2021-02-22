@@ -91,8 +91,7 @@ class UmezawasJitteAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         switch(event.getType()) {
-            case DAMAGED_CREATURE:
-            case DAMAGED_PLANESWALKER:
+            case DAMAGED_PERMANENT:
             case DAMAGED_PLAYER:
             case COMBAT_DAMAGE_STEP_PRE:
                 return true;

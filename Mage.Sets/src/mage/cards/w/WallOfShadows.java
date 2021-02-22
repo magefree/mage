@@ -23,7 +23,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.permanent.BlockedByIdPredicate;
 import mage.game.Game;
-import mage.game.events.DamageCreatureEvent;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
@@ -87,11 +87,11 @@ class WallOfShadowsEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!super.applies(event, source, game)
-                || !(event instanceof DamageCreatureEvent)
+                || !(event instanceof DamageEvent)
                 || event.getAmount() <= 0) {
             return false;
         }
-        DamageCreatureEvent damageEvent = (DamageCreatureEvent) event;
+        DamageEvent damageEvent = (DamageEvent) event;
         if (!event.getTargetId().equals(source.getSourceId())) {
             return false;
         }

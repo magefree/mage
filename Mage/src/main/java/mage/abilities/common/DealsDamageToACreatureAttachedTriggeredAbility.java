@@ -6,7 +6,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedCreatureEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -40,12 +40,12 @@ public class DealsDamageToACreatureAttachedTriggeredAbility extends TriggeredAbi
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!combatOnly || ((DamagedCreatureEvent) event).isCombatDamage()) {
+        if (!combatOnly || ((DamagedEvent) event).isCombatDamage()) {
             Permanent attachment = game.getPermanent(this.getSourceId());
             if (attachment != null
                     && attachment.isAttachedTo(event.getSourceId())) {

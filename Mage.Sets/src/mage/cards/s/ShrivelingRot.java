@@ -1,12 +1,11 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.EntwineAbility;
@@ -18,24 +17,25 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-import mage.game.events.ZoneChangeEvent;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class ShrivelingRot extends CardImpl {
 
     public ShrivelingRot(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
 
         // Choose one -
         // Until end of turn, whenever a creature is dealt damage, destroy it.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new ShrivelingRotDestroyTriggeredAbility()));
-        
+
         // Until end of turn, whenever a creature dies, that creature's controller loses life equal to its toughness.
         Mode mode = new Mode();
         mode.addEffect(new CreateDelayedTriggeredAbilityEffect(new ShrivelingRotLoseLifeTriggeredAbility()));
@@ -72,14 +72,16 @@ class ShrivelingRotDestroyTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        for (Effect effect : this.getEffects()) {
-            effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent == null || !permanent.isCreature()) {
+            return false;
         }
+        getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         return true;
     }
 

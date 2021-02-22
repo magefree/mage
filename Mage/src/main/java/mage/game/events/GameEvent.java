@@ -359,8 +359,9 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         OPTION_USED,
-        DAMAGE_CREATURE, DAMAGED_CREATURE, DAMAGED_CREATURE_BATCH,
-        DAMAGE_PLANESWALKER, DAMAGED_PLANESWALKER, DAMAGED_PLANESWALKER_BATCH,
+        DAMAGE_PERMANENT,
+        DAMAGED_PERMANENT,
+        DAMAGED_PERMANENT_BATCH,
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
          targetId    id of the permanent to destroy
@@ -492,8 +493,7 @@ public class GameEvent implements Serializable {
         return new GameEvent(customEventType, targetId, source, playerId);
     }
 
-    private GameEvent(EventType type, UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount, boolean flag)
-    {
+    private GameEvent(EventType type, UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount, boolean flag) {
         this(type, customEventType, targetId, source, playerId, amount, flag, null);
     }
 

@@ -75,22 +75,15 @@ class KazarovSengirPurebloodTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event == null) {
-            return false;
-        }
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (permanent == null) {
-            return false;
-        }
-        if (permanent.isControlledBy(this.getControllerId())) {
-            return false;
-        }
-        return true;
+        return permanent!=null
+                && permanent.isCreature()
+                && game.getOpponents(permanent.getControllerId()).contains(this.getControllerId());
     }
 
     @Override

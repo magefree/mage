@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedCreatureEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.FoodToken;
@@ -65,12 +65,12 @@ class GiantsSkewerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!((DamagedCreatureEvent) event).isCombatDamage()) {
+        if (!((DamagedEvent) event).isCombatDamage()) {
             return false;
         }
         Permanent permanent = game.getPermanent(event.getSourceId());

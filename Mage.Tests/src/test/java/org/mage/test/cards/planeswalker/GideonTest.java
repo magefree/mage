@@ -7,7 +7,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -142,23 +141,44 @@ public class GideonTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Kytheon, Hero of Akros", 1);
     }
 
-    @Ignore
     @Test
-    public void testGideonJura() {
-        // TODO: this test fails because of how damage is currently handled
+    public void testGideonJuraNoPrevention() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Zone.BATTLEFIELD, playerA, "Gideon Jura");
         addCard(Zone.BATTLEFIELD, playerA, "Leyline of Punishment");
         addCard(Zone.HAND, playerA, "Lightning Bolt");
 
+        setStrictChooseMode(true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "0:");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Gideon Jura");
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+        assertAllCommandsUsed();
 
         assertType("Gideon Jura", CardType.CREATURE, true);
         assertDamageReceived(playerA, "Gideon Jura", 3);
         assertCounterCount(playerA, "Gideon Jura", CounterType.LOYALTY, 3);
+    }
+
+    @Test
+    public void testGideonJuraNoPreventionCombat() {
+        addCard(Zone.BATTLEFIELD, playerA, "Gideon Jura");
+        addCard(Zone.BATTLEFIELD, playerA, "Leyline of Punishment");
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+
+        setStrictChooseMode(true);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "0:");
+        attack(1, playerA, "Gideon Jura", playerB);
+        block(1, playerB, "Grizzly Bears", "Gideon Jura");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertType("Gideon Jura", CardType.CREATURE, true);
+        assertDamageReceived(playerA, "Gideon Jura", 2);
+        assertCounterCount(playerA, "Gideon Jura", CounterType.LOYALTY, 4);
+        assertGraveyardCount(playerB, "Grizzly Bears", 1);
     }
 }

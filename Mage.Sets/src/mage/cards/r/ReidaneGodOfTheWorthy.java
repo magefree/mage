@@ -175,8 +175,7 @@ class ValkmiraProtectorsShieldPreventionEffect extends PreventionEffectImpl {
                 return isOpponent
                         && source.isControlledBy(event.getTargetId())
                         && super.applies(event, source, game);
-            case DAMAGE_CREATURE:
-            case DAMAGE_PLANESWALKER:
+            case DAMAGE_PERMANENT:
                 isOpponent = game.getOpponents(game.getControllerId(event.getSourceId())).contains(source.getControllerId());
                 Permanent permanent = game.getPermanent(event.getTargetId());
                 return isOpponent

@@ -72,7 +72,7 @@ class TempleAltisaurPreventEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGE_CREATURE) {
+        if (event.getType() == GameEvent.EventType.DAMAGE_PERMANENT) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null
                     && !permanent.getId().equals(source.getSourceId())

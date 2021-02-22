@@ -93,15 +93,13 @@ class JadeMonolithRedirectionEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE;
+        return event.getType() == EventType.DAMAGE_PERMANENT;
     }
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getSourceId().equals(targetSource.getFirstTarget()) && event.getTargetId().equals(source.getFirstTarget())) {
-            return true;
-        }
-        return false;
+        return event.getSourceId().equals(targetSource.getFirstTarget())
+                && event.getTargetId().equals(source.getFirstTarget());
     }
     
 }

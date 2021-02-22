@@ -2075,75 +2075,76 @@ public abstract class PlayerImpl implements Player, Serializable {
             return 0;
         }
 
-        if (damage > 0) {
-            if (canDamage(game.getObject(attackerId), game)) {
-                GameEvent event = new DamagePlayerEvent(playerId,
-                        attackerId, playerId, damage, preventable, combatDamage);
-                event.setAppliedEffects(appliedEffects);
-                if (!game.replaceEvent(event)) {
-                    int actualDamage = event.getAmount();
-                    if (actualDamage > 0) {
-                        UUID sourceControllerId = null;
-                        Abilities sourceAbilities = null;
-                        MageObject attacker = game.getPermanentOrLKIBattlefield(attackerId);
-                        if (attacker == null) {
-                            StackObject stackObject = game.getStack().getStackObject(attackerId);
-                            if (stackObject != null) {
-                                attacker = stackObject.getStackAbility().getSourceObject(game);
-                            } else {
-                                attacker = game.getObject(attackerId);
-                            }
-                            if (attacker instanceof Spell) {
-                                sourceAbilities = ((Spell) attacker).getAbilities(game);
-                                sourceControllerId = ((Spell) attacker).getControllerId();
-                            } else if (attacker instanceof Card) {
-                                sourceAbilities = ((Card) attacker).getAbilities(game);
-                                sourceControllerId = ((Card) attacker).getOwnerId();
-                            } else if (attacker instanceof CommandObject) {
-                                sourceControllerId = ((CommandObject) attacker).getControllerId();
-                                sourceAbilities = attacker.getAbilities();
-                            }
-                        } else {
-                            sourceAbilities = ((Permanent) attacker).getAbilities(game);
-                            sourceControllerId = ((Permanent) attacker).getControllerId();
-                        }
-                        if (sourceAbilities != null && sourceAbilities.containsKey(InfectAbility.getInstance().getId())) {
-                            addCounters(CounterType.POISON.createInstance(actualDamage), sourceControllerId, source, game);
-                        } else {
-                            GameEvent damageToLifeLossEvent = new GameEvent(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS,
-                                    playerId, source, playerId, actualDamage, combatDamage);
-                            if (!game.replaceEvent(damageToLifeLossEvent)) {
-                                this.loseLife(damageToLifeLossEvent.getAmount(), game, source, combatDamage, attackerId);
-                            }
-                        }
-                        if (sourceAbilities != null && sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
-                            if (combatDamage) {
-                                game.getPermanent(attackerId).markLifelink(actualDamage);
-                            } else {
-                                Player player = game.getPlayer(sourceControllerId);
-                                player.gainLife(actualDamage, game, source);
-                            }
-                        }
-                        // Unstable ability - Earl of Squirrel
-                        if (sourceAbilities != null && sourceAbilities.containsKey(SquirrellinkAbility.getInstance().getId())) {
-                            Player player = game.getPlayer(sourceControllerId);
-                            new SquirrelToken().putOntoBattlefield(actualDamage, game, source, player.getId());
-                        }
-                        DamagedEvent damagedEvent = new DamagedPlayerEvent(playerId, attackerId, playerId, actualDamage, combatDamage);
-                        game.fireEvent(damagedEvent);
-                        game.getState().addSimultaneousDamage(damagedEvent, game);
-                        return actualDamage;
-                    }
-                }
+        if (damage < 1) {
+            return 0;
+        }
+        if (!canDamage(game.getObject(attackerId), game)) {
+            MageObject sourceObject = game.getObject(attackerId);
+            game.informPlayers(damage + " damage "
+                    + (sourceObject == null ? "" : "from " + sourceObject.getLogName())
+                    + " to " + getLogName()
+                    + (damage > 1 ? " were" : "was") + " prevented because of protection");
+            return 0;
+        }
+        DamageEvent event = new DamagePlayerEvent(playerId, attackerId, playerId, damage, preventable, combatDamage);
+        event.setAppliedEffects(appliedEffects);
+        if (game.replaceEvent(event)) {
+            return 0;
+        }
+        int actualDamage = event.getAmount();
+        if (actualDamage < 1) {
+            return 0;
+        }
+        UUID sourceControllerId = null;
+        Abilities sourceAbilities = null;
+        MageObject attacker = game.getPermanentOrLKIBattlefield(attackerId);
+        if (attacker == null) {
+            StackObject stackObject = game.getStack().getStackObject(attackerId);
+            if (stackObject != null) {
+                attacker = stackObject.getStackAbility().getSourceObject(game);
             } else {
-                MageObject sourceObject = game.getObject(attackerId);
-                game.informPlayers(damage + " damage "
-                        + (sourceObject == null ? "" : "from " + sourceObject.getLogName())
-                        + " to " + getLogName()
-                        + (damage > 1 ? " were" : "was") + " prevented because of protection");
+                attacker = game.getObject(attackerId);
+            }
+            if (attacker instanceof Spell) {
+                sourceAbilities = ((Spell) attacker).getAbilities(game);
+                sourceControllerId = ((Spell) attacker).getControllerId();
+            } else if (attacker instanceof Card) {
+                sourceAbilities = ((Card) attacker).getAbilities(game);
+                sourceControllerId = ((Card) attacker).getOwnerId();
+            } else if (attacker instanceof CommandObject) {
+                sourceControllerId = ((CommandObject) attacker).getControllerId();
+                sourceAbilities = attacker.getAbilities();
+            }
+        } else {
+            sourceAbilities = ((Permanent) attacker).getAbilities(game);
+            sourceControllerId = ((Permanent) attacker).getControllerId();
+        }
+        if (event.isAsThoughInfect() || (sourceAbilities != null && sourceAbilities.containsKey(InfectAbility.getInstance().getId()))) {
+            addCounters(CounterType.POISON.createInstance(actualDamage), sourceControllerId, source, game);
+        } else {
+            GameEvent damageToLifeLossEvent = new GameEvent(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS,
+                    playerId, source, playerId, actualDamage, combatDamage);
+            if (!game.replaceEvent(damageToLifeLossEvent)) {
+                this.loseLife(damageToLifeLossEvent.getAmount(), game, source, combatDamage, attackerId);
             }
         }
-        return 0;
+        if (sourceAbilities != null && sourceAbilities.containsKey(LifelinkAbility.getInstance().getId())) {
+            if (combatDamage) {
+                game.getPermanent(attackerId).markLifelink(actualDamage);
+            } else {
+                Player player = game.getPlayer(sourceControllerId);
+                player.gainLife(actualDamage, game, source);
+            }
+        }
+        // Unstable ability - Earl of Squirrel
+        if (sourceAbilities != null && sourceAbilities.containsKey(SquirrellinkAbility.getInstance().getId())) {
+            Player player = game.getPlayer(sourceControllerId);
+            new SquirrelToken().putOntoBattlefield(actualDamage, game, source, player.getId());
+        }
+        DamagedEvent damagedEvent = new DamagedPlayerEvent(playerId, attackerId, playerId, actualDamage, combatDamage);
+        game.fireEvent(damagedEvent);
+        game.getState().addSimultaneousDamage(damagedEvent, game);
+        return actualDamage;
     }
 
     @Override

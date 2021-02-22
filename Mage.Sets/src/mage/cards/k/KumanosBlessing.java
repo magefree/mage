@@ -13,10 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
@@ -110,12 +108,14 @@ class DamagedByEnchantedWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_PERMANENT) {
             Permanent enchantment = game.getPermanent(this.getSourceId());
             if (enchantment != null && enchantment.isAttachedTo(event.getSourceId())) {
-                MageObjectReference mor = new MageObjectReference(event.getTargetId(), game);
-                damagedCreatures.add(mor);
-
+                Permanent permanent = game.getPermanent(event.getTargetId());
+                if (permanent != null && permanent.isCreature()) {
+                    MageObjectReference mor = new MageObjectReference(event.getTargetId(), game);
+                    damagedCreatures.add(mor);
+                }
             }
         }
     }
