@@ -38,7 +38,7 @@ public final class HaldanAvidArcanist extends CardImpl {
         // exiled them, and you may spend mana as though it were mana of any color to cast those spells.
         Ability ability = new SimpleStaticAbility(new HaldanAvidArcanistCastFromExileEffect());
         ability.addEffect(new HaldanAvidArcanistSpendAnyManaEffect());
-        this.addAbility(ability);
+        this.addAbility(ability, PakoArcaneRetriever.createWatcher());
     }
 
     private HaldanAvidArcanist(final HaldanAvidArcanist card) {
@@ -48,7 +48,7 @@ public final class HaldanAvidArcanist extends CardImpl {
     @Override
     public HaldanAvidArcanist copy() {
         return new HaldanAvidArcanist(this);
-	}
+    }
 }
 
 class HaldanAvidArcanistCastFromExileEffect extends AsThoughEffectImpl {
@@ -74,13 +74,13 @@ class HaldanAvidArcanistCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-		Card card = game.getCard(sourceId);
-		if (card == null || !source.isControlledBy(affectedControllerId)
-				|| game.getState().getZone(sourceId) != Zone.EXILED
-				|| !PakoArcaneRetriever.checkWatcher(affectedControllerId, card, game)) {
-			return false;
-		}
-		return !card.isCreature() && card.getCounters(game).containsKey(CounterType.FETCH);
+        Card card = game.getCard(sourceId);
+        if (card == null || !source.isControlledBy(affectedControllerId)
+                || game.getState().getZone(sourceId) != Zone.EXILED
+                || !PakoArcaneRetriever.checkWatcher(affectedControllerId, card, game)) {
+            return false;
+        }
+        return !card.isCreature() && card.getCounters(game).containsKey(CounterType.FETCH);
     }
 }
 
@@ -107,17 +107,17 @@ class HaldanAvidArcanistSpendAnyManaEffect extends AsThoughEffectImpl implements
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-		// The card may be on the stack, in which case it will not have a fetch counter
-		// on it. In this case, we will have to rely on the watcher to tell us whether
-		// or not it is a valid card to apply the effect to.
-		Zone zone;
-		Card card = game.getCard(objectId);
-		if (card == null || !source.isControlledBy(affectedControllerId)
-				|| (zone = game.getState().getZone(objectId)) != Zone.EXILED && zone != Zone.STACK
-				|| !PakoArcaneRetriever.checkWatcher(affectedControllerId, card, game)) {
-			return false;
-		}
-		return !card.isCreature() && (card.getCounters(game).containsKey(CounterType.FETCH) || zone == Zone.STACK);
+        // The card may be on the stack, in which case it will not have a fetch counter
+        // on it. In this case, we will have to rely on the watcher to tell us whether
+        // or not it is a valid card to apply the effect to.
+        Zone zone;
+        Card card = game.getCard(objectId);
+        if (card == null || !source.isControlledBy(affectedControllerId)
+                || (zone = game.getState().getZone(objectId)) != Zone.EXILED && zone != Zone.STACK
+                || !PakoArcaneRetriever.checkWatcher(affectedControllerId, card, game)) {
+            return false;
+        }
+        return !card.isCreature() && (card.getCounters(game).containsKey(CounterType.FETCH) || zone == Zone.STACK);
     }
 
     @Override

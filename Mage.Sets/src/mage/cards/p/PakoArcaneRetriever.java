@@ -58,6 +58,10 @@ public final class PakoArcaneRetriever extends CardImpl {
         PakoArcaneRetrieverWatcher watcher = game.getState().getWatcher(PakoArcaneRetrieverWatcher.class);
         return watcher != null && watcher.checkCard(playerId, card, game);
     }
+
+    public static Watcher createWatcher() {
+        return new PakoArcaneRetrieverWatcher();
+    }
 }
 
 class PakoArcaneRetrieverEffect extends OneShotEffect {
@@ -124,23 +128,23 @@ class PakoArcaneRetrieverWatcher extends Watcher {
     }
 
     void addCard(UUID playerId, Card card, Game game) {
-		playerMap.computeIfAbsent(playerId, u -> new HashSet<MageObjectReference>())
-				.add(new MageObjectReference(card, game));
+        playerMap.computeIfAbsent(playerId, u -> new HashSet<MageObjectReference>())
+                .add(new MageObjectReference(card, game));
     }
 
     boolean checkCard(UUID playerId, Card card, Game game) {
-		if (card == null)
-			return false;
+        if (card == null)
+            return false;
 
-		// If the card has been moved onto the stack (e.g. by attempting to cast), the
-		// number of zone change counters will be 1 more than when the pako effect
-		// exiled it and the watcher took a reference.
-		// https://github.com/magefree/mage/issues/7585
-		final int zoneChangeDifference = game.getState().getZone(card.getId()) == Zone.STACK ? 1 : 0;
-		return playerMap.computeIfAbsent(playerId, u -> new HashSet<MageObjectReference>())
+        // If the card has been moved onto the stack (e.g. by attempting to cast), the
+        // number of zone change counters will be 1 more than when the pako effect
+        // exiled it and the watcher took a reference.
+        // https://github.com/magefree/mage/issues/7585
+        final int zoneChangeDifference = game.getState().getZone(card.getId()) == Zone.STACK ? 1 : 0;
+        return playerMap.computeIfAbsent(playerId, u -> new HashSet<MageObjectReference>())
                 .stream()
-				.anyMatch(ref -> ref.getSourceId().equals(card.getId())
-						&& ref.getZoneChangeCounter() == (game.getState().getZoneChangeCounter(card.getId())
-								- zoneChangeDifference));
+                .anyMatch(ref -> ref.getSourceId().equals(card.getId())
+                        && ref.getZoneChangeCounter() == (game.getState().getZoneChangeCounter(card.getId())
+                        - zoneChangeDifference));
     }
 }
