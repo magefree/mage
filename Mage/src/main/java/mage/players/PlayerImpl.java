@@ -4180,7 +4180,9 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean moveCardsToExile(Card card, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName) {
         Set<Card> cards = new HashSet<>();
-        cards.add(card);
+        if (card != null) {
+            cards.add(card);
+        }
         return moveCardsToExile(cards, source, game, withName, exileId, exileZoneName);
     }
 
