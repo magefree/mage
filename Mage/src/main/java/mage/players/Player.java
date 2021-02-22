@@ -365,6 +365,20 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean cast(SpellAbility ability, Game game, boolean noMana, ApprovingObject approvingObject);
 
+    /**
+     * Force player to choose spell ability to cast. Use it in effects while casting cards.
+     *
+     * Commands order in all use cases:
+     * - PlayFromNotOwnHandZone - true
+     * - chooseAbilityForCast
+     * - cast
+     * - PlayFromNotOwnHandZone - false
+     *
+     * @param card
+     * @param game
+     * @param noMana
+     * @return
+     */
     SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana);
 
     boolean putInHand(Card card, Game game);

@@ -2782,6 +2782,12 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
+    public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
+        Map<UUID, ActivatedAbility> useable = PlayerImpl.getSpellAbilities(this.getId(), card, game.getState().getZone(card.getId()), game);
+        return (SpellAbility) useable.values().stream().findFirst().orElse(null);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

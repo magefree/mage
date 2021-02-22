@@ -1,6 +1,7 @@
 package mage.abilities.keyword;
 
 import mage.ApprovingObject;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -13,6 +14,10 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -91,6 +96,8 @@ class CascadeEffect extends OneShotEffect {
         if (sourceCard == null) {
             return false;
         }
+
+        // exile cards from the top of your library until you exile a nonland card whose converted mana cost is less than this spell's converted mana cost
         Cards cardsToExile = new CardsImpl();
         int sourceCost = sourceCard.getConvertedManaCost();
         Card cardToCast = null;
@@ -101,58 +108,63 @@ class CascadeEffect extends OneShotEffect {
                 break;
             }
         }
-
         controller.moveCards(cardsToExile, Zone.EXILED, source, game);
         controller.getLibrary().reset(); // set back empty draw state if that caused an empty draw
 
+        // additional replacement effect: As you cascade, you may put a land card from among the exiled cards onto the battlefield tapped
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.CASCADE_LAND, source.getSourceId(), source, source.getControllerId(), 0);
         game.replaceEvent(event);
         if (event.getAmount() > 0) {
-            TargetCardInExile target = new TargetCardInExile(
-                    0, event.getAmount(), StaticFilters.FILTER_CARD_LAND, null, true
-            );
+            TargetCardInExile target = new TargetCardInExile(0, event.getAmount(), StaticFilters.FILTER_CARD_LAND, null, true);
+            target.withChooseHint("land to put onto battlefield tapped");
             controller.choose(Outcome.PutCardInPlay, cardsToExile, target, game);
             controller.moveCards(
                     new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD,
                     source, game, true, false, false, null
             );
         }
-        if (cardToCast != null && controller.chooseUse(
-                outcome, "Use cascade effect on " + cardToCast.getLogName() + '?', source, game
-        )) {
-            // Check to see if player is allowed to cast the back half
-            // Front half is already checked by exile effect
-            if (cardToCast instanceof ModalDoubleFacesCard) {
-                ModalDoubleFacesCardHalf leftHalf = ((ModalDoubleFacesCard) cardToCast).getLeftHalfCard();
-                ModalDoubleFacesCardHalf rightHalf = ((ModalDoubleFacesCard) cardToCast).getRightHalfCard();
-                if (rightHalf.getConvertedManaCost() < sourceCost) {
-                    castForFree(cardToCast, source, game, controller);
-                } else {
-                    castForFree(leftHalf, source, game, controller);
-                }
+
+        // You may cast that spell without paying its mana cost if its converted mana cost is less than this spell's converted mana cost.
+        List<Card> partsToCast = new ArrayList<>();
+        if (cardToCast != null) {
+            if (cardToCast instanceof SplitCard) {
+                partsToCast.add(((SplitCard) cardToCast).getLeftHalfCard());
+                partsToCast.add(((SplitCard) cardToCast).getRightHalfCard());
+                partsToCast.add(cardToCast);
             } else if (cardToCast instanceof AdventureCard) {
-                Card adventureSpell = ((AdventureCard) cardToCast).getSpellCard();
-                if (adventureSpell.getConvertedManaCost() < sourceCost) {
-                    castForFree(cardToCast, source, game, controller);
-                } else {
-                    game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), Boolean.TRUE);
-                    controller.cast(cardToCast.getSpellAbility(), game, true, new ApprovingObject(source, game));
-                    game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), null);
-                }
+                partsToCast.add(((AdventureCard) cardToCast).getSpellCard());
+                partsToCast.add(cardToCast);
+            } else if (cardToCast instanceof ModalDoubleFacesCard) {
+                partsToCast.add(((ModalDoubleFacesCard) cardToCast).getLeftHalfCard());
+                partsToCast.add(((ModalDoubleFacesCard) cardToCast).getRightHalfCard());
             } else {
-                castForFree(cardToCast, source, game, controller);
+                partsToCast.add(cardToCast);
+            }
+            // remove too big cmc
+            partsToCast.removeIf(card -> card.getConvertedManaCost() >= sourceCost);
+            // remove non spells
+            partsToCast.removeIf(card -> card.getSpellAbility() == null);
+        }
+
+        String partsInfo = partsToCast.stream()
+                .map(MageObject::getIdName)
+                .collect(Collectors.joining(" or "));
+        if (cardToCast != null
+                && partsToCast.size() > 0
+                && controller.chooseUse(outcome, "Cast spell without paying its mana cost (" + partsInfo + ")?", source, game)) {
+            try {
+                // enable free cast for all compatible parts
+                partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE));
+                controller.cast(controller.chooseAbilityForCast(cardToCast, game, true),
+                        game, true, new ApprovingObject(source, game));
+            } finally {
+                partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null));
             }
         }
-        // Move the remaining cards to the buttom of the library in a random order
+
+        // Then put all cards exiled this way that weren't cast on the bottom of your library in a random order.
         cardsToExile.removeIf(uuid -> game.getState().getZone(uuid) != Zone.EXILED);
         return controller.putCardsOnBottomOfLibrary(cardsToExile, game, source, false);
-    }
-
-    private void castForFree(Card cardToCast, Ability source, Game game, Player controller) {
-        game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), Boolean.TRUE);
-        controller.cast(controller.chooseAbilityForCast(cardToCast, game, true),
-                game, true, new ApprovingObject(source, game));
-        game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), null);
     }
 
     @Override

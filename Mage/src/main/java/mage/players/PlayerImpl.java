@@ -1519,14 +1519,26 @@ public abstract class PlayerImpl implements Player, Serializable {
         return false;
     }
 
+    /**
+     * Return spells for possible cast
+     * Uses in GUI to show only playable spells for choosing from the card
+     * (example: effect allow to cast card and player must choose the spell ability)
+     *
+     * @param playerId
+     * @param object
+     * @param zone
+     * @param game
+     * @return
+     */
     public static LinkedHashMap<UUID, ActivatedAbility> getSpellAbilities(UUID playerId, MageObject object, Zone zone, Game game) {
+        // it uses simple check from spellCanBeActivatedRegularlyNow
+        // reason: no approved info here (e.g. forced to choose spell ability from cast card)
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<>();
         for (Ability ability : object.getAbilities()) {
             if (ability instanceof SpellAbility) {
                 switch (((SpellAbility) ability).getSpellAbilityType()) {
                     case BASE_ALTERNATE:
-                        ActivationStatus as = ((SpellAbility) ability).canActivate(playerId, game);
-                        if (as.canActivate()) {
+                        if (((SpellAbility) ability).spellCanBeActivatedRegularlyNow(playerId, game)) {
                             useable.put(ability.getId(), (SpellAbility) ability);  // example: Chandra, Torch of Defiance +1 loyal ability
                         }
                         return useable;
@@ -1560,7 +1572,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                         return useable;
                     default:
-                        useable.put(ability.getId(), (SpellAbility) ability);
+                        if (((SpellAbility) ability).spellCanBeActivatedRegularlyNow(playerId, game)) {
+                            useable.put(ability.getId(), (SpellAbility) ability);
+                        }
                 }
             }
         }
@@ -2713,7 +2727,9 @@ public abstract class PlayerImpl implements Player, Serializable {
 
             // casting selected card
             // TODO: fix costs (why is Panglacial Wurm automatically accepting payment?)
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
             targetPlayer.cast(targetPlayer.chooseAbilityForCast(card, game, false), game, false, null);
+            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
             castableCards.remove(card.getId());
             casted = true;
         }

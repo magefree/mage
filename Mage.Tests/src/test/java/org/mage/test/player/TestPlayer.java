@@ -3777,6 +3777,21 @@ public class TestPlayer implements Player {
     ) {
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
+
+            // skip choices
+            if (choices.get(0).equals(CHOICE_SKIP)) {
+                choices.remove(0);
+                if (cards.isEmpty()) {
+                    // cancel button forced in GUI on no possible choices
+                    return false;
+                } else {
+                    Assert.assertTrue("found skip choice, but it require more choices, needs "
+                                    + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
+                            target.getTargets().size() >= target.getMinNumberOfTargets());
+                    return true;
+                }
+            }
+
             for (String choose2 : choices) {
                 // TODO: More targetting to fix
                 String[] targetList = choose2.split("\\^");
