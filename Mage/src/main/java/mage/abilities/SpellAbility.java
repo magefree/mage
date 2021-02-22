@@ -118,13 +118,13 @@ public class SpellAbility extends ActivatedAbilityImpl {
                         // fused can be called from hand only, so not permitting object allows or other zones checks
                         // see https://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/251926-snapcaster-mage-and-fuse
                         if (game.getState().getZone(splitCard.getId()) == Zone.HAND) {
-                            return new ActivationStatus(splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game)
-                                    && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game), null);
+                            return new ActivationStatus(splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)
+                                    && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId), null);
                         }
                     }
                     return ActivationStatus.getFalse();
                 } else {
-                    return new ActivationStatus(canChooseTarget(game), approvingObject);
+                    return new ActivationStatus(canChooseTarget(game, playerId), approvingObject);
                 }
             }
         }

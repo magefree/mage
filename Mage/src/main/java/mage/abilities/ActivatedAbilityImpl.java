@@ -194,7 +194,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
                 || game.canPlaySorcery(playerId)
                 || null != approvingObject) {
             if (costs.canPay(this, this, playerId, game)
-                    && canChooseTarget(game)) {
+                    && canChooseTarget(game, playerId)) {
                 this.activatorId = playerId;
                 return new ActivationStatus(true, approvingObject);
             }

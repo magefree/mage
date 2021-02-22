@@ -320,7 +320,7 @@ public interface Ability extends Controllable, Serializable {
 
     Modes getModes();
 
-    boolean canChooseTarget(Game game);
+    boolean canChooseTarget(Game game, UUID playerId);
 
     /**
      * Gets the list of sub-abilities associated with this ability.

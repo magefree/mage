@@ -1495,7 +1495,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (sourceObject != null) {
             sourceObject.adjustTargets(ability, game);
         }
-        if (ability.canChooseTarget(game)) {
+        if (ability.canChooseTarget(game, playerId)) {
             if (ability.isUsesStack()) {
                 game.getStack().push(new StackAbility(ability, playerId));
             }
@@ -1539,28 +1539,28 @@ public abstract class PlayerImpl implements Player, Serializable {
                         return useable;
                     case SPLIT_FUSED:
                         if (zone == Zone.HAND) {
-                            if (ability.canChooseTarget(game)) {
+                            if (ability.canChooseTarget(game, playerId)) {
                                 useable.put(ability.getId(), (SpellAbility) ability);
                             }
                         }
                     case SPLIT:
-                        if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game)) {
+                        if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
                             useable.put(((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
                                     ((SplitCard) object).getLeftHalfCard().getSpellAbility());
                         }
-                        if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game)) {
+                        if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
                             useable.put(((SplitCard) object).getRightHalfCard().getSpellAbility().getId(),
                                     ((SplitCard) object).getRightHalfCard().getSpellAbility());
                         }
                         return useable;
                     case SPLIT_AFTERMATH:
                         if (zone == Zone.GRAVEYARD) {
-                            if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game)) {
+                            if (((SplitCard) object).getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
                                 useable.put(((SplitCard) object).getRightHalfCard().getSpellAbility().getId(),
                                         ((SplitCard) object).getRightHalfCard().getSpellAbility());
                             }
                         } else {
-                            if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game)) {
+                            if (((SplitCard) object).getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)) {
                                 useable.put(((SplitCard) object).getLeftHalfCard().getSpellAbility().getId(),
                                         ((SplitCard) object).getLeftHalfCard().getSpellAbility());
                             }
