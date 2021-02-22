@@ -124,6 +124,7 @@ class ValkiGodOfLiesRevealExileEffect extends OneShotEffect {
                 if (opponent != null) {
                     opponent.revealCards(source, opponent.getHand(), game);
                     TargetCard targetToExile = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_CREATURE);
+                    targetToExile.withChooseHint("card to exile");
                     targetToExile.setNotTarget(true);
                     if (controller.choose(Outcome.Exile, opponent.getHand(), targetToExile, game)) {
                         Card targetedCardToExile = game.getCard(targetToExile.getFirstTarget());
@@ -240,7 +241,8 @@ class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
             filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
             TargetCardInExile target = new TargetCardInExile(filter, exileId);
             Cards cards = game.getExile().getExileZone(exileId);
-            if (!cards.isEmpty()
+            if (cards != null
+                    && !cards.isEmpty()
                     && controller.choose(Outcome.Benefit, cards, target, game)) {
                 Card chosenExiledCard = game.getCard(target.getFirstTarget());
                 if (chosenExiledCard != null) {

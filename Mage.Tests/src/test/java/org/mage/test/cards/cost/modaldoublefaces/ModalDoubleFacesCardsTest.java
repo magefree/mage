@@ -10,6 +10,7 @@ import mage.util.CardUtil;
 import mage.util.ManaUtil;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -796,5 +797,70 @@ public class ModalDoubleFacesCardsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_Cascade_ValkiGodOfLies() {
+        // https://magic.wizards.com/en/articles/archive/news/february-15-2021-banned-and-restricted-announcement
+        // For example, if you cast Bloodbraid Elf and exile Valki, God of Lies from your library,
+        // you'll be able to cast Valki but not Tibalt, Cosmic Impostor. On the other hand, if you
+        // exile Cosima, God of the Voyage, you may cast either Cosima or The Omenkeel, as each face
+        // has a lesser converted mana cost than Bloodbraid Elf.
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+
+        // Cascade
+        addCard(Zone.HAND, playerA, "Bloodbraid Elf"); // {2}{R}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        //
+        addCard(Zone.LIBRARY, playerA, "Swamp", 2);
+        addCard(Zone.LIBRARY, playerA, "Valki, God of Lies", 1);
+        addCard(Zone.LIBRARY, playerA, "Island", 2);
+
+        // play elf with cascade
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodbraid Elf");
+        setChoice(playerA, "Yes"); // use free cast
+        //setChoice(playerA, "Cast Valki, God of Lies"); possible bug: you can see two spell abilities to choose, but only one allows here
+        setChoice(playerA, TestPlayer.CHOICE_SKIP); // no choices for valki's etb exile
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Valki, God of Lies", 1);
+    }
+
+    @Test
+    public void test_Cascade_CosimaGodOfTheVoyage() {
+        // https://magic.wizards.com/en/articles/archive/news/february-15-2021-banned-and-restricted-announcement
+        // For example, if you cast Bloodbraid Elf and exile Valki, God of Lies from your library,
+        // you'll be able to cast Valki but not Tibalt, Cosmic Impostor. On the other hand, if you
+        // exile Cosima, God of the Voyage, you may cast either Cosima or The Omenkeel, as each face
+        // has a lesser converted mana cost than Bloodbraid Elf.
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+
+        // Cascade
+        addCard(Zone.HAND, playerA, "Bloodbraid Elf"); // {2}{R}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        //
+        addCard(Zone.LIBRARY, playerA, "Swamp", 2);
+        addCard(Zone.LIBRARY, playerA, "Cosima, God of the Voyage", 1);
+        addCard(Zone.LIBRARY, playerA, "Island", 2);
+
+        // play elf with cascade
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodbraid Elf");
+        setChoice(playerA, "Yes"); // use free cast
+        setChoice(playerA, "Cast The Omenkeel"); // can cast any side here
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "The Omenkeel", 1);
     }
 }

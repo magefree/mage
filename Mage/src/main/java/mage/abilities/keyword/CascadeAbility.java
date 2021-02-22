@@ -1,36 +1,38 @@
 package mage.abilities.keyword;
 
 import mage.ApprovingObject;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public class CascadeAbility extends TriggeredAbilityImpl {
     //20091005 - 702.82
+    //20210215 - 702.84a - Updated Cascade rule
 
     private static final String REMINDERTEXT = " <i>(When you cast this spell, "
             + "exile cards from the top of your library until you exile a "
-            + "nonland card that costs less."
-            + " You may cast it without paying its mana cost. "
-            + "Put the exiled cards on the bottom in a random order.)</i>";
+            + "nonland card whose converted mana cost is less than this spell's converted mana cost. "
+            + "You may cast that spell without paying its mana cost "
+            + "if its converted mana cost is less than this spell's converted mana cost. "
+            + "Then put all cards exiled this way that weren't cast on the bottom of your library in a random order.)</i>";
     private final boolean withReminder;
-    private static final FilterCard filter = new FilterLandCard("land card (to put onto the battlefield)");
 
     public CascadeAbility() {
         this(true);
@@ -86,52 +88,83 @@ class CascadeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
-        Cards cards = new CardsImpl();
-        card = game.getCard(source.getSourceId());
-        if (card == null) {
+        Card sourceCard = game.getCard(source.getSourceId());
+        if (sourceCard == null) {
             return false;
         }
-        int sourceCost = card.getConvertedManaCost();
-        do {
-            card = controller.getLibrary().getFromTop(game);
-            if (card == null) {
+
+        // exile cards from the top of your library until you exile a nonland card whose converted mana cost is less than this spell's converted mana cost
+        Cards cardsToExile = new CardsImpl();
+        int sourceCost = sourceCard.getConvertedManaCost();
+        Card cardToCast = null;
+        for (Card card : controller.getLibrary().getCards(game)) {
+            cardsToExile.add(card);
+            if (!card.isLand() && card.getConvertedManaCost() < sourceCost) {
+                cardToCast = card;
                 break;
             }
-            cards.add(card);
-            controller.moveCards(card, Zone.EXILED, source, game);
-        } while (controller.canRespond()
-                && (card.isLand() || card.getConvertedManaCost() >= sourceCost));
-
+        }
+        controller.moveCards(cardsToExile, Zone.EXILED, source, game);
         controller.getLibrary().reset(); // set back empty draw state if that caused an empty draw
 
+        // additional replacement effect: As you cascade, you may put a land card from among the exiled cards onto the battlefield tapped
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.CASCADE_LAND, source.getSourceId(), source, source.getControllerId(), 0);
         game.replaceEvent(event);
         if (event.getAmount() > 0) {
-            TargetCardInExile target = new TargetCardInExile(
-                    0, event.getAmount(), StaticFilters.FILTER_CARD_LAND, null, true
-            );
-            controller.choose(Outcome.PutCardInPlay, cards, target, game);
+            TargetCardInExile target = new TargetCardInExile(0, event.getAmount(), StaticFilters.FILTER_CARD_LAND, null, true);
+            target.withChooseHint("land to put onto battlefield tapped");
+            controller.choose(Outcome.PutCardInPlay, cardsToExile, target, game);
             controller.moveCards(
                     new CardsImpl(target.getTargets()).getCards(game), Zone.BATTLEFIELD,
                     source, game, true, false, false, null
             );
         }
-        if (card != null && controller.chooseUse(
-                outcome, "Use cascade effect on " + card.getLogName() + '?', source, game
-        )) {
-            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-            controller.cast(controller.chooseAbilityForCast(card, game, true),
-                    game, true, new ApprovingObject(source, game));
-            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+
+        // You may cast that spell without paying its mana cost if its converted mana cost is less than this spell's converted mana cost.
+        List<Card> partsToCast = new ArrayList<>();
+        if (cardToCast != null) {
+            if (cardToCast instanceof SplitCard) {
+                partsToCast.add(((SplitCard) cardToCast).getLeftHalfCard());
+                partsToCast.add(((SplitCard) cardToCast).getRightHalfCard());
+                partsToCast.add(cardToCast);
+            } else if (cardToCast instanceof AdventureCard) {
+                partsToCast.add(((AdventureCard) cardToCast).getSpellCard());
+                partsToCast.add(cardToCast);
+            } else if (cardToCast instanceof ModalDoubleFacesCard) {
+                partsToCast.add(((ModalDoubleFacesCard) cardToCast).getLeftHalfCard());
+                partsToCast.add(((ModalDoubleFacesCard) cardToCast).getRightHalfCard());
+            } else {
+                partsToCast.add(cardToCast);
+            }
+            // remove too big cmc
+            partsToCast.removeIf(card -> card.getConvertedManaCost() >= sourceCost);
+            // remove non spells
+            partsToCast.removeIf(card -> card.getSpellAbility() == null);
         }
-        // Move the remaining cards to the buttom of the library in a random order
-        cards.removeIf(uuid -> game.getState().getZone(uuid) != Zone.EXILED);
-        return controller.putCardsOnBottomOfLibrary(cards, game, source, false);
+
+        String partsInfo = partsToCast.stream()
+                .map(MageObject::getIdName)
+                .collect(Collectors.joining(" or "));
+        if (cardToCast != null
+                && partsToCast.size() > 0
+                && controller.chooseUse(outcome, "Cast spell without paying its mana cost (" + partsInfo + ")?", source, game)) {
+            try {
+                // enable free cast for all compatible parts
+                partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE));
+                controller.cast(controller.chooseAbilityForCast(cardToCast, game, true),
+                        game, true, new ApprovingObject(source, game));
+            } finally {
+                partsToCast.forEach(card -> game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null));
+            }
+        }
+
+        // Then put all cards exiled this way that weren't cast on the bottom of your library in a random order.
+        cardsToExile.removeIf(uuid -> game.getState().getZone(uuid) != Zone.EXILED);
+        return controller.putCardsOnBottomOfLibrary(cardsToExile, game, source, false);
     }
 
     @Override
