@@ -1,7 +1,6 @@
 
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -9,29 +8,27 @@ import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ReturnFromExileEffect extends OneShotEffect {
 
-    private UUID exileId;
-    private Zone zone;
-    private boolean tapped;
+    private final Zone zone;
+    private final boolean tapped;
 
-    public ReturnFromExileEffect(UUID exileId, Zone zone) {
-        this(exileId, zone, false);
+    public ReturnFromExileEffect(Zone zone) {
+        this(zone, false);
     }
 
-    public ReturnFromExileEffect(UUID exileId, Zone zone, String text) {
-        this(exileId, zone, false);
+    public ReturnFromExileEffect(Zone zone, String text) {
+        this(zone, false);
         staticText = text;
     }
 
-    public ReturnFromExileEffect(UUID exileId, Zone zone, boolean tapped) {
+    public ReturnFromExileEffect(Zone zone, boolean tapped) {
         super(Outcome.PutCardInPlay);
-        this.exileId = exileId;
         this.zone = zone;
         this.tapped = tapped;
         setText();
@@ -39,7 +36,6 @@ public class ReturnFromExileEffect extends OneShotEffect {
 
     public ReturnFromExileEffect(final ReturnFromExileEffect effect) {
         super(effect);
-        this.exileId = effect.exileId;
         this.zone = effect.zone;
         this.tapped = effect.tapped;
     }
@@ -51,19 +47,15 @@ public class ReturnFromExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ExileZone exile = game.getExile().getExileZone(exileId);
+        ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && exile != null) {
-            switch (zone) {
-                case LIBRARY:
-                    controller.putCardsOnTopOfLibrary(exile, game, source, false);
-                    break;
-                default:
-                    controller.moveCards(exile.getCards(game), zone, source, game, tapped, false, true, null);
-            }
-            return true;
+        if (controller == null || exile == null) {
+            return false;
         }
-        return false;
+        if (zone == Zone.LIBRARY) {
+            return controller.putCardsOnTopOfLibrary(exile, game, source, false);
+        }
+        return controller.moveCards(exile.getCards(game), zone, source, game, tapped, false, true, null);
     }
 
     private void setText() {

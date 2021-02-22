@@ -186,7 +186,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 11: // KARN LIBERATED 1
                                 sb.append("Target player exiles a card from their hand.");
-                                effects.add(new ExileFromZoneTargetEffect(Zone.HAND, null, "", new FilterCard()));
+                                effects.add(new ExileFromZoneTargetEffect(Zone.HAND, true));
                                 target = new TargetPlayer();
                                 break;
                             case 12: // NISSA SAGE ANIMIST 1
