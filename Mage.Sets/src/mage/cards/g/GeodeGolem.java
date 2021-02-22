@@ -4,7 +4,6 @@ import mage.ApprovingObject;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
@@ -16,8 +15,6 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.util.ManaUtil;
-import mage.watchers.common.CommanderPlaysCountWatcher;
 
 import java.util.Set;
 import java.util.UUID;
@@ -37,8 +34,7 @@ public final class GeodeGolem extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever Geode Golem deals combat damage to a player, you may 
-        // cast your commander from the command zone without paying its mana cost.
+        // Whenever Geode Golem deals combat damage to a player, you may cast your commander from the command zone without paying its mana cost.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new GeodeGolemEffect(), true));
     }
 
@@ -83,12 +79,11 @@ class GeodeGolemEffect extends OneShotEffect {
                 target.setNotTarget(true);
                 if (controller.canRespond()
                         && controller.choose(Outcome.PlayForFree, new CardsImpl(commandersInCommandZone), target, game)) {
-                    if (target.getFirstTarget() != null) {
-                        selectedCommander = commandersInCommandZone.stream()
-                                .filter(c -> c.getId().equals(target.getFirstTarget()))
-                                .findFirst()
-                                .orElse(null);
-                    }
+                    selectedCommander = commandersInCommandZone.stream()
+                            .filter(c -> c.getId().equals(target.getFirstTarget()))
+                            .findFirst()
+                            .orElse(null);
+
                 }
             }
 
@@ -96,27 +91,17 @@ class GeodeGolemEffect extends OneShotEffect {
                 return false;
             }
 
-            // PAY
-            // TODO: this is broken with the commander cost reduction effect
-            ManaCost cost = null;
-            CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
-            int castCount = watcher.getPlaysCount(selectedCommander.getId());
-            if (castCount > 0) {
-                cost = ManaUtil.createManaCost(castCount * 2, false);
-            }
-
-            // CAST: as spell or as land
-            if (cost == null
-                    || cost.pay(source, game, source, controller.getId(), false, null)) {
-                if (selectedCommander.getSpellAbility() != null) { // TODO: can be broken with mdf cards (one side creature, one side land)?
-                    game.getState().setValue("PlayFromNotOwnHandZone" + selectedCommander.getId(), Boolean.TRUE);
-                    Boolean commanderWasCast = controller.cast(controller.chooseAbilityForCast(selectedCommander, game, true),
-                            game, true, new ApprovingObject(source, game));
-                    game.getState().setValue("PlayFromNotOwnHandZone" + selectedCommander.getId(), null);
-                    return commanderWasCast;
-                } else {
-                    return controller.playLand(selectedCommander, game, true);
-                }
+            // commander tax applies as additional cost
+            if (selectedCommander.getSpellAbility() != null) {
+                game.getState().setValue("PlayFromNotOwnHandZone" + selectedCommander.getId(), Boolean.TRUE);
+                Boolean commanderWasCast = controller.cast(controller.chooseAbilityForCast(selectedCommander, game, true),
+                        game, true, new ApprovingObject(source, game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + selectedCommander.getId(), null);
+                return commanderWasCast;
+            } else {
+                // play commander as land is xmage feature, but mtg rules for text "cast commander" doesn't allow that
+                // TODO: improve lands support for "cast your commander" (allow land play from mdf cards)?
+                return controller.playLand(selectedCommander, game, true);
             }
         }
         return false;
