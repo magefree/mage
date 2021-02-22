@@ -367,9 +367,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Force player to choose spell ability to cast. Use it in effects while casting cards.
-     *
+     * <p>
      * Commands order in all use cases:
-     * - PlayFromNotOwnHandZone - true
+     * - PlayFromNotOwnHandZone - true (if you put main id then all parts allows, if you put part id then only part allows)
      * - chooseAbilityForCast
      * - cast
      * - PlayFromNotOwnHandZone - false
