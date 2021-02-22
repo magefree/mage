@@ -90,7 +90,7 @@ class DaxosOfMeletisEffect extends OneShotEffect {
                     if (card.getSpellAbility() != null) {
                         // allow to cast the card
                         // and you may spend mana as though it were mana of any color to cast it
-                        CardUtil.makeCardPlayableAndSpendManaAsAnyColor(game, source, card, Duration.EndOfTurn);
+                        CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
                     }
                 }
                 return true;

@@ -1,42 +1,37 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.common.ExileFromZoneTargetEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.ExileZone;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.players.Player;
+import mage.target.TargetCard;
+import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetDiscard;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author BetaSteward
  */
 public final class FiendOfTheShadows extends CardImpl {
 
-    private UUID exileId = UUID.randomUUID();
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Human");
-
-    static {
-        filter.add(SubType.HUMAN.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.HUMAN, "a Human");
 
     public FiendOfTheShadows(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.subtype.add(SubType.VAMPIRE);
         this.subtype.add(SubType.WIZARD);
 
@@ -44,12 +39,12 @@ public final class FiendOfTheShadows extends CardImpl {
         this.toughness = new MageInt(3);
 
         this.addAbility(FlyingAbility.getInstance());
+
         // Whenever Fiend of the Shadows deals combat damage to a player, that player exiles a card from their hand. You may play that card for as long as it remains exiled.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExileFromZoneTargetEffect(Zone.HAND, exileId, "Fiend of the Shadows", new FilterCard()), false, true));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new FiendOfTheShadowsEffect(exileId)));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new FiendOfTheShadowsEffect(), false, true));
 
         // Sacrifice a Human: Regenerate Fiend of the Shadows.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
     private FiendOfTheShadows(final FiendOfTheShadows card) {
@@ -62,24 +57,16 @@ public final class FiendOfTheShadows extends CardImpl {
     }
 }
 
-class FiendOfTheShadowsEffect extends AsThoughEffectImpl {
+class FiendOfTheShadowsEffect extends OneShotEffect {
 
-    private final UUID exileId;
-
-    public FiendOfTheShadowsEffect(UUID exileId) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
-        this.exileId = exileId;
-        staticText = "You may play that card for as long as it remains exiled";
+    FiendOfTheShadowsEffect() {
+        super(Outcome.Discard);
+        staticText = "that player exiles a card from their hand. " +
+                "You may play that card for as long as it remains exiled";
     }
 
-    public FiendOfTheShadowsEffect(final FiendOfTheShadowsEffect effect) {
+    private FiendOfTheShadowsEffect(final FiendOfTheShadowsEffect effect) {
         super(effect);
-        this.exileId = effect.exileId;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -88,14 +75,23 @@ class FiendOfTheShadowsEffect extends AsThoughEffectImpl {
     }
 
     @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            ExileZone zone = game.getExile().getExileZone(exileId);
-            if (zone != null && zone.contains(objectId)) {
-                return true;
-            }
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        MageObject sourceObject = source.getSourceObject(game);
+        if (player == null || sourceObject == null || player.getHand().isEmpty()) {
+            return false;
         }
-        return false;
+        TargetCard targetCard = new TargetDiscard(player.getId());
+        player.choose(outcome, targetCard, source.getSourceId(), game);
+        Card card = game.getCard(targetCard.getFirstTarget());
+        if (card == null) {
+            return false;
+        }
+        player.moveCardToExileWithInfo(
+                card, CardUtil.getExileZoneId(game, source), sourceObject.getName(),
+                source, game, Zone.HAND, true
+        );
+        CardUtil.makeCardPlayable(game, source, card, Duration.Custom, false);
+        return true;
     }
-
 }

@@ -7,7 +7,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,21 +27,18 @@ public final class SafeHaven extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {2}, {tap}: Exile target creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(this.getId(),
-                this.getIdName()), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(new ExileTargetForSourceEffect(), new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you may sacrifice Safe Haven. If you do, return each card exiled with Safe Haven to the battlefield under its owner's control.
-        ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new DoIfCostPaid(
-                        new ReturnFromExileEffect(this.getId(), Zone.BATTLEFIELD, "return each card exiled with {this} to the battlefield under its owner's control"),
-                        new SacrificeSourceCost()
-                ),
-                TargetController.YOU,
-                false);
-        this.addAbility(ability);
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new DoIfCostPaid(new ReturnFromExileEffect(
+                        Zone.BATTLEFIELD, "return each card exiled with " +
+                        "{this} to the battlefield under its owner's control"
+                ), new SacrificeSourceCost()), TargetController.YOU, false
+        ));
     }
 
     private SafeHaven(final SafeHaven card) {

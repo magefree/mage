@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import mage.abilities.Ability;
@@ -12,19 +11,16 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
 /**
- *
  * @author BetaSteward
  */
 public final class CurseOfOblivion extends CardImpl {
@@ -56,11 +52,11 @@ public final class CurseOfOblivion extends CardImpl {
 
 class CurseOfOblivionAbility extends TriggeredAbilityImpl {
 
-    public CurseOfOblivionAbility() {
-        super(Zone.BATTLEFIELD, new ExileFromZoneTargetEffect(Zone.GRAVEYARD, null, "", new FilterCard(), 2));
+    CurseOfOblivionAbility() {
+        super(Zone.BATTLEFIELD, new ExileFromZoneTargetEffect(Zone.GRAVEYARD, StaticFilters.FILTER_CARD_CARDS, 2, false));
     }
 
-    public CurseOfOblivionAbility(final CurseOfOblivionAbility ability) {
+    private CurseOfOblivionAbility(final CurseOfOblivionAbility ability) {
         super(ability);
     }
 
@@ -76,20 +72,16 @@ class CurseOfOblivionAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.sourceId);
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Player player = game.getPlayer(enchantment.getAttachedTo());
-            if (player != null && game.isActivePlayer(player.getId())) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-                return true;
-            }
+        Permanent enchantment = getSourcePermanentOrLKI(game);
+        if (enchantment == null || !game.isActivePlayer(enchantment.getAttachedTo())) {
+            return false;
         }
-        return false;
+        this.getEffects().setTargetPointer(new FixedTarget(enchantment.getAttachedTo()));
+        return true;
     }
 
     @Override
     public String getRule() {
         return "At the beginning of enchanted player's upkeep, that player exiles two cards from their graveyard.";
     }
-
 }

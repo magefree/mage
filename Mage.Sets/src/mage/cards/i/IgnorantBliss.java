@@ -1,27 +1,27 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class IgnorantBliss extends CardImpl {
@@ -30,9 +30,7 @@ public final class IgnorantBliss extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // Exile all cards from your hand face down. At the beginning of the next end step, return those cards to your hand, then draw a card.
-        this.getSpellAbility().addEffect(new IgnorantBlissExileEffect());
-        this.getSpellAbility().addEffect(new IgnorantBlissReturnEffect());
-
+        this.getSpellAbility().addEffect(new IgnorantBlissEffect());
     }
 
     private IgnorantBliss(final IgnorantBliss card) {
@@ -45,71 +43,40 @@ public final class IgnorantBliss extends CardImpl {
     }
 }
 
-class IgnorantBlissExileEffect extends OneShotEffect {
+class IgnorantBlissEffect extends OneShotEffect {
 
-    IgnorantBlissExileEffect() {
+    IgnorantBlissEffect() {
         super(Outcome.Exile);
-        this.staticText = "Exile all cards from your hand face down";
+        this.staticText = "Exile all cards from your hand face down. At the beginning of the next end step, " +
+                "return those cards to your hand, then draw a card";
     }
 
-    IgnorantBlissExileEffect(final IgnorantBlissExileEffect effect) {
+    private IgnorantBlissEffect(final IgnorantBlissEffect effect) {
         super(effect);
     }
 
     @Override
-    public IgnorantBlissExileEffect copy() {
-        return new IgnorantBlissExileEffect(this);
+    public IgnorantBlissEffect copy() {
+        return new IgnorantBlissEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null
-                && sourceObject != null) {
-            Cards hand = controller.getHand();
-            hand.getCards(game).stream().filter((card) -> (card != null)).map((card) -> {
-                UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), 0);
-                controller.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName());
-                return card;
-            }).forEachOrdered((card) -> {
-                card.setFaceDown(true, game);
-            });
-            return true;
+        if (controller == null || sourceObject == null) {
+            return false;
         }
-        return false;
-    }
-}
-
-class IgnorantBlissReturnEffect extends OneShotEffect {
-
-    IgnorantBlissReturnEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "At the beginning of the next end step, return those cards to your hand, then draw a card";
-    }
-
-    IgnorantBlissReturnEffect(final IgnorantBlissReturnEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public IgnorantBlissReturnEffect copy() {
-        return new IgnorantBlissReturnEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), 0));
-            if (exileZone != null) {
-                Effect effect = new ReturnFromExileEffect(exileZone.getId(), Zone.HAND);
-                AtTheBeginOfNextEndStepDelayedTriggeredAbility ability = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-                ability.addEffect(new DrawCardSourceControllerEffect(1));
-                game.addDelayedTriggeredAbility(ability, source);
-                return true;
-            }
-        }
-        return false;
+        Cards hand = new CardsImpl(controller.getHand());
+        controller.moveCardsToExile(hand.getCards(game), source, game, false, CardUtil.getExileZoneId(game, source), sourceObject.getIdName());
+        hand.getCards(game)
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(card -> game.getState().getZone(card.getId()) == Zone.EXILED)
+                .forEach(card -> card.setFaceDown(true, game));
+        DelayedTriggeredAbility ability = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnFromExileEffect(Zone.HAND));
+        ability.addEffect(new DrawCardSourceControllerEffect(1));
+        game.addDelayedTriggeredAbility(ability, source);
+        return true;
     }
 }

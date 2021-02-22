@@ -1102,8 +1102,8 @@ public final class CardUtil {
         }
     }
 
-    public static void makeCardPlayableAndSpendManaAsAnyColor(Game game, Ability source, Card card, Duration duration) {
-        makeCardPlayableAndSpendManaAsAnyColor(game, source, card, duration, null);
+    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor) {
+        makeCardPlayable(game, source, card, duration, anyColor, null);
     }
 
     /**
@@ -1115,9 +1115,10 @@ public final class CardUtil {
      * @param game
      * @param card
      * @param duration
+     * @param anyColor
      * @param condition can be null
      */
-    public static void makeCardPlayableAndSpendManaAsAnyColor(Game game, Ability source, Card card, Duration duration, Condition condition) {
+    public static void makeCardPlayable(Game game, Ability source, Card card, Duration duration, boolean anyColor, Condition condition) {
         // Effect can be used for cards in zones and permanents on battlefield
         // PermanentCard's ZCC is static, but we need updated ZCC from the card (after moved to another zone)
         // So there is a workaround to get actual card's ZCC
@@ -1125,7 +1126,9 @@ public final class CardUtil {
         UUID objectId = card.getMainCard().getId();
         int zcc = game.getState().getZoneChangeCounter(objectId);
         game.addEffect(new CanPlayCardControllerEffect(game, objectId, zcc, duration, condition), source);
-        game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
+        if (anyColor) {
+            game.addEffect(new YouMaySpendManaAsAnyColorToCastTargetEffect(duration, condition).setTargetPointer(new FixedTarget(objectId, zcc)), source);
+        }
     }
 
     /**
