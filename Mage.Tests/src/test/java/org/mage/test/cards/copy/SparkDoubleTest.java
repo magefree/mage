@@ -244,4 +244,46 @@ public class SparkDoubleTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
     }
 
+    @Test
+    public void test_SparkCopyEachOther() {
+        // rules:
+        // 706.9e Some replacement effects that generate copy effects include an exception that’s an
+        // additional effect rather than a modification of the affected object’s characteristics.
+        // If another copy effect is applied to that object after applying the copy effect with that
+        // exception, the exception’s effect doesn’t happen.
+        // Example: Altered Ego reads, “You may have Altered Ego enter the battlefield as a copy of any
+        // creature on the battlefield, except it enters with X additional +1/+1 counters on it.” You
+        // choose for it to enter the battlefield as a copy of Clone, which reads “You may have Clone
+        // enter the battlefield as a copy of any creature on the battlefield,” for which no creature
+        // was chosen as it entered the battlefield. If you then choose a creature to copy as you apply
+        // the replacement effect Altered Ego gains by copying Clone, Altered Ego’s replacement effect
+        // won’t cause it to enter the battlefield with any +1/+1 counters on it.
+
+        addCard(Zone.HAND, playerA, "Spark Double", 2); // {3}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4 * 2);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 1);
+
+        // cast first spark
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Grizzly Bears");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears", 2);
+
+        // cast second spark
+        // rules 706.9e affected, so must get only 1 counter
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "Grizzly Bears[only copy]");
+        //setChoice(playerA, "Grizzly Bears"); // possible bug: two etb effects
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears", 3);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
 }

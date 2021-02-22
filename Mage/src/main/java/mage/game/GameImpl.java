@@ -1687,6 +1687,7 @@ public abstract class GameImpl implements Game, Serializable {
                 }
             }
         }
+
         // if it was no copy of copy take the target itself
         if (newBluePrint == null) {
             newBluePrint = copyFromPermanent.copy();

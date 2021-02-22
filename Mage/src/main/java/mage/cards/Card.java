@@ -182,7 +182,7 @@ public interface Card extends MageObject {
     }
 
     /**
-     * Commander tax calculation. Can be change from {2} to life life cost (see Liesa, Shroud of Dusk)
+     * Commander tax calculation. Tax logic can be changed (example: from {2} to life cost, see Liesa, Shroud of Dusk)
      *
      * @param game
      * @param source

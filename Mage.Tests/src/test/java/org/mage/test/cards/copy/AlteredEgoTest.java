@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.copy;
 
 import mage.constants.PhaseStep;
@@ -7,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class AlteredEgoTest extends CardTestPlayerBase {
@@ -24,9 +22,13 @@ public class AlteredEgoTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Altered Ego");
         setChoice(playerA, "X=3");
+        setChoice(playerA, "Yes"); // use copy
+        setChoice(playerA, "Silvercoat Lion"); // copy target
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
         assertPowerToughness(playerA, "Silvercoat Lion", 5, 5);
@@ -42,9 +44,12 @@ public class AlteredEgoTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Altered Ego");
         setChoice(playerA, "X=3");
+        setChoice(playerA, "Yes"); // use copy (but no targets for copy)
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Altered Ego", 0);
         assertGraveyardCount(playerA, "Altered Ego", 1);

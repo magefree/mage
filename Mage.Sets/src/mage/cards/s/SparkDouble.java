@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 public final class SparkDouble extends CardImpl {
 
-    private static FilterPermanent filter = new FilterControlledPermanent("a creature or planeswalker you control");
+    private static final FilterPermanent filter = new FilterControlledPermanent("a creature or planeswalker you control");
 
     static {
         filter.add(Predicates.or(
@@ -40,13 +40,11 @@ public final class SparkDouble extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        // You may have Spark Double enter the battlefield as a copy of a creature or planeswalker you control,
-        // except it enters with an additional +1/+1 counter on it if it’s a creature,
-        // it enters with an additional loyalty counter on it if it’s a planeswalker, and it isn’t legendary if that permanent is legendary.
-        Effect effect = new CopyPermanentEffect(filter, new SparkDoubleExceptEffectsCopyApplier());
-        effect.setText("as a copy of a creature or planeswalker you control, "
+        // You may have Spark Double enter the battlefield as a copy of a creature or planeswalker you control, except it enters with an additional +1/+1 counter on it if it’s a creature, it enters with an additional loyalty counter on it if it’s a planeswalker, and it isn’t legendary if that permanent is legendary.
+        Effect effect = new CopyPermanentEffect(filter, new SparkDoubleCopyApplier());
+        /*effect.setText("as a copy of a creature or planeswalker you control, "
                 + "except it enters with an additional +1/+1 counter on it if it's a creature, "
-                + "it enters with an additional loyalty counter on it if it's a planeswalker, and it isn't legendary if that permanent is legendary.");
+                + "it enters with an additional loyalty counter on it if it's a planeswalker, and it isn't legendary if that permanent is legendary.");*/
         EntersBattlefieldAbility ability = new EntersBattlefieldAbility(effect, true);
         this.addAbility(ability);
     }
@@ -61,7 +59,14 @@ public final class SparkDouble extends CardImpl {
     }
 }
 
-class SparkDoubleExceptEffectsCopyApplier extends CopyApplier {
+class SparkDoubleCopyApplier extends CopyApplier {
+
+    @Override
+    public String getText() {
+        return ", except it enters with an additional +1/+1 counter on it if it’s a creature, it enters with "
+                + "an additional loyalty counter on it if it’s a planeswalker, and it isn’t legendary if "
+                + "that permanent is legendary.";
+    }
 
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
@@ -88,12 +93,12 @@ class SparkDoubleExceptEffectsCopyApplier extends CopyApplier {
         // Spark Double enters as a planeswalker creature and gets both kinds of counters.
 
         // counters only for original card, not copies
-        if (!isCopyOfCopy(source, copyToObjectId)) {
+        if (!isCopyOfCopy(source, blueprint, copyToObjectId)) {
             // enters with an additional +1/+1 counter on it if it’s a creature
             if (blueprint.isCreature()) {
                 blueprint.getAbilities().add(new EntersBattlefieldAbility(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance(), false)
-                        .setText("with an additional +1/+1 counter on it")
+                                .setText("with an additional +1/+1 counter on it")
                 ));
             }
 
@@ -101,7 +106,7 @@ class SparkDoubleExceptEffectsCopyApplier extends CopyApplier {
             if (blueprint.isPlaneswalker()) {
                 blueprint.getAbilities().add(new EntersBattlefieldAbility(
                         new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(), false)
-                        .setText("with an additional loyalty counter on it")
+                                .setText("with an additional loyalty counter on it")
                 ));
             }
         }
