@@ -10,6 +10,7 @@ public class ValkiGodOfLiesTest extends CardTestPlayerBase {
     @Test
     public void ephmerateTest() {
         removeAllCardsFromLibrary(playerB);
+
         addCard(Zone.BATTLEFIELD, playerA, "Badlands", 7);
         addCard(Zone.HAND, playerA, "Plains");
         addCard(Zone.HAND, playerA, "Valki, God of Lies");
@@ -17,14 +18,16 @@ public class ValkiGodOfLiesTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerB, "Ephemerate");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tibalt, Cosmic Impostor");
+        setChoice(playerA, "Tibalt, Cosmic Impostor"); // two etb effects
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+2: Exile the top card of each player's library.");
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Plains");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ephemerate", "Grizzly Bears");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-
         assertAllCommandsUsed();
+
         assertPermanentCount(playerA, "Tibalt, Cosmic Impostor", 1);
         assertPermanentCount(playerA, "Grizzly Bears", 1);
         assertGraveyardCount(playerB, "Ephemerate", 1);

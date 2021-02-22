@@ -918,21 +918,19 @@ public abstract class AbilityImpl implements Ability {
     private static boolean canChooseTargetAbility(Ability ability, Game game, UUID controllerId) {
         int found = 0;
         for (Mode mode : ability.getModes().values()) {
-            int targetMatch = 0;
+            boolean validTargets = true;
             for (Target target : mode.getTargets()) {
-                UUID playerId;
-                UUID targetController = target.getTargetController();
-                if (targetController != null) {
-                    playerId = targetController;
-                } else {
-                    playerId = controllerId;
+                UUID abilityControllerId = controllerId;
+                if (target.getTargetController() != null) {
+                    abilityControllerId = target.getTargetController();
                 }
-                if (!target.canChoose(ability.getSourceId(), playerId, game)) {
+                if (!target.canChoose(ability.getSourceId(), abilityControllerId, game)) {
+                    validTargets = false;
                     break;
                 }
-                targetMatch++;
             }
-            if (targetMatch == mode.getTargets().size()) {
+
+            if (validTargets) {
                 found++;
                 if (ability.getModes().isEachModeMoreThanOnce()) {
                     return true;
