@@ -1138,6 +1138,7 @@ public abstract class GameImpl implements Game, Serializable {
         getState().addWatcher(new BlockedAttackerWatcher());
         getState().addWatcher(new DamageDoneWatcher());
         getState().addWatcher(new PlanarRollWatcher());
+        getState().addWatcher(new AttackedThisTurnWatcher());
         getState().addWatcher(new PlayersAttackedThisTurnWatcher());
         getState().addWatcher(new CardsDrawnThisTurnWatcher());
     }
