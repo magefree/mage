@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfUpkeepAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -13,12 +13,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.Objects;
@@ -48,9 +45,11 @@ public final class InfectiousCurse extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfectiousCurseCostReductionEffect()));
 
         // At the beginning of enchanted player's upkeep, that player loses 1 life and you gain 1 life.
-        InfectiousCurseAbility curseAbility = new InfectiousCurseAbility();
-        curseAbility.addEffect(new GainLifeEffect(1));
-        this.addAbility(curseAbility);
+        Ability ability = new BeginningOfUpkeepAttachedTriggeredAbility(
+                new LoseLifeTargetEffect(1).setText("that player loses 1 life")
+        );
+        ability.addEffect(new GainLifeEffect(1).concatBy("and"));
+        this.addAbility(ability);
     }
 
     private InfectiousCurse(final InfectiousCurse card) {
@@ -63,54 +62,14 @@ public final class InfectiousCurse extends CardImpl {
     }
 }
 
-class InfectiousCurseAbility extends TriggeredAbilityImpl {
-
-    public InfectiousCurseAbility() {
-        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1));
-    }
-
-    public InfectiousCurseAbility(final InfectiousCurseAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public InfectiousCurseAbility copy() {
-        return new InfectiousCurseAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.sourceId);
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Player player = game.getPlayer(enchantment.getAttachedTo());
-            if (player != null && game.isActivePlayer(player.getId())) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of enchanted player's upkeep, that player loses 1 life and you gain 1 life.";
-    }
-
-}
-
 class InfectiousCurseCostReductionEffect extends CostModificationEffectImpl {
 
-    public InfectiousCurseCostReductionEffect() {
+    InfectiousCurseCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.staticText = "Spells you cast that target enchanted player cost {1} less to cast";
     }
 
-    protected InfectiousCurseCostReductionEffect(InfectiousCurseCostReductionEffect effect) {
+    private InfectiousCurseCostReductionEffect(InfectiousCurseCostReductionEffect effect) {
         super(effect);
     }
 

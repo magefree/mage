@@ -1,8 +1,7 @@
-
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfUpkeepAttachedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -11,22 +10,18 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class CruelReality extends CardImpl {
@@ -43,8 +38,7 @@ public final class CruelReality extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         //At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, they lose 5 life.
-        this.addAbility(new CruelRealityTriggeredAbiilty());
-
+        this.addAbility(new BeginningOfUpkeepAttachedTriggeredAbility(new CruelRealityEffect()));
     }
 
     private CruelReality(final CruelReality card) {
@@ -57,55 +51,23 @@ public final class CruelReality extends CardImpl {
     }
 }
 
-class CruelRealityTriggeredAbiilty extends TriggeredAbilityImpl {
-
-    public CruelRealityTriggeredAbiilty() {
-        super(Zone.BATTLEFIELD, new CruelRealityEffect());
-    }
-
-    public CruelRealityTriggeredAbiilty(final CruelRealityTriggeredAbiilty ability) {
-        super(ability);
-    }
-
-    @Override
-    public CruelRealityTriggeredAbiilty copy() {
-        return new CruelRealityTriggeredAbiilty(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.sourceId);
-        if (enchantment != null
-                && enchantment.getAttachedTo() != null) {
-            Player cursedPlayer = game.getPlayer(enchantment.getAttachedTo());
-            if (cursedPlayer != null
-                    && game.isActivePlayer(cursedPlayer.getId())) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(cursedPlayer.getId()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of enchanted player's upkeep, " + super.getRule();
-    }
-}
-
 class CruelRealityEffect extends OneShotEffect {
 
-    public CruelRealityEffect() {
+    private static final FilterPermanent filter = new FilterControlledPermanent("creature or planeswalker");
+
+    static {
+        filter.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                CardType.PLANESWALKER.getPredicate()
+        ));
+    }
+
+    CruelRealityEffect() {
         super(Outcome.LoseLife);
         staticText = "that player sacrifices a creature or planeswalker. If the player can't, they lose 5 life";
     }
 
-    public CruelRealityEffect(final CruelRealityEffect effect) {
+    private CruelRealityEffect(final CruelRealityEffect effect) {
         super(effect);
     }
 
@@ -118,24 +80,21 @@ class CruelRealityEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player cursedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (cursedPlayer != null
-                && controller != null) {
-                FilterControlledPermanent filter = new FilterControlledPermanent("creature or planeswalker");
-                filter.add(Predicates.or(
-                        CardType.CREATURE.getPredicate(),
-                        CardType.PLANESWALKER.getPredicate()));
-                TargetPermanent target = new TargetPermanent(filter);
-                if (cursedPlayer.choose(Outcome.Sacrifice, target, source.getId(), game)) {
-                    Permanent objectToBeSacrificed = game.getPermanent(target.getFirstTarget());
-                    if (objectToBeSacrificed != null) {
-                        if (objectToBeSacrificed.sacrifice(source, game)) {
-                            return true;
-                        }
-                    }
-                }
-            cursedPlayer.loseLife(5, game, source, false);
-            return true;
+        if (cursedPlayer == null || controller == null) {
+            return false;
         }
-        return false;
+        TargetPermanent target = new TargetPermanent(filter);
+        target.setNotTarget(true);
+        if (target.canChoose(source.getSourceId(), cursedPlayer.getId(), game)
+                && cursedPlayer.choose(Outcome.Sacrifice, target, source.getId(), game)) {
+            Permanent objectToBeSacrificed = game.getPermanent(target.getFirstTarget());
+            if (objectToBeSacrificed != null) {
+                if (objectToBeSacrificed.sacrifice(source, game)) {
+                    return true;
+                }
+            }
+        }
+        cursedPlayer.loseLife(5, game, source, false);
+        return true;
     }
 }

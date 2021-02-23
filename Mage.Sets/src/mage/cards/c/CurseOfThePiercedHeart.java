@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfUpkeepAttachedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -10,17 +10,15 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
-import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -41,7 +39,7 @@ public final class CurseOfThePiercedHeart extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of enchanted player's upkeep, Curse of the Pierced Heart deals 1 damage to that player.
-        this.addAbility(new CurseOfThePiercedHeartAbility());
+        this.addAbility(new BeginningOfUpkeepAttachedTriggeredAbility(new CurseOfThePiercedHeartEffect()));
     }
 
     private CurseOfThePiercedHeart(final CurseOfThePiercedHeart card) {
@@ -54,55 +52,14 @@ public final class CurseOfThePiercedHeart extends CardImpl {
     }
 }
 
-class CurseOfThePiercedHeartAbility extends TriggeredAbilityImpl {
-
-    public CurseOfThePiercedHeartAbility() {
-        super(Zone.BATTLEFIELD, new CurseOfThePiercedHeartEffect());
-    }
-
-    public CurseOfThePiercedHeartAbility(final CurseOfThePiercedHeartAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public CurseOfThePiercedHeartAbility copy() {
-        return new CurseOfThePiercedHeartAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(this.sourceId);
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Player player = game.getPlayer(enchantment.getAttachedTo());
-            if (player != null && game.isActivePlayer(player.getId())) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(player.getId()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of enchanted player's upkeep, "
-                + "{this} deals 1 damage to that player or a planeswalker that player controls.";
-    }
-
-}
-
 class CurseOfThePiercedHeartEffect extends OneShotEffect {
 
-    public CurseOfThePiercedHeartEffect() {
+    CurseOfThePiercedHeartEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 1 damage to that player or a planeswalker that player controls";
     }
 
-    public CurseOfThePiercedHeartEffect(final CurseOfThePiercedHeartEffect effect) {
+    private CurseOfThePiercedHeartEffect(final CurseOfThePiercedHeartEffect effect) {
         super(effect);
     }
 
@@ -114,29 +71,23 @@ class CurseOfThePiercedHeartEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (controller == null || enchantment == null) {
+        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        if (controller == null || opponent == null) {
             return false;
         }
-        UUID opponentId = enchantment.getAttachedTo();
-        Player opponent = game.getPlayer(opponentId);
-        if (opponent == null) {
-            return false;
+        if (game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER, source.getSourceId(), opponent.getId(), game) < 1
+                || !controller.chooseUse(Outcome.Damage, "Redirect to a planeswalker controlled by " + opponent.getLogName() + "?", source, game)) {
+            return opponent.damage(1, source.getSourceId(), source, game) > 0;
         }
-        if (!game.getBattlefield().getAllActivePermanents(new FilterPlaneswalkerPermanent(), opponentId, game).isEmpty()) {
-            if (controller.chooseUse(Outcome.Damage, "Redirect to a planeswalker controlled by " + opponent.getLogName() + "?", source, game)) {
-                FilterPlaneswalkerPermanent filter = new FilterPlaneswalkerPermanent("a planeswalker controlled by " + opponent.getLogName());
-                filter.add(new ControllerIdPredicate(opponentId));
-                TargetPermanent target = new TargetPermanent(1, 1, filter, false);
-                if (target.choose(Outcome.Damage, controller.getId(), source.getSourceId(), game)) {
-                    Permanent permanent = game.getPermanent(target.getFirstTarget());
-                    if (permanent != null) {
-                        return permanent.damage(1, source.getSourceId(), source, game, false, true) > 0;
-                    }
-                }
-            }
+        FilterPermanent filter = new FilterPlaneswalkerPermanent("a planeswalker controlled by " + opponent.getLogName());
+        filter.add(new ControllerIdPredicate(opponent.getId()));
+        TargetPermanent target = new TargetPermanent(filter);
+        target.setNotTarget(true);
+        controller.choose(outcome, target, source.getSourceId(), game);
+        Permanent permanent = game.getPermanent(target.getFirstTarget());
+        if (permanent != null) {
+            return permanent.damage(1, source.getSourceId(), source, game, false, true) > 0;
         }
-        opponent.damage(1, source.getSourceId(), source, game);
-        return true;
+        return opponent.damage(1, source.getSourceId(), source, game) > 0;
     }
 }
