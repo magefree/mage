@@ -2954,7 +2954,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public CardState getLastKnownInformationCard(UUID objectId, Zone zone) {
-        if (zone == Zone.GRAVEYARD) {
+        if (zone.isPublicZone()) {
             Map<UUID, CardState> lkiCardStateMap = lkiCardState.get(zone);
             if (lkiCardStateMap != null) {
                 CardState cardState = lkiCardStateMap.get(objectId);
@@ -3008,7 +3008,7 @@ public abstract class GameImpl implements Game, Serializable {
                     lkiExtended.put(objectId, lkiExtendedMap);
                 }
             }
-        } else if (Zone.GRAVEYARD.equals(zone)) {
+        } else if (zone.isPublicZone()) {
             // Remember card state in this public zone (mainly removed/gained abilities)
             Map<UUID, CardState> lkiMap = lkiCardState.get(zone);
             if (lkiMap != null) {

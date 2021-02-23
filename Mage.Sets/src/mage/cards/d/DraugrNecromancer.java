@@ -11,6 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.game.CardState;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -159,14 +160,17 @@ class DraugrNecromancerSpendAnyManaEffect extends AsThoughEffectImpl implements 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
         if (!source.isControlledBy(affectedControllerId)
-                || game.getState().getZone(sourceId) != Zone.EXILED) {
+                || !game.getOpponents(game.getOwnerId(sourceId)).contains(source.getControllerId())) {
             return false;
         }
         Card card = game.getCard(sourceId);
-        return card != null
-                && !card.isLand()
-                && game.getOpponents(card.getOwnerId()).contains(source.getControllerId())
-                && card.getCounters(game).getCount(CounterType.ICE) > 0;
+        if (card != null
+                && game.getState().getZone(sourceId) == Zone.EXILED
+                && card.getCounters(game).getCount(CounterType.ICE) > 0) {
+            return true;
+        }
+        CardState cardState = game.getLastKnownInformationCard(sourceId, Zone.EXILED);
+        return cardState != null && cardState.getCounters().getCount(CounterType.ICE) > 0;
     }
 
     @Override
