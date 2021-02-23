@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.LoseCreatureTypeSourceEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
 import mage.abilities.keyword.IndestructibleAbility;
@@ -12,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.players.Player;
 
 import java.util.UUID;
 
@@ -41,9 +41,9 @@ public final class KruphixGodOfHorizons extends CardImpl {
                 Integer.MAX_VALUE, Duration.WhileOnBattlefield,
                 MaximumHandSizeControllerEffect.HandSizeModification.SET
         )));
+
         // If unused mana would empty from your mana pool, that mana becomes colorless instead.
         this.addAbility(new SimpleStaticAbility(new KruphixGodOfHorizonsEffect()));
-
     }
 
     private KruphixGodOfHorizons(final KruphixGodOfHorizons card) {
@@ -56,11 +56,11 @@ public final class KruphixGodOfHorizons extends CardImpl {
     }
 }
 
-class KruphixGodOfHorizonsEffect extends ReplacementEffectImpl {
+class KruphixGodOfHorizonsEffect extends ContinuousEffectImpl {
 
     KruphixGodOfHorizonsEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If you would lose unspent mana, that mana becomes colorless instead.";
+        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
+        staticText = "if you would lose unspent mana, that mana becomes colorless instead";
     }
 
     private KruphixGodOfHorizonsEffect(final KruphixGodOfHorizonsEffect effect) {
@@ -74,21 +74,10 @@ class KruphixGodOfHorizonsEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.getManaPool().setManaBecomesColorless(true);
+        }
         return true;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.EMPTY_MANA_POOL;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(source.getControllerId());
     }
 }

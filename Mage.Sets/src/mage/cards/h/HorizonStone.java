@@ -2,14 +2,12 @@ package mage.cards.h;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.players.Player;
 
 import java.util.UUID;
 
@@ -35,11 +33,11 @@ public final class HorizonStone extends CardImpl {
     }
 }
 
-class HorizonStoneEffect extends ReplacementEffectImpl {
+class HorizonStoneEffect extends ContinuousEffectImpl {
 
     HorizonStoneEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If you would lose unspent mana, that mana becomes colorless instead.";
+        super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
+        staticText = "if you would lose unspent mana, that mana becomes colorless instead";
     }
 
     private HorizonStoneEffect(final HorizonStoneEffect effect) {
@@ -53,21 +51,10 @@ class HorizonStoneEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.getManaPool().setManaBecomesColorless(true);
+        }
         return true;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.EMPTY_MANA_POOL;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(source.getControllerId());
     }
 }

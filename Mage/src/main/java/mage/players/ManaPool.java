@@ -1,6 +1,7 @@
 package mage.players;
 
 import mage.ConditionalMana;
+import mage.Emptiable;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -37,6 +38,7 @@ public class ManaPool implements Serializable {
     private final List<ManaPoolItem> poolBookmark = new ArrayList<>(); // mana pool bookmark for rollback purposes
 
     private final Set<ManaType> doNotEmptyManaTypes = new HashSet<>();
+    private boolean manaBecomesColorless = false;
 
     private static final class ConditionalManaInfo {
         private final ManaType manaType;
@@ -73,6 +75,7 @@ public class ManaPool implements Serializable {
         }
         this.doNotEmptyManaTypes.addAll(pool.doNotEmptyManaTypes);
         this.lastPaymentWasSnow = pool.lastPaymentWasSnow;
+        this.manaBecomesColorless = pool.manaBecomesColorless;
     }
 
     public int getRed() {
@@ -229,10 +232,19 @@ public class ManaPool implements Serializable {
 
     public void clearEmptyManaPoolRules() {
         doNotEmptyManaTypes.clear();
+        this.manaBecomesColorless = false;
     }
 
     public void addDoNotEmptyManaType(ManaType manaType) {
         doNotEmptyManaTypes.add(manaType);
+    }
+
+    public void setManaBecomesColorless(boolean manaBecomesColorless) {
+        this.manaBecomesColorless = manaBecomesColorless;
+    }
+
+    public boolean isManaBecomesColorless() {
+        return manaBecomesColorless;
     }
 
     public void init() {
@@ -246,35 +258,15 @@ public class ManaPool implements Serializable {
             ManaPoolItem item = it.next();
             ConditionalMana conditionalItem = item.getConditionalMana();
             for (ManaType manaType : ManaType.values()) {
-                if (!doNotEmptyManaTypes.contains(manaType)) {
-                    if (item.get(manaType) > 0) {
-                        if (item.getDuration() != Duration.EndOfTurn
-                                || game.getPhase().getType() == TurnPhase.END) {
-                            if (game.replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, playerId, null, playerId))) {
-                                int amount = item.get(manaType);
-                                item.clear(manaType);
-                                item.add(ManaType.COLORLESS, amount);
-                            } else {
-                                total += item.get(manaType);
-                                item.clear(manaType);
-                            }
-                        }
-                    }
-                    if (conditionalItem != null) {
-                        if (conditionalItem.get(manaType) > 0) {
-                            if (item.getDuration() != Duration.EndOfTurn
-                                    || game.getPhase().getType() == TurnPhase.END) {
-                                if (game.replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, playerId, null, playerId))) {
-                                    int amount = conditionalItem.get(manaType);
-                                    conditionalItem.clear(manaType);
-                                    conditionalItem.add(ManaType.COLORLESS, amount);
-                                } else {
-                                    total += conditionalItem.get(manaType);
-                                    conditionalItem.clear(manaType);
-                                }
-                            }
-                        }
-                    }
+                if (doNotEmptyManaTypes.contains(manaType)) {
+                    continue;
+                }
+                if (item.get(manaType) > 0) {
+                    total += emptyItem(item, item, game, manaType);
+                }
+                if (conditionalItem != null
+                        && conditionalItem.get(manaType) > 0) {
+                    total += emptyItem(item, conditionalItem, game, manaType);
                 }
             }
             if (item.count() == 0) {
@@ -282,6 +274,22 @@ public class ManaPool implements Serializable {
             }
         }
         return total;
+    }
+
+    private int emptyItem(ManaPoolItem item, Emptiable toEmpty, Game game, ManaType manaType) {
+        if (item.getDuration() == Duration.EndOfTurn
+                && game.getPhase().getType() != TurnPhase.END) {
+            return 0;
+        }
+        if (!manaBecomesColorless) {
+            int amount = toEmpty.get(manaType);
+            toEmpty.clear(manaType);
+            return amount;
+        }
+        int amount = toEmpty.get(manaType);
+        toEmpty.clear(manaType);
+        toEmpty.add(ManaType.COLORLESS, amount);
+        return 0;
     }
 
     public Mana getMana() {
