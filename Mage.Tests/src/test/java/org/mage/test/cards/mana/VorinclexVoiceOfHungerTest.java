@@ -4,12 +4,10 @@ import mage.constants.ManaType;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
@@ -91,7 +89,6 @@ public class VorinclexVoiceOfHungerTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
     public void testCastWithGemstoneCavern() {
         // Trample
         // Whenever you tap a land for mana, add one mana of any type that land produced.

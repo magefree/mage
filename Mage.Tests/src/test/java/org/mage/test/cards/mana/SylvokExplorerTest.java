@@ -4,18 +4,15 @@ import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class SylvokExplorerTest extends CardTestPlayerBase {
 
     @Test
-    @Ignore
     public void testOneInstance() {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 1);
@@ -44,11 +41,11 @@ public class SylvokExplorerTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
-        
+
         setStrictChooseMode(true);
         execute();
         assertAllCommandsUsed();
-        
+
         ManaOptions options = playerA.getAvailableManaTest(currentGame);
         Assert.assertEquals("Player should be able to create 3 white mana", "{W}{W}{W}", options.get(0).toString());
     }

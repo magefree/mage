@@ -3,12 +3,10 @@ package org.mage.test.AI.basic;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 
 /**
- *
  * @author LevelX2
  */
 public class CostModificationTest extends CardTestPlayerBaseAI {
@@ -18,8 +16,6 @@ public class CostModificationTest extends CardTestPlayerBaseAI {
      * Once played, I am stuck at "Waiting for Computer" forever...
      */
     @Test
-    @Ignore
-    // TODO: Check why sometimes Silvercoat Lion is not cast from AI
     public void testFluctuator() {
         addCard(Zone.HAND, playerA, "Silvercoat Lion");
         // Destroy all artifacts, creatures, and enchantments.
