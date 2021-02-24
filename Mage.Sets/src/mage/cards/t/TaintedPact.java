@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.HashSet;
@@ -17,13 +16,13 @@ import mage.players.Player;
 
 /**
  *
- * @author cbt33, Ad Nauseum (North), Izzet Staticaster (LevelX2), Bane Alley Broker (LevelX2)
+ * @author cbt33, Ad Nauseum (North), Izzet Staticaster (LevelX2), Bane Alley
+ * Broker (LevelX2)
  */
 public final class TaintedPact extends CardImpl {
 
     public TaintedPact(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{B}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{B}");
 
         // Exile the top card of your library. You may put that card into your hand unless it has the same name as another card exiled this way. Repeat this process until you put a card into your hand or you exile two cards with the same name, whichever comes first.
         this.getSpellAbility().addEffect(new TaintedPactEffect());
@@ -39,9 +38,9 @@ public final class TaintedPact extends CardImpl {
     }
 }
 
-class TaintedPactEffect extends OneShotEffect{
-    
-        public TaintedPactEffect() {
+class TaintedPactEffect extends OneShotEffect {
+
+    public TaintedPactEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Exile the top card of your library. You may put that card into your hand unless it has the same name as another card exiled this way. Repeat this process until you put a card into your hand or you exile two cards with the same name, whichever comes first";
     }
@@ -54,28 +53,29 @@ class TaintedPactEffect extends OneShotEffect{
     public TaintedPactEffect copy() {
         return new TaintedPactEffect(this);
     }
-    
+
     @Override
-    public boolean apply(Game game, Ability source) { 
-        Card sourceCard = game.getCard(source.getSourceId()); 
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || sourceCard == null) {
+    public boolean apply(Game game, Ability source) {
+        Card sourceCard = game.getCard(source.getSourceId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null 
+                || sourceCard == null) {
             return false;
         }
         Set<String> names = new HashSet<>();
-        while (player.canRespond() && player.getLibrary().hasCards()) {
-            Card card = player.getLibrary().getFromTop(game);
+        while (controller.canRespond()
+                && controller.getLibrary().hasCards()) {
+            Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
-
-                card.moveToExile(null, null, source, game);
+                controller.moveCards(card, Zone.EXILED, source, game);
                 // Checks if there was already exiled a card with the same name
                 if (names.contains(card.getName())) {
                     break;
                 }
                 names.add(card.getName());
-                if (player.chooseUse(outcome, "Put " + card.getName() + " into your hand?", source, game)) {
-                     //Adds the current card to hand if it is chosen.
-                    card.moveToZone(Zone.HAND, source, game, true);
+                if (controller.chooseUse(outcome, "Put " + card.getName() + " into your hand?", source, game)) {
+                    //Adds the current card to hand if it is chosen.
+                    controller.moveCards(card, Zone.HAND, source, game);
                     break;
                 }
             }
