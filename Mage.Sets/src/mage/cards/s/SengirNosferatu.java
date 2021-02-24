@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -82,19 +81,19 @@ class ReturnSengirNosferatuEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID controllerId = source.getControllerId();
-        Target target = new TargetCardInExile(filter);
-        target.setNotTarget(true);
-        if (!target.canChoose(source.getSourceId(), controllerId, game)) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
-        Player player = game.getPlayer(controllerId);
-        if (player != null) {
-            player.chooseTarget(Outcome.PutCreatureInPlay, target, source, game);
-            Card card = game.getCard(target.getTargets().get(0));
-            if (card != null) {
-                return card.moveToZone(Zone.BATTLEFIELD, source, game, false);
-            }
+        Target target = new TargetCardInExile(filter);
+        target.setNotTarget(true);
+        if (!target.canChoose(source.getSourceId(), controller.getId(), game)) {
+            return false;
+        }
+        controller.chooseTarget(Outcome.PutCreatureInPlay, target, source, game);
+        Card card = game.getCard(target.getTargets().get(0));
+        if (card != null) {
+            return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
         }
         return false;
     }

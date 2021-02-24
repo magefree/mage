@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.abilities.Ability;
@@ -16,8 +15,11 @@ import mage.game.events.ZoneChangeEvent;
 import mage.watchers.Watcher;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import mage.players.Player;
 
 /**
  *
@@ -26,8 +28,7 @@ import java.util.UUID;
 public final class SecondSunrise extends CardImpl {
 
     public SecondSunrise(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
 
         // Each player returns to the battlefield all artifact, creature, enchantment, and land cards in their graveyard that were put there from the battlefield this turn.
         this.getSpellAbility().addEffect(new SecondSunriseEffect());
@@ -59,12 +60,21 @@ class SecondSunriseEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         SecondSunriseWatcher watcher = game.getState().getWatcher(SecondSunriseWatcher.class);
         if (watcher != null) {
+            Set<Card> cardsToBattlefield = new LinkedHashSet<>();
             for (UUID id : watcher.getCards()) {
-                Card c = game.getCard(id);
-                if (c != null && game.getState().getZone(id) == Zone.GRAVEYARD) {
-                    if (c.isArtifact() || c.isCreature() ||
-                        c.isEnchantment() || c.isLand())
-                    c.moveToZone(Zone.BATTLEFIELD, source, game, false);
+                Card card = game.getCard(id);
+                if (card != null 
+                        && game.getState().getZone(id) == Zone.GRAVEYARD) {
+                    if (card.isArtifact() || card.isCreature()
+                            || card.isEnchantment() || card.isLand()) {
+                        cardsToBattlefield.add(card);
+                    }
+                }
+            }
+            for (Card card : cardsToBattlefield) {
+                Player owner = game.getPlayer(card.getOwnerId());
+                if (owner != null) {
+                    owner.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
             return true;
@@ -79,6 +89,7 @@ class SecondSunriseEffect extends OneShotEffect {
 }
 
 class SecondSunriseWatcher extends Watcher {
+
     private List<UUID> cards = new ArrayList<>();
 
     public SecondSunriseWatcher() {
@@ -87,7 +98,8 @@ class SecondSunriseWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE 
+                && ((ZoneChangeEvent) event).isDiesEvent()) {
             cards.add(event.getTargetId());
         }
     }
@@ -98,7 +110,7 @@ class SecondSunriseWatcher extends Watcher {
         cards.clear();
     }
 
-    public List<UUID> getCards(){
+    public List<UUID> getCards() {
         return cards;
     }
 }

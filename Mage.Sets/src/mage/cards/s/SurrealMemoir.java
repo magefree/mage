@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -23,8 +22,7 @@ import mage.util.RandomUtil;
 public final class SurrealMemoir extends CardImpl {
 
     public SurrealMemoir(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
         // Return an instant card at random from your graveyard to your hand.
         this.getSpellAbility().addEffect(new SurrealMemoirEffect());
@@ -59,16 +57,18 @@ class SurrealMemoirEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
             FilterCard filter = new FilterCard("instant card");
             filter.add(CardType.INSTANT.getPredicate());
-            Card[] cards = player.getGraveyard().getCards(filter, game).toArray(new Card[0]);
+            Card[] cards = controller.getGraveyard().getCards(filter, game).toArray(new Card[0]);
             if (cards.length > 0) {
                 Card card = cards[RandomUtil.nextInt(cards.length)];
-                card.moveToZone(Zone.HAND, source, game, true);
-                game.informPlayers(card.getName() + "returned to the hand of" + player.getLogName());
-                return true;
+                if (card != null
+                        && controller.moveCards(card, Zone.HAND, source, game)) {
+                    game.informPlayers(card.getName() + "returned to the hand of" + controller.getLogName());
+                    return true;
+                }
             }
         }
         return false;
