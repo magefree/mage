@@ -1,10 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -18,6 +13,11 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author North
@@ -43,12 +43,12 @@ public final class FactOrFiction extends CardImpl {
 
 class FactOrFictionEffect extends OneShotEffect {
 
-    public FactOrFictionEffect() {
+    FactOrFictionEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard";
     }
 
-    public FactOrFictionEffect(final FactOrFictionEffect effect) {
+    private FactOrFictionEffect(final FactOrFictionEffect effect) {
         super(effect);
     }
 
@@ -110,8 +110,10 @@ class FactOrFictionEffect extends OneShotEffect {
                 if (i < pile1.size()) {
                     sb.append(", ");
                 }
-                card.moveToZone(pile1Zone, source, game, false);
             }
+            cards.clear();
+            cards.addAll(pile1);
+            controller.moveCards(cards, pile1Zone, source, game);
             game.informPlayers(sb.toString());
 
             sb = new StringBuilder("Pile 2, going to ").append(pile2Zone == Zone.HAND ? "Hand" : "Graveyard").append(':');
@@ -122,8 +124,10 @@ class FactOrFictionEffect extends OneShotEffect {
                 if (i < pile2.size()) {
                     sb.append(", ");
                 }
-                card.moveToZone(pile2Zone, source, game, false);
             }
+            cards.clear();
+            cards.addAll(pile2);
+            controller.moveCards(cards, pile2Zone, source, game);
             game.informPlayers(sb.toString());
         }
 

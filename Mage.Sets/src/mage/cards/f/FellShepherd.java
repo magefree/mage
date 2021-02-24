@@ -1,11 +1,8 @@
-
 package mage.cards.f;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,21 +10,26 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
+import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class FellShepherd extends CardImpl {
@@ -43,8 +45,8 @@ public final class FellShepherd extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new FellShepherdEffect(), true), new FellShepherdWatcher());
 
         // {B}, Sacrifice another creature: Target creature gets -2/-2 until end of turn.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, -2, Duration.EndOfTurn), new ManaCostsImpl("{B}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false)));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(-2, -2, Duration.EndOfTurn), new ManaCostsImpl("{B}"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
@@ -60,72 +62,62 @@ public final class FellShepherd extends CardImpl {
     }
 }
 
-class FellShepherdWatcher extends Watcher {
-
-    private Set<UUID> creatureIds = new HashSet<>();
-
-    public FellShepherdWatcher() {
-        super(WatcherScope.PLAYER);
-        condition = true;
-    }
-
-    public Set<UUID> getCreaturesIds() {
-        return creatureIds;
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
-            MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (card != null && ((Card) card).isOwnedBy(this.controllerId) && card.isCreature()) {
-                creatureIds.add(card.getId());
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        creatureIds.clear();
-    }
-}
-
 class FellShepherdEffect extends OneShotEffect {
 
-    public FellShepherdEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "return to your hand all creature cards that were put into your graveyard from the battlefield this turn";
+    FellShepherdEffect() {
+        super(Outcome.PutCardInPlay);
+        staticText = "return to your hand all creature cards that were put into your graveyard from the battlefield this turn";
     }
 
-    public FellShepherdEffect(final FellShepherdEffect effect) {
+    private FellShepherdEffect(final FellShepherdEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        FellShepherdWatcher watcher = game.getState().getWatcher(FellShepherdWatcher.class);
+        if (player == null || watcher == null) {
+            return false;
+        }
+        return player.moveCards(watcher.getCards(source.getControllerId(), game), Zone.HAND, source, game);
     }
 
     @Override
     public FellShepherdEffect copy() {
         return new FellShepherdEffect(this);
     }
+}
+
+class FellShepherdWatcher extends Watcher {
+
+    private final Set<MageObjectReference> morMap = new HashSet<>();
+
+    FellShepherdWatcher() {
+        super(WatcherScope.GAME);
+    }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        FellShepherdWatcher watcher = game.getState().getWatcher(FellShepherdWatcher.class, source.getControllerId());
-        if (watcher != null) {
-            StringBuilder sb = new StringBuilder();
-            for (UUID creatureId : watcher.getCreaturesIds()) {
-                if (game.getState().getZone(creatureId) == Zone.GRAVEYARD) {
-                    Card card = game.getCard(creatureId);
-                    if (card != null) {
-                        card.moveToZone(Zone.HAND, source, game, false);
-                        sb.append(' ').append(card.getName());
-                    }
-                }
-            }
-            if (sb.length() > 0) {
-                sb.insert(0, "Fell Shepherd - returning to hand:");
-                game.informPlayers(sb.toString());
-            }
-            return true;
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
+            morMap.add(new MageObjectReference(((ZoneChangeEvent) event).getTarget(), game));
         }
-        return false;
+    }
+
+    Cards getCards(UUID ownerId, Game game) {
+        Cards cards = new CardsImpl();
+        morMap.stream()
+                .map(m -> m.getCard(game))
+                .filter(Objects::nonNull)
+                .filter(MageObject::isCreature)
+                .filter(c -> c.isOwnedBy(ownerId))
+                .forEach(cards::add);
+        return cards;
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        morMap.clear();
     }
 }

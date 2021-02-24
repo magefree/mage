@@ -1,7 +1,5 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -15,15 +13,17 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class FiremindsForesight extends CardImpl {
 
     public FiremindsForesight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{5}{U}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{U}{R}");
 
         // Search your library for an instant card with converted mana cost 3, reveal it,
         // and put it into your hand. Then repeat this process for instant cards with
@@ -41,14 +41,27 @@ public final class FiremindsForesight extends CardImpl {
     }
 }
 
-class FiremindsForesightSearchEffect extends  OneShotEffect {
+class FiremindsForesightSearchEffect extends OneShotEffect {
 
-    public FiremindsForesightSearchEffect() {
-        super(Outcome.DrawCard);
-        staticText = "Search your library for an instant card with converted mana cost 3, reveal it, and put it into your hand. Then repeat this process for instant cards with converted mana costs 2 and 1. Then shuffle your library";
+    private static final Map<Integer, FilterCard> filterMap = new HashMap<>();
+
+    static {
+        for (int cmc = 3; cmc > 0; cmc--) {
+            FilterCard filter = new FilterCard("instant card with converted mana cost " + cmc);
+            filter.add(CardType.INSTANT.getPredicate());
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
+            filterMap.put(cmc, filter);
+        }
     }
 
-    public FiremindsForesightSearchEffect(final FiremindsForesightSearchEffect effect) {
+    FiremindsForesightSearchEffect() {
+        super(Outcome.DrawCard);
+        staticText = "Search your library for an instant card with converted mana cost 3, " +
+                "reveal it, and put it into your hand. Then repeat this process " +
+                "for instant cards with converted mana costs 2 and 1. Then shuffle your library";
+    }
+
+    private FiremindsForesightSearchEffect(final FiremindsForesightSearchEffect effect) {
         super(effect);
     }
 
@@ -60,41 +73,22 @@ class FiremindsForesightSearchEffect extends  OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (player == null || sourceCard == null) {
+        if (player == null) {
             return false;
         }
-        int cardsCount;
         Cards cardToReveal = new CardsImpl();
-        Cards cardsInLibrary = new CardsImpl();
-        cardsInLibrary.addAll(player.getLibrary().getCards(game));
-
-        for (int cmc=3; cmc > 0; cmc--) {
-            FilterCard filter = new FilterCard("instant card with converted mana cost " + cmc);
-            filter.add(CardType.INSTANT.getPredicate());
-            filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
-
-
-            cardsCount = cardsInLibrary.count(filter, game);
-            if (cardsCount > 0) {
-                TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
-                if (player.searchLibrary(target, source, game)) {
-                    for (UUID cardId: target.getTargets()) {
-                        Card card = player.getLibrary().remove(cardId, game);
-                        if (card != null){
-                            card.moveToZone(Zone.HAND, source, game, false);
-                            game.informPlayers(sourceCard.getName()+": " + player.getLogName() + " chose " + card.getName() );
-                            cardsInLibrary.remove(card);
-                            cardToReveal.add(card);
-                            player.revealCards(sourceCard.getName(), cardToReveal, game);
-                        }
-                    }
-                }
-            } else {
-                player.lookAtCards(filter.getMessage(), cardsInLibrary, game);
+        for (int cmc = 3; cmc > 0; cmc--) {
+            TargetCardInLibrary target = new TargetCardInLibrary(filterMap.get(cmc));
+            player.searchLibrary(target, source, game);
+            Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+            if (card == null) {
+                continue;
             }
+            cardToReveal.clear();
+            cardToReveal.add(card);
+            player.revealCards(source, cardToReveal, game);
+            player.moveCards(cardToReveal, Zone.HAND, source, game);
         }
-
         player.shuffleLibrary(source, game);
         return true;
     }

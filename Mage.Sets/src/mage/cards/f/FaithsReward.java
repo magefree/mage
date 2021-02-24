@@ -1,11 +1,13 @@
-
 package mage.cards.f;
 
+import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.WatcherScope;
@@ -13,21 +15,21 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.players.Player;
 import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author Loki
  */
 public final class FaithsReward extends CardImpl {
 
     public FaithsReward(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
 
         // Return to the battlefield all permanent cards in your graveyard that were put there from the battlefield this turn.
         this.getSpellAbility().addEffect(new FaithsRewardEffect());
@@ -51,23 +53,18 @@ class FaithsRewardEffect extends OneShotEffect {
         staticText = "Return to the battlefield all permanent cards in your graveyard that were put there from the battlefield this turn";
     }
 
-    FaithsRewardEffect(final FaithsRewardEffect effect) {
+    private FaithsRewardEffect(final FaithsRewardEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
         FaithsRewardWatcher watcher = game.getState().getWatcher(FaithsRewardWatcher.class);
-        if (watcher != null) {
-            for (UUID id : watcher.getCards()) {
-                Card c = game.getCard(id);
-                if (c != null && c.isOwnedBy(source.getControllerId()) && game.getState().getZone(id) == Zone.GRAVEYARD) {
-                    c.moveToZone(Zone.BATTLEFIELD, source, game, false);
-                }
-            }
-            return true;
+        if (player == null || watcher == null) {
+            return false;
         }
-        return false;
+        return player.moveCards(watcher.getCards(source.getControllerId(), game), Zone.BATTLEFIELD, source, game);
     }
 
     @Override
@@ -77,26 +74,34 @@ class FaithsRewardEffect extends OneShotEffect {
 }
 
 class FaithsRewardWatcher extends Watcher {
-    private List<UUID> cards = new ArrayList<>();
 
-    public FaithsRewardWatcher() {
+    private final Set<MageObjectReference> morMap = new HashSet<>();
+
+    FaithsRewardWatcher() {
         super(WatcherScope.GAME);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
-            cards.add(event.getTargetId());
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
+            morMap.add(new MageObjectReference(((ZoneChangeEvent) event).getTarget(), game));
         }
     }
 
-    public List<UUID> getCards(){
+    Cards getCards(UUID ownerId, Game game) {
+        Cards cards = new CardsImpl();
+        morMap.stream()
+                .map(m -> m.getCard(game))
+                .filter(Objects::nonNull)
+                .filter(MageObject::isPermanent)
+                .filter(c -> c.isOwnedBy(ownerId))
+                .forEach(cards::add);
         return cards;
     }
 
     @Override
     public void reset() {
         super.reset();
-        cards.clear();
+        morMap.clear();
     }
 }
