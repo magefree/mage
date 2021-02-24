@@ -9,56 +9,54 @@ import java.io.Serializable;
  */
 public class MageVersion implements Serializable, Comparable<MageVersion> {
 
+    // version must be compatible with maven version numbers
+    // launcher can update only to newest version
+    // example: 1.4.48-V1-beta3
+    // * 1.4.48 compares as numbers
+    // * V1-beta3 is qualifier and compares as string
+    // * launcher gives priority to 1.4.48 instead 1.4.48-any-text, so don't use empty release info
     public static final int MAGE_VERSION_MAJOR = 1;
     public static final int MAGE_VERSION_MINOR = 4;
-    public static final int MAGE_VERSION_PATCH = 48;
-    public static final String MAGE_EDITION_INFO = ""; // set "-beta2" for 1.4.32V1-beta2
-    public static final String MAGE_VERSION_MINOR_PATCH = "V1"; // default
-    // strict mode
-    private static final boolean MAGE_VERSION_MINOR_PATCH_MUST_BE_SAME = true; // set true on uncompatible github changes, set false after new major release (after MAGE_VERSION_PATCH changes)
+    public static final int MAGE_VERSION_RELEASE = 48;
+    public static final String MAGE_VERSION_RELEASE_INFO = "V1"; // V1 for releases, V1-beta3 for betas
 
+    // strict mode
+    // Each update requires a strict version
+    // If you disable it then server can accept multiple versions with same release number
+    // Since incompatible changes are no longer monitored - it must always be true
+    private static final boolean MAGE_VERSION_RELEASE_INFO_MUST_BE_SAME = true;
+    // build info
     public static final boolean MAGE_VERSION_SHOW_BUILD_TIME = true;
+
     private final int major;
     private final int minor;
-    private final int patch;
-    private final String minorPatch; // doesn't matter for compatibility
+    private final int release;
+    private final String releaseInfo;
     private final String buildTime;
-    private final String editionInfo;
 
     public MageVersion(Class sourceClass) {
-        this(MAGE_VERSION_MAJOR, MAGE_VERSION_MINOR, MAGE_VERSION_PATCH, MAGE_VERSION_MINOR_PATCH, MAGE_EDITION_INFO, sourceClass);
+        this(MAGE_VERSION_MAJOR, MAGE_VERSION_MINOR, MAGE_VERSION_RELEASE, MAGE_VERSION_RELEASE_INFO, sourceClass);
     }
 
-    public MageVersion(int major, int minor, int patch, String minorPatch, String editionInfo, Class sourceClass) {
+    public MageVersion(int major, int minor, int release, String releaseInfo, Class sourceClass) {
         this.major = major;
         this.minor = minor;
-        this.patch = patch;
-        this.minorPatch = minorPatch;
-        this.editionInfo = editionInfo;
+        this.release = release;
+        this.releaseInfo = releaseInfo;
+
+        if (!releaseInfo.startsWith("V")) {
+            // release: V1
+            // beta: V1-beta3
+            throw new IllegalArgumentException("ERROR, release info must be started from V.");
+        }
 
         // build time
         this.buildTime = JarVersion.getBuildTime(sourceClass);
     }
 
-    public int getMajor() {
-        return major;
-    }
-
-    public int getMinor() {
-        return minor;
-    }
-
-    public int getPatch() {
-        return patch;
-    }
-
-    public String getMinorPatch() {
-        return minorPatch;
-    }
-
     public String toString(boolean showBuildTime) {
-        // 1.4.32V1-beta2 (build: time)
-        String res = major + "." + minor + '.' + patch + minorPatch + editionInfo;
+        // 1.4.32-V1-beta2 (build: time)
+        String res = major + "." + minor + '.' + release + "-" + releaseInfo;
         if (showBuildTime && !this.buildTime.isEmpty()) {
             res += " (build: " + this.buildTime + ")";
         }
@@ -78,12 +76,15 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
         if (minor != o.minor) {
             return minor - o.minor;
         }
-        if (patch != o.patch) {
-            return patch - o.patch;
+        if (release != o.release) {
+            return release - o.release;
         }
-        if (MAGE_VERSION_MINOR_PATCH_MUST_BE_SAME && !minorPatch.equals(o.minorPatch)) {
-            return minorPatch.compareTo(o.minorPatch);
+
+        if (MAGE_VERSION_RELEASE_INFO_MUST_BE_SAME && !releaseInfo.equals(o.releaseInfo)) {
+            return releaseInfo.compareTo(o.releaseInfo);
         }
-        return editionInfo.compareTo(o.editionInfo);
+
+        // all fine
+        return 0;
     }
 }
