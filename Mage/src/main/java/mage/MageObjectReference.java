@@ -26,13 +26,17 @@ public class MageObjectReference implements Comparable<MageObjectReference>, Ser
     private final int zoneChangeCounter;
 
     public MageObjectReference(MageObject mageObject, Game game) {
+        this(mageObject, game, 0);
+    }
+
+    public MageObjectReference(MageObject mageObject, Game game, int offset) {
         if (mageObject == null) {
             this.sourceId = null;
             this.zoneChangeCounter = -1;
             return;
         }
         this.sourceId = mageObject.getId();
-        this.zoneChangeCounter = mageObject.getZoneChangeCounter(game);
+        this.zoneChangeCounter = mageObject.getZoneChangeCounter(game) + offset;
     }
 
     /**

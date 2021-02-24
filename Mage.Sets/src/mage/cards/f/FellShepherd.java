@@ -100,7 +100,7 @@ class FellShepherdWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
-            morMap.add(new MageObjectReference(((ZoneChangeEvent) event).getTarget(), game));
+            morMap.add(new MageObjectReference(((ZoneChangeEvent) event).getTarget(), game, 1));
         }
     }
 
