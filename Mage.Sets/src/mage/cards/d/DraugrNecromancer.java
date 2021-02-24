@@ -19,6 +19,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -83,7 +84,7 @@ class DraugrNecromancerReplacementEffect extends ReplacementEffectImpl {
         }
         Card card = game.getCard(permanent.getId());
         controller.moveCards(permanent, Zone.EXILED, source, game);
-        card.addCounters(CounterType.ICE.createInstance(), source.getControllerId(), source, game);
+        card.getMainCard().addCounters(CounterType.ICE.createInstance(), source.getControllerId(), source, game);
         return true;
     }
 
@@ -132,7 +133,7 @@ class DraugrNecromancerCastFromExileEffect extends AsThoughEffectImpl {
         return card != null
                 && !card.isLand()
                 && game.getOpponents(card.getOwnerId()).contains(source.getControllerId())
-                && card.getCounters(game).getCount(CounterType.ICE) > 0;
+                && card.getMainCard().getCounters(game).getCount(CounterType.ICE) > 0;
     }
 }
 
@@ -165,11 +166,11 @@ class DraugrNecromancerSpendAnyManaEffect extends AsThoughEffectImpl implements 
         }
         Card card = game.getCard(sourceId);
         if (card != null
-                && game.getState().getZone(sourceId) == Zone.EXILED
-                && card.getCounters(game).getCount(CounterType.ICE) > 0) {
+                && game.getState().getZone(card.getId()) == Zone.EXILED
+                && card.getMainCard().getCounters(game).getCount(CounterType.ICE) > 0) {
             return true;
         }
-        CardState cardState = game.getLastKnownInformationCard(sourceId, Zone.EXILED);
+        CardState cardState = game.getLastKnownInformationCard(CardUtil.getMainCardId(game, sourceId), Zone.EXILED);
         return cardState != null && cardState.getCounters().getCount(CounterType.ICE) > 0;
     }
 
