@@ -1,10 +1,12 @@
-
 package mage.cards.w;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
@@ -63,15 +65,17 @@ class WashOutEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        Set<Card> cardsToReturn = new LinkedHashSet<>();
         ChoiceColor choice = new ChoiceColor();
-        if (controller != null && controller.choose(Outcome.ReturnToHand, choice, game)) {
+        if (controller != null 
+                && controller.choose(Outcome.ReturnToHand, choice, game)) {
             ObjectColor color = choice.getColor();
             FilterPermanent filter = new FilterPermanent();
             filter.add(new ColorPredicate(color));
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                permanent.moveToZone(Zone.HAND, source, game, true);
+                cardsToReturn.add((Card) permanent);
             }
-            return true;
+            return controller.moveCards(cardsToReturn, Zone.HAND, source, game);
         }
         return false;
     }

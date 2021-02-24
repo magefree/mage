@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -14,6 +13,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -65,8 +65,10 @@ class WarrenPilferersReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getFirstTarget());
-        if (card != null) {
-            card.moveToZone(Zone.HAND, source, game, false);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (card != null
+                && controller != null
+                && controller.moveCards(card, Zone.HAND, source, game)) {
             if (card.hasSubtype(SubType.GOBLIN, game)) {
                 game.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), source);
             }
