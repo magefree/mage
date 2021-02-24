@@ -1,24 +1,25 @@
 package mage.cards.a;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Collection;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -31,13 +32,12 @@ public final class AllHallowsEve extends CardImpl {
 
         // Exile All Hallow's Eve with two scream counters on it.
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
-        Effect effect = new AddCountersSourceEffect(CounterType.SCREAM.createInstance(), StaticValue.get(2), true, true);
-        effect.setText("with 2 scream counters on it");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new AddCountersSourceEffect(
+                CounterType.SCREAM.createInstance(), StaticValue.get(2), true, true
+        ).setText("with 2 scream counters on it"));
 
         // At the beginning of your upkeep, if All Hallow's Eve is exiled with a scream counter on it, remove a scream counter from it. If there are no more scream counters on it, put it into your graveyard and each player returns all creature cards from their graveyard to the battlefield.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new AllHallowsEveEffect(), TargetController.YOU, false));
-
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new AllHallowsEveEffect(), TargetController.YOU, false), AllHallowsEveCondition.instance, "At the beginning of your upkeep, if {this} is exiled with a scream counter on it, remove a scream counter from it. If there are no more scream counters on it, put it into your graveyard and each player returns all creature cards from their graveyard to the battlefield."));
     }
 
     private AllHallowsEve(final AllHallowsEve card) {
@@ -50,14 +50,26 @@ public final class AllHallowsEve extends CardImpl {
     }
 }
 
+enum AllHallowsEveCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
+        return sourceObject != null
+                && game.getState().getZone(source.getSourceId()) == Zone.EXILED
+                && sourceObject instanceof Card
+                && ((Card) sourceObject).getMainCard().getCounters(game).getCount(CounterType.SCREAM) > 0;
+    }
+}
+
 class AllHallowsEveEffect extends OneShotEffect {
 
-    public AllHallowsEveEffect() {
+    AllHallowsEveEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "if {this} is exiled with a scream counter on it, remove a scream counter from it. If there are no more scream counters on it, put it into your graveyard and each player returns all creature cards from their graveyard to the battlefield";
     }
 
-    public AllHallowsEveEffect(final AllHallowsEveEffect effect) {
+    private AllHallowsEveEffect(final AllHallowsEveEffect effect) {
         super(effect);
     }
 
@@ -68,23 +80,24 @@ class AllHallowsEveEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card allHallowsEve = game.getCard(source.getSourceId());
+        Card card = (Card) source.getSourceObject(game);
         Player controller = game.getPlayer(source.getControllerId());
-        if (allHallowsEve != null
-                && controller != null
-                && game.getExile().getCard(allHallowsEve.getId(), game) != null) {
-            allHallowsEve.removeCounters(CounterType.SCREAM.getName(), 1, source, game);
-            if (allHallowsEve.getCounters(game).getCount(CounterType.SCREAM) == 0) {
-                allHallowsEve.moveToZone(Zone.GRAVEYARD, source, game, false);
-                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        player.moveCards(player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game), Zone.BATTLEFIELD, source, game);
-                    }
-                }
-            }
-            return true;
+        if (card == null || controller == null) {
+            return false;
         }
-        return false;
+        controller.moveCards(card, Zone.GRAVEYARD, source, game);
+        Cards cards = new CardsImpl();
+        game.getState()
+                .getPlayersInRange(source.getControllerId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .map(Player::getGraveyard)
+                .map(g -> g.getCards(game))
+                .flatMap(Collection::stream)
+                .filter(MageObject::isCreature)
+                .forEach(cards::add);
+        controller.moveCards(card, Zone.BATTLEFIELD, source, game, false, false, true, null);
+        return true;
     }
 }

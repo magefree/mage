@@ -1,8 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -14,10 +11,16 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.common.TargetCreaturePermanentSameController;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class BarrinsSpite extends CardImpl {
@@ -27,8 +30,9 @@ public final class BarrinsSpite extends CardImpl {
 
         // Choose two target creatures controlled by the same player. Their controller chooses and sacrifices one of them. Return the other to its owner's hand.
         this.getSpellAbility().addEffect(new BarrinsSpiteEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentSameController(2, 2, StaticFilters.FILTER_PERMANENT_CREATURE, false));
-
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentSameController(
+                2, 2, StaticFilters.FILTER_PERMANENT_CREATURE, false
+        ));
     }
 
     private BarrinsSpite(final BarrinsSpite card) {
@@ -43,12 +47,13 @@ public final class BarrinsSpite extends CardImpl {
 
 class BarrinsSpiteEffect extends OneShotEffect {
 
-    public BarrinsSpiteEffect() {
+    BarrinsSpiteEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Choose two target creatures controlled by the same player. Their controller chooses and sacrifices one of them. Return the other to its owner's hand";
+        this.staticText = "Choose two target creatures controlled by the same player. " +
+                "Their controller chooses and sacrifices one of them. Return the other to its owner's hand";
     }
 
-    public BarrinsSpiteEffect(final BarrinsSpiteEffect effect) {
+    private BarrinsSpiteEffect(final BarrinsSpiteEffect effect) {
         super(effect);
     }
 
@@ -59,30 +64,42 @@ class BarrinsSpiteEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = source.getSourceObject(game);
-        if (sourceObject != null) {
-            boolean sacrificeDone = false;
-            int count = 0;
-            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
-                Permanent creature = game.getPermanent(targetId);
-                if (creature != null) {
-                    Player controllerOfCreature = game.getPlayer(creature.getControllerId());
-                    if(controllerOfCreature != null) {
-                        if ((count == 0
-                                && controllerOfCreature.chooseUse(Outcome.Sacrifice, "Sacrifice " + creature.getLogName() + '?', source, game))
-                                || (count == 1
-                                && !sacrificeDone)) {
-                            creature.sacrifice(source, game);
-                            sacrificeDone = true;
-                        } else {
-                            creature.moveToZone(Zone.HAND, source, game, false);
-                        }
-                        count++;
-                    }
-                }
-            }
+        List<Permanent> permanents = source
+                .getTargets()
+                .stream()
+                .map(Target::getTargets)
+                .flatMap(Collection::stream)
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        if (permanents.isEmpty()) {
+            return false;
+        }
+        if (permanents.size() == 1) {
+            permanents.get(0).sacrifice(source, game);
             return true;
         }
-        return false;
+        if (permanents.size() > 2) {
+            throw new IllegalStateException("Too many permanents in list, shouldn't be possible");
+        }
+        Player player = game.getPlayer(permanents.get(0).getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (player == null || controller == null) {
+            return false;
+        }
+        Permanent perm1 = permanents.get(0);
+        Permanent perm2 = permanents.get(1);
+        if (player.chooseUse(
+                outcome, "Choose which permanent to sacrifice",
+                "The other will be returned to your hand",
+                perm1.getIdName(), perm2.getIdName(), source, game
+        )) {
+            perm1.sacrifice(source, game);
+            controller.moveCards(perm2, Zone.HAND, source, game);
+            return true;
+        }
+        perm2.sacrifice(source, game);
+        controller.moveCards(perm1, Zone.HAND, source, game);
+        return true;
     }
 }
