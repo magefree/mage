@@ -5,11 +5,13 @@ import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -24,7 +26,6 @@ public final class CutTheTethers extends CardImpl {
 
     public CutTheTethers(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{U}{U}");
-
 
         // For each Spirit, return it to its owner's hand unless that player pays {3}.
         this.getSpellAbility().addEffect(new CutTheTethersEffect());
@@ -42,18 +43,14 @@ public final class CutTheTethers extends CardImpl {
 
 class CutTheTethersEffect extends OneShotEffect {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Spirit creatures");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.SPIRIT, "");
 
-    static {
-        filter.add(SubType.SPIRIT.getPredicate());
-    }
-
-    public CutTheTethersEffect() {
+    CutTheTethersEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "For each Spirit, return it to its owner's hand unless that player pays {3}";
     }
 
-    public CutTheTethersEffect(final CutTheTethersEffect effect) {
+    private CutTheTethersEffect(final CutTheTethersEffect effect) {
         super(effect);
     }
 
@@ -64,19 +61,28 @@ class CutTheTethersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            Player player = game.getPlayer(creature.getControllerId());
-            if (player != null) {
-                boolean paid = false;
-                if (player.chooseUse(Outcome.Benefit, "Pay {3} to keep " + creature.getName() + " on the battlefield?", source, game)) {
-                    Cost cost = ManaUtil.createManaCost(3, false);
-                    paid = cost.pay(source, game, source, creature.getControllerId(), false, null);
-                }
-                if (!paid) {
-                    creature.moveToZone(Zone.HAND, source, game, true);
-                }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        Cards toHand = new CardsImpl();
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
+                filter, source.getControllerId(), source.getSourceId(), game
+        )) {
+            Player player = game.getPlayer(permanent.getOwnerId());
+            if (player == null) {
+                continue;
+            }
+            boolean paid = false;
+            if (player.chooseUse(Outcome.Benefit, "Pay {3} to keep " + permanent.getIdName() + " on the battlefield?", source, game)) {
+                Cost cost = ManaUtil.createManaCost(3, false);
+                paid = cost.pay(source, game, source, permanent.getControllerId(), false, null);
+            }
+            if (!paid) {
+                toHand.add(permanent);
             }
         }
+        controller.moveCards(toHand, Zone.HAND, source, game);
         return true;
     }
 }

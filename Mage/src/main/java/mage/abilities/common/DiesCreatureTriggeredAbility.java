@@ -72,9 +72,7 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()) {
             if (filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
                 if (setTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
-                    }
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
                 }
                 return true;
             }

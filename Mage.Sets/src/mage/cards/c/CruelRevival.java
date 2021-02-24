@@ -14,6 +14,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -36,7 +37,6 @@ public final class CruelRevival extends CardImpl {
     public CruelRevival(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{B}");
 
-
         // Destroy target non-Zombie creature. It can't be regenerated. Return up to one target Zombie card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new CruelRevivalEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
@@ -55,12 +55,13 @@ public final class CruelRevival extends CardImpl {
 
 class CruelRevivalEffect extends OneShotEffect {
 
-    public CruelRevivalEffect() {
+    CruelRevivalEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Destroy target non-Zombie creature. It can't be regenerated. Return up to one target Zombie card from your graveyard to your hand";
+        staticText = "Destroy target non-Zombie creature. It can't be regenerated. " +
+                "Return up to one target Zombie card from your graveyard to your hand";
     }
 
-    public CruelRevivalEffect(final CruelRevivalEffect effect) {
+    private CruelRevivalEffect(final CruelRevivalEffect effect) {
         super(effect);
     }
 
@@ -71,9 +72,10 @@ class CruelRevivalEffect extends OneShotEffect {
             targetDestroy.destroy(source, game, true);
         }
 
+        Player player = game.getPlayer(source.getControllerId());
         Card targetRetrieve = game.getCard(source.getTargets().get(1).getFirstTarget());
-        if (targetRetrieve != null) {
-            targetRetrieve.moveToZone(Zone.HAND, source, game, true);
+        if (player != null && targetRetrieve != null) {
+            player.moveCards(targetRetrieve, Zone.HAND, source, game);
         }
         return true;
     }

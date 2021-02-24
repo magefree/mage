@@ -4,8 +4,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -15,14 +18,12 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import mage.abilities.condition.Condition;
-import mage.constants.Zone;
 
 /**
  * @author TheElk801
@@ -88,7 +89,7 @@ class DecoyGambitEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        HashSet<Permanent> permanentToHand = new HashSet();
+        Cards permanentToHand = new CardsImpl();
         int numberOfCardsToDraw = 0;
         if (controller == null) {
             return false;
@@ -102,8 +103,6 @@ class DecoyGambitEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         for (Permanent permanent : permanents) {
-            // If a creature targeted by Decoy Gambit changes controller, it’s no longer a legal target.
-            new DecoyGambitCondition(permanent).apply(game, source); // save current controller
             Player player = game.getPlayer(permanent.getControllerId());
             if (player == null) {
                 continue;
@@ -125,31 +124,7 @@ class DecoyGambitEffect extends OneShotEffect {
         cards. After you’ve drawn, the appropriate creatures are all simultaneously returned to their owners’ hands.
          */
         controller.drawCards(numberOfCardsToDraw, source, game);
-        for (Permanent creature : permanentToHand) {
-            if (creature != null
-                    && new DecoyGambitCondition(creature).apply(game, source)) { // same controller required
-                creature.moveToZone(Zone.HAND, source, game, false);
-            }
-        }
+        controller.moveCards(permanentToHand, Zone.HAND, source, game);
         return true;
-    }
-}
-
-class DecoyGambitCondition implements Condition {
-
-    private UUID controllerId;
-    private final Permanent permanent;
-
-    DecoyGambitCondition(Permanent permanent) {
-        this.permanent = permanent;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        if (controllerId == null) { // is the original controller set
-            controllerId = permanent.getControllerId(); // original controller set
-        }
-        return (permanent != null
-                && Objects.equals(controllerId, permanent.getControllerId()));
     }
 }
