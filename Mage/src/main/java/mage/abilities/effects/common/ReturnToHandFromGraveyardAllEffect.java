@@ -74,16 +74,16 @@ public class ReturnToHandFromGraveyardAllEffect extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
-        if(staticText!=null&&!staticText.isEmpty()){
+        if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        String rule="";
-        switch (targetController){
-            case EACH_PLAYER:
-                rule+="each player";break;
-            case OPPONENT:rule+="opponent";break;
+        switch (targetController) {
+            case OPPONENT:
+                return "each opponent returns each " + filter.getMessage() + " from their graveyard to their hand";
             case YOU:
-                
+                return "return each " + filter.getMessage() + " from your graveyard to your hand";
+            default:
+                return "each player returns each " + filter.getMessage() + " from their graveyard to their hand";
         }
     }
 }
