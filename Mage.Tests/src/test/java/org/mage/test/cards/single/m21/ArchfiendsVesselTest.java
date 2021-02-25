@@ -26,8 +26,9 @@ public class ArchfiendsVesselTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Demon", 1);
+        assertPermanentCount(playerA, archfiendsVessel, 0);
         assertExileCount(playerA, archfiendsVessel, 1);
-
+        assertGraveyardCount(playerA, archfiendsVessel, 0);
     }
 
     @Test
@@ -48,7 +49,33 @@ public class ArchfiendsVesselTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertPermanentCount(playerA, "Demon", 1);
+        assertPermanentCount(playerA, archfiendsVessel, 0);
         assertExileCount(playerA, archfiendsVessel, 1);
+        assertGraveyardCount(playerA, archfiendsVessel, 0);
+    }
 
+    @Test
+    public void diesOnStack() {
+        // If Archfiend’s Vessel leaves the battlefield while its triggered ability is on the stack,
+        // you can’t exile it from the zone it’s put into, so you won’t create a Demon.
+
+        addCard(Zone.GRAVEYARD, playerA, archfiendsVessel);
+        addCard(Zone.HAND, playerA, "Exhume");
+        addCard(Zone.HAND, playerA, "Fatal Push");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Exhume");
+        addTarget(playerA, archfiendsVessel);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fatal Push");
+        addTarget(playerA, archfiendsVessel);
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, "Demon", 0);
+        assertPermanentCount(playerA, archfiendsVessel, 0);
+        assertExileCount(playerA, archfiendsVessel, 0);
+        assertGraveyardCount(playerA, archfiendsVessel, 1);
     }
 }
