@@ -2,27 +2,21 @@ package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.WatcherScope;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.card.PutIntoGraveFromBattlefieldThisTurnPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.watchers.Watcher;
-
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.players.Player;
+import mage.watchers.common.CardsPutIntoGraveyardWatcher;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class SecondSunrise extends CardImpl {
@@ -32,7 +26,7 @@ public final class SecondSunrise extends CardImpl {
 
         // Each player returns to the battlefield all artifact, creature, enchantment, and land cards in their graveyard that were put there from the battlefield this turn.
         this.getSpellAbility().addEffect(new SecondSunriseEffect());
-        this.getSpellAbility().addWatcher(new SecondSunriseWatcher());
+        this.getSpellAbility().addWatcher(new CardsPutIntoGraveyardWatcher());
     }
 
     private SecondSunrise(final SecondSunrise card) {
@@ -47,70 +41,45 @@ public final class SecondSunrise extends CardImpl {
 
 class SecondSunriseEffect extends OneShotEffect {
 
-    SecondSunriseEffect() {
-        super(Outcome.PutCardInPlay);
-        staticText = "Each player returns to the battlefield all artifact, creature, enchantment, and land cards in their graveyard that were put there from the battlefield this turn";
+    private static final FilterCard filter = new FilterCard();
+
+    static {
+        filter.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate(),
+                CardType.ENCHANTMENT.getPredicate(),
+                CardType.LAND.getPredicate()
+        ));
+        filter.add(PutIntoGraveFromBattlefieldThisTurnPredicate.instance);
     }
 
-    SecondSunriseEffect(final SecondSunriseEffect effect) {
+    SecondSunriseEffect() {
+        super(Outcome.PutCardInPlay);
+        staticText = "Each player returns to the battlefield all artifact, creature, enchantment, " +
+                "and land cards in their graveyard that were put there from the battlefield this turn.";
+    }
+
+    private SecondSunriseEffect(final SecondSunriseEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SecondSunriseWatcher watcher = game.getState().getWatcher(SecondSunriseWatcher.class);
-        if (watcher != null) {
-            Set<Card> cardsToBattlefield = new LinkedHashSet<>();
-            for (UUID id : watcher.getCards()) {
-                Card card = game.getCard(id);
-                if (card != null 
-                        && game.getState().getZone(id) == Zone.GRAVEYARD) {
-                    if (card.isArtifact() || card.isCreature()
-                            || card.isEnchantment() || card.isLand()) {
-                        cardsToBattlefield.add(card);
-                    }
-                }
+        boolean result = false;
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
             }
-            for (Card card : cardsToBattlefield) {
-                Player owner = game.getPlayer(card.getOwnerId());
-                if (owner != null) {
-                    owner.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
-            }
-            return true;
+            result |= player.moveCards(player.getGraveyard().getCards(
+                    filter, source.getSourceId(), source.getControllerId(), game
+            ), Zone.BATTLEFIELD, source, game);
         }
-        return false;
+        return result;
     }
 
     @Override
     public SecondSunriseEffect copy() {
         return new SecondSunriseEffect(this);
-    }
-}
-
-class SecondSunriseWatcher extends Watcher {
-
-    private List<UUID> cards = new ArrayList<>();
-
-    public SecondSunriseWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE 
-                && ((ZoneChangeEvent) event).isDiesEvent()) {
-            cards.add(event.getTargetId());
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        cards.clear();
-    }
-
-    public List<UUID> getCards() {
-        return cards;
     }
 }

@@ -1,26 +1,21 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-import mage.watchers.Watcher;
+import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -42,7 +37,7 @@ public final class GerrardWeatherlightHero extends CardImpl {
         // When Gerrard, Weatherlight Hero dies, exile it and return to the battlefield all artifact and creature cards in your graveyard that were put there from the battlefield this turn.
         Ability ability = new DiesSourceTriggeredAbility(new ExileSourceEffect().setText("exile it"));
         ability.addEffect(new GerrardWeatherlightHeroEffect());
-        this.addAbility(ability, new GerrardWeatherlightHeroWatcher());
+        this.addAbility(ability, new CardsPutIntoGraveyardWatcher());
     }
 
     private GerrardWeatherlightHero(final GerrardWeatherlightHero card) {
@@ -56,6 +51,15 @@ public final class GerrardWeatherlightHero extends CardImpl {
 }
 
 class GerrardWeatherlightHeroEffect extends OneShotEffect {
+
+    private static final FilterCard filter = new FilterCard();
+
+    static {
+        filter.add(Predicates.or(
+                CardType.ARTIFACT.getPredicate(),
+                CardType.CREATURE.getPredicate()
+        ));
+    }
 
     GerrardWeatherlightHeroEffect() {
         super(Outcome.Benefit);
@@ -75,48 +79,12 @@ class GerrardWeatherlightHeroEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        GerrardWeatherlightHeroWatcher watcher = game.getState().getWatcher(GerrardWeatherlightHeroWatcher.class);
-        if (player == null || watcher == null) {
+        if (player == null) {
             return false;
         }
-        return player.moveCards(
-                player.getGraveyard()
-                        .getCards(game)
-                        .stream()
-                        .filter(card -> watcher.checkCard(card, game))
-                        .collect(Collectors.toSet()),
-                Zone.BATTLEFIELD, source, game
-        );
-    }
-}
-
-class GerrardWeatherlightHeroWatcher extends Watcher {
-
-    private final List<MageObjectReference> cards = new ArrayList<>();
-
-    GerrardWeatherlightHeroWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && ((ZoneChangeEvent) event).isDiesEvent()) {
-            cards.add(new MageObjectReference(event.getTargetId(), game));
-        }
-    }
-
-    boolean checkCard(Card card, Game game) {
-        if (!card.isCreature() && !card.isArtifact()) {
-            return false;
-        }
-        return cards.stream().anyMatch(mageObjectReference -> mageObjectReference.refersTo(card, game));
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        cards.clear();
+        return player.moveCards(player.getGraveyard().getCards(
+                filter, source.getSourceId(), source.getControllerId(), game
+        ), Zone.BATTLEFIELD, source, game);
     }
 }
 // don’t mourn for me. this is my destiny.

@@ -1,38 +1,40 @@
-
 package mage.cards.n;
 
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.abilities.effects.common.ReturnToHandFromGraveyardAllEffect;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.players.Player;
-import mage.watchers.Watcher;
+import mage.constants.TargetController;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.card.PutIntoGraveFromBattlefieldThisTurnPredicate;
+import mage.watchers.common.CardsPutIntoGraveyardWatcher;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author anonymous
  */
 public final class NoRestForTheWicked extends CardImpl {
 
+    private static final FilterCard filter = new FilterCreatureCard();
+
+    static {
+        filter.add(PutIntoGraveFromBattlefieldThisTurnPredicate.instance);
+    }
+
     public NoRestForTheWicked(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         // Sacrifice No Rest for the Wicked: Return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NoRestForTheWickedEffect(), new SacrificeSourceCost());
-        Watcher watcher = new NoRestForTheWickedWatcher();
-        addAbility(ability, watcher);
+        this.addAbility(new SimpleActivatedAbility(
+                new ReturnToHandFromGraveyardAllEffect(filter, TargetController.YOU)
+                        .setText("return to your hand all creature cards in your graveyard " +
+                                "that were put there from the battlefield this turn"),
+                new SacrificeSourceCost()
+        ), new CardsPutIntoGraveyardWatcher());
     }
 
     private NoRestForTheWicked(final NoRestForTheWicked card) {
@@ -42,74 +44,5 @@ public final class NoRestForTheWicked extends CardImpl {
     @Override
     public NoRestForTheWicked copy() {
         return new NoRestForTheWicked(this);
-    }
-}
-
-class NoRestForTheWickedEffect extends OneShotEffect {
-
-    NoRestForTheWickedEffect() {
-        super(Outcome.Sacrifice);
-        staticText = "Return to your hand all creature cards in your graveyard that were put there from the battlefield this turn";
-    }
-
-    NoRestForTheWickedEffect(final NoRestForTheWickedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        NoRestForTheWickedWatcher watcher = game.getState().getWatcher(NoRestForTheWickedWatcher.class);
-        Player controller = game.getPlayer(source.getControllerId());
-        if (watcher != null && controller != null) {
-            Cards cardsToHand = new CardsImpl();
-            for (UUID cardId : watcher.getCards()) {
-                Card c = game.getCard(cardId);
-                if (c != null) {
-                    if (game.getState().getZone(cardId) == Zone.GRAVEYARD
-                            && c.isCreature()
-                            && c.isOwnedBy(source.getControllerId())) {
-                        cardsToHand.add(c);
-                    }
-                }
-            }
-            controller.moveCards(cardsToHand, Zone.HAND, source, game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public NoRestForTheWickedEffect copy() {
-        return new NoRestForTheWickedEffect(this);
-
-    }
-}
-
-class NoRestForTheWickedWatcher extends Watcher {
-
-    public List<UUID> getCards() {
-        return cards;
-    }
-
-    private List<UUID> cards;
-
-    public NoRestForTheWickedWatcher() {
-        super(WatcherScope.GAME);
-        this.cards = new ArrayList<>();
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && ((ZoneChangeEvent) event).isDiesEvent()) {
-            //400.3 Intercept only the controller's events
-            cards.add(event.getTargetId());
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        cards.clear();
     }
 }
