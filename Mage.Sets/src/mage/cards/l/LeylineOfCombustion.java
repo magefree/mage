@@ -12,8 +12,11 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -64,29 +67,34 @@ class LeylineOfCombustionTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         StackObject sourceObject = game.getStack().getStackObject(event.getSourceId());
-        if (sourceObject == null || this.controllerId.equals(sourceObject.getControllerId())) {
+        if (sourceObject == null) {
             return false;
         }
-        if (sourceObject
-                .getStackAbility()
-                .getTargets()
-                .stream()
-                .noneMatch(target -> target
-                        .getTargets()
-                        .stream()
-                        .anyMatch(targetId -> {
-                            if (this.controllerId.equals(targetId)) {
-                                return true;
-                            }
-                            Permanent permanent = game.getPermanent(targetId);
-                            return permanent != null && permanent.getControllerId().equals(this.controllerId);
-                        })
-                )) {
+        Player targetter = game.getPlayer(event.getPlayerId());
+        if (targetter == null || !targetter.hasOpponent(this.controllerId, game)) {
             return false;
         }
+        if (!event.getTargetId().equals(this.controllerId)) {
+            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            if (permanent == null || !permanent.isControlledBy(this.controllerId)) {
+                return false;
+            }
+        }
+        // If a spell targets you and/or a permanent you control multiple times,
+        // or if a spell targets you and one or more permanents you control,
+        // Leyline of Combustion’s triggered ability triggers once.
+        Set<UUID> sourceObjects = (Set<UUID>) game.getState().getValue("sourceObjects" + this.id);
+        if (sourceObjects == null) {
+            sourceObjects = new HashSet<>();
+        }
+        if (sourceObjects.contains(sourceObject.getId())) {
+            return false;
+        }
+        sourceObjects.add(sourceObject.getId());
+        game.getState().setValue("sourceObjects" + this.id, sourceObjects);
         this.getEffects().clear();
         Effect effect = new DamageTargetEffect(2);
-        effect.setTargetPointer(new FixedTarget(sourceObject.getControllerId(), game));
+        effect.setTargetPointer(new FixedTarget(event.getPlayerId(), game));
         this.addEffect(effect);
         return true;
     }
