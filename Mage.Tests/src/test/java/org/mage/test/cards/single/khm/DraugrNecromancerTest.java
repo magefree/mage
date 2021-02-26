@@ -118,7 +118,6 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, pair, 1);
     }
 
-    @Ignore
     @Test
     public void testCastAdventureSpellFromExile() {
         addCard(Zone.BATTLEFIELD, playerA, necromancer);
@@ -136,8 +135,8 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertExileCount(playerB, pair, 0);
-        assertGraveyardCount(playerB, pair, 1);
+        assertExileCount(playerB, pair, 1);
+        assertGraveyardCount(playerB, pair, 0);
         assertPermanentCount(playerA, "Food", 1);
     }
 
@@ -162,7 +161,6 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, pair, 1);
     }
 
-    @Ignore
     @Test
     public void testCastAdventureSpellFromExileWithSnow() {
         addCard(Zone.BATTLEFIELD, playerA, necromancer);
@@ -180,8 +178,8 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
         execute();
         assertAllCommandsUsed();
 
-        assertExileCount(playerB, pair, 0);
-        assertGraveyardCount(playerB, pair, 1);
+        assertExileCount(playerB, pair, 1);
+        assertGraveyardCount(playerB, pair, 0);
         assertPermanentCount(playerA, "Food", 1);
     }
 

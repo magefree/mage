@@ -125,15 +125,18 @@ class DraugrNecromancerCastFromExileEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, UUID affectedControllerId, Game game) {
-        if (!source.isControlledBy(affectedControllerId)
-                || game.getState().getZone(sourceId) != Zone.EXILED) {
+        Card card = game.getCard(sourceId);
+        if (card == null) {
             return false;
         }
-        Card card = game.getCard(sourceId);
-        return card != null
-                && !card.isLand()
+        card = card.getMainCard();
+        if (!source.isControlledBy(affectedControllerId)
+                || game.getState().getZone(card.getId()) != Zone.EXILED) {
+            return false;
+        }
+        return !card.isLand()
                 && game.getOpponents(card.getOwnerId()).contains(source.getControllerId())
-                && card.getMainCard().getCounters(game).getCount(CounterType.ICE) > 0;
+                && card.getCounters(game).getCount(CounterType.ICE) > 0;
     }
 }
 
