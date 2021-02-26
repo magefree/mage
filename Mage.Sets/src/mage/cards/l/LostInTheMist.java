@@ -1,7 +1,5 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -12,18 +10,19 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class LostInTheMist extends CardImpl {
 
     public LostInTheMist(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}");
 
         // Counter target spell. Return target permanent to its owner's hand.
         this.getSpellAbility().addTarget(new TargetSpell());
@@ -44,12 +43,12 @@ public final class LostInTheMist extends CardImpl {
 
 class LostInTheMistEffect extends OneShotEffect {
 
-    public LostInTheMistEffect() {
+    LostInTheMistEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return target permanent to its owner's hand";
     }
 
-    public LostInTheMistEffect(final LostInTheMistEffect effect) {
+    private LostInTheMistEffect(final LostInTheMistEffect effect) {
         super(effect);
     }
 
@@ -60,10 +59,10 @@ class LostInTheMistEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (permanent != null) {
-            return permanent.moveToZone(Zone.HAND, source, game, false);
-        }
-        return false;
+        return player != null
+                && permanent != null
+                && player.moveCards(permanent, Zone.HAND, source, game);
     }
 }

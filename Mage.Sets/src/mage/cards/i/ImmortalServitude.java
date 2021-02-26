@@ -1,7 +1,5 @@
 package mage.cards.i;
 
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -14,8 +12,11 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class ImmortalServitude extends CardImpl {
@@ -39,12 +40,12 @@ public final class ImmortalServitude extends CardImpl {
 
 class ImmortalServitudeEffect extends OneShotEffect {
 
-    public ImmortalServitudeEffect() {
+    ImmortalServitudeEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Return each creature card with converted mana cost X from your graveyard to the battlefield";
     }
 
-    public ImmortalServitudeEffect(final ImmortalServitudeEffect effect) {
+    private ImmortalServitudeEffect(final ImmortalServitudeEffect effect) {
         super(effect);
     }
 
@@ -56,13 +57,14 @@ class ImmortalServitudeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
+        if (you == null) {
+            return false;
+        }
         int count = source.getManaCostsToPay().getX();
         Set<Card> cards = you.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game);
-        for (Card card : cards) {
-            if (card != null && card.getConvertedManaCost() == count) {
-                card.moveToZone(Zone.BATTLEFIELD, source, game, false);
-            }
-        }
-        return true;
+        cards.removeIf(Objects::isNull);
+        cards.removeIf(card -> !card.isCreature());
+        cards.removeIf(card -> card.getConvertedManaCost() != count);
+        return you.moveCards(cards, Zone.BATTLEFIELD, source, game);
     }
 }
