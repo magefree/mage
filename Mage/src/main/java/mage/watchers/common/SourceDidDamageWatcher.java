@@ -1,13 +1,14 @@
-
 package mage.watchers.common;
 
+import mage.MageObject;
+import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.watchers.Watcher;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Watcher stores which sources did damage to anything.
@@ -16,7 +17,7 @@ import java.util.*;
  */
 public class SourceDidDamageWatcher extends Watcher {
 
-    public final Set<UUID> damageSources = new HashSet<>();
+    private final Set<MageObjectReference> damageSources = new HashSet<>();
 
     public SourceDidDamageWatcher() {
         super(WatcherScope.GAME);
@@ -26,8 +27,12 @@ public class SourceDidDamageWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_PERMANENT
                 || event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-                damageSources.add(event.getSourceId());
+            damageSources.add(new MageObjectReference(event.getSourceId(), game));
         }
+    }
+
+    public boolean checkSource(MageObject mageObject, Game game) {
+        return damageSources.stream().anyMatch(mor -> mor.refersTo(mageObject, game));
     }
 
     @Override
