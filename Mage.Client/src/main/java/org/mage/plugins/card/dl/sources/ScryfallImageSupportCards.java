@@ -493,6 +493,7 @@ public class ScryfallImageSupportCards {
             add("CC1"); // Commander Collection: Green
             add("KHM"); // Kaldheim
             add("KHC"); // Kaldheim Commander
+            add("STX"); // Strixhaven: School of Mages
         }
     };
 
