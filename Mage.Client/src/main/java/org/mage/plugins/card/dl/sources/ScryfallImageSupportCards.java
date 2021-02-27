@@ -489,6 +489,7 @@ public class ScryfallImageSupportCards {
             add("AKR"); // Amonkhet Remastered
             add("ZNR"); // Zendikar Rising
             add("ZNC"); // Zendikar Rising Commander
+            add("ZNE"); // Zendikar Rising Expeditions
             add("CMR"); // Commander Legends
             add("CC1"); // Commander Collection: Green
             add("KHM"); // Kaldheim
