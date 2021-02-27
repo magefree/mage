@@ -44,6 +44,7 @@ import mage.game.tournament.Tournament;
 import mage.player.ai.simulators.CombatGroupSimulator;
 import mage.player.ai.simulators.CombatSimulator;
 import mage.player.ai.simulators.CreatureSimulator;
+import mage.players.ManaPoolItem;
 import mage.players.Player;
 import mage.players.PlayerImpl;
 import mage.players.net.UserData;
@@ -1423,6 +1424,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                             if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
                                 continue;
                             }
+                            if (approvingObject != null && !canUseAsThoughManaToPayManaCost(cost, ability, netMana, manaAbility, mageObject, game)) {
+                                continue;
+                            }
                             if (activateAbility(manaAbility, game)) {
                                 return true;
                             }
@@ -1441,6 +1445,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                             if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
                                 continue;
                             }
+                            if (approvingObject != null && !canUseAsThoughManaToPayManaCost(cost, ability, netMana, manaAbility, mageObject, game)) {
+                                continue;
+                            }
                             if (activateAbility(manaAbility, game)) {
                                 return true;
                             }
@@ -1454,6 +1461,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
                         if (cost.testPay(netMana) || approvingObject != null) {
                             if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
+                                continue;
+                            }
+                            if (approvingObject != null && !canUseAsThoughManaToPayManaCost(cost, ability, netMana, manaAbility, mageObject, game)) {
                                 continue;
                             }
                             if (activateAbility(manaAbility, game)) {
@@ -1471,6 +1481,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                             if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
                                 continue;
                             }
+                            if (approvingObject != null && !canUseAsThoughManaToPayManaCost(cost, ability, netMana, manaAbility, mageObject, game)) {
+                                continue;
+                            }
                             if (activateAbility(manaAbility, game)) {
                                 return true;
                             }
@@ -1484,6 +1497,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
                         if (cost.testPay(netMana) || approvingObject != null) {
                             if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
+                                continue;
+                            }
+                            if (approvingObject != null && !canUseAsThoughManaToPayManaCost(cost, ability, netMana, manaAbility, mageObject, game)) {
                                 continue;
                             }
                             if (activateAbility(manaAbility, game)) {
@@ -1501,6 +1517,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                             if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
                                 continue;
                             }
+                            if (approvingObject != null && !canUseAsThoughManaToPayManaCost(cost, ability, netMana, manaAbility, mageObject, game)) {
+                                continue;
+                            }
                             if (activateAbility(manaAbility, game)) {
                                 return true;
                             }
@@ -1514,6 +1533,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     for (Mana netMana : manaAbility.getNetMana(game)) {
                         if (cost.testPay(netMana) || approvingObject != null) {
                             if (netMana instanceof ConditionalMana && !((ConditionalMana) netMana).apply(ability, game, getId(), cost)) {
+                                continue;
+                            }
+                            if (approvingObject != null && !canUseAsThoughManaToPayManaCost(cost, ability, netMana, manaAbility, mageObject, game)) {
                                 continue;
                             }
                             if (activateAbility(manaAbility, game)) {
@@ -1549,6 +1571,56 @@ public class ComputerPlayer extends PlayerImpl implements Player {
                     // only one time try to pay
                     break;
                 }
+            }
+        }
+
+        return false;
+    }
+
+    boolean canUseAsThoughManaToPayManaCost(ManaCost checkCost, Ability abilityToPay, Mana manaOption, Ability manaAbility, MageObject manaProducer, Game game) {
+        // asThoughMana can change producing mana type, so you must check it here
+        // cause some effects adds additional checks in getAsThoughManaType (example: Draugr Necromancer with snow mana sources)
+
+        // simulate real asThoughMana usage
+        ManaPoolItem possiblePoolItem;
+        if (manaOption instanceof ConditionalMana) {
+            ConditionalMana conditionalNetMana = (ConditionalMana) manaOption;
+            possiblePoolItem = new ManaPoolItem(
+                    conditionalNetMana,
+                    manaAbility.getSourceObject(game),
+                    conditionalNetMana.getManaProducerOriginalId() != null ? conditionalNetMana.getManaProducerOriginalId() : manaAbility.getOriginalId()
+            );
+        } else {
+            possiblePoolItem = new ManaPoolItem(
+                    manaOption.getRed(),
+                    manaOption.getGreen(),
+                    manaOption.getBlue(),
+                    manaOption.getWhite(),
+                    manaOption.getBlack(),
+                    manaOption.getGeneric() + manaOption.getColorless(),
+                    manaProducer,
+                    manaAbility.getOriginalId(),
+                    manaOption.getFlag()
+            );
+        }
+
+        // cost can contains multiple mana types, must check each type (is it possible to pay a cost)
+        for (ManaType checkType : ManaUtil.getManaTypesInCost(checkCost)) {
+            // affected asThoughMana effect must fit a checkType with pool mana
+            ManaType possibleAsThoughPoolManaType = game.getContinuousEffects().asThoughMana(checkType, possiblePoolItem, abilityToPay.getSourceId(), abilityToPay, abilityToPay.getControllerId(), game);
+            if (possibleAsThoughPoolManaType == null) {
+                continue; // no affected asThough effects
+            }
+            boolean canPay;
+            if (possibleAsThoughPoolManaType == ManaType.COLORLESS) {
+                // colorless can be payed by any color from the pool
+                canPay = possiblePoolItem.count() > 0;
+            } else {
+                // colored must be payed by specific color from the pool (AsThough already changed it to fit with mana pool)
+                canPay = possiblePoolItem.get(possibleAsThoughPoolManaType) > 0;
+            }
+            if (canPay) {
+                return true;
             }
         }
 

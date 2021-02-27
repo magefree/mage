@@ -612,6 +612,23 @@ public class ContinuousEffects implements Serializable {
         return null;
     }
 
+    /**
+     * Fit paying mana type with current mana pool (if asThoughMana affected)
+     * <p>
+     * Example:
+     * - you need to pay {R} as cost
+     * - asThoughMana effect allows to use {G} as any color;
+     * - asThoughMana effect must change/fit paying mana type from {R} to {G}
+     * - after that you can pay {G} as cost
+     *
+     * @param manaType        paying mana type
+     * @param mana            checking pool item
+     * @param objectId        paying ability's source object
+     * @param affectedAbility paying ability
+     * @param controllerId    controller who pay
+     * @param game
+     * @return corrected paying mana type (same if no asThough effects and different on applied asThough effect)
+     */
     public ManaType asThoughMana(ManaType manaType, ManaPoolItem mana, UUID objectId, Ability affectedAbility, UUID controllerId, Game game) {
         // First check existing only effects
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(AsThoughEffectType.SPEND_ONLY_MANA, game);

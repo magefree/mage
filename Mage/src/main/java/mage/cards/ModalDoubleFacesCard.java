@@ -7,6 +7,7 @@ import mage.abilities.*;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.constants.*;
+import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.GameState;
@@ -121,6 +122,16 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
     @Override
     public Counters getCounters(GameState state) {
         return state.getCardState(leftHalfCard.getId()).getCounters();
+    }
+
+    @Override
+    public boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect) {
+        return leftHalfCard.addCounters(counter, playerAddingCounters, source, game, appliedEffects, isEffect);
+    }
+
+    @Override
+    public void removeCounters(String name, int amount, Ability source, Game game) {
+        leftHalfCard.removeCounters(name, amount, source, game);
     }
 
     @Override

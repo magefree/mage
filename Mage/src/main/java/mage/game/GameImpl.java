@@ -2985,39 +2985,25 @@ public abstract class GameImpl implements Game, Serializable {
         if (object instanceof Permanent || object instanceof StackObject) {
             MageObject copy = object.copy();
 
-            Map<UUID, MageObject> lkiMap = lki.get(zone);
-            if (lkiMap != null) {
-                lkiMap.put(objectId, copy);
-            } else {
-                Map<UUID, MageObject> newMap = new HashMap<>();
-                newMap.put(objectId, copy);
-                lki.put(zone, newMap);
-            }
+            Map<UUID, MageObject> lkiMap = lki.computeIfAbsent(zone, k -> new HashMap<>());
+            lkiMap.put(objectId, copy);
+
             // remembers if a object was in a zone during the resolution of an effect
             // e.g. Wrath destroys all and you the question is is the replacement effect to apply because the source was also moved by the same effect
             // because it happens all at the same time the replacement effect has still to be applied
             Set<UUID> idSet = shortLivingLKI.computeIfAbsent(zone, k -> new HashSet<>());
             idSet.add(objectId);
             if (object instanceof Permanent) {
-                Map<Integer, MageObject> lkiExtendedMap = lkiExtended.get(objectId);
-                if (lkiExtendedMap != null) {
-                    lkiExtendedMap.put(object.getZoneChangeCounter(this), copy);
-                } else {
-                    lkiExtendedMap = new HashMap<>();
-                    lkiExtendedMap.put(object.getZoneChangeCounter(this), copy);
-                    lkiExtended.put(objectId, lkiExtendedMap);
-                }
+                Map<Integer, MageObject> lkiExtendedMap = lkiExtended.computeIfAbsent(objectId, k -> new HashMap<>());
+                lkiExtendedMap.put(object.getZoneChangeCounter(this), copy);
             }
         } else if (zone.isPublicZone()) {
             // Remember card state in this public zone (mainly removed/gained abilities)
-            Map<UUID, CardState> lkiMap = lkiCardState.get(zone);
-            if (lkiMap != null) {
-                lkiMap.put(objectId, getState().getCardState(objectId));
-            } else {
-                Map<UUID, CardState> newMap = new HashMap<>();
-                newMap.put(objectId, getState().getCardState(objectId).copy());
-                lkiCardState.put(zone, newMap);
-            }
+            // Must save all card parts (mdf, split)
+            CardUtil.getObjectParts(object).forEach(partId -> {
+                Map<UUID, CardState> lkiMap = lkiCardState.computeIfAbsent(zone, k -> new HashMap<>());
+                lkiMap.put(partId, getState().getCardState(partId).copy());
+            });
         }
     }
 

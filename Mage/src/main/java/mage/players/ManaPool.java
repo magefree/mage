@@ -339,15 +339,28 @@ public class ManaPool implements Serializable {
             Mana mana = manaToAdd.copy();
             if (!game.replaceEvent(new ManaEvent(EventType.ADD_MANA, source.getId(), source, playerId, mana))) {
                 if (mana instanceof ConditionalMana) {
-                    ManaPoolItem item = new ManaPoolItem((ConditionalMana) mana, source.getSourceObject(game),
-                            ((ConditionalMana) mana).getManaProducerOriginalId() != null
-                                    ? ((ConditionalMana) mana).getManaProducerOriginalId() : source.getOriginalId());
+                    ConditionalMana conditionalMana = (ConditionalMana) mana;
+                    ManaPoolItem item = new ManaPoolItem(
+                            conditionalMana,
+                            source.getSourceObject(game),
+                            conditionalMana.getManaProducerOriginalId() != null ? conditionalMana.getManaProducerOriginalId() : source.getOriginalId()
+                    );
                     if (emptyOnTurnsEnd) {
                         item.setDuration(Duration.EndOfTurn);
                     }
                     this.manaItems.add(item);
                 } else {
-                    ManaPoolItem item = new ManaPoolItem(mana.getRed(), mana.getGreen(), mana.getBlue(), mana.getWhite(), mana.getBlack(), mana.getGeneric() + mana.getColorless(), source.getSourceObject(game), source.getOriginalId(), mana.getFlag());
+                    ManaPoolItem item = new ManaPoolItem(
+                            mana.getRed(),
+                            mana.getGreen(),
+                            mana.getBlue(),
+                            mana.getWhite(),
+                            mana.getBlack(),
+                            mana.getGeneric() + mana.getColorless(),
+                            source.getSourceObject(game),
+                            source.getOriginalId(),
+                            mana.getFlag()
+                    );
                     if (emptyOnTurnsEnd) {
                         item.setDuration(Duration.EndOfTurn);
                     }

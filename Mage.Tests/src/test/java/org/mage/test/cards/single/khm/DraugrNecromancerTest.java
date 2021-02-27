@@ -3,7 +3,6 @@ package org.mage.test.cards.single.khm;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -186,16 +185,16 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
     @Test
     public void testCastMDFCFrontFromExile() {
         addCard(Zone.BATTLEFIELD, playerA, necromancer);
-        addCard(Zone.BATTLEFIELD, playerA, "Badlands", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Badlands", 6); // {B} or {R}
         addCard(Zone.HAND, playerA, murder);
         addCard(Zone.HAND, playerB, birgi);
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, birgi);
 
-        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, murder, birgi);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, murder, birgi); // {1}{B}{B}
 
-        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, birgi);
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, birgi); // {2}{R}
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
@@ -232,7 +231,6 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
         assertExileCount(playerB, birgi, 0);
     }
 
-    @Ignore
     @Test
     public void testCastMDFCFrontFromExileWithSnow() {
         addCard(Zone.BATTLEFIELD, playerA, necromancer);
@@ -257,7 +255,6 @@ public class DraugrNecromancerTest extends CardTestPlayerBase {
         assertExileCount(playerB, birgi, 0);
     }
 
-    @Ignore
     @Test
     public void testCastMDFCBackFromExileWithSnow() {
         addCard(Zone.BATTLEFIELD, playerA, necromancer);

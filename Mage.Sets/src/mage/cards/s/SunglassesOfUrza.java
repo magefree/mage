@@ -1,30 +1,24 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.ManaType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.ManaPoolItem;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SunglassesOfUrza extends CardImpl {
 
     public SunglassesOfUrza(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // You may spend white mana as though it were red mana.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SunglassesOfUrzaManaAsThoughtEffect()));
@@ -62,7 +56,7 @@ class SunglassesOfUrzaManaAsThoughtEffect extends AsThoughEffectImpl implements 
         if (mana.getWhite() > 0 && ManaType.RED == manaType) {
             return ManaType.WHITE;
         }
-        return manaType;
+        return null;
     }
 
     @Override

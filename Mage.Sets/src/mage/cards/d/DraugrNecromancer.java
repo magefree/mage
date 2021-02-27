@@ -6,9 +6,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.CardState;
@@ -19,7 +17,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -167,14 +164,32 @@ class DraugrNecromancerSpendAnyManaEffect extends AsThoughEffectImpl implements 
                 || !game.getOpponents(game.getOwnerId(sourceId)).contains(source.getControllerId())) {
             return false;
         }
+
         Card card = game.getCard(sourceId);
-        if (card != null
-                && game.getState().getZone(card.getId()) == Zone.EXILED
-                && card.getMainCard().getCounters(game).getCount(CounterType.ICE) > 0) {
-            return true;
+        if (card == null) {
+            return false;
         }
-        CardState cardState = game.getLastKnownInformationCard(CardUtil.getMainCardId(game, sourceId), Zone.EXILED);
-        return cardState != null && cardState.getCounters().getCount(CounterType.ICE) > 0;
+        card = card.getMainCard();
+
+        // card can be in exile or stack zones
+        if (game.getState().getZone(card.getId()) == Zone.EXILED) {
+            // exile zone
+            return card.getCounters(game).getCount(CounterType.ICE) > 0;
+        } else {
+            // stack zone
+            // you must look at exile zone (use LKI to see ice counters from the past)
+            CardState cardState;
+            if (card instanceof SplitCard) {
+                cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
+            } else if (card instanceof AdventureCard) {
+                cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
+            } else if (card instanceof ModalDoubleFacesCard) {
+                cardState = game.getLastKnownInformationCard(((ModalDoubleFacesCard) card).getLeftHalfCard().getId(), Zone.EXILED);
+            } else {
+                cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
+            }
+            return cardState != null && cardState.getCounters().getCount(CounterType.ICE) > 0;
+        }
     }
 
     @Override
@@ -182,6 +197,6 @@ class DraugrNecromancerSpendAnyManaEffect extends AsThoughEffectImpl implements 
         if (mana.getSourceObject().isSnow()) {
             return mana.getFirstAvailable();
         }
-        return manaType;
+        return null;
     }
 }
