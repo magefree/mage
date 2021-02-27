@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.MageObject;
@@ -7,19 +6,16 @@ import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 
 public class PutOnLibrarySourceEffect extends OneShotEffect {
 
-    boolean onTop;
+    private final boolean onTop;
 
     public PutOnLibrarySourceEffect(boolean onTop) {
         super(Outcome.ReturnToHand);
@@ -44,22 +40,15 @@ public class PutOnLibrarySourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (sourceObject == null) {
+        if (player == null || !(sourceObject instanceof Card)) {
             return false;
         }
-        if (sourceObject instanceof Permanent) {
-            ((Permanent) sourceObject).moveToZone(Zone.LIBRARY, source, game, onTop);
-            return true;
-        } else if (sourceObject instanceof Card && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-            for (Player player : game.getPlayers().values()) {
-                if (player.getGraveyard().contains(sourceObject.getId())) {
-                    ((Card) sourceObject).moveToZone(Zone.LIBRARY, source, game, onTop);
-                    return true;
-                }
-            }
+        if (onTop) {
+            return player.putCardsOnTopOfLibrary((Card) sourceObject, game, source, false);
         }
-        return false;
+        return player.putCardsOnBottomOfLibrary((Card) sourceObject, game, source, false);
     }
 
     @Override
@@ -73,6 +62,5 @@ public class PutOnLibrarySourceEffect extends OneShotEffect {
             sb.append(onTop ? "top" : "the bottom").append(" of its owner's library");
         }
         return sb.toString();
-
     }
 }

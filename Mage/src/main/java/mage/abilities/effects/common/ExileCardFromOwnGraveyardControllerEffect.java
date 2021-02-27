@@ -2,10 +2,11 @@ package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -17,7 +18,8 @@ import java.util.UUID;
  * @author LevelX2
  */
 public class ExileCardFromOwnGraveyardControllerEffect extends OneShotEffect {
-    private int amount;
+
+    private final int amount;
 
     public ExileCardFromOwnGraveyardControllerEffect(int amount) {
         super(Outcome.Exile);
@@ -25,7 +27,7 @@ public class ExileCardFromOwnGraveyardControllerEffect extends OneShotEffect {
         this.staticText = setText();
     }
 
-    public ExileCardFromOwnGraveyardControllerEffect(final ExileCardFromOwnGraveyardControllerEffect effect) {
+    private ExileCardFromOwnGraveyardControllerEffect(final ExileCardFromOwnGraveyardControllerEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -38,19 +40,21 @@ public class ExileCardFromOwnGraveyardControllerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(Math.min(amount, player.getGraveyard().size()), new FilterCard());
-            if (player.chooseTarget(outcome, target, source, game)) {
-                for (UUID targetId : target.getTargets()) {
-                    Card card = player.getGraveyard().get(targetId, game);
-                    if (card != null) {
-                        card.moveToZone(Zone.EXILED, source, game, false);
-                    }
-                }
-            }
+        if (player == null || player.getGraveyard().isEmpty()) {
+            return false;
+        }
+        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(Math.min(
+                amount, player.getGraveyard().size()
+        ), StaticFilters.FILTER_CARD);
+        target.setNotTarget(true);
+        if (!player.chooseTarget(outcome, target, source, game)) {
             return true;
         }
-        return false;
+        Cards cards = new CardsImpl();
+        for (UUID targetId : target.getTargets()) {
+            cards.add(player.getGraveyard().get(targetId, game));
+        }
+        return player.moveCards(cards, Zone.EXILED, source, game);
     }
 
     private String setText() {
@@ -63,5 +67,4 @@ public class ExileCardFromOwnGraveyardControllerEffect extends OneShotEffect {
         sb.append("from your graveyard");
         return sb.toString();
     }
-
 }

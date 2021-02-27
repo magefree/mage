@@ -112,7 +112,7 @@ public class WishEffect extends OneShotEffect {
                         if (topOfLibrary) {
                             controller.putCardsOnTopOfLibrary(card, game, source, true);
                         } else {
-                            card.moveToZone(Zone.HAND, source, game, false);
+                            controller.moveCards(card, Zone.HAND, source, game);
                         }
                         if (reveal) {
                             Cards revealCard = new CardsImpl();

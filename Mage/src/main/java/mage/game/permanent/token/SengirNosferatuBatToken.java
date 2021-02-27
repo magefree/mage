@@ -1,9 +1,5 @@
-
-
 package mage.game.permanent.token;
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.SubType;
+
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,7 +8,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -22,7 +20,6 @@ import mage.target.Target;
 import mage.target.common.TargetCardInExile;
 
 /**
- *
  * @author spjspj
  */
 public final class SengirNosferatuBatToken extends TokenImpl {
@@ -59,11 +56,11 @@ class ReturnSengirNosferatuEffect extends OneShotEffect {
         filter.add(new NamePredicate("Sengir Nosferatu"));
     }
 
-    public ReturnSengirNosferatuEffect() {
+    ReturnSengirNosferatuEffect() {
         super(Outcome.Benefit);
     }
 
-    public ReturnSengirNosferatuEffect(final ReturnSengirNosferatuEffect effect) {
+    private ReturnSengirNosferatuEffect(final ReturnSengirNosferatuEffect effect) {
         super(effect);
     }
 
@@ -74,20 +71,20 @@ class ReturnSengirNosferatuEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID controllerId = source.getControllerId();
-        Target target = new TargetCardInExile(filter);
-        target.setNotTarget(true);
-        if (!target.canChoose(source.getSourceId(), controllerId, game)) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
             return false;
         }
-        Player player = game.getPlayer(controllerId);
-        if (player != null) {
-            player.chooseTarget(Outcome.PutCreatureInPlay, target, source, game);
-            Card card = game.getCard(target.getTargets().get(0));
-            if (card != null) {
-                return card.moveToZone(Zone.BATTLEFIELD, source, game, false);
-            }
+        Target target = new TargetCardInExile(filter);
+        target.setNotTarget(true);
+        if (!target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
+            return false;
         }
-        return false;
+        player.chooseTarget(Outcome.PutCreatureInPlay, target, source, game);
+        Card card = game.getCard(target.getFirstTarget());
+        return card != null && player.moveCards(
+                card, Zone.BATTLEFIELD, source, game, false,
+                false, true, null
+        );
     }
 }
