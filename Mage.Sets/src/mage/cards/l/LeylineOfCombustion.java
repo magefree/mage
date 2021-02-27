@@ -87,10 +87,9 @@ class LeylineOfCombustionTriggeredAbility extends TriggeredAbilityImpl {
         if (sourceObjects == null) {
             sourceObjects = new HashSet<>();
         }
-        if (sourceObjects.contains(sourceObject.getId())) {
+        if (!sourceObjects.add(sourceObject.getId())) {
             return false;
         }
-        sourceObjects.add(sourceObject.getId());
         game.getState().setValue("sourceObjects" + this.id, sourceObjects);
         this.getEffects().clear();
         Effect effect = new DamageTargetEffect(2);
