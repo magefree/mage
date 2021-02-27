@@ -54,12 +54,13 @@ public final class PuppetMaster extends CardImpl {
 
 class PuppetMasterEffect extends OneShotEffect {
 
-    public PuppetMasterEffect() {
+    PuppetMasterEffect() {
         super(Outcome.ReturnToHand);
-        staticText = "return that card to its owner's hand. If that card is returned to its owner's hand this way, you may pay {U}{U}{U}. If you do, return {this} to its owner's hand";
+        staticText = "return that card to its owner's hand. If that card is returned to its owner's hand this way, " +
+                "you may pay {U}{U}{U}. If you do, return {this} to its owner's hand";
     }
 
-    public PuppetMasterEffect(final PuppetMasterEffect effect) {
+    private PuppetMasterEffect(final PuppetMasterEffect effect) {
         super(effect);
     }
 
@@ -70,25 +71,30 @@ class PuppetMasterEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Object object = getValue("attachedTo");
-        if (object instanceof Permanent) {
-            Card card = game.getCard(((Permanent) object).getId());
-            if (card != null) {
-                if (card.moveToZone(Zone.HAND, source, game, false)) {
-                    Cost cost = new ManaCostsImpl("{U}{U}{U}");
-                    Player controller = game.getPlayer(source.getControllerId());
-                    Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-                    if (controller != null && sourcePermanent != null) {
-                        if (controller.chooseUse(Outcome.Neutral, "Pay " + cost.getText() + " to return " + sourcePermanent.getLogName() + " to its owner's hand?", source, game)
-                                && cost.pay(source, game, source, controller.getId(), false, null)) {
-                            sourcePermanent.moveToZone(Zone.HAND, source, game, false);
-                        }
-                    }
-                    return true;
-                }
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        Permanent permanent = (Permanent) getValue("attachedTo");
+        if (controller == null || permanent == null) {
+            return false;
         }
-        return false;
+        Card card = permanent.getMainCard();
+        if (card == null || card.getZoneChangeCounter(game) != permanent.getZoneChangeCounter(game) + 1) {
+            return false;
+        }
+        controller.moveCards(card, Zone.HAND, source, game);
+        if (game.getState().getZone(card.getId()) != Zone.HAND) {
+            return false;
+        }
+        card = game.getCard(source.getSourceId());
+        if (card == null || card.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter() + 1) {
+            return false;
+        }
+        Cost cost = new ManaCostsImpl("{U}{U}{U}");
+        if (!controller.chooseUse(Outcome.Neutral, "Pay " + cost.getText()
+                + " to return " + card.getLogName() + " to its owner's hand?", source, game)
+                || !cost.pay(source, game, source, controller.getId(), false, null)) {
+            return true;
+        }
+        controller.moveCards(card, Zone.HAND, source, game);
+        return true;
     }
-
 }

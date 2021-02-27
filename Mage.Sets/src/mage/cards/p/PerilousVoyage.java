@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -16,13 +14,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class PerilousVoyage extends CardImpl {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent you don't control");
+    private static final FilterNonlandPermanent filter
+            = new FilterNonlandPermanent("nonland permanent you don't control");
 
     static {
         filter.add(TargetController.NOT_YOU.getControllerPredicate());
@@ -49,11 +49,12 @@ public final class PerilousVoyage extends CardImpl {
 class PerilousVoyageEffect extends OneShotEffect {
 
     PerilousVoyageEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Return target nonland permanent you don't control to its owner's hand. If its converted mana cost was 2 or less, scry 2";
+        super(Outcome.ReturnToHand);
+        this.staticText = "Return target nonland permanent you don't control to its owner's hand. " +
+                "If its converted mana cost was 2 or less, scry 2";
     }
 
-    PerilousVoyageEffect(final PerilousVoyageEffect effect) {
+    private PerilousVoyageEffect(final PerilousVoyageEffect effect) {
         super(effect);
     }
 
@@ -66,13 +67,14 @@ class PerilousVoyageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent != null) {
-            boolean isLittle = permanent.getConvertedManaCost() < 3;
-            permanent.moveToZone(Zone.HAND, source, game, true);
-            if (isLittle && player != null) {
-                player.scry(2, source, game);
-            }
+        if (player == null || permanent == null) {
+            return false;
         }
-        return false;
+        boolean flag = permanent.getConvertedManaCost() <= 2;
+        player.moveCards(permanent, Zone.HAND, source, game);
+        if (flag) {
+            player.scry(2, source, game);
+        }
+        return true;
     }
 }

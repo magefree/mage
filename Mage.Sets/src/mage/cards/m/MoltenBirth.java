@@ -1,7 +1,9 @@
 package mage.cards.m;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,8 +25,8 @@ public final class MoltenBirth extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{R}{R}");
 
         // Create two 1/1 red Elemental creature tokens. Then flip a coin. If you win the flip, return Molten Birth to its owner's hand.
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new MoltenBirthElementalToken(), 2));
         this.getSpellAbility().addEffect(new MoltenBirthEffect());
-
     }
 
     private MoltenBirth(final MoltenBirth card) {
@@ -39,12 +41,12 @@ public final class MoltenBirth extends CardImpl {
 
 class MoltenBirthEffect extends OneShotEffect {
 
-    public MoltenBirthEffect() {
+    MoltenBirthEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Create two 1/1 red Elemental creature tokens. Then flip a coin. If you win the flip, return {this} to its owner's hand";
+        staticText = "Then flip a coin. If you win the flip, return {this} to its owner's hand";
     }
 
-    public MoltenBirthEffect(final MoltenBirthEffect effect) {
+    private MoltenBirthEffect(final MoltenBirthEffect effect) {
         super(effect);
     }
 
@@ -56,19 +58,10 @@ class MoltenBirthEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            MoltenBirthElementalToken token = new MoltenBirthElementalToken();
-            token.putOntoBattlefield(2, game, source, source.getControllerId());
-            if (controller.flipCoin(source, game, true)) {
-                Card molten = game.getCard(source.getSourceId());
-                if (molten != null) {
-                    molten.moveToZone(Zone.HAND, source, game, true);
-                    game.informPlayers(controller.getLogName() + " won the flip.  " + molten.getLogName() + " is returned to " + controller.getLogName() + "'s hand.");
-                }
-            }
-            return true;
-        }
-        return false;
+        MageObject sourceObject = source.getSourceObject(game);
+        return controller != null
+                && controller.flipCoin(source, game, true)
+                && sourceObject instanceof Card
+                && controller.moveCards((Card) sourceObject, Zone.HAND, source, game);
     }
-
 }

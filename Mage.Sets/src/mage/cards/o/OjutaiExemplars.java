@@ -1,12 +1,9 @@
-
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -15,28 +12,19 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class OjutaiExemplars extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("a noncreature spell");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public OjutaiExemplars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{W}");
@@ -46,23 +34,22 @@ public final class OjutaiExemplars extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever you cast a noncreature spell, choose one - Tap target creature; 
-        Ability ability = new SpellCastControllerTriggeredAbility(new TapTargetEffect(), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                new TapTargetEffect(), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
+        );
         ability.addTarget(new TargetCreaturePermanent());
 
         // Ojutai Exemplars gain first strike and lifelink until end of turn; 
-        Mode mode = new Mode();
-        Effect effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("{this} gains first strike");
-        mode.addEffect(effect);
-        Effect effect2 = new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
-        effect2.setText("and lifelink until end of turn");
-        mode.addEffect(effect2);
+        Mode mode = new Mode(new GainAbilitySourceEffect(
+                FirstStrikeAbility.getInstance(), Duration.EndOfTurn
+        ).setText("{this} gains first strike"));
+        mode.addEffect(new GainAbilitySourceEffect(
+                LifelinkAbility.getInstance(), Duration.EndOfTurn
+        ).setText("and lifelink until end of turn"));
         ability.addMode(mode);
 
         // or Exile Ojutai Exemplars, then return it to the battlefield tapped under its owner's control.
-        mode = new Mode();
-        mode.addEffect(new OjutaiExemplarsEffect());
-        ability.addMode(mode);
+        ability.addMode(new Mode(new OjutaiExemplarsEffect()));
 
         this.addAbility(ability);
     }
@@ -79,12 +66,12 @@ public final class OjutaiExemplars extends CardImpl {
 
 class OjutaiExemplarsEffect extends OneShotEffect {
 
-    public OjutaiExemplarsEffect() {
+    OjutaiExemplarsEffect() {
         super(Outcome.Neutral);
         this.staticText = "Exile {this}, then return it to the battlefield tapped under its owner's control";
     }
 
-    public OjutaiExemplarsEffect(final OjutaiExemplarsEffect effect) {
+    private OjutaiExemplarsEffect(final OjutaiExemplarsEffect effect) {
         super(effect);
     }
 
@@ -95,15 +82,14 @@ class OjutaiExemplarsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent ojutaiExemplars = game.getPermanent(source.getSourceId());
-        if (ojutaiExemplars != null) {
-            if (ojutaiExemplars.moveToExile(source.getSourceId(), "Ojutai Exemplars", source, game)) {
-                Card card = game.getExile().getCard(source.getSourceId(), game);
-                if (card != null) {
-                    return card.moveToZone(Zone.BATTLEFIELD, source, game, true);
-                }
-            }
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (player == null || permanent == null) {
+            return false;
         }
-        return false;
+        Card card = permanent.getMainCard();
+        player.moveCards(permanent, Zone.EXILED, source, game);
+        player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
+        return true;
     }
 }

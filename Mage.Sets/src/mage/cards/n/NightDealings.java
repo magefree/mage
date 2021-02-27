@@ -1,8 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.Objects;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -10,12 +7,16 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
@@ -23,6 +24,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  * @author Loki
@@ -36,7 +39,7 @@ public final class NightDealings extends CardImpl {
         this.addAbility((new NightDealingsTriggeredAbility()));
 
         // {2}{B}{B}, Remove X theft counters from Night Dealings: Search your library for a nonland card with converted mana cost X, reveal it, and put it into your hand. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NightDealingsSearchEffect(), new ManaCostsImpl("{2}{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(new NightDealingsSearchEffect(), new ManaCostsImpl("{2}{B}{B}"));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.THEFT.createInstance(1)));
         this.addAbility(ability);
     }
@@ -50,13 +53,13 @@ public final class NightDealings extends CardImpl {
         return new NightDealings(this);
     }
 
-    private class NightDealingsTriggeredAbility extends TriggeredAbilityImpl {
+    private static final class NightDealingsTriggeredAbility extends TriggeredAbilityImpl {
 
-        public NightDealingsTriggeredAbility() {
+        private NightDealingsTriggeredAbility() {
             super(Zone.BATTLEFIELD, new NightDealingsEffect());
         }
 
-        public NightDealingsTriggeredAbility(final NightDealingsTriggeredAbility ability) {
+        private NightDealingsTriggeredAbility(final NightDealingsTriggeredAbility ability) {
             super(ability);
         }
 
@@ -73,16 +76,12 @@ public final class NightDealings extends CardImpl {
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
             // to another player
-            if (!Objects.equals(this.getControllerId(), event.getTargetId())) {
-                // a source you control
-                UUID sourceControllerId = game.getControllerId(event.getSourceId());
-                if (sourceControllerId != null && sourceControllerId.equals(this.getControllerId())) {
-                    // save amount of damage to effect
-                    this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-                    return true;
-                }
+            if (this.isControlledBy(event.getTargetId())
+                    || !this.isControlledBy(game.getControllerId(event.getSourceId()))) {
+                return false;
             }
-            return false;
+            this.getEffects().setValue("damageAmount", event.getAmount());
+            return true;
         }
 
         @Override
@@ -91,14 +90,14 @@ public final class NightDealings extends CardImpl {
         }
     }
 
-    private static class NightDealingsEffect extends OneShotEffect {
+    private static final class NightDealingsEffect extends OneShotEffect {
 
-        public NightDealingsEffect() {
+        private NightDealingsEffect() {
             super(Outcome.Damage);
             this.staticText = "put that many theft counters on {this}";
         }
 
-        public NightDealingsEffect(final NightDealingsEffect effect) {
+        private NightDealingsEffect(final NightDealingsEffect effect) {
             super(effect);
         }
 
@@ -109,26 +108,27 @@ public final class NightDealings extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             Integer damageAmount = (Integer) this.getValue("damageAmount");
-            if (damageAmount != null) {
-                Permanent permanent = game.getPermanent(source.getSourceId());
-                if (permanent != null) {
-                    permanent.addCounters(CounterType.THEFT.createInstance(damageAmount), source.getControllerId(), source, game);
-                    return true;
-                }
-            }
-            return false;
+            return permanent != null
+                    && damageAmount != null
+                    && damageAmount > 0
+                    && permanent.addCounters(
+                    CounterType.THEFT.createInstance(damageAmount),
+                    source.getControllerId(), source, game
+            );
         }
     }
 
-    private static class NightDealingsSearchEffect extends OneShotEffect {
+    private static final class NightDealingsSearchEffect extends OneShotEffect {
 
-        public NightDealingsSearchEffect() {
+        private NightDealingsSearchEffect() {
             super(Outcome.DrawCard);
-            this.staticText = "Search your library for a nonland card with converted mana cost X, reveal it, and put it into your hand. Then shuffle your library";
+            this.staticText = "Search your library for a nonland card with converted mana cost X, " +
+                    "reveal it, and put it into your hand. Then shuffle your library";
         }
 
-        public NightDealingsSearchEffect(final NightDealingsSearchEffect effect) {
+        private NightDealingsSearchEffect(final NightDealingsSearchEffect effect) {
             super(effect);
         }
 
@@ -148,33 +148,21 @@ public final class NightDealings extends CardImpl {
             for (Cost cost : source.getCosts()) {
                 if (cost instanceof RemoveVariableCountersSourceCost) {
                     cmc = ((RemoveVariableCountersSourceCost) cost).getAmount();
+                    break;
                 }
             }
 
-            FilterNonlandCard filter = new FilterNonlandCard("nonland card with converted mana cost X = " + cmc);
+            FilterCard filter = new FilterNonlandCard("nonland card with converted mana cost " + cmc);
             filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, cmc));
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
-
-            if (player.searchLibrary(target, source, game)) {
-                Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
-                if (card != null) {
-                    card.moveToZone(Zone.HAND, source, game, false);
-
-                    String name = "Reveal";
-                    Cards cards = new CardsImpl(card);
-                    Card sourceCard = game.getCard(source.getSourceId());
-                    if (sourceCard != null) {
-                        name = sourceCard.getName();
-                    }
-                    player.revealCards(name, cards, game);
-                    game.informPlayers(player.getLogName() + " reveals " + card.getName());
-                }
-                player.shuffleLibrary(source, game);
-                return true;
+            player.searchLibrary(target, source, game);
+            Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+            if (card != null) {
+                player.revealCards(source, new CardsImpl(card), game);
+                player.moveCards(card, Zone.HAND, source, game);
             }
             player.shuffleLibrary(source, game);
-            return false;
+            return true;
         }
     }
-
 }

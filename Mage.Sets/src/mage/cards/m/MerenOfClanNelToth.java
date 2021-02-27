@@ -1,12 +1,9 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersControllerEffect;
 import mage.cards.Card;
@@ -14,21 +11,22 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class MerenOfClanNelToth extends CardImpl {
-    
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature you control");
+
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent("another creature you control");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -36,7 +34,7 @@ public final class MerenOfClanNelToth extends CardImpl {
     }
 
     public MerenOfClanNelToth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.SHAMAN);
@@ -44,15 +42,14 @@ public final class MerenOfClanNelToth extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever another creature you control dies, you get an experience counter.
-        Effect effect = new AddCountersControllerEffect(CounterType.EXPERIENCE.createInstance(1), false);
-        effect.setText("you get an experience counter");
-        this.addAbility(new DiesCreatureTriggeredAbility(effect, false, filter));
-                
+        this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersControllerEffect(
+                CounterType.EXPERIENCE.createInstance(1), false
+        ).setText("you get an experience counter"), false, filter));
+
         // At the beginning of your end step, choose target creature card in your graveyard. 
         // If that card's converted mana cost is less than or equal to the number of experience counters you have, return it to the battlefield. Otherwise, put it into your hand.
-        Target target = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card in your graveyard"));
         Ability ability = new BeginningOfYourEndStepTriggeredAbility(new MerenOfClanNelTothEffect(), false);
-        ability.addTarget(target);
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }
 
@@ -68,12 +65,14 @@ public final class MerenOfClanNelToth extends CardImpl {
 
 class MerenOfClanNelTothEffect extends OneShotEffect {
 
-    public MerenOfClanNelTothEffect() {
+    MerenOfClanNelTothEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "choose target creature card in your graveyard. If that card's converted mana cost is less than or equal to the number of experience counters you have, return it to the battlefield. Otherwise, put it into your hand";
+        this.staticText = "choose target creature card in your graveyard. If that card's converted mana cost " +
+                "is less than or equal to the number of experience counters you have, " +
+                "return it to the battlefield. Otherwise, put it into your hand";
     }
 
-    public MerenOfClanNelTothEffect(final MerenOfClanNelTothEffect effect) {
+    private MerenOfClanNelTothEffect(final MerenOfClanNelTothEffect effect) {
         super(effect);
     }
 
@@ -85,21 +84,11 @@ class MerenOfClanNelTothEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int amount = player.getCounters().getCount(CounterType.EXPERIENCE);
-            Card card = game.getCard(targetPointer.getFirst(game, source));
-            if (card != null) {
-                Zone targetZone = Zone.HAND;
-                String text = " put into hand of ";
-                if (card.getConvertedManaCost() <= amount) {
-                    targetZone = Zone.BATTLEFIELD;
-                    text = " put onto battlefield for ";
-                }
-                card.moveToZone(targetZone, source, game, false);
-                game.informPlayers("Meren of Clan Nel Toth: " + card.getName() + text + player.getLogName());
-                return true;
-            }
+        Card card = game.getCard(targetPointer.getFirst(game, source));
+        if (player == null || card == null) {
+            return false;
         }
-        return false;
+        boolean flag = card.getConvertedManaCost() <= player.getCounters().getCount(CounterType.EXPERIENCE);
+        return player.moveCards(card, flag ? Zone.BATTLEFIELD : Zone.HAND, source, game);
     }
 }
