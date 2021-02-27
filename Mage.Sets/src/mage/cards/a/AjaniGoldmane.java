@@ -97,7 +97,7 @@ class AvatarTokenEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent token = game.getPermanent(source.getSourceId());
+        Permanent token = source.getSourcePermanentIfItStillExists(game);
         if (token != null) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {

@@ -64,7 +64,7 @@ class MistformSliverEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (player != null && permanent != null) {
             Choice typeChoice = new ChoiceCreatureType(permanent);
             if (!player.choose(Outcome.Detriment, typeChoice, game)) {

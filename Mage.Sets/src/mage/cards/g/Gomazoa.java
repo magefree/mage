@@ -79,7 +79,7 @@ class GomazoaEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             List<UUID> players = new ArrayList<>();
-            Permanent gomazoa = game.getPermanent(source.getSourceId());
+            Permanent gomazoa = source.getSourcePermanentIfItStillExists(game);
             if (gomazoa != null) {
                 controller.moveCardToLibraryWithInfo(gomazoa, source, game, Zone.BATTLEFIELD, true, true);
                 players.add(gomazoa.getOwnerId());

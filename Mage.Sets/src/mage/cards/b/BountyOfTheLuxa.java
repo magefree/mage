@@ -61,7 +61,7 @@ class BountyOfTheLuxaEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent bountyOfLuxa = game.getPermanent(source.getSourceId());
+        Permanent bountyOfLuxa = source.getSourcePermanentIfItStillExists(game);
         if (bountyOfLuxa != null && bountyOfLuxa.getZoneChangeCounter(game) != source.getSourceObjectZoneChangeCounter()) {
             bountyOfLuxa = null;
         }

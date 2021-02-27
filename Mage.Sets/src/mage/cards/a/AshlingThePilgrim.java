@@ -74,7 +74,7 @@ class AshlingThePilgrimEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null) {
             int counters = sourcePermanent.getCounters(game).getCount(CounterType.P1P1);
             if (counters < 1) {

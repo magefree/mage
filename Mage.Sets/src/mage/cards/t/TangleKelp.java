@@ -84,7 +84,7 @@ class DontUntapIfAttackedLastTurnEnchantedEffect extends ContinuousRuleModifying
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());
             if (enchanted != null) {
@@ -102,7 +102,7 @@ class DontUntapIfAttackedLastTurnEnchantedEffect extends ContinuousRuleModifying
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
-            Permanent enchantment = game.getPermanent(source.getSourceId());
+            Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
             if (enchantment != null && enchantment.getAttachedTo() != null && event.getTargetId().equals(enchantment.getAttachedTo())) {
                 Permanent permanent = game.getPermanent(enchantment.getAttachedTo());
                 if (permanent != null &&  permanent.isControlledBy(game.getActivePlayerId())) {

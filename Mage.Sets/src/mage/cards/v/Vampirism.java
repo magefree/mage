@@ -82,7 +82,7 @@ class VampirismBoostEnchantedEffect extends ContinuousEffectImpl {
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
         int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) - 1;
         if (count > 0) {
-            Permanent enchantment = game.getPermanent(source.getSourceId());
+            Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Permanent creature = game.getPermanent(enchantment.getAttachedTo());
                 if (creature != null) {

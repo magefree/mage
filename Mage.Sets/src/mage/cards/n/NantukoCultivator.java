@@ -69,7 +69,7 @@ class NantukoCultivatorEffect extends OneShotEffect {
         if (count < 1) {
             return false;
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             permanent.addCounters(CounterType.P1P1.createInstance(count), source.getControllerId(), source, game);
         }

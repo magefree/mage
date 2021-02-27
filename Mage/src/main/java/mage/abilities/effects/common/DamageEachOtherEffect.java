@@ -32,7 +32,7 @@ public class DamageEachOtherEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         boolean sourceOnBattlefield = true;
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-        Permanent sourceCreature = game.getPermanent(source.getSourceId());
+        Permanent sourceCreature = source.getSourcePermanentIfItStillExists(game);
         if (sourceCreature == null) {
             sourceCreature = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             sourceOnBattlefield = false;

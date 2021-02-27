@@ -106,7 +106,7 @@ class RetaliatorGriffinEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             Integer amount = (Integer) this.getValue("damageAmount");
             if (permanent != null && amount != null && amount > 0) {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount), true).apply(game, source);

@@ -72,7 +72,7 @@ public final class BalanWanderingKnight extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Permanent balan = game.getPermanent(source.getSourceId());
+            Permanent balan = source.getSourcePermanentIfItStillExists(game);
             if (balan != null) {
                 FilterPermanent filter = new FilterPermanent();
                 filter.add(SubType.EQUIPMENT.getPredicate());

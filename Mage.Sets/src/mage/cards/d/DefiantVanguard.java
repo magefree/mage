@@ -130,7 +130,7 @@ class DefiantVanguardEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         boolean result = false;
         Permanent blockedCreature = game.getPermanent(targetPointer.getFirst(game, source));
-        Permanent defiantVanguard = game.getPermanent(source.getSourceId());
+        Permanent defiantVanguard = source.getSourcePermanentIfItStillExists(game);
         if (blockedCreature != null) {
             if (game.getState().getValue(blockedCreature.toString()).equals(blockedCreature.getZoneChangeCounter(game))) { // true if it did not change zones
                 blockedCreature.destroy(source, game, false);

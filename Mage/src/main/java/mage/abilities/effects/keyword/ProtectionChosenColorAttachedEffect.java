@@ -48,7 +48,7 @@ public class ProtectionChosenColorAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent attachement = game.getPermanent(source.getSourceId());
+        Permanent attachement = source.getSourcePermanentIfItStillExists(game);
         if (attachement != null && attachement.getAttachedTo() != null) {
             ObjectColor color = (ObjectColor) game.getState().getValue(attachement.getId() + "_color");
             if (color != null && (protectionAbility == null || !color.equals(chosenColor))) {

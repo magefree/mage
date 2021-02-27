@@ -58,7 +58,7 @@ class KreshTheBloodbraidedEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        Permanent kreshTheBloodbraided = game.getPermanent(source.getSourceId());
+        Permanent kreshTheBloodbraided = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && kreshTheBloodbraided != null) {
             int amount = permanent.getPower().getValue();
             if (amount > 0) {

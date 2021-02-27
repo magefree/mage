@@ -90,7 +90,7 @@ class PalisadeGiantReplacementEffect extends ReplacementEffectImpl {
         }
         if (event.getType() == GameEvent.EventType.DAMAGE_PERMANENT) {
             Permanent targetPermanent = game.getPermanent(event.getTargetId());
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
             if (targetPermanent != null &&
                     targetPermanent.isControlledBy(source.getControllerId()) &&
                     !CardUtil.haveSameNames(targetPermanent, sourcePermanent)) {  // no redirection from or to other Palisade Giants
@@ -103,7 +103,7 @@ class PalisadeGiantReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         DamageEvent damageEvent = (DamageEvent) event;
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null) {
             // get name of old target
             Permanent targetPermanent = game.getPermanent(event.getTargetId());

@@ -12,7 +12,7 @@ public enum FlippedCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getSourceId());
+        Permanent p = source.getSourcePermanentIfItStillExists(game);
         if (p != null) {
             return p.isFlipped();
         }

@@ -27,7 +27,7 @@ public enum SourceOnBattlefieldOrCommandZoneCondition implements Condition {
                 return true;
             }
         }
-        return (game.getPermanent(source.getSourceId()) != null);
+        return (source.getSourcePermanentIfItStillExists(game) != null);
     }
 
     @Override

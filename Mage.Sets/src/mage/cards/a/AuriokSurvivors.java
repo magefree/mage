@@ -67,7 +67,7 @@ class AuriokSurvivorsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent p = game.getPermanent(targetPointer.getFirst(game, source));
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Player player = game.getPlayer(source.getControllerId());
         if (p != null && player != null && sourcePermanent != null) {
             if (player.chooseUse(Outcome.Benefit, "Attach " + p.getName() + " to " + sourcePermanent.getName() + '?', source, game)) {

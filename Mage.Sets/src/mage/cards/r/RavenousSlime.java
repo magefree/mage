@@ -73,7 +73,7 @@ class RavenousSlimeEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceCreature = game.getPermanent(source.getSourceId());
+        Permanent sourceCreature = source.getSourcePermanentIfItStillExists(game);
         if (controller == null || sourceCreature == null) {
             return false;
         }

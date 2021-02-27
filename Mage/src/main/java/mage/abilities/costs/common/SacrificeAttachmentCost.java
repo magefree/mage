@@ -26,7 +26,7 @@ public class SacrificeAttachmentCost extends UseAttachedCost {
         if (mageObjectReference == null) {
             return false;
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             return paid;
         }

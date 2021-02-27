@@ -77,7 +77,7 @@ class ShorecrasherElementalEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent shorecrasherElemental = game.getPermanent(source.getSourceId());
+        Permanent shorecrasherElemental = source.getSourcePermanentIfItStillExists(game);
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && shorecrasherElemental != null && sourceObject != null
                 && new MageObjectReference(sourceObject, game).refersTo(shorecrasherElemental, game)) {

@@ -109,7 +109,7 @@ class MythRealizedSetPTEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null && new MageObjectReference(source.getSourceObject(game), game).refersTo(permanent, game)) {
                 int amount = permanent.getCounters(game).getCount(CounterType.LORE);
                 permanent.getPower().setValue(amount);

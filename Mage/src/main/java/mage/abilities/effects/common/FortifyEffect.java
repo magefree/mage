@@ -18,7 +18,7 @@ public class FortifyEffect extends AttachEffect{
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         //Some artifacts have the subtype “Fortification.” A Fortification can be attached to a land. It can’t legally
         // be attached to an object that isn’t a land. Fortification’s analog to the equip keyword ability is the
         // fortify keyword ability. Rules 301.5a–e apply to Fortifications in relation to lands just as they apply to

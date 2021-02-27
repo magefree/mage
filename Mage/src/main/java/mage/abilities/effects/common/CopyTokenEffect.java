@@ -24,7 +24,7 @@ public class CopyTokenEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         permanent.setName(token.getName());
         permanent.getColor(game).setColor(token.getColor(game));
         permanent.getCardType().clear();

@@ -68,7 +68,7 @@ class LudevicsTestSubjectEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getSourceId());
+        Permanent p = source.getSourcePermanentIfItStillExists(game);
         if (p != null) {
             if (p.getCounters(game).getCount(CounterType.HATCHLING) >= 5) {
                 p.removeCounters(CounterType.HATCHLING.getName(), p.getCounters(game).getCount(CounterType.HATCHLING), source, game);

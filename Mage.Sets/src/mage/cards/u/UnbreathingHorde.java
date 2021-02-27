@@ -123,7 +123,7 @@ class UnbreathingHordeEffect2 extends PreventionEffectImpl {
             game.fireEvent(new PreventedDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), damage));
             retValue = true;
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             permanent.removeCounters(CounterType.P1P1.createInstance(), source, game);
         }

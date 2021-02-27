@@ -68,7 +68,7 @@ class WallOfDeceitEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null
                 && source.getSourceObjectZoneChangeCounter() == sourcePermanent.getZoneChangeCounter(game) // in case source was blinked after ability was set to stack
                 && !sourcePermanent.isFaceDown(game)) {

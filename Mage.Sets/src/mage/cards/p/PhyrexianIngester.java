@@ -85,7 +85,7 @@ class PhyrexianIngesterImprintEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && sourceObject != null) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
             Permanent targetPermanent = game.getPermanent(source.getFirstTarget());
             if (sourcePermanent != null && targetPermanent != null) {
                 controller.moveCardToExileWithInfo(targetPermanent, getId(), sourceObject.getIdName() + " (Imprint)", source, game, Zone.BATTLEFIELD, true);
@@ -115,7 +115,7 @@ class PhyrexianIngesterBoostEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && !permanent.getImprinted().isEmpty()) {
             Card card = game.getCard(permanent.getImprinted().get(0));
             if (card != null) {

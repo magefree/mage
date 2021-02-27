@@ -66,7 +66,7 @@ class GainReboundEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (player != null && permanent != null) {
             for (Card card : player.getHand().getCards(CastThroughTime.filter, game)) {
                 addReboundAbility(card, game);

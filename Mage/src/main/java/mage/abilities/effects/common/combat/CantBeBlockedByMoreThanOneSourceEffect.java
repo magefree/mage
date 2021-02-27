@@ -47,7 +47,7 @@ public class CantBeBlockedByMoreThanOneSourceEffect extends ContinuousEffectImpl
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent perm = game.getPermanent(source.getSourceId());
+        Permanent perm = source.getSourcePermanentIfItStillExists(game);
         if (perm != null) {
             switch (layer) {
                 case RulesEffects:

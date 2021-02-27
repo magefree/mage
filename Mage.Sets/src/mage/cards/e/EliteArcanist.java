@@ -108,7 +108,7 @@ class EliteArcanistImprintEffect extends OneShotEffect {
                 Card card = player.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     card.moveToExile(source.getSourceId(), "Elite Arcanist", source, game);
-                    Permanent permanent = game.getPermanent(source.getSourceId());
+                    Permanent permanent = source.getSourcePermanentIfItStillExists(game);
                     if (permanent != null) {
                         permanent.imprint(card.getId(), game);
                         permanent.addInfo("imprint", "[Exiled card - " + card.getName() + ']', game);
@@ -146,7 +146,7 @@ class EliteArcanistCopyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent == null) {
             sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         }

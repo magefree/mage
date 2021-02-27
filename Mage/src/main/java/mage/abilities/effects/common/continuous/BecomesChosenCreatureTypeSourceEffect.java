@@ -37,7 +37,7 @@ public class BecomesChosenCreatureTypeSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePerm = game.getPermanent(source.getSourceId());
+        Permanent sourcePerm = source.getSourcePermanentIfItStillExists(game);
         if (sourcePerm == null) {
             return false;
         }

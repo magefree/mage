@@ -68,7 +68,7 @@ public final class TimberpackWolf extends CardImpl {
         public boolean apply(Game game, Ability source) {
             int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) - 1;
             if (count > 0) {
-                Permanent target = game.getPermanent(source.getSourceId());
+                Permanent target = source.getSourcePermanentIfItStillExists(game);
                 if (target != null) {
                     target.addPower(count);
                     target.addToughness(count);

@@ -46,7 +46,7 @@ public class CantBeBlockedByOneAttachedEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         switch (layer) {
             case RulesEffects:
-                Permanent attachment = game.getPermanent(source.getSourceId());
+                Permanent attachment = source.getSourcePermanentIfItStillExists(game);
                 if (attachment != null && attachment.getAttachedTo() != null) {
                     Permanent perm = game.getPermanent(attachment.getAttachedTo());
                     if (perm != null) {

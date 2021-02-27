@@ -80,7 +80,7 @@ class GisaAndGeralfCastFromGraveyardEffect extends AsThoughEffectImpl {
         if (source.isControlledBy(affectedControllerId)
                 && Zone.GRAVEYARD.equals(game.getState().getZone(objectId))) {
             Card objectCard = game.getCard(objectId);
-            Permanent sourceObject = game.getPermanent(source.getSourceId());
+            Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
             if (sourceObject != null && objectCard != null
                     && objectCard.isOwnedBy(source.getControllerId())
                     && objectCard.isCreature()

@@ -110,7 +110,7 @@ class ImminentDoomEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent imminentDoom = game.getPermanent(source.getSourceId());
+        Permanent imminentDoom = source.getSourcePermanentIfItStillExists(game);
         if (imminentDoom != null) {
             Effect effect = new DamageTargetEffect((int) game.getState().getValue("ImminentDoomCount" + source.getSourceId().toString()));
             effect.apply(game, source);

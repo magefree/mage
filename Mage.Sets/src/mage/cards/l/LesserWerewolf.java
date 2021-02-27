@@ -73,7 +73,7 @@ class LesserWerewolfEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source)); // must be valid target
         if (controller != null && sourcePermanent != null && targetPermanent != null) {
             if (sourcePermanent.getPower().getValue() >= 1) {

@@ -108,7 +108,7 @@ class CopyActivatedAbilityEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         StackAbility ability = (StackAbility) getValue("stackAbility");
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (ability != null && controller != null && sourcePermanent != null) {
             ability.createCopyOnStack(game, source, source.getControllerId(), true);
             game.informPlayers(sourcePermanent.getName() + ": " + controller.getLogName() + " copied activated ability");

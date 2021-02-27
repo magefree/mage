@@ -19,7 +19,7 @@ public class EquipEffect extends AttachEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         //301.5c An Equipment that’s also a creature can’t equip a creature. An Equipment that loses the subtype
         // “Equipment” can’t equip a creature. An Equipment can’t equip itself. An Equipment that equips an illegal or
         // nonexistent permanent becomes unattached from that permanent but remains on the battlefield. (This is a

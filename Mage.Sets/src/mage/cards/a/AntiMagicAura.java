@@ -77,7 +77,7 @@ class AntiMagicAuraRuleEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (sourceObject != null && sourceObject.getAttachedTo() != null) {
             if (event.getTargetId().equals(sourceObject.getAttachedTo())) {
                 return !event.getSourceId().equals(source.getSourceId());

@@ -84,7 +84,7 @@ class DescentIntoMadnessEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null && controller != null) {
             sourcePermanent.addCounters(CounterType.DESPAIR.createInstance(), source.getControllerId(), source, game);
         }

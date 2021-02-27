@@ -63,7 +63,7 @@ class GamorreanPrisonGuardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        Permanent thisCreature = game.getPermanent(source.getSourceId());
+        Permanent thisCreature = source.getSourcePermanentIfItStillExists(game);
         Permanent opponentCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (you != null && thisCreature != null && opponentCreature != null) {
             return thisCreature.fight(opponentCreature, source, game);

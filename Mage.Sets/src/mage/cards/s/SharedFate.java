@@ -62,7 +62,7 @@ class SharedFateReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Player playerToDraw = game.getPlayer(event.getPlayerId());
         if (playerToDraw != null && sourcePermanent != null) {
             TargetOpponent target = new TargetOpponent(true);
@@ -118,7 +118,7 @@ class SharedFatePlayEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (game.getState().getZone(objectId) == Zone.EXILED) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
             UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + sourcePermanent.getZoneChangeCounter(game) + affectedControllerId.toString(), game);
             ExileZone exileZone = game.getExile().getExileZone(exileId);
             return exileZone != null && exileZone.contains(objectId);
@@ -151,7 +151,7 @@ class SharedFateLookEffect extends AsThoughEffectImpl {
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         if (game.getState().getZone(objectId) == Zone.EXILED) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
             UUID exileId = CardUtil.getExileZoneId(source.getSourceId().toString() + sourcePermanent.getZoneChangeCounter(game) + affectedControllerId.toString(), game);
             ExileZone exileZone = game.getExile().getExileZone(exileId);
             if (exileZone != null && exileZone.contains(objectId)) {

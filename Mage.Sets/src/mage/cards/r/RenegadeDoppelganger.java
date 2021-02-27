@@ -104,7 +104,7 @@ class RenegadeDoppelgangerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         Permanent targetCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (targetCreature == null || permanent == null) {
             return false;

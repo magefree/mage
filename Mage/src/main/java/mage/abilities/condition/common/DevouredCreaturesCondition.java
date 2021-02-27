@@ -24,7 +24,7 @@ public class DevouredCreaturesCondition extends IntCompareCondition {
     @Override
     protected int getInputValue(Game game, Ability source) {
         int devouredCreatures = 0;
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null) {
             for (Ability ability : sourcePermanent.getAbilities()) {
                 if (ability instanceof DevourAbility) {

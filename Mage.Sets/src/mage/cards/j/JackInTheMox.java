@@ -75,7 +75,7 @@ class JackInTheMoxManaEffect extends ManaEffect {
             return mana;
         }
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && permanent != null) {
             int amount = controller.rollDice(source, game, 6);
             switch (amount) {

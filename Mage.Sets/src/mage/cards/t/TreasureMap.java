@@ -70,7 +70,7 @@ class TreasureMapEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             player.scry(1, source, game);

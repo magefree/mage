@@ -72,7 +72,7 @@ class PlagueBoilerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && sourcePermanent != null) {
             if (!sourcePermanent.getCounters(game).containsKey(CounterType.PLAGUE) || controller.chooseUse(outcome, "Put a plague counter on? (No removes one)", source, game)) {
                 return new AddCountersSourceEffect(CounterType.PLAGUE.createInstance(), true).apply(game, source);
@@ -139,7 +139,7 @@ class PlagueBoilerSacrificeDestroyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null) {
             if (sourcePermanent.sacrifice(source, game)) {
                 return new DestroyAllEffect(new FilterNonlandPermanent()).apply(game, source);

@@ -166,7 +166,7 @@ class UnboundFlourishingCopyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (player != null && controller != null) {
             Object needObject = game.getState().getValue(source.getSourceId() + UnboundFlourishing.needPrefix);
 

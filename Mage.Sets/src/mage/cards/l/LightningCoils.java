@@ -73,7 +73,7 @@ class LightningCoilsEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent p = game.getPermanent(source.getSourceId());
+        Permanent p = source.getSourcePermanentIfItStillExists(game);
         if (p != null && controller != null) {
             int counters = p.getCounters(game).getCount(CounterType.CHARGE);
             if (counters >= 5) {

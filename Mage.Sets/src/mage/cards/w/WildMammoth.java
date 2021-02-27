@@ -67,7 +67,7 @@ class WildMammothEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
             if (sourcePermanent != null) {
                 Player newController = null;
                 int maxCreatures = 0;

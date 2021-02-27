@@ -91,7 +91,7 @@ class SekkiSeasonsGuideEffect extends PreventionEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         int damage = event.getAmount();
         preventDamageAction(event, source, game);
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             permanent.removeCounters(CounterType.P1P1.createInstance(damage), source, game);
         }

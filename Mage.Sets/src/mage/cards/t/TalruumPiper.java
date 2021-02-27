@@ -55,7 +55,7 @@ class TalruumPiperEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent sourceCreature = game.getPermanent(source.getSourceId());
+        Permanent sourceCreature = source.getSourcePermanentIfItStillExists(game);
         if (sourceCreature != null && sourceCreature.isAttacking()) {
             return permanent.getAbilities().contains(FlyingAbility.getInstance())
                     && permanent.canBlock(source.getSourceId(), game);

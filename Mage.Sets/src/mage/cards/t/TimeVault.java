@@ -79,7 +79,7 @@ class TimeVaultReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (source.isControlledBy(event.getPlayerId())) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null && permanent.isTapped()) {
                 return true;
             }
@@ -90,7 +90,7 @@ class TimeVaultReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (player != null && permanent != null) {
             if (player.chooseUse(Outcome.Untap, "Skip your turn to untap " + permanent.getName() + '?', source, game)) {
                 permanent.untap(game);

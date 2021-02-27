@@ -82,7 +82,7 @@ class MudslideEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
 
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (player != null && sourcePermanent != null) {
             int countBattlefield = game.getBattlefield().getAllActivePermanents(filter, game.getActivePlayerId(), game).size();
             while (player.canRespond() && countBattlefield > 0 && player.chooseUse(Outcome.Benefit, "Pay {2} and untap a tapped creature without flying under your control?", source, game)) {

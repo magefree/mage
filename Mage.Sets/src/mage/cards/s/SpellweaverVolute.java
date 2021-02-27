@@ -81,7 +81,7 @@ class SpellweaverVoluteEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
             if (sourcePermanent != null && sourcePermanent.getAttachedTo() != null) {
                 Card enchantedCard = game.getCard(sourcePermanent.getAttachedTo());
                 if (enchantedCard != null && game.getState().getZone(enchantedCard.getId()) == Zone.GRAVEYARD) {

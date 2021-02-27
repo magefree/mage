@@ -34,7 +34,7 @@ public class UntapSourceDuringEachOtherPlayersUntapStepEffect extends Continuous
                     && game.getStep() != null
                     && game.getStep().getType() == PhaseStep.UNTAP) {
                 game.getState().setValue(source.getSourceId() + "applied", true);
-                Permanent permanent = game.getPermanent(source.getSourceId());
+                Permanent permanent = source.getSourcePermanentIfItStillExists(game);
                 if (permanent != null) {
                     boolean untap = true;
                     for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).keySet()) {

@@ -85,7 +85,7 @@ class GrothamaAllDevouringGainAbilityEffect extends GainAbilityAllEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             return false;
         }
@@ -117,7 +117,7 @@ class GrothamaAllDevouringFightEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent grothama = game.getPermanent(fightId);
-        Permanent creature = game.getPermanent(source.getSourceId());
+        Permanent creature = source.getSourcePermanentIfItStillExists(game);
         if (grothama == null || creature == null) {
             return false;
         }

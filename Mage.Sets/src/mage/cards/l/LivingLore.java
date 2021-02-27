@@ -114,7 +114,7 @@ class LivingLoreSetPowerToughnessSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         int zcc = game.getState().getZoneChangeCounter(source.getSourceId());
         if (permanent == null) {
             permanent = game.getPermanentEntering(source.getSourceId());
@@ -166,7 +166,7 @@ class LivingLoreSacrificeEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             MageObject mageObject = source.getSourceObject(game);
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null
                     && mageObject != null
                     && new MageObjectReference(permanent, game).refersTo(mageObject, game)) {

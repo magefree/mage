@@ -79,7 +79,7 @@ enum SnowDevilCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         FilterLandPermanent filter = new FilterLandPermanent();
         filter.add(SuperType.SNOW.getPredicate());
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (enchantment != null) {
             Player controller = game.getPlayer(enchantment.getControllerId());
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());

@@ -66,7 +66,7 @@ class BrackwaterElementalSacrificeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null) {
             SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice {this}");
             sacrificeEffect.setTargetPointer(new FixedTarget(sourcePermanent.getId()));

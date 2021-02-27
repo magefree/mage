@@ -88,7 +88,7 @@ class HisokasGuardGainAbilityTargetEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         // remember the guarded creature
         Permanent guardedCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
-        Permanent hisokasGuard = game.getPermanent(source.getSourceId());
+        Permanent hisokasGuard = source.getSourcePermanentIfItStillExists(game);
         if (guardedCreature != null && hisokasGuard != null) {
             hisokasGuard.addConnectedCard("HisokasGuard", guardedCreature.getId());
         }
@@ -96,7 +96,7 @@ class HisokasGuardGainAbilityTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent hisokasGuard = game.getPermanent(source.getSourceId());
+        Permanent hisokasGuard = source.getSourcePermanentIfItStillExists(game);
         if (hisokasGuard != null && !hisokasGuard.getConnectedCards("HisokasGuard").isEmpty()) {
             Permanent guardedCreature = game.getPermanent(hisokasGuard.getConnectedCards("HisokasGuard").get(0));
             if (guardedCreature != null && hisokasGuard.isTapped()) {

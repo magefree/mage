@@ -67,7 +67,7 @@ class SemblanceAnvilEffect extends OneShotEffect {
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
                 card.moveToExile(getId(), "Semblance Anvil (Imprint)", source, game);
-                Permanent permanent = game.getPermanent(source.getSourceId());
+                Permanent permanent = source.getSourcePermanentIfItStillExists(game);
                 if (permanent != null) {
                     permanent.imprint(card.getId(), game);
                 }
@@ -110,7 +110,7 @@ class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl {
                 && abilityToModify.isControlledBy(source.getControllerId())) {
             Card spellCard = ((SpellAbility) abilityToModify).getCharacteristics(game);
             if (spellCard != null) {
-                Permanent permanent = game.getPermanent(source.getSourceId());
+                Permanent permanent = source.getSourcePermanentIfItStillExists(game);
                 if (permanent != null) {
                     List<UUID> imprinted = permanent.getImprinted();
                     if (imprinted != null && !imprinted.isEmpty()) {

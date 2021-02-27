@@ -59,7 +59,7 @@ class EaterOfTheDeadEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Card card = game.getCard(source.getFirstTarget());
         if (sourcePermanent != null && sourcePermanent.isTapped() && card != null) {
             card.moveToExile(null, "Eater of the Dead", source, game);

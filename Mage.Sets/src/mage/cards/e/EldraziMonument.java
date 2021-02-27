@@ -85,7 +85,7 @@ class EldraziMonumentEffect extends OneShotEffect {
                 return permanent.sacrifice(source, game);
             }
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             return permanent.sacrifice(source, game);
         }

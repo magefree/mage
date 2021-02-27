@@ -80,7 +80,7 @@ class PrismaticWardPreventDamageEffect extends PreventionEffectImpl {
         if (!super.applies(event, source, game)) {
             return false;
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             return false;
         }
@@ -92,7 +92,7 @@ class PrismaticWardPreventDamageEffect extends PreventionEffectImpl {
         if (sourceObject == null || !sourceObject.getColor(game).shares(color)) {
             return false;
         }
-        Permanent attachment = game.getPermanent(source.getSourceId());
+        Permanent attachment = source.getSourcePermanentIfItStillExists(game);
         if (attachment != null
                 && attachment.getAttachedTo() != null
                 && event.getTargetId().equals(attachment.getAttachedTo())) {

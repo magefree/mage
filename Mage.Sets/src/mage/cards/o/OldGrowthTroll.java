@@ -154,7 +154,7 @@ class OldGrowthTrollContinuousEffect extends ContinuousEffectImpl {
             discard();
             return false;
         }
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (sourceObject == null) {
             sourceObject = game.getPermanentEntering(source.getSourceId());
         }

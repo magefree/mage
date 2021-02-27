@@ -70,7 +70,7 @@ class ThoughtGorgerEffectEnters extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent thoughtGorger = game.getPermanent(source.getSourceId());
+        Permanent thoughtGorger = source.getSourcePermanentIfItStillExists(game);
         if (player == null
                 || player.getHand().isEmpty()
                 || thoughtGorger == null

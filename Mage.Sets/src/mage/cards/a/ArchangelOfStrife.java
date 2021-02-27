@@ -70,7 +70,7 @@ class ArchangelOfStrifeChooseEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
 
         if (sourcePermanent == null) {
             sourcePermanent = game.getPermanentEntering(source.getSourceId());

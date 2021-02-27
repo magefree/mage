@@ -73,7 +73,7 @@ class ElkinLairUpkeepEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(game.getActivePlayerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (player != null
                 && sourcePermanent != null) {
             Card[] cards = player.getHand().getCards(new FilterCard(), game).toArray(new Card[0]);

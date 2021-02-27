@@ -66,7 +66,7 @@ class ArmoredTransportPreventCombatDamageSourceEffect extends PreventionEffectIm
         if (super.applies(event, source, game)) {
             DamageEvent damageEvent = (DamageEvent) event;
             if (event.getTargetId().equals(source.getSourceId()) && damageEvent.isCombatDamage()) {
-                Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+                Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
                 if (sourcePermanent != null && sourcePermanent.isAttacking()) {
                     return true;
                 }

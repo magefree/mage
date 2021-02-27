@@ -80,7 +80,7 @@ class WhipgrassEntanglerCantAttackUnlessYouPayEffect extends CantAttackBlockUnle
 
     @Override
     public ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game) {
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (sourceObject != null) {
             int payment = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
             if (payment > 0) {

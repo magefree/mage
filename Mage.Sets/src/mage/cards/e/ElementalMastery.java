@@ -74,7 +74,7 @@ class ElementalMasteryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creatureAttached = game.getPermanent(source.getSourceId());
+        Permanent creatureAttached = source.getSourcePermanentIfItStillExists(game);
         if (creatureAttached != null) {
             int power = creatureAttached.getPower().getValue();
             if (power > 0) {

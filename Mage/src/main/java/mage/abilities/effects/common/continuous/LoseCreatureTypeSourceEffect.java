@@ -57,7 +57,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl implement
         if (dynamicValue.calculate(game, source, this) >= lessThan) {
             return false;
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             return false;
         }

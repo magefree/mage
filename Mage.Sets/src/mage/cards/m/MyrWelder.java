@@ -71,7 +71,7 @@ class MyrWelderEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getFirstTarget());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (card != null && permanent != null) {
             card.moveToExile(getId(), "Myr Welder (Imprint)", source, game);
             permanent.imprint(card.getId(), game);
@@ -100,7 +100,7 @@ class MyrWelderContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent perm = game.getPermanent(source.getSourceId());
+        Permanent perm = source.getSourcePermanentIfItStillExists(game);
         if (perm != null) {
             for (UUID imprintedId : perm.getImprinted()) {
                 Card card = game.getCard(imprintedId);

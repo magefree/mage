@@ -91,7 +91,7 @@ class LeoninArbiterIgnoreEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         String key = permanent.getId() + keyString;
 
         // Using a Map.Entry since there is no pair class
@@ -132,7 +132,7 @@ class LeoninArbiterCantSearchEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             boolean applies = true;
             String key = permanent.getId() + keyString;

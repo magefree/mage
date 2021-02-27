@@ -78,7 +78,7 @@ class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         if (protectionFilter == null) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null) {
                 SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(permanent.getId(), game);
                 if (subType != null) {

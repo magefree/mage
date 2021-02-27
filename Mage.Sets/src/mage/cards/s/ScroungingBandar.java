@@ -82,7 +82,7 @@ class ScroungingBandarEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent fromPermanent = game.getPermanent(source.getSourceId());
+            Permanent fromPermanent = source.getSourcePermanentIfItStillExists(game);
             Permanent toPermanent = game.getPermanent(source.getTargets().getFirstTarget());
 
             if (fromPermanent != null && toPermanent != null) {

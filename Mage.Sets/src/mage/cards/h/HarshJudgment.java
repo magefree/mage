@@ -79,7 +79,7 @@ class HarshJudgmentEffect extends RedirectionEffect {
                 spell = (Spell) stackObject;
             }
             //Checks if damage is from a sorcery or instants and spell is of chosen color
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             ObjectColor color = (ObjectColor) game.getState().getValue(permanent.getId() + "_color");
             if (spell != null && instantOrSorceryFilter.match(spell.getCard(), game) && spell.getColor(game).contains(color)) {
                 TargetPlayer target = new TargetPlayer();

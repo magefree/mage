@@ -74,7 +74,7 @@ class GoblinBangchuckersEffect extends OneShotEffect {
                     return true;
                 }
             } else {
-                Permanent permanent = game.getPermanent(source.getSourceId());
+                Permanent permanent = source.getSourcePermanentIfItStillExists(game);
                 if (permanent != null) {
                     permanent.damage(2, source.getSourceId(), source, game, false, true);
                     return true;

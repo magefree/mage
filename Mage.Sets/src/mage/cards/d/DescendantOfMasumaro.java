@@ -68,7 +68,7 @@ class DescendantOfMasumaroEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && sourcePermanent != null) {
             if (!controller.getHand().isEmpty()) {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(controller.getHand().size()), true).apply(game, source);

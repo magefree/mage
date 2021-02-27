@@ -72,7 +72,7 @@ class FreneticSliverEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent perm = game.getPermanent(source.getSourceId());
+        Permanent perm = source.getSourcePermanentIfItStillExists(game);
         if (player == null || perm == null) {
             return false;
         }

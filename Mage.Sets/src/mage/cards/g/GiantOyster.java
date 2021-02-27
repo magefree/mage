@@ -104,7 +104,7 @@ class GiantOysterCreateDelayedTriggerEffects extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent oyster = game.getPermanent(source.getSourceId());
+            Permanent oyster = source.getSourcePermanentIfItStillExists(game);
             Permanent tappedCreature = game.getPermanent(source.getFirstTarget());
             if (oyster != null && tappedCreature != null) {
                 Effect addCountersEffect = new AddCountersTargetEffect(CounterType.M1M1.createInstance(1));

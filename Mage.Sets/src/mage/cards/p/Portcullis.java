@@ -92,7 +92,7 @@ class PortcullisExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creatureToExile = game.getPermanent(getTargetPointer().getFirst(game, source));
-        Permanent portcullis = game.getPermanent(source.getSourceId());
+        Permanent portcullis = source.getSourcePermanentIfItStillExists(game);
         Player controller = game.getPlayer(source.getControllerId());
         if (portcullis != null
                 && creatureToExile != null

@@ -88,7 +88,7 @@ class KraulHarpoonerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePerm = game.getPermanent(source.getSourceId());
+        Permanent sourcePerm = source.getSourcePermanentIfItStillExists(game);
         Player player = game.getPlayer(source.getControllerId());
         if (sourcePerm == null || player == null) {
             return false;

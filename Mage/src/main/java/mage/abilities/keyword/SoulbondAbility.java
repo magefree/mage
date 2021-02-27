@@ -130,7 +130,7 @@ class SoulboundEntersSelfEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && permanent.isCreature()) {
             Player controller = game.getPlayer(permanent.getControllerId());
             if (controller != null) {
@@ -232,7 +232,7 @@ class SoulboundEntersOtherEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && permanent.getPairedCard() == null
                 && permanent.isCreature()) {
             Player controller = game.getPlayer(permanent.getControllerId());

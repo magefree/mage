@@ -73,7 +73,7 @@ class StorageMatrixRestrictionEffect extends RestrictionEffect {
             if (game.getTurnNum() != turn) {
                 turn = game.getTurnNum();
                 applies = false;
-                Permanent storageMatrix = game.getPermanent(source.getSourceId());
+                Permanent storageMatrix = source.getSourcePermanentIfItStillExists(game);
                 if (storageMatrix != null && !storageMatrix.isTapped()) {
                     Choice choiceImpl = new ChoiceImpl(true);
                     choiceImpl.setMessage("Untap which kind of permanent?");

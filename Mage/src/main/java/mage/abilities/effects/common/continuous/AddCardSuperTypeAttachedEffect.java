@@ -31,7 +31,7 @@ public class AddCardSuperTypeAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent target = game.getPermanent(equipment.getAttachedTo());
             if (target != null && !target.getSuperType().contains(addedSuperType)) {

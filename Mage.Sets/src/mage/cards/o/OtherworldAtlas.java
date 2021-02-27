@@ -61,7 +61,7 @@ class OtherworldAtlasDrawEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && sourcePlayer != null) {
             int amount = permanent.getCounters(game).getCount(CounterType.CHARGE);
             if (amount > 0) {

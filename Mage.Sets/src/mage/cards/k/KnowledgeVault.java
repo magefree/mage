@@ -103,7 +103,7 @@ class KnowledgeVaultReturnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Player controller = game.getPlayer(source.getControllerId());
         if (sourcePermanent != null && controller != null) {
             if (sourcePermanent.sacrifice(source, game)) {

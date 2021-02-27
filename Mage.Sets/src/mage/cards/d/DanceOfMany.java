@@ -88,7 +88,7 @@ class DanceOfManyCreateTokenCopyEffect extends OneShotEffect {
         // is put onto the battlefield. This card remains on the battlefield as an enchantment with no token.
         // (2004-10-04)
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && sourceObject != null) {
 
             CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();

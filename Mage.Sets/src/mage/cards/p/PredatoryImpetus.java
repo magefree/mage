@@ -67,7 +67,7 @@ class PredatoryImpetusEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
+        Permanent attachment = source.getSourcePermanentIfItStillExists(game);
         if (attachment == null || attachment.getAttachedTo() == null) {
             return false;
         }
@@ -88,7 +88,7 @@ class PredatoryImpetusEffect extends RequirementEffect {
 
     @Override
     public UUID mustBlockAttackerIfElseUnblocked(Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
+        Permanent attachment = source.getSourcePermanentIfItStillExists(game);
         return attachment == null ? null : attachment.getAttachedTo();
     }
 

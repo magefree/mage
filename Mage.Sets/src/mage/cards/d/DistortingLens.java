@@ -59,7 +59,7 @@ class ChangeColorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         Permanent chosen = game.getPermanent(targetPointer.getFirst(game, source));
         if (player != null && permanent != null) {
             ContinuousEffect effect = new BecomesColorTargetEffect(null, Duration.EndOfTurn);

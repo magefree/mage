@@ -47,7 +47,7 @@ public class BoostSourceWhileControlsEffect extends WhileConditionContinuousEffe
 
     @Override
     public boolean applyEffect(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             permanent.addPower(power);
             permanent.addToughness(toughness);

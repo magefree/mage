@@ -93,7 +93,7 @@ class RevokePrivilegeCantCrewEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         return enchantment != null && event.getTargetId().equals(enchantment.getAttachedTo());
     }
 }

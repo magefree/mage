@@ -78,7 +78,7 @@ class TortureChamberEffect1 extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (player != null && permanent != null) {
             int painCounters = permanent.getCounters(game).getCount(CounterType.PAIN);
             player.damage(painCounters, source.getSourceId(), source, game);

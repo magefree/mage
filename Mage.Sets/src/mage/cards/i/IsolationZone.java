@@ -72,7 +72,7 @@ class IsolationZoneExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         // If Stasis Snare leaves the battlefield before its triggered ability resolves,
         // the target won't be exiled.
         if (permanent != null) {

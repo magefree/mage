@@ -51,7 +51,7 @@ class SoldeviSentryEffect extends RegenerateSourceEffect {
     public boolean apply(Game game, Ability source) {
         //20110204 - 701.11
         Player opponent = game.getPlayer(source.getFirstTarget());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && permanent.regenerate(source, game)) {
             if (opponent != null) {
                 if (opponent.chooseUse(Outcome.DrawCard, "Draw a card?", source, game)) {

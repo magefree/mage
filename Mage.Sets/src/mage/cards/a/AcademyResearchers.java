@@ -69,7 +69,7 @@ class AcademyResearchersEffect extends OneShotEffect {
         FilterCard filterCardInHand = new FilterCard();
         filterCardInHand.add(SubType.AURA.getPredicate());
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent academyResearchers = game.getPermanent(source.getSourceId());
+        Permanent academyResearchers = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && academyResearchers != null) {
             filterCardInHand.add(new AuraCardCanAttachToPermanentId(academyResearchers.getId()));
             TargetCardInHand target = new TargetCardInHand(0, 1, filterCardInHand);

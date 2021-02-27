@@ -68,7 +68,7 @@ class DeathrenderEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && sourcePermanent != null) {
             TargetCardInHand target = new TargetCardInHand(0, 1, StaticFilters.FILTER_CARD_CREATURE);
             if (controller.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {

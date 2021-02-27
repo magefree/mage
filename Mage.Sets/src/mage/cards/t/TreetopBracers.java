@@ -63,7 +63,7 @@ class TreetopBracersRestrictEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equipped = game.getPermanent(equipment.getAttachedTo());
             return permanent != null && permanent.getId().equals(equipped.getId());

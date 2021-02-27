@@ -60,7 +60,7 @@ class VeiledSentryEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent veiledSentry = game.getPermanent(source.getSourceId());
+        Permanent veiledSentry = source.getSourcePermanentIfItStillExists(game);
         Spell spellCast = game.getSpell(targetPointer.getFirst(game, source));
         if (spellCast != null) {
             game.getState().setValue(source + "cmcSpell", spellCast.getConvertedManaCost());

@@ -61,7 +61,7 @@ public final class VulshokBattlemaster extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Permanent battlemaster = game.getPermanent(source.getSourceId());
+            Permanent battlemaster = source.getSourcePermanentIfItStillExists(game);
             if (battlemaster != null) {
                 FilterPermanent filter = new FilterPermanent();
                 filter.add(SubType.EQUIPMENT.getPredicate());

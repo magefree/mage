@@ -100,7 +100,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl implements Sou
             if (affectedObjectsSet) {
                 permanent = affectedObjectList.get(0).getPermanent(game);
             } else {
-                permanent = game.getPermanent(source.getSourceId());
+                permanent = source.getSourcePermanentIfItStillExists(game);
             }
             if (permanent != null) {
                 permanent.addAbility(ability, source.getSourceId(), game);

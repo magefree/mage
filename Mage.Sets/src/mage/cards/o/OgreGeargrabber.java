@@ -80,7 +80,7 @@ class OgreGeargrabberEffect1 extends OneShotEffect {
             game.addDelayedTriggeredAbility(delayedAbility, source);
             Permanent equipment = game.getPermanent(equipmentId);
             if (equipment != null) {
-                Permanent ogre = game.getPermanent(source.getSourceId());
+                Permanent ogre = source.getSourcePermanentIfItStillExists(game);
                 if (ogre != null) {
                     ogre.addAttachment(equipmentId, source, game);
                 }

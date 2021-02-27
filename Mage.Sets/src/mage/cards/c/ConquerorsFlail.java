@@ -138,7 +138,7 @@ class ConquerorsFlailEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         boolean isAttached = false;
         if (permanent != null) {
             UUID attachedTo = permanent.getAttachedTo();

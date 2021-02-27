@@ -56,7 +56,7 @@ class WinterOrbEffect extends RestrictionUntapNotMoreThanEffect {
 
     @Override
     public boolean applies(Player player, Ability source, Game game) {
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         return sourceObject != null && !sourceObject.isTapped();
     }
 

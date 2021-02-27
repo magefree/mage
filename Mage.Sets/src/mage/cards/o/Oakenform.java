@@ -70,7 +70,7 @@ class OakenformEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-    Permanent enchantment = game.getPermanent(source.getSourceId());
+    Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (enchantment != null && enchantment.getAttachedTo() != null) {
         Permanent creature = game.getPermanent(enchantment.getAttachedTo());
         if (creature != null) {

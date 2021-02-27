@@ -24,7 +24,7 @@ public class BecomesCreatureIfVehicleEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent aura = game.getPermanent(source.getSourceId());
+        Permanent aura = source.getSourcePermanentIfItStillExists(game);
         if (aura != null && aura.getAttachedTo() != null) {
             Permanent enchanted = game.getPermanent(aura.getAttachedTo());
             if (enchanted != null && enchanted.hasSubtype(SubType.VEHICLE, game)) {

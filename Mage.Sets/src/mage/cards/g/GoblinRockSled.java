@@ -93,7 +93,7 @@ class DontUntapIfAttackedLastTurnSourceEffect extends ContinuousRuleModifyingEff
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP
                 && event.getTargetId().equals(source.getSourceId())) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null && permanent.isControlledBy(game.getActivePlayerId())) {
                 AttackedLastTurnWatcher watcher = game.getState().getWatcher(AttackedLastTurnWatcher.class);
                 if (watcher != null) {

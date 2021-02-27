@@ -74,7 +74,7 @@ class EarthbindEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
+        Permanent attachment = source.getSourcePermanentIfItStillExists(game);
         if (attachment != null && attachment.getAttachedTo() != null) {           
             Permanent enchanted = game.getPermanent(attachment.getAttachedTo());
             if (enchanted != null) {

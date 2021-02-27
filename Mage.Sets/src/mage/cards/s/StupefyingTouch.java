@@ -63,7 +63,7 @@ class CantActivateAbilitiesAttachedEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             return permanent.getId().equals(enchantment.getAttachedTo());
         }

@@ -81,7 +81,7 @@ class PrimalAmuletEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && player != null) {
             permanent.addCounters(CounterType.CHARGE.createInstance(), source.getControllerId(), source, game);
             int counters = permanent.getCounters(game).getCount(CounterType.CHARGE);

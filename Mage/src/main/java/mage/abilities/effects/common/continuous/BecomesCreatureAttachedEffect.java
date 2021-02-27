@@ -52,7 +52,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (enchantment == null) {
             return false;
         }

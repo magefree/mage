@@ -77,7 +77,7 @@ class SpellweaverHelixImprintEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
             for (UUID targetId : this.getTargetPointer().getTargets(game, source)) {
                 Card card = game.getCard(targetId);
                 if (card != null) {

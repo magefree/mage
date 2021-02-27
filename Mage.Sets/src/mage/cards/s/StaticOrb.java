@@ -55,7 +55,7 @@ class StaticOrbEffect extends RestrictionUntapNotMoreThanEffect {
     @Override
     public boolean applies(Player player, Ability source, Game game) {
         // applied to all players
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (!permanent.isTapped()) {
             return true;
         }

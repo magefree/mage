@@ -69,7 +69,7 @@ class AngelicSkirmisherEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && sourcePermanent != null) {
             Choice abilityChoice = new ChoiceImpl(true);
             Set<String> abilityChoices = new HashSet<>(3);

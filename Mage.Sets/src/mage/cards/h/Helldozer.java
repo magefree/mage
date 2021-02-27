@@ -70,7 +70,7 @@ class HelldozerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent helldozer = game.getPermanent(source.getSourceId());
+        Permanent helldozer = source.getSourcePermanentIfItStillExists(game);
         Permanent landTarget = game.getPermanent(source.getFirstTarget());
         if (landTarget != null) {
             boolean wasNonBasic = !landTarget.isBasic();

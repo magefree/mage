@@ -75,7 +75,7 @@ class ThunderstaffPreventionEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
             if (event.getTargetId().equals(source.getControllerId())){
-                Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+                Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
                 if (sourcePermanent != null && !sourcePermanent.isTapped()) {
                     Permanent damageSource = game.getPermanent(event.getSourceId());
                     if (damageSource != null && filter.match(damageSource, game)) {

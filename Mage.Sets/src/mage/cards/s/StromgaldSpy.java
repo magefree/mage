@@ -69,7 +69,7 @@ class StromgaldSpyEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && sourcePermanent != null) {
             Player defender = game.getPlayer(this.getTargetPointer().getFirst(game, source));

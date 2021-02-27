@@ -18,7 +18,7 @@ public enum EquipmentAttachedCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
+        Permanent attachment = source.getSourcePermanentIfItStillExists(game);
         return attachment != null && attachment.getAttachedTo() != null;
     }
 

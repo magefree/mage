@@ -121,7 +121,7 @@ class CovetedJewelControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         Player newControllingPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (permanent == null || newControllingPlayer == null || !newControllingPlayer.canRespond()) {
             this.discard();

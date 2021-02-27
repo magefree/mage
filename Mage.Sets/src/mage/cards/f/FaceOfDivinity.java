@@ -67,7 +67,7 @@ enum FaceOfDivinityCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent currentAura = game.getPermanent(source.getSourceId());
+        Permanent currentAura = source.getSourcePermanentIfItStillExists(game);
         if (currentAura != null && currentAura.getAttachedTo() != null) {
             Permanent permanent = game.getPermanent(currentAura.getAttachedTo());
             if (permanent != null && !permanent.getAttachments().isEmpty()) {

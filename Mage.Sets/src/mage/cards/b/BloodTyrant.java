@@ -116,7 +116,7 @@ class BloodTyrantEffect extends OneShotEffect {
                     }
                 }
             }
-            Permanent bloodTyrant = game.getPermanent(source.getSourceId());
+            Permanent bloodTyrant = source.getSourcePermanentIfItStillExists(game);
             if (bloodTyrant != null && counters > 0) {
                 bloodTyrant.addCounters(CounterType.P1P1.createInstance(counters), source.getControllerId(), source, game);
             }

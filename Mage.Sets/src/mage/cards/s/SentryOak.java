@@ -69,7 +69,7 @@ class SentryOakEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (game.getPermanent(source.getSourceId()) != null) {
+        if (source.getSourcePermanentIfItStillExists(game) != null) {
             ContinuousEffect continuousEffect = new BoostSourceEffect(2, 0, Duration.EndOfTurn);
             game.addEffect(continuousEffect, source);
 

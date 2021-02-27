@@ -119,7 +119,7 @@ class SkeletonScavengersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent skeletonScavengers = game.getPermanent(source.getSourceId());
+        Permanent skeletonScavengers = source.getSourcePermanentIfItStillExists(game);
         if (skeletonScavengers != null) {
             if (new RegenerateSourceEffect().apply(game, source)) {
                 return new AddCountersSourceEffect(CounterType.P1P1.createInstance()).apply(game, source);

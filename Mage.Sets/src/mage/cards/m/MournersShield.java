@@ -84,7 +84,7 @@ class MournersShieldImprintEffect extends OneShotEffect {
             Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
             if (card != null) {
                 controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()), source.getSourceObject(game).getIdName());
-                Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+                Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
                 if (sourcePermanent != null) {
                     sourcePermanent.imprint(this.getTargetPointer().getFirst(game, source), game);
                 }
@@ -126,7 +126,7 @@ class MournersShieldEffect extends PreventionEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         ObjectColor colorsAmongImprinted = new ObjectColor();
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source.getSourceId()));
         if (sourceObject == null || sourceObject.getImprinted() == null) {
             noneExiled = true;

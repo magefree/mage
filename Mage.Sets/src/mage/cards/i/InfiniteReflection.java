@@ -83,7 +83,7 @@ class InfiniteReflectionTriggeredEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null && sourcePermanent.getAttachedTo() != null) {
             Permanent toCopyFromPermanent = game.getPermanent(sourcePermanent.getAttachedTo());
             if (toCopyFromPermanent != null) {
@@ -125,7 +125,7 @@ class InfiniteReflectionEntersBattlefieldEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         MageObject toCopyToObject = ((EntersTheBattlefieldEvent) event).getTarget();
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null && toCopyToObject != null && sourcePermanent.getAttachedTo() != null) {
             Permanent toCopyFromPermanent = game.getPermanent(sourcePermanent.getAttachedTo());
             if (toCopyFromPermanent != null) {

@@ -83,7 +83,7 @@ class WheelOfSunAndMoonEffect extends ReplacementEffectImpl {
         if (zEvent.getToZone() == Zone.GRAVEYARD) {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
-                Permanent enchantment = game.getPermanent(source.getSourceId());
+                Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
                 if (enchantment != null && enchantment.getAttachedTo() != null
                         && card.isOwnedBy(enchantment.getAttachedTo())) {
                     return true;

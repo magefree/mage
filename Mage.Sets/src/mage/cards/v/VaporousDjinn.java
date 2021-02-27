@@ -66,7 +66,7 @@ class VaporousDjinnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Cost cost = new ManaCostsImpl("{U}{U}");

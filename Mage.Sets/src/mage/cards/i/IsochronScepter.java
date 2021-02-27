@@ -90,7 +90,7 @@ class IsochronScepterImprintEffect extends OneShotEffect {
                     if (card != null) {
                         controller.moveCardsToExile(card, source, game, true, source.getSourceId(),
                                 sourcePermanent.getIdName() + " (Imprint)");
-                        Permanent permanent = game.getPermanent(source.getSourceId());
+                        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
                         if (permanent != null) {
                             permanent.imprint(card.getId(), game);
                             permanent.addInfo("imprint", CardUtil.addToolTipMarkTags(

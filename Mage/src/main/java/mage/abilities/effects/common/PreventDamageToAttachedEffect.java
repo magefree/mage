@@ -41,7 +41,7 @@ public class PreventDamageToAttachedEffect extends PreventionEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
             if (!onlyCombat || ((DamageEvent) event).isCombatDamage()) {
-                Permanent attachment = game.getPermanent(source.getSourceId());
+                Permanent attachment = source.getSourcePermanentIfItStillExists(game);
                 if (attachment != null
                         && attachment.getAttachedTo() != null) {
                     if (event.getTargetId().equals(attachment.getAttachedTo())) {

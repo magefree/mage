@@ -74,7 +74,7 @@ class LazavDimirMastermindEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent lazavDimirMastermind = game.getPermanent(source.getSourceId());
+        Permanent lazavDimirMastermind = source.getSourcePermanentIfItStillExists(game);
         Permanent newBluePrint = null;
         if (controller != null
                 && lazavDimirMastermind != null) {

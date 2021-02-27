@@ -93,7 +93,7 @@ class MagebaneArmorPreventionEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
         if (equipment != null && equipment.getAttachedTo() != null) {
             GameEvent preventEvent = new PreventDamageEvent(event.getTargetId(), source.getSourceId(), source, source.getControllerId(), event.getAmount(), ((DamageEvent) event).isCombatDamage());
             if (!game.replaceEvent(preventEvent)) {
@@ -109,7 +109,7 @@ class MagebaneArmorPreventionEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game) && !((DamageEvent) event).isCombatDamage()) {
-            Permanent equipment = game.getPermanent(source.getSourceId());
+            Permanent equipment = source.getSourcePermanentIfItStillExists(game);
             return equipment != null && equipment.getAttachedTo() != null
                     && event.getTargetId().equals(equipment.getAttachedTo());
         }

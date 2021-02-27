@@ -87,14 +87,14 @@ class KarganIntimidatorEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         return sourcePermanent != null;
     }
 
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         if (attacker != null && blocker != null) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
             if (sourcePermanent != null && attacker.hasSubtype(SubType.WARRIOR, game)) {
                 return !blocker.hasSubtype(SubType.COWARD, game);
             }

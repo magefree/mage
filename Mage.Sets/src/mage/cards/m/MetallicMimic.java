@@ -74,7 +74,7 @@ class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Permanent enteringCreature = ((EntersTheBattlefieldEvent) event).getTarget();
         if (enteringCreature != null && sourcePermanent != null
                 && enteringCreature.isControlledBy(source.getControllerId())

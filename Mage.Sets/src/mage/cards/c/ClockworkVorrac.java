@@ -64,7 +64,7 @@ class ClockworkVorracEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getSourceId());
+        Permanent p = source.getSourcePermanentIfItStillExists(game);
         if (p != null) {
             AtTheEndOfCombatDelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(new RemoveCounterSourceEffect(CounterType.P1P1.createInstance()));
             game.addDelayedTriggeredAbility(ability, source);

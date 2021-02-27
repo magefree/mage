@@ -79,7 +79,7 @@ class UndergrowthChampionPreventionEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             boolean removeCounter = true;
             // check if in the same combat damage step already a counter was removed

@@ -55,7 +55,7 @@ class UndiscoveredParadiseEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             Effect effect = new ReturnToHandTargetEffect();
             effect.setTargetPointer(new FixedTarget(permanent, game));

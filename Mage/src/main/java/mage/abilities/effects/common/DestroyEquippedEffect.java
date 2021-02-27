@@ -29,7 +29,7 @@ public class DestroyEquippedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
         if (equipment != null && equipment.getAttachedTo() != null) {
             UUID uuid = getTargetPointer().getFirst(game, source);
             Permanent permanent = game.getPermanent(uuid);

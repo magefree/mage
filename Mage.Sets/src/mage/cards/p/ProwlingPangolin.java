@@ -76,7 +76,7 @@ class ProwlingPangolinEffect extends OneShotEffect {
                 }
             }
             if (costPaid) {
-                Permanent sourceObject = game.getPermanent(source.getSourceId());
+                Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
                 if (sourceObject != null) {
                     sourceObject.sacrifice(source, game);
                 }

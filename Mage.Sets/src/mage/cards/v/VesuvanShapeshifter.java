@@ -100,7 +100,7 @@ class VesuvanShapeshifterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
 
-        Permanent copyToCreature = game.getPermanent(source.getSourceId());
+        Permanent copyToCreature = source.getSourcePermanentIfItStillExists(game);
         if (copyToCreature != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
             filter.add(AnotherPredicate.instance);
@@ -141,7 +141,7 @@ class VesuvanShapeshifterFaceDownEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
 
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && permanent != null) {
             permanent.removeAllAbilities(source.getSourceId(), game);
 

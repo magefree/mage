@@ -35,7 +35,7 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         //20110204 - 701.11
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null
                 && permanent.regenerate(source, game)) {
             this.used = true;

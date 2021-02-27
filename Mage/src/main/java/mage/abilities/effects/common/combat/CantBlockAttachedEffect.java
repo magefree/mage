@@ -52,7 +52,7 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
     public void init(Ability source, Game game) {
         super.init(source, game);
         if (affectedObjectsSet) {
-            Permanent equipment = game.getPermanent(source.getSourceId());
+            Permanent equipment = source.getSourcePermanentIfItStillExists(game);
             if (equipment != null && equipment.getAttachedTo() != null) {
                 this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game.getState().getZoneChangeCounter(equipment.getAttachedTo())));
             }

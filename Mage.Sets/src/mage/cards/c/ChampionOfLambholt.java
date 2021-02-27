@@ -73,7 +73,7 @@ class ChampionOfLambholtEffect extends RestrictionEffect {
 
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null && attacker != null && attacker.isControlledBy(sourcePermanent.getControllerId())) {
             return blocker.getPower().getValue() >= sourcePermanent.getPower().getValue();
         }

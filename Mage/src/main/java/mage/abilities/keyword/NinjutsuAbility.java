@@ -115,7 +115,7 @@ class NinjutsuEffect extends OneShotEffect {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
             controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null) {
                 UUID defendingPlayerId = null;
                 for (Cost cost : source.getCosts()) {

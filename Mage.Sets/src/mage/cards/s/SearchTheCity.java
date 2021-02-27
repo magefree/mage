@@ -167,7 +167,7 @@ class SearchTheCityExiledCardToHandEffect extends OneShotEffect {
                     }
                     searchTheCityExileZone.remove(card);
                     if (searchTheCityExileZone.isEmpty()) {
-                        Permanent permanent = game.getPermanent(source.getSourceId());
+                        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
                         if (permanent != null) {
                             permanent.sacrifice(source, game);
                             // extra turn

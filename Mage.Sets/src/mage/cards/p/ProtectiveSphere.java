@@ -78,7 +78,7 @@ class ProtectiveSphereEffect extends PreventionEffectImpl {
         target.setNotTarget(true);
         target.setRequired(false);
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent protectiveSphere = game.getPermanent(source.getSourceId());
+        Permanent protectiveSphere = source.getSourcePermanentIfItStillExists(game);
         if (controller != null
                 && protectiveSphere != null) {
             game.getState().setValue("ProtectiveSphere" 

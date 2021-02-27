@@ -26,7 +26,7 @@ public class AddManaAnyColorAttachedControllerEffect extends ManaEffect {
 
     @Override
     public Player getPlayer(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (enchantment != null) {
             Permanent permanentAttachedTo = game.getPermanent(enchantment.getAttachedTo());
             if (permanentAttachedTo != null) {
@@ -51,7 +51,7 @@ public class AddManaAnyColorAttachedControllerEffect extends ManaEffect {
     @Override
     public Mana produceMana(Game game, Ability source) {
         if (game != null) {
-            Permanent enchantment = game.getPermanent(source.getSourceId());
+            Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
             if (enchantment != null) {
                 Permanent land = game.getPermanent(enchantment.getAttachedTo());
                 if (land != null) {

@@ -122,7 +122,7 @@ class GiftOfDoomEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent giftOfDoom = game.getPermanent(source.getSourceId());
+        Permanent giftOfDoom = source.getSourcePermanentIfItStillExists(game);
         if (player == null || giftOfDoom == null) {
             return false;
         }

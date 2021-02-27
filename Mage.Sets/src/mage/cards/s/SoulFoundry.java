@@ -107,7 +107,7 @@ class SoulFoundryImprintEffect extends OneShotEffect {
                     Card card = controller.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         controller.moveCardToExileWithInfo(card, source.getSourceId(), sourcePermanent.getIdName() + " (Imprint)", source, game, Zone.HAND, true);
-                        Permanent permanent = game.getPermanent(source.getSourceId());
+                        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
                         if (permanent != null) {
                             permanent.imprint(card.getId(), game);
                             permanent.addInfo("imprint", CardUtil.addToolTipMarkTags("[Imprinted card - " + card.getLogName() + ']'), game);

@@ -67,7 +67,7 @@ class MeglonothEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent meglonoth = game.getPermanent(source.getSourceId());
+        Permanent meglonoth = source.getSourcePermanentIfItStillExists(game);
         Permanent blocked = game.getPermanent(targetPointer.getFirst(game, source));
         if (blocked != null && meglonoth != null) {
             game.getPlayer(blocked.getControllerId()).damage(meglonoth.getPower().getValue(), source.getSourceId(), source, game);

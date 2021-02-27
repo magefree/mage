@@ -16,7 +16,7 @@ public enum AttachedToTappedCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
+        Permanent attachment = source.getSourcePermanentIfItStillExists(game);
         if (attachment == null || attachment.getAttachedTo() == null) {
             return false;
         }

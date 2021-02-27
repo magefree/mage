@@ -70,7 +70,7 @@ class LieutenantsOfTheGuardDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
         this.vote("strength", "numbers", controller, game, source);
 
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
 
         //Strength Votes
         //If strength received zero votes or the permanent is no longer on the battlefield, do not attempt to put P1P1 counters on it.

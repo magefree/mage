@@ -109,7 +109,7 @@ class TalusPaladinEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent taluspPaladin = game.getPermanent(source.getSourceId());
+        Permanent taluspPaladin = source.getSourcePermanentIfItStillExists(game);
         if (taluspPaladin != null && player != null) {
             String question = "Put a +1/+1 counter on Talus Paladin?";
             if (!player.chooseUse(Outcome.Benefit, question, source, game)) {

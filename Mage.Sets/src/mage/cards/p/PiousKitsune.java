@@ -84,7 +84,7 @@ class PiousKitsuneEffect extends OneShotEffect {
         boolean result;
         result = new AddCountersSourceEffect(CounterType.DEVOTION.createInstance()).apply(game, source);
         if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > 0) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null) {
                 int life = permanent.getCounters(game).getCount(CounterType.DEVOTION);
                 if (life > 0) {

@@ -91,7 +91,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent == null) {
             return false;
         }

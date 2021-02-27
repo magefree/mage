@@ -57,7 +57,7 @@ public final class NecroticOoze extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Permanent perm = game.getPermanent(source.getSourceId());
+            Permanent perm = source.getSourcePermanentIfItStillExists(game);
             if (perm != null) {
                 for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
                     Player player = game.getPlayer(playerId);

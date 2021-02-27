@@ -121,7 +121,7 @@ class TahngarthFirstMateEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(game.getActivePlayerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (controller == null || player == null || permanent == null) {
             return false;
         }

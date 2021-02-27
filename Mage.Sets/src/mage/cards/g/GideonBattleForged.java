@@ -146,7 +146,7 @@ class GideonBattleForgedAttacksIfAbleTargetEffect extends RequirementEffect {
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(getTargetPointer().getFirst(game, source))) {
             if (game.isActivePlayer(permanent.getControllerId())) {
-                Permanent planeswalker = game.getPermanent(source.getSourceId());
+                Permanent planeswalker = source.getSourcePermanentIfItStillExists(game);
                 if (planeswalker != null) {
                     return true;
                 } else {

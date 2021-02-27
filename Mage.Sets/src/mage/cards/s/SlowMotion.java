@@ -74,7 +74,7 @@ class SacrificeEquipedUnlessPaysEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
         if (equipment == null) {
             return false;
         }

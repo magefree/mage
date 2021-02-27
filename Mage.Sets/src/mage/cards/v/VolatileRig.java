@@ -72,7 +72,7 @@ class VolatileRigEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             if (!player.flipCoin(source, game, true)) {
-                Permanent permanent = game.getPermanent(source.getSourceId());
+                Permanent permanent = source.getSourcePermanentIfItStillExists(game);
                 if (permanent != null) {
                     return permanent.sacrifice(source, game);
                 }

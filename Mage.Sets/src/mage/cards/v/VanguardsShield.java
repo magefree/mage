@@ -68,7 +68,7 @@ class VanguardsShieldEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent perm = game.getPermanent(source.getSourceId());
+        Permanent perm = source.getSourcePermanentIfItStillExists(game);
         if (perm != null && perm.getAttachedTo() != null) {
             Permanent equipped = game.getPermanent(perm.getAttachedTo());
             if (equipped != null) {

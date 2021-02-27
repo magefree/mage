@@ -102,7 +102,7 @@ class DarkImpostorContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent perm = game.getPermanent(source.getSourceId());
+        Permanent perm = source.getSourcePermanentIfItStillExists(game);
         if (perm != null) {
             for (UUID imprintedId : perm.getImprinted()) {
                 Card card = game.getCard(imprintedId);

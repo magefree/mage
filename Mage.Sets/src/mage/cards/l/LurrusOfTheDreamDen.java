@@ -103,7 +103,7 @@ class LurrusOfTheDreamDenCastFromGraveyardEffect extends AsThoughEffectImpl {
                 && Zone.GRAVEYARD.equals(game.getState().getZone(objectId))
                 && game.isActivePlayer(source.getControllerId())) { // only during your turn
             Card objectCard = game.getCard(objectId);
-            Permanent sourceObject = game.getPermanent(source.getSourceId());
+            Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
             if (sourceObject != null && objectCard != null
                     && objectCard.isPermanent()
                     && objectCard.isOwnedBy(source.getControllerId())

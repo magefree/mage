@@ -68,7 +68,7 @@ class WeaponRackEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent == null || !sourcePermanent.getCounters(game).containsKey(CounterType.P1P1)) {
             return false;
         }

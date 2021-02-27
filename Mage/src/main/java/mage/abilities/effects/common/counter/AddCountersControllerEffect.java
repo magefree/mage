@@ -45,7 +45,7 @@ public class AddCountersControllerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         UUID uuid = source.getControllerId();
         if (this.enchantedEquipped) {
-            Permanent enchantment = game.getPermanent(source.getSourceId());
+            Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 UUID eUuid = enchantment.getAttachedTo();
                 Permanent permanent = game.getPermanent(eUuid);

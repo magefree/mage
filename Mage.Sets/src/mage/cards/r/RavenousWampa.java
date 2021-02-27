@@ -101,7 +101,7 @@ class RavenousWampaSacrificeTargetCost extends SacrificeTargetCost {
         boolean result = super.pay(ability, game, source, controllerId, noMana, costToPay);
         if (paid && !getPermanents().isEmpty()) {
             Permanent sacrificedPermanen = getPermanents().get(0);
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
             if (sourcePermanent != null && sacrificedPermanen != null) {
                 game.getState().setValue(RAVENOUS_WAMPA_STATE_VALUE_KEY_PREFIX + source.getSourceId() + sourcePermanent.getZoneChangeCounter(game), sacrificedPermanen.getToughness().getValue());
             }

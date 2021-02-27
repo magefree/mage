@@ -86,7 +86,7 @@ class HomuraReturnFlippedSourceEffect extends OneShotEffect {
             ContinuousEffect effect = new ConditionalContinuousEffect(new CopyTokenEffect(flipToken), FlippedCondition.instance, "");
             game.addEffect(effect, source);
             controller.moveCards(sourceCard, Zone.BATTLEFIELD, source, game);
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null) {
                 permanent.flip(game);  // not complete correct because it should enter the battlefield flipped
             }

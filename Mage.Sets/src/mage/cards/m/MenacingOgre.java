@@ -74,7 +74,7 @@ class MenacingOgreEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         int highestNumber = 0;
         int number = 0;
-        Permanent menacingOgre = game.getPermanent(source.getSourceId());
+        Permanent menacingOgre = source.getSourcePermanentIfItStillExists(game);
         String message = "Choose a number.";
         Map<Player, Integer> numberChosen = new HashMap<>();
 

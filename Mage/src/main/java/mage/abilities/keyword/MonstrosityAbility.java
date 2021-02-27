@@ -94,7 +94,7 @@ class BecomeMonstrousSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && !permanent.isMonstrous() && source instanceof MonstrosityAbility) {
             int monstrosityValue = ((MonstrosityAbility) source).getMonstrosityValue();
             // handle monstrosity = X

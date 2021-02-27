@@ -77,7 +77,7 @@ class EmrakulsEvangelCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent selfPermanent = game.getPermanent(source.getSourceId());
+        Permanent selfPermanent = source.getSourcePermanentIfItStillExists(game);
         Player player = game.getPlayer(controllerId);
         if (selfPermanent != null && player != null) {
             paid = selfPermanent.sacrifice(source, game); // sacrifice self
@@ -101,7 +101,7 @@ class EmrakulsEvangelCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         return permanent != null && game.getPlayer(controllerId).canPaySacrificeCost(permanent, source, controllerId, game);
     }
 

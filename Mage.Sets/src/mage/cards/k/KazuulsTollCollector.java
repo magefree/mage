@@ -72,7 +72,7 @@ class KazuulsTollCollectorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent equipment = game.getPermanent(source.getFirstTarget());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && equipment != null) {
             return permanent.addAttachment(equipment.getId(), source, game);
         }

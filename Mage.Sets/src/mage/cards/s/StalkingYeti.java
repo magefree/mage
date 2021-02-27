@@ -80,7 +80,7 @@ class StalkingYetiEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent thisCreature = game.getPermanent(source.getSourceId());
+        Permanent thisCreature = source.getSourcePermanentIfItStillExists(game);
         Permanent thatCreature = game.getPermanent(source.getFirstTarget());
         if (thisCreature == null || thatCreature == null) {
             return false;

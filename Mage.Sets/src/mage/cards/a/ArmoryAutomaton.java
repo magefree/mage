@@ -75,7 +75,7 @@ class ArmoryAutomatonEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (player != null && sourcePermanent != null) {
 
             // dynamic filter (can't selects own attaches and can't selects twice)

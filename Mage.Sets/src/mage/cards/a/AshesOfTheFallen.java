@@ -55,7 +55,7 @@ class AshesOfTheFallenEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && permanent != null) {
             SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(permanent.getId(), game);
             if (subType != null) {

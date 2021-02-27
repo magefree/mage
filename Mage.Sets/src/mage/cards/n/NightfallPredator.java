@@ -81,7 +81,7 @@ class NightfallPredatorEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature1 = game.getPermanent(source.getSourceId());
+        Permanent creature1 = source.getSourcePermanentIfItStillExists(game);
         Permanent creature2 = game.getPermanent(source.getFirstTarget());
         // 20110930 - 701.10
         if (creature1 != null && creature2 != null) {

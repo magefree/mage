@@ -70,7 +70,7 @@ class RiskyMoveGetControlEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Player newController = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (newController != null && controller != null && sourceObject != null && sourceObject.equals(sourcePermanent)) {
             // remove old control effects of the same player

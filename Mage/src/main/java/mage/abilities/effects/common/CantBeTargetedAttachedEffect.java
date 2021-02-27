@@ -57,7 +57,7 @@ public class CantBeTargetedAttachedEffect extends ContinuousRuleModifyingEffectI
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
+        Permanent attachment = source.getSourcePermanentIfItStillExists(game);
         if (attachment != null && event.getTargetId().equals(attachment.getAttachedTo())) {
             if (targetController == TargetController.OPPONENT
                     && !game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {

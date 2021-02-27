@@ -133,7 +133,7 @@ class SuncleanserPreventCountersEffect extends ContinuousRuleModifyingEffectImpl
         if (!source.getFirstTarget().equals(event.getTargetId())) {
             return false;
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             discard();
             return false;

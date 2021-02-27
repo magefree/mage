@@ -76,7 +76,7 @@ class TwinningGlassEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Spell> spells = new ArrayList<>();
-        Permanent twinningGlass = game.getPermanent(source.getSourceId());
+        Permanent twinningGlass = source.getSourcePermanentIfItStillExists(game);
         Player controller = game.getPlayer(source.getControllerId());
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
         if (twinningGlass == null) {

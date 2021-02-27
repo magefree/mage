@@ -115,7 +115,7 @@ class AttackIfAbleTargetRandoOpponentSourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         AttackedLastCombatWatcher watcher = game.getState().getWatcher(AttackedLastCombatWatcher.class);
         if (controller != null && sourcePermanent != null && watcher != null) {
             List<UUID> opponents = new ArrayList<>();

@@ -83,7 +83,7 @@ class WorldQuellerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         List<Card> chosen = new ArrayList<>();
         Player player = game.getPlayer(source.getControllerId());
-        Permanent sourceCreature = game.getPermanent(source.getSourceId());
+        Permanent sourceCreature = source.getSourcePermanentIfItStillExists(game);
         if (player != null && sourceCreature != null) {
             Choice choiceImpl = new ChoiceImpl();
             choiceImpl.setChoices(choice);

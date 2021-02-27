@@ -89,7 +89,7 @@ class GraspOfFateExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) { // 11/4/2015: If Grasp of Fate leaves the battlefield before its triggered ability resolves, no nonland permanents will be exiled.
             return new ConditionalOneShotEffect(new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), permanent.getIdName(), Zone.BATTLEFIELD, true), SourceOnBattlefieldCondition.instance).apply(game, source);
         }

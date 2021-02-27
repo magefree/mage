@@ -83,7 +83,7 @@ public final class DeathMaskDuplicant extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Permanent sourceObject = game.getPermanent(source.getSourceId());
+            Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
 
             if (sourceObject == null) {
                 return false;

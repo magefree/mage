@@ -82,7 +82,7 @@ class GildedDrakeEffect extends OneShotEffect {
 
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent sourceObject = game.getPermanent(source.getSourceId());
+            Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
             if (sourceObject != null) {
                 if (targetPointer.getFirst(game, source) != null) {
                     Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));

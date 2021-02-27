@@ -231,7 +231,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         // Get the source permanent of the ability 
         MageObject sourceObject = null;
         if (game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
-            sourceObject = game.getPermanent(source.getSourceId());
+            sourceObject = source.getSourcePermanentIfItStillExists(game);
         } else {
             if (game.getShortLivingLKI(source.getSourceId(), Zone.BATTLEFIELD)) {
                 sourceObject = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);

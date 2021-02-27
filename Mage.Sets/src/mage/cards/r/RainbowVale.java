@@ -53,7 +53,7 @@ public final class RainbowVale extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null) {
                 game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new OpponentGainControlEffect()), source);
                 return true;
@@ -87,7 +87,7 @@ class OpponentGainControlEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && permanent != null) {
             if (game.getOpponents(controller.getId()).size() == 1) {
                 opponentId = game.getOpponents(controller.getId()).iterator().next();
@@ -113,7 +113,7 @@ class OpponentGainControlEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetOpponent = game.getPlayer(opponentId);
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && targetOpponent != null) {
             permanent.changeControllerId(opponentId, game, source);
         } else {

@@ -104,7 +104,7 @@ class ScreechingBatTransformSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             Cost cost = new ManaCostsImpl("{2}{B}{B}");
             if (cost.pay(source, game, source, permanent.getControllerId(), false, null)) {

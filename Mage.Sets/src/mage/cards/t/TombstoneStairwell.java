@@ -80,7 +80,7 @@ class TombstoneStairwellCreateTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Token token = new TombspawnZombieToken();
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (game.getPlayer(source.getControllerId()) != null && activePlayer != null && permanent != null) {
             Object object = game.getState().getValue(CardUtil.getCardZoneString("_tokensCreated", source.getSourceId(), game));
             Set<UUID> tokensCreated;

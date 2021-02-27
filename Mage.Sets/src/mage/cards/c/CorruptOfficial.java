@@ -67,7 +67,7 @@ class CorruptOfficialDiscardEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent corruptOfficial = game.getPermanent(source.getSourceId());
+        Permanent corruptOfficial = source.getSourcePermanentIfItStillExists(game);
         if (corruptOfficial != null) {
             Combat combat = game.getCombat();
             Player defendingPlayer = game.getPlayer(combat.getDefendingPlayerId(corruptOfficial.getId(), game));

@@ -100,7 +100,7 @@ class GuardianBeastConditionalEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         Permanent targetPermanent = game.getPermanent(event.getTargetId());
         Permanent guardianBeast = game.getPermanent(guardianBeastId);
 

@@ -67,7 +67,7 @@ class CemeteryPucaEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent copyToCreature = game.getPermanent(source.getSourceId());
+        Permanent copyToCreature = source.getSourcePermanentIfItStillExists(game);
         if (copyToCreature != null) {
             Permanent copyFromCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
             if (copyFromCreature != null) {

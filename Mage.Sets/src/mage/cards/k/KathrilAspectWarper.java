@@ -116,7 +116,7 @@ class KathrilAspectWarperEffect extends OneShotEffect {
         if (countersAdded == 0) {
             return false;
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             return true;
         }

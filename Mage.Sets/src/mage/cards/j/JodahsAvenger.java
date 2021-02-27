@@ -108,7 +108,7 @@ class JodahsAvengerEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (sourceObject != null) {
             sourceObject.addPower(-1);
             sourceObject.addToughness(-1);

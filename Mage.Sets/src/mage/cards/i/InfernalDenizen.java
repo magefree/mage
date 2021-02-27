@@ -97,7 +97,7 @@ class InfernalDenizenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(source.getSourceId());
+        Permanent creature = source.getSourcePermanentIfItStillExists(game);
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             DynamicValue swamps = new PermanentsOnBattlefieldCount(filter);

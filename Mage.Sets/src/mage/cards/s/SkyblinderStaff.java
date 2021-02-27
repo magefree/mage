@@ -57,7 +57,7 @@ class CantBeBlockedByCreaturesWithFlyingAttachedEffect extends RestrictionEffect
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return game.getPermanent(source.getSourceId()) != null
+        return source.getSourcePermanentIfItStillExists(game) != null
                 && permanent.getAttachments().contains(source.getSourceId());
     }
 

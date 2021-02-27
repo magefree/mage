@@ -57,7 +57,7 @@ public class GainAbilityControllerEffect extends ContinuousEffectImpl {
         if (player != null) {
             player.addAbility(ability);
             if (duration == Duration.Custom) {
-                if (game.getPermanent(source.getSourceId()) == null) {
+                if (source.getSourcePermanentIfItStillExists(game) == null) {
                     discard();
                 }
             }

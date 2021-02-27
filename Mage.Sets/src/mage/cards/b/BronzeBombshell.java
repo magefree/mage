@@ -101,7 +101,7 @@ class BronzeBombshellEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent bronzeBombshell = game.getPermanent(source.getSourceId());
+        Permanent bronzeBombshell = source.getSourcePermanentIfItStillExists(game);
         if (bronzeBombshell != null) {
             Player newController = game.getPlayer(bronzeBombshell.getControllerId());
             if (newController != null) {

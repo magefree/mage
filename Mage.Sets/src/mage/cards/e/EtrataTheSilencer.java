@@ -148,7 +148,7 @@ class EtrataTheSilencerEffect extends OneShotEffect {
         if (cardsFound > 2) {
             player.lost(game);
         }
-        Permanent etrataTheSilencer = game.getPermanent(source.getSourceId());
+        Permanent etrataTheSilencer = source.getSourcePermanentIfItStillExists(game);
         if (etrataTheSilencer != null) {
             if (etrataTheSilencer.isPhasedIn()) {
                 return new ShuffleIntoLibrarySourceEffect().apply(game, source);

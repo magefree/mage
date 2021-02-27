@@ -73,7 +73,7 @@ class DjinnIlluminatusGainReplicateEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent djinn = game.getPermanent(source.getSourceId());
+        Permanent djinn = source.getSourcePermanentIfItStillExists(game);
         if (djinn == null) {
             return false;
         }

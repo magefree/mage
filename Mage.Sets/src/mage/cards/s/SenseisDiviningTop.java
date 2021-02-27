@@ -62,7 +62,7 @@ class SenseisDiviningTopEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         Player owner = game.getPlayer(game.getOwnerId(source.getSourceId()));
         if (permanent != null && owner != null) {
             return owner.putCardsOnTopOfLibrary(permanent, game, source, true);

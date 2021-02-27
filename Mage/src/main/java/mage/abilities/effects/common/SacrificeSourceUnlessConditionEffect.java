@@ -31,7 +31,7 @@ public class SacrificeSourceUnlessConditionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (player != null && permanent != null) {
             if (condition.apply(game, source)) {
                 return true;

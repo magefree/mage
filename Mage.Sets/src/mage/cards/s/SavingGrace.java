@@ -103,7 +103,7 @@ class SavingGraceReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         DamageEvent damageEvent = (DamageEvent) event;
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
 
         if (sourcePermanent != null) {
             Permanent creature = game.getPermanent(sourcePermanent.getAttachedTo());

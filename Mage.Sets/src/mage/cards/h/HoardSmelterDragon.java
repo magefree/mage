@@ -68,7 +68,7 @@ class HoardSmelterEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getSourceId());
+        Permanent target = source.getSourcePermanentIfItStillExists(game);
         if (target != null) {
             target.addPower(costValue);
             return true;

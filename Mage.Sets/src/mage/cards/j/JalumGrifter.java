@@ -123,7 +123,7 @@ class JalumGrifterEffect extends OneShotEffect {
                     card.setFaceDown(false, game);
                     game.informPlayers(opponent.getLogName() + " reveals " + card.getLogName());
                     if (card.getId().equals(sourceCard.getId())) {
-                        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+                        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
                         if (sourcePermanent != null) {
                             sourcePermanent.sacrifice(source, game);
                         }

@@ -114,7 +114,7 @@ class DampingEngineEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
-        Permanent dampingEngine = game.getPermanent(source.getSourceId());
+        Permanent dampingEngine = source.getSourcePermanentIfItStillExists(game);
         final Card card = game.getCard(event.getSourceId());
         if (player != null || card != null) {
             // check type of spell
@@ -173,7 +173,7 @@ class DampingEngineIgnoreEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         String key = permanent.getId() + "ignoreEffect" + game.getState().getPriorityPlayerId() + game.getState().getTurnNum();
         if (key != null) {
             game.getState().setValue("ignoreEffect", key);

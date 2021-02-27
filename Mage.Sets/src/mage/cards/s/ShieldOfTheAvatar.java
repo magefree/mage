@@ -71,7 +71,7 @@ class ShieldOfTheAvatarPreventionEffect extends PreventionEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         boolean result = false;
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
         if (equipment != null && equipment.getAttachedTo() != null) {
             int numberOfCreaturesControlled = CreaturesYouControlCount.instance.calculate(game, source, this);
             int toPrevent = Math.min(numberOfCreaturesControlled, event.getAmount());
@@ -95,7 +95,7 @@ class ShieldOfTheAvatarPreventionEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game)) {
-            Permanent equipment = game.getPermanent(source.getSourceId());
+            Permanent equipment = source.getSourcePermanentIfItStillExists(game);
             return equipment != null && equipment.getAttachedTo() != null
                     && event.getTargetId().equals(equipment.getAttachedTo());
         }

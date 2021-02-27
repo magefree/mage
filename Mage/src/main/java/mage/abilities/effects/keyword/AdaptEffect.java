@@ -44,7 +44,7 @@ public class AdaptEffect extends OneShotEffect {
         if (sourceObject == null) {
             if (game.getState().getZone(source.getSourceId()).equals(Zone.BATTLEFIELD)
                     && source.getSourceObjectZoneChangeCounter() + 1 == game.getState().getZoneChangeCounter(source.getSourceId())) {
-                sourceObject = game.getPermanent(source.getSourceId());
+                sourceObject = source.getSourcePermanentIfItStillExists(game);
             }
         }
         Permanent permanent = ((Permanent) sourceObject);

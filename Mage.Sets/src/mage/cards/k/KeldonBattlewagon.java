@@ -127,7 +127,7 @@ class KeldonBattlewagonBoostEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent KeldonBattlewagon = game.getPermanent(source.getSourceId());
+        Permanent KeldonBattlewagon = source.getSourcePermanentIfItStillExists(game);
         Permanent tappedCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (tappedCreature != null && KeldonBattlewagon != null) {
             int amount = tappedCreature.getPower().getValue();

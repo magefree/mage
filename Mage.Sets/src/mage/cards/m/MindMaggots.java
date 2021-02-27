@@ -73,7 +73,7 @@ class MindMaggotsEffect extends OneShotEffect {
         TargetCard target = new TargetDiscard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURE, controller.getId());
         controller.choose(outcome, controller.getHand(), target, game);
         int counters = controller.discard(new CardsImpl(target.getTargets()), false, source, game).size();
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null || counters < 1) {
             return true;
         }

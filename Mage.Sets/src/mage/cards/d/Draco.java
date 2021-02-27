@@ -94,7 +94,7 @@ class DracoSacrificeUnlessPaysEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (player != null && permanent != null) {
             // The cost is reduced by {2} for each basic land type.
             int domainValueReduction = new DomainValue(2).calculate(game, source, this);

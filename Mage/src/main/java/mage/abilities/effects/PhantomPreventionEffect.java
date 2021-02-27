@@ -43,7 +43,7 @@ public class PhantomPreventionEffect extends PreventionEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         preventDamageAction(event, source, game);
 
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             boolean removeCounter = true;
             // check if in the same combat damage step already a counter was removed

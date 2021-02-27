@@ -71,7 +71,7 @@ class SuspensionFieldExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         // If Suspension Field leaves the battlefield before its triggered ability resolves, the target won't be exiled.
         if (sourcePermanent != null) {
             return new ExileTargetEffect(CardUtil.getCardExileZoneId(game, source), sourcePermanent.getIdName()).apply(game, source);

@@ -53,7 +53,7 @@ public class ExileReturnBattlefieldOwnerNextEndStepSourceEffect extends OneShotE
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null) {
                 int zcc = game.getState().getZoneChangeCounter(permanent.getId());
                 boolean exiled = controller.moveCardToExileWithInfo(permanent, source.getSourceId(), permanent.getIdName(), source, game, Zone.BATTLEFIELD, true);

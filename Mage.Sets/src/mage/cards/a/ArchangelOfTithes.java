@@ -63,7 +63,7 @@ class ArchangelOfTithesPayManaToAttackAllEffect extends CantAttackYouUnlessPayMa
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent.isTapped()) {
             return false;
         }
@@ -90,7 +90,7 @@ class ArchangelOfTithesPayManaToBlockAllEffect extends CantBlockUnlessPayManaAll
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (!permanent.isAttacking()) {
             return false;
         }

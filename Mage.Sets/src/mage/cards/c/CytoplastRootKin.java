@@ -82,7 +82,7 @@ class CytoplastRootKinEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (sourcePermanent != null
                 && targetPermanent != null

@@ -116,7 +116,7 @@ class KurkeshOnakkeAncientEffect extends OneShotEffect {
                 if (cost.pay(source, game, source, source.getControllerId(), false)) {
                     StackAbility ability = (StackAbility) getValue("stackAbility");
                     Player controller = game.getPlayer(source.getControllerId());
-                    Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+                    Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
                     if (ability != null && controller != null) {
                         ability.createCopyOnStack(game, source, source.getControllerId(), true);
                         game.informPlayers(sourcePermanent.getName() + ": " + controller.getLogName() + " copied activated ability");

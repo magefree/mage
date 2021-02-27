@@ -56,7 +56,7 @@ class SnickeringSquirrelEffect extends ReplacementEffectImpl {
         Player controller = game.getPlayer(source.getControllerId());
         Player dieRoller = game.getPlayer(event.getPlayerId());
         if (controller != null && dieRoller != null) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null && !permanent.isTapped()) {
                 if (controller.chooseUse(Outcome.AIDontUseIt, "Do you want to tap this to increase the result of a die ("
                         + event.getAmount() + ") "

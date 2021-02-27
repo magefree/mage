@@ -99,7 +99,7 @@ class HamletbackGoliathEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent creature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (creature != null && sourceObject != null) {
             sourceObject.addCounters(CounterType.P1P1.createInstance(creature.getPower().getValue()), source.getControllerId(), source, game);
         }

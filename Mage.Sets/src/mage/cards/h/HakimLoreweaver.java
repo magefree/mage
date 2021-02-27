@@ -105,7 +105,7 @@ class HakimLoreweaverEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent hakimLoreweaver = game.getPermanent(source.getSourceId());
+        Permanent hakimLoreweaver = source.getSourcePermanentIfItStillExists(game);
         Card targetAuraCard = game.getCard(source.getFirstTarget());
         if (controller != null
                 && hakimLoreweaver != null
@@ -133,7 +133,7 @@ class HakimLoreweaverCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent hakimLoreweaver = game.getPermanent(source.getSourceId());
+        Permanent hakimLoreweaver = source.getSourcePermanentIfItStillExists(game);
         if (hakimLoreweaver != null) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(auras, game)) {
                 if (permanent != null

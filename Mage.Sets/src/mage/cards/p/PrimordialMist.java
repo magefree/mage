@@ -94,7 +94,7 @@ class PrimordialMistCost extends CostImpl {
             if (target.choose(Outcome.Exile, controllerId, source.getSourceId(), game)) {
                 Card card = game.getCard(source.getSourceId());
                 if (card != null) {
-                    Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+                    Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
                     if (sourcePermanent != null) {
                         Permanent targetPermanent = game.getPermanent(target.getFirstTarget());
                         Card targetCard = game.getCard(target.getFirstTarget());

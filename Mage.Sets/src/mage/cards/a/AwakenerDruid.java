@@ -67,7 +67,7 @@ class AwakenerDruidBecomesCreatureEffect extends BecomesCreatureTargetEffect {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent == null) {
             this.discard();
             return false;

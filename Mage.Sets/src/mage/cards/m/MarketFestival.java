@@ -69,7 +69,7 @@ class MarketFestivalManaEffect extends ManaEffect {
     }
 
     public Player getPlayer(Game game, Ability source) {
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (sourceObject == null) {
             return null;
         }

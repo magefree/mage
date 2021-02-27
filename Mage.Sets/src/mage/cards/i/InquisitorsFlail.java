@@ -70,7 +70,7 @@ class InquisitorsFlailEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (((DamageEvent) event).isCombatDamage()) {
-            Permanent equipment = game.getPermanent(source.getSourceId());
+            Permanent equipment = source.getSourcePermanentIfItStillExists(game);
             if (equipment != null && equipment.getAttachedTo() != null) {
                 UUID attachedTo = equipment.getAttachedTo();
                 if (event.getSourceId().equals(attachedTo)) {

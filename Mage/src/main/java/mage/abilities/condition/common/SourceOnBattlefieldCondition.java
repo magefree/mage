@@ -18,7 +18,7 @@ public enum SourceOnBattlefieldCondition implements Condition {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        return (game.getPermanent(source.getSourceId()) != null);
+        return (source.getSourcePermanentIfItStillExists(game) != null);
     }
 
     @Override

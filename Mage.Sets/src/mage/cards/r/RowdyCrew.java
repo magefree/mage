@@ -68,7 +68,7 @@ class RowdyCrewEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(source.getSourceId());
+        Permanent creature = source.getSourcePermanentIfItStillExists(game);
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             player.drawCards(3, source, game);

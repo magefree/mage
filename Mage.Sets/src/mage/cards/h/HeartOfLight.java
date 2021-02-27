@@ -85,7 +85,7 @@ class HeartOfLightEffect extends PreventionEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (super.applies(event, source, game) && event instanceof DamageEvent) {
-            Permanent aura = game.getPermanent(source.getSourceId());
+            Permanent aura = source.getSourcePermanentIfItStillExists(game);
             if (aura != null && aura.getAttachedTo() != null) {
                 return event.getSourceId().equals(aura.getAttachedTo()) || event.getTargetId().equals(aura.getAttachedTo());
             }

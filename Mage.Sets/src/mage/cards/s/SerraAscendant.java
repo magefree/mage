@@ -71,7 +71,7 @@ class SerraAscendantEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent creature = game.getPermanent(source.getSourceId());
+        Permanent creature = source.getSourcePermanentIfItStillExists(game);
         Player controller = game.getPlayer(source.getControllerId());
         if (creature != null && controller != null) {
             if (controller.getLife() >= 30) {

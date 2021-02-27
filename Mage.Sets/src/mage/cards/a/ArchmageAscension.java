@@ -108,7 +108,7 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent archmage = game.getPermanent(source.getSourceId());
+        Permanent archmage = source.getSourcePermanentIfItStillExists(game);
         Player you = game.getPlayer(source.getControllerId());
         return event.getPlayerId().equals(source.getControllerId())
                 && archmage != null

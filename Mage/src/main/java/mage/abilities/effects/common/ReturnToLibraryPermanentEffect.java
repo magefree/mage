@@ -32,7 +32,7 @@ public class ReturnToLibraryPermanentEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getPermanent(source.getSourceId());
+            Card card = source.getSourcePermanentIfItStillExists(game);
             if (card != null) {
                 controller.moveCardToLibraryWithInfo(card, source, game, Zone.STACK, toTop, true);
             }

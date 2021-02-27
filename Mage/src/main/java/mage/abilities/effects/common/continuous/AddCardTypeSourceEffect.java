@@ -43,7 +43,7 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && affectedObjectList.contains(new MageObjectReference(permanent, game))) {
             for (CardType cardType : addedCardTypes) {
                 permanent.addCardType(cardType);

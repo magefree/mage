@@ -104,7 +104,7 @@ class LazavTheMultifariousEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent lazavTheMultifarious = game.getPermanent(source.getSourceId());
+        Permanent lazavTheMultifarious = source.getSourcePermanentIfItStillExists(game);
         Permanent newBluePrint = null;
         if (controller != null
                 && lazavTheMultifarious != null) {

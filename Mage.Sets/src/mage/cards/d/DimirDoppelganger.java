@@ -72,7 +72,7 @@ class DimirDoppelgangerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent dimirDoppelganger = game.getPermanent(source.getSourceId());
+        Permanent dimirDoppelganger = source.getSourcePermanentIfItStillExists(game);
         Permanent newBluePrint = null;
         if (controller != null
                 && dimirDoppelganger != null) {

@@ -45,7 +45,7 @@ public class ProtectionChosenColorSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             ObjectColor color = (ObjectColor) game.getState().getValue(permanent.getId() + "_color");
             if (color != null && (protectionAbility == null || !color.equals(chosenColor))) {

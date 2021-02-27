@@ -93,7 +93,7 @@ class AzorsElocutorsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             permanent.addCounters(CounterType.FILIBUSTER.createInstance(), source.getControllerId(), source, game);
             if (permanent.getCounters(game).getCount(CounterType.FILIBUSTER) > 4) {

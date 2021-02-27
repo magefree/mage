@@ -36,7 +36,7 @@ public class ExertSourceCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(controllerId);
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (player != null && permanent != null) {
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_EXERTED, permanent.getId(), source, source.getControllerId()));
             ContinuousEffect effect = new DontUntapInControllersNextUntapStepTargetEffect("", permanent.getControllerId());

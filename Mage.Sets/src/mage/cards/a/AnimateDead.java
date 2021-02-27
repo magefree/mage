@@ -90,7 +90,7 @@ class AnimateDeadReAttachEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent animateDead = game.getPermanent(source.getSourceId());
+        Permanent animateDead = source.getSourcePermanentIfItStillExists(game);
 
         if (controller != null && animateDead != null) {
             Card cardInGraveyard = game.getCard(animateDead.getAttachedTo());
@@ -178,7 +178,7 @@ class AnimateDeadAttachEffect extends OneShotEffect {
         Card card = game.getCard(source.getFirstTarget());
         if (card != null && game.getState().getZone(source.getFirstTarget()) == Zone.GRAVEYARD) {
             // Card have no attachedTo attribute yet so write ref only to enchantment now
-            Permanent enchantment = game.getPermanent(source.getSourceId());
+            Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
             if (enchantment != null) {
                 enchantment.attachTo(card.getId(), source, game);
             }
@@ -252,7 +252,7 @@ class AnimateDeadAttachToPermanentEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent animateDead = game.getPermanent(source.getSourceId());
+        Permanent animateDead = source.getSourcePermanentIfItStillExists(game);
         if (animateDead != null) {
             // The target has to be changed to CreaturePermanent because the reset from card resets it to Card in Graveyard
             FilterCreaturePermanent filter = new FilterCreaturePermanent("enchant creature put onto the battlefield with Animate Dead");

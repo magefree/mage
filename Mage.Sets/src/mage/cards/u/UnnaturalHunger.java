@@ -70,7 +70,7 @@ class UnnaturalHungerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent aura = game.getPermanent(source.getSourceId());
+        Permanent aura = source.getSourcePermanentIfItStillExists(game);
         if (aura != null) {
             Permanent attachedTo = game.getPermanent(aura.getAttachedTo());
             if (attachedTo != null) {

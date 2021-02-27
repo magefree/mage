@@ -82,7 +82,7 @@ class NettlevineBlightEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent nettlevineBlight = game.getPermanent(source.getSourceId());
+        Permanent nettlevineBlight = source.getSourcePermanentIfItStillExists(game);
         Player newController = null;
         if (controller != null
                 && nettlevineBlight != null) {

@@ -64,7 +64,7 @@ class DesecrationDemonEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent descrationDemon = game.getPermanent(source.getSourceId());
+        Permanent descrationDemon = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && descrationDemon != null) {
             for (UUID opponentId: game.getOpponents(controller.getId())) {
                 Player opponent = game.getPlayer(opponentId);

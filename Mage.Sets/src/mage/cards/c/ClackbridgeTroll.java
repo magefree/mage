@@ -83,7 +83,7 @@ class ClackbridgeTrollEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePerm = game.getPermanent(source.getSourceId());
+        Permanent sourcePerm = source.getSourcePermanentIfItStillExists(game);
         if (controller == null) {
             return false;
         }

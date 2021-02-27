@@ -99,7 +99,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
             if (objectReference != null) {
                 permanent = objectReference.getPermanent(game);
             } else {
-                permanent = game.getPermanent(source.getSourceId());
+                permanent = source.getSourcePermanentIfItStillExists(game);
             }
             if (permanent != null) {
                 permanent.setFaceDown(true, game);
@@ -113,7 +113,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl implemen
         if (objectReference != null) {
             permanent = objectReference.getPermanent(game);
         } else {
-            permanent = game.getPermanent(source.getSourceId());
+            permanent = source.getSourcePermanentIfItStillExists(game);
         }
 
         if (permanent != null && permanent.isFaceDown(game)) {

@@ -64,7 +64,7 @@ class VoidStalkerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Set<Player> toShuffle = new LinkedHashSet<>();
         if (targetCreature != null) {
             Player owner = game.getPlayer(targetCreature.getOwnerId());

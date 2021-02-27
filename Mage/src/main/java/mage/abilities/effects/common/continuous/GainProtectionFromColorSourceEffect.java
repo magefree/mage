@@ -56,7 +56,7 @@ public class GainProtectionFromColorSourceEffect extends GainAbilitySourceEffect
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && new MageObjectReference(permanent, game).refersTo(source.getSourceObject(game), game)) {
             permanent.addAbility(ability, source.getSourceId(), game);
         } else {

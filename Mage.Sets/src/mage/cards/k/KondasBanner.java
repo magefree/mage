@@ -104,7 +104,7 @@ class KondasBannerTypeBoostEffect extends BoostAllEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         // Check if the equipment is attached
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
             if (equipedCreature != null) {
@@ -144,7 +144,7 @@ class KondasBannerColorBoostEffect extends BoostAllEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         // Check if the equipment is attached
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent equipedCreature = game.getPermanent(equipment.getAttachedTo());
             if (equipedCreature != null) {

@@ -73,7 +73,7 @@ class AwesomePresenceRestrictionEffect extends PayCostToAttackBlockEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent blockingCreature = game.getPermanent(event.getSourceId());
         Permanent enchantedAttackingCreature = game.getPermanent(event.getTargetId());
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (blockingCreature != null
                 && enchantedAttackingCreature != null
                 && enchantment != null

@@ -54,7 +54,7 @@ class TotemArmorEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null) {
             Permanent equipedPermanent = game.getPermanent(event.getTargetId());
             if (equipedPermanent != null) {
@@ -72,7 +72,7 @@ class TotemArmorEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         return sourcePermanent != null && event.getTargetId().equals(sourcePermanent.getAttachedTo());
     }
 

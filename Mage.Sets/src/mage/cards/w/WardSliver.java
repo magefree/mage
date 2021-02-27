@@ -82,7 +82,7 @@ class WardSliverGainAbilityControlledEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         if (protectionFilter == null) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null) {
                 ObjectColor color = (ObjectColor) game.getState().getValue(permanent.getId() + "_color");
                 if (color != null) {

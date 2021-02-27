@@ -32,7 +32,7 @@ public class AttacksIfAbleAttachedEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
+        Permanent attachment = source.getSourcePermanentIfItStillExists(game);
         return attachment != null && attachment.getAttachedTo() != null
                 && permanent.getId().equals(attachment.getAttachedTo());
     }

@@ -66,7 +66,7 @@ class GoblinFestivalChangeControlEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (controller != null) {
             if (!controller.flipCoin(source, game, true)) {
                 if (sourcePermanent != null) {

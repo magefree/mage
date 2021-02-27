@@ -68,7 +68,7 @@ class LobeLobberEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
         Player player = game.getPlayer(source.getFirstTarget());
 
         if (controller != null && equipment != null && player != null) {

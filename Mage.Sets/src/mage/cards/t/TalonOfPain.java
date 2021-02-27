@@ -158,7 +158,7 @@ class TalonOfPainRemoveVariableCountersSourceCost extends VariableCostImpl {
     @Override
     public int getMaxValue(Ability source, Game game) {
         int maxValue = 0;
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             maxValue = permanent.getCounters(game).getCount(counterName);
         }

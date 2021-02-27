@@ -96,7 +96,7 @@ class NarcolepsyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent narcolepsy = game.getPermanent(source.getSourceId());
+        Permanent narcolepsy = source.getSourcePermanentIfItStillExists(game);
         if (narcolepsy != null) {
             Permanent enchanted = game.getPermanent(narcolepsy.getAttachedTo());
             if (enchanted != null) {

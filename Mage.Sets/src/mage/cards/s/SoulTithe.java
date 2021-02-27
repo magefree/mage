@@ -68,7 +68,7 @@ class SoulTitheEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent aura = game.getPermanent(source.getSourceId());
+        Permanent aura = source.getSourcePermanentIfItStillExists(game);
         if (aura != null) {
             Permanent permanent = game.getPermanent(aura.getAttachedTo());
             if (permanent != null) {

@@ -75,7 +75,7 @@ class CallToTheKindredEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
 
         if (enchantment == null || controller == null || enchantment.getAttachedTo() == null) {
             return false;

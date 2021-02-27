@@ -65,7 +65,7 @@ class ElbrusTheBindingBladeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
         if (equipment != null && equipment.getAttachedTo() != null) {
             Permanent attachedTo = game.getPermanent(equipment.getAttachedTo());
             if (attachedTo != null) {

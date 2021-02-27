@@ -70,7 +70,7 @@ class AstralCornucopiaManaEffect extends ManaEffect {
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
         if (game != null) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
             if (sourcePermanent != null) {
                 int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
                 if (counters > 0) {
@@ -87,7 +87,7 @@ class AstralCornucopiaManaEffect extends ManaEffect {
         if (game == null) {
             return mana;
         }
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null) {
             int counters = sourcePermanent.getCounters(game).getCount(CounterType.CHARGE.getName());
             if (counters > 0) {

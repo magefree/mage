@@ -83,7 +83,7 @@ class ApathyEffect extends OneShotEffect {
                 || player.discardOne(true, false, source, game) == null) {
             return false;
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             return false;
         }

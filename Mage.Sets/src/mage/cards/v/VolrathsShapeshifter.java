@@ -65,7 +65,7 @@ class VolrathsShapeshifterEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getPlayer(source.getControllerId()).getGraveyard().getTopCard(game);
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
 
         if (card == null
                 || permanent == null

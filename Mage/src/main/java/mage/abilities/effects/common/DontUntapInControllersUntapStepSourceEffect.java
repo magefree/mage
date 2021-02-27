@@ -49,7 +49,7 @@ public class DontUntapInControllersUntapStepSourceEffect extends ContinuousRuleM
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP
                 && event.getTargetId().equals(source.getSourceId())) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null && permanent.isControlledBy(game.getActivePlayerId())) {
                 return true;
             }

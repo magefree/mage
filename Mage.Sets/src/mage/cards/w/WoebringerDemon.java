@@ -84,7 +84,7 @@ class WoebringerDemonEffect extends OneShotEffect {
                     }
                 }
             }
-            Permanent sourceObject = game.getPermanent(source.getSourceId());
+            Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
             if (sourceObject != null && sourceObject.getZoneChangeCounter(game) == source.getSourceObjectZoneChangeCounter()) {
                 sourceObject.sacrifice(source, game);
             }

@@ -65,7 +65,7 @@ class BloodshotTraineeCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             if (permanent.getPower().getValue() >= 4) {
                 return true;

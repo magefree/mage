@@ -74,7 +74,7 @@ class UrzasEngineEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null) {
             for (UUID bandedId : sourcePermanent.getBandedCards()) {
                 Permanent banded = game.getPermanent(bandedId);

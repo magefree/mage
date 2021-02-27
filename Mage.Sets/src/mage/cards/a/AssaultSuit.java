@@ -94,7 +94,7 @@ public final class AssaultSuit extends CardImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.SACRIFICE_PERMANENT) {
-            Permanent equipment = game.getPermanent(source.getSourceId());
+            Permanent equipment = source.getSourcePermanentIfItStillExists(game);
             if (equipment != null) {
                 return equipment.isAttachedTo(event.getTargetId());
             }
@@ -123,7 +123,7 @@ class AssaultSuitGainControlEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player activePlayer = game.getPlayer(game.getActivePlayerId());
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && activePlayer != null && equipment != null) {
             if (equipment.getAttachedTo() != null) {
                 Permanent equippedCreature = game.getPermanent(equipment.getAttachedTo());

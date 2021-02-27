@@ -83,7 +83,7 @@ class NecromancyReAttachEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         Card cardInGraveyard = game.getCard(getTargetPointer().getFirst(game, source));
         if (controller != null && enchantment != null && cardInGraveyard != null) {
             controller.moveCards(cardInGraveyard, Zone.BATTLEFIELD, source, game);

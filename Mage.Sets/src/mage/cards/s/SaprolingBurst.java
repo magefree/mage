@@ -75,7 +75,7 @@ class SaprolingBurstCreateTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Token token = new SaprolingBurstToken(new MageObjectReference(source.getSourceObject(game), game));
         token.putOntoBattlefield(1, game, source, source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             Object object = game.getState().getValue(CardUtil.getCardZoneString("_tokensCreated", source.getSourceId(), game));
             Set<UUID> tokensCreated;

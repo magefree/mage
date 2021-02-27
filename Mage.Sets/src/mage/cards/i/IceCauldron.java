@@ -170,7 +170,7 @@ class IceCauldronNoteManaEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent iceCauldron = game.getPermanent(source.getSourceId());
+        Permanent iceCauldron = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && iceCauldron != null) {
             game.getState().setValue("IceCauldronMana" + source.getSourceId().toString(), source.getManaCostsToPay().getUsedManaToPay()); //store the mana used to pay
             manaUsedString = source.getManaCostsToPay().getUsedManaToPay().toString();
@@ -208,7 +208,7 @@ class IceCauldronAddManaEffect extends ManaEffect {
         if (game == null) {
             return mana;
         }
-        Permanent iceCauldron = game.getPermanent(source.getSourceId());
+        Permanent iceCauldron = source.getSourcePermanentIfItStillExists(game);
         Player controller = game.getPlayer(source.getControllerId());
         if (iceCauldron != null && controller != null) {
             storedMana = (Mana) game.getState().getValue("IceCauldronMana" + source.getSourceId().toString());

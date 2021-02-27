@@ -64,7 +64,7 @@ class CentaurOmenreaderSpellsCostReductionEffect extends SpellsCostReductionCont
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null && sourcePermanent.isTapped()) {
             return super.applies(abilityToModify, source, game);
         }

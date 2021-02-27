@@ -62,7 +62,7 @@ class PlanarChaosUpkeepEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             if (!player.flipCoin(source, game, true)) {
-                Permanent perm = game.getPermanent(source.getSourceId());
+                Permanent perm = source.getSourcePermanentIfItStillExists(game);
                 if (perm != null) {
                     perm.sacrifice(source, game);
                 }

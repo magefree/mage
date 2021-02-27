@@ -79,7 +79,7 @@ class VolrathsCurseRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
+        Permanent attachment = source.getSourcePermanentIfItStillExists(game);
         if (attachment != null && attachment.getAttachedTo() != null
                 && permanent.getId().equals(attachment.getAttachedTo())) {
             String key = source.getSourceId().toString() + attachment.getZoneChangeCounter(game) + keyString + game.getTurnNum() + permanent.getControllerId();
@@ -132,7 +132,7 @@ class VolrathsCurseCantActivateAbilitiesEffect extends ContinuousRuleModifyingEf
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             if (event.getSourceId().equals(enchantment.getAttachedTo())) {
                 Permanent enchanted = game.getPermanent(enchantment.getAttachedTo());

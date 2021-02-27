@@ -55,7 +55,7 @@ class MijaeDjinnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent creature = game.getPermanent(source.getSourceId());
+        Permanent creature = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && creature != null) {
             if (controller.flipCoin(source, game, true)) {
                 return true;

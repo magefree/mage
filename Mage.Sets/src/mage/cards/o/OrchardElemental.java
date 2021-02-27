@@ -64,7 +64,7 @@ class OrchardElementalDilemmaEffect extends CouncilsDilemmaVoteEffect {
 
         this.vote("sprout", "harvest", controller, game, source);
 
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
 
         //Sprout Votes
         //If sprout received zero votes or the permanent is no longer on the battlefield, do not attempt to put P1P1 counter on it.

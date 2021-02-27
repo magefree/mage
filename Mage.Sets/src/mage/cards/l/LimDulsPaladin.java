@@ -83,11 +83,11 @@ class LimDulsPaladinEffect extends SacrificeSourceUnlessPaysEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if(permanent != null) {
             super.apply(game, source);
             // Not in play anymore -> was sacrificed, draw a card
-            if(game.getPermanent(source.getSourceId()) == null) {
+            if(source.getSourcePermanentIfItStillExists(game) == null) {
                  return new DrawCardSourceControllerEffect(1).apply(game, source);
             }
             return true;

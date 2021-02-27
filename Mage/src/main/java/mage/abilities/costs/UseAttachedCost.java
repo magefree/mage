@@ -31,7 +31,7 @@ public abstract class UseAttachedCost extends CostImpl {
         if (mageObjectReference == null) {
             return false;
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         return permanent != null
                 && permanent
                 .getAttachments()

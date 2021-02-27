@@ -89,7 +89,7 @@ class ThoughtPrisonImprintEffect extends OneShotEffect {
                     Card card = targetPlayer.getHand().get(targetId, game);
                     if (card != null) {
                         card.moveToExile(source.getSourceId(), "Thought Prison", source, game);
-                        Permanent permanent = game.getPermanent(source.getSourceId());
+                        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
                         if (permanent != null) {
                             permanent.imprint(card.getId(), game);
                             permanent.addInfo("imprint", "[Exiled card - " + card.getName() + ']', game);

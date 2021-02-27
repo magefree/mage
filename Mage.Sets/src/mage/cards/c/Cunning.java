@@ -76,7 +76,7 @@ class SacrificeSourceBeginningCleanupStepEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent cunning = game.getPermanent(source.getSourceId());
+        Permanent cunning = source.getSourcePermanentIfItStillExists(game);
         if (cunning != null) {
             DelayedTriggeredAbility delayedAbility
                     = new AtTheBeginOfNextCleanupDelayedTriggeredAbility(

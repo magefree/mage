@@ -79,7 +79,7 @@ class ChromeMoxEffect extends OneShotEffect {
             TargetCard target = new TargetCard(Zone.HAND, filter);
             target.setNotTarget(true);
             Card cardToImprint = null;
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
             if (!controller.getHand().isEmpty() && controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
                 cardToImprint = controller.getHand().get(target.getFirstTarget(), game);
             }
@@ -125,7 +125,7 @@ class ChromeMoxManaEffect extends ManaEffect {
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
         if (game != null) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null) {
                 List<UUID> imprinted = permanent.getImprinted();
                 if (imprinted != null && !imprinted.isEmpty()) {
@@ -160,7 +160,7 @@ class ChromeMoxManaEffect extends ManaEffect {
         if (game == null) {
             return mana;
         }
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         Player player = game.getPlayer(source.getControllerId());
         if (permanent != null && player != null) {
             List<UUID> imprinted = permanent.getImprinted();

@@ -69,7 +69,7 @@ class EquippedDealtCombatDamageToCreatureCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
         if (equipment != null && equipment.getAttachedTo() != null) {
             CombatDamageToCreatureWatcher watcher =
                     game.getState().getWatcher(CombatDamageToCreatureWatcher.class);

@@ -143,7 +143,7 @@ class WormsOfTheEarthDestroyEffect extends OneShotEffect {
                         } else {
                             player.damage(5, source.getSourceId(), source, game);
                         }
-                        sourcePermanent = game.getPermanent(source.getSourceId());
+                        sourcePermanent = source.getSourcePermanentIfItStillExists(game);
                         if (sourcePermanent != null) {
                             sourcePermanent.destroy(source, game, false);
                         }

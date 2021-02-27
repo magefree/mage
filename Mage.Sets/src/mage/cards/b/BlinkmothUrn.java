@@ -63,7 +63,7 @@ class BlinkmothUrnEffect extends OneShotEffect {
         Player player = game.getPlayer(game.getActivePlayerId());
         FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts you control");
         filter.add(new ControllerIdPredicate(game.getActivePlayerId()));
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (player != null && sourcePermanent != null && !sourcePermanent.isTapped()) {
             player.getManaPool().addMana(Mana.ColorlessMana(
                     game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game).

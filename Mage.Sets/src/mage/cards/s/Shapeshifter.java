@@ -73,7 +73,7 @@ class ShapeshifterEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getPermanentEntering(source.getSourceId());
         if (mageObject == null) {
-            mageObject = game.getPermanent(source.getSourceId());
+            mageObject = source.getSourcePermanentIfItStillExists(game);
         }
         if (controller != null) {
             Choice numberChoice = new ChoiceImpl();
@@ -114,7 +114,7 @@ class ShapeshifterContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         String lastChosen = (String) game.getState().getValue(source.getSourceId().toString() + "_Shapeshifter");
         if (permanent != null && lastChosen != null) {
             int lastChosenNumber = Integer.parseInt(lastChosen);

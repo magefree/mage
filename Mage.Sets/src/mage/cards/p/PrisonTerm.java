@@ -81,7 +81,7 @@ class PrisonTermEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         Permanent opponentCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        Permanent prisonTerm = game.getPermanent(source.getSourceId());
+        Permanent prisonTerm = source.getSourcePermanentIfItStillExists(game);
         if (you != null && opponentCreature != null && prisonTerm != null) {
             Permanent oldCreature = game.getPermanent(prisonTerm.getAttachedTo());
             if (oldCreature == null) {

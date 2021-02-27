@@ -83,7 +83,7 @@ class PanopticMirrorExileEffect extends OneShotEffect {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 card.moveToExile(CardUtil.getCardExileZoneId(game, source), "Panoptic Mirror", source, game);
-                Permanent PanopticMirror = game.getPermanent(source.getSourceId());
+                Permanent PanopticMirror = source.getSourcePermanentIfItStillExists(game);
                 if (PanopticMirror != null) {
                     PanopticMirror.imprint(card.getId(), game);
                 }
@@ -112,7 +112,7 @@ class PanopticMirrorCastEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent PanopticMirror = game.getPermanent(source.getSourceId());
+        Permanent PanopticMirror = source.getSourcePermanentIfItStillExists(game);
         Player controller = game.getPlayer(source.getControllerId());
         if (PanopticMirror == null) {
             PanopticMirror = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);

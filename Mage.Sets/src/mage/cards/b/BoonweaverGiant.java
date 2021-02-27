@@ -109,7 +109,7 @@ class BoonweaverGiantEffect extends OneShotEffect {
         }
         // aura card found - attach it
         if (card != null) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null) {
                 game.getState().setValue("attachTo:" + card.getId(), permanent);
             }

@@ -61,7 +61,7 @@ class MageSlayerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
         if (equipment != null && equipment.getAttachedTo() != null) {
             int power = game.getPermanent(equipment.getAttachedTo()).getPower().getValue();
             UUID defenderId = game.getCombat().getDefenderId(equipment.getAttachedTo());

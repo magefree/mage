@@ -73,7 +73,7 @@ class FortuneThiefReplacementEffect extends ReplacementEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null

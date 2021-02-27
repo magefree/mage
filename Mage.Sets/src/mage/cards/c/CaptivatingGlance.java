@@ -76,7 +76,7 @@ class CaptivatingGlanceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         final boolean clashResult;
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent captivatingGlance = game.getPermanent(source.getSourceId());
+        Permanent captivatingGlance = source.getSourcePermanentIfItStillExists(game);
         if (controller != null
                 && captivatingGlance != null) {
             Permanent enchantedCreature = game.getPermanent(captivatingGlance.getAttachedTo());

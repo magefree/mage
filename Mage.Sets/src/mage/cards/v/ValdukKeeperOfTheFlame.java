@@ -67,7 +67,7 @@ class ValdukKeeperOfTheFlameEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null) {
             EquipmentAttachedCount eamount = new EquipmentAttachedCount();
             int value = eamount.calculate(game, source, this);

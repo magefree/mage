@@ -65,7 +65,7 @@ class PoultrygeistEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int result = controller.rollDice(source, game, 6);
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null) {
                 if (result == 1) {
                     return permanent.sacrifice(source, game);

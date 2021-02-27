@@ -88,7 +88,7 @@ class KayaGhostAssassinEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && sourcePermanent != null) {
             if (getTargetPointer().getFirst(game, source) != null) {
                 Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));

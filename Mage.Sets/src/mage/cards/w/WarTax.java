@@ -63,7 +63,7 @@ class WarTaxCantAttackUnlessPaysEffect extends PayCostToAttackBlockEffectImpl {
 
     @Override
     public ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game) {
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (sourceObject != null) {
             int amount = xCosts.calculate(game, source, this);
             return new ManaCostsImpl<>("{" + amount + '}');

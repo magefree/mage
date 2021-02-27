@@ -71,7 +71,7 @@ class DawnsReflectionManaEffect extends ManaEffect {
 
     @Override
     public Player getPlayer(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (enchantment != null) {
             Permanent permanentAttachedTo = game.getPermanent(enchantment.getAttachedTo());
             if (permanentAttachedTo != null) {

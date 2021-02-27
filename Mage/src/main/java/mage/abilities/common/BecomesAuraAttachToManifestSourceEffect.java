@@ -37,7 +37,7 @@ public class BecomesAuraAttachToManifestSourceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && enchantment != null) {
             // manifest top card
             Card card = controller.getLibrary().getFromTop(game);

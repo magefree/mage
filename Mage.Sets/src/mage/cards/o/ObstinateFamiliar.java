@@ -82,7 +82,7 @@ class ObstinateFamiliarReplacementEffect extends ReplacementEffectImpl {
     
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent archmage = game.getPermanent(source.getSourceId());
+        Permanent archmage = source.getSourcePermanentIfItStillExists(game);
         if (archmage != null && event.getPlayerId().equals(source.getControllerId())) {
             return true;
         }

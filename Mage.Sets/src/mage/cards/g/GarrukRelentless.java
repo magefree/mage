@@ -105,7 +105,7 @@ class GarrukRelentlessDamageEffect extends OneShotEffect {
             int damage = permanent.getPower().getValue();
             permanent.damage(3, source.getSourceId(), source, game, false, true);
             if (damage > 0) {
-                Permanent garruk = game.getPermanent(source.getSourceId());
+                Permanent garruk = source.getSourcePermanentIfItStillExists(game);
                 if (garruk != null) {
                     garruk.damage(damage, permanent.getId(), source, game, false, true);
                 }

@@ -34,7 +34,7 @@ public class RemoveAllCountersSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (sourcePermanent != null) {
             int count = sourcePermanent.getCounters(game).getCount(counterType);
             sourcePermanent.removeCounters(counterType.getName(), count, source, game);

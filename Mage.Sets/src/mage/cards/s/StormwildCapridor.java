@@ -76,7 +76,7 @@ class StormwildCapridorEffect extends PreventionEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         PreventionEffectData preventionEffectData = preventDamageAction(event, source, game);
         if (preventionEffectData.getPreventedDamage() > 0) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null) {
                 permanent.addCounters(CounterType.P1P1.createInstance(preventionEffectData.getPreventedDamage()), source.getControllerId(), source, game);
             }

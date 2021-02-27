@@ -75,7 +75,7 @@ class GodEternalRhonasEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent godEternalRhonas = game.getPermanent(source.getSourceId());
+        Permanent godEternalRhonas = source.getSourcePermanentIfItStillExists(game);
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
             if (permanent == null
                     || godEternalRhonas != null

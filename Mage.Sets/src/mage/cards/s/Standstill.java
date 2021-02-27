@@ -91,7 +91,7 @@ class StandstillEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             if (permanent.sacrifice(source, game)) {
                 for (UUID uuid : game.getOpponents(this.getTargetPointer().getFirst(game, source))) {

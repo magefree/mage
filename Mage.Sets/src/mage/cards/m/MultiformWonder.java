@@ -154,7 +154,7 @@ class MultiformWonder2Effect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (sourceObject != null) {
             sourceObject.addPower(power);
             sourceObject.addToughness(toughness);

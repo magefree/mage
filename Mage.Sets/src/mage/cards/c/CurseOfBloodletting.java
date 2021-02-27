@@ -70,7 +70,7 @@ class CurseOfBloodlettingEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (enchantment != null &&
                 enchantment.isAttachedTo(event.getTargetId())) {
             return true;

@@ -88,7 +88,7 @@ class HaktosTheUnscarredChooseEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
         if (permanent == null) {
-            permanent = game.getPermanent(source.getSourceId());
+            permanent = source.getSourcePermanentIfItStillExists(game);
         }
         if (controller == null || permanent == null) {
             return false;

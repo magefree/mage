@@ -75,7 +75,7 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         // reveal top card and drawn (return false to continue default draw)
-        Permanent god = game.getPermanent(source.getSourceId());
+        Permanent god = source.getSourcePermanentIfItStillExists(game);
         Player you = game.getPlayer(source.getControllerId());
         if (god == null && you == null) {
             return false;
@@ -128,7 +128,7 @@ class GodEternalKefnetDrawCardReplacementEffect extends ReplacementEffectImpl {
             return false;
         }
 
-        Permanent god = game.getPermanent(source.getSourceId());
+        Permanent god = source.getSourcePermanentIfItStillExists(game);
         Player you = game.getPlayer(source.getControllerId());
         if (god == null && you == null) {
             return false;

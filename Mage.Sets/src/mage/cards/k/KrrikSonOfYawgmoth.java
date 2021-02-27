@@ -88,7 +88,7 @@ class KrrikSonOfYawgmothPhyrexianEffect extends ContinuousEffectImpl {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Player controller = game.getPlayer(source.getControllerId());
         FilterMana phyrexianBlack = new FilterMana();
 

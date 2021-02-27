@@ -101,7 +101,7 @@ class DelayingShieldUpkeepEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && permanent != null) {
             int numCounters = permanent.getCounters(game).getCount(CounterType.DELAY);
             permanent.removeCounters(CounterType.DELAY.createInstance(numCounters), source, game);

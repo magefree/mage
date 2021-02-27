@@ -62,7 +62,7 @@ class CrazedFirecatEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && sourceObject != null) {
             int flipsWon = 0;
             while (controller.flipCoin(source, game, true)) {

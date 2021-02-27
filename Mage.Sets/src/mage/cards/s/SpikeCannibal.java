@@ -73,7 +73,7 @@ class SpikeCannibalEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int countersRemoved = 0;
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
 
         if (sourcePermanent != null) {
             for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {

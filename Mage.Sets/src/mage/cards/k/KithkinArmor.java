@@ -78,7 +78,7 @@ class KithkinArmorCost extends CostImpl {
 
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             // store attached to information due to getLastInfo being completely fubared
             game.getState().setValue(ability.getSourceId().toString() + "attachedToPermanent", permanent.getAttachedTo());
@@ -92,7 +92,7 @@ class KithkinArmorCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         return permanent != null && game.getPlayer(controllerId).canPaySacrificeCost(permanent, source, controllerId, game);
     }
 
@@ -115,7 +115,7 @@ class KithkinArmorRestrictionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (enchantment != null
                 && enchantment.getAttachedTo() != null) {
             Permanent enchantedPermanent = game.getPermanent(enchantment.getAttachedTo());

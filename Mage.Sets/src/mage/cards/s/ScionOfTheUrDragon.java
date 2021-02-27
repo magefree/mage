@@ -76,7 +76,7 @@ class ScionOfTheUrDragonEffect extends SearchEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (player != null && sourcePermanent != null) {
             if (player.searchLibrary(target, source, game)) {
                 for (UUID cardId : target.getTargets()) {

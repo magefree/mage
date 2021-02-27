@@ -171,7 +171,7 @@ class BaronVonCountMoveDoomCounterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         MageObject mageObject = game.getObject(source.getSourceId());
         if (controller != null && sourcePermanent != null && mageObject != null) {
             if (game.getState().getValue(mageObject.getId() + "_doom") == null) {
@@ -248,7 +248,7 @@ class BaronVonCountDestroyPlayerEffect extends OneShotEffect {
             game.informPlayers(targetPlayer.getLogName() + " was destroyed");
             targetPlayer.lost(game); // double checks canLose, but seems more future-proof than lostForced
         }
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         MageObject mageObject = game.getObject(source.getSourceId());
         if (sourcePermanent != null && mageObject != null) {
             if (game.getState().getValue(mageObject.getId() + "_doom") == null) {

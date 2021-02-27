@@ -114,7 +114,7 @@ public final class RoninWarclub extends CardImpl {
         @Override
         public boolean apply(Game game, Ability source) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());
-            Permanent attachment = game.getPermanent(source.getSourceId());
+            Permanent attachment = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null && attachment != null) {
                 if (attachment.getAttachedTo() != null) {
                     Permanent oldTarget = game.getPermanent(attachment.getAttachedTo());

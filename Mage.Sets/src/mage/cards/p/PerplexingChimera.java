@@ -189,7 +189,7 @@ class PerplexingChimeraControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             return permanent.changeControllerId(this.getTargetPointer().getFirst(game, source), game, source);
         } else {

@@ -73,7 +73,7 @@ class KrovikanVampireEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent krovikanVampire = game.getPermanent(source.getSourceId());
+        Permanent krovikanVampire = source.getSourcePermanentIfItStillExists(game);
         creaturesAffected = (Set<UUID>) game.getState().getValue(source.getSourceId() + "creatureToGainControl");
         if (creaturesAffected != null
                 && controller != null

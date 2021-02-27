@@ -93,7 +93,7 @@ class LivingInfernoEffect extends OneShotEffect {
                 }
             }
             // Each of those creatures deals damage equal to its power to Living Inferno
-            Permanent sourceCreature = game.getPermanent(source.getSourceId());
+            Permanent sourceCreature = source.getSourcePermanentIfItStillExists(game);
             if (sourceCreature != null) {
                 for (Permanent permanent : permanents) {
                     sourceCreature.damage(permanent.getPower().getValue(), permanent.getId(), source, game, false, true);

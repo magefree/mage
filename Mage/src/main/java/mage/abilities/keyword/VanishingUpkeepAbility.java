@@ -62,7 +62,7 @@ class VanishingEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getSourceId());
+        Permanent p = source.getSourcePermanentIfItStillExists(game);
         if (p != null) {
             int amount = p.getCounters(game).getCount(CounterType.TIME);
             if (amount > 0) {

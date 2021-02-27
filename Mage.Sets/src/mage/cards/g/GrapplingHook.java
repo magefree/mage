@@ -65,7 +65,7 @@ class GrapplingHookEffect extends RequirementEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getFirstTarget())) {
-            Permanent equipment = game.getPermanent(source.getSourceId());
+            Permanent equipment = source.getSourcePermanentIfItStillExists(game);
             if (equipment != null && equipment.getAttachedTo() != null) {
                 return permanent.canBlock(equipment.getAttachedTo(), game);
             }
@@ -85,7 +85,7 @@ class GrapplingHookEffect extends RequirementEffect {
 
     @Override
     public UUID mustBlockAttacker(Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
+        Permanent attachment = source.getSourcePermanentIfItStillExists(game);
         return attachment != null ? attachment.getAttachedTo() : null;
     }
 

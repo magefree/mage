@@ -79,7 +79,7 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
                 return true;
             }
         } else {
-            Permanent equipment = game.getPermanent(source.getSourceId());
+            Permanent equipment = source.getSourcePermanentIfItStillExists(game);
             if (equipment != null && equipment.getAttachedTo() != null) {
                 permanent = game.getPermanentOrLKIBattlefield(equipment.getAttachedTo());
             }
@@ -88,7 +88,7 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
             return true;
         }
         Ability ability = makeAbility(this.effects, this.targets, this.costs);
-        ability.getEffects().setValue("attachedPermanent", game.getPermanent(source.getSourceId()));
+        ability.getEffects().setValue("attachedPermanent", source.getSourcePermanentIfItStillExists(game));
         ability.addCost(useAttachedCost.copy().setMageObjectReference(source, game));
         permanent.addAbility(ability, source.getSourceId(), game);
         return true;

@@ -71,7 +71,7 @@ class SereneMasterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceCreature = game.getPermanent(source.getSourceId());
+        Permanent sourceCreature = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && sourceCreature != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature it's blocking");
             filter.add(new BlockedByIdPredicate((source.getSourceId())));

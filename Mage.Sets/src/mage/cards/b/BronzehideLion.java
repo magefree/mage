@@ -132,7 +132,7 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
         if (game.getState().getZoneChangeCounter(source.getSourceId()) > zoneChangeCounter) {
             discard();
         }
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (sourceObject == null) {
             sourceObject = game.getPermanentEntering(source.getSourceId());
         }

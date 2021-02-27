@@ -65,7 +65,7 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         if (conditionState(source, game)) {
-            Permanent creature = game.getPermanent(source.getSourceId());
+            Permanent creature = source.getSourcePermanentIfItStillExists(game);
             if (creature != null) {
                 switch (layer) {
                     case PTChangingEffects_7:

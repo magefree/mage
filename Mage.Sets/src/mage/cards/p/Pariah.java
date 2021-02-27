@@ -63,7 +63,7 @@ public final class Pariah extends CardImpl {
         @Override
         public boolean replaceEvent(GameEvent event, Ability source, Game game) {
             DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
-            Permanent equipment = game.getPermanent(source.getSourceId());
+            Permanent equipment = source.getSourcePermanentIfItStillExists(game);
             if (equipment != null) {
                 Permanent permanent = game.getPermanent(equipment.getAttachedTo());
                 if (permanent != null) {

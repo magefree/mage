@@ -83,7 +83,7 @@ class VulshokGauntletsEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP) {
-            Permanent equipment = game.getPermanent(source.getSourceId());
+            Permanent equipment = source.getSourcePermanentIfItStillExists(game);
             if (equipment != null && equipment.getAttachedTo() != null) {
                 Permanent equipped = game.getPermanent(equipment.getAttachedTo());
                 if (equipped.getId().equals(event.getTargetId())) {

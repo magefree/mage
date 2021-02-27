@@ -51,7 +51,7 @@ public class RemoveCountersAttachedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null && permanent.getAttachedTo() != null) {
             Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
             if (attachedTo != null && counter != null) {

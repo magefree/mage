@@ -46,7 +46,7 @@ class DidNotCastCreatureCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = game.getPermanent(source.getSourceId());
+        Permanent p = source.getSourcePermanentIfItStillExists(game);
         if (p != null) {
             Watcher watcher = game.getState().getWatcher(CastCreatureWatcher.class, source.getSourceId());
             if (watcher != null && !watcher.conditionMet()) {

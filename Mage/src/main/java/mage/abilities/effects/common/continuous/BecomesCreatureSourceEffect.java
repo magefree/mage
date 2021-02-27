@@ -80,7 +80,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl implements
         if (affectedObjectsSet) {
             permanent = affectedObjectList.get(0).getPermanent(game);
         } else {
-            permanent = game.getPermanent(source.getSourceId());
+            permanent = source.getSourcePermanentIfItStillExists(game);
         }
         if (permanent == null) {
             if (duration == Duration.Custom) {

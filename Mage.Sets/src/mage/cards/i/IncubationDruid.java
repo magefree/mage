@@ -178,7 +178,7 @@ class AnyColorLandsProduceManaEffect extends ManaEffect {
 
     private int getManaAmount(Game game, Ability source) {
         if (game != null) {
-            Permanent permanent = game.getPermanent(source.getSourceId());
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
             if (permanent != null && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
                 return 3;
             }

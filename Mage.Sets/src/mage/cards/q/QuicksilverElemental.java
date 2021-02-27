@@ -70,7 +70,7 @@ class QuicksilverElementalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         Permanent creature = game.getPermanent(source.getTargets().getFirstTarget());
 
         if (permanent != null && creature != null) {

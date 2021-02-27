@@ -124,7 +124,7 @@ class ImpelledGiantBoostEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent impelledGiant = game.getPermanent(source.getSourceId());
+        Permanent impelledGiant = source.getSourcePermanentIfItStillExists(game);
         Permanent tappedCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (tappedCreature != null && impelledGiant != null) {
             int amount = tappedCreature.getPower().getValue();

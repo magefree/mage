@@ -27,7 +27,7 @@ public class PutSourceOnBottomOwnerLibraryCost extends CostImpl {
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(controllerId);
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (player != null && sourcePermanent != null) {
             paid = true;
             player.putCardsOnBottomOfLibrary(new CardsImpl(sourcePermanent), game, ability, false);
@@ -37,7 +37,7 @@ public class PutSourceOnBottomOwnerLibraryCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return game.getPermanent(source.getSourceId()) != null;
+        return source.getSourcePermanentIfItStillExists(game) != null;
     }
 
     @Override

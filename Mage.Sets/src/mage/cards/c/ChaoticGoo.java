@@ -65,7 +65,7 @@ class ChaoticGooEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && permanent != null) {
             if (controller.flipCoin(source, game, true)) {
                 game.informPlayers("Chaotic Goo: Won flip. Put a +1/+1 counter on Chaotic Goo.");

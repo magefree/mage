@@ -29,7 +29,7 @@ public class BlocksIfAbleSourceEffect extends RequirementEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent creature = game.getPermanent(source.getSourceId());
+        Permanent creature = source.getSourcePermanentIfItStillExists(game);
         return creature != null && creature.getId().equals(permanent.getId());
     }
 

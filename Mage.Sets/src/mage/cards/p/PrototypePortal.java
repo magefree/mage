@@ -95,7 +95,7 @@ class PrototypePortalEffect extends OneShotEffect {
                 Card card = controller.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     controller.moveCardsToExile(card, source, game, true, source.getSourceId(), sourceObject.getIdName() + " (Imprint)");
-                    Permanent permanent = game.getPermanent(source.getSourceId());
+                    Permanent permanent = source.getSourcePermanentIfItStillExists(game);
                     if (permanent != null) {
                         permanent.imprint(card.getId(), game);
                     }
@@ -131,7 +131,7 @@ class PrototypePortalCreateTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent == null) {
             return false;
         }

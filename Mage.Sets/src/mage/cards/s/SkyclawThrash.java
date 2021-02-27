@@ -69,7 +69,7 @@ class SkyclawThrashEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
             if (controller.flipCoin(source, game, true) && sourcePermanent != null) {
                 ContinuousEffect effect = new BoostTargetEffect(1, 1, Duration.EndOfTurn);
                 effect.setTargetPointer(new FixedTarget(sourcePermanent, game));

@@ -104,7 +104,7 @@ class DanceOfTheDeadReAttachEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
 
         if (controller != null && enchantment != null) {
             Card cardInGraveyard = game.getCard(enchantment.getAttachedTo());
@@ -191,7 +191,7 @@ class DanceOfTheDeadAttachEffect extends OneShotEffect {
         Card card = game.getCard(source.getFirstTarget());
         if (card != null && game.getState().getZone(source.getFirstTarget()) == Zone.GRAVEYARD) {
             // Card have no attachedTo attribute yet so write ref only to enchantment now
-            Permanent enchantment = game.getPermanent(source.getSourceId());
+            Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
             if (enchantment != null) {
                 enchantment.attachTo(card.getId(), source, game);
             }

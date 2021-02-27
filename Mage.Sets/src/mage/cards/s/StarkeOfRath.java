@@ -110,7 +110,7 @@ class StarkeOfRathControlEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         Player newController = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (permanent != null && newController != null) {
             return permanent.changeControllerId(newController.getId(), game, source);

@@ -85,7 +85,7 @@ class ArmamentMasterEffect extends ContinuousEffectImpl {
 
     private int countEquipment(Game game, Ability source) {
         int count = 0;
-        Permanent p = game.getPermanent(source.getSourceId());
+        Permanent p = source.getSourcePermanentIfItStillExists(game);
         if (p != null) {
             List<UUID> attachments = p.getAttachments();
             for (UUID attachmentId : attachments) {

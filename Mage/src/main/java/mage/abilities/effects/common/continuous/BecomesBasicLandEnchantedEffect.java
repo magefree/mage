@@ -33,7 +33,7 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (enchantment == null || enchantment.getAttachedTo() == null) {
             return false;
         }

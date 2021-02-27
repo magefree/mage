@@ -75,7 +75,7 @@ class PendantOfProsperityEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         effect1.apply(game, source);
         effect2.apply(game, source);
-        Player player = game.getPlayer(game.getOwnerId(game.getPermanent(source.getSourceId())));
+        Player player = game.getPlayer(game.getOwnerId(source.getSourcePermanentIfItStillExists(game)));
         if (player == null) {
             return false;
         }

@@ -94,7 +94,7 @@ class HelmOfObedienceEffect extends OneShotEffect {
                 controller.moveCards(creatures, Zone.BATTLEFIELD, source, game);
             }
             if (!creatures.isEmpty()) {
-                Permanent permanent = game.getPermanent(source.getSourceId());
+                Permanent permanent = source.getSourcePermanentIfItStillExists(game);
                 if (permanent != null) {
                     permanent.sacrifice(source, game);
                 }

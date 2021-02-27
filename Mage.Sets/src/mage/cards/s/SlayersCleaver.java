@@ -74,7 +74,7 @@ class SlayersCleaverEffect extends RequirementEffect {
 
     @Override
     public UUID mustBlockAttackerIfElseUnblocked(Ability source, Game game) {
-        Permanent equipment = game.getPermanent(source.getSourceId());
+        Permanent equipment = source.getSourcePermanentIfItStillExists(game);
         if (equipment != null) {
             return equipment.getAttachedTo();
         }

@@ -161,7 +161,7 @@ class JinxedChokerCounterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && sourcePermanent != null) {
             if (!sourcePermanent.getCounters(game).containsKey(CounterType.CHARGE) || controller.chooseUse(outcome, "Put a charge counter on? (No removes one)", source, game)) {
                 return new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true).apply(game, source);

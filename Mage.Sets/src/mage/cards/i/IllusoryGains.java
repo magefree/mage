@@ -80,7 +80,7 @@ class IllusoryGainsEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         Permanent opponentCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-        Permanent illusoryGains = game.getPermanent(source.getSourceId());
+        Permanent illusoryGains = source.getSourcePermanentIfItStillExists(game);
         if (you != null && opponentCreature != null && illusoryGains != null) {
             Permanent oldCreature = game.getPermanent(illusoryGains.getAttachedTo());
             if (oldCreature == null) {

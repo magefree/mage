@@ -72,7 +72,7 @@ class UrbanBurgeoningUntapEffect extends ContinuousEffectImpl {
         if (!applied && layer == Layer.RulesEffects) {
             if (!game.isActivePlayer(source.getControllerId()) && game.getStep().getType() == PhaseStep.UNTAP) {
                 game.getState().setValue(source.getSourceId() + "applied", true);
-                Permanent land = game.getPermanent(source.getSourceId());
+                Permanent land = source.getSourcePermanentIfItStillExists(game);
                 boolean untap = true;
                 for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(land, game).keySet()) {
                     untap &= effect.canBeUntapped(land, source, game, true);

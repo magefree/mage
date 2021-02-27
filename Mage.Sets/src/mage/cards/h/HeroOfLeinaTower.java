@@ -73,7 +73,7 @@ class HeroOfLeinaTowerEffect extends OneShotEffect {
             int costX = you.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
             cost.add(new GenericManaCost(costX));
             if (cost.pay(source, game, source, source.getControllerId(), false, null)) {
-                Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+                Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
                 if (sourcePermanent != null) {
                     return new AddCountersSourceEffect(CounterType.P1P1.createInstance(costX), true).apply(game, source);
                 }

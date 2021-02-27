@@ -31,7 +31,7 @@ public class CantAttackBlockUnlessPaysAttachedEffect extends PayCostToAttackBloc
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
                 return event.getSourceId().equals(enchantment.getAttachedTo());

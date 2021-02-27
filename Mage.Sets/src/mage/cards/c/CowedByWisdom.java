@@ -79,7 +79,7 @@ class CowedByWisdomayCostToAttackBlockEffect extends PayCostToAttackBlockEffectI
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
+        Permanent enchantment = source.getSourcePermanentIfItStillExists(game);
         return enchantment != null && enchantment.isAttachedTo(event.getSourceId());
     }
 

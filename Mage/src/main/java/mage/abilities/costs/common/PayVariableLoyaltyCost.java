@@ -32,7 +32,7 @@ public class PayVariableLoyaltyCost extends VariableCostImpl  {
     
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        Permanent planeswalker = game.getPermanent(source.getSourceId());
+        Permanent planeswalker = source.getSourcePermanentIfItStillExists(game);
         return planeswalker!= null && planeswalker.canLoyaltyBeUsed(game);
     }
 
@@ -44,7 +44,7 @@ public class PayVariableLoyaltyCost extends VariableCostImpl  {
     @Override
     public int getMaxValue(Ability source, Game game) {
         int maxValue = 0;
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (permanent != null) {
             maxValue = permanent.getCounters(game).getCount(CounterType.LOYALTY.getName());
         }

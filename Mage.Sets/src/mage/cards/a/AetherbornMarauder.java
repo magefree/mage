@@ -72,7 +72,7 @@ class AetherbornMarauderEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (controller != null && sourceObject != null) {
             FilterControlledPermanent filter = new FilterControlledPermanent("permanent you control to remove +1/+1 counters from");
             filter.add(AnotherPredicate.instance);

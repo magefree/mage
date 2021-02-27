@@ -66,7 +66,7 @@ public final class KyrenToy extends CardImpl {
         public List<Mana> getNetMana(Game game, Ability source) {
             List<Mana> netMana = new ArrayList<>();
             if (game != null) {
-                Permanent sourceObject = game.getPermanent(source.getSourceId());
+                Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
                 if (sourceObject != null) {
                     netMana.add(Mana.ColorlessMana(sourceObject.getCounters(game).getCount(CounterType.CHARGE) + 1));
                     return netMana;

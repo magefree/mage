@@ -68,7 +68,7 @@ class MyrPrototypeCantAttackUnlessYouPayEffect extends CantAttackBlockUnlessPays
 
     @Override
     public ManaCosts getManaCostToPay(GameEvent event, Ability source, Game game) {
-        Permanent sourceObject = game.getPermanent(source.getSourceId());
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         if (sourceObject != null) {
             int counter = sourceObject.getCounters(game).getCount(CounterType.P1P1);
             if (counter > 0) {

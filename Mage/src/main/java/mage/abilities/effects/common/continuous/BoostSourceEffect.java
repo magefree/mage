@@ -77,7 +77,7 @@ public class BoostSourceEffect extends ContinuousEffectImpl implements SourceEff
         if (affectedObjectsSet) {
             target = affectedObjectList.get(0).getPermanent(game);
         } else {
-            target = game.getPermanent(source.getSourceId());
+            target = source.getSourcePermanentIfItStillExists(game);
         }
         if (target != null) {
             target.addPower(power.calculate(game, source, this));

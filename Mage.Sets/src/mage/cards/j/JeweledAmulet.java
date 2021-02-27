@@ -79,7 +79,7 @@ class JeweledAmuletAddCounterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent jeweledAmulet = game.getPermanent(source.getSourceId());
+        Permanent jeweledAmulet = source.getSourcePermanentIfItStillExists(game);
         if (controller != null
                 && jeweledAmulet != null) {
             game.getState().setValue("JeweledAmulet" + source.getSourceId().toString(), source.getManaCostsToPay().getUsedManaToPay()); //store the mana used to pay
@@ -116,7 +116,7 @@ class JeweledAmuletAddManaEffect extends ManaEffect {
         if (game == null) {
             return mana;
         }
-        Permanent jeweledAmulet = game.getPermanent(source.getSourceId());
+        Permanent jeweledAmulet = source.getSourcePermanentIfItStillExists(game);
         Player controller = game.getPlayer(source.getControllerId());
         if (jeweledAmulet != null && controller != null) {
             storedMana = (Mana) game.getState().getValue("JeweledAmulet" + source.getSourceId().toString());

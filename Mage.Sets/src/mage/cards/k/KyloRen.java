@@ -91,7 +91,7 @@ class KyloRenTapTargetEffect extends TapTargetEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         Player player = game.getPlayer(source.getControllerId());
         if(player != null && permanent != null) {
             if(player.chooseUse(outcome, "Tap target creature defending player controls (" + permanent.getLogName() + ")", source, game)) {

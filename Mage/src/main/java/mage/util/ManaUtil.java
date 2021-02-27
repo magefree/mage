@@ -424,7 +424,7 @@ public final class ManaUtil {
      * @return message to be shown in human players feedback area
      */
     public static String addSpecialManaPayAbilities(Ability source, Game game, ManaCost unpaid) {
-        MageObject baseObject = game.getPermanent(source.getSourceId());
+        MageObject baseObject = source.getSourcePermanentIfItStillExists(game);
         if (baseObject == null) {
             baseObject = game.getCard(source.getSourceId());
         }

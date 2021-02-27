@@ -121,7 +121,7 @@ class KaradorGhostChieftainCastFromGraveyardEffect extends AsThoughEffectImpl {
         if (source.isControlledBy(affectedControllerId)
                 && Zone.GRAVEYARD.equals(game.getState().getZone(objectId))) {
             Card objectCard = game.getCard(objectId);
-            Permanent sourceObject = game.getPermanent(source.getSourceId()); // needs to be onto the battlefield
+            Permanent sourceObject = source.getSourcePermanentIfItStillExists(game); // needs to be onto the battlefield
             if (objectCard != null
                     && sourceObject != null
                     && objectCard.isOwnedBy(source.getControllerId())

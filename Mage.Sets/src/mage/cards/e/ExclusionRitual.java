@@ -68,7 +68,7 @@ class ExclusionRitualImprintEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && sourcePermanent != null && targetPermanent != null) {
@@ -102,7 +102,7 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Card card = game.getCard(event.getSourceId());
         if (sourcePermanent != null && card != null) {
             if (!sourcePermanent.getImprinted().isEmpty()) {
