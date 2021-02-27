@@ -14,7 +14,7 @@ public class VotedEvent extends GameEvent {
     private final VoteHandler voteHandler;
 
     public VotedEvent(Ability source, VoteHandler voteHandler) {
-        super(EventType.FINISHED_VOTING, source.getSourceId(), source, source.getControllerId());
+        super(EventType.VOTED, source.getSourceId(), source, source.getControllerId());
         this.voteHandler = voteHandler;
     }
 

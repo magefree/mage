@@ -9,8 +9,8 @@ import java.util.UUID;
  */
 public class VoteEvent extends GameEvent {
 
-    private int extraVotes = 0;
-    private int optionalVotes = 0;
+    private int extraVotes = 0; // example: you get an additional vote
+    private int optionalExtraVotes = 0; // example: you may vote an additional time
 
     public VoteEvent(UUID playerId, Ability source) {
         super(EventType.VOTE, playerId, source, playerId);
@@ -20,15 +20,15 @@ public class VoteEvent extends GameEvent {
         extraVotes++;
     }
 
-    public void incrementOptionalVotes() {
-        optionalVotes++;
+    public void incrementOptionalExtraVotes() {
+        optionalExtraVotes++;
     }
 
     public int getExtraVotes() {
         return extraVotes;
     }
 
-    public int getOptionalVotes() {
-        return optionalVotes;
+    public int getOptionalExtraVotes() {
+        return optionalExtraVotes;
     }
 }

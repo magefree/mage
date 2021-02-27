@@ -71,7 +71,7 @@ class BallotBrokerReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((VoteEvent) event).incrementOptionalVotes();
+        ((VoteEvent) event).incrementOptionalExtraVotes();
         return false;
     }
 }

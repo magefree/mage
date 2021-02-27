@@ -27,14 +27,14 @@ public abstract class VoteHandler<T> {
             if (player == null || decidingPlayer == null) {
                 continue;
             }
-            int voteCount = event.getExtraVotes() + event.getOptionalVotes() + 1;
+            int voteCount = event.getExtraVotes() + event.getOptionalExtraVotes() + 1;
             for (int i = 0; i < voteCount; i++) {
                 if (i > event.getExtraVotes() && !player.chooseUse(
                         Outcome.Neutral, "Use an extra vote?", source, game
                 )) {
                     continue;
                 }
-                T vote = playerChoose(player, decidingPlayer, source, game);
+                T vote = playerChoose(player, decidingPlayer, source, game); // TODO: add vote step info as sub message
                 if (vote == null) {
                     continue;
                 }

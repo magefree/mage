@@ -58,7 +58,7 @@ class GrudgeKeeperTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.FINISHED_VOTING;
+        return event.getType() == GameEvent.EventType.VOTED;
     }
 
     @Override
