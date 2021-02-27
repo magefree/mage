@@ -126,14 +126,13 @@ class DraugrNecromancerCastFromExileEffect extends AsThoughEffectImpl {
         if (card == null) {
             return false;
         }
-        card = card.getMainCard();
         if (!source.isControlledBy(affectedControllerId)
-                || game.getState().getZone(card.getId()) != Zone.EXILED) {
+                || game.getState().getZone(card.getMainCard().getId()) != Zone.EXILED) {
             return false;
         }
         return !card.isLand()
                 && game.getOpponents(card.getOwnerId()).contains(source.getControllerId())
-                && card.getCounters(game).getCount(CounterType.ICE) > 0;
+                && card.getMainCard().getCounters(game).getCount(CounterType.ICE) > 0;
     }
 }
 
