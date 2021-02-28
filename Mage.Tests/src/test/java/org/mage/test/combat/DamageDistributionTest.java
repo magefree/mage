@@ -180,4 +180,21 @@ public class DamageDistributionTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
     }
 
+    @Test
+    public void testTrampleDeathtouch() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Colossal Dreadmaw");
+        addCard(Zone.BATTLEFIELD, playerB, "Colossapede");
+        addCard(Zone.HAND, playerA, "Bladebrand");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bladebrand", "Colossal Dreadmaw");
+
+        attack(1, playerA, "Colossal Dreadmaw");
+        block(1, playerB, "Colossapede", "Colossal Dreadmaw");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 5);
+    }
 }

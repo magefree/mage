@@ -1038,7 +1038,10 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 lethal = Math.min(lethal, toughness.getValue());
             }
             lethal = Math.max(lethal - this.damage, 0);
-            Card attacker = game.getCard(attackerId);
+            Card attacker = game.getPermanent(attackerId);
+            if (attacker == null) {
+                attacker = game.getCard(attackerId);
+            }
             if (attacker != null && attacker.getAbilities(game).containsKey(DeathtouchAbility.getInstance().getId())) {
                 lethal = Math.min(1, lethal);
             }
