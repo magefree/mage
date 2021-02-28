@@ -8,6 +8,7 @@ import mage.abilities.common.CastCommanderAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.keyword.EscapeAbility;
 import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
@@ -43,6 +44,10 @@ public class Commander implements CommandObject {
                 switch (spellAbility.getSpellAbilityType()) {
                     case BASE:
                     case BASE_ALTERNATE:
+                        // Escape only castable from graveyard
+                        if (ability instanceof EscapeAbility) {
+                            break;
+                        }
                     case SPLIT:
                     case SPLIT_FUSED:
                     case SPLIT_LEFT:
