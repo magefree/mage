@@ -8,7 +8,6 @@ import mage.abilities.common.CastCommanderAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.keyword.EscapeAbility;
 import mage.abilities.text.TextPart;
 import mage.cards.Card;
 import mage.cards.FrameStyle;
@@ -44,10 +43,6 @@ public class Commander implements CommandObject {
                 switch (spellAbility.getSpellAbilityType()) {
                     case BASE:
                     case BASE_ALTERNATE:
-                        // Escape only castable from graveyard
-                        if (ability instanceof EscapeAbility) {
-                            break;
-                        }
                     case SPLIT:
                     case SPLIT_FUSED:
                     case SPLIT_LEFT:
@@ -57,7 +52,9 @@ public class Commander implements CommandObject {
                     case MODAL_RIGHT:
                     case ADVENTURE_SPELL:
                         // can be used from command zone
-                        abilities.add(new CastCommanderAbility(card, spellAbility));
+                        if (canUseAbilityFromCommandZone(spellAbility)) {
+                            abilities.add(new CastCommanderAbility(card, spellAbility));
+                        }
                         break;
                     case FACE_DOWN_CREATURE: // dynamic added spell for alternative cost like cast as face down
                     case SPLICE: // only from hand
@@ -73,8 +70,10 @@ public class Commander implements CommandObject {
         // replace play land with commander play land (to play from command zone)
         for (Ability ability : card.getAbilities()) {
             if (ability instanceof PlayLandAbility) {
-                Ability newAbility = new PlayLandAsCommanderAbility((PlayLandAbility) ability);
-                abilities.add(newAbility);
+                if (canUseAbilityFromCommandZone(ability)) {
+                    Ability newAbility = new PlayLandAsCommanderAbility((PlayLandAbility) ability);
+                    abilities.add(newAbility);
+                }
             }
         }
 
@@ -86,8 +85,21 @@ public class Commander implements CommandObject {
             }
 
             // all other abilities must be added to commander (example: triggers from command zone, alternative cost, etc)
+            // no changes to ability zone, so can add any
             Ability newAbility = ability.copy();
             abilities.add(newAbility);
+        }
+    }
+
+    private boolean canUseAbilityFromCommandZone(Ability ability) {
+        // ability can be restricted by zone usage, so you must ignore it for commander (example: Escape or Jumpstart)
+        switch (ability.getZone()) {
+            case ALL:
+            case COMMAND:
+            case HAND:
+                return true;
+            default:
+                return false;
         }
     }
 
