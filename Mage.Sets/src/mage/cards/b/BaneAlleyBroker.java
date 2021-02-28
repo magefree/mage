@@ -115,7 +115,9 @@ class BaneAlleyBrokerDrawExileEffect extends OneShotEffect {
         if (card == null || sourceObject == null) {
             return false;
         }
-        if (!card.moveToExile(CardUtil.getExileZoneId(game, source), sourceObject.getName(), source, game)) {
+        if (!controller.moveCardsToExile(
+                card, source, game, false, CardUtil.getExileZoneId(game, source), sourceObject.getIdName()
+        )) {
             return false;
         }
         card.setFaceDown(true, game);
@@ -157,7 +159,7 @@ class BaneAlleyBrokerReturnToHandEffect extends OneShotEffect {
         }
         TargetCardInExile target = new TargetCardInExile(StaticFilters.FILTER_CARD, exile.getId());
         target.setNotTarget(true);
-        player.chooseTarget(outcome, exile,target, source, game);
+        player.chooseTarget(outcome, exile, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         if (card == null) {
             return false;

@@ -1,20 +1,22 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class CryptIncursion extends CardImpl {
@@ -23,9 +25,8 @@ public final class CryptIncursion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
 
         // Exile all creature cards from target player's graveyard. You gain 3 life for each card exiled this way.
-        this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new CryptIncursionEffect());
-
+        this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
     private CryptIncursion(final CryptIncursion card) {
@@ -36,17 +37,17 @@ public final class CryptIncursion extends CardImpl {
     public CryptIncursion copy() {
         return new CryptIncursion(this);
     }
-
 }
 
 class CryptIncursionEffect extends OneShotEffect {
 
-    public CryptIncursionEffect() {
+    CryptIncursionEffect() {
         super(Outcome.Detriment);
-        staticText = "Exile all creature cards from target player's graveyard. You gain 3 life for each card exiled this way";
+        staticText = "Exile all creature cards from target player's graveyard. " +
+                "You gain 3 life for each card exiled this way";
     }
 
-    public CryptIncursionEffect(final CryptIncursionEffect effect) {
+    private CryptIncursionEffect(final CryptIncursionEffect effect) {
         super(effect);
     }
 
@@ -54,24 +55,20 @@ class CryptIncursionEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (player != null && targetPlayer != null) {
-            int exiledCards = 0;
-            for (Card card : targetPlayer.getGraveyard().getCards(game)) {
-                if (StaticFilters.FILTER_CARD_CREATURE.match(card, game)) {
-                    if (card.moveToExile(null, "", source, game)) {
-                        exiledCards++;
-                    }
-                }
-            }
-            player.gainLife(exiledCards * 3, game, source);
-            return true;
-        }
-        return false;
+        Cards cards = new CardsImpl(targetPlayer.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
+        player.moveCards(cards, Zone.EXILED, source, game);
+        int count = cards
+                .stream()
+                .map(game.getState()::getZone)
+                .map(Zone.EXILED::equals)
+                .mapToInt(x -> x ? 1 : 0)
+                .sum();
+        player.gainLife(3 * count, game, source);
+        return true;
     }
 
     @Override
     public CryptIncursionEffect copy() {
         return new CryptIncursionEffect(this);
     }
-
 }

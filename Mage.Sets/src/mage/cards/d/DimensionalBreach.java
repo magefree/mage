@@ -1,31 +1,32 @@
-
 package mage.cards.d;
 
-import java.util.UUID;
-import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.card.OwnerIdPredicate;
-import mage.game.ExileZone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
-import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
- *
- * @author jeffwadsworth
+ * @author TheElk801
  */
 public final class DimensionalBreach extends CardImpl {
 
@@ -34,8 +35,6 @@ public final class DimensionalBreach extends CardImpl {
 
         // Exile all permanents. For as long as any of those cards remain exiled, at the beginning of each player's upkeep, that player returns one of the exiled cards they own to the battlefield.
         this.getSpellAbility().addEffect(new DimensionalBreachExileEffect());
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(Zone.ALL, new DimensionalBreachReturnFromExileEffect(), TargetController.ANY, false, true, null), new CardsStillInExileCondition(), null));
-
     }
 
     private DimensionalBreach(final DimensionalBreach card) {
@@ -50,12 +49,14 @@ public final class DimensionalBreach extends CardImpl {
 
 class DimensionalBreachExileEffect extends OneShotEffect {
 
-    public DimensionalBreachExileEffect() {
+    DimensionalBreachExileEffect() {
         super(Outcome.Exile);
-        staticText = "Exile all permanents.";
+        staticText = "Exile all permanents. For as long as any of those cards remain exiled, " +
+                "at the beginning of each player's upkeep, that player returns " +
+                "one of the exiled cards they own to the battlefield.";
     }
 
-    public DimensionalBreachExileEffect(final DimensionalBreachExileEffect effect) {
+    private DimensionalBreachExileEffect(final DimensionalBreachExileEffect effect) {
         super(effect);
     }
 
@@ -66,75 +67,107 @@ class DimensionalBreachExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject sourceObject = source.getSourceObject(game);
-        Player controller = game.getPlayer(source.getControllerId());
-        if (sourceObject != null
-                && controller != null) {
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), 0);
-            if (exileId != null) {
-                game.getBattlefield().getAllActivePermanents().forEach((permanent) -> {
-                    permanent.moveToExile(exileId, sourceObject.getName(), source, game);
-                });
-                return true;
-            }
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
         }
-        return false;
+        Cards cards = new CardsImpl();
+        game.getBattlefield().getActivePermanents(source.getControllerId(), game).stream().forEach(cards::add);
+        player.moveCards(cards, Zone.EXILED, source, game);
+        Set<MageObjectReference> morSet = cards
+                .getCards(game)
+                .stream()
+                .filter(c -> game.getState().getZone(c.getId()) == Zone.EXILED)
+                .map(c -> new MageObjectReference(c, game))
+                .collect(Collectors.toSet());
+        game.addDelayedTriggeredAbility(new DimensionalBreachDelayedTriggeredAbility(morSet), source);
+        return true;
     }
 }
 
-class DimensionalBreachReturnFromExileEffect extends OneShotEffect {
+class DimensionalBreachDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
-    public DimensionalBreachReturnFromExileEffect() {
-        super(Outcome.PutCardInPlay);
-        staticText = "For as long as any of those cards remain exiled, at the beginning of each player's upkeep, that player returns one of the exiled cards they own to the battlefield.";
+    private final Set<MageObjectReference> morSet = new HashSet<>();
+
+    DimensionalBreachDelayedTriggeredAbility(Set<MageObjectReference> morSet) {
+        super(new DimensionalBreachReturnEffect(morSet), Duration.Custom, false, false);
+        this.morSet.addAll(morSet);
     }
 
-    public DimensionalBreachReturnFromExileEffect(final DimensionalBreachReturnFromExileEffect effect) {
-        super(effect);
+    private DimensionalBreachDelayedTriggeredAbility(final DimensionalBreachDelayedTriggeredAbility ability) {
+        super(ability);
+        this.morSet.addAll(ability.morSet);
     }
 
     @Override
-    public DimensionalBreachReturnFromExileEffect copy() {
-        return new DimensionalBreachReturnFromExileEffect(this);
+    public boolean checkEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return morSet.stream().map(mor -> mor.getCard(game)).anyMatch(Objects::nonNull);
+    }
+
+    @Override
+    public DimensionalBreachDelayedTriggeredAbility copy() {
+        return new DimensionalBreachDelayedTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean isInactive(Game game) {
+        return morSet.stream().map(mor -> mor.getCard(game)).noneMatch(Objects::nonNull);
+    }
+
+    @Override
+    public String getRule() {
+        return "For as long as any of those cards remain exiled, at the beginning of each player's upkeep, " +
+                "that player returns one of the exiled cards they own to the battlefield.";
+    }
+}
+
+class DimensionalBreachReturnEffect extends OneShotEffect {
+
+    private final Set<MageObjectReference> morSet = new HashSet<>();
+
+    DimensionalBreachReturnEffect(Set<MageObjectReference> morSet) {
+        super(Outcome.PutCardInPlay);
+        this.morSet.addAll(morSet);
+    }
+
+    private DimensionalBreachReturnEffect(final DimensionalBreachReturnEffect effect) {
+        super(effect);
+        this.morSet.addAll(effect.morSet);
+    }
+
+    @Override
+    public DimensionalBreachReturnEffect copy() {
+        return new DimensionalBreachReturnEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            FilterCard filter = new FilterCard("card you own from the Dimensional Breach exile");
-            filter.add(new OwnerIdPredicate(player.getId()));
-
-            TargetCardInExile target = new TargetCardInExile(filter, CardUtil.getExileZoneId(game, source.getSourceId(), 0));
-            target.setNotTarget(true);
-            
-            if (target.canChoose(source.getSourceId(), player.getId(), game)) {
-                if (player.chooseTarget(Outcome.PutCardInPlay, target, source, game)) {
-                    Card card = game.getCard(target.getFirstTarget());
-                    if (card != null
-                            && player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-}
-
-class CardsStillInExileCondition implements Condition {
-
-    @Override
-    public final boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(game.getActivePlayerId());
-        if (player != null) {
-            FilterCard filter = new FilterCard();
-            filter.add(new OwnerIdPredicate(player.getId()));
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), 0);
-            ExileZone exileZone = game.getExile().getExileZone(exileId);
-            return (exileZone != null
-                    && !exileZone.getCards(filter, game).isEmpty());
+        if (player == null) {
+            return false;
         }
-        return false;
+        Cards cards = new CardsImpl(
+                morSet.stream()
+                        .map(mor -> mor.getCard(game))
+                        .filter(Objects::nonNull)
+                        .filter(c -> c.isOwnedBy(game.getActivePlayerId()))
+                        .collect(Collectors.toSet())
+        );
+        if (cards.isEmpty()) {
+            return false;
+        }
+        if (cards.size() > 1) {
+            TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD);
+            target.setNotTarget(true);
+            player.choose(outcome, cards, target, game);
+            cards.clear();
+            cards.add(target.getFirstTarget());
+        }
+        return player.moveCards(cards, Zone.BATTLEFIELD, source, game);
     }
 }
