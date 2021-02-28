@@ -1,5 +1,6 @@
 package mage.cards.f;
 
+import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.ContinuousEffect;
@@ -13,7 +14,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -24,7 +24,6 @@ import mage.target.targetpointer.FixedTarget;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import mage.ApprovingObject;
 
 /**
  * @author JayDi85
@@ -192,8 +191,7 @@ class FinaleOfPromiseReplacementEffect extends ReplacementEffectImpl {
         if (controller != null) {
             Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
-                card.moveToExile(null, "", source, game);
-                return true;
+                return controller.moveCards(card, Zone.EXILED, source, game);
             }
         }
         return false;

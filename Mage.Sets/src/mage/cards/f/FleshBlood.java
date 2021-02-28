@@ -39,7 +39,6 @@ public final class FleshBlood extends SplitCard {
         getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         getRightHalfCard().getSpellAbility().addTarget(new TargetAnyTarget());
         getRightHalfCard().getSpellAbility().addEffect(new BloodEffect());
-
     }
 
     private FleshBlood(final FleshBlood card) {
@@ -65,19 +64,20 @@ class FleshEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
         Card targetCard = game.getCard(source.getFirstTarget());
-        if (targetCard != null) {
-            int power = targetCard.getPower().getValue();
-            targetCard.moveToExile(null, null, source, game);
-            if (power > 0) {
-                Permanent targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-                if (targetCreature != null) {
-                    targetCreature.addCounters(CounterType.P1P1.createInstance(power), source.getControllerId(), source, game);
-                }
-            }
-            return true;
+        if (player == null || targetCard == null) {
+            return false;
         }
-        return false;
+        int power = targetCard.getPower().getValue();
+        player.moveCards(targetCard, Zone.EXILED, source, game);
+        if (power > 0) {
+            Permanent targetCreature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+            if (targetCreature != null) {
+                targetCreature.addCounters(CounterType.P1P1.createInstance(power), source.getControllerId(), source, game);
+            }
+        }
+        return true;
     }
 
     @Override

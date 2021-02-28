@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,10 +15,12 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class EaterOfTheDead extends CardImpl {
@@ -31,7 +32,7 @@ public final class EaterOfTheDead extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {0}: If Eater of the Dead is tapped, exile target creature card from a graveyard and untap Eater of the Dead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EaterOfTheDeadEffect(), new GenericManaCost(0));
+        Ability ability = new SimpleActivatedAbility(new EaterOfTheDeadEffect(), new GenericManaCost(0));
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         this.addAbility(ability);
     }
@@ -49,28 +50,31 @@ public final class EaterOfTheDead extends CardImpl {
 class EaterOfTheDeadEffect extends OneShotEffect {
 
     EaterOfTheDeadEffect() {
-        super(Outcome.DestroyPermanent);
+        super(Outcome.Exile);
         staticText = "If {this} is tapped, exile target creature card from a graveyard and untap {this}";
     }
 
-    EaterOfTheDeadEffect(final EaterOfTheDeadEffect effect) {
+    private EaterOfTheDeadEffect(final EaterOfTheDeadEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        Card card = game.getCard(source.getFirstTarget());
-        if (sourcePermanent != null && sourcePermanent.isTapped() && card != null) {
-            card.moveToExile(null, "Eater of the Dead", source, game);
-            sourcePermanent.untap(game);
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
+        if (player == null || permanent == null || !permanent.isTapped()) {
+            return false;
         }
-        return false;
+        Card card = game.getCard(source.getFirstTarget());
+        if (card != null) {
+            player.moveCards(card, Zone.EXILED, source, game);
+        }
+        permanent.untap(game);
+        return true;
     }
 
     @Override
     public EaterOfTheDeadEffect copy() {
         return new EaterOfTheDeadEffect(this);
     }
-
 }

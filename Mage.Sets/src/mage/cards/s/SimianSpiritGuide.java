@@ -1,30 +1,24 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
+import mage.abilities.costs.common.ExileSourceFromHandCost;
 import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class SimianSpiritGuide extends CardImpl {
 
     public SimianSpiritGuide(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.subtype.add(SubType.APE);
         this.subtype.add(SubType.SPIRIT);
 
@@ -43,41 +37,4 @@ public final class SimianSpiritGuide extends CardImpl {
     public SimianSpiritGuide copy() {
         return new SimianSpiritGuide(this);
     }
-}
-
-
-class ExileSourceFromHandCost extends CostImpl {
-
-    public ExileSourceFromHandCost() {
-        this.text = "Exile {this} from your hand";
-    }
-
-    public ExileSourceFromHandCost(ExileSourceFromHandCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
-        Card card = game.getCard(source.getSourceId());
-        Player player = game.getPlayer(controllerId);
-        if (player != null && player.getHand().contains(source.getSourceId()) && card != null) {
-            paid = card.moveToExile(ability.getSourceId(), "from Hand", source, game);
-        }
-        return paid;
-    }
-
-    @Override
-    public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        Player player = game.getPlayer(controllerId);
-        if (player != null && player.getHand().contains(source.getSourceId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public ExileSourceFromHandCost copy() {
-        return new ExileSourceFromHandCost(this);
-    }
-
 }
