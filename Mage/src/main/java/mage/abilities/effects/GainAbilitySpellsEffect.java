@@ -1,6 +1,7 @@
 package mage.abilities.effects;
 
 import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.filter.FilterObject;
@@ -21,7 +22,7 @@ public class GainAbilitySpellsEffect extends ContinuousEffectImpl {
         staticText = filter.getMessage() + " have " + ability.getRule();
     }
 
-    public GainAbilitySpellsEffect(final GainAbilitySpellsEffect effect) {
+    private GainAbilitySpellsEffect(final GainAbilitySpellsEffect effect) {
         super(effect);
         this.ability = effect.ability;
         this.filter = effect.filter;
@@ -36,47 +37,51 @@ public class GainAbilitySpellsEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (player != null && permanent != null) {
-            for (Card card : game.getExile().getAllCards(game)) {
-                if (card.isOwnedBy(source.getControllerId()) && filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
-            for (Card card : player.getLibrary().getCards(game)) {
-                if (filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
-            for (Card card : player.getHand().getCards(game)) {
-                if (filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
-            for (Card card : player.getGraveyard().getCards(game)) {
-                if (filter.match(card, game)) {
-                    game.getState().addOtherAbility(card, ability);
-                }
-            }
-
-            // workaround to gain cost reduction abilities to commanders before cast (make it playable)
-            game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY).stream()
-                    .filter(card -> filter.match(card, game))
-                    .forEach(card -> {
-                        game.getState().addOtherAbility(card, ability);
-                    });
-
-            for (StackObject stackObject : game.getStack()) {
-                if (stackObject.isControlledBy(source.getControllerId())) {
-                    Card card = game.getCard(stackObject.getSourceId());
-                    if (card != null && filter.match(stackObject, game)) {
-                        if (!card.hasAbility(ability, game)) {
-                            game.getState().addOtherAbility(card, ability);
-                        }
-                    }
-                }
-            }
-            return true;
+        if (player == null || permanent == null) {
+            return false;
         }
-        return false;
+        for (Card card : game.getExile().getAllCards(game)) {
+            if (card.isOwnedBy(source.getControllerId()) && filter.match(card, game)) {
+                game.getState().addOtherAbility(card, ability);
+            }
+        }
+        for (Card card : player.getLibrary().getCards(game)) {
+            if (filter.match(card, game)) {
+                game.getState().addOtherAbility(card, ability);
+            }
+        }
+        for (Card card : player.getHand().getCards(game)) {
+            if (filter.match(card, game)) {
+                game.getState().addOtherAbility(card, ability);
+            }
+        }
+        for (Card card : player.getGraveyard().getCards(game)) {
+            if (filter.match(card, game)) {
+                game.getState().addOtherAbility(card, ability);
+            }
+        }
+
+        // workaround to gain cost reduction abilities to commanders before cast (make it playable)
+        game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY)
+                .stream()
+                .filter(card -> filter.match(card, game))
+                .forEach(card -> {
+                    game.getState().addOtherAbility(card, ability);
+                });
+
+        for (StackObject stackObject : game.getStack()) {
+            if (!stackObject.isControlledBy(source.getControllerId())) {
+                continue;
+            }
+            Card card = game.getCard(stackObject.getSourceId());
+            if (card == null || !filter.match(stackObject, game)) {
+                continue;
+            }
+            if (ability instanceof MageSingleton && card.hasAbility(ability, game)) {
+                continue;
+            }
+            game.getState().addOtherAbility(card, ability);
+        }
+        return true;
     }
 }
