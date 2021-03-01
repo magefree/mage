@@ -1,8 +1,7 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -16,26 +15,27 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
+import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class GideonChampionOfJustice extends CardImpl {
 
     public GideonChampionOfJustice(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.GIDEON);
 
@@ -56,7 +56,6 @@ public final class GideonChampionOfJustice extends CardImpl {
 
         // -15: Exile all other permanents.
         this.addAbility(new LoyaltyAbility(new GideonExileAllOtherPermanentsEffect(), -15));
-
     }
 
     private GideonChampionOfJustice(final GideonChampionOfJustice card) {
@@ -71,12 +70,12 @@ public final class GideonChampionOfJustice extends CardImpl {
 
 class GideonExileAllOtherPermanentsEffect extends OneShotEffect {
 
-    public GideonExileAllOtherPermanentsEffect() {
+    GideonExileAllOtherPermanentsEffect() {
         super(Outcome.Exile);
-        staticText = "Exile all other permanents";
+        staticText = "exile all other permanents";
     }
 
-    public GideonExileAllOtherPermanentsEffect(final GideonExileAllOtherPermanentsEffect effect) {
+    private GideonExileAllOtherPermanentsEffect(final GideonExileAllOtherPermanentsEffect effect) {
         super(effect);
     }
 
@@ -87,18 +86,27 @@ class GideonExileAllOtherPermanentsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
-            if (!permanent.getId().equals(source.getSourceId())) {
-                permanent.moveToExile(null, null, source, game);
-            }
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
         }
-        return true;
+        MageObjectReference mor = new MageObjectReference(source.getSourceObject(game), game);
+        Cards cards = new CardsImpl();
+        game.getBattlefield()
+                .getActivePermanents(
+                        StaticFilters.FILTER_PERMANENT,
+                        source.getControllerId(), game
+                ).stream()
+                .filter(Objects::nonNull)
+                .filter(permanent -> !mor.refersTo(permanent, game))
+                .forEach(cards::add);
+        return player.moveCards(cards, Zone.EXILED, source, game);
     }
 }
 
 class GideonChampionOfJusticeToken extends TokenImpl {
 
-    public GideonChampionOfJusticeToken() {
+    GideonChampionOfJusticeToken() {
         super("", "indestructible Human Soldier creature with power and toughness each equal to the number of loyalty counters on him");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.HUMAN);
@@ -109,7 +117,8 @@ class GideonChampionOfJusticeToken extends TokenImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
     }
-    public GideonChampionOfJusticeToken(final GideonChampionOfJusticeToken token) {
+
+    private GideonChampionOfJusticeToken(final GideonChampionOfJusticeToken token) {
         super(token);
     }
 

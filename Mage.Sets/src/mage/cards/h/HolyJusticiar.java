@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,16 +14,18 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class HolyJusticiar extends CardImpl {
 
     public HolyJusticiar(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.CLERIC);
 
@@ -33,11 +33,10 @@ public final class HolyJusticiar extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{W}, {tap}: Tap target creature. If that creature is a Zombie, exile it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HolyJusticiarEffect(), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(new HolyJusticiarEffect(), new ManaCostsImpl("{2}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-
     }
 
     private HolyJusticiar(final HolyJusticiar card) {
@@ -52,28 +51,27 @@ public final class HolyJusticiar extends CardImpl {
 
 class HolyJusticiarEffect extends OneShotEffect {
 
-    public HolyJusticiarEffect() {
+    HolyJusticiarEffect() {
         super(Outcome.Detriment);
-        staticText = "Tap target creature.  If that creature is a Zombie, exile it";
+        staticText = "Tap target creature. If that creature is a Zombie, exile it";
     }
 
-    public HolyJusticiarEffect(final HolyJusticiarEffect effect) {
+    private HolyJusticiarEffect(final HolyJusticiarEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
         Permanent creature = game.getPermanent(source.getFirstTarget());
-        if (creature != null) {
-            if (creature.hasSubtype(SubType.ZOMBIE, game)) {
-                creature.tap(source, game);
-                creature.moveToExile(source.getSourceId(), creature.getName(), source, game);
-            } else {
-                creature.tap(source, game);
-            }
-            return true;
+        if (player == null || creature == null) {
+            return false;
         }
-        return false; 
+        creature.tap(source, game);
+        if (creature.hasSubtype(SubType.ZOMBIE, game)) {
+            player.moveCards(creature, Zone.EXILED, source, game);
+        }
+        return true;
     }
 
     @Override
@@ -81,4 +79,3 @@ class HolyJusticiarEffect extends OneShotEffect {
         return new HolyJusticiarEffect(this);
     }
 }
-
