@@ -34,8 +34,8 @@ public class ReturnToLibrarySpellEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Spell spell = game.getStack().getSpell(source.getSourceId());
-            if (spell != null) {
-                Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
+            if (spell != null && !spell.isCopy()) {
+                Card spellCard = spell.getCard();
                 if (spellCard != null) {
                     controller.moveCardToLibraryWithInfo(spellCard, source, game, Zone.STACK, toTop, true);
                 }
