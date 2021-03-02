@@ -807,7 +807,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects);
 
-    boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game);
+    boolean moveCards(Set<? extends Card> cards, Zone toZone, Ability source, Game game);
 
     /**
      * Universal method to move cards from one zone to another. Do not mix
@@ -826,7 +826,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param appliedEffects
      * @return
      */
-    boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects);
+    boolean moveCards(Set<? extends Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects);
 
     boolean moveCardsToExile(Card card, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName);
 
@@ -883,7 +883,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param fromZone if null, this info isn't postet
      * @return Set<Cards> that were successful moved to graveyard
      */
-    Set<Card> moveCardsToGraveyardWithInfo(Set<Card> cards, Ability source, Game game, Zone fromZone);
+    Set<Card> moveCardsToGraveyardWithInfo(Set<? extends Card> cards, Ability source, Game game, Zone fromZone);
 
     /**
      * Uses card.moveToZone and posts a inform message about moving the card to
