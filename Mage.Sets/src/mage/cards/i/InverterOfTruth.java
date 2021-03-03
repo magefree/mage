@@ -1,31 +1,32 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DevoidAbility;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class InverterOfTruth extends CardImpl {
 
     public InverterOfTruth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.subtype.add(SubType.ELDRAZI);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
@@ -37,7 +38,7 @@ public final class InverterOfTruth extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Inverter of Truth enters the battlefield, exile all cards from your library face down, then shuffle all cards from your graveyard into your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ExileLibraryEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new InverterOfTruthEffect(), false));
     }
 
     private InverterOfTruth(final InverterOfTruth card) {
@@ -50,35 +51,37 @@ public final class InverterOfTruth extends CardImpl {
     }
 }
 
-class ExileLibraryEffect extends OneShotEffect {
+class InverterOfTruthEffect extends OneShotEffect {
 
-    public ExileLibraryEffect() {
-        super(Outcome.Exile);
-        staticText = "exile all cards from your library face down, then shuffle all cards from your graveyard into your library";
+    InverterOfTruthEffect() {
+        super(Outcome.Benefit);
+        staticText = "exile all cards from your library face down, " +
+                "then shuffle all cards from your graveyard into your library";
+    }
+
+    private InverterOfTruthEffect(final InverterOfTruthEffect effect) {
+        super(effect);
     }
 
     @Override
-    public ExileLibraryEffect copy() {
-        return new ExileLibraryEffect();
+    public InverterOfTruthEffect copy() {
+        return new InverterOfTruthEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int count = controller.getLibrary().size();
-            if (count > 0) {
-                for (Card cardToExile: controller.getLibrary().getCards(game)) {
-                    cardToExile.moveToExile(null, "", source, game);
-                    cardToExile.setFaceDown(true, game);
-                }
-            }
-            for (Card cardToLibrary: controller.getGraveyard().getCards(game)) {
-                controller.moveCardToLibraryWithInfo(cardToLibrary, source, game, Zone.GRAVEYARD, true, true);
-            }
-            controller.shuffleLibrary(source, game);
-            return true;
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
         }
-        return false;
+        Cards cards = new CardsImpl(player.getLibrary().getCards(game));
+        player.moveCards(cards, Zone.EXILED, source, game);
+        cards.removeIf(uuid -> game.getState().getZone(uuid) != Zone.EXILED);
+        cards.getCards(game)
+                .stream()
+                .filter(Objects::nonNull)
+                .forEach(card -> card.setFaceDown(true, game));
+        player.shuffleCardsToLibrary(player.getGraveyard(), game, source);
+        return true;
     }
 }

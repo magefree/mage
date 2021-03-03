@@ -1,26 +1,28 @@
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class InfernalReckoning extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("colorless creature");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("colorless creature");
 
     static {
         filter.add(ColorlessPredicate.instance);
@@ -31,7 +33,7 @@ public final class InfernalReckoning extends CardImpl {
 
         // Exile target colorless creature. You gain life equal to its power.
         this.getSpellAbility().addEffect(new InfernalJudgmentEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private InfernalReckoning(final InfernalReckoning card) {
@@ -46,12 +48,12 @@ public final class InfernalReckoning extends CardImpl {
 
 class InfernalJudgmentEffect extends OneShotEffect {
 
-    public InfernalJudgmentEffect() {
+    InfernalJudgmentEffect() {
         super(Outcome.GainLife);
         staticText = "exile target colorless creature. You gain life equal to its power";
     }
 
-    public InfernalJudgmentEffect(final InfernalJudgmentEffect effect) {
+    private InfernalJudgmentEffect(final InfernalJudgmentEffect effect) {
         super(effect);
     }
 
@@ -62,14 +64,13 @@ class InfernalJudgmentEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
         Player player = game.getPlayer(source.getControllerId());
         if (permanent == null || player == null) {
             return false;
         }
         int creaturePower = permanent.getPower().getValue();
-        permanent.moveToExile(null, null, source, game);
-        game.getState().processAction(game);
+        player.moveCards(permanent, Zone.EXILED, source, game);
         player.gainLife(creaturePower, game, source);
         return true;
     }
