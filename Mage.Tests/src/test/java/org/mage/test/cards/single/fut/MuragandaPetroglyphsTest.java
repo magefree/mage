@@ -212,4 +212,28 @@ public class MuragandaPetroglyphsTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, "Grizzly Bears", 2, 2);
     }
+
+    /**
+     * Quicksilver Gargantuan overwrites Tarmogoyf's P/T and therefore removes its characteristic-definining abilities
+     */
+    @Test
+    public void cdaTest() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+        addCard(Zone.BATTLEFIELD, playerA, "Muraganda Petroglyphs", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Tarmogoyf", 1);
+        addCard(Zone.GRAVEYARD, playerA, "Darksteel Relic");
+        addCard(Zone.GRAVEYARD, playerA, "Bitterblossom");
+        addCard(Zone.HAND, playerA, "Quicksilver Gargantuan", 1);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicksilver Gargantuan");
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+        assertAllCommandsUsed();
+
+        // Graveyard has artifact, enchantment and tribal
+        assertPowerToughness(playerA, "Tarmogoyf", 3, 4);
+        // Gargantuan copy overwrites and gets a boost from Petroglyphs
+        assertPowerToughness(playerA, "Tarmogoyf", 7 + 2, 7 + 2);
+    }
 }
