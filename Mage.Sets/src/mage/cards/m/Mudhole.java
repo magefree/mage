@@ -1,29 +1,26 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
-import mage.filter.common.FilterLandCard;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author cbt33
  */
 public final class Mudhole extends CardImpl {
 
     public Mudhole(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{2}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Target player exiles all land cards from their graveyard.
         this.getSpellAbility().addTarget(new TargetPlayer());
@@ -42,27 +39,24 @@ public final class Mudhole extends CardImpl {
 
 class MudholeEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterLandCard();
-
-    public MudholeEffect() {
+    MudholeEffect() {
         super(Outcome.Exile);
         staticText = "Target player exiles all land cards from their graveyard";
     }
 
-    public MudholeEffect(final MudholeEffect effect) {
+    private MudholeEffect(final MudholeEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (targetPlayer != null) {
-            for (Card card : targetPlayer.getGraveyard().getCards(filter, game)) {
-                card.moveToExile(null, "", source, game);
-            }
-            return true;
+        Player player = game.getPlayer(source.getFirstTarget());
+        if (player == null) {
+            return false;
         }
-        return false;
+        return player.moveCards(player.getGraveyard().getCards(
+                StaticFilters.FILTER_CARD_LAND, game
+        ), Zone.EXILED, source, game);
     }
 
     @Override

@@ -2,21 +2,20 @@ package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author emerald000
  */
 public final class ManipulateFate extends CardImpl {
@@ -26,7 +25,6 @@ public final class ManipulateFate extends CardImpl {
 
         // Search your library for three cards, exile them, then shuffle your library.
         this.getSpellAbility().addEffect(new ManipulateFateEffect());
-
     }
 
     private ManipulateFate(final ManipulateFate card) {
@@ -42,12 +40,12 @@ public final class ManipulateFate extends CardImpl {
 class ManipulateFateEffect extends SearchEffect {
 
     ManipulateFateEffect() {
-        super(new TargetCardInLibrary(3, new FilterCard()), Outcome.Benefit);
+        super(new TargetCardInLibrary(3, StaticFilters.FILTER_CARD), Outcome.Benefit);
         staticText = "Search your library for three cards, exile them, "
-                + "then shuffle your library.  Draw a card";
+                + "then shuffle your library. Draw a card";
     }
 
-    ManipulateFateEffect(final ManipulateFateEffect effect) {
+    private ManipulateFateEffect(final ManipulateFateEffect effect) {
         super(effect);
     }
 
@@ -59,24 +57,13 @@ class ManipulateFateEffect extends SearchEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            if (player.searchLibrary(target, source, game)) {
-                for (UUID targetId : getTargets()) {
-                    Card card = player.getLibrary().getCard(targetId, game);
-                    if (card != null) {
-                        card.moveToExile(null, null, source, game);
-                    }
-                }
-            }
-            player.shuffleLibrary(source, game);
-            player.drawCards(1, source, game);
-            return true;
+        if (player == null) {
+            return false;
         }
-        return false;
+        player.searchLibrary(target, source, game);
+        player.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
+        player.shuffleLibrary(source, game);
+        player.drawCards(1, source, game);
+        return true;
     }
-
-    public List<UUID> getTargets() {
-        return target.getTargets();
-    }
-
 }

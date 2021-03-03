@@ -1,34 +1,36 @@
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class NecromancersCovenant extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Zombies you control");
-
-    static {
-        filter.add(SubType.ZOMBIE.getPredicate());
-    }
+    private static final FilterPermanent filter
+            = new FilterControlledPermanent(SubType.ZOMBIE, "Zombies you control");
 
     public NecromancersCovenant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{B}{B}");
@@ -39,7 +41,9 @@ public final class NecromancersCovenant extends CardImpl {
         this.addAbility(ability);
 
         // Zombies you control have lifelink.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
+                LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, filter
+        )));
     }
 
     private NecromancersCovenant(final NecromancersCovenant card) {
@@ -54,32 +58,26 @@ public final class NecromancersCovenant extends CardImpl {
 
 class NecromancersConvenantEffect extends OneShotEffect {
 
-    public NecromancersConvenantEffect() {
+    NecromancersConvenantEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "exile all creature cards from target player's graveyard, then create a 2/2 black Zombie creature token for each card exiled this way";
+        staticText = "exile all creature cards from target player's graveyard, " +
+                "then create a 2/2 black Zombie creature token for each card exiled this way";
     }
 
-    public NecromancersConvenantEffect(NecromancersConvenantEffect effect) {
+    private NecromancersConvenantEffect(NecromancersConvenantEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(source.getFirstTarget());
-        if (player == null) {
+        if (controller == null || player == null) {
             return false;
         }
-        int count = 0;
-        for (Card card : player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game)) {
-            if (card.moveToExile(source.getSourceId(), "Necromancer Covenant", source, game)) {
-                count += 1;
-            }
-        }
-        ZombieToken zombieToken = new ZombieToken();
-        if (zombieToken.putOntoBattlefield(count, game, source, source.getControllerId())) {
-            return true;
-        }
-        return false;
+        Cards cards = new CardsImpl(player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
+        int count = cards.size();
+        return count > 0 && new ZombieToken().putOntoBattlefield(count, game, source, controller.getId());
     }
 
     @Override

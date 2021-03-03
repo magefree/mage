@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -9,27 +7,29 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.token.SaprolingToken;
+import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class MorbidBloom extends CardImpl {
 
+    private static final FilterCard filter = new FilterCreatureCard("creature card from a graveyard");
+
     public MorbidBloom(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{B}{G}");
-
-
-        
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{B}{G}");
 
         // Exile target creature card from a graveyard, then create X 1/1 green Saproling creature tokens, where X is the exiled card's toughness.
         this.getSpellAbility().addEffect(new MorbidBloomEffect());
-        this.getSpellAbility().addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature from a graveyard")));
-        
+        this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
     }
 
     private MorbidBloom(final MorbidBloom card) {
@@ -44,12 +44,14 @@ public final class MorbidBloom extends CardImpl {
 
 class MorbidBloomEffect extends OneShotEffect {
 
-    public MorbidBloomEffect() {
+    MorbidBloomEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Exile target creature card from a graveyard, then create X 1/1 green Saproling creature tokens, where X is the exiled card's toughness";
+        staticText = "Exile target creature card from a graveyard, " +
+                "then create X 1/1 green Saproling creature tokens, " +
+                "where X is the exiled card's toughness";
     }
 
-    public MorbidBloomEffect(final MorbidBloomEffect effect) {
+    private MorbidBloomEffect(final MorbidBloomEffect effect) {
         super(effect);
     }
 
@@ -60,13 +62,16 @@ class MorbidBloomEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card targetCreatureCard = game.getCard(source.getFirstTarget());
-        if (targetCreatureCard != null) {
-            targetCreatureCard.moveToExile(null, null, source, game);
-            int toughness = targetCreatureCard.getToughness().getValue();
-            SaprolingToken token = new SaprolingToken();
-            return token.putOntoBattlefield(toughness, game, source, source.getControllerId());
+        Player player = game.getPlayer(source.getControllerId());
+        Card card = game.getCard(source.getFirstTarget());
+        if (player == null || card == null) {
+            return false;
         }
-        return false;
+        player.moveCards(card, Zone.EXILED, source, game);
+        int toughness = card.getToughness().getValue();
+        if (toughness < 1) {
+            return true;
+        }
+        return new SaprolingToken().putOntoBattlefield(toughness, game, source, player.getId());
     }
 }
