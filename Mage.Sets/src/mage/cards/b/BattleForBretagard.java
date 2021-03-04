@@ -13,6 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -100,7 +101,7 @@ class BattleForBretagardEffect extends OneShotEffect {
 
 class BattleForBretagardTarget extends TargetPermanent {
 
-    private static final FilterPermanent filter = new FilterPermanent(
+    private static final FilterPermanent filter = new FilterControlledPermanent(
             "artifact tokens and/or creature tokens you control with different names"
     );
 
