@@ -4,6 +4,8 @@ import com.google.common.base.CharMatcher;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
+import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.MultikickerAbility;
@@ -1279,6 +1281,14 @@ public class VerifyCardDataTest {
         // special check: Sagas need to have saga ability added
         if (card.hasSubtype(SubType.SAGA, null) && !card.getAbilities().containsClass(SagaAbility.class)) {
             fail(card, "abilities", "card is a Saga but is missing this.addAbility(sagaAbility)");
+        }
+
+        // special check: Werewolves front ability should only be on front and vice versa
+        if (card.getAbilities().containsClass(WerewolfFrontTriggeredAbility.class) && card.isNightCard()) {
+            fail(card, "abilities", "card is a back face werewolf with a front face ability");
+        }
+        if (card.getAbilities().containsClass(WerewolfBackTriggeredAbility.class) && !card.isNightCard()) {
+            fail(card, "abilities", "card is a front face werewolf with a back face ability");
         }
 
         // special check: missing or wrong ability/effect hints

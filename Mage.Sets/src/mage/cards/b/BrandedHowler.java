@@ -1,10 +1,10 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -33,8 +33,7 @@ public final class BrandedHowler extends CardImpl {
         this.transformable = true;
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Branded Howler.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
+       this.addAbility(new WerewolfBackTriggeredAbility());
     }
 
     private BrandedHowler(final BrandedHowler card) {

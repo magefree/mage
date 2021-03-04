@@ -2,20 +2,17 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
@@ -43,8 +40,7 @@ public final class WerewolfRansacker extends CardImpl {
         this.addAbility(new WerewolfRansackerAbility());
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Werewolf Ransacker.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new WerewolfBackTriggeredAbility());
     }
 
     private WerewolfRansacker(final WerewolfRansacker card) {
@@ -59,14 +55,12 @@ public final class WerewolfRansacker extends CardImpl {
 
 class WerewolfRansackerAbility extends TriggeredAbilityImpl {
 
-    static final String RULE_TEXT = "Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller";
-
-    public WerewolfRansackerAbility() {
+    WerewolfRansackerAbility() {
         super(Zone.BATTLEFIELD, new WerewolfRansackerEffect(), true);
         this.addTarget(new TargetArtifactPermanent());
     }
 
-    public WerewolfRansackerAbility(final WerewolfRansackerAbility ability) {
+    private WerewolfRansackerAbility(final WerewolfRansackerAbility ability) {
         super(ability);
     }
 
@@ -91,17 +85,18 @@ class WerewolfRansackerAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return RULE_TEXT + '.';
+        return "Whenever this creature transforms into {this}, you may destroy target artifact. If that artifact " +
+                "is put into a graveyard this way, {this} deals 3 damage to that artifact's controller";
     }
 }
 
 class WerewolfRansackerEffect extends OneShotEffect {
 
-    public WerewolfRansackerEffect() {
+    WerewolfRansackerEffect() {
         super(Outcome.DestroyPermanent);
     }
 
-    public WerewolfRansackerEffect(final WerewolfRansackerEffect effect) {
+    private WerewolfRansackerEffect(final WerewolfRansackerEffect effect) {
         super(effect);
     }
 
@@ -112,23 +107,16 @@ class WerewolfRansackerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int affectedTargets = 0;
-        if (this.targetPointer != null && !this.targetPointer.getTargets(game, source).isEmpty()) {
-            for (UUID permanentId : this.targetPointer.getTargets(game, source)) {
-                Permanent permanent = game.getPermanent(permanentId);
-                if (permanent != null) {
-                    if (permanent.destroy(source, game, false)) {
-                        affectedTargets++;
-                        if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
-                            Player player = game.getPlayer(permanent.getControllerId());
-                            if (player != null) {
-                                player.damage(3, source.getSourceId(), source, game);
-                            }
-                        }
-                    }
-                }
-            }
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent == null) {
+            return false;
         }
-        return affectedTargets > 0;
+        Player player = game.getPlayer(permanent.getControllerId());
+        permanent.destroy(source, game, false);
+        if (game.getState().getZone(permanent.getId()) != Zone.GRAVEYARD || player == null) {
+            return true;
+        }
+        player.damage(3, source.getSourceId(), source, game);
+        return true;
     }
 }

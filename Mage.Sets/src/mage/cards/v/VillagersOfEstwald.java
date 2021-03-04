@@ -1,20 +1,14 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
-
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -34,8 +28,7 @@ public final class VillagersOfEstwald extends CardImpl {
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Villagers of Estwald.
         this.addAbility(new TransformAbility());
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new WerewolfFrontTriggeredAbility());
     }
 
     private VillagersOfEstwald(final VillagersOfEstwald card) {

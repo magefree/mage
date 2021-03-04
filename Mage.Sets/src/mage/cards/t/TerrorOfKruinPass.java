@@ -1,41 +1,29 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.TransformedCondition;
-import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
-import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
+import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.MenaceAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class TerrorOfKruinPass extends CardImpl {
 
-    private static final String ruleText = "Werewolves you control have menace. (They can't be blocked except by two or more creatures.)";
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Werewolf you control");
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(SubType.WEREWOLF.getPredicate());
-    }
+    private static final FilterPermanent filter = new FilterPermanent(SubType.WEREWOLF, "Werewolves");
 
     public TerrorOfKruinPass(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");
         this.subtype.add(SubType.WEREWOLF);
 
         // this card is the second face of double-faced card
@@ -47,13 +35,14 @@ public final class TerrorOfKruinPass extends CardImpl {
         this.toughness = new MageInt(3);
 
         this.addAbility(DoubleStrikeAbility.getInstance());
+
         // Werewolves you control have menace. (They can't be blocked except by two or more creatures.)
-        Effect effect = new ConditionalContinuousEffect(new GainAbilityAllEffect(new MenaceAbility(), Duration.Custom, filter), new TransformedCondition(), ruleText);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-        
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
+                new MenaceAbility(false), Duration.WhileOnBattlefield, filter, false
+        )));
+
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Terror of Kruin Pass.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.instance, TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new WerewolfBackTriggeredAbility());
     }
 
     private TerrorOfKruinPass(final TerrorOfKruinPass card) {
