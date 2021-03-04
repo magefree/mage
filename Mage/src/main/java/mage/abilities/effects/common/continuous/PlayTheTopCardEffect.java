@@ -82,7 +82,7 @@ public class PlayTheTopCardEffect extends AsThoughEffectImpl {
 
         // must be your card
         Player player = game.getPlayer(cardToCheck.getOwnerId());
-        if (player == null) {
+        if (player == null || !player.getId().equals(affectedControllerId)) {
             return false;
         }
 
