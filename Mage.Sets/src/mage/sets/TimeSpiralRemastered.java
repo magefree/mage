@@ -26,7 +26,7 @@ public class TimeSpiralRemastered extends ExpansionSet {
     private TimeSpiralRemastered() {
         super("Time Spiral Remastered", "TSR", ExpansionSet.buildDate(2021, 3, 19), SetType.SUPPLEMENTAL);
         this.hasBoosters = true;
-        this.hasBasicLands = false;
+        this.hasBasicLands = true;
         this.maxCardNumberInBooster = 410;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
