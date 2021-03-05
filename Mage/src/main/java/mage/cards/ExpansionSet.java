@@ -561,56 +561,44 @@ public abstract class ExpansionSet implements Serializable {
 
         List<CardInfo> specialMythic = getSpecialMythic();
         specialCards += specialMythic.size();
+
         List<CardInfo> specialRare = getSpecialRare();
         specialCards += specialRare.size();
+
         List<CardInfo> specialUncommon = getSpecialUncommon();
         specialCards += specialUncommon.size();
-        List<CardInfo> specialCommon = getSpecialCommon();
 
+        List<CardInfo> specialCommon = getSpecialCommon();
         specialCards += specialCommon.size();
 
         if (specialCards > 0) {
             for (int i = 0; i < numBoosterSpecial; i++) {
-                if (RandomUtil.nextInt(15) < 10) {
-                    if (!specialCommon.isEmpty()) {
-                        addToBooster(booster, specialCommon);
-                    } else {
-                        i--;
-                    }
+                if (!specialCommon.isEmpty()
+                        && RandomUtil.nextInt(15) < 10) {
+                    addToBooster(booster, specialCommon);
                     continue;
                 }
-                if (RandomUtil.nextInt(4) < 3) {
-                    if (!specialUncommon.isEmpty()) {
-                        addToBooster(booster, specialUncommon);
-                    } else {
-                        i--;
-                    }
+                if (!specialUncommon.isEmpty()
+                        && RandomUtil.nextInt(4) < 3) {
+                    addToBooster(booster, specialUncommon);
                     continue;
                 }
-                if (RandomUtil.nextInt(8) < 7) {
-                    if (!specialRare.isEmpty()) {
-                        addToBooster(booster, specialRare);
-                    } else {
-                        i--;
-                    }
+                if (!specialRare.isEmpty()
+                        && RandomUtil.nextInt(8) < 7) {
+                    addToBooster(booster, specialRare);
                     continue;
                 }
                 if (!specialMythic.isEmpty()) {
-                    if (!specialBonus.isEmpty()) {
-                        if (RandomUtil.nextInt(3) < 2) {
-                            addToBooster(booster, specialMythic);
-                            continue;
-                        }
-                    } else {
+                    if (specialBonus.isEmpty() || RandomUtil.nextInt(3) < 2) {
                         addToBooster(booster, specialMythic);
                         continue;
                     }
-                } else {
-                    i--;
                 }
                 if (!specialBonus.isEmpty()) {
                     addToBooster(booster, specialBonus);
+                    continue;
                 }
+                i--;
             }
         }
     }
