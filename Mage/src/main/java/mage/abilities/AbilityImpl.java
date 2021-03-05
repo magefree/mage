@@ -142,6 +142,10 @@ public abstract class AbilityImpl implements Ability {
             this.id = UUID.randomUUID();
         }
         getEffects().newId();
+
+        for (Ability sub : getSubAbilities()) {
+            sub.newId();
+        }
     }
 
     @Override

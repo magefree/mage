@@ -180,13 +180,11 @@ public class SuspendAbility extends SpecialAction {
         ability1.setSourceId(card.getId());
         ability1.setControllerId(card.getOwnerId());
         game.getState().addOtherAbility(card, ability1);
-        game.getState().addAbility(ability1, source.getSourceId(), card);
 
         SuspendPlayCardAbility ability2 = new SuspendPlayCardAbility();
         ability2.setSourceId(card.getId());
         ability2.setControllerId(card.getOwnerId());
         game.getState().addOtherAbility(card, ability2);
-        game.getState().addAbility(ability2, source.getSourceId(), card);
     }
 
     public static UUID getSuspendExileId(UUID controllerId, Game game) {

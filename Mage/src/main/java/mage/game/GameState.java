@@ -1081,7 +1081,8 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param attachedTo
      * @param ability
      * @param copyAbility copies non MageSingleton abilities before adding to
-     *                    state
+     *                    state (allows to have multiple instances in one object,
+     *                    e.g. false param will simulate keyword/singletone)
      */
     public void addOtherAbility(Card attachedTo, Ability ability, boolean copyAbility) {
         checkWrongDynamicAbilityUsage(attachedTo, ability);
@@ -1090,7 +1091,10 @@ public class GameState implements Serializable, Copyable<GameState> {
         if (ability instanceof MageSingleton || !copyAbility) {
             newAbility = ability;
         } else {
+            // must use new id, so you can add multiple instances of the same ability
+            // (example: gained Cascade from multiple Imoti, Celebrant of Bounty)
             newAbility = ability.copy();
+            newAbility.newId();
         }
         newAbility.setSourceId(attachedTo.getId());
         newAbility.setControllerId(attachedTo.getOwnerId());

@@ -77,9 +77,6 @@ public class GainAbilitySpellsEffect extends ContinuousEffectImpl {
             if (card == null || !filter.match(stackObject, game)) {
                 continue;
             }
-            if (ability instanceof MageSingleton && card.hasAbility(ability, game)) {
-                continue;
-            }
             game.getState().addOtherAbility(card, ability);
         }
         return true;

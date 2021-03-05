@@ -404,4 +404,62 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Mountain", 1);
         assertPermanentCount(playerA, "Island", 1);
     }
+
+    @Test
+    public void test_AllowsMultipleInstancesOfGainedTriggers() {
+        // bug:  multiple copies of Imoti, Celebrant of Bounty only giving cascade once
+        // reason: gained ability used same id, so only one trigger were possible (now it uses new ids)
+        removeAllCardsFromHand(playerA);
+        removeAllCardsFromLibrary(playerA);
+        skipInitShuffling();
+
+        // Spells you cast with converted mana cost 6 or greater have cascade.
+        // Cascade
+        // (When you cast this spell exile cards from the top of your library until you exile a
+        // nonland card whose converted mana cost is less than this spell's converted mana cost. You may cast
+        // that spell without paying its mana cost if its converted mana cost is less than this spell's
+        // converted mana cost. Then put all cards exiled this way that weren't cast on the bottom of
+        // your library in a random order.)
+        addCard(Zone.BATTLEFIELD, playerA, "Imoti, Celebrant of Bounty", 1); // {3}{G}{U}
+        //
+        addCard(Zone.LIBRARY, playerA, "Swamp", 1);
+        addCard(Zone.LIBRARY, playerA, "Lightning Bolt", 1);
+        addCard(Zone.LIBRARY, playerA, "Swamp", 1);
+        addCard(Zone.LIBRARY, playerA, "Lightning Bolt", 1);
+        addCard(Zone.LIBRARY, playerA, "Swamp", 1);
+        //
+        // You may have Spark Double enter the battlefield as a copy of a creature or planeswalker you control,
+        // except it enters with an additional +1/+1 counter on it if it’s a creature, it enters with an
+        // additional loyalty counter on it if it’s a planeswalker, and it isn’t legendary if that
+        // permanent is legendary.
+        addCard(Zone.HAND, playerA, "Spark Double", 1); // {3}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        //
+        addCard(Zone.HAND, playerA, "Alpha Tyrranax", 1); // {4}{G}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+
+        // cast spark and make imoti's copy
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Spark Double");
+        setChoice(playerA, "Yes"); // use copy
+        setChoice(playerA, "Imoti, Celebrant of Bounty"); // copy of imoti
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after copy", 1, PhaseStep.PRECOMBAT_MAIN,  playerA, "Imoti, Celebrant of Bounty", 2);
+
+        // cast big spell and catch cascade 2x times (from two copies)
+        // possible bug: cascade activates only 1x times
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alpha Tyrranax");
+        checkStackSize("afer big spell", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 3);
+        setChoice(playerA, "cascade"); // choice between 2x gained cascades
+        setChoice(playerA, "Yes"); // cast first bolt by first cascade
+        addTarget(playerA, playerB); // target for first bolt
+        setChoice(playerA, "Yes"); // cast second bold by second cascade
+        addTarget(playerA, playerB); // target for second bolt
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+
+        assertLife(playerB, 20 - 3 * 2); // 2x bolts from 2x cascades
+    }
 }
