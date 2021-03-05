@@ -707,6 +707,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void untap(Game game);
 
+    void updateRange(Game game);
+
     ManaOptions getManaAvailable(Game game);
 
     void addAvailableTriggeredMana(List<Mana> netManaAvailable);

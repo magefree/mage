@@ -483,7 +483,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void beginTurn(Game game) {
         this.landsPlayed = 0;
-        updateRangeOfInfluence(game);
+        updateRange(game);
     }
 
     @Override
@@ -491,7 +491,8 @@ public abstract class PlayerImpl implements Player, Serializable {
         return range;
     }
 
-    protected void updateRangeOfInfluence(Game game) {
+    @Override
+    public void updateRange(Game game) {
         // 20100423 - 801.2c
         // 801.2c The particular players within each player’s range of influence are determined as each turn begins.
         inRange.clear();
@@ -523,6 +524,13 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public Set<UUID> getInRange() {
+        if (inRange.isEmpty()) {
+            // runtime check: inRange filled on beginTurn, but unit tests adds cards by cheat engine before game starting,
+            // so inRange will be empty and some ETB effects can be broken (example: Spark Double puts direct to battlefield).
+            // Cheat engine already have a workaround, so that error must not be visible in normal situation.
+            throw new IllegalStateException("Wrong code usage (game is not started, but you call getInRange in some effects).");
+        }
+
         return inRange;
     }
 

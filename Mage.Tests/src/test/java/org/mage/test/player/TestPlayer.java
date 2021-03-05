@@ -3024,6 +3024,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void updateRange(Game game) {
+        computerPlayer.updateRange(game);
+    }
+
+    @Override
     public UUID getId() {
         return computerPlayer.getId();
     }

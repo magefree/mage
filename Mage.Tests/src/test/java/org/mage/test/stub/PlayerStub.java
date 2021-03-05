@@ -1031,6 +1031,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void updateRange(Game game) {
+
+    }
+
+    @Override
     public ManaOptions getManaAvailable(Game game) {
         return null;
     }

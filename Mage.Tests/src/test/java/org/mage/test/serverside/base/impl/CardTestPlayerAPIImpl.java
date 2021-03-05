@@ -298,6 +298,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                 (maxTurn > this.stopOnTurn) || (maxTurn == this.stopOnTurn && maxPhase > this.stopAtStep.getIndex()));
 
         if (!currentGame.isPaused()) {
+            // workaround to fill range info (cause real range fills after game start, but some cheated cards needs range on ETB)
+            for (Player player : currentGame.getPlayers().values()) {
+                player.updateRange(currentGame);
+            }
+            // add cards to game
             for (Player player : currentGame.getPlayers().values()) {
                 TestPlayer testPlayer = (TestPlayer) player;
                 currentGame.cheat(testPlayer.getId(), getCommands(testPlayer));
