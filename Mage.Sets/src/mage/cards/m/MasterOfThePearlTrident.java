@@ -1,8 +1,7 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -12,11 +11,11 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class MasterOfThePearlTrident extends CardImpl {
@@ -28,15 +27,20 @@ public final class MasterOfThePearlTrident extends CardImpl {
     }
 
     public MasterOfThePearlTrident(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}");
         this.subtype.add(SubType.MERFOLK);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
         // Other Merfolk creatures you control get +1/+1 and have islandwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new IslandwalkAbility(), Duration.WhileOnBattlefield, filter, true)));
+        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(
+                1, 1, Duration.WhileOnBattlefield, filter, true
+        ));
+        ability.addEffect(new GainAbilityControlledEffect(
+                new IslandwalkAbility(), Duration.WhileOnBattlefield, filter, true
+        ).setText("and have islandwalk"));
+        this.addAbility(ability);
     }
 
     private MasterOfThePearlTrident(final MasterOfThePearlTrident card) {

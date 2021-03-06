@@ -6,9 +6,9 @@ import mage.constants.SuperType;
 import mage.constants.TargetController;
 import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.KickedSpellPredicate;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 
@@ -557,6 +557,12 @@ public final class StaticFilters {
 
     static {
         FILTER_SPELL_OR_ABILITY.setLockedFilter(true);
+    }
+
+    public static final FilterStackObject FILTER_SPELL_OR_ABILITY_A = new FilterStackObject("a spell or ability");
+
+    static {
+        FILTER_SPELL_OR_ABILITY_A.setLockedFilter(true);
     }
 
     public static final FilterCreatureSpell FILTER_SPELL_A_CREATURE = new FilterCreatureSpell("a creature spell");

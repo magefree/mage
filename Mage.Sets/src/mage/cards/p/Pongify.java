@@ -43,7 +43,7 @@ class PongifyEffect extends OneShotEffect {
 
     public PongifyEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "That creature's controller creates a 3/3 green Ape creature token";
+        this.staticText = "Its controller creates a 3/3 green Ape creature token";
     }
 
     public PongifyEffect(final PongifyEffect effect) {

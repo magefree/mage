@@ -20,7 +20,7 @@ public class BecomesTargetTriggeredAbility extends TriggeredAbilityImpl {
     private final SetTargetPointer setTargetPointer;
 
     public BecomesTargetTriggeredAbility(Effect effect) {
-        this(effect, StaticFilters.FILTER_SPELL_OR_ABILITY);
+        this(effect, StaticFilters.FILTER_SPELL_OR_ABILITY_A);
     }
 
     public BecomesTargetTriggeredAbility(Effect effect, FilterStackObject filter) {
