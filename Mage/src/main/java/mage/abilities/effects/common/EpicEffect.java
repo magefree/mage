@@ -55,7 +55,7 @@ public class EpicEffect extends OneShotEffect {
             if (spell == null) {
                 return false;
             }
-            spell = spell.copySpell(source.getControllerId(), game);
+            spell = spell.copySpell(game, source, source.getControllerId()); // it's a fake copy, real copy with events in EpicPushEffect
             // Remove Epic effect from the spell
             Effect epicEffect = null;
             for (Effect effect : spell.getSpellAbility().getEffects()) {

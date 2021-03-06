@@ -74,6 +74,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public abstract class GameImpl implements Game, Serializable {
 
@@ -552,7 +553,7 @@ public abstract class GameImpl implements Game, Serializable {
         // copied cards removes, but delayed triggered possible from it, see https://github.com/magefree/mage/issues/5437
         // TODO: remove that workround after LKI rework, see GameState.copyCard
         if (card == null) {
-            card = (Card) state.getValue(GameState.COPIED_FROM_CARD_KEY + cardId.toString());
+            card = (Card) state.getValue(GameState.COPIED_CARD_KEY + cardId.toString());
         }
         return card;
     }
@@ -1421,7 +1422,7 @@ public abstract class GameImpl implements Game, Serializable {
                             errorContinueCounter++;
                             continue;
                         } else {
-                            throw new MageException("Error in testclass");
+                            throw new MageException("Error in unit tests");
                         }
                     } finally {
                         setCheckPlayableState(false);
@@ -1734,7 +1735,7 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public Card copyCard(Card cardToCopy, Ability source, UUID newController) {
-        return state.copyCard(cardToCopy, source, this);
+        return state.copyCard(cardToCopy, newController, this);
     }
 
     /**
@@ -1947,48 +1948,67 @@ public abstract class GameImpl implements Game, Serializable {
             somethingHappened = true;
         }
 
-        // 704.5e If a copy of a spell is in a zone other than the stack, it ceases to exist. If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
-        // (Isochron Scepter) 12/1/2004: If you don't want to cast the copy, you can choose not to; the copy ceases to exist the next time state-based actions are checked.
-        Iterator<Card> copiedCards = this.getState().getCopiedCards().iterator();
-        while (copiedCards.hasNext()) {
-            Card card = copiedCards.next();
-            if (card instanceof SplitCardHalf || card instanceof AdventureCardSpell || card instanceof ModalDoubleFacesCardHalf) {
-                continue; // only the main card is moves, not the halves (cause halfes is not copied - it uses original card -- TODO: need to fix (bugs with same card copy)?
+        // 704.5e
+        // If a copy of a spell is in a zone other than the stack, it ceases to exist.
+        // If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
+        // (Isochron Scepter) 12/1/2004: If you don't want to cast the copy, you can choose not to; the copy ceases
+        // to exist the next time state-based actions are checked.
+        //
+        // Copied cards can be stored in GameState.copiedCards or in game state value (until LKI rework)
+        Set<Card> allCopiedCards = new HashSet<>();
+        allCopiedCards.addAll(this.getState().getCopiedCards());
+        Map<String, Object> stateSavedCopiedCards = this.getState().getValues(GameState.COPIED_CARD_KEY);
+        allCopiedCards.addAll(stateSavedCopiedCards.values()
+                .stream()
+                .map(object -> (Card) object)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList())
+        );
+        for (Card copiedCard : allCopiedCards) {
+            // 1. Zone must be checked from main card only cause mdf parts can have different zones
+            //    (one side on battlefield, another side on outsize)
+            // 2. Copied card creates in OUTSIDE zone and put to stack manually in the same code,
+            //    so no SBA calls before real zone change (you will see here only unused cards like Isochron Scepter)
+            //    (Isochron Scepter) 12/1/2004: If you don't want to cast the copy, you can choose not to; the copy ceases
+            //    to exist the next time state-based actions are checked.
+            Zone zone = state.getZone(copiedCard.getMainCard().getId());
+            if (zone == Zone.BATTLEFIELD || zone == Zone.STACK) {
+                continue;
             }
-            Zone zone = state.getZone(card.getId());
-            if (zone != Zone.BATTLEFIELD && zone != Zone.STACK) {
-                // TODO: remember LKI of copied cards here after LKI rework
-                switch (zone) {
-                    case GRAVEYARD:
-                        for (Player player : getPlayers().values()) {
-                            if (player.getGraveyard().contains(card.getId())) {
-                                player.getGraveyard().remove(card);
-                                break;
-                            }
+            // TODO: remember LKI of copied cards here after LKI rework
+            switch (zone) {
+                case GRAVEYARD:
+                    for (Player player : getPlayers().values()) {
+                        if (player.getGraveyard().contains(copiedCard.getId())) {
+                            player.getGraveyard().remove(copiedCard);
+                            break;
                         }
-                        break;
-                    case HAND:
-                        for (Player player : getPlayers().values()) {
-                            if (player.getHand().contains(card.getId())) {
-                                player.getHand().remove(card);
-                                break;
-                            }
+                    }
+                    break;
+                case HAND:
+                    for (Player player : getPlayers().values()) {
+                        if (player.getHand().contains(copiedCard.getId())) {
+                            player.getHand().remove(copiedCard);
+                            break;
                         }
-                        break;
-                    case LIBRARY:
-                        for (Player player : getPlayers().values()) {
-                            if (player.getLibrary().getCard(card.getId(), this) != null) {
-                                player.getLibrary().remove(card.getId(), this);
-                                break;
-                            }
+                    }
+                    break;
+                case LIBRARY:
+                    for (Player player : getPlayers().values()) {
+                        if (player.getLibrary().getCard(copiedCard.getId(), this) != null) {
+                            player.getLibrary().remove(copiedCard.getId(), this);
+                            break;
                         }
-                        break;
-                    case EXILED:
-                        getExile().removeCard(card, this);
-                        break;
-                }
-                copiedCards.remove();
+                    }
+                    break;
+                case EXILED:
+                    getExile().removeCard(copiedCard, this);
+                    break;
             }
+
+            // remove copied card info
+            this.getState().getCopiedCards().remove(copiedCard);
+            this.getState().removeValue(GameState.COPIED_CARD_KEY + copiedCard.getId().toString());
         }
 
         List<Permanent> legendary = new ArrayList<>();

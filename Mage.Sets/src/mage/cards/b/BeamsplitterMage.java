@@ -16,6 +16,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.CopiedStackObjectEvent;
+import mage.game.events.CopyStackObjectEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -166,7 +167,13 @@ class BeamsplitterMageEffect extends OneShotEffect {
                 if (creature == null) {
                     return false;
                 }
-                Spell copy = spell.copySpell(source.getControllerId(), game);
+                // TODO: add support if multiple copies? See Twinning Staff
+                GameEvent gameEvent = new CopyStackObjectEvent(source, spell, source.getControllerId(), 1);
+                if (game.replaceEvent(gameEvent)) {
+                    return false;
+                }
+                Spell copy = spell.copySpell(game, source, source.getControllerId());
+                copy.setZone(Zone.STACK, game);
                 game.getStack().push(copy);
                 setTarget:
                 for (UUID modeId : copy.getSpellAbility().getModes().getSelectedModes()) {

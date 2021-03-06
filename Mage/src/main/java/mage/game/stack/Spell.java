@@ -766,8 +766,31 @@ public class Spell extends StackObjImpl implements Card {
         return new Spell(this);
     }
 
-    public Spell copySpell(UUID newController, Game game) {
-        Spell spellCopy = new Spell(this.card, this.ability.copySpell(), this.controllerId, this.fromZone, game);
+    /**
+     * Copy current spell on stack, but do not put copy back to stack (you can modify and put it later)
+     * <p>
+     * Warning, don't forget to call CopyStackObjectEvent and CopiedStackObjectEvent before and after copy
+     * CopyStackObjectEvent can change new copies amount, see Twinning Staff
+     * <p>
+     * Warning, don't forget to call spell.setZone before push to stack
+     *
+     * @param game
+     * @param newController controller of the copied spell
+     * @return
+     */
+    public Spell copySpell(Game game, Ability source, UUID newController) {
+        // copied spells must use copied cards
+        // spell can be from card's part (mdf/adventure), but you must copy FULL card
+        Card copiedMainCard = game.copyCard(this.card.getMainCard(), source, newController);
+        // find copied part
+        Map<UUID, MageObject> mapOldToNew = CardUtil.getOriginalToCopiedPartsMap(this.card.getMainCard(), copiedMainCard);
+        if (!mapOldToNew.containsKey(this.card.getId())) {
+            throw new IllegalStateException("Can't find card id after main card copy: " + copiedMainCard.getName());
+        }
+        Card copiedPart = (Card) mapOldToNew.get(this.card.getId());
+
+        // copy spell
+        Spell spellCopy = new Spell(copiedPart, this.ability.copySpell(this.card, copiedPart), this.controllerId, this.fromZone, game);
         boolean firstDone = false;
         for (SpellAbility spellAbility : this.getSpellAbilities()) {
             if (!firstDone) {
@@ -939,6 +962,12 @@ public class Spell extends StackObjImpl implements Card {
         this.copyFrom = (copyFrom != null ? copyFrom.copy() : null);
     }
 
+    /**
+     * Game processing a copies as normal cards, so you don't need to check spell's copy for move/exile
+     * Use this only in exceptional situations or skip unaffected code/choices
+     *
+     * @return
+     */
     @Override
     public boolean isCopy() {
         return this.copy;
@@ -1006,6 +1035,7 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public void setZone(Zone zone, Game game) {
         card.setZone(zone, game);
+        game.getState().setZone(this.getId(), Zone.STACK);
     }
 
     @Override
@@ -1039,8 +1069,8 @@ public class Spell extends StackObjImpl implements Card {
             return null;
         }
         for (int i = 0; i < gameEvent.getAmount(); i++) {
-            spellCopy = this.copySpell(newControllerId, game);
-            game.getState().setZone(spellCopy.getId(), Zone.STACK); // required for targeting ex: Nivmagus Elemental
+            spellCopy = this.copySpell(game, source, newControllerId);
+            spellCopy.setZone(Zone.STACK, game);  // required for targeting ex: Nivmagus Elemental
             game.getStack().push(spellCopy);
             if (chooseNewTargets) {
                 spellCopy.chooseNewTargets(game, newControllerId);

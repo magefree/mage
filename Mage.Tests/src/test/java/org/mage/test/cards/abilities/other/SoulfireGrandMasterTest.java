@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.other;
 
 import mage.constants.PhaseStep;
@@ -7,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author BetaSteward
  */
 public class SoulfireGrandMasterTest extends CardTestPlayerBase {
@@ -17,7 +15,6 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
      * and sorcery spells you control have lifelink. {2}{U/R}{U/R}: The next
      * time you cast an instant or sorcery spell from your hand this turn, put
      * that card into your hand instead of into your graveyard as it resolves.
-     *
      */
     @Test
     public void testSpellsGainLifelink() {
@@ -120,19 +117,23 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
 
     /**
      * Test copied instant spell gives also life
-     *
      */
     @Test
-    public void testCopySpell() {
+    public void test_CopiesMustHaveGainedLifelink() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.HAND, playerA, "Lightning Bolt");
+        //
+        // Instant and sorcery spells you control have lifelink.
         addCard(Zone.BATTLEFIELD, playerA, "Soulfire Grand Master", 1);
+        //
         // {2}{U}{R}: Copy target instant or sorcery spell you control. You may choose new targets for the copy.
         addCard(Zone.BATTLEFIELD, playerA, "Nivix Guildmage", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{U}{R}:");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
+        checkStackSize("after copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2); // 2x bolts
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -143,12 +144,10 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
 
         assertLife(playerB, 14);
         assertLife(playerA, 26);
-
     }
 
     /**
      * Test damage of activated ability of a permanent does not gain lifelink
-     *
      */
     @Test
     public void testActivatedAbility() {
@@ -235,7 +234,6 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
     /**
      * Check if second ability resolved, the next spell that is counterer won't
      * go to hand back because it did not resolve
-     *
      */
     @Test
     public void testSoulfireCounteredSpellDontGoesBack() {
@@ -269,7 +267,6 @@ public class SoulfireGrandMasterTest extends CardTestPlayerBase {
      * caster life. It should as it has lifelink, and it's Deflecting Palm (an
      * instant) dealing damage. I was playing against a human in Standard
      * Constructed.
-     *
      */
     @Test
     public void testWithDeflectingPalm() {

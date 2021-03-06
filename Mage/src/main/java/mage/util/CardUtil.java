@@ -1228,39 +1228,66 @@ public final class CardUtil {
      * @return
      */
     public static Set<UUID> getObjectParts(MageObject object) {
-        Set<UUID> res = new HashSet<>();
+        Set<UUID> res = new LinkedHashSet<>(); // set must be ordered
+        List<MageObject> allParts = getObjectPartsAsObjects(object);
+        allParts.forEach(part -> {
+            res.add(part.getId());
+        });
+        return res;
+    }
+
+    public static List<MageObject> getObjectPartsAsObjects(MageObject object) {
+        List<MageObject> res = new ArrayList<>();
         if (object == null) {
             return res;
         }
 
         if (object instanceof SplitCard || object instanceof SplitCardHalf) {
             SplitCard mainCard = (SplitCard) ((Card) object).getMainCard();
-            res.add(object.getId());
-            res.add(mainCard.getId());
-            res.add(mainCard.getLeftHalfCard().getId());
-            res.add(mainCard.getRightHalfCard().getId());
+            res.add(mainCard);
+            res.add(mainCard.getLeftHalfCard());
+            res.add(mainCard.getRightHalfCard());
         } else if (object instanceof ModalDoubleFacesCard || object instanceof ModalDoubleFacesCardHalf) {
             ModalDoubleFacesCard mainCard = (ModalDoubleFacesCard) ((Card) object).getMainCard();
-            res.add(object.getId());
-            res.add(mainCard.getId());
-            res.add(mainCard.getLeftHalfCard().getId());
-            res.add(mainCard.getRightHalfCard().getId());
+            res.add(mainCard);
+            res.add(mainCard.getLeftHalfCard());
+            res.add(mainCard.getRightHalfCard());
         } else if (object instanceof AdventureCard || object instanceof AdventureCardSpell) {
             AdventureCard mainCard = (AdventureCard) ((Card) object).getMainCard();
-            res.add(object.getId());
-            res.add(mainCard.getId());
-            res.add(mainCard.getSpellCard().getId());
+            res.add(mainCard);
+            res.add(mainCard.getSpellCard());
         } else if (object instanceof Spell) {
             // example: activate Lightning Storm's ability from the spell on the stack
-            res.add(object.getId());
-            res.addAll(getObjectParts(((Spell) object).getCard()));
+            res.add(object);
+            res.addAll(getObjectPartsAsObjects(((Spell) object).getCard()));
         } else if (object instanceof Commander) {
             // commander can contains double sides
-            res.add(object.getId());
-            res.addAll(getObjectParts(((Commander) object).getSourceObject()));
+            res.add(object);
+            res.addAll(getObjectPartsAsObjects(((Commander) object).getSourceObject()));
         } else {
-            res.add(object.getId());
+            res.add(object);
         }
         return res;
+    }
+
+    /**
+     * Find mapping from original to copied card (e.g. map left side with copied left side, etc)
+     *
+     * @param originalCard
+     * @param copiedCard
+     * @return
+     */
+    public static Map<UUID, MageObject> getOriginalToCopiedPartsMap(Card originalCard, Card copiedCard) {
+        List<UUID> oldIds = new ArrayList<>(CardUtil.getObjectParts(originalCard));
+        List<MageObject> newObjects = new ArrayList<>(CardUtil.getObjectPartsAsObjects(copiedCard));
+        if (oldIds.size() != newObjects.size()) {
+            throw new IllegalStateException("Found wrong card parts after copy: " + originalCard.getName() + " -> " + copiedCard.getName());
+        }
+
+        Map<UUID, MageObject> mapOldToNew = new HashMap<>();
+        for (int i = 0; i < oldIds.size(); i++) {
+            mapOldToNew.put(oldIds.get(i), newObjects.get(i));
+        }
+        return mapOldToNew;
     }
 }

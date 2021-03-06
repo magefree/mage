@@ -11,7 +11,6 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class ReturnToLibrarySpellEffect extends OneShotEffect {
@@ -20,7 +19,7 @@ public class ReturnToLibrarySpellEffect extends OneShotEffect {
 
     public ReturnToLibrarySpellEffect(boolean top) {
         super(Outcome.Neutral);
-        staticText = "Put {this} on "+ (top ? "top":"the bottom") + " of its owner's library";
+        staticText = "Put {this} on " + (top ? "top" : "the bottom") + " of its owner's library";
         this.toTop = top;
     }
 
@@ -34,7 +33,7 @@ public class ReturnToLibrarySpellEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Spell spell = game.getStack().getSpell(source.getSourceId());
-            if (spell != null && !spell.isCopy()) {
+            if (spell != null) {
                 Card spellCard = spell.getCard();
                 if (spellCard != null) {
                     controller.moveCardToLibraryWithInfo(spellCard, source, game, Zone.STACK, toTop, true);

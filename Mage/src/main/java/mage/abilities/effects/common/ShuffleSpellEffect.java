@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -11,7 +10,6 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 
 /**
- *
  * @author nantuko
  */
 public class ShuffleSpellEffect extends OneShotEffect implements MageSingleton {
@@ -34,7 +32,7 @@ public class ShuffleSpellEffect extends OneShotEffect implements MageSingleton {
             // We have to use the spell id because in case of copied spells, the sourceId can be multiple times on the stack
             Spell spell = game.getStack().getSpell(source.getId());
             if (spell != null) {
-                if (controller.moveCards(spell, Zone.LIBRARY, source, game) && !spell.isCopy()) {
+                if (controller.moveCards(spell, Zone.LIBRARY, source, game)) {
                     Player owner = game.getPlayer(spell.getCard().getOwnerId());
                     if (owner != null) {
                         owner.shuffleLibrary(source, game);

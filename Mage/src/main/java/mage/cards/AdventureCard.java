@@ -18,7 +18,7 @@ import java.util.UUID;
 public abstract class AdventureCard extends CardImpl {
 
     /* The adventure spell card, i.e. Swift End. */
-    protected Card spellCard;
+    protected AdventureCardSpell spellCard;
 
     public AdventureCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, CardType[] typesSpell, String costs, String adventureName, String costsSpell) {
         super(ownerId, setInfo, types, costs);
@@ -28,11 +28,17 @@ public abstract class AdventureCard extends CardImpl {
     public AdventureCard(AdventureCard card) {
         super(card);
         this.spellCard = card.getSpellCard().copy();
-        ((AdventureCardSpell) this.spellCard).setParentCard(this);
+        this.spellCard.setParentCard(this);
     }
 
-    public Card getSpellCard() {
+    public AdventureCardSpell getSpellCard() {
         return spellCard;
+    }
+
+    public void setParts(AdventureCardSpell cardSpell) {
+        // for card copy only - set new parts
+        this.spellCard = cardSpell;
+        cardSpell.setParentCard(this);
     }
 
     @Override

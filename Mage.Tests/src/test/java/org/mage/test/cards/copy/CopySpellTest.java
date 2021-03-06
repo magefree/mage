@@ -1,11 +1,22 @@
 package org.mage.test.cards.copy;
 
+import mage.abilities.MageSingleton;
 import mage.abilities.keyword.FlyingAbility;
+import mage.cards.AdventureCard;
+import mage.cards.Card;
+import mage.cards.ModalDoubleFacesCard;
+import mage.cards.SplitCard;
+import mage.cards.repository.CardRepository;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.util.CardUtil;
+import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -55,24 +66,31 @@ public class CopySpellTest extends CardTestPlayerBase {
         // Target creature gets +3/+3 and gains flying until end of turn.
         addCard(Zone.HAND, playerA, "Angelic Blessing", 1); // {2}{W}
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        //
+        // Whenever you cast an instant or sorcery spell that targets only Zada, Hedron Grinder,
+        // copy that spell for each other creature you control that the spell could target.
+        // Each copy targets a different one of those creatures.
+        addCard(Zone.BATTLEFIELD, playerA, "Zada, Hedron Grinder", 1); // 3/3
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox", 1); // 2/4
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1); // 2/2
 
-        // Whenever you cast an instant or sorcery spell that targets only Zada, Hedron Grinder, copy that spell for each other creature you control that the spell could target. Each copy targets a different one of those creatures.
-        addCard(Zone.BATTLEFIELD, playerA, "Zada, Hedron Grinder", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Pillarfield Ox", 1);
-
-        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
-
+        // cast boost and copy it for another target (lion will not get boost cause can't be targeted)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angelic Blessing", "Zada, Hedron Grinder");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
+        assertAllCommandsUsed();
 
         assertGraveyardCount(playerA, "Angelic Blessing", 1);
-        assertPowerToughness(playerA, "Pillarfield Ox", 5, 7);
-        assertAbility(playerA, "Pillarfield Ox", FlyingAbility.getInstance(), true);
-        assertPowerToughness(playerA, "Zada, Hedron Grinder", 6, 6);
+        // original target
+        assertPowerToughness(playerA, "Zada, Hedron Grinder", 3 + 3, 3 + 3);
         assertAbility(playerA, "Zada, Hedron Grinder", FlyingAbility.getInstance(), true);
-
+        // copied target
+        assertPowerToughness(playerA, "Pillarfield Ox", 2 + 3, 4 + 3);
+        assertAbility(playerA, "Pillarfield Ox", FlyingAbility.getInstance(), true);
+        // can't target lion, so no boost
         assertPowerToughness(playerB, "Silvercoat Lion", 2, 2);
         assertAbility(playerB, "Silvercoat Lion", FlyingAbility.getInstance(), false);
     }
@@ -205,8 +223,8 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Wolf", 1); // created from Silverfur ability
     }
     */
-    
-    
+
+
     @Test
     public void ZadaHedronGrinderBoostWithCharm() {
         // Choose two -
@@ -443,7 +461,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         setChoice(playerA, "Yes"); // use copy
         setChoice(playerA, "Imoti, Celebrant of Bounty"); // copy of imoti
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after copy", 1, PhaseStep.PRECOMBAT_MAIN,  playerA, "Imoti, Celebrant of Bounty", 2);
+        checkPermanentCount("after copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Imoti, Celebrant of Bounty", 2);
 
         // cast big spell and catch cascade 2x times (from two copies)
         // possible bug: cascade activates only 1x times
@@ -461,5 +479,174 @@ public class CopySpellTest extends CardTestPlayerBase {
         assertAllCommandsUsed();
 
         assertLife(playerB, 20 - 3 * 2); // 2x bolts from 2x cascades
+    }
+
+    @Test
+    public void test_CopiedSpellsMustUseIndependentCards() {
+        // possible bug: copied spell on stack depends on the original spell/card
+        // https://github.com/magefree/mage/issues/7634
+
+        // Return any number of cards with different converted mana costs from your graveyard to your hand.
+        // Put Seasons Past on the bottom of its owner's library.
+        addCard(Zone.HAND, playerA, "Seasons Past", 1); // {4}{G}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 6);
+        //
+        addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears", 5); // for return
+        //
+        // Copy target instant or sorcery spell, except that the copy is red. You may choose new targets for the copy.
+        addCard(Zone.HAND, playerA, "Fork", 1); // {R}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        // cast season and make copy of it on stack
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 6);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Seasons Past");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fork", "Seasons Past", "Cast Seasons Past");
+        checkStackSize("after copy cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2); // season + fork
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
+        checkStackSize("after copy resolve", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2); // season + copied season
+        checkStackObject("after copy resolve", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Seasons Past", 2);
+
+        // resolve copied season (possible bug: after copied resolve it will return an original card too, so original spell will be fizzled)
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
+        setChoice(playerA, "Grizzly Bears"); // return to hand
+        checkStackSize("after copied resolve", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1);
+
+        // resolve original season
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
+        setChoice(playerA, "Grizzly Bears"); // return to hand
+        checkStackSize("after original resolve", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
+
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setStrictChooseMode(true);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_SimpleCopy_Card() {
+        Card sourceCard = CardRepository.instance.findCard("Grizzly Bears").getCard();
+        Card originalCard = CardRepository.instance.findCard("Grizzly Bears").getCard();
+        prepareZoneAndZCC(originalCard);
+        Card copiedCard = currentGame.copyCard(originalCard, null, playerA.getId());
+        // main
+        Assert.assertNotEquals("main - id must be different", originalCard.getId(), copiedCard.getId());
+        Assert.assertEquals("main - rules must be same", originalCard.getRules(), copiedCard.getRules());
+        abilitySourceMustBeSame(sourceCard, "main source");
+        abilitySourceMustBeSame(originalCard, "main original"); // original card can be broken after copyCard call
+        abilitySourceMustBeSame(copiedCard, "main copied");
+        //cardsMustHaveSameZoneAndZCC(originalCard, copiedCard, "main");
+    }
+
+    @Test
+    public void test_SimpleCopy_SplitCard() {
+        SplitCard sourceCard = (SplitCard) CardRepository.instance.findCard("Alive // Well").getCard();
+        SplitCard originalCard = (SplitCard) CardRepository.instance.findCard("Alive // Well").getCard();
+        prepareZoneAndZCC(originalCard);
+        SplitCard copiedCard = (SplitCard) currentGame.copyCard(originalCard, null, playerA.getId());
+        // main
+        Assert.assertNotEquals("main - id must be different", originalCard.getId(), copiedCard.getId());
+        Assert.assertEquals("main - rules must be same", originalCard.getRules(), copiedCard.getRules());
+        abilitySourceMustBeSame(sourceCard, "main source");
+        abilitySourceMustBeSame(originalCard, "main original");
+        abilitySourceMustBeSame(copiedCard, "main copied");
+        //cardsMustHaveSameZoneAndZCC(originalCard, copiedCard, "main");
+        // left
+        Assert.assertNotEquals("left - id must be different", originalCard.getLeftHalfCard().getId(), copiedCard.getLeftHalfCard().getId());
+        Assert.assertEquals("left - rules must be same", originalCard.getLeftHalfCard().getRules(), copiedCard.getLeftHalfCard().getRules());
+        Assert.assertEquals("left - parent ref", copiedCard.getLeftHalfCard().getParentCard().getId(), copiedCard.getId());
+        abilitySourceMustBeSame(originalCard.getLeftHalfCard(), "left original");
+        abilitySourceMustBeSame(copiedCard.getLeftHalfCard(), "left copied");
+        //cardsMustHaveSameZoneAndZCC(originalCard.getLeftHalfCard(), copiedCard.getLeftHalfCard(), "left");
+        // right
+        Assert.assertNotEquals("right - id must be different", originalCard.getRightHalfCard().getId(), copiedCard.getRightHalfCard().getId());
+        Assert.assertEquals("right - rules must be same", originalCard.getRightHalfCard().getRules(), copiedCard.getRightHalfCard().getRules());
+        Assert.assertEquals("right - parent ref", copiedCard.getRightHalfCard().getParentCard().getId(), copiedCard.getId());
+        abilitySourceMustBeSame(originalCard.getRightHalfCard(), "right original");
+        abilitySourceMustBeSame(copiedCard.getRightHalfCard(), "right copied");
+        //cardsMustHaveSameZoneAndZCC(originalCard.getRightHalfCard(), copiedCard.getRightHalfCard(), "right");
+    }
+
+    @Test
+    public void test_SimpleCopy_AdventureCard() {
+        AdventureCard sourceCard = (AdventureCard) CardRepository.instance.findCard("Animating Faerie").getCard();
+        AdventureCard originalCard = (AdventureCard) CardRepository.instance.findCard("Animating Faerie").getCard();
+        prepareZoneAndZCC(originalCard);
+        AdventureCard copiedCard = (AdventureCard) currentGame.copyCard(originalCard, null, playerA.getId());
+        // main
+        Assert.assertNotEquals("main - id must be different", originalCard.getId(), copiedCard.getId());
+        Assert.assertEquals("main - rules must be same", originalCard.getRules(), copiedCard.getRules());
+        abilitySourceMustBeSame(sourceCard, "main source");
+        abilitySourceMustBeSame(originalCard, "main original");
+        abilitySourceMustBeSame(copiedCard, "main copied");
+        //cardsMustHaveSameZoneAndZCC(originalCard, copiedCard, "main");
+        // right (spell)
+        Assert.assertNotEquals("right - id must be different", originalCard.getSpellCard().getId(), copiedCard.getSpellCard().getId());
+        Assert.assertEquals("right - rules must be same", originalCard.getSpellCard().getRules(), copiedCard.getSpellCard().getRules());
+        Assert.assertEquals("right - parent ref", copiedCard.getSpellCard().getParentCard().getId(), copiedCard.getId());
+        abilitySourceMustBeSame(originalCard.getSpellCard(), "right original");
+        abilitySourceMustBeSame(copiedCard.getSpellCard(), "right copied");
+        //cardsMustHaveSameZoneAndZCC(originalCard.getSpellCard(), copiedCard.getSpellCard(), "right");
+    }
+
+    @Test
+    public void test_SimpleCopy_MDFC() {
+        ModalDoubleFacesCard sourceCard = (ModalDoubleFacesCard) CardRepository.instance.findCard("Agadeem's Awakening").getCard();
+        ModalDoubleFacesCard originalCard = (ModalDoubleFacesCard) CardRepository.instance.findCard("Agadeem's Awakening").getCard();
+        prepareZoneAndZCC(originalCard);
+        ModalDoubleFacesCard copiedCard = (ModalDoubleFacesCard) currentGame.copyCard(originalCard, null, playerA.getId());
+        // main
+        Assert.assertNotEquals("main - id must be different", originalCard.getId(), copiedCard.getId());
+        Assert.assertEquals("main - rules must be same", originalCard.getRules(), copiedCard.getRules());
+        abilitySourceMustBeSame(sourceCard, "main source");
+        abilitySourceMustBeSame(originalCard, "main original");
+        abilitySourceMustBeSame(copiedCard, "main copied");
+        //cardsMustHaveSameZoneAndZCC(originalCard, copiedCard, "main");
+        // left
+        Assert.assertNotEquals("left - id must be different", originalCard.getLeftHalfCard().getId(), copiedCard.getLeftHalfCard().getId());
+        Assert.assertEquals("left - rules must be same", originalCard.getLeftHalfCard().getRules(), copiedCard.getLeftHalfCard().getRules());
+        Assert.assertEquals("left - parent ref", copiedCard.getLeftHalfCard().getParentCard().getId(), copiedCard.getId());
+        abilitySourceMustBeSame(originalCard.getLeftHalfCard(), "left original");
+        abilitySourceMustBeSame(copiedCard.getLeftHalfCard(), "left copied");
+        //cardsMustHaveSameZoneAndZCC(originalCard.getLeftHalfCard(), copiedCard.getLeftHalfCard(), "left");
+        // right
+        Assert.assertNotEquals("right - id must be different", originalCard.getRightHalfCard().getId(), copiedCard.getRightHalfCard().getId());
+        Assert.assertEquals("right - rules must be same", originalCard.getRightHalfCard().getRules(), copiedCard.getRightHalfCard().getRules());
+        Assert.assertEquals("right - parent ref", copiedCard.getRightHalfCard().getParentCard().getId(), copiedCard.getId());
+        abilitySourceMustBeSame(originalCard.getRightHalfCard(), "right original");
+        abilitySourceMustBeSame(copiedCard.getRightHalfCard(), "right copied");
+        //cardsMustHaveSameZoneAndZCC(originalCard.getRightHalfCard(), copiedCard.getRightHalfCard(), "right");
+    }
+
+    private void abilitySourceMustBeSame(Card card, String infoPrefix) {
+        Set<UUID> partIds = CardUtil.getObjectParts(card);
+
+        card.getAbilities(currentGame).forEach(ability -> {
+            // ability can refs to part or main card only
+            if (!partIds.contains(ability.getSourceId())) {
+                if (ability instanceof MageSingleton) {
+                    // sourceId don't work with MageSingleton abilities
+                    return;
+                }
+
+                Assert.fail(infoPrefix + " - " + "ability source must be same: " + ability.toString());
+            }
+        });
+    }
+
+    private void prepareZoneAndZCC(Card originalCard) {
+        // prepare custom zcc and zone for copy testing
+        originalCard.setZoneChangeCounter(5, currentGame);
+        originalCard.setZone(Zone.STACK, currentGame);
+    }
+
+    private void cardsMustHaveSameZoneAndZCC(Card originalCard, Card copiedCard, String infoPrefix) {
+        // zcc and zone are not copied, so you don't need it here yet
+        Zone zone1 = currentGame.getState().getZone(originalCard.getId());
+        Zone zone2 = currentGame.getState().getZone(copiedCard.getId());
+        int zcc1 = currentGame.getState().getZoneChangeCounter(originalCard.getId());
+        int zcc2 = currentGame.getState().getZoneChangeCounter(copiedCard.getId());
+        if (zone1 != zone2 || zcc1 != zcc2) {
+            Assert.fail(infoPrefix + " - " + "cards must have same zone and zcc: " + zcc1 + " - " + zone1 + " != " + zcc2 + " - " + zone2);
+        }
     }
 }

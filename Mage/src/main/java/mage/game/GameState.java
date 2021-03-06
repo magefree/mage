@@ -6,10 +6,7 @@ import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
-import mage.cards.AdventureCard;
-import mage.cards.Card;
-import mage.cards.ModalDoubleFacesCard;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.constants.Zone;
 import mage.designations.Designation;
 import mage.filter.common.FilterCreaturePermanent;
@@ -56,7 +53,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     private static final Logger logger = Logger.getLogger(GameState.class);
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(1024);
 
-    public static final String COPIED_FROM_CARD_KEY = "CopiedFromCard";
+    // save copied cards between game cycles (lki workaround)
+    // warning, do not use another keys with same starting text cause copy code search and clean all related values
+    public static final String COPIED_CARD_KEY = "CopiedCard";
 
     private final Players players;
     private final PlayerList playerList;
@@ -845,33 +844,16 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void addCard(Card card) {
-        setZone(card.getId(), Zone.OUTSIDE);
+        // all new cards and tokens must enter from outside
+        addCard(card, Zone.OUTSIDE);
+    }
+
+    private void addCard(Card card, Zone zone) {
+        setZone(card.getId(), zone);
 
         // add card specific abilities to game
         for (Ability ability : card.getInitAbilities()) {
             addAbility(ability, null, card);
-        }
-    }
-
-    public void removeCopiedCard(Card card) {
-        if (copiedCards.containsKey(card.getId())) {
-            copiedCards.remove(card.getId());
-            cardState.remove(card.getId());
-            zones.remove(card.getId());
-            zoneChangeCounter.remove(card.getId());
-        }
-        // TODO Watchers?
-        // TODO Abilities?
-        if (card instanceof SplitCard) {
-            removeCopiedCard(((SplitCard) card).getLeftHalfCard());
-            removeCopiedCard(((SplitCard) card).getRightHalfCard());
-        }
-        if (card instanceof ModalDoubleFacesCard) {
-            removeCopiedCard(((ModalDoubleFacesCard) card).getLeftHalfCard());
-            removeCopiedCard(((ModalDoubleFacesCard) card).getRightHalfCard());
-        }
-        if (card instanceof AdventureCard) {
-            removeCopiedCard(((AdventureCard) card).getSpellCard());
         }
     }
 
@@ -1022,6 +1004,27 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /**
+     * Return values list starting with searching key.
+     * <p>
+     * Usage example: if you want to find all saved values from related ability/effect
+     *
+     * @param startWithValue
+     * @return
+     */
+    public Map<String, Object> getValues(String startWithValue) {
+        if (startWithValue == null || startWithValue.isEmpty()) {
+            throw new IllegalArgumentException("Can't use empty search value");
+        }
+        Map<String, Object> res = new HashMap<>();
+        for (Map.Entry<String, Object> entry : this.values.entrySet()) {
+            if (entry.getKey().startsWith(startWithValue)) {
+                res.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return res;
+    }
+
+    /**
      * Best only use immutable objects, otherwise the states/values of the
      * object may be changed by AI simulation or rollbacks, because the Value
      * objects are not copied as the state class is copied. Mutable supported:
@@ -1033,6 +1036,15 @@ public class GameState implements Serializable, Copyable<GameState> {
      */
     public void setValue(String valueId, Object value) {
         values.put(valueId, value);
+    }
+
+    /**
+     * Remove saved value
+     *
+     * @param valueId
+     */
+    public void removeValue(String valueId) {
+        values.remove(valueId);
     }
 
     /**
@@ -1251,45 +1263,90 @@ public class GameState implements Serializable, Copyable<GameState> {
         return copiedCards.values();
     }
 
-    public Card copyCard(Card cardToCopy, Ability source, Game game) {
-        // main card
-        Card copiedCard = cardToCopy.copy();
-        copiedCard.assignNewId();
-        copiedCard.setOwnerId(source.getControllerId());
-        copiedCard.setCopy(true, cardToCopy);
-        copiedCards.put(copiedCard.getId(), copiedCard);
-        addCard(copiedCard);
+    /**
+     * Make full copy of the card and all of the card's parts and put to the game.
+     *
+     * @param mainCardToCopy
+     * @param newController
+     * @param game
+     * @return
+     */
+    public Card copyCard(Card mainCardToCopy, UUID newController, Game game) {
+        // runtime check
+        if (!mainCardToCopy.getId().equals(mainCardToCopy.getMainCard().getId())) {
+            // copyCard allows for main card only, if you catch it then check your targeting code
+            throw new IllegalArgumentException("Wrong code usage. You can copy only main card.");
+        }
 
-        // other faces
+        // must copy all card's parts
+        // zcc and zone must be new cause zcc copy logic need card usage info here, but it haven't:
+        // * reason 1: copied land must be played (+1 zcc), but copied spell must be put on stack and cast (+2 zcc)
+        // * reason 2: copied card or spell can be used later as blueprint for real copies (see Epic ability)
+        List<Card> copiedParts = new ArrayList<>();
+
+        // main part (prepare must be called after other parts)
+        Card copiedCard = mainCardToCopy.copy();
+        copiedParts.add(copiedCard);
+
+        // other parts
         if (copiedCard instanceof SplitCard) {
             // left
-            Card leftCard = ((SplitCard) copiedCard).getLeftHalfCard(); // TODO: must be new ID (bugs with same card copy)?
-            copiedCards.put(leftCard.getId(), leftCard);
-            addCard(leftCard);
+            SplitCardHalf leftOriginal = ((SplitCard) copiedCard).getLeftHalfCard();
+            SplitCardHalf leftCopied = leftOriginal.copy();
+            prepareCardForCopy(leftOriginal, leftCopied, newController);
+            copiedParts.add(leftCopied);
             // right
-            Card rightCard = ((SplitCard) copiedCard).getRightHalfCard();
-            copiedCards.put(rightCard.getId(), rightCard);
-            addCard(rightCard);
+            SplitCardHalf rightOriginal = ((SplitCard) copiedCard).getRightHalfCard();
+            SplitCardHalf rightCopied = rightOriginal.copy();
+            prepareCardForCopy(rightOriginal, rightCopied, newController);
+            copiedParts.add(rightCopied);
+            // sync parts
+            ((SplitCard) copiedCard).setParts(leftCopied, rightCopied);
         } else if (copiedCard instanceof ModalDoubleFacesCard) {
             // left
-            Card leftCard = ((ModalDoubleFacesCard) copiedCard).getLeftHalfCard(); // TODO: must be new ID (bugs with same card copy)?
-            copiedCards.put(leftCard.getId(), leftCard);
-            addCard(leftCard);
+            ModalDoubleFacesCardHalf leftOriginal = ((ModalDoubleFacesCard) copiedCard).getLeftHalfCard();
+            ModalDoubleFacesCardHalf leftCopied = leftOriginal.copy();
+            prepareCardForCopy(leftOriginal, leftCopied, newController);
+            copiedParts.add(leftCopied);
             // right
-            Card rightCard = ((ModalDoubleFacesCard) copiedCard).getRightHalfCard();
-            copiedCards.put(rightCard.getId(), rightCard);
-            addCard(rightCard);
+            ModalDoubleFacesCardHalf rightOriginal = ((ModalDoubleFacesCard) copiedCard).getRightHalfCard();
+            ModalDoubleFacesCardHalf rightCopied = rightOriginal.copy();
+            prepareCardForCopy(rightOriginal, rightCopied, newController);
+            copiedParts.add(rightCopied);
+            // sync parts
+            ((ModalDoubleFacesCard) copiedCard).setParts(leftCopied, rightCopied);
         } else if (copiedCard instanceof AdventureCard) {
-            Card spellCard = ((AdventureCard) copiedCard).getSpellCard();
-            copiedCards.put(spellCard.getId(), spellCard);
-            addCard(spellCard);
+            // right
+            AdventureCardSpell rightOriginal = ((AdventureCard) copiedCard).getSpellCard();
+            AdventureCardSpell rightCopied = rightOriginal.copy();
+            prepareCardForCopy(rightOriginal, rightCopied, newController);
+            copiedParts.add(rightCopied);
+            // sync parts
+            ((AdventureCard) copiedCard).setParts(rightCopied);
         }
+
+        // main part prepare (must be called after other parts cause it change ids for all)
+        prepareCardForCopy(mainCardToCopy, copiedCard, newController);
+
+        // add all parts to the game
+        copiedParts.forEach(card -> {
+            copiedCards.put(card.getId(), card);
+            addCard(card);
+        });
 
         // copied cards removes from game after battlefield/stack leaves, so remember it here as workaround to fix freeze, see https://github.com/magefree/mage/issues/5437
         // TODO: remove that workaround after LKI will be rewritten to support cross-steps/turns data transition and support copied cards
-        this.setValue(COPIED_FROM_CARD_KEY + copiedCard.getId(), cardToCopy.copy());
+        copiedParts.forEach(card -> {
+            this.setValue(COPIED_CARD_KEY + card.getId(), card.copy());
+        });
 
         return copiedCard;
+    }
+
+    private void prepareCardForCopy(Card originalCard, Card copiedCard, UUID newController) {
+        copiedCard.assignNewId();
+        copiedCard.setOwnerId(newController);
+        copiedCard.setCopy(true, originalCard);
     }
 
     public int getNextPermanentOrderNumber() {

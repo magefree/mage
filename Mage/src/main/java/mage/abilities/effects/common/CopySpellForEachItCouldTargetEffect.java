@@ -80,8 +80,9 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                 return false;
             }
 
-            // generate copies for each possible target, but do not put it to stack (use must choose targets in custom order later)
-            Spell copy = spell.copySpell(source.getControllerId(), game);
+            // TODO: add support if multiple copies? See Twinning Staff
+            // generate copies for each possible target, but do not put it to stack (must choose targets in custom order later)
+            Spell copy = spell.copySpell(game, source, source.getControllerId());
             modifyCopy(copy, game, source);
             Target sampleTarget = targetsToBeChanged.iterator().next().getTarget(copy);
             sampleTarget.setNotTarget(true);
@@ -93,7 +94,8 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                     obj = game.getPlayer(objId);
                 }
                 if (obj != null) {
-                    copy = spell.copySpell(source.getControllerId(), game);
+                    // TODO: add support if multiple copies? See Twinning Staff
+                    copy = spell.copySpell(game, source, source.getControllerId());
                     try {
                         modifyCopy(copy, (T) obj, game, source);
                         if (!filter.match((T) obj, source.getSourceId(), actingPlayer.getId(), game)) {
@@ -168,6 +170,8 @@ public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> ex
                             for (UUID chosenId : chosenIds) {
                                 Spell chosenCopy = targetCopyMap.get(chosenId);
                                 if (chosenCopy != null) {
+                                    // COPY DONE, can put to stack
+                                    chosenCopy.setZone(Zone.STACK, game);
                                     game.getStack().push(chosenCopy);
                                     game.fireEvent(new CopiedStackObjectEvent(spell, chosenCopy, source.getControllerId()));
                                     toDelete.add(chosenId);

@@ -13,11 +13,9 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -176,9 +174,17 @@ public class SpellAbility extends ActivatedAbilityImpl {
         return new SpellAbility(this);
     }
 
-    public SpellAbility copySpell() {
+    public SpellAbility copySpell(Card originalCard, Card copiedCard) {
+        // all copied spells must have own copied card
+        Map<UUID, MageObject> mapOldToNew = CardUtil.getOriginalToCopiedPartsMap(originalCard, copiedCard);
+        if (!mapOldToNew.containsKey(this.getSourceId())) {
+            throw new IllegalStateException("Can't find source id after copy: " + originalCard.getName() + " -> " + copiedCard.getName());
+        }
+        UUID copiedSourceId = mapOldToNew.getOrDefault(this.getSourceId(), copiedCard).getId();
+
         SpellAbility spell = new SpellAbility(this);
-        spell.id = UUID.randomUUID();
+        spell.newId();
+        spell.setSourceId(copiedSourceId);
         return spell;
     }
 

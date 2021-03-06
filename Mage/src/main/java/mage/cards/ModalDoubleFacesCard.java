@@ -55,6 +55,14 @@ public abstract class ModalDoubleFacesCard extends CardImpl {
         return (ModalDoubleFacesCardHalf) rightHalfCard;
     }
 
+    public void setParts(ModalDoubleFacesCardHalf leftHalfCard, ModalDoubleFacesCardHalf rightHalfCard) {
+        // for card copy only - set new parts
+        this.leftHalfCard = leftHalfCard;
+        leftHalfCard.setParentCard(this);
+        this.rightHalfCard = rightHalfCard;
+        rightHalfCard.setParentCard(this);
+    }
+
     @Override
     public void assignNewId() {
         super.assignNewId();
