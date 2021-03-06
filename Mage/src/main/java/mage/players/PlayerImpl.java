@@ -4400,7 +4400,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     sb.append("from ").append(fromZone.toString().toLowerCase(Locale.ENGLISH)).append(' ');
                 }
                 if (card.isOwnedBy(getId())) {
-                    sb.append(" to his or her command zone");
+                    sb.append(" to their command zone");
                 } else {
                     Player player = game.getPlayer(card.getOwnerId());
                     if (player != null) {

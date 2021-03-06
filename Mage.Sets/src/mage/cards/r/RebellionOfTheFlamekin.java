@@ -87,7 +87,7 @@ class RebellionOfTheFlamekinTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever you clash, you may pay {1}. If you do create a 3/1 Red Elemental Shaman creature token in play. If you won that token gains haste until end of turn";
+        return "Whenever you clash, you may pay {1}. If you do create a 3/1 Red Elemental Shaman creature token. If you won that token gains haste until end of turn";
     }
 }
 
