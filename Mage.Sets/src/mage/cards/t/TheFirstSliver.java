@@ -33,10 +33,10 @@ public final class TheFirstSliver extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Cascade
-        this.addAbility(new CascadeAbility());
+        this.addAbility(new CascadeAbility(false));
 
         // Sliver spells you cast have cascade.
-        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new CascadeAbility(), filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new CascadeAbility(false), filter)));
     }
 
     private TheFirstSliver(final TheFirstSliver card) {
