@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import mage.MageObjectReference;
@@ -62,7 +61,7 @@ class VisionCharmEffect extends ContinuousEffectImpl {
     private SubType targetBasicLandType;
 
     VisionCharmEffect() {
-        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
+        super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Neutral);
         staticText = "Choose a land type and a basic land type. Each land of the first chosen type becomes the second chosen type until end of turn.";
     }
 
