@@ -1,39 +1,34 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ElementalShamanToken;
-import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
+import mage.game.permanent.token.Token;
+import mage.target.targetpointer.FixedTargets;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
- *
  * @author Styxo
  */
 public final class RebellionOfTheFlamekin extends CardImpl {
 
     public RebellionOfTheFlamekin(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ENCHANTMENT},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{3}{R}");
         this.subtype.add(SubType.ELEMENTAL);
 
         // Whenever you clash, you may pay {1}. If you do create a 3/1 Red Elemental Shaman creature token in play. If you won that token gains haste
@@ -52,11 +47,11 @@ public final class RebellionOfTheFlamekin extends CardImpl {
 
 class RebellionOfTheFlamekinTriggeredAbility extends TriggeredAbilityImpl {
 
-    public RebellionOfTheFlamekinTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new RebellionOfTheFlamekinEffect());
+    RebellionOfTheFlamekinTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new RebellionOfTheFlamekinEffect(), new GenericManaCost(1)));
     }
 
-    public RebellionOfTheFlamekinTriggeredAbility(final RebellionOfTheFlamekinTriggeredAbility ability) {
+    private RebellionOfTheFlamekinTriggeredAbility(final RebellionOfTheFlamekinTriggeredAbility ability) {
         super(ability);
     }
 
@@ -72,32 +67,29 @@ class RebellionOfTheFlamekinTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        boolean youWonTheClash = false;
-         if (event.getData().equals("controller") && event.getPlayerId().equals(getControllerId())
-                    || event.getData().equals("opponent") && event.getTargetId().equals(getControllerId())) {
-            youWonTheClash = true;
+        if (!isControlledBy(event.getPlayerId())) {
+            return false;
         }
-        for (Effect effect : getEffects()) {
-            if (effect instanceof RebellionOfTheFlamekinEffect) {
-                effect.setValue("clash", youWonTheClash);
-            }
-        }
+        this.getEffects().setValue("clash", event.getFlag());
         return true;
     }
 
     @Override
     public String getRule() {
-        return "Whenever you clash, you may pay {1}. If you do create a 3/1 Red Elemental Shaman creature token. If you won that token gains haste until end of turn";
+        return "Whenever you clash, you may pay {1}. If you do, " +
+                "create a 3/1 red Elemental Shaman creature token. " +
+                "If you won, that token gains haste until end of turn. " +
+                "<i>(This ability triggers after the clash ends.)</i>";
     }
 }
 
 class RebellionOfTheFlamekinEffect extends OneShotEffect {
 
-    public RebellionOfTheFlamekinEffect() {
+    RebellionOfTheFlamekinEffect() {
         super(Outcome.PutCreatureInPlay);
     }
 
-    public RebellionOfTheFlamekinEffect(final RebellionOfTheFlamekinEffect effect) {
+    private RebellionOfTheFlamekinEffect(final RebellionOfTheFlamekinEffect effect) {
         super(effect);
     }
 
@@ -108,21 +100,20 @@ class RebellionOfTheFlamekinEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            CreateTokenEffect createTokenEffect = new CreateTokenEffect(new ElementalShamanToken("LRW"));
-            DoIfCostPaid doIfCostPaid = new DoIfCostPaid(createTokenEffect, new ManaCostsImpl("{1}"));
-            doIfCostPaid.apply(game, source);
-            Permanent token = game.getPermanent(createTokenEffect.getLastAddedTokenId());
-            if (token != null && (boolean) (this.getValue("clash"))) {
-                ContinuousEffect continuousEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                continuousEffect.setTargetPointer(new FixedTarget(createTokenEffect.getLastAddedTokenId()));
-                game.addEffect(continuousEffect, source);
-            }
-            return true;
+        Token token = new ElementalShamanToken("LRW");
+        token.putOntoBattlefield(1, game, source, source.getControllerId());
 
+        List<Permanent> permanents = token
+                .getLastAddedTokenIds()
+                .stream()
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        if (!permanents.isEmpty() && (boolean) this.getValue("clash")) {
+            game.addEffect(new GainAbilityTargetEffect(
+                    HasteAbility.getInstance(), Duration.EndOfTurn
+            ).setTargetPointer(new FixedTargets(permanents, game)), source);
         }
-        return false;
-
+        return true;
     }
 }

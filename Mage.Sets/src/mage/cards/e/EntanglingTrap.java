@@ -1,44 +1,28 @@
-
 package mage.cards.e;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetOpponentsCreaturePermanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class EntanglingTrap extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
-
-    static {
-        filter.add(TargetController.OPPONENT.getControllerPredicate());
-    }
-
     public EntanglingTrap(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // Whenever you clash, tap target creature an opponent controls. If you won, that creature doesn't untap during its controller's next untap step.
-        Ability ability = new EntanglingTrapTriggeredAbility();
-        ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability);
+        this.addAbility(new EntanglingTrapTriggeredAbility());
     }
 
     private EntanglingTrap(final EntanglingTrap card) {
@@ -53,11 +37,12 @@ public final class EntanglingTrap extends CardImpl {
 
 class EntanglingTrapTriggeredAbility extends TriggeredAbilityImpl {
 
-    public EntanglingTrapTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TapTargetEffect());
+    EntanglingTrapTriggeredAbility() {
+        super(Zone.BATTLEFIELD, null);
+        this.addTarget(new TargetOpponentsCreaturePermanent());
     }
 
-    public EntanglingTrapTriggeredAbility(final EntanglingTrapTriggeredAbility ability) {
+    private EntanglingTrapTriggeredAbility(final EntanglingTrapTriggeredAbility ability) {
         super(ability);
     }
 
@@ -73,28 +58,20 @@ class EntanglingTrapTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        //remove effects from previous triggers
-        List<Effect> effects = getEffects();
-        List<Effect> effectsToRemove = new ArrayList<>();
-        for (Effect effect : effects) {
-            if (effect instanceof DontUntapInControllersNextUntapStepTargetEffect) {
-                effectsToRemove.add(effect);
-            }
+        if (!isControlledBy(event.getPlayerId())) {
+            return false;
         }
-        for (Effect effect : effectsToRemove) {
-            effects.remove(effect);
+        this.getEffects().clear();
+        this.addEffect(new TapTargetEffect());
+        if (event.getFlag()) {
+            this.addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
         }
-
-        if (event.getData().equals("controller") && event.getPlayerId().equals(getControllerId())
-                || event.getData().equals("opponent") && event.getTargetId().equals(getControllerId())) {
-            addEffect(new DontUntapInControllersNextUntapStepTargetEffect());
-        }
-
         return true;
     }
 
     @Override
     public String getRule() {
-        return "Whenever you clash, tap target creature an opponent controls. If you won, that creature doesn't untap during its controller's next untap step.";
+        return "Whenever you clash, tap target creature an opponent controls. " +
+                "If you won, that creature doesn't untap during its controller's next untap step.";
     }
 }
