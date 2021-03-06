@@ -1271,7 +1271,7 @@ public final class CardUtil {
     }
 
     /**
-     * Find mapping from original to copied card (e.g. map left side with copied left side, etc)
+     * Find mapping from original to copied card (e.g. map original left side with copied left side)
      *
      * @param originalCard
      * @param copiedCard

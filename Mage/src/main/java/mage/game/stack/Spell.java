@@ -963,8 +963,8 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     /**
-     * Game processing a copies as normal cards, so you don't need to check spell's copy for move/exile
-     * Use this only in exceptional situations or skip unaffected code/choices
+     * Game processing a copies as normal cards, so you don't need to check spell's copy for move/exile.
+     * Use this only in exceptional situations or to skip unaffected code/choices.
      *
      * @return
      */
@@ -1035,7 +1035,7 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public void setZone(Zone zone, Game game) {
         card.setZone(zone, game);
-        game.getState().setZone(this.getId(), Zone.STACK);
+        game.getState().setZone(this.getId(), zone);
     }
 
     @Override

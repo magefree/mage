@@ -1966,7 +1966,7 @@ public abstract class GameImpl implements Game, Serializable {
         );
         for (Card copiedCard : allCopiedCards) {
             // 1. Zone must be checked from main card only cause mdf parts can have different zones
-            //    (one side on battlefield, another side on outsize)
+            //    (one side on battlefield, another side on outside)
             // 2. Copied card creates in OUTSIDE zone and put to stack manually in the same code,
             //    so no SBA calls before real zone change (you will see here only unused cards like Isochron Scepter)
             //    (Isochron Scepter) 12/1/2004: If you don't want to cast the copy, you can choose not to; the copy ceases
