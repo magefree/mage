@@ -1,4 +1,3 @@
-
 package mage.cards.u;
 
 import mage.abilities.Ability;
@@ -28,7 +27,8 @@ public final class UrzasFactory extends CardImpl {
 
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {7}, {tap}: Create a 2/2 colorless Assembly-Worker artifact creature token.
+
+        // {7}, {T}: Create a 2/2 colorless Assembly-Worker artifact creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new AssemblyWorkerToken()), new GenericManaCost(7));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

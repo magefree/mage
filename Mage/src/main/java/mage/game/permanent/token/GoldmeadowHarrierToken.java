@@ -20,7 +20,6 @@ public final class GoldmeadowHarrierToken extends TokenImpl {
 
     public GoldmeadowHarrierToken() {
         super("Goldmeadow Harrier", "1/1 white Kithkin Soldier creature token named Goldmeadow Harrier with \"{W}, {T}: Tap target creature.\"");
-        this.setOriginalExpansionSetCode("FUT");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.KITHKIN);

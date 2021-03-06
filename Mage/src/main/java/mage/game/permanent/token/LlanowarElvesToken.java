@@ -1,10 +1,11 @@
-
-
 package mage.game.permanent.token;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 import mage.abilities.mana.GreenManaAbility;
+
+import java.util.Arrays;
 
 /**
  *
@@ -14,7 +15,6 @@ public final class LlanowarElvesToken extends TokenImpl {
 
     public LlanowarElvesToken() {
         super("Llanowar Elves", "1/1 green Elf Druid creature token named Llanowar Elves with \"{T}: Add {G}.\"");
-        this.setOriginalExpansionSetCode("FUT");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.ELF);
@@ -22,7 +22,10 @@ public final class LlanowarElvesToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
+        // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
+
+        availableImageSetCodes = Arrays.asList("TSR");
     }
 
     public LlanowarElvesToken(final LlanowarElvesToken token) {

@@ -18,7 +18,6 @@ public final class FesteringGoblinToken extends TokenImpl {
 
     public FesteringGoblinToken() {
         super("Festering Goblin", "1/1 black Zombie Goblin creature token named Festering Goblin with \"When Festering Goblin dies, target creature gets -1/-1 until end of turn.\"");
-        this.setOriginalExpansionSetCode("FUT");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add(SubType.ZOMBIE);

@@ -520,7 +520,7 @@ public class ScryfallImageSupportTokens {
             put("KHM/Emblem Tibalt Cosmic Imposter", "https://api.scryfall.com/cards/tkhm/21/en?format=image");
             put("KHM/Emblem Tyvar Kell", "https://api.scryfall.com/cards/tkhm/22/en?format=image");
 
-            // TKHC
+            // KHC
             put("KHC/Bird", "https://api.scryfall.com/cards/tkhc/1/en?format=image");
             put("KHC/Boar", "https://api.scryfall.com/cards/tkhc/5/en?format=image");
             put("KHC/Elemental", "https://api.scryfall.com/cards/tkhc/6/en?format=image");
@@ -529,6 +529,23 @@ public class ScryfallImageSupportTokens {
             put("KHC/Servo", "https://api.scryfall.com/cards/tkhc/7/en?format=image");
             put("KHC/Soldier", "https://api.scryfall.com/cards/tkhc/4/en?format=image");
             put("KHC/Thopter", "https://api.scryfall.com/cards/tkhc/8/en?format=image");
+
+            // TSR
+            put("TSR/Ape", "https://api.scryfall.com/cards/ttsr/10/en?format=image");
+            put("TSR/Assembly-Worker", "https://api.scryfall.com/cards/ttsr/14/en?format=image");
+            put("TSR/Bat", "https://api.scryfall.com/cards/ttsr/4/en?format=image");
+            put("TSR/Cloud Sprite", "https://api.scryfall.com/cards/ttsr/3/en?format=image");
+            put("TSR/Giant", "https://api.scryfall.com/cards/ttsr/7/en?format=image");
+            put("TSR/Goblin", "https://api.scryfall.com/cards/ttsr/8/en?format=image");
+            put("TSR/Griffin", "https://api.scryfall.com/cards/ttsr/1/en?format=image");
+            put("TSR/Insect", "https://api.scryfall.com/cards/ttsr/11/en?format=image");
+            put("TSR/Knight", "https://api.scryfall.com/cards/ttsr/5/en?format=image");
+            put("TSR/Kobolds of Kher Keep", "https://api.scryfall.com/cards/ttsr/9/en?format=image");
+            put("TSR/Llanowar Elves", "https://api.scryfall.com/cards/ttsr/12/en?format=image");
+            put("TSR/Metallic Sliver", "https://api.scryfall.com/cards/ttsr/15/en?format=image");
+            put("TSR/Saproling", "https://api.scryfall.com/cards/ttsr/13/en?format=image");
+            put("TSR/Soldier", "https://api.scryfall.com/cards/ttsr/2/en?format=image");
+            put("TSR/Spider", "https://api.scryfall.com/cards/ttsr/6/en?format=image");
 
             // generate supported sets
             supportedSets.clear();

@@ -1,9 +1,8 @@
 
 package mage.game.permanent.token;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
@@ -14,26 +13,18 @@ import mage.abilities.mana.GreenManaAbility;
  *
  * @author spjspj
  */
-public final class FreyaliseLlanowarsFuryToken extends TokenImpl {
+public final class ElfDruidToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("C14", "CMA"));
-    }
-
-    public FreyaliseLlanowarsFuryToken() {
+    public ElfDruidToken() {
         this(null, 0);
     }
 
-    public FreyaliseLlanowarsFuryToken(String setCode) {
+    public ElfDruidToken(String setCode) {
         this(setCode, 0);
     }
 
-    public FreyaliseLlanowarsFuryToken(String setCode, int tokenType) {
+    public ElfDruidToken(String setCode, int tokenType) {
         super("Elf Druid", "1/1 green Elf Druid creature token with \"{T}: Add {G}.\"");
-        availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode(setCode);
         this.cardType.add(CardType.CREATURE);
         this.color = ObjectColor.GREEN;
         this.subtype.add(SubType.ELF);
@@ -44,13 +35,15 @@ public final class FreyaliseLlanowarsFuryToken extends TokenImpl {
 
         // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());
+
+        availableImageSetCodes = Arrays.asList("C14");
     }
 
-    public FreyaliseLlanowarsFuryToken(final FreyaliseLlanowarsFuryToken token) {
+    public ElfDruidToken(final ElfDruidToken token) {
         super(token);
     }
 
-    public FreyaliseLlanowarsFuryToken copy() {
-        return new FreyaliseLlanowarsFuryToken(this);
+    public ElfDruidToken copy() {
+        return new ElfDruidToken(this);
     }
 }

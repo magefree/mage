@@ -5,6 +5,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.MageInt;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -15,9 +17,12 @@ public final class AssemblyWorkerToken extends TokenImpl {
         super("Assembly-Worker", "2/2 Assembly-Worker artifact creature");
         cardType.add(CardType.ARTIFACT);
         cardType.add(CardType.CREATURE);
-        this.subtype.add(SubType.ASSEMBLY_WORKER);
+        subtype.add(SubType.ASSEMBLY_WORKER);
+
         power = new MageInt(2);
         toughness = new MageInt(2);
+
+        availableImageSetCodes = Arrays.asList("4ED", "ATQ", "DDF", "EMA", "MED", "TSR");
     }
 
     public AssemblyWorkerToken(final AssemblyWorkerToken token) {

@@ -19,6 +19,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInExile;
 
+import java.util.Arrays;
+
 /**
  * @author spjspj
  */
@@ -31,12 +33,18 @@ public final class SengirNosferatuBatToken extends TokenImpl {
         subtype.add(SubType.BAT);
         power = new MageInt(1);
         toughness = new MageInt(2);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // {1}{B}, Sacrifice this creature: Return an exiled card named Sengir Nosferatu to the battlefield under its owner’s control.
         ReturnSengirNosferatuEffect effect = new ReturnSengirNosferatuEffect();
         effect.setText("Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control.");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{1}{B}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
+
+        availableImageSetCodes = Arrays.asList("TSP", "TSR");
     }
 
     public SengirNosferatuBatToken(final SengirNosferatuBatToken token) {
