@@ -109,8 +109,9 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     public boolean chooseMulligan(Game game) {
         log.debug("chooseMulligan");
         if (hand.size() < 6
-                || isTestMode()
-                || game.getClass().getName().contains("Momir")) {
+                || isTestsMode() // ignore mulligan in tests
+                || game.getClass().getName().contains("Momir") // ignore mulligan in Momir games
+        ) {
             return false;
         }
         Set<Card> lands = hand.getCards(new FilterLandCard(), game);
@@ -2880,9 +2881,10 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     @Override
     public boolean isHuman() {
         if (human) {
-            log.error("computer must be not human", new Throwable());
+            throw new IllegalStateException("Computer player can't be Human");
+        } else {
+            return false;
         }
-        return human;
     }
 
     @Override

@@ -477,7 +477,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public boolean isTestMode() {
+    public boolean isTestsMode() {
         return false;
     }
 

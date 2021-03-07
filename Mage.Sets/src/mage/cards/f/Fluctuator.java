@@ -69,7 +69,7 @@ class FluctuatorEffect extends CostModificationEffectImpl {
             }
             if (reduceMax > 0) {
                 int reduce;
-                if (game.inCheckPlayableState() || !controller.isHuman()) {
+                if (game.inCheckPlayableState() || controller.isComputer()) {
                     reduce = reduceMax;
                 } else {
                     ChoiceImpl choice = new ChoiceImpl(true);

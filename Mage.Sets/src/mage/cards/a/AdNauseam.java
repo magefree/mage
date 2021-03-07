@@ -73,7 +73,7 @@ class AdNauseamEffect extends OneShotEffect {
             controller.revealCards(sourceCard.getIdName() + " put into hand", new CardsImpl(card), game);
 
             // AI workaround to stop infinite choose (only one card allows)
-            if (!controller.isHuman() && !controller.isTestMode()) {
+            if (controller.isComputer()) {
                 break;
             }
         }

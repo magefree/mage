@@ -2715,7 +2715,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         // only humans can use it
-        if (!targetPlayer.isHuman() && !targetPlayer.isTestMode()) {
+        if (targetPlayer.isComputer()) {
             return false;
         }
 
@@ -3866,7 +3866,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean isTestMode() {
+    public boolean isTestsMode() {
         return isTestMode;
     }
 

@@ -92,7 +92,7 @@ class PainsRewardEffect extends OneShotEffect {
 
     private int chooseLifeAmountToBid(Player player, int currentBig, Game game) {
         int newBid;
-        if (!player.isHuman() && !player.isTestMode()) {
+        if (player.isComputer()) {
             // AI choose
             newBid = currentBig + 1;
         } else {

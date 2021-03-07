@@ -1418,7 +1418,7 @@ public abstract class GameImpl implements Game, Serializable {
                                     + ex.getMessage());
                         }
                         Player activePlayer = this.getPlayer(getActivePlayerId());
-                        if (activePlayer != null && !activePlayer.isTestMode()) {
+                        if (activePlayer != null && !activePlayer.isTestsMode()) {
                             errorContinueCounter++;
                             continue;
                         } else {

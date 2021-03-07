@@ -1571,9 +1571,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * AI play one PRIORITY with multi game simulations (calcs and play ONE best
-     * action, can be called with stack) All choices must be made by AI
-     * (e.g.strict mode possible)
+     * AI play one PRIORITY with multi game simulations like real game
+     * (calcs and play ONE best action, can be called with stack)
+     * All choices must be made by AI (e.g.strict mode possible)
      *
      * @param turnNum
      * @param step
@@ -1595,11 +1595,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     public PlayerAction createAIPlayerAction(int turnNum, PhaseStep step, String aiCommand) {
-        // AI actions must disable and enable strict mode
+        // AI commands must disable and enable real game simulation and strict mode
         return new PlayerAction("", turnNum, step, AI_PREFIX + aiCommand) {
             @Override
             public void onActionRemovedLater(Game game, TestPlayer player) {
-                player.setAICanChooseInStrictMode(false);
+                player.setAIRealGameSimulation(false);
             }
         };
     }

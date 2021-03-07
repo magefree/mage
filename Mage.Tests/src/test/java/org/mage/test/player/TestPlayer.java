@@ -86,8 +86,14 @@ public class TestPlayer implements Player {
 
     private int maxCallsWithoutAction = 400;
     private int foundNoAction = 0;
-    private boolean AIPlayer; // full playable AI
-    private boolean AICanChooseInStrictMode = false; // AI can choose in custom aiXXX commands (e.g. on one priority or step)
+
+    // full playable AI, TODO: can be deleted?
+    private boolean AIPlayer;
+    // AI simulates a real game, e.g. ignores strict mode and play command/priority, see aiXXX commands
+    // true - unit tests uses real AI logic (e.g. AI hints and AI workarounds in cards)
+    // false - unit tests uses Human logic and dialogs
+    private boolean AIRealGameSimulation = false;
+
     private final List<PlayerAction> actions = new ArrayList<>();
     private final Map<PlayerAction, PhaseStep> actionsToRemoveLater = new HashMap<>(); // remove actions later, on next step (e.g. for AI commands)
     private final Map<Integer, HashMap<UUID, ArrayList<PlayerAction>>> rollbackActions = new HashMap<>(); // actions to add after a executed rollback
@@ -125,7 +131,7 @@ public class TestPlayer implements Player {
 
     public TestPlayer(final TestPlayer testPlayer) {
         this.AIPlayer = testPlayer.AIPlayer;
-        this.AICanChooseInStrictMode = testPlayer.AICanChooseInStrictMode;
+        this.AIRealGameSimulation = testPlayer.AIRealGameSimulation;
         this.foundNoAction = testPlayer.foundNoAction;
         this.actions.addAll(testPlayer.actions);
         this.choices.addAll(testPlayer.choices);
@@ -720,7 +726,7 @@ public class TestPlayer implements Player {
 
                     // play priority
                     if (command.equals(AI_COMMAND_PLAY_PRIORITY)) {
-                        AICanChooseInStrictMode = true; // disable on action's remove
+                        AIRealGameSimulation = true; // disable on action's remove
                         computerPlayer.priority(game);
                         actions.remove(action);
                         return true;
@@ -728,7 +734,7 @@ public class TestPlayer implements Player {
 
                     // play step
                     if (command.equals(AI_COMMAND_PLAY_STEP)) {
-                        AICanChooseInStrictMode = true; // disable on action's remove
+                        AIRealGameSimulation = true; // disable on action's remove
                         actionsToRemoveLater.put(action, game.getStep().getType());
                         computerPlayer.priority(game);
                         return true;
@@ -1897,7 +1903,7 @@ public class TestPlayer implements Player {
     }
 
     private void chooseStrictModeFailed(String choiceType, Game game, String reason, boolean printAbilities) {
-        if (strictChooseMode && !AICanChooseInStrictMode) {
+        if (strictChooseMode && !AIRealGameSimulation) {
             if (printAbilities) {
                 printStart("Available mana for " + computerPlayer.getName());
                 printMana(game, computerPlayer.getManaAvailable(game));
@@ -3060,7 +3066,18 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean isHuman() {
-        return computerPlayer.isHuman();
+        return false;
+    }
+
+    @Override
+    public boolean isComputer() {
+        // all players in unit tests are computers, so you must use AIRealGameSimulation to test different logic (Human vs AI)
+        if (isTestsMode()) {
+            return AIRealGameSimulation;
+        } else {
+            throw new IllegalStateException("Can't use test player outside of unit tests");
+            //return !isHuman();
+        }
     }
 
     @Override
@@ -3449,8 +3466,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean isTestMode() {
-        return computerPlayer.isTestMode();
+    public boolean isTestsMode() {
+        return computerPlayer.isTestsMode();
     }
 
     @Override
@@ -4193,8 +4210,8 @@ public class TestPlayer implements Player {
         return computerPlayer;
     }
 
-    public void setAICanChooseInStrictMode(boolean AICanChooseInStrictMode) {
-        this.AICanChooseInStrictMode = AICanChooseInStrictMode;
+    public void setAIRealGameSimulation(boolean AIRealGameSimulation) {
+        this.AIRealGameSimulation = AIRealGameSimulation;
     }
 
     public Map<Integer, HashMap<UUID, ArrayList<org.mage.test.player.PlayerAction>>> getRollbackActions() {
