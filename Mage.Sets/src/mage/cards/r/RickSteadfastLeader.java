@@ -36,8 +36,8 @@ import static mage.constants.Outcome.Benefit;
  */
 public final class RickSteadfastLeader extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterControlledPermanent(SubType.HUMAN, "");
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent(SubType.HUMAN, "");
     private static final FilterCreaturePermanent filter2
             = new FilterCreaturePermanent(SubType.HUMAN, "");
     private static final Condition condition
@@ -60,7 +60,7 @@ public final class RickSteadfastLeader extends CardImpl {
 
         // As long as you control four or more Humans, Humans you control get +2/+2.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield),
+                new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter),
                 condition, "as long as you control four or more Humans, Humans you control get +2/+2"
         )));
     }
