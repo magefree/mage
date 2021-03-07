@@ -4,26 +4,30 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.CostAdjuster;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
+import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceCreatureType;
 import mage.constants.*;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
-import java.util.UUID;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continuous.SetPowerToughnessSourceEffect;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- * @author jeffwadsworth
+ * @author jeffwadsworth, JayDi85
  */
 public final class CallerOfTheHunt extends CardImpl {
 
@@ -56,25 +60,67 @@ enum CallerOfTheHuntAdjuster implements CostAdjuster {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        MageObject mageObject = game.getObject(ability.getSourceId());
-        Effect effect = new ChooseCreatureTypeEffect(Outcome.Benefit);
-        if (mageObject != null) {
-            effect.apply(game, ability);
+        if (game.inCheckPlayableState()) {
+            return;
         }
-        if (mageObject != null) {
-            SubType typeChoice = (SubType) game.getState().getValue(mageObject.getId() + "_type");
-            if (typeChoice != null) {
-                FilterCreaturePermanent filter = new FilterCreaturePermanent("chosen creature type");
-                filter.add(typeChoice.getPredicate());
-                ContinuousEffect effectPowerToughness = new SetPowerToughnessSourceEffect(
-                        new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame);
-                effectPowerToughness.setText("");
-                SimpleStaticAbility setPT = new SimpleStaticAbility(Zone.ALL, effectPowerToughness);
-                GainAbilityTargetEffect gainAbility = new GainAbilityTargetEffect(setPT, Duration.EndOfGame);
-                gainAbility.setTargetPointer(new FixedTarget(ability.getSourceId()));
-                game.getState().addEffect(gainAbility, ability);
+
+        Player controller = game.getPlayer(ability.getControllerId());
+        if (controller == null) {
+            return;
+        }
+
+        MageObject sourceObject = game.getObject(ability.getSourceId());
+        if (sourceObject == null) {
+            return;
+        }
+
+        // AI hint - find best creature type with max permanents, all creature type supports too
+        Map<SubType, Integer> usedSubTypeStats = new HashMap<>();
+        game.getBattlefield().getActivePermanents(ability.getControllerId(), game)
+                .stream()
+                .map(permanent -> permanent.getSubtype(game))
+                .flatMap(Collection::stream)
+                .distinct()
+                .forEach(subType -> {
+                    FilterCreaturePermanent filter = new FilterCreaturePermanent();
+                    filter.add(subType.getPredicate());
+                    int amount = new PermanentsOnBattlefieldCount(filter).calculate(game, ability, null);
+                    usedSubTypeStats.put(subType, amount);
+                });
+        int maxAmount = 0;
+        SubType maxSubType = null;
+        for (Map.Entry<SubType, Integer> entry : usedSubTypeStats.entrySet()) {
+            if (entry.getValue() > maxAmount) {
+                maxSubType = entry.getKey();
+                maxAmount = entry.getValue();
             }
         }
+
+        // choose creature type
+        SubType typeChoice;
+        if (controller.isComputer()) {
+            // AI hint - simulate type choose
+            game.getState().setValue(sourceObject.getId() + "_type", maxSubType);
+        } else {
+            // human choose
+            Effect effect = new ChooseCreatureTypeEffect(Outcome.Benefit);
+            effect.apply(game, ability);
+        }
+        typeChoice = (SubType) game.getState().getValue(sourceObject.getId() + "_type");
+        if (typeChoice == null) {
+            return;
+        }
+
+        // apply boost
+        FilterCreaturePermanent filter = new FilterCreaturePermanent("chosen creature type");
+        filter.add(typeChoice.getPredicate());
+        ContinuousEffect effectPowerToughness = new SetPowerToughnessSourceEffect(
+                new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame);
+        effectPowerToughness.setText("");
+        SimpleStaticAbility setPT = new SimpleStaticAbility(Zone.ALL, effectPowerToughness);
+        GainAbilityTargetEffect gainAbility = new GainAbilityTargetEffect(setPT, Duration.EndOfGame);
+        gainAbility.setTargetPointer(new FixedTarget(ability.getSourceId()));
+        game.getState().addEffect(gainAbility, ability);
     }
 }
 
