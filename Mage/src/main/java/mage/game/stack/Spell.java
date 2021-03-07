@@ -1131,4 +1131,8 @@ public class Spell extends StackObjImpl implements Card {
         throw new UnsupportedOperationException("Spells should not loose all abilities. Check if this operation is correct.");
     }
 
+    @Override
+    public String toString() {
+        return ability.toString();
+    }
 }

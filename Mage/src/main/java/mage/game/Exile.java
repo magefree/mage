@@ -120,4 +120,12 @@ public class Exile implements Serializable, Copyable<Exile> {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "Cards: " + exileZones.values()
+                .stream()
+                .mapToInt(ExileZone::size)
+                .sum();
+    }
 }

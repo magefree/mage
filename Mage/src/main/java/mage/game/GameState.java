@@ -28,6 +28,7 @@ import mage.players.Player;
 import mage.players.PlayerList;
 import mage.players.Players;
 import mage.target.Target;
+import mage.util.CardUtil;
 import mage.util.Copyable;
 import mage.util.ThreadLocalStringBuilder;
 import mage.watchers.Watcher;
@@ -1383,5 +1384,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public boolean isManaBurn() {
         return manaBurn;
+    }
+
+    @Override
+    public String toString() {
+        return CardUtil.getTurnInfo(this);
     }
 }

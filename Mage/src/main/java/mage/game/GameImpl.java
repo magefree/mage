@@ -3476,4 +3476,14 @@ public abstract class GameImpl implements Game, Serializable {
         return gameStopped;
     }
 
+    @Override
+    public String toString() {
+        Player activePayer = this.getPlayer(this.getActivePlayerId());
+        StringBuilder sb = new StringBuilder()
+                .append(this.getGameType().toString())
+                .append("; ").append(CardUtil.getTurnInfo(this))
+                .append("; active: ").append((activePayer == null ? "none" : activePayer.getName()))
+                .append("; stack: ").append(this.getStack().toString());
+        return sb.toString();
+    }
 }

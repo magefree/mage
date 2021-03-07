@@ -382,4 +382,9 @@ public class Battlefield implements Serializable {
                 .mapToInt(x -> x ? 1 : 0)
                 .sum();
     }
+
+    @Override
+    public String toString() {
+        return "Permanents: " + field.size();
+    }
 }

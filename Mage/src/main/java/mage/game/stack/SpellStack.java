@@ -144,4 +144,8 @@ public class SpellStack extends ArrayDeque<StackObject> {
         return dateLastAdded;
     }
 
+    @Override
+    public String toString() {
+        return this.size() + (this.isEmpty() ? "" : " (top: " + this.getFirst().toString() + ")");
+    }
 }

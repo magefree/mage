@@ -4201,4 +4201,8 @@ public class TestPlayer implements Player {
         return rollbackActions;
     }
 
+    @Override
+    public String toString() {
+        return computerPlayer.toString();
+    }
 }

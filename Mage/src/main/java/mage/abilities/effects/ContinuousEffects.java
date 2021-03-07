@@ -1498,4 +1498,8 @@ public class ContinuousEffects implements Serializable {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Effects: " + allEffectsLists.stream().mapToInt(ContinuousEffectsList::size).sum();
+    }
 }

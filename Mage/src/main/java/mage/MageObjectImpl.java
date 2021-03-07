@@ -339,4 +339,9 @@ public abstract class MageObjectImpl implements MageObject {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return getIdName() + " (" + super.getClass().getSuperclass().getSimpleName() + " -> " + this.getClass().getSimpleName() + ")";
+    }
 }

@@ -100,6 +100,15 @@ public class Mana implements Comparable<Mana>, Serializable, Copyable<Mana> {
         public int hashCode() {
             return Objects.hash(amount, snowAmount);
         }
+
+        @Override
+        public String toString() {
+            if (amount != 0 || snowAmount != 0) {
+                return amount + "/" + snowAmount;
+            } else {
+                return "";
+            }
+        }
     }
 
     private static final transient Logger logger = Logger.getLogger(Mana.class);

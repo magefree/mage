@@ -531,4 +531,9 @@ public class ManaPool implements Serializable {
     public boolean getLastPaymentWasSnow() {
         return lastPaymentWasSnow;
     }
+
+    @Override
+    public String toString() {
+        return getMana().toString();
+    }
 }

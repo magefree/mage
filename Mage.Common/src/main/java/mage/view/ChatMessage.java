@@ -1,6 +1,7 @@
 package mage.view;
 
 import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -43,25 +44,10 @@ public class ChatMessage implements Serializable {
         this.username = username;
         this.message = message;
         this.time = time;
-        this.turnInfo = prepareTurnInfo(game);
+        this.turnInfo = CardUtil.getTurnInfo(game);
         this.color = color;
         this.messageType = messageType;
         this.soundToPlay = soundToPlay;
-    }
-
-    private String prepareTurnInfo(Game game) {
-        // no turn info
-        if (game == null) {
-            return null;
-        }
-
-        // not started game
-        if (game.getStep() == null) {
-            return "T0";
-        }
-
-        // normal game
-        return "T" + game.getTurnNum() + "." + game.getStep().getType().getStepShortText();
     }
 
     public String getMessage() {

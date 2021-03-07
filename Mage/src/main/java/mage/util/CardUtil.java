@@ -21,6 +21,7 @@ import mage.filter.Filter;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.CardState;
 import mage.game.Game;
+import mage.game.GameState;
 import mage.game.command.Commander;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -1289,5 +1290,30 @@ public final class CardUtil {
             mapOldToNew.put(oldIds.get(i), newObjects.get(i));
         }
         return mapOldToNew;
+    }
+
+    /**
+     * Return turn info for game. Uses in game logs and debug.
+     *
+     * @param game
+     * @return
+     */
+    public static String getTurnInfo(Game game) {
+        return getTurnInfo(game == null ? null : game.getState());
+    }
+
+    public static String getTurnInfo(GameState gameState) {
+        // no turn info
+        if (gameState == null) {
+            return null;
+        }
+
+        // not started game
+        if (gameState.getTurn().getStep() == null) {
+            return "T0";
+        }
+
+        // normal game
+        return "T" + gameState.getTurnNum() + "." + gameState.getTurn().getStep().getType().getStepShortText();
     }
 }

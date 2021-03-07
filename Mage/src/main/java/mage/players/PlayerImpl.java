@@ -4706,7 +4706,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public String toString() {
-        return getName() + " " + super.toString();
+        return getName() + " (" + super.getClass().getSimpleName() + ")";
     }
 
 }
