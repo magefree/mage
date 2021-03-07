@@ -22,6 +22,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
  * @author LevelX2
@@ -101,8 +102,9 @@ class PathOfMettleTriggeredAbility extends TriggeredAbilityImpl {
         int attackerCount = 0;
         if (game.getCombat() != null) {
             if (isControlledBy(game.getCombat().getAttackingPlayerId())) {
-                for (UUID attacker : game.getCombat().getAttackers()) {
-                    if (filter.match(game.getPermanent(attacker), game)) {
+                for (UUID attackerId : game.getCombat().getAttackers()) {
+                    Permanent attacker = game.getPermanent(attackerId);
+                    if (attacker != null && filter.match(attacker, game)) {
                         attackerCount++;
                     }
                 }
