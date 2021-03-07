@@ -165,7 +165,8 @@ class BronzehideLionContinuousEffect extends ContinuousEffectImpl {
 
                 // add the activated ability
                 activatedAbility.setControllerId(source.getControllerId());
-                lion.addAbility(activatedAbility);
+                lion.addAbility(activatedAbility, source.getSourceId(), game);
+                break;
         }
         return true;
     }
