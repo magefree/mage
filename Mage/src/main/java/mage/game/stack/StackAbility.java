@@ -1,6 +1,9 @@
 package mage.game.stack;
 
-import mage.*;
+import mage.MageIdentifier;
+import mage.MageInt;
+import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.*;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostAdjuster;
@@ -593,15 +596,15 @@ public class StackAbility extends StackObjImpl implements Ability {
     }
 
     @Override
-    public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
-        return createCopyOnStack(game, source, newControllerId, chooseNewTargets, 1);
+    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
+        createCopyOnStack(game, source, newControllerId, chooseNewTargets, 1);
     }
 
-    public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
+    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
         StackAbility newStackAbility = null;
         GameEvent gameEvent = new CopyStackObjectEvent(source, this, newControllerId, amount);
         if (game.replaceEvent(gameEvent)) {
-            return null;
+            return;
         }
         for (int i = 0; i < gameEvent.getAmount(); i++) {
             Ability newAbility = this.copy();
@@ -618,7 +621,6 @@ public class StackAbility extends StackObjImpl implements Ability {
             }
             game.fireEvent(new CopiedStackObjectEvent(this, newStackAbility, newControllerId));
         }
-        return newStackAbility;
     }
 
     @Override

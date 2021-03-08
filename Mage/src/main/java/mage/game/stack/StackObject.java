@@ -17,7 +17,6 @@ public interface StackObject extends MageObject, Controllable {
     UUID getSourceId();
 
     /**
-     *
      * @param source null for fizzled events (sourceId will be null)
      * @param game
      */
@@ -29,9 +28,9 @@ public interface StackObject extends MageObject, Controllable {
 
     boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget, FilterPermanent filterNewTarget);
 
-    StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets);
+    void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets);
 
-    StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount);
+    void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount);
 
     boolean isTargetChanged();
 

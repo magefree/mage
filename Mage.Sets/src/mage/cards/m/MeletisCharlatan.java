@@ -1,7 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -11,25 +10,24 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
-import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class MeletisCharlatan extends CardImpl {
 
     public MeletisCharlatan(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
 
@@ -69,15 +67,7 @@ class MeletisCharlatanCopyTargetSpellEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
-            StackObject newStackObject = spell.createCopyOnStack(game, source, spell.getControllerId(), true);
-            Player player = game.getPlayer(spell.getControllerId());
-            if (player != null && newStackObject instanceof Spell) {
-                String activateMessage = ((Spell) newStackObject).getActivatedMessage(game);
-                if (activateMessage.startsWith(" casts ")) {
-                    activateMessage = activateMessage.substring(6);
-                }
-                game.informPlayers(player.getLogName() + " copies " + activateMessage);
-            }
+            spell.createCopyOnStack(game, source, spell.getControllerId(), true);
             return true;
         }
         return false;

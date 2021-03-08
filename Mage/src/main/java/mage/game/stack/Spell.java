@@ -1057,16 +1057,16 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
-        return createCopyOnStack(game, source, newControllerId, chooseNewTargets, 1);
+    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
+        createCopyOnStack(game, source, newControllerId, chooseNewTargets, 1);
     }
 
     @Override
-    public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
+    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
         Spell spellCopy = null;
         GameEvent gameEvent = new CopyStackObjectEvent(source, this, newControllerId, amount);
         if (game.replaceEvent(gameEvent)) {
-            return null;
+            return;
         }
         for (int i = 0; i < gameEvent.getAmount(); i++) {
             spellCopy = this.copySpell(game, source, newControllerId);
@@ -1077,7 +1077,6 @@ public class Spell extends StackObjImpl implements Card {
             }
             game.fireEvent(new CopiedStackObjectEvent(this, spellCopy, newControllerId));
         }
-        return spellCopy;
     }
 
     @Override
