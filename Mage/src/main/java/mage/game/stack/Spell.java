@@ -32,6 +32,7 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
 import mage.util.SubTypes;
+import mage.util.functions.SpellCopyApplier;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -1063,6 +1064,11 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
+        createCopyOnStack(game, source, newControllerId, chooseNewTargets, amount, null);
+    }
+
+    @Override
+    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount, SpellCopyApplier applier) {
         Spell spellCopy = null;
         GameEvent gameEvent = new CopyStackObjectEvent(source, this, newControllerId, amount);
         if (game.replaceEvent(gameEvent)) {

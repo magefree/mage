@@ -32,6 +32,7 @@ import mage.target.Targets;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.util.GameLog;
 import mage.util.SubTypes;
+import mage.util.functions.SpellCopyApplier;
 import mage.watchers.Watcher;
 
 import java.util.ArrayList;
@@ -600,7 +601,12 @@ public class StackAbility extends StackObjImpl implements Ability {
         createCopyOnStack(game, source, newControllerId, chooseNewTargets, 1);
     }
 
+    @Override
     public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
+        createCopyOnStack(game, source, newControllerId, chooseNewTargets, amount, null);
+    }
+
+    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount, SpellCopyApplier applier) {
         StackAbility newStackAbility = null;
         GameEvent gameEvent = new CopyStackObjectEvent(source, this, newControllerId, amount);
         if (game.replaceEvent(gameEvent)) {

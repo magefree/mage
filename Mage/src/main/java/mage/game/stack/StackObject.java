@@ -7,6 +7,7 @@ import mage.constants.ZoneDetail;
 import mage.filter.FilterPermanent;
 import mage.game.Controllable;
 import mage.game.Game;
+import mage.util.functions.SpellCopyApplier;
 
 import java.util.UUID;
 
@@ -31,6 +32,8 @@ public interface StackObject extends MageObject, Controllable {
     void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets);
 
     void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount);
+
+    void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount, SpellCopyApplier applier);
 
     boolean isTargetChanged();
 
