@@ -4,7 +4,7 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.Zone;
 import mage.constants.ZoneDetail;
-import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicate;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.util.functions.SpellCopyApplier;
@@ -27,7 +27,9 @@ public interface StackObject extends MageObject, Controllable {
 
     Ability getStackAbility();
 
-    boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget, FilterPermanent filterNewTarget);
+    boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget, Predicate extraPredicate);
+
+    boolean canTarget(Game game, UUID targetId);
 
     void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets);
 

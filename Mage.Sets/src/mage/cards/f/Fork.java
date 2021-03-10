@@ -76,4 +76,8 @@ enum ForkApplier implements SpellCopyApplier {
     public void modifySpell(Spell spell, Game game) {
         spell.getColor(game).setColor(ObjectColor.RED);
     }
+
+    @Override
+    public void changeTargets(Spell spell, Game game) {
+    }
 }

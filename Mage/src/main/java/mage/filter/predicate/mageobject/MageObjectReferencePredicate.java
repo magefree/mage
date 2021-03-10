@@ -1,16 +1,15 @@
-
 package mage.filter.predicate.mageobject;
 
+import mage.MageItem;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 
 /**
- *
  * @author TheElk801
  */
-public class MageObjectReferencePredicate implements Predicate<MageObject> {
+public class MageObjectReferencePredicate implements Predicate<MageItem> {
 
     private final MageObjectReference mor;
 
@@ -19,8 +18,8 @@ public class MageObjectReferencePredicate implements Predicate<MageObject> {
     }
 
     @Override
-    public boolean apply(MageObject input, Game game) {
-        return mor.refersTo(input, game);
+    public boolean apply(MageItem input, Game game) {
+        return input instanceof MageObject && mor.refersTo((MageObject) input, game);
     }
 
     @Override

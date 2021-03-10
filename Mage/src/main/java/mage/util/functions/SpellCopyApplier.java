@@ -11,4 +11,6 @@ import java.io.Serializable;
 public interface SpellCopyApplier extends Serializable {
 
     void modifySpell(Spell spell, Game game);
+
+    void changeTargets(Spell spell, Game game);
 }

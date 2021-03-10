@@ -1081,6 +1081,9 @@ public class Spell extends StackObjImpl implements Card {
             }
             spellCopy.setZone(Zone.STACK, game);  // required for targeting ex: Nivmagus Elemental
             game.getStack().push(spellCopy);
+            if (applier != null) {
+                applier.changeTargets(spellCopy, game);
+            }
             if (chooseNewTargets) {
                 spellCopy.chooseNewTargets(game, newControllerId);
             }
