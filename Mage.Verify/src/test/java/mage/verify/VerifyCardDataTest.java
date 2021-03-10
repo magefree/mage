@@ -1665,7 +1665,7 @@ public class VerifyCardDataTest {
         // other cards can't have that stats
         if (isBasicLandName(card.getName())) {
             // lands
-            if (card.getRarity() != Rarity.LAND) {
+            if (card.getRarity() != Rarity.LAND && card.getRarity() != Rarity.SPECIAL) {
                 fail(card, "rarity", "basic land must be Rarity.LAND");
             }
 
