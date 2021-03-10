@@ -38,8 +38,8 @@ public final class RickSteadfastLeader extends CardImpl {
 
     private static final FilterCreaturePermanent filter
             = new FilterCreaturePermanent(SubType.HUMAN, "");
-    private static final FilterCreaturePermanent filter2
-            = new FilterCreaturePermanent(SubType.HUMAN, "");
+    private static final FilterPermanent filter2
+            = new FilterControlledPermanent(SubType.HUMAN, "");
     private static final Condition condition
             = new PermanentsOnTheBattlefieldCondition(filter2, ComparisonType.MORE_THAN, 3);
 
