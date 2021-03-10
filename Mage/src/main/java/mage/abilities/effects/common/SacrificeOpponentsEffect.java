@@ -1,8 +1,5 @@
 package mage.abilities.effects.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -15,6 +12,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * All opponents have to sacrifice [amount] permanents that match the [filter].
@@ -82,17 +83,16 @@ public class SacrificeOpponentsEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder();
         sb.append("each opponent sacrifices ");
         if (amount.toString().equals("X")) {
-            sb.append(amount.toString());
+            sb.append(amount.toString()).append(' ');
         } else {
             if (amount.toString().equals("1")) {
                 if (!filter.getMessage().startsWith("a ") && !filter.getMessage().startsWith("an ")) {
-                    sb.append('a');
+                    sb.append("a ");
                 }
             } else {
-                sb.append(CardUtil.numberToText(amount.toString()));
+                sb.append(CardUtil.numberToText(amount.toString())).append(' ');
             }
         }
-        sb.append(' ');
         sb.append(filter.getMessage());
         staticText = sb.toString();
     }

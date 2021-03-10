@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class LlanowarElvesToken extends TokenImpl {
 
     public LlanowarElvesToken() {
-        super("Llanowar Elves", "1/1 green Elf Druid creature token named Llanowar Elves with \"{T}: Add {G}.\"");
+        super("Llanowar Elves", "1/1 green Elf Druid creature token named Llanowar Elves. It has \"{T}: Add {G}.\"");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add(SubType.ELF);
