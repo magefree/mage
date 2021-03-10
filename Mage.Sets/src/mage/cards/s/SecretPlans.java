@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.TurnedFaceUpAllTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -10,13 +8,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.card.FaceDownPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class SecretPlans extends CardImpl {
@@ -28,15 +26,18 @@ public final class SecretPlans extends CardImpl {
     }
 
     public SecretPlans(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{U}");
 
         // Face-down creatures you control get +0/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0,1, Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(
+                0, 1, Duration.WhileOnBattlefield, filter
+        )));
 
         // Whenever a permanent you control is turned face up, draw a card.
-        this.addAbility(new TurnedFaceUpAllTriggeredAbility(new DrawCardSourceControllerEffect(1), new FilterControlledPermanent()));
-
+        this.addAbility(new TurnedFaceUpAllTriggeredAbility(
+                new DrawCardSourceControllerEffect(1),
+                StaticFilters.FILTER_CONTROLLED_A_PERMANENT
+        ));
     }
 
     private SecretPlans(final SecretPlans card) {

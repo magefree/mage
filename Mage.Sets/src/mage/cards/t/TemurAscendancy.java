@@ -23,7 +23,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  */
 public final class TemurAscendancy extends CardImpl {
 
-    final private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
+    final private static FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with power 4 or greater");
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }

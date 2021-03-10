@@ -14,7 +14,7 @@ import java.util.Arrays;
 public final class MetallicSliverToken extends TokenImpl {
 
     public MetallicSliverToken() {
-        super("Metallic Sliver", "1/1 colorless Sliver creature token named Metallic Sliver");
+        super("Metallic Sliver", "1/1 colorless Sliver artifact creature token named Metallic Sliver");
         cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
         subtype.add(SubType.SLIVER);

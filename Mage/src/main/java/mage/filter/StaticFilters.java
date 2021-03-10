@@ -298,6 +298,12 @@ public final class StaticFilters {
         FILTER_CONTROLLED_PERMANENT.setLockedFilter(true);
     }
 
+    public static final FilterControlledPermanent FILTER_CONTROLLED_A_PERMANENT = new FilterControlledPermanent("a permanent you control");
+
+    static {
+        FILTER_CONTROLLED_A_PERMANENT.setLockedFilter(true);
+    }
+
     public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT = new FilterControlledArtifactPermanent();
 
     static {

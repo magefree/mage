@@ -153,6 +153,6 @@ class LaviniaAzoriusRenegadeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever an opponent casts a spell, if no mana was spent to cast it, counter that spell";
+        return "Whenever an opponent casts a spell, if no mana was spent to cast it, counter that spell.";
     }
 }

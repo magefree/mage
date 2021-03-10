@@ -7,9 +7,9 @@ import java.util.List;
  * @author noxx
  */
 public class CompoundAbility extends AbilitiesImpl<Ability> {
-    
+
     private String ruleText;
-    
+
     public CompoundAbility(Ability... abilities) {
         this(null, abilities);
     }
@@ -31,11 +31,13 @@ public class CompoundAbility extends AbilitiesImpl<Ability> {
         }
 
         StringBuilder sb = new StringBuilder();
-        List<String> rules = super.getRules(null,false);
+        List<String> rules = super.getRules(null, false);
         for (int index = 0; index < rules.size(); index++) {
             if (index > 0) {
                 if (index < rules.size() - 1) {
                     sb.append(", ");
+                } else if (rules.size() > 2) {
+                    sb.append(", and ");
                 } else {
                     sb.append(" and ");
                 }

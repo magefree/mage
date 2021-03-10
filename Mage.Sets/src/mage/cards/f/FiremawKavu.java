@@ -35,7 +35,7 @@ public final class FiremawKavu extends CardImpl {
         this.addAbility(ability);
         
         // When Firemaw Kavu leaves the battlefield, it deals 4 damage to target creature.
-        ability = new LeavesBattlefieldTriggeredAbility(new DamageTargetEffect(4), false);
+        ability = new LeavesBattlefieldTriggeredAbility(new DamageTargetEffect(4, "it"), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

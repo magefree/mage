@@ -36,7 +36,7 @@ public final class DreamscapeArtist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{U}, {tap}, Discard a card, Sacrifice a land: Search your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
-        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LAND);
+        TargetCardInLibrary target = new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS);
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay),

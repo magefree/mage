@@ -24,7 +24,7 @@ import mage.game.permanent.token.SaprolingToken;
  */
 public final class TheloniteHermit extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Saproling creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All Saprolings");
 
     static {
         filter.add(SubType.SAPROLING.getPredicate());
