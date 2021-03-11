@@ -58,8 +58,9 @@ public class ZadaHedronGrinderTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
 
         // cast
+        addTarget(playerA, "Balduvian Bears");
+        addTarget(playerA, "Silvercoat Lion");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Arbor Armament", "Zada, Hedron Grinder");
-        addTarget(playerA, "Balduvian Bears^Silvercoat Lion");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
