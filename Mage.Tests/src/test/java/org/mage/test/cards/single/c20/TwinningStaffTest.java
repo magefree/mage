@@ -3,6 +3,7 @@ package org.mage.test.cards.single.c20;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -27,6 +28,8 @@ public class TwinningStaffTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, lion);
         addCard(Zone.HAND, playerA, growth);
 
+        setChoice(playerA, playerA.getName()); // need to choose starting player manually
+        setChoice(playerA, TestPlayer.CHOICE_SKIP); // skip stack order
         setChoice(playerA, "Yes");
         addTarget(playerA, bear);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, growth, zada);

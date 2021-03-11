@@ -4,6 +4,7 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -58,6 +59,8 @@ public class ZadaHedronGrinderTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
 
         // cast
+        setChoice(playerA, playerA.getName()); // need to choose starting player manually
+        setChoice(playerA, TestPlayer.CHOICE_SKIP); // skip stack order
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Arbor Armament", "Zada, Hedron Grinder");
 
         setStrictChooseMode(true);

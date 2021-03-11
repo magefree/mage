@@ -1963,6 +1963,13 @@ public class TestPlayer implements Player {
     public boolean choose(Outcome outcome, Choice choice, Game game) {
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
+
+            // skip choices
+            if (choices.get(0).equals(CHOICE_SKIP)) {
+                choices.remove(0);
+                return true;
+            }
+
             if (choice.setChoiceByAnswers(choices, true)) {
                 return true;
             }
