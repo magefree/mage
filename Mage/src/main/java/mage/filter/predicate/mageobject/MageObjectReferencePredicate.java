@@ -5,6 +5,7 @@ import mage.MageObject;
 import mage.MageObjectReference;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -24,6 +25,18 @@ public class MageObjectReferencePredicate implements Predicate<MageItem> {
             return mor.getSourceId().equals(input.getId());
         }
         return input instanceof MageObject && mor.refersTo((MageObject) input, game);
+    }
+
+    public String getName(Game game) {
+        Permanent permanent = mor.getPermanent(game);
+        if (permanent != null) {
+            return permanent.getIdName();
+        }
+        Player player = game.getPlayer(mor.getSourceId());
+        if (player != null) {
+            return player.getName();
+        }
+        return null;
     }
 
     @Override

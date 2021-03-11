@@ -13,11 +13,14 @@ import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.text.TextPart;
 import mage.cards.*;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.filter.FilterMana;
 import mage.filter.predicate.Predicate;
+import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.MageObjectAttribute;
@@ -37,6 +40,7 @@ import mage.util.functions.SpellCopyApplier;
 import org.apache.log4j.Logger;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -1068,6 +1072,90 @@ public class Spell extends StackObjImpl implements Card {
         createCopyOnStack(game, source, newControllerId, chooseNewTargets, amount, null);
     }
 
+    private static final class PredicateIterator implements Iterator<MageObjectReferencePredicate> {
+        private final SpellCopyApplier applier;
+        private final Player player;
+        private final int amount;
+        private final Game game;
+        private Map<String, MageObjectReferencePredicate> predicateMap = null;
+        private int anyCount = 0;
+        private int setCount = 0;
+        private Iterator<MageObjectReferencePredicate> iterator = null;
+        private Choice choice = null;
+
+        private PredicateIterator(Game game, UUID newControllerId, int amount, SpellCopyApplier applier) {
+            this.applier = applier;
+            this.player = game.getPlayer(newControllerId);
+            this.amount = amount;
+            this.game = game;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return true;
+        }
+
+        private void makeMap() {
+            if (predicateMap != null) {
+                return;
+            }
+            predicateMap = new HashMap<>();
+
+            for (int i = 0; i < amount; i++) {
+                MageObjectReferencePredicate predicate = applier.getNextPredicate();
+                if (predicate == null) {
+                    anyCount++;
+                    String message = "Any target";
+                    if (anyCount > 1) {
+                        message += " (" + anyCount + ")";
+                    }
+                    predicateMap.put(message, predicate);
+                    continue;
+                }
+                setCount++;
+                predicateMap.put(predicate.getName(game), predicate);
+            }
+            if ((setCount == 1 && anyCount == 0) || setCount == 0) {
+                iterator = predicateMap.values().stream().collect(Collectors.toList()).iterator();
+            }
+        }
+
+        private void makeChoice() {
+            if (choice != null) {
+                return;
+            }
+            choice = new ChoiceImpl(false);
+            choice.setMessage("Choose the order of copies to go on the stack");
+            choice.setSubMessage("Press cancel to put the rest in any order");
+            choice.setChoices(new HashSet<>(predicateMap.keySet()));
+        }
+
+        @Override
+        public MageObjectReferencePredicate next() {
+            if (player == null || applier == null) {
+                return null;
+            }
+            makeMap();
+            if (iterator != null) {
+                return iterator.hasNext() ? iterator.next() : null;
+            }
+            makeChoice();
+            if (choice.getChoices().size() < 2) {
+                iterator = choice.getChoices().stream().map(predicateMap::get).iterator();
+                return next();
+            }
+            choice.clearChoice();
+            player.choose(Outcome.AIDontUseIt, choice, game);
+            String chosen = choice.getChoice();
+            if (chosen == null) {
+                iterator = choice.getChoices().stream().map(predicateMap::get).iterator();
+                return next();
+            }
+            choice.getChoices().remove(chosen);
+            return predicateMap.get(chosen);
+        }
+    }
+
     @Override
     public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount, SpellCopyApplier applier) {
         Spell spellCopy = null;
@@ -1075,6 +1163,7 @@ public class Spell extends StackObjImpl implements Card {
         if (game.replaceEvent(gameEvent)) {
             return;
         }
+        Iterator<MageObjectReferencePredicate> predicates = new PredicateIterator(game, newControllerId, gameEvent.getAmount(), applier);
         // TODO: add a way to choose order of items on the stack
         for (int i = 0; i < gameEvent.getAmount(); i++) {
             spellCopy = this.copySpell(game, source, newControllerId);
@@ -1083,13 +1172,10 @@ public class Spell extends StackObjImpl implements Card {
             }
             spellCopy.setZone(Zone.STACK, game);  // required for targeting ex: Nivmagus Elemental
             game.getStack().push(spellCopy);
-            Predicate predicate = null;
-            if (applier != null) {
-                predicate = applier.getNextPredicate();
-            }
+            Predicate predicate = predicates.next();
             if (predicate != null) {
                 spellCopy.chooseNewTargets(game, newControllerId, true, false, predicate);
-            } else if (chooseNewTargets || i >= amount) { // if event has increased copies they can have their targets changed
+            } else if (chooseNewTargets || applier != null) { // if applier is non-null but predicate is null then it's extra
                 spellCopy.chooseNewTargets(game, newControllerId);
             }
             game.fireEvent(new CopiedStackObjectEvent(this, spellCopy, newControllerId));
