@@ -3,7 +3,6 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -31,12 +30,11 @@ public abstract class CopySpellForEachItCouldTargetEffect extends OneShotEffect 
         }
 
         @Override
-        public void changeTargets(Spell spell, Game game) {
-            if (!iterator.hasNext()) {
-                return;
+        public MageObjectReferencePredicate getNextPredicate() {
+            if (iterator.hasNext()) {
+                return iterator.next();
             }
-            Predicate predicate = iterator.next();
-            spell.chooseNewTargets(game, spell.getControllerId(), true, false, predicate);
+            return null;
         }
     }
 

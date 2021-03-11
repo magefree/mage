@@ -29,9 +29,7 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.util.functions.SpellCopyApplier;
 
-import java.util.Collection;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author TheElk801
@@ -173,7 +171,10 @@ class BeamsplitterMageEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        spell.createCopyOnStack(game, source, player.getId(), false, 1, new BeamsplitterMageApplier(permanent));
+        spell.createCopyOnStack(
+                game, source, player.getId(), false,
+                1, new BeamsplitterMageApplier(permanent, game)
+        );
         return true;
     }
 }
@@ -194,10 +195,12 @@ class BeamsplitterMagePredicate implements Predicate<Permanent> {
 
 class BeamsplitterMageApplier implements SpellCopyApplier {
 
-    private Permanent permanent;
+    private final Iterator<MageObjectReferencePredicate> predicate;
 
-    BeamsplitterMageApplier(Permanent permanent) {
-        this.permanent = permanent;
+    BeamsplitterMageApplier(Permanent permanent, Game game) {
+        this.predicate = Arrays.asList(new MageObjectReferencePredicate(
+                new MageObjectReference(permanent, game)
+        )).iterator();
     }
 
     @Override
@@ -205,14 +208,10 @@ class BeamsplitterMageApplier implements SpellCopyApplier {
     }
 
     @Override
-    public void changeTargets(Spell spell, Game game) {
-        if (permanent == null) {
-            return;
+    public MageObjectReferencePredicate getNextPredicate() {
+        if (predicate.hasNext()) {
+            return predicate.next();
         }
-        spell.chooseNewTargets(
-                game, spell.getControllerId(), true, true,
-                new MageObjectReferencePredicate(new MageObjectReference(permanent, game))
-        );
-        permanent = null;
+        return null;
     }
 }

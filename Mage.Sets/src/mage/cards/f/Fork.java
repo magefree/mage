@@ -8,6 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
+import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
@@ -78,6 +79,7 @@ enum ForkApplier implements SpellCopyApplier {
     }
 
     @Override
-    public void changeTargets(Spell spell, Game game) {
+    public MageObjectReferencePredicate getNextPredicate() {
+        return null;
     }
 }

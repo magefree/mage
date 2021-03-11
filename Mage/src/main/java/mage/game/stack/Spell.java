@@ -17,6 +17,7 @@ import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.filter.FilterMana;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.MageObjectAttribute;
@@ -1082,10 +1083,13 @@ public class Spell extends StackObjImpl implements Card {
             }
             spellCopy.setZone(Zone.STACK, game);  // required for targeting ex: Nivmagus Elemental
             game.getStack().push(spellCopy);
+            Predicate predicate = null;
             if (applier != null) {
-                applier.changeTargets(spellCopy, game);
+                predicate = applier.getNextPredicate();
             }
-            if (chooseNewTargets || i >= amount) { // if event has increased copies they can have their targets changed
+            if (predicate != null) {
+                spellCopy.chooseNewTargets(game, newControllerId, true, false, predicate);
+            } else if (chooseNewTargets || i >= amount) { // if event has increased copies they can have their targets changed
                 spellCopy.chooseNewTargets(game, newControllerId);
             }
             game.fireEvent(new CopiedStackObjectEvent(this, spellCopy, newControllerId));
