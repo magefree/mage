@@ -154,6 +154,8 @@ public abstract class StackObjImpl implements StackObject {
         Target newTarget = target.copy();
         if (predicate != null) {
             newTarget.getFilter().add(predicate);
+            // If adding a predicate, there will only be one choice and therefore target can be automatic
+            newTarget.setRandom(true);
         }
         newTarget.setEventReporting(false);
         if (!targetController.getId().equals(getControllerId())) {
@@ -197,6 +199,8 @@ public abstract class StackObjImpl implements StackObject {
                     Target tempTarget = target.copy();
                     if (predicate != null) {
                         tempTarget.getFilter().add(predicate);
+                        // If adding a predicate, there will only be one choice and therefore target can be automatic
+                        tempTarget.setRandom(true);
                     }
                     tempTarget.setEventReporting(false);
                     if (target instanceof TargetAmount) {

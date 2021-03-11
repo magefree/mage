@@ -78,6 +78,7 @@ public class CopySpellTest extends CardTestPlayerBase {
         // cast boost and copy it for another target (lion will not get boost cause can't be targeted)
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Angelic Blessing", "Zada, Hedron Grinder");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertAllCommandsUsed();

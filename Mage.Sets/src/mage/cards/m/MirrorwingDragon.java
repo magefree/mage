@@ -1,10 +1,5 @@
 package mage.cards.m;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -16,27 +11,28 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterInPlay;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.util.TargetAddress;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author LevelX2
  */
 public final class MirrorwingDragon extends CardImpl {
 
     public MirrorwingDragon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
         this.subtype.add(SubType.DRAGON);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
@@ -65,7 +61,7 @@ class MirrorwingDragonCopyTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MirrorwingDragonCopySpellEffect(), false);
     }
 
-  private   MirrorwingDragonCopyTriggeredAbility(final MirrorwingDragonCopyTriggeredAbility ability) {
+    private MirrorwingDragonCopyTriggeredAbility(final MirrorwingDragonCopyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -126,7 +122,7 @@ class MirrorwingDragonCopyTriggeredAbility extends TriggeredAbilityImpl {
 
 class MirrorwingDragonCopySpellEffect extends CopySpellForEachItCouldTargetEffect {
 
-     MirrorwingDragonCopySpellEffect() {
+    MirrorwingDragonCopySpellEffect() {
         super();
         this.staticText = "that player copies that spell for each other creature they control that the spell could target. Each copy targets a different one of those creatures.";
     }

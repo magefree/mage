@@ -2,7 +2,6 @@ package org.mage.test.cards.single.tor;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
@@ -27,9 +26,6 @@ public class RadiateTest extends CardTestPlayerBaseWithAIHelps {
 
         // cast bolt and copy spell for each another target
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        addTarget(playerA, "Grizzly Bears", 2);
-        addTarget(playerA, "Kitesail Corsair", 2);
-        addTarget(playerA, playerA);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Radiate", "Lightning Bolt", "Lightning Bolt");
         checkStackSize("before radiate", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
@@ -47,7 +43,6 @@ public class RadiateTest extends CardTestPlayerBaseWithAIHelps {
         assertLife(playerB, 20 - 3);
     }
 
-    @Ignore
     @Test
     public void test_Play_AI() {
         // This test has trouble now but the manual version works
