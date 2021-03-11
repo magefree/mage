@@ -1074,6 +1074,7 @@ public class Spell extends StackObjImpl implements Card {
         if (game.replaceEvent(gameEvent)) {
             return;
         }
+        // TODO: add a way to choose order of items on the stack
         for (int i = 0; i < gameEvent.getAmount(); i++) {
             spellCopy = this.copySpell(game, source, newControllerId);
             if (applier != null) {
@@ -1084,7 +1085,7 @@ public class Spell extends StackObjImpl implements Card {
             if (applier != null) {
                 applier.changeTargets(spellCopy, game);
             }
-            if (chooseNewTargets) {
+            if (chooseNewTargets || i >= amount) { // if event has increased copies they can have their targets changed
                 spellCopy.chooseNewTargets(game, newControllerId);
             }
             game.fireEvent(new CopiedStackObjectEvent(this, spellCopy, newControllerId));
