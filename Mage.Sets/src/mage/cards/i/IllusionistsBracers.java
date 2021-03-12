@@ -111,7 +111,6 @@ class CopyActivatedAbilityEffect extends OneShotEffect {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (ability != null && controller != null && sourcePermanent != null) {
             ability.createCopyOnStack(game, source, source.getControllerId(), true);
-            game.informPlayers(sourcePermanent.getName() + ": " + controller.getLogName() + " copied activated ability");
             return true;
         }
         return false;

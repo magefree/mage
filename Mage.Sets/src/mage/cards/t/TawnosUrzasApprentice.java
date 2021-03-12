@@ -85,7 +85,6 @@ class TawnosUrzasApprenticeEffect extends OneShotEffect {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (controller != null && sourcePermanent != null) {
                 stackAbility.createCopyOnStack(game, source, source.getControllerId(), true);
-                game.informPlayers(sourcePermanent.getIdName() + ": " + controller.getLogName() + " copied an ability");
                 return true;
             }
         }

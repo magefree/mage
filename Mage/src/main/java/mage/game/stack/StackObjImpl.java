@@ -7,13 +7,14 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.Outcome;
-import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
 
+import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -94,12 +95,12 @@ public abstract class StackObjImpl implements StackObject {
      *                           targetId
      * @param onlyOneTarget      - 114.6b one target must be changed to another
      *                           target
-     * @param filterNewTarget    restriction for the new target, if null nothing is
+     * @param extraPredicate     restriction for the new target, if null nothing is
      *                           cheched
      * @return
      */
     @Override
-    public boolean chooseNewTargets(Game game, UUID targetControllerId, boolean forceChange, boolean onlyOneTarget, FilterPermanent filterNewTarget) {
+    public boolean chooseNewTargets(Game game, UUID targetControllerId, boolean forceChange, boolean onlyOneTarget, Predicate extraPredicate) {
         Player targetController = game.getPlayer(targetControllerId);
         if (targetController != null) {
             StringBuilder oldTargetDescription = new StringBuilder();
@@ -118,7 +119,7 @@ public abstract class StackObjImpl implements StackObject {
                     ability.getModes().setActiveMode(mode);
                     oldTargetDescription.append(ability.getTargetDescription(mode.getTargets(), game));
                     for (Target target : mode.getTargets()) {
-                        Target newTarget = chooseNewTarget(targetController, ability, mode, target, forceChange, filterNewTarget, game);
+                        Target newTarget = chooseNewTarget(targetController, ability, mode, target, forceChange, extraPredicate, game);
                         // clear the old target and copy all targets from new target
                         target.clearChosen();
                         for (UUID targetId : newTarget.getTargets()) {
@@ -149,8 +150,13 @@ public abstract class StackObjImpl implements StackObject {
      * @param game
      * @return
      */
-    private Target chooseNewTarget(Player targetController, Ability ability, Mode mode, Target target, boolean forceChange, FilterPermanent filterNewTarget, Game game) {
+    private Target chooseNewTarget(Player targetController, Ability ability, Mode mode, Target target, boolean forceChange, Predicate predicate, Game game) {
         Target newTarget = target.copy();
+        if (predicate != null) {
+            newTarget.getFilter().add(predicate);
+            // If adding a predicate, there will only be one choice and therefore target can be automatic
+            newTarget.setRandom(true);
+        }
         newTarget.setEventReporting(false);
         if (!targetController.getId().equals(getControllerId())) {
             newTarget.setTargetController(targetController.getId()); // target controller for the change is different from spell controller
@@ -181,15 +187,6 @@ public abstract class StackObjImpl implements StackObject {
 
                         newTarget.chooseTarget(outcome, getControllerId(), ability, game);
 
-                        // check target restriction TODO: add multiple target checks
-                        if (newTarget.getFirstTarget() != null && filterNewTarget != null) {
-                            Permanent newTargetPermanent = game.getPermanent(newTarget.getFirstTarget());
-                            if (newTargetPermanent == null || !filterNewTarget.match(newTargetPermanent, game)) {
-                                game.informPlayer(targetController, "Target does not fullfil the target requirements (" + filterNewTarget.getMessage() + ')');
-                                newTarget.clearChosen();
-                            }
-                        }
-
                         // workaround to stop infinite AI choose (remove after chooseTarget can be called with extra filter to disable some ids)
                         if (iteration > 10) {
                             break;
@@ -200,6 +197,11 @@ public abstract class StackObjImpl implements StackObject {
                 } else {
                     // build a target definition with exactly one possible target to select that replaces old target
                     Target tempTarget = target.copy();
+                    if (predicate != null) {
+                        tempTarget.getFilter().add(predicate);
+                        // If adding a predicate, there will only be one choice and therefore target can be automatic
+                        tempTarget.setRandom(true);
+                    }
                     tempTarget.setEventReporting(false);
                     if (target instanceof TargetAmount) {
                         ((TargetAmount) tempTarget).setAmountDefinition(StaticValue.get(target.getTargetAmount(targetId)));
@@ -242,12 +244,6 @@ public abstract class StackObjImpl implements StackObject {
                                     // keep the old
                                     newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, true);
                                 }
-                            } else if (newTarget.getFirstTarget() != null && filterNewTarget != null) {
-                                Permanent newTargetPermanent = game.getPermanent(newTarget.getFirstTarget());
-                                if (newTargetPermanent == null || !filterNewTarget.match(newTargetPermanent, game)) {
-                                    game.informPlayer(targetController, "This target does not fullfil the target requirements (" + filterNewTarget.getMessage() + ')');
-                                    again = true;
-                                }
                             } else {
                                 // valid target was selected, add it to the new target definition
                                 newTarget.addTarget(tempTarget.getFirstTarget(), target.getTargetAmount(targetId), ability, game, true);
@@ -261,6 +257,30 @@ public abstract class StackObjImpl implements StackObject {
             }
         }
         return newTarget;
+    }
+
+    @Override
+    public boolean canTarget(Game game, UUID targetId) {
+        Abilities<Ability> objectAbilities = new AbilitiesImpl<>();
+        if (this instanceof Spell) {
+            objectAbilities.addAll(((Spell) this).getSpellAbilities());
+        } else {
+            objectAbilities.add(getStackAbility());
+        }
+        for (Ability ability : objectAbilities) {
+            if (ability.getModes()
+                    .getSelectedModes()
+                    .stream()
+                    .map(ability.getModes()::get)
+                    .filter(Objects::nonNull)
+                    .map(Mode::getTargets)
+                    .flatMap(Collection::stream)
+                    .filter(t -> !t.isNotTarget())
+                    .anyMatch(t -> t.canTarget(ability.getControllerId(), targetId, ability, game))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private String getNamesOftargets(UUID targetId, Game game) {

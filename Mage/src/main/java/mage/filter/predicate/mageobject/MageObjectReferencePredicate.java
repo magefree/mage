@@ -1,16 +1,17 @@
-
 package mage.filter.predicate.mageobject;
 
+import mage.MageItem;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
- *
  * @author TheElk801
  */
-public class MageObjectReferencePredicate implements Predicate<MageObject> {
+public class MageObjectReferencePredicate implements Predicate<MageItem> {
 
     private final MageObjectReference mor;
 
@@ -19,8 +20,23 @@ public class MageObjectReferencePredicate implements Predicate<MageObject> {
     }
 
     @Override
-    public boolean apply(MageObject input, Game game) {
-        return mor.refersTo(input, game);
+    public boolean apply(MageItem input, Game game) {
+        if (input instanceof Player) {
+            return mor.getSourceId().equals(input.getId());
+        }
+        return input instanceof MageObject && mor.refersTo((MageObject) input, game);
+    }
+
+    public String getName(Game game) {
+        Permanent permanent = mor.getPermanent(game);
+        if (permanent != null) {
+            return permanent.getIdName();
+        }
+        Player player = game.getPlayer(mor.getSourceId());
+        if (player != null) {
+            return player.getName();
+        }
+        return null;
     }
 
     @Override

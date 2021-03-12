@@ -1,7 +1,6 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.common.SpellMasteryCondition;
@@ -21,8 +20,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PsychicRebuttal extends CardImpl {
@@ -35,7 +35,7 @@ public final class PsychicRebuttal extends CardImpl {
     }
 
     public PsychicRebuttal(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Counter target instant or sorcery spell that targets you.
         this.getSpellAbility().addEffect(new PsychicRebuttalEffect());
@@ -82,15 +82,7 @@ class PsychicRebuttalEffect extends OneShotEffect {
 
             if (SpellMasteryCondition.instance.apply(game, source)
                     && controller.chooseUse(Outcome.PlayForFree, "Copy " + spell.getName() + " (you may choose new targets for the copy)?", source, game)) {
-
-                StackObject newStackObject = spell.createCopyOnStack(game, source, source.getControllerId(), true);
-                if (newStackObject instanceof Spell) {
-                    String activateMessage = ((Spell) newStackObject).getActivatedMessage(game);
-                    if (activateMessage.startsWith(" casts ")) {
-                        activateMessage = activateMessage.substring(6);
-                    }
-                    game.informPlayers(controller.getLogName() + activateMessage);
-                }
+                spell.createCopyOnStack(game, source, source.getControllerId(), true);
             }
 
             return true;

@@ -1,25 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.effects.common;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
-
-import java.util.Objects;
 
 /**
  * @author jeffwadsworth
@@ -35,42 +26,36 @@ import java.util.Objects;
  */
 public class EpicEffect extends OneShotEffect {
 
-    static final String rule = "<br>Epic <i>(For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps for the rest of the game, copy this spell except for its epic ability. If the spell has targets, you may choose new targets for the copy)";
+    private static final String rule = "Epic <i>(For the rest of the game, you can't cast spells. " +
+            "At the beginning of each of your upkeeps for the rest of the game, copy this spell " +
+            "except for its epic ability. If the spell has targets, you may choose new targets for the copy)";
 
     public EpicEffect() {
         super(Outcome.Benefit);
-        staticText = rule;
+        staticText = "<br>" + rule;
     }
 
-    public EpicEffect(final EpicEffect effect) {
+    private EpicEffect(final EpicEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            StackObject stackObject = game.getStack().getStackObject(source.getId());
-            Spell spell = (Spell) stackObject;
-            if (spell == null) {
-                return false;
-            }
-            spell = spell.copySpell(game, source, source.getControllerId()); // it's a fake copy, real copy with events in EpicPushEffect
-            // Remove Epic effect from the spell
-            Effect epicEffect = null;
-            for (Effect effect : spell.getSpellAbility().getEffects()) {
-                if (effect instanceof EpicEffect) {
-                    epicEffect = effect;
-                    break;
-                }
-            }
-            spell.getSpellAbility().getEffects().remove(epicEffect);
-            DelayedTriggeredAbility ability = new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(new EpicPushEffect(spell, rule), Duration.EndOfGame, false);
-            game.addDelayedTriggeredAbility(ability, source);
-            game.addEffect(new EpicReplacementEffect(), source);
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
+        Spell spell = (Spell) source.getSourceObject(game);
+        if (spell == null) {
+            return false;
+        }
+        spell = spell.copy();
+        spell.getSpellAbility().getEffects().removeIf(EpicEffect.class::isInstance);
+        game.addDelayedTriggeredAbility(new AtTheBeginOfYourNextUpkeepDelayedTriggeredAbility(
+                new EpicPushEffect(spell, rule), Duration.EndOfGame, false
+        ), source);
+        game.addEffect(new EpicReplacementEffect(), source);
+        return true;
     }
 
     @Override
@@ -81,12 +66,12 @@ public class EpicEffect extends OneShotEffect {
 
 class EpicReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public EpicReplacementEffect() {
+    EpicReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Neutral);
         staticText = "For the rest of the game, you can't cast spells";
     }
 
-    public EpicReplacementEffect(final EpicReplacementEffect effect) {
+    private EpicReplacementEffect(final EpicReplacementEffect effect) {
         super(effect);
     }
 
@@ -116,25 +101,22 @@ class EpicReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (Objects.equals(source.getControllerId(), event.getPlayerId())) {
-            MageObject object = game.getObject(event.getSourceId());
-            return object != null;
-        }
-        return false;
+        return source.isControlledBy(event.getPlayerId())
+                && game.getObject(event.getSourceId()) != null;
     }
 }
 
 class EpicPushEffect extends OneShotEffect {
 
-    final private Spell spell;
+    private final Spell spell;
 
-    public EpicPushEffect(Spell spell, String ruleText) {
+    EpicPushEffect(Spell spell, String ruleText) {
         super(Outcome.Copy);
         this.spell = spell;
         staticText = ruleText;
     }
 
-    public EpicPushEffect(final EpicPushEffect effect) {
+    private EpicPushEffect(final EpicPushEffect effect) {
         super(effect);
         this.spell = effect.spell;
     }
@@ -145,7 +127,6 @@ class EpicPushEffect extends OneShotEffect {
             spell.createCopyOnStack(game, source, source.getControllerId(), true);
             return true;
         }
-
         return false;
     }
 

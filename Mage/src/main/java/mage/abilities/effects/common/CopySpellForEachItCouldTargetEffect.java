@@ -1,463 +1,69 @@
 package mage.abilities.effects.common;
 
-import mage.MageItem;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterImpl;
-import mage.filter.FilterInPlay;
-import mage.filter.predicate.other.FromSetPredicate;
+import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
-import mage.game.events.CopiedStackObjectEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.TargetImpl;
-import mage.util.TargetAddress;
+import mage.util.functions.SpellCopyApplier;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 
 /**
- * @param <T>
  * @author duncant
  */
-public abstract class CopySpellForEachItCouldTargetEffect<T extends MageItem> extends OneShotEffect {
+public abstract class CopySpellForEachItCouldTargetEffect extends OneShotEffect {
 
-    protected final FilterInPlay<T> filter;
+    private static final class CopyApplier implements SpellCopyApplier {
 
-    public CopySpellForEachItCouldTargetEffect(FilterInPlay<T> filter) {
-        super(Outcome.Copy);
-        this.staticText = "copy the spell for each other " + filter.getMessage()
-                + " that spell could target. Each copy targets a different one";
-        this.filter = filter;
+        private final Iterator<MageObjectReferencePredicate> iterator;
+
+        private CopyApplier(List<MageObjectReferencePredicate> predicates) {
+            this.iterator = predicates.iterator();
+        }
+
+        @Override
+        public void modifySpell(Spell spell, Game game) {
+        }
+
+        @Override
+        public MageObjectReferencePredicate getNextPredicate() {
+            if (iterator.hasNext()) {
+                return iterator.next();
+            }
+            return null;
+        }
     }
 
-    public CopySpellForEachItCouldTargetEffect(final CopySpellForEachItCouldTargetEffect effect) {
+    protected CopySpellForEachItCouldTargetEffect() {
+        super(Outcome.Copy);
+    }
+
+    protected CopySpellForEachItCouldTargetEffect(final CopySpellForEachItCouldTargetEffect effect) {
         super(effect);
-        this.filter = effect.filter;
     }
 
     protected abstract Spell getSpell(Game game, Ability source);
 
     protected abstract Player getPlayer(Game game, Ability source);
 
-    protected abstract boolean changeTarget(Target target, Game game, Ability source);
-
-    protected abstract void modifyCopy(Spell copy, Game game, Ability source);
-
-    protected void modifyCopy(Spell copy, T newTarget, Game game, Ability source) {
-        modifyCopy(copy, game, source);
-    }
-
-    protected boolean okUUIDToCopyFor(UUID potentialTarget, Game game, Ability source, Spell spell) {
-        return true;
-    }
+    protected abstract List<MageObjectReferencePredicate> getPossibleTargets(Spell spell, Player player, Ability source, Game game);
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player actingPlayer = getPlayer(game, source);
-        if (actingPlayer == null) {
-            return false;
-        }
         Spell spell = getSpell(game, source);
-        if (spell != null) {
-            Set<TargetAddress> targetsToBeChanged = new HashSet<>();
-            boolean madeACopy = false;
-            for (TargetAddress addr : TargetAddress.walk(spell)) {
-                Target targetInstance = addr.getTarget(spell);
-                if (targetInstance.getNumberOfTargets() > 1) {
-                    throw new UnsupportedOperationException("Changing Target instances "
-                            + "with multiple targets is unsupported");
-                }
-                if (changeTarget(targetInstance, game, source)) {
-                    targetsToBeChanged.add(addr);
-                }
-            }
-
-            if (targetsToBeChanged.size() < 1) {
-                return false;
-            }
-
-            // TODO: add support if multiple copies? See Twinning Staff
-            // generate copies for each possible target, but do not put it to stack (must choose targets in custom order later)
-            Spell copy = spell.copySpell(game, source, source.getControllerId());
-            modifyCopy(copy, game, source);
-            Target sampleTarget = targetsToBeChanged.iterator().next().getTarget(copy);
-            sampleTarget.setNotTarget(true);
-
-            Map<UUID, Map<UUID, Spell>> playerTargetCopyMap = new HashMap<>();
-            for (UUID objId : sampleTarget.possibleTargets(actingPlayer.getId(), game)) {
-                MageItem obj = game.getObject(objId);
-                if (obj == null) {
-                    obj = game.getPlayer(objId);
-                }
-                if (obj != null) {
-                    // TODO: add support if multiple copies? See Twinning Staff
-                    copy = spell.copySpell(game, source, source.getControllerId());
-                    try {
-                        modifyCopy(copy, (T) obj, game, source);
-                        if (!filter.match((T) obj, source.getSourceId(), actingPlayer.getId(), game)) {
-                            continue;
-                        }
-                    } catch (ClassCastException e) {
-                        continue;
-                    }
-
-                    boolean legal = true;
-                    for (TargetAddress addr : targetsToBeChanged) {
-                        // potential target must be legal for all targets that we're about to change
-                        Target targetInstance = addr.getTarget(copy);
-                        legal &= targetInstance.canTarget(actingPlayer.getId(), objId, addr.getSpellAbility(copy), game);
-                        if (!legal) {
-                            break;
-                        }
-
-                        // potential target must not be the thing that was targeted initially
-                        targetInstance = addr.getTarget(spell);
-                        legal &= !targetInstance.getTargets().contains(objId);
-                        if (!legal) {
-                            break;
-                        }
-                    }
-
-                    legal &= okUUIDToCopyFor(objId, game, source, spell);
-                    if (legal) {
-                        for (TargetAddress addr : targetsToBeChanged) {
-                            Target targetInstance = addr.getTarget(copy);
-                            targetInstance.clearChosen();
-                            targetInstance.add(objId, game);
-                        }
-                        if (!playerTargetCopyMap.containsKey(copy.getControllerId())) {
-                            playerTargetCopyMap.put(copy.getControllerId(), new HashMap<>());
-                        }
-                        playerTargetCopyMap.get(copy.getControllerId()).put(objId, copy);
-                    }
-                }
-            }
-
-            // allows controller of the copies to choose spells order on stack (by using targeting GUI)
-            for (Player player : game.getPlayers().values()) {
-                if (playerTargetCopyMap.containsKey(player.getId())) {
-                    Map<UUID, Spell> targetCopyMap = playerTargetCopyMap.get(player.getId());
-                    if (targetCopyMap != null) {
-                        while (!targetCopyMap.isEmpty()) {
-                            // all checks must be make for new copied spell, not original (controller can be changed)
-                            Spell spellSample = targetCopyMap.values().stream().findFirst().get();
-                            FilterInPlay<T> setFilter = filter.copy();
-                            setFilter.add(new FromSetPredicate(targetCopyMap.keySet())); // allows only unselected targets
-                            Target target = new TargetWithAdditionalFilter(sampleTarget, setFilter);
-                            target.setNotTarget(false); // it is targeted, not chosen
-                            target.setMinNumberOfTargets(0); // if not selected then it uses first target (see below), same for AI
-                            target.setMaxNumberOfTargets(1);
-                            target.setTargetName(filter.getMessage() + " that " + spellSample.getLogName()
-                                    + " could target (" + targetCopyMap.size() + " remaining)");
-
-                            if (targetCopyMap.size() > 1
-                                    && target.canChoose(spellSample.getId(), player.getId(), game)) {
-                                // The original "source" is not applicable here due to the spell being a copy.  ie: Zada, Hedron Grinder
-                                Outcome outcome = spellSample.getSpellAbility().getAllEffects().getOutcome(spellSample.getSpellAbility());
-                                player.chooseTarget(outcome, target, spellSample.getSpellAbility(), game); // not source, but the spell that is copied
-                            }
-
-                            Collection<UUID> chosenIds = target.getTargets();
-                            if (chosenIds.isEmpty()) {
-                                // uses first target on cancel/non-selected
-                                chosenIds = targetCopyMap.keySet();
-                            }
-                            List<UUID> toDelete = new ArrayList<>();
-                            for (UUID chosenId : chosenIds) {
-                                Spell chosenCopy = targetCopyMap.get(chosenId);
-                                if (chosenCopy != null) {
-                                    // COPY DONE, can put to stack
-                                    chosenCopy.setZone(Zone.STACK, game);
-                                    game.getStack().push(chosenCopy);
-                                    game.fireEvent(new CopiedStackObjectEvent(spell, chosenCopy, source.getControllerId()));
-                                    toDelete.add(chosenId);
-                                    madeACopy = true;
-                                }
-                            }
-                            targetCopyMap.keySet().removeAll((toDelete));
-                        }
-                    }
-                }
-            }
-            return madeACopy;
-        }
-        return false;
-    }
-}
-
-class CompoundFilter<T extends MageItem> extends FilterImpl<T> implements FilterInPlay<T> {
-
-    protected final FilterInPlay<T> filterA;
-    protected final FilterInPlay<T> filterB;
-
-    public CompoundFilter(String name) {
-        super(name);
-        this.filterA = null;
-        this.filterB = null;
-    }
-
-    public CompoundFilter(FilterInPlay<T> filterA, FilterInPlay<T> filterB, String name) {
-        super(name);
-        this.filterA = filterA;
-        this.filterB = filterB;
-    }
-
-    @Override
-    public boolean checkObjectClass(Object object) {
-        return true; // already checked in the filter classes itself
-    }
-
-    @Override
-    public boolean match(T obj, Game game) {
-        return (filterA == null
-                || !filterA.match(obj, game))
-                && (filterB == null
-                || !filterB.match(obj, game));
-    }
-
-    @Override
-    public boolean match(T obj, UUID sourceId, UUID playerId, Game game) {
-        return (filterA == null
-                || !filterA.match(obj, sourceId, playerId, game))
-                && (filterB == null
-                || !filterB.match(obj, sourceId, playerId, game));
-    }
-
-    @Override
-    public CompoundFilter copy() {
-        return new CompoundFilter(filterA == null ? null : filterA.copy(),
-                filterB == null ? null : filterB.copy(),
-                message);
-    }
-}
-
-class TargetWithAdditionalFilter<T extends MageItem> extends TargetImpl {
-
-    protected final FilterInPlay<T> additionalFilter;
-    protected final Target originalTarget;
-
-    public TargetWithAdditionalFilter(final TargetWithAdditionalFilter target) {
-        this(target.originalTarget, target.additionalFilter, false);
-    }
-
-    public TargetWithAdditionalFilter(Target originalTarget, FilterInPlay<T> additionalFilter) {
-        this(originalTarget, additionalFilter, false);
-    }
-
-    public TargetWithAdditionalFilter(Target originalTarget, FilterInPlay<T> additionalFilter, boolean notTarget) {
-        this.originalTarget = originalTarget.copy();
-        this.originalTarget.clearChosen();
-        this.targetName = originalTarget.getFilter().getMessage();
-        this.notTarget = notTarget;
-        this.additionalFilter = additionalFilter;
-    }
-
-    @Override
-    public Target getOriginalTarget() {
-        return originalTarget;
-    }
-
-    @Override
-    public int getNumberOfTargets() {
-        return originalTarget.getNumberOfTargets();
-    }
-
-    @Override
-    public int getMinNumberOfTargets() {
-        return originalTarget.getMinNumberOfTargets();
-    }
-
-    @Override
-    public void setMinNumberOfTargets(int minNumberOfTargets) {
-        originalTarget.setMinNumberOfTargets(minNumberOfTargets);
-    }
-
-    @Override
-    public int getMaxNumberOfTargets() {
-        return originalTarget.getMaxNumberOfTargets();
-    }
-
-    @Override
-    public void setMaxNumberOfTargets(int maxNumberOfTargets) {
-        originalTarget.setMaxNumberOfTargets(maxNumberOfTargets);
-    }
-
-    @Override
-    public Zone getZone() {
-        return originalTarget.getZone();
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Game game) {
-        MageItem obj = game.getObject(id);
-        if (obj == null) {
-            obj = game.getPlayer(id);
-        }
-
-        try {
-            return obj != null
-                    && originalTarget.canTarget(id, game)
-                    && additionalFilter.match((T) obj, game);
-        } catch (ClassCastException e) {
+        if (actingPlayer == null || spell == null) {
             return false;
         }
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        MageItem obj = game.getObject(id);
-        if (obj == null) {
-            obj = game.getPlayer(id);
-        }
-
-        try {
-            return obj != null
-                    && originalTarget.canTarget(id, source, game)
-                    && additionalFilter.match((T) obj, source.getSourceId(), source.getControllerId(), game);
-        } catch (ClassCastException e) {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        MageItem obj = game.getObject(id);
-        if (obj == null) {
-            obj = game.getPlayer(id);
-        }
-
-        try {
-            return obj != null
-                    && originalTarget.canTarget(controllerId, id, source, game)
-                    && additionalFilter.match((T) obj, source.getSourceId(), controllerId, game);
-        } catch (ClassCastException e) {
-            return false;
-        }
-    }
-
-    @Override
-    public FilterInPlay<T> getFilter() {
-        return new CompoundFilter((FilterInPlay<T>) originalTarget.getFilter(),
-                additionalFilter, originalTarget.getFilter().getMessage());
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        int remainingTargets = getNumberOfTargets() - targets.size();
-        if (remainingTargets <= 0) {
-            return true;
-        }
-
-        int count = 0;
-        for (UUID objId : originalTarget.possibleTargets(sourceId, sourceControllerId, game)) {
-            MageItem obj = game.getObject(objId);
-            if (obj == null) {
-                obj = game.getPlayer(objId);
-            }
-            try {
-                if (!targets.containsKey(objId)
-                        && obj != null
-                        && additionalFilter.match((T) obj, sourceId, sourceControllerId, game)) {
-                    count++;
-                    if (count >= remainingTargets) {
-                        return true;
-                    }
-                }
-            } catch (ClassCastException e) {
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        int remainingTargets = getNumberOfTargets() - targets.size();
-        if (remainingTargets <= 0) {
-            return true;
-        }
-
-        int count = 0;
-        for (UUID objId : originalTarget.possibleTargets(sourceControllerId, game)) {
-            MageItem obj = game.getObject(objId);
-            if (obj == null) {
-                obj = game.getPlayer(objId);
-            }
-            try {
-                if (!targets.containsKey(objId)
-                        && obj != null
-                        && additionalFilter.match((T) obj, game)) {
-                    count++;
-                    if (count >= remainingTargets) {
-                        return true;
-                    }
-                }
-            } catch (ClassCastException e) {
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        Set<UUID> ret = new HashSet<>();
-        for (UUID id : originalTarget.possibleTargets(sourceId, sourceControllerId, game)) {
-            MageItem obj = game.getObject(id);
-            if (obj == null) {
-                obj = game.getPlayer(id);
-            }
-            try {
-                if (obj != null
-                        && additionalFilter.match((T) obj, sourceId, sourceControllerId, game)) {
-                    ret.add(id);
-                }
-            } catch (ClassCastException e) {
-            }
-        }
-        return ret;
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> ret = new HashSet<>();
-        for (UUID id : originalTarget.possibleTargets(sourceControllerId, game)) {
-            MageItem obj = game.getObject(id);
-            if (obj == null) {
-                obj = game.getPlayer(id);
-            }
-            try {
-                if (obj != null
-                        && additionalFilter.match((T) obj, game)) {
-                    ret.add(id);
-                }
-            } catch (ClassCastException e) {
-            }
-        }
-        return ret;
-    }
-
-    @Override
-    public TargetWithAdditionalFilter copy() {
-        return new TargetWithAdditionalFilter(this);
-    }
-
-    @Override
-    public String getTargetedName(Game game) {
-        StringBuilder sb = new StringBuilder();
-        for (UUID targetId : getTargets()) {
-            MageObject object = game.getObject(targetId);
-            if (object != null) {
-                sb.append(object.getLogName()).append(' ');
-            } else {
-                Player player = game.getPlayer(targetId);
-                if (player != null) {
-                    sb.append(player.getLogName()).append(' ');
-                }
-            }
-        }
-        return sb.toString().trim();
+        List<MageObjectReferencePredicate> predicates = getPossibleTargets(spell, actingPlayer, source, game);
+        spell.createCopyOnStack(
+                game, source, actingPlayer.getId(), false,
+                predicates.size(), new CopyApplier(predicates)
+        );
+        return true;
     }
 }

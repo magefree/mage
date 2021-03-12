@@ -12,7 +12,6 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetSpell;
@@ -81,10 +80,7 @@ class IncreasingVengeanceEffect extends OneShotEffect {
         if (sourceSpell != null && sourceSpell.getFromZone() == Zone.GRAVEYARD) {
             copies++;
         }
-        StackObject stackObjectCopy = spell.createCopyOnStack(game, source, source.getControllerId(), true, copies);
-        if (stackObjectCopy instanceof Spell) {
-            game.informPlayers(controller.getLogName() + ((Spell) stackObjectCopy).getActivatedMessage(game));
-        }
+        spell.createCopyOnStack(game, source, source.getControllerId(), true, copies);
         return true;
     }
 

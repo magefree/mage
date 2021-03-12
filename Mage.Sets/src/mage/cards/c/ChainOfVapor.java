@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -15,19 +14,19 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class ChainOfVapor extends CardImpl {
 
     public ChainOfVapor(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}");
 
         // Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy.
         this.getSpellAbility().addEffect(new ChainOfVaporEffect());
@@ -77,14 +76,7 @@ class ChainOfVaporEffect extends OneShotEffect {
                     if (player.chooseUse(outcome, "Copy the spell?", source, game)) {
                         Spell spell = game.getStack().getSpell(source.getSourceId());
                         if (spell != null) {
-                            StackObject newStackObject = spell.createCopyOnStack(game, source, player.getId(), true);
-                            if (newStackObject instanceof Spell) {
-                                String activateMessage = ((Spell) newStackObject).getActivatedMessage(game);
-                                if (activateMessage.startsWith(" casts ")) {
-                                    activateMessage = activateMessage.substring(6);
-                                }
-                                game.informPlayers(player.getLogName() + ' ' + activateMessage);
-                            }
+                            spell.createCopyOnStack(game, source, player.getId(), true);
                         }
                     }
                 }

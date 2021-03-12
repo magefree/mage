@@ -82,7 +82,6 @@ class StringOfDisappearancesEffect extends OneShotEffect {
             return true;
         }
         spell.createCopyOnStack(game, source, affectedPlayer.getId(), true);
-        game.informPlayers(affectedPlayer.getLogName() + " copies " + spell.getName() + '.');
         return true;
     }
 }

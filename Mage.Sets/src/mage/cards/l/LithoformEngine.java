@@ -109,7 +109,6 @@ class LithoformEngineEffect extends OneShotEffect {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (controller != null && sourcePermanent != null) {
                 stackAbility.createCopyOnStack(game, source, source.getControllerId(), true);
-                game.informPlayers(sourcePermanent.getIdName() + ": " + controller.getLogName() + " copied ability");
                 return true;
             }
         }
