@@ -30,6 +30,7 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.Targets;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.SubTypes;
 import mage.util.functions.SpellCopyApplier;
@@ -626,6 +627,13 @@ public class StackAbility extends StackObjImpl implements Ability {
                 }
             }
             game.fireEvent(new CopiedStackObjectEvent(this, newStackAbility, newControllerId));
+        }
+        Player player = game.getPlayer(newControllerId);
+        if (player != null) {
+            game.informPlayers(
+                    player.getName() + " created " + CardUtil.numberToText(gameEvent.getAmount(), "a")
+                            + " cop" + (gameEvent.getAmount() == 1 ? "y" : "ies") + " of " + getIdName()
+            );
         }
     }
 
