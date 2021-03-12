@@ -28,7 +28,6 @@ public class TwinningStaffTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, lion);
         addCard(Zone.HAND, playerA, growth);
 
-        setChoice(playerA, playerA.getName()); // need to choose starting player manually
         setChoice(playerA, TestPlayer.CHOICE_SKIP); // skip stack order
         setChoice(playerA, "Yes");
         addTarget(playerA, bear);

@@ -1164,7 +1164,6 @@ public class Spell extends StackObjImpl implements Card {
             return;
         }
         Iterator<MageObjectReferencePredicate> predicates = new PredicateIterator(game, newControllerId, gameEvent.getAmount(), applier);
-        // TODO: add a way to choose order of items on the stack
         for (int i = 0; i < gameEvent.getAmount(); i++) {
             spellCopy = this.copySpell(game, source, newControllerId);
             if (applier != null) {
