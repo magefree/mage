@@ -1158,14 +1158,13 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount, SpellCopyApplier applier) {
-        Spell spellCopy = null;
         GameEvent gameEvent = new CopyStackObjectEvent(source, this, newControllerId, amount);
         if (game.replaceEvent(gameEvent)) {
             return;
         }
         Iterator<MageObjectReferencePredicate> predicates = new PredicateIterator(game, newControllerId, gameEvent.getAmount(), applier);
         for (int i = 0; i < gameEvent.getAmount(); i++) {
-            spellCopy = this.copySpell(game, source, newControllerId);
+            Spell spellCopy = this.copySpell(game, source, newControllerId);
             if (applier != null) {
                 applier.modifySpell(spellCopy, game);
             }
@@ -1178,6 +1177,13 @@ public class Spell extends StackObjImpl implements Card {
                 spellCopy.chooseNewTargets(game, newControllerId);
             }
             game.fireEvent(new CopiedStackObjectEvent(this, spellCopy, newControllerId));
+        }
+        Player player = game.getPlayer(newControllerId);
+        if (player != null) {
+            game.informPlayers(
+                    player.getName() + " created " + CardUtil.numberToText(gameEvent.getAmount(), "a")
+                            + " cop" + (gameEvent.getAmount() == 1 ? "y" : "ies") + " of " + getIdName()
+            );
         }
     }
 

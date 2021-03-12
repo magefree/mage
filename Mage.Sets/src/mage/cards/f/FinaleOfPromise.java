@@ -154,7 +154,6 @@ class FinaleOfPromiseEffect extends OneShotEffect {
                     Spell spell = game.getStack().getSpell(card.getId());
                     if (spell != null) {
                         spell.createCopyOnStack(game, source, controller.getId(), true, 2);
-                        game.informPlayers(controller.getLogName() + " copies " + spell.getName() + " twice.");
                     }
                 }
             }
