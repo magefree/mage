@@ -2,8 +2,8 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.MageObject;
-import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -20,6 +20,7 @@ import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 
+import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
 
@@ -40,7 +41,7 @@ public final class ZirdaTheDawnwaker extends CardImpl {
         // Companion — Each permanent card in your starting deck has an activated ability.
         this.addAbility(new CompanionAbility(ZirdaTheDawnwakerCompanionCondition.instance));
 
-        // Abilities you activate that aren't mana abilities cost {2} less to activate. 
+        // Abilities you activate that aren't mana abilities cost {2} less to activate.
         // This effect can't reduce the mana in that cost to less than one mana.
         this.addAbility(new SimpleStaticAbility(new ZirdaTheDawnwakerEffect()));
 
@@ -76,13 +77,9 @@ enum ZirdaTheDawnwakerCompanionCondition implements CompanionCondition {
         return deck
                 .stream()
                 .filter(MageObject::isPermanent)
-                .allMatch(card -> card
-                .getAbilities()
-                .stream()
-                .map(Ability::getAbilityType)
-                .anyMatch(abilityType -> abilityType == AbilityType.ACTIVATED
-                || abilityType == AbilityType.MANA)
-                );
+                .map(MageObject::getAbilities)
+                .flatMap(Collection::stream)
+                .anyMatch(ActivatedAbility.class::isInstance);
     }
 }
 
@@ -100,8 +97,10 @@ class ZirdaTheDawnwakerEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        int reduceMax = CardUtil.calculateActualPossibleGenericManaReduction(abilityToModify.getManaCostsToPay().getMana(), 2, 1);        
-        if (reduceMax <= 0) {
+        int reduceMax = CardUtil.calculateActualPossibleGenericManaReduction(
+                abilityToModify.getManaCostsToPay().getMana(), 2, 1
+        );
+        if (reduceMax < 1) {
             return true;
         }
         CardUtil.reduceCost(abilityToModify, reduceMax);
@@ -112,8 +111,7 @@ class ZirdaTheDawnwakerEffect extends CostModificationEffectImpl {
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return abilityToModify.getAbilityType() == AbilityType.ACTIVATED
-                && abilityToModify.isControlledBy(source.getControllerId())
-                && abilityToModify.getAbilityType() != AbilityType.MANA;  // no mana abilities
+                && abilityToModify.isControlledBy(source.getControllerId());
     }
 
     @Override
