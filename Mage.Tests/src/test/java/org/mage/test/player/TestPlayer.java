@@ -3165,6 +3165,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void exchangeLife(Player player, Ability source, Game game) {
+        computerPlayer.exchangeLife(player, source, game);
+    }
+
+    @Override
     public int damage(int damage, UUID attackerId, Ability source, Game game) {
         return computerPlayer.damage(damage, attackerId, source, game);
     }

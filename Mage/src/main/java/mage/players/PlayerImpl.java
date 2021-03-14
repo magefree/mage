@@ -2064,6 +2064,18 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public void exchangeLife(Player player, Ability source, Game game) {
+        int lifePlayer1 = getLife();
+        int lifePlayer2 = player.getLife();
+        if ((lifePlayer1 != lifePlayer2 && this.isLifeTotalCanChange() && player.isLifeTotalCanChange())
+                && (lifePlayer1 >= lifePlayer2 || (this.isCanGainLife() && player.isCanLoseLife()))
+                && (lifePlayer1 <= lifePlayer2 || (this.isCanLoseLife() && player.isCanGainLife()))) {
+            this.setLife(lifePlayer2, game, source);
+            player.setLife(lifePlayer1, game, source);
+        }
+    }
+
+    @Override
     public int damage(int damage, UUID attackerId, Ability source, Game game) {
         return doDamage(damage, attackerId, source, game, false, true, null);
     }

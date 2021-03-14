@@ -138,6 +138,10 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public void exchangeLife(Player player, Ability source, Game game) {
+    }
+
+    @Override
     public int damage(int damage, UUID attackerId, Ability source, Game game) {
         return 0;
     }

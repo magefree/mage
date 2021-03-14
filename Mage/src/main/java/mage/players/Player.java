@@ -50,9 +50,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Current player is real life player (human). Try to use in GUI and network engine only.
-     *
+     * <p>
      * WARNING, you must use isComputer instead isHuman in card's code (for good Human/AI logic testing in unit tests)
      * TODO: check combat code and other and replace isHuman to isComputer usage if possible (if AI support that actions)
+     *
      * @return
      */
     boolean isHuman();
@@ -61,9 +62,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Current player is AI. Use it in card's code and all other places.
-     *
+     * <p>
      * It help to split Human/AI logic and test both by unit tests.
-     *
+     * <p>
      * Usage example: AI hint to skip or auto-calculate choices instead call of real choose dialogs
      * - unit tests for Human logic: call normal commands
      * - unit tests for AI logic: call aiXXX commands
@@ -124,6 +125,8 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     int gainLife(int amount, Game game, Ability source);
+
+    void exchangeLife(Player player, Ability source, Game game);
 
     int damage(int damage, UUID attackerId, Ability source, Game game);
 
