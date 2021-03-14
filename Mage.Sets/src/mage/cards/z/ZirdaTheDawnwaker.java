@@ -86,7 +86,7 @@ enum ZirdaTheDawnwakerCompanionCondition implements CompanionCondition {
 class ZirdaTheDawnwakerEffect extends CostModificationEffectImpl {
 
     ZirdaTheDawnwakerEffect() {
-        super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "Abilities you activate that aren't mana abilities cost {2} less to activate. "
                 + "This effect can't reduce the mana in that cost to less than one mana";
     }

@@ -72,4 +72,33 @@ public class ZirdaTheDawnwakerTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, 2);
         assertGraveyardCount(playerB, lion, 0);
     }
+
+    @Test
+    public void testWithGeth2() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.BATTLEFIELD, playerA, geth);
+        addCard(Zone.GRAVEYARD, playerB, zirda);
+        addCard(Zone.GRAVEYARD, playerB, lion);
+
+        setChoice(playerA, "X=3");
+        addTarget(playerA, zirda);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}{B}");
+
+        setChoice(playerA, "X=2");
+        addTarget(playerA, lion);
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{X}{B}");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertPermanentCount(playerA, zirda, 1);
+        assertPermanentCount(playerA, lion, 1);
+        assertTapped(zirda, true);
+        assertTapped(lion, true);
+        assertGraveyardCount(playerB, 2 + 3);
+        assertGraveyardCount(playerB, zirda, 0);
+        assertGraveyardCount(playerB, lion, 0);
+    }
 }
