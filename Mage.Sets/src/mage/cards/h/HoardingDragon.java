@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -41,7 +41,8 @@ public final class HoardingDragon extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new HoardingDragonEffect(), true));
 
         // When Hoarding Dragon dies, you may put the exiled card into its owner's hand.
-        this.addAbility(new DiesSourceTriggeredAbility(new ReturnFromExileEffect(Zone.HAND), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new ReturnFromExileEffect(Zone.HAND)
+                .setText("put the exiled card into its owner's hand"), true));
     }
 
     private HoardingDragon(final HoardingDragon card) {
@@ -59,7 +60,7 @@ class HoardingDragonEffect extends OneShotEffect {
 
     HoardingDragonEffect() {
         super(Outcome.Exile);
-        this.staticText = "you may search your library for an artifact card, exile it, then shuffle your library";
+        this.staticText = "search your library for an artifact card, exile it, then shuffle your library";
     }
 
     private HoardingDragonEffect(final HoardingDragonEffect effect) {
@@ -70,15 +71,17 @@ class HoardingDragonEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        UUID exileId = CardUtil.getExileZoneId(game, source);
         if (controller == null || sourceObject == null) {
             return false;
         }
-        TargetCardInLibrary target = new TargetCardInLibrary(new FilterArtifactCard());
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_ARTIFACT);
         controller.searchLibrary(target, source, game);
         Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
         if (card != null) {
-            controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source, game, Zone.LIBRARY, true);
+            controller.moveCardsToExile(
+                    card, source, game, true,
+                    CardUtil.getExileZoneId(game, source), sourceObject.getIdName()
+            );
         }
         controller.shuffleLibrary(source, game);
         return true;
