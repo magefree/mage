@@ -1,7 +1,7 @@
-
 package mage.cards.h;
 
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,17 +13,17 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
+import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
- *
- * @author LevelX2
+ * @author TheElk801
  */
 public final class HedonistsTrove extends CardImpl {
 
@@ -36,11 +36,10 @@ public final class HedonistsTrove extends CardImpl {
         this.addAbility(ability);
 
         // You may play land cards exiled by Hedonist's Trove.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HedonistsTrovePlayLandEffect()));
+        this.addAbility(new SimpleStaticAbility(new HedonistsTrovePlayLandEffect()));
 
         // You may cast nonland cards exiled with Hedonist's Trove. You can't cast more than one spell this way each turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HedonistsTroveCastNonlandCardsEffect()));
-
+        this.addAbility(new SimpleStaticAbility(new HedonistsTroveCastNonlandCardsEffect()), new HedonistsTroveWatcher());
     }
 
     private HedonistsTrove(final HedonistsTrove card) {
@@ -55,44 +54,43 @@ public final class HedonistsTrove extends CardImpl {
 
 class HedonistsTroveExileEffect extends OneShotEffect {
 
-    public HedonistsTroveExileEffect() {
+    HedonistsTroveExileEffect() {
         super(Outcome.Exile);
         staticText = "exile all cards from target opponent's graveyard";
     }
 
+    private HedonistsTroveExileEffect(final HedonistsTroveExileEffect effect) {
+        super(effect);
+    }
+
     @Override
     public HedonistsTroveExileEffect copy() {
-        return new HedonistsTroveExileEffect();
+        return new HedonistsTroveExileEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && targetPlayer != null && sourceObject != null) {
-            UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-            List<UUID> graveyard = new ArrayList<>(targetPlayer.getGraveyard());
-            for (UUID cardId : graveyard) {
-                Card card = game.getCard(cardId);
-                if (card != null) {
-                    controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source, game, Zone.GRAVEYARD, true);
-                }
-            }
-            return true;
-        }
-        return false;
+        return controller != null
+                && targetPlayer != null
+                && sourceObject != null
+                && controller.moveCardsToExile(
+                targetPlayer.getGraveyard().getCards(game), source, game, true,
+                CardUtil.getExileZoneId(game, source), sourceObject.getIdName()
+        );
     }
 }
 
 class HedonistsTrovePlayLandEffect extends AsThoughEffectImpl {
 
-    public HedonistsTrovePlayLandEffect() {
+    HedonistsTrovePlayLandEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You may play land cards exiled with {this}";
+        staticText = "You may play lands from among cards exiled with {this}";
     }
 
-    public HedonistsTrovePlayLandEffect(final HedonistsTrovePlayLandEffect effect) {
+    private HedonistsTrovePlayLandEffect(final HedonistsTrovePlayLandEffect effect) {
         super(effect);
     }
 
@@ -108,35 +106,25 @@ class HedonistsTrovePlayLandEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(objectId);
-            MageObject sourceObject = source.getSourceObject(game);
-            if (card != null && card.isLand() && sourceObject != null) {
-                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-                if (exileId != null) {
-                    ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
-                    return exileZone != null && exileZone.contains(objectId);
-                }
-            }
+        Card cardToCheck = game.getCard(objectId);
+        if (cardToCheck == null || !cardToCheck.isLand() || !source.isControlledBy(affectedControllerId)) {
+            return false;
         }
-        return false;
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        return exileZone != null && exileZone.contains(cardToCheck.getMainCard());
     }
 }
 
 class HedonistsTroveCastNonlandCardsEffect extends AsThoughEffectImpl {
 
-    private int turnNumber;
-    private UUID cardId;
-
-    public HedonistsTroveCastNonlandCardsEffect() {
+    HedonistsTroveCastNonlandCardsEffect() {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You may cast nonland cards exiled with {this}. You can't cast more than one spell this way each turn";
+        staticText = "You may cast spells from among cards exiled with {this}. " +
+                "You can’t cast more than one spell this way each turn.";
     }
 
-    public HedonistsTroveCastNonlandCardsEffect(final HedonistsTroveCastNonlandCardsEffect effect) {
+    private HedonistsTroveCastNonlandCardsEffect(final HedonistsTroveCastNonlandCardsEffect effect) {
         super(effect);
-        this.turnNumber = effect.turnNumber;
-        this.cardId = effect.cardId;
     }
 
     @Override
@@ -151,29 +139,52 @@ class HedonistsTroveCastNonlandCardsEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(objectId);
-            MageObject sourceObject = source.getSourceObject(game);
-            if (card != null && !card.isLand() && sourceObject != null) {
-                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-                if (exileId != null) {
-                    ExileZone exileZone = game.getState().getExile().getExileZone(exileId);
-                    if (exileZone != null && exileZone.contains(objectId)) {
-                        if (game.getTurnNum() == turnNumber) {
-                            if (!exileZone.contains(cardId)) {
-                                // last checked card this turn is no longer exiled, so you can't cast another with this effect
-                                // TODO: Handle if card was cast/removed from exile with effect from another card.
-                                //       If so, this effect could prevent player from casting although they should be able to use it
-                                return false;
-                            }
-                        }
-                        this.turnNumber = game.getTurnNum();
-                        this.cardId = objectId;
-                        return true;
-                    }
-                }
-            }
+        HedonistsTroveWatcher watcher = game.getState().getWatcher(HedonistsTroveWatcher.class);
+        if (watcher == null || !watcher.checkPlayer(affectedControllerId, source, game)) {
+            return false;
         }
-        return false;
+        Card cardToCheck = game.getCard(objectId);
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        return cardToCheck != null
+                && !cardToCheck.isLand()
+                && source.isControlledBy(affectedControllerId)
+                && exileZone != null
+                && exileZone.contains(cardToCheck.getMainCard());
+    }
+}
+
+class HedonistsTroveWatcher extends Watcher {
+
+    private static final Set<MageObjectReference> emptySet = new HashSet<>();
+    private final Map<UUID, Set<MageObjectReference>> playerMap = new HashMap<>();
+
+    HedonistsTroveWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getAdditionalReference() == null) {
+            return;
+        }
+        playerMap
+                .computeIfAbsent(event.getPlayerId(), x -> new HashSet<>())
+                .add(event.getAdditionalReference().getApprovingMageObjectReference());
+        playerMap.get(event.getPlayerId()).removeIf(Objects::isNull);
+    }
+
+    boolean checkPlayer(UUID playerId, Ability source, Game game) {
+        Permanent permanent = source.getSourcePermanentOrLKI(game);
+        return permanent != null
+                && playerMap
+                .getOrDefault(playerId, emptySet)
+                .stream()
+                .noneMatch(mor -> mor.refersTo(permanent, game));
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        playerMap.clear();
     }
 }
