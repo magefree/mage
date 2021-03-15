@@ -8,12 +8,11 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ManaEvent;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -44,23 +43,22 @@ public class TapForManaAllTriggeredAbility extends TriggeredAbilityImpl {
         if (game.inCheckPlayableState()) { // Ignored - see GameEvent.TAPPED_FOR_MANA
             return false;
         }
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
-            ManaEvent mEvent = (ManaEvent) event;
-            for(Effect effect:getEffects()) {
-                effect.setValue("mana", mEvent.getMana());
-            }
-            switch(setTargetPointer) {
-                case PERMANENT:
-                    getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
-                    break;
-                case PLAYER:
-                    getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                    break;
-            }
-            return true;
+        TappedForManaEvent manaEvent = ((TappedForManaEvent) event);
+        Permanent permanent = manaEvent.getPermanent();
+        if (permanent == null || !filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            return false;
         }
-        return false;
+        getEffects().setValue("mana", manaEvent.getMana());
+        getEffects().setValue("tappedPermanent", permanent);
+        switch (setTargetPointer) {
+            case PERMANENT:
+                getEffects().setTargetPointer(new FixedTarget(permanent.getId(), permanent.getZoneChangeCounter(game)));
+                break;
+            case PLAYER:
+                getEffects().setTargetPointer(new FixedTarget(permanent.getControllerId()));
+                break;
+        }
+        return true;
     }
 
     @Override
