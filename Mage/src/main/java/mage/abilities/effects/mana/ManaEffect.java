@@ -8,8 +8,8 @@ import mage.constants.AbilityType;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
+import mage.game.events.TappedForManaEvent;
 import mage.players.Player;
 
 import java.util.ArrayList;
@@ -133,7 +133,7 @@ public abstract class ManaEffect extends OneShotEffect {
      */
     public void checkToFirePossibleEvents(Mana mana, Game game, Ability source) {
         if (source.getAbilityType() == AbilityType.MANA && source.hasTapCost()) {
-            ManaEvent event = new ManaEvent(GameEvent.EventType.TAPPED_FOR_MANA, source.getSourceId(), source, source.getControllerId(), mana);
+            ManaEvent event = new TappedForManaEvent(source.getSourceId(), source, source.getControllerId(), mana, game);
             if (!game.replaceEvent(event)) {
                 game.fireEvent(event);
             }
