@@ -84,13 +84,18 @@ class OnceUponATimeWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (GameEvent.EventType.SPELL_CAST == event.getType()) {
-            castSpells.add(event.getPlayerId());
+        switch (event.getType()) {
+            case SPELL_CAST:
+                castSpells.add(event.getPlayerId());
+                return;
+            case BEGINNING_PHASE_PRE:
+                if (game.getTurnNum() == 1) {
+                    castSpells.clear();
+                }
         }
     }
 
-    public boolean getSpellsCastThisGame(UUID playerId) {
+    boolean getSpellsCastThisGame(UUID playerId) {
         return !castSpells.contains(playerId);
     }
-    
 }
