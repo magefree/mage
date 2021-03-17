@@ -5,20 +5,22 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ChooseColorEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.effects.mana.AddManaChosenColorEffect;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.FilterPermanent;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.mageobject.ChosenColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ManaEvent;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -32,10 +34,11 @@ import java.util.UUID;
  */
 public final class GauntletOfPower extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("a basic land");
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent("creatures of the chosen color");
 
     static {
-        filter.add(SuperType.BASIC.getPredicate());
+        filter.add(ChosenColorPredicate.TRUE);
     }
 
     public GauntletOfPower(UUID ownerId, CardSetInfo setInfo) {
@@ -43,11 +46,14 @@ public final class GauntletOfPower extends CardImpl {
 
         // As Gauntlet of Power enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
+
         // Creatures of the chosen color get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GauntletOfPowerBoostEffect()));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(
+                1, 1, Duration.WhileOnBattlefield, filter, false
+        )));
 
         // Whenever a basic land is tapped for mana of the chosen color, its controller adds one mana of that color.
-        this.addAbility(new GauntletOfPowerTapForManaAllTriggeredAbility(new GauntletOfPowerManaEffect2(), filter, SetTargetPointer.PERMANENT));
+        this.addAbility(new GauntletOfPowerTapForManaAllTriggeredAbility());
     }
 
     private GauntletOfPower(final GauntletOfPower card) {
@@ -60,55 +66,14 @@ public final class GauntletOfPower extends CardImpl {
     }
 }
 
-class GauntletOfPowerBoostEffect extends ContinuousEffectImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    public GauntletOfPowerBoostEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-        staticText = "Creatures of the chosen color get +1/+1";
-    }
-
-    public GauntletOfPowerBoostEffect(final GauntletOfPowerBoostEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public GauntletOfPowerBoostEffect copy() {
-        return new GauntletOfPowerBoostEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
-        if (color != null) {
-            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                if (perm.getColor(game).contains(color)) {
-                    perm.addPower(1);
-                    perm.addToughness(1);
-                }
-            }
-        }
-        return true;
-    }
-
-}
-
 class GauntletOfPowerTapForManaAllTriggeredAbility extends TriggeredManaAbility {
 
-    private final FilterPermanent filter;
-    private final SetTargetPointer setTargetPointer;
-
-    public GauntletOfPowerTapForManaAllTriggeredAbility(ManaEffect effect, FilterPermanent filter, SetTargetPointer setTargetPointer) {
-        super(Zone.BATTLEFIELD, effect, false);
-        this.filter = filter;
-        this.setTargetPointer = setTargetPointer;
+    GauntletOfPowerTapForManaAllTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new AddManaChosenColorEffect(), false);
     }
 
-    public GauntletOfPowerTapForManaAllTriggeredAbility(GauntletOfPowerTapForManaAllTriggeredAbility ability) {
+    private GauntletOfPowerTapForManaAllTriggeredAbility(GauntletOfPowerTapForManaAllTriggeredAbility ability) {
         super(ability);
-        this.filter = ability.filter.copy();
-        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -118,42 +83,27 @@ class GauntletOfPowerTapForManaAllTriggeredAbility extends TriggeredManaAbility 
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
-            ManaEvent mEvent = (ManaEvent) event;
-            ObjectColor color = (ObjectColor) game.getState().getValue(getSourceId() + "_color");
-            if (color != null) {
-                Mana mana = mEvent.getMana();
-                boolean colorFits = false;
-                if (color.isBlack() && mana.getBlack() > 0) {
-                    colorFits = true;
-                } else if (color.isBlue() && mana.getBlue() > 0) {
-                    colorFits = true;
-                } else if (color.isGreen() && mana.getGreen() > 0) {
-                    colorFits = true;
-                } else if (color.isWhite() && mana.getWhite() > 0) {
-                    colorFits = true;
-                } else if (color.isRed() && mana.getRed() > 0) {
-                    colorFits = true;
-                }
-                if (colorFits) {
-
-                    for (Effect effect : getEffects()) {
-                        effect.setValue("mana", mEvent.getMana());
-                    }
-                    switch (setTargetPointer) {
-                        case PERMANENT:
-                            getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
-                            break;
-                        case PLAYER:
-                            getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                            break;
-                    }
-                    return true;
-                }
-            }
+        TappedForManaEvent mEvent = (TappedForManaEvent) event;
+        Permanent permanent = mEvent.getPermanent();
+        if (permanent == null || !permanent.isLand() || !permanent.isBasic()) {
+            return false;
         }
-        return false;
+        ObjectColor color = (ObjectColor) game.getState().getValue(getSourceId() + "_color");
+        if (color == null) {
+            return false;
+        }
+        Mana mana = mEvent.getMana();
+        if ((!color.isBlack() || mana.getBlack() < 1)
+                && (!color.isBlue() || mana.getBlue() < 1)
+                && (!color.isGreen() || mana.getGreen() < 1)
+                && (!color.isWhite() || mana.getWhite() < 1)
+                && (!color.isRed() || mana.getRed() < 1)) {
+            return false;
+        }
+
+        getEffects().setValue("mana", mEvent.getMana());
+        getEffects().setTargetPointer(new FixedTarget(permanent, game));
+        return true;
     }
 
     @Override
@@ -170,12 +120,12 @@ class GauntletOfPowerTapForManaAllTriggeredAbility extends TriggeredManaAbility 
 
 class GauntletOfPowerManaEffect2 extends ManaEffect {
 
-    public GauntletOfPowerManaEffect2() {
+    GauntletOfPowerManaEffect2() {
         super();
         staticText = "its controller adds one additional mana of that color";
     }
 
-    public GauntletOfPowerManaEffect2(final GauntletOfPowerManaEffect2 effect) {
+    private GauntletOfPowerManaEffect2(final GauntletOfPowerManaEffect2 effect) {
         super(effect);
     }
 
@@ -191,27 +141,28 @@ class GauntletOfPowerManaEffect2 extends ManaEffect {
     @Override
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
-        if (game != null) {
-            Mana mana = (Mana) getValue("mana");
-            if (mana != null) {
-                netMana.add(mana.copy());
-            }
+        if (game == null) {
+            return netMana;
         }
+        Mana mana = (Mana) getValue("mana");
+        if (mana == null) {
+            return netMana;
+        }
+        netMana.add(mana.copy());
         return netMana;
     }
 
     @Override
     public Mana produceMana(Game game, Ability source) {
-        if (game != null) {
-            Permanent land = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-            if (land != null) {
-                Mana mana = (Mana) getValue("mana");
-                if (mana != null) {
-                    return mana.copy();
-                }
-            }
+        if (game == null) {
+            return new Mana();
         }
-        return new Mana();
+        Permanent land = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
+        Mana mana = (Mana) getValue("mana");
+        if (land == null || mana == null) {
+            return new Mana();
+        }
+        return mana.copy();
     }
 
     @Override
