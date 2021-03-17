@@ -38,9 +38,6 @@ public class TapForManaAllTriggeredManaAbility extends TriggeredManaAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.inCheckPlayableState()) { // Ignored - see GameEvent.TAPPED_FOR_MANA
-            return false;
-        }
         TappedForManaEvent manaEvent = ((TappedForManaEvent) event);
         Permanent permanent = manaEvent.getPermanent();
         if (permanent == null || !filter.match(permanent, getSourceId(), getControllerId(), game)) {
