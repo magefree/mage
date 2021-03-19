@@ -19,6 +19,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -81,6 +83,12 @@ class CouncilsJudgmentVote extends VoteHandler<Permanent> {
     CouncilsJudgmentVote(Player controller) {
         this.filter = new FilterNonlandPermanent("nonland permanent not controlled by " + controller.getName());
         this.filter.add(Predicates.not(new ControllerIdPredicate(controller.getId())));
+    }
+
+    @Override
+    protected Set<Permanent> getPossibleVotes(Ability source, Game game) {
+        // too much permanentns on battlefield, so no need to show full list here
+        return new LinkedHashSet<>();
     }
 
     @Override

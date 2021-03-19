@@ -5,10 +5,9 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * @author TheElk801
@@ -18,12 +17,16 @@ public class TwoChoiceVote extends VoteHandler<Boolean> {
     private final String choice1;
     private final String choice2;
     private final Outcome outcome;
-    private final Map<UUID, List<Boolean>> playerMap = new HashMap<>();
 
     public TwoChoiceVote(String choice1, String choice2, Outcome outcome) {
         this.choice1 = choice1;
         this.choice2 = choice2;
         this.outcome = outcome;
+    }
+
+    @Override
+    protected Set<Boolean> getPossibleVotes(Ability source, Game game) {
+        return new LinkedHashSet<>(Arrays.asList(Boolean.TRUE, Boolean.FALSE));
     }
 
     @Override

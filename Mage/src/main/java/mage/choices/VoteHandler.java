@@ -46,11 +46,59 @@ public abstract class VoteHandler<T> {
                 playerMap.computeIfAbsent(playerId, x -> new ArrayList<>()).add(vote);
             }
         }
+
+        // show final results to players
+
+        Map<T, Integer> totalVotes = new LinkedHashMap<>();
+        // fill by possible choices
+        this.getPossibleVotes(source, game).forEach(vote -> {
+            totalVotes.putIfAbsent(vote, 0);
+        });
+        // fill by real choices
+        playerMap.entrySet()
+                .stream()
+                .flatMap(votesList -> votesList.getValue().stream())
+                .forEach(vote -> {
+                    totalVotes.compute(vote, (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+                });
+
+        Set<T> winners = this.getMostVoted();
+        String totalVotesStr = totalVotes.entrySet()
+                .stream()
+                .map(entry -> (winners.contains(entry.getKey()) ? " -win- " : " -lose- ") + voteName(entry.getKey()) + ": " + entry.getValue())
+                .sorted()
+                .collect(Collectors.joining("<br>"));
+        game.informPlayers("Vote results:<br>" + totalVotesStr);
+
         game.fireEvent(new VotedEvent(source, this));
     }
 
+    /**
+     * Return possible votes. Uses for info only (final results).
+     *
+     * @param source
+     * @param game
+     * @return
+     */
+    protected abstract Set<T> getPossibleVotes(Ability source, Game game);
+
+    /**
+     * Choose dialog for voting. Another player can choose it (example: Illusion of Choice)
+     *
+     * @param player
+     * @param decidingPlayer
+     * @param source
+     * @param game
+     * @return
+     */
     protected abstract T playerChoose(Player player, Player decidingPlayer, Ability source, Game game);
 
+    /**
+     * Show readable choice name
+     *
+     * @param vote
+     * @return
+     */
     protected abstract String voteName(T vote);
 
     public List<T> getVotes(UUID playerId) {

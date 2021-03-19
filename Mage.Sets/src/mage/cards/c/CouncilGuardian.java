@@ -17,6 +17,9 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -85,12 +88,16 @@ class CouncilsGuardianEffect extends OneShotEffect {
 class CouncilGuardianVote extends VoteHandler<String> {
 
     @Override
+    protected Set<String> getPossibleVotes(Ability source, Game game) {
+        return new LinkedHashSet<>(Arrays.asList("Blue", "Black", "Red", "Green"));
+    }
+
+    @Override
     public String playerChoose(Player player, Player decidingPlayer, Ability source, Game game) {
         ChoiceColor choice = new ChoiceColor();
         choice.getChoices().remove("White");
-        decidingPlayer.choose(Outcome.AddAbility, choice, game);
-        String vote = choice.getChoice();
-        return vote;
+        decidingPlayer.choose(Outcome.AIDontUseIt, choice, game); // TODO: add AI hint logic in the choice method (hint per player)
+        return choice.getChoice();
     }
 
     @Override

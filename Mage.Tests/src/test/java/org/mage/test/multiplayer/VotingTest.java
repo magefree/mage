@@ -18,10 +18,27 @@ import java.io.FileNotFoundException;
  */
 public class VotingTest extends CardTestMultiPlayerBase {
 
+    // Council’s dilemma — When Lieutenants of the Guard enters the battlefield, starting with you,
+    // each player votes for strength or numbers. Put a +1/+1 counter on Lieutenants of the Guard
+    // for each strength vote and create a 1/1 white Soldier creature token for each numbers vote.
     private static final String lieutenant = "Lieutenants of the Guard";
+
+    // While voting, you get an additional vote. (The votes can be for different choices or for the same choice.)
     private static final String rep = "Brago's Representative";
+
+    // While voting, you may vote an additional time. (The votes can be for different choices or for the same choice.)
     private static final String broker = "Ballot Broker";
+
+    // You choose how each player votes this turn.
     private static final String illusion = "Illusion of Choice";
+
+    // TODO: add test with broker
+    // rulues:
+    // The ability only affects spells and abilities that use the word “vote.” Other cards that involve choices,
+    // such as Archangel of Strife, are unaffected.
+    // (2016-08-23)
+
+    // Whenever players finish voting, each opponent who voted for a choice you didn’t vote for loses 2 life.
     private static final String keeper = "Grudge Keeper";
 
     @Override
@@ -47,14 +64,14 @@ public class VotingTest extends CardTestMultiPlayerBase {
     }
 
     @Test
-    public void testLieutenant1() {
+    public void test_LieutenantsOfTheGuard_1() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.HAND, playerA, lieutenant);
 
-        setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lieutenant);
         setChoices("Yes");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -64,14 +81,14 @@ public class VotingTest extends CardTestMultiPlayerBase {
     }
 
     @Test
-    public void testLieutenant2() {
+    public void test_LieutenantsOfTheGuard_2() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.HAND, playerA, lieutenant);
 
-        setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lieutenant);
         setChoices("No");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -81,14 +98,14 @@ public class VotingTest extends CardTestMultiPlayerBase {
     }
 
     @Test
-    public void testLieutenant3() {
+    public void test_LieutenantsOfTheGuard_3() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.HAND, playerA, lieutenant);
 
-        setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lieutenant);
         setChoices("Yes", "Yes", "No", "No");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -98,16 +115,16 @@ public class VotingTest extends CardTestMultiPlayerBase {
     }
 
     @Test
-    public void testBragosRepresentative() {
+    public void test_BragosRepresentative() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.BATTLEFIELD, playerA, rep);
         addCard(Zone.HAND, playerA, lieutenant);
 
-        setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lieutenant);
         setChoice(playerA, "Yes");
         setChoices("Yes", "Yes", "No", "No");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -117,17 +134,17 @@ public class VotingTest extends CardTestMultiPlayerBase {
     }
 
     @Test
-    public void testBallotBroker() {
+    public void test_BallotBroker() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.BATTLEFIELD, playerA, broker);
         addCard(Zone.HAND, playerA, lieutenant);
 
-        setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, lieutenant);
         setChoices("Yes", "Yes", "No", "No");
         setChoice(playerA, "Yes"); // to have an additional vote
         setChoice(playerA, "No"); // the additional vote
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -137,16 +154,16 @@ public class VotingTest extends CardTestMultiPlayerBase {
     }
 
     @Test
-    public void testIllusionOfChoice() {
+    public void test_IllusionOfChoice_Single() {
         addCard(Zone.BATTLEFIELD, playerA, "Tundra", 6);
         addCard(Zone.HAND, playerA, illusion);
         addCard(Zone.HAND, playerA, lieutenant);
 
-        setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, illusion);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lieutenant);
         setChoice(playerA, "Yes", 4);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -156,7 +173,7 @@ public class VotingTest extends CardTestMultiPlayerBase {
     }
 
     @Test
-    public void testIllusionOfChoiceWithBragosRepresentative() {
+    public void test_IllusionOfChoice_WithBragosRepresentative() {
         addCard(Zone.BATTLEFIELD, playerA, "Tundra", 6);
         addCard(Zone.BATTLEFIELD, playerB, rep);
         addCard(Zone.HAND, playerA, illusion);
@@ -166,6 +183,7 @@ public class VotingTest extends CardTestMultiPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lieutenant);
         setChoice(playerA, "Yes", 5);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -175,19 +193,19 @@ public class VotingTest extends CardTestMultiPlayerBase {
     }
 
     @Test
-    public void testIllusionOfChoiceTwice() {
+    public void test_IllusionOfChoice_Double() {
         addCard(Zone.BATTLEFIELD, playerA, "Tundra", 6);
         addCard(Zone.BATTLEFIELD, playerB, "Island");
         addCard(Zone.HAND, playerA, illusion);
         addCard(Zone.HAND, playerB, illusion);
         addCard(Zone.HAND, playerA, lieutenant);
 
-        setStrictChooseMode(true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, illusion);
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerB, illusion);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lieutenant);
         setChoice(playerB, "Yes", 4);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -197,17 +215,17 @@ public class VotingTest extends CardTestMultiPlayerBase {
     }
 
     @Test
-    public void testGrudgeKeeper() {
+    public void test_GrudgeKeeper_1() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.BATTLEFIELD, playerA, keeper);
         addCard(Zone.BATTLEFIELD, playerB, rep);
         addCard(Zone.HAND, playerA, lieutenant);
 
-        setStrictChooseMode(true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lieutenant);
         setChoice(playerB, "Yes");
         setChoices("Yes", "No", "No", "No");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();
@@ -221,19 +239,19 @@ public class VotingTest extends CardTestMultiPlayerBase {
     }
 
     @Test
-    public void testGrudgeKeeper2() {
+    public void test_GrudgeKeeper_2() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
         addCard(Zone.BATTLEFIELD, playerA, keeper);
         addCard(Zone.BATTLEFIELD, playerA, rep);
         addCard(Zone.BATTLEFIELD, playerB, rep);
         addCard(Zone.HAND, playerA, lieutenant);
 
-        setStrictChooseMode(true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, lieutenant);
         setChoice(playerA, "No");
         setChoice(playerB, "No");
         setChoices("Yes");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertAllCommandsUsed();

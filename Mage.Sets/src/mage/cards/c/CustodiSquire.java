@@ -19,6 +19,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -92,6 +94,12 @@ class CustodiSquireVote extends VoteHandler<Card> {
                 CardType.CREATURE.getPredicate(),
                 CardType.ENCHANTMENT.getPredicate()
         ));
+    }
+
+    @Override
+    protected Set<Card> getPossibleVotes(Ability source, Game game) {
+        // too much permanentns on battlefield, so no need to show full list here
+        return new LinkedHashSet<>();
     }
 
     @Override
