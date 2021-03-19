@@ -27,7 +27,7 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
 
     @Override
     public Player getPlayer(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        Permanent permanent = (Permanent) getValue("tappedPermanent");
         if (permanent != null) {
             return game.getPlayer(permanent.getControllerId());
         }
@@ -38,25 +38,26 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
     public List<Mana> getNetMana(Game game, Ability source) {
         List<Mana> netMana = new ArrayList<>();
         Mana types = (Mana) this.getValue("mana");
-        if (types != null) {
-            if (types.getBlack() > 0) {
-                netMana.add(Mana.BlackMana(1));
-            }
-            if (types.getRed() > 0) {
-                netMana.add(Mana.RedMana(1));
-            }
-            if (types.getBlue() > 0) {
-                netMana.add(Mana.BlueMana(1));
-            }
-            if (types.getGreen() > 0) {
-                netMana.add(Mana.GreenMana(1));
-            }
-            if (types.getWhite() > 0) {
-                netMana.add(Mana.WhiteMana(1));
-            }
-            if (types.getColorless() > 0) {
-                netMana.add(Mana.ColorlessMana(1));
-            }
+        if (types == null) {
+            return netMana;
+        }
+        if (types.getBlack() > 0) {
+            netMana.add(Mana.BlackMana(1));
+        }
+        if (types.getRed() > 0) {
+            netMana.add(Mana.RedMana(1));
+        }
+        if (types.getBlue() > 0) {
+            netMana.add(Mana.BlueMana(1));
+        }
+        if (types.getGreen() > 0) {
+            netMana.add(Mana.GreenMana(1));
+        }
+        if (types.getWhite() > 0) {
+            netMana.add(Mana.WhiteMana(1));
+        }
+        if (types.getColorless() > 0) {
+            netMana.add(Mana.ColorlessMana(1));
         }
         return netMana;
     }
@@ -64,68 +65,69 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
     @Override
     public Mana produceMana(Game game, Ability source) {
         Mana newMana = new Mana();
-        if (game != null) {
-            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (permanent != null) {
-                Player targetController = game.getPlayer(permanent.getControllerId());
-                Mana types = (Mana) this.getValue("mana");
-                if (targetController == null || types == null) {
-                    return newMana;
-                }
+        if (game == null) {
+            return newMana;
+        }
+        Permanent permanent = (Permanent) this.getValue("tappedPermanent");
+        Mana types = (Mana) this.getValue("mana");
+        if (permanent == null || types == null) {
+            return newMana;
+        }
+        Player targetController = game.getPlayer(permanent.getControllerId());
+        if (targetController == null) {
+            return newMana;
+        }
 
-                Choice choice = new ChoiceColor(true);
-                choice.getChoices().clear();
-                choice.setMessage("Pick the type of mana to produce");
-                if (types.getBlack() > 0) {
-                    choice.getChoices().add("Black");
-                }
-                if (types.getRed() > 0) {
-                    choice.getChoices().add("Red");
-                }
-                if (types.getBlue() > 0) {
-                    choice.getChoices().add("Blue");
-                }
-                if (types.getGreen() > 0) {
-                    choice.getChoices().add("Green");
-                }
-                if (types.getWhite() > 0) {
-                    choice.getChoices().add("White");
-                }
-                if (types.getColorless() > 0) {
-                    choice.getChoices().add("Colorless");
-                }
+        Choice choice = new ChoiceColor(true);
+        choice.getChoices().clear();
+        choice.setMessage("Pick the type of mana to produce");
+        if (types.getWhite() > 0) {
+            choice.getChoices().add("White");
+        }
+        if (types.getBlue() > 0) {
+            choice.getChoices().add("Blue");
+        }
+        if (types.getBlack() > 0) {
+            choice.getChoices().add("Black");
+        }
+        if (types.getRed() > 0) {
+            choice.getChoices().add("Red");
+        }
+        if (types.getGreen() > 0) {
+            choice.getChoices().add("Green");
+        }
+        if (types.getColorless() > 0) {
+            choice.getChoices().add("Colorless");
+        }
 
-                if (!choice.getChoices().isEmpty()) {
-                    if (choice.getChoices().size() == 1) {
-                        choice.setChoice(choice.getChoices().iterator().next());
-                    } else {
-                        if (!targetController.choose(outcome, choice, game)) {
-                            return newMana;
-                        }
-                    }
+        if (choice.getChoices().isEmpty()) {
+            return newMana;
+        }
+        if (choice.getChoices().size() != 1
+                && !targetController.choose(outcome, choice, game)) {
+            return newMana;
+        }
+        choice.setChoice(choice.getChoices().iterator().next());
 
-                    switch (choice.getChoice()) {
-                        case "Black":
-                            newMana.setBlack(1);
-                            break;
-                        case "Blue":
-                            newMana.setBlue(1);
-                            break;
-                        case "Red":
-                            newMana.setRed(1);
-                            break;
-                        case "Green":
-                            newMana.setGreen(1);
-                            break;
-                        case "White":
-                            newMana.setWhite(1);
-                            break;
-                        case "Colorless":
-                            newMana.setColorless(1);
-                            break;
-                    }
-                }
-            }
+        switch (choice.getChoice()) {
+            case "White":
+                newMana.setWhite(1);
+                break;
+            case "Blue":
+                newMana.setBlue(1);
+                break;
+            case "Black":
+                newMana.setBlack(1);
+                break;
+            case "Red":
+                newMana.setRed(1);
+                break;
+            case "Green":
+                newMana.setGreen(1);
+                break;
+            case "Colorless":
+                newMana.setColorless(1);
+                break;
         }
         return newMana;
     }
@@ -134,5 +136,4 @@ public class AddManaOfAnyTypeProducedEffect extends ManaEffect {
     public AddManaOfAnyTypeProducedEffect copy() {
         return new AddManaOfAnyTypeProducedEffect(this);
     }
-
 }

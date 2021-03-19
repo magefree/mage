@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.FixedTargets;
@@ -46,32 +46,33 @@ public final class TreasureNabber extends CardImpl {
 
 class TreasureNabberAbility extends TriggeredAbilityImpl {
 
-    public TreasureNabberAbility() {
+    TreasureNabberAbility() {
         super(Zone.BATTLEFIELD, new TreasureNabberEffect());
     }
 
-    public TreasureNabberAbility(TreasureNabberAbility ability) {
+    private TreasureNabberAbility(TreasureNabberAbility ability) {
         super(ability);
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        if (game.inCheckPlayableState()) {
-            return false;
-        }
         return event.getType() == GameEvent.EventType.TAPPED_FOR_MANA;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && permanent.isArtifact()) {
-                getEffects().get(0).setTargetPointer(new FixedTarget(permanent, game));
-                return true;
-            }
+        if (game.inCheckPlayableState()) {
+            return false;
         }
-        return false;
+        if (!game.getOpponents(controllerId).contains(event.getPlayerId())) {
+            return false;
+        }
+        Permanent permanent = ((TappedForManaEvent) event).getPermanent();
+        if (permanent == null || !permanent.isArtifact()) {
+            return false;
+        }
+        getEffects().setTargetPointer(new FixedTarget(permanent, game));
+        return true;
     }
 
     @Override
@@ -94,7 +95,7 @@ class TreasureNabberEffect extends ContinuousEffectImpl {
         this.staticText = "gain control of that artifact until the end of your next turn";
     }
 
-    TreasureNabberEffect(final TreasureNabberEffect effect) {
+    private TreasureNabberEffect(final TreasureNabberEffect effect) {
         super(effect);
         this.fixedTargets = effect.fixedTargets;
     }

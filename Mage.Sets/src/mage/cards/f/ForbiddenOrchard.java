@@ -59,16 +59,18 @@ class ForbiddenOrchardTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.inCheckPlayableState()) { // Ignored - see GameEvent.TAPPED_FOR_MANA
+        if (game.inCheckPlayableState()) {
             return false;
         }
         Permanent permanent = ((TappedForManaEvent) event).getPermanent();
-        return permanent != null && event.getSourceId().equals(permanent.getId());
+        return permanent != null
+                && permanent == getSourcePermanentOrLKI(game)
+                && isControlledBy(event.getPlayerId());
     }
 
     @Override
     public String getRule() {
-        return "Whenever you tap {this} for mana, " + super.getRule();
+        return "Whenever you tap {this} for mana, create a 1/1 colorless Spirit creature token under target opponent's control.";
     }
 
     @Override
