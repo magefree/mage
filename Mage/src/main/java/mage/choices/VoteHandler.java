@@ -82,7 +82,7 @@ public abstract class VoteHandler<T> {
                 .values()
                 .stream()
                 .flatMap(Collection::stream)
-                .map(t -> map.compute(t, (s, i) -> i == null ? 1 : Integer.sum(i, 1)));
+                .forEach(t -> map.compute(t, (s, i) -> i == null ? 1 : Integer.sum(i, 1)));
         int max = map.values().stream().mapToInt(x -> x).max().orElse(0);
         return map
                 .entrySet()
