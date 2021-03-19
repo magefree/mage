@@ -10,6 +10,22 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class StormCauldronTest extends CardTestPlayerBase {
 
+    @Test
+    public void testRegular() {
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Storm Cauldron", 1);
+
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertHandCount(playerA, "Mountain", 1);
+        assertPermanentCount(playerA, "Mountain", 0);
+    }
+
     /**
      * With Storm Cauldron in play (owned by opponent), I sacced Crystal Vein
      * for 2 mana... except it got returned to my hand, which shouldn't happen.
