@@ -11,7 +11,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.card.OwnerIdPredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;

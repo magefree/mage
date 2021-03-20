@@ -128,7 +128,6 @@ public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
     }
 
     @Test
-    @Ignore // TODO: fix after merge, see player.isComputer
     public void test_TyrantsChoice_AI_UnderControl() {
         addCard(Zone.HAND, playerA, tyrant); // {1}{B}
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);

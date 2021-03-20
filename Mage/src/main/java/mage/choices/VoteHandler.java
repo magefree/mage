@@ -55,8 +55,7 @@ public abstract class VoteHandler<T> {
                 String stepName = (i > 0 ? "extra step" : "step");
                 String voteInfo = String.format("Vote, %s %d of %d", stepName, stepCurrent, stepTotal);
                 T vote;
-                if (!decidingPlayer.isHuman() && !decidingPlayer.isTestMode() && this.aiVoteHint != null) {
-                    // TODO: add isComputer after PR
+                if (decidingPlayer.isComputer() && this.aiVoteHint != null) {
                     // ai choose
                     vote = this.aiVoteHint.makeChoice(this, player, decidingPlayer, source, game);
                 } else {
