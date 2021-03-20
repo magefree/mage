@@ -63,11 +63,15 @@ public class ChoiceColor extends ChoiceImpl {
     }
 
     public ObjectColor getColor() {
-        if (choice == null) {
+        return getColorFromString(choice);
+    }
+
+    public static ObjectColor getColorFromString(String colorString) {
+        if (colorString == null) {
             return null;
         }
         ObjectColor color = new ObjectColor();
-        switch (choice) {
+        switch (colorString) {
             case "Black":
                 color.setBlack(true);
                 break;

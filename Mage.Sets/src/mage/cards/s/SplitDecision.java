@@ -1,27 +1,27 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.choices.TwoChoiceVote;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.players.Player;
+import mage.game.stack.Spell;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
- * @author fireshoes
+ * @author fireshoes, TheElk801
  */
 public final class SplitDecision extends CardImpl {
 
     public SplitDecision(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Will of the council - Choose target instant or sorcery spell. Starting with you, each player votes for denial or duplication. If denial gets more votes, counter the spell. If duplication gets more votes or the vote is tied, copy the spell. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(new SplitDecisionEffect());
@@ -41,11 +41,14 @@ public final class SplitDecision extends CardImpl {
 class SplitDecisionEffect extends OneShotEffect {
 
     SplitDecisionEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "<i>Will of the council</i> &mdash; Choose target instant or sorcery spell. Starting with you, each player votes for denial or duplication. If denial gets more votes, counter the spell. If duplication gets more votes or the vote is tied, copy the spell. You may choose new targets for the copy";
+        super(Outcome.Removal); // cause AI votes for counter all the time so it must it target opponent's spell, not own
+        this.staticText = "<i>Will of the council</i> &mdash; Choose target instant or sorcery spell. " +
+                "Starting with you, each player votes for denial or duplication. If denial gets more votes, " +
+                "counter the spell. If duplication gets more votes or the vote is tied, copy the spell. " +
+                "You may choose new targets for the copy";
     }
 
-    SplitDecisionEffect(final SplitDecisionEffect effect) {
+    private SplitDecisionEffect(final SplitDecisionEffect effect) {
         super(effect);
     }
 
@@ -56,28 +59,26 @@ class SplitDecisionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int denialCount = 0;
-            int duplicationCount = 0;
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    if (player.chooseUse(Outcome.ExtraTurn, "Choose denial?", source, game)) {
-                        denialCount++;
-                        game.informPlayers(player.getLogName() + " has voted for denial");
-                    } else {
-                        duplicationCount++;
-                        game.informPlayers(player.getLogName() + " has voted for duplication");
-                    }
-                }
-            }
-            if (denialCount > duplicationCount) {
-                return game.getStack().counter(getTargetPointer().getFirst(game, source), source, game);
-            } else {
-                return new CopyTargetSpellEffect().apply(game, source);
-            }
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
+        if (spell == null) {
+            return false;
         }
-        return false;
+
+        // Outcome.Benefit - AI will use counter all the time (Denial choice)
+        // TODO: add AI hint logic in the choice method, see Tyrant's Choice as example
+        TwoChoiceVote vote = new TwoChoiceVote(
+                "Denial (counter " + spell.getIdName() + ")",
+                "Duplication (copy " + spell.getIdName() + ")",
+                Outcome.Benefit
+        );
+        vote.doVotes(source, game);
+
+        int denialCount = vote.getVoteCount(true);
+        int duplicationCount = vote.getVoteCount(false);
+        if (denialCount > duplicationCount) {
+            return game.getStack().counter(spell.getId(), source, game);
+        } else {
+            return new CopyTargetSpellEffect().apply(game, source);
+        }
     }
 }

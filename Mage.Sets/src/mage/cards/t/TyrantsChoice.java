@@ -1,26 +1,27 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.choices.TwoChoiceVote;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
- * @author fireshoes
+ * @author fireshoes, TheElk801
  */
 public final class TyrantsChoice extends CardImpl {
 
     public TyrantsChoice(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // Will of the council - Starting with you, each player votes for death or torture. If death gets more votes, each opponent sacrifices a creature. If torture gets more votes or the vote is tied, each opponent loses 4 life.
         this.getSpellAbility().addEffect(new TyrantsChoiceEffect());
@@ -40,10 +41,13 @@ class TyrantsChoiceEffect extends OneShotEffect {
 
     TyrantsChoiceEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Will of the council</i> &mdash; Starting with you, each player votes for death or torture. If death gets more votes, each opponent sacrifices a creature. If torture gets more votes or the vote is tied, each opponent loses 4 life";
+        this.staticText = "<i>Will of the council</i> &mdash; Starting with you, " +
+                "each player votes for death or torture. If death gets more votes, " +
+                "each opponent sacrifices a creature. If torture gets more votes " +
+                "or the vote is tied, each opponent loses 4 life";
     }
 
-    TyrantsChoiceEffect(final TyrantsChoiceEffect effect) {
+    private TyrantsChoiceEffect(final TyrantsChoiceEffect effect) {
         super(effect);
     }
 
@@ -54,55 +58,24 @@ class TyrantsChoiceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int deathCount = 0;
-            int tortureCount = 0;
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    if (player.chooseUse(Outcome.Sacrifice, "Choose death?", source, game)) {
-                        deathCount++;
-                        game.informPlayers(player.getLogName() + " has voted for death");
-                    } else {
-                        tortureCount++;
-                        game.informPlayers(player.getLogName() + " has voted for torture");
-                    }
-                }
-            }
-            if (deathCount > tortureCount) {
-                new SacrificeOpponentsEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT).apply(game, source);
+        TwoChoiceVote vote = new TwoChoiceVote("Death (sacrifice a creature)", "Torture (lose 4 life)", Outcome.Benefit);
+        vote.doVotes(source, game, (voteHandler, aiPlayer, aiDecidingPlayer, aiSource, aiGame) -> {
+            // ai hint
+            if (aiSource.isControlledBy(aiDecidingPlayer.getId())) {
+                // best for controller - lose life
+                return Boolean.FALSE;
             } else {
-                new TyrantsChoiceLoseLifeEffect().apply(game, source);
+                // best for opponent - sacrifice
+                return Boolean.TRUE;
             }
-            return true;
+        });
+
+        int deathCount = vote.getVoteCount(true);
+        int tortureCount = vote.getVoteCount(false);
+        if (deathCount > tortureCount) {
+            return new SacrificeOpponentsEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT).apply(game, source);
+        } else {
+            return new LoseLifeOpponentsEffect(4).apply(game, source);
         }
-        return false;
     }
-}
-
-class TyrantsChoiceLoseLifeEffect extends OneShotEffect {
-
-    public TyrantsChoiceLoseLifeEffect() {
-        super(Outcome.Damage);
-        staticText = "Each opponent loses 2 life";
-    }
-
-    public TyrantsChoiceLoseLifeEffect(final TyrantsChoiceLoseLifeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            game.getPlayer(opponentId).loseLife(4, game, source, false);
-        }
-        return true;
-    }
-
-    @Override
-    public TyrantsChoiceLoseLifeEffect copy() {
-        return new TyrantsChoiceLoseLifeEffect(this);
-    }
-
 }

@@ -1,30 +1,33 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.choices.TwoChoiceVote;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.Collection;
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
- * @author fireshoes
+ * @author fireshoes, TheElk801
  */
 public final class MagisterOfWorth extends CardImpl {
 
@@ -38,9 +41,7 @@ public final class MagisterOfWorth extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Will of the council - When Magister of Worth enters the battlefield, starting with you, each player votes for grace or condemnation. If grace gets more votes, each player returns each creature card from their graveyard to the battlefield. If condemnation gets more votes or the vote is tied, destroy all creatures other than Magister of Worth.
-        Effect effect = new MagisterOfWorthVoteEffect();
-        effect.setText("Will of the council - When Magister of Worth enters the battlefield, starting with you, each player votes for grace or condemnation. If grace gets more votes, each player returns each creature card from their graveyard to the battlefield. If condemnation gets more votes or the vote is tied, destroy all creatures other than Magister of Worth");
-        this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false, true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new MagisterOfWorthEffect(), false, true));
     }
 
     private MagisterOfWorth(final MagisterOfWorth card) {
@@ -53,83 +54,65 @@ public final class MagisterOfWorth extends CardImpl {
     }
 }
 
-class MagisterOfWorthVoteEffect extends OneShotEffect {
+class MagisterOfWorthEffect extends OneShotEffect {
 
-    MagisterOfWorthVoteEffect() {
+    private static final FilterPermanent filter = new FilterCreaturePermanent();
+
+    static {
+        filter.add(AnotherPredicate.instance);
+    }
+
+    MagisterOfWorthEffect() {
         super(Outcome.Benefit);
-        this.staticText = "<i>Will of the council</i> &mdash; When {this} enters the battlefield, starting with you, each player votes for grace or condemnation. If grace gets more votes, each player returns each creature card from their graveyard to the battlefield. If condemnation gets more votes or the vote is tied, destroy all creatures other than {this}.";
+        staticText = "<i>Will of the council</i> &mdash; When {this} enters the battlefield, " +
+                "starting with you, each player votes for grace or condemnation. " +
+                "If grace gets more votes, each player returns each creature card from their graveyard to the battlefield. " +
+                "If condemnation gets more votes or the vote is tied, destroy all creatures other than {this}.";
     }
 
-    MagisterOfWorthVoteEffect(final MagisterOfWorthVoteEffect effect) {
+    private MagisterOfWorthEffect(final MagisterOfWorthEffect effect) {
         super(effect);
     }
 
     @Override
-    public MagisterOfWorthVoteEffect copy() {
-        return new MagisterOfWorthVoteEffect(this);
+    public MagisterOfWorthEffect copy() {
+        return new MagisterOfWorthEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            int graceCount = 0;
-            int condemnationCount = 0;
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    if (player.chooseUse(Outcome.DestroyPermanent, "Choose grace?", source, game)) {
-                        graceCount++;
-                        game.informPlayers(player.getLogName() + " has chosen: grace");
-                    } else {
-                        condemnationCount++;
-                        game.informPlayers(player.getLogName() + " has chosen: condemnation");
-                    }
-                }
-            }
-            if (graceCount > condemnationCount) {
-                new MagisterOfWorthReturnFromGraveyardEffect().apply(game, source);
-            } else {
-                FilterPermanent filter = new FilterCreaturePermanent("creatures other than {this}");
-                filter.add(AnotherPredicate.instance);
-                new DestroyAllEffect(filter).apply(game, source);
-            }
-            return true;
+        if (controller == null) {
+            return false;
         }
-        return false;
-    }
-}
 
-class MagisterOfWorthReturnFromGraveyardEffect extends OneShotEffect {
+        // Outcome.Benefit - AI will return from graveyard all the time (Grace choice)
+        // TODO: add AI hint logic in the choice method, see Tyrant's Choice as example
+        TwoChoiceVote vote = new TwoChoiceVote("Grace (return from graveyard)", "Condemnation (destroy all)", Outcome.Benefit);
+        vote.doVotes(source, game);
 
-    public MagisterOfWorthReturnFromGraveyardEffect() {
-        super(Outcome.PutCreatureInPlay);
-        staticText = "each player returns each creature card from their graveyard to the battlefield";
-    }
-
-    public MagisterOfWorthReturnFromGraveyardEffect(final MagisterOfWorthReturnFromGraveyardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    player.moveCards(player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game), Zone.BATTLEFIELD, source, game);
-                }
-            }
-            return true;
+        int graceCount = vote.getVoteCount(true);
+        int condemnationCount = vote.getVoteCount(false);
+        if (condemnationCount >= graceCount) {
+            return new DestroyAllEffect(filter).apply(game, source);
         }
-        return false;
-    }
 
-    @Override
-    public MagisterOfWorthReturnFromGraveyardEffect copy() {
-        return new MagisterOfWorthReturnFromGraveyardEffect(this);
+        // grace win - each player returns each creature card from their graveyard to the battlefield
+        Cards cards = new CardsImpl();
+        game.getState()
+                .getPlayersInRange(source.getControllerId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .map(Player::getGraveyard)
+                .map(g -> g.getCards(game))
+                .flatMap(Collection::stream)
+                .filter(Objects::nonNull)
+                .filter(MageObject::isCreature)
+                .forEach(cards::add);
+        return controller.moveCards(
+                cards.getCards(game), Zone.BATTLEFIELD, source, game,
+                false, false, true, null
+        );
     }
-
 }

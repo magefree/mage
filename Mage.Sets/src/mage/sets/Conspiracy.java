@@ -39,6 +39,7 @@ public final class Conspiracy extends ExpansionSet {
         cards.add(new SetCardInfo("Basandra, Battle Seraph", 184, Rarity.RARE, mage.cards.b.BasandraBattleSeraph.class));
         cards.add(new SetCardInfo("Bite of the Black Rose", 26, Rarity.UNCOMMON, mage.cards.b.BiteOfTheBlackRose.class));
         cards.add(new SetCardInfo("Boldwyr Intimidator", 137, Rarity.UNCOMMON, mage.cards.b.BoldwyrIntimidator.class));
+        cards.add(new SetCardInfo("Brago's Representative", 14, Rarity.COMMON, mage.cards.b.BragosRepresentative.class));
         cards.add(new SetCardInfo("Brago, King Eternal", 41, Rarity.RARE, mage.cards.b.BragoKingEternal.class));
         cards.add(new SetCardInfo("Brainstorm", 91, Rarity.COMMON, mage.cards.b.Brainstorm.class));
         cards.add(new SetCardInfo("Breakthrough", 92, Rarity.UNCOMMON, mage.cards.b.Breakthrough.class));
@@ -90,6 +91,7 @@ public final class Conspiracy extends ExpansionSet {
         cards.add(new SetCardInfo("Grenzo, Dungeon Warden", 47, Rarity.RARE, mage.cards.g.GrenzoDungeonWarden.class));
         cards.add(new SetCardInfo("Grenzo's Cutthroat", 32, Rarity.COMMON, mage.cards.g.GrenzosCutthroat.class));
         cards.add(new SetCardInfo("Grixis Illusionist", 99, Rarity.COMMON, mage.cards.g.GrixisIllusionist.class));
+        cards.add(new SetCardInfo("Grudge Keeper", 28, Rarity.COMMON, mage.cards.g.GrudgeKeeper.class));
         cards.add(new SetCardInfo("Guardian Zendikon", 71, Rarity.COMMON, mage.cards.g.GuardianZendikon.class));
         cards.add(new SetCardInfo("Heartless Hidetsugu", 144, Rarity.RARE, mage.cards.h.HeartlessHidetsugu.class));
         cards.add(new SetCardInfo("Heckling Fiends", 145, Rarity.UNCOMMON, mage.cards.h.HecklingFiends.class));

@@ -1,7 +1,6 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -10,6 +9,7 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.ChoiceColor;
+import mage.choices.VoteHandler;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -17,12 +17,13 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.players.Player;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
- * @author Styxo
+ * @author Styxo, TheElk801
  */
 public final class CouncilGuardian extends CardImpl {
 
@@ -35,8 +36,9 @@ public final class CouncilGuardian extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Will of the council - When Council Guardian enters the battlefield, starting with you, each player votes for blue, black, red, or green. Council Guardian gains protection from each color with the most votes or tied for most votes.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CouncilsGuardianEffect(), false, "<i>Will of the council</i> &mdash; "));
-
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new CouncilsGuardianEffect(), false, "<i>Will of the council</i> &mdash; "
+        ));
     }
 
     private CouncilGuardian(final CouncilGuardian card) {
@@ -51,12 +53,13 @@ public final class CouncilGuardian extends CardImpl {
 
 class CouncilsGuardianEffect extends OneShotEffect {
 
-    public CouncilsGuardianEffect() {
+    CouncilsGuardianEffect() {
         super(Outcome.Benefit);
-        this.staticText = "starting with you, each player votes for blue, black, red, or green. {this} gains protection from each color with the most votes or tied for most votes";
+        this.staticText = "starting with you, each player votes for blue, black, red, or green. " +
+                "{this} gains protection from each color with the most votes or tied for most votes";
     }
 
-    public CouncilsGuardianEffect(final CouncilsGuardianEffect effect) {
+    private CouncilsGuardianEffect(final CouncilsGuardianEffect effect) {
         super(effect);
     }
 
@@ -67,45 +70,39 @@ class CouncilsGuardianEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
+        CouncilGuardianVote vote = new CouncilGuardianVote();
+        vote.doVotes(source, game);
+
+        for (String color : vote.getMostVoted()) {
+            if (color == null) {
+                continue;
+            }
+            game.addEffect(new GainAbilitySourceEffect(
+                    ProtectionAbility.from(ChoiceColor.getColorFromString(color)), Duration.Custom
+            ), source);
+        }
+        return true;
+    }
+}
+
+class CouncilGuardianVote extends VoteHandler<String> {
+
+    @Override
+    protected Set<String> getPossibleVotes(Ability source, Game game) {
+        return new LinkedHashSet<>(Arrays.asList("Blue", "Black", "Red", "Green"));
+    }
+
+    @Override
+    public String playerChoose(String voteInfo, Player player, Player decidingPlayer, Ability source, Game game) {
         ChoiceColor choice = new ChoiceColor();
         choice.getChoices().remove("White");
-        if (controller != null) {
-            Map<ObjectColor, Integer> chosenColors = new HashMap<>(2);
-            int maxCount = 0;
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    choice.clearChoice();
-                    if (player.choose(Outcome.Detriment, choice, game)) {
-                        ObjectColor color = choice.getColor();
-                        if (color != null) {
-                            if (chosenColors.containsKey(color)) {
-                                int count = chosenColors.get(color) + 1;
-                                if (count > maxCount) {
-                                    maxCount = count;
-                                }
-                                chosenColors.put(color, count);
-                            } else {
-                                if (maxCount == 0) {
-                                    maxCount = 1;
-                                }
-                                chosenColors.put(color, 1);
-                            }
-                            game.informPlayers(player.getLogName() + " has chosen " + color.getDescription() + '.');
-                        }
-                    }
-                }
-            }
+        choice.setSubMessage(voteInfo);
+        decidingPlayer.choose(Outcome.AIDontUseIt, choice, game); // TODO: add AI hint logic in the choice method, see Tyrant's Choice as example
+        return choice.getChoice();
+    }
 
-            for (Map.Entry<ObjectColor, Integer> entry : chosenColors.entrySet()) {
-                if (entry.getValue() == maxCount) {
-                    ObjectColor color = entry.getKey();
-                    game.addEffect(new GainAbilitySourceEffect(ProtectionAbility.from(color), Duration.Custom), source);
-                }
-            }
-            return true;
-        }
-        return false;
+    @Override
+    protected String voteName(String vote) {
+        return vote;
     }
 }
