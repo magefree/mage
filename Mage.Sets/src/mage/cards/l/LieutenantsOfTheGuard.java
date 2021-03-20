@@ -69,7 +69,7 @@ class LieutenantsOfTheGuardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         // Outcome.Benefit - AI will boost all the time (Strength choice)
-        // TODO: add AI hint logic in the choice method (hint per player)
+        // TODO: add AI hint logic in the choice method, see Tyrant's Choice as example
         TwoChoiceVote vote = new TwoChoiceVote("Strength (+1/+1 counter)", "Numbers (1/1 token)", Outcome.Benefit);
         vote.doVotes(source, game);
 

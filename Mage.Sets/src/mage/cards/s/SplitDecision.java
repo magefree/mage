@@ -65,7 +65,7 @@ class SplitDecisionEffect extends OneShotEffect {
         }
 
         // Outcome.Benefit - AI will use counter all the time (Denial choice)
-        // TODO: add AI hint logic in the choice method (hint per player)
+        // TODO: add AI hint logic in the choice method, see Tyrant's Choice as example
         TwoChoiceVote vote = new TwoChoiceVote(
                 "Denial (counter " + spell.getIdName() + ")",
                 "Duplication (copy " + spell.getIdName() + ")",

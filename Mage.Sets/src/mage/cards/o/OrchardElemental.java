@@ -65,7 +65,7 @@ class OrchardElementalEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         // Outcome.Benefit - AI will boost all the time (Sprout choice)
-        // TODO: add AI hint logic in the choice method (hint per player)
+        // TODO: add AI hint logic in the choice method, see Tyrant's Choice as example
         TwoChoiceVote vote = new TwoChoiceVote("Sprout (two +1/+1 counters)", "Harvest (3 life)", Outcome.Benefit);
         vote.doVotes(source, game);
 

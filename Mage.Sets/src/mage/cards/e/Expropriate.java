@@ -74,7 +74,7 @@ class ExpropriateEffect extends OneShotEffect {
         }
 
         // Outcome.Detriment - AI will gain control all the time (Money choice)
-        // TODO: add AI hint logic in the choice method (hint per player)
+        // TODO: add AI hint logic in the choice method, see Tyrant's Choice as example
         TwoChoiceVote vote = new TwoChoiceVote("Time (extra turn)", "Money (gain control)", Outcome.Detriment);
         vote.doVotes(source, game);
 

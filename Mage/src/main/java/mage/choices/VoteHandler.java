@@ -16,10 +16,19 @@ import java.util.stream.Collectors;
 public abstract class VoteHandler<T> {
 
     protected final Map<UUID, List<T>> playerMap = new HashMap<>();
+    protected VoteHandlerAI<T> aiVoteHint = null;
 
     public void doVotes(Ability source, Game game) {
-        playerMap.clear();
+        doVotes(source, game, null);
+    }
+
+    public void doVotes(Ability source, Game game, VoteHandlerAI<T> aiVoteHint) {
+        this.aiVoteHint = aiVoteHint;
+        this.playerMap.clear();
+        int stepCurrent = 0;
+        int stepTotal = game.getState().getPlayersInRange(source.getControllerId(), game).size();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
+            stepCurrent++;
             VoteEvent event = new VoteEvent(playerId, source);
             game.replaceEvent(event);
             Player player = game.getPlayer(event.getTargetId());
@@ -29,21 +38,40 @@ public abstract class VoteHandler<T> {
             }
             int voteCount = event.getExtraVotes() + event.getOptionalExtraVotes() + 1;
             for (int i = 0; i < voteCount; i++) {
+                // Decision for extra choice goes from original player, not from deciding.
+                // Rules from Illusion of Choice:
+                // If another player controls Ballot Broker, that player first takes their “normal” vote
+                // with you choosing the result, then that player decides whether they are taking the
+                // additional vote. If there is an additional vote, you again choose the result.
+                // (2016-08-23)
+
+                // Outcome.Benefit - AI must use extra vote all the time
                 if (i > event.getExtraVotes() && !player.chooseUse(
-                        Outcome.Neutral, "Use an extra vote?", source, game
+                        Outcome.Benefit, "Use an extra vote?", source, game
                 )) {
                     continue;
                 }
-                T vote = playerChoose(player, decidingPlayer, source, game); // TODO: add vote step info as sub message
+
+                String stepName = (i > 0 ? "extra step" : "step");
+                String voteInfo = String.format("Vote, %s %d of %d", stepName, stepCurrent, stepTotal);
+                T vote;
+                if (!decidingPlayer.isHuman() && !decidingPlayer.isTestMode() && this.aiVoteHint != null) {
+                    // TODO: add isComputer after PR
+                    // ai choose
+                    vote = this.aiVoteHint.makeChoice(this, player, decidingPlayer, source, game);
+                } else {
+                    // human choose
+                    vote = playerChoose(voteInfo, player, decidingPlayer, source, game);
+                }
                 if (vote == null) {
                     continue;
                 }
-                String message = player.getName() + " voted for " + voteName(vote);
+                String message = voteInfo + ": " + player.getName() + " voted for " + voteName(vote);
                 if (!Objects.equals(player, decidingPlayer)) {
                     message += " (chosen by " + decidingPlayer.getName() + ')';
                 }
                 game.informPlayers(message);
-                playerMap.computeIfAbsent(playerId, x -> new ArrayList<>()).add(vote);
+                this.playerMap.computeIfAbsent(playerId, x -> new ArrayList<>()).add(vote);
             }
         }
 
@@ -91,7 +119,7 @@ public abstract class VoteHandler<T> {
      * @param game
      * @return
      */
-    protected abstract T playerChoose(Player player, Player decidingPlayer, Ability source, Game game);
+    protected abstract T playerChoose(String voteInfo, Player player, Player decidingPlayer, Ability source, Game game);
 
     /**
      * Show readable choice name

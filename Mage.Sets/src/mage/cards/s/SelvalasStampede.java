@@ -63,7 +63,7 @@ class SelvalasStampedeEffect extends OneShotEffect {
         }
 
         // Outcome.Detriment - AI will use library will the time (Free choice)
-        // TODO: add AI hint logic in the choice method (hint per player)
+        // TODO: add AI hint logic in the choice method, see Tyrant's Choice as example
         TwoChoiceVote vote = new TwoChoiceVote("Wild (from library to battlefield)", "Free (from hand to battlefield)", Outcome.Detriment);
         vote.doVotes(source, game);
 

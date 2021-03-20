@@ -66,7 +66,7 @@ class BiteOfTheBlackRoseEffect extends OneShotEffect {
         }
 
         // Outcome.Detriment - AI will discard a card all the time (Psychosis choice)
-        // TODO: add AI hint logic in the choice method (hint per player)
+        // TODO: add AI hint logic in the choice method, see Tyrant's Choice as example
         TwoChoiceVote vote = new TwoChoiceVote("Sickness (-2/-2)", "Psychosis (discard cards)", Outcome.Detriment);
         vote.doVotes(source, game);
 

@@ -70,7 +70,7 @@ class MessengerJaysEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         // Outcome.Benefit - AI will boost all the time (Feather choice)
-        // TODO: add AI hint logic in the choice method (hint per player)
+        // TODO: add AI hint logic in the choice method, see Tyrant's Choice as example
         TwoChoiceVote vote = new TwoChoiceVote("Feather (+1/+1 counter)", "Quill (draw a card)", Outcome.Benefit);
         vote.doVotes(source, game);
 

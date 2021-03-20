@@ -94,11 +94,12 @@ class CouncilsJudgmentVote extends VoteHandler<Permanent> {
     }
 
     @Override
-    public Permanent playerChoose(Player player, Player decidingPlayer, Ability source, Game game) {
+    public Permanent playerChoose(String voteInfo, Player player, Player decidingPlayer, Ability source, Game game) {
         if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) < 1) {
             return null;
         }
-        Target target = new TargetPermanent(1, filter).withChooseHint("to exile");
+        TargetPermanent target = new TargetPermanent(1, filter);
+        target.withChooseHint(voteInfo + " (to exile)");
         target.setNotTarget(true);
         decidingPlayer.choose(Outcome.Exile, target, source.getSourceId(), game);
         return game.getPermanent(target.getFirstTarget());

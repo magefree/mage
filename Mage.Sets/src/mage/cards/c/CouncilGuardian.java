@@ -93,10 +93,11 @@ class CouncilGuardianVote extends VoteHandler<String> {
     }
 
     @Override
-    public String playerChoose(Player player, Player decidingPlayer, Ability source, Game game) {
+    public String playerChoose(String voteInfo, Player player, Player decidingPlayer, Ability source, Game game) {
         ChoiceColor choice = new ChoiceColor();
         choice.getChoices().remove("White");
-        decidingPlayer.choose(Outcome.AIDontUseIt, choice, game); // TODO: add AI hint logic in the choice method (hint per player)
+        choice.setSubMessage(voteInfo);
+        decidingPlayer.choose(Outcome.AIDontUseIt, choice, game); // TODO: add AI hint logic in the choice method, see Tyrant's Choice as example
         return choice.getChoice();
     }
 

@@ -30,8 +30,8 @@ public class TwoChoiceVote extends VoteHandler<Boolean> {
     }
 
     @Override
-    public Boolean playerChoose(Player player, Player decidingPlayer, Ability source, Game game) {
-        return decidingPlayer.chooseUse(outcome, "Vote", null, choice1, choice2, source, game);
+    public Boolean playerChoose(String voteInfo, Player player, Player decidingPlayer, Ability source, Game game) {
+        return decidingPlayer.chooseUse(outcome, voteInfo, null, choice1, choice2, source, game);
     }
 
     @Override

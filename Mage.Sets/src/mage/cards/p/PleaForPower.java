@@ -61,7 +61,7 @@ class PleaForPowerEffect extends OneShotEffect {
         }
 
         // Outcome.Detriment - AI will draw cards all the time (Knowledge choice)
-        // TODO: add AI hint logic in the choice method (hint per player)
+        // TODO: add AI hint logic in the choice method, see Tyrant's Choice as example
         TwoChoiceVote vote = new TwoChoiceVote("Time (extra turn)", "Knowledge (draw 3 cards)", Outcome.Detriment);
         vote.doVotes(source, game);
 

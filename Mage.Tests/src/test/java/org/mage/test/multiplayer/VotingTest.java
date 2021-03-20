@@ -1,22 +1,17 @@
 package org.mage.test.multiplayer;
 
-import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
-import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
-import mage.game.FreeForAll;
-import mage.game.Game;
-import mage.game.GameException;
-import mage.game.mulligan.MulliganType;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestMultiPlayerBase;
-
-import java.io.FileNotFoundException;
+import org.mage.test.serverside.base.CardTestCommander4PlayersWithAIHelps;
 
 /**
  * @author TheElk801
  */
-public class VotingTest extends CardTestMultiPlayerBase {
+public class VotingTest extends CardTestCommander4PlayersWithAIHelps {
+
+    // Player order: A -> D -> C -> B
 
     // Council’s dilemma — When Lieutenants of the Guard enters the battlefield, starting with you,
     // each player votes for strength or numbers. Put a +1/+1 counter on Lieutenants of the Guard
@@ -41,16 +36,9 @@ public class VotingTest extends CardTestMultiPlayerBase {
     // Whenever players finish voting, each opponent who voted for a choice you didn’t vote for loses 2 life.
     private static final String keeper = "Grudge Keeper";
 
-    @Override
-    protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
-        Game game = new FreeForAll(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
-        // Player order: A -> D -> C -> B
-        playerA = createPlayer(game, playerA, "PlayerA");
-        playerB = createPlayer(game, playerB, "PlayerB");
-        playerC = createPlayer(game, playerC, "PlayerC");
-        playerD = createPlayer(game, playerD, "PlayerD");
-        return game;
-    }
+    // Will of the council - Starting with you, each player votes for death or torture. If death gets more votes,
+    // each opponent sacrifices a creature. If torture gets more votes or the vote is tied, each opponent loses 4 life.
+    private static final String tyrant = "Tyrant's Choice";
 
     private void setChoices(String choice) {
         setChoices(choice, choice, choice, choice);
@@ -112,6 +100,66 @@ public class VotingTest extends CardTestMultiPlayerBase {
 
         assertPowerToughness(playerA, lieutenant, 4, 4);
         assertPermanentCount(playerA, "Soldier", 2);
+    }
+
+    @Test
+    public void test_TyrantsChoice_AI_Normal() {
+        addCard(Zone.HAND, playerA, tyrant); // {1}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+
+        // ai play
+        // opponents must have more votes so final result is sacrifice (best for opponents)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, tyrant);
+        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerB);
+        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerC);
+        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerD);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, tyrant, 1);
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertLife(playerC, 20);
+        assertLife(playerD, 20);
+    }
+
+    @Test
+    @Ignore // TODO: fix after merge, see player.isComputer
+    public void test_TyrantsChoice_AI_UnderControl() {
+        addCard(Zone.HAND, playerA, tyrant); // {1}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        //
+        addCard(Zone.HAND, playerA, illusion, 1); // {U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+
+        // prepare vote control
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, illusion);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkGraveyardCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, illusion, 1);
+
+        // ai play
+        // you control the opponents, so votes result must be lose life (best for controller)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, tyrant);
+        checkStackSize("before resolve", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1);
+        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerB);
+        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerC);
+        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerD);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertGraveyardCount(playerA, tyrant, 1);
+        assertLife(playerA, 20);
+        assertLife(playerB, 20 - 4);
+        assertLife(playerC, 20 - 4);
+        assertLife(playerD, 20 - 4);
     }
 
     @Test

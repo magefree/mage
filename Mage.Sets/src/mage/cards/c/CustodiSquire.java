@@ -103,7 +103,7 @@ class CustodiSquireVote extends VoteHandler<Card> {
     }
 
     @Override
-    public Card playerChoose(Player player, Player decidingPlayer, Ability source, Game game) {
+    public Card playerChoose(String voteInfo, Player player, Player decidingPlayer, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null || controller.getGraveyard().count(
                 filter, source.getSourceId(), source.getControllerId(), game
@@ -111,7 +111,7 @@ class CustodiSquireVote extends VoteHandler<Card> {
             return null;
         }
         TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
-        target.withChooseHint("from graveyard to hand");
+        target.withChooseHint(voteInfo + " (from graveyard to hand)");
         target.setNotTarget(true);
         decidingPlayer.choose(Outcome.ReturnToHand, controller.getGraveyard(), target, game);
         return controller.getGraveyard().get(target.getFirstTarget(), game);

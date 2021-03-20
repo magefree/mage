@@ -1,5 +1,6 @@
 package mage.cards.t;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
@@ -57,10 +58,17 @@ class TyrantsChoiceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // Outcome.Benefit - AI will use sacrifice all the time (Death choice)
-        // TODO: add AI hint logic in the choice method (hint per player)
         TwoChoiceVote vote = new TwoChoiceVote("Death (sacrifice a creature)", "Torture (lose 4 life)", Outcome.Benefit);
-        vote.doVotes(source, game);
+        vote.doVotes(source, game, (voteHandler, aiPlayer, aiDecidingPlayer, aiSource, aiGame) -> {
+            // ai hint
+            if (aiSource.isControlledBy(aiDecidingPlayer.getId())) {
+                // best for controller - lose life
+                return Boolean.FALSE;
+            } else {
+                // best for opponent - sacrifice
+                return Boolean.TRUE;
+            }
+        });
 
         int deathCount = vote.getVoteCount(true);
         int tortureCount = vote.getVoteCount(false);

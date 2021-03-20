@@ -87,7 +87,7 @@ class MagisterOfWorthEffect extends OneShotEffect {
         }
 
         // Outcome.Benefit - AI will return from graveyard all the time (Grace choice)
-        // TODO: add AI hint logic in the choice method (hint per player)
+        // TODO: add AI hint logic in the choice method, see Tyrant's Choice as example
         TwoChoiceVote vote = new TwoChoiceVote("Grace (return from graveyard)", "Condemnation (destroy all)", Outcome.Benefit);
         vote.doVotes(source, game);
 
