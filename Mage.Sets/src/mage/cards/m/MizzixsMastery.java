@@ -79,7 +79,7 @@ class MizzixsMasteryEffect extends OneShotEffect {
             if (card != null) {
                 if (controller.moveCards(card, Zone.EXILED, source, game)) {
                     Card cardCopy = game.copyCard(card, source, source.getControllerId());
-                    if (cardCopy.getSpellAbility().canChooseTarget(game)
+                    if (cardCopy.getSpellAbility().canChooseTarget(game, controller.getId())
                             && controller.chooseUse(outcome, "Cast copy of "
                             + card.getName() + " without paying its mana cost?", source, game)) {
                         game.getState().setValue("PlayFromNotOwnHandZone" + cardCopy.getId(), Boolean.TRUE);
@@ -135,7 +135,7 @@ class MizzixsMasteryOverloadEffect extends OneShotEffect {
                         if (controller.chooseTarget(Outcome.PlayForFree, copiedCards, targetCard, source, game)) {
                             Card selectedCard = game.getCard(targetCard.getFirstTarget());
                             if (selectedCard != null
-                                    && selectedCard.getSpellAbility().canChooseTarget(game)) {
+                                    && selectedCard.getSpellAbility().canChooseTarget(game, controller.getId())) {
                                 game.getState().setValue("PlayFromNotOwnHandZone" + selectedCard.getId(), Boolean.TRUE);
                                 controller.cast(controller.chooseAbilityForCast(selectedCard, game, true),
                                         game, true, new ApprovingObject(source, game));

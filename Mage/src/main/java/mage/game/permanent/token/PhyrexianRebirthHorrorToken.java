@@ -11,13 +11,13 @@ import java.util.Arrays;
  */
 public final class PhyrexianRebirthHorrorToken extends TokenImpl {
 
-    public PhyrexianRebirthHorrorToken() {
+    public PhyrexianRebirthHorrorToken(int power, int toughness) {
         super("Horror", "X/X colorless Horror artifact creature token");
-        cardType.add(CardType.ARTIFACT);
-        cardType.add(CardType.CREATURE);
-        subtype.add(SubType.HORROR);
-        power = new MageInt(0);
-        toughness = new MageInt(0);
+        this.cardType.add(CardType.ARTIFACT);
+        this.cardType.add(CardType.CREATURE);
+        this.subtype.add(SubType.HORROR);
+        this.power = new MageInt(power);
+        this.toughness = new MageInt(toughness);
 
         availableImageSetCodes = Arrays.asList("C18", "C19", "MBS", "CMR");
     }

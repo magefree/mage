@@ -5,6 +5,7 @@ import java.util.UUID;
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
+import mage.Emptiable;
 import mage.constants.Duration;
 import mage.constants.ManaType;
 
@@ -12,7 +13,7 @@ import mage.constants.ManaType;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ManaPoolItem implements Serializable {
+public class ManaPoolItem implements Serializable, Emptiable {
 
     private int red = 0;
     private int green = 0;

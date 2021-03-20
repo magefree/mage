@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -12,32 +10,31 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.counters.Counter;
-import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class EverlastingTorment extends CardImpl {
 
     public EverlastingTorment(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B/R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B/R}");
 
         // Players can't gain life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantGainLifeAllEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantGainLifeAllEffect()));
 
         // Damage can't be prevented.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new DamageCantBePreventedEffect(Duration.WhileOnBattlefield, "Damage can't be prevented", true, false)));
+        this.addAbility(new SimpleStaticAbility(new DamageCantBePreventedEffect(
+                Duration.WhileOnBattlefield, "Damage can't be prevented",
+                true, false
+        )));
 
         // All damage is dealt as though its source had wither.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DamageDealtAsIfSourceHadWitherEffect()));
-
+        this.addAbility(new SimpleStaticAbility(new DamageDealtAsIfSourceHadWitherEffect()));
     }
 
     private EverlastingTorment(final EverlastingTorment card) {
@@ -52,12 +49,12 @@ public final class EverlastingTorment extends CardImpl {
 
 class DamageDealtAsIfSourceHadWitherEffect extends ReplacementEffectImpl {
 
-    public DamageDealtAsIfSourceHadWitherEffect() {
+    DamageDealtAsIfSourceHadWitherEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "All damage is dealt as though its source had wither";
     }
 
-    public DamageDealtAsIfSourceHadWitherEffect(final DamageDealtAsIfSourceHadWitherEffect effect) {
+    private DamageDealtAsIfSourceHadWitherEffect(final DamageDealtAsIfSourceHadWitherEffect effect) {
         super(effect);
     }
 
@@ -73,23 +70,15 @@ class DamageDealtAsIfSourceHadWitherEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        int damageAmount = event.getAmount();
-        if (damageAmount > 0) {
-            Counter counter = CounterType.M1M1.createInstance(damageAmount);
-            Permanent creatureDamaged = game.getPermanent(event.getTargetId());
-            if (creatureDamaged != null) {
-                creatureDamaged.addCounters(counter, source.getControllerId(), source, game);
-            }
-        }
-        return true;
+        ((DamageEvent) event).setAsThoughWither(true);
+        return false;
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGE_PERMANENT;
     }
 
-    
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return true;

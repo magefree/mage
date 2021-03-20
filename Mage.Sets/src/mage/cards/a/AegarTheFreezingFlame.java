@@ -56,12 +56,7 @@ class AegarTheFreezingFlameTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case DAMAGED_CREATURE:
-            case DAMAGED_PLANESWALKER:
-                return true;
-        }
-        return false;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
@@ -98,12 +93,8 @@ class AegarTheFreezingFlameWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        switch (event.getType()) {
-            case DAMAGED_CREATURE:
-            case DAMAGED_PLANESWALKER:
-                break;
-            default:
-                return;
+        if (event.getType() != GameEvent.EventType.DAMAGED_PERMANENT) {
+            return;
         }
         DamagedEvent dEvent = (DamagedEvent) event;
         MageObject sourceObject = game.getObject(event.getSourceId());

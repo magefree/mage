@@ -21,7 +21,7 @@ import mage.constants.Outcome;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -176,12 +176,12 @@ class GrothamaAllDevouringWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.DAMAGED_CREATURE) {
+        if (event.getType() != GameEvent.EventType.DAMAGED_PERMANENT) {
             return;
         }
         UUID damageControllerId = game.getControllerId(event.getSourceId());
         Permanent damaged = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (damaged == null || damageControllerId == null) {
+        if (damaged == null || !damaged.isCreature() || damageControllerId == null) {
             return;
         }
         MageObjectReference mor = new MageObjectReference(damaged, game);

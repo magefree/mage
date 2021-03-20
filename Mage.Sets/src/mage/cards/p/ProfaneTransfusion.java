@@ -2,13 +2,13 @@ package mage.cards.p;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExchangeLifeTwoTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.PhyrexianRebirthHorrorToken;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
@@ -23,6 +23,7 @@ public final class ProfaneTransfusion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{B}{B}{B}");
 
         // Two target players exchange life totals. You create an X/X colorless Horror artifact creature token, where X is the difference between those players' life totals.
+        this.getSpellAbility().addEffect(new ExchangeLifeTwoTargetEffect());
         this.getSpellAbility().addEffect(new ProfaneTransfusionEffect());
         this.getSpellAbility().addTarget(new TargetPlayer(2));
     }
@@ -41,8 +42,7 @@ class ProfaneTransfusionEffect extends OneShotEffect {
 
     ProfaneTransfusionEffect() {
         super(Outcome.Benefit);
-        staticText = "two target players exchange life totals. " +
-                "You create an X/X colorless Horror artifact creature token, " +
+        staticText = "You create an X/X colorless Horror artifact creature token, " +
                 "where X is the difference between those players' life totals";
     }
 
@@ -65,30 +65,8 @@ class ProfaneTransfusionEffect extends OneShotEffect {
         if (player1 == null || player2 == null) {
             return false;
         }
-        int lifePlayer1 = player1.getLife();
-        int lifePlayer2 = player2.getLife();
-        int lifeDifference = Math.abs(lifePlayer1 - lifePlayer2);
-
-        Token token = new PhyrexianRebirthHorrorToken();
-        token.setPower(lifeDifference);
-        token.setToughness(lifeDifference);
-
-        if (lifeDifference == 0
-                || !player1.isLifeTotalCanChange()
-                || !player2.isLifeTotalCanChange()) {
-            return token.putOntoBattlefield(1, game, source, source.getControllerId());
-        }
-
-        if (lifePlayer1 < lifePlayer2 && (!player1.isCanGainLife() || !player2.isCanLoseLife())) {
-            return token.putOntoBattlefield(1, game, source, source.getControllerId());
-        }
-
-        if (lifePlayer1 > lifePlayer2 && (!player1.isCanLoseLife() || !player2.isCanGainLife())) {
-            return token.putOntoBattlefield(1, game, source, source.getControllerId());
-        }
-
-        player1.setLife(lifePlayer2, game, source);
-        player2.setLife(lifePlayer1, game, source);
-        return token.putOntoBattlefield(1, game, source, source.getControllerId());
+        int lifeDifference = Math.abs(player1.getLife() - player2.getLife());
+        return new PhyrexianRebirthHorrorToken(lifeDifference, lifeDifference)
+                .putOntoBattlefield(1, game, source, source.getControllerId());
     }
 }

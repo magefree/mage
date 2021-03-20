@@ -6,7 +6,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.DamagedCreatureEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -46,13 +46,13 @@ public class DealsDamageToACreatureTriggeredAbility extends TriggeredAbilityImpl
     
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(this.sourceId)
-                && (!combatOnly || ((DamagedCreatureEvent) event).isCombatDamage())) {
+                && (!combatOnly || ((DamagedEvent) event).isCombatDamage())) {
             if (filter != null) {
                 Permanent creature = game.getPermanentOrLKIBattlefield(event.getTargetId());
                 if (creature == null || !filter.match(creature, getSourceId(), getControllerId(), game)) {

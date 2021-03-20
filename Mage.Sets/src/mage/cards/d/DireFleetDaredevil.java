@@ -15,7 +15,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInOpponentsGraveyard;
@@ -94,7 +93,7 @@ class DireFleetDaredevilEffect extends OneShotEffect {
                     targetCard = game.getCard(targetCard.getId());
                     if (targetCard != null) {
                         // you may play and spend any mana
-                        CardUtil.makeCardPlayableAndSpendManaAsAnyColor(game, source, targetCard, Duration.EndOfTurn);
+                        CardUtil.makeCardPlayable(game, source, targetCard, Duration.EndOfTurn, true);
                         // exile from graveyard
                         ContinuousEffect effect = new DireFleetDaredevilReplacementEffect();
                         effect.setTargetPointer(new FixedTarget(targetCard, game));

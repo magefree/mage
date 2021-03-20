@@ -4,19 +4,18 @@ import mage.abilities.mana.ManaOptions;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
-import static org.mage.test.utils.ManaOptionsTestUtils.*;
+
+import static org.mage.test.utils.ManaOptionsTestUtils.assertDuplicatedManaOptions;
+import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
- *
  * @author LevelX2, JayDi85
  */
 public class HarvesterDruidTest extends CardTestPlayerBase {
 
     @Test
-    @Ignore
     public void testOneInstance() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
@@ -35,7 +34,6 @@ public class HarvesterDruidTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
     public void testTwoInstances() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);

@@ -1,32 +1,30 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyPermanentEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.util.functions.CopyApplier;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class AlteredEgo extends CardImpl {
 
     public AlteredEgo(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{X}{2}{G}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{2}{G}{U}");
         this.subtype.add(SubType.SHAPESHIFTER);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
@@ -35,13 +33,10 @@ public final class AlteredEgo extends CardImpl {
         this.addAbility(new CantBeCounteredSourceAbility());
 
         // You may have Altered Ego enter the battlefield as a copy of any creature on the battlefield, except it enters with an additional X +1/+1 counters on it.
-        Effect effect = new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, null);
-        effect.setText("a copy of any creature on the battlefield");
-        EntersBattlefieldAbility ability = new EntersBattlefieldAbility(effect, true);
-        effect = new AlteredEgoAddCountersEffect(CounterType.P1P1.createInstance());
-        effect.setText(", except it enters with an additional X +1/+1 counters on it");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldAbility(
+                new CopyPermanentEffect(StaticFilters.FILTER_PERMANENT_CREATURE, new AlteredEgoCopyApplier()),
+                true
+        ));
     }
 
     private AlteredEgo(final AlteredEgo card) {
@@ -54,31 +49,29 @@ public final class AlteredEgo extends CardImpl {
     }
 }
 
-class AlteredEgoAddCountersEffect extends EntersBattlefieldWithXCountersEffect {
+class AlteredEgoCopyApplier extends CopyApplier {
 
-    public AlteredEgoAddCountersEffect(Counter counter) {
-        super(counter);
-    }
-
-    public AlteredEgoAddCountersEffect(EntersBattlefieldWithXCountersEffect effect) {
-        super(effect);
+    @Override
+    public String getText() {
+        return ", except it enters with an additional X +1/+1 counters on it";
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanentEntering(source.getSourceId());
-        if (permanent != null) {
-            // except only takes place if something was copied
-            if (permanent.isCopy()) {
-                return super.apply(game, source);
-            }
+    public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
+        // counters only for original card, not copies, see rules:
+        // 706.9e
+        // Some replacement effects that generate copy effects include an exception that’s an additional
+        // effect rather than a modification of the affected object’s characteristics. If another copy
+        // effect is applied to that object after applying the copy effect with that exception, the
+        // exception’s effect doesn’t happen.
+
+        if (!isCopyOfCopy(source, blueprint, copyToObjectId)) {
+            // except it enters with an additional X +1/+1 counters on it
+            blueprint.getAbilities().add(
+                    new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance()))
+            );
         }
-        return false;
-    }
 
-    @Override
-    public EntersBattlefieldWithXCountersEffect copy() {
-        return new AlteredEgoAddCountersEffect(this);
+        return true;
     }
-
 }

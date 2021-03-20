@@ -2,13 +2,9 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.common.WerewolfFrontTriggeredAbility;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -41,8 +37,7 @@ public final class LambholtPacifist extends CardImpl {
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Lambholt Pacifist.
         this.addAbility(new TransformAbility());
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.instance, TransformAbility.NO_SPELLS_TRANSFORM_RULE));
+        this.addAbility(new WerewolfFrontTriggeredAbility());
     }
 
     private LambholtPacifist(final LambholtPacifist card) {

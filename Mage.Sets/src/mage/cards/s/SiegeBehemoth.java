@@ -65,8 +65,7 @@ class SiegeBehemothEffect extends AsThoughEffectImpl {
             Player controller = game.getPlayer(source.getControllerId());
             Permanent otherCreature = game.getPermanent(sourceId);
             if (controller != null && otherCreature != null && otherCreature.isControlledBy(controller.getId())){
-                return controller.chooseUse(Outcome.Damage, "Do you wish to assign damage for "
-                        + otherCreature.getLogName() + " as though it weren't blocked?", source, game);
+                return controller.chooseUse(Outcome.Damage, "Have " + otherCreature.getLogName() + " assign damage as though it weren't blocked?", source, game);
             }
         }
         return false;

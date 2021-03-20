@@ -147,6 +147,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Oona, Queen of the Fae", 54, Rarity.MYTHIC, mage.cards.o.OonaQueenOfTheFae.class));
         cards.add(new SetCardInfo("Opt", 111, Rarity.RARE, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Pack Rat", 35, Rarity.RARE, mage.cards.p.PackRat.class));
+        cards.add(new SetCardInfo("Path of Ancestry", 250, Rarity.RARE, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Pharika, God of Affliction", 82, Rarity.MYTHIC, mage.cards.p.PharikaGodOfAffliction.class));
         cards.add(new SetCardInfo("Phenax, God of Deception", 75, Rarity.MYTHIC, mage.cards.p.PhenaxGodOfDeception.class));
         cards.add(new SetCardInfo("Pithing Needle", 44, Rarity.RARE, mage.cards.p.PithingNeedle.class));
@@ -181,6 +182,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Snow-Covered Swamp", 3, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Shalai, Voice of Plenty", 244, Rarity.RARE, mage.cards.s.ShalaiVoiceOfPlenty.class));
         cards.add(new SetCardInfo("Sliver Overlord", 10, Rarity.MYTHIC, mage.cards.s.SliverOverlord.class));
+        cards.add(new SetCardInfo("Sol Ring", 249, Rarity.RARE, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Sorin, Vengeful Bloodlord", 524, Rarity.RARE, mage.cards.s.SorinVengefulBloodlord.class));
         cards.add(new SetCardInfo("Sower of Temptation", 120, Rarity.RARE, mage.cards.s.SowerOfTemptation.class));
         cards.add(new SetCardInfo("Spell Pierce", 41, Rarity.RARE, mage.cards.s.SpellPierce.class));

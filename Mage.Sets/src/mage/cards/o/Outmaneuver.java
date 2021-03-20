@@ -77,8 +77,8 @@ class OutmaneuverEffect extends AsThoughEffectImpl {
         if (blockedCreature != null) {
             Player controller = game.getPlayer(blockedCreature.getControllerId());
             if (controller != null) {
-                return controller.chooseUse(Outcome.Damage, "Do you wish to assign combat damage for "
-                        + blockedCreature.getLogName() + " as though it weren't blocked?", source, game);
+                return controller.chooseUse(Outcome.Damage, "have "
+                        + blockedCreature.getLogName() + "assign combat damage as though it weren't blocked?", source, game);
             }
         }
         return false;

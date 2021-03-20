@@ -80,7 +80,7 @@ class PlaneswalkersMischiefEffect extends OneShotEffect {
                 AsThoughEffect effect = new PlaneswalkersMischiefCastFromExileEffect();
                 effect.setTargetPointer(new FixedTarget(revealedCard.getId()));
                 game.addEffect(effect, source);
-                OneShotEffect effect2 = new ReturnFromExileEffect(source.getSourceId(), Zone.HAND);
+                OneShotEffect effect2 = new ReturnFromExileEffect(Zone.HAND);
                 Condition condition = new PlaneswalkersMischiefCondition(source.getSourceId(), revealedCard.getId());
                 ConditionalOneShotEffect effect3 = new ConditionalOneShotEffect(effect2, condition, "if you haven't cast it, return it to its owner's hand.");
                 DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect3);

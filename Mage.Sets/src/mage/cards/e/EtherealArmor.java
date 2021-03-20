@@ -1,10 +1,8 @@
-
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
@@ -14,26 +12,26 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterEnchantmentPermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class EtherealArmor extends CardImpl {
 
-    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("enchantment you control");
+    private static final FilterPermanent filter
+            = new FilterControlledEnchantmentPermanent("enchantment you control");
 
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
-    public EtherealArmor (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
+    public EtherealArmor(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -43,13 +41,16 @@ public final class EtherealArmor extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 for each enchantment you control and has first strike.
-        PermanentsOnBattlefieldCount countEnchantments = new PermanentsOnBattlefieldCount(new FilterEnchantmentPermanent(filter));
-        SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(countEnchantments, countEnchantments, Duration.WhileOnBattlefield));
-        ability2.addEffect(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA));
-        this.addAbility(ability2);
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(
+                xValue, xValue, Duration.WhileOnBattlefield
+        ));
+        ability.addEffect(new GainAbilityAttachedEffect(
+                FirstStrikeAbility.getInstance(), AttachmentType.AURA
+        ).setText("and has first strike"));
+        this.addAbility(ability);
     }
 
-    public EtherealArmor (final EtherealArmor card) {
+    private EtherealArmor(final EtherealArmor card) {
         super(card);
     }
 
@@ -57,5 +58,4 @@ public final class EtherealArmor extends CardImpl {
     public EtherealArmor copy() {
         return new EtherealArmor(this);
     }
-
 }

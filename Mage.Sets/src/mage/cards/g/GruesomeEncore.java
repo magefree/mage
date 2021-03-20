@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -27,8 +25,9 @@ import mage.players.Player;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class GruesomeEncore extends CardImpl {
@@ -40,6 +39,7 @@ public final class GruesomeEncore extends CardImpl {
 
         // Put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste.
         this.getSpellAbility().addEffect(new GruesomeEncoreEffect());
+
         // Exile it at the beginning of the next end step. If that creature would leave the battlefield, exile it instead of putting it anywhere else.
         this.getSpellAbility().addEffect(new GruesomeEncoreReplacementEffect());
         this.getSpellAbility().addTarget(new TargetCardInOpponentsGraveyard(filter));
@@ -57,12 +57,12 @@ public final class GruesomeEncore extends CardImpl {
 
 class GruesomeEncoreEffect extends OneShotEffect {
 
-    public GruesomeEncoreEffect() {
+    GruesomeEncoreEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste. Exile it at the beginning of the next end step";
     }
 
-    public GruesomeEncoreEffect(final GruesomeEncoreEffect effect) {
+    private GruesomeEncoreEffect(final GruesomeEncoreEffect effect) {
         super(effect);
     }
 
@@ -104,7 +104,7 @@ class GruesomeEncoreReplacementEffect extends ReplacementEffectImpl {
         staticText = "If that creature would leave the battlefield, exile it instead of putting it anywhere else";
     }
 
-    GruesomeEncoreReplacementEffect(final GruesomeEncoreReplacementEffect effect) {
+    private GruesomeEncoreReplacementEffect(final GruesomeEncoreReplacementEffect effect) {
         super(effect);
     }
 
@@ -115,11 +115,9 @@ class GruesomeEncoreReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player player = game.getPlayer(source.getSourceId());
         Card card = game.getCard(source.getFirstTarget());
-        if (card != null) {
-            card.moveToExile(null, "", source, game);
-        }
-        return true;
+        return player != null && card != null && player.moveCards(card, Zone.EXILED, source, game);
     }
 
     @Override

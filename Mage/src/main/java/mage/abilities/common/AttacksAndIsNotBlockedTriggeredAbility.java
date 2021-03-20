@@ -1,14 +1,11 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 public class AttacksAndIsNotBlockedTriggeredAbility extends TriggeredAbilityImpl {
@@ -40,23 +37,20 @@ public class AttacksAndIsNotBlockedTriggeredAbility extends TriggeredAbilityImpl
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DECLARE_BLOCKERS_STEP;
+        return event.getType() == EventType.UNBLOCKED_ATTACKER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());
-        if (sourcePermanent != null && sourcePermanent.isAttacking()) {
-            for (CombatGroup combatGroup : game.getCombat().getGroups()) {
-                if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(getSourceId())) {
-                    if (setTargetPointer) {
-                        this.getEffects().setTargetPointer(new FixedTarget(game.getCombat().getDefendingPlayerId(getSourceId(), game)));
-                    }
-                    return true;
-                }
-            }
+        if (!event.getTargetId().equals(getSourceId())) {
+            return false;
         }
-        return false;
+        if (setTargetPointer) {
+            this.getEffects().setTargetPointer(new FixedTarget(
+                    game.getCombat().getDefendingPlayerId(getSourceId(), game), game
+            ));
+        }
+        return true;
     }
 
     @Override

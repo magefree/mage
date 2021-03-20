@@ -17,7 +17,7 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterStackObject;
-import mage.filter.predicate.ability.ArtifactSourcePredicate;
+import mage.filter.predicate.other.ArtifactSourcePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
@@ -85,7 +85,6 @@ class TawnosUrzasApprenticeEffect extends OneShotEffect {
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (controller != null && sourcePermanent != null) {
                 stackAbility.createCopyOnStack(game, source, source.getControllerId(), true);
-                game.informPlayers(sourcePermanent.getIdName() + ": " + controller.getLogName() + " copied an ability");
                 return true;
             }
         }

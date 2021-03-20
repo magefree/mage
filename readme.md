@@ -73,10 +73,11 @@ XMageLauncher in `Settings > Java > Server java options`.
 Github issues page contain [popular problems and fixes](https://github.com/magefree/mage/issues?q=is%3Aissue+label%3AFAQ+):
 * [Program freezes on startup (white/blue/black screen)](https://github.com/magefree/mage/issues/4461#issuecomment-361108597);
 * [Can't download images or it stops after some time](https://www.reddit.com/r/XMage/comments/agmcjf/new_xmage_release_with_ravnica_allegiance_rna/); 
-* [MacOS client freezes in GUI](https://github.com/magefree/mage/issues/4920#issuecomment-517944308);
-* [Battlefield broken or ugly cards drawing](https://github.com/magefree/mage/issues/4626#issuecomment-374640070);
+* [MacOS can't open launcher](https://www.reddit.com/r/XMage/comments/kf8l34/updated_java_on_osx_xmage_not_working/ggej8cq/)
+* [MacOS client freezes in GUI (on connect dialog, on new match)](https://github.com/magefree/mage/issues/4920#issuecomment-517944308);
+* [Ugly cards and GUI drawing in games](https://github.com/magefree/mage/issues/4626#issuecomment-374640070);
 * [No texts or small buttons in launcher](https://github.com/magefree/mage/issues/4126);
-* [Could not open ...jvm.cfg](https://github.com/magefree/mage/issues/1272#issuecomment-529789018).
+* [Can't run client, could not open ...jvm.cfg](https://github.com/magefree/mage/issues/1272#issuecomment-529789018).
 
 
 ## Performance tweaks

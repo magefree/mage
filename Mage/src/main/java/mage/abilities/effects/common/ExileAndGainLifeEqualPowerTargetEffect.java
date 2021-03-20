@@ -4,6 +4,7 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -18,7 +19,7 @@ public class ExileAndGainLifeEqualPowerTargetEffect extends OneShotEffect {
         staticText = "Exile target creature. Its controller gains life equal to its power";
     }
 
-    public ExileAndGainLifeEqualPowerTargetEffect(final ExileAndGainLifeEqualPowerTargetEffect effect) {
+    private ExileAndGainLifeEqualPowerTargetEffect(final ExileAndGainLifeEqualPowerTargetEffect effect) {
         super(effect);
     }
 
@@ -30,16 +31,17 @@ public class ExileAndGainLifeEqualPowerTargetEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            Player player = game.getPlayer(permanent.getControllerId());
-            if (player != null) {
-                int creaturePower = permanent.getPower().getValue();
-                permanent.moveToExile(null, null, source, game);
-                game.getState().processAction(game);
-                player.gainLife(creaturePower, game, source);
-            }
+        if (permanent == null) {
+            return false;
+        }
+        Player controller = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(permanent.getControllerId());
+        if (controller == null || player == null) {
             return true;
         }
-        return false;
+        int creaturePower = permanent.getPower().getValue();
+        controller.moveCards(permanent, Zone.EXILED, source, game);
+        player.gainLife(creaturePower, game, source);
+        return true;
     }
 }

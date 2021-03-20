@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.watchers.common;
 
 import mage.MageObjectReference;
@@ -43,8 +38,7 @@ public class DamageDoneWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         switch (event.getType()) {
-            case DAMAGED_CREATURE:
-            case DAMAGED_PLANESWALKER:
+            case DAMAGED_PERMANENT:
             case DAMAGED_PLAYER: {
                 MageObjectReference damageSourceRef = new MageObjectReference(event.getSourceId(), game);
                 damagingObjects.putIfAbsent(damageSourceRef, 0);

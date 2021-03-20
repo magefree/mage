@@ -95,7 +95,7 @@ class OracleOfBonesCastEffect extends OneShotEffect {
                     if (controller.chooseTarget(outcome, target, source, game)) {
                         cardToCast = game.getCard(target.getFirstTarget());
                         if (cardToCast != null
-                                && cardToCast.getSpellAbility().canChooseTarget(game)) {
+                                && cardToCast.getSpellAbility().canChooseTarget(game, controller.getId())) {
                             cancel = true;
                         }
                     } else {

@@ -13,7 +13,7 @@ import mage.filter.FilterStackObject;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.other.TargetsPermanentPredicate;
+import mage.filter.predicate.mageobject.TargetsPermanentPredicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.Target;

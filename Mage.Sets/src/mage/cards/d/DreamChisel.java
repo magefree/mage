@@ -7,7 +7,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.other.FaceDownCastablePredicate;
+import mage.filter.predicate.card.FaceDownCastablePredicate;
 
 import java.util.UUID;
 

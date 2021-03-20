@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.common;
 
 import java.util.UUID;
@@ -60,8 +55,8 @@ public class AttacksWithCreaturesTriggeredAbility extends TriggeredAbilityImpl {
         if (game.getCombat().getAttackingPlayerId().equals(getControllerId())) {
             int attackerCount = 0;
             for (UUID attackerId : game.getCombat().getAttackers()) {
-                Permanent permanent = game.getPermanent(attackerId);
-                if (permanent != null && filter.match(game.getPermanent(attackerId), game)) {
+                Permanent attacker = game.getPermanent(attackerId);
+                if (attacker != null && filter.match(attacker, game)) {
                     attackerCount++;
                 }
             }

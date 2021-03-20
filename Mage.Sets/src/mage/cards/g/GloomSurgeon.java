@@ -67,13 +67,13 @@ class GloomSurgeonEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGE_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGE_PERMANENT;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getTargetId().equals(source.getSourceId())) {
-            DamageCreatureEvent damageEvent = (DamageCreatureEvent) event;
+            DamageEvent damageEvent = (DamageEvent) event;
             return damageEvent.isCombatDamage();
         }
         return false;

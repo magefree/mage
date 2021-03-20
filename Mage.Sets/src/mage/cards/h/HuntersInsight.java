@@ -13,7 +13,6 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -92,13 +91,17 @@ class HuntersInsightTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_PLAYER
-                || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER;
+                || event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!mor.refersTo(event.getSourceId(), game)
                 || !((DamagedEvent) event).isCombatDamage()) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent != null && !permanent.isPlaneswalker()) {
             return false;
         }
         this.getEffects().clear();

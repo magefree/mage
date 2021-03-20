@@ -15,7 +15,7 @@ import mage.players.Player;
 import java.util.*;
 import mage.cards.Cards;
 import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.other.OwnerIdPredicate;
+import mage.filter.predicate.card.OwnerIdPredicate;
 
 /**
  *

@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -17,13 +16,13 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class ChainStasis extends CardImpl {
@@ -74,7 +73,7 @@ class ChainStasisEffect extends OneShotEffect {
             effect.setTargetPointer(new FixedTarget(source.getFirstTarget()));
             effect.apply(game, source);
             Player player = game.getPlayer(permanent.getControllerId());
-            if(player == null){
+            if (player == null) {
                 return false;
             }
             Cost cost = new ManaCostsImpl("{2}{U}");
@@ -82,14 +81,7 @@ class ChainStasisEffect extends OneShotEffect {
                 if (player.chooseUse(outcome, "Copy the spell?", source, game)) {
                     Spell spell = game.getStack().getSpell(source.getSourceId());
                     if (spell != null) {
-                        StackObject newStackObject = spell.createCopyOnStack(game, source, player.getId(), true);
-                        if (newStackObject instanceof Spell) {
-                            String activateMessage = ((Spell) newStackObject).getActivatedMessage(game);
-                            if (activateMessage.startsWith(" casts ")) {
-                                activateMessage = activateMessage.substring(6);
-                            }
-                            game.informPlayers(player.getLogName() + ' ' + activateMessage);
-                        }
+                        spell.createCopyOnStack(game, source, player.getId(), true);
                     }
                 }
             }

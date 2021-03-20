@@ -53,7 +53,15 @@ public class CopyPermanentEffect extends OneShotEffect {
         this.applier = applier;
         this.filter = filter;
         this.useTargetOfAbility = useTarget;
-        this.staticText = "as a copy of any " + filter.getMessage() + " on the battlefield";
+
+        String text = "as a copy of";
+        if (filter.getMessage().startsWith("a ") || filter.getMessage().startsWith("an ")) {
+            text += " " + filter.getMessage();
+        } else {
+            text += " any " + filter.getMessage() + " on battlefield";
+        }
+        text += applier == null ? "" : applier.getText();
+        this.staticText = text;
     }
 
     public CopyPermanentEffect(final CopyPermanentEffect effect) {

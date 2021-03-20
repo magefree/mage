@@ -190,6 +190,7 @@ public class SpendOtherManaTest extends CardTestPlayerBase {
         checkPlayableAbility("must have new ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}, {T}:", true);
 
         // renew target
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {W}", 2);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flicker", "Anaba Shaman");
 
         // use ability

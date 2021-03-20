@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -13,26 +11,23 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PhantomWings extends CardImpl {
 
     public PhantomWings(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.subtype.add(SubType.AURA);
-
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -40,11 +35,14 @@ public final class PhantomWings extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
         // Enchanted creature has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
+                FlyingAbility.getInstance(), AttachmentType.AURA
+        )));
+
         // Sacrifice Phantom Wings: Return enchanted creature to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhantomWingsReturnEffect(), new SacrificeSourceCost()));
-        
+        this.addAbility(new SimpleActivatedAbility(new PhantomWingsReturnEffect(), new SacrificeSourceCost()));
     }
 
     private PhantomWings(final PhantomWings card) {
@@ -56,14 +54,14 @@ public final class PhantomWings extends CardImpl {
         return new PhantomWings(this);
     }
 
-    private static class PhantomWingsReturnEffect extends OneShotEffect {
+    private static final class PhantomWingsReturnEffect extends OneShotEffect {
 
-        public PhantomWingsReturnEffect() {
+        private PhantomWingsReturnEffect() {
             super(Outcome.ReturnToHand);
             staticText = "Return enchanted creature to its owner's hand";
         }
 
-        public PhantomWingsReturnEffect(final PhantomWingsReturnEffect effect) {
+        private PhantomWingsReturnEffect(final PhantomWingsReturnEffect effect) {
             super(effect);
         }
 
@@ -74,15 +72,13 @@ public final class PhantomWings extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-            if (permanent != null && permanent.getAttachedTo() != null)
-            {
-                Permanent enchantedCreature = game.getPermanent(permanent.getAttachedTo());
-                if (enchantedCreature != null) {
-                    return enchantedCreature.moveToZone(Zone.HAND, source, game, false);
-                }
-            }        
-            return false;
+            Player player = game.getPlayer(source.getControllerId());
+            Permanent permanent = source.getSourcePermanentOrLKI(game);
+            if (player == null || permanent == null || permanent.getAttachedTo() == null) {
+                return false;
+            }
+            Permanent enchantedCreature = game.getPermanent(permanent.getAttachedTo());
+            return enchantedCreature != null && player.moveCards(enchantedCreature, Zone.HAND, source, game);
         }
     }
 }

@@ -386,14 +386,14 @@ public class Commander extends Constructed {
                 whenYouCast |= s.contains("when you cast") || s.contains("whenever you cast");
             }
 
-            for (ManaCost cost : card.getManaCost()) {
-                if (cost.getText().contains("X")) {
+            for (String s : card.getManaCostSymbols()) {
+                if (s.contains("X")) {
                     xCost = true;
                 }
             }
             for (Ability a : card.getAbilities()) {
-                for (ManaCost cost : a.getManaCosts()) {
-                    if (cost.getText().contains("X")) {
+                for (String s : a.getManaCostSymbols()) {
+                    if (s.contains("X")) {
                         xCost = true;
                     }
                 }

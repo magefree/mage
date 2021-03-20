@@ -3,8 +3,7 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -13,9 +12,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.TargetPermanent;
 
 import java.util.UUID;
 
@@ -23,6 +23,12 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class BragoKingEternal extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterControlledPermanent("nonland permanents you control");
+
+    static {
+        filter.add(Predicates.not(CardType.LAND.getPredicate()));
+    }
 
     public BragoKingEternal(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}{U}");
@@ -34,14 +40,11 @@ public final class BragoKingEternal extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // When Brago, King Eternal deals combat damage to a player, exile any number of target nonland permanents you control, then return those cards to the battlefield under their owner's control.
-        Effect effect = new ExileTargetEffect(this.getId(), this.getName(), Zone.BATTLEFIELD);
-        effect.setText("exile any number of target nonland permanents you control");
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(effect, false);
-        FilterControlledPermanent filterControlledNonlandPermanent = new FilterControlledPermanent();
-        filterControlledNonlandPermanent.add(Predicates.not(CardType.LAND.getPredicate()));
-        ability.addTarget(new TargetControlledPermanent(0, Integer.MAX_VALUE, filterControlledNonlandPermanent, false));
-        ability.addEffect(new ReturnFromExileEffect(this.getId(), Zone.BATTLEFIELD, ", then return those cards to the battlefield under their owner's control"));
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new ExileTargetForSourceEffect().setText("exile any number of target nonland permanents you control"), false);
+        ability.addTarget(new TargetPermanent(0, Integer.MAX_VALUE, filter, false));
+        ability.addEffect(new ReturnFromExileEffect(Zone.BATTLEFIELD, ", then return those cards to the battlefield under their owner's control"));
         this.addAbility(ability);
     }
 

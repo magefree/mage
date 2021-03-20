@@ -83,7 +83,7 @@ class BecomesColorOrColorsEnchantedEffect extends OneShotEffect {
         }
         for (int i = 0; i < 5; i++) {
             if (i > 0) {
-                if (!controller.chooseUse(Outcome.Neutral, "Do you wish to choose another color?", source, game)) {
+                if (!controller.chooseUse(Outcome.Neutral, "Choose another color?", source, game)) {
                     break;
                 }
             }

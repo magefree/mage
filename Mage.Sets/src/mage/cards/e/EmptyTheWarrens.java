@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -20,6 +19,7 @@ public final class EmptyTheWarrens extends CardImpl {
 
         // Create two 1/1 red Goblin creature tokens.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new GoblinToken(), 2));
+
         // Storm
         this.addAbility(new StormAbility());
     }

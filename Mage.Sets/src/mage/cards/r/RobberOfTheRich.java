@@ -6,8 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.AsThoughManaEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.keyword.HasteAbility;
@@ -16,20 +14,12 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.ManaPoolItem;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
-import mage.watchers.Watcher;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -145,7 +135,7 @@ class RobberOfTheRichEffect extends OneShotEffect {
         if (card.getSpellAbility() != null) {
             // allow to cast the card
             // and you may spend mana as though it were mana of any color to cast it
-            CardUtil.makeCardPlayableAndSpendManaAsAnyColor(game, source, card, Duration.Custom, RobberOfTheRichAnyTurnAttackedCondition.instance);
+            CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true, RobberOfTheRichAnyTurnAttackedCondition.instance);
         }
         return true;
     }

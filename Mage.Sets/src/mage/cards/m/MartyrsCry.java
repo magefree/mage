@@ -1,22 +1,30 @@
-
 package mage.cards.m;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.UUID;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author TheElk801
  */
 public final class MartyrsCry extends CardImpl {
@@ -40,12 +48,18 @@ public final class MartyrsCry extends CardImpl {
 
 class MartyrsCryEffect extends OneShotEffect {
 
+    private static final FilterPermanent filter = new FilterCreaturePermanent();
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
+    }
+
     MartyrsCryEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile all white creatures. For each creature exiled this way, its controller draws a card.";
     }
 
-    MartyrsCryEffect(final MartyrsCryEffect effect) {
+    private MartyrsCryEffect(final MartyrsCryEffect effect) {
         super(effect);
     }
 
@@ -56,19 +70,29 @@ class MartyrsCryEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Map<UUID, Integer> playerCrtCount = new HashMap<>();
-        for (Iterator<Permanent> it = game.getBattlefield().getActivePermanents(source.getControllerId(), game).iterator(); it.hasNext();) {
-            Permanent perm = it.next();
-            if (perm != null && perm.isCreature() && perm.getColor(game).isWhite() && perm.moveToExile(null, null, source, game)) {
-                playerCrtCount.putIfAbsent(perm.getControllerId(), 0);
-                playerCrtCount.compute(perm.getControllerId(), (p, amount) -> amount + 1);
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
         }
-        for (UUID playerId : game.getPlayerList().toList()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                player.drawCards(playerCrtCount.getOrDefault(playerId, 0), source, game);
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(
+                filter, source.getControllerId(), source.getSourceId(), game
+        );
+        Map<UUID, Integer> playerMap = permanents
+                .stream()
+                .filter(Objects::nonNull)
+                .map(Controllable::getControllerId)
+                .collect(Collectors.toMap(
+                        Function.identity(),
+                        uuid -> 1,
+                        Integer::sum
+                ));
+        controller.moveCards(new CardsImpl(permanents), Zone.EXILED, source, game);
+        for (Map.Entry<UUID, Integer> entry : playerMap.entrySet()) {
+            Player player = game.getPlayer(entry.getKey());
+            if (player == null) {
+                continue;
             }
+            player.drawCards(entry.getValue(), source, game);
         }
         return true;
     }

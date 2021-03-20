@@ -69,7 +69,7 @@ class CrazedFirecatEffect extends OneShotEffect {
                 flipsWon++;
 
                 // AI workaround to stop on good condition
-                if (!controller.isHuman() && !controller.isTestMode() && flipsWon >= 2) {
+                if (controller.isComputer() && flipsWon >= 2) {
                     break;
                 }
             }

@@ -1,21 +1,22 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.TargetCard;
+import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class MakeAWish extends CardImpl {
@@ -39,12 +40,12 @@ public final class MakeAWish extends CardImpl {
 
 class MakeAWishEffect extends OneShotEffect {
 
-    public MakeAWishEffect() {
+    MakeAWishEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Return two cards at random from your graveyard to your hand";
     }
 
-    public MakeAWishEffect(final MakeAWishEffect effect) {
+    private MakeAWishEffect(final MakeAWishEffect effect) {
         super(effect);
     }
 
@@ -56,20 +57,13 @@ class MakeAWishEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Cards cards = player.getGraveyard();
-            for (int i = 0; i < 2 && !cards.isEmpty(); i++) {
-                Card card = cards.getRandom(game);
-                if (card != null) {
-                    card.moveToZone(Zone.HAND, source, game, true);
-                    cards.remove(card);
-                    game.informPlayers(card.getName() + " returned to the hand of " + player.getLogName());
-                } else {
-                    return false;
-                }
-            }
-            return true;
+        if (player == null || player.getGraveyard().isEmpty()) {
+            return false;
         }
-        return false;
+        TargetCard target = new TargetCardInYourGraveyard(Math.min(player.getGraveyard().size(), 2), StaticFilters.FILTER_CARD);
+        target.setNotTarget(true);
+        target.setRandom(true);
+        player.choose(outcome, target, source.getSourceId(), game);
+        return player.moveCards(new CardsImpl(target.getTargets()), Zone.HAND, source, game);
     }
 }

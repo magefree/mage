@@ -1,55 +1,32 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
 package mage.cards.d;
 
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
+import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
- * @author jeffwadsworth
+ * @author TheElk801
  */
 public class DampingEngine extends CardImpl {
 
@@ -58,9 +35,11 @@ public class DampingEngine extends CardImpl {
 
         // A player who controls more permanents than each other player can't play lands or cast artifact, creature, or enchantment spells. 
         // That player may sacrifice a permanent for that player to ignore this effect until end of turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DampingEngineEffect()));
-        this.addAbility(new DampingEngineSpecialAction());
-
+        Ability ability = new SimpleStaticAbility(new DampingEngineEffect());
+        ability.addEffect(new GainAbilitySourceEffect(new DampingEngineSpecialAction()).setText(
+                "That player may sacrifice a permanent for that player to ignore this effect until end of turn"
+        ));
+        this.addAbility(ability);
     }
 
     private DampingEngine(final DampingEngine card) {
@@ -71,17 +50,53 @@ public class DampingEngine extends CardImpl {
     public DampingEngine copy() {
         return new DampingEngine(this);
     }
+
+    static boolean checkPlayer(Player player, Game game) {
+        Map<UUID, Integer> map = game
+                .getBattlefield()
+                .getActivePermanents(player.getId(), game)
+                .stream()
+                .filter(Objects::nonNull)
+                .map(Controllable::getControllerId)
+                .collect(Collectors.toMap(
+                        Function.identity(),
+                        x -> 1,
+                        Integer::sum
+                ));
+        int playerPerms = map.getOrDefault(player.getId(), 0);
+        int otherPerms = map
+                .entrySet()
+                .stream()
+                .filter(e -> !player.getId().equals(e.getKey()))
+                .mapToInt(e -> e.getValue())
+                .max()
+                .orElse(0);
+        return playerPerms > otherPerms;
+    }
+
+    static String makeKey(UUID playerId, Ability source, Game game) {
+        return "dampingEngine_"
+                + playerId + "_"
+                + source.getSourceId() + "_"
+                + source.getSourceObjectZoneChangeCounter() + "_"
+                + game.getTurnNum();
+    }
+
+    static boolean checkValue(UUID playerId, Ability source, Game game) {
+        Object object = game.getState().getValue(makeKey(playerId, source, game));
+        return object instanceof Boolean && ((Boolean) object);
+    }
 }
 
 class DampingEngineEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public DampingEngineEffect() {
+    DampingEngineEffect() {
         super(Duration.WhileOnBattlefield, Outcome.AIDontUseIt);
-        staticText = "A player who controls more permanents than each other player can't play lands or cast artifact, creature, or enchantment spells"
-                + "That player may sacrifice a permanent for that player to ignore this effect until end of turn.<br><br>";
+        staticText = "A player who controls more permanents than each other player " +
+                "can't play lands or cast artifact, creature, or enchantment spells.";
     }
 
-    public DampingEngineEffect(final DampingEngineEffect effect) {
+    private DampingEngineEffect(final DampingEngineEffect effect) {
         super(effect);
     }
 
@@ -97,7 +112,7 @@ class DampingEngineEffect extends ContinuousRuleModifyingEffectImpl {
 
     @Override
     public String getInfoMessage(Ability source, GameEvent event, Game game) {
-        MageObject mageObject = game.getObject(source.getSourceId());
+        MageObject mageObject = source.getSourceObject(game);
         if (mageObject != null) {
             return "You can't play the land or cast the spell (" + mageObject.getName() + " in play).";
         }
@@ -114,38 +129,33 @@ class DampingEngineEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(event.getPlayerId());
-        Permanent dampingEngine = game.getPermanent(source.getSourceId());
-        final Card card = game.getCard(event.getSourceId());
-        if (player != null || card != null) {
-            // check type of spell
-            if (card.isCreature()
-                    || card.isArtifact()
-                    || card.isEnchantment()
-                    || card.isLand()) {
-                // check to see if the player has more permanents
-                if (new ControlsMorePermanentsThanEachOtherPlayer(player).apply(game, source)) {
-                    // check to see if the player choose to ignore the effect
-                    return game.getState().getValue("ignoreEffect") == null
-                            || dampingEngine == null
-                            || !game.getState().getValue("ignoreEffect").equals
-                            (dampingEngine.getId() + "ignoreEffect" + game.getState().getPriorityPlayerId() + game.getState().getTurnNum());
-                }
-            }
+        Permanent dampingEngine = source.getSourcePermanentIfItStillExists(game);
+        Card card = game.getCard(event.getSourceId());
+        if (player == null || dampingEngine == null || card == null) {
+            return false;
         }
-        return false;
+        if (!card.isCreature()
+                && !card.isArtifact()
+                && !card.isEnchantment()
+                && !card.isLand()) {
+            return false;
+        }
+        return DampingEngine.checkPlayer(player, game)
+                && !DampingEngine.checkValue(player.getId(), source, game);
     }
 }
 
 class DampingEngineSpecialAction extends SpecialAction {
 
-    public DampingEngineSpecialAction() {
+    DampingEngineSpecialAction() {
         super(Zone.BATTLEFIELD);
         this.addCost(new SacrificeTargetCost(new TargetControlledPermanent(), true));
         this.addEffect(new DampingEngineIgnoreEffect());
         this.setMayActivate(TargetController.ANY);
+        this.setRuleVisible(false);
     }
 
-    public DampingEngineSpecialAction(final DampingEngineSpecialAction ability) {
+    private DampingEngineSpecialAction(final DampingEngineSpecialAction ability) {
         super(ability);
     }
 
@@ -153,16 +163,31 @@ class DampingEngineSpecialAction extends SpecialAction {
     public DampingEngineSpecialAction copy() {
         return new DampingEngineSpecialAction(this);
     }
+
+    @Override
+    public ActivationStatus canActivate(UUID playerId, Game game) {
+        Player player = game.getPlayer(playerId);
+        if (player != null
+                && DampingEngine.checkPlayer(player, game)
+                && !DampingEngine.checkValue(player.getId(), this, game)) {
+            return super.canActivate(playerId, game);
+        }
+        return ActivationStatus.getFalse();
+    }
+
+    @Override
+    public String getRule() {
+        return "";
+    }
 }
 
 class DampingEngineIgnoreEffect extends OneShotEffect {
 
-    public DampingEngineIgnoreEffect() {
+    DampingEngineIgnoreEffect() {
         super(Outcome.AIDontUseIt);
-        this.staticText = "That player may sacrifice a permanent for that player to ignore this effect until end of turn";
     }
 
-    public DampingEngineIgnoreEffect(final DampingEngineIgnoreEffect effect) {
+    private DampingEngineIgnoreEffect(final DampingEngineIgnoreEffect effect) {
         super(effect);
     }
 
@@ -173,36 +198,7 @@ class DampingEngineIgnoreEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        String key = permanent.getId() + "ignoreEffect" + game.getState().getPriorityPlayerId() + game.getState().getTurnNum();
-        if (key != null) {
-            game.getState().setValue("ignoreEffect", key);
-        }
+        game.getState().setValue(DampingEngine.makeKey(source.getControllerId(), source, game), Boolean.TRUE);
         return true;
-    }
-}
-
-class ControlsMorePermanentsThanEachOtherPlayer implements Condition {
-
-    Player player;
-
-    public ControlsMorePermanentsThanEachOtherPlayer(Player player) {
-        this.player = player;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int numPermanents = game.getBattlefield().countAll(new FilterPermanent(), player.getId(), game);
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            if (numPermanents > game.getBattlefield().countAll(new FilterPermanent(), playerId, game)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "a player controls less permanents than you";
     }
 }

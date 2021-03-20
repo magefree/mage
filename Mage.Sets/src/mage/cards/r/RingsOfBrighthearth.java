@@ -109,7 +109,6 @@ class RingsOfBrighthearthEffect extends OneShotEffect {
                     Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
                     if (ability != null && controller != null && sourcePermanent != null) {
                         ability.createCopyOnStack(game, source, source.getControllerId(), true);
-                        game.informPlayers(sourcePermanent.getIdName() + ": " + controller.getLogName() + " copied activated ability");
                         return true;
                     }
                     return false;

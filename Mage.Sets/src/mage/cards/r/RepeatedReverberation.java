@@ -132,7 +132,6 @@ class RepeatedReverberationEffect extends OneShotEffect {
             return false;
         }
         stackAbility.createCopyOnStack(game, source, source.getControllerId(), true, 2);
-        game.informPlayers(sourcePermanent.getIdName() + ": " + controller.getLogName() + " copied loyalty ability twice");
         return true;
     }
 

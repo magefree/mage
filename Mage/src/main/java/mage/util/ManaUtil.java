@@ -18,6 +18,7 @@ import mage.cards.ModalDoubleFacesCard;
 import mage.cards.SplitCard;
 import mage.choices.Choice;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.ManaType;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.Player;
@@ -699,6 +700,23 @@ public final class ManaUtil {
         } else {
             return 0;
         }
+    }
 
+    /**
+     * Find all used mana types in mana cost (wubrg + colorless)
+     *
+     * @return
+     */
+    public static List<ManaType> getManaTypesInCost(ManaCost cost) {
+        List<ManaType> res = new ArrayList<>();
+        for (Mana mana : cost.getManaOptions()) {
+            if (mana.getWhite() > 0) res.add(ManaType.WHITE);
+            if (mana.getBlue() > 0) res.add(ManaType.BLUE);
+            if (mana.getBlack() > 0) res.add(ManaType.BLACK);
+            if (mana.getRed() > 0) res.add(ManaType.RED);
+            if (mana.getGreen() > 0) res.add(ManaType.GREEN);
+            if (mana.getColorless() > 0 || mana.getGeneric() > 0 || mana.getAny() > 0) res.add(ManaType.COLORLESS);
+        }
+        return res;
     }
 }

@@ -18,8 +18,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
-    private String attachedDescription;
-    private boolean diesRuleText;
+    private final String attachedDescription;
+    private final boolean diesRuleText;
     protected SetTargetPointer setTargetPointer;
 
     public DiesAttachedTriggeredAbility(Effect effect, String attachedDescription) {
@@ -35,7 +35,7 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public DiesAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional,
-            boolean diesRuleText, SetTargetPointer setTargetPointer) {
+                                        boolean diesRuleText, SetTargetPointer setTargetPointer) {
         super(Zone.ALL, effect, optional); // because the trigger only triggers if the object was attached, it doesn't matter where the Attachment was moved to (e.g. by replacement effect) after the trigger triggered, so Zone.all
         this.attachedDescription = attachedDescription;
         this.diesRuleText = diesRuleText;
@@ -61,65 +61,64 @@ public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (((ZoneChangeEvent) event).isDiesEvent()) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            boolean triggered = false;
-            if (zEvent.getTarget() != null
-                    && zEvent.getTarget().getAttachments() != null
-                    && zEvent.getTarget().getAttachments().contains(this.getSourceId())) {
-                triggered = true;
-            } else {
-                // If the attachment and attachedTo went to graveyard at the same time, the trigger applies.
-                // If the attachment is removed beforehand, the trigger fails.
-                // IE: A player cast Planar Clensing.  The attachment is Disenchanted in reponse 
-                // and successfully removed from the attachedTo.  The trigger fails.
-                Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
-                Card attachmentCard = game.getCard(getSourceId());
-                if (attachment != null
-                        && zEvent.getTargetId() != null
-                        && attachment.getAttachedTo() != null
-                        && zEvent.getTargetId().equals(attachment.getAttachedTo())) {
-                    Permanent attachedTo = game.getPermanentOrLKIBattlefield(attachment.getAttachedTo());
-                    if (attachedTo != null
-                            && game.getState().getZone(attachedTo.getId()) == (Zone.GRAVEYARD)  // Demonic Vigor
-                            && attachmentCard != null
-                            && attachment.getAttachedToZoneChangeCounter() == attachedTo.getZoneChangeCounter(game)
-                            && attachment.getZoneChangeCounter(game) == attachmentCard.getZoneChangeCounter(game)) {
-                        triggered = true;
-                    }
+        if (!((ZoneChangeEvent) event).isDiesEvent()) {
+            return false;
+        }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        boolean triggered = false;
+        if (zEvent.getTarget() != null
+                && zEvent.getTarget().getAttachments() != null
+                && zEvent.getTarget().getAttachments().contains(this.getSourceId())) {
+            triggered = true;
+        } else {
+            // If the attachment and attachedTo went to graveyard at the same time, the trigger applies.
+            // If the attachment is removed beforehand, the trigger fails.
+            // IE: A player cast Planar Clensing.  The attachment is Disenchanted in reponse
+            // and successfully removed from the attachedTo.  The trigger fails.
+            Permanent attachment = getSourcePermanentOrLKI(game);
+            Card attachmentCard = game.getCard(getSourceId());
+            if (attachment != null
+                    && zEvent.getTargetId() != null
+                    && attachment.getAttachedTo() != null
+                    && zEvent.getTargetId().equals(attachment.getAttachedTo())) {
+                Permanent attachedTo = game.getPermanentOrLKIBattlefield(attachment.getAttachedTo());
+                if (attachedTo != null
+                        && game.getState().getZone(attachedTo.getId()) == (Zone.GRAVEYARD)  // Demonic Vigor
+                        && attachmentCard != null
+                        && attachment.getAttachedToZoneChangeCounter() == attachedTo.getZoneChangeCounter(game)
+                        && attachment.getZoneChangeCounter(game) == attachmentCard.getZoneChangeCounter(game)) {
+                    triggered = true;
                 }
-            }
-            if (triggered) {
-                for (Effect effect : getEffects()) {
-                    if (zEvent.getTarget() != null) {
-                        effect.setValue("attachedTo", zEvent.getTarget());
-                        effect.setValue("zcc", zEvent.getTarget().getZoneChangeCounter(game) + 1); // zone change info from battlefield
-                        if (setTargetPointer == SetTargetPointer.ATTACHED_TO_CONTROLLER) {
-                            Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
-                            if (attachment != null 
-                                    && attachment.getAttachedTo() != null) {
-                                Permanent attachedTo = (Permanent) game.getLastKnownInformation(attachment.getAttachedTo(),
-                                        Zone.BATTLEFIELD, attachment.getAttachedToZoneChangeCounter());
-                                if (attachedTo != null) {
-                                    effect.setTargetPointer(new FixedTarget(attachedTo.getControllerId()));
-                                }
-                            }
-                        }
-                    }
-                }
-                return true;
             }
         }
-        return false;
+        if (!triggered) {
+            return false;
+        }
+        if (zEvent.getTarget() == null) {
+            return true;
+        }
+        getEffects().setValue("attachedTo", zEvent.getTarget());
+        getEffects().setValue("zcc", zEvent.getTarget().getZoneChangeCounter(game) + 1); // zone change info from battlefield
+        if (setTargetPointer == SetTargetPointer.ATTACHED_TO_CONTROLLER) {
+            Permanent attachment = game.getPermanentOrLKIBattlefield(getSourceId());
+            if (attachment != null
+                    && attachment.getAttachedTo() != null) {
+                Permanent attachedTo = (Permanent) game.getLastKnownInformation(attachment.getAttachedTo(),
+                        Zone.BATTLEFIELD, attachment.getAttachedToZoneChangeCounter());
+                if (attachedTo != null) {
+                    getEffects().setTargetPointer(new FixedTarget(attachedTo.getControllerId()));
+                }
+            }
+        }
+        return true;
     }
 
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder();
-        if(attachedDescription.startsWith("equipped")) {
+        if (attachedDescription.startsWith("equipped")) {
             sb.append("Whenever ");
-        }
-        else {
+        } else {
             sb.append("When ");
         }
         sb.append(attachedDescription);

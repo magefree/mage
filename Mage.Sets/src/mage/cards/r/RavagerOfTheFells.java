@@ -1,27 +1,17 @@
-
 package mage.cards.r;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.common.WerewolfBackTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -33,8 +23,11 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class RavagerOfTheFells extends CardImpl {
@@ -58,12 +51,7 @@ public final class RavagerOfTheFells extends CardImpl {
         this.addAbility(new RavagerOfTheFellsAbility());
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Ravager of the Fells.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                ability,
-                TwoOrMoreSpellsWereCastLastTurnCondition.instance,
-                TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE
-        ));
+        this.addAbility(new WerewolfBackTriggeredAbility());
     }
 
     private RavagerOfTheFells(final RavagerOfTheFells card) {
@@ -78,14 +66,14 @@ public final class RavagerOfTheFells extends CardImpl {
 
 class RavagerOfTheFellsAbility extends TriggeredAbilityImpl {
 
-    public RavagerOfTheFellsAbility() {
+    RavagerOfTheFellsAbility() {
         super(Zone.BATTLEFIELD, new RavagerOfTheFellsEffect(), false);
         Target target1 = new TargetOpponentOrPlaneswalker();
         this.addTarget(target1);
         this.addTarget(new RavagerOfTheFellsTarget());
     }
 
-    public RavagerOfTheFellsAbility(final RavagerOfTheFellsAbility ability) {
+    private RavagerOfTheFellsAbility(final RavagerOfTheFellsAbility ability) {
         super(ability);
     }
 
@@ -121,11 +109,11 @@ class RavagerOfTheFellsAbility extends TriggeredAbilityImpl {
 
 class RavagerOfTheFellsEffect extends OneShotEffect {
 
-    public RavagerOfTheFellsEffect() {
+    RavagerOfTheFellsEffect() {
         super(Outcome.Damage);
     }
 
-    public RavagerOfTheFellsEffect(final RavagerOfTheFellsEffect effect) {
+    private RavagerOfTheFellsEffect(final RavagerOfTheFellsEffect effect) {
         super(effect);
     }
 
@@ -148,11 +136,11 @@ class RavagerOfTheFellsEffect extends OneShotEffect {
 
 class RavagerOfTheFellsTarget extends TargetPermanent {
 
-    public RavagerOfTheFellsTarget() {
+    RavagerOfTheFellsTarget() {
         super(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE, false);
     }
 
-    public RavagerOfTheFellsTarget(final RavagerOfTheFellsTarget target) {
+    private RavagerOfTheFellsTarget(final RavagerOfTheFellsTarget target) {
         super(target);
     }
 

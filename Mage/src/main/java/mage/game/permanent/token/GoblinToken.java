@@ -14,16 +14,10 @@ import java.util.List;
  */
 public final class GoblinToken extends TokenImpl {
 
-    static final private List<String> tokenImageSets = new ArrayList<>();
-
-    static {
-        tokenImageSets.addAll(Arrays.asList("10E", "ALA", "SOM", "M10", "NPH", "M13", "RTR",
-                "MMA", "M15", "C14", "KTK", "EVG", "DTK", "ORI", "DDG", "DDN", "EVG", "MM2",
-                "MM3", "EMA", "C16", "DOM", "ANA", "RNA", "WAR", "MH1"));
-    }
-
     public GoblinToken(boolean withHaste) {
         this();
+
+        // token image don't have haste info so it's ok to use same class for different versions
         if (withHaste) {
             addAbility(HasteAbility.getInstance());
             this.description = "1/1 red Goblin creature token with haste";
@@ -31,22 +25,16 @@ public final class GoblinToken extends TokenImpl {
     }
 
     public GoblinToken() {
-        this(null, 0);
-    }
-
-    public GoblinToken(String setCode) {
-        this(setCode, 0);
-    }
-
-    public GoblinToken(String setCode, int tokenType) {
         super("Goblin", "1/1 red Goblin creature token");
-        availableImageSetCodes = tokenImageSets;
-        setOriginalExpansionSetCode(setCode);
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.GOBLIN);
         color.setRed(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
+
+        availableImageSetCodes = Arrays.asList("10E", "ALA", "SOM", "M10", "NPH", "M13", "RTR",
+                "MMA", "M15", "C14", "KTK", "EVG", "DTK", "ORI", "DDG", "DDN", "EVG", "MM2",
+                "MM3", "EMA", "C16", "DOM", "ANA", "RNA", "WAR", "MH1", "TSR");
     }
 
     public GoblinToken(final GoblinToken token) {

@@ -88,6 +88,8 @@ public interface Ability extends Controllable, Serializable {
     /**
      * Gets the id of the object which put this ability in motion.
      *
+     * WARNING, MageSingleton abilities contains dirty data here, so you can't use sourceId with it
+     *
      * @return The {@link java.util.UUID} of the object this ability is
      * associated with.
      */
@@ -320,7 +322,7 @@ public interface Ability extends Controllable, Serializable {
 
     Modes getModes();
 
-    boolean canChooseTarget(Game game);
+    boolean canChooseTarget(Game game, UUID playerId);
 
     /**
      * Gets the list of sub-abilities associated with this ability.

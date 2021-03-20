@@ -174,7 +174,6 @@ class UnboundFlourishingCopyEffect extends OneShotEffect {
             if (needObject instanceof StackAbility) {
                 StackAbility stackAbility = (StackAbility) needObject;
                 stackAbility.createCopyOnStack(game, source, source.getControllerId(), true);
-                game.informPlayers(sourcePermanent.getName() + ": " + controller.getLogName() + " copied activated ability");
                 return true;
             }
 
@@ -182,7 +181,6 @@ class UnboundFlourishingCopyEffect extends OneShotEffect {
             if (needObject instanceof Spell) {
                 Spell spell = (Spell) needObject;
                 spell.createCopyOnStack(game, source, source.getControllerId(), true);
-                game.informPlayers(sourcePermanent.getName() + ": " + controller.getLogName() + " copied casted spell");
                 return true;
             }
         }

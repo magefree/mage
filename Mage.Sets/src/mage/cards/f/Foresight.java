@@ -1,25 +1,22 @@
-
 package mage.cards.f;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextUpkeepDelayedTriggeredAbility;
 import mage.abilities.effects.SearchEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class Foresight extends CardImpl {
@@ -47,11 +44,11 @@ public final class Foresight extends CardImpl {
 class ForesightEffect extends SearchEffect {
 
     ForesightEffect() {
-        super(new TargetCardInLibrary(3, new FilterCard()), Outcome.Benefit);
+        super(new TargetCardInLibrary(3, StaticFilters.FILTER_CARD), Outcome.Benefit);
         staticText = "Search your library for three cards, exile them, then shuffle your library";
     }
 
-    ForesightEffect(final ForesightEffect effect) {
+    private ForesightEffect(final ForesightEffect effect) {
         super(effect);
     }
 
@@ -63,21 +60,19 @@ class ForesightEffect extends SearchEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.searchLibrary(target, source, game)) {
-            for (UUID targetId : getTargets()) {
-                Card card = player.getLibrary().getCard(targetId, game);
-                if (card != null) {
-                    card.moveToExile(null, null, source, game);
-                }
-            }
-            player.shuffleLibrary(source, game);
-            return true;
+        if (player == null) {
+            return false;
         }
-        return false;
+        player.searchLibrary(target, source, game);
+        Cards cards = new CardsImpl();
+        for (UUID targetId : target.getTargets()) {
+            Card card = player.getLibrary().getCard(targetId, game);
+            if (card != null) {
+                cards.add(card);
+            }
+        }
+        player.moveCards(cards, Zone.EXILED, source, game);
+        player.shuffleLibrary(source, game);
+        return true;
     }
-
-    public List<UUID> getTargets() {
-        return target.getTargets();
-    }
-
 }

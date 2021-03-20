@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -27,6 +26,7 @@ public final class PenumbraSpider extends CardImpl {
 
         // Reach
         this.addAbility(ReachAbility.getInstance());
+
         // When Penumbra Spider dies, create a 2/4 black Spider creature token with reach.
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new PenumbraSpiderToken()), false));
     }

@@ -6,7 +6,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -72,9 +72,7 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
         if (zEvent.isDiesEvent()) {
             if (filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
                 if (setTargetPointer) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
-                    }
+                    this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
                 }
                 return true;
             }

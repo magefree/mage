@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.permanent.DefendingPlayerOwnsCardPredicate;
+import mage.filter.predicate.card.DefendingPlayerOwnsCardPredicate;
 import mage.target.common.TargetCardInGraveyard;
 
 import java.util.UUID;

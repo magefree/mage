@@ -9,6 +9,7 @@ import mage.cards.SplitCard;
 import mage.cards.SplitCardHalf;
 import mage.cards.repository.CardInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +30,9 @@ public class MockSplitCardHalf extends MockCard implements SplitCardHalf {
 
     public MockSplitCardHalf(final MockSplitCardHalf card) {
         super(card);
+        this.splitCardParent = card.splitCardParent;
+        this.manaCosts = card.manaCosts.copy();
+        this.manaCostsSymbols = new ArrayList<>(card.manaCostsSymbols);
     }
 
     @Override

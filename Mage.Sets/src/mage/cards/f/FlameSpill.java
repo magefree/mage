@@ -3,7 +3,6 @@ package mage.cards.f;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,8 +13,6 @@ import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
-
-import static mage.game.combat.CombatGroup.getLethalDamage;
 
 /**
  * @author TheElk801
@@ -64,10 +61,7 @@ class FlameSpillEffect extends OneShotEffect {
         if (permanent == null || sourceObject == null) {
             return false;
         }
-        int lethal = getLethalDamage(permanent, game);
-        if (sourceObject.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
-            lethal = Math.min(lethal, 1);
-        }
+        int lethal = permanent.getLethalDamage(source.getSourceId(), game);
         lethal = Math.min(lethal, 4);
         permanent.damage(lethal, source.getSourceId(), source, game);
         Player player = game.getPlayer(permanent.getControllerId());

@@ -28,7 +28,7 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.command.emblems.TibaltCosmicImposterEmblem;
+import mage.game.command.emblems.TibaltCosmicImpostorEmblem;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
@@ -48,7 +48,7 @@ public final class ValkiGodOfLies extends ModalDoubleFacesCard {
     public ValkiGodOfLies(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
                 new CardType[]{CardType.CREATURE}, new SubType[]{SubType.GOD}, "{1}{B}",
-                "Tibalt, Cosmic Imposter", new CardType[]{CardType.PLANESWALKER}, new SubType[]{SubType.TIBALT}, "{5}{B}{R}"
+                "Tibalt, Cosmic Impostor", new CardType[]{CardType.PLANESWALKER}, new SubType[]{SubType.TIBALT}, "{5}{B}{R}"
         );
 
         // 1.
@@ -70,7 +70,7 @@ public final class ValkiGodOfLies extends ModalDoubleFacesCard {
         this.getRightHalfCard().addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(5));
 
         // As Tibalt enters the battlefield, you get an emblem with “You may play cards exiled with Tibalt, Cosmic Impostor, and you may spend mana as though it were mana of any color to cast those spells.”
-        this.getRightHalfCard().addAbility(new AsEntersBattlefieldAbility(new GetEmblemEffect(new TibaltCosmicImposterEmblem())));
+        this.getRightHalfCard().addAbility(new AsEntersBattlefieldAbility(new GetEmblemEffect(new TibaltCosmicImpostorEmblem())));
 
         // +2: Exile the top card of each player’s library.
         this.getRightHalfCard().addAbility(new LoyaltyAbility(new ExileTopCardEachPlayersLibrary(), 2));
@@ -124,6 +124,7 @@ class ValkiGodOfLiesRevealExileEffect extends OneShotEffect {
                 if (opponent != null) {
                     opponent.revealCards(source, opponent.getHand(), game);
                     TargetCard targetToExile = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_CREATURE);
+                    targetToExile.withChooseHint("card to exile");
                     targetToExile.setNotTarget(true);
                     if (controller.choose(Outcome.Exile, opponent.getHand(), targetToExile, game)) {
                         Card targetedCardToExile = game.getCard(targetToExile.getFirstTarget());
@@ -240,7 +241,8 @@ class ValkiGodOfLiesCopyExiledEffect extends OneShotEffect {
             filter.add(new ConvertedManaCostPredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
             TargetCardInExile target = new TargetCardInExile(filter, exileId);
             Cards cards = game.getExile().getExileZone(exileId);
-            if (!cards.isEmpty()
+            if (cards != null
+                    && !cards.isEmpty()
                     && controller.choose(Outcome.Benefit, cards, target, game)) {
                 Card chosenExiledCard = game.getCard(target.getFirstTarget());
                 if (chosenExiledCard != null) {
@@ -259,7 +261,7 @@ class ExileTopCardEachPlayersLibrary extends OneShotEffect {
 
     public ExileTopCardEachPlayersLibrary() {
         super(Outcome.Benefit);
-        this.staticText = "Exile the top card of each player’s library";
+        this.staticText = "Exile the top card of each player's library";
     }
 
     public ExileTopCardEachPlayersLibrary(final ExileTopCardEachPlayersLibrary effect) {

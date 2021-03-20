@@ -48,7 +48,9 @@ public class ForetellAbility extends SpecialAction {
         // exile the card and it can't be cast the turn it was foretold
         this.addEffect(new ForetellExileEffect(card, foretellCost, foretellSplitCost));
         // look at face-down card anytime
-        addSubAbility(new SimpleStaticAbility(Zone.ALL, new ForetellLookAtCardEffect()));
+        Ability ability = new SimpleStaticAbility(Zone.ALL, new ForetellLookAtCardEffect());
+        ability.setControllerId(controllerId);  // if not set, anyone can look at the card in exile
+        addSubAbility(ability);
         this.setRuleVisible(true);
         this.addWatcher(new ForetoldWatcher());
     }
@@ -292,6 +294,12 @@ public class ForetellAbility extends SpecialAction {
 
         public ForetellCostAbility(String foretellCost) {
             super(null, "Testing", Zone.EXILED, SpellAbilityType.BASE_ALTERNATE, SpellAbilityCastMode.NORMAL);
+            // Needed for Dream Devourer and Ethereal Valkyrie reducing the cost of a colorless CMC 2 or less spell to 0
+            // CardUtil.reduceCost returns an empty string in that case so we add a cost of 0 here
+            // https://github.com/magefree/mage/issues/7607
+            if (foretellCost != null && foretellCost.isEmpty()) {
+                foretellCost = "{0}";
+            }
             this.setAdditionalCostsRuleVisible(false);
             this.name = "Foretell " + foretellCost;
             this.addCost(new ManaCostsImpl(foretellCost));

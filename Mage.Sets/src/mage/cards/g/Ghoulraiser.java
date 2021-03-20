@@ -1,12 +1,9 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,16 +13,18 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.RandomUtil;
+import mage.target.TargetCard;
+import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
- *
  * @author North
  */
 public final class Ghoulraiser extends CardImpl {
 
     public Ghoulraiser(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.subtype.add(SubType.ZOMBIE);
 
         this.power = new MageInt(2);
@@ -47,12 +46,18 @@ public final class Ghoulraiser extends CardImpl {
 
 class GhoulraiserEffect extends OneShotEffect {
 
-    public GhoulraiserEffect() {
+    private static final FilterCard filter = new FilterCard();
+
+    static {
+        filter.add(SubType.ZOMBIE.getPredicate());
+    }
+
+    GhoulraiserEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "return a Zombie card at random from your graveyard to your hand";
     }
 
-    public GhoulraiserEffect(final GhoulraiserEffect effect) {
+    private GhoulraiserEffect(final GhoulraiserEffect effect) {
         super(effect);
     }
 
@@ -64,17 +69,13 @@ class GhoulraiserEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            FilterCard filter = new FilterCard("Zombie card");
-            filter.add(SubType.ZOMBIE.getPredicate());
-            Card[] cards = player.getGraveyard().getCards(filter, game).toArray(new Card[0]);
-            if (cards.length > 0) {
-                Card card = cards[RandomUtil.nextInt(cards.length)];
-                card.moveToZone(Zone.HAND, source, game, true);
-                game.informPlayers(card.getName() + "returned to the hand of" + player.getLogName());
-                return true;
-            }
+        if (player == null || player.getGraveyard().count(filter, game) < 1) {
+            return false;
         }
-        return false;
+        TargetCard target = new TargetCardInYourGraveyard(filter);
+        target.setNotTarget(true);
+        target.setRandom(true);
+        player.choose(outcome, target, source.getSourceId(), game);
+        return player.moveCards(game.getCard(target.getFirstTarget()), Zone.HAND, source, game);
     }
 }

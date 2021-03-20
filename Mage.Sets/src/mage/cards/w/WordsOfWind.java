@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.List;
@@ -28,8 +27,7 @@ import mage.target.common.TargetControlledPermanent;
 public final class WordsOfWind extends CardImpl {
 
     public WordsOfWind(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // {1}: The next time you would draw a card this turn, each player returns a permanent they control to its owner's hand instead.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWindEffect(), new ManaCostsImpl("{1}")));
@@ -62,40 +60,40 @@ class WordsOfWindEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {        
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         game.informPlayers("Each player returns a permanent they control to its owner's hand instead");
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 TargetControlledPermanent target = new TargetControlledPermanent();
                 List<Permanent> liste = game.getBattlefield().getActivePermanents(new FilterControlledPermanent(), playerId, game);
-                if(!liste.isEmpty()){
-                    while (!player.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)){
+                if (!liste.isEmpty()) {
+                    while (!player.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
                         if (!player.canRespond()) {
                             return false;
                         }
                     }
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
-                        permanent.moveToZone(Zone.HAND, source, game, false);
+                        player.moveCards(permanent, Zone.HAND, source, game);
                     }
                 }
             }
         }
-		this.used = true;
+        this.used = true;
         discard();
         return true;
     }
-    
+
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DRAW_CARD;
-    }   
-    
+    }
+
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!this.used) {
-			return source.isControlledBy(event.getPlayerId());
+            return source.isControlledBy(event.getPlayerId());
         }
         return false;
     }

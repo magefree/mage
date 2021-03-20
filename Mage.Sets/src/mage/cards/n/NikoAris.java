@@ -156,8 +156,7 @@ class NikoArisDamageTriggeredAbility extends DelayedTriggeredAbility {
     public boolean checkEventType(GameEvent event, Game game) {
         switch (event.getType()) {
             case DAMAGED_PLAYER:
-            case DAMAGED_CREATURE:
-            case DAMAGED_PLANESWALKER:
+            case DAMAGED_PERMANENT:
                 return true;
         }
         return false;

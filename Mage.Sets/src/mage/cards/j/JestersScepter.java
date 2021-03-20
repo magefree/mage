@@ -156,7 +156,8 @@ class JestersScepterCost extends CostImpl {
             TargetCardInExile target = new TargetCardInExile(new FilterCard(), CardUtil.getCardExileZoneId(game, ability));
             target.setNotTarget(true);
             Cards cards = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, ability));
-            if (!cards.isEmpty()
+            if (cards != null
+                    && !cards.isEmpty()
                     && controller.choose(Outcome.Benefit, cards, target, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {

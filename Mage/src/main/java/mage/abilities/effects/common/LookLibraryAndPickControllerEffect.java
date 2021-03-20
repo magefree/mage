@@ -233,20 +233,20 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     }
 
     private String getMayText() {
-        StringBuilder sb = new StringBuilder("Do you wish to ");
+        StringBuilder sb = new StringBuilder();
         switch (targetPickedCards) {
             case HAND:
                 if (revealPickedCards) {
-                    sb.append("reveal ").append(filter.getMessage()).append(" and put into your hand");
+                    sb.append("Reveal ").append(filter.getMessage()).append(" and put into your hand");
                 } else {
-                    sb.append("put ").append(filter.getMessage()).append(" into your hand");
+                    sb.append("Put ").append(filter.getMessage()).append(" into your hand");
                 }
                 break;
             case BATTLEFIELD:
-                sb.append("put ").append(filter.getMessage()).append(" onto the battlefield");
+                sb.append("Put ").append(filter.getMessage()).append(" onto the battlefield");
                 break;
             case GRAVEYARD:
-                sb.append("put ").append(filter.getMessage()).append(" into your graveyard");
+                sb.append("Put ").append(filter.getMessage()).append(" into your graveyard");
                 break;
         }
         return sb.append('?').toString();

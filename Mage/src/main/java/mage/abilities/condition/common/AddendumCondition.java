@@ -6,6 +6,8 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 
 /**
+ * Addendum — If you cast this spell during your main phase, you get some boost
+ *
  * @author LevelX2
  */
 
@@ -23,6 +25,6 @@ public enum AddendumCondition implements Condition {
             return true;
         }
         Spell spell = game.getSpell(source.getSourceId());
-        return spell != null && !spell.isCopy();
+        return spell != null && !spell.isCopy(); // copies are not casted
     }
 }

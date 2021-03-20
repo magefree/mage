@@ -76,16 +76,17 @@ class VaporSnareEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean targetChosen = false;
-        Player player = game.getPlayer(source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
         TargetPermanent target = new TargetPermanent(1, 1, filter, false);
 
-        if (player != null && target.canChoose(source.getSourceId(), player.getId(), game)) {
-            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
+        if (controller != null 
+                && target.canChoose(source.getSourceId(), controller.getId(), game)) {
+            controller.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
 
             if ( permanent != null ) {
                 targetChosen = true;
-                permanent.moveToZone(Zone.HAND, source, game, false);
+                controller.moveCards(permanent, Zone.HAND, source, game);
             }
         }
 

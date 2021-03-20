@@ -58,7 +58,7 @@ class CantCastSerraAvengerEffect extends ContinuousRuleModifyingEffectImpl {
 
     public CantCastSerraAvengerEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You can't cast {this} during your first, second, or third turns of the game";
+        staticText = "You can't cast this spell during your first, second, or third turns of the game";
     }
 
     public CantCastSerraAvengerEffect(final CantCastSerraAvengerEffect effect) {

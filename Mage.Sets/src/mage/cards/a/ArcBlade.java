@@ -30,7 +30,7 @@ public final class ArcBlade extends CardImpl {
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
         // with three time counters on it.
         Effect effect = new AddCountersSourceEffect(CounterType.TIME.createInstance(), StaticValue.get(3), false, true);
-        effect.setText("with 3 time counters on it");
+        effect.setText("with three time counters on it");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 

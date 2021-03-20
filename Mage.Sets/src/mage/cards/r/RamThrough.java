@@ -2,7 +2,6 @@ package mage.cards.r;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -16,8 +15,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
-
-import static mage.game.combat.CombatGroup.getLethalDamage;
 
 /**
  * @author TheElk801
@@ -79,10 +76,7 @@ class RamThroughEffect extends OneShotEffect {
         if (!myPermanent.getAbilities().containsKey(TrampleAbility.getInstance().getId())) {
             return anotherPermanent.damage(power, myPermanent.getId(), source, game, false, true) > 0;
         }
-        int lethal = getLethalDamage(anotherPermanent, game);
-        if (myPermanent.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
-            lethal = Math.min(lethal, 1);
-        }
+        int lethal = anotherPermanent.getLethalDamage(myPermanent.getId(), game);
         lethal = Math.min(lethal, power);
         anotherPermanent.damage(lethal, myPermanent.getId(), source, game);
         Player player = game.getPlayer(anotherPermanent.getControllerId());

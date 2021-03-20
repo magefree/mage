@@ -103,7 +103,6 @@ class ChandrasRegulatorEffect extends OneShotEffect {
             return false;
         }
         ability.createCopyOnStack(game, source, source.getControllerId(), true);
-        game.informPlayers(sourcePermanent.getIdName() + ": " + controller.getLogName() + " copied activated ability");
         return true;
     }
 }

@@ -22,7 +22,6 @@ import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
@@ -269,10 +268,7 @@ class ConspireEffect extends OneShotEffect {
         if (controller != null && conspiredSpell != null) {
             Card card = game.getCard(conspiredSpell.getSourceId());
             if (card != null) {
-                StackObject newStackObject = conspiredSpell.createCopyOnStack(game, source, source.getControllerId(), true);
-                if (newStackObject instanceof Spell && !game.isSimulation()) {
-                    game.informPlayers(controller.getLogName() + ((Spell) newStackObject).getActivatedMessage(game));
-                }
+                conspiredSpell.createCopyOnStack(game, source, source.getControllerId(), true);
                 return true;
             }
         }

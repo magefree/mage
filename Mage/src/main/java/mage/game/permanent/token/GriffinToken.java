@@ -19,9 +19,11 @@ public final class GriffinToken extends TokenImpl {
         subtype.add(SubType.GRIFFIN);
         power = new MageInt(2);
         toughness = new MageInt(2);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        availableImageSetCodes.addAll(Arrays.asList("DDG", "DDH", "DDL", "TSP", "M21"));
+        availableImageSetCodes = Arrays.asList("DDG", "DDH", "DDL", "TSP", "M21", "TSR");
     }
 
     public GriffinToken(final GriffinToken token) {

@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -13,21 +11,30 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.common.FilterPermanentOrSuspendedCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetPermanentOrSuspendedCard;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class Timebender extends CardImpl {
 
+    private static final FilterPermanentOrSuspendedCard filter
+            = new FilterPermanentOrSuspendedCard("permanent with a time counter on it or suspended card");
+
+    static {
+        filter.getPermanentFilter().add(CounterType.TIME.getPredicate());
+    }
+
     public Timebender(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(1);
@@ -42,9 +49,8 @@ public final class Timebender extends CardImpl {
         ability.addTarget(new TargetPermanentOrSuspendedCard());
 
         // Put two time counters on target permanent with a time counter on it or suspended card.
-        Mode mode = new Mode();
-        mode.addEffect(new TimebenderEffect(true));
-        mode.addTarget(new TargetPermanentOrSuspendedCard());
+        Mode mode = new Mode(new TimebenderEffect(true));
+        mode.addTarget(new TargetPermanentOrSuspendedCard(filter, false));
         ability.addMode(mode);
         ability.getModes().addMode(mode);
         this.addAbility(ability);
@@ -62,20 +68,20 @@ public final class Timebender extends CardImpl {
 }
 
 class TimebenderEffect extends OneShotEffect {
-    
+
     private final boolean addCounters;
 
-    public TimebenderEffect(boolean addCounters) {
+    TimebenderEffect(boolean addCounters) {
         super(Outcome.Benefit);
         this.addCounters = addCounters;
         if (addCounters) {
-            this.staticText = "put two time counters on target permanent or suspended card";
+            this.staticText = "put two time counters on target permanent with a time counter on it or suspended card";
         } else {
             this.staticText = "remove two time counters from target permanent or suspended card";
         }
     }
 
-    public TimebenderEffect(final TimebenderEffect effect) {
+    private TimebenderEffect(final TimebenderEffect effect) {
         super(effect);
         this.addCounters = effect.addCounters;
     }

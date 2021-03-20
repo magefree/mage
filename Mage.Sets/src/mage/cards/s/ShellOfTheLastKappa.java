@@ -143,8 +143,7 @@ class ShellOfTheLastKappaCastEffect extends OneShotEffect {
                             sourcePermanent.getZoneChangeCounter(game))), target, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null
-                        && controller.chooseUse(outcome, "Do you wish to cast card exiled with "
-                                + sourcePermanent.getLogName() + "?", source, game)) {
+                        && controller.chooseUse(outcome, "Cast " + card.getLogName() + " without paying its mana cost?", source, game)) {
                     game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
                     Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(card, game, true),
                             game, true, new ApprovingObject(source, game));

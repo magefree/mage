@@ -1,8 +1,7 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -13,11 +12,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterInPlay;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.GolemToken;
 import mage.game.stack.Spell;
@@ -25,13 +23,18 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.util.TargetAddress;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
  * @author duncant
  */
 public final class PrecursorGolem extends CardImpl {
 
     public PrecursorGolem(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{5}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{5}");
         this.subtype.add(SubType.GOLEM);
 
         this.power = new MageInt(3);
@@ -60,7 +63,7 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new PrecursorGolemCopySpellEffect(), false);
     }
 
-    PrecursorGolemCopyTriggeredAbility(final PrecursorGolemCopyTriggeredAbility ability) {
+    private PrecursorGolemCopyTriggeredAbility(final PrecursorGolemCopyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -77,76 +80,82 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return checkSpell(spell, game);
-    }
-
-    private boolean checkSpell(Spell spell, Game game) {
-        if (spell != null
-                && (spell.isInstant() || spell.isSorcery())) {
-            UUID targetGolem = null;
-            for (TargetAddress addr : TargetAddress.walk(spell)) {
-                Target targetInstance = addr.getTarget(spell);
-                for (UUID target : targetInstance.getTargets()) {
-                    Permanent permanent = game.getPermanent(target);
-                    if (permanent == null || !permanent.hasSubtype(SubType.GOLEM, game)) {
+        if (spell == null || !spell.isInstantOrSorcery()) {
+            return false;
+        }
+        UUID targetGolem = null;
+        for (TargetAddress addr : TargetAddress.walk(spell)) {
+            Target targetInstance = addr.getTarget(spell);
+            for (UUID target : targetInstance.getTargets()) {
+                Permanent permanent = game.getPermanent(target);
+                if (permanent == null || !permanent.hasSubtype(SubType.GOLEM, game)) {
+                    return false;
+                }
+                if (targetGolem == null) {
+                    targetGolem = target;
+                } else // If a spell has multiple targets, but it's targeting the same Golem with all of them, Precursor Golem's last ability will trigger
+                {
+                    if (!targetGolem.equals(target)) {
                         return false;
-                    }
-                    if (targetGolem == null) {
-                        targetGolem = target;
-                    } else // If a spell has multiple targets, but it's targeting the same Golem with all of them, Precursor Golem's last ability will trigger
-                    {
-                        if (!targetGolem.equals(target)) {
-                            return false;
-                        }
                     }
                 }
             }
-            if (targetGolem != null) {
-                getEffects().get(0).setValue("triggeringSpell", spell);
-                getEffects().get(0).setValue("targetedGolem", targetGolem);
-                return true;
-            }
         }
-        return false;
+        if (targetGolem == null) {
+            return false;
+        }
+        getEffects().setValue("triggeringSpell", spell);
+        getEffects().setValue("targetedGolem", targetGolem);
+        return true;
     }
 
     @Override
     public String getRule() {
-        return "Whenever a player casts an instant or sorcery spell that targets only a single Golem, that player copies that spell for each other Golem that spell could target. Each copy targets a different one of those Golems.";
+        return "Whenever a player casts an instant or sorcery spell that targets only a single Golem, " +
+                "that player copies that spell for each other Golem that spell could target. " +
+                "Each copy targets a different one of those Golems.";
     }
 }
 
-class PrecursorGolemCopySpellEffect extends CopySpellForEachItCouldTargetEffect<Permanent> {
+class PrecursorGolemCopySpellEffect extends CopySpellForEachItCouldTargetEffect {
 
-    public PrecursorGolemCopySpellEffect() {
-        this(new FilterCreaturePermanent(SubType.GOLEM, "Golem"));
+    private static final FilterPermanent filter = new FilterPermanent(SubType.GOLEM, "");
+
+    PrecursorGolemCopySpellEffect() {
+        super();
     }
 
-    public PrecursorGolemCopySpellEffect(PrecursorGolemCopySpellEffect effect) {
+    private PrecursorGolemCopySpellEffect(PrecursorGolemCopySpellEffect effect) {
         super(effect);
-    }
-
-    private PrecursorGolemCopySpellEffect(FilterInPlay<Permanent> filter) {
-        super(filter);
     }
 
     @Override
     protected Player getPlayer(Game game, Ability source) {
-        return game.getPlayer(source.getControllerId());
+        Spell spell = getSpell(game, source);
+        if (spell == null) {
+            return null;
+        }
+        return game.getPlayer(spell.getControllerId());
+    }
+
+    @Override
+    protected List<MageObjectReferencePredicate> getPossibleTargets(Spell spell, Player player, Ability source, Game game) {
+        Permanent permanent = (Permanent) getValue("targetedGolem");
+        return game.getBattlefield()
+                .getActivePermanents(
+                        filter, player.getId(), source.getSourceId(), game
+                ).stream()
+                .filter(Objects::nonNull)
+                .filter(p -> !p.equals(permanent))
+                .filter(p -> spell.canTarget(game, p.getId()))
+                .map(p -> new MageObjectReference(p, game))
+                .map(MageObjectReferencePredicate::new)
+                .collect(Collectors.toList());
     }
 
     @Override
     protected Spell getSpell(Game game, Ability source) {
         return (Spell) getValue("triggeringSpell");
-    }
-
-    @Override
-    protected boolean changeTarget(Target target, Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    protected void modifyCopy(Spell copy, Game game, Ability source) {
     }
 
     @Override

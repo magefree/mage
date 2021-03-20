@@ -86,8 +86,14 @@ public class TestPlayer implements Player {
 
     private int maxCallsWithoutAction = 400;
     private int foundNoAction = 0;
-    private boolean AIPlayer; // full playable AI
-    private boolean AICanChooseInStrictMode = false; // AI can choose in custom aiXXX commands (e.g. on one priority or step)
+
+    // full playable AI, TODO: can be deleted?
+    private boolean AIPlayer;
+    // AI simulates a real game, e.g. ignores strict mode and play command/priority, see aiXXX commands
+    // true - unit tests uses real AI logic (e.g. AI hints and AI workarounds in cards)
+    // false - unit tests uses Human logic and dialogs
+    private boolean AIRealGameSimulation = false;
+
     private final List<PlayerAction> actions = new ArrayList<>();
     private final Map<PlayerAction, PhaseStep> actionsToRemoveLater = new HashMap<>(); // remove actions later, on next step (e.g. for AI commands)
     private final Map<Integer, HashMap<UUID, ArrayList<PlayerAction>>> rollbackActions = new HashMap<>(); // actions to add after a executed rollback
@@ -125,7 +131,7 @@ public class TestPlayer implements Player {
 
     public TestPlayer(final TestPlayer testPlayer) {
         this.AIPlayer = testPlayer.AIPlayer;
-        this.AICanChooseInStrictMode = testPlayer.AICanChooseInStrictMode;
+        this.AIRealGameSimulation = testPlayer.AIRealGameSimulation;
         this.foundNoAction = testPlayer.foundNoAction;
         this.actions.addAll(testPlayer.actions);
         this.choices.addAll(testPlayer.choices);
@@ -720,7 +726,7 @@ public class TestPlayer implements Player {
 
                     // play priority
                     if (command.equals(AI_COMMAND_PLAY_PRIORITY)) {
-                        AICanChooseInStrictMode = true; // disable on action's remove
+                        AIRealGameSimulation = true; // disable on action's remove
                         computerPlayer.priority(game);
                         actions.remove(action);
                         return true;
@@ -728,7 +734,7 @@ public class TestPlayer implements Player {
 
                     // play step
                     if (command.equals(AI_COMMAND_PLAY_STEP)) {
-                        AICanChooseInStrictMode = true; // disable on action's remove
+                        AIRealGameSimulation = true; // disable on action's remove
                         actionsToRemoveLater.put(action, game.getStep().getType());
                         computerPlayer.priority(game);
                         return true;
@@ -1897,7 +1903,7 @@ public class TestPlayer implements Player {
     }
 
     private void chooseStrictModeFailed(String choiceType, Game game, String reason, boolean printAbilities) {
-        if (strictChooseMode && !AICanChooseInStrictMode) {
+        if (strictChooseMode && !AIRealGameSimulation) {
             if (printAbilities) {
                 printStart("Available mana for " + computerPlayer.getName());
                 printMana(game, computerPlayer.getManaAvailable(game));
@@ -1957,6 +1963,13 @@ public class TestPlayer implements Player {
     public boolean choose(Outcome outcome, Choice choice, Game game) {
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
+
+            // skip choices
+            if (choices.get(0).equals(CHOICE_SKIP)) {
+                choices.remove(0);
+                return true;
+            }
+
             if (choice.setChoiceByAnswers(choices, true)) {
                 return true;
             }
@@ -1999,6 +2012,11 @@ public class TestPlayer implements Player {
         UUID abilityControllerId = computerPlayer.getId();
         if (target.getTargetController() != null && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
+        }
+
+        // ignore player select
+        if (target.getMessage().equals("Select a starting player")) {
+            return computerPlayer.choose(outcome, target, sourceId, game, options);
         }
 
         assertAliasSupportInChoices(true);
@@ -2202,15 +2220,12 @@ public class TestPlayer implements Player {
              */
         }
 
-        // ignore player select
-        if (!target.getMessage().equals("Select a starting player")) {
-            this.chooseStrictModeFailed("choice", game, getInfo(game.getObject(sourceId)) + ";\n" + getInfo(target));
-        }
+        this.chooseStrictModeFailed("choice", game, getInfo(game.getObject(sourceId)) + ";\n" + getInfo(target));
         return computerPlayer.choose(outcome, target, sourceId, game, options);
     }
 
     private void checkTargetDefinitionMarksSupport(Target needTarget, String targetDefinition, String canSupportChars) {
-        // fail on wrong chars in definition
+        // fail on wrong chars in definition    `   `   `   `   `   `   `   ``````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
         // ^ - multiple targets
         // [] - special option like [no copy]
         // = - target type like targetPlayer=PlayerA
@@ -3024,6 +3039,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void updateRange(Game game) {
+        computerPlayer.updateRange(game);
+    }
+
+    @Override
     public UUID getId() {
         return computerPlayer.getId();
     }
@@ -3055,7 +3075,18 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean isHuman() {
-        return computerPlayer.isHuman();
+        return false;
+    }
+
+    @Override
+    public boolean isComputer() {
+        // all players in unit tests are computers, so you must use AIRealGameSimulation to test different logic (Human vs AI)
+        if (isTestsMode()) {
+            return AIRealGameSimulation;
+        } else {
+            throw new IllegalStateException("Can't use test player outside of unit tests");
+            //return !isHuman();
+        }
     }
 
     @Override
@@ -3131,6 +3162,11 @@ public class TestPlayer implements Player {
     @Override
     public int gainLife(int amount, Game game, Ability source) {
         return computerPlayer.gainLife(amount, game, source);
+    }
+
+    @Override
+    public void exchangeLife(Player player, Ability source, Game game) {
+        computerPlayer.exchangeLife(player, source, game);
     }
 
     @Override
@@ -3444,8 +3480,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean isTestMode() {
-        return computerPlayer.isTestMode();
+    public boolean isTestsMode() {
+        return computerPlayer.isTestsMode();
     }
 
     @Override
@@ -3639,7 +3675,7 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public Set<Card> moveCardsToGraveyardWithInfo(Set<Card> allCards, Ability source, Game game, Zone fromZone) {
+    public Set<Card> moveCardsToGraveyardWithInfo(Set<? extends Card> allCards, Ability source, Game game, Zone fromZone) {
         return computerPlayer.moveCardsToGraveyardWithInfo(allCards, source, game, fromZone);
     }
 
@@ -3777,6 +3813,21 @@ public class TestPlayer implements Player {
     ) {
         assertAliasSupportInChoices(false);
         if (!choices.isEmpty()) {
+
+            // skip choices
+            if (choices.get(0).equals(CHOICE_SKIP)) {
+                choices.remove(0);
+                if (cards.isEmpty()) {
+                    // cancel button forced in GUI on no possible choices
+                    return false;
+                } else {
+                    Assert.assertTrue("found skip choice, but it require more choices, needs "
+                                    + (target.getMinNumberOfTargets() - target.getTargets().size()) + " more",
+                            target.getTargets().size() >= target.getMinNumberOfTargets());
+                    return true;
+                }
+            }
+
             for (String choose2 : choices) {
                 // TODO: More targetting to fix
                 String[] targetList = choose2.split("\\^");
@@ -4052,14 +4103,14 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean moveCards(Set<Card> cards, Zone toZone,
+    public boolean moveCards(Set<? extends Card> cards, Zone toZone,
                              Ability source, Game game
     ) {
         return computerPlayer.moveCards(cards, toZone, source, game);
     }
 
     @Override
-    public boolean moveCards(Set<Card> cards, Zone toZone,
+    public boolean moveCards(Set<? extends Card> cards, Zone toZone,
                              Ability source, Game game,
                              boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects
     ) {
@@ -4146,7 +4197,8 @@ public class TestPlayer implements Player {
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
         assertAliasSupportInChoices(false);
 
-        Map<UUID, ActivatedAbility> useable = PlayerImpl.getSpellAbilities(this.getId(), card, game.getState().getZone(card.getId()), game);
+        MageObject object = game.getObject(card.getId()); // must be object to find real abilities (example: commander)
+        Map<UUID, ActivatedAbility> useable = PlayerImpl.getSpellAbilities(this.getId(), object, game.getState().getZone(object.getId()), game);
         String allInfo = useable.values().stream().map(Object::toString).collect(Collectors.joining("\n"));
         if (useable.size() == 1) {
             return (SpellAbility) useable.values().iterator().next();
@@ -4172,12 +4224,16 @@ public class TestPlayer implements Player {
         return computerPlayer;
     }
 
-    public void setAICanChooseInStrictMode(boolean AICanChooseInStrictMode) {
-        this.AICanChooseInStrictMode = AICanChooseInStrictMode;
+    public void setAIRealGameSimulation(boolean AIRealGameSimulation) {
+        this.AIRealGameSimulation = AIRealGameSimulation;
     }
 
     public Map<Integer, HashMap<UUID, ArrayList<org.mage.test.player.PlayerAction>>> getRollbackActions() {
         return rollbackActions;
     }
 
+    @Override
+    public String toString() {
+        return computerPlayer.toString();
+    }
 }

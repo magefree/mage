@@ -13,10 +13,14 @@ import mage.abilities.keyword.BestowAbility;
 import mage.abilities.keyword.MorphAbility;
 import mage.abilities.text.TextPart;
 import mage.cards.*;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.filter.FilterMana;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.MageObjectAttribute;
@@ -32,9 +36,11 @@ import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.ManaUtil;
 import mage.util.SubTypes;
+import mage.util.functions.SpellCopyApplier;
 import org.apache.log4j.Logger;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -403,8 +409,8 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public void counter(Ability source, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
-        // source can be null for fizzled spells, found only one place with that usage -- Rebound Ability:
-        // event.getSourceId().equals(source.getSourceId())
+        // source can be null for fizzled spells, don't use that code in your ZONE_CHANGE watchers/triggers:
+        // event.getSourceId().equals
         // TODO: so later it must be replaced to another technics with non null source
         UUID counteringSourceId = (source == null ? null : source.getSourceId());
         this.countered = true;
@@ -766,8 +772,31 @@ public class Spell extends StackObjImpl implements Card {
         return new Spell(this);
     }
 
-    public Spell copySpell(UUID newController, Game game) {
-        Spell spellCopy = new Spell(this.card, this.ability.copySpell(), this.controllerId, this.fromZone, game);
+    /**
+     * Copy current spell on stack, but do not put copy back to stack (you can modify and put it later)
+     * <p>
+     * Warning, don't forget to call CopyStackObjectEvent and CopiedStackObjectEvent before and after copy
+     * CopyStackObjectEvent can change new copies amount, see Twinning Staff
+     * <p>
+     * Warning, don't forget to call spell.setZone before push to stack
+     *
+     * @param game
+     * @param newController controller of the copied spell
+     * @return
+     */
+    public Spell copySpell(Game game, Ability source, UUID newController) {
+        // copied spells must use copied cards
+        // spell can be from card's part (mdf/adventure), but you must copy FULL card
+        Card copiedMainCard = game.copyCard(this.card.getMainCard(), source, newController);
+        // find copied part
+        Map<UUID, MageObject> mapOldToNew = CardUtil.getOriginalToCopiedPartsMap(this.card.getMainCard(), copiedMainCard);
+        if (!mapOldToNew.containsKey(this.card.getId())) {
+            throw new IllegalStateException("Can't find card id after main card copy: " + copiedMainCard.getName());
+        }
+        Card copiedPart = (Card) mapOldToNew.get(this.card.getId());
+
+        // copy spell
+        Spell spellCopy = new Spell(copiedPart, this.ability.copySpell(this.card, copiedPart), this.controllerId, this.fromZone, game);
         boolean firstDone = false;
         for (SpellAbility spellAbility : this.getSpellAbilities()) {
             if (!firstDone) {
@@ -939,6 +968,12 @@ public class Spell extends StackObjImpl implements Card {
         this.copyFrom = (copyFrom != null ? copyFrom.copy() : null);
     }
 
+    /**
+     * Game processing a copies as normal cards, so you don't need to check spell's copy for move/exile.
+     * Use this only in exceptional situations or to skip unaffected code/choices.
+     *
+     * @return
+     */
     @Override
     public boolean isCopy() {
         return this.copy;
@@ -1006,6 +1041,7 @@ public class Spell extends StackObjImpl implements Card {
     @Override
     public void setZone(Zone zone, Game game) {
         card.setZone(zone, game);
+        game.getState().setZone(this.getId(), zone);
     }
 
     @Override
@@ -1027,27 +1063,128 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
-        return createCopyOnStack(game, source, newControllerId, chooseNewTargets, 1);
+    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
+        createCopyOnStack(game, source, newControllerId, chooseNewTargets, 1);
     }
 
     @Override
-    public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
-        Spell spellCopy = null;
+    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount) {
+        createCopyOnStack(game, source, newControllerId, chooseNewTargets, amount, null);
+    }
+
+    private static final class PredicateIterator implements Iterator<MageObjectReferencePredicate> {
+        private final SpellCopyApplier applier;
+        private final Player player;
+        private final int amount;
+        private final Game game;
+        private Map<String, MageObjectReferencePredicate> predicateMap = null;
+        private int anyCount = 0;
+        private int setCount = 0;
+        private Iterator<MageObjectReferencePredicate> iterator = null;
+        private Choice choice = null;
+
+        private PredicateIterator(Game game, UUID newControllerId, int amount, SpellCopyApplier applier) {
+            this.applier = applier;
+            this.player = game.getPlayer(newControllerId);
+            this.amount = amount;
+            this.game = game;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return true;
+        }
+
+        private void makeMap() {
+            if (predicateMap != null) {
+                return;
+            }
+            predicateMap = new HashMap<>();
+
+            for (int i = 0; i < amount; i++) {
+                MageObjectReferencePredicate predicate = applier.getNextPredicate();
+                if (predicate == null) {
+                    anyCount++;
+                    String message = "Any target";
+                    if (anyCount > 1) {
+                        message += " (" + anyCount + ")";
+                    }
+                    predicateMap.put(message, predicate);
+                    continue;
+                }
+                setCount++;
+                predicateMap.put(predicate.getName(game), predicate);
+            }
+            if ((setCount == 1 && anyCount == 0) || setCount == 0) {
+                iterator = predicateMap.values().stream().collect(Collectors.toList()).iterator();
+            }
+        }
+
+        private void makeChoice() {
+            if (choice != null) {
+                return;
+            }
+            choice = new ChoiceImpl(false);
+            choice.setMessage("Choose the order of copies to go on the stack");
+            choice.setSubMessage("Press cancel to put the rest in any order");
+            choice.setChoices(new HashSet<>(predicateMap.keySet()));
+        }
+
+        @Override
+        public MageObjectReferencePredicate next() {
+            if (player == null || applier == null) {
+                return null;
+            }
+            makeMap();
+            if (iterator != null) {
+                return iterator.hasNext() ? iterator.next() : null;
+            }
+            makeChoice();
+            if (choice.getChoices().size() < 2) {
+                iterator = choice.getChoices().stream().map(predicateMap::get).iterator();
+                return next();
+            }
+            choice.clearChoice();
+            player.choose(Outcome.AIDontUseIt, choice, game);
+            String chosen = choice.getChoice();
+            if (chosen == null) {
+                iterator = choice.getChoices().stream().map(predicateMap::get).iterator();
+                return next();
+            }
+            choice.getChoices().remove(chosen);
+            return predicateMap.get(chosen);
+        }
+    }
+
+    @Override
+    public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets, int amount, SpellCopyApplier applier) {
         GameEvent gameEvent = new CopyStackObjectEvent(source, this, newControllerId, amount);
         if (game.replaceEvent(gameEvent)) {
-            return null;
+            return;
         }
+        Iterator<MageObjectReferencePredicate> predicates = new PredicateIterator(game, newControllerId, gameEvent.getAmount(), applier);
         for (int i = 0; i < gameEvent.getAmount(); i++) {
-            spellCopy = this.copySpell(newControllerId, game);
-            game.getState().setZone(spellCopy.getId(), Zone.STACK); // required for targeting ex: Nivmagus Elemental
+            Spell spellCopy = this.copySpell(game, source, newControllerId);
+            if (applier != null) {
+                applier.modifySpell(spellCopy, game);
+            }
+            spellCopy.setZone(Zone.STACK, game);  // required for targeting ex: Nivmagus Elemental
             game.getStack().push(spellCopy);
-            if (chooseNewTargets) {
+            Predicate predicate = predicates.next();
+            if (predicate != null) {
+                spellCopy.chooseNewTargets(game, newControllerId, true, false, predicate);
+            } else if (chooseNewTargets || applier != null) { // if applier is non-null but predicate is null then it's extra
                 spellCopy.chooseNewTargets(game, newControllerId);
             }
             game.fireEvent(new CopiedStackObjectEvent(this, spellCopy, newControllerId));
         }
-        return spellCopy;
+        Player player = game.getPlayer(newControllerId);
+        if (player != null) {
+            game.informPlayers(
+                    player.getName() + " created " + CardUtil.numberToText(gameEvent.getAmount(), "a")
+                            + " cop" + (gameEvent.getAmount() == 1 ? "y" : "ies") + " of " + getIdName()
+            );
+        }
     }
 
     @Override
@@ -1101,4 +1238,8 @@ public class Spell extends StackObjImpl implements Card {
         throw new UnsupportedOperationException("Spells should not loose all abilities. Check if this operation is correct.");
     }
 
+    @Override
+    public String toString() {
+        return ability.toString();
+    }
 }

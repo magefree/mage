@@ -181,6 +181,14 @@ public interface Card extends MageObject {
         return getOwnerId().equals(controllerId);
     }
 
+    /**
+     * Commander tax calculation. Tax logic can be changed (example: from {2} to life cost, see Liesa, Shroud of Dusk)
+     *
+     * @param game
+     * @param source
+     * @param abilityToModify
+     * @return
+     */
     default boolean commanderCost(Game game, Ability source, Ability abilityToModify) {
         CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
         int castCount = watcher.getPlaysCount(getMainCard().getId());

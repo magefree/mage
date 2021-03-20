@@ -13,6 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
@@ -100,7 +101,7 @@ class BattleForBretagardEffect extends OneShotEffect {
 
 class BattleForBretagardTarget extends TargetPermanent {
 
-    private static final FilterPermanent filter = new FilterPermanent(
+    private static final FilterPermanent filter = new FilterControlledPermanent(
             "artifact tokens and/or creature tokens you control with different names"
     );
 
@@ -133,9 +134,11 @@ class BattleForBretagardTarget extends TargetPermanent {
         Set<String> names = this.getTargets()
                 .stream()
                 .map(game::getPermanent)
-                .map(MageObject::getName)
                 .filter(Objects::nonNull)
+                .map(MageObject::getName)
                 .collect(Collectors.toSet());
+        names.removeIf(Objects::isNull);
+        names.removeIf(String::isEmpty);
         Permanent permanent = game.getPermanent(id);
         return permanent != null && !names.contains(permanent.getName());
     }
@@ -147,12 +150,14 @@ class BattleForBretagardTarget extends TargetPermanent {
         Set<String> names = this.getTargets()
                 .stream()
                 .map(game::getPermanent)
-                .map(MageObject::getName)
                 .filter(Objects::nonNull)
+                .map(MageObject::getName)
                 .collect(Collectors.toSet());
+        names.removeIf(Objects::isNull);
+        names.removeIf(String::isEmpty);
         possibleTargets.removeIf(uuid -> {
             Permanent permanent = game.getPermanent(uuid);
-            return permanent != null && !names.contains(permanent.getName());
+            return permanent == null || names.contains(permanent.getName());
         });
         return possibleTargets;
     }

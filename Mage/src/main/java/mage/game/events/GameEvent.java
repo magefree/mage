@@ -65,7 +65,7 @@ public class GameEvent implements Serializable {
         //player events
         /* ZONE_CHANGE
          targetId    id of the zone changing object
-         sourceId    sourceId of the ability with the object moving effect
+         sourceId    sourceId of the ability with the object moving effect (WARNING, can be null if it move of fizzled spells)
          playerId    controller of the moved object
          amount      not used for this event
          flag        not used for this event
@@ -359,8 +359,9 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         OPTION_USED,
-        DAMAGE_CREATURE, DAMAGED_CREATURE, DAMAGED_CREATURE_BATCH,
-        DAMAGE_PLANESWALKER, DAMAGED_PLANESWALKER, DAMAGED_PLANESWALKER_BATCH,
+        DAMAGE_PERMANENT,
+        DAMAGED_PERMANENT,
+        DAMAGED_PERMANENT_BATCH,
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
          targetId    id of the permanent to destroy

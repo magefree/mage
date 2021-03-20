@@ -20,7 +20,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.command.emblems.VraskaGolgariQueenEmblem;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;

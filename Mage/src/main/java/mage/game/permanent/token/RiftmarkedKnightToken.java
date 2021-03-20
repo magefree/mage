@@ -9,6 +9,8 @@ import mage.abilities.keyword.FlankingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ProtectionAbility;
 
+import java.util.Arrays;
+
 /**
  *
  * @author spjspj
@@ -22,9 +24,12 @@ public final class RiftmarkedKnightToken extends TokenImpl {
         subtype.add(SubType.KNIGHT);
         power = new MageInt(2);
         toughness = new MageInt(2);
-        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
+
         this.addAbility(new FlankingAbility());
+        this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
         this.addAbility(HasteAbility.getInstance());
+
+        availableImageSetCodes = Arrays.asList("PLC", "TSR");
     }
 
     public RiftmarkedKnightToken(final RiftmarkedKnightToken token) {

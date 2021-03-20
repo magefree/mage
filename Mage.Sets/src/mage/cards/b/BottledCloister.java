@@ -1,42 +1,41 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BottledCloister extends CardImpl {
 
     public BottledCloister(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // At the beginning of each opponent's upkeep, exile all cards from your hand face down.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new BottledCloisterExileEffect(), TargetController.OPPONENT, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new BottledCloisterExileEffect(), TargetController.OPPONENT, false
+        ));
+
         // At the beginning of your upkeep, return all cards you own exiled with Bottled Cloister to your hand, then draw a card.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new BottledCloisterReturnEffect(), TargetController.YOU, false);
-        Effect effect = new DrawCardSourceControllerEffect(1);
-        effect.setText(", then draw a card");
-        ability.addEffect(effect);
-        this.addAbility(ability);
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new BottledCloisterReturnEffect(), TargetController.YOU, false
+        ));
     }
 
     private BottledCloister(final BottledCloister card) {
@@ -51,12 +50,12 @@ public final class BottledCloister extends CardImpl {
 
 class BottledCloisterExileEffect extends OneShotEffect {
 
-    public BottledCloisterExileEffect() {
+    BottledCloisterExileEffect() {
         super(Outcome.Detriment);
         this.staticText = "exile all cards from your hand face down";
     }
 
-    public BottledCloisterExileEffect(final BottledCloisterExileEffect effect) {
+    private BottledCloisterExileEffect(final BottledCloisterExileEffect effect) {
         super(effect);
     }
 
@@ -68,31 +67,31 @@ class BottledCloisterExileEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && sourcePermanent != null) {
-            int numberOfCards = controller.getHand().size();
-            if (numberOfCards > 0) {
-                UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                for (Card card: controller.getHand().getCards(game)) {
-                    card.moveToExile(exileId, sourcePermanent.getName(), source, game);
-                    card.setFaceDown(true, game);
-                }
-                game.informPlayers(sourcePermanent.getName() + ": " + controller.getLogName() + " exiles their hand face down (" + numberOfCards + "card" + (numberOfCards > 1 ?"s":"") + ')');
-            }
-            return true;
+        MageObject sourceObject = source.getSourceObject(game);
+        if (controller == null || sourceObject == null) {
+            return false;
         }
-        return false;
+        Cards cards = new CardsImpl(controller.getHand());
+        if (cards.isEmpty()) {
+            return false;
+        }
+        controller.moveCardsToExile(cards.getCards(game), source, game, false, CardUtil.getExileZoneId(game, source), sourceObject.getIdName());
+        cards.getCards(game)
+                .stream()
+                .filter(c -> game.getState().getZone(c.getId()) == Zone.EXILED)
+                .forEach(card -> card.setFaceDown(true, game));
+        return true;
     }
 }
 
 class BottledCloisterReturnEffect extends OneShotEffect {
 
-    public BottledCloisterReturnEffect() {
+    BottledCloisterReturnEffect() {
         super(Outcome.Benefit);
-        this.staticText = "return all cards you own exiled with {this} to your hand";
+        this.staticText = "return all cards you own exiled with {this} to your hand, then draw a card";
     }
 
-    public BottledCloisterReturnEffect(final BottledCloisterReturnEffect effect) {
+    private BottledCloisterReturnEffect(final BottledCloisterReturnEffect effect) {
         super(effect);
     }
 
@@ -103,26 +102,14 @@ class BottledCloisterReturnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (controller != null && sourcePermanent != null) {
-            UUID exileId = CardUtil.getCardExileZoneId(game, source);
-            int numberOfCards = 0;
-            ExileZone exileZone = game.getExile().getExileZone(exileId);
-            if (exileZone != null) {
-                for (Card card:  exileZone.getCards(game)) {
-                    if (card.isOwnedBy(controller.getId())) {
-                        numberOfCards++;
-                        card.moveToZone(Zone.HAND, source, game, true);
-                        card.setFaceDown(false, game);
-                    }
-                }
-            }
-            if (numberOfCards > 0) {
-                game.informPlayers(sourcePermanent.getLogName() + ": " + controller.getLogName() + " returns "+ numberOfCards + " card" + (numberOfCards > 1 ?"s":"") + " from exile to hand");
-            }
-            return true;
+        Player player = game.getPlayer(source.getControllerId());
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        Cards cards = new CardsImpl(exileZone);
+        cards.removeIf(uuid -> !player.getId().equals(game.getOwnerId(uuid)));
+        if (!cards.isEmpty()) {
+            player.moveCards(cards, Zone.HAND, source, game);
         }
-        return false;
+        player.drawCards(1, source, game);
+        return true;
     }
 }

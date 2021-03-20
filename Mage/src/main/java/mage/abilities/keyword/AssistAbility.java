@@ -94,8 +94,9 @@ public class AssistAbility extends SimpleStaticAbility implements AlternateManaP
         }
 
         // AI can't use assist (can't ask another player to help), maybe in teammode it can be enabled, but tests must works all the time
+        // Outcome.AIDontUseIt
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && !controller.isTestMode() && !controller.isHuman()) {
+        if (controller != null && controller.isComputer()) {
             return options;
         }
 
@@ -170,7 +171,7 @@ class AssistEffect extends OneShotEffect {
         if (controller != null && spell != null && targetPlayer != null) {
             // AI can't assist other players, maybe for teammates only (but tests must work as normal)
             int amountToPay = 0;
-            if (targetPlayer.isHuman() || targetPlayer.isTestMode()) {
+            if (!targetPlayer.isComputer()) {
                 amountToPay = targetPlayer.announceXMana(0, unpaid.getMana().getGeneric(),
                         "How much mana to pay as assist for " + controller.getName() + "?", game, source);
             }

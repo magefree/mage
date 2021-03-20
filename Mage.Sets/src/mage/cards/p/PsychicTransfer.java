@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -12,15 +10,15 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author Quercitron
  */
 public final class PsychicTransfer extends CardImpl {
 
     public PsychicTransfer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{4}{U}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{U}");
 
         // If the difference between your life total and target player's life total is 5 or less, exchange life totals with that player.
         this.getSpellAbility().addEffect(new PsychicTransferEffect());
@@ -37,15 +35,15 @@ public final class PsychicTransfer extends CardImpl {
     }
 }
 
-class PsychicTransferEffect extends OneShotEffect 
-{
+class PsychicTransferEffect extends OneShotEffect {
 
-    public PsychicTransferEffect() {
+    PsychicTransferEffect() {
         super(Outcome.Neutral);
-        this.staticText = "If the difference between your life total and target player's life total is 5 or less, exchange life totals with that player";
+        this.staticText = "If the difference between your life total and target player's " +
+                "life total is 5 or less, exchange life totals with that player";
     }
 
-    public PsychicTransferEffect(final PsychicTransferEffect effect) {
+    private PsychicTransferEffect(final PsychicTransferEffect effect) {
         super(effect);
     }
 
@@ -57,32 +55,12 @@ class PsychicTransferEffect extends OneShotEffect
     @Override
     public boolean apply(Game game, Ability source) {
         Player sourcePlayer = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(source.getTargets().getFirstTarget());
-        if (sourcePlayer != null && targetPlayer != null) {
-            int lifePlayer1 = sourcePlayer.getLife();
-            int lifePlayer2 = targetPlayer.getLife();
-
-            if (Math.abs(lifePlayer1 - lifePlayer2) > 5) {
-                return false;
-            }
-            
-            if (lifePlayer1 == lifePlayer2) {
-                return false;
-            }
-
-            // 20110930 - 118.7, 118.8
-            if (lifePlayer1 < lifePlayer2 && (!sourcePlayer.isCanGainLife() || !targetPlayer.isCanLoseLife())) {
-                return false;
-            }
-
-            if (lifePlayer1 > lifePlayer2 && (!sourcePlayer.isCanLoseLife() || !targetPlayer.isCanGainLife())) {
-                return false;
-            }
-
-            sourcePlayer.setLife(lifePlayer2, game, source);
-            targetPlayer.setLife(lifePlayer1, game, source);
-            return true;
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        if (sourcePlayer == null || targetPlayer == null
+                || Math.abs(sourcePlayer.getLife() - targetPlayer.getLife()) > 5) {
+            return false;
         }
-        return false;
+        sourcePlayer.exchangeLife(targetPlayer, source, game);
+        return true;
     }
 }

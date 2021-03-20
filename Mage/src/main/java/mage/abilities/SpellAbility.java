@@ -13,9 +13,9 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -65,9 +65,19 @@ public class SpellAbility extends ActivatedAbilityImpl {
         if (object == null) {
             return false;
         }
-        if (game.getState().getValue("PlayFromNotOwnHandZone" + object.getId()) != null) {
-            return (Boolean) game.getState().getValue("PlayFromNotOwnHandZone" + object.getId());  // card like Chandra, Torch of Defiance +1 loyal ability)
+
+        // forced to cast (can be part id or main id)
+        Set<UUID> idsToCheck = new HashSet<>();
+        idsToCheck.add(object.getId());
+        if (object instanceof Card) {
+            idsToCheck.add(((Card) object).getMainCard().getId());
         }
+        for (UUID idToCheck : idsToCheck) {
+            if (game.getState().getValue("PlayFromNotOwnHandZone" + idToCheck) != null) {
+                return (Boolean) game.getState().getValue("PlayFromNotOwnHandZone" + idToCheck);  // card like Chandra, Torch of Defiance +1 loyal ability)
+            }
+        }
+
         return null != game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST_AS_INSTANT, this, playerId, game) // check this first to allow Offering in main phase
                 || timing == TimingRule.INSTANT
                 || object.hasAbility(FlashAbility.getInstance(), game)
@@ -118,13 +128,13 @@ public class SpellAbility extends ActivatedAbilityImpl {
                         // fused can be called from hand only, so not permitting object allows or other zones checks
                         // see https://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/251926-snapcaster-mage-and-fuse
                         if (game.getState().getZone(splitCard.getId()) == Zone.HAND) {
-                            return new ActivationStatus(splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game)
-                                    && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game), null);
+                            return new ActivationStatus(splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game, playerId)
+                                    && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game, playerId), null);
                         }
                     }
                     return ActivationStatus.getFalse();
                 } else {
-                    return new ActivationStatus(canChooseTarget(game), approvingObject);
+                    return new ActivationStatus(canChooseTarget(game, playerId), approvingObject);
                 }
             }
         }
@@ -164,9 +174,17 @@ public class SpellAbility extends ActivatedAbilityImpl {
         return new SpellAbility(this);
     }
 
-    public SpellAbility copySpell() {
+    public SpellAbility copySpell(Card originalCard, Card copiedCard) {
+        // all copied spells must have own copied card
+        Map<UUID, MageObject> mapOldToNew = CardUtil.getOriginalToCopiedPartsMap(originalCard, copiedCard);
+        if (!mapOldToNew.containsKey(this.getSourceId())) {
+            throw new IllegalStateException("Can't find source id after copy: " + originalCard.getName() + " -> " + copiedCard.getName());
+        }
+        UUID copiedSourceId = mapOldToNew.getOrDefault(this.getSourceId(), copiedCard).getId();
+
         SpellAbility spell = new SpellAbility(this);
-        spell.id = UUID.randomUUID();
+        spell.newId();
+        spell.setSourceId(copiedSourceId);
         return spell;
     }
 

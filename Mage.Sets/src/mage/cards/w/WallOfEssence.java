@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -10,23 +9,24 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedCreatureEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class WallOfEssence extends CardImpl {
 
     public WallOfEssence(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.subtype.add(SubType.WALL);
 
         this.power = new MageInt(0);
@@ -65,16 +65,20 @@ class WallOfEssenceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.sourceId) && ((DamagedCreatureEvent)event).isCombatDamage() ) {
-   			this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-       		return true;
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent == null
+                || !permanent.isCreature()
+                || !event.getTargetId().equals(this.sourceId)
+                || !((DamagedEvent) event).isCombatDamage()) {
+            return false;
         }
-        return false;
+        this.getEffects().setValue("damageAmount", event.getAmount());
+        return true;
     }
 
     @Override
@@ -86,10 +90,10 @@ class WallOfEssenceTriggeredAbility extends TriggeredAbilityImpl {
 
 class PiousWarriorGainLifeEffect extends OneShotEffect {
 
-	public PiousWarriorGainLifeEffect() {
-		super(Outcome.GainLife);
-		staticText = "you gain that much life";
-	}
+    public PiousWarriorGainLifeEffect() {
+        super(Outcome.GainLife);
+        staticText = "you gain that much life";
+    }
 
     public PiousWarriorGainLifeEffect(final PiousWarriorGainLifeEffect effect) {
         super(effect);

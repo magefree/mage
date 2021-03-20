@@ -31,7 +31,7 @@ public final class KaervekTheMerciless extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever an opponent casts a spell, Kaervek the Merciless deals damage to any target equal to that spell's converted mana cost.
-        Ability ability = new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new KaervekTheMercilessEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.SPELL);
+        Ability ability = new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new KaervekTheMercilessEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 

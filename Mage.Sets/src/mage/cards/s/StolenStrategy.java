@@ -3,13 +3,11 @@ package mage.cards.s;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -80,7 +78,7 @@ class StolenStrategyEffect extends OneShotEffect {
                 if (!card.isLand() && card.getSpellAbility() != null) {
                     // allow to cast the card
                     // and you may spend mana as though it were mana of any color to cast it
-                    CardUtil.makeCardPlayableAndSpendManaAsAnyColor(game, source, card, Duration.EndOfTurn);
+                    CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
                 }
             }
         }

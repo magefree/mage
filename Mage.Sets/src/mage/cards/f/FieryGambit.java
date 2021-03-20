@@ -72,7 +72,7 @@ class FieryGambitEffect extends OneShotEffect {
                 }
 
                 // AI workaround to stop flips on good result
-                if (!controller.isHuman() && !controller.isTestMode() && flipsWon >= 3) {
+                if (controller.isComputer() && flipsWon >= 3) {
                     controllerStopped = true;
                     break;
                 }

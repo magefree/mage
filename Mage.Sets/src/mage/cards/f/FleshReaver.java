@@ -3,7 +3,6 @@ package mage.cards.f;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -50,7 +49,7 @@ class FleshReaverTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new FleshReaverEffect());
     }
 
-    FleshReaverTriggeredAbility(final FleshReaverTriggeredAbility effect) {
+    private FleshReaverTriggeredAbility(final FleshReaverTriggeredAbility effect) {
         super(effect);
     }
 
@@ -61,23 +60,22 @@ class FleshReaverTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_CREATURE || event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT
+                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getSourceId().equals(sourceId)) {
+        if (!event.getSourceId().equals(getSourceId())) {
             return false;
         }
-        if (event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
-            if (event.getTargetId().equals(controllerId)) {
-                return false;
-            }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if ((permanent != null && permanent.isCreature())
+                || game.getOpponents(event.getTargetId()).contains(getControllerId())) {
+            this.getEffects().setValue("damage", event.getAmount());
+            return true;
         }
-        for (Effect effect : this.getEffects()) {
-            effect.setValue("damage", event.getAmount());
-        }
-        return true;
+        return false;
     }
 
     @Override
@@ -94,7 +92,7 @@ class FleshReaverEffect extends OneShotEffect {
         this.staticText = "{this} deals that much damage to you.";
     }
 
-    FleshReaverEffect(final FleshReaverEffect effect) {
+    private FleshReaverEffect(final FleshReaverEffect effect) {
         super(effect);
     }
 

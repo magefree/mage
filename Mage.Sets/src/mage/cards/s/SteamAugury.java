@@ -1,7 +1,7 @@
-
 package mage.cards.s;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -67,6 +67,8 @@ class SteamAuguryEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source.getSourceId());
+        Set<Card> cardsToGraveyard = new LinkedHashSet<>();
+        Set<Card> cardsToHand = new LinkedHashSet<>();
         if (controller == null || sourceObject == null) {
             return false;
         }
@@ -127,9 +129,10 @@ class SteamAuguryEffect extends OneShotEffect {
                     if (i < pile1CardsIds.size()) {
                         sb.append(", ");
                     }
-                    card.moveToZone(pile1Zone, source, game, false);
+                    cardsToGraveyard.add(card);
                 }
             }
+            controller.moveCards(cardsToGraveyard, pile1Zone, source, game);
             game.informPlayers(sb.toString());
 
             sb = new StringBuilder(sourceObject.getLogName() + ": Pile 2, going to ").append(pile2Zone == Zone.HAND ? "Hand" : "Graveyard").append(':');
@@ -142,9 +145,10 @@ class SteamAuguryEffect extends OneShotEffect {
                     if (i < pile2CardsIds.size()) {
                         sb.append(", ");
                     }
-                    card.moveToZone(pile2Zone, source, game, false);
+                    cardsToHand.add(card);
                 }
             }
+            controller.moveCards(cardsToHand, pile2Zone, source, game);
             game.informPlayers(sb.toString());
         }
 

@@ -127,7 +127,7 @@ class PossibilityStormEffect extends OneShotEffect {
 
                     if (card != null && sharesType(card, spell.getCardType())
                             && !card.isLand()
-                            && card.getSpellAbility().canChooseTarget(game)) {
+                            && card.getSpellAbility().canChooseTarget(game, spellController.getId())) {
                         if (spellController.chooseUse(Outcome.PlayForFree, "Cast " + card.getLogName() + " without paying cost?", source, game)) {
                             spellController.cast(card.getSpellAbility(), game, true, new ApprovingObject(source, game));
                         }

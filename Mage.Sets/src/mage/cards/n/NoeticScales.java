@@ -1,23 +1,27 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class NoeticScales extends CardImpl {
@@ -26,7 +30,9 @@ public final class NoeticScales extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // At the beginning of each player's upkeep, return to its owner's hand each creature that player controls with power greater than the number of cards in their hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new NoeticScalesEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new NoeticScalesEffect(), TargetController.ANY, false
+        ));
     }
 
     private NoeticScales(final NoeticScales card) {
@@ -41,12 +47,18 @@ public final class NoeticScales extends CardImpl {
 
 class NoeticScalesEffect extends OneShotEffect {
 
-    public NoeticScalesEffect() {
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+
+    static {
+        filter.add(NoeticScalesPredicate.instance);
+    }
+
+    NoeticScalesEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "return to its owner's hand each creature that player controls with power greater than the number of cards in their hand";
     }
 
-    public NoeticScalesEffect(final NoeticScalesEffect effect) {
+    private NoeticScalesEffect(final NoeticScalesEffect effect) {
         super(effect);
     }
 
@@ -57,19 +69,24 @@ class NoeticScalesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            int numberOfCardsInHand = player.getHand().size();
-            for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter, player.getId(), game)) {
-                if (creature.getPower().getValue() > numberOfCardsInHand) {
-                    if (creature.moveToZone(Zone.HAND, source, game, false)) {
-                        game.informPlayers(player.getLogName() + " moves " + creature.getLogName() + " from the battlefield to their hand.");
-                    }
-                }
-            }
-            return true;
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return false;
         }
-        return false;
+        Cards cards = new CardsImpl();
+        game.getBattlefield().getActivePermanents(
+                filter, game.getActivePlayerId(), source.getSourceId(), game
+        ).stream().filter(Objects::nonNull).forEach(cards::add);
+        return player.moveCards(cards, Zone.HAND, source, game);
+    }
+}
+
+enum NoeticScalesPredicate implements Predicate<Permanent> {
+    instance;
+
+    @Override
+    public boolean apply(Permanent input, Game game) {
+        Player player = game.getPlayer(input.getControllerId());
+        return player != null && player.getHand().size() < input.getPower().getValue();
     }
 }

@@ -37,8 +37,8 @@ public class TargetTriggeredAbility extends TargetObject {
         }
 
         StackObject stackObject = game.getStack().getStackObject(id);
-        return stackObject.getStackAbility() != null
-                && (stackObject.getStackAbility() instanceof TriggeredAbility)
+        return stackObject != null
+                && stackObject.getStackAbility() instanceof TriggeredAbility
                 && source != null
                 && stackObject.getStackAbility().isControlledBy(source.getControllerId());
     }
@@ -51,8 +51,7 @@ public class TargetTriggeredAbility extends TargetObject {
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
         for (StackObject stackObject : game.getStack()) {
-            if (stackObject.getStackAbility() != null
-                    && stackObject.getStackAbility() instanceof TriggeredAbility
+            if (stackObject.getStackAbility() instanceof TriggeredAbility
                     && stackObject.getStackAbility().isControlledBy(sourceControllerId)) {
                 return true;
             }
@@ -69,8 +68,7 @@ public class TargetTriggeredAbility extends TargetObject {
     public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
         Set<UUID> possibleTargets = new HashSet<>();
         for (StackObject stackObject : game.getStack()) {
-            if (stackObject.getStackAbility() != null
-                    && stackObject.getStackAbility() instanceof TriggeredAbility
+            if (stackObject.getStackAbility() instanceof TriggeredAbility
                     && stackObject.getStackAbility().isControlledBy(sourceControllerId)) {
                 possibleTargets.add(stackObject.getStackAbility().getId());
             }

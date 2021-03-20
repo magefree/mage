@@ -9,24 +9,23 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.HeroicAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicate;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
 import mage.util.CardUtil;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -48,11 +47,9 @@ public final class Mindreaver extends CardImpl {
         this.addAbility(ability);
 
         // {U}{U}, Sacrifice Mindreaver: Counter target spell with the same name as a card exiled with Mindreaver.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{U}{U}"));
-        FilterSpell filter = new FilterSpell("spell with the same name as a card exiled with {this}");
-        filter.add(new MindreaverNamePredicate(this.getId()));
-        ability.addTarget(new TargetSpell(filter));
+        ability = new SimpleActivatedAbility(new CounterTargetEffect(), new ManaCostsImpl("{U}{U}"));
         ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new MindreaverTarget());
         this.addAbility(ability);
     }
 
@@ -66,14 +63,43 @@ public final class Mindreaver extends CardImpl {
     }
 }
 
-class MindreaverExileEffect extends OneShotEffect {
+class MindreaverTarget extends TargetSpell {
 
-    public MindreaverExileEffect() {
-        super(Outcome.Exile);
-        this.staticText = "exile the top three cards of target opponent's library";
+    private static final FilterSpell filter
+            = new FilterSpell("spell with the same name as a card exiled with {this}");
+
+    MindreaverTarget() {
+        super(filter);
     }
 
-    public MindreaverExileEffect(final MindreaverExileEffect effect) {
+    private MindreaverTarget(final MindreaverTarget target) {
+        super(target);
+    }
+
+    @Override
+    public boolean canTarget(UUID id, Ability source, Game game) {
+        Spell spell = game.getSpell(id);
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        return super.canTarget(id, source, game)
+                && spell != null
+                && exileZone != null
+                && !exileZone.isEmpty()
+                && exileZone
+                .getCards(game)
+                .stream()
+                .filter(Objects::nonNull)
+                .anyMatch(card -> CardUtil.haveSameNames(spell, card));
+    }
+}
+
+class MindreaverExileEffect extends OneShotEffect {
+
+    MindreaverExileEffect() {
+        super(Outcome.Exile);
+        this.staticText = "exile the top three cards of target player's library";
+    }
+
+    private MindreaverExileEffect(final MindreaverExileEffect effect) {
         super(effect);
     }
 
@@ -84,44 +110,16 @@ class MindreaverExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID exileId = CardUtil.getCardExileZoneId(game, source);
-        MageObject sourceObject = source.getSourceObject(game);
-        Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (opponent != null && sourceObject != null) {
-            for (int i = 0; i < 3; i++) {
-                Card card = opponent.getLibrary().getFromTop(game);
-                if (card != null) {
-                    card.moveToExile(exileId, sourceObject.getIdName(), source, game);
-                }
-            }
+        Player controller = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(source.getFirstTarget());
+        MageObject mageObject = source.getSourceObject(game);
+        if (controller == null || player == null || mageObject == null) {
+            return false;
         }
-        return false;
-    }
-}
-
-class MindreaverNamePredicate implements Predicate<MageObject> {
-
-    private final UUID sourceId;
-
-    public MindreaverNamePredicate(UUID sourceId) {
-        this.sourceId = sourceId;
-    }
-
-    @Override
-    public boolean apply(MageObject input, Game game) {
-        Set<String> cardNames = new HashSet<>();
-        UUID exileId = CardUtil.getCardExileZoneId(game, sourceId);
-        ExileZone exileZone = game.getExile().getExileZone(exileId);
-        if (exileZone != null) {
-            for (Card card : exileZone.getCards(game)) {
-                cardNames.add(card.getName());
-            }
-        }
-        return cardNames.stream().anyMatch(needName -> CardUtil.haveSameNames(input, needName, game));
-    }
-
-    @Override
-    public String toString() {
-        return "spell with the same name as a card exiled with {this}";
+        Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
+        return controller.moveCardsToExile(
+                cards.getCards(game), source, game, true,
+                CardUtil.getExileZoneId(game, source), mageObject.getIdName()
+        );
     }
 }

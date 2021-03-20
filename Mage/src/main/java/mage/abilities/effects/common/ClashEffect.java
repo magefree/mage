@@ -12,7 +12,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.players.PlayerList;
 import mage.target.Target;
@@ -85,100 +84,104 @@ public class ClashEffect extends OneShotEffect implements MageSingleton {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null
-                && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.CLASH, controller.getId(), source, controller.getId()))) {
-            // choose opponent
-            Target target = new TargetOpponent(true);
-            target.setTargetName("an opponent to clash with");
-            if (controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
-                Player opponent = game.getPlayer(target.getFirstTarget());
-                if (opponent != null) {
-                    int cmcController = Integer.MIN_VALUE;
-                    Card cardController = null;
-                    boolean topController = true;
-                    int cmcOpponent = Integer.MIN_VALUE;
-                    Card cardOpponent = null;
-                    boolean topOpponent = true;
-                    // Reveal top cards of involved players
-                    StringBuilder message = new StringBuilder("Clash: ");
-                    message.append(controller.getLogName());
-                    if (controller.getLibrary().hasCards()) {
-                        Cards cards = new CardsImpl();
-                        cardController = controller.getLibrary().getFromTop(game);
-                        cards.add(cardController);
-                        controller.revealCards(sourceObject.getIdName() + ": Clash card of " + controller.getName(), cards, game);
-                        cmcController = cardController.getConvertedManaCost();
-                        message.append(" (").append(cmcController).append(')');
-                    } else {
-                        message.append(" no card");
-                    }
-                    message.append(" vs. ").append(opponent.getLogName());
-                    if (opponent.getLibrary().hasCards()) {
-                        Cards cards = new CardsImpl();
-                        cardOpponent = opponent.getLibrary().getFromTop(game);
-                        cards.add(cardOpponent);
-                        opponent.revealCards(sourceObject.getIdName() + ": Clash card of " + opponent.getName(), cards, game);
-                        cmcOpponent = cardOpponent.getConvertedManaCost();
-                        message.append(" (").append(cmcOpponent).append(')');
-                    } else {
-                        message.append(" no card");
-                    }
-                    message.append(" - ");
-                    if (!game.isSimulation()) {
-                        if (cmcController > cmcOpponent) {
-                            message.append(controller.getLogName()).append(" won the clash");
-                            game.informPlayer(controller, "You won the clash!");
-                        } else if (cmcController < cmcOpponent) {
-                            message.append(opponent.getLogName()).append(" won the clash");
-                            game.informPlayer(controller, opponent.getLogName() + " won the clash!");
-                        } else {
-                            message.append(" no winner ");
-                        }
-                        game.informPlayers(message.toString());
-                    }
-                    // decide to put the cards on top or on the buttom of library in turn order beginning with the active player in turn order
-                    PlayerList playerList = game.getPlayerList().copy();
-                    playerList.setCurrent(game.getActivePlayerId());
-                    Player nextPlayer;
-                    do {
-                        Player current = playerList.getCurrent(game);
-                        if (cardController != null && current.getId().equals(controller.getId())) {
-                            topController = current.chooseUse(Outcome.Detriment, "Put " + cardController.getLogName() + " back on top of your library? (otherwise it goes to bottom)", source, game);
-                        }
-                        if (cardOpponent != null && current.getId().equals(opponent.getId())) {
-                            topOpponent = current.chooseUse(Outcome.Detriment, "Put " + cardOpponent.getLogName() + " back on top of your library? (otherwise it goes to bottom)", source, game);
-                        }
-                        nextPlayer = playerList.getNext(game, false);
-                    } while (nextPlayer != null && !nextPlayer.getId().equals(game.getActivePlayerId()));
-                    // put the cards back to library
-                    if (cardController != null) {
-                        controller.moveCardToLibraryWithInfo(cardController, source, game, Zone.LIBRARY, topController, true);
-                    }
-                    if (cardOpponent != null) {
-                        opponent.moveCardToLibraryWithInfo(cardOpponent, source, game, Zone.LIBRARY, topOpponent, true);
-                    }
-                    // fire CLASHED event with info about who won
-                    String winner = "draw";
-                    if (cmcController > cmcOpponent) {
-                        winner = "controller";
-                    }
-                    if (cmcOpponent > cmcController) {
-                        winner = "opponent";
-                    }
-                    GameEvent gameEvent = new GameEvent(GameEvent.EventType.CLASHED, opponent.getId(), source, controller.getId());
-                    gameEvent.setData(winner);
-                    game.fireEvent(gameEvent);
+        if (controller == null
+                || sourceObject == null
+                || game.replaceEvent(GameEvent.getEvent(
+                GameEvent.EventType.CLASH, controller.getId(), source, controller.getId()
+        ))) {
+            return false;
+        }
+        // choose opponent
+        Target target = new TargetOpponent(true);
+        target.setTargetName("an opponent to clash with");
+        target.setNotTarget(true);
+        if (!controller.choose(Outcome.Benefit, target, source.getSourceId(), game)) {
+            return false;
+        }
+        Player opponent = game.getPlayer(target.getFirstTarget());
+        if (opponent == null) {
+            return false;
+        }
+        int cmcController = Integer.MIN_VALUE;
+        Card cardController = null;
+        boolean topController = true;
+        int cmcOpponent = Integer.MIN_VALUE;
+        Card cardOpponent = null;
+        boolean topOpponent = true;
+        // Reveal top cards of involved players
+        StringBuilder message = new StringBuilder("Clash: ");
+        message.append(controller.getLogName());
+        if (controller.getLibrary().hasCards()) {
+            Cards cards = new CardsImpl();
+            cardController = controller.getLibrary().getFromTop(game);
+            cards.add(cardController);
+            controller.revealCards(sourceObject.getIdName() + ": Clash card of " + controller.getName(), cards, game);
+            cmcController = cardController.getConvertedManaCost();
+            message.append(" (").append(cmcController).append(')');
+        } else {
+            message.append(" no card");
+        }
+        message.append(" vs. ").append(opponent.getLogName());
+        if (opponent.getLibrary().hasCards()) {
+            Cards cards = new CardsImpl();
+            cardOpponent = opponent.getLibrary().getFromTop(game);
+            cards.add(cardOpponent);
+            opponent.revealCards(sourceObject.getIdName() + ": Clash card of " + opponent.getName(), cards, game);
+            cmcOpponent = cardOpponent.getConvertedManaCost();
+            message.append(" (").append(cmcOpponent).append(')');
+        } else {
+            message.append(" no card");
+        }
+        message.append(" - ");
+        if (!game.isSimulation()) {
+            if (cmcController > cmcOpponent) {
+                message.append(controller.getLogName()).append(" won the clash");
+                game.informPlayer(controller, "You won the clash!");
+            } else if (cmcController < cmcOpponent) {
+                message.append(opponent.getLogName()).append(" won the clash");
+                game.informPlayer(controller, opponent.getLogName() + " won the clash!");
+            } else {
+                message.append(" no winner ");
+            }
+            game.informPlayers(message.toString());
+        }
+        // decide to put the cards on top or on the buttom of library in turn order beginning with the active player in turn order
+        PlayerList playerList = game.getPlayerList().copy();
+        playerList.setCurrent(game.getActivePlayerId());
+        Player nextPlayer;
+        do {
+            Player current = playerList.getCurrent(game);
+            if (cardController != null && current.getId().equals(controller.getId())) {
+                topController = current.chooseUse(Outcome.Detriment, "Put " + cardController.getLogName() + " back on top of your library? (otherwise it goes to bottom)", source, game);
+            }
+            if (cardOpponent != null && current.getId().equals(opponent.getId())) {
+                topOpponent = current.chooseUse(Outcome.Detriment, "Put " + cardOpponent.getLogName() + " back on top of your library? (otherwise it goes to bottom)", source, game);
+            }
+            nextPlayer = playerList.getNext(game, false);
+        } while (nextPlayer != null && !nextPlayer.getId().equals(game.getActivePlayerId()));
+        // put the cards back to library
+        if (cardController != null) {
+            controller.moveCardToLibraryWithInfo(cardController, source, game, Zone.LIBRARY, topController, true);
+        }
+        if (cardOpponent != null) {
+            opponent.moveCardToLibraryWithInfo(cardOpponent, source, game, Zone.LIBRARY, topOpponent, true);
+        }
+        // fire CLASHED event with info about who won
+        game.fireEvent(new GameEvent(
+                GameEvent.EventType.CLASHED, controller.getId(), source,
+                opponent.getId(), 0, cmcController > cmcOpponent
+        ));
+        game.fireEvent(new GameEvent(
+                GameEvent.EventType.CLASHED, opponent.getId(), source,
+                controller.getId(), 0, cmcOpponent > cmcController
+        ));
 
-                    // set opponent to DoIfClashWonEffect
-                    for (Effect effect : source.getEffects()) {
-                        if (effect instanceof DoIfClashWonEffect) {
-                            effect.setValue("clashOpponent", opponent);
-                        }
-                    }
-                    return cmcController > cmcOpponent;
-                }
+        // set opponent to DoIfClashWonEffect
+        for (Effect effect : source.getEffects()) {
+            if (effect instanceof DoIfClashWonEffect) {
+                effect.setValue("clashOpponent", opponent);
             }
         }
-        return false;
+        return cmcController > cmcOpponent;
     }
 }

@@ -48,7 +48,32 @@ import java.util.*;
  */
 public interface Player extends MageItem, Copyable<Player> {
 
+    /**
+     * Current player is real life player (human). Try to use in GUI and network engine only.
+     * <p>
+     * WARNING, you must use isComputer instead isHuman in card's code (for good Human/AI logic testing in unit tests)
+     * TODO: check combat code and other and replace isHuman to isComputer usage if possible (if AI support that actions)
+     *
+     * @return
+     */
     boolean isHuman();
+
+    boolean isTestsMode();
+
+    /**
+     * Current player is AI. Use it in card's code and all other places.
+     * <p>
+     * It help to split Human/AI logic and test both by unit tests.
+     * <p>
+     * Usage example: AI hint to skip or auto-calculate choices instead call of real choose dialogs
+     * - unit tests for Human logic: call normal commands
+     * - unit tests for AI logic: call aiXXX commands
+     *
+     * @return
+     */
+    default boolean isComputer() {
+        return !isHuman();
+    }
 
     String getName();
 
@@ -100,6 +125,8 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     int gainLife(int amount, Game game, Ability source);
+
+    void exchangeLife(Player player, Ability source, Game game);
 
     int damage(int damage, UUID attackerId, Ability source, Game game);
 
@@ -314,8 +341,6 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void setGameUnderYourControl(boolean value, boolean fullRestore);
 
-    boolean isTestMode();
-
     void setTestMode(boolean value);
 
     void addAction(String action);
@@ -365,6 +390,20 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean cast(SpellAbility ability, Game game, boolean noMana, ApprovingObject approvingObject);
 
+    /**
+     * Force player to choose spell ability to cast. Use it in effects while casting cards.
+     * <p>
+     * Commands order in all use cases:
+     * - PlayFromNotOwnHandZone - true (if you put main id then all parts allows, if you put part id then only part allows)
+     * - chooseAbilityForCast
+     * - cast
+     * - PlayFromNotOwnHandZone - false
+     *
+     * @param card
+     * @param game
+     * @param noMana
+     * @return
+     */
     SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana);
 
     boolean putInHand(Card card, Game game);
@@ -693,6 +732,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void untap(Game game);
 
+    void updateRange(Game game);
+
     ManaOptions getManaAvailable(Game game);
 
     void addAvailableTriggeredMana(List<Mana> netManaAvailable);
@@ -793,7 +834,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean moveCards(Card card, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects);
 
-    boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game);
+    boolean moveCards(Set<? extends Card> cards, Zone toZone, Ability source, Game game);
 
     /**
      * Universal method to move cards from one zone to another. Do not mix
@@ -812,7 +853,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param appliedEffects
      * @return
      */
-    boolean moveCards(Set<Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects);
+    boolean moveCards(Set<? extends Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects);
 
     boolean moveCardsToExile(Card card, Ability source, Game game, boolean withName, UUID exileId, String exileZoneName);
 
@@ -869,7 +910,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param fromZone if null, this info isn't postet
      * @return Set<Cards> that were successful moved to graveyard
      */
-    Set<Card> moveCardsToGraveyardWithInfo(Set<Card> cards, Ability source, Game game, Zone fromZone);
+    Set<Card> moveCardsToGraveyardWithInfo(Set<? extends Card> cards, Ability source, Game game, Zone fromZone);
 
     /**
      * Uses card.moveToZone and posts a inform message about moving the card to

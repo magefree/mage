@@ -11,6 +11,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import org.apache.log4j.Logger;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -20,6 +21,8 @@ import mage.game.stack.Spell;
  * https://github.com/magefree/mage/issues/473
  */
 public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbility> {
+
+    private static final Logger logger = Logger.getLogger(TriggeredAbilities.class);
 
     private final Map<String, List<UUID>> sources = new HashMap<>();
 
@@ -115,7 +118,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
             this.add(ability, attachedTo);
             List<UUID> uuidList = new LinkedList<>();
             uuidList.add(sourceId);
-            // if the object that gained the ability moves zone, also then the triggered ability must be removed
+            // if the object that gained the ability moves from zone then the triggered ability must be removed
             uuidList.add(attachedTo.getId());
             sources.put(getKey(ability, attachedTo), uuidList);
         }

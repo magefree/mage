@@ -1,5 +1,3 @@
-
-
 package mage.game.permanent.token;
 import mage.constants.CardType;
 import mage.constants.SubType;
@@ -18,7 +16,6 @@ public final class SparkElementalToken extends TokenImpl {
 
     public SparkElementalToken() {
         super("Spark Elemental", "3/1 red Elemental creature token named Spark Elemental with trample, haste, and \"At the beginning of the end step, sacrifice Spark Elemental.\"");
-        this.setOriginalExpansionSetCode("FUT");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.ELEMENTAL);

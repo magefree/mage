@@ -17,7 +17,7 @@ import java.util.UUID;
 /**
  * @author nantuko
  */
-public class ConditionalMana extends Mana implements Serializable {
+public class ConditionalMana extends Mana implements Serializable, Emptiable {
 
     /**
      * Conditions that should be met (all or any depending on comparison scope)

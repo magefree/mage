@@ -1,17 +1,18 @@
-
 package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class ExileTargetAndSearchGraveyardHandLibraryEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
@@ -20,7 +21,7 @@ public class ExileTargetAndSearchGraveyardHandLibraryEffect extends SearchTarget
         super(graveyardExileOptional, searchWhatText, searchForText);
     }
 
-    public ExileTargetAndSearchGraveyardHandLibraryEffect(final ExileTargetAndSearchGraveyardHandLibraryEffect effect) {
+    private ExileTargetAndSearchGraveyardHandLibraryEffect(final ExileTargetAndSearchGraveyardHandLibraryEffect effect) {
         super(effect);
     }
 
@@ -36,13 +37,15 @@ public class ExileTargetAndSearchGraveyardHandLibraryEffect extends SearchTarget
                 break;
             }
         }
-        if (exileTarget != null) {
-            Permanent permanentToExile = game.getPermanent(exileTarget.getFirstTarget());
-            if (permanentToExile != null) {
-                targetPlayerId = permanentToExile.getControllerId();
-                result = permanentToExile.moveToExile(null, "", source, game);
-                this.applySearchAndExile(game, source, permanentToExile.getName(), targetPlayerId);
-            }
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null || exileTarget == null) {
+            return result;
+        }
+        Permanent permanentToExile = game.getPermanent(exileTarget.getFirstTarget());
+        if (permanentToExile != null) {
+            targetPlayerId = permanentToExile.getControllerId();
+            result = player.moveCards(permanentToExile, Zone.EXILED, source, game);
+            this.applySearchAndExile(game, source, permanentToExile.getName(), targetPlayerId);
         }
 
         return result;

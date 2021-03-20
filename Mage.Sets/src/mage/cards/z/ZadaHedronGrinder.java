@@ -1,26 +1,32 @@
 package mage.cards.z;
 
-import java.util.UUID;
 import mage.MageInt;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CopySpellForEachItCouldTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.FilterInPlay;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
+import mage.filter.StaticFilters;
+import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.Target;
 import mage.util.TargetAddress;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author LevelX2
  */
 public final class ZadaHedronGrinder extends CardImpl {
@@ -32,11 +38,10 @@ public final class ZadaHedronGrinder extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever you cast an instant or sorcery spell that targets only Zada, Hedron Grinder, 
-        // copy that spell for each other creature you control that the spell could target. 
+        // Whenever you cast an instant or sorcery spell that targets only Zada, Hedron Grinder,
+        // copy that spell for each other creature you control that the spell could target.
         // Each copy targets a different one of those creatures.
         this.addAbility(new ZadaHedronGrinderTriggeredAbility());
-
     }
 
     private ZadaHedronGrinder(final ZadaHedronGrinder card) {
@@ -55,7 +60,7 @@ class ZadaHedronGrinderTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ZadaHedronGrinderCopySpellEffect(), false);
     }
 
-    ZadaHedronGrinderTriggeredAbility(final ZadaHedronGrinderTriggeredAbility ability) {
+    private ZadaHedronGrinderTriggeredAbility(final ZadaHedronGrinderTriggeredAbility ability) {
         super(ability);
     }
 
@@ -71,40 +76,38 @@ class ZadaHedronGrinderTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Spell spell = game.getStack().getSpell(event.getTargetId());
-        return checkSpell(spell, game)
-                && event.getPlayerId().equals(controllerId);
-    }
-
-    private boolean checkSpell(Spell spell, Game game) {
-        if (spell != null
-                && (spell.isInstant() 
-                || spell.isSorcery())) {
-            boolean noTargets = true;
-            for (TargetAddress addr : TargetAddress.walk(spell)) {
-                if (addr != null) {
-                    noTargets = false;
-                    Target targetInstance = addr.getTarget(spell);
-                    if (targetInstance != null) {
-                        for (UUID target : targetInstance.getTargets()) {
-                            if (target != null) {
-                                Permanent permanent = game.getPermanent(target);
-                                if (permanent == null
-                                        || !permanent.getId().equals(getSourceId())) {
-                                    return false;
-                                }
-                            }
-                        }
-                    }
+        if (!isControlledBy(event.getPlayerId())) {
+            return false;
+        }
+        Spell spell = game.getSpell(event.getTargetId());
+        if (spell == null || !spell.isInstantOrSorcery()) {
+            return false;
+        }
+        boolean noTargets = true;
+        for (TargetAddress addr : TargetAddress.walk(spell)) {
+            if (addr == null) {
+                continue;
+            }
+            noTargets = false;
+            Target targetInstance = addr.getTarget(spell);
+            if (targetInstance == null) {
+                continue;
+            }
+            for (UUID target : targetInstance.getTargets()) {
+                if (target == null) {
+                    continue;
+                }
+                Permanent permanent = game.getPermanent(target);
+                if (permanent == null || !permanent.getId().equals(getSourceId())) {
+                    return false;
                 }
             }
-            if (noTargets) {
-                return false;
-            }
-            getEffects().get(0).setValue("triggeringSpell", spell);
-            return true;
         }
-        return false;
+        if (noTargets) {
+            return false;
+        }
+        getEffects().setValue("triggeringSpell", spell);
+        return true;
     }
 
     @Override
@@ -115,55 +118,40 @@ class ZadaHedronGrinderTriggeredAbility extends TriggeredAbilityImpl {
     }
 }
 
-class ZadaHedronGrinderCopySpellEffect extends CopySpellForEachItCouldTargetEffect<Permanent> {
+class ZadaHedronGrinderCopySpellEffect extends CopySpellForEachItCouldTargetEffect {
 
-    public ZadaHedronGrinderCopySpellEffect() {
-        this(new FilterControlledCreaturePermanent());
-        this.staticText = "copy that spell for each other creature you control "
-                + "that the spell could target. Each copy targets a different one of those creatures.";
+    ZadaHedronGrinderCopySpellEffect() {
+        super();
     }
 
-    public ZadaHedronGrinderCopySpellEffect(ZadaHedronGrinderCopySpellEffect effect) {
+    private ZadaHedronGrinderCopySpellEffect(final ZadaHedronGrinderCopySpellEffect effect) {
         super(effect);
-    }
-
-    private ZadaHedronGrinderCopySpellEffect(FilterInPlay<Permanent> filter) {
-        super(filter);
     }
 
     @Override
     protected Player getPlayer(Game game, Ability source) {
-        Spell spell = getSpell(game, source);
-        if (spell != null) {
-            return game.getPlayer(spell.getControllerId());
-        }
-        return null;
+        return game.getPlayer(source.getControllerId());
+    }
+
+    @Override
+    protected List<MageObjectReferencePredicate> getPossibleTargets(Spell spell, Player player, Ability source, Game game) {
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        return game.getBattlefield()
+                .getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_CREATURE,
+                        player.getId(), source.getSourceId(), game
+                ).stream()
+                .filter(Objects::nonNull)
+                .filter(p -> !p.equals(permanent))
+                .filter(p -> spell.canTarget(game, p.getId()))
+                .map(p -> new MageObjectReference(p, game))
+                .map(MageObjectReferencePredicate::new)
+                .collect(Collectors.toList());
     }
 
     @Override
     protected Spell getSpell(Game game, Ability source) {
         return (Spell) getValue("triggeringSpell");
-    }
-
-    @Override
-    protected boolean changeTarget(Target target, Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    protected void modifyCopy(Spell copy, Game game, Ability source) {
-        Spell spell = getSpell(game, source);
-        copy.setControllerId(spell.getControllerId());
-    }
-
-    @Override
-    protected boolean okUUIDToCopyFor(UUID potentialTarget, Game game, Ability source, Spell spell) {
-        Permanent permanent = game.getPermanent(potentialTarget);
-        if (permanent == null
-                || !permanent.isControlledBy(spell.getControllerId())) {
-            return false;
-        }
-        return true;
     }
 
     @Override

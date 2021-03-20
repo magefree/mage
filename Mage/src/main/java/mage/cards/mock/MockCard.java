@@ -10,6 +10,7 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -99,6 +100,14 @@ public class MockCard extends CardImpl {
 
     public MockCard(final MockCard card) {
         super(card);
+
+        this.startingLoyalty = card.startingLoyalty;
+        this.manaCostLeftStr = new ArrayList<>(card.manaCostLeftStr);
+        this.manaCostRightStr = new ArrayList<>(card.manaCostRightStr);
+        this.manaCostStr = new ArrayList<>(card.manaCostStr);
+        this.adventureSpellName = card.adventureSpellName;
+        this.isModalDoubleFacesCard = card.isModalDoubleFacesCard;
+        this.convertedManaCost = card.convertedManaCost;
     }
 
     @Override

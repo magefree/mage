@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import mage.ObjectColor;
@@ -16,7 +15,7 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.game.permanent.token.FreyaliseLlanowarsFuryToken;
+import mage.game.permanent.token.ElfDruidToken;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -42,11 +41,13 @@ public final class FreyaliseLlanowarsFury extends CardImpl {
         this.addAbility(new PlaneswalkerEntersWithLoyaltyCountersAbility(3));
 
         // +2: Create a 1/1 green Elf Druid creature token with "{T}: Add {G}."
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new FreyaliseLlanowarsFuryToken()), 2));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new ElfDruidToken()), 2));
+
         // -2: Destroy target artifact or enchantment.
         LoyaltyAbility loyaltyAbility = new LoyaltyAbility(new DestroyTargetEffect(), -2);
         loyaltyAbility.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.addAbility(loyaltyAbility);
+
         // -6: Draw a card for each green creature you control.
         this.addAbility(new LoyaltyAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filterGreen)), -6));
 

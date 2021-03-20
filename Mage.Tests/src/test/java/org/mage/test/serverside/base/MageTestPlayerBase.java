@@ -10,6 +10,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
 import mage.cards.Card;
@@ -32,6 +33,7 @@ import mage.server.util.ConfigWrapper;
 import mage.server.util.PluginClassLoader;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
 import mage.util.CardUtil;
 import mage.util.Copier;
@@ -463,6 +465,21 @@ public abstract class MageTestPlayerBase {
         ability.addTarget(new TargetAnyTarget());
         addCustomCardWithAbility(
                 "target damage " + damageAmount + " for " + controller.getName(),
+                controller,
+                ability
+        );
+    }
+
+    /**
+     * Add target destroy ability that can be called by text "target destroy"
+     *
+     * @param controller
+     */
+    protected void addCustomEffect_DestroyTarget(TestPlayer controller) {
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect().setText("target destroy"), new ManaCostsImpl(""));
+        ability.addTarget(new TargetPermanent());
+        addCustomCardWithAbility(
+                "target destroy for " + controller.getName(),
                 controller,
                 ability
         );
