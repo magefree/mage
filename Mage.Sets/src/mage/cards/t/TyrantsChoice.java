@@ -57,11 +57,17 @@ class TyrantsChoiceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("death", "torture", Outcome.Sacrifice);
+        // Outcome.Benefit - AI will use sacrifice all the time (Death choice)
+        // TODO: add AI hint logic in the choice method (hint per player)
+        TwoChoiceVote vote = new TwoChoiceVote("Death (sacrifice a creature)", "Torture (lose 4 life)", Outcome.Benefit);
         vote.doVotes(source, game);
-        if (vote.getVoteCount(true) > vote.getVoteCount(false)) {
+
+        int deathCount = vote.getVoteCount(true);
+        int tortureCount = vote.getVoteCount(false);
+        if (deathCount > tortureCount) {
             return new SacrificeOpponentsEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT).apply(game, source);
+        } else {
+            return new LoseLifeOpponentsEffect(4).apply(game, source);
         }
-        return new LoseLifeOpponentsEffect(4).apply(game, source);
     }
 }

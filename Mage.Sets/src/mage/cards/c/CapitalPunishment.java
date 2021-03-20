@@ -57,8 +57,11 @@ class CapitalPunishmentEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("death", "taxes", Outcome.Sacrifice);
+        // Outcome.Detriment - AI will discard a card all the time (taxes choice)
+        // TODO: add AI hint logic in the choice method (hint per player)
+        TwoChoiceVote vote = new TwoChoiceVote("Death (sacrifice creature)", "Taxes (discard card)", Outcome.Detriment);
         vote.doVotes(source, game);
+
         int deathCount = vote.getVoteCount(true);
         int taxesCount = vote.getVoteCount(false);
         if (deathCount > 0) {

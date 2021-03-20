@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import mage.MageInt;
@@ -65,18 +64,23 @@ class OrchardElementalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("sprout", "harvest", Outcome.BoostCreature);
+        // Outcome.Benefit - AI will boost all the time (Sprout choice)
+        // TODO: add AI hint logic in the choice method (hint per player)
+        TwoChoiceVote vote = new TwoChoiceVote("Sprout (two +1/+1 counters)", "Harvest (3 life)", Outcome.Benefit);
         vote.doVotes(source, game);
+
         int sproutCount = vote.getVoteCount(true);
         int harvestCount = vote.getVoteCount(false);
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (sproutCount > 0 && permanent != null) {
             permanent.addCounters(CounterType.P1P1.createInstance(2 * sproutCount), source.getControllerId(), source, game);
         }
+
         Player player = game.getPlayer(source.getControllerId());
         if (harvestCount > 0 && player != null) {
             player.gainLife(3 * harvestCount, game, source);
         }
+
         return sproutCount + harvestCount > 0;
     }
 }

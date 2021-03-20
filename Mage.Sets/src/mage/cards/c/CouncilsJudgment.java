@@ -17,6 +17,7 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.TargetPermanent;
 
 import java.util.LinkedHashSet;
@@ -70,6 +71,7 @@ class CouncilsJudgmentEffect extends OneShotEffect {
         }
         CouncilsJudgmentVote vote = new CouncilsJudgmentVote(player);
         vote.doVotes(source, game);
+
         Cards cards = new CardsImpl();
         vote.getMostVoted().stream().forEach(cards::add);
         return player.moveCards(cards, Zone.EXILED, source, game);
@@ -96,7 +98,7 @@ class CouncilsJudgmentVote extends VoteHandler<Permanent> {
         if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) < 1) {
             return null;
         }
-        TargetPermanent target = new TargetPermanent(1, filter);
+        Target target = new TargetPermanent(1, filter).withChooseHint("to exile");
         target.setNotTarget(true);
         decidingPlayer.choose(Outcome.Exile, target, source.getSourceId(), game);
         return game.getPermanent(target.getFirstTarget());

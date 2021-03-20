@@ -73,14 +73,18 @@ class ExpropriateEffect extends OneShotEffect {
             return false;
         }
 
-        TwoChoiceVote vote = new TwoChoiceVote("time", "money", Outcome.Detriment);
+        // Outcome.Detriment - AI will gain control all the time (Money choice)
+        // TODO: add AI hint logic in the choice method (hint per player)
+        TwoChoiceVote vote = new TwoChoiceVote("Time (extra turn)", "Money (gain control)", Outcome.Detriment);
         vote.doVotes(source, game);
 
+        // extra turn
         int timeCount = vote.getVoteCount(true);
         for (int i = 0; i < timeCount; i++) {
             game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
         }
 
+        // gain control
         if (vote.getVoteCount(false) < 1) {
             return true;
         }

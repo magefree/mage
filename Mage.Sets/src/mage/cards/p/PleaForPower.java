@@ -55,13 +55,22 @@ class PleaForPowerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("time", "knowledge", Outcome.Detriment);
-        vote.doVotes(source, game);
-        if (vote.getVoteCount(true) > vote.getVoteCount(false)) {
-            return new AddExtraTurnControllerEffect().apply(game, source);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
         }
-        Player player = game.getPlayer(source.getControllerId());
-        player.drawCards(3, source, game);
-        return true;
+
+        // Outcome.Detriment - AI will draw cards all the time (Knowledge choice)
+        // TODO: add AI hint logic in the choice method (hint per player)
+        TwoChoiceVote vote = new TwoChoiceVote("Time (extra turn)", "Knowledge (draw 3 cards)", Outcome.Detriment);
+        vote.doVotes(source, game);
+
+        int timeCount = vote.getVoteCount(true);
+        int knowledgeCount = vote.getVoteCount(false);
+        if (timeCount > knowledgeCount) {
+            return new AddExtraTurnControllerEffect().apply(game, source);
+        } else {
+            return controller.drawCards(3, source, game) > 0;
+        }
     }
 }

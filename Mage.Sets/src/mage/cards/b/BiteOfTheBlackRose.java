@@ -60,19 +60,24 @@ class BiteOfTheBlackRoseEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("Sickness", "Psychosis", Outcome.UnboostCreature);
-        vote.doVotes(source, game);
-
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
-        if (vote.getVoteCount(true) > vote.getVoteCount(false)) {
+
+        // Outcome.Detriment - AI will discard a card all the time (Psychosis choice)
+        // TODO: add AI hint logic in the choice method (hint per player)
+        TwoChoiceVote vote = new TwoChoiceVote("Sickness (-2/-2)", "Psychosis (discard cards)", Outcome.Detriment);
+        vote.doVotes(source, game);
+
+        int sicknessCount = vote.getVoteCount(true);
+        int psychosisCount = vote.getVoteCount(false);
+        if (sicknessCount > psychosisCount) {
+            // sickness
             game.addEffect(new BoostOpponentsEffect(-2, -2, Duration.EndOfTurn), source);
         } else {
-            new DiscardEachPlayerEffect(
-                    StaticValue.get(2), false, TargetController.OPPONENT
-            ).apply(game, source);
+            // psychosis or tied
+            new DiscardEachPlayerEffect(StaticValue.get(2), false, TargetController.OPPONENT).apply(game, source);
         }
         return true;
     }

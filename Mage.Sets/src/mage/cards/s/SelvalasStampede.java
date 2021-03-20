@@ -62,12 +62,16 @@ class SelvalasStampedeEffect extends OneShotEffect {
             return false;
         }
 
-        TwoChoiceVote vote = new TwoChoiceVote("wild", "free", Outcome.Detriment);
+        // Outcome.Detriment - AI will use library will the time (Free choice)
+        // TODO: add AI hint logic in the choice method (hint per player)
+        TwoChoiceVote vote = new TwoChoiceVote("Wild (from library to battlefield)", "Free (from hand to battlefield)", Outcome.Detriment);
         vote.doVotes(source, game);
 
         int wildCount = vote.getVoteCount(true);
         int freeCount = vote.getVoteCount(false);
 
+        // Reveal cards from the top of your library until you reveal a creature card for each wild vote.
+        // Put those creature cards onto the battlefield, then shuffle the rest into your library.
         Cards toReveal = new CardsImpl();
         Cards creatureCards = new CardsImpl();
         for (Card card : player.getLibrary().getCards(game)) {
@@ -87,6 +91,7 @@ class SelvalasStampedeEffect extends OneShotEffect {
         }
         player.shuffleLibrary(source, game);
 
+        // You may put a permanent card from your hand onto the battlefield for each free vote
         if (freeCount > 0) {
             TargetCardInHand target = new TargetCardInHand(0, freeCount, StaticFilters.FILTER_CARD_PERMANENT);
             player.choose(Outcome.PutCreatureInPlay, player.getHand(), target, game);
@@ -94,6 +99,7 @@ class SelvalasStampedeEffect extends OneShotEffect {
             creatureCards.addAll(target.getTargets());
             player.moveCards(creatureCards, Zone.BATTLEFIELD, source, game);
         }
+
         return wildCount + freeCount > 0;
     }
 }

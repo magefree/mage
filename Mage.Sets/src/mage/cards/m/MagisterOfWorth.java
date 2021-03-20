@@ -81,15 +81,23 @@ class MagisterOfWorthEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("grace", "condemnation", Outcome.PutCreatureInPlay);
-        vote.doVotes(source, game);
-        if (vote.getVoteCount(true) <= vote.getVoteCount(false)) {
-            return new DestroyAllEffect(filter).apply(game, source);
-        }
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
+
+        // Outcome.Benefit - AI will return from graveyard all the time (Grace choice)
+        // TODO: add AI hint logic in the choice method (hint per player)
+        TwoChoiceVote vote = new TwoChoiceVote("Grace (return from graveyard)", "Condemnation (destroy all)", Outcome.Benefit);
+        vote.doVotes(source, game);
+
+        int graceCount = vote.getVoteCount(true);
+        int condemnationCount = vote.getVoteCount(false);
+        if (condemnationCount >= graceCount) {
+            return new DestroyAllEffect(filter).apply(game, source);
+        }
+
+        // grace win - each player returns each creature card from their graveyard to the battlefield
         Cards cards = new CardsImpl();
         game.getState()
                 .getPlayersInRange(source.getControllerId(), game)
@@ -102,7 +110,7 @@ class MagisterOfWorthEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .filter(MageObject::isCreature)
                 .forEach(cards::add);
-        return player.moveCards(
+        return controller.moveCards(
                 cards.getCards(game), Zone.BATTLEFIELD, source, game,
                 false, false, true, null
         );

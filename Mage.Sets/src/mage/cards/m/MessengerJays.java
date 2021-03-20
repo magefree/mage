@@ -69,19 +69,24 @@ class MessengerJaysEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("feather", "quill", Outcome.BoostCreature);
+        // Outcome.Benefit - AI will boost all the time (Feather choice)
+        // TODO: add AI hint logic in the choice method (hint per player)
+        TwoChoiceVote vote = new TwoChoiceVote("Feather (+1/+1 counter)", "Quill (draw a card)", Outcome.Benefit);
         vote.doVotes(source, game);
+
         int featherCount = vote.getVoteCount(true);
         int quillCount = vote.getVoteCount(false);
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         if (featherCount > 0 && permanent != null) {
             permanent.addCounters(CounterType.P1P1.createInstance(featherCount), source.getControllerId(), source, game);
         }
+
         Player player = game.getPlayer(source.getControllerId());
         if (quillCount > 0 && player != null) {
             int drawn = player.drawCards(quillCount, source, game);
             player.discard(drawn, false, false, source, game);
         }
+
         return featherCount + quillCount > 0;
     }
 }

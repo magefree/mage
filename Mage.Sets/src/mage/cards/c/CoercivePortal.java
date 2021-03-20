@@ -63,20 +63,27 @@ class CoercivePortalEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        TwoChoiceVote vote = new TwoChoiceVote("carnage", "homage", Outcome.DestroyPermanent);
+        // Outcome.Detriment - AI will draw a card all the time (Homage choice)
+        // TODO: add AI hint logic in the choice method (hint per player)
+        TwoChoiceVote vote = new TwoChoiceVote("Carnage (sacrifice and destroy)", "Homage (draw a card)", Outcome.Detriment);
         vote.doVotes(source, game);
-        if (vote.getVoteCount(true) <= vote.getVoteCount(false)) {
+
+        int carnageCount = vote.getVoteCount(true);
+        int homageCount = vote.getVoteCount(false);
+        if (carnageCount > homageCount) {
+            // carnage
+            Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+            if (permanent != null && permanent.isControlledBy(source.getControllerId())) {
+                permanent.sacrifice(source, game);
+            }
+            new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_NON_LAND).apply(game, source);
+        } else {
+            // homage or tied
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
                 player.drawCards(1, source, game);
             }
-            return true;
         }
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent != null && permanent.isControlledBy(source.getControllerId())) {
-            permanent.sacrifice(source, game);
-        }
-        new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_NON_LAND).apply(game, source);
         return true;
     }
 }
