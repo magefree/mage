@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -21,6 +20,7 @@ public final class HistoricAnthology3 extends ExpansionSet {
         this.blockName = "Reprint";
         this.hasBoosters = false;
         this.hasBasicLands = false;
+
         cards.add(new SetCardInfo("Ancient Ziggurat", 26, Rarity.UNCOMMON, mage.cards.a.AncientZiggurat.class));
         cards.add(new SetCardInfo("Akroma's Memorial", 24, Rarity.MYTHIC, mage.cards.a.AkromasMemorial.class));
         cards.add(new SetCardInfo("Body Double", 6, Rarity.RARE, mage.cards.b.BodyDouble.class));
@@ -48,8 +48,5 @@ public final class HistoricAnthology3 extends ExpansionSet {
         cards.add(new SetCardInfo("Timely Reinforcements", 5, Rarity.UNCOMMON, mage.cards.t.TimelyReinforcements.class));
         cards.add(new SetCardInfo("Ulamog, the Ceaseless Hunger", 1, Rarity.MYTHIC, mage.cards.u.UlamogTheCeaselessHunger.class));
         cards.add(new SetCardInfo("Unburial Rites", 14, Rarity.UNCOMMON, mage.cards.u.UnburialRites.class));
-
-
     }
-
 }
