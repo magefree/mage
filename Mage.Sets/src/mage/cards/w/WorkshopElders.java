@@ -17,7 +17,7 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterArtifactCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.TargetPermanent;
@@ -29,13 +29,11 @@ import java.util.UUID;
  */
 public final class WorkshopElders extends CardImpl {
 
-    private static final FilterPermanent filter
-            = new FilterArtifactCreaturePermanent("artifact creatures");
     private static final FilterPermanent filter2
             = new FilterControlledArtifactPermanent("noncreature artifact you control");
 
     static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
+        filter2.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
     public WorkshopElders(UUID ownerId, CardSetInfo setInfo) {
@@ -48,7 +46,8 @@ public final class WorkshopElders extends CardImpl {
 
         // Artifact creatures you control have flying.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
-                FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter
+                FlyingAbility.getInstance(), Duration.WhileOnBattlefield,
+                StaticFilters.FILTER_PERMANENTS_ARTIFACT_CREATURE
         )));
 
         // At the beginning of combat on your turn, you may have target noncreature artifact you control become a 0/0 artifact creature. If you do, put four +1/+1 counters on it.
