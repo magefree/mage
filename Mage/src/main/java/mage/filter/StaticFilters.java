@@ -246,10 +246,16 @@ public final class StaticFilters {
         FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT.setLockedFilter(true);
     }
 
-    public static final FilterCreaturePermanent FILTER_ARTIFACT_CREATURE_PERMANENT = new FilterArtifactCreaturePermanent();
+    public static final FilterCreaturePermanent FILTER_PERMANENT_ARTIFACT_CREATURE = new FilterArtifactCreaturePermanent();
 
     static {
-        FILTER_ARTIFACT_CREATURE_PERMANENT.setLockedFilter(true);
+        FILTER_PERMANENT_ARTIFACT_CREATURE.setLockedFilter(true);
+    }
+
+    public static final FilterCreaturePermanent FILTER_PERMANENTS_ARTIFACT_CREATURE = new FilterArtifactCreaturePermanent("artifact creatures");
+
+    static {
+        FILTER_PERMANENTS_ARTIFACT_CREATURE.setLockedFilter(true);
     }
 
     public static final FilterControlledArtifactPermanent FILTER_ARTIFACTS_NON_CREATURE = new FilterControlledArtifactPermanent("Noncreature artifacts");
