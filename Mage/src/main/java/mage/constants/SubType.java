@@ -146,6 +146,7 @@ public enum SubType {
     FISH("Fish", SubTypeSet.CreatureType),
     FLAGBEARER("Flagbearer", SubTypeSet.CreatureType),
     FOX("Fox", SubTypeSet.CreatureType),
+    FRACTAL("Fractal", SubTypeSet.CreatureType),
     FROG("Frog", SubTypeSet.CreatureType),
     FUNGUS("Fungus", SubTypeSet.CreatureType),
     // G
