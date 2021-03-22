@@ -93,7 +93,7 @@ enum KaheeraTheOrphanguardCompanionCondition implements CompanionCondition {
     );
 
     private static boolean checkTypes(Card card) {
-        return subtypes.stream().anyMatch(subtype -> card.getSubtype().contains(subtype));
+        return subtypes.stream().anyMatch(subtype -> card.hasSubtype(subtype, null));
     }
 
     @Override

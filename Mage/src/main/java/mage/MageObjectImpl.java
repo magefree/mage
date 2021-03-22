@@ -9,6 +9,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.text.TextPart;
 import mage.abilities.text.TextPartSubType;
@@ -291,6 +292,9 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public boolean isAllCreatureTypes(Game game) {
+        if (game == null) {
+            return this.getAbilities().containsClass(ChangelingAbility.class);
+        }
         return this.getSubtype(game).isAllCreatureTypes();
     }
 
