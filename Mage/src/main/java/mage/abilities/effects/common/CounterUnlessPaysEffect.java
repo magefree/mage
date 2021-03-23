@@ -60,12 +60,11 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
                     costToPay = ManaUtil.createManaCost(genericMana, game, source, this);
                     costValueMessage = "{" + genericMana.calculate(game, source, this) + "}";
                 }
-                String message;
+                String message = "";
                 if (costToPay instanceof ManaCost) {
-                    message = "Would you like to pay " + costValueMessage + " to prevent counter effect?";
-                } else {
-                    message = costValueMessage + " to prevent counter effect?";
+                    message += "Pay ";
                 }
+                message += costValueMessage + '?';
 
                 costToPay.clearPaid();
                 if (!(player.chooseUse(Outcome.Benefit, message, source, game)

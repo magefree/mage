@@ -1,12 +1,10 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ClashEffect;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -15,7 +13,6 @@ import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
-import mage.util.ManaUtil;
 
 import java.util.UUID;
 
@@ -28,7 +25,8 @@ public final class BrokenAmbitions extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");
 
         // Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller puts the top four cards of their library into their graveyard.
-        this.getSpellAbility().addEffect(new BrokenAmbitionsEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(ManacostVariableValue.instance));
+        this.getSpellAbility().addEffect(new BrokenAmbitionsEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 
@@ -44,32 +42,13 @@ public final class BrokenAmbitions extends CardImpl {
 
 class BrokenAmbitionsEffect extends OneShotEffect {
 
-    private static final String effectText = "Counter target spell unless its controller pays {X}. Clash with an opponent. If you win, that spell's controller mills four cards";
-
-    protected Cost cost;
-    protected DynamicValue genericMana;
-
-    public BrokenAmbitionsEffect(Cost cost) {
+    BrokenAmbitionsEffect() {
         super(Outcome.Benefit);
-        this.cost = cost;
-        this.staticText = effectText;
+        this.staticText = "Clash with an opponent. If you win, that spell's controller mills four cards";
     }
 
-    public BrokenAmbitionsEffect(DynamicValue genericMana) {
-        super(Outcome.Detriment);
-        this.genericMana = genericMana;
-        this.staticText = effectText;
-    }
-
-    public BrokenAmbitionsEffect(final BrokenAmbitionsEffect effect) {
+    private BrokenAmbitionsEffect(final BrokenAmbitionsEffect effect) {
         super(effect);
-        if (effect.cost != null) {
-            this.cost = effect.cost.copy();
-        }
-        if (effect.genericMana != null) {
-            this.genericMana = effect.genericMana.copy();
-        }
-        this.staticText = effectText;
     }
 
     @Override
@@ -79,37 +58,17 @@ class BrokenAmbitionsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = (Spell) game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
-        Player player = game.getPlayer(spell.getControllerId());
-        if (player != null) {
-            Cost costToPay;
-            String costValueMessage;
-            if (cost != null) {
-                costToPay = cost.copy();
-                costValueMessage = costToPay.getText();
-            } else {
-                costToPay = ManaUtil.createManaCost(genericMana, game, source, this);
-                costValueMessage = "{" + genericMana.calculate(game, source, this) + "}";
-            }
-            String message;
-            if (costToPay instanceof ManaCost) {
-                message = "Would you like to pay " + costValueMessage + " to prevent counter effect?";
-            } else {
-                message = costValueMessage + " to prevent counter effect?";
-            }
-
-            costToPay.clearPaid();
-            if (!(player.chooseUse(Outcome.Benefit, message, source, game) && costToPay.pay(source, game, source, spell.getControllerId(), false, null))) {
-                game.informPlayers(player.getLogName() + " chooses not to pay " + costValueMessage + " to prevent the counter effect");
-                game.getStack().counter(spell.getId(), source, game);
-            }
-            game.informPlayers(player.getLogName() + " chooses to pay " + costValueMessage + " to prevent the counter effect");
-
-            if (ClashEffect.getInstance().apply(game, source)) {
-                player.millCards(4, source, game);
-            }
-            return true;
+        Spell spell = game.getSpellOrLKIStack(source.getFirstTarget());
+        if (spell == null) {
+            return false;
         }
-        return false;
+        Player player = game.getPlayer(spell.getControllerId());
+        if (player == null) {
+            return false;
+        }
+        if (ClashEffect.getInstance().apply(game, source)) {
+            player.millCards(4, source, game);
+        }
+        return true;
     }
 }

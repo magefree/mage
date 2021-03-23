@@ -118,8 +118,7 @@ class MysticRemoraEffect extends OneShotEffect {
         if (controller != null && opponent != null && sourceObject != null) {
             if (controller.chooseUse(Outcome.DrawCard, "Draw a card (" + sourceObject.getLogName() + ')', source, game)) {
                 Cost cost = ManaUtil.createManaCost(4, false);
-                String message = "Would you like to pay {4} to prevent the opponent to draw a card?";
-                if (opponent.chooseUse(Outcome.Benefit, message, source, game)
+                if (opponent.chooseUse(Outcome.Benefit, "Pay {4}?", source, game)
                         && cost.pay(source, game, source, opponent.getId(), false, null)) {
                     return true;
                 }

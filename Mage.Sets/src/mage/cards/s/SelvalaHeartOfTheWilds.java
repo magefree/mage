@@ -97,7 +97,7 @@ class SelvalaHeartOfTheWildsEffect extends OneShotEffect {
             if (filter2.match(permanent, game)) {
                 Player permanentController = game.getPlayer(permanent.getControllerId());
                 if (permanentController != null
-                        && permanentController.chooseUse(Outcome.DrawCard, "Would you like to draw a card?", source, game)) {
+                        && permanentController.chooseUse(Outcome.DrawCard, "Draw a card?", source, game)) {
                     permanentController.drawCards(1, source, game);
                 }
             }

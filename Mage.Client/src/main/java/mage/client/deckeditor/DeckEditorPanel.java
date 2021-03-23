@@ -711,7 +711,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         Object[] options = {"From file", "From clipboard (new deck)", "From clipboard (append cards)"};
 
         int n = JOptionPane.showOptionDialog(MageFrame.getDesktop(),
-                "Where would you like to import from?",
+                "Choose import location",
                 "Deck import",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
@@ -817,7 +817,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         Object[] options = {"To file", "To clipboard"};
 
         int n = JOptionPane.showOptionDialog(MageFrame.getDesktop(),
-                "Where would you like to export?",
+                "Choose export location",
                 "Deck export",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE,

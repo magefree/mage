@@ -4297,7 +4297,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (userData.askMoveToGraveOrder()) {
                     if (cards.size() > 1) {
                         chooseOrder = choosingPlayer.chooseUse(Outcome.Neutral,
-                                "Would you like to choose the order the cards go to graveyard?", source, game);
+                                "Choose the order in which the cards go to the graveyard?", source, game);
                     }
                 }
                 if (chooseOrder) {
