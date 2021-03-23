@@ -72,7 +72,7 @@ class EyeOfTheStormAbility extends TriggeredAbilityImpl {
                 && !spell.isCopy()
                 && spell.getCard() != null
                 && !spell.getCard().isCopy()
-                && (spell.isInstant() || spell.isSorcery())) {
+                && spell.isInstantOrSorcery()) {
             for (Effect effect : this.getEffects()) {
                 effect.setTargetPointer(new FixedTarget(event.getTargetId()));
             }

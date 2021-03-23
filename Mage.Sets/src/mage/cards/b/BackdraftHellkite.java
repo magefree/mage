@@ -1,6 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -75,7 +76,7 @@ class BackdraftHellkiteEffect extends ContinuousEffectImpl {
         player.getGraveyard()
                 .stream()
                 .map((cardId) -> game.getCard(cardId))
-                .filter(card -> card.isInstant() || card.isSorcery())
+                .filter(MageObject::isInstantOrSorcery)
                 .forEachOrdered(card -> affectedObjectList.add(new MageObjectReference(card, game)));
     }
 

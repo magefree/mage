@@ -97,7 +97,7 @@ class TheMirariConjectureDelayedTriggeredAbility extends DelayedTriggeredAbility
         if (event.getPlayerId().equals(this.getControllerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null
-                    && (spell.isInstant() || spell.isSorcery())) {
+                    && spell.isInstantOrSorcery()) {
                 this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
                 return true;
             }

@@ -207,7 +207,7 @@ public class Spell extends StackObjImpl implements Card {
                 turnController.controlPlayersTurn(game, controller.getId());
             }
         }
-        if (this.isInstant() || this.isSorcery()) {
+        if (this.isInstantOrSorcery()) {
             int index = 0;
             result = false;
             boolean legalParts = false;

@@ -75,7 +75,7 @@ class ForethoughtAmuletEffect extends ReplacementEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getAmount() >= 3) {
             MageObject object = game.getObject(event.getSourceId());
-            return object != null && (object.isInstant() || object.isSorcery());
+            return object != null && object.isInstantOrSorcery();
         }
         return false;
     }

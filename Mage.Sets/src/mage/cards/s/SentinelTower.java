@@ -119,7 +119,7 @@ class SentinelTowerWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
             MageObject object = game.getObject(event.getTargetId());
-            if (object != null && (object.isInstant() || object.isSorcery())) {
+            if (object != null && object.isInstantOrSorcery()) {
                 spellsThisTurn.add(new MageObjectReference(object, game));
             }
         }

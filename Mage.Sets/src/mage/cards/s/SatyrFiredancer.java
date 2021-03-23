@@ -85,7 +85,7 @@ class SatyrFiredancerTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         MageObject sourceObject = game.getObject(event.getSourceId());
-        if (sourceObject == null || !(sourceObject.isInstant() || sourceObject.isSorcery())) {
+        if (sourceObject == null || !sourceObject.isInstantOrSorcery()) {
             return false;
         }
         for (Effect effect : this.getEffects()) {

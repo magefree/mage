@@ -87,8 +87,8 @@ class MirariTriggeredAbility extends TriggeredAbilityImpl {
 
     private boolean isControlledInstantOrSorcery(Spell spell) {
         return spell != null
-                && (spell.isControlledBy(this.getControllerId()))
-                && (spell.isInstant() || spell.isSorcery());
+                && spell.isControlledBy(this.getControllerId())
+                && spell.isInstantOrSorcery();
     }
 
     @Override

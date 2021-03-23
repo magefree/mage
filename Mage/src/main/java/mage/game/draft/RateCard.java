@@ -110,7 +110,7 @@ public final class RateCard {
     }
 
     private static int isRemoval(Card card) {
-        if (card.isEnchantment() || card.isInstant() || card.isSorcery()) {
+        if (card.isEnchantment() || card.isInstantOrSorcery()) {
 
             for (Ability ability : card.getAbilities()) {
                 for (Effect effect : ability.getEffects()) {

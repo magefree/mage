@@ -77,7 +77,7 @@ class NivixAerieOfTheFiremindEffect extends OneShotEffect {
                 Card card = library.getFromTop(game);
                 if (card != null
                         && controller.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null))
-                        && (card.isInstant() || card.isSorcery())) {
+                        && card.isInstantOrSorcery()) {
                     ContinuousEffect effect = new NivixAerieOfTheFiremindCanCastEffect();
                     effect.setTargetPointer(new FixedTarget(card.getId()));
                     game.addEffect(effect, source);

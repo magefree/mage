@@ -1,5 +1,6 @@
 package mage.cards.p;
 
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -63,7 +64,7 @@ class PastInFlamesEffect extends ContinuousEffectImpl {
         if (this.affectedObjectsSet) {
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                player.getGraveyard().stream().map((cardId) -> game.getCard(cardId)).filter((card) -> (card.isInstant() || card.isSorcery())).forEachOrdered((card) -> {
+                player.getGraveyard().stream().map((cardId) -> game.getCard(cardId)).filter(MageObject::isInstantOrSorcery).forEachOrdered((card) -> {
                     affectedObjectList.add(new MageObjectReference(card, game));
                 });
             }

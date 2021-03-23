@@ -1,5 +1,6 @@
 package mage.cards.d;
 
+import mage.MageObject;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.cards.CardImpl;
@@ -71,7 +72,7 @@ class DoubleVisionCopyTriggeredAbility extends SpellCastControllerTriggeredAbili
             if (watcher != null) {
                 List<Spell> eligibleSpells = watcher.getSpellsCastThisTurn(this.getControllerId())
                         .stream()
-                        .filter(s -> s.isInstant() || s.isSorcery())
+                        .filter(MageObject::isInstantOrSorcery)
                         .collect(Collectors.toList());
                 return eligibleSpells.size() == 1 && eligibleSpells.get(0).getId().equals(spell.getId());
             }

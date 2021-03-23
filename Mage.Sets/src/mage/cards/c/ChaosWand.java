@@ -82,7 +82,7 @@ class ChaosWandEffect extends OneShotEffect {
             }
             opponent.moveCards(card, Zone.EXILED, source, game);
             controller.revealCards(source, new CardsImpl(card), game);
-            if (card.isInstant() || card.isSorcery()) {
+            if (card.isInstantOrSorcery()) {
                 boolean cardWasCast = false;
                 if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName()
                         + " without paying its mana cost?", source, game)) {
