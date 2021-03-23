@@ -3,7 +3,7 @@ package mage.cards.d;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.RevealedOrControlledDragonCondition;
 import mage.abilities.costs.common.RevealDragonFromHandCost;
-import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
 import mage.abilities.effects.common.CantBeCounteredSourceEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -27,10 +27,9 @@ public final class DragonlordsPrerogative extends CardImpl {
         // If you revealed a Dragon card or controlled a Dragon as you cast Dragonlord's Prerogative, Dragonlord's Prerogative can't be countered.        
         this.addAbility(new SimpleStaticAbility(
                 Zone.STACK,
-                new ConditionalContinuousEffect(
-                        new CantBeCounteredSourceEffect(), RevealedOrControlledDragonCondition.instance,
-                        "if you revealed a Dragon card or controlled a Dragon as you cast this spell, this spell can't be countered"
-                )
+                new ConditionalContinuousRuleModifyingEffect(
+                        new CantBeCounteredSourceEffect(), RevealedOrControlledDragonCondition.instance
+                ).setText("if you revealed a Dragon card or controlled a Dragon as you cast this spell, this spell can't be countered")
         ));
 
         // Draw four cards.        
