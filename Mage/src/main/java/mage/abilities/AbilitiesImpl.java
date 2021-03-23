@@ -4,6 +4,7 @@ import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.abilities.mana.ManaAbility;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -12,7 +13,6 @@ import org.apache.log4j.Logger;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import mage.abilities.mana.ManaAbility;
 
 /**
  * @param <T>
@@ -24,11 +24,8 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);
 
-    public AbilitiesImpl() {
-    }
-
     public AbilitiesImpl(T... abilities) {
-        addAll(Arrays.asList(abilities));
+        Collections.addAll(this, abilities);
     }
 
     public AbilitiesImpl(final AbilitiesImpl<T> abilities) {
@@ -104,42 +101,38 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     @Override
     public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone) {
         return stream()
-                .filter(ability -> ability instanceof ActivatedAbility)
+                .filter(ActivatedAbility.class::isInstance)
                 .filter(ability -> ability.getZone().match(zone))
-                .map(ability -> (ActivatedAbility) ability)
+                .map(ActivatedAbility.class::cast)
                 .collect(Collectors.toCollection(AbilitiesImpl::new));
-
     }
 
     @Override
     public Abilities<ActivatedAbility> getPlayableAbilities(Zone zone) {
         return stream()
-                .filter(ability -> (ability instanceof ActivatedAbility))
+                .filter(ActivatedAbility.class::isInstance)
                 .filter(ability -> ability.getZone().match(zone))
-                .map(ability -> (ActivatedAbility) ability)
+                .map(ActivatedAbility.class::cast)
                 .collect(Collectors.toCollection(AbilitiesImpl::new));
-
     }
 
     @Override
     public Abilities<ActivatedManaAbilityImpl> getActivatedManaAbilities(Zone zone) {
         return stream()
-                .filter(ability -> ability instanceof ActivatedManaAbilityImpl)
+                .filter(ActivatedManaAbilityImpl.class::isInstance)
                 .filter(ability -> ability.getZone().match(zone))
-                .map(ability -> (ActivatedManaAbilityImpl) ability)
+                .map(ActivatedManaAbilityImpl.class::cast)
                 .collect(Collectors.toCollection(AbilitiesImpl::new));
-
     }
 
     @Override
     public Abilities<ActivatedManaAbilityImpl> getAvailableActivatedManaAbilities(Zone zone, UUID playerId, Game game) {
         return stream()
-                .filter(ability -> ability instanceof ActivatedManaAbilityImpl)
+                .filter(ActivatedManaAbilityImpl.class::isInstance)
                 .filter(ability -> ability.getZone().match(zone))
-                .filter(ability -> (((ActivatedManaAbilityImpl) ability).canActivate(playerId, game).canActivate()))
-                .map(ability -> (ActivatedManaAbilityImpl) ability)
+                .map(ActivatedManaAbilityImpl.class::cast)
+                .filter(ability -> ability.canActivate(playerId, game).canActivate())
                 .collect(Collectors.toCollection(AbilitiesImpl::new));
-
     }
 
     @Override
@@ -148,26 +141,23 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                 .filter(ability -> ability.getAbilityType() == AbilityType.MANA)
                 .filter(ability -> ability.getZone().match(zone))
                 .collect(Collectors.toCollection(AbilitiesImpl::new));
-
     }
 
     @Override
     public Abilities<EvasionAbility> getEvasionAbilities() {
         return stream()
-                .filter(ability -> ability instanceof EvasionAbility)
-                .map(ability -> (EvasionAbility) ability)
+                .filter(EvasionAbility.class::isInstance)
+                .map(EvasionAbility.class::cast)
                 .collect(Collectors.toCollection(AbilitiesImpl::new));
-
     }
 
     @Override
     public Abilities<StaticAbility> getStaticAbilities(Zone zone) {
         return stream()
-                .filter(ability -> ability instanceof StaticAbility)
+                .filter(StaticAbility.class::isInstance)
                 .filter(ability -> ability.getZone().match(zone))
-                .map(ability -> (StaticAbility) ability)
+                .map(StaticAbility.class::cast)
                 .collect(Collectors.toCollection(AbilitiesImpl::new));
-
     }
 
     @Override
@@ -189,17 +179,17 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     @Override
     public boolean hasPoolDependantAbilities() {
         return stream()
-                .anyMatch(ability -> ability.getAbilityType() == AbilityType.MANA
-                && ((ManaAbility) ability).isPoolDependant());
+                .filter(ability -> ability.getAbilityType() == AbilityType.MANA)
+                .map(ManaAbility.class::cast)
+                .anyMatch(ManaAbility::isPoolDependant);
     }
 
     @Override
     public Abilities<ProtectionAbility> getProtectionAbilities() {
         return stream()
-                .filter(ability -> ability instanceof ProtectionAbility)
-                .map(ability -> (ProtectionAbility) ability)
+                .filter(ProtectionAbility.class::isInstance)
+                .map(ProtectionAbility.class::cast)
                 .collect(Collectors.toCollection(AbilitiesImpl::new));
-
     }
 
     @Override
@@ -232,7 +222,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public boolean contains(T ability) {
-        for (Iterator<T> iterator = this.iterator(); iterator.hasNext();) { // simple loop can cause java.util.ConcurrentModificationException
+        for (Iterator<T> iterator = this.iterator(); iterator.hasNext(); ) { // simple loop can cause java.util.ConcurrentModificationException
             T test = iterator.next();
             // Checking also by getRule() without other restrictions is a problem when a triggered ability will be copied to a permanent that had the same ability
             // already before the copy. Because then it keeps the triggered ability twice and it triggers twice.
@@ -253,12 +243,11 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public boolean containsRule(T ability) { // TODO: remove
-        return stream().anyMatch(rule -> rule.getRule().equals(ability.getRule()));
+        return stream().map(T::getRule).anyMatch(ability.getRule()::equals);
     }
 
     @Override
     public boolean containsAll(Abilities<T> abilities) {
-
         if (this.size() < abilities.size()) {
             return false;
         }
@@ -272,12 +261,12 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public boolean containsKey(UUID abilityId) { // TODO: remove
-        return stream().anyMatch(ability -> abilityId.equals(ability.getId()));
+        return stream().map(T::getId).anyMatch(abilityId::equals);
     }
 
     @Override
     public boolean containsClass(Class classObject) {
-        return stream().anyMatch(ability -> ability.getClass().equals(classObject));
+        return stream().map(T::getClass).anyMatch(classObject::equals);
     }
 
     public Optional<T> get(UUID abilityId) {
