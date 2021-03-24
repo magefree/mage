@@ -46,7 +46,7 @@ class DraconicRoarEffect extends OneShotEffect {
     DraconicRoarEffect() {
         super(Outcome.Benefit);
         staticText = "{this} deals 3 damage to target creature. If you revealed a Dragon card or controlled " +
-                "a Dragon as you cast this spell, {this} deals 3 damage to that creature’s controller.";
+                "a Dragon as you cast this spell, {this} deals 3 damage to that creature's controller.";
     }
 
     private DraconicRoarEffect(final DraconicRoarEffect effect) {
