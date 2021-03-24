@@ -2,16 +2,14 @@ package mage.cards.g;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -29,35 +27,15 @@ public final class GhostfireBlade extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+2
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 2)));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3))); // todo
+        Ability ability = new EquipAbility(3);
+        ability.setCostAdjuster(GhostfireBladeAdjuster.instance);
+        this.addAbility(ability);
 
         // Ghostfire Blade's equip ability costs {2} less to activate if it targets a colorless creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("{this}'s equip ability costs {2} less to activate if it targets a colorless creature")));
-    }
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (ability instanceof EquipAbility) {
-            if (game.inCheckPlayableState()) {
-                // checking state
-                boolean canSelectColorlessCreature = CardUtil.getAllPossibleTargets(ability, game).stream()
-                        .map(game::getPermanent)
-                        .filter(Objects::nonNull)
-                        .anyMatch(permanent -> permanent.getColor(game).isColorless());
-                if (canSelectColorlessCreature) {
-                    CardUtil.reduceCost(ability, 2);
-                }
-            } else {
-                // real cast state
-                Permanent targetCreature = game.getPermanent(ability.getTargets().getFirstTarget());
-                if (targetCreature != null && targetCreature.getColor(game).isColorless()) {
-                    CardUtil.reduceCost(ability, 2);
-                }
-            }
-        }
+        this.addAbility(new SimpleStaticAbility(new InfoEffect("{this}'s equip ability costs {2} less to activate if it targets a colorless creature")));
     }
 
     private GhostfireBlade(final GhostfireBlade card) {
@@ -67,5 +45,30 @@ public final class GhostfireBlade extends CardImpl {
     @Override
     public GhostfireBlade copy() {
         return new GhostfireBlade(this);
+    }
+}
+
+enum GhostfireBladeAdjuster implements CostAdjuster {
+    instance;
+
+    @Override
+    public void adjustCosts(Ability ability, Game game) {
+        // checking state
+        if (game.inCheckPlayableState()) {
+            if (CardUtil
+                    .getAllPossibleTargets(ability, game)
+                    .stream()
+                    .map(game::getPermanent)
+                    .filter(Objects::nonNull)
+                    .noneMatch(permanent -> permanent.getColor(game).isColorless())) {
+                return;
+            }
+        } else {
+            Permanent permanent = game.getPermanent(ability.getFirstTarget());
+            if (permanent == null || !permanent.getColor(game).isColorless()) {
+                return;
+            }
+        }
+        CardUtil.reduceCost(ability, 2);
     }
 }
