@@ -19,9 +19,13 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.util.CardUtil;
-import mage.watchers.common.CastSpellLastTurnWatcher;
+import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -49,7 +53,9 @@ public final class KazaRoilChaser extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // {T}: The next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of Wizards you control as this ability resolves.
-        this.addAbility(new SimpleActivatedAbility(new KazaRoilChaserEffect(), new TapSourceCost()).addHint(hint));
+        this.addAbility(new SimpleActivatedAbility(
+                new KazaRoilChaserEffect(), new TapSourceCost()
+        ).addHint(hint), new KazaRoilChaserWatcher());
     }
 
     private KazaRoilChaser(final KazaRoilChaser card) {
@@ -64,9 +70,9 @@ public final class KazaRoilChaser extends CardImpl {
 
 class KazaRoilChaserEffect extends CostModificationEffectImpl {
 
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.WIZARD);
     private int spellsCast;
     private int wizardCount = 0;
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.WIZARD);
 
     KazaRoilChaserEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, CostModificationType.REDUCE_COST);
@@ -83,9 +89,9 @@ class KazaRoilChaserEffect extends CostModificationEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
+        KazaRoilChaserWatcher watcher = game.getState().getWatcher(KazaRoilChaserWatcher.class);
         if (watcher != null) {
-            spellsCast = watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId());
+            spellsCast = watcher.getCount(source.getControllerId());
         }
         wizardCount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
     }
@@ -98,11 +104,11 @@ class KazaRoilChaserEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        CastSpellLastTurnWatcher watcher = game.getState().getWatcher(CastSpellLastTurnWatcher.class);
+        KazaRoilChaserWatcher watcher = game.getState().getWatcher(KazaRoilChaserWatcher.class);
         if (watcher == null) {
             return false;
         }
-        if (watcher.getAmountOfSpellsPlayerCastOnCurrentTurn(source.getControllerId()) > spellsCast) {
+        if (watcher.getCount(source.getControllerId()) > spellsCast) {
             discard(); // only one use
             return false;
         }
@@ -117,5 +123,35 @@ class KazaRoilChaserEffect extends CostModificationEffectImpl {
     @Override
     public KazaRoilChaserEffect copy() {
         return new KazaRoilChaserEffect(this);
+    }
+}
+
+class KazaRoilChaserWatcher extends Watcher {
+
+    private final Map<UUID, Integer> playerMap = new HashMap<>();
+
+    KazaRoilChaserWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST) {
+            return;
+        }
+        Spell spell = game.getSpell(event.getSourceId());
+        if (spell != null && spell.isInstantOrSorcery()) {
+            playerMap.compute(event.getPlayerId(), (u, i) -> i == null ? 1 : Integer.sum(i, 1));
+        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        playerMap.clear();
+    }
+
+    int getCount(UUID playerId) {
+        return playerMap.getOrDefault(playerId, 0);
     }
 }
