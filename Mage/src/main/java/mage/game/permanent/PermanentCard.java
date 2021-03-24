@@ -175,30 +175,6 @@ public class PermanentCard extends PermanentImpl {
     }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (this.isTransformed() && card.getSecondCardFace() != null) {
-            card.getSecondCardFace().adjustTargets(ability, game);
-        } else {
-            if (this.isCopy()) {
-                // if COPIED card have adjuster then it's must be called instead own -- see OathOfLieges tests
-                // raise null error on wrong copy
-                this.getCopyFrom().adjustTargets(ability, game);
-            } else {
-                card.adjustTargets(ability, game);
-            }
-        }
-    }
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        if (this.isTransformed() && card.getSecondCardFace() != null) {
-            card.getSecondCardFace().adjustCosts(ability, game);
-        } else {
-            card.adjustCosts(ability, game);
-        }
-    }
-
-    @Override
     public ManaCosts<ManaCost> getManaCost() {
         if (faceDown) { // face down permanent has always {0} mana costs
             manaCost.clear();

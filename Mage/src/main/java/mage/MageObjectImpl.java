@@ -241,11 +241,13 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public final void adjustCosts(Ability ability, Game game) {
+        ability.adjustCosts(game);
     }
 
     @Override
-    public void adjustTargets(Ability ability, Game game) {
+    public final void adjustTargets(Ability ability, Game game) {
+        ability.adjustTargets(game);
     }
 
     @Override
