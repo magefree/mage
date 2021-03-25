@@ -84,57 +84,58 @@ public class WishEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            if (controller.chooseUse(Outcome.Benefit, choiceText, source, game)) {
-                Cards cards = controller.getSideboard();
-                List<Card> exile = game.getExile().getAllCards(game);
-                boolean noTargets = cards.isEmpty() && (!alsoFromExile || exile.isEmpty());
-                if (noTargets) {
-                    game.informPlayer(controller, "You have no cards outside the game" + (alsoFromExile ? " or in exile" : "") + '.');
-                    return true;
-                }
-
-                Set<Card> filtered = cards.getCards(filter, game);
-                Cards filteredCards = new CardsImpl();
-                for (Card card : filtered) {
-                    filteredCards.add(card.getId());
-                }
-                if (alsoFromExile) {
-                    for (Card exileCard : exile) {
-                        if (exileCard.isOwnedBy(source.getControllerId()) && filter.match(exileCard, game)) {
-                            filteredCards.add(exileCard);
-                        }
-                    }
-                }
-                if (filteredCards.isEmpty()) {
-                    game.informPlayer(controller, "You don't have " + filter.getMessage() + " outside the game" + (alsoFromExile ? " or in exile" : "") + '.');
-                    return true;
-                }
-
-                TargetCard target = new TargetCard(Zone.ALL, filter);
-                target.setNotTarget(true);
-                if (controller.choose(Outcome.Benefit, filteredCards, target, game)) {
-                    Card card = controller.getSideboard().get(target.getFirstTarget(), game);
-                    if (card == null && alsoFromExile) {
-                        card = game.getCard(target.getFirstTarget());
-                    }
-                    if (card != null) {
-                        if (topOfLibrary) {
-                            controller.putCardsOnTopOfLibrary(card, game, source, true);
-                        } else {
-                            controller.moveCards(card, Zone.HAND, source, game);
-                        }
-                        if (reveal) {
-                            Cards revealCard = new CardsImpl();
-                            revealCard.add(card);
-                            controller.revealCards(sourceObject.getIdName(), revealCard, game);
-                        }
-                    }
-                }
-            }
+        if (controller == null || sourceObject == null) {
+            return false;
+        }
+        if (!controller.chooseUse(Outcome.Benefit, choiceText, source, game)) {
+            return false;
+        }
+        Cards cards = controller.getSideboard();
+        List<Card> exile = game.getExile().getAllCards(game);
+        boolean noTargets = cards.isEmpty() && (!alsoFromExile || exile.isEmpty());
+        if (noTargets) {
+            game.informPlayer(controller, "You have no cards outside the game" + (alsoFromExile ? " or in exile" : "") + '.');
             return true;
         }
-        return false;
+
+        Set<Card> filtered = cards.getCards(filter, game);
+        Cards filteredCards = new CardsImpl();
+        for (Card card : filtered) {
+            filteredCards.add(card.getId());
+        }
+        if (alsoFromExile) {
+            for (Card exileCard : exile) {
+                if (exileCard.isOwnedBy(source.getControllerId()) && filter.match(exileCard, game)) {
+                    filteredCards.add(exileCard);
+                }
+            }
+        }
+        if (filteredCards.isEmpty()) {
+            game.informPlayer(controller, "You don't have " + filter.getMessage() + " outside the game" + (alsoFromExile ? " or in exile" : "") + '.');
+            return true;
+        }
+
+        TargetCard target = new TargetCard(Zone.ALL, filter);
+        target.setNotTarget(true);
+        if (controller.choose(Outcome.Benefit, filteredCards, target, game)) {
+            Card card = controller.getSideboard().get(target.getFirstTarget(), game);
+            if (card == null && alsoFromExile) {
+                card = game.getCard(target.getFirstTarget());
+            }
+            if (card != null) {
+                if (topOfLibrary) {
+                    controller.putCardsOnTopOfLibrary(card, game, source, true);
+                } else {
+                    controller.moveCards(card, Zone.HAND, source, game);
+                }
+                if (reveal) {
+                    Cards revealCard = new CardsImpl();
+                    revealCard.add(card);
+                    controller.revealCards(sourceObject.getIdName(), revealCard, game);
+                }
+            }
+        }
+        return true;
     }
 
 }
