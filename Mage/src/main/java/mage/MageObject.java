@@ -280,6 +280,11 @@ public interface MageObject extends MageItem, Serializable {
         game.getState().getCreateMageObjectAttribute(this, game).getSubtype().retainAll(SubType.getEnchantmentTypes());
     }
 
+    default void retainAllLandSubTypes(Game game) {
+        setIsAllCreatureTypes(game, false);
+        game.getState().getCreateMageObjectAttribute(this, game).getSubtype().retainAll(SubType.getLandTypes());
+    }
+
     /**
      * Remove object's own creature types forever (for copy effects usage)
      */
