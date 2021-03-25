@@ -12,6 +12,10 @@ import mage.game.stack.Spell;
  */
 public class MagecraftAbility extends TriggeredAbilityImpl {
 
+    public MagecraftAbility(Effect effect) {
+        this(effect, false);
+    }
+
     public MagecraftAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
     }
