@@ -1,19 +1,21 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterAttackingCreature;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.SharesCreatureTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -27,8 +29,8 @@ public final class SharedAnimosity extends CardImpl {
 
         // Whenever a creature you control attacks, it gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it.
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(
-                new SharedAnimosityEffect(), false, true)
-        );
+                new SharedAnimosityEffect(), false, true
+        ));
     }
 
     private SharedAnimosity(final SharedAnimosity card) {
@@ -41,18 +43,16 @@ public final class SharedAnimosity extends CardImpl {
     }
 }
 
-class SharedAnimosityEffect extends ContinuousEffectImpl {
+class SharedAnimosityEffect extends OneShotEffect {
 
-    private int power;
-
-    public SharedAnimosityEffect() {
-        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
-
+    SharedAnimosityEffect() {
+        super(Outcome.Benefit);
+        staticText = "it gets +1/+0 until end of turn for each other " +
+                "attacking creature that shares a creature type with it";
     }
 
-    public SharedAnimosityEffect(final SharedAnimosityEffect effect) {
+    private SharedAnimosityEffect(final SharedAnimosityEffect effect) {
         super(effect);
-        this.power = effect.power;
     }
 
     @Override
@@ -61,30 +61,20 @@ class SharedAnimosityEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        Permanent permanent = game.getPermanent(this.targetPointer.getFirst(game, source));
-        if (permanent != null) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(Predicates.not(new PermanentIdPredicate(this.targetPointer.getFirst(game, source))));
-            filter.add(AttackingPredicate.instance);
-            filter.add(new SharesCreatureTypePredicate(permanent));
-            power = game.getBattlefield().count(filter, source.getControllerId(), source.getSourceId(), game);
-        }
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(this.targetPointer.getFirst(game, source));
-        if (target != null) {
-            target.addPower(power);
-            return true;
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent == null) {
+            return false;
         }
-        return false;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "it gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it";
+        FilterPermanent filter = new FilterAttackingCreature();
+        filter.add(new SharesCreatureTypePredicate(permanent));
+        filter.add(AnotherPredicate.instance);
+        int count = game.getBattlefield().count(filter, permanent.getId(), source.getControllerId(), game);
+        if (count > 0) {
+            game.addEffect(new BoostTargetEffect(
+                    count, 0, Duration.EndOfTurn
+            ).setTargetPointer(new FixedTarget(permanent, game)), source);
+        }
+        return true;
     }
 }
