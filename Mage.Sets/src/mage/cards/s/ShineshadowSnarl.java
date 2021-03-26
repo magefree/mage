@@ -34,8 +34,10 @@ public final class ShineshadowSnarl extends CardImpl {
 
         // As Shineshadow Snarl enters the battlefield, you may reveal a Plains or Swamp card from your hand. If you don't, Shineshadow Snarl enters the battlefield tapped.
         this.addAbility(new AsEntersBattlefieldAbility(
-                new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))),
-                "you may reveal a Plains or Swamp card from your hand. If you don't, {this} enters the battlefield tapped"
+                new TapSourceUnlessPaysEffect(
+                        new RevealTargetFromHandCost(new TargetCardInHand(filter))
+                ), "you may reveal a Plains or Swamp card from your hand. " +
+                "If you don't, {this} enters the battlefield tapped"
         ));
 
         // {T}: Add {W} or {B}.
