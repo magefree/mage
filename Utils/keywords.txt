@@ -104,4 +104,5 @@ Undying|new|
 Unearth|cost|
 Unleash|new|
 Vigilance|instance|
+Ward|cost|
 Wither|instance|
