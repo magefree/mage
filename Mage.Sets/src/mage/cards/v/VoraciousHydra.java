@@ -5,19 +5,16 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoubleP1P1CountersSourceEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.FightTargetSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -44,7 +41,7 @@ public final class VoraciousHydra extends CardImpl {
 
         // When Voracious Hydra enters the battlefield, choose one —
         // • Double the number of +1/+1 counters on Voracious Hydra.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new VoraciousHydraEffect(), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DoubleP1P1CountersSourceEffect(), false);
 
         // • Voracious Hydra fights target creature you don't control.
         Mode mode = new Mode(
@@ -63,33 +60,5 @@ public final class VoraciousHydra extends CardImpl {
     @Override
     public VoraciousHydra copy() {
         return new VoraciousHydra(this);
-    }
-}
-
-class VoraciousHydraEffect extends OneShotEffect {
-
-    VoraciousHydraEffect() {
-        super(Outcome.Benefit);
-        staticText = "Double the number of +1/+1 counters on {this}";
-    }
-
-    private VoraciousHydraEffect(final VoraciousHydraEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public VoraciousHydraEffect copy() {
-        return new VoraciousHydraEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            return false;
-        }
-        return permanent.addCounters(CounterType.P1P1.createInstance(
-                permanent.getCounters(game).getCount(CounterType.P1P1)
-        ), source.getControllerId(), source, game);
     }
 }
