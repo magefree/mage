@@ -97,6 +97,10 @@ public class ModalDoubleFacesCardHalfImpl extends CardImpl implements ModalDoubl
     }
 
     @Override
+    public void setPT(int power, int toughness) {
+        this.setPT(new MageInt(power), new MageInt(toughness));
+    }
+
     public void setPT(MageInt power, MageInt toughness) {
         this.power = power;
         this.toughness = toughness;
