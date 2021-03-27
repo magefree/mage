@@ -23,13 +23,24 @@ public class Historic extends Constructed {
                 setCodes.add(set.getCode());
             }
         }
+        // Additional sets
+        setCodes.add("JMP"); // Jumpstart (replacements below)
+        setCodes.add("STA"); // Strixhaven Mystical Archive
+
         // Regular ban list
         banned.add("Agent of Treachery");
+        banned.add("Channel");
+        banned.add("Counterspell");
+        banned.add("Dark Ritual");
+        banned.add("Demonic Tutor");
         banned.add("Fires of Invention");
+        banned.add("Lightning Bolt");
+        banned.add("Natural Order");
         banned.add("Nexus of Fate");
         banned.add("Oko, Thief of Crowns");
         banned.add("Omnath, Locus of Creation");
         banned.add("Once Upon a Time");
+        banned.add("Swords to Plowshares");
         banned.add("Teferi, Time Raveler");
         banned.add("Uro, Titan of Nature's Wrath");
         banned.add("Veil of Summer");
@@ -59,8 +70,7 @@ public class Historic extends Constructed {
         singleCards.add("The Gitrog Monster");
         singleCards.add("Talrand, Sky Summoner");
 
-        // Jumpstart with replacements
-        setCodes.add("JMP");
+        // Jumpstart replacements
         singleCards.add("Archon of Sun's Grace");
         singleCards.add("Banishing Light");
         singleCards.add("Gadwick, the Wizened");
@@ -96,7 +106,6 @@ public class Historic extends Constructed {
         banned.add("Draconic Roar");
         banned.add("Flametongue Kavu");
         banned.add("Goblin Lore");
-        banned.add("Lightning Bolt");
         banned.add("Fa'adiyah Seer");
         banned.add("Scrounging Bandar");
         banned.add("Time to Feed");
