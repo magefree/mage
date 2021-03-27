@@ -12,6 +12,8 @@ import mage.game.stack.Spell;
  */
 public class MagecraftAbility extends TriggeredAbilityImpl {
 
+    public static final String SPELL_KEY = "castCopiedSpell";
+
     public MagecraftAbility(Effect effect) {
         this(effect, false);
     }
@@ -33,7 +35,13 @@ public class MagecraftAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Spell spell = game.getSpell(event.getTargetId());
-        return spell != null && spell.isControlledBy(getControllerId()) && spell.isInstantOrSorcery();
+        if (spell == null
+                || !spell.isControlledBy(getControllerId())
+                || !spell.isInstantOrSorcery()) {
+            return false;
+        }
+        getEffects().setValue(SPELL_KEY, spell);
+        return true;
     }
 
     @Override
