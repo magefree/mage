@@ -41,7 +41,7 @@ public final class StrixhavenMysticalArchive extends ExpansionSet {
         cards.add(new SetCardInfo("Compulsive Research", 14, Rarity.RARE, mage.cards.c.CompulsiveResearch.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Compulsive Research", 77, Rarity.RARE, mage.cards.c.CompulsiveResearch.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Counterspell", 15, Rarity.RARE, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Counterspell", 78, Rarity.COMMON, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Counterspell", 78, Rarity.RARE, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crux of Fate", 25, Rarity.MYTHIC, mage.cards.c.CruxOfFate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Crux of Fate", 88, Rarity.MYTHIC, mage.cards.c.CruxOfFate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cultivate", 114, Rarity.UNCOMMON, mage.cards.c.Cultivate.class, NON_FULL_USE_VARIOUS));
@@ -68,17 +68,17 @@ public final class StrixhavenMysticalArchive extends ExpansionSet {
         cards.add(new SetCardInfo("Eliminate", 93, Rarity.UNCOMMON, mage.cards.e.Eliminate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ephemerate", 5, Rarity.RARE, mage.cards.e.Ephemerate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ephemerate", 68, Rarity.RARE, mage.cards.e.Ephemerate.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Faithless Looting", 101, Rarity.COMMON, mage.cards.f.FaithlessLooting.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Faithless Looting", 101, Rarity.RARE, mage.cards.f.FaithlessLooting.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Faithless Looting", 38, Rarity.RARE, mage.cards.f.FaithlessLooting.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gift of Estates", 6, Rarity.RARE, mage.cards.g.GiftOfEstates.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gift of Estates", 69, Rarity.RARE, mage.cards.g.GiftOfEstates.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gods Willing", 7, Rarity.RARE, mage.cards.g.GodsWilling.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gods Willing", 70, Rarity.RARE, mage.cards.g.GodsWilling.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Grapeshot", 102, Rarity.COMMON, mage.cards.g.Grapeshot.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Grapeshot", 102, Rarity.RARE, mage.cards.g.Grapeshot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grapeshot", 39, Rarity.RARE, mage.cards.g.Grapeshot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Growth Spiral", 124, Rarity.RARE, mage.cards.g.GrowthSpiral.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Growth Spiral", 61, Rarity.RARE, mage.cards.g.GrowthSpiral.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Harmonize", 115, Rarity.COMMON, mage.cards.h.Harmonize.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Harmonize", 115, Rarity.RARE, mage.cards.h.Harmonize.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Harmonize", 52, Rarity.RARE, mage.cards.h.Harmonize.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Increasing Vengeance", 103, Rarity.MYTHIC, mage.cards.i.IncreasingVengeance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Increasing Vengeance", 40, Rarity.MYTHIC, mage.cards.i.IncreasingVengeance.class, NON_FULL_USE_VARIOUS));
@@ -89,7 +89,7 @@ public final class StrixhavenMysticalArchive extends ExpansionSet {
         cards.add(new SetCardInfo("Krosan Grip", 116, Rarity.RARE, mage.cards.k.KrosanGrip.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Krosan Grip", 53, Rarity.RARE, mage.cards.k.KrosanGrip.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Bolt", 105, Rarity.RARE, mage.cards.l.LightningBolt.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Lightning Bolt", 42, Rarity.COMMON, mage.cards.l.LightningBolt.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lightning Bolt", 42, Rarity.RARE, mage.cards.l.LightningBolt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Helix", 125, Rarity.RARE, mage.cards.l.LightningHelix.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Helix", 62, Rarity.RARE, mage.cards.l.LightningHelix.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mana Tithe", 71, Rarity.RARE, mage.cards.m.ManaTithe.class, NON_FULL_USE_VARIOUS));
@@ -123,7 +123,7 @@ public final class StrixhavenMysticalArchive extends ExpansionSet {
         cards.add(new SetCardInfo("Stone Rain", 108, Rarity.RARE, mage.cards.s.StoneRain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stone Rain", 45, Rarity.RARE, mage.cards.s.StoneRain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Strategic Planning", 20, Rarity.UNCOMMON, mage.cards.s.StrategicPlanning.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Strategic Planning", 83, Rarity.COMMON, mage.cards.s.StrategicPlanning.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strategic Planning", 83, Rarity.UNCOMMON, mage.cards.s.StrategicPlanning.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 10, Rarity.RARE, mage.cards.s.SwordsToPlowshares.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 73, Rarity.RARE, mage.cards.s.SwordsToPlowshares.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tainted Pact", 33, Rarity.MYTHIC, mage.cards.t.TaintedPact.class, NON_FULL_USE_VARIOUS));
@@ -142,7 +142,7 @@ public final class StrixhavenMysticalArchive extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Rage", 47, Rarity.RARE, mage.cards.u.UrzasRage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Village Rites", 35, Rarity.UNCOMMON, mage.cards.v.VillageRites.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Village Rites", 98, Rarity.UNCOMMON, mage.cards.v.VillageRites.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Weather the Storm", 121, Rarity.COMMON, mage.cards.w.WeatherTheStorm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Weather the Storm", 121, Rarity.RARE, mage.cards.w.WeatherTheStorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Weather the Storm", 58, Rarity.RARE, mage.cards.w.WeatherTheStorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Whirlwind Denial", 23, Rarity.UNCOMMON, mage.cards.w.WhirlwindDenial.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Whirlwind Denial", 86, Rarity.UNCOMMON, mage.cards.w.WhirlwindDenial.class, NON_FULL_USE_VARIOUS));
