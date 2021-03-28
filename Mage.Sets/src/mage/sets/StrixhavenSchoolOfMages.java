@@ -1,8 +1,12 @@
 package mage.sets;
 
+import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.util.RandomUtil;
+
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -21,7 +25,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         this.hasBoosters = true;
         this.hasBasicLands = true;
         this.numBoosterLands = 1;
-        this.numBoosterCommon = 10;
+        this.numBoosterCommon = 9;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 7.4;
@@ -74,5 +78,22 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Waterfall Aerialist", 61, Rarity.COMMON, mage.cards.w.WaterfallAerialist.class));
         cards.add(new SetCardInfo("Witherbloom Apprentice", 247, Rarity.UNCOMMON, mage.cards.w.WitherbloomApprentice.class));
         cards.add(new SetCardInfo("Witherbloom Command", 248, Rarity.RARE, mage.cards.w.WitherbloomCommand.class));
+    }
+
+    @Override
+    public List<Card> tryBooster() {
+        // Boosters have one card from STA, odds are 2/3 for uncommon, 4/15 for rare, 1/15 for mythic
+        List<Card> booster = super.tryBooster();
+        final Rarity rarity;
+        int i = RandomUtil.nextInt(15);
+        if (i == 14) {
+            rarity = Rarity.MYTHIC;
+        } else if (i >= 10) {
+            rarity = Rarity.RARE;
+        } else {
+            rarity = Rarity.UNCOMMON;
+        }
+        addToBooster(booster, StrixhavenMysticalArchive.getInstance().getCardsByRarity(rarity));
+        return booster;
     }
 }

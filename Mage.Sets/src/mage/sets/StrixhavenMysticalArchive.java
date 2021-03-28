@@ -19,6 +19,7 @@ public final class StrixhavenMysticalArchive extends ExpansionSet {
         super("Strixhaven Mystical Archive", "STA", ExpansionSet.buildDate(2021, 4, 23), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
+        this.maxCardNumberInBooster = 63;
 
         cards.add(new SetCardInfo("Abundant Harvest", 111, Rarity.RARE, mage.cards.a.AbundantHarvest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Abundant Harvest", 48, Rarity.RARE, mage.cards.a.AbundantHarvest.class, NON_FULL_USE_VARIOUS));
