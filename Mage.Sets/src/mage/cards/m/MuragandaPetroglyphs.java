@@ -34,7 +34,6 @@ public final class MuragandaPetroglyphs extends CardImpl {
 
     public MuragandaPetroglyphs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
-        this.expansionSetCode = "FUT";
 
         // Creatures with no abilities get +2/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(
