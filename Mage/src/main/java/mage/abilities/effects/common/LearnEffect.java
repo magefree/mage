@@ -22,7 +22,7 @@ public class LearnEffect extends OneShotEffect {
 
     public LearnEffect() {
         super(Outcome.Neutral);
-        staticText = "learn. <i>(You may reveal a Lesson card you own from outside the game " +
+        staticText = "Learn. <i>(You may reveal a Lesson card you own from outside the game " +
                 "and put it into your hand, or discard a card to draw a card.)</i>";
     }
 
