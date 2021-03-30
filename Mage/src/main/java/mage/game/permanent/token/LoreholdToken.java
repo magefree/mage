@@ -7,9 +7,9 @@ import mage.constants.SubType;
 /**
  * @author TheElk801
  */
-public final class SpiritRedWhiteToken extends TokenImpl {
+public final class LoreholdToken extends TokenImpl {
 
-    public SpiritRedWhiteToken() {
+    public LoreholdToken() {
         super("Spirit", "3/2 red and white Spirit creature token");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
@@ -19,12 +19,12 @@ public final class SpiritRedWhiteToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    private SpiritRedWhiteToken(final SpiritRedWhiteToken token) {
+    private LoreholdToken(final LoreholdToken token) {
         super(token);
     }
 
     @Override
-    public SpiritRedWhiteToken copy() {
-        return new SpiritRedWhiteToken(this);
+    public LoreholdToken copy() {
+        return new LoreholdToken(this);
     }
 }
