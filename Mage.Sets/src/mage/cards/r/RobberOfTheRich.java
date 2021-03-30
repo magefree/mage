@@ -1,7 +1,6 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -15,6 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.AttackedThisTurnWatcher;
@@ -43,17 +43,14 @@ public final class RobberOfTheRich extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Whenever Robber of the Rich attacks, if defending player has more cards in hand than you, exile the top card of their library. During any turn you attacked with a Rogue, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(
                         new RobberOfTheRichEffect(), false, "", SetTargetPointer.PLAYER
                 ), RobberOfTheRichAttacksCondition.instance, "Whenever {this} attacks, " +
                 "if defending player has more cards in hand than you, exile the top card of their library. " +
                 "During any turn you attacked with a Rogue, you may cast that card and " +
-                "you may spend mana as though it were mana of any color to cast that spell.");
-        ability.addWatcher(new AttackedThisTurnWatcher());
-        ability.addHint(new ConditionHint(RobberOfTheRichAnyTurnAttackedCondition.instance));
-
-        this.addAbility(ability);
+                "you may spend mana as though it were mana of any color to cast that spell."
+        ).addHint(new ConditionHint(RobberOfTheRichAnyTurnAttackedCondition.instance)), new AttackedThisTurnWatcher());
     }
 
     private RobberOfTheRich(final RobberOfTheRich card) {
@@ -123,14 +120,13 @@ class RobberOfTheRichEffect extends OneShotEffect {
         if (controller == null || damagedPlayer == null) {
             return false;
         }
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        UUID exileId = CardUtil.getCardExileZoneId(game, source);
+        Permanent sourceObject = source.getSourcePermanentIfItStillExists(game);
         Card card = damagedPlayer.getLibrary().getFromTop(game);
         if (card == null || sourceObject == null) {
-            return true;
+            return false;
         }
         // move card to exile
-        controller.moveCardToExileWithInfo(card, exileId, sourceObject.getIdName(), source, game, Zone.LIBRARY, true);
+        controller.moveCardsToExile(card, source, game, true, CardUtil.getExileZoneId(game, source), sourceObject.getIdName());
         // Add effects only if the card has a spellAbility (e.g. not for lands).
         if (card.getSpellAbility() != null) {
             // allow to cast the card
