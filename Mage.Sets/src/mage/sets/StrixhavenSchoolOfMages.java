@@ -76,6 +76,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Quandrix Apprentice", 216, Rarity.UNCOMMON, mage.cards.q.QuandrixApprentice.class));
         cards.add(new SetCardInfo("Quandrix Command", 217, Rarity.RARE, mage.cards.q.QuandrixCommand.class));
         cards.add(new SetCardInfo("Quintorius, Field Historian", 220, Rarity.UNCOMMON, mage.cards.q.QuintoriusFieldHistorian.class));
+        cards.add(new SetCardInfo("Reconstruct History", 222, Rarity.UNCOMMON, mage.cards.r.ReconstructHistory.class));
         cards.add(new SetCardInfo("Relic Sloth", 223, Rarity.COMMON, mage.cards.r.RelicSloth.class));
         cards.add(new SetCardInfo("Returned Pastcaller", 224, Rarity.UNCOMMON, mage.cards.r.ReturnedPastcaller.class));
         cards.add(new SetCardInfo("Rip Apart", 381, Rarity.UNCOMMON, mage.cards.r.RipApart.class));
