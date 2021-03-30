@@ -2842,6 +2842,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public Cards discard(int minAmount, int maxAmount, boolean payForCost, Ability source, Game game) {
+        return computerPlayer.discard(minAmount, maxAmount, payForCost, source, game);
+    }
+
+    @Override
     public Cards discard(Cards cards, boolean payForCost, Ability source, Game game) {
         return computerPlayer.discard(cards, payForCost, source, game);
     }

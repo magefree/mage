@@ -497,6 +497,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     Cards discard(int amount, boolean random, boolean payForCost, Ability source, Game game);
 
+    Cards discard(int minAmount, int maxAmount, boolean payForCost, Ability source, Game game);
+
     Cards discard(Cards cards, boolean payForCost, Ability source, Game game);
 
     void discardToMax(Game game);

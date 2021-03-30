@@ -665,6 +665,11 @@ public class PlayerStub implements Player {
     }
 
     @Override
+    public Cards discard(int minAmount, int maxAmount, boolean payForCost, Ability source, Game game) {
+        return null;
+    }
+
+    @Override
     public void discardToMax(Game game) {
 
     }

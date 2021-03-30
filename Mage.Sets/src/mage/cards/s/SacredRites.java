@@ -5,15 +5,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetDiscard;
 
 import java.util.UUID;
 
@@ -61,9 +57,7 @@ class SacredRitesEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Target target = new TargetDiscard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD, controller.getId());
-        target.choose(outcome, controller.getId(), source.getSourceId(), game);
-        int numDiscarded = controller.discard(new CardsImpl(target.getTargets()), false, source, game).size();
+        int numDiscarded = controller.discard(0, Integer.MAX_VALUE, false, source, game).size();
         if (numDiscarded > 0) {
             game.addEffect(new BoostControlledEffect(0, numDiscarded, Duration.EndOfTurn), source);
         }
