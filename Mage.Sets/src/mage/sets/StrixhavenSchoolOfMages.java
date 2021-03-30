@@ -32,6 +32,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         this.ratioBoosterMythic = 7.4;
         this.maxCardNumberInBooster = 275;
 
+        cards.add(new SetCardInfo("Ageless Guardian", 8, Rarity.COMMON, mage.cards.a.AgelessGuardian.class));
         cards.add(new SetCardInfo("Archmage Emeritus", 37, Rarity.RARE, mage.cards.a.ArchmageEmeritus.class));
         cards.add(new SetCardInfo("Dragonsguard Elite", 127, Rarity.RARE, mage.cards.d.DragonsguardElite.class));
         cards.add(new SetCardInfo("Eager First-Year", 16, Rarity.COMMON, mage.cards.e.EagerFirstYear.class));
