@@ -107,6 +107,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Spectacle Mage", 235, Rarity.COMMON, mage.cards.s.SpectacleMage.class));
         cards.add(new SetCardInfo("Spirit Summoning", 236, Rarity.COMMON, mage.cards.s.SpiritSummoning.class));
         cards.add(new SetCardInfo("Star Pupil", 30, Rarity.COMMON, mage.cards.s.StarPupil.class));
+        cards.add(new SetCardInfo("Stonebinder's Familiar", 31, Rarity.UNCOMMON, mage.cards.s.StonebindersFamiliar.class));
         cards.add(new SetCardInfo("Stonebound Mentor", 239, Rarity.COMMON, mage.cards.s.StoneboundMentor.class));
         cards.add(new SetCardInfo("Storm-Kiln Artist", 115, Rarity.UNCOMMON, mage.cards.s.StormKilnArtist.class));
         cards.add(new SetCardInfo("Study Break", 34, Rarity.COMMON, mage.cards.s.StudyBreak.class));
