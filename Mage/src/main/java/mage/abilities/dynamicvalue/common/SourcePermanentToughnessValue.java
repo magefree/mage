@@ -3,6 +3,7 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -29,11 +30,14 @@ public class SourcePermanentToughnessValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent sourcePermanent = sourceAbility.getSourcePermanentOrLKI(game);
+        Permanent sourcePermanent = game.getPermanent(sourceAbility.getSourceId());
         if (sourcePermanent == null) {
-            return 0;
+            sourcePermanent = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.BATTLEFIELD);
         }
-        return sourcePermanent.getToughness().getValue();
+        if (sourcePermanent != null) {
+            return sourcePermanent.getToughness().getValue();
+        }
+        return 0;
     }
 
     @Override
