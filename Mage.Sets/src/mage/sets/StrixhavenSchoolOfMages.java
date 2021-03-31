@@ -66,6 +66,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Introduction to Prophecy", 4, Rarity.COMMON, mage.cards.i.IntroductionToProphecy.class));
         cards.add(new SetCardInfo("Island", 368, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kasmina, Enigma Sage", 196, Rarity.MYTHIC, mage.cards.k.KasminaEnigmaSage.class));
+        cards.add(new SetCardInfo("Kelpie Guide", 45, Rarity.UNCOMMON, mage.cards.k.KelpieGuide.class));
         cards.add(new SetCardInfo("Kianne, Dean of Substance", 152, Rarity.RARE, mage.cards.k.KianneDeanOfSubstance.class));
         cards.add(new SetCardInfo("Lorehold Apprentice", 198, Rarity.UNCOMMON, mage.cards.l.LoreholdApprentice.class));
         cards.add(new SetCardInfo("Lorehold Campus", 268, Rarity.COMMON, mage.cards.l.LoreholdCampus.class));
