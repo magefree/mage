@@ -166,7 +166,9 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
     @Override
     public List<CardInfo> getCardsByRarity(Rarity rarity) {
         List<CardInfo> cards = super.getCardsByRarity(rarity);
-        cards.removeIf(cardInfo -> cardInfo.getCard().hasSubtype(SubType.LESSON, null));
+        if (rarity != Rarity.UNCOMMON) {
+            cards.removeIf(cardInfo -> cardInfo.getCard().hasSubtype(SubType.LESSON, null));
+        }
         return cards;
     }
 }
