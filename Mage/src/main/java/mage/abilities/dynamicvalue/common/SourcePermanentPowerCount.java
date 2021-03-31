@@ -3,7 +3,6 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -12,7 +11,7 @@ import mage.game.permanent.Permanent;
  */
 public class SourcePermanentPowerCount implements DynamicValue {
 
-    boolean allowNegativeValues;
+    private final boolean allowNegativeValues;
 
     public SourcePermanentPowerCount() {
         this(true);
@@ -30,17 +29,12 @@ public class SourcePermanentPowerCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent sourcePermanent = game.getPermanent(sourceAbility.getSourceId());
-        if (sourcePermanent == null
-                || (sourceAbility.getSourceObjectZoneChangeCounter() > 0
-                && sourcePermanent.getZoneChangeCounter(game) > sourceAbility.getSourceObjectZoneChangeCounter())) {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.BATTLEFIELD);
+        Permanent sourcePermanent = sourceAbility.getSourcePermanentOrLKI(game);
+        if (sourcePermanent == null) {
+            return 0;
         }
-        if (sourcePermanent != null
-                && (allowNegativeValues || sourcePermanent.getPower().getValue() >= 0)) {
-            return sourcePermanent.getPower().getValue();
-        }
-        return 0;
+        int power = sourcePermanent.getPower().getValue();
+        return allowNegativeValues ? power : Integer.max(power, 0);
     }
 
     @Override
