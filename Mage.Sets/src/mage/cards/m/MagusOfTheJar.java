@@ -116,6 +116,7 @@ class MagusoftheJarDelayedEffect extends OneShotEffect {
 
     private MagusoftheJarDelayedEffect(final MagusoftheJarDelayedEffect effect) {
         super(effect);
+        this.cards.addAll(effect.cards);
     }
 
     @Override

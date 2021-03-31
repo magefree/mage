@@ -720,20 +720,20 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public Card discardOne(boolean random, boolean payForCost, Ability source, Game game) {
-        Cards cards = discard(1, random, payForCost, source, game);
-        if (cards.isEmpty()) {
-            return null;
-        }
-        return cards.getRandom(game);
+        return discard(1, random, payForCost, source, game).getRandom(game);
     }
 
     @Override
     public Cards discard(int amount, boolean random, boolean payForCost, Ability source, Game game) {
-        Cards discardedCards = doDiscardWithoutFinalEvent(amount, random, payForCost, source, game);
-        if (!discardedCards.isEmpty()) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARDS, null, source, playerId, discardedCards.size()));
+        if (random) {
+            return discard(getRandomToDiscard(amount, source, game), payForCost, source, game);
         }
-        return discardedCards;
+        return discard(amount, amount, payForCost, source, game);
+    }
+
+    @Override
+    public Cards discard(int minAmount, int maxAmount, boolean payForCost, Ability source, Game game) {
+        return discard(getToDiscard(minAmount, maxAmount, source, game), payForCost, source, game);
     }
 
     @Override
@@ -753,48 +753,41 @@ public abstract class PlayerImpl implements Player, Serializable {
         return discardedCards;
     }
 
-    private Cards doDiscardWithoutFinalEvent(int amount, boolean random, boolean payForCost, Ability source, Game game) {
-        Cards discardedCards = new CardsImpl();
-        if (amount <= 0) {
-            return discardedCards;
-        }
-
-        // all without dialogs
-        if (this.getHand().size() == 1 || this.getHand().size() == amount) {
-            List<UUID> cardsToDiscard = new ArrayList<>(this.getHand());
-            for (UUID id : cardsToDiscard) {
-                if (doDiscard(this.getHand().get(id, game), source, game, payForCost, false)) {
-                    discardedCards.add(id);
-                }
-            }
-            return discardedCards;
-        }
-
-        if (random) {
-            for (int i = 0; i < amount; i++) {
-                Card card = this.getHand().getRandom(game);
-                if (doDiscard(card, source, game, payForCost, false)) {
-                    discardedCards.add(card);
-                }
-            }
-        } else {
-            int possibleAmount = Math.min(getHand().size(), amount);
-            TargetDiscard target = new TargetDiscard(possibleAmount, possibleAmount,
-                    new FilterCard(CardUtil.numberToText(possibleAmount, "a")
-                            + " card" + (possibleAmount > 1 ? "s" : "")), playerId);
-            choose(Outcome.Discard, target, source == null ? null : source.getSourceId(), game);
-            for (UUID cardId : target.getTargets()) {
-                if (doDiscard(this.getHand().get(cardId, game), source, game, payForCost, false)) {
-                    discardedCards.add(cardId);
-                }
-            }
-        }
-        return discardedCards;
-    }
-
     @Override
     public boolean discard(Card card, boolean payForCost, Ability source, Game game) {
         return doDiscard(card, source, game, payForCost, true);
+    }
+
+    private Cards getToDiscard(int minAmount, int maxAmount, Ability source, Game game) {
+        Cards toDiscard = new CardsImpl();
+        if (minAmount > maxAmount) {
+            return getToDiscard(maxAmount, minAmount, source, game);
+        }
+        if (maxAmount < 1) {
+            return toDiscard;
+        }
+        if (getHand().size() <= minAmount) {
+            toDiscard.addAll(getHand());
+            return toDiscard;
+        }
+        TargetDiscard target = new TargetDiscard(minAmount, maxAmount, StaticFilters.FILTER_CARD, getId());
+        choose(Outcome.Discard, target, source != null ? source.getSourceId() : null, game);
+        toDiscard.addAll(target.getTargets());
+        return toDiscard;
+    }
+
+    private Cards getRandomToDiscard(int amount, Ability source, Game game) {
+        Cards toDiscard = new CardsImpl();
+        Cards hand = getHand().copy();
+        for (int i = 0; i < amount; i++) {
+            if(hand.isEmpty()){
+                break;
+            }
+            Card card = hand.getRandom(game);
+            hand.remove(card);
+            toDiscard.add(card);
+        }
+        return toDiscard;
     }
 
     private boolean doDiscard(Card card, Ability source, Game game, boolean payForCost, boolean fireFinalEvent) {

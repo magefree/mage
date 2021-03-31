@@ -18,7 +18,7 @@ import mage.constants.Outcome;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.SpiritRedWhiteToken;
+import mage.game.permanent.token.LoreholdToken;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetAnyTarget;
@@ -38,7 +38,7 @@ public final class LoreholdCommand extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(2);
 
         // • Create a 3/2 red and white Spirit creature token.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritRedWhiteToken()));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new LoreholdToken()));
 
         // • Creatures you control get +1/+0 and gain indestructible and haste until end of turn.
         Mode mode = new Mode(new BoostControlledEffect(

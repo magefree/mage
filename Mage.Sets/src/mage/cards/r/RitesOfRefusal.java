@@ -1,18 +1,16 @@
 package mage.cards.r;
 
 import mage.abilities.Ability;
-import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
-import mage.util.ManaUtil;
 
 import java.util.UUID;
 
@@ -28,7 +26,6 @@ public final class RitesOfRefusal extends CardImpl {
         // controller pays {3} for each card discarded this way.
         this.getSpellAbility().addEffect(new RitesOfRefusalEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
-
     }
 
     private RitesOfRefusal(final RitesOfRefusal card) {
@@ -49,7 +46,7 @@ class RitesOfRefusalEffect extends OneShotEffect {
                 + "spell unless its controller pays {3} for each card discarded this way";
     }
 
-    RitesOfRefusalEffect(final RitesOfRefusalEffect effect) {
+    private RitesOfRefusalEffect(final RitesOfRefusalEffect effect) {
         super(effect);
     }
 
@@ -61,31 +58,10 @@ class RitesOfRefusalEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Spell targetSpell = game.getStack().getSpell(source.getFirstTarget());
-        if (targetSpell != null) {
-            Player controllerOfTargetedSpell = game.getPlayer(targetSpell.getControllerId());
-            if (controller != null && controllerOfTargetedSpell != null) {
-                int numToDiscard = controller.getAmount(0,
-                        controller.getHand().size(), "How many cards do you want to discard?", game);
-                Cards discardedCards = controller.discard(numToDiscard, false, false, source, game);
-                int actualNumberDiscarded = discardedCards.size();
-                if (actualNumberDiscarded > 0) {
-                    Cost cost = ManaUtil.createManaCost(actualNumberDiscarded * 3, false);
-                    if (controllerOfTargetedSpell.chooseUse(Outcome.Benefit,
-                            "Do you want to pay "
-                            + cost.getText()
-                            + " to prevent "
-                            + targetSpell.getName()
-                            + " from gettting countered?", source, game)
-                            && cost.pay(source, game, source,
-                                    controllerOfTargetedSpell.getId(), false)) {
-                        return true;
-                    }
-                    game.getStack().counter(targetSpell.getId(), source, game);
-                    return true;
-                }
-            }
+        if (controller == null) {
+            return false;
         }
-        return false;
+        int count = controller.discard(0, Integer.MAX_VALUE, false, source, game).size();
+        return new CounterUnlessPaysEffect(new GenericManaCost(3 * count)).apply(game, source);
     }
 }

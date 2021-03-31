@@ -7,19 +7,14 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetDiscard;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -74,12 +69,7 @@ class LastRitesEffect extends OneShotEffect {
         if (controller == null || targetPlayer == null) {
             return false;
         }
-        Cards cardsInHand = controller.getHand().copy();
-        TargetCard target = new TargetDiscard(
-                0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CARDS, controller.getId()
-        );
-        controller.chooseTarget(Outcome.AIDontUseIt, cardsInHand, target, source, game);
-        int discardCount = controller.discard(new CardsImpl(target.getTargets()), false, source, game).size();
+        int discardCount = controller.discard(0, Integer.MAX_VALUE, false, source, game).size();
         FilterCard filter = new FilterCard((discardCount > 1 ? "" : "a")
                 + " nonland card" + (discardCount > 1 ? "s" : ""));
         filter.add(Predicates.not(CardType.LAND.getPredicate()));

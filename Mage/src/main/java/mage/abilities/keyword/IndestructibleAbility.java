@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
 import mage.abilities.icon.abilities.IndestructibleAbilityIcon;
 import mage.constants.Zone;
@@ -21,7 +22,7 @@ import java.io.ObjectStreamException;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class IndestructibleAbility extends StaticAbility {
+public class IndestructibleAbility extends StaticAbility implements MageSingleton {
 
     private static final IndestructibleAbility instance;
 

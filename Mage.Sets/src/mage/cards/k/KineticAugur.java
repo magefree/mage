@@ -1,24 +1,21 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.effects.common.discard.DiscardAndDrawThatManyEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorceryCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetDiscard;
 
 import java.util.UUID;
 
@@ -45,7 +42,7 @@ public final class KineticAugur extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerSourceEffect(xValue, Duration.EndOfGame)));
 
         // When Kinetic Augur enters the battlefield, discard up to two cards, then draw that many cards.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new KineticAugurEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardAndDrawThatManyEffect(2)));
     }
 
     private KineticAugur(final KineticAugur card) {
@@ -55,37 +52,5 @@ public final class KineticAugur extends CardImpl {
     @Override
     public KineticAugur copy() {
         return new KineticAugur(this);
-    }
-}
-
-class KineticAugurEffect extends OneShotEffect {
-
-    KineticAugurEffect() {
-        super(Outcome.Benefit);
-        staticText = "discard up to two cards, then draw that many cards";
-    }
-
-    private KineticAugurEffect(final KineticAugurEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KineticAugurEffect copy() {
-        return new KineticAugurEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || player.getHand().isEmpty()) {
-            return false;
-        }
-        TargetDiscard target = new TargetDiscard(0, 2, StaticFilters.FILTER_CARD, player.getId());
-        player.choose(Outcome.AIDontUseIt, player.getHand(), target, game);
-        int discarded = player.discard(new CardsImpl(target.getTargets()), false, source, game).size();
-        if (discarded > 0) {
-            player.drawCards(discarded, source, game);
-        }
-        return true;
     }
 }
