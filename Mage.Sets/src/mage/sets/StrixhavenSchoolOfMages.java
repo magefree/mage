@@ -134,6 +134,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Sudden Breakthrough", 116, Rarity.COMMON, mage.cards.s.SuddenBreakthrough.class));
         cards.add(new SetCardInfo("Swamp", 370, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tanazir Quandrix", 240, Rarity.MYTHIC, mage.cards.t.TanazirQuandrix.class));
+        cards.add(new SetCardInfo("Teach by Example", 241, Rarity.COMMON, mage.cards.t.TeachByExample.class));
         cards.add(new SetCardInfo("Thrilling Discovery", 243, Rarity.COMMON, mage.cards.t.ThrillingDiscovery.class));
         cards.add(new SetCardInfo("Thunderous Orator", 35, Rarity.UNCOMMON, mage.cards.t.ThunderousOrator.class));
         cards.add(new SetCardInfo("Torrent Sculptor", 159, Rarity.RARE, mage.cards.t.TorrentSculptor.class));

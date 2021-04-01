@@ -1,4 +1,4 @@
-package mage.cards.d;
+package mage.cards.t;
 
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
@@ -17,42 +17,42 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class Doublecast extends CardImpl {
+public final class TeachByExample extends CardImpl {
 
-    public Doublecast(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}{R}");
+    public TeachByExample(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U/R}{U/R}");
 
         // When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(
-                new CreateDelayedTriggeredAbilityEffect(new DoublecastAbility())
+                new CreateDelayedTriggeredAbilityEffect(new TeachByExampleAbility())
                         .setText("When you cast your next instant or sorcery spell this turn, "
                                 + "copy that spell. You may choose new targets for the copy")
         );
     }
 
-    private Doublecast(final Doublecast card) {
+    private TeachByExample(final TeachByExample card) {
         super(card);
     }
 
     @Override
-    public Doublecast copy() {
-        return new Doublecast(this);
+    public TeachByExample copy() {
+        return new TeachByExample(this);
     }
 }
 
-class DoublecastAbility extends DelayedTriggeredAbility {
+class TeachByExampleAbility extends DelayedTriggeredAbility {
 
-    DoublecastAbility() {
+    TeachByExampleAbility() {
         super(new CopyTargetSpellEffect(true), Duration.EndOfTurn);
     }
 
-    private DoublecastAbility(final DoublecastAbility ability) {
+    private TeachByExampleAbility(final TeachByExampleAbility ability) {
         super(ability);
     }
 
     @Override
-    public DoublecastAbility copy() {
-        return new DoublecastAbility(this);
+    public TeachByExampleAbility copy() {
+        return new TeachByExampleAbility(this);
     }
 
     @Override
