@@ -114,6 +114,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Rise of Extus", 226, Rarity.COMMON, mage.cards.r.RiseOfExtus.class));
         cards.add(new SetCardInfo("Rootha, Mercurial Artist", 227, Rarity.UNCOMMON, mage.cards.r.RoothaMercurialArtist.class));
         cards.add(new SetCardInfo("Secret Rendezvous", 26, Rarity.UNCOMMON, mage.cards.s.SecretRendezvous.class));
+        cards.add(new SetCardInfo("Serpentine Curve", 52, Rarity.COMMON, mage.cards.s.SerpentineCurve.class));
         cards.add(new SetCardInfo("Shineshadow Snarl", 272, Rarity.RARE, mage.cards.s.ShineshadowSnarl.class));
         cards.add(new SetCardInfo("Silverquill Apprentice", 231, Rarity.UNCOMMON, mage.cards.s.SilverquillApprentice.class));
         cards.add(new SetCardInfo("Silverquill Command", 232, Rarity.RARE, mage.cards.s.SilverquillCommand.class));

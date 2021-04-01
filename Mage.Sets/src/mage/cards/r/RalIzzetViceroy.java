@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -9,21 +8,28 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.command.emblems.RalIzzetViceroyEmblem;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class RalIzzetViceroy extends CardImpl {
+
+    private static final Hint hint = new ValueHint(
+            "Instant and sorcery cards in your exile and graveyard", InstantSorceryExileGraveyardCount.instance
+    );
 
     public RalIzzetViceroy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{U}{R}");
@@ -47,7 +53,7 @@ public final class RalIzzetViceroy extends CardImpl {
                 + "the total number of instant and sorcery cards "
                 + "you own in exile and in your graveyard"), -3);
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(hint));
 
         // -8: You get an emblem with "Whenever you cast an instant or sorcery spell, this emblem deals 4 damage to any target and you draw two cards."
         this.addAbility(new LoyaltyAbility(
