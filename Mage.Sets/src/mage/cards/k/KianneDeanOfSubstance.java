@@ -5,7 +5,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.*;
 import mage.constants.*;
@@ -13,15 +16,15 @@ import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterOwnedCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.token.FractalToken;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.QuandrixToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -45,9 +48,10 @@ public final class KianneDeanOfSubstance extends ModalDoubleFacesCard {
         ));
 
         // {4}{G}: Create a 0/0 green and blue Fractal creature token. Put a +1/+1 counter on it for each different mana value among nonland cards you own in exile with study counters on them.
-        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(
-                new KianneDeanOfSubstanceTokenEffect(), new ManaCostsImpl("{4}{G}")
-        ));
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(QuandrixToken.getEffect(
+                KianneDeanOfSubstanceValue.instance, "Put a +1/+1 counter on it for each different mana value " +
+                        "among nonland cards you own in exile with study counters on them"
+        ), new ManaCostsImpl("{4}{G}")).addHint(KianneDeanOfSubstanceHint.instance));
 
         // 2.
         // Imbraham, Dean of Theory
@@ -114,48 +118,62 @@ class KianneDeanOfSubstanceExileEffect extends OneShotEffect {
     }
 }
 
-class KianneDeanOfSubstanceTokenEffect extends OneShotEffect {
-
-    KianneDeanOfSubstanceTokenEffect() {
-        super(Outcome.Benefit);
-        staticText = "create a 0/0 green and blue Fractal creature token. Put a +1/+1 counter on it " +
-                "for each different mana value among nonland cards you own in exile with study counters on them";
-    }
-
-    private KianneDeanOfSubstanceTokenEffect(final KianneDeanOfSubstanceTokenEffect effect) {
-        super(effect);
-    }
+enum KianneDeanOfSubstanceValue implements DynamicValue {
+    instance;
 
     @Override
-    public KianneDeanOfSubstanceTokenEffect copy() {
-        return new KianneDeanOfSubstanceTokenEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Token token = new FractalToken();
-        token.putOntoBattlefield(1, game, source, source.getControllerId());
-        int exileCount = game
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        return game
                 .getExile()
                 .getAllCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(card -> card.isOwnedBy(source.getControllerId()))
+                .filter(card -> card.isOwnedBy(sourceAbility.getControllerId()))
+                .filter(card -> card.getCounters(game).containsKey(CounterType.STUDY))
                 .map(MageObject::getConvertedManaCost)
                 .distinct()
                 .mapToInt(x -> 1)
                 .sum();
-        if (exileCount < 1) {
-            return true;
+    }
+
+    @Override
+    public KianneDeanOfSubstanceValue copy() {
+        return instance;
+    }
+
+    @Override
+    public String getMessage() {
+        return "";
+    }
+}
+
+enum KianneDeanOfSubstanceHint implements Hint {
+    instance;
+
+    @Override
+    public String getText(Game game, Ability ability) {
+        List<Integer> values = game.getExile()
+                .getAllCards(game)
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(card -> card.isOwnedBy(ability.getControllerId()))
+                .filter(card -> card.getCounters(game).containsKey(CounterType.STUDY))
+                .map(MageObject::getConvertedManaCost)
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
+        String message = "" + values.size();
+        if (values.size() > 0) {
+            message += " (";
+            message += values.stream().map(i -> "" + i).reduce((a, b) -> a + ", " + b).orElse("");
+            message += ')';
         }
-        for (UUID tokenId : token.getLastAddedTokenIds()) {
-            Permanent permanent = game.getPermanent(tokenId);
-            if (permanent == null) {
-                continue;
-            }
-            permanent.addCounters(CounterType.P1P1.createInstance(exileCount), source.getControllerId(), source, game);
-        }
-        return true;
+        return "Mana values of cards exiled with study counters: " + message;
+    }
+
+    @Override
+    public KianneDeanOfSubstanceHint copy() {
+        return instance;
     }
 }
 
