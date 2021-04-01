@@ -1,37 +1,80 @@
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.MageInt;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.game.Game;
+import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
  * @author htrajan
  */
-public final class ShaileDeanOfRadiance extends CardImpl {
+public final class ShaileDeanOfRadiance extends ModalDoubleFacesCard {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
+    private static final FilterPermanent embroseFilter = new FilterControlledCreaturePermanent("a creature you control with a +1/+1 counter on it");
+
+    static {
+        filter.add(AnotherPredicate.instance);
+        embroseFilter.add(CounterType.P1P1.getPredicate());
+    }
 
     public ShaileDeanOfRadiance(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
-        
-        this.addSuperType(SuperType.LEGENDARY);
-        this.subtype.add(SubType.BIRD);
-        this.subtype.add(SubType.CLERIC);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        super(ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.BIRD, SubType.CLERIC}, "{1}{W}",
+                "Embrose, Dean of Shadow", new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.WARLOCK}, "{2}{B}{B}");
+
+        // 1.
+        // Shaile, Dean of Radiance
+        // Legendary Creature - Bird Cleric
+        this.getLeftHalfCard().addSuperType(SuperType.LEGENDARY);
+        this.getLeftHalfCard().setPT(1, 1);
 
         // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        this.getLeftHalfCard().addAbility(FlyingAbility.getInstance());
 
         // Vigilance
-        this.addAbility(VigilanceAbility.getInstance());
+        this.getLeftHalfCard().addAbility(VigilanceAbility.getInstance());
 
         // {T}: Put a +1/+1 counter on each creature that entered the battlefield under your control this turn.
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(new ShaileDeanOfRadianceEffect(), new TapSourceCost()));
+
+        // 2.
+        // Embrose, Dean of Shadow
+        // Legendary Creature - Human Warlock
+        this.getRightHalfCard().addSuperType(SuperType.LEGENDARY);
+        this.getRightHalfCard().setPT(4, 4);
+
+        // {T}: Put a +1/+1 counter on another target creature, then Embrose, Dean of Shadow deals 2 damage to that creature.
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new TapSourceCost());
+        ability.addEffect(new DamageTargetEffect(2).concatBy(", then").setText("{this} deals 2 damage to that creature"));
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.getRightHalfCard().addAbility(ability);
+
+        // Whenever a creature you control with a +1/+1 counter on it dies, draw a card.
+        this.getRightHalfCard().addAbility(new DiesCreatureTriggeredAbility(new DrawCardSourceControllerEffect(1), false, embroseFilter));
     }
 
     private ShaileDeanOfRadiance(final ShaileDeanOfRadiance card) {
@@ -41,5 +84,32 @@ public final class ShaileDeanOfRadiance extends CardImpl {
     @Override
     public ShaileDeanOfRadiance copy() {
         return new ShaileDeanOfRadiance(this);
+    }
+}
+
+class ShaileDeanOfRadianceEffect extends OneShotEffect {
+
+    public ShaileDeanOfRadianceEffect() {
+        super(Outcome.Benefit);
+        staticText = "put a +1/+1 counter on each creature that entered the battlefield under your control this turn";
+    }
+
+    public ShaileDeanOfRadianceEffect(ShaileDeanOfRadianceEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ShaileDeanOfRadianceEffect copy() {
+        return new ShaileDeanOfRadianceEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        game.getBattlefield().getAllPermanents().forEach(permanent -> {
+            if (permanent.getTurnsOnBattlefield() == 0 && StaticFilters.FILTER_CONTROLLED_CREATURE.match(permanent, game)) {
+                permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
+            }
+        });
+        return true;
     }
 }
