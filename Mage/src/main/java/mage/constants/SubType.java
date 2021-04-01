@@ -186,6 +186,7 @@ public enum SubType {
     ILLUSION("Illusion", SubTypeSet.CreatureType),
     IMP("Imp", SubTypeSet.CreatureType),
     INCARNATION("Incarnation", SubTypeSet.CreatureType),
+    INKLING("Inkling", SubTypeSet.CreatureType),
     INSECT("Insect", SubTypeSet.CreatureType),
     ITHORIAN("Ithorian", SubTypeSet.CreatureType, true), // Star Wars
     // J
