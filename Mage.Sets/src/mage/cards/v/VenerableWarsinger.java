@@ -96,6 +96,6 @@ class VenerableWarsingerTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever {this} deals combat damage to a player, you may return target creature card " +
                 "with mana value X or less from your graveyard to the battlefield, " +
-                "where X is the amount of damage that {this} dealt to that player.";
+                "where X is the amount of damage {this} dealt to that player.";
     }
 }
