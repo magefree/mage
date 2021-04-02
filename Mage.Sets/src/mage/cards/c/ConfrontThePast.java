@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import com.google.common.collect.Iterables;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -64,12 +65,14 @@ enum ConfrontThePastAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        ability.getTargets().clear();
-        FilterPermanentCard filter = new FilterPermanentCard("planeswalker card with mana value X or less");
-        filter.add(CardType.PLANESWALKER.getPredicate());
-        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        if (Iterables.getOnlyElement(ability.getEffects()) instanceof ReturnFromGraveyardToBattlefieldTargetEffect) {
+            int xValue = ability.getManaCostsToPay().getX();
+            ability.getTargets().clear();
+            FilterPermanentCard filter = new FilterPermanentCard("planeswalker card with mana value X or less");
+            filter.add(CardType.PLANESWALKER.getPredicate());
+            filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+            ability.addTarget(new TargetCardInYourGraveyard(filter));
+        }
     }
 }
 
