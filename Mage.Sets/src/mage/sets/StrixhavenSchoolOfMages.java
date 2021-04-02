@@ -91,6 +91,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Mage Hunter", 76, Rarity.UNCOMMON, mage.cards.m.MageHunter.class));
         cards.add(new SetCardInfo("Magma Opus", 203, Rarity.MYTHIC, mage.cards.m.MagmaOpus.class));
         cards.add(new SetCardInfo("Manifestation Sage", 205, Rarity.RARE, mage.cards.m.ManifestationSage.class));
+        cards.add(new SetCardInfo("Mascot Exhibition", 5, Rarity.MYTHIC, mage.cards.m.MascotExhibition.class));
         cards.add(new SetCardInfo("Master Symmetrist", 138, Rarity.UNCOMMON, mage.cards.m.MasterSymmetrist.class));
         cards.add(new SetCardInfo("Mountain", 372, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Multiple Choice", 48, Rarity.RARE, mage.cards.m.MultipleChoice.class));
