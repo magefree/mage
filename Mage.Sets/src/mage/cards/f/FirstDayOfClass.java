@@ -48,7 +48,7 @@ public final class FirstDayOfClass extends CardImpl {
 class FirstDayOfClassTriggeredAbility extends DelayedTriggeredAbility {
 
     public FirstDayOfClassTriggeredAbility() {
-        super(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
+        super(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), Duration.EndOfTurn, false);
         this.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
     }
 
