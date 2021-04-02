@@ -1717,6 +1717,9 @@ public class VerifyCardDataTest {
                     if (card == null) {
                         errorsList.add("Error: broken constructor " + setInfo.getCardClass());
                     }
+                    if (!card.getExpansionSetCode().equals(set.getCode())) {
+                        errorsList.add("Error: card constructor have custom expansionSetCode, must be removed " + setInfo.getCardClass());
+                    }
                 } catch (Throwable e) {
                     // CardImpl.createCard don't throw exceptions (only error logs), so that logs are useless here
                     logger.error("Error: can't create card " + setInfo.getName() + ": " + e.getMessage(), e);
