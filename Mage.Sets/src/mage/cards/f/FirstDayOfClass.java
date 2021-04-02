@@ -63,20 +63,21 @@ class FirstDayOfClassTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD &&
-                permanent.isCreature() &&
-                permanent.isControlledBy(this.getControllerId());
+        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        getEffects().forEach(effect -> effect.setTargetPointer(new FixedTarget(event.getTargetId())));
-        return true;
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        if (permanent.isCreature() && permanent.isControlledBy(this.getControllerId())) {
+            getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+            return true;
+        }
+        return false;
     }
 
     @Override
     public String getRule() {
-        return "whenever a creature enters the battlefield under your control this turn, put a +1/+1 counter on it and it gains haste until end of turn";
+        return "Whenever a creature enters the battlefield under your control this turn, put a +1/+1 counter on it and it gains haste until end of turn";
     }
 }
