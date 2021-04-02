@@ -107,6 +107,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Oggyar Battle-Seer", 209, Rarity.COMMON, mage.cards.o.OggyarBattleSeer.class));
         cards.add(new SetCardInfo("Owlin Shieldmage", 210, Rarity.COMMON, mage.cards.o.OwlinShieldmage.class));
         cards.add(new SetCardInfo("Pest Summoning", 211, Rarity.COMMON, mage.cards.p.PestSummoning.class));
+        cards.add(new SetCardInfo("Pilgrim of the Ages", 22, Rarity.COMMON, mage.cards.p.PilgrimOfTheAges.class));
         cards.add(new SetCardInfo("Plains", 366, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Pop Quiz", 49, Rarity.COMMON, mage.cards.p.PopQuiz.class));
         cards.add(new SetCardInfo("Practical Research", 212, Rarity.UNCOMMON, mage.cards.p.PracticalResearch.class));
