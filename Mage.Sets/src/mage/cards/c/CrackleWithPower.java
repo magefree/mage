@@ -26,7 +26,7 @@ public final class CrackleWithPower extends CardImpl {
 
         // Crackle with Power deals five times X damage to up to X targets.
         this.getSpellAbility().addEffect(
-                new DamageTargetEffect(value).setText("{this} deals five times X damage to up to X targets")
+                new DamageTargetEffect(value).setText("{this} deals five times X damage to each of up to X targets")
         );
         this.getSpellAbility().setTargetAdjuster(CrackleWithPowerAdjuster.instance);
     }
