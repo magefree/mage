@@ -6,6 +6,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.InstantSorceryExileGraveyardCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.SetPowerSourceEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,6 +22,10 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class CracklingDrake extends CardImpl {
+
+    private static final Hint hint = new ValueHint(
+            "Instant and sorcery cards in your exile and graveyard", InstantSorceryExileGraveyardCount.instance
+    );
 
     public CracklingDrake(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}{U}{R}{R}");
@@ -39,7 +45,7 @@ public final class CracklingDrake extends CardImpl {
                 ).setText("{this}'s power is equal to the total number "
                         + "of instant and sorcery cards you own "
                         + "in exile and in your graveyard.")
-        ));
+        ).addHint(hint));
 
         // When Crackling Drake enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(

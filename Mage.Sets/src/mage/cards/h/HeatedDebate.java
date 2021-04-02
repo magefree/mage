@@ -21,7 +21,7 @@ public final class HeatedDebate extends CardImpl {
 
         // This spell can't be countered.
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect()
-                .setText("This spell can’t be countered. <i>(This includes by the ward ability.)</i>")
+                .setText("This spell can't be countered. <i>(This includes by the ward ability.)</i>")
         ));
 
         // Heated Debate deals 4 damage to target creature or planeswalker.

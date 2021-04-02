@@ -1,31 +1,24 @@
-
 package mage.abilities.dynamicvalue.common;
 
-import java.io.ObjectStreamException;
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.MageSingleton;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.game.Game;
 import mage.watchers.common.PlayerGainedLifeWatcher;
+
+import java.util.UUID;
 
 /**
  * Amount of life the controller got this turn.
  *
  * @author LevelX2
  */
-public class ControllerGotLifeCount implements DynamicValue, MageSingleton {
+public enum ControllerGotLifeCount implements DynamicValue {
+    instance;
 
-    private static final ControllerGotLifeCount fINSTANCE = new ControllerGotLifeCount();
-
-    private Object readResolve() throws ObjectStreamException {
-        return fINSTANCE;
-    }
-
-    public static ControllerGotLifeCount getInstance() {
-        return fINSTANCE;
-    }
+    private static final Hint hint = new ValueHint("Life gained this turn:", instance);
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -42,7 +35,7 @@ public class ControllerGotLifeCount implements DynamicValue, MageSingleton {
 
     @Override
     public ControllerGotLifeCount copy() {
-        return new ControllerGotLifeCount();
+        return instance;
     }
 
     @Override
@@ -53,5 +46,9 @@ public class ControllerGotLifeCount implements DynamicValue, MageSingleton {
     @Override
     public String getMessage() {
         return "the amount of life you've gained this turn";
+    }
+
+    public static Hint getHint() {
+        return hint;
     }
 }

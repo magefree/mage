@@ -13,15 +13,13 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.filter.predicate.mageobject.SharesColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.FractalToken;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.QuandrixToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
@@ -48,7 +46,9 @@ public final class KasminaEnigmaSage extends CardImpl {
         this.addAbility(new LoyaltyAbility(new ScryEffect(1), 2));
 
         // −X: Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it.
-        this.addAbility(new LoyaltyAbility(new KasminaEnigmaSageTokenEffect()));
+        this.addAbility(new LoyaltyAbility(QuandrixToken.getEffect(
+                GetXLoyaltyValue.instance, "Put X +1/+1 counters on it"
+        )));
 
         // −8: Search your library for an instant or sorcery card that shares a color with this planeswalker, exile that card, then shuffle. You may cast that card without paying its mana cost.
         this.addAbility(new LoyaltyAbility(new KasminaEnigmaSageSearchEffect(), -8));
@@ -103,40 +103,6 @@ class KasminaEnigmaSageGainAbilitiesEffect extends ContinuousEffectImpl {
     @Override
     public KasminaEnigmaSageGainAbilitiesEffect copy() {
         return new KasminaEnigmaSageGainAbilitiesEffect(this);
-    }
-}
-
-class KasminaEnigmaSageTokenEffect extends OneShotEffect {
-
-    KasminaEnigmaSageTokenEffect() {
-        super(Outcome.Benefit);
-        staticText = "create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it";
-    }
-
-    private KasminaEnigmaSageTokenEffect(final KasminaEnigmaSageTokenEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KasminaEnigmaSageTokenEffect copy() {
-        return new KasminaEnigmaSageTokenEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Token token = new FractalToken();
-        token.putOntoBattlefield(1, game, source, source.getControllerId());
-        int loyalty = GetXLoyaltyValue.instance.calculate(game, source, this);
-        if (loyalty < 1) {
-            return true;
-        }
-        for (UUID tokenId : token.getLastAddedTokenIds()) {
-            Permanent permanent = game.getPermanent(tokenId);
-            if (permanent != null) {
-                permanent.addCounters(CounterType.P1P1.createInstance(loyalty), source.getControllerId(), source, game);
-            }
-        }
-        return true;
     }
 }
 

@@ -1,7 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -18,25 +16,28 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author fireshoes
  */
 public final class BrunaTheFadingLight extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Angel or Human creature card");
+    private static final FilterCard filter = new FilterCreatureCard("Angel or Human creature card");
 
     static {
-        filter.add(Predicates.and(CardType.CREATURE.getPredicate(),
-                (Predicates.or(SubType.HUMAN.getPredicate(),
-                    (SubType.ANGEL.getPredicate())))));
+        filter.add(Predicates.or(
+                SubType.HUMAN.getPredicate(),
+                SubType.ANGEL.getPredicate()
+        ));
     }
 
     public BrunaTheFadingLight(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
         addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.ANGEL, SubType.HORROR);
         this.power = new MageInt(5);
@@ -56,7 +57,7 @@ public final class BrunaTheFadingLight extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // <i>(Melds with Gisela, the Broken Blade.)</i>
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("(Melds with Gisela, the Broken Blade.)")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("<i>(Melds with Gisela, the Broken Blade.)</i>")));
     }
 
     private BrunaTheFadingLight(final BrunaTheFadingLight card) {

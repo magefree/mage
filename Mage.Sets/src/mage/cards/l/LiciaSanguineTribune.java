@@ -7,8 +7,7 @@ import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.hint.common.MyTurnHint;
@@ -40,7 +39,9 @@ public final class LiciaSanguineTribune extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Licia, Sanguine Tribune costs 1 less to cast for each 1 life you gained this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new LiciaSanguineTribuneCostReductionEffect()), new PlayerGainedLifeWatcher());
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL, new LiciaSanguineTribuneCostReductionEffect()
+        ).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
 
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
@@ -49,8 +50,11 @@ public final class LiciaSanguineTribune extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Pay 5 life: Put three +1/+1 counters on Licia. Activate this ability only on your turn and only once each turn.
-        this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), new PayLifeCost(5), 1, MyTurnCondition.instance)
-                .addHint(MyTurnHint.instance));
+        this.addAbility(new LimitedTimesPerTurnActivatedAbility(
+                Zone.BATTLEFIELD,
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)),
+                new PayLifeCost(5), 1, MyTurnCondition.instance
+        ).addHint(MyTurnHint.instance));
     }
 
     private LiciaSanguineTribune(final LiciaSanguineTribune card) {
@@ -78,8 +82,7 @@ class LiciaSanguineTribuneCostReductionEffect extends CostModificationEffectImpl
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            DynamicValue reductionAmount = new YouGainLifeCount();
-            CardUtil.reduceCost(abilityToModify, reductionAmount.calculate(game, source, this));
+            CardUtil.reduceCost(abilityToModify, ControllerGotLifeCount.instance.calculate(game, source, this));
             return true;
         }
         return false;
@@ -96,36 +99,5 @@ class LiciaSanguineTribuneCostReductionEffect extends CostModificationEffectImpl
     @Override
     public LiciaSanguineTribuneCostReductionEffect copy() {
         return new LiciaSanguineTribuneCostReductionEffect(this);
-    }
-}
-
-class YouGainLifeCount implements DynamicValue {
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return this.calculate(game, sourceAbility.getControllerId());
-    }
-
-    public int calculate(Game game, UUID controllerId) {
-        PlayerGainedLifeWatcher watcher = game.getState().getWatcher(PlayerGainedLifeWatcher.class);
-        if (watcher != null) {
-            return watcher.getLifeGained(controllerId);
-        }
-        return 0;
-    }
-
-    @Override
-    public YouGainLifeCount copy() {
-        return new YouGainLifeCount();
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "the total life you gained this turn";
     }
 }
