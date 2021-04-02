@@ -490,6 +490,7 @@ public class ScryfallImageSupportCards {
             add("ZNR"); // Zendikar Rising
             add("ZNC"); // Zendikar Rising Commander
             add("ZNE"); // Zendikar Rising Expeditions
+            add("KLR"); // Kaladesh Remastered
             add("CMR"); // Commander Legends
             add("CC1"); // Commander Collection: Green
             add("KHM"); // Kaldheim
