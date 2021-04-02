@@ -23,12 +23,13 @@ public final class FortifyingDraught extends CardImpl {
         // You gain 2 life. Target creature gets +X/+X until end of turn, where X is the amount of life you gained this turn.
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                ControllerGotLifeCount.getInstance(),
-                ControllerGotLifeCount.getInstance(),
+                ControllerGotLifeCount.instance,
+                ControllerGotLifeCount.instance,
                 Duration.EndOfTurn, true
         ).setText("Target creature gets +X/+X until end of turn, where X is the amount of life you gained this turn."));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addWatcher(new PlayerGainedLifeWatcher());
+        this.getSpellAbility().addHint(ControllerGotLifeCount.getHint());
     }
 
     private FortifyingDraught(final FortifyingDraught card) {
