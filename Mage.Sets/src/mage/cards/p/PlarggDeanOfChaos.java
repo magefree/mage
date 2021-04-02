@@ -24,12 +24,10 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.filter.predicate.permanent.UntappedPredicate;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -38,12 +36,13 @@ import java.util.UUID;
  */
 public final class PlarggDeanOfChaos extends ModalDoubleFacesCard {
 
-    public static final FilterCreaturePermanent tappedFilter = new FilterCreaturePermanent("tapped creatures you control");
-    public static final FilterCreaturePermanent untappedFilter = new FilterCreaturePermanent("untapped creatures you control");
+    private static final FilterCreaturePermanent tappedFilter = new FilterCreaturePermanent("tapped creatures you control");
+    private static final FilterCreaturePermanent untappedFilter = new FilterCreaturePermanent("untapped creatures you control");
 
     static {
         tappedFilter.add(TappedPredicate.instance);
         tappedFilter.add(TargetController.YOU.getControllerPredicate());
+
         untappedFilter.add(UntappedPredicate.instance);
         untappedFilter.add(TargetController.YOU.getControllerPredicate());
     }
@@ -152,7 +151,11 @@ class PlarggDeanOfChaosEffect extends OneShotEffect {
 
 class AugustaDeanOfOrderEffect extends OneShotEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+
+    static {
+        filter.add(UntappedPredicate.instance);
+    }
 
     public AugustaDeanOfOrderEffect() {
         super(Outcome.Benefit);
@@ -165,30 +168,14 @@ class AugustaDeanOfOrderEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            TargetPermanent target = new TargetPermanent(0, 1, filter, false);
-            while (controller.canRespond()) {
-                target.clearChosen();
-                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-                    Map<String, Serializable> options = new HashMap<>();
-                    options.put("UI.right.btn.text", "Tapping complete");
-                    controller.choose(outcome, target, source.getControllerId(), game, options);
-                    if (!target.getTargets().isEmpty()) {
-                        UUID creature = target.getFirstTarget();
-                        if (creature != null) {
-                            game.getPermanent(creature).tap(source, game);
-                        }
-                    } else {
-                        break;
-                    }
-                } else {
-                    break;
-                }
-            }
-            return true;
-        }
-        return false;
+        controller.chooseTarget(Outcome.Benefit, target, source, game);
+        target.getTargets().forEach(t -> {
+            Permanent permanent = game.getPermanent(t);
+            permanent.tap(source, game);
+        });
+        return true;
     }
 
     @Override

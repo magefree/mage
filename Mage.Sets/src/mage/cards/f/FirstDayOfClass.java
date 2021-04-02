@@ -26,7 +26,6 @@ public final class FirstDayOfClass extends CardImpl {
 
     public FirstDayOfClass(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
-        
 
         // Whenever a creature enters the battlefield under your control this turn, put a +1/+1 counter on it and it gains haste until end of turn.
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new FirstDayOfClassTriggeredAbility()));
