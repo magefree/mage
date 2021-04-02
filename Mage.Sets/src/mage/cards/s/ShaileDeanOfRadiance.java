@@ -4,25 +4,25 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacesCard;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.game.Game;
+import mage.filter.predicate.permanent.EnteredThisTurnPredicate;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -34,10 +34,13 @@ import java.util.UUID;
 public final class ShaileDeanOfRadiance extends ModalDoubleFacesCard {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature");
+    private static final FilterPermanent shaileFilter = new FilterControlledCreaturePermanent("creature that entered the battlefield under your control this turn");
     private static final FilterPermanent embroseFilter = new FilterControlledCreaturePermanent("a creature you control with a +1/+1 counter on it");
 
     static {
         filter.add(AnotherPredicate.instance);
+        shaileFilter.add(EnteredThisTurnPredicate.instance);
+        shaileFilter.add((Predicate<Permanent>) (input, game) -> !input.checkControlChanged(game));
         embroseFilter.add(CounterType.P1P1.getPredicate());
     }
 
@@ -59,7 +62,7 @@ public final class ShaileDeanOfRadiance extends ModalDoubleFacesCard {
         this.getLeftHalfCard().addAbility(VigilanceAbility.getInstance());
 
         // {T}: Put a +1/+1 counter on each creature that entered the battlefield under your control this turn.
-        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(new ShaileDeanOfRadianceEffect(), new TapSourceCost()));
+        this.getLeftHalfCard().addAbility(new SimpleActivatedAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), shaileFilter), new TapSourceCost()));
 
         // 2.
         // Embrose, Dean of Shadow
@@ -84,32 +87,5 @@ public final class ShaileDeanOfRadiance extends ModalDoubleFacesCard {
     @Override
     public ShaileDeanOfRadiance copy() {
         return new ShaileDeanOfRadiance(this);
-    }
-}
-
-class ShaileDeanOfRadianceEffect extends OneShotEffect {
-
-    public ShaileDeanOfRadianceEffect() {
-        super(Outcome.Benefit);
-        staticText = "put a +1/+1 counter on each creature that entered the battlefield under your control this turn";
-    }
-
-    public ShaileDeanOfRadianceEffect(ShaileDeanOfRadianceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ShaileDeanOfRadianceEffect copy() {
-        return new ShaileDeanOfRadianceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        game.getBattlefield().getAllPermanents().forEach(permanent -> {
-            if (permanent.getTurnsOnBattlefield() == 0 && StaticFilters.FILTER_CONTROLLED_CREATURE.match(permanent, game)) {
-                permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-            }
-        });
-        return true;
     }
 }
