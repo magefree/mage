@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -19,15 +20,16 @@ public class PickMultiNumberDialog extends MageDialog {
     private List<JLabel> labelList = null;
     private List<JSpinner> spinnerList = null;
 
-    /**
-     * Creates new form PickMultiNumberDialog
-     */
     public PickMultiNumberDialog() {
         initComponents();
         this.setModal(true);
     }
 
     public void showDialog(List<String> messages, int min, int max, Map<String, Serializable> options) {
+        this.header.setText((String) options.get("header"));
+        this.header.setHorizontalAlignment(SwingConstants.CENTER);
+        this.setTitle((String) options.get("title"));
+
         if (labelList != null) {
             for (JLabel label : labelList) {
                 jPanel1.remove(label);
@@ -45,35 +47,39 @@ public class PickMultiNumberDialog extends MageDialog {
         GridBagConstraints labelC = new GridBagConstraints();
         GridBagConstraints spinnerC = new GridBagConstraints();
         for (int i = 0; i < size; i++) {
-            String input = messages.get(i);
-            String manaText = null;
             JLabel label = new JLabel();
+
+            // mana mode
+            String manaText = null;
+            String input = messages.get(i);
             switch (input) {
                 case "W":
-                    manaText = htmlWrapper(ColoredManaSymbol.W.getColorHtmlName());
+                    manaText = ColoredManaSymbol.W.getColorHtmlName();
                     break;
                 case "U":
-                    manaText = htmlWrapper(ColoredManaSymbol.U.getColorHtmlName());
+                    manaText = ColoredManaSymbol.U.getColorHtmlName();
                     break;
                 case "B":
-                    manaText = htmlWrapper(ColoredManaSymbol.B.getColorHtmlName());
+                    manaText = ColoredManaSymbol.B.getColorHtmlName();
                     break;
                 case "R":
-                    manaText = htmlWrapper(ColoredManaSymbol.R.getColorHtmlName());
+                    manaText = ColoredManaSymbol.R.getColorHtmlName();
                     break;
                 case "G":
-                    manaText = htmlWrapper(ColoredManaSymbol.G.getColorHtmlName());
+                    manaText = ColoredManaSymbol.G.getColorHtmlName();
                     break;
             }
             if (manaText != null) {
-                label.setText(manaText);
+                label.setText("<html>" + manaText);
                 Image image = ManaSymbols.getSizedManaSymbol(input);
                 if (image != null) {
                     label.setIcon(new ImageIcon(image));
                 }
             } else {
-                label.setText(input);
+                // text mode
+                label.setText("<html>" + input);
             }
+
             labelC.weightx = 0.5;
             labelC.gridx = 0;
             labelC.gridy = i;
@@ -81,45 +87,42 @@ public class PickMultiNumberDialog extends MageDialog {
             labelList.add(label);
 
             JSpinner spinner = new JSpinner();
-            spinner.setModel(new SpinnerNumberModel(min, min, max, 1));
+            spinner.setModel(new SpinnerNumberModel(0, 0, max, 1));
             spinnerC.weightx = 0.5;
             spinnerC.gridx = 1;
             spinnerC.gridy = i;
             spinnerC.ipadx = 20;
             spinner.addChangeListener(e -> {
-                int totalChosenAmount = 0;
-                for (JSpinner jSpinner : spinnerList) {
-                    totalChosenAmount += ((Number) jSpinner.getValue()).intValue();
-                }
-                counterText.setText(totalChosenAmount + " out of " + max);
-                chooseButton.setEnabled(totalChosenAmount == max);
+                updateControls(min, max);
             });
             jPanel1.add(spinner, spinnerC);
             spinnerList.add(spinner);
         }
-        int totalChosenAmount = min * size;
-        this.header.setText((String) options.get("header"));
-        this.header.setHorizontalAlignment(SwingConstants.CENTER);
-        this.counterText.setText(totalChosenAmount + " out of " + max);
+        this.counterText.setText("0 out of 0");
         this.counterText.setHorizontalAlignment(SwingConstants.CENTER);
-        this.chooseButton.setEnabled(totalChosenAmount == max);
-        this.setTitle((String) options.get("title"));
+
+        updateControls(min, max);
+
         this.pack();
         this.makeWindowCentered();
         this.setVisible(true);
     }
 
-    public String getMultiAmount() {
-        StringBuilder sb = new StringBuilder();
-        for (JSpinner spinner : spinnerList) {
-            sb.append(((Number) spinner.getValue()).intValue());
-            sb.append(' ');
+    private void updateControls(int min, int max) {
+        int totalChosenAmount = 0;
+        for (JSpinner jSpinner : spinnerList) {
+            totalChosenAmount += ((Number) jSpinner.getValue()).intValue();
         }
-        return sb.toString();
+        counterText.setText(totalChosenAmount + " out of " + max);
+        chooseButton.setEnabled(totalChosenAmount >= min && totalChosenAmount <= max);
     }
 
-    private String htmlWrapper(String text) {
-        return "<html>" + text + "</html>";
+    public String getMultiAmount() {
+        return spinnerList
+                .stream()
+                .map(spinner -> ((Number) spinner.getValue()).intValue())
+                .map(String::valueOf)
+                .collect(Collectors.joining(" "));
     }
 
     /**

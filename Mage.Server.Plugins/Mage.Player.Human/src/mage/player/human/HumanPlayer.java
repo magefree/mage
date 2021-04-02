@@ -1912,19 +1912,9 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public List<Integer> getMultiAmount(List<String> messages, int min, int max, MultiAmountType type, Game game) {
-        int size = messages.size();
-        int total = min * size;
-        int i = 0;
-        List<Integer> defaultList = new ArrayList<>(size);
-        if (total < max) {
-            int diff = max - total;
-            defaultList.add(min + diff);
-            i++;
-        }
-        while (i < size) {
-            defaultList.add(min);
-            i++;
-        }
+        int needCount = messages.size();
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
+        List<Integer> answer = null;
 
         if (gameInCheckPlayableState(game)) {
             return defaultList;
@@ -1941,47 +1931,23 @@ public class HumanPlayer extends PlayerImpl {
             }
             waitForResponse(game);
 
+            // waiting correct values only
             if (response.getString() != null) {
-                break;
+                answer = MultiAmountType.parseAnswer(response.getString(), needCount, min, max, false);
+                if (MultiAmountType.isGoodValues(answer, needCount, min, max)) {
+                    break;
+                } else {
+                    // it's not normal: can be cheater or a wrong GUI checks
+                    logger.error(String.format("GUI return wrong MultiAmountType values: %d %d %d - %s", needCount, min, max, response.getString()));
+                    game.informPlayer(this, "Error, you must enter correct values.");
+                }
             }
         }
 
-        if (response.getString() != null) {
-            Scanner scanner = new Scanner(response.getString());
-            List<Integer> responseList = new ArrayList<>(size);
-            int responseAmount = 0;
-            // Validate string data sent from client and parse into integer list
-            while (scanner.hasNextInt() && responseList.size() < size) {
-                int nextInt = scanner.nextInt();
-                if (nextInt < min) {
-                    nextInt = min;
-                }
-                responseAmount += nextInt;
-                responseList.add(nextInt);
-            }
-            while (responseList.size() < size) {
-                responseList.add(min);
-            }
-            if (responseAmount < max) {
-                int lastIndex = responseList.size() - 1;
-                int lastInt = responseList.get(lastIndex);
-                lastInt += max - responseAmount;
-                responseList.set(lastIndex, lastInt);
-            } else if (responseAmount > max) {
-                int index = 0;
-                while (responseAmount > max && index < responseList.size()) {
-                    int responseInt = responseList.get(index);
-                    if (responseInt > min) {
-                        responseInt--;
-                        responseList.set(index, responseInt);
-                        responseAmount--;
-                    } else {
-                        index++;
-                    }
-                }
-            }
-            return responseList;
+        if (answer != null) {
+            return answer;
         } else {
+            // something wrong, e.g. player disconnected
             return defaultList;
         }
     }
