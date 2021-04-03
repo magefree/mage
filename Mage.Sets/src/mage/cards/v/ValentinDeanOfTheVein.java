@@ -21,7 +21,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.token.PestToken2;
+import mage.game.permanent.token.WitherbloomToken;
 
 import java.util.UUID;
 
@@ -101,7 +101,7 @@ class ValentinDeanOfTheVeinEffect extends ReplacementEffectImpl {
         ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
         game.fireReflexiveTriggeredAbility(new ReflexiveTriggeredAbility(
                 new DoIfCostPaid(
-                        new CreateTokenEffect(new PestToken2()), new GenericManaCost(2)
+                        new CreateTokenEffect(new WitherbloomToken()), new GenericManaCost(2)
                 ), false, "you may pay {2}. If you do, create a 1/1 black and green " +
                 "Pest creature token with \"When this creature dies, you gain 1 life.\""
         ), source);
