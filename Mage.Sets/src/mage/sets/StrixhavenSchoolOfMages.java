@@ -86,6 +86,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 374, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fortifying Draught", 132, Rarity.UNCOMMON, mage.cards.f.FortifyingDraught.class));
         cards.add(new SetCardInfo("Fractal Summoning", 187, Rarity.COMMON, mage.cards.f.FractalSummoning.class));
+        cards.add(new SetCardInfo("Fracture", 188, Rarity.UNCOMMON, mage.cards.f.Fracture.class));
         cards.add(new SetCardInfo("Frost Trickster", 43, Rarity.COMMON, mage.cards.f.FrostTrickster.class));
         cards.add(new SetCardInfo("Frostboil Snarl", 265, Rarity.RARE, mage.cards.f.FrostboilSnarl.class));
         cards.add(new SetCardInfo("Fuming Effigy", 103, Rarity.COMMON, mage.cards.f.FumingEffigy.class));
