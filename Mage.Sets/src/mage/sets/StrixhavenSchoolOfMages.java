@@ -57,6 +57,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Defend the Campus", 12, Rarity.COMMON, mage.cards.d.DefendTheCampus.class));
         cards.add(new SetCardInfo("Double Major", 179, Rarity.RARE, mage.cards.d.DoubleMajor.class));
         cards.add(new SetCardInfo("Dragonsguard Elite", 127, Rarity.RARE, mage.cards.d.DragonsguardElite.class));
+        cards.add(new SetCardInfo("Dream Strix", 42, Rarity.RARE, mage.cards.d.DreamStrix.class));
         cards.add(new SetCardInfo("Dueling Coach", 15, Rarity.UNCOMMON, mage.cards.d.DuelingCoach.class));
         cards.add(new SetCardInfo("Eager First-Year", 16, Rarity.COMMON, mage.cards.e.EagerFirstYear.class));
         cards.add(new SetCardInfo("Elemental Masterpiece", 182, Rarity.COMMON, mage.cards.e.ElementalMasterpiece.class));
