@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class ExponentialGrowth extends CardImpl {
 
     public ExponentialGrowth(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{G}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{G}{G}");
 
         // Until end of turn, double target creature's power X times.
         this.getSpellAbility().addEffect(new ExponentialGrowthEffect());

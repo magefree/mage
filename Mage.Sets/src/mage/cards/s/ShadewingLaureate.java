@@ -32,7 +32,7 @@ public final class ShadewingLaureate extends CardImpl {
     }
 
     public ShadewingLaureate(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W/B}{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{W}{W/B}{B}");
 
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WARLOCK);
