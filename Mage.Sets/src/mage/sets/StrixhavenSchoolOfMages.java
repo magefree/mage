@@ -210,6 +210,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Witherbloom Campus", 275, Rarity.COMMON, mage.cards.w.WitherbloomCampus.class));
         cards.add(new SetCardInfo("Witherbloom Command", 248, Rarity.RARE, mage.cards.w.WitherbloomCommand.class));
         cards.add(new SetCardInfo("Witherbloom Pledgemage", 249, Rarity.COMMON, mage.cards.w.WitherbloomPledgemage.class));
+        cards.add(new SetCardInfo("Wormhole Serpent", 62, Rarity.UNCOMMON, mage.cards.w.WormholeSerpent.class));
     }
 
     @Override
