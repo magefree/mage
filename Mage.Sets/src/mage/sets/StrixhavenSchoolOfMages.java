@@ -32,6 +32,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         this.ratioBoosterMythic = 7.4;
         this.maxCardNumberInBooster = 275;
 
+        cards.add(new SetCardInfo("Academic Debate", 91, Rarity.UNCOMMON, mage.cards.a.AcademicDebate.class));
         cards.add(new SetCardInfo("Access Tunnel", 262, Rarity.UNCOMMON, mage.cards.a.AccessTunnel.class));
         cards.add(new SetCardInfo("Accomplished Alchemist", 119, Rarity.RARE, mage.cards.a.AccomplishedAlchemist.class));
         cards.add(new SetCardInfo("Aether Helix", 162, Rarity.UNCOMMON, mage.cards.a.AetherHelix.class));
