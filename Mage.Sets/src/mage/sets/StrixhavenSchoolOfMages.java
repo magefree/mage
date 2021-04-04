@@ -145,6 +145,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Overgrown Arch", 139, Rarity.UNCOMMON, mage.cards.o.OvergrownArch.class));
         cards.add(new SetCardInfo("Owlin Shieldmage", 210, Rarity.COMMON, mage.cards.o.OwlinShieldmage.class));
         cards.add(new SetCardInfo("Pest Summoning", 211, Rarity.COMMON, mage.cards.p.PestSummoning.class));
+        cards.add(new SetCardInfo("Pigment Storm", 111, Rarity.COMMON, mage.cards.p.PigmentStorm.class));
         cards.add(new SetCardInfo("Pilgrim of the Ages", 22, Rarity.COMMON, mage.cards.p.PilgrimOfTheAges.class));
         cards.add(new SetCardInfo("Pillardrop Rescuer", 23, Rarity.COMMON, mage.cards.p.PillardropRescuer.class));
         cards.add(new SetCardInfo("Plains", 366, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
