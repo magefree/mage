@@ -187,6 +187,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Silverquill Campus", 273, Rarity.COMMON, mage.cards.s.SilverquillCampus.class));
         cards.add(new SetCardInfo("Silverquill Command", 232, Rarity.RARE, mage.cards.s.SilverquillCommand.class));
         cards.add(new SetCardInfo("Silverquill Pledgemage", 233, Rarity.COMMON, mage.cards.s.SilverquillPledgemage.class));
+        cards.add(new SetCardInfo("Snow Day", 53, Rarity.UNCOMMON, mage.cards.s.SnowDay.class));
         cards.add(new SetCardInfo("Solve the Equation", 54, Rarity.UNCOMMON, mage.cards.s.SolveTheEquation.class));
         cards.add(new SetCardInfo("Soothsayer Adept", 55, Rarity.COMMON, mage.cards.s.SoothsayerAdept.class));
         cards.add(new SetCardInfo("Sparring Regimen", 29, Rarity.RARE, mage.cards.s.SparringRegimen.class));
