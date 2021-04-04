@@ -42,9 +42,9 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Archmage Emeritus", 37, Rarity.RARE, mage.cards.a.ArchmageEmeritus.class));
         cards.add(new SetCardInfo("Archway Commons", 263, Rarity.COMMON, mage.cards.a.ArchwayCommons.class));
         cards.add(new SetCardInfo("Arrogant Poet", 63, Rarity.COMMON, mage.cards.a.ArrogantPoet.class));
-        cards.add(new SetCardInfo("Bayou Groff", 121, Rarity.COMMON, mage.cards.b.BayouGroff.class));
         cards.add(new SetCardInfo("Augmenter Pugilist", 147, Rarity.RARE, mage.cards.a.AugmenterPugilist.class));
         cards.add(new SetCardInfo("Baleful Mastery", 64, Rarity.RARE, mage.cards.b.BalefulMastery.class));
+        cards.add(new SetCardInfo("Bayou Groff", 121, Rarity.COMMON, mage.cards.b.BayouGroff.class));
         cards.add(new SetCardInfo("Beaming Defiance", 9, Rarity.COMMON, mage.cards.b.BeamingDefiance.class));
         cards.add(new SetCardInfo("Beledros Witherbloom", 163, Rarity.MYTHIC, mage.cards.b.BeledrosWitherbloom.class));
         cards.add(new SetCardInfo("Big Play", 122, Rarity.COMMON, mage.cards.b.BigPlay.class));
