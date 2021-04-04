@@ -19,7 +19,7 @@ public final class WitherbloomPledgemage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B/G}{B/G}");
 
         this.subtype.add(SubType.TREEFOLK);
-        this.subtype.add(SubType.WARRIOR);
+        this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
