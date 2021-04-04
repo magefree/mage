@@ -21,7 +21,7 @@ public class DiesSourceTriggeredAbility extends ZoneChangeTriggeredAbility {
         this(effect, false);
     }
 
-    public DiesSourceTriggeredAbility(DiesSourceTriggeredAbility ability) {
+    public DiesSourceTriggeredAbility(final DiesSourceTriggeredAbility ability) {
         super(ability);
     }
 
@@ -29,24 +29,19 @@ public class DiesSourceTriggeredAbility extends ZoneChangeTriggeredAbility {
     public DiesSourceTriggeredAbility copy() {
         return new DiesSourceTriggeredAbility(this);
     }
-    
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent() && event.getTargetId().equals(getSourceId())) {            
-            for (Effect effect : getEffects()) {
-                effect.setValue("permanentLeftBattlefield", zEvent.getTarget());
-            }
-            return true;
+        if (!zEvent.isDiesEvent() || !event.getTargetId().equals(getSourceId())) {
+            return false;
         }
-        return false;
+        getEffects().setValue("permanentLeftBattlefield", zEvent.getTarget());
+        return true;
     }
-    
+
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
-
-
-
 }
