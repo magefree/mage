@@ -121,6 +121,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Leech Fanatic", 75, Rarity.COMMON, mage.cards.l.LeechFanatic.class));
         cards.add(new SetCardInfo("Leonin Lightscribe", 20, Rarity.RARE, mage.cards.l.LeoninLightscribe.class));
         cards.add(new SetCardInfo("Letter of Acceptance", 256, Rarity.COMMON, mage.cards.l.LetterOfAcceptance.class));
+        cards.add(new SetCardInfo("Leyline Invocation", 136, Rarity.COMMON, mage.cards.l.LeylineInvocation.class));
         cards.add(new SetCardInfo("Lorehold Apprentice", 198, Rarity.UNCOMMON, mage.cards.l.LoreholdApprentice.class));
         cards.add(new SetCardInfo("Lorehold Campus", 268, Rarity.COMMON, mage.cards.l.LoreholdCampus.class));
         cards.add(new SetCardInfo("Lorehold Command", 199, Rarity.RARE, mage.cards.l.LoreholdCommand.class));
