@@ -59,6 +59,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Cogwork Archivist", 254, Rarity.COMMON, mage.cards.c.CogworkArchivist.class));
         cards.add(new SetCardInfo("Combat Professor", 11, Rarity.COMMON, mage.cards.c.CombatProfessor.class));
         cards.add(new SetCardInfo("Confront the Past", 67, Rarity.RARE, mage.cards.c.ConfrontThePast.class));
+        cards.add(new SetCardInfo("Containment Breach", 125, Rarity.UNCOMMON, mage.cards.c.ContainmentBreach.class));
         cards.add(new SetCardInfo("Crackle with Power", 95, Rarity.MYTHIC, mage.cards.c.CrackleWithPower.class));
         cards.add(new SetCardInfo("Cram Session", 170, Rarity.COMMON, mage.cards.c.CramSession.class));
         cards.add(new SetCardInfo("Creative Outburst", 171, Rarity.UNCOMMON, mage.cards.c.CreativeOutburst.class));
