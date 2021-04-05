@@ -120,6 +120,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Kasmina, Enigma Sage", 196, Rarity.MYTHIC, mage.cards.k.KasminaEnigmaSage.class));
         cards.add(new SetCardInfo("Kelpie Guide", 45, Rarity.UNCOMMON, mage.cards.k.KelpieGuide.class));
         cards.add(new SetCardInfo("Kianne, Dean of Substance", 152, Rarity.RARE, mage.cards.k.KianneDeanOfSubstance.class));
+        cards.add(new SetCardInfo("Killian, Ink Duelist", 197, Rarity.UNCOMMON, mage.cards.k.KillianInkDuelist.class));
         cards.add(new SetCardInfo("Lash of Malice", 74, Rarity.COMMON, mage.cards.l.LashOfMalice.class));
         cards.add(new SetCardInfo("Leech Fanatic", 75, Rarity.COMMON, mage.cards.l.LeechFanatic.class));
         cards.add(new SetCardInfo("Leonin Lightscribe", 20, Rarity.RARE, mage.cards.l.LeoninLightscribe.class));
