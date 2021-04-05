@@ -9,7 +9,6 @@ import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 
 /**
- *
  * @author Plopman
  */
 public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
@@ -48,19 +47,19 @@ public class CastSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getSourceId().equals(this.getSourceId())) {
-            MageObject spellObject = game.getObject(sourceId);
-            if ((spellObject instanceof Spell)) {
-                Spell spell = (Spell) spellObject;
-                if (spell.getSpellAbility() != null) {
-                    for (Effect effect : getEffects()) {
-                        effect.setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());
-                    }
-                }
-            }
+        if (!event.getSourceId().equals(this.getSourceId())) {
+            return false;
+        }
+        MageObject spellObject = game.getObject(sourceId);
+        if ((!(spellObject instanceof Spell))) {
             return true;
         }
-        return false;
+        Spell spell = (Spell) spellObject;
+        if (spell.getSpellAbility() != null) {
+            getEffects().setValue(SOURCE_CAST_SPELL_ABILITY, spell.getSpellAbility());
+        }
+        getEffects().setValue("spellCast", spell);
+        return true;
     }
 
     @Override

@@ -19,5 +19,7 @@ public final class Commander2021Edition extends ExpansionSet {
         super("Commander 2021 Edition", "C21", ExpansionSet.buildDate(2021, 4, 23), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         this.hasBasicLands = false;
+
+        cards.add(new SetCardInfo("Excavation Technique", 16, Rarity.RARE, mage.cards.e.ExcavationTechnique.class));
     }
 }
