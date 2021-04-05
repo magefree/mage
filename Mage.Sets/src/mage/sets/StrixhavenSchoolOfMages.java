@@ -221,6 +221,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Tenured Inkcaster", 88, Rarity.UNCOMMON, mage.cards.t.TenuredInkcaster.class));
         cards.add(new SetCardInfo("Thrilling Discovery", 243, Rarity.COMMON, mage.cards.t.ThrillingDiscovery.class));
         cards.add(new SetCardInfo("Thunderous Orator", 35, Rarity.UNCOMMON, mage.cards.t.ThunderousOrator.class));
+        cards.add(new SetCardInfo("Tome Shredder", 117, Rarity.COMMON, mage.cards.t.TomeShredder.class));
         cards.add(new SetCardInfo("Torrent Sculptor", 159, Rarity.RARE, mage.cards.t.TorrentSculptor.class));
         cards.add(new SetCardInfo("Twinscroll Shaman", 118, Rarity.COMMON, mage.cards.t.TwinscrollShaman.class));
         cards.add(new SetCardInfo("Umbral Juke", 89, Rarity.UNCOMMON, mage.cards.u.UmbralJuke.class));
