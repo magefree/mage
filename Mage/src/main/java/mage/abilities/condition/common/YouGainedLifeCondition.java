@@ -17,16 +17,12 @@ public class YouGainedLifeCondition extends IntCompareCondition {
 
     @Override
     protected int getInputValue(Game game, Ability source) {
-        int gainedLife = 0;
         PlayerGainedLifeWatcher watcher = game.getState().getWatcher(PlayerGainedLifeWatcher.class);
-        if (watcher != null) {
-            gainedLife = watcher.getLifeGained(source.getControllerId());
-        }
-        return gainedLife;
+        return watcher == null ? 0 : watcher.getLifeGained(source.getControllerId());
     }
 
     @Override
     public String toString() {
-        return String.format("if you gained %s or more life this turn", value + 1);
+        return "if you gained " + (value == 0 ? "" : (value + 1) + " or more ") + "life this turn";
     }
 }
