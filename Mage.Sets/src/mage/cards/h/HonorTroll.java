@@ -1,4 +1,4 @@
-package mage.cards.a;
+package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -7,7 +7,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,52 +23,53 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class AngelOfVitality extends CardImpl {
+public final class HonorTroll extends CardImpl {
 
-    public AngelOfVitality(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
+    public HonorTroll(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
 
-        this.subtype.add(SubType.ANGEL);
+        this.subtype.add(SubType.TROLL);
+        this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
+        // Vigilance
+        this.addAbility(VigilanceAbility.getInstance());
 
         // If you would gain life, you gain that much life plus 1 instead.
-        this.addAbility(new SimpleStaticAbility(new AngelOfVitalityEffect()));
+        this.addAbility(new SimpleStaticAbility(new HonorTrollEffect()));
 
-        // Angel of Vitality gets +2/+2 as long as you have 25 or more life.
+        // Honor Troll gets +2/+1 as long as you have 25 or more life.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
-                AngelOfVitalityCondition.instance, "{this} gets +2/+2 as long as you have 25 or more life"
+                new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield),
+                HonorTrollCondition.instance, "{this} gets +2/+1 as long as you have 25 or more life"
         )));
     }
 
-    private AngelOfVitality(final AngelOfVitality card) {
+    private HonorTroll(final HonorTroll card) {
         super(card);
     }
 
     @Override
-    public AngelOfVitality copy() {
-        return new AngelOfVitality(this);
+    public HonorTroll copy() {
+        return new HonorTroll(this);
     }
 }
 
-class AngelOfVitalityEffect extends ReplacementEffectImpl {
+class HonorTrollEffect extends ReplacementEffectImpl {
 
-    AngelOfVitalityEffect() {
+    HonorTrollEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would gain life, you gain that much life plus 1 instead";
     }
 
-    private AngelOfVitalityEffect(final AngelOfVitalityEffect effect) {
+    private HonorTrollEffect(final HonorTrollEffect effect) {
         super(effect);
     }
 
     @Override
-    public AngelOfVitalityEffect copy() {
-        return new AngelOfVitalityEffect(this);
+    public HonorTrollEffect copy() {
+        return new HonorTrollEffect(this);
     }
 
     @Override
@@ -93,7 +94,7 @@ class AngelOfVitalityEffect extends ReplacementEffectImpl {
     }
 }
 
-enum AngelOfVitalityCondition implements Condition {
+enum HonorTrollCondition implements Condition {
     instance;
 
     @Override
