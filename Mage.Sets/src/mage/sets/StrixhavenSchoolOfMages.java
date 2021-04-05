@@ -203,6 +203,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Spell Satchel", 258, Rarity.UNCOMMON, mage.cards.s.SpellSatchel.class));
         cards.add(new SetCardInfo("Spined Karok", 143, Rarity.COMMON, mage.cards.s.SpinedKarok.class));
         cards.add(new SetCardInfo("Spirit Summoning", 236, Rarity.COMMON, mage.cards.s.SpiritSummoning.class));
+        cards.add(new SetCardInfo("Spiteful Squad", 237, Rarity.COMMON, mage.cards.s.SpitefulSquad.class));
         cards.add(new SetCardInfo("Springmane Cervin", 144, Rarity.COMMON, mage.cards.s.SpringmaneCervin.class));
         cards.add(new SetCardInfo("Square Up", 238, Rarity.COMMON, mage.cards.s.SquareUp.class));
         cards.add(new SetCardInfo("Star Pupil", 30, Rarity.COMMON, mage.cards.s.StarPupil.class));
