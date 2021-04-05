@@ -1,18 +1,15 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.IsPhaseCondition;
-import mage.abilities.costs.AlternativeCostSourceAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.TurnPhase;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.game.Game;
@@ -41,8 +38,10 @@ public final class ClosingStatement extends CardImpl {
 
         // This spell costs {2} less to cast during your end step.
         IsPhaseCondition condition = new IsPhaseCondition(TurnPhase.END, true);
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{1}{W}{B}"), condition, "this spell costs {2} less to cast during your end step.")
-            .addHint(new ConditionHint(condition, "On your end step")));
+        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(2, condition).setText("this spell costs {2} less to cast during your end step"));
+        ability.addHint(new ConditionHint(condition, "On your end step"));
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
 
         // Destroy target creature or planeswalker you don't control. Put a +1/+1 counter on up to one target creature you control.
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker(1, 1, filter, false));
