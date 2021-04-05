@@ -20,6 +20,7 @@ public final class Commander2021Edition extends ExpansionSet {
         this.blockName = "Command Zone";
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Angel of the Ruins", 11, Rarity.RARE, mage.cards.a.AngelOfTheRuins.class));
         cards.add(new SetCardInfo("Excavation Technique", 16, Rarity.RARE, mage.cards.e.ExcavationTechnique.class));
     }
 }
