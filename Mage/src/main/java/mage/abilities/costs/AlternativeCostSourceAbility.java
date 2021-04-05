@@ -159,6 +159,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                             }
                         }
                     }
+                    game.getState().setValue(getId().toString(), "ALT_COST_PAID");
                 } else {
                     return false;
                 }

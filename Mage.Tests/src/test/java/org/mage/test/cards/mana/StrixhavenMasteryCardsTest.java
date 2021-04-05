@@ -35,4 +35,27 @@ public class StrixhavenMasteryCardsTest extends CardTestPlayerBase {
         assertExileCount(playerB, 1);
     }
 
+    @Test
+    public void testBalefulMastery_alternateCostNotPaid() {
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.HAND, playerA, "Baleful Mastery");
+
+        addCard(Zone.BATTLEFIELD, playerB, "Goblin Piker");
+        addCard(Zone.BATTLEFIELD, playerB, "Witchbane Orb");
+
+        assertHandCount(playerB, 0);
+        assertExileCount(playerB, 0);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Baleful Mastery", "Goblin Piker");
+        setChoice(playerA, "No");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertHandCount(playerB, 0);
+        assertExileCount(playerB, 1);
+    }
+
 }

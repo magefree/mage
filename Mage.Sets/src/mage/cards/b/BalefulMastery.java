@@ -70,7 +70,8 @@ class BalefulMasteryAlternativeCostEffect extends OneShotEffect {
             .filter(ability -> ability instanceof AlternativeCostSourceAbility)
             .findFirst()
             .orElseThrow(IllegalStateException::new);
-        if (altCostAbility.getManaCosts().isPaid()) {
+        Object value = game.getState().getValue(altCostAbility.getId().toString());
+        if (value != null && value.toString().equals("ALT_COST_PAID")) {
             Player player = game.getPlayer(source.getControllerId());
             TargetOpponent targetOpponent = new TargetOpponent(true);
             if (player.chooseTarget(Outcome.Detriment, targetOpponent, source, game)) {
