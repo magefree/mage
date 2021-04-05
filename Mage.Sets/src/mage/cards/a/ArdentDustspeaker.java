@@ -14,6 +14,7 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -53,9 +54,11 @@ public final class ArdentDustspeaker extends CardImpl {
 
 class ArdentDustspeakerCost extends CostImpl {
 
+    private static final FilterCard filter
+            = new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard");
+
     public ArdentDustspeakerCost() {
-        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(
-                new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard"));
+        TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filter);
         target.setNotTarget(true);
         this.addTarget(target);
         this.text = "put an instant or sorcery card from your graveyard on the bottom of your library";
