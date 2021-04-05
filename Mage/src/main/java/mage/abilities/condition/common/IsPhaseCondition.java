@@ -15,19 +15,29 @@ import java.util.Locale;
 public class IsPhaseCondition implements Condition {
 
     protected TurnPhase turnPhase;
+    protected boolean yourTurn;
 
     public IsPhaseCondition(TurnPhase turnPhase) {
+        this(turnPhase, false);
+    }
+
+    public IsPhaseCondition(TurnPhase turnPhase, boolean yourTurn) {
         this.turnPhase = turnPhase;
+        this.yourTurn = yourTurn;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return turnPhase == game.getTurn().getPhaseType();
+        return turnPhase == game.getTurn().getPhaseType() && (!yourTurn || game.getActivePlayerId().equals(source.getControllerId()));
     }
 
     @Override
     public String toString() {
-        return new StringBuilder("during ").append(turnPhase).toString().toLowerCase(Locale.ENGLISH);
+        return new StringBuilder("during ")
+            .append(yourTurn ? "your " : "")
+            .append(turnPhase)
+            .toString()
+            .toLowerCase(Locale.ENGLISH);
     }
 
 }
