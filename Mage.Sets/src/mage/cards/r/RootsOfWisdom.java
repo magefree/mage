@@ -45,10 +45,10 @@ class RootsOfWisdomEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("land card or Elf card");
 
     static {
-        Predicates.or(
+        filter.add(Predicates.or(
                 CardType.LAND.getPredicate(),
                 SubType.ELF.getPredicate()
-        );
+        ));
     }
 
     RootsOfWisdomEffect() {
@@ -74,6 +74,7 @@ class RootsOfWisdomEffect extends OneShotEffect {
         }
         player.millCards(3, source, game);
         TargetCard targetCard = new TargetCardInYourGraveyard(filter);
+        targetCard.setNotTarget(true);
         if (targetCard.canChoose(source.getSourceId(), source.getControllerId(), game)
                 && player.choose(outcome, targetCard, source.getSourceId(), game)) {
             Card card = player.getGraveyard().get(targetCard.getFirstTarget(), game);
