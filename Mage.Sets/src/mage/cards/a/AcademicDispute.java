@@ -22,44 +22,44 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author weirddan455
  */
-public final class AcademicDebate extends CardImpl {
+public final class AcademicDispute extends CardImpl {
 
-    public AcademicDebate(UUID ownerId, CardSetInfo setInfo) {
+    public AcademicDispute(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}");
 
         // Target creature blocks this turn if able. You may have that creature gain reach until end of turn.
         this.getSpellAbility().addEffect(new BlocksIfAbleTargetEffect(Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new AcademicDebateEffect());
+        this.getSpellAbility().addEffect(new AcademicDisputeEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Learn.
         this.getSpellAbility().addEffect(new LearnEffect().concatBy("<br>"));
     }
 
-    private AcademicDebate(final AcademicDebate card) {
+    private AcademicDispute(final AcademicDispute card) {
         super(card);
     }
 
     @Override
-    public AcademicDebate copy() {
-        return new AcademicDebate(this);
+    public AcademicDispute copy() {
+        return new AcademicDispute(this);
     }
 }
 
-class AcademicDebateEffect extends OneShotEffect {
+class AcademicDisputeEffect extends OneShotEffect {
 
-    AcademicDebateEffect() {
+    AcademicDisputeEffect() {
         super(Outcome.AddAbility);
-        this.staticText = "You may have that creature gain reach until end of turn";
+        this.staticText = "You may have it gain reach until end of turn";
     }
 
-    private AcademicDebateEffect(final AcademicDebateEffect effect) {
+    private AcademicDisputeEffect(final AcademicDisputeEffect effect) {
         super(effect);
     }
 
     @Override
-    public AcademicDebateEffect copy() {
-        return new AcademicDebateEffect(this);
+    public AcademicDisputeEffect copy() {
+        return new AcademicDisputeEffect(this);
     }
 
     @Override
