@@ -79,15 +79,6 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
 
     public LookLibraryAndPickControllerEffect(DynamicValue numberOfCards,
                                               boolean mayShuffleAfter, DynamicValue numberToPick,
-                                              FilterCard pickFilter, boolean putOnTop, boolean reveal,
-                                              boolean anyOrder) {
-        this(numberOfCards, mayShuffleAfter, numberToPick, pickFilter,
-                Zone.LIBRARY, putOnTop, reveal);
-        this.anyOrder = anyOrder;
-    }
-
-    public LookLibraryAndPickControllerEffect(DynamicValue numberOfCards,
-                                              boolean mayShuffleAfter, DynamicValue numberToPick,
                                               FilterCard pickFilter, Zone targetZoneLookedCards,
                                               boolean putOnTop, boolean reveal) {
         this(numberOfCards, mayShuffleAfter, numberToPick, pickFilter,
