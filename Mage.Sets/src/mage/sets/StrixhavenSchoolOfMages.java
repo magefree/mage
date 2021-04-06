@@ -101,6 +101,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Frostboil Snarl", 265, Rarity.RARE, mage.cards.f.FrostboilSnarl.class));
         cards.add(new SetCardInfo("Fuming Effigy", 103, Rarity.COMMON, mage.cards.f.FumingEffigy.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 266, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
+        cards.add(new SetCardInfo("Galazeth Prismari", 189, Rarity.MYTHIC, mage.cards.g.GalazethPrismari.class));
         cards.add(new SetCardInfo("Gnarled Professor", 133, Rarity.RARE, mage.cards.g.GnarledProfessor.class));
         cards.add(new SetCardInfo("Go Blank", 72, Rarity.UNCOMMON, mage.cards.g.GoBlank.class));
         cards.add(new SetCardInfo("Golden Ratio", 190, Rarity.UNCOMMON, mage.cards.g.GoldenRatio.class));
