@@ -20,6 +20,7 @@ public final class Commander2021Edition extends ExpansionSet {
         this.blockName = "Command Zone";
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Adrix and Nev, Twincasters", 9, Rarity.MYTHIC, mage.cards.a.AdrixAndNevTwincasters.class));
         cards.add(new SetCardInfo("Ancient Den", 276, Rarity.SPECIAL, mage.cards.a.AncientDen.class));
         cards.add(new SetCardInfo("Angel of the Ruins", 11, Rarity.RARE, mage.cards.a.AngelOfTheRuins.class));
         cards.add(new SetCardInfo("Arcane Signet", 234, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
