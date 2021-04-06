@@ -147,6 +147,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Master Symmetrist", 138, Rarity.UNCOMMON, mage.cards.m.MasterSymmetrist.class));
         cards.add(new SetCardInfo("Mentor's Guidance", 46, Rarity.UNCOMMON, mage.cards.m.MentorsGuidance.class));
         cards.add(new SetCardInfo("Moldering Karok", 206, Rarity.COMMON, mage.cards.m.MolderingKarok.class));
+        cards.add(new SetCardInfo("Mortality Spear", 207, Rarity.UNCOMMON, mage.cards.m.MortalitySpear.class));
         cards.add(new SetCardInfo("Mountain", 372, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Multiple Choice", 48, Rarity.RARE, mage.cards.m.MultipleChoice.class));
         cards.add(new SetCardInfo("Necroblossom Snarl", 269, Rarity.RARE, mage.cards.n.NecroblossomSnarl.class));
