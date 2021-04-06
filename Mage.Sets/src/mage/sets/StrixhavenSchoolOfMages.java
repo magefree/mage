@@ -155,6 +155,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Needlethorn Drake", 208, Rarity.COMMON, mage.cards.n.NeedlethornDrake.class));
         cards.add(new SetCardInfo("Novice Dissector", 79, Rarity.COMMON, mage.cards.n.NoviceDissector.class));
         cards.add(new SetCardInfo("Oggyar Battle-Seer", 209, Rarity.COMMON, mage.cards.o.OggyarBattleSeer.class));
+        cards.add(new SetCardInfo("Oriq Loremage", 80, Rarity.RARE, mage.cards.o.OriqLoremage.class));
         cards.add(new SetCardInfo("Overgrown Arch", 139, Rarity.UNCOMMON, mage.cards.o.OvergrownArch.class));
         cards.add(new SetCardInfo("Owlin Shieldmage", 210, Rarity.COMMON, mage.cards.o.OwlinShieldmage.class));
         cards.add(new SetCardInfo("Pest Summoning", 211, Rarity.COMMON, mage.cards.p.PestSummoning.class));
