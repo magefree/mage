@@ -1,20 +1,21 @@
 package mage.cards.a;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.CopyEffect;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacesCard;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
 
@@ -38,7 +39,19 @@ public final class AugmenterPugilist extends ModalDoubleFacesCard {
         this.getLeftHalfCard().addAbility(TrampleAbility.getInstance());
 
         // As long as you control eight or more lands, Augmenter Pugilist gets +5/+5.
-        this.getLeftHalfCard().addAbility(new AugmenterPugilistAbility());
+        this.getLeftHalfCard().addAbility(new SimpleStaticAbility(
+            Zone.BATTLEFIELD,
+            new ConditionalContinuousEffect(
+                    new BoostSourceEffect(
+                            5, 5, Duration.WhileOnBattlefield
+                    ),
+                    new PermanentsOnTheBattlefieldCondition(
+                            StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
+                            ComparisonType.MORE_THAN, 7
+                    ),
+                    "as long as you control eight or more lands, {this} gets +5/+5"
+            )
+        ));
 
         // 2.
         // Echoing Equation
@@ -60,29 +73,10 @@ public final class AugmenterPugilist extends ModalDoubleFacesCard {
     }
 }
 
-class AugmenterPugilistAbility extends SimpleStaticAbility {
-
-    public AugmenterPugilistAbility() {
-        super(new BoostSourceEffect(5, 5, Duration.WhileOnBattlefield));
-    }
-
-    @Override
-    public boolean checkIfClause(Game game) {
-        return game.getBattlefield().getAllPermanents().stream()
-            .filter(permanent -> permanent.isLand() && permanent.isControlledBy(getControllerId()))
-            .count() > 7;
-    }
-
-    @Override
-    public String getRule() {
-        return "as long as you control eight or more lands, {this} gets +5/+5";
-    }
-}
-
-class EchoingEquationEffect extends ContinuousEffectImpl {
+class EchoingEquationEffect extends OneShotEffect {
 
     public EchoingEquationEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "choose target creature you control. Each other creature you control becomes a copy of it until end of turn, except those creatures aren’t legendary if the chosen creature is legendary";
     }
 
@@ -97,10 +91,16 @@ class EchoingEquationEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getFirstTarget());
+        Permanent copyFrom = game.getPermanent(source.getFirstTarget());
         game.getBattlefield().getAllPermanents().stream()
-            .filter(permanent -> permanent.isCreature() && permanent.isControlledBy(source.getControllerId()))
-            .forEach(creature -> source.addEffect(new CopyEffect(Duration.EndOfTurn, target, creature.getId(), false)));
+            .filter(permanent -> permanent.isCreature() && !permanent.getId().equals(copyFrom.getId()) && permanent.isControlledBy(source.getControllerId()))
+            .forEach(copyTo -> game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo.getId(), source, new CopyApplier() {
+                @Override
+                public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
+                    blueprint.getSuperType().remove(SuperType.LEGENDARY);
+                    return true;
+                }
+            }));
         return true;
     }
 }

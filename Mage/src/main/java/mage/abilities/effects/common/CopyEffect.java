@@ -23,30 +23,24 @@ public class CopyEffect extends ContinuousEffectImpl {
      * Object we copy from
      */
     protected MageObject copyFromObject;
+
     protected UUID copyToObjectId;
     protected CopyApplier applier;
-    protected boolean keepLegendarySupertype;
 
     public CopyEffect(MageObject copyFromObject, UUID copyToObjectId) {
         this(Duration.Custom, copyFromObject, copyToObjectId);
     }
 
     public CopyEffect(Duration duration, MageObject copyFromObject, UUID copyToObjectId) {
-        this(Duration.Custom, copyFromObject, copyToObjectId, true);
-    }
-
-    public CopyEffect(Duration duration, MageObject copyFromObject, UUID copyToObjectId, boolean keepLegendarySupertype) {
         super(duration, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
         this.copyFromObject = copyFromObject;
         this.copyToObjectId = copyToObjectId;
-        this.keepLegendarySupertype = keepLegendarySupertype;
     }
 
     public CopyEffect(final CopyEffect effect) {
         super(effect);
         this.copyFromObject = effect.copyFromObject.copy();
         this.copyToObjectId = effect.copyToObjectId;
-        this.keepLegendarySupertype = effect.keepLegendarySupertype;
         this.applier = effect.applier;
     }
 
@@ -115,9 +109,7 @@ public class CopyEffect extends ContinuousEffectImpl {
 
         permanent.getSuperType().clear();
         for (SuperType type : copyFromObject.getSuperType()) {
-            if (type != SuperType.LEGENDARY || keepLegendarySupertype) {
-                permanent.addSuperType(type);
-            }
+            permanent.addSuperType(type);
         }
 
         permanent.removeAllAbilities(source.getSourceId(), game);
