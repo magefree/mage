@@ -49,6 +49,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Big Play", 122, Rarity.COMMON, mage.cards.b.BigPlay.class));
         cards.add(new SetCardInfo("Biomathematician", 164, Rarity.COMMON, mage.cards.b.Biomathematician.class));
         cards.add(new SetCardInfo("Blade Historian", 165, Rarity.RARE, mage.cards.b.BladeHistorian.class));
+        cards.add(new SetCardInfo("Blex, Vexing Pest", 148, Rarity.MYTHIC, mage.cards.b.BlexVexingPest.class));
         cards.add(new SetCardInfo("Blood Age General", 93, Rarity.COMMON, mage.cards.b.BloodAgeGeneral.class));
         cards.add(new SetCardInfo("Blood Researcher", 166, Rarity.COMMON, mage.cards.b.BloodResearcher.class));
         cards.add(new SetCardInfo("Blot Out the Sky", 167, Rarity.MYTHIC, mage.cards.b.BlotOutTheSky.class));
