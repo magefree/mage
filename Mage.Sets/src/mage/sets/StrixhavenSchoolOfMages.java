@@ -113,6 +113,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Guiding Voice", 19, Rarity.COMMON, mage.cards.g.GuidingVoice.class));
         cards.add(new SetCardInfo("Hall Monitor", 105, Rarity.UNCOMMON, mage.cards.h.HallMonitor.class));
         cards.add(new SetCardInfo("Hall of Oracles", 267, Rarity.RARE, mage.cards.h.HallOfOracles.class));
+        cards.add(new SetCardInfo("Harness Infinity", 191, Rarity.MYTHIC, mage.cards.h.HarnessInfinity.class));
         cards.add(new SetCardInfo("Heated Debate", 106, Rarity.COMMON, mage.cards.h.HeatedDebate.class));
         cards.add(new SetCardInfo("Honor Troll", 134, Rarity.UNCOMMON, mage.cards.h.HonorTroll.class));
         cards.add(new SetCardInfo("Humiliate", 193, Rarity.UNCOMMON, mage.cards.h.Humiliate.class));
