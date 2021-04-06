@@ -1,5 +1,6 @@
 package mage.abilities;
 
+import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -19,7 +20,6 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -237,6 +237,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         return timing;
     }
 
+    @Override
     public void setTiming(TimingRule timing) {
         this.timing = timing;
     }
