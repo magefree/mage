@@ -121,6 +121,7 @@ class ZurzothChaosRiderAttackAbility extends TriggeredAbilityImpl {
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
+                .filter(permanent -> permanent.isControlledBy(this.getControllerId()))
                 .filter(permanent -> permanent.hasSubtype(SubType.DEVIL, game))
                 .map(MageItem::getId)
                 .map(game.getCombat()::getDefenderId)
@@ -131,7 +132,7 @@ class ZurzothChaosRiderAttackAbility extends TriggeredAbilityImpl {
         if (playerIds.isEmpty()) {
             return false;
         }
-        playerIds.add(getControllerId());
+        playerIds.add(this.getControllerId());
         this.getEffects().clear();
         this.addEffect(new ZurzothChaosRiderEffect(playerIds));
         return true;
