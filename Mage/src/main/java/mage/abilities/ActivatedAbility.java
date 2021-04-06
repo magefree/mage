@@ -1,11 +1,12 @@
 package mage.abilities;
 
+import mage.ApprovingObject;
 import mage.abilities.mana.ManaOptions;
 import mage.constants.TargetController;
+import mage.constants.TimingRule;
 import mage.game.Game;
 
 import java.util.UUID;
-import mage.ApprovingObject;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -68,4 +69,6 @@ public interface ActivatedAbility extends Ability {
     void setMaxActivationsPerTurn(int maxActivationsPerTurn);
 
     int getMaxActivationsPerTurn(Game game);
+
+    public void setTiming(TimingRule timing);
 }

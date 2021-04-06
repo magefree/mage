@@ -7,11 +7,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
+import mage.abilities.hint.common.LandsYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,8 +31,6 @@ public final class KelpieGuide extends CardImpl {
             = new FilterControlledLandPermanent("you control eight or more lands");
     private static final Condition condition
             = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 7);
-    private static final Hint hint
-            = new ValueHint("Lands you control", new PermanentsOnBattlefieldCount(filter));
 
     public KelpieGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -53,7 +49,7 @@ public final class KelpieGuide extends CardImpl {
                 Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost(), condition
         );
         ability.addTarget(new TargetPermanent());
-        this.addAbility(ability.addHint(hint));
+        this.addAbility(ability.addHint(LandsYouControlHint.instance));
     }
 
     private KelpieGuide(final KelpieGuide card) {

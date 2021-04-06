@@ -3,7 +3,7 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,7 +20,7 @@ import java.util.UUID;
 public final class BloodAgeGeneral extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterAttackingCreature("attacking Spirits you control");
+            = new FilterAttackingCreature("attacking Spirits");
 
     static {
         filter.add(SubType.SPIRIT.getPredicate());
@@ -34,9 +34,9 @@ public final class BloodAgeGeneral extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {T}: Attacking Spirits you control get +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new BoostControlledEffect(
-                1, 0, Duration.EndOfTurn, filter
+        // {T}: Attacking Spirits get +1/+0 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(new BoostAllEffect(
+                1, 0, Duration.EndOfTurn, filter, false
         ), new TapSourceCost()));
     }
 

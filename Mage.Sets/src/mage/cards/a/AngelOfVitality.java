@@ -89,7 +89,7 @@ class AngelOfVitalityEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getPlayerId().equals(source.getControllerId()) && (source.getControllerId() != null);
+        return source.isControlledBy(event.getPlayerId());
     }
 }
 

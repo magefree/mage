@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;

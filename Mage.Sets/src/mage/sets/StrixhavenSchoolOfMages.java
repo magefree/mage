@@ -32,7 +32,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         this.ratioBoosterMythic = 7.4;
         this.maxCardNumberInBooster = 275;
 
-        cards.add(new SetCardInfo("Academic Debate", 91, Rarity.UNCOMMON, mage.cards.a.AcademicDebate.class));
+        cards.add(new SetCardInfo("Academic Dispute", 91, Rarity.UNCOMMON, mage.cards.a.AcademicDispute.class));
         cards.add(new SetCardInfo("Academic Probation", 287, Rarity.RARE, mage.cards.a.AcademicProbation.class));
         cards.add(new SetCardInfo("Access Tunnel", 262, Rarity.UNCOMMON, mage.cards.a.AccessTunnel.class));
         cards.add(new SetCardInfo("Accomplished Alchemist", 119, Rarity.RARE, mage.cards.a.AccomplishedAlchemist.class));
@@ -41,6 +41,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Arcane Subtraction", 36, Rarity.COMMON, mage.cards.a.ArcaneSubtraction.class));
         cards.add(new SetCardInfo("Archmage Emeritus", 37, Rarity.RARE, mage.cards.a.ArchmageEmeritus.class));
         cards.add(new SetCardInfo("Archway Commons", 263, Rarity.COMMON, mage.cards.a.ArchwayCommons.class));
+        cards.add(new SetCardInfo("Ardent Dustspeaker", 92, Rarity.UNCOMMON, mage.cards.a.ArdentDustspeaker.class));
         cards.add(new SetCardInfo("Arrogant Poet", 63, Rarity.COMMON, mage.cards.a.ArrogantPoet.class));
         cards.add(new SetCardInfo("Augmenter Pugilist", 147, Rarity.RARE, mage.cards.a.AugmenterPugilist.class));
         cards.add(new SetCardInfo("Baleful Mastery", 64, Rarity.RARE, mage.cards.b.BalefulMastery.class));
@@ -48,6 +49,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Bayou Groff", 121, Rarity.COMMON, mage.cards.b.BayouGroff.class));
         cards.add(new SetCardInfo("Beaming Defiance", 9, Rarity.COMMON, mage.cards.b.BeamingDefiance.class));
         cards.add(new SetCardInfo("Beledros Witherbloom", 163, Rarity.MYTHIC, mage.cards.b.BeledrosWitherbloom.class));
+        cards.add(new SetCardInfo("Biblioplex Assistant", 251, Rarity.COMMON, mage.cards.b.BiblioplexAssistant.class));
         cards.add(new SetCardInfo("Big Play", 122, Rarity.COMMON, mage.cards.b.BigPlay.class));
         cards.add(new SetCardInfo("Biomathematician", 164, Rarity.COMMON, mage.cards.b.Biomathematician.class));
         cards.add(new SetCardInfo("Blade Historian", 165, Rarity.RARE, mage.cards.b.BladeHistorian.class));
@@ -55,6 +57,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Researcher", 166, Rarity.COMMON, mage.cards.b.BloodResearcher.class));
         cards.add(new SetCardInfo("Blot Out the Sky", 167, Rarity.MYTHIC, mage.cards.b.BlotOutTheSky.class));
         cards.add(new SetCardInfo("Body of Research", 168, Rarity.MYTHIC, mage.cards.b.BodyOfResearch.class));
+        cards.add(new SetCardInfo("Brackish Trudge", 65, Rarity.UNCOMMON, mage.cards.b.BrackishTrudge.class));
         cards.add(new SetCardInfo("Burrog Befuddler", 38, Rarity.COMMON, mage.cards.b.BurrogBefuddler.class));
         cards.add(new SetCardInfo("Bury in Books", 39, Rarity.COMMON, mage.cards.b.BuryInBooks.class));
         cards.add(new SetCardInfo("Callous Bloodmage", 66, Rarity.RARE, mage.cards.c.CallousBloodmage.class));
@@ -104,13 +107,16 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Frostboil Snarl", 265, Rarity.RARE, mage.cards.f.FrostboilSnarl.class));
         cards.add(new SetCardInfo("Fuming Effigy", 103, Rarity.COMMON, mage.cards.f.FumingEffigy.class));
         cards.add(new SetCardInfo("Furycalm Snarl", 266, Rarity.RARE, mage.cards.f.FurycalmSnarl.class));
+        cards.add(new SetCardInfo("Galazeth Prismari", 189, Rarity.MYTHIC, mage.cards.g.GalazethPrismari.class));
         cards.add(new SetCardInfo("Gnarled Professor", 133, Rarity.RARE, mage.cards.g.GnarledProfessor.class));
         cards.add(new SetCardInfo("Go Blank", 72, Rarity.UNCOMMON, mage.cards.g.GoBlank.class));
         cards.add(new SetCardInfo("Golden Ratio", 190, Rarity.UNCOMMON, mage.cards.g.GoldenRatio.class));
         cards.add(new SetCardInfo("Grinning Ignus", 104, Rarity.UNCOMMON, mage.cards.g.GrinningIgnus.class));
         cards.add(new SetCardInfo("Guiding Voice", 19, Rarity.COMMON, mage.cards.g.GuidingVoice.class));
         cards.add(new SetCardInfo("Hall Monitor", 105, Rarity.UNCOMMON, mage.cards.h.HallMonitor.class));
+        cards.add(new SetCardInfo("Hall of Oracles", 267, Rarity.RARE, mage.cards.h.HallOfOracles.class));
         cards.add(new SetCardInfo("Heated Debate", 106, Rarity.COMMON, mage.cards.h.HeatedDebate.class));
+        cards.add(new SetCardInfo("Honor Troll", 134, Rarity.UNCOMMON, mage.cards.h.HonorTroll.class));
         cards.add(new SetCardInfo("Humiliate", 193, Rarity.UNCOMMON, mage.cards.h.Humiliate.class));
         cards.add(new SetCardInfo("Hunt for Specimens", 73, Rarity.COMMON, mage.cards.h.HuntForSpecimens.class));
         cards.add(new SetCardInfo("Igneous Inspiration", 107, Rarity.UNCOMMON, mage.cards.i.IgneousInspiration.class));
@@ -124,6 +130,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Kasmina, Enigma Sage", 196, Rarity.MYTHIC, mage.cards.k.KasminaEnigmaSage.class));
         cards.add(new SetCardInfo("Kelpie Guide", 45, Rarity.UNCOMMON, mage.cards.k.KelpieGuide.class));
         cards.add(new SetCardInfo("Kianne, Dean of Substance", 152, Rarity.RARE, mage.cards.k.KianneDeanOfSubstance.class));
+        cards.add(new SetCardInfo("Killian, Ink Duelist", 197, Rarity.UNCOMMON, mage.cards.k.KillianInkDuelist.class));
         cards.add(new SetCardInfo("Lash of Malice", 74, Rarity.COMMON, mage.cards.l.LashOfMalice.class));
         cards.add(new SetCardInfo("Leech Fanatic", 75, Rarity.COMMON, mage.cards.l.LeechFanatic.class));
         cards.add(new SetCardInfo("Leonin Lightscribe", 20, Rarity.RARE, mage.cards.l.LeoninLightscribe.class));
@@ -155,6 +162,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Pigment Storm", 111, Rarity.COMMON, mage.cards.p.PigmentStorm.class));
         cards.add(new SetCardInfo("Pilgrim of the Ages", 22, Rarity.COMMON, mage.cards.p.PilgrimOfTheAges.class));
         cards.add(new SetCardInfo("Pillardrop Rescuer", 23, Rarity.COMMON, mage.cards.p.PillardropRescuer.class));
+        cards.add(new SetCardInfo("Pillardrop Warden", 112, Rarity.COMMON, mage.cards.p.PillardropWarden.class));
         cards.add(new SetCardInfo("Plains", 366, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plargg, Dean of Chaos", 155, Rarity.RARE, mage.cards.p.PlarggDeanOfChaos.class));
         cards.add(new SetCardInfo("Poet's Quill", 82, Rarity.RARE, mage.cards.p.PoetsQuill.class));
@@ -201,8 +209,10 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Sparring Regimen", 29, Rarity.RARE, mage.cards.s.SparringRegimen.class));
         cards.add(new SetCardInfo("Spectacle Mage", 235, Rarity.COMMON, mage.cards.s.SpectacleMage.class));
         cards.add(new SetCardInfo("Specter of the Fens", 87, Rarity.COMMON, mage.cards.s.SpecterOfTheFens.class));
+        cards.add(new SetCardInfo("Spell Satchel", 258, Rarity.UNCOMMON, mage.cards.s.SpellSatchel.class));
         cards.add(new SetCardInfo("Spined Karok", 143, Rarity.COMMON, mage.cards.s.SpinedKarok.class));
         cards.add(new SetCardInfo("Spirit Summoning", 236, Rarity.COMMON, mage.cards.s.SpiritSummoning.class));
+        cards.add(new SetCardInfo("Spiteful Squad", 237, Rarity.COMMON, mage.cards.s.SpitefulSquad.class));
         cards.add(new SetCardInfo("Springmane Cervin", 144, Rarity.COMMON, mage.cards.s.SpringmaneCervin.class));
         cards.add(new SetCardInfo("Square Up", 238, Rarity.COMMON, mage.cards.s.SquareUp.class));
         cards.add(new SetCardInfo("Star Pupil", 30, Rarity.COMMON, mage.cards.s.StarPupil.class));
@@ -218,11 +228,14 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Tanazir Quandrix", 240, Rarity.MYTHIC, mage.cards.t.TanazirQuandrix.class));
         cards.add(new SetCardInfo("Tangletrap", 145, Rarity.COMMON, mage.cards.t.Tangletrap.class));
         cards.add(new SetCardInfo("Teach by Example", 241, Rarity.COMMON, mage.cards.t.TeachByExample.class));
+        cards.add(new SetCardInfo("Teachings of the Archaics", 57, Rarity.RARE, mage.cards.t.TeachingsOfTheArchaics.class));
         cards.add(new SetCardInfo("Team Pennant", 260, Rarity.UNCOMMON, mage.cards.t.TeamPennant.class));
         cards.add(new SetCardInfo("Tempted by the Oriq", 58, Rarity.RARE, mage.cards.t.TemptedByTheOriq.class));
+        cards.add(new SetCardInfo("Tend the Pests", 242, Rarity.UNCOMMON, mage.cards.t.TendThePests.class));
         cards.add(new SetCardInfo("Tenured Inkcaster", 88, Rarity.UNCOMMON, mage.cards.t.TenuredInkcaster.class));
         cards.add(new SetCardInfo("Thrilling Discovery", 243, Rarity.COMMON, mage.cards.t.ThrillingDiscovery.class));
         cards.add(new SetCardInfo("Thunderous Orator", 35, Rarity.UNCOMMON, mage.cards.t.ThunderousOrator.class));
+        cards.add(new SetCardInfo("Tome Shredder", 117, Rarity.COMMON, mage.cards.t.TomeShredder.class));
         cards.add(new SetCardInfo("Torrent Sculptor", 159, Rarity.RARE, mage.cards.t.TorrentSculptor.class));
         cards.add(new SetCardInfo("Twinscroll Shaman", 118, Rarity.COMMON, mage.cards.t.TwinscrollShaman.class));
         cards.add(new SetCardInfo("Umbral Juke", 89, Rarity.UNCOMMON, mage.cards.u.UmbralJuke.class));
@@ -238,6 +251,8 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Witherbloom Command", 248, Rarity.RARE, mage.cards.w.WitherbloomCommand.class));
         cards.add(new SetCardInfo("Witherbloom Pledgemage", 249, Rarity.COMMON, mage.cards.w.WitherbloomPledgemage.class));
         cards.add(new SetCardInfo("Wormhole Serpent", 62, Rarity.UNCOMMON, mage.cards.w.WormholeSerpent.class));
+        cards.add(new SetCardInfo("Zephyr Boots", 261, Rarity.UNCOMMON, mage.cards.z.ZephyrBoots.class));
+        cards.add(new SetCardInfo("Zimone, Quandrix Prodigy", 250, Rarity.UNCOMMON, mage.cards.z.ZimoneQuandrixProdigy.class));
     }
 
     @Override
