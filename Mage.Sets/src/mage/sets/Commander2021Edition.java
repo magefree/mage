@@ -50,5 +50,6 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Steel Overseer", 267, Rarity.RARE, mage.cards.s.SteelOverseer.class));
         cards.add(new SetCardInfo("Thopter Engineer", 181, Rarity.UNCOMMON, mage.cards.t.ThopterEngineer.class));
         cards.add(new SetCardInfo("Thousand-Year Elixir", 271, Rarity.RARE, mage.cards.t.ThousandYearElixir.class));
+        cards.add(new SetCardInfo("Willowdusk, Essence Seer", 6, Rarity.MYTHIC, mage.cards.w.WillowduskEssenceSeer.class));
     }
 }

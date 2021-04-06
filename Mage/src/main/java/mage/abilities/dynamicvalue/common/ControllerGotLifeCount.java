@@ -18,7 +18,7 @@ import java.util.UUID;
 public enum ControllerGotLifeCount implements DynamicValue {
     instance;
 
-    private static final Hint hint = new ValueHint("Life gained this turn:", instance);
+    private static final Hint hint = new ValueHint("Life gained this turn", instance);
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
