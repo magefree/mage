@@ -77,7 +77,7 @@ class EchoingEquationEffect extends OneShotEffect {
 
     public EchoingEquationEffect() {
         super(Outcome.Benefit);
-        staticText = "choose target creature you control. Each other creature you control becomes a copy of it until end of turn, except those creatures aren’t legendary if the chosen creature is legendary";
+        staticText = "choose target creature you control. Each other creature you control becomes a copy of it until end of turn, except those creatures aren't legendary if the chosen creature is legendary";
     }
 
     EchoingEquationEffect(EchoingEquationEffect effect) {
