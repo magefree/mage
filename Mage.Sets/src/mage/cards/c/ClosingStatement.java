@@ -19,6 +19,7 @@ import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -46,6 +47,9 @@ public final class ClosingStatement extends CardImpl {
         // Destroy target creature or planeswalker you don't control. Put a +1/+1 counter on up to one target creature you control.
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker(1, 1, filter, false));
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        Target target = new TargetControlledCreaturePermanent(0, 1);
+        target.setTargetTag(2);
+        this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new ClosingStatementEffect());
     }
 
@@ -81,8 +85,10 @@ class ClosingStatementEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Target target = new TargetControlledCreaturePermanent(0, 1);
-        player.choose(outcome, target, source.getSourceId(), game);
+        Target target = source.getTargets().stream()
+            .filter(t -> t.getTargetTag() == 2)
+            .findFirst()
+            .orElseThrow(() -> new IllegalStateException("Expected to find target with tag 2 but none exists"));
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent != null) {
             return permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
