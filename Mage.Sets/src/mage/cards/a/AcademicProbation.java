@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.effects.common.CantCastEffect;
+import mage.abilities.effects.common.OpponentsCantCastChosenUntilNextTurnEffect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -34,7 +34,7 @@ public final class AcademicProbation extends CardImpl {
         Effect effect = new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME);
         effect.setText("Choose a nonland card name");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new CantCastEffect().setText("opponents can't cast spells with the chosen name until your next turn"));
+        this.getSpellAbility().addEffect(new OpponentsCantCastChosenUntilNextTurnEffect().setText("opponents can't cast spells with the chosen name until your next turn"));
 
         // • Choose target nonland permanent. Until your next turn, it can't attack or block, and its activated abilities can't be activated.
         Mode restrictMode = new Mode();

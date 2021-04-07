@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ChooseACardNameEffect;
-import mage.abilities.effects.common.CantCastEffect;
+import mage.abilities.effects.common.OpponentsCantCastChosenUntilNextTurnEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.AftermathAbility;
 import mage.cards.CardSetInfo;
@@ -33,7 +33,7 @@ public final class FailureComply extends SplitCard {
         Effect effect = new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL);
         effect.setText("Choose a card name");
         getRightHalfCard().getSpellAbility().addEffect(effect);
-        getRightHalfCard().getSpellAbility().addEffect(new CantCastEffect());
+        getRightHalfCard().getSpellAbility().addEffect(new OpponentsCantCastChosenUntilNextTurnEffect());
     }
 
     private FailureComply(final FailureComply card) {

@@ -9,20 +9,23 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.util.CardUtil;
 
-public class CantCastEffect extends ContinuousRuleModifyingEffectImpl {
+/**
+ * This effect must be used in tandem with ChooseACardNameEffect
+ */
+public class OpponentsCantCastChosenUntilNextTurnEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CantCastEffect() {
+    public OpponentsCantCastChosenUntilNextTurnEffect() {
         super(Duration.UntilYourNextTurn, Outcome.Benefit);
         staticText = "Until your next turn, your opponents can't cast spells with the chosen name";
     }
 
-    public CantCastEffect(final CantCastEffect effect) {
+    public OpponentsCantCastChosenUntilNextTurnEffect(final OpponentsCantCastChosenUntilNextTurnEffect effect) {
         super(effect);
     }
 
     @Override
-    public CantCastEffect copy() {
-        return new CantCastEffect(this);
+    public OpponentsCantCastChosenUntilNextTurnEffect copy() {
+        return new OpponentsCantCastChosenUntilNextTurnEffect(this);
     }
 
     @Override
