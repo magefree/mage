@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -58,28 +57,26 @@ public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell, game)) {
-                if (setTargetPointer != SetTargetPointer.NONE) {
-                    for (Effect effect : this.getEffects()) {
-                        switch (setTargetPointer) {
-                            case SPELL:
-                                effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                                break;
-                            case PLAYER:
-                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                                break;
-                            default:
-                                throw new UnsupportedOperationException("Value of SetTargetPointer not supported!");
-                        }
-
-                    }
-                }
-                return true;
-            }
+        if (!game.getPlayer(this.getControllerId()).hasOpponent(event.getPlayerId(), game)) {
+            return false;
         }
-        return false;
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell == null || !filter.match(spell, getSourceId(), getControllerId(), game)) {
+            return false;
+        }
+        switch (setTargetPointer) {
+            case NONE:
+                break;
+            case SPELL:
+                getEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+                break;
+            case PLAYER:
+                getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
+                break;
+            default:
+                throw new UnsupportedOperationException("Value of SetTargetPointer not supported!");
+        }
+        return true;
     }
 
     @Override
