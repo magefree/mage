@@ -67,6 +67,7 @@ class MakeYourMarkEffect extends OneShotEffect {
             return false;
         }
         game.addDelayedTriggeredAbility(new MakeYourMarkDelayedTriggeredAbility(permanent, game), source);
+        return true;
     }
 }
 
