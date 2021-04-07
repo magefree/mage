@@ -94,6 +94,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Exhilarating Elocution", 185, Rarity.COMMON, mage.cards.e.ExhilaratingElocution.class));
         cards.add(new SetCardInfo("Expanded Anatomy", 2, Rarity.COMMON, mage.cards.e.ExpandedAnatomy.class));
         cards.add(new SetCardInfo("Expel", 18, Rarity.COMMON, mage.cards.e.Expel.class));
+        cards.add(new SetCardInfo("Explosive Welcome", 100, Rarity.UNCOMMON, mage.cards.e.ExplosiveWelcome.class));
         cards.add(new SetCardInfo("Exponential Growth", 130, Rarity.RARE, mage.cards.e.ExponentialGrowth.class));
         cards.add(new SetCardInfo("Eyetwitch", 70, Rarity.UNCOMMON, mage.cards.e.Eyetwitch.class));
         cards.add(new SetCardInfo("Field Trip", 131, Rarity.COMMON, mage.cards.f.FieldTrip.class));
