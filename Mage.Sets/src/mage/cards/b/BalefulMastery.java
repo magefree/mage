@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 import mage.target.common.TargetOpponent;
@@ -65,19 +64,16 @@ class BalefulMasteryAlternativeCostEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getSpell(source.getOriginalId());
-        AlternativeCostSourceAbility altCostAbility = (AlternativeCostSourceAbility) spell.getAbilities().stream()
-            .filter(ability -> ability instanceof AlternativeCostSourceAbility)
-            .findFirst()
-            .orElseThrow(IllegalStateException::new);
-        Object value = game.getState().getValue(altCostAbility.getId().toString());
+        Object value = game.getState().getValue(source.getOriginalId() + AlternativeCostSourceAbility.INFO_KEY);
         if (value != null && value.toString().equals("ALT_COST_PAID")) {
             Player player = game.getPlayer(source.getControllerId());
             TargetOpponent targetOpponent = new TargetOpponent(true);
             if (player.chooseTarget(Outcome.Detriment, targetOpponent, source, game)) {
                 Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
-                opponent.drawCards(1, source, game);
-                return true;
+                if (opponent != null) {
+                    opponent.drawCards(1, source, game);
+                    return true;
+                }
             }
             return false;
         }

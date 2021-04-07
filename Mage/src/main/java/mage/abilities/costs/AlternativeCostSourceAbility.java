@@ -16,12 +16,13 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.Iterator;
-import mage.MageObject;
 
 /**
  * @author LevelX2
  */
 public class AlternativeCostSourceAbility extends StaticAbility implements AlternativeSourceCosts {
+
+    public static final String INFO_KEY = "ALT_COST";
 
     private Costs<AlternativeCost2> alternateCosts = new CostsImpl<>();
     protected Condition condition;
@@ -159,7 +160,7 @@ public class AlternativeCostSourceAbility extends StaticAbility implements Alter
                             }
                         }
                     }
-                    game.getState().setValue(getId().toString(), "ALT_COST_PAID");
+                    game.getState().setValue(ability.getOriginalId().toString() + INFO_KEY, "ALT_COST_PAID");
                 } else {
                     return false;
                 }
