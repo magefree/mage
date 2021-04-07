@@ -93,15 +93,18 @@ class EchoingEquationEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent copyFrom = game.getPermanent(source.getFirstTarget());
-        game.getBattlefield().getAllPermanents().stream()
-            .filter(permanent -> permanent.isCreature() && !permanent.getId().equals(copyFrom.getId()) && permanent.isControlledBy(source.getControllerId()))
-            .forEach(copyTo -> game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo.getId(), source, new CopyApplier() {
-                @Override
-                public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
-                    blueprint.getSuperType().remove(SuperType.LEGENDARY);
-                    return true;
-                }
-            }));
-        return true;
+        if (copyFrom != null) {
+            game.getBattlefield().getAllActivePermanents(source.getControllerId()).stream()
+                .filter(permanent -> permanent.isCreature() && !permanent.getId().equals(copyFrom.getId()))
+                .forEach(copyTo -> game.copyPermanent(Duration.EndOfTurn, copyFrom, copyTo.getId(), source, new CopyApplier() {
+                    @Override
+                    public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
+                        blueprint.getSuperType().remove(SuperType.LEGENDARY);
+                        return true;
+                    }
+                }));
+            return true;
+        }
+        return false;
     }
 }
