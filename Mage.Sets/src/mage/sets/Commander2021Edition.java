@@ -36,6 +36,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Daretti, Scrap Savant", 164, Rarity.MYTHIC, mage.cards.d.DarettiScrapSavant.class));
         cards.add(new SetCardInfo("Darksteel Citadel", 285, Rarity.UNCOMMON, mage.cards.d.DarksteelCitadel.class));
         cards.add(new SetCardInfo("Darksteel Mutation", 87, Rarity.UNCOMMON, mage.cards.d.DarksteelMutation.class));
+        cards.add(new SetCardInfo("Digsite Engineer", 15, Rarity.RARE, mage.cards.d.DigsiteEngineer.class));
         cards.add(new SetCardInfo("Dispatch", 88, Rarity.UNCOMMON, mage.cards.d.Dispatch.class));
         cards.add(new SetCardInfo("Dispeller's Capsule", 89, Rarity.COMMON, mage.cards.d.DispellersCapsule.class));
         cards.add(new SetCardInfo("Duplicant", 242, Rarity.RARE, mage.cards.d.Duplicant.class));
