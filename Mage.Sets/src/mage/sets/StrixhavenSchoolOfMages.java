@@ -198,6 +198,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Reject", 50, Rarity.COMMON, mage.cards.r.Reject.class));
         cards.add(new SetCardInfo("Relic Sloth", 223, Rarity.COMMON, mage.cards.r.RelicSloth.class));
         cards.add(new SetCardInfo("Resculpt", 51, Rarity.COMMON, mage.cards.r.Resculpt.class));
+        cards.add(new SetCardInfo("Retriever Phoenix", 113, Rarity.RARE, mage.cards.r.RetrieverPhoenix.class));
         cards.add(new SetCardInfo("Returned Pastcaller", 224, Rarity.UNCOMMON, mage.cards.r.ReturnedPastcaller.class));
         cards.add(new SetCardInfo("Rip Apart", 225, Rarity.UNCOMMON, mage.cards.r.RipApart.class));
         cards.add(new SetCardInfo("Rise of Extus", 226, Rarity.COMMON, mage.cards.r.RiseOfExtus.class));

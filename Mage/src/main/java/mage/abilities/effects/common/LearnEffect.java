@@ -7,7 +7,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.players.Player;
+import mage.game.events.GameEvent;
 
 /**
  * @author TheElk801
@@ -20,10 +20,12 @@ public class LearnEffect extends OneShotEffect {
         filter.add(SubType.LESSON.getPredicate());
     }
 
+    private static final String defaultText = "learn. <i>(You may reveal a Lesson card you own from outside the game " +
+            "and put it into your hand, or discard a card to draw a card.)</i>";
+
     public LearnEffect() {
         super(Outcome.Neutral);
-        staticText = "learn. <i>(You may reveal a Lesson card you own from outside the game " +
-                "and put it into your hand, or discard a card to draw a card.)</i>";
+        staticText = defaultText;
     }
 
     private LearnEffect(final LearnEffect effect) {
@@ -32,7 +34,12 @@ public class LearnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        if (game.replaceEvent(GameEvent.getEvent(
+                GameEvent.EventType.LEARN, source.getSourceId(),
+                source, source.getControllerId()
+        ))) {
+            return false;
+        }
         return new WishEffect(filter, true).apply(game, source)
                 || new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1), new DiscardCardCost()
@@ -42,5 +49,9 @@ public class LearnEffect extends OneShotEffect {
     @Override
     public LearnEffect copy() {
         return new LearnEffect(this);
+    }
+
+    public static String getDefaultText() {
+        return defaultText;
     }
 }
