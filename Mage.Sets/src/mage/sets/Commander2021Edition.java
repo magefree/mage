@@ -24,6 +24,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Ancient Den", 276, Rarity.SPECIAL, mage.cards.a.AncientDen.class));
         cards.add(new SetCardInfo("Angel of the Ruins", 11, Rarity.RARE, mage.cards.a.AngelOfTheRuins.class));
         cards.add(new SetCardInfo("Arcane Signet", 234, Rarity.COMMON, mage.cards.a.ArcaneSignet.class));
+        cards.add(new SetCardInfo("Audacious Reshapers", 47, Rarity.RARE, mage.cards.a.AudaciousReshapers.class));
         cards.add(new SetCardInfo("Boros Charm", 210, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
         cards.add(new SetCardInfo("Boros Locket", 236, Rarity.COMMON, mage.cards.b.BorosLocket.class));
         cards.add(new SetCardInfo("Bosh, Iron Golem", 237, Rarity.RARE, mage.cards.b.BoshIronGolem.class));
