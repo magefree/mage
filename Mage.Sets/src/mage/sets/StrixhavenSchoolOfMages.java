@@ -54,6 +54,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Researcher", 166, Rarity.COMMON, mage.cards.b.BloodResearcher.class));
         cards.add(new SetCardInfo("Blot Out the Sky", 167, Rarity.MYTHIC, mage.cards.b.BlotOutTheSky.class));
         cards.add(new SetCardInfo("Body of Research", 168, Rarity.MYTHIC, mage.cards.b.BodyOfResearch.class));
+        cards.add(new SetCardInfo("Bookwurm", 123, Rarity.UNCOMMON, mage.cards.b.Bookwurm.class));
         cards.add(new SetCardInfo("Brackish Trudge", 65, Rarity.UNCOMMON, mage.cards.b.BrackishTrudge.class));
         cards.add(new SetCardInfo("Burrog Befuddler", 38, Rarity.COMMON, mage.cards.b.BurrogBefuddler.class));
         cards.add(new SetCardInfo("Bury in Books", 39, Rarity.COMMON, mage.cards.b.BuryInBooks.class));
