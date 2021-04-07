@@ -7,6 +7,8 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.constants.ZoneDetail;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -19,15 +21,26 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
 
     protected Cost cost;
     protected DynamicValue genericMana;
+    private final boolean exile;
 
     public CounterUnlessPaysEffect(Cost cost) {
+        this(cost, false);
+    }
+
+    public CounterUnlessPaysEffect(Cost cost, boolean exile) {
         super(Outcome.Detriment);
         this.cost = cost;
+        this.exile = exile;
     }
 
     public CounterUnlessPaysEffect(DynamicValue genericMana) {
+        this(genericMana, false);
+    }
+
+    public CounterUnlessPaysEffect(DynamicValue genericMana, boolean exile) {
         super(Outcome.Detriment);
         this.genericMana = genericMana;
+        this.exile = exile;
     }
 
     public CounterUnlessPaysEffect(final CounterUnlessPaysEffect effect) {
@@ -38,6 +51,7 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
         if (effect.genericMana != null) {
             this.genericMana = effect.genericMana.copy();
         }
+        this.exile = effect.exile;
     }
 
     @Override
@@ -48,35 +62,40 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
-        if (spell != null) {
-            Player player = game.getPlayer(spell.getControllerId());
-            if (player != null) {
-                Cost costToPay;
-                String costValueMessage;
-                if (cost != null) {
-                    costToPay = cost.copy();
-                    costValueMessage = costToPay.getText();
-                } else {
-                    costToPay = ManaUtil.createManaCost(genericMana, game, source, this);
-                    costValueMessage = "{" + genericMana.calculate(game, source, this) + "}";
-                }
-                String message = "";
-                if (costToPay instanceof ManaCost) {
-                    message += "Pay ";
-                }
-                message += costValueMessage + '?';
+        if (spell == null) {
+            return false;
+        }
+        Player player = game.getPlayer(spell.getControllerId());
+        if (player == null) {
+            return false;
+        }
+        Cost costToPay;
+        String costValueMessage;
+        if (cost != null) {
+            costToPay = cost.copy();
+            costValueMessage = costToPay.getText();
+        } else {
+            costToPay = ManaUtil.createManaCost(genericMana, game, source, this);
+            costValueMessage = "{" + genericMana.calculate(game, source, this) + "}";
+        }
+        String message = "";
+        if (costToPay instanceof ManaCost) {
+            message += "Pay ";
+        }
+        message += costValueMessage + '?';
 
-                costToPay.clearPaid();
-                if (!(player.chooseUse(Outcome.Benefit, message, source, game)
-                        && costToPay.pay(source, game, source, spell.getControllerId(), false, null))) {
-                    game.informPlayers(player.getLogName() + " chooses not to pay " + costValueMessage + " to prevent the counter effect");
-                    return game.getStack().counter(spell.getId(), source, game);
-                }
-                game.informPlayers(player.getLogName() + " chooses to pay " + costValueMessage + " to prevent the counter effect");
-                return true;
+        costToPay.clearPaid();
+        if (!(player.chooseUse(Outcome.Benefit, message, source, game)
+                && costToPay.pay(source, game, source, spell.getControllerId(), false, null))) {
+            game.informPlayers(player.getLogName() + " chooses not to pay " + costValueMessage + " to prevent the counter effect");
+            if (exile) {
+                game.getStack().counter(spell.getId(), source, game, Zone.EXILED, false, ZoneDetail.NONE);
+            } else {
+                return game.getStack().counter(spell.getId(), source, game);
             }
         }
-        return false;
+        game.informPlayers(player.getLogName() + " chooses to pay " + costValueMessage + " to prevent the counter effect");
+        return true;
     }
 
     @Override
@@ -100,6 +119,9 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
         if (genericMana != null && !genericMana.getMessage().isEmpty()) {
             sb.append(", where X is ");
             sb.append(genericMana.getMessage());
+        }
+        if (exile) {
+            sb.append(". If that spell is countered this way, exile it instead of putting into its owner's graveyard.");
         }
         return sb.toString();
     }
