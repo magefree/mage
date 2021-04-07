@@ -7,6 +7,7 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.common.LandsYouControlHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacesCard;
@@ -51,7 +52,7 @@ public final class AugmenterPugilist extends ModalDoubleFacesCard {
                     ),
                     "as long as you control eight or more lands, {this} gets +5/+5"
             )
-        ));
+        ).addHint(LandsYouControlHint.instance));
 
         // 2.
         // Echoing Equation

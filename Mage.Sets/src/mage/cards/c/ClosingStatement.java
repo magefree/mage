@@ -19,7 +19,6 @@ import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
