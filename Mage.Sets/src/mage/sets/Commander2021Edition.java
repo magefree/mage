@@ -68,6 +68,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Pia Nalaar", 177, Rarity.RARE, mage.cards.p.PiaNalaar.class));
         cards.add(new SetCardInfo("Pilgrim's Eye", 257, Rarity.COMMON, mage.cards.p.PilgrimsEye.class));
         cards.add(new SetCardInfo("Quicksmith Genius", 178, Rarity.UNCOMMON, mage.cards.q.QuicksmithGenius.class));
+        cards.add(new SetCardInfo("Reinterpret", 73, Rarity.RARE, mage.cards.r.Reinterpret.class));
         cards.add(new SetCardInfo("Replication Technique", 31, Rarity.RARE, mage.cards.r.ReplicationTechnique.class));
         cards.add(new SetCardInfo("Return to Dust", 100, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
         cards.add(new SetCardInfo("Rout", 101, Rarity.RARE, mage.cards.r.Rout.class));
