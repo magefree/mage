@@ -668,6 +668,13 @@ public final class StaticFilters {
         FILTER_SPELL_KICKED_A.setLockedFilter(true);
     }
 
+    public static final FilterCreaturePermanent FILTER_CREATURE_TOKEN = new FilterCreaturePermanent("creature token");
+
+    static {
+        FILTER_CREATURE_TOKEN.add(TokenPredicate.instance);
+        FILTER_CREATURE_TOKEN.setLockedFilter(true);
+    }
+
     public static final FilterCreaturePermanent FILTER_CREATURE_TOKENS = new FilterCreaturePermanent("creature tokens");
 
     static {
