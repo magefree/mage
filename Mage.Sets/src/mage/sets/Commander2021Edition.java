@@ -74,6 +74,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Reinterpret", 73, Rarity.RARE, mage.cards.r.Reinterpret.class));
         cards.add(new SetCardInfo("Replication Technique", 31, Rarity.RARE, mage.cards.r.ReplicationTechnique.class));
         cards.add(new SetCardInfo("Return to Dust", 100, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
+        cards.add(new SetCardInfo("Rousing Refrain", 56, Rarity.RARE, mage.cards.r.RousingRefrain.class));
         cards.add(new SetCardInfo("Rout", 101, Rarity.RARE, mage.cards.r.Rout.class));
         cards.add(new SetCardInfo("Sanctum Gargoyle", 102, Rarity.COMMON, mage.cards.s.SanctumGargoyle.class));
         cards.add(new SetCardInfo("Scrap Trawler", 260, Rarity.RARE, mage.cards.s.ScrapTrawler.class));
