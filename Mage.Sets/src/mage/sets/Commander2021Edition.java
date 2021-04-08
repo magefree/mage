@@ -35,6 +35,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Cleansing Nova", 86, Rarity.RARE, mage.cards.c.CleansingNova.class));
         cards.add(new SetCardInfo("Combustible Gearhulk", 163, Rarity.MYTHIC, mage.cards.c.CombustibleGearhulk.class));
         cards.add(new SetCardInfo("Commander's Sphere", 239, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
+        cards.add(new SetCardInfo("Curiosity Crafter", 24, Rarity.RARE, mage.cards.c.CuriosityCrafter.class));
         cards.add(new SetCardInfo("Daretti, Scrap Savant", 164, Rarity.MYTHIC, mage.cards.d.DarettiScrapSavant.class));
         cards.add(new SetCardInfo("Darksteel Citadel", 285, Rarity.UNCOMMON, mage.cards.d.DarksteelCitadel.class));
         cards.add(new SetCardInfo("Darksteel Mutation", 87, Rarity.UNCOMMON, mage.cards.d.DarksteelMutation.class));
