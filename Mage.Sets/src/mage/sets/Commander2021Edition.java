@@ -47,6 +47,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Feldon of the Third Path", 169, Rarity.MYTHIC, mage.cards.f.FeldonOfTheThirdPath.class));
         cards.add(new SetCardInfo("Fiery Encore", 51, Rarity.RARE, mage.cards.f.FieryEncore.class));
         cards.add(new SetCardInfo("Great Furnace", 292, Rarity.COMMON, mage.cards.g.GreatFurnace.class));
+        cards.add(new SetCardInfo("Guardian Augmenter", 62, Rarity.RARE, mage.cards.g.GuardianAugmenter.class));
         cards.add(new SetCardInfo("Hedron Archive", 244, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
         cards.add(new SetCardInfo("Hellkite Igniter", 171, Rarity.RARE, mage.cards.h.HellkiteIgniter.class));
         cards.add(new SetCardInfo("Hellkite Tyrant", 172, Rarity.MYTHIC, mage.cards.h.HellkiteTyrant.class));
