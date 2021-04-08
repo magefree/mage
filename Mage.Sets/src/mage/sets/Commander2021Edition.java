@@ -56,6 +56,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Hoard-Smelter Dragon", 173, Rarity.RARE, mage.cards.h.HoardSmelterDragon.class));
         cards.add(new SetCardInfo("Ichor Wellspring", 245, Rarity.COMMON, mage.cards.i.IchorWellspring.class));
         cards.add(new SetCardInfo("Inferno Project", 52, Rarity.RARE, mage.cards.i.InfernoProject.class));
+        cards.add(new SetCardInfo("Inspiring Refrain", 27, Rarity.RARE, mage.cards.i.InspiringRefrain.class));
         cards.add(new SetCardInfo("Jor Kadeen, the Prevailer", 220, Rarity.RARE, mage.cards.j.JorKadeenThePrevailer.class));
         cards.add(new SetCardInfo("Key to the City", 248, Rarity.RARE, mage.cards.k.KeyToTheCity.class));
         cards.add(new SetCardInfo("Meteor Golem", 250, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
