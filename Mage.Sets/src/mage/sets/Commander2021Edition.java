@@ -60,6 +60,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Mind Stone", 251, Rarity.COMMON, mage.cards.m.MindStone.class));
         cards.add(new SetCardInfo("Monologue Tax", 19, Rarity.RARE, mage.cards.m.MonologueTax.class));
         cards.add(new SetCardInfo("Myr Battlesphere", 253, Rarity.RARE, mage.cards.m.MyrBattlesphere.class));
+        cards.add(new SetCardInfo("Oversimplify", 72, Rarity.RARE, mage.cards.o.Oversimplify.class));
         cards.add(new SetCardInfo("Paradox Zone", 64, Rarity.RARE, mage.cards.p.ParadoxZone.class));
         cards.add(new SetCardInfo("Phyrexia's Core", 309, Rarity.UNCOMMON, mage.cards.p.PhyrexiasCore.class));
         cards.add(new SetCardInfo("Pia Nalaar", 177, Rarity.RARE, mage.cards.p.PiaNalaar.class));
