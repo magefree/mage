@@ -13,9 +13,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentToken;
-import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -49,6 +47,7 @@ class StonebindersFamiliarTriggeredAbility extends TriggeredAbilityImpl {
 
     StonebindersFamiliarTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        this.setTriggersOnce(true);
     }
 
     private StonebindersFamiliarTriggeredAbility(final StonebindersFamiliarTriggeredAbility ability) {
@@ -62,24 +61,11 @@ class StonebindersFamiliarTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (Objects.equals(game.getState().getValue(
-                CardUtil.getCardZoneString("lastTurnTriggered" + originalId, sourceId, game)
-        ), game.getTurnNum())) {
-            return false;
-        }
         ZoneChangeEvent zEvent = ((ZoneChangeEvent) event);
         return zEvent.getToZone() == Zone.EXILED
                 && isControlledBy(game.getActivePlayerId())
                 && (zEvent.getFromZone() != Zone.BATTLEFIELD
                 || !(zEvent.getTarget() instanceof PermanentToken));
-    }
-
-    @Override
-    public void trigger(Game game, UUID controllerId) {
-        game.getState().setValue(CardUtil.getCardZoneString(
-                "lastTurnTriggered" + originalId, sourceId, game
-        ), game.getTurnNum());
-        super.trigger(game, controllerId);
     }
 
     @Override

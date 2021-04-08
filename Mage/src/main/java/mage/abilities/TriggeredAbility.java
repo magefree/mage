@@ -1,12 +1,12 @@
 
 package mage.abilities;
 
-import java.util.UUID;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public interface TriggeredAbility extends Ability {
@@ -36,6 +36,10 @@ public interface TriggeredAbility extends Ability {
      * @return
      */
     boolean checkTrigger(GameEvent event, Game game);
+
+    boolean checkTriggeredAlready(Game game);
+
+    TriggeredAbility setTriggersOnce(boolean triggersOnce);
 
     boolean checkInterveningIfClause(Game game);
 

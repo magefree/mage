@@ -2,8 +2,6 @@
 
 package mage.abilities;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import mage.MageObject;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -12,6 +10,9 @@ import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -39,7 +40,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     }
 
     public void checkStateTriggers(Game game) {
-        for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext();) {
+        for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext(); ) {
             TriggeredAbility ability = it.next();
             if (ability instanceof StateTriggeredAbility && ((StateTriggeredAbility) ability).canTrigger(game)) {
                 checkTrigger(ability, null, game);
@@ -48,7 +49,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     }
 
     public void checkTriggers(GameEvent event, Game game) {
-        for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext();) {
+        for (Iterator<TriggeredAbility> it = this.values().iterator(); it.hasNext(); ) {
             TriggeredAbility ability = it.next();
             if (ability.checkEventType(event, game)) {
                 checkTrigger(ability, event, game);
@@ -90,7 +91,7 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
                     }
                 }
 
-                if (ability.checkTrigger(event, game)) {
+                if (ability.checkTrigger(event, game) && ability.checkTriggeredAlready(game)) {
                     NumberOfTriggersEvent numberOfTriggersEvent = new NumberOfTriggersEvent(ability, event);
                     if (!game.replaceEvent(numberOfTriggersEvent)) {
                         for (int i = 0; i < numberOfTriggersEvent.getAmount(); i++) {
@@ -105,8 +106,8 @@ public class TriggeredAbilities extends ConcurrentHashMap<String, TriggeredAbili
     /**
      * Adds a by sourceId gained triggered ability
      *
-     * @param ability - the gained ability
-     * @param sourceId - the source that assigned the ability
+     * @param ability    - the gained ability
+     * @param sourceId   - the source that assigned the ability
      * @param attachedTo - the object that gained the ability
      */
     public void add(TriggeredAbility ability, UUID sourceId, MageObject attachedTo) {

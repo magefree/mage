@@ -8,13 +8,13 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.Locale;
 import java.util.UUID;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -23,6 +23,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     protected boolean optional;
     protected boolean leavesTheBattlefieldTrigger;
+    private boolean triggersOnce = false;
 
     public TriggeredAbilityImpl(Zone zone, Effect effect) {
         this(zone, effect, false);
@@ -48,14 +49,41 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         super(ability);
         this.optional = ability.optional;
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
+        this.triggersOnce = ability.triggersOnce;
     }
 
     @Override
     public void trigger(Game game, UUID controllerId) {
         //20091005 - 603.4
         if (checkInterveningIfClause(game)) {
+            addthing(game);
             game.addTriggeredAbility(this);
         }
+    }
+
+    private final void addthing(Game game) {
+        if (!triggersOnce) {
+            return;
+        }
+        game.getState().setValue(CardUtil.getCardZoneString(
+                "lastTurnTriggered" + originalId, sourceId, game
+        ), game.getTurnNum());
+    }
+
+    @Override
+    public boolean checkTriggeredAlready(Game game) {
+        if (!triggersOnce) {
+            return true;
+        }
+        Integer lastTurnTriggered = (Integer) game.getState().getValue(
+                CardUtil.getCardZoneString("lastTurnTriggered" + originalId, sourceId, game)
+        );
+        return lastTurnTriggered == null || lastTurnTriggered != game.getTurnNum();
+    }
+
+    public TriggeredAbility setTriggersOnce(boolean triggersOnce) {
+        this.triggersOnce = triggersOnce;
+        return this;
     }
 
     @Override
@@ -130,6 +158,9 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
             }
             sb.append(superRule);
+            if (triggersOnce) {
+                sb.append(" This abilities triggers only once each turn.");
+            }
         }
 
         return sb.toString();
@@ -247,7 +278,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         if (!source.hasSourceObjectAbility(game, sourceObject, event)) {
             return false; // the permanent does currently not have or before it dies the ability so no trigger
         }
-        
+
         // check now it is in graveyard (only if it is no token and was the target itself)
         if (source.getSourceId().equals(event.getTargetId()) // source is also the target
                 && !(sourceObject instanceof PermanentToken) // it's no token
