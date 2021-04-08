@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.effects.common.DoubleP1P1CountersSourceEffect;
+import mage.abilities.effects.common.DoubleCountersSourceEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -41,7 +41,7 @@ public final class PrimordialHydra extends CardImpl {
 
         // At the beginning of your upkeep, double the number of +1/+1 counters on Primordial Hydra.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoubleP1P1CountersSourceEffect(), TargetController.YOU, false
+                new DoubleCountersSourceEffect(CounterType.P1P1), TargetController.YOU, false
         ));
 
         // Primordial Hydra has trample as long as it has ten or more +1/+1 counters on it.

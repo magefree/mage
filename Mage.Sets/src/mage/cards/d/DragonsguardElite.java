@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.MagecraftAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DoubleP1P1CountersSourceEffect;
+import mage.abilities.effects.common.DoubleCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +31,7 @@ public final class DragonsguardElite extends CardImpl {
         this.addAbility(new MagecraftAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
 
         // {4}{G}{G}: Double the number of +1/+1 counters on Dragonsguard Elite.
-        this.addAbility(new SimpleActivatedAbility(new DoubleP1P1CountersSourceEffect(), new ManaCostsImpl<>("{4}{G}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new DoubleCountersSourceEffect(CounterType.P1P1), new ManaCostsImpl<>("{4}{G}{G}")));
     }
 
     private DragonsguardElite(final DragonsguardElite card) {

@@ -3,12 +3,13 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.DoubleP1P1CountersSourceEffect;
+import mage.abilities.effects.common.DoubleCountersSourceEffect;
 import mage.abilities.keyword.SunburstAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.counters.CounterType;
 
 import java.util.UUID;
 
@@ -27,7 +28,7 @@ public final class Solarion extends CardImpl {
         this.addAbility(new SunburstAbility(this));
 
         // {tap}: Double the number of +1/+1 counters on Solarion.
-        this.addAbility(new SimpleActivatedAbility(new DoubleP1P1CountersSourceEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DoubleCountersSourceEffect(CounterType.P1P1), new TapSourceCost()));
     }
 
     private Solarion(final Solarion card) {
