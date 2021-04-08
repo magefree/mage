@@ -86,6 +86,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Eager First-Year", 16, Rarity.COMMON, mage.cards.e.EagerFirstYear.class));
         cards.add(new SetCardInfo("Elemental Masterpiece", 182, Rarity.COMMON, mage.cards.e.ElementalMasterpiece.class));
         cards.add(new SetCardInfo("Elemental Summoning", 183, Rarity.COMMON, mage.cards.e.ElementalSummoning.class));
+        cards.add(new SetCardInfo("Emergent Sequence", 129, Rarity.UNCOMMON, mage.cards.e.EmergentSequence.class));
         cards.add(new SetCardInfo("Enthusiastic Study", 99, Rarity.COMMON, mage.cards.e.EnthusiasticStudy.class));
         cards.add(new SetCardInfo("Environmental Sciences", 1, Rarity.COMMON, mage.cards.e.EnvironmentalSciences.class));
         cards.add(new SetCardInfo("Essence Infusion", 69, Rarity.COMMON, mage.cards.e.EssenceInfusion.class));
