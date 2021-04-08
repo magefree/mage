@@ -80,6 +80,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Slayers' Stronghold", 318, Rarity.RARE, mage.cards.s.SlayersStronghold.class));
         cards.add(new SetCardInfo("Sol Ring", 263, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 264, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
+        cards.add(new SetCardInfo("Spawning Kraken", 33, Rarity.RARE, mage.cards.s.SpawningKraken.class));
         cards.add(new SetCardInfo("Steel Hellkite", 266, Rarity.RARE, mage.cards.s.SteelHellkite.class));
         cards.add(new SetCardInfo("Steel Overseer", 267, Rarity.RARE, mage.cards.s.SteelOverseer.class));
         cards.add(new SetCardInfo("Sun Titan", 106, Rarity.MYTHIC, mage.cards.s.SunTitan.class));
