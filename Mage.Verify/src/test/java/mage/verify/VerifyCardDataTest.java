@@ -102,6 +102,7 @@ public class VerifyCardDataTest {
 
         // supertype
         skipListCreate(SKIP_LIST_SUPERTYPE);
+        skipListAddName(SKIP_LIST_SUPERTYPE, "C21", "Octavia, Living Thesis"); // temporary
 
         // type
         skipListCreate(SKIP_LIST_TYPE);
