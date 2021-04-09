@@ -48,7 +48,7 @@ public final class BalefulMastery extends CardImpl {
 
 class BalefulMasteryAlternativeCostEffect extends OneShotEffect {
 
-    UUID alternativeCostOriginalID;
+    private final UUID alternativeCostOriginalID;
 
     BalefulMasteryAlternativeCostEffect(UUID alternativeCostOriginalID) {
         super(Outcome.Detriment);
@@ -56,7 +56,7 @@ class BalefulMasteryAlternativeCostEffect extends OneShotEffect {
         this.alternativeCostOriginalID = alternativeCostOriginalID;
     }
 
-    BalefulMasteryAlternativeCostEffect(BalefulMasteryAlternativeCostEffect effect) {
+    private BalefulMasteryAlternativeCostEffect(BalefulMasteryAlternativeCostEffect effect) {
         super(effect);
         this.alternativeCostOriginalID = effect.alternativeCostOriginalID;
     }
@@ -68,8 +68,9 @@ class BalefulMasteryAlternativeCostEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        boolean wasActivated = AlternativeCostSourceAbility.getActivatedStatus(game, source, this.alternativeCostOriginalID, false);
-        if (!wasActivated) {
+        if (!AlternativeCostSourceAbility.getActivatedStatus(
+                game, source, this.alternativeCostOriginalID, false
+        )) {
             return false;
         }
 
