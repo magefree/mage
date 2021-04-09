@@ -586,6 +586,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      *
      * @param player {@link Player} to remove all cards from hand.
      */
+    @Deprecated // TODO: remove, cause test games don't use starting draws
     public void removeAllCardsFromHand(TestPlayer player) {
         getCommands(player).put(Zone.HAND, "clear");
     }

@@ -33,6 +33,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         this.maxCardNumberInBooster = 275;
 
         cards.add(new SetCardInfo("Academic Dispute", 91, Rarity.UNCOMMON, mage.cards.a.AcademicDispute.class));
+        cards.add(new SetCardInfo("Academic Probation", 287, Rarity.RARE, mage.cards.a.AcademicProbation.class));
         cards.add(new SetCardInfo("Access Tunnel", 262, Rarity.UNCOMMON, mage.cards.a.AccessTunnel.class));
         cards.add(new SetCardInfo("Accomplished Alchemist", 119, Rarity.RARE, mage.cards.a.AccomplishedAlchemist.class));
         cards.add(new SetCardInfo("Aether Helix", 162, Rarity.UNCOMMON, mage.cards.a.AetherHelix.class));
@@ -42,6 +43,9 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Archway Commons", 263, Rarity.COMMON, mage.cards.a.ArchwayCommons.class));
         cards.add(new SetCardInfo("Ardent Dustspeaker", 92, Rarity.UNCOMMON, mage.cards.a.ArdentDustspeaker.class));
         cards.add(new SetCardInfo("Arrogant Poet", 63, Rarity.COMMON, mage.cards.a.ArrogantPoet.class));
+        cards.add(new SetCardInfo("Augmenter Pugilist", 147, Rarity.RARE, mage.cards.a.AugmenterPugilist.class));
+        cards.add(new SetCardInfo("Baleful Mastery", 64, Rarity.RARE, mage.cards.b.BalefulMastery.class));
+        cards.add(new SetCardInfo("Basic Conjuration", 120, Rarity.RARE, mage.cards.b.BasicConjuration.class));
         cards.add(new SetCardInfo("Bayou Groff", 121, Rarity.COMMON, mage.cards.b.BayouGroff.class));
         cards.add(new SetCardInfo("Beaming Defiance", 9, Rarity.COMMON, mage.cards.b.BeamingDefiance.class));
         cards.add(new SetCardInfo("Beledros Witherbloom", 163, Rarity.MYTHIC, mage.cards.b.BeledrosWitherbloom.class));
@@ -62,6 +66,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Campus Guide", 252, Rarity.COMMON, mage.cards.c.CampusGuide.class));
         cards.add(new SetCardInfo("Charge Through", 124, Rarity.COMMON, mage.cards.c.ChargeThrough.class));
         cards.add(new SetCardInfo("Clever Lumimancer", 10, Rarity.UNCOMMON, mage.cards.c.CleverLumimancer.class));
+        cards.add(new SetCardInfo("Closing Statement", 169, Rarity.UNCOMMON, mage.cards.c.ClosingStatement.class));
         cards.add(new SetCardInfo("Cogwork Archivist", 254, Rarity.COMMON, mage.cards.c.CogworkArchivist.class));
         cards.add(new SetCardInfo("Combat Professor", 11, Rarity.COMMON, mage.cards.c.CombatProfessor.class));
         cards.add(new SetCardInfo("Confront the Past", 67, Rarity.RARE, mage.cards.c.ConfrontThePast.class));
