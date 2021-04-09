@@ -81,6 +81,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Dina, Soul Steeper", 178, Rarity.UNCOMMON, mage.cards.d.DinaSoulSteeper.class));
         cards.add(new SetCardInfo("Divide by Zero", 41, Rarity.UNCOMMON, mage.cards.d.DivideByZero.class));
         cards.add(new SetCardInfo("Double Major", 179, Rarity.RARE, mage.cards.d.DoubleMajor.class));
+        cards.add(new SetCardInfo("Dragon's Approach", 97, Rarity.COMMON, mage.cards.d.DragonsApproach.class));
         cards.add(new SetCardInfo("Dragonsguard Elite", 127, Rarity.RARE, mage.cards.d.DragonsguardElite.class));
         cards.add(new SetCardInfo("Dramatic Finale", 180, Rarity.RARE, mage.cards.d.DramaticFinale.class));
         cards.add(new SetCardInfo("Dream Strix", 42, Rarity.RARE, mage.cards.d.DreamStrix.class));
