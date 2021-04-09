@@ -17,7 +17,6 @@ import mage.target.common.TargetOpponent;
 import java.util.UUID;
 
 /**
- *
  * @author htrajan
  */
 public final class BalefulMastery extends CardImpl {
@@ -26,10 +25,11 @@ public final class BalefulMastery extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");
 
         // You may pay {1}{B} rather than pay this spell's mana cost.
-        this.addAbility(new AlternativeCostSourceAbility(new ManaCostsImpl<>("{1}{B}")));
+        Ability costAbility = new AlternativeCostSourceAbility(new ManaCostsImpl<>("{1}{B}"));
+        this.addAbility(costAbility);
 
         // If the {1}{B} cost was paid, an opponent draws a card.
-        this.getSpellAbility().addEffect(new BalefulMasteryAlternativeCostEffect());
+        this.getSpellAbility().addEffect(new BalefulMasteryAlternativeCostEffect(costAbility.getOriginalId()));
 
         // Exile target creature or planeswalker.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
@@ -48,13 +48,17 @@ public final class BalefulMastery extends CardImpl {
 
 class BalefulMasteryAlternativeCostEffect extends OneShotEffect {
 
-    BalefulMasteryAlternativeCostEffect() {
+    UUID alternativeCostOriginalID;
+
+    BalefulMasteryAlternativeCostEffect(UUID alternativeCostOriginalID) {
         super(Outcome.Detriment);
         staticText = "if the {1}{B} cost was paid, an opponent draws a card.<br>";
+        this.alternativeCostOriginalID = alternativeCostOriginalID;
     }
 
     BalefulMasteryAlternativeCostEffect(BalefulMasteryAlternativeCostEffect effect) {
         super(effect);
+        this.alternativeCostOriginalID = effect.alternativeCostOriginalID;
     }
 
     @Override
@@ -64,19 +68,20 @@ class BalefulMasteryAlternativeCostEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Object value = game.getState().getValue(source.getOriginalId() + AlternativeCostSourceAbility.INFO_KEY);
-        if (value != null && value.toString().equals("ALT_COST_PAID")) {
-            Player player = game.getPlayer(source.getControllerId());
-            TargetOpponent targetOpponent = new TargetOpponent(true);
-            if (player.chooseTarget(Outcome.Detriment, targetOpponent, source, game)) {
-                Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
-                if (opponent != null) {
-                    opponent.drawCards(1, source, game);
-                    return true;
-                }
-            }
+        boolean wasActivated = AlternativeCostSourceAbility.getActivatedStatus(game, source, this.alternativeCostOriginalID, false);
+        if (!wasActivated) {
             return false;
         }
-        return true;
+
+        Player player = game.getPlayer(source.getControllerId());
+        TargetOpponent targetOpponent = new TargetOpponent(true);
+        if (player.chooseTarget(Outcome.DrawCard, targetOpponent, source, game)) {
+            Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
+            if (opponent != null) {
+                opponent.drawCards(1, source, game);
+                return true;
+            }
+        }
+        return false;
     }
 }

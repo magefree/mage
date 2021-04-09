@@ -59,7 +59,38 @@ public class BalefulMasteryTest extends CardTestPlayerBase {
         assertExileCount(playerB, "Goblin Piker", 1);
     }
 
-    @Test // TODO: must be fixed
+    @Test
+    public void test_BalefulMastery_DoubleCast() {
+        // You may pay {1}{B} rather than pay this spell's mana cost.
+        // If the {1}{B} cost was paid, an opponent draws a card.
+        // Exile target creature or planeswalker.
+        addCard(Zone.HAND, playerA, "Baleful Mastery", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2 + 4); // 1x normal, 1x alternative
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Goblin Piker");
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+
+        // cast 1 - alternative
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Baleful Mastery", "Goblin Piker");
+        setChoice(playerA, "Yes"); // use alternative cost
+        addTarget(playerA, playerB); // select opponent
+
+        // cast 2 - normal
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Baleful Mastery", "Grizzly Bears");
+        setChoice(playerA, "No"); // normal cast
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+
+        assertHandCount(playerA, 0);
+        assertHandCount(playerB, 1);
+        assertExileCount(playerB, "Goblin Piker", 1);
+        assertExileCount(playerB, "Grizzly Bears", 1);
+    }
+
+    @Test
     public void test_BalefulMastery_BlinkMustResetAlternativeCost() {
         addCustomEffect_ReturnFromAnyToHand(playerA);
 
@@ -99,6 +130,49 @@ public class BalefulMasteryTest extends CardTestPlayerBase {
         checkHandCount("after cast 2", 1, PhaseStep.PRECOMBAT_MAIN, playerB, 1); // no draws on cast 2
         checkExileCount("after cast 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Piker", 1);
         checkExileCount("after cast 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grizzly Bears", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_BalefulMastery_CopyMustKeepAlternativeCost() {
+        // You may pay {1}{B} rather than pay this spell's mana cost.
+        // If the {1}{B} cost was paid, an opponent draws a card.
+        // Exile target creature or planeswalker.
+        addCard(Zone.HAND, playerA, "Baleful Mastery");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        //
+        // Copy target instant or sorcery spell. You may choose new targets for the copy.
+        addCard(Zone.HAND, playerA, "Twincast"); // {U}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Goblin Piker");
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+
+        // cast with alternative
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {B}", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Baleful Mastery", "Goblin Piker");
+        setChoice(playerA, "Yes"); // use alternative cost
+        // copy spell
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Twincast", "Cast Baleful Mastery", "Cast Baleful Mastery");
+        setChoice(playerA, "Yes"); // change target
+        addTarget(playerA, "Grizzly Bears"); // new target
+        checkStackSize("before copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
+        checkStackSize("after copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 2);
+        //
+        // resolve copied spell
+        // possible bug: alternative cost will be lost for copied spell, so no opponent selections
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
+        addTarget(playerA, playerB); // select opponent
+        checkStackSize("after copy resolve", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 1);
+        // resolve original spell
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA, true);
+        addTarget(playerA, playerB); // select opponent
+        checkStackSize("after original resolve", 1, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
