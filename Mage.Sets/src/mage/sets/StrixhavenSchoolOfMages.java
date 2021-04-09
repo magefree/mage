@@ -104,6 +104,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Eyetwitch", 70, Rarity.UNCOMMON, mage.cards.e.Eyetwitch.class));
         cards.add(new SetCardInfo("Field Trip", 131, Rarity.COMMON, mage.cards.f.FieldTrip.class));
         cards.add(new SetCardInfo("First Day of Class", 102, Rarity.COMMON, mage.cards.f.FirstDayOfClass.class));
+        cards.add(new SetCardInfo("Flamescroll Celebrant", 150, Rarity.RARE, mage.cards.f.FlamescrollCelebrant.class));
         cards.add(new SetCardInfo("Flunk", 71, Rarity.UNCOMMON, mage.cards.f.Flunk.class));
         cards.add(new SetCardInfo("Forest", 374, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fortifying Draught", 132, Rarity.UNCOMMON, mage.cards.f.FortifyingDraught.class));
