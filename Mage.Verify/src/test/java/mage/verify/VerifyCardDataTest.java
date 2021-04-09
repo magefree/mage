@@ -110,6 +110,7 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense");
         skipListAddName(SKIP_LIST_TYPE, "STX", "Rise of Extus"); // temporary
+        skipListAddName(SKIP_LIST_TYPE, "C21", "Octavia, Living Thesis"); // temporary
 
         // subtype
         skipListCreate(SKIP_LIST_SUBTYPE);
