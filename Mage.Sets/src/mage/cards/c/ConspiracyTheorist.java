@@ -1,7 +1,6 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -125,8 +124,7 @@ class ConspiracyTheoristEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source.getSourceId());
-        if (controller != null && sourceObject != null) {
+        if (controller != null) {
             CardsImpl cards = new CardsImpl(discardedCards);
             if (controller.chooseUse(Outcome.Exile, "Exile a card?", source, game)) {
                 TargetCard target = new TargetCard(Zone.GRAVEYARD, new FilterCard("card to exile"));
