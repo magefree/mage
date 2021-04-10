@@ -7,6 +7,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -42,7 +43,7 @@ public final class TivashGloomSummoner extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new TivashGloomSummonerEffect(),
                 TargetController.YOU, condition, false
-        ), new PlayerGainedLifeWatcher());
+        ).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private TivashGloomSummoner(final TivashGloomSummoner card) {

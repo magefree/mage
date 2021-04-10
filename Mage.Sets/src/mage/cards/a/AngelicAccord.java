@@ -2,6 +2,7 @@ package mage.cards.a;
 
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.YouGainedLifeCondition;
+import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,9 +24,10 @@ public final class AngelicAccord extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // At the beginning of each end step, if you gained 4 or more life this turn, create a 4/4 white Angel creature token with flying.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new AngelToken()), TargetController.ANY,
-                        new YouGainedLifeCondition(ComparisonType.MORE_THAN, 3), false),
-                new PlayerGainedLifeWatcher());
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                Zone.BATTLEFIELD, new CreateTokenEffect(new AngelToken()), TargetController.ANY,
+                new YouGainedLifeCondition(ComparisonType.MORE_THAN, 3), false
+        ).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private AngelicAccord(final AngelicAccord card) {
