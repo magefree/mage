@@ -227,6 +227,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Trygon Predator", 231, Rarity.UNCOMMON, mage.cards.t.TrygonPredator.class));
         cards.add(new SetCardInfo("Unstable Obelisk", 272, Rarity.UNCOMMON, mage.cards.u.UnstableObelisk.class));
         cards.add(new SetCardInfo("Utter End", 232, Rarity.RARE, mage.cards.u.UtterEnd.class));
+        cards.add(new SetCardInfo("Veinwitch Coven", 46, Rarity.RARE, mage.cards.v.VeinwitchCoven.class));
         cards.add(new SetCardInfo("Veyran, Voice of Duality", 3, Rarity.MYTHIC, mage.cards.v.VeyranVoiceOfDuality.class));
         cards.add(new SetCardInfo("Victory Chimes", 274, Rarity.RARE, mage.cards.v.VictoryChimes.class));
         cards.add(new SetCardInfo("Volcanic Vision", 182, Rarity.RARE, mage.cards.v.VolcanicVision.class));
