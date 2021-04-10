@@ -160,6 +160,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Lorehold Excavation", 200, Rarity.UNCOMMON, mage.cards.l.LoreholdExcavation.class));
         cards.add(new SetCardInfo("Lorehold Pledgemage", 201, Rarity.COMMON, mage.cards.l.LoreholdPledgemage.class));
         cards.add(new SetCardInfo("Maelstrom Muse", 202, Rarity.UNCOMMON, mage.cards.m.MaelstromMuse.class));
+        cards.add(new SetCardInfo("Mage Duel", 137, Rarity.COMMON, mage.cards.m.MageDuel.class));
         cards.add(new SetCardInfo("Mage Hunter", 76, Rarity.UNCOMMON, mage.cards.m.MageHunter.class));
         cards.add(new SetCardInfo("Mage Hunters' Onslaught", 77, Rarity.COMMON, mage.cards.m.MageHuntersOnslaught.class));
         cards.add(new SetCardInfo("Magma Opus", 203, Rarity.MYTHIC, mage.cards.m.MagmaOpus.class));
