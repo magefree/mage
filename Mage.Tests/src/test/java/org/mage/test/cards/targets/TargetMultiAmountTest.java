@@ -1,9 +1,12 @@
 package org.mage.test.cards.targets;
 
 import mage.constants.MultiAmountType;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestPlayerBase;
+import org.mage.test.player.TestPlayer;
+import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +15,7 @@ import java.util.stream.Collectors;
  * @author JayDi85
  */
 
-public class TargetMultiAmountTest extends CardTestPlayerBase {
+public class TargetMultiAmountTest extends CardTestPlayerBaseWithAIHelps {
 
     @Test
     public void test_DefaultValues() {
@@ -115,5 +118,38 @@ public class TargetMultiAmountTest extends CardTestPlayerBase {
         if (returnDefaultOnError) {
             Assert.assertTrue("parsed values must be good", MultiAmountType.isGoodValues(parsedValues, count, min, max));
         }
+    }
+
+    @Test
+    public void test_Manamorphose_Normal() {
+        removeAllCardsFromHand(playerA);
+
+        // Add two mana in any combination of colors.
+        // Draw a card.
+        addCard(Zone.HAND, playerA, "Manamorphose", 2); // {1}{R/G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2 * 2);
+
+        // cast and select {B}{B}
+        // one type of choices: wubrg order
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Manamorphose");
+        setChoiceAmount(playerA, 0); // W
+        setChoiceAmount(playerA, 0); // U
+        setChoiceAmount(playerA, 2); // B
+        setChoice(playerA, TestPlayer.CHOICE_SKIP); // skip RG
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkManaPool("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "B", 2);
+
+        // cast and select {R}{G}
+        // another type of choices
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Manamorphose");
+        setChoiceAmount(playerA, 0, 0, 0, 1, 1);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        checkManaPool("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "R", 1);
+        checkManaPool("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "G", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
     }
 }

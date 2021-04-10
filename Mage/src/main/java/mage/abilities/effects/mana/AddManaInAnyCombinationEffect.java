@@ -1,11 +1,5 @@
 package mage.abilities.effects.mana;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -18,6 +12,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
  * @author LevelX2
  */
@@ -28,7 +25,13 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
     private final DynamicValue netAmount;
 
     public AddManaInAnyCombinationEffect(int amount) {
-        this(StaticValue.get(amount), StaticValue.get(amount), ColoredManaSymbol.B, ColoredManaSymbol.U, ColoredManaSymbol.R, ColoredManaSymbol.W, ColoredManaSymbol.G);
+        this(StaticValue.get(amount), StaticValue.get(amount),
+                ColoredManaSymbol.W,
+                ColoredManaSymbol.U,
+                ColoredManaSymbol.B,
+                ColoredManaSymbol.R,
+                ColoredManaSymbol.G
+        );
     }
 
     public AddManaInAnyCombinationEffect(int amount, ColoredManaSymbol... coloredManaSymbols) {
@@ -129,7 +132,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
     @Override
     public Set<ManaType> getProducableManaTypes(Game game, Ability source) {
         Set<ManaType> manaTypes = new HashSet<>();
-        for(ColoredManaSymbol coloredManaSymbol: manaSymbols) {
+        for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
             if (coloredManaSymbol.equals(ColoredManaSymbol.B)) {
                 manaTypes.add(ManaType.BLACK);
             }

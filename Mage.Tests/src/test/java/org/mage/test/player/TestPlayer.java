@@ -2655,40 +2655,43 @@ public class TestPlayer implements Player {
     @Override
     public List<Integer> getMultiAmount(List<String> messages, int min, int max, MultiAmountType type, Game game) {
         assertAliasSupportInChoices(false);
-        int size = messages.size();
-        int choiceAmount = 0;
-        boolean allValuesChosen = true;
-        List<Integer> multiAmount = new ArrayList<>(size);
-        for (String message : messages) {
-            if (choices.isEmpty()) {
-                this.chooseStrictModeFailed("choice", game, message);
-                return computerPlayer.getMultiAmount(messages, min, max, type, game);
-            } else if (choices.get(0).startsWith("X=")) {
-                int xValue = Integer.parseInt(choices.get(0).substring(2));
-                choiceAmount += xValue;
-                multiAmount.add(xValue);
-                choices.remove(0);
-            } else if (choices.get(0).equals(CHOICE_SKIP)) {
-                allValuesChosen = false;
-                choices.remove(0);
-                break;
-            } else {
-                throw new AssertionError(choices.get(0) + " is an invalid choice for " + message);
+
+        int needCount = messages.size();
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
+        List<Integer> answer = new ArrayList<>(defaultList);
+
+        if (!choices.isEmpty()) {
+            // must fill all possible choices or skip it
+            for (int i = 0; i < messages.size(); i++) {
+                if (!choices.isEmpty()) {
+                    // normal choice
+                    if (choices.get(0).startsWith("X=")) {
+                        answer.set(i, Integer.parseInt(choices.get(0).substring(2)));
+                        choices.remove(0);
+                        continue;
+                    }
+                    // skip
+                    if (choices.get(0).equals(CHOICE_SKIP)) {
+                        choices.remove(0);
+                        break;
+                    }
+                }
+                Assert.fail(String.format("Missing choice in multi amount: %s (pos %d - %s)", type.getHeader(), i + 1, messages.get(i)));
             }
+
+            // extra check
+            if (!MultiAmountType.isGoodValues(answer, needCount, min, max)) {
+                Assert.fail("Wrong choices in multi amount: " + answer
+                        .stream()
+                        .map(String::valueOf)
+                        .collect(Collectors.joining(",")));
+            }
+
+            return answer;
         }
-        if (!allValuesChosen) {
-            while (multiAmount.size() < size) {
-                choiceAmount += min;
-                multiAmount.add(min);
-            }
-            if (choiceAmount < max) {
-                int lastIndex = multiAmount.size() - 1;
-                int lastInt = multiAmount.get(lastIndex);
-                lastInt += max - choiceAmount;
-                multiAmount.set(lastIndex, lastInt);
-            }
-        }
-        return multiAmount;
+
+        this.chooseStrictModeFailed("choice", game, "Multi amount: " + type.getHeader());
+        return computerPlayer.getMultiAmount(messages, min, max, type, game);
     }
 
     @Override

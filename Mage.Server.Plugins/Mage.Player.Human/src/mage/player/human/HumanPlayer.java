@@ -1938,6 +1938,7 @@ public class HumanPlayer extends PlayerImpl {
                     break;
                 } else {
                     // it's not normal: can be cheater or a wrong GUI checks
+                    answer = null;
                     logger.error(String.format("GUI return wrong MultiAmountType values: %d %d %d - %s", needCount, min, max, response.getString()));
                     game.informPlayer(this, "Error, you must enter correct values.");
                 }

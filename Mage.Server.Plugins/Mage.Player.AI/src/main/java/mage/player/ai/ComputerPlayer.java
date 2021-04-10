@@ -1955,6 +1955,7 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
+    // TODO: add AI support with outcome and replace random with min/max
     public int getAmount(int min, int max, String message, Game game) {
         log.debug("getAmount");
         if (message.startsWith("Assign damage to ")) {
