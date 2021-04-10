@@ -272,6 +272,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Unwilling Ingredient", 90, Rarity.COMMON, mage.cards.u.UnwillingIngredient.class));
         cards.add(new SetCardInfo("Valentin, Dean of the Vein", 161, Rarity.RARE, mage.cards.v.ValentinDeanOfTheVein.class));
         cards.add(new SetCardInfo("Vanishing Verse", 244, Rarity.RARE, mage.cards.v.VanishingVerse.class));
+        cards.add(new SetCardInfo("Velomachus Lorehold", 245, Rarity.MYTHIC, mage.cards.v.VelomachusLorehold.class));
         cards.add(new SetCardInfo("Venerable Warsinger", 246, Rarity.RARE, mage.cards.v.VenerableWarsinger.class));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 274, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class));
         cards.add(new SetCardInfo("Vortex Runner", 60, Rarity.COMMON, mage.cards.v.VortexRunner.class));
