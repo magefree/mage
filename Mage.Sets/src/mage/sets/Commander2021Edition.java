@@ -223,6 +223,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquil Thicket", 408, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
         cards.add(new SetCardInfo("Traumatic Visions", 132, Rarity.COMMON, mage.cards.t.TraumaticVisions.class));
         cards.add(new SetCardInfo("Treasure Cruise", 133, Rarity.COMMON, mage.cards.t.TreasureCruise.class));
+        cards.add(new SetCardInfo("Trudge Garden", 69, Rarity.RARE, mage.cards.t.TrudgeGarden.class));
         cards.add(new SetCardInfo("Trygon Predator", 231, Rarity.UNCOMMON, mage.cards.t.TrygonPredator.class));
         cards.add(new SetCardInfo("Unstable Obelisk", 272, Rarity.UNCOMMON, mage.cards.u.UnstableObelisk.class));
         cards.add(new SetCardInfo("Utter End", 232, Rarity.RARE, mage.cards.u.UtterEnd.class));
