@@ -219,6 +219,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Teysa, Envoy of Ghosts", 230, Rarity.RARE, mage.cards.t.TeysaEnvoyOfGhosts.class));
         cards.add(new SetCardInfo("Thopter Engineer", 181, Rarity.UNCOMMON, mage.cards.t.ThopterEngineer.class));
         cards.add(new SetCardInfo("Thousand-Year Elixir", 271, Rarity.RARE, mage.cards.t.ThousandYearElixir.class));
+        cards.add(new SetCardInfo("Tivash, Gloom Summoner", 45, Rarity.RARE, mage.cards.t.TivashGloomSummoner.class));
         cards.add(new SetCardInfo("Together Forever", 108, Rarity.RARE, mage.cards.t.TogetherForever.class));
         cards.add(new SetCardInfo("Tragic Arrogance", 109, Rarity.RARE, mage.cards.t.TragicArrogance.class));
         cards.add(new SetCardInfo("Tranquil Thicket", 408, Rarity.COMMON, mage.cards.t.TranquilThicket.class));
