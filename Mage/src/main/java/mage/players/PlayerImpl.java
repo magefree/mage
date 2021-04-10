@@ -748,7 +748,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
         if (!discardedCards.isEmpty()) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARDS, null, source, playerId, discardedCards.size()));
+            game.fireEvent(new DiscardedCardsEvent(null, source, playerId, discardedCards.size(), discardedCards));
         }
         return discardedCards;
     }

@@ -4,8 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -19,14 +18,12 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.events.DiscardedCardsEvent;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
-import mage.watchers.Watcher;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -45,13 +42,12 @@ public final class ConspiracyTheorist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Conspiracy Theorist attacks, you may pay {1} and discard a card. If you do, draw a card.
-        CostsImpl<Cost> costs = new CostsImpl<>();
-        costs.add(new ManaCostsImpl<>("{1}"));
-        costs.add(new DiscardCardCost());
-        this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), costs).setText("you may pay {1} and discard a card. If you do, draw a card"), false));
+        this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1),
+            new CompositeCost(new ManaCostsImpl<>("{1}"), new DiscardCardCost(), "pay {1} and discard a card"))
+                .setText("you may pay {1} and discard a card. If you do, draw a card"), false));
 
         // Whenever you discard one or more nonland cards, you may exile one of them from your graveyard. If you do, you may cast it this turn.
-        this.addAbility(new ConspiracyTheoristAbility(), new ConspiracyTheoristWatcher());
+        this.addAbility(new ConspiracyTheoristAbility());
     }
 
     private ConspiracyTheorist(final ConspiracyTheorist card) {
@@ -82,15 +78,12 @@ class ConspiracyTheoristAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getPlayerId().equals(getControllerId())) {
-            ConspiracyTheoristWatcher watcher = game.getState().getWatcher(ConspiracyTheoristWatcher.class);
-            if (watcher != null) {
-                CardsImpl discardedCards = watcher.getSourceIdToDiscardedCards().getOrDefault(event.getSourceId(), new CardsImpl());
-                Set<Card> discardedNonLandCards = discardedCards.getCards(StaticFilters.FILTER_CARD_NON_LAND, game);
-                if (discardedNonLandCards.size() > 0) {
-                    this.getEffects().clear();
-                    this.getEffects().add(new ConspiracyTheoristEffect(discardedNonLandCards));
-                    return true;
-                }
+            DiscardedCardsEvent discardedCardsEvent = (DiscardedCardsEvent) event;
+            Set<Card> discardedNonLandCards = discardedCardsEvent.getDiscardedCards().getCards(StaticFilters.FILTER_CARD_NON_LAND, game);
+            if (discardedNonLandCards.size() > 0) {
+                this.getEffects().clear();
+                this.getEffects().add(new ConspiracyTheoristEffect(discardedNonLandCards));
+                return true;
             }
         }
         return false;
@@ -144,35 +137,5 @@ class ConspiracyTheoristEffect extends OneShotEffect {
     @Override
     public ConspiracyTheoristEffect copy() {
         return new ConspiracyTheoristEffect(this);
-    }
-}
-
-class ConspiracyTheoristWatcher extends Watcher {
-
-    private final Map<UUID, CardsImpl> sourceIdToDiscardedCards = new HashMap<>();
-
-    ConspiracyTheoristWatcher() {
-        super(WatcherScope.GAME);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DISCARDED_CARD) {
-            Card card = game.getCard(event.getTargetId());
-            sourceIdToDiscardedCards.merge(event.getSourceId(), new CardsImpl(card), (c1, c2) -> {
-               c1.addAll(c2.getCards(game));
-               return c1;
-            });
-        }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        this.sourceIdToDiscardedCards.clear();
-    }
-
-    public Map<UUID, CardsImpl> getSourceIdToDiscardedCards() {
-        return sourceIdToDiscardedCards;
     }
 }
