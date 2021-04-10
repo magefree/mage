@@ -159,6 +159,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Parasitic Impetus", 150, Rarity.UNCOMMON, mage.cards.p.ParasiticImpetus.class));
         cards.add(new SetCardInfo("Pendant of Prosperity", 256, Rarity.RARE, mage.cards.p.PendantOfProsperity.class));
         cards.add(new SetCardInfo("Perplexing Test", 30, Rarity.RARE, mage.cards.p.PerplexingTest.class));
+        cards.add(new SetCardInfo("Pest Infestation", 65, Rarity.RARE, mage.cards.p.PestInfestation.class));
         cards.add(new SetCardInfo("Phyrexia's Core", 309, Rarity.UNCOMMON, mage.cards.p.PhyrexiasCore.class));
         cards.add(new SetCardInfo("Pia Nalaar", 177, Rarity.RARE, mage.cards.p.PiaNalaar.class));
         cards.add(new SetCardInfo("Pilgrim's Eye", 257, Rarity.COMMON, mage.cards.p.PilgrimsEye.class));
