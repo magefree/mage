@@ -47,7 +47,7 @@ public final class PestilentCauldron extends ModalDoubleFacesCard {
                 ownerId, setInfo,
                 new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{2}{B}",
                 "Restorative Burst",
-                new CardType[]{CardType.ARTIFACT}, new SubType[]{}, "{3}{G}{G}"
+                new CardType[]{CardType.SORCERY}, new SubType[]{}, "{3}{G}{G}"
         );
 
         // 1.
