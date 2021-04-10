@@ -87,7 +87,6 @@ class BeamsplitterMageTriggeredAbility extends TriggeredAbilityImpl {
         if (spell == null || !spell.isInstantOrSorcery()) {
             return false;
         }
-        boolean targetsSource = false;
         if (spell.getSpellAbilities()
                 .stream()
                 .map(AbilityImpl::getModes)
