@@ -141,6 +141,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Illuminate History", 108, Rarity.RARE, mage.cards.i.IlluminateHistory.class));
         cards.add(new SetCardInfo("Illustrious Historian", 109, Rarity.COMMON, mage.cards.i.IllustriousHistorian.class));
         cards.add(new SetCardInfo("Infuse with Vitality", 194, Rarity.COMMON, mage.cards.i.InfuseWithVitality.class));
+        cards.add(new SetCardInfo("Ingenious Mastery", 44, Rarity.RARE, mage.cards.i.IngeniousMastery.class));
         cards.add(new SetCardInfo("Inkling Summoning", 195, Rarity.COMMON, mage.cards.i.InklingSummoning.class));
         cards.add(new SetCardInfo("Introduction to Annihilation", 3, Rarity.COMMON, mage.cards.i.IntroductionToAnnihilation.class));
         cards.add(new SetCardInfo("Introduction to Prophecy", 4, Rarity.COMMON, mage.cards.i.IntroductionToProphecy.class));
