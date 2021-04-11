@@ -115,10 +115,7 @@ class DevouringTendrilsDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            return mor.refersTo(zEvent.getTarget(), game);
-        }
-        return false;
+        return zEvent.isDiesEvent() && mor.refersTo(zEvent.getTarget(), game);
     }
 
     @Override
