@@ -2,6 +2,7 @@ package mage.game.events;
 
 import mage.abilities.Ability;
 import mage.cards.Cards;
+import mage.cards.CardsImpl;
 
 import java.util.UUID;
 
@@ -13,9 +14,9 @@ public class DiscardedCardsEvent extends GameEvent {
 
     private final Cards discardedCards;
 
-    public DiscardedCardsEvent(UUID targetId, Ability source, UUID playerId, int amount, Cards discardedCards) {
-        super(EventType.DISCARDED_CARDS, targetId, source, playerId, amount, false);
-        this.discardedCards = discardedCards;
+    public DiscardedCardsEvent(Ability source, UUID playerId, int amount, Cards discardedCards) {
+        super(EventType.DISCARDED_CARDS, null, source, playerId, amount, false);
+        this.discardedCards = new CardsImpl(discardedCards);
     }
 
     public Cards getDiscardedCards() {
