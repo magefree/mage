@@ -748,7 +748,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
         if (!discardedCards.isEmpty()) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARDS, null, source, playerId, discardedCards.size()));
+            game.fireEvent(new DiscardedCardsEvent(source, playerId, discardedCards.size(), discardedCards));
         }
         return discardedCards;
     }
@@ -826,7 +826,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source, playerId));
 
         if (fireFinalEvent) {
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARDS, null, source, playerId, 1));
+            game.fireEvent(new DiscardedCardsEvent(source, playerId, 1, new CardsImpl(card)));
         }
         return true;
     }
