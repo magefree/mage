@@ -86,6 +86,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Defend the Campus", 12, Rarity.COMMON, mage.cards.d.DefendTheCampus.class));
         cards.add(new SetCardInfo("Detention Vortex", 13, Rarity.UNCOMMON, mage.cards.d.DetentionVortex.class));
         cards.add(new SetCardInfo("Devastating Mastery", 14, Rarity.RARE, mage.cards.d.DevastatingMastery.class));
+        cards.add(new SetCardInfo("Devouring Tendrils", 126, Rarity.UNCOMMON, mage.cards.d.DevouringTendrils.class));
         cards.add(new SetCardInfo("Dina, Soul Steeper", 178, Rarity.UNCOMMON, mage.cards.d.DinaSoulSteeper.class));
         cards.add(new SetCardInfo("Divide by Zero", 41, Rarity.UNCOMMON, mage.cards.d.DivideByZero.class));
         cards.add(new SetCardInfo("Double Major", 179, Rarity.RARE, mage.cards.d.DoubleMajor.class));
