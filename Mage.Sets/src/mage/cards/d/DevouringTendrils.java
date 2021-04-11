@@ -31,7 +31,7 @@ import java.util.UUID;
  */
 public final class DevouringTendrils extends CardImpl {
 
-    public static final FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker you don't control");
+    private static final FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent("creature or planeswalker you don't control");
 
     static {
         filter.add(TargetController.NOT_YOU.getControllerPredicate());
