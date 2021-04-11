@@ -68,6 +68,7 @@ class EmergentUltimatumEffect extends OneShotEffect {
             return false;
         }
         TargetCardInLibrary targetCardInLibrary = new EmergentUltimatumTarget();
+        targetCardInLibrary.setNotTarget(true);
         boolean searched = player.searchLibrary(targetCardInLibrary, source, game);
         Cards cards = new CardsImpl(targetCardInLibrary.getTargets());
         player.moveCards(cards, Zone.EXILED, source, game);
@@ -85,9 +86,10 @@ class EmergentUltimatumEffect extends OneShotEffect {
             if (searched) {
                 player.shuffleLibrary(source, game);
             }
-            return true;
+            return false;
         }
         TargetCardInExile targetCardInExile = new TargetCardInExile(StaticFilters.FILTER_CARD);
+        targetCardInExile.setNotTarget(true);
         opponent.choose(outcome, cards, targetCardInExile, game);
         Card toShuffle = game.getCard(targetCardInExile.getFirstTarget());
         if (toShuffle != null) {

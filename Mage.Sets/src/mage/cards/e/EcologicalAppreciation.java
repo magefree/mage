@@ -67,6 +67,7 @@ class EcologicalAppreciationEffect extends OneShotEffect {
         }
         int xValue = source.getManaCostsToPay().getX();
         TargetCard targetCardsInLibrary = new EcologicalAppreciationTarget(Zone.LIBRARY, 4, xValue);
+        targetCardsInLibrary.setNotTarget(true);
         boolean searched = player.choose(Outcome.PutCreatureInPlay, new CardsImpl(player.getLibrary().getCards(game)), targetCardsInLibrary, game);
         Cards cards = new CardsImpl(targetCardsInLibrary.getTargets());
 
@@ -80,6 +81,7 @@ class EcologicalAppreciationEffect extends OneShotEffect {
         int remainingCards = 4 - cards.size();
         if (remainingCards > 0) {
             TargetCard targetCardsInGY = new EcologicalAppreciationTarget(Zone.GRAVEYARD, remainingCards, xValue);
+            targetCardsInGY.setNotTarget(true);
             player.choose(Outcome.PutCreatureInPlay, new CardsImpl(player.getGraveyard().getCards(game)), targetCardsInGY, game);
             cards.addAll(targetCardsInGY.getTargets());
         }
