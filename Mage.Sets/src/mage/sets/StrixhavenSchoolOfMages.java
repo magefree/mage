@@ -284,6 +284,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Venerable Warsinger", 246, Rarity.RARE, mage.cards.v.VenerableWarsinger.class));
         cards.add(new SetCardInfo("Vineglimmer Snarl", 274, Rarity.RARE, mage.cards.v.VineglimmerSnarl.class));
         cards.add(new SetCardInfo("Vortex Runner", 60, Rarity.COMMON, mage.cards.v.VortexRunner.class));
+        cards.add(new SetCardInfo("Wandering Archaic", 6, Rarity.RARE, mage.cards.w.WanderingArchaic.class));
         cards.add(new SetCardInfo("Waterfall Aerialist", 61, Rarity.COMMON, mage.cards.w.WaterfallAerialist.class));
         cards.add(new SetCardInfo("Witherbloom Apprentice", 247, Rarity.UNCOMMON, mage.cards.w.WitherbloomApprentice.class));
         cards.add(new SetCardInfo("Witherbloom Campus", 275, Rarity.COMMON, mage.cards.w.WitherbloomCampus.class));

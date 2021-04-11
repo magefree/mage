@@ -64,6 +64,7 @@ public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl {
         if (spell == null || !filter.match(spell, getSourceId(), getControllerId(), game)) {
             return false;
         }
+        getEffects().setValue("spellCast", spell);
         switch (setTargetPointer) {
             case NONE:
                 break;
