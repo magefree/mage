@@ -670,6 +670,7 @@ public interface Player extends MageItem, Copyable<Player> {
     /**
      * Player distributes amount among multiple options
      *
+     * @param outcome   AI hint
      * @param messages  List of options to distribute amount among
      * @param min       Minimum value per option
      * @param max       Total amount to be distributed
@@ -677,7 +678,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game      Game
      * @return          List of integers with size equal to messages.size().  The sum of the integers is equal to max.
      */
-    List<Integer> getMultiAmount(List<String> messages, int min, int max, MultiAmountType type, Game game);
+    List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game);
 
     void sideboard(Match match, Deck deck);
 

@@ -41,6 +41,9 @@ public class TargetMultiAmountTest extends CardTestPlayerBaseWithAIHelps {
         assertDefaultValues("2", 1, 2, 10);
         assertDefaultValues("2 0", 2, 2, 10);
         assertDefaultValues("2 0 0", 3, 2, 10);
+        //
+        // performance test
+        assertDefaultValues("2 0 0", 3, 2, Integer.MAX_VALUE);
     }
 
     private void assertDefaultValues(String need, int count, int min, int max) {
@@ -51,6 +54,50 @@ public class TargetMultiAmountTest extends CardTestPlayerBaseWithAIHelps {
                 .collect(Collectors.joining(" "));
         Assert.assertEquals("default values", need, current);
         Assert.assertTrue("default values must be good", MultiAmountType.isGoodValues(defaultValues, count, min, max));
+    }
+
+    @Test
+    public void test_MaxValues() {
+        // max possible values must be assigned from first to last by max possible values
+        assertMaxValues("", 0, 0, 0);
+        //
+        assertMaxValues("0", 1, 0, 0);
+        assertMaxValues("0 0", 2, 0, 0);
+        assertMaxValues("0 0 0", 3, 0, 0);
+        //
+        assertMaxValues("1", 1, 1, 1);
+        assertMaxValues("1 0", 2, 1, 1);
+        assertMaxValues("1 0 0", 3, 1, 1);
+        //
+        assertMaxValues("2", 1, 1, 2);
+        assertMaxValues("1 1", 2, 1, 2);
+        assertMaxValues("1 1 0", 3, 1, 2);
+        //
+        assertMaxValues("2", 1, 2, 2);
+        assertMaxValues("1 1", 2, 2, 2);
+        assertMaxValues("1 1 0", 3, 2, 2);
+        //
+        assertMaxValues("10", 1, 2, 10);
+        assertMaxValues("5 5", 2, 2, 10);
+        assertMaxValues("4 3 3", 3, 2, 10);
+        //
+        assertMaxValues("1 1 1 1 1 0 0 0 0 0", 10, 2, 5);
+        //
+        // performance test
+        assertMaxValues(String.valueOf(Integer.MAX_VALUE), 1, 2, Integer.MAX_VALUE);
+        int part = Integer.MAX_VALUE / 3;
+        String need = String.format("%d %d %d", part + 1, part, part);
+        assertMaxValues(need, 3, 2, Integer.MAX_VALUE);
+    }
+
+    private void assertMaxValues(String need, int count, int min, int max) {
+        List<Integer> maxValues = MultiAmountType.prepareMaxValues(count, min, max);
+        String current = maxValues
+                .stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(" "));
+        Assert.assertEquals("max values", need, current);
+        Assert.assertTrue("max values must be good", MultiAmountType.isGoodValues(maxValues, count, min, max));
     }
 
     @Test
@@ -146,6 +193,28 @@ public class TargetMultiAmountTest extends CardTestPlayerBaseWithAIHelps {
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
         checkManaPool("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "R", 1);
         checkManaPool("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "G", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertAllCommandsUsed();
+    }
+
+    @Test
+    public void test_Manamorphose_AI() {
+        removeAllCardsFromHand(playerA);
+
+        // Add two mana in any combination of colors.
+        // Draw a card.
+        addCard(Zone.HAND, playerA, "Manamorphose", 1); // {1}{R/G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+
+        // cast, but AI must select first manas (WU)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Manamorphose");
+        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkManaPool("after ai cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "W", 1);
+        checkManaPool("after ai cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "U", 1);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

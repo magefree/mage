@@ -1968,22 +1968,26 @@ public class ComputerPlayer extends PlayerImpl implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
         log.debug("getMultiAmount");
-        int size = messages.size();
-        int total = min * size;
-        int i = 0;
-        List<Integer> defaultList = new ArrayList<>(size);
-        if (total < max) {
-            int diff = max - total;
-            defaultList.add(min + diff);
-            i++;
+
+        int needCount = messages.size();
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
+        if (needCount == 0) {
+            return defaultList;
         }
-       while (i < size) {
-            defaultList.add(min);
-            i++;
+
+        // BAD effect
+        // default list uses minimum possible values, so return it on bad effect
+        // TODO: need something for damage target and mana logic here, current version is useless but better than random
+        if (!outcome.isGood()) {
+            return defaultList;
         }
-        return defaultList;
+
+        // GOOD effect
+        // values must be stable, so AI must able to simulate it and choose correct actions
+        // fill max values as much as possible
+        return MultiAmountType.prepareMaxValues(needCount, min, max);
     }
 
     @Override

@@ -1,9 +1,11 @@
 package mage.constants;
 
+import com.google.common.collect.Iterables;
 import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -31,13 +33,45 @@ public enum MultiAmountType {
     public static List<Integer> prepareDefaltValues(int count, int min, int max) {
         // default values must be assigned from first to last by minimum values
         List<Integer> res = new ArrayList<>();
+        if (count == 0) {
+            return res;
+        }
 
         // fill list
         IntStream.range(0, count).forEach(i -> res.add(0));
 
         // fill values
-        if (min > 0 && res.size() > 0) {
+        if (min > 0) {
             res.set(0, min);
+        }
+
+        return res;
+    }
+
+    public static List<Integer> prepareMaxValues(int count, int min, int max) {
+        // fill max values as much as possible
+        List<Integer> res = new ArrayList<>();
+        if (count == 0) {
+            return res;
+        }
+
+        // fill list
+        int startingValue = max / count;
+        IntStream.range(0, count).forEach(i -> res.add(startingValue));
+
+        // fill values
+        // from first to last until complete
+        List<Integer> resIndexes = new ArrayList<>(res.size());
+        IntStream.range(0, res.size()).forEach(resIndexes::add);
+        // infinite iterator (no needs with starting values use, but can be used later for different logic)
+        Iterator<Integer> resIterator = Iterables.cycle(resIndexes).iterator();
+        int valueInc = 1;
+        int valueTotal = startingValue * count;
+        while (valueTotal < max) {
+            int currentIndex = resIterator.next();
+            int newValue = CardUtil.overflowInc(res.get(currentIndex), valueInc);
+            res.set(currentIndex, newValue);
+            valueTotal += valueInc;
         }
 
         return res;

@@ -862,7 +862,7 @@ public class HumanPlayer extends PlayerImpl {
             }
         }
 
-        List<Integer> amountList = getMultiAmount(targetStrings, 1, amount, MultiAmountType.DAMAGE, game);
+        List<Integer> amountList = getMultiAmount(outcome, targetStrings, 1, amount, MultiAmountType.DAMAGE, game);
         int i = 0;
         for (UUID targetId : targets) {
             target.setTargetAmount(targetId, amountList.get(i), source, game);
@@ -1911,15 +1911,18 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public List<Integer> getMultiAmount(List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
         int needCount = messages.size();
         List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
-        List<Integer> answer = null;
+        if (needCount == 0) {
+            return defaultList;
+        }
 
         if (gameInCheckPlayableState(game)) {
             return defaultList;
         }
 
+        List<Integer> answer = null;
         while (canRespond()) {
             updateGameStatePriority("getMultiAmount", game);
             prepareForResponse(game);

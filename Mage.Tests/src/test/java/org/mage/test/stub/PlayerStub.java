@@ -966,7 +966,7 @@ public class PlayerStub implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
         return null;
     }
 

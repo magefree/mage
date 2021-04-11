@@ -2653,13 +2653,16 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public List<Integer> getMultiAmount(List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    public List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
         assertAliasSupportInChoices(false);
 
         int needCount = messages.size();
         List<Integer> defaultList = MultiAmountType.prepareDefaltValues(needCount, min, max);
-        List<Integer> answer = new ArrayList<>(defaultList);
+        if (needCount == 0) {
+            return defaultList;
+        }
 
+        List<Integer> answer = new ArrayList<>(defaultList);
         if (!choices.isEmpty()) {
             // must fill all possible choices or skip it
             for (int i = 0; i < messages.size(); i++) {
@@ -2691,7 +2694,7 @@ public class TestPlayer implements Player {
         }
 
         this.chooseStrictModeFailed("choice", game, "Multi amount: " + type.getHeader());
-        return computerPlayer.getMultiAmount(messages, min, max, type, game);
+        return computerPlayer.getMultiAmount(outcome, messages, min, max, type, game);
     }
 
     @Override
