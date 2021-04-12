@@ -17,8 +17,8 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
@@ -76,7 +76,7 @@ class EcologicalAppreciationEffect extends OneShotEffect {
         int xValue = source.getManaCostsToPay().getX();
         FilterCard filter = new FilterCreatureCard();
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        TargetCardInLibrary targetCardsInLibrary = new TargetCardInLibrary(0, 4, filter) {
+        TargetCard targetCardsInLibrary = new TargetCardInLibrary(0, 4, filter) {
             @Override
             public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
                 if (!super.canTarget(playerId, id, source, game)) {
@@ -99,7 +99,7 @@ class EcologicalAppreciationEffect extends OneShotEffect {
         if (status) {
             int remainingCards = 4 - cards.size();
             if (remainingCards > 0) {
-                TargetCard targetCardsInGY = new TargetCardInGraveyard(0, remainingCards, filter) {
+                TargetCard targetCardsInGY = new TargetCardInYourGraveyard(0, remainingCards, filter) {
                     @Override
                     public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
                         if (!super.canTarget(playerId, id, source, game)) {
