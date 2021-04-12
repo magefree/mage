@@ -23,6 +23,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Adrix and Nev, Twincasters", 9, Rarity.MYTHIC, mage.cards.a.AdrixAndNevTwincasters.class));
         cards.add(new SetCardInfo("Aether Gale", 113, Rarity.RARE, mage.cards.a.AetherGale.class));
         cards.add(new SetCardInfo("Aetherspouts", 114, Rarity.RARE, mage.cards.a.Aetherspouts.class));
+        cards.add(new SetCardInfo("Alibou, Ancient Witness", 7, Rarity.MYTHIC, mage.cards.a.AlibouAncientWitness.class));
         cards.add(new SetCardInfo("Ancient Den", 276, Rarity.COMMON, mage.cards.a.AncientDen.class));
         cards.add(new SetCardInfo("Angel of Serenity", 83, Rarity.MYTHIC, mage.cards.a.AngelOfSerenity.class));
         cards.add(new SetCardInfo("Angel of the Ruins", 11, Rarity.RARE, mage.cards.a.AngelOfTheRuins.class));
