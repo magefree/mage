@@ -87,6 +87,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Elite Scaleguard", 91, Rarity.UNCOMMON, mage.cards.e.EliteScaleguard.class));
         cards.add(new SetCardInfo("Epic Experiment", 216, Rarity.MYTHIC, mage.cards.e.EpicExperiment.class));
         cards.add(new SetCardInfo("Erratic Cyclops", 166, Rarity.RARE, mage.cards.e.ErraticCyclops.class));
+        cards.add(new SetCardInfo("Essence Pulse", 39, Rarity.RARE, mage.cards.e.EssencePulse.class));
         cards.add(new SetCardInfo("Etali, Primal Storm", 167, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
         cards.add(new SetCardInfo("Excavation Technique", 16, Rarity.RARE, mage.cards.e.ExcavationTechnique.class));
         cards.add(new SetCardInfo("Ezuri's Predation", 188, Rarity.RARE, mage.cards.e.EzurisPredation.class));
