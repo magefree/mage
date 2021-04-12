@@ -64,6 +64,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Coveted Jewel", 240, Rarity.RARE, mage.cards.c.CovetedJewel.class));
         cards.add(new SetCardInfo("Crackling Drake", 213, Rarity.UNCOMMON, mage.cards.c.CracklingDrake.class));
         cards.add(new SetCardInfo("Crafty Cutpurse", 117, Rarity.RARE, mage.cards.c.CraftyCutpurse.class));
+        cards.add(new SetCardInfo("Creative Technique", 49, Rarity.RARE, mage.cards.c.CreativeTechnique.class));
         cards.add(new SetCardInfo("Curiosity Crafter", 24, Rarity.RARE, mage.cards.c.CuriosityCrafter.class));
         cards.add(new SetCardInfo("Curse of Disturbance", 138, Rarity.UNCOMMON, mage.cards.c.CurseOfDisturbance.class));
         cards.add(new SetCardInfo("Curse of the Swine", 118, Rarity.RARE, mage.cards.c.CurseOfTheSwine.class));
