@@ -90,6 +90,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Etali, Primal Storm", 167, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
         cards.add(new SetCardInfo("Excavation Technique", 16, Rarity.RARE, mage.cards.e.ExcavationTechnique.class));
         cards.add(new SetCardInfo("Ezuri's Predation", 188, Rarity.RARE, mage.cards.e.EzurisPredation.class));
+        cards.add(new SetCardInfo("Ezzaroot Channeler", 60, Rarity.RARE, mage.cards.e.EzzarootChanneler.class));
         cards.add(new SetCardInfo("Faithless Looting", 168, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
         cards.add(new SetCardInfo("Feldon of the Third Path", 169, Rarity.MYTHIC, mage.cards.f.FeldonOfTheThirdPath.class));
         cards.add(new SetCardInfo("Fiery Encore", 51, Rarity.RARE, mage.cards.f.FieryEncore.class));
