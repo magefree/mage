@@ -94,6 +94,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Ezzaroot Channeler", 60, Rarity.RARE, mage.cards.e.EzzarootChanneler.class));
         cards.add(new SetCardInfo("Faithless Looting", 168, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
         cards.add(new SetCardInfo("Feldon of the Third Path", 169, Rarity.MYTHIC, mage.cards.f.FeldonOfTheThirdPath.class));
+        cards.add(new SetCardInfo("Felisa, Fang of Silverquill", 2, Rarity.MYTHIC, mage.cards.f.FelisaFangOfSilverquill.class));
         cards.add(new SetCardInfo("Fiery Encore", 51, Rarity.RARE, mage.cards.f.FieryEncore.class));
         cards.add(new SetCardInfo("Fiery Fall", 170, Rarity.COMMON, mage.cards.f.FieryFall.class));
         cards.add(new SetCardInfo("Forgotten Ancient", 137, Rarity.RARE, mage.cards.f.ForgottenAncient.class));

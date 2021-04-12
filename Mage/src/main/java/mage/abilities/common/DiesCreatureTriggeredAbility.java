@@ -69,15 +69,14 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            if (filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
-                if (setTargetPointer) {
-                    this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
-                }
-                return true;
-            }
+        if (!zEvent.isDiesEvent() || !filter.match(zEvent.getTarget(), sourceId, controllerId, game)) {
+            return false;
         }
-        return false;
+        getEffects().setValue("creatureDied", zEvent.getTarget());
+        if (setTargetPointer) {
+            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
+        }
+        return true;
     }
 
     @Override
