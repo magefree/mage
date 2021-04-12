@@ -40,6 +40,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Blight Mound", 36, Rarity.RARE, mage.cards.b.BlightMound.class));
         cards.add(new SetCardInfo("Blighted Cataract", 279, Rarity.UNCOMMON, mage.cards.b.BlightedCataract.class));
         cards.add(new SetCardInfo("Bloodthirsty Blade", 235, Rarity.UNCOMMON, mage.cards.b.BloodthirstyBlade.class));
+        cards.add(new SetCardInfo("Blossoming Bogbeast", 59, Rarity.RARE, mage.cards.b.BlossomingBogbeast.class));
         cards.add(new SetCardInfo("Bojuka Bog", 281, Rarity.COMMON, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Boreas Charger", 84, Rarity.RARE, mage.cards.b.BoreasCharger.class));
         cards.add(new SetCardInfo("Boros Charm", 210, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
