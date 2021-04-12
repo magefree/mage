@@ -669,7 +669,7 @@ public class HumanPlayer extends PlayerImpl {
                 options.put("choosable", (Serializable) choosable);
             }
 
-            // if nothing to choose then show window (user must see non selectable items and click on any of them)
+            // if nothing to choose then show dialog (user must see non selectable items and click on any of them)
             if (required && choosable.isEmpty()) {
                 required = false;
             }
@@ -744,7 +744,7 @@ public class HumanPlayer extends PlayerImpl {
                 options.put("choosable", (Serializable) choosable);
             }
 
-            // if nothing to choose then show window (user must see non selectable items and click on any of them)
+            // if nothing to choose then show dialog (user must see non selectable items and click on any of them)
             if (required && choosable.isEmpty()) {
                 required = false;
             }
@@ -782,6 +782,7 @@ public class HumanPlayer extends PlayerImpl {
     @Override
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
         // choose amount
+        // human can choose or un-choose MULTIPLE targets at once
         if (gameInCheckPlayableState(game)) {
             return true;
         }
@@ -791,12 +792,14 @@ public class HumanPlayer extends PlayerImpl {
             abilityControllerId = target.getAbilityController();
         }
 
-        int amount = target.getAmountRemaining();
-        if (amount < 1 || target.getSize() > amount) {
-            return false;
-        }
+        int amountTotal = target.getAmountTotal(game, source);
 
-        while (canRespond() && target.getSize() < amount) {
+        // Two steps logic:
+        // 1. Select targets
+        // 2. Distribute amount between selected targets
+
+        // 1. Select targets
+        while (canRespond()) {
             Set<UUID> possibleTargets = target.possibleTargets(source == null ? null : source.getSourceId(), abilityControllerId, game);
             boolean required = target.isRequired(source != null ? source.getSourceId() : null, game);
             if (possibleTargets.isEmpty()
@@ -804,31 +807,42 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
+            // selected
+            Map<String, Serializable> options = getOptions(target, null);
+            java.util.List<UUID> chosen = target.getTargets();
+            options.put("chosen", (Serializable) chosen);
+            // selectable
+            java.util.List<UUID> choosable = new ArrayList<>();
+            for (UUID targetId : possibleTargets) {
+                if (target.canTarget(abilityControllerId, targetId, source, game)) {
+                    choosable.add(targetId);
+                }
+            }
+            if (!choosable.isEmpty()) {
+                options.put("choosable", (Serializable) choosable);
+            }
+
+            // if nothing to choose then show dialog (user must see non selectable items and click on any of them)
+            if (required && choosable.isEmpty()) {
+                required = false;
+            }
+
             updateGameStatePriority("chooseTargetAmount", game);
             prepareForResponse(game);
             if (!isExecutingMacro()) {
-                StringBuilder sb = new StringBuilder();
-                int index = target.getMessage().indexOf(" (selected");
-                if (index > 0) {
-                    sb.append(target.getMessage(), 0, index);
-                } else {
-                    sb.append(target.getMessage());
-                }
-                sb.append(" (selected ");
-                sb.append(target.getSize());
-                sb.append(" of ");
-                sb.append(amount);
-                sb.append(')');
-                game.fireSelectTargetEvent(playerId, new MessageToClient(sb.toString(), getRelatedObjectName(source, game)),
-                        possibleTargets, required, getOptions(target, null));
+                // target amount uses for damage only, if you see another use case then message must be changed here and on getMultiAmount call
+                String message = String.format("Select targets to distribute %d damage (selected %d)", amountTotal, target.getTargets().size());
+                game.fireSelectTargetEvent(playerId, new MessageToClient(message, getRelatedObjectName(source, game)), possibleTargets, required, options);
             }
             waitForResponse(game);
 
             UUID responseId = getFixedResponseUUID(game);
             if (responseId != null) {
                 if (target.contains(responseId)) {
+                    // unselect
                     target.remove(responseId);
                 } else if (possibleTargets.contains(responseId) && target.canTarget(abilityControllerId, responseId, source, game)) {
+                    // select
                     target.addTarget(responseId, source, game);
                 }
             } else if (!required) {
@@ -836,37 +850,46 @@ public class HumanPlayer extends PlayerImpl {
             }
         }
 
+        // no targets to choose or disconnected
         List<UUID> targets = target.getTargets();
         if (targets.isEmpty()) {
             return false;
         }
 
-        List<String> targetStrings = new ArrayList<>(amount);
+        // 2. Distribute amount between selected targets
+
+        // prepare targets list with p/t or life stats (cause that's dialog used for damage distribute)
+        List<String> targetNames = new ArrayList<>();
         for (UUID targetId : targets) {
             MageObject targetObject = game.getObject(targetId);
             if (targetObject != null) {
-                StringBuilder sb = new StringBuilder();
-                sb.append(targetObject.getIdName());
-                sb.append(", ");
-                sb.append(targetObject.getPower().getValue());
-                sb.append('/');
-                sb.append(targetObject.getToughness().getValue());
-                targetStrings.add(sb.toString());
+                targetNames.add(String.format("%s, P/T: %d/%d",
+                        targetObject.getIdName(),
+                        targetObject.getPower().getValue(),
+                        targetObject.getToughness().getValue()
+                ));
             } else {
                 Player player = game.getPlayer(targetId);
                 if (player != null) {
-                    targetStrings.add(player.getName());
+                    targetNames.add(String.format("%s, life: %d", player.getName(), player.getLife()));
                 } else {
-                    targetStrings.add(targetId.toString());
+                    targetNames.add("ERROR, unknown target " + targetId.toString());
                 }
             }
         }
 
-        List<Integer> amountList = getMultiAmount(outcome, targetStrings, 1, amount, MultiAmountType.DAMAGE, game);
-        int i = 0;
-        for (UUID targetId : targets) {
-            target.setTargetAmount(targetId, amountList.get(i), source, game);
-            i++;
+        // ask and assign new amount
+        List<Integer> targetValues = getMultiAmount(outcome, targetNames, 1, amountTotal, MultiAmountType.DAMAGE, game);
+        for (int i = 0; i < targetValues.size(); i++) {
+            int newAmount = targetValues.get(i);
+            UUID targetId = targets.get(i);
+            if (newAmount <= 0) {
+                // remove target
+                target.remove(targetId);
+            } else {
+                // set amount
+                target.setTargetAmount(targetId, newAmount, source, game);
+            }
         }
         return true;
     }
