@@ -67,6 +67,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Charge Through", 124, Rarity.COMMON, mage.cards.c.ChargeThrough.class));
         cards.add(new SetCardInfo("Clever Lumimancer", 10, Rarity.UNCOMMON, mage.cards.c.CleverLumimancer.class));
         cards.add(new SetCardInfo("Closing Statement", 169, Rarity.UNCOMMON, mage.cards.c.ClosingStatement.class));
+        cards.add(new SetCardInfo("Codie, Vociferous Codex", 253, Rarity.RARE, mage.cards.c.CodieVociferousCodex.class));
         cards.add(new SetCardInfo("Cogwork Archivist", 254, Rarity.COMMON, mage.cards.c.CogworkArchivist.class));
         cards.add(new SetCardInfo("Combat Professor", 11, Rarity.COMMON, mage.cards.c.CombatProfessor.class));
         cards.add(new SetCardInfo("Confront the Past", 67, Rarity.RARE, mage.cards.c.ConfrontThePast.class));
