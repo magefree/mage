@@ -130,6 +130,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Jor Kadeen, the Prevailer", 220, Rarity.RARE, mage.cards.j.JorKadeenThePrevailer.class));
         cards.add(new SetCardInfo("Kaseto, Orochi Archmage", 221, Rarity.MYTHIC, mage.cards.k.KasetoOrochiArchmage.class));
         cards.add(new SetCardInfo("Kazandu Tuskcaller", 196, Rarity.RARE, mage.cards.k.KazanduTuskcaller.class));
+        cards.add(new SetCardInfo("Keen Duelist", 42, Rarity.RARE, mage.cards.k.KeenDuelist.class));
         cards.add(new SetCardInfo("Key to the City", 248, Rarity.RARE, mage.cards.k.KeyToTheCity.class));
         cards.add(new SetCardInfo("Knight of the White Orchid", 95, Rarity.RARE, mage.cards.k.KnightOfTheWhiteOrchid.class));
         cards.add(new SetCardInfo("Kodama's Reach", 197, Rarity.COMMON, mage.cards.k.KodamasReach.class));
