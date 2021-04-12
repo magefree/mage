@@ -1,21 +1,29 @@
 package mage.cards.e;
 
+import com.google.common.collect.Sets;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.*;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
 
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -66,85 +74,84 @@ class EcologicalAppreciationEffect extends OneShotEffect {
             return false;
         }
         int xValue = source.getManaCostsToPay().getX();
-        TargetCard targetCardsInLibrary = new EcologicalAppreciationTarget(Zone.LIBRARY, 4, xValue);
+        FilterCard filter = new FilterCreatureCard();
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN, xValue + 1));
+        TargetCardInLibrary targetCardsInLibrary = new TargetCardInLibrary(0, 4, filter) {
+            @Override
+            public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+                if (!super.canTarget(playerId, id, source, game)) {
+                    return false;
+                }
+                Card card = game.getCard(id);
+                Set<Card> disallowedCards = this.getTargets().stream()
+                    .map(game::getCard)
+                    .collect(Collectors.toSet());
+                return isValidTarget(card, disallowedCards);
+            }
+        };
         targetCardsInLibrary.setNotTarget(true);
-        boolean searched = player.choose(Outcome.PutCreatureInPlay, new CardsImpl(player.getLibrary().getCards(game)), targetCardsInLibrary, game);
+        targetCardsInLibrary.withChooseHint("Step 1 of 2: Search library");
+        player.choose(Outcome.PutCreatureInPlay, new CardsImpl(player.getLibrary().getCards(game)), targetCardsInLibrary, game);
         Cards cards = new CardsImpl(targetCardsInLibrary.getTargets());
 
-        if (cards.isEmpty()) {
-            if (searched) {
-                player.shuffleLibrary(source, game);
+        boolean status = !cards.isEmpty();
+
+        if (status) {
+            int remainingCards = 4 - cards.size();
+            if (remainingCards > 0) {
+                TargetCard targetCardsInGY = new TargetCardInGraveyard(0, remainingCards, filter) {
+                    @Override
+                    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+                        if (!super.canTarget(playerId, id, source, game)) {
+                            return false;
+                        }
+                        Card card = game.getCard(id);
+                        Set<Card> disallowedCards = this.getTargets().stream()
+                            .map(game::getCard)
+                            .collect(Collectors.toSet());
+                        return isValidTarget(card, Sets.union(disallowedCards, cards.getCards(game)));
+                    }
+                };
+                targetCardsInGY.setNotTarget(true);
+                targetCardsInGY.withChooseHint("Step 2 of 2: Search graveyard");
+                player.choose(Outcome.PutCreatureInPlay, new CardsImpl(player.getGraveyard().getCards(game)), targetCardsInGY, game);
+                cards.addAll(targetCardsInGY.getTargets());
             }
-            return false;
-        }
 
-        int remainingCards = 4 - cards.size();
-        if (remainingCards > 0) {
-            TargetCard targetCardsInGY = new EcologicalAppreciationTarget(Zone.GRAVEYARD, remainingCards, xValue);
-            targetCardsInGY.setNotTarget(true);
-            player.choose(Outcome.PutCreatureInPlay, new CardsImpl(player.getGraveyard().getCards(game)), targetCardsInGY, game);
-            cards.addAll(targetCardsInGY.getTargets());
-        }
+            TargetOpponent targetOpponent = new TargetOpponent();
+            targetOpponent.setNotTarget(true);
+            player.choose(outcome, targetOpponent, source.getSourceId(), game);
+            Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
 
-        TargetOpponent targetOpponent = new TargetOpponent();
-        targetOpponent.setNotTarget(true);
-        player.choose(outcome, targetOpponent, source.getSourceId(), game);
-        Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
-        if (opponent == null) {
-            if (searched) {
-                player.shuffleLibrary(source, game);
+            if (opponent == null) {
+                status = false;
             }
-            return false;
+
+            if (status) {
+                TargetCard chosenCards = new TargetCard(2, Zone.ALL, StaticFilters.FILTER_CARD);
+                chosenCards.setNotTarget(true);
+                opponent.choose(outcome, cards, chosenCards, game);
+                Cards toShuffle = new CardsImpl(chosenCards.getTargets().stream()
+                    .map(game::getCard)
+                    .collect(Collectors.toList()));
+
+                player.putCardsOnTopOfLibrary(toShuffle, game, source, false);
+                cards.removeAll(toShuffle);
+
+                player.moveCards(cards, Zone.BATTLEFIELD, source, game);
+            }
         }
 
-        TargetCard chosenCards = new TargetCard(2, Zone.ALL, StaticFilters.FILTER_CARD);
-        chosenCards.setNotTarget(true);
-        opponent.choose(outcome, cards, chosenCards, game);
-        Cards toShuffle = new CardsImpl(chosenCards.getTargets().stream()
-            .map(game::getCard)
-            .collect(Collectors.toList()));
-
-        player.putCardsOnTopOfLibrary(toShuffle, game, source, false);
         player.shuffleLibrary(source, game);
-        cards.removeAll(toShuffle);
 
-        player.moveCards(cards, Zone.BATTLEFIELD, source, game);
-
-        return true;
-    }
-}
-
-class EcologicalAppreciationTarget extends TargetCard {
-
-    private static final FilterCard filter = new FilterCreatureCard("creature cards with different names that each have mana value X or less");
-
-    private final int xValue;
-
-    EcologicalAppreciationTarget(Zone zone, int maxTargets, int xValue) {
-        super(0, maxTargets, zone, filter);
-        this.xValue = xValue;
+        return status;
     }
 
-    private EcologicalAppreciationTarget(final EcologicalAppreciationTarget target) {
-        super(target);
-        this.xValue = target.xValue;
-    }
-
-    @Override
-    public EcologicalAppreciationTarget copy() {
-        return new EcologicalAppreciationTarget(this);
-    }
-
-    @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(playerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        return card != null && card.getConvertedManaCost() <= xValue &&
-            this.getTargets().stream()
-                .map(game::getCard)
+    private boolean isValidTarget(Card target, Set<Card> disallowedCards) {
+        return target != null &&
+            disallowedCards.stream()
+                .filter(Objects::nonNull)
                 .map(MageObject::getName)
-                .noneMatch(card.getName()::equals);
+                .noneMatch(name -> CardUtil.haveSameNames(name, target.getName()));
     }
 }
