@@ -37,6 +37,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Beast Within", 186, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
         cards.add(new SetCardInfo("Biomass Mutation", 209, Rarity.RARE, mage.cards.b.BiomassMutation.class));
         cards.add(new SetCardInfo("Blasphemous Act", 159, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
+        cards.add(new SetCardInfo("Blight Mound", 36, Rarity.RARE, mage.cards.b.BlightMound.class));
         cards.add(new SetCardInfo("Blighted Cataract", 279, Rarity.UNCOMMON, mage.cards.b.BlightedCataract.class));
         cards.add(new SetCardInfo("Bloodthirsty Blade", 235, Rarity.UNCOMMON, mage.cards.b.BloodthirstyBlade.class));
         cards.add(new SetCardInfo("Bojuka Bog", 281, Rarity.COMMON, mage.cards.b.BojukaBog.class));
