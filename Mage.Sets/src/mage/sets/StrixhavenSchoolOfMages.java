@@ -218,6 +218,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Quandrix Cultivator", 218, Rarity.UNCOMMON, mage.cards.q.QuandrixCultivator.class));
         cards.add(new SetCardInfo("Quandrix Pledgemage", 219, Rarity.COMMON, mage.cards.q.QuandrixPledgemage.class));
         cards.add(new SetCardInfo("Quintorius, Field Historian", 220, Rarity.UNCOMMON, mage.cards.q.QuintoriusFieldHistorian.class));
+        cards.add(new SetCardInfo("Radiant Scrollwielder", 221, Rarity.RARE, mage.cards.r.RadiantScrollwielder.class));
         cards.add(new SetCardInfo("Reckless Amplimancer", 141, Rarity.COMMON, mage.cards.r.RecklessAmplimancer.class));
         cards.add(new SetCardInfo("Reconstruct History", 222, Rarity.UNCOMMON, mage.cards.r.ReconstructHistory.class));
         cards.add(new SetCardInfo("Reduce to Memory", 25, Rarity.UNCOMMON, mage.cards.r.ReduceToMemory.class));
