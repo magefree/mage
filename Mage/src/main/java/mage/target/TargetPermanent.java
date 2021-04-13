@@ -28,7 +28,11 @@ public class TargetPermanent extends TargetObject {
     }
 
     public TargetPermanent(int numTargets, FilterPermanent filter) {
-        this(numTargets, numTargets, filter, false);
+        this(numTargets, numTargets, filter);
+    }
+
+    public TargetPermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter) {
+        this(minNumTargets, maxNumTargets, filter, false);
     }
 
     public TargetPermanent(int minNumTargets, int maxNumTargets, FilterPermanent filter, boolean notTarget) {

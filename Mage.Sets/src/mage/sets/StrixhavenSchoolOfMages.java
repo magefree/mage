@@ -230,6 +230,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Rip Apart", 225, Rarity.UNCOMMON, mage.cards.r.RipApart.class));
         cards.add(new SetCardInfo("Rise of Extus", 226, Rarity.COMMON, mage.cards.r.RiseOfExtus.class));
         cards.add(new SetCardInfo("Rootha, Mercurial Artist", 227, Rarity.UNCOMMON, mage.cards.r.RoothaMercurialArtist.class));
+        cards.add(new SetCardInfo("Rowan, Scholar of Sparks", 156, Rarity.MYTHIC, mage.cards.r.RowanScholarOfSparks.class));
         cards.add(new SetCardInfo("Rushed Rebirth", 228, Rarity.RARE, mage.cards.r.RushedRebirth.class));
         cards.add(new SetCardInfo("Scurrid Colony", 142, Rarity.COMMON, mage.cards.s.ScurridColony.class));
         cards.add(new SetCardInfo("Secret Rendezvous", 26, Rarity.UNCOMMON, mage.cards.s.SecretRendezvous.class));

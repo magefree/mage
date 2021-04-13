@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.Emblem;
@@ -21,7 +22,8 @@ public final class LukkaWaywardBonderEmblem extends Emblem {
         this.setName("Emblem Lukka");
         this.setExpansionSetCodeForImage("STX");
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
-                new LukkaWaywardBonderEmblemEffect(), StaticFilters.FILTER_PERMANENT_CREATURE_A
+                Zone.COMMAND, new LukkaWaywardBonderEmblemEffect(),
+                StaticFilters.FILTER_PERMANENT_CREATURE_A, false
         );
         ability.addTarget(new TargetAnyTarget());
         this.getAbilities().add(ability);
