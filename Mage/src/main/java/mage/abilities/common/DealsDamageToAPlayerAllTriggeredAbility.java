@@ -4,6 +4,7 @@ package mage.abilities.common;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -21,6 +22,7 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
     private final SetTargetPointer setTargetPointer;
     private final boolean onlyCombat;
     private final boolean affectsDefendingPlayer;
+    private final TargetController targetController;
 
     public DealsDamageToAPlayerAllTriggeredAbility(Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, boolean onlyCombat) {
         this(effect, filter, optional, setTargetPointer, onlyCombat, false);
@@ -31,11 +33,16 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
     }
 
     public DealsDamageToAPlayerAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, boolean onlyCombat, boolean affectsDefendingPlayer) {
+        this(zone, effect, filter, optional, setTargetPointer, onlyCombat, affectsDefendingPlayer, TargetController.ANY);
+    }
+
+    public DealsDamageToAPlayerAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer, boolean onlyCombat, boolean affectsDefendingPlayer, TargetController targetController) {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
         this.filter = filter;
         this.onlyCombat = onlyCombat;
         this.affectsDefendingPlayer = affectsDefendingPlayer;
+        this.targetController = targetController;
     }
 
     public DealsDamageToAPlayerAllTriggeredAbility(final DealsDamageToAPlayerAllTriggeredAbility ability) {
@@ -44,6 +51,7 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
         this.filter = ability.filter;
         this.onlyCombat = ability.onlyCombat;
         this.affectsDefendingPlayer = ability.affectsDefendingPlayer;
+        this.targetController = ability.targetController;
     }
 
     @Override
@@ -59,6 +67,10 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (onlyCombat && !((DamagedPlayerEvent) event).isCombatDamage()) {
+            return false;
+        }
+        if (targetController == TargetController.OPPONENT
+                && !game.getOpponents(getControllerId()).contains(event.getTargetId())) {
             return false;
         }
         Permanent permanent = game.getPermanent(event.getSourceId());
@@ -84,7 +96,7 @@ public class DealsDamageToAPlayerAllTriggeredAbility extends TriggeredAbilityImp
 
     @Override
     public String getRule() {
-        return "Whenever " + filter.getMessage() + " deals " + (onlyCombat ? "combat " : "") + "damage to a player, " + super.getRule();
+        return "Whenever " + filter.getMessage() + " deals " + (onlyCombat ? "combat " : "") + "damage to "
+                + (targetController == TargetController.OPPONENT ? "an opponent" : "a player") + ", " + super.getRule();
     }
-
 }

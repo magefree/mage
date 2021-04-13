@@ -127,6 +127,7 @@ public enum CounterType {
     PLAGUE("plague"),
     PLOT("plot"),
     POLYP("polyp"),
+    POINT("point"),
     POISON("poison"),
     PRESSURE("pressure"),
     PREY("prey"),
