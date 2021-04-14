@@ -2,6 +2,7 @@ package mage.cards;
 
 import mage.MageItem;
 import mage.MageObject;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.util.RandomUtil;
@@ -206,4 +207,8 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         return cards.values();
     }
 
+    @Override
+    public void retainZone(Zone zone, Game game) {
+        removeIf(uuid -> game.getState().getZone(uuid) != zone);
+    }
 }

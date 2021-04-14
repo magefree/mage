@@ -247,6 +247,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Sapling of Colfenor", 228, Rarity.RARE, mage.cards.s.SaplingOfColfenor.class));
         cards.add(new SetCardInfo("Sapseep Forest", 313, Rarity.UNCOMMON, mage.cards.s.SapseepForest.class));
         cards.add(new SetCardInfo("Scavenger Grounds", 314, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));
+        cards.add(new SetCardInfo("Scholarship Sponsor", 22, Rarity.RARE, mage.cards.s.ScholarshipSponsor.class));
         cards.add(new SetCardInfo("Scrap Trawler", 260, Rarity.RARE, mage.cards.s.ScrapTrawler.class));
         cards.add(new SetCardInfo("Sculpting Steel", 261, Rarity.RARE, mage.cards.s.SculptingSteel.class));
         cards.add(new SetCardInfo("Secluded Steppe", 315, Rarity.COMMON, mage.cards.s.SecludedSteppe.class));
