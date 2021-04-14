@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.o.OsgirTheReconstructor;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -212,6 +213,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Orzhov Advokist", 99, Rarity.UNCOMMON, mage.cards.o.OrzhovAdvokist.class));
         cards.add(new SetCardInfo("Orzhov Basilica", 308, Rarity.UNCOMMON, mage.cards.o.OrzhovBasilica.class));
         cards.add(new SetCardInfo("Orzhov Signet", 254, Rarity.UNCOMMON, mage.cards.o.OrzhovSignet.class));
+        cards.add(new SetCardInfo("Osgir, the Reconstructor", 8, Rarity.MYTHIC, OsgirTheReconstructor.class));
         cards.add(new SetCardInfo("Oversimplify", 72, Rarity.RARE, mage.cards.o.Oversimplify.class));
         cards.add(new SetCardInfo("Paradise Plume", 255, Rarity.UNCOMMON, mage.cards.p.ParadisePlume.class));
         cards.add(new SetCardInfo("Paradox Zone", 64, Rarity.RARE, mage.cards.p.ParadoxZone.class));
