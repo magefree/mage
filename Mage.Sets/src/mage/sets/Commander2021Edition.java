@@ -306,6 +306,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Victory Chimes", 274, Rarity.RARE, mage.cards.v.VictoryChimes.class));
         cards.add(new SetCardInfo("Volcanic Vision", 182, Rarity.RARE, mage.cards.v.VolcanicVision.class));
         cards.add(new SetCardInfo("Vow of Duty", 110, Rarity.UNCOMMON, mage.cards.v.VowOfDuty.class));
+        cards.add(new SetCardInfo("Wake the Past", 75, Rarity.RARE, mage.cards.w.WakeThePast.class));
         cards.add(new SetCardInfo("Well of Lost Dreams", 275, Rarity.RARE, mage.cards.w.WellOfLostDreams.class));
         cards.add(new SetCardInfo("Wildfire Devils", 183, Rarity.RARE, mage.cards.w.WildfireDevils.class));
         cards.add(new SetCardInfo("Willowdusk, Essence Seer", 6, Rarity.MYTHIC, mage.cards.w.WillowduskEssenceSeer.class));
