@@ -190,6 +190,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Myriad Landscape", 304, Rarity.UNCOMMON, mage.cards.m.MyriadLandscape.class));
         cards.add(new SetCardInfo("Naru Meha, Master Wizard", 124, Rarity.MYTHIC, mage.cards.n.NaruMehaMasterWizard.class));
         cards.add(new SetCardInfo("Necropolis Regent", 147, Rarity.MYTHIC, mage.cards.n.NecropolisRegent.class));
+        cards.add(new SetCardInfo("Nils, Discipline Enforcer", 20, Rarity.RARE, mage.cards.n.NilsDisciplineEnforcer.class));
         cards.add(new SetCardInfo("Nissa's Expedition", 200, Rarity.UNCOMMON, mage.cards.n.NissasExpedition.class));
         cards.add(new SetCardInfo("Nissa's Renewal", 201, Rarity.RARE, mage.cards.n.NissasRenewal.class));
         cards.add(new SetCardInfo("Novijen, Heart of Progress", 305, Rarity.UNCOMMON, mage.cards.n.NovijenHeartOfProgress.class));
