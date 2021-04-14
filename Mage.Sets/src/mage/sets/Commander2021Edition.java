@@ -234,6 +234,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Return of the Wildspeaker", 205, Rarity.RARE, mage.cards.r.ReturnOfTheWildspeaker.class));
         cards.add(new SetCardInfo("Return to Dust", 100, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
         cards.add(new SetCardInfo("Revival Experiment", 74, Rarity.RARE, mage.cards.r.RevivalExperiment.class));
+        cards.add(new SetCardInfo("Rionya, Fire Dancer", 55, Rarity.RARE, mage.cards.r.RionyaFireDancer.class));
         cards.add(new SetCardInfo("Rite of Replication", 128, Rarity.RARE, mage.cards.r.RiteOfReplication.class));
         cards.add(new SetCardInfo("Rogue's Passage", 312, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Rousing Refrain", 56, Rarity.RARE, mage.cards.r.RousingRefrain.class));
