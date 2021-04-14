@@ -318,6 +318,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Windborn Muse", 111, Rarity.RARE, mage.cards.w.WindbornMuse.class));
         cards.add(new SetCardInfo("Witch's Clinic", 81, Rarity.RARE, mage.cards.w.WitchsClinic.class));
         cards.add(new SetCardInfo("Yavimaya Coast", 409, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
+        cards.add(new SetCardInfo("Zaffai, Thunder Conductor", 4, Rarity.MYTHIC, mage.cards.z.ZaffaiThunderConductor.class));
         cards.add(new SetCardInfo("Zetalpa, Primal Dawn", 112, Rarity.RARE, mage.cards.z.ZetalpaPrimalDawn.class));
     }
 }
