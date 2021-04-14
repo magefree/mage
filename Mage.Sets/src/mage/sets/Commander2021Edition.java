@@ -68,6 +68,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Coiling Oracle", 212, Rarity.COMMON, mage.cards.c.CoilingOracle.class));
         cards.add(new SetCardInfo("Combustible Gearhulk", 163, Rarity.MYTHIC, mage.cards.c.CombustibleGearhulk.class));
         cards.add(new SetCardInfo("Command Tower", 284, Rarity.COMMON, mage.cards.c.CommandTower.class));
+        cards.add(new SetCardInfo("Commander's Insight", 23, Rarity.RARE, mage.cards.c.CommandersInsight.class));
         cards.add(new SetCardInfo("Commander's Sphere", 239, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Coveted Jewel", 240, Rarity.RARE, mage.cards.c.CovetedJewel.class));
         cards.add(new SetCardInfo("Crackling Drake", 213, Rarity.UNCOMMON, mage.cards.c.CracklingDrake.class));
