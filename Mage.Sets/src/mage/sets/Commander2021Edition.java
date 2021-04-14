@@ -149,6 +149,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Incubation Druid", 195, Rarity.RARE, mage.cards.i.IncubationDruid.class));
         cards.add(new SetCardInfo("Infernal Offering", 146, Rarity.RARE, mage.cards.i.InfernalOffering.class));
         cards.add(new SetCardInfo("Inferno Project", 52, Rarity.RARE, mage.cards.i.InfernoProject.class));
+        cards.add(new SetCardInfo("Inkshield", 71, Rarity.RARE, mage.cards.i.Inkshield.class));
         cards.add(new SetCardInfo("Inspiring Refrain", 27, Rarity.RARE, mage.cards.i.InspiringRefrain.class));
         cards.add(new SetCardInfo("Izzet Boilerworks", 294, Rarity.UNCOMMON, mage.cards.i.IzzetBoilerworks.class));
         cards.add(new SetCardInfo("Izzet Signet", 247, Rarity.COMMON, mage.cards.i.IzzetSignet.class));
