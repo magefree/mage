@@ -31,8 +31,9 @@ public interface Permanent extends Card, Controllable {
     /**
      * use tap(game)
      * <p>
-     * setTapped doesn't trigger TAPPED event and should be used only if you
-     * want permanent to enter battlefield tapped</p>
+     * setTapped doesn't trigger TAPPED event and should be used only if you want
+     * permanent to enter battlefield tapped
+     * </p>
      *
      * @param tapped
      * @deprecated
@@ -101,7 +102,7 @@ public interface Permanent extends Card, Controllable {
 
     /**
      * @param attachment
-     * @param source can be null for default checks like state base
+     * @param source     can be null for default checks like state base
      * @param game
      * @param silentMode - use it to ignore warning message for users (e.g. for
      *                   checking only)
@@ -123,22 +124,25 @@ public interface Permanent extends Card, Controllable {
      * Uses in replace events only
      *
      * @param damage
-     * @param attackerId id of the permanent or player who make damage (source.getSourceId() in most cases)
-     * @param source can be null for default game actions like combat
+     * @param attackerId     id of the permanent or player who make damage
+     *                       (source.getSourceId() in most cases)
+     * @param source         can be null for default game actions like combat
      * @param game
      * @param combat
      * @param preventable
      * @param appliedEffects
      * @return
      */
-    int damage(int damage, UUID attackerId, Ability source, Game game, boolean combat, boolean preventable, List<UUID> appliedEffects);
+    int damage(int damage, UUID attackerId, Ability source, Game game, boolean combat, boolean preventable,
+            List<UUID> appliedEffects);
 
     /**
      * Uses in combat only to deal damage at the same time
      *
      * @param damage
-     * @param attackerId id of the permanent or player who make damage (source.getSourceId() in most cases)
-     * @param source can be null for default game actions like combat
+     * @param attackerId  id of the permanent or player who make damage
+     *                    (source.getSourceId() in most cases)
+     * @param source      can be null for default game actions like combat
      * @param game
      * @param preventable
      * @param combat
@@ -229,17 +233,16 @@ public interface Permanent extends Card, Controllable {
     void setRemovedFromCombat(boolean removedFromCombat);
 
     /**
-     * Sets the maximum number of blockers the creature can be blocked by.
-     * Default = 0 which means there is no restriction in the number of
-     * blockers.
+     * Sets the maximum number of blockers the creature can be blocked by. Default =
+     * 0 which means there is no restriction in the number of blockers.
      *
      * @param maxBlockedBy maximum number of blockers
      */
     void setMaxBlockedBy(int maxBlockedBy);
 
     /**
-     * @param defenderId id of planeswalker or player to attack - can be empty
-     *                   to check generally
+     * @param defenderId id of planeswalker or player to attack - can be empty to
+     *                   check generally
      * @param game
      * @return
      */
@@ -259,8 +262,7 @@ public interface Permanent extends Card, Controllable {
     boolean canBlockAny(Game game);
 
     /**
-     * Checks by restriction effects if the permanent can use activated
-     * abilities
+     * Checks by restriction effects if the permanent can use activated abilities
      *
      * @param game
      * @return true - permanent can use activated abilities
@@ -317,8 +319,8 @@ public interface Permanent extends Card, Controllable {
     List<UUID> getImprinted();
 
     /**
-     * Allows to connect any card to permanent. Very similar to Imprint except
-     * that it is for internal use only.
+     * Allows to connect any card to permanent. Very similar to Imprint except that
+     * it is for internal use only.
      *
      * @param key
      * @param connectedCard
@@ -379,8 +381,10 @@ public interface Permanent extends Card, Controllable {
     @Override
     Permanent copy();
 
-    // Simple int counter to set a timewise create order , the lower the number the earlier the object was created
-    // if objects enter the battlefield at the same time they can get (and should) get the same number.
+    // Simple int counter to set a timewise create order , the lower the number the
+    // earlier the object was created
+    // if objects enter the battlefield at the same time they can get (and should)
+    // get the same number.
     int getCreateOrder();
 
     void setCreateOrder(int createOrder);

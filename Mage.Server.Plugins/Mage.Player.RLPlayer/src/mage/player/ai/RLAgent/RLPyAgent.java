@@ -52,6 +52,7 @@ public class RLPyAgent extends RLAgent {
         }
         assert 0<= action && action <actions.size();
         int chosenact=action%actions.size();
+        logger.info(actions.get(chosenact).getText());
         return chosenact;
     }
     public void sendGame(Game game,Player player,List<RLAction> actions){

@@ -3,7 +3,8 @@ import mage.game.Game;
 import mage.abilities.*;
 import mage.abilities.common.PassAbility;
 import mage.MageObject;
-
+import mage.cards.Card;
+import mage.game.permanent.Permanent;
 
 public class ActionAbility extends RLAction {
     public Ability ability;
@@ -19,7 +20,15 @@ public class ActionAbility extends RLAction {
             //logger.info(ability.getRule());
         }
         else{
-            name="Ability:"+source.getName();
+            if(source instanceof Permanent){
+                name="Ability:"+"Perm:"+source.getName();
+            }
+            else if(source instanceof Card){
+                name="Ability:"+"Card:"+source.getName();
+            }
+            else{
+                name="unrecognized";
+            }
         }
     }
 }

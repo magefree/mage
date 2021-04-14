@@ -186,7 +186,6 @@ public class Representer implements Serializable{
         else if(action instanceof ActionAttack){
             ActionAttack attack=((ActionAttack) action);
             if(attack.isAttack){
-                
                 String attackName=action.getText();
                 embeds[0]=getActionID(attackName);
             }

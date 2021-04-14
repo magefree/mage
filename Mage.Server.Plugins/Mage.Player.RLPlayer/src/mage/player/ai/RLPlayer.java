@@ -19,6 +19,7 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.util.RandomUtil;
+import mage.MageObject;
 
 import java.io.Serializable;
 import java.nio.file.Files;
@@ -28,6 +29,7 @@ import mage.player.ai.RLAgent.*;
 import java.util.stream.Collectors;
 import mage.player.ai.RLAgent.*;
 import java.io.*;
+import mage.abilities.*;
 
 import org.deeplearning4j.nn.graph.ComputationGraph;
 import org.deeplearning4j.optimize.listeners.CollectScoresIterationListener;
@@ -165,12 +167,13 @@ public class RLPlayer extends RandomPlayer{
     private Ability chooseAbility(Game game, List<Ability> options){
         Ability ability=pass;
         if (!options.isEmpty()) {
-            if (options.size() == 1) { //Similar 
+            if (options.size() == 1) { //Don't call ML model for single element
                 ability = options.get(0);
             } else {
                 List<RLAction> toUse=new ArrayList<RLAction>();
                 for(int i=0;i<options.size();i++){
-                    toUse.add((RLAction) new ActionAbility(game,options.get(i)));
+                    Ability abil=options.get(i);
+                    toUse.add((RLAction) new ActionAbility(game,abil));
                 }
                 int choice=learner.choose(game,this,toUse);
                 ActionAbility chosenAction=(ActionAbility) toUse.get(choice);
@@ -180,11 +183,24 @@ public class RLPlayer extends RandomPlayer{
         return ability;
     }
 
-    
+    protected List<ActivatedAbility> getPlayableNonLandTapAbilities(Game game){
+        List<ActivatedAbility> playables=getPlayableAbilities(game);
+        List<ActivatedAbility> filtered=new ArrayList<ActivatedAbility>();
+        for(int i=0;i<playables.size();i++){
+            MageObject source=playables.get(i).getSourceObjectIfItStillExists(game);
+            if(source!=null && source instanceof Permanent && source.isLand()){
+                //System.out.println("skipped a land");
+                continue;
+            }
+            filtered.add(playables.get(i));
+        }
+        return filtered;
+    }
     @Override
     protected Ability getAction(Game game) {
         //logger.info("Getting action");
-        List<ActivatedAbility> playables = getPlayableAbilities(game); //already contains pass
+        //List<ActivatedAbility> playables = getPlayableAbilities(game); //already contains pass
+        List<ActivatedAbility> playables =getPlayableNonLandTapAbilities(game);
         List<Ability> castPlayables=playables.stream().map(element->(Ability) element).collect(Collectors.toList());
         Ability ability;
         ability=chooseAbility(game, castPlayables);
@@ -208,7 +224,8 @@ public class RLPlayer extends RandomPlayer{
         List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
         for(int i=0;i<attackersList.size();i++){
             Permanent attacker=attackersList.get(i);
-            List<RLAction> toattack= Arrays.asList((RLAction) new ActionAttack(attacker,false),(RLAction) new ActionAttack(attacker,true));
+            
+            List<RLAction> toattack= Arrays.asList([(RLAction) new ActionAttack(attacker,false),(RLAction) new ActionAttack(attacker,true)]);
             int index=learner.choose(game,this,toattack);
             if(index==1){//chose to attack
                 setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
