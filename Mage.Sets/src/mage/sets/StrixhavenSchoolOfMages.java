@@ -98,6 +98,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Dream Strix", 42, Rarity.RARE, mage.cards.d.DreamStrix.class));
         cards.add(new SetCardInfo("Dueling Coach", 15, Rarity.UNCOMMON, mage.cards.d.DuelingCoach.class));
         cards.add(new SetCardInfo("Eager First-Year", 16, Rarity.COMMON, mage.cards.e.EagerFirstYear.class));
+        cards.add(new SetCardInfo("Ecological Appreciation", 128, Rarity.MYTHIC, mage.cards.e.EcologicalAppreciation.class));
         cards.add(new SetCardInfo("Elemental Expressionist", 181, Rarity.RARE, mage.cards.e.ElementalExpressionist.class));
         cards.add(new SetCardInfo("Elemental Masterpiece", 182, Rarity.COMMON, mage.cards.e.ElementalMasterpiece.class));
         cards.add(new SetCardInfo("Elemental Summoning", 183, Rarity.COMMON, mage.cards.e.ElementalSummoning.class));
