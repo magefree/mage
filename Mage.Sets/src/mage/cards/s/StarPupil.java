@@ -71,7 +71,7 @@ class StarPupilEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
+        Permanent sourcePermanent = (Permanent) getValue("permanentLeftBattlefield");
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (sourcePermanent == null || permanent == null) {
             return false;
