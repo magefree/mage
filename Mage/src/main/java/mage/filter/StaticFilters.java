@@ -114,6 +114,12 @@ public final class StaticFilters {
         FILTER_CARD_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
     }
 
+    public static final FilterCard FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD = new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard");
+
+    static {
+        FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD.setLockedFilter(true);
+    }
+
     public static final FilterNoncreatureCard FILTER_CARD_NON_CREATURE = new FilterNoncreatureCard();
 
     static {

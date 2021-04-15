@@ -20,7 +20,7 @@ public class CastCardFromGraveyardThenExileItEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    CastCardFromGraveyardThenExileItEffect(final CastCardFromGraveyardThenExileItEffect effect) {
+    protected CastCardFromGraveyardThenExileItEffect(final CastCardFromGraveyardThenExileItEffect effect) {
         super(effect);
     }
 
@@ -32,15 +32,15 @@ public class CastCardFromGraveyardThenExileItEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
-        if (card != null) {
-            ContinuousEffect effect = new CastCardFromGraveyardEffect();
-            effect.setTargetPointer(new FixedTarget(card, game));
-            game.addEffect(effect, source);
-            effect = new ExileReplacementEffect(card.getId());
-            game.addEffect(effect, source);
-            return true;
+        if (card == null) {
+            return false;
         }
-        return false;
+        ContinuousEffect effect = new CastCardFromGraveyardEffect();
+        effect.setTargetPointer(new FixedTarget(card, game));
+        game.addEffect(effect, source);
+        effect = new ExileReplacementEffect(card.getId());
+        game.addEffect(effect, source);
+        return true;
     }
 }
 
@@ -51,7 +51,7 @@ class CastCardFromGraveyardEffect extends AsThoughEffectImpl {
         this.staticText = "You may cast target card from your graveyard";
     }
 
-    CastCardFromGraveyardEffect(final CastCardFromGraveyardEffect effect) {
+    private CastCardFromGraveyardEffect(final CastCardFromGraveyardEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,8 @@ class CastCardFromGraveyardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        return objectId.equals(this.getTargetPointer().getFirst(game, source)) && affectedControllerId.equals(source.getControllerId());
+        return objectId.equals(this.getTargetPointer().getFirst(game, source))
+                && affectedControllerId.equals(source.getControllerId());
     }
 }
 
@@ -81,7 +82,7 @@ class ExileReplacementEffect extends ReplacementEffectImpl {
         this.staticText = "If that card would be put into your graveyard this turn, exile it instead";
     }
 
-    ExileReplacementEffect(final ExileReplacementEffect effect) {
+    private ExileReplacementEffect(final ExileReplacementEffect effect) {
         super(effect);
         this.cardId = effect.cardId;
     }
@@ -95,10 +96,9 @@ class ExileReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
         Card card = game.getCard(this.cardId);
-        if (controller != null && card != null) {
-            return controller.moveCards(card, Zone.EXILED, source, game);
-        }
-        return false;
+        return controller != null
+                && card != null
+                && controller.moveCards(card, Zone.EXILED, source, game);
     }
 
     @Override

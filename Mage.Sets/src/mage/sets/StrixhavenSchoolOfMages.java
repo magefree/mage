@@ -178,6 +178,7 @@ public final class StrixhavenSchoolOfMages extends ExpansionSet {
         cards.add(new SetCardInfo("Mascot Exhibition", 5, Rarity.MYTHIC, mage.cards.m.MascotExhibition.class));
         cards.add(new SetCardInfo("Mascot Interception", 110, Rarity.UNCOMMON, mage.cards.m.MascotInterception.class));
         cards.add(new SetCardInfo("Master Symmetrist", 138, Rarity.UNCOMMON, mage.cards.m.MasterSymmetrist.class));
+        cards.add(new SetCardInfo("Mavinda, Students' Advocate", 21, Rarity.MYTHIC, mage.cards.m.MavindaStudentsAdvocate.class));
         cards.add(new SetCardInfo("Mentor's Guidance", 46, Rarity.UNCOMMON, mage.cards.m.MentorsGuidance.class));
         cards.add(new SetCardInfo("Mercurial Transformation", 47, Rarity.UNCOMMON, mage.cards.m.MercurialTransformation.class));
         cards.add(new SetCardInfo("Mila, Crafty Companion", 153, Rarity.MYTHIC, mage.cards.m.MilaCraftyCompanion.class));
