@@ -31,9 +31,6 @@ import mage.player.ai.RLAgent.*;
 import java.io.*;
 import mage.abilities.*;
 
-import org.deeplearning4j.nn.graph.ComputationGraph;
-import org.deeplearning4j.optimize.listeners.CollectScoresIterationListener;
-import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 /**
  * uses a reinforcement learning based AI
  *
@@ -110,60 +107,6 @@ public class RLPlayer extends RandomPlayer{
             return null;
          }
     }
-    public static void saveLearner(RLLearner learner,String loc){
-        try {
-            FileOutputStream fileClassOut =new FileOutputStream(getClassLoc(loc));
-            ObjectOutputStream classOut = new ObjectOutputStream(fileClassOut);
-            FileOutputStream fileDataOut =new FileOutputStream(getDataLoc(loc));
-            ObjectOutputStream dataOut = new ObjectOutputStream(fileDataOut);
-            classOut.writeObject(learner);
-            classOut.close();
-            fileClassOut.close();
-            dataOut.writeObject(learner.games);
-            dataOut.close();
-            fileDataOut.close();
-            File locationToSaveGraph = new File(getModelLoc(loc));
-            learner.model.save(locationToSaveGraph, true);
-            System.out.printf("Serialized data is saved in "+loc+"\n");
-         } catch (IOException i) {
-            i.printStackTrace();
-         }
-    }
-    public static RLLearner loadLearner(String loc,boolean trainMode){
-        try {
-            FileInputStream fileClassIn = new FileInputStream(getClassLoc(loc));
-            FileInputStream fileDataIn = new FileInputStream(getDataLoc(loc));
-            ObjectInputStream classIn = new ObjectInputStream(fileClassIn);
-            Object read=classIn.readObject();
-            RLLearner learner = (RLLearner) read;
-            if(trainMode){
-                ObjectInputStream dataIn = new ObjectInputStream(fileDataIn);
-                learner.games=(LinkedList<GameSequence>) dataIn.readObject();
-                dataIn.close();
-            } else{
-                learner.games=new LinkedList<GameSequence>();
-                learner.setEvaluateMode(true);
-                learner.setEpsilon(.05f);
-            }
-            classIn.close();
-            fileClassIn.close();
-            fileDataIn.close();
-            //logger.info("loading model...");
-            learner.model=ComputationGraph.load(new File(getModelLoc(loc)),true);
-            CollectScoresIterationListener listener=new CollectScoresIterationListener(1);
-            learner.model.setListeners(listener);
-            learner.losses=listener;
-            //logger.info("loaded model");
-            return learner;
-         } catch (IOException i) {
-            i.printStackTrace();
-            return null;
-         } catch (ClassNotFoundException c) {
-            System.out.println("RLLearner class not found");
-            c.printStackTrace();
-            return null;
-         }
-    }
     private Ability chooseAbility(Game game, List<Ability> options){
         Ability ability=pass;
         if (!options.isEmpty()) {
@@ -189,6 +132,7 @@ public class RLPlayer extends RandomPlayer{
         for(int i=0;i<playables.size();i++){
             MageObject source=playables.get(i).getSourceObjectIfItStillExists(game);
             if(source!=null && source instanceof Permanent && source.isLand()){
+                //Don't allow just tapping a land to be an action
                 //System.out.println("skipped a land");
                 continue;
             }
@@ -217,6 +161,7 @@ public class RLPlayer extends RandomPlayer{
         }
         return ability;
     }
+
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) { //Recorded by AI now!
         //logger.info("life total of " + getName() +" is "+getLife());
@@ -224,8 +169,8 @@ public class RLPlayer extends RandomPlayer{
         List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
         for(int i=0;i<attackersList.size();i++){
             Permanent attacker=attackersList.get(i);
-            
-            List<RLAction> toattack= Arrays.asList([(RLAction) new ActionAttack(attacker,false),(RLAction) new ActionAttack(attacker,true)]);
+
+            List<RLAction> toattack= Arrays.asList((RLAction) new ActionAttack(attacker,false),(RLAction) new ActionAttack(attacker,true));
             int index=learner.choose(game,this,toattack);
             if(index==1){//chose to attack
                 setStoredBookmark(game.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda

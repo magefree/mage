@@ -39,6 +39,7 @@ public class RLPyAgent extends RLAgent {
         this.conn=conn;
         conn.write_hparams();
     }
+    
     public int choose(Game game, Player player,List<RLAction> actions){
         if(done){
             return 0;

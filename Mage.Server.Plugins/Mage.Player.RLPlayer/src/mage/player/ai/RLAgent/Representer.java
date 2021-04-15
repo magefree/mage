@@ -15,6 +15,9 @@ import mage.game.permanent.Battlefield;
 import org.nd4j.linalg.api.buffer.DataType;
 import mage.game.combat.CombatGroup;
 import mage.game.combat.Combat;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
 public class Representer implements Serializable{
     HashMap<String,Integer> nameToIndex;
     int current_represent;
