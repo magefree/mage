@@ -118,7 +118,7 @@ class MavindaStudentsAdvocateCostEffect extends CostModificationEffectImpl {
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return abilityToModify instanceof SpellAbility
                 && abilityToModify.isControlledBy(source.getControllerId())
-                && mor.refersTo(((SpellAbility) abilityToModify).getCharacteristics(game), game)
+                && mor.refersTo(CardUtil.getMainCardId(game, abilityToModify.getSourceId()), game)
                 && abilityToModify
                 .getTargets()
                 .stream()
