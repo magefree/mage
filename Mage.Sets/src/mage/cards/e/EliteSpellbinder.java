@@ -60,9 +60,12 @@ class EliteSpellbinderEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         TargetOpponent targetOpponent = new TargetOpponent();
-
-        controller.lookAtCards(source.getSourceObject(game).getName(), new CardsImpl());
-        return false;
+        controller.chooseTarget(outcome, targetOpponent, source, game);
+        Player opponent = game.getPlayer(targetOpponent.getFirstTarget());
+        if (opponent != null) {
+            controller.lookAtCards(source.getSourceObject(game).getName(), opponent.getHand(), game);
+        }
+        return true;
     }
 
     @Override
