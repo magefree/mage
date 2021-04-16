@@ -1742,9 +1742,10 @@ public abstract class GameImpl implements Game, Serializable {
      * For internal use only
      *
      * @param ability
+     * @param triggeringEvent
      */
     @Override
-    public void addTriggeredAbility(TriggeredAbility ability) {
+    public void addTriggeredAbility(TriggeredAbility ability, GameEvent triggeringEvent) {
         if (ability.getControllerId() == null) {
             String sourceName = "no sourceId";
             if (ability.getSourceId() != null) {
@@ -1770,6 +1771,7 @@ public abstract class GameImpl implements Game, Serializable {
             if (newAbility.getSourceObjectZoneChangeCounter() == 0) {
                 newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(ability.getSourceId()));
             }
+            newAbility.setTriggerEvent(triggeringEvent);
             state.addTriggeredAbility(newAbility);
         }
     }

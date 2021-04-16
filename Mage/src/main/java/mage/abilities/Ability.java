@@ -48,7 +48,7 @@ public interface Ability extends Controllable, Serializable {
      *
      * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
      * mage.game.Game)
-     * @see mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
+     * @see Game#addTriggeredAbility(TriggeredAbility, GameEvent)
      * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
     void newId();
@@ -58,7 +58,7 @@ public interface Ability extends Controllable, Serializable {
      *
      * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility,
      * mage.game.Game)
-     * @see mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
+     * @see Game#addTriggeredAbility(TriggeredAbility, GameEvent)
      * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
     void newOriginalId();

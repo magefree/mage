@@ -78,10 +78,10 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
     }
 
     @Override
-    public void trigger(Game game, UUID controllerId) {
+    public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
         //20100716 - 603.8
         game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.TRUE);
-        super.trigger(game, controllerId);
+        super.trigger(game, controllerId, triggeringEvent);
     }
 
     @Override

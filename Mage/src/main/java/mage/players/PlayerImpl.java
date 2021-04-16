@@ -780,7 +780,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         Cards toDiscard = new CardsImpl();
         Cards hand = getHand().copy();
         for (int i = 0; i < amount; i++) {
-            if(hand.isEmpty()){
+            if (hand.isEmpty()) {
                 break;
             }
             Card card = hand.getRandom(game);
@@ -1496,6 +1496,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         if (sourceObject != null) {
             sourceObject.adjustTargets(ability, game);
         }
+        UUID triggerId = null;
         if (ability.canChooseTarget(game, playerId)) {
             if (ability.isUsesStack()) {
                 game.getStack().push(new StackAbility(ability, playerId));
@@ -1509,14 +1510,23 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (!ability.isUsesStack()) {
                     ability.resolve(game);
                 } else {
-                    game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY,
-                            ability.getId(), ability, ability.getControllerId()));
+                    game.fireEvent(new GameEvent(
+                            GameEvent.EventType.TRIGGERED_ABILITY,
+                            ability.getId(), ability, ability.getControllerId()
+                    ));
+                    triggerId = ability.getId();
                 }
                 game.removeBookmark(bookmark);
                 return true;
             }
         }
         restoreState(bookmark, triggeredAbility.getRule(), game); // why restore is needed here? (to remove the triggered ability from the stack because of no possible targets)
+        GameEvent event = new GameEvent(
+                GameEvent.EventType.ABILITY_TRIGGERED,
+                triggerId, ability, ability.getControllerId()
+        );
+        game.getState().setValue(event.getId().toString(), ability.getTriggerEvent());
+        game.fireEvent(event);
         return false;
     }
 

@@ -11,7 +11,7 @@ import java.util.UUID;
  */
 public interface TriggeredAbility extends Ability {
 
-    void trigger(Game game, UUID controllerId);
+    void trigger(Game game, UUID controllerId, GameEvent event);
 
     /**
      * This check for the relevant event types is called at first to prevent
@@ -52,4 +52,7 @@ public interface TriggeredAbility extends Ability {
     @Override
     TriggeredAbility copy();
 
+    void setTriggerEvent(GameEvent event);
+
+    GameEvent getTriggerEvent();
 }

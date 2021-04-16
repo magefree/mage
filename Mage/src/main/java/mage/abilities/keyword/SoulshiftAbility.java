@@ -11,6 +11,7 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -46,14 +47,14 @@ public class SoulshiftAbility extends DiesSourceTriggeredAbility {
     }
 
     @Override
-    public void trigger(Game game, UUID controllerId) {
+    public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
         this.getTargets().clear();
         int intValue = amount.calculate(game, this, null);
         FilterCard filter = new FilterCard("Spirit card with converted mana cost " + intValue + " or less from your graveyard");
         filter.add(new ConvertedManaCostPredicate(ComparisonType.FEWER_THAN,  intValue + 1));
         filter.add(SubType.SPIRIT.getPredicate());
         this.addTarget(new TargetCardInYourGraveyard(filter));
-        super.trigger(game, controllerId); //To change body of generated methods, choose Tools | Templates.
+        super.trigger(game, controllerId, triggeringEvent); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

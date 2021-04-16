@@ -24,6 +24,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     protected boolean optional;
     protected boolean leavesTheBattlefieldTrigger;
     private boolean triggersOnce = false;
+    private GameEvent triggerEvent = null;
 
     public TriggeredAbilityImpl(Zone zone, Effect effect) {
         this(zone, effect, false);
@@ -53,21 +54,31 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
-    public void trigger(Game game, UUID controllerId) {
+    public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
         //20091005 - 603.4
         if (checkInterveningIfClause(game)) {
-            addthing(game);
-            game.addTriggeredAbility(this);
+            setLastTrigger(game);
+            game.addTriggeredAbility(this, triggeringEvent);
         }
     }
 
-    private final void addthing(Game game) {
+    private final void setLastTrigger(Game game) {
         if (!triggersOnce) {
             return;
         }
         game.getState().setValue(CardUtil.getCardZoneString(
                 "lastTurnTriggered" + originalId, sourceId, game
         ), game.getTurnNum());
+    }
+
+    @Override
+    public void setTriggerEvent(GameEvent triggerEvent) {
+        this.triggerEvent = triggerEvent;
+    }
+
+    @Override
+    public GameEvent getTriggerEvent() {
+        return triggerEvent;
     }
 
     @Override
