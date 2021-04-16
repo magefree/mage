@@ -10,14 +10,12 @@ import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -40,7 +38,9 @@ public final class EfreetFlamepainter extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // Whenever Efreet Flamepainter deals combat damage to a player, you may cast target instant or sorcery card from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new EfreetFlamepainterEffect(), false));
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new EfreetFlamepainterEffect(), false);
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY));
+        this.addAbility(ability);
     }
 
     private EfreetFlamepainter(final EfreetFlamepainter card) {
@@ -67,15 +67,16 @@ class EfreetFlamepainterEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        TargetCard targetCard = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY);
-        controller.chooseTarget(outcome, new CardsImpl(controller.getGraveyard().getCards(game)), targetCard, source, game);
-        Card card = game.getCard(targetCard.getFirstTarget());
-        if (card != null && controller.chooseUse(outcome, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
-            game.addEffect(new ExileCardEnteringGraveyardReplacementEffect(card.getId()), source);
-            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-            controller.cast(controller.chooseAbilityForCast(card, game, true),
-                game, true, new ApprovingObject(source, game));
-            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+        UUID targetId = source.getFirstTarget();
+        if (targetId != null) {
+            Card card = game.getCard(targetId);
+            if (card != null && controller.chooseUse(outcome, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
+                game.addEffect(new ExileCardEnteringGraveyardReplacementEffect(card.getId()), source);
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
+                controller.cast(controller.chooseAbilityForCast(card, game, true),
+                    game, true, new ApprovingObject(source, game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
+            }
         }
         return true;
     }
