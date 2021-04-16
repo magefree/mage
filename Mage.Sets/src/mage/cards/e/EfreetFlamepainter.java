@@ -70,7 +70,7 @@ class EfreetFlamepainterEffect extends OneShotEffect {
         TargetCard targetCard = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY);
         controller.chooseTarget(outcome, new CardsImpl(controller.getGraveyard().getCards(game)), targetCard, source, game);
         Card card = game.getCard(targetCard.getFirstTarget());
-        if (controller.chooseUse(outcome, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
+        if (card != null && controller.chooseUse(outcome, "Cast " + card.getName() + " without paying its mana cost?", source, game)) {
             game.addEffect(new ExileCardEnteringGraveyardReplacementEffect(card.getId()), source);
             game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
             controller.cast(controller.chooseAbilityForCast(card, game, true),
