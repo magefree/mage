@@ -291,6 +291,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Silence", 325, Rarity.RARE, mage.cards.t.TempleOfSilence.class));
         cards.add(new SetCardInfo("Temple of Triumph", 327, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
         cards.add(new SetCardInfo("Temple of the False God", 326, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
+        cards.add(new SetCardInfo("Tempting Contract", 78, Rarity.RARE, mage.cards.t.TemptingContract.class));
         cards.add(new SetCardInfo("Terastodon", 207, Rarity.RARE, mage.cards.t.Terastodon.class));
         cards.add(new SetCardInfo("Teysa, Envoy of Ghosts", 230, Rarity.RARE, mage.cards.t.TeysaEnvoyOfGhosts.class));
         cards.add(new SetCardInfo("Thopter Engineer", 181, Rarity.UNCOMMON, mage.cards.t.ThopterEngineer.class));
