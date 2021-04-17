@@ -26,14 +26,17 @@ import mage.target.common.TargetCreatureOrPlaneswalker;
 import java.util.UUID;
 
 /**
- *
  * @author htrajan
  */
 public final class SelflessGlyphweaver extends ModalDoubleFacesCard {
 
     public SelflessGlyphweaver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.CLERIC}, "{2}{W}",
-            "Deadly Vanity", new CardType[]{CardType.SORCERY}, new SubType[]{}, "{5}{B}{B}{B}");
+        super(
+                ownerId, setInfo,
+                new CardType[]{CardType.CREATURE}, new SubType[]{SubType.HUMAN, SubType.CLERIC}, "{2}{W}",
+                "Deadly Vanity",
+                new CardType[]{CardType.SORCERY}, new SubType[]{}, "{5}{B}{B}{B}"
+        );
 
         // 1.
         // Selfless Glyphweaver
@@ -73,10 +76,12 @@ class DeadlyVanityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         TargetPermanent target = new TargetCreatureOrPlaneswalker();
         target.setNotTarget(true);
-
-        Player controller = game.getPlayer(source.getControllerId());
         controller.choose(outcome, target, source.getId(), game);
 
         FilterPermanent filter = new FilterCreatureOrPlaneswalkerPermanent();
