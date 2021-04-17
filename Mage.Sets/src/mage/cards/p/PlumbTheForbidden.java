@@ -50,6 +50,10 @@ class PlumbTheForbiddenCost extends SacrificeTargetCost {
                 "copy this spell for each creature sacrificed this way";
     }
 
+    private PlumbTheForbiddenCost(final PlumbTheForbiddenCost cost) {
+        super(cost);
+    }
+
     @Override
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         if (!super.pay(ability, game, source, controllerId, noMana, costToPay)) {
@@ -68,5 +72,10 @@ class PlumbTheForbiddenCost extends SacrificeTargetCost {
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
         return true;
+    }
+
+    @Override
+    public PlumbTheForbiddenCost copy() {
+        return new PlumbTheForbiddenCost(this);
     }
 }
