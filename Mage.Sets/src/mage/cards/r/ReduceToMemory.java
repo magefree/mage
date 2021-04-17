@@ -45,7 +45,7 @@ class ReduceToMemoryEffect extends OneShotEffect {
 
     ReduceToMemoryEffect() {
         super(Outcome.Benefit);
-        staticText = "exile target nonland permanent. Its controller creates a 3/2 red and white spirit creature token";
+        staticText = "exile target nonland permanent. Its controller creates a 3/2 red and white Spirit creature token";
     }
 
     private ReduceToMemoryEffect(final ReduceToMemoryEffect effect) {

@@ -31,7 +31,8 @@ public final class ZephyrBoots extends CardImpl {
 
         // Whenever equipped creature deals combat damage to a player, draw a card, then discard a card.
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(
-                new DrawDiscardControllerEffect(1, 1), "equipped", false
+                new DrawDiscardControllerEffect(1, 1),
+                "equipped creature", false
         ));
 
         // Equip {2}

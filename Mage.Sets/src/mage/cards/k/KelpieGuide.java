@@ -18,6 +18,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -29,6 +30,8 @@ public final class KelpieGuide extends CardImpl {
 
     private static final FilterPermanent filter
             = new FilterControlledLandPermanent("you control eight or more lands");
+    private static final FilterPermanent filter2
+            = new FilterControlledPermanent("another target permanent you control");
     private static final Condition condition
             = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 7);
 
@@ -41,7 +44,7 @@ public final class KelpieGuide extends CardImpl {
 
         // {T}: Untap another target permanent you control.
         Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new TapSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
 
         // {T}: Tap target permanent. Activate only if you control eight or more lands.

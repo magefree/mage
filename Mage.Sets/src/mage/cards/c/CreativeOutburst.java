@@ -31,7 +31,8 @@ public final class CreativeOutburst extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(
                 StaticValue.get(5), false, StaticValue.get(1),
                 StaticFilters.FILTER_CARD, Zone.LIBRARY, false, false
-        ));
+        ).setBackInRandomOrder(true).setText("Look at the top five cards of your library. " +
+                "Put one of them into your hand and the rest on the bottom of your library in a random order"));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // {U/R}{U/R}, Discard Creative Outburst: Create a Treasure token.

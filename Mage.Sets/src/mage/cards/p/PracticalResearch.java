@@ -25,7 +25,7 @@ public final class PracticalResearch extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(4));
         this.getSpellAbility().addEffect(new DoIfCostPaid(
                 null, new DiscardControllerEffect(2), cost
-        ).setText("Then discard two cards unless you discard an enchantment card"));
+        ).setText("Then discard two cards unless you discard an instant or sorcery card"));
     }
 
     private PracticalResearch(final PracticalResearch card) {

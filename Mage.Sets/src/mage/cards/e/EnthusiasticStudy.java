@@ -21,7 +21,9 @@ public final class EnthusiasticStudy extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{R}");
 
         // Target creature gets +3/+1 and gains trample until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(3, 1));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(
+                3, 1
+        ).setText("target creature gets +3/+1"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ).setText("and gains trample until end of turn"));

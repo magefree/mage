@@ -39,7 +39,7 @@ public final class LoreholdExcavation extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(
                 new LoreholdToken(), 1, true, false
         ), new GenericManaCost(5));
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE)));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_A)));
         this.addAbility(ability);
     }
 

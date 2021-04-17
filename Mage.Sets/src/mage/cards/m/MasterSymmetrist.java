@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class MasterSymmetrist extends CardImpl {
 
     private static final FilterCreaturePermanent filter
-            = new FilterCreaturePermanent("a creature you control with power equal to its toughness");
+            = new FilterCreaturePermanent("creature you control with power equal to its toughness");
 
     static {
         filter.add(TargetController.YOU.getControllerPredicate());

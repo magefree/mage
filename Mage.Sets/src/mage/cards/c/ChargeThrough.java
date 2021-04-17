@@ -1,5 +1,6 @@
 package mage.cards.c;
 
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -24,7 +25,7 @@ public final class ChargeThrough extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Draw a card.
-        this.getSpellAbility().addEffect(new DrawCardTargetEffect(1));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }
 
     private ChargeThrough(final ChargeThrough card) {

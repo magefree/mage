@@ -42,12 +42,12 @@ public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder(super.getRule()).append(" Activate this ability ");
+        StringBuilder sb = new StringBuilder(super.getRule()).append(" Activate ");
         if (condition != null) {
             sb.append("only ").append(condition.toString()).append(" and ");
         }
         if (getTiming() == TimingRule.SORCERY) {
-            sb.append("only any time you could cast a sorcery and ");
+            sb.append("only as a sorcery and ");
         }
         switch (maxActivationsPerTurn) {
             case 1:

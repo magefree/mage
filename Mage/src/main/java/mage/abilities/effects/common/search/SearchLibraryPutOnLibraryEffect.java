@@ -12,7 +12,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
@@ -72,12 +71,9 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
         StringBuilder sb = new StringBuilder();
         sb.append("search your library for a ").append(target.getTargetName());
         if (reveal) {
-            sb.append(" and reveal that card. Shuffle");
-        } else {
-            sb.append(", then shuffle");
+            sb.append(", reveal it");
         }
-        sb.append(" your library and put that card on top of it");
+        sb.append(", then shuffle and put that card on top of it");
         staticText = sb.toString();
     }
-
 }

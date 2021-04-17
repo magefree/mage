@@ -24,7 +24,7 @@ import java.util.UUID;
 public final class TomeShredder extends CardImpl {
 
     private static final FilterCard filter
-            = new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard");
+            = new FilterInstantOrSorceryCard("an instant or sorcery card from your graveyard");
 
     public TomeShredder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");

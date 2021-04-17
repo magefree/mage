@@ -47,10 +47,10 @@ public final class MascotInterception extends CardImpl {
         this.getSpellAbility().addEffect(new UntapTargetEffect().setText("Untap that creature"));
         this.getSpellAbility().addEffect(new BoostTargetEffect(
                 2, 0, Duration.EndOfTurn
-        ).setText("Until end of turn, it gets +2/+0"));
+        ).setText("It gets +2/+0"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn
-        ).setText("and gains haste"));
+        ).setText("and gains haste until end of turn"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

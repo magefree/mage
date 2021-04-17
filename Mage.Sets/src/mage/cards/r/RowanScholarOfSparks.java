@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
  */
 public final class RowanScholarOfSparks extends ModalDoubleFacesCard {
 
-    private static final FilterCard filter = new FilterInstantOrSorceryCard("");
+    private static final FilterCard filter = new FilterInstantOrSorceryCard("instant and sorcery spells");
 
     public RowanScholarOfSparks(UUID ownerId, CardSetInfo setInfo) {
         super(

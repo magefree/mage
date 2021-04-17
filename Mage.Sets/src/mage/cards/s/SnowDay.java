@@ -1,6 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.DrawDiscardTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
@@ -24,7 +25,7 @@ public final class SnowDay extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
 
         // Draw two cards, then discard a card.
-        this.getSpellAbility().addEffect(new DrawDiscardTargetEffect(2, 1).concatBy("<br>"));
+        this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2, 1).concatBy("<br>"));
     }
 
     private SnowDay(final SnowDay card) {

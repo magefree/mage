@@ -14,7 +14,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -46,7 +46,7 @@ public final class ShadewingLaureate extends CardImpl {
         Ability ability = new DiesCreatureTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false, filter
         );
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
 

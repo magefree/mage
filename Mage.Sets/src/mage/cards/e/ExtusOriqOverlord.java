@@ -64,11 +64,12 @@ public final class ExtusOriqOverlord extends ModalDoubleFacesCard {
         // Sorcery
         // As an additional cost to cast this spell, you may sacrifice any number of creatures. This spell costs {2} less to cast for each creature sacrificed this way.
         Cost cost = new SacrificeXTargetCost(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT);
-        cost.setText("As an additional cost to cast this spell, you may sacrifice any number of creatures");
+        cost.setText("As an additional cost to cast this spell, you may sacrifice any number of creatures. " +
+                "This spell costs {2} less to cast for each creature sacrificed this way");
         this.getRightHalfCard().getSpellAbility().addCost(cost);
-        this.getRightHalfCard().addAbility(new SimpleStaticAbility(
-                Zone.ALL, new AwakenTheBloodAvatarCostReductionEffect()
-        ));
+        ability = new SimpleStaticAbility(Zone.ALL, new AwakenTheBloodAvatarCostReductionEffect());
+        ability.setRuleVisible(false);
+        this.getRightHalfCard().addAbility(ability);
 
         // Each opponent sacrifices a creature. Create a 3/6 black and red Avatar creature token with haste and "Whenever this creature attacks, it deals 3 damage to each opponent."
         this.getRightHalfCard().getSpellAbility().addEffect(new SacrificeOpponentsEffect(
@@ -91,7 +92,6 @@ class AwakenTheBloodAvatarCostReductionEffect extends CostModificationEffectImpl
 
     AwakenTheBloodAvatarCostReductionEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
-        staticText = "This spell costs {2} less to cast for each creature sacrificed this way";
     }
 
     private AwakenTheBloodAvatarCostReductionEffect(final AwakenTheBloodAvatarCostReductionEffect effect) {

@@ -121,7 +121,7 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
             sb.append(genericMana.getMessage());
         }
         if (exile) {
-            sb.append(". If that spell is countered this way, exile it instead of putting into its owner's graveyard.");
+            sb.append(". If that spell is countered this way, exile it instead of putting it into its owner's graveyard.");
         }
         return sb.toString();
     }

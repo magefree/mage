@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
 import java.util.ArrayList;
@@ -138,7 +139,7 @@ public class PutOnLibraryTargetEffect extends OneShotEffect {
             sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(' ');
         }
         sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" on ");
-        sb.append(onTop ? "top" : "the bottom").append(" of its owner's library");
+        sb.append(onTop ? "top" : "the bottom").append(" of ").append(mode.getTargets().get(0) instanceof TargetCardInYourGraveyard ? "your" : "its owner's").append(" library");
 
         return sb.toString();
 

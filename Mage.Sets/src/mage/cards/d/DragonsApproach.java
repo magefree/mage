@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class DragonsApproach extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("a Dragon creature card");
+    private static final FilterCard filter = new FilterCreatureCard("Dragon creature card");
     private static final FilterCard filter2 = new FilterCard("cards named Dragon's Approach");
 
     static {
@@ -39,7 +39,7 @@ public final class DragonsApproach extends CardImpl {
         // Dragon's Approach deals 3 damage to each opponent. You may exile Dragon's Approach and four cards named Dragon's Approach from your graveyard. If you do, search your library for a Dragon creature card, put it onto the battlefield, then shuffle.
         this.getSpellAbility().addEffect(new DamagePlayersEffect(3, TargetController.OPPONENT));
         this.getSpellAbility().addEffect(new DoIfCostPaid(
-                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary()),
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)),
                 new CompositeCost(
                         new ExileSourceCost(), new ExileFromGraveCost(new TargetCardInYourGraveyard(filter2)),
                         "exile {this} and four cards named Dragon's Approach from your graveyard"

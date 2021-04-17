@@ -26,7 +26,10 @@ public final class TendThePests extends CardImpl {
         ));
 
         // Create X 1/1 black and green Pest creature tokens with "When this creature dies, you gain 1 life," where X is the sacrificed creature's power.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new WitherbloomToken(), SacrificeCostCreaturesPower.instance));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(
+                new WitherbloomToken(), SacrificeCostCreaturesPower.instance
+        ).setText("create X 1/1 black and green Pest creature tokens with " +
+                "\"When this creature dies, you gain 1 life,\" where X is the sacrificed creature's power"));
     }
 
     private TendThePests(final TendThePests card) {

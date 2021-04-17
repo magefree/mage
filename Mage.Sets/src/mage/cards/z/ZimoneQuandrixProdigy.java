@@ -41,7 +41,9 @@ public final class ZimoneQuandrixProdigy extends CardImpl {
 
         // {1}, {T}: You may put a land card from your hand onto the battlefield tapped.
         Ability ability = new SimpleActivatedAbility(
-                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_LAND_A), new GenericManaCost(1)
+                new PutCardFromHandOntoBattlefieldEffect(
+                        StaticFilters.FILTER_CARD_LAND_A, false, true
+                ), new GenericManaCost(1)
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

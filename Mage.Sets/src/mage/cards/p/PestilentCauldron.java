@@ -72,7 +72,7 @@ public final class PestilentCauldron extends ModalDoubleFacesCard {
         ability = new SimpleActivatedAbility(new ExileTargetEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInASingleGraveyard(
-                0, 4, StaticFilters.FILTER_CARD_CARDS
+                4, 4, StaticFilters.FILTER_CARD_CARDS
         ));
         ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.getLeftHalfCard().addAbility(ability);

@@ -35,7 +35,9 @@ public final class CombatProfessor extends CardImpl {
 
         // At the beginning of combat on your turn, target creature you control gets +1/+0 and gains vigilance until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new BoostTargetEffect(1, 0), TargetController.YOU, false
+                new BoostTargetEffect(1, 0)
+                        .setText("target creature you control gets +1/+0"),
+                TargetController.YOU, false
         );
         ability.addEffect(new GainAbilityTargetEffect(
                 VigilanceAbility.getInstance(), Duration.EndOfTurn
