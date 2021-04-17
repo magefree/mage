@@ -203,7 +203,7 @@ class LukkaWaywardBonderReturnEffect extends OneShotEffect {
                         .setText("Exile it at the beginning of your next upkeep.")
                         .setTargetPointer(new FixedTarget(permanent, game)),
                 Duration.Custom, true
-        ));
+        ), source);
         return true;
     }
 }

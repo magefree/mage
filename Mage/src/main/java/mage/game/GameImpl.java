@@ -1778,25 +1778,16 @@ public abstract class GameImpl implements Game, Serializable {
 
     @Override
     public UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility, Ability source) {
-        delayedAbility.setSourceId(source.getSourceId());
-        delayedAbility.setControllerId(source.getControllerId());
+        if (source != null) {
+            delayedAbility.setSourceId(source.getSourceId());
+            delayedAbility.setControllerId(source.getControllerId());
+        }
         // return addDelayedTriggeredAbility(delayedAbility);
         DelayedTriggeredAbility newAbility = delayedAbility.copy();
         newAbility.newId();
-        newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
-        newAbility.initOnAdding(this);
-        // ability.init is called as the ability triggeres not now.
-        // If a FixedTarget pointer is already set from the effect setting up this delayed ability
-        // it has to be already initialized so it won't be overwitten as the ability triggers
-        getState().addDelayedTriggeredAbility(newAbility);
-        return newAbility.getId();
-    }
-
-    @Deprecated
-    @Override
-    public UUID addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility) {
-        DelayedTriggeredAbility newAbility = delayedAbility.copy();
-        newAbility.newId();
+        if (source != null) {
+            newAbility.setSourceObjectZoneChangeCounter(getState().getZoneChangeCounter(source.getSourceId()));
+        }
         newAbility.initOnAdding(this);
         // ability.init is called as the ability triggeres not now.
         // If a FixedTarget pointer is already set from the effect setting up this delayed ability

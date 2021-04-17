@@ -553,7 +553,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     new LoseControlOnOtherPlayersControllerEffect(this.getLogName(), player.getLogName()));
             ability.setSourceId(getId());
             ability.setControllerId(getId());
-            game.addDelayedTriggeredAbility(ability);
+            game.addDelayedTriggeredAbility(ability, null);
         }
     }
 
