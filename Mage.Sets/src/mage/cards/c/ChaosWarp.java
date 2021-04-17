@@ -79,7 +79,7 @@ class ChaosWarpRevealEffect extends OneShotEffect {
 
     public ChaosWarpRevealEffect() {
         super(Outcome.PutCardInPlay);
-        this.staticText = "then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield";
+        this.staticText = ", then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield";
     }
 
     public ChaosWarpRevealEffect(final ChaosWarpRevealEffect effect) {

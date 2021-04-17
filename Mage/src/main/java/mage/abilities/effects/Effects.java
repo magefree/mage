@@ -54,7 +54,11 @@ public class Effects extends ArrayList<Effect> {
             String concatPrefix = effect.getConcatPrefix();
 
             if (effectNum > 1 && !concatPrefix.isEmpty() && !concatPrefix.equals(".")) {
-                nextRule = concatPrefix + " " + nextRule;
+                if (concatPrefix.contains("<br>")) {
+                    nextRule = concatPrefix + CardUtil.getTextWithFirstCharUpperCase(nextRule);
+                } else {
+                    nextRule = concatPrefix + " " + nextRule;
+                }
             }
 
 

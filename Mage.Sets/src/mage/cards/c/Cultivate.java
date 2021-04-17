@@ -45,12 +45,13 @@ class CultivateEffect extends OneShotEffect {
 
     protected static final FilterCard filter = new FilterCard("card to put on the battlefield tapped");
 
-    public CultivateEffect() {
+    CultivateEffect() {
         super(Outcome.PutLandInPlay);
-        staticText = "Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library";
+        staticText = "search your library for up to two basic land cards, reveal those cards, " +
+                "put one onto the battlefield tapped and the other into your hand, then shuffle";
     }
 
-    public CultivateEffect(final CultivateEffect effect) {
+    private CultivateEffect(final CultivateEffect effect) {
         super(effect);
     }
 

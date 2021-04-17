@@ -22,7 +22,7 @@ public final class TendrilsOfAgony extends CardImpl {
         // Target player loses 2 life and you gain 2 life.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(2));
-        this.getSpellAbility().addEffect(new GainLifeEffect(2));
+        this.getSpellAbility().addEffect(new GainLifeEffect(2).concatBy("and"));
         // Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
         this.addAbility(new StormAbility());
     }

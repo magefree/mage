@@ -97,9 +97,9 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
             sb.append(" tapped");
         }
         if (forceShuffle) {
-            sb.append(", then shuffle your library");
+            sb.append(", then shuffle");
         } else {
-            sb.append(". If you do, shuffle your library");
+            sb.append(". If you do, shuffle");
         }
         staticText = sb.toString();
     }
