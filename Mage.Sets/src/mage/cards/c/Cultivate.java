@@ -82,15 +82,13 @@ class CultivateEffect extends OneShotEffect {
                     }
                     Set<Card> cards = revealed.getCards(game);
                     card = cards.isEmpty() ? null : cards.iterator().next();
-                    if (card != null) {
-                        controller.moveCards(card, Zone.HAND, source, game);
-                    }
+                    controller.moveCards(card, Zone.HAND, source, game);
+
                 } else if (target.getTargets().size() == 1) {
                     Set<Card> cards = revealed.getCards(game);
                     Card card = cards.isEmpty() ? null : cards.iterator().next();
-                    if (card != null) {
-                        controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
-                    }
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
+
                 }
             }
         }

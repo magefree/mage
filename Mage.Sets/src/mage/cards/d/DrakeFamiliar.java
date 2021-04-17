@@ -70,9 +70,7 @@ class DrakeFamiliarEffect extends OneShotEffect {
                 && controller.chooseUse(outcome, "Return an enchantment to its owner's hand?", source, game)) {
             controller.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent != null) {
-                return controller.moveCards(permanent, Zone.HAND, source, game);
-            }
+            return controller.moveCards(permanent, Zone.HAND, source, game);
         }
         Permanent permanent = source.getSourcePermanentIfItStillExists(game);
         return permanent != null && permanent.sacrifice(source, game);

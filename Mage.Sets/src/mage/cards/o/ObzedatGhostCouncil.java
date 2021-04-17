@@ -80,8 +80,7 @@ class ObzedatGhostCouncilExileSourceEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null
-                || controller == null
+        if (controller == null
                 || !controller.moveCards(permanent, Zone.EXILED, source, game)) {
             return false;
         }

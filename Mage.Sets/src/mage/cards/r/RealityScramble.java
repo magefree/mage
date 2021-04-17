@@ -105,10 +105,8 @@ class RealityScrambleEffect extends OneShotEffect {
             }
         }
         controller.revealCards(source, toReveal, game);
-        if (cardToPlay != null) {
-            controller.moveCards(cardToPlay, Zone.BATTLEFIELD, source, game);
-            toReveal.remove(cardToPlay);
-        }
+        controller.moveCards(cardToPlay, Zone.BATTLEFIELD, source, game);
+        toReveal.remove(cardToPlay);
         controller.putCardsOnBottomOfLibrary(toReveal, game, source, false);
         return true;
     }

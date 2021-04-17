@@ -76,10 +76,7 @@ class MistmoonGriffinEffect extends OneShotEffect {
                     lastCreatureCard = card;
                 }
             }
-            if (lastCreatureCard != null) {
-                return controller.moveCards(lastCreatureCard, Zone.BATTLEFIELD, source, game);
-            }
-            return true;
+            return controller.moveCards(lastCreatureCard, Zone.BATTLEFIELD, source, game);
         }
         return false;
     }

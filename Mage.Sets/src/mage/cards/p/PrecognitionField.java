@@ -78,9 +78,7 @@ class PrecognitionFieldExileEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card card = controller.getLibrary().getFromTop(game);
-            if (card != null) {
-                controller.moveCards(card, Zone.EXILED, source, game);
-            }
+            controller.moveCards(card, Zone.EXILED, source, game);
             return true;
         }
         return false;

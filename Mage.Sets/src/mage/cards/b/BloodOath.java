@@ -80,40 +80,21 @@ class BloodOathEffect extends OneShotEffect {
             Choice choiceImpl = new ChoiceImpl();
             choiceImpl.setChoices(choice);
             if (player.choose(Outcome.Neutral, choiceImpl, game)) {
-                CardType type = null;
-                String choosenType = choiceImpl.getChoice();
-
-                if (choosenType.equals(CardType.ARTIFACT.toString())) {
-                    type = CardType.ARTIFACT;
-                } else if (choosenType.equals(CardType.LAND.toString())) {
-                    type = CardType.LAND;
-                } else if (choosenType.equals(CardType.CREATURE.toString())) {
-                    type = CardType.CREATURE;
-                } else if (choosenType.equals(CardType.ENCHANTMENT.toString())) {
-                    type = CardType.ENCHANTMENT;
-                } else if (choosenType.equals(CardType.INSTANT.toString())) {
-                    type = CardType.INSTANT;
-                } else if (choosenType.equals(CardType.SORCERY.toString())) {
-                    type = CardType.SORCERY;
-                } else if (choosenType.equals(CardType.PLANESWALKER.toString())) {
-                    type = CardType.PLANESWALKER;
-                } else if (choosenType.equals(CardType.TRIBAL.toString())) {
-                    type = CardType.TRIBAL;
-                }
-                if (type != null) {
-                    Cards hand = opponent.getHand();
-                    opponent.revealCards(sourceObject.getIdName(), hand, game);
-                    Set<Card> cards = hand.getCards(game);
-                    int damageToDeal = 0;
-                    for (Card card : cards) {
-                        if (card != null && card.getCardType().contains(type)) {
-                            damageToDeal += 3;
-                        }
+                String chosenType = choiceImpl.getChoice();
+                CardType cardType = CardType.fromString(chosenType);
+                Cards hand = opponent.getHand();
+                opponent.revealCards(sourceObject.getIdName(), hand, game);
+                Set<Card> cards = hand.getCards(game);
+                int damageToDeal = 0;
+                for (Card card : cards) {
+                    if (card != null && card.getCardType().contains(cardType)) {
+                        damageToDeal += 3;
                     }
-                    game.informPlayers(sourceObject.getLogName() + " deals " + (damageToDeal == 0 ? "no" : "" + damageToDeal) + " damage to " + opponent.getLogName());
-                    opponent.damage(damageToDeal, source.getSourceId(), source, game);
-                    return true;
                 }
+                game.informPlayers(sourceObject.getLogName() + " deals " + (damageToDeal == 0 ? "no" : "" + damageToDeal) + " damage to " + opponent.getLogName());
+                opponent.damage(damageToDeal, source.getSourceId(), source, game);
+                return true;
+
             }
         }
         return false;

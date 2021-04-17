@@ -74,10 +74,8 @@ class AbundantHarvestEffect extends OneShotEffect {
             }
         }
         player.revealCards(source, toReveal, game);
-        if (toHand != null) {
-            toReveal.remove(toHand);
-            player.moveCards(toHand, Zone.HAND, source, game);
-        }
+        toReveal.remove(toHand);
+        player.moveCards(toHand, Zone.HAND, source, game);
         player.putCardsOnBottomOfLibrary(toReveal, game, source, false);
         return true;
     }

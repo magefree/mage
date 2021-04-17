@@ -76,9 +76,7 @@ public class SearchLibraryGraveyardPutOntoBattlefieldEffect extends OneShotEffec
                 }
             }
 
-            if (cardFound != null) {
-                controller.moveCards(cardFound, Zone.BATTLEFIELD, source, game);
-            }
+            controller.moveCards(cardFound, Zone.BATTLEFIELD, source, game);
 
             if (needShuffle) {
                 controller.shuffleLibrary(source, game);

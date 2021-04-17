@@ -75,9 +75,7 @@ class GhostQuarterEffect extends OneShotEffect {
                 TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
                 if (controller.searchLibrary(target, source, game)) {
                     Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-                    if (card != null) {
-                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    }
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
                 controller.shuffleLibrary(source, game);
             }

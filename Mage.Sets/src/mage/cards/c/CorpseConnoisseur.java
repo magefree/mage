@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -19,8 +18,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author Plopman
  */
 public final class CorpseConnoisseur extends CardImpl {
@@ -72,9 +72,8 @@ class SearchLibraryPutInGraveyard extends SearchEffect {
             if (controller.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-                    if (card != null) {
-                        controller.moveCards(card, Zone.GRAVEYARD, source, game);
-                    }
+                    controller.moveCards(card, Zone.GRAVEYARD, source, game);
+
                 }
             }
             controller.shuffleLibrary(source, game);

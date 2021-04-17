@@ -107,7 +107,7 @@ class WildfireDevilsEffect extends OneShotEffect {
             return false;
         }
         game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
-        Boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(copiedCard, game, true), game, true,
+        boolean cardWasCast = controller.cast(controller.chooseAbilityForCast(copiedCard, game, true), game, true,
                 new ApprovingObject(source, game));
         game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
         return cardWasCast;

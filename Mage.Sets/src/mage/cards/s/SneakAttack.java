@@ -77,7 +77,7 @@ class SneakAttackEffect extends OneShotEffect {
             return true;
         }
         Card card = game.getCard(target.getFirstTarget());
-        if (card == null || !controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+        if (!controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
             return false;
         }
         Permanent permanent = game.getPermanent(card.getId());

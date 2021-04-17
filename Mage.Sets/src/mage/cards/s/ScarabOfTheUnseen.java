@@ -85,7 +85,7 @@ class ScarabOfTheUnseenEffect extends OneShotEffect {
                 attachments.addAll(targetPermanent.getAttachments());
                 for (UUID attachedId : attachments) {
                     Permanent attachedPerm = game.getPermanent(attachedId);
-                    if (attachedPerm != null && filter.match(attachedPerm, game)) {
+                    if (filter.match(attachedPerm, game)) {
                         controller.moveCards(attachedPerm, Zone.HAND, source, game);
                     }
                 }

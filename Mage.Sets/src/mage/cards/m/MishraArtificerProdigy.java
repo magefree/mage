@@ -141,9 +141,7 @@ class MishraArtificerProdigyEffect extends OneShotEffect {
                 controller.shuffleLibrary(source, game);
             }
             // Put on battlefield
-            if (card != null) {
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            }
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             return true;
         }
         return false;

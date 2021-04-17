@@ -137,9 +137,7 @@ class KasminaEnigmaSageSearchEffect extends OneShotEffect {
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         controller.searchLibrary(target, source, game);
         Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-        if (card != null) {
-            controller.moveCards(card, Zone.EXILED, source, game);
-        }
+        controller.moveCards(card, Zone.EXILED, source, game);
         controller.shuffleLibrary(source, game);
         if (card == null || !controller.chooseUse(
                 Outcome.PlayForFree, "Cast " + card.getName() + " without paying its mana cost?", source, game

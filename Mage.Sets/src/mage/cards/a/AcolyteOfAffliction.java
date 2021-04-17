@@ -77,10 +77,6 @@ class AcolyteOfAfflictionEffect extends OneShotEffect {
             return true;
         }
         Card card = game.getCard(target.getFirstTarget());
-        if (card == null) {
-            return true;
-        }
-        player.moveCards(card, Zone.HAND, source, game);
-        return true;
+        return player.moveCards(card, Zone.HAND, source, game);
     }
 }

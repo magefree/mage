@@ -75,9 +75,7 @@ class GrimCaptainsCallEffect extends OneShotEffect {
         if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
             if (controller.chooseTarget(outcome, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    controller.moveCards(card, Zone.HAND, source, game);
-                }
+                controller.moveCards(card, Zone.HAND, source, game);
             }
         }
     }

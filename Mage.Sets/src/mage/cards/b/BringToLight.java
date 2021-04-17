@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ColorsOfManaSpentToCastCount;
@@ -18,6 +17,8 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -74,9 +75,7 @@ class BringToLightEffect extends OneShotEffect {
             TargetCardInLibrary target = new TargetCardInLibrary(filter);
             controller.searchLibrary(target, source, game);
             Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-            if (card != null) {
-                controller.moveCards(card, Zone.EXILED, source, game);
-            }
+            controller.moveCards(card, Zone.EXILED, source, game);
             controller.shuffleLibrary(source, game);
             if (card != null) {
                 if (controller.chooseUse(Outcome.PlayForFree, "Cast " + card.getName()

@@ -2,9 +2,9 @@
 package mage.abilities.effects.common.search;
 
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -14,7 +14,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 /**
- *
  * @author Styxo
  */
 public class SearchLibraryWithLessCMCPutInPlayEffect extends OneShotEffect {
@@ -46,9 +45,8 @@ public class SearchLibraryWithLessCMCPutInPlayEffect extends OneShotEffect {
             if (controller.searchLibrary(target, source, game)) {
                 if (!target.getTargets().isEmpty()) {
                     Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-                    if (card != null) {
-                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    }
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+
                 }
                 controller.shuffleLibrary(source, game);
             }

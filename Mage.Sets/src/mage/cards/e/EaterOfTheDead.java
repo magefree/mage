@@ -66,9 +66,8 @@ class EaterOfTheDeadEffect extends OneShotEffect {
             return false;
         }
         Card card = game.getCard(source.getFirstTarget());
-        if (card != null) {
-            player.moveCards(card, Zone.EXILED, source, game);
-        }
+
+        player.moveCards(card, Zone.EXILED, source, game);
         permanent.untap(game);
         return true;
     }

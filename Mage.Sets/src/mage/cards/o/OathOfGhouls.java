@@ -121,9 +121,8 @@ class OathOfGhoulsEffect extends OneShotEffect {
                 && firstPlayer.chooseUse(outcome, "Return a creature card from your graveyard to your hand?", source, game)
                 && firstPlayer.chooseTarget(Outcome.ReturnToHand, target, source, game)) {
             Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                firstPlayer.moveCards(card, Zone.HAND, source, game);
-            }
+            firstPlayer.moveCards(card, Zone.HAND, source, game);
+
         }
         return true;
     }

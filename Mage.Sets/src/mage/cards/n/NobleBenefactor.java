@@ -74,9 +74,7 @@ class NobleBenefactorEffect extends OneShotEffect {
                         player.searchLibrary(target, source, game);
                         for (UUID cardId : target.getTargets()) {
                             Card card = player.getLibrary().getCard(cardId, game);
-                            if (card != null) {
-                                player.moveCards(card, Zone.HAND, source, game);
-                            }
+                            player.moveCards(card, Zone.HAND, source, game);
                         }
                         player.shuffleLibrary(source, game);
                     }

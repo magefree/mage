@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
@@ -14,14 +13,15 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class BoneDancer extends CardImpl {
 
     public BoneDancer(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
         this.subtype.add(SubType.ZOMBIE);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -69,9 +69,7 @@ class BoneDancerEffect extends OneShotEffect {
                     lastCreatureCard = card;
                 }
             }
-            if (lastCreatureCard != null) {
-                controller.moveCards(lastCreatureCard, Zone.BATTLEFIELD, source, game);
-            }
+            controller.moveCards(lastCreatureCard, Zone.BATTLEFIELD, source, game);
             return true;
         }
         return false;

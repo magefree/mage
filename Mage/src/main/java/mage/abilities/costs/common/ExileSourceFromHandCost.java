@@ -27,7 +27,7 @@ public class ExileSourceFromHandCost extends CostImpl {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(controllerId);
         Card card = game.getCard(source.getSourceId());
-        if (player != null && player.getHand().contains(source.getSourceId()) && card != null) {
+        if (player != null && player.getHand().contains(source.getSourceId())) {
             paid = player.moveCards(card, Zone.EXILED, source, game);
         }
         return paid;

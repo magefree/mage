@@ -74,9 +74,7 @@ class SunkenHopeReturnToHandEffect extends OneShotEffect {
 
             for (UUID targetId : target.getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null) {
-                    result |= player.moveCards(permanent, Zone.HAND, source, game);
-                }
+                result |= player.moveCards(permanent, Zone.HAND, source, game);
             }
         }
         return result;

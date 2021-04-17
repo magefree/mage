@@ -90,9 +90,7 @@ class ReweaveEffect extends OneShotEffect {
                             }
                         }
                         permanentController.revealCards(source, cards, game);
-                        if (permanentCard != null) {
-                            permanentController.moveCards(permanentCard, Zone.BATTLEFIELD, source, game);
-                        }
+                        permanentController.moveCards(permanentCard, Zone.BATTLEFIELD, source, game);
                         permanentController.shuffleLibrary(source, game);
 
                     }

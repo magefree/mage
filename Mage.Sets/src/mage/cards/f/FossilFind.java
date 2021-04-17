@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -13,14 +12,15 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class FossilFind extends CardImpl {
 
     public FossilFind(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R/G}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R/G}");
 
         // Return a card at random from your graveyard to your hand, then reorder your graveyard as you choose.
         this.getSpellAbility().addEffect(new FossilFindEffect());
@@ -57,10 +57,7 @@ class FossilFindEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && !controller.getGraveyard().isEmpty()) {
             Card card = controller.getGraveyard().getRandom(game);
-            if (card != null) {
-                controller.moveCards(card, Zone.HAND, source, game);
-                return true;
-            }
+            controller.moveCards(card, Zone.HAND, source, game);
             controller.moveCards(controller.getGraveyard(), Zone.GRAVEYARD, source, game);
         }
         return false;

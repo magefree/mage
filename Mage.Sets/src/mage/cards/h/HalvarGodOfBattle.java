@@ -170,9 +170,8 @@ class SwordOfTheRealmsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card creature = (Card) getValue("attachedTo");
-            if (creature != null) {
-                return controller.moveCards(creature, Zone.HAND, source, game);
-            }
+            return controller.moveCards(creature, Zone.HAND, source, game);
+
         }
         return false;
     }

@@ -117,7 +117,7 @@ class GruesomeEncoreReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player player = game.getPlayer(source.getSourceId());
         Card card = game.getCard(source.getFirstTarget());
-        return player != null && card != null && player.moveCards(card, Zone.EXILED, source, game);
+        return player != null && player.moveCards(card, Zone.EXILED, source, game);
     }
 
     @Override

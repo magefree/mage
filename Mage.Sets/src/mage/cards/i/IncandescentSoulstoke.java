@@ -95,19 +95,18 @@ class IncandescentSoulstokeEffect extends OneShotEffect {
                 TargetCardInHand target = new TargetCardInHand(filter);
                 if (controller.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                     Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                            Permanent permanent = game.getPermanent(card.getId());
-                            if (permanent != null) {
-                                ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-                                effect.setTargetPointer(new FixedTarget(permanent, game));
-                                game.addEffect(effect, source);
-                                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + card.getName(), source.getControllerId());
-                                sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
-                                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
-                            }
+                    if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
+                        Permanent permanent = game.getPermanent(card.getId());
+                        if (permanent != null) {
+                            ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
+                            effect.setTargetPointer(new FixedTarget(permanent, game));
+                            game.addEffect(effect, source);
+                            SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice " + card.getName(), source.getControllerId());
+                            sacrificeEffect.setTargetPointer(new FixedTarget(permanent, game));
+                            game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
                         }
                     }
+
                 }
             }
             return true;

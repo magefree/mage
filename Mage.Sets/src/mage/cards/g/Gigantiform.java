@@ -115,9 +115,7 @@ class GigantiformEffect extends OneShotEffect {
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (controller != null && controller.searchLibrary(target, source, game)) {
             Card card = controller.getLibrary().getCard(target.getFirstTarget(), game);
-            if (card != null) {
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            }
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             controller.shuffleLibrary(source, game);
             return true;
         }

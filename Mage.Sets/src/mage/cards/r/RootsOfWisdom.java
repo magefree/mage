@@ -78,7 +78,7 @@ class RootsOfWisdomEffect extends OneShotEffect {
         if (targetCard.canChoose(source.getSourceId(), source.getControllerId(), game)
                 && player.choose(outcome, targetCard, source.getSourceId(), game)) {
             Card card = player.getGraveyard().get(targetCard.getFirstTarget(), game);
-            if (card != null && player.moveCards(card, Zone.HAND, source, game)) {
+            if (player.moveCards(card, Zone.HAND, source, game)) {
                 return true;
             }
         }

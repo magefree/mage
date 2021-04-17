@@ -107,9 +107,7 @@ class HaraldUnitesTheElvesEffect extends OneShotEffect {
         TargetCard targetCard = new TargetCardInYourGraveyard(0, 1, filter, true);
         player.choose(outcome, targetCard, source.getSourceId(), game);
         Card card = player.getGraveyard().get(targetCard.getFirstTarget(), game);
-        if (card != null) {
-            player.moveCards(card, Zone.BATTLEFIELD, source, game);
-        }
+        player.moveCards(card, Zone.BATTLEFIELD, source, game);
         return true;
     }
 }

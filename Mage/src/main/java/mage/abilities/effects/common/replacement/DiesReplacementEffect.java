@@ -46,7 +46,7 @@ public class DiesReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((ZoneChangeEvent) event).getTarget();
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && permanent != null) {
+        if (controller != null) {
             return controller.moveCards(permanent, Zone.EXILED, source, game);
         }
         return false;

@@ -94,9 +94,7 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl {
         TargetCardInLibrary target = new TargetCardInLibrary();
         player.searchLibrary(target, source, game);
         Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
-        if (card != null) {
-            player.moveCards(card, Zone.HAND, source, game);
-        }
+        player.moveCards(card, Zone.HAND, source, game);
         player.shuffleLibrary(source, game);
         return true;
     }

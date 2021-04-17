@@ -66,9 +66,8 @@ class CerebralEruptionEffect extends OneShotEffect {
             }
             if (card.isLand()) {
                 Card spellCard = game.getStack().getSpell(source.getSourceId()).getCard();
-                if (spellCard != null) {
-                    player.moveCards(spellCard, Zone.HAND, source, game);
-                }
+                player.moveCards(spellCard, Zone.HAND, source, game);
+
             }
             return true;
         }

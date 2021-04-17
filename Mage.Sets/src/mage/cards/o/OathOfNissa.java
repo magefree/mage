@@ -91,11 +91,10 @@ class OathOfNissaEffect extends OneShotEffect {
                             controller.choose(outcome, topCards, target, game);
                             card = topCards.get(target.getFirstTarget(), game);
                         }
-                        if (card != null) {
-                            controller.moveCards(card, Zone.HAND, source, game);
-                            controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
-                            topCards.remove(card);
-                        }
+                        controller.moveCards(card, Zone.HAND, source, game);
+                        controller.revealCards(sourceObject.getIdName(), new CardsImpl(card), game);
+                        topCards.remove(card);
+
                     }
                 }
                 controller.putCardsOnBottomOfLibrary(topCards, game, source, true);

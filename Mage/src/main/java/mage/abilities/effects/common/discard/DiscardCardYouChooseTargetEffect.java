@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -72,8 +73,8 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         this(StaticValue.get(1), filter, targetController);
     }
 
-    public DiscardCardYouChooseTargetEffect(DynamicValue numberCardsToDiscard, 
-            FilterCard filter, TargetController targetController) {
+    public DiscardCardYouChooseTargetEffect(DynamicValue numberCardsToDiscard,
+                                            FilterCard filter, TargetController targetController) {
         super(Outcome.Discard);
         this.targetController = targetController;
         this.filter = filter;
@@ -111,7 +112,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         Cards revealedCards = new CardsImpl();
         numberToReveal = Math.min(player.getHand().size(), numberToReveal);
         if (player.getHand().size() > numberToReveal) {
-            TargetCard chosenCards = new TargetCard(numberToReveal, numberToReveal, 
+            TargetCard chosenCards = new TargetCard(numberToReveal, numberToReveal,
                     Zone.HAND, new FilterCard("card in " + player.getName() + "'s hand"));
             chosenCards.setNotTarget(true);
             if (chosenCards.canChoose(source.getSourceId(), player.getId(), game)
@@ -120,9 +121,8 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
                     List<UUID> targets = chosenCards.getTargets();
                     for (UUID targetid : targets) {
                         Card card = game.getCard(targetid);
-                        if (card != null) {
-                            revealedCards.add(card);
-                        }
+                        revealedCards.add(card);
+
                     }
                 }
             }
@@ -131,7 +131,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         }
 
         Card sourceCard = game.getCard(source.getSourceId());
-        player.revealCards(sourceCard != null ? sourceCard.getIdName() + " (" 
+        player.revealCards(sourceCard != null ? sourceCard.getIdName() + " ("
                 + sourceCard.getZoneChangeCounter(game) + ')' : "Discard", revealedCards, game);
 
         boolean result = true;
@@ -144,7 +144,7 @@ public class DiscardCardYouChooseTargetEffect extends OneShotEffect {
         if (!controller.choose(Outcome.Benefit, revealedCards, target, game)) {
             return result;
         }
-        result=!player.discard(new CardsImpl(target.getTargets()),false, source,game).isEmpty();
+        result = !player.discard(new CardsImpl(target.getTargets()), false, source, game).isEmpty();
         return result;
     }
 

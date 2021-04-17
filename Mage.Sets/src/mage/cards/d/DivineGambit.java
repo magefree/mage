@@ -1,7 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -21,8 +19,9 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class DivineGambit extends CardImpl {
@@ -85,9 +84,7 @@ class DivineGambitEffect extends OneShotEffect {
                     TargetCardInHand target = new TargetCardInHand(StaticFilters.FILTER_CARD_PERMANENT);
                     if (player.chooseTarget(outcome, target, source, game)) {
                         Card card = game.getCard(target.getFirstTarget());
-                        if (card != null) {
-                            return player.moveCards(card, Zone.BATTLEFIELD, source, game);
-                        }
+                        return player.moveCards(card, Zone.BATTLEFIELD, source, game);
                     }
                 }
             }

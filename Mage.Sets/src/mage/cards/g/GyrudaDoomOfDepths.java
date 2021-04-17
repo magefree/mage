@@ -116,6 +116,6 @@ class GyrudaDoomOfDepthsEffect extends OneShotEffect {
         targetCard.setNotTarget(true);
         controller.choose(outcome, cards, targetCard, game);
         Card card = game.getCard(targetCard.getFirstTarget());
-        return card != null && controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+        return controller.moveCards(card, Zone.BATTLEFIELD, source, game);
     }
 }

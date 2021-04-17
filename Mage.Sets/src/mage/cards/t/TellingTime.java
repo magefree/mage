@@ -81,13 +81,10 @@ class TellingTimeEffect extends OneShotEffect {
         }
 
         card = pickCard(game, controller, cards, "card to put on top of your library");
-        if (card != null) {
-            controller.moveCards(card, Zone.LIBRARY, source, game);
-            cards.remove(card);
-        }
-        if (!cards.isEmpty()) {
-            controller.putCardsOnBottomOfLibrary(cards, game, source, false);
-        }
+        controller.moveCards(card, Zone.LIBRARY, source, game);
+        cards.remove(card);
+
+        controller.putCardsOnBottomOfLibrary(cards, game, source, false);
         return true;
     }
 

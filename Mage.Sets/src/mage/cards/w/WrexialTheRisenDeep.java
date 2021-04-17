@@ -183,7 +183,7 @@ class WrexialReplacementEffect extends ReplacementEffectImpl {
         UUID eventObject = event.getTargetId();
         StackObject card = game.getStack().getStackObject(eventObject);
         Player controller = game.getPlayer(source.getControllerId());
-        if (card != null && controller != null) {
+        if (controller != null) {
             if (card instanceof Card) {
                 return controller.moveCards((Card) card, Zone.EXILED, source, game);
             }

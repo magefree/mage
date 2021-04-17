@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.PlaneswalkerEntersWithLoyaltyCountersAbility;
@@ -12,12 +11,7 @@ import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.Game;
@@ -28,14 +22,15 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class DarthTyranusCountOfSerenno extends CardImpl {
 
     public DarthTyranusCountOfSerenno(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{W}{U}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{1}{W}{U}{B}");
         this.addSuperType(SuperType.LEGENDARY);
         this.subtype.add(SubType.DOOKU);
 
@@ -125,15 +120,11 @@ class TransmuteArtifactEffect extends SearchEffect {
                 }
             }
             if (sacrifice && controller.searchLibrary(target, source, game)) {
-                if (!target.getTargets().isEmpty()) {
-                    for (UUID cardId : target.getTargets()) {
-                        Card card = controller.getLibrary().getCard(cardId, game);
-                        if (card != null) {
-                            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                            controller.shuffleLibrary(source, game);
-                            return true;
-                        }
-                    }
+                for (UUID cardId : target.getTargets()) {
+                    Card card = controller.getLibrary().getCard(cardId, game);
+                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                    controller.shuffleLibrary(source, game);
+                    return true;
                 }
                 controller.shuffleLibrary(source, game);
             }

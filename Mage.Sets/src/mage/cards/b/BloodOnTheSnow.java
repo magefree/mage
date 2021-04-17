@@ -83,10 +83,9 @@ class BloodOnTheSnowEffect extends OneShotEffect {
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(1, 1, filter, true);
             controller.chooseTarget(outcome, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
-            if (card != null) {
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                return true;
-            }
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+            return true;
+
         }
         return false;
     }

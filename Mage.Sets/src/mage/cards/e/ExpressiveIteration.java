@@ -74,10 +74,8 @@ class ExpressiveIterationEffect extends OneShotEffect {
         target.withChooseHint("To put into your hand");
         player.choose(outcome, cards, target, game);
         Card card = game.getCard(target.getFirstTarget());
-        if (card != null) {
-            player.moveCards(card, Zone.HAND, source, game);
-            cards.remove(card);
-        }
+        player.moveCards(card, Zone.HAND, source, game);
+        cards.remove(card);
         if (cards.isEmpty()) {
             return true;
         }

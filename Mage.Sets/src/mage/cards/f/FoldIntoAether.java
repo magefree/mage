@@ -71,9 +71,8 @@ class FoldIntoAetherEffect extends OneShotEffect {
                     && spellController.chooseUse(Outcome.Neutral, "Put a creature card from your hand in play?", source, game)
                     && spellController.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
                 Card card = game.getCard(target.getFirstTarget());
-                if (card != null) {
-                    spellController.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
+                spellController.moveCards(card, Zone.BATTLEFIELD, source, game);
+
             }
             return true;
         }

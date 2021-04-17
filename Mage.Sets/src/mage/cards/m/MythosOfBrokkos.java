@@ -79,9 +79,7 @@ class MythosOfBrokkosEffect extends OneShotEffect {
             TargetCardInLibrary targetCardInLibrary = new TargetCardInLibrary();
             if (player.searchLibrary(targetCardInLibrary, source, game)) {
                 Card card = game.getCard(targetCardInLibrary.getFirstTarget());
-                if (card != null) {
-                    player.moveCards(card, Zone.GRAVEYARD, source, game);
-                }
+                player.moveCards(card, Zone.GRAVEYARD, source, game);
                 player.shuffleLibrary(source, game);
             }
         }

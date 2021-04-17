@@ -92,6 +92,6 @@ class ScrabblingClawsEffect extends OneShotEffect {
             return false;
         }
         Card card = game.getCard(target.getFirstTarget());
-        return card != null && targetPlayer.moveCards(card, Zone.EXILED, source, game);
+        return targetPlayer.moveCards(card, Zone.EXILED, source, game);
     }
 }

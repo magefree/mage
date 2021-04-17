@@ -80,9 +80,7 @@ class YawgmothsVileOfferingEffect extends OneShotEffect {
         }
 
         Card returnCard = game.getCard(source.getTargets().getFirstTarget());
-        if (returnCard != null) {
-            controller.moveCards(returnCard, Zone.BATTLEFIELD, source, game);
-        }
+        controller.moveCards(returnCard, Zone.BATTLEFIELD, source, game);
 
         Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
 

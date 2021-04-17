@@ -75,10 +75,8 @@ class JungleWayfinderEffect extends OneShotEffect {
                         player.searchLibrary(target, source, game);
                         for (UUID cardId : target.getTargets()) {
                             Card card = player.getLibrary().getCard(cardId, game);
-                            if (card != null) {
-                                player.revealCards(source, new CardsImpl(card), game);
-                                player.moveCards(card, Zone.HAND, source, game);
-                            }
+                            player.revealCards(source, new CardsImpl(card), game);
+                            player.moveCards(card, Zone.HAND, source, game);
                         }
                         player.shuffleLibrary(source, game);
                     }

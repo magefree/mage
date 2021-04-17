@@ -96,10 +96,9 @@ class CavalierOfThornsEffect extends OneShotEffect {
         if (cards.getCards(game).stream().anyMatch(Card::isLand)
                 && controller.choose(Outcome.PutCardInPlay, cards, target, game)) {
             Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-            }
+            cards.remove(card);
+            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+
         }
         controller.moveCards(cards, Zone.GRAVEYARD, source, game);
         return true;

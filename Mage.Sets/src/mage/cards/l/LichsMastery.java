@@ -212,9 +212,7 @@ class LichsMasteryLoseLifeEffect extends OneShotEffect {
                 Target target = new TargetCardInYourGraveyard(1, 1, new FilterCard(), true);
                 target.choose(Outcome.Exile, source.getControllerId(), source.getSourceId(), game);
                 Card card = controller.getGraveyard().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    controller.moveCards(card, Zone.EXILED, source, game);
-                }
+                controller.moveCards(card, Zone.EXILED, source, game);
             }
         }
         return true;

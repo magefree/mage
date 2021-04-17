@@ -178,9 +178,7 @@ class KarnMinus1Effect extends OneShotEffect {
         if (card == null) {
             card = game.getCard(target.getFirstTarget());
         }
-        if (card != null) {
-            controller.moveCards(card, Zone.HAND, source, game);
-        }
+        controller.moveCards(card, Zone.HAND, source, game);
         return true;
     }
 }

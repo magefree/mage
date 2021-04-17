@@ -1,9 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -28,8 +25,11 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class DarkIntimations extends CardImpl {
@@ -120,7 +120,7 @@ class DarkIntimationsEffect extends OneShotEffect {
             }
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filterCard);
-        if (target.canChoose(source.getSourceId(), source.getControllerId(), game) 
+        if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
                 && controller.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card == null) {
@@ -154,9 +154,7 @@ class DarkIntimationsGraveyardEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Card sourceCard = controller.getGraveyard().get(source.getSourceId(), game);
-            if (sourceCard != null) {
-                controller.moveCards(sourceCard, Zone.EXILED, source, game);
-            }
+            controller.moveCards(sourceCard, Zone.EXILED, source, game);
             Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
             if (spell != null) {
                 ContinuousEffect effect = new DarkIntimationsReplacementEffect();
@@ -188,7 +186,7 @@ class DarkIntimationsReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
-        return creature != null 
+        return creature != null
                 && event.getTargetId().equals(getTargetPointer().getFirst(game, source));
     }
 

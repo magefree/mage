@@ -85,9 +85,7 @@ class SkullwinderEffect extends OneShotEffect {
                     targetCard.setNotTarget(true);
                     if (opponent.choose(outcome, targetCard, source.getSourceId(), game)) {
                         Card card = game.getCard(targetCard.getFirstTarget());
-                        if (card != null) {
-                            opponent.moveCards(card, Zone.HAND, source, game);
-                        }
+                        opponent.moveCards(card, Zone.HAND, source, game);
                     }
                 }
             }

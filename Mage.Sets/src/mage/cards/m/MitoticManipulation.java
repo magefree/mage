@@ -84,10 +84,8 @@ class MitoticManipulationEffect extends OneShotEffect {
                         && controller.chooseUse(Outcome.PutCardInPlay, "Put a card on the battlefield?", source, game)) {
                     if (controller.choose(Outcome.PutCardInPlay, cardsFromTop, target, game)) {
                         Card card = cardsFromTop.get(target.getFirstTarget(), game);
-                        if (card != null) {
-                            controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                            cardsFromTop.remove(card);
-                        }
+                        controller.moveCards(card, Zone.BATTLEFIELD, source, game);
+                        cardsFromTop.remove(card);
                     }
                 }
             }

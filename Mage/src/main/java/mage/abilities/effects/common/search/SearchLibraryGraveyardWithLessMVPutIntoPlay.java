@@ -2,10 +2,10 @@ package mage.abilities.effects.common.search;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.constants.ComparisonType;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardsImpl;
+import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
@@ -16,7 +16,6 @@ import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 
 /**
- *
  * @author antoni-g
  */
 public class SearchLibraryGraveyardWithLessMVPutIntoPlay extends OneShotEffect {
@@ -48,7 +47,7 @@ public class SearchLibraryGraveyardWithLessMVPutIntoPlay extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         Card cardFound = null;
-        if (controller != null  && sourceObject != null) {
+        if (controller != null && sourceObject != null) {
             // create x cost filter
             FilterCard advancedFilter = filter.copy(); // never change static objects so copy the object here before
             advancedFilter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
@@ -74,10 +73,8 @@ public class SearchLibraryGraveyardWithLessMVPutIntoPlay extends OneShotEffect {
                 }
             }
 
-            if (cardFound != null) {
-                controller.revealCards(sourceObject.getIdName(), new CardsImpl(cardFound), game);
-                controller.moveCards(cardFound, Zone.BATTLEFIELD, source, game);
-            }
+            controller.revealCards(sourceObject.getIdName(), new CardsImpl(cardFound), game);
+            controller.moveCards(cardFound, Zone.BATTLEFIELD, source, game);
 
             return true;
         }

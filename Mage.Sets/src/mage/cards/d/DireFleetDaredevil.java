@@ -127,7 +127,7 @@ class DireFleetDaredevilReplacementEffect extends ReplacementEffectImpl {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getTargetId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (card != null && controller != null) {
+        if (controller != null) {
             return controller.moveCards(card, Zone.EXILED, source, game);
         }
         return false;

@@ -83,10 +83,8 @@ class ThoughtpickerWitchEffect extends OneShotEffect {
                 TargetCard target = new TargetCardInLibrary(new FilterCard("card to exile"));
                 if (controller.choose(Outcome.Exile, cards, target, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        cards.remove(card);
-                        opponent.moveCards(card, Zone.EXILED, source, game);
-                    }
+                    cards.remove(card);
+                    opponent.moveCards(card, Zone.EXILED, source, game);
                 }
             }
             return true;

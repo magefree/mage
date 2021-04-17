@@ -124,11 +124,7 @@ class SwordOfLightAndShadowReturnToHandTargetEffect extends OneShotEffect {
                     switch (game.getState().getZone(targetId)) {
                         case GRAVEYARD:
                             Card card = game.getCard(targetId);
-                            if (card != null) {
-                                controller.moveCards(card, Zone.HAND, source, game);
-                            } else {
-                                result = false;
-                            }
+                            result = controller.moveCards(card, Zone.HAND, source, game);
                             break;
                     }
                 }

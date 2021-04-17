@@ -127,9 +127,7 @@ class ExileTopCardLibraryCost extends CostImpl {
         Player controller = game.getPlayer(controllerId);
         if (controller != null) {
             card = controller.getLibrary().getFromTop(game);
-            if (card != null) {
-                paid = controller.moveCards(card, Zone.EXILED, ability, game);
-            }
+            paid = controller.moveCards(card, Zone.EXILED, ability, game);
         }
         return paid;
     }

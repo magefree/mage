@@ -87,9 +87,7 @@ class MausoleumTurnkeyEffect extends OneShotEffect {
                     Target target = new TargetCardInGraveyard(filter);
                     opponent.chooseTarget(outcome, target, source, game);
                     Card card = game.getCard(target.getFirstTarget());
-                    if (card != null) {
-                        controller.moveCards(card, Zone.HAND, source, game);
-                    }
+                    controller.moveCards(card, Zone.HAND, source, game);
                 }
             }
             return true;

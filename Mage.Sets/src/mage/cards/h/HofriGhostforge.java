@@ -142,6 +142,6 @@ class HofriGhostforgeReturnEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Card card = mor.getCard(game);
-        return player != null && card != null && player.moveCards(card, Zone.GRAVEYARD, source, game);
+        return player != null && player.moveCards(card, Zone.GRAVEYARD, source, game);
     }
 }

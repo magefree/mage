@@ -74,10 +74,8 @@ class HiredGiantEffect extends OneShotEffect {
                         TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
                         if (player.searchLibrary(target, source, game)) {
                             Card targetCard = player.getLibrary().getCard(target.getFirstTarget(), game);
-                            if (targetCard != null) {
-                                player.moveCards(targetCard, Zone.BATTLEFIELD, source, game);
-                                playersThatSearched.add(player);
-                            }
+                            player.moveCards(targetCard, Zone.BATTLEFIELD, source, game);
+                            playersThatSearched.add(player);
                         }
                     }
                 }

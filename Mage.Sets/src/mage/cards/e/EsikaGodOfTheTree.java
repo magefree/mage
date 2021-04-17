@@ -107,10 +107,9 @@ class PrismaticBridgeEffect extends OneShotEffect {
             }
         }
         controller.revealCards(source, toReveal, game);
-        if (toBattlefield != null) {
-            toReveal.remove(toBattlefield);
-            controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
-        }
+        toReveal.remove(toBattlefield);
+        controller.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
+
         controller.putCardsOnBottomOfLibrary(toReveal, game, source, false);
         return true;
     }

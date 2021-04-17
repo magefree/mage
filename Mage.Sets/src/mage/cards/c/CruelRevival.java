@@ -74,7 +74,7 @@ class CruelRevivalEffect extends OneShotEffect {
 
         Player player = game.getPlayer(source.getControllerId());
         Card targetRetrieve = game.getCard(source.getTargets().get(1).getFirstTarget());
-        if (player != null && targetRetrieve != null) {
+        if (player != null) {
             player.moveCards(targetRetrieve, Zone.HAND, source, game);
         }
         return true;

@@ -108,10 +108,8 @@ class PsychicSurgeryEffect extends OneShotEffect {
                 TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to exile"));
                 if (controller.choose(Outcome.Exile, cards, target, game)) {
                     Card card = cards.get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        controller.moveCards(card, Zone.EXILED, source, game);
-                        cards.remove(card);
-                    }
+                    controller.moveCards(card, Zone.EXILED, source, game);
+                    cards.remove(card);
                 }
             }
             controller.putCardsOnTopOfLibrary(cards, game, source, true);

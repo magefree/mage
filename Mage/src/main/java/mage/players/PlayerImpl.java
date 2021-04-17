@@ -4129,7 +4129,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean moveCards(Set<? extends Card> cards, Zone toZone, Ability source, Game game, boolean tapped, boolean faceDown, boolean byOwner, List<UUID> appliedEffects) {
         if (cards.isEmpty()) {
-            return true;
+            return false;
         }
         Set<Card> successfulMovedCards = new LinkedHashSet<>();
         Zone fromZone = null;

@@ -100,10 +100,8 @@ class MerchantsDockhandEffect extends OneShotEffect {
         target.setNotTarget(true);
         if (controller.chooseTarget(Outcome.DrawCard, cards, target, source, game)) {
             Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                controller.moveCards(card, Zone.HAND, source, game);
-                cards.remove(card);
-            }
+            controller.moveCards(card, Zone.HAND, source, game);
+            cards.remove(card);
         }
         controller.putCardsOnBottomOfLibrary(cards, game, source, true);
         return true;

@@ -165,15 +165,13 @@ class PurgatoryReturnEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         UUID exileId = CardUtil.getCardExileZoneId(game, source);
         MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && exileId != null && sourceObject != null) {
+        if (controller != null && sourceObject != null) {
             ExileZone exileZone = game.getExile().getExileZone(exileId);
             if (exileZone != null) {
                 TargetCard targetCard = new TargetCard(Zone.EXILED, new FilterCard());
                 controller.chooseTarget(outcome, exileZone, targetCard, source, game);
                 Card card = game.getCard(targetCard.getFirstTarget());
-                if (card != null) {
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
             return true;
         }

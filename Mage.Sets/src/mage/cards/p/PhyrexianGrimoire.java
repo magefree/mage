@@ -93,16 +93,11 @@ class PhyrexianGrimoireEffect extends OneShotEffect {
                 {
                     Card card = game.getCard(target.getFirstTarget()); 
                     cards.remove(target.getFirstTarget());
-                    if (card != null) {
-                        controller.moveCards(card, Zone.EXILED, source, game);
-                    }
-                    
-                    if(!cards.isEmpty())
-                    {
+                    controller.moveCards(card, Zone.EXILED, source, game);
+                    if(!cards.isEmpty()){
                         card = game.getCard(cards.iterator().next()); 
-                        if (card != null) {
-                            controller.moveCards(card, Zone.HAND, source, game);
-                        }
+                        controller.moveCards(card, Zone.HAND, source, game);
+
                     }
                     
                 }

@@ -91,7 +91,7 @@ class RescuerSphinxEffect extends OneShotEffect {
             return false;
         }
         Permanent permanent = game.getPermanent(target.getFirstTarget());
-        if (permanent == null || !player.moveCards(permanent, Zone.HAND, source, game)) {
+        if (!player.moveCards(permanent, Zone.HAND, source, game)) {
             return false;
         }
         return new AddCountersSourceEffect(CounterType.P1P1.createInstance()).apply(game, source);

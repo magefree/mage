@@ -106,10 +106,8 @@ class HatcherySpiderEffect extends OneShotEffect {
         if (player.chooseUse(outcome, "Put a card onto the battlefield?", source, game)
                 && player.choose(outcome, cards, target, game)) {
             Card card = game.getCard(target.getFirstTarget());
-            if (card != null
-                    && player.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-                cards.remove(card);
-            }
+            player.moveCards(card, Zone.BATTLEFIELD, source, game);
+            cards.remove(card);
         }
         while (!cards.isEmpty()) {
             Card card = cards.getRandom(game);

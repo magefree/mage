@@ -1,7 +1,6 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.EpicEffect;
@@ -18,10 +17,10 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
- *
  */
 public final class EternalDominion extends CardImpl {
 
@@ -78,9 +77,7 @@ class EternalDominionEffect extends OneShotEffect {
             TargetCardInLibrary target = new TargetCardInLibrary(FILTER);
             controller.searchLibrary(target, source, game, opponent.getId());
             Card targetCard = game.getCard(target.getFirstTarget());
-            if (targetCard != null) {
-                applied = controller.moveCards(targetCard, Zone.BATTLEFIELD, source, game);
-            }
+            applied = controller.moveCards(targetCard, Zone.BATTLEFIELD, source, game);
             opponent.shuffleLibrary(source, game);
         }
         return applied;

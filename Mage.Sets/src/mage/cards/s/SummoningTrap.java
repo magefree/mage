@@ -130,10 +130,8 @@ class SummoningTrapEffect extends OneShotEffect {
                             "creature card to put on the battlefield"));
             if (controller.choose(Outcome.PutCreatureInPlay, cards, target, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-                }
+                cards.remove(card);
+                controller.moveCards(card, Zone.BATTLEFIELD, source, game);
             }
             if (!cards.isEmpty()) {
                 controller.putCardsOnBottomOfLibrary(cards, game, source, true);

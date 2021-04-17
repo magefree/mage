@@ -62,7 +62,6 @@ class LostInTheMistEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         return player != null
-                && permanent != null
                 && player.moveCards(permanent, Zone.HAND, source, game);
     }
 }

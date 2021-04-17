@@ -143,9 +143,7 @@ class InfernalOfferingReturnEffect extends OneShotEffect {
                 target = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card in your graveyard"));
                 if (target.choose(Outcome.PutCreatureInPlay, opponent.getId(), source.getSourceId(), game)) {
                     Card card = opponent.getGraveyard().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        opponent.moveCards(card, Zone.BATTLEFIELD, source, game);
-                    }
+                    opponent.moveCards(card, Zone.BATTLEFIELD, source, game);
                 }
             }
             return true;

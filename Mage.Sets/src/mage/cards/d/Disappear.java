@@ -77,9 +77,7 @@ class DisappearEffect extends OneShotEffect {
                 && aura.getAttachedTo() != null) {
             Permanent enchantedCreature = game.getPermanent(aura.getAttachedTo());
             controller.moveCards(aura, Zone.HAND, source, game);
-            if (enchantedCreature != null) {
-                controller.moveCards(enchantedCreature, Zone.HAND, source, game);
-            }
+            controller.moveCards(enchantedCreature, Zone.HAND, source, game);
             return true;
         }
         return false;
