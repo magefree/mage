@@ -40,7 +40,7 @@ public final class ElementalExpressionist extends CardImpl {
         ));
         ability.addEffect(new GainAbilityTargetEffect(
                 new ElementalExpressionistTriggeredAbility(), Duration.EndOfTurn,
-                "and \"When you exile this creature, create a 4/4 blue and red Elemental creature token.\""
+                "and \"When this creature is put into exile, create a 4/4 blue and red Elemental creature token.\""
         ));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
@@ -113,7 +113,6 @@ class ElementalExpressionistTriggeredAbility extends ZoneChangeTriggeredAbility 
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        // TODO: this needs to check that the controller exiled it, currently not supported
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         if (zEvent.getTarget() == null || zEvent.getTarget() != getSourcePermanentOrLKI(game)) {
             return false;
@@ -125,6 +124,6 @@ class ElementalExpressionistTriggeredAbility extends ZoneChangeTriggeredAbility 
 
     @Override
     public String getRule() {
-        return "When you exile this creature, create a 4/4 blue and red Elemental creature token.";
+        return "When this creature is put into exile, create a 4/4 blue and red Elemental creature token.";
     }
 }

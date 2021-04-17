@@ -54,7 +54,7 @@ class ShowOfConfidenceEffect extends OneShotEffect {
 
     ShowOfConfidenceEffect() {
         super(Outcome.Benefit);
-        staticText = "copy it for each other instant or sorcery spell you've cast this turn. " +
+        staticText = "copy it for each other instant and sorcery spell you've cast this turn. " +
                 "You may choose new targets for the copies";
     }
 

@@ -245,7 +245,7 @@ public final class Commander2021Edition extends ExpansionSet {
         cards.add(new SetCardInfo("Ruxa, Patient Professor", 66, Rarity.RARE, mage.cards.r.RuxaPatientProfessor.class));
         cards.add(new SetCardInfo("Sanctum Gargoyle", 102, Rarity.COMMON, mage.cards.s.SanctumGargoyle.class));
         cards.add(new SetCardInfo("Sangromancer", 152, Rarity.RARE, mage.cards.s.Sangromancer.class));
-        cards.add(new SetCardInfo("Sanguine Bond", 153, Rarity.UNCOMMON, mage.cards.s.SanguineBond.class));
+        cards.add(new SetCardInfo("Sanguine Bond", 153, Rarity.RARE, mage.cards.s.SanguineBond.class));
         cards.add(new SetCardInfo("Sapling of Colfenor", 228, Rarity.RARE, mage.cards.s.SaplingOfColfenor.class));
         cards.add(new SetCardInfo("Sapseep Forest", 313, Rarity.UNCOMMON, mage.cards.s.SapseepForest.class));
         cards.add(new SetCardInfo("Scavenger Grounds", 314, Rarity.RARE, mage.cards.s.ScavengerGrounds.class));

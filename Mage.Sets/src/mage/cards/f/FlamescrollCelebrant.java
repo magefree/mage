@@ -54,7 +54,7 @@ public final class FlamescrollCelebrant extends ModalDoubleFacesCard {
         // 2.
         // Revel in Silence
         // Instant
-        // You opponents can't cast spells or activate planeswalkers' loyalty abilities this turn.
+        // Your opponents can't cast spells or activate planeswalkers' loyalty abilities this turn.
         this.getRightHalfCard().getSpellAbility().addEffect(new RevelInSilenceEffect());
 
         // Exile Revel in Silence.
@@ -115,7 +115,7 @@ class RevelInSilenceEffect extends ContinuousRuleModifyingEffectImpl {
 
     RevelInSilenceEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You opponents can't cast spells or activate planeswalkers' loyalty abilities this turn.";
+        staticText = "Your opponents can't cast spells or activate planeswalkers' loyalty abilities this turn.";
     }
 
     private RevelInSilenceEffect(final RevelInSilenceEffect effect) {
